@@ -1,0 +1,7 @@
+###############
+# 제목 작성 가이드
+# == [Action] task-title optional-message #이슈번호 == 형식
+# PR 링크 연결은 #이슈번호 앞에 Fix/Close 사용
+# 예) [Feat] 로그인기능 소설로그인 Close #5321
+
+################
