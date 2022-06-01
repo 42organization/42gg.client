@@ -7,12 +7,11 @@ assignees: ''
 
 ---
 
-> ### ISSUE
-> * Type: `feature`, `fix`
-> * Detail: fix actions from client redux
-> 
-> ### TODO
-> 1. [ ]  Job1
-> 2. [ ]  Job2
-> 3. [ ]  Job3
->
+### ISSUE
+ * Type: `feature`, `fix`
+ * Detail: fix actions from client redux
+ 
+ ### TODO
+- [ ]  Job1
+- [ ]  Job2
+- [ ]  Job3
