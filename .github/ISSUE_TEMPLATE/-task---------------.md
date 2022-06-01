@@ -8,7 +8,6 @@ assignees: ''
 ---
 
 > ### ISSUE
-> * Group:  `client`, `server`
 > * Type: `feature`, `fix`
 > * Detail: fix actions from client redux
 > 
