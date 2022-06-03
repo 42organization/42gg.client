@@ -7,6 +7,51 @@ type RankType = {
     ranking: Rank;
 };
 
+const list = [
+    {
+        rank: 1,
+        userId: "daekim0",
+        ppp: 42,
+        statusMessage: "연습 중",
+        winRate: 1,
+    },
+    {
+        rank: 1,
+        userId: "daekim1",
+        ppp: 42,
+        statusMessage: "연습 중",
+        winRate: 1,
+    },
+    {
+        rank: 1,
+        userId: "daekim2",
+        ppp: 42,
+        statusMessage: "연습 중",
+        winRate: 1,
+    },
+    {
+        rank: 1,
+        userId: "daekim3",
+        ppp: 42,
+        statusMessage: "연습 중",
+        winRate: 1,
+    },
+    {
+        rank: 1,
+        userId: "daekim4",
+        ppp: 42,
+        statusMessage: "연습 중",
+        winRate: 1,
+    },
+    {
+        rank: 1,
+        userId: "daekim5",
+        ppp: 42,
+        statusMessage: "연습 중",
+        winRate: 1,
+    },
+]
+
 export default function RankList() {
     const test = {
         rank: 1,
@@ -25,7 +70,7 @@ export default function RankList() {
                     <div className={styles.userId}>유저</div>
                     <div className={styles.ppp}>점수</div>
                 </div>
-                <RankItem user={test} />
+                {list.map((item) => (<RankItem key={item.userId} user={item} />))}
             </div>
         </div>
     );
