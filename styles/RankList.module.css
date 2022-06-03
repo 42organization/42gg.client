@@ -1,0 +1,58 @@
+.container {
+    width: 50vh;
+    height: 50vh;
+    padding: 5px;
+    align-items: center;
+    background-color: #ffffff;
+  }
+  
+  .title {
+    width: 45vh;
+    font-size: 30px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .division {
+    display: flex;
+    background-color: #a4d1dd;
+    width: 90%;
+    height: 45px;
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 10px;
+  }
+  
+  .person {
+    display: flex;
+    background-color: #d3f2f8;
+    width: 90%;
+    height: 45px;
+    padding: 5px;
+    border-radius: 10px;
+  }
+  
+  .rank {
+    width: 20%;
+    display: flex;
+    height: 50px;
+    margin: 10px;
+    float: left;
+  }
+  
+  .userId {
+    width: 60%;
+    display: flex;
+    height: 50px;
+    margin: 10px;
+    float: center;
+  }
+  
+  .ppp {
+    width: 20%;
+    display: flex;
+    height: 50px;
+    margin: 10px;
+    float: right;
+  }
+  
