@@ -1,4 +1,4 @@
-import { Player } from "../types/game/gametypes";
+import { Player, Matches } from "../types/game/gametypes";
 import GameResultItem from "./GameResultItem";
 
 export default function GameResultList() {
