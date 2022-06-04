@@ -1,17 +1,27 @@
-import { Room } from "../types/matchTypes";
+import { ManagedSlot } from "../types/matchTypes";
 
 interface MatchItemProps {
-  room: Room;
+  slot: ManagedSlot;
+  type: string;
 }
 
-export default function MatchItem({ room }: MatchItemProps) {
-  const { start, end, headCnt, headMax } = room;
+export default function MatchItem({ type, slot }: MatchItemProps) {
+  const { startMin, endMin, headCount } = slot;
+  const startMinString = minuiteToStr(startMin);
+  const endMinString = minuiteToStr(endMin);
+  const headMax = type === "single" ? 2 : 4;
+
   return (
-    <div>
+    <button onClick={() => alert(`${startMin} - ${endMin}`)}>
       <span>
-        {start} - {end}
+        {startMinString} - {endMinString}
       </span>
-      <span> {headCnt === 0 ? "+" : `${headCnt}/${headMax}`} </span>
-    </div>
+      <span> {headCount === 0 ? "+" : `${headCount}/${headMax}`} </span>
+    </button>
   );
+}
+
+function minuiteToStr(min: number) {
+  min = min === 60 ? 0 : min;
+  return min < 10 ? "0" + min.toString() : min.toString();
 }

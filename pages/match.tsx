@@ -1,5 +1,5 @@
-import MatchTableList from "../components/MatchTableList";
+import MatchBoardList from "../components/MatchBoardList";
 
 export default function Match() {
-  return <MatchTableList />;
+  return <MatchBoardList />;
 }
