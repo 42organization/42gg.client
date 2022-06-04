@@ -1,9 +1,9 @@
-import GameResultItem from "../components/GameResultItem";
+import GameResultList from "../components/GameResultList";
 
-export default function GameResult() {
+export default function game() {
   return (
     <div>
-      <GameResultItem />
+      <GameResultList />
     </div>
   );
 }
