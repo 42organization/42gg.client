@@ -8,7 +8,7 @@ export default function Match() {
   useEffect(() => {
     (async () => {
       try {
-        const data = await getData(`/pingpong/match/table/${1}?type=single`);
+        const data = await getData(`/pingpong/match/tables/${1}?type=single`);
         setMatchData(data);
       } catch (e) {
         console.log(e);
