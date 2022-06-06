@@ -1,60 +1,30 @@
+import { MatchData } from "../types/matchTypes";
 import MatchBoard from "./MatchBoard";
 
-export default function MatchBoardList() {
-  const startHour = 9;
-  const interval = 10;
-  const type = "single";
-  const matchBoards = [
-    [
-      { status: "open", slotId: 0, headCount: 1 },
-      { status: "close", slotId: 1, headCount: 1 },
-      { status: "open", slotId: 2, headCount: 0 },
-      { status: "open", slotId: 3, headCount: 1 },
-      { status: "close", slotId: 4, headCount: 2 },
-      { status: "open", slotId: 5, headCount: 1 },
-    ],
-    [
-      { status: "open", slotId: 0, headCount: 1 },
-      { status: "close", slotId: 1, headCount: 1 },
-      { status: "open", slotId: 2, headCount: 0 },
-      { status: "open", slotId: 3, headCount: 1 },
-      { status: "close", slotId: 4, headCount: 2 },
-      { status: "open", slotId: 5, headCount: 1 },
-    ],
-    [
-      { status: "open", slotId: 0, headCount: 1 },
-      { status: "close", slotId: 1, headCount: 1 },
-      { status: "open", slotId: 2, headCount: 0 },
-      { status: "open", slotId: 3, headCount: 1 },
-      { status: "close", slotId: 4, headCount: 2 },
-      { status: "open", slotId: 5, headCount: 1 },
-    ],
-    [
-      { status: "open", slotId: 0, headCount: 1 },
-      { status: "close", slotId: 1, headCount: 1 },
-      { status: "open", slotId: 2, headCount: 0 },
-      { status: "open", slotId: 3, headCount: 1 },
-      { status: "close", slotId: 4, headCount: 2 },
-      { status: "open", slotId: 5, headCount: 1 },
-    ],
-    [
-      { status: "open", slotId: 0, headCount: 1 },
-      { status: "close", slotId: 1, headCount: 1 },
-      { status: "open", slotId: 2, headCount: 0 },
-      { status: "open", slotId: 3, headCount: 1 },
-      { status: "close", slotId: 4, headCount: 2 },
-      { status: "open", slotId: 5, headCount: 1 },
-    ],
-  ];
+interface MatchBoardListProps {
+  matchData: MatchData | null;
+}
 
-  return (
-    <div>
-      {matchBoards.map((matchSlots, i) => (
-        <div key={i}>
-          {startHour + i}
-          <MatchBoard type={type} interval={interval} matchSlots={matchSlots} />
-        </div>
-      ))}
-    </div>
-  );
+export default function MatchBoardList({ matchData }: MatchBoardListProps) {
+  if (matchData) {
+    const { startTime, intervalMinute, type, matchBoards } = matchData;
+    const startHour = parseInt(startTime.split(":")[0]);
+    const interval = intervalMinute;
+    return (
+      <div>
+        {matchBoards.map((matchSlots, i) => (
+          <div key={i}>
+            {startHour + i}
+            <MatchBoard
+              type={type}
+              interval={interval}
+              matchSlots={matchSlots}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  } else {
+    return <div>loading...</div>;
+  }
 }
