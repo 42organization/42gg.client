@@ -1,4 +1,4 @@
-import { MatchData } from "../types/matchTypes";
+import { MatchData } from "../../types/matchTypes";
 import MatchBoard from "./MatchBoard";
 
 interface MatchBoardListProps {

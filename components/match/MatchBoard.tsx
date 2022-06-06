@@ -1,5 +1,5 @@
 import MatchItem from "./MatchItem";
-import { Slot, ManagedSlot } from "../types/matchTypes";
+import { Slot, ManagedSlot } from "../../types/matchTypes";
 
 interface MatchBoardProps {
   matchSlots: Slot[];
