@@ -1,0 +1,14 @@
+@import './common.scss';
+
+.shadow {
+  @include shadow;
+}
+
+.notiWrap {
+  @include menu-noti-bar;
+  margin-left: auto;
+}
+
+.delete {
+  margin: 0.5rem 0.5rem 0 auto;
+}
