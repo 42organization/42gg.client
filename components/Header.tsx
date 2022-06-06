@@ -1,44 +1,47 @@
-import Link from 'next/link';
-import { atom, useRecoilState } from 'recoil';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import Menubar from './Menubar';
 import Notibar from './Notibar';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
 import { FiMenu } from 'react-icons/fi';
 import styles from '../styles/Header.module.scss';
 
-export const menubarState = atom<boolean>({ key: 'menubarState', default: false });
-export const notibarState = atom<boolean>({ key: 'notibarState', default: false });
-
 export default function Header() {
-  const [showMenubar, setShowMenubar] = useRecoilState(menubarState);
-  const [showNotibar, setShowNotibar] = useRecoilState(notibarState);
-  const notiCount = 3; // 메인에서 받아오는 노티카운트, recoil쓸 것
+  const [showMenubar, setShowMenubar] = useState(false);
+  const [showNotibar, setShowNotibar] = useState(false);
+  const notiCount = 3; // 메인에서 받아오는 노티카운트, recoil쓸 것, 카운트에따라 아이콘 달라짐
+  const router = useRouter();
 
   const showMenubarHandler = () => {
-    setShowMenubar(!showMenubar);
     setShowNotibar(false);
+    setShowMenubar(!showMenubar);
   };
   const showNotibarHandler = () => {
-    setShowNotibar(!showNotibar);
     setShowMenubar(false);
+    setShowNotibar(!showNotibar);
+  };
+  const gotoHomeHandler = () => {
+    setShowMenubar(false);
+    setShowNotibar(false);
+    router.push('/');
   };
 
   return (
-    <>
+    <div>
       <div className={styles.headerWrap}>
         <div onClick={showMenubarHandler}>
-          <FiMenu className={styles.menuIcon} />
+          <FiMenu id={styles.menuIcon} />
         </div>
-        <Link href='/'>
-          <div>Logo</div>
-        </Link>
-        <div>
-          <div onClick={showNotibarHandler}>{notiCount ? <VscBellDot className={styles.notiIcon} /> : <VscBell className={styles.notiIcon} />}</div>
-          <img src='/vercel.svg' alt='prfImg'></img>
+        <div id={styles.logo} onClick={gotoHomeHandler}>
+          Logo
+        </div>
+        <div className={styles.headerRight}>
+          <div onClick={showNotibarHandler}>{notiCount ? <VscBellDot id={styles.notiIcon} /> : <VscBell id={styles.notiIcon} />}</div>
+          <img src='/vercel.svg' alt='prfImg' />
         </div>
       </div>
-      {showMenubar && <Menubar />}
-      {showNotibar && <Notibar />}
-    </>
+      {showMenubar && <Menubar showMenubarHandler={showMenubarHandler} />}
+      {showNotibar && <Notibar showNotibarHandler={showNotibarHandler} />}
+    </div>
   );
 }

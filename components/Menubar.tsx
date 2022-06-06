@@ -1,19 +1,20 @@
 import { useRouter } from 'next/router';
-import { useRecoilState } from 'recoil';
-import { menubarState as menubarState } from './Header';
 import styles from '../styles/Menubar.module.scss';
 
-export default function Menubar() {
-  const [showMenubar, setShowMenubar] = useRecoilState<boolean>(menubarState);
+type MenubarProps = {
+  showMenubarHandler: () => void;
+};
+
+export default function Menubar({ showMenubarHandler }: MenubarProps) {
   const router = useRouter();
 
   const MenuPathHandler = (path: string) => {
-    setShowMenubar(false);
+    showMenubarHandler();
     router.push(`/${path}`);
   };
 
   return (
-    <div className={styles.shadow} onClick={() => setShowMenubar(false)}>
+    <div className={styles.shadow} onClick={showMenubarHandler}>
       <div className={styles.menubarWrap} onClick={(e) => e.stopPropagation()}>
         <nav>
           <ul>

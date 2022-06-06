@@ -1,18 +1,19 @@
 import { NotiData } from '../types/notiTypes';
+import styles from '../styles/NotiItem.module.scss';
 
-type GreetingProps = {
+type NotiItemProps = {
   data: NotiData;
 };
 
-export default function NotiItem({ data }: GreetingProps) {
+export default function NotiItem({ data }: NotiItemProps) {
   const title = makeTitle(data.type);
   const content = makeContent(data);
 
   return (
-    <>
-      <div>{title}</div>
-      <div>{content}</div>
-    </>
+    <div className={styles.notiWrap}>
+      <span className={styles.title}>{title}</span>
+      <div className={styles.content}>{content}</div>
+    </div>
   );
 }
 

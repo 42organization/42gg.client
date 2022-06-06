@@ -1,19 +1,14 @@
+@import './common.scss';
+
 .shadow {
-  position: fixed;
-  top: 3rem;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  @include shadow;
 }
 
 .notiWrap {
-  z-index: 1 !important;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: 16rem;
-  height: 100vh;
+  @include menu-noti-bar;
   margin-left: auto;
-  background-color: #ffff;
+}
+
+.delete {
+  margin: 0.5rem 0.5rem 0 auto;
 }

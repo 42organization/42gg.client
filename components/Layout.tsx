@@ -14,24 +14,16 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <>
-      {presentPath === '/match' ? (
-        <>
-          <Header />
-          {children}
-          <Footer />
-        </>
-      ) : (
-        <>
-          <Header />
-          <Link href='/match'>
-            <a className='matchingButton'>
-              <RiPingPongFill />
-            </a>
-          </Link>
-          {children}
-          <Footer />
-        </>
+      <Header />
+      {presentPath !== '/match' && (
+        <Link href='/match'>
+          <a className='matchingButton'>
+            <RiPingPongFill />
+          </a>
+        </Link>
       )}
+      {children}
+      <Footer />
     </>
   );
 }
