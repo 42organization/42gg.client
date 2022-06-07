@@ -1,19 +1,27 @@
+import { useEffect, useState } from 'react';
 import NotiItem from './NotiItem';
 import { NotiData } from '../types/notiTypes';
 import { BsCheck2Square } from 'react-icons/bs';
 import styles from '../styles/Notibar.module.scss';
+import { getData } from '../utils/getData';
 
 type NotibarProps = {
   showNotibarHandler: () => void;
 };
 
 export default function Notibar({ showNotibarHandler }: NotibarProps) {
-  const dummyData: NotiData[] = [
-    { id: 1, type: '성사', message: null, time: '09:10', isChecked: false, myTeam: ['jabae'], enemyTeam: ['sujpark'] },
-    { id: 2, type: '취소', message: null, time: '09:10', isChecked: false, myTeam: ['jabae'], enemyTeam: ['sujpark'] },
-    { id: 3, type: '5분전', message: null, time: '09:10', isChecked: false, myTeam: ['jabae'], enemyTeam: ['sujpark'] },
-    { id: 4, type: '공지', message: '탁구대 망가짐으로 1시간 동안 경기가 불가합니다', time: '2022-05-31', isChecked: true },
-  ];
+  const [notiData, setNotiData] = useState<NotiData[] | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await getData(`/pingpong/notifications`);
+        setNotiData(data);
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
 
   const allNotiDeleteHandler = () => {};
 
@@ -24,8 +32,8 @@ export default function Notibar({ showNotibarHandler }: NotibarProps) {
           <BsCheck2Square />
           전체삭제
         </span>
-        <div>
-          {dummyData.map((data: NotiData) => (
+        <div className={styles.notiFullContent}>
+          {notiData?.map((data: NotiData) => (
             <NotiItem key={data.id} data={data} />
           ))}
         </div>

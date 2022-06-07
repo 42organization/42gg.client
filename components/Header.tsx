@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../utils/atom';
 import Menubar from './Menubar';
 import Notibar from './Notibar';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
@@ -9,7 +11,8 @@ import styles from '../styles/Header.module.scss';
 export default function Header() {
   const [showMenubar, setShowMenubar] = useState(false);
   const [showNotibar, setShowNotibar] = useState(false);
-  const notiCount = 3; // 메인에서 받아오는 노티카운트, recoil쓸 것, 카운트에따라 아이콘 달라짐
+  const notiCount = useRecoilValue(userState)?.notiCount;
+  const userImg = useRecoilValue(userState)?.userImageUri;
   const router = useRouter();
 
   const showMenubarHandler = () => {
@@ -37,7 +40,7 @@ export default function Header() {
         </div>
         <div className={styles.headerRight}>
           <div onClick={showNotibarHandler}>{notiCount ? <VscBellDot id={styles.notiIcon} /> : <VscBell id={styles.notiIcon} />}</div>
-          <img src='/vercel.svg' alt='prfImg' />
+          <img src={userImg} alt='prfImg' /> {/* next js 에서 image는 다시 알아봐야 함 */}
         </div>
       </div>
       {showMenubar && <Menubar showMenubarHandler={showMenubarHandler} />}
