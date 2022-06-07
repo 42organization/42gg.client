@@ -1,17 +1,19 @@
 import React from "react";
 import styles from "../styles/RankList.module.css";
-import { Rank } from "../types/types";
+import { Rank } from "../types/rankTypes";
 
 type RankType = {
-    user: Rank;
+  user: Rank;
 };
 
 export default function RankItem({ user }: RankType) {
-    return (
-        <div className={styles.person}>
-            <div className={styles.rank}>{user.rank}</div>
-            <div className={styles.userId}>{user.userId}</div>
-            <div className={styles.ppp}>{user.ppp}</div>
-        </div>
-    );
+  const { rank, userId, ppp, statusMessage, winRate } = user;
+  return (
+    <div className={styles.person}>
+      <div className={styles.rank}>{rank}</div>
+      <div className={styles.userId}>{`${userId} (${ppp})`}</div>
+      <div className={styles.statusMessage}>{statusMessage}</div>
+      <div className={styles.winRate}>{winRate}</div>
+    </div>
+  );
 }
