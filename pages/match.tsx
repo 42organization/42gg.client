@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MatchBoardList from "../components/MatchBoardList";
+import MatchBoardList from "../components/match/MatchBoardList";
 import { MatchData } from "../types/matchTypes";
 import { getData } from "../utils/getData";
 

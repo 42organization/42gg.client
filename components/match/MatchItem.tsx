@@ -1,4 +1,4 @@
-import { ManagedSlot } from "../types/matchTypes";
+import { ManagedSlot } from "../../types/matchTypes";
 
 interface MatchItemProps {
   slot: ManagedSlot;
@@ -12,7 +12,10 @@ export default function MatchItem({ type, slot }: MatchItemProps) {
   const headMax = type === "single" ? 2 : 4;
 
   return (
-    <button onClick={() => alert(`${startMin} - ${endMin}`)}>
+    <button
+      disabled={slot.status === "close" && true}
+      onClick={() => alert(`${startMinString} - ${endMinString}`)}
+    >
       <span>
         {startMinString} - {endMinString}
       </span>
