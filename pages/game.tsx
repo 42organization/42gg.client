@@ -1,4 +1,4 @@
-import GameResultList from "../components/GameResultList";
+import GameResultList from "../components/game/GameResultList";
 
 export default function game() {
   return (
