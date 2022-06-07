@@ -1,6 +1,5 @@
 import React from "react";
-import styles from "../styles/RankList.module.css";
-import RankItem from "./RankItem";
+import styles from "../../styles/RankList.module.css";
 
 type RankType = {
   myRank: number;
