@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../utils/atom';
+import { userState } from '../utils/recoil/main';
 import Menubar from './Menubar';
 import Notibar from './Notibar';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
@@ -39,8 +39,15 @@ export default function Header() {
           Logo
         </div>
         <div className={styles.headerRight}>
-          <div onClick={showNotibarHandler}>{notiCount ? <VscBellDot id={styles.notiIcon} /> : <VscBell id={styles.notiIcon} />}</div>
-          <img src={userImg} alt='prfImg' /> {/* next js 에서 image는 다시 알아봐야 함 */}
+          <div onClick={showNotibarHandler}>
+            {notiCount ? (
+              <VscBellDot id={styles.notiIcon} />
+            ) : (
+              <VscBell id={styles.notiIcon} />
+            )}
+          </div>
+          <img src={userImg} alt='prfImg' />{' '}
+          {/* next js 에서 image는 다시 알아봐야 함 */}
         </div>
       </div>
       {showMenubar && <Menubar showMenubarHandler={showMenubarHandler} />}

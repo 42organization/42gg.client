@@ -1,5 +1,5 @@
-import styles from "../../styles/GameResultItem.module.css";
-import { Game } from "../../types/gameTypes";
+import styles from '../../styles/GameResultItem.module.css';
+import { Game } from '../../types/gameTypes';
 
 export default function GameResultItem({ game }: { game: Game }) {
   const { team1, team2, time, status, type } = game;

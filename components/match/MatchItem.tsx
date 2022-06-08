@@ -1,4 +1,6 @@
-import { ManagedSlot } from "../../types/matchTypes";
+import { ManagedSlot, EnrollInfo } from '../../types/matchTypes';
+import { enrollInfoState } from '../../utils/recoil/match';
+import { useSetRecoilState } from 'recoil';
 
 interface MatchItemProps {
   slot: ManagedSlot;
@@ -6,25 +8,27 @@ interface MatchItemProps {
 }
 
 export default function MatchItem({ type, slot }: MatchItemProps) {
-  const { startMin, endMin, headCount } = slot;
-  const startMinString = minuiteToStr(startMin);
-  const endMinString = minuiteToStr(endMin);
-  const headMax = type === "single" ? 2 : 4;
+  const setEnrollInfo = useSetRecoilState<EnrollInfo | null>(enrollInfoState);
+  const { startTime, endTime, headCount, slotId, status } = slot;
+  const startMinString = startTime.split(':')[1];
+  const endMinString = endTime.split(':')[1];
+  const headMax = type === 'single' ? 2 : 4;
+
+  const onClick = () => {
+    setEnrollInfo({
+      slotId,
+      type,
+      startTime,
+      endTime,
+    });
+  };
 
   return (
-    <button
-      disabled={slot.status === "close" && true}
-      onClick={() => alert(`${startMinString} - ${endMinString}`)}
-    >
+    <button disabled={status === 'close'} onClick={onClick}>
       <span>
         {startMinString} - {endMinString}
       </span>
-      <span> {headCount === 0 ? "+" : `${headCount}/${headMax}`} </span>
+      <span> {headCount === 0 ? '+' : `${headCount}/${headMax}`} </span>
     </button>
   );
-}
-
-function minuiteToStr(min: number) {
-  min = min === 60 ? 0 : min;
-  return min < 10 ? "0" + min.toString() : min.toString();
 }

@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "../../styles/RankList.module.css";
-import { Rank } from "../../types/rankTypes";
-import RankItem from "./RankItem";
+import React from 'react';
+import styles from '../../styles/RankList.module.css';
+import { Rank } from '../../types/rankTypes';
+import RankItem from './RankItem';
 
 type RankType = {
   rankList: Rank[];
@@ -18,7 +18,7 @@ export default function RankList({ rankList }: RankType) {
           <div className={styles.statusMessage}>상태메시지</div>
           <div className={styles.winRate}>승률</div>
         </div>
-        {rankList.map(item => (
+        {rankList.map((item) => (
           <RankItem key={item.userId} user={item} />
         ))}
       </div>

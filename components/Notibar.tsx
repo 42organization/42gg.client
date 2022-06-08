@@ -3,7 +3,7 @@ import NotiItem from './NotiItem';
 import { NotiData } from '../types/notiTypes';
 import { BsCheck2Square } from 'react-icons/bs';
 import styles from '../styles/Notibar.module.scss';
-import { getData } from '../utils/getData';
+import { getData } from '../utils/axios';
 
 type NotibarProps = {
   showNotibarHandler: () => void;
