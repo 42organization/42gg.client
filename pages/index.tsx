@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { userState } from "../utils/atom";
 import { UserData } from "../types/mainType";
 import styles from "../styles/Home.module.css";
-import { getData } from "../utils/getData";
+import { getData } from "../utils/axios";
 
 const Home: NextPage = () => {
   const [userData, setUserData] = useRecoilState<UserData | null>(userState);

@@ -1,30 +1,31 @@
-import { MatchData } from "../../types/matchTypes";
+import { Slots } from "../../types/matchTypes";
 import MatchBoard from "./MatchBoard";
 
 interface MatchBoardListProps {
-  matchData: MatchData | null;
+  type: string;
+  startTime: string;
+  intervalMinute: number;
+  matchBoards: Slots[];
 }
 
-export default function MatchBoardList({ matchData }: MatchBoardListProps) {
-  if (matchData) {
-    const { startTime, intervalMinute, type, matchBoards } = matchData;
-    const startHour = parseInt(startTime.split(":")[0]);
-    const interval = intervalMinute;
-    return (
-      <div>
-        {matchBoards.map((matchSlots, i) => (
-          <div key={i}>
-            {startHour + i}
-            <MatchBoard
-              type={type}
-              interval={interval}
-              matchSlots={matchSlots}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  } else {
-    return <div>loading...</div>;
-  }
+export default function MatchBoardList({
+  type,
+  startTime,
+  intervalMinute,
+  matchBoards,
+}: MatchBoardListProps) {
+  const startHour = parseInt(startTime.split(":")[0]);
+  return (
+    <div>
+      {matchBoards.map((matchSlots, i) => (
+        <MatchBoard
+          key={i}
+          type={type}
+          intervalMinute={intervalMinute}
+          hour={startHour + i}
+          matchSlots={matchSlots}
+        />
+      ))}
+    </div>
+  );
 }

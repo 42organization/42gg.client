@@ -1,31 +1,47 @@
-import MatchItem from "./MatchItem";
 import { Slot, ManagedSlot } from "../../types/matchTypes";
+import MatchItem from "./MatchItem";
 
 interface MatchBoardProps {
   matchSlots: Slot[];
   type: string;
-  interval: number;
+  hour: number;
+  intervalMinute: number;
 }
 
 export default function MatchBoard({
   matchSlots,
-  interval,
+  intervalMinute,
   type,
+  hour,
 }: MatchBoardProps) {
   return (
     <div>
-      {matchSlots.map((slot, i) => {
-        const startMin = i * interval;
-        const endMin = (i + 1) * interval;
-        const managedSlot: ManagedSlot = { ...slot, startMin, endMin };
-        return (
-          <MatchItem
-            key={slot.slotId}
-            type={type}
-            slot={managedSlot}
-          ></MatchItem>
-        );
-      })}
+      <div>{hour}</div>
+      <div>
+        {matchSlots.map((slot, i) => {
+          const startMin = i * intervalMinute;
+          const endMin = (i + 1) * intervalMinute;
+          const startHour = hour;
+          const endHour = endMin === 60 ? (startHour + 1) % 24 : startHour;
+          const managedSlot: ManagedSlot = {
+            ...slot,
+            startTime: `${startHour}:${minuiteToStr(startMin)}`,
+            endTime: `${endHour}:${minuiteToStr(endMin)}`,
+          };
+          return (
+            <MatchItem
+              key={slot.slotId}
+              type={type}
+              slot={managedSlot}
+            ></MatchItem>
+          );
+        })}
+      </div>
     </div>
   );
+}
+
+function minuiteToStr(min: number) {
+  min = min === 60 ? 0 : min;
+  return min < 10 ? "0" + min.toString() : min.toString();
 }
