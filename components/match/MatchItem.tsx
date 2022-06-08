@@ -1,5 +1,5 @@
 import { ManagedSlot, EnrollInfo } from "../../types/matchTypes";
-import { enrollInfoState } from "../../recoil/match";
+import { enrollInfoState } from "../../utils/recoil/match";
 import { useSetRecoilState } from "recoil";
 
 interface MatchItemProps {

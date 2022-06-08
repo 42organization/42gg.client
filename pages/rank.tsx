@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { RankData } from "../types/rankTypes";
 import { getData } from "../utils/axios";
-import RankList from "../components/Rank/RankList";
-import MyRank from "../components/Rank/MyRank";
+import RankList from "../components/rank/RankList";
+import MyRank from "../components/rank/MyRank";
 
 export default function Rank() {
   const [rankData, setRankData] = useState<RankData | null>(null);

@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { userState } from "../utils/atom";
+import { userState } from "../utils/recoil/main";
 import { UserData } from "../types/mainType";
 import styles from "../styles/Home.module.css";
 import { getData } from "../utils/axios";

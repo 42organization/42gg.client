@@ -1,4 +1,4 @@
-import { enrollInfoState } from "../../recoil/match";
+import { enrollInfoState } from "../../utils/recoil/match";
 import { EnrollInfo } from "../../types/matchTypes";
 import { postData } from "../../utils/axios";
 import { useRecoilState } from "recoil";
