@@ -23,7 +23,7 @@ export default function Match() {
   return (
     <div>
       <MatchBoardList
-        type="single"
+        type='single'
         startTime={matchData.startTime}
         intervalMinute={matchData.intervalMinute}
         matchBoards={matchData.matchBoards}

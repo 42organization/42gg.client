@@ -46,7 +46,7 @@ export default function Header() {
               <VscBell id={styles.notiIcon} />
             )}
           </div>
-          <img src={userImg} alt="prfImg" />{' '}
+          <img src={userImg} alt='prfImg' />{' '}
           {/* next js 에서 image는 다시 알아봐야 함 */}
         </div>
       </div>
