@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Games, Game } from "../../types/gameTypes";
-import { getData } from "../../utils/getData";
+import { getData } from "../../utils/axios";
 import GameResultItem from "./GameResultItem";
 
 export default function GameResultList() {

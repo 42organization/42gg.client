@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { RankData } from "../types/rankTypes";
-import { getData } from "../utils/getData";
+import { getData } from "../utils/axios";
 import RankList from "../components/Rank/RankList";
 import MyRank from "../components/Rank/MyRank";
 
