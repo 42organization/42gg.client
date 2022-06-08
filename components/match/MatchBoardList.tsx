@@ -1,5 +1,5 @@
-import { Slots } from "../../types/matchTypes";
-import MatchBoard from "./MatchBoard";
+import { Slots } from '../../types/matchTypes';
+import MatchBoard from './MatchBoard';
 
 interface MatchBoardListProps {
   type: string;
@@ -14,7 +14,7 @@ export default function MatchBoardList({
   intervalMinute,
   matchBoards,
 }: MatchBoardListProps) {
-  const startHour = parseInt(startTime.split(":")[0]);
+  const startHour = parseInt(startTime.split(':')[0]);
   return (
     <div>
       {matchBoards.map((matchSlots, i) => (

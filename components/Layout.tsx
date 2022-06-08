@@ -16,8 +16,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
     <>
       <Header />
       {presentPath !== '/match' && (
-        <Link href='/match'>
-          <a className='matchingButton'>
+        <Link href="/match">
+          <a className="matchingButton">
             <RiPingPongFill />
           </a>
         </Link>

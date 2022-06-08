@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Games, Game } from "../../types/gameTypes";
-import { getData } from "../../utils/axios";
-import GameResultItem from "./GameResultItem";
+import { useEffect, useState } from 'react';
+import { Games, Game } from '../../types/gameTypes';
+import { getData } from '../../utils/axios';
+import GameResultItem from './GameResultItem';
 
 export default function GameResultList() {
   const [games, setGames] = useState<Games>();
@@ -19,7 +19,7 @@ export default function GameResultList() {
   return (
     <div>
       {!games
-        ? "로딩중"
+        ? '로딩중'
         : games.map((game: Game) => (
             <GameResultItem key={game.matchId} game={game} />
           ))}

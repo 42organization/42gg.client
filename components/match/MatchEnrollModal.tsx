@@ -1,7 +1,7 @@
-import { enrollInfoState } from "../../utils/recoil/match";
-import { EnrollInfo } from "../../types/matchTypes";
-import { postData } from "../../utils/axios";
-import { useRecoilState } from "recoil";
+import { enrollInfoState } from '../../utils/recoil/match';
+import { EnrollInfo } from '../../types/matchTypes';
+import { postData } from '../../utils/axios';
+import { useRecoilState } from 'recoil';
 
 export default function MatchEnrollModal() {
   const [enrollInfo, setEnrollInfo] = useRecoilState<EnrollInfo | null>(

@@ -1,14 +1,14 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
-import { Game, Games, Team } from "../../../../types/gameTypes";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { Game, Games, Team } from '../../../../types/gameTypes';
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Games>
 ) {
   const kipark: Team = {
-    userId: "kipark",
-    userImageUri: "imageUrl",
+    userId: 'kipark',
+    userImageUri: 'imageUrl',
     wins: 1,
     losses: 2,
     winRate: 60,
@@ -17,8 +17,8 @@ export default function handler(
     score: 3,
   };
   const jibae: Team = {
-    userId: "jiba22ewqe",
-    userImageUri: "imageUrl",
+    userId: 'jiba22ewqe',
+    userImageUri: 'imageUrl',
     wins: 4,
     losses: 2,
     winRate: 50,
@@ -28,8 +28,8 @@ export default function handler(
   };
 
   const sujpark: Team = {
-    userId: "sujpark",
-    userImageUri: "imageUrl",
+    userId: 'sujpark',
+    userImageUri: 'imageUrl',
     wins: 14,
     losses: 12,
     winRate: 630,
@@ -38,8 +38,8 @@ export default function handler(
     score: 2,
   };
   const jabae: Team = {
-    userId: "jabae",
-    userImageUri: "imageUrl",
+    userId: 'jabae',
+    userImageUri: 'imageUrl',
     wins: 1,
     losses: 1,
     winRate: 70,
@@ -50,34 +50,34 @@ export default function handler(
 
   const game1: Game = {
     matchId: 1,
-    time: "12시 30분",
-    status: "end",
-    type: "단식",
+    time: '12시 30분',
+    status: 'end',
+    type: '단식',
     team1: kipark,
     team2: jibae,
   };
 
   const game2: Game = {
     matchId: 2,
-    time: "12시 30분",
-    status: "end",
-    type: "단식",
+    time: '12시 30분',
+    status: 'end',
+    type: '단식',
     team1: sujpark,
     team2: jabae,
   };
   const game3: Game = {
     matchId: 3,
-    time: "12시 30분",
-    status: "end",
-    type: "단식",
+    time: '12시 30분',
+    status: 'end',
+    type: '단식',
     team1: sujpark,
     team2: jabae,
   };
   const game4: Game = {
     matchId: 4,
-    time: "12시 30분",
-    status: "end",
-    type: "단식",
+    time: '12시 30분',
+    status: 'end',
+    type: '단식',
     team1: sujpark,
     team2: jabae,
   };
