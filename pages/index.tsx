@@ -1,26 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { userState } from '../utils/recoil/main';
-import { UserData } from '../types/mainType';
 import styles from '../styles/Home.module.css';
-import { getData } from '../utils/axios';
 
 const Home: NextPage = () => {
-  const [userData, setUserData] = useRecoilState<UserData | null>(userState);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await getData(`/pingpong/users`);
-        setUserData(data); // slice로 0~2?만 리코일?
-      } catch (e) {
-        console.log(e);
-      }
-    })();
-  }, []);
-
   return (
     <div className={styles.container}>
       <Head>

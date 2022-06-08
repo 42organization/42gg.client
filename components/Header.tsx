@@ -1,19 +1,33 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { userState } from '../utils/recoil/main';
+import { UserData } from '../types/mainType';
 import Menubar from './Menubar';
 import Notibar from './Notibar';
-import { VscBell, VscBellDot } from 'react-icons/vsc';
+import { VscBell, VscBellDot, VscSmiley } from 'react-icons/vsc';
 import { FiMenu } from 'react-icons/fi';
 import styles from '../styles/Header.module.scss';
+import { getData } from '../utils/axios';
 
 export default function Header() {
+  const [userData, setUserData] = useRecoilState<UserData | null>(userState);
   const [showMenubar, setShowMenubar] = useState(false);
   const [showNotibar, setShowNotibar] = useState(false);
-  const notiCount = useRecoilValue(userState)?.notiCount;
-  const userImg = useRecoilValue(userState)?.userImageUri;
+  const notiCount = userData?.notiCount;
+  const userImg = userData?.userImageUri;
   const router = useRouter();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await getData(`/pingpong/users`);
+        setUserData(data);
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
 
   const showMenubarHandler = () => {
     setShowNotibar(false);
@@ -46,7 +60,11 @@ export default function Header() {
               <VscBell id={styles.notiIcon} />
             )}
           </div>
-          <img src={userImg} alt='prfImg' />{' '}
+          {userImg ? (
+            <img src={userImg} alt='prfImg' />
+          ) : (
+            <VscSmiley id={styles.userIcon} />
+          )}
           {/* next js 에서 image는 다시 알아봐야 함 */}
         </div>
       </div>
