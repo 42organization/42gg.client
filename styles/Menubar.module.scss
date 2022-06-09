@@ -8,13 +8,13 @@
   @include menu-noti-bar;
   nav {
     margin: 1rem 0.5rem 0 0;
-    font-size: 1.1rem;
+    font-size: $big-font;
   }
   li {
     list-style: none;
     margin: 1rem 0 1rem 0;
   }
   #subMenu {
-    font-size: 0.8rem;
+    font-size: $small-font;
   }
 }
