@@ -12,8 +12,8 @@ import { getData } from '../utils/axios';
 
 export default function Header() {
   const [userData, setUserData] = useRecoilState<UserData | null>(userState);
-  const [showMenubar, setShowMenubar] = useState(false);
-  const [showNotibar, setShowNotibar] = useState(false);
+  const [showMenuBar, setShowMenuBar] = useState(false);
+  const [showNotiBar, setShowNotiBar] = useState(false);
   const notiCount = userData?.notiCount;
   const userImg = userData?.userImageUri;
   const router = useRouter();
@@ -29,31 +29,31 @@ export default function Header() {
     })();
   }, []);
 
-  const showMenubarHandler = () => {
-    setShowNotibar(false);
-    setShowMenubar(!showMenubar);
+  const showMenuBarHandler = () => {
+    setShowNotiBar(false);
+    setShowMenuBar(!showMenuBar);
   };
-  const showNotibarHandler = () => {
-    setShowMenubar(false);
-    setShowNotibar(!showNotibar);
+  const showNotiBarHandler = () => {
+    setShowMenuBar(false);
+    setShowNotiBar(!showNotiBar);
   };
   const gotoHomeHandler = () => {
-    setShowMenubar(false);
-    setShowNotibar(false);
+    setShowMenuBar(false);
+    setShowNotiBar(false);
     router.push('/');
   };
 
   return (
     <div>
       <div className={styles.headerWrap}>
-        <div onClick={showMenubarHandler}>
+        <div onClick={showMenuBarHandler}>
           <FiMenu id={styles.menuIcon} />
         </div>
         <div id={styles.logo} onClick={gotoHomeHandler}>
           Logo
         </div>
         <div className={styles.headerRight}>
-          <div onClick={showNotibarHandler}>
+          <div onClick={showNotiBarHandler}>
             {notiCount ? (
               <VscBellDot id={styles.notiIcon} />
             ) : (
@@ -68,8 +68,8 @@ export default function Header() {
           {/* next js 에서 image는 다시 알아봐야 함 */}
         </div>
       </div>
-      {showMenubar && <MenuBar showMenubarHandler={showMenubarHandler} />}
-      {showNotibar && <NotiBar showNotibarHandler={showNotibarHandler} />}
+      {showMenuBar && <MenuBar showMenuBarHandler={showMenuBarHandler} />}
+      {showNotiBar && <NotiBar showNotiBarHandler={showNotiBarHandler} />}
     </div>
   );
 }

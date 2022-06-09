@@ -4,8 +4,8 @@
   @include shadow;
 }
 
-.menubarWrap {
-  @include menu-noti-bar;
+.menuBarWrap {
+  @include menu-noti-Bar;
   nav {
     margin: 1rem 0.5rem 0 0;
     font-size: $big-font;

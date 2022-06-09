@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { SearchData } from '../../types/mainType';
 import { getData } from '../../utils/axios';
 
-export default function Searchbar() {
+export default function SearchBar() {
   const [keyword, setKeyword] = useState<string>('');
   const [showSearchBox, setShowSearchBox] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<SearchData | null>(null);

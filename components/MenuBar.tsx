@@ -1,21 +1,21 @@
 import { useRouter } from 'next/router';
-import styles from '../styles/Menubar.module.scss';
+import styles from '../styles/MenuBar.module.scss';
 
-type MenubarProps = {
-  showMenubarHandler: () => void;
+type MenuBarProps = {
+  showMenuBarHandler: () => void;
 };
 
-export default function Menubar({ showMenubarHandler }: MenubarProps) {
+export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
   const router = useRouter();
 
   const MenuPathHandler = (path: string) => {
-    showMenubarHandler();
+    showMenuBarHandler();
     router.push(`/${path}`);
   };
 
   return (
-    <div className={styles.shadow} onClick={showMenubarHandler}>
-      <div className={styles.menubarWrap} onClick={(e) => e.stopPropagation()}>
+    <div className={styles.shadow} onClick={showMenuBarHandler}>
+      <div className={styles.menuBarWrap} onClick={(e) => e.stopPropagation()}>
         <nav>
           <ul>
             <li onClick={() => MenuPathHandler('rank')}>Ranking</li>

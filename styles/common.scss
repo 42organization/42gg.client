@@ -7,7 +7,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-@mixin menu-noti-bar {
+@mixin menu-noti-Bar {
   z-index: 1 !important;
   display: flex;
   flex-direction: column;
@@ -26,5 +26,5 @@
   background-color: #ffff;
 }
 
-$big-font: 1.3rem; // Menubar
+$big-font: 1.3rem; // MenuBar
 $small-font: 0.8rem;

@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import NotiItem from './NotiItem';
 import { NotiData } from '../types/notiTypes';
 import { BsCheck2Square } from 'react-icons/bs';
-import styles from '../styles/Notibar.module.scss';
+import styles from '../styles/NotiBar.module.scss';
 import { getData } from '../utils/axios';
 
-type NotibarProps = {
-  showNotibarHandler: () => void;
+type NotiBarProps = {
+  showNotiBarHandler: () => void;
 };
 
-export default function Notibar({ showNotibarHandler }: NotibarProps) {
+export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
   const [notiData, setNotiData] = useState<NotiData[] | null>(null);
 
   useEffect(() => {
@@ -23,10 +23,12 @@ export default function Notibar({ showNotibarHandler }: NotibarProps) {
     })();
   }, []);
 
-  const allNotiDeleteHandler = () => {};
+  const allNotiDeleteHandler = () => {
+    // DELETE 요청하기
+  };
 
   return (
-    <div className={styles.shadow} onClick={showNotibarHandler}>
+    <div className={styles.shadow} onClick={showNotiBarHandler}>
       <div className={styles.notiWrap} onClick={(e) => e.stopPropagation()}>
         <button onClick={allNotiDeleteHandler}>
           <BsCheck2Square />
