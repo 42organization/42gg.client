@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { userState } from '../utils/recoil/main';
 import { UserData } from '../types/mainType';
-import Menubar from './Menubar';
-import Notibar from './Notibar';
+import MenuBar from './MenuBar';
+import NotiBar from './NotiBar';
 import { VscBell, VscBellDot, VscSmiley } from 'react-icons/vsc';
 import { FiMenu } from 'react-icons/fi';
 import styles from '../styles/Header.module.scss';
@@ -68,8 +68,8 @@ export default function Header() {
           {/* next js 에서 image는 다시 알아봐야 함 */}
         </div>
       </div>
-      {showMenubar && <Menubar showMenubarHandler={showMenubarHandler} />}
-      {showNotibar && <Notibar showNotibarHandler={showNotibarHandler} />}
+      {showMenubar && <MenuBar showMenubarHandler={showMenubarHandler} />}
+      {showNotibar && <NotiBar showNotibarHandler={showNotibarHandler} />}
     </div>
   );
 }

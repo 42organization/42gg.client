@@ -1,6 +1,6 @@
 import GameResultList from '../components/game/GameResultList';
 
-export default function game() {
+export default function Game() {
   return (
     <div>
       <GameResultList />

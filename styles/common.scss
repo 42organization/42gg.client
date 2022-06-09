@@ -19,9 +19,10 @@
 
 @mixin pageWrap {
   margin: 1rem 2rem;
-  height: calc(
-    100vh - 7rem
-  ); // 전체 화면 크기에 - (헤더+푸터+페이지마진 등)을 계산한 값
+  // height: calc(
+  //   100vh - 7rem
+  // );
+  // 전체 화면 크기에 - (헤더+푸터+페이지마진 등)을 계산한 값
   background-color: #ffff;
 }
 

@@ -1,31 +1,26 @@
 import Link from 'next/link';
-import { Game } from '../../types/gameTypes';
-import { Rank } from '../../types/rankTypes';
-import RankItem from '../rank/RankItem';
 import styles from '../../styles/Section.module.scss';
+import GameResultList from '../game/GameResultList';
+import RankList from '../rank/RankList';
 
 type SectionProps = {
-  gameData?: Game[];
-  rankData?: Rank[];
   path: string;
 };
 
-export default function Section({ gameData, rankData, path }: SectionProps) {
+export default function Section({ path }: SectionProps) {
   return (
     <div className={styles.sectionWrap}>
       <Link href={path}>
         <a>더보기 &#9657;</a>
       </Link>
-      {gameData ? (
-        <section>{/* kipark의 게임 리스트 */}</section>
-      ) : (
-        <section>
-          <div id={styles.title}>Winner</div>
-          {rankData?.map((item) => (
-            <RankItem key={item.userId} user={item} />
-          ))}
-        </section>
-      )}
+      <section>
+        {/* {path === '/game' ? (
+          <GameResultList count={3} />
+        ) : (
+          <RankList count={3} />
+        )}
+				kipark, daekim 수정 후 사용 예정 */}
+      </section>
     </div>
   );
 }
