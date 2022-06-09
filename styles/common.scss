@@ -7,7 +7,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-@mixin menu-noti-bar {
+@mixin menu-noti-Bar {
   z-index: 1 !important;
   display: flex;
   flex-direction: column;
@@ -16,3 +16,15 @@
   height: 100vh;
   background-color: #ffff;
 }
+
+@mixin pageWrap {
+  margin: 1rem 2rem;
+  // height: calc(
+  //   100vh - 7rem
+  // );
+  // 전체 화면 크기에 - (헤더+푸터+페이지마진 등)을 계산한 값
+  background-color: #ffff;
+}
+
+$big-font: 1.3rem; // MenuBar
+$small-font: 0.8rem;
