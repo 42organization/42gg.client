@@ -7,7 +7,6 @@ export default function handler(
   res: NextApiResponse<RankData>
 ) {
   const obj = {
-    myRank: 3,
     rankList: [
       {
         rank: 1,
