@@ -7,6 +7,5 @@ export interface Rank {
 }
 
 export interface RankData {
-  myRank: number;
   rankList: Rank[];
 }
