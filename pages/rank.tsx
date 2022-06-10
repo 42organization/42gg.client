@@ -5,7 +5,7 @@ export default function Rank() {
   return (
     <div>
       <MyRank />
-      <RankList />
+      <RankList isMain={false} />
     </div>
   );
 }

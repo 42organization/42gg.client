@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../styles/RankList.module.css';
-import { Rank, RankData } from '../../types/rankTypes';
+import { Rank } from '../../types/rankTypes';
 import RankItem from './RankItem';
 import { getData } from '../../utils/axios';
 
 type RankType = {
-  count?: number | null;
+  isMain: boolean;
 };
 
-export default function RankList({ count }: RankType) {
+export default function RankList({ isMain }: RankType) {
   const [rankData, setRankData] = useState<Rank[] | null>(null);
+
   useEffect(() => {
     (async () => {
       try {
@@ -25,11 +26,13 @@ export default function RankList({ count }: RankType) {
 
   return (
     <>
-      {count ? (
+      {isMain ? (
         <div>
-          {rankData.map((item: Rank) => (
-            <RankItem key={item.userId} user={item} count={count} />
-          ))}
+          {rankData
+            ?.filter((item) => item.rank < 4) //
+            .map((item: Rank) => (
+              <RankItem key={item.userId} user={item} isMain={isMain} />
+            ))}
         </div>
       ) : (
         <div>
@@ -42,7 +45,7 @@ export default function RankList({ count }: RankType) {
               <div className={styles.winRate}>승률</div>
             </div>
             {rankData?.map((item: Rank) => (
-              <RankItem key={item.userId} user={item} />
+              <RankItem key={item.userId} user={item} isMain={isMain} />
             ))}
           </div>
         </div>

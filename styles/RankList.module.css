@@ -10,7 +10,7 @@
 .container {
   width: flex;
   font-size: smaller;
-  height: 50vh;
+  height: flex;
   padding: 5px;
   align-items: center;
   background-color: #ffffff;
