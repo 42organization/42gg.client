@@ -8,6 +8,7 @@ export default function handler(
   const obj = {
     userId: 'jabae',
     userImageUri: '/vercel.svg',
+    myRank: 2,
     notiCount: 4,
     userState: { isPlaying: false, gameId: 3 },
   };
