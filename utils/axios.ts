@@ -21,3 +21,13 @@ export const postData = async (path: string, body: object) => {
     throw new Error(e);
   }
 };
+
+export const deleteData = async (path: string) => {
+  try {
+    const res = await axios.delete(`${END_POINT}/api${path}`);
+    if (res.statusText !== 'OK') throw new Error('네트워크 에러');
+    return await res.data;
+  } catch (e) {
+    throw new Error(e);
+  }
+};

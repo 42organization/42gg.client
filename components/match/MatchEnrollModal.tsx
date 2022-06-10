@@ -2,6 +2,7 @@ import { enrollInfoState } from '../../utils/recoil/match';
 import { EnrollInfo } from '../../types/matchTypes';
 import { postData } from '../../utils/axios';
 import { useRecoilState } from 'recoil';
+import { dateToString } from '../../utils/handleTime';
 
 export default function MatchEnrollModal() {
   const [enrollInfo, setEnrollInfo] = useRecoilState<EnrollInfo | null>(
@@ -10,8 +11,9 @@ export default function MatchEnrollModal() {
 
   if (!enrollInfo) return null;
 
+  const { slotId, type, startTime, endTime } = enrollInfo;
+
   const onEnroll = async () => {
-    const { slotId, type } = enrollInfo;
     const body = { slotId, type };
     const data = await postData(`/pingpong/match/tables/${1}`, body);
     alert(data.message);
@@ -23,7 +25,7 @@ export default function MatchEnrollModal() {
   return (
     <div>
       <div>
-        play time : {enrollInfo.startTime} - {enrollInfo.endTime}
+        play time : {dateToString(startTime)} - {dateToString(endTime)}
       </div>
       <div>참여하시겠습니까?</div>
       <button onClick={onEnroll}>확인</button>

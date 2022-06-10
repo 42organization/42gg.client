@@ -2,25 +2,27 @@ export interface Slot {
   slotId: number;
   status: string;
   headCount: number;
-}
-
-export interface ManagedSlot extends Slot {
-  startTime: string;
-  endTime: string;
+  time: string;
 }
 
 export type Slots = Slot[];
 
+export interface CurrentMatch {
+  slotId: number;
+  time: string;
+  isMatch: boolean;
+  enemyTeam: string[];
+}
+
 export interface MatchData {
-  startTime: string;
   intervalMinute: number;
-  type: string;
+  currentMatch: CurrentMatch;
   matchBoards: Slots[];
 }
 
 export interface EnrollInfo {
   slotId: number;
   type: string;
-  startTime: string;
-  endTime: string;
+  startTime: Date;
+  endTime: Date;
 }
