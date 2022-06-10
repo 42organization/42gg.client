@@ -12,12 +12,6 @@ export default function handler(
     const obj = {
       intervalMinute: 10,
       type: 'single',
-      currentMatch: {
-        slotId: 0,
-        time: '2022-06-10 18:00',
-        isMatch: true,
-        enemyTeam: ['sujpark', 'jabae'],
-      },
       matchBoards: [
         [
           { status: 'open', slotId: 0, headCount: 1, time: `${today} ${s}:00` },

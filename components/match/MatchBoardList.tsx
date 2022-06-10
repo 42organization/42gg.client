@@ -1,17 +1,30 @@
-import { Slots } from '../../types/matchTypes';
+import { MatchData } from '../../types/matchTypes';
+import { useEffect, useState } from 'react';
+import { getData } from '../../utils/axios';
 import MatchBoard from './MatchBoard';
 
 interface MatchBoardListProps {
   type: string;
-  intervalMinute: number;
-  matchBoards: Slots[];
 }
 
-export default function MatchBoardList({
-  type,
-  intervalMinute,
-  matchBoards,
-}: MatchBoardListProps) {
+export default function MatchBoardList({ type }: MatchBoardListProps) {
+  const [matchData, setMatchData] = useState<MatchData | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await getData(`/pingpong/match/tables/${1}?type=single`);
+        setMatchData(data);
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
+
+  if (!matchData) return null;
+
+  const { matchBoards, intervalMinute } = matchData;
+
   const filteredMatchBoards = matchBoards.filter((matchSlots) => {
     const slotsHour = new Date(matchSlots[0].time).getHours();
     const nowHour = new Date().getHours();

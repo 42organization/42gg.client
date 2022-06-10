@@ -6,29 +6,10 @@ import MatchEnrollModal from '../components/match/MatchEnrollModal';
 import CurrentMatchInfo from '../components/match/CurrentMatchInfo';
 
 export default function Match() {
-  const [matchData, setMatchData] = useState<MatchData | null>(null);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await getData(`/pingpong/match/tables/${1}?type=single`);
-        setMatchData(data);
-      } catch (e) {
-        console.log(e);
-      }
-    })();
-  }, []);
-
-  if (!matchData) return <div>loading...</div>;
-
   return (
     <div>
-      <CurrentMatchInfo currentMatch={matchData.currentMatch} />
-      <MatchBoardList
-        type='single'
-        intervalMinute={matchData.intervalMinute}
-        matchBoards={matchData.matchBoards}
-      />
+      <CurrentMatchInfo />
+      <MatchBoardList type='single' />
       <MatchEnrollModal />
     </div>
   );

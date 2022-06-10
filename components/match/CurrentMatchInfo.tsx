@@ -2,14 +2,25 @@ import Link from 'next/link';
 import { CurrentMatch } from '../../types/matchTypes';
 import { deleteData } from '../../utils/axios';
 import { dateToString } from '../../utils/handleTime';
+import { useState, useEffect } from 'react';
+import { getData } from '../../utils/axios';
 
-interface CurrentMatchInfoProps {
-  currentMatch: CurrentMatch;
-}
+export default function CurrentMatchInfo() {
+  const [currentMatch, setCurrentMatch] = useState<CurrentMatch | null>(null);
 
-export default function CurrentMatchInfo({
-  currentMatch,
-}: CurrentMatchInfoProps) {
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await getData(`/pingpong/match/current`);
+        setCurrentMatch(data);
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
+
+  if (!currentMatch) return null;
+
   const { isMatch, enemyTeam, time, slotId } = currentMatch;
   const matchingMessage = makeMessage(time, isMatch);
   const enemyTeamInfo = isBeforeMin(time, 5)

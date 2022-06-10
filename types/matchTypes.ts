@@ -16,7 +16,6 @@ export interface CurrentMatch {
 
 export interface MatchData {
   intervalMinute: number;
-  currentMatch: CurrentMatch;
   matchBoards: Slots[];
 }
 
