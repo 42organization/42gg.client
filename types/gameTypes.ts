@@ -1,10 +1,14 @@
-export interface Team {
+export interface Player {
   userId: string;
   userImageUri: string;
   wins: number;
   losses: number;
   winRate: number;
   pppChange: number;
+}
+
+export interface Team {
+  players: Player[];
   isWin: boolean;
   score: number;
 }
@@ -17,5 +21,3 @@ export interface Game {
   status: string;
   time: string;
 }
-
-export type Games = Game[];

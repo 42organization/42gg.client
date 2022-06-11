@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
-import { Games, Game } from '../../types/gameTypes';
+import { useRecoilValue } from 'recoil';
+import { Game } from '../../types/gameTypes';
 import { getData } from '../../utils/axios';
-import GameResultItem from './GameResultItem';
+import { ItemClickState } from '../../utils/recoil/game';
+import GameResultBigItem from './big/GameResultBigItem';
+import GameResultSmallItem from './small/GameResultSmallItem';
 
-export default function GameResultList() {
-  const [games, setGames] = useState<Games>();
+export default function GameResultList({ count }: { count: string }) {
+  const [games, setGames] = useState<Game[]>();
+  const isItemClick = useRecoilValue<number>(ItemClickState);
+
   useEffect(() => {
     (async () => {
       try {
-        const data = await getData(`/pingpong/games`);
+        const data = await getData(`/pingpong/games?count=${count}`);
         setGames(data);
       } catch (e) {
         console.log(e);
@@ -20,9 +25,14 @@ export default function GameResultList() {
     <div>
       {!games
         ? '로딩중'
-        : games.map((game: Game) => (
-            <GameResultItem key={game.matchId} game={game} />
-          ))}
+        : games.map((game: Game) => {
+            if (isItemClick === game.matchId) {
+              return <GameResultBigItem key={game.matchId} game={game} />;
+            } else {
+              return <GameResultSmallItem key={game.matchId} game={game} />;
+            }
+          })}
+      )
     </div>
   );
 }
