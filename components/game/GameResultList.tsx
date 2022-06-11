@@ -6,7 +6,10 @@ import { ItemClickState } from '../../utils/recoil/game';
 import GameResultBigItem from './big/GameResultBigItem';
 import GameResultSmallItem from './small/GameResultSmallItem';
 
-export default function GameResultList({ count }: { count: string }) {
+type gameResultTypes = {
+  count: string;
+};
+export default function GameResultList({ count }: gameResultTypes) {
   const [games, setGames] = useState<Game[]>();
   const isItemClick = useRecoilValue<number>(ItemClickState);
 

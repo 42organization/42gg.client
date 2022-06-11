@@ -1,15 +1,17 @@
 import styles from '../../../styles/GameResultItem.module.css';
 import { Game, Team } from '../../../types/gameTypes';
 
+type gameResultTypes = {
+  game: Game;
+  team1: Team;
+  team2: Team;
+};
+
 export default function GameResultBiglItem({
   game,
   team1,
   team2,
-}: {
-  game: Game;
-  team1: Team;
-  team2: Team;
-}) {
+}: gameResultTypes) {
   const { time, status, type } = game;
 
   return (

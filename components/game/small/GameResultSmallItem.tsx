@@ -5,7 +5,11 @@ import styles from '../../../styles/GameResultItem.module.css';
 import GameResultSmallScore from './GameResultSmallScore';
 import GameResultSmallTeam from './GameResultSmallTeam';
 
-export default function GameResultSmallItem({ game }: { game: Game }) {
+type gameResultTypes = {
+  game: Game;
+};
+
+export default function GameResultSmallItem({ game }: gameResultTypes) {
   const { team1, team2 } = game;
   const setIsItemClick = useSetRecoilState<number>(ItemClickState);
 

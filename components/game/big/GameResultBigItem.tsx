@@ -5,7 +5,11 @@ import { ItemClickState } from '../../../utils/recoil/game';
 import GameResultBigScore from './GameResultBigScore';
 import GameResultBigTeam from './GameResultBigTeam';
 
-export default function GameResultBiglItem({ game }: { game: Game }) {
+type gameResultTypes = {
+  game: Game;
+};
+
+export default function GameResultBiglItem({ game }: gameResultTypes) {
   const { team1, team2 } = game;
   const setIsItemClick = useSetRecoilState<number>(ItemClickState);
 
