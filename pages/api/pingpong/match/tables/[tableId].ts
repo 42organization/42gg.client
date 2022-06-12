@@ -2,13 +2,21 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { MatchData } from './../../../../../types/matchTypes';
 
+function getTodayString() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+  const date = today.getDate();
+  return `${year}-${month}-${date}`;
+}
+
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<MatchData | object>
 ) {
   if (req.method === 'GET') {
-    const today = '2022-06-10';
-    const s = 17;
+    const today = getTodayString();
+    const s = 14;
     const obj = {
       intervalMinute: 10,
       type: 'single',

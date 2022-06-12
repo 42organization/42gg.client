@@ -26,9 +26,10 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   const { matchBoards, intervalMinute } = matchData;
 
   const filteredMatchBoards = matchBoards.filter((matchSlots) => {
-    const slotsHour = new Date(matchSlots[0].time).getHours();
-    const nowHour = new Date().getHours();
-    return nowHour <= slotsHour;
+    const lastIndex = matchSlots.length - 1;
+    const slotsTime = new Date(matchSlots[lastIndex].time);
+    const nowTime = new Date();
+    return nowTime.getTime() <= slotsTime.getTime();
   });
 
   if (filteredMatchBoards.length === 0)
