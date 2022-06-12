@@ -1,0 +1,81 @@
+@import './common.scss';
+
+.background {
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+
+.moduleContainer {
+  background: white;
+  border: solid 1px black;
+  border-radius: 2%;
+  position: aboslute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 30rem;
+}
+
+.resultContainer {
+  border: solid 1px black;
+  border-radius: 2%;
+  background: lightgray;
+  margin: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 20rem;
+  height: 20rem;
+}
+
+.players {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 1.5rem;
+  .userImage {
+    background: white;
+    border-radius: 50%;
+    border: solid 1px black;
+    width: 5rem;
+    height: 5rem;
+    margin: 1rem 0;
+  }
+  .userId {
+    font-size: 1rem;
+  }
+}
+
+.scoreInput {
+  display: flex;
+  align-items: center;
+  input {
+    font-size: 1rem;
+    width: 5rem;
+    height: 3rem;
+    margin: 0 2rem;
+    text-align: center;
+  }
+}
+
+.submitButton {
+  input {
+    border-radius: 2%;
+    background: black;
+    font-size: 1rem;
+    color: white;
+    width: 8rem;
+    height: 3rem;
+  }
+}
