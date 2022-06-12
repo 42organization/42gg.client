@@ -40,9 +40,9 @@ export default function SearchBar() {
       <button>&#128269;</button>
       {showDropDown && (
         <div>
-          {!searchResult || !keyword
-            ? '검색 결과가 없습니다.'
-            : searchResult?.map((item, i) => <div key={i}>{item}</div>)}
+          {searchResult && keyword
+            ? searchResult?.map((item, i) => <div key={i}>{item}</div>)}
+            : '검색 결과가 없습니다.'
         </div>
       )}
     </div>
