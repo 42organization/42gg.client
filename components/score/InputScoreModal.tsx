@@ -20,10 +20,16 @@ export default function InputScoreModal({ gameId }: GameProps) {
         setMyInfo(data.myTeam[0]);
         setEnemyInfo(data.enemyTeam[0]);
       } catch (e) {
-        console.log(e);
+        // console.log(e);
       }
     })();
   }, []);
+
+  const inputScoreHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.target.value = e.target.value.replace(/[^-0-9]/g, '');
+    if (e.target.id === 'myScore') setMyScore(e.target.value);
+    else setEnemyScore(e.target.value);
+  };
 
   const submitScoreHandler = async () => {
     const body = { myScore, enemyScore };
@@ -48,20 +54,15 @@ export default function InputScoreModal({ gameId }: GameProps) {
             </div>
           </div>
           <div className={styles.scoreInput}>
-            <input
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setMyScore(e.target.value);
-              }}
-              maxLength={2}
-            />
-            <div>:</div>
-            <input
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setEnemyScore(e.target.value);
-                console.log(enemyScore);
-              }}
-              maxLength={2}
-            />
+            <form name='inputScore'>
+              <div>
+                <input id='myScore' onChange={inputScoreHandler} maxLength={2} />
+              </div>
+              <div>:</div>
+              <div>
+                <input id='enemyScore' onChange={inputScoreHandler} maxLength={2} />
+              </div>
+            </form>
           </div>
         </div>
         <div className={styles.submitButton}>

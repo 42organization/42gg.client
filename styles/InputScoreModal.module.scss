@@ -58,14 +58,16 @@
 }
 
 .scoreInput {
-  display: flex;
-  align-items: center;
-  input {
-    font-size: 1rem;
-    width: 5rem;
-    height: 3rem;
-    margin: 0 2rem;
-    text-align: center;
+  form {
+    display: flex;
+    align-items: center;
+    input {
+      font-size: 1rem;
+      width: 5rem;
+      height: 3rem;
+      margin: 0 2rem;
+      text-align: center;
+    }
   }
 }
 
