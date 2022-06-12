@@ -19,7 +19,9 @@ export default function InputScoreModal({ gameId }: GameProps) {
         const data = await getData(`/pingpong/games/[gameId]/result`);
         setMyInfo(data.myTeam[0]);
         setEnemyInfo(data.enemyTeam[0]);
-      } catch (e) {}
+      } catch (e) {
+        // console.log(e);
+      }
     })();
   }, []);
 
