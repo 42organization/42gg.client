@@ -10,3 +10,7 @@ export interface UserState {
   isPlaying: boolean;
   gameId: number;
 }
+
+export interface SearchData {
+  users: string[];
+}
