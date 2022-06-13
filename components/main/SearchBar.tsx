@@ -11,7 +11,7 @@ export default function SearchBar() {
     const checkId = /^[a-z|A-Z|0-9|\-]+$/;
 
     if (keyword !== '' && checkId.test(keyword))
-      makeDebounce(getSearchResultHandler, 1500)();
+      makeDebounce(getSearchResultHandler, 800)();
   }, [keyword]);
 
   const showDropDownHandler = () => {
