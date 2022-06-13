@@ -8,8 +8,9 @@ export default function SearchBar() {
   const [searchResult, setSearchResult] = useState<SearchData | null>(null);
 
   useEffect(() => {
-    const checkId = /[^a-zA-Z0-9\-]/;
-    if (keyword !== '' && !checkId.test(keyword))
+    const checkId = /^[a-z|A-Z|0-9|\-]+$/;
+
+    if (keyword !== '' && checkId.test(keyword))
       makeDebounce(getSearchResultHandler, 1500)();
   }, [keyword]);
 
