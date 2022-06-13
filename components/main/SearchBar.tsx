@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { SearchData } from '../../types/mainType';
 import { getData } from '../../utils/axios';
 
 export default function SearchBar() {
   const [keyword, setKeyword] = useState<string>('');
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
-  const [searchResult, setSearchResult] = useState<SearchData | null>(null);
+  const [searchResult, setSearchResult] = useState<string[]>([]);
 
   useEffect(() => {
     const checkId = /^[a-z|A-Z|0-9|\-]+$/;
@@ -25,7 +24,7 @@ export default function SearchBar() {
   const getSearchResultHandler = async () => {
     try {
       const data = await getData(`/pingpong/users/searches/${keyword}`);
-      setSearchResult(data);
+      setSearchResult(data.users);
     } catch (e) {}
   };
 
@@ -42,8 +41,8 @@ export default function SearchBar() {
       <span>&#128269;</span>
       {showDropDown && (
         <div>
-          {searchResult && keyword
-            ? searchResult.users.map((item, i) => <div key={i}>{item}</div>)
+          {searchResult.length && keyword
+            ? searchResult.map((item, i) => <div key={i}>{item}</div>)
             : '검색 결과가 없습니다.'}
         </div>
       )}
