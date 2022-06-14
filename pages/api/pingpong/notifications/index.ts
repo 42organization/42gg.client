@@ -64,5 +64,5 @@ export default function handler(
     res.status(200).json(obj);
   } else if (req.method === 'DELETE') {
     res.status(200).json({ message: '삭제가 완료되었습니다.' });
-  } else res.status(500).json({ message: '잘못된 요청입니다.' });
+  } else res.status(400).json({ message: '잘못된 요청입니다.' });
 }

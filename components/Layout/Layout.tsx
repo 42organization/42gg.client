@@ -23,7 +23,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     (async () => {
       try {
         const data = await getData(`/pingpong/users`);
-        setUserData((prev) => data);
+        setUserData(data);
         getLiveDataHandler(data.userId);
       } catch (e) {}
     })();
@@ -37,7 +37,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     if (userId !== '') {
       try {
         const data = await getData(`/pingpong/users/${userId}/live`);
-        setLiveData((prev) => data);
+        setLiveData(data);
       } catch (e) {}
     }
   };

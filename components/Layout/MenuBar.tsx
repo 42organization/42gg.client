@@ -19,7 +19,7 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
         <nav>
           <ul>
             <li onClick={() => MenuPathHandler('rank')}>랭킹</li>
-            <li onClick={() => MenuPathHandler('game')}>게임 결과</li>
+            <li onClick={() => MenuPathHandler('game')}>최근 경기</li>
             <li onClick={() => MenuPathHandler('')}>내 정보</li>
           </ul>
         </nav>
