@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import styles from '../styles/MenuBar.module.scss';
+import styles from '../../styles/MenuBar.module.scss';
 
 type MenuBarProps = {
   showMenuBarHandler: () => void;
@@ -18,9 +18,9 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
       <div className={styles.menuBarWrap} onClick={(e) => e.stopPropagation()}>
         <nav>
           <ul>
-            <li onClick={() => MenuPathHandler('rank')}>Ranking</li>
-            <li onClick={() => MenuPathHandler('game')}>Game Results</li>
-            <li onClick={() => MenuPathHandler('')}>My Profile</li>
+            <li onClick={() => MenuPathHandler('rank')}>랭킹</li>
+            <li onClick={() => MenuPathHandler('game')}>게임 결과</li>
+            <li onClick={() => MenuPathHandler('')}>내 정보</li>
           </ul>
         </nav>
         <nav>

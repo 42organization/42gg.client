@@ -1,5 +1,5 @@
-import { NotiData } from '../types/notiTypes';
-import styles from '../styles/NotiItem.module.scss';
+import { NotiData } from '../../types/notiTypes';
+import styles from '../../styles/NotiItem.module.scss';
 
 type NotiItemProps = {
   data: NotiData;
