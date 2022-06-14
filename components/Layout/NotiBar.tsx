@@ -1,30 +1,32 @@
 import { useEffect, useState } from 'react';
 import NotiItem from './NotiItem';
-import { NotiData } from '../types/notiTypes';
+import { NotiData } from '../../types/notiTypes';
 import { BsCheck2Square } from 'react-icons/bs';
-import styles from '../styles/NotiBar.module.scss';
-import { getData } from '../utils/axios';
+import styles from '../../styles/NotiBar.module.scss';
+import { getData, deleteData } from '../../utils/axios';
 
 type NotiBarProps = {
   showNotiBarHandler: () => void;
 };
 
 export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
-  const [notiData, setNotiData] = useState<NotiData[] | null>(null);
+  const [notiData, setNotiData] = useState<NotiData[]>([]);
 
   useEffect(() => {
     (async () => {
       try {
         const data = await getData(`/pingpong/notifications`);
-        setNotiData(data);
-      } catch (e) {
-        console.log(e);
-      }
+        setNotiData(data.noti);
+      } catch (e) {}
     })();
   }, []);
 
-  const allNotiDeleteHandler = () => {
-    // DELETE 요청하기
+  const allNotiDeleteHandler = async () => {
+    try {
+      const res = await deleteData(`/pingpong/notifications`);
+      alert(res.message);
+      showNotiBarHandler();
+    } catch (e) {}
   };
 
   return (
@@ -35,9 +37,10 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
           전체삭제
         </button>
         <div className={styles.notiFullContent}>
-          {notiData?.map((data: NotiData) => (
-            <NotiItem key={data.id} data={data} />
-          ))}
+          {notiData.length &&
+            notiData.map((data: NotiData) => (
+              <NotiItem key={data.id} data={data} />
+            ))}
         </div>
       </div>
     </div>

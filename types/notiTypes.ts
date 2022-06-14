@@ -1,3 +1,7 @@
+export interface NotiList {
+  noti: NotiData[];
+}
+
 export interface NotiData {
   id: number;
   type: string;
