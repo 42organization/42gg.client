@@ -9,3 +9,8 @@ export interface ProfileInfo {
   racketType: string;
   statusMessage: string;
 }
+
+export interface ChartDataItem {
+  ppp: number;
+  date: string;
+}

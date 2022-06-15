@@ -12,8 +12,12 @@ export default function user() {
 
   return (
     <div>
-      {typeof userId === 'string' && <Profile userId={userId}></Profile>}
-      <Chart></Chart>
+      {typeof userId === 'string' && (
+        <>
+          <Profile userId={userId}></Profile>
+          <Chart userId={userId}></Chart>
+        </>
+      )}
       {isEditProfile && <EditProfile />}
     </div>
   );
