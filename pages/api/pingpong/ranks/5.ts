@@ -7,12 +7,9 @@ export default function handler(
   res: NextApiResponse<RankData>
 ) {
   const obj = {
-    info: {
-      count: 100,
-      page: 5,
-      next: String(null),
-      previous: `https://localhost:3000/api/pingpong/ranks/4`,
-    },
+    myRank: 17,
+    currentPage: 5,
+    totalPage: 5,
     rankList: [
       {
         rank: 81,
