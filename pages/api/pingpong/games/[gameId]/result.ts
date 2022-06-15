@@ -1,9 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { GameResult } from '../../../../../types/scoreTypes';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<GameResult | object>) {
+export default function handler(req: NextApiRequest, res: NextApiResponse<GameResult | object | number>) {
   if (req.method === 'GET') {
-    const obj = {
+    console.log('Get');
+    const gamePlayers = {
       myTeam: [
         {
           userId: 'jihyukim',
@@ -17,8 +18,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<GameRe
         },
       ],
     };
-    res.status(200).json(obj);
+    res.status(200).json(gamePlayers);
   } else if (req.method === 'POST') {
-    res.status(200).json({ message: '등록이 완료되었습니다.' });
-  } else res.status(500).json({ message: '잘못된 요청입니다.' });
+    res.status(201).json({ status: res.status });
+  } else res.status(400).json({ message: '잘못된 요청입니다.' });
 }
