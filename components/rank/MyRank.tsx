@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
 import { myRankPosition, isScrollState } from '../../utils/recoil/myRank';
@@ -16,7 +16,7 @@ export default function MyRank() {
   return (
     <div>
       <div className={styles.myRank} onClick={onClick}>
-        {myRank ? `지금 나의 🏆 랭킹 ${myRank}` : null}
+        {myRank && `지금 나의 🏆 랭킹 ${myRank}`}
       </div>
     </div>
   );
