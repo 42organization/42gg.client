@@ -53,7 +53,7 @@ export default function InputScoreModal({ gameId }: GameProps) {
     } else if (res == 202) {
       alert('결과가 입력된 게임입니다.');
     } else {
-      alert('error occured');
+      alert('error occurred');
     }
     window.location.href = '/';
   };
