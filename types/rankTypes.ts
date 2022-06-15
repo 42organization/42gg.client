@@ -6,14 +6,9 @@ export interface Rank {
   winRate: number;
 }
 
-export interface Info {
-  count: number;
-  page: number;
-  next: string;
-  previous: string;
-}
-
 export interface RankData {
-  info: Info;
+  myRank: number;
+  currentPage: number;
+  totalPage: number;
   rankList: Rank[];
 }
