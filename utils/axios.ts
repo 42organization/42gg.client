@@ -12,11 +12,11 @@ export const getData = async (path: string) => {
   }
 };
 
-export const postData = async (path: string, body: object) => {
+export const postData = async (path: string, body: Object) => {
   try {
     const res = await axios.post(`${END_POINT}/api${path}`, body);
-    if (res.statusText !== 'OK') throw new Error('네트워크 에러');
-    return await res.data;
+    if (Math.round(res.status / 200) !== 1) throw new Error('네트워크 에러');
+    return await res.status;
   } catch (e) {
     throw new Error(e);
   }

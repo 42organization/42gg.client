@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getData, postData } from '../../utils/axios';
-import { PlayerData, GameResult } from '../../types/scoreTypes';
+import { PlayerInfo, GameResult } from '../../types/scoreTypes';
 import styles from '../../styles/InputScoreModal.module.scss';
 
 type GameProps = {
@@ -8,10 +8,10 @@ type GameProps = {
 };
 
 export default function InputScoreModal({ gameId }: GameProps) {
-  const [myInfo, setMyInfo] = useState<PlayerData>({ userId: '', userImageUri: '' });
-  const [enemyInfo, setEnemyInfo] = useState<PlayerData>({ userId: '', userImageUri: '' });
-  const [myScore, setMyScore] = useState<string>('');
-  const [enemyScore, setEnemyScore] = useState<string>('');
+  const [myInfo, setMyInfo] = useState<PlayerInfo>({ userId: '', userImageUri: '' });
+  const [enemyInfo, setEnemyInfo] = useState<PlayerInfo>({ userId: '', userImageUri: '' });
+  const [result, setResult] = useState<GameResult>({ myScore: '', enemyScore: '' });
+  const [onCheck, setOnCheck] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -27,20 +27,41 @@ export default function InputScoreModal({ gameId }: GameProps) {
 
   const inputScoreHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.value = e.target.value.replace(/[^-0-9]/g, '');
-    if (e.target.id === 'myScore') setMyScore(e.target.value);
-    else setEnemyScore(e.target.value);
+    setResult((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
-  const submitScoreHandler = async () => {
-    const body = { myScore, enemyScore };
-    const data = await postData(`/pingpong/games/${1}/result`, body);
-    alert(data.message);
+  const enterHandler = () => {
+    if (result.myScore && result.enemyScore) {
+      setOnCheck(true);
+    }
+  };
+
+  const reEnterHandler = () => {
+    if (result.myScore && result.enemyScore) {
+      setResult((prev) => ({ ...prev, myScore: '', enemyScore: '' }));
+      setOnCheck(false);
+    }
+  };
+
+  const submitResultHandler = async () => {
+    const res = await postData(`/pingpong/games/[gameId]/result`, result);
+    if (res == 201) {
+      alert('결과 입력이 완료되었습니다.');
+    } else if (res == 202) {
+      alert('결과가 입력된 게임입니다.');
+    } else {
+      alert('error occurred');
+    }
+    window.location.href = '/';
   };
 
   return (
-    <div className={styles.background}>
-      <div className={styles.moduleContainer}>
-        <div className={styles.phrase}>경기가 끝났다면 점수를 입력해주세요.</div>
+    <div className={styles.backdrop}>
+      <div className={styles.modalContainer}>
+        <div className={styles.phrase}>{onCheck ? '경기 결과' : '경기가 끝났다면 점수를 입력해주세요.'}</div>
         <div className={styles.resultContainer}>
           <div className={styles.players}>
             <div className={styles.userInfo}>
@@ -53,21 +74,34 @@ export default function InputScoreModal({ gameId }: GameProps) {
               <div className={styles.userId}>{enemyInfo.userId}</div>
             </div>
           </div>
-          <div className={styles.scoreInput}>
-            <form name='inputScore'>
+          {onCheck ? (
+            <div className={styles.finalScore}>
+              <div>{result.myScore}</div>
+              <div>:</div>
+              <div>{result.enemyScore}</div>
+            </div>
+          ) : (
+            <div className={styles.finalScore}>
               <div>
-                <input id='myScore' onChange={inputScoreHandler} maxLength={2} />
+                <input id='myScore' name='myScore' onChange={inputScoreHandler} maxLength={2} />
               </div>
               <div>:</div>
               <div>
-                <input id='enemyScore' onChange={inputScoreHandler} maxLength={2} />
+                <input id='enemyScore' name='enemyScore' onChange={inputScoreHandler} maxLength={2} />
               </div>
-            </form>
+            </div>
+          )}
+        </div>
+        {onCheck ? (
+          <div className={styles.submitButton}>
+            <input type='button' value='다시 입력하기' onClick={reEnterHandler} style={{ background: 'white', color: 'black' }} />
+            <input type='button' value='제출하기' onClick={submitResultHandler} />
           </div>
-        </div>
-        <div className={styles.submitButton}>
-          <input type='button' value='제출하기' onClick={submitScoreHandler} />
-        </div>
+        ) : (
+          <div className={styles.submitButton}>
+            <input type='button' value='확인' onClick={enterHandler} />
+          </div>
+        )}
       </div>
     </div>
   );
