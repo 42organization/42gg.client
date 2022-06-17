@@ -1,7 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 import styles from '../../styles/GameResultItem.module.scss';
 import { Game } from '../../types/gameTypes';
-import { ClickedGameItem } from '../../utils/recoil/game';
+import { clickedGameItem } from '../../utils/recoil/game';
 import GameResultBigScore from './big/GameResultBigScore';
 import GameResultSmallScore from './small/GameResultSmallScore';
 import GameResultBigTeam from './big/GameResultBigTeam';
@@ -14,7 +14,7 @@ type gameResultTypes = {
 
 export default function GameResultItem({ game, big }: gameResultTypes) {
   const { team1, team2, status, gameId } = game;
-  const setClickedItemId = useSetRecoilState<number>(ClickedGameItem);
+  const setClickedItemId = useSetRecoilState<number>(clickedGameItem);
 
   return (
     <div
