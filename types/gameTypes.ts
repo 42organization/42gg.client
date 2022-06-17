@@ -14,7 +14,7 @@ export interface Team {
 }
 
 export interface Game {
-  matchId: number;
+  gameId: number;
   team1: Team;
   team2: Team;
   type: string;
