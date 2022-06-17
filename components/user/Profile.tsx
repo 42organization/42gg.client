@@ -33,7 +33,7 @@ export default function Profile({ userId }: ProfileProps) {
     statusMessage,
   } = profileInfo;
 
-  const onEdit = () => {
+  const startEditHandler = () => {
     setIsEditProfile(true);
   };
 
@@ -56,7 +56,7 @@ export default function Profile({ userId }: ProfileProps) {
       <div>
         <span>상태메세지 : {statusMessage} </span>
       </div>
-      <button onClick={onEdit}>수정</button>
+      <button onClick={startEditHandler}>수정</button>
     </div>
   );
 }

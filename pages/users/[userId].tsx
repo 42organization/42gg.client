@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
-import Profile from '../../components/user/Profile';
-import Chart from '../../components/user/Chart';
 import { useRecoilValue } from 'recoil';
 import { isEditProfileState } from '../../utils/recoil/user';
+import Chart from '../../components/user/Chart';
+import Profile from '../../components/user/Profile';
 import EditProfile from '../../components/user/EditProfile';
 
 export default function user() {

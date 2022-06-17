@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { profileInfoState, isEditProfileState } from '../../utils/recoil/user';
-import { useState } from 'react';
 import { postData } from '../../utils/axios';
 
 interface EditedProfile {
@@ -11,7 +10,7 @@ interface EditedProfile {
 }
 
 export default function EditProfile() {
-  const setIsEditProfil = useSetRecoilState(isEditProfileState);
+  const setIsEditProfile = useSetRecoilState(isEditProfileState);
   const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
   const [editedProfile, setEditedProfile] = useState<EditedProfile>({
     userImageUri: '',
@@ -36,7 +35,7 @@ export default function EditProfile() {
     }));
   }, [profileInfo]);
 
-  const onChange = (
+  const inputChangeHandler = (
     e:
       | React.ChangeEvent<HTMLTextAreaElement>
       | React.ChangeEvent<HTMLInputElement>
@@ -47,22 +46,25 @@ export default function EditProfile() {
     }));
   };
 
-  const onEdit = async () => {
+  const finishEditHandler = async () => {
     setProfileInfo((prev) => ({
       ...prev,
       ...editedProfile,
     }));
-    setIsEditProfil(false);
-    const res = await postData(
-      `/pingpong/users/${userId}/detail`,
-      editedProfile
-    );
-    alert(res.message);
+    setIsEditProfile(false);
+
+    try {
+      const res = await postData(
+        `/pingpong/users/${userId}/detail`,
+        editedProfile
+      );
+      alert(res.message);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  const onCancel = () => {
-    setIsEditProfil(false);
-  };
+  const cancelEditHandler = () => setIsEditProfile(false);
 
   return (
     <div>
@@ -81,7 +83,7 @@ export default function EditProfile() {
             type='radio'
             name='racketType'
             value='penholder'
-            onChange={onChange}
+            onChange={inputChangeHandler}
             checked={editedProfile.racketType === 'penholder'}
           />{' '}
           penholder
@@ -91,7 +93,7 @@ export default function EditProfile() {
             type='radio'
             name='racketType'
             value='shakehand'
-            onChange={onChange}
+            onChange={inputChangeHandler}
             checked={editedProfile.racketType === 'shakehand'}
           />{' '}
           shakehand
@@ -101,12 +103,12 @@ export default function EditProfile() {
         <textarea
           value={editedProfile.statusMessage}
           name='statusMessage'
-          onChange={onChange}
+          onChange={inputChangeHandler}
         ></textarea>
       </div>
       <div>
-        <button onClick={onCancel}>취소</button>
-        <button onClick={onEdit}>확인</button>
+        <button onClick={cancelEditHandler}>취소</button>
+        <button onClick={finishEditHandler}>확인</button>
       </div>
     </div>
   );
