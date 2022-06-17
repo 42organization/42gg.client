@@ -58,7 +58,7 @@ export default function EditProfile() {
         `/pingpong/users/${userId}/detail`,
         editedProfile
       );
-      alert(res.message);
+      alert(res?.data.message);
     } catch (e) {
       console.log(e);
     }

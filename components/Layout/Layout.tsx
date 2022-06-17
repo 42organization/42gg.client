@@ -22,9 +22,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
   useEffect(() => {
     (async () => {
       try {
-        const data = await getData(`/pingpong/users`);
-        setUserData(data);
-        getLiveDataHandler(data.userId);
+        const res = await getData(`/pingpong/users`);
+        setUserData(res?.data);
+        getLiveDataHandler(res?.data.userId);
       } catch (e) {}
     })();
   }, []);
@@ -36,8 +36,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const getLiveDataHandler = async (userId: string) => {
     if (userId !== '') {
       try {
-        const data = await getData(`/pingpong/users/${userId}/live`);
-        setLiveData(data);
+        const res = await getData(`/pingpong/users/${userId}/live`);
+        setLiveData(res?.data);
       } catch (e) {}
     }
   };

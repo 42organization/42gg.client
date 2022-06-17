@@ -15,7 +15,7 @@ export default function Profile({ userId }: ProfileProps) {
     (async () => {
       try {
         const res = await getData(`/pingpong/users/${userId}/detail`);
-        setProfileInfo(res);
+        setProfileInfo(res?.data);
       } catch (e) {
         console.log(e);
       }
