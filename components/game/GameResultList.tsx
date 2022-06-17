@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Game } from '../../types/gameTypes';
 import infScroll from '../../utils/infinityScroll';
-import { ClickedGameItem } from '../../utils/recoil/game';
+import { clickedGameItem } from '../../utils/recoil/game';
 import GameResultItem from './GameResultItem';
 
 type gameResultTypes = {
@@ -11,7 +11,7 @@ type gameResultTypes = {
 
 export default function GameResultList(user: gameResultTypes) {
   const [clickedItemId, setClickedItemId] =
-    useRecoilState<number>(ClickedGameItem);
+    useRecoilState<number>(clickedGameItem);
   const result = infScroll(`/pingpong/games?page=`);
   const { data, fetchNextPage, status } = result;
 
