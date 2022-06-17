@@ -31,9 +31,9 @@ export default function RankList({ isMain }: RankType) {
   useEffect(() => {
     (async () => {
       try {
-        const data = await getData(`${path}`);
-        setRankData(data);
-        setMyRank(data.myRank);
+        const res = await getData(`${path}`);
+        setRankData(res?.data);
+        setMyRank(res?.data.myRank);
       } catch (e) {
         console.log(e);
       }

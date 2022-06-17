@@ -48,10 +48,14 @@ export default function Chart({ userId }: ChartProps) {
 
   useEffect(() => {
     (async () => {
-      const data = await getData(
-        `/pingpong/users/${userId}/historics?chartType=rank`
-      );
-      setChartData(data.historics);
+      try {
+        const res = await getData(
+          `/pingpong/users/${userId}/historics?chartType=rank`
+        );
+        setChartData(res?.data.historics);
+      } catch (e) {
+        console.log(e);
+      }
     })();
   }, []);
 

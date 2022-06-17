@@ -8,17 +8,26 @@ type GameProps = {
 };
 
 export default function InputScoreModal({ gameId }: GameProps) {
-  const [myInfo, setMyInfo] = useState<PlayerInfo>({ userId: '', userImageUri: '' });
-  const [enemyInfo, setEnemyInfo] = useState<PlayerInfo>({ userId: '', userImageUri: '' });
-  const [result, setResult] = useState<GameResult>({ myScore: '', enemyScore: '' });
+  const [myInfo, setMyInfo] = useState<PlayerInfo>({
+    userId: '',
+    userImageUri: '',
+  });
+  const [enemyInfo, setEnemyInfo] = useState<PlayerInfo>({
+    userId: '',
+    userImageUri: '',
+  });
+  const [result, setResult] = useState<GameResult>({
+    myScore: '',
+    enemyScore: '',
+  });
   const [onCheck, setOnCheck] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
       try {
-        const data = await getData(`/pingpong/games/[gameId]/result`);
-        setMyInfo(data.myTeam[0]);
-        setEnemyInfo(data.enemyTeam[0]);
+        const res = await getData(`/pingpong/games/[gameId]/result`);
+        setMyInfo(res?.data.myTeam[0]);
+        setEnemyInfo(res?.data.enemyTeam[0]);
       } catch (e) {
         // console.log(e);
       }
@@ -48,9 +57,9 @@ export default function InputScoreModal({ gameId }: GameProps) {
 
   const submitResultHandler = async () => {
     const res = await postData(`/pingpong/games/[gameId]/result`, result);
-    if (res == 201) {
+    if (res?.status == 201) {
       alert('결과 입력이 완료되었습니다.');
-    } else if (res == 202) {
+    } else if (res?.status == 202) {
       alert('결과가 입력된 게임입니다.');
     } else {
       alert('error occurred');
@@ -61,7 +70,9 @@ export default function InputScoreModal({ gameId }: GameProps) {
   return (
     <div className={styles.backdrop}>
       <div className={styles.modalContainer}>
-        <div className={styles.phrase}>{onCheck ? '경기 결과' : '경기가 끝났다면 점수를 입력해주세요.'}</div>
+        <div className={styles.phrase}>
+          {onCheck ? '경기 결과' : '경기가 끝났다면 점수를 입력해주세요.'}
+        </div>
         <div className={styles.resultContainer}>
           <div className={styles.players}>
             <div className={styles.userInfo}>
@@ -83,19 +94,38 @@ export default function InputScoreModal({ gameId }: GameProps) {
           ) : (
             <div className={styles.finalScore}>
               <div>
-                <input id='myScore' name='myScore' onChange={inputScoreHandler} maxLength={2} />
+                <input
+                  id='myScore'
+                  name='myScore'
+                  onChange={inputScoreHandler}
+                  maxLength={2}
+                />
               </div>
               <div>:</div>
               <div>
-                <input id='enemyScore' name='enemyScore' onChange={inputScoreHandler} maxLength={2} />
+                <input
+                  id='enemyScore'
+                  name='enemyScore'
+                  onChange={inputScoreHandler}
+                  maxLength={2}
+                />
               </div>
             </div>
           )}
         </div>
         {onCheck ? (
           <div className={styles.submitButton}>
-            <input type='button' value='다시 입력하기' onClick={reEnterHandler} style={{ background: 'white', color: 'black' }} />
-            <input type='button' value='제출하기' onClick={submitResultHandler} />
+            <input
+              type='button'
+              value='다시 입력하기'
+              onClick={reEnterHandler}
+              style={{ background: 'white', color: 'black' }}
+            />
+            <input
+              type='button'
+              value='제출하기'
+              onClick={submitResultHandler}
+            />
           </div>
         ) : (
           <div className={styles.submitButton}>

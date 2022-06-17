@@ -23,8 +23,8 @@ export default function SearchBar() {
 
   const getSearchResultHandler = async () => {
     try {
-      const data = await getData(`/pingpong/users/searches/${keyword}`);
-      setSearchResult(data.users);
+      const res = await getData(`/pingpong/users/searches/${keyword}`);
+      setSearchResult(res?.data.users);
     } catch (e) {}
   };
 
