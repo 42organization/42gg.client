@@ -4,7 +4,7 @@ import { PlayerInfo, GameResult } from '../../types/scoreTypes';
 import styles from '../../styles/InputScoreModal.module.scss';
 
 type GameProps = {
-  gameId: string;
+  gameId: number;
 };
 
 export default function InputScoreModal({ gameId }: GameProps) {
