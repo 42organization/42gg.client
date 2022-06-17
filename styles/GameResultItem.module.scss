@@ -1,0 +1,72 @@
+.div {
+  border: 1px solid;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0.2rem;
+}
+
+.userInfo {
+  display: flex;
+  .smallLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .userImage {
+      background: white;
+      border-radius: 50%;
+      border: solid 1px black;
+      width: 2rem;
+      height: 2rem;
+      margin: 0.5rem 0;
+    }
+  }
+  .smallRight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .userImage {
+      background: white;
+      border-radius: 50%;
+      border: solid 1px black;
+      width: 2rem;
+      height: 2rem;
+      margin: 0.5rem 0;
+    }
+  }
+  .scoreBoard {
+    align-self: center;
+  }
+
+  .bigLeft {
+    display: flex;
+    align-items: center;
+    .userImage {
+      background: white;
+      border-radius: 50%;
+      border: solid 1px black;
+      width: 4rem;
+      height: 4rem;
+      margin: 0.5rem 0;
+    }
+  }
+
+  .bigRight {
+    .userImage {
+      background: white;
+      border-radius: 50%;
+      border: solid 1px black;
+      width: 4rem;
+      height: 4rem;
+      margin: 0.5rem 0;
+      font: 1em sans-serif;
+    }
+  }
+}
+
+.scoreBoard {
+  align-items: center;
+}

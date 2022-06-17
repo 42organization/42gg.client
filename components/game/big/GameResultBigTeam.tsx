@@ -1,35 +1,31 @@
-import styles from '../../../styles/GameResultItem.module.css';
-import { Game, Team } from '../../../types/gameTypes';
+import styles from '../../../styles/GameResultItem.module.scss';
+import { Team } from '../../../types/gameTypes';
 
 type gameResultTypes = {
-  game: Game;
   team: Team;
+  userLeft: boolean;
 };
 
-export default function GameResultBigTeam({ game, team }: gameResultTypes) {
+export default function GameResultBigTeam({ team, userLeft }: gameResultTypes) {
   return (
-    <div className={styles.div}>
-      <div>
-        {team.players.map((player) => (
-          <span key={game.matchId + player.userImageUri}>
-            {player.userImageUri} : {player.userId}
-          </span>
-        ))}
-      </div>
-      <div>
-        intra id :{' '}
-        {team.players.map((player) => (
-          <div key={game.matchId + player.userId}>
-            <span>{player.userId}</span>
-            <span>{player.wins}</span>
-            <span>{player.losses}</span>
+    <div>
+      <div className={styles.userInfo}>
+        <div className={userLeft ? styles.bigLeft : styles.bigRight}>
+          <div className={styles.userImage}>
+            {team.players.map((player) => (
+              <div key={player.userId}>{player.userId}</div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-      <div>
-        team ppp{' '}
+
+      <div className={styles.userFont}>
         {team.players.map((player) => (
-          <span key={game.matchId + player.winRate}>{player.winRate}</span>
+          <div key={player.userId}>
+            <div>{player.userId}</div>
+            <span>{player.wins}승 </span>
+            <span>{player.losses}패 </span>
+          </div>
         ))}
       </div>
     </div>

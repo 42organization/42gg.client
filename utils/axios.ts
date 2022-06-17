@@ -1,37 +1,43 @@
 import axios from 'axios';
 
-// const END_POINT = 'http://localhost:3000';
-const END_POINT = 'http://211.253.28.235:9090';
+const SERVER = 'http://211.253.28.235:9090';
+const LOCAL = 'http://localhost:3000/api';
 
-export const getData = async (path: string) => {
+export const getData = async (path: string, isServer: boolean = false) => {
   try {
-    // const res = await axios.get(`${END_POINT}/api${path}`);
+    const END_POINT = isServer ? SERVER : LOCAL;
     const res = await axios.get(`${END_POINT}${path}`);
-    if (res.statusText !== 'OK') throw new Error('네트워크 에러');
+    if (Math.round(res.status / 200) !== 1) {
+      throw new Error('네트워크 에러');
+    }
     return await res.data;
   } catch (e) {
-    throw new Error(e);
+    // throw new Error(e);
   }
 };
 
-export const postData = async (path: string, body: Object) => {
+export const postData = async (
+  path: string,
+  body: Object,
+  isServer: boolean = false
+) => {
   try {
-    // const res = await axios.post(`${END_POINT}/api${path}`, body);
+    const END_POINT = isServer ? SERVER : LOCAL;
     const res = await axios.post(`${END_POINT}${path}`, body);
     if (Math.round(res.status / 200) !== 1) throw new Error('네트워크 에러');
     return await res.status;
   } catch (e) {
-    throw new Error(e);
+    // throw new Error(e);
   }
 };
 
-export const deleteData = async (path: string) => {
+export const deleteData = async (path: string, isServer: boolean = false) => {
   try {
-    // const res = await axios.delete(`${END_POINT}/api${path}`);
+    const END_POINT = isServer ? SERVER : LOCAL;
     const res = await axios.delete(`${END_POINT}${path}`);
     if (res.statusText !== 'OK') throw new Error('네트워크 에러');
     return await res.data;
   } catch (e) {
-    throw new Error(e);
+    // throw new Error(e);
   }
 };
