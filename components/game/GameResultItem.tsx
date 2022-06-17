@@ -21,7 +21,7 @@ export default function GameResultItem({ game, big }: gameResultTypes) {
       className={[styles.div, styles.container].join(' ')}
       onClick={() => setClickedItemId(gameId)}
     >
-      {big ? <BigItem key={gameId} /> : <SmallItem key={gameId} />}
+      {big ? <BigItem /> : <SmallItem />}
     </div>
   );
 
