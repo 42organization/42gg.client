@@ -1,34 +1,22 @@
-import styles from '../../../styles/GameResultItem.module.css';
-import { Game, Team } from '../../../types/gameTypes';
+import { Team } from '../../../types/gameTypes';
+import styles from '../../../styles/GameResultItem.module.scss';
 
 type gameResultTypes = {
-  game: Game;
+  status: string;
   team1: Team;
   team2: Team;
 };
 
-export default function GameResultBiglItem({
-  game,
+export default function GameResultBigScore({
+  status,
   team1,
   team2,
 }: gameResultTypes) {
-  const { time, status, type } = game;
-
   return (
-    <div className={styles.div}>
+    <div className={styles.scoreBoard}>
+      <div>{status}</div>
       <div>
-        <div>게임 타입 : {type}</div>
-        <div>{time}</div>
-        <div>{status}</div>
-        <div>
-          이긴사람 :{' '}
-          {team1.isWin
-            ? team1.players.map((player) => player.userId).join(',')
-            : team2.players.map((player) => player.userId).join(',')}
-        </div>
-        <div>
-          스코어 {team1.score} : {team2.score}
-        </div>
+        {team1.score} : {team2.score}
       </div>
     </div>
   );

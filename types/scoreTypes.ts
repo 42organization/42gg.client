@@ -1,9 +1,14 @@
-export interface PlayerData {
+export interface PlayerInfo {
   userId: string;
   userImageUri: string;
 }
 
+export interface PlayersData {
+  myTeam: PlayerInfo[];
+  enemyTeam: PlayerInfo[];
+}
+
 export interface GameResult {
-  myTeam: PlayerData[];
-  enemyTeam: PlayerData[];
+  myScore: string;
+  enemyScore: string;
 }

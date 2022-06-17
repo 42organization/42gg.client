@@ -9,15 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
+    "@types/react-js-pagination": "^3.0.4",
+    "@types/react-router-dom": "^5.3.3",
     "axios": "^0.27.2",
     "chart.js": "^3.8.0",
     "next": "^12.1.6",
     "react": "18.1.0",
     "react-chartjs-2": "^4.2.0",
     "react-dom": "18.1.0",
+    "react-hooks-paginator": "^0.5.0",
     "react-icons": "^4.4.0",
     "react-infinite-scroll-component": "^6.1.0",
+    "react-js-pagination": "^3.0.3",
     "react-query": "^3.39.1",
+    "react-router-dom": "^6.3.0",
     "recoil": "^0.7.3",
     "uuid": "^8.3.2"
   },
