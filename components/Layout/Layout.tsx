@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userState, liveState } from '../../utils/recoil/main';
 import { UserData, LiveData } from '../../types/mainType';
+import InputScoreModal from '../score/InputScoreModal';
+import CurrentMatchInfo from '../match/CurrentMatchInfo';
 import Header from './Header';
 import Footer from './Footer';
 import { getData } from '../../utils/axios';
@@ -15,8 +17,7 @@ type AppLayoutProps = {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   const [userData, setUserData] = useRecoilState<UserData>(userState);
-  const setLiveData = useSetRecoilState<LiveData>(liveState);
-  const userId = userData.userId;
+  const [liveData, setLiveData] = useRecoilState<LiveData>(liveState);
   const presentPath = useRouter().asPath;
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }, []);
 
   useEffect(() => {
-    getLiveDataHandler(userId);
+    getLiveDataHandler(userData.userId);
   }, [presentPath]);
 
   const getLiveDataHandler = async (userId: string) => {
@@ -45,6 +46,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <>
       <Header />
+      {/* 목업 서버에 항상 gameId를 갖고 있어 서버 연결 후 주석 해제 예정 */}
+      {/* {liveData.gameId && <InputScoreModal gameId={liveData.gameId} />} */}
+      {liveData.event === 'match' && <CurrentMatchInfo />}
       {presentPath !== '/match' && (
         <Link href='/match'>
           <a className='matchingButton'>
