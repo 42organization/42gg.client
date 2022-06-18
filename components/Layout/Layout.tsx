@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userState, liveState } from '../../utils/recoil/main';
 import { UserData, LiveData } from '../../types/mainType';
+import InputScoreModal from '../score/InputScoreModal';
 import Header from './Header';
 import Footer from './Footer';
 import { getData } from '../../utils/axios';
@@ -15,7 +16,7 @@ type AppLayoutProps = {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   const [userData, setUserData] = useRecoilState<UserData>(userState);
-  const setLiveData = useSetRecoilState<LiveData>(liveState);
+  const [liveData, setLiveData] = useRecoilState<LiveData>(liveState);
   const userId = userData.userId;
   const presentPath = useRouter().asPath;
 
@@ -44,6 +45,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <>
+      {/* {liveData.gameId && <InputScoreModal gameId={liveData.gameId} />} */}
       <Header />
       {presentPath !== '/match' && (
         <Link href='/match'>
