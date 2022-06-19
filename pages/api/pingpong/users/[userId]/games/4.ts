@@ -1,10 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Game, Team, Player } from '../../../../types/gameTypes';
+import { Game, Team, Player } from '../../../../../../types/gameTypes';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (typeof req.query.count !== 'string')
-    return res.status(500).json({ message: '잘못된 형식입니다' });
+  const lastGameId = 0;
   const players: Player[] = [
     {
       userId: 'kipark',
@@ -65,7 +64,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const games: Game[] = [
     {
-      gameId: 1,
+      gameId: 13,
       time: '12시 30분',
       status: 'end',
       type: '단식',
@@ -73,7 +72,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       team2: teams[1],
     },
     {
-      gameId: 2,
+      gameId: 14,
       time: '12시 30분',
       status: 'end',
       type: '단식',
@@ -81,7 +80,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       team2: teams[3],
     },
     {
-      gameId: 3,
+      gameId: 15,
       time: '12시 30분',
       status: 'end',
       type: '단식',
@@ -89,7 +88,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       team2: teams[3],
     },
     {
-      gameId: 4,
+      gameId: 16,
       time: '12시 30분',
       status: 'end',
       type: '단식',
@@ -97,7 +96,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       team2: teams[3],
     },
   ];
-  const reqCounct = parseInt(req.query.count);
-  const returnObjs = games.filter((game, i) => i < reqCounct);
-  res.status(200).json(returnObjs);
+  const objs = {
+    lastGameId,
+    games: games,
+  };
+  res.status(200).json(objs);
 }

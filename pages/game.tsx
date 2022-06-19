@@ -1,9 +1,9 @@
-import GameResultList from '../components/game/GameResultList';
+import GameResultPath from '../components/game/GameResultPath';
 
 export default function Game() {
   return (
     <div>
-      <GameResultList count={'10'} />
+      <GameResultPath />
     </div>
   );
 }

@@ -13,8 +13,8 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   useEffect(() => {
     (async () => {
       try {
-        const data = await getData(`/pingpong/match/tables/${1}?type=single`);
-        setMatchData(data);
+        const res = await getData(`/pingpong/match/tables/${1}?type=single`);
+        setMatchData(res?.data);
       } catch (e) {
         console.log(e);
       }

@@ -1,4 +1,7 @@
 import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../utils/recoil/main';
+import { UserData } from '../../types/mainType';
 import styles from '../../styles/MenuBar.module.scss';
 
 type MenuBarProps = {
@@ -6,6 +9,7 @@ type MenuBarProps = {
 };
 
 export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
+  const userData = useRecoilValue<UserData>(userState);
   const router = useRouter();
 
   const MenuPathHandler = (path: string) => {
@@ -20,7 +24,9 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
           <ul>
             <li onClick={() => MenuPathHandler('rank')}>랭킹</li>
             <li onClick={() => MenuPathHandler('game')}>최근 경기</li>
-            <li onClick={() => MenuPathHandler('')}>내 정보</li>
+            <li onClick={() => MenuPathHandler(`users/${userData.userId}`)}>
+              내 정보
+            </li>
           </ul>
         </nav>
         <nav>

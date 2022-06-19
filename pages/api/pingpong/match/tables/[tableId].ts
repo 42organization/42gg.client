@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { MatchData } from './../../../../../types/matchTypes';
 
@@ -16,7 +15,7 @@ export default function handler(
 ) {
   if (req.method === 'GET') {
     const today = getTodayString();
-    const s = 14;
+    const s = 18;
     const obj = {
       intervalMinute: 10,
       type: 'single',
