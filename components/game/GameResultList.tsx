@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { InfiniteData } from 'react-query';
 import { useRecoilState } from 'recoil';
 import { Game } from '../../types/gameTypes';
 import infScroll from '../../utils/infinityScroll';
@@ -18,7 +19,7 @@ export default function GameResultList({ path }: gameResultTypes) {
   const { data, fetchNextPage, status } = infResult;
   const router = useRouter();
 
-  const getLastGameId = (data: any) => {
+  const getLastGameId = (data: InfiniteData<any> | undefined) => {
     return data?.pages[data.pages.length - 1].lastGameId;
   };
 
