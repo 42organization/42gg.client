@@ -14,7 +14,6 @@ export default function RankList() {
   const [isScroll, setIsScroll] = useRecoilState(isScrollState);
   const [page, setPage] = useState<number>(1);
   const router = useRouter();
-  console.log(router);
   const path =
     router.asPath === '/'
       ? `/pingpong/ranks/count/${3}`
