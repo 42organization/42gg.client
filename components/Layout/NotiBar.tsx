@@ -39,7 +39,11 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
         <div className={styles.notiFullContent}>
           {notiData.length &&
             notiData.map((data: NotiData) => (
-              <NotiItem key={data.id} data={data} />
+              <NotiItem
+                key={data.id}
+                data={data}
+                showNotiBarHandler={showNotiBarHandler}
+              />
             ))}
         </div>
       </div>
