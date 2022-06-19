@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { Game } from '../../types/gameTypes';
@@ -7,15 +8,15 @@ import GameResultItem from './GameResultItem';
 
 type gameResultTypes = {
   path: string;
-  isMain: boolean;
 };
 
-export default function GameResultList({ path, isMain }: gameResultTypes) {
+export default function GameResultList({ path }: gameResultTypes) {
   const [clickedItemId, setClickedItemId] =
     useRecoilState<number>(clickedGameItem);
   const [lastGameId, setLastGameId] = useState<number>();
-  const infResult = infScroll(path, true);
+  const infResult = infScroll(path, false);
   const { data, fetchNextPage, status } = infResult;
+  const router = useRouter();
 
   const getLastGameId = (data: any) => {
     return data?.pages[data.pages.length - 1].lastGameId;
@@ -45,18 +46,10 @@ export default function GameResultList({ path, isMain }: gameResultTypes) {
         </>
       )}
       <>
-        {!isMain ? (
-          <>
-            {lastGameId !== 0 ? (
-              <button style={{ width: '100%' }} onClick={() => fetchNextPage()}>
-                더보기
-              </button>
-            ) : (
-              '요소가 없습니다!'
-            )}
-          </>
-        ) : (
-          ''
+        {router.asPath !== '/' && lastGameId !== 0 && (
+          <button style={{ width: '100%' }} onClick={() => fetchNextPage()}>
+            더보기
+          </button>
         )}
       </>
     </div>
