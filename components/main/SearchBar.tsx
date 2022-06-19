@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useEffect, useState, useRef } from 'react';
 import { getData } from '../../utils/axios';
 
 export default function SearchBar() {
@@ -8,18 +9,9 @@ export default function SearchBar() {
 
   useEffect(() => {
     const checkId = /^[a-z|A-Z|0-9|\-]+$/;
-
     if (keyword !== '' && checkId.test(keyword))
       makeDebounce(getSearchResultHandler, 800)();
   }, [keyword]);
-
-  const showDropDownHandler = () => {
-    setShowDropDown(!showDropDown);
-  };
-
-  const keywordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyword(event.target.value);
-  };
 
   const getSearchResultHandler = async () => {
     try {
@@ -28,21 +20,28 @@ export default function SearchBar() {
     } catch (e) {}
   };
 
+  const keywordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(event.target.value);
+  };
+
   return (
     <div>
       <input
         type='text'
         value={keyword}
         onChange={keywordHandler}
-        onFocus={showDropDownHandler}
-        onBlur={showDropDownHandler}
+        onFocus={() => setShowDropDown(true)}
         placeholder='유저 검색하기'
       />
       <span>&#128269;</span>
       {showDropDown && (
         <div>
           {searchResult.length && keyword
-            ? searchResult.map((item, i) => <div key={i}>{item}</div>)
+            ? searchResult.map((userId: string) => (
+                <Link href={`users/${userId}`} key={userId}>
+                  <div>{userId}</div>
+                </Link>
+              ))
             : '검색 결과가 없습니다.'}
         </div>
       )}
