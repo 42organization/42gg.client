@@ -6,6 +6,7 @@ export default function SearchBar() {
   const [keyword, setKeyword] = useState<string>('');
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<string[]>([]);
+  const searchBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const checkId = /^[a-z|A-Z|0-9|\-]+$/;
@@ -20,12 +21,28 @@ export default function SearchBar() {
     } catch (e) {}
   };
 
+  // 검색 컴포넌트 외부 클릭시 검색결과모달 닫기
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      searchBarRef.current &&
+      !searchBarRef.current.contains(event.target as Node)
+    )
+      setShowDropDown(false);
+  };
+
   const keywordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(event.target.value);
   };
 
   return (
-    <div>
+    <div ref={searchBarRef}>
       <input
         type='text'
         value={keyword}
