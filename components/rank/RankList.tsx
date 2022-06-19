@@ -8,19 +8,17 @@ import { myRankPosition, isScrollState } from '../../utils/recoil/myRank';
 import RankItem from './RankItem';
 import PageNation from '../Pagination';
 
-type RankType = {
-  isMain: boolean;
-};
-
-export default function RankList({ isMain }: RankType) {
+export default function RankList() {
   const [rankData, setRankData] = useState<RankData | null>(null);
   const [myRank, setMyRank] = useRecoilState(myRankPosition);
   const [isScroll, setIsScroll] = useRecoilState(isScrollState);
   const [page, setPage] = useState<number>(1);
   const router = useRouter();
-  const path = isMain
-    ? `/pingpong/ranks/count/${1}`
-    : `/pingpong/ranks/${page}`;
+  console.log(router);
+  const path =
+    router.asPath === '/'
+      ? `/pingpong/ranks/count/${3}`
+      : `/pingpong/ranks/${page}`;
 
   useEffect(() => {
     if (isScroll) {
@@ -52,11 +50,13 @@ export default function RankList({ isMain }: RankType) {
     router.push(`rank`);
   };
 
-  return isMain ? (
+  return router.asPath === '/' ? (
     <div>
-      {rankData?.rankList.map((item: Rank) => (
-        <RankItem key={item.userId} user={item} isMain={isMain} />
-      ))}
+      <div className={styles.container}>
+        {rankData?.rankList.map((item: Rank) => (
+          <RankItem key={item.userId} user={item} isMain={true} />
+        ))}
+      </div>
     </div>
   ) : (
     <>
@@ -69,7 +69,7 @@ export default function RankList({ isMain }: RankType) {
           <div className={styles.winRate}>승률</div>
         </div>
         {rankData?.rankList.map((item: Rank) => (
-          <RankItem key={item.userId} user={item} isMain={isMain} />
+          <RankItem key={item.userId} user={item} isMain={false} />
         ))}
         <PageNation
           curPage={rankData?.currentPage!}
