@@ -3,12 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { Game, Team, Player } from '../../../../../../types/gameTypes';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const info = {
-    count: 16,
-    next: 'http://localhost:3000/api/pingpong/users/kipark/games/1',
-    pages: 4,
-    prev: 'http://localhost:3000/api/pingpong/users/kipark/games/3',
-  };
+  const lastGameId = 3;
   const players: Player[] = [
     {
       userId: 'kipark',
@@ -102,7 +97,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     },
   ];
   const objs = {
-    info: info,
+    lastGameId,
     games: games,
   };
   res.status(200).json(objs);

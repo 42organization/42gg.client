@@ -1,14 +1,9 @@
-import { QueryClient, QueryClientProvider } from 'react-query';
-import GameResultList from '../components/game/GameResultList';
+import GameResultPath from '../components/game/GameResultPath';
 
 export default function Game() {
-  const queryClient = new QueryClient();
-
   return (
     <div>
-      <QueryClientProvider client={queryClient}>
-        <GameResultList user='all' />
-      </QueryClientProvider>
+      <GameResultPath />
     </div>
   );
 }
