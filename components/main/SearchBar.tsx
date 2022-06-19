@@ -41,6 +41,10 @@ export default function SearchBar() {
     setKeyword(event.target.value);
   };
 
+  const resetKeywordHandler = () => {
+    setKeyword('');
+  };
+
   return (
     <div ref={searchBarRef}>
       <input
@@ -50,6 +54,7 @@ export default function SearchBar() {
         onFocus={() => setShowDropDown(true)}
         placeholder='유저 검색하기'
       />
+      <span onClick={resetKeywordHandler}>&#x02717;</span>
       <span>&#128269;</span>
       {showDropDown && (
         <div>
