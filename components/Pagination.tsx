@@ -7,8 +7,8 @@ import {
 } from 'react-icons/io5';
 
 interface GreetingProps {
-  curPage: number;
-  totalPages: number;
+  curPage: number | undefined;
+  totalPages: number | undefined;
   pageChangeHandler: (page: number) => any;
 }
 
