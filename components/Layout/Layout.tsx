@@ -1,8 +1,7 @@
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo } from 'react';
-import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import { userState, liveState } from '../../utils/recoil/main';
 import { UserData, LiveData } from '../../types/mainType';
 import InputScoreModal from '../score/InputScoreModal';
