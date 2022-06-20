@@ -17,8 +17,8 @@ export default function InputScoreModal({ gameId }: GameProps) {
     userImageUri: '',
   });
   const [result, setResult] = useState<GameResult>({
-    myScore: 0,
-    enemyScore: 0,
+    myScore: 42,
+    enemyScore: 42,
   });
   const [onCheck, setOnCheck] = useState<boolean>(false);
 
@@ -38,26 +38,22 @@ export default function InputScoreModal({ gameId }: GameProps) {
     e.target.value = e.target.value.replace(/[^0-2]/g, '');
     setResult((prev) => ({
       ...prev,
-      [e.target.name]: +e.target.value,
+      [e.target.name]: parseInt(e.target.value),
     }));
   };
 
   const enterHandler = () => {
     const { myScore, enemyScore } = result;
-    if (myScore + enemyScore > 3 || myScore === enemyScore) {
+    if (myScore + enemyScore > 3 || myScore === enemyScore || isNaN(myScore) || isNaN(enemyScore)) {
       alert('정확한 점수를 입력해주세요.');
       return;
     }
-    if (myScore && enemyScore) {
-      setOnCheck(true);
-    }
+    setOnCheck(true);
   };
 
   const reEnterHandler = () => {
-    if (result.myScore && result.enemyScore) {
-      setResult((prev) => ({ ...prev, myScore: 0, enemyScore: 0 }));
-      setOnCheck(false);
-    }
+    setResult((prev) => ({ ...prev, myScore: 42, enemyScore: 42 }));
+    setOnCheck(false);
   };
 
   const submitResultHandler = async () => {
