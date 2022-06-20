@@ -9,6 +9,6 @@ export interface PlayersData {
 }
 
 export interface GameResult {
-  myScore: string;
-  enemyScore: string;
+  myScore: number;
+  enemyScore: number;
 }
