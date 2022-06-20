@@ -11,7 +11,7 @@ type RankType = {
 export default function RankItem({ user, isMain }: RankType) {
   const { rank, userId, ppp, statusMessage, winRate } = user;
   return (
-    <Link href={`/user/${userId}`}>
+    <Link href={`/users/${userId}`}>
       <div className={styles.person}>
         {isMain ? (
           <>
