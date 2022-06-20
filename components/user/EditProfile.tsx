@@ -9,6 +9,8 @@ interface EditedProfile {
   statusMessage: string;
 }
 
+const CHAR_LIMIT = 20;
+
 export default function EditProfile() {
   const setIsEditProfile = useSetRecoilState(isEditProfileState);
   const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
@@ -40,6 +42,8 @@ export default function EditProfile() {
       | React.ChangeEvent<HTMLTextAreaElement>
       | React.ChangeEvent<HTMLInputElement>
   ) => {
+    if (e.target.name === 'statusMessage')
+      e.target.value = e.target.value.slice(0, CHAR_LIMIT);
     setEditedProfile((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -104,7 +108,9 @@ export default function EditProfile() {
           value={editedProfile.statusMessage}
           name='statusMessage'
           onChange={inputChangeHandler}
+          maxLength={CHAR_LIMIT}
         ></textarea>
+        <span>{`${editedProfile.statusMessage.length}/${CHAR_LIMIT}`}</span>
       </div>
       <div>
         <button onClick={cancelEditHandler}>취소</button>
