@@ -7,9 +7,9 @@ import {
 } from 'react-icons/io5';
 
 interface GreetingProps {
-  curPage: number;
-  totalPages: number;
-  pageChangeHandler: (page: number) => any;
+  curPage: number | undefined;
+  totalPages: number | undefined;
+  pageChangeHandler: (page: number) => void;
 }
 
 function PageNation({ curPage, totalPages, pageChangeHandler }: GreetingProps) {

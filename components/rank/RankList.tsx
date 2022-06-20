@@ -71,8 +71,8 @@ export default function RankList() {
           <RankItem key={item.userId} user={item} isMain={false} />
         ))}
         <PageNation
-          curPage={rankData?.currentPage!}
-          totalPages={rankData?.totalPage!}
+          curPage={rankData?.currentPage}
+          totalPages={rankData?.totalPage}
           pageChangeHandler={pageChangeHandler}
         />
       </div>
