@@ -10,7 +10,7 @@ export default function CurrentMatchInfo() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await instance.get(`/api/pingpong/match/current`);
+        const res = await instance.get(`/pingpong/match/current`);
         setCurrentMatch(res?.data);
       } catch (e) {
         console.log(e);
@@ -29,7 +29,7 @@ export default function CurrentMatchInfo() {
   const onCancel = async () => {
     try {
       const res = await instance.delete(
-        `/api/pingpong/match/tables/${1}?slotId=${slotId}`
+        `/pingpong/match/tables/${1}?slotId=${slotId}`
       );
       alert(res?.data.message);
       // 현재매치정보 삭제하기

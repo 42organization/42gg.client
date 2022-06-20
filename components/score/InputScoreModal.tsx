@@ -25,7 +25,7 @@ export default function InputScoreModal({ gameId }: GameProps) {
   useEffect(() => {
     (async () => {
       try {
-        const res = await instance.get(`/api/pingpong/games/[gameId]/result`);
+        const res = await instance.get(`/pingpong/games/[gameId]/result`);
         setMyInfo(res?.data.myTeam[0]);
         setEnemyInfo(res?.data.enemyTeam[0]);
       } catch (e) {
@@ -56,10 +56,7 @@ export default function InputScoreModal({ gameId }: GameProps) {
   };
 
   const submitResultHandler = async () => {
-    const res = await instance.post(
-      `/api/pingpong/games/[gameId]/result`,
-      result
-    );
+    const res = await instance.post(`/pingpong/games/[gameId]/result`, result);
     if (res?.status == 201) {
       alert('결과 입력이 완료되었습니다.');
     } else if (res?.status == 202) {

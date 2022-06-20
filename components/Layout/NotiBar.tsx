@@ -15,7 +15,7 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
   useEffect(() => {
     (async () => {
       try {
-        const res = await instance.get(`/api/pingpong/notifications`);
+        const res = await instance.get(`/pingpong/notifications`);
         setNotiData(res?.data.noti);
       } catch (e) {}
     })();
@@ -23,7 +23,7 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
 
   const allNotiDeleteHandler = async () => {
     try {
-      const res = await instance.delete(`/api/pingpong/notifications`);
+      const res = await instance.delete(`/pingpong/notifications`);
       alert(res?.data.message);
       showNotiBarHandler();
     } catch (e) {}

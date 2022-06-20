@@ -9,11 +9,11 @@ export default function GameResultPath() {
   const router = useRouter();
   useEffect(() => {
     if (router.asPath === '/') {
-      setPath(`/api/pingpong/games?count=3&gameId=`);
+      setPath(`/pingpong/games?count=3&gameId=`);
     } else if (router.asPath === '/game') {
-      setPath(`/api/pingpong/games?gameId=`);
+      setPath(`/pingpong/games?gameId=`);
     } else {
-      setPath(`/api/pingpong${router.asPath}/games?count=4&status=end&gameId=`);
+      setPath(`/pingpong${router.asPath}/games?count=4&status=end&gameId=`);
     }
   }, []);
 

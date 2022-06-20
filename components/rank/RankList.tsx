@@ -16,8 +16,8 @@ export default function RankList() {
   const router = useRouter();
   const path =
     router.asPath !== '/rank'
-      ? `/api/pingpong/ranks/count/${3}`
-      : `/api/pingpong/ranks/${page}`;
+      ? `/pingpong/ranks/count/${3}`
+      : `/pingpong/ranks/${page}`;
 
   useEffect(() => {
     if (isScroll) {

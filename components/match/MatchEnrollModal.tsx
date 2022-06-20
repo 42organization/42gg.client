@@ -15,7 +15,7 @@ export default function MatchEnrollModal() {
 
   const onEnroll = async () => {
     const body = { slotId, type };
-    const res = await instance.post(`/api/pingpong/match/tables/${1}`, body);
+    const res = await instance.post(`/pingpong/match/tables/${1}`, body);
     alert(res?.data.message);
     setEnrollInfo(null);
   };

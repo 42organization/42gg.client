@@ -1,23 +1,6 @@
-// import { Link } from 'react-router-dom';
-// import { TopBar, PageName, Squares } from 'styles/styled';
-// import {
-//   AppContainer,
-//   PageContainer,
-//   ContentContainer,
-//   SeoulImg,
-//   TextWrap,
-//   LoginButtonWrap,
-// } from './styled';
-import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
-import React, { useEffect, useState } from 'react';
-import { loginState } from '../utils/recoil/login';
-import { useRouter } from 'next/router';
+import React from 'react';
 
 function Login() {
-  // const isLoggedIn = useRecoilValue(loginState);
-  // const router = useRouter();
-
-  // if (isLoggedIn) router.push(`/`);
   return (
     <>
       <div> 4 2 A R C A D E </div>

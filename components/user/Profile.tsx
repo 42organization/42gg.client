@@ -14,7 +14,7 @@ export default function Profile({ userId }: ProfileProps) {
   useEffect(() => {
     (async () => {
       try {
-        const res = await instance.get(`/api/pingpong/users/${userId}/detail`);
+        const res = await instance.get(`/pingpong/users/${userId}/detail`);
         setProfileInfo(res?.data);
       } catch (e) {
         console.log(e);

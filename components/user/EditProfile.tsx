@@ -55,7 +55,7 @@ export default function EditProfile() {
 
     try {
       const res = await instance.post(
-        `/api/pingpong/users/${userId}/detail`,
+        `/pingpong/users/${userId}/detail`,
         editedProfile
       );
       alert(res?.data.message);

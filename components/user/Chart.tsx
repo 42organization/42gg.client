@@ -50,7 +50,7 @@ export default function Chart({ userId }: ChartProps) {
     (async () => {
       try {
         const res = await instance.get(
-          `/api/pingpong/users/${userId}/historics?chartType=rank`
+          `/pingpong/users/${userId}/historics?chartType=rank`
         );
         setChartData(res?.data.historics);
       } catch (e) {

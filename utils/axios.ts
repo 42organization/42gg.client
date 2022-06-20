@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const baseURL: any = process.env.REACT_APP_SERVERIP;
+const baseURL: any = process.env.NEXT_PUBLIC_SERVERIP;
 
-const instance = axios.create(baseURL);
+const instance = axios.create({ baseURL });
 
 instance.interceptors.request.use(
   function setConfig(parameter) {

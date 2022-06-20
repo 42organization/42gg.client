@@ -16,7 +16,7 @@ export default function SearchBar() {
 
   const getSearchResultHandler = async () => {
     try {
-      const res = await instance.get(`/api/pingpong/users/searches/${keyword}`);
+      const res = await instance.get(`/pingpong/users/searches/${keyword}`);
       setSearchResult(res?.data.users);
     } catch (e) {}
   };

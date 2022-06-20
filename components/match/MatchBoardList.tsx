@@ -14,7 +14,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
     (async () => {
       try {
         const res = await instance.get(
-          `/api/pingpong/match/tables/${1}?type=single`
+          `/pingpong/match/tables/${1}?type=single`
         );
         setMatchData(res?.data);
       } catch (e) {
