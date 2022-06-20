@@ -9,7 +9,7 @@ import {
 interface GreetingProps {
   curPage: number | undefined;
   totalPages: number | undefined;
-  pageChangeHandler: (page: number) => any;
+  pageChangeHandler: (page: number) => void;
 }
 
 function PageNation({ curPage, totalPages, pageChangeHandler }: GreetingProps) {
