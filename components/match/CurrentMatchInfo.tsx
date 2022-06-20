@@ -1,9 +1,8 @@
 import Link from 'next/link';
 import { CurrentMatch } from '../../types/matchTypes';
-import { deleteData } from '../../utils/axios';
 import { dateToString } from '../../utils/handleTime';
 import { useState, useEffect } from 'react';
-import { getData } from '../../utils/axios';
+import instance from '../../utils/axios';
 
 export default function CurrentMatchInfo() {
   const [currentMatch, setCurrentMatch] = useState<CurrentMatch | null>(null);
@@ -11,7 +10,7 @@ export default function CurrentMatchInfo() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await getData(`/pingpong/match/current`);
+        const res = await instance.get(`/pingpong/match/current`);
         setCurrentMatch(res?.data);
       } catch (e) {
         console.log(e);
@@ -29,7 +28,7 @@ export default function CurrentMatchInfo() {
 
   const onCancel = async () => {
     try {
-      const res = await deleteData(
+      const res = await instance.delete(
         `/pingpong/match/tables/${1}?slotId=${slotId}`
       );
       alert(res?.data.message);

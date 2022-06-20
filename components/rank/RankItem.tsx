@@ -11,13 +11,13 @@ type RankType = {
 export default function RankItem({ user, isMain }: RankType) {
   const { rank, userId, ppp, statusMessage, winRate } = user;
   return (
-    <Link href={'/' /*프로필{/profile?userId={userId}}로 수정 예정*/}>
+    <Link href={`/users/${userId}`}>
       <div className={styles.person}>
         {isMain ? (
           <>
-            <div className={styles.mainrank}>{rank}</div>
-            <div className={styles.mainuserId}>{userId}</div>
-            <div className={styles.mainppp}>{ppp}</div>
+            <div className={styles.mainRank}>{rank}</div>
+            <div className={styles.mainUserId}>{userId}</div>
+            <div className={styles.mainPpp}>{ppp}</div>
           </>
         ) : (
           <>

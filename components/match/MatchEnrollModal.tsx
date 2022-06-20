@@ -1,6 +1,6 @@
 import { enrollInfoState } from '../../utils/recoil/match';
 import { EnrollInfo } from '../../types/matchTypes';
-import { postData } from '../../utils/axios';
+import instance from '../../utils/axios';
 import { useRecoilState } from 'recoil';
 import { dateToString } from '../../utils/handleTime';
 
@@ -15,7 +15,7 @@ export default function MatchEnrollModal() {
 
   const onEnroll = async () => {
     const body = { slotId, type };
-    const res = await postData(`/pingpong/match/tables/${1}`, body);
+    const res = await instance.post(`/pingpong/match/tables/${1}`, body);
     alert(res?.data.message);
     setEnrollInfo(null);
   };

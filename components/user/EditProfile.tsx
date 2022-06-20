@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { profileInfoState, isEditProfileState } from '../../utils/recoil/user';
-import { postData } from '../../utils/axios';
+import instance from '../../utils/axios';
 
 interface EditedProfile {
   userImageUri: string;
@@ -58,7 +58,7 @@ export default function EditProfile() {
     setIsEditProfile(false);
 
     try {
-      const res = await postData(
+      const res = await instance.post(
         `/pingpong/users/${userId}/detail`,
         editedProfile
       );

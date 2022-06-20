@@ -3,6 +3,8 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '../../utils/recoil/main';
 import { UserData } from '../../types/mainType';
 import styles from '../../styles/MenuBar.module.scss';
+import { useSetRecoilState } from 'recoil';
+import { loginState } from '../../utils/recoil/login';
 
 type MenuBarProps = {
   showMenuBarHandler: () => void;
@@ -10,11 +12,19 @@ type MenuBarProps = {
 
 export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
   const userData = useRecoilValue<UserData>(userState);
+  const setIsLoggedIn = useSetRecoilState(loginState);
+
   const router = useRouter();
 
   const MenuPathHandler = (path: string) => {
     showMenuBarHandler();
     router.push(`/${path}`);
+  };
+
+  const logoutHandler = () => {
+    localStorage.removeItem('42gg-token');
+    setIsLoggedIn(false);
+    router.push(`/`);
   };
 
   return (
@@ -32,7 +42,7 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
         <nav>
           <ul id={styles.subMenu}>
             <li>매뉴얼</li>
-            <li>로그아웃</li>
+            <li onClick={logoutHandler}>로그아웃</li>
           </ul>
         </nav>
       </div>
