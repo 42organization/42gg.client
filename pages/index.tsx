@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import type { NextPage } from 'next';
 import SearchBar from '../components/main/SearchBar';
 import Section from '../components/main/Section';
@@ -10,11 +9,11 @@ const Home: NextPage = () => {
       <div className={styles.search}>
         <SearchBar />
       </div>
-      <div className={styles.game}>
-        <Section path={'/game'} />
-      </div>
       <div className={styles.rank}>
         <Section path={'/rank'} />
+      </div>
+      <div className={styles.game}>
+        <Section path={'/game'} />
       </div>
     </div>
   );

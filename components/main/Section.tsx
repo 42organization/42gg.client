@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from '../../styles/Section.module.scss';
-import GameResultList from '../game/GameResultList';
+import GameResultPath from '../game/GameResultPath';
 import RankList from '../rank/RankList';
 
 type SectionProps = {
@@ -13,14 +13,16 @@ export default function Section({ path }: SectionProps) {
       <Link href={path}>
         <a>더보기 &#9657;</a>
       </Link>
-      <section>
-        {/* {path === '/game' ? (
-          <GameResultList count={3} />
-        ) : (
-          <RankList count={3} />
-        )}
-				kipark, daekim 수정 후 사용 예정 */}
-      </section>
+      <section>{sectionRouter(path)}</section>
     </div>
   );
+}
+
+function sectionRouter(path: string) {
+  switch (path) {
+    case '/game':
+      return <GameResultPath />;
+    case '/rank':
+      return <RankList />;
+  }
 }
