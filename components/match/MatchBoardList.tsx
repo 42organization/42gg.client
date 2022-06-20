@@ -1,6 +1,6 @@
 import { MatchData } from '../../types/matchTypes';
 import { useEffect, useState } from 'react';
-import { getData } from '../../utils/axios';
+import instance from '../../utils/axios';
 import MatchBoard from './MatchBoard';
 
 interface MatchBoardListProps {
@@ -13,7 +13,9 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   useEffect(() => {
     (async () => {
       try {
-        const res = await getData(`/pingpong/match/tables/${1}?type=single`);
+        const res = await instance.get(
+          `/api/pingpong/match/tables/${1}?type=single`
+        );
         setMatchData(res?.data);
       } catch (e) {
         console.log(e);

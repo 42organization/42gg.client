@@ -3,7 +3,7 @@ import NotiItem from './NotiItem';
 import { NotiData } from '../../types/notiTypes';
 import { BsCheck2Square } from 'react-icons/bs';
 import styles from '../../styles/NotiBar.module.scss';
-import { getData, deleteData } from '../../utils/axios';
+import instance from '../../utils/axios';
 
 type NotiBarProps = {
   showNotiBarHandler: () => void;
@@ -15,7 +15,7 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
   useEffect(() => {
     (async () => {
       try {
-        const res = await getData(`/pingpong/notifications`);
+        const res = await instance.get(`/api/pingpong/notifications`);
         setNotiData(res?.data.noti);
       } catch (e) {}
     })();
@@ -23,7 +23,7 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
 
   const allNotiDeleteHandler = async () => {
     try {
-      const res = await deleteData(`/pingpong/notifications`);
+      const res = await instance.delete(`/api/pingpong/notifications`);
       alert(res?.data.message);
       showNotiBarHandler();
     } catch (e) {}

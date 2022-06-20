@@ -1,7 +1,7 @@
 import { isEditProfileState, profileInfoState } from '../../utils/recoil/user';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { useEffect } from 'react';
-import { getData } from '../../utils/axios';
+import instance from '../../utils/axios';
 
 interface ProfileProps {
   userId: string;
@@ -14,7 +14,7 @@ export default function Profile({ userId }: ProfileProps) {
   useEffect(() => {
     (async () => {
       try {
-        const res = await getData(`/pingpong/users/${userId}/detail`);
+        const res = await instance.get(`/api/pingpong/users/${userId}/detail`);
         setProfileInfo(res?.data);
       } catch (e) {
         console.log(e);

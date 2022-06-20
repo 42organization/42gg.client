@@ -11,7 +11,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { useEffect, useState, useMemo } from 'react';
 import { ChartDataItem } from '../../types/userTypes';
-import { getData } from '../../utils/axios';
+import instance from '../../utils/axios';
 
 ChartJS.register(
   CategoryScale,
@@ -49,8 +49,8 @@ export default function Chart({ userId }: ChartProps) {
   useEffect(() => {
     (async () => {
       try {
-        const res = await getData(
-          `/pingpong/users/${userId}/historics?chartType=rank`
+        const res = await instance.get(
+          `/api/pingpong/users/${userId}/historics?chartType=rank`
         );
         setChartData(res?.data.historics);
       } catch (e) {

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
-import { getData } from '../../utils/axios';
+import instance from '../../utils/axios';
 
 export default function SearchBar() {
   const [keyword, setKeyword] = useState<string>('');
@@ -16,7 +16,7 @@ export default function SearchBar() {
 
   const getSearchResultHandler = async () => {
     try {
-      const res = await getData(`/pingpong/users/searches/${keyword}`);
+      const res = await instance.get(`/api/pingpong/users/searches/${keyword}`);
       setSearchResult(res?.data.users);
     } catch (e) {}
   };

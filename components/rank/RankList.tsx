@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../../styles/RankList.module.css';
 import { Rank, RankData } from '../../types/rankTypes';
-import { getData } from '../../utils/axios';
+import instance from '../../utils/axios';
 import { useRecoilState } from 'recoil';
 import { myRankPosition, isScrollState } from '../../utils/recoil/myRank';
 import RankItem from './RankItem';
@@ -15,9 +15,9 @@ export default function RankList() {
   const [page, setPage] = useState<number>(1);
   const router = useRouter();
   const path =
-    router.asPath === '/'
-      ? `/pingpong/ranks/count/${3}`
-      : `/pingpong/ranks/${page}`;
+    router.asPath !== '/rank'
+      ? `/api/pingpong/ranks/count/${3}`
+      : `/api/pingpong/ranks/${page}`;
 
   useEffect(() => {
     if (isScroll) {
@@ -28,7 +28,7 @@ export default function RankList() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await getData(`${path}`);
+        const res = await instance.get(`${path}`);
         setRankData(res?.data);
         setMyRank(res?.data.myRank);
       } catch (e) {
@@ -49,7 +49,7 @@ export default function RankList() {
     router.push(`rank`);
   };
 
-  return router.asPath === '/' ? (
+  return router.asPath !== '/rank' ? (
     <div>
       <div className={styles.container}>
         {rankData?.rankList.map((item: Rank) => (
