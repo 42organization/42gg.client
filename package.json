@@ -25,6 +25,7 @@
     "react-query": "^3.39.1",
     "react-router-dom": "^6.3.0",
     "recoil": "^0.7.3",
+    "recoil-persist": "^4.2.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

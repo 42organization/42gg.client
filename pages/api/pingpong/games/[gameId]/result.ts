@@ -1,9 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { GameResult } from '../../../../../types/scoreTypes';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<GameResult | object | number>) {
+export default function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<GameResult | object | number>
+) {
   if (req.method === 'GET') {
-    console.log('Get');
     const gamePlayers = {
       myTeam: [
         {

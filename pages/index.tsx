@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import type { NextPage } from 'next';
 import SearchBar from '../components/main/SearchBar';
 import Section from '../components/main/Section';
