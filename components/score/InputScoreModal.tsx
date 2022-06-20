@@ -43,11 +43,12 @@ export default function InputScoreModal({ gameId }: GameProps) {
   };
 
   const enterHandler = () => {
-    if (result.myScore + result.enemyScore > 3 || result.myScore == result.enemyScore) {
+    const { myScore, enemyScore } = result;
+    if (myScore + enemyScore > 3 || myScore === enemyScore) {
       alert('정확한 점수를 입력해주세요.');
       return;
     }
-    if (result.myScore && result.enemyScore) {
+    if (myScore && enemyScore) {
       setOnCheck(true);
     }
   };
@@ -61,9 +62,9 @@ export default function InputScoreModal({ gameId }: GameProps) {
 
   const submitResultHandler = async () => {
     const res = await instance.post(`/pingpong/games/result`, result);
-    if (res?.status == 201) {
+    if (res?.status === 201) {
       alert('결과 입력이 완료되었습니다.');
-    } else if (res?.status == 202) {
+    } else if (res?.status === 202) {
       alert('결과가 입력된 게임입니다.');
     } else {
       alert('error occurred');
