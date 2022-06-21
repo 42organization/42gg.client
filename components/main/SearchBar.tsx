@@ -13,7 +13,8 @@ export default function SearchBar() {
 
   useEffect(() => {
     const checkId = /^[a-z|A-Z|0-9|\-]+$/;
-    if (keyword !== '' && checkId.test(keyword)) makeDebounce(getSearchResultHandler, 800)();
+    if (keyword !== '' && checkId.test(keyword))
+      makeDebounce(getSearchResultHandler, 800)();
   }, [keyword]);
 
   const getSearchResultHandler = async () => {
@@ -32,7 +33,11 @@ export default function SearchBar() {
   }, []);
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) setShowDropDown(false);
+    if (
+      searchBarRef.current &&
+      !searchBarRef.current.contains(event.target as Node)
+    )
+      setShowDropDown(false);
   };
 
   const keywordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +51,13 @@ export default function SearchBar() {
   return (
     <div>
       <div className={styles.searchBar} ref={searchBarRef}>
-        <input type='text' value={keyword} onChange={keywordHandler} onFocus={() => setShowDropDown(true)} placeholder='유저 검색하기' />
+        <input
+          type='text'
+          value={keyword}
+          onChange={keywordHandler}
+          onFocus={() => setShowDropDown(true)}
+          placeholder='유저 검색하기'
+        />
         <div className={styles.buttons}>
           <span onClick={resetKeywordHandler}>
             <IoIosCloseCircle style={{ color: 'gray' }} />

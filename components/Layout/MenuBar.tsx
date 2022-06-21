@@ -29,12 +29,17 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
 
   return (
     <div className={styles.backdrop} onClick={showMenuBarHandler}>
-      <div className={styles.menuContainer} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={styles.menuContainer}
+        onClick={(e) => e.stopPropagation()}
+      >
         <nav>
           <div className={styles.menu}>
             <div onClick={() => MenuPathHandler('rank')}>랭킹</div>
             <div onClick={() => MenuPathHandler('game')}>최근 경기</div>
-            <div onClick={() => MenuPathHandler(`users/${userData.userId}`)}>내 정보</div>
+            <div onClick={() => MenuPathHandler(`users/${userData.userId}`)}>
+              내 정보
+            </div>
           </div>
           <div className={styles.subMenu}>
             <div>매뉴얼</div>

@@ -20,9 +20,19 @@ export default function NotiItem({ data, showNotiBarHandler }: NotiItemProps) {
   };
 
   return (
-    <div className={data.isChecked ? `${styles.readWrap}` : `${styles.notiWrap}`}>
+    <div
+      className={data.isChecked ? `${styles.readWrap}` : `${styles.notiWrap}`}
+    >
       <span className={styles.title}>{title}</span>
-      <div className={styles.content}>{data.type === 'imminent' && data.enemyTeam ? <div>{makeEnemyUsers(data.enemyTeam)}님과 경기 5분 전 입니다. 서두르세요!</div> : makeContent(data)}</div>
+      <div className={styles.content}>
+        {data.type === 'imminent' && data.enemyTeam ? (
+          <div>
+            {makeEnemyUsers(data.enemyTeam)}님과 경기 5분 전 입니다. 서두르세요!
+          </div>
+        ) : (
+          makeContent(data)
+        )}
+      </div>
       <div className={styles.date}>{data.createdAt}</div>
     </div>
   );
@@ -36,8 +46,11 @@ function makeTitle(type: string) {
 }
 
 function makeContent(data: NotiData) {
-  if (data.type === 'matched') return `${data.time}에 신청한 매칭이 상대에 의해 성사되었습니다.`;
-  else if (data.type === 'cancledByMan') return `${data.time}에 신청한 매칭이 상대에 의해 취소되었습니다.`;
-  else if (data.type === 'cancledByTime') return `${data.time}에 신청한 매칭이 상대 없음으로 취소되었습니다.`;
+  if (data.type === 'matched')
+    return `${data.time}에 신청한 매칭이 상대에 의해 성사되었습니다.`;
+  else if (data.type === 'cancledByMan')
+    return `${data.time}에 신청한 매칭이 상대에 의해 취소되었습니다.`;
+  else if (data.type === 'cancledByTime')
+    return `${data.time}에 신청한 매칭이 상대 없음으로 취소되었습니다.`;
   else return `${data.message}`;
 }

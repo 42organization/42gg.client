@@ -65,7 +65,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
     <>
       {isLoggedIn ? (
         <div className={styles.layoutContainer}>
-          {/* <Image id={styles.background} width='100vw' height='100vh' src='/../../public/background_img.png' alt='background' /> */}
+          {/* <Image
+            id={styles.background}
+            width='100vw'
+            height='100vh'
+            src='/../../public/background_img.png'
+            alt='background'
+          /> */}
           <div className={styles.mainContent}>
             <Header />
             {/* 목업 서버에 항상 gameId를 갖고 있어 서버 연결 후 주석 해제 예정 */}

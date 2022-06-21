@@ -43,8 +43,18 @@ export default function Header() {
           Logo
         </div>
         <div className={styles.headerRight}>
-          <div onClick={showNotiBarHandler}>{liveData.notiCount ? <VscBellDot id={styles.notiIcon} /> : <VscBell id={styles.notiIcon} />}</div>
-          {userImg !== '' ? <img src={userImg} alt='prfImg' /> : <VscSmiley id={styles.userIcon} />}
+          <div onClick={showNotiBarHandler}>
+            {liveData.notiCount ? (
+              <VscBellDot id={styles.notiIcon} />
+            ) : (
+              <VscBell id={styles.notiIcon} />
+            )}
+          </div>
+          {userImg !== '' ? (
+            <img src={userImg} alt='prfImg' />
+          ) : (
+            <VscSmiley id={styles.userIcon} />
+          )}
           {/* next js 에서 image는 다시 알아봐야 함 */}
         </div>
       </div>

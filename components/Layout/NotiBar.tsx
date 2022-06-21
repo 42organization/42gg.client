@@ -31,11 +31,23 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
 
   return (
     <div className={styles.backdrop} onClick={showNotiBarHandler}>
-      <div className={styles.notiContainer} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={styles.notiContainer}
+        onClick={(e) => e.stopPropagation()}
+      >
         <button onClick={allNotiDeleteHandler}>
           <BsCheck2Square /> 전체삭제
         </button>
-        <div className={styles.notiFullContent}>{notiData.length && notiData.map((data: NotiData) => <NotiItem key={data.id} data={data} showNotiBarHandler={showNotiBarHandler} />)}</div>
+        <div className={styles.notiFullContent}>
+          {notiData.length &&
+            notiData.map((data: NotiData) => (
+              <NotiItem
+                key={data.id}
+                data={data}
+                showNotiBarHandler={showNotiBarHandler}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );
