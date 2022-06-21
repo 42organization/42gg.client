@@ -109,7 +109,7 @@ export default function InputScoreModal({ gameId }: GameProps) {
           </div>
         ) : (
           <div className={styles.submitButton}>
-            <input type='button' value='확인' onClick={enterHandler} />
+            <input type='button' value='확 인' onClick={enterHandler} />
           </div>
         )}
       </div>
