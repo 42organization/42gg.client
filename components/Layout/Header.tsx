@@ -34,7 +34,7 @@ export default function Header() {
   };
 
   return (
-    <div>
+    <div className={styles.headerContainer}>
       <div className={styles.headerWrap}>
         <div onClick={showMenuBarHandler}>
           <FiMenu id={styles.menuIcon} />

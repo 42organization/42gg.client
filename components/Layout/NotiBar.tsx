@@ -30,11 +30,13 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
   };
 
   return (
-    <div className={styles.shadow} onClick={showNotiBarHandler}>
-      <div className={styles.notiWrap} onClick={(e) => e.stopPropagation()}>
+    <div className={styles.backdrop} onClick={showNotiBarHandler}>
+      <div
+        className={styles.notiContainer}
+        onClick={(e) => e.stopPropagation()}
+      >
         <button onClick={allNotiDeleteHandler}>
-          <BsCheck2Square />
-          전체삭제
+          <BsCheck2Square /> 전체삭제
         </button>
         <div className={styles.notiFullContent}>
           {notiData.length &&

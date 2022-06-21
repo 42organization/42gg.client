@@ -44,7 +44,12 @@ export default function InputScoreModal({ gameId }: GameProps) {
 
   const enterHandler = () => {
     const { myScore, enemyScore } = result;
-    if (myScore + enemyScore > 3 || myScore === enemyScore || isNaN(myScore) || isNaN(enemyScore)) {
+    if (
+      myScore + enemyScore > 3 ||
+      myScore === enemyScore ||
+      isNaN(myScore) ||
+      isNaN(enemyScore)
+    ) {
       alert('정확한 점수를 입력해주세요.');
       return;
     }
@@ -71,7 +76,9 @@ export default function InputScoreModal({ gameId }: GameProps) {
   return (
     <div className={styles.backdrop}>
       <div className={styles.modalContainer}>
-        <div className={styles.phrase}>{onCheck ? '경기 결과' : '경기가 끝났다면 점수를 입력해주세요.'}</div>
+        <div className={styles.phrase}>
+          {onCheck ? '경기 결과' : '경기가 끝났다면 점수를 입력해주세요.'}
+        </div>
         <div className={styles.resultContainer}>
           <div className={styles.players}>
             <div className={styles.userInfo}>
@@ -93,23 +100,42 @@ export default function InputScoreModal({ gameId }: GameProps) {
           ) : (
             <div className={styles.finalScore}>
               <div>
-                <input id='myScore' name='myScore' onChange={inputScoreHandler} maxLength={1} />
+                <input
+                  id='myScore'
+                  name='myScore'
+                  onChange={inputScoreHandler}
+                  maxLength={1}
+                />
               </div>
               <div>:</div>
               <div>
-                <input id='enemyScore' name='enemyScore' onChange={inputScoreHandler} maxLength={1} />
+                <input
+                  id='enemyScore'
+                  name='enemyScore'
+                  onChange={inputScoreHandler}
+                  maxLength={1}
+                />
               </div>
             </div>
           )}
         </div>
         {onCheck ? (
           <div className={styles.submitButton}>
-            <input type='button' value='다시 입력하기' onClick={reEnterHandler} style={{ background: 'white', color: 'black' }} />
-            <input type='button' value='제출하기' onClick={submitResultHandler} />
+            <input
+              type='button'
+              value='다시 입력하기'
+              onClick={reEnterHandler}
+              style={{ background: 'white', color: 'black' }}
+            />
+            <input
+              type='button'
+              value='제출하기'
+              onClick={submitResultHandler}
+            />
           </div>
         ) : (
           <div className={styles.submitButton}>
-            <input type='button' value='확인' onClick={enterHandler} />
+            <input type='button' value='확 인' onClick={enterHandler} />
           </div>
         )}
       </div>

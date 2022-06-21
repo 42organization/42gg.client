@@ -1,64 +1,47 @@
 @import './common.scss';
 
 .backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: var(--modal-index);
+  @include backdrop;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modalContainer {
-  background: white;
-  border: solid 1px black;
-  border-radius: 2%;
-  position: aboslute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 30rem;
+  @include modalContainer(30rem);
+  font-size: $midium-font;
 }
 
 .resultContainer {
-  border: solid 1px black;
-  border-radius: 2%;
-  background: lightgray;
-  margin: 0 1rem;
+  border: solid 3px white;
+  border-radius: $small-radius;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: space-evenly;
   width: 20rem;
-  height: 20rem;
+  height: 17rem;
 }
 
 .players {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  font-size: $big-font;
 }
 
 .userInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 1.5rem;
+
   .userImage {
     background: white;
     border-radius: 50%;
-    border: solid 1px black;
     width: 5rem;
     height: 5rem;
-    margin: 1rem 0;
-  }
-  .userId {
-    font-size: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 5px 5px 6px $dark-gray;
   }
 }
 
@@ -68,26 +51,23 @@
   justify-content: space-evenly;
   height: 3rem;
   padding: auto;
-  div {
-    font-size: 1.2rem;
-    text-align: center;
-  }
+  font-size: $big-font;
+  text-align: center;
   input {
-    font-size: 1.2rem;
+    font-size: $big-font;
     text-align: center;
-    height: 2rem;
+    height: 2.5rem;
     width: 5rem;
   }
 }
 
 .submitButton {
+  cursor: pointer;
   input {
-    border-radius: 2%;
-    font-size: 1rem;
-    background: black;
-    color: white;
-    width: 8rem;
-    height: 3rem;
-    margin: 0 0.2rem;
+    @include button($btn-blue, white);
+    margin: 0 0.8rem;
+  }
+  :hover {
+    background: $dark-blue;
   }
 }
