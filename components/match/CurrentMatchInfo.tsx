@@ -29,7 +29,7 @@ export default function CurrentMatchInfo() {
   const onCancel = async () => {
     try {
       const res = await instance.delete(
-        `/pingpong/match/tables/${1}?slotId=${slotId}`
+        `/pingpong/match/tables/${1}/slots/${slotId}`
       );
       alert(res?.data.message);
       // 현재매치정보 삭제하기
