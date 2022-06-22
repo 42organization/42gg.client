@@ -1,17 +1,20 @@
 @import './common.scss';
 
-.shadow {
-  @include shadow;
+.backdrop {
+  @include backdrop;
 }
 
-.notiWrap {
+.notiContainer {
   @include menu-noti-Bar;
+  background: linear-gradient(to right bottom, $g2-top, $g2-bottom);
   margin-left: auto;
+  padding: 0.7rem;
+  button {
+    all: unset;
+    text-align: center;
+    border-radius: $small-radius;
+    background: linear-gradient(to bottom, white, $gray);
+    margin-bottom: 0.7rem;
+    padding: 0.2rem 0;
+  }
 }
-
-.delete {
-  margin: 0.5rem 0.5rem 0 auto;
-}
-
-// .notiFullContent {
-// }

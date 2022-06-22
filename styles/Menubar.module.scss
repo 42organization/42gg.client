@@ -1,20 +1,26 @@
 @import './common.scss';
 
-.shadow {
-  @include shadow;
+.backdrop {
+  @include backdrop;
 }
 
-.menuBarWrap {
+.menuContainer {
   @include menu-noti-Bar;
-  nav {
-    margin: 1rem 0.5rem 0 0;
-    font-size: $big-font;
+  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  padding: 5rem 2rem;
+  color: white;
+  text-shadow: 2px 2px 2px black;
+  .menu {
+    margin-bottom: 4rem;
+    font-size: $giant-font;
+    div {
+      margin-bottom: 1.5rem;
+    }
   }
-  li {
-    list-style: none;
-    margin: 1rem 0 1rem 0;
-  }
-  #subMenu {
-    font-size: $small-font;
+  .subMenu {
+    font-size: $midium-font;
+    div {
+      margin-bottom: 0.8rem;
+    }
   }
 }

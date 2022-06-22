@@ -1,31 +1,80 @@
-@mixin shadow {
-  position: fixed;
-  top: 3rem;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-}
+$giant-font: 1.5rem;
+$big-font: 1.2rem;
+$midium-font: 1rem;
+$small-font: 0.8rem;
+
+$small-radius: 0.5rem;
+$big-radius: 5rem;
+
+$pp-red: #de1825;
+$pp-pink: #ffc5c8;
+$pp-blue: #471df0;
+
+$light-gray: #f0f0f0;
+$gray: #dadada;
+$dark-gray: #676767;
+
+$btn-blue: #2d80ed;
+$dark-blue: #24098f;
+
+$g1-top: #8dbbf9;
+$g1-bottom: #f0b5f2;
+$g2-top: #c4fff8;
+$g2-bottom: #b5bbf2;
+
+$loser-red: #ff0303;
+$winner-blue: #040eff;
 
 @mixin menu-noti-Bar {
   z-index: 1 !important;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: 16rem;
+  width: 18rem;
   height: 100vh;
-  overflow: auto;
-  background-color: #ffff;
 }
 
 @mixin pageWrap {
-  margin: 1rem 2rem;
+  padding: 1rem 2rem;
+  background: white;
   // height: calc(
   //   100vh - 7rem
   // );
   // 전체 화면 크기에 - (헤더+푸터+페이지마진 등)을 계산한 값
-  background-color: #ffff;
 }
 
-$big-font: 1.3rem; // MenuBar
-$small-font: 0.8rem;
+@mixin button($btn-color, $txt-color) {
+  all: unset;
+  box-shadow: 5px 5px 6px $dark-gray;
+  border-radius: $small-radius;
+  width: 8rem;
+  height: 3rem;
+  background: $btn-color;
+  color: $txt-color;
+  font-size: $midium-font;
+  text-align: center;
+}
+
+@mixin backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--modal-index);
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+@mixin modalContainer($height) {
+  position: aboslute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: $small-radius;
+  padding: 1rem;
+  height: $height;
+  background: linear-gradient(to right bottom, $g2-top, $g2-bottom);
+  color: black;
+}
