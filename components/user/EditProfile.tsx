@@ -56,7 +56,7 @@ export default function EditProfile() {
     setIsEditProfile(false);
 
     try {
-      const res = await instance.post(`/pingpong/users/detail`, editedProfile);
+      const res = await instance.put(`/pingpong/users/detail`, editedProfile);
       alert(res?.data.message);
     } catch (e) {
       console.log(e);
