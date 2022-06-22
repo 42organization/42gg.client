@@ -8,7 +8,5 @@ export default function handler(
   const obj = {
     users: ['jabae', 'sujpark', 'daekim', 'kipark', 'jihyukim'],
   };
-  if (req.query.q !== '') res.status(200).json(obj);
-
   res.status(200).json(obj);
 }
