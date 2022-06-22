@@ -29,7 +29,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   useEffect(() => {
     if (token) localStorage.setItem('42gg-token', token);
-    if (localStorage.getItem('42gg-token')) setIsLoggedIn(true);
+    if (localStorage.getItem('42gg-token')) {
+      setIsLoggedIn(true);
+      getUserDataHandler();
+    }
   }, []);
 
   useEffect(() => {
@@ -39,26 +42,23 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }, [token]);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await instance.get(`/pingpong/users`);
-        setUserData(res?.data);
-        getLiveDataHandler(res?.data.userId);
-      } catch (e) {}
-    })();
-  }, []);
+    if (userData.userId) {
+      getLiveDataHandler(userData.userId);
+    }
+  }, [presentPath, userData]);
 
-  useEffect(() => {
-    getLiveDataHandler(userData.userId);
-  }, [presentPath]);
+  const getUserDataHandler = async () => {
+    try {
+      const res = await instance.get(`/pingpong/users`);
+      setUserData(res?.data);
+    } catch (e) {}
+  };
 
   const getLiveDataHandler = async (userId: string) => {
-    if (userId !== '') {
-      try {
-        const res = await instance.get(`/pingpong/users/${userId}/live`);
-        setLiveData(res?.data);
-      } catch (e) {}
-    }
+    try {
+      const res = await instance.get(`/pingpong/users/${userId}/live`);
+      setLiveData(res?.data);
+    } catch (e) {}
   };
 
   return (
