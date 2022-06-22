@@ -9,5 +9,5 @@ export const userState = atom<UserData>({
 
 export const liveState = atom<LiveData>({
   key: `liveState/${v1()}`,
-  default: { notiCount: 0, gameId: null, event: null },
+  default: { notiCount: 0, event: null },
 });

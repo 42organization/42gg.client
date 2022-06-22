@@ -5,7 +5,6 @@ export interface UserData {
 
 export interface LiveData {
   notiCount: number;
-  gameId: number | null;
   event: string | null;
 }
 

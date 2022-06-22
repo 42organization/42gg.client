@@ -1,12 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { SearchData } from '../../../../../types/mainType';
+import { LiveData } from '../../../../types/mainType';
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<SearchData | object>
+  res: NextApiResponse<LiveData | object>
 ) {
   const obj = {
-    users: ['jabae', 'sujpark', 'daekim', 'kipark', 'jihyukim'],
+    notiCount: 9,
+    event: 'match',
   };
   res.status(200).json(obj);
 }

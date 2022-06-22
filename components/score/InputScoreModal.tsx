@@ -3,11 +3,7 @@ import instance from '../../utils/axios';
 import { PlayerInfo, GameResult } from '../../types/scoreTypes';
 import styles from '../../styles/InputScoreModal.module.scss';
 
-type GameProps = {
-  gameId: number;
-};
-
-export default function InputScoreModal({ gameId }: GameProps) {
+export default function InputScoreModal() {
   const [myInfo, setMyInfo] = useState<PlayerInfo>({
     userId: '',
     userImageUri: '',

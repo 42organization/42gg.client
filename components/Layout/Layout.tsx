@@ -56,7 +56,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   const getLiveDataHandler = async (userId: string) => {
     try {
-      const res = await instance.get(`/pingpong/users/${userId}/live`);
+      const res = await instance.get(`/pingpong/users/live`);
       setLiveData(res?.data);
     } catch (e) {}
   };
@@ -74,9 +74,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
           /> */}
           <div className={styles.mainContent}>
             <Header />
-            {/* 목업 서버에 항상 gameId를 갖고 있어 서버 연결 후 주석 해제 예정 */}
-            {/* {liveData.gameId && <InputScoreModal gameId={liveData.gameId} />} */}
-            {/* {liveData.event === 'match' && <CurrentMatchInfo />} */}
+            {/* {liveData.event === 'game' && <InputScoreModal />}
+            {liveData.event === 'match' && <CurrentMatchInfo />} */}
             {presentPath !== '/match' && (
               <Link href='/match'>
                 <a className='matchingButton'>
