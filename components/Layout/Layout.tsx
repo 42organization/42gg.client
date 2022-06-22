@@ -29,7 +29,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   useEffect(() => {
     if (token) localStorage.setItem('42gg-token', token);
-    if (localStorage.getItem('42gg-token')) setIsLoggedIn(true);
+    if (localStorage.getItem('42gg-token')) {
+      setIsLoggedIn(true);
+      getUserDataHandler();
+    }
   }, []);
 
   useEffect(() => {
@@ -39,26 +42,23 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }, [token]);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await instance.get(`/pingpong/users`);
-        setUserData(res?.data);
-        getLiveDataHandler(res?.data.userId);
-      } catch (e) {}
-    })();
-  }, []);
+    if (userData.userId) {
+      getLiveDataHandler(userData.userId);
+    }
+  }, [presentPath, userData]);
 
-  useEffect(() => {
-    getLiveDataHandler(userData.userId);
-  }, [presentPath]);
+  const getUserDataHandler = async () => {
+    try {
+      const res = await instance.get(`/pingpong/users`);
+      setUserData(res?.data);
+    } catch (e) {}
+  };
 
   const getLiveDataHandler = async (userId: string) => {
-    if (userId !== '') {
-      try {
-        const res = await instance.get(`/pingpong/users/${userId}/live`);
-        setLiveData(res?.data);
-      } catch (e) {}
-    }
+    try {
+      const res = await instance.get(`/pingpong/users/live`);
+      setLiveData(res?.data);
+    } catch (e) {}
   };
 
   return (
@@ -74,9 +74,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
           /> */}
           <div className={styles.mainContent}>
             <Header />
-            {/* 목업 서버에 항상 gameId를 갖고 있어 서버 연결 후 주석 해제 예정 */}
-            {/* {liveData.gameId && <InputScoreModal gameId={liveData.gameId} />} */}
-            {/* {liveData.event === 'match' && <CurrentMatchInfo />} */}
+            {/* {liveData.event === 'game' && <InputScoreModal />}
+            {liveData.event === 'match' && <CurrentMatchInfo />} */}
             {presentPath !== '/match' && (
               <Link href='/match'>
                 <a className='matchingButton'>
