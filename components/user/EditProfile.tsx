@@ -37,16 +37,16 @@ export default function EditProfile() {
     }));
   }, [profileInfo]);
 
-  const inputChangeHandler = (
-    e:
-      | React.ChangeEvent<HTMLTextAreaElement>
-      | React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (e.target.name === 'statusMessage')
-      e.target.value = e.target.value.slice(0, CHAR_LIMIT);
+  const inputChangeHandler = ({
+    target: { name, value },
+  }:
+    | React.ChangeEvent<HTMLTextAreaElement>
+    | React.ChangeEvent<HTMLInputElement>) => {
+    if (name === 'statusMessage' && value.length > CHAR_LIMIT)
+      value = value.slice(0, CHAR_LIMIT);
     setEditedProfile((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
