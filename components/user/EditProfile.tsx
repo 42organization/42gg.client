@@ -4,7 +4,6 @@ import { profileInfoState, isEditProfileState } from '../../utils/recoil/user';
 import instance from '../../utils/axios';
 
 interface EditedProfile {
-  userImageUri: string;
   racketType: string;
   statusMessage: string;
 }
@@ -15,7 +14,6 @@ export default function EditProfile() {
   const setIsEditProfile = useSetRecoilState(isEditProfileState);
   const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
   const [editedProfile, setEditedProfile] = useState<EditedProfile>({
-    userImageUri: '',
     racketType: 'penholder',
     statusMessage: '',
   });
@@ -58,10 +56,7 @@ export default function EditProfile() {
     setIsEditProfile(false);
 
     try {
-      const res = await instance.post(
-        `/pingpong/users/${userId}/detail`,
-        editedProfile
-      );
+      const res = await instance.post(`/pingpong/users/detail`, editedProfile);
       alert(res?.data.message);
     } catch (e) {
       console.log(e);
