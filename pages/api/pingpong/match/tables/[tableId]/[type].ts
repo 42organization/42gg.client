@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { MatchData } from './../../../../../types/matchTypes';
+import { MatchData } from '../../../../../../types/matchTypes';
 
 function getTodayString() {
   const today = new Date();
@@ -195,7 +195,5 @@ export default function handler(
     res.status(200).json(obj);
   } else if (req.method === 'POST') {
     res.status(200).json({ message: '등록이 완료되었습니다.' });
-  } else if (req.method === 'DELETE') {
-    res.status(200).json({ message: '정상적으로 취소되었습니다.' });
   } else res.status(500).json({ message: '잘못된 요청입니다.' });
 }
