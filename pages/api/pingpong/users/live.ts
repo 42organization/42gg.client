@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { LiveData } from '../../../../../types/mainType';
+import { LiveData } from '../../../../types/mainType';
 
 export default function handler(
   req: NextApiRequest,
@@ -7,7 +7,6 @@ export default function handler(
 ) {
   const obj = {
     notiCount: 9,
-    gameId: 12,
     event: 'match',
   };
   res.status(200).json(obj);
