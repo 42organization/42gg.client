@@ -4,7 +4,8 @@ import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { userState, liveState } from '../../utils/recoil/main';
 import { UserData, LiveData } from '../../types/mainType';
-import InputScoreModal from '../score/InputScoreModal';
+import Modal from './Modal';
+import InputScore from '../score/InputScore';
 import CurrentMatchInfo from '../match/CurrentMatchInfo';
 import Header from './Header';
 import Footer from './Footer';
@@ -42,7 +43,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   useEffect(() => {
     if (userData.userId) {
-      getLiveDataHandler(userData.userId);
+      getLiveDataHandler();
     }
   }, [presentPath, userData]);
 
@@ -53,7 +54,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     } catch (e) {}
   };
 
-  const getLiveDataHandler = async (userId: string) => {
+  const getLiveDataHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/users/live`);
       setLiveData(res?.data);
@@ -66,7 +67,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
         <div className={styles.layoutContainer}>
           <div className={styles.mainContent}>
             <Header />
-            {liveData.event === 'game' && <InputScoreModal />}
+            {liveData.event === 'game' && (
+              <Modal>
+                <InputScore />
+              </Modal>
+            )}
             {/* {liveData.event === 'match' && <CurrentMatchInfo />} */}
             {presentPath !== '/match' && (
               <Link href='/match'>

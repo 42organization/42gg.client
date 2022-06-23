@@ -1,17 +1,5 @@
 @import './common.scss';
 
-.backdrop {
-  @include backdrop;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modalContainer {
-  @include modalContainer(30rem);
-  font-size: $midium-font;
-}
-
 .resultContainer {
   border: solid 3px white;
   border-radius: $small-radius;
@@ -19,7 +7,7 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: space-evenly;
-  width: 20rem;
+  width: 16.8rem;
   height: 17rem;
 }
 
