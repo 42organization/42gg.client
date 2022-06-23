@@ -7,3 +7,17 @@
 .mainContent {
   position: relative;
 }
+
+.matchingButton {
+  position: fixed;
+  bottom: 2rem;
+  right: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  font-size: 2.3rem;
+  background: white;
+}

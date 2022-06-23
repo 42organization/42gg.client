@@ -66,13 +66,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
         <div className={styles.layoutContainer}>
           <div className={styles.mainContent}>
             <Header />
-            {/* {liveData.event === 'game' && <InputScoreModal />}
-            {liveData.event === 'match' && <CurrentMatchInfo />} */}
+            {liveData.event === 'game' && <InputScoreModal />}
+            {/* {liveData.event === 'match' && <CurrentMatchInfo />} */}
             {presentPath !== '/match' && (
               <Link href='/match'>
-                <a className='matchingButton'>
-                  <RiPingPongFill />
-                </a>
+                <a className={styles.matchingButton}>🏓</a>
               </Link>
             )}
             {children}

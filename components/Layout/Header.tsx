@@ -37,7 +37,7 @@ export default function Header() {
   return (
     <div className={styles.headerContainer}>
       <div className={styles.headerWrap}>
-        <div onClick={showMenuBarHandler}>
+        <div className={styles.headerLeft} onClick={showMenuBarHandler}>
           <FiMenu id={styles.menuIcon} />
         </div>
         <div id={styles.logo} onClick={gotoHomeHandler}>
@@ -51,12 +51,9 @@ export default function Header() {
               <VscBell id={styles.notiIcon} />
             )}
           </div>
-          {userImg !== '' ? (
-            <img src={userImg} alt='prfImg' />
-          ) : (
-            <VscSmiley id={styles.userIcon} />
-          )}
-          {/* next js 에서 image는 다시 알아봐야 함 */}
+          <div id={styles.userImg}>
+            {/* <Image src={userImg} alt='prfImg' /> */}
+          </div>
         </div>
       </div>
       {showMenuBar && <MenuBar showMenuBarHandler={showMenuBarHandler} />}

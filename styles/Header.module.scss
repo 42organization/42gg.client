@@ -1,30 +1,36 @@
+@import './common.scss';
+
 .headerWrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 3rem;
-  margin: 0 1rem;
+  height: 4rem;
+  margin: 0 0.7rem;
   color: white;
-  #menuIcon {
-    font-size: 1.5rem;
-    margin-right: 3.2rem;
-  }
-  #logo {
-    font-size: 1.1rem;
-  }
-
-  .headerRight {
+  font-size: $giant-font;
+  .headerLeft {
+    flex: 2;
     display: flex;
     align-items: center;
+  }
+  #logo {
+    flex: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .headerRight {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: end;
     #notiIcon {
-      margin: 0.2rem 0.5rem 0 0.5rem;
+      display: flex;
+      align-items: center;
+      margin-right: 0.5rem;
       font-size: 1.5rem;
     }
-    #userIcon {
-      height: 1.8rem;
-      width: 1.8rem;
-    }
-    img {
+    #userImg {
       height: 2.2rem;
       width: 2.2rem;
       border: solid 1px white;

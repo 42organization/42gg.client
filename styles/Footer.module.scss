@@ -1,0 +1,11 @@
+@import './common.scss';
+
+.footerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  font-size: $small-font;
+  color: white;
+}
