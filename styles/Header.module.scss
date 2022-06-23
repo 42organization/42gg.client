@@ -3,7 +3,8 @@
   justify-content: space-between;
   align-items: center;
   height: 3rem;
-  margin: 0 1rem 0;
+  margin: 0 1rem;
+  color: white;
   #menuIcon {
     font-size: 1.5rem;
     margin-right: 3.2rem;
@@ -26,7 +27,7 @@
     img {
       height: 2.2rem;
       width: 2.2rem;
-      border: solid 2px #000;
+      border: solid 1px white;
       border-radius: 50%;
     }
   }

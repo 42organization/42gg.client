@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
@@ -65,13 +64,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
     <>
       {isLoggedIn ? (
         <div className={styles.layoutContainer}>
-          {/* <Image
-            id={styles.background}
-            width='100vw'
-            height='100vh'
-            src='/../../public/background_img.png'
-            alt='background'
-          /> */}
           <div className={styles.mainContent}>
             <Header />
             {/* {liveData.event === 'game' && <InputScoreModal />}
