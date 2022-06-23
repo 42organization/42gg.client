@@ -19,27 +19,3 @@ a {
 * {
   box-sizing: border-box;
 }
-
-/* 추가한 것 */
-
-.matchingButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 85vh;
-  left: 75vw;
-  height: 4rem;
-  width: 4rem;
-  border: solid 2px #000;
-  border-radius: 50%;
-  font-size: 2rem;
-}
-
-footer {
-  height: 2rem;
-  padding: 0.2rem;
-  text-align: center;
-  font-size: 8px;
-  background-color: #f5f5f5;
-}

@@ -36,12 +36,7 @@ $winner-blue: #040eff;
 }
 
 @mixin pageWrap {
-  padding: 1rem 2rem;
-  // background: white;
-  // height: calc(
-  //   100vh - 7rem
-  // );
-  // 전체 화면 크기에 - (헤더+푸터+페이지마진 등)을 계산한 값
+  padding: 2rem 1.5rem;
 }
 
 @mixin button($btn-color, $txt-color) {
