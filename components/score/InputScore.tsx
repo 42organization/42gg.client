@@ -1,51 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import instance from '../../utils/axios';
 import { PlayerInfo, GameResult } from '../../types/scoreTypes';
-import styles from '../../styles/InputScoreModal.module.scss';
+import styles from '../../styles/InputScore.module.scss';
+
+const defaultPlayersInfo: PlayerInfo[] = [{ userId: '', userImageUri: '' }];
+const defaultResult: GameResult = { myTeamScore: '', enemyTeamScore: '' };
 
 export default function InputScoreModal() {
-  const [myInfo, setMyInfo] = useState<PlayerInfo>({
-    userId: '',
-    userImageUri: '',
-  });
-  const [enemyInfo, setEnemyInfo] = useState<PlayerInfo>({
-    userId: '',
-    userImageUri: '',
-  });
-  const [result, setResult] = useState<GameResult>({
-    myScore: 42,
-    enemyScore: 42,
-  });
+  const [myTeamInfo, setMyTeamInfo] =
+    useState<PlayerInfo[]>(defaultPlayersInfo);
+  const [enemyTeamInfo, setEnemyTeamInfo] =
+    useState<PlayerInfo[]>(defaultPlayersInfo);
+  const [result, setResult] = useState<GameResult>(defaultResult);
   const [onCheck, setOnCheck] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
       try {
         const res = await instance.get(`/pingpong/games/result`);
-        setMyInfo(res?.data.myTeam[0]);
-        setEnemyInfo(res?.data.enemyTeam[0]);
+        setMyTeamInfo(res?.data.myTeam);
+        setEnemyTeamInfo(res?.data.enemyTeam);
       } catch (e) {
-        // console.log(e);
+        //console.log(e);
       }
     })();
   }, []);
 
-  const inputScoreHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.target.value = e.target.value.replace(/[^0-2]/g, '');
+  const inputScoreHandler = ({
+    target: { name, value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    value = value.replace(/[^0-2]/g, '');
     setResult((prev) => ({
       ...prev,
-      [e.target.name]: parseInt(e.target.value),
+      [name]: value === '' ? value : parseInt(value),
     }));
   };
 
+  const isCorrectScore = (score1: number | '', score2: number | '') => {
+    if (score1 === '' || score2 === '') return false;
+    if (score1 + score2 > 3) return false;
+    if (score1 === score2) return false;
+    return true;
+  };
+
   const enterHandler = () => {
-    const { myScore, enemyScore } = result;
-    if (
-      myScore + enemyScore > 3 ||
-      myScore === enemyScore ||
-      isNaN(myScore) ||
-      isNaN(enemyScore)
-    ) {
+    const { myTeamScore, enemyTeamScore } = result;
+    if (!isCorrectScore(myTeamScore, enemyTeamScore)) {
       alert('정확한 점수를 입력해주세요.');
       return;
     }
@@ -53,7 +53,7 @@ export default function InputScoreModal() {
   };
 
   const reEnterHandler = () => {
-    setResult((prev) => ({ ...prev, myScore: 42, enemyScore: 42 }));
+    setResult((prev) => ({ ...prev, myScore: '', enemyScore: '' }));
     setOnCheck(false);
   };
 
@@ -77,27 +77,40 @@ export default function InputScoreModal() {
       <div className={styles.resultContainer}>
         <div className={styles.players}>
           <div className={styles.userInfo}>
-            <div className={styles.userImage}></div>
-            <div className={styles.userId}>{myInfo.userId}</div>
+            {myTeamInfo.map((userInfo) => (
+              <div key={userInfo.userId} className={styles.userImage}></div>
+            ))}
+            {myTeamInfo.map((userInfo) => (
+              <div key={userInfo.userId} className={styles.userId}>
+                {userInfo.userId}
+              </div>
+            ))}
           </div>
           <div>vs</div>
           <div className={styles.userInfo}>
-            <div className={styles.userImage}></div>
-            <div className={styles.userId}>{enemyInfo.userId}</div>
+            {enemyTeamInfo.map((userInfo) => (
+              <div key={userInfo.userId} className={styles.userImage}></div>
+            ))}
+            {enemyTeamInfo.map((userInfo) => (
+              <div key={userInfo.userId} className={styles.userId}>
+                {userInfo.userId}
+              </div>
+            ))}
           </div>
         </div>
         {onCheck ? (
           <div className={styles.finalScore}>
-            <div>{result.myScore}</div>
+            <div>{result.myTeamScore}</div>
             <div>:</div>
-            <div>{result.enemyScore}</div>
+            <div>{result.enemyTeamScore}</div>
           </div>
         ) : (
           <div className={styles.finalScore}>
             <div>
               <input
-                id='myScore'
-                name='myScore'
+                id='myTeamScore'
+                name='myTeamScore'
+                value={result.myTeamScore}
                 onChange={inputScoreHandler}
                 maxLength={1}
               />
@@ -105,8 +118,9 @@ export default function InputScoreModal() {
             <div>:</div>
             <div>
               <input
-                id='enemyScore'
-                name='enemyScore'
+                id='enemyTeamScore'
+                name='enemyTeamScore'
+                value={result.enemyTeamScore}
                 onChange={inputScoreHandler}
                 maxLength={1}
               />
