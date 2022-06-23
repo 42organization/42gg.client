@@ -44,12 +44,8 @@ export default function Header() {
           Logo
         </div>
         <div className={styles.headerRight}>
-          <div onClick={showNotiBarHandler}>
-            {liveData.notiCount ? (
-              <VscBellDot id={styles.notiIcon} />
-            ) : (
-              <VscBell id={styles.notiIcon} />
-            )}
+          <div id={styles.notiIcon} onClick={showNotiBarHandler}>
+            {liveData.notiCount ? <VscBellDot /> : <VscBell />}
           </div>
           <div id={styles.userImg}>
             {/* <Image src={userImg} alt='prfImg' /> */}
