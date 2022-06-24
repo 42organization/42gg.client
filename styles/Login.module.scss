@@ -1,0 +1,30 @@
+@import './common.scss';
+
+.loginContainer {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginTitle {
+  font-size: 5rem;
+  text-align: center;
+  color: white;
+  font-weight: 800;
+  letter-spacing: 0.2rem;
+  text-shadow: -0.1rem 0 black, 0 0.1rem black, 0.1rem 0 black, 0 -0.1rem black,
+    0.35rem 0.35rem 0px $btn-blue;
+}
+
+.loginButton {
+  @include button($btn-blue, white);
+  box-shadow: 0.1rem 0.1rem 0.3rem $pp-blue;
+  width: 13rem;
+  height: 3.5rem;
+  font-size: $big-font;
+  font-weight: 500;
+  margin: 3rem 0 5rem 0;
+}

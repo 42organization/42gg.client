@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
 import { myRankPosition, isScrollState } from '../../utils/recoil/myRank';
-import styles from '../../styles/RankList.module.css';
+import styles from '../../styles/RankList.module.scss';
 
 export default function MyRank() {
   const router = useRouter();
@@ -14,9 +14,9 @@ export default function MyRank() {
   };
 
   return (
-    <div>
+    <div className={styles.myRankContainer}>
       <div className={styles.myRank} onClick={onClick}>
-        {myRank && `지금 나의 🏆 랭킹 ${myRank}`}
+        {myRank && `지금 나의 👑 랭킹 ${myRank}`}
       </div>
     </div>
   );

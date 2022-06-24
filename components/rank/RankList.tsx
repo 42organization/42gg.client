@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import styles from '../../styles/RankList.module.css';
+import styles from '../../styles/RankList.module.scss';
 import { Rank, RankData } from '../../types/rankTypes';
 import instance from '../../utils/axios';
 import { useRecoilState } from 'recoil';
@@ -51,9 +51,10 @@ export default function RankList() {
 
   return router.asPath !== '/rank' ? (
     <div>
-      <div className={styles.container}>
+      <div className={styles.mainContainer}>
+        <div className={styles.mainTitle}>Champion</div>
         {rankData?.rankList.map((item: Rank) => (
-          <RankItem key={item.userId} user={item} isMain={true} />
+          <RankItem key={item.rank} user={item} isMain={true} />
         ))}
       </div>
     </div>
@@ -62,10 +63,10 @@ export default function RankList() {
       <div className={styles.title}>Ranking</div>
       <div className={styles.container}>
         <div className={styles.division}>
-          <div className={styles.rank}>랭킹</div>
-          <div className={styles.userId}>유저 (점수)</div>
-          <div className={styles.statusMessage}>상태메시지</div>
-          <div className={styles.winRate}>승률</div>
+          <div className={styles.divItem}>랭킹</div>
+          <div className={styles.divItem}>intra ID (점수)</div>
+          <div className={styles.divItem}>상태메시지</div>
+          <div className={styles.divItem}>승률</div>
         </div>
         {rankData?.rankList.map((item: Rank) => (
           <RankItem key={item.userId} user={item} isMain={false} />

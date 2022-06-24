@@ -32,13 +32,6 @@ export default function handler(
         statusMessage: '비쥬얼 리드',
         winRate: 60,
       },
-      {
-        rank: 4,
-        userId: 'jihyukim',
-        ppp: 70,
-        statusMessage: '돌아온 미국인',
-        winRate: 42,
-      },
     ],
   };
   res.status(200).json(obj);

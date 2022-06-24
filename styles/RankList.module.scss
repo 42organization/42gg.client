@@ -1,0 +1,188 @@
+@import './common.scss';
+
+/* 나의 랭킹 */
+.myRankContainer {
+  width: flex;
+  height: 3rem;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  line-height: middle;
+  background: rgba(#fff, 0.6);
+}
+
+.myRank {
+  font-size: $midium-font;
+  color: white;
+  text-shadow: 0.1rem 0.1rem 0.1rem black;
+  text-align: center;
+}
+
+/* Ranking 타이틀 */
+.title {
+  width: flex;
+  font-size: 2rem;
+  margin-top: 1rem;
+  text-align: center;
+  color: white;
+  font-weight: 800;
+  text-shadow: -0.1rem 0 black, 0 0.1rem black, 0.1rem 0 black, 0 -0.1rem black,
+    0.25rem 0.25rem 0px $pp-red;
+}
+
+.container {
+  width: flex;
+  font-size: $small-font;
+  padding: 1.5rem;
+  align-items: center;
+}
+
+/* Rank List 구분 */
+.division {
+  display: grid;
+  grid-template-columns: 10% 27% auto 10%;
+  background: $pp-red;
+  height: 2.7rem;
+  padding: 0.28rem;
+  font-weight: 700;
+  border-radius: $big-radius;
+  text-align: center;
+  color: white;
+  font-family: 'Roboto';
+  align-items: center;
+}
+
+.divItem {
+  margin: 0.6rem 0.2rem;
+}
+
+/* RankList */
+.oddPerson {
+  display: grid;
+  grid-template-columns: 10% 27% auto 10%;
+  background: white;
+  width: flex;
+  height: 2.3rem;
+  padding: 0.21rem;
+  border-radius: $big-radius;
+  color: $dark-gray;
+  font-family: 'Roboto';
+  text-align: center;
+}
+
+.evenPerson {
+  display: grid;
+  grid-template-columns: 10% 27% auto 10%;
+  background: $gray;
+  width: flex;
+  height: 2.3rem;
+  padding: 0.21rem;
+  border-radius: $big-radius;
+  color: $dark-gray;
+  font-family: 'Roboto';
+  text-align: center;
+}
+
+.myPerson {
+  display: grid;
+  grid-template-columns: 10% 27% auto 10%;
+  background: $g1-bottom;
+  width: flex;
+  height: 2.3rem;
+  padding: 0.21rem;
+  border: 0.07rem solid $pp-red;
+  border-radius: $big-radius;
+  font-family: 'Roboto';
+  text-align: center;
+}
+
+.topRank {
+  margin: 0.6rem 0.2rem;
+  font-weight: 700;
+  color: $loser-red;
+}
+
+.rank {
+  margin: 0.6rem 0.2rem;
+  color: $dark-gray;
+}
+
+.userId {
+  margin: 0.6rem 0.1rem;
+  font-weight: 700;
+  color: black;
+}
+
+.ppp {
+  font-weight: 400;
+  font-size: 0.7rem;
+  color: $dark-gray;
+}
+
+.statusMessage {
+  margin: 0.6rem 0.2rem;
+  color: $dark-gray;
+}
+
+.winRate {
+  margin: 0.6rem 0.2rem;
+  font-weight: 600;
+  color: blue;
+}
+
+/* Main */
+
+.mainContainer {
+  font-size: $small-font;
+  padding: 0.5rem;
+}
+
+.mainTitle {
+  border-radius: $big-radius;
+  background: $pp-red;
+  padding: 0.4rem;
+  height: 2.7rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 800;
+  text-shadow: -0.1rem 0 black, 0 0.1rem black, 0.1rem 0 black, 0 -0.1rem black;
+}
+
+.mainPerson {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  background: $pp-pink;
+  margin-top: 0.2rem;
+  height: 2.3rem;
+  padding: 0.21rem;
+  font-family: 'Roboto';
+  border-radius: $big-radius;
+}
+
+.mainRank {
+  margin: 0.6rem 0.2rem;
+  text-align: center;
+  font-weight: 900;
+  color: $pp-red;
+}
+
+.mainUserId {
+  margin: 0.6rem 0.2rem;
+  text-align: left;
+  font-weight: 900;
+  color: black;
+}
+
+.mainPpp {
+  font-weight: 500;
+  font-size: 0.7rem;
+  color: $dark-gray;
+}
+
+.mainWinRate {
+  margin: 0.6rem 0.2rem;
+  text-align: center;
+  font-weight: 600;
+  color: blue;
+}
