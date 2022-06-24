@@ -13,9 +13,9 @@ export default function GameResultBigScore({
   team2,
 }: gameResultTypes) {
   return (
-    <div className={styles.scoreBoard}>
-      <div>{status}</div>
-      <div>
+    <div className={styles.bigScoreBoard}>
+      <div className={styles.gameStatus}>{status}</div>
+      <div className={styles.gameScore}>
         {team1.score} : {team2.score}
       </div>
     </div>

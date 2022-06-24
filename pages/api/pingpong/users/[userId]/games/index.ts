@@ -1,17 +1,18 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Game, Team, Player } from '../../../../types/gameTypes';
+import { Game, Team, Player } from '../../../../../../types/gameTypes';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (
-    typeof req.query.pageParam !== 'string' ||
-    typeof req.query.count !== 'string'
-  ) {
+  console.log(typeof req.query.pageParam);
+  if (typeof req.query.pageParam !== 'string') {
+    return;
+  }
+  if (typeof req.query.count !== 'string') {
     return;
   }
   const lastGameId = parseInt(req.query.pageParam);
   const count = parseInt(req.query.count);
-  let i = 0;
+  let i = 1;
   const players: Player[] = [
     {
       userId: 'kipark',
@@ -199,61 +200,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       team1: teams[2],
       team2: teams[3],
     },
-    {
-      gameId: 17,
-      time: '12시 30분',
-      status: 'end',
-      type: '단식',
-      team1: teams[2],
-      team2: teams[3],
-    },
-    {
-      gameId: 18,
-      time: '12시 30분',
-      status: 'end',
-      type: '단식',
-      team1: teams[2],
-      team2: teams[3],
-    },
-    {
-      gameId: 19,
-      time: '12시 30분',
-      status: 'end',
-      type: '단식',
-      team1: teams[2],
-      team2: teams[3],
-    },
-    {
-      gameId: 20,
-      time: '12시 30분',
-      status: 'end',
-      type: '단식',
-      team1: teams[2],
-      team2: teams[3],
-    },
-    {
-      gameId: 21,
-      time: '12시 30분',
-      status: 'end',
-      type: '단식',
-      team1: teams[2],
-      team2: teams[3],
-    },
-    {
-      gameId: 22,
-      time: '12시 30분',
-      status: 'end',
-      type: '단식',
-      team1: teams[2],
-      team2: teams[3],
-    },
   ];
   const gamese = games.filter(
-    (item) => i++ < count + lastGameId && lastGameId < item.gameId
+    (item) => i++ < count && lastGameId < item.gameId
   );
   const objs = {
-    lastGameId: lastGameId + count,
-    games: gamese,
+    lastGameId,
+    games: games,
   };
   res.status(200).json(objs);
 }

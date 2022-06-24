@@ -8,15 +8,10 @@ type gameResultTypes = {
 
 export default function GameResultBigTeam({ team, userLeft }: gameResultTypes) {
   return (
-    <div className={styles.userInfo}>
+    <div className={styles.smallUserInfo}>
       <div className={userLeft ? styles.smallLeft : styles.smallRight}>
-        <div className={styles.userImage}>
-          {team.players.map((player) => (
-            <div key={player.userId}>{player.userId}</div>
-          ))}
-        </div>
-
-        <span>
+        <span className={styles.userImage}></span>
+        <span className={styles.user}>
           {team.players.map((player) => (
             <div key={player.userId}>{player.userId}</div>
           ))}

@@ -15,7 +15,7 @@ export default function GameResultList({ path }: gameResultTypes) {
   const [clickedItemId, setClickedItemId] =
     useRecoilState<number>(clickedGameItem);
   const [lastGameId, setLastGameId] = useState<number>();
-  const infResult = infScroll(path, false);
+  const infResult = infScroll(path);
   const { data, fetchNextPage, status } = infResult;
   const router = useRouter();
 

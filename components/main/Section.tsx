@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from '../../styles/Section.module.scss';
-import GameResultPath from '../game/GameResultPath';
+import GameResult from '../game/GameResult';
 import RankList from '../rank/RankList';
 
 type SectionProps = {
@@ -21,7 +21,7 @@ export default function Section({ path }: SectionProps) {
 function sectionRouter(path: string) {
   switch (path) {
     case '/game':
-      return <GameResultPath />;
+      return <GameResult />;
     case '/rank':
       return <RankList />;
   }

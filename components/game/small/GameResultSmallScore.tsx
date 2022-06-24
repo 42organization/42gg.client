@@ -11,8 +11,8 @@ export default function GameResultSmallScore({
   team2,
 }: gameResultTypes) {
   return (
-    <div className={styles.userInfo}>
-      <div className={styles.scoreBoard}>
+    <div>
+      <div className={styles.smallScoreBoard}>
         {team1.score} : {team2.score}
       </div>
     </div>
