@@ -3,6 +3,8 @@
 .layoutContainer {
   background-image: url('../public/background_img.png');
   background-size: cover;
+  overflow-y: scroll;
+  height: 100vh;
 }
 .mainContent {
   position: relative;
