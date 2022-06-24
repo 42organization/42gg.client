@@ -49,8 +49,6 @@ export default function RankList() {
     router.push(`rank`);
   };
 
-  console.log(router.asPath);
-
   return router.asPath !== '/rank' ? (
     <div>
       <div className={styles.mainContainer}>
@@ -65,10 +63,10 @@ export default function RankList() {
       <div className={styles.title}>Ranking</div>
       <div className={styles.container}>
         <div className={styles.division}>
-          <div className={styles.divRank}>랭킹</div>
-          <div className={styles.divUserId}>intra ID (점수)</div>
-          <div className={styles.divStatusMessage}>상태메시지</div>
-          <div className={styles.divWinRate}>승률</div>
+          <div className={styles.divItem}>랭킹</div>
+          <div className={styles.divItem}>intra ID (점수)</div>
+          <div className={styles.divItem}>상태메시지</div>
+          <div className={styles.divItem}>승률</div>
         </div>
         {rankData?.rankList.map((item: Rank) => (
           <RankItem key={item.userId} user={item} isMain={false} />

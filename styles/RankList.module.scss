@@ -7,7 +7,7 @@
   padding: 0.8rem;
   margin-top: 0.5rem;
   line-height: middle;
-  background-color: rgba(222, 222, 222, 0.6);
+  background: rgba(#fff, 0.6);
 }
 
 .myRank {
@@ -40,7 +40,7 @@
 .division {
   display: grid;
   grid-template-columns: 10% 27% auto 10%;
-  background-color: $pp-red;
+  background: $pp-red;
   height: 2.7rem;
   padding: 0.28rem;
   font-weight: 700;
@@ -48,21 +48,10 @@
   text-align: center;
   color: white;
   font-family: 'Roboto';
+  align-items: center;
 }
 
-.divRank {
-  margin: 0.6rem 0.2rem;
-}
-
-.divUserId {
-  margin: 0.6rem 0.2rem;
-}
-
-.divStatusMessage {
-  margin: 0.6rem 0.2rem;
-}
-
-.divWinRate {
+.divItem {
   margin: 0.6rem 0.2rem;
 }
 
@@ -70,7 +59,7 @@
 .oddPerson {
   display: grid;
   grid-template-columns: 10% 27% auto 10%;
-  background-color: white;
+  background: white;
   width: flex;
   height: 2.3rem;
   padding: 0.21rem;
@@ -83,7 +72,7 @@
 .evenPerson {
   display: grid;
   grid-template-columns: 10% 27% auto 10%;
-  background-color: $gray;
+  background: $gray;
   width: flex;
   height: 2.3rem;
   padding: 0.21rem;
@@ -96,7 +85,7 @@
 .myPerson {
   display: grid;
   grid-template-columns: 10% 27% auto 10%;
-  background-color: $g1-bottom;
+  background: $g1-bottom;
   width: flex;
   height: 2.3rem;
   padding: 0.21rem;
@@ -149,7 +138,7 @@
 
 .mainTitle {
   border-radius: $big-radius;
-  background-color: $pp-red;
+  background: $pp-red;
   padding: 0.4rem;
   height: 2.7rem;
   margin-top: 0.5rem;
@@ -163,7 +152,7 @@
 .mainPerson {
   display: grid;
   grid-template-columns: 25% 50% 25%;
-  background-color: $pp-pink;
+  background: $pp-pink;
   margin-top: 0.2rem;
   height: 2.3rem;
   padding: 0.21rem;

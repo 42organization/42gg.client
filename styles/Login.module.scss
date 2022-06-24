@@ -21,9 +21,9 @@
 
 .loginButton {
   @include button($btn-blue, white);
-  box-shadow: 0.2rem 0.2rem 0.4rem $pp-blue;
+  box-shadow: 0.1rem 0.1rem 0.3rem $pp-blue;
   width: 13rem;
-  height: 3.7rem;
+  height: 3.5rem;
   font-size: $big-font;
   font-weight: 500;
   margin: 3rem 0 5rem 0;
