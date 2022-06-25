@@ -42,6 +42,13 @@ $winner-blue: #040eff;
   padding: 2rem 1.5rem;
 }
 
+@mixin logoTitle($shadow) {
+  color: #fff;
+  letter-spacing: 0.1rem;
+  font-family: $title-font;
+  text-shadow: $text-shadow, $shadow $shadow 0 $btn-blue;
+}
+
 @mixin pageTitle {
   margin: 0 0 1.5rem 0;
   color: #fff;

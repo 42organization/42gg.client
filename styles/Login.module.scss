@@ -10,13 +10,8 @@
 }
 
 .loginTitle {
+  @include logoTitle(0.4rem);
   font-size: 5rem;
-  text-align: center;
-  color: white;
-  font-weight: 800;
-  letter-spacing: 0.2rem;
-  text-shadow: -0.1rem 0 black, 0 0.1rem black, 0.1rem 0 black, 0 -0.1rem black,
-    0.35rem 0.35rem 0px $btn-blue;
 }
 
 .loginButton {

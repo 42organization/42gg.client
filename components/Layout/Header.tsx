@@ -41,7 +41,7 @@ export default function Header() {
           <FiMenu id={styles.menuIcon} />
         </div>
         <div id={styles.logo} onClick={gotoHomeHandler}>
-          Logo
+          42GG
         </div>
         <div className={styles.headerRight}>
           <div id={styles.notiIcon} onClick={showNotiBarHandler}>
