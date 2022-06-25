@@ -1,0 +1,48 @@
+@import '../common.scss';
+
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  height: 17rem;
+}
+
+.icon {
+  @include center;
+  font-size: $giant-giant-font;
+  margin-bottom: 1rem;
+}
+
+.timeString {
+  @include center;
+  font-size: $giant-font;
+  margin-bottom: 1rem;
+}
+
+.string {
+  @include center;
+  font-size: $big-font;
+}
+
+.submitButton {
+  @include button($btn-blue, white, 6rem);
+  margin: 0 0.5rem 0 0;
+  :hover {
+    background: $dark-blue;
+  }
+}
+
+.cancelButton {
+  @include button(white, black, 6rem);
+  :hover {
+    background: $dark-blue;
+  }
+}
