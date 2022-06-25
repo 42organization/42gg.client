@@ -6,6 +6,9 @@ $small-font: 0.8rem;
 $small-radius: 0.5rem;
 $big-radius: 5rem;
 
+$title-font: 'Alfa Slab One', cursive;
+$text-shadow: 0.1rem 0 #000, 0 0.1rem #000, -0.1rem 0 #000, 0 -0.1rem #000;
+
 $pp-red: #de1825;
 $pp-pink: #ffc5c8;
 $pp-blue: #471df0;
@@ -31,12 +34,22 @@ $winner-blue: #040eff;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: 18rem;
+  width: 16rem;
   height: 100vh;
 }
 
 @mixin pageWrap {
   padding: 2rem 1.5rem;
+}
+
+@mixin pageTitle {
+  margin: 0 0 1.5rem 0;
+  color: #fff;
+  text-align: center;
+  font-size: 2.5rem;
+  letter-spacing: 0.1rem;
+  font-family: $title-font;
+  text-shadow: $text-shadow, 0.3rem 0.3rem 0 $pp-red;
 }
 
 @mixin button($btn-color, $txt-color) {
