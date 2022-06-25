@@ -20,7 +20,7 @@ export default function handler(
       },
       {
         rank: 2,
-        userId: 'sujpakr',
+        userId: 'sujpark',
         ppp: 90,
         statusMessage: '멋쟁이 PM',
         winRate: 80,

@@ -23,7 +23,7 @@ export default function RankItem({ user, isMain }: RankType) {
             <span>{userId}</span>{' '}
             <span className={styles.mainPpp}>({ppp})</span>
           </div>
-          <div className={styles.mainWinRate}>{winRate}</div>
+          <div className={styles.mainWinRate}>{winRate}%</div>
         </div>
       ) : (
         <div
@@ -35,7 +35,7 @@ export default function RankItem({ user, isMain }: RankType) {
             <span>{userId}</span> <span className={styles.ppp}>({ppp})</span>
           </div>
           <div className={styles.statusMessage}>{statusMessage}</div>
-          <div className={styles.winRate}>{winRate}</div>
+          <div className={styles.winRate}>{winRate}%</div>
         </div>
       )}
     </Link>
