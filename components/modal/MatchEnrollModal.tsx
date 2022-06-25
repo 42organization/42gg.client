@@ -3,7 +3,7 @@ import { EnrollInfo } from '../../types/matchTypes';
 import instance from '../../utils/axios';
 import { useRecoilState } from 'recoil';
 import { dateToString } from '../../utils/handleTime';
-import Modal from '../Layout/Modal';
+import Modal from './Modal';
 import styles from '../../styles/match/MatchEnroll.module.scss';
 
 export default function MatchEnrollModal() {

@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { userState, liveState } from '../../utils/recoil/main';
 import { UserData, LiveData } from '../../types/mainType';
-import Modal from './Modal';
-import InputScore from '../score/InputScore';
+import Modal from '../modal/Modal';
+import InputScore from '../modal/InputScore';
 import CurrentMatchInfo from './CurrentMatchInfo';
 import Header from './Header';
 import Footer from './Footer';
@@ -62,7 +62,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   };
 
   return (
-    <div className={styles.layoutContainer}>
+    <div className={styles.container}>
       {isLoggedIn ? (
         <div className={styles.mainContent}>
           <Header />
