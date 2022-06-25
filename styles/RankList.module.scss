@@ -84,7 +84,7 @@
   background: $g1-bottom;
   width: flex;
   height: 2.3rem;
-  padding: 0.21rem;
+  padding: 0.15rem;
   border: 0.07rem solid $pp-red;
   border-radius: $big-radius;
   font-family: 'Roboto';
@@ -128,15 +128,15 @@
 /* Main */
 
 .mainContainer {
-  font-size: $small-font;
+  font-size: $midium-font;
   margin: 0.2rem;
 }
 
 .mainTitle {
   border-radius: $big-radius;
   background: $pp-red;
-  padding: 0.4rem;
-  height: 2.7rem;
+  padding: 0.45rem;
+  height: 2.9rem;
   text-align: center;
   font-size: 1.5rem;
   color: white;
@@ -150,7 +150,7 @@
   grid-template-columns: 25% 50% 25%;
   background: $pp-pink;
   margin-top: 0.2rem;
-  height: 2.3rem;
+  height: 2.5rem;
   padding: 0.21rem;
   font-family: 'Roboto';
   border-radius: $big-radius;
@@ -172,7 +172,7 @@
 
 .mainPpp {
   font-weight: 500;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   color: $dark-gray;
 }
 
