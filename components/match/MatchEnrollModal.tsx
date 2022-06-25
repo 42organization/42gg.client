@@ -38,11 +38,11 @@ export default function MatchEnrollModal() {
           <div className={styles.string}>경기에 참여하시겠습니까?</div>
         </div>
         <div>
-          <button className={styles.submitButton} onClick={onEnroll}>
-            확인
-          </button>
           <button className={styles.cancelButton} onClick={onCancel}>
             취소
+          </button>
+          <button className={styles.submitButton} onClick={onEnroll}>
+            확인
           </button>
         </div>
       </div>

@@ -84,17 +84,3 @@ $winner-blue: #040eff;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
 }
-
-@mixin modalContainer {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: $small-radius;
-  padding: 1rem;
-  // background: linear-gradient(to right bottom, $g2-top, $g2-bottom);
-  background: #676767;
-  width: 85%;
-  color: white;
-}
