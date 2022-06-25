@@ -59,8 +59,8 @@ export default function RankList() {
       </div>
     </div>
   ) : (
-    <>
-      <div className={styles.title}>Ranking</div>
+    <div className={styles.pageWrap}>
+      <h1 className={styles.title}>Ranking</h1>
       <div className={styles.container}>
         <div className={styles.division}>
           <div className={styles.divItem}>랭킹</div>
@@ -77,6 +77,6 @@ export default function RankList() {
           pageChangeHandler={pageChangeHandler}
         />
       </div>
-    </>
+    </div>
   );
 }

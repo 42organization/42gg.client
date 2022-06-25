@@ -14,6 +14,7 @@
     align-items: center;
   }
   #logo {
+    @include logoTitle(0.25rem);
     flex: 5;
     display: flex;
     align-items: center;
