@@ -13,14 +13,8 @@
   margin: 0.5rem 0;
 }
 
-$text-shadow: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black, 0 -0.1rem black;
-
 .title {
-  color: white;
-  text-align: center;
-  text-shadow: $text-shadow, 0.3rem 0.3rem 0 $pp-red;
-  font-size: 4rem;
-  font-weight: 0.1rem;
+  @include pageTitle;
 }
 
 .bigContainer {

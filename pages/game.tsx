@@ -4,7 +4,7 @@ import styles from './../styles/GameResultItem.module.scss';
 export default function Game() {
   return (
     <div className={styles.pageWrap}>
-      <h1 className={styles.title}>Current</h1>
+      <h1 className={styles.title}>Record</h1>
       <GameResult />
     </div>
   );
