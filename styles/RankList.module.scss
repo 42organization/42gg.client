@@ -140,8 +140,9 @@
   text-align: center;
   font-size: 1.5rem;
   color: white;
-  font-weight: 800;
-  text-shadow: -0.1rem 0 black, 0 0.1rem black, 0.1rem 0 black, 0 -0.1rem black;
+  font-family: $title-font;
+  text-shadow: $text-shadow;
+  letter-spacing: 0.1rem;
 }
 
 .mainPerson {
