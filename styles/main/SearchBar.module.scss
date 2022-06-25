@@ -1,15 +1,15 @@
-@import './common.scss';
+@import '../common.scss';
 
 .searchBar {
   font-size: $midium-font;
   background: white;
   border-radius: $small-radius;
-  height: 2.5rem;
+  height: 2.7rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0.5rem;
-  margin-top: 1rem;
+  padding: 0 1rem;
+  margin: 1rem 0.8rem 0;
   input {
     all: unset;
     width: 15rem;
@@ -28,9 +28,12 @@
 }
 
 .dropdown {
-  background: $light-gray;
+  position: fixed;
+  width: calc(100vw - 4.6rem);
+  background: #fff;
   border-radius: $small-radius;
-  padding: 0.5rem 0.7rem;
+  margin: -0.7rem 0.8rem 0;
+  padding: 0.7rem 1rem 1rem;
   div {
     padding: 0.5rem 0;
   }

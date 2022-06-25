@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
 import instance from '../../utils/axios';
-import styles from '../../styles/SearchBar.module.scss';
+import styles from '../../styles/main/SearchBar.module.scss';
 
 export default function SearchBar() {
   const [keyword, setKeyword] = useState<string>('');
@@ -49,8 +49,8 @@ export default function SearchBar() {
   };
 
   return (
-    <div>
-      <div className={styles.searchBar} ref={searchBarRef}>
+    <div ref={searchBarRef}>
+      <div className={styles.searchBar}>
         <input
           type='text'
           value={keyword}
@@ -59,17 +59,19 @@ export default function SearchBar() {
           placeholder='유저 검색하기'
         />
         <div className={styles.buttons}>
-          <span onClick={resetKeywordHandler}>
-            <IoIosCloseCircle style={{ color: 'gray' }} />
-          </span>
+          {keyword && (
+            <span onClick={resetKeywordHandler}>
+              <IoIosCloseCircle style={{ color: 'gray' }} />
+            </span>
+          )}
           <span>
             <GoSearch />
           </span>
         </div>
       </div>
-      {showDropDown && (
+      {showDropDown && keyword && (
         <div className={styles.dropdown}>
-          {searchResult.length && keyword
+          {searchResult.length
             ? searchResult.map((userId: string) => (
                 <Link href={`users/${userId}`} key={userId}>
                   <div>{userId}</div>
