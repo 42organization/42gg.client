@@ -1,8 +1,12 @@
+$giant-giant-font: 2.4rem;
+$giant-big-font: 2.1rem;
+$big-giant-font: 1.8rem;
 $giant-font: 1.5rem;
 $big-font: 1.2rem;
 $midium-font: 1rem;
 $small-font: 0.8rem;
 
+$mini-radius: 0.3rem;
 $small-radius: 0.5rem;
 $big-radius: 5rem;
 
@@ -59,12 +63,12 @@ $winner-blue: #040eff;
   text-shadow: $text-shadow, 0.3rem 0.3rem 0 $pp-red;
 }
 
-@mixin button($btn-color, $txt-color) {
+@mixin button($btn-color, $txt-color, $width: 8rem, $height: 3rem) {
   all: unset;
   box-shadow: 5px 5px 6px $dark-gray;
   border-radius: $small-radius;
-  width: 8rem;
-  height: 3rem;
+  width: $width;
+  height: $height;
   background: $btn-color;
   color: $txt-color;
   font-size: $midium-font;
@@ -79,17 +83,4 @@ $winner-blue: #040eff;
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
-}
-
-@mixin modalContainer($height) {
-  position: aboslute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: $small-radius;
-  padding: 1rem;
-  height: $height;
-  background: linear-gradient(to right bottom, $g2-top, $g2-bottom);
-  color: black;
 }

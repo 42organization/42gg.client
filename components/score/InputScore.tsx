@@ -70,7 +70,7 @@ export default function InputScoreModal() {
   };
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.phrase}>
         {onCheck ? '경기 결과' : '경기가 끝났다면 점수를 입력해주세요.'}
       </div>
@@ -143,6 +143,6 @@ export default function InputScoreModal() {
           <input type='button' value='확 인' onClick={enterHandler} />
         </div>
       )}
-    </>
+    </div>
   );
 }

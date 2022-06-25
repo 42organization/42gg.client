@@ -6,7 +6,7 @@ import { userState, liveState } from '../../utils/recoil/main';
 import { UserData, LiveData } from '../../types/mainType';
 import Modal from './Modal';
 import InputScore from '../score/InputScore';
-import CurrentMatchInfo from '../match/CurrentMatchInfo';
+import CurrentMatchInfo from './CurrentMatchInfo';
 import Header from './Header';
 import Footer from './Footer';
 import instance from '../../utils/axios';
@@ -71,7 +71,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
               <InputScore />
             </Modal>
           )}
-          {/* {liveData.event === 'match' && <CurrentMatchInfo />} */}
+          {liveData.event === 'match' && <CurrentMatchInfo />}
           {presentPath !== '/match' && (
             <Link href='/match'>
               <a className={styles.matchingButton}>🏓</a>
