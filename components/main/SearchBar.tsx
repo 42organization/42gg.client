@@ -59,9 +59,11 @@ export default function SearchBar() {
           placeholder='유저 검색하기'
         />
         <div className={styles.buttons}>
-          <span onClick={resetKeywordHandler}>
-            <IoIosCloseCircle style={{ color: 'gray' }} />
-          </span>
+          {keyword && (
+            <span onClick={resetKeywordHandler}>
+              <IoIosCloseCircle style={{ color: 'gray' }} />
+            </span>
+          )}
           <span>
             <GoSearch />
           </span>
