@@ -15,9 +15,7 @@
   justify-content: space-evenly;
   border-radius: $small-radius;
   padding: 1rem;
-  // background: linear-gradient(to right bottom, $g2-top, $g2-bottom);
-  background: #676767;
-  width: 85%;
+  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
   color: white;
   font-size: $midium-font;
 }

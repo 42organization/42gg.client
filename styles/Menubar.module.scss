@@ -7,20 +7,22 @@
 .menuContainer {
   @include menu-noti-Bar;
   background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
-  padding: 5rem 2rem;
+  padding: 8rem 2rem;
   color: white;
-  text-shadow: 2px 2px 2px black;
+  text-shadow: 2px 2px 2px $dark-gray;
   .menu {
     margin-bottom: 4rem;
-    font-size: $giant-font;
+    font-size: 1.7rem;
+    font-weight: 700;
     div {
       margin-bottom: 1.5rem;
     }
   }
   .subMenu {
-    font-size: $midium-font;
+    font-size: $big-font;
+    font-weight: 600;
     div {
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
     }
   }
 }

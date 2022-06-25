@@ -1,13 +1,9 @@
 @import './common.scss';
 
-.layoutContainer {
+.container {
   background-image: url('../public/background_img.png');
-  background-size: cover;
-  overflow-y: scroll;
-  height: 100vh;
-}
-.mainContent {
-  position: relative;
+  background-size: contain;
+  background-attachment: fixed;
 }
 
 .matchingButton {
@@ -22,4 +18,5 @@
   border-radius: 50%;
   font-size: 2.3rem;
   background: white;
+  box-shadow: 3px 3px 10px black;
 }

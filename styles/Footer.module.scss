@@ -5,7 +5,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 3rem;
+  height: 5rem;
   font-size: $small-font;
   color: white;
+  div:nth-child(1) {
+    margin-bottom: 0.2rem;
+  }
 }

@@ -72,7 +72,10 @@ export default function InputScoreModal() {
   return (
     <div className={styles.container}>
       <div className={styles.phrase}>
-        {onCheck ? '경기 결과' : '경기가 끝났다면 점수를 입력해주세요.'}
+        <div>✅</div>
+        <div>
+          {onCheck ? '경기 결과' : '경기가 끝났다면 점수를 입력해주세요.'}
+        </div>
       </div>
       <div className={styles.resultContainer}>
         <div className={styles.players}>
