@@ -2,6 +2,7 @@ import { MatchData } from '../../types/matchTypes';
 import { useEffect, useState } from 'react';
 import instance from '../../utils/axios';
 import MatchBoard from './MatchBoard';
+import styles from '../../styles/match/MatchBoardList.module.scss';
 
 interface MatchBoardListProps {
   type: string;
@@ -36,7 +37,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
     return <div>오늘의 매치가 모두 끝났습니다!</div>;
 
   return (
-    <div>
+    <div className={styles.matchBoardList}>
       {filteredMatchBoards.map((matchSlots, i) => (
         <MatchBoard
           key={i}

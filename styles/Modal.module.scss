@@ -8,6 +8,6 @@
 }
 
 .modalContainer {
-  @include modalContainer(30rem);
+  @include modalContainer;
   font-size: $midium-font;
 }

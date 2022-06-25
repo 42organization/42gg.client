@@ -3,6 +3,8 @@ import { EnrollInfo } from '../../types/matchTypes';
 import instance from '../../utils/axios';
 import { useRecoilState } from 'recoil';
 import { dateToString } from '../../utils/handleTime';
+import Modal from '../Layout/Modal';
+import styles from '../../styles/match/MatchEnroll.module.scss';
 
 export default function MatchEnrollModal() {
   const [enrollInfo, setEnrollInfo] = useRecoilState<EnrollInfo | null>(
@@ -26,13 +28,24 @@ export default function MatchEnrollModal() {
   const onCancel = () => setEnrollInfo(null);
 
   return (
-    <div>
-      <div>
-        play time : {dateToString(startTime)} - {dateToString(endTime)}
+    <Modal>
+      <div className={styles.container}>
+        <div>
+          <div className={styles.icon}>🏓</div>
+          <div className={styles.timeString}>
+            {dateToString(startTime)} - {dateToString(endTime)}
+          </div>
+          <div className={styles.string}>경기에 참여하시겠습니까?</div>
+        </div>
+        <div>
+          <button className={styles.submitButton} onClick={onEnroll}>
+            확인
+          </button>
+          <button className={styles.cancelButton} onClick={onCancel}>
+            취소
+          </button>
+        </div>
       </div>
-      <div>참여하시겠습니까?</div>
-      <button onClick={onEnroll}>확인</button>
-      <button onClick={onCancel}>취소</button>
-    </div>
+    </Modal>
   );
 }

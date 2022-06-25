@@ -15,7 +15,7 @@ export default function handler(
 ) {
   if (req.method === 'GET') {
     const today = getTodayString();
-    const s = 18;
+    const s = 13;
     const obj = {
       intervalMinute: 10,
       type: 'single',

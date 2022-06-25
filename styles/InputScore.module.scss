@@ -1,5 +1,9 @@
 @import './common.scss';
 
+.container {
+  height: 25rem;
+}
+
 .resultContainer {
   border: solid 3px white;
   border-radius: $small-radius;
@@ -7,7 +11,6 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: space-evenly;
-  width: 16.8rem;
   height: 17rem;
 }
 
@@ -52,7 +55,7 @@
 .submitButton {
   cursor: pointer;
   input {
-    @include button($btn-blue, white);
+    @include button($btn-blue, white, 8rem);
     margin: 0 0.8rem;
   }
   :hover {

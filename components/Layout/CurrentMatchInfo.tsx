@@ -3,6 +3,7 @@ import { CurrentMatch } from '../../types/matchTypes';
 import { dateToString } from '../../utils/handleTime';
 import { useState, useEffect } from 'react';
 import instance from '../../utils/axios';
+import styles from '../../styles/Layout/CurrentMatchInfo.module.scss';
 
 export default function CurrentMatchInfo() {
   const [currentMatch, setCurrentMatch] = useState<CurrentMatch | null>(null);
@@ -39,12 +40,17 @@ export default function CurrentMatchInfo() {
   };
 
   return (
-    <div>
-      <div>
-        {matchingMessage}
-        {enemyTeamInfo}
+    <div className={styles.container}>
+      <div className={styles.stringWrapper}>
+        <div className={styles.icon}> ⏰ </div>
+        <div className={styles.messageWrapper}>
+          {matchingMessage}
+          {enemyTeamInfo}
+        </div>
       </div>
-      <button onClick={onCancel}>취소하기</button>
+      <button className={styles.cancelButton} onClick={onCancel}>
+        취소하기
+      </button>
     </div>
   );
 }
@@ -52,8 +58,8 @@ export default function CurrentMatchInfo() {
 function makeMessage(time: string, isMatch: boolean) {
   const formattedTime = dateToString(time);
   return (
-    <div>
-      🏓 <span>{formattedTime}</span>
+    <div className={styles.messageString}>
+      <span>{formattedTime}</span>
       <span>
         {isMatch ? '에 경기가 시작됩니다!' : ' 참가자 기다리는 중...'}
       </span>
@@ -75,5 +81,5 @@ function makeEnemyTeamInfo(enemyTeam: string[]) {
       {i < enemyTeam.length - 1 ? ', ' : ''}
     </span>
   ));
-  return <div> 상대팀 : {enemyUsers}</div>;
+  return <div className={styles.enemyTeamString}> 상대팀 : {enemyUsers}</div>;
 }

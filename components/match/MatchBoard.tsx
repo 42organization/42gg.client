@@ -1,5 +1,6 @@
 import { Slot } from '../../types/matchTypes';
 import MatchItem from './MatchItem';
+import styles from '../../styles/match/MatchBoard.module.scss';
 
 interface MatchBoardProps {
   matchSlots: Slot[];
@@ -13,11 +14,12 @@ export default function MatchBoard({
   type,
 }: MatchBoardProps) {
   const slotsHour = new Date(matchSlots[0].time).getHours();
+  const slotHourString = changeTo12HourClock(slotsHour);
 
   return (
-    <div>
-      <div>{slotsHour}</div>
-      <div>
+    <div className={styles.matchBoard}>
+      <div className={styles.slotHourString}>{slotHourString}</div>
+      <div className={styles.gridContainer}>
         {matchSlots.map((slot) => (
           <MatchItem
             key={slot.slotId}
@@ -29,4 +31,8 @@ export default function MatchBoard({
       </div>
     </div>
   );
+}
+
+function changeTo12HourClock(hour: number) {
+  return `${hour < 12 ? '오전 ' : '오후 '} ${hour % 12}시`;
 }
