@@ -49,8 +49,8 @@ export default function SearchBar() {
   };
 
   return (
-    <div>
-      <div className={styles.searchBar} ref={searchBarRef}>
+    <div ref={searchBarRef}>
+      <div className={styles.searchBar}>
         <input
           type='text'
           value={keyword}
@@ -67,9 +67,9 @@ export default function SearchBar() {
           </span>
         </div>
       </div>
-      {showDropDown && (
+      {showDropDown && keyword && (
         <div className={styles.dropdown}>
-          {searchResult.length && keyword
+          {searchResult.length
             ? searchResult.map((userId: string) => (
                 <Link href={`users/${userId}`} key={userId}>
                   <div>{userId}</div>
