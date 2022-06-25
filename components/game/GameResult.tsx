@@ -8,7 +8,7 @@ export default function GameResult() {
   const [path, setPath] = useState<string>();
   const router = useRouter();
   useEffect(() => {
-    if (router.asPath === '/') {
+    if (router.asPath === '/' || router.asPath.includes('token')) {
       setPath(`/pingpong/games?count=3&pageParam=`);
     } else if (router.asPath === '/game') {
       setPath(`/pingpong/games?count=10&pageParam=`);
