@@ -3,7 +3,7 @@ import Link from 'next/link';
 import type { NextPage } from 'next';
 import SearchBar from '../components/main/SearchBar';
 import Section from '../components/main/Section';
-import styles from '../styles/Home.module.scss';
+import styles from '../styles/main/Home.module.scss';
 
 const Home: NextPage = () => {
   return (

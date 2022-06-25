@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '../../styles/Section.module.scss';
+import styles from '../../styles/main/Section.module.scss';
 import GameResult from '../game/GameResult';
 import RankList from '../rank/RankList';
 
