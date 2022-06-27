@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import instance from '../../utils/axios';
-import { PlayerInfo, GameResult } from '../../types/scoreTypes';
-import styles from '../../styles/InputScore.module.scss';
+import instance from 'utils/axios';
+import { PlayerInfo, GameResult } from 'types/scoreTypes';
+import styles from 'styles/InputScore.module.scss';
 
 const defaultPlayersInfo: PlayerInfo[] = [{ userId: '', userImageUri: '' }];
 const defaultResult: GameResult = { myTeamScore: '', enemyTeamScore: '' };
