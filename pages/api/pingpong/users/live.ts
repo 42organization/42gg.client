@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { LiveData } from '../../../../types/mainType';
+import { LiveData } from 'types/mainType';
 
 export default function handler(
   req: NextApiRequest,

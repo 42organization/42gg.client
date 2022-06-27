@@ -30,7 +30,8 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
     const lastIndex = matchSlots.length - 1;
     const slotsTime = new Date(matchSlots[lastIndex].time);
     const nowTime = new Date();
-    return nowTime.getTime() <= slotsTime.getTime();
+    return nowTime.getTime();
+    // <= slotsTime.getTime();
   });
 
   if (filteredMatchBoards.length === 0)

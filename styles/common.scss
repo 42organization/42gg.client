@@ -63,7 +63,7 @@ $winner-blue: #040eff;
   text-shadow: $text-shadow, 0.3rem 0.3rem 0 $pp-red;
 }
 
-@mixin button($btn-color, $txt-color, $width: 8rem, $height: 3rem) {
+@mixin button($btn-color, $txt-color, $width: 8rem, $height: 2.8rem) {
   all: unset;
   box-shadow: 5px 5px 6px $dark-gray;
   border-radius: $small-radius;
