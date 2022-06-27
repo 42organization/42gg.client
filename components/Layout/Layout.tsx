@@ -1,25 +1,26 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { userState, liveState } from '../../utils/recoil/main';
-import { UserData, LiveData } from '../../types/mainType';
-import Modal from '../modal/Modal';
-import InputScore from '../modal/InputScore';
+import { userState, liveState } from 'utils/recoil/main';
+import { UserData, LiveData } from 'types/mainType';
+import Modal from 'components/modal/Modal';
+import InputScore from 'components/modal/InputScore';
 import CurrentMatchInfo from './CurrentMatchInfo';
 import Header from './Header';
 import Footer from './Footer';
-import instance from '../../utils/axios';
+import instance from 'utils/axios';
 import { RiPingPongFill } from 'react-icons/ri';
-import Login from '../../pages/login';
-import { loginState } from '../../utils/recoil/login';
-import styles from '../../styles/Layout/Layout.module.scss';
+import Login from 'pages/login';
+import { loginState } from 'utils/recoil/login';
+import styles from 'styles/Layout/Layout.module.scss';
 
 type AppLayoutProps = {
   children: React.ReactNode;
 };
 
 export default function AppLayout({ children }: AppLayoutProps) {
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [userData, setUserData] = useRecoilState<UserData>(userState);
   const [liveData, setLiveData] = useRecoilState<LiveData>(liveState);
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
@@ -33,6 +34,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       setIsLoggedIn(true);
       getUserDataHandler();
     }
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -81,7 +83,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
           <Footer />
         </div>
       ) : (
-        <Login />
+        <>{!isLoading && <Login />}</>
       )}
     </div>
   );
