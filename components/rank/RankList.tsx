@@ -22,7 +22,6 @@ export default function RankList() {
   useEffect(() => {
     if (isScroll) {
       setPage(Math.ceil(myRank / 20));
-      console.log('1 ', page);
     }
   }, [isScroll]);
 
@@ -36,21 +35,18 @@ export default function RankList() {
         console.log(e);
       }
     })();
-    console.log('2 ', page);
   }, [page, isScroll === true]);
 
   useEffect(() => {
     if (isScroll) {
       window.scrollTo({ top: ((myRank - 1) % 20) * 45, behavior: 'smooth' });
       setIsScroll(false);
-      console.log('3 ', page);
     }
   }, [rankData]);
 
   const pageChangeHandler = (pages: number) => {
     setPage(pages);
-    // router.push(`rank`);
-    console.log('4 ', page);
+    // router.push(`rank`); 추가 가능성 염두
   };
 
   return router.asPath !== '/rank' ? (

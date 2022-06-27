@@ -20,7 +20,7 @@ function PageNation({
 }: GreetingProps) {
   return (
     <>
-      {totalPages ? (
+      {totalPages && (
         <ul className={styles.pagination}>
           <Pagination
             activePage={curPage}
@@ -34,7 +34,7 @@ function PageNation({
             onChange={pageChangeHandler}
           />
         </ul>
-      ) : null}
+      )}
     </>
   );
 }
