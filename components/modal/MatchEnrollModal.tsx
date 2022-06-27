@@ -1,10 +1,10 @@
-import { enrollInfoState } from '../../utils/recoil/match';
-import { EnrollInfo } from '../../types/matchTypes';
-import instance from '../../utils/axios';
+import { enrollInfoState } from 'utils/recoil/match';
+import { EnrollInfo } from 'types/matchTypes';
+import instance from 'utils/axios';
 import { useRecoilState } from 'recoil';
-import { dateToString } from '../../utils/handleTime';
+import { dateToString } from 'utils/handleTime';
 import Modal from './Modal';
-import styles from '../../styles/match/MatchEnroll.module.scss';
+import styles from 'styles/match/MatchEnroll.module.scss';
 
 export default function MatchEnrollModal() {
   const [enrollInfo, setEnrollInfo] = useRecoilState<EnrollInfo | null>(
