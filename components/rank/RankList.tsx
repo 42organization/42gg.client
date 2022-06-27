@@ -46,7 +46,7 @@ export default function RankList() {
 
   const pageChangeHandler = (pages: number) => {
     setPage(pages);
-    router.push(`rank`);
+    // router.push(`rank`); 추가 가능성 염두
   };
 
   return router.asPath !== '/rank' ? (
