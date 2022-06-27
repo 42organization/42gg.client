@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { NotiData } from '../../types/notiTypes';
-import styles from '../../styles/NotiItem.module.scss';
+import styles from '../../styles/Layout/NotiItem.module.scss';
 
 type NotiItemProps = {
   data: NotiData;
@@ -21,7 +21,7 @@ export default function NotiItem({ data, showNotiBarHandler }: NotiItemProps) {
 
   return (
     <div
-      className={data.isChecked ? `${styles.readWrap}` : `${styles.notiWrap}`}
+      className={data.isChecked ? `${styles.readWrap}` : `${styles.unreadWrap}`}
     >
       <span className={styles.title}>{title}</span>
       <div className={styles.content}>

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../utils/recoil/main';
 import { UserData } from '../../types/mainType';
-import styles from '../../styles/MenuBar.module.scss';
+import styles from '../../styles/Layout/MenuBar.module.scss';
 import { useSetRecoilState } from 'recoil';
 import { loginState } from '../../utils/recoil/login';
 
@@ -29,10 +29,8 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
 
   return (
     <div className={styles.backdrop} onClick={showMenuBarHandler}>
-      <div
-        className={styles.menuContainer}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className={styles.container} onClick={(e) => e.stopPropagation()}>
+        <button onClick={showMenuBarHandler}>&#10005;</button>
         <nav>
           <div className={styles.menu}>
             <div onClick={() => MenuPathHandler('rank')}>랭킹</div>

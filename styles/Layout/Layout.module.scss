@@ -1,7 +1,7 @@
-@import './common.scss';
+@import '../common.scss';
 
 .container {
-  background-image: url('../public/background_img.png');
+  background-image: url('../../public/background_img.png');
   background-size: contain;
   background-attachment: fixed;
 }

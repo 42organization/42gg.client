@@ -8,7 +8,7 @@ import MenuBar from './MenuBar';
 import NotiBar from './NotiBar';
 import { VscBell, VscBellDot, VscSmiley } from 'react-icons/vsc';
 import { FiMenu } from 'react-icons/fi';
-import styles from '../../styles/Header.module.scss';
+import styles from '../../styles/Layout/Header.module.scss';
 
 export default function Header() {
   const userImg = useRecoilValue<UserData>(userState).userImageUri;
