@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
+import instance from 'utils/axios';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
-import instance from '../../utils/axios';
-import styles from '../../styles/main/SearchBar.module.scss';
+import styles from 'styles/main/SearchBar.module.scss';
 
 export default function SearchBar() {
   const [keyword, setKeyword] = useState<string>('');

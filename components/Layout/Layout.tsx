@@ -2,17 +2,16 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
+import instance from 'utils/axios';
 import { userState, liveState } from 'utils/recoil/main';
+import { loginState } from 'utils/recoil/login';
 import { UserData, LiveData } from 'types/mainType';
-import Modal from 'components/modal/Modal';
-import InputScore from 'components/modal/InputScore';
-import CurrentMatchInfo from './CurrentMatchInfo';
+import Login from 'pages/login';
 import Header from './Header';
 import Footer from './Footer';
-import instance from 'utils/axios';
-import { RiPingPongFill } from 'react-icons/ri';
-import Login from 'pages/login';
-import { loginState } from 'utils/recoil/login';
+import CurrentMatchInfo from './CurrentMatchInfo';
+import Modal from 'components/modal/Modal';
+import InputScore from 'components/modal/InputScore';
 import styles from 'styles/Layout/Layout.module.scss';
 
 type AppLayoutProps = {
