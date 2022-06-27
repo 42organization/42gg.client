@@ -13,7 +13,7 @@ import instance from '../../utils/axios';
 import { RiPingPongFill } from 'react-icons/ri';
 import Login from '../../pages/login';
 import { loginState } from '../../utils/recoil/login';
-import styles from '../../styles/Layout.module.scss';
+import styles from '../../styles/Layout/Layout.module.scss';
 
 type AppLayoutProps = {
   children: React.ReactNode;

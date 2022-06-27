@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import NotiItem from './NotiItem';
 import { NotiData } from '../../types/notiTypes';
-import styles from '../../styles/NotiBar.module.scss';
+import styles from '../../styles/Layout/NotiBar.module.scss';
 import instance from '../../utils/axios';
 
 type NotiBarProps = {
