@@ -1,14 +1,14 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import Image from 'next/image';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { userState, liveState } from '../../utils/recoil/main';
-import { UserData, LiveData } from '../../types/mainType';
+import { userState, liveState } from 'utils/recoil/main';
+import { UserData, LiveData } from 'types/mainType';
 import MenuBar from './MenuBar';
 import NotiBar from './NotiBar';
-import { VscBell, VscBellDot, VscSmiley } from 'react-icons/vsc';
+import { VscBell, VscBellDot } from 'react-icons/vsc';
 import { FiMenu } from 'react-icons/fi';
-import styles from '../../styles/Layout/Header.module.scss';
+import styles from 'styles/Layout/Header.module.scss';
 
 export default function Header() {
   const userImg = useRecoilValue<UserData>(userState).userImageUri;

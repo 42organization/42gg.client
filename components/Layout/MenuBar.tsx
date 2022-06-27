@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../utils/recoil/main';
-import { UserData } from '../../types/mainType';
-import styles from '../../styles/Layout/MenuBar.module.scss';
-import { useSetRecoilState } from 'recoil';
-import { loginState } from '../../utils/recoil/login';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { userState } from 'utils/recoil/main';
+import { loginState } from 'utils/recoil/login';
+import { UserData } from 'types/mainType';
+import styles from 'styles/Layout/MenuBar.module.scss';
 
 type MenuBarProps = {
   showMenuBarHandler: () => void;

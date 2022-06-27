@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import instance from 'utils/axios';
+import { NotiData } from 'types/notiTypes';
 import NotiItem from './NotiItem';
-import { NotiData } from '../../types/notiTypes';
-import styles from '../../styles/Layout/NotiBar.module.scss';
-import instance from '../../utils/axios';
+import styles from 'styles/Layout/NotiBar.module.scss';
 
 type NotiBarProps = {
   showNotiBarHandler: () => void;

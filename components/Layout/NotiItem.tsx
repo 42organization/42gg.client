@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { NotiData } from '../../types/notiTypes';
-import styles from '../../styles/Layout/NotiItem.module.scss';
+import { NotiData } from 'types/notiTypes';
+import styles from 'styles/Layout/NotiItem.module.scss';
 
 type NotiItemProps = {
   data: NotiData;

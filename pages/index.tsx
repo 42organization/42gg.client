@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
 import type { NextPage } from 'next';
-import SearchBar from '../components/main/SearchBar';
-import Section from '../components/main/Section';
-import styles from '../styles/main/Home.module.scss';
+import SearchBar from 'components/main/SearchBar';
+import Section from 'components/main/Section';
+import styles from 'styles/main/Home.module.scss';
 
 const Home: NextPage = () => {
   return (
