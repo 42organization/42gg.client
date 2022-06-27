@@ -4,25 +4,32 @@
   @include backdrop;
 }
 
-.menuContainer {
+.container {
   @include menu-noti-Bar;
   background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
-  padding: 8rem 2rem;
+  padding: 1.15rem 0.7rem;
   color: white;
   text-shadow: 2px 2px 2px $dark-gray;
+  button {
+    all: unset;
+    color: $dark-gray;
+    font-size: 1.5rem;
+    text-align: right;
+    text-shadow: none;
+  }
   .menu {
-    margin-bottom: 4rem;
-    font-size: 1.7rem;
-    font-weight: 700;
+    margin: 4rem 1rem;
+    font-size: $big-giant-font;
+    font-weight: 600;
     div {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.7rem;
     }
   }
   .subMenu {
-    font-size: $big-font;
-    font-weight: 600;
+    margin: 4rem 1rem;
+    font-size: $midium-font;
     div {
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
   }
 }
