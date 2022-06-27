@@ -1,0 +1,38 @@
+@import './common.scss';
+
+ul.pagination li {
+  display: inline-block;
+  width: 27px;
+  height: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $big-font;
+  font-weight: 600;
+}
+
+ul.pagination li a {
+  text-decoration: none;
+  color: $g1-bottom;
+  font-size: 1rem;
+}
+
+ul.pagination li.active a {
+  color: $pp-red;
+}
+
+ul.pagination li.active {
+  background-color: $pp-red;
+}
+
+ul.pagination li a:hover,
+ul.pagination li a.active {
+  font-weight: 700;
+  color: $pp-red;
+}
+
+.page-selection {
+  width: 48px;
+  height: 30px;
+  color: white;
+}
