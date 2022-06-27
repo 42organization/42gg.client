@@ -1,0 +1,85 @@
+@import 'styles/common.scss';
+
+.container {
+  height: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
+}
+
+.phrase {
+  text-align: center;
+  .emoji {
+    font-size: $giant-big-font;
+    margin-bottom: 0.3rem;
+  }
+}
+
+.resultContainer {
+  border: solid 3px white;
+  border-radius: $small-radius;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-evenly;
+  height: 16rem;
+  width: 18rem;
+}
+
+.players {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: $big-font;
+  font-weight: 600;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-shadow: $text-shadow;
+  .userImage {
+    background: white;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 1rem;
+    box-shadow: 5px 5px 6px $dark-gray;
+  }
+}
+
+.finalScore {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 3rem;
+  padding: auto;
+  font-size: $giant-font;
+  font-weight: 600;
+  text-align: center;
+  input {
+    font-size: $big-font;
+    text-align: center;
+    height: 2.5rem;
+    width: 5rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .positive {
+    @include button($btn-blue, white);
+  }
+  .negative {
+    @include button(white, black);
+    margin-right: 1rem;
+  }
+  :hover {
+    background: $dark-blue;
+    color: white;
+  }
+}

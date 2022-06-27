@@ -1,8 +1,8 @@
-import { MatchData } from '../../types/matchTypes';
+import { MatchData } from 'types/matchTypes';
 import { useEffect, useState } from 'react';
-import instance from '../../utils/axios';
+import instance from 'utils/axios';
 import MatchBoard from './MatchBoard';
-import styles from '../../styles/match/MatchBoardList.module.scss';
+import styles from 'styles/match/MatchBoardList.module.scss';
 
 interface MatchBoardListProps {
   type: string;
@@ -30,8 +30,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
     const lastIndex = matchSlots.length - 1;
     const slotsTime = new Date(matchSlots[lastIndex].time);
     const nowTime = new Date();
-    return nowTime.getTime();
-    // <= slotsTime.getTime();
+    return nowTime.getTime() <= slotsTime.getTime();
   });
 
   if (filteredMatchBoards.length === 0)
