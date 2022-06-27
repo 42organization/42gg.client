@@ -33,8 +33,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
     if (localStorage.getItem('42gg-token')) {
       setIsLoggedIn(true);
       getUserDataHandler();
-      setIsLoading(false);
     }
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
