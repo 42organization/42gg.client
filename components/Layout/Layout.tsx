@@ -33,6 +33,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     if (localStorage.getItem('42gg-token')) {
       setIsLoggedIn(true);
       getUserDataHandler();
+      setIsLoading(false);
     }
   }, []);
 
@@ -61,10 +62,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
       setLiveData(res?.data);
     } catch (e) {}
   };
-
-  useEffect(() => {
-    setIsLoading(false);
-  }, []);
 
   return (
     <div className={styles.container}>
