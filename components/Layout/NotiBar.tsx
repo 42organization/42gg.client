@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import NotiItem from './NotiItem';
 import { NotiData } from '../../types/notiTypes';
-import { BsCheck2Square } from 'react-icons/bs';
 import styles from '../../styles/NotiBar.module.scss';
 import instance from '../../utils/axios';
 
@@ -31,13 +30,9 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
 
   return (
     <div className={styles.backdrop} onClick={showNotiBarHandler}>
-      <div
-        className={styles.notiContainer}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button onClick={allNotiDeleteHandler}>
-          <BsCheck2Square /> 전체삭제
-        </button>
+      <div className={styles.container} onClick={(e) => e.stopPropagation()}>
+        <button onClick={showNotiBarHandler}>&#10005;</button>
+        <button onClick={allNotiDeleteHandler}>&#9745; 전체삭제</button>
         <div className={styles.notiFullContent}>
           {notiData.length &&
             notiData.map((data: NotiData) => (

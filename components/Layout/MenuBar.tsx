@@ -29,10 +29,8 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
 
   return (
     <div className={styles.backdrop} onClick={showMenuBarHandler}>
-      <div
-        className={styles.menuContainer}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className={styles.container} onClick={(e) => e.stopPropagation()}>
+        <button onClick={showMenuBarHandler}>&#10005;</button>
         <nav>
           <div className={styles.menu}>
             <div onClick={() => MenuPathHandler('rank')}>랭킹</div>
