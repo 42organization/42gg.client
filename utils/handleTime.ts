@@ -12,3 +12,10 @@ export const dateToString = (d: Date | string) => {
 
   return `${hourString}:${minString}`;
 };
+
+export const filterDate = (fullTime: string) => {
+  const month = fullTime.split('T')[0].split('-')[1];
+  const day = fullTime.split('T')[0].split('-')[2];
+  const time = fullTime.split('T')[1].slice(0, 5);
+  return `${month}-${day} ${time}`;
+};
