@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Modal from 'components/modal/Modal';
 import CancelModal from 'components/modal/CancelModal';
 import { CurrentMatch } from 'types/matchTypes';
-import { dateToString } from 'utils/handleTime';
+import { gameTimeToString } from 'utils/handleTime';
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { cancelModalState } from 'utils/recoil/match';
@@ -61,7 +61,7 @@ export default function CurrentMatchInfo() {
 }
 
 function makeMessage(time: string, isMatch: boolean) {
-  const formattedTime = dateToString(time);
+  const formattedTime = gameTimeToString(time);
   return (
     <div className={styles.messageString}>
       <span>{formattedTime}</span>

@@ -1,4 +1,4 @@
-@import '../common.scss';
+@import 'styles/common.scss';
 
 .backdrop {
   @include backdrop;
@@ -15,8 +15,9 @@
     all: unset;
     color: $dark-gray;
     font-size: 1.5rem;
-    text-align: right;
     text-shadow: none;
+    margin-left: auto;
+    width: 1.5rem;
   }
   .menu {
     margin: 4rem 1rem;

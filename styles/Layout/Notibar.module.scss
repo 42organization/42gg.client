@@ -1,4 +1,4 @@
-@import '../common.scss';
+@import 'styles/common.scss';
 
 .backdrop {
   @include backdrop;
@@ -9,18 +9,19 @@
   @include menu-noti-Bar;
   background: linear-gradient(to right bottom, $g2-top, $g2-bottom);
   margin-left: auto;
-  padding: 1.15rem 0.7rem;
+  padding: 1.15rem 0.7rem 2rem;
   button:nth-child(1) {
     all: unset;
     color: $dark-gray;
     font-size: 1.5rem;
+    width: 1.5rem;
   }
   button:nth-child(2) {
     all: unset;
     text-align: center;
     border-radius: $small-radius;
     background: linear-gradient(to bottom, #fff, $gray);
-    margin: 2.5rem 0 0.7rem auto;
+    margin: 0 0 0.7rem auto;
     padding: 0.2rem 0.5rem;
     &:hover {
       color: #fff;
