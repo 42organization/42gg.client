@@ -10,59 +10,41 @@
   text-align: center;
   width: $width;
   height: $height;
-  margin: 0.5rem 0;
 }
 
 .title {
   @include pageTitle;
-}
-
-.bigContainer {
-  border-radius: $small-radius;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-  background: linear-gradient(135deg, $pp-red, $pp-blue);
-  margin: 0.2rem;
-  padding: 0.4rem;
+  font-size: $big-giant-font;
+  margin-bottom: 0.8rem;
 }
 
 .smallContainer {
-  border-radius: $small-radius;
+  border-radius: $midium-radius;
   display: grid;
-  grid-template-columns: 1.25fr 0.5fr 1.25fr;
+  grid-template-columns: 2fr 1fr 2fr;
   align-items: center;
   background: $gray;
-  margin: 0.2rem;
-  padding: 0.4rem 0;
+  margin-bottom: 0.2rem;
+  padding: 0.5rem 1.2rem;
 }
 
-.smallUserInfo {
-  display: flex;
-  flex-direction: column;
+.smallTeam {
   .smallLeft {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 1rem;
     .userImage {
       @include imageCircle(white, 2rem, 2rem);
-    }
-    .user {
-      margin-left: 0.2rem;
+      margin-right: 0.7rem;
     }
   }
-
   .smallRight {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    margin-right: 1rem;
     .userImage {
       @include imageCircle($dark-gray, 2rem, 2rem);
-    }
-    .user {
-      margin-right: 0.2rem;
+      margin-left: 0.7rem;
     }
   }
 }
@@ -72,19 +54,38 @@
   text-align: center;
 }
 
-.bigUserInfo {
+.bigContainer {
+  border-radius: $midium-radius;
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  align-items: center;
+  background: linear-gradient(135deg, $pp-red, $pp-blue);
+  margin-bottom: 0.2rem;
+  padding: 0.8rem 0;
+}
+
+.bigTeam {
   display: flex;
   flex-direction: column;
   align-items: center;
-  .bigLeft {
-    .userImage {
-      @include imageCircle(white, 4.5rem, 4.5rem);
-    }
+  .userImage {
+    @include imageCircle(white, 4.5rem, 4.5rem);
   }
-  .bigRight {
-    .userImage {
-      @include imageCircle($dark-gray, 4.5rem, 4.5rem);
-    }
+  .userId {
+    margin: 0.5rem 0;
+    text-align: center;
+    text-shadow: $text-shadow;
+    color: white;
+    font-size: $big-font;
+    font-weight: 600;
+  }
+  .winRate {
+    border: 0.1rem white solid;
+    border-radius: $small-radius;
+    text-align: center;
+    font-size: $small-font;
+    color: white;
+    padding: 0.1rem 0.8rem;
   }
 }
 
@@ -96,23 +97,23 @@
   }
   .gameScore {
     font-size: 2rem;
+    font-weight: 600;
     color: white;
     text-align: center;
     text-shadow: $text-shadow;
   }
 }
 
-.bigUserWinRate {
-  border: 0.1rem white solid;
+.getButton {
+  width: 100%;
+  color: black;
+  background: linear-gradient(to bottom, white, $gray);
   border-radius: $small-radius;
-  margin: 0.5rem 0;
-  text-align: center;
-  color: white;
-}
-
-.bigUserId {
-  margin: 0.5rem 0;
-  text-align: center;
-  text-shadow: $text-shadow;
-  color: white;
+  font-size: $small-font;
+  input {
+    all: unset;
+    width: 100%;
+    padding: 0.2rem 0;
+    text-align: center;
+  }
 }
