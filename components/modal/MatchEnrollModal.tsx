@@ -32,10 +32,10 @@ export default function MatchEnrollModal() {
       <div className={styles.container}>
         <div className={styles.phrase}>
           <div className={styles.emoji}>🏓</div>
-          <div className={styles.timeString}>
+          <div className={styles.time}>
             {dateToString(startTime)} - {dateToString(endTime)}
           </div>
-          <div className={styles.string}>경기에 참여하시겠습니까?</div>
+          <div>경기에 참여하시겠습니까?</div>
         </div>
         <div className={styles.buttons}>
           <button className={styles.negative} onClick={onCancel}>

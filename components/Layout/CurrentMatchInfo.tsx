@@ -11,7 +11,8 @@ import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 export default function CurrentMatchInfo() {
   const [currentMatch, setCurrentMatch] = useState<CurrentMatch | null>(null);
-  const [openModal, setOpenModal] = useRecoilState<boolean>(cancelModalState);
+  const [openCancelModal, setOpenCancelModal] =
+    useRecoilState<boolean>(cancelModalState);
 
   useEffect(() => {
     (async () => {
@@ -33,12 +34,12 @@ export default function CurrentMatchInfo() {
     : '';
 
   const onCancel = () => {
-    setOpenModal(true);
+    setOpenCancelModal(true);
   };
 
   return (
     <>
-      {openModal && (
+      {openCancelModal && (
         <Modal>
           <CancelModal slotId={slotId} />
         </Modal>
