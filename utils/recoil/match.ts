@@ -11,3 +11,8 @@ export const cancelModalState = atom<boolean>({
   key: `cancelModalState/${v1()}`,
   default: false,
 });
+
+export const currentMatchInfoState = atom<boolean>({
+  key: `currentMatchInfoState/${v1()}`,
+  default: false,
+});

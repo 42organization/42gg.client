@@ -5,7 +5,7 @@ import {
   IoCaretBackSharp,
   IoCaretForwardSharp,
 } from 'react-icons/io5';
-import styles from '../styles/Pagination.module.scss';
+import styles from 'styles/Pagination.module.scss';
 
 interface GreetingProps {
   curPage: number | undefined;

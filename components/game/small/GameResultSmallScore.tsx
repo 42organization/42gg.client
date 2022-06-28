@@ -1,5 +1,5 @@
-import styles from '../../../styles/GameResultItem.module.scss';
-import { Team } from '../../../types/gameTypes';
+import styles from 'styles/GameResultItem.module.scss';
+import { Team } from 'types/gameTypes';
 
 type gameResultTypes = {
   team1: Team;

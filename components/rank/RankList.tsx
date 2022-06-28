@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import styles from '../../styles/RankList.module.scss';
-import { Rank, RankData } from '../../types/rankTypes';
-import instance from '../../utils/axios';
+import styles from 'styles/RankList.module.scss';
+import { Rank, RankData } from 'types/rankTypes';
+import instance from 'utils/axios';
 import { useRecoilState } from 'recoil';
-import { myRankPosition, isScrollState } from '../../utils/recoil/myRank';
+import { myRankPosition, isScrollState } from 'utils/recoil/myRank';
 import RankItem from './RankItem';
-import PageNation from '../Pagination';
+import PageNation from 'components/Pagination';
 
 export default function RankList() {
   const [rankData, setRankData] = useState<RankData | null>(null);
@@ -46,7 +46,7 @@ export default function RankList() {
 
   const pageChangeHandler = (pages: number) => {
     setPage(pages);
-    // router.push(`rank`); 추가 가능성 염두
+    router.push(`rank`);
   };
 
   return router.asPath !== '/rank' ? (
@@ -59,24 +59,21 @@ export default function RankList() {
       </div>
     </div>
   ) : (
-    <div className={styles.pageWrap}>
-      <h1 className={styles.title}>Ranking</h1>
-      <div className={styles.container}>
-        <div className={styles.division}>
-          <div className={styles.divItem}>랭킹</div>
-          <div className={styles.divItem}>intra ID (점수)</div>
-          <div className={styles.divItem}>상태메시지</div>
-          <div className={styles.divItem}>승률</div>
-        </div>
-        {rankData?.rankList.map((item: Rank) => (
-          <RankItem key={item.userId} user={item} isMain={false} />
-        ))}
-        <PageNation
-          curPage={rankData?.currentPage}
-          totalPages={rankData?.totalPage}
-          pageChangeHandler={pageChangeHandler}
-        />
+    <div className={styles.container}>
+      <div className={styles.division}>
+        <div className={styles.divItem}>랭킹</div>
+        <div className={styles.divItem}>intra ID (점수)</div>
+        <div className={styles.divItem}>상태메시지</div>
+        <div className={styles.divItem}>승률</div>
       </div>
+      {rankData?.rankList.map((item: Rank) => (
+        <RankItem key={item.userId} user={item} isMain={false} />
+      ))}
+      <PageNation
+        curPage={rankData?.currentPage}
+        totalPages={rankData?.totalPage}
+        pageChangeHandler={pageChangeHandler}
+      />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import GameResultList from './GameResultList';
+import GameResultList from 'components/game/GameResultList';
 
 export default function GameResult() {
   const queryClient = new QueryClient();

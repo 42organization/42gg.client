@@ -1,5 +1,5 @@
-import GameResult from '../components/game/GameResult';
-import styles from './../styles/GameResultItem.module.scss';
+import GameResult from 'components/game/GameResult';
+import styles from 'styles/GameResultItem.module.scss';
 
 export default function Game() {
   return (
