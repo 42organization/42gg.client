@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { profileInfoState, isEditProfileState } from '../../utils/recoil/user';
-import instance from '../../utils/axios';
+import { profileInfoState, isEditProfileState } from 'utils/recoil/user';
+import instance from 'utils/axios';
 
 interface EditedProfile {
   racketType: string;

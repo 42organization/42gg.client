@@ -1,0 +1,83 @@
+@import '../common.scss';
+
+.container {
+  height: 10rem;
+  background-color: #24098f;
+  color: white;
+  border-radius: $small-radius;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 1.5rem;
+  padding-block: 0.6rem;
+}
+
+.leftSide {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.scoreInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.rank {
+  color: $pp-red;
+  font-size: 3rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.pppAndracketType {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ppp {
+  font-size: $big-font;
+}
+
+.racketType {
+  font-size: $small-font;
+}
+
+.statusMessage {
+  font-size: $big-font;
+}
+
+.rightSide {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rightTopSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  background-color: white;
+  border-radius: 50%;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.userId {
+  font-size: $big-font;
+  vertical-align: center;
+}

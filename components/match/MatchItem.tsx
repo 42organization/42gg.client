@@ -1,8 +1,8 @@
-import { Slot, EnrollInfo } from '../../types/matchTypes';
-import { enrollInfoState } from '../../utils/recoil/match';
+import { Slot, EnrollInfo } from 'types/matchTypes';
+import { enrollInfoState } from 'utils/recoil/match';
 import { useSetRecoilState } from 'recoil';
-import { fillZero } from '../../utils/handleTime';
-import styles from '../../styles/match/MatchItem.module.scss';
+import { fillZero } from 'utils/handleTime';
+import styles from 'styles/match/MatchItem.module.scss';
 
 interface MatchItemProps {
   slot: Slot;
