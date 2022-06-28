@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import instance from 'utils/axios';
 import { userState, liveState } from 'utils/recoil/main';
+import { currentMatchInfoState } from 'utils/recoil/match';
 import { loginState } from 'utils/recoil/login';
 import { UserData, LiveData } from 'types/mainType';
 import Login from 'pages/login';
@@ -19,9 +20,12 @@ type AppLayoutProps = {
 };
 
 export default function AppLayout({ children }: AppLayoutProps) {
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [userData, setUserData] = useRecoilState<UserData>(userState);
   const [liveData, setLiveData] = useRecoilState<LiveData>(liveState);
+  const [openCurrentInfo, setOpenCurrentInfo] = useRecoilState<boolean>(
+    currentMatchInfoState
+  );
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
   const presentPath = useRouter().asPath;
   const router = useRouter();
@@ -48,6 +52,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
     }
   }, [presentPath, userData]);
 
+  useEffect(() => {
+    if (liveData?.event === 'match') setOpenCurrentInfo(true);
+    else setOpenCurrentInfo(false);
+  }, [liveData]);
+
   const getUserDataHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/users`);
@@ -72,7 +81,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
               <InputScoreModal />
             </Modal>
           )}
-          {liveData.event === 'match' && <CurrentMatchInfo />}
+          {openCurrentInfo && <CurrentMatchInfo />}
           {presentPath !== '/match' && (
             <Link href='/match'>
               <a className={styles.matchingButton}>🏓</a>
