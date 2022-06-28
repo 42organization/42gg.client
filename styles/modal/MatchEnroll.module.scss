@@ -1,11 +1,5 @@
 @import 'styles/common.scss';
 
-@mixin center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .container {
   display: flex;
   flex-direction: column;

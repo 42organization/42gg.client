@@ -2,6 +2,7 @@
 
 .backdrop {
   @include backdrop;
+  z-index: 2;
 }
 
 .container {
