@@ -6,7 +6,7 @@ import { Game } from 'types/gameTypes';
 import infScroll from 'utils/infinityScroll';
 import { clickedGameItem } from 'utils/recoil/game';
 import GameResultItem from './GameResultItem';
-import styles from 'styles/GameResultItem.module.scss';
+import styles from 'styles/game/GameResultItem.module.scss';
 
 type gameResultTypes = {
   path: string;
