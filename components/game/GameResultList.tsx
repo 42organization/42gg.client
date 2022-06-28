@@ -2,10 +2,10 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { InfiniteData } from 'react-query';
 import { useRecoilState } from 'recoil';
-import { Game } from '../../types/gameTypes';
-import infScroll from '../../utils/infinityScroll';
-import { clickedGameItem } from '../../utils/recoil/game';
-import GameResultItem from './GameResultItem';
+import { Game } from 'types/gameTypes';
+import infScroll from 'utils/infinityScroll';
+import { clickedGameItem } from 'utils/recoil/game';
+import GameResultItem from 'components/game/GameResultItem';
 
 type gameResultTypes = {
   path: string;
