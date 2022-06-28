@@ -7,8 +7,8 @@ type SlotProps = {
   slotId: number;
 };
 export default function CancelModal({ slotId }: SlotProps) {
-  const setOpenModal = useSetRecoilState<boolean>(cancelModalState);
-  const setOpenCurrentInfo = useSetRecoilState<boolean>(currentMatchInfoState);
+  const setOpenModal = useSetRecoilState(cancelModalState);
+  const setOpenCurrentInfo = useSetRecoilState(currentMatchInfoState);
 
   const onCancel = async () => {
     try {
@@ -32,7 +32,9 @@ export default function CancelModal({ slotId }: SlotProps) {
       <div className={styles.phrase}>
         <div className={styles.emoji}>🤔</div>
         <div>
-          정말 경기를 <br /> 취소하시겠습니까?
+          정말 경기를
+          <br />
+          취소하시겠습니까?
         </div>
       </div>
       <div className={styles.buttons}>

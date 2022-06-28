@@ -10,6 +10,7 @@
 
 .phrase {
   @include modal-phrase;
+  font-size: $big-font;
   .time {
     font-size: $giant-font;
     margin-bottom: 0.5rem;

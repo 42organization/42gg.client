@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { userState } from 'utils/recoil/main';
-import { loginState } from 'utils/recoil/login';
+import { logoutModalState } from 'utils/recoil/login';
 import { UserData } from 'types/mainType';
+import Modal from 'components/modal/Modal';
+import LogoutModal from 'components/modal/LogoutModal';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 type MenuBarProps = {
@@ -11,39 +13,51 @@ type MenuBarProps = {
 
 export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
   const userData = useRecoilValue<UserData>(userState);
-  const setIsLoggedIn = useSetRecoilState(loginState);
+  const [openLogoutModal, setOpenLogoutModal] =
+    useRecoilState<boolean>(logoutModalState);
 
   const router = useRouter();
 
   const MenuPathHandler = (path: string) => {
     showMenuBarHandler();
+    setOpenLogoutModal(false);
     router.push(`/${path}`);
   };
 
-  const logoutHandler = () => {
-    localStorage.removeItem('42gg-token');
-    setIsLoggedIn(false);
-    router.push(`/`);
+  const logoutModalHandler = () => {
+    setOpenLogoutModal(true);
+  };
+
+  const closeMenubarHandler = () => {
+    setOpenLogoutModal(false);
+    showMenuBarHandler();
   };
 
   return (
-    <div className={styles.backdrop} onClick={showMenuBarHandler}>
-      <div className={styles.container} onClick={(e) => e.stopPropagation()}>
-        <button onClick={showMenuBarHandler}>&#10005;</button>
-        <nav>
-          <div className={styles.menu}>
-            <div onClick={() => MenuPathHandler('rank')}>랭킹</div>
-            <div onClick={() => MenuPathHandler('game')}>최근 경기</div>
-            <div onClick={() => MenuPathHandler(`users/${userData.userId}`)}>
-              내 정보
+    <>
+      {openLogoutModal && (
+        <Modal>
+          <LogoutModal />
+        </Modal>
+      )}
+      <div className={styles.backdrop} onClick={closeMenubarHandler}>
+        <div className={styles.container} onClick={(e) => e.stopPropagation()}>
+          <button onClick={closeMenubarHandler}>&#10005;</button>
+          <nav>
+            <div className={styles.menu}>
+              <div onClick={() => MenuPathHandler('rank')}>랭킹</div>
+              <div onClick={() => MenuPathHandler('game')}>최근 경기</div>
+              <div onClick={() => MenuPathHandler(`users/${userData.userId}`)}>
+                내 정보
+              </div>
             </div>
-          </div>
-          <div className={styles.subMenu}>
-            <div>매뉴얼</div>
-            <div onClick={logoutHandler}>로그아웃</div>
-          </div>
-        </nav>
+            <div className={styles.subMenu}>
+              <div>매뉴얼</div>
+              <div onClick={logoutModalHandler}>로그아웃</div>
+            </div>
+          </nav>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
