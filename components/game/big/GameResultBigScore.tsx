@@ -1,5 +1,5 @@
-import { Team } from '../../../types/gameTypes';
-import styles from '../../../styles/GameResultItem.module.scss';
+import { Team } from 'types/gameTypes';
+import styles from 'styles/GameResultItem.module.scss';
 
 type gameResultTypes = {
   status: string;
