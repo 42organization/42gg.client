@@ -6,12 +6,15 @@ type gameResultTypes = {
   userLeft: boolean;
 };
 
-export default function GameResultBigTeam({ team, userLeft }: gameResultTypes) {
+export default function GameResultSmallTeam({
+  team,
+  userLeft,
+}: gameResultTypes) {
   return (
-    <div className={styles.smallUserInfo}>
+    <div className={styles.smallTeam}>
       <div className={userLeft ? styles.smallLeft : styles.smallRight}>
         <span className={styles.userImage}></span>
-        <span className={styles.user}>
+        <span>
           {team.players.map((player) => (
             <div key={player.userId}>{player.userId}</div>
           ))}
