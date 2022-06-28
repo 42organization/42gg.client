@@ -1,4 +1,4 @@
-import styles from 'styles/Layout/Modal.module.scss';
+import styles from 'styles/modal/Modal.module.scss';
 
 type ModalProps = {
   children: React.ReactNode;

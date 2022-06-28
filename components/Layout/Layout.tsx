@@ -11,7 +11,7 @@ import Header from './Header';
 import Footer from './Footer';
 import CurrentMatchInfo from './CurrentMatchInfo';
 import Modal from 'components/modal/Modal';
-import InputScore from 'components/modal/InputScore';
+import InputScoreModal from 'components/modal/InputScoreModal';
 import styles from 'styles/Layout/Layout.module.scss';
 
 type AppLayoutProps = {
@@ -69,7 +69,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
           <Header />
           {liveData.event === 'game' && (
             <Modal>
-              <InputScore />
+              <InputScoreModal />
             </Modal>
           )}
           {liveData.event === 'match' && <CurrentMatchInfo />}

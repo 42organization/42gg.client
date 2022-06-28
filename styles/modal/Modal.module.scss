@@ -1,4 +1,4 @@
-@import '../common.scss';
+@import 'styles/common.scss';
 
 .backdrop {
   @include backdrop;
@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: space-evenly;
   border-radius: $small-radius;
-  padding: 1rem;
+  padding: 1.2rem;
   background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
   color: white;
   font-size: $midium-font;

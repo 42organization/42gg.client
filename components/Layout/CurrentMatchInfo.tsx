@@ -1,12 +1,18 @@
 import Link from 'next/link';
-import { CurrentMatch } from '../../types/matchTypes';
-import { dateToString } from '../../utils/handleTime';
+import Modal from 'components/modal/Modal';
+import CancelModal from 'components/modal/CancelModal';
+import { CurrentMatch } from 'types/matchTypes';
+import { dateToString } from 'utils/handleTime';
 import { useState, useEffect } from 'react';
-import instance from '../../utils/axios';
-import styles from '../../styles/Layout/CurrentMatchInfo.module.scss';
+import { useRecoilState } from 'recoil';
+import { cancelModalState } from 'utils/recoil/match';
+import instance from 'utils/axios';
+import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 export default function CurrentMatchInfo() {
   const [currentMatch, setCurrentMatch] = useState<CurrentMatch | null>(null);
+  const [openCancelModal, setOpenCancelModal] =
+    useRecoilState<boolean>(cancelModalState);
 
   useEffect(() => {
     (async () => {
@@ -27,31 +33,30 @@ export default function CurrentMatchInfo() {
     ? makeEnemyTeamInfo(enemyTeam)
     : '';
 
-  const onCancel = async () => {
-    try {
-      const res = await instance.delete(
-        `/pingpong/match/tables/${1}/slots/${slotId}`
-      );
-      alert(res?.data.message);
-      // 현재매치정보 삭제하기
-    } catch (e) {
-      console.log(e);
-    }
+  const onCancel = () => {
+    setOpenCancelModal(true);
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.stringWrapper}>
-        <div className={styles.icon}> ⏰ </div>
-        <div className={styles.messageWrapper}>
-          {matchingMessage}
-          {enemyTeamInfo}
+    <>
+      {openCancelModal && (
+        <Modal>
+          <CancelModal slotId={slotId} />
+        </Modal>
+      )}
+      <div className={styles.container}>
+        <div className={styles.stringWrapper}>
+          <div className={styles.icon}> ⏰ </div>
+          <div className={styles.messageWrapper}>
+            {matchingMessage}
+            {enemyTeamInfo}
+          </div>
         </div>
+        <button className={styles.cancelButton} onClick={onCancel}>
+          취소하기
+        </button>
       </div>
-      <button className={styles.cancelButton} onClick={onCancel}>
-        취소하기
-      </button>
-    </div>
+    </>
   );
 }
 

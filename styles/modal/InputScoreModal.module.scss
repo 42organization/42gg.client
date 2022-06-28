@@ -1,4 +1,4 @@
-@import './common.scss';
+@import 'styles/common.scss';
 
 .container {
   height: 30rem;
@@ -9,11 +9,7 @@
 }
 
 .phrase {
-  text-align: center;
-  div:nth-child(1) {
-    font-size: $giant-big-font;
-    margin-bottom: 0.3rem;
-  }
+  @include modal-phrase;
 }
 
 .resultContainer {
@@ -67,17 +63,9 @@
   }
 }
 
-.submitButton {
-  cursor: pointer;
+.buttons {
   display: flex;
   justify-content: center;
-  input {
-    @include button($btn-blue, white, 8rem);
-  }
-  :hover {
-    background: $dark-blue;
-  }
-  input:nth-child(2) {
-    margin-left: 1rem;
-  }
+  align-items: center;
+  @include select-buttons;
 }

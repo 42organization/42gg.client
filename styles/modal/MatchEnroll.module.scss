@@ -1,0 +1,27 @@
+@import 'styles/common.scss';
+
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 15rem;
+}
+
+.phrase {
+  @include modal-phrase;
+  .time {
+    font-size: $giant-font;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.buttons {
+  @include select-buttons(6rem);
+}

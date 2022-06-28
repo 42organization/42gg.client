@@ -63,7 +63,7 @@ $winner-blue: #040eff;
   text-shadow: $text-shadow, 0.3rem 0.3rem 0 $pp-red;
 }
 
-@mixin button($btn-color, $txt-color, $width: 8rem, $height: 3rem) {
+@mixin button($btn-color, $txt-color, $width: 8rem, $height: 2.8rem) {
   all: unset;
   box-shadow: 5px 5px 6px $dark-gray;
   border-radius: $small-radius;
@@ -83,4 +83,27 @@ $winner-blue: #040eff;
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
+}
+
+@mixin select-buttons($width: 8rem, $height: 2.8rem) {
+  .positive {
+    @include button($btn-blue, white, $width, $height);
+  }
+  .negative {
+    @include button(white, black, $width, $height);
+    margin-right: 1rem;
+  }
+  :hover {
+    background: $dark-blue;
+    color: white;
+  }
+}
+
+@mixin modal-phrase {
+  text-align: center;
+  line-height: 150%;
+  .emoji {
+    font-size: $giant-big-font;
+    margin-bottom: 1rem;
+  }
 }

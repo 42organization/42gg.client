@@ -1,8 +1,8 @@
-import { MatchData } from '../../types/matchTypes';
+import { MatchData } from 'types/matchTypes';
 import { useEffect, useState } from 'react';
-import instance from '../../utils/axios';
+import instance from 'utils/axios';
 import MatchBoard from './MatchBoard';
-import styles from '../../styles/match/MatchBoardList.module.scss';
+import styles from 'styles/match/MatchBoardList.module.scss';
 
 interface MatchBoardListProps {
   type: string;

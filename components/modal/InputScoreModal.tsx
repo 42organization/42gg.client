@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import instance from 'utils/axios';
 import { PlayerInfo, GameResult } from 'types/scoreTypes';
-import styles from 'styles/InputScore.module.scss';
+import styles from 'styles/modal/InputScoreModal.module.scss';
 
 const defaultPlayersInfo: PlayerInfo[] = [{ userId: '', userImageUri: '' }];
 const defaultResult: GameResult = { myTeamScore: '', enemyTeamScore: '' };
@@ -72,7 +72,7 @@ export default function InputScoreModal() {
   return (
     <div className={styles.container}>
       <div className={styles.phrase}>
-        <div>✅</div>
+        <div className={styles.emoji}>✅</div>
         <div>
           {onCheck ? '경기 결과' : '경기가 끝났다면 점수를 입력해주세요.'}
         </div>
@@ -132,18 +132,28 @@ export default function InputScoreModal() {
         )}
       </div>
       {onCheck ? (
-        <div className={styles.submitButton}>
+        <div className={styles.buttons}>
           <input
+            className={styles.negative}
             type='button'
             value='다시 입력하기'
             onClick={reEnterHandler}
-            style={{ background: 'white', color: 'black' }}
           />
-          <input type='button' value='제출하기' onClick={submitResultHandler} />
+          <input
+            className={styles.positive}
+            type='button'
+            value='제출하기'
+            onClick={submitResultHandler}
+          />
         </div>
       ) : (
-        <div className={styles.submitButton}>
-          <input type='button' value='확 인' onClick={enterHandler} />
+        <div className={styles.buttons}>
+          <input
+            className={styles.positive}
+            type='button'
+            value='확 인'
+            onClick={enterHandler}
+          />
         </div>
       )}
     </div>
