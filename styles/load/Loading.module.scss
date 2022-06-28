@@ -1,8 +1,13 @@
-@import '../common.scss';
+@import 'styles/common.scss';
 
 .title {
   @include pageTitle;
   height: 2rem;
+}
+
+.loadingTag {
+  color: white;
+  margin: 1 rem;
 }
 
 .container {
@@ -11,6 +16,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .spinner {
   background: linear-gradient(135deg, $g1-top, $g1-bottom);
   position: relative;

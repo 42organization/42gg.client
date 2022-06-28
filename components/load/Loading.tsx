@@ -1,5 +1,4 @@
 import styles from 'styles/load/Loading.module.scss';
-import styles2 from 'styles/Layout/Modal.module.scss';
 
 // code by: https://codepen.io/bratzie/pen/dOgXBq#anon-signup
 export default function Loading() {
@@ -8,7 +7,7 @@ export default function Loading() {
       <div className={styles.backColor}>
         <div className={styles.spinner}>
           <h1 className={styles.title}> 42GG</h1>
-          <h2 style={{ color: 'white', margin: '1 rem' }}>Loading ...</h2>
+          <h2 className={styles.loadingTag}>Loading ...</h2>
           <svg className={[styles.raquet, styles.r1].join(' ')}>
             <ellipse className={styles.front} cx='44' cy='50' rx='35' ry='50' />
             <ellipse
