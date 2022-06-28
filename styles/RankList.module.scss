@@ -1,20 +1,18 @@
 @import './common.scss';
 
 /* 나의 랭킹 */
-.myRankContainer {
-  width: flex;
-  height: 3rem;
-  padding: 0.8rem;
-  margin-top: 0.5rem;
-  line-height: middle;
-  background: rgba(#fff, 0.6);
-}
 
 .myRank {
+  height: 2rem;
+  line-height: middle;
+  font-weight: 600;
   font-size: $midium-font;
   color: white;
-  text-shadow: 0.1rem 0.1rem 0.1rem black;
+  text-shadow: 0.1rem 0.1rem 0.1rem $pp-blue;
   text-align: center;
+  span {
+    color: $g1-top;
+  }
 }
 
 /* Ranking 타이틀 */
@@ -24,6 +22,7 @@
 
 .title {
   @include pageTitle;
+  margin: 0 0 1rem 0;
 }
 
 .container {
