@@ -61,7 +61,7 @@ export default function Chart({ userId }: ChartProps) {
 
   const data = useMemo(
     () => ({
-      labels: chartData.map((e) => dateToString(e.date)),
+      labels: chartData.map((e) => gameTimeToString(e.date)),
       datasets: [
         {
           label: 'ppp',
@@ -81,7 +81,7 @@ export default function Chart({ userId }: ChartProps) {
   );
 }
 
-function dateToString(dateString: string) {
+function gameTimeToString(dateString: string) {
   const newDate = new Date(dateString);
   const month = newDate.getMonth() + 1;
   const date = newDate.getDate();

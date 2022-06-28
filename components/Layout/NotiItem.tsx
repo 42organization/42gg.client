@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { NotiData } from 'types/notiTypes';
-import { filterDate } from 'utils/handleTime';
+import { gameTimeToString, filterDate } from 'utils/handleTime';
 import styles from 'styles/Layout/NotiItem.module.scss';
 
 type NotiItemProps = {
@@ -49,17 +49,15 @@ function makeTitle(type: string) {
 }
 
 function makeContent(data: NotiData) {
-  const getGameTime = () => {
-    const gameTime = data.time?.split('T')[1].slice(0, 5);
-    return gameTime?.charAt(0) === '0' ? gameTime.slice(1, 5) : gameTime;
-  };
-  if (data.type === 'matched')
-    return `${getGameTime()}에 신청한 매칭이 상대에 의해 성사되었습니다.`;
-  else if (data.type === 'canceledByMan')
-    return `${getGameTime()}에 신청한 매칭이 상대에 의해 취소되었습니다.`;
-  else if (data.type === 'canceledByTime')
-    return `${getGameTime()}에 신청한 매칭이 상대 없음으로 취소되었습니다.`;
-  else return `${data.message}`;
+  if (data.type !== 'announce' && data.time) {
+    const gameTime = gameTimeToString(data.time);
+    if (data.type === 'matched')
+      return `${gameTime}에 신청한 매칭이 상대에 의해 성사되었습니다.`;
+    else if (data.type === 'canceledByMan')
+      return `${gameTime}에 신청한 매칭이 상대에 의해 취소되었습니다.`;
+    else if (data.type === 'canceledByTime')
+      return `${gameTime}에 신청한 매칭이 상대 없음으로 취소되었습니다.`;
+  } else return `${data.message}`;
 }
 
 function makeImminentMinute(gameTime: string, createdAt: string) {

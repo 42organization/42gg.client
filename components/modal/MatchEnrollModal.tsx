@@ -2,7 +2,7 @@ import { enrollInfoState } from 'utils/recoil/match';
 import { EnrollInfo } from 'types/matchTypes';
 import instance from 'utils/axios';
 import { useRecoilState } from 'recoil';
-import { dateToString } from 'utils/handleTime';
+import { gameTimeToString } from 'utils/handleTime';
 import Modal from './Modal';
 import styles from 'styles/modal/MatchEnroll.module.scss';
 
@@ -33,7 +33,7 @@ export default function MatchEnrollModal() {
         <div className={styles.phrase}>
           <div className={styles.emoji}>🏓</div>
           <div className={styles.time}>
-            {dateToString(startTime)} - {dateToString(endTime)}
+            {gameTimeToString(startTime)} - {gameTimeToString(endTime)}
           </div>
           <div>경기에 참여하시겠습니까?</div>
         </div>

@@ -3,7 +3,7 @@ export const fillZero = (origin: string, width: number) => {
   return (fillLen > 0 ? new Array(fillLen).fill(0).join('') : '') + origin;
 };
 
-export const dateToString = (d: Date | string) => {
+export const gameTimeToString = (d: Date | string) => {
   const date = typeof d === 'string' ? new Date(d) : d;
   const hour = date.getHours();
   const min = date.getMinutes();
