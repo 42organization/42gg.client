@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { NotiData } from 'types/notiTypes';
-import { gameTimeToString, filterDate } from 'utils/handleTime';
+import { gameTimeToString } from 'utils/handleTime';
 import styles from 'styles/Layout/NotiItem.module.scss';
 
 type NotiItemProps = {
@@ -10,6 +10,7 @@ type NotiItemProps = {
 
 export default function NotiItem({ data, showNotiBarHandler }: NotiItemProps) {
   const title = makeTitle(data.type);
+  const notiDate = data.createdAt.slice(5, 16).replace('T', ' ');
 
   const makeEnemyUsers = (enemyTeam: string[]) => {
     return enemyTeam.map((userId: string, i: number) => (
@@ -18,6 +19,12 @@ export default function NotiItem({ data, showNotiBarHandler }: NotiItemProps) {
         {data.enemyTeam && i < data.enemyTeam.length - 1 ? ', ' : ''}
       </span>
     ));
+  };
+
+  const makeImminentMinute = (gameTime: string, createdAt: string) => {
+    return Math.floor(
+      (Number(new Date(gameTime)) - Number(new Date(createdAt))) / 60000
+    );
   };
 
   return (
@@ -36,7 +43,7 @@ export default function NotiItem({ data, showNotiBarHandler }: NotiItemProps) {
           makeContent(data)
         )}
       </div>
-      <div className={styles.date}>{filterDate(data.createdAt)}</div>
+      <div className={styles.date}>{notiDate}</div>
     </div>
   );
 }
@@ -58,12 +65,4 @@ function makeContent(data: NotiData) {
     else if (data.type === 'canceledByTime')
       return `${gameTime}에 신청한 매칭이 상대 없음으로 취소되었습니다.`;
   } else return `${data.message}`;
-}
-
-function makeImminentMinute(gameTime: string, createdAt: string) {
-  const imminentMin =
-    Number(gameTime.slice(-5, -3)) - Number(createdAt.slice(-5, -3));
-  if (imminentMin < 0) return 60 + imminentMin;
-  else if (imminentMin < 5) return imminentMin + 1;
-  else return imminentMin;
 }
