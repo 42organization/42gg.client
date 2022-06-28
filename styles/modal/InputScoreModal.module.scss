@@ -9,11 +9,7 @@
 }
 
 .phrase {
-  text-align: center;
-  .emoji {
-    font-size: $giant-big-font;
-    margin-bottom: 0.3rem;
-  }
+  @include modal-phrase;
 }
 
 .resultContainer {
@@ -71,15 +67,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  .positive {
-    @include button($btn-blue, white);
-  }
-  .negative {
-    @include button(white, black);
-    margin-right: 1rem;
-  }
-  :hover {
-    background: $dark-blue;
-    color: white;
-  }
+  @include select-buttons;
 }

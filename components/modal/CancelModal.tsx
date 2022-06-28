@@ -1,5 +1,5 @@
 import instance from 'utils/axios';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { cancelModalState } from 'utils/recoil/match';
 import styles from 'styles/modal/CancelModal.module.scss';
 
@@ -7,7 +7,7 @@ type SlotProps = {
   slotId: number;
 };
 export default function CancelModal({ slotId }: SlotProps) {
-  const [openModal, setOpenModal] = useRecoilState<boolean>(cancelModalState);
+  const setOpenModal = useSetRecoilState<boolean>(cancelModalState);
 
   const onCancel = async () => {
     try {

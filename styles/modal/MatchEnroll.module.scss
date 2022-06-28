@@ -11,34 +11,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  height: 18rem;
+  height: 15rem;
 }
 
 .phrase {
-  text-align: center;
-  .emoji {
-    font-size: $giant-big-font;
-    margin-bottom: 0.3rem;
-  }
-  .timeString {
+  @include modal-phrase;
+  .time {
     font-size: $giant-font;
     margin-bottom: 0.5rem;
-  }
-  .string {
-    font-size: $big-font;
   }
 }
 
 .buttons {
-  .positive {
-    @include button($btn-blue, white, 6rem);
-  }
-  .negative {
-    @include button(white, black, 6rem);
-    margin-right: 1rem;
-  }
-  :hover {
-    background: $dark-blue;
-    color: white;
-  }
+  @include select-buttons(6rem);
 }

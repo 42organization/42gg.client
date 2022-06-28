@@ -84,3 +84,26 @@ $winner-blue: #040eff;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
 }
+
+@mixin select-buttons($width: 8rem, $height: 2.8rem) {
+  .positive {
+    @include button($btn-blue, white, $width, $height);
+  }
+  .negative {
+    @include button(white, black, $width, $height);
+    margin-right: 1rem;
+  }
+  :hover {
+    background: $dark-blue;
+    color: white;
+  }
+}
+
+@mixin modal-phrase {
+  text-align: center;
+  line-height: 150%;
+  .emoji {
+    font-size: $giant-big-font;
+    margin-bottom: 1rem;
+  }
+}
