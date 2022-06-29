@@ -1,6 +1,6 @@
-import { Slot } from '../../types/matchTypes';
+import { Slot } from 'types/matchTypes';
 import MatchItem from './MatchItem';
-import styles from '../../styles/match/MatchBoard.module.scss';
+import styles from 'styles/match/MatchBoard.module.scss';
 
 interface MatchBoardProps {
   matchSlots: Slot[];

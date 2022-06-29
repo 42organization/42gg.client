@@ -1,0 +1,179 @@
+@import '../common.scss';
+
+.container {
+  // height: 13rem;
+  background-color: #24098f;
+  color: white;
+  border-radius: $small-radius;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 0.8rem;
+  padding-top: 0.6rem;
+  padding-bottom: 1rem;
+}
+
+.leftSide {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.scoreInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.rank {
+  color: $pp-red;
+  font-size: 3rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.pppAndracketType {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ppp {
+  font-size: $big-font;
+}
+
+.racketType {
+  font-size: $small-font;
+}
+
+.winRate {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-block: 0.5rem;
+
+  .winRateStr {
+    font-size: $small-font;
+    margin-right: 1rem;
+  }
+
+  .winRateBar {
+    font-size: $small-font;
+    display: flex;
+    flex-direction: row;
+    width: 6rem;
+    .wins {
+      background-color: $winner-blue;
+      border-top-left-radius: $mini-radius;
+      border-bottom-left-radius: $mini-radius;
+    }
+
+    .loses {
+      background-color: $loser-red;
+      border-top-right-radius: $mini-radius;
+      border-bottom-right-radius: $mini-radius;
+    }
+  }
+}
+
+.statusMessage {
+  height: 4rem;
+  font-size: $big-font;
+}
+
+.rightSide {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rightTopSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  background-color: white;
+  border-radius: 50%;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.userId {
+  font-size: $big-font;
+  vertical-align: center;
+}
+
+.editButton {
+  background: transparent;
+  color: white;
+  border: 1px solid;
+  border-radius: $mini-radius;
+
+  vertical-align: center;
+}
+
+.emoji {
+  font-size: $giant-big-font;
+}
+
+.editContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 28rem;
+}
+
+.cancelButton {
+  @include button($light-gray, black, 6rem);
+  margin-right: 1rem;
+}
+
+.finishButton {
+  @include button($btn-blue, white, 6rem);
+}
+
+.statusTitle {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.textareaWrapper {
+  background-color: white;
+  border-radius: $small-radius;
+  overflow: hidden;
+  width: 100%;
+  border: solid $pp-blue 1px;
+  textarea {
+    border: none;
+    padding: 0.7rem;
+    font-size: $big-font;
+    height: 5rem;
+    width: 100%;
+    resize: none;
+  }
+  textarea:focus {
+    outline: none;
+  }
+  div {
+    display: flex;
+    justify-content: flex-end;
+    color: $dark-gray;
+    padding-inline: 0.7rem;
+    padding-bottom: 0.7rem;
+    font-size: $small-font;
+  }
+}

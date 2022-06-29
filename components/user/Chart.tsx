@@ -10,8 +10,8 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useEffect, useState, useMemo } from 'react';
-import { ChartDataItem } from '../../types/userTypes';
-import instance from '../../utils/axios';
+import { ChartDataItem } from 'types/userTypes';
+import instance from 'utils/axios';
 
 ChartJS.register(
   CategoryScale,
