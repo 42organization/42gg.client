@@ -16,8 +16,8 @@ export default function RankList() {
   const router = useRouter();
   const path =
     router.asPath !== '/rank'
-      ? `/pingpong/ranks/count/${3}`
-      : `/pingpong/ranks/${page}`;
+      ? `/pingpong/ranks/single?count=3`
+      : `/pingpong/ranks/single?page=${page}`;
 
   useEffect(() => {
     if (isScroll) {
@@ -67,7 +67,7 @@ export default function RankList() {
         <div>승률</div>
       </div>
       {rankData?.rankList.map((item: Rank) => (
-        <RankItem key={item.userId} user={item} isMain={false} />
+        <RankItem key={item.intraId} user={item} isMain={false} />
       ))}
       <PageNation
         curPage={rankData?.currentPage}

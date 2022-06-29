@@ -1,6 +1,6 @@
 export interface Rank {
   rank: number;
-  userId: string;
+  intraId: string;
   ppp: number;
   statusMessage: string;
   winRate: number;
