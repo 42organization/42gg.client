@@ -8,7 +8,7 @@ interface EditedProfile {
   statusMessage: string;
 }
 
-const CHAR_LIMIT = 20;
+const CHAR_LIMIT = 30;
 
 export default function EditProfile() {
   const setIsEditProfile = useSetRecoilState(isEditProfileState);

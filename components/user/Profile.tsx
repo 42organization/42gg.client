@@ -48,21 +48,32 @@ export default function Profile({ userId }: ProfileProps) {
             <div className={styles.racketType}>{racketType.toUpperCase()}</div>
           </div>
         </div>
-        <div className={styles.statusMessage}>{statusMessage}</div>
-        <div>
-          <span>승률 {winRate}</span>
-          <span>
-            <span></span>
-            <span></span>
-          </span>
+        <div className={styles.winRate}>
+          <div className={styles.winRateStr}>승률 {winRate}</div>
+          <div className={styles.winRateBar}>
+            <div
+              style={{ width: `${parseInt(winRate)}%` }}
+              className={styles.wins}
+            ></div>
+            <div
+              className={styles.loses}
+              style={{ width: `${100 - parseInt(winRate)}%` }}
+            ></div>
+          </div>
         </div>
+        <div className={styles.statusMessage}>{statusMessage}</div>
       </div>
       <div className={styles.rightSide}>
-        <div className={styles.rightSide}>
+        <div className={styles.rightTopSide}>
           <div className={styles.image}></div>
           <div className={styles.userId}>{userId}</div>
         </div>
-        <button onClick={startEditHandler}>수정</button>
+        <input
+          type='button'
+          className={styles.editButton}
+          onClick={startEditHandler}
+          value='edit'
+        />
       </div>
     </div>
   );

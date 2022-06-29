@@ -1,7 +1,7 @@
 @import '../common.scss';
 
 .container {
-  height: 10rem;
+  height: 13rem;
   background-color: #24098f;
   color: white;
   border-radius: $small-radius;
@@ -9,8 +9,9 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-inline: 1.5rem;
-  padding-block: 0.6rem;
+  padding-inline: 1.2rem;
+  padding-top: 0.6rem;
+  padding-bottom: 1rem;
 }
 
 .leftSide {
@@ -51,7 +52,36 @@
   font-size: $small-font;
 }
 
+.winRate {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .winRateStr {
+    font-size: $small-font;
+  }
+
+  .winRateBar {
+    font-size: $small-font;
+    display: flex;
+    flex-direction: row;
+    width: 6rem;
+    .wins {
+      background-color: $winner-blue;
+      border-top-left-radius: $mini-radius;
+      border-bottom-left-radius: $mini-radius;
+    }
+
+    .loses {
+      background-color: $loser-red;
+      border-top-right-radius: $mini-radius;
+      border-bottom-right-radius: $mini-radius;
+    }
+  }
+}
+
 .statusMessage {
+  height: 45%;
   font-size: $big-font;
 }
 
@@ -79,5 +109,14 @@
 
 .userId {
   font-size: $big-font;
+  vertical-align: center;
+}
+
+.editButton {
+  background: transparent;
+  color: white;
+  border: 1px solid;
+  border-radius: $mini-radius;
+
   vertical-align: center;
 }

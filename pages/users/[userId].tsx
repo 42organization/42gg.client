@@ -6,6 +6,7 @@ import Profile from 'components/user/Profile';
 import EditProfile from 'components/user/EditProfile';
 import GameResult from 'components/game/GameResult';
 import styles from 'styles/user/user.module.scss';
+import Modal from 'components/modal/Modal';
 
 export default function user() {
   const router = useRouter();
@@ -22,7 +23,11 @@ export default function user() {
           {/* <GameResult /> */}
         </>
       )}
-      {isEditProfile && <EditProfile />}
+      {isEditProfile && (
+        <Modal>
+          <EditProfile />
+        </Modal>
+      )}
     </div>
   );
 }
