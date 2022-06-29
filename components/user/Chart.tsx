@@ -34,7 +34,7 @@ export const options = {
     title: {
       display: true,
       text: 'PingPong Power',
-      color: 'white',
+      color: '#FFFFFF',
     },
   },
   scales: {
