@@ -1,7 +1,7 @@
 @import '../common.scss';
 
 .container {
-  height: 13rem;
+  // height: 13rem;
   background-color: #24098f;
   color: white;
   border-radius: $small-radius;
@@ -9,7 +9,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-inline: 1.2rem;
+  padding-inline: 0.8rem;
   padding-top: 0.6rem;
   padding-bottom: 1rem;
 }
@@ -55,10 +55,12 @@
 .winRate {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
+  margin-block: 0.5rem;
 
   .winRateStr {
     font-size: $small-font;
+    margin-right: 1rem;
   }
 
   .winRateBar {
@@ -81,7 +83,7 @@
 }
 
 .statusMessage {
-  height: 45%;
+  height: 4rem;
   font-size: $big-font;
 }
 
@@ -119,4 +121,59 @@
   border-radius: $mini-radius;
 
   vertical-align: center;
+}
+
+.emoji {
+  font-size: $giant-big-font;
+}
+
+.editContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 28rem;
+}
+
+.cancelButton {
+  @include button($light-gray, black, 6rem);
+  margin-right: 1rem;
+}
+
+.finishButton {
+  @include button($btn-blue, white, 6rem);
+}
+
+.statusTitle {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.textareaWrapper {
+  background-color: white;
+  border-radius: $small-radius;
+  overflow: hidden;
+  width: 100%;
+  border: solid $pp-blue 1px;
+  textarea {
+    border: none;
+    padding: 0.7rem;
+    font-size: $big-font;
+    height: 5rem;
+    width: 100%;
+    resize: none;
+  }
+  textarea:focus {
+    outline: none;
+  }
+  div {
+    display: flex;
+    justify-content: flex-end;
+    color: $dark-gray;
+    padding-inline: 0.7rem;
+    padding-bottom: 0.7rem;
+    font-size: $small-font;
+  }
 }

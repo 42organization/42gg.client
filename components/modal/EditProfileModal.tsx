@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { profileInfoState, isEditProfileState } from 'utils/recoil/user';
 import instance from 'utils/axios';
+import styles from 'styles/user/Profile.module.scss';
 
 interface EditedProfile {
   racketType: string;
@@ -10,7 +11,7 @@ interface EditedProfile {
 
 const CHAR_LIMIT = 30;
 
-export default function EditProfile() {
+export default function EditProfileModal() {
   const setIsEditProfile = useSetRecoilState(isEditProfileState);
   const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
   const [editedProfile, setEditedProfile] = useState<EditedProfile>({
@@ -66,15 +67,39 @@ export default function EditProfile() {
   const cancelEditHandler = () => setIsEditProfile(false);
 
   return (
-    <div>
-      <div>
-        <span>{rank} </span>
-        <span>{ppp} </span>
-        <span>{userImageUri} </span>
-        <span>{userId} </span>
-      </div>
-      <div>
-        <span>{winRate}</span>
+    <div className={styles.editContainer}>
+      <div className={styles.emoji}>✏️</div>
+      <div className={styles.container}>
+        <div className={styles.leftSide}>
+          <div className={styles.scoreInfo}>
+            <div className={styles.rank}>{rank}00</div>
+            <div className={styles.pppAndracketType}>
+              <div className={styles.ppp}>{ppp}점</div>{' '}
+              <div className={styles.racketType}>
+                {racketType.toUpperCase()}
+              </div>
+            </div>
+          </div>
+          <div className={styles.winRate}>
+            <div className={styles.winRateStr}>승률 {winRate}</div>
+            <div className={styles.winRateBar}>
+              <div
+                style={{ width: `${parseInt(winRate)}%` }}
+                className={styles.wins}
+              ></div>
+              <div
+                className={styles.loses}
+                style={{ width: `${100 - parseInt(winRate)}%` }}
+              ></div>
+            </div>
+          </div>
+        </div>
+        <div className={styles.rightSide}>
+          <div className={styles.rightTopSide}>
+            <div className={styles.image}></div>
+            <div className={styles.userId}>{userId}</div>
+          </div>
+        </div>
       </div>
       <div>
         <label>
@@ -99,17 +124,26 @@ export default function EditProfile() {
         </label>
       </div>
       <div>
-        <textarea
-          value={editedProfile.statusMessage}
-          name='statusMessage'
-          onChange={inputChangeHandler}
-          maxLength={CHAR_LIMIT}
-        ></textarea>
-        <span>{`${editedProfile.statusMessage.length}/${CHAR_LIMIT}`}</span>
+        <div className={styles.statusTitle}>
+          <span>상태메세지</span>
+        </div>
+        <div className={styles.textareaWrapper}>
+          <textarea
+            value={editedProfile.statusMessage}
+            name='statusMessage'
+            onChange={inputChangeHandler}
+            maxLength={CHAR_LIMIT}
+          ></textarea>
+          <div>{`${editedProfile.statusMessage.length}/${CHAR_LIMIT}`}</div>
+        </div>
       </div>
       <div>
-        <button onClick={cancelEditHandler}>취소</button>
-        <button onClick={finishEditHandler}>확인</button>
+        <button className={styles.cancelButton} onClick={cancelEditHandler}>
+          취소
+        </button>
+        <button className={styles.finishButton} onClick={finishEditHandler}>
+          확인
+        </button>
       </div>
     </div>
   );

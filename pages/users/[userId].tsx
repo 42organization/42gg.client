@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { isEditProfileState } from 'utils/recoil/user';
 import Chart from 'components/user/Chart';
 import Profile from 'components/user/Profile';
-import EditProfile from 'components/user/EditProfile';
+import EditProfileModal from 'components/modal/EditProfileModal';
 import GameResult from 'components/game/GameResult';
 import styles from 'styles/user/user.module.scss';
 import Modal from 'components/modal/Modal';
@@ -25,7 +25,7 @@ export default function user() {
       )}
       {isEditProfile && (
         <Modal>
-          <EditProfile />
+          <EditProfileModal />
         </Modal>
       )}
     </div>
