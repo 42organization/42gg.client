@@ -7,7 +7,7 @@ export default function handler(
 ) {
   if (req.method === 'GET') {
     const obj = {
-      noti: [
+      notifications: [
         {
           id: 1,
           type: 'matched',
