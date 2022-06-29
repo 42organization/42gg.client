@@ -20,7 +20,7 @@ export default function user() {
           <h1 className={styles.title}>{userId}</h1>
           <Profile userId={userId}></Profile>
           <Chart userId={userId}></Chart>
-          {/* <GameResult /> */}
+          <GameResult />
         </>
       )}
       {isEditProfile && (
