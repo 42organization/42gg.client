@@ -27,8 +27,8 @@ export default function CurrentMatchInfo() {
 
   if (!currentMatch) return null;
 
-  const { isMatch, enemyTeam, time, slotId } = currentMatch;
-  const matchingMessage = makeMessage(time, isMatch);
+  const { isMatched, enemyTeam, time, slotId } = currentMatch;
+  const matchingMessage = makeMessage(time, isMatched);
   const enemyTeamInfo = isBeforeMin(time, 5)
     ? makeEnemyTeamInfo(enemyTeam)
     : '';
@@ -60,13 +60,13 @@ export default function CurrentMatchInfo() {
   );
 }
 
-function makeMessage(time: string, isMatch: boolean) {
+function makeMessage(time: string, isMatched: boolean) {
   const formattedTime = gameTimeToString(time);
   return (
     <div className={styles.messageString}>
       <span>{formattedTime}</span>
       <span>
-        {isMatch ? '에 경기가 시작됩니다!' : ' 참가자 기다리는 중...'}
+        {isMatched ? '에 경기가 시작됩니다!' : ' 참가자 기다리는 중...'}
       </span>
     </div>
   );
