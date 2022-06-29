@@ -16,24 +16,24 @@ export default function GameResultBigScore({
   team2,
 }: gameResultTypes) {
   const router = useRouter();
-  const isMain = router.asPath == '/' ? true : false;
+  const isMain = router.asPath === '/' ? true : false;
 
-  const getFindTimeMilliSeconds = (gameTime: string) => {
-    return Number(new Date()) - Number(new Date(gameTime));
+  const getFindTimeSeconds = (gameTime: string) => {
+    return (Number(new Date()) - Number(new Date(gameTime))) / 1000;
   };
 
   const getTimeAgo = (gameTime: string) => {
-    const findTime = getFindTimeMilliSeconds(gameTime);
+    const findTime = getFindTimeSeconds(gameTime);
     const times = [
-      { time: '분', milliSeconds: 1000 * 60 },
-      { time: '시간', milliSeconds: 1000 * 60 * 60 },
-      { time: '일', milliSeconds: 1000 * 60 * 60 * 24 },
-      { time: '개월', milliSeconds: 1000 * 60 * 60 * 24 * 30 },
-      { time: '년', milliSeconds: 1000 * 60 * 60 * 24 * 365 },
-    ].reverse();
+      { time: '년', second: 60 * 60 * 24 * 365 },
+      { time: '개월', second: 60 * 60 * 24 * 30 },
+      { time: '일', second: 60 * 60 * 24 },
+      { time: '시간', second: 60 * 60 },
+      { time: '분', second: 60 },
+    ];
 
     for (const item of times) {
-      const betweenTime = Math.floor(findTime / item.milliSeconds);
+      const betweenTime = Math.floor(findTime / item.second);
 
       if (betweenTime > 0) {
         return `${betweenTime}${item.time} 전`;
