@@ -5,7 +5,8 @@ import { useRecoilState } from 'recoil';
 import { Game } from 'types/gameTypes';
 import infScroll from 'utils/infinityScroll';
 import { clickedGameItem } from 'utils/recoil/game';
-import GameResultItem from 'components/game/GameResultItem';
+import GameResultItem from './GameResultItem';
+import styles from 'styles/game/GameResultItem.module.scss';
 
 type gameResultTypes = {
   path: string;
@@ -48,9 +49,13 @@ export default function GameResultList({ path }: gameResultTypes) {
       )}
       <>
         {router.asPath !== '/' && lastGameId !== 0 && (
-          <button style={{ width: '100%' }} onClick={() => fetchNextPage()}>
-            더보기
-          </button>
+          <div className={styles.getButton}>
+            <input
+              type='button'
+              value='더 보기'
+              onClick={() => fetchNextPage()}
+            />
+          </div>
         )}
       </>
     </div>

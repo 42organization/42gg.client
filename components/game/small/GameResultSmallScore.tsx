@@ -1,4 +1,4 @@
-import styles from 'styles/GameResultItem.module.scss';
+import styles from 'styles/game/GameResultItem.module.scss';
 import { Team } from 'types/gameTypes';
 
 type gameResultTypes = {

@@ -13,9 +13,13 @@
     flex: 2;
     display: flex;
     align-items: center;
+    #menuIcon {
+      cursor: pointer;
+    }
   }
   #logo {
     @include logoTitle(0.25rem);
+    cursor: pointer;
     flex: 5;
     display: flex;
     align-items: center;
@@ -27,12 +31,14 @@
     align-items: center;
     justify-content: flex-end;
     #notiIcon {
+      cursor: pointer;
       display: flex;
       align-items: center;
       margin-right: 0.5rem;
       font-size: 1.5rem;
     }
     #userImg {
+      cursor: pointer;
       height: 2.2rem;
       width: 2.2rem;
       border: solid 1px white;

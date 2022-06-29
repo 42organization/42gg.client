@@ -11,6 +11,7 @@
   text-shadow: 0.1rem 0.1rem 0.1rem $pp-blue;
   text-align: center;
   span {
+    cursor: pointer;
     color: $g1-top;
   }
 }
@@ -26,117 +27,91 @@
 }
 
 .container {
-  width: flex;
   font-size: $small-font;
+}
+
+@mixin rankGrid {
+  display: grid;
+  grid-template-columns: 12% 30% auto 12%;
   align-items: center;
+  justify-items: center;
+  border-radius: $big-radius;
+  color: $dark-gray;
+  height: 2.5rem;
+  padding: 0 0.2rem;
+  margin-top: 0.15rem;
+  div:nth-child(2) {
+    justify-self: start;
+  }
 }
 
 /* Rank List 구분 */
 .division {
-  display: grid;
-  grid-template-columns: 10% 27% auto 10%;
+  @include rankGrid;
   background: $pp-red;
-  height: 2.7rem;
-  padding: 0.28rem;
-  font-weight: 700;
-  border-radius: $big-radius;
-  text-align: center;
   color: white;
-  font-family: 'Roboto';
-  align-items: center;
-}
-
-.divItem {
-  margin: 0.6rem 0.2rem;
+  font-weight: 700;
 }
 
 /* RankList */
-.oddPerson {
-  display: grid;
-  grid-template-columns: 10% 27% auto 10%;
+.odd {
+  @include rankGrid;
   background: white;
-  width: flex;
-  height: 2.3rem;
-  padding: 0.21rem;
-  border-radius: $big-radius;
-  color: $dark-gray;
-  font-family: 'Roboto';
-  text-align: center;
 }
-
-.evenPerson {
-  display: grid;
-  grid-template-columns: 10% 27% auto 10%;
+.even {
+  @include rankGrid;
   background: $gray;
-  width: flex;
-  height: 2.3rem;
-  padding: 0.21rem;
-  border-radius: $big-radius;
-  color: $dark-gray;
-  font-family: 'Roboto';
-  text-align: center;
 }
-
-.myPerson {
-  display: grid;
-  grid-template-columns: 10% 27% auto 10%;
+.myself {
+  @include rankGrid;
   background: $g1-bottom;
-  width: flex;
-  height: 2.3rem;
-  padding: 0.15rem;
   border: 0.07rem solid $pp-red;
-  border-radius: $big-radius;
-  font-family: 'Roboto';
-  text-align: center;
 }
 
-.topRank {
-  margin: 0.6rem 0.2rem;
-  font-weight: 700;
-  color: $loser-red;
-}
-
-.rank {
-  margin: 0.6rem 0.2rem;
-  color: $dark-gray;
-}
-
-.userId {
-  margin: 0.6rem 0.1rem;
-  font-weight: 700;
-  color: black;
-}
-
-.ppp {
-  font-weight: 400;
-  font-size: 0.7rem;
-  color: $dark-gray;
-}
-
-.statusMessage {
-  margin: 0.6rem 0.2rem;
-  color: $dark-gray;
-}
-
-.winRate {
-  margin: 0.6rem 0.2rem;
-  font-weight: 600;
-  color: blue;
+.rankData {
+  .topRank {
+    justify-self: center;
+    font-weight: 700;
+    color: $loser-red;
+  }
+  .rank {
+    justify-self: center;
+    color: $dark-gray;
+  }
+  .userId {
+    justify-self: start;
+    font-weight: 700;
+    color: black;
+    .ppp {
+      font-weight: 400;
+      font-size: 0.7rem;
+      color: $dark-gray;
+    }
+  }
+  .statusMessage {
+    justify-self: center;
+    color: $dark-gray;
+  }
+  .winRate {
+    justify-self: center;
+    font-weight: 600;
+    color: blue;
+  }
 }
 
 /* Main */
 
 .mainContainer {
-  font-size: $midium-font;
-  margin: 0.2rem;
+  font-size: 1.05rem;
 }
 
 .mainTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: $big-radius;
   background: $pp-red;
-  padding: 0.45rem;
   height: 2.9rem;
-  text-align: center;
   font-size: 1.5rem;
   color: white;
   font-family: $title-font;
@@ -144,40 +119,31 @@
   letter-spacing: 0.1rem;
 }
 
-.mainPerson {
+.mainData {
   display: grid;
-  grid-template-columns: 25% 50% 25%;
+  grid-template-columns: 1.5fr 4fr 2fr;
+  align-items: center;
   background: $pp-pink;
   margin-top: 0.2rem;
-  height: 2.5rem;
-  padding: 0.21rem;
-  font-family: 'Roboto';
+  height: 2.9rem;
   border-radius: $big-radius;
-}
-
-.mainRank {
-  margin: 0.6rem 0.2rem;
-  text-align: center;
-  font-weight: 900;
-  color: $pp-red;
-}
-
-.mainUserId {
-  margin: 0.6rem 0.2rem;
-  text-align: left;
-  font-weight: 900;
-  color: black;
-}
-
-.mainPpp {
-  font-weight: 500;
-  font-size: 0.9rem;
-  color: $dark-gray;
-}
-
-.mainWinRate {
-  margin: 0.6rem 0.2rem;
-  text-align: center;
-  font-weight: 600;
-  color: blue;
+  .rank {
+    text-align: center;
+    font-weight: 700;
+    color: $pp-red;
+  }
+  .userId {
+    text-align: left;
+    font-weight: 700;
+    color: black;
+    .ppp {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: $dark-gray;
+    }
+  }
+  .winRate {
+    text-align: center;
+    color: blue;
+  }
 }
