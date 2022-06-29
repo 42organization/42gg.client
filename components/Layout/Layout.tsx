@@ -2,17 +2,17 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import instance from 'utils/axios';
+import { UserData, LiveData } from 'types/mainType';
 import { userState, liveState } from 'utils/recoil/main';
 import { currentMatchInfoState } from 'utils/recoil/match';
 import { loginState } from 'utils/recoil/login';
-import { UserData, LiveData } from 'types/mainType';
 import Login from 'pages/login';
 import Header from './Header';
 import Footer from './Footer';
 import CurrentMatchInfo from './CurrentMatchInfo';
 import Modal from 'components/modal/Modal';
 import InputScoreModal from 'components/modal/InputScoreModal';
+import instance from 'utils/axios';
 import styles from 'styles/Layout/Layout.module.scss';
 
 type AppLayoutProps = {

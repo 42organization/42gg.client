@@ -1,5 +1,5 @@
-import { MatchData } from 'types/matchTypes';
 import { useEffect, useState } from 'react';
+import { MatchData } from 'types/matchTypes';
 import instance from 'utils/axios';
 import MatchBoard from './MatchBoard';
 import styles from 'styles/match/MatchBoardList.module.scss';

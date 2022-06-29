@@ -1,6 +1,6 @@
-import { isEditProfileState, profileInfoState } from 'utils/recoil/user';
-import { useSetRecoilState, useRecoilState } from 'recoil';
 import { useEffect } from 'react';
+import { useSetRecoilState, useRecoilState } from 'recoil';
+import { isEditProfileState, profileInfoState } from 'utils/recoil/user';
 import instance from 'utils/axios';
 import styles from 'styles/user/Profile.module.scss';
 

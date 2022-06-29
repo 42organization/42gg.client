@@ -1,6 +1,6 @@
+import { useSetRecoilState } from 'recoil';
 import { Slot, EnrollInfo } from 'types/matchTypes';
 import { enrollInfoState } from 'utils/recoil/match';
-import { useSetRecoilState } from 'recoil';
 import { fillZero } from 'utils/handleTime';
 import styles from 'styles/match/MatchItem.module.scss';
 

@@ -1,9 +1,9 @@
-import { enrollInfoState } from 'utils/recoil/match';
-import { EnrollInfo } from 'types/matchTypes';
-import instance from 'utils/axios';
 import { useRecoilState } from 'recoil';
+import { enrollInfoState } from 'utils/recoil/match';
 import { gameTimeToString } from 'utils/handleTime';
+import { EnrollInfo } from 'types/matchTypes';
 import Modal from './Modal';
+import instance from 'utils/axios';
 import styles from 'styles/modal/MatchEnroll.module.scss';
 
 export default function MatchEnrollModal() {

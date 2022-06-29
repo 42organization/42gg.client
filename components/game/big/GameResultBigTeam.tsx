@@ -1,6 +1,6 @@
 import { Team } from 'types/gameTypes';
-import styles from 'styles/game/GameResultItem.module.scss';
 import Link from 'next/link';
+import styles from 'styles/game/GameResultItem.module.scss';
 
 type gameResultTypes = {
   team: Team;

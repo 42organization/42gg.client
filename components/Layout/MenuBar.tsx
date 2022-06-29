@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { UserData } from 'types/mainType';
 import { userState } from 'utils/recoil/main';
 import { logoutModalState } from 'utils/recoil/login';
-import { UserData } from 'types/mainType';
 import Modal from 'components/modal/Modal';
 import LogoutModal from 'components/modal/LogoutModal';
 import styles from 'styles/Layout/MenuBar.module.scss';
