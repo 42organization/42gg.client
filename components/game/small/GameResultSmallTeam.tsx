@@ -18,7 +18,7 @@ export default function GameResultSmallTeam({
         <span>
           {team.players.map((player) => (
             <Link key={player.userId} href={`/users/${player.userId}`}>
-              <div>{player.userId}</div>
+              <div className={styles.cursorOn}>{player.userId}</div>
             </Link>
           ))}
         </span>
