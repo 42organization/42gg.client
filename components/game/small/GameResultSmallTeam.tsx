@@ -17,8 +17,8 @@ export default function GameResultSmallTeam({
         <span className={styles.userImage}></span>
         <span>
           {team.players.map((player) => (
-            <Link href={`/users/${player.userId}`}>
-              <div key={player.userId}>{player.userId}</div>
+            <Link key={player.userId} href={`/users/${player.userId}`}>
+              <div>{player.userId}</div>
             </Link>
           ))}
         </span>
