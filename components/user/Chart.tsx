@@ -33,7 +33,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Pingpong Power',
+      text: 'PingPong Power',
       color: 'white',
     },
   },
