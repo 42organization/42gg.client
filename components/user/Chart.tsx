@@ -56,7 +56,7 @@ export const options = {
       },
       ticks: {
         beginAtZero: true,
-        color: 'white',
+        color: '#FFFFFF',
         fontSize: 12,
       },
     },
