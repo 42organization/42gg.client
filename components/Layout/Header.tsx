@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -11,7 +12,7 @@ import { FiMenu } from 'react-icons/fi';
 import styles from 'styles/Layout/Header.module.scss';
 
 export default function Header() {
-  const userImg = useRecoilValue<UserData>(userState).userImageUri;
+  const userData = useRecoilValue<UserData>(userState);
   const [liveData, setLiveData] = useRecoilState<LiveData>(liveState);
   const [showMenuBar, setShowMenuBar] = useState(false);
   const [showNotiBar, setShowNotiBar] = useState(false);
@@ -47,9 +48,11 @@ export default function Header() {
           <div id={styles.notiIcon} onClick={showNotiBarHandler}>
             {liveData.notiCount ? <VscBellDot /> : <VscBell />}
           </div>
-          <div id={styles.userImg}>
-            {/* <Image src={userImg} alt='prfImg' /> */}
-          </div>
+          <Link href={`users/${userData.userId}`}>
+            <div id={styles.userImg}>
+              {/* <Image src={userData.userImg} alt='prfImg' /> */}
+            </div>
+          </Link>
         </div>
       </div>
       {showMenuBar && <MenuBar showMenuBarHandler={showMenuBarHandler} />}
