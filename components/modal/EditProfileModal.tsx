@@ -101,26 +101,28 @@ export default function EditProfileModal() {
           </div>
         </div>
       </div>
-      <div>
-        <label>
+      <div className={styles.racketRadioButtons}>
+        <label htmlFor='penholder'>
           <input
             type='radio'
             name='racketType'
+            id='penholder'
             value='penholder'
             onChange={inputChangeHandler}
             checked={editedProfile.racketType === 'penholder'}
           />{' '}
-          penholder
+          <div className={styles.radioButton}>PENHOLDER</div>
         </label>
-        <label>
+        <label htmlFor='shakehand'>
           <input
             type='radio'
             name='racketType'
+            id='shakehand'
             value='shakehand'
             onChange={inputChangeHandler}
             checked={editedProfile.racketType === 'shakehand'}
           />{' '}
-          shakehand
+          <div className={styles.radioButton}>SHAKEHAND</div>
         </label>
       </div>
       <div>

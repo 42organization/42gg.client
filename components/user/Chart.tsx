@@ -12,6 +12,7 @@ import { Line } from 'react-chartjs-2';
 import { useEffect, useState, useMemo } from 'react';
 import { ChartDataItem } from 'types/userTypes';
 import instance from 'utils/axios';
+import styles from 'styles/user/Chart.module.scss';
 
 ChartJS.register(
   CategoryScale,
@@ -32,7 +33,32 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Pingpong Power 추이',
+      text: 'PingPong Power',
+      color: '#FFFFFF',
+    },
+  },
+  scales: {
+    yAxes: {
+      grid: {
+        drawBorder: true,
+        color: '#FFFFFF',
+      },
+      ticks: {
+        beginAtZero: true,
+        color: '#FFFFFF',
+        fontSize: 12,
+      },
+    },
+    xAxes: {
+      grid: {
+        drawBorder: true,
+        color: '#FFFFFF',
+      },
+      ticks: {
+        beginAtZero: true,
+        color: '#FFFFFF',
+        fontSize: 12,
+      },
     },
   },
 };
@@ -75,8 +101,8 @@ export default function Chart({ userId }: ChartProps) {
   );
 
   return (
-    <div>
-      <Line options={options} data={data} />
+    <div className={styles.chartWrapper}>
+      <Line options={options} data={data} height={180} />
     </div>
   );
 }

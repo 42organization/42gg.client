@@ -1,0 +1,9 @@
+@import '../common.scss';
+
+.container {
+  @include pageWrap;
+}
+
+.title {
+  @include pageTitle;
+}
