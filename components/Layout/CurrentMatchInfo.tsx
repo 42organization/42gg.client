@@ -81,7 +81,7 @@ function isBeforeMin(gameTimeString: string, min: number) {
 
 function makeEnemyTeamInfo(enemyTeam: string[]) {
   const enemyUsers = enemyTeam.map((userId: string, i: number) => (
-    <span key={userId}>
+    <span key={userId} id={styles.enemyUsers}>
       <Link href={`/users/${userId}`}>{userId}</Link>
       {i < enemyTeam.length - 1 ? ', ' : ''}
     </span>
