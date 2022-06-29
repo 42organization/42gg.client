@@ -4,10 +4,10 @@ import styles from 'styles/load/Loading.module.scss';
 export default function Loading() {
   return (
     <div className={styles.container}>
-      <div className={styles.backColor}>
+      <div>
         <div className={styles.spinner}>
-          <h1 className={styles.title}> 42GG</h1>
-          <h2 className={styles.loadingTag}>Loading ...</h2>
+          <h1 className={styles.title}>42GG</h1>
+          <h2 className={styles.loadText}>Loading ...</h2>
           <svg className={[styles.raquet, styles.r1].join(' ')}>
             <ellipse className={styles.front} cx='44' cy='50' rx='35' ry='50' />
             <ellipse

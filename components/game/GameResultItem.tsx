@@ -5,7 +5,7 @@ import GameResultBigScore from 'components/game/big/GameResultBigScore';
 import GameResultSmallScore from 'components/game/small/GameResultSmallScore';
 import GameResultBigTeam from 'components/game/big/GameResultBigTeam';
 import GameResultSmallTeam from 'components/game/small/GameResultSmallTeam';
-import styles from 'styles/GameResultItem.module.scss';
+import styles from 'styles/game/GameResultItem.module.scss';
 
 type gameResultTypes = {
   game: Game;
@@ -13,7 +13,7 @@ type gameResultTypes = {
 };
 
 export default function GameResultItem({ game, big }: gameResultTypes) {
-  const { team1, team2, status, gameId } = game;
+  const { team1, team2, status, time, gameId } = game;
   const setClickedItemId = useSetRecoilState<number>(clickedGameItem);
 
   return <>{big ? <BigItem /> : <SmallItem />}</>;
@@ -38,7 +38,12 @@ export default function GameResultItem({ game, big }: gameResultTypes) {
         onClick={() => setClickedItemId(gameId)}
       >
         <GameResultBigTeam team={team1} userLeft={true} />
-        <GameResultBigScore status={status} team1={team1} team2={team2} />
+        <GameResultBigScore
+          status={status}
+          time={time}
+          team1={team1}
+          team2={team2}
+        />
         <GameResultBigTeam team={team2} userLeft={false} />
       </div>
     );

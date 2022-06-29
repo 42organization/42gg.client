@@ -1,5 +1,5 @@
 import GameResult from 'components/game/GameResult';
-import styles from 'styles/GameResultItem.module.scss';
+import styles from 'styles/game/GameResultItem.module.scss';
 
 export default function Game() {
   return (

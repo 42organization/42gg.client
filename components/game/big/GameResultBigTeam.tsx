@@ -1,5 +1,6 @@
 import { Team } from 'types/gameTypes';
-import styles from 'styles/GameResultItem.module.scss';
+import styles from 'styles/game/GameResultItem.module.scss';
+import Link from 'next/link';
 
 type gameResultTypes = {
   team: Team;
@@ -17,7 +18,9 @@ export default function GameResultBigTeam({ team, userLeft }: gameResultTypes) {
       </div>
       {team.players.map((player) => (
         <div key={player.userId}>
-          <div className={styles.userId}>{player.userId}</div>
+          <Link href={`/users/${player.userId}`}>
+            <div className={styles.userId}>{player.userId}</div>
+          </Link>
           <div className={styles.winRate}>
             <span>{player.wins}승 </span>
             <span>{player.losses}패 </span>

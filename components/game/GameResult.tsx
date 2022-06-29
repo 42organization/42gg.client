@@ -13,7 +13,7 @@ export default function GameResult() {
     } else if (router.asPath === '/game') {
       setPath(`/pingpong/games?count=10&pageParam=`);
     } else {
-      setPath(`/pingpong${router.asPath}/games?count=4&status=end&gameId=`);
+      setPath(`/pingpong${router.asPath}/games?count=5&status=end&pageParam=`);
     }
   }, []);
 
