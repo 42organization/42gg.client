@@ -10,7 +10,8 @@ export type Slots = Slot[];
 export interface CurrentMatch {
   slotId: number;
   time: string;
-  isMatch: boolean;
+  isMatched: boolean;
+  myTeam: string[];
   enemyTeam: string[];
 }
 

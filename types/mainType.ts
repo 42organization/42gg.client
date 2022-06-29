@@ -11,11 +11,3 @@ export interface LiveData {
 export interface SearchData {
   users: string[];
 }
-export interface currentMatch {
-  time: string;
-  enemyTeam: [];
-  match: {
-    slotId: number;
-    isMatch: boolean;
-  };
-}
