@@ -13,6 +13,7 @@
   text-shadow: 2px 2px 2px $dark-gray;
   button {
     all: unset;
+    cursor: pointer;
     color: $dark-gray;
     font-size: 1.5rem;
     text-shadow: none;
@@ -24,6 +25,7 @@
     font-size: $big-giant-font;
     font-weight: 600;
     div {
+      cursor: pointer;
       margin-bottom: 1.7rem;
     }
   }
@@ -31,6 +33,7 @@
     margin: 4rem 1rem;
     font-size: $midium-font;
     div {
+      cursor: pointer;
       margin-bottom: 1.2rem;
     }
   }

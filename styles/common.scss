@@ -65,6 +65,7 @@ $winner-blue: #040eff;
 
 @mixin button($btn-color, $txt-color, $width: 8rem, $height: 2.8rem) {
   all: unset;
+  cursor: pointer;
   box-shadow: 5px 5px 6px $dark-gray;
   border-radius: $small-radius;
   width: $width;
