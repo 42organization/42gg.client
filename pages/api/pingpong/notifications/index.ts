@@ -7,7 +7,7 @@ export default function handler(
 ) {
   if (req.method === 'GET') {
     const obj = {
-      noti: [
+      notifications: [
         {
           id: 1,
           type: 'matched',
@@ -17,14 +17,14 @@ export default function handler(
         },
         {
           id: 2,
-          type: 'canceledByMan',
+          type: 'canceledbyman',
           time: '2022-06-28T12:00:00',
           isChecked: false,
           createdAt: '2022-06-28T11:48:34',
         },
         {
           id: 3,
-          type: 'canceledByTime',
+          type: 'canceledbytime',
           time: '2022-06-28T12:00:00',
           isChecked: false,
           createdAt: '2022-06-28T11:48:34',
@@ -54,7 +54,7 @@ export default function handler(
         },
         {
           id: 7,
-          type: 'canceledByMan',
+          type: 'canceledbyman',
           time: '2022-06-28T12:00:00',
           isChecked: true,
           createdAt: '2022-06-28T11:48:34',
