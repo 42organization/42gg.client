@@ -9,7 +9,8 @@ export default function handler(
   const currentMatch: CurrentMatch = {
     slotId: 0,
     time: '2022-06-10 18:00',
-    isMatch: true,
+    isMatched: true,
+    myTeam: ['kipark', 'wochae'],
     enemyTeam: ['sujpark', 'jabae'],
   };
   res.status(200).json(currentMatch);
