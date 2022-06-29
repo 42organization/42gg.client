@@ -60,9 +60,9 @@ function makeContent(data: NotiData) {
     const gameTime = gameTimeToString(data.time);
     if (data.type === 'matched')
       return `${gameTime}에 신청한 매칭이 상대에 의해 성사되었습니다.`;
-    else if (data.type === 'canceledByMan')
+    else if (data.type === 'canceledbyman')
       return `${gameTime}에 신청한 매칭이 상대에 의해 취소되었습니다.`;
-    else if (data.type === 'canceledByTime')
+    else if (data.type === 'canceledbytime')
       return `${gameTime}에 신청한 매칭이 상대 없음으로 취소되었습니다.`;
   } else return `${data.message}`;
 }
