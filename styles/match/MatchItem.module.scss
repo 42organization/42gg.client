@@ -1,4 +1,4 @@
-@import '../common.scss';
+@import 'styles/common.scss';
 
 @mixin matchItemButton {
   border: 0;
@@ -16,12 +16,12 @@
 
 .enableButton {
   @include matchItemButton;
-  background: linear-gradient(to bottom, white, #f0b5f2);
+  background: linear-gradient(to bottom, white, $g1-bottom);
 }
 
 .disableButton {
   @include matchItemButton;
-  background: linear-gradient(to bottom, #dadada, rgba(217, 217, 217, 0.6));
+  background: linear-gradient(to bottom, $gray, rgba(217, 217, 217, 0.6));
 }
 
 .timeString {

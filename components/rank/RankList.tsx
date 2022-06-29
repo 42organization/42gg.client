@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import styles from 'styles/RankList.module.scss';
+import { useRecoilState } from 'recoil';
 import { Rank, RankData } from 'types/rankTypes';
 import instance from 'utils/axios';
-import { useRecoilState } from 'recoil';
 import { myRankPosition, isScrollState } from 'utils/recoil/myRank';
 import RankItem from './RankItem';
 import PageNation from 'components/Pagination';
+import styles from 'styles/RankList.module.scss';
 
 export default function RankList() {
   const [rankData, setRankData] = useState<RankData | null>(null);

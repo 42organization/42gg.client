@@ -1,5 +1,4 @@
-import React from 'react';
-import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { myRankPosition, isScrollState } from 'utils/recoil/myRank';
 import styles from 'styles/RankList.module.scss';
 

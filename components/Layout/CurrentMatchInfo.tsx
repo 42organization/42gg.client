@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import Modal from 'components/modal/Modal';
-import CancelModal from 'components/modal/CancelModal';
-import { CurrentMatch } from 'types/matchTypes';
-import { gameTimeToString } from 'utils/handleTime';
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
+import { CurrentMatch } from 'types/matchTypes';
+import { gameTimeToString } from 'utils/handleTime';
 import { cancelModalState } from 'utils/recoil/match';
+import Modal from 'components/modal/Modal';
+import CancelModal from 'components/modal/CancelModal';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 

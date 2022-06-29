@@ -1,5 +1,5 @@
-import MatchBoardList from '../components/match/MatchBoardList';
-import MatchEnrollModal from '../components/modal/MatchEnrollModal';
+import MatchBoardList from 'components/match/MatchBoardList';
+import MatchEnrollModal from 'components/modal/MatchEnrollModal';
 import styles from 'styles/match/match.module.scss';
 
 export default function Match() {

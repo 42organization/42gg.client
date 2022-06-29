@@ -1,6 +1,6 @@
-import instance from 'utils/axios';
 import { useSetRecoilState } from 'recoil';
 import { cancelModalState, currentMatchInfoState } from 'utils/recoil/match';
+import instance from 'utils/axios';
 import styles from 'styles/modal/CancelModal.module.scss';
 
 type SlotProps = {

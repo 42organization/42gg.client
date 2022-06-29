@@ -1,9 +1,8 @@
-import React from 'react';
 import Link from 'next/link';
-import styles from '../../styles/RankList.module.scss';
-import { Rank } from '../../types/rankTypes';
 import { useRecoilValue } from 'recoil';
-import { myRankPosition } from '../../utils/recoil/myRank';
+import { Rank } from 'types/rankTypes';
+import { myRankPosition } from 'utils/recoil/myRank';
+import styles from 'styles/RankList.module.scss';
 
 type RankType = {
   user: Rank;

@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import GameResult from '../game/GameResult';
-import RankList from '../rank/RankList';
+import GameResult from 'components/game/GameResult';
+import RankList from 'components/rank/RankList';
 import styles from 'styles/main/Section.module.scss';
 
 type SectionProps = {

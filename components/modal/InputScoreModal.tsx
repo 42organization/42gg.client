@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import instance from 'utils/axios';
+import { useEffect, useState } from 'react';
 import { PlayerInfo, GameResult } from 'types/scoreTypes';
+import instance from 'utils/axios';
 import styles from 'styles/modal/InputScoreModal.module.scss';
 
 const defaultPlayersInfo: PlayerInfo[] = [{ userId: '', userImageUri: '' }];

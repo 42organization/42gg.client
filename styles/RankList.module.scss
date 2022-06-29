@@ -94,7 +94,7 @@
   .winRate {
     justify-self: center;
     font-weight: 600;
-    color: blue;
+    color: $winner-blue;
   }
 }
 
@@ -143,6 +143,6 @@
   }
   .winRate {
     text-align: center;
-    color: blue;
+    color: $winner-blue;
   }
 }
