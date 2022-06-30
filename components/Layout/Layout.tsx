@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { UserData, LiveData } from 'types/mainType';
 import { userState, liveState } from 'utils/recoil/main';
-import { currentMatchInfoState } from 'utils/recoil/match';
+import { openCurrentMatchInfoState } from 'utils/recoil/match';
 import { loginState } from 'utils/recoil/login';
 import Login from 'pages/login';
 import Header from './Header';
@@ -24,7 +24,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const [userData, setUserData] = useRecoilState<UserData>(userState);
   const [liveData, setLiveData] = useRecoilState<LiveData>(liveState);
   const [openCurrentInfo, setOpenCurrentInfo] = useRecoilState<boolean>(
-    currentMatchInfoState
+    openCurrentMatchInfoState
   );
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
   const presentPath = useRouter().asPath;

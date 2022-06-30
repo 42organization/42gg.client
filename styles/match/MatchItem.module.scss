@@ -12,6 +12,12 @@
   padding: 0.2rem 0.6rem;
   color: black;
   font-size: $midium-font;
+  cursor: pointer;
+}
+
+.myButton {
+  @include matchItemButton;
+  background: linear-gradient(to bottom, white, rgba(45, 128, 237));
 }
 
 .enableButton {
@@ -22,6 +28,7 @@
 .disableButton {
   @include matchItemButton;
   background: linear-gradient(to bottom, $gray, rgba(217, 217, 217, 0.6));
+  cursor: default;
 }
 
 .headCountString {

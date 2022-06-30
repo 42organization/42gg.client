@@ -16,10 +16,12 @@ export default function MatchItem({
   intervalMinute,
 }: MatchItemProps) {
   const setEnrollInfo = useSetRecoilState<EnrollInfo | null>(enrollInfoState);
+
   const { headCount, slotId, status, time } = slot;
   const headMax = type === 'single' ? 2 : 4;
   const startTime = new Date(time);
   const endTime = new Date(time);
+  let buttonStyle;
   endTime.setMinutes(endTime.getMinutes() + intervalMinute);
 
   const onClick = () => {
@@ -31,11 +33,17 @@ export default function MatchItem({
     });
   };
 
+  if (status === 'mytable') {
+    buttonStyle = styles.myButton;
+  } else if (status === 'open') {
+    buttonStyle = styles.enableButton;
+  } else {
+    buttonStyle = styles.disableButton;
+  }
+
   return (
     <button
-      className={
-        status === 'close' ? styles.disableButton : styles.enableButton
-      }
+      className={buttonStyle}
       disabled={status === 'close'}
       onClick={onClick}
     >
