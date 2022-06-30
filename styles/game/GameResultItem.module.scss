@@ -69,7 +69,7 @@
   .userImage {
     @include imageCircle(white, 4.5rem, 4.5rem);
   }
-  .userId {
+  .intraId {
     margin: 0.5rem 0;
     text-align: center;
     text-shadow: $text-shadow;

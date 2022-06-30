@@ -1,5 +1,5 @@
 export interface Player {
-  userId: string;
+  intraId: string;
   userImageUri: string;
   wins: number;
   losses: number;

@@ -80,9 +80,9 @@ function isBeforeMin(gameTimeString: string, min: number) {
 }
 
 function makeEnemyTeamInfo(enemyTeam: string[]) {
-  const enemyUsers = enemyTeam.map((userId: string, i: number) => (
-    <span key={userId} id={styles.enemyUsers}>
-      <Link href={`/users/${userId}`}>{userId}</Link>
+  const enemyUsers = enemyTeam.map((intraId: string, i: number) => (
+    <span key={intraId} id={styles.enemyUsers}>
+      <Link href={`/users/${intraId}`}>{intraId}</Link>
       {i < enemyTeam.length - 1 ? ', ' : ''}
     </span>
   ));

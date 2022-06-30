@@ -13,9 +13,9 @@ export default function NotiItem({ data, showNotiBarHandler }: NotiItemProps) {
   const notiDate = data.createdAt.slice(5, 16).replace('T', ' ');
 
   const makeEnemyUsers = (enemyTeam: string[]) => {
-    return enemyTeam.map((userId: string, i: number) => (
-      <span key={userId} onClick={showNotiBarHandler}>
-        <Link href={`/users/${userId}`}>{userId}</Link>
+    return enemyTeam.map((intraId: string, i: number) => (
+      <span key={intraId} onClick={showNotiBarHandler}>
+        <Link href={`/users/${intraId}`}>{intraId}</Link>
         {data.enemyTeam && i < data.enemyTeam.length - 1 ? ', ' : ''}
       </span>
     ));

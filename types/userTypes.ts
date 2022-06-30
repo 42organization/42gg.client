@@ -1,5 +1,5 @@
 export interface ProfileInfo {
-  userId: string;
+  intraId: string;
   userImageUri: string;
   rank: number;
   ppp: number;

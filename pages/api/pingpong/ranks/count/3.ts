@@ -13,21 +13,21 @@ export default function handler(
     rankList: [
       {
         rank: 1,
-        userId: 'kipark',
+        intraId: 'kipark',
         ppp: 100,
         statusMessage: '기요미 막내',
         winRate: 100,
       },
       {
         rank: 2,
-        userId: 'sujpark',
+        intraId: 'sujpark',
         ppp: 90,
         statusMessage: '멋쟁이 PM',
         winRate: 80,
       },
       {
         rank: 3,
-        userId: 'jabae',
+        intraId: 'jabae',
         ppp: 80,
         statusMessage: '비쥬얼 리드',
         winRate: 60,

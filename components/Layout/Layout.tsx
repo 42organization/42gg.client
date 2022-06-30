@@ -47,7 +47,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }, [token]);
 
   useEffect(() => {
-    if (userData.userId) {
+    if (userData.intraId) {
       getLiveDataHandler();
     }
   }, [presentPath, userData]);
