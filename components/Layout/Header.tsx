@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { UserData, LiveData } from 'types/mainType';
 import { userState, liveState } from 'utils/recoil/main';
 import MenuBar from './MenuBar';
 import NotiBar from './NotiBar';
@@ -12,8 +11,8 @@ import { FiMenu } from 'react-icons/fi';
 import styles from 'styles/Layout/Header.module.scss';
 
 export default function Header() {
-  const userData = useRecoilValue<UserData>(userState);
-  const [liveData, setLiveData] = useRecoilState<LiveData>(liveState);
+  const userData = useRecoilValue(userState);
+  const [liveData, setLiveData] = useRecoilState(liveState);
   const [showMenuBar, setShowMenuBar] = useState(false);
   const [showNotiBar, setShowNotiBar] = useState(false);
   const router = useRouter();
