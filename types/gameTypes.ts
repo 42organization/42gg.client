@@ -4,7 +4,7 @@ export interface Player {
   wins: number;
   losses: number;
   winRate: number;
-  pppChange: number;
+  pppChange: number | null;
 }
 
 export interface Team {
