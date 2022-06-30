@@ -60,7 +60,7 @@ export default function SearchBar() {
         />
         <div className={styles.buttons}>
           {keyword && (
-            <span onClick={resetKeywordHandler}>
+            <span className={styles.resetBtn} onClick={resetKeywordHandler}>
               <IoIosCloseCircle style={{ color: 'gray' }} />
             </span>
           )}
@@ -73,7 +73,7 @@ export default function SearchBar() {
         <div className={styles.dropdown}>
           {searchResult.length
             ? searchResult.map((intraId: string) => (
-                <Link href={`users/${intraId}`} key={intraId}>
+                <Link href={`/users/${intraId}`} key={intraId}>
                   <div>{intraId}</div>
                 </Link>
               ))

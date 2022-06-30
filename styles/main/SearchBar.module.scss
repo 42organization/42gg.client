@@ -18,6 +18,9 @@
     display: flex;
     align-items: center;
     font-size: 1.2rem;
+    .resetBtn {
+      cursor: pointer;
+    }
     span {
       display: flex;
       align-items: center;
@@ -35,6 +38,7 @@
   margin: -0.7rem 0.8rem 0;
   padding: 0.7rem 1rem 1rem;
   div {
+    cursor: pointer;
     padding: 0.5rem 0;
   }
 }
