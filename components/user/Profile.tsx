@@ -5,23 +5,23 @@ import instance from 'utils/axios';
 import styles from 'styles/user/Profile.module.scss';
 
 interface ProfileProps {
-  userId: string;
+  intraId: string;
 }
 
-export default function Profile({ userId }: ProfileProps) {
+export default function Profile({ intraId }: ProfileProps) {
   const setIsEditProfile = useSetRecoilState(isEditProfileState);
   const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
 
   useEffect(() => {
     (async () => {
       try {
-        const res = await instance.get(`/pingpong/users/${userId}/detail`);
+        const res = await instance.get(`/pingpong/users/${intraId}/detail`);
         setProfileInfo(res?.data);
       } catch (e) {
         console.log(e);
       }
     })();
-  }, [userId]);
+  }, [intraId]);
 
   const {
     userImageUri,
@@ -66,7 +66,7 @@ export default function Profile({ userId }: ProfileProps) {
       <div className={styles.rightSide}>
         <div className={styles.rightTopSide}>
           <div className={styles.image}></div>
-          <div className={styles.userId}>{userId}</div>
+          <div className={styles.intraId}>{intraId}</div>
         </div>
         <input
           type='button'

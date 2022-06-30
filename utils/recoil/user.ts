@@ -10,7 +10,7 @@ export const isEditProfileState = atom<boolean>({
 export const profileInfoState = atom<ProfileInfo>({
   key: `profileInfoState/${v1()}`,
   default: {
-    userId: '',
+    intraId: '',
     userImageUri: '',
     rank: 0,
     ppp: 0,

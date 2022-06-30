@@ -6,7 +6,7 @@ export default function handler(
   res: NextApiResponse<UserData>
 ) {
   const obj = {
-    userId: 'jabae',
+    intraId: 'jabae',
     userImageUri: '/vercel.svg',
     myRank: 80,
     notiCount: 4,

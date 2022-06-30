@@ -3,7 +3,7 @@ import { PlayerInfo, GameResult } from 'types/scoreTypes';
 import instance from 'utils/axios';
 import styles from 'styles/modal/InputScoreModal.module.scss';
 
-const defaultPlayersInfo: PlayerInfo[] = [{ userId: '', userImageUri: '' }];
+const defaultPlayersInfo: PlayerInfo[] = [{ intraId: '', userImageUri: '' }];
 const defaultResult: GameResult = { myTeamScore: '', enemyTeamScore: '' };
 
 export default function InputScoreModal() {
@@ -81,22 +81,22 @@ export default function InputScoreModal() {
         <div className={styles.players}>
           <div className={styles.userInfo}>
             {myTeamInfo.map((userInfo) => (
-              <div key={userInfo.userId} className={styles.userImage}></div>
+              <div key={userInfo.intraId} className={styles.userImage}></div>
             ))}
             {myTeamInfo.map((userInfo) => (
-              <div key={userInfo.userId} className={styles.userId}>
-                {userInfo.userId}
+              <div key={userInfo.intraId} className={styles.intraId}>
+                {userInfo.intraId}
               </div>
             ))}
           </div>
           <div>vs</div>
           <div className={styles.userInfo}>
             {enemyTeamInfo.map((userInfo) => (
-              <div key={userInfo.userId} className={styles.userImage}></div>
+              <div key={userInfo.intraId} className={styles.userImage}></div>
             ))}
             {enemyTeamInfo.map((userInfo) => (
-              <div key={userInfo.userId} className={styles.userId}>
-                {userInfo.userId}
+              <div key={userInfo.intraId} className={styles.intraId}>
+                {userInfo.intraId}
               </div>
             ))}
           </div>

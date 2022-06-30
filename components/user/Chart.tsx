@@ -64,10 +64,10 @@ export const options = {
 };
 
 interface ChartProps {
-  userId: string;
+  intraId: string;
 }
 
-export default function Chart({ userId }: ChartProps) {
+export default function Chart({ intraId }: ChartProps) {
   const [chartData, setChartData] = useState<ChartDataItem[]>([
     { ppp: 0, date: '1970-01-01' },
   ]);
@@ -76,7 +76,7 @@ export default function Chart({ userId }: ChartProps) {
     (async () => {
       try {
         const res = await instance.get(
-          `/pingpong/users/${userId}/historics?chartType=rank`
+          `/pingpong/users/${intraId}/historics?chartType=rank`
         );
         setChartData(res?.data.historics);
       } catch (e) {

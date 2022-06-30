@@ -10,16 +10,16 @@ import Modal from 'components/modal/Modal';
 
 export default function user() {
   const router = useRouter();
-  const { userId } = router.query;
+  const { intraId } = router.query;
   const isEditProfile = useRecoilValue(isEditProfileState);
 
   return (
     <div className={styles.container}>
-      {typeof userId === 'string' && (
+      {typeof intraId === 'string' && (
         <>
-          <h1 className={styles.title}>{userId}</h1>
-          <Profile userId={userId}></Profile>
-          <Chart userId={userId}></Chart>
+          <h1 className={styles.title}>{intraId}</h1>
+          <Profile intraId={intraId}></Profile>
+          <Chart intraId={intraId}></Chart>
           <GameResult />
         </>
       )}

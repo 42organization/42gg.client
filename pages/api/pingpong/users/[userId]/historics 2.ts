@@ -9,7 +9,7 @@ export default function handler(
   res: NextApiResponse<Data | object>
 ) {
   if (req.method === 'GET') {
-    if (req.query.userId && req.query.chartType === 'rank') {
+    if (req.query.intraId && req.query.chartType === 'rank') {
       const historics1 = [
         {
           date: '2022-01-01 12:00',

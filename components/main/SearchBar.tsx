@@ -72,9 +72,9 @@ export default function SearchBar() {
       {showDropDown && keyword && (
         <div className={styles.dropdown}>
           {searchResult.length
-            ? searchResult.map((userId: string) => (
-                <Link href={`users/${userId}`} key={userId}>
-                  <div>{userId}</div>
+            ? searchResult.map((intraId: string) => (
+                <Link href={`users/${intraId}`} key={intraId}>
+                  <div>{intraId}</div>
                 </Link>
               ))
             : '검색 결과가 없습니다.'}

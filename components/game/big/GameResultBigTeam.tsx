@@ -13,14 +13,14 @@ export default function GameResultBigTeam({ team, userLeft }: gameResultTypes) {
       <div className={styles.userImage}>
         {/* image url 추가 시 적용 */}
         {/* {team.players.map((player) => (
-              <div key={player.userId}>{player.userId}</div>
+              <div key={player.intraId}>{player.intraId}</div>
             ))} */}
       </div>
       {team.players.map((player) => (
-        <div key={player.userId}>
-          <Link href={`/users/${player.userId}`}>
-            <div className={`${styles.userId} ${styles.cursorOn}`}>
-              {player.userId}
+        <div key={player.intraId}>
+          <Link href={`/users/${player.intraId}`}>
+            <div className={`${styles.intraId} ${styles.cursorOn}`}>
+              {player.intraId}
             </div>
           </Link>
           <div className={styles.winRate}>

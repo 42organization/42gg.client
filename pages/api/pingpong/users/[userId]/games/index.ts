@@ -14,7 +14,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   let i = 0;
   const players: Player[] = [
     {
-      userId: 'kipark',
+      intraId: 'kipark',
       userImageUri: 'imageUrl',
       wins: 1,
       losses: 2,
@@ -22,7 +22,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       pppChange: 20,
     },
     {
-      userId: 'jibae',
+      intraId: 'jibae',
       userImageUri: 'imageUrl',
       wins: 4,
       losses: 2,
@@ -30,7 +30,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       pppChange: 20,
     },
     {
-      userId: 'sujpark',
+      intraId: 'sujpark',
       userImageUri: 'imageUrl',
       wins: 1422,
       losses: 122,
@@ -38,7 +38,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       pppChange: 210,
     },
     {
-      userId: 'jabae',
+      intraId: 'jabae',
       userImageUri: 'imageUrl',
       wins: 1,
       losses: 1,

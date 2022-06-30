@@ -47,7 +47,7 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
             <div className={styles.menu}>
               <div onClick={() => MenuPathHandler('rank')}>랭킹</div>
               <div onClick={() => MenuPathHandler('game')}>최근 경기</div>
-              <div onClick={() => MenuPathHandler(`users/${userData.userId}`)}>
+              <div onClick={() => MenuPathHandler(`users/${userData.intraId}`)}>
                 내 정보
               </div>
             </div>

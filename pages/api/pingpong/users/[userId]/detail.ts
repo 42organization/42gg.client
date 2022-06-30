@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { ProfileInfo } from '../../../../../types/userTypes';
 
 const profile = {
-  userId: '',
+  intraId: '',
   userImageUri: '',
   rank: 3,
   ppp: 500,
@@ -19,9 +19,9 @@ export default function handler(
   res: NextApiResponse<ProfileInfo | object>
 ) {
   if (req.method === 'GET') {
-    if (typeof req.query.userId !== 'string')
+    if (typeof req.query.intraId !== 'string')
       return res.status(400).json({ message: '잘못된 아이디 입니다' });
-    profile.userId = req.query.userId;
+    profile.intraId = req.query.intraId;
     res.status(200).json(profile);
   } else res.status(400).json({ message: '잘못된 접근입니다' });
 }

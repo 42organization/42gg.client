@@ -1,5 +1,5 @@
 export interface PlayerInfo {
-  userId: string;
+  intraId: string;
   userImageUri: string;
 }
 

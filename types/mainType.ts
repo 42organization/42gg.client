@@ -1,5 +1,5 @@
 export interface UserData {
-  userId: string;
+  intraId: string;
   userImageUri: string;
 }
 

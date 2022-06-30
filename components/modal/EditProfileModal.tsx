@@ -19,7 +19,7 @@ export default function EditProfileModal() {
     statusMessage: '',
   });
   const {
-    userId,
+    intraId,
     userImageUri,
     rank,
     ppp,
@@ -97,7 +97,7 @@ export default function EditProfileModal() {
         <div className={styles.rightSide}>
           <div className={styles.rightTopSide}>
             <div className={styles.image}></div>
-            <div className={styles.userId}>{userId}</div>
+            <div className={styles.intraId}>{intraId}</div>
           </div>
         </div>
       </div>
