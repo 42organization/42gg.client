@@ -42,7 +42,7 @@ export default function Profile({ intraId }: ProfileProps) {
     <div className={styles.container}>
       <div className={styles.leftSide}>
         <div className={styles.scoreInfo}>
-          <div className={styles.rank}>{rank}00</div>
+          <div className={styles.rank}>{rank}</div>
           <div className={styles.pppAndracketType}>
             <div className={styles.ppp}>{ppp}점</div>{' '}
             <div className={styles.racketType}>{racketType.toUpperCase()}</div>
