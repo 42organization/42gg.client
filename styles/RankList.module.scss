@@ -86,6 +86,9 @@
       font-size: 0.7rem;
       color: $dark-gray;
     }
+    span {
+      cursor: pointer;
+    }
   }
   .statusMessage {
     justify-self: center;
@@ -139,6 +142,9 @@
       font-weight: 500;
       font-size: 0.9rem;
       color: $dark-gray;
+    }
+    span {
+      cursor: pointer;
     }
   }
   .winRate {
