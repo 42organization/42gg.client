@@ -6,6 +6,7 @@ import { Game } from 'types/gameTypes';
 import infScroll from 'utils/infinityScroll';
 import { clickedGameItem } from 'utils/recoil/game';
 import GameResultItem from './GameResultItem';
+import GameResultEmptyArray from './GameResultEmptyArray';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 type gameResultTypes = {
@@ -29,6 +30,10 @@ export default function GameResultList({ path }: gameResultTypes) {
       setClickedItemId(data?.pages[0].games[0].gameId);
     setLastGameId(getLastGameId(data));
   }, [data]);
+
+  if (data?.pages[0].games.length === 0) {
+    return <GameResultEmptyArray />;
+  }
 
   return (
     <div>
