@@ -23,6 +23,7 @@ export default function MatchEnrollModal() {
     );
     alert(res?.data.message);
     setEnrollInfo(null);
+    window.location.reload();
   };
 
   const onCancel = () => setEnrollInfo(null);
