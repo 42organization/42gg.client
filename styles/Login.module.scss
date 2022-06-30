@@ -17,12 +17,12 @@
     padding-bottom: 5rem;
   }
 
-  .Title {
+  .title {
     @include logoTitle(0.4rem);
     font-size: 5rem;
   }
 
-  .Button {
+  .button {
     @include button($btn-blue, white);
     box-shadow: 0.1rem 0.1rem 0.3rem $pp-blue;
     width: 13rem;
