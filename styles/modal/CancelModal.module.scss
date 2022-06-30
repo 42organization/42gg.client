@@ -1,22 +1,12 @@
 @import 'styles/common.scss';
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+  @include modal-container;
   height: 17rem;
 }
 
 .phrase {
   @include modal-phrase;
-  font-size: $big-font;
-  .subContent {
-    margin: 0.5rem 0;
-    font-size: $small-font;
-    line-height: 1.5;
-    color: $pp-blue;
-  }
 }
 
 .buttons {

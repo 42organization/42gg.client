@@ -115,10 +115,24 @@ $winner-blue: #040eff;
 @mixin modal-phrase {
   text-align: center;
   line-height: 150%;
+  font-size: $big-font;
   .emoji {
     font-size: $giant-big-font;
     margin-bottom: 1rem;
   }
+  .subContent {
+    margin: 0.5rem 0;
+    font-size: $small-font;
+    line-height: 1.5;
+    color: $pp-blue;
+  }
+}
+
+@mixin modal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 @mixin spanUpDownAnimation($fontSize, $padding) {
