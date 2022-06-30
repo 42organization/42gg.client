@@ -20,6 +20,12 @@ a {
   box-sizing: border-box;
 }
 
+/* 페이지네이션 */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
 .pagination {
   display: flex;
   flex-direction: row;
@@ -27,7 +33,30 @@ a {
   align-items: center;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+ul.pagination li {
+  display: inline-block;
+  cursor: pointer;
+  width: 27px;
+  height: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem; /* $big-font */
+  font-weight: 600;
+}
+
+ul.pagination li a {
+  text-decoration: none;
+  color: #f0b5f2; /* $g1-bottom */
+  font-size: 1rem;
+}
+
+ul.pagination li.active a {
+  color: #de1825; /* $pp-red */
+}
+
+ul.pagination li a:hover,
+ul.pagination li a.active {
+  font-weight: 700;
+  color: #de1825; /* $pp-red */
 }
