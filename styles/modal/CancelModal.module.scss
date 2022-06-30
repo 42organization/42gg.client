@@ -11,6 +11,11 @@
 .phrase {
   @include modal-phrase;
   font-size: $big-font;
+  .subContent {
+    margin: 1.5rem 0;
+    font-size: $small-font;
+    line-height: 1.5;
+  }
 }
 
 .buttons {
