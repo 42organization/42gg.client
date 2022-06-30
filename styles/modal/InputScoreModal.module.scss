@@ -64,8 +64,5 @@
 }
 
 .buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   @include select-buttons;
 }

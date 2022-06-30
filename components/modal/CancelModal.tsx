@@ -42,18 +42,12 @@ export default function CancelModal({ slotId }: SlotProps) {
         </div>
       </div>
       <div className={styles.buttons}>
-        <input
-          className={styles.negative}
-          onClick={onReturn}
-          type='button'
-          value='아니오'
-        />
-        <input
-          className={styles.positive}
-          onClick={onCancel}
-          type='button'
-          value='예'
-        />
+        <div className={styles.negative}>
+          <input onClick={onReturn} type='button' value='아니오' />
+        </div>
+        <div className={styles.positive}>
+          <input onClick={onCancel} type='button' value='예' />
+        </div>
       </div>
     </div>
   );

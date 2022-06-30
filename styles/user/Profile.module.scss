@@ -135,13 +135,8 @@
   height: 28rem;
 }
 
-.cancelButton {
-  @include button($light-gray, black, 6rem);
-  margin-right: 1rem;
-}
-
-.finishButton {
-  @include button($btn-blue, white, 6rem);
+.buttons {
+  @include select-buttons;
 }
 
 .statusTitle {

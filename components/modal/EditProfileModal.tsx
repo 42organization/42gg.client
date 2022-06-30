@@ -140,12 +140,14 @@ export default function EditProfileModal() {
         </div>
       </div>
       <div>
-        <button className={styles.cancelButton} onClick={cancelEditHandler}>
-          취소
-        </button>
-        <button className={styles.finishButton} onClick={finishEditHandler}>
-          확인
-        </button>
+        <div className={styles.buttons}>
+          <div className={styles.negative}>
+            <input type='button' onClick={cancelEditHandler} value='취소' />
+          </div>
+          <div className={styles.positive}>
+            <input type='button' onClick={finishEditHandler} value='확인' />
+          </div>
+        </div>
       </div>
     </div>
   );

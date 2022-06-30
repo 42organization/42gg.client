@@ -29,18 +29,12 @@ export default function LogoutModal() {
         </div>
       </div>
       <div className={styles.buttons}>
-        <input
-          className={styles.negative}
-          onClick={onReturn}
-          type='button'
-          value='아니오'
-        />
-        <input
-          className={styles.positive}
-          onClick={onLogout}
-          type='button'
-          value='예'
-        />
+        <div className={styles.negative}>
+          <input onClick={onReturn} type='button' value='아니오' />
+        </div>
+        <div className={styles.positive}>
+          <input onClick={onLogout} type='button' value='예' />
+        </div>
       </div>
     </div>
   );
