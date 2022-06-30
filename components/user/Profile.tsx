@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { useSetRecoilState, useRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
 import { isEditProfileState, profileInfoState } from 'utils/recoil/user';
+import { userState } from 'utils/recoil/main';
 import instance from 'utils/axios';
 import styles from 'styles/user/Profile.module.scss';
 
@@ -9,6 +10,7 @@ interface ProfileProps {
 }
 
 export default function Profile({ intraId }: ProfileProps) {
+  const userData = useRecoilValue(userState);
   const setIsEditProfile = useSetRecoilState(isEditProfileState);
   const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
 
@@ -68,12 +70,14 @@ export default function Profile({ intraId }: ProfileProps) {
           <div className={styles.image}></div>
           <div className={styles.intraId}>{intraId}</div>
         </div>
-        <input
-          type='button'
-          className={styles.editButton}
-          onClick={startEditHandler}
-          value='edit'
-        />
+        {userData.intraId === intraId && (
+          <input
+            type='button'
+            className={styles.editButton}
+            onClick={startEditHandler}
+            value='edit'
+          />
+        )}
       </div>
     </div>
   );
