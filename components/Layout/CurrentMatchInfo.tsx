@@ -8,7 +8,6 @@ import Modal from 'components/modal/Modal';
 import CancelModal from 'components/modal/CancelModal';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
-import InputScoreModal from 'components/modal/InputScoreModal';
 
 export default function CurrentMatchInfo() {
   const [currentMatch, setCurrentMatch] = useState<CurrentMatch | null>(null);
