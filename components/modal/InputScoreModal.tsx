@@ -62,7 +62,7 @@ export default function InputScoreModal() {
     if (res?.status === 201) {
       alert('결과 입력이 완료되었습니다.');
     } else if (res?.status === 202) {
-      alert('결과가 입력된 게임입니다.');
+      alert('상대가 이미 점수를 입력했습니다.');
     } else {
       alert('error occurred');
     }
@@ -133,27 +133,26 @@ export default function InputScoreModal() {
       </div>
       {onCheck ? (
         <div className={styles.buttons}>
-          <input
-            className={styles.negative}
-            type='button'
-            value='다시 입력하기'
-            onClick={reEnterHandler}
-          />
-          <input
-            className={styles.positive}
-            type='button'
-            value='제출하기'
-            onClick={submitResultHandler}
-          />
+          <div className={styles.negative}>
+            <input
+              onClick={reEnterHandler}
+              type='button'
+              value='다시 입력하기'
+            />
+          </div>
+          <div className={styles.positive}>
+            <input
+              onClick={submitResultHandler}
+              type='button'
+              value='제출하기'
+            />
+          </div>
         </div>
       ) : (
         <div className={styles.buttons}>
-          <input
-            className={styles.positive}
-            type='button'
-            value='확 인'
-            onClick={enterHandler}
-          />
+          <div className={styles.positive}>
+            <input onClick={enterHandler} type='button' value='확 인' />
+          </div>
         </div>
       )}
     </div>
