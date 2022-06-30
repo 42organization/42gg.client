@@ -1,6 +1,9 @@
 import { useSetRecoilState } from 'recoil';
-import { cancelModalState, currentMatchInfoState } from 'utils/recoil/match';
 import instance from 'utils/axios';
+import {
+  cancelModalState,
+  openCurrentMatchInfoState,
+} from 'utils/recoil/match';
 import styles from 'styles/modal/CancelModal.module.scss';
 
 type SlotProps = {
@@ -8,7 +11,7 @@ type SlotProps = {
 };
 export default function CancelModal({ slotId }: SlotProps) {
   const setOpenModal = useSetRecoilState(cancelModalState);
-  const setOpenCurrentInfo = useSetRecoilState(currentMatchInfoState);
+  const setOpenCurrentInfo = useSetRecoilState(openCurrentMatchInfoState);
 
   const onCancel = async () => {
     try {

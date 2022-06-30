@@ -14,6 +14,11 @@
   font-size: $midium-font;
 }
 
+.myButton {
+  @include matchItemButton;
+  background: linear-gradient(to bottom, white, rgba(45, 128, 237));
+}
+
 .enableButton {
   @include matchItemButton;
   background: linear-gradient(to bottom, white, $g1-bottom);
