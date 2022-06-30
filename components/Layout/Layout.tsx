@@ -72,7 +72,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.background}>
       {isLoggedIn ? (
         <div className={styles.mainContent}>
           <Header />

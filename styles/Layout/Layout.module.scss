@@ -1,8 +1,9 @@
 @import 'styles/common.scss';
 
-.container {
+.background {
   background-image: url('../../public/background_img.png');
-  background-size: contain;
+  background-size: cover;
+  background-position: center;
   background-attachment: fixed;
 }
 
