@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Rank, RankData } from 'types/rankTypes';
-import instance from 'utils/axios';
 import { myRankPosition, isScrollState } from 'utils/recoil/myRank';
+import instance from 'utils/axios';
 import RankItem from './RankItem';
 import PageNation from 'components/Pagination';
 import styles from 'styles/RankList.module.scss';
@@ -31,9 +31,7 @@ export default function RankList() {
         const res = await instance.get(`${path}`);
         setRankData(res?.data);
         setMyRank(res?.data.myRank);
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     })();
   }, [page, isScroll === true]);
 
@@ -53,8 +51,8 @@ export default function RankList() {
     <div>
       <div className={styles.mainContainer}>
         <div className={styles.mainTitle}>Champion</div>
-        {rankData?.rankList.map((item: Rank) => (
-          <RankItem key={item.rank} user={item} isMain={true} />
+        {rankData?.rankList.map((item: Rank, index) => (
+          <RankItem key={item.rank} index={index} user={item} isMain={true} />
         ))}
       </div>
     </div>
@@ -66,8 +64,8 @@ export default function RankList() {
         <div>상태메시지</div>
         <div>승률</div>
       </div>
-      {rankData?.rankList.map((item: Rank) => (
-        <RankItem key={item.intraId} user={item} isMain={false} />
+      {rankData?.rankList.map((item: Rank, index) => (
+        <RankItem key={item.intraId} index={index} user={item} isMain={false} />
       ))}
       <PageNation
         curPage={rankData?.currentPage}
