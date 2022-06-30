@@ -12,9 +12,8 @@ export default function CancelModal({ slotId }: SlotProps) {
 
   const onCancel = async () => {
     try {
-      const res = await instance.delete(
-        `/pingpong/match/tables/${1}/slots/${slotId}`
-      );
+      const res = await instance.delete(`/pingpong/match/slots/${slotId}`);
+      console.log(res);
       alert(res?.data.message);
     } catch (e) {
       console.log(e);
@@ -35,6 +34,11 @@ export default function CancelModal({ slotId }: SlotProps) {
           정말 경기를
           <br />
           취소하시겠습니까?
+        </div>
+        <div className={styles.subContent}>
+          &#9888; 지금 경기를 취소하시면
+          <br />
+          1분 간 새로운 예약이 불가합니다!
         </div>
       </div>
       <div className={styles.buttons}>
