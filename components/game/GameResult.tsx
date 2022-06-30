@@ -9,11 +9,11 @@ export default function GameResult() {
   const router = useRouter();
   useEffect(() => {
     if (router.asPath === '/' || router.asPath.includes('token')) {
-      setPath(`/pingpong/games?count=3&pageParam=`);
+      setPath(`/pingpong/games?count=3&gameId=`);
     } else if (router.asPath === '/game') {
-      setPath(`/pingpong/games?count=10&pageParam=`);
+      setPath(`/pingpong/games?count=10&status=end&gameId=`);
     } else {
-      setPath(`/pingpong${router.asPath}/games?count=5&status=end&pageParam=`);
+      setPath(`/pingpong${router.asPath}/games?count=5&status=end&gameId=`);
     }
   }, []);
 

@@ -12,6 +12,12 @@
   height: $height;
 }
 
+@mixin spanUpDownAnimation {
+  font-size: 0.2rem;
+  padding: 0.2rem;
+  animation: upDown 0.75s infinite;
+}
+
 .title {
   @include pageTitle;
 }
@@ -48,6 +54,7 @@
 }
 
 .smallScoreBoard {
+  font-weight: 500;
   color: black;
   text-align: center;
 }
@@ -69,7 +76,7 @@
   .userImage {
     @include imageCircle(white, 4.5rem, 4.5rem);
   }
-  .intraId {
+  .userId {
     margin: 0.5rem 0;
     text-align: center;
     text-shadow: $text-shadow;
@@ -88,17 +95,69 @@
 }
 
 .bigScoreBoard {
-  .gameStatus {
+  .gameStatusLive {
+    position: relative;
+    top: -0.8rem;
+    border: black solid 0.1rem;
+    background: $pp-red;
     color: white;
     text-align: center;
     text-shadow: $text-shadow;
+    padding: 0.2rem;
+    animation: upDown 1.3s infinite;
   }
+  .gameStatusWait {
+    position: relative;
+    top: -0.8rem;
+    color: white;
+    text-align: center;
+    text-shadow: $text-shadow;
+    padding: 0.2rem;
+    span {
+      position: relative;
+      display: inline-block;
+    }
+  }
+  .gameStatusEnd {
+    font-size: 0.8rem;
+    position: relative;
+    font-weight: 400;
+    color: white;
+    padding: 0.2rem;
+    text-shadow: $text-shadow;
+    text-align: center;
+  }
+
+  .span1 {
+    @include spanUpDownAnimation;
+    animation-delay: 0.3s;
+  }
+  .span2 {
+    @include spanUpDownAnimation;
+    animation-delay: 0.5s;
+  }
+  .span3 {
+    @include spanUpDownAnimation;
+    animation-delay: 0.7s;
+  }
+
   .gameScore {
     font-size: 2rem;
     font-weight: 600;
     color: white;
     text-align: center;
     text-shadow: $text-shadow;
+  }
+}
+
+@keyframes upDown {
+  0%,
+  40%,
+  100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-0.2rem);
   }
 }
 

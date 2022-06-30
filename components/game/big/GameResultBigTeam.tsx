@@ -19,7 +19,7 @@ export default function GameResultBigTeam({ team, userLeft }: gameResultTypes) {
       {team.players.map((player) => (
         <div key={player.intraId}>
           <Link href={`/users/${player.intraId}`}>
-            <div className={`${styles.intraId} ${styles.cursorOn}`}>
+            <div className={`${styles.userId} ${styles.cursorOn}`}>
               {player.intraId}
             </div>
           </Link>

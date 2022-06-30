@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { Team } from 'types/gameTypes';
 import styles from 'styles/game/GameResultItem.module.scss';
 
@@ -15,8 +14,9 @@ export default function GameResultBigScore({
   team1,
   team2,
 }: gameResultTypes) {
-  const router = useRouter();
-  const isMain = router.asPath === '/' ? true : false;
+  let statusStyles = '';
+  let statusMessage = <></>;
+  let gameScoreMessage = '';
 
   const getFindTimeSeconds = (gameTime: string) => {
     return (Number(new Date()) - Number(new Date(gameTime))) / 1000;
@@ -42,14 +42,28 @@ export default function GameResultBigScore({
     return '방금 전';
   };
 
+  if (status === 'live') {
+    statusStyles = `${styles.gameStatusLive}`;
+    statusMessage = <>Live</>;
+  } else if (status === 'wait') {
+    statusStyles = `${styles.gameStatusWait}`;
+    statusMessage = (
+      <>
+        <span className={styles.span1}>o</span>
+        <span className={styles.span2}>o</span>
+        <span className={styles.span3}>o</span>
+      </>
+    );
+  } else if (status === 'end') {
+    statusStyles = `${styles.gameStatusEnd}`;
+    statusMessage = <>{getTimeAgo(time)}</>;
+  }
+  gameScoreMessage = team1.score + ' : ' + team2.score;
+
   return (
     <div className={styles.bigScoreBoard}>
-      <div className={styles.gameStatus}>
-        {isMain ? <>{status}</> : getTimeAgo(time)}
-      </div>
-      <div className={styles.gameScore}>
-        {team1.score} : {team2.score}
-      </div>
+      <div className={statusStyles}>{statusMessage}</div>
+      <div className={styles.gameScore}>{gameScoreMessage}</div>
     </div>
   );
 }
