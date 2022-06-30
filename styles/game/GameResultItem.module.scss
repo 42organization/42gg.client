@@ -4,18 +4,12 @@
   @include pageWrap;
 }
 
-@mixin imageCircle($background-color, $width, $height) {
-  background: $background-color;
+@mixin imageCircle($backgroundColor, $width, $height) {
+  background: $backgroundColor;
   border-radius: 50%;
   text-align: center;
   width: $width;
   height: $height;
-}
-
-@mixin spanUpDownAnimation {
-  font-size: 0.2rem;
-  padding: 0.2rem;
-  animation: upDown 0.75s infinite;
 }
 
 .title {
@@ -133,15 +127,15 @@
   }
 
   .span1 {
-    @include spanUpDownAnimation;
+    @include spanUpDownAnimation(0.2rem, 0.2rem);
     animation-delay: 0.3s;
   }
   .span2 {
-    @include spanUpDownAnimation;
+    @include spanUpDownAnimation(0.2rem, 0.2rem);
     animation-delay: 0.5s;
   }
   .span3 {
-    @include spanUpDownAnimation;
+    @include spanUpDownAnimation(0.2rem, 0.2rem);
     animation-delay: 0.7s;
   }
 
