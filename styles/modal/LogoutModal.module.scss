@@ -1,20 +1,12 @@
 @import 'styles/common.scss';
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+  @include modal-container;
   height: 14rem;
 }
 
 .phrase {
   @include modal-phrase;
-  font-size: $big-font;
-  .time {
-    font-size: $giant-font;
-    margin-bottom: 0.5rem;
-  }
 }
 
 .buttons {

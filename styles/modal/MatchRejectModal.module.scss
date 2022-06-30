@@ -2,13 +2,15 @@
 
 .container {
   @include modal-container;
-  height: 17rem;
+  height: 15rem;
+  padding: 0 0.5rem;
 }
 
 .phrase {
   @include modal-phrase;
+  font-size: $midium-font;
 }
 
 .buttons {
-  @include select-buttons(6rem);
+  @include select-buttons;
 }

@@ -58,14 +58,14 @@ export default function InputScoreModal() {
   };
 
   const submitResultHandler = async () => {
-    const res = await instance.post(`/pingpong/games/result`, result);
-    if (res?.status === 201) {
-      alert('결과 입력이 완료되었습니다.');
-    } else if (res?.status === 202) {
-      alert('상대가 이미 점수를 입력했습니다.');
-    } else {
-      alert('error occurred');
-    }
+    try {
+      const res = await instance.post(`/pingpong/games/result`, result);
+      if (res?.status === 201) {
+        alert('결과 입력이 완료되었습니다.');
+      } else if (res?.status === 202) {
+        alert('상대가 이미 점수를 입력했습니다.');
+      }
+    } catch (e) {}
     window.location.href = '/';
   };
 

@@ -16,12 +16,17 @@ export default function MatchEnrollModal() {
   const { slotId, type, startTime, endTime } = enrollInfo;
 
   const onEnroll = async () => {
-    const body = { slotId };
-    const res = await instance.post(
-      `/pingpong/match/tables/${1}/${type}`,
-      body
-    );
-    alert(res?.data.message);
+    try {
+      const body = { slotId };
+      const res = await instance.post(
+        `/pingpong/match/tables/${1}/${type}`,
+        body
+      );
+      alert('경기가 성공적으로 등록되었습니다.');
+    } catch (e: any) {
+      if (e.response.status === 400)
+        alert('경기 취소 후 1분 동안 경기를 예약할 수 없습니다.');
+    }
     setEnrollInfo(null);
     window.location.reload();
   };
