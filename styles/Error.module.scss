@@ -1,0 +1,41 @@
+@import './common.scss';
+
+.container {
+  @include pageWrap;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 40vh;
+  width: 90vw;
+  border-radius: $small-radius;
+  background: linear-gradient(160deg, #ff0303, #200d6b 67%, #13083e);
+}
+
+.title {
+  margin: 0 0 1.5rem 0;
+  color: #fff;
+  text-align: center;
+  font-size: 3rem;
+  letter-spacing: 0.2rem;
+  font-family: $title-font;
+  text-shadow: $text-shadow, 0.3rem 0.3rem 0 $btn-blue;
+}
+
+.errorMessage {
+  font-size: $big-font;
+  color: white;
+}
+
+.home {
+  font-size: $big-font;
+  color: white;
+}

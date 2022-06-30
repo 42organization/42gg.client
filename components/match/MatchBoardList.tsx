@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { MatchData } from 'types/matchTypes';
+import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import MatchBoard from './MatchBoard';
 import styles from 'styles/match/MatchBoardList.module.scss';
@@ -10,6 +12,7 @@ interface MatchBoardListProps {
 
 export default function MatchBoardList({ type }: MatchBoardListProps) {
   const [matchData, setMatchData] = useState<MatchData | null>(null);
+  const setErrorMessage = useSetRecoilState(errorState);
 
   useEffect(() => {
     (async () => {
@@ -17,7 +20,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
         const res = await instance.get(`/pingpong/match/tables/${1}/single`);
         setMatchData(res?.data);
       } catch (e) {
-        console.log(e);
+        setErrorMessage('MatchBoard Error');
       }
     })();
   }, []);

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Rank, RankData } from 'types/rankTypes';
 import { myRankPosition, isScrollState } from 'utils/recoil/myRank';
+import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import RankItem from './RankItem';
 import PageNation from 'components/Pagination';
@@ -13,6 +14,7 @@ export default function RankList() {
   const [myRank, setMyRank] = useRecoilState(myRankPosition);
   const [isScroll, setIsScroll] = useRecoilState(isScrollState);
   const [page, setPage] = useState<number>(1);
+  const setErrorMessage = useSetRecoilState(errorState);
   const router = useRouter();
   const path =
     router.asPath !== '/rank'
@@ -31,7 +33,9 @@ export default function RankList() {
         const res = await instance.get(`${path}`);
         setRankData(res?.data);
         setMyRank(res?.data.myRank);
-      } catch (e) {}
+      } catch (e) {
+        setErrorMessage(`RankList Error`);
+      }
     })();
   }, [page, isScroll === true]);
 

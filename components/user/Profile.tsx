@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
 import { isEditProfileState, profileInfoState } from 'utils/recoil/user';
 import { userState } from 'utils/recoil/main';
+import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import styles from 'styles/user/Profile.module.scss';
 
@@ -12,6 +13,7 @@ interface ProfileProps {
 export default function Profile({ intraId }: ProfileProps) {
   const userData = useRecoilValue(userState);
   const setIsEditProfile = useSetRecoilState(isEditProfileState);
+  const setErrorMessage = useSetRecoilState(errorState);
   const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export default function Profile({ intraId }: ProfileProps) {
         const res = await instance.get(`/pingpong/users/${intraId}/detail`);
         setProfileInfo(res?.data);
       } catch (e) {
-        console.log(e);
+        setErrorMessage('Profile Error');
       }
     })();
   }, [intraId]);

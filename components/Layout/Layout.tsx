@@ -6,7 +6,9 @@ import { UserData, LiveData } from 'types/mainType';
 import { userState, liveState } from 'utils/recoil/main';
 import { openCurrentMatchInfoState } from 'utils/recoil/match';
 import { loginState } from 'utils/recoil/login';
+import { errorState } from 'utils/recoil/error';
 import Login from 'pages/login';
+import ErrorPage from 'components/ErrorPage';
 import Header from './Header';
 import Footer from './Footer';
 import CurrentMatchInfo from './CurrentMatchInfo';
@@ -27,6 +29,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     openCurrentMatchInfoState
   );
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
+  const [errorMessage, setErrorMessage] = useRecoilState(errorState);
   const presentPath = useRouter().asPath;
   const router = useRouter();
   const token = router.asPath.split('?token=')[1];
@@ -61,38 +64,50 @@ export default function AppLayout({ children }: AppLayoutProps) {
     try {
       const res = await instance.get(`/pingpong/users`);
       setUserData(res?.data);
-    } catch (e) {}
+    } catch (e) {
+      setErrorMessage('UserData Error');
+    }
   };
 
   const getLiveDataHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/users/live`);
       setLiveData(res?.data);
-    } catch (e) {}
+    } catch (e) {
+      setErrorMessage('Live Error');
+    }
   };
 
-  return (
-    <div className={styles.background}>
-      {isLoggedIn ? (
-        <div className={styles.mainContent}>
-          <Header />
-          {liveData.event === 'game' && (
-            <Modal>
-              <InputScoreModal />
-            </Modal>
-          )}
-          {openCurrentInfo && <CurrentMatchInfo />}
-          {presentPath !== '/match' && (
-            <Link href='/match'>
-              <a className={styles.matchingButton}>🏓</a>
-            </Link>
-          )}
-          {children}
-          <Footer />
-        </div>
-      ) : (
-        <>{!isLoading && <Login />}</>
-      )}
-    </div>
-  );
+  if (errorMessage !== '') {
+    return (
+      <div className={styles.background}>
+        <ErrorPage />
+      </div>
+    );
+  } else {
+    return (
+      <div className={styles.background}>
+        {isLoggedIn ? (
+          <div className={styles.mainContent}>
+            <Header />
+            {liveData.event === 'game' && (
+              <Modal>
+                <InputScoreModal />
+              </Modal>
+            )}
+            {openCurrentInfo && <CurrentMatchInfo />}
+            {presentPath !== '/match' && (
+              <Link href='/match'>
+                <a className={styles.matchingButton}>🏓</a>
+              </Link>
+            )}
+            {children}
+            <Footer />
+          </div>
+        ) : (
+          <>{!isLoading && <Login />}</>
+        )}
+      </div>
+    );
+  }
 }

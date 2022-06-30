@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { PlayerInfo, GameResult } from 'types/scoreTypes';
+import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import styles from 'styles/modal/InputScoreModal.module.scss';
 
@@ -13,6 +15,7 @@ export default function InputScoreModal() {
     useState<PlayerInfo[]>(defaultPlayersInfo);
   const [result, setResult] = useState<GameResult>(defaultResult);
   const [onCheck, setOnCheck] = useState<boolean>(false);
+  const setErrorMessage = useSetRecoilState(errorState);
 
   useEffect(() => {
     (async () => {
@@ -21,7 +24,7 @@ export default function InputScoreModal() {
         setMyTeamInfo(res?.data.myTeam);
         setEnemyTeamInfo(res?.data.enemyTeam);
       } catch (e) {
-        //console.log(e);
+        setErrorMessage('InputScorce Error');
       }
     })();
   }, []);

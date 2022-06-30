@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { CurrentMatch } from 'types/matchTypes';
 import { gameTimeToString } from 'utils/handleTime';
 import { cancelModalState } from 'utils/recoil/match';
+import { errorState } from 'utils/recoil/error';
 import Modal from 'components/modal/Modal';
 import CancelModal from 'components/modal/CancelModal';
 import instance from 'utils/axios';
@@ -13,6 +14,7 @@ export default function CurrentMatchInfo() {
   const [currentMatch, setCurrentMatch] = useState<CurrentMatch | null>(null);
   const [openCancelModal, setOpenCancelModal] =
     useRecoilState<boolean>(cancelModalState);
+  const setErrorMessage = useSetRecoilState(errorState);
 
   useEffect(() => {
     (async () => {
@@ -20,7 +22,7 @@ export default function CurrentMatchInfo() {
         const res = await instance.get(`/pingpong/match/current`);
         setCurrentMatch(res?.data);
       } catch (e) {
-        console.log(e);
+        setErrorMessage('CurrentMatch Error');
       }
     })();
   }, []);

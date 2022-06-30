@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
+import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import styles from 'styles/main/SearchBar.module.scss';
 
@@ -9,6 +11,7 @@ export default function SearchBar() {
   const [keyword, setKeyword] = useState<string>('');
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<string[]>([]);
+  const setErrorMessage = useSetRecoilState(errorState);
   const searchBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -21,7 +24,9 @@ export default function SearchBar() {
     try {
       const res = await instance.get(`/pingpong/users/searches?q=${keyword}`);
       setSearchResult(res?.data.users);
-    } catch (e) {}
+    } catch (e) {
+      setErrorMessage('SearchBar ResultHandler Error');
+    }
   };
 
   // 검색 컴포넌트 외부 클릭시 검색결과모달 닫기
