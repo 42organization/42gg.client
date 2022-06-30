@@ -5,7 +5,6 @@ import {
   IoCaretBackSharp,
   IoCaretForwardSharp,
 } from 'react-icons/io5';
-import styles from 'styles/Pagination.module.scss';
 
 interface GreetingProps {
   curPage: number | undefined;
@@ -21,19 +20,17 @@ function PageNation({
   return (
     <>
       {totalPages && (
-        <ul className={styles.pagination}>
-          <Pagination
-            activePage={curPage}
-            itemsCountPerPage={1}
-            pageRangeDisplayed={5}
-            totalItemsCount={totalPages}
-            firstPageText={<IoPlaySkipBackSharp />}
-            lastPageText={<IoPlaySkipForwardSharp />}
-            prevPageText={<IoCaretBackSharp />}
-            nextPageText={<IoCaretForwardSharp />}
-            onChange={pageChangeHandler}
-          />
-        </ul>
+        <Pagination
+          activePage={curPage}
+          itemsCountPerPage={1}
+          pageRangeDisplayed={5}
+          totalItemsCount={totalPages}
+          firstPageText={<IoPlaySkipBackSharp />}
+          lastPageText={<IoPlaySkipForwardSharp />}
+          prevPageText={<IoCaretBackSharp />}
+          nextPageText={<IoCaretForwardSharp />}
+          onChange={pageChangeHandler}
+        />
       )}
     </>
   );
