@@ -16,3 +16,8 @@ export const openCurrentMatchInfoState = atom<boolean>({
   key: `openCurrentMatchInfoState/${v1()}`,
   default: false,
 });
+
+export const rejectModalState = atom<boolean>({
+  key: `rejectModalState/${v1()}`,
+  default: false,
+});
