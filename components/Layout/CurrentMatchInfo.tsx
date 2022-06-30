@@ -49,7 +49,7 @@ export default function CurrentMatchInfo() {
           <div className={styles.icon}> ⏰ </div>
           <div className={styles.messageWrapper}>
             {matchingMessage}
-            {enemyTeamInfo}
+            {enemyTeam.length ? enemyTeamInfo : null}
           </div>
         </div>
         <div className={styles.cancelButton}>
