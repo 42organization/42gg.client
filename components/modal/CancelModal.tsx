@@ -9,6 +9,7 @@ import styles from 'styles/modal/CancelModal.module.scss';
 type SlotProps = {
   slotId: number;
 };
+
 export default function CancelModal({ slotId }: SlotProps) {
   const setOpenModal = useSetRecoilState(cancelModalState);
   const setOpenCurrentInfo = useSetRecoilState(openCurrentMatchInfoState);
@@ -16,13 +17,14 @@ export default function CancelModal({ slotId }: SlotProps) {
   const onCancel = async () => {
     try {
       const res = await instance.delete(`/pingpong/match/slots/${slotId}`);
-      console.log(res);
-      alert(res?.data.message);
-    } catch (e) {
-      console.log(e);
+      alert('게임이 성공적으로 취소되었습니다.');
+    } catch (e: any) {
+      if (e.response.status === 400)
+        alert('게임 시작 5분 전에는 매칭을 취소할 수 없습니다.');
     }
     setOpenModal(false);
     setOpenCurrentInfo(false);
+    window.location.reload();
   };
 
   const onReturn = () => {
@@ -34,7 +36,7 @@ export default function CancelModal({ slotId }: SlotProps) {
       <div className={styles.phrase}>
         <div className={styles.emoji}>🤔</div>
         <div>
-          정말 경기를
+          해당 경기를
           <br />
           취소하시겠습니까?
         </div>

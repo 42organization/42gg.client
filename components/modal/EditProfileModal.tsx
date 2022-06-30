@@ -58,10 +58,8 @@ export default function EditProfileModal() {
 
     try {
       const res = await instance.put(`/pingpong/users/detail`, editedProfile);
-      alert(res?.data.message);
-    } catch (e) {
-      console.log(e);
-    }
+      alert('프로필이 성공적으로 등록되었습니다.');
+    } catch (e) {}
   };
 
   const cancelEditHandler = () => setIsEditProfile(false);
