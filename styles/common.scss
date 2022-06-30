@@ -120,3 +120,20 @@ $winner-blue: #040eff;
     margin-bottom: 1rem;
   }
 }
+
+@mixin spanUpDownAnimation($fontSize, $padding) {
+  font-size: $fontSize;
+  padding: $padding;
+  animation: upDown 0.75s infinite;
+}
+
+@keyframes upDown {
+  0%,
+  40%,
+  100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-0.2rem);
+  }
+}

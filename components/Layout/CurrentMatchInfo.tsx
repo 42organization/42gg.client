@@ -66,7 +66,18 @@ function makeMessage(time: string, isMatched: boolean) {
     <div className={styles.messageString}>
       <span>{formattedTime}</span>
       <span>
-        {isMatched ? '에 경기가 시작됩니다!' : ' 참가자 기다리는 중...'}
+        {isMatched ? (
+          '에 경기가 시작됩니다!'
+        ) : (
+          <>
+            <span> 참가자 기다리는 중</span>
+            <span className={styles.waitUpDown}>
+              <span className={styles.span1}>.</span>
+              <span className={styles.span2}>.</span>
+              <span className={styles.span3}>.</span>
+            </span>
+          </>
+        )}
       </span>
     </div>
   );

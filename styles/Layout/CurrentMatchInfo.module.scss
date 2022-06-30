@@ -13,6 +13,29 @@
   align-items: center;
 }
 
+.waitUpDown {
+  span {
+    position: relative;
+    display: inline-block;
+  }
+}
+
+.span1 {
+  margin-left: 0.2rem;
+  @include spanUpDownAnimation(1.5rem, 0.1rem);
+  animation-delay: 0.3s;
+}
+
+.span2 {
+  @include spanUpDownAnimation(1.5rem, 0.1rem);
+  animation-delay: 0.5s;
+}
+
+.span3 {
+  @include spanUpDownAnimation(1.5rem, 0.1rem);
+  animation-delay: 0.7s;
+}
+
 .messageWrapper {
   color: white;
   text-shadow: 2px 2px 2px rgb(70, 70, 70);
