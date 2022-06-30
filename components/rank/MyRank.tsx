@@ -12,14 +12,18 @@ export default function MyRank() {
 
   return (
     <div>
-      <div className={styles.myRank} onClick={onClick}>
-        {myRank && (
-          <>
-            <span>{`🚀🚀 나의 순위 ${myRank} `}</span>
-            바로가기 🚀🚀
-          </>
-        )}
-      </div>
+      {myRank && (
+        <div className={styles.myRank}>
+          {myRank === -1 ? (
+            <span> 💡 나의 순위가 정해지지 않았습니다 💡</span>
+          ) : (
+            <div onClick={onClick}>
+              <span>🚀🚀 나의 순위 {myRank} </span>
+              바로가기 🚀🚀
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
