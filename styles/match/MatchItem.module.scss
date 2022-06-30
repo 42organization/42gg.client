@@ -1,17 +1,17 @@
 @import 'styles/common.scss';
 
 @mixin matchItemButton {
-  border: 0;
-  outline: 0;
+  all: unset;
+  cursor: pointer;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
-  color: black;
-  width: 6rem;
+  justify-content: space-between;
   height: 2.3rem;
   border-radius: $mini-radius;
   margin: 0.1rem;
+  padding: 0.2rem 0.6rem;
+  color: black;
+  font-size: $midium-font;
 }
 
 .enableButton {
@@ -24,19 +24,16 @@
   background: linear-gradient(to bottom, $gray, rgba(217, 217, 217, 0.6));
 }
 
-.timeString {
-  width: 60%;
-}
-
 .headCountString {
-  width: 30%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  vertical-align: center;
+  font-size: $midium-font;
+  font-weight: 600;
+  text-shadow: 1px 1px 7px #a6a6a6;
+  color: $pp-blue;
 }
 
 .plusString {
-  font-size: 1.1rem;
+  font-size: $big-font;
+  font-weight: 600;
+  text-shadow: 1px 1px 7px #a6a6a6;
+  color: $pp-blue;
 }

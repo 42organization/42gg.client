@@ -20,6 +20,7 @@ $pp-blue: #471df0;
 
 $light-gray: #f0f0f0;
 $gray: #dadada;
+$midium-gray: #cccccc;
 $dark-gray: #676767;
 
 $btn-blue: #2d80ed;
@@ -63,19 +64,6 @@ $winner-blue: #040eff;
   text-shadow: $text-shadow, 0.3rem 0.3rem 0 $pp-red;
 }
 
-@mixin button($btn-color, $txt-color, $width: 8rem, $height: 2.8rem) {
-  all: unset;
-  cursor: pointer;
-  box-shadow: 5px 5px 6px $dark-gray;
-  border-radius: $small-radius;
-  width: $width;
-  height: $height;
-  background: $btn-color;
-  color: $txt-color;
-  font-size: $midium-font;
-  text-align: center;
-}
-
 @mixin backdrop {
   position: fixed;
   top: 0;
@@ -85,17 +73,42 @@ $winner-blue: #040eff;
   background: rgba(0, 0, 0, 0.5);
 }
 
+@mixin button($btn-color, $txt-color, $width: 8rem, $height: 2.8rem) {
+  all: unset;
+  cursor: pointer;
+  border-radius: $small-radius;
+  width: $width;
+  height: $height;
+  background: if(
+    $btn-color == white,
+    linear-gradient(to bottom, $btn-color, $midium-gray),
+    linear-gradient(to bottom, $btn-color, $dark-blue)
+  );
+  color: $txt-color;
+  font-size: $midium-font;
+  text-align: center;
+}
+
 @mixin select-buttons($width: 8rem, $height: 2.8rem) {
-  .positive {
-    @include button($btn-blue, white, $width, $height);
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
   .negative {
-    @include button(white, black, $width, $height);
+    input {
+      @include button(white, black, $width, $height);
+    }
     margin-right: 1rem;
+    :hover {
+      background: linear-gradient(to bottom, $midium-gray, white);
+    }
   }
-  :hover {
-    background: $dark-blue;
-    color: white;
+  .positive {
+    input {
+      @include button($btn-blue, white, $width, $height);
+    }
+    :hover {
+      background: linear-gradient(to bottom, $dark-blue, $btn-blue);
+    }
   }
 }
 

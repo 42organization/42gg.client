@@ -3,16 +3,14 @@
 .container {
   background: rgba(255, 255, 255, 0.35);
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-inline: 1rem;
-  padding-block: 0.8rem;
+  padding: 0.8rem 1rem;
 }
 
 .stringWrapper {
   display: flex;
-  flex-direction: row;
+  align-items: center;
 }
 
 .messageWrapper {
@@ -29,11 +27,12 @@
 }
 
 .cancelButton {
-  @include button($btn-blue, white, 4rem, 2rem);
-  box-shadow: none;
-  font-size: $small-font;
+  input {
+    @include button($btn-blue, white, 4rem, 2rem);
+    font-size: $small-font;
+  }
   :hover {
-    background: $dark-blue;
+    background: linear-gradient(to bottom, $dark-blue, $btn-blue);
   }
 }
 
