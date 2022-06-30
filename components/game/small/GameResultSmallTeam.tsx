@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Team } from 'types/gameTypes';
 import styles from 'styles/game/GameResultItem.module.scss';
 
@@ -17,9 +16,9 @@ export default function GameResultSmallTeam({
         <span className={styles.userImage}></span>
         <span>
           {team.players.map((player) => (
-            <Link key={player.intraId} href={`/users/${player.intraId}`}>
-              <div className={styles.cursorOn}>{player.intraId}</div>
-            </Link>
+            <div key={player.intraId} className={styles.cursorOn}>
+              {player.intraId}
+            </div>
           ))}
         </span>
       </div>
