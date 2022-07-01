@@ -20,6 +20,10 @@ a {
   box-sizing: border-box;
 }
 
+h1 {
+  margin: 0;
+}
+
 /* 페이지네이션 */
 ul {
   list-style: none;

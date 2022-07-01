@@ -6,6 +6,22 @@
   flex-direction: column;
 }
 
+.btnWrap {
+  display: flex;
+  position: absolute;
+  top: calc(4rem + 5.5rem);
+  right: 1.5rem;
+  .mamualBtn {
+    @include match-noti-button;
+    border-radius: $small-radius;
+  }
+  .refreshBtn {
+    @include match-noti-button;
+    margin-left: 0.4rem;
+    border-radius: $big-radius;
+  }
+}
+
 .title {
   @include pageTitle;
 }

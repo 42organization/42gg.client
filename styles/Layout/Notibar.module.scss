@@ -1,18 +1,5 @@
 @import 'styles/common.scss';
 
-@mixin noti-button {
-  all: unset;
-  cursor: pointer;
-  text-align: center;
-  background: linear-gradient(to bottom, #fff, $gray);
-  margin: 0.7rem 0;
-  padding: 0.2rem 0.5rem;
-  &:hover {
-    color: #fff;
-    background: linear-gradient(to bottom, $btn-blue, $dark-blue);
-  }
-}
-
 .backdrop {
   @include backdrop;
   z-index: 2;
@@ -34,11 +21,11 @@
     display: flex;
     justify-content: space-between;
     .refreshBtn {
-      @include noti-button;
+      @include match-noti-button;
       border-radius: $big-radius;
     }
     .deleteBtn {
-      @include noti-button;
+      @include match-noti-button;
       border-radius: $small-radius;
     }
   }
@@ -47,7 +34,7 @@
 .emtyContent {
   text-align: right;
   .refreshBtn {
-    @include noti-button;
+    @include match-noti-button;
     border-radius: $big-radius;
   }
   div {
