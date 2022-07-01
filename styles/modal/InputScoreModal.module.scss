@@ -1,15 +1,12 @@
 @import 'styles/common.scss';
 
 .container {
-  height: 30rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch;
+  @include modal-container;
 }
 
 .phrase {
   @include modal-phrase;
+  margin-bottom: 1.5rem;
   font-size: $midium-font;
 }
 
@@ -22,6 +19,8 @@
   justify-content: space-evenly;
   height: 16rem;
   width: 18rem;
+  margin-bottom: 2rem;
+  padding: 0.8rem 0;
 }
 
 .players {
