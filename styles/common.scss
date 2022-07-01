@@ -43,6 +43,19 @@ $winner-blue: #040eff;
   height: 100vh;
 }
 
+@mixin match-noti-button {
+  all: unset;
+  cursor: pointer;
+  text-align: center;
+  background: linear-gradient(to bottom, #fff, $gray);
+  margin: 0.7rem 0;
+  padding: 0.2rem 0.5rem;
+  &:hover {
+    color: $dark-gray;
+    background: linear-gradient(to bottom, $gray, #fff);
+  }
+}
+
 @mixin pageWrap {
   padding: 2rem 1.5rem;
 }
