@@ -43,7 +43,7 @@ export default function CurrentMatchInfo() {
     <>
       {openCancelModal && (
         <Modal>
-          <CancelControll slotId={slotId} time={time} />
+          <CancelControll slotId={slotId} time={time} enemyTeam={enemyTeam} />
         </Modal>
       )}
       <div className={styles.container}>
