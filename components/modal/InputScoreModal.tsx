@@ -24,7 +24,7 @@ export default function InputScoreModal() {
         setMyTeamInfo(res?.data.myTeam);
         setEnemyTeamInfo(res?.data.enemyTeam);
       } catch (e) {
-        setErrorMessage('InputScorce Error');
+        setErrorMessage('InputScore Error');
       }
     })();
   }, []);
@@ -68,7 +68,9 @@ export default function InputScoreModal() {
       } else if (res?.status === 202) {
         alert('상대가 이미 점수를 입력했습니다.');
       }
-    } catch (e) {}
+    } catch (e) {
+      setErrorMessage('SubmitResultHandler Error');
+    }
     window.location.href = '/';
   };
 
