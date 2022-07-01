@@ -1,9 +1,10 @@
 import { useSetRecoilState } from 'recoil';
-import instance from 'utils/axios';
 import {
   cancelModalState,
   openCurrentMatchInfoState,
 } from 'utils/recoil/match';
+import { errorState } from 'utils/recoil/error';
+import instance from 'utils/axios';
 import styles from 'styles/modal/CancelModal.module.scss';
 
 type SlotProps = {
@@ -13,14 +14,15 @@ type SlotProps = {
 export default function CancelModal({ slotId }: SlotProps) {
   const setOpenModal = useSetRecoilState(cancelModalState);
   const setOpenCurrentInfo = useSetRecoilState(openCurrentMatchInfoState);
+  const setErrorMessage = useSetRecoilState(errorState);
 
   const onCancel = async () => {
     try {
       const res = await instance.delete(`/pingpong/match/slots/${slotId}`);
       alert('게임이 성공적으로 취소되었습니다.');
     } catch (e: any) {
-      if (e.response.status === 400)
-        alert('게임 시작 5분 전에는 매칭을 취소할 수 없습니다.');
+      if (e.response.status === 418) alert('경기 임박! 취소 불가!!');
+      else setErrorMessage('Cancel Error');
     }
     setOpenModal(false);
     setOpenCurrentInfo(false);

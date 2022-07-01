@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { NotiData } from 'types/notiTypes';
+import { errorState } from 'utils/recoil/error';
 import NotiItem from './NotiItem';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/NotiBar.module.scss';
@@ -10,6 +12,7 @@ type NotiBarProps = {
 
 export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
   const [notiData, setNotiData] = useState<NotiData[]>([]);
+  const setErrorMessage = useSetRecoilState(errorState);
 
   useEffect(() => {
     getNotiDataHandler();
@@ -19,7 +22,9 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
     try {
       const res = await instance.get(`/pingpong/notifications`);
       setNotiData(res?.data.notifications);
-    } catch (e) {}
+    } catch (e) {
+      setErrorMessage('NotiBar DataHandler Error');
+    }
   };
 
   const allNotiDeleteHandler = async () => {
@@ -27,7 +32,9 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
       const res = await instance.delete(`/pingpong/notifications`);
       alert('알림이 성공적으로 삭제되었습니다.');
       showNotiBarHandler();
-    } catch (e) {}
+    } catch (e) {
+      setErrorMessage('NotiBar Delete Error');
+    }
   };
 
   return (

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { profileInfoState, isEditProfileState } from 'utils/recoil/user';
+import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import styles from 'styles/user/Profile.module.scss';
 
@@ -14,6 +15,7 @@ const CHAR_LIMIT = 30;
 export default function EditProfileModal() {
   const setIsEditProfile = useSetRecoilState(isEditProfileState);
   const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
+  const setErrorMessage = useSetRecoilState(errorState);
   const [editedProfile, setEditedProfile] = useState<EditedProfile>({
     racketType: 'penholder',
     statusMessage: '',
@@ -59,7 +61,9 @@ export default function EditProfileModal() {
     try {
       const res = await instance.put(`/pingpong/users/detail`, editedProfile);
       alert('프로필이 성공적으로 등록되었습니다.');
-    } catch (e) {}
+    } catch (e) {
+      setErrorMessage('Editprofile Error');
+    }
   };
 
   const cancelEditHandler = () => setIsEditProfile(false);
@@ -70,7 +74,7 @@ export default function EditProfileModal() {
       <div className={styles.container}>
         <div className={styles.leftSide}>
           <div className={styles.scoreInfo}>
-            <div className={styles.rank}>{rank}00</div>
+            <div className={styles.rank}>{rank}</div>
             <div className={styles.pppAndracketType}>
               <div className={styles.ppp}>{ppp}점</div>{' '}
               <div className={styles.racketType}>
