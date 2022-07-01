@@ -18,6 +18,7 @@ export default function SearchBar() {
     const checkId = /^[a-z|A-Z|0-9|\-]+$/;
     if (keyword !== '' && checkId.test(keyword))
       makeDebounce(getSearchResultHandler, 800)();
+    else setSearchResult([]);
   }, [keyword]);
 
   const getSearchResultHandler = async () => {
