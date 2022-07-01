@@ -1,8 +1,7 @@
-@import './common.scss';
+@import 'styles/common.scss';
 
 .loginContainer {
   display: flex;
-  width: 100vw;
   height: 100vh;
   flex-direction: column;
   align-items: center;
@@ -22,13 +21,14 @@
     font-size: 5rem;
   }
 
-  .button {
-    @include button($btn-blue, white);
-    box-shadow: 0.1rem 0.1rem 0.3rem $pp-blue;
-    width: 13rem;
-    height: 3.5rem;
-    font-size: $big-font;
-    font-weight: 500;
-    margin: 0;
+  .buttons {
+    @include select-buttons(13rem, 3.5rem);
+    .positive {
+      input {
+        font-size: $big-font;
+        font-weight: 500;
+        box-shadow: 0.1rem 0.1rem 0.3rem $pp-blue;
+      }
+    }
   }
 }
