@@ -28,8 +28,9 @@ export default function MatchItem({
   const headMax = type === 'single' ? 2 : 4;
   const startTime = new Date(time);
   const endTime = new Date(time);
-  let buttonStyle;
   endTime.setMinutes(endTime.getMinutes() + intervalMinute);
+  const isAfterSlot: boolean = startTime.getTime() - new Date().getTime() >= 0;
+  let buttonStyle;
 
   const onClick = () => {
     if (status === 'mytable') {
@@ -70,7 +71,8 @@ export default function MatchItem({
         }`}
       >
         {' '}
-        {headCount === 0 ? '+' : `${headCount}/${headMax}`}{' '}
+        {isAfterSlot &&
+          (headCount === 0 ? '+' : `${headCount}/${headMax}`)}{' '}
       </span>
     </button>
   );
