@@ -6,7 +6,8 @@ import { gameTimeToString } from 'utils/handleTime';
 import { cancelModalState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import Modal from 'components/modal/Modal';
-import CancelModal from 'components/modal/CancelModal';
+
+import { CancelControll } from 'components/modal/cancel/CancelControll';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
@@ -43,7 +44,7 @@ export default function CurrentMatchInfo() {
     <>
       {openCancelModal && (
         <Modal>
-          <CancelModal slotId={slotId} />
+          <CancelControll slotId={slotId} time={time} />
         </Modal>
       )}
       <div className={styles.container}>
