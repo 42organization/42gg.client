@@ -16,12 +16,10 @@ export default function CancelBeforeFiveMinModal() {
         <div>
           경기를 취소할 수 없습니다!!
           <br />
-          <br />
         </div>
         <div className={styles.subContent}>
-          경기시작 5분 전 부터는 경기를 취소할 수 없습니다.
+          경기시작 5분 전부터는 경기를 취소할 수 없습니다..
           <br />
-          상대 선수가 없다면 자동으로 매치 취소 처리 됩니다.
         </div>
       </div>
       <div className={styles.buttons}>
