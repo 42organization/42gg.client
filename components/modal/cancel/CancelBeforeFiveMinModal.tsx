@@ -18,7 +18,9 @@ export default function CancelBeforeFiveMinModal() {
           <br />
         </div>
         <div className={styles.subContent}>
-          경기시작 5분 전부터는 경기를 취소할 수 없습니다..
+          경기시작 5분 전부터는
+          <br />
+          경기를 취소할 수 없습니다..
           <br />
         </div>
       </div>
