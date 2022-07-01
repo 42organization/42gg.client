@@ -21,8 +21,7 @@ export default function CancelModal({ slotId }: SlotProps) {
       const res = await instance.delete(`/pingpong/match/slots/${slotId}`);
       alert('게임이 성공적으로 취소되었습니다.');
     } catch (e: any) {
-      if (e.response.status === 418) alert('경기 임박! 취소 불가!!');
-      else setErrorMessage('Cancel Error');
+      setErrorMessage('Cancel Error');
     }
     setOpenModal(false);
     setOpenCurrentInfo(false);

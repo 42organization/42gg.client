@@ -12,3 +12,10 @@ export const gameTimeToString = (d: Date | string) => {
 
   return `${hourString}:${minString}`;
 };
+
+export const isBeforeMin = (gameTimeString: string, min: number) => {
+  const gameTime = new Date(gameTimeString);
+  const afterMin = new Date();
+  afterMin.setMinutes(afterMin.getMinutes() + min);
+  return gameTime.getTime() <= afterMin.getTime();
+};
