@@ -1,10 +1,21 @@
 @import 'styles/common.scss';
 
+.appContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: $dark-blue;
+  width: 100vw;
+}
+
 .background {
   background-image: url('../../public/background_img.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  width: 100vw;
+  max-width: 100vh;
+  min-height: 100vh;
 }
 
 .matchingButton {
