@@ -58,6 +58,9 @@ $winner-blue: #040eff;
 
 @mixin pageWrap {
   padding: 2rem 1.5rem;
+  min-height: calc(100vh - 8rem);
+  max-width: 30rem;
+  margin: 0 auto;
 }
 
 @mixin logoTitle($shadow) {

@@ -89,7 +89,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       <div className={styles.appContainer}>
         <div className={styles.background}>
           {isLoggedIn ? (
-            <div className={styles.mainContent}>
+            <div>
               <Header />
               {liveData.event === 'game' && (
                 <Modal>
