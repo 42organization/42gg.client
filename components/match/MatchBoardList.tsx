@@ -15,15 +15,17 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   const setErrorMessage = useSetRecoilState(errorState);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await instance.get(`/pingpong/match/tables/${1}/single`);
-        setMatchData(res?.data);
-      } catch (e) {
-        setErrorMessage('MatchBoard Error');
-      }
-    })();
+    getMatchDataHandler();
   }, []);
+
+  const getMatchDataHandler = async () => {
+    try {
+      const res = await instance.get(`/pingpong/match/tables/${1}/single`);
+      setMatchData(res?.data);
+    } catch (e) {
+      setErrorMessage('MatchBoard Error');
+    }
+  };
 
   if (!matchData) return null;
 
@@ -36,19 +38,33 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
     return nowTime.getTime() <= slotsTime.getTime();
   });
 
+  const manualPageHandler = () => {
+    // 매뉴얼 구현시 연결
+  };
+
   if (filteredMatchBoards.length === 0)
     return <div>오늘의 매치가 모두 끝났습니다!</div>;
 
   return (
-    <div className={styles.matchBoardList}>
-      {filteredMatchBoards.map((matchSlots, i) => (
-        <MatchBoard
-          key={i}
-          type={type}
-          intervalMinute={intervalMinute}
-          matchSlots={matchSlots}
-        />
-      ))}
-    </div>
+    <>
+      <div className={styles.btnWrap}>
+        <button className={styles.mamualBtn} onClick={manualPageHandler}>
+          매뉴얼
+        </button>
+        <button className={styles.refreshBtn} onClick={getMatchDataHandler}>
+          &#8635;
+        </button>
+      </div>
+      <div className={styles.matchBoardList}>
+        {filteredMatchBoards.map((matchSlots, i) => (
+          <MatchBoard
+            key={i}
+            type={type}
+            intervalMinute={intervalMinute}
+            matchSlots={matchSlots}
+          />
+        ))}
+      </div>
+    </>
   );
 }

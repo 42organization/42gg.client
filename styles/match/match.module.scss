@@ -2,23 +2,7 @@
 
 .container {
   @include pageWrap;
-  position: relative;
-}
-
-.btnWrap {
-  display: flex;
-  position: absolute;
-  top: calc(3.5rem + 1.8rem);
-  right: 1.5rem;
-  .mamualBtn {
-    @include match-noti-button;
-    border-radius: $small-radius;
-  }
-  .refreshBtn {
-    @include match-noti-button;
-    margin-left: 0.4rem;
-    border-radius: $big-radius;
-  }
+  position: relative; // match refresh 버튼을 위해 필요함
 }
 
 .title {
