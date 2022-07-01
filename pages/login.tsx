@@ -9,7 +9,11 @@ function Login() {
           <a
             href={`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/oauth2/authorization/42`}
           >
-            <button className={styles.button}>로그인</button>
+            <div className={styles.buttons}>
+              <div className={styles.positive}>
+                <input type='button' value='로그인' />
+              </div>
+            </div>
           </a>
         </div>
       </div>

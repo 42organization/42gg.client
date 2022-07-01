@@ -86,27 +86,29 @@ export default function AppLayout({ children }: AppLayoutProps) {
     );
   } else {
     return (
-      <div className={styles.background}>
-        {isLoggedIn ? (
-          <div className={styles.mainContent}>
-            <Header />
-            {liveData.event === 'game' && (
-              <Modal>
-                <InputScoreModal />
-              </Modal>
-            )}
-            {openCurrentInfo && <CurrentMatchInfo />}
-            {presentPath !== '/match' && (
-              <Link href='/match'>
-                <a className={styles.matchingButton}>🏓</a>
-              </Link>
-            )}
-            {children}
-            <Footer />
-          </div>
-        ) : (
-          <>{!isLoading && <Login />}</>
-        )}
+      <div className={styles.appContainer}>
+        <div className={styles.background}>
+          {isLoggedIn ? (
+            <div className={styles.mainContent}>
+              <Header />
+              {liveData.event === 'game' && (
+                <Modal>
+                  <InputScoreModal />
+                </Modal>
+              )}
+              {openCurrentInfo && <CurrentMatchInfo />}
+              {presentPath !== '/match' && (
+                <Link href='/match'>
+                  <a className={styles.matchingButton}>🏓</a>
+                </Link>
+              )}
+              {children}
+              <Footer />
+            </div>
+          ) : (
+            <>{!isLoading && <Login />}</>
+          )}
+        </div>
       </div>
     );
   }
