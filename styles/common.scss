@@ -134,11 +134,12 @@ $winner-blue: #040eff;
     margin-bottom: 1rem;
   }
   .subContent {
-    margin: 0.5rem 0;
+    margin-top: 0.5rem;
     font-size: $small-font;
     line-height: 1.5;
     color: $pp-blue;
   }
+  margin-bottom: 2rem;
 }
 
 @mixin modal-container {

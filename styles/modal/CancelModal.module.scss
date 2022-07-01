@@ -2,7 +2,6 @@
 
 .container {
   @include modal-container;
-  height: 17rem;
 }
 
 .phrase {
@@ -10,5 +9,5 @@
 }
 
 .buttons {
-  @include select-buttons(6rem);
+  @include select-buttons;
 }
