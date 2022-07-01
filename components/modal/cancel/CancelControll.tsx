@@ -1,3 +1,4 @@
+import { isBeforeMin } from 'utils/handleTime';
 import CancelBeforeFiveMinModal from './CancelBeforeFiveMinModal';
 import CancelModal from './CancelModal';
 
@@ -7,13 +8,6 @@ type CancelType = {
 };
 
 export function CancelControll({ slotId, time }: CancelType) {
-  function isBeforeMin(gameTimeString: string, min: number) {
-    const gameTime = new Date(gameTimeString);
-    const afterMin = new Date();
-    afterMin.setMinutes(afterMin.getMinutes() + min);
-    return gameTime.getTime() <= afterMin.getTime();
-  }
-
   const matchStartBefore5Min = isBeforeMin(time, 5);
   return (
     <>

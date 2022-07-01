@@ -2,11 +2,10 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { CurrentMatch } from 'types/matchTypes';
-import { gameTimeToString } from 'utils/handleTime';
+import { gameTimeToString, isBeforeMin } from 'utils/handleTime';
 import { cancelModalState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import Modal from 'components/modal/Modal';
-
 import { CancelControll } from 'components/modal/cancel/CancelControll';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
@@ -84,13 +83,6 @@ function makeMessage(time: string, isMatched: boolean) {
       </span>
     </div>
   );
-}
-
-function isBeforeMin(gameTimeString: string, min: number) {
-  const gameTime = new Date(gameTimeString);
-  const afterMin = new Date();
-  afterMin.setMinutes(afterMin.getMinutes() + min);
-  return gameTime.getTime() <= afterMin.getTime();
 }
 
 function makeEnemyTeamInfo(enemyTeam: string[]) {
