@@ -22,7 +22,7 @@ export default function Profile({ intraId }: ProfileProps) {
         const res = await instance.get(`/pingpong/users/${intraId}/detail`);
         setProfileInfo(res?.data);
       } catch (e) {
-        setErrorMessage('Profile Error');
+        // setErrorMessage('Profile Error'); // CORS 에러로 인한 일시적 주석처리. 본 서버 연동 후 해제 예정.
       }
     })();
   }, [intraId]);
