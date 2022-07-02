@@ -45,7 +45,13 @@ export default function Header() {
         </div>
         <div className={styles.headerRight}>
           <div id={styles.notiIcon} onClick={showNotiBarHandler}>
-            {liveData.notiCount ? <VscBellDot /> : <VscBell />}
+            {liveData.notiCount ? (
+              <div className={styles.bellWhole}>
+                <VscBellDot />
+              </div>
+            ) : (
+              <VscBell />
+            )}
           </div>
           <Link href={`/users/${userData.intraId}`}>
             <div id={styles.userImg}>
