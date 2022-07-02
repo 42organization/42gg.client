@@ -30,9 +30,8 @@ export default function GameResultBigScore({
   const getFindTimeSeconds = (gameTime: string) => {
     return (Number(new Date()) - Number(new Date(gameTime))) / 1000;
   };
-
   const getTimeAgo = (gameTime: string) => {
-    const findTime = getFindTimeSeconds(gameTime);
+    const findTime = getFindTimeSeconds(gameTime) - 60 * 10;
     const times = [
       { time: '년', second: 60 * 60 * 24 * 365 },
       { time: '개월', second: 60 * 60 * 24 * 30 },
