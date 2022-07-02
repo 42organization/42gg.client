@@ -70,6 +70,7 @@ export default function InputScoreModal() {
       }
     } catch (e) {
       setErrorMessage('SubmitResultHandler Error');
+      return;
     }
     window.location.href = '/';
   };
