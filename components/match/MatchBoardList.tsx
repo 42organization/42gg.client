@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { MatchData } from 'types/matchTypes';
+import { matchRefreshBtnState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import MatchBoard from './MatchBoard';
@@ -12,6 +13,7 @@ interface MatchBoardListProps {
 
 export default function MatchBoardList({ type }: MatchBoardListProps) {
   const [matchData, setMatchData] = useState<MatchData | null>(null);
+  const setMatchRefreshBtn = useSetRecoilState(matchRefreshBtnState);
   const setErrorMessage = useSetRecoilState(errorState);
 
   useEffect(() => {
@@ -42,8 +44,19 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
     // 매뉴얼 구현시 연결
   };
 
+  const refreshBtnHandler = () => {
+    console.log('refresh');
+    getMatchDataHandler();
+    setMatchRefreshBtn(true);
+    // setMatchRefreshBtn(false);
+  };
+
   if (filteredMatchBoards.length === 0)
-    return <div>오늘의 매치가 모두 끝났습니다!</div>;
+    return (
+      <div className={styles.matchAllClosed}>
+        오늘의 매치가 모두 끝났습니다!
+      </div>
+    );
 
   return (
     <>
@@ -51,7 +64,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
         <button className={styles.mamualBtn} onClick={manualPageHandler}>
           매뉴얼
         </button>
-        <button className={styles.refreshBtn} onClick={getMatchDataHandler}>
+        <button className={styles.refreshBtn} onClick={refreshBtnHandler}>
           &#8635;
         </button>
       </div>
