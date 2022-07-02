@@ -15,12 +15,17 @@ export default function RankItem({ index, user, isMain }: RankType) {
   const myRank = useRecoilValue(myRankPosition);
 
   return (
-    <Link href={`/users/${intraId}`}>
+    <>
       {isMain ? (
         <div className={styles.mainData}>
           <div className={styles.rank}>{rank === -1 ? '-' : rank}</div>
           <div className={styles.intraId}>
-            <span>{intraId}</span> <span className={styles.ppp}>({ppp})</span>
+            <Link href={`/users/${intraId}`}>
+              <span>{intraId} </span>
+            </Link>
+            <Link href={`/users/${intraId}`}>
+              <span className={styles.ppp}>({ppp})</span>
+            </Link>
           </div>
           <div className={styles.winRate}>{winRate}%</div>
         </div>
@@ -36,13 +41,18 @@ export default function RankItem({ index, user, isMain }: RankType) {
               {rank === -1 ? '-' : rank}
             </div>
             <div className={styles.intraId}>
-              <span>{intraId}</span> <span className={styles.ppp}>({ppp})</span>
+              <Link href={`/users/${intraId}`}>
+                <span>{intraId} </span>
+              </Link>
+              <Link href={`/users/${intraId}`}>
+                <span className={styles.ppp}>({ppp})</span>
+              </Link>
             </div>
             <div className={styles.statusMessage}>{statusMessage}</div>
             <div className={styles.winRate}>{winRate}%</div>
           </div>
         </div>
       )}
-    </Link>
+    </>
   );
 }
