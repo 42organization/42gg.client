@@ -1,5 +1,11 @@
 @import 'styles/common.scss';
 
+.matchAllClosed {
+  margin: 3rem 0;
+  text-align: center;
+  color: #fff;
+}
+
 .matchBoardList {
   display: flex;
   flex-direction: column;

@@ -21,3 +21,8 @@ export const rejectModalState = atom<boolean>({
   key: `rejectModalState/${v1()}`,
   default: false,
 });
+
+export const matchRefreshBtnState = atom<boolean>({
+  key: `matchRefreshBtnState/${v1()}`,
+  default: false,
+});

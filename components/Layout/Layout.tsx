@@ -30,8 +30,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
   );
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
   const [errorMessage, setErrorMessage] = useRecoilState(errorState);
-  const presentPath = useRouter().asPath;
   const router = useRouter();
+  const presentPath = useRouter().asPath;
   const token = router.asPath.split('?token=')[1];
 
   useEffect(() => {
