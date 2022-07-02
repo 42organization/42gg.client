@@ -11,7 +11,7 @@ instance.interceptors.request.use(
     config.headers = {
       'Content-Type': 'application/json',
       // Authorization: `Bearer ${localStorage.getItem('42gg-token')}`,
-      Authorization: `Bearer access2`, // 백에서 access1~1000까지 토큰을 임의로 바꿨습니당
+      Authorization: `Bearer access23`, // 백에서 access1~1000까지 토큰을 임의로 바꿨습니당
     };
     return config;
   },
