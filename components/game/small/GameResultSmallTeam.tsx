@@ -16,9 +16,7 @@ export default function GameResultSmallTeam({
         <span className={styles.userImage}></span>
         <span>
           {team.players.map((player) => (
-            <div key={player.intraId} className={styles.cursorOn}>
-              {player.intraId}
-            </div>
+            <div key={player.intraId}>{player.intraId}</div>
           ))}
         </span>
       </div>
