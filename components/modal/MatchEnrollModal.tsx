@@ -26,7 +26,6 @@ export default function MatchEnrollModal() {
       );
       alert('경기가 성공적으로 등록되었습니다.');
     } catch (e: any) {
-      console.log(e);
       if (e.response.status === 423)
         alert('경기 취소 후 1분 동안 경기를 예약할 수 없습니다.');
       else {
