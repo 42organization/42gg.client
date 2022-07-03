@@ -27,7 +27,7 @@ export default function CancelModal({ slotId }: SlotProps) {
       else {
         setOpenModal(false);
         setOpenCurrentInfo(false);
-        setErrorMessage('Cancel Error');
+        setErrorMessage('JH01');
         return;
       }
     }

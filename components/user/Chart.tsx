@@ -83,7 +83,7 @@ export default function Chart({ intraId }: ChartProps) {
         );
         setChartData(res?.data.historics);
       } catch (e) {
-        setErrorMessage('Chart Error');
+        setErrorMessage('SJ02');
       }
     })();
   }, []);

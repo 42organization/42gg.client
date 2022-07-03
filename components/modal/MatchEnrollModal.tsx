@@ -34,7 +34,7 @@ export default function MatchEnrollModal() {
         alert('경기 취소 후 1분 동안 경기를 예약할 수 없습니다.');
       else {
         setEnrollInfo(null);
-        setErrorMessage('Request Error');
+        setErrorMessage('JH05');
         return;
       }
     }
