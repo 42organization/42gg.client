@@ -90,7 +90,11 @@ export default function Profile({ intraId }: ProfileProps) {
       </div>
       <div className={styles.bottom}>
         <div className={styles.statusMessage}>
-          <div className={styles.messaage}>{statusMessage}</div>
+          <div className={styles.messaage}>
+            {statusMessage.length === 0
+              ? '상태메세지를 입력해보세요!'
+              : statusMessage}
+          </div>
           <div className={styles.buttons}>
             {userData.intraId === intraId && (
               <div className={styles.positive}>

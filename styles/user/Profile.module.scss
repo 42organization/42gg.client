@@ -71,15 +71,13 @@
       display: flex;
       width: 70%;
       height: 1rem;
+      border-radius: $mini-radius;
+      overflow: hidden;
       .wins {
         background-color: $winner-blue;
-        border-top-left-radius: $mini-radius;
-        border-bottom-left-radius: $mini-radius;
       }
       .loses {
         background-color: $loser-red;
-        border-top-right-radius: $mini-radius;
-        border-bottom-right-radius: $mini-radius;
       }
     }
   }
