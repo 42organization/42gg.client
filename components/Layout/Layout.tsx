@@ -80,8 +80,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   if (errorMessage !== '') {
     return (
-      <div className={styles.background}>
-        <ErrorPage />
+      <div className={styles.appContainer}>
+        <div className={styles.background}>
+          <ErrorPage />
+        </div>
       </div>
     );
   } else {
