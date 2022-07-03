@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Team } from 'types/gameTypes';
 import styles from 'styles/game/GameResultItem.module.scss';
 
@@ -13,7 +14,19 @@ export default function GameResultSmallTeam({
   return (
     <div className={styles.smallTeam}>
       <div className={userLeft ? styles.smallLeft : styles.smallRight}>
-        <span className={styles.userImage}></span>
+        <span className={styles.userImage}>
+          {team.players.map((player, index) => (
+            <Image
+              key={index}
+              src={player.userImageUri}
+              alt='prfImg'
+              layout='fill'
+              objectFit='cover'
+              sizes='10vw'
+              quality='5'
+            />
+          ))}
+        </span>
         <span>
           {team.players.map((player) => (
             <div key={player.intraId}>{player.intraId}</div>
