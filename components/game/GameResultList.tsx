@@ -16,19 +16,20 @@ type gameResultTypes = {
 export default function GameResultList({ path }: gameResultTypes) {
   const [clickedItemId, setClickedItemId] =
     useRecoilState<number>(clickedGameItem);
-  const [lastGameId, setLastGameId] = useState<number>();
+  const [totalPage, setTotalPage] = useState<number>();
   const infResult = infScroll(path);
   const { data, fetchNextPage, status } = infResult;
   const router = useRouter();
 
-  const getLastGameId = (data: InfiniteData<any> | undefined) => {
-    return data?.pages[data.pages.length - 1].lastGameId;
+  const getTotalPage = (data: InfiniteData<any> | undefined) => {
+    return data?.pages[data.pages.length - 1].totalPage;
   };
 
   useEffect(() => {
-    if (data?.pages.length === 1 && getLastGameId(data) !== 0)
+    if (data?.pages.length === 1 && getTotalPage(data) !== 0)
       setClickedItemId(data?.pages[0].games[0].gameId);
-    setLastGameId(getLastGameId(data));
+    setTotalPage(getTotalPage(data));
+    console.log(data);
   }, [data]);
 
   if (data?.pages[0].games.length === 0) {
@@ -53,7 +54,7 @@ export default function GameResultList({ path }: gameResultTypes) {
         </>
       )}
       <>
-        {router.asPath !== '/' && lastGameId !== 0 && (
+        {router.asPath !== '/' && totalPage !== 1 && (
           <div className={styles.getButton}>
             <input
               type='button'
