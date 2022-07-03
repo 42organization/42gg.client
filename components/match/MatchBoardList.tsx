@@ -32,7 +32,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
       const res = await instance.get(`/pingpong/match/tables/${1}/single`);
       setMatchData(res?.data);
     } catch (e) {
-      setErrorMessage('MatchBoard Error');
+      setErrorMessage('SJ01');
     }
   };
 

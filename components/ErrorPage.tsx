@@ -22,9 +22,16 @@ export default function ErrorPage() {
       <div className={styles.container}>
         <div className={styles.errorContainer}>
           <div className={styles.title}>42gg</div>
-          <div className={styles.errorMessage}>{errorMessage}</div>
+          <div className={styles.errorMessage}>
+            {errorMessage === 'DK404'
+              ? '잘못된 요청입니다!'
+              : '데이터 요청에 실패하였습니다.'}
+            <div className={styles.errorCode}>({errorMessage})</div>
+          </div>
           <div className={styles.home} onClick={goHome}>
-            🏠 홈으로 🏠
+            <div className={styles.positive}>
+              <input type='button' value='🏠 홈으로 🏠' />
+            </div>
           </div>
         </div>
       </div>

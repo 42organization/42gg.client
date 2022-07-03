@@ -26,7 +26,7 @@ export default function SearchBar() {
       const res = await instance.get(`/pingpong/users/searches?q=${keyword}`);
       setSearchResult(res?.data.users);
     } catch (e) {
-      setErrorMessage('SearchBar ResultHandler Error');
+      setErrorMessage('JB06');
     }
   };
 

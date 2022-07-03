@@ -34,7 +34,7 @@ export default function RankList() {
         setRankData(res?.data);
         setMyRank(res?.data.myRank);
       } catch (e) {
-        setErrorMessage(`RankList Error`);
+        setErrorMessage('DK01');
       }
     })();
   }, [page, isScroll === true]);

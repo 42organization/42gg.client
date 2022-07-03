@@ -53,7 +53,7 @@ export default function CurrentMatchInfo() {
         setMatchRefreshBtn(false);
       }
     } catch (e) {
-      setErrorMessage('CurrentMatch Error');
+      setErrorMessage('JB01');
     }
   };
 

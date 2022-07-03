@@ -26,7 +26,7 @@
   text-align: center;
   font-size: 3rem;
   letter-spacing: 0.2rem;
-  font-family: $title-font;
+  font-family: $logo-font;
   text-shadow: $text-shadow, 0.3rem 0.3rem 0 $btn-blue;
 }
 
@@ -35,7 +35,20 @@
   color: white;
 }
 
+.errorCode {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: $midium-font;
+  color: $midium-gray;
+}
+
 .home {
-  font-size: $big-font;
-  color: white;
+  @include select-buttons(10rem, 4rem);
+  .positive {
+    input {
+      font-size: $big-font;
+      font-weight: 500;
+      box-shadow: 0.1rem 0.1rem 0.3rem $pp-blue;
+    }
+  }
 }

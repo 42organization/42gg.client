@@ -23,7 +23,7 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
       const res = await instance.get(`/pingpong/notifications`);
       setNotiData(res?.data.notifications);
     } catch (e) {
-      setErrorMessage('NotiBar DataHandler Error');
+      setErrorMessage('JB04');
     }
   };
 
@@ -33,7 +33,7 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
       alert('알림이 성공적으로 삭제되었습니다.');
       showNotiBarHandler();
     } catch (e) {
-      setErrorMessage('NotiBar Delete Error');
+      setErrorMessage('JB05');
     }
   };
 
