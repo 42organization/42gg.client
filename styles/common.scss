@@ -171,7 +171,6 @@ $winner-blue: #040eff;
 }
 
 @mixin userImage($size) {
-  cursor: pointer;
   position: relative;
   height: $size;
   width: $size;
