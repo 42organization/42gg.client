@@ -1,12 +1,12 @@
 import { useSetRecoilState } from 'recoil';
 import styles from 'styles/match/MatchManual.module.scss';
-import { manualModalState } from 'utils/recoil/match';
+import { matchModalState } from 'utils/recoil/match';
 
-export default function MatchManual() {
-  const openManualModal = useSetRecoilState(manualModalState);
+export default function MatchManualModal() {
+  const setMatchModal = useSetRecoilState(matchModalState);
 
   const onReturn = () => {
-    openManualModal(false);
+    setMatchModal(null);
   };
 
   return (

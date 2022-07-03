@@ -1,12 +1,12 @@
 import { useSetRecoilState } from 'recoil';
-import { rejectModalState } from 'utils/recoil/match';
+import { matchModalState } from 'utils/recoil/match';
 import styles from 'styles/modal/MatchRejectModal.module.scss';
 
 export default function MatchRejectModal() {
-  const setopenRejectModal = useSetRecoilState(rejectModalState);
+  const setMatchModal = useSetRecoilState(matchModalState);
 
   const onReturn = () => {
-    setopenRejectModal(false);
+    setMatchModal(null);
   };
 
   return (

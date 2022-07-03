@@ -6,7 +6,7 @@ import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import MatchBoard from './MatchBoard';
 import styles from 'styles/match/MatchBoardList.module.scss';
-import { manualModalState } from 'utils/recoil/match';
+import { matchModalState } from 'utils/recoil/match';
 
 interface MatchBoardListProps {
   type: string;
@@ -17,7 +17,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   const setMatchRefreshBtn = useSetRecoilState(matchRefreshBtnState);
   const setErrorMessage = useSetRecoilState(errorState);
   const currentRef = useRef<HTMLDivElement>(null);
-  const openManualModal = useSetRecoilState(manualModalState);
+  const setMatchModal = useSetRecoilState(matchModalState);
   const [refreshBtnAnimation, setRefreshBtnAnimation] =
     useState<boolean>(false);
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   const { matchBoards, intervalMinute } = matchData;
 
   const manualPageHandler = () => {
-    openManualModal(true);
+    setMatchModal('manual');
   };
 
   const refreshBtnHandler = () => {
