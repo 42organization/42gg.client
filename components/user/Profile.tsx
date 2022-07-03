@@ -49,7 +49,7 @@ export default function Profile({ intraId }: ProfileProps) {
         <div className={styles.gameInfo}>
           <div className={styles.rank}>
             <span>순위</span>
-            <span>{rank}</span>
+            <span>{rank === -1 ? '-' : rank}</span>
           </div>
           <div className={styles.pppRacketWrap}>
             <div className={styles.ppp}>{ppp}점</div>
