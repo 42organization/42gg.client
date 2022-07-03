@@ -16,7 +16,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   const [matchData, setMatchData] = useState<MatchData | null>(null);
   const setMatchRefreshBtn = useSetRecoilState(matchRefreshBtnState);
   const setErrorMessage = useSetRecoilState(errorState);
-  const setManualModal = useSetRecoilState(manualModalState);
+  const openManualModal = useSetRecoilState(manualModalState);
   useEffect(() => {
     getMatchDataHandler();
   }, []);
@@ -42,7 +42,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   });
 
   const manualPageHandler = () => {
-    setManualModal(true);
+    openManualModal(true);
   };
 
   const refreshBtnHandler = () => {

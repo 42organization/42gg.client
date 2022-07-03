@@ -9,10 +9,11 @@ import { manualModalState, rejectModalState } from 'utils/recoil/match';
 
 export default function Match() {
   const openRejectModal = useRecoilValue(rejectModalState);
-  const setManualModal = useRecoilValue(manualModalState);
+  const openManualModal = useRecoilValue(manualModalState);
+
   return (
     <>
-      {setManualModal && (
+      {openManualModal && (
         <Modal>
           <MatchManual />
         </Modal>

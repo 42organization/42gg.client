@@ -3,10 +3,10 @@ import styles from 'styles/match/MatchManual.module.scss';
 import { manualModalState } from 'utils/recoil/match';
 
 export default function MatchManual() {
-  const setManualModal = useSetRecoilState(manualModalState);
+  const openManualModal = useSetRecoilState(manualModalState);
 
   const onReturn = () => {
-    setManualModal(false);
+    openManualModal(false);
   };
 
   return (
