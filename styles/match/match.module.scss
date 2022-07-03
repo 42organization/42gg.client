@@ -3,6 +3,7 @@
 .container {
   @include pageWrap;
   position: relative; // match refresh 버튼을 위해 필요함
+  min-height: auto;
 }
 
 .title {

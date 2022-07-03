@@ -32,7 +32,7 @@ export default function MatchItem({
   const isAfterSlot: boolean = startTime.getTime() - new Date().getTime() >= 0;
   let buttonStyle;
 
-  const onClick = () => {
+  const enrollHandler = () => {
     if (status === 'mytable') {
       setOpenCancelModal(true);
     } else if (liveData.event === 'match') {
@@ -59,7 +59,7 @@ export default function MatchItem({
     <button
       className={buttonStyle}
       disabled={status === 'close'}
-      onClick={onClick}
+      onClick={enrollHandler}
     >
       <span className={styles.timeString}>
         {minuiteToStr(startTime.getMinutes())} -{' '}

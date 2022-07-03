@@ -18,23 +18,23 @@ export default function MatchBoard({
 
   return (
     <>
-      <div className={styles.matchBoard}>
-        <div className={styles.slotHourString}>{slotHourString}</div>
-        <div className={styles.gridContainer}>
-          {matchSlots.map((slot) => (
-            <MatchItem
-              key={slot.slotId}
-              type={type}
-              slot={slot}
-              intervalMinute={intervalMinute}
-            ></MatchItem>
-          ))}
-        </div>
+      <div className={styles.slotHourString}>{slotHourString}</div>
+      <div className={styles.gridContainer}>
+        {matchSlots.map((slot) => (
+          <MatchItem
+            key={slot.slotId}
+            type={type}
+            slot={slot}
+            intervalMinute={intervalMinute}
+          ></MatchItem>
+        ))}
       </div>
     </>
   );
 }
 
 function changeTo12HourClock(hour: number) {
-  return `${hour < 12 ? '오전 ' : '오후 '} ${hour % 12}시`;
+  return `${hour < 12 ? '오전 ' : '오후 '} ${
+    hour % 12 === 0 ? 12 : hour % 12
+  }시`;
 }
