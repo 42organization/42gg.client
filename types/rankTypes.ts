@@ -7,6 +7,7 @@ export interface Rank {
 }
 
 export interface RankData {
+  myIntraId: string;
   myRank: number;
   currentPage: number;
   totalPage: number;
