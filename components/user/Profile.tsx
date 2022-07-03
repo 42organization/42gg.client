@@ -49,7 +49,7 @@ export default function Profile({ intraId }: ProfileProps) {
         <div className={styles.gameInfo}>
           <div className={styles.rank}>
             <span>순위</span>
-            <span>{rank}</span>
+            <span>{rank === -1 ? '-' : rank}</span>
           </div>
           <div className={styles.pppRacketWrap}>
             <div className={styles.ppp}>{ppp}점</div>
@@ -90,7 +90,11 @@ export default function Profile({ intraId }: ProfileProps) {
       </div>
       <div className={styles.bottom}>
         <div className={styles.statusMessage}>
-          <div className={styles.messaage}>{statusMessage}</div>
+          <div className={styles.messaage}>
+            {statusMessage.length === 0
+              ? '상태메세지를 입력해보세요!'
+              : statusMessage}
+          </div>
           <div className={styles.buttons}>
             {userData.intraId === intraId && (
               <div className={styles.positive}>
