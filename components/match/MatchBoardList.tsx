@@ -18,7 +18,8 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   const setErrorMessage = useSetRecoilState(errorState);
   const currentRef = useRef<HTMLDivElement>(null);
   const openManualModal = useSetRecoilState(manualModalState);
-
+  const [refreshBtnAnimation, setRefreshBtnAnimation] =
+    useState<boolean>(false);
   useEffect(() => {
     getMatchDataHandler();
   }, []);
@@ -45,6 +46,10 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   };
 
   const refreshBtnHandler = () => {
+    setRefreshBtnAnimation(true);
+    setTimeout(() => {
+      setRefreshBtnAnimation(false);
+    }, 1000);
     getMatchDataHandler();
     setMatchRefreshBtn(true);
   };
@@ -62,7 +67,12 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
         <button className={styles.mamualBtn} onClick={manualPageHandler}>
           매뉴얼
         </button>
-        <button className={styles.refreshBtn} onClick={refreshBtnHandler}>
+        <button
+          className={
+            refreshBtnAnimation ? styles.refreshBtnAnimation : styles.refreshBtn
+          }
+          onClick={refreshBtnHandler}
+        >
           &#8635;
         </button>
       </div>
