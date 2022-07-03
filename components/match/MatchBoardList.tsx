@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { MatchData } from 'types/matchTypes';
 import { matchRefreshBtnState } from 'utils/recoil/match';
@@ -15,10 +15,15 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   const [matchData, setMatchData] = useState<MatchData | null>(null);
   const setMatchRefreshBtn = useSetRecoilState(matchRefreshBtnState);
   const setErrorMessage = useSetRecoilState(errorState);
+  const currentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     getMatchDataHandler();
   }, []);
+
+  useEffect(() => {
+    currentRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [matchData]);
 
   const getMatchDataHandler = async () => {
     try {
@@ -33,13 +38,6 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
 
   const { matchBoards, intervalMinute } = matchData;
 
-  const filteredMatchBoards = matchBoards.filter((matchSlots) => {
-    const lastIndex = matchSlots.length - 1;
-    const slotsTime = new Date(matchSlots[lastIndex].time);
-    const nowTime = new Date();
-    return nowTime.getTime() <= slotsTime.getTime();
-  });
-
   const manualPageHandler = () => {
     // 매뉴얼 구현시 연결
   };
@@ -51,7 +49,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
     // setMatchRefreshBtn(false);
   };
 
-  if (filteredMatchBoards.length === 0)
+  if (matchBoards.length === 0)
     return (
       <div className={styles.matchAllClosed}>
         오늘의 매치가 모두 끝났습니다!
@@ -69,14 +67,29 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
         </button>
       </div>
       <div className={styles.matchBoardList}>
-        {filteredMatchBoards.map((matchSlots, i) => (
-          <MatchBoard
-            key={i}
-            type={type}
-            intervalMinute={intervalMinute}
-            matchSlots={matchSlots}
-          />
-        ))}
+        {matchBoards.map((matchSlots, i) => {
+          const slotsTime = new Date(matchSlots[0].time);
+          if (slotsTime.getHours() === new Date().getHours())
+            console.log(slotsTime.getHours());
+          return (
+            <div
+              className={styles.matchBoard}
+              key={i}
+              ref={
+                slotsTime.getHours() === new Date().getHours()
+                  ? currentRef
+                  : null
+              }
+            >
+              <MatchBoard
+                key={i}
+                type={type}
+                intervalMinute={intervalMinute}
+                matchSlots={matchSlots}
+              />
+            </div>
+          );
+        })}
       </div>
     </>
   );
