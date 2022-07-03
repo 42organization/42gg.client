@@ -39,6 +39,7 @@
     }
     .userImage {
       @include userImage(2.2rem);
+      cursor: pointer;
     }
   }
 }
