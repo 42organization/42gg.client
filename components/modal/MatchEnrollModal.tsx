@@ -36,7 +36,7 @@ export default function MatchEnrollModal() {
       else {
         setMatchModal(null);
         setEnrollInfo(null);
-        setErrorMessage('Request Error');
+        setErrorMessage('JH05');
         return;
       }
     }

@@ -17,7 +17,7 @@ export default function infScroll(path: string) {
       return pages.lastGameId;
     },
     onError: () => {
-      setErrorMessage('Infinite Error');
+      setErrorMessage('KP01');
     },
   });
 

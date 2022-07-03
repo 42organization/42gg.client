@@ -26,7 +26,7 @@ export default function SearchBar() {
       const res = await instance.get(`/pingpong/users/searches?q=${keyword}`);
       setSearchResult(res?.data.users);
     } catch (e) {
-      setErrorMessage('SearchBar ResultHandler Error');
+      setErrorMessage('JB06');
     }
   };
 
@@ -74,18 +74,20 @@ export default function SearchBar() {
             <GoSearch />
           </span>
         </div>
-      </div>
-      {showDropDown && keyword && (
-        <div className={styles.dropdown}>
-          {searchResult.length
-            ? searchResult.map((intraId: string) => (
+        {showDropDown && keyword && (
+          <div className={styles.dropdown}>
+            {searchResult.length ? (
+              searchResult.map((intraId: string) => (
                 <Link href={`/users/${intraId}`} key={intraId}>
                   <div>{intraId}</div>
                 </Link>
               ))
-            : '검색 결과가 없습니다.'}
-        </div>
-      )}
+            ) : (
+              <div style={{ cursor: 'unset' }}>'검색 결과가 없습니다.'</div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

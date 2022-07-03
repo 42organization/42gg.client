@@ -65,7 +65,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       const res = await instance.get(`/pingpong/users`);
       setUserData(res?.data);
     } catch (e) {
-      setErrorMessage('UserData Error');
+      setErrorMessage('JB02');
     }
   };
 
@@ -74,14 +74,16 @@ export default function AppLayout({ children }: AppLayoutProps) {
       const res = await instance.get(`/pingpong/users/live`);
       setLiveData(res?.data);
     } catch (e) {
-      setErrorMessage('Live Error');
+      setErrorMessage('JB03');
     }
   };
 
   if (errorMessage !== '') {
     return (
-      <div className={styles.background}>
-        <ErrorPage />
+      <div className={styles.appContainer}>
+        <div className={styles.background}>
+          <ErrorPage />
+        </div>
       </div>
     );
   } else {
