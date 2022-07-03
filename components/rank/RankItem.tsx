@@ -46,7 +46,11 @@ export default function RankItem({ myIntraId, index, user, isMain }: RankType) {
                 <span className={styles.ppp}>({ppp})</span>
               </Link>
             </div>
-            <div className={styles.statusMessage}>{statusMessage}</div>
+            <div className={styles.statusMessage}>
+              {statusMessage.length > 21
+                ? `${statusMessage.slice(0, 21)}...`
+                : statusMessage}
+            </div>
             <div className={styles.winRate}>{winRate}%</div>
           </div>
         </div>
