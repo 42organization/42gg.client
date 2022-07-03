@@ -70,68 +70,13 @@ export default function EditProfileModal() {
 
   return (
     <div className={styles.editContainer}>
-      <div className={styles.emoji}>✏️</div>
-      <div className={styles.container}>
-        <div className={styles.leftSide}>
-          <div className={styles.scoreInfo}>
-            <div className={styles.rank}>{rank}</div>
-            <div className={styles.pppAndracketType}>
-              <div className={styles.ppp}>{ppp}점</div>{' '}
-              <div className={styles.racketType}>
-                {racketType.toUpperCase()}
-              </div>
-            </div>
-          </div>
-          <div className={styles.winRate}>
-            <div className={styles.winRateStr}>승률 {winRate}</div>
-            <div className={styles.winRateBar}>
-              <div
-                style={{ width: `${parseInt(winRate)}%` }}
-                className={styles.wins}
-              ></div>
-              <div
-                className={styles.loses}
-                style={{ width: `${100 - parseInt(winRate)}%` }}
-              ></div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.rightSide}>
-          <div className={styles.rightTopSide}>
-            <div className={styles.image}></div>
-            <div className={styles.intraId}>{intraId}</div>
-          </div>
-        </div>
+      <div className={styles.phrase}>
+        <div className={styles.emoji}>✏️</div>
+        <div>프로필 수정</div>
       </div>
-      <div className={styles.racketRadioButtons}>
-        <label htmlFor='penholder'>
-          <input
-            type='radio'
-            name='racketType'
-            id='penholder'
-            value='penholder'
-            onChange={inputChangeHandler}
-            checked={editedProfile.racketType === 'penholder'}
-          />{' '}
-          <div className={styles.radioButton}>PENHOLDER</div>
-        </label>
-        <label htmlFor='shakehand'>
-          <input
-            type='radio'
-            name='racketType'
-            id='shakehand'
-            value='shakehand'
-            onChange={inputChangeHandler}
-            checked={editedProfile.racketType === 'shakehand'}
-          />{' '}
-          <div className={styles.radioButton}>SHAKEHAND</div>
-        </label>
-      </div>
-      <div>
-        <div className={styles.statusTitle}>
-          <span>상태메세지</span>
-        </div>
-        <div className={styles.textareaWrapper}>
+      <div className={styles.statusMessageWrap}>
+        <div className={styles.editType}>상태메세지</div>
+        <div className={styles.textareaWrap}>
           <textarea
             value={editedProfile.statusMessage}
             name='statusMessage'
@@ -141,14 +86,40 @@ export default function EditProfileModal() {
           <div>{`${editedProfile.statusMessage.length}/${CHAR_LIMIT}`}</div>
         </div>
       </div>
-      <div>
-        <div className={styles.buttons}>
-          <div className={styles.negative}>
-            <input type='button' onClick={cancelEditHandler} value='취소' />
-          </div>
-          <div className={styles.positive}>
-            <input type='button' onClick={finishEditHandler} value='확인' />
-          </div>
+      <div className={styles.racketTypeWrap}>
+        <div className={styles.editType}>라켓 타입</div>
+        <div className={styles.racketRadioButtons}>
+          <label htmlFor='penholder'>
+            <input
+              type='radio'
+              name='racketType'
+              id='penholder'
+              value='penholder'
+              onChange={inputChangeHandler}
+              checked={editedProfile.racketType === 'penholder'}
+            />{' '}
+            <div className={styles.radioButton}>PENHOLDER</div>
+          </label>
+          <label htmlFor='shakehand'>
+            <input
+              type='radio'
+              name='racketType'
+              id='shakehand'
+              value='shakehand'
+              onChange={inputChangeHandler}
+              checked={editedProfile.racketType === 'shakehand'}
+            />{' '}
+            <div className={styles.radioButton}>SHAKEHAND</div>
+          </label>
+        </div>
+      </div>
+
+      <div className={styles.buttons}>
+        <div className={styles.negative}>
+          <input type='button' onClick={cancelEditHandler} value='취소' />
+        </div>
+        <div className={styles.positive}>
+          <input type='button' onClick={finishEditHandler} value='확인' />
         </div>
       </div>
     </div>
