@@ -9,5 +9,5 @@
 }
 
 .buttons {
-  @include select-buttons;
+  @include select-buttons(6rem);
 }

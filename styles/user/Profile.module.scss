@@ -1,198 +1,207 @@
-@import '../common.scss';
+@import 'styles/common.scss';
 
 .container {
-  // height: 13rem;
-  background-color: #24098f;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: $dark-blue;
   color: white;
   border-radius: $small-radius;
+  padding: 1rem;
+}
+
+.top {
   display: flex;
-  flex-direction: row;
+  margin-bottom: 0.5rem;
+}
+
+.bottom {
+  display: flex;
+}
+
+.gameInfo {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  padding-inline: 0.8rem;
-  padding-top: 0.6rem;
+  align-items: stretch;
   padding-bottom: 1rem;
+  .rank {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    color: $pp-red;
+    font-size: 3rem;
+    font-weight: 700;
+    span:nth-child(1) {
+      font-size: $big-font;
+      margin: 0 0.5rem 0.3rem 0;
+    }
+    margin-bottom: 0.3rem;
+  }
+  .pppRacketWrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.3rem;
+    .ppp {
+      font-size: $big-font;
+      margin-right: 0.5rem;
+    }
+    .racketType {
+      font-size: $small-font;
+      border: 1px solid;
+      border-radius: $mini-radius;
+      text-align: center;
+      padding: 0.1rem 0.5rem;
+    }
+  }
+  .winRate {
+    display: flex;
+    align-items: center;
+    font-size: $midium-font;
+    width: 100%;
+    .winRateStr {
+      margin-right: 0.5rem;
+      font-weight: 300;
+      span:nth-child(1) {
+        font-size: $small-font;
+      }
+    }
+    .winRateBar {
+      display: flex;
+      width: 70%;
+      height: 1rem;
+      .wins {
+        background-color: $winner-blue;
+        border-top-left-radius: $mini-radius;
+        border-bottom-left-radius: $mini-radius;
+      }
+      .loses {
+        background-color: $loser-red;
+        border-top-right-radius: $mini-radius;
+        border-bottom-right-radius: $mini-radius;
+      }
+    }
+  }
 }
 
-.leftSide {
-  height: 100%;
+.playerInfo {
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.scoreInfo {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-
-.rank {
-  color: $pp-red;
-  font-size: 3rem;
-  font-weight: bold;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin-right: 0.5rem;
-}
-
-.pppAndracketType {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.ppp {
-  font-size: $big-font;
-}
-
-.racketType {
-  font-size: $small-font;
-}
-
-.winRate {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  margin-block: 0.5rem;
-
-  .winRateStr {
-    font-size: $small-font;
-    margin-right: 1rem;
+  padding-bottom: 1rem;
+  .image {
+    background-color: white;
+    border-radius: 50%;
+    width: 4.7em;
+    height: 4.7rem;
   }
-
-  .winRateBar {
-    font-size: $small-font;
-    display: flex;
-    flex-direction: row;
-    width: 6rem;
-    .wins {
-      background-color: $winner-blue;
-      border-top-left-radius: $mini-radius;
-      border-bottom-left-radius: $mini-radius;
-    }
-
-    .loses {
-      background-color: $loser-red;
-      border-top-right-radius: $mini-radius;
-      border-bottom-right-radius: $mini-radius;
-    }
+  .intraId {
+    font-size: $big-font;
+    font-weight: 600;
+    margin-top: 0.2rem;
   }
 }
 
 .statusMessage {
-  height: 4rem;
+  flex: 2;
+  background: $g2-bottom;
+  border-radius: $mini-radius;
+  min-height: 5rem;
   font-size: $big-font;
-}
-
-.rightSide {
-  height: 100%;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-}
-
-.rightTopSide {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1rem;
-}
-
-.image {
-  background-color: white;
-  border-radius: 50%;
-  width: 4.5rem;
-  height: 4.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.intraId {
-  font-size: $big-font;
-  vertical-align: center;
-}
-
-.editButton {
-  background: transparent;
-  color: white;
-  border: 1px solid;
-  border-radius: $mini-radius;
-  vertical-align: center;
-}
-
-.emoji {
-  font-size: $giant-big-font;
+  .buttons {
+    @include select-buttons(4rem, 1.5rem);
+    margin-left: auto;
+    margin-top: 0.2rem;
+  }
 }
 
 .editContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  height: 28rem;
+  align-items: stretch;
+}
+
+.phrase {
+  @include modal-phrase;
+}
+
+.editType {
+  margin: 0 0 0.3rem 0.5rem;
+  color: $pp-blue;
+  font-size: $midium-font;
+}
+
+.racketTypeWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: 3rem;
+  .racketRadioButtons {
+    display: flex;
+    justify-content: space-between;
+    input[type='radio'] {
+      position: absolute;
+      opacity: 0;
+    }
+    :checked + .radioButton {
+      color: $pp-blue;
+      border-color: $pp-blue;
+    }
+    .radioButton {
+      cursor: pointer;
+      border: solid 1px white;
+      border-radius: $mini-radius;
+      text-align: center;
+      font-size: $midium-font;
+      width: 8rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.statusMessageWrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  .textareaWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: white;
+    border-radius: $small-radius;
+    overflow: hidden;
+    border: solid $pp-blue 1px;
+    textarea {
+      border: none;
+      padding: 0.7rem;
+      font-size: $big-font;
+      height: 5rem;
+      resize: none;
+    }
+    :focus {
+      outline: none;
+    }
+    div {
+      display: flex;
+      justify-content: flex-end;
+      color: $dark-gray;
+      padding: 0.7rem;
+      font-size: $small-font;
+    }
+  }
 }
 
 .buttons {
   @include select-buttons;
-}
-
-.statusTitle {
-  display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  margin-bottom: 0.5rem;
-  color: $pp-blue;
-}
-
-.textareaWrapper {
-  background-color: white;
-  border-radius: $small-radius;
-  overflow: hidden;
-  width: 100%;
-  border: solid $pp-blue 1px;
-  textarea {
-    border: none;
-    padding: 0.7rem;
-    font-size: $big-font;
-    height: 5rem;
-    width: 100%;
-    resize: none;
-  }
-  textarea:focus {
-    outline: none;
-  }
-  div {
-    display: flex;
-    justify-content: flex-end;
-    color: $dark-gray;
-    padding-inline: 0.7rem;
-    padding-bottom: 0.7rem;
-    font-size: $small-font;
-  }
-}
-
-.racketRadioButtons {
-  display: flex;
-  width: 100%;
-  justify-content: space-evenly;
-  input[type='radio'] {
-    position: absolute;
-    opacity: 0;
-  }
-
-  input[type='radio']:checked + .radioButton {
-    color: $pp-blue;
-    border-color: $pp-blue;
-  }
-
-  .radioButton {
-    cursor: pointer;
-    border: solid 1px white;
-    border-radius: $mini-radius;
-    padding-block: 0.3rem;
-    padding-inline: 0.5rem;
-  }
 }
