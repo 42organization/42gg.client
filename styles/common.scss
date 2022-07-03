@@ -11,7 +11,7 @@ $small-radius: 0.5rem;
 $midium-radius: 0.6rem;
 $big-radius: 5rem;
 
-$title-font: 'Alfa Slab One', cursive;
+$title-font: 'Reality Hyper Regular';
 $text-shadow: 0.1rem 0 #000, 0 0.1rem #000, -0.1rem 0 #000, 0 -0.1rem #000;
 
 $pp-red: #de1825;
@@ -33,6 +33,10 @@ $g2-bottom: #b5bbf2;
 
 $loser-red: #ff0303;
 $winner-blue: #040eff;
+
+@mixin logoFont {
+  font-family: 'Agonostic Italic';
+}
 
 @mixin menu-noti-Bar {
   overflow: auto;
@@ -66,15 +70,15 @@ $winner-blue: #040eff;
 @mixin logoTitle($shadow) {
   color: #fff;
   letter-spacing: 0.1rem;
-  font-family: $title-font;
-  text-shadow: $text-shadow, $shadow $shadow 0 $btn-blue;
+  font-family: 'Agonostic Italic';
+  font-size: 2rem;
 }
 
 @mixin pageTitle {
   margin-bottom: 1rem;
   color: #fff;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   letter-spacing: 0.1rem;
   font-family: $title-font;
   text-shadow: $text-shadow, 0.3rem 0.3rem 0 $pp-red;
