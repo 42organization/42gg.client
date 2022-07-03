@@ -11,7 +11,8 @@ $small-radius: 0.5rem;
 $midium-radius: 0.6rem;
 $big-radius: 5rem;
 
-$title-font: 'Reality Hyper Regular';
+$logo-font: 'Agonostic Italic', cursive;
+$title-font: 'Reality Hyper Regular', cursive;
 $text-shadow: 0.1rem 0 #000, 0 0.1rem #000, -0.1rem 0 #000, 0 -0.1rem #000;
 
 $pp-red: #de1825;
@@ -66,7 +67,7 @@ $winner-blue: #040eff;
 @mixin logoTitle($shadow) {
   color: #fff;
   letter-spacing: 0.1rem;
-  font-family: 'Agonostic Italic';
+  font-family: $logo-font;
   font-size: 2rem;
 }
 
