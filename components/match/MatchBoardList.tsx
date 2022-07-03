@@ -6,6 +6,7 @@ import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import MatchBoard from './MatchBoard';
 import styles from 'styles/match/MatchBoardList.module.scss';
+import { manualModalState } from 'utils/recoil/match';
 
 interface MatchBoardListProps {
   type: string;
@@ -16,6 +17,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   const setMatchRefreshBtn = useSetRecoilState(matchRefreshBtnState);
   const setErrorMessage = useSetRecoilState(errorState);
   const currentRef = useRef<HTMLDivElement>(null);
+  const openManualModal = useSetRecoilState(manualModalState);
 
   useEffect(() => {
     getMatchDataHandler();
@@ -39,14 +41,12 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   const { matchBoards, intervalMinute } = matchData;
 
   const manualPageHandler = () => {
-    // 매뉴얼 구현시 연결
+    openManualModal(true);
   };
 
   const refreshBtnHandler = () => {
-    console.log('refresh');
     getMatchDataHandler();
     setMatchRefreshBtn(true);
-    // setMatchRefreshBtn(false);
   };
 
   if (matchBoards.length === 0)
@@ -69,8 +69,6 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
       <div className={styles.matchBoardList}>
         {matchBoards.map((matchSlots, i) => {
           const slotsTime = new Date(matchSlots[0].time);
-          if (slotsTime.getHours() === new Date().getHours())
-            console.log(slotsTime.getHours());
           return (
             <div
               className={styles.matchBoard}

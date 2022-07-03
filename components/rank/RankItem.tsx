@@ -1,18 +1,16 @@
 import Link from 'next/link';
-import { useRecoilValue } from 'recoil';
 import { Rank } from 'types/rankTypes';
-import { myRankPosition } from 'utils/recoil/myRank';
 import styles from 'styles/RankList.module.scss';
 
 type RankType = {
+  myIntraId: string;
   index: number;
   user: Rank;
   isMain: boolean;
 };
 
-export default function RankItem({ index, user, isMain }: RankType) {
+export default function RankItem({ myIntraId, index, user, isMain }: RankType) {
   const { rank, intraId, ppp, statusMessage, winRate } = user;
-  const myRank = useRecoilValue(myRankPosition);
 
   return (
     <>
@@ -33,7 +31,7 @@ export default function RankItem({ index, user, isMain }: RankType) {
         <div className={styles.rankData}>
           <div
             className={`${index % 2 ? styles.even : styles.odd}
-            ${rank === myRank && styles.myself}`}
+            ${intraId === myIntraId && styles.myself}`}
           >
             <div
               className={0 < rank && rank < 4 ? styles.topRank : styles.rank}

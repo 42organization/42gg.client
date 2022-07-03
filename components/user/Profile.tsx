@@ -44,42 +44,49 @@ export default function Profile({ intraId }: ProfileProps) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.leftSide}>
-        <div className={styles.scoreInfo}>
-          <div className={styles.rank}>{rank}</div>
-          <div className={styles.pppAndracketType}>
-            <div className={styles.ppp}>{ppp}점</div>{' '}
+      <div className={styles.top}>
+        <div className={styles.gameInfo}>
+          <div className={styles.rank}>
+            <span>순위</span>
+            <span>{rank}</span>
+          </div>
+          <div className={styles.pppRacketWrap}>
+            <div className={styles.ppp}>{ppp}점</div>
             <div className={styles.racketType}>{racketType.toUpperCase()}</div>
           </div>
-        </div>
-        <div className={styles.winRate}>
-          <div className={styles.winRateStr}>승률 {winRate}</div>
-          <div className={styles.winRateBar}>
-            <div
-              style={{ width: `${parseInt(winRate)}%` }}
-              className={styles.wins}
-            ></div>
-            <div
-              className={styles.loses}
-              style={{ width: `${100 - parseInt(winRate)}%` }}
-            ></div>
+          <div className={styles.winRate}>
+            <div className={styles.winRateStr}>
+              <span>승률 </span>
+              <span>{winRate}</span>
+            </div>
+            <div className={styles.winRateBar}>
+              <span
+                className={styles.wins}
+                style={{ width: `${parseInt(winRate)}%` }}
+              ></span>
+              <span
+                className={styles.loses}
+                style={{ width: `${100 - parseInt(winRate)}%` }}
+              ></span>
+            </div>
           </div>
         </div>
-        <div className={styles.statusMessage}>{statusMessage}</div>
-      </div>
-      <div className={styles.rightSide}>
-        <div className={styles.rightTopSide}>
+        <div className={styles.playerInfo}>
           <div className={styles.image}></div>
           <div className={styles.intraId}>{intraId}</div>
         </div>
-        {userData.intraId === intraId && (
-          <input
-            type='button'
-            className={styles.editButton}
-            onClick={startEditHandler}
-            value='edit'
-          />
-        )}
+      </div>
+      <div className={styles.bottom}>
+        <div className={styles.statusMessage}>
+          <div className={styles.messaage}>{statusMessage}</div>
+          <div className={styles.buttons}>
+            {userData.intraId === intraId && (
+              <div className={styles.positive}>
+                <input type='button' onClick={startEditHandler} value='edit' />
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

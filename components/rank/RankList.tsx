@@ -56,7 +56,13 @@ export default function RankList() {
       <div className={styles.mainContainer}>
         <div className={styles.mainTitle}>Champion</div>
         {rankData?.rankList.map((item: Rank, index) => (
-          <RankItem key={item.rank} index={index} user={item} isMain={true} />
+          <RankItem
+            key={item.intraId}
+            myIntraId={rankData.myIntraId}
+            index={index}
+            user={item}
+            isMain={true}
+          />
         ))}
       </div>
     </div>
@@ -69,7 +75,13 @@ export default function RankList() {
         <div>승률</div>
       </div>
       {rankData?.rankList.map((item: Rank, index) => (
-        <RankItem key={item.intraId} index={index} user={item} isMain={false} />
+        <RankItem
+          key={item.intraId}
+          myIntraId={rankData.myIntraId}
+          index={index}
+          user={item}
+          isMain={false}
+        />
       ))}
       <PageNation
         curPage={rankData?.currentPage}

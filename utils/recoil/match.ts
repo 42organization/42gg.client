@@ -26,3 +26,8 @@ export const matchRefreshBtnState = atom<boolean>({
   key: `matchRefreshBtnState/${v1()}`,
   default: false,
 });
+
+export const manualModalState = atom<boolean>({
+  key: `manualModalState/${v1()}`,
+  default: false,
+});
