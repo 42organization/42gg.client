@@ -1,5 +1,5 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { enrollInfoState } from 'utils/recoil/match';
+import { enrollInfoState, matchModalState } from 'utils/recoil/match';
 import { gameTimeToString } from 'utils/handleTime';
 import { EnrollInfo } from 'types/matchTypes';
 import { errorState } from 'utils/recoil/error';
@@ -9,6 +9,7 @@ import styles from 'styles/modal/MatchEnroll.module.scss';
 
 export default function MatchEnrollModal() {
   const setErrorMessage = useSetRecoilState(errorState);
+  const setMatchModal = useSetRecoilState(matchModalState);
   const [enrollInfo, setEnrollInfo] = useRecoilState<EnrollInfo | null>(
     enrollInfoState
   );
@@ -33,16 +34,21 @@ export default function MatchEnrollModal() {
       else if (e.response.data.code === 'SC003')
         alert('경기 취소 후 1분 동안 경기를 예약할 수 없습니다.');
       else {
+        setMatchModal(null);
         setEnrollInfo(null);
         setErrorMessage('Request Error');
         return;
       }
     }
+    setMatchModal(null);
     setEnrollInfo(null);
     window.location.reload();
   };
 
-  const onCancel = () => setEnrollInfo(null);
+  const onCancel = () => {
+    setMatchModal(null);
+    setEnrollInfo(null);
+  };
 
   return (
     <Modal>

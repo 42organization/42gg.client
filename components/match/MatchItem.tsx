@@ -3,7 +3,7 @@ import { Slot, EnrollInfo } from 'types/matchTypes';
 import {
   cancelModalState,
   enrollInfoState,
-  rejectModalState,
+  matchModalState,
 } from 'utils/recoil/match';
 import { fillZero } from 'utils/handleTime';
 import styles from 'styles/match/MatchItem.module.scss';
@@ -21,7 +21,7 @@ export default function MatchItem({
   intervalMinute,
 }: MatchItemProps) {
   const setEnrollInfo = useSetRecoilState<EnrollInfo | null>(enrollInfoState);
-  const setOpenRejectModal = useSetRecoilState(rejectModalState);
+  const setMatchModal = useSetRecoilState(matchModalState);
   const setOpenCancelModal = useSetRecoilState<boolean>(cancelModalState);
   const liveData = useRecoilValue(liveState);
   const { headCount, slotId, status, time } = slot;
@@ -36,8 +36,9 @@ export default function MatchItem({
     if (status === 'mytable') {
       setOpenCancelModal(true);
     } else if (liveData.event === 'match') {
-      setOpenRejectModal(true);
+      setMatchModal('reject');
     } else {
+      setMatchModal('enroll');
       setEnrollInfo({
         slotId,
         type,
