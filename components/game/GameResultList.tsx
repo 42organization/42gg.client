@@ -29,7 +29,6 @@ export default function GameResultList({ path }: gameResultTypes) {
     if (data?.pages.length === 1 && getTotalPage(data) !== 0)
       setClickedItemId(data?.pages[0].games[0].gameId);
     setTotalPage(getTotalPage(data));
-    console.log(data);
   }, [data]);
 
   if (data?.pages[0].games.length === 0) {
