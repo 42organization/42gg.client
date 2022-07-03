@@ -4,14 +4,6 @@
   @include pageWrap;
 }
 
-@mixin imageCircle($backgroundColor, $width, $height) {
-  background: $backgroundColor;
-  border-radius: 50%;
-  text-align: center;
-  width: $width;
-  height: $height;
-}
-
 .title {
   @include pageTitle;
 }
@@ -33,7 +25,7 @@
     flex-direction: row;
     align-items: center;
     .userImage {
-      @include imageCircle(white, 2rem, 2rem);
+      @include userImage(2rem);
       margin-right: 0.7rem;
     }
   }
@@ -42,7 +34,7 @@
     flex-direction: row-reverse;
     align-items: center;
     .userImage {
-      @include imageCircle($dark-gray, 2rem, 2rem);
+      @include userImage(2rem);
       margin-left: 0.7rem;
     }
   }
@@ -69,7 +61,7 @@
   flex-direction: column;
   align-items: center;
   .userImage {
-    @include imageCircle(white, 4.5rem, 4.5rem);
+    @include userImage(4.5rem);
   }
   .userId {
     cursor: pointer;

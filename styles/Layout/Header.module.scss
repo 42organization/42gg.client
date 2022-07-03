@@ -37,12 +37,8 @@
       margin-right: 0.5rem;
       font-size: 1.5rem;
     }
-    #userImg {
-      cursor: pointer;
-      height: 2.2rem;
-      width: 2.2rem;
-      border: solid 1px white;
-      border-radius: 50%;
+    .userImage {
+      @include userImage(2.2rem);
     }
   }
 }

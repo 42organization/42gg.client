@@ -54,8 +54,17 @@ export default function Header() {
             )}
           </div>
           <Link href={`/users/${userData.intraId}`}>
-            <div id={styles.userImg}>
-              {/* <Image src={userData.userImg} alt='prfImg' /> */}
+            <div className={styles.userImage}>
+              {userData.userImageUri && (
+                <Image
+                  src={userData.userImageUri}
+                  alt='prfImg'
+                  layout='fill'
+                  objectFit='cover'
+                  sizes='10vw'
+                  quality='5'
+                />
+              )}
             </div>
           </Link>
         </div>

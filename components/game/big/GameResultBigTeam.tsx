@@ -1,5 +1,6 @@
-import { Team } from 'types/gameTypes';
+import Image from 'next/image';
 import Link from 'next/link';
+import { Team } from 'types/gameTypes';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 type gameResultTypes = {
@@ -11,10 +12,17 @@ export default function GameResultBigTeam({ team, userLeft }: gameResultTypes) {
   return (
     <div className={styles.bigTeam}>
       <div className={styles.userImage}>
-        {/* image url 추가 시 적용 */}
-        {/* {team.players.map((player) => (
-              <div key={player.intraId}>{player.intraId}</div>
-            ))} */}
+        {team.players.map((player, index) => (
+          <Image
+            key={index}
+            src={player.userImageUri}
+            alt='prfImg'
+            layout='fill'
+            objectFit='cover'
+            sizes='30vw'
+            quality='30'
+          />
+        ))}
       </div>
       {team.players.map((player) => (
         <div key={player.intraId}>

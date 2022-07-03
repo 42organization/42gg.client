@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
 import { isEditProfileState, profileInfoState } from 'utils/recoil/user';
@@ -22,7 +23,7 @@ export default function Profile({ intraId }: ProfileProps) {
         const res = await instance.get(`/pingpong/users/${intraId}/detail`);
         setProfileInfo(res?.data);
       } catch (e) {
-        setErrorMessage('SJ03'); // CORS 에러로 인한 일시적 주석처리. 본 서버 연동 후 해제 예정.
+        setErrorMessage('SJ03');
       }
     })();
   }, [intraId]);
@@ -72,7 +73,18 @@ export default function Profile({ intraId }: ProfileProps) {
           </div>
         </div>
         <div className={styles.playerInfo}>
-          <div className={styles.image}></div>
+          <div className={styles.userImage}>
+            {userImageUri && (
+              <Image
+                src={userImageUri}
+                alt='prfImg'
+                layout='fill'
+                objectFit='cover'
+                sizes='30vw'
+                quality='30'
+              />
+            )}
+          </div>
           <div className={styles.intraId}>{intraId}</div>
         </div>
       </div>

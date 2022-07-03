@@ -169,3 +169,15 @@ $winner-blue: #040eff;
     transform: translateY(-0.2rem);
   }
 }
+
+@mixin userImage($size) {
+  cursor: pointer;
+  position: relative;
+  height: $size;
+  width: $size;
+  border: solid 1px white;
+  border-radius: 50%;
+  img {
+    border-radius: 50%;
+  }
+}

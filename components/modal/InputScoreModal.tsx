@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { PlayerInfo, GameResult } from 'types/scoreTypes';
@@ -86,8 +87,20 @@ export default function InputScoreModal() {
       <div className={styles.resultContainer}>
         <div className={styles.players}>
           <div className={styles.userInfo}>
-            {myTeamInfo.map((userInfo) => (
-              <div key={userInfo.intraId} className={styles.userImage}></div>
+            {myTeamInfo.map((userInfo, index) => (
+              <div key={userInfo.intraId} className={styles.userImage}>
+                {userInfo.userImageUri && (
+                  <Image
+                    key={index}
+                    src={userInfo.userImageUri}
+                    alt='prfImg'
+                    layout='fill'
+                    objectFit='cover'
+                    sizes='30vw'
+                    quality='30'
+                  />
+                )}
+              </div>
             ))}
             {myTeamInfo.map((userInfo) => (
               <div key={userInfo.intraId} className={styles.intraId}>
@@ -97,8 +110,20 @@ export default function InputScoreModal() {
           </div>
           <div>vs</div>
           <div className={styles.userInfo}>
-            {enemyTeamInfo.map((userInfo) => (
-              <div key={userInfo.intraId} className={styles.userImage}></div>
+            {enemyTeamInfo.map((userInfo, index) => (
+              <div key={userInfo.intraId} className={styles.userImage}>
+                {userInfo.userImageUri && (
+                  <Image
+                    key={index}
+                    src={userInfo.userImageUri}
+                    alt='prfImg'
+                    layout='fill'
+                    objectFit='cover'
+                    sizes='30vw'
+                    quality='30'
+                  />
+                )}
+              </div>
             ))}
             {enemyTeamInfo.map((userInfo) => (
               <div key={userInfo.intraId} className={styles.intraId}>

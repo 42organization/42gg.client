@@ -4,6 +4,9 @@ const nextConfig = {
   env: {
     BASE_URL: process.env.BASE_URL,
   },
+  images: {
+    domains: ['cdn.intra.42.fr'],
+  },
 };
 
 module.exports = nextConfig;
