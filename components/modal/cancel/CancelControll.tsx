@@ -8,7 +8,11 @@ type CancelType = {
   enemyTeam: string[];
 };
 
-export function CancelControll({ slotId, time, enemyTeam }: CancelType) {
+export default function CancelControll({
+  slotId,
+  time,
+  enemyTeam,
+}: CancelType) {
   const matchStartBefore5Min = isBeforeMin(time, 5);
   return (
     <>

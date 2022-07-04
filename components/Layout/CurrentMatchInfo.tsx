@@ -9,7 +9,7 @@ import { gameTimeToString, isBeforeMin } from 'utils/handleTime';
 import { cancelModalState, matchRefreshBtnState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import Modal from 'components/modal/Modal';
-import { CancelControll } from 'components/modal/cancel/CancelControll';
+import CancelControll from 'components/modal/cancel/CancelControll';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
@@ -35,6 +35,10 @@ export default function CurrentMatchInfo() {
   useEffect(() => {
     getCurrentMatchHandler();
   }, []);
+
+  useEffect(() => {
+    setOpenCancelModal(false);
+  }, [presentPath]);
 
   useEffect(() => {
     getCurrentMatchHandler();
