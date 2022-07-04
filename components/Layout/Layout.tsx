@@ -1,9 +1,14 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { UserData, LiveData } from 'types/mainType';
-import { userState, liveState } from 'utils/recoil/main';
+import {
+  showMenuBarState,
+  showNotiBarState,
+  userState,
+  liveState,
+} from 'utils/recoil/layout';
 import { openCurrentMatchInfoState } from 'utils/recoil/match';
 import { loginState } from 'utils/recoil/login';
 import { errorState } from 'utils/recoil/error';
@@ -30,6 +35,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
   );
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
   const [errorMessage, setErrorMessage] = useRecoilState(errorState);
+  const setShowMenuBar = useSetRecoilState(showMenuBarState);
+  const setShowNotiBar = useSetRecoilState(showNotiBarState);
   const router = useRouter();
   const presentPath = useRouter().asPath;
   const token = router.asPath.split('?token=')[1];
@@ -48,6 +55,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
       router.push(`/`);
     }
   }, [token]);
+
+  useEffect(() => {
+    setShowMenuBar(false);
+    setShowNotiBar(false);
+  }, [presentPath]);
 
   useEffect(() => {
     if (userData.intraId) {

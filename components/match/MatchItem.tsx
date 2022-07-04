@@ -7,7 +7,7 @@ import {
 } from 'utils/recoil/match';
 import { fillZero } from 'utils/handleTime';
 import styles from 'styles/match/MatchItem.module.scss';
-import { liveState } from 'utils/recoil/main';
+import { liveState } from 'utils/recoil/layout';
 
 interface MatchItemProps {
   slot: Slot;

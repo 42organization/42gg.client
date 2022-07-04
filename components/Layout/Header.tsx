@@ -1,9 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { userState, liveState } from 'utils/recoil/main';
+import {
+  showMenuBarState,
+  showNotiBarState,
+  userState,
+  liveState,
+} from 'utils/recoil/layout';
 import MenuBar from './MenuBar';
 import NotiBar from './NotiBar';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
@@ -13,8 +17,8 @@ import styles from 'styles/Layout/Header.module.scss';
 export default function Header() {
   const userData = useRecoilValue(userState);
   const [liveData, setLiveData] = useRecoilState(liveState);
-  const [showMenuBar, setShowMenuBar] = useState(false);
-  const [showNotiBar, setShowNotiBar] = useState(false);
+  const [showMenuBar, setShowMenuBar] = useRecoilState(showMenuBarState);
+  const [showNotiBar, setShowNotiBar] = useRecoilState(showNotiBarState);
   const router = useRouter();
 
   const showMenuBarHandler = () => {

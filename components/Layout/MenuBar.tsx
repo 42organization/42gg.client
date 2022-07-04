@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { UserData } from 'types/mainType';
-import { userState } from 'utils/recoil/main';
+import { userState } from 'utils/recoil/layout';
 import { logoutModalState } from 'utils/recoil/login';
 import Modal from 'components/modal/Modal';
 import LogoutModal from 'components/modal/LogoutModal';
@@ -15,7 +15,6 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
   const userData = useRecoilValue<UserData>(userState);
   const [openLogoutModal, setOpenLogoutModal] =
     useRecoilState<boolean>(logoutModalState);
-
   const router = useRouter();
 
   const MenuPathHandler = (path: string) => {

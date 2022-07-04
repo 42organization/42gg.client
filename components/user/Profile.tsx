@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
 import { isEditProfileState, profileInfoState } from 'utils/recoil/user';
-import { userState } from 'utils/recoil/main';
+import { userState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import styles from 'styles/user/Profile.module.scss';
