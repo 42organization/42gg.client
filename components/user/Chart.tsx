@@ -86,7 +86,7 @@ export default function Chart({ intraId }: ChartProps) {
         setErrorMessage('SJ02');
       }
     })();
-  }, []);
+  }, [intraId]);
 
   const data = useMemo(
     () => ({
