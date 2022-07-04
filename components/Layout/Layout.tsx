@@ -101,7 +101,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
               {openCurrentInfo && <CurrentMatchInfo />}
               {presentPath !== '/match' && (
                 <Link href='/match'>
-                  <div className={styles.test}>
+                  <div className={styles.buttonContainer}>
                     <a className={styles.matchingButton}>🏓</a>
                   </div>
                 </Link>
