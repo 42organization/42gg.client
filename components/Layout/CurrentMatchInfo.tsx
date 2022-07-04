@@ -23,7 +23,7 @@ export default function CurrentMatchInfo() {
   });
   const { isMatched, enemyTeam, time, slotId } = currentMatch;
   const [enemyTeamInfo, setEnemyTeamInfo] = useState(<></>);
-  const matchingMessage = makeMessage(time, isMatched);
+  const matchingMessage = time && makeMessage(time, isMatched);
   const [matchRefreshBtn, setMatchRefreshBtn] =
     useRecoilState(matchRefreshBtnState);
   const [openCancelModal, setOpenCancelModal] =
