@@ -13,12 +13,17 @@ type NotiBarProps = {
 export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
   const [notiData, setNotiData] = useState<NotiData[]>([]);
   const setErrorMessage = useSetRecoilState(errorState);
-
+  const [refreshBtnAnimation, setRefreshBtnAnimation] =
+    useState<boolean>(false);
   useEffect(() => {
     getNotiDataHandler();
   }, []);
 
   const getNotiDataHandler = async () => {
+    setRefreshBtnAnimation(true);
+    setTimeout(() => {
+      setRefreshBtnAnimation(false);
+    }, 1000);
     try {
       const res = await instance.get(`/pingpong/notifications`);
       setNotiData(res?.data.notifications);
@@ -51,7 +56,11 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
                 &#9745; 전체삭제
               </button>
               <button
-                className={styles.refreshBtn}
+                className={
+                  refreshBtnAnimation
+                    ? styles.refreshBtnAnimation
+                    : styles.refreshBtn
+                }
                 onClick={getNotiDataHandler}
               >
                 &#8635;
@@ -69,7 +78,15 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
           </>
         ) : (
           <div className={styles.emtyContent}>
-            <button className={styles.refreshBtn} onClick={getNotiDataHandler}>
+            <></>
+            <button
+              className={
+                refreshBtnAnimation
+                  ? styles.refreshBtnAnimation
+                  : styles.refreshBtn
+              }
+              onClick={getNotiDataHandler}
+            >
               &#8635;
             </button>
             <div>💭 새로운 알림이 없습니다!</div>
