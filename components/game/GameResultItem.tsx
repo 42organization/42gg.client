@@ -25,7 +25,10 @@ export default function GameResultItem({ game, big }: gameResultTypes) {
         onClick={() => setClickedItemId(gameId)}
       >
         <GameResultSmallTeam team={team1} userLeft={true} />
-        <GameResultSmallScore team1={team1} team2={team2} />
+        <GameResultSmallScore
+          scoreTeam1={team1.score}
+          scoreTeam2={team2.score}
+        />
         <GameResultSmallTeam team={team2} userLeft={false} />
       </div>
     );
@@ -41,8 +44,8 @@ export default function GameResultItem({ game, big }: gameResultTypes) {
         <GameResultBigScore
           status={status}
           time={time}
-          team1={team1}
-          team2={team2}
+          scoreTeam1={team1.score}
+          scoreTeam2={team2.score}
         />
         <GameResultBigTeam team={team2} userLeft={false} />
       </div>
