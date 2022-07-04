@@ -7,6 +7,8 @@ import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import styles from 'styles/main/SearchBar.module.scss';
 
+let timer: ReturnType<typeof setTimeout>;
+
 export default function SearchBar() {
   const [keyword, setKeyword] = useState<string>('');
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
@@ -15,29 +17,30 @@ export default function SearchBar() {
   const searchBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setSearchResult([]);
     const checkId = /^[a-z|A-Z|0-9|\-]+$/;
     if (keyword !== '' && checkId.test(keyword)) {
-      makeDebounce(getSearchResultHandler, 800)();
+      debounce(getSearchResultHandler, 800)();
+    } else {
+      clearTimeout(timer);
     }
+    setSearchResult([]);
   }, [keyword]);
 
-  const getSearchResultHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/users/searches?q=${keyword}`);
-      setSearchResult(res?.data.users);
-    } catch (e) {
-      setErrorMessage('JB06');
-    }
-  };
-
-  // 검색 컴포넌트 외부 클릭시 검색결과모달 닫기
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, []); // 검색 컴포넌트 외부 클릭시 검색결과모달 닫기
+
+  const getSearchResultHandler = async () => {
+    try {
+      const res = await instance.get(`/pingpong/users/searches?q=${keyword}`);
+      setSearchResult((prev) => res?.data.users);
+    } catch (e) {
+      setErrorMessage('JB06');
+    }
+  };
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -51,23 +54,23 @@ export default function SearchBar() {
     setKeyword(event.target.value);
   };
 
-  const resetKeywordHandler = () => {
-    setKeyword('');
-  };
-
   return (
     <div ref={searchBarRef}>
       <div className={styles.searchBar}>
         <input
           type='text'
-          value={keyword}
           onChange={keywordHandler}
           onFocus={() => setShowDropDown(true)}
           placeholder='유저 검색하기'
         />
         <div className={styles.buttons}>
           {keyword && (
-            <span className={styles.resetBtn} onClick={resetKeywordHandler}>
+            <span
+              className={styles.resetBtn}
+              onClick={() => {
+                setKeyword('');
+              }}
+            >
               <IoIosCloseCircle style={{ color: 'gray' }} />
             </span>
           )}
@@ -93,9 +96,7 @@ export default function SearchBar() {
   );
 }
 
-function makeDebounce(callback: () => void, timeout: number) {
-  let timer: ReturnType<typeof setTimeout>;
-
+function debounce(callback: () => void, timeout: number) {
   return () => {
     clearTimeout(timer);
     timer = setTimeout(() => {
