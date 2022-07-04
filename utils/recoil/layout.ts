@@ -18,6 +18,6 @@ export const showMenuBarState = atom<boolean>({
 });
 
 export const showNotiBarState = atom<boolean>({
-  key: `showMenuBarState/${v1()}`,
+  key: `showNotiBarState/${v1()}`,
   default: false,
 });
