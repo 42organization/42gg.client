@@ -65,8 +65,8 @@ export default function Header() {
                   alt='prfImg'
                   layout='fill'
                   objectFit='cover'
-                  sizes='10vw'
-                  quality='5'
+                  sizes='20vw'
+                  quality='20'
                 />
               )}
             </div>
