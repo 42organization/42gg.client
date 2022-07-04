@@ -5,7 +5,7 @@ export default function GameResultEmptyArray() {
     <div className={styles.container}>
       <div className={styles.title}>Record</div>
       <div className={styles.emoji}>🤔</div>
-      <div className={styles.gameStatusMessage}>게임 결과가 없습니다</div>
+      <div>게임 결과가 없습니다.</div>
     </div>
   );
 }

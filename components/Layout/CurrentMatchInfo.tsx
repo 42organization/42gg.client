@@ -1,13 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import {
-  useRecoilState,
-  useSetRecoilState,
-  useResetRecoilState,
-  useRecoilValue,
-} from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { CurrentMatch } from 'types/matchTypes';
+import { LiveData } from 'types/mainType';
+import { liveState } from 'utils/recoil/main';
 import { gameTimeToString, isBeforeMin } from 'utils/handleTime';
 import { cancelModalState, matchRefreshBtnState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
@@ -32,6 +29,7 @@ export default function CurrentMatchInfo() {
   const [openCancelModal, setOpenCancelModal] =
     useRecoilState(cancelModalState);
   const setErrorMessage = useSetRecoilState(errorState);
+  const setLiveData = useSetRecoilState<LiveData>(liveState);
   const presentPath = useRouter().asPath;
 
   useEffect(() => {
@@ -39,27 +37,24 @@ export default function CurrentMatchInfo() {
   }, []);
 
   useEffect(() => {
-    if (isBeforeMin(time, 5)) {
-      getCurrentMatchHandler();
-      setEnemyTeamInfo(makeEnemyTeamInfo(enemyTeam));
+    getCurrentMatchHandler();
+    if (matchRefreshBtn && isBeforeMin(time, 0)) {
+      setLiveData((prev) => ({ ...prev, event: 'game' }));
     }
-  }, [presentPath]); // 페이지를 바꿀 때, 5분 임박인지 확인후 상대팀 알리기
+  }, [presentPath, matchRefreshBtn]);
 
   const getCurrentMatchHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/match/current`);
       setCurrentMatch(res?.data);
-      if (matchRefreshBtn) {
-        setMatchRefreshBtn(false);
+      if (isBeforeMin(res?.data.time, 5)) {
+        setEnemyTeamInfo(makeEnemyTeamInfo(res?.data.enemyTeam));
       }
+      if (matchRefreshBtn) setMatchRefreshBtn(false);
     } catch (e) {
       setErrorMessage('JB01');
     }
   };
-
-  if (matchRefreshBtn) {
-    getCurrentMatchHandler();
-  } // 매치 페이지의 새로고침 버튼 누를 때, 실행
 
   const onCancel = () => {
     setOpenCancelModal(true);
