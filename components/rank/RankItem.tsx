@@ -25,7 +25,11 @@ export default function RankItem({ myIntraId, index, user, isMain }: RankType) {
               <span className={styles.ppp}>({ppp})</span>
             </Link>
           </div>
-          <div className={styles.winRate}>{winRate}%</div>
+          <div className={styles.statusMessage}>
+            {statusMessage.length > 10
+              ? `${statusMessage.slice(0, 10)}...`
+              : statusMessage}
+          </div>
         </div>
       ) : (
         <div className={styles.rankData}>
@@ -47,8 +51,8 @@ export default function RankItem({ myIntraId, index, user, isMain }: RankType) {
               </Link>
             </div>
             <div className={styles.statusMessage}>
-              {statusMessage.length > 21
-                ? `${statusMessage.slice(0, 21)}...`
+              {statusMessage.length > 20
+                ? `${statusMessage.slice(0, 20)}...`
                 : statusMessage}
             </div>
             <div className={styles.winRate}>{winRate}%</div>
