@@ -19,18 +19,21 @@
   min-height: 100vh;
 }
 
-.matchingButton {
+.test {
+  position: sticky;
   z-index: 1;
-  position: absolute;
-  bottom: 2rem;
-  right: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 5rem;
-  width: 5rem;
-  border-radius: 50%;
-  font-size: 2.3rem;
-  background: white;
-  box-shadow: 3px 3px 10px black;
+  top: 83%;
+  margin-left: 75%;
+  .matchingButton {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    font-size: 2.3rem;
+    background: white;
+    box-shadow: 3px 3px 10px black;
+  }
 }
