@@ -1,87 +1,67 @@
-import { Team } from 'types/gameTypes';
 import styles from 'styles/game/GameResultItem.module.scss';
-import { useEffect, useState } from 'react';
 
-type gameResultTypes = {
+interface GameResultTypes {
   status: string;
   time: string;
-  team1: Team;
-  team2: Team;
-};
+  scoreTeam1: number;
+  scoreTeam2: number;
+}
 
-type gameScoreView = {
-  gameScoreMessage: string;
-  statusStyles: string;
-  statusMessage: JSX.Element;
-};
+interface ScoreViewProviderProps {
+  status: string;
+  time: string;
+}
 
 export default function GameResultBigScore({
   status,
   time,
-  team1,
-  team2,
-}: gameResultTypes) {
-  const [scoreView, setScoreView] = useState<gameScoreView>({
-    statusStyles: '',
-    statusMessage: <></>,
-    gameScoreMessage: team1.score + ' : ' + team2.score,
-  });
-
-  const getFindTimeSeconds = (gameTime: string) => {
-    return (Number(new Date()) - Number(new Date(gameTime))) / 1000;
-  };
-  const getTimeAgo = (gameTime: string) => {
-    const findTime = getFindTimeSeconds(gameTime) - 60 * 10;
-    const times = [
-      { time: '년', second: 60 * 60 * 24 * 365 },
-      { time: '개월', second: 60 * 60 * 24 * 30 },
-      { time: '일', second: 60 * 60 * 24 },
-      { time: '시간', second: 60 * 60 },
-      { time: '분', second: 60 },
-    ];
-
-    for (const item of times) {
-      const betweenTime = Math.floor(findTime / item.second);
-
-      if (betweenTime > 0) {
-        return `${betweenTime}${item.time} 전`;
-      }
-    }
-    return '방금 전';
-  };
-
-  const setScoreViewHandler = (
-    statusMessage: JSX.Element,
-    statusStyles: string
-  ) => {
-    setScoreView((prev) => ({
-      ...prev,
-      statusMessage: statusMessage,
-      statusStyles: statusStyles,
-    }));
-  };
-
-  useEffect(() => {
-    if (status === 'live') {
-      setScoreViewHandler(<>Live</>, `${styles.gameStatusLive}`);
-    } else if (status === 'wait') {
-      setScoreViewHandler(
-        <>
-          <span className={styles.span1}>o</span>
-          <span className={styles.span2}>o</span>
-          <span className={styles.span3}>o</span>
-        </>,
-        `${styles.gameStatusWait}`
-      );
-    } else if (status === 'end') {
-      setScoreViewHandler(<>{getTimeAgo(time)}</>, `${styles.gameStatusEnd}`);
-    }
-  }, []);
-
+  scoreTeam1,
+  scoreTeam2,
+}: GameResultTypes) {
   return (
     <div className={styles.bigScoreBoard}>
-      <div className={scoreView.statusStyles}>{scoreView.statusMessage}</div>
-      <div className={styles.gameScore}>{scoreView.gameScoreMessage}</div>
+      <ScoreViewProvider status={status} time={time} />
+      <div className={styles.gameScore}>{`${scoreTeam1} : ${scoreTeam2}`}</div>
     </div>
   );
+}
+
+function ScoreViewProvider({ status, time }: ScoreViewProviderProps) {
+  if (status === 'live')
+    return <div className={styles.gameStatusLive}>Live</div>;
+  else if (status === 'wait')
+    return (
+      <div className={styles.gameStatusWait}>
+        <span className={styles.span1}>o</span>
+        <span className={styles.span2}>o</span>
+        <span className={styles.span3}>o</span>
+      </div>
+    );
+  else if (status === 'end')
+    return <div className={styles.gameStatusEnd}>{getTimeAgo(time)}</div>;
+  else return null;
+}
+
+function getElapsedTimeSeconds(gameTime: string) {
+  return (Number(new Date()) - Number(new Date(gameTime))) / 1000;
+}
+
+function getTimeAgo(gameTime: string) {
+  const elapsedTimeSeconds = getElapsedTimeSeconds(gameTime) - 60 * 10;
+  const timeUnits = [
+    { unit: '년', second: 60 * 60 * 24 * 365 },
+    { unit: '개월', second: 60 * 60 * 24 * 30 },
+    { unit: '일', second: 60 * 60 * 24 },
+    { unit: '시간', second: 60 * 60 },
+    { unit: '분', second: 60 },
+  ];
+
+  for (const timeUnit of timeUnits) {
+    const elapsedTime = Math.floor(elapsedTimeSeconds / timeUnit.second);
+
+    if (elapsedTime > 0) {
+      return `${elapsedTime}${timeUnit.unit} 전`;
+    }
+  }
+  return '방금 전';
 }
