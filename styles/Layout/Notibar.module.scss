@@ -24,6 +24,13 @@
       @include match-noti-button;
       border-radius: $big-radius;
     }
+    .refreshBtnAnimation {
+      @include match-noti-button;
+      cursor: not-allowed;
+      opacity: 0.7;
+      border-radius: $big-radius;
+      animation: spin 1s infinite;
+    }
     .deleteBtn {
       @include match-noti-button;
       border-radius: $small-radius;
@@ -37,6 +44,13 @@
     @include match-noti-button;
     border-radius: $big-radius;
   }
+  .refreshBtnAnimation {
+    @include match-noti-button;
+    cursor: not-allowed;
+    opacity: 0.7;
+    border-radius: $big-radius;
+    animation: spin 1s infinite;
+  }
   div {
     padding: 1rem;
     margin-top: 1.3rem;
@@ -45,5 +59,11 @@
     text-align: center;
     color: #000;
     background: #fff;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
   }
 }
