@@ -15,7 +15,7 @@ export default function GameResult() {
     } else {
       setPath(`/pingpong${router.asPath}/games?count=5&status=end&gameId=`);
     }
-  }, []);
+  }, [router.asPath]);
 
   return (
     <div>

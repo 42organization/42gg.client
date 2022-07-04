@@ -20,10 +20,14 @@ export default function GameResultList({ path }: gameResultTypes) {
   const infResult = infScroll(path);
   const { data, fetchNextPage, status } = infResult;
   const router = useRouter();
-
   const getTotalPage = (data: InfiniteData<any> | undefined) => {
     return data?.pages[data.pages.length - 1].totalPage;
   };
+
+  useEffect(() => {
+    infResult.remove();
+    infResult.refetch();
+  }, [path]);
 
   useEffect(() => {
     if (data?.pages.length === 1 && getTotalPage(data) !== 0)
