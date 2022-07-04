@@ -15,10 +15,11 @@ export default function SearchBar() {
   const searchBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    setSearchResult([]);
     const checkId = /^[a-z|A-Z|0-9|\-]+$/;
-    if (keyword !== '' && checkId.test(keyword))
-      makeDebounce(getSearchResultHandler, 800)();
-    else setSearchResult([]);
+    if (keyword !== '' && checkId.test(keyword)) {
+      makeDebounce(getSearchResultHandler, 1000)();
+    }
   }, [keyword]);
 
   const getSearchResultHandler = async () => {
@@ -83,7 +84,7 @@ export default function SearchBar() {
                 </Link>
               ))
             ) : (
-              <div style={{ cursor: 'unset' }}>'검색 결과가 없습니다.'</div>
+              <div>검색 결과가 없습니다.</div>
             )}
           </div>
         )}
