@@ -1,0 +1,35 @@
+@import 'styles/common.scss';
+
+.backDrop {
+  @include backdrop;
+}
+
+.container {
+  @include modal-container;
+  @include pageWrap;
+  margin: 1rem;
+  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+}
+
+.buttons {
+  @include select-buttons;
+}
+
+.title {
+  color: #fff;
+  text-align: center;
+  font-size: 3rem;
+  letter-spacing: 0.1rem;
+  font-family: $title-font;
+  text-shadow: $text-shadow;
+  padding: 1rem;
+}
+
+.gameStatusMessage {
+  color: white;
+  padding-bottom: 2.5rem;
+}
+
+.textPadding {
+  margin-left: 1rem;
+}

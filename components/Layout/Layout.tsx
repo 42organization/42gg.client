@@ -111,7 +111,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 </Modal>
               )}
               {openCurrentInfo && <CurrentMatchInfo />}
-              {presentPath !== '/match' && (
+              {presentPath !== '/match' && presentPath !== '/manual' && (
                 <Link href='/match'>
                   <div className={styles.buttonContainer}>
                     <a className={styles.matchingButton}>🏓</a>

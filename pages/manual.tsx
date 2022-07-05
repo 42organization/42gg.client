@@ -1,12 +1,9 @@
-import { useSetRecoilState } from 'recoil';
-import styles from 'styles/match/MatchManual.module.scss';
-import { matchModalState } from 'utils/recoil/match';
+import router from 'next/router';
+import styles from 'styles/Manual.module.scss';
 
-export default function MatchManualModal() {
-  const setMatchModal = useSetRecoilState(matchModalState);
-
-  const onReturn = () => {
-    setMatchModal(null);
+export default function Manual() {
+  const onReturnHome = (path: string) => {
+    router.push(`/${path}`);
   };
 
   return (
@@ -45,7 +42,11 @@ export default function MatchManualModal() {
       </div>
       <div className={styles.buttons}>
         <div className={styles.positive}>
-          <input onClick={onReturn} type='button' value='확 인' />
+          <input
+            onClick={() => onReturnHome('')}
+            type='button'
+            value='🏠 홈으로 🏠'
+          />
         </div>
       </div>
     </div>
