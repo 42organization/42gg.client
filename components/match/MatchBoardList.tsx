@@ -25,7 +25,10 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   }, []);
 
   useEffect(() => {
-    currentRef.current?.scrollIntoView({ behavior: 'smooth' });
+    currentRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+    });
   }, [matchData]);
 
   const getMatchDataHandler = async () => {
@@ -84,7 +87,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
               className={styles.matchBoard}
               key={i}
               ref={
-                slotsTime.getHours() === new Date().getHours()
+                slotsTime.getHours() === new Date().getHours() + 1
                   ? currentRef
                   : null
               }
