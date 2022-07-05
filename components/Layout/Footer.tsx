@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from 'styles/Layout/Footer.module.scss';
 
 export default function Footer() {
@@ -5,7 +6,7 @@ export default function Footer() {
     <footer className={styles.footerContainer}>
       <div>
         <a href='https://github.com/42organization'>github |</a>
-        <a href=''> manual</a>
+        <Link href={`/manual`}> manual</Link>
       </div>
       <div>© 2022 42GG</div>
     </footer>

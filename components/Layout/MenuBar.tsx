@@ -51,7 +51,7 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
               </div>
             </div>
             <div className={styles.subMenu}>
-              <div>매뉴얼</div>
+              <div onClick={() => MenuPathHandler('manual')}>매뉴얼</div>
               <div onClick={logoutModalHandler}>로그아웃</div>
             </div>
           </nav>

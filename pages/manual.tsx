@@ -1,14 +1,7 @@
-import { useSetRecoilState } from 'recoil';
-import styles from 'styles/match/MatchManual.module.scss';
-import { matchModalState } from 'utils/recoil/match';
+import Link from 'next/link';
+import styles from 'styles/Manual.module.scss';
 
-export default function MatchManualModal() {
-  const setMatchModal = useSetRecoilState(matchModalState);
-
-  const onReturn = () => {
-    setMatchModal(null);
-  };
-
+export default function Manual() {
   return (
     <div className={styles.container}>
       <div className={styles.title}>Please!!</div>
@@ -45,7 +38,9 @@ export default function MatchManualModal() {
       </div>
       <div className={styles.buttons}>
         <div className={styles.positive}>
-          <input onClick={onReturn} type='button' value='확 인' />
+          <Link href={`/`}>
+            <input type='button' value='🏠 홈으로 🏠' />
+          </Link>
         </div>
       </div>
     </div>
