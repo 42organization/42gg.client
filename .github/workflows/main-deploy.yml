@@ -1,0 +1,43 @@
+name: Deploy to 42ggClientS3
+
+on:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      - name: Install and Build
+        uses: actions/setup-node@v1
+      - run: npm install
+      - run: npm run build
+        env:
+          CI: true
+          DEPLOY_TARGET: gh-pages
+      - run: touch out/.nojekyll
+
+      - name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 cp \
+            --recursive \
+            --region ap-northeast-2 \
+            build s3://${{ secrets.AWS_BUCKET_NAME }}
+
+      - name: Cache Invalidation
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_BUCKET_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_BUCKET_REGION }}
+        run: aws cloudfront create-invalidation --distribution-id=E17G9TOCS6V97Q --paths "/*"
+
