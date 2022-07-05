@@ -106,12 +106,12 @@
   border-radius: $mini-radius;
   min-height: 5rem;
   font-size: $big-font;
-  padding: 0.5rem;
+  padding: 0.8rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   .buttons {
-    @include select-buttons(4rem, 1.5rem);
+    @include select-buttons(4.5rem, 1.5rem);
     margin-left: auto;
     margin-top: 0.2rem;
   }
@@ -179,7 +179,7 @@
     border: solid $pp-blue 1px;
     textarea {
       border: none;
-      padding: 0.7rem;
+      padding: 0.8rem;
       font-size: $big-font;
       height: 5rem;
       resize: none;
