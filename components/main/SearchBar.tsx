@@ -18,12 +18,12 @@ export default function SearchBar() {
 
   useEffect(() => {
     const checkId = /^[a-z|A-Z|0-9|-]+$/;
-    if (keyword !== '' && checkId.test(keyword)) {
-      debounce(getSearchResultHandler, 800)();
-    } else {
+    if (keyword === '') {
       clearTimeout(timer);
+      setSearchResult([]);
+    } else if (checkId.test(keyword)) {
+      debounce(getSearchResultHandler, 500)();
     }
-    setSearchResult([]);
   }, [keyword]);
 
   useEffect(() => {
@@ -35,6 +35,7 @@ export default function SearchBar() {
 
   const getSearchResultHandler = async () => {
     try {
+      console.log('request: ', keyword);
       const res = await instance.get(`/pingpong/users/searches?q=${keyword}`);
       setSearchResult(res?.data.users);
     } catch (e) {
