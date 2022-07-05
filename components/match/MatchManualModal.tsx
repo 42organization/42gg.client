@@ -12,13 +12,14 @@ export default function MatchManualModal() {
   return (
     <div className={styles.container}>
       <div className={styles.title}>Please!!</div>
-      <div className={styles.text}>
+      <div className={styles.textWrap}>
         🔍 매칭 <br />
         <div className={styles.textPadding}>
           - 경기 시작 5분 전 상대 팀 공개 및 취소 불가 <br />
           - 경기 시간은 10분 <br />
           - 매칭 후 슬롯 취소 시, 1분 페널티 <br />
           - 매칭 알람은 이메일로 전달됨 <br />
+          - 일정 점수 이상 차이 나는 상대와 매칭 불가 <br />
         </div>
         <br />
         📖 룰 <br />

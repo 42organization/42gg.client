@@ -13,6 +13,7 @@ export default function Manual() {
             - 경기 시간은 10분 <br />
             - 매칭 후 슬롯 취소 시, 1분 페널티 <br />
             - 매칭 알람은 이메일로 전달됨 <br />
+            - 일정 점수 이상 차이 나는 상대와 매칭 불가 <br />
           </div>
           <br />
           📖 룰 <br />

@@ -11,6 +11,26 @@
 .buttons {
   @include select-buttons;
 }
+.textWrap {
+  overflow-y: scroll;
+  height: 40vh;
+  max-height: 40vh;
+  padding: 0.5rem;
+  color: black;
+  width: auto;
+  margin-bottom: 1.5rem;
+}
+
+.textWrap::-webkit-scrollbar {
+  display: inherit;
+  width: 5px;
+  height: 1rem;
+}
+
+.textWrap::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 10px;
+}
 
 .title {
   color: #fff;
@@ -20,11 +40,6 @@
   font-family: $title-font;
   text-shadow: $text-shadow;
   padding: 1rem;
-}
-
-.gameStatusMessage {
-  color: white;
-  padding-bottom: 2.5rem;
 }
 
 .textPadding {
