@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import router from 'next/router';
 import styles from 'styles/Manual.module.scss';
 
@@ -42,11 +43,9 @@ export default function Manual() {
       </div>
       <div className={styles.buttons}>
         <div className={styles.positive}>
-          <input
-            onClick={() => onReturnHome('')}
-            type='button'
-            value='🏠 홈으로 🏠'
-          />
+          <Link href={`/`}>
+            <input type='button' value='🏠 홈으로 🏠' />
+          </Link>
         </div>
       </div>
     </div>
