@@ -21,10 +21,7 @@ export default function MatchEnrollModal() {
   const onEnroll = async () => {
     try {
       const body = { slotId };
-      const res = await instance.post(
-        `/pingpong/match/tables/${1}/${type}`,
-        body
-      );
+      await instance.post(`/pingpong/match/tables/${1}/${type}`, body);
       alert('경기가 성공적으로 등록되었습니다.');
     } catch (e: any) {
       if (e.response.data.code === 'SC001')

@@ -28,16 +28,8 @@ export default function Profile({ intraId }: ProfileProps) {
     })();
   }, [intraId]);
 
-  const {
-    userImageUri,
-    rank,
-    ppp,
-    wins,
-    loses,
-    winRate,
-    racketType,
-    statusMessage,
-  } = profileInfo;
+  const { userImageUri, rank, ppp, winRate, racketType, statusMessage } =
+    profileInfo;
 
   const startEditHandler = () => {
     setIsEditProfile(true);

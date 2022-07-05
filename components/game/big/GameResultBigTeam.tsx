@@ -5,10 +5,9 @@ import styles from 'styles/game/GameResultItem.module.scss';
 
 type gameResultTypes = {
   team: Team;
-  userLeft: boolean;
 };
 
-export default function GameResultBigTeam({ team, userLeft }: gameResultTypes) {
+export default function GameResultBigTeam({ team }: gameResultTypes) {
   return (
     <div className={styles.bigTeam}>
       <div className={styles.userImage}>

@@ -17,7 +17,7 @@ export default function SearchBar() {
   const searchBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const checkId = /^[a-z|A-Z|0-9|\-]+$/;
+    const checkId = /^[a-z|A-Z|0-9|-]+$/;
     if (keyword !== '' && checkId.test(keyword)) {
       debounce(getSearchResultHandler, 800)();
     } else {

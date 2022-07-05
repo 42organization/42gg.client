@@ -18,7 +18,7 @@ export default function CancelModal({ slotId }: SlotProps) {
 
   const onCancel = async () => {
     try {
-      const res = await instance.delete(`/pingpong/match/slots/${slotId}`);
+      await instance.delete(`/pingpong/match/slots/${slotId}`);
       alert('경기가 성공적으로 취소되었습니다.');
     } catch (e: any) {
       if (e.response.data.code === 'SD001') alert('이미 지난 경기입니다.');
