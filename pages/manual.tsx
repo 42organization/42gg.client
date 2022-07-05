@@ -1,12 +1,7 @@
 import Link from 'next/link';
-import router from 'next/router';
 import styles from 'styles/Manual.module.scss';
 
 export default function Manual() {
-  const onReturnHome = (path: string) => {
-    router.push(`/${path}`);
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.title}>Please!!</div>
