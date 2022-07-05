@@ -18,12 +18,12 @@ export default function SearchBar() {
 
   useEffect(() => {
     const checkId = /^[a-z|A-Z|0-9|-]+$/;
-    if (keyword !== '' && checkId.test(keyword)) {
-      debounce(getSearchResultHandler, 800)();
-    } else {
+    if (keyword === '') {
       clearTimeout(timer);
+      setSearchResult([]);
+    } else if (checkId.test(keyword)) {
+      debounce(getSearchResultHandler, 500)();
     }
-    setSearchResult([]);
   }, [keyword]);
 
   useEffect(() => {
