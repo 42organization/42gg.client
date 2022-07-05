@@ -7,7 +7,7 @@ const nextConfig = {
   images: {
     domains: ['cdn.intra.42.fr'],
     loader: 'akamai',
-    path: '/',
+    path: '',
   },
   eslint: {
     ignoreDuringBuilds: true,
