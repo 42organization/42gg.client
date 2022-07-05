@@ -4,10 +4,13 @@
   @include backdrop;
 }
 
-.container {
-  @include modal-container;
+.pageWrap {
   @include pageWrap;
-  margin: 1rem;
+  align-items: center;
+}
+
+.container {
+  padding: 1rem 1.5rem;
   background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
 }
 
