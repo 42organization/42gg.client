@@ -34,7 +34,7 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
 
   const allNotiDeleteHandler = async () => {
     try {
-      const res = await instance.delete(`/pingpong/notifications`);
+      await instance.delete(`/pingpong/notifications`);
       alert('알림이 성공적으로 삭제되었습니다.');
       showNotiBarHandler();
     } catch (e) {

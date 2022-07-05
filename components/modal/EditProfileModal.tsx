@@ -20,15 +20,7 @@ export default function EditProfileModal() {
     racketType: 'penholder',
     statusMessage: '',
   });
-  const {
-    intraId,
-    userImageUri,
-    rank,
-    ppp,
-    winRate,
-    racketType,
-    statusMessage,
-  } = profileInfo;
+  const { racketType, statusMessage } = profileInfo;
 
   useEffect(() => {
     setEditedProfile((prev) => ({
@@ -59,7 +51,7 @@ export default function EditProfileModal() {
     setIsEditProfile(false);
 
     try {
-      const res = await instance.put(`/pingpong/users/detail`, editedProfile);
+      await instance.put(`/pingpong/users/detail`, editedProfile);
       alert('프로필이 성공적으로 등록되었습니다.');
     } catch (e) {
       setErrorMessage('JH02');

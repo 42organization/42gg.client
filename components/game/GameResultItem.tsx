@@ -40,14 +40,14 @@ export default function GameResultItem({ game, big }: gameResultTypes) {
         className={styles.bigContainer}
         onClick={() => setClickedItemId(gameId)}
       >
-        <GameResultBigTeam team={team1} userLeft={true} />
+        <GameResultBigTeam team={team1} />
         <GameResultBigScore
           status={status}
           time={time}
           scoreTeam1={team1.score}
           scoreTeam2={team2.score}
         />
-        <GameResultBigTeam team={team2} userLeft={false} />
+        <GameResultBigTeam team={team2} />
       </div>
     );
   }
