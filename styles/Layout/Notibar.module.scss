@@ -15,6 +15,8 @@
     cursor: pointer;
     color: $dark-gray;
     font-size: 1.5rem;
+    text-shadow: none;
+    text-align: center;
     width: 1.5rem;
   }
   .btnWrap {
@@ -53,7 +55,6 @@
   }
   div {
     padding: 1rem;
-    margin-top: 1.3rem;
     border-radius: $small-radius;
     font-size: $midium-font;
     text-align: center;
