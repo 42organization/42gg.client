@@ -37,9 +37,11 @@
 
 <br/>
 
-### 💃 매치페이지에서 나와 비슷한 실력의 상대와의 경기를 매칭할 수 있습니다 🕺
+### 💃 매치페이지에서 나와 비슷한 실력의 상대와의 경기를 매칭할 수 있습니다 🕺
 
- <img width=25% alt="match_before" src="https://user-images.githubusercontent.com/58678617/177514095-e1cd2ee4-fb58-49e2-a23f-cdf77130d8e7.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width=25% alt="match_enroll" src="https://user-images.githubusercontent.com/58678617/177514088-10658f06-7564-4e87-9a17-fd4ebf09efb6.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width=25% alt="match_after" src="https://user-images.githubusercontent.com/58678617/177514080-cb736512-589a-4399-88e5-881ebe16c31e.png">
+> 🏓 탁구 아이콘을 클릭해 매치 페이지로 넘어가 보아요!
+
+<img width=23% alt="main_to_match" src="https://user-images.githubusercontent.com/58678617/177549191-177623b6-308e-4355-846f-b54b920d3ca0.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width=23% alt="match_before" src="https://user-images.githubusercontent.com/58678617/177514095-e1cd2ee4-fb58-49e2-a23f-cdf77130d8e7.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width=23% alt="match_enroll" src="https://user-images.githubusercontent.com/58678617/177514088-10658f06-7564-4e87-9a17-fd4ebf09efb6.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width=23% alt="match_after" src="https://user-images.githubusercontent.com/58678617/177514080-cb736512-589a-4399-88e5-881ebe16c31e.png">
 
 <br/>
 
