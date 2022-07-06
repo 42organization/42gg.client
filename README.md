@@ -25,7 +25,7 @@
 
 ## 주요 기능 소개
 
-### 🔐 42 auth api 를 통해 로그인할 수 있습니다
+### 🔐 42 OAuth api를 통해 로그인할 수 있습니다
 
 <img width=25% alt="login" src="https://user-images.githubusercontent.com/58678617/177508304-6d7d2e49-5b07-4d6a-a5b9-59c5f3ddb6ce.png" >&nbsp;&nbsp;&nbsp;&nbsp;<img width=25% alt="42login" src="https://user-images.githubusercontent.com/58678617/177508341-c8520263-2394-47f6-9d10-96958549d8c1.png" >&nbsp;&nbsp;&nbsp;&nbsp;<img width=25% alt="42auth" src="https://user-images.githubusercontent.com/58678617/177508347-bcfaab5d-853e-4adb-a884-336aa4eca218.png" >
 
@@ -63,7 +63,7 @@
 
 ### 🧑 유저페이지에서 유저 정보를 확인할 수 있습니다. 내 페이지에서 상태메세지를 바꿔보세요!
 
-<img width=20% alt="user_other" src="https://user-images.githubusercontent.com/58678617/177510129-d101560e-c934-464a-9dea-5d4adc5a1f02.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width=20% alt="user_me" src="https://user-images.githubusercontent.com/58678617/177510162-45275538-1689-4de7-a88a-4600db63dd4c.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width=20% alt="user_edit" src="https://user-images.githubusercontent.com/58678617/177510167-2dbb2707-952a-4d3d-a0bd-2e70531eef4d.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width=20% alt="user_me_edit" src="https://user-images.githubusercontent.com/58678617/177510173-97878100-3d5f-4e68-a767-f542f64196a5.png">
+<img width=23% alt="user_other" src="https://user-images.githubusercontent.com/58678617/177510129-d101560e-c934-464a-9dea-5d4adc5a1f02.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width=23% alt="user_me" src="https://user-images.githubusercontent.com/58678617/177510162-45275538-1689-4de7-a88a-4600db63dd4c.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width=23% alt="user_edit" src="https://user-images.githubusercontent.com/58678617/177510167-2dbb2707-952a-4d3d-a0bd-2e70531eef4d.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width=23% alt="user_me_edit" src="https://user-images.githubusercontent.com/58678617/177510173-97878100-3d5f-4e68-a767-f542f64196a5.png">
 
 <br/>
 
