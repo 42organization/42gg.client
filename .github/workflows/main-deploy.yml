@@ -17,6 +17,12 @@ jobs:
           node-version: 16.x
 
       - name: Build
+        env:
+          NEXT_PUBLIC_LOCAL_ENDPOINT: ${{ secrets.NEXT_PUBLIC_LOCAL_ENDPOINT }}
+          NEXT_PUBLIC_TESTSERVER_ENDPOINT: ${{ secrets.NEXT_PUBLIC_TESTSERVER_ENDPOINT }}
+          NEXT_PUBLIC_DEVSERVER_ENDPOINT: ${{ secrets.NEXT_PUBLIC_DEVSERVER_ENDPOINT }}
+          NEXT_PUBLIC_SERVER_ENDPOINT: ${{ secrets.NEXT_PUBLIC_SERVER_ENDPOINT }}
+          GENERATE_SOURCEMAP: ${{ secrets.GENERATE_SOURCEMAP }}
         run: |
           npm install
           npm run build
