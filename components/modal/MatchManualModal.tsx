@@ -1,12 +1,21 @@
 import { useSetRecoilState } from 'recoil';
-import styles from 'styles/match/MatchManual.module.scss';
+import { useRouter } from 'next/router';
 import { matchModalState } from 'utils/recoil/match';
+import styles from 'styles/modal/MatchManualModal.module.scss';
 
-export default function MatchManualModal() {
+type ManualProps = {
+  isPage: boolean;
+};
+export default function MatchManualModal({ isPage }: ManualProps) {
+  const router = useRouter();
   const setMatchModal = useSetRecoilState(matchModalState);
 
   const onReturn = () => {
-    setMatchModal(null);
+    if (isPage) {
+      router.push(`/`);
+    } else {
+      setMatchModal(null);
+    }
   };
 
   return (
@@ -15,7 +24,7 @@ export default function MatchManualModal() {
       <div className={styles.textWrap}>
         🔍 매칭 <br />
         <div className={styles.textPadding}>
-          - 경기 시작 5분 전 상대 팀 공개 및 취소 불가 <br />
+          - 경기 시작 5분 전에 상대 팀 공개 및 취소 불가 <br />
           - 경기 시간은 10분 <br />
           - 매칭 후 슬롯 취소 시, 1분 페널티 <br />
           - 매칭 알람은 이메일로 전달됨 <br />
@@ -46,7 +55,11 @@ export default function MatchManualModal() {
       </div>
       <div className={styles.buttons}>
         <div className={styles.positive}>
-          <input onClick={onReturn} type='button' value='확 인' />
+          <input
+            onClick={onReturn}
+            type='button'
+            value={isPage ? '🏠 홈으로 🏠' : '확 인'}
+          />
         </div>
       </div>
     </div>
