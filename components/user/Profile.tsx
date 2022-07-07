@@ -89,9 +89,12 @@ export default function Profile({ intraId }: ProfileProps) {
           </div>
           <div className={styles.buttons}>
             {userData.intraId === intraId && (
-              <div className={styles.positive}>
-                <input type='button' onClick={startEditHandler} value='edit' />
-              </div>
+              <input
+                className={styles.editButton}
+                type='button'
+                onClick={startEditHandler}
+                value='edit'
+              />
             )}
           </div>
         </div>

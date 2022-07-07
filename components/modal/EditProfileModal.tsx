@@ -64,7 +64,7 @@ export default function EditProfileModal() {
     <div className={styles.editContainer}>
       <div className={styles.phrase}>
         <div className={styles.emoji}>✏️</div>
-        <div>프로필 수정</div>
+        <div className={styles.editModalTitle}>프로필 수정</div>
       </div>
       <div className={styles.statusMessageWrap}>
         <div className={styles.editType}>상태메세지</div>
