@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { loginState } from 'utils/recoil/login';
 import { newLoginState } from 'utils/recoil/layout';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import Login from 'pages/login';
 import styles from 'styles/Layout/Layout.module.scss';
 
@@ -13,7 +13,7 @@ interface LoginCheckerProps {
 export default function ErrorChecker({ children }: LoginCheckerProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
-  const [newLogin, setNewLogin] = useRecoilState(newLoginState);
+  const setNewLogin = useSetRecoilState(newLoginState);
   const router = useRouter();
   const presentPath = router.asPath;
   const token = presentPath.split('?token=')[1];
