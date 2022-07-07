@@ -1,5 +1,5 @@
 import MatchBoardList from 'components/match/MatchBoardList';
-import MatchManual from 'components/match/MatchManualModal';
+import MatchManualModal from 'components/modal/MatchManualModal';
 import MatchEnrollModal from 'components/modal/MatchEnrollModal';
 import MatchRejectModal from 'components/modal/MatchRejectModal';
 import Modal from 'components/modal/Modal';
@@ -17,7 +17,8 @@ export default function Match() {
 
   const ModalChild = () => {
     if (matchModal === 'enroll') return <MatchEnrollModal />;
-    else if (matchModal === 'manual') return <MatchManual />;
+    else if (matchModal === 'manual')
+      return <MatchManualModal isPage={false} />;
     else if (matchModal === 'reject') return <MatchRejectModal />;
     else return null;
   };

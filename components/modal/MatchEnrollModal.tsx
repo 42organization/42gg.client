@@ -5,7 +5,7 @@ import { EnrollInfo } from 'types/matchTypes';
 import { errorState } from 'utils/recoil/error';
 import Modal from './Modal';
 import instance from 'utils/axios';
-import styles from 'styles/modal/MatchEnroll.module.scss';
+import styles from 'styles/modal/MatchEnrollModal.module.scss';
 
 export default function MatchEnrollModal() {
   const setErrorMessage = useSetRecoilState(errorState);
