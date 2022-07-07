@@ -13,7 +13,6 @@ import { openCurrentMatchInfoState } from 'utils/recoil/match';
 import { loginState } from 'utils/recoil/login';
 import { errorState } from 'utils/recoil/error';
 import Login from 'pages/login';
-import ErrorPage from 'components/ErrorPage';
 import Header from './Header';
 import Footer from './Footer';
 import CurrentMatchInfo from './CurrentMatchInfo';
@@ -34,12 +33,12 @@ export default function AppLayout({ children }: AppLayoutProps) {
     openCurrentMatchInfoState
   );
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
-  const [errorMessage, setErrorMessage] = useRecoilState(errorState);
+  const setErrorMessage = useSetRecoilState(errorState);
   const setShowMenuBar = useSetRecoilState(showMenuBarState);
   const setShowNotiBar = useSetRecoilState(showNotiBarState);
   const router = useRouter();
-  const presentPath = useRouter().asPath;
-  const token = router.asPath.split('?token=')[1];
+  const presentPath = router.asPath;
+  const token = presentPath.split('?token=')[1];
 
   useEffect(() => {
     if (token) localStorage.setItem('42gg-token', token);
@@ -90,42 +89,32 @@ export default function AppLayout({ children }: AppLayoutProps) {
     }
   };
 
-  if (errorMessage !== '') {
-    return (
-      <div className={styles.appContainer}>
-        <div className={styles.background}>
-          <ErrorPage />
-        </div>
+  return (
+    <div className={styles.appContainer}>
+      <div className={styles.background}>
+        {isLoggedIn ? (
+          <div>
+            <Header />
+            {liveData.event === 'game' && (
+              <Modal>
+                <InputScoreModal />
+              </Modal>
+            )}
+            {openCurrentInfo && <CurrentMatchInfo />}
+            {presentPath !== '/match' && presentPath !== '/manual' && (
+              <Link href='/match'>
+                <div className={styles.buttonContainer}>
+                  <a className={styles.matchingButton}>🏓</a>
+                </div>
+              </Link>
+            )}
+            {children}
+            <Footer />
+          </div>
+        ) : (
+          <>{!isLoading && <Login />}</>
+        )}
       </div>
-    );
-  } else {
-    return (
-      <div className={styles.appContainer}>
-        <div className={styles.background}>
-          {isLoggedIn ? (
-            <div>
-              <Header />
-              {liveData.event === 'game' && (
-                <Modal>
-                  <InputScoreModal />
-                </Modal>
-              )}
-              {openCurrentInfo && <CurrentMatchInfo />}
-              {presentPath !== '/match' && presentPath !== '/manual' && (
-                <Link href='/match'>
-                  <div className={styles.buttonContainer}>
-                    <a className={styles.matchingButton}>🏓</a>
-                  </div>
-                </Link>
-              )}
-              {children}
-              <Footer />
-            </div>
-          ) : (
-            <>{!isLoading && <Login />}</>
-          )}
-        </div>
-      </div>
-    );
-  }
+    </div>
+  );
 }

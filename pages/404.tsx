@@ -10,7 +10,6 @@ const Error = () => {
 
   useEffect(() => {
     setErrorMessage('DK404');
-    router.replace(`/`);
   }, []);
   return <ErrorPage />;
 };
