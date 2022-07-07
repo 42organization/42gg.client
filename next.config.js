@@ -19,6 +19,11 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/error',
+        destination: '/',
+        permanent: true,
+      },
     ];
   },
 };

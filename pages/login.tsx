@@ -4,9 +4,11 @@ import { useEffect } from 'react';
 
 function Login() {
   const router = useRouter();
+
   useEffect(() => {
     router.replace('/');
   }, []);
+
   return (
     <>
       <div className={styles.loginContainer}>

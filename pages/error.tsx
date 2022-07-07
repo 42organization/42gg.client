@@ -14,7 +14,7 @@ export default function ErrorPage() {
 
   const goHome = () => {
     setErrorMessage('');
-    window.location.href = '/';
+    router.push('/');
   };
 
   return (

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { UserData, LiveData } from 'types/mainType';
 import {
   showMenuBarState,
@@ -11,9 +11,7 @@ import {
   newLoginState,
 } from 'utils/recoil/layout';
 import { openCurrentMatchInfoState } from 'utils/recoil/match';
-import { loginState } from 'utils/recoil/login';
 import { errorState } from 'utils/recoil/error';
-import Login from 'pages/login';
 import Header from './Header';
 import Footer from './Footer';
 import CurrentMatchInfo from './CurrentMatchInfo';
@@ -28,36 +26,21 @@ type AppLayoutProps = {
 };
 
 export default function AppLayout({ children }: AppLayoutProps) {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [userData, setUserData] = useRecoilState<UserData>(userState);
   const [liveData, setLiveData] = useRecoilState<LiveData>(liveState);
   const [openCurrentInfo, setOpenCurrentInfo] = useRecoilState<boolean>(
     openCurrentMatchInfoState
   );
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
-  const [newLogin, setNewLogin] = useRecoilState(newLoginState);
+  const newLogin = useRecoilValue(newLoginState);
   const setErrorMessage = useSetRecoilState(errorState);
   const setShowMenuBar = useSetRecoilState(showMenuBarState);
   const setShowNotiBar = useSetRecoilState(showNotiBarState);
   const router = useRouter();
   const presentPath = router.asPath;
-  const token = presentPath.split('?token=')[1];
 
   useEffect(() => {
-    if (token) localStorage.setItem('42gg-token', token);
-    if (localStorage.getItem('42gg-token')) {
-      setIsLoggedIn(true);
-      getUserDataHandler();
-    }
-    setIsLoading(false);
+    getUserDataHandler();
   }, []);
-
-  useEffect(() => {
-    if (router.asPath.includes('token')) {
-      setNewLogin(true);
-      router.push(`/`);
-    }
-  }, [token]);
 
   useEffect(() => {
     setShowMenuBar(false);
@@ -65,7 +48,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }, [presentPath]);
 
   useEffect(() => {
-    if (userData.intraId && isLoggedIn) {
+    if (userData.intraId) {
       getLiveDataHandler();
     }
   }, [presentPath, userData]);
@@ -96,33 +79,29 @@ export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className={styles.appContainer}>
       <div className={styles.background}>
-        {isLoggedIn ? (
-          <div>
-            <Header />
-            {newLogin && (
-              <Modal>
-                <WelcomeModal />
-              </Modal>
-            )}
-            {liveData.event === 'game' && (
-              <Modal>
-                <InputScoreModal />
-              </Modal>
-            )}
-            {openCurrentInfo && <CurrentMatchInfo />}
-            {presentPath !== '/match' && presentPath !== '/manual' && (
-              <Link href='/match'>
-                <div className={styles.buttonContainer}>
-                  <a className={styles.matchingButton}>🏓</a>
-                </div>
-              </Link>
-            )}
-            {children}
-            <Footer />
-          </div>
-        ) : (
-          <>{!isLoading && <Login />}</>
-        )}
+        <div>
+          <Header />
+          {newLogin && (
+            <Modal>
+              <WelcomeModal />
+            </Modal>
+          )}
+          {liveData.event === 'game' && (
+            <Modal>
+              <InputScoreModal />
+            </Modal>
+          )}
+          {openCurrentInfo && <CurrentMatchInfo />}
+          {presentPath !== '/match' && presentPath !== '/manual' && (
+            <Link href='/match'>
+              <div className={styles.buttonContainer}>
+                <a className={styles.matchingButton}>🏓</a>
+              </div>
+            </Link>
+          )}
+          {children}
+          <Footer />
+        </div>
       </div>
     </div>
   );

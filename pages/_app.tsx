@@ -8,6 +8,7 @@ import Layout from 'components/Layout/Layout';
 import 'styles/globals.css';
 import * as gtag from 'lib/gtag';
 import ErrorChecker from 'components/ErrorChecker';
+import LoginChecker from 'components/LoginChecker';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -45,11 +46,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
       <RecoilRoot>
-        <ErrorChecker>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ErrorChecker>
+        <LoginChecker>
+          <ErrorChecker>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ErrorChecker>
+        </LoginChecker>
       </RecoilRoot>
     </>
   );

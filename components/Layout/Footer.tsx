@@ -15,7 +15,7 @@ export default function Footer() {
             )
           }
         >
-          Page Manual
+          Page Guide
         </div>
       </div>
       <div className={styles.copyright}>© 2022 42GG</div>
