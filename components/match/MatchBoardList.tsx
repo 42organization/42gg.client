@@ -68,7 +68,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
     <>
       <div className={styles.btnWrap}>
         <button className={styles.mamualBtn} onClick={manualPageHandler}>
-          메뉴얼
+          매뉴얼
         </button>
         <button
           className={

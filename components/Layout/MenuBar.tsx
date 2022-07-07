@@ -51,7 +51,7 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
               </div>
             </div>
             <div className={styles.subMenu}>
-              <div onClick={() => MenuPathHandler('manual')}>경기 메뉴얼</div>
+              <div onClick={() => MenuPathHandler('manual')}>경기 매뉴얼</div>
               <div
                 onClick={() =>
                   window.open(
