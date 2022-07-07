@@ -51,7 +51,16 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
               </div>
             </div>
             <div className={styles.subMenu}>
-              <div onClick={() => MenuPathHandler('manual')}>매뉴얼</div>
+               <div
+                onClick={() =>
+                  window.open(
+                    'https://github.com/42organization/42arcade.gg.client#주요-기능-소개'
+                  )
+                }
+              >
+                페이지 가이드
+              </div>
+              <div onClick={() => MenuPathHandler('manual')}>경기 매뉴얼</div>
               <div onClick={logoutModalHandler}>로그아웃</div>
             </div>
           </nav>

@@ -1,0 +1,29 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modal-container;
+}
+
+.phrase {
+  @include modal-phrase;
+  color: black;
+  font-size: 1rem;
+  .title {
+    color: white;
+    font-family: $title-font;
+    text-shadow: $text-shadow;
+    font-size: 2rem;
+    margin-bottom: 1.7rem;
+  }
+  .rose {
+    margin-top: 1rem;
+    color: $pp-red;
+    span:last-child {
+      color: green;
+    }
+  }
+}
+
+.buttons {
+  @include select-buttons(7rem);
+}

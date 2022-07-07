@@ -8,6 +8,7 @@ import {
   showNotiBarState,
   userState,
   liveState,
+  newLoginState,
 } from 'utils/recoil/layout';
 import { openCurrentMatchInfoState } from 'utils/recoil/match';
 import { loginState } from 'utils/recoil/login';
@@ -20,6 +21,7 @@ import Modal from 'components/modal/Modal';
 import InputScoreModal from 'components/modal/InputScoreModal';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/Layout.module.scss';
+import WelcomeModal from 'components/modal/WelcomeModal';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -33,6 +35,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     openCurrentMatchInfoState
   );
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
+  const [newLogin, setNewLogin] = useRecoilState(newLoginState);
   const setErrorMessage = useSetRecoilState(errorState);
   const setShowMenuBar = useSetRecoilState(showMenuBarState);
   const setShowNotiBar = useSetRecoilState(showNotiBarState);
@@ -51,6 +54,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   useEffect(() => {
     if (router.asPath.includes('token')) {
+      setNewLogin(true);
       router.push(`/`);
     }
   }, [token]);
@@ -95,6 +99,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
         {isLoggedIn ? (
           <div>
             <Header />
+            {newLogin && (
+              <Modal>
+                <WelcomeModal />
+              </Modal>
+            )}
             {liveData.event === 'game' && (
               <Modal>
                 <InputScoreModal />
