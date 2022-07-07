@@ -21,3 +21,8 @@ export const showNotiBarState = atom<boolean>({
   key: `showNotiBarState/${v1()}`,
   default: false,
 });
+
+export const newLoginState = atom<boolean>({
+  key: `newLoginState/${v1()}`,
+  default: false,
+});
