@@ -1,13 +1,11 @@
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
-import { newLoginState } from 'utils/recoil/layout';
 import { loginState, logoutModalState } from 'utils/recoil/login';
 import styles from 'styles/modal/LogoutModal.module.scss';
 
 export default function LogoutModal() {
   const setOpenModal = useSetRecoilState(logoutModalState);
   const setIsLoggedIn = useSetRecoilState(loginState);
-  const setNewLogin = useSetRecoilState(newLoginState);
   const router = useRouter();
 
   const onReturn = () => {
@@ -17,7 +15,6 @@ export default function LogoutModal() {
   const onLogout = () => {
     localStorage.removeItem('42gg-token');
     setIsLoggedIn(false);
-    setNewLogin(true);
     router.push(`/`);
   };
 
