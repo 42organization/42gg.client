@@ -55,7 +55,11 @@ export default function MatchManualModal({ isPage }: ManualProps) {
       </div>
       <div className={styles.buttons}>
         <div className={styles.positive}>
-          <input onClick={onReturn} type='button' value='확 인' />
+          <input
+            onClick={onReturn}
+            type='button'
+            value={isPage ? '🏠 홈으로 🏠' : '확 인'}
+          />
         </div>
       </div>
     </div>
