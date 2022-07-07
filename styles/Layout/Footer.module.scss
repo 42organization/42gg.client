@@ -8,7 +8,17 @@
   height: 4rem;
   font-size: $small-font;
   color: white;
-  div:nth-child(1) {
+  .link {
+    display: flex;
+    div {
+      cursor: pointer;
+    }
+    .bar {
+      cursor: unset;
+      margin: 0 0.3rem;
+    }
+  }
+  .copyright {
     margin-bottom: 0.2rem;
   }
 }

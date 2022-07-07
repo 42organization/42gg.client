@@ -22,7 +22,10 @@
     width: 1.5rem;
   }
   .menu {
-    margin: 4rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 4rem 1rem 2rem;
     font-size: $big-giant-font;
     font-weight: 600;
     div {
@@ -31,7 +34,10 @@
     }
   }
   .subMenu {
-    margin: 4rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 1rem;
     font-size: $midium-font;
     div {
       cursor: pointer;
