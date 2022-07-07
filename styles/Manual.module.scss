@@ -1,38 +1,14 @@
 @import 'styles/common.scss';
 
-.backDrop {
-  @include backdrop;
-}
-
 .pageWrap {
   @include pageWrap;
-  align-items: center;
 }
 
 .container {
-  padding: 1rem 1.5rem;
+  border-radius: $small-radius;
+  padding: 2.5rem 1.2rem;
   background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
-}
-
-.buttons {
-  @include select-buttons;
-}
-
-.title {
-  color: #fff;
-  text-align: center;
-  font-size: 3rem;
-  letter-spacing: 0.1rem;
-  font-family: $title-font;
-  text-shadow: $text-shadow;
-  padding: 1rem;
-}
-
-.gameStatusMessage {
-  color: white;
-  padding-bottom: 2.5rem;
-}
-
-.textPadding {
-  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
