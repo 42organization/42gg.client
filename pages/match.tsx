@@ -1,12 +1,12 @@
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import MatchBoardList from 'components/match/MatchBoardList';
 import MatchManualModal from 'components/modal/MatchManualModal';
 import MatchEnrollModal from 'components/modal/MatchEnrollModal';
 import MatchRejectModal from 'components/modal/MatchRejectModal';
 import Modal from 'components/modal/Modal';
-import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import styles from 'styles/match/match.module.scss';
 import { matchModalState } from 'utils/recoil/match';
+import styles from 'styles/match/match.module.scss';
 
 export default function Match() {
   const [matchModal, setMatchModal] = useRecoilState(matchModalState);
@@ -31,12 +31,10 @@ export default function Match() {
     ) : null;
 
   return (
-    <>
-      <div className={styles.container}>
-        <h1 className={styles.title}>Match</h1>
-        <MatchBoardList type='single' />
-        <ModalProvider />
-      </div>
-    </>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Match</h1>
+      <MatchBoardList type='single' />
+      <ModalProvider />
+    </div>
   );
 }
