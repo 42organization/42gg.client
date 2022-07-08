@@ -21,9 +21,6 @@ export default function RankItem({ myIntraId, index, user, isMain }: RankType) {
             <Link href={`/users/${intraId}`}>
               <span>{intraId} </span>
             </Link>
-            {/* <Link href={`/users/${intraId}`}>
-              <span className={styles.ppp}>({ppp})</span>
-            </Link> */}
           </div>
           <div className={styles.statusMessage}>
             {statusMessage.length > 10
