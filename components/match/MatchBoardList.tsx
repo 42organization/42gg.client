@@ -3,10 +3,10 @@ import { useSetRecoilState } from 'recoil';
 import { MatchData } from 'types/matchTypes';
 import { matchRefreshBtnState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
+import { matchModalState } from 'utils/recoil/match';
 import instance from 'utils/axios';
 import MatchBoard from './MatchBoard';
 import styles from 'styles/match/MatchBoardList.module.scss';
-import { matchModalState } from 'utils/recoil/match';
 
 interface MatchBoardListProps {
   type: string;
