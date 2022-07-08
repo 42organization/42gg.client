@@ -28,16 +28,8 @@ export default function RankList() {
   }, [isScroll]);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await instance.get(`${path}`);
-        setRankData(res?.data);
-        setMyRank(res?.data.myRank);
-      } catch (e) {
-        setErrorMessage('DK01');
-      }
-    })();
-  }, [page, isScroll === true]);
+    getRankData();
+  }, [page]);
 
   useEffect(() => {
     if (isScroll) {
@@ -46,9 +38,19 @@ export default function RankList() {
     }
   }, [rankData]);
 
+  const getRankData = async () => {
+    try {
+      const res = await instance.get(`${path}`);
+      setRankData(res?.data);
+      setMyRank(res?.data.myRank);
+    } catch (e) {
+      setErrorMessage('DK01');
+    }
+  };
+
   const pageChangeHandler = (pages: number) => {
     setPage(pages);
-    router.push(`rank`);
+    router.push('/rank');
   };
 
   return router.asPath !== '/rank' ? (
