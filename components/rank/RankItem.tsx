@@ -11,33 +11,33 @@ type RankType = {
 
 export default function RankItem({ myIntraId, index, user, isMain }: RankType) {
   const { rank, intraId, ppp, statusMessage, winRate } = user;
+  const rankStr = rank === -1 ? '-' : rank;
 
   return (
     <>
       {isMain ? (
         <div className={styles.mainData}>
-          <div className={styles.rank}>{rank === -1 ? '-' : rank}</div>
+          <div className={styles.rank}>{rankStr}</div>
           <div className={styles.intraId}>
             <Link href={`/users/${intraId}`}>
               <span>{intraId} </span>
             </Link>
           </div>
           <div className={styles.statusMessage}>
-            {statusMessage.length > 10
-              ? `${statusMessage.slice(0, 10)}...`
-              : statusMessage}
+            {statusMessage.slice(0, 20)}
+            {statusMessage.length > 20 ? '...' : ''}
           </div>
         </div>
       ) : (
         <div className={styles.rankData}>
           <div
-            className={`${index % 2 ? styles.even : styles.odd}
+            className={`${index % 2 === 0 ? styles.even : styles.odd}
             ${intraId === myIntraId && styles.myself}`}
           >
             <div
               className={0 < rank && rank < 4 ? styles.topRank : styles.rank}
             >
-              {rank === -1 ? '-' : rank}
+              {rankStr}
             </div>
             <div className={styles.intraId}>
               <Link href={`/users/${intraId}`}>
@@ -48,9 +48,8 @@ export default function RankItem({ myIntraId, index, user, isMain }: RankType) {
               </Link>
             </div>
             <div className={styles.statusMessage}>
-              {statusMessage.length > 20
-                ? `${statusMessage.slice(0, 20)}...`
-                : statusMessage}
+              {statusMessage.slice(0, 20)}
+              {statusMessage.length > 20 ? '...' : ''}
             </div>
             <div className={styles.winRate}>{winRate}%</div>
           </div>
