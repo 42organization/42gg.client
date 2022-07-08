@@ -1,47 +1,52 @@
 @import 'styles/common.scss';
 
-.backDrop {
-  @include backdrop;
-}
-
 .container {
   @include modal-container;
 }
 
-.buttons {
-  @include select-buttons;
+.title {
+  color: #fff;
+  font-size: 2.5rem;
+  letter-spacing: 0.1rem;
+  font-family: $title-font;
+  text-shadow: $text-shadow;
 }
-.textWrap {
+
+.ruleList {
+  list-style: none;
   overflow-y: scroll;
   height: 40vh;
   max-height: 40vh;
-  padding: 0.5rem;
   color: black;
   width: auto;
-  margin-bottom: 1.5rem;
+  margin: 1.5rem 0.5rem;
+}
+.ruleList > li {
+  font-weight: 700;
+  margin-bottom: 1.2rem;
 }
 
-.textWrap::-webkit-scrollbar {
+.ruleDetail {
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-left: 0.8rem;
+}
+.ruleDetail > li {
+  list-style: square;
+  margin-top: 0.3rem;
+}
+
+.ruleList::-webkit-scrollbar {
   display: inherit;
   width: 5px;
   height: 1rem;
 }
 
-.textWrap::-webkit-scrollbar-thumb {
+.ruleList::-webkit-scrollbar-thumb {
   background-color: white;
   border-radius: 10px;
 }
 
-.title {
-  color: #fff;
-  text-align: center;
-  font-size: 3rem;
-  letter-spacing: 0.1rem;
-  font-family: $title-font;
-  text-shadow: $text-shadow;
-  padding: 1rem;
-}
-
-.textPadding {
-  margin-left: 1rem;
+.buttons {
+  @include select-buttons;
 }
