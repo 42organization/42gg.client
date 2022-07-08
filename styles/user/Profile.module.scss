@@ -204,16 +204,3 @@
 .buttons {
   @include select-buttons;
 }
-
-.editButton {
-  outline: none;
-  cursor: pointer;
-  border-radius: $mini-radius;
-  border: 1px solid $dark-gray;
-  width: 2.7rem;
-  height: 1.5rem;
-  color: $dark-gray;
-  background-color: white;
-  font-size: $midium-font;
-  text-align: center;
-}
