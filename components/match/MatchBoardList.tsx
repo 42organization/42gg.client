@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import MatchBoard from './MatchBoard';
 import { MatchData } from 'types/matchTypes';
 import { matchRefreshBtnState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { matchModalState } from 'utils/recoil/match';
 import instance from 'utils/axios';
-import MatchBoard from './MatchBoard';
 import styles from 'styles/match/MatchBoardList.module.scss';
 
 interface MatchBoardListProps {
@@ -44,6 +44,10 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   if (!matchData) return null;
 
   const { matchBoards, intervalMinute } = matchData;
+  if (matchBoards.length === 0)
+    return (
+      <div className={styles.matchAllClosed}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>
+    );
   const lastGameTime = matchBoards[matchBoards.length - 1][0].time;
   const lastGameHour = new Date(lastGameTime).getHours();
   const nowHour = new Date().getHours();
@@ -61,7 +65,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
     setMatchRefreshBtn(true);
   };
 
-  const getScrollCurrentRef = (slotsHour: Number) => {
+  const getScrollCurrentRef = (slotsHour: number) => {
     if (nowHour === lastGameHour && slotsHour === nowHour) return currentRef;
     if (slotsHour === nowHour + 1) return currentRef;
     return null;
