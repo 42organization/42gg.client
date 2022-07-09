@@ -2,25 +2,21 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { CurrentMatch } from 'types/matchTypes';
-import { LiveData } from 'types/mainType';
-import { liveState } from 'utils/recoil/layout';
-import { gameTimeToString, isBeforeMin } from 'utils/handleTime';
-import { cancelModalState, matchRefreshBtnState } from 'utils/recoil/match';
-import { errorState } from 'utils/recoil/error';
 import Modal from 'components/modal/Modal';
 import CancelControll from 'components/modal/cancel/CancelControll';
+import { liveState } from 'utils/recoil/layout';
+import { errorState } from 'utils/recoil/error';
+import {
+  cancelModalState,
+  matchRefreshBtnState,
+  currentMatchInfo,
+} from 'utils/recoil/match';
+import { gameTimeToString, isBeforeMin } from 'utils/handleTime';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 export default function CurrentMatchInfo() {
-  const [currentMatch, setCurrentMatch] = useState<CurrentMatch>({
-    slotId: 0,
-    time: '',
-    isMatched: false,
-    myTeam: [],
-    enemyTeam: [],
-  });
+  const [currentMatch, setCurrentMatch] = useRecoilState(currentMatchInfo);
   const { isMatched, enemyTeam, time, slotId } = currentMatch;
   const [enemyTeamInfo, setEnemyTeamInfo] = useState(<></>);
   const matchingMessage = time && makeMessage(time, isMatched);
@@ -29,7 +25,7 @@ export default function CurrentMatchInfo() {
   const [openCancelModal, setOpenCancelModal] =
     useRecoilState(cancelModalState);
   const setErrorMessage = useSetRecoilState(errorState);
-  const setLiveData = useSetRecoilState<LiveData>(liveState);
+  const setLiveData = useSetRecoilState(liveState);
   const presentPath = useRouter().asPath;
 
   useEffect(() => {
