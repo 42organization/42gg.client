@@ -82,7 +82,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
           &#8635;
         </button>
       </div>
-      {nowHour >= lastGameHour + 1 && (
+      {nowHour > lastGameHour && (
         <div className={styles.matchAllClosed}>
           ❌ 오늘의 매치가 모두 끝났습니다! ❌
         </div>
