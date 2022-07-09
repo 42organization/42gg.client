@@ -10,7 +10,7 @@ interface LoginCheckerProps {
   children: React.ReactNode;
 }
 
-export default function ErrorChecker({ children }: LoginCheckerProps) {
+export default function LoginChecker({ children }: LoginCheckerProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
   const setNewLogin = useSetRecoilState(newLoginState);
@@ -19,19 +19,16 @@ export default function ErrorChecker({ children }: LoginCheckerProps) {
   const token = presentPath.split('?token=')[1];
 
   useEffect(() => {
-    if (token) localStorage.setItem('42gg-token', token);
+    if (token) {
+      localStorage.setItem('42gg-token', token);
+      setNewLogin(true);
+      router.replace(`/`);
+    }
     if (localStorage.getItem('42gg-token')) {
       setIsLoggedIn(true);
     }
     setIsLoading(false);
   }, []);
-
-  useEffect(() => {
-    if (router.asPath.includes('token')) {
-      setNewLogin(true);
-      router.replace(`/`);
-    }
-  }, [token]);
 
   return isLoggedIn ? (
     <>{children}</>

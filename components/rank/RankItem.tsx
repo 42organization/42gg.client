@@ -24,8 +24,8 @@ export default function RankItem({ myIntraId, index, user, isMain }: RankType) {
             </Link>
           </div>
           <div className={styles.statusMessage}>
-            {statusMessage.slice(0, 20)}
-            {statusMessage.length > 20 ? '...' : ''}
+            {statusMessage.slice(0, 10)}
+            {statusMessage.length > 10 ? '...' : ''}
           </div>
         </div>
       ) : (
