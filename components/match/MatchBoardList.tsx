@@ -14,12 +14,13 @@ interface MatchBoardListProps {
 
 export default function MatchBoardList({ type }: MatchBoardListProps) {
   const [matchData, setMatchData] = useState<MatchData | null>(null);
+  const [refreshBtnAnimation, setRefreshBtnAnimation] =
+    useState<boolean>(false);
+  const setMatchModal = useSetRecoilState(matchModalState);
   const setMatchRefreshBtn = useSetRecoilState(matchRefreshBtnState);
   const setErrorMessage = useSetRecoilState(errorState);
   const currentRef = useRef<HTMLDivElement>(null);
-  const setMatchModal = useSetRecoilState(matchModalState);
-  const [refreshBtnAnimation, setRefreshBtnAnimation] =
-    useState<boolean>(false);
+
   useEffect(() => {
     getMatchDataHandler();
   }, []);
@@ -43,6 +44,9 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   if (!matchData) return null;
 
   const { matchBoards, intervalMinute } = matchData;
+  const lastGameTime = matchBoards[matchBoards.length - 1][0].time;
+  const lastGameHour = new Date(lastGameTime).getHours();
+  const nowHour = new Date().getHours();
 
   const manualPageHandler = () => {
     setMatchModal('manual');
@@ -57,12 +61,11 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
     setMatchRefreshBtn(true);
   };
 
-  if (matchBoards.length === 0)
-    return (
-      <div className={styles.matchAllClosed}>
-        오늘의 매치가 모두 끝났습니다!
-      </div>
-    );
+  const getScrollCurrentRef = (slotsHour: Number) => {
+    if (nowHour === lastGameHour && slotsHour === nowHour) return currentRef;
+    if (slotsHour === nowHour + 1) return currentRef;
+    return null;
+  };
 
   return (
     <>
@@ -79,6 +82,11 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
           &#8635;
         </button>
       </div>
+      {nowHour > lastGameHour && (
+        <div className={styles.matchAllClosed}>
+          ❌ 오늘의 매치가 모두 끝났습니다! ❌
+        </div>
+      )}
       <div className={styles.matchBoardList}>
         {matchBoards.map((matchSlots, i) => {
           const slotsTime = new Date(matchSlots[0].time);
@@ -86,11 +94,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
             <div
               className={styles.matchBoard}
               key={i}
-              ref={
-                slotsTime.getHours() === new Date().getHours() + 1
-                  ? currentRef
-                  : null
-              }
+              ref={getScrollCurrentRef(slotsTime.getHours())}
             >
               <MatchBoard
                 key={i}
