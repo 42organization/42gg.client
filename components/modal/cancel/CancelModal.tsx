@@ -1,9 +1,10 @@
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   cancelModalState,
   openCurrentMatchInfoState,
 } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
+import { currentMatchInfo } from 'utils/recoil/match';
 import instance from 'utils/axios';
 import styles from 'styles/modal/CancelModal.module.scss';
 
@@ -15,6 +16,7 @@ export default function CancelModal({ slotId }: SlotProps) {
   const setOpenModal = useSetRecoilState(cancelModalState);
   const setOpenCurrentInfo = useSetRecoilState(openCurrentMatchInfoState);
   const setErrorMessage = useSetRecoilState(errorState);
+  const currentMatch = useRecoilValue(currentMatchInfo);
 
   const onCancel = async () => {
     try {
@@ -49,11 +51,13 @@ export default function CancelModal({ slotId }: SlotProps) {
           <br />
           취소하시겠습니까?
         </div>
-        <div className={styles.subContent}>
-          &#9888; 지금 경기를 취소하시면
-          <br />
-          1분 간 새로운 예약이 불가합니다!
-        </div>
+        {currentMatch.isMatched && (
+          <div className={styles.subContent}>
+            &#9888; 매칭이 완료된 경기를 취소하면
+            <br />
+            1분 간 새로운 예약이 불가합니다!
+          </div>
+        )}
       </div>
       <div className={styles.buttons}>
         <div className={styles.negative}>

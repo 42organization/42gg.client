@@ -5,9 +5,12 @@ import {
   enrollInfoState,
   matchModalState,
 } from 'utils/recoil/match';
-import { fillZero } from 'utils/handleTime';
-import styles from 'styles/match/MatchItem.module.scss';
+import { errorState } from 'utils/recoil/error';
 import { liveState } from 'utils/recoil/layout';
+import { currentMatchInfo } from 'utils/recoil/match';
+import { fillZero } from 'utils/handleTime';
+import instance from 'utils/axios';
+import styles from 'styles/match/MatchItem.module.scss';
 
 interface MatchItemProps {
   slot: Slot;
@@ -23,6 +26,8 @@ export default function MatchItem({
   const setEnrollInfo = useSetRecoilState<EnrollInfo | null>(enrollInfoState);
   const setMatchModal = useSetRecoilState(matchModalState);
   const setOpenCancelModal = useSetRecoilState<boolean>(cancelModalState);
+  const setErrorMessage = useSetRecoilState(errorState);
+  const setCurrentMatch = useSetRecoilState(currentMatchInfo);
   const liveData = useRecoilValue(liveState);
   const { headCount, slotId, status, time } = slot;
   const headMax = type === 'single' ? 2 : 4;
@@ -32,8 +37,14 @@ export default function MatchItem({
   const isAfterSlot: boolean = startTime.getTime() - new Date().getTime() >= 0;
   let buttonStyle;
 
-  const enrollHandler = () => {
+  const enrollHandler = async () => {
     if (status === 'mytable') {
+      try {
+        const res = await instance.get(`/pingpong/match/current`);
+        setCurrentMatch(res?.data);
+      } catch (e) {
+        setErrorMessage('JB03');
+      }
       setOpenCancelModal(true);
     } else if (liveData.event === 'match') {
       setMatchModal('reject');
