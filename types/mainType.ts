@@ -1,5 +1,6 @@
 export interface UserData {
   intraId: string;
+  isAdmin: boolean;
   userImageUri: string;
 }
 
