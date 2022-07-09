@@ -7,7 +7,7 @@ import { RecoilRoot } from 'recoil';
 import Layout from 'components/Layout/Layout';
 import 'styles/globals.css';
 import * as gtag from 'lib/gtag';
-import ErrorChecker from 'components/ErrorChecker';
+import ErrorChecker from 'components/error/ErrorChecker';
 import LoginChecker from 'components/LoginChecker';
 
 function MyApp({ Component, pageProps }: AppProps) {

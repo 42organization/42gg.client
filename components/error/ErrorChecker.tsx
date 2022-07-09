@@ -1,6 +1,6 @@
 import { errorState } from 'utils/recoil/error';
 import { useRecoilValue } from 'recoil';
-import ErrorPage from 'pages/error';
+import ErrorPage from 'components/error/Error';
 import styles from 'styles/Layout/Layout.module.scss';
 
 interface ErrorCheckerProps {
