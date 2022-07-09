@@ -11,7 +11,6 @@ instance.interceptors.request.use(
     config.headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('42gg-token')}`,
-      // Authorization: `Bearer access1`, // tsetSERVER 토큰, access1~1000까지
     };
     return config;
   },
