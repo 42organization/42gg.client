@@ -5,6 +5,7 @@ import { userState } from 'utils/recoil/layout';
 import { logoutModalState } from 'utils/recoil/login';
 import Modal from 'components/modal/Modal';
 import LogoutModal from 'components/modal/LogoutModal';
+import instance from 'utils/axios';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 type MenuBarProps = {
@@ -30,6 +31,16 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
   const closeMenubarHandler = () => {
     setOpenLogoutModal(false);
     showMenuBarHandler();
+  };
+
+  const goToAdminPage = () => {
+    instance
+      .get('/admin')
+      .then(
+        () =>
+          (window.location.href = `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/admin`)
+      )
+      .catch(() => alert('관리자가 아닙니다!'));
   };
 
   return (
@@ -62,6 +73,7 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
               </div>
               <div onClick={() => MenuPathHandler('manual')}>경기 매뉴얼</div>
               <div onClick={logoutModalHandler}>로그아웃</div>
+              {userData.isAdmin && <div onClick={goToAdminPage}>😎 관리자</div>}
             </div>
           </nav>
         </div>
