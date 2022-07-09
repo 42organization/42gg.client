@@ -44,6 +44,9 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   if (!matchData) return null;
 
   const { matchBoards, intervalMinute } = matchData;
+  const lastGameTime = matchBoards[matchBoards.length - 1][0].time;
+  const lastGameHour = new Date(lastGameTime).getHours();
+  const nowHour = new Date().getHours();
 
   const manualPageHandler = () => {
     setMatchModal('manual');
@@ -59,20 +62,10 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   };
 
   const getScrollCurrentRef = (slotsHour: Number) => {
-    const lastGameTime = matchBoards[matchBoards.length - 1][0].time;
-    const lastGameHour = new Date(lastGameTime).getHours();
-    const nowHour = new Date().getHours();
     if (nowHour === lastGameHour && slotsHour === nowHour) return currentRef;
-    else if (slotsHour === nowHour + 1) return currentRef;
+    if (slotsHour === nowHour + 1) return currentRef;
     else null;
   };
-
-  if (matchBoards.length === 0)
-    return (
-      <div className={styles.matchAllClosed}>
-        오늘의 매치가 모두 끝났습니다!
-      </div>
-    );
 
   return (
     <>
@@ -89,6 +82,11 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
           &#8635;
         </button>
       </div>
+      {nowHour >= lastGameHour + 1 && (
+        <div className={styles.matchAllClosed}>
+          ❌ 오늘의 매치가 모두 끝났습니다! ❌
+        </div>
+      )}
       <div className={styles.matchBoardList}>
         {matchBoards.map((matchSlots, i) => {
           const slotsTime = new Date(matchSlots[0].time);
