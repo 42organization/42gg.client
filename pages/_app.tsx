@@ -4,11 +4,11 @@ import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { RecoilRoot } from 'recoil';
+import ErrorChecker from 'components/error/ErrorChecker';
+import LoginChecker from 'components/LoginChecker';
 import Layout from 'components/Layout/Layout';
 import 'styles/globals.css';
 import * as gtag from 'lib/gtag';
-import ErrorChecker from 'components/error/ErrorChecker';
-import LoginChecker from 'components/LoginChecker';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();

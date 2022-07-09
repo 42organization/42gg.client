@@ -16,10 +16,10 @@ import Header from './Header';
 import Footer from './Footer';
 import CurrentMatchInfo from './CurrentMatchInfo';
 import Modal from 'components/modal/Modal';
+import WelcomeModal from 'components/modal/WelcomeModal';
 import InputScoreModal from 'components/modal/InputScoreModal';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/Layout.module.scss';
-import WelcomeModal from 'components/modal/WelcomeModal';
 
 type AppLayoutProps = {
   children: React.ReactNode;
