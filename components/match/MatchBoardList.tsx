@@ -64,7 +64,7 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   const getScrollCurrentRef = (slotsHour: Number) => {
     if (nowHour === lastGameHour && slotsHour === nowHour) return currentRef;
     if (slotsHour === nowHour + 1) return currentRef;
-    else null;
+    return null;
   };
 
   return (
