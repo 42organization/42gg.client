@@ -33,14 +33,17 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
     showMenuBarHandler();
   };
 
-  const goToAdminPage = () => {
-    instance
-      .get('/admin')
-      .then(
-        () =>
-          (window.location.href = `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/admin`)
-      )
-      .catch(() => alert('관리자가 아닙니다!'));
+  const goToAdminPage = async () => {
+    try {
+      await instance
+        .get('/admin')
+        .then(
+          () =>
+            (window.location.href = `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/admin`)
+        );
+    } catch (e) {
+      alert('👊 콱 씨...!');
+    }
   };
 
   return (
