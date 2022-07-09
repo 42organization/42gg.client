@@ -35,12 +35,8 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
 
   const goToAdminPage = async () => {
     try {
-      await instance
-        .get('/admin')
-        .then(
-          () =>
-            (window.location.href = `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/admin`)
-        );
+      await instance.get('/admin');
+      window.location.href = `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/admin`;
     } catch (e) {
       alert('👊 콱 씨...!');
     }
