@@ -15,7 +15,7 @@ export default function NotiItem({ data, showNotiBarHandler }: NotiItemProps) {
   const makeEnemyUsers = (enemyTeam: string[]) => {
     return enemyTeam.map((intraId: string, i: number) => (
       <span key={intraId} onClick={showNotiBarHandler}>
-        <Link href={`/users/${intraId}`}>{intraId}</Link>
+        <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
         {data.enemyTeam && i < data.enemyTeam.length - 1 ? ', ' : ''}
       </span>
     ));

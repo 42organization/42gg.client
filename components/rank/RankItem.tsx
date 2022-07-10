@@ -19,7 +19,7 @@ export default function RankItem({ myIntraId, index, user, isMain }: RankType) {
         <div className={styles.mainData}>
           <div className={styles.rank}>{rankStr}</div>
           <div className={styles.intraId}>
-            <Link href={`/users/${intraId}`}>
+            <Link href={`/users/detail?intraId=${intraId}`}>
               <span>{intraId} </span>
             </Link>
           </div>
@@ -40,10 +40,10 @@ export default function RankItem({ myIntraId, index, user, isMain }: RankType) {
               {rankStr}
             </div>
             <div className={styles.intraId}>
-              <Link href={`/users/${intraId}`}>
+              <Link href={`/users/detail?intraId=${intraId}`}>
                 <span>{intraId} </span>
               </Link>
-              <Link href={`/users/${intraId}`}>
+              <Link href={`/users/detail?intraId=${intraId}`}>
                 <span className={styles.ppp}>({ppp})</span>
               </Link>
             </div>

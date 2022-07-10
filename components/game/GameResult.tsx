@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import GameResultList from 'components/game/GameResultList';
 
-export default function GameResult() {
+interface GameResult {
+  intraId?: string;
+}
+
+export default function GameResult({ intraId }: GameResult) {
   const queryClient = new QueryClient();
   const [path, setPath] = useState<string>();
   const router = useRouter();
@@ -13,7 +17,7 @@ export default function GameResult() {
     } else if (router.asPath === '/game') {
       setPath(`/pingpong/games?count=10&status=end&gameId=`);
     } else {
-      setPath(`/pingpong${router.asPath}/games?count=5&status=end&gameId=`);
+      setPath(`/pingpong/users/${intraId}/games?count=5&status=end&gameId=`);
     }
   }, [router.asPath]);
 
