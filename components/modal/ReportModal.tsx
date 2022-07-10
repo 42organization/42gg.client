@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
-import { reportModalState } from 'utils/recoil/layout';
+import { showMenuBarState, reportModalState } from 'utils/recoil/layout';
 import instance from 'utils/axios';
 import styles from 'styles/modal/ReportModal.module.scss';
 
@@ -17,6 +17,7 @@ export default function ReportModal() {
   });
   const setErrorMessage = useSetRecoilState(errorState);
   const setReportModal = useSetRecoilState(reportModalState);
+  const setShowMenuBar = useSetRecoilState(showMenuBarState);
 
   const inputChangeHandler = ({
     target: { name, value },
@@ -35,6 +36,7 @@ export default function ReportModal() {
       try {
         await instance.post('/pingpong/feedback', body);
         setReportModal(false);
+        setShowMenuBar(false);
         alert('신고가 완료되었습니다.');
       } catch (e) {
         setErrorMessage('JH06');
