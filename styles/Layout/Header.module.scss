@@ -18,12 +18,14 @@
     }
   }
   #logo {
-    @include logoTitle(0.25rem);
-    cursor: pointer;
-    flex: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    div {
+      @include logoTitle(0.25rem);
+      cursor: pointer;
+      flex: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
   .headerRight {
     flex: 2;
