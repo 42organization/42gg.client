@@ -3,8 +3,10 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { UserData } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
 import { logoutModalState } from 'utils/recoil/login';
+import { reportModalState } from 'utils/recoil/layout';
 import Modal from 'components/modal/Modal';
 import LogoutModal from 'components/modal/LogoutModal';
+import ReportModal from 'components/modal/ReportModal';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
@@ -15,7 +17,9 @@ type MenuBarProps = {
 export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
   const userData = useRecoilValue<UserData>(userState);
   const [openLogoutModal, setOpenLogoutModal] =
-    useRecoilState<boolean>(logoutModalState);
+    useRecoilState(logoutModalState);
+  const [openReportModal, setOpenReportModal] =
+    useRecoilState(reportModalState);
   const router = useRouter();
 
   const MenuPathHandler = (path: string) => {
@@ -49,6 +53,11 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
           <LogoutModal />
         </Modal>
       )}
+      {openReportModal && (
+        <Modal>
+          <ReportModal />
+        </Modal>
+      )}
       <div className={styles.backdrop} onClick={closeMenubarHandler}>
         <div className={styles.container} onClick={(e) => e.stopPropagation()}>
           <button onClick={closeMenubarHandler}>&#10005;</button>
@@ -75,8 +84,17 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
                 페이지 가이드
               </div>
               <div onClick={() => MenuPathHandler('manual')}>경기 매뉴얼</div>
+              {userData.isAdmin ? (
+                <div onClick={goToAdminPage}>😎 관리자</div>
+              ) : (
+                <div
+                  className={styles.reportButton}
+                  onClick={() => setOpenReportModal(true)}
+                >
+                  신고하기
+                </div>
+              )}
               <div onClick={logoutModalHandler}>로그아웃</div>
-              {userData.isAdmin && <div onClick={goToAdminPage}>😎 관리자</div>}
             </div>
           </nav>
         </div>

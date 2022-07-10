@@ -1,0 +1,67 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modal-container;
+  align-items: stretch;
+}
+
+.emoji {
+  text-align: center;
+  font-size: $giant-big-font;
+  margin-bottom: 0.5rem;
+}
+
+.phrase {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #fff;
+  font-size: 2.2rem;
+  letter-spacing: 0.1rem;
+  font-family: $title-font;
+  text-shadow: $text-shadow;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  div {
+    flex-direction: row;
+    margin-bottom: 0.5rem;
+    label {
+      margin-left: 0.5rem;
+      color: black;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background-color: white;
+  border-radius: $small-radius;
+  border: solid $pp-blue 1px;
+  margin-bottom: 1rem;
+  width: 15rem;
+  padding: 0.3rem;
+  textarea {
+    border: none;
+    height: 3rem;
+    resize: none;
+    margin-bottom: 0.2rem;
+  }
+  :focus {
+    outline: none;
+  }
+  div {
+    display: flex;
+    justify-content: flex-end;
+    color: $dark-gray;
+    font-size: $small-font;
+  }
+}
+
+.buttons {
+  @include select-buttons(7rem);
+}
