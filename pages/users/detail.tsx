@@ -23,9 +23,9 @@ export default function user() {
       {typeof intraId === 'string' && (
         <>
           <h1 className={styles.title}>{intraId}</h1>
-          <Profile intraId={intraId}></Profile>
-          <Chart intraId={intraId}></Chart>
-          <GameResult />
+          <Profile intraId={intraId} />
+          <Chart intraId={intraId} />
+          <GameResult intraId={intraId} />
         </>
       )}
       {isEditProfile && (

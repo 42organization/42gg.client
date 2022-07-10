@@ -109,7 +109,7 @@ function makeMessage(time: string, isMatched: boolean) {
 function makeEnemyTeamInfo(enemyTeam: string[]) {
   const enemyUsers = enemyTeam.map((intraId: string, i: number) => (
     <span key={intraId} id={styles.enemyUsers}>
-      <Link href={`/users/${intraId}`}>{intraId}</Link>
+      <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
       {i < enemyTeam.length - 1 ? ', ' : ''}
     </span>
   ));

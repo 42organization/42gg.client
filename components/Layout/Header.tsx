@@ -57,7 +57,7 @@ export default function Header() {
               <VscBell />
             )}
           </div>
-          <Link href={`/users/${userData.intraId}`}>
+          <Link href={`/users/detail?intraId=${userData.intraId}`}>
             <div className={styles.userImage}>
               {userData.userImageUri && (
                 <Image

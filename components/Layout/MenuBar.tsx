@@ -56,7 +56,11 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
             <div className={styles.menu}>
               <div onClick={() => MenuPathHandler('rank')}>랭킹</div>
               <div onClick={() => MenuPathHandler('game')}>최근 경기</div>
-              <div onClick={() => MenuPathHandler(`users/${userData.intraId}`)}>
+              <div
+                onClick={() =>
+                  MenuPathHandler(`users/detail?intraId=${userData.intraId}`)
+                }
+              >
                 내 정보
               </div>
             </div>
@@ -64,7 +68,7 @@ export default function MenuBar({ showMenuBarHandler }: MenuBarProps) {
               <div
                 onClick={() =>
                   window.open(
-                    'https://github.com/42organization/42arcade.gg.client#주요-기능-소개'
+                    'https://github.com/42organization/42arcade.gg.client/wiki/42gg.kr--%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B0%80%EC%9D%B4%EB%93%9C'
                   )
                 }
               >
