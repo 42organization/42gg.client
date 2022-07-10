@@ -18,6 +18,14 @@ export default function ReportModal() {
   const setErrorMessage = useSetRecoilState(errorState);
   const setReportModal = useSetRecoilState(reportModalState);
   const setShowMenuBar = useSetRecoilState(showMenuBarState);
+  const reportCategory = [
+    { id: 'GAMERESULT', label: '게임 결과 정정 요청' },
+    { id: 'BUG', label: '버그 신고' },
+    { id: 'COMPLAINT', label: '불편 사항' },
+    { id: 'OPINION', label: '의견 제시' },
+    { id: 'CHEERS', label: '응원의 한 마디' },
+    { id: 'ETC', label: '기타' },
+  ];
 
   const inputChangeHandler = ({
     target: { name, value },
@@ -54,66 +62,18 @@ export default function ReportModal() {
       </div>
       <form>
         <div className={styles.category}>
-          <div>
-            <input
-              type='radio'
-              name='category'
-              id='gameResult'
-              value='GAMERESULT'
-              onChange={inputChangeHandler}
-            />
-            <label htmlFor='gameResult'>게임 결과 정정 요청</label>
-          </div>
-          <div>
-            <input
-              type='radio'
-              name='category'
-              id='bug'
-              value='BUG'
-              onChange={inputChangeHandler}
-            />
-            <label htmlFor='bug'>버그 신고</label>
-          </div>
-          <div>
-            <input
-              type='radio'
-              name='category'
-              id='complaint'
-              value='COMPLAINT'
-              onChange={inputChangeHandler}
-            />
-            <label htmlFor='complaint'>불편 사항</label>
-          </div>
-          <div>
-            <input
-              type='radio'
-              name='category'
-              id='opinion'
-              value='OPINION'
-              onChange={inputChangeHandler}
-            />
-            <label htmlFor='opinion'>의견 제시</label>
-          </div>
-          <div>
-            <input
-              type='radio'
-              name='category'
-              id='cheers'
-              value='CHEERS'
-              onChange={inputChangeHandler}
-            />
-            <label htmlFor='cheers'>응원의 한 마디</label>
-          </div>
-          <div>
-            <input
-              type='radio'
-              name='category'
-              id='etc'
-              value='ETC'
-              onChange={inputChangeHandler}
-            />
-            <label htmlFor='etc'>기타</label>
-          </div>
+          {reportCategory.map((category, index) => (
+            <div key={index}>
+              <input
+                type='radio'
+                name='category'
+                id={category.id}
+                value={category.id}
+                onChange={inputChangeHandler}
+              />
+              <label htmlFor={category.id}>{category.label}</label>
+            </div>
+          ))}
         </div>
         <div className={styles.content}>
           <textarea
