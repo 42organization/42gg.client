@@ -17,9 +17,9 @@ export default function RankList() {
   const setErrorMessage = useSetRecoilState(errorState);
   const router = useRouter();
   const path =
-    router.asPath !== '/rank'
-      ? `/pingpong/ranks/single?count=3`
-      : `/pingpong/ranks/single?page=${page}`;
+    router.asPath === '/'
+      ? `/pingpong/ranks/single?page=${page}`
+      : `/pingpong/ranks/single?count=3`;
 
   useEffect(() => {
     if (isScroll) {
