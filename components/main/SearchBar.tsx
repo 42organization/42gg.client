@@ -62,6 +62,8 @@ export default function SearchBar() {
           onChange={keywordHandler}
           onFocus={() => setShowDropDown(true)}
           placeholder='유저 검색하기'
+          maxLength={15}
+          value={keyword}
         />
         <div className={styles.buttons}>
           {keyword && (

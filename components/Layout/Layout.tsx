@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { UserData, LiveData } from 'types/mainType';
 import {
-  showMenuBarState,
-  showNotiBarState,
+  menuBarState,
+  notiBarState,
   userState,
   liveState,
   newLoginState,
@@ -33,8 +33,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
   );
   const newLogin = useRecoilValue(newLoginState);
   const setErrorMessage = useSetRecoilState(errorState);
-  const setShowMenuBar = useSetRecoilState(showMenuBarState);
-  const setShowNotiBar = useSetRecoilState(showNotiBarState);
+  const setOpenMenuBar = useSetRecoilState(menuBarState);
+  const setOpenNotiBar = useSetRecoilState(notiBarState);
   const router = useRouter();
   const presentPath = router.asPath;
 
@@ -43,8 +43,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }, []);
 
   useEffect(() => {
-    setShowMenuBar(false);
-    setShowNotiBar(false);
+    setOpenMenuBar(false);
+    setOpenNotiBar(false);
   }, [presentPath]);
 
   useEffect(() => {
