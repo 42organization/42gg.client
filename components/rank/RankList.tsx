@@ -17,7 +17,7 @@ export default function RankList() {
   const setErrorMessage = useSetRecoilState(errorState);
   const router = useRouter();
   const path =
-    router.asPath !== '/rank'
+    router.asPath === '/'
       ? `/pingpong/ranks/single?count=3`
       : `/pingpong/ranks/single?page=${page}`;
 
