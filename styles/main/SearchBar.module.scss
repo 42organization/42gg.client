@@ -11,26 +11,19 @@
   justify-content: space-between;
   padding: 0 0.8rem;
   margin: 1rem 0.8rem 0;
-  .placeHolder {
-    display: flex;
-    width: 100%;
-    span {
-      display: flex;
-      align-items: center;
-      font-size: 1.1rem;
-      margin-right: 0.8rem;
-    }
-    input {
-      all: unset;
-      width: calc(100% - 4rem);
-    }
+  input {
+    all: unset;
+    width: calc(100% - 4rem);
   }
-  .resetButton {
-    cursor: pointer;
+  .icons {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     font-size: 1.2rem;
+    .reset {
+      cursor: pointer;
+      color: gray;
+    }
   }
 }
 

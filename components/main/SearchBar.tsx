@@ -59,23 +59,24 @@ export default function SearchBar() {
   return (
     <div ref={searchBarRef}>
       <div className={styles.searchBar}>
-        <div className={styles.placeHolder}>
-          {!keyword && (
+        <input
+          type='text'
+          onChange={keywordHandler}
+          onFocus={() => setShowDropDown(true)}
+          placeholder='유저 검색하기'
+          maxLength={15}
+          value={keyword}
+        />
+        <div className={styles.icons}>
+          {keyword ? (
+            <span className={styles.reset} onClick={() => setKeyword('')}>
+              <IoIosCloseCircle />
+            </span>
+          ) : (
             <span>
               <GoSearch />
             </span>
           )}
-          <input
-            type='text'
-            onChange={keywordHandler}
-            onFocus={() => setShowDropDown(true)}
-            placeholder='유저 검색하기'
-            maxLength={15}
-            value={keyword}
-          />
-        </div>
-        <div className={styles.resetButton} onClick={() => setKeyword('')}>
-          {keyword && <IoIosCloseCircle style={{ color: 'gray' }} />}
         </div>
         {showDropDown && keyword && (
           <div className={styles.dropdown}>
