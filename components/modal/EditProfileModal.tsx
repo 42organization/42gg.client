@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { profileInfoState, isEditProfileState } from 'utils/recoil/user';
+import { profileInfoState, editProfileModalState } from 'utils/recoil/user';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import styles from 'styles/user/Profile.module.scss';
@@ -13,7 +13,7 @@ interface EditedProfile {
 const CHAR_LIMIT = 30;
 
 export default function EditProfileModal() {
-  const setIsEditProfile = useSetRecoilState(isEditProfileState);
+  const setIsEditProfile = useSetRecoilState(editProfileModalState);
   const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
   const setErrorMessage = useSetRecoilState(errorState);
   const [editedProfile, setEditedProfile] = useState<EditedProfile>({

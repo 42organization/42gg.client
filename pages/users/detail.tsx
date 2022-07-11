@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
-import { isEditProfileState } from 'utils/recoil/user';
+import { editProfileModalState } from 'utils/recoil/user';
 import Chart from 'components/user/Chart';
 import Profile from 'components/user/Profile';
 import EditProfileModal from 'components/modal/EditProfileModal';
@@ -12,7 +12,9 @@ import { useEffect } from 'react';
 export default function user() {
   const router = useRouter();
   const { intraId } = router.query;
-  const [isEditProfile, setIsEditProfile] = useRecoilState(isEditProfileState);
+  const [isEditProfile, setIsEditProfile] = useRecoilState(
+    editProfileModalState
+  );
 
   useEffect(() => {
     return setIsEditProfile(false);
