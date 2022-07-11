@@ -15,10 +15,10 @@ export default function MyRank() {
       {myRank && (
         <div className={styles.myRank}>
           {myRank === -1 ? (
-            <span> 💡 나의 순위가 정해지지 않았습니다 💡</span>
+            <span>💡 나의 순위가 정해지지 않았습니다 💡</span>
           ) : (
-            <div onClick={onClick}>
-              🚀🚀 <span>나의 순위 {myRank}위 </span>
+            <div>
+              🚀🚀 <span onClick={onClick}>나의 순위 {myRank}위 </span>
               바로가기 🚀🚀
             </div>
           )}
