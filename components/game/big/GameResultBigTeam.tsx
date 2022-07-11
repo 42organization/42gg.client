@@ -14,7 +14,6 @@ export default function GameResultBigTeam({ team }: gameResultTypes) {
       <div className={styles.userImage}>
         {team.players.map((player, index) => (
           <Image
-            className={styles.bigImageCursor}
             key={index}
             src={player.userImageUri}
             alt='prfImg'
