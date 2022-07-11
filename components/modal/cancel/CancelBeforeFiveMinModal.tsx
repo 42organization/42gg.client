@@ -1,12 +1,12 @@
 import { useSetRecoilState } from 'recoil';
+import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/CancelModal.module.scss';
-import { cancelModalState } from 'utils/recoil/match';
 
 export default function CancelBeforeFiveMinModal() {
-  const setOpenModal = useSetRecoilState(cancelModalState);
+  const setModalInfo = useSetRecoilState(modalState);
 
   const onReturn = () => {
-    setOpenModal(false);
+    setModalInfo({ modalName: null });
   };
 
   return (

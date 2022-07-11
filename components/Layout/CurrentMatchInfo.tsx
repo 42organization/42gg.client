@@ -2,15 +2,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import Modal from 'components/modal/Modal';
-import CancelControll from 'components/modal/cancel/CancelControll';
+import { matchRefreshBtnState, currentMatchInfo } from 'utils/recoil/match';
 import { liveState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
-import {
-  cancelModalState,
-  matchRefreshBtnState,
-  currentMatchInfo,
-} from 'utils/recoil/match';
+import { modalState } from 'utils/recoil/modal';
 import { gameTimeToString, isBeforeMin } from 'utils/handleTime';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
@@ -19,13 +14,12 @@ export default function CurrentMatchInfo() {
   const [currentMatch, setCurrentMatch] = useRecoilState(currentMatchInfo);
   const { isMatched, enemyTeam, time, slotId } = currentMatch;
   const [enemyTeamInfo, setEnemyTeamInfo] = useState(<></>);
-  const matchingMessage = time && makeMessage(time, isMatched);
   const [matchRefreshBtn, setMatchRefreshBtn] =
     useRecoilState(matchRefreshBtnState);
-  const [openCancelModal, setOpenCancelModal] =
-    useRecoilState(cancelModalState);
+  const setModalInfo = useSetRecoilState(modalState);
   const setErrorMessage = useSetRecoilState(errorState);
   const setLiveData = useSetRecoilState(liveState);
+  const matchingMessage = time && makeMessage(time, isMatched);
   const presentPath = useRouter().asPath;
 
   useEffect(() => {
@@ -33,7 +27,7 @@ export default function CurrentMatchInfo() {
   }, []);
 
   useEffect(() => {
-    setOpenCancelModal(false);
+    setModalInfo({ modalName: null });
   }, [presentPath]);
 
   useEffect(() => {
@@ -57,16 +51,14 @@ export default function CurrentMatchInfo() {
   };
 
   const onCancel = () => {
-    setOpenCancelModal(true);
+    setModalInfo({
+      modalName: 'MATCH-CANCEL',
+      cancelInfo: { slotId, time, enemyTeam },
+    });
   };
 
   return (
     <>
-      {openCancelModal && (
-        <Modal>
-          <CancelControll slotId={slotId} time={time} enemyTeam={enemyTeam} />
-        </Modal>
-      )}
       <div className={styles.container}>
         <div className={styles.stringWrapper}>
           <div className={styles.icon}> ⏰ </div>

@@ -1,15 +1,16 @@
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
-import { loginState, logoutModalState } from 'utils/recoil/login';
+import { loginState } from 'utils/recoil/login';
+import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/LogoutModal.module.scss';
 
 export default function LogoutModal() {
-  const setOpenModal = useSetRecoilState(logoutModalState);
   const setIsLoggedIn = useSetRecoilState(loginState);
+  const setModalInfo = useSetRecoilState(modalState);
   const router = useRouter();
 
   const onReturn = () => {
-    setOpenModal(false);
+    setModalInfo({ modalName: null });
   };
 
   const onLogout = () => {

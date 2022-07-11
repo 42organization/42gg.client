@@ -19,10 +19,3 @@ export interface MatchData {
   intervalMinute: number;
   matchBoards: Slots[];
 }
-
-export interface EnrollInfo {
-  slotId: number;
-  type: string;
-  startTime: Date;
-  endTime: Date;
-}

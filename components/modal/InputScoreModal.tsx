@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { PlayerInfo, GameResult } from 'types/scoreTypes';
 import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/modal/InputScoreModal.module.scss';
 
@@ -17,6 +18,7 @@ export default function InputScoreModal() {
   const [result, setResult] = useState<GameResult>(defaultResult);
   const [onCheck, setOnCheck] = useState<boolean>(false);
   const setErrorMessage = useSetRecoilState(errorState);
+  const setModalInfo = useSetRecoilState(modalState);
 
   useEffect(() => {
     (async () => {
@@ -66,8 +68,10 @@ export default function InputScoreModal() {
       const res = await instance.post(`/pingpong/games/result`, result);
       if (res?.status === 201) {
         alert('결과 입력이 완료되었습니다.');
+        setModalInfo({ modalName: null });
       } else if (res?.status === 202) {
         alert('상대가 이미 점수를 입력했습니다.');
+        setModalInfo({ modalName: null });
       }
     } catch (e) {
       setErrorMessage('JH04');

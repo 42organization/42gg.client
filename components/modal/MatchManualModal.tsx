@@ -1,20 +1,22 @@
-import { useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
-import { matchModalState } from 'utils/recoil/match';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from 'utils/recoil/modal';
+
 import styles from 'styles/modal/MatchManualModal.module.scss';
 
 type ManualProps = {
   isPage: boolean;
 };
 export default function MatchManualModal({ isPage }: ManualProps) {
+  const setModalInfo = useSetRecoilState(modalState);
   const router = useRouter();
-  const setMatchModal = useSetRecoilState(matchModalState);
 
   const onReturn = () => {
     if (isPage) {
       router.push(`/`);
     } else {
-      setMatchModal(null);
+      setModalInfo({ modalName: null });
+      document.body.style.overflow = 'unset';
     }
   };
 

@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
-import { editProfileModalState, profileInfoState } from 'utils/recoil/user';
+import { profileInfoState } from 'utils/recoil/user';
 import { userState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/user/Profile.module.scss';
 
@@ -13,8 +14,8 @@ interface ProfileProps {
 
 export default function Profile({ intraId }: ProfileProps) {
   const userData = useRecoilValue(userState);
-  const setIsEditProfile = useSetRecoilState(editProfileModalState);
   const setErrorMessage = useSetRecoilState(errorState);
+  const setModalInfo = useSetRecoilState(modalState);
   const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ export default function Profile({ intraId }: ProfileProps) {
     profileInfo;
 
   const startEditHandler = () => {
-    setIsEditProfile(true);
+    setModalInfo({ modalName: 'USER-PROFILE_EDIT' });
   };
 
   return (

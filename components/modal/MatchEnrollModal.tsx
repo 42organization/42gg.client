@@ -1,22 +1,19 @@
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { enrollInfoState, matchModalState } from 'utils/recoil/match';
+import { useSetRecoilState } from 'recoil';
 import { gameTimeToString } from 'utils/handleTime';
-import { EnrollInfo } from 'types/matchTypes';
 import { errorState } from 'utils/recoil/error';
-import Modal from './Modal';
+import { modalState } from 'utils/recoil/modal';
+import { EnrollInfo } from 'types/modalTypes';
 import instance from 'utils/axios';
 import styles from 'styles/modal/MatchEnrollModal.module.scss';
 
-export default function MatchEnrollModal() {
+export default function MatchEnrollModal({
+  slotId,
+  type,
+  startTime,
+  endTime,
+}: EnrollInfo) {
   const setErrorMessage = useSetRecoilState(errorState);
-  const setMatchModal = useSetRecoilState(matchModalState);
-  const [enrollInfo, setEnrollInfo] = useRecoilState<EnrollInfo | null>(
-    enrollInfoState
-  );
-
-  if (!enrollInfo) return null;
-
-  const { slotId, type, startTime, endTime } = enrollInfo;
+  const setModalInfo = useSetRecoilState(modalState);
 
   const onEnroll = async () => {
     try {
@@ -31,41 +28,37 @@ export default function MatchEnrollModal() {
       else if (e.response.data.code === 'SC003')
         alert('경기 취소 후 1분 동안 경기를 예약할 수 없습니다.');
       else {
-        setMatchModal(null);
-        setEnrollInfo(null);
+        setModalInfo({ modalName: null });
         setErrorMessage('JH05');
         return;
       }
     }
-    setMatchModal(null);
-    setEnrollInfo(null);
+    setModalInfo({ modalName: null });
+
     window.location.reload();
   };
 
   const onCancel = () => {
-    setMatchModal(null);
-    setEnrollInfo(null);
+    setModalInfo({ modalName: null });
   };
 
   return (
-    <Modal>
-      <div className={styles.container}>
-        <div className={styles.phrase}>
-          <div className={styles.emoji}>🏓</div>
-          <div className={styles.time}>
-            {gameTimeToString(startTime)} - {gameTimeToString(endTime)}
-          </div>
-          <div>경기에 참여하시겠습니까?</div>
+    <div className={styles.container}>
+      <div className={styles.phrase}>
+        <div className={styles.emoji}>🏓</div>
+        <div className={styles.time}>
+          {gameTimeToString(startTime)} - {gameTimeToString(endTime)}
         </div>
-        <div className={styles.buttons}>
-          <div className={styles.negative}>
-            <input onClick={onCancel} type='button' value='취소' />
-          </div>
-          <div className={styles.positive}>
-            <input onClick={onEnroll} type='button' value='확인' />
-          </div>
+        <div>경기에 참여하시겠습니까?</div>
+      </div>
+      <div className={styles.buttons}>
+        <div className={styles.negative}>
+          <input onClick={onCancel} type='button' value='취소' />
+        </div>
+        <div className={styles.positive}>
+          <input onClick={onEnroll} type='button' value='확인' />
         </div>
       </div>
-    </Modal>
+    </div>
   );
 }

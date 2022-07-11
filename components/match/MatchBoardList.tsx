@@ -4,7 +4,7 @@ import MatchBoard from './MatchBoard';
 import { MatchData } from 'types/matchTypes';
 import { matchRefreshBtnState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
-import { matchModalState } from 'utils/recoil/match';
+import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/match/MatchBoardList.module.scss';
 
@@ -16,9 +16,10 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   const [matchData, setMatchData] = useState<MatchData | null>(null);
   const [refreshBtnAnimation, setRefreshBtnAnimation] =
     useState<boolean>(false);
-  const setMatchModal = useSetRecoilState(matchModalState);
   const setMatchRefreshBtn = useSetRecoilState(matchRefreshBtnState);
   const setErrorMessage = useSetRecoilState(errorState);
+  const setModalInfo = useSetRecoilState(modalState);
+
   const currentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -53,7 +54,8 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
   const nowHour = new Date().getHours();
 
   const manualPageHandler = () => {
-    setMatchModal('manual');
+    setModalInfo({ modalName: 'MATCH-MANUAL' });
+    document.body.style.overflow = 'hidden';
   };
 
   const refreshBtnHandler = () => {

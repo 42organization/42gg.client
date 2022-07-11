@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
-import { menuBarState, reportModalState } from 'utils/recoil/layout';
+import { menuBarState } from 'utils/recoil/layout';
+import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/modal/ReportModal.module.scss';
 
@@ -14,10 +15,10 @@ export default function ReportModal() {
   const [reportData, setReportData] = useState<ReportInfo>({
     category: '',
     content: '',
-  });
+  }); // TODO report 로 처리해야하는 이유?
+  const setModalInfo = useSetRecoilState(modalState);
   const setErrorMessage = useSetRecoilState(errorState);
   const setOpenMenuBar = useSetRecoilState(menuBarState);
-  const setOpenReportModal = useSetRecoilState(reportModalState);
   const reportCategory = [
     { id: 'GAMERESULT', label: '게임 결과 정정 요청' },
     { id: 'BUG', label: '버그 신고' },
@@ -43,7 +44,7 @@ export default function ReportModal() {
       const body = reportData;
       try {
         await instance.post('/pingpong/feedback', body);
-        setOpenReportModal(false);
+        setModalInfo({ modalName: null });
         setOpenMenuBar(false);
         alert('신고가 완료되었습니다.');
       } catch (e) {
@@ -87,9 +88,7 @@ export default function ReportModal() {
           <div className={styles.negative}>
             <input
               type='button'
-              onClick={() => {
-                setOpenReportModal(false);
-              }}
+              onClick={() => setModalInfo({ modalName: null })}
               value='취소'
             />
           </div>

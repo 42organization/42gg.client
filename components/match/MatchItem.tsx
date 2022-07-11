@@ -1,13 +1,8 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { Slot, EnrollInfo } from 'types/matchTypes';
-import {
-  cancelModalState,
-  enrollInfoState,
-  matchModalState,
-} from 'utils/recoil/match';
+import { Slot } from 'types/matchTypes';
 import { errorState } from 'utils/recoil/error';
 import { liveState } from 'utils/recoil/layout';
-import { currentMatchInfo } from 'utils/recoil/match';
+import { modalState } from 'utils/recoil/modal';
 import { fillZero } from 'utils/handleTime';
 import instance from 'utils/axios';
 import styles from 'styles/match/MatchItem.module.scss';
@@ -23,12 +18,10 @@ export default function MatchItem({
   slot,
   intervalMinute,
 }: MatchItemProps) {
-  const setEnrollInfo = useSetRecoilState<EnrollInfo | null>(enrollInfoState);
-  const setMatchModal = useSetRecoilState(matchModalState);
-  const setOpenCancelModal = useSetRecoilState<boolean>(cancelModalState);
   const setErrorMessage = useSetRecoilState(errorState);
-  const setCurrentMatch = useSetRecoilState(currentMatchInfo);
+  const setModalInfo = useSetRecoilState(modalState);
   const liveData = useRecoilValue(liveState);
+
   const { headCount, slotId, status, time } = slot;
   const headMax = type === 'single' ? 2 : 4;
   const startTime = new Date(time);
@@ -40,21 +33,23 @@ export default function MatchItem({
   const enrollHandler = async () => {
     if (status === 'mytable') {
       try {
-        const res = await instance.get(`/pingpong/match/current`);
-        setCurrentMatch(res?.data);
+        const res = await instance.get(`/pingpong/match/current`); // TODO
+        if (res?.data) {
+          const { slotId, time, enemyTeam } = res.data;
+          setModalInfo({
+            modalName: 'MATCH-CANCEL',
+            cancelInfo: { slotId, time, enemyTeam },
+          });
+        }
       } catch (e) {
         setErrorMessage('JB03');
       }
-      setOpenCancelModal(true);
     } else if (liveData.event === 'match') {
-      setMatchModal('reject');
+      setModalInfo({ modalName: 'MATCH-REJECT' });
     } else {
-      setMatchModal('enroll');
-      setEnrollInfo({
-        slotId,
-        type,
-        startTime,
-        endTime,
+      setModalInfo({
+        modalName: 'MATCH-ENROLL',
+        enrollInfo: { slotId, type, startTime, endTime },
       });
     }
   };

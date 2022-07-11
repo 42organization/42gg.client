@@ -21,13 +21,3 @@ export const notiBarState = atom<boolean>({
   key: `notiBarState/${v1()}`,
   default: false,
 });
-
-export const newLoginState = atom<boolean>({
-  key: `newLoginState/${v1()}`,
-  default: false,
-});
-
-export const reportModalState = atom<boolean>({
-  key: `reportModalState/${v1()}`,
-  default: false,
-});
