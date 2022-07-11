@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
-  showMenuBarState,
-  showNotiBarState,
+  menuBarState,
+  notiBarState,
   userState,
   liveState,
 } from 'utils/recoil/layout';
@@ -17,38 +17,30 @@ import styles from 'styles/Layout/Header.module.scss';
 export default function Header() {
   const userData = useRecoilValue(userState);
   const [liveData, setLiveData] = useRecoilState(liveState);
-  const [showMenuBar, setShowMenuBar] = useRecoilState(showMenuBarState);
-  const [showNotiBar, setShowNotiBar] = useRecoilState(showNotiBarState);
+  const [openMenuBar, setOpenMenuBar] = useRecoilState(menuBarState);
+  const [openNotiBar, setOpenNotiBar] = useRecoilState(notiBarState);
   const router = useRouter();
 
-  const showMenuBarHandler = () => {
-    setShowNotiBar(false);
-    setShowMenuBar(!showMenuBar);
+  const openMenuBarHandler = () => {
+    setOpenMenuBar(!openMenuBar);
   };
 
-  const showNotiBarHandler = () => {
-    setShowMenuBar(false);
-    setShowNotiBar(!showNotiBar);
+  const openNotiBarHandler = () => {
+    setOpenNotiBar(!openNotiBar);
     setLiveData((prev) => ({ ...prev, notiCount: 0 }));
-  };
-
-  const gotoHomeHandler = () => {
-    setShowMenuBar(false);
-    setShowNotiBar(false);
-    router.push('/');
   };
 
   return (
     <div className={styles.headerContainer}>
       <div className={styles.headerWrap}>
-        <div className={styles.headerLeft} onClick={showMenuBarHandler}>
+        <div className={styles.headerLeft} onClick={openMenuBarHandler}>
           <FiMenu id={styles.menuIcon} />
         </div>
-        <div id={styles.logo} onClick={gotoHomeHandler}>
+        <div id={styles.logo} onClick={() => router.push('/')}>
           <div>42GG</div>
         </div>
         <div className={styles.headerRight}>
-          <div id={styles.notiIcon} onClick={showNotiBarHandler}>
+          <div id={styles.notiIcon} onClick={openNotiBarHandler}>
             {liveData.notiCount ? (
               <div className={styles.bellWhole}>
                 <VscBellDot />
@@ -73,8 +65,8 @@ export default function Header() {
           </Link>
         </div>
       </div>
-      {showMenuBar && <MenuBar showMenuBarHandler={showMenuBarHandler} />}
-      {showNotiBar && <NotiBar showNotiBarHandler={showNotiBarHandler} />}
+      {openMenuBar && <MenuBar />}
+      {openNotiBar && <NotiBar showNotiBarHandler={openNotiBarHandler} />}
     </div>
   );
 }

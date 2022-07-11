@@ -12,13 +12,13 @@ export const liveState = atom<LiveData>({
   default: { notiCount: 0, event: null },
 });
 
-export const showMenuBarState = atom<boolean>({
-  key: `showMenuBarState/${v1()}`,
+export const menuBarState = atom<boolean>({
+  key: `menuBarState/${v1()}`,
   default: false,
 });
 
-export const showNotiBarState = atom<boolean>({
-  key: `showNotiBarState/${v1()}`,
+export const notiBarState = atom<boolean>({
+  key: `notiBarState/${v1()}`,
   default: false,
 });
 

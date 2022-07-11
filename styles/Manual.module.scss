@@ -2,6 +2,7 @@
 
 .pageWrap {
   @include pageWrap;
+  height: calc(100vh - 8rem);
 }
 
 .container {
@@ -11,4 +12,6 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  justify-content: center;
+  height: 100%;
 }
