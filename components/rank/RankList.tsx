@@ -36,7 +36,7 @@ export default function RankList() {
       window.scrollTo({ top: ((myRank - 1) % 20) * 45, behavior: 'smooth' });
       setIsScroll(false);
     }
-  }, [rankData]);
+  }, [rankData, isScroll]);
 
   const getRankData = async () => {
     try {
