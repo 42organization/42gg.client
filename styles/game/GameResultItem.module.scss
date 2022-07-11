@@ -62,6 +62,7 @@
   align-items: center;
   .userImage {
     @include userImage(4.5rem);
+    cursor: pointer;
   }
   .userId {
     cursor: pointer;
