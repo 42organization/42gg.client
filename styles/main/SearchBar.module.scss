@@ -9,24 +9,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
+  padding: 0 0.8rem;
   margin: 1rem 0.8rem 0;
   input {
     all: unset;
     width: calc(100% - 4rem);
   }
-  .buttons {
-    display: flex;
-    align-items: center;
-    font-size: 1.2rem;
-    .resetBtn {
-      cursor: pointer;
-    }
+  .icons {
     span {
       display: flex;
       align-items: center;
-      margin: 0 0.2rem;
-      text-align: center;
+      font-size: 1.2rem;
+    }
+    .reset {
+      cursor: pointer;
+      color: gray;
     }
   }
 }

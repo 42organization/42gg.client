@@ -23,6 +23,8 @@ export default function SearchBar() {
       setSearchResult([]);
     } else if (checkId.test(keyword)) {
       debounce(getSearchResultHandler, 500)();
+    } else if (keyword.length && !checkId.test(keyword)) {
+      setSearchResult([]);
     }
   }, [keyword]);
 
@@ -65,20 +67,16 @@ export default function SearchBar() {
           maxLength={15}
           value={keyword}
         />
-        <div className={styles.buttons}>
-          {keyword && (
-            <span
-              className={styles.resetBtn}
-              onClick={() => {
-                setKeyword('');
-              }}
-            >
-              <IoIosCloseCircle style={{ color: 'gray' }} />
+        <div className={styles.icons}>
+          {keyword ? (
+            <span className={styles.reset} onClick={() => setKeyword('')}>
+              <IoIosCloseCircle />
+            </span>
+          ) : (
+            <span>
+              <GoSearch />
             </span>
           )}
-          <span>
-            <GoSearch />
-          </span>
         </div>
         {showDropDown && keyword && (
           <div className={styles.dropdown}>
