@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
-import { showMenuBarState, reportModalState } from 'utils/recoil/layout';
+import { menuBarState, reportModalState } from 'utils/recoil/layout';
 import instance from 'utils/axios';
 import styles from 'styles/modal/ReportModal.module.scss';
 
@@ -16,8 +16,8 @@ export default function ReportModal() {
     content: '',
   });
   const setErrorMessage = useSetRecoilState(errorState);
-  const setReportModal = useSetRecoilState(reportModalState);
-  const setShowMenuBar = useSetRecoilState(showMenuBarState);
+  const setOpenMenuBar = useSetRecoilState(menuBarState);
+  const setOpenReportModal = useSetRecoilState(reportModalState);
   const reportCategory = [
     { id: 'GAMERESULT', label: '게임 결과 정정 요청' },
     { id: 'BUG', label: '버그 신고' },
@@ -43,8 +43,8 @@ export default function ReportModal() {
       const body = reportData;
       try {
         await instance.post('/pingpong/feedback', body);
-        setReportModal(false);
-        setShowMenuBar(false);
+        setOpenReportModal(false);
+        setOpenMenuBar(false);
         alert('신고가 완료되었습니다.');
       } catch (e) {
         setErrorMessage('JH06');
@@ -88,7 +88,7 @@ export default function ReportModal() {
             <input
               type='button'
               onClick={() => {
-                setReportModal(false);
+                setOpenReportModal(false);
               }}
               value='취소'
             />

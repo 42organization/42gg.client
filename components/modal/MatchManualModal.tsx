@@ -17,6 +17,7 @@ export default function MatchManualModal({ isPage }: ManualProps) {
       setMatchModal(null);
     }
   };
+  console.log(isPage);
 
   return (
     <div className={styles.container}>
