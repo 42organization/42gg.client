@@ -8,6 +8,10 @@
   @include pageTitle;
 }
 
+.bigImageCursor {
+  cursor: pointer;
+}
+
 .smallContainer {
   cursor: pointer;
   border-radius: $midium-radius;

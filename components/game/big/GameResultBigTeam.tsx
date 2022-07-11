@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Team } from 'types/gameTypes';
 import styles from 'styles/game/GameResultItem.module.scss';
+import router from 'next/router';
 
 type gameResultTypes = {
   team: Team;
@@ -13,6 +14,7 @@ export default function GameResultBigTeam({ team }: gameResultTypes) {
       <div className={styles.userImage}>
         {team.players.map((player, index) => (
           <Image
+            className={styles.bigImageCursor}
             key={index}
             src={player.userImageUri}
             alt='prfImg'
@@ -20,6 +22,9 @@ export default function GameResultBigTeam({ team }: gameResultTypes) {
             objectFit='cover'
             sizes='30vw'
             quality='30'
+            onClick={() => {
+              router.push(`/users/detail?intraId=${player.intraId}`);
+            }}
           />
         ))}
       </div>
