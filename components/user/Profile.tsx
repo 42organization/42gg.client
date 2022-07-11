@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
-import { isEditProfileState, profileInfoState } from 'utils/recoil/user';
+import { editProfileModalState, profileInfoState } from 'utils/recoil/user';
 import { userState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
@@ -13,7 +13,7 @@ interface ProfileProps {
 
 export default function Profile({ intraId }: ProfileProps) {
   const userData = useRecoilValue(userState);
-  const setIsEditProfile = useSetRecoilState(isEditProfileState);
+  const setIsEditProfile = useSetRecoilState(editProfileModalState);
   const setErrorMessage = useSetRecoilState(errorState);
   const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
 
