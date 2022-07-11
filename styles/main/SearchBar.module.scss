@@ -16,10 +16,11 @@
     width: calc(100% - 4rem);
   }
   .icons {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    font-size: 1.2rem;
+    span {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+    }
     .reset {
       cursor: pointer;
       color: gray;
