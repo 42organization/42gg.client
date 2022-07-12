@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import { NotiData } from 'types/notiTypes';
 import { notiBarState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
@@ -11,7 +11,7 @@ export default function NotiBar() {
   const [notiData, setNotiData] = useState<NotiData[]>([]);
   const [clickRefreshBtn, setClickRefreshBtn] = useState(false);
   const [refreshBtnAnimation, setRefreshBtnAnimation] = useState(false);
-  const setOpenNotiBar = useSetRecoilState(notiBarState);
+  const resetOpenNotiBar = useResetRecoilState(notiBarState);
   const setErrorMessage = useSetRecoilState(errorState);
 
   useEffect(() => {
@@ -42,16 +42,16 @@ export default function NotiBar() {
     try {
       await instance.delete(`/pingpong/notifications`);
       alert('알림이 성공적으로 삭제되었습니다.');
-      setOpenNotiBar(false);
+      resetOpenNotiBar;
     } catch (e) {
       setErrorMessage('JB05');
     }
   };
 
   return (
-    <div className={styles.backdrop} onClick={() => setOpenNotiBar(false)}>
+    <div className={styles.backdrop} onClick={resetOpenNotiBar}>
       <div className={styles.container} onClick={(e) => e.stopPropagation()}>
-        <button onClick={() => setOpenNotiBar(false)}>&#10005;</button>
+        <button onClick={resetOpenNotiBar}>&#10005;</button>
         {notiData.length ? (
           <>
             <div className={styles.btnWrap}>
