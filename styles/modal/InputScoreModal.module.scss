@@ -6,7 +6,7 @@
 
 .phrase {
   @include modal-phrase;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-size: $midium-font;
 }
 
@@ -58,6 +58,11 @@
     height: 2.5rem;
     width: 5rem;
   }
+}
+
+.rules {
+  font-size: $midium-font;
+  margin-bottom: 1.4rem;
 }
 
 .buttons {
