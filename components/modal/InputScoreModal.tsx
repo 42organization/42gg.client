@@ -52,7 +52,7 @@ export default function InputScoreModal() {
       return false;
     }
     if (score1 === score2) {
-      alert('동점 입력은 불가합니다. 골든골로 승부를 결정해주세요!');
+      alert('동점 입력은 불가합니다. 1점내기로 승부를 결정해주세요!');
       return false;
     }
     return true;
