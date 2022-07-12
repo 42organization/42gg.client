@@ -5,7 +5,6 @@ import { menuBarState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/modal/ReportModal.module.scss';
-import { report } from 'process';
 
 interface ReportInfo {
   category: string;
@@ -43,7 +42,7 @@ export default function ReportModal() {
   const reportHandler = async () => {
     if (
       reportData.category &&
-      reportData.content.replace(/(\s*)/g, '').replaceAll(/(\n)/g, '')
+      reportData.content.replace(/(\s*)/g, '').replace(/(\n)/g, '')
     ) {
       const body = reportData;
       try {
