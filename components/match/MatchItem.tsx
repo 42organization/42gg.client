@@ -33,7 +33,7 @@ export default function MatchItem({
   const enrollHandler = async () => {
     if (status === 'mytable') {
       try {
-        const res = await instance.get(`/pingpong/match/current`); // TODO
+        const res = await instance.get(`/pingpong/match/current`);
         if (res?.data) {
           const { slotId, time, enemyTeam } = res.data;
           setModalInfo({

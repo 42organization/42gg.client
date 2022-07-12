@@ -15,7 +15,7 @@ export default function ReportModal() {
   const [reportData, setReportData] = useState<ReportInfo>({
     category: '',
     content: '',
-  }); // TODO report 로 처리해야하는 이유?
+  });
   const setModalInfo = useSetRecoilState(modalState);
   const setErrorMessage = useSetRecoilState(errorState);
   const setOpenMenuBar = useSetRecoilState(menuBarState);
