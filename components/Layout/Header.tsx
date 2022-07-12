@@ -19,7 +19,6 @@ export default function Header() {
   const [liveData, setLiveData] = useRecoilState(liveState);
   const [openMenuBar, setOpenMenuBar] = useRecoilState(menuBarState);
   const [openNotiBar, setOpenNotiBar] = useRecoilState(notiBarState);
-  const router = useRouter();
 
   const openMenuBarHandler = () => {
     setOpenMenuBar(!openMenuBar);
@@ -36,8 +35,10 @@ export default function Header() {
         <div className={styles.headerLeft} onClick={openMenuBarHandler}>
           <FiMenu id={styles.menuIcon} />
         </div>
-        <div id={styles.logo} onClick={() => router.push('/')}>
-          <div>42GG</div>
+        <div id={styles.logo}>
+          <Link href={'/'}>
+            <div>42GG</div>
+          </Link>
         </div>
         <div className={styles.headerRight}>
           <div id={styles.notiIcon} onClick={openNotiBarHandler}>

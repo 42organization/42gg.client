@@ -3,12 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { UserData, LiveData } from 'types/mainType';
-import {
-  menuBarState,
-  notiBarState,
-  userState,
-  liveState,
-} from 'utils/recoil/layout';
+import { userState, liveState } from 'utils/recoil/layout';
 import {
   matchRefreshBtnState,
   openCurrentMatchInfoState,
@@ -34,19 +29,12 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const [matchRefreshBtn, setMatchRefreshBtn] =
     useRecoilState(matchRefreshBtnState);
   const setErrorMessage = useSetRecoilState(errorState);
-  const setOpenMenuBar = useSetRecoilState(menuBarState);
-  const setOpenNotiBar = useSetRecoilState(notiBarState);
   const setModalInfo = useSetRecoilState(modalState);
   const presentPath = useRouter().asPath;
 
   useEffect(() => {
     getUserDataHandler();
   }, []);
-
-  useEffect(() => {
-    setOpenMenuBar(false);
-    setOpenNotiBar(false);
-  }, [presentPath]);
 
   useEffect(() => {
     if (userData.intraId || matchRefreshBtn) {
