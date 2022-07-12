@@ -1,5 +1,5 @@
-import Loading from 'components/load/Loading';
+import CommingSoon from 'components/load/CommingSoon';
 
 export default function Load() {
-  return <Loading />;
+  return <CommingSoon />;
 }

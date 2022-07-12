@@ -1,5 +1,14 @@
 @import 'styles/common.scss';
 
+@mixin backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+}
+
 .container {
   @include backdrop;
   display: flex;
@@ -9,21 +18,65 @@
 
 .title {
   @include pageTitle;
+  font-family: $logo-font;
   height: 0rem;
-  padding: 1.3rem 0;
+  padding: 1.3rem 0rem 3rem;
 }
 
-.loadText {
-  padding: 1.5rem 0;
+.loadBottom {
+  text-align: right;
+  transform: scaleY(-1);
+}
+
+.display {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.loadTextRed {
+  font-size: 3rem;
+  color: $pp-red;
+  height: 0rem;
+}
+
+.loadTextWhite {
+  font-size: 3rem;
   color: white;
   height: 0rem;
+  margin-bottom: 10rem;
+}
+
+.loadTextRedBottom {
+  font-size: 3rem;
+  color: $pp-red;
+  height: 0rem;
+}
+
+.loadTextWhiteBottom {
+  font-size: 3rem;
+  height: 0%;
+  color: white;
+}
+
+.loadTextBlack {
+  font-size: 3rem;
+  color: black;
+  height: 0rem;
+  padding-bottom: 2rem;
 }
 
 .spinner {
-  background: linear-gradient(135deg, $g1-top, $g1-bottom);
+  background: linear-gradient(
+    to bottom,
+    rgb(19, 27, 97),
+    rgba(207, 21, 21, 0.6)
+  );
   position: relative;
   border-radius: $small-radius;
-  height: 25rem;
+  height: 20rem;
   left: 50%;
   text-align: center;
   transform: translateX(-50%);
@@ -35,7 +88,7 @@
   .ball {
     width: 40px;
     transform-origin: bottom;
-    animation: bounce 500ms infinite alternate
+    animation: bounce 300ms infinite alternate
       cubic-bezier(0.35, 0.5, 0.65, 0.5);
     circle {
       fill: #fff;
@@ -47,12 +100,12 @@
     height: 142px;
     #sor-1 {
       fill: rgba(0, 0, 0, 0.2);
-      animation: shadow 500ms infinite 500ms alternate
+      animation: shadow 300ms infinite 300ms alternate
         cubic-bezier(0.35, 0.5, 0.65, 0.5);
     }
     #sor-2 {
       fill: rgba(0, 0, 0, 0.2);
-      animation: shadow 500ms infinite alternate
+      animation: shadow 300ms infinite alternate
         cubic-bezier(0.35, 0.5, 0.65, 0.5);
     }
 
@@ -77,11 +130,11 @@
 
   .r1 {
     transform: translateX(70px) rotateZ(45deg);
-    animation: hit-1 1000ms infinite 300ms ease-in-out;
+    animation: hit-1 600ms infinite 180ms ease-in-out;
   }
   .r2 {
     transform: translateX(-70px) rotateZ(-45deg);
-    animation: hit-2 1000ms infinite -200ms ease-in-out;
+    animation: hit-2 600ms infinite -120ms ease-in-out;
   }
 
   .shadow {
@@ -96,13 +149,13 @@
       transform-origin: center;
     }
     .sr_1 {
-      animation: grow 1000ms infinite -200ms ease-in-out;
+      animation: grow 600ms infinite -120ms ease-in-out;
     }
     .sr_2 {
-      animation: grow 1000ms infinite 300ms ease-in-out;
+      animation: grow 600ms infinite 180ms ease-in-out;
     }
     .sb {
-      animation: swing 500ms infinite alternate
+      animation: swing 300ms infinite alternate
         cubic-bezier(0.35, 0.5, 0.65, 0.5);
     }
   }
