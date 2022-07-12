@@ -22,7 +22,6 @@ export default function MatchEnrollModal({
       alert('경기가 성공적으로 등록되었습니다.');
     } catch (e: any) {
       if (e.response.status === 0) {
-        setModalInfo({ modalName: null });
         setErrorMessage('DK303');
         return;
       } else if (e.response.data.code === 'SC001')
@@ -32,7 +31,6 @@ export default function MatchEnrollModal({
       else if (e.response.data.code === 'SC003')
         alert('경기 취소 후 1분 동안 경기를 예약할 수 없습니다.');
       else {
-        setModalInfo({ modalName: null });
         setErrorMessage('JH05');
         return;
       }

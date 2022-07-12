@@ -27,7 +27,6 @@ export default function InputScoreModal() {
         setMyTeamInfo(res?.data.myTeam);
         setEnemyTeamInfo(res?.data.enemyTeam);
       } catch (e: any) {
-        setModalInfo({ modalName: null });
         if (e.response.status === 0) setErrorMessage('DK303');
         else setErrorMessage('JH03');
       }
@@ -76,7 +75,6 @@ export default function InputScoreModal() {
         setModalInfo({ modalName: null });
       }
     } catch (e: any) {
-      setModalInfo({ modalName: null });
       if (e.response.status === 0) setErrorMessage('DK303');
       else setErrorMessage('JH04');
       return;

@@ -3,12 +3,14 @@ import { useRouter } from 'next/router';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import { loginState } from 'utils/recoil/login';
+import { modalState } from 'utils/recoil/modal';
 import Login from 'pages/login';
 import styles from 'styles/Error.module.scss';
 
 export default function ErrorPage() {
   const [errorMessage, setErrorMessage] = useRecoilState(errorState);
   const setIsLoggedIn = useSetRecoilState(loginState);
+  const setModalInfo = useSetRecoilState(modalState);
   const router = useRouter();
 
   useEffect(() => {
@@ -16,6 +18,7 @@ export default function ErrorPage() {
       localStorage.removeItem('42gg-token');
       setIsLoggedIn(false);
     }
+    setModalInfo({ modalName: null });
     router.replace(`/`);
   }, []);
 

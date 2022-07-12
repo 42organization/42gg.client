@@ -46,7 +46,6 @@ export default function CurrentMatchInfo() {
       }
       if (matchRefreshBtn) setMatchRefreshBtn(false);
     } catch (e: any) {
-      setModalInfo({ modalName: null });
       if (e.response.status === 0) setErrorMessage('DK303');
       else setErrorMessage('JB01');
     }

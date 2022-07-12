@@ -22,7 +22,6 @@ export default function CancelModal({ slotId }: SlotProps) {
       alert('경기가 성공적으로 취소되었습니다.');
     } catch (e: any) {
       if (e.response.status === 0) {
-        setModalInfo({ modalName: null });
         setOpenCurrentInfo(false);
         setErrorMessage('DK303');
         return;
@@ -31,7 +30,6 @@ export default function CancelModal({ slotId }: SlotProps) {
       else if (e.response.data.code === 'SD002')
         alert('이미 매칭이 완료된 경기입니다.');
       else {
-        setModalInfo({ modalName: null });
         setOpenCurrentInfo(false);
         setErrorMessage('JH01');
         return;

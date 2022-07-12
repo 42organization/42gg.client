@@ -42,7 +42,6 @@ export default function MatchItem({
           });
         }
       } catch (e: any) {
-        setModalInfo({ modalName: null });
         if (e.response.status === 0) setErrorMessage('DK303');
         else setErrorMessage('JB03');
       }

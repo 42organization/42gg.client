@@ -68,7 +68,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
       const res = await instance.get(`/pingpong/users`);
       setUserData(res?.data);
     } catch (e: any) {
-      setModalInfo({ modalName: null });
       if (e.response.status === 0) setErrorMessage('DK303');
       else setErrorMessage('JB02');
     }
@@ -79,7 +78,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
       const res = await instance.get(`/pingpong/users/live`);
       setLiveData(res?.data);
     } catch (e: any) {
-      setModalInfo({ modalName: null });
       if (e.response.status === 0) setErrorMessage('DK303');
       else setErrorMessage('JB03');
     }

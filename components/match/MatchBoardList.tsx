@@ -38,7 +38,6 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
       const res = await instance.get(`/pingpong/match/tables/${1}/single`);
       setMatchData(res?.data);
     } catch (e: any) {
-      setModalInfo({ modalName: null });
       if (e.response.status === 0) setErrorMessage('DK303');
       else setErrorMessage('SJ01');
     }
