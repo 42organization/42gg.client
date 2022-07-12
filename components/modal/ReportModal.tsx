@@ -40,7 +40,10 @@ export default function ReportModal() {
   };
 
   const reportHandler = async () => {
-    if (reportData.category && reportData.content) {
+    if (
+      reportData.category &&
+      reportData.content.replace(/(\s*)/g, '').replace(/(\n)/g, '')
+    ) {
       const body = reportData;
       try {
         await instance.post('/pingpong/feedback', body);
