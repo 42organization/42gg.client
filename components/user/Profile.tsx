@@ -23,8 +23,10 @@ export default function Profile({ intraId }: ProfileProps) {
       try {
         const res = await instance.get(`/pingpong/users/${intraId}/detail`);
         setProfileInfo(res?.data);
-      } catch (e) {
-        setErrorMessage('SJ03');
+      } catch (e: any) {
+        setModalInfo({ modalName: null });
+        if (e.response.status === 0) setErrorMessage('DK303');
+        else setErrorMessage('SJ03');
       }
     })();
   }, [intraId]);

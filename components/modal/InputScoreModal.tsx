@@ -26,8 +26,10 @@ export default function InputScoreModal() {
         const res = await instance.get(`/pingpong/games/result`);
         setMyTeamInfo(res?.data.myTeam);
         setEnemyTeamInfo(res?.data.enemyTeam);
-      } catch (e) {
-        setErrorMessage('JH03');
+      } catch (e: any) {
+        setModalInfo({ modalName: null });
+        if (e.response.status === 0) setErrorMessage('DK303');
+        else setErrorMessage('JH03');
       }
     })();
   }, []);
@@ -73,8 +75,10 @@ export default function InputScoreModal() {
         alert('상대가 이미 점수를 입력했습니다.');
         setModalInfo({ modalName: null });
       }
-    } catch (e) {
-      setErrorMessage('JH04');
+    } catch (e: any) {
+      setModalInfo({ modalName: null });
+      if (e.response.status === 0) setErrorMessage('DK303');
+      else setErrorMessage('JH04');
       return;
     }
     window.location.href = '/';

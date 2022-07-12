@@ -55,8 +55,10 @@ export default function EditProfileModal() {
     try {
       await instance.put(`/pingpong/users/detail`, editedProfile);
       alert('프로필이 성공적으로 등록되었습니다.');
-    } catch (e) {
-      setErrorMessage('JH02');
+    } catch (e: any) {
+      setModalInfo({ modalName: null });
+      if (e.response.status === 0) setErrorMessage('DK303');
+      else setErrorMessage('JH02');
     }
   };
 

@@ -43,8 +43,9 @@ export default function RankList() {
       const res = await instance.get(`${path}`);
       setRankData(res?.data);
       setMyRank(res?.data.myRank);
-    } catch (e) {
-      setErrorMessage('DK01');
+    } catch (e: any) {
+      if (e.response.status === 0) setErrorMessage('DK303');
+      else setErrorMessage('DK01');
     }
   };
 

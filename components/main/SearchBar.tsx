@@ -39,8 +39,9 @@ export default function SearchBar() {
     try {
       const res = await instance.get(`/pingpong/users/searches?q=${keyword}`);
       setSearchResult(res?.data.users);
-    } catch (e) {
-      setErrorMessage('JB06');
+    } catch (e: any) {
+      if (e.response.status === 0) setErrorMessage('DK303');
+      else setErrorMessage('JB06');
     }
   };
 

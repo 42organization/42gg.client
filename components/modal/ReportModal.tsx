@@ -47,8 +47,10 @@ export default function ReportModal() {
         setModalInfo({ modalName: null });
         setOpenMenuBar(false);
         alert('신고가 완료되었습니다.');
-      } catch (e) {
-        setErrorMessage('JH06');
+      } catch (e: any) {
+        setModalInfo({ modalName: null });
+        if (e.response.status === 0) setErrorMessage('DK303');
+        else setErrorMessage('JH06');
       }
     } else {
       alert('마음을 담아 신고를 해주세요 ❤️');

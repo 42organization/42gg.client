@@ -41,8 +41,10 @@ export default function MatchItem({
             cancelInfo: { slotId, time, enemyTeam },
           });
         }
-      } catch (e) {
-        setErrorMessage('JB03');
+      } catch (e: any) {
+        setModalInfo({ modalName: null });
+        if (e.response.status === 0) setErrorMessage('DK303');
+        else setErrorMessage('JB03');
       }
     } else if (liveData.event === 'match') {
       setModalInfo({ modalName: 'MATCH-REJECT' });

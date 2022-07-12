@@ -21,7 +21,11 @@ export default function MatchEnrollModal({
       await instance.post(`/pingpong/match/tables/${1}/${type}`, body);
       alert('경기가 성공적으로 등록되었습니다.');
     } catch (e: any) {
-      if (e.response.data.code === 'SC001')
+      if (e.response.status === 0) {
+        setModalInfo({ modalName: null });
+        setErrorMessage('DK303');
+        return;
+      } else if (e.response.data.code === 'SC001')
         alert('경기 등록에 실패하였습니다.');
       else if (e.response.data.code === 'SC002')
         alert('이미 등록이 완료된 경기입니다.');

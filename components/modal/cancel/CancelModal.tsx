@@ -21,7 +21,13 @@ export default function CancelModal({ slotId }: SlotProps) {
       await instance.delete(`/pingpong/match/slots/${slotId}`);
       alert('경기가 성공적으로 취소되었습니다.');
     } catch (e: any) {
-      if (e.response.data.code === 'SD001') alert('이미 지난 경기입니다.');
+      if (e.response.status === 0) {
+        setModalInfo({ modalName: null });
+        setOpenCurrentInfo(false);
+        setErrorMessage('DK303');
+        return;
+      } else if (e.response.data.code === 'SD001')
+        alert('이미 지난 경기입니다.');
       else if (e.response.data.code === 'SD002')
         alert('이미 매칭이 완료된 경기입니다.');
       else {

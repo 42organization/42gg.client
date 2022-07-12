@@ -27,8 +27,9 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
     try {
       const res = await instance.get(`/pingpong/notifications`);
       setNotiData(res?.data.notifications);
-    } catch (e) {
-      setErrorMessage('JB04');
+    } catch (e: any) {
+      if (e.response.status === 0) setErrorMessage('DK303');
+      else setErrorMessage('JB04');
     }
   };
 
@@ -37,8 +38,9 @@ export default function NotiBar({ showNotiBarHandler }: NotiBarProps) {
       await instance.delete(`/pingpong/notifications`);
       alert('알림이 성공적으로 삭제되었습니다.');
       showNotiBarHandler();
-    } catch (e) {
-      setErrorMessage('JB05');
+    } catch (e: any) {
+      if (e.response.status === 0) setErrorMessage('DK303');
+      else setErrorMessage('JB05');
     }
   };
 

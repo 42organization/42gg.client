@@ -82,8 +82,9 @@ export default function Chart({ intraId }: ChartProps) {
           `/pingpong/users/${intraId}/historics?chartType=rank`
         );
         setChartData(res?.data.historics);
-      } catch (e) {
-        setErrorMessage('SJ02');
+      } catch (e: any) {
+        if (e.response.status === 0) setErrorMessage('DK303');
+        else setErrorMessage('SJ02');
       }
     })();
   }, [intraId]);

@@ -45,8 +45,10 @@ export default function CurrentMatchInfo() {
         setEnemyTeamInfo(makeEnemyTeamInfo(res?.data.enemyTeam));
       }
       if (matchRefreshBtn) setMatchRefreshBtn(false);
-    } catch (e) {
-      setErrorMessage('JB01');
+    } catch (e: any) {
+      setModalInfo({ modalName: null });
+      if (e.response.status === 0) setErrorMessage('DK303');
+      else setErrorMessage('JB01');
     }
   };
 
