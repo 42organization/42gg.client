@@ -42,7 +42,7 @@ export default function NotiBar() {
     try {
       await instance.delete(`/pingpong/notifications`);
       alert('알림이 성공적으로 삭제되었습니다.');
-      resetOpenNotiBar;
+      resetOpenNotiBar();
     } catch (e) {
       setErrorMessage('JB05');
     }
