@@ -6,7 +6,7 @@ export interface UserData {
 
 export interface LiveData {
   notiCount: number;
-  event: string | null;
+  event: 'match' | 'game' | null;
 }
 
 export interface SearchData {

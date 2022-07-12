@@ -1,21 +1,19 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import {
-  cancelModalState,
-  openCurrentMatchInfoState,
-} from 'utils/recoil/match';
+import { openCurrentMatchInfoState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { currentMatchInfo } from 'utils/recoil/match';
+import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/modal/CancelModal.module.scss';
 
-type SlotProps = {
+interface SlotProps {
   slotId: number;
-};
+}
 
 export default function CancelModal({ slotId }: SlotProps) {
-  const setOpenModal = useSetRecoilState(cancelModalState);
   const setOpenCurrentInfo = useSetRecoilState(openCurrentMatchInfoState);
   const setErrorMessage = useSetRecoilState(errorState);
+  const setModalInfo = useSetRecoilState(modalState);
   const currentMatch = useRecoilValue(currentMatchInfo);
 
   const onCancel = async () => {
@@ -27,19 +25,19 @@ export default function CancelModal({ slotId }: SlotProps) {
       else if (e.response.data.code === 'SD002')
         alert('이미 매칭이 완료된 경기입니다.');
       else {
-        setOpenModal(false);
+        setModalInfo({ modalName: null });
         setOpenCurrentInfo(false);
         setErrorMessage('JH01');
         return;
       }
     }
-    setOpenModal(false);
+    setModalInfo({ modalName: null });
     setOpenCurrentInfo(false);
     window.location.reload();
   };
 
   const onReturn = () => {
-    setOpenModal(false);
+    setModalInfo({ modalName: null });
   };
 
   return (

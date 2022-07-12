@@ -1,21 +1,16 @@
 import { useRouter } from 'next/router';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userState } from 'utils/recoil/layout';
-import { logoutModalState } from 'utils/recoil/login';
-import { menuBarState, reportModalState } from 'utils/recoil/layout';
-import Modal from 'components/modal/Modal';
-import LogoutModal from 'components/modal/LogoutModal';
-import ReportModal from 'components/modal/ReportModal';
+import { menuBarState } from 'utils/recoil/layout';
+import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 export default function MenuBar() {
   const userData = useRecoilValue(userState);
   const setOpenMenuBar = useSetRecoilState(menuBarState);
-  const [openLogoutModal, setOpenLogoutModal] =
-    useRecoilState(logoutModalState);
-  const [openReportModal, setOpenReportModal] =
-    useRecoilState(reportModalState);
+  const setModalInfo = useSetRecoilState(modalState);
+
   const router = useRouter();
 
   const MenuPathHandler = (path: string) => {
@@ -33,16 +28,6 @@ export default function MenuBar() {
 
   return (
     <>
-      {openLogoutModal && (
-        <Modal>
-          <LogoutModal />
-        </Modal>
-      )}
-      {openReportModal && (
-        <Modal>
-          <ReportModal />
-        </Modal>
-      )}
       <div className={styles.backdrop} onClick={() => setOpenMenuBar(false)}>
         <div className={styles.container} onClick={(e) => e.stopPropagation()}>
           <button onClick={() => setOpenMenuBar(false)}>&#10005;</button>
@@ -72,9 +57,13 @@ export default function MenuBar() {
               {userData.isAdmin ? (
                 <div onClick={goToAdminPage}>😎 관리자</div>
               ) : (
-                <div onClick={() => setOpenReportModal(true)}>신고하기</div>
+                <div onClick={() => setModalInfo({ modalName: 'MENU-REPORT' })}>
+                  신고하기
+                </div>
               )}
-              <div onClick={() => setOpenLogoutModal(true)}>로그아웃</div>
+              <div onClick={() => setModalInfo({ modalName: 'MENU-LOGOUT' })}>
+                로그아웃
+              </div>
             </div>
           </nav>
         </div>

@@ -9,6 +9,7 @@ import LoginChecker from 'components/LoginChecker';
 import Layout from 'components/Layout/Layout';
 import 'styles/globals.css';
 import * as gtag from 'lib/gtag';
+import ModalProvider from 'components/modal/ModalProvider';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -51,6 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Layout>
               <Component {...pageProps} />
             </Layout>
+            <ModalProvider />
           </ErrorChecker>
         </LoginChecker>
       </RecoilRoot>

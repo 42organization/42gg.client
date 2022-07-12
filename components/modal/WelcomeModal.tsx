@@ -1,9 +1,9 @@
 import { useSetRecoilState } from 'recoil';
-import { newLoginState } from 'utils/recoil/layout';
+import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/WelcomeModal.module.scss';
 
-export default function PageManualModal() {
-  const setNewLogin = useSetRecoilState(newLoginState);
+export default function WelcomeModal() {
+  const setModalInfo = useSetRecoilState(modalState);
 
   const openPageManual = () => {
     window.open(
@@ -12,7 +12,7 @@ export default function PageManualModal() {
   };
 
   const closeModalHandler = () => {
-    setNewLogin(false);
+    setModalInfo({ modalName: null });
   };
 
   return (

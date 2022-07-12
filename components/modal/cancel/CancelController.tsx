@@ -1,19 +1,15 @@
+import { CancelInfo } from 'types/modalTypes';
 import { isBeforeMin } from 'utils/handleTime';
 import CancelBeforeFiveMinModal from './CancelBeforeFiveMinModal';
 import CancelModal from './CancelModal';
 
-type CancelType = {
-  slotId: number;
-  time: string;
-  enemyTeam: string[];
-};
-
-export default function CancelControll({
+export default function CancelController({
   slotId,
   time,
   enemyTeam,
-}: CancelType) {
+}: CancelInfo) {
   const matchStartBefore5Min = isBeforeMin(time, 5);
+
   return (
     <>
       {matchStartBefore5Min && enemyTeam.length ? (

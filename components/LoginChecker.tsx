@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { loginState } from 'utils/recoil/login';
-import { newLoginState } from 'utils/recoil/layout';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import { loginState } from 'utils/recoil/login';
+import { modalState } from 'utils/recoil/modal';
 import Login from 'pages/login';
 import styles from 'styles/Layout/Layout.module.scss';
 
@@ -13,7 +13,7 @@ interface LoginCheckerProps {
 export default function LoginChecker({ children }: LoginCheckerProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
-  const setNewLogin = useSetRecoilState(newLoginState);
+  const setModalInfo = useSetRecoilState(modalState);
   const router = useRouter();
   const presentPath = router.asPath;
   const token = presentPath.split('?token=')[1];
@@ -21,7 +21,7 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
   useEffect(() => {
     if (token) {
       localStorage.setItem('42gg-token', token);
-      setNewLogin(true);
+      setModalInfo({ modalName: 'MAIN-WELCOME' });
       router.replace(`/`);
     }
     if (localStorage.getItem('42gg-token')) {

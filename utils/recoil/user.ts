@@ -2,11 +2,6 @@ import { ProfileInfo } from './../../types/userTypes';
 import { atom } from 'recoil';
 import { v1 } from 'uuid';
 
-export const editProfileModalState = atom<boolean>({
-  key: `editProfileModalState/${v1()}`,
-  default: false,
-});
-
 export const profileInfoState = atom<ProfileInfo>({
   key: `profileInfoState/${v1()}`,
   default: {

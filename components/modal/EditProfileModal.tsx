@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { profileInfoState, editProfileModalState } from 'utils/recoil/user';
+import { profileInfoState } from 'utils/recoil/user';
 import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/user/Profile.module.scss';
 
@@ -13,9 +14,10 @@ interface EditedProfile {
 const CHAR_LIMIT = 30;
 
 export default function EditProfileModal() {
-  const setIsEditProfile = useSetRecoilState(editProfileModalState);
   const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
   const setErrorMessage = useSetRecoilState(errorState);
+  const setModalInfo = useSetRecoilState(modalState);
+
   const [editedProfile, setEditedProfile] = useState<EditedProfile>({
     racketType: 'penholder',
     statusMessage: '',
@@ -48,7 +50,7 @@ export default function EditProfileModal() {
       ...prev,
       ...editedProfile,
     }));
-    setIsEditProfile(false);
+    setModalInfo({ modalName: null });
 
     try {
       await instance.put(`/pingpong/users/detail`, editedProfile);
@@ -58,7 +60,7 @@ export default function EditProfileModal() {
     }
   };
 
-  const cancelEditHandler = () => setIsEditProfile(false);
+  const cancelEditHandler = () => setModalInfo({ modalName: null });
 
   return (
     <div className={styles.editContainer}>

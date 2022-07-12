@@ -9,8 +9,3 @@ export const loginState = atom<boolean>({
   default: false,
   effects_UNSTABLE: [persistAtom],
 });
-
-export const logoutModalState = atom<boolean>({
-  key: `logoutModalState/${v1()}`,
-  default: false,
-});
