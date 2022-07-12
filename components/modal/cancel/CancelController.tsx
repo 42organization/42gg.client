@@ -3,7 +3,7 @@ import { isBeforeMin } from 'utils/handleTime';
 import CancelBeforeFiveMinModal from './CancelBeforeFiveMinModal';
 import CancelModal from './CancelModal';
 
-export default function CancelControll({
+export default function CancelController({
   slotId,
   time,
   enemyTeam,
