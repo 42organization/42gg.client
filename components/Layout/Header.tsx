@@ -66,7 +66,7 @@ export default function Header() {
         </div>
       </div>
       {openMenuBar && <MenuBar />}
-      {openNotiBar && <NotiBar showNotiBarHandler={openNotiBarHandler} />}
+      {openNotiBar && <NotiBar />}
     </div>
   );
 }

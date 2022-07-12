@@ -10,7 +10,10 @@ export default function MenuBar() {
   const userData = useRecoilValue(userState);
   const setOpenMenuBar = useSetRecoilState(menuBarState);
   const setModalInfo = useSetRecoilState(modalState);
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   const router = useRouter();
 
   const MenuPathHandler = (path: string) => {

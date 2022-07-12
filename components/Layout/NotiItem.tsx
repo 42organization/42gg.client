@@ -1,20 +1,22 @@
 import Link from 'next/link';
+import { useSetRecoilState } from 'recoil';
 import { NotiData } from 'types/notiTypes';
+import { notiBarState } from 'utils/recoil/layout';
 import { gameTimeToString } from 'utils/handleTime';
 import styles from 'styles/Layout/NotiItem.module.scss';
 
 type NotiItemProps = {
   data: NotiData;
-  showNotiBarHandler: () => void;
 };
 
-export default function NotiItem({ data, showNotiBarHandler }: NotiItemProps) {
+export default function NotiItem({ data }: NotiItemProps) {
+  const setOpenNotiBar = useSetRecoilState(notiBarState);
   const title = makeTitle(data.type);
   const notiDate = data.createdAt.slice(5, 16).replace('T', ' ');
 
   const makeEnemyUsers = (enemyTeam: string[]) => {
     return enemyTeam.map((intraId: string, i: number) => (
-      <span key={intraId} onClick={showNotiBarHandler}>
+      <span key={intraId} onClick={() => setOpenNotiBar(false)}>
         <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
         {data.enemyTeam && i < data.enemyTeam.length - 1 ? ', ' : ''}
       </span>
