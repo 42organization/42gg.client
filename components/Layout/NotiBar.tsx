@@ -79,7 +79,7 @@ export default function NotiBar() {
             </div>
           </>
         ) : (
-          <div className={styles.emtyContent}>
+          <div className={styles.emptyContent}>
             <></>
             <button
               className={
