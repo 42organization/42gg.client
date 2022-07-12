@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-
 import styles from 'styles/modal/MatchManualModal.module.scss';
 
 type ManualProps = {
