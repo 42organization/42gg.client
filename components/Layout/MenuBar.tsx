@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import Link from 'next/link';
+import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import { menuBarState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
@@ -8,14 +8,13 @@ import styles from 'styles/Layout/MenuBar.module.scss';
 
 export default function MenuBar() {
   const userData = useRecoilValue(userState);
-  const setOpenMenuBar = useSetRecoilState(menuBarState);
+  const resetOpenMenuBar = useResetRecoilState(menuBarState);
   const setModalInfo = useSetRecoilState(modalState);
-
-  const router = useRouter();
-
-  const MenuPathHandler = (path: string) => {
-    router.push(`/${path}`);
-  };
+  const menuList = [
+    { name: '랭킹', link: '/rank' },
+    { name: '최근 경기', link: '/game' },
+    { name: '내 정보', link: `/users/detail?intraId=${userData.intraId}` },
+  ];
 
   const goToAdminPage = async () => {
     try {
@@ -28,20 +27,16 @@ export default function MenuBar() {
 
   return (
     <>
-      <div className={styles.backdrop} onClick={() => setOpenMenuBar(false)}>
+      <div className={styles.backdrop} onClick={resetOpenMenuBar}>
         <div className={styles.container} onClick={(e) => e.stopPropagation()}>
-          <button onClick={() => setOpenMenuBar(false)}>&#10005;</button>
+          <button onClick={resetOpenMenuBar}>&#10005;</button>
           <nav>
             <div className={styles.menu}>
-              <div onClick={() => MenuPathHandler('rank')}>랭킹</div>
-              <div onClick={() => MenuPathHandler('game')}>최근 경기</div>
-              <div
-                onClick={() =>
-                  MenuPathHandler(`users/detail?intraId=${userData.intraId}`)
-                }
-              >
-                내 정보
-              </div>
+              {menuList.map((menuList, index: number) => (
+                <Link href={menuList.link} key={index}>
+                  <div onClick={resetOpenMenuBar}>{menuList.name}</div>
+                </Link>
+              ))}
             </div>
             <div className={styles.subMenu}>
               <div
@@ -53,12 +48,14 @@ export default function MenuBar() {
               >
                 페이지 가이드
               </div>
-              <div onClick={() => MenuPathHandler('manual')}>경기 매뉴얼</div>
+              <Link href={'/manual'}>
+                <div onClick={resetOpenMenuBar}>경기 매뉴얼</div>
+              </Link>
               {userData.isAdmin ? (
                 <div onClick={goToAdminPage}>😎 관리자</div>
               ) : (
                 <div onClick={() => setModalInfo({ modalName: 'MENU-REPORT' })}>
-                  신고하기
+                  건의하기
                 </div>
               )}
               <div onClick={() => setModalInfo({ modalName: 'MENU-LOGOUT' })}>

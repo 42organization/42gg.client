@@ -3,19 +3,16 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { UserData, LiveData } from 'types/mainType';
+import { userState, liveState } from 'utils/recoil/layout';
 import {
-  menuBarState,
-  notiBarState,
-  userState,
-  liveState,
-} from 'utils/recoil/layout';
-import { openCurrentMatchInfoState } from 'utils/recoil/match';
+  matchRefreshBtnState,
+  openCurrentMatchInfoState,
+} from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import Header from './Header';
 import Footer from './Footer';
 import CurrentMatchInfo from './CurrentMatchInfo';
-
 import instance from 'utils/axios';
 import styles from 'styles/Layout/Layout.module.scss';
 
@@ -29,28 +26,21 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const [openCurrentInfo, setOpenCurrentInfo] = useRecoilState<boolean>(
     openCurrentMatchInfoState
   );
+  const [matchRefreshBtn, setMatchRefreshBtn] =
+    useRecoilState(matchRefreshBtnState);
   const setErrorMessage = useSetRecoilState(errorState);
-  const setOpenMenuBar = useSetRecoilState(menuBarState);
-  const setOpenNotiBar = useSetRecoilState(notiBarState);
   const setModalInfo = useSetRecoilState(modalState);
-
-  const router = useRouter();
-  const presentPath = router.asPath;
+  const presentPath = useRouter().asPath;
 
   useEffect(() => {
     getUserDataHandler();
   }, []);
 
   useEffect(() => {
-    setOpenMenuBar(false);
-    setOpenNotiBar(false);
-  }, [presentPath]);
-
-  useEffect(() => {
-    if (userData.intraId) {
+    if (userData.intraId || matchRefreshBtn) {
       getLiveDataHandler();
     }
-  }, [presentPath, userData]);
+  }, [presentPath, userData, matchRefreshBtn]);
 
   useEffect(() => {
     if (liveData?.event === 'match') setOpenCurrentInfo(true);
@@ -74,6 +64,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     try {
       const res = await instance.get(`/pingpong/users/live`);
       setLiveData(res?.data);
+      if (matchRefreshBtn) setMatchRefreshBtn(false);
     } catch (e) {
       setErrorMessage('JB03');
     }

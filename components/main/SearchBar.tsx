@@ -18,13 +18,11 @@ export default function SearchBar() {
 
   useEffect(() => {
     const checkId = /^[a-z|A-Z|0-9|-]+$/;
-    if (keyword === '') {
+    if (keyword === '' || (keyword.length && !checkId.test(keyword))) {
       clearTimeout(timer);
       setSearchResult([]);
     } else if (checkId.test(keyword)) {
       debounce(getSearchResultHandler, 500)();
-    } else if (keyword.length && !checkId.test(keyword)) {
-      setSearchResult([]);
     }
   }, [keyword]);
 
