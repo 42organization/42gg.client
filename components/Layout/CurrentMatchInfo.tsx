@@ -20,6 +20,7 @@ export default function CurrentMatchInfo() {
   const setErrorMessage = useSetRecoilState(errorState);
   const setLiveData = useSetRecoilState(liveState);
   const matchingMessage = time && makeMessage(time, isMatched);
+  const isblockCancelBtn = isBeforeMin(time, 5) && enemyTeam.length;
   const presentPath = useRouter().asPath;
 
   useEffect(() => {
@@ -68,7 +69,11 @@ export default function CurrentMatchInfo() {
           </div>
         </div>
         <div className={styles.cancelButton}>
-          <input type='button' onClick={onCancel} value='취소하기' />
+          <input
+            type='button'
+            onClick={onCancel}
+            value={isblockCancelBtn ? '취소불가' : '취소하기'}
+          />
         </div>
       </div>
     </>
