@@ -43,19 +43,24 @@ export default function InputScoreModal() {
   };
 
   const isCorrectScore = (score1: number | '', score2: number | '') => {
-    if (score1 === '' || score2 === '') return false;
-    if (score1 + score2 > 3) return false;
-    if (score1 === score2) return false;
+    if (score1 === '' || score2 === '') {
+      alert('점수를 입력해주세요.');
+      return false;
+    }
+    if (score1 + score2 > 3) {
+      alert('3점 이상 입력은 불가합니다. (3판 2선승제)');
+      return false;
+    }
+    if (score1 === score2) {
+      alert('동점 입력은 불가합니다. 골든골로 승부를 결정해주세요!');
+      return false;
+    }
     return true;
   };
 
   const enterHandler = () => {
     const { myTeamScore, enemyTeamScore } = result;
-    if (!isCorrectScore(myTeamScore, enemyTeamScore)) {
-      alert('정확한 점수를 입력해주세요.');
-      return;
-    }
-    setOnCheck(true);
+    if (isCorrectScore(myTeamScore, enemyTeamScore)) setOnCheck(true);
   };
 
   const reEnterHandler = () => {
@@ -87,6 +92,10 @@ export default function InputScoreModal() {
         <div>
           {onCheck ? '경기 결과' : '경기가 끝났다면 점수를 입력해주세요.'}
         </div>
+      </div>
+      <div className={styles.rules}>
+        <div>💡 3판 2선승제!</div>
+        <div>💡 동점은 골든 골로 승부를 결정!</div>
       </div>
       <div className={styles.resultContainer}>
         <div className={styles.players}>
