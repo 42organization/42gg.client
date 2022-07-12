@@ -55,7 +55,6 @@ export default function MatchBoardList({ type }: MatchBoardListProps) {
 
   const manualPageHandler = () => {
     setModalInfo({ modalName: 'MATCH-MANUAL' });
-    document.body.style.overflow = 'hidden';
   };
 
   const refreshBtnHandler = () => {

@@ -16,7 +16,6 @@ export default function MatchManualModal({ isPage }: ManualProps) {
       router.push(`/`);
     } else {
       setModalInfo({ modalName: null });
-      document.body.style.overflow = 'unset';
     }
   };
 

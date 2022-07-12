@@ -26,7 +26,6 @@ export default function ModalProvider() {
     if (modalInfo.modalName?.split('-')[0] === 'FIXED') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
       setModalInfo({ modalName: null });
-      document.body.style.overflow = 'unset';
     }
   };
 
