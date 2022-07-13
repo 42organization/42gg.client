@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { loginState } from 'utils/recoil/login';
 import { modalState } from 'utils/recoil/modal';
+import Login from 'pages/login';
 import styles from 'styles/Layout/Layout.module.scss';
-import Login from 'pages/load';
 
 interface LoginCheckerProps {
   children: React.ReactNode;
