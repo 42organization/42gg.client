@@ -4,7 +4,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { loginState } from 'utils/recoil/login';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/Layout/Layout.module.scss';
-import Load from 'pages/load';
+import Login from 'pages/load';
 
 interface LoginCheckerProps {
   children: React.ReactNode;
@@ -34,7 +34,7 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
     <>{children}</>
   ) : (
     <div className={styles.appContainer}>
-      <div className={styles.background}>{!isLoading && <Load />}</div>
+      <div className={styles.background}>{!isLoading && <Login />}</div>
     </div>
   );
 }
