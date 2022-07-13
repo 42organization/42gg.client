@@ -63,7 +63,7 @@
 
 <br/>
 
-### 🧑 유저페이지에서 유저 정보를 확인할 수 있습니다. 내 페이지에서 상태메세지를 바꿔보세요!
+### 🧑 유저페이지에서 유저 정보를 확인할 수 있습니다. 내 페이지에서 상태메시지를 바꿔보세요!
 
 <img width=23% alt="user_other" src="https://user-images.githubusercontent.com/58678617/177510129-d101560e-c934-464a-9dea-5d4adc5a1f02.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width=23% alt="user_me" src="https://user-images.githubusercontent.com/58678617/177510162-45275538-1689-4de7-a88a-4600db63dd4c.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width=23% alt="user_edit" src="https://user-images.githubusercontent.com/58678617/177510167-2dbb2707-952a-4d3d-a0bd-2e70531eef4d.png">&nbsp;&nbsp;&nbsp;&nbsp;<img width=23% alt="user_me_edit" src="https://user-images.githubusercontent.com/58678617/177510173-97878100-3d5f-4e68-a767-f542f64196a5.png">
 

@@ -69,14 +69,14 @@ export default function EditProfileModal() {
         <div className={styles.editModalTitle}>프로필 수정</div>
       </div>
       <div className={styles.statusMessageWrap}>
-        <div className={styles.editType}>상태메세지</div>
+        <div className={styles.editType}>상태메시지</div>
         <div className={styles.textareaWrap}>
           <textarea
             value={editedProfile.statusMessage}
             name='statusMessage'
             onChange={inputChangeHandler}
             maxLength={CHAR_LIMIT}
-            placeholder={'상태메세지를 입력해주세요 ;)'}
+            placeholder={'상태메시지를 입력해주세요 ;)'}
           ></textarea>
           <div>{`${editedProfile.statusMessage.length}/${CHAR_LIMIT}`}</div>
         </div>
