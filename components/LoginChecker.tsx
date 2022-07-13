@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { loginState } from 'utils/recoil/login';
 import { modalState } from 'utils/recoil/modal';
-import Load from 'pages/load';
-// import Login from 'pages/login';
+// import Load from 'pages/load';
+import Login from 'pages/login';
 import styles from 'styles/Layout/Layout.module.scss';
 
 interface LoginCheckerProps {
@@ -35,8 +35,8 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
     <>{children}</>
   ) : (
     <div className={styles.appContainer}>
-      {/* <div className={styles.background}>{!isLoading && <Login />}</div> */}
-      <div className={styles.background}>{!isLoading && <Load />}</div>
+      <div className={styles.background}>{!isLoading && <Login />}</div>
+      {/* <div className={styles.background}>{!isLoading && <Load />}</div> */}
     </div>
   );
 }
