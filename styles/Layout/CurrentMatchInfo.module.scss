@@ -59,6 +59,14 @@
   }
 }
 
+.blockCancelButton {
+  input {
+    @include button($midium-gray, white, 4rem, 2rem);
+    font-size: $small-font;
+    background: linear-gradient(to bottom, $midium-gray, $dark-gray);
+  }
+}
+
 .messageString {
   margin-bottom: 0.1rem;
 }

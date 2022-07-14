@@ -68,7 +68,11 @@ export default function CurrentMatchInfo() {
             {enemyTeam.length ? enemyTeamInfo : null}
           </div>
         </div>
-        <div className={styles.cancelButton}>
+        <div
+          className={
+            isblockCancelBtn ? styles.blockCancelButton : styles.cancelButton
+          }
+        >
           <input
             type='button'
             onClick={onCancel}
