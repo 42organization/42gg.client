@@ -17,12 +17,16 @@ export default function EditProfileModal() {
   const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
   const setErrorMessage = useSetRecoilState(errorState);
   const setModalInfo = useSetRecoilState(modalState);
-
   const [editedProfile, setEditedProfile] = useState<EditedProfile>({
     racketType: 'penholder',
     statusMessage: '',
   });
   const { racketType, statusMessage } = profileInfo;
+  const racket = [
+    { id: 'penholder', label: 'PENHOLDER' },
+    { id: 'shakehand', label: 'SHAKEHAND' },
+    { id: 'dual', label: 'DUAL' },
+  ];
 
   useEffect(() => {
     setEditedProfile((prev) => ({
@@ -84,31 +88,23 @@ export default function EditProfileModal() {
       <div className={styles.racketTypeWrap}>
         <div className={styles.editType}>라켓 타입</div>
         <div className={styles.racketRadioButtons}>
-          <label htmlFor='penholder'>
-            <input
-              type='radio'
-              name='racketType'
-              id='penholder'
-              value='penholder'
-              onChange={inputChangeHandler}
-              checked={editedProfile.racketType === 'penholder'}
-            />{' '}
-            <div className={styles.radioButton}>PENHOLDER</div>
-          </label>
-          <label htmlFor='shakehand'>
-            <input
-              type='radio'
-              name='racketType'
-              id='shakehand'
-              value='shakehand'
-              onChange={inputChangeHandler}
-              checked={editedProfile.racketType === 'shakehand'}
-            />{' '}
-            <div className={styles.radioButton}>SHAKEHAND</div>
-          </label>
+          {racket.map((racket, index) => {
+            return (
+              <label key={index} htmlFor={racket.id}>
+                <input
+                  type='radio'
+                  name='racketType'
+                  id={racket.id}
+                  value={racket.id}
+                  onChange={inputChangeHandler}
+                  checked={editedProfile.racketType === racket.id}
+                />
+                <div className={styles.radioButton}>{racket.label}</div>
+              </label>
+            );
+          })}
         </div>
       </div>
-
       <div className={styles.buttons}>
         <div className={styles.negative}>
           <input type='button' onClick={cancelEditHandler} value='취소' />
