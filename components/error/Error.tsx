@@ -20,7 +20,7 @@ export default function ErrorPage() {
   return (
     <div className={styles.container}>
       <div className={styles.errorContainer}>
-        <div className={styles.title}>42gg</div>
+        <div className={styles.title}>42GG</div>
         <div className={styles.errorMessage}>
           {errorMessage === 'DK404'
             ? '잘못된 요청입니다!'
