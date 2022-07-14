@@ -23,8 +23,8 @@ export default function EditProfileModal() {
   });
   const { racketType, statusMessage } = profileInfo;
   const racket = [
-    { id: 'PENHOLDER', label: 'PENHOLDER' },
-    { id: 'shakehane', label: 'SHAKEHAND' },
+    { id: 'penholder', label: 'PENHOLDER' },
+    { id: 'shakehand', label: 'SHAKEHAND' },
     { id: 'dual', label: 'DUAL' },
   ];
 
