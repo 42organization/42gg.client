@@ -96,7 +96,7 @@ export default function ReportModal() {
             />
           </div>
           <div className={styles.positive}>
-            <input type='button' onClick={reportHandler} value='신고' />
+            <input type='button' onClick={reportHandler} value='보내기' />
           </div>
         </div>
       </form>

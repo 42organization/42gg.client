@@ -1,21 +1,12 @@
-import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/MatchManualModal.module.scss';
 
-type ManualProps = {
-  isPage: boolean;
-};
-export default function MatchManualModal({ isPage }: ManualProps) {
+export default function MatchManualModal() {
   const setModalInfo = useSetRecoilState(modalState);
-  const router = useRouter();
 
   const onReturn = () => {
-    if (isPage) {
-      router.push(`/`);
-    } else {
-      setModalInfo({ modalName: null });
-    }
+    setModalInfo({ modalName: null });
   };
 
   return (
@@ -63,7 +54,7 @@ export default function MatchManualModal({ isPage }: ManualProps) {
           </ul>
         </li>
         <li>
-          ⚠️ 경기 시 주의사항 ⚠️
+          🚨 경기 시 주의사항
           <ul className={styles.ruleDetail}>
             <li>
               매치가 시작 되었으나 상대방이 나오지 않는다면 3분이 지날 때 마다
@@ -75,11 +66,7 @@ export default function MatchManualModal({ isPage }: ManualProps) {
       </ul>
       <div className={styles.buttons}>
         <div className={styles.positive}>
-          <input
-            onClick={onReturn}
-            type='button'
-            value={isPage ? '🏠 홈으로 🏠' : '확 인'}
-          />
+          <input onClick={onReturn} type='button' value={'확 인'} />
         </div>
       </div>
     </div>

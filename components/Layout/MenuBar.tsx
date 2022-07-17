@@ -37,27 +37,32 @@ export default function MenuBar() {
                   <div onClick={resetOpenMenuBar}>{menuList.name}</div>
                 </Link>
               ))}
-            </div>
-            <div className={styles.subMenu}>
-              <div
-                onClick={() =>
-                  window.open(
-                    'https://github.com/42organization/42arcade.gg.client/wiki/42gg.kr--%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B0%80%EC%9D%B4%EB%93%9C'
-                  )
-                }
-              >
-                페이지 가이드
-              </div>
-              <Link href={'/manual'}>
-                <div onClick={resetOpenMenuBar}>경기 매뉴얼</div>
-              </Link>
-              {userData.isAdmin ? (
-                <div onClick={goToAdminPage}>😎 관리자</div>
-              ) : (
+              <div className={styles.subMenu}>
+                <div
+                  onClick={() =>
+                    window.open(
+                      'https://far-moonstone-7ff.notion.site/91925f9c945340c6a139f64fb849990d'
+                    )
+                  }
+                >
+                  공지사항
+                </div>
+                <div
+                  onClick={() =>
+                    window.open(
+                      'https://far-moonstone-7ff.notion.site/917df2bd339d42c3a7689277246e7f64'
+                    )
+                  }
+                >
+                  사용 설명서
+                </div>
                 <div onClick={() => setModalInfo({ modalName: 'MENU-REPORT' })}>
                   건의하기
                 </div>
-              )}
+              </div>
+            </div>
+            <div className={styles.subMenu} id={styles.logout}>
+              {userData.isAdmin && <div onClick={goToAdminPage}>😎 관리자</div>}
               <div onClick={() => setModalInfo({ modalName: 'MENU-LOGOUT' })}>
                 로그아웃
               </div>

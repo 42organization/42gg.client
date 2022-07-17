@@ -49,7 +49,7 @@ export default function ModalProvider() {
           <CancelController {...cancelInfo} />
         ) : null;
       case 'MATCH-MANUAL':
-        return <MatchManualModal isPage={false} />;
+        return <MatchManualModal />;
       case 'USER-PROFILE_EDIT':
         return <EditProfileModal />;
       case 'FIXED-INPUT_SCORE':
