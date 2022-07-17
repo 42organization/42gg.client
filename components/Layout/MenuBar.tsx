@@ -14,7 +14,6 @@ export default function MenuBar() {
     { name: '랭킹', link: '/rank' },
     { name: '최근 경기', link: '/game' },
     { name: '내 정보', link: `/users/detail?intraId=${userData.intraId}` },
-    // { name: '경기 규칙', link: '/manual' },
   ];
 
   const goToAdminPage = async () => {
