@@ -27,9 +27,10 @@ export default function MatchManualModal({ isPage }: ManualProps) {
           <ul className={styles.ruleDetail}>
             <li>등록한 경기가 끝나야만 다음 경기 등록 가능</li>
             <li>경기 시작 5분 전 상대 팀 공개 및 경기 취소 불가</li>
-            <li>매칭 취소 시, 1분간 경기 등록 불가</li>
             <li>매칭 알림은 이메일로 전달</li>
             <li>일정 점수 이상 차이 나는 상대와 매칭 불가</li>
+            <li>경기가 매칭된 상태에서 취소 시, 1분간 경기 등록 불가</li>
+            <li>상대방이 경기를 취소하면 나의 경기는 매칭 대기 상태로 전환 </li>
           </ul>
         </li>
         <li>
@@ -59,6 +60,16 @@ export default function MatchManualModal({ isPage }: ManualProps) {
             <li>경기 종료 후 그 자리에서 세트 점수 입력</li>
             <li>다음 경기가 있을 시 현재 스코어가 높은 선수가 승리</li>
             <li>다음 경기가 없을 시 계속 진행</li>
+          </ul>
+        </li>
+        <li>
+          ⚠️ 경기 시 주의사항 ⚠️
+          <ul className={styles.ruleDetail}>
+            <li>
+              매치가 시작 되었으나 상대방이 나오지 않는다면 3분이 지날 때 마다
+              세트 점수 1점씩 획득
+            </li>
+            <li>6분이 지났을 때도 나오지 않았다면 세트 점수 2:0 승리 처리</li>
           </ul>
         </li>
       </ul>
