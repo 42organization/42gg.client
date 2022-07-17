@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
   menuBarState,
@@ -12,6 +11,7 @@ import MenuBar from './MenuBar';
 import NotiBar from './NotiBar';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
 import { FiMenu } from 'react-icons/fi';
+import { BsMegaphone } from 'react-icons/bs';
 import styles from 'styles/Layout/Header.module.scss';
 
 export default function Header() {
@@ -41,6 +41,16 @@ export default function Header() {
           </Link>
         </div>
         <div className={styles.headerRight}>
+          <div
+            id={styles.announceIcon}
+            onClick={() =>
+              window.open(
+                'https://far-moonstone-7ff.notion.site/91925f9c945340c6a139f64fb849990d'
+              )
+            }
+          >
+            <BsMegaphone />
+          </div>
           <div id={styles.notiIcon} onClick={openNotiBarHandler}>
             {liveData.notiCount ? (
               <div className={styles.bellWhole}>
