@@ -54,7 +54,7 @@ export default function MatchManualModal() {
           </ul>
         </li>
         <li>
-          ⚠️ 경기 시 주의사항 ⚠️
+          🚨 경기 시 주의사항
           <ul className={styles.ruleDetail}>
             <li>
               매치가 시작 되었으나 상대방이 나오지 않는다면 3분이 지날 때 마다
