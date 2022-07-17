@@ -54,7 +54,6 @@ export default function EditProfileModal() {
       ...prev,
       ...editedProfile,
     }));
-    setModalInfo({ modalName: null });
 
     try {
       await instance.put(`/pingpong/users/detail`, editedProfile);
@@ -62,6 +61,7 @@ export default function EditProfileModal() {
     } catch (e) {
       setErrorMessage('JH02');
     }
+    setModalInfo({ modalName: null });
   };
 
   const cancelEditHandler = () => setModalInfo({ modalName: null });
