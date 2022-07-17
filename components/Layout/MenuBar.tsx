@@ -56,9 +56,6 @@ export default function MenuBar() {
                 >
                   사용 설명서
                 </div>
-                <Link href={'/manual'}>
-                  <div onClick={resetOpenMenuBar}>경기 매뉴얼</div>
-                </Link>
                 <div onClick={() => setModalInfo({ modalName: 'MENU-REPORT' })}>
                   건의하기
                 </div>
