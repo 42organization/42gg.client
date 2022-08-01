@@ -11,8 +11,19 @@ type NotiItemProps = {
 
 export default function NotiItem({ data }: NotiItemProps) {
   const setOpenNotiBar = useSetRecoilState(notiBarState);
-  const title = makeTitle(data.type);
   const notiDate = data.createdAt.slice(5, 16).replace('T', ' ');
+  const title = makeTitle(data.type);
+  const content = () => {
+    if (data.type === 'imminent' && data.enemyTeam && data.time)
+      return (
+        <>
+          {makeEnemyUsers(data.enemyTeam)}님과 경기{' '}
+          {makeImminentMinute(data.time, data.createdAt)}분 전 입니다.
+          서두르세요!
+        </>
+      );
+    else return makeContent(data);
+  };
 
   const makeEnemyUsers = (enemyTeam: string[]) => {
     return enemyTeam.map((intraId: string, i: number) => (
@@ -34,17 +45,7 @@ export default function NotiItem({ data }: NotiItemProps) {
       className={data.isChecked ? `${styles.readWrap}` : `${styles.unreadWrap}`}
     >
       <span className={styles.title}>{title}</span>
-      <div className={styles.content}>
-        {data.type === 'imminent' && data.enemyTeam && data.time ? (
-          <>
-            {makeEnemyUsers(data.enemyTeam)}님과 경기{' '}
-            {makeImminentMinute(data.time, data.createdAt)}분 전 입니다.
-            서두르세요!
-          </>
-        ) : (
-          makeContent(data)
-        )}
-      </div>
+      <div className={styles.content}>{content()}</div>
       <div className={styles.date}>{notiDate}</div>
     </div>
   );
@@ -57,6 +58,18 @@ function makeTitle(type: string) {
   else return '공 지';
 }
 
+function makeHyperlink(message: string) {
+  const url = message.split('https')[1];
+  const content = message.split('https')[0].split('=>')[0];
+  const linkedContent = message.split('https')[0].split('=>')[1];
+  return (
+    <>
+      {content} {'=>'}
+      <span onClick={() => window.open(`https${url}`)}>{linkedContent}</span>
+    </>
+  );
+}
+
 function makeContent(data: NotiData) {
   if (data.type !== 'announce' && data.time) {
     const gameTime = gameTimeToString(data.time);
@@ -66,5 +79,8 @@ function makeContent(data: NotiData) {
       return `${gameTime}에 신청한 매칭이 상대에 의해 취소되었습니다.`;
     else if (data.type === 'canceledbytime')
       return `${gameTime}에 신청한 매칭이 상대 없음으로 취소되었습니다.`;
-  } else return `${data.message}`;
+  } else {
+    if (data.message?.includes('https')) return makeHyperlink(data.message);
+    else return `${data.message}`;
+  }
 }

@@ -19,7 +19,7 @@ export default function MenuBar() {
   const goToAdminPage = async () => {
     try {
       await instance.get('/admin');
-      window.location.href = `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/admin`;
+      window.open(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/admin`);
     } catch (e) {
       alert('👊 콱 씨...!');
     }
