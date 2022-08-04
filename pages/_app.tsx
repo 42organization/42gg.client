@@ -9,6 +9,7 @@ import LoginChecker from 'components/LoginChecker';
 import Layout from 'components/Layout/Layout';
 import 'styles/globals.css';
 import * as gtag from 'lib/gtag';
+import { GTMPageView } from 'lib/gtm';
 import ModalProvider from 'components/modal/ModalProvider';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -23,6 +24,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
+
+  useEffect(() => {
+    const handleRouteChange = (url: string) => GTMPageView(url);
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, []);
 
   return (
     <>
