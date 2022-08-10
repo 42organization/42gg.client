@@ -6,10 +6,6 @@ export default function MyRank() {
   const myRank = useRecoilValue(myRankPosition);
   const setIsScroll = useSetRecoilState(isScrollState);
 
-  const onClick = () => {
-    setIsScroll(true);
-  };
-
   return (
     <div>
       {myRank && (
@@ -18,7 +14,14 @@ export default function MyRank() {
             <span>💡 나의 순위가 정해지지 않았습니다 💡</span>
           ) : (
             <div>
-              🚀🚀 <span onClick={onClick}>나의 순위 {myRank}위 </span>
+              🚀🚀{' '}
+              <span
+                onClick={() => {
+                  setIsScroll(true);
+                }}
+              >
+                나의 순위 {myRank}위{' '}
+              </span>
               바로가기 🚀🚀
             </div>
           )}
