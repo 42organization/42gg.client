@@ -31,7 +31,7 @@
 
 @mixin rankGrid {
   display: grid;
-  grid-template-columns: 12% 30% auto 14%;
+  grid-template-columns: 12% 22% auto 14%;
   align-items: center;
   justify-items: center;
   border-radius: $big-radius;
@@ -81,11 +81,6 @@
     justify-self: start;
     font-weight: 700;
     color: black;
-    .ppp {
-      font-weight: 400;
-      font-size: 0.7rem;
-      color: $dark-gray;
-    }
     span {
       cursor: pointer;
     }
@@ -94,7 +89,7 @@
     justify-self: left;
     color: $dark-gray;
   }
-  .winRate {
+  .ppp {
     justify-self: center;
     font-weight: 600;
     color: $winner-blue;

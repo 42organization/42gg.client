@@ -72,9 +72,9 @@ export default function RankList() {
     <div className={styles.container}>
       <div className={styles.division}>
         <div>순위</div>
-        <div>intraID (점수)</div>
+        <div>intraID</div>
         <div>상태메시지</div>
-        <div>승률</div>
+        <div>점수</div>
       </div>
       {rankData?.rankList.map((item: Rank, index) => (
         <RankItem
