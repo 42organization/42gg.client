@@ -4,13 +4,14 @@ import { userState } from 'utils/recoil/layout';
 import { useEffect, useState } from 'react';
 import styles from 'styles/mode/ModeSelect.module.scss';
 import ModeToggle from './ModeToggle';
+import SeasonDropDown from './SeasonDropDown';
 import React from 'react';
 
 interface ModeSelectProps {
   children: React.ReactNode;
 }
 
-export default function ModeSelect({ children }: ModeSelectProps) {
+export default function ModeSeasonProvider({ children }: ModeSelectProps) {
   const userData = useRecoilValue<UserData>(userState);
   const [displaySeasons, SetDisplaySeasons] = useState(true);
   const [isRank, setIsRank] = useState(userData?.mode === 'rank');
@@ -45,6 +46,7 @@ export default function ModeSelect({ children }: ModeSelectProps) {
         {displaySeasons && (
           <SeasonDropDown
             seasons={isRank ? seasons_rank : seasons_normal}
+            value={season}
             onSelect={dropDownHandler}
           />
         )}
@@ -55,23 +57,5 @@ export default function ModeSelect({ children }: ModeSelectProps) {
         displaySeasonsHandler,
       })}
     </div>
-  );
-}
-
-interface SeasonDropDownProps {
-  seasons: string[];
-  onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-}
-
-function SeasonDropDown({ seasons, onSelect }: SeasonDropDownProps) {
-  if (seasons.length === 0) return null;
-  return (
-    <select onChange={onSelect} defaultValue={seasons[0]}>
-      {seasons.map((season) => (
-        <option key={season} value={season}>
-          {season}
-        </option>
-      ))}
-    </select>
   );
 }
