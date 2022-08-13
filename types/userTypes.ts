@@ -4,7 +4,7 @@ export interface ProfileInfo {
   rank: number;
   ppp: number;
   wins: number;
-  loses: number;
+  losses: number;
   winRate: string;
   racketType: string;
   statusMessage: string;
