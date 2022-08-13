@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import { UserData } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from 'styles/mode/ModeSelect.module.scss';
 import ModeToggle from './ModeToggle';
 import React from 'react';
@@ -12,14 +12,28 @@ interface ModeSelectProps {
 
 export default function ModeSelect({ children }: ModeSelectProps) {
   const userData = useRecoilValue<UserData>(userState);
-  const [isRank, setIsRank] = useState(userData?.mode === 'normal');
-  const seasons_normal = ['season4', 'season2']; // 임시
-  const seasons_rank = ['season3', 'season1']; // 임시
+  const [displaySeasons, SetDisplaySeasons] = useState(true);
+  const [isRank, setIsRank] = useState(userData?.mode === 'rank');
+  const [season, setSeason] = useState('');
+  const seasons_normal = ['season4', 'season2']; // 임시 : back에서 받아와야함
+  const seasons_rank = ['season3', 'season1']; // 임시 : back에서 받아와야함
+
+  useEffect(() => {
+    setSeason(() => (isRank ? seasons_rank[0] : seasons_normal[0]));
+  }, [isRank]);
+
   const toggleHandler = () => {
     setIsRank((isRank) => !isRank);
   };
-  // cloneElement 문서화하기
-  // 하위 컴포넌트에 season 넘겨주기
+
+  const dropDownHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSeason(e.target.value);
+  };
+
+  const displaySeasonsHandler = (isDisplay: boolean) => {
+    SetDisplaySeasons(isDisplay);
+  };
+
   return (
     <div>
       <div className={styles.wrapper}>
@@ -28,16 +42,31 @@ export default function ModeSelect({ children }: ModeSelectProps) {
           onToggle={toggleHandler}
           text={isRank ? '랭크' : '일반'}
         />
-        <SeasonDropDown seasons={isRank ? seasons_rank : seasons_normal} />
+        {displaySeasons && (
+          <SeasonDropDown
+            seasons={isRank ? seasons_rank : seasons_normal}
+            onSelect={dropDownHandler}
+          />
+        )}
       </div>
-      {React.cloneElement(children as React.ReactElement, { isRank })}
+      {React.cloneElement(children as React.ReactElement, {
+        isRank,
+        season,
+        displaySeasonsHandler,
+      })}
     </div>
   );
 }
 
-function SeasonDropDown({ seasons }: { seasons: string[] }) {
+interface SeasonDropDownProps {
+  seasons: string[];
+  onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+function SeasonDropDown({ seasons, onSelect }: SeasonDropDownProps) {
+  if (seasons.length === 0) return null;
   return (
-    <select>
+    <select onChange={onSelect} defaultValue={seasons[0]}>
       {seasons.map((season) => (
         <option key={season} value={season}>
           {season}

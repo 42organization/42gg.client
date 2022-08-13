@@ -4,7 +4,8 @@
   display: block;
   position: relative;
   border-radius: 2rem;
-  background-color: #fff;
+  background-color: #8e8e8e;
+  color: white;
   box-shadow: 0 0 1rem 3px rgba(0 0 0 / 15%);
   cursor: pointer;
 
@@ -12,7 +13,6 @@
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
-    color: #f03d3d;
     left: 50%;
   }
 }
@@ -27,7 +27,7 @@
   left: 0.2rem;
   transform: translateY(-50%);
   border-radius: 50%;
-  background: #f03d3d;
+  background: white;
 }
 
 /* 체크박스가 체크될 시 변경되는 요소 */
@@ -37,7 +37,6 @@
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
-    color: white;
     left: 15%;
   }
 }
