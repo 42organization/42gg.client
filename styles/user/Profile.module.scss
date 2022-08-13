@@ -22,7 +22,7 @@
   align-items: center;
   border: solid 1.4px white;
   border-radius: $mini-radius;
-  padding: 0.5rem;
+  padding: 0.65rem;
   .userImage {
     @include userImage(4.7rem);
     margin-bottom: 0.8rem;
@@ -31,7 +31,7 @@
     font-size: $small-font;
     border-radius: $mini-radius;
     text-align: center;
-    padding: 0.1rem 0.5rem;
+    padding: 0.2rem 0.5rem;
     background: white;
   }
 }
@@ -86,7 +86,7 @@
   .bar {
     display: flex;
     width: 99%;
-    height: 1.3rem;
+    height: 1.2rem;
     border-radius: $mini-radius;
     overflow: hidden;
     margin-right: 0.1rem;
