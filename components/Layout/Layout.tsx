@@ -54,7 +54,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const getUserDataHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/users`);
-      setUserData(res?.data);
+      setUserData({ ...res?.data, mode: 'normal' }); // 임시
     } catch (e) {
       setErrorMessage('JB02');
     }
