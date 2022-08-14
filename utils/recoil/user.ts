@@ -10,7 +10,7 @@ export const profileInfoState = atom<ProfileInfo>({
     rank: 0,
     ppp: 0,
     wins: 0,
-    loses: 0,
+    losses: 0,
     winRate: '0%',
     racketType: 'shakeHand',
     statusMessage: '',
