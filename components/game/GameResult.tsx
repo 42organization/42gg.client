@@ -5,12 +5,15 @@ import GameResultList from 'components/game/GameResultList';
 
 interface GameResult {
   intraId?: string;
+  isRank?: boolean;
+  season?: string;
 }
 
-export default function GameResult({ intraId }: GameResult) {
+export default function GameResult({ intraId, isRank, season }: GameResult) {
   const queryClient = new QueryClient();
   const [path, setPath] = useState<string>();
   const router = useRouter();
+
   useEffect(() => {
     if (router.asPath === '/' || router.asPath.includes('token')) {
       setPath(`/pingpong/games?count=3&gameId=`);

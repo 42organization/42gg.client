@@ -67,9 +67,11 @@ export const options = {
 
 interface ChartProps {
   intraId: string;
+  isRank?: boolean;
+  season?: string;
 }
 
-export default function Chart({ intraId }: ChartProps) {
+export default function Chart({ intraId, isRank, season }: ChartProps) {
   const setErrorMessage = useSetRecoilState(errorState);
   const [chartData, setChartData] = useState<ChartDataItem[]>([
     { ppp: 0, date: '1970-01-01' },

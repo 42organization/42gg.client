@@ -9,7 +9,17 @@ import RankItem from './RankItem';
 import PageNation from 'components/Pagination';
 import styles from 'styles/RankList.module.scss';
 
-export default function RankList() {
+interface RankListProps {
+  isRank?: boolean;
+  season?: string;
+  displaySeasonsHandler?: (isDisplay: boolean) => void;
+}
+
+export default function RankList({
+  isRank,
+  season,
+  displaySeasonsHandler,
+}: RankListProps) {
   const [rankData, setRankData] = useState<RankData | null>(null);
   const [myRank, setMyRank] = useRecoilState(myRankPosition);
   const [isScroll, setIsScroll] = useRecoilState(isScrollState);
@@ -20,6 +30,11 @@ export default function RankList() {
     router.asPath !== '/rank'
       ? `/pingpong/ranks/single?count=3`
       : `/pingpong/ranks/single?page=${page}`;
+
+  useEffect(() => {
+    if (isRank === undefined || displaySeasonsHandler === undefined) return;
+    displaySeasonsHandler(isRank);
+  }, [isRank]);
 
   useEffect(() => {
     if (isScroll) {
