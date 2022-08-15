@@ -3,8 +3,8 @@ import { v1 } from 'uuid';
 import { UserData, LiveData } from '../../types/mainType';
 
 export const userState = atom<UserData>({
-  key: `userState/${v1()}`, // unique ID (다른 atoms/selectors을 구별하기 위해서)
-  default: { intraId: '', isAdmin: false, userImageUri: '' }, // default value (aka initial value)
+  key: `userState/${v1()}`,
+  default: { intraId: '', isAdmin: false, userImageUri: '', mode: 'both' },
 });
 
 export const liveState = atom<LiveData>({
