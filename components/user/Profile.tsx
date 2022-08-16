@@ -10,10 +10,9 @@ import styles from 'styles/user/Profile.module.scss';
 
 interface ProfileProps {
   intraId: string;
-  isRank?: boolean;
 }
 
-export default function Profile({ intraId, isRank }: ProfileProps) {
+export default function Profile({ intraId }: ProfileProps) {
   const userData = useRecoilValue(userState);
   const setErrorMessage = useSetRecoilState(errorState);
   const setModalInfo = useSetRecoilState(modalState);

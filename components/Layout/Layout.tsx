@@ -45,7 +45,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   useEffect(() => {
     if (liveData?.event === 'match') setOpenCurrentInfo(true);
     else {
-      if (liveData?.event === 'game')
+      if (liveData?.event === 'game' && liveData?.mode === 'rank')
         setModalInfo({ modalName: 'FIXED-INPUT_SCORE' });
       setOpenCurrentInfo(false);
     }
@@ -63,7 +63,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const getLiveDataHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/users/live`);
-      setLiveData(res?.data);
+      setLiveData({ ...res?.data, mode: 'normal' }); // 임시
       if (matchRefreshBtn) setMatchRefreshBtn(false);
     } catch (e) {
       setErrorMessage('JB03');

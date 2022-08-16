@@ -8,16 +8,17 @@ import instance from 'utils/axios';
 import RankItem from './RankItem';
 import PageNation from 'components/Pagination';
 import styles from 'styles/RankList.module.scss';
+import { Mode } from 'types/mainType';
 
 interface RankListProps {
   isRank?: boolean;
-  season?: string;
+  mode?: Mode;
   displaySeasonsHandler?: (isDisplay: boolean) => void;
 }
 
 export default function RankList({
   isRank,
-  season,
+  mode,
   displaySeasonsHandler,
 }: RankListProps) {
   const [rankData, setRankData] = useState<RankData | null>(null);
