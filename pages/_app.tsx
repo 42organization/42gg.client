@@ -7,10 +7,9 @@ import { RecoilRoot } from 'recoil';
 import ErrorChecker from 'components/error/ErrorChecker';
 import LoginChecker from 'components/LoginChecker';
 import Layout from 'components/Layout/Layout';
-import ModalProvider from 'components/modal/ModalProvider';
-import AdminChecker from 'components/admin/AdminChecker';
-import * as gtag from 'lib/gtag';
 import 'styles/globals.css';
+import * as gtag from 'lib/gtag';
+import ModalProvider from 'components/modal/ModalProvider';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -50,12 +49,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <RecoilRoot>
         <LoginChecker>
           <ErrorChecker>
-            <AdminChecker>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-              <ModalProvider />
-            </AdminChecker>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+            <ModalProvider />
           </ErrorChecker>
         </LoginChecker>
       </RecoilRoot>

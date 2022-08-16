@@ -70,7 +70,9 @@ export default function MenuBar() {
             <div className={styles.subMenu} id={styles.logout}>
               {userData.isAdmin && (
                 <>
-                  <div onClick={goToStatisticsPage}>📊 통계페이지</div>
+                  <Link href='/statistics'>
+                    <div onClick={goToStatisticsPage}>📊 통계페이지</div>
+                  </Link>
                   <div onClick={goToAdminPage}>😎 관리자</div>
                 </>
               )}
