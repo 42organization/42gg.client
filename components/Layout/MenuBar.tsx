@@ -3,6 +3,7 @@ import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import { menuBarState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import { adminState } from 'utils/recoil/admin';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
@@ -10,11 +11,16 @@ export default function MenuBar() {
   const userData = useRecoilValue(userState);
   const resetOpenMenuBar = useResetRecoilState(menuBarState);
   const setModalInfo = useSetRecoilState(modalState);
+  const setIsAdmin = useSetRecoilState(adminState);
   const menuList = [
     { name: '랭킹', link: '/rank' },
     { name: '최근 경기', link: '/game' },
     { name: '내 정보', link: `/users/detail?intraId=${userData.intraId}` },
   ];
+
+  const goToStatisticsPage = () => {
+    setIsAdmin(true);
+  };
 
   const goToAdminPage = async () => {
     try {
@@ -62,7 +68,12 @@ export default function MenuBar() {
               </div>
             </div>
             <div className={styles.subMenu} id={styles.logout}>
-              {userData.isAdmin && <div onClick={goToAdminPage}>😎 관리자</div>}
+              {userData.isAdmin && (
+                <>
+                  <div onClick={goToStatisticsPage}>📊 통계페이지</div>
+                  <div onClick={goToAdminPage}>😎 관리자</div>
+                </>
+              )}
               <div onClick={() => setModalInfo({ modalName: 'MENU-LOGOUT' })}>
                 로그아웃
               </div>
