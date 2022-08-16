@@ -15,13 +15,12 @@ export default function ModeSeasonProvider({ children }: ModeSelectProps) {
   const userData = useRecoilValue<UserData>(userState);
   const [mode, setMode] = useState(userData?.mode);
   const [season, setSeason] = useState('');
-  const [displaySeasons, setDisplaySeasons] = useState(true);
+  const [displaySeasons, SetDisplaySeasons] = useState(true);
   const seasons_normal = ['season4', 'season2']; // 임시 : back에서 받아와야함
   const seasons_rank = ['season3', 'season1']; // 임시 : back에서 받아와야함
 
   useEffect(() => {
     setSeason(() => (mode === 'rank' ? seasons_rank[0] : seasons_normal[0]));
-    setDisplaySeasons(mode === 'rank');
   }, [mode]);
 
   const modeToggleHandler = () => {
@@ -30,6 +29,10 @@ export default function ModeSeasonProvider({ children }: ModeSelectProps) {
 
   const seasonDropDownHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSeason(e.target.value);
+  };
+
+  const displaySeasonsHandler = (isDisplay: boolean) => {
+    SetDisplaySeasons(isDisplay);
   };
 
   return (
@@ -51,6 +54,7 @@ export default function ModeSeasonProvider({ children }: ModeSelectProps) {
       {React.cloneElement(children as React.ReactElement, {
         mode,
         season,
+        displaySeasonsHandler,
       })}
     </div>
   );

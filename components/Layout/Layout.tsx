@@ -15,6 +15,7 @@ import Footer from './Footer';
 import CurrentMatchInfo from './CurrentMatchInfo';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/Layout.module.scss';
+import Statistics from 'pages/statistics';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -45,7 +46,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   useEffect(() => {
     if (liveData?.event === 'match') setOpenCurrentInfo(true);
     else {
-      if (liveData?.event === 'game')
+      if (liveData?.event === 'game' && liveData?.mode === 'rank')
         setModalInfo({ modalName: 'FIXED-INPUT_SCORE' });
       setOpenCurrentInfo(false);
     }
@@ -63,7 +64,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const getLiveDataHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/users/live`);
-      setLiveData(res?.data);
+      setLiveData({ ...res?.data, mode: 'normal' }); // 임시
       if (matchRefreshBtn) setMatchRefreshBtn(false);
     } catch (e) {
       setErrorMessage('JB03');
@@ -74,17 +75,25 @@ export default function AppLayout({ children }: AppLayoutProps) {
     <div className={styles.appContainer}>
       <div className={styles.background}>
         <div>
-          <Header />
-          {openCurrentInfo && <CurrentMatchInfo />}
-          {presentPath !== '/match' && presentPath !== '/manual' && (
-            <Link href='/match'>
-              <div className={styles.buttonContainer}>
-                <a className={styles.matchingButton}>🏓</a>
-              </div>
-            </Link>
+          {presentPath === '/statistics' && userData.isAdmin ? (
+            <Statistics />
+          ) : (
+            userData.intraId && (
+              <>
+                <Header />
+                {openCurrentInfo && <CurrentMatchInfo />}
+                {presentPath !== '/match' && presentPath !== '/manual' && (
+                  <Link href='/match'>
+                    <div className={styles.buttonContainer}>
+                      <a className={styles.matchingButton}>🏓</a>
+                    </div>
+                  </Link>
+                )}
+                {children}
+                <Footer />
+              </>
+            )
           )}
-          {children}
-          <Footer />
         </div>
       </div>
     </div>

@@ -15,6 +15,7 @@ import { ChartDataItem } from 'types/userTypes';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import styles from 'styles/user/Chart.module.scss';
+import { Mode } from 'types/mainType';
 
 ChartJS.register(
   CategoryScale,
@@ -67,11 +68,10 @@ export const options = {
 
 interface ChartProps {
   intraId: string;
-  isRank?: boolean;
   season?: string;
 }
 
-export default function Chart({ intraId, isRank, season }: ChartProps) {
+export default function Chart({ intraId, season }: ChartProps) {
   const setErrorMessage = useSetRecoilState(errorState);
   const [chartData, setChartData] = useState<ChartDataItem[]>([
     { ppp: 0, date: '1970-01-01' },

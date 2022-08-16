@@ -62,7 +62,14 @@ export default function MenuBar() {
               </div>
             </div>
             <div className={styles.subMenu} id={styles.logout}>
-              {userData.isAdmin && <div onClick={goToAdminPage}>😎 관리자</div>}
+              {userData.isAdmin && (
+                <>
+                  <Link href='/statistics'>
+                    <div>📊 통계페이지</div>
+                  </Link>
+                  <div onClick={goToAdminPage}>😎 관리자</div>
+                </>
+              )}
               <div onClick={() => setModalInfo({ modalName: 'MENU-LOGOUT' })}>
                 로그아웃
               </div>

@@ -10,6 +10,7 @@ export interface UserData {
 export interface LiveData {
   notiCount: number;
   event: 'match' | 'game' | null;
+  mode: Mode | null;
 }
 
 export interface SearchData {

@@ -2,14 +2,21 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import GameResultList from 'components/game/GameResultList';
+import { Mode } from 'types/mainType';
 
 interface GameResult {
   intraId?: string;
-  isRank?: boolean;
+  mode?: Mode;
   season?: string;
+  isMine?: boolean;
 }
 
-export default function GameResult({ intraId, isRank, season }: GameResult) {
+export default function GameResult({
+  intraId,
+  mode,
+  season,
+  isMine,
+}: GameResult) {
   const queryClient = new QueryClient();
   const [path, setPath] = useState<string>();
   const router = useRouter();
