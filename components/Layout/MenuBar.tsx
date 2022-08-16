@@ -3,7 +3,6 @@ import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import { menuBarState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
-import { adminState } from 'utils/recoil/admin';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
@@ -11,16 +10,11 @@ export default function MenuBar() {
   const userData = useRecoilValue(userState);
   const resetOpenMenuBar = useResetRecoilState(menuBarState);
   const setModalInfo = useSetRecoilState(modalState);
-  const setIsAdmin = useSetRecoilState(adminState);
   const menuList = [
     { name: '랭킹', link: '/rank' },
     { name: '최근 경기', link: '/game' },
     { name: '내 정보', link: `/users/detail?intraId=${userData.intraId}` },
   ];
-
-  const goToStatisticsPage = () => {
-    setIsAdmin(true);
-  };
 
   const goToAdminPage = async () => {
     try {
@@ -71,7 +65,7 @@ export default function MenuBar() {
               {userData.isAdmin && (
                 <>
                   <Link href='/statistics'>
-                    <div onClick={goToStatisticsPage}>📊 통계페이지</div>
+                    <div>📊 통계페이지</div>
                   </Link>
                   <div onClick={goToAdminPage}>😎 관리자</div>
                 </>
