@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import { adminState } from 'utils/recoil/admin';
-import Statistics from 'pages/statistics';
+import Statistics from 'components/admin/statistics';
 import styles from 'styles/Layout/Layout.module.scss';
 
 interface AdminCheckerProps {

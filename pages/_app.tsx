@@ -8,7 +8,7 @@ import ErrorChecker from 'components/error/ErrorChecker';
 import LoginChecker from 'components/LoginChecker';
 import Layout from 'components/Layout/Layout';
 import ModalProvider from 'components/modal/ModalProvider';
-import AdminChecker from 'components/AdminChecker';
+import AdminChecker from 'components/admin/AdminChecker';
 import * as gtag from 'lib/gtag';
 import 'styles/globals.css';
 
