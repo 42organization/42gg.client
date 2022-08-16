@@ -4,12 +4,12 @@ import { UserData, LiveData } from '../../types/mainType';
 
 export const userState = atom<UserData>({
   key: `userState/${v1()}`,
-  default: { intraId: '', isAdmin: false, userImageUri: '', mode: 'both' },
+  default: { intraId: '', isAdmin: false, userImageUri: '', mode: 'normal' },
 });
 
 export const liveState = atom<LiveData>({
   key: `liveState/${v1()}`,
-  default: { notiCount: 0, event: null },
+  default: { notiCount: 0, event: null, mode: 'rank' },
 });
 
 export const menuBarState = atom<boolean>({
