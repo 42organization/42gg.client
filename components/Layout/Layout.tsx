@@ -74,13 +74,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className={styles.appContainer}>
       <div className={styles.background}>
+        <Header />
         <div>
           {presentPath === '/statistics' && userData.isAdmin ? (
             <Statistics />
           ) : (
             userData.intraId && (
               <>
-                <Header />
                 {openCurrentInfo && <CurrentMatchInfo />}
                 {presentPath !== '/match' && presentPath !== '/manual' && (
                   <Link href='/match'>
@@ -90,11 +90,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
                   </Link>
                 )}
                 {children}
-                <Footer />
               </>
             )
           )}
         </div>
+        <Footer />
       </div>
     </div>
   );
