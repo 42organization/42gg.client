@@ -7,12 +7,10 @@ export const profileInfoState = atom<ProfileInfo>({
   default: {
     intraId: '',
     userImageUri: '',
-    rank: 0,
-    ppp: 0,
-    wins: 0,
-    losses: 0,
-    winRate: '0%',
     racketType: 'shakeHand',
     statusMessage: '',
+    level: 0,
+    currentExp: 0,
+    maxExp: 0,
   },
 });
