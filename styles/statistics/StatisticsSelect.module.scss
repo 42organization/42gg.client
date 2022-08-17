@@ -1,0 +1,26 @@
+@import 'styles/common.scss';
+
+.container {
+  display: grid;
+  grid-template-columns: 3fr 10fr;
+  background: rgba(#ffffff, 0.95);
+  height: 100vh;
+}
+
+.chartSelectContainer {
+  height: 100vh;
+  background: rgba(#ffffff, 1);
+  font-size: $small-font;
+  text-align: center;
+  .listText {
+    border: solid $gray 0.1rem;
+    border-radius: $small-radius;
+    margin: 0.1rem;
+    text-align: center;
+    padding: 1rem;
+  }
+}
+
+.chart {
+  padding: 1rem;
+}

@@ -15,6 +15,7 @@ import Footer from './Footer';
 import CurrentMatchInfo from './CurrentMatchInfo';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/Layout.module.scss';
+import Statistics from 'pages/statistics';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -74,17 +75,25 @@ export default function AppLayout({ children }: AppLayoutProps) {
     <div className={styles.appContainer}>
       <div className={styles.background}>
         <div>
-          <Header />
-          {openCurrentInfo && <CurrentMatchInfo />}
-          {presentPath !== '/match' && presentPath !== '/manual' && (
-            <Link href='/match'>
-              <div className={styles.buttonContainer}>
-                <a className={styles.matchingButton}>🏓</a>
-              </div>
-            </Link>
+          {presentPath === '/statistics' && userData.isAdmin ? (
+            <Statistics />
+          ) : (
+            userData.intraId && (
+              <>
+                <Header />
+                {openCurrentInfo && <CurrentMatchInfo />}
+                {presentPath !== '/match' && presentPath !== '/manual' && (
+                  <Link href='/match'>
+                    <div className={styles.buttonContainer}>
+                      <a className={styles.matchingButton}>🏓</a>
+                    </div>
+                  </Link>
+                )}
+                {children}
+                <Footer />
+              </>
+            )
           )}
-          {children}
-          <Footer />
         </div>
       </div>
     </div>
