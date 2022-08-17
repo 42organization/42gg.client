@@ -1,12 +1,11 @@
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import Chart from 'components/user/Chart';
 import Profile from 'components/user/Profile';
 import GameResult from 'components/game/GameResult';
 import styles from 'styles/user/user.module.scss';
 import { useEffect } from 'react';
-import SeasonProvider from 'components/mode/SeasonProvider';
+import RankProfile from 'components/user/RankProfile';
 
 export default function user() {
   const setModalInfo = useSetRecoilState(modalState);
@@ -23,9 +22,7 @@ export default function user() {
         <>
           <h1 className={styles.title}>{intraId}</h1>
           <Profile intraId={intraId} />
-          <SeasonProvider>
-            <Chart intraId={intraId} />
-          </SeasonProvider>
+          <RankProfile intraId={intraId} />
           <GameResult intraId={intraId} />
         </>
       )}

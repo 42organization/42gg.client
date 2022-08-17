@@ -29,16 +29,8 @@ export default function Profile({ intraId }: ProfileProps) {
     })();
   }, [intraId]);
 
-  const {
-    userImageUri,
-    rank,
-    ppp,
-    wins,
-    losses,
-    winRate,
-    racketType,
-    statusMessage,
-  } = profileInfo;
+  const { userImageUri, racketType, statusMessage, level, currentExp, maxExp } =
+    profileInfo;
 
   const startEditHandler = () => {
     setModalInfo({ modalName: 'USER-PROFILE_EDIT' });
@@ -46,9 +38,9 @@ export default function Profile({ intraId }: ProfileProps) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.gameInfoWrap}>
-        <div className={styles.playerInfo}>
-          <div className={styles.userImage}>
+      <div className={styles.topContainer}>
+        <div className={styles.userImage}>
+          <div>
             {userImageUri && (
               <Image
                 src={userImageUri}
@@ -60,50 +52,45 @@ export default function Profile({ intraId }: ProfileProps) {
               />
             )}
           </div>
-          <div className={styles.racketType}>{racketType.toUpperCase()}</div>
         </div>
-        <div className={styles.gameInfo}>
-          <div className={styles.rank}>
-            <span>순위</span>
-            <span>{rank === -1 ? '-' : rank}</span>
-          </div>
-          <div className={styles.rankDetail}>
-            <div className={styles.string}>
-              <div className={styles.ppp}>
-                <span>{ppp} 점</span>
-              </div>
-              <div className={styles.winRate}>
-                <span>
-                  {wins}승 {losses}패
-                </span>
-                <span>승률 {winRate}%</span>
-              </div>
-            </div>
+        <div className={styles.levelRacketWrap}>
+          <div className={styles.level}>Lv. 20</div>
+          {/* <div className={styles.level}>Lv. {level}</div> */}
+          <div className={styles.exp}>
+            <div className={styles.expRate}>999 / 1000</div>
+            {/* <div className={styles.expRate}>
+              {currentExp} / {maxExp}
+            </div> */}
             <div className={styles.bar}>
-              <span
-                className={styles.wins}
-                style={{ width: `${parseInt(winRate)}%` }}
+              <span className={styles.right} style={{ width: `30%` }}></span>
+              <span className={styles.left} style={{ width: `70%` }}></span>
+              {/* <span
+                className={styles.right}
+                style={{ width: `${currentExp}%` }}
               ></span>
               <span
-                className={styles.losses}
-                style={{ width: `${100 - parseInt(winRate)}%` }}
-              ></span>
+                className={styles.left}
+                style={{ width: `${(maxExp - currentExp) / 100}%` }}
+              ></span> */}
             </div>
           </div>
+          <div className={styles.racket}>{racketType.toUpperCase()}</div>
         </div>
       </div>
-      <div className={styles.statusMessage}>
-        <div className={styles.messaage}>
-          {userData.intraId === intraId && statusMessage.length === 0
-            ? '상태메시지를 입력해보세요!'
-            : statusMessage}
-        </div>
-        <div className={styles.buttons}>
-          {userData.intraId === intraId && (
-            <div className={styles.positive}>
-              <input type='button' onClick={startEditHandler} value='edit' />
-            </div>
-          )}
+      <div className={styles.bottomContainer}>
+        <div className={styles.statusMessage}>
+          <div className={styles.messaage}>
+            {userData.intraId === intraId && statusMessage.length === 0
+              ? '상태메시지를 입력해보세요!'
+              : statusMessage}
+          </div>
+          <div className={styles.buttons}>
+            {userData.intraId === intraId && (
+              <div className={styles.positive}>
+                <input type='button' onClick={startEditHandler} value='edit' />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

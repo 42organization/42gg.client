@@ -8,99 +8,122 @@
   color: black;
   border-radius: $small-radius;
   padding: 1rem;
+  margin-bottom: 0.6rem;
 }
 
-.gameInfoWrap {
+.topContainer {
   display: flex;
-  margin-bottom: 0.8rem;
 }
 
-.playerInfo {
+.bottomContainer {
+  margin-top: 1rem;
+}
+
+.userImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px white;
+  border-radius: $mini-radius;
+  padding: 0.3rem;
+  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  div {
+    @include userImage(4.7rem);
+  }
+}
+
+.levelRacketWrap {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  border: solid 1.4px white;
-  border-radius: $mini-radius;
-  padding: 0.65rem;
-  .userImage {
-    @include userImage(4.7rem);
-    margin-bottom: 0.8rem;
+  justify-content: center;
+  margin-left: 1rem;
+  .level {
+    color: $pp-blue;
+    font-size: $giant-font;
+    font-weight: 700;
+    margin: 0 0 0.2rem 0.2rem;
   }
-  .racketType {
+  .exp {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+    .expRate {
+      font-size: $small-font;
+      margin: 0 0 0.2rem 0.2rem;
+    }
+    .bar {
+      display: flex;
+      height: 0.5rem;
+      width: 7rem;
+      border-radius: $mini-radius;
+      overflow: hidden;
+      .right {
+        background-color: $g2-top;
+      }
+      .left {
+        background-color: $dark-gray;
+      }
+    }
+  }
+  .racket {
     font-size: $small-font;
     border-radius: $mini-radius;
     text-align: center;
     padding: 0.2rem 0.5rem;
     background: white;
+    margin-right: auto;
   }
 }
 
-.gameInfo {
+.rankInfo {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  margin-left: 0.8rem;
-  width: 100%;
+  padding: 0 0.5rem;
+  margin: -1.5rem 0 0.7rem 0;
 }
 
 .rank {
   display: flex;
   align-items: flex-end;
-  justify-content: flex-start;
   color: $pp-red;
-  font-size: 3.3rem;
+  font-size: 2rem;
   font-weight: 700;
-  line-height: 3.1rem;
+  line-height: 100%;
+  margin-bottom: 0.3rem;
   span:nth-child(1) {
-    font-size: $big-font;
-    line-height: $big-font;
-    margin-right: 0.3rem;
-    margin-bottom: 0.2rem;
+    font-size: 1.5rem;
+    margin-right: 0.2rem;
   }
-  margin-bottom: 0.8rem;
+  span:nth-child(2) {
+    padding-bottom: 0.15rem;
+  }
 }
 
-.rankDetail {
-  width: 100%;
-  .string {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    width: 100%;
-    margin-bottom: 0.3rem;
-    .ppp {
-      margin-right: 0.5rem;
-      font-size: $big-font;
-    }
-    .winRate {
-      margin-right: 0.3rem;
-      span:nth-child(2) {
-        margin-left: 0.4rem;
-        font-size: $small-font;
-        font-weight: 300;
-      }
-    }
+.pppWinRateWrap {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 0.2rem;
+  .ppp {
+    font-size: $big-font;
   }
-  .bar {
-    display: flex;
-    width: 99%;
-    height: 1.2rem;
-    border-radius: $mini-radius;
-    overflow: hidden;
-    margin-right: 0.1rem;
-    margin-bottom: 0.1rem;
-    .wins {
-      display: flex;
-      align-items: center;
-      background-color: $winner-blue;
-      padding: 0.1rem 0.3rem;
-      color: white;
-    }
-    .losses {
-      background-color: $loser-red;
-    }
+  .winRate {
+    font-size: $small-font;
+    font-weight: 400;
+    margin-left: auto;
+  }
+}
+
+.bar {
+  display: flex;
+  width: 100%;
+  height: 0.8rem;
+  border-radius: $mini-radius;
+  overflow: hidden;
+  .wins {
+    background-color: $winner-blue;
+  }
+  .losses {
+    background-color: $loser-red;
   }
 }
 
@@ -109,8 +132,8 @@
   background: white;
   border-radius: $mini-radius;
   min-height: 5rem;
-  font-size: $big-font;
-  padding: 0.8rem;
+  font-size: $midium-font;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
