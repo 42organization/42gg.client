@@ -1,6 +1,5 @@
 import { Mode } from 'types/mainType';
 import styles from 'styles/RankList.module.scss';
-import { useEffect } from 'react';
 
 interface RankListFrameProps {
   children: React.ReactNode;

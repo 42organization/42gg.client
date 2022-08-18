@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
 import { Normal, Rank } from 'types/rankTypes';
-import { Mode, UserData } from 'types/mainType';
+import { Mode } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
 import styles from 'styles/RankList.module.scss';
 
@@ -24,7 +24,7 @@ export default function RankListItem({
   level,
   exp,
 }: RankType) {
-  const myIntraId = useRecoilValue<UserData>(userState).intraId;
+  const myIntraId = useRecoilValue(userState).intraId;
   const { rank, intraId, statusMessage } = userData;
   const messageFiltered =
     statusMessage.length > 10

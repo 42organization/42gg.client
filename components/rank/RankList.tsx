@@ -9,9 +9,8 @@ import instance from 'utils/axios';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 import PageNation from 'components/Pagination';
-import styles from 'styles/RankList.module.scss';
 
-import axios from 'axios';
+import axios from 'axios'; // api 연결 후 삭제 예정
 
 interface RankListProps {
   mode?: Mode;
@@ -58,8 +57,9 @@ export default function RankList({ mode, season }: RankListProps) {
 
   const getRankData = async () => {
     try {
-      // const res = await instance.get(`${path}`);
-      const res = await axios.get(`http://localhost:3000/api/${path()}`); // 백에서 api 만들면 뺄 예정
+      // const res = await instance.get(`${path()}`);
+      const res = await axios.get(`http://localhost:3000/api/${path()}`); // api 연결 후 삭제 예정
+
       setRankData(res?.data);
       setMyRank(res?.data.myRank);
     } catch (e) {
