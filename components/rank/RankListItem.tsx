@@ -7,7 +7,7 @@ import styles from 'styles/RankList.module.scss';
 
 interface RankType {
   index: number;
-  userData: Normal | Rank;
+  rankedUser: Normal | Rank;
   isMain: boolean;
   mode?: Mode;
   ppp: number | string | null;
@@ -17,7 +17,7 @@ interface RankType {
 
 export default function RankListItem({
   index,
-  userData,
+  rankedUser,
   isMain,
   mode,
   ppp,
@@ -25,7 +25,7 @@ export default function RankListItem({
   exp,
 }: RankType) {
   const myIntraId = useRecoilValue(userState).intraId;
-  const { rank, intraId, statusMessage } = userData;
+  const { rank, intraId, statusMessage } = rankedUser;
   const messageFiltered =
     statusMessage.length > 10
       ? statusMessage.slice(0, 10) + '...'

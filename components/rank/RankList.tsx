@@ -17,7 +17,7 @@ interface RankListProps {
   season?: string;
 }
 
-function isRankType(arg: any): arg is Rank {
+function isRankType(arg: Rank | Normal): arg is Rank {
   return 'ppp' in arg;
 } // 타입확인하는 함수
 
@@ -29,7 +29,7 @@ export default function RankList({ mode, season }: RankListProps) {
   const setErrorMessage = useSetRecoilState(errorState);
   const router = useRouter();
   const isMainPage = router.asPath !== '/rank' ? true : false;
-  const path = () => {
+  const makePath = () => {
     const option = mode === 'normal' ? 'vip' : 'ranks';
     const season_op =
       mode === 'rank' && season ? `season=${season.split('season')[1]}` : '';
@@ -40,7 +40,7 @@ export default function RankList({ mode, season }: RankListProps) {
 
   useEffect(() => {
     getRankData();
-  }, [page, mode]);
+  }, [page, mode, season]);
 
   useEffect(() => {
     if (isScroll) {
@@ -58,7 +58,7 @@ export default function RankList({ mode, season }: RankListProps) {
   const getRankData = async () => {
     try {
       // const res = await instance.get(`${path()}`);
-      const res = await axios.get(`http://localhost:3000/api/${path()}`); // api 연결 후 삭제 예정
+      const res = await axios.get(`http://localhost:3000/api${makePath()}`); // api 연결 후 삭제 예정
 
       setRankData(res?.data);
       setMyRank(res?.data.myRank);
@@ -78,7 +78,7 @@ export default function RankList({ mode, season }: RankListProps) {
         <RankListItem
           key={item.intraId}
           index={index}
-          userData={item}
+          rankedUser={item}
           isMain={isMainPage}
           mode={mode}
           ppp={isRankType(item) ? item.ppp : null} // type에 또는을 써서 타입 확인 후 할당해주었습니다!
