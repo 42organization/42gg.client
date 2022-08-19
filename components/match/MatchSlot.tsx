@@ -5,11 +5,11 @@ import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { fillZero } from 'utils/handleTime';
 import instance from 'utils/axios';
-import styles from 'styles/match/MatchItem.module.scss';
+import styles from 'styles/match/MatchSlot.module.scss';
 
-interface MatchItemProps {
-  slot: Slot;
+interface MatchSlotProps {
   type: string;
+  slot: Slot;
   intervalMinute: number;
 }
 
@@ -17,7 +17,7 @@ export default function MatchItem({
   type,
   slot,
   intervalMinute,
-}: MatchItemProps) {
+}: MatchSlotProps) {
   const setErrorMessage = useSetRecoilState(errorState);
   const setModalInfo = useSetRecoilState(modalState);
   const liveData = useRecoilValue(liveState);
@@ -68,18 +68,12 @@ export default function MatchItem({
       disabled={status === 'close'}
       onClick={enrollHandler}
     >
-      <span className={styles.timeString}>
+      <span className={styles.time}>
         {minuiteToStr(startTime.getMinutes())} -{' '}
         {minuiteToStr(endTime.getMinutes())}
       </span>
-      <span
-        className={`${styles.headCountString} ${
-          headCount === 0 && styles.plusString
-        }`}
-      >
-        {' '}
-        {isAfterSlot &&
-          (headCount === 0 ? '+' : `${headCount}/${headMax}`)}{' '}
+      <span className={`${styles.headCount} ${headCount === 0 && styles.plus}`}>
+        {isAfterSlot && (headCount === 0 ? '+' : `${headCount}/${headMax}`)}
       </span>
     </button>
   );

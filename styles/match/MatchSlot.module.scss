@@ -1,6 +1,6 @@
 @import 'styles/common.scss';
 
-@mixin matchItemButton {
+@mixin slotButton {
   all: unset;
   cursor: pointer;
   display: flex;
@@ -9,36 +9,38 @@
   height: 2.3rem;
   border-radius: $mini-radius;
   margin: 0.1rem;
-  padding: 0.2rem 0.6rem;
-  color: black;
-  font-size: 0.9rem;
-  cursor: pointer;
+  padding: 0 0.6rem;
 }
 
 .myButton {
-  @include matchItemButton;
+  @include slotButton;
   background: linear-gradient(to bottom, white, rgba(45, 128, 237));
 }
 
 .enableButton {
-  @include matchItemButton;
+  @include slotButton;
   background: linear-gradient(to bottom, white, $g1-bottom);
 }
 
 .disableButton {
-  @include matchItemButton;
+  @include slotButton;
   background: linear-gradient(to bottom, $gray, rgba(217, 217, 217, 0.6));
   cursor: default;
 }
 
-.headCountString {
+.time {
+  color: black;
   font-size: 0.9rem;
+}
+
+.headCount {
+  font-size: $small-font;
   font-weight: 600;
   text-shadow: 1px 1px 7px #a6a6a6;
   color: $pp-blue;
 }
 
-.plusString {
+.plus {
   font-size: $big-font;
   font-weight: 600;
   text-shadow: 1px 1px 7px #a6a6a6;
