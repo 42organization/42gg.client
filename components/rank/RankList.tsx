@@ -28,10 +28,10 @@ export default function RankList({ mode, season }: RankListProps) {
   const setErrorMessage = useSetRecoilState(errorState);
   const router = useRouter();
   const isMainPage = router.asPath !== '/rank' ? true : false;
-  const pageItem = {
+  const pageInfo = {
     currentPage: rankData?.currentPage,
     totalPage: rankData?.totalPage,
-    setPage: setPage,
+    setPage,
   };
 
   const makePath = () => {
@@ -72,7 +72,7 @@ export default function RankList({ mode, season }: RankListProps) {
   };
 
   return (
-    <RankListFrame isMain={isMainPage} modeType={mode} pageItem={pageItem}>
+    <RankListFrame isMain={isMainPage} modeType={mode} pageInfo={pageInfo}>
       {rankData?.rankList.map((item: Normal | Rank, index) => (
         <RankListItem
           key={item.intraId}

@@ -3,7 +3,7 @@ import { Mode } from 'types/mainType';
 import PageNation from 'components/Pagination';
 import styles from 'styles/RankList.module.scss';
 
-interface PageItem {
+interface PageInfo {
   currentPage?: number;
   totalPage?: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
@@ -12,14 +12,14 @@ interface RankListFrameProps {
   children: React.ReactNode;
   isMain: boolean;
   modeType?: Mode;
-  pageItem: PageItem;
+  pageInfo: PageInfo;
 }
 
 export default function RankListFrame({
   children,
   isMain,
   modeType,
-  pageItem,
+  pageInfo,
 }: RankListFrameProps) {
   const mainTitle = modeType === 'rank' ? 'Champion' : 'Vips';
   const divisionList =
@@ -29,7 +29,7 @@ export default function RankListFrame({
   const router = useRouter();
 
   const pageChangeHandler = (pages: number) => {
-    pageItem.setPage(pages);
+    pageInfo.setPage(pages);
     router.push('/rank');
   };
 
@@ -51,8 +51,8 @@ export default function RankListFrame({
             {children}
           </div>
           <PageNation
-            curPage={pageItem.currentPage}
-            totalPages={pageItem.totalPage}
+            curPage={pageInfo.currentPage}
+            totalPages={pageInfo.totalPage}
             pageChangeHandler={pageChangeHandler}
           />
         </>
