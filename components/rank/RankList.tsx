@@ -8,7 +8,6 @@ import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
-import PageNation from 'components/Pagination';
 
 import axios from 'axios'; // api 연결 후 삭제 예정
 
@@ -23,12 +22,18 @@ function isRankType(arg: Rank | Normal): arg is Rank {
 
 export default function RankList({ mode, season }: RankListProps) {
   const [rankData, setRankData] = useState<RankData | null>(null);
+  const [page, setPage] = useState(1);
   const [myRank, setMyRank] = useRecoilState(myRankPosition);
   const [isScroll, setIsScroll] = useRecoilState(isScrollState);
-  const [page, setPage] = useState(1);
   const setErrorMessage = useSetRecoilState(errorState);
   const router = useRouter();
   const isMainPage = router.asPath !== '/rank' ? true : false;
+  const pageItem = {
+    currentPage: rankData?.currentPage,
+    totalPage: rankData?.totalPage,
+    setPage: setPage,
+  };
+
   const makePath = () => {
     const option = mode === 'normal' ? 'vip' : 'ranks';
     const season_op =
@@ -39,7 +44,7 @@ export default function RankList({ mode, season }: RankListProps) {
   };
 
   useEffect(() => {
-    getRankData();
+    getRankDataHandler();
   }, [page, mode, season]);
 
   useEffect(() => {
@@ -55,11 +60,10 @@ export default function RankList({ mode, season }: RankListProps) {
     }
   }, [rankData, isScroll]);
 
-  const getRankData = async () => {
+  const getRankDataHandler = async () => {
     try {
       // const res = await instance.get(`${path()}`);
       const res = await axios.get(`http://localhost:3000/api${makePath()}`); // api 연결 후 삭제 예정
-
       setRankData(res?.data);
       setMyRank(res?.data.myRank);
     } catch (e) {
@@ -67,13 +71,8 @@ export default function RankList({ mode, season }: RankListProps) {
     }
   };
 
-  const pageChangeHandler = (pages: number) => {
-    setPage(pages);
-    router.push('/rank');
-  };
-
   return (
-    <RankListFrame isMain={isMainPage} modeType={mode}>
+    <RankListFrame isMain={isMainPage} modeType={mode} pageItem={pageItem}>
       {rankData?.rankList.map((item: Normal | Rank, index) => (
         <RankListItem
           key={item.intraId}
@@ -86,13 +85,6 @@ export default function RankList({ mode, season }: RankListProps) {
           exp={!isRankType(item) ? item.exp : null}
         />
       ))}
-      {!isMainPage && (
-        <PageNation
-          curPage={rankData?.currentPage}
-          totalPages={rankData?.totalPage}
-          pageChangeHandler={pageChangeHandler}
-        />
-      )}
     </RankListFrame>
   );
 }
