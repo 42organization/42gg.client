@@ -38,6 +38,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }, []);
 
   useEffect(() => {
+    console.log(userData);
+  }, [userData]);
+
+  useEffect(() => {
     setModalInfo({ modalName: null }); // TODO 내가 왜 이렇게 짰을까... 왜 여기서...? layout 에서 하면 안돼..?
   }, [presentPath]);
 
@@ -60,16 +64,17 @@ export default function AppLayout({ children }: AppLayoutProps) {
     try {
       const res = await instance.get(`/pingpong/users`);
       setUserData({ ...res?.data, mode: 'normal' }); // 임시
+      //setUserData({ ...res?.data, mode: 'rank' }); // 임시
     } catch (e) {
       setErrorMessage('JB02');
     }
   };
 
   const getLiveDataHandler = async () => {
-    // TODO matchRefreshBtn 을 사용하지 말고 getAPIData 함수들을 한곳에 모아둔 다음에 가져다가 사용하는게 어떨까?
     try {
       const res = await instance.get(`/pingpong/users/live`);
       setLiveData({ ...res?.data, mode: 'normal' }); // 임시
+      // setLiveData({ ...res?.data, mode: 'rank' }); // 임시
       if (matchRefreshBtn) setMatchRefreshBtn(false); // TODO 여기서 할 필요 없이 41번째 줄에서 하면 안되나?
     } catch (e) {
       setErrorMessage('JB03');

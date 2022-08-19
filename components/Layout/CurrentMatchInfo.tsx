@@ -18,7 +18,6 @@ export default function CurrentMatchInfo() {
     useRecoilState(matchRefreshBtnState);
   const setModalInfo = useSetRecoilState(modalState);
   const setErrorMessage = useSetRecoilState(errorState);
-  const setLiveData = useSetRecoilState(liveState);
   const matchingMessage = time && makeMessage(time, isMatched);
   const isblockCancelBtn = isBeforeMin(time, 5) && enemyTeam.length;
   const presentPath = useRouter().asPath;
@@ -29,9 +28,6 @@ export default function CurrentMatchInfo() {
 
   useEffect(() => {
     getCurrentMatchHandler();
-    if (matchRefreshBtn && isBeforeMin(time, 0)) {
-      setLiveData((prev) => ({ ...prev, event: 'game' })); // TODO presentPath, matchRefreshBtn 바뀌는 경우 layout 에서 liveData 받아올텐데...
-    }
   }, [presentPath, matchRefreshBtn]);
 
   const getCurrentMatchHandler = async () => {
