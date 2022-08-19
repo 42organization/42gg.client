@@ -38,11 +38,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }, []);
 
   useEffect(() => {
-    console.log(userData);
-  }, [userData]);
-
-  useEffect(() => {
-    setModalInfo({ modalName: null }); // TODO 내가 왜 이렇게 짰을까... 왜 여기서...? layout 에서 하면 안돼..?
+    setModalInfo({ modalName: null });
   }, [presentPath]);
 
   useEffect(() => {
@@ -74,7 +70,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     try {
       const res = await instance.get(`/pingpong/users/live`);
       setLiveData({ ...res?.data, mode: 'normal' }); // 임시
-      // setLiveData({ ...res?.data, mode: 'rank' }); // 임시
+      //setLiveData({ ...res?.data, mode: 'rank' }); // 임시
       if (matchRefreshBtn) setMatchRefreshBtn(false); // TODO 여기서 할 필요 없이 41번째 줄에서 하면 안되나?
     } catch (e) {
       setErrorMessage('JB03');

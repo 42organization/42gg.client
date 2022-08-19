@@ -4,7 +4,7 @@ export interface UserData {
   intraId: string;
   isAdmin: boolean;
   userImageUri: string;
-  mode: Mode;
+  mode: Mode; //mode 를 또받아?
 }
 
 export interface LiveData {
