@@ -23,7 +23,7 @@ export default function user() {
           <h1 className={styles.title}>{intraId}</h1>
           <Profile intraId={intraId} />
           <RankProfile intraId={intraId} />
-          <h2 className={styles.subtitle}>current match</h2>
+          <h2 className={styles.subtitle}>recent record</h2>
           <GameResult intraId={intraId} />
         </>
       )}
