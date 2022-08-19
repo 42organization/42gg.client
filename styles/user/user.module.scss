@@ -7,3 +7,12 @@
 .title {
   @include pageTitle;
 }
+
+.subtitle {
+  color: white;
+  font-family: $title-font;
+  font-size: $giant-font;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  margin: 1rem 0 0.5rem 0;
+}
