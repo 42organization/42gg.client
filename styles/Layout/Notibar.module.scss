@@ -22,16 +22,15 @@
   .btnWrap {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     .refreshBtn {
-      @include match-noti-button;
-      border-radius: $big-radius;
+      @include refresh-button;
     }
     .refreshBtnAnimation {
-      @include match-noti-button;
+      @include refresh-button;
       cursor: not-allowed;
       pointer-events: none;
       opacity: 0.7;
-      border-radius: $big-radius;
       animation: spin 1s infinite;
     }
     .deleteBtn {
