@@ -5,7 +5,7 @@ import styles from 'styles/RankList.module.scss';
 
 interface PageItem {
   currentPage?: number;
-  totalPages?: number;
+  totalPage?: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 interface RankListFrameProps {
