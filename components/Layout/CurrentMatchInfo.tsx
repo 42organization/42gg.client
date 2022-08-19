@@ -13,7 +13,7 @@ import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 export default function CurrentMatchInfo() {
   const [currentMatch, setCurrentMatch] = useRecoilState(currentMatchInfo);
   const { isMatched, enemyTeam, time, slotId } = currentMatch;
-  const [enemyTeamInfo, setEnemyTeamInfo] = useState(<></>);
+  const [enemyTeamInfo, setEnemyTeamInfo] = useState(<></>); // TODO: ReactNode를 동적으로 관리하면 안될것같은데.... 근거를 찾아봐야겠다.
   const [matchRefreshBtn, setMatchRefreshBtn] =
     useRecoilState(matchRefreshBtnState);
   const setModalInfo = useSetRecoilState(modalState);
@@ -28,13 +28,9 @@ export default function CurrentMatchInfo() {
   }, []);
 
   useEffect(() => {
-    setModalInfo({ modalName: null });
-  }, [presentPath]);
-
-  useEffect(() => {
     getCurrentMatchHandler();
     if (matchRefreshBtn && isBeforeMin(time, 0)) {
-      setLiveData((prev) => ({ ...prev, event: 'game' }));
+      setLiveData((prev) => ({ ...prev, event: 'game' })); // TODO presentPath, matchRefreshBtn 바뀌는 경우 layout 에서 liveData 받아올텐데...
     }
   }, [presentPath, matchRefreshBtn]);
 

@@ -5,12 +5,6 @@ import MatchBoardList from 'components/match/MatchBoardList';
 import styles from 'styles/match/match.module.scss';
 
 export default function Match() {
-  const setModalInfo = useSetRecoilState(modalState);
-
-  useEffect(() => {
-    return () => setModalInfo({ modalName: null });
-  }, []);
-
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Match</h1>
