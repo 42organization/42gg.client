@@ -33,7 +33,7 @@ function RankInfo({ intraId, season }: RankProps) {
     ppp: 0,
     wins: 0,
     losses: 0,
-    winRate: 'string;',
+    winRate: '',
   });
 
   useEffect(() => {
