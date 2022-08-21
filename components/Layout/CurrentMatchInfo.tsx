@@ -22,13 +22,13 @@ export default function CurrentMatchInfo() {
 
   useEffect(() => {
     getCurrentMatchHandler();
+    if (matchRefreshBtn) setMatchRefreshBtn(false);
   }, [presentPath, matchRefreshBtn]);
 
   const getCurrentMatchHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/match/current`);
       setCurrentMatch(res?.data);
-      if (matchRefreshBtn) setMatchRefreshBtn(false);
     } catch (e) {
       setErrorMessage('JB01');
     }
