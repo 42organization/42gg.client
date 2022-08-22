@@ -16,6 +16,7 @@ import axios from 'utils/axios';
 import { ChartInterface, GraphData } from 'types/chartTypes';
 import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
+import ModeSeasonMineProvider from 'components/mode/ModeSeasonMineProvider';
 
 ChartJS.register(
   ArcElement,
@@ -34,6 +35,8 @@ type ChartType = {
 
 export default function StatisticsChart({ chartType }: ChartType) {
   const [chart, getChart] = useState<ChartInterface>();
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const setErrorMessage = useSetRecoilState(errorState);
 
   useEffect(() => {
@@ -58,7 +61,6 @@ export default function StatisticsChart({ chartType }: ChartType) {
   const inchartData = chart
     ? `${chart.graphs[0].graphData.map((item: GraphData) => item.count)}`
     : '';
-
   const chartData = {
     labels: chartLabels.split(','),
     datasets: [
@@ -73,8 +75,27 @@ export default function StatisticsChart({ chartType }: ChartType) {
   const options = {
     responsive: true,
   };
+
+  const startDateHandler = ({
+    target: date,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setStartDate(date.value);
+  };
+  const endDateHandler = ({
+    target: date,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setEndDate(date.value);
+  };
+
   return (
     <div>
+      <input
+        type={'date'}
+        onChange={startDateHandler}
+        value={startDate}
+      ></input>
+      <input type={'date'} onChange={endDateHandler} value={endDate}></input>
+      <input type={'button'} value={'요청'}></input>
       <Chart data={chartData} options={options} />
     </div>
   );
