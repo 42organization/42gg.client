@@ -4,13 +4,13 @@ export interface UserData {
   intraId: string;
   isAdmin: boolean;
   userImageUri: string;
-  mode: Mode; //mode 를 또받아?
+  mode: Mode;
 }
 
 export interface LiveData {
   notiCount: number;
   event: 'match' | 'game' | null;
-  mode: Mode | null; // TODO LiveData 에 CurrentMatch 를 포함시키는게 어떨까..? 시간정보 겹치고 API 호출 두번 해야되니까
+  mode: Mode | null;
 }
 
 export interface SearchData {
