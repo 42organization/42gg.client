@@ -14,6 +14,8 @@ import { useEffect, useState } from 'react';
 import { Chart } from 'react-chartjs-2';
 import axios from 'utils/axios';
 import { ChartInterface, GraphData } from 'types/chartTypes';
+import { useSetRecoilState } from 'recoil';
+import { errorState } from 'utils/recoil/error';
 
 ChartJS.register(
   ArcElement,
@@ -32,6 +34,7 @@ type ChartType = {
 
 export default function StatisticsChart({ chartType }: ChartType) {
   const [chart, getChart] = useState<ChartInterface>();
+  const setErrorMessage = useSetRecoilState(errorState);
 
   useEffect(() => {
     getChartDataHandler();
@@ -75,7 +78,4 @@ export default function StatisticsChart({ chartType }: ChartType) {
       <Chart data={chartData} options={options} />
     </div>
   );
-}
-function setErrorMessage(arg0: string) {
-  throw new Error('Function not implemented.');
 }
