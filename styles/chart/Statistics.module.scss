@@ -1,0 +1,19 @@
+@import 'styles/common.scss';
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  background: rgba(255, 255, 255, 0.85);
+  align-items: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+  font-family: $title-font;
+  background: white;
+}
+.emoji {
+  font-size: 2rem;
+}

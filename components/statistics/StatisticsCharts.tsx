@@ -10,7 +10,12 @@ import {
   BarElement,
   ChartTypeRegistry,
 } from 'chart.js';
+import { useEffect, useState } from 'react';
 import { Chart } from 'react-chartjs-2';
+import axios from 'utils/axios';
+import { ChartInterface, GraphData } from 'types/chartTypes';
+import { useSetRecoilState } from 'recoil';
+import { errorState } from 'utils/recoil/error';
 
 ChartJS.register(
   ArcElement,
@@ -23,44 +28,54 @@ ChartJS.register(
   Tooltip
 );
 
-type chart = {
+type ChartType = {
   chartType: string;
 };
 
-export default function StatisticsChart({ chartType }: chart) {
-  const labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
+export default function StatisticsChart({ chartType }: ChartType) {
+  const [chart, getChart] = useState<ChartInterface>();
+  const setErrorMessage = useSetRecoilState(errorState);
+
+  useEffect(() => {
+    getChartDataHandler();
+  }, []);
+
+  const getChartDataHandler = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3000/api/pingpong/stat/visit`
+      );
+      getChart(res.data);
+    } catch (e) {
+      setErrorMessage('KP01');
+    }
+  };
+
+  const chartLabel = chart ? `${chart.graphs[0].graphName}` : '';
+  const chartLabels = chart
+    ? `${chart.graphs[0].graphData.map((item: GraphData) => item.date)}`
+    : '';
+  const inchartData = chart
+    ? `${chart.graphs[0].graphData.map((item: GraphData) => item.count)}`
+    : '';
 
   const chartData = {
-    labels,
+    labels: chartLabels.split(','),
     datasets: [
       {
         type: chartType as keyof ChartTypeRegistry,
-        label: '그래프 이름',
-        backgroundColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(255, 99, 2, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-        ],
-        data: [14, 22, 13, 24, 45, 16, 27],
+        label: [chartLabel],
+        backgroundColor: ['rgba(255, 99, 132, 1)'],
+        data: inchartData.split(','),
       },
     ],
   };
-  console.log(chartType);
   const options = {
     responsive: true,
   };
-
   return (
     <div>
-      <Chart
-        type={chartType as keyof ChartTypeRegistry}
-        data={chartData}
-        options={options}
-      />
+      <Chart data={chartData} options={options} />
     </div>
   );
 }
