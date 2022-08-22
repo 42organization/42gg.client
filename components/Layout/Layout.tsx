@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { UserData, LiveData } from 'types/mainType';
 import { userState, liveState } from 'utils/recoil/layout';
 import {
   matchRefreshBtnState,
@@ -22,9 +21,9 @@ type AppLayoutProps = {
 };
 
 export default function AppLayout({ children }: AppLayoutProps) {
-  const [userData, setUserData] = useRecoilState<UserData>(userState);
-  const [liveData, setLiveData] = useRecoilState<LiveData>(liveState);
-  const [openCurrentInfo, setOpenCurrentInfo] = useRecoilState<boolean>(
+  const [userData, setUserData] = useRecoilState(userState);
+  const [liveData, setLiveData] = useRecoilState(liveState);
+  const [openCurrentInfo, setOpenCurrentInfo] = useRecoilState(
     openCurrentMatchInfoState
   );
   const [matchRefreshBtn, setMatchRefreshBtn] =
@@ -38,8 +37,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }, []);
 
   useEffect(() => {
-    if (userData.intraId || matchRefreshBtn) {
+    setModalInfo({ modalName: null });
+  }, [presentPath]);
+
+  useEffect(() => {
+    if (userData.intraId) {
       getLiveDataHandler();
+      if (matchRefreshBtn) setMatchRefreshBtn(false);
     }
   }, [presentPath, userData, matchRefreshBtn]);
 
@@ -56,6 +60,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     try {
       const res = await instance.get(`/pingpong/users`);
       setUserData({ ...res?.data, mode: 'normal' }); // 임시
+      //setUserData({ ...res?.data, mode: 'rank' }); // 임시
     } catch (e) {
       setErrorMessage('JB02');
     }
@@ -65,7 +70,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     try {
       const res = await instance.get(`/pingpong/users/live`);
       setLiveData({ ...res?.data, mode: 'normal' }); // 임시
-      if (matchRefreshBtn) setMatchRefreshBtn(false);
+      //setLiveData({ ...res?.data, mode: 'rank' }); // 임시
     } catch (e) {
       setErrorMessage('JB03');
     }

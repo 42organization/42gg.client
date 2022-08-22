@@ -11,7 +11,7 @@ export default function MenuBar() {
   const resetOpenMenuBar = useResetRecoilState(menuBarState);
   const setModalInfo = useSetRecoilState(modalState);
   const menuList = [
-    { name: '랭킹', link: '/rank' },
+    { name: `${userData.mode === 'normal' ? 'VIP' : '랭킹'}`, link: '/rank' },
     { name: '최근 경기', link: '/game' },
     { name: '내 정보', link: `/users/detail?intraId=${userData.intraId}` },
   ];
