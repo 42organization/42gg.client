@@ -20,10 +20,12 @@ export default function StatisticsSelect() {
   return (
     <div className={styles.container}>
       <div className={styles.chartSelectContainer}>
-        {charts.chartName.map((chart) => (
+        <div>통계</div>
+        {charts.chartName.map((chart, index) => (
           <div
             className={styles.listText}
             onClick={() => setChartType(chart.value)}
+            key={index}
           >
             {chart.key}
           </div>
