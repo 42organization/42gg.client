@@ -33,18 +33,20 @@ type ChartType = {
 export default function StatisticsChart({ chartType }: ChartType) {
   const [chart, getChart] = useState<ChartInterface>();
 
-  const getChartData = async () => {
+  useEffect(() => {
+    getChartDataHandler();
+  }, []);
+
+  const getChartDataHandler = async () => {
     try {
       const res = await axios.get(
         `http://localhost:3000/api/pingpong/stat/visit`
       );
       getChart(res.data);
-    } catch (e) {}
+    } catch (e) {
+      setErrorMessage('KP01');
+    }
   };
-
-  useEffect(() => {
-    getChartData();
-  }, []);
 
   const chartLabel = chart ? `${chart.graphs[0].graphName}` : '';
   const chartLabels = chart
@@ -73,4 +75,7 @@ export default function StatisticsChart({ chartType }: ChartType) {
       <Chart data={chartData} options={options} />
     </div>
   );
+}
+function setErrorMessage(arg0: string) {
+  throw new Error('Function not implemented.');
 }
