@@ -52,7 +52,7 @@ export default function ModalProvider() {
         return <MatchManualModal />;
       case 'USER-PROFILE_EDIT':
         return <EditProfileModal />;
-      case 'FIXED-AFTER_GAME': // TODO 수정
+      case 'FIXED-AFTER_GAME':
         return <AfterGameModal />;
       default:
         return null;

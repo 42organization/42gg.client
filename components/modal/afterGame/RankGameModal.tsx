@@ -1,29 +1,26 @@
 import { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { CurrentGameInfo, GameResult } from 'types/scoreTypes';
-import { errorState } from 'utils/recoil/error';
-import { modalState } from 'utils/recoil/modal';
-import instance from 'utils/axios';
 import styles from 'styles/modal/AfterGameModal.module.scss';
 import { MatchTeamsInfo } from './MatchTeamsInfo';
 import Score from './Score';
-import Guide from './Guide';
+import Guide, { GuideLine } from './Guide';
+import { Buttons } from './Buttons';
 
 const defaultResult: GameResult = { myTeamScore: '', enemyTeamScore: '' };
 
 interface RankGameModalProps {
   currentGameInfo: CurrentGameInfo;
-  guide: { trueStr: string; falseStr: string };
+  guideLine: GuideLine;
+  onSubmit: (gameResult: GameResult) => void;
 }
 
 export default function RankGameModal({
   currentGameInfo,
-  guide,
+  guideLine,
+  onSubmit,
 }: RankGameModalProps) {
   const [result, setResult] = useState<GameResult>(defaultResult);
   const [onCheck, setOnCheck] = useState<boolean>(false);
-  const setErrorMessage = useSetRecoilState(errorState);
-  const setModalInfo = useSetRecoilState(modalState);
 
   const inputScoreHandler = ({
     target: { name, value },
@@ -45,30 +42,9 @@ export default function RankGameModal({
     setOnCheck(false);
   };
 
-  const submitResultHandler = async () => {
-    try {
-      const res = await instance.post(`/pingpong/games/result`, result);
-      if (res?.status === 201) {
-        alert('결과 입력이 완료되었습니다.');
-        setModalInfo({ modalName: null });
-      } else if (res?.status === 202) {
-        alert('상대가 이미 점수를 입력했습니다.');
-        setModalInfo({ modalName: null });
-      }
-    } catch (e) {
-      setErrorMessage('JH04');
-      return;
-    }
-    window.location.href = '/';
-  };
-
   return (
     <div className={styles.container}>
-      <Guide condition={onCheck} {...guide} />
-      <div className={styles.rules}>
-        <div>💡 3판 2선승제!</div>
-        <div>💡 동점은 1점 내기로 승부를 결정!</div>
-      </div>
+      <Guide condition={onCheck} guideLine={guideLine} />
       <div className={styles.resultContainer}>
         <MatchTeamsInfo matchTeamsInfo={currentGameInfo.matchTeamsInfo} />
         <Score onCheck={onCheck} result={result} onChange={inputScoreHandler} />
@@ -77,34 +53,8 @@ export default function RankGameModal({
         onCheck={onCheck}
         onEnter={enterHandler}
         onReset={resetHandler}
-        onSubmit={submitResultHandler}
+        onSubmit={() => onSubmit(result)}
       />
-    </div>
-  );
-}
-
-interface ButtonsProps {
-  onCheck: boolean;
-  onEnter: () => void;
-  onReset: () => void;
-  onSubmit: () => void;
-}
-
-function Buttons({ onCheck, onEnter, onReset, onSubmit }: ButtonsProps) {
-  return onCheck ? (
-    <div className={styles.buttons}>
-      <div className={styles.negative}>
-        <input onClick={onReset} type='button' value='다시 입력하기' />
-      </div>
-      <div className={styles.positive}>
-        <input onClick={onSubmit} type='button' value='제출하기' />
-      </div>
-    </div>
-  ) : (
-    <div className={styles.buttons}>
-      <div className={styles.positive}>
-        <input onClick={onEnter} type='button' value='확 인' />
-      </div>
     </div>
   );
 }
