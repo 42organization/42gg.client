@@ -19,3 +19,26 @@ export const isBeforeMin = (gameTimeString: string, min: number) => {
   afterMin.setMinutes(afterMin.getMinutes() + min);
   return gameTime.getTime() <= afterMin.getTime();
 };
+
+export const dateToString = (d: Date) => {
+  const year = d.getFullYear();
+  const month = d.getMonth() + 1;
+  const date = d.getDate();
+  const hour = d.getHours();
+  const min = d.getMinutes();
+
+  return `${year}-${month}-${date} ${hour}:${min}`;
+};
+
+export const minuitesAgo = (min: number) => {
+  const date = new Date();
+  date.setMinutes(date.getMinutes() - min);
+  return dateToString(date);
+};
+
+export const isAfterMin = (gameTimeString: string, min: number) => {
+  const gameTime = new Date(gameTimeString);
+  const beforeMin = new Date();
+  beforeMin.setMinutes(beforeMin.getMinutes() - min);
+  return gameTime.getTime() <= beforeMin.getTime();
+};

@@ -21,16 +21,18 @@ export default function InputScoreModal() {
   const setModalInfo = useSetRecoilState(modalState);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await instance.get(`/pingpong/games/result`);
-        setMyTeamInfo(res?.data.myTeam);
-        setEnemyTeamInfo(res?.data.enemyTeam);
-      } catch (e) {
-        setErrorMessage('JH03');
-      }
-    })();
+    getPlayersInfoHandler();
   }, []);
+
+  const getPlayersInfoHandler = async () => {
+    try {
+      const res = await instance.get(`/pingpong/games/result`);
+      setMyTeamInfo(res?.data.myTeam);
+      setEnemyTeamInfo(res?.data.enemyTeam);
+    } catch (e) {
+      setErrorMessage('JH03');
+    }
+  };
 
   const inputScoreHandler = ({
     target: { name, value },
@@ -40,20 +42,6 @@ export default function InputScoreModal() {
       ...prev,
       [name]: value === '' ? value : parseInt(value),
     }));
-  };
-
-  const isCorrectScore = (score1: number | '', score2: number | '') => {
-    if (score1 === '' || score2 === '') {
-      alert('점수를 입력해주세요.');
-      return false;
-    } else if (score1 > 2 || score2 > 2) {
-      alert('점수로 3점이상 입력이 불가합니다! (3판 2선승제)');
-      return false;
-    } else if (score1 === score2) {
-      alert('동점 입력은 불가합니다. 1점 내기로 승부를 결정해주세요!');
-      return false;
-    }
-    return true;
   };
 
   const enterHandler = () => {
@@ -97,51 +85,9 @@ export default function InputScoreModal() {
       </div>
       <div className={styles.resultContainer}>
         <div className={styles.players}>
-          <div className={styles.userInfo}>
-            {myTeamInfo.map((userInfo, index) => (
-              <div key={userInfo.intraId} className={styles.userImage}>
-                {userInfo.userImageUri && (
-                  <Image
-                    key={index}
-                    src={userInfo.userImageUri}
-                    alt='prfImg'
-                    layout='fill'
-                    objectFit='cover'
-                    sizes='30vw'
-                    quality='30'
-                  />
-                )}
-              </div>
-            ))}
-            {myTeamInfo.map((userInfo) => (
-              <div key={userInfo.intraId} className={styles.intraId}>
-                {userInfo.intraId}
-              </div>
-            ))}
-          </div>
+          <TeamInfo teamInfo={myTeamInfo} />
           <div>vs</div>
-          <div className={styles.userInfo}>
-            {enemyTeamInfo.map((userInfo, index) => (
-              <div key={userInfo.intraId} className={styles.userImage}>
-                {userInfo.userImageUri && (
-                  <Image
-                    key={index}
-                    src={userInfo.userImageUri}
-                    alt='prfImg'
-                    layout='fill'
-                    objectFit='cover'
-                    sizes='30vw'
-                    quality='30'
-                  />
-                )}
-              </div>
-            ))}
-            {enemyTeamInfo.map((userInfo) => (
-              <div key={userInfo.intraId} className={styles.intraId}>
-                {userInfo.intraId}
-              </div>
-            ))}
-          </div>
+          <TeamInfo teamInfo={enemyTeamInfo} />
         </div>
         {onCheck ? (
           <div className={styles.finalScore}>
@@ -199,4 +145,55 @@ export default function InputScoreModal() {
       )}
     </div>
   );
+}
+
+const isCorrectScore = (score1: number | '', score2: number | '') => {
+  if (score1 === '' || score2 === '') {
+    alert('점수를 입력해주세요.');
+    return false;
+  } else if (score1 > 2 || score2 > 2) {
+    alert('점수로 3점이상 입력이 불가합니다! (3판 2선승제)');
+    return false;
+  } else if (score1 === score2) {
+    alert('동점 입력은 불가합니다. 1점 내기로 승부를 결정해주세요!');
+    return false;
+  }
+  return true;
+};
+
+function TeamInfo({ teamInfo }: { teamInfo: PlayerInfo[] }) {
+  return (
+    <div className={styles.userInfo}>
+      {teamInfo.map((playerInfo) => (
+        <PlayerImage
+          key={playerInfo.intraId}
+          userImageUri={playerInfo.userImageUri}
+        />
+      ))}
+      {teamInfo.map((userInfo) => (
+        <PlayerId key={userInfo.intraId} intraId={userInfo.intraId} />
+      ))}
+    </div>
+  );
+}
+
+function PlayerImage({ userImageUri }: { userImageUri: string }) {
+  return (
+    <div className={styles.userImage}>
+      {userImageUri && (
+        <Image
+          src={userImageUri}
+          alt='prfImg'
+          layout='fill'
+          objectFit='cover'
+          sizes='30vw'
+          quality='30'
+        />
+      )}
+    </div>
+  );
+}
+
+function PlayerId({ intraId }: { intraId: string }) {
+  return <div className={styles.intraId}>{intraId}</div>;
 }
