@@ -26,7 +26,7 @@ export default function AfterGameModal() {
   );
   const normalGuide = {
     before: '즐거운 경기 하셨나요?',
-    after: '경기 중',
+    after: '🔥 경기 중 🔥',
     explains: ['💡 경기시작 10분 후부터 ', '💡 경기를 완료할 수 있습니다'],
   };
   const rankGuide = {
@@ -43,7 +43,7 @@ export default function AfterGameModal() {
     try {
       const res = await instance.get(`/pingpong/games/result`);
       setCurrentGameInfo({
-        mode: 'rank',
+        mode: 'normal',
         startTime: minuitesAgo(10),
         matchTeamsInfo: { ...res?.data },
       }); // 임시
