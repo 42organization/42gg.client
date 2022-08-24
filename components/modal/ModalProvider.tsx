@@ -9,7 +9,7 @@ import MatchManualModal from './MatchManualModal';
 import MatchRejectModal from './MatchRejectModal';
 import ReportModal from './ReportModal';
 import WelcomeModal from './WelcomeModal';
-import InputScoreModal from './InputScoreModal';
+import AfterGameModal from './afterGame/AfterGameModal';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
@@ -52,8 +52,8 @@ export default function ModalProvider() {
         return <MatchManualModal />;
       case 'USER-PROFILE_EDIT':
         return <EditProfileModal />;
-      case 'FIXED-INPUT_SCORE':
-        return <InputScoreModal />;
+      case 'FIXED-AFTER_GAME':
+        return <AfterGameModal />;
       default:
         return null;
     }

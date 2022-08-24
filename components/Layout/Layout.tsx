@@ -50,8 +50,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
   useEffect(() => {
     if (liveData?.event === 'match') setOpenCurrentInfo(true);
     else {
-      if (liveData?.event === 'game' && liveData?.mode === 'rank')
-        setModalInfo({ modalName: 'FIXED-INPUT_SCORE' });
+      if (liveData?.event === 'game')
+        setModalInfo({ modalName: 'FIXED-AFTER_GAME' });
       setOpenCurrentInfo(false);
     }
   }, [liveData]);
