@@ -6,7 +6,7 @@ type MatchModal = 'ENROLL' | 'REJECT' | 'CANCEL' | 'MANUAL';
 
 type UserModal = 'PROFILE_EDIT';
 
-type FixedModal = 'INPUT_SCORE';
+type FixedModal = 'AFTER_GAME';
 
 type ModalName =
   | null
