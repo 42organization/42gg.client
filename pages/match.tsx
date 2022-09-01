@@ -1,6 +1,3 @@
-import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
 import MatchBoard from 'components/match/MatchBoard';
 import styles from 'styles/match/match.module.scss';
 
