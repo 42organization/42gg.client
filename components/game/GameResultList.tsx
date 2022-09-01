@@ -14,24 +14,21 @@ interface GameResultListProps {
 }
 
 export default function GameResultList({ path }: GameResultListProps) {
-  const infResult = infScroll(path);
-  const { data, fetchNextPage, status } = infResult;
+  const { data, fetchNextPage, status, remove, refetch } = infScroll(path);
   const [clickedItemId, setClickedItemId] = useRecoilState(clickedGameItem);
   const [totalPage, setTotalPage] = useState();
   const router = useRouter();
-  const getTotalPage = (data: InfiniteData<any> | undefined) => {
-    return data?.pages[data.pages.length - 1].totalPage;
-  };
 
   useEffect(() => {
-    infResult.remove();
-    infResult.refetch();
+    remove();
+    refetch();
   }, [path]);
 
   useEffect(() => {
-    if (data?.pages.length === 1 && getTotalPage(data) !== 0)
+    const getTotalPage = data?.pages[data.pages.length - 1].totalPage;
+    if (data?.pages.length === 1 && getTotalPage !== 0)
       setClickedItemId(data?.pages[0].games[0].gameId);
-    setTotalPage(getTotalPage(data));
+    setTotalPage(getTotalPage);
   }, [data]);
 
   if (data?.pages[0].games.length === 0) {

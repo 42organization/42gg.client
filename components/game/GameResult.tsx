@@ -47,11 +47,7 @@ export default function GameResult({
 
   useEffect(() => {
     makePath();
-  }, [router.asPath]);
-
-  useEffect(() => {
-    makePath();
-  }, [mode, season, isMine]);
+  }, [router.asPath, mode, season, isMine]);
 
   return (
     <div>
