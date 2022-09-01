@@ -29,8 +29,15 @@ export default function Profile({ intraId }: ProfileProps) {
     })();
   }, [intraId]);
 
-  const { userImageUri, racketType, statusMessage, level, currentExp, maxExp } =
-    profileInfo;
+  const {
+    userImageUri,
+    racketType,
+    statusMessage,
+    level,
+    currentExp,
+    maxExp,
+    expRate,
+  } = profileInfo;
 
   const startEditHandler = () => {
     setModalInfo({ modalName: 'USER-PROFILE_EDIT' });
@@ -62,11 +69,11 @@ export default function Profile({ intraId }: ProfileProps) {
             <div className={styles.bar}>
               <span
                 className={styles.expCurrent}
-                style={{ width: `${currentExp}%` }}
+                style={{ width: `${expRate}%` }}
               ></span>
               <span
                 className={styles.expLeft}
-                style={{ width: `${((maxExp - currentExp) / maxExp) * 100}%` }}
+                style={{ width: `${100 - expRate}%` }}
               ></span>
             </div>
           </div>

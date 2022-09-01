@@ -6,6 +6,7 @@ export interface ProfileInfo {
   level: number;
   currentExp: number;
   maxExp: number;
+  expRate: number;
 }
 
 export interface RankProfileInfo {
