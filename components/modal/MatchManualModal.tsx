@@ -71,7 +71,6 @@ export default function MatchManualModal() {
           </ul>
         </li>
       </ul>
-      ㅊㅊ
       <div className={styles.buttons}>
         <div className={styles.positive}>
           <input onClick={onReturn} type='button' value={'확 인'} />
