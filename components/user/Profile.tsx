@@ -42,7 +42,6 @@ export default function Profile({ intraId }: ProfileProps) {
   const startEditHandler = () => {
     setModalInfo({ modalName: 'USER-PROFILE_EDIT' });
   };
-  console.log(expRate);
 
   return (
     <div className={styles.container}>
