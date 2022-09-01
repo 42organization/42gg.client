@@ -74,18 +74,15 @@ export default function MatchBoard({ type }: MatchBoardProps) {
   return (
     <>
       <div className={styles.buttonWrap}>
-        <input
-          className={styles.manual}
-          onClick={openManual}
-          type='button'
-          value='매뉴얼'
-        />
-        <input
+        <button className={styles.manual} onClick={openManual}>
+          매뉴얼
+        </button>
+        <button
           className={`${styles.refresh} ${spinRefreshButton && styles.spin}`}
           onClick={refreshMatchData}
-          type='button'
-          value='&#8635;'
-        />
+        >
+          &#8635;
+        </button>
       </div>
       {currentHour > lastSlotHour && (
         <div className={styles.notice}>
