@@ -52,7 +52,7 @@ export default function GameResultList({ path }: GameResultListProps) {
           ))}
         </>
       )}
-      {router.asPath !== '/' && totalPage !== 1 && (
+      {status === 'success' && router.asPath !== '/' && totalPage !== 1 && (
         <div className={styles.getButton}>
           <input
             type='button'

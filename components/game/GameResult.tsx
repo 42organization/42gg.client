@@ -26,7 +26,7 @@ export default function GameResult({
 
   const makePath = () => {
     if (router.asPath === '/' || router.asPath.includes('token')) {
-      setPath(`/pingpong/games?count=3&gameId=`);
+      setPath(`v1/pingpong/games?count=3&gameId=`); // 백에서 api 정리(통일) 후 v1 뺄 예정
       return;
     }
     const userOption = isMine
@@ -41,7 +41,7 @@ export default function GameResult({
     const query = [modeOption, seasonOption, 'gameId=']
       .filter((item) => item !== '')
       .join('&');
-    setPath(`/pingpong${userOption}/games?${query}`);
+    setPath(`v1/pingpong${userOption}/games?${query}`); // 백에서 api 정리(통일) 후 v1 뺄 예정
     return;
   };
 
