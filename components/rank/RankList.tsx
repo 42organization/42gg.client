@@ -18,7 +18,7 @@ interface RankListProps {
 
 function isRankType(arg: Rank | Normal): arg is Rank {
   return 'ppp' in arg;
-} // 타입확인하는 함수
+}
 
 export default function RankList({ mode, season }: RankListProps) {
   const [rankData, setRankData] = useState<RankData | null>(null);
@@ -35,12 +35,12 @@ export default function RankList({ mode, season }: RankListProps) {
   };
 
   const makePath = () => {
-    const option = mode === 'normal' ? 'vip' : 'ranks';
-    const season_op =
+    const option = mode === 'normal' ? 'vip' : 'ranks/single';
+    const seasonOption =
       mode === 'rank' && season ? `season=${season.split('season')[1]}` : '';
     return isMainPage
-      ? `/pingpong/${option}/single?count=3`
-      : `/pingpong/${option}/single?page=${page}${season_op}`;
+      ? `/pingpong/${option}?count=3`
+      : `/pingpong/${option}?page=${page}${seasonOption}`;
   };
 
   useEffect(() => {
@@ -80,7 +80,7 @@ export default function RankList({ mode, season }: RankListProps) {
           rankedUser={item}
           isMain={isMainPage}
           mode={mode}
-          ppp={isRankType(item) ? item.ppp : null} // type에 또는을 써서 타입 확인 후 할당해주었습니다!
+          ppp={isRankType(item) ? item.ppp : null}
           level={!isRankType(item) ? item.level : null}
           exp={!isRankType(item) ? item.exp : null}
         />

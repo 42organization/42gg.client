@@ -82,7 +82,7 @@ export default function handler(
   ];
   const obj = {
     myIntraId: 'jabae',
-    myRank: 1,
+    myRank: 10,
     currentPage: 1,
     totalPage: 1,
     rankList: count ? objList.slice(0, 3) : objList,

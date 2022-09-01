@@ -1,14 +1,34 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Team } from 'types/gameTypes';
+import { RankInfo, RankPlayer, NormalPlayer } from 'types/gameTypes';
 import styles from 'styles/game/GameResultItem.module.scss';
 import router from 'next/router';
 
-type gameResultTypes = {
-  team: Team;
-};
+interface GameResultBigTeamProps {
+  mode: string;
+  team: RankInfo;
+}
 
-export default function GameResultBigTeam({ team }: gameResultTypes) {
+export function isRankPlayerType(
+  arg: RankPlayer | NormalPlayer
+): arg is RankPlayer {
+  return 'wins' in arg;
+}
+
+export default function GameResultBigTeam({
+  mode,
+  team,
+}: GameResultBigTeamProps) {
+  const makeRate = (player: RankPlayer | NormalPlayer) =>
+    isRankPlayerType(player) ? (
+      <>
+        <span>{player.wins}승</span>
+        <span>{player.losses}패</span>
+      </>
+    ) : (
+      <span>{player.level}</span>
+    );
+
   return (
     <div className={styles.bigTeam}>
       <div className={styles.userImage}>
@@ -32,10 +52,7 @@ export default function GameResultBigTeam({ team }: gameResultTypes) {
           <Link href={`/users/detail?intraId=${player.intraId}`}>
             <div className={styles.userId}>{player.intraId}</div>
           </Link>
-          <div className={styles.winRate}>
-            <span>{player.wins}승 </span>
-            <span>{player.losses}패 </span>
-          </div>
+          <div className={styles.winRate}>{makeRate(player)}</div>
         </div>
       ))}
     </div>

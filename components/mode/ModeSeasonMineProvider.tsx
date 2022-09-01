@@ -1,12 +1,13 @@
+import React from 'react';
+import axios from 'axios';
 import { useRecoilValue } from 'recoil';
 import { Mode, UserData } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
 import { useEffect, useState } from 'react';
-import styles from 'styles/mode/ModeSelect.module.scss';
 import ModeToggle from './ModeToggle';
 import SeasonDropDown from './SeasonDropDown';
-import React from 'react';
 import ModeRadiobox from './ModeRadiobox';
+import styles from 'styles/mode/ModeSelect.module.scss';
 
 interface ModeSelectProps {
   children: React.ReactNode;
@@ -17,17 +18,21 @@ export default function ModeSeasonProvider({ children }: ModeSelectProps) {
   const [mode, setMode] = useState(userData?.mode);
   const [isMine, setIsMine] = useState(false);
   const [season, setSeason] = useState('');
-  const seasons_both = ['season4', 'season3', 'season2', 'season1']; // 임시 : back에서 받아와야함
-  const seasons_normal = ['season4', 'season2']; // 임시 : back에서 받아와야함
-  const seasons_rank = ['season3', 'season1']; // 임시 : back에서 받아와야함
+  const [seasonList, setSeasonList] = useState<string[]>(); // 임시
 
   useEffect(() => {
-    setSeason(() => {
-      if (mode === 'both') return seasons_both[0];
-      else if (mode === 'normal') return seasons_normal[0];
-      else return seasons_rank[0];
-    });
+    getSeasonList();
   }, [mode]);
+
+  const getSeasonList = async () => {
+    try {
+      // const res = await instance.get(`/pingpong/seasonlist`);
+      const res = await axios.get(
+        `http://localhost:3000/api/pingpong/seasonlist`
+      ); // api 연결 후 삭제 예정
+      setSeasonList(res?.data.seasonList);
+    } catch (e) {}
+  };
 
   const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMode(e.target.value as Mode);
@@ -49,18 +54,13 @@ export default function ModeSeasonProvider({ children }: ModeSelectProps) {
           onToggle={isMineToggleHandler}
           text={isMine ? '내 거' : '모두'}
         />
-        <SeasonDropDown
-          seasons={
-            // 임시
-            mode === 'rank'
-              ? seasons_rank
-              : mode === 'normal'
-              ? seasons_normal
-              : seasons_both
-          }
-          value={season}
-          onSelect={seasonDropDownHandler}
-        />
+        {mode === 'rank' && seasonList && (
+          <SeasonDropDown
+            seasons={seasonList}
+            value={season}
+            onSelect={seasonDropDownHandler}
+          />
+        )}
       </div>
       <ModeRadiobox mode={mode} onChange={modeChangeHandler} />
       {React.cloneElement(children as React.ReactElement, {
