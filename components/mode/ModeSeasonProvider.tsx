@@ -9,9 +9,13 @@ import React from 'react';
 
 interface ModeSelectProps {
   children: React.ReactNode;
+  setModeProps: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function ModeSeasonProvider({ children }: ModeSelectProps) {
+export default function ModeSeasonProvider({
+  children,
+  setModeProps,
+}: ModeSelectProps) {
   const userData = useRecoilValue<UserData>(userState);
   const [mode, setMode] = useState(userData?.mode);
   const [season, setSeason] = useState('');
@@ -22,6 +26,7 @@ export default function ModeSeasonProvider({ children }: ModeSelectProps) {
   useEffect(() => {
     setSeason(() => (mode === 'rank' ? seasons_rank[0] : seasons_normal[0]));
     setDisplaySeasons(mode === 'rank');
+    setModeProps(mode);
   }, [mode]);
 
   const modeToggleHandler = () => {
