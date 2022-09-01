@@ -54,7 +54,7 @@ export default function ModeSeasonProvider({ children }: ModeSelectProps) {
           onToggle={isMineToggleHandler}
           text={isMine ? '내 거' : '모두'}
         />
-        {mode === 'rank' && seasonList !== undefined && (
+        {mode === 'rank' && seasonList && (
           <SeasonDropDown
             seasons={seasonList}
             value={season}
