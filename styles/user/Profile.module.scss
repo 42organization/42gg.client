@@ -54,13 +54,13 @@
     .bar {
       display: flex;
       height: 0.5rem;
-      width: 7rem;
+      width: 6.5rem;
       border-radius: $mini-radius;
       overflow: hidden;
-      .right {
+      .expCurrent {
         background-color: $g2-top;
       }
-      .left {
+      .expLeft {
         background-color: $dark-gray;
       }
     }
@@ -69,7 +69,8 @@
     font-size: $small-font;
     border-radius: $mini-radius;
     text-align: center;
-    padding: 0.2rem 0.5rem;
+    padding: 0.2rem 0;
+    width: 6.5rem;
     background: white;
     margin-right: auto;
   }
