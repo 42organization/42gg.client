@@ -8,7 +8,6 @@ export default function infScroll(path: string) {
 
   const getList = ({ pageParam = 0 }) =>
     instance.get(`${path}${pageParam}`, {}).then((res) => {
-      console.log(res?.data);
       return res?.data;
     });
 

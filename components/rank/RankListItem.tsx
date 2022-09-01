@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { Normal, Rank } from 'types/rankTypes';
 import { Mode } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
-import styles from 'styles/RankList.module.scss';
+import styles from 'styles/rank/RankList.module.scss';
 
 interface RankType {
   index: number;
@@ -36,7 +36,13 @@ export default function RankListItem({
   const makeIntraIdLink = () => (
     <Link href={`/users/detail?intraId=${intraId}`}>
       <span>
-        {mode === 'normal' && level ? `${intraId} (${level})` : intraId}
+        {mode === 'normal' && level ? (
+          <>
+            {intraId} <span className={styles.level}>({level})</span>
+          </>
+        ) : (
+          intraId
+        )}
       </span>
     </Link>
   );

@@ -9,8 +9,6 @@ import instance from 'utils/axios';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 
-import axios from 'axios'; // api 연결 후 삭제 예정
-
 interface RankListProps {
   mode?: Mode;
   season?: string;
@@ -62,8 +60,7 @@ export default function RankList({ mode, season }: RankListProps) {
 
   const getRankDataHandler = async () => {
     try {
-      // const res = await instance.get(`${path()}`);
-      const res = await axios.get(`http://localhost:3000/api${makePath()}`); // api 연결 후 삭제 예정
+      const res = await instance.get(`${makePath()}`);
       setRankData(res?.data);
       setMyRank(res?.data.myRank);
     } catch (e) {

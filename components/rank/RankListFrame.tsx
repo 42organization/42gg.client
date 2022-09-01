@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { Mode } from 'types/mainType';
 import PageNation from 'components/Pagination';
-import styles from 'styles/RankList.module.scss';
+import styles from 'styles/rank/RankList.module.scss';
 
 interface PageInfo {
   currentPage?: number;
@@ -25,7 +25,7 @@ export default function RankListFrame({
   const divisionList =
     modeType === 'rank'
       ? ['순위', 'intraId', '상태메시지', '점수']
-      : ['열정', 'intraId(Lv)', '상태메시지', '경험치'];
+      : ['열정', 'intraId (Lv)', '상태메시지', '경험치'];
   const router = useRouter();
 
   const pageChangeHandler = (pages: number) => {

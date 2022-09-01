@@ -1,4 +1,4 @@
-@import './common.scss';
+@import '../common.scss';
 
 /* 나의 랭킹 */
 
@@ -50,6 +50,12 @@
   background: $pp-red;
   color: white;
   font-weight: 700;
+}
+
+.level {
+  font-weight: 500;
+  font-size: 0.7rem;
+  color: $dark-gray;
 }
 
 /* RankList */
