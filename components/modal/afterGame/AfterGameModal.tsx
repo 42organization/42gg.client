@@ -73,7 +73,7 @@ export default function AfterGameModal() {
     try {
       await instance.post(`/pingpong/games/result/normal`);
       alert('게임이 종료되었습니다.');
-      setModalInfo({ modalName: null });
+      setModalInfo({ modalName: null }); // 경험치 오르는 모달 추가해야 한다.
     } catch (e) {
       setErrorMessage('JH04');
       return;
