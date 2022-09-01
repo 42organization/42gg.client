@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import Chart from 'components/user/Chart';
 import SeasonProvider from 'components/mode/SeasonProvider';
 import { errorState } from 'utils/recoil/error';
@@ -40,7 +40,8 @@ function RankInfo({ intraId, season }: RankProps) {
     (async () => {
       try {
         const res = await instance.get(
-          `/pingpong/users/${intraId}/rank/${season}`
+          `/pingpong/users/${intraId}/rank/1` // 임시
+          // `/pingpong/users/${intraId}/rank?season=${season}`
         );
         setRankProfileInfo(res?.data);
       } catch (e) {
@@ -56,26 +57,23 @@ function RankInfo({ intraId, season }: RankProps) {
       <div className={styles.rankInfo}>
         <div className={styles.rank}>
           <span>RANK</span>
-          <span>6</span>
-          {/* <span>{rank}</span> */}
+          <span>{rank}</span>
         </div>
         <div className={styles.pppWinRateWrap}>
-          <div className={styles.ppp}>1200점</div>
-          <div className={styles.winRate}>승률 68% (14승 6패)</div>
-          {/* <div className={styles.ppp}>{ppp}점</div>
-          <div className={styles.winRate}>승률 {winRate}% ({wins}승 {losses}패)</div> */}
+          <div className={styles.ppp}>{ppp}점</div>
+          <div className={styles.winRate}>
+            승률 {winRate}% ({wins}승 {losses}패)
+          </div>
         </div>
         <div className={styles.bar}>
-          <span className={styles.wins} style={{ width: '60%' }}></span>
-          <span className={styles.losses} style={{ width: '40%' }}></span>
-          {/* <span
+          <span
             className={styles.wins}
             style={{ width: `${parseInt(winRate)}%` }}
           ></span>
           <span
             className={styles.losses}
-            style={{ width: `${100 - parseInt(winRate)}` }}
-          ></span> */}
+            style={{ width: `${100 - parseInt(winRate)}%` }}
+          ></span>
         </div>
       </div>
       <Chart intraId={intraId} />

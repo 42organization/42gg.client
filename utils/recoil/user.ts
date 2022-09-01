@@ -12,5 +12,6 @@ export const profileInfoState = atom<ProfileInfo>({
     level: 0,
     currentExp: 0,
     maxExp: 0,
+    expRate: 0,
   },
 });
