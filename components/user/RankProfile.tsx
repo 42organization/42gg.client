@@ -41,7 +41,7 @@ function RankInfo({ intraId, season }: RankProps) {
       try {
         const res = await instance.get(
           `/pingpong/users/${intraId}/rank/1` // 임시
-          // `/pingpong/users/${intraId}/rank/season=${season}`
+          // `/pingpong/users/${intraId}/rank?season=${season}`
         );
         setRankProfileInfo(res?.data);
       } catch (e) {
