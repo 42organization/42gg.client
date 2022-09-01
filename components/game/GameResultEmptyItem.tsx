@@ -1,6 +1,6 @@
 import styles from 'styles/game/GameResultEmpty.module.scss';
 
-export default function GameResultEmptyArray() {
+export default function GameResultEmptyItem() {
   return (
     <div className={styles.container}>
       <div className={styles.title}>Record</div>

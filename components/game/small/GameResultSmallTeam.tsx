@@ -1,16 +1,16 @@
 import Image from 'next/image';
-import { Team } from 'types/gameTypes';
+import { RankInfo } from 'types/gameTypes';
 import styles from 'styles/game/GameResultItem.module.scss';
 
-type gameResultTypes = {
-  team: Team;
+interface GameResultSmallTeamProps {
+  team: RankInfo;
   userLeft: boolean;
-};
+}
 
 export default function GameResultSmallTeam({
   team,
   userLeft,
-}: gameResultTypes) {
+}: GameResultSmallTeamProps) {
   return (
     <div className={styles.smallTeam}>
       <div className={userLeft ? styles.smallLeft : styles.smallRight}>
