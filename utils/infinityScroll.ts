@@ -7,10 +7,9 @@ export default function infScroll(path: string) {
   const setErrorMessage = useSetRecoilState(errorState);
 
   const getList = ({ pageParam = 0 }) =>
-    instance
-      .get(`${path}${pageParam}`, {})
-
-      .then((res) => res?.data);
+    instance.get(`${path}${pageParam}`, {}).then((res) => {
+      return res?.data;
+    });
 
   const result = useInfiniteQuery('infiniteList', getList, {
     getNextPageParam: (pages) => {
