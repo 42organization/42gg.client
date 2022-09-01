@@ -1,5 +1,7 @@
+import { Seasons } from 'types/seasonTypes';
+
 interface SeasonDropDownProps {
-  seasons: string[];
+  seasons: Seasons;
   value: string;
   onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -9,12 +11,14 @@ export default function SeasonDropDown({
   value,
   onSelect,
 }: SeasonDropDownProps) {
-  if (seasons.length === 0) return null;
+  if (seasons.seasonList === undefined) {
+    return null;
+  }
   return (
     <select onChange={onSelect} value={value}>
-      {seasons.map((season) => (
-        <option key={season} value={season}>
-          {season}
+      {seasons.seasonList.map((season) => (
+        <option key={season.id} value={season.name}>
+          {season.name}
         </option>
       ))}
     </select>

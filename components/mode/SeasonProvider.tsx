@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
-import styles from 'styles/mode/ModeSelect.module.scss';
-import SeasonDropDown from './SeasonDropDown';
 import React from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Seasons } from 'types/seasonTypes';
+import SeasonDropDown from './SeasonDropDown';
+import styles from 'styles/mode/ModeSelect.module.scss';
 
 interface ModeSelectProps {
   children: React.ReactNode;
@@ -9,11 +11,21 @@ interface ModeSelectProps {
 
 export default function SeasonProvider({ children }: ModeSelectProps) {
   const [season, setSeason] = useState('');
-  const seasons_rank = ['season3', 'season1']; // 임시 : back에서 받아와야함
+  const [seasonList, setSeasonList] = useState<Seasons>(); // 임시
 
   useEffect(() => {
-    setSeason(() => seasons_rank[0]);
+    getSeasonListHandler();
   }, []);
+
+  const getSeasonListHandler = async () => {
+    try {
+      // const res = await instance.get(`/pingpong/seasonlist`);
+      const res = await axios.get(
+        `http://localhost:3000/api/pingpong/seasonlist`
+      ); // api 연결 후 삭제 예정
+      setSeasonList(res?.data);
+    } catch (e) {}
+  };
 
   const seasonDropDownHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSeason(e.target.value);
@@ -22,11 +34,13 @@ export default function SeasonProvider({ children }: ModeSelectProps) {
   return (
     <div>
       <div className={styles.wrapperRight}>
-        <SeasonDropDown
-          seasons={seasons_rank}
-          value={season}
-          onSelect={seasonDropDownHandler}
-        />
+        {seasonList && (
+          <SeasonDropDown
+            seasons={seasonList}
+            value={season}
+            onSelect={seasonDropDownHandler}
+          />
+        )}
       </div>
       {React.cloneElement(children as React.ReactElement, {
         season,
