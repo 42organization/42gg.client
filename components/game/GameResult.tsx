@@ -1,10 +1,12 @@
 import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
 import { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import GameResultList from 'components/game/GameResultList';
 import { Mode } from 'types/mainType';
+import { userState } from 'utils/recoil/layout';
+import GameResultList from 'components/game/GameResultList';
 
-interface GameResult {
+interface GameResultProps {
   intraId?: string;
   mode?: Mode;
   season?: string;
@@ -16,26 +18,48 @@ export default function GameResult({
   mode,
   season,
   isMine,
-}: GameResult) {
+}: GameResultProps) {
   const queryClient = new QueryClient();
-  const [path, setPath] = useState<string>();
+  const myIntraId = useRecoilValue(userState).intraId;
+  const [path, setPath] = useState('');
   const router = useRouter();
 
-  useEffect(() => {
+  const makePath = () => {
     if (router.asPath === '/' || router.asPath.includes('token')) {
       setPath(`/pingpong/games?count=3&gameId=`);
-    } else if (router.asPath === '/game') {
-      setPath(`/pingpong/games?count=10&status=end&gameId=`);
-    } else {
-      setPath(`/pingpong/users/${intraId}/games?count=5&status=end&gameId=`);
+      return;
     }
+    const userOption = isMine
+      ? `/users/${myIntraId}`
+      : intraId
+      ? `/users/${intraId}`
+      : '';
+    const seasonOption =
+      mode === 'rank' && season ? `season=${season.split('season')[1]}` : '';
+    const modeOption =
+      mode === 'rank' ? 'mode=rank' : mode === 'normal' ? 'mode=normal' : '';
+    const query = [modeOption, seasonOption, 'gameId=']
+      .filter((item) => item !== '')
+      .join('&');
+    setPath(`/pingpong${userOption}/games?${query}`);
+    return;
+  };
+
+  useEffect(() => {
+    makePath();
   }, [router.asPath]);
+
+  useEffect(() => {
+    makePath();
+  }, [mode, season, isMine]);
 
   return (
     <div>
-      <QueryClientProvider client={queryClient}>
-        {!path ? '로딩중' : <GameResultList path={path} />}
-      </QueryClientProvider>
+      {path && (
+        <QueryClientProvider client={queryClient}>
+          <GameResultList path={path} />
+        </QueryClientProvider>
+      )}
     </div>
   );
 }
