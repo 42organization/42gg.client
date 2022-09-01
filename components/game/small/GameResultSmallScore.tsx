@@ -1,19 +1,19 @@
 import styles from 'styles/game/GameResultItem.module.scss';
 
-type gameResultTypes = {
-  scoreTeam1: number;
-  scoreTeam2: number;
-};
+interface GameResultSmallScoreProps {
+  mode: string;
+  scoreTeam1?: number;
+  scoreTeam2?: number;
+}
 
 export default function GameResultSmallScore({
+  mode,
   scoreTeam1,
   scoreTeam2,
-}: gameResultTypes) {
+}: GameResultSmallScoreProps) {
   return (
-    <div>
-      <div className={styles.smallScoreBoard}>
-        {scoreTeam1} : {scoreTeam2}
-      </div>
+    <div className={styles.smallScoreBoard}>
+      {mode === 'normal' ? 'VS' : `${scoreTeam1} : ${scoreTeam2}`}
     </div>
   );
 }
