@@ -28,7 +28,6 @@ export default function ModeSeasonProvider({ children }: ModeSelectProps) {
       const res = await axios.get(
         `http://localhost:3000/api/pingpong/seasonlist`
       ); // api 연결 후 삭제 예정
-      // console.log('get data', res.data.seasonList);
       setSeasonList(res?.data);
     } catch (e) {}
   };
