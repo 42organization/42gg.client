@@ -19,13 +19,20 @@ export default function MatchManualModal() {
             <li>등록한 경기가 끝나야만 다음 경기 등록 가능</li>
             <li>경기 시작 5분 전 상대 팀 공개 및 경기 취소 불가</li>
             <li>매칭 알림은 이메일로 전달</li>
-            <li>일정 점수 이상 차이 나는 상대와 매칭 불가</li>
+            <li>일정 점수 이상 차이 나는 상대와 랭크 경기 불가</li>
             <li>경기가 매칭된 상태에서 취소 시, 1분간 경기 등록 불가</li>
-            <li>상대방이 경기를 취소하면 나의 경기는 매칭 대기 상태로 전환 </li>
+            <li>상대방이 경기를 취소하면 나의 경기는 매칭 대기 상태로 전환</li>
           </ul>
         </li>
         <li>
-          📖 경기
+          🌀 일반 경기
+          <ul className={styles.ruleDetail}>
+            <li>일반 게임 진행 시 점수 입력 없음</li>
+            <li>게임 시작 후 10분이 경과해야 게임 종료 가능</li>
+          </ul>
+        </li>
+        <li>
+          📖 랭크 경기
           <ul className={styles.ruleDetail}>
             <li>11점 3판 2선승제</li>
             <li>경기는 10분 동안 진행</li>
@@ -57,13 +64,14 @@ export default function MatchManualModal() {
           🚨 경기 시 주의사항
           <ul className={styles.ruleDetail}>
             <li>
-              매치가 시작 되었으나 상대방이 나오지 않는다면 3분이 지날 때 마다
-              세트 점수 1점씩 획득
+              매치가 시작 되었으나 상대방이 나오지 않는다면 3분이 지날
+              <br />때 마다 세트 점수 1점씩 획득
             </li>
             <li>6분이 지났을 때도 나오지 않았다면 세트 점수 2:0 승리 처리</li>
           </ul>
         </li>
       </ul>
+      ㅊㅊ
       <div className={styles.buttons}>
         <div className={styles.positive}>
           <input onClick={onReturn} type='button' value={'확 인'} />
