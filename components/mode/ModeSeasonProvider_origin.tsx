@@ -1,11 +1,13 @@
+import axios from 'axios';
+import React from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { UserData } from 'types/mainType';
+import { Seasons } from 'types/seasonTypes';
 import { userState } from 'utils/recoil/layout';
-import { useEffect, useState } from 'react';
-import styles from 'styles/mode/ModeSelect.module.scss';
 import ModeToggle from './ModeToggle';
 import SeasonDropDown from './SeasonDropDown';
-import React from 'react';
+import styles from 'styles/mode/ModeSelect.module.scss';
 
 interface ModeSelectProps {
   children: React.ReactNode;
@@ -16,12 +18,21 @@ export default function ModeSeasonProvider({ children }: ModeSelectProps) {
   const [mode, setMode] = useState(userData?.mode);
   const [season, setSeason] = useState('');
   const [displaySeasons, SetDisplaySeasons] = useState(true);
-  const seasons_normal = ['season4', 'season2']; // 임시 : back에서 받아와야함
-  const seasons_rank = ['season3', 'season1']; // 임시 : back에서 받아와야함
+  const [seasonList, setSeasonList] = useState<Seasons>(); // 임시
 
   useEffect(() => {
-    setSeason(() => (mode === 'rank' ? seasons_rank[0] : seasons_normal[0]));
+    getSeasonList();
   }, [mode]);
+
+  const getSeasonList = async () => {
+    try {
+      // const res = await instance.get(`/pingpong/seasonlist`);
+      const res = await axios.get(
+        `http://localhost:3000/api/pingpong/seasonlist`
+      ); // api 연결 후 삭제 예정
+      setSeasonList(res?.data);
+    } catch (e) {}
+  };
 
   const modeToggleHandler = () => {
     setMode((mode) => (mode === 'rank' ? 'normal' : 'rank'));
@@ -43,9 +54,9 @@ export default function ModeSeasonProvider({ children }: ModeSelectProps) {
           onToggle={modeToggleHandler}
           text={mode === 'rank' ? '랭크' : '일반'}
         />
-        {displaySeasons && (
+        {displaySeasons && seasonList && (
           <SeasonDropDown
-            seasons={mode === 'rank' ? seasons_rank : seasons_normal}
+            seasons={seasonList}
             value={season}
             onSelect={seasonDropDownHandler}
           />

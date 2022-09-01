@@ -1,8 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-interface Seasons {
-  seasonList: string[];
-}
+import { Seasons } from 'types/seasonTypes';
 
 export default function handler(
   req: NextApiRequest,
@@ -11,6 +8,12 @@ export default function handler(
   const query = req.query;
   const { count } = query;
 
-  const objList = { seasonList: ['season3', 'season2', 'season1'] };
+  const objList = {
+    seasonList: [
+      { id: 3, name: 'season3' },
+      { id: 2, name: 'season2' },
+      { id: 1, name: 'season1' },
+    ],
+  };
   res.status(200).json(objList);
 }
