@@ -54,24 +54,20 @@ export default function Profile({ intraId }: ProfileProps) {
           </div>
         </div>
         <div className={styles.levelRacketWrap}>
-          <div className={styles.level}>Lv. 20</div>
-          {/* <div className={styles.level}>Lv. {level}</div> */}
+          <div className={styles.level}>Lv. {level}</div>
           <div className={styles.exp}>
-            <div className={styles.expRate}>999 / 1000</div>
-            {/* <div className={styles.expRate}>
+            <div className={styles.expRate}>
               {currentExp} / {maxExp}
-            </div> */}
+            </div>
             <div className={styles.bar}>
-              <span className={styles.right} style={{ width: `30%` }}></span>
-              <span className={styles.left} style={{ width: `70%` }}></span>
-              {/* <span
-                className={styles.right}
+              <span
+                className={styles.expCurrent}
                 style={{ width: `${currentExp}%` }}
               ></span>
               <span
-                className={styles.left}
-                style={{ width: `${(maxExp - currentExp) / 100}%` }}
-              ></span> */}
+                className={styles.expLeft}
+                style={{ width: `${((maxExp - currentExp) / maxExp) * 100}%` }}
+              ></span>
             </div>
           </div>
           <div className={styles.racket}>{racketType.toUpperCase()}</div>
