@@ -19,10 +19,10 @@ export default function ModeSeasonProvider({ children }: ModeSelectProps) {
   const [seasonList, setSeasonList] = useState<Seasons>();
 
   useEffect(() => {
-    getSeasonList();
+    getSeasonListHandler();
   }, [mode]);
 
-  const getSeasonList = async () => {
+  const getSeasonListHandler = async () => {
     try {
       // const res = await instance.get(`/pingpong/seasonlist`);
       const res = await axios.get(

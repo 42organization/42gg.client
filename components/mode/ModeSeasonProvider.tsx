@@ -25,12 +25,12 @@ export default function ModeSeasonProvider({
   const [seasonList, setSeasonList] = useState<Seasons>(); // 임시
 
   useEffect(() => {
-    getSeasonList();
+    getSeasonListHandler();
     setDisplaySeasons(mode === 'rank');
     setModeProps(mode);
   }, [mode]);
 
-  const getSeasonList = async () => {
+  const getSeasonListHandler = async () => {
     try {
       // const res = await instance.get(`/pingpong/seasonlist`);
       const res = await axios.get(
