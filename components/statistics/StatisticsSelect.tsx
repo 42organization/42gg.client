@@ -36,7 +36,6 @@ export default function StatisticsSelect() {
     ));
   };
   const { chartName, chartType, apiPath } = selectChart;
-  console.log(selectChart);
   return (
     <div className={styles.container}>
       <div className={styles.chartSelectContainer}>
