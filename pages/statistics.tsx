@@ -1,10 +1,13 @@
-import styles from 'styles/Login.module.scss';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import StatisticsHeader from 'components/statistics/StatisticsHeader';
 import StatisticsSelect from 'components/statistics/StatisticsSelect';
 
 function Statistics() {
-  return <StatisticsSelect />;
+  return (
+    <div>
+      <StatisticsHeader />
+      <StatisticsSelect />
+    </div>
+  );
 }
 
 export default Statistics;

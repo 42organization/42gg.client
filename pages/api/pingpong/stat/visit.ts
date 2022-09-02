@@ -7,8 +7,8 @@ export default function handler(
 ) {
   const query = req.query;
 
-  const graphName1 = 'kipark';
-  const graphData1 = [
+  const graphName = 'kipark';
+  const graphData = [
     {
       date: '08-01',
       count: 7,
@@ -39,13 +39,13 @@ export default function handler(
     },
   ];
 
-  const graph1: SingleGraph = {
-    graphName: graphName1,
-    graphData: graphData1,
+  const graph: SingleGraph = {
+    graphName: graphName,
+    graphData: graphData,
   };
 
   const chart: ChartInterface = {
-    graphs: [graph1],
+    graphs: [graph],
   };
   res.status(200).json(chart);
 }

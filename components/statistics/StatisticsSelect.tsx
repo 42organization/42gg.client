@@ -1,39 +1,52 @@
 import { useState } from 'react';
 import styles from 'styles/statistics/StatisticsSelect.module.scss';
-import StatisticsChart from './StatisticsCharts';
+import { getChartList } from 'utils/handleChartList';
+import StatisticsChartData from './StatisticsChartData';
+
+type chartListElement = {
+  chartName: string;
+  chartType: string;
+  apiPath: string;
+};
 
 export default function StatisticsSelect() {
-  const [chartType, setChartType] = useState<string>('line');
-
-  const charts = {
-    chartName: [
-      { key: '일일 접속자 수', value: 'line' },
-      { key: '일일 접속자 수 대비 일일 매치 이용자 수 ', value: 'pie' },
-      { key: '시간별 슬롯 이용률', value: 'bar' },
-      { key: '매칭 취소 횟수 & 유저리스트', value: 'line' },
-      { key: '랭크별 일일 접속자 수', value: 'bar' },
-      { key: '랭크별 일일 매치 이용자 수', value: 'pie' },
-      { key: '기수별 매칭 이용자 수', value: 'line' },
-    ],
+  const defaultChart: chartListElement = {
+    chartName: '통계 페이지',
+    chartType: '',
+    apiPath: '',
   };
+  const [selectChart, setSelectChart] =
+    useState<chartListElement>(defaultChart);
 
+  const charts = getChartList();
+  const setNewChart = (chart: chartListElement) => {
+    setSelectChart(chart);
+  };
+  const returnCharList = () => {
+    return charts.chartName.map((chart, index) => (
+      <div
+        className={styles.listText}
+        onClick={() => {
+          setNewChart(chart);
+        }}
+        key={index}
+      >
+        {chart.chartName}
+      </div>
+    ));
+  };
+  const { chartName, chartType, apiPath } = selectChart;
+  console.log(selectChart);
   return (
     <div className={styles.container}>
       <div className={styles.chartSelectContainer}>
-        <div>통계</div>
-        {charts.chartName.map((chart, index) => (
-          <div
-            className={styles.listText}
-            onClick={() => setChartType(chart.value)}
-            key={index}
-          >
-            {chart.key}
-          </div>
-        ))}
+        <div>{returnCharList()}</div>
       </div>
-      <div className={styles.chart}>
-        <StatisticsChart chartType={chartType} />
-      </div>
+      <StatisticsChartData
+        chartName={chartName}
+        chartType={chartType}
+        apiPath={apiPath}
+      />
     </div>
   );
 }
