@@ -10,31 +10,31 @@ export default function handler(
   const graphName = 'kipark';
   const graphData = [
     {
-      date: '08-01',
+      date: '09-05',
       count: 7,
     },
     {
-      date: '08-02',
+      date: '09-06',
       count: 3,
     },
     {
-      date: '08-03',
+      date: '09-07',
       count: 4,
     },
     {
-      date: '08-04',
+      date: '09-08',
       count: 10,
     },
     {
-      date: '08-05',
+      date: '09-09',
       count: 9,
     },
     {
-      date: '08-06',
+      date: '09-10',
       count: 11,
     },
     {
-      date: '08-07',
+      date: '09-11',
       count: 5,
     },
   ];

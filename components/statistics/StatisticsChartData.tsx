@@ -33,7 +33,7 @@ export default function StatisticsChartData({
       );
       setChart(res.data);
     } catch (e) {
-      setErrorMessage('KP01');
+      setErrorMessage('KP02');
     }
   };
 
