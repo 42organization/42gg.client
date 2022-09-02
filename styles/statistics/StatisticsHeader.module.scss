@@ -1,7 +1,7 @@
 @import 'styles/common.scss';
 
 .headerWrap {
-  background-color: #141a46;
+  background: #141a46;
   #logo {
     div {
       @include logoTitle(0.25rem);
