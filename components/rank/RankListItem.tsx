@@ -66,7 +66,7 @@ export default function RankListItem({
             <div className={styles.intraId}>{makeIntraIdLink()}</div>
             <div className={styles.statusMessage}>{messageFiltered}</div>
             <div className={styles.ppp}>
-              {mode === 'normal' && exp ? exp : pppFiltered}
+              {mode === 'normal' && ppp === null ? exp : pppFiltered}
             </div>
           </div>
         </div>

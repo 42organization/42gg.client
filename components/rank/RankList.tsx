@@ -35,7 +35,7 @@ export default function RankList({ mode, season }: RankListProps) {
   const makePath = () => {
     const option = mode === 'normal' ? 'vip' : 'ranks/single';
     const seasonOption =
-      mode === 'rank' && season ? `season=${season.split('season')[1]}` : '';
+      mode === 'rank' && season ? `&season=${season.split('season')[1]}` : '';
     return isMainPage
       ? `/pingpong/${option}?count=3`
       : `/pingpong/${option}?page=${page}${seasonOption}`;
