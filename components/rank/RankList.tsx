@@ -37,7 +37,9 @@ export default function RankList({ mode, season }: RankListProps) {
     const modeOption = mode === 'normal' ? 'vip' : 'ranks/single';
     const seasonOption = mode === 'rank' ? `&season=${season}` : '';
     return router.asPath === '/'
-      ? `/pingpong/${seasonMode === 'normal' ? 'vip' : 'rank'}?page=1&count=3`
+      ? `/pingpong/${
+          seasonMode === 'normal' ? 'vip' : 'ranks/single'
+        }?page=1&count=3`
       : `/pingpong/${modeOption}?page=${page}${seasonOption}`;
   };
 
