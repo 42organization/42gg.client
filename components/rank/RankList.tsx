@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Mode } from 'types/mainType';
 import { RankMode, NormalMode, Rank } from 'types/rankTypes';
 import { myRankPosition, isMyRankScroll } from 'utils/recoil/myRank';
+import { userState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import RankListFrame from './RankListFrame';
@@ -23,6 +24,7 @@ export default function RankList({ mode, season }: RankListProps) {
   const [page, setPage] = useState<number>(1);
   const [myRank, setMyRank] = useRecoilState(myRankPosition);
   const [isScroll, setIsScroll] = useRecoilState(isMyRankScroll);
+  const seasonMode = useRecoilValue(userState).seasonMode;
   const setErrorMessage = useSetRecoilState(errorState);
   const router = useRouter();
   const pageInfo = {
@@ -35,7 +37,7 @@ export default function RankList({ mode, season }: RankListProps) {
     const modeOption = mode === 'normal' ? 'vip' : 'ranks/single';
     const seasonOption = mode === 'rank' ? `&season=${season}` : '';
     return router.asPath === '/'
-      ? `/pingpong/${modeOption}?count=3`
+      ? `/pingpong/${seasonMode === 'normal' ? 'vip' : 'rank'}?page=1&count=3`
       : `/pingpong/${modeOption}?page=${page}${seasonOption}`;
   };
 
