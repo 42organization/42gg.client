@@ -13,7 +13,7 @@ export default function GameResultSmallScore({
 }: GameResultSmallScoreProps) {
   return (
     <div className={styles.smallScoreBoard}>
-      {mode === 'normal' ? 'VS' : `${scoreTeam1} : ${scoreTeam2}`}
+      {mode === 'normal' ? '일반전' : `${scoreTeam1} : ${scoreTeam2}`}
     </div>
   );
 }
