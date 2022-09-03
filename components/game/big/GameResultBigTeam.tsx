@@ -5,7 +5,6 @@ import styles from 'styles/game/GameResultItem.module.scss';
 import router from 'next/router';
 
 interface GameResultBigTeamProps {
-  mode: string;
   team: RankInfo;
 }
 
@@ -15,18 +14,14 @@ export function isRankPlayerType(
   return 'wins' in arg;
 }
 
-export default function GameResultBigTeam({
-  mode,
-  team,
-}: GameResultBigTeamProps) {
+export default function GameResultBigTeam({ team }: GameResultBigTeamProps) {
   const makeRate = (player: RankPlayer | NormalPlayer) =>
     isRankPlayerType(player) ? (
-      <>
-        <span>{player.wins}승</span>
-        <span>{player.losses}패</span>
-      </>
+      <span>
+        {player.wins}승 {player.losses}패
+      </span>
     ) : (
-      <span>{player.level}</span>
+      <span>Lv. {player.level}</span>
     );
 
   return (
