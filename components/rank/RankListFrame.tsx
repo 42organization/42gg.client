@@ -10,14 +10,12 @@ interface PageInfo {
 }
 interface RankListFrameProps {
   children: React.ReactNode;
-  isMain: boolean;
   modeType?: Mode;
   pageInfo: PageInfo;
 }
 
 export default function RankListFrame({
   children,
-  isMain,
   modeType,
   pageInfo,
 }: RankListFrameProps) {
@@ -35,7 +33,7 @@ export default function RankListFrame({
 
   return (
     <>
-      {isMain ? (
+      {router.asPath === '/' ? (
         <div className={styles.mainContainer}>
           <div className={styles.mainTitle}>{mainTitle}</div>
           {children}

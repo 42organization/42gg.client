@@ -1,14 +1,14 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
-import { Normal, Rank } from 'types/rankTypes';
+import { NormalMode, RankMode } from 'types/rankTypes';
 import { Mode } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
 import styles from 'styles/rank/RankList.module.scss';
 
-interface RankType {
+interface RankListItemRrops {
   index: number;
-  rankedUser: Normal | Rank;
-  isMain: boolean;
+  rankedUser: NormalMode | RankMode;
   mode?: Mode;
   ppp: number | string | null;
   level: number | null;
@@ -18,20 +18,20 @@ interface RankType {
 export default function RankListItem({
   index,
   rankedUser,
-  isMain,
   mode,
   ppp,
   level,
   exp,
-}: RankType) {
-  const myIntraId = useRecoilValue(userState).intraId;
+}: RankListItemRrops) {
   const { rank, intraId, statusMessage } = rankedUser;
+  const myIntraId = useRecoilValue(userState).intraId;
   const messageFiltered =
     statusMessage.length > 10
       ? statusMessage.slice(0, 10) + '...'
       : statusMessage;
   const rankFiltered = rank < 0 ? '-' : rank;
   const pppFiltered = rank < 0 ? '-' : ppp;
+  const router = useRouter();
 
   const makeIntraIdLink = () => (
     <Link href={`/users/detail?intraId=${intraId}`}>
@@ -49,7 +49,7 @@ export default function RankListItem({
 
   return (
     <>
-      {isMain ? (
+      {router.asPath === '/' ? (
         <div className={styles.mainData}>
           <div className={styles.rank}>{rankFiltered}</div>
           <div className={styles.intraId}>{makeIntraIdLink()}</div>

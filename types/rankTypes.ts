@@ -1,4 +1,4 @@
-export interface Rank {
+export interface RankMode {
   rank: number;
   intraId: string;
   statusMessage: string;
@@ -6,7 +6,7 @@ export interface Rank {
   winRate: number;
 }
 
-export interface Normal {
+export interface NormalMode {
   rank: number;
   intraId: string;
   statusMessage: string;
@@ -14,10 +14,9 @@ export interface Normal {
   exp: number;
 }
 
-export interface RankData {
-  myIntraId: string; // 백에 빼줄 것 요청
+export interface Rank {
   myRank: number;
   currentPage: number;
   totalPage: number;
-  rankList: Rank[] | Normal[];
+  rankList: RankMode[] | NormalMode[];
 }
