@@ -45,7 +45,7 @@ export default function AfterGameModal() {
       setCurrentGameInfo({
         mode: 'normal',
         startTime: minuitesAgo(10),
-        matchTeamsInfo: { ...res?.data },
+        matchTeamsInfo: { ...res?.data.matchTeamsInfo },
       }); // 임시
     } catch (e) {
       setErrorMessage('JH03');
