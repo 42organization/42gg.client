@@ -7,6 +7,6 @@ export const myRankPosition = atom<number>({
 });
 
 export const isMyRankScroll = atom<boolean>({
-  key: `myRankScroll/${v1()}`,
+  key: `isMyRankScroll/${v1()}`,
   default: false,
 });
