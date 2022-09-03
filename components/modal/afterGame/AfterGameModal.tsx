@@ -49,7 +49,6 @@ export default function AfterGameModal() {
         startTime: minuitesAgo(10),
         matchTeamsInfo: { ...res?.data.matchTeamsInfo },
       }); // 임시
-      console.log('res', res);
     } catch (e) {
       setErrorMessage('JH03');
     }
