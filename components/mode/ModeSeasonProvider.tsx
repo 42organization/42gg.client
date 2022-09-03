@@ -4,8 +4,8 @@ import { useRecoilValue } from 'recoil';
 import { UserData } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
 import { seasonState } from 'utils/recoil/seasons';
-import ModeToggle from './ModeToggle';
-import SeasonDropDown from './SeasonDropDown';
+import ModeToggle from './modeItems/ModeToggle';
+import SeasonDropDown from './modeItems/SeasonDropDown';
 import styles from 'styles/mode/ModeSelect.module.scss';
 
 interface ModeSelectProps {
@@ -19,7 +19,7 @@ export default function ModeSeasonProvider({
 }: ModeSelectProps) {
   const userData = useRecoilValue<UserData>(userState);
   const [mode, setMode] = useState(userData?.mode);
-  const [season, setSeason] = useState('');
+  const [season, setSeason] = useState<number>(0);
   const [displaySeasons, setDisplaySeasons] = useState(true);
   const seasonList = useRecoilValue(seasonState);
 
@@ -33,7 +33,7 @@ export default function ModeSeasonProvider({
   };
 
   const seasonDropDownHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSeason(e.target.value);
+    setSeason(parseInt(e.target.value));
   };
 
   return (

@@ -13,7 +13,7 @@ interface RankProfileProps {
 
 interface RankProps {
   intraId: string;
-  season?: string;
+  season?: number;
 }
 
 export default function RankProfile({ intraId }: RankProfileProps) {
@@ -28,7 +28,7 @@ export default function RankProfile({ intraId }: RankProfileProps) {
 
 function RankInfo({ intraId, season }: RankProps) {
   const setErrorMessage = useSetRecoilState(errorState);
-  const [rankProfileInfo, setRankProfileInfo] = useState<RankProfileInfo>({
+  const [rankProfile, setRankProfile] = useState<RankProfileInfo>({
     rank: 0,
     ppp: 0,
     wins: 0,
@@ -40,17 +40,16 @@ function RankInfo({ intraId, season }: RankProps) {
     (async () => {
       try {
         const res = await instance.get(
-          `/pingpong/users/${intraId}/rank/1` // 임시
-          // `/pingpong/users/${intraId}/rank?season=${season}`
+          `/pingpong/users/${intraId}/rank?season=${season}`
         );
-        setRankProfileInfo(res?.data);
+        setRankProfile(res?.data);
       } catch (e) {
-        setErrorMessage('');
+        setErrorMessage('JH07');
       }
     })();
   }, [intraId, season]);
 
-  const { rank, ppp, wins, losses, winRate } = rankProfileInfo;
+  const { rank, ppp, wins, losses, winRate } = rankProfile;
 
   return (
     <div>

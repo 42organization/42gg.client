@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { seasonState } from 'utils/recoil/seasons';
-import SeasonDropDown from './SeasonDropDown';
+import SeasonDropDown from './modeItems/SeasonDropDown';
 import styles from 'styles/mode/ModeSelect.module.scss';
 
 interface ModeSelectProps {
@@ -10,11 +10,11 @@ interface ModeSelectProps {
 }
 
 export default function SeasonProvider({ children }: ModeSelectProps) {
-  const [season, setSeason] = useState('');
+  const [season, setSeason] = useState<number>(0);
   const seasonList = useRecoilValue(seasonState);
 
   const seasonDropDownHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSeason(e.target.value);
+    setSeason(parseInt(e.target.value));
   };
 
   return (

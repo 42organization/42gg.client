@@ -3,7 +3,7 @@ import { Seasons } from 'types/seasonTypes';
 
 interface SeasonDropDownProps {
   seasons: Seasons;
-  value: string;
+  value: number;
   onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -18,7 +18,7 @@ export default function SeasonDropDown({
   return (
     <select onChange={onSelect} value={value}>
       {seasons.seasonList.map((season: seasonType) => (
-        <option key={season.id} value={season.name}>
+        <option key={season.id} value={season.id}>
           {season.name}
         </option>
       ))}

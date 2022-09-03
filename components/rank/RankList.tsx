@@ -33,12 +33,11 @@ export default function RankList({ mode, season }: RankListProps) {
   };
 
   const makePath = () => {
-    const option = mode === 'normal' ? 'vip' : 'ranks/single';
-    const seasonOption =
-      mode === 'rank' && season ? `&season=${season.split('season')[1]}` : '';
+    const modeOption = mode === 'normal' ? 'vip' : 'ranks/single';
+    const seasonOption = mode === 'rank' ? `&season=${season}` : '';
     return isMainPage
-      ? `/pingpong/${option}?count=3`
-      : `/pingpong/${option}?page=${page}${seasonOption}`;
+      ? `/pingpong/${modeOption}?count=3`
+      : `/pingpong/${modeOption}?page=${page}${seasonOption}`;
   };
 
   useEffect(() => {

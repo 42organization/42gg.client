@@ -34,11 +34,10 @@ export default function GameResult({
       : intraId
       ? `/users/${intraId}`
       : '';
-    const seasonOption =
-      mode === 'rank' && season ? `season=${season.split('season')[1]}` : '';
+    const seasonOption = mode === 'rank' ? `season=${season}` : '';
     const modeOption =
       mode === 'rank' ? 'mode=rank' : mode === 'normal' ? 'mode=normal' : '';
-    const countOption = intraId && 'count=5';
+    const countOption = intraId ? 'count=5' : '';
     const query = [modeOption, seasonOption, countOption, 'gameId=']
       .filter((item) => item !== '')
       .join('&');
