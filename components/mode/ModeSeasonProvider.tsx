@@ -17,7 +17,7 @@ export default function ModeSeasonProvider({
   children,
   setModeProps,
 }: ModeSelectProps) {
-  const user = useRecoilValue<UserType>(userState);
+  const user = useRecoilValue(userState);
   const [mode, setMode] = useState(user?.seasonMode);
   const [season, setSeason] = useState<number>(0);
   const [displaySeasons, setDisplaySeasons] = useState(true);
