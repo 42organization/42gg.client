@@ -15,8 +15,8 @@ import { BsMegaphone } from 'react-icons/bs';
 import styles from 'styles/Layout/Header.module.scss';
 
 export default function Header() {
-  const userData = useRecoilValue(userState);
-  const [liveData, setLiveData] = useRecoilState(liveState);
+  const user = useRecoilValue(userState);
+  const [userLive, setUserLive] = useRecoilState(liveState);
   const [openMenuBar, setOpenMenuBar] = useRecoilState(menuBarState);
   const [openNotiBar, setOpenNotiBar] = useRecoilState(notiBarState);
 
@@ -26,7 +26,7 @@ export default function Header() {
 
   const openNotiBarHandler = () => {
     setOpenNotiBar(!openNotiBar);
-    setLiveData((prev) => ({ ...prev, notiCount: 0 }));
+    setUserLive((prev) => ({ ...prev, notiCount: 0 }));
   };
 
   return (
@@ -52,7 +52,7 @@ export default function Header() {
             <BsMegaphone />
           </div>
           <div id={styles.notiIcon} onClick={openNotiBarHandler}>
-            {liveData.notiCount ? (
+            {userLive.notiCount ? (
               <div className={styles.bellWhole}>
                 <VscBellDot />
               </div>
@@ -60,11 +60,11 @@ export default function Header() {
               <VscBell />
             )}
           </div>
-          <Link href={`/users/detail?intraId=${userData.intraId}`}>
+          <Link href={`/users/detail?intraId=${user.intraId}`}>
             <div className={styles.userImage}>
-              {userData.userImageUri && (
+              {user.userImageUri && (
                 <Image
-                  src={userData.userImageUri}
+                  src={user.userImageUri}
                   alt='prfImg'
                   layout='fill'
                   objectFit='cover'

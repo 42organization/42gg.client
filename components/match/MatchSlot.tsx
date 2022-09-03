@@ -20,7 +20,7 @@ export default function MatchItem({
 }: MatchSlotProps) {
   const setErrorMessage = useSetRecoilState(errorState);
   const setModalInfo = useSetRecoilState(modalState);
-  const liveData = useRecoilValue(liveState);
+  const userLive = useRecoilValue(liveState);
 
   const { headCount, slotId, status, time } = slot;
   const headMax = type === 'single' ? 2 : 4;
@@ -44,7 +44,7 @@ export default function MatchItem({
       } catch (e) {
         setErrorMessage('JB03');
       }
-    } else if (liveData.event === 'match') {
+    } else if (userLive.event === 'match') {
       setModalInfo({ modalName: 'MATCH-REJECT' });
     } else {
       setModalInfo({

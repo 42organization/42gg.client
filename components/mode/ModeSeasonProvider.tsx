@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { UserData } from 'types/mainType';
+import { UserType } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
 import { seasonState } from 'utils/recoil/seasons';
 import ModeToggle from './modeItems/ModeToggle';
@@ -17,8 +17,8 @@ export default function ModeSeasonProvider({
   children,
   setModeProps,
 }: ModeSelectProps) {
-  const userData = useRecoilValue<UserData>(userState);
-  const [mode, setMode] = useState(userData?.mode);
+  const user = useRecoilValue<UserType>(userState);
+  const [mode, setMode] = useState(user?.seasonMode);
   const [season, setSeason] = useState<number>(0);
   const [displaySeasons, setDisplaySeasons] = useState(true);
   const seasonList = useRecoilValue(seasonState);
