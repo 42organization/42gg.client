@@ -18,11 +18,9 @@ export default function ExpGameModal() {
 
   const getExpInfoHandler = async () => {
     try {
-      console.log('get', modalInfo);
       const res = await instance.get(
         `/pingpong/games/${modalInfo.gameId}/result`
       );
-      console.log('expInfo', res);
       setExpInfo(res?.data);
     } catch (e) {
       setErrorMessage('exp');

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import instance from 'utils/axios';
 import { PlayerInfo, CurrentGameInfo, GameResult } from 'types/scoreTypes';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import { minuitesAgo } from 'utils/handleTime';
@@ -21,7 +21,7 @@ const defaultCurrentGameInfo: CurrentGameInfo = {
 
 export default function AfterGameModal() {
   const setErrorMessage = useSetRecoilState(errorState);
-  const [modalInfo, setModalInfo] = useRecoilState(modalState);
+  const setModalInfo = useSetRecoilState(modalState);
   const [currentGameInfo, setCurrentGameInfo] = useState<CurrentGameInfo>(
     defaultCurrentGameInfo
   );
@@ -74,16 +74,12 @@ export default function AfterGameModal() {
 
   const submitNormalResultHandler = async () => {
     try {
-      console.log('current', currentGameInfo);
       await instance.post(`/pingpong/games/result/normal`);
-      //alert('게임이 종료되었습니다.');
-      setModalInfo({ modalName: 'FIXED-EXP', gameId: currentGameInfo.gameId }); // 경험치 오르는 모달 추가해야 한다.
-      console.log('modal', modalInfo);
+      setModalInfo({ modalName: 'FIXED-EXP', gameId: currentGameInfo.gameId });
     } catch (e) {
       setErrorMessage('JH04');
       return;
     }
-    // window.location.href = '/';
   };
 
   return currentGameInfo.mode === 'normal' ? (
