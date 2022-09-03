@@ -1,10 +1,9 @@
-import axios from 'axios';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { UserData } from 'types/mainType';
-import { Seasons } from 'types/seasonTypes';
 import { userState } from 'utils/recoil/layout';
+import { seasonState } from 'utils/recoil/seasons';
 import ModeToggle from './ModeToggle';
 import SeasonDropDown from './SeasonDropDown';
 import styles from 'styles/mode/ModeSelect.module.scss';
@@ -22,23 +21,12 @@ export default function ModeSeasonProvider({
   const [mode, setMode] = useState(userData?.mode);
   const [season, setSeason] = useState('');
   const [displaySeasons, setDisplaySeasons] = useState(true);
-  const [seasonList, setSeasonList] = useState<Seasons>(); // 임시
+  const seasonList = useRecoilValue(seasonState);
 
   useEffect(() => {
-    getSeasonListHandler();
     setDisplaySeasons(mode === 'rank');
     setModeProps(mode);
   }, [mode]);
-
-  const getSeasonListHandler = async () => {
-    try {
-      // const res = await instance.get(`/pingpong/seasonlist`);
-      const res = await axios.get(
-        `http://localhost:3000/api/pingpong/seasonlist`
-      ); // api 연결 후 삭제 예정
-      setSeasonList(res?.data);
-    } catch (e) {}
-  };
 
   const modeToggleHandler = () => {
     setMode((mode) => (mode === 'rank' ? 'normal' : 'rank'));
