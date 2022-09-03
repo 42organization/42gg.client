@@ -22,7 +22,7 @@ export default function GameResultItem({ game, isBig }: GameResultItemProps) {
     >
       {isBig ? (
         <>
-          <GameResultBigTeam team={team1} mode={mode} />
+          <GameResultBigTeam team={team1} />
           <GameResultBigScore
             mode={mode}
             status={status}
@@ -30,7 +30,7 @@ export default function GameResultItem({ game, isBig }: GameResultItemProps) {
             scoreTeam1={team1.score}
             scoreTeam2={team2.score}
           />
-          <GameResultBigTeam team={team2} mode={mode} />
+          <GameResultBigTeam team={team2} />
         </>
       ) : (
         <>
