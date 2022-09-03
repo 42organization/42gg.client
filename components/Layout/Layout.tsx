@@ -23,8 +23,8 @@ type AppLayoutProps = {
 };
 
 export default function AppLayout({ children }: AppLayoutProps) {
-  const [userData, setUserData] = useRecoilState(userState);
-  const [liveData, setLiveData] = useRecoilState(liveState);
+  const [user, setUser] = useRecoilState(userState);
+  const [userLive, setUserLive] = useRecoilState(liveState);
   const [openCurrentInfo, setOpenCurrentInfo] = useRecoilState(
     openCurrentMatchInfoState
   );
@@ -36,7 +36,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const setSeasonList = useSetRecoilState(seasonState);
 
   useEffect(() => {
-    getUserDataHandler();
+    getUserHandler();
     getSeasonListHandler();
   }, []);
 
@@ -55,26 +55,25 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }, [presentPath]);
 
   useEffect(() => {
-    if (userData.intraId) {
+    if (user.intraId) {
       getLiveDataHandler();
       if (matchRefreshBtn) setMatchRefreshBtn(false);
     }
-  }, [presentPath, userData, matchRefreshBtn]);
+  }, [presentPath, user, matchRefreshBtn]);
 
   useEffect(() => {
-    if (liveData?.event === 'match') setOpenCurrentInfo(true);
+    if (userLive?.event === 'match') setOpenCurrentInfo(true);
     else {
-      if (liveData?.event === 'game')
+      if (userLive?.event === 'game')
         setModalInfo({ modalName: 'FIXED-AFTER_GAME' });
       setOpenCurrentInfo(false);
     }
-  }, [liveData]);
+  }, [userLive]);
 
-  const getUserDataHandler = async () => {
+  const getUserHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/users`);
-      setUserData({ ...res?.data, mode: 'normal' }); // 임시
-      //setUserData({ ...res?.data, mode: 'rank' }); // 임시
+      setUser({ ...res?.data });
     } catch (e) {
       setErrorMessage('JB02');
     }
@@ -83,8 +82,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const getLiveDataHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/users/live`);
-      setLiveData({ ...res?.data, mode: 'normal' }); // 임시
-      //setLiveData({ ...res?.data, mode: 'rank' }); // 임시
+      setUserLive({ ...res?.data });
     } catch (e) {
       setErrorMessage('JB03');
     }
@@ -94,10 +92,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
     <div className={styles.appContainer}>
       <div className={styles.background}>
         <div>
-          {presentPath === '/statistics' && userData.isAdmin ? (
+          {presentPath === '/statistics' && user.isAdmin ? (
             <Statistics />
           ) : (
-            userData.intraId && (
+            user.intraId && (
               <>
                 <Header />
                 {openCurrentInfo && <CurrentMatchInfo />}

@@ -1,15 +1,25 @@
 import { atom } from 'recoil';
 import { v1 } from 'uuid';
-import { UserData, LiveData } from '../../types/mainType';
+import { UserType, UserLiveType } from '../../types/mainType';
 
-export const userState = atom<UserData>({
+export const userState = atom<UserType>({
   key: `userState/${v1()}`,
-  default: { intraId: '', isAdmin: false, userImageUri: '', mode: 'normal' },
+  default: {
+    intraId: '',
+    isAdmin: false,
+    userImageUri: '',
+    seasonMode: 'normal',
+  },
 });
 
-export const liveState = atom<LiveData>({
+export const liveState = atom<UserLiveType>({
   key: `liveState/${v1()}`,
-  default: { notiCount: 0, event: null, mode: 'rank' },
+  default: {
+    notiCount: 0,
+    event: null,
+    seasonMode: 'normal',
+    currentMatchMode: null,
+  },
 });
 
 export const menuBarState = atom<boolean>({

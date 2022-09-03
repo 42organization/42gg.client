@@ -7,13 +7,16 @@ import instance from 'utils/axios';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 export default function MenuBar() {
-  const userData = useRecoilValue(userState);
+  const user = useRecoilValue(userState);
   const resetOpenMenuBar = useResetRecoilState(menuBarState);
   const setModalInfo = useSetRecoilState(modalState);
   const menuList = [
-    { name: `${userData.mode === 'normal' ? 'VIP' : '랭킹'}`, link: '/rank' },
+    {
+      name: `${user.seasonMode === 'normal' ? 'VIP' : '랭킹'}`,
+      link: '/rank',
+    },
     { name: '최근 경기', link: '/game' },
-    { name: '내 정보', link: `/users/detail?intraId=${userData.intraId}` },
+    { name: '내 정보', link: `/users/detail?intraId=${user.intraId}` },
   ];
 
   const goToAdminPage = async () => {
@@ -62,7 +65,7 @@ export default function MenuBar() {
               </div>
             </div>
             <div className={styles.subMenu} id={styles.logout}>
-              {userData.isAdmin && (
+              {user.isAdmin && (
                 <>
                   <Link href='/statistics'>
                     <div>📊 통계페이지</div>

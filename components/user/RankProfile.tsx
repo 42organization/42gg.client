@@ -4,7 +4,7 @@ import Chart from 'components/user/Chart';
 import SeasonProvider from 'components/mode/SeasonProvider';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
-import { RankProfileInfo } from 'types/userTypes';
+import { RankProfileType } from 'types/userTypes';
 import styles from 'styles/user/Profile.module.scss';
 
 interface RankProfileProps {
@@ -28,7 +28,7 @@ export default function RankProfile({ intraId }: RankProfileProps) {
 
 function RankInfo({ intraId, season }: RankProps) {
   const setErrorMessage = useSetRecoilState(errorState);
-  const [rankProfile, setRankProfile] = useState<RankProfileInfo>({
+  const [rankProfile, setRankProfile] = useState<RankProfileType>({
     rank: 0,
     ppp: 0,
     wins: 0,

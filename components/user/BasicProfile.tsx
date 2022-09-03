@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
-import { profileInfoState } from 'utils/recoil/user';
+import { profileState } from 'utils/recoil/user';
 import { userState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
@@ -12,17 +12,17 @@ interface ProfileProps {
   intraId: string;
 }
 
-export default function Profile({ intraId }: ProfileProps) {
-  const userData = useRecoilValue(userState);
+export default function BasicProfile({ intraId }: ProfileProps) {
+  const user = useRecoilValue(userState);
   const setErrorMessage = useSetRecoilState(errorState);
   const setModalInfo = useSetRecoilState(modalState);
-  const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
+  const [profile, setProfile] = useRecoilState(profileState);
 
   useEffect(() => {
     (async () => {
       try {
         const res = await instance.get(`/pingpong/users/${intraId}/detail`);
-        setProfileInfo(res?.data);
+        setProfile(res?.data);
       } catch (e) {
         setErrorMessage('SJ03');
       }
@@ -37,7 +37,7 @@ export default function Profile({ intraId }: ProfileProps) {
     currentExp,
     maxExp,
     expRate,
-  } = profileInfo;
+  } = profile;
 
   const startEditHandler = () => {
     setModalInfo({ modalName: 'USER-PROFILE_EDIT' });
@@ -83,12 +83,12 @@ export default function Profile({ intraId }: ProfileProps) {
       <div className={styles.bottomContainer}>
         <div className={styles.statusMessage}>
           <div className={styles.messaage}>
-            {userData.intraId === intraId && statusMessage.length === 0
+            {user.intraId === intraId && statusMessage.length === 0
               ? '상태메시지를 입력해보세요!'
               : statusMessage}
           </div>
           <div className={styles.buttons}>
-            {userData.intraId === intraId && (
+            {user.intraId === intraId && (
               <div className={styles.positive}>
                 <input type='button' onClick={startEditHandler} value='edit' />
               </div>

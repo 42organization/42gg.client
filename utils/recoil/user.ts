@@ -1,9 +1,9 @@
-import { ProfileInfo } from './../../types/userTypes';
+import { BasicProfileType } from './../../types/userTypes';
 import { atom } from 'recoil';
 import { v1 } from 'uuid';
 
-export const profileInfoState = atom<ProfileInfo>({
-  key: `profileInfoState/${v1()}`,
+export const profileState = atom<BasicProfileType>({
+  key: `profileState/${v1()}`,
   default: {
     intraId: '',
     userImageUri: '',

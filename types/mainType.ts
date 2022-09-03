@@ -1,18 +1,15 @@
 export type Mode = 'normal' | 'rank' | 'both';
 
-export interface UserData {
+export interface UserType {
   intraId: string;
   isAdmin: boolean;
   userImageUri: string;
-  mode: Mode;
+  seasonMode: Mode;
 }
 
-export interface LiveData {
+export interface UserLiveType {
   notiCount: number;
   event: 'match' | 'game' | null;
-  mode: Mode | null;
-}
-
-export interface SearchData {
-  users: string[];
+  seasonMode: Mode | null;
+  currentMatchMode: Mode | null;
 }
