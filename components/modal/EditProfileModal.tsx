@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { profileInfoState } from 'utils/recoil/user';
+import { profileState } from 'utils/recoil/user';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
@@ -14,15 +14,15 @@ interface EditedProfile {
 const CHAR_LIMIT = 30;
 
 export default function EditProfileModal() {
-  const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
   const setErrorMessage = useSetRecoilState(errorState);
   const setModalInfo = useSetRecoilState(modalState);
+  const [profile, setProfile] = useRecoilState(profileState);
   const [editedProfile, setEditedProfile] = useState<EditedProfile>({
-    racketType: 'penholder',
+    racketType: profile.racketType,
     statusMessage: '',
   });
-  const { racketType, statusMessage } = profileInfo;
-  const racket = [
+  const { racketType, statusMessage } = profile;
+  const racketTypes = [
     { id: 'penholder', label: 'PENHOLDER' },
     { id: 'shakehand', label: 'SHAKEHAND' },
     { id: 'dual', label: 'DUAL' },
@@ -34,7 +34,7 @@ export default function EditProfileModal() {
       racketType,
       statusMessage,
     }));
-  }, [profileInfo]);
+  }, [profile]);
 
   const inputChangeHandler = ({
     target: { name, value },
@@ -50,11 +50,10 @@ export default function EditProfileModal() {
   };
 
   const finishEditHandler = async () => {
-    setProfileInfo((prev) => ({
+    setProfile((prev) => ({
       ...prev,
       ...editedProfile,
     }));
-
     try {
       await instance.put(`/pingpong/users/detail`, editedProfile);
       alert('프로필이 성공적으로 등록되었습니다.');
@@ -88,7 +87,7 @@ export default function EditProfileModal() {
       <div className={styles.racketTypeWrap}>
         <div className={styles.editType}>라켓 타입</div>
         <div className={styles.racketRadioButtons}>
-          {racket.map((racket, index) => {
+          {racketTypes.map((racket, index) => {
             return (
               <label key={index} htmlFor={racket.id}>
                 <input
