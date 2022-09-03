@@ -9,12 +9,14 @@ import {
 } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
+import { seasonState } from 'utils/recoil/seasons';
 import Header from './Header';
 import Footer from './Footer';
 import CurrentMatchInfo from './CurrentMatchInfo';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/Layout.module.scss';
 import Statistics from 'pages/statistics';
+import axios from 'axios';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -31,10 +33,22 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const setErrorMessage = useSetRecoilState(errorState);
   const setModalInfo = useSetRecoilState(modalState);
   const presentPath = useRouter().asPath;
+  const setSeasonList = useSetRecoilState(seasonState);
 
   useEffect(() => {
     getUserDataHandler();
+    getSeasonListHandler();
   }, []);
+
+  const getSeasonListHandler = async () => {
+    try {
+      // const res = await instance.get(`/pingpong/seasonlist`);
+      const res = await axios.get(
+        `http://localhost:3000/api/pingpong/seasonlist`
+      ); // api 연결 후 삭제 예정
+      setSeasonList(res?.data);
+    } catch (e) {}
+  };
 
   useEffect(() => {
     setModalInfo({ modalName: null });
