@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Mode } from 'types/mainType';
 import { RankMode, NormalMode, Rank } from 'types/rankTypes';
