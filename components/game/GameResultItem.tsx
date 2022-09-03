@@ -1,12 +1,11 @@
 import { useSetRecoilState } from 'recoil';
-import { GameData, RankPlayer, NormalPlayer } from 'types/gameTypes';
+import { GameData } from 'types/gameTypes';
 import { clickedGameItem } from 'utils/recoil/game';
 import GameResultBigScore from 'components/game/big/GameResultBigScore';
 import GameResultSmallScore from 'components/game/small/GameResultSmallScore';
 import GameResultBigTeam from 'components/game/big/GameResultBigTeam';
 import GameResultSmallTeam from 'components/game/small/GameResultSmallTeam';
 import styles from 'styles/game/GameResultItem.module.scss';
-
 interface GameResultItemProps {
   game: GameData;
   isBig: boolean;
@@ -15,10 +14,10 @@ interface GameResultItemProps {
 export default function GameResultItem({ game, isBig }: GameResultItemProps) {
   const { mode, team1, team2, status, time, gameId } = game;
   const setClickedItemId = useSetRecoilState(clickedGameItem);
-
   return (
     <div
-      className={isBig ? styles.bigContainer : styles.smallContainer}
+      className={`${isBig ? styles.bigContainer : styles.smallContainer}
+			${mode === 'normal' ? styles.normal : styles.rank}`}
       onClick={() => setClickedItemId(gameId)}
     >
       {isBig ? (

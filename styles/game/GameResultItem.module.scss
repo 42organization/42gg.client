@@ -1,5 +1,16 @@
 @import 'styles/common.scss';
 
+@keyframes upDown {
+  0%,
+  40%,
+  100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-0.2rem);
+  }
+}
+
 .pageWrap {
   @include pageWrap;
 }
@@ -14,9 +25,24 @@
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   align-items: center;
-  background: $gray;
   margin-bottom: 0.2rem;
   padding: 0.5rem 1.5rem;
+  background: $gray;
+}
+
+.bigContainer {
+  border-radius: $midium-radius;
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  align-items: center;
+  margin-bottom: 0.2rem;
+  padding: 0.8rem 0;
+  &.rank {
+    background: linear-gradient(135deg, $pp-red, $pp-blue);
+  }
+  &.normal {
+    background: linear-gradient(135deg, $pp-pink, $pp-blue);
+  }
 }
 
 .smallTeam {
@@ -44,16 +70,6 @@
   font-weight: 500;
   color: black;
   text-align: center;
-}
-
-.bigContainer {
-  border-radius: $midium-radius;
-  display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
-  align-items: center;
-  background: linear-gradient(135deg, $pp-red, $pp-blue);
-  margin-bottom: 0.2rem;
-  padding: 0.8rem 0;
 }
 
 .bigTeam {
@@ -140,17 +156,6 @@
     color: white;
     text-align: center;
     text-shadow: $text-shadow;
-  }
-}
-
-@keyframes upDown {
-  0%,
-  40%,
-  100% {
-    transform: translateY(0);
-  }
-  20% {
-    transform: translateY(-0.2rem);
   }
 }
 
