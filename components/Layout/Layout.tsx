@@ -84,7 +84,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
       const res = await instance.get(`/pingpong/users/live`);
       setUserLive({ ...res?.data });
     } catch (e) {
-      setErrorMessage('');
       setErrorMessage('JB03');
     }
   };
