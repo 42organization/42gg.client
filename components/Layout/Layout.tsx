@@ -42,10 +42,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   const getSeasonListHandler = async () => {
     try {
-      // const res = await instance.get(`/pingpong/seasonlist`);
-      const res = await axios.get(
-        `http://localhost:3000/api/pingpong/seasonlist`
-      ); // api 연결 후 삭제 예정
+      const res = await instance.get(`/pingpong/seasonlist`);
       setSeasonList(res?.data);
     } catch (e) {}
   };

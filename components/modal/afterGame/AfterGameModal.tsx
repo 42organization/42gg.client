@@ -10,6 +10,7 @@ import RankGameModal from './RankGameModal';
 
 const defaultPlayersInfo: PlayerInfo[] = [{ intraId: '', userImageUri: '' }];
 const defaultCurrentGameInfo: CurrentGameInfo = {
+  gameId: 0,
   mode: 'normal',
   startTime: '1970-01-01 00:00',
   matchTeamsInfo: {
@@ -43,6 +44,7 @@ export default function AfterGameModal() {
     try {
       const res = await instance.get(`/pingpong/games/result`);
       setCurrentGameInfo({
+        gameId: res?.data.gameId,
         mode: 'normal',
         startTime: minuitesAgo(10),
         matchTeamsInfo: { ...res?.data.matchTeamsInfo },
@@ -72,13 +74,11 @@ export default function AfterGameModal() {
   const submitNormalResultHandler = async () => {
     try {
       await instance.post(`/pingpong/games/result/normal`);
-      alert('게임이 종료되었습니다.');
-      setModalInfo({ modalName: null }); // 경험치 오르는 모달 추가해야 한다.
+      setModalInfo({ modalName: 'FIXED-EXP', gameId: currentGameInfo.gameId });
     } catch (e) {
       setErrorMessage('JH04');
       return;
     }
-    window.location.href = '/';
   };
 
   return currentGameInfo.mode === 'normal' ? (
