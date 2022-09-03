@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import instance from 'utils/axios';
 import { PlayerInfo, CurrentGameInfo, GameResult } from 'types/scoreTypes';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import { minuitesAgo } from 'utils/handleTime';
@@ -10,6 +10,7 @@ import RankGameModal from './RankGameModal';
 
 const defaultPlayersInfo: PlayerInfo[] = [{ intraId: '', userImageUri: '' }];
 const defaultCurrentGameInfo: CurrentGameInfo = {
+  gameId: 0,
   mode: 'normal',
   startTime: '1970-01-01 00:00',
   matchTeamsInfo: {
@@ -20,7 +21,7 @@ const defaultCurrentGameInfo: CurrentGameInfo = {
 
 export default function AfterGameModal() {
   const setErrorMessage = useSetRecoilState(errorState);
-  const setModalInfo = useSetRecoilState(modalState);
+  const [modalInfo, setModalInfo] = useRecoilState(modalState);
   const [currentGameInfo, setCurrentGameInfo] = useState<CurrentGameInfo>(
     defaultCurrentGameInfo
   );
@@ -43,10 +44,12 @@ export default function AfterGameModal() {
     try {
       const res = await instance.get(`/pingpong/games/result`);
       setCurrentGameInfo({
+        gameId: res?.data.gameId,
         mode: 'normal',
         startTime: minuitesAgo(10),
         matchTeamsInfo: { ...res?.data.matchTeamsInfo },
       }); // 임시
+      console.log('res', res);
     } catch (e) {
       setErrorMessage('JH03');
     }
@@ -71,14 +74,16 @@ export default function AfterGameModal() {
 
   const submitNormalResultHandler = async () => {
     try {
+      console.log('current', currentGameInfo);
       await instance.post(`/pingpong/games/result/normal`);
-      alert('게임이 종료되었습니다.');
-      setModalInfo({ modalName: null }); // 경험치 오르는 모달 추가해야 한다.
+      //alert('게임이 종료되었습니다.');
+      setModalInfo({ modalName: 'FIXED-EXP', gameId: currentGameInfo.gameId }); // 경험치 오르는 모달 추가해야 한다.
+      console.log('modal', modalInfo);
     } catch (e) {
       setErrorMessage('JH04');
       return;
     }
-    window.location.href = '/';
+    // window.location.href = '/';
   };
 
   return currentGameInfo.mode === 'normal' ? (

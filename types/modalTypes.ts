@@ -6,7 +6,7 @@ type MatchModal = 'ENROLL' | 'REJECT' | 'CANCEL' | 'MANUAL';
 
 type UserModal = 'PROFILE_EDIT';
 
-type FixedModal = 'AFTER_GAME';
+type FixedModal = 'AFTER_GAME' | 'EXP';
 
 type ModalName =
   | null
@@ -33,4 +33,5 @@ export interface ModalInfo {
   modalName: ModalName;
   cancelInfo?: CancelInfo;
   enrollInfo?: EnrollInfo;
+  gameId?: number;
 }

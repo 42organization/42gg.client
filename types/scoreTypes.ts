@@ -1,5 +1,6 @@
 import { Mode } from './mainType';
 export interface CurrentGameInfo {
+  gameId: number;
   mode: Mode;
   startTime: string;
   matchTeamsInfo: PlayersData;

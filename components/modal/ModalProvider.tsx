@@ -10,6 +10,7 @@ import MatchRejectModal from './MatchRejectModal';
 import ReportModal from './ReportModal';
 import WelcomeModal from './WelcomeModal';
 import AfterGameModal from './afterGame/AfterGameModal';
+import ExpGameModal from './afterGame/ExpGameModal';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
@@ -54,6 +55,8 @@ export default function ModalProvider() {
         return <EditProfileModal />;
       case 'FIXED-AFTER_GAME':
         return <AfterGameModal />;
+      case 'FIXED-EXP':
+        return <ExpGameModal />;
       default:
         return null;
     }
