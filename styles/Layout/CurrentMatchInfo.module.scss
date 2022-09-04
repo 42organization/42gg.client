@@ -61,12 +61,12 @@
 
 .blockCancelButton {
   input {
-    @include button($midium-gray, white, 4rem, 2rem);
-    background: linear-gradient(to bottom, $midium-gray, $dark-gray);
+    @include button($medium-gray, white, 4rem, 2rem);
+    background: linear-gradient(to bottom, $medium-gray, $dark-gray);
     font-size: $small-font;
   }
   :hover {
-    background: linear-gradient(to bottom, $dark-gray, $midium-gray);
+    background: linear-gradient(to bottom, $dark-gray, $medium-gray);
   }
 }
 
