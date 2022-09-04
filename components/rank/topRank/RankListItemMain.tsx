@@ -1,13 +1,15 @@
 import Link from 'next/link';
 import { RankMode, NormalMode } from 'types/rankTypes';
-import styles from 'styles/rank/RankList.module.scss';
+import styles from 'styles/rank/RankListMain.module.scss';
 
 interface RankListItemMainProps {
   rankedUser: NormalMode | RankMode;
+  isSeasonNormal: boolean;
 }
 
 export default function RankListItemMain({
   rankedUser,
+  isSeasonNormal,
 }: RankListItemMainProps) {
   const { rank, intraId, statusMessage } = rankedUser;
   const messageFiltered =
@@ -17,8 +19,11 @@ export default function RankListItemMain({
   const rankFiltered = rank < 0 ? '-' : rank;
 
   return (
-    <div className={styles.mainData}>
-      <div className={styles.rank}>{rankFiltered}</div>
+    <div
+      className={`${styles.mainData}
+			${isSeasonNormal && styles.normal}`}
+    >
+      <div className={styles.rankNumber}>{rankFiltered}</div>
       <div className={styles.intraId}>
         <Link href={`/users/detail?intraId=${intraId}`}>
           <span>{intraId}</span>
