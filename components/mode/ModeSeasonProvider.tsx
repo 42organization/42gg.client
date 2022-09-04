@@ -1,7 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { UserType } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
 import { seasonState } from 'utils/recoil/seasons';
 import ModeToggle from './modeItems/ModeToggle';
@@ -18,18 +17,18 @@ export default function ModeSeasonProvider({
   setModeProps,
 }: ModeSelectProps) {
   const user = useRecoilValue(userState);
-  const [mode, setMode] = useState(user?.seasonMode);
+  const [rankMode, setRankMode] = useState(user?.seasonMode);
   const [season, setSeason] = useState<number>(0);
   const [displaySeasons, setDisplaySeasons] = useState(true);
   const seasonList = useRecoilValue(seasonState);
 
   useEffect(() => {
-    setDisplaySeasons(mode === 'rank');
-    setModeProps(mode);
-  }, [mode]);
+    setDisplaySeasons(rankMode === 'rank');
+    setModeProps(rankMode);
+  }, [rankMode]);
 
   const modeToggleHandler = () => {
-    setMode((mode) => (mode === 'rank' ? 'normal' : 'rank'));
+    setRankMode((mode) => (mode === 'rank' ? 'normal' : 'rank'));
   };
 
   const seasonDropDownHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -40,9 +39,9 @@ export default function ModeSeasonProvider({
     <div>
       <div className={styles.wrapper}>
         <ModeToggle
-          checked={mode === 'rank'}
+          checked={rankMode === 'rank'}
           onToggle={modeToggleHandler}
-          text={mode === 'rank' ? '랭크' : '일반'}
+          text={rankMode === 'rank' ? '랭크' : '일반'}
         />
         {displaySeasons && seasonList && (
           <SeasonDropDown
@@ -53,7 +52,7 @@ export default function ModeSeasonProvider({
         )}
       </div>
       {React.cloneElement(children as React.ReactElement, {
-        mode,
+        mode: rankMode,
         season,
       })}
     </div>

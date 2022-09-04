@@ -17,18 +17,18 @@ export default function MatchEnrollModal({
   const setErrorMessage = useSetRecoilState(errorState);
   const setModalInfo = useSetRecoilState(modalState);
   const userLive = useRecoilValue(liveState);
-  const [gameMode, setGameMode] = useState<string>('');
+  const [matchMode, setMatchMode] = useState<string>('');
 
   useEffect(() => {
-    if (userLive.seasonMode === 'rank') setGameMode('rank');
-    else setGameMode('normal');
+    if (userLive.seasonMode === 'rank') setMatchMode('rank');
+    else setMatchMode('normal');
   }, []);
   // 이후에 게임 모드를 사용자가 선택할 때 input(normal/rank) 선택에 따라
   // setGameMode하는 함수를 만들어야 함.
 
   const onEnroll = async () => {
     try {
-      const body = { slotId: slotId, mode: gameMode };
+      const body = { slotId: slotId, mode: matchMode };
       await instance.post(`/pingpong/match/tables/${1}/${type}`, body);
       alert('경기가 성공적으로 등록되었습니다.');
     } catch (e: any) {

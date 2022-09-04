@@ -3,12 +3,12 @@ $giant-big-font: 2.1rem;
 $big-giant-font: 1.8rem;
 $giant-font: 1.5rem;
 $big-font: 1.2rem;
-$midium-font: 1rem;
+$medium-font: 1rem;
 $small-font: 0.8rem;
 
 $mini-radius: 0.3rem;
 $small-radius: 0.5rem;
-$midium-radius: 0.6rem;
+$medium-radius: 0.6rem;
 $big-radius: 5rem;
 
 $logo-font: 'Agonostic Italic', cursive;
@@ -21,7 +21,7 @@ $pp-blue: #471df0;
 
 $light-gray: #f0f0f0;
 $gray: #dadada;
-$midium-gray: #cccccc;
+$medium-gray: #cccccc;
 $dark-gray: #676767;
 
 $btn-blue: #2d80ed;
@@ -112,11 +112,11 @@ $winner-blue: #040eff;
   height: $height;
   background: if(
     $btn-color == white,
-    linear-gradient(to bottom, $btn-color, $midium-gray),
+    linear-gradient(to bottom, $btn-color, $medium-gray),
     linear-gradient(to bottom, $btn-color, $dark-blue)
   );
   color: $txt-color;
-  font-size: $midium-font;
+  font-size: $medium-font;
   text-align: center;
 }
 
@@ -130,7 +130,7 @@ $winner-blue: #040eff;
     }
     margin-right: 1rem;
     :hover {
-      background: linear-gradient(to bottom, $midium-gray, white);
+      background: linear-gradient(to bottom, $medium-gray, white);
     }
   }
   .positive {
