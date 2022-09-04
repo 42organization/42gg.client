@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { Mode } from 'types/mainType';
+import { MatchMode } from 'types/mainType';
 import { RankMode, NormalMode, Rank } from 'types/rankTypes';
 import { myRankPosition, isMyRankScroll } from 'utils/recoil/myRank';
 import { userState } from 'utils/recoil/layout';
@@ -12,7 +12,7 @@ import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 
 interface RankListProps {
-  mode?: Mode;
+  mode?: MatchMode;
   season?: string;
 }
 

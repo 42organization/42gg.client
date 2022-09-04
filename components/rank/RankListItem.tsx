@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
 import { NormalMode, RankMode } from 'types/rankTypes';
-import { Mode } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
 import styles from 'styles/rank/RankList.module.scss';
 
@@ -36,7 +35,7 @@ export default function RankListItem({
       <span>
         {intraId}
         {!isRankMode && level && (
-          <span className={styles.level}>( {level})</span>
+          <span className={styles.level}> ({level})</span>
         )}
       </span>
     </Link>
