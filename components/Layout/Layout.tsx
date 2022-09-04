@@ -44,7 +44,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
     try {
       const res = await instance.get(`/pingpong/seasonlist`);
       setSeasonList(res?.data);
-    } catch (e) {}
+    } catch (e) {
+      setErrorMessage('DK02');
+    }
   };
 
   useEffect(() => {

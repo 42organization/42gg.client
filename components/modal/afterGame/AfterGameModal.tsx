@@ -76,7 +76,7 @@ export default function AfterGameModal() {
       await instance.post(`/pingpong/games/result/normal`);
       setModalInfo({ modalName: 'FIXED-EXP', gameId: currentGameInfo.gameId });
     } catch (e) {
-      setErrorMessage('JH04');
+      setErrorMessage('DK03');
       return;
     }
   };

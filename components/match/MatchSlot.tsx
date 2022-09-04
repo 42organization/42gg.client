@@ -42,7 +42,7 @@ export default function MatchItem({
           });
         }
       } catch (e) {
-        setErrorMessage('JB03');
+        setErrorMessage('JH08');
       }
     } else if (userLive.event === 'match') {
       setModalInfo({ modalName: 'MATCH-REJECT' });
