@@ -7,6 +7,7 @@ import { myRankPosition, isMyRankScroll } from 'utils/recoil/myRank';
 import { userState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
+import RankListMain from './topRank/RankListMain';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 
@@ -20,13 +21,15 @@ function isRankModeType(arg: RankMode | NormalMode): arg is RankMode {
 }
 
 export default function RankList({ mode, season }: RankListProps) {
-  const [rank, setRank] = useState<Rank | null>(null);
+  const [rank, setRank] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
   const [myRank, setMyRank] = useRecoilState(myRankPosition);
   const [isScroll, setIsScroll] = useRecoilState(isMyRankScroll);
   const seasonMode = useRecoilValue(userState).seasonMode;
   const setErrorMessage = useSetRecoilState(errorState);
   const router = useRouter();
+  const isMain = router.asPath === '/';
+  const isRankMode = mode === 'rank';
   const pageInfo = {
     currentPage: rank?.currentPage,
     totalPage: rank?.totalPage,
@@ -34,10 +37,10 @@ export default function RankList({ mode, season }: RankListProps) {
   };
 
   const makePath = () => {
-    const modeOption = (mode?: string) =>
-      mode === 'normal' ? 'vip' : 'ranks/single';
-    const seasonOption = mode === 'rank' ? `&season=${season}` : '';
-    return router.asPath === '/'
+    const modeOption = (targetMode?: string) =>
+      targetMode !== 'normal' ? 'ranks/single' : 'vip';
+    const seasonOption = isRankMode ? `&season=${season}` : '';
+    return isMain
       ? `/pingpong/${modeOption(seasonMode)}?page=1&count=3`
       : `/pingpong/${modeOption(mode)}?page=${page}${seasonOption}`;
   };
@@ -69,14 +72,16 @@ export default function RankList({ mode, season }: RankListProps) {
     }
   };
 
+  if (isMain) return <RankListMain rank={rank} />;
+
   return (
-    <RankListFrame modeType={mode} pageInfo={pageInfo}>
+    <RankListFrame isRankMode={isRankMode} pageInfo={pageInfo}>
       {rank?.rankList.map((item: NormalMode | RankMode, index) => (
         <RankListItem
           key={item.intraId}
           index={index}
           rankedUser={item}
-          mode={mode}
+          isRankMode={isRankMode}
           ppp={isRankModeType(item) ? item.ppp : null}
           level={!isRankModeType(item) ? item.level : null}
           exp={!isRankModeType(item) ? item.exp : null}

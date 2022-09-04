@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import { Mode } from 'types/mainType';
 import PageNation from 'components/Pagination';
 import styles from 'styles/rank/RankList.module.scss';
 
@@ -10,21 +9,19 @@ interface PageInfo {
 }
 interface RankListFrameProps {
   children: React.ReactNode;
-  modeType?: Mode;
   pageInfo: PageInfo;
+  isRankMode: boolean;
 }
 
 export default function RankListFrame({
   children,
-  modeType,
   pageInfo,
+  isRankMode,
 }: RankListFrameProps) {
-  const mainTitle = modeType === 'rank' ? 'Champion' : 'Vips';
-  const divisionList =
-    modeType === 'rank'
-      ? ['순위', 'intraId', '상태메시지', '점수']
-      : ['열정', 'intraId (Lv)', '상태메시지', '경험치'];
   const router = useRouter();
+  const divisionList = isRankMode
+    ? ['순위', 'intraId', '상태메시지', '점수']
+    : ['열정', 'intraId (Lv)', '상태메시지', '경험치'];
 
   const pageChangeHandler = (pages: number) => {
     pageInfo.setPage(pages);
@@ -33,28 +30,19 @@ export default function RankListFrame({
 
   return (
     <>
-      {router.asPath === '/' ? (
-        <div className={styles.mainContainer}>
-          <div className={styles.mainTitle}>{mainTitle}</div>
-          {children}
+      <div className={styles.container}>
+        <div className={styles.division}>
+          {divisionList.map((item: string) => (
+            <div key={item}>{item}</div>
+          ))}
         </div>
-      ) : (
-        <>
-          <div className={styles.container}>
-            <div className={styles.division}>
-              {divisionList.map((item: string) => (
-                <div key={item}>{item}</div>
-              ))}
-            </div>
-            {children}
-          </div>
-          <PageNation
-            curPage={pageInfo.currentPage}
-            totalPages={pageInfo.totalPage}
-            pageChangeHandler={pageChangeHandler}
-          />
-        </>
-      )}
+        {children}
+      </div>
+      <PageNation
+        curPage={pageInfo.currentPage}
+        totalPages={pageInfo.totalPage}
+        pageChangeHandler={pageChangeHandler}
+      />
     </>
   );
 }
