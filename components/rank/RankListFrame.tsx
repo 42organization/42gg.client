@@ -31,7 +31,6 @@ export default function RankListFrame({
   return (
     <>
       <div className={styles.container}>
-        {/* <div className={styles.division}> */}
         <div
           className={`${styles.division}
 					${!isRankMode && styles.normal}`}
