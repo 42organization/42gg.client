@@ -1,9 +1,8 @@
-import { Mode } from 'types/mainType';
-
+import { RecordMode } from 'types/mainType';
 import styles from 'styles/mode/ModeRadiobox.module.scss';
 
 interface ModeRadiobox {
-  mode: Mode;
+  mode: RecordMode;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
