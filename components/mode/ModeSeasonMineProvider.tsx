@@ -1,9 +1,9 @@
 import React from 'react';
-import { Mode } from 'types/mainType';
+import { RecordMode } from 'types/mainType';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { seasonState } from 'utils/recoil/seasons';
-import ModeToggle from './modeItems/ModeToggle';
+import IsMineCheckBox from './modeItems/IsMineCheckBox';
 import SeasonDropDown from './modeItems/SeasonDropDown';
 import ModeRadiobox from './modeItems/ModeRadiobox';
 import styles from 'styles/mode/ModeSelect.module.scss';
@@ -13,16 +13,16 @@ interface ModeSelectProps {
 }
 
 export default function ModeSeasonProvider({ children }: ModeSelectProps) {
-  const [mode, setMode] = useState<Mode>('both');
+  const [recordMode, setRecordMode] = useState<RecordMode>('both');
   const [isMine, setIsMine] = useState(false);
   const [season, setSeason] = useState<number>(0);
   const seasonList = useRecoilValue(seasonState);
 
   const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMode(e.target.value as Mode);
+    setRecordMode(e.target.value as RecordMode);
   };
 
-  const isMineToggleHandler = () => {
+  const isMineCheckBoxHandler = () => {
     setIsMine((isMine) => !isMine);
   };
 
@@ -33,12 +33,8 @@ export default function ModeSeasonProvider({ children }: ModeSelectProps) {
   return (
     <div>
       <div className={styles.wrapper}>
-        <ModeToggle
-          checked={isMine}
-          onToggle={isMineToggleHandler}
-          text={isMine ? '내 거' : '모두'}
-        />
-        {mode === 'rank' && seasonList && (
+        <IsMineCheckBox isMine={isMine} onChange={isMineCheckBoxHandler} />
+        {recordMode === 'rank' && seasonList && (
           <SeasonDropDown
             seasons={seasonList}
             value={season}
@@ -46,9 +42,9 @@ export default function ModeSeasonProvider({ children }: ModeSelectProps) {
           />
         )}
       </div>
-      <ModeRadiobox mode={mode} onChange={modeChangeHandler} />
+      <ModeRadiobox mode={recordMode} onChange={modeChangeHandler} />
       {React.cloneElement(children as React.ReactElement, {
-        mode,
+        mode: recordMode,
         season,
         isMine,
       })}
