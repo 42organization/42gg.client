@@ -5,15 +5,15 @@ export default function test() {
   useEffect(() => {
     for (let i = 0; i < 200; i++) {
       // Random rotation
-      var randomRotation = Math.floor(Math.random() * 360);
+      const randomRotation = Math.floor(Math.random() * 360);
       // Random Scale
-      var randomScale = Math.random() * 1;
+      const randomScale = Math.random() * 1;
       // Random width & height between 0 and viewport
-      var randomWidth = Math.floor(
+      const randomWidth = Math.floor(
         Math.random() *
           Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
       );
-      var randomHeight = Math.floor(
+      const randomHeight = Math.floor(
         Math.random() *
           Math.max(
             document.documentElement.clientHeight,
@@ -22,10 +22,10 @@ export default function test() {
       );
 
       // Random animation-delay
-      var randomAnimationDelay = Math.floor(Math.random() * 15);
+      const randomAnimationDelay = Math.floor(Math.random() * 15);
 
       // Random colors
-      var colors = [
+      const colors = [
         '#0CD977',
         '#FF1C1C',
         '#FF93DE',
@@ -33,10 +33,10 @@ export default function test() {
         '#FFC61C',
         '#8497B0',
       ];
-      var randomColor = colors[Math.floor(Math.random() * colors.length)];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
       // Create confetti piece
-      var confetti = document.createElement('div');
+      const confetti = document.createElement('div');
       confetti.className = styles.confetti;
       confetti.style.top = randomHeight + 'px';
       confetti.style.right = randomWidth + 'px';
