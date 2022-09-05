@@ -1,12 +1,12 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import React from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
+import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
-import ExpGameData from './ExpGameData';
-import { modalState } from 'utils/recoil/modal';
-import styles from 'styles/modal/ExpGameModal.module.scss';
-import React from 'react';
 import Celebration from './Celebration';
+import ExpGameData from './ExpGameData';
+import styles from 'styles/modal/ExpGameModal.module.scss';
 
 export default function ExpGameModal() {
   const [modalInfo, setModalInfo] = useRecoilState(modalState);

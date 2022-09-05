@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import styles from 'styles/modal/ExpGameModal.module.scss';
-import { modalState } from 'utils/recoil/modal';
+import { useEffect, useState } from 'react';
 import { sleep } from 'utils/sleep';
 import { Button } from './Buttons';
+import { modalState } from 'utils/recoil/modal';
+import styles from 'styles/modal/ExpGameModal.module.scss';
 
 type gameData = {
   maxExp: number;
