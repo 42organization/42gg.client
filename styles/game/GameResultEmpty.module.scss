@@ -5,19 +5,20 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  height: 12rem;
+  padding: 1.3rem;
   border-radius: $small-radius;
   background: rgba(80, 85, 92, 0.8);
   color: #fff;
-  height: 12rem;
-  padding: 1.3rem;
 }
 
 .title {
   font-size: 1.5rem;
-  letter-spacing: 0.1rem;
   font-family: $title-font;
   text-shadow: $text-shadow;
+  letter-spacing: 0.1rem;
 }
+
 .emoji {
   font-size: 2rem;
 }

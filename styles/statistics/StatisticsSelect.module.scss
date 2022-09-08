@@ -3,8 +3,8 @@
 .container {
   display: grid;
   grid-template-columns: 3fr 10fr;
-  background: rgba(#ffffff, 0.95);
   height: 100vh;
+  background: rgba(#ffffff, 0.95);
 }
 
 .chartSelectContainer {
@@ -13,11 +13,11 @@
   font-size: $small-font;
   text-align: center;
   .listText {
+    padding: 1rem;
+    margin: 0.1rem;
     border: solid $gray 0.1rem;
     border-radius: $small-radius;
-    margin: 0.1rem;
     text-align: center;
-    padding: 1rem;
   }
 }
 

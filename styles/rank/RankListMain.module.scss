@@ -6,12 +6,12 @@
 
 .mainTitle {
   display: flex;
-  align-items: center;
   justify-content: center;
-  border-radius: $big-radius;
+  align-items: center;
   height: 2.9rem;
-  font-size: 1.8rem;
+  border-radius: $big-radius;
   color: white;
+  font-size: 1.8rem;
   font-family: $title-font;
   text-shadow: $text-shadow;
   letter-spacing: 0.1rem;
@@ -27,10 +27,10 @@
   display: grid;
   grid-template-columns: 1.5fr 2.1fr 4fr;
   align-items: center;
-  background: $pp-pink;
-  margin-top: 0.2rem;
   height: 2.9rem;
+  margin-top: 0.2rem;
   border-radius: $big-radius;
+  background: $pp-pink;
 }
 
 .normal {
@@ -38,23 +38,23 @@
 }
 
 .rankNumber {
-  text-align: center;
-  font-weight: 700;
   color: $pp-red;
+  font-weight: 700;
+  text-align: center;
 }
 
 .intraId {
-  text-align: left;
-  font-weight: 700;
   color: black;
+  font-weight: 700;
+  text-align: left;
   span {
     cursor: pointer;
   }
 }
 
 .statusMessage {
+  color: $dark-blue;
   font-size: $medium-font;
   font-weight: 500;
   text-align: left;
-  color: $dark-blue;
 }

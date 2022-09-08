@@ -6,19 +6,19 @@
 }
 
 .emoji {
-  text-align: center;
-  font-size: $giant-big-font;
   margin-bottom: 0.5rem;
+  font-size: $giant-big-font;
+  text-align: center;
 }
 
 .phrase {
-  text-align: center;
   margin-bottom: 1rem;
   color: #fff;
   font-size: 2.2rem;
-  letter-spacing: 0.1rem;
   font-family: $title-font;
+  text-align: center;
   text-shadow: $text-shadow;
+  letter-spacing: 0.1rem;
 }
 
 .category {
@@ -26,8 +26,8 @@
   flex-direction: column;
   align-items: flex-start;
   div {
-    flex-direction: row;
     margin-bottom: 0.5rem;
+    flex-direction: row;
     label {
       margin-left: 0.5rem;
       color: black;
@@ -39,17 +39,17 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  background-color: white;
-  border-radius: $small-radius;
-  border: solid $pp-blue 1px;
-  margin-bottom: 1rem;
   width: 15rem;
   padding: 0.3rem;
+  margin-bottom: 1rem;
+  border: solid $pp-blue 1px;
+  border-radius: $small-radius;
+  background-color: white;
   textarea {
-    border: none;
-    height: 3rem;
     resize: none;
+    height: 3rem;
     margin-bottom: 0.2rem;
+    border: none;
   }
   :focus {
     outline: none;

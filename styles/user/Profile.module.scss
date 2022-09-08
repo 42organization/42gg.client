@@ -4,11 +4,11 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  background: $g2-bottom;
-  color: black;
-  border-radius: $small-radius;
   padding: 1rem;
   margin-bottom: 0.6rem;
+  border-radius: $small-radius;
+  background: $g2-bottom;
+  color: black;
 }
 
 .topContainer {
@@ -21,11 +21,11 @@
 
 .userImage {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  padding: 0.3rem;
   border: solid 1px white;
   border-radius: $mini-radius;
-  padding: 0.3rem;
   background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
   div {
     @include userImage(4.7rem);
@@ -38,23 +38,23 @@
   justify-content: center;
   margin-left: 1rem;
   .level {
+    margin: 0 0 0.2rem 0.2rem;
     color: $pp-blue;
     font-size: $giant-font;
     font-weight: 700;
-    margin: 0 0 0.2rem 0.2rem;
   }
   .exp {
     display: flex;
     flex-direction: column;
     margin-bottom: 0.5rem;
     .expRate {
-      font-size: $small-font;
       margin: 0 0 0.2rem 0.2rem;
+      font-size: $small-font;
     }
     .bar {
       display: flex;
-      height: 0.5rem;
       width: 6.5rem;
+      height: 0.5rem;
       border-radius: $mini-radius;
       overflow: hidden;
       .expCurrent {
@@ -66,13 +66,13 @@
     }
   }
   .racket {
-    font-size: $small-font;
-    border-radius: $mini-radius;
-    text-align: center;
-    padding: 0.2rem 0;
     width: 6.5rem;
-    background: white;
+    padding: 0.2rem 0;
     margin-right: auto;
+    border-radius: $mini-radius;
+    background: white;
+    font-size: $small-font;
+    text-align: center;
   }
 }
 
@@ -86,14 +86,14 @@
 .rank {
   display: flex;
   align-items: flex-end;
+  line-height: 100%;
+  margin-bottom: 0.3rem;
   color: $pp-red;
   font-size: 2rem;
   font-weight: 700;
-  line-height: 100%;
-  margin-bottom: 0.3rem;
   span:nth-child(1) {
-    font-size: 1.5rem;
     margin-right: 0.2rem;
+    font-size: 1.5rem;
   }
   span:nth-child(2) {
     padding-bottom: 0.15rem;
@@ -108,9 +108,9 @@
     font-size: $big-font;
   }
   .winRate {
+    margin-left: auto;
     font-size: $small-font;
     font-weight: 400;
-    margin-left: auto;
   }
 }
 
@@ -130,14 +130,14 @@
 
 .statusMessage {
   flex: 2;
-  background: white;
-  border-radius: $mini-radius;
-  min-height: 5rem;
-  font-size: $medium-font;
-  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 5rem;
+  padding: 0.5rem;
+  border-radius: $mini-radius;
+  background: white;
+  font-size: $medium-font;
   .buttons {
     @include select-buttons(4.5rem, 1.5rem);
     margin-left: auto;
@@ -179,20 +179,20 @@
       opacity: 0;
     }
     :checked + .radioButton {
-      color: $pp-blue;
       border-color: $pp-blue;
+      color: $pp-blue;
     }
     .radioButton {
-      cursor: pointer;
-      border: solid 1px white;
-      border-radius: $mini-radius;
-      text-align: center;
-      font-size: $small-font;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 6rem;
       height: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border: solid 1px white;
+      border-radius: $mini-radius;
+      font-size: $small-font;
+      text-align: center;
+      cursor: pointer;
     }
   }
 }
@@ -205,16 +205,16 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background-color: white;
-    border-radius: $small-radius;
-    overflow: hidden;
     border: solid $pp-blue 1px;
+    border-radius: $small-radius;
+    background-color: white;
+    overflow: hidden;
     textarea {
-      border: none;
-      padding: 0.8rem;
-      font-size: $big-font;
-      height: 5rem;
       resize: none;
+      height: 5rem;
+      padding: 0.8rem;
+      border: none;
+      font-size: $big-font;
     }
     :focus {
       outline: none;
@@ -222,8 +222,8 @@
     div {
       display: flex;
       justify-content: flex-end;
-      color: $dark-gray;
       padding: 0.7rem;
+      color: $dark-gray;
       font-size: $small-font;
     }
   }

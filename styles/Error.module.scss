@@ -2,19 +2,19 @@
 
 .container {
   @include pageWrap;
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   justify-content: center;
+  align-items: stretch;
+  width: 100vw;
+  height: 100vh;
 }
 
 .errorContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-evenly;
+  align-items: center;
   height: 30rem;
   margin: auto 0;
   border-radius: $small-radius;
@@ -24,18 +24,18 @@
 .title {
   color: #fff;
   font-size: 3rem;
-  letter-spacing: 0.2rem;
   font-family: $logo-font;
+  letter-spacing: 0.2rem;
 }
 
 .errorMessage {
-  font-size: $big-font;
   color: white;
+  font-size: $big-font;
   .errorCode {
     margin-top: 0.5rem;
-    text-align: center;
-    font-size: $medium-font;
     color: $medium-gray;
+    font-size: $medium-font;
+    text-align: center;
   }
 }
 

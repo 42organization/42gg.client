@@ -18,9 +18,9 @@
 
 .title {
   @include pageTitle;
-  font-family: $logo-font;
   height: 0rem;
   padding: 1.3rem 0rem 3rem;
+  font-family: $logo-font;
 }
 
 .loadBottom {
@@ -29,58 +29,58 @@
 }
 
 .display {
-  position: relative;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
+  height: 100vh;
 }
 
 .loadTextRed {
-  font-size: 3rem;
-  color: $pp-red;
   height: 0rem;
+  color: $pp-red;
+  font-size: 3rem;
 }
 
 .loadTextWhite {
-  font-size: 3rem;
-  color: white;
   height: 0rem;
   margin-bottom: 10rem;
+  color: white;
+  font-size: 3rem;
 }
 
 .loadTextRedBottom {
-  font-size: 3rem;
-  color: $pp-red;
   height: 0rem;
+  color: $pp-red;
+  font-size: 3rem;
 }
 
 .loadTextWhiteBottom {
-  font-size: 3rem;
   height: 0%;
   color: white;
+  font-size: 3rem;
 }
 
 .loadTextBlack {
-  font-size: 3rem;
-  color: black;
   height: 0rem;
   padding-bottom: 2rem;
+  color: black;
+  font-size: 3rem;
 }
 
 .spinner {
+  position: relative;
+  left: 50%;
+  height: 20rem;
+  padding: 1rem;
+  border-radius: $small-radius;
   background: linear-gradient(
     to bottom,
     rgb(19, 27, 97),
     rgba(207, 21, 21, 0.6)
   );
-  position: relative;
-  border-radius: $small-radius;
-  height: 20rem;
-  left: 50%;
   text-align: center;
   transform: translateX(-50%);
-  padding: 1rem;
   .ball_container {
     width: 40px;
     transform: translate(130px, -140px);
@@ -95,9 +95,9 @@
     }
   }
   .raquet {
-    transform-origin: bottom;
     width: 85px;
     height: 142px;
+    transform-origin: bottom;
     #sor-1 {
       fill: rgba(0, 0, 0, 0.2);
       animation: shadow 300ms infinite 300ms alternate

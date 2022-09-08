@@ -7,8 +7,8 @@
 .phrase {
   @include modal-phrase;
   .time {
-    font-size: $giant-font;
     margin-bottom: 0.5rem;
+    font-size: $giant-font;
   }
 }
 

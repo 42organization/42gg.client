@@ -1,18 +1,18 @@
 @import 'styles/common.scss';
 
 .celebratContainer {
+  z-index: 2;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
 }
 
 .container {
-  position: relative;
   flex-direction: column;
   align-items: stretch;
-  color: black;
+  position: relative;
   border-radius: $small-radius;
+  color: black;
 }
 
 .levelRacketWrap {
@@ -20,23 +20,23 @@
   flex-direction: column;
   justify-content: center;
   .level {
+    margin: 0 0 0.2rem 0.2rem;
     color: $pp-blue;
     font-size: $giant-giant-font;
     font-weight: 700;
-    margin: 0 0 0.2rem 0.2rem;
   }
   .exp {
     display: flex;
     flex-direction: column;
     margin-bottom: 0.5rem;
     .expRate {
-      font-size: $big-font;
       margin: 0 0 0.2rem 0.2rem;
+      font-size: $big-font;
     }
     .bar {
       display: flex;
-      height: 1.5rem;
       width: 100%;
+      height: 1.5rem;
       border-radius: $mini-radius;
       overflow: hidden;
       .expCurrent {
@@ -54,12 +54,21 @@
 }
 
 .wrapper {
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  position: absolute;
   width: 100vh;
+  height: 100vh;
+}
+
+.confetti {
+  position: absolute;
+  width: 1rem;
+  height: 1.5rem;
+  opacity: 0;
+  transition: 500ms ease;
+  animation: confettiRain 5s infinite;
 }
 
 @keyframes scaleCup {
@@ -74,21 +83,12 @@
 
 @keyframes confettiRain {
   0% {
-    opacity: 1;
     margin-top: -100vh;
+    opacity: 1;
   }
 
   100% {
-    opacity: 1;
     margin-top: 100vh;
+    opacity: 1;
   }
-}
-
-.confetti {
-  opacity: 0;
-  position: absolute;
-  width: 1rem;
-  height: 1.5rem;
-  transition: 500ms ease;
-  animation: confettiRain 5s infinite;
 }

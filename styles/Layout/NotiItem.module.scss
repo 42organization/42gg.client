@@ -1,13 +1,13 @@
 @import 'styles/common.scss';
 
 @mixin notiWrap {
-  margin-bottom: 0.7rem;
-  padding: 0.7rem;
-  border-radius: $small-radius;
-  height: 7rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 0.7rem;
+  margin-bottom: 0.7rem;
+  border-radius: $small-radius;
+  height: 7rem;
 }
 
 .unreadWrap {
@@ -27,30 +27,30 @@
 }
 
 .title {
-  color: #fff;
-  border-radius: $small-radius;
   width: 4.6rem;
-  margin: 0.2rem 0;
   padding: 0.3rem 0;
-  text-align: center;
+  margin: 0.2rem 0;
+  border-radius: $small-radius;
+  color: #fff;
   font-size: $small-font;
-  letter-spacing: 0.1rem;
   font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.1rem;
 }
 
 .content {
   margin: 0 0.4rem;
   font-size: $medium-font;
   span {
-    cursor: pointer;
     color: $pp-blue;
     font-weight: 600;
+    cursor: pointer;
   }
 }
 
 .date {
   margin-right: 0.4rem;
-  text-align: right;
   color: $dark-gray;
   font-size: $small-font;
+  text-align: right;
 }

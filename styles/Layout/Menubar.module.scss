@@ -7,25 +7,25 @@
 
 .container {
   @include menu-noti-Bar;
-  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
   padding: 1.15rem 0.7rem;
+  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
   color: white;
   text-shadow: 2px 2px 2px $dark-gray;
   button {
     all: unset;
-    cursor: pointer;
+    width: 1.5rem;
+    margin-left: auto;
     color: $dark-gray;
     font-size: 1.5rem;
     text-shadow: none;
     text-align: center;
-    margin-left: auto;
-    width: 1.5rem;
+    cursor: pointer;
   }
   nav {
     display: flex;
     flex-direction: column;
-    height: 100%;
     justify-content: space-between;
+    height: 100%;
     margin: 2rem 1rem;
   }
   .menu {
@@ -36,8 +36,8 @@
     font-size: $big-giant-font;
     font-weight: 600;
     div {
-      cursor: pointer;
       margin-bottom: 1.7rem;
+      cursor: pointer;
     }
   }
   .subMenu {
@@ -48,8 +48,8 @@
     font-size: $medium-font;
     font-weight: normal;
     div {
-      cursor: pointer;
       margin-bottom: 1.2rem;
+      cursor: pointer;
     }
   }
 }
