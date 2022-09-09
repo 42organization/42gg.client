@@ -79,7 +79,7 @@ $winner-blue: #040eff;
 }
 
 @mixin logoTitle($shadow) {
-  color: #fff;
+  color: white;
   font-family: $logo-font;
   font-size: 2rem;
   letter-spacing: 0.1rem;
@@ -87,7 +87,7 @@ $winner-blue: #040eff;
 
 @mixin pageTitle {
   margin-bottom: 1rem;
-  color: #fff;
+  color: white;
   font-size: 2.8rem;
   font-family: $title-font;
   text-align: center;

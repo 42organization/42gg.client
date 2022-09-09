@@ -58,10 +58,10 @@
       border-radius: $mini-radius;
       overflow: hidden;
       .expCurrent {
-        background-color: $g2-top;
+        background: $g2-top;
       }
       .expLeft {
-        background-color: $dark-gray;
+        background: $dark-gray;
       }
     }
   }
@@ -121,10 +121,10 @@
   border-radius: $mini-radius;
   overflow: hidden;
   .wins {
-    background-color: $winner-blue;
+    background: $winner-blue;
   }
   .losses {
-    background-color: $loser-red;
+    background: $loser-red;
   }
 }
 
@@ -179,7 +179,7 @@
       opacity: 0;
     }
     :checked + .radioButton {
-      border-color: $pp-blue;
+      border: $pp-blue;
       color: $pp-blue;
     }
     .radioButton {
@@ -207,7 +207,7 @@
     align-items: stretch;
     border: solid $pp-blue 1px;
     border-radius: $small-radius;
-    background-color: white;
+    background: white;
     overflow: hidden;
     textarea {
       resize: none;
