@@ -36,29 +36,29 @@ export const options = {
     title: {
       display: true,
       text: 'PingPong Power',
-      color: '#FFFFFF',
+      color: 'white',
     },
   },
   scales: {
     yAxes: {
       grid: {
         drawBorder: true,
-        color: '#FFFFFF',
+        color: 'white',
       },
       ticks: {
         beginAtZero: true,
-        color: '#FFFFFF',
+        color: 'white',
         fontSize: 12,
       },
     },
     xAxes: {
       grid: {
         drawBorder: true,
-        color: '#FFFFFF',
+        color: 'white',
       },
       ticks: {
         beginAtZero: true,
-        color: '#FFFFFF',
+        color: 'white',
         fontSize: 12,
       },
     },

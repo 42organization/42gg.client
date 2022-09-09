@@ -43,7 +43,7 @@
 .toggle:checked ~ .toggleSwitch .toggleButton {
   /* 100% -> 끝위치, 1.8rem -> 기존 left(0.2) + 버튼 크기(1.6) */
   left: calc(100% - 1.8rem);
-  background: #fff;
+  background: white;
 }
 
 .toggleSwitch,

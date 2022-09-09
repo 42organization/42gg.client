@@ -13,7 +13,7 @@ $big-radius: 5rem;
 
 $logo-font: 'Agonostic Italic', cursive;
 $title-font: 'Reality Hyper Regular', cursive;
-$text-shadow: 0.1rem 0 #000, 0 0.1rem #000, -0.1rem 0 #000, 0 -0.1rem #000;
+$text-shadow: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black, 0 -0.1rem black;
 
 $pp-red: #de1825;
 $pp-pink: #ffc5c8;
@@ -48,11 +48,11 @@ $winner-blue: #040eff;
   all: unset;
   padding: 0.2rem 0.5rem;
   margin: 0.7rem 0;
-  background: linear-gradient(to bottom, #fff, $gray);
+  background: linear-gradient(to bottom, white, $gray);
   text-align: center;
   cursor: pointer;
   &:hover {
-    background: linear-gradient(to bottom, $gray, #fff);
+    background: linear-gradient(to bottom, $gray, white);
     color: $dark-gray;
   }
 }
@@ -62,12 +62,12 @@ $winner-blue: #040eff;
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 50%;
-  background: linear-gradient(to bottom, #fff, $gray);
+  background: linear-gradient(to bottom, white, $gray);
   text-align: center;
   cursor: pointer;
   &:hover {
     color: $dark-gray;
-    background: linear-gradient(to bottom, $gray, #fff);
+    background: linear-gradient(to bottom, $gray, white);
   }
 }
 
@@ -177,7 +177,7 @@ $winner-blue: #040eff;
   position: relative;
   width: $size;
   height: $size;
-  border: solid 1px white;
+  border: 1px solid white;
   border-radius: 50%;
   background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
   img {
