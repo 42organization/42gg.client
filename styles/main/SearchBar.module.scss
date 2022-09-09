@@ -1,16 +1,16 @@
 @import 'styles/common.scss';
 
 .searchBar {
-  font-size: $medium-font;
-  background: white;
-  border-radius: $small-radius;
-  height: 2.7rem;
-  position: relative;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  position: relative;
+  height: 2.7rem;
   padding: 0 0.8rem;
   margin: 1rem 0.8rem 0;
+  border-radius: $small-radius;
+  background: white;
+  font-size: $medium-font;
   input {
     all: unset;
     width: calc(100% - 4rem);
@@ -22,23 +22,23 @@
       font-size: 1.2rem;
     }
     .reset {
-      cursor: pointer;
       color: gray;
+      cursor: pointer;
     }
   }
 }
 
 .dropdown {
+  display: block;
   position: absolute;
   top: 2.3rem;
   left: 0;
-  display: block;
   width: 100%;
-  background: #fff;
-  border-radius: 0 0 $small-radius $small-radius;
   padding: 0 1rem 0.5rem 1rem;
+  border-radius: 0 0 $small-radius $small-radius;
+  background: white;
   div {
-    cursor: pointer;
     padding: 0.5rem 0;
+    cursor: pointer;
   }
 }

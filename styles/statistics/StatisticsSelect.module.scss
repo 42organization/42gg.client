@@ -3,21 +3,21 @@
 .container {
   display: grid;
   grid-template-columns: 3fr 10fr;
-  background: rgba(#ffffff, 0.95);
   height: 100vh;
+  background: rgba(white, 0.95);
 }
 
 .chartSelectContainer {
   height: 100vh;
-  background: rgba(#ffffff, 1);
+  background: rgba(white, 1);
   font-size: $small-font;
   text-align: center;
   .listText {
-    border: solid $gray 0.1rem;
-    border-radius: $small-radius;
-    margin: 0.1rem;
-    text-align: center;
     padding: 1rem;
+    margin: 0.1rem;
+    border: 0.1rem solid $gray;
+    border-radius: $small-radius;
+    text-align: center;
   }
 }
 

@@ -13,7 +13,7 @@ $big-radius: 5rem;
 
 $logo-font: 'Agonostic Italic', cursive;
 $title-font: 'Reality Hyper Regular', cursive;
-$text-shadow: 0.1rem 0 #000, 0 0.1rem #000, -0.1rem 0 #000, 0 -0.1rem #000;
+$text-shadow: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black, 0 -0.1rem black;
 
 $pp-red: #de1825;
 $pp-pink: #ffc5c8;
@@ -36,63 +36,63 @@ $loser-red: #ff0303;
 $winner-blue: #040eff;
 
 @mixin menu-noti-Bar {
-  overflow: auto;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   width: 16rem;
   height: 100vh;
+  overflow: auto;
 }
 
 @mixin match-noti-button {
   all: unset;
-  cursor: pointer;
-  text-align: center;
-  background: linear-gradient(to bottom, #fff, $gray);
-  margin: 0.7rem 0;
   padding: 0.2rem 0.5rem;
+  margin: 0.7rem 0;
+  background: linear-gradient(to bottom, white, $gray);
+  text-align: center;
+  cursor: pointer;
   &:hover {
+    background: linear-gradient(to bottom, $gray, white);
     color: $dark-gray;
-    background: linear-gradient(to bottom, $gray, #fff);
   }
 }
 
 @mixin refresh-button {
   all: unset;
-  cursor: pointer;
-  text-align: center;
-  background: linear-gradient(to bottom, #fff, $gray);
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 50%;
+  background: linear-gradient(to bottom, white, $gray);
+  text-align: center;
+  cursor: pointer;
   &:hover {
     color: $dark-gray;
-    background: linear-gradient(to bottom, $gray, #fff);
+    background: linear-gradient(to bottom, $gray, white);
   }
 }
 
 @mixin pageWrap {
-  padding: 2rem 1.5rem;
-  min-height: calc(100vh - 8rem);
   max-width: 30rem;
+  min-height: calc(100vh - 8rem);
+  padding: 2rem 1.5rem;
   margin: 0 auto;
 }
 
 @mixin logoTitle($shadow) {
-  color: #fff;
-  letter-spacing: 0.1rem;
+  color: white;
   font-family: $logo-font;
   font-size: 2rem;
+  letter-spacing: 0.1rem;
 }
 
 @mixin pageTitle {
   margin-bottom: 1rem;
-  color: #fff;
-  text-align: center;
+  color: white;
   font-size: 2.8rem;
-  letter-spacing: 0.1rem;
   font-family: $title-font;
+  text-align: center;
   text-shadow: $text-shadow, 0.3rem 0.3rem 0 $pp-red;
+  letter-spacing: 0.1rem;
 }
 
 @mixin backdrop {
@@ -106,10 +106,9 @@ $winner-blue: #040eff;
 
 @mixin button($btn-color, $txt-color, $width: 8rem, $height: 2.8rem) {
   all: unset;
-  cursor: pointer;
-  border-radius: $small-radius;
   width: $width;
   height: $height;
+  border-radius: $small-radius;
   background: if(
     $btn-color == white,
     linear-gradient(to bottom, $btn-color, $medium-gray),
@@ -118,12 +117,13 @@ $winner-blue: #040eff;
   color: $txt-color;
   font-size: $medium-font;
   text-align: center;
+  cursor: pointer;
 }
 
 @mixin select-buttons($width: 8rem, $height: 2.8rem) {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   .negative {
     input {
       @include button(white, black, $width, $height);
@@ -144,18 +144,18 @@ $winner-blue: #040eff;
 }
 
 @mixin modal-phrase {
-  text-align: center;
   line-height: 150%;
   font-size: $big-font;
+  text-align: center;
   .emoji {
-    font-size: $giant-big-font;
     margin-bottom: 1rem;
+    font-size: $giant-big-font;
   }
   .subContent {
-    margin-top: 0.5rem;
-    font-size: $small-font;
     line-height: 1.5;
+    margin-top: 0.5rem;
     color: $pp-blue;
+    font-size: $small-font;
   }
   margin-bottom: 2rem;
 }
@@ -163,14 +163,26 @@ $winner-blue: #040eff;
 @mixin modal-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 @mixin spanUpDownAnimation($fontSize, $padding) {
-  font-size: $fontSize;
   padding: $padding;
+  font-size: $fontSize;
   animation: upDown 0.75s infinite;
+}
+
+@mixin userImage($size) {
+  position: relative;
+  width: $size;
+  height: $size;
+  border: 1px solid white;
+  border-radius: 50%;
+  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  img {
+    border-radius: 50%;
+  }
 }
 
 @keyframes upDown {
@@ -181,17 +193,5 @@ $winner-blue: #040eff;
   }
   20% {
     transform: translateY(-0.2rem);
-  }
-}
-
-@mixin userImage($size) {
-  position: relative;
-  height: $size;
-  width: $size;
-  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
-  border: solid 1px white;
-  border-radius: 50%;
-  img {
-    border-radius: 50%;
   }
 }

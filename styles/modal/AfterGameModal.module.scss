@@ -11,22 +11,22 @@
 }
 
 .resultContainer {
-  border: solid 3px white;
-  border-radius: $small-radius;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   justify-content: space-evenly;
-  height: 16rem;
+  align-items: stretch;
   width: 18rem;
-  margin-bottom: 2rem;
+  height: 16rem;
   padding: 0.8rem 0;
+  margin-bottom: 2rem;
+  border: 3px solid white;
+  border-radius: $small-radius;
 }
 
 .players {
   display: flex;
-  align-items: center;
   justify-content: space-evenly;
+  align-items: center;
   font-size: $big-font;
   font-weight: 600;
 }
@@ -45,8 +45,8 @@
 
 .finalScore {
   display: flex;
-  align-items: center;
   justify-content: space-evenly;
+  align-items: center;
   height: 3rem;
   padding: auto;
   font-size: $giant-font;
@@ -55,14 +55,14 @@
   input {
     font-size: $big-font;
     text-align: center;
-    height: 2.5rem;
     width: 5rem;
+    height: 2.5rem;
   }
 }
 
 .rules {
-  font-size: $medium-font;
   margin-bottom: 1.4rem;
+  font-size: $medium-font;
 }
 
 .buttons {

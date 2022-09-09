@@ -5,31 +5,31 @@
 }
 
 .title {
-  color: #fff;
+  color: white;
   font-size: 2.5rem;
-  letter-spacing: 0.1rem;
   font-family: $title-font;
   text-shadow: $text-shadow;
+  letter-spacing: 0.1rem;
 }
 
 .ruleList {
   list-style: none;
-  overflow-y: scroll;
+  margin: 1.5rem 0.5rem;
+  width: auto;
   height: 40vh;
   max-height: 40vh;
   color: black;
-  width: auto;
-  margin: 1.5rem 0.5rem;
+  overflow-y: scroll;
 }
 .ruleList > li {
-  font-weight: 700;
   margin-bottom: 1.2rem;
+  font-weight: 700;
 }
 
 .ruleDetail {
+  margin-left: 0.8rem;
   font-size: 0.9rem;
   font-weight: 400;
-  margin-left: 0.8rem;
 }
 .ruleDetail > li {
   list-style: square;
@@ -43,8 +43,8 @@
 }
 
 .ruleList::-webkit-scrollbar-thumb {
-  background-color: white;
   border-radius: 10px;
+  background: white;
 }
 
 .buttons {

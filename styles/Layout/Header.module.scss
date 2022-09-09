@@ -20,29 +20,29 @@
   #logo {
     div {
       @include logoTitle(0.25rem);
-      cursor: pointer;
       flex: 5;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      cursor: pointer;
     }
   }
   .headerRight {
     flex: 2;
     display: flex;
-    align-items: center;
     justify-content: flex-end;
+    align-items: center;
     #announceIcon {
-      cursor: pointer;
-      transform: scaleX(-1);
       margin-right: 0.7rem;
+      transform: scaleX(-1);
+      cursor: pointer;
     }
     #notiIcon {
-      cursor: pointer;
       display: flex;
       align-items: center;
       margin-right: 0.7rem;
       font-size: 1.7rem;
+      cursor: pointer;
     }
     .userImage {
       @include userImage(2.2rem);
@@ -52,8 +52,8 @@
 }
 
 .bellWhole {
-  animation: ring 3s infinite;
   transform-origin: 9.5px 2.4781px;
+  animation: ring 3s infinite;
 }
 
 @keyframes ring {

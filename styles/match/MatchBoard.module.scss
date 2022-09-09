@@ -2,8 +2,8 @@
 
 .notice {
   margin: 1rem 0;
+  color: white;
   text-align: center;
-  color: #fff;
 }
 
 .buttonWrap {
@@ -12,20 +12,20 @@
   align-items: center;
   .manual {
     @include match-noti-button;
-    border-radius: $small-radius;
+    margin-right: 0.8rem;
     width: 4rem;
     height: 1.2rem;
-    margin-right: 0.8rem;
+    border-radius: $small-radius;
   }
   .refresh {
     @include refresh-button;
     cursor: pointer;
   }
   .spin {
-    cursor: not-allowed;
-    pointer-events: none;
     opacity: 0.7;
+    pointer-events: none;
     animation: spin 1s infinite;
+    cursor: not-allowed;
   }
 }
 
@@ -36,15 +36,15 @@
 }
 
 .matchBoard {
-  flex-direction: column;
+  flex-direction: column; // check flex가 없음
   justify-content: center;
   align-items: stretch;
-  margin-block: 1rem;
   height: 60vh;
-  overflow-y: scroll;
   padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.2);
+  margin-block: 1rem;
   border-radius: $small-radius;
+  background: rgba(255, 255, 255, 0.2);
+  overflow-y: scroll;
 }
 
 .matchSlotList {

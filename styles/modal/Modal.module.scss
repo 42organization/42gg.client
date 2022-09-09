@@ -9,15 +9,15 @@
 }
 
 .modalContainer {
-  position: fixed;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
-  border-radius: $small-radius;
+  align-items: center;
+  position: fixed;
   padding: 2.5rem 1.2rem;
+  margin: 1rem;
+  border-radius: $small-radius;
   background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
   color: white;
   font-size: $medium-font;
-  margin: 1rem;
 }

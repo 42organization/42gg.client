@@ -4,14 +4,14 @@
 .myRank {
   height: 2rem;
   line-height: middle;
+  color: white;
   font-weight: 600;
   font-size: $medium-font;
-  color: white;
   text-shadow: 0.1rem 0.1rem 0.1rem $pp-blue;
   text-align: center;
   span {
-    cursor: pointer;
     color: $g1-top;
+    cursor: pointer;
   }
 }
 
@@ -32,13 +32,13 @@
 @mixin rankGrid {
   display: grid;
   grid-template-columns: 12% 22% auto 14%;
-  align-items: center;
   justify-items: center;
-  border-radius: $big-radius;
-  color: $dark-gray;
+  align-items: center;
   height: 2.5rem;
   padding: 0 0.2rem;
   margin-top: 0.15rem;
+  border-radius: $big-radius;
+  color: $dark-gray;
   div:nth-child(2) {
     justify-self: start;
   }
@@ -56,9 +56,9 @@
 }
 
 .level {
+  color: $dark-gray;
   font-weight: 500;
   font-size: 0.7rem;
-  color: $dark-gray;
 }
 
 /* RankList */
@@ -72,15 +72,15 @@
 }
 .myself {
   @include rankGrid;
-  background: $g1-bottom;
   border: 0.07rem solid $pp-red;
+  background: $g1-bottom;
 }
 
 .rankData {
   .topRank {
     justify-self: center;
-    font-weight: 700;
     color: $loser-red;
+    font-weight: 700;
   }
   .rank {
     justify-self: center;
@@ -88,8 +88,8 @@
   }
   .intraId {
     justify-self: start;
-    font-weight: 700;
     color: black;
+    font-weight: 700;
     span {
       cursor: pointer;
     }
@@ -100,7 +100,7 @@
   }
   .ppp {
     justify-self: center;
-    font-weight: 600;
     color: $winner-blue;
+    font-weight: 600;
   }
 }

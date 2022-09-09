@@ -6,16 +6,16 @@
   justify-content: center;
   align-items: center;
   height: 4rem;
-  font-size: $small-font;
   color: white;
+  font-size: $small-font;
   .link {
     display: flex;
     div {
       cursor: pointer;
     }
     .bar {
-      cursor: unset;
       margin: 0 0.3rem;
+      cursor: unset;
     }
   }
   .copyright {
