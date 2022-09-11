@@ -5,7 +5,7 @@ import { sleep } from 'utils/sleep';
 import { Button } from './Buttons';
 import styles from 'styles/modal/ExpGameModal.module.scss';
 
-type expResult = {
+type ExpGuageProps = {
   maxExp: number;
   exp: number;
   level: number;
@@ -20,7 +20,7 @@ export default function ExpGuage({
   increasedExp,
   afterMaxExp,
   increasedLevel,
-}: expResult) {
+}: ExpGuageProps) {
   const setModalInfo = useSetRecoilState(modalState);
   const [beforeExp, setBeforeExp] = useState<number>(exp);
 
