@@ -1,8 +1,8 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { Slot } from 'types/matchTypes';
 import { errorState } from 'utils/recoil/error';
 import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import { Slot } from 'types/matchTypes';
 import { fillZero } from 'utils/handleTime';
 import instance from 'utils/axios';
 import styles from 'styles/match/MatchSlot.module.scss';
@@ -57,9 +57,9 @@ export default function MatchItem({
   if (status === 'mytable') {
     buttonStyle = styles.myButton;
   } else if (status === 'open') {
-    buttonStyle = styles.enableButton;
-  } else {
-    buttonStyle = styles.disableButton;
+    buttonStyle = styles.enabledButton;
+  } else if (status === 'close') {
+    buttonStyle = styles.disabledButton;
   }
 
   return (
