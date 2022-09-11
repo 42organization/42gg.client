@@ -1,10 +1,12 @@
+@import '../common.scss';
+
 .toggleSwitch {
   display: block;
   position: relative;
   width: 5rem;
   height: 2rem;
   border-radius: 2rem;
-  background: #8e8e8e;
+  background: $dark-gray;
   color: white;
   box-shadow: 0 0 1rem 3px rgba(0 0 0 / 15%);
   cursor: pointer;
@@ -12,6 +14,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    font-size: $small-font;
+    font-weight: 600;
     transform: translate(0, -50%);
   }
 }
@@ -31,7 +35,7 @@
 
 /* 체크박스가 체크될 시 변경되는 요소 */
 .toggle:checked ~ .toggleSwitch {
-  background: #f03d3d;
+  background: $pp-red;
   .toggleText {
     position: absolute;
     top: 50%;

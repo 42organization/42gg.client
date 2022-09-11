@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import CancelController from './cancel/CancelController';
+import CancelController from './matchCancel/CancelController';
 import EditProfileModal from './EditProfileModal';
 import LogoutModal from './LogoutModal';
 import MatchEnrollModal from './MatchEnrollModal';
@@ -10,7 +10,7 @@ import MatchRejectModal from './MatchRejectModal';
 import ReportModal from './ReportModal';
 import WelcomeModal from './WelcomeModal';
 import AfterGameModal from './afterGame/AfterGameModal';
-import ExpGameModal from './afterGame/ExpGameModal';
+import ExpChangeModal from './afterGame/ExpChangeModal';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
@@ -56,7 +56,7 @@ export default function ModalProvider() {
       case 'FIXED-AFTER_GAME':
         return <AfterGameModal />;
       case 'FIXED-EXP':
-        return <ExpGameModal />;
+        return <ExpChangeModal />;
       default:
         return null;
     }

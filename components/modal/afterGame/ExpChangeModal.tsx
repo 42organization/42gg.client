@@ -5,10 +5,10 @@ import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import Celebration from './Celebration';
-import ExpGameData from './ExpGameData';
+import ExpGuage from './ExpGuage';
 import styles from 'styles/modal/ExpGameModal.module.scss';
 
-export default function ExpGameModal() {
+export default function ExpChangeModal() {
   const [modalInfo, setModalInfo] = useRecoilState(modalState);
   const [user, setUser] = useState();
   const setErrorMessage = useSetRecoilState(errorState);
@@ -51,7 +51,7 @@ export default function ExpGameModal() {
           >
             <Celebration />
           </div>
-          <ExpGameData
+          <ExpGuage
             maxExp={beforeMaxExp}
             exp={beforeExp}
             level={beforeLevel}

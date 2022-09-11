@@ -1,11 +1,11 @@
 import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
+import { modalState } from 'utils/recoil/modal';
 import { sleep } from 'utils/sleep';
 import { Button } from './Buttons';
-import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/ExpGameModal.module.scss';
 
-type gameData = {
+type ExpGuageProps = {
   maxExp: number;
   exp: number;
   level: number;
@@ -13,14 +13,14 @@ type gameData = {
   afterMaxExp: number;
   increasedLevel: number;
 };
-export default function ExpGameData({
+export default function ExpGuage({
   maxExp,
   exp,
   level,
   increasedExp,
   afterMaxExp,
   increasedLevel,
-}: gameData) {
+}: ExpGuageProps) {
   const setModalInfo = useSetRecoilState(modalState);
   const [beforeExp, setBeforeExp] = useState<number>(exp);
 
@@ -43,7 +43,7 @@ export default function ExpGameData({
   if (getPercent(maxExp, beforeExp) > 100) {
     return (
       <div>
-        <ExpGameData
+        <ExpGuage
           maxExp={afterMaxExp}
           exp={0}
           level={level + increasedLevel}

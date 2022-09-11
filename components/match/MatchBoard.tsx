@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import MatchSlotList from './MatchSlotList';
-import { MatchData } from 'types/matchTypes';
 import { matchRefreshBtnState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
+import { MatchData } from 'types/matchTypes';
 import instance from 'utils/axios';
+import MatchSlotList from './MatchSlotList';
 import styles from 'styles/match/MatchBoard.module.scss';
 
 interface MatchBoardProps {
@@ -33,7 +33,7 @@ export default function MatchBoard({ type }: MatchBoardProps) {
 
   const getMatchDataHandler = async () => {
     try {
-      const res = await instance.get(`/pingpong/match/tables/${1}/single`);
+      const res = await instance.get(`/pingpong/match/tables/${1}/${type}`);
       setMatchData(res?.data);
     } catch (e) {
       setErrorMessage('SJ01');

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { CurrentGameInfo, GameResult } from 'types/scoreTypes';
-import styles from 'styles/modal/AfterGameModal.module.scss';
 import { MatchTeamsInfo } from './MatchTeamsInfo';
 import Score from './Score';
-import Guide, { GuideLine } from './Guide';
 import { Buttons } from './Buttons';
+import Guide, { GuideLine } from './Guide';
+import styles from 'styles/modal/AfterGameModal.module.scss';
 
 const defaultResult: GameResult = { myTeamScore: '', enemyTeamScore: '' };
 
