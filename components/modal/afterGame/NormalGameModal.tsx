@@ -1,9 +1,9 @@
 import { CurrentGameInfo } from 'types/scoreTypes';
-import styles from 'styles/modal/AfterGameModal.module.scss';
 import { MatchTeamsInfo } from './MatchTeamsInfo';
-import Guide, { GuideLine } from './Guide';
 import { isAfterMin } from 'utils/handleTime';
 import { Button } from './Buttons';
+import Guide, { GuideLine } from './Guide';
+import styles from 'styles/modal/AfterGameModal.module.scss';
 
 interface NormalGameModalProps {
   currentGameInfo: CurrentGameInfo;

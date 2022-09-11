@@ -1,6 +1,6 @@
-import styles from 'styles/modal/AfterGameModal.module.scss';
 import Image from 'next/image';
 import { PlayerInfo, PlayersData } from 'types/scoreTypes';
+import styles from 'styles/modal/AfterGameModal.module.scss';
 
 export function MatchTeamsInfo({
   matchTeamsInfo,
