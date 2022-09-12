@@ -23,7 +23,7 @@ export default function ModalProvider() {
   const setModalOutsideScroll = () =>
     (document.body.style.overflow = modalInfo.modalName ? 'hidden' : 'unset');
 
-  const modalCloseHandler = (e: React.MouseEvent) => {
+  const closeModalHandler = (e: React.MouseEvent) => {
     if (modalInfo.modalName?.split('-')[0] === 'FIXED') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
       setModalInfo({ modalName: null });
@@ -67,7 +67,7 @@ export default function ModalProvider() {
       <div
         className={styles.backdrop}
         id='modalOutside'
-        onClick={modalCloseHandler}
+        onClick={closeModalHandler}
       >
         <div className={styles.modalContainer}>{findModal()}</div>
       </div>
