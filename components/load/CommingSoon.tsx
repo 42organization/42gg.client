@@ -6,15 +6,13 @@ export default function Loading() {
     <div>
       <div className={styles.display}>
         <div>
-          <h2 className={styles.loadTextRed}> 7월 13일 COMMING SOON !!!</h2>
-          <h2 className={styles.loadTextWhite}> 7월 13일 COMMING SOON !!!</h2>
+          <h2 className={styles.loadTextRed}> 11월 개포에서 만나요!!!</h2>
+          <h2 className={styles.loadTextWhite}> 11월 개포에서 만나요!!!</h2>
         </div>
         <div className={styles.loadBottom}>
-          <h2 className={styles.loadTextRedBottom}>
-            7월 13일 COMMING SOON !!!
-          </h2>
+          <h2 className={styles.loadTextRedBottom}>11월 개포에서 만나요!!!</h2>
           <h2 className={styles.loadTextWhiteBottom}>
-            7월 13일 COMMING SOON !!!
+            11월 개포에서 만나요!!!
           </h2>
         </div>
       </div>
