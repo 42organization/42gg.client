@@ -31,12 +31,14 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
     setIsLoading(false);
   }, []);
 
-  return isLoggedIn ? (
-    <>{children}</>
-  ) : (
+  return (
+    // isLoggedIn ? (
+    //   <>{children}</>
+    // ) : (
     <div className={styles.appContainer}>
       {/* <div className={styles.background}>{!isLoading && <Login />}</div> */}
       <div className={styles.background}>{!isLoading && <Load />}</div>
     </div>
   );
+  // );
 }
