@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { matchRefreshBtnState } from 'utils/recoil/match';
-import { errorState } from 'utils/recoil/error';
-import { modalState } from 'utils/recoil/modal';
 import { MatchData } from 'types/matchTypes';
 import instance from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/modal';
+import { matchRefreshBtnState } from 'utils/recoil/match';
 import MatchSlotList from './MatchSlotList';
 import styles from 'styles/match/MatchBoard.module.scss';
 

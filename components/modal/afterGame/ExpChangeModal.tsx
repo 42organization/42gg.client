@@ -1,9 +1,9 @@
 import React from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
-import instance from 'utils/axios';
 import Celebration from './Celebration';
 import ExpGuage from './ExpGuage';
 import styles from 'styles/modal/ExpGameModal.module.scss';

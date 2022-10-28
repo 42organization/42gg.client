@@ -1,5 +1,5 @@
-import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { sleep } from 'utils/sleep';
 import { Button } from './Buttons';

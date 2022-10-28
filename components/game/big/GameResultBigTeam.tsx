@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
+import router from 'next/router';
 import { RankInfo, RankPlayer, NormalPlayer } from 'types/gameTypes';
 import styles from 'styles/game/GameResultItem.module.scss';
-import router from 'next/router';
 
 interface GameResultBigTeamProps {
   team: RankInfo;

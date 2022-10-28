@@ -10,13 +10,12 @@ import {
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { seasonState } from 'utils/recoil/seasons';
+import instance from 'utils/axios';
+import Statistics from 'pages/statistics';
 import Header from './Header';
 import Footer from './Footer';
 import CurrentMatchInfo from './CurrentMatchInfo';
-import instance from 'utils/axios';
 import styles from 'styles/Layout/Layout.module.scss';
-import Statistics from 'pages/statistics';
-import axios from 'axios';
 
 type AppLayoutProps = {
   children: React.ReactNode;
