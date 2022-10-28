@@ -1,14 +1,14 @@
 export type MatchMode = 'normal' | 'rank';
 export type RecordMode = 'normal' | 'rank' | 'both';
 
-export interface UserType {
+export interface User {
   intraId: string;
   isAdmin: boolean;
   userImageUri: string;
   seasonMode: RecordMode;
 }
 
-export interface UserLiveType {
+export interface Live {
   notiCount: number;
   event: 'match' | 'game' | null;
   seasonMode: RecordMode;

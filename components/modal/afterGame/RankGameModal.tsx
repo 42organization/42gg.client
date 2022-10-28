@@ -1,17 +1,17 @@
 import { useState } from 'react';
-import { CurrentGameInfo, GameResult } from 'types/scoreTypes';
+import { AfterGame, TeamScore } from 'types/scoreTypes';
 import { MatchTeamsInfo } from './MatchTeamsInfo';
 import Score from './Score';
 import { Buttons } from './Buttons';
 import Guide, { GuideLine } from './Guide';
 import styles from 'styles/modal/AfterGameModal.module.scss';
 
-const defaultResult: GameResult = { myTeamScore: '', enemyTeamScore: '' };
+const defaultResult: TeamScore = { myTeamScore: '', enemyTeamScore: '' };
 
 interface RankGameModalProps {
-  currentGameInfo: CurrentGameInfo;
+  currentGameInfo: AfterGame;
   guideLine: GuideLine;
-  onSubmit: (gameResult: GameResult) => void;
+  onSubmit: (gameResult: TeamScore) => void;
 }
 
 export default function RankGameModal({
@@ -19,7 +19,7 @@ export default function RankGameModal({
   guideLine,
   onSubmit,
 }: RankGameModalProps) {
-  const [result, setResult] = useState<GameResult>(defaultResult);
+  const [result, setResult] = useState<TeamScore>(defaultResult);
   const [onCheck, setOnCheck] = useState<boolean>(false);
 
   const inputScoreHandler = ({

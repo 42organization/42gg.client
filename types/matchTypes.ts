@@ -15,7 +15,7 @@ export interface CurrentMatch {
   enemyTeam: string[];
 }
 
-export interface MatchData {
+export interface Match {
   intervalMinute: number;
   matchBoards: Slots[];
 }

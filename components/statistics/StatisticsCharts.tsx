@@ -11,7 +11,7 @@ import {
   ChartTypeRegistry,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
-import { ChartInterface, GraphData } from 'types/chartTypes';
+import { Graphs, GraphValue } from 'types/chartTypes';
 ChartJS.register(
   ArcElement,
   LinearScale,
@@ -25,16 +25,16 @@ ChartJS.register(
 
 type ChartType = {
   chartType: string;
-  chart: ChartInterface;
+  chart: Graphs;
 };
 
 export default function StatisticsChart({ chartType, chart }: ChartType) {
   const chartLabel = chart ? chart.graphs[0].graphName : '';
   const chartLabels = chart
-    ? chart.graphs[0].graphData.map((item: GraphData) => item.date)
+    ? chart.graphs[0].graphData.map((item: GraphValue) => item.date)
     : [];
   const charData = chart
-    ? chart.graphs[0].graphData.map((item: GraphData) => item.count)
+    ? chart.graphs[0].graphData.map((item: GraphValue) => item.count)
     : '';
   const options = {
     responsive: true,

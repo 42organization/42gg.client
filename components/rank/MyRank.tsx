@@ -1,10 +1,10 @@
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { myRankPosition, isMyRankScroll } from 'utils/recoil/myRank';
+import { myRankState, scrollState } from 'utils/recoil/myRank';
 import styles from 'styles/rank/RankList.module.scss';
 
 export default function MyRank() {
-  const myRank = useRecoilValue(myRankPosition);
-  const setIsScroll = useSetRecoilState(isMyRankScroll);
+  const myRank = useRecoilValue(myRankState);
+  const setIsScroll = useSetRecoilState(scrollState);
 
   return (
     <div>

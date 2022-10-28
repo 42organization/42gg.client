@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { ChartInterface, GraphData, SingleGraph } from 'types/chartTypes';
+import { Graphs, GraphValue, Graph } from 'types/chartTypes';
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ChartInterface>
+  res: NextApiResponse<Graphs>
 ) {
   const query = req.query;
 
@@ -39,12 +39,12 @@ export default function handler(
     },
   ];
 
-  const graph: SingleGraph = {
+  const graph: Graph = {
     graphName: graphName,
     graphData: graphData,
   };
 
-  const chart: ChartInterface = {
+  const chart: Graphs = {
     graphs: [graph],
   };
   res.status(200).json(chart);

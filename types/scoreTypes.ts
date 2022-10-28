@@ -1,22 +1,26 @@
-import { Mode } from './mainType';
-export interface CurrentGameInfo {
+import { MatchMode } from './mainType';
+
+/**
+ * 경기 후  스코어 입력시 쓰는 타입
+ * */
+export interface AfterGame {
   gameId: number;
-  mode: Mode;
+  mode: MatchMode;
   startTime: string;
-  matchTeamsInfo: PlayersData;
+  matchTeamsInfo: Players;
 }
 
-export interface PlayerInfo {
+export interface Player {
   intraId: string;
   userImageUri: string;
 }
 
-export interface PlayersData {
-  myTeam: PlayerInfo[];
-  enemyTeam: PlayerInfo[];
+export interface Players {
+  myTeam: Player[];
+  enemyTeam: Player[];
 }
 
-export interface GameResult {
+export interface TeamScore {
   myTeamScore: number | '';
   enemyTeamScore: number | '';
 }

@@ -1,8 +1,8 @@
-import { BasicProfileType } from './../../types/userTypes';
+import { BasicProfile } from './../../types/userTypes';
 import { atom } from 'recoil';
 import { v1 } from 'uuid';
 
-export const profileState = atom<BasicProfileType>({
+export const profileState = atom<BasicProfile>({
   key: `profileState/${v1()}`,
   default: {
     intraId: '',

@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import router from 'next/router';
-import { RankInfo, RankPlayer, NormalPlayer } from 'types/gameTypes';
+import { RankResult, RankPlayer, NormalPlayer } from 'types/gameTypes';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultBigTeamProps {
-  team: RankInfo;
+  team: RankResult;
 }
 
 export function isRankPlayerType(

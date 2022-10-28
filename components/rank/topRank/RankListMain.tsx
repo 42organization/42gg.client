@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { RankMode, NormalMode, Rank } from 'types/rankTypes';
+import { RankUser, NormalUser, Rank } from 'types/rankTypes';
 import { userState } from 'utils/recoil/layout';
 import RankListItemMain from './RankListItemMain';
 import styles from 'styles/rank/RankListMain.module.scss';
@@ -20,7 +20,7 @@ export default function RankListMain({ rank }: RankListMainProps) {
       >
         {mainTitle}
       </div>
-      {rank?.rankList.map((item: NormalMode | RankMode) => (
+      {rank?.rankList.map((item: NormalUser | RankUser) => (
         <RankListItemMain
           key={item.intraId}
           rankedUser={item}

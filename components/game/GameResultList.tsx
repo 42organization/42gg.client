@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { GameData } from 'types/gameTypes';
+import { Game } from 'types/gameTypes';
 import infScroll from 'utils/infinityScroll';
-import { clickedGameItem } from 'utils/recoil/game';
+import { clickedGameItemState } from 'utils/recoil/game';
 import GameResultItem from './GameResultItem';
 import GameResultEmptyItem from './GameResultEmptyItem';
 import styles from 'styles/game/GameResultItem.module.scss';
@@ -14,7 +14,8 @@ interface GameResultListProps {
 
 export default function GameResultList({ path }: GameResultListProps) {
   const { data, fetchNextPage, status, remove, refetch } = infScroll(path);
-  const [clickedItemId, setClickedItemId] = useRecoilState(clickedGameItem);
+  const [clickedItemId, setClickedItemId] =
+    useRecoilState(clickedGameItemState);
   const [totalPage, setTotalPage] = useState();
   const router = useRouter();
 
@@ -40,7 +41,7 @@ export default function GameResultList({ path }: GameResultListProps) {
         <>
           {data?.pages.map((gameList, index) => (
             <div key={index}>
-              {gameList.games.map((game: GameData) => (
+              {gameList.games.map((game: Game) => (
                 <GameResultItem
                   key={game.gameId}
                   game={game}

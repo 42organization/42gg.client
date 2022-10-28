@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { PlayerInfo, CurrentGameInfo, GameResult } from 'types/scoreTypes';
+import { Player, AfterGame, TeamScore } from 'types/scoreTypes';
 import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
@@ -8,8 +8,8 @@ import { minuitesAgo } from 'utils/handleTime';
 import NormalGameModal from './NormalGameModal';
 import RankGameModal from './RankGameModal';
 
-const defaultPlayersInfo: PlayerInfo[] = [{ intraId: '', userImageUri: '' }];
-const defaultCurrentGameInfo: CurrentGameInfo = {
+const defaultPlayersInfo: Player[] = [{ intraId: '', userImageUri: '' }];
+const defaultCurrentGameInfo: AfterGame = {
   gameId: 0,
   mode: 'normal',
   startTime: '1970-01-01 00:00',
@@ -22,7 +22,7 @@ const defaultCurrentGameInfo: CurrentGameInfo = {
 export default function AfterGameModal() {
   const setErrorMessage = useSetRecoilState(errorState);
   const setModalInfo = useSetRecoilState(modalState);
-  const [currentGameInfo, setCurrentGameInfo] = useState<CurrentGameInfo>(
+  const [currentGameInfo, setCurrentGameInfo] = useState<AfterGame>(
     defaultCurrentGameInfo
   );
   const normalGuide = {
@@ -54,7 +54,7 @@ export default function AfterGameModal() {
     }
   };
 
-  const submitRankResultHandler = async (result: GameResult) => {
+  const submitRankResultHandler = async (result: TeamScore) => {
     try {
       const res = await instance.post(`/pingpong/games/result`, result);
       if (res?.status === 201) {

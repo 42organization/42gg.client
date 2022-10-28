@@ -11,7 +11,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { useEffect, useState, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { ChartDataItem } from 'types/userTypes';
+import { PppChart } from 'types/userTypes';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import styles from 'styles/user/Chart.module.scss';
@@ -72,7 +72,7 @@ interface ChartProps {
 
 export default function Chart({ intraId, season }: ChartProps) {
   const setErrorMessage = useSetRecoilState(errorState);
-  const [chartData, setChartData] = useState<ChartDataItem[]>([
+  const [chartData, setChartData] = useState<PppChart[]>([
     { ppp: 0, date: '1970-01-01' },
   ]);
 

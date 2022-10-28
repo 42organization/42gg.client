@@ -13,17 +13,17 @@ export interface NormalPlayer {
   level: number;
 }
 
-export interface RankInfo {
+export interface RankResult {
   players: RankPlayer[] | NormalPlayer[];
   isWin?: boolean;
   score?: number;
 }
 
-export interface GameData {
+export interface Game {
   gameId: number;
   mode: string;
-  team1: RankInfo;
-  team2: RankInfo;
+  team1: RankResult;
+  team2: RankResult;
   type: string;
   status: string;
   time: string;

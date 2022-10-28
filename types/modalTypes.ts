@@ -16,22 +16,22 @@ type ModalName =
   | `USER-${UserModal}`
   | `FIXED-${FixedModal}`;
 
-export interface CancelInfo {
+export interface Cancel {
   slotId: number;
   time: string;
   enemyTeam: string[];
 }
 
-export interface EnrollInfo {
+export interface Enroll {
   slotId: number;
   type: string;
   startTime: Date;
   endTime: Date;
 }
 
-export interface ModalInfo {
+export interface Modal {
   modalName: ModalName;
-  cancelInfo?: CancelInfo;
-  enrollInfo?: EnrollInfo;
+  cancelInfo?: Cancel;
+  enrollInfo?: Enroll;
   gameId?: number;
 }

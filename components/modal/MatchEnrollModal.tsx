@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { EnrollInfo } from 'types/modalTypes';
+import { Enroll } from 'types/modalTypes';
 import { gameTimeToString } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';
 import { liveState } from 'utils/recoil/layout';
@@ -13,7 +13,7 @@ export default function MatchEnrollModal({
   type,
   startTime,
   endTime,
-}: EnrollInfo) {
+}: Enroll) {
   const setErrorMessage = useSetRecoilState(errorState);
   const setModalInfo = useSetRecoilState(modalState);
   const userLive = useRecoilValue(liveState);

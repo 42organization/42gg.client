@@ -5,7 +5,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { userState, liveState } from 'utils/recoil/layout';
 import {
   matchRefreshBtnState,
-  openCurrentMatchInfoState,
+  openCurrentMatchState,
 } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
@@ -14,7 +14,7 @@ import instance from 'utils/axios';
 import Statistics from 'pages/statistics';
 import Header from './Header';
 import Footer from './Footer';
-import CurrentMatchInfo from './CurrentMatchInfo';
+import CurrentMatch from './CurrentMatch';
 import styles from 'styles/Layout/Layout.module.scss';
 
 type AppLayoutProps = {
@@ -25,7 +25,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const [user, setUser] = useRecoilState(userState);
   const [userLive, setUserLive] = useRecoilState(liveState);
   const [openCurrentInfo, setOpenCurrentInfo] = useRecoilState(
-    openCurrentMatchInfoState
+    openCurrentMatchState
   );
   const [matchRefreshBtn, setMatchRefreshBtn] =
     useRecoilState(matchRefreshBtnState);
@@ -96,7 +96,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
             user.intraId && (
               <>
                 <Header />
-                {openCurrentInfo && <CurrentMatchInfo />}
+                {openCurrentInfo && <CurrentMatch />}
                 {presentPath !== '/match' && presentPath !== '/manual' && (
                   <Link href='/match'>
                     <div className={styles.buttonContainer}>
