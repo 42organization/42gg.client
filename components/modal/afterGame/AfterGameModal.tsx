@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { PlayerInfo, CurrentGameInfo, GameResult } from 'types/scoreTypes';
 import { useSetRecoilState } from 'recoil';
+import { PlayerInfo, CurrentGameInfo, GameResult } from 'types/scoreTypes';
+import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import { minuitesAgo } from 'utils/handleTime';
-import instance from 'utils/axios';
 import NormalGameModal from './NormalGameModal';
 import RankGameModal from './RankGameModal';
 

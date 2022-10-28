@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import Chart from 'components/user/Chart';
-import SeasonProvider from 'components/mode/SeasonProvider';
+import { RankProfileType } from 'types/userTypes';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
-import { RankProfileType } from 'types/userTypes';
+import Chart from 'components/user/Chart';
+import SeasonProvider from 'components/mode/SeasonProvider';
 import styles from 'styles/user/Profile.module.scss';
 
 interface RankProfileProps {

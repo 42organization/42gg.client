@@ -3,8 +3,8 @@ import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import { NotiData } from 'types/notiTypes';
 import { notiBarState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
-import NotiItem from './NotiItem';
 import instance from 'utils/axios';
+import NotiItem from './NotiItem';
 import styles from 'styles/Layout/NotiBar.module.scss';
 
 export default function NotiBar() {

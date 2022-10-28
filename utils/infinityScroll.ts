@@ -1,6 +1,6 @@
+import { useSetRecoilState } from 'recoil';
 import { useInfiniteQuery } from 'react-query';
 import { errorState } from 'utils/recoil/error';
-import { useSetRecoilState } from 'recoil';
 import instance from './axios';
 
 export default function infScroll(path: string) {

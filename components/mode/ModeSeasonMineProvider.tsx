@@ -1,7 +1,7 @@
 import React from 'react';
-import { RecordMode } from 'types/mainType';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import { RecordMode } from 'types/mainType';
 import { seasonState } from 'utils/recoil/seasons';
 import IsMineCheckBox from './modeItems/IsMineCheckBox';
 import SeasonDropDown from './modeItems/SeasonDropDown';

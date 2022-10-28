@@ -9,9 +9,9 @@ import {
 } from 'utils/recoil/layout';
 import MenuBar from './MenuBar';
 import NotiBar from './NotiBar';
-import { VscBell, VscBellDot } from 'react-icons/vsc';
 import { FiMenu } from 'react-icons/fi';
 import { BsMegaphone } from 'react-icons/bs';
+import { VscBell, VscBellDot } from 'react-icons/vsc';
 import styles from 'styles/Layout/Header.module.scss';
 
 export default function Header() {

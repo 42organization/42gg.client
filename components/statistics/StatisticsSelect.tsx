@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import styles from 'styles/statistics/StatisticsSelect.module.scss';
 import { getChartList } from 'utils/handleChartList';
 import StatisticsChartData from './StatisticsChartData';
+import styles from 'styles/statistics/StatisticsSelect.module.scss';
 
 type chartListElement = {
   chartName: string;

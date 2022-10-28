@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { InfiniteData } from 'react-query';
 import { useRecoilState } from 'recoil';
 import { GameData } from 'types/gameTypes';
 import infScroll from 'utils/infinityScroll';

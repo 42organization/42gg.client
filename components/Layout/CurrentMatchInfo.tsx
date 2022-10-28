@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { matchRefreshBtnState, currentMatchInfo } from 'utils/recoil/match';
+import instance from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { gameTimeToString, isBeforeMin } from 'utils/handleTime';
-import instance from 'utils/axios';
+import { matchRefreshBtnState, currentMatchInfo } from 'utils/recoil/match';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 export default function CurrentMatchInfo() {

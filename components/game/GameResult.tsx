@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
 import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecordMode } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';

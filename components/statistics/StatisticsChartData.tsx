@@ -1,10 +1,10 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { ChartInterface } from 'types/chartTypes';
 import { errorState } from 'utils/recoil/error';
-import styles from 'styles/statistics/StatisticsSelect.module.scss';
+import axios from 'axios';
 import StatisticsChart from './StatisticsCharts';
+import styles from 'styles/statistics/StatisticsSelect.module.scss';
 
 type chartListElement = {
   chartName: string;

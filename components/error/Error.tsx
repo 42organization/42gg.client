@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import styles from 'styles/Error.module.scss';

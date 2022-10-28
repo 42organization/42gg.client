@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { EnrollInfo } from 'types/modalTypes';
 import { gameTimeToString } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';
 import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
-import { EnrollInfo } from 'types/modalTypes';
 import instance from 'utils/axios';
 import styles from 'styles/modal/MatchEnrollModal.module.scss';
 
