@@ -1,3 +1,9 @@
+/* font */
+$logo-font: 'Agonostic Italic', cursive;
+$title-font: 'Reality Hyper Regular', cursive;
+$text-shadow: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black, 0 -0.1rem black;
+
+/* font-size */
 $giant-giant-font: 2.4rem;
 $giant-big-font: 2.1rem;
 $big-giant-font: 1.8rem;
@@ -6,18 +12,25 @@ $big-font: 1.2rem;
 $medium-font: 1rem;
 $small-font: 0.8rem;
 
+/* radius */
 $mini-radius: 0.3rem;
 $small-radius: 0.5rem;
 $medium-radius: 0.6rem;
 $big-radius: 5rem;
 
-$logo-font: 'Agonostic Italic', cursive;
-$title-font: 'Reality Hyper Regular', cursive;
-$text-shadow: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black, 0 -0.1rem black;
-
+/* color */
 $pp-red: #de1825;
 $pp-pink: #ffc5c8;
 $pp-blue: #471df0;
+
+$rank-red: #de1825;
+$rank-pink: #ffc5c8;
+$rank-blue: #471df0;
+
+$norm-hotpink: #dc3789;
+$norm-lightblue: #5acfe8;
+$norm-lightblue2: #1ea1c8;
+$norm-emerald: #cef1d0;
 
 $light-gray: #f0f0f0;
 $gray: #dadada;

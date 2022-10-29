@@ -16,10 +16,10 @@
   text-shadow: $text-shadow;
   letter-spacing: 0.1rem;
   &.rank {
-    background: $pp-red;
+    background: $rank-red;
   }
   &.normal {
-    background: $pp-blue;
+    background: $norm-lightblue2;
   }
 }
 
@@ -30,15 +30,15 @@
   height: 2.9rem;
   margin-top: 0.2rem;
   border-radius: $big-radius;
-  background: $pp-pink;
+  background: $rank-pink;
 }
 
 .normal {
-  background: $g2-bottom;
+  background: $norm-emerald;
 }
 
 .rankNumber {
-  color: $pp-red;
+  color: $rank-red;
   font-weight: 700;
   text-align: center;
 }
