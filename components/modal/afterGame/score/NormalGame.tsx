@@ -5,17 +5,17 @@ import { MatchTeams } from './MatchTeams';
 import Guide, { GuideLine } from './Guide';
 import styles from 'styles/modal/AfterGameModal.module.scss';
 
-interface NormalGameModalProps {
+interface NormalGameProps {
   currentGame: AfterGame;
   guideLine: GuideLine;
   onSubmit: () => void;
 }
 
-export default function NormalGameModal({
+export default function NormalGame({
   currentGame,
   guideLine,
   onSubmit,
-}: NormalGameModalProps) {
+}: NormalGameProps) {
   const { startTime, matchTeamsInfo } = currentGame;
   const canBeCompleted = isAfterMin(startTime, 10);
 

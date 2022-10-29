@@ -8,17 +8,17 @@ import styles from 'styles/modal/AfterGameModal.module.scss';
 
 const defaultResult: TeamScore = { myTeamScore: '', enemyTeamScore: '' };
 
-interface RankGameModalProps {
+interface RankGameProps {
   currentGame: AfterGame;
   guideLine: GuideLine;
   onSubmit: (gameResult: TeamScore) => void;
 }
 
-export default function RankGameModal({
+export default function RankGame({
   currentGame,
   guideLine,
   onSubmit,
-}: RankGameModalProps) {
+}: RankGameProps) {
   const [result, setResult] = useState<TeamScore>(defaultResult);
   const [onCheck, setOnCheck] = useState<boolean>(false);
 
