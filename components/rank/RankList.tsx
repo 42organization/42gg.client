@@ -70,7 +70,6 @@ export default function RankList({ mode, season }: RankListProps) {
     } catch (e) {
       setErrorMessage('DK01');
     }
-    console.log(pageInfo);
   };
 
   if (isMain) return <RankListMain rank={rank} />;
