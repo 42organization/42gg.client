@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { RecordMode } from 'types/mainType';
 import { seasonListState } from 'utils/recoil/seasons';
