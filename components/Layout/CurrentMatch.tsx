@@ -6,11 +6,11 @@ import instance from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { gameTimeToString, isBeforeMin } from 'utils/handleTime';
-import { matchRefreshBtnState, currentMatchInfo } from 'utils/recoil/match';
+import { matchRefreshBtnState, currentMatchState } from 'utils/recoil/match';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
-export default function CurrentMatchInfo() {
-  const [currentMatch, setCurrentMatch] = useRecoilState(currentMatchInfo);
+export default function CurrentMatch() {
+  const [currentMatch, setCurrentMatch] = useRecoilState(currentMatchState);
   const { isMatched, enemyTeam, time, slotId } = currentMatch;
   const [matchRefreshBtn, setMatchRefreshBtn] =
     useRecoilState(matchRefreshBtnState);

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { MatchData } from 'types/matchTypes';
+import { Match } from 'types/matchTypes';
 import instance from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
@@ -13,7 +13,7 @@ interface MatchBoardProps {
 }
 
 export default function MatchBoard({ type }: MatchBoardProps) {
-  const [matchData, setMatchData] = useState<MatchData | null>(null);
+  const [matchData, setMatchData] = useState<Match | null>(null);
   const [spinRefreshButton, setSpinRefreshButton] = useState<boolean>(false);
   const setRefreshMatch = useSetRecoilState(matchRefreshBtnState);
   const setErrorMessage = useSetRecoilState(errorState);

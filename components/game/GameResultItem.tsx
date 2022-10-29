@@ -1,19 +1,19 @@
 import { useSetRecoilState } from 'recoil';
-import { GameData } from 'types/gameTypes';
-import { clickedGameItem } from 'utils/recoil/game';
+import { Game } from 'types/gameTypes';
+import { clickedGameItemState } from 'utils/recoil/game';
 import GameResultBigScore from 'components/game/big/GameResultBigScore';
 import GameResultSmallScore from 'components/game/small/GameResultSmallScore';
 import GameResultBigTeam from 'components/game/big/GameResultBigTeam';
 import GameResultSmallTeam from 'components/game/small/GameResultSmallTeam';
 import styles from 'styles/game/GameResultItem.module.scss';
 interface GameResultItemProps {
-  game: GameData;
+  game: Game;
   isBig: boolean;
 }
 
 export default function GameResultItem({ game, isBig }: GameResultItemProps) {
   const { mode, team1, team2, status, time, gameId } = game;
-  const setClickedItemId = useSetRecoilState(clickedGameItem);
+  const setClickedItemId = useSetRecoilState(clickedGameItemState);
   return (
     <div
       className={`${isBig ? styles.bigContainer : styles.smallContainer}

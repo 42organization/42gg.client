@@ -1,8 +1,8 @@
-import { GameResult } from 'types/scoreTypes';
+import { TeamScore } from 'types/scoreTypes';
 import styles from 'styles/modal/AfterGameModal.module.scss';
 
 interface ScoreProps {
-  result: GameResult;
+  result: TeamScore;
   onCheck: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -16,7 +16,7 @@ export default function Score({ result, onCheck, onChange }: ScoreProps) {
 }
 
 interface InputScoreProps {
-  result: GameResult;
+  result: TeamScore;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -46,7 +46,7 @@ function InputScore({ result, onChange }: InputScoreProps) {
   );
 }
 
-function CheckedScore({ result }: { result: GameResult }) {
+function CheckedScore({ result }: { result: TeamScore }) {
   return (
     <div className={styles.finalScore}>
       <div>{result.myTeamScore}</div>

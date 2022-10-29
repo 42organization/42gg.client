@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState, useResetRecoilState } from 'recoil';
-import { NotiData } from 'types/notiTypes';
+import { Noti } from 'types/notiTypes';
 import { notiBarState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
@@ -8,7 +8,7 @@ import NotiItem from './NotiItem';
 import styles from 'styles/Layout/NotiBar.module.scss';
 
 export default function NotiBar() {
-  const [notiData, setNotiData] = useState<NotiData[]>([]);
+  const [notiData, setNotiData] = useState<Noti[]>([]);
   const [clickRefreshBtn, setClickRefreshBtn] = useState(false);
   const [refreshBtnAnimation, setRefreshBtnAnimation] = useState(false);
   const resetOpenNotiBar = useResetRecoilState(notiBarState);
@@ -73,7 +73,7 @@ export default function NotiBar() {
               </button>
             </div>
             <div>
-              {notiData.map((data: NotiData) => (
+              {notiData.map((data: Noti) => (
                 <NotiItem key={data.id} data={data} />
               ))}
             </div>

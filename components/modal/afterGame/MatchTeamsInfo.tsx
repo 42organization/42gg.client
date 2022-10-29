@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import { PlayerInfo, PlayersData } from 'types/scoreTypes';
+import { Player, Players } from 'types/scoreTypes';
 import styles from 'styles/modal/AfterGameModal.module.scss';
 
 export function MatchTeamsInfo({
   matchTeamsInfo,
 }: {
-  matchTeamsInfo: PlayersData;
+  matchTeamsInfo: Players;
 }) {
   return (
     <div className={styles.players}>
@@ -16,7 +16,7 @@ export function MatchTeamsInfo({
   );
 }
 
-function TeamInfo({ teamInfo }: { teamInfo: PlayerInfo[] }) {
+function TeamInfo({ teamInfo }: { teamInfo: Player[] }) {
   return (
     <div className={styles.userInfo}>
       {teamInfo.map((playerInfo) => (

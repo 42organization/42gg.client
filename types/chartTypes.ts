@@ -1,13 +1,13 @@
-export interface GraphData {
+export interface GraphValue {
   date: string;
   count: number;
 }
 
-export interface SingleGraph {
+export interface Graph {
   graphName: string;
-  graphData: GraphData[];
+  graphData: GraphValue[];
 }
 
-export interface ChartInterface {
-  graphs: SingleGraph[];
+export interface Graphs {
+  graphs: Graph[];
 }

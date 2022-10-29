@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import { useSetRecoilState } from 'recoil';
-import { NotiData } from 'types/notiTypes';
-import { notiBarState } from 'utils/recoil/layout';
+import { Noti } from 'types/notiTypes';
+import { notiBar } from 'utils/recoil/layout';
 import { gameTimeToString } from 'utils/handleTime';
 import styles from 'styles/Layout/NotiItem.module.scss';
 
 type NotiItemProps = {
-  data: NotiData;
+  data: Noti;
 };
 
 export default function NotiItem({ data }: NotiItemProps) {
-  const setOpenNotiBar = useSetRecoilState(notiBarState);
+  const setOpenNotiBar = useSetRecoilState(notiBar);
   const notiDate = data.createdAt.slice(5, 16).replace('T', ' ');
   const title = makeTitle(data.type);
   const content = () => {
@@ -70,7 +70,7 @@ function makeHyperlink(message: string) {
   );
 }
 
-function makeContent(data: NotiData) {
+function makeContent(data: Noti) {
   if (data.type !== 'announce' && data.time) {
     const gameTime = gameTimeToString(data.time);
     if (data.type === 'matched')

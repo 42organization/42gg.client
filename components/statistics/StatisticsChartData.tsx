@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { ChartInterface } from 'types/chartTypes';
+import { Graphs } from 'types/chartTypes';
 import { errorState } from 'utils/recoil/error';
 import axios from 'axios';
 import StatisticsChart from './StatisticsCharts';
@@ -19,7 +19,7 @@ export default function StatisticsChartData({
 }: chartListElement) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [chart, setChart] = useState<ChartInterface>();
+  const [chart, setChart] = useState<Graphs>();
   const setErrorMessage = useSetRecoilState(errorState);
 
   const clickGetChart = () => {

@@ -1,8 +1,8 @@
 import { atom } from 'recoil';
 import { v1 } from 'uuid';
-import { UserType, UserLiveType } from '../../types/mainType';
+import { User, Live } from '../../types/mainType';
 
-export const userState = atom<UserType>({
+export const userState = atom<User>({
   key: `userState/${v1()}`,
   default: {
     intraId: '',
@@ -12,7 +12,7 @@ export const userState = atom<UserType>({
   },
 });
 
-export const liveState = atom<UserLiveType>({
+export const liveState = atom<Live>({
   key: `liveState/${v1()}`,
   default: {
     notiCount: 0,

@@ -1,5 +1,4 @@
-import { seasonType } from 'types/seasonTypes';
-import { Seasons } from 'types/seasonTypes';
+import { Season, Seasons } from 'types/seasonTypes';
 
 interface SeasonDropDownProps {
   seasons: Seasons;
@@ -17,7 +16,7 @@ export default function SeasonDropDown({
   }
   return (
     <select onChange={onSelect} value={value}>
-      {seasons.seasonList.map((season: seasonType) => (
+      {seasons.seasonList.map((season: Season) => (
         <option key={season.id} value={season.id}>
           {season.name}
         </option>

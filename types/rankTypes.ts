@@ -1,4 +1,4 @@
-export interface RankMode {
+export interface RankUser {
   rank: number;
   intraId: string;
   statusMessage: string;
@@ -6,7 +6,7 @@ export interface RankMode {
   winRate: number;
 }
 
-export interface NormalMode {
+export interface NormalUser {
   rank: number;
   intraId: string;
   statusMessage: string;
@@ -18,5 +18,5 @@ export interface Rank {
   myRank: number;
   currentPage: number;
   totalPage: number;
-  rankList: RankMode[] | NormalMode[];
+  rankList: RankUser[] | NormalUser[];
 }

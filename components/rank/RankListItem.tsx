@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
-import { NormalMode, RankMode } from 'types/rankTypes';
+import { NormalUser, RankUser } from 'types/rankTypes';
 import { userState } from 'utils/recoil/layout';
 import styles from 'styles/rank/RankList.module.scss';
 
 interface RankListItemRrops {
   index: number;
-  rankedUser: NormalMode | RankMode;
+  rankedUser: NormalUser | RankUser;
   isRankMode: boolean;
   ppp: number | null;
   level: number | null;

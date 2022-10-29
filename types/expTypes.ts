@@ -1,4 +1,4 @@
-export interface expInfo {
+export interface Exp {
   maxExp: number;
   expRate: number;
   currentExp: number;

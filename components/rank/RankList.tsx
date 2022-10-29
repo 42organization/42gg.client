@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
-import { RankMode, NormalMode, Rank } from 'types/rankTypes';
-import { myRankPosition, isMyRankScroll } from 'utils/recoil/myRank';
+import { RankUser, NormalUser, Rank } from 'types/rankTypes';
+import { myRankState, scrollState } from 'utils/recoil/myRank';
 import { userState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
@@ -16,15 +16,15 @@ interface RankListProps {
   season?: string;
 }
 
-function isRankModeType(arg: RankMode | NormalMode): arg is RankMode {
+function isRankModeType(arg: RankUser | NormalUser): arg is RankUser {
   return 'ppp' in arg;
 }
 
 export default function RankList({ mode, season }: RankListProps) {
   const [rank, setRank] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
-  const [myRank, setMyRank] = useRecoilState(myRankPosition);
-  const [isScroll, setIsScroll] = useRecoilState(isMyRankScroll);
+  const [myRank, setMyRank] = useRecoilState(myRankState);
+  const [isScroll, setIsScroll] = useRecoilState(scrollState);
   const seasonMode = useRecoilValue(userState).seasonMode;
   const setErrorMessage = useSetRecoilState(errorState);
   const router = useRouter();
@@ -76,7 +76,7 @@ export default function RankList({ mode, season }: RankListProps) {
 
   return (
     <RankListFrame isRankMode={isRankMode} pageInfo={pageInfo}>
-      {rank?.rankList.map((item: NormalMode | RankMode, index) => (
+      {rank?.rankList.map((item: NormalUser | RankUser, index) => (
         <RankListItem
           key={item.intraId}
           index={index}

@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { RankMode, NormalMode } from 'types/rankTypes';
+import { RankUser, NormalUser } from 'types/rankTypes';
 import styles from 'styles/rank/RankListMain.module.scss';
 
 interface RankListItemMainProps {
-  rankedUser: NormalMode | RankMode;
+  rankedUser: NormalUser | RankUser;
   isSeasonNormal: boolean;
 }
 

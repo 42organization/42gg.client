@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import { RankInfo } from 'types/gameTypes';
+import { RankResult } from 'types/gameTypes';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultSmallTeamProps {
-  team: RankInfo;
+  team: RankResult;
   userLeft: boolean;
 }
 
