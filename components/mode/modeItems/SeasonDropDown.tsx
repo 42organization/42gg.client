@@ -1,7 +1,7 @@
-import { Season, Seasons } from 'types/seasonTypes';
+import { Season, SeasonList } from 'types/seasonTypes';
 
 interface SeasonDropDownProps {
-  seasons: Seasons;
+  seasons: SeasonList;
   value: number;
   onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }

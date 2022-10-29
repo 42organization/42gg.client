@@ -4,7 +4,7 @@ import { ProfileRank } from 'types/userTypes';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import Chart from 'components/user/Chart';
-import SeasonProvider from 'components/mode/SeasonProvider';
+import ProfileMode from 'components/mode/ProfileMode';
 import styles from 'styles/user/Profile.module.scss';
 
 interface RankProfileProps {
@@ -19,9 +19,9 @@ interface RankProps {
 export default function RankProfile({ intraId }: RankProfileProps) {
   return (
     <div className={styles.container}>
-      <SeasonProvider>
+      <ProfileMode>
         <RankInfo intraId={intraId} />
-      </SeasonProvider>
+      </ProfileMode>
     </div>
   );
 }

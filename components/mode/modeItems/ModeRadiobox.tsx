@@ -1,12 +1,12 @@
 import { RecordMode } from 'types/mainType';
 import styles from 'styles/mode/ModeRadiobox.module.scss';
 
-interface ModeRadiobox {
+interface ModeRadioboxProps {
   mode: RecordMode;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function ModeRadiobox({ mode, onChange }: ModeRadiobox) {
+export default function ModeRadiobox({ mode, onChange }: ModeRadioboxProps) {
   const modes = [
     { type: 'both', name: '전체' },
     { type: 'normal', name: '일반' },
