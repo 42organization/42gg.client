@@ -8,3 +8,7 @@
 .title {
   @include pageTitle;
 }
+
+.toggle {
+  margin-bottom: -2rem;
+}

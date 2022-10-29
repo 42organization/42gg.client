@@ -2,14 +2,14 @@ import styles from 'styles/mode/ModeToggle.module.scss';
 
 interface ModeToggleProps {
   checked: boolean;
-  onToggle: () => void;
   text: string;
+  onToggle: () => void;
 }
 
 export default function ModeToggle({
   checked,
-  onToggle,
   text,
+  onToggle,
 }: ModeToggleProps) {
   return (
     <div>

@@ -2,21 +2,21 @@ import React from 'react';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { RecordMode } from 'types/mainType';
-import { seasonState } from 'utils/recoil/seasons';
+import { seasonListState } from 'utils/recoil/seasons';
 import IsMineCheckBox from './modeItems/IsMineCheckBox';
 import SeasonDropDown from './modeItems/SeasonDropDown';
 import ModeRadiobox from './modeItems/ModeRadiobox';
 import styles from 'styles/mode/ModeSelect.module.scss';
 
-interface ModeSelectProps {
+interface GameModeProps {
   children: React.ReactNode;
 }
 
-export default function ModeSeasonProvider({ children }: ModeSelectProps) {
-  const [recordMode, setRecordMode] = useState<RecordMode>('both');
+export default function GameMode({ children }: GameModeProps) {
   const [isMine, setIsMine] = useState(false);
   const [season, setSeason] = useState<number>(0);
-  const seasonList = useRecoilValue(seasonState);
+  const seasonList = useRecoilValue(seasonListState);
+  const [recordMode, setRecordMode] = useState<RecordMode>('both');
 
   const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRecordMode(e.target.value as RecordMode);

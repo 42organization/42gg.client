@@ -12,17 +12,21 @@
   cursor: pointer;
 }
 
-.myButton {
+.mySlot {
   @include slotButton;
-  background: linear-gradient(to bottom, white, rgba(45, 128, 237));
+  background: linear-gradient(to bottom, white, #68ff77);
 }
 
-.enabledButton {
+.rankSlot {
   @include slotButton;
   background: linear-gradient(to bottom, white, $g1-bottom);
 }
+.normalSlot {
+  @include slotButton;
+  background: linear-gradient(to bottom, white, $norm-lightblue);
+}
 
-.disabledButton {
+.disabledSlot {
   @include slotButton;
   background: linear-gradient(to bottom, $gray, rgba(217, 217, 217, 0.6));
   cursor: default;

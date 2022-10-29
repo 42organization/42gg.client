@@ -1,8 +1,8 @@
 import { atom } from 'recoil';
 import { v1 } from 'uuid';
-import { Seasons } from 'types/seasonTypes';
+import { SeasonList } from 'types/seasonTypes';
 
-export const seasonState = atom<Seasons>({
-  key: `seasonState/${v1()}`,
+export const seasonListState = atom<SeasonList>({
+  key: `seasonListState/${v1()}`,
   default: { seasonList: [] },
 });

@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { Enroll } from 'types/modalTypes';
 import { gameTimeToString } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';
-import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/modal/MatchEnrollModal.module.scss';
@@ -11,24 +9,16 @@ import styles from 'styles/modal/MatchEnrollModal.module.scss';
 export default function MatchEnrollModal({
   slotId,
   type,
+  mode,
   startTime,
   endTime,
 }: Enroll) {
-  const setErrorMessage = useSetRecoilState(errorState);
-  const setModalInfo = useSetRecoilState(modalState);
-  const userLive = useRecoilValue(liveState);
-  const [matchMode, setMatchMode] = useState<string>('');
-
-  useEffect(() => {
-    if (userLive.seasonMode === 'rank') setMatchMode('rank');
-    else setMatchMode('normal');
-  }, []);
-  // 이후에 게임 모드를 사용자가 선택할 때 input(normal/rank) 선택에 따라
-  // setGameMode하는 함수를 만들어야 함.
+  const setError = useSetRecoilState(errorState);
+  const setModal = useSetRecoilState(modalState);
 
   const onEnroll = async () => {
     try {
-      const body = { slotId: slotId, mode: matchMode };
+      const body = { slotId: slotId, mode: mode };
       await instance.post(`/pingpong/match/tables/${1}/${type}`, body);
       alert('경기가 성공적으로 등록되었습니다.');
     } catch (e: any) {
@@ -39,17 +29,17 @@ export default function MatchEnrollModal({
       else if (e.response.data.code === 'SC003')
         alert('경기 취소 후 1분 동안 경기를 예약할 수 없습니다.');
       else {
-        setModalInfo({ modalName: null });
-        setErrorMessage('JH05');
+        setModal({ modalName: null });
+        setError('JH05');
         return;
       }
     }
-    setModalInfo({ modalName: null });
+    setModal({ modalName: null });
     window.location.reload();
   };
 
   const onCancel = () => {
-    setModalInfo({ modalName: null });
+    setModal({ modalName: null });
   };
 
   return (

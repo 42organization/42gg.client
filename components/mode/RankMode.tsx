@@ -2,33 +2,30 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { userState } from 'utils/recoil/layout';
-import { seasonState } from 'utils/recoil/seasons';
+import { seasonListState } from 'utils/recoil/seasons';
 import ModeToggle from './modeItems/ModeToggle';
 import SeasonDropDown from './modeItems/SeasonDropDown';
 import styles from 'styles/mode/ModeSelect.module.scss';
 
-interface ModeSelectProps {
+interface RankModeProps {
   children: React.ReactNode;
   setModeProps: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function ModeSeasonProvider({
-  children,
-  setModeProps,
-}: ModeSelectProps) {
+export default function RankMode({ children, setModeProps }: RankModeProps) {
   const user = useRecoilValue(userState);
-  const [rankMode, setRankMode] = useState(user?.seasonMode);
   const [season, setSeason] = useState<number>(0);
+  const [seasonMode, setSeasonMode] = useState(user?.seasonMode);
   const [displaySeasons, setDisplaySeasons] = useState(true);
-  const seasonList = useRecoilValue(seasonState);
+  const seasonList = useRecoilValue(seasonListState);
 
   useEffect(() => {
-    setDisplaySeasons(rankMode === 'rank');
-    setModeProps(rankMode);
-  }, [rankMode]);
+    setDisplaySeasons(seasonMode === 'rank');
+    setModeProps(seasonMode);
+  }, [seasonMode]);
 
   const modeToggleHandler = () => {
-    setRankMode((mode) => (mode === 'rank' ? 'normal' : 'rank'));
+    setSeasonMode((mode) => (mode === 'rank' ? 'normal' : 'rank'));
   };
 
   const seasonDropDownHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -39,9 +36,9 @@ export default function ModeSeasonProvider({
     <div>
       <div className={styles.wrapper}>
         <ModeToggle
-          checked={rankMode === 'rank'}
+          checked={seasonMode === 'rank'}
           onToggle={modeToggleHandler}
-          text={rankMode === 'rank' ? '랭크' : '일반'}
+          text={seasonMode === 'rank' ? '랭크' : '일반'}
         />
         {displaySeasons && seasonList && (
           <SeasonDropDown
@@ -52,7 +49,7 @@ export default function ModeSeasonProvider({
         )}
       </div>
       {React.cloneElement(children as React.ReactElement, {
-        mode: rankMode,
+        mode: seasonMode,
         season,
       })}
     </div>

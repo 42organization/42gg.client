@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ModeSeasonProvider from 'components/mode/ModeSeasonProvider';
+import RankMode from 'components/mode/RankMode';
 import MyRank from 'components/rank/MyRank';
 import RankList from 'components/rank/RankList';
 import styles from 'styles/rank/RankList.module.scss';
@@ -11,9 +11,9 @@ export default function Rank() {
     <div className={styles.pageWrap}>
       <h1 className={styles.title}>{makePageName(mode)}</h1>
       <MyRank />
-      <ModeSeasonProvider setModeProps={setMode}>
+      <RankMode setModeProps={setMode}>
         <RankList />
-      </ModeSeasonProvider>
+      </RankMode>
     </div>
   );
 }

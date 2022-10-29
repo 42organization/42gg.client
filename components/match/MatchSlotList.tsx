@@ -4,12 +4,14 @@ import styles from 'styles/match/MatchSlotList.module.scss';
 
 interface MatchSlotListProps {
   type: string;
+  mode?: string;
   intervalMinute: number;
   matchSlots: Slot[];
 }
 
 export default function MatchSlotList({
   type,
+  mode,
   intervalMinute,
   matchSlots,
 }: MatchSlotListProps) {
@@ -24,6 +26,7 @@ export default function MatchSlotList({
           <MatchSlot
             key={slot.slotId}
             type={type}
+            mode={mode}
             slot={slot}
             intervalMinute={intervalMinute}
           ></MatchSlot>

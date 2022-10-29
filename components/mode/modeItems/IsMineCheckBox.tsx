@@ -1,11 +1,14 @@
 import styles from 'styles/mode/IsMineCheckBox.module.scss';
 
-interface IsMineCheckBox {
+interface IsMineCheckBoxProps {
   isMine: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function IsMineCheckBox({ isMine, onChange }: IsMineCheckBox) {
+export default function IsMineCheckBox({
+  isMine,
+  onChange,
+}: IsMineCheckBoxProps) {
   return (
     <div className={styles.checkbox}>
       <input
