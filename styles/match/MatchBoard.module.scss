@@ -12,9 +12,10 @@
   align-items: center;
   .manual {
     @include match-noti-button;
-    margin-right: 0.8rem;
-    width: 4rem;
-    height: 1.2rem;
+    margin: 0 0.8rem 0 0;
+    width: 3.2rem;
+    height: 1.6rem;
+    font-size: $small-font;
     border-radius: $small-radius;
   }
   .refresh {

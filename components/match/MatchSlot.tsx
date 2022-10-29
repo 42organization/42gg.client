@@ -9,18 +9,20 @@ import styles from 'styles/match/MatchSlot.module.scss';
 
 interface MatchSlotProps {
   type: string;
+  mode?: string;
   slot: Slot;
   intervalMinute: number;
 }
 
 export default function MatchItem({
   type,
+  mode,
   slot,
   intervalMinute,
 }: MatchSlotProps) {
-  const setErrorMessage = useSetRecoilState(errorState);
-  const setModalInfo = useSetRecoilState(modalState);
-  const userLive = useRecoilValue(liveState);
+  const setError = useSetRecoilState(errorState);
+  const setModal = useSetRecoilState(modalState);
+  const live = useRecoilValue(liveState);
 
   const { headCount, slotId, status, time } = slot;
   const headMax = type === 'single' ? 2 : 4;
@@ -36,30 +38,31 @@ export default function MatchItem({
         const res = await instance.get(`/pingpong/match/current`);
         if (res?.data) {
           const { slotId, time, enemyTeam } = res.data;
-          setModalInfo({
+          setModal({
             modalName: 'MATCH-CANCEL',
             cancelInfo: { slotId, time, enemyTeam },
           });
         }
       } catch (e) {
-        setErrorMessage('JH08');
+        setError('JH08');
       }
-    } else if (userLive.event === 'match') {
-      setModalInfo({ modalName: 'MATCH-REJECT' });
+    } else if (live.event === 'match') {
+      setModal({ modalName: 'MATCH-REJECT' });
     } else {
-      setModalInfo({
+      setModal({
         modalName: 'MATCH-ENROLL',
-        enrollInfo: { slotId, type, startTime, endTime },
+        enrollInfo: { slotId, type, mode, startTime, endTime },
       });
     }
   };
 
   if (status === 'mytable') {
-    buttonStyle = styles.myButton;
+    buttonStyle = styles.mySlot;
   } else if (status === 'open') {
-    buttonStyle = styles.enabledButton;
+    if (mode === 'rank') buttonStyle = styles.rankSlot;
+    if (mode === 'normal') buttonStyle = styles.normalSlot;
   } else if (status === 'close') {
-    buttonStyle = styles.disabledButton;
+    buttonStyle = styles.disabledSlot;
   }
 
   return (
@@ -71,6 +74,7 @@ export default function MatchItem({
       <span className={styles.time}>
         {minuiteToStr(startTime.getMinutes())} -{' '}
         {minuiteToStr(endTime.getMinutes())}
+        {status === 'mytable' && ' 🙋'}
       </span>
       <span className={`${styles.headCount} ${headCount === 0 && styles.plus}`}>
         {isAfterSlot && (headCount === 0 ? '+' : `${headCount}/${headMax}`)}

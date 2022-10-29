@@ -25,6 +25,7 @@ export interface Cancel {
 export interface Enroll {
   slotId: number;
   type: string;
+  mode?: string;
   startTime: Date;
   endTime: Date;
 }

@@ -6,43 +6,49 @@ import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { matchRefreshBtnState } from 'utils/recoil/match';
 import MatchSlotList from './MatchSlotList';
+
 import styles from 'styles/match/MatchBoard.module.scss';
 
 interface MatchBoardProps {
   type: string;
+  mode?: string;
 }
 
-export default function MatchBoard({ type }: MatchBoardProps) {
-  const [matchData, setMatchData] = useState<Match | null>(null);
+export default function MatchBoard({ type, mode }: MatchBoardProps) {
+  const [match, setMatch] = useState<Match | null>(null);
   const [spinRefreshButton, setSpinRefreshButton] = useState<boolean>(false);
-  const setRefreshMatch = useSetRecoilState(matchRefreshBtnState);
-  const setErrorMessage = useSetRecoilState(errorState);
-  const setModalInfo = useSetRecoilState(modalState);
+  const setMatchRefreshBtn = useSetRecoilState(matchRefreshBtnState);
+  const setError = useSetRecoilState(errorState);
+  const setModal = useSetRecoilState(modalState);
   const currentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     getMatchDataHandler();
-  }, []);
+  }, [mode]);
 
   useEffect(() => {
     currentRef.current?.scrollIntoView({
       behavior: 'smooth',
       block: 'nearest',
     });
-  }, [matchData]);
+  }, [match]);
 
   const getMatchDataHandler = async () => {
     try {
+      // 서버 연결 후 주석 해제
+      // const res = await instance.get(
+      //   `/pingpong/match/tables/${1}/${mode}/${type}`
+      // );
       const res = await instance.get(`/pingpong/match/tables/${1}/${type}`);
-      setMatchData(res?.data);
+      setMatch(res?.data);
     } catch (e) {
-      setErrorMessage('SJ01');
+      setError('SJ01');
     }
   };
 
-  if (!matchData) return null;
+  if (!match) return null;
 
-  const { matchBoards, intervalMinute } = matchData;
+  const { matchBoards, intervalMinute } = match;
 
   if (matchBoards.length === 0)
     return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
@@ -52,7 +58,7 @@ export default function MatchBoard({ type }: MatchBoardProps) {
   const currentHour = new Date().getHours();
 
   const openManual = () => {
-    setModalInfo({ modalName: 'MATCH-MANUAL' });
+    setModal({ modalName: 'MATCH-MANUAL' });
   };
 
   const refreshMatchData = () => {
@@ -61,7 +67,7 @@ export default function MatchBoard({ type }: MatchBoardProps) {
       setSpinRefreshButton(false);
     }, 1000);
     getMatchDataHandler();
-    setRefreshMatch(true);
+    setMatchRefreshBtn(true);
   };
 
   const getScrollCurrentRef = (slotsHour: number) => {
@@ -72,7 +78,7 @@ export default function MatchBoard({ type }: MatchBoardProps) {
   };
 
   return (
-    <>
+    <div>
       <div className={styles.buttonWrap}>
         <button className={styles.manual} onClick={openManual}>
           매뉴얼
@@ -100,6 +106,7 @@ export default function MatchBoard({ type }: MatchBoardProps) {
             >
               <MatchSlotList
                 type={type}
+                mode={mode}
                 intervalMinute={intervalMinute}
                 matchSlots={matchSlots}
               />
@@ -107,6 +114,6 @@ export default function MatchBoard({ type }: MatchBoardProps) {
           );
         })}
       </div>
-    </>
+    </div>
   );
 }
