@@ -6,7 +6,6 @@ import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { matchRefreshBtnState } from 'utils/recoil/match';
 import MatchSlotList from './MatchSlotList';
-
 import styles from 'styles/match/MatchBoard.module.scss';
 
 interface MatchBoardProps {
