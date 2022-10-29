@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { sleep } from 'utils/sleep';
-import { Button } from './Buttons';
+import { Button } from '../score/Buttons';
 import styles from 'styles/modal/ExpGameModal.module.scss';
 
 type ExpGuageProps = {
@@ -21,7 +21,7 @@ export default function ExpGuage({
   afterMaxExp,
   increasedLevel,
 }: ExpGuageProps) {
-  const setModalInfo = useSetRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
   const [beforeExp, setBeforeExp] = useState<number>(exp);
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export default function ExpGuage({
           style={styles.positive}
           value='확인'
           onClick={() => {
-            setModalInfo({ modalName: null });
+            setModal({ modalName: null });
           }}
         />
       </div>

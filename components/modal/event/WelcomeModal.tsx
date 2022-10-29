@@ -3,7 +3,7 @@ import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/WelcomeModal.module.scss';
 
 export default function WelcomeModal() {
-  const setModalInfo = useSetRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
 
   const openPageManual = () => {
     window.open(
@@ -12,7 +12,7 @@ export default function WelcomeModal() {
   };
 
   const closeModalHandler = () => {
-    setModalInfo({ modalName: null });
+    setModal({ modalName: null });
   };
 
   return (

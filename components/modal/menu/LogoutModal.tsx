@@ -6,11 +6,11 @@ import styles from 'styles/modal/LogoutModal.module.scss';
 
 export default function LogoutModal() {
   const setIsLoggedIn = useSetRecoilState(loginState);
-  const setModalInfo = useSetRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
   const router = useRouter();
 
   const onReturn = () => {
-    setModalInfo({ modalName: null });
+    setModal({ modalName: null });
   };
 
   const onLogout = () => {

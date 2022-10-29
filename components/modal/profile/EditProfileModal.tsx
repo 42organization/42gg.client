@@ -15,7 +15,7 @@ const CHAR_LIMIT = 30;
 
 export default function EditProfileModal() {
   const setErrorMessage = useSetRecoilState(errorState);
-  const setModalInfo = useSetRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
   const [profile, setProfile] = useRecoilState(profileState);
   const [editedProfile, setEditedProfile] = useState<EditedProfile>({
     racketType: profile.racketType,
@@ -60,10 +60,10 @@ export default function EditProfileModal() {
     } catch (e) {
       setErrorMessage('JH02');
     }
-    setModalInfo({ modalName: null });
+    setModal({ modalName: null });
   };
 
-  const cancelEditHandler = () => setModalInfo({ modalName: null });
+  const cancelEditHandler = () => setModal({ modalName: null });
 
   return (
     <div className={styles.editContainer}>

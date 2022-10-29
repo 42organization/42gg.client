@@ -31,18 +31,6 @@
   font-weight: 600;
 }
 
-.userInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-shadow: $text-shadow;
-  .userImage {
-    @include userImage(5rem);
-    margin-bottom: 1rem;
-    box-shadow: 5px 5px 6px $dark-gray;
-  }
-}
-
 .finalScore {
   display: flex;
   justify-content: space-evenly;

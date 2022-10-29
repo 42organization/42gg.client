@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AfterGame, TeamScore } from 'types/scoreTypes';
-import { MatchTeamsInfo } from './MatchTeamsInfo';
+import { MatchTeams } from './MatchTeams';
 import Score from './Score';
 import { Buttons } from './Buttons';
 import Guide, { GuideLine } from './Guide';
@@ -9,13 +9,13 @@ import styles from 'styles/modal/AfterGameModal.module.scss';
 const defaultResult: TeamScore = { myTeamScore: '', enemyTeamScore: '' };
 
 interface RankGameModalProps {
-  currentGameInfo: AfterGame;
+  currentGame: AfterGame;
   guideLine: GuideLine;
   onSubmit: (gameResult: TeamScore) => void;
 }
 
 export default function RankGameModal({
-  currentGameInfo,
+  currentGame,
   guideLine,
   onSubmit,
 }: RankGameModalProps) {
@@ -46,7 +46,7 @@ export default function RankGameModal({
     <div className={styles.container}>
       <Guide condition={onCheck} guideLine={guideLine} />
       <div className={styles.resultContainer}>
-        <MatchTeamsInfo matchTeamsInfo={currentGameInfo.matchTeamsInfo} />
+        <MatchTeams matchTeams={currentGame.matchTeamsInfo} />
         <Score onCheck={onCheck} result={result} onChange={inputScoreHandler} />
       </div>
       <Buttons

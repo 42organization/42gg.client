@@ -6,17 +6,17 @@ import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/modal/ReportModal.module.scss';
 
-interface ReportInfo {
+interface Report {
   category: string;
   content: string;
 }
 
 export default function ReportModal() {
-  const [reportData, setReportData] = useState<ReportInfo>({
+  const [report, setReport] = useState<Report>({
     category: '',
     content: '',
   });
-  const setModalInfo = useSetRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
   const setErrorMessage = useSetRecoilState(errorState);
   const setOpenMenuBar = useSetRecoilState(menuBarState);
   const reportCategory = [
@@ -33,7 +33,7 @@ export default function ReportModal() {
   }:
     | React.ChangeEvent<HTMLTextAreaElement>
     | React.ChangeEvent<HTMLInputElement>) => {
-    setReportData((prev) => ({
+    setReport((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -41,13 +41,13 @@ export default function ReportModal() {
 
   const reportHandler = async () => {
     if (
-      reportData.category &&
-      reportData.content.replace(/(\s*)/g, '').replace(/(\n)/g, '')
+      report.category &&
+      report.content.replace(/(\s*)/g, '').replace(/(\n)/g, '')
     ) {
-      const body = reportData;
+      const body = report;
       try {
         await instance.post('/pingpong/feedback', body);
-        setModalInfo({ modalName: null });
+        setModal({ modalName: null });
         setOpenMenuBar(false);
         alert('신고가 완료되었습니다.');
       } catch (e) {
@@ -85,13 +85,13 @@ export default function ReportModal() {
             maxLength={300}
             onChange={inputChangeHandler}
           />
-          <div>{`${reportData.content.length}/300`}</div>
+          <div>{`${report.content.length}/300`}</div>
         </div>
         <div className={styles.buttons}>
           <div className={styles.negative}>
             <input
               type='button'
-              onClick={() => setModalInfo({ modalName: null })}
+              onClick={() => setModal({ modalName: null })}
               value='취소'
             />
           </div>

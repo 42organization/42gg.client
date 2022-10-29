@@ -2,36 +2,36 @@ import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import CancelController from './matchCancel/CancelController';
-import EditProfileModal from './EditProfileModal';
-import LogoutModal from './LogoutModal';
-import MatchEnrollModal from './MatchEnrollModal';
-import MatchManualModal from './MatchManualModal';
-import MatchRejectModal from './MatchRejectModal';
-import ReportModal from './ReportModal';
-import WelcomeModal from './WelcomeModal';
-import AfterGameModal from './afterGame/AfterGameModal';
-import ExpChangeModal from './afterGame/ExpChangeModal';
+import EditProfileModal from './profile/EditProfileModal';
+import LogoutModal from './menu/LogoutModal';
+import MatchEnrollModal from './match/MatchEnrollModal';
+import MatchManualModal from './match/MatchManualModal';
+import MatchRejectModal from './match/MatchRejectModal';
+import ReportModal from './menu/ReportModal';
+import WelcomeModal from './event/WelcomeModal';
+import AfterGameModal from './afterGame/score/AfterGameModal';
+import ExpChangeModal from './afterGame/exp/ExpChangeModal';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
-  const [modalInfo, setModalInfo] = useRecoilState(modalState);
+  const [modal, setModal] = useRecoilState(modalState);
 
   useEffect(() => {
     setModalOutsideScroll();
-  }, [modalInfo]);
+  }, [modal]);
 
   const setModalOutsideScroll = () =>
-    (document.body.style.overflow = modalInfo.modalName ? 'hidden' : 'unset');
+    (document.body.style.overflow = modal.modalName ? 'hidden' : 'unset');
 
   const closeModalHandler = (e: React.MouseEvent) => {
-    if (modalInfo.modalName?.split('-')[0] === 'FIXED') return;
+    if (modal.modalName?.split('-')[0] === 'FIXED') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
-      setModalInfo({ modalName: null });
+      setModal({ modalName: null });
     }
   };
 
   const findModal = () => {
-    const { modalName, cancelInfo, enrollInfo } = modalInfo;
+    const { modalName, cancelInfo, enrollInfo } = modal;
     switch (modalName) {
       case 'MAIN-WELCOME':
         return <WelcomeModal />;
@@ -63,7 +63,7 @@ export default function ModalProvider() {
   };
 
   return (
-    modalInfo.modalName && (
+    modal.modalName && (
       <div
         className={styles.backdrop}
         id='modalOutside'

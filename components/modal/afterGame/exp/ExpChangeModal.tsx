@@ -4,24 +4,22 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
-import Celebration from './Celebration';
+import Celebration from './ExpCelebrate';
 import ExpGuage from './ExpGuage';
 import styles from 'styles/modal/ExpGameModal.module.scss';
 
 export default function ExpChangeModal() {
-  const [modalInfo, setModalInfo] = useRecoilState(modalState);
+  const [modal, setModal] = useRecoilState(modalState);
   const [user, setUser] = useState();
   const setErrorMessage = useSetRecoilState(errorState);
 
   useEffect(() => {
-    getExpInfoHandler();
+    getExpHandler();
   }, []);
 
-  const getExpInfoHandler = async () => {
+  const getExpHandler = async () => {
     try {
-      const res = await instance.get(
-        `/pingpong/games/${modalInfo.gameId}/result`
-      );
+      const res = await instance.get(`/pingpong/games/${modal.gameId}/result`);
       setUser(res?.data);
     } catch (e) {
       setErrorMessage('KP03');
@@ -46,7 +44,7 @@ export default function ExpChangeModal() {
           <div
             className={styles.celebratContainer}
             onClick={() => {
-              setModalInfo({ modalName: null });
+              setModal({ modalName: null });
             }}
           >
             <Celebration />
