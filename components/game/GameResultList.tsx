@@ -14,9 +14,9 @@ interface GameResultListProps {
 
 export default function GameResultList({ path }: GameResultListProps) {
   const { data, fetchNextPage, status, remove, refetch } = infScroll(path);
+  const [totalPage, setTotalPage] = useState();
   const [clickedItemId, setClickedItemId] =
     useRecoilState(clickedGameItemState);
-  const [totalPage, setTotalPage] = useState();
   const router = useRouter();
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function GameResultList({ path }: GameResultListProps) {
           ))}
         </>
       )}
-      {status === 'success' && router.asPath !== '/' && totalPage !== 1 && (
+      {status === 'success' && router.asPath === '/game' && totalPage !== 1 && (
         <div className={styles.getButton}>
           <input
             type='button'

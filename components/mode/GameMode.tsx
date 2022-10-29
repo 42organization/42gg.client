@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { RecordMode } from 'types/mainType';
@@ -14,9 +15,14 @@ interface GameModeProps {
 
 export default function GameMode({ children }: GameModeProps) {
   const [isMine, setIsMine] = useState(false);
-  const [season, setSeason] = useState<number>(0);
-  const seasonList = useRecoilValue(seasonListState);
+  const [season, setSeason] = useState(0);
   const [recordMode, setRecordMode] = useState<RecordMode>('both');
+  const seasonList = useRecoilValue(seasonListState);
+  const fromMine = useRouter().query.fromMine;
+
+  useEffect(() => {
+    if (fromMine) setIsMine(true);
+  }, []);
 
   const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRecordMode(e.target.value as RecordMode);
