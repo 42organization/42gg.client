@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import styles from 'styles/modal/ExpGameModal.module.scss';
 
-export default function ExpCelebrate() {
+export default function ExpCelebration() {
   useEffect(() => {
     for (let i = 0; i < 200; i++) {
       // Random rotation
