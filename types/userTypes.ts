@@ -1,4 +1,4 @@
-export interface BasicProfile {
+export interface ProfileBasic {
   intraId: string;
   userImageUri: string;
   racketType: string;
@@ -9,7 +9,7 @@ export interface BasicProfile {
   expRate: number;
 }
 
-export interface RankProfile {
+export interface ProfileRank {
   rank: number;
   ppp: number;
   wins: number;
