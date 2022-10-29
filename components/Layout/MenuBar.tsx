@@ -9,7 +9,7 @@ import styles from 'styles/Layout/MenuBar.module.scss';
 export default function MenuBar() {
   const user = useRecoilValue(userState);
   const resetOpenMenuBar = useResetRecoilState(menuBarState);
-  const setModalInfo = useSetRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
   const menuList = [
     {
       name: `${user.seasonMode === 'normal' ? 'VIP' : '랭킹'}`,
@@ -59,7 +59,7 @@ export default function MenuBar() {
                 >
                   사용 설명서
                 </div>
-                <div onClick={() => setModalInfo({ modalName: 'MENU-REPORT' })}>
+                <div onClick={() => setModal({ modalName: 'MENU-REPORT' })}>
                   건의하기
                 </div>
               </div>
@@ -73,7 +73,7 @@ export default function MenuBar() {
                   <div onClick={goToAdminPage}>😎 관리자</div>
                 </>
               )}
-              <div onClick={() => setModalInfo({ modalName: 'MENU-LOGOUT' })}>
+              <div onClick={() => setModal({ modalName: 'MENU-LOGOUT' })}>
                 로그아웃
               </div>
             </div>

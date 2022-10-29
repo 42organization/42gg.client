@@ -15,7 +15,7 @@ interface ProfileProps {
 export default function BasicProfile({ intraId }: ProfileProps) {
   const user = useRecoilValue(userState);
   const setErrorMessage = useSetRecoilState(errorState);
-  const setModalInfo = useSetRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
   const [profile, setProfile] = useRecoilState(profileState);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function BasicProfile({ intraId }: ProfileProps) {
   } = profile;
 
   const startEditHandler = () => {
-    setModalInfo({ modalName: 'USER-PROFILE_EDIT' });
+    setModal({ modalName: 'USER-PROFILE_EDIT' });
   };
 
   return (

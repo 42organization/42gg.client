@@ -80,7 +80,7 @@ export default function RankList({ mode, season }: RankListProps) {
         <RankListItem
           key={item.intraId}
           index={index}
-          rankedUser={item}
+          user={item}
           isRankMode={isRankMode}
           ppp={isRankModeType(item) ? item.ppp : null}
           level={!isRankModeType(item) ? item.level : null}

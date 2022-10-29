@@ -3,15 +3,15 @@ import { RankUser, NormalUser } from 'types/rankTypes';
 import styles from 'styles/rank/RankListMain.module.scss';
 
 interface RankListItemMainProps {
-  rankedUser: NormalUser | RankUser;
+  user: NormalUser | RankUser;
   isSeasonNormal: boolean;
 }
 
 export default function RankListItemMain({
-  rankedUser,
+  user,
   isSeasonNormal,
 }: RankListItemMainProps) {
-  const { rank, intraId, statusMessage } = rankedUser;
+  const { rank, intraId, statusMessage } = user;
   const messageFiltered =
     statusMessage.length > 10
       ? statusMessage.slice(0, 10) + '...'

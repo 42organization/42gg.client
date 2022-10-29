@@ -8,21 +8,21 @@ import NotiItem from './NotiItem';
 import styles from 'styles/Layout/NotiBar.module.scss';
 
 export default function NotiBar() {
-  const [notiData, setNotiData] = useState<Noti[]>([]);
+  const [noti, setNoti] = useState<Noti[]>([]);
   const [clickRefreshBtn, setClickRefreshBtn] = useState(false);
   const [refreshBtnAnimation, setRefreshBtnAnimation] = useState(false);
   const resetOpenNotiBar = useResetRecoilState(notiBarState);
   const setErrorMessage = useSetRecoilState(errorState);
 
   useEffect(() => {
-    getNotiDataHandler();
+    getNotiHandler();
   }, []);
 
   useEffect(() => {
-    if (clickRefreshBtn) getNotiDataHandler();
+    if (clickRefreshBtn) getNotiHandler();
   }, [clickRefreshBtn]);
 
-  const getNotiDataHandler = async () => {
+  const getNotiHandler = async () => {
     if (clickRefreshBtn) {
       setRefreshBtnAnimation(true);
       setTimeout(() => {
@@ -31,7 +31,7 @@ export default function NotiBar() {
     }
     try {
       const res = await instance.get(`/pingpong/notifications`);
-      setNotiData(res?.data.notifications);
+      setNoti(res?.data.notifications);
       setClickRefreshBtn(false);
     } catch (e) {
       setErrorMessage('JB04');
@@ -52,7 +52,7 @@ export default function NotiBar() {
     <div className={styles.backdrop} onClick={resetOpenNotiBar}>
       <div className={styles.container} onClick={(e) => e.stopPropagation()}>
         <button onClick={resetOpenNotiBar}>&#10005;</button>
-        {notiData.length ? (
+        {noti.length ? (
           <>
             <div className={styles.btnWrap}>
               <button
@@ -73,7 +73,7 @@ export default function NotiBar() {
               </button>
             </div>
             <div>
-              {notiData.map((data: Noti) => (
+              {noti.map((data: Noti) => (
                 <NotiItem key={data.id} data={data} />
               ))}
             </div>

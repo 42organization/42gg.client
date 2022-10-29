@@ -13,8 +13,8 @@ interface LoginCheckerProps {
 
 export default function LoginChecker({ children }: LoginCheckerProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
-  const setModalInfo = useSetRecoilState(modalState);
+  const [loggedIn, setLoggedIn] = useRecoilState(loginState);
+  const setModal = useSetRecoilState(modalState);
   const router = useRouter();
   const presentPath = router.asPath;
   const token = presentPath.split('?token=')[1];
@@ -22,16 +22,16 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
   useEffect(() => {
     if (token) {
       localStorage.setItem('42gg-token', token);
-      setModalInfo({ modalName: 'MAIN-WELCOME' });
+      setModal({ modalName: 'MAIN-WELCOME' });
       router.replace(`/`);
     }
     if (localStorage.getItem('42gg-token')) {
-      setIsLoggedIn(true);
+      setLoggedIn(true);
     }
     setIsLoading(false);
   }, []);
 
-  return isLoggedIn ? (
+  return loggedIn ? (
     <>{children}</>
   ) : (
     <div className={styles.appContainer}>

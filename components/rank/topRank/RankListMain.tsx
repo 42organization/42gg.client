@@ -23,7 +23,7 @@ export default function RankListMain({ rank }: RankListMainProps) {
       {rank?.rankList.map((item: NormalUser | RankUser) => (
         <RankListItemMain
           key={item.intraId}
-          rankedUser={item}
+          user={item}
           isSeasonNormal={isSeasonNormal}
         />
       ))}

@@ -24,13 +24,13 @@ type AppLayoutProps = {
 export default function AppLayout({ children }: AppLayoutProps) {
   const [user, setUser] = useRecoilState(userState);
   const [userLive, setUserLive] = useRecoilState(liveState);
-  const [openCurrentInfo, setOpenCurrentInfo] = useRecoilState(
+  const [openCurrentMatch, setOpenCurrentMatch] = useRecoilState(
     openCurrentMatchState
   );
   const [matchRefreshBtn, setMatchRefreshBtn] =
     useRecoilState(matchRefreshBtnState);
   const setErrorMessage = useSetRecoilState(errorState);
-  const setModalInfo = useSetRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
   const presentPath = useRouter().asPath;
   const setSeasonList = useSetRecoilState(seasonListState);
 
@@ -49,7 +49,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   };
 
   useEffect(() => {
-    setModalInfo({ modalName: null });
+    setModal({ modalName: null });
   }, [presentPath]);
 
   useEffect(() => {
@@ -60,11 +60,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }, [presentPath, user, matchRefreshBtn]);
 
   useEffect(() => {
-    if (userLive?.event === 'match') setOpenCurrentInfo(true);
+    if (userLive?.event === 'match') setOpenCurrentMatch(true);
     else {
       if (userLive?.event === 'game')
-        setModalInfo({ modalName: 'FIXED-AFTER_GAME' });
-      setOpenCurrentInfo(false);
+        setModal({ modalName: 'FIXED-AFTER_GAME' });
+      setOpenCurrentMatch(false);
     }
   }, [userLive]);
 
@@ -96,7 +96,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
             user.intraId && (
               <>
                 <Header />
-                {openCurrentInfo && <CurrentMatch />}
+                {openCurrentMatch && <CurrentMatch />}
                 {presentPath !== '/match' && presentPath !== '/manual' && (
                   <Link href='/match'>
                     <div className={styles.buttonContainer}>

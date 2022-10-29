@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useSetRecoilState } from 'recoil';
 import { Noti } from 'types/notiTypes';
-import { notiBar } from 'utils/recoil/layout';
+import { notiBarState } from 'utils/recoil/layout';
 import { gameTimeToString } from 'utils/handleTime';
 import styles from 'styles/Layout/NotiItem.module.scss';
 
@@ -10,8 +10,8 @@ type NotiItemProps = {
 };
 
 export default function NotiItem({ data }: NotiItemProps) {
-  const setOpenNotiBar = useSetRecoilState(notiBar);
-  const notiDate = data.createdAt.slice(5, 16).replace('T', ' ');
+  const setOpenNotiBar = useSetRecoilState(notiBarState);
+  const noti = data.createdAt.slice(5, 16).replace('T', ' ');
   const title = makeTitle(data.type);
   const content = () => {
     if (data.type === 'imminent' && data.enemyTeam && data.time)
@@ -46,7 +46,7 @@ export default function NotiItem({ data }: NotiItemProps) {
     >
       <span className={styles.title}>{title}</span>
       <div className={styles.content}>{content()}</div>
-      <div className={styles.date}>{notiDate}</div>
+      <div className={styles.date}>{noti}</div>
     </div>
   );
 }

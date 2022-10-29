@@ -6,7 +6,7 @@ import styles from 'styles/rank/RankList.module.scss';
 
 interface RankListItemRrops {
   index: number;
-  rankedUser: NormalUser | RankUser;
+  user: NormalUser | RankUser;
   isRankMode: boolean;
   ppp: number | null;
   level: number | null;
@@ -15,13 +15,13 @@ interface RankListItemRrops {
 
 export default function RankListItem({
   index,
-  rankedUser,
+  user,
   isRankMode,
   ppp,
   level,
   exp,
 }: RankListItemRrops) {
-  const { rank, intraId, statusMessage } = rankedUser;
+  const { rank, intraId, statusMessage } = user;
   const myIntraId = useRecoilValue(userState).intraId;
   const messageFiltered =
     statusMessage.length > 10
