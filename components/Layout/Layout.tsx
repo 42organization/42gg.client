@@ -24,7 +24,9 @@ type AppLayoutProps = {
 export default function AppLayout({ children }: AppLayoutProps) {
   const [user, setUser] = useRecoilState(userState);
   const [userLive, setUserLive] = useRecoilState(liveState);
-  const [openCurrent, setOpenCurrent] = useRecoilState(openCurrentMatchState);
+  const [openCurrentMatch, setOpenCurrentMatch] = useRecoilState(
+    openCurrentMatchState
+  );
   const [matchRefreshBtn, setMatchRefreshBtn] =
     useRecoilState(matchRefreshBtnState);
   const setErrorMessage = useSetRecoilState(errorState);
@@ -58,11 +60,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }, [presentPath, user, matchRefreshBtn]);
 
   useEffect(() => {
-    if (userLive?.event === 'match') setOpenCurrent(true);
+    if (userLive?.event === 'match') setOpenCurrentMatch(true);
     else {
       if (userLive?.event === 'game')
         setModal({ modalName: 'FIXED-AFTER_GAME' });
-      setOpenCurrent(false);
+      setOpenCurrentMatch(false);
     }
   }, [userLive]);
 
@@ -94,7 +96,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
             user.intraId && (
               <>
                 <Header />
-                {openCurrent && <CurrentMatch />}
+                {openCurrentMatch && <CurrentMatch />}
                 {presentPath !== '/match' && presentPath !== '/manual' && (
                   <Link href='/match'>
                     <div className={styles.buttonContainer}>
