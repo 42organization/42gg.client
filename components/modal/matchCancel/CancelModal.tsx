@@ -11,7 +11,7 @@ interface SlotProps {
 }
 
 export default function CancelModal({ slotId }: SlotProps) {
-  const setOpenCurrent = useSetRecoilState(openCurrentMatchState);
+  const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   const setErrorMessage = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const currentMatch = useRecoilValue(currentMatchState);
@@ -26,13 +26,13 @@ export default function CancelModal({ slotId }: SlotProps) {
         alert('이미 매칭이 완료된 경기입니다.');
       else {
         setModal({ modalName: null });
-        setOpenCurrent(false);
+        setOpenCurrentMatch(false);
         setErrorMessage('JH01');
         return;
       }
     }
     setModal({ modalName: null });
-    setOpenCurrent(false);
+    setOpenCurrentMatch(false);
     window.location.reload();
   };
 
