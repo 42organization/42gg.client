@@ -3,6 +3,6 @@ export interface Season {
   name: string;
 }
 
-export interface Seasons {
+export interface SeasonList {
   seasonList: Season[];
 }

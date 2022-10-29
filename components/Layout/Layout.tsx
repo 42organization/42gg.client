@@ -9,7 +9,7 @@ import {
 } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import { seasonState } from 'utils/recoil/seasons';
+import { seasonListState } from 'utils/recoil/seasons';
 import instance from 'utils/axios';
 import Statistics from 'pages/statistics';
 import Header from './Header';
@@ -32,7 +32,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const setErrorMessage = useSetRecoilState(errorState);
   const setModalInfo = useSetRecoilState(modalState);
   const presentPath = useRouter().asPath;
-  const setSeasonList = useSetRecoilState(seasonState);
+  const setSeasonList = useSetRecoilState(seasonListState);
 
   useEffect(() => {
     getUserHandler();
