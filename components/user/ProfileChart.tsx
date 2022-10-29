@@ -70,9 +70,9 @@ interface ChartProps {
   season?: string;
 }
 
-export default function Chart({ intraId, season }: ChartProps) {
+export default function ProfileChart({ intraId, season }: ChartProps) {
   const setErrorMessage = useSetRecoilState(errorState);
-  const [chartData, setChartData] = useState<PppChart[]>([
+  const [chart, setChart] = useState<PppChart[]>([
     { ppp: 0, date: '1970-01-01' },
   ]);
 
@@ -84,7 +84,7 @@ export default function Chart({ intraId, season }: ChartProps) {
           // 백에서 아직 현재 시즌(season=0)에 대한 구현이 안되어 season=1로 고정해둡니다.
           `/pingpong/users/${intraId}/historics?season=1`
         );
-        setChartData(res?.data.historics);
+        setChart(res?.data.historics);
       } catch (e) {
         setErrorMessage('SJ02');
       }
@@ -93,17 +93,17 @@ export default function Chart({ intraId, season }: ChartProps) {
 
   const data = useMemo(
     () => ({
-      labels: chartData.map((e) => gameTimeToString(e.date)),
+      labels: chart.map((e) => gameTimeToString(e.date)),
       datasets: [
         {
           label: 'ppp',
-          data: chartData.map((e) => e.ppp),
+          data: chart.map((e) => e.ppp),
           borderColor: 'rgb(255, 99, 132)',
           backgroundColor: 'rgba(255, 99, 132, 0.5)',
         },
       ],
     }),
-    [chartData]
+    [chart]
   );
 
   return (

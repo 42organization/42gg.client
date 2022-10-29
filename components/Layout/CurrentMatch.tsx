@@ -14,10 +14,10 @@ export default function CurrentMatch() {
   const { isMatched, enemyTeam, time, slotId } = currentMatch;
   const [matchRefreshBtn, setMatchRefreshBtn] =
     useRecoilState(matchRefreshBtnState);
-  const setModalInfo = useSetRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
   const setErrorMessage = useSetRecoilState(errorState);
   const matchingMessage = time && makeMessage(time, isMatched);
-  const isblockCancelBtn = isBeforeMin(time, 5) && enemyTeam.length;
+  const isBlockCancelBtn = isBeforeMin(time, 5) && enemyTeam.length;
   const presentPath = useRouter().asPath;
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function CurrentMatch() {
   };
 
   const onCancel = () => {
-    setModalInfo({
+    setModal({
       modalName: 'MATCH-CANCEL',
       cancelInfo: { slotId, time, enemyTeam },
     });
@@ -48,18 +48,18 @@ export default function CurrentMatch() {
           <div className={styles.icon}> ⏰ </div>
           <div className={styles.messageWrapper}>
             {matchingMessage}
-            <EnemyTeamInfo enemyTeam={enemyTeam} time={time} />
+            <EnemyTeam enemyTeam={enemyTeam} time={time} />
           </div>
         </div>
         <div
           className={
-            isblockCancelBtn ? styles.blockCancelButton : styles.cancelButton
+            isBlockCancelBtn ? styles.blockCancelButton : styles.cancelButton
           }
         >
           <input
             type='button'
             onClick={onCancel}
-            value={isblockCancelBtn ? '취소불가' : '취소하기'}
+            value={isBlockCancelBtn ? '취소불가' : '취소하기'}
           />
         </div>
       </div>
@@ -70,7 +70,7 @@ export default function CurrentMatch() {
 function makeMessage(time: string, isMatched: boolean) {
   const formattedTime = gameTimeToString(time);
   return (
-    <div className={styles.messageString}>
+    <div className={styles.message}>
       <span>{formattedTime}</span>
       <span>
         {isMatched ? (
@@ -89,12 +89,12 @@ function makeMessage(time: string, isMatched: boolean) {
     </div>
   );
 }
-interface EnemyTeamInfo {
+interface EnemyTeam {
   enemyTeam: string[];
   time: string;
 }
 
-function EnemyTeamInfo({ enemyTeam, time }: EnemyTeamInfo) {
+function EnemyTeam({ enemyTeam, time }: EnemyTeam) {
   if (!isBeforeMin(time, 5) || enemyTeam.length === 0) return <></>;
   const enemyUsers = enemyTeam.map((intraId, i) => (
     <span key={intraId} id={styles.enemyUsers}>
@@ -102,5 +102,5 @@ function EnemyTeamInfo({ enemyTeam, time }: EnemyTeamInfo) {
       {i < enemyTeam.length - 1 ? ', ' : ''}
     </span>
   ));
-  return <div className={styles.enemyTeamString}> 상대팀 : {enemyUsers}</div>;
+  return <div className={styles.enemyTeam}> 상대팀 : {enemyUsers}</div>;
 }
