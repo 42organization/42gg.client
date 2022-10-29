@@ -7,9 +7,9 @@ interface ModeToggleProps {
 }
 
 export default function ModeToggle({
-  onToggle,
-  text,
   checked,
+  text,
+  onToggle,
 }: ModeToggleProps) {
   return (
     <div>
