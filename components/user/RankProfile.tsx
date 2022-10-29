@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { RankProfile } from 'types/userTypes';
+import { ProfileRank } from 'types/userTypes';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import Chart from 'components/user/Chart';
@@ -28,7 +28,7 @@ export default function RankProfile({ intraId }: RankProfileProps) {
 
 function RankInfo({ intraId, season }: RankProps) {
   const setErrorMessage = useSetRecoilState(errorState);
-  const [rankProfile, setRankProfile] = useState<RankProfile>({
+  const [rankProfile, setRankProfile] = useState<ProfileRank>({
     rank: 0,
     ppp: 0,
     wins: 0,

@@ -7,7 +7,7 @@
   color: white;
   font-weight: 600;
   font-size: $medium-font;
-  text-shadow: 0.1rem 0.1rem 0.1rem $pp-blue;
+  text-shadow: 0.1rem 0.1rem 0.1rem $rank-blue;
   text-align: center;
   span {
     color: $g1-top;
@@ -46,13 +46,13 @@
 
 .division {
   @include rankGrid;
-  background: $pp-red;
+  background: $rank-red;
   color: white;
   font-weight: 700;
 }
 
 .normal {
-  background: $pp-blue;
+  background: $norm-lightblue2;
 }
 
 .level {
@@ -72,7 +72,7 @@
 }
 .myself {
   @include rankGrid;
-  border: 0.07rem solid $pp-red;
+  border: 0.07rem solid $rank-red;
   background: $g1-bottom;
 }
 

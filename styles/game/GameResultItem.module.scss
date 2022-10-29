@@ -27,10 +27,10 @@
   margin-bottom: 0.2rem;
   border-radius: $medium-radius;
   &.rank {
-    background: linear-gradient(135deg, $pp-red, $pp-blue);
+    background: linear-gradient(135deg, $rank-red, $rank-blue);
   }
   &.normal {
-    background: linear-gradient(135deg, $pp-pink, $pp-blue);
+    background: linear-gradient(135deg, $norm-lightblue, $norm-hotpink);
   }
 }
 
