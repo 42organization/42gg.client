@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { getChartList } from 'utils/handleChartList';
-import StatisticsChartData from './StatisticsChartData';
+import StatisticsChart from './StatisticsCharts';
 import styles from 'styles/statistics/StatisticsSelect.module.scss';
 
 type chartListElement = {
@@ -41,7 +41,7 @@ export default function StatisticsSelect() {
       <div className={styles.chartSelectContainer}>
         <div>{returnCharList()}</div>
       </div>
-      <StatisticsChartData
+      <StatisticsChart
         chartName={chartName}
         chartType={chartType}
         apiPath={apiPath}

@@ -1,59 +1,79 @@
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  ChartTypeRegistry,
-} from 'chart.js';
-import { Chart } from 'react-chartjs-2';
-import { Graphs, GraphValue } from 'types/chartTypes';
-ChartJS.register(
-  ArcElement,
-  LinearScale,
-  CategoryScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Legend,
-  Tooltip
-);
+import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { Graphs } from 'types/chartTypes';
+import { errorState } from 'utils/recoil/error';
+import axios from 'axios';
+import StatisticsChart from './StatisticsChart';
+import styles from 'styles/statistics/StatisticsSelect.module.scss';
 
-type ChartType = {
+type chartElementprops = {
+  chartName: string;
   chartType: string;
-  chart: Graphs;
+  apiPath: string;
 };
 
-export default function StatisticsChart({ chartType, chart }: ChartType) {
-  const chartLabel = chart ? chart.graphs[0].graphName : '';
-  const chartLabels = chart
-    ? chart.graphs[0].graphData.map((item: GraphValue) => item.date)
-    : [];
-  const charData = chart
-    ? chart.graphs[0].graphData.map((item: GraphValue) => item.count)
-    : '';
-  const options = {
-    responsive: true,
+export default function StatisticsCharts({
+  chartName,
+  chartType,
+  apiPath,
+}: chartElementprops) {
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [chart, setChart] = useState<Graphs>();
+  const setErrorMessage = useSetRecoilState(errorState);
+
+  const clickGetChart = () => {
+    getChartHandler();
   };
-  const chartData = {
-    labels: chartLabels,
-    datasets: [
-      {
-        type: chartType as keyof ChartTypeRegistry,
-        label: chartLabel,
-        backgroundColor: ['rgba(255, 99, 132, 1)'],
-        data: charData,
-      },
-    ],
+
+  const getChartHandler = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3000/api/pingpong/stat/visit`
+      );
+      setChart(res.data);
+    } catch (e) {
+      setErrorMessage('KP02');
+    }
+  };
+
+  const startDateHandler = ({
+    target: date,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setStartDate(date.value);
+  };
+  const endDateHandler = ({
+    target: date,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setEndDate(date.value);
   };
 
   return (
-    <div>
-      <Chart type='bar' data={chartData} options={options} />
+    <div className={styles.chart}>
+      <h1>{chartName}</h1>
+      <hr></hr>
+      <input
+        className={styles.date}
+        type={'date'}
+        onChange={startDateHandler}
+        value={startDate}
+        min={'2022-09-05'}
+      ></input>
+      ~
+      <input
+        className={styles.date}
+        type={'date'}
+        onChange={endDateHandler}
+        value={endDate}
+        min={startDate}
+      ></input>
+      <input
+        className={styles.submitButton}
+        type={'button'}
+        value={'요청'}
+        onClick={clickGetChart}
+      ></input>
+      {chart ? <StatisticsChart chartType={chartType} chart={chart} /> : ''}
     </div>
   );
 }

@@ -3,10 +3,10 @@ import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/MatchRejectModal.module.scss';
 
 export default function MatchRejectModal() {
-  const setModalInfo = useSetRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
 
   const onReturn = () => {
-    setModalInfo({ modalName: null });
+    setModal({ modalName: null });
   };
 
   return (

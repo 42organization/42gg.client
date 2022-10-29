@@ -1,29 +1,29 @@
 import { AfterGame } from 'types/scoreTypes';
 import { isAfterMin } from 'utils/handleTime';
 import { Button } from './Buttons';
-import { MatchTeamsInfo } from './MatchTeamsInfo';
+import { MatchTeams } from './MatchTeams';
 import Guide, { GuideLine } from './Guide';
 import styles from 'styles/modal/AfterGameModal.module.scss';
 
-interface NormalGameModalProps {
-  currentGameInfo: AfterGame;
+interface NormalGameProps {
+  currentGame: AfterGame;
   guideLine: GuideLine;
   onSubmit: () => void;
 }
 
-export default function NormalGameModal({
-  currentGameInfo,
+export default function NormalGame({
+  currentGame,
   guideLine,
   onSubmit,
-}: NormalGameModalProps) {
-  const { startTime, matchTeamsInfo } = currentGameInfo;
+}: NormalGameProps) {
+  const { startTime, matchTeamsInfo } = currentGame;
   const canBeCompleted = isAfterMin(startTime, 10);
 
   return (
     <div className={styles.container}>
       <Guide condition={canBeCompleted} guideLine={guideLine} />
       <div className={styles.resultContainer}>
-        <MatchTeamsInfo matchTeamsInfo={matchTeamsInfo} />
+        <MatchTeams matchTeams={matchTeamsInfo} />
       </div>
       {canBeCompleted && (
         <div className={styles.buttons}>
