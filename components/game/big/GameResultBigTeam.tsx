@@ -1,21 +1,25 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Team } from 'types/gameTypes';
-import styles from 'styles/game/GameResultItem.module.scss';
 import router from 'next/router';
+import { useState } from 'react';
+import { Team } from 'types/gameTypes';
+import fallBack from 'public/image/fallBackSrc.jpeg';
+import styles from 'styles/game/GameResultItem.module.scss';
 
 type gameResultTypes = {
   team: Team;
 };
 
 export default function GameResultBigTeam({ team }: gameResultTypes) {
+  const [imgError, setImgError] = useState(false);
+
   return (
     <div className={styles.bigTeam}>
       <div className={styles.userImage}>
         {team.players.map((player, index) => (
           <Image
             key={index}
-            src={player.userImageUri}
+            src={imgError ? fallBack : player.userImageUri}
             alt='prfImg'
             layout='fill'
             objectFit='cover'
@@ -24,6 +28,7 @@ export default function GameResultBigTeam({ team }: gameResultTypes) {
             onClick={() => {
               router.push(`/users/detail?intraId=${player.intraId}`);
             }}
+            onError={() => setImgError(true)}
           />
         ))}
       </div>

@@ -5,6 +5,7 @@ import { PlayerInfo, GameResult } from 'types/scoreTypes';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
+import fallBack from 'public/image/fallBackSrc.jpeg';
 import styles from 'styles/modal/InputScoreModal.module.scss';
 
 const defaultPlayersInfo: PlayerInfo[] = [{ intraId: '', userImageUri: '' }];
@@ -17,6 +18,7 @@ export default function InputScoreModal() {
     useState<PlayerInfo[]>(defaultPlayersInfo);
   const [result, setResult] = useState<GameResult>(defaultResult);
   const [onCheck, setOnCheck] = useState<boolean>(false);
+  const [imgError, setImgError] = useState(false);
   const setErrorMessage = useSetRecoilState(errorState);
   const setModalInfo = useSetRecoilState(modalState);
 
@@ -103,12 +105,13 @@ export default function InputScoreModal() {
                 {userInfo.userImageUri && (
                   <Image
                     key={index}
-                    src={userInfo.userImageUri}
+                    src={imgError ? fallBack : userInfo.userImageUri}
                     alt='prfImg'
                     layout='fill'
                     objectFit='cover'
                     sizes='30vw'
                     quality='30'
+                    onError={() => setImgError(true)}
                   />
                 )}
               </div>

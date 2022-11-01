@@ -1,11 +1,12 @@
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
 import { profileInfoState } from 'utils/recoil/user';
 import { userState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
+import fallBack from 'public/image/fallBackSrc.jpeg';
 import styles from 'styles/user/Profile.module.scss';
 
 interface ProfileProps {
@@ -17,6 +18,7 @@ export default function Profile({ intraId }: ProfileProps) {
   const setErrorMessage = useSetRecoilState(errorState);
   const setModalInfo = useSetRecoilState(modalState);
   const [profileInfo, setProfileInfo] = useRecoilState(profileInfoState);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -69,12 +71,13 @@ export default function Profile({ intraId }: ProfileProps) {
           <div className={styles.userImage}>
             {userImageUri && (
               <Image
-                src={userImageUri}
+                src={imgError ? fallBack : userImageUri}
                 alt='prfImg'
                 layout='fill'
                 objectFit='cover'
                 sizes='30vw'
                 quality='30'
+                onError={() => setImgError(true)}
               />
             )}
           </div>
