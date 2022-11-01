@@ -77,6 +77,7 @@ export default function Profile({ intraId }: ProfileProps) {
                 objectFit='cover'
                 sizes='30vw'
                 quality='30'
+                unoptimized={imgError ? true : false}
                 onError={() => setImgError(true)}
               />
             )}

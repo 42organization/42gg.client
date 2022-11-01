@@ -27,6 +27,7 @@ export default function GameResultSmallTeam({
               objectFit='cover'
               sizes='20vw'
               quality='20'
+              unoptimized={imgError ? true : false}
               onError={() => setImgError(true)}
             />
           ))}

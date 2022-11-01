@@ -28,6 +28,7 @@ export default function GameResultBigTeam({ team }: gameResultTypes) {
             onClick={() => {
               router.push(`/users/detail?intraId=${player.intraId}`);
             }}
+            unoptimized={imgError ? true : false}
             onError={() => setImgError(true)}
           />
         ))}
