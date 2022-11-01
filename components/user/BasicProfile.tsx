@@ -1,11 +1,12 @@
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
 import { profileState } from 'utils/recoil/user';
 import { userState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
+import fallBack from 'public/image/fallBackSrc.jpeg';
 import styles from 'styles/user/Profile.module.scss';
 
 interface ProfileProps {
@@ -17,6 +18,7 @@ export default function BasicProfile({ intraId }: ProfileProps) {
   const setErrorMessage = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const [profile, setProfile] = useRecoilState(profileState);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -24,6 +26,7 @@ export default function BasicProfile({ intraId }: ProfileProps) {
         const res = await instance.get(`/pingpong/users/${intraId}/detail`);
         setProfile(res?.data);
       } catch (e) {
+        console.log(e);
         setErrorMessage('SJ03');
       }
     })();
@@ -50,12 +53,14 @@ export default function BasicProfile({ intraId }: ProfileProps) {
           <div>
             {userImageUri && (
               <Image
-                src={userImageUri}
+                src={imgError ? fallBack : userImageUri}
                 alt='prfImg'
                 layout='fill'
                 objectFit='cover'
                 sizes='30vw'
                 quality='30'
+                unoptimized={imgError}
+                onError={() => setImgError(true)}
               />
             )}
           </div>

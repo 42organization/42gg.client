@@ -1,5 +1,7 @@
 import Image from 'next/image';
+import { useState } from 'react';
 import { Player, Players } from 'types/scoreTypes';
+import fallBack from 'public/image/fallBackSrc.jpeg';
 import styles from 'styles/modal/AfterGameModal.module.scss';
 
 export function MatchTeams({ matchTeams }: { matchTeams: Players }) {
@@ -26,16 +28,20 @@ function Team({ team }: { team: Player[] }) {
 }
 
 function PlayerImage({ userImageUri }: { userImageUri: string }) {
+  const [imgError, setImgError] = useState(false);
+
   return (
     <div className={styles.userImage}>
       {userImageUri && (
         <Image
-          src={userImageUri}
+          src={imgError ? fallBack : userImageUri}
           alt='prfImg'
           layout='fill'
           objectFit='cover'
           sizes='30vw'
           quality='30'
+          unoptimized={imgError}
+          onError={() => setImgError(true)}
         />
       )}
     </div>

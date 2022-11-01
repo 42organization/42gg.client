@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
   menuBarState,
@@ -12,6 +13,7 @@ import NotiBar from './NotiBar';
 import { FiMenu } from 'react-icons/fi';
 import { BsMegaphone } from 'react-icons/bs';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
+import fallBack from 'public/image/fallBackSrc.jpeg';
 import styles from 'styles/Layout/Header.module.scss';
 
 export default function Header() {
@@ -19,6 +21,7 @@ export default function Header() {
   const [userLive, setUserLive] = useRecoilState(liveState);
   const [openMenuBar, setOpenMenuBar] = useRecoilState(menuBarState);
   const [openNotiBar, setOpenNotiBar] = useRecoilState(notiBarState);
+  const [imgError, setImgError] = useState(false);
 
   const openMenuBarHandler = () => {
     setOpenMenuBar(!openMenuBar);
@@ -64,12 +67,14 @@ export default function Header() {
             <div className={styles.userImage}>
               {user.userImageUri && (
                 <Image
-                  src={user.userImageUri}
+                  src={imgError ? fallBack : user.userImageUri}
                   alt='prfImg'
                   layout='fill'
                   objectFit='cover'
                   sizes='20vw'
                   quality='20'
+                  unoptimized={imgError}
+                  onError={() => setImgError(true)}
                 />
               )}
             </div>
