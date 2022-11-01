@@ -15,7 +15,7 @@ interface GameResultListProps {
 export default function GameResultList({ path }: GameResultListProps) {
   const { data, fetchNextPage, status, remove, refetch } = infScroll(path);
   const [totalPage, setTotalPage] = useState();
-  const [clickedItemId, setClickedItemId] =
+  const [clickedGameItem, setClickedGameItem] =
     useRecoilState(clickedGameItemState);
   const router = useRouter();
 
@@ -27,7 +27,7 @@ export default function GameResultList({ path }: GameResultListProps) {
   useEffect(() => {
     const getTotalPage = data?.pages[data.pages.length - 1].totalPage;
     if (data?.pages.length === 1 && getTotalPage !== 0)
-      setClickedItemId(data?.pages[0].games[0].gameId);
+      setClickedGameItem(data?.pages[0].games[0].gameId);
     setTotalPage(getTotalPage);
   }, [data]);
 
@@ -45,7 +45,7 @@ export default function GameResultList({ path }: GameResultListProps) {
                 <GameResultItem
                   key={game.gameId}
                   game={game}
-                  isBig={clickedItemId === game.gameId}
+                  isBig={clickedGameItem === game.gameId}
                 />
               ))}
             </div>

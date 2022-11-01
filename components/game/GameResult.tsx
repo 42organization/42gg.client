@@ -25,18 +25,18 @@ export default function GameResult({ mode, season, isMine }: GameResultProps) {
       setPath(`/pingpong/games?count=3&gameId=`);
       return;
     }
-    const userOption = isMine
+    const userQuery = isMine
       ? `/users/${myIntraId}`
       : intraId
       ? `/users/${intraId}`
       : '';
-    const seasonOption = mode === 'rank' && `season=${season}`;
-    const modeOption = mode !== 'both' && `mode=${mode}`;
-    const countOption = router.pathname === '/users/detail' && 'count=5';
-    const query = [modeOption, seasonOption, countOption, 'gameId=']
+    const seasonQuery = mode === 'rank' && `season=${season}`;
+    const modeQuery = mode !== 'both' && `mode=${mode}`;
+    const countQuery = router.pathname === '/users/detail' && 'count=5';
+    const query = [modeQuery, seasonQuery, countQuery, 'gameId=']
       .filter((item) => item)
       .join('&');
-    setPath(`/pingpong${userOption}/games?${query}`);
+    setPath(`/pingpong${userQuery}/games?${query}`);
     return;
   };
 
