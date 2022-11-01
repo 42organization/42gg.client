@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import router from 'next/router';
+import { useState } from 'react';
 import { RankResult, RankPlayer, NormalPlayer } from 'types/gameTypes';
+import fallBack from 'public/image/fallBackSrc.jpeg';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultBigTeamProps {
@@ -15,6 +17,7 @@ export function isRankPlayerType(
 }
 
 export default function GameResultBigTeam({ team }: GameResultBigTeamProps) {
+  const [imgError, setImgError] = useState(false);
   const makeRate = (player: RankPlayer | NormalPlayer) =>
     isRankPlayerType(player) ? (
       <span>
@@ -30,12 +33,14 @@ export default function GameResultBigTeam({ team }: GameResultBigTeamProps) {
         {team.players.map((player, index) => (
           <Image
             key={index}
-            src={player.userImageUri}
+            src={imgError ? fallBack : player.userImageUri}
             alt='prfImg'
             layout='fill'
             objectFit='cover'
             sizes='30vw'
             quality='30'
+            unoptimized={imgError}
+            onError={() => setImgError(true)}
             onClick={() => {
               router.push(`/users/detail?intraId=${player.intraId}`);
             }}
