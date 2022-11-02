@@ -3,8 +3,8 @@
 .toggleSwitch {
   display: block;
   position: relative;
-  width: 5rem;
-  height: 2rem;
+  width: 4rem;
+  height: 1.6rem;
   border-radius: 2rem;
   background: $dark-gray;
   color: white;
@@ -26,8 +26,8 @@
   position: absolute;
   top: 50%;
   left: 0.2rem;
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1.3rem;
+  height: 1.3rem;
   border-radius: 50%;
   background: white;
   transform: translateY(-50%);
@@ -46,7 +46,7 @@
 
 .toggle:checked ~ .toggleSwitch .toggleButton {
   /* 100% -> 끝위치, 1.8rem -> 기존 left(0.2) + 버튼 크기(1.6) */
-  left: calc(100% - 1.8rem);
+  left: calc(100% - 1.5rem);
   background: white;
 }
 

@@ -1,32 +1,31 @@
 @import '../common.scss';
 
 .modeButtons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0.5rem;
-  //margin-bottom: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: stretch;
+  align-items: stretch;
+  margin: 0.5rem 0.6rem 0 0.6rem;
   color: white;
   input[type='radio'] {
     position: absolute;
     opacity: 0;
   }
-  :checked + .modeButtonText {
-    background: rgba(223, 223, 223, 0.3);
+  :checked + .modeButton {
+    background: rgba(223, 223, 223, 0.5);
   }
   .modeButton {
-    width: 33%;
-    //padding-block: 0.5rem;
-  }
-  .modeButtonText {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-block: 0.2rem;
+    // margin: 0 0.1rem;
+    padding-block: 0.3rem;
     border: solid 1px white;
-    border-radius: $mini-radius;
+    border-radius: $small-radius;
     border-bottom-style: none;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    // background: $gray;
     font-size: 1rem;
     text-align: center;
     cursor: pointer;
