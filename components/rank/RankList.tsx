@@ -47,7 +47,12 @@ export default function RankList({ mode, season }: RankListProps) {
 
   useEffect(() => {
     getRankDataHandler();
-  }, [page, mode, season]);
+  }, [page]);
+
+  useEffect(() => {
+    setPage(1);
+    getRankDataHandler();
+  }, [mode, season]);
 
   useEffect(() => {
     if (isScroll) {
