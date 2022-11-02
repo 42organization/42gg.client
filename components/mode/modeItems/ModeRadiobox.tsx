@@ -1,8 +1,8 @@
-import { RecordMode } from 'types/mainType';
+import { SeasonMode } from 'types/mainType';
 import styles from 'styles/mode/ModeRadiobox.module.scss';
 
 interface ModeRadioboxProps {
-  mode: RecordMode;
+  mode: SeasonMode;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -16,7 +16,7 @@ export default function ModeRadiobox({ mode, onChange }: ModeRadioboxProps) {
   return (
     <div className={styles.modeButtons}>
       {modes.map(({ type, name }) => (
-        <label key={type} htmlFor={type} className={styles.modeButton}>
+        <label key={type} htmlFor={type}>
           <input
             type='radio'
             id={type}
@@ -24,7 +24,7 @@ export default function ModeRadiobox({ mode, onChange }: ModeRadioboxProps) {
             onChange={onChange}
             checked={mode === type}
           />
-          <div className={styles.modeButtonText}>{name}</div>
+          <div className={styles.modeButton}>{name}</div>
         </label>
       ))}
     </div>

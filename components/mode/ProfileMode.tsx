@@ -10,8 +10,8 @@ interface ProfileModeProps {
 }
 
 export default function ProfileMode({ children }: ProfileModeProps) {
-  const [season, setSeason] = useState<number>(0);
-  const seasonList = useRecoilValue(seasonListState);
+  const { seasonList } = useRecoilValue(seasonListState);
+  const [season, setSeason] = useState<number>(seasonList[0].id);
 
   const seasonDropDownHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSeason(parseInt(e.target.value));
@@ -22,7 +22,7 @@ export default function ProfileMode({ children }: ProfileModeProps) {
       <div className={styles.wrapperRight}>
         {seasonList && (
           <SeasonDropDown
-            seasons={seasonList}
+            seasonList={seasonList}
             value={season}
             onSelect={seasonDropDownHandler}
           />

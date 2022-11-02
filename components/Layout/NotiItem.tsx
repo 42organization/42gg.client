@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useSetRecoilState } from 'recoil';
 import { Noti } from 'types/notiTypes';
-import { notiBarState } from 'utils/recoil/layout';
+import { openNotiBarState } from 'utils/recoil/layout';
 import { gameTimeToString } from 'utils/handleTime';
 import styles from 'styles/Layout/NotiItem.module.scss';
 
@@ -10,7 +10,7 @@ type NotiItemProps = {
 };
 
 export default function NotiItem({ data }: NotiItemProps) {
-  const setOpenNotiBar = useSetRecoilState(notiBarState);
+  const setOpenNotiBar = useSetRecoilState(openNotiBarState);
   const noti = data.createdAt.slice(5, 16).replace('T', ' ');
   const title = makeTitle(data.type);
   const content = () => {

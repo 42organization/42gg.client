@@ -23,7 +23,7 @@ type AppLayoutProps = {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   const [user, setUser] = useRecoilState(userState);
-  const [userLive, setUserLive] = useRecoilState(liveState);
+  const [live, setLive] = useRecoilState(liveState);
   const [openCurrentMatch, setOpenCurrentMatch] = useRecoilState(
     openCurrentMatchState
   );
@@ -42,7 +42,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const getSeasonListHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/seasonlist`);
-      setSeasonList(res?.data);
+      setSeasonList({ ...res?.data });
     } catch (e) {
       setErrorMessage('DK02');
     }
@@ -60,18 +60,17 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }, [presentPath, user, matchRefreshBtn]);
 
   useEffect(() => {
-    if (userLive?.event === 'match') setOpenCurrentMatch(true);
+    if (live?.event === 'match') setOpenCurrentMatch(true);
     else {
-      if (userLive?.event === 'game')
-        setModal({ modalName: 'FIXED-AFTER_GAME' });
+      if (live?.event === 'game') setModal({ modalName: 'FIXED-AFTER_GAME' });
       setOpenCurrentMatch(false);
     }
-  }, [userLive]);
+  }, [live]);
 
   const getUserHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/users`);
-      setUser({ ...res?.data });
+      setUser(res?.data);
     } catch (e) {
       setErrorMessage('JB02');
     }
@@ -80,7 +79,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const getLiveDataHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/users/live`);
-      setUserLive({ ...res?.data });
+      setLive({ ...res?.data });
     } catch (e) {
       setErrorMessage('JB03');
     }

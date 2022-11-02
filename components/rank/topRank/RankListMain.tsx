@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import { RankUser, NormalUser, Rank } from 'types/rankTypes';
-import { userState } from 'utils/recoil/layout';
+import { seasonListState } from 'utils/recoil/seasons';
 import RankListItemMain from './RankListItemMain';
 import styles from 'styles/rank/RankListMain.module.scss';
 
@@ -9,14 +9,15 @@ interface RankListMainProps {
 }
 
 export default function RankListMain({ rank }: RankListMainProps) {
-  const seasonMode = useRecoilValue(userState).seasonMode;
-  const isSeasonNormal = seasonMode === 'normal';
-  const mainTitle = isSeasonNormal ? 'Vip' : 'Champion';
+  const { seasonMode } = useRecoilValue(seasonListState);
+  const isNormalSeason = seasonMode === 'normal';
+  const mainTitle = isNormalSeason ? 'Vip' : 'Champion';
+
   return (
     <div className={styles.mainContainer}>
       <div
         className={`${styles.mainTitle}
-				${isSeasonNormal ? styles.normal : styles.rank}`}
+				${isNormalSeason ? styles.normal : styles.rank}`}
       >
         {mainTitle}
       </div>
@@ -24,7 +25,7 @@ export default function RankListMain({ rank }: RankListMainProps) {
         <RankListItemMain
           key={item.intraId}
           user={item}
-          isSeasonNormal={isSeasonNormal}
+          isSeasonNormal={isNormalSeason}
         />
       ))}
     </div>
