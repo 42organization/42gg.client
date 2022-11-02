@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
-import { menuBarState } from 'utils/recoil/layout';
+import { openMenuBarState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/modal/ReportModal.module.scss';
@@ -17,8 +17,8 @@ export default function ReportModal() {
     content: '',
   });
   const setModal = useSetRecoilState(modalState);
-  const setErrorMessage = useSetRecoilState(errorState);
-  const setOpenMenuBar = useSetRecoilState(menuBarState);
+  const setError = useSetRecoilState(errorState);
+  const setOpenMenuBar = useSetRecoilState(openMenuBarState);
   const reportCategory = [
     { id: 'GAMERESULT', label: '게임 결과 정정 요청' },
     { id: 'BUG', label: '버그 신고' },
@@ -51,7 +51,7 @@ export default function ReportModal() {
         setOpenMenuBar(false);
         alert('신고가 완료되었습니다.');
       } catch (e) {
-        setErrorMessage('JH06');
+        setError('JH06');
       }
     } else {
       alert('마음을 담아 신고를 해주세요 ❤️');

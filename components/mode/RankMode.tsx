@@ -1,7 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { userState } from 'utils/recoil/layout';
 import { seasonListState } from 'utils/recoil/seasons';
 import ModeToggle from './modeItems/ModeToggle';
 import SeasonDropDown from './modeItems/SeasonDropDown';
@@ -13,19 +12,22 @@ interface RankModeProps {
 }
 
 export default function RankMode({ children, setModeProps }: RankModeProps) {
-  const user = useRecoilValue(userState);
-  const [season, setSeason] = useState<number>(0);
-  const [seasonMode, setSeasonMode] = useState(user?.seasonMode);
-  const [displaySeasons, setDisplaySeasons] = useState(true);
-  const seasonList = useRecoilValue(seasonListState);
+  const { seasonMode, seasonList } = useRecoilValue(seasonListState);
+  const [season, setSeason] = useState<number>(seasonList[0]?.id);
+  const [toggleMode, setToggleMode] = useState<string>(
+    seasonMode === 'normal' ? 'normal' : 'rank'
+  );
+  const [displaySeasons, setDisplaySeasons] = useState<boolean>(
+    seasonMode !== 'normal'
+  );
 
   useEffect(() => {
-    setDisplaySeasons(seasonMode === 'rank');
-    setModeProps(seasonMode);
-  }, [seasonMode]);
+    setDisplaySeasons(toggleMode === 'rank');
+    setModeProps(toggleMode);
+  }, [toggleMode]);
 
   const modeToggleHandler = () => {
-    setSeasonMode((mode) => (mode === 'rank' ? 'normal' : 'rank'));
+    setToggleMode((mode) => (mode === 'rank' ? 'normal' : 'rank'));
   };
 
   const seasonDropDownHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -36,20 +38,20 @@ export default function RankMode({ children, setModeProps }: RankModeProps) {
     <div>
       <div className={styles.wrapper}>
         <ModeToggle
-          checked={seasonMode === 'rank'}
+          checked={toggleMode === 'rank'}
           onToggle={modeToggleHandler}
-          text={seasonMode === 'rank' ? '랭크' : '일반'}
+          text={toggleMode === 'rank' ? '랭크' : '일반'}
         />
         {displaySeasons && seasonList && (
           <SeasonDropDown
-            seasons={seasonList}
+            seasonList={seasonList}
             value={season}
             onSelect={seasonDropDownHandler}
           />
         )}
       </div>
       {React.cloneElement(children as React.ReactElement, {
-        mode: seasonMode,
+        mode: toggleMode,
         season,
       })}
     </div>

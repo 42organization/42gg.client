@@ -1,26 +1,28 @@
-import { Season, SeasonList } from 'types/seasonTypes';
+import { Season } from 'types/seasonTypes';
+import styles from 'styles/mode/SeasonDropDown.module.scss';
 
 interface SeasonDropDownProps {
-  seasons: SeasonList;
+  seasonList: Season[];
   value: number;
   onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export default function SeasonDropDown({
-  seasons,
+  seasonList,
   value,
   onSelect,
 }: SeasonDropDownProps) {
-  if (seasons.seasonList === undefined) {
-    return null;
-  }
+  if (seasonList === undefined) return null;
+
   return (
-    <select onChange={onSelect} value={value}>
-      {seasons.seasonList.map((season: Season) => (
-        <option key={season.id} value={season.id}>
-          {season.name}
-        </option>
-      ))}
-    </select>
+    <div className={styles.selectBox}>
+      <select className={styles.select} onChange={onSelect} value={value}>
+        {seasonList.map((season: Season) => (
+          <option key={season.id} value={season.id}>
+            {season.name}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }

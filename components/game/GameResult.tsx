@@ -2,13 +2,13 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { RecordMode } from 'types/mainType';
+import { SeasonMode } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
 import GameResultList from 'components/game/GameResultList';
 
 interface GameResultProps {
   intraId?: string;
-  mode?: RecordMode;
+  mode?: SeasonMode;
   season?: string;
   isMine?: boolean;
 }

@@ -1,22 +1,24 @@
 import Link from 'next/link';
 import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { userState } from 'utils/recoil/layout';
-import { menuBarState } from 'utils/recoil/layout';
+import { seasonListState } from 'utils/recoil/seasons';
+import { openMenuBarState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 export default function MenuBar() {
-  const user = useRecoilValue(userState);
-  const resetOpenMenuBar = useResetRecoilState(menuBarState);
+  const { intraId, isAdmin } = useRecoilValue(userState);
+  const { seasonMode } = useRecoilValue(seasonListState);
+  const resetOpenMenuBar = useResetRecoilState(openMenuBarState);
   const setModal = useSetRecoilState(modalState);
   const menuList = [
     {
-      name: `${user.seasonMode === 'normal' ? 'VIP' : '랭킹'}`,
+      name: `${seasonMode === 'normal' ? 'VIP' : '랭킹'}`,
       link: '/rank',
     },
     { name: '최근 경기', link: '/game' },
-    { name: '내 정보', link: `/users/detail?intraId=${user.intraId}` },
+    { name: '내 정보', link: `/users/detail?intraId=${intraId}` },
   ];
 
   const goToAdminPage = async () => {
@@ -65,7 +67,7 @@ export default function MenuBar() {
               </div>
             </div>
             <div className={styles.subMenu} id={styles.logout}>
-              {user.isAdmin && (
+              {isAdmin && (
                 <>
                   <Link href='/statistics'>
                     <div>📊 통계페이지</div>

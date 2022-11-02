@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import { Noti } from 'types/notiTypes';
-import { notiBarState } from 'utils/recoil/layout';
+import { openNotiBarState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import NotiItem from './NotiItem';
 import styles from 'styles/Layout/NotiBar.module.scss';
 
 export default function NotiBar() {
+  const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
+  const setError = useSetRecoilState(errorState);
   const [noti, setNoti] = useState<Noti[]>([]);
   const [clickRefreshBtn, setClickRefreshBtn] = useState(false);
   const [refreshBtnAnimation, setRefreshBtnAnimation] = useState(false);
-  const resetOpenNotiBar = useResetRecoilState(notiBarState);
-  const setErrorMessage = useSetRecoilState(errorState);
 
   useEffect(() => {
     getNotiHandler();
@@ -34,7 +34,7 @@ export default function NotiBar() {
       setNoti(res?.data.notifications);
       setClickRefreshBtn(false);
     } catch (e) {
-      setErrorMessage('JB04');
+      setError('JB04');
     }
   };
 
@@ -44,7 +44,7 @@ export default function NotiBar() {
       alert('알림이 성공적으로 삭제되었습니다.');
       resetOpenNotiBar();
     } catch (e) {
-      setErrorMessage('JB05');
+      setError('JB05');
     }
   };
 

@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
-  menuBarState,
-  notiBarState,
+  openMenuBarState,
+  openNotiBarState,
   userState,
   liveState,
 } from 'utils/recoil/layout';
@@ -18,9 +18,9 @@ import styles from 'styles/Layout/Header.module.scss';
 
 export default function Header() {
   const user = useRecoilValue(userState);
-  const [userLive, setUserLive] = useRecoilState(liveState);
-  const [openMenuBar, setOpenMenuBar] = useRecoilState(menuBarState);
-  const [openNotiBar, setOpenNotiBar] = useRecoilState(notiBarState);
+  const [live, setLive] = useRecoilState(liveState);
+  const [openMenuBar, setOpenMenuBar] = useRecoilState(openMenuBarState);
+  const [openNotiBar, setOpenNotiBar] = useRecoilState(openNotiBarState);
   const [imgError, setImgError] = useState(false);
 
   const openMenuBarHandler = () => {
@@ -29,7 +29,7 @@ export default function Header() {
 
   const openNotiBarHandler = () => {
     setOpenNotiBar(!openNotiBar);
-    setUserLive((prev) => ({ ...prev, notiCount: 0 }));
+    setLive((prev) => ({ ...prev, notiCount: 0 }));
   };
 
   return (
@@ -55,7 +55,7 @@ export default function Header() {
             <BsMegaphone />
           </div>
           <div id={styles.notiIcon} onClick={openNotiBarHandler}>
-            {userLive.notiCount ? (
+            {live.notiCount ? (
               <div className={styles.bellWhole}>
                 <VscBellDot />
               </div>

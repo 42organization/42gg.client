@@ -8,7 +8,6 @@ export const userState = atom<User>({
     intraId: '',
     isAdmin: false,
     userImageUri: '',
-    seasonMode: 'normal',
   },
 });
 
@@ -17,17 +16,16 @@ export const liveState = atom<Live>({
   default: {
     notiCount: 0,
     event: null,
-    seasonMode: 'normal',
     currentMatchMode: null,
   },
 });
 
-export const menuBarState = atom<boolean>({
-  key: `menuBarState/${v1()}`,
+export const openMenuBarState = atom<boolean>({
+  key: `openMenuBarState/${v1()}`,
   default: false,
 });
 
-export const notiBarState = atom<boolean>({
-  key: `notiBarState/${v1()}`,
+export const openNotiBarState = atom<boolean>({
+  key: `openNotiBarState/${v1()}`,
   default: false,
 });
