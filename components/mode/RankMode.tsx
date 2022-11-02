@@ -17,12 +17,12 @@ export default function RankMode({ children, setModeProps }: RankModeProps) {
   const [toggleMode, setToggleMode] = useState<string>(
     seasonMode === 'normal' ? 'normal' : 'rank'
   );
-  const [displaySeasons, setDisplaySeasons] = useState<boolean>(
+  const [showSeasons, setShowSeasons] = useState<boolean>(
     seasonMode !== 'normal'
   );
 
   useEffect(() => {
-    setDisplaySeasons(toggleMode === 'rank');
+    setShowSeasons(toggleMode === 'rank');
     setModeProps(toggleMode);
   }, [toggleMode]);
 
@@ -42,7 +42,7 @@ export default function RankMode({ children, setModeProps }: RankModeProps) {
           onToggle={modeToggleHandler}
           text={toggleMode === 'rank' ? '랭크' : '일반'}
         />
-        {displaySeasons && seasonList && (
+        {showSeasons && seasonList && (
           <SeasonDropDown
             seasonList={seasonList}
             value={season}
