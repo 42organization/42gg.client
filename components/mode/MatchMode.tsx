@@ -19,16 +19,15 @@ export default function MatchMode({ children }: MatchModeProps) {
 
   return (
     <div>
-      {/* 서버 업데이트 이후 주석 해제할 예정 */}
-      {/* {seasonMode === 'both' && ( */}
-      <div className={styles.toggle}>
-        <ModeToggle
-          checked={toggleMode === 'rank'}
-          onToggle={modeToggleHandler}
-          text={toggleMode === 'rank' ? '랭크' : '일반'}
-        />
-      </div>
-      {/* )} */}
+      {seasonMode === 'both' && (
+        <div className={styles.toggle}>
+          <ModeToggle
+            checked={toggleMode === 'rank'}
+            onToggle={modeToggleHandler}
+            text={toggleMode === 'rank' ? '랭크' : '일반'}
+          />
+        </div>
+      )}
       {React.cloneElement(children as React.ReactElement, {
         mode: toggleMode,
       })}

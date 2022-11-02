@@ -34,11 +34,9 @@ export default function MatchBoard({ type, mode }: MatchBoardProps) {
 
   const getMatchDataHandler = async () => {
     try {
-      // 서버 연결 후 주석 해제
-      // const res = await instance.get(
-      //   `/pingpong/match/tables/${1}/${mode}/${type}`
-      // );
-      const res = await instance.get(`/pingpong/match/tables/${1}/${type}`);
+      const res = await instance.get(
+        `/pingpong/match/tables/${1}/${mode}/${type}`
+      );
       setMatch(res?.data);
     } catch (e) {
       setError('SJ01');
