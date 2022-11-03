@@ -25,6 +25,7 @@ export default function BasicProfile({ intraId }: ProfileProps) {
       try {
         const res = await instance.get(`/pingpong/users/${intraId}/detail`);
         setProfile(res?.data);
+        setImgError(false);
       } catch (e) {
         setErrorMessage('SJ03');
       }
