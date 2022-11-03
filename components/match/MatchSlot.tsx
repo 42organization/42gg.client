@@ -9,22 +9,22 @@ import styles from 'styles/match/MatchSlot.module.scss';
 
 interface MatchSlotProps {
   type: string;
-  mode?: string;
+  matchMode?: string;
   slot: Slot;
   intervalMinute: number;
 }
 
-export default function MatchItem({
+export default function MatchSlot({
   type,
-  mode,
   slot,
+  matchMode,
   intervalMinute,
 }: MatchSlotProps) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const live = useRecoilValue(liveState);
 
-  const { headCount, slotId, status, time } = slot;
+  const { headCount, slotId, status, time, mode } = slot;
   const headMax = type === 'single' ? 2 : 4;
   const startTime = new Date(time);
   const endTime = new Date(time);
@@ -51,16 +51,19 @@ export default function MatchItem({
     } else {
       setModal({
         modalName: 'MATCH-ENROLL',
-        enrollInfo: { slotId, type, mode, startTime, endTime },
+        enrollInfo: { slotId, type, mode: matchMode, startTime, endTime },
       });
     }
   };
 
   if (status === 'mytable') {
-    buttonStyle = styles.mySlot;
+    console.log(mode);
+    console.log(matchMode);
+    if (matchMode === mode) buttonStyle = styles.mySlot;
+    else buttonStyle = styles.disabledSlot;
   } else if (status === 'open') {
-    if (mode === 'rank') buttonStyle = styles.rankSlot;
-    if (mode === 'normal') buttonStyle = styles.normalSlot;
+    if (matchMode === 'rank') buttonStyle = styles.rankSlot;
+    if (matchMode === 'normal') buttonStyle = styles.normalSlot;
   } else if (status === 'close') {
     buttonStyle = styles.disabledSlot;
   }

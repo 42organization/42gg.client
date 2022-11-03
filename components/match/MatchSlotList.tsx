@@ -26,7 +26,7 @@ export default function MatchSlotList({
           <MatchSlot
             key={slot.slotId}
             type={type}
-            mode={mode}
+            matchMode={mode}
             slot={slot}
             intervalMinute={intervalMinute}
           ></MatchSlot>

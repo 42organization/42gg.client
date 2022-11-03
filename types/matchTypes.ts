@@ -3,6 +3,7 @@ export interface Slot {
   status: string;
   headCount: number;
   time: string;
+  mode: string;
 }
 
 export type Slots = Slot[];
