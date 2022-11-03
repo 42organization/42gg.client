@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { SeasonMode } from 'types/mainType';
 import { seasonListState } from 'utils/recoil/seasons';
-import SeasonDropDown from './modeItems/SeasonDropDown';
-import UserGameSearchBar from './modeItems/UserGameSearchBar';
-import ModeRadiobox from './modeItems/ModeRadiobox';
-import styles from 'styles/mode/ModeSelect.module.scss';
+import UserGameSearchBar from '../modeItems/UserGameSearchBar';
+import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
+import ModeRadiobox from 'components/mode/modeItems/ModeRadiobox';
+import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface GameModeProps {
   children: React.ReactNode;
@@ -26,7 +26,7 @@ export default function GameMode({ children }: GameModeProps) {
 
   return (
     <div>
-      <div className={styles.wrapper}>
+      <div className={styles.gameModeWrap}>
         <UserGameSearchBar />
         {radioMode === 'rank' && seasonList && (
           <SeasonDropDown

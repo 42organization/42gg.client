@@ -4,7 +4,7 @@ import { ProfileRank } from 'types/userTypes';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import Chart from 'components/user/ProfileChart';
-import ProfileMode from 'components/mode/ProfileMode';
+import ProfileMode from 'components/mode/modeWraps/ProfileMode';
 import styles from 'styles/user/Profile.module.scss';
 
 interface RankProfileProps {

@@ -9,11 +9,11 @@
 }
 
 .subtitle {
-  margin: 1rem 0 0.5rem 0;
+  width: fit-content;
+  margin: 1rem auto 0.5rem auto;
   color: white;
   font-family: $title-font;
   font-size: $giant-font;
-  text-align: center;
   letter-spacing: 0.1rem;
 }
 

@@ -1,5 +1,5 @@
 import MatchBoard from 'components/match/MatchBoard';
-import MatchMode from 'components/mode/MatchMode';
+import MatchMode from 'components/mode/modeWraps/MatchMode';
 import styles from 'styles/match/match.module.scss';
 
 export default function Match() {

@@ -2,16 +2,16 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { seasonListState } from 'utils/recoil/seasons';
-import ModeToggle from './modeItems/ModeToggle';
-import SeasonDropDown from './modeItems/SeasonDropDown';
-import styles from 'styles/mode/ModeSelect.module.scss';
+import ModeToggle from 'components/mode/modeItems/ModeToggle';
+import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
+import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface RankModeProps {
   children: React.ReactNode;
-  setModeProps: React.Dispatch<React.SetStateAction<string>>;
+  setMode: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function RankMode({ children, setModeProps }: RankModeProps) {
+export default function RankMode({ children, setMode }: RankModeProps) {
   const { seasonMode, seasonList } = useRecoilValue(seasonListState);
   const [season, setSeason] = useState<number>(seasonList[0]?.id);
   const [toggleMode, setToggleMode] = useState<string>(
@@ -23,7 +23,7 @@ export default function RankMode({ children, setModeProps }: RankModeProps) {
 
   useEffect(() => {
     setShowSeasons(toggleMode === 'rank');
-    setModeProps(toggleMode);
+    setMode(toggleMode);
   }, [toggleMode]);
 
   const modeToggleHandler = () => {
@@ -36,7 +36,7 @@ export default function RankMode({ children, setModeProps }: RankModeProps) {
 
   return (
     <div>
-      <div className={styles.wrapper}>
+      <div className={styles.rankModeWrap}>
         <ModeToggle
           checked={toggleMode === 'rank'}
           onToggle={modeToggleHandler}

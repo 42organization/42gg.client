@@ -1,5 +1,14 @@
 @import 'styles/common.scss';
 
+.matchBoard {
+  height: 60vh;
+  padding: 1rem;
+  margin-block: 1rem;
+  border-radius: $small-radius;
+  background: rgba(255, 255, 255, 0.2);
+  overflow-y: scroll;
+}
+
 .notice {
   margin: 1rem 0;
   color: white;
@@ -10,10 +19,13 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-bottom: 0.7rem;
+  margin-right: 0.6rem;
   .manual {
     @include match-noti-button;
     margin: 0 0.8rem 0 0;
-    width: 3.2rem;
+    padding: 0;
+    width: 4.2rem;
     height: 1.6rem;
     font-size: $small-font;
     border-radius: $small-radius;
@@ -34,18 +46,6 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-.matchBoard {
-  flex-direction: column; // check flex가 없음
-  justify-content: center;
-  align-items: stretch;
-  height: 60vh;
-  padding: 1rem;
-  margin-block: 1rem;
-  border-radius: $small-radius;
-  background: rgba(255, 255, 255, 0.2);
-  overflow-y: scroll;
 }
 
 .matchSlotList {

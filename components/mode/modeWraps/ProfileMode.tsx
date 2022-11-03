@@ -2,8 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { seasonListState } from 'utils/recoil/seasons';
-import SeasonDropDown from './modeItems/SeasonDropDown';
-import styles from 'styles/mode/ModeSelect.module.scss';
+import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
+import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface ProfileModeProps {
   children: React.ReactNode;
@@ -19,7 +19,7 @@ export default function ProfileMode({ children }: ProfileModeProps) {
 
   return (
     <div>
-      <div className={styles.wrapperRight}>
+      <div className={styles.profileModeWrap}>
         {seasonList && (
           <SeasonDropDown
             seasonList={seasonList}

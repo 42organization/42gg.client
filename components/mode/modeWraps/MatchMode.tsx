@@ -2,8 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { seasonListState } from 'utils/recoil/seasons';
-import ModeToggle from './modeItems/ModeToggle';
-import styles from 'styles/match/match.module.scss';
+import ModeToggle from 'components/mode/modeItems/ModeToggle';
+import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface MatchModeProps {
   children: React.ReactNode;
@@ -20,7 +20,7 @@ export default function MatchMode({ children }: MatchModeProps) {
   return (
     <div>
       {seasonMode === 'both' && (
-        <div className={styles.toggle}>
+        <div className={styles.matchModeWrap}>
           <ModeToggle
             checked={toggleMode === 'rank'}
             onToggle={modeToggleHandler}
