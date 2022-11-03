@@ -6,6 +6,8 @@
 
 .title {
   @include pageTitle;
+  width: fit-content;
+  margin-inline: auto;
   cursor: pointer;
 }
 
