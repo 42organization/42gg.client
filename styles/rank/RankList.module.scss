@@ -1,5 +1,19 @@
 @import '../common.scss';
 
+/* Ranking 타이틀 */
+.pageWrap {
+  @include pageWrap;
+}
+
+.rankTitle {
+  @include pageTitle;
+}
+
+.vipTitle {
+  @include pageTitle;
+  text-shadow: $text-shadow, 0.3rem 0.3rem 0 $norm-lightblue2;
+}
+
 /* 나의 랭킹 */
 .myRank {
   height: 2rem;
@@ -13,15 +27,6 @@
     color: $g1-top;
     cursor: pointer;
   }
-}
-
-/* Ranking 타이틀 */
-.pageWrap {
-  @include pageWrap;
-}
-
-.title {
-  @include pageTitle;
 }
 
 .container {
