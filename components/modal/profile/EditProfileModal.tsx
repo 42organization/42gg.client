@@ -14,7 +14,7 @@ interface EditedProfile {
 const CHAR_LIMIT = 30;
 
 export default function EditProfileModal() {
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const [profile, setProfile] = useRecoilState(profileState);
   const [editedProfile, setEditedProfile] = useState<EditedProfile>({
@@ -58,7 +58,7 @@ export default function EditProfileModal() {
       await instance.put(`/pingpong/users/detail`, editedProfile);
       alert('프로필이 성공적으로 등록되었습니다.');
     } catch (e) {
-      setErrorMessage('JH02');
+      setError('JH02');
     }
     setModal({ modalName: null });
   };

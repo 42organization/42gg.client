@@ -46,7 +46,10 @@ export default function RankListItem({
       <div
         className={`${index % 2 === 0 ? styles.even : styles.odd}
             ${rankFiltered < 4 ? styles.topRank : styles.rank}
-            ${intraId === myIntraId && styles.myself}`}
+            ${
+              intraId === myIntraId &&
+              (isRankMode ? styles.myRanking : styles.myVip)
+            }`}
       >
         {rankFiltered}
         <div className={styles.intraId}>{makeIntraIdLink()}</div>

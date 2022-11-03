@@ -27,7 +27,7 @@ export default function RankProfile({ intraId }: RankProfileProps) {
 }
 
 function Profile({ intraId, season }: RankProps) {
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
   const [rankProfile, setRankProfile] = useState<ProfileRank>({
     rank: 0,
     ppp: 0,
@@ -44,7 +44,7 @@ function Profile({ intraId, season }: RankProps) {
         );
         setRankProfile(res?.data);
       } catch (e) {
-        setErrorMessage('JH07');
+        setError('JH07');
       }
     })();
   }, [intraId, season]);

@@ -24,7 +24,7 @@ export default function RankList({ mode, season }: RankListProps) {
   const [myRank, setMyRank] = useRecoilState(myRankState);
   const [isScroll, setIsScroll] = useRecoilState(scrollState);
   const { seasonMode } = useRecoilValue(seasonListState);
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
   const [rank, setRank] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
   const router = useRouter();
@@ -50,8 +50,8 @@ export default function RankList({ mode, season }: RankListProps) {
   }, [page]);
 
   useEffect(() => {
+    pageInfo.currentPage = 1;
     setPage(1);
-    getRankDataHandler();
   }, [mode, season]);
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function RankList({ mode, season }: RankListProps) {
       setRank(res?.data);
       setMyRank(res?.data.myRank);
     } catch (e) {
-      setErrorMessage('DK01');
+      setError('DK01');
     }
   };
 

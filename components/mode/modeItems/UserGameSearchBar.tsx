@@ -15,7 +15,7 @@ export default function UserGameSearchBar() {
   const [keyword, setKeyword] = useState<string>(String(intraId || ''));
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<string[]>([]);
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
   const searchBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function UserGameSearchBar() {
       const res = await instance.get(`/pingpong/users/searches?q=${keyword}`);
       setSearchResult(res?.data.users);
     } catch (e) {
-      setErrorMessage('JB06');
+      setError('JB06');
     }
   };
 

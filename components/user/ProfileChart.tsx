@@ -71,7 +71,7 @@ interface ChartProps {
 }
 
 export default function ProfileChart({ intraId, season }: ChartProps) {
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
   const [chart, setChart] = useState<PppChart[]>([
     { ppp: 0, date: '1970-01-01' },
   ]);
@@ -86,7 +86,7 @@ export default function ProfileChart({ intraId, season }: ChartProps) {
         );
         setChart(res?.data.historics);
       } catch (e) {
-        setErrorMessage('SJ02');
+        setError('SJ02');
       }
     })();
   }, [intraId]);

@@ -29,7 +29,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   );
   const [matchRefreshBtn, setMatchRefreshBtn] =
     useRecoilState(matchRefreshBtnState);
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const presentPath = useRouter().asPath;
   const setSeasonList = useSetRecoilState(seasonListState);
@@ -44,7 +44,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       const res = await instance.get(`/pingpong/seasonlist`);
       setSeasonList({ ...res?.data });
     } catch (e) {
-      setErrorMessage('DK02');
+      setError('DK02');
     }
   };
 
@@ -72,7 +72,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       const res = await instance.get(`/pingpong/users`);
       setUser(res?.data);
     } catch (e) {
-      setErrorMessage('JB02');
+      setError('JB02');
     }
   };
 
@@ -81,7 +81,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       const res = await instance.get(`/pingpong/users/live`);
       setLive({ ...res?.data });
     } catch (e) {
-      setErrorMessage('JB03');
+      setError('JB03');
     }
   };
 
