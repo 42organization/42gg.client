@@ -5,11 +5,12 @@
   width: 6rem;
   height: 1.6rem;
   border-radius: $mini-radius;
+  font-size: $small-font;
   background: white;
 }
 
 .select {
-  z-index: 3;
+  z-index: 1;
   position: relative;
   width: 5rem;
   height: inherit;

@@ -5,9 +5,9 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  height: 2.7rem;
-  padding: 0 0.8rem;
+  height: 2.5rem;
   margin: 1rem 0.8rem 0;
+  padding: 0 0.8rem;
   border-radius: $small-radius;
   background: white;
   font-size: $medium-font;
@@ -29,10 +29,10 @@
   .dropdown {
     display: block;
     position: absolute;
-    top: 2.3rem;
+    top: 2.1rem;
     left: 0;
     width: 100%;
-    padding: 0 1rem 0.5rem 1rem;
+    padding: 0 0.8rem 0.5rem 0.8rem;
     border-radius: 0 0 $small-radius $small-radius;
     background: white;
     div {
@@ -43,11 +43,23 @@
 }
 
 #game {
-  z-index: 4;
+  z-index: 1;
   height: 1.6rem;
   margin: 0;
+  padding: 0 0.5rem;
+  font-size: $small-font;
+  border-radius: $mini-radius;
+  input {
+    width: calc(100% - 1.5rem);
+  }
+  .icons {
+    span {
+      font-size: 0.9rem;
+    }
+  }
   .dropdown {
-    top: 1.25rem;
-    padding: 0 0.8rem 0.5rem 0.8rem;
+    top: 1.33rem;
+    padding: 0 0.5rem 0.2rem 0.5rem;
+    border-radius: 0 0 $mini-radius $mini-radius;
   }
 }
