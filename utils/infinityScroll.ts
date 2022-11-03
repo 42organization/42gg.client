@@ -4,7 +4,7 @@ import { errorState } from 'utils/recoil/error';
 import instance from './axios';
 
 export default function infScroll(path: string) {
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
 
   const getList = ({ pageParam = 0 }) =>
     instance.get(`${path}${pageParam}`, {}).then((res) => {
@@ -16,7 +16,7 @@ export default function infScroll(path: string) {
       return pages.lastGameId;
     },
     onError: () => {
-      setErrorMessage('KP01');
+      setError('KP01');
     },
   });
 

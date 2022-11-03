@@ -12,7 +12,7 @@ interface SlotProps {
 
 export default function CancelModal({ slotId }: SlotProps) {
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const currentMatch = useRecoilValue(currentMatchState);
 
@@ -27,7 +27,7 @@ export default function CancelModal({ slotId }: SlotProps) {
       else {
         setModal({ modalName: null });
         setOpenCurrentMatch(false);
-        setErrorMessage('JH01');
+        setError('JH01');
         return;
       }
     }

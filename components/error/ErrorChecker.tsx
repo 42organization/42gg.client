@@ -8,9 +8,9 @@ interface ErrorCheckerProps {
 }
 
 export default function ErrorChecker({ children }: ErrorCheckerProps) {
-  const errorMessage = useRecoilValue(errorState);
+  const error = useRecoilValue(errorState);
 
-  return errorMessage === '' ? (
+  return error === '' ? (
     <>{children}</>
   ) : (
     <div className={styles.appContainer}>

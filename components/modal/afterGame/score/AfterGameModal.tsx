@@ -20,7 +20,7 @@ const defaultCurrentGame: AfterGame = {
 };
 
 export default function AfterGameModal() {
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const [currentGame, setCurrentGame] = useState<AfterGame>(defaultCurrentGame);
   const normalGuide = {
@@ -48,7 +48,7 @@ export default function AfterGameModal() {
         matchTeamsInfo: { ...res?.data.matchTeamsInfo },
       }); // 임시
     } catch (e) {
-      setErrorMessage('JH03');
+      setError('JH03');
     }
   };
 
@@ -63,7 +63,7 @@ export default function AfterGameModal() {
         setModal({ modalName: null });
       }
     } catch (e) {
-      setErrorMessage('JH04');
+      setError('JH04');
       return;
     }
     window.location.href = '/';
@@ -74,7 +74,7 @@ export default function AfterGameModal() {
       await instance.post(`/pingpong/games/result/normal`);
       setModal({ modalName: 'FIXED-EXP', gameId: currentGame.gameId });
     } catch (e) {
-      setErrorMessage('DK03');
+      setError('DK03');
       return;
     }
   };

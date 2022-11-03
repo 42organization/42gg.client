@@ -11,7 +11,7 @@ import styles from 'styles/modal/ExpGameModal.module.scss';
 export default function ExpChangeModal() {
   const [modal, setModal] = useRecoilState(modalState);
   const [user, setUser] = useState();
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
 
   useEffect(() => {
     getExpHandler();
@@ -22,7 +22,7 @@ export default function ExpChangeModal() {
       const res = await instance.get(`/pingpong/games/${modal.gameId}/result`);
       setUser(res?.data);
     } catch (e) {
-      setErrorMessage('KP03');
+      setError('KP03');
     }
   };
 

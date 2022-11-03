@@ -15,7 +15,7 @@ export default function CurrentMatch() {
   const [matchRefreshBtn, setMatchRefreshBtn] =
     useRecoilState(matchRefreshBtnState);
   const setModal = useSetRecoilState(modalState);
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
   const matchingMessage = time && makeMessage(time, isMatched);
   const isBlockCancelBtn = isBeforeMin(time, 5) && enemyTeam.length;
   const presentPath = useRouter().asPath;
@@ -30,7 +30,7 @@ export default function CurrentMatch() {
       const res = await instance.get(`/pingpong/match/current`);
       setCurrentMatch(res?.data);
     } catch (e) {
-      setErrorMessage('JB01');
+      setError('JB01');
     }
   };
 

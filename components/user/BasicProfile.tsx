@@ -15,7 +15,7 @@ interface ProfileProps {
 
 export default function BasicProfile({ intraId }: ProfileProps) {
   const user = useRecoilValue(userState);
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const [profile, setProfile] = useRecoilState(profileState);
   const [imgError, setImgError] = useState(false);
@@ -27,7 +27,7 @@ export default function BasicProfile({ intraId }: ProfileProps) {
         setProfile(res?.data);
         setImgError(false);
       } catch (e) {
-        setErrorMessage('SJ03');
+        setError('SJ03');
       }
     })();
   }, [intraId]);

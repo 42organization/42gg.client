@@ -20,7 +20,7 @@ export default function StatisticsCharts({
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [chart, setChart] = useState<Graphs>();
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
 
   const clickGetChart = () => {
     getChartHandler();
@@ -33,7 +33,7 @@ export default function StatisticsCharts({
       );
       setChart(res.data);
     } catch (e) {
-      setErrorMessage('KP02');
+      setError('KP02');
     }
   };
 

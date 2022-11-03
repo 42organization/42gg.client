@@ -70,10 +70,15 @@
   @include rankGrid;
   background: $gray;
 }
-.myself {
+.rankMyself {
   @include rankGrid;
   border: 0.07rem solid $rank-red;
   background: $g1-bottom;
+}
+.normalMyself {
+  @include rankGrid;
+  border: 0.07rem solid $norm-lightblue2;
+  background: $norm-emerald;
 }
 
 .rankData {
