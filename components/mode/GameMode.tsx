@@ -1,10 +1,9 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { SeasonMode } from 'types/mainType';
 import { seasonListState } from 'utils/recoil/seasons';
-import IsMineCheckBox from './modeItems/IsMineCheckBox';
 import SeasonDropDown from './modeItems/SeasonDropDown';
+import UserGameSearchBar from './modeItems/UserGameSearchBar';
 import ModeRadiobox from './modeItems/ModeRadiobox';
 import styles from 'styles/mode/ModeSelect.module.scss';
 
@@ -14,16 +13,11 @@ interface GameModeProps {
 
 export default function GameMode({ children }: GameModeProps) {
   const { seasonList } = useRecoilValue(seasonListState);
-  const [isMine, setIsMine] = useState(false);
-  const [season, setSeason] = useState<number>(seasonList[0].id);
+  const [season, setSeason] = useState<number>(seasonList[0]?.id);
   const [radioMode, setRadioMode] = useState<SeasonMode>('both');
 
   const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRadioMode(e.target.value as SeasonMode);
-  };
-
-  const isMineCheckBoxHandler = () => {
-    setIsMine((isMine) => !isMine);
   };
 
   const seasonDropDownHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -33,7 +27,7 @@ export default function GameMode({ children }: GameModeProps) {
   return (
     <div>
       <div className={styles.wrapper}>
-        <IsMineCheckBox isMine={isMine} onChange={isMineCheckBoxHandler} />
+        <UserGameSearchBar />
         {radioMode === 'rank' && seasonList && (
           <SeasonDropDown
             seasonList={seasonList}
@@ -46,7 +40,6 @@ export default function GameMode({ children }: GameModeProps) {
       {React.cloneElement(children as React.ReactElement, {
         mode: radioMode,
         season,
-        isMine,
       })}
     </div>
   );

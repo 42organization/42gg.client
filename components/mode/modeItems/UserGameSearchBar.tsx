@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState, useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
 import instance from 'utils/axios';
@@ -9,8 +9,10 @@ import styles from 'styles/main/SearchBar.module.scss';
 
 let timer: ReturnType<typeof setTimeout>;
 
-export default function SearchBar() {
-  const [keyword, setKeyword] = useState<string>('');
+export default function UserGameSearchBar() {
+  const router = useRouter();
+  const { intraId } = useRouter().query;
+  const [keyword, setKeyword] = useState<string>(String(intraId || ''));
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<string[]>([]);
   const setErrorMessage = useSetRecoilState(errorState);
@@ -27,9 +29,9 @@ export default function SearchBar() {
   }, [keyword]);
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', clickOutsideHandler);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', clickOutsideHandler);
     };
   }, []);
 
@@ -42,7 +44,7 @@ export default function SearchBar() {
     }
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
+  const clickOutsideHandler = (event: MouseEvent) => {
     if (
       searchBarRef.current &&
       !searchBarRef.current.contains(event.target as Node)
@@ -54,8 +56,19 @@ export default function SearchBar() {
     setKeyword(event.target.value);
   };
 
+  const clickResultHandler = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    intraId: string
+  ) => {
+    setKeyword(intraId);
+    setShowDropDown(false);
+    router.push(`/game?intraId=${intraId}`, undefined, {
+      shallow: true,
+    });
+  };
+
   return (
-    <div className={styles.searchBar} ref={searchBarRef}>
+    <div id={styles.game} className={styles.searchBar} ref={searchBarRef}>
       <input
         type='text'
         onChange={keywordHandler}
@@ -66,7 +79,12 @@ export default function SearchBar() {
       />
       <div className={styles.icons}>
         {keyword ? (
-          <span className={styles.reset} onClick={() => setKeyword('')}>
+          <span
+            className={styles.reset}
+            onClick={() => {
+              setKeyword('');
+            }}
+          >
             <IoIosCloseCircle />
           </span>
         ) : (
@@ -79,9 +97,12 @@ export default function SearchBar() {
         <div className={styles.dropdown}>
           {searchResult.length ? (
             searchResult.map((intraId: string) => (
-              <Link href={`/users/detail?intraId=${intraId}`} key={intraId}>
-                <div>{intraId}</div>
-              </Link>
+              <div
+                key={intraId}
+                onClick={(e) => clickResultHandler(e, intraId)}
+              >
+                {intraId}
+              </div>
             ))
           ) : (
             <div>검색 결과가 없습니다.</div>

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import BasicProfile from 'components/user/BasicProfile';
 import GameResult from 'components/game/GameResult';
@@ -15,8 +16,17 @@ export default function user() {
           <h1 className={styles.title}>{intraId}</h1>
           <BasicProfile intraId={intraId} />
           <RankProfile intraId={intraId} />
-          <h2 className={styles.subtitle}>recent record</h2>
-          <GameResult intraId={intraId} />
+          <Link
+            href={{
+              pathname: '/game',
+              query: { intraId: intraId },
+            }}
+          >
+            <h2 id={styles.mine} className={styles.subtitle}>
+              recent record ▶️
+            </h2>
+          </Link>
+          <GameResult />
         </>
       )}
     </div>

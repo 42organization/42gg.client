@@ -6,6 +6,7 @@
 
 .title {
   @include pageTitle;
+  cursor: pointer;
 }
 
 .smallContainer {
