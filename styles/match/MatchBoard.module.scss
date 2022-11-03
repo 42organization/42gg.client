@@ -1,9 +1,6 @@
 @import 'styles/common.scss';
 
 .matchBoard {
-  flex-direction: column; // check flex가 없음
-  justify-content: center;
-  align-items: stretch;
   height: 60vh;
   padding: 1rem;
   margin-block: 1rem;

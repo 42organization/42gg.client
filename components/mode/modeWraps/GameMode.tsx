@@ -1,11 +1,10 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { SeasonMode } from 'types/mainType';
 import { seasonListState } from 'utils/recoil/seasons';
 import UserGameSearchBar from '../modeItems/UserGameSearchBar';
-import SeasonDropDown from '../modeItems/SeasonDropDown';
-import ModeRadiobox from '../modeItems/ModeRadiobox';
+import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
+import ModeRadiobox from 'components/mode/modeItems/ModeRadiobox';
 import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface GameModeProps {

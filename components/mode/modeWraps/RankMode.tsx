@@ -2,8 +2,8 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { seasonListState } from 'utils/recoil/seasons';
-import ModeToggle from '../modeItems/ModeToggle';
-import SeasonDropDown from '../modeItems/SeasonDropDown';
+import ModeToggle from 'components/mode/modeItems/ModeToggle';
+import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
 import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface RankModeProps {

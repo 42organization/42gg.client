@@ -62,8 +62,9 @@ export default function MatchSlot({
     if (matchMode === mode) buttonStyle = styles.mySlot;
     else buttonStyle = styles.disabledSlot;
   } else if (status === 'open') {
-    if (matchMode === 'rank') buttonStyle = styles.rankSlot;
-    if (matchMode === 'normal') buttonStyle = styles.normalSlot;
+    matchMode === 'rank'
+      ? (buttonStyle = styles.rankSlot)
+      : (buttonStyle = styles.normalSlot);
   } else if (status === 'close') {
     buttonStyle = styles.disabledSlot;
   }

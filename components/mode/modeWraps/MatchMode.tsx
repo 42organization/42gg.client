@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { seasonListState } from 'utils/recoil/seasons';
-import ModeToggle from '../modeItems/ModeToggle';
+import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface MatchModeProps {
