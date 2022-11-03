@@ -1,53 +1,40 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { SeasonMode } from 'types/mainType';
-import { userState } from 'utils/recoil/layout';
 import GameResultList from 'components/game/GameResultList';
 
 interface GameResultProps {
-  intraId?: string;
   mode?: SeasonMode;
   season?: string;
-  isMine?: boolean;
 }
 
-export default function GameResult({
-  intraId,
-  mode,
-  season,
-  isMine,
-}: GameResultProps) {
+export default function GameResult({ mode, season }: GameResultProps) {
   const queryClient = new QueryClient();
-  const myIntraId = useRecoilValue(userState).intraId;
   const [path, setPath] = useState('');
   const router = useRouter();
+  const asPath = router.asPath;
+  const intraId = router.query.intraId;
 
   const makePath = () => {
-    if (router.asPath === '/' || router.asPath.includes('token')) {
+    if (asPath === '/' || asPath.includes('token')) {
       setPath(`/pingpong/games?count=3&gameId=`);
       return;
     }
-    const userOption = isMine
-      ? `/users/${myIntraId}`
-      : intraId
-      ? `/users/${intraId}`
-      : '';
-    const seasonOption = mode === 'rank' ? `season=${season}` : '';
-    const modeOption =
-      mode === 'rank' ? 'mode=rank' : mode === 'normal' ? 'mode=normal' : '';
-    const countOption = intraId ? 'count=5' : '';
-    const query = [modeOption, seasonOption, countOption, 'gameId=']
-      .filter((item) => item !== '')
+    const userQuery = intraId ? `/users/${intraId}` : '';
+    const seasonQuery = mode === 'rank' && `season=${season}`;
+    const modeQuery = mode !== 'both' && `mode=${mode}`;
+    const countQuery = router.pathname === '/users/detail' && 'count=5';
+    const query = [modeQuery, seasonQuery, countQuery, 'gameId=']
+      .filter((item) => item)
       .join('&');
-    setPath(`/pingpong${userOption}/games?${query}`);
+    setPath(`/pingpong${userQuery}/games?${query}`);
     return;
   };
 
   useEffect(() => {
     makePath();
-  }, [router.asPath, mode, season, isMine]);
+  }, [asPath, intraId, mode, season]);
 
   return (
     <div>

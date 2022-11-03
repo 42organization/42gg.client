@@ -26,19 +26,28 @@
       cursor: pointer;
     }
   }
+  .dropdown {
+    display: block;
+    position: absolute;
+    top: 2.3rem;
+    left: 0;
+    width: 100%;
+    padding: 0 1rem 0.5rem 1rem;
+    border-radius: 0 0 $small-radius $small-radius;
+    background: white;
+    div {
+      padding: 0.5rem 0;
+      cursor: pointer;
+    }
+  }
 }
 
-.dropdown {
-  display: block;
-  position: absolute;
-  top: 2.3rem;
-  left: 0;
-  width: 100%;
-  padding: 0 1rem 0.5rem 1rem;
-  border-radius: 0 0 $small-radius $small-radius;
-  background: white;
-  div {
-    padding: 0.5rem 0;
-    cursor: pointer;
+#game {
+  z-index: 4;
+  height: 1.6rem;
+  margin: 0;
+  .dropdown {
+    top: 1.25rem;
+    padding: 0 0.8rem 0.5rem 0.8rem;
   }
 }
