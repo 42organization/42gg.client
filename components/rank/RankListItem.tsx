@@ -48,7 +48,7 @@ export default function RankListItem({
             ${rankFiltered < 4 ? styles.topRank : styles.rank}
             ${
               intraId === myIntraId &&
-              (isRankMode ? styles.rankMyself : styles.normalMyself)
+              (isRankMode ? styles.myRanking : styles.myVip)
             }`}
       >
         {rankFiltered}
