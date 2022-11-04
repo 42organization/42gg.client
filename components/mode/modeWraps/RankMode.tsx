@@ -1,20 +1,20 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { seasonListState } from 'utils/recoil/seasons';
+import { MatchMode } from 'types/mainType';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
 import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface RankModeProps {
   children: React.ReactNode;
-  setMode: React.Dispatch<React.SetStateAction<string>>;
+  setMode: React.Dispatch<React.SetStateAction<MatchMode>>;
 }
 
 export default function RankMode({ children, setMode }: RankModeProps) {
   const { seasonMode, seasonList } = useRecoilValue(seasonListState);
   const [season, setSeason] = useState<number>(seasonList[0]?.id);
-  const [toggleMode, setToggleMode] = useState<string>(
+  const [toggleMode, setToggleMode] = useState<MatchMode>(
     seasonMode === 'normal' ? 'normal' : 'rank'
   );
   const [showSeasons, setShowSeasons] = useState<boolean>(
