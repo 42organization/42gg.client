@@ -50,8 +50,9 @@ export default function RankList({ mode, season }: RankListProps) {
   }, [page]);
 
   useEffect(() => {
-    pageInfo.currentPage = 1;
-    setPage(1);
+    page !== 1
+      ? ((pageInfo.currentPage = 1), setPage(1))
+      : getRankDataHandler();
   }, [mode, season]);
 
   useEffect(() => {
