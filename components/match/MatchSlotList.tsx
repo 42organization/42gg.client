@@ -7,6 +7,7 @@ interface MatchSlotListProps {
   mode?: string;
   intervalMinute: number;
   matchSlots: Slot[];
+  getMatchDataHandler: () => void;
 }
 
 export default function MatchSlotList({
@@ -14,6 +15,7 @@ export default function MatchSlotList({
   mode,
   intervalMinute,
   matchSlots,
+  getMatchDataHandler,
 }: MatchSlotListProps) {
   const slotHour = new Date(matchSlots[0].time).getHours();
   const slotHourIn12 = ChangeHourFrom24To12(slotHour);
@@ -29,6 +31,7 @@ export default function MatchSlotList({
             matchMode={mode}
             slot={slot}
             intervalMinute={intervalMinute}
+            getMatchDataHandler={getMatchDataHandler}
           ></MatchSlot>
         ))}
       </div>
