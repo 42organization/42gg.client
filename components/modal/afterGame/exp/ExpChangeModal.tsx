@@ -17,7 +17,6 @@ export default function ExpChangeModal() {
     getExpHandler();
   }, []);
 
-  console.log(modal.enrollInfo?.mode, 'exe modal');
   const getExpHandler = async () => {
     try {
       const res = await instance.get(

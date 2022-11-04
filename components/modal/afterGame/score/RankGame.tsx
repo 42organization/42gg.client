@@ -33,7 +33,6 @@ export default function RankGame({
 
   // useEffect(() => {
   //   if (currentGame.matchTeamsInfo.myTeam.teamScore !== null) {
-  //     console.log('in here');
   //     setResult((prev) => ({
   //       ...prev,
   //       myScore: currentGame.matchTeamsInfo.myTeam.teamScore,

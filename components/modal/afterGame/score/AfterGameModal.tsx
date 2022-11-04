@@ -50,7 +50,6 @@ export default function AfterGameModal() {
   const getCurrentGameHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/games/players`);
-      console.log(res, 'getCurrentGame 함수');
       setCurrentGame({
         gameId: res?.data.gameId,
         mode: res?.data.mode,
@@ -65,7 +64,6 @@ export default function AfterGameModal() {
   const submitRankResultHandler = async (result: TeamScore) => {
     try {
       const res = await instance.post(`/pingpong/games/result/rank`, result);
-      console.log(result, 'rank is here');
       if (res?.status === 201) {
         alert('결과 입력이 완료되었습니다.');
         setModal({ modalName: 'FIXED-EXP', gameId: currentGame.gameId });
@@ -83,7 +81,6 @@ export default function AfterGameModal() {
   const submitNormalResultHandler = async () => {
     try {
       await instance.post(`/pingpong/games/result/normal`);
-      console.log('normal is here');
       setModal({ modalName: 'FIXED-EXP', gameId: currentGame.gameId });
     } catch (e) {
       setError('DK03');
