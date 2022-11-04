@@ -106,6 +106,7 @@ export default function MatchBoard({ type, mode }: MatchBoardProps) {
                 mode={mode}
                 intervalMinute={intervalMinute}
                 matchSlots={matchSlots}
+                getMatchDataHandler={getMatchDataHandler}
               />
             </div>
           );

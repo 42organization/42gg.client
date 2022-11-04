@@ -12,6 +12,7 @@ interface MatchSlotProps {
   matchMode?: string;
   slot: Slot;
   intervalMinute: number;
+  getMatchDataHandler: () => void;
 }
 
 export default function MatchSlot({
@@ -19,6 +20,7 @@ export default function MatchSlot({
   slot,
   matchMode,
   intervalMinute,
+  getMatchDataHandler,
 }: MatchSlotProps) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
@@ -51,14 +53,19 @@ export default function MatchSlot({
     } else {
       setModal({
         modalName: 'MATCH-ENROLL',
-        enrollInfo: { slotId, type, mode: matchMode, startTime, endTime },
+        enrollInfo: {
+          slotId,
+          type,
+          mode: matchMode,
+          startTime,
+          endTime,
+          getMatchDataHandler,
+        },
       });
     }
   };
 
   if (status === 'mytable') {
-    console.log(mode);
-    console.log(matchMode);
     if (matchMode === mode) buttonStyle = styles.mySlot;
     else buttonStyle = styles.disabledSlot;
   } else if (status === 'open') {

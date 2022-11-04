@@ -28,6 +28,7 @@ export interface Enroll {
   mode?: string;
   startTime: Date;
   endTime: Date;
+  getMatchDataHandler: () => void;
 }
 
 export interface Modal {
