@@ -11,8 +11,8 @@ let timer: ReturnType<typeof setTimeout>;
 
 export default function UserGameSearchBar() {
   const router = useRouter();
-  const { intraId } = useRouter().query;
-  const [keyword, setKeyword] = useState<string>(String(intraId || ''));
+  const { intraId } = router.query;
+  const [keyword, setKeyword] = useState<string>('');
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<string[]>([]);
   const setError = useSetRecoilState(errorState);
@@ -27,6 +27,11 @@ export default function UserGameSearchBar() {
       debounce(getSearchResultHandler, 500)();
     }
   }, [keyword]);
+
+  useEffect(() => {
+    if (intraId) setKeyword(String(intraId));
+    else setKeyword('');
+  }, [router]);
 
   useEffect(() => {
     document.addEventListener('mousedown', clickOutsideHandler);

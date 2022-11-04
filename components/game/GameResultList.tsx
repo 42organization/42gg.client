@@ -25,10 +25,12 @@ export default function GameResultList({ path }: GameResultListProps) {
   }, [path]);
 
   useEffect(() => {
-    const isLastGame = data?.pages[data?.pages.length - 1].isLast;
-    if (data?.pages.length === 1 && !isLastGame)
-      setClickedGameItem(data?.pages[0].games[0].gameId);
-    setIsLast(isLastGame);
+    if (status === 'success') {
+      const gameList = data?.pages;
+      if (gameList[0].games.length)
+        setClickedGameItem(gameList[0].games[0].gameId);
+      setIsLast(gameList[gameList.length - 1].isLast);
+    }
   }, [data]);
 
   if (status === 'success' && !data?.pages[0].games.length) {
