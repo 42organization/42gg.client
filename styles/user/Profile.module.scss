@@ -179,7 +179,7 @@
       opacity: 0;
     }
     :checked + .radioButton {
-      border: $pp-blue;
+      border: solid 1px $pp-blue;
       color: $pp-blue;
     }
     .radioButton {
