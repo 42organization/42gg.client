@@ -14,7 +14,7 @@ interface GameResultListProps {
 
 export default function GameResultList({ path }: GameResultListProps) {
   const { data, fetchNextPage, status, remove, refetch } = infScroll(path);
-  const [totalPage, setTotalPage] = useState();
+  const [isLast, setIsLast] = useState<boolean>(false);
   const [clickedGameItem, setClickedGameItem] =
     useRecoilState(clickedGameItemState);
   const router = useRouter();
@@ -25,13 +25,13 @@ export default function GameResultList({ path }: GameResultListProps) {
   }, [path]);
 
   useEffect(() => {
-    const getTotalPage = data?.pages[data.pages.length - 1].totalPage;
-    if (data?.pages.length === 1 && getTotalPage !== 0)
+    const isLastGame = data?.pages[data?.pages.length - 1].isLast;
+    if (data?.pages.length === 1 && !isLastGame)
       setClickedGameItem(data?.pages[0].games[0].gameId);
-    setTotalPage(getTotalPage);
+    setIsLast(isLastGame);
   }, [data]);
 
-  if (data?.pages[0].games.length === 0) {
+  if (status === 'success' && !data?.pages[0].games.length) {
     return <GameResultEmptyItem />;
   }
 
@@ -52,7 +52,7 @@ export default function GameResultList({ path }: GameResultListProps) {
           ))}
         </>
       )}
-      {status === 'success' && router.asPath === '/game' && totalPage !== 1 && (
+      {status === 'success' && router.asPath === '/game' && !isLast && (
         <div className={styles.getButton}>
           <input
             type='button'
