@@ -10,14 +10,18 @@ export interface AfterGame {
   matchTeamsInfo: Players;
 }
 
+export interface Players {
+  myTeam: Team;
+  enemyTeam: Team;
+}
+export interface Team {
+  teamScore: number;
+  teams: Player[];
+}
+
 export interface Player {
   intraId: string;
   userImageUri: string;
-}
-
-export interface Players {
-  myTeam: Player[];
-  enemyTeam: Player[];
 }
 
 export interface TeamScore {

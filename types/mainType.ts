@@ -1,4 +1,4 @@
-export type MatchMode = 'normal' | 'rank';
+export type MatchMode = 'normal' | 'rank' | 'both';
 export type SeasonMode = 'normal' | 'rank' | 'both';
 
 export interface User {
