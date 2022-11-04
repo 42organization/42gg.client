@@ -18,6 +18,7 @@ export default function infScroll(path: string) {
     onError: () => {
       setError('KP01');
     },
+    keepPreviousData: true,
   });
 
   return result;

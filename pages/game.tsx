@@ -5,9 +5,17 @@ import styles from 'styles/game/GameResultItem.module.scss';
 
 export default function Game() {
   const router = useRouter();
+
   return (
     <div className={styles.pageWrap}>
-      <h1 className={styles.title} onClick={() => router.replace('/game')}>
+      <h1
+        className={styles.title}
+        onClick={() =>
+          router.push(`/game`, undefined, {
+            shallow: true,
+          })
+        }
+      >
         Record
       </h1>
       <GameMode>
