@@ -19,7 +19,9 @@ export default function ExpChangeModal() {
 
   const getExpHandler = async () => {
     try {
-      const res = await instance.get(`/pingpong/games/${modal.gameId}/result`);
+      const res = await instance.get(
+        `/pingpong/games/${modal.gameId}/result/${modal.enrollInfo?.mode}`
+      );
       setUser(res?.data);
     } catch (e) {
       setError('KP03');

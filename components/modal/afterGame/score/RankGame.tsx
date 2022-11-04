@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AfterGame, TeamScore } from 'types/scoreTypes';
 import { MatchTeams } from './MatchTeams';
 import Score from './Score';
@@ -21,7 +21,6 @@ export default function RankGame({
 }: RankGameProps) {
   const [result, setResult] = useState<TeamScore>(defaultResult);
   const [onCheck, setOnCheck] = useState<boolean>(false);
-
   const inputScoreHandler = ({
     target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +30,16 @@ export default function RankGame({
       [name]: filteredValue === '' ? filteredValue : parseInt(filteredValue),
     }));
   };
+
+  // useEffect(() => {
+  //   if (currentGame.matchTeamsInfo.myTeam.teamScore !== null) {
+  //     setResult((prev) => ({
+  //       ...prev,
+  //       myScore: currentGame.matchTeamsInfo.myTeam.teamScore,
+  //       enemyScore: currentGame.matchTeamsInfo.enemyTeam.teamScore,
+  //     }));
+  //   }
+  // }, []);
 
   const enterHandler = () => {
     const { myTeamScore, enemyTeamScore } = result;

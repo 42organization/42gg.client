@@ -7,9 +7,9 @@ import styles from 'styles/modal/AfterGameModal.module.scss';
 export function MatchTeams({ matchTeams }: { matchTeams: Players }) {
   return (
     <div className={styles.players}>
-      <Team team={matchTeams.myTeam} />
+      <Team team={matchTeams.myTeam.teams} />
       <div>vs</div>
-      <Team team={matchTeams.enemyTeam} />
+      <Team team={matchTeams.enemyTeam.teams} />
     </div>
   );
 }

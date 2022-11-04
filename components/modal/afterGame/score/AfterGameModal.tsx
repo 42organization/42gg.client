@@ -1,17 +1,26 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { Player, AfterGame, TeamScore } from 'types/scoreTypes';
+import { Player, AfterGame, TeamScore, Team } from 'types/scoreTypes';
 import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
-import { minuitesAgo } from 'utils/handleTime';
 import NormalGame from './NormalGame';
 import RankGame from './RankGame';
 
-const defaultPlayers: Player[] = [{ intraId: '', userImageUri: '' }];
+const defaultTeam = {
+  teamScore: 0,
+  teams: [
+    {
+      intraId: '',
+      userImageUri: '',
+    },
+  ],
+};
+
+const defaultPlayers: Team = defaultTeam;
 const defaultCurrentGame: AfterGame = {
   gameId: 0,
-  mode: 'normal',
+  mode: 'both',
   startTime: '1970-01-01 00:00',
   matchTeamsInfo: {
     myTeam: defaultPlayers,
@@ -40,13 +49,13 @@ export default function AfterGameModal() {
 
   const getCurrentGameHandler = async () => {
     try {
-      const res = await instance.get(`/pingpong/games/result`);
+      const res = await instance.get(`/pingpong/games/players`);
       setCurrentGame({
         gameId: res?.data.gameId,
-        mode: 'normal',
-        startTime: minuitesAgo(10),
+        mode: res?.data.mode,
+        startTime: res?.data.startTime,
         matchTeamsInfo: { ...res?.data.matchTeamsInfo },
-      }); // 임시
+      });
     } catch (e) {
       setError('JH03');
     }
@@ -54,13 +63,13 @@ export default function AfterGameModal() {
 
   const submitRankResultHandler = async (result: TeamScore) => {
     try {
-      const res = await instance.post(`/pingpong/games/result`, result);
+      const res = await instance.post(`/pingpong/games/result/rank`, result);
       if (res?.status === 201) {
         alert('결과 입력이 완료되었습니다.');
         setModal({ modalName: 'FIXED-EXP', gameId: currentGame.gameId });
       } else if (res?.status === 202) {
         alert('상대가 이미 점수를 입력했습니다.');
-        setModal({ modalName: null });
+        setModal({ modalName: 'FIXED-EXP', gameId: currentGame.gameId });
       }
     } catch (e) {
       setError('JH04');

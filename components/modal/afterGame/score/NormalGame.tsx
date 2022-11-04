@@ -18,7 +18,6 @@ export default function NormalGame({
 }: NormalGameProps) {
   const { startTime, matchTeamsInfo } = currentGame;
   const canBeCompleted = isAfterMin(startTime, 10);
-
   return (
     <div className={styles.container}>
       <Guide condition={canBeCompleted} guideLine={guideLine} />
