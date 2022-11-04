@@ -1,19 +1,22 @@
 import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { seasonListState } from 'utils/recoil/seasons';
+import { MatchMode } from 'types/mainType';
 import RankMode from 'components/mode/modeWraps/RankMode';
 import MyRank from 'components/rank/MyRank';
 import RankList from 'components/rank/RankList';
 import styles from 'styles/rank/RankList.module.scss';
 
 export default function Rank() {
-  const [mode, setMode] = useState('');
-  const makePageName = (mode?: string) => {
-    return mode === 'rank' ? 'Ranking' : 'VIP';
-  };
+  const { seasonMode } = useRecoilValue(seasonListState);
+  const [mode, setMode] = useState<MatchMode>(
+    seasonMode === 'normal' ? 'normal' : 'rank'
+  );
 
   return (
     <div className={styles.pageWrap}>
       <h1 className={mode === 'rank' ? styles.rankTitle : styles.vipTitle}>
-        {makePageName(mode)}
+        {mode === 'rank' ? 'Ranking' : 'VIP'}
       </h1>
       <MyRank />
       <RankMode setMode={setMode}>
