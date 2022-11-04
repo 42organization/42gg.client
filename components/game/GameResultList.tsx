@@ -25,10 +25,10 @@ export default function GameResultList({ path }: GameResultListProps) {
   }, [path]);
 
   useEffect(() => {
-    const game = data?.pages;
-    if (game?.length && !game[game.length - 1].isLast)
-      setClickedGameItem(game[0].games[0].gameId);
-    setIsLast(true);
+    const isLastGame = data?.pages[data?.pages.length - 1].isLast;
+    if (data?.pages.length === 1 && !isLastGame)
+      setClickedGameItem(data?.pages[0].games[0].gameId);
+    setIsLast(isLastGame);
   }, [data]);
 
   if (status === 'success' && !data?.pages[0].games.length) {
@@ -52,7 +52,7 @@ export default function GameResultList({ path }: GameResultListProps) {
           ))}
         </>
       )}
-      {status === 'success' && router.asPath === '/game' && isLast && (
+      {status === 'success' && router.asPath === '/game' && !isLast && (
         <div className={styles.getButton}>
           <input
             type='button'
