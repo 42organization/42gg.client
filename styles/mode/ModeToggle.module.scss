@@ -6,7 +6,7 @@
   width: 4rem;
   height: 1.6rem;
   border-radius: 2rem;
-  background: $dark-gray;
+  background: $norm-lightblue2;
   color: white;
   box-shadow: 0 0 1rem 3px rgba(0 0 0 / 15%);
   cursor: pointer;
@@ -35,7 +35,7 @@
 
 /* 체크박스가 체크될 시 변경되는 요소 */
 .toggle:checked ~ .toggleSwitch {
-  background: $pp-red;
+  background: $rank-red;
   .toggleText {
     position: absolute;
     top: 50%;
