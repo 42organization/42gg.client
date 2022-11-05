@@ -76,7 +76,7 @@ export default function MatchSlot({
       const res = await instance.get(`/pingpong/users/live`);
       setLive({ ...res?.data });
     } catch (e) {
-      setError('JB03');
+      setError('JH09');
     }
   };
 
