@@ -12,7 +12,7 @@ export default function MatchEnrollModal({
   mode,
   startTime,
   endTime,
-  getMatchDataHandler,
+  reload,
 }: Enroll) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
@@ -36,7 +36,8 @@ export default function MatchEnrollModal({
       }
     }
     setModal({ modalName: null });
-    getMatchDataHandler();
+    reload?.getMatchHandler();
+    reload?.getLiveHandler();
   };
 
   const onCancel = () => {

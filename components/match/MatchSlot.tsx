@@ -1,4 +1,4 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Slot } from 'types/matchTypes';
 import { errorState } from 'utils/recoil/error';
 import { liveState } from 'utils/recoil/layout';
@@ -9,22 +9,22 @@ import styles from 'styles/match/MatchSlot.module.scss';
 
 interface MatchSlotProps {
   type: string;
-  matchMode?: string;
   slot: Slot;
+  toggleMode?: string;
   intervalMinute: number;
-  getMatchDataHandler: () => void;
+  getMatchHandler: () => void;
 }
 
 export default function MatchSlot({
   type,
   slot,
-  matchMode,
+  toggleMode,
   intervalMinute,
-  getMatchDataHandler,
+  getMatchHandler,
 }: MatchSlotProps) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
-  const live = useRecoilValue(liveState);
+  const [live, setLive] = useRecoilState(liveState);
 
   const { headCount, slotId, status, time, mode } = slot;
   const headMax = type === 'single' ? 2 : 4;
@@ -42,7 +42,12 @@ export default function MatchSlot({
           const { slotId, time, enemyTeam } = res.data;
           setModal({
             modalName: 'MATCH-CANCEL',
-            cancelInfo: { slotId, time, enemyTeam },
+            cancelInfo: {
+              slotId,
+              time,
+              enemyTeam,
+              reload: { getMatchHandler, getLiveHandler },
+            },
           });
         }
       } catch (e) {
@@ -56,20 +61,29 @@ export default function MatchSlot({
         enrollInfo: {
           slotId,
           type,
-          mode: matchMode,
+          mode: toggleMode,
           startTime,
           endTime,
-          getMatchDataHandler,
+          reload: { getMatchHandler, getLiveHandler },
         },
       });
     }
   };
 
+  const getLiveHandler = async () => {
+    try {
+      const res = await instance.get(`/pingpong/users/live`);
+      setLive({ ...res?.data });
+    } catch (e) {
+      setError('JB03');
+    }
+  };
+
   if (status === 'mytable') {
-    if (matchMode === mode) buttonStyle = styles.mySlot;
+    if (toggleMode === mode) buttonStyle = styles.mySlot;
     else buttonStyle = styles.disabledSlot;
   } else if (status === 'open') {
-    matchMode === 'rank'
+    toggleMode === 'rank'
       ? (buttonStyle = styles.rankSlot)
       : (buttonStyle = styles.normalSlot);
   } else if (status === 'close') {
