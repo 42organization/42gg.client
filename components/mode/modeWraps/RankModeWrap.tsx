@@ -6,12 +6,12 @@ import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
 import styles from 'styles/mode/ModeWrap.module.scss';
 
-interface RankModeProps {
+interface RankModeWrapProps {
   children: React.ReactNode;
   setMode: React.Dispatch<React.SetStateAction<MatchMode>>;
 }
 
-export default function RankMode({ children, setMode }: RankModeProps) {
+export default function RankModeWrap({ children, setMode }: RankModeWrapProps) {
   const { seasonMode, seasonList } = useRecoilValue(seasonListState);
   const [season, setSeason] = useState<number>(seasonList[0]?.id);
   const [toggleMode, setToggleMode] = useState<MatchMode>(

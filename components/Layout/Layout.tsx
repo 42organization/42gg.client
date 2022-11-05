@@ -54,7 +54,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   useEffect(() => {
     if (user.intraId) {
-      getLiveDataHandler();
+      getLiveHandler();
       if (matchRefreshBtn) setMatchRefreshBtn(false);
     }
   }, [presentPath, user, matchRefreshBtn]);
@@ -76,7 +76,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     }
   };
 
-  const getLiveDataHandler = async () => {
+  const getLiveHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/users/live`);
       setLive({ ...res?.data });

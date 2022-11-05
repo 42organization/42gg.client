@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import GameResult from 'components/game/GameResult';
-import GameMode from 'components/mode/modeWraps/GameMode';
+import GameModeWrap from 'components/mode/modeWraps/GameModeWrap';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 export default function Game() {
@@ -18,9 +18,9 @@ export default function Game() {
       >
         Record
       </h1>
-      <GameMode>
+      <GameModeWrap>
         <GameResult />
-      </GameMode>
+      </GameModeWrap>
     </div>
   );
 }

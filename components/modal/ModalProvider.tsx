@@ -31,7 +31,7 @@ export default function ModalProvider() {
   };
 
   const findModal = () => {
-    const { modalName, cancelInfo, enrollInfo } = modal;
+    const { modalName, cancel, enroll } = modal;
     switch (modalName) {
       case 'MAIN-WELCOME':
         return <WelcomeModal />;
@@ -40,14 +40,14 @@ export default function ModalProvider() {
       case 'MENU-LOGOUT':
         return <LogoutModal />;
       case 'MATCH-ENROLL':
-        return typeof enrollInfo !== 'undefined' ? (
-          <MatchEnrollModal {...enrollInfo} />
+        return typeof enroll !== 'undefined' ? (
+          <MatchEnrollModal {...enroll} />
         ) : null;
       case 'MATCH-REJECT':
         return <MatchRejectModal />;
       case 'MATCH-CANCEL':
-        return typeof cancelInfo !== 'undefined' ? (
-          <CancelController {...cancelInfo} />
+        return typeof cancel !== 'undefined' ? (
+          <CancelController {...cancel} />
         ) : null;
       case 'MATCH-MANUAL':
         return <MatchManualModal />;

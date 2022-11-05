@@ -1,30 +1,31 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { Slot } from 'types/matchTypes';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import { MatchMode } from 'types/mainType';
+import { Slot } from 'types/matchTypes';
 import { fillZero } from 'utils/handleTime';
 import instance from 'utils/axios';
 import styles from 'styles/match/MatchSlot.module.scss';
 
 interface MatchSlotProps {
   type: string;
-  matchMode?: string;
   slot: Slot;
+  toggleMode?: MatchMode;
   intervalMinute: number;
-  getMatchDataHandler: () => void;
+  getMatchHandler: () => void;
 }
 
 export default function MatchSlot({
   type,
   slot,
-  matchMode,
+  toggleMode,
   intervalMinute,
-  getMatchDataHandler,
+  getMatchHandler,
 }: MatchSlotProps) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
-  const live = useRecoilValue(liveState);
+  const [live, setLive] = useRecoilState(liveState);
 
   const { headCount, slotId, status, time, mode } = slot;
   const headMax = type === 'single' ? 2 : 4;
@@ -42,7 +43,12 @@ export default function MatchSlot({
           const { slotId, time, enemyTeam } = res.data;
           setModal({
             modalName: 'MATCH-CANCEL',
-            cancelInfo: { slotId, time, enemyTeam },
+            cancel: {
+              slotId,
+              time,
+              enemyTeam,
+              reload: { getMatchHandler, getLiveHandler },
+            },
           });
         }
       } catch (e) {
@@ -53,23 +59,32 @@ export default function MatchSlot({
     } else {
       setModal({
         modalName: 'MATCH-ENROLL',
-        enrollInfo: {
+        enroll: {
           slotId,
           type,
-          mode: matchMode,
+          mode: toggleMode,
           startTime,
           endTime,
-          getMatchDataHandler,
+          reload: { getMatchHandler, getLiveHandler },
         },
       });
     }
   };
 
+  const getLiveHandler = async () => {
+    try {
+      const res = await instance.get(`/pingpong/users/live`);
+      setLive({ ...res?.data });
+    } catch (e) {
+      setError('JH09');
+    }
+  };
+
   if (status === 'mytable') {
-    if (matchMode === mode) buttonStyle = styles.mySlot;
+    if (toggleMode === mode) buttonStyle = styles.mySlot;
     else buttonStyle = styles.disabledSlot;
   } else if (status === 'open') {
-    matchMode === 'rank'
+    toggleMode === 'rank'
       ? (buttonStyle = styles.rankSlot)
       : (buttonStyle = styles.normalSlot);
   } else if (status === 'close') {

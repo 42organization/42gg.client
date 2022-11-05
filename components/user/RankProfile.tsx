@@ -4,7 +4,7 @@ import { ProfileRank } from 'types/userTypes';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
 import Chart from 'components/user/ProfileChart';
-import ProfileMode from 'components/mode/modeWraps/ProfileMode';
+import ProfileModeWrap from 'components/mode/modeWraps/ProfileModeWrap';
 import styles from 'styles/user/Profile.module.scss';
 
 interface RankProfileProps {
@@ -19,9 +19,9 @@ interface RankProps {
 export default function RankProfile({ intraId }: RankProfileProps) {
   return (
     <div className={styles.container}>
-      <ProfileMode>
+      <ProfileModeWrap>
         <Profile intraId={intraId} />
-      </ProfileMode>
+      </ProfileModeWrap>
     </div>
   );
 }

@@ -1,21 +1,22 @@
+import { MatchMode } from 'types/mainType';
 import { Slot } from 'types/matchTypes';
 import MatchSlot from './MatchSlot';
 import styles from 'styles/match/MatchSlotList.module.scss';
 
 interface MatchSlotListProps {
   type: string;
-  mode?: string;
   intervalMinute: number;
+  toggleMode?: MatchMode;
   matchSlots: Slot[];
-  getMatchDataHandler: () => void;
+  getMatchHandler: () => void;
 }
 
 export default function MatchSlotList({
   type,
-  mode,
   intervalMinute,
+  toggleMode,
   matchSlots,
-  getMatchDataHandler,
+  getMatchHandler,
 }: MatchSlotListProps) {
   const slotHour = new Date(matchSlots[0].time).getHours();
   const slotHourIn12 = ChangeHourFrom24To12(slotHour);
@@ -28,10 +29,10 @@ export default function MatchSlotList({
           <MatchSlot
             key={slot.slotId}
             type={type}
-            matchMode={mode}
+            toggleMode={toggleMode}
             slot={slot}
             intervalMinute={intervalMinute}
-            getMatchDataHandler={getMatchDataHandler}
+            getMatchHandler={getMatchHandler}
           ></MatchSlot>
         ))}
       </div>

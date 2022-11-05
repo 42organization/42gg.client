@@ -1,3 +1,5 @@
+import { MatchMode } from './mainType';
+
 type MainModal = 'WELCOME';
 
 type MenuModal = 'REPORT' | 'LOGOUT';
@@ -16,24 +18,29 @@ type ModalName =
   | `USER-${UserModal}`
   | `FIXED-${FixedModal}`;
 
+export interface Reload {
+  getMatchHandler: () => void;
+  getLiveHandler: () => void;
+}
 export interface Cancel {
   slotId: number;
   time: string;
   enemyTeam: string[];
+  reload: Reload | null;
 }
 
 export interface Enroll {
   slotId: number;
   type: string;
-  mode?: string;
+  mode?: MatchMode;
   startTime: Date;
   endTime: Date;
-  getMatchDataHandler: () => void;
+  reload: Reload | null;
 }
 
 export interface Modal {
   modalName: ModalName;
-  cancelInfo?: Cancel;
-  enrollInfo?: Enroll;
+  cancel?: Cancel;
+  enroll?: Enroll;
   gameId?: number;
 }

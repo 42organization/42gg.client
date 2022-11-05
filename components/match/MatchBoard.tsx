@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Match } from 'types/matchTypes';
+import { MatchMode } from 'types/mainType';
 import instance from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
@@ -10,10 +11,10 @@ import styles from 'styles/match/MatchBoard.module.scss';
 
 interface MatchBoardProps {
   type: string;
-  mode?: string;
+  toggleMode?: MatchMode;
 }
 
-export default function MatchBoard({ type, mode }: MatchBoardProps) {
+export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   const [match, setMatch] = useState<Match | null>(null);
   const [spinRefreshButton, setSpinRefreshButton] = useState<boolean>(false);
   const setMatchRefreshBtn = useSetRecoilState(matchRefreshBtnState);
@@ -22,8 +23,8 @@ export default function MatchBoard({ type, mode }: MatchBoardProps) {
   const currentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    getMatchDataHandler();
-  }, [mode]);
+    getMatchHandler();
+  }, [toggleMode]);
 
   useEffect(() => {
     currentRef.current?.scrollIntoView({
@@ -32,10 +33,10 @@ export default function MatchBoard({ type, mode }: MatchBoardProps) {
     });
   }, [match]);
 
-  const getMatchDataHandler = async () => {
+  const getMatchHandler = async () => {
     try {
       const res = await instance.get(
-        `/pingpong/match/tables/${1}/${mode}/${type}`
+        `/pingpong/match/tables/${1}/${toggleMode}/${type}`
       );
       setMatch(res?.data);
     } catch (e) {
@@ -63,7 +64,7 @@ export default function MatchBoard({ type, mode }: MatchBoardProps) {
     setTimeout(() => {
       setSpinRefreshButton(false);
     }, 1000);
-    getMatchDataHandler();
+    getMatchHandler();
     setMatchRefreshBtn(true);
   };
 
@@ -103,10 +104,10 @@ export default function MatchBoard({ type, mode }: MatchBoardProps) {
             >
               <MatchSlotList
                 type={type}
-                mode={mode}
                 intervalMinute={intervalMinute}
+                toggleMode={toggleMode}
                 matchSlots={matchSlots}
-                getMatchDataHandler={getMatchDataHandler}
+                getMatchHandler={getMatchHandler}
               />
             </div>
           );
