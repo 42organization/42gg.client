@@ -29,7 +29,7 @@ export default function MatchMode({ children }: MatchModeProps) {
         </div>
       )}
       {React.cloneElement(children as React.ReactElement, {
-        mode: toggleMode,
+        toggleMode: toggleMode,
       })}
     </div>
   );
