@@ -42,7 +42,7 @@ export default function MatchSlot({
           const { slotId, time, enemyTeam } = res.data;
           setModal({
             modalName: 'MATCH-CANCEL',
-            cancelInfo: {
+            cancel: {
               slotId,
               time,
               enemyTeam,
@@ -58,7 +58,7 @@ export default function MatchSlot({
     } else {
       setModal({
         modalName: 'MATCH-ENROLL',
-        enrollInfo: {
+        enroll: {
           slotId,
           type,
           mode: toggleMode,

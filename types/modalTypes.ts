@@ -38,7 +38,7 @@ export interface Enroll {
 
 export interface Modal {
   modalName: ModalName;
-  cancelInfo?: Cancel;
-  enrollInfo?: Enroll;
+  cancel?: Cancel;
+  enroll?: Enroll;
   gameId?: number;
 }
