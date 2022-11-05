@@ -6,11 +6,11 @@ import { MatchMode } from 'types/mainType';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import styles from 'styles/mode/ModeWrap.module.scss';
 
-interface MatchModeProps {
+interface MatchModeWrapProps {
   children: React.ReactNode;
 }
 
-export default function MatchMode({ children }: MatchModeProps) {
+export default function MatchModeWrap({ children }: MatchModeWrapProps) {
   const { seasonMode } = useRecoilValue(seasonListState);
   const [toggleMode, setToggleMode] = useState<MatchMode>('rank');
 
