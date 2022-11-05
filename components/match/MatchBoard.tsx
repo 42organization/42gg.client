@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Match } from 'types/matchTypes';
+import { MatchMode } from 'types/mainType';
 import instance from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
@@ -10,7 +11,7 @@ import styles from 'styles/match/MatchBoard.module.scss';
 
 interface MatchBoardProps {
   type: string;
-  toggleMode?: string;
+  toggleMode?: MatchMode;
 }
 
 export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {

@@ -1,3 +1,4 @@
+import { MatchMode } from 'types/mainType';
 import { Slot } from 'types/matchTypes';
 import MatchSlot from './MatchSlot';
 import styles from 'styles/match/MatchSlotList.module.scss';
@@ -5,7 +6,7 @@ import styles from 'styles/match/MatchSlotList.module.scss';
 interface MatchSlotListProps {
   type: string;
   intervalMinute: number;
-  toggleMode?: string;
+  toggleMode?: MatchMode;
   matchSlots: Slot[];
   getMatchHandler: () => void;
 }

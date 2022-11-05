@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { seasonListState } from 'utils/recoil/seasons';
+import { MatchMode } from 'types/mainType';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import styles from 'styles/mode/ModeWrap.module.scss';
 
@@ -11,7 +12,7 @@ interface MatchModeProps {
 
 export default function MatchMode({ children }: MatchModeProps) {
   const { seasonMode } = useRecoilValue(seasonListState);
-  const [toggleMode, setToggleMode] = useState<string>('rank');
+  const [toggleMode, setToggleMode] = useState<MatchMode>('rank');
 
   const modeToggleHandler = () => {
     setToggleMode((mode) => (mode === 'rank' ? 'normal' : 'rank'));

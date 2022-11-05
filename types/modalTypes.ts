@@ -1,3 +1,5 @@
+import { MatchMode } from './mainType';
+
 type MainModal = 'WELCOME';
 
 type MenuModal = 'REPORT' | 'LOGOUT';
@@ -30,7 +32,7 @@ export interface Cancel {
 export interface Enroll {
   slotId: number;
   type: string;
-  mode?: string;
+  mode?: MatchMode;
   startTime: Date;
   endTime: Date;
   reload: Reload | null;

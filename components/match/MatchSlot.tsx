@@ -1,8 +1,9 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { Slot } from 'types/matchTypes';
 import { errorState } from 'utils/recoil/error';
 import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import { MatchMode } from 'types/mainType';
+import { Slot } from 'types/matchTypes';
 import { fillZero } from 'utils/handleTime';
 import instance from 'utils/axios';
 import styles from 'styles/match/MatchSlot.module.scss';
@@ -10,7 +11,7 @@ import styles from 'styles/match/MatchSlot.module.scss';
 interface MatchSlotProps {
   type: string;
   slot: Slot;
-  toggleMode?: string;
+  toggleMode?: MatchMode;
   intervalMinute: number;
   getMatchHandler: () => void;
 }
