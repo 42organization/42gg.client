@@ -18,8 +18,9 @@ export default function ExpChangeModal() {
 
   const getExpHandler = async () => {
     try {
+      console.log(modal);
       const res = await instance.get(
-        `/pingpong/games/${modal.gameId}/result/rank`
+        `/pingpong/games/${modal.exp?.gameId}/result/${modal.exp?.mode}`
       );
       setUser(res?.data);
     } catch (e) {

@@ -47,6 +47,6 @@ export interface Modal {
   modalName: ModalName;
   cancel?: Cancel;
   enroll?: Enroll;
-  exp: Exp;
+  exp?: Exp;
   gameId?: number;
 }
