@@ -63,7 +63,7 @@ export default function RankGame({
         <div className={styles.buttons}>
           <Button
             style={styles.positive}
-            value='확인'
+            value='게임종료'
             onClick={() => onSubmit(result)}
           />
         </div>
