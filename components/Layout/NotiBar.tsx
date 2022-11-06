@@ -8,43 +8,33 @@ import NotiItem from './NotiItem';
 import styles from 'styles/Layout/NotiBar.module.scss';
 
 export default function NotiBar() {
+  const [noti, setNoti] = useState<Noti[]>([]);
+  const [clickReloadBtn, setClickReloadBtn] = useState(false);
+  const [reloadBtnAnimation, setReloadBtnAnimation] = useState(false);
   const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
   const setError = useSetRecoilState(errorState);
-  const [noti, setNoti] = useState<Noti[]>([]);
-  const [clickRefreshBtn, setClickRefreshBtn] = useState(false);
-  const [refreshBtnAnimation, setRefreshBtnAnimation] = useState(false);
 
   useEffect(() => {
     getNotiHandler();
   }, []);
 
   useEffect(() => {
-    if (clickRefreshBtn) getNotiHandler();
-  }, [clickRefreshBtn]);
+    if (clickReloadBtn) getNotiHandler();
+  }, [clickReloadBtn]);
 
   const getNotiHandler = async () => {
-    if (clickRefreshBtn) {
-      setRefreshBtnAnimation(true);
+    if (clickReloadBtn) {
+      setReloadBtnAnimation(true);
       setTimeout(() => {
-        setRefreshBtnAnimation(false);
+        setReloadBtnAnimation(false);
       }, 1000);
     }
     try {
       const res = await instance.get(`/pingpong/notifications`);
       setNoti(res?.data.notifications);
-      setClickRefreshBtn(false);
+      setClickReloadBtn(false);
     } catch (e) {
       setError('JB04');
-    }
-  };
-
-  const allNotiDeleteHandler = async () => {
-    try {
-      await instance.delete(`/pingpong/notifications`);
-      alert('알림이 성공적으로 삭제되었습니다.');
-      resetOpenNotiBar();
-    } catch (e) {
-      setError('JB05');
     }
   };
 
@@ -55,22 +45,11 @@ export default function NotiBar() {
         {noti.length ? (
           <>
             <div className={styles.btnWrap}>
-              <button
-                className={styles.deleteBtn}
-                onClick={allNotiDeleteHandler}
-              >
-                &#9745; 전체삭제
-              </button>
-              <button
-                className={
-                  refreshBtnAnimation
-                    ? styles.refreshBtnAnimation
-                    : styles.refreshBtn
-                }
-                onClick={() => setClickRefreshBtn(true)}
-              >
-                &#8635;
-              </button>
+              <DeleteAllBtn />
+              <ReloadNotiBtn
+                reloadBtnAnimation={reloadBtnAnimation}
+                setClickReloadBtn={setClickReloadBtn}
+              />
             </div>
             <div>
               {noti.map((data: Noti) => (
@@ -81,20 +60,54 @@ export default function NotiBar() {
         ) : (
           <div className={styles.emptyContent}>
             <></>
-            <button
-              className={
-                refreshBtnAnimation
-                  ? styles.refreshBtnAnimation
-                  : styles.refreshBtn
-              }
-              onClick={() => setClickRefreshBtn(true)}
-            >
-              &#8635;
-            </button>
+            <ReloadNotiBtn
+              reloadBtnAnimation={reloadBtnAnimation}
+              setClickReloadBtn={setClickReloadBtn}
+            />
             <div>💭 새로운 알림이 없습니다!</div>
           </div>
         )}
       </div>
     </div>
+  );
+}
+
+interface ReloadNotiBtnProps {
+  reloadBtnAnimation: boolean;
+  setClickReloadBtn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function ReloadNotiBtn({
+  reloadBtnAnimation,
+  setClickReloadBtn,
+}: ReloadNotiBtnProps) {
+  return (
+    <button
+      className={
+        reloadBtnAnimation ? styles.refreshBtnAnimation : styles.refreshBtn
+      }
+      onClick={() => setClickReloadBtn(true)}
+    >
+      &#8635;
+    </button>
+  );
+}
+
+function DeleteAllBtn() {
+  const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
+  const setError = useSetRecoilState(errorState);
+  const allNotiDeleteHandler = async () => {
+    try {
+      await instance.delete(`/pingpong/notifications`);
+      alert('알림이 성공적으로 삭제되었습니다.');
+      resetOpenNotiBar();
+    } catch (e) {
+      setError('JB05');
+    }
+  };
+  return (
+    <button className={styles.deleteBtn} onClick={allNotiDeleteHandler}>
+      &#9745; 전체삭제
+    </button>
   );
 }
