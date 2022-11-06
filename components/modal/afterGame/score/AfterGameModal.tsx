@@ -4,9 +4,9 @@ import { AfterGame, TeamScore, Team } from 'types/scoreTypes';
 import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
+import { liveState } from 'utils/recoil/layout';
 import NormalGame from './NormalGame';
 import RankGame from './RankGame';
-import { liveState } from 'utils/recoil/layout';
 
 const defaultTeam = {
   teamScore: 0,
@@ -26,7 +26,7 @@ export default function AfterGameModal() {
   const defaultCurrentGame: AfterGame = {
     gameId: 0,
     mode: currentMatchMode,
-    startTime: '1970-01-01 00:00',
+    startTime: '2022-07-13 11:50',
     matchTeamsInfo: {
       myTeam: defaultPlayers,
       enemyTeam: defaultPlayers,
@@ -64,21 +64,21 @@ export default function AfterGameModal() {
         matchTeamsInfo: { ...res?.data.matchTeamsInfo },
       });
     } catch (e) {
-      setError('JH03');
+      setError('KP05');
     }
   };
 
   const submitRankResultHandler = async (result: TeamScore) => {
     try {
       const res = await instance.post(`/pingpong/games/result/rank`, result);
-      await instance.put(`/pingpong/match/current`);
       if (res?.status === 201) {
         alert('결과 입력이 완료되었습니다.');
       } else if (res?.status === 202) {
         alert('상대가 이미 점수를 입력했습니다.');
       }
+      await instance.put(`/pingpong/match/current`);
     } catch (e) {
-      setError('JH04');
+      setError('KP05');
       return;
     }
     setModal({
@@ -92,7 +92,7 @@ export default function AfterGameModal() {
       await instance.post(`/pingpong/games/result/normal`);
       await instance.put(`/pingpong/match/current`);
     } catch (e) {
-      setError('DK03');
+      setError('KP05');
       return;
     }
     setModal({ modalName: 'FIXED-EXP', exp: currentExp });
