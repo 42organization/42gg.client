@@ -23,7 +23,7 @@ export default function ExpChangeModal() {
       );
       setUser(res?.data);
     } catch (e) {
-      setErrorMessage('KP03');
+      setErrorMessage('KP04');
     }
   };
 
