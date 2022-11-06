@@ -75,7 +75,6 @@ export default function MatchSlot({
     buttonStyle = toggleMode === 'rank' ? styles.rankSlot : styles.normalSlot;
   }
 
-  if (slotId === 1637) console.log(status);
   return (
     <button
       className={buttonStyle}
