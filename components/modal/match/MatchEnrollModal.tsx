@@ -1,11 +1,11 @@
 import { useSetRecoilState } from 'recoil';
 import { Enroll } from 'types/modalTypes';
 import { gameTimeToString } from 'utils/handleTime';
+import { reloadMatchState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/modal/MatchEnrollModal.module.scss';
-import { reloadMatchState } from 'utils/recoil/match';
 
 export default function MatchEnrollModal({
   slotId,
