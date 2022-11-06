@@ -33,7 +33,7 @@ const rankGuide = {
 const scoreExitsGuide = {
   before: '경기 결과!',
   after: '',
-  explains: ['이미 입력된 경기 입니다 점수를 확인하세요!', ''],
+  explains: ['이미 입력된 경기입니다. 점수를 확인하세요!', ''],
 };
 const defaultGuide = {
   before: '',
