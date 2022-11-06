@@ -20,6 +20,27 @@ const defaultTeam = {
 };
 const defaultPlayers: Team = defaultTeam;
 
+const normalGuide = {
+  before: '즐거운 경기 하셨나요?',
+  after: '🔥 경기 중 🔥',
+  explains: ['💡 경기시작 10분 후부터 ', '💡 경기를 완료할 수 있습니다'],
+};
+const rankGuide = {
+  before: '경기 결과 확인',
+  after: '경기 후 점수를 입력해주세요',
+  explains: ['💡 3판 2선승제!', '💡 동점은 1점 내기로 승부를 결정!'],
+};
+const scoreExitsGuide = {
+  before: '경기 결과!',
+  after: '',
+  explains: ['이미 입력된 경기 입니다 점수를 확인하세요!', ''],
+};
+const defaultGuide = {
+  before: '',
+  after: '',
+  explains: ['', ''],
+};
+
 export default function AfterGameModal() {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
@@ -34,33 +55,11 @@ export default function AfterGameModal() {
       enemyTeam: defaultPlayers,
     },
   };
-
   const [currentGame, setCurrentGame] = useState<AfterGame>(defaultCurrentGame);
 
   const currentExp = {
     gameId: currentGame.gameId,
     mode: currentGame.mode,
-  };
-
-  const normalGuide = {
-    before: '즐거운 경기 하셨나요?',
-    after: '🔥 경기 중 🔥',
-    explains: ['💡 경기시작 10분 후부터 ', '💡 경기를 완료할 수 있습니다'],
-  };
-  const rankGuide = {
-    before: '경기 결과 확인',
-    after: '경기 후 점수를 입력해주세요',
-    explains: ['💡 3판 2선승제!', '💡 동점은 1점 내기로 승부를 결정!'],
-  };
-  const rankEndGuide = {
-    before: '경기 결과!',
-    after: '',
-    explains: ['이미 입력된 경기 입니다 점수를 확인하세요!', ''],
-  };
-  const defaultGuide = {
-    before: '',
-    after: '',
-    explains: ['', ''],
   };
 
   const getCurrentGameHandler = async () => {
@@ -131,7 +130,7 @@ export default function AfterGameModal() {
 
   function getRankGuidLine(scoreExits: boolean) {
     if (scoreExits === true) {
-      return rankEndGuide;
+      return scoreExitsGuide;
     } else {
       return rankGuide;
     }
