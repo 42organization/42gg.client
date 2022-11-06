@@ -6,7 +6,7 @@ import GameResultList from 'components/game/GameResultList';
 
 interface GameResultProps {
   mode?: SeasonMode;
-  season?: string;
+  season?: number;
 }
 
 export default function GameResult({ mode, season }: GameResultProps) {
@@ -18,13 +18,13 @@ export default function GameResult({ mode, season }: GameResultProps) {
 
   const makePath = () => {
     if (asPath === '/' || asPath.includes('token')) {
-      setPath(`/pingpong/games?count=3&gameId=`);
+      setPath(`/pingpong/games?count=${3}&status=${'live'}&gameId=`);
       return;
     }
     const userQuery = intraId ? `/users/${intraId}` : '';
     const seasonQuery = mode === 'rank' && season && `season=${season}`;
     const modeQuery = mode !== 'both' && `mode=${mode}`;
-    const countQuery = router.pathname === '/users/detail' && 'count=5';
+    const countQuery = router.pathname === '/users/detail' && `count=${5}`;
     const query = [modeQuery, seasonQuery, countQuery, 'gameId=']
       .filter((item) => item)
       .join('&');
