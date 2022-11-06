@@ -6,27 +6,25 @@
   justify-items: stretch;
   align-items: stretch;
   margin: 0.5rem 0.6rem 0 0.6rem;
-  color: white;
   input[type='radio'] {
     position: absolute;
     opacity: 0;
   }
   :checked + .modeButton {
-    background: rgba(223, 223, 223, 0.5);
+    background: #f9f6ff;
   }
   .modeButton {
     display: flex;
     justify-content: center;
     align-items: center;
-    // margin: 0 0.1rem;
-    padding-block: 0.3rem;
-    border: solid 1px white;
+    height: 2rem;
+    background: #e4caf4;
+    border: solid 1px $dark-gray;
     border-radius: $small-radius;
-    border-bottom-style: none;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    // background: $gray;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
     text-align: center;
     cursor: pointer;
   }
