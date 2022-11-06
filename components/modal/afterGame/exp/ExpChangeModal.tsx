@@ -4,7 +4,6 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
-import ExpCelebration from './ExpCelebration';
 import ExpGuage from './ExpGuage';
 import styles from 'styles/modal/ExpGameModal.module.scss';
 
@@ -20,11 +19,11 @@ export default function ExpChangeModal() {
   const getExpHandler = async () => {
     try {
       const res = await instance.get(
-        `/pingpong/games/${modal.gameId}/result/${modal.enroll?.mode}`
+        `/pingpong/games/${modal.exp?.gameId}/result/${modal.exp?.mode}`
       );
       setUser(res?.data);
     } catch (e) {
-      setError('KP03');
+      setError('KP04');
     }
   };
 
@@ -48,9 +47,7 @@ export default function ExpChangeModal() {
             onClick={() => {
               setModal({ modalName: null });
             }}
-          >
-            <ExpCelebration />
-          </div>
+          ></div>
           <ExpGuage
             maxExp={beforeMaxExp}
             exp={beforeExp}

@@ -4,6 +4,7 @@ import { modalState } from 'utils/recoil/modal';
 import { sleep } from 'utils/sleep';
 import { Button } from '../score/Buttons';
 import styles from 'styles/modal/ExpGameModal.module.scss';
+import ExpCelebration from './ExpCelebration';
 
 type ExpGuageProps = {
   maxExp: number;
@@ -13,6 +14,7 @@ type ExpGuageProps = {
   afterMaxExp: number;
   increasedLevel: number;
 };
+
 export default function ExpGuage({
   maxExp,
   exp,
@@ -22,58 +24,72 @@ export default function ExpGuage({
   increasedLevel,
 }: ExpGuageProps) {
   const setModal = useSetRecoilState(modalState);
-  const [beforeExp, setBeforeExp] = useState<number>(exp);
+  const [currentExp, setCurrentExp] = useState<number>(0);
+  const [currentMaxExp, setCurrentMaxExp] = useState<number>(maxExp);
+  const [currentLevel, setCurrentLevel] = useState<number>(level);
+  const [celebrateEvent, setCelebrateEvent] = useState<Boolean>(false);
 
   useEffect(() => {
     expGaugeAnimation();
   }, []);
 
-  const expGaugeAnimation = async () => {
-    for (let i = 0; i < 100; ++i) {
-      sleep(i * 20).then(() =>
-        setBeforeExp((thisExp) => thisExp + increasedExp / 100)
-      );
+  useEffect(() => {
+    if (getPercent(maxExp, exp + currentExp) >= 100) {
+      setCurrentMaxExp(afterMaxExp);
+      setCurrentLevel(level + increasedLevel);
+      setCelebrateEvent(true);
+    }
+  }, [currentExp]);
+
+  const expGaugeAnimation = () => {
+    for (let i = 0; i < increasedExp; ++i) {
+      sleep(i * 20).then(() => setCurrentExp((thisExp) => thisExp + 1));
     }
   };
 
-  function getPercent(maxExp: number, increasedExp: number) {
-    return (increasedExp / maxExp) * 100;
-  }
-
-  if (getPercent(maxExp, beforeExp) > 100) {
-    return (
-      <div>
-        <ExpGuage
-          maxExp={afterMaxExp}
-          exp={0}
-          level={level + increasedLevel}
-          increasedExp={increasedExp - (maxExp - exp)}
-          afterMaxExp={afterMaxExp}
-          increasedLevel={increasedLevel}
-        />
-      </div>
-    );
-  }
+  const CelebrationEvent = (
+    <div
+      className={styles.celebratContainer}
+      onClick={() => {
+        setModal({ modalName: null });
+      }}
+    >
+      <ExpCelebration />
+    </div>
+  );
 
   return (
     <div className={styles.container}>
+      {celebrateEvent && CelebrationEvent}
       <div className={styles.levelRacketWrap}>
-        <div className={styles.level}>Lv. {level}</div>
+        <div className={styles.level}>Lv. {currentLevel}</div>
         <div className={styles.exp}>
-          <div className={styles.expRate}>
-            {Math.ceil(beforeExp)} / {maxExp}
+          <div className={styles.expContainer}>
+            <div className={styles.expRate}>
+              {getCurrentExp(currentExp + exp, maxExp)} / {currentMaxExp}
+            </div>
+            <div className={styles.expIncrease}>+{currentExp}</div>
           </div>
           <div className={styles.bar}>
             <span
               className={styles.expCurrent}
               style={{
-                width: `${getPercent(maxExp, beforeExp)}%`,
+                width: `${getPercent(
+                  currentMaxExp,
+                  getCurrentExp(currentExp + exp, maxExp)
+                )}%`,
               }}
             ></span>
             <span
               className={styles.expLeft}
               style={{
-                width: `${100 - getPercent(maxExp, beforeExp)}%`,
+                width: `${
+                  100 -
+                  getPercent(
+                    currentMaxExp,
+                    getCurrentExp(currentExp + exp, maxExp)
+                  )
+                }%`,
               }}
             ></span>
           </div>
@@ -90,4 +106,16 @@ export default function ExpGuage({
       </div>
     </div>
   );
+}
+
+function getPercent(currentMaxExp: number, increasedExp: number) {
+  return (increasedExp / currentMaxExp) * 100;
+}
+
+function getCurrentExp(currentExp: number, maxExp: number) {
+  if (currentExp >= maxExp) {
+    return currentExp - maxExp;
+  } else {
+    return currentExp;
+  }
 }
