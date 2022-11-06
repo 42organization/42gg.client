@@ -6,24 +6,21 @@ import styles from 'styles/game/GameResultItem.module.scss';
 
 export default function Game() {
   const router = useRouter();
-  const [clickedTitle, setClickedTitle] = useState<boolean>(false);
+  const [clickTitle, setClickTitle] = useState<boolean>(false);
 
-  const clickedTitleHandler = () => {
+  const clickTitleHandler = () => {
     router.push(`/game`, undefined, {
       shallow: true,
     });
-    setClickedTitle(true);
+    setClickTitle(true);
   };
 
   return (
     <div className={styles.pageWrap}>
-      <h1 className={styles.title} onClick={clickedTitleHandler}>
+      <h1 className={styles.title} onClick={clickTitleHandler}>
         Record
       </h1>
-      <GameModeWrap
-        clickedTitle={clickedTitle}
-        setClickedTitle={setClickedTitle}
-      >
+      <GameModeWrap clickTitle={clickTitle} setClickTitle={setClickTitle}>
         <GameResult />
       </GameModeWrap>
     </div>

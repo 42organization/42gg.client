@@ -9,26 +9,26 @@ import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface GameModeWrapProps {
   children: React.ReactNode;
-  clickedTitle: boolean;
-  setClickedTitle: React.Dispatch<React.SetStateAction<boolean>>;
+  clickTitle: boolean;
+  setClickTitle: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function GameModeWrap({
   children,
-  clickedTitle,
-  setClickedTitle,
+  clickTitle,
+  setClickTitle,
 }: GameModeWrapProps) {
   const { seasonList } = useRecoilValue(seasonListState);
   const [season, setSeason] = useState<number>(seasonList[0]?.id);
   const [radioMode, setRadioMode] = useState<SeasonMode>('both');
 
   useEffect(() => {
-    if (clickedTitle) {
+    if (clickTitle) {
       setRadioMode('both');
       setSeason(seasonList[0]?.id);
-      setClickedTitle(false);
+      setClickTitle(false);
     }
-  }, [clickedTitle]);
+  }, [clickTitle]);
 
   const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRadioMode(e.target.value as SeasonMode);
