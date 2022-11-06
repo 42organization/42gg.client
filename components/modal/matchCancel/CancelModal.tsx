@@ -1,21 +1,23 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import instance from 'utils/axios';
-import { Reload } from 'types/modalTypes';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import { currentMatchState } from 'utils/recoil/match';
-import { openCurrentMatchState } from 'utils/recoil/match';
+import {
+  openCurrentMatchState,
+  currentMatchState,
+  reloadMatchState,
+} from 'utils/recoil/match';
 import styles from 'styles/modal/CancelModal.module.scss';
 
 interface CancelModalProps {
   slotId: number;
-  reload: Reload | null;
 }
 
-export default function CancelModal({ slotId, reload }: CancelModalProps) {
+export default function CancelModal({ slotId }: CancelModalProps) {
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
+  const setReloadMatch = useSetRecoilState(reloadMatchState);
   const currentMatch = useRecoilValue(currentMatchState);
 
   const onCancel = async () => {
@@ -35,10 +37,7 @@ export default function CancelModal({ slotId, reload }: CancelModalProps) {
     }
     setModal({ modalName: null });
     setOpenCurrentMatch(false);
-    if (reload) {
-      reload.getMatchHandler();
-      reload.getLiveHandler();
-    } else window.location.reload();
+    setReloadMatch(true);
   };
 
   const onReturn = () => {

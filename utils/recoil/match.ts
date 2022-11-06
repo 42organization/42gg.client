@@ -7,8 +7,8 @@ export const openCurrentMatchState = atom<boolean>({
   default: false,
 });
 
-export const matchRefreshBtnState = atom<boolean>({
-  key: `matchRefreshBtnState/${v1()}`,
+export const reloadMatchState = atom<boolean>({
+  key: `reloadMatchState/${v1()}`,
   default: false,
 });
 

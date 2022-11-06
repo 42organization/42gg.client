@@ -3,10 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { userState, liveState } from 'utils/recoil/layout';
-import {
-  matchRefreshBtnState,
-  openCurrentMatchState,
-} from 'utils/recoil/match';
+import { reloadMatchState, openCurrentMatchState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { seasonListState } from 'utils/recoil/seasons';
@@ -27,12 +24,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const [openCurrentMatch, setOpenCurrentMatch] = useRecoilState(
     openCurrentMatchState
   );
-  const [matchRefreshBtn, setMatchRefreshBtn] =
-    useRecoilState(matchRefreshBtnState);
+  const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
+  const setSeasonList = useSetRecoilState(seasonListState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const presentPath = useRouter().asPath;
-  const setSeasonList = useSetRecoilState(seasonListState);
 
   useEffect(() => {
     getUserHandler();
@@ -55,9 +51,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
   useEffect(() => {
     if (user.intraId) {
       getLiveHandler();
-      if (matchRefreshBtn) setMatchRefreshBtn(false);
+      if (reloadMatch) setReloadMatch(false);
     }
-  }, [presentPath, user, matchRefreshBtn]);
+  }, [presentPath, user, reloadMatch]);
 
   useEffect(() => {
     if (live?.event === 'match') setOpenCurrentMatch(true);

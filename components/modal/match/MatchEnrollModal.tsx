@@ -1,6 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 import { Enroll } from 'types/modalTypes';
 import { gameTimeToString } from 'utils/handleTime';
+import { reloadMatchState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
@@ -12,10 +13,10 @@ export default function MatchEnrollModal({
   mode,
   startTime,
   endTime,
-  reload,
 }: Enroll) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
+  const setReloadMatch = useSetRecoilState(reloadMatchState);
 
   const onEnroll = async () => {
     try {
@@ -36,8 +37,7 @@ export default function MatchEnrollModal({
       }
     }
     setModal({ modalName: null });
-    reload?.getMatchHandler();
-    reload?.getLiveHandler();
+    setReloadMatch(true);
   };
 
   const onCancel = () => {

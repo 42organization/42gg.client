@@ -5,15 +5,14 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import instance from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
+import { reloadMatchState, currentMatchState } from 'utils/recoil/match';
 import { gameTimeToString, isBeforeMin } from 'utils/handleTime';
-import { matchRefreshBtnState, currentMatchState } from 'utils/recoil/match';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 export default function CurrentMatch() {
-  const [currentMatch, setCurrentMatch] = useRecoilState(currentMatchState);
-  const { isMatched, enemyTeam, time, slotId } = currentMatch;
-  const [matchRefreshBtn, setMatchRefreshBtn] =
-    useRecoilState(matchRefreshBtnState);
+  const [{ isMatched, enemyTeam, time, slotId }, setCurrentMatch] =
+    useRecoilState(currentMatchState);
+  const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
   const matchingMessage = time && makeMessage(time, isMatched);
@@ -22,8 +21,8 @@ export default function CurrentMatch() {
 
   useEffect(() => {
     getCurrentMatchHandler();
-    if (matchRefreshBtn) setMatchRefreshBtn(false);
-  }, [presentPath, matchRefreshBtn]);
+    if (reloadMatch) setReloadMatch(false);
+  }, [presentPath, reloadMatch]);
 
   const getCurrentMatchHandler = async () => {
     try {
@@ -37,7 +36,7 @@ export default function CurrentMatch() {
   const onCancel = () => {
     setModal({
       modalName: 'MATCH-CANCEL',
-      cancel: { slotId, time, enemyTeam, reload: null },
+      cancel: { slotId, time, enemyTeam },
     });
   };
 
