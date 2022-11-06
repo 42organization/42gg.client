@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
+import { MatchMode } from 'types/mainType';
 import PageNation from 'components/Pagination';
 import styles from 'styles/rank/RankList.module.scss';
-import { MatchMode } from 'types/mainType';
 
 interface PageInfo {
   currentPage?: number;
