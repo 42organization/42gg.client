@@ -27,7 +27,7 @@ export default function ExpGuage({
   const [currentExp, setCurrentExp] = useState<number>(0);
   const [currentMaxExp, setCurrentMaxExp] = useState<number>(maxExp);
   const [currentLevel, setCurrentLevel] = useState<number>(level);
-  const [isCelebrationEvent, setIsCelebrationEvent] = useState<Boolean>(false);
+  const [celebrateEvent, setCelebrateEvent] = useState<Boolean>(false);
 
   useEffect(() => {
     expGaugeAnimation();
@@ -37,7 +37,7 @@ export default function ExpGuage({
     if (getPercent(maxExp, exp + currentExp) >= 100) {
       setCurrentMaxExp(afterMaxExp);
       setCurrentLevel(level + increasedLevel);
-      setIsCelebrationEvent(true);
+      setCelebrateEvent(true);
     }
   }, [currentExp]);
 
@@ -60,7 +60,7 @@ export default function ExpGuage({
 
   return (
     <div className={styles.container}>
-      {isCelebrationEvent && CelebrationEvent}
+      {celebrateEvent && CelebrationEvent}
       <div className={styles.levelRacketWrap}>
         <div className={styles.level}>Lv. {currentLevel}</div>
         <div className={styles.exp}>

@@ -15,7 +15,7 @@ export default function infScroll(path: string) {
     getNextPageParam: (pages) => {
       return pages.lastGameId;
     },
-    onError: (error: any) => {
+    onError: () => {
       setError('KP01');
     },
     keepPreviousData: true,

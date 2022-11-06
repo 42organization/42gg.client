@@ -10,7 +10,7 @@ import styles from 'styles/modal/ExpGameModal.module.scss';
 export default function ExpChangeModal() {
   const [modal, setModal] = useRecoilState(modalState);
   const [user, setUser] = useState();
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
 
   useEffect(() => {
     getExpHandler();
@@ -23,7 +23,7 @@ export default function ExpChangeModal() {
       );
       setUser(res?.data);
     } catch (e) {
-      setErrorMessage('KP04');
+      setError('KP04');
     }
   };
 
