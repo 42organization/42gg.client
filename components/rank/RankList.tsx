@@ -12,7 +12,7 @@ import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 
 interface RankListProps {
-  mode?: MatchMode;
+  mode: MatchMode;
   season?: string;
 }
 
@@ -80,12 +80,12 @@ export default function RankList({ mode, season }: RankListProps) {
   if (isMain) return <RankListMain rank={rank} />;
 
   return (
-    <RankListFrame mode={mode!} pageInfo={pageInfo}>
+    <RankListFrame mode={mode} pageInfo={pageInfo}>
       {rank?.rankList.map((item: NormalUser | RankUser, index) => (
         <RankListItem
           key={item.intraId}
           index={index}
-          mode={mode!}
+          mode={mode}
           user={makeUser(item)}
         />
       ))}
