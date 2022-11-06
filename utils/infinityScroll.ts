@@ -1,4 +1,5 @@
-import { useSetRecoilState } from 'recoil';
+import { useRouter } from 'next/router';
+import { useSetRecoilState, useRecoilState } from 'recoil';
 import { useInfiniteQuery } from 'react-query';
 import { errorState } from 'utils/recoil/error';
 import instance from './axios';
@@ -15,9 +16,11 @@ export default function infScroll(path: string) {
     getNextPageParam: (pages) => {
       return pages.lastGameId;
     },
-    onError: () => {
-      setError('KP01');
+    onError: (e: any) => {
+      if (e.response.data.code === 'UF001') setError('JB07');
+      else setError('KP01');
     },
+    retry: 0,
     keepPreviousData: true,
   });
 
