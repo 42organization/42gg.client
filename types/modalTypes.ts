@@ -38,9 +38,15 @@ export interface Enroll {
   reload: Reload | null;
 }
 
+export interface Exp {
+  gameId: number;
+  mode: MatchMode | null;
+}
+
 export interface Modal {
   modalName: ModalName;
   cancel?: Cancel;
   enroll?: Enroll;
+  exp: Exp;
   gameId?: number;
 }

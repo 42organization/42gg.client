@@ -27,6 +27,7 @@ export default function BasicProfile({ intraId }: ProfileProps) {
         setProfile(res?.data);
         setImgError(false);
       } catch (e) {
+        console.log(e.response.data.code);
         setError('SJ03');
       }
     })();

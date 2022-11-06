@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { Player, AfterGame, TeamScore, Team } from 'types/scoreTypes';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { AfterGame, TeamScore, Team } from 'types/scoreTypes';
 import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import NormalGame from './NormalGame';
 import RankGame from './RankGame';
+import { liveState } from 'utils/recoil/layout';
 
 const defaultTeam = {
   teamScore: 0,
@@ -16,22 +17,23 @@ const defaultTeam = {
     },
   ],
 };
-
 const defaultPlayers: Team = defaultTeam;
-const defaultCurrentGame: AfterGame = {
-  gameId: 0,
-  mode: 'both',
-  startTime: '1970-01-01 00:00',
-  matchTeamsInfo: {
-    myTeam: defaultPlayers,
-    enemyTeam: defaultPlayers,
-  },
-};
 
 export default function AfterGameModal() {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
+  const { currentMatchMode } = useRecoilValue(liveState);
+  const defaultCurrentGame: AfterGame = {
+    gameId: 0,
+    mode: currentMatchMode,
+    startTime: '1970-01-01 00:00',
+    matchTeamsInfo: {
+      myTeam: defaultPlayers,
+      enemyTeam: defaultPlayers,
+    },
+  };
   const [currentGame, setCurrentGame] = useState<AfterGame>(defaultCurrentGame);
+
   const normalGuide = {
     before: '즐거운 경기 하셨나요?',
     after: '🔥 경기 중 🔥',
@@ -41,6 +43,11 @@ export default function AfterGameModal() {
     before: '경기 결과 확인',
     after: '경기 후 점수를 입력해주세요',
     explains: ['💡 3판 2선승제!', '💡 동점은 1점 내기로 승부를 결정!'],
+  };
+
+  const currentExp = {
+    gameId: currentGame.gameId,
+    mode: currentGame.mode,
   };
 
   useEffect(() => {
@@ -64,28 +71,31 @@ export default function AfterGameModal() {
   const submitRankResultHandler = async (result: TeamScore) => {
     try {
       const res = await instance.post(`/pingpong/games/result/rank`, result);
+      await instance.put(`/pingpong/match/current`);
       if (res?.status === 201) {
         alert('결과 입력이 완료되었습니다.');
-        setModal({ modalName: 'FIXED-EXP', gameId: currentGame.gameId });
       } else if (res?.status === 202) {
         alert('상대가 이미 점수를 입력했습니다.');
-        setModal({ modalName: 'FIXED-EXP', gameId: currentGame.gameId });
       }
     } catch (e) {
       setError('JH04');
       return;
     }
-    window.location.href = '/';
+    setModal({
+      modalName: 'FIXED-EXP',
+      exp: currentExp,
+    });
   };
 
   const submitNormalResultHandler = async () => {
     try {
       await instance.post(`/pingpong/games/result/normal`);
-      setModal({ modalName: 'FIXED-EXP', gameId: currentGame.gameId });
+      await instance.put(`/pingpong/match/current`);
     } catch (e) {
       setError('DK03');
       return;
     }
+    setModal({ modalName: 'FIXED-EXP', exp: currentExp });
   };
 
   return currentGame.mode === 'normal' ? (

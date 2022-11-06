@@ -5,24 +5,18 @@ export default function ExpCelebration() {
   useEffect(() => {
     for (let i = 0; i < 200; i++) {
       // Random rotation
-      const randomRotation = Math.floor(Math.random() * 360);
-      // Random Scale
-      const randomScale = Math.random() * 1;
-      // Random width & height between 0 and viewport
-      const randomWidth = Math.floor(
-        Math.random() *
-          Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
+      const randomRotation = Math.floor(
+        Math.random() * document.documentElement.clientWidth
       );
+
+      // Random width & height between 0 and viewport
+      const randomWidth = Math.floor(Math.random() * 100);
       const randomHeight = Math.floor(
-        Math.random() *
-          Math.max(
-            document.documentElement.clientHeight,
-            window.innerHeight || 500
-          )
+        Math.random() * document.documentElement.clientHeight
       );
 
       // Random animation-delay
-      const randomAnimationDelay = Math.floor(Math.random() * 15);
+      const randomAnimationDelay = Math.floor(Math.random() * 5);
 
       // Random colors
       const colors = [
@@ -39,7 +33,7 @@ export default function ExpCelebration() {
       const confetti = document.createElement('div');
       confetti.className = styles.confetti;
       confetti.style.top = randomHeight + 'px';
-      confetti.style.right = randomWidth + 'px';
+      confetti.style.right = randomWidth + '%';
       confetti.style.backgroundColor = randomColor;
       confetti.style.transform =
         'skew(15deg) rotate(' + randomRotation + 'deg)';

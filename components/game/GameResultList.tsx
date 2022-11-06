@@ -25,6 +25,7 @@ export default function GameResultList({ path }: GameResultListProps) {
   }, [path]);
 
   useEffect(() => {
+    console.log(data);
     if (status === 'success') {
       const gameList = data?.pages;
       if (gameList[0].games.length)

@@ -1,11 +1,11 @@
-import { SeasonMode } from './mainType';
+import { MatchMode, SeasonMode } from './mainType';
 
 /**
  * 경기 후  스코어 입력시 쓰는 타입
  * */
 export interface AfterGame {
   gameId: number;
-  mode: SeasonMode;
+  mode: MatchMode | null;
   startTime: string;
   matchTeamsInfo: Players;
 }
