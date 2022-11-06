@@ -16,7 +16,7 @@ interface MatchBoardProps {
 
 export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   const [match, setMatch] = useState<Match | null>(null);
-  const [spinRefreshButton, setSpinRefreshButton] = useState<boolean>(false);
+  const [spinReloadButton, setSpinReloadButton] = useState<boolean>(false);
   const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
@@ -64,9 +64,9 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   };
 
   const reloadMatchHandler = () => {
-    setSpinRefreshButton(true);
+    setSpinReloadButton(true);
     setTimeout(() => {
-      setSpinRefreshButton(false);
+      setSpinReloadButton(false);
     }, 1000);
     setReloadMatch(true);
   };
@@ -85,7 +85,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
           매뉴얼
         </button>
         <button
-          className={`${styles.refresh} ${spinRefreshButton && styles.spin}`}
+          className={`${styles.reload} ${spinReloadButton && styles.spin}`}
           onClick={reloadMatchHandler}
         >
           &#8635;

@@ -19,21 +19,21 @@
     text-align: center;
     cursor: pointer;
   }
-  .btnWrap {
+  .buttonWrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .refreshBtn {
-      @include refresh-button;
+    .reloadButton {
+      @include reload-button;
     }
-    .refreshBtnAnimation {
-      @include refresh-button;
+    .spinReloadButton {
+      @include reload-button;
       opacity: 0.7;
       animation: spin 1s infinite;
       pointer-events: none;
       cursor: not-allowed;
     }
-    .deleteBtn {
+    .deleteButton {
       @include match-noti-button;
       border-radius: $small-radius;
     }
@@ -42,11 +42,11 @@
 
 .emptyContent {
   text-align: right;
-  .refreshBtn {
+  .reloadButton {
     @include match-noti-button;
     border-radius: $big-radius;
   }
-  .refreshBtnAnimation {
+  .spinReloadButton {
     @include match-noti-button;
     border-radius: $big-radius;
     opacity: 0.7;

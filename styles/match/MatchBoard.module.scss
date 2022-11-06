@@ -30,8 +30,8 @@
     font-size: $small-font;
     border-radius: $small-radius;
   }
-  .refresh {
-    @include refresh-button;
+  .reload {
+    @include reload-button;
     cursor: pointer;
   }
   .spin {
