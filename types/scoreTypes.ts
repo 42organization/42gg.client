@@ -7,6 +7,7 @@ export interface AfterGame {
   gameId: number;
   mode: MatchMode | null;
   startTime: string;
+  isScoreExist: boolean;
   matchTeamsInfo: Players;
 }
 
