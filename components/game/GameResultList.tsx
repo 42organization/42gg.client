@@ -4,8 +4,9 @@ import { useRecoilState } from 'recoil';
 import { Game } from 'types/gameTypes';
 import infScroll from 'utils/infinityScroll';
 import { clickedGameItemState } from 'utils/recoil/game';
-import GameResultItem from './GameResultItem';
 import GameResultEmptyItem from './GameResultEmptyItem';
+import GameResultBigItem from './big/GameResultBigItem';
+import GameResultSmallItem from './small/GameResultSmallItem';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultListProps {
@@ -43,25 +44,25 @@ export default function GameResultList({ path }: GameResultListProps) {
         <>
           {data?.pages.map((gameList, index) => (
             <div key={index}>
-              {gameList.games.map((game: Game) => (
-                <GameResultItem
-                  key={game.gameId}
-                  game={game}
-                  isBig={clickedGameItem === game.gameId}
-                />
-              ))}
+              {gameList.games.map((game: Game) => {
+                return clickedGameItem === game.gameId ? (
+                  <GameResultBigItem key={game.gameId} game={game} />
+                ) : (
+                  <GameResultSmallItem key={game.gameId} game={game} />
+                );
+              })}
             </div>
           ))}
+          {router.asPath === '/game' && !isLast && (
+            <div className={styles.getButton}>
+              <input
+                type='button'
+                value='더 보기'
+                onClick={() => fetchNextPage()}
+              />
+            </div>
+          )}
         </>
-      )}
-      {status === 'success' && router.asPath === '/game' && !isLast && (
-        <div className={styles.getButton}>
-          <input
-            type='button'
-            value='더 보기'
-            onClick={() => fetchNextPage()}
-          />
-        </div>
       )}
     </div>
   );
