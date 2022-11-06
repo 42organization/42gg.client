@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Match } from 'types/matchTypes';
 import { MatchMode } from 'types/mainType';
 import instance from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import { matchRefreshBtnState } from 'utils/recoil/match';
+import { reloadMatchState } from 'utils/recoil/match';
 import MatchSlotList from './MatchSlotList';
 import styles from 'styles/match/MatchBoard.module.scss';
 
@@ -17,13 +17,13 @@ interface MatchBoardProps {
 export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   const [match, setMatch] = useState<Match | null>(null);
   const [spinRefreshButton, setSpinRefreshButton] = useState<boolean>(false);
-  const setMatchRefreshBtn = useSetRecoilState(matchRefreshBtnState);
+  const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const currentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    getMatchHandler();
+    setReloadMatch(true);
   }, [toggleMode]);
 
   useEffect(() => {
@@ -32,6 +32,10 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
       block: 'nearest',
     });
   }, [match]);
+
+  useEffect(() => {
+    if (reloadMatch) getMatchHandler();
+  }, [reloadMatch]);
 
   const getMatchHandler = async () => {
     try {
@@ -59,13 +63,12 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
     setModal({ modalName: 'MATCH-MANUAL' });
   };
 
-  const refreshMatchData = () => {
+  const reloadMatchHandler = () => {
     setSpinRefreshButton(true);
     setTimeout(() => {
       setSpinRefreshButton(false);
     }, 1000);
-    getMatchHandler();
-    setMatchRefreshBtn(true);
+    setReloadMatch(true);
   };
 
   const getScrollCurrentRef = (slotsHour: number) => {
@@ -83,7 +86,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
         </button>
         <button
           className={`${styles.refresh} ${spinRefreshButton && styles.spin}`}
-          onClick={refreshMatchData}
+          onClick={reloadMatchHandler}
         >
           &#8635;
         </button>
@@ -107,7 +110,6 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
                 intervalMinute={intervalMinute}
                 toggleMode={toggleMode}
                 matchSlots={matchSlots}
-                getMatchHandler={getMatchHandler}
               />
             </div>
           );

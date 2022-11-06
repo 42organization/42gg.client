@@ -5,6 +5,7 @@ import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/modal/MatchEnrollModal.module.scss';
+import { reloadMatchState } from 'utils/recoil/match';
 
 export default function MatchEnrollModal({
   slotId,
@@ -12,10 +13,10 @@ export default function MatchEnrollModal({
   mode,
   startTime,
   endTime,
-  reload,
 }: Enroll) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
+  const setReloadMatch = useSetRecoilState(reloadMatchState);
 
   const onEnroll = async () => {
     try {
@@ -36,8 +37,7 @@ export default function MatchEnrollModal({
       }
     }
     setModal({ modalName: null });
-    reload?.getMatchHandler();
-    reload?.getLiveHandler();
+    setReloadMatch(true);
   };
 
   const onCancel = () => {

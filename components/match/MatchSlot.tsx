@@ -1,9 +1,9 @@
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { MatchMode } from 'types/mainType';
+import { Slot } from 'types/matchTypes';
 import { errorState } from 'utils/recoil/error';
 import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
-import { MatchMode } from 'types/mainType';
-import { Slot } from 'types/matchTypes';
 import { fillZero } from 'utils/handleTime';
 import instance from 'utils/axios';
 import styles from 'styles/match/MatchSlot.module.scss';
@@ -13,7 +13,6 @@ interface MatchSlotProps {
   slot: Slot;
   toggleMode?: MatchMode;
   intervalMinute: number;
-  getMatchHandler: () => void;
 }
 
 export default function MatchSlot({
@@ -21,12 +20,10 @@ export default function MatchSlot({
   slot,
   toggleMode,
   intervalMinute,
-  getMatchHandler,
 }: MatchSlotProps) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
-  const [live, setLive] = useRecoilState(liveState);
-
+  const { event } = useRecoilValue(liveState);
   const { headCount, slotId, status, time, mode } = slot;
   const headMax = type === 'single' ? 2 : 4;
   const startTime = new Date(time);
@@ -47,14 +44,13 @@ export default function MatchSlot({
               slotId,
               time,
               enemyTeam,
-              reload: { getMatchHandler, getLiveHandler },
             },
           });
         }
       } catch (e) {
         setError('JH08');
       }
-    } else if (live.event === 'match') {
+    } else if (event === 'match') {
       setModal({ modalName: 'MATCH-REJECT' });
     } else {
       setModal({
@@ -65,32 +61,21 @@ export default function MatchSlot({
           mode: toggleMode,
           startTime,
           endTime,
-          reload: { getMatchHandler, getLiveHandler },
         },
       });
-    }
-  };
-
-  const getLiveHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/users/live`);
-      setLive({ ...res?.data });
-    } catch (e) {
-      setError('JH09');
     }
   };
 
   if (status === 'mytable') {
     if (toggleMode === mode) buttonStyle = styles.mySlot;
     else buttonStyle = styles.disabledSlot;
-  } else if (status === 'open') {
-    toggleMode === 'rank'
-      ? (buttonStyle = styles.rankSlot)
-      : (buttonStyle = styles.normalSlot);
   } else if (status === 'close') {
     buttonStyle = styles.disabledSlot;
+  } else if (status === 'open') {
+    buttonStyle = toggleMode === 'rank' ? styles.rankSlot : styles.normalSlot;
   }
 
+  if (slotId === 1637) console.log(status);
   return (
     <button
       className={buttonStyle}

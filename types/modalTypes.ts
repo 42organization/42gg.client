@@ -18,15 +18,10 @@ type ModalName =
   | `USER-${UserModal}`
   | `FIXED-${FixedModal}`;
 
-export interface Reload {
-  getMatchHandler: () => void;
-  getLiveHandler: () => void;
-}
 export interface Cancel {
   slotId: number;
   time: string;
   enemyTeam: string[];
-  reload: Reload | null;
 }
 
 export interface Enroll {
@@ -35,7 +30,6 @@ export interface Enroll {
   mode?: MatchMode;
   startTime: Date;
   endTime: Date;
-  reload: Reload | null;
 }
 
 export interface Exp {
