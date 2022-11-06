@@ -11,7 +11,9 @@ interface ProfileModeWrapProps {
 
 export default function ProfileModeWrap({ children }: ProfileModeWrapProps) {
   const { seasonList } = useRecoilValue(seasonListState);
-  const [season, setSeason] = useState<number>(seasonList[0]?.id);
+  const [season, setSeason] = useState<number>(
+    seasonList[0] ? seasonList[0].id : 1
+  );
 
   const seasonDropDownHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSeason(parseInt(e.target.value));
