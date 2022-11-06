@@ -9,8 +9,8 @@ import styles from 'styles/Layout/NotiBar.module.scss';
 
 export default function NotiBar() {
   const [noti, setNoti] = useState<Noti[]>([]);
-  const [clickReloadBtn, setClickReloadBtn] = useState(false);
-  const [reloadBtnAnimation, setReloadBtnAnimation] = useState(false);
+  const [clickReloadNoti, setClickReloadNoti] = useState(false);
+  const [spinReloadButton, setSpinReloadButton] = useState(false);
   const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
   const setError = useSetRecoilState(errorState);
 
@@ -19,20 +19,20 @@ export default function NotiBar() {
   }, []);
 
   useEffect(() => {
-    if (clickReloadBtn) getNotiHandler();
-  }, [clickReloadBtn]);
+    if (clickReloadNoti) getNotiHandler();
+  }, [clickReloadNoti]);
 
   const getNotiHandler = async () => {
-    if (clickReloadBtn) {
-      setReloadBtnAnimation(true);
+    if (clickReloadNoti) {
+      setSpinReloadButton(true);
       setTimeout(() => {
-        setReloadBtnAnimation(false);
+        setSpinReloadButton(false);
       }, 1000);
     }
     try {
       const res = await instance.get(`/pingpong/notifications`);
       setNoti(res?.data.notifications);
-      setClickReloadBtn(false);
+      setClickReloadNoti(false);
     } catch (e) {
       setError('JB04');
     }
@@ -44,11 +44,11 @@ export default function NotiBar() {
         <button onClick={resetOpenNotiBar}>&#10005;</button>
         {noti.length ? (
           <>
-            <div className={styles.btnWrap}>
-              <DeleteAllBtn />
-              <ReloadNotiBtn
-                reloadBtnAnimation={reloadBtnAnimation}
-                setClickReloadBtn={setClickReloadBtn}
+            <div className={styles.buttonWrap}>
+              <DeleteAllButton />
+              <ReloadNotiButton
+                spinReloadButton={spinReloadButton}
+                setClickReloadNoti={setClickReloadNoti}
               />
             </div>
             <div>
@@ -60,9 +60,9 @@ export default function NotiBar() {
         ) : (
           <div className={styles.emptyContent}>
             <></>
-            <ReloadNotiBtn
-              reloadBtnAnimation={reloadBtnAnimation}
-              setClickReloadBtn={setClickReloadBtn}
+            <ReloadNotiButton
+              spinReloadButton={spinReloadButton}
+              setClickReloadNoti={setClickReloadNoti}
             />
             <div>💭 새로운 알림이 없습니다!</div>
           </div>
@@ -72,28 +72,28 @@ export default function NotiBar() {
   );
 }
 
-interface ReloadNotiBtnProps {
-  reloadBtnAnimation: boolean;
-  setClickReloadBtn: React.Dispatch<React.SetStateAction<boolean>>;
+interface ReloadNotiButtonProps {
+  spinReloadButton: boolean;
+  setClickReloadNoti: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ReloadNotiBtn({
-  reloadBtnAnimation,
-  setClickReloadBtn,
-}: ReloadNotiBtnProps) {
+function ReloadNotiButton({
+  spinReloadButton,
+  setClickReloadNoti,
+}: ReloadNotiButtonProps) {
   return (
     <button
       className={
-        reloadBtnAnimation ? styles.refreshBtnAnimation : styles.refreshBtn
+        spinReloadButton ? styles.spinReloadButton : styles.reloadButton
       }
-      onClick={() => setClickReloadBtn(true)}
+      onClick={() => setClickReloadNoti(true)}
     >
       &#8635;
     </button>
   );
 }
 
-function DeleteAllBtn() {
+function DeleteAllButton() {
   const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
   const setError = useSetRecoilState(errorState);
   const allNotiDeleteHandler = async () => {
@@ -106,7 +106,7 @@ function DeleteAllBtn() {
     }
   };
   return (
-    <button className={styles.deleteBtn} onClick={allNotiDeleteHandler}>
+    <button className={styles.deleteButton} onClick={allNotiDeleteHandler}>
       &#9745; 전체삭제
     </button>
   );
