@@ -16,7 +16,7 @@ export default function CurrentMatch() {
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
   const matchingMessage = time && makeMessage(time, isMatched);
-  const blockCancelBtn = isBeforeMin(time, 5) && enemyTeam.length;
+  const blockCancelButton = isBeforeMin(time, 5) && enemyTeam.length;
   const presentPath = useRouter().asPath;
 
   useEffect(() => {
@@ -52,13 +52,13 @@ export default function CurrentMatch() {
         </div>
         <div
           className={
-            blockCancelBtn ? styles.blockCancelButton : styles.cancelButton
+            blockCancelButton ? styles.blockCancelButton : styles.cancelButton
           }
         >
           <input
             type='button'
             onClick={onCancel}
-            value={blockCancelBtn ? '취소불가' : '취소하기'}
+            value={blockCancelButton ? '취소불가' : '취소하기'}
           />
         </div>
       </div>
