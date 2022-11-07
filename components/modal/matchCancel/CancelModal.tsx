@@ -19,15 +19,27 @@ export default function CancelModal({ slotId }: CancelModalProps) {
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const currentMatch = useRecoilValue(currentMatchState);
+  const cancelResponse: { [key: string]: string } = {
+    SUCCESS: '경기가 성공적으로 취소되었습니다.',
+    SD001: '이미 지난 경기입니다.',
+    SD002: '이미 매칭이 완료된 경기입니다.',
+  };
+  const message = {
+    main: ['해당 경기를', <br />, '취소하시겠습니까?'],
+    sub: [
+      '매칭이 완료된 경기를 취소하면',
+      <br />,
+      '1분 간 새로운 예약이 불가합니다!',
+    ],
+  };
 
   const onCancel = async () => {
     try {
       await instance.delete(`/pingpong/match/slots/${slotId}`);
-      alert('경기가 성공적으로 취소되었습니다.');
+      alert(cancelResponse.SUCCESS);
     } catch (e: any) {
-      if (e.response.data.code === 'SD001') alert('이미 지난 경기입니다.');
-      else if (e.response.data.code === 'SD002')
-        alert('이미 매칭이 완료된 경기입니다.');
+      if (e.response.data.code in cancelResponse)
+        alert(cancelResponse[e.response.data.code]);
       else {
         setModal({ modalName: null });
         setOpenCurrentMatch(false);
@@ -48,17 +60,9 @@ export default function CancelModal({ slotId }: CancelModalProps) {
     <div className={styles.container}>
       <div className={styles.phrase}>
         <div className={styles.emoji}>🤔</div>
-        <div>
-          해당 경기를
-          <br />
-          취소하시겠습니까?
-        </div>
+        <div>{message.main}</div>
         {currentMatch.isMatched && (
-          <div className={styles.subContent}>
-            &#9888; 매칭이 완료된 경기를 취소하면
-            <br />
-            1분 간 새로운 예약이 불가합니다!
-          </div>
+          <div className={styles.subContent}>&#9888;{message.sub}</div>
         )}
       </div>
       <div className={styles.buttons}>
