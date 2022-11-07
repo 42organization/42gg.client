@@ -30,7 +30,7 @@ const rankGuide = {
   after: '경기 후 점수를 입력해주세요',
   explains: ['💡 3판 2선승제!', '💡 동점은 1점 내기로 승부를 결정!'],
 };
-const scoreExitsGuide = {
+const scoreExistGuide = {
   before: '경기 결과!',
   after: '',
   explains: ['이미 입력된 경기입니다. 점수를 확인하세요!', ''],
@@ -130,7 +130,7 @@ export default function AfterGameModal() {
 
   function getRankGuidLine(scoreExits: boolean) {
     if (scoreExits === true) {
-      return scoreExitsGuide;
+      return scoreExistGuide;
     } else {
       return rankGuide;
     }
