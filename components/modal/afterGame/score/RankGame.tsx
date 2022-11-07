@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { AfterGame, TeamScore } from 'types/scoreTypes';
 import { MatchTeams } from './MatchTeams';
 import Score from './Score';
-import { Buttons } from './Buttons';
+import { Button, Buttons } from './Buttons';
 import Guide, { GuideLine } from './Guide';
 import styles from 'styles/modal/AfterGameModal.module.scss';
 
@@ -31,16 +31,6 @@ export default function RankGame({
     }));
   };
 
-  // useEffect(() => {
-  //   if (currentGame.matchTeamsInfo.myTeam.teamScore !== null) {
-  //     setResult((prev) => ({
-  //       ...prev,
-  //       myScore: currentGame.matchTeamsInfo.myTeam.teamScore,
-  //       enemyScore: currentGame.matchTeamsInfo.enemyTeam.teamScore,
-  //     }));
-  //   }
-  // }, []);
-
   const enterHandler = () => {
     const { myTeamScore, enemyTeamScore } = result;
     if (isCorrectScore(myTeamScore, enemyTeamScore)) setOnCheck(true);
@@ -51,6 +41,17 @@ export default function RankGame({
     setOnCheck(false);
   };
 
+  useEffect(() => {
+    if (currentGame.isScoreExist) {
+      setOnCheck(true);
+      setResult((prev) => ({
+        ...prev,
+        myTeamScore: currentGame.matchTeamsInfo.myTeam.teamScore,
+        enemyTeamScore: currentGame.matchTeamsInfo.enemyTeam.teamScore,
+      }));
+    }
+  }, [currentGame]);
+
   return (
     <div className={styles.container}>
       <Guide condition={onCheck} guideLine={guideLine} />
@@ -58,12 +59,22 @@ export default function RankGame({
         <MatchTeams matchTeams={currentGame.matchTeamsInfo} />
         <Score onCheck={onCheck} result={result} onChange={inputScoreHandler} />
       </div>
-      <Buttons
-        onCheck={onCheck}
-        onEnter={enterHandler}
-        onReset={resetHandler}
-        onSubmit={() => onSubmit(result)}
-      />
+      {currentGame.isScoreExist ? (
+        <div className={styles.buttons}>
+          <Button
+            style={styles.positive}
+            value='게임종료'
+            onClick={() => onSubmit(result)}
+          />
+        </div>
+      ) : (
+        <Buttons
+          onCheck={onCheck}
+          onEnter={enterHandler}
+          onReset={resetHandler}
+          onSubmit={() => onSubmit(result)}
+        />
+      )}
     </div>
   );
 }

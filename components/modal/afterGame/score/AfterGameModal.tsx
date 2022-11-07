@@ -7,6 +7,7 @@ import { errorState } from 'utils/recoil/error';
 import { liveState } from 'utils/recoil/layout';
 import NormalGame from './NormalGame';
 import RankGame from './RankGame';
+import DefaultGame from './DefaultGame';
 
 const defaultTeam = {
   teamScore: 0,
@@ -19,6 +20,27 @@ const defaultTeam = {
 };
 const defaultPlayers: Team = defaultTeam;
 
+const normalGuide = {
+  before: '즐거운 경기 하셨나요?',
+  after: '🔥 경기 중 🔥',
+  explains: ['💡 경기시작 10분 후부터 ', '💡 경기를 완료할 수 있습니다'],
+};
+const rankGuide = {
+  before: '경기 결과 확인',
+  after: '경기 후 점수를 입력해주세요',
+  explains: ['💡 3판 2선승제!', '💡 동점은 1점 내기로 승부를 결정!'],
+};
+const scoreExistGuide = {
+  before: '경기 결과!',
+  after: '',
+  explains: ['이미 입력된 경기입니다. 점수를 확인하세요!', ''],
+};
+const defaultGuide = {
+  before: '',
+  after: '',
+  explains: ['', ''],
+};
+
 export default function AfterGameModal() {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
@@ -27,6 +49,7 @@ export default function AfterGameModal() {
     gameId: 0,
     mode: currentMatchMode,
     startTime: '2022-07-13 11:50',
+    isScoreExist: false,
     matchTeamsInfo: {
       myTeam: defaultPlayers,
       enemyTeam: defaultPlayers,
@@ -34,25 +57,10 @@ export default function AfterGameModal() {
   };
   const [currentGame, setCurrentGame] = useState<AfterGame>(defaultCurrentGame);
 
-  const normalGuide = {
-    before: '즐거운 경기 하셨나요?',
-    after: '🔥 경기 중 🔥',
-    explains: ['💡 경기시작 10분 후부터 ', '💡 경기를 완료할 수 있습니다'],
-  };
-  const rankGuide = {
-    before: '경기 결과 확인',
-    after: '경기 후 점수를 입력해주세요',
-    explains: ['💡 3판 2선승제!', '💡 동점은 1점 내기로 승부를 결정!'],
-  };
-
   const currentExp = {
     gameId: currentGame.gameId,
     mode: currentGame.mode,
   };
-
-  useEffect(() => {
-    getCurrentGameHandler();
-  }, []);
 
   const getCurrentGameHandler = async () => {
     try {
@@ -61,6 +69,7 @@ export default function AfterGameModal() {
         gameId: res?.data.gameId,
         mode: res?.data.mode,
         startTime: res?.data.startTime,
+        isScoreExist: res?.data.isScoreExist,
         matchTeamsInfo: { ...res?.data.matchTeamsInfo },
       });
     } catch (e) {
@@ -92,13 +101,48 @@ export default function AfterGameModal() {
       await instance.post(`/pingpong/games/result/normal`);
       await instance.put(`/pingpong/match/current`);
     } catch (e) {
-      setError('KP05');
+      setError('KP06');
       return;
     }
     setModal({ modalName: 'FIXED-EXP', exp: currentExp });
   };
 
-  return currentGame.mode === 'normal' ? (
+  const submitRankExistResultHandler = async (result: TeamScore) => {
+    try {
+      await instance.put(`/pingpong/match/current`);
+    } catch (e) {
+      setError('KP07');
+      return;
+    }
+    setModal({
+      modalName: 'FIXED-EXP',
+      exp: currentExp,
+    });
+  };
+
+  function getRankOnSubMit(scoreExits: boolean) {
+    if (scoreExits === true) {
+      return submitRankExistResultHandler;
+    } else {
+      return submitRankResultHandler;
+    }
+  }
+
+  function getRankGuidLine(scoreExits: boolean) {
+    if (scoreExits === true) {
+      return scoreExistGuide;
+    } else {
+      return rankGuide;
+    }
+  }
+
+  useEffect(() => {
+    getCurrentGameHandler();
+  }, []);
+
+  return currentGame.startTime === '2022-07-13 11:50' ? (
+    <DefaultGame guideLine={defaultGuide} />
+  ) : currentGame.mode === 'normal' ? (
     <NormalGame
       currentGame={currentGame}
       guideLine={normalGuide}
@@ -107,8 +151,8 @@ export default function AfterGameModal() {
   ) : (
     <RankGame
       currentGame={currentGame}
-      guideLine={rankGuide}
-      onSubmit={submitRankResultHandler}
+      guideLine={getRankGuidLine(currentGame.isScoreExist)}
+      onSubmit={getRankOnSubMit(currentGame.isScoreExist)}
     />
   );
 }
