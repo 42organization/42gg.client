@@ -5,7 +5,7 @@ import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import ExpGuage from './ExpGuage';
-import styles from 'styles/modal/ExpGameModal.module.scss';
+import PppChange from '../ppp/PppChange';
 
 export default function ExpChangeModal() {
   const [modal, setModal] = useRecoilState(modalState);
@@ -34,30 +34,33 @@ export default function ExpChangeModal() {
     beforeExp,
     beforeLevel,
     beforeMaxExp,
+    beforePpp,
+    changedPpp,
     increasedExp,
     increasedLevel,
   } = user;
 
   return (
     <div>
-      {user && (
-        <div>
-          <div
-            className={styles.celebratContainer}
-            onClick={() => {
-              setModal({ modalName: null });
-            }}
-          ></div>
-          <ExpGuage
-            maxExp={beforeMaxExp}
-            exp={beforeExp}
-            level={beforeLevel}
-            increasedExp={increasedExp}
-            afterMaxExp={afterMaxExp}
-            increasedLevel={increasedLevel}
+      <div onClick={() => setModal({ modalName: null })}>
+        {modal.exp?.mode == 'rank' ? (
+          <PppChange
+            beforePpp={beforePpp}
+            changePpp={changedPpp}
+            win={Math.sign(changedPpp)}
           />
-        </div>
-      )}
+        ) : (
+          ''
+        )}
+        <ExpGuage
+          maxExp={beforeMaxExp}
+          exp={beforeExp}
+          level={beforeLevel}
+          increasedExp={increasedExp}
+          afterMaxExp={afterMaxExp}
+          increasedLevel={increasedLevel}
+        />
+      </div>
     </div>
   );
 }

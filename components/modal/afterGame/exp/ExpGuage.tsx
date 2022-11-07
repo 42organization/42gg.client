@@ -30,16 +30,16 @@ export default function ExpGuage({
   const [celebrateEvent, setCelebrateEvent] = useState<Boolean>(false);
 
   useEffect(() => {
-    expGaugeAnimation();
-  }, []);
-
-  useEffect(() => {
     if (getPercent(maxExp, exp + currentExp) >= 100) {
       setCurrentMaxExp(afterMaxExp);
       setCurrentLevel(level + increasedLevel);
       setCelebrateEvent(true);
     }
   }, [currentExp]);
+
+  useEffect(() => {
+    expGaugeAnimation();
+  }, []);
 
   const expGaugeAnimation = () => {
     for (let i = 0; i < increasedExp; ++i) {
@@ -95,15 +95,7 @@ export default function ExpGuage({
           </div>
         </div>
       </div>
-      <div className={styles.buttons}>
-        <Button
-          style={styles.positive}
-          value='확인'
-          onClick={() => {
-            setModal({ modalName: null });
-          }}
-        />
-      </div>
+      <div className={styles.guideWord}>화면을 클릭해주세요!</div>
     </div>
   );
 }

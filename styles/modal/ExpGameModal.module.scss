@@ -1,5 +1,11 @@
 @import 'styles/common.scss';
 
+$text-shadow-red: -0.2rem 0 $pp-red, 0 0rem $pp-red, 0rem 0 $pp-red,
+  0 0rem $pp-red;
+$text-shadow-blue: -0.2rem 0 $pp-blue, 0 0rem $pp-blue, 0rem 0 $pp-blue,
+  0 0rem $pp-blue;
+$ppp-font: 3.5rem;
+
 .celebratContainer {
   z-index: 2;
   position: fixed;
@@ -15,13 +21,40 @@
   color: black;
 }
 
+.pppWordBlue {
+  font-size: $giant-giant-font;
+  font-weight: 700;
+  text-shadow: $text-shadow-red;
+  color: $pp-blue;
+}
+
+.pppChangeBlue {
+  font-size: $ppp-font;
+  font-weight: 700;
+  text-shadow: $text-shadow-red;
+  color: $pp-blue;
+}
+
+.pppWordRed {
+  font-size: $giant-giant-font;
+  font-weight: 700;
+  text-shadow: $text-shadow-blue;
+  color: $pp-red;
+}
+
+.pppChangeRed {
+  font-size: $ppp-font;
+  font-weight: 700;
+  text-shadow: $text-shadow-blue;
+  color: $pp-red;
+}
+
 .levelRacketWrap {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 0.3rem;
   .level {
-    margin: 0 0 0.2rem 0.2rem;
-    color: $rank-blue;
     font-size: $giant-giant-font;
     font-weight: 700;
   }
@@ -29,9 +62,24 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 0.5rem;
-    .expRate {
-      margin: 0 0 0.2rem 0.2rem;
-      font-size: $big-font;
+    .expContainer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 0.1rem;
+      .expRate {
+        font-style: normal;
+        font-weight: 700;
+        font-size: $big-font;
+        line-height: $big-font;
+      }
+      .expIncrease {
+        margin-right: 0.2rem;
+        font-style: normal;
+        font-weight: 700;
+        font-size: $medium-font;
+        color: white;
+      }
     }
     .bar {
       display: flex;
@@ -47,6 +95,14 @@
       }
     }
   }
+}
+
+.guideWord {
+  margin-left: 2.7rem;
+  margin-right: 2.7rem;
+  text-align: center;
+  font-size: $medium-font;
+  font-weight: 700;
 }
 
 .buttons {
