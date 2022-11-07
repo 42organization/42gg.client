@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import GameResult from 'components/game/GameResult';
 import GameModeWrap from 'components/mode/modeWraps/GameModeWrap';
+import { SeasonMode } from 'types/mainType';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 export default function Game() {
   const router = useRouter();
   const [clickTitle, setClickTitle] = useState<boolean>(false);
+  const [radioMode, setRadioMode] = useState<SeasonMode>('both');
 
   const clickTitleHandler = () => {
     router.push(`/game`, undefined, {
@@ -17,10 +19,18 @@ export default function Game() {
 
   return (
     <div className={styles.pageWrap}>
-      <h1 className={styles.title} onClick={clickTitleHandler}>
+      <h1
+        className={radioMode !== 'normal' ? styles.rankTitle : styles.normTitle}
+        onClick={clickTitleHandler}
+      >
         Record
       </h1>
-      <GameModeWrap clickTitle={clickTitle} setClickTitle={setClickTitle}>
+      <GameModeWrap
+        clickTitle={clickTitle}
+        setClickTitle={setClickTitle}
+        radioMode={radioMode}
+        setRadioMode={setRadioMode}
+      >
         <GameResult />
       </GameModeWrap>
     </div>

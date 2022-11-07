@@ -18,9 +18,9 @@ export default function Rank() {
       <h1 className={mode === 'rank' ? styles.rankTitle : styles.vipTitle}>
         {mode === 'rank' ? 'Ranking' : 'VIP'}
       </h1>
-      <MyRank />
+      <MyRank mode={mode} />
       <RankModeWrap setMode={setMode}>
-        <RankList />
+        <RankList mode={mode} />
       </RankModeWrap>
     </div>
   );
