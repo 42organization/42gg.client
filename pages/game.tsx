@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { SeasonMode } from 'types/mainType';
 import GameResult from 'components/game/GameResult';
 import GameModeWrap from 'components/mode/modeWraps/GameModeWrap';
-import { SeasonMode } from 'types/mainType';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 export default function Game() {

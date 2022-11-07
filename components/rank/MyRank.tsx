@@ -1,6 +1,6 @@
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { myRankState, scrollState } from 'utils/recoil/myRank';
 import { MatchMode } from 'types/mainType';
+import { myRankState, scrollState } from 'utils/recoil/myRank';
 import styles from 'styles/rank/RankList.module.scss';
 
 interface MyRankProps {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { MatchMode } from 'types/mainType';
 import MatchBoard from 'components/match/MatchBoard';
 import MatchModeWrap from 'components/mode/modeWraps/MatchModeWrap';
-import { MatchMode } from 'types/mainType';
 import styles from 'styles/match/match.module.scss';
 
 export default function Match() {

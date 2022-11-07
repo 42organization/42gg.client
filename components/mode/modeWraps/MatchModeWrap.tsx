@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { seasonListState } from 'utils/recoil/seasons';
 import { MatchMode } from 'types/mainType';
+import { seasonListState } from 'utils/recoil/seasons';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import styles from 'styles/mode/ModeWrap.module.scss';
 
