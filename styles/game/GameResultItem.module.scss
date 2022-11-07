@@ -4,11 +4,19 @@
   @include pageWrap;
 }
 
-.title {
+.rankTitle {
   @include pageTitle;
   width: fit-content;
   margin-inline: auto;
   cursor: pointer;
+}
+
+.normTitle {
+  @include pageTitle;
+  width: fit-content;
+  margin-inline: auto;
+  cursor: pointer;
+  text-shadow: $text-shadow, 0.3rem 0.3rem 0 $norm-lightblue2;
 }
 
 .smallContainer {

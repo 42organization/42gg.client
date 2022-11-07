@@ -5,8 +5,13 @@
   position: relative; // match refresh 버튼을 위해 필요함
 }
 
-.title {
+.rankTitle {
   @include pageTitle;
+}
+
+.normTitle {
+  @include pageTitle;
+  text-shadow: $text-shadow, 0.3rem 0.3rem 0 $norm-lightblue2;
 }
 
 .toggle {

@@ -11,16 +11,19 @@ interface GameModeWrapProps {
   children: React.ReactNode;
   clickTitle: boolean;
   setClickTitle: React.Dispatch<React.SetStateAction<boolean>>;
+  radioMode: SeasonMode;
+  setRadioMode: React.Dispatch<React.SetStateAction<SeasonMode>>;
 }
 
 export default function GameModeWrap({
   children,
   clickTitle,
   setClickTitle,
+  radioMode,
+  setRadioMode,
 }: GameModeWrapProps) {
   const { seasonList } = useRecoilValue(seasonListState);
   const [season, setSeason] = useState<number>(seasonList[0]?.id);
-  const [radioMode, setRadioMode] = useState<SeasonMode>('both');
 
   useEffect(() => {
     if (clickTitle) {
