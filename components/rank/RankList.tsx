@@ -12,7 +12,7 @@ import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 
 interface RankListProps {
-  mode?: MatchMode;
+  mode: MatchMode;
   season?: string;
 }
 
@@ -29,7 +29,6 @@ export default function RankList({ mode, season }: RankListProps) {
   const [page, setPage] = useState<number>(1);
   const router = useRouter();
   const isMain = router.asPath === '/';
-  const isRankSeason = mode === 'rank';
   const pageInfo = {
     currentPage: rank?.currentPage,
     totalPage: rank?.totalPage,
@@ -39,7 +38,7 @@ export default function RankList({ mode, season }: RankListProps) {
   const makePath = () => {
     const modeQuery = (targetMode?: string) =>
       targetMode !== 'normal' ? 'ranks/single' : 'vip';
-    const seasonQuery = isRankSeason ? `&season=${season}` : '';
+    const seasonQuery = mode === 'rank' ? `&season=${season}` : '';
     return isMain
       ? `/pingpong/${modeQuery(seasonMode)}?page=1&count=3`
       : `/pingpong/${modeQuery(mode)}?page=${page}${seasonQuery}`;
@@ -81,18 +80,28 @@ export default function RankList({ mode, season }: RankListProps) {
   if (isMain) return <RankListMain rank={rank} />;
 
   return (
-    <RankListFrame isRankMode={isRankSeason} pageInfo={pageInfo}>
+    <RankListFrame mode={mode} pageInfo={pageInfo}>
       {rank?.rankList.map((item: NormalUser | RankUser, index) => (
         <RankListItem
           key={item.intraId}
           index={index}
-          user={item}
-          isRankMode={isRankSeason}
-          ppp={isRankModeType(item) ? item.ppp : null}
-          level={!isRankModeType(item) ? item.level : null}
-          exp={!isRankModeType(item) ? item.exp : null}
+          mode={mode}
+          user={makeUser(item)}
         />
       ))}
     </RankListFrame>
   );
+}
+
+function makeUser(user: NormalUser | RankUser) {
+  const makeStatusMessage = (message: string) =>
+    message.length > 10 ? `${message.slice(0, 10)}...` : message;
+  const makeInit = (init: number) => (user.rank < 0 ? '-' : init);
+  return {
+    intraId: user.intraId,
+    rank: makeInit(user.rank),
+    statusMessage: makeStatusMessage(user.statusMessage),
+    point: !isRankModeType(user) ? user.exp : makeInit(user.ppp),
+    level: !isRankModeType(user) ? user.level : null,
+  };
 }

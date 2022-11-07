@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { MatchMode } from 'types/mainType';
 import PageNation from 'components/Pagination';
 import styles from 'styles/rank/RankList.module.scss';
 
@@ -10,18 +11,19 @@ interface PageInfo {
 interface RankListFrameProps {
   children: React.ReactNode;
   pageInfo: PageInfo;
-  isRankMode: boolean;
+  mode: MatchMode;
 }
 
 export default function RankListFrame({
   children,
   pageInfo,
-  isRankMode,
+  mode,
 }: RankListFrameProps) {
   const router = useRouter();
-  const divisionList = isRankMode
-    ? ['순위', 'intraId', '상태메시지', '점수']
-    : ['열정', 'intraId (Lv)', '상태메시지', '경험치'];
+  const division: { [key: string]: string[] } = {
+    rank: ['순위', 'intraId', '상태메시지', '점수'],
+    normal: ['열정', 'intraId (Lv)', '상태메시지', '경험치'],
+  };
 
   const pageChangeHandler = (pages: number) => {
     pageInfo.setPage(pages);
@@ -33,9 +35,9 @@ export default function RankListFrame({
       <div className={styles.container}>
         <div
           className={`${styles.division}
-					${!isRankMode && styles.normal}`}
+					${mode === 'normal' && styles.normal}`}
         >
-          {divisionList.map((item: string) => (
+          {division[mode].map((item: string) => (
             <div key={item}>{item}</div>
           ))}
         </div>
