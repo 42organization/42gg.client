@@ -30,7 +30,11 @@ export default function MatchSlot({
   const endTime = new Date(time);
   endTime.setMinutes(endTime.getMinutes() + intervalMinute);
   const isAfterSlot: boolean = startTime.getTime() - new Date().getTime() >= 0;
-  let buttonStyle;
+  const buttonStyle: { [key: string]: string } = {
+    mytable: toggleMode === mode ? styles.mySlot : styles.disabledSlot,
+    close: styles.disabledSlot,
+    open: toggleMode === 'rank' ? styles.rankSlot : styles.normalSlot,
+  };
 
   const enrollHandler = async () => {
     if (status === 'mytable') {
@@ -66,18 +70,9 @@ export default function MatchSlot({
     }
   };
 
-  if (status === 'mytable') {
-    if (toggleMode === mode) buttonStyle = styles.mySlot;
-    else buttonStyle = styles.disabledSlot;
-  } else if (status === 'close') {
-    buttonStyle = styles.disabledSlot;
-  } else if (status === 'open') {
-    buttonStyle = toggleMode === 'rank' ? styles.rankSlot : styles.normalSlot;
-  }
-
   return (
     <button
-      className={buttonStyle}
+      className={buttonStyle[status]}
       disabled={status === 'close'}
       onClick={enrollHandler}
     >
