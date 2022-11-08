@@ -28,7 +28,7 @@ export default function GameResult({ mode, season }: GameResultProps) {
     const query = [modeQuery, seasonQuery, countQuery, 'gameId=']
       .filter((item) => item)
       .join('&');
-    setPath(`/pingpong${userQuery}/games?${query}`);
+    setPath(`/pingpong/games${userQuery}?${query}`);
     return;
   };
 
