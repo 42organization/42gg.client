@@ -36,7 +36,7 @@ export default function CurrentMatch() {
   const onCancel = () => {
     setModal({
       modalName: 'MATCH-CANCEL',
-      cancel: { slotId, time, enemyTeam },
+      cancel: { isMatched, slotId, time },
     });
   };
 
