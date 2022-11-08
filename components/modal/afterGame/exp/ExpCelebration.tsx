@@ -43,10 +43,8 @@ export default function ExpCelebration() {
   }, []);
 
   return (
-    <div>
-      <div className={styles.wrapper}>
-        <div id='confetti-wrapper'></div>
-      </div>
+    <div className={styles.wrapper}>
+      <div id='confetti-wrapper'></div>
     </div>
   );
 }

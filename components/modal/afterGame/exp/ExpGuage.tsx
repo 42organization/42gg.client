@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { sleep } from 'utils/sleep';
-import { Button } from '../score/Buttons';
 import styles from 'styles/modal/ExpGameModal.module.scss';
 import ExpCelebration from './ExpCelebration';
 
