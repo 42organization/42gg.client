@@ -1,36 +1,38 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
+import { Cancel } from 'types/modalTypes';
 import instance from 'utils/axios';
+import { isBeforeMin } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';
+import { openCurrentMatchState, reloadMatchState } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
-import {
-  openCurrentMatchState,
-  currentMatchState,
-  reloadMatchState,
-} from 'utils/recoil/match';
 import styles from 'styles/modal/CancelModal.module.scss';
 
-interface CancelModalProps {
-  slotId: number;
-}
-
-export default function CancelModal({ slotId }: CancelModalProps) {
+export default function CancelModal({ isMatched, slotId, time }: Cancel) {
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
-  const currentMatch = useRecoilValue(currentMatchState);
+  const cancelLimitTime = 5;
+  const cancelLimit = isBeforeMin(time, cancelLimitTime);
+  const rejectCancel = cancelLimit && isMatched;
+  const checkCancel = rejectCancel ? 'reject' : 'cancel';
+  const message = {
+    cancel: ['해당 경기를', '취소하시겠습니까?'],
+    cancelSub: [
+      '⚠︎ 매칭이 완료된 경기를 취소하면',
+      '1분 간 새로운 예약이 불가합니다!',
+    ],
+    reject: ['매칭이 완료되어', '경기를 취소할 수 없습니다!!'],
+    rejectSub: [
+      `경기시작 ${cancelLimitTime}분 전부터는`,
+      '경기를 취소할 수 없습니다..',
+    ],
+  };
+
   const cancelResponse: { [key: string]: string } = {
     SUCCESS: '경기가 성공적으로 취소되었습니다.',
     SD001: '이미 지난 경기입니다.',
     SD002: '이미 매칭이 완료된 경기입니다.',
-  };
-  const message = {
-    main: ['해당 경기를', <br />, '취소하시겠습니까?'],
-    sub: [
-      '매칭이 완료된 경기를 취소하면',
-      <br />,
-      '1분 간 새로운 예약이 불가합니다!',
-    ],
   };
 
   const onCancel = async () => {
@@ -54,24 +56,41 @@ export default function CancelModal({ slotId }: CancelModalProps) {
 
   const onReturn = () => {
     setModal({ modalName: null });
+    if (rejectCancel) setReloadMatch(true);
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.phrase}>
-        <div className={styles.emoji}>🤔</div>
-        <div>{message.main}</div>
-        {currentMatch.isMatched && (
-          <div className={styles.subContent}>&#9888;{message.sub}</div>
-        )}
+        <div className={styles.emoji}>{rejectCancel ? '😰' : '🤔'}</div>
+        <>
+          {message[checkCancel].map((e, i) => (
+            <div key={i}>{e}</div>
+          ))}
+          {(rejectCancel || (!rejectCancel && isMatched)) && (
+            <div className={styles.subContent}>
+              {message[`${checkCancel}Sub`].map((e, i) => (
+                <div key={i}>{e}</div>
+              ))}
+            </div>
+          )}
+        </>
       </div>
       <div className={styles.buttons}>
-        <div className={styles.negative}>
-          <input onClick={onReturn} type='button' value='아니오' />
-        </div>
-        <div className={styles.positive}>
-          <input onClick={onCancel} type='button' value='예' />
-        </div>
+        {rejectCancel ? (
+          <div className={styles.positive}>
+            <input onClick={onReturn} type='button' value='확인' />
+          </div>
+        ) : (
+          <>
+            <div className={styles.negative}>
+              <input onClick={onReturn} type='button' value='아니오' />
+            </div>
+            <div className={styles.positive}>
+              <input onClick={onCancel} type='button' value='예' />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
