@@ -12,7 +12,7 @@ export default function user() {
   return (
     <div className={styles.container}>
       {typeof intraId === 'string' && (
-        <>
+        <div key={intraId}>
           <h1 className={styles.title}>{intraId}</h1>
           <BasicProfile intraId={intraId} />
           <RankProfile intraId={intraId} />
@@ -27,7 +27,7 @@ export default function user() {
             </h2>
           </Link>
           <GameResult />
-        </>
+        </div>
       )}
     </div>
   );

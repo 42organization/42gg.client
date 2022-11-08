@@ -1,5 +1,4 @@
-import { useRouter } from 'next/router';
-import { useSetRecoilState, useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { useInfiniteQuery } from 'react-query';
 import { errorState } from 'utils/recoil/error';
 import instance from './axios';

@@ -21,16 +21,18 @@ export default function BasicProfile({ intraId }: ProfileProps) {
   const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await instance.get(`/pingpong/users/${intraId}/detail`);
-        setProfile(res?.data);
-        setImgError(false);
-      } catch (e) {
-        setError('SJ03');
-      }
-    })();
-  }, [intraId]);
+    getBasicProfileHandler();
+  }, []);
+
+  const getBasicProfileHandler = async () => {
+    try {
+      const res = await instance.get(`/pingpong/users/${intraId}/detail`);
+      setProfile(res?.data);
+      setImgError(false);
+    } catch (e) {
+      setError('SJ03');
+    }
+  };
 
   const {
     userImageUri,
