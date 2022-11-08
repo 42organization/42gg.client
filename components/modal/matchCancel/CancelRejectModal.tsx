@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
+import { reloadMatchState } from 'utils/recoil/match';
 import styles from 'styles/modal/CancelModal.module.scss';
 
 interface CancelRejectModalProps {
@@ -9,7 +9,7 @@ interface CancelRejectModalProps {
 
 export default function CancelRejectModal({ minute }: CancelRejectModalProps) {
   const setModal = useSetRecoilState(modalState);
-  const router = useRouter();
+  const setReloadMatch = useSetRecoilState(reloadMatchState);
   const message = {
     main: ['매칭이 완료되어', <br />, '경기를 취소할 수 없습니다!!'],
     sub: [
@@ -21,7 +21,7 @@ export default function CancelRejectModal({ minute }: CancelRejectModalProps) {
 
   const onReturn = () => {
     setModal({ modalName: null });
-    router.reload();
+    setReloadMatch(true);
   };
 
   return (
