@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import CancelController from './matchCancel/CancelController';
+import CancelModal from './matchCancel/CancelModal';
 import EditProfileModal from './profile/EditProfileModal';
 import LogoutModal from './menu/LogoutModal';
 import MatchEnrollModal from './match/MatchEnrollModal';
@@ -47,7 +47,7 @@ export default function ModalProvider() {
         return <MatchRejectModal />;
       case 'MATCH-CANCEL':
         return typeof cancel !== 'undefined' ? (
-          <CancelController {...cancel} />
+          <CancelModal {...cancel} />
         ) : null;
       case 'MATCH-MANUAL':
         return <MatchManualModal />;
