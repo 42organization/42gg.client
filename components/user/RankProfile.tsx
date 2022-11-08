@@ -37,17 +37,19 @@ function Profile({ intraId, season }: RankProps) {
   });
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await instance.get(
-          `/pingpong/users/${intraId}/rank?season=${season}`
-        );
-        setRankProfile(res?.data);
-      } catch (e) {
-        setError('JH07');
-      }
-    })();
-  }, [intraId, season]);
+    getRankProfileHandler();
+  }, [season]);
+
+  const getRankProfileHandler = async () => {
+    try {
+      const res = await instance.get(
+        `/pingpong/users/${intraId}/rank?season=${season}`
+      );
+      setRankProfile(res?.data);
+    } catch (e) {
+      setError('JH07');
+    }
+  };
 
   const { rank, ppp, wins, losses, winRate } = rankProfile;
 
