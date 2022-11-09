@@ -27,6 +27,10 @@ export default function ReportModal() {
     { id: 'CHEERS', label: '응원의 한 마디' },
     { id: 'ETC', label: '기타' },
   ];
+  const reportResponse: { [key: string]: string } = {
+    SUCCESS: '신고가 완료되었습니다.',
+    REJECT: '마음을 담아 신고를 해주세요 ❤️',
+  };
 
   const inputChangeHandler = ({
     target: { name, value },
@@ -40,21 +44,17 @@ export default function ReportModal() {
   };
 
   const reportHandler = async () => {
-    if (
-      report.category &&
-      report.content.replace(/(\s*)/g, '').replace(/(\n)/g, '')
-    ) {
-      const body = report;
+    if (report.category && report.content.replace(/^\s+|\s+$/g, '')) {
       try {
-        await instance.post('/pingpong/feedback', body);
+        await instance.post('/pingpong/feedback', report);
         setModal({ modalName: null });
         setOpenMenuBar(false);
-        alert('신고가 완료되었습니다.');
+        alert(reportResponse.SUCCESS);
       } catch (e) {
         setError('JH06');
       }
     } else {
-      alert('마음을 담아 신고를 해주세요 ❤️');
+      alert(reportResponse.REJECT);
     }
   };
 
