@@ -7,7 +7,7 @@ import styles from 'styles/match/match.module.scss';
 export default function Match() {
   const [toggleMode, setToggleMode] = useState<MatchMode>('rank');
   const content = {
-    normal: { style: styles.norm },
+    normal: { style: styles.normal },
     rank: { style: '' },
   };
 

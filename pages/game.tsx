@@ -10,7 +10,7 @@ export default function Game() {
   const [clickTitle, setClickTitle] = useState<boolean>(false);
   const [radioMode, setRadioMode] = useState<SeasonMode>('both');
   const content = {
-    normal: { style: styles.norm },
+    normal: { style: styles.normal },
     rank: { style: '' },
     both: { style: '' },
   };
