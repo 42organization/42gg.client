@@ -9,26 +9,32 @@ import styles from 'styles/modal/CancelModal.module.scss';
 
 export default function CancelModal({ isMatched, slotId, time }: Cancel) {
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
+  const setReloadMatch = useSetRecoilState(reloadMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
-  const setReloadMatch = useSetRecoilState(reloadMatchState);
   const cancelLimitTime = 5;
-  const cancelLimit = isBeforeMin(time, cancelLimitTime);
-  const rejectCancel = cancelLimit && isMatched;
-  const checkCancel = rejectCancel ? 'reject' : 'cancel';
+  const rejectCancel = isBeforeMin(time, cancelLimitTime) && isMatched;
+  const messageType = rejectCancel ? 'reject' : 'cancel';
   const message = {
-    cancel: ['해당 경기를', '취소하시겠습니까?'],
-    cancelSub: [
-      '⚠︎ 매칭이 완료된 경기를 취소하면',
-      '1분 간 새로운 예약이 불가합니다!',
-    ],
-    reject: ['매칭이 완료되어', '경기를 취소할 수 없습니다!!'],
-    rejectSub: [
-      `경기시작 ${cancelLimitTime}분 전부터는`,
-      '경기를 취소할 수 없습니다..',
-    ],
+    emoji: {
+      cancel: '🤔',
+      reject: '😰',
+    },
+    main: {
+      cancel: ['해당 경기를', '취소하시겠습니까?'],
+      reject: ['매칭이 완료되어', '경기를 취소할 수 없습니다!!'],
+    },
+    sub: {
+      cancel: [
+        '⚠︎ 매칭이 완료된 경기를 취소하면',
+        '1분 간 새로운 예약이 불가합니다!',
+      ],
+      reject: [
+        `경기시작 ${cancelLimitTime}분 전부터는`,
+        '경기를 취소할 수 없습니다..',
+      ],
+    },
   };
-
   const cancelResponse: { [key: string]: string } = {
     SUCCESS: '경기가 성공적으로 취소되었습니다.',
     SD001: '이미 지난 경기입니다.',
@@ -62,14 +68,14 @@ export default function CancelModal({ isMatched, slotId, time }: Cancel) {
   return (
     <div className={styles.container}>
       <div className={styles.phrase}>
-        <div className={styles.emoji}>{rejectCancel ? '😰' : '🤔'}</div>
+        <div className={styles.emoji}>{message.emoji[messageType]}</div>
         <>
-          {message[checkCancel].map((e, i) => (
+          {message.main[messageType].map((e, i) => (
             <div key={i}>{e}</div>
           ))}
           {(rejectCancel || (!rejectCancel && isMatched)) && (
             <div className={styles.subContent}>
-              {message[`${checkCancel}Sub`].map((e, i) => (
+              {message.sub[messageType].map((e, i) => (
                 <div key={i}>{e}</div>
               ))}
             </div>

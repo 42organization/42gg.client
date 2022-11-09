@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import CancelModal from './matchCancel/CancelModal';
+import CancelModal from './match/CancelModal';
 import EditProfileModal from './profile/EditProfileModal';
 import LogoutModal from './menu/LogoutModal';
 import MatchEnrollModal from './match/MatchEnrollModal';
