@@ -26,9 +26,9 @@
   span:nth-child(2) {
     color: $g1-top;
   }
-}
-.rank {
-  cursor: pointer;
+  &.rank {
+    cursor: pointer;
+  }
 }
 
 .container {
