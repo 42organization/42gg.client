@@ -19,7 +19,9 @@ export default function ExpChangeModal() {
 
   const getExpHandler = async () => {
     try {
-      const res = await instance.get(`/pingpong/games//result/rank`);
+      const res = await instance.get(
+        `/pingpong/games/${modal.exp?.gameId}/result/${modal.exp?.mode}`
+      );
       setUser(res?.data);
     } catch (e) {
       setError('KP04');
@@ -43,6 +45,7 @@ export default function ExpChangeModal() {
     <div>
       <div onClick={() => setModal({ modalName: null })}>
         <div className={styles.emogi}>🎉</div>
+        <div className={styles.exitModal}></div>
         <PppChange
           beforePpp={beforePpp}
           changePpp={changedPpp}

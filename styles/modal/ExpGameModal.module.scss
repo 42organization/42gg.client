@@ -4,11 +4,17 @@ $text-shadow-red: 2px 2px 0px $pp-red;
 $text-shadow-blue: 2px 2px 0px $pp-blue;
 $ppp-font: 3.5rem;
 
-.celebratContainer {
-  z-index: 2;
+.emogi {
+  text-align: center;
+  font-size: $giant-giant-font;
+}
+
+.exitModal {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 .container {
@@ -25,15 +31,18 @@ $ppp-font: 3.5rem;
   justify-content: space-between;
 }
 
+.celebratContainer {
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 .levelUp {
   font-weight: 700;
   font-size: $medium-font;
   text-align: center;
   color: red;
-}
-.emogi {
-  text-align: center;
-  font-size: $giant-giant-font;
 }
 
 .pppLeftEmogi {

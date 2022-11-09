@@ -46,20 +46,9 @@ export default function ExpGuage({
     }
   };
 
-  const CelebrationEvent = (
-    <div
-      className={styles.celebratContainer}
-      onClick={() => {
-        setModal({ modalName: null });
-      }}
-    >
-      <ExpCelebration />
-    </div>
-  );
-
   return (
     <div className={styles.container}>
-      {celebrateEvent && CelebrationEvent}
+      {celebrateEvent && <ExpCelebration />}
       <div className={styles.levelRacketWrap}>
         <div className={styles.level}>Lv. {currentLevel}</div>
         <div className={styles.exp}>
