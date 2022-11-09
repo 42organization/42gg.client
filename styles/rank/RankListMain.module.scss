@@ -16,9 +16,9 @@
   text-shadow: $text-shadow;
   letter-spacing: 0.1rem;
   background: $rank-red;
-}
-.normal {
-  background: $norm-lightblue2;
+  &.normal {
+    background: $norm-lightblue2;
+  }
 }
 
 .mainData {
@@ -29,10 +29,9 @@
   margin-top: 0.2rem;
   border-radius: $big-radius;
   background: $rank-pink;
-}
-
-.normal {
-  background: $norm-emerald;
+  &.normal {
+    background: $norm-emerald;
+  }
 }
 
 .rankNumber {
