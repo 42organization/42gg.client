@@ -4,18 +4,14 @@
   @include pageWrap;
 }
 
-.rankTitle {
+.title {
   @include pageTitle;
   width: fit-content;
   margin-inline: auto;
   cursor: pointer;
 }
 
-.normTitle {
-  @include pageTitle;
-  width: fit-content;
-  margin-inline: auto;
-  cursor: pointer;
+.norm {
   text-shadow: $text-shadow, 0.3rem 0.3rem 0 $norm-lightblue2;
 }
 
@@ -90,7 +86,7 @@
     cursor: pointer;
   }
   .winRate {
-    width: 5rem;
+    min-width: 5rem;
     padding: 0.1rem 0.8rem;
     border-radius: $small-radius;
     border: 0.1rem white solid;
