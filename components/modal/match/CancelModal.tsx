@@ -18,19 +18,13 @@ export default function CancelModal({ isMatched, slotId, time }: Cancel) {
   const content = {
     cancel: {
       emoji: '🤔',
-      main: ['해당 경기를', '취소하시겠습니까?'],
-      sub: [
-        '⚠︎ 매칭이 완료된 경기를 취소하면',
-        '1분 간 새로운 예약이 불가합니다!',
-      ],
+      main: '해당 경기를\n취소하시겠습니까?',
+      sub: '⚠︎ 매칭이 완료된 경기를 취소하면\n1분 간 새로운 예약이 불가합니다!',
     },
     reject: {
       emoji: '😰',
-      main: ['매칭이 완료되어', '경기를 취소할 수 없습니다!!'],
-      sub: [
-        `경기시작 ${cancelLimitTime}분 전부터는`,
-        '경기를 취소할 수 없습니다..',
-      ],
+      main: '매칭이 완료되어\n경기를 취소할 수 없습니다!!',
+      sub: `경기시작 ${cancelLimitTime}분 전부터는\n경기를 취소할 수 없습니다..`,
     },
   };
   const cancelResponse: { [key: string]: string } = {
@@ -67,15 +61,9 @@ export default function CancelModal({ isMatched, slotId, time }: Cancel) {
     <div className={styles.container}>
       <div className={styles.phrase}>
         <div className={styles.emoji}>{content[contentType].emoji}</div>
-        {content[contentType].main.map((e, i) => (
-          <div key={i}>{e}</div>
-        ))}
+        {content[contentType].main}
         {(rejectCancel || (!rejectCancel && isMatched)) && (
-          <div className={styles.subContent}>
-            {content[contentType].sub.map((e, i) => (
-              <div key={i}>{e}</div>
-            ))}
-          </div>
+          <div className={styles.subContent}>{content[contentType].sub}</div>
         )}
       </div>
       <div className={styles.buttons}>

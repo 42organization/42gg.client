@@ -20,10 +20,9 @@
   max-height: 40vh;
   color: black;
   overflow-y: scroll;
-
+  font-weight: 700;
   li {
-    margin-bottom: 1.2rem;
-    font-weight: 700;
+    margin-top: 1rem;
   }
 }
 
@@ -31,10 +30,9 @@
   margin-left: 0.8rem;
   font-size: 0.9rem;
   font-weight: 400;
-
   li {
     list-style: square;
-    margin-top: 0.3rem;
+    margin-top: 0.5rem;
     white-space: pre-wrap;
   }
 }
