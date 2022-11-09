@@ -4,6 +4,16 @@ import styles from 'styles/modal/WelcomeModal.module.scss';
 
 export default function WelcomeModal() {
   const setModal = useSetRecoilState(modalState);
+  const content = {
+    title: 'Welcome',
+    message: [
+      '42GG에 오신걸 환영합니다.',
+      <br />,
+      '당신의 행복한 탁구 생활을',
+      <br />,
+      '응원합니다! 총총총...',
+    ],
+  };
 
   const openPageManual = () => {
     window.open(
@@ -20,13 +30,9 @@ export default function WelcomeModal() {
       <div className={styles.phrase}>
         <div className={styles.emoji}></div>
         <div className={styles.title}>Welcome</div>
-        <div>
-          42GG에 오신걸 환영합니다.
-          <br />
-          당신의 행복한 탁구 생활을
-          <br />
-          응원합니다! 총총총...
-        </div>
+        {content.message.map((e, i) => (
+          <div key={i}>{e}</div>
+        ))}
         <div className={styles.rose}>
           <span>{`@`}</span>
           <span>{`)->->--`}</span>

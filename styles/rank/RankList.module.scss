@@ -5,12 +5,11 @@
   @include pageWrap;
 }
 
-.rankTitle {
+.title {
   @include pageTitle;
 }
 
-.vipTitle {
-  @include pageTitle;
+.vip {
   text-shadow: $text-shadow, 0.3rem 0.3rem 0 $norm-lightblue2;
 }
 
@@ -27,9 +26,9 @@
   span:nth-child(2) {
     color: $g1-top;
   }
-}
-.rank {
-  cursor: pointer;
+  &.rank {
+    cursor: pointer;
+  }
 }
 
 .container {

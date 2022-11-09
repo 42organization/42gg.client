@@ -17,7 +17,18 @@ export default function BasicProfile({ intraId }: ProfileProps) {
   const user = useRecoilValue(userState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
-  const [profile, setProfile] = useRecoilState(profileState);
+  const [
+    {
+      userImageUri,
+      racketType,
+      statusMessage,
+      level,
+      currentExp,
+      maxExp,
+      expRate,
+    },
+    setProfile,
+  ] = useRecoilState(profileState);
   const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
@@ -33,16 +44,6 @@ export default function BasicProfile({ intraId }: ProfileProps) {
       setError('SJ03');
     }
   };
-
-  const {
-    userImageUri,
-    racketType,
-    statusMessage,
-    level,
-    currentExp,
-    maxExp,
-    expRate,
-  } = profile;
 
   const startEditHandler = () => {
     setModal({ modalName: 'USER-PROFILE_EDIT' });

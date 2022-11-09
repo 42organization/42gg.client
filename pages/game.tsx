@@ -9,6 +9,11 @@ export default function Game() {
   const router = useRouter();
   const [clickTitle, setClickTitle] = useState<boolean>(false);
   const [radioMode, setRadioMode] = useState<SeasonMode>('both');
+  const content = {
+    normal: { style: styles.normal },
+    rank: { style: '' },
+    both: { style: '' },
+  };
 
   const clickTitleHandler = () => {
     router.push(`/game`, undefined, {
@@ -20,7 +25,7 @@ export default function Game() {
   return (
     <div className={styles.pageWrap}>
       <h1
-        className={radioMode !== 'normal' ? styles.rankTitle : styles.normTitle}
+        className={`${styles.title} ${content[radioMode].style}`}
         onClick={clickTitleHandler}
       >
         Record

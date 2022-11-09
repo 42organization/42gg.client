@@ -32,9 +32,9 @@ export default function MatchSlot({
   const isAfterSlot: boolean = startTime.getTime() - new Date().getTime() >= 0;
   const buttonStyle: { [key: string]: string } = useMemo(
     () => ({
-      mytable: toggleMode === mode ? styles.mySlot : styles.disabledSlot,
-      close: styles.disabledSlot,
-      open: toggleMode === 'rank' ? styles.rankSlot : styles.normalSlot,
+      mytable: toggleMode === mode ? styles.my : styles.disabled,
+      close: styles.disabled,
+      open: toggleMode === 'rank' ? styles.rank : styles.normal,
     }),
     [slot]
   );
@@ -67,7 +67,7 @@ export default function MatchSlot({
 
   return (
     <button
-      className={buttonStyle[status]}
+      className={`${styles.slotButton} ${buttonStyle[status]}`}
       disabled={status === 'close'}
       onClick={enrollHandler}
     >

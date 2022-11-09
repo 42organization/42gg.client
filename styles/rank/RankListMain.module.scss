@@ -4,7 +4,7 @@
   font-size: 1.05rem;
 }
 
-.mainTitle {
+.title {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,9 +15,7 @@
   font-family: $title-font;
   text-shadow: $text-shadow;
   letter-spacing: 0.1rem;
-  &.rank {
-    background: $rank-red;
-  }
+  background: $rank-red;
   &.normal {
     background: $norm-lightblue2;
   }
@@ -31,10 +29,9 @@
   margin-top: 0.2rem;
   border-radius: $big-radius;
   background: $rank-pink;
-}
-
-.normal {
-  background: $norm-emerald;
+  &.normal {
+    background: $norm-emerald;
+  }
 }
 
 .rankNumber {
