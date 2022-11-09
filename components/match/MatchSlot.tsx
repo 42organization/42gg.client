@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { Slot } from 'types/matchTypes';
@@ -29,11 +30,14 @@ export default function MatchSlot({
   const endTime = new Date(time);
   endTime.setMinutes(endTime.getMinutes() + intervalMinute);
   const isAfterSlot: boolean = startTime.getTime() - new Date().getTime() >= 0;
-  const buttonStyle: { [key: string]: string } = {
-    mytable: toggleMode === mode ? styles.mySlot : styles.disabledSlot,
-    close: styles.disabledSlot,
-    open: toggleMode === 'rank' ? styles.rankSlot : styles.normalSlot,
-  };
+  const buttonStyle: { [key: string]: string } = useMemo(
+    () => ({
+      mytable: toggleMode === mode ? styles.mySlot : styles.disabledSlot,
+      close: styles.disabledSlot,
+      open: toggleMode === 'rank' ? styles.rankSlot : styles.normalSlot,
+    }),
+    [slot]
+  );
 
   const enrollHandler = async () => {
     if (status === 'mytable') {
