@@ -20,23 +20,23 @@
   max-height: 40vh;
   color: black;
   overflow-y: scroll;
-}
 
-.ruleList>li {
-  margin-bottom: 1.2rem;
-  font-weight: 700;
+  li {
+    margin-bottom: 1.2rem;
+    font-weight: 700;
+  }
 }
 
 .ruleDetail {
   margin-left: 0.8rem;
   font-size: 0.9rem;
   font-weight: 400;
-}
 
-.ruleDetail>li {
-  list-style: square;
-  margin-top: 0.3rem;
-  white-space: pre-wrap;
+  li {
+    list-style: square;
+    margin-top: 0.3rem;
+    white-space: pre-wrap;
+  }
 }
 
 .ruleList::-webkit-scrollbar {
