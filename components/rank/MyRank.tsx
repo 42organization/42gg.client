@@ -10,27 +10,29 @@ interface MyRankProps {
 export default function MyRank({ mode }: MyRankProps) {
   const myRank = useRecoilValue(myRankState);
   const setIsScroll = useSetRecoilState(scrollState);
-  const rank = mode === 'rank' ? '순위' : '열정';
+  const rankType = mode === 'rank' ? '순위' : '열정';
+  const messageType = myRank === -1 ? 'UNRANK' : 'RANK';
+  const rankStyle = myRank === -1 ? styles.unrank : styles.rank;
+  const message = {
+    UNRANK: [`💡 나의 ${rankType}가 정해지지 않았습니다 💡`],
+    RANK: [`🚀🚀 나의 ${rankType}`, ` ${myRank}위`, ' 바로가기 🚀🚀'],
+  };
+
+  const myRankHandler = () => {
+    if (myRank === -1) return;
+    setIsScroll(true);
+  };
 
   return (
     <div>
       {myRank && (
-        <div className={styles.myRank}>
-          {myRank === -1 ? (
-            <span>💡 나의 {rank}가 정해지지 않았습니다 💡</span>
-          ) : (
-            <div>
-              🚀🚀{' '}
-              <span
-                onClick={() => {
-                  setIsScroll(true);
-                }}
-              >
-                나의 {rank} {myRank}위{' '}
-              </span>
-              바로가기 🚀🚀
-            </div>
-          )}
+        <div
+          className={`${styles.myRank} ${rankStyle}`}
+          onClick={myRankHandler}
+        >
+          {message[messageType].map((e, i) => (
+            <span key={i}>{e}</span>
+          ))}
         </div>
       )}
     </div>

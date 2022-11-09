@@ -16,17 +16,20 @@
 
 /* 나의 랭킹 */
 .myRank {
-  height: 2rem;
-  line-height: middle;
+  width: fit-content;
+  margin-bottom: 1.7rem;
+  margin-inline: auto;
   color: white;
   font-weight: 600;
   font-size: $medium-font;
   text-shadow: 0.1rem 0.1rem 0.1rem $rank-blue;
   text-align: center;
-  span {
+  span:nth-child(2) {
     color: $g1-top;
-    cursor: pointer;
   }
+}
+.rank {
+  cursor: pointer;
 }
 
 .container {
