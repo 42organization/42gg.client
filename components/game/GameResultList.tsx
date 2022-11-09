@@ -34,9 +34,10 @@ export default function GameResultList({ path }: GameResultListProps) {
     }
   }, [data]);
 
-  if (status === 'success' && !data?.pages[0].games.length) {
-    return <GameResultEmptyItem />;
-  }
+  if (status === 'loading') return <GameResultEmptyItem status={status} />;
+
+  if (status === 'success' && !data?.pages[0].games.length)
+    return <GameResultEmptyItem status={status} />;
 
   return (
     <div>
