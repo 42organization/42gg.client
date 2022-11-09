@@ -6,6 +6,7 @@ import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import ExpGuage from './ExpGuage';
 import PppChange from '../ppp/PppChange';
+import styles from 'styles/modal/ExpGameModal.module.scss';
 
 export default function ExpChangeModal() {
   const [modal, setModal] = useRecoilState(modalState);
@@ -18,9 +19,7 @@ export default function ExpChangeModal() {
 
   const getExpHandler = async () => {
     try {
-      const res = await instance.get(
-        `/pingpong/games/${modal.exp?.gameId}/result/${modal.exp?.mode}`
-      );
+      const res = await instance.get(`/pingpong/games//result/rank`);
       setUser(res?.data);
     } catch (e) {
       setError('KP04');
@@ -43,15 +42,12 @@ export default function ExpChangeModal() {
   return (
     <div>
       <div onClick={() => setModal({ modalName: null })}>
-        {modal.exp?.mode == 'rank' ? (
-          <PppChange
-            beforePpp={beforePpp}
-            changePpp={changedPpp}
-            win={Math.sign(changedPpp)}
-          />
-        ) : (
-          ''
-        )}
+        <div className={styles.emogi}>🎉</div>
+        <PppChange
+          beforePpp={beforePpp}
+          changePpp={changedPpp}
+          win={Math.sign(changedPpp)}
+        />
         <ExpGuage
           maxExp={beforeMaxExp}
           exp={beforeExp}

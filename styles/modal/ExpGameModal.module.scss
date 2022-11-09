@@ -1,9 +1,7 @@
 @import 'styles/common.scss';
 
-$text-shadow-red: -0.2rem 0 $pp-red, 0 0rem $pp-red, 0rem 0 $pp-red,
-  0 0rem $pp-red;
-$text-shadow-blue: -0.2rem 0 $pp-blue, 0 0rem $pp-blue, 0rem 0 $pp-blue,
-  0 0rem $pp-blue;
+$text-shadow-red: 2px 2px 0px $pp-red;
+$text-shadow-blue: 2px 2px 0px $pp-blue;
 $ppp-font: 3.5rem;
 
 .celebratContainer {
@@ -21,32 +19,50 @@ $ppp-font: 3.5rem;
   color: black;
 }
 
-.pppWordBlue {
-  font-size: $giant-giant-font;
+.pppContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.levelUp {
   font-weight: 700;
-  text-shadow: $text-shadow-red;
-  color: $pp-blue;
+  font-size: $medium-font;
+  text-align: center;
+  color: red;
+}
+.emogi {
+  text-align: center;
+  font-size: $giant-giant-font;
+}
+
+.pppLeftEmogi {
+  font-size: $ppp-font;
+  margin-right: 0.5rem;
+}
+
+.pppRightEmogi {
+  font-size: $ppp-font;
+  margin-left: 0.5rem;
+  transform: scaleX(-1);
 }
 
 .pppChangeBlue {
+  text-align: center;
   font-size: $ppp-font;
   font-weight: 700;
   text-shadow: $text-shadow-red;
   color: $pp-blue;
-}
-
-.pppWordRed {
-  font-size: $giant-giant-font;
-  font-weight: 700;
-  text-shadow: $text-shadow-blue;
-  color: $pp-red;
+  align-items: center;
 }
 
 .pppChangeRed {
+  text-align: center;
   font-size: $ppp-font;
   font-weight: 700;
   text-shadow: $text-shadow-blue;
   color: $pp-red;
+  align-items: center;
 }
 
 .levelRacketWrap {
@@ -55,8 +71,11 @@ $ppp-font: 3.5rem;
   justify-content: center;
   margin-bottom: 0.3rem;
   .level {
+    margin-bottom: 0.5rem;
     font-size: $giant-giant-font;
     font-weight: 700;
+    color: #f2e6e6;
+    text-shadow: 2px 2px 0px #040eff;
   }
   .exp {
     display: flex;
@@ -68,17 +87,21 @@ $ppp-font: 3.5rem;
       justify-content: space-between;
       margin-bottom: 0.1rem;
       .expRate {
+        margin-bottom: 0.2rem;
+
         font-style: normal;
         font-weight: 700;
         font-size: $big-font;
         line-height: $big-font;
       }
       .expIncrease {
+        margin-bottom: 0.2rem;
+
         margin-right: 0.2rem;
         font-style: normal;
         font-weight: 700;
         font-size: $medium-font;
-        color: white;
+        color: #746f84;
       }
     }
     .bar {
@@ -98,8 +121,8 @@ $ppp-font: 3.5rem;
 }
 
 .guideWord {
-  margin-left: 2.7rem;
-  margin-right: 2.7rem;
+  margin-left: 4.5rem;
+  margin-right: 4.5rem;
   text-align: center;
   font-size: $medium-font;
   font-weight: 700;
