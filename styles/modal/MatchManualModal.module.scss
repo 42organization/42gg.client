@@ -14,15 +14,16 @@
 
 .ruleList {
   list-style: none;
-  margin: 0.5rem 0.5rem;
+  margin: 1.5rem 0.5rem;
   width: auto;
+  height: 40vh;
   max-height: 40vh;
   color: black;
   overflow-y: scroll;
 }
 
 .ruleList>li {
-  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
   font-weight: 700;
 }
 

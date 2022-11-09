@@ -62,16 +62,15 @@ export default function MatchManualModal() {
         {modalContents.map((item: { title: string, description: string[] }) => {
           return (
             <>
-              <ul className={styles.ruleList}>
-                <li>{item.title}</li>
-              </ul>
-              <ul className={styles.ruleDetail}>
-                {item.description.map((d, i) => {
-                  return (
-                    <li key={i}>{d}</li>
-                  )
-                })}
-              </ul>
+              <li>{item.title}
+                <ul className={styles.ruleDetail}>
+                  {item.description.map((d, i) => {
+                    return (
+                      <li key={i}>{d}</li>
+                    )
+                  })}
+                </ul>
+              </li>
             </>
           )
         })}
