@@ -11,15 +11,16 @@ interface RankListMainProps {
 export default function RankListMain({ rank }: RankListMainProps) {
   const { seasonMode } = useRecoilValue(seasonListState);
   const isNormalSeason = seasonMode === 'normal';
-  const mainTitle = isNormalSeason ? 'Vip' : 'Champion';
+  const content = {
+    normal: { style: styles.normal, title: 'VIP' },
+    rank: { style: '', title: 'Champion' },
+    both: { style: '', title: 'Champion' },
+  };
 
   return (
     <div className={styles.mainContainer}>
-      <div
-        className={`${styles.mainTitle}
-				${isNormalSeason ? styles.normal : styles.rank}`}
-      >
-        {mainTitle}
+      <div className={`${styles.title} ${content[seasonMode].style}`}>
+        {content[seasonMode].title}
       </div>
       {rank?.rankList.map((item: NormalUser | RankUser) => (
         <RankListItemMain

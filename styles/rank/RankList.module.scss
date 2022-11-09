@@ -5,12 +5,11 @@
   @include pageWrap;
 }
 
-.rankTitle {
+.title {
   @include pageTitle;
 }
 
-.vipTitle {
-  @include pageTitle;
+.vip {
   text-shadow: $text-shadow, 0.3rem 0.3rem 0 $norm-lightblue2;
 }
 

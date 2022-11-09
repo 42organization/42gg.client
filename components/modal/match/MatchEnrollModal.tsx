@@ -18,6 +18,7 @@ export default function MatchEnrollModal({
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const enrollResponse: { [key: string]: string } = {
+    SUCCESS: '경기가 성공적으로 등록되었습니다.',
     SC001: '경기 등록에 실패하였습니다.',
     SC002: '이미 등록이 완료된 경기입니다.',
     SC003: '경기 취소 후 1분 동안 경기를 예약할 수 없습니다.',
@@ -27,7 +28,7 @@ export default function MatchEnrollModal({
     try {
       const body = { slotId: slotId, mode: mode };
       await instance.post(`/pingpong/match/tables/${1}/${type}`, body);
-      alert('경기가 성공적으로 등록되었습니다.');
+      alert(enrollResponse.SUCCESS);
     } catch (e: any) {
       if (e.response.data.code in enrollResponse)
         alert(enrollResponse[e.response.data.code]);

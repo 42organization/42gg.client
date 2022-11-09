@@ -11,11 +11,16 @@ export default function MyRank({ mode }: MyRankProps) {
   const myRank = useRecoilValue(myRankState);
   const setIsScroll = useSetRecoilState(scrollState);
   const rankType = mode === 'rank' ? '순위' : '열정';
-  const messageType = myRank === -1 ? 'rank' : 'unrank';
-  const rankStyle = myRank === -1 ? styles.unrank : styles.rank;
-  const message = {
-    unrank: [`💡 나의 ${rankType}가 정해지지 않았습니다 💡`],
-    rank: [`🚀🚀 나의 ${rankType}`, ` ${myRank}위`, ' 바로가기 🚀🚀'],
+  const isRanked = myRank === -1 ? 'rank' : 'unrank';
+  const content = {
+    unrank: {
+      style: '',
+      message: [`💡 나의 ${rankType}가 정해지지 않았습니다 💡`],
+    },
+    rank: {
+      style: styles.rank,
+      message: [`🚀🚀 나의 ${rankType}`, ` ${myRank}위`, ' 바로가기 🚀🚀'],
+    },
   };
 
   const myRankHandler = () => {
@@ -27,10 +32,10 @@ export default function MyRank({ mode }: MyRankProps) {
     <div>
       {myRank && (
         <div
-          className={`${styles.myRank} ${rankStyle}`}
+          className={`${styles.myRank} ${content[isRanked].style}`}
           onClick={myRankHandler}
         >
-          {message[messageType].map((e, i) => (
+          {content[isRanked].message.map((e, i) => (
             <span key={i}>{e}</span>
           ))}
         </div>

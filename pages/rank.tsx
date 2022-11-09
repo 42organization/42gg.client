@@ -12,11 +12,15 @@ export default function Rank() {
   const [mode, setMode] = useState<MatchMode>(
     seasonMode === 'normal' ? 'normal' : 'rank'
   );
+  const content = {
+    rank: { style: '', title: 'Ranking' },
+    normal: { style: styles.vip, title: 'VIP' },
+  };
 
   return (
     <div className={styles.pageWrap}>
-      <h1 className={mode === 'rank' ? styles.rankTitle : styles.vipTitle}>
-        {mode === 'rank' ? 'Ranking' : 'VIP'}
+      <h1 className={`${styles.title} ${content[mode].style}`}>
+        {content[mode].title}
       </h1>
       <MyRank mode={mode} />
       <RankModeWrap setMode={setMode}>

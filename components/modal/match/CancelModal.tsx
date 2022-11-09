@@ -14,22 +14,20 @@ export default function CancelModal({ isMatched, slotId, time }: Cancel) {
   const setModal = useSetRecoilState(modalState);
   const cancelLimitTime = 5;
   const rejectCancel = isBeforeMin(time, cancelLimitTime) && isMatched;
-  const messageType = rejectCancel ? 'reject' : 'cancel';
-  const message = {
-    emoji: {
-      cancel: '🤔',
-      reject: '😰',
-    },
-    main: {
-      cancel: ['해당 경기를', '취소하시겠습니까?'],
-      reject: ['매칭이 완료되어', '경기를 취소할 수 없습니다!!'],
-    },
-    sub: {
-      cancel: [
+  const contentType = rejectCancel ? 'reject' : 'cancel';
+  const content = {
+    cancel: {
+      emoji: '🤔',
+      main: ['해당 경기를', '취소하시겠습니까?'],
+      sub: [
         '⚠︎ 매칭이 완료된 경기를 취소하면',
         '1분 간 새로운 예약이 불가합니다!',
       ],
-      reject: [
+    },
+    reject: {
+      emoji: '😰',
+      main: ['매칭이 완료되어', '경기를 취소할 수 없습니다!!'],
+      sub: [
         `경기시작 ${cancelLimitTime}분 전부터는`,
         '경기를 취소할 수 없습니다..',
       ],
@@ -68,19 +66,17 @@ export default function CancelModal({ isMatched, slotId, time }: Cancel) {
   return (
     <div className={styles.container}>
       <div className={styles.phrase}>
-        <div className={styles.emoji}>{message.emoji[messageType]}</div>
-        <>
-          {message.main[messageType].map((e, i) => (
-            <div key={i}>{e}</div>
-          ))}
-          {(rejectCancel || (!rejectCancel && isMatched)) && (
-            <div className={styles.subContent}>
-              {message.sub[messageType].map((e, i) => (
-                <div key={i}>{e}</div>
-              ))}
-            </div>
-          )}
-        </>
+        <div className={styles.emoji}>{content[contentType].emoji}</div>
+        {content[contentType].main.map((e, i) => (
+          <div key={i}>{e}</div>
+        ))}
+        {(rejectCancel || (!rejectCancel && isMatched)) && (
+          <div className={styles.subContent}>
+            {content[contentType].sub.map((e, i) => (
+              <div key={i}>{e}</div>
+            ))}
+          </div>
+        )}
       </div>
       <div className={styles.buttons}>
         {rejectCancel ? (
