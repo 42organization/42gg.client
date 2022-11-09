@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useRecoilState } from 'recoil';
 import { Game } from 'types/gameTypes';
 import infScroll from 'utils/infinityScroll';
@@ -34,9 +34,10 @@ export default function GameResultList({ path }: GameResultListProps) {
     }
   }, [data]);
 
-  if (status === 'success' && !data?.pages[0].games.length) {
-    return <GameResultEmptyItem />;
-  }
+  if (status === 'loading') return <GameResultEmptyItem status={status} />;
+
+  if (status === 'success' && !data?.pages[0].games.length)
+    return <GameResultEmptyItem status={status} />;
 
   return (
     <div>
