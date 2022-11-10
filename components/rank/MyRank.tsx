@@ -11,7 +11,7 @@ export default function MyRank({ mode }: MyRankProps) {
   const myRank = useRecoilValue(myRankState);
   const setIsScroll = useSetRecoilState(scrollState);
   const rankType = mode === 'rank' ? '순위' : '열정';
-  const isRanked = myRank === -1 ? 'rank' : 'unrank';
+  const isRanked = myRank === -1 ? 'unrank' : 'rank';
   const content = {
     unrank: {
       style: '',
