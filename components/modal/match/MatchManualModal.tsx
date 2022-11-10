@@ -1,6 +1,10 @@
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/MatchManualModal.module.scss';
+import { Manual } from 'types/modalTypes';
+import { useState } from 'react';
+import ModeToggle from '../../mode/modeItems/ModeToggle';
+import { seasonListState } from '../../../utils/recoil/seasons';
 
 const modalContentsNormal: { title: string; description: string[] }[] = [
   {
@@ -77,30 +81,63 @@ const modalContentsRank: { title: string; description: string[] }[] = [
   },
 ];
 
-export default function MatchManualModal() {
+export default function MatchManualModal({ toggleMode }: Manual) {
   const setModal = useSetRecoilState(modalState);
-
   const onReturn = () => {
     setModal({ modalName: null });
+  };
+
+  const { seasonMode } = useRecoilValue(seasonListState);
+  const [modalToggleMode, setModalToggleMode] = useState(toggleMode);
+
+  const onToggle = () => {
+    console.log('mkdal toggle');
+    setModalToggleMode(modalToggleMode === 'rank' ? 'normal' : 'rank');
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.title}>Please!!</div>
-      <ul className={styles.ruleList}>
-        {modalContentsRank.map(
-          (item: { title: string; description: string[] }, i) => (
-            <li key={i}>
-              {item.title}
-              <ul className={styles.ruleDetail}>
-                {item.description.map((d, i) => (
-                  <li key={i}>{d}</li>
-                ))}
-              </ul>
-            </li>
-          ),
-        )}
-      </ul>
+      {seasonMode === 'both' && (
+        <ModeToggle
+          checked={modalToggleMode === 'rank'}
+          onToggle={onToggle}
+          id={'modalToggle'}
+          text={modalToggleMode === 'rank' ? '랭크' : '일반'}
+        />
+      )}
+      {modalToggleMode === 'rank' && (
+        <ul className={styles.ruleList}>
+          {modalContentsRank.map(
+            (item: { title: string; description: string[] }, i) => (
+              <li key={i}>
+                {item.title}
+                <ul className={styles.ruleDetail}>
+                  {item.description.map((d, i) => (
+                    <li key={i}>{d}</li>
+                  ))}
+                </ul>
+              </li>
+            ),
+          )}
+        </ul>
+      )}
+      {modalToggleMode === 'normal' && (
+        <ul className={styles.ruleList}>
+          {modalContentsNormal.map(
+            (item: { title: string; description: string[] }, i) => (
+              <li key={i}>
+                {item.title}
+                <ul className={styles.ruleDetail}>
+                  {item.description.map((d, i) => (
+                    <li key={i}>{d}</li>
+                  ))}
+                </ul>
+              </li>
+            ),
+          )}
+        </ul>
+      )}
       <div className={styles.buttons}>
         <div className={styles.positive}>
           <input onClick={onReturn} type="button" value={'확 인'} />
