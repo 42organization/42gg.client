@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Cancel } from 'types/modalTypes';
 import instance from 'utils/axios';
@@ -10,7 +11,6 @@ import {
 } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/CancelModal.module.scss';
-import { useEffect } from 'react';
 
 export default function CancelModal({ isMatched, slotId, time }: Cancel) {
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
