@@ -23,22 +23,22 @@ const defaultPlayers: Team = defaultTeam;
 const normalGuide = {
   before: '즐거운 경기 하셨나요?',
   after: '🔥 경기 중 🔥',
-  explains: ['💡 경기시작 10분 후부터 ', '💡 경기를 완료할 수 있습니다'],
+  explains: '💡 경기시작 10분 후부터\n💡 경기를 완료할 수 있습니다',
 };
 const rankGuide = {
   before: '경기 결과 확인',
   after: '경기 후 점수를 입력해주세요',
-  explains: ['💡 3판 2선승제!', '💡 동점은 1점 내기로 승부를 결정!'],
+  explains: '💡 3판 2선승제!\n💡 동점은 1점 내기로 승부를 결정!',
 };
 const scoreExistGuide = {
   before: '경기 결과!',
   after: '',
-  explains: ['이미 입력된 경기입니다. 점수를 확인하세요!', ''],
+  explains: '이미 입력된 경기입니다. 점수를 확인하세요!\n',
 };
 const defaultGuide = {
   before: '',
   after: '',
-  explains: ['', ''],
+  explains: '\n',
 };
 
 export default function AfterGameModal() {
@@ -61,6 +61,10 @@ export default function AfterGameModal() {
     gameId: currentGame.gameId,
     mode: currentGame.mode,
   };
+
+  useEffect(() => {
+    getCurrentGameHandler();
+  }, []);
 
   const getCurrentGameHandler = async () => {
     try {
@@ -120,25 +124,15 @@ export default function AfterGameModal() {
     });
   };
 
-  function getRankOnSubMit(scoreExits: boolean) {
-    if (scoreExits === true) {
-      return submitRankExistResultHandler;
-    } else {
-      return submitRankResultHandler;
-    }
+  function getRankOnSubmit(scoreExits: boolean) {
+    if (scoreExits) return submitRankExistResultHandler;
+    else return submitRankResultHandler;
   }
 
-  function getRankGuidLine(scoreExits: boolean) {
-    if (scoreExits === true) {
-      return scoreExistGuide;
-    } else {
-      return rankGuide;
-    }
+  function getRankGuideLine(scoreExits: boolean) {
+    if (scoreExits) return scoreExistGuide;
+    else return rankGuide;
   }
-
-  useEffect(() => {
-    getCurrentGameHandler();
-  }, []);
 
   return currentGame.startTime === '2022-07-13 11:50' ? (
     <DefaultGame guideLine={defaultGuide} />
@@ -151,8 +145,8 @@ export default function AfterGameModal() {
   ) : (
     <RankGame
       currentGame={currentGame}
-      guideLine={getRankGuidLine(currentGame.isScoreExist)}
-      onSubmit={getRankOnSubMit(currentGame.isScoreExist)}
+      guideLine={getRankGuideLine(currentGame.isScoreExist)}
+      onSubmit={getRankOnSubmit(currentGame.isScoreExist)}
     />
   );
 }

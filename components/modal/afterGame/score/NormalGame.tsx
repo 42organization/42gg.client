@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { AfterGame } from 'types/scoreTypes';
 import { isAfterMin } from 'utils/handleTime';
 import { Button } from './Buttons';
@@ -17,18 +18,32 @@ export default function NormalGame({
   onSubmit,
 }: NormalGameProps) {
   const { startTime, matchTeamsInfo } = currentGame;
+  const [reload, setReload] = useState<boolean>(false);
   const canBeCompleted = isAfterMin(startTime, 10);
+  const buttonMode = {
+    style: canBeCompleted
+      ? styles.positive
+      : `${styles.negative} ${styles.single}`,
+    onClick: canBeCompleted
+      ? onSubmit
+      : () => {
+          setReload(!reload);
+        },
+  };
+
   return (
     <div className={styles.container}>
       <Guide condition={canBeCompleted} guideLine={guideLine} />
       <div className={styles.resultContainer}>
         <MatchTeams matchTeams={matchTeamsInfo} />
       </div>
-      {canBeCompleted && (
-        <div className={styles.buttons}>
-          <Button style={styles.positive} value='게임종료' onClick={onSubmit} />
-        </div>
-      )}
+      <div className={styles.buttons}>
+        <Button
+          style={buttonMode.style}
+          value='게임종료'
+          onClick={buttonMode.onClick}
+        />
+      </div>
     </div>
   );
 }
