@@ -23,14 +23,14 @@
 
 .ruleList {
   list-style: none;
-  margin: 0 0.6rem 0.5rem;
   width: auto;
   height: 60vh;
   max-height: 60vh;
+  margin: 0 0.6rem 0.5rem;
   color: black;
-  overflow-y: scroll;
   font-size: 1.2rem;
   font-weight: 700;
+  overflow-y: scroll;
 
   > li {
     margin-top: 1.2rem;
