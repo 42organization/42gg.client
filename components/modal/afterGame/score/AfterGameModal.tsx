@@ -62,6 +62,10 @@ export default function AfterGameModal() {
     mode: currentGame.mode,
   };
 
+  useEffect(() => {
+    getCurrentGameHandler();
+  }, []);
+
   const getCurrentGameHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/games/players`);
@@ -120,25 +124,15 @@ export default function AfterGameModal() {
     });
   };
 
-  function getRankOnSubMit(scoreExits: boolean) {
-    if (scoreExits === true) {
-      return submitRankExistResultHandler;
-    } else {
-      return submitRankResultHandler;
-    }
+  function getRankOnSubmit(scoreExits: boolean) {
+    if (scoreExits) return submitRankExistResultHandler;
+    else return submitRankResultHandler;
   }
 
-  function getRankGuidLine(scoreExits: boolean) {
-    if (scoreExits === true) {
-      return scoreExistGuide;
-    } else {
-      return rankGuide;
-    }
+  function getRankGuideLine(scoreExits: boolean) {
+    if (scoreExits) return scoreExistGuide;
+    else return rankGuide;
   }
-
-  useEffect(() => {
-    getCurrentGameHandler();
-  }, []);
 
   return currentGame.startTime === '2022-07-13 11:50' ? (
     <DefaultGame guideLine={defaultGuide} />
@@ -151,8 +145,8 @@ export default function AfterGameModal() {
   ) : (
     <RankGame
       currentGame={currentGame}
-      guideLine={getRankGuidLine(currentGame.isScoreExist)}
-      onSubmit={getRankOnSubMit(currentGame.isScoreExist)}
+      guideLine={getRankGuideLine(currentGame.isScoreExist)}
+      onSubmit={getRankOnSubmit(currentGame.isScoreExist)}
     />
   );
 }
