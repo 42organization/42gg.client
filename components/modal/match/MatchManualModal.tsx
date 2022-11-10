@@ -70,8 +70,8 @@ export default function MatchManualModal() {
     <div className={styles.container}>
       <div className={styles.title}>Please!!</div>
       <ul className={styles.ruleList}>
-        {modalContents.map((item: { title: string; description: string[] }) => (
-          <li>
+        {modalContents.map((item: { title: string; description: string[] }, i) => (
+          <li key={i}>
             {item.title}
             <ul className={styles.ruleDetail}>
               {item.description.map((d, i) => (
