@@ -91,7 +91,6 @@ export default function MatchManualModal({ toggleMode }: Manual) {
   const [modalToggleMode, setModalToggleMode] = useState(toggleMode);
 
   const onToggle = () => {
-    console.log('mkdal toggle');
     setModalToggleMode(modalToggleMode === 'rank' ? 'normal' : 'rank');
   };
 
@@ -99,12 +98,14 @@ export default function MatchManualModal({ toggleMode }: Manual) {
     <div className={styles.container}>
       <div className={styles.title}>Please!!</div>
       {seasonMode === 'both' && (
-        <ModeToggle
-          checked={modalToggleMode === 'rank'}
-          onToggle={onToggle}
-          id={'modalToggle'}
-          text={modalToggleMode === 'rank' ? '랭크' : '일반'}
-        />
+        <div className={styles.toggleContainer}>
+          <ModeToggle
+            checked={modalToggleMode === 'rank'}
+            onToggle={onToggle}
+            id={'modalToggle'}
+            text={modalToggleMode === 'rank' ? '랭크' : '일반'}
+          />
+        </div>
       )}
       {modalToggleMode === 'rank' && (
         <ul className={styles.ruleList}>
