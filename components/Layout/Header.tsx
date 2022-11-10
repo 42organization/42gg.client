@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
   openMenuBarState,
@@ -31,6 +31,13 @@ export default function Header() {
     setOpenNotiBar(!openNotiBar);
     setLive((prev) => ({ ...prev, notiCount: 0 }));
   };
+
+  useEffect(() => {
+    setMenuOutsideScroll();
+  }, [openMenuBar, openNotiBar]);
+
+  const setMenuOutsideScroll = () =>
+    (document.body.style.overflow = (openMenuBar || openNotiBar) ? 'hidden' : 'unset');
 
   return (
     <div className={styles.headerContainer}>
