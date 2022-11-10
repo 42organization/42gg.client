@@ -32,18 +32,12 @@ export default function PppChange({
   };
 
   return (
-    <div>
-      {win === 1 ? (
-        <>
-          <span className={styles.pppWordRed}>ppp.</span>
-          <span className={styles.pppChangeRed}>{ppp}</span>
-        </>
-      ) : (
-        <>
-          <span className={styles.pppWordBlue}>ppp.</span>
-          <span className={styles.pppChangeBlue}>{ppp}</span>
-        </>
-      )}
+    <div className={styles.pppContainer}>
+      <div className={styles.pppLeftEmogi}>🏓</div>
+      <div className={win === 1 ? styles.pppChangeRed : styles.pppChangeBlue}>
+        {ppp}
+      </div>
+      <div className={styles.pppRightEmogi}>🏓</div>
     </div>
   );
 }
