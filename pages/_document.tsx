@@ -8,6 +8,8 @@ export default function Document() {
     <Html>
       <Head>
         <link rel='icon' href='/image/pingpong.png' />
+        <link rel='shortcut icon' href='/image/pingpong.png' />
+        <link rel='apple-touch-icon' href='/image/pingpong.png' />
         <meta name='author' content='개발자국' />
         <meta name='description' content='42좋은 42서울인을 위한 탁구 생활' />
         <meta name='keywords' content='42gg, 42GG, 42gg.kr, 42seoul, 42서울' />
