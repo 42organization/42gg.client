@@ -21,16 +21,20 @@
   color: black;
   overflow-y: scroll;
   font-weight: 700;
-  li {
+
+  >li {
     margin-top: 1rem;
   }
 }
+
+
 
 .ruleDetail {
   margin-left: 0.8rem;
   font-size: 0.9rem;
   font-weight: 400;
-  li {
+
+  >li {
     list-style: square;
     margin-top: 0.5rem;
     white-space: pre-wrap;
