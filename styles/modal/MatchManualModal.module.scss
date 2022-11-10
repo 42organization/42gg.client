@@ -21,22 +21,24 @@
   color: black;
   overflow-y: scroll;
   font-weight: 700;
+
+  >li {
+    margin-top: 1rem;
+  }
 }
 
-.ruleList>li {
-  margin-top: 1rem;
-}
+
 
 .ruleDetail {
   margin-left: 0.8rem;
   font-size: 0.9rem;
   font-weight: 400;
-}
 
-.ruleDetail>li {
-  list-style: square;
-  margin-top: 0.5rem;
-  white-space: pre-wrap;
+  >li {
+    list-style: square;
+    margin-top: 0.5rem;
+    white-space: pre-wrap;
+  }
 }
 
 .ruleList::-webkit-scrollbar {
