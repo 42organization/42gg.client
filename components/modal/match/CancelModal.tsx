@@ -1,17 +1,23 @@
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Cancel } from 'types/modalTypes';
 import instance from 'utils/axios';
 import { isBeforeMin } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';
-import { openCurrentMatchState, reloadMatchState } from 'utils/recoil/match';
+import {
+  currentMatchState,
+  openCurrentMatchState,
+  reloadMatchState,
+} from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/CancelModal.module.scss';
+import { useEffect } from 'react';
 
 export default function CancelModal({ isMatched, slotId, time }: Cancel) {
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
+  const [currentMatch, setCurrentMatch] = useRecoilState(currentMatchState);
   const cancelLimitTime = 5;
   const rejectCancel = isBeforeMin(time, cancelLimitTime) && isMatched;
   const contentType = rejectCancel ? 'reject' : 'cancel';
@@ -33,6 +39,10 @@ export default function CancelModal({ isMatched, slotId, time }: Cancel) {
     SD002: '이미 매칭이 완료된 경기입니다.',
   };
 
+  useEffect(() => {
+    getCurrentMatchHandler();
+  }, []);
+
   const onCancel = async () => {
     try {
       await instance.delete(`/pingpong/match/slots/${slotId}`);
@@ -52,9 +62,18 @@ export default function CancelModal({ isMatched, slotId, time }: Cancel) {
     setReloadMatch(true);
   };
 
+  const getCurrentMatchHandler = async () => {
+    try {
+      const res = await instance.get('/pingpong/match/current');
+      setCurrentMatch(res.data);
+    } catch (e: any) {
+      setError('JH08');
+    }
+  };
+
   const onReturn = () => {
     setModal({ modalName: null });
-    if (rejectCancel) setReloadMatch(true);
+    setReloadMatch(true);
   };
 
   return (
@@ -62,7 +81,7 @@ export default function CancelModal({ isMatched, slotId, time }: Cancel) {
       <div className={styles.phrase}>
         <div className={styles.emoji}>{content[contentType].emoji}</div>
         {content[contentType].main}
-        {(rejectCancel || (!rejectCancel && isMatched)) && (
+        {(rejectCancel || (!rejectCancel && currentMatch.isMatched)) && (
           <div className={styles.subContent}>{content[contentType].sub}</div>
         )}
       </div>
