@@ -67,7 +67,7 @@ export default function CancelModal({ isMatched, slotId, time }: Cancel) {
       const res = await instance.get('/pingpong/match/current');
       setCurrentMatch(res.data);
     } catch (e) {
-      setError('JH08');
+      setError('JH03');
     }
   };
 
