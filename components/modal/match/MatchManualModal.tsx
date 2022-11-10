@@ -18,12 +18,15 @@ const modalContentsNormal: { title: string; description: string[] }[] = [
     ],
   },
   {
-    title: '🌀 일반 경기',
-    description: ['게임 시작 후 10분이 경과해야 게임 종료 가능'],
+    title: '📖 일반 경기 규칙',
+    description: ['자유 규칙 !'],
   },
   {
     title: '✅ 경기 결과',
-    description: ['일반 게임 진행 시 점수 입력 없음'],
+    description: [
+      '일반 게임 진행 시 점수 입력 없음',
+      '게임 시작 후 10분이 경과해야 게임 종료 가능',
+    ],
   },
   {
     title: '🚨 경기 시 주의사항',
@@ -38,13 +41,13 @@ const modalContentsRank: { title: string; description: string[] }[] = [
       '등록한 경기가 끝나야만 다음 경기 등록 가능',
       '경기 시작 5분 전 상대 팀 공개 및 경기 취소 불가',
       '매칭 알림은 이메일로 전달',
-      '일정 점수 이상 차이 나는 상대와 랭크 경기 불가',
       '경기가 매칭된 상태에서 취소 시, 1분간 경기 등록 불가',
       '상대방이 경기를 취소하면 나의 경기는 매칭 대기 상태로 전환',
+      '일정 점수 이상 차이 나는 상대와 랭크 경기 불가',
     ],
   },
   {
-    title: '📖 경기 규칙',
+    title: '📖 랭크 경기 규칙',
     description: [
       '11점 3판 2선승제',
       '경기는 10분 동안 진행',
@@ -55,7 +58,7 @@ const modalContentsRank: { title: string; description: string[] }[] = [
     ],
   },
   {
-    title: '🏓 서브',
+    title: '🏓 서브 규칙',
     description: [
       '첫 세트만 서브 게임 진행',
       '서브 게임 승자부터 세트별 교대로 서브',
