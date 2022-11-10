@@ -2,7 +2,32 @@ import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/MatchManualModal.module.scss';
 
-const modalContents: { title: string; description: string[] }[] = [
+const modalContentsNormal: { title: string; description: string[] }[] = [
+  {
+    title: '🔍 매칭',
+    description: [
+      '등록한 경기가 끝나야만 다음 경기 등록 가능',
+      '경기 시작 5분 전 상대 팀 공개 및 경기 취소 불가',
+      '매칭 알림은 이메일로 전달',
+      '경기가 매칭된 상태에서 취소 시, 1분간 경기 등록 불가',
+      '상대방이 경기를 취소하면 나의 경기는 매칭 대기 상태로 전환',
+    ],
+  },
+  {
+    title: '🌀 일반 경기',
+    description: ['게임 시작 후 10분이 경과해야 게임 종료 가능'],
+  },
+  {
+    title: '✅ 경기 결과',
+    description: ['일반 게임 진행 시 점수 입력 없음'],
+  },
+  {
+    title: '🚨 경기 시 주의사항',
+    description: [`노쇼는 건의사항 기능 이용해서 신고`],
+  },
+];
+
+const modalContentsRank: { title: string; description: string[] }[] = [
   {
     title: '🔍 매칭',
     description: [
@@ -15,14 +40,7 @@ const modalContents: { title: string; description: string[] }[] = [
     ],
   },
   {
-    title: '🌀 일반 경기',
-    description: [
-      '일반 게임 진행 시 점수 입력 없음',
-      '게임 시작 후 10분이 경과해야 게임 종료 가능',
-    ],
-  },
-  {
-    title: '📖 랭크 경기',
+    title: '📖 경기 규칙',
     description: [
       '11점 3판 2선승제',
       '경기는 10분 동안 진행',
@@ -46,12 +64,12 @@ const modalContents: { title: string; description: string[] }[] = [
     title: '✅ 경기 결과',
     description: [
       '경기 종료 후 그 자리에서 세트 점수 입력',
-      '다음 경기가 있을 시 현재 스코어가 높은 선수가 승리',
+      '종료시간에 다음 경기가 있을 시 현재 스코어가 높은 선수가 승리',
       '다음 경기가 없을 시 계속 진행',
     ],
   },
   {
-    title: '🚨 경기 시 주의사항',
+    title: '🚨 노쇼',
     description: [
       `매치가 시작 되었으나 상대방이 나오지 않는다면\n3분이 지날 때 마다 세트 점수 1점씩 획득`,
       '6분이 지났을 때도 나오지 않았다면 세트 점수 2:0 승리 처리',
@@ -70,20 +88,22 @@ export default function MatchManualModal() {
     <div className={styles.container}>
       <div className={styles.title}>Please!!</div>
       <ul className={styles.ruleList}>
-        {modalContents.map((item: { title: string; description: string[] }, i) => (
-          <li key={i}>
-            {item.title}
-            <ul className={styles.ruleDetail}>
-              {item.description.map((d, i) => (
-                <li key={i}>{d}</li>
-              ))}
-            </ul>
-          </li>
-        ))}
+        {modalContentsRank.map(
+          (item: { title: string; description: string[] }, i) => (
+            <li key={i}>
+              {item.title}
+              <ul className={styles.ruleDetail}>
+                {item.description.map((d, i) => (
+                  <li key={i}>{d}</li>
+                ))}
+              </ul>
+            </li>
+          ),
+        )}
       </ul>
       <div className={styles.buttons}>
         <div className={styles.positive}>
-          <input onClick={onReturn} type='button' value={'확 인'} />
+          <input onClick={onReturn} type="button" value={'확 인'} />
         </div>
       </div>
     </div>
