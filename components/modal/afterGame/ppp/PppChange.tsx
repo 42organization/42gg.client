@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import styles from 'styles/modal/ExpGameModal.module.scss';
 import { sleep } from 'utils/sleep';
+import styles from 'styles/modal/ExpGameModal.module.scss';
 
 type PppChangeProps = {
   beforePpp: number;
