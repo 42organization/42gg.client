@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
 import { sleep } from 'utils/sleep';
-import styles from 'styles/modal/ExpGameModal.module.scss';
 import ExpCelebration from './ExpCelebration';
+import styles from 'styles/modal/ExpGameModal.module.scss';
 
 type ExpGuageProps = {
   maxExp: number;
@@ -22,11 +20,10 @@ export default function ExpGuage({
   afterMaxExp,
   increasedLevel,
 }: ExpGuageProps) {
-  const setModal = useSetRecoilState(modalState);
   const [currentExp, setCurrentExp] = useState<number>(0);
   const [currentMaxExp, setCurrentMaxExp] = useState<number>(maxExp);
   const [currentLevel, setCurrentLevel] = useState<number>(level);
-  const [celebrateEvent, setCelebrateEvent] = useState<Boolean>(false);
+  const [celebrateEvent, setCelebrateEvent] = useState<boolean>(false);
 
   useEffect(() => {
     if (getPercent(maxExp, exp + currentExp) >= 100) {

@@ -5,7 +5,7 @@ import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import ExpGuage from './ExpGuage';
-import PppChange from '../ppp/PppChange';
+import PppChange from 'components/modal/afterGame/ppp/PppChange';
 import styles from 'styles/modal/ExpGameModal.module.scss';
 
 export default function ExpChangeModal() {
