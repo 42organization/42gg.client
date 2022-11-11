@@ -28,7 +28,7 @@ export default function MatchManualModal({ toggleMode }: Manual) {
           <ModeToggle
             checked={manualMode === 'rank'}
             onToggle={onToggle}
-            id={'modalToggle'}
+            id={'manualToggle'}
             text={manualMode === 'rank' ? '랭크' : '일반'}
           />
         </div>
