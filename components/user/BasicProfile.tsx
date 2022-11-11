@@ -30,6 +30,7 @@ export default function BasicProfile({ intraId }: ProfileProps) {
     setProfile,
   ] = useRecoilState(profileState);
   const [imgError, setImgError] = useState(false);
+  const MAX_LEVEL = 42;
 
   useEffect(() => {
     getBasicProfileHandler();
@@ -72,7 +73,9 @@ export default function BasicProfile({ intraId }: ProfileProps) {
           <div className={styles.level}>Lv. {level}</div>
           <div className={styles.exp}>
             <div className={styles.expRate}>
-              {currentExp} / {maxExp}
+              {level !== MAX_LEVEL
+                ? `EXP : ${currentExp} / ${maxExp}`
+                : `EXP : ${currentExp} / Max Exp`}
             </div>
             <div className={styles.bar}>
               <span
