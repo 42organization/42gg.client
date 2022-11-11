@@ -54,7 +54,7 @@
     "workerDirectory": "public"
   },
   "lint-staged": {
-    "*.{ts,tsx,css,md}": "prettier --write",
+    "*.{ts,tsx,scss,md}": "prettier --write",
     "*.{ts,tsx}": "eslint --cache --fix"
   }
 }
