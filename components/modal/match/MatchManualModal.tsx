@@ -10,14 +10,14 @@ import styles from 'styles/modal/MatchManualModal.module.scss';
 export default function MatchManualModal({ toggleMode }: Manual) {
   const setModal = useSetRecoilState(modalState);
   const { seasonMode } = useRecoilValue(seasonListState);
-  const [modalToggleMode, setModalToggleMode] = useState(toggleMode);
+  const [manualMode, setManualMode] = useState(toggleMode);
 
   const onReturn = () => {
     setModal({ modalName: null });
   };
 
   const onToggle = () => {
-    setModalToggleMode(modalToggleMode === 'rank' ? 'normal' : 'rank');
+    setManualMode(manualMode === 'rank' ? 'normal' : 'rank');
   };
 
   return (
@@ -26,15 +26,15 @@ export default function MatchManualModal({ toggleMode }: Manual) {
       {seasonMode === 'both' && (
         <div className={styles.toggleContainer}>
           <ModeToggle
-            checked={modalToggleMode === 'rank'}
+            checked={manualMode === 'rank'}
             onToggle={onToggle}
             id={'modalToggle'}
-            text={modalToggleMode === 'rank' ? '랭크' : '일반'}
+            text={manualMode === 'rank' ? '랭크' : '일반'}
           />
         </div>
       )}
       <ul className={styles.ruleList}>
-        {manualSelect(modalToggleMode).map(
+        {manualSelect(manualMode).map(
           (item: { title: string; description: string[] }, i) => (
             <li key={i}>
               {item.title}
@@ -44,7 +44,7 @@ export default function MatchManualModal({ toggleMode }: Manual) {
                 ))}
               </ul>
             </li>
-          ),
+          )
         )}
       </ul>
       <div className={styles.buttons}>
