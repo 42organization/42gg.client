@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { MatchMode } from 'types/mainType';
 import { Manual } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import { seasonListState } from 'utils/recoil/seasons';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import styles from 'styles/modal/MatchManualModal.module.scss';
-import { MatchMode } from 'types/mainType';
 
 export default function MatchManualModal({ toggleMode }: Manual) {
   const setModal = useSetRecoilState(modalState);
@@ -49,7 +49,7 @@ export default function MatchManualModal({ toggleMode }: Manual) {
       </ul>
       <div className={styles.buttons}>
         <div className={styles.positive}>
-          <input onClick={onReturn} type="button" value={'확 인'} />
+          <input onClick={onReturn} type='button' value={'확 인'} />
         </div>
       </div>
     </div>

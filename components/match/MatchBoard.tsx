@@ -40,7 +40,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   const getMatchHandler = async () => {
     try {
       const res = await instance.get(
-        `/pingpong/match/tables/${1}/${toggleMode}/${type}`,
+        `/pingpong/match/tables/${1}/${toggleMode}/${type}`
       );
       setMatch(res?.data);
     } catch (e) {

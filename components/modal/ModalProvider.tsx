@@ -68,7 +68,7 @@ export default function ModalProvider() {
     modal.modalName && (
       <div
         className={styles.backdrop}
-        id="modalOutside"
+        id='modalOutside'
         onClick={closeModalHandler}
       >
         <div className={styles.modalContainer}>{findModal()}</div>
