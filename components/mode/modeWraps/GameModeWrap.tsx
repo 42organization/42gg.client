@@ -23,7 +23,9 @@ export default function GameModeWrap({
   setRadioMode,
 }: GameModeWrapProps) {
   const { seasonList } = useRecoilValue(seasonListState);
-  const [season, setSeason] = useState<number>(seasonList[0]?.id);
+  const [season, setSeason] = useState<number>(
+    seasonList[0] ? seasonList[0].id : 1
+  );
 
   useEffect(() => {
     if (clickTitle) {

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
+import { reloadMatchState } from 'utils/recoil/match';
 import CancelModal from './match/CancelModal';
 import EditProfileModal from './profile/EditProfileModal';
 import LogoutModal from './menu/LogoutModal';
@@ -15,6 +16,7 @@ import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
   const [modal, setModal] = useRecoilState(modalState);
+  const setReloadMatch = useSetRecoilState(reloadMatchState);
 
   useEffect(() => {
     setModalOutsideScroll();
@@ -26,6 +28,7 @@ export default function ModalProvider() {
   const closeModalHandler = (e: React.MouseEvent) => {
     if (modal.modalName?.split('-')[0] === 'FIXED') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
+      if (modal.modalName === 'MATCH-CANCEL') setReloadMatch(true);
       setModal({ modalName: null });
     }
   };
