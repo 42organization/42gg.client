@@ -31,7 +31,7 @@ export default function ModalProvider() {
   };
 
   const findModal = () => {
-    const { modalName, cancel, enroll } = modal;
+    const { modalName, cancel, enroll, manual } = modal;
     switch (modalName) {
       case 'MAIN-WELCOME':
         return <WelcomeModal />;
@@ -50,7 +50,9 @@ export default function ModalProvider() {
           <CancelModal {...cancel} />
         ) : null;
       case 'MATCH-MANUAL':
-        return <MatchManualModal />;
+        return typeof manual !== 'undefined' ? (
+          <MatchManualModal {...manual} />
+        ) : null;
       case 'USER-PROFILE_EDIT':
         return <EditProfileModal />;
       case 'FIXED-AFTER_GAME':

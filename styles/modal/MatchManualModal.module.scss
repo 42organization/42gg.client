@@ -12,31 +12,40 @@
   letter-spacing: 0.1rem;
 }
 
-.ruleList {
-  list-style: none;
-  margin: 1.5rem 0.5rem;
-  width: auto;
-  height: 40vh;
-  max-height: 40vh;
-  color: black;
-  overflow-y: scroll;
-  font-weight: 700;
-
-  >li {
-    margin-top: 1rem;
-  }
+.toggleContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  padding-top: 0.5rem;
+  padding-right: 1rem;
+  margin-bottom: 0.1rem;
 }
 
+.ruleList {
+  list-style: none;
+  width: auto;
+  height: 60vh;
+  max-height: 60vh;
+  margin: 0 0.6rem 0.5rem;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 700;
+  overflow-y: scroll;
 
+  > li {
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+  }
+}
 
 .ruleDetail {
   margin-left: 0.8rem;
   font-size: 0.9rem;
   font-weight: 400;
 
-  >li {
+  > li {
     list-style: square;
-    margin-top: 0.5rem;
+    margin: 0.4rem 0;
     white-space: pre-wrap;
   }
 }

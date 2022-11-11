@@ -4,24 +4,26 @@ interface ModeToggleProps {
   checked: boolean;
   text: string;
   onToggle: () => void;
+  id: string;
 }
 
 export default function ModeToggle({
   checked,
   text,
   onToggle,
+  id,
 }: ModeToggleProps) {
   return (
     <div>
       <input
-        type='checkbox'
-        id='toggle'
+        type="checkbox"
+        id={id}
         className={styles.toggle}
         checked={checked}
         onChange={onToggle}
         hidden
       />
-      <label htmlFor='toggle' className={styles.toggleSwitch}>
+      <label htmlFor={id} className={styles.toggleSwitch}>
         <span className={styles.toggleText}>{text}</span>
         <span className={styles.toggleButton}></span>
       </label>

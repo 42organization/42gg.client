@@ -11,7 +11,7 @@ import styles from 'styles/match/MatchBoard.module.scss';
 
 interface MatchBoardProps {
   type: string;
-  toggleMode?: MatchMode;
+  toggleMode: MatchMode;
 }
 
 export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
@@ -60,7 +60,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   const currentHour = new Date().getHours();
 
   const openManual = () => {
-    setModal({ modalName: 'MATCH-MANUAL' });
+    setModal({ modalName: 'MATCH-MANUAL', manual: { toggleMode: toggleMode } });
   };
 
   const reloadMatchHandler = () => {
