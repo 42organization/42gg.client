@@ -23,6 +23,6 @@ function sectionRouter(path: string) {
     case '/game':
       return <GameResult />;
     case '/rank':
-      return <RankList />;
+      return <RankList mode={'rank'} />;
   }
 }
