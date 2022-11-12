@@ -24,7 +24,7 @@ export default function GameModeWrap({
 }: GameModeWrapProps) {
   const { seasonList } = useRecoilValue(seasonListState);
   const [season, setSeason] = useState<number>(
-    seasonList[0] ? seasonList[0].id : 1
+    seasonList[0] ? seasonList[0].id : 0
   );
 
   useEffect(() => {
