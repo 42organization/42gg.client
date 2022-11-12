@@ -12,15 +12,14 @@ import {
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/CancelModal.module.scss';
 
-export default function CancelModal({ slotId, time }: Cancel) {
+export default function CancelModal({ isMatched, slotId, time }: Cancel) {
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const [currentMatch, setCurrentMatch] = useRecoilState(currentMatchState);
   const cancelLimitTime = 5;
-  const rejectCancel =
-    isBeforeMin(time, cancelLimitTime) && currentMatch.isMatched;
+  const rejectCancel = isBeforeMin(time, cancelLimitTime) && isMatched;
   const contentType = rejectCancel ? 'reject' : 'cancel';
   const content = {
     cancel: {

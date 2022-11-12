@@ -44,6 +44,7 @@ export default function MatchSlot({
       setModal({
         modalName: 'MATCH-CANCEL',
         cancel: {
+          isMatched: currentMatch.isMatched,
           slotId: currentMatch.slotId,
           time: currentMatch.time,
         },
