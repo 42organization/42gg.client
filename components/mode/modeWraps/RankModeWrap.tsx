@@ -14,7 +14,7 @@ interface RankModeWrapProps {
 export default function RankModeWrap({ children, setMode }: RankModeWrapProps) {
   const { seasonMode, seasonList } = useRecoilValue(seasonListState);
   const [season, setSeason] = useState<number>(
-    seasonList[0] ? seasonList[0].id : 1
+    seasonList[0] ? seasonList[0].id : 0
   );
   const [toggleMode, setToggleMode] = useState<MatchMode>(
     seasonMode === 'normal' ? 'normal' : 'rank'

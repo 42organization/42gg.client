@@ -4,6 +4,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
+import { reloadMatchState } from 'utils/recoil/match';
 import ExpGuage from './ExpGuage';
 import PppChange from 'components/modal/afterGame/ppp/PppChange';
 import styles from 'styles/modal/ExpGameModal.module.scss';
@@ -12,6 +13,7 @@ export default function ExpChangeModal() {
   const [modal, setModal] = useRecoilState(modalState);
   const [user, setUser] = useState();
   const setError = useSetRecoilState(errorState);
+  const setReloadMatch = useSetRecoilState(reloadMatchState);
 
   useEffect(() => {
     getExpHandler();
@@ -43,7 +45,12 @@ export default function ExpChangeModal() {
 
   return (
     <div>
-      <div onClick={() => setModal({ modalName: null })}>
+      <div
+        onClick={() => {
+          setReloadMatch(true);
+          setModal({ modalName: null });
+        }}
+      >
         <div className={styles.emogi}>🎉</div>
         <div className={styles.exitModal}></div>
         <PppChange
