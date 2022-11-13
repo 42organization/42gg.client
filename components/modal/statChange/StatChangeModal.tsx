@@ -7,10 +7,12 @@ import { errorState } from 'utils/recoil/error';
 import ExpStat from './ExpStat';
 import PppStat from 'components/modal/statChange/PppStat';
 import styles from 'styles/modal/StatChangeModal.module.scss';
+import { reloadMatchState } from 'utils/recoil/match';
 
 export default function StatChangeModal({ gameId, mode }: Exp) {
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
+  const setReloadMatch = useSetRecoilState(reloadMatchState);
   const [stat, setStat] = useState();
 
   useEffect(() => {
@@ -34,7 +36,10 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
     <div>
       <div
         className={`${styles.fixedContainer} ${styles.front}`}
-        onClick={() => setModal({ modalName: null })}
+        onClick={() => {
+          setReloadMatch(true);
+          setModal({ modalName: null });
+        }}
       ></div>
       <div className={styles.container}>
         <div className={styles.emoji}>🏓</div>
