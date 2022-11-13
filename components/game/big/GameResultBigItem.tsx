@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Game } from 'types/gameTypes';
 import { clickedGameItemState } from 'utils/recoil/game';
@@ -9,7 +10,8 @@ interface GameResultBigItemProps {
   game: Game;
 }
 
-export default function GameResultBigItem({ game }: GameResultBigItemProps) {
+function GameResultBigItem({ game }: GameResultBigItemProps) {
+  console.log('big');
   const { mode, team1, team2, status, time, gameId } = game;
   const setClickedItemId = useSetRecoilState(clickedGameItemState);
   return (
@@ -30,3 +32,5 @@ export default function GameResultBigItem({ game }: GameResultBigItemProps) {
     </div>
   );
 }
+
+export default React.memo(GameResultBigItem);

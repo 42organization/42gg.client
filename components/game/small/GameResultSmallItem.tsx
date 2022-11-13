@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Game } from 'types/gameTypes';
 import { clickedGameItemState } from 'utils/recoil/game';
@@ -9,9 +10,8 @@ interface GameResultSmallItemProps {
   game: Game;
 }
 
-export default function GameResultSmallItem({
-  game,
-}: GameResultSmallItemProps) {
+function GameResultSmallItem({ game }: GameResultSmallItemProps) {
+  console.log('small');
   const { mode, team1, team2, gameId } = game;
   const setClickedItemId = useSetRecoilState(clickedGameItemState);
   return (
@@ -30,3 +30,5 @@ export default function GameResultSmallItem({
     </div>
   );
 }
+
+export default React.memo(GameResultSmallItem);
