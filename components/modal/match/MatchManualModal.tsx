@@ -35,12 +35,12 @@ export default function MatchManualModal({ toggleMode }: Manual) {
       )}
       <ul className={styles.ruleList}>
         {manualSelect(manualMode).map(
-          (item: { title: string; description: string[] }, i) => (
-            <li key={i}>
+          (item: { title: string; description: string[] }, index) => (
+            <li key={index}>
               {item.title}
               <ul className={styles.ruleDetail}>
-                {item.description.map((d, i) => (
-                  <li key={i}>{d}</li>
+                {item.description.map((e, idx) => (
+                  <li key={idx}>{e}</li>
                 ))}
               </ul>
             </li>

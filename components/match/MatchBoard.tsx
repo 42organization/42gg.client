@@ -97,12 +97,12 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
         </div>
       )}
       <div className={styles.matchBoard}>
-        {matchBoards.map((matchSlots, i) => {
+        {matchBoards.map((matchSlots, index) => {
           const slotTime = new Date(matchSlots[0].time);
           return (
             <div
               className={styles.matchSlotList}
-              key={i}
+              key={index}
               ref={getScrollCurrentRef(slotTime.getHours())}
             >
               <MatchSlotList

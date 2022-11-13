@@ -35,8 +35,8 @@ export default function MyRank({ mode }: MyRankProps) {
           className={`${styles.myRank} ${content[isRanked].style}`}
           onClick={myRankHandler}
         >
-          {content[isRanked].message.map((e, i) => (
-            <span key={i}>{e}</span>
+          {content[isRanked].message.map((e, index) => (
+            <span key={index}>{e}</span>
           ))}
         </div>
       )}
