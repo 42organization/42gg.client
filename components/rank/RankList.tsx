@@ -85,7 +85,7 @@ export default function RankList({
     <RankListFrame mode={mode} pageInfo={pageInfo}>
       {rank?.rankList.map((item: NormalUser | RankUser, index) => (
         <RankListItem
-          key={item.intraId}
+          key={index}
           index={index}
           mode={mode}
           user={makeUser(item)}
