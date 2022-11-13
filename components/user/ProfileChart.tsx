@@ -67,7 +67,7 @@ export const options = {
 
 interface ChartProps {
   intraId: string;
-  season?: string;
+  season?: number;
 }
 
 export default function ProfileChart({ intraId, season }: ChartProps) {
@@ -78,16 +78,15 @@ export default function ProfileChart({ intraId, season }: ChartProps) {
 
   useEffect(() => {
     getProfileChartHandler();
-  }, []);
+  }, [season]);
 
   const getProfileChartHandler = async () => {
     try {
       const res = await instance.get(
-        // `/pingpong/users/${intraId}/historics?season=${season}`
-        // 백에서 아직 현재 시즌(season=0)에 대한 구현이 안되어 season=1로 고정해둡니다.
-        `/pingpong/users/${intraId}/historics?season=1`
+        `/pingpong/users/${intraId}/historics?season=${season}`
       );
       setChart(res?.data.historics);
+      console.log(res);
     } catch (e) {
       setError('SJ02');
     }

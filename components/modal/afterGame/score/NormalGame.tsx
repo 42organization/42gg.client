@@ -19,7 +19,7 @@ export default function NormalGame({
 }: NormalGameProps) {
   const { startTime, matchTeamsInfo } = currentGame;
   const [reload, setReload] = useState<boolean>(false);
-  const canBeCompleted = isAfterMin(startTime, 10);
+  const canBeCompleted = isAfterMin(startTime, 1);
   const buttonMode = {
     style: canBeCompleted
       ? styles.positive
