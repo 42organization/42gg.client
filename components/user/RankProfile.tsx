@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import { ProfileRank } from 'types/userTypes';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
-import Chart from 'components/user/ProfileChart';
+import ProfileChart from 'components/user/ProfileChart';
 import ProfileModeWrap from 'components/mode/modeWraps/ProfileModeWrap';
 import styles from 'styles/user/Profile.module.scss';
 
@@ -37,7 +37,7 @@ function Profile({ intraId, season }: RankProps) {
   });
 
   useEffect(() => {
-    getRankProfileHandler();
+    if (season) getRankProfileHandler();
   }, [season]);
 
   const getRankProfileHandler = async () => {
@@ -77,7 +77,7 @@ function Profile({ intraId, season }: RankProps) {
           ></span>
         </div>
       </div>
-      <Chart intraId={intraId} />
+      <ProfileChart intraId={intraId} season={season} />
     </div>
   );
 }
