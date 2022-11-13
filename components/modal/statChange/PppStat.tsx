@@ -15,14 +15,9 @@ export default function PppStat({ stat }: PppChangeProps) {
   }, []);
 
   const PppChangeAnimation = () => {
-    if (isWinner) {
-      for (let i = 0; i < Math.abs(changedPpp); ++i) {
-        sleep(i * i * 7).then(() => setPpp((thisPpp) => thisPpp + 1));
-      }
-    } else {
-      for (let i = 0; i < Math.abs(changedPpp); ++i) {
-        sleep(i * i * 7).then(() => setPpp((thisPpp) => thisPpp - 1));
-      }
+    const toAdd = isWinner ? 1 : -1;
+    for (let i = 0; i < Math.abs(changedPpp); ++i) {
+      sleep(i * i * 7).then(() => setPpp((thisPpp) => thisPpp + toAdd));
     }
   };
 
