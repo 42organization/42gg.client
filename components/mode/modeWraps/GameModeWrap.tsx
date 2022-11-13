@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { SeasonMode } from 'types/mainType';
@@ -25,14 +26,13 @@ export default function GameModeWrap({
   const latestSeasonId = useRecoilValue(latestSeasonIdState);
   const { seasonList } = useRecoilValue(seasonListState);
   const [season, setSeason] = useState<number>(latestSeasonId);
+  const intraId = useRouter().query.intraId;
 
   useEffect(() => {
-    if (clickTitle) {
-      setRadioMode('both');
-      setSeason(latestSeasonId);
-      setClickTitle(false);
-    }
-  }, [clickTitle]);
+    setRadioMode('both');
+    setSeason(latestSeasonId);
+    if (clickTitle) setClickTitle(false);
+  }, [clickTitle, intraId]);
 
   const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRadioMode(e.target.value as SeasonMode);
