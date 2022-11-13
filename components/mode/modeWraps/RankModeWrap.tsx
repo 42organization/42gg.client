@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { seasonListState } from 'utils/recoil/seasons';
+import { seasonListState, latestSeasonIdState } from 'utils/recoil/seasons';
 import { MatchMode } from 'types/mainType';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
@@ -14,7 +14,7 @@ interface RankModeWrapProps {
 export default function RankModeWrap({ children, setMode }: RankModeWrapProps) {
   const { seasonMode, seasonList } = useRecoilValue(seasonListState);
   const [season, setSeason] = useState<number>(
-    seasonList[0] ? seasonList[0].id : 0
+    useRecoilValue(latestSeasonIdState)
   );
   const [toggleMode, setToggleMode] = useState<MatchMode>(
     seasonMode === 'normal' ? 'normal' : 'rank'
