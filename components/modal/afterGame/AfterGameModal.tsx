@@ -22,7 +22,6 @@ export default function AfterGameModal() {
       enemyTeam: { teamScore: 0, teams: [] },
     },
   });
-  console.log(currentGame.gameId);
 
   const rankResponse: { [key: string]: string } = {
     '201': '결과 입력이 완료되었습니다.',
