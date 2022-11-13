@@ -21,7 +21,7 @@ export default function RankListFrame({
 }: RankListFrameProps) {
   const router = useRouter();
   const division: { [key: string]: string[] } = {
-    rank: ['순위', 'intraId', '상태메시지', '점수'],
+    rank: ['순위', 'intraId', '상태메시지', '탁구력'],
     normal: ['열정', 'intraId (Lv)', '상태메시지', '경험치'],
   };
 

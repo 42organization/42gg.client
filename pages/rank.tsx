@@ -22,9 +22,9 @@ export default function Rank() {
       <h1 className={`${styles.title} ${content[mode].style}`}>
         {content[mode].title}
       </h1>
-      <MyRank mode={mode} />
+      <MyRank toggleMode={mode} />
       <RankModeWrap setMode={setMode}>
-        <RankList mode={mode} />
+        <RankList toggleMode={mode} />
       </RankModeWrap>
     </div>
   );
