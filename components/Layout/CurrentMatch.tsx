@@ -95,10 +95,10 @@ interface EnemyTeam {
 
 function EnemyTeam({ enemyTeam, time }: EnemyTeam) {
   if (!isBeforeMin(time, 5) || enemyTeam.length === 0) return <></>;
-  const enemyUsers = enemyTeam.map((intraId, i) => (
+  const enemyUsers = enemyTeam.map((intraId, index) => (
     <span key={intraId} id={styles.enemyUsers}>
       <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
-      {i < enemyTeam.length - 1 ? ', ' : ''}
+      {index < enemyTeam.length - 1 ? ', ' : ''}
     </span>
   ));
   return <div className={styles.enemyTeam}> 상대팀 : {enemyUsers}</div>;
