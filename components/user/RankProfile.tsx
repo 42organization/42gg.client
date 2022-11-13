@@ -58,10 +58,10 @@ function Profile({ intraId, season }: ProfileProps) {
       <div className={styles.rankInfo}>
         <div className={styles.rank}>
           <span>RANK</span>
-          <span>{rank}</span>
+          <span>{rank === -1 ? ' -' : rank}</span>
         </div>
         <div className={styles.pppWinRateWrap}>
-          <div className={styles.ppp}>{ppp}점</div>
+          <div className={styles.ppp}>{rank === -1 ? 'NONE' : ppp + '점'}</div>
           <div className={styles.winRate}>
             승률 {winRate}% ({wins}승 {losses}패)
           </div>

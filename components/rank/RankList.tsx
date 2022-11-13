@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
@@ -14,21 +13,24 @@ import RankListItem from './RankListItem';
 interface RankListProps {
   mode: MatchMode;
   season?: number;
+  isMain?: boolean;
 }
 
 function isRankModeType(arg: RankUser | NormalUser): arg is RankUser {
   return 'ppp' in arg;
 }
 
-export default function RankList({ mode, season }: RankListProps) {
+export default function RankList({
+  mode,
+  season,
+  isMain = false,
+}: RankListProps) {
   const [myRank, setMyRank] = useRecoilState(myRankState);
   const [isScroll, setIsScroll] = useRecoilState(scrollState);
   const { seasonMode } = useRecoilValue(seasonListState);
   const setError = useSetRecoilState(errorState);
   const [rank, setRank] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
-  const router = useRouter();
-  const isMain = router.asPath === '/';
   const pageInfo = {
     currentPage: rank?.currentPage,
     totalPage: rank?.totalPage,
