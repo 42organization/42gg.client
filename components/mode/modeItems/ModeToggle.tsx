@@ -1,22 +1,22 @@
 import styles from 'styles/mode/ModeToggle.module.scss';
 
 interface ModeToggleProps {
-  checked: boolean;
-  text: string;
-  onToggle: () => void;
   id: string;
+  text: string;
+  checked: boolean;
+  onToggle: () => void;
 }
 
 export default function ModeToggle({
-  checked,
-  text,
-  onToggle,
   id,
+  text,
+  checked,
+  onToggle,
 }: ModeToggleProps) {
   return (
     <div>
       <input
-        type="checkbox"
+        type='checkbox'
         id={id}
         className={styles.toggle}
         checked={checked}

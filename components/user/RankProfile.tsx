@@ -11,7 +11,7 @@ interface RankProfileProps {
   intraId: string;
 }
 
-interface RankProps {
+interface ProfileProps {
   intraId: string;
   season?: number;
 }
@@ -26,7 +26,7 @@ export default function RankProfile({ intraId }: RankProfileProps) {
   );
 }
 
-function Profile({ intraId, season }: RankProps) {
+function Profile({ intraId, season }: ProfileProps) {
   const setError = useSetRecoilState(errorState);
   const [rankProfile, setRankProfile] = useState<ProfileRank>({
     rank: 0,

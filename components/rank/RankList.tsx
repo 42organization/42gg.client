@@ -13,7 +13,7 @@ import RankListItem from './RankListItem';
 
 interface RankListProps {
   mode: MatchMode;
-  season?: string;
+  season?: number;
 }
 
 function isRankModeType(arg: RankUser | NormalUser): arg is RankUser {

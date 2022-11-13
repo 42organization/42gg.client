@@ -22,7 +22,7 @@ export default function GameResult({ mode, season }: GameResultProps) {
       return;
     }
     const userQuery = intraId ? `/users/${intraId}` : '';
-    const seasonQuery = mode === 'rank' && season && `season=${season}`;
+    const seasonQuery = mode === 'rank' && `season=${season}`;
     const modeQuery = mode !== 'both' && `mode=${mode}`;
     const countQuery = router.pathname === '/users/detail' && `count=${5}`;
     const query = [modeQuery, seasonQuery, countQuery, 'gameId=']

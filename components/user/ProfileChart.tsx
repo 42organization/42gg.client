@@ -65,12 +65,12 @@ export const options = {
   },
 };
 
-interface ChartProps {
+interface ProfileChartProps {
   intraId: string;
   season?: number;
 }
 
-export default function ProfileChart({ intraId, season }: ChartProps) {
+export default function ProfileChart({ intraId, season }: ProfileChartProps) {
   const setError = useSetRecoilState(errorState);
   const [chart, setChart] = useState<PppChart[]>([
     { ppp: 0, date: '1970-01-01' },
