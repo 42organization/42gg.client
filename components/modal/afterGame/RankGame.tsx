@@ -3,23 +3,20 @@ import { AfterGame, TeamScore } from 'types/scoreTypes';
 import { MatchTeams } from './MatchTeams';
 import Score from './Score';
 import { Button, Buttons } from './Buttons';
-import Guide, { GuideLine } from './Guide';
+import Guide from './Guide';
 import styles from 'styles/modal/AfterGameModal.module.scss';
-
-const defaultResult: TeamScore = { myTeamScore: '', enemyTeamScore: '' };
 
 interface RankGameProps {
   currentGame: AfterGame;
-  guideLine: GuideLine;
   onSubmit: (gameResult: TeamScore) => void;
 }
 
-export default function RankGame({
-  currentGame,
-  guideLine,
-  onSubmit,
-}: RankGameProps) {
-  const [result, setResult] = useState<TeamScore>(defaultResult);
+export default function RankGame({ currentGame, onSubmit }: RankGameProps) {
+  const { isScoreExist, matchTeamsInfo } = currentGame;
+  const [result, setResult] = useState<TeamScore>({
+    myTeamScore: '',
+    enemyTeamScore: '',
+  });
   const [onCheck, setOnCheck] = useState<boolean>(false);
   const inputScoreHandler = ({
     target: { name, value },
@@ -31,6 +28,17 @@ export default function RankGame({
     }));
   };
 
+  useEffect(() => {
+    if (isScoreExist) {
+      setOnCheck(true);
+      setResult((prev) => ({
+        ...prev,
+        myTeamScore: matchTeamsInfo.myTeam.teamScore,
+        enemyTeamScore: matchTeamsInfo.enemyTeam.teamScore,
+      }));
+    }
+  }, [currentGame]);
+
   const enterHandler = () => {
     const { myTeamScore, enemyTeamScore } = result;
     if (isCorrectScore(myTeamScore, enemyTeamScore)) setOnCheck(true);
@@ -41,25 +49,14 @@ export default function RankGame({
     setOnCheck(false);
   };
 
-  useEffect(() => {
-    if (currentGame.isScoreExist) {
-      setOnCheck(true);
-      setResult((prev) => ({
-        ...prev,
-        myTeamScore: currentGame.matchTeamsInfo.myTeam.teamScore,
-        enemyTeamScore: currentGame.matchTeamsInfo.enemyTeam.teamScore,
-      }));
-    }
-  }, [currentGame]);
-
   return (
     <div className={styles.container}>
-      <Guide condition={onCheck} guideLine={guideLine} />
+      <Guide condition={onCheck} modalMode='rank' />
       <div className={styles.resultContainer}>
-        <MatchTeams matchTeams={currentGame.matchTeamsInfo} />
+        <MatchTeams matchTeams={matchTeamsInfo} />
         <Score onCheck={onCheck} result={result} onChange={inputScoreHandler} />
       </div>
-      {currentGame.isScoreExist ? (
+      {isScoreExist ? (
         <div className={styles.buttons}>
           <Button
             style={styles.positive}

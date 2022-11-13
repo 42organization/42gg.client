@@ -10,8 +10,8 @@ import MatchManualModal from './match/MatchManualModal';
 import MatchRejectModal from './match/MatchRejectModal';
 import ReportModal from './menu/ReportModal';
 import WelcomeModal from './event/WelcomeModal';
-import AfterGameModal from './afterGame/score/AfterGameModal';
-import ExpChangeModal from './afterGame/exp/ExpChangeModal';
+import AfterGameModal from './afterGame/AfterGameModal';
+import StatChangeModal from './statChange/StatChangeModal';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
@@ -34,7 +34,7 @@ export default function ModalProvider() {
   };
 
   const findModal = () => {
-    const { modalName, cancel, enroll, manual } = modal;
+    const { modalName, cancel, enroll, manual, exp } = modal;
     switch (modalName) {
       case 'MAIN-WELCOME':
         return <WelcomeModal />;
@@ -60,8 +60,8 @@ export default function ModalProvider() {
         return <EditProfileModal />;
       case 'FIXED-AFTER_GAME':
         return <AfterGameModal />;
-      case 'FIXED-EXP':
-        return <ExpChangeModal />;
+      case 'FIXED-STAT':
+        return <StatChangeModal {...exp} />;
       default:
         return null;
     }

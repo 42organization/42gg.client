@@ -8,7 +8,7 @@ type MatchModal = 'ENROLL' | 'REJECT' | 'CANCEL' | 'MANUAL';
 
 type UserModal = 'PROFILE_EDIT';
 
-type FixedModal = 'AFTER_GAME' | 'EXP';
+type FixedModal = 'AFTER_GAME' | 'STAT';
 
 type ModalName =
   | null
@@ -33,8 +33,8 @@ export interface Enroll {
 }
 
 export interface Exp {
-  gameId: number;
-  mode: MatchMode | null;
+  gameId?: number;
+  mode?: MatchMode | null;
 }
 
 export interface Manual {

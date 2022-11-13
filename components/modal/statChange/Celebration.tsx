@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import styles from 'styles/modal/ExpGameModal.module.scss';
+import styles from 'styles/modal/StatChangeModal.module.scss';
 
-export default function ExpCelebration() {
+export default function Celebration() {
   useEffect(() => {
     for (let i = 0; i < 200; i++) {
       // Random rotation
@@ -43,7 +43,7 @@ export default function ExpCelebration() {
   }, []);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.fixedContainer} ${styles.back}`}>
       <div id='confetti-wrapper'></div>
     </div>
   );

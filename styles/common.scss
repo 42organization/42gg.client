@@ -179,6 +179,7 @@ $winner-blue: #040eff;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  margin: 2rem 1.5rem;
 }
 
 @mixin spanUpDownAnimation($fontSize, $padding) {
