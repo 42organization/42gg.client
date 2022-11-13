@@ -2,6 +2,8 @@
 
 .container {
   @include modal-container;
+  width: 80vw;
+  max-width: 20rem;
 }
 
 .title {
