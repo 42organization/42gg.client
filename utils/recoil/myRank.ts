@@ -1,9 +1,10 @@
 import { atom } from 'recoil';
+import { MyRank } from 'types/rankTypes';
 import { v1 } from 'uuid';
 
-export const myRankState = atom<number>({
+export const myRankState = atom<MyRank>({
   key: `myRankState/${v1()}`,
-  default: 0,
+  default: { rank: 0, normal: 0 },
 });
 
 export const scrollState = atom<boolean>({

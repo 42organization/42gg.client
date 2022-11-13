@@ -14,6 +14,11 @@ export interface NormalUser {
   exp: number;
 }
 
+export interface MyRank {
+  rank: number;
+  normal: number;
+}
+
 export interface Rank {
   myRank: number;
   currentPage: number;
