@@ -86,7 +86,6 @@ export default function ProfileChart({ intraId, season }: ChartProps) {
         `/pingpong/users/${intraId}/historics?season=${season}`
       );
       setChart(res?.data.historics);
-      console.log(res);
     } catch (e) {
       setError('SJ02');
     }
