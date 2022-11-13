@@ -97,7 +97,7 @@ export default function RankList({
 
 function makeUser(user: NormalUser | RankUser) {
   const makeStatusMessage = (message: string) =>
-    message.length > 10 ? `${message.slice(0, 10)}...` : message;
+    message.length > 20 ? `${message.slice(0, 20)}...` : message;
   const makeInit = (init: number) => (user.rank < 0 ? '-' : init);
   return {
     intraId: user.intraId,
