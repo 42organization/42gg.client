@@ -15,66 +15,45 @@ import StatChangeModal from './statChange/StatChangeModal';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
-  const [modal, setModal] = useRecoilState(modalState);
+  const [{ modalName, cancel, enroll, manual, exp }, setModal] =
+    useRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
+  const content: { [key: string]: JSX.Element | null } = {
+    'MAIN-WELCOME': <WelcomeModal />,
+    'MENU-REPORT': <ReportModal />,
+    'MENU-LOGOUT': <LogoutModal />,
+    'MATCH-REJECT': <MatchRejectModal />,
+    'MATCH-ENROLL': enroll ? <MatchEnrollModal {...enroll} /> : null,
+    'MATCH-CANCEL': cancel ? <CancelModal {...cancel} /> : null,
+    'MATCH-MANUAL': manual ? <MatchManualModal {...manual} /> : null,
+    'USER-PROFILE_EDIT': <EditProfileModal />,
+    'FIXED-AFTER_GAME': <AfterGameModal />,
+    'FIXED-STAT': <StatChangeModal {...exp} />,
+  };
 
   useEffect(() => {
     setModalOutsideScroll();
-  }, [modal]);
+  }, [modalName]);
 
   const setModalOutsideScroll = () =>
-    (document.body.style.overflow = modal.modalName ? 'hidden' : 'unset');
+    (document.body.style.overflow = modalName ? 'hidden' : 'unset');
 
   const closeModalHandler = (e: React.MouseEvent) => {
-    if (modal.modalName?.split('-')[0] === 'FIXED') return;
+    if (modalName?.split('-')[0] === 'FIXED') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
-      if (modal.modalName === 'MATCH-CANCEL') setReloadMatch(true);
+      if (modalName === 'MATCH-CANCEL') setReloadMatch(true);
       setModal({ modalName: null });
     }
   };
 
-  const findModal = () => {
-    const { modalName, cancel, enroll, manual, exp } = modal;
-    switch (modalName) {
-      case 'MAIN-WELCOME':
-        return <WelcomeModal />;
-      case 'MENU-REPORT':
-        return <ReportModal />;
-      case 'MENU-LOGOUT':
-        return <LogoutModal />;
-      case 'MATCH-ENROLL':
-        return typeof enroll !== 'undefined' ? (
-          <MatchEnrollModal {...enroll} />
-        ) : null;
-      case 'MATCH-REJECT':
-        return <MatchRejectModal />;
-      case 'MATCH-CANCEL':
-        return typeof cancel !== 'undefined' ? (
-          <CancelModal {...cancel} />
-        ) : null;
-      case 'MATCH-MANUAL':
-        return typeof manual !== 'undefined' ? (
-          <MatchManualModal {...manual} />
-        ) : null;
-      case 'USER-PROFILE_EDIT':
-        return <EditProfileModal />;
-      case 'FIXED-AFTER_GAME':
-        return <AfterGameModal />;
-      case 'FIXED-STAT':
-        return <StatChangeModal {...exp} />;
-      default:
-        return null;
-    }
-  };
-
   return (
-    modal.modalName && (
+    modalName && (
       <div
         className={styles.backdrop}
         id='modalOutside'
         onClick={closeModalHandler}
       >
-        <div className={styles.modalContainer}>{findModal()}</div>
+        <div className={styles.modalContainer}>{content[modalName]}</div>
       </div>
     )
   );
