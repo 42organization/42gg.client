@@ -12,8 +12,6 @@ export default function SeasonDropDown({
   value,
   onSelect,
 }: SeasonDropDownProps) {
-  if (seasonList === undefined) return null;
-
   return (
     <div className={styles.selectBox}>
       <select className={styles.select} onChange={onSelect} value={value}>
