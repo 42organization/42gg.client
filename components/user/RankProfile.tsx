@@ -37,7 +37,7 @@ function Profile({ intraId, season }: RankProps) {
   });
 
   useEffect(() => {
-    getRankProfileHandler();
+    if (season) getRankProfileHandler();
   }, [season]);
 
   const getRankProfileHandler = async () => {
