@@ -28,7 +28,7 @@ export default function GameResultList({ path }: GameResultListProps) {
   useEffect(() => {
     if (status === 'success') {
       const gameList = data?.pages;
-      if (gameList[0].games.length)
+      if (gameList.length === 1)
         setClickedGameItem(gameList[0].games[0].gameId);
       setIsLast(gameList[gameList.length - 1].isLast);
     }
