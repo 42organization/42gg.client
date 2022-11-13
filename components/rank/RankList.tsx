@@ -11,7 +11,7 @@ import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 
 interface RankListProps {
-  mode: MatchMode;
+  toggleMode: MatchMode;
   season?: number;
   isMain?: boolean;
 }
@@ -21,7 +21,7 @@ function isRankModeType(arg: RankUser | NormalUser): arg is RankUser {
 }
 
 export default function RankList({
-  mode,
+  toggleMode,
   season,
   isMain = false,
 }: RankListProps) {
@@ -40,10 +40,10 @@ export default function RankList({
   const makePath = () => {
     const modeQuery = (targetMode?: string) =>
       targetMode !== 'normal' ? 'ranks/single' : 'vip';
-    const seasonQuery = mode === 'rank' ? `&season=${season}` : '';
+    const seasonQuery = toggleMode === 'rank' ? `&season=${season}` : '';
     return isMain
       ? `/pingpong/${modeQuery(seasonMode)}?page=1&count=3`
-      : `/pingpong/${modeQuery(mode)}?page=${page}${seasonQuery}`;
+      : `/pingpong/${modeQuery(toggleMode)}?page=${page}${seasonQuery}`;
   };
 
   useEffect(() => {
@@ -54,17 +54,20 @@ export default function RankList({
     page !== 1
       ? ((pageInfo.currentPage = 1), setPage(1))
       : getRankDataHandler();
-  }, [mode, season]);
+  }, [toggleMode, season]);
 
   useEffect(() => {
     if (isScroll) {
-      setPage(Math.ceil(myRank / 20));
+      setPage(Math.ceil(myRank[toggleMode] / 20));
     }
   }, [isScroll]);
 
   useEffect(() => {
     if (isScroll) {
-      window.scrollTo({ top: ((myRank - 1) % 20) * 45, behavior: 'smooth' });
+      window.scrollTo({
+        top: ((myRank[toggleMode] - 1) % 20) * 45,
+        behavior: 'smooth',
+      });
       setIsScroll(false);
     }
   }, [rank, isScroll]);
@@ -73,7 +76,7 @@ export default function RankList({
     try {
       const res = await instance.get(`${makePath()}`);
       setRank(res?.data);
-      setMyRank(res?.data.myRank);
+      setMyRank((prev) => ({ ...prev, [toggleMode]: res?.data.myRank }));
     } catch (e) {
       setError('DK01');
     }
@@ -82,12 +85,12 @@ export default function RankList({
   if (isMain) return <RankListMain rank={rank} />;
 
   return (
-    <RankListFrame mode={mode} pageInfo={pageInfo}>
+    <RankListFrame mode={toggleMode} pageInfo={pageInfo}>
       {rank?.rankList.map((item: NormalUser | RankUser, index) => (
         <RankListItem
           key={index}
           index={index}
-          mode={mode}
+          mode={toggleMode}
           user={makeUser(item)}
         />
       ))}
