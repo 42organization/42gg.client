@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import SearchBar from 'components/main/SearchBar';
 import Section from 'components/main/Section';
-import styles from 'styles/main/Home.module.scss';
-import { useRecoilState, useSetRecoilState } from 'recoil';
 import { firstVisitedState, modalState } from 'utils/recoil/modal';
+import styles from 'styles/main/Home.module.scss';
 
 const Home: NextPage = () => {
   const [firstVisited, setFirstVisited] = useRecoilState(firstVisitedState);
