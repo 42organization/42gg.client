@@ -18,7 +18,7 @@ export default function GameResultList({ path }: GameResultListProps) {
   const [isLast, setIsLast] = useState<boolean>(false);
   const [clickedGameItem, setClickedGameItem] =
     useRecoilState(clickedGameItemState);
-  const router = useRouter();
+  const pathName = useRouter().pathname;
 
   useEffect(() => {
     remove();
@@ -54,7 +54,7 @@ export default function GameResultList({ path }: GameResultListProps) {
               })}
             </div>
           ))}
-          {router.asPath === '/game' && !isLast && (
+          {pathName === '/game' && !isLast && (
             <div className={styles.getButton}>
               <input
                 type='button'
