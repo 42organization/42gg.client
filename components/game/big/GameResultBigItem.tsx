@@ -11,7 +11,6 @@ interface GameResultBigItemProps {
 }
 
 function GameResultBigItem({ game }: GameResultBigItemProps) {
-  console.log('big');
   const { mode, team1, team2, status, time, gameId } = game;
   const setClickedItemId = useSetRecoilState(clickedGameItemState);
   return (

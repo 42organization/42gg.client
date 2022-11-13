@@ -11,7 +11,6 @@ interface GameResultSmallItemProps {
 }
 
 function GameResultSmallItem({ game }: GameResultSmallItemProps) {
-  console.log('small');
   const { mode, team1, team2, gameId } = game;
   const setClickedItemId = useSetRecoilState(clickedGameItemState);
   return (
