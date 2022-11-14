@@ -1,17 +1,31 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import router from 'next/router';
 import { useState } from 'react';
-import { Team } from 'types/gameTypes';
+import { RankResult, RankPlayer, NormalPlayer } from 'types/gameTypes';
 import fallBack from 'public/image/fallBackSrc.jpeg';
 import styles from 'styles/game/GameResultItem.module.scss';
 
-type gameResultTypes = {
-  team: Team;
-};
+interface GameResultBigTeamProps {
+  team: RankResult;
+}
 
-export default function GameResultBigTeam({ team }: gameResultTypes) {
+export function isRankPlayerType(
+  arg: RankPlayer | NormalPlayer
+): arg is RankPlayer {
+  return 'wins' in arg;
+}
+
+export default function GameResultBigTeam({ team }: GameResultBigTeamProps) {
   const [imgError, setImgError] = useState(false);
+  const makeRate = (player: RankPlayer | NormalPlayer) =>
+    isRankPlayerType(player) ? (
+      <span>
+        {player.wins}승 {player.losses}패
+      </span>
+    ) : (
+      <span>Lv. {player.level}</span>
+    );
 
   return (
     <div className={styles.bigTeam}>
@@ -25,11 +39,11 @@ export default function GameResultBigTeam({ team }: gameResultTypes) {
             objectFit='cover'
             sizes='30vw'
             quality='30'
+            unoptimized={imgError}
+            onError={() => setImgError(true)}
             onClick={() => {
               router.push(`/users/detail?intraId=${player.intraId}`);
             }}
-            unoptimized={imgError ? true : false}
-            onError={() => setImgError(true)}
           />
         ))}
       </div>
@@ -38,10 +52,7 @@ export default function GameResultBigTeam({ team }: gameResultTypes) {
           <Link href={`/users/detail?intraId=${player.intraId}`}>
             <div className={styles.userId}>{player.intraId}</div>
           </Link>
-          <div className={styles.winRate}>
-            <span>{player.wins}승 </span>
-            <span>{player.losses}패 </span>
-          </div>
+          <div className={styles.winRate}>{makeRate(player)}</div>
         </div>
       ))}
     </div>

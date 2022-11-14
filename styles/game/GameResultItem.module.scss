@@ -6,17 +6,38 @@
 
 .title {
   @include pageTitle;
+  width: fit-content;
+  margin-inline: auto;
+  cursor: pointer;
+  &.normal {
+    text-shadow: $text-shadow, 0.3rem 0.3rem 0 $norm-lightblue2;
+  }
 }
 
 .smallContainer {
-  cursor: pointer;
-  border-radius: $midium-radius;
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   align-items: center;
-  background: $gray;
-  margin-bottom: 0.2rem;
   padding: 0.5rem 1.5rem;
+  margin-bottom: 0.2rem;
+  border-radius: $medium-radius;
+  background: $gray;
+  cursor: pointer;
+}
+
+.bigContainer {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  align-items: center;
+  padding: 0.8rem 0;
+  margin-bottom: 0.2rem;
+  border-radius: $medium-radius;
+  &.rank {
+    background: linear-gradient(135deg, $rank-red, $rank-blue);
+  }
+  &.normal {
+    background: linear-gradient(135deg, $norm-lightblue, $norm-hotpink);
+  }
 }
 
 .smallTeam {
@@ -41,19 +62,9 @@
 }
 
 .smallScoreBoard {
-  font-weight: 500;
   color: black;
+  font-weight: 500;
   text-align: center;
-}
-
-.bigContainer {
-  border-radius: $midium-radius;
-  display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
-  align-items: center;
-  background: linear-gradient(135deg, $pp-red, $pp-blue);
-  margin-bottom: 0.2rem;
-  padding: 0.8rem 0;
 }
 
 .bigTeam {
@@ -65,21 +76,22 @@
     cursor: pointer;
   }
   .userId {
-    cursor: pointer;
     margin: 0.5rem 0;
-    text-align: center;
-    text-shadow: $text-shadow;
     color: white;
     font-size: $big-font;
     font-weight: 600;
+    text-align: center;
+    text-shadow: $text-shadow;
+    cursor: pointer;
   }
   .winRate {
-    border: 0.1rem white solid;
-    border-radius: $small-radius;
-    text-align: center;
-    font-size: $small-font;
-    color: white;
+    min-width: 5rem;
     padding: 0.1rem 0.8rem;
+    border-radius: $small-radius;
+    border: 0.1rem white solid;
+    color: white;
+    font-size: $small-font;
+    text-align: center;
   }
 }
 
@@ -90,33 +102,33 @@
   .gameStatusLive {
     position: relative;
     top: -0.8rem;
-    border: black solid 0.1rem;
-    background: $pp-red;
     width: 4rem;
+    padding: 0.2rem;
+    border: 0.1rem solid black;
+    background: $pp-red;
     color: white;
     text-align: center;
     text-shadow: $text-shadow;
-    padding: 0.2rem;
     animation: upDown 1.3s infinite;
   }
   .gameStatusWait {
     position: relative;
     top: -0.8rem;
+    padding: 0.2rem;
     color: white;
     text-align: center;
     text-shadow: $text-shadow;
-    padding: 0.2rem;
     span {
-      position: relative;
       display: inline-block;
+      position: relative;
     }
   }
   .gameStatusEnd {
-    font-size: 0.8rem;
     position: relative;
-    font-weight: 400;
-    color: white;
     padding: 0.2rem;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 400;
     text-shadow: $text-shadow;
     text-align: center;
   }
@@ -135,11 +147,26 @@
   }
 
   .gameScore {
+    color: white;
     font-size: 2rem;
     font-weight: 600;
-    color: white;
     text-align: center;
     text-shadow: $text-shadow;
+  }
+}
+
+.getButton {
+  width: 100%;
+  border-radius: $small-radius;
+  background: linear-gradient(to bottom, white, $gray);
+  color: black;
+  font-size: $small-font;
+  input {
+    all: unset;
+    width: 100%;
+    padding: 0.2rem 0;
+    text-align: center;
+    cursor: pointer;
   }
 }
 
@@ -151,19 +178,5 @@
   }
   20% {
     transform: translateY(-0.2rem);
-  }
-}
-
-.getButton {
-  width: 100%;
-  color: black;
-  background: linear-gradient(to bottom, white, $gray);
-  border-radius: $small-radius;
-  font-size: $small-font;
-  input {
-    all: unset;
-    width: 100%;
-    padding: 0.2rem 0;
-    text-align: center;
   }
 }

@@ -1,29 +1,49 @@
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { myRankPosition, isScrollState } from 'utils/recoil/myRank';
-import styles from 'styles/RankList.module.scss';
+import { MatchMode } from 'types/mainType';
+import { myRankState, scrollState } from 'utils/recoil/myRank';
+import styles from 'styles/rank/RankList.module.scss';
 
-export default function MyRank() {
-  const myRank = useRecoilValue(myRankPosition);
-  const setIsScroll = useSetRecoilState(isScrollState);
+interface MyRankProps {
+  toggleMode: MatchMode;
+}
 
-  const onClick = () => {
+export default function MyRank({ toggleMode }: MyRankProps) {
+  const myRank = useRecoilValue(myRankState);
+  const setIsScroll = useSetRecoilState(scrollState);
+  const rankType = toggleMode === 'rank' ? '순위' : '열정';
+  const isRanked = myRank[toggleMode] === -1 ? 'unrank' : 'rank';
+  const content = {
+    unrank: {
+      style: '',
+      message: [
+        `💡 나의 ${
+          rankType + (toggleMode === 'rank' ? '가' : '이')
+        } 정해지지 않았습니다 💡`,
+      ],
+    },
+    rank: {
+      style: styles.rank,
+      message: [
+        `🚀🚀 나의 ${rankType}`,
+        ` ${myRank[toggleMode]}위`,
+        ' 바로가기 🚀🚀',
+      ],
+    },
+  };
+
+  const myRankHandler = () => {
+    if (myRank[toggleMode] === -1) return;
     setIsScroll(true);
   };
 
   return (
-    <div>
-      {myRank && (
-        <div className={styles.myRank}>
-          {myRank === -1 ? (
-            <span>💡 나의 순위가 정해지지 않았습니다 💡</span>
-          ) : (
-            <div>
-              🚀🚀 <span onClick={onClick}>나의 순위 {myRank}위 </span>
-              바로가기 🚀🚀
-            </div>
-          )}
-        </div>
-      )}
+    <div
+      className={`${styles.myRank} ${content[isRanked].style}`}
+      onClick={myRankHandler}
+    >
+      {content[isRanked].message.map((e, index) => (
+        <span key={index}>{e}</span>
+      ))}
     </div>
   );
 }

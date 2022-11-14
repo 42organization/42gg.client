@@ -4,37 +4,37 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: black;
   width: 100vw;
+  background: black;
 }
 
 .background {
   position: relative;
+  width: 100vw;
+  max-width: 100vh;
+  min-height: 100vh;
   background-image: url('../../public/image/background_img.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  width: 100vw;
-  max-width: 100vh;
-  min-height: 100vh;
 }
 
 .buttonContainer {
-  position: sticky;
   z-index: 1;
+  position: sticky;
   top: 83%;
   margin-left: 75%;
   .matchingButton {
-    cursor: pointer;
-    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5rem;
+    position: absolute;
     width: 5rem;
+    height: 5rem;
     border-radius: 50%;
-    font-size: 2.3rem;
     background: white;
+    font-size: 2.3rem;
     box-shadow: 3px 3px 10px black;
+    cursor: pointer;
   }
 }

@@ -1,0 +1,42 @@
+@import '../common.scss';
+
+.checkbox {
+  color: white;
+  text-align: center;
+  input {
+    display: none;
+  }
+  input + label span {
+    display: inline-block;
+    width: 25px;
+    height: 19px;
+    &:before,
+    &:after {
+      position: absolute;
+      z-index: 1;
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid white;
+      border-radius: 50%;
+      background: transparent;
+      content: '';
+    }
+    &:after {
+      z-index: 0;
+      border: none;
+    }
+  }
+  input:checked + label span {
+    &:before {
+      z-index: 100;
+      background: $pp-red;
+    }
+  }
+  label {
+    display: flex;
+    cursor: pointer;
+    div {
+      margin-left: 1rem;
+    }
+  }
+}

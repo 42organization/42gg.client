@@ -1,0 +1,73 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modal-container;
+}
+
+.phrase {
+  @include modal-phrase;
+  margin-bottom: 1rem;
+  font-size: $big-font;
+}
+
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
+  width: 18rem;
+  height: 16rem;
+  padding: 0.8rem 0;
+  margin-bottom: 2rem;
+  border: 3px solid white;
+  border-radius: $small-radius;
+}
+
+.players {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: $big-font;
+  font-weight: 600;
+  .userImage {
+    @include userImage(5rem);
+    margin-bottom: 1rem;
+    box-shadow: 5px 5px 6px $dark-gray;
+  }
+  .user {
+    .intraId {
+      text-align: center;
+    }
+  }
+}
+
+.finalScore {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 3rem;
+  padding: auto;
+  font-size: $giant-font;
+  font-weight: 600;
+  text-align: center;
+  input {
+    font-size: $big-font;
+    text-align: center;
+    width: 5rem;
+    height: 2.5rem;
+  }
+}
+
+.rules {
+  margin-bottom: 1.4rem;
+  font-size: $medium-font;
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+.buttons {
+  @include select-buttons;
+  .single {
+    margin-right: 0rem;
+  }
+}

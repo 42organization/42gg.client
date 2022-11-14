@@ -1,26 +1,26 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
-  menuBarState,
-  notiBarState,
+  openMenuBarState,
+  openNotiBarState,
   userState,
   liveState,
 } from 'utils/recoil/layout';
 import MenuBar from './MenuBar';
 import NotiBar from './NotiBar';
-import { VscBell, VscBellDot } from 'react-icons/vsc';
 import { FiMenu } from 'react-icons/fi';
 import { BsMegaphone } from 'react-icons/bs';
+import { VscBell, VscBellDot } from 'react-icons/vsc';
 import fallBack from 'public/image/fallBackSrc.jpeg';
 import styles from 'styles/Layout/Header.module.scss';
 
 export default function Header() {
-  const userData = useRecoilValue(userState);
-  const [liveData, setLiveData] = useRecoilState(liveState);
-  const [openMenuBar, setOpenMenuBar] = useRecoilState(menuBarState);
-  const [openNotiBar, setOpenNotiBar] = useRecoilState(notiBarState);
+  const user = useRecoilValue(userState);
+  const [live, setLive] = useRecoilState(liveState);
+  const [openMenuBar, setOpenMenuBar] = useRecoilState(openMenuBarState);
+  const [openNotiBar, setOpenNotiBar] = useRecoilState(openNotiBarState);
   const [imgError, setImgError] = useState(false);
 
   const openMenuBarHandler = () => {
@@ -29,8 +29,16 @@ export default function Header() {
 
   const openNotiBarHandler = () => {
     setOpenNotiBar(!openNotiBar);
-    setLiveData((prev) => ({ ...prev, notiCount: 0 }));
+    setLive((prev) => ({ ...prev, notiCount: 0 }));
   };
+
+  useEffect(() => {
+    setMenuOutsideScroll();
+  }, [openMenuBar, openNotiBar]);
+
+  const setMenuOutsideScroll = () =>
+    (document.body.style.overflow =
+      openMenuBar || openNotiBar ? 'hidden' : 'unset');
 
   return (
     <div className={styles.headerContainer}>
@@ -55,7 +63,7 @@ export default function Header() {
             <BsMegaphone />
           </div>
           <div id={styles.notiIcon} onClick={openNotiBarHandler}>
-            {liveData.notiCount ? (
+            {live.notiCount ? (
               <div className={styles.bellWhole}>
                 <VscBellDot />
               </div>
@@ -63,17 +71,17 @@ export default function Header() {
               <VscBell />
             )}
           </div>
-          <Link href={`/users/detail?intraId=${userData.intraId}`}>
+          <Link href={`/users/detail?intraId=${user.intraId}`}>
             <div className={styles.userImage}>
-              {userData.userImageUri && (
+              {user.userImageUri && (
                 <Image
-                  src={imgError ? fallBack : userData.userImageUri}
+                  src={imgError ? fallBack : user.userImageUri}
                   alt='prfImg'
                   layout='fill'
                   objectFit='cover'
                   sizes='20vw'
                   quality='20'
-                  unoptimized={imgError ? true : false}
+                  unoptimized={imgError}
                   onError={() => setImgError(true)}
                 />
               )}

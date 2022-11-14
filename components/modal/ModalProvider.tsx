@@ -1,72 +1,59 @@
 import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import CancelController from './cancel/CancelController';
-import EditProfileModal from './EditProfileModal';
-import LogoutModal from './LogoutModal';
-import MatchEnrollModal from './MatchEnrollModal';
-import MatchManualModal from './MatchManualModal';
-import MatchRejectModal from './MatchRejectModal';
-import ReportModal from './ReportModal';
-import WelcomeModal from './WelcomeModal';
-import InputScoreModal from './InputScoreModal';
+import { reloadMatchState } from 'utils/recoil/match';
+import CancelModal from './match/CancelModal';
+import EditProfileModal from './profile/EditProfileModal';
+import LogoutModal from './menu/LogoutModal';
+import MatchEnrollModal from './match/MatchEnrollModal';
+import MatchManualModal from './match/MatchManualModal';
+import MatchRejectModal from './match/MatchRejectModal';
+import ReportModal from './menu/ReportModal';
+import WelcomeModal from './event/WelcomeModal';
+import AfterGameModal from './afterGame/AfterGameModal';
+import StatChangeModal from './statChange/StatChangeModal';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
-  const [modalInfo, setModalInfo] = useRecoilState(modalState);
+  const [{ modalName, cancel, enroll, manual, exp }, setModal] =
+    useRecoilState(modalState);
+  const setReloadMatch = useSetRecoilState(reloadMatchState);
+  const content: { [key: string]: JSX.Element | null } = {
+    'MAIN-WELCOME': <WelcomeModal />,
+    'MENU-REPORT': <ReportModal />,
+    'MENU-LOGOUT': <LogoutModal />,
+    'MATCH-REJECT': <MatchRejectModal />,
+    'MATCH-ENROLL': enroll ? <MatchEnrollModal {...enroll} /> : null,
+    'MATCH-CANCEL': cancel ? <CancelModal {...cancel} /> : null,
+    'MATCH-MANUAL': manual ? <MatchManualModal {...manual} /> : null,
+    'USER-PROFILE_EDIT': <EditProfileModal />,
+    'FIXED-AFTER_GAME': <AfterGameModal />,
+    'FIXED-STAT': <StatChangeModal {...exp} />,
+  };
 
   useEffect(() => {
     setModalOutsideScroll();
-  }, [modalInfo]);
+  }, [modalName]);
 
   const setModalOutsideScroll = () =>
-    (document.body.style.overflow = modalInfo.modalName ? 'hidden' : 'unset');
+    (document.body.style.overflow = modalName ? 'hidden' : 'unset');
 
-  const modalCloseHandler = (e: React.MouseEvent) => {
-    if (modalInfo.modalName?.split('-')[0] === 'FIXED') return;
+  const closeModalHandler = (e: React.MouseEvent) => {
+    if (modalName?.split('-')[0] === 'FIXED') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
-      setModalInfo({ modalName: null });
-    }
-  };
-
-  const findModal = () => {
-    const { modalName, cancelInfo, enrollInfo } = modalInfo;
-    switch (modalName) {
-      case 'MAIN-WELCOME':
-        return <WelcomeModal />;
-      case 'MENU-REPORT':
-        return <ReportModal />;
-      case 'MENU-LOGOUT':
-        return <LogoutModal />;
-      case 'MATCH-ENROLL':
-        return typeof enrollInfo !== 'undefined' ? (
-          <MatchEnrollModal {...enrollInfo} />
-        ) : null;
-      case 'MATCH-REJECT':
-        return <MatchRejectModal />;
-      case 'MATCH-CANCEL':
-        return typeof cancelInfo !== 'undefined' ? (
-          <CancelController {...cancelInfo} />
-        ) : null;
-      case 'MATCH-MANUAL':
-        return <MatchManualModal />;
-      case 'USER-PROFILE_EDIT':
-        return <EditProfileModal />;
-      case 'FIXED-INPUT_SCORE':
-        return <InputScoreModal />;
-      default:
-        return null;
+      if (modalName === 'MATCH-CANCEL') setReloadMatch(true);
+      setModal({ modalName: null });
     }
   };
 
   return (
-    modalInfo.modalName && (
+    modalName && (
       <div
         className={styles.backdrop}
         id='modalOutside'
-        onClick={modalCloseHandler}
+        onClick={closeModalHandler}
       >
-        <div className={styles.modalContainer}>{findModal()}</div>
+        <div className={styles.modalContainer}>{content[modalName]}</div>
       </div>
     )
   );

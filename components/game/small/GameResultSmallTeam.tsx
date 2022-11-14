@@ -1,18 +1,18 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import { Team } from 'types/gameTypes';
+import { RankResult } from 'types/gameTypes';
 import fallBack from 'public/image/fallBackSrc.jpeg';
 import styles from 'styles/game/GameResultItem.module.scss';
 
-type gameResultTypes = {
-  team: Team;
+interface GameResultSmallTeamProps {
+  team: RankResult;
   userLeft: boolean;
-};
+}
 
 export default function GameResultSmallTeam({
   team,
   userLeft,
-}: gameResultTypes) {
+}: GameResultSmallTeamProps) {
   const [imgError, setImgError] = useState(false);
   return (
     <div className={styles.smallTeam}>
@@ -27,7 +27,7 @@ export default function GameResultSmallTeam({
               objectFit='cover'
               sizes='20vw'
               quality='20'
-              unoptimized={imgError ? true : false}
+              unoptimized={imgError}
               onError={() => setImgError(true)}
             />
           ))}

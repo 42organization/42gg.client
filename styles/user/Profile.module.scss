@@ -4,112 +4,141 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  padding: 1rem;
+  margin-bottom: 0.6rem;
+  border-radius: $small-radius;
   background: $g2-bottom;
   color: black;
-  border-radius: $small-radius;
-  padding: 1rem;
 }
 
-.top {
-  display: flex;
-  margin-bottom: 0.5rem;
-}
-
-.bottom {
+.topContainer {
   display: flex;
 }
 
-.gameInfo {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch;
-  padding-bottom: 1rem;
-  .rank {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-    color: $pp-red;
-    font-size: 3rem;
-    font-weight: 700;
-    span:nth-child(1) {
-      font-size: $big-font;
-      margin: 0 0.5rem 0.3rem 0;
-    }
-    margin-bottom: 0.3rem;
-  }
-  .pppRacketWrap {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.3rem;
-    .ppp {
-      font-size: $big-font;
-      margin-right: 0.5rem;
-    }
-    .racketType {
-      font-size: $small-font;
-      border: 1px solid;
-      border-radius: $mini-radius;
-      text-align: center;
-      padding: 0.1rem 0.5rem;
-    }
-  }
-  .winRate {
-    display: flex;
-    align-items: center;
-    font-size: $midium-font;
-    width: 100%;
-    .winRateStr {
-      margin-right: 0.5rem;
-      font-weight: 300;
-      span:nth-child(1) {
-        font-size: $small-font;
-      }
-    }
-    .winRateBar {
-      display: flex;
-      width: 70%;
-      height: 1rem;
-      border-radius: $mini-radius;
-      overflow: hidden;
-      .wins {
-        background-color: $winner-blue;
-      }
-      .loses {
-        background-color: $loser-red;
-      }
-    }
-  }
+.bottomContainer {
+  margin-top: 1rem;
 }
 
-.playerInfo {
-  flex: 1;
+.userImage {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding-bottom: 1rem;
-  .userImage {
+  padding: 0.3rem;
+  border: solid 1px white;
+  border-radius: $mini-radius;
+  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  div {
     @include userImage(4.7rem);
   }
-  .intraId {
+}
+
+.levelRacketWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 1rem;
+  .level {
+    margin: 0 0 0.2rem 0.2rem;
+    color: $pp-blue;
+    font-size: $giant-font;
+    font-weight: 700;
+  }
+  .exp {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+    .expRate {
+      margin: 0 0 0.2rem 0.2rem;
+      font-size: $small-font;
+    }
+    .bar {
+      display: flex;
+      width: 6.5rem;
+      height: 0.5rem;
+      border-radius: $mini-radius;
+      overflow: hidden;
+      .expCurrent {
+        background: $g2-top;
+      }
+      .expLeft {
+        background: $dark-gray;
+      }
+    }
+  }
+  .racket {
+    width: 6.5rem;
+    padding: 0.2rem 0;
+    margin-right: auto;
+    border-radius: $mini-radius;
+    background: white;
+    font-size: $small-font;
+    text-align: center;
+  }
+}
+
+.rankInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.5rem;
+  margin: -1.8rem 0 0.7rem 0;
+}
+
+.rank {
+  display: flex;
+  align-items: flex-end;
+  line-height: 100%;
+  margin-bottom: 0.3rem;
+  color: $rank-red;
+  font-size: 2rem;
+  font-weight: 700;
+  span:nth-child(1) {
+    margin-right: 0.2rem;
+    font-size: 1.5rem;
+  }
+  span:nth-child(2) {
+    padding-bottom: 0.15rem;
+  }
+}
+
+.pppWinRateWrap {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 0.3rem;
+  height: 1.7rem;
+  .ppp {
     font-size: $big-font;
-    font-weight: 600;
-    margin-top: 0.2rem;
+  }
+  .winRate {
+    margin-left: auto;
+    font-size: $small-font;
+    font-weight: 400;
+  }
+}
+
+.bar {
+  display: flex;
+  width: 100%;
+  height: 0.8rem;
+  border-radius: $mini-radius;
+  overflow: hidden;
+  .wins {
+    background: $winner-blue;
+  }
+  .losses {
+    background: $loser-red;
   }
 }
 
 .statusMessage {
   flex: 2;
-  background: white;
-  border-radius: $mini-radius;
-  min-height: 5rem;
-  font-size: $big-font;
-  padding: 0.8rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 5rem;
+  padding: 0.5rem;
+  border-radius: $mini-radius;
+  background: white;
+  font-size: $medium-font;
   .buttons {
     @include select-buttons(4.5rem, 1.5rem);
     margin-left: auto;
@@ -122,6 +151,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
+  margin: 2rem 1.5rem;
 }
 
 .editModalTitle {
@@ -135,7 +165,7 @@
 .editType {
   margin: 0 0 0.3rem 0.5rem;
   color: $pp-blue;
-  font-size: $midium-font;
+  font-size: $medium-font;
 }
 
 .racketTypeWrap {
@@ -151,20 +181,20 @@
       opacity: 0;
     }
     :checked + .radioButton {
+      border: solid 1px $pp-blue;
       color: $pp-blue;
-      border-color: $pp-blue;
     }
     .radioButton {
-      cursor: pointer;
-      border: solid 1px white;
-      border-radius: $mini-radius;
-      text-align: center;
-      font-size: $small-font;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 6rem;
       height: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border: 1px solid white;
+      border-radius: $mini-radius;
+      font-size: $small-font;
+      text-align: center;
+      cursor: pointer;
     }
   }
 }
@@ -177,16 +207,16 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background-color: white;
+    border: 1px solid $pp-blue;
     border-radius: $small-radius;
+    background: white;
     overflow: hidden;
-    border: solid $pp-blue 1px;
     textarea {
-      border: none;
-      padding: 0.8rem;
-      font-size: $big-font;
-      height: 5rem;
       resize: none;
+      height: 5rem;
+      padding: 0.8rem;
+      border: none;
+      font-size: $big-font;
     }
     :focus {
       outline: none;
@@ -194,8 +224,8 @@
     div {
       display: flex;
       justify-content: flex-end;
-      color: $dark-gray;
       padding: 0.7rem;
+      color: $dark-gray;
       font-size: $small-font;
     }
   }

@@ -1,0 +1,21 @@
+@import '../common.scss';
+
+.selectBox {
+  position: relative;
+  width: 6rem;
+  height: 1.6rem;
+  border-radius: $mini-radius;
+  font-size: $small-font;
+  background: white;
+}
+
+.select {
+  z-index: 1;
+  position: relative;
+  width: 5rem;
+  height: inherit;
+  margin: 0 0.5rem;
+  border: 0 none;
+  outline: 0 none;
+  background: transparent;
+}

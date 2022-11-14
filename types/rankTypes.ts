@@ -1,15 +1,27 @@
-export interface Rank {
+export interface RankUser {
   rank: number;
   intraId: string;
-  ppp: number;
   statusMessage: string;
+  ppp: number;
   winRate: number;
 }
 
-export interface RankData {
-  myIntraId: string;
+export interface NormalUser {
+  rank: number;
+  intraId: string;
+  statusMessage: string;
+  level: number;
+  exp: number;
+}
+
+export interface MyRank {
+  rank: number;
+  normal: number;
+}
+
+export interface Rank {
   myRank: number;
   currentPage: number;
   totalPage: number;
-  rankList: Rank[];
+  rankList: RankUser[] | NormalUser[];
 }

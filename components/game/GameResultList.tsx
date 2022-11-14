@@ -1,72 +1,70 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { InfiniteData } from 'react-query';
 import { useRecoilState } from 'recoil';
 import { Game } from 'types/gameTypes';
 import infScroll from 'utils/infinityScroll';
-import { clickedGameItem } from 'utils/recoil/game';
-import GameResultItem from './GameResultItem';
-import GameResultEmptyArray from './GameResultEmptyArray';
+import { clickedGameItemState } from 'utils/recoil/game';
+import GameResultEmptyItem from './GameResultEmptyItem';
+import GameResultBigItem from './big/GameResultBigItem';
+import GameResultSmallItem from './small/GameResultSmallItem';
 import styles from 'styles/game/GameResultItem.module.scss';
 
-type gameResultTypes = {
+interface GameResultListProps {
   path: string;
-};
+}
 
-export default function GameResultList({ path }: gameResultTypes) {
-  const [clickedItemId, setClickedItemId] =
-    useRecoilState<number>(clickedGameItem);
-  const [totalPage, setTotalPage] = useState<number>();
-  const infResult = infScroll(path);
-  const { data, fetchNextPage, status } = infResult;
-  const router = useRouter();
-  const getTotalPage = (data: InfiniteData<any> | undefined) => {
-    return data?.pages[data.pages.length - 1].totalPage;
-  };
+export default function GameResultList({ path }: GameResultListProps) {
+  const { data, fetchNextPage, status, remove, refetch } = infScroll(path);
+  const [isLast, setIsLast] = useState<boolean>(false);
+  const [clickedGameItem, setClickedGameItem] =
+    useRecoilState(clickedGameItemState);
+  const pathName = useRouter().pathname;
 
   useEffect(() => {
-    infResult.remove();
-    infResult.refetch();
+    remove();
+    refetch();
   }, [path]);
 
   useEffect(() => {
-    if (data?.pages.length === 1 && getTotalPage(data) !== 0)
-      setClickedItemId(data?.pages[0].games[0].gameId);
-    setTotalPage(getTotalPage(data));
+    if (status === 'success') {
+      const gameList = data?.pages;
+      if (gameList.length === 1 && gameList[0].games.length)
+        setClickedGameItem(gameList[0].games[0].gameId);
+      setIsLast(gameList[gameList.length - 1].isLast);
+    }
   }, [data]);
 
-  if (data?.pages[0].games.length === 0) {
-    return <GameResultEmptyArray />;
-  }
+  if (status === 'loading') return <GameResultEmptyItem status={status} />;
+
+  if (status === 'success' && !data?.pages[0].games.length)
+    return <GameResultEmptyItem status={status} />;
 
   return (
     <div>
       {status === 'success' && (
         <>
-          {data?.pages.map((page, index) => (
+          {data?.pages.map((gameList, index) => (
             <div key={index}>
-              {page.games.map((game: Game) => (
-                <GameResultItem
-                  key={game.gameId}
-                  game={game}
-                  big={clickedItemId === game.gameId}
-                />
-              ))}
+              {gameList.games.map((game: Game) => {
+                return clickedGameItem === game.gameId ? (
+                  <GameResultBigItem key={game.gameId} game={game} />
+                ) : (
+                  <GameResultSmallItem key={game.gameId} game={game} />
+                );
+              })}
             </div>
           ))}
+          {pathName === '/game' && !isLast && (
+            <div className={styles.getButton}>
+              <input
+                type='button'
+                value='더 보기'
+                onClick={() => fetchNextPage()}
+              />
+            </div>
+          )}
         </>
       )}
-      <>
-        {router.asPath !== '/' && totalPage !== 1 && (
-          <div className={styles.getButton}>
-            <input
-              type='button'
-              value='더 보기'
-              onClick={() => fetchNextPage()}
-            />
-          </div>
-        )}
-      </>
     </div>
   );
 }

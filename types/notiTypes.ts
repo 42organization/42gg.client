@@ -1,8 +1,8 @@
 export interface NotiList {
-  noti: NotiData[];
+  noti: Noti[];
 }
 
-export interface NotiData {
+export interface Noti {
   id: number;
   type: string;
   message?: string;

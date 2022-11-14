@@ -8,12 +8,13 @@
   @include modal-phrase;
   color: black;
   font-size: 1rem;
+  white-space: pre-wrap;
   .title {
+    margin-bottom: 1.7rem;
     color: white;
     font-family: $title-font;
-    text-shadow: $text-shadow;
     font-size: 2rem;
-    margin-bottom: 1.7rem;
+    text-shadow: $text-shadow;
   }
   .rose {
     margin-top: 1rem;

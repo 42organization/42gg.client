@@ -1,27 +1,40 @@
+/* font */
+$logo-font: 'Agonostic Italic', cursive;
+$title-font: 'Reality Hyper Regular', cursive;
+$text-shadow: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black, 0 -0.1rem black;
+
+/* font-size */
 $giant-giant-font: 2.4rem;
 $giant-big-font: 2.1rem;
 $big-giant-font: 1.8rem;
 $giant-font: 1.5rem;
 $big-font: 1.2rem;
-$midium-font: 1rem;
+$medium-font: 1rem;
 $small-font: 0.8rem;
 
+/* radius */
 $mini-radius: 0.3rem;
 $small-radius: 0.5rem;
-$midium-radius: 0.6rem;
+$medium-radius: 0.6rem;
 $big-radius: 5rem;
 
-$logo-font: 'Agonostic Italic', cursive;
-$title-font: 'Reality Hyper Regular', cursive;
-$text-shadow: 0.1rem 0 #000, 0 0.1rem #000, -0.1rem 0 #000, 0 -0.1rem #000;
-
+/* color */
 $pp-red: #de1825;
 $pp-pink: #ffc5c8;
 $pp-blue: #471df0;
 
+$rank-red: #de1825;
+$rank-pink: #ffc5c8;
+$rank-blue: #471df0;
+
+$norm-hotpink: #dc3789;
+$norm-lightblue: #5acfe8;
+$norm-lightblue2: #1ea1c8;
+$norm-emerald: #cef1d0;
+
 $light-gray: #f0f0f0;
 $gray: #dadada;
-$midium-gray: #cccccc;
+$medium-gray: #cccccc;
 $dark-gray: #676767;
 
 $btn-blue: #2d80ed;
@@ -36,52 +49,67 @@ $loser-red: #ff0303;
 $winner-blue: #040eff;
 
 @mixin menu-noti-Bar {
-  overflow: auto;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   width: 16rem;
   height: 100vh;
+  overflow: auto;
 }
 
 @mixin match-noti-button {
   all: unset;
-  cursor: pointer;
-  text-align: center;
-  background: linear-gradient(to bottom, #fff, $gray);
-  margin: 0.7rem 0;
   padding: 0.2rem 0.5rem;
+  margin: 0.7rem 0;
+  background: linear-gradient(to bottom, white, $gray);
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background: linear-gradient(to bottom, $gray, white);
+    color: $dark-gray;
+  }
+}
+
+@mixin reload-button {
+  all: unset;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, white, $gray);
+  text-align: center;
+  cursor: pointer;
   &:hover {
     color: $dark-gray;
-    background: linear-gradient(to bottom, $gray, #fff);
+    background: linear-gradient(to bottom, $gray, white);
   }
 }
 
 @mixin pageWrap {
-  padding: 2rem 1.5rem;
-  min-height: calc(100vh - 8rem);
   max-width: 30rem;
+  min-height: calc(100vh - 8rem);
+  padding: 2rem 1.5rem;
   margin: 0 auto;
 }
 
 @mixin logoTitle($shadow) {
-  color: #fff;
-  letter-spacing: 0.1rem;
+  color: white;
   font-family: $logo-font;
   font-size: 2rem;
+  letter-spacing: 0.1rem;
 }
 
 @mixin pageTitle {
   margin-bottom: 1rem;
-  color: #fff;
-  text-align: center;
+  color: white;
   font-size: 2.8rem;
-  letter-spacing: 0.1rem;
   font-family: $title-font;
+  text-align: center;
   text-shadow: $text-shadow, 0.3rem 0.3rem 0 $pp-red;
+  letter-spacing: 0.1rem;
 }
 
 @mixin backdrop {
+  z-index: 5;
   position: fixed;
   top: 0;
   left: 0;
@@ -92,31 +120,31 @@ $winner-blue: #040eff;
 
 @mixin button($btn-color, $txt-color, $width: 8rem, $height: 2.8rem) {
   all: unset;
-  cursor: pointer;
-  border-radius: $small-radius;
   width: $width;
   height: $height;
+  border-radius: $small-radius;
   background: if(
     $btn-color == white,
-    linear-gradient(to bottom, $btn-color, $midium-gray),
+    linear-gradient(to bottom, $btn-color, $medium-gray),
     linear-gradient(to bottom, $btn-color, $dark-blue)
   );
   color: $txt-color;
-  font-size: $midium-font;
+  font-size: $medium-font;
   text-align: center;
+  cursor: pointer;
 }
 
 @mixin select-buttons($width: 8rem, $height: 2.8rem) {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   .negative {
     input {
       @include button(white, black, $width, $height);
     }
     margin-right: 1rem;
     :hover {
-      background: linear-gradient(to bottom, $midium-gray, white);
+      background: linear-gradient(to bottom, $medium-gray, white);
     }
   }
   .positive {
@@ -130,18 +158,18 @@ $winner-blue: #040eff;
 }
 
 @mixin modal-phrase {
-  text-align: center;
   line-height: 150%;
   font-size: $big-font;
+  text-align: center;
   .emoji {
-    font-size: $giant-big-font;
     margin-bottom: 1rem;
+    font-size: $giant-big-font;
   }
   .subContent {
-    margin-top: 0.5rem;
-    font-size: $small-font;
     line-height: 1.5;
+    margin-top: 0.5rem;
     color: $pp-blue;
+    font-size: $small-font;
   }
   margin-bottom: 2rem;
 }
@@ -149,14 +177,27 @@ $winner-blue: #040eff;
 @mixin modal-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-evenly;
+  align-items: center;
+  margin: 2rem 1.5rem;
 }
 
 @mixin spanUpDownAnimation($fontSize, $padding) {
-  font-size: $fontSize;
   padding: $padding;
+  font-size: $fontSize;
   animation: upDown 0.75s infinite;
+}
+
+@mixin userImage($size) {
+  position: relative;
+  width: $size;
+  height: $size;
+  border: 1px solid white;
+  border-radius: 50%;
+  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  img {
+    border-radius: 50%;
+  }
 }
 
 @keyframes upDown {
@@ -167,17 +208,5 @@ $winner-blue: #040eff;
   }
   20% {
     transform: translateY(-0.2rem);
-  }
-}
-
-@mixin userImage($size) {
-  position: relative;
-  height: $size;
-  width: $size;
-  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
-  border: solid 1px white;
-  border-radius: 50%;
-  img {
-    border-radius: 50%;
   }
 }

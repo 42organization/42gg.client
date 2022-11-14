@@ -1,50 +1,40 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState, useResetRecoilState } from 'recoil';
-import { NotiData } from 'types/notiTypes';
-import { notiBarState } from 'utils/recoil/layout';
+import { Noti } from 'types/notiTypes';
+import { openNotiBarState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
-import NotiItem from './NotiItem';
 import instance from 'utils/axios';
+import NotiItem from './NotiItem';
 import styles from 'styles/Layout/NotiBar.module.scss';
 
 export default function NotiBar() {
-  const [notiData, setNotiData] = useState<NotiData[]>([]);
-  const [clickRefreshBtn, setClickRefreshBtn] = useState(false);
-  const [refreshBtnAnimation, setRefreshBtnAnimation] = useState(false);
-  const resetOpenNotiBar = useResetRecoilState(notiBarState);
-  const setErrorMessage = useSetRecoilState(errorState);
+  const [noti, setNoti] = useState<Noti[]>([]);
+  const [clickReloadNoti, setClickReloadNoti] = useState(false);
+  const [spinReloadButton, setSpinReloadButton] = useState(false);
+  const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
+  const setError = useSetRecoilState(errorState);
 
   useEffect(() => {
-    getNotiDataHandler();
+    getNotiHandler();
   }, []);
 
   useEffect(() => {
-    if (clickRefreshBtn) getNotiDataHandler();
-  }, [clickRefreshBtn]);
+    if (clickReloadNoti) getNotiHandler();
+  }, [clickReloadNoti]);
 
-  const getNotiDataHandler = async () => {
-    if (clickRefreshBtn) {
-      setRefreshBtnAnimation(true);
+  const getNotiHandler = async () => {
+    if (clickReloadNoti) {
+      setSpinReloadButton(true);
       setTimeout(() => {
-        setRefreshBtnAnimation(false);
+        setSpinReloadButton(false);
       }, 1000);
     }
     try {
       const res = await instance.get(`/pingpong/notifications`);
-      setNotiData(res?.data.notifications);
-      setClickRefreshBtn(false);
+      setNoti(res?.data.notifications);
+      setClickReloadNoti(false);
     } catch (e) {
-      setErrorMessage('JB04');
-    }
-  };
-
-  const allNotiDeleteHandler = async () => {
-    try {
-      await instance.delete(`/pingpong/notifications`);
-      alert('알림이 성공적으로 삭제되었습니다.');
-      resetOpenNotiBar();
-    } catch (e) {
-      setErrorMessage('JB05');
+      setError('JB04');
     }
   };
 
@@ -52,28 +42,17 @@ export default function NotiBar() {
     <div className={styles.backdrop} onClick={resetOpenNotiBar}>
       <div className={styles.container} onClick={(e) => e.stopPropagation()}>
         <button onClick={resetOpenNotiBar}>&#10005;</button>
-        {notiData.length ? (
+        {noti.length ? (
           <>
-            <div className={styles.btnWrap}>
-              <button
-                className={styles.deleteBtn}
-                onClick={allNotiDeleteHandler}
-              >
-                &#9745; 전체삭제
-              </button>
-              <button
-                className={
-                  refreshBtnAnimation
-                    ? styles.refreshBtnAnimation
-                    : styles.refreshBtn
-                }
-                onClick={() => setClickRefreshBtn(true)}
-              >
-                &#8635;
-              </button>
+            <div className={styles.buttonWrap}>
+              <DeleteAllButton />
+              <ReloadNotiButton
+                spinReloadButton={spinReloadButton}
+                setClickReloadNoti={setClickReloadNoti}
+              />
             </div>
             <div>
-              {notiData.map((data: NotiData) => (
+              {noti.map((data: Noti) => (
                 <NotiItem key={data.id} data={data} />
               ))}
             </div>
@@ -81,20 +60,54 @@ export default function NotiBar() {
         ) : (
           <div className={styles.emptyContent}>
             <></>
-            <button
-              className={
-                refreshBtnAnimation
-                  ? styles.refreshBtnAnimation
-                  : styles.refreshBtn
-              }
-              onClick={() => setClickRefreshBtn(true)}
-            >
-              &#8635;
-            </button>
+            <ReloadNotiButton
+              spinReloadButton={spinReloadButton}
+              setClickReloadNoti={setClickReloadNoti}
+            />
             <div>💭 새로운 알림이 없습니다!</div>
           </div>
         )}
       </div>
     </div>
+  );
+}
+
+interface ReloadNotiButtonProps {
+  spinReloadButton: boolean;
+  setClickReloadNoti: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function ReloadNotiButton({
+  spinReloadButton,
+  setClickReloadNoti,
+}: ReloadNotiButtonProps) {
+  return (
+    <button
+      className={
+        spinReloadButton ? styles.spinReloadButton : styles.reloadButton
+      }
+      onClick={() => setClickReloadNoti(true)}
+    >
+      &#8635;
+    </button>
+  );
+}
+
+function DeleteAllButton() {
+  const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
+  const setError = useSetRecoilState(errorState);
+  const allNotiDeleteHandler = async () => {
+    try {
+      await instance.delete(`/pingpong/notifications`);
+      alert('알림이 성공적으로 삭제되었습니다.');
+      resetOpenNotiBar();
+    } catch (e) {
+      setError('JB05');
+    }
+  };
+  return (
+    <button className={styles.deleteButton} onClick={allNotiDeleteHandler}>
+      &#9745; 전체삭제
+    </button>
   );
 }

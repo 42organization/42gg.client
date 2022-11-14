@@ -7,34 +7,33 @@
 
 .container {
   @include menu-noti-Bar;
-  background: linear-gradient(to right bottom, $g2-top, $g2-bottom);
-  margin-left: auto;
   padding: 1.15rem 0.7rem 2rem;
+  margin-left: auto;
+  background: linear-gradient(to right bottom, $g2-top, $g2-bottom);
   button {
     all: unset;
-    cursor: pointer;
+    width: 1.5rem;
     color: $dark-gray;
     font-size: 1.5rem;
     text-shadow: none;
     text-align: center;
-    width: 1.5rem;
+    cursor: pointer;
   }
-  .btnWrap {
+  .buttonWrap {
     display: flex;
     justify-content: space-between;
-    .refreshBtn {
-      @include match-noti-button;
-      border-radius: $big-radius;
+    align-items: center;
+    .reloadButton {
+      @include reload-button;
     }
-    .refreshBtnAnimation {
-      @include match-noti-button;
-      cursor: not-allowed;
-      pointer-events: none;
+    .spinReloadButton {
+      @include reload-button;
       opacity: 0.7;
-      border-radius: $big-radius;
       animation: spin 1s infinite;
+      pointer-events: none;
+      cursor: not-allowed;
     }
-    .deleteBtn {
+    .deleteButton {
       @include match-noti-button;
       border-radius: $small-radius;
     }
@@ -43,25 +42,25 @@
 
 .emptyContent {
   text-align: right;
-  .refreshBtn {
+  .reloadButton {
     @include match-noti-button;
     border-radius: $big-radius;
   }
-  .refreshBtnAnimation {
+  .spinReloadButton {
     @include match-noti-button;
-    cursor: not-allowed;
-    pointer-events: none;
-    opacity: 0.7;
     border-radius: $big-radius;
+    opacity: 0.7;
+    pointer-events: none;
     animation: spin 1s infinite;
+    cursor: not-allowed;
   }
   div {
     padding: 1rem;
     border-radius: $small-radius;
-    font-size: $midium-font;
+    background: white;
+    color: black;
+    font-size: $medium-font;
     text-align: center;
-    color: #000;
-    background: #fff;
   }
 }
 

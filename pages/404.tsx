@@ -1,13 +1,13 @@
-import { useSetRecoilState } from 'recoil';
 import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
-import ErrorPage from '../components/error/Error';
+import ErrorPage from 'components/error/Error';
 
 const Error = () => {
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
 
   useEffect(() => {
-    setErrorMessage('DK404');
+    setError('DK404');
   }, []);
   return <ErrorPage />;
 };

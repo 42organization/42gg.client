@@ -1,0 +1,15 @@
+@import 'styles/common.scss';
+
+.headerWrap {
+  background: #141a46;
+  #logo {
+    div {
+      @include logoTitle(0.25rem);
+      cursor: pointer;
+      flex: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

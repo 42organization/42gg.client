@@ -1,0 +1,25 @@
+@mixin modeWrapBasic {
+  display: flex;
+  justify-content: space-between;
+  margin-inline: 0.6rem;
+  margin-bottom: 0.7rem;
+}
+
+.rankModeWrap {
+  @include modeWrapBasic;
+}
+
+.gameModeWrap {
+  @include modeWrapBasic;
+}
+
+.profileModeWrap {
+  display: flex;
+  justify-content: right;
+  margin-bottom: 0.7rem;
+}
+
+.matchModeWrap {
+  margin-left: 0.6rem;
+  margin-bottom: -1.6rem;
+}

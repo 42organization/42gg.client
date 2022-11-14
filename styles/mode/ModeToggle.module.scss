@@ -1,0 +1,56 @@
+@import '../common.scss';
+
+.toggleSwitch {
+  display: block;
+  position: relative;
+  width: 4rem;
+  height: 1.6rem;
+  border-radius: 2rem;
+  background: $norm-lightblue2;
+  color: white;
+  box-shadow: 0 0 1rem 3px rgba(0 0 0 / 15%);
+  cursor: pointer;
+  .toggleText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: $small-font;
+    font-weight: 600;
+    transform: translate(0, -50%);
+  }
+}
+
+/* 토글 버튼 */
+.toggleSwitch .toggleButton {
+  /* 버튼은 토글보다 작아야함  */
+  position: absolute;
+  top: 50%;
+  left: 0.2rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  background: white;
+  transform: translateY(-50%);
+}
+
+/* 체크박스가 체크될 시 변경되는 요소 */
+.toggle:checked ~ .toggleSwitch {
+  background: $rank-red;
+  .toggleText {
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    transform: translate(0, -50%);
+  }
+}
+
+.toggle:checked ~ .toggleSwitch .toggleButton {
+  /* 100% -> 끝위치, 1.8rem -> 기존 left(0.2) + 버튼 크기(1.6) */
+  left: calc(100% - 1.5rem);
+  background: white;
+}
+
+.toggleSwitch,
+.toggleButton {
+  transition: all 0.2s ease-in;
+}

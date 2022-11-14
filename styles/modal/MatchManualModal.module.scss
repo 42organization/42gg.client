@@ -2,38 +2,54 @@
 
 .container {
   @include modal-container;
+  width: 80vw;
+  max-width: 20rem;
 }
 
 .title {
-  color: #fff;
+  color: white;
   font-size: 2.5rem;
-  letter-spacing: 0.1rem;
   font-family: $title-font;
   text-shadow: $text-shadow;
+  letter-spacing: 0.1rem;
+}
+
+.toggleContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  padding-top: 0.5rem;
+  padding-right: 1rem;
+  margin-bottom: 0.1rem;
 }
 
 .ruleList {
   list-style: none;
-  overflow-y: scroll;
-  height: 40vh;
-  max-height: 40vh;
-  color: black;
   width: auto;
-  margin: 1.5rem 0.5rem;
-}
-.ruleList > li {
+  height: 60vh;
+  max-height: 60vh;
+  margin: 0 0.6rem 0.5rem;
+  color: black;
+  font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 1.2rem;
+  overflow-y: scroll;
+
+  > li {
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .ruleDetail {
+  margin-left: 0.8rem;
   font-size: 0.9rem;
   font-weight: 400;
-  margin-left: 0.8rem;
-}
-.ruleDetail > li {
-  list-style: square;
-  margin-top: 0.3rem;
+
+  > li {
+    list-style: square;
+    margin: 0.4rem 0;
+    white-space: pre-wrap;
+  }
 }
 
 .ruleList::-webkit-scrollbar {
@@ -43,8 +59,8 @@
 }
 
 .ruleList::-webkit-scrollbar-thumb {
-  background-color: white;
   border-radius: 10px;
+  background: white;
 }
 
 .buttons {

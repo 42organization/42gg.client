@@ -1,31 +1,48 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { SeasonMode } from 'types/mainType';
 import GameResultList from 'components/game/GameResultList';
 
-interface GameResult {
-  intraId?: string;
+interface GameResultProps {
+  mode?: SeasonMode;
+  season?: number;
 }
 
-export default function GameResult({ intraId }: GameResult) {
+export default function GameResult({ mode, season }: GameResultProps) {
+  const [path, setPath] = useState('');
   const queryClient = new QueryClient();
-  const [path, setPath] = useState<string>();
   const router = useRouter();
-  useEffect(() => {
-    if (router.asPath === '/' || router.asPath.includes('token')) {
-      setPath(`/pingpong/games?count=3&gameId=`);
-    } else if (router.asPath === '/game') {
-      setPath(`/pingpong/games?count=10&status=end&gameId=`);
-    } else {
-      setPath(`/pingpong/users/${intraId}/games?count=5&status=end&gameId=`);
+  const asPath = router.asPath;
+  const intraId = router.query.intraId;
+
+  const makePath = () => {
+    if (asPath === '/' || asPath.includes('token')) {
+      setPath(`/pingpong/games?count=${3}&status=${'live'}&gameId=`);
+      return;
     }
-  }, [router.asPath]);
+    const userQuery = intraId ? `/users/${intraId}` : '';
+    const seasonQuery = mode === 'rank' && `season=${season}`;
+    const modeQuery = mode !== 'both' && `mode=${mode}`;
+    const countQuery = router.pathname === '/users/detail' && `count=${5}`;
+    const query = [modeQuery, seasonQuery, countQuery, 'gameId=']
+      .filter((item) => item)
+      .join('&');
+    setPath(`/pingpong/games${userQuery}?${query}`);
+    return;
+  };
+
+  useEffect(() => {
+    makePath();
+  }, [asPath, intraId, mode, season]);
 
   return (
     <div>
-      <QueryClientProvider client={queryClient}>
-        {!path ? '로딩중' : <GameResultList path={path} />}
-      </QueryClientProvider>
+      {path && (
+        <QueryClientProvider client={queryClient}>
+          <GameResultList path={path} />
+        </QueryClientProvider>
+      )}
     </div>
   );
 }

@@ -1,5 +1,5 @@
-import { errorState } from 'utils/recoil/error';
 import { useRecoilValue } from 'recoil';
+import { errorState } from 'utils/recoil/error';
 import ErrorPage from 'components/error/Error';
 import styles from 'styles/Layout/Layout.module.scss';
 
@@ -8,9 +8,9 @@ interface ErrorCheckerProps {
 }
 
 export default function ErrorChecker({ children }: ErrorCheckerProps) {
-  const errorMessage = useRecoilValue(errorState);
+  const error = useRecoilValue(errorState);
 
-  return errorMessage === '' ? (
+  return error === '' ? (
     <>{children}</>
   ) : (
     <div className={styles.appContainer}>

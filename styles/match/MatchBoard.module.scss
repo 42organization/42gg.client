@@ -1,21 +1,57 @@
 @import 'styles/common.scss';
 
 .matchBoard {
+  height: 60vh;
+  padding: 1rem;
+  margin-block: 1rem;
+  border-radius: $small-radius;
+  background: rgba(255, 255, 255, 0.2);
+  overflow-y: scroll;
+}
+
+.notice {
+  margin: 1rem 0;
+  color: white;
+  text-align: center;
+}
+
+.buttonWrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 0.7rem;
+  margin-right: 0.6rem;
+  .manual {
+    @include match-noti-button;
+    margin: 0 0.8rem 0 0;
+    padding: 0;
+    width: 4.2rem;
+    height: 1.6rem;
+    font-size: $small-font;
+    border-radius: $small-radius;
+  }
+  .reload {
+    @include reload-button;
+    cursor: pointer;
+  }
+  .spin {
+    opacity: 0.7;
+    pointer-events: none;
+    animation: spin 1s infinite;
+    cursor: not-allowed;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.matchSlotList {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
   margin: 1rem 0 1rem 0;
-}
-
-.slotHourString {
-  font-size: $big-font;
-  color: white;
-  margin-left: 0.3rem;
-}
-
-.gridContainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-top: 0.6rem;
 }

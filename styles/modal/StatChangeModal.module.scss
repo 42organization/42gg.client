@@ -1,0 +1,160 @@
+@import 'styles/common.scss';
+
+$text-shadow-red: 2px 2px 0px $pp-red;
+$text-shadow-blue: 2px 2px 0px $pp-blue;
+$ppp-font: 2.8rem;
+
+.fixedContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  &.front {
+    z-index: 3;
+  }
+  &.back {
+    z-index: 2;
+  }
+}
+
+.container {
+  @include modal-container;
+  align-items: stretch;
+  min-height: 10rem;
+  min-width: 17rem;
+  border-radius: $small-radius;
+  color: black;
+  .emoji {
+    margin-bottom: 1rem;
+    font-size: $giant-big-font;
+    text-align: center;
+  }
+}
+
+.pppWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.6rem;
+  .ppp {
+    display: flex;
+    align-items: center;
+    color: $pp-blue;
+    font-size: $ppp-font;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: $text-shadow-red;
+    &.winner {
+      color: $pp-red;
+      text-shadow: $text-shadow-blue;
+    }
+    span:nth-child(2) {
+      margin-left: 0.5rem;
+      margin-top: 0.5rem;
+      font-size: $big-giant-font;
+    }
+  }
+}
+
+.levelExpWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .level {
+    margin-bottom: 0.5rem;
+    margin-inline: 0.2rem;
+    font-size: $big-giant-font;
+    font-weight: 700;
+    color: #f2e6e6;
+    text-shadow: 2px 2px 0px #040eff;
+  }
+  .expWrap {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+    .expString {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 0.2rem;
+      padding-inline: 0.2rem;
+      .expRate {
+        margin-bottom: 0.2rem;
+        font-style: normal;
+        font-weight: 700;
+        font-size: $big-font;
+        line-height: $big-font;
+        span:nth-child(1) {
+          width: 5rem;
+        }
+      }
+      .increasedExp {
+        margin-bottom: 0.1rem;
+        font-style: normal;
+        font-weight: 700;
+        font-size: $medium-font;
+        color: #746f84;
+        span:nth-child(2) {
+          width: 5rem;
+        }
+      }
+    }
+    .expBar {
+      display: flex;
+      width: 100%;
+      height: 1.5rem;
+      border-radius: $mini-radius;
+      overflow: hidden;
+      .expCurrent {
+        background: $g2-top;
+      }
+      .expLeft {
+        background: $dark-gray;
+      }
+    }
+  }
+}
+
+.guide {
+  margin-top: 0.3rem;
+  color: $dark-gray;
+  font-size: $medium-font;
+  font-weight: 700;
+  text-align: center;
+}
+
+.buttons {
+  @include select-buttons(12rem);
+}
+
+.confetti {
+  position: absolute;
+  width: 1rem;
+  height: 1.5rem;
+  opacity: 0;
+  transition: 500ms ease;
+  animation: confettiRain 5s infinite;
+}
+
+@keyframes scaleCup {
+  0% {
+    transform: scale(0.6);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes confettiRain {
+  0% {
+    margin-top: -100vh;
+    opacity: 1;
+  }
+
+  100% {
+    margin-top: 100vh;
+    opacity: 1;
+  }
+}

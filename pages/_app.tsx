@@ -1,15 +1,15 @@
 import Head from 'next/head';
 import Script from 'next/script';
-import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
+import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import { RecoilRoot } from 'recoil';
+import Layout from 'components/Layout/Layout';
 import ErrorChecker from 'components/error/ErrorChecker';
 import LoginChecker from 'components/LoginChecker';
-import Layout from 'components/Layout/Layout';
-import 'styles/globals.css';
-import * as gtag from 'lib/gtag';
 import ModalProvider from 'components/modal/ModalProvider';
+import * as gtag from 'lib/gtag';
+import 'styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();

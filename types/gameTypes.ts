@@ -1,4 +1,4 @@
-export interface Player {
+export interface RankPlayer {
   intraId: string;
   userImageUri: string;
   wins: number;
@@ -7,16 +7,23 @@ export interface Player {
   pppChange: number | null;
 }
 
-export interface Team {
-  players: Player[];
-  isWin: boolean;
-  score: number;
+export interface NormalPlayer {
+  intraId: string;
+  userImageUri: string;
+  level: number;
+}
+
+export interface RankResult {
+  players: RankPlayer[] | NormalPlayer[];
+  isWin?: boolean;
+  score?: number;
 }
 
 export interface Game {
   gameId: number;
-  team1: Team;
-  team2: Team;
+  mode: string;
+  team1: RankResult;
+  team2: RankResult;
   type: string;
   status: string;
   time: string;

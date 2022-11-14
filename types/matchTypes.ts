@@ -3,6 +3,7 @@ export interface Slot {
   status: string;
   headCount: number;
   time: string;
+  mode: string;
 }
 
 export type Slots = Slot[];
@@ -15,7 +16,7 @@ export interface CurrentMatch {
   enemyTeam: string[];
 }
 
-export interface MatchData {
+export interface Match {
   intervalMinute: number;
   matchBoards: Slots[];
 }

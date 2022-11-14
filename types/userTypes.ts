@@ -1,16 +1,22 @@
-export interface ProfileInfo {
+export interface ProfileBasic {
   intraId: string;
   userImageUri: string;
+  racketType: string;
+  statusMessage: string;
+  level: number;
+  currentExp: number;
+  maxExp: number;
+  expRate: number;
+}
+
+export interface ProfileRank {
   rank: number;
   ppp: number;
   wins: number;
-  loses: number;
+  losses: number;
   winRate: string;
-  racketType: string;
-  statusMessage: string;
 }
-
-export interface ChartDataItem {
+export interface PppChart {
   ppp: number;
   date: string;
 }

@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
+import instance from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
-import { errorState } from 'utils/recoil/error';
-import instance from 'utils/axios';
 import styles from 'styles/main/SearchBar.module.scss';
 
 let timer: ReturnType<typeof setTimeout>;
@@ -13,7 +13,7 @@ export default function SearchBar() {
   const [keyword, setKeyword] = useState<string>('');
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<string[]>([]);
-  const setErrorMessage = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
   const searchBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -31,14 +31,14 @@ export default function SearchBar() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []); // 검색 컴포넌트 외부 클릭시 검색결과모달 닫기
+  }, []);
 
   const getSearchResultHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/users/searches?q=${keyword}`);
       setSearchResult(res?.data.users);
     } catch (e) {
-      setErrorMessage('JB06');
+      setError('JB06');
     }
   };
 
@@ -55,41 +55,39 @@ export default function SearchBar() {
   };
 
   return (
-    <div ref={searchBarRef}>
-      <div className={styles.searchBar}>
-        <input
-          type='text'
-          onChange={keywordHandler}
-          onFocus={() => setShowDropDown(true)}
-          placeholder='유저 검색하기'
-          maxLength={15}
-          value={keyword}
-        />
-        <div className={styles.icons}>
-          {keyword ? (
-            <span className={styles.reset} onClick={() => setKeyword('')}>
-              <IoIosCloseCircle />
-            </span>
-          ) : (
-            <span>
-              <GoSearch />
-            </span>
-          )}
-        </div>
-        {showDropDown && keyword && (
-          <div className={styles.dropdown}>
-            {searchResult.length ? (
-              searchResult.map((intraId: string) => (
-                <Link href={`/users/detail?intraId=${intraId}`} key={intraId}>
-                  <div>{intraId}</div>
-                </Link>
-              ))
-            ) : (
-              <div>검색 결과가 없습니다.</div>
-            )}
-          </div>
+    <div className={styles.searchBar} ref={searchBarRef}>
+      <input
+        type='text'
+        onChange={keywordHandler}
+        onFocus={() => setShowDropDown(true)}
+        placeholder='유저 검색하기'
+        maxLength={15}
+        value={keyword}
+      />
+      <div className={styles.icons}>
+        {keyword ? (
+          <span className={styles.reset} onClick={() => setKeyword('')}>
+            <IoIosCloseCircle />
+          </span>
+        ) : (
+          <span>
+            <GoSearch />
+          </span>
         )}
       </div>
+      {showDropDown && keyword && (
+        <div className={styles.dropdown}>
+          {searchResult.length ? (
+            searchResult.map((intraId: string) => (
+              <Link href={`/users/detail?intraId=${intraId}`} key={intraId}>
+                <div>{intraId}</div>
+              </Link>
+            ))
+          ) : (
+            <div>검색 결과가 없습니다.</div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

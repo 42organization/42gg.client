@@ -1,3 +1,5 @@
+import { MatchMode } from './mainType';
+
 type MainModal = 'WELCOME';
 
 type MenuModal = 'REPORT' | 'LOGOUT';
@@ -6,7 +8,7 @@ type MatchModal = 'ENROLL' | 'REJECT' | 'CANCEL' | 'MANUAL';
 
 type UserModal = 'PROFILE_EDIT';
 
-type FixedModal = 'INPUT_SCORE';
+type FixedModal = 'AFTER_GAME' | 'STAT';
 
 type ModalName =
   | null
@@ -16,21 +18,34 @@ type ModalName =
   | `USER-${UserModal}`
   | `FIXED-${FixedModal}`;
 
-export interface CancelInfo {
+export interface Cancel {
+  isMatched: boolean;
   slotId: number;
   time: string;
-  enemyTeam: string[];
 }
 
-export interface EnrollInfo {
+export interface Enroll {
   slotId: number;
   type: string;
+  mode?: MatchMode;
   startTime: Date;
   endTime: Date;
 }
 
-export interface ModalInfo {
+export interface Exp {
+  gameId?: number;
+  mode?: MatchMode | null;
+}
+
+export interface Manual {
+  toggleMode: MatchMode;
+}
+
+export interface Modal {
   modalName: ModalName;
-  cancelInfo?: CancelInfo;
-  enrollInfo?: EnrollInfo;
+  manual?: Manual;
+  cancel?: Cancel;
+  enroll?: Enroll;
+  exp?: Exp;
+  gameId?: number;
 }
