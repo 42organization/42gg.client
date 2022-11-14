@@ -76,7 +76,7 @@ const modalContentsNormal: { title: string; description: string[] }[] = [
     description: ['일반 게임 진행 시 점수 입력 없음'],
   },
   {
-    title: '🚨 경기 시 주의사항',
+    title: '🚨 노쇼',
     description: [`노쇼는 건의사항 기능 이용해서 신고`],
   },
 ];
