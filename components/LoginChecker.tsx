@@ -25,7 +25,6 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
       setFirstVisited(false);
     }
-    setFirstVisited(false);
   };
 
   const welcomeModal = () => {

@@ -1,9 +1,10 @@
 import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/WelcomeModal.module.scss';
+import { firstVisitedState } from 'utils/recoil/modal';
 
 export default function WelcomeModal() {
-  const setModal = useSetRecoilState(modalState);
+  const setFirstVisited = useSetRecoilState(firstVisitedState);
+
   const content = {
     title: 'Welcome',
     message:
@@ -17,7 +18,7 @@ export default function WelcomeModal() {
   };
 
   const closeModalHandler = () => {
-    setModal({ modalName: null });
+    setFirstVisited(false);
   };
 
   return (
