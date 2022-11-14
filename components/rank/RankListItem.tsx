@@ -15,10 +15,14 @@ interface User {
 interface RankListItemRrops {
   index: number;
   user: User;
-  mode: MatchMode;
+  toggleMode: MatchMode;
 }
 
-export default function RankListItem({ index, user, mode }: RankListItemRrops) {
+export default function RankListItem({
+  index,
+  user,
+  toggleMode,
+}: RankListItemRrops) {
   const { rank, intraId, statusMessage, point, level } = user;
   const myIntraId = useRecoilValue(userState).intraId;
 
@@ -26,7 +30,7 @@ export default function RankListItem({ index, user, mode }: RankListItemRrops) {
     <Link href={`/users/detail?intraId=${intraId}`}>
       <span>
         {intraId}
-        {mode === 'normal' && level && (
+        {toggleMode === 'normal' && level && (
           <span className={styles.level}> ({level})</span>
         )}
       </span>
@@ -40,7 +44,7 @@ export default function RankListItem({ index, user, mode }: RankListItemRrops) {
             ${rank < 4 ? styles.topRank : styles.rank}
             ${
               intraId === myIntraId &&
-              (mode === 'rank' ? styles.myRanking : styles.myVip)
+              (toggleMode === 'rank' ? styles.myRanking : styles.myVip)
             }`}
       >
         {rank}

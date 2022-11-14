@@ -85,12 +85,12 @@ export default function RankList({
   if (isMain) return <RankListMain rank={rank} />;
 
   return (
-    <RankListFrame mode={toggleMode} pageInfo={pageInfo}>
+    <RankListFrame toggleMode={toggleMode} pageInfo={pageInfo}>
       {rank?.rankList.map((item: NormalUser | RankUser, index) => (
         <RankListItem
           key={index}
           index={index}
-          mode={toggleMode}
+          toggleMode={toggleMode}
           user={makeUser(item)}
         />
       ))}
