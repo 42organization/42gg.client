@@ -25,6 +25,12 @@ export default function Document() {
         <meta property='og:image:width' content='600' />
         <meta property='og:image:height' content='315' />
         <meta property='og:locale' content='ko_KR' />
+        <meta
+          httpEquiv='Cache-Control'
+          content='no-cache, no-store, must-revalidate'
+        />
+        <meta httpEquiv='Pragma' content='no-cache' />
+        <meta httpEquiv='Expires' content='0' />
       </Head>
       <body>
         <Main />
