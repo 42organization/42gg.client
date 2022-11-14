@@ -36,7 +36,6 @@ export default function RankListItem({
       </span>
     </Link>
   );
-  console.log('RankListItem toggle mode : ', toggleMode);
 
   return (
     <div className={styles.rankData}>
