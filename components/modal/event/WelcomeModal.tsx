@@ -1,9 +1,11 @@
 import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
+import { firstVisitedState } from 'utils/recoil/modal';
 import styles from 'styles/modal/WelcomeModal.module.scss';
+import modalStyles from 'styles/modal/Modal.module.scss';
 
 export default function WelcomeModal() {
-  const setModal = useSetRecoilState(modalState);
+  const setFirstVisited = useSetRecoilState(firstVisitedState);
+
   const content = {
     title: 'Welcome',
     message:
@@ -16,27 +18,49 @@ export default function WelcomeModal() {
     );
   };
 
-  const closeModalHandler = () => {
-    setModal({ modalName: null });
+  const closeModalBackdropHandler = (e: React.MouseEvent) => {
+    if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
+      setFirstVisited(false);
+    }
+  };
+
+  const closeModalButtonHandler = () => {
+    setFirstVisited(false);
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.phrase}>
-        <div className={styles.emoji}></div>
-        <div className={styles.title}>Welcome</div>
-        {content.message}
-        <div className={styles.rose}>
-          <span>{`@`}</span>
-          <span>{`)->->--`}</span>
-        </div>
-      </div>
-      <div className={styles.buttons}>
-        <div className={styles.negative}>
-          <input onClick={openPageManual} type='button' value='페이지 소개' />
-        </div>
-        <div className={styles.positive}>
-          <input onClick={closeModalHandler} type='button' value='홈으로' />
+    <div
+      className={modalStyles.backdrop}
+      id='modalOutside'
+      onClick={closeModalBackdropHandler}
+    >
+      <div className={modalStyles.modalContainer}>
+        <div className={styles.container}>
+          <div className={styles.phrase}>
+            <div className={styles.emoji}></div>
+            <div className={styles.title}>Welcome</div>
+            {content.message}
+            <div className={styles.rose}>
+              <span>{`@`}</span>
+              <span>{`)->->--`}</span>
+            </div>
+          </div>
+          <div className={styles.buttons}>
+            <div className={styles.negative}>
+              <input
+                onClick={openPageManual}
+                type='button'
+                value='페이지 소개'
+              />
+            </div>
+            <div className={styles.positive}>
+              <input
+                onClick={closeModalButtonHandler}
+                type='button'
+                value='홈으로'
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
