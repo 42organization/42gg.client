@@ -20,7 +20,6 @@ export default function ReportModal() {
   const setError = useSetRecoilState(errorState);
   const setOpenMenuBar = useSetRecoilState(openMenuBarState);
   const reportCategory = [
-    { id: 'GAMERESULT', label: '게임 결과 정정 요청' },
     { id: 'BUG', label: '버그 신고' },
     { id: 'COMPLAINT', label: '불편 사항' },
     { id: 'OPINION', label: '의견 제시' },
@@ -28,8 +27,8 @@ export default function ReportModal() {
     { id: 'ETC', label: '기타' },
   ];
   const reportResponse: { [key: string]: string } = {
-    SUCCESS: '신고가 완료되었습니다.',
-    REJECT: '마음을 담아 신고를 해주세요 ❤️',
+    SUCCESS: '의견 주셔서 감사합니다 ❤️',
+    REJECT: '마음을 담아 의견을 보내주세요 ❤️',
   };
 
   const inputChangeHandler = ({
