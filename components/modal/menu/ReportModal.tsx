@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import { openMenuBarState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
@@ -18,12 +18,12 @@ export default function ReportModal() {
   });
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
-  const setOpenMenuBar = useSetRecoilState(openMenuBarState);
+  const resetOpenMenuBar = useResetRecoilState(openMenuBarState);
   const reportCategory = [
-    { id: 'BUG', label: '버그 신고' },
-    { id: 'COMPLAINT', label: '불편 사항' },
-    { id: 'OPINION', label: '의견 제시' },
     { id: 'CHEERS', label: '응원의 한 마디' },
+    { id: 'OPINION', label: '의견 제시' },
+    { id: 'COMPLAINT', label: '불편 사항' },
+    { id: 'BUG', label: '버그 신고' },
     { id: 'ETC', label: '기타' },
   ];
   const reportResponse: { [key: string]: string } = {
@@ -47,7 +47,7 @@ export default function ReportModal() {
       try {
         await instance.post('/pingpong/feedback', report);
         setModal({ modalName: null });
-        setOpenMenuBar(false);
+        resetOpenMenuBar();
         alert(reportResponse.SUCCESS);
       } catch (e) {
         setError('JH06');
