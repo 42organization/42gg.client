@@ -37,7 +37,8 @@ export default function Header() {
   }, [openMenuBar, openNotiBar]);
 
   const setMenuOutsideScroll = () =>
-    (document.body.style.overflow = (openMenuBar || openNotiBar) ? 'hidden' : 'unset');
+    (document.body.style.overflow =
+      openMenuBar || openNotiBar ? 'hidden' : 'unset');
 
   return (
     <div className={styles.headerContainer}>
