@@ -77,7 +77,7 @@ export default function ProfileChart({ intraId, season }: ProfileChartProps) {
   ]);
 
   useEffect(() => {
-    if (season) getProfileChartHandler();
+    if (season != undefined) getProfileChartHandler();
   }, [season]);
 
   const getProfileChartHandler = async () => {
