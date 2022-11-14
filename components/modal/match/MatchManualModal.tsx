@@ -73,10 +73,7 @@ const modalContentsNormal: { title: string; description: string[] }[] = [
   },
   {
     title: '✅ 경기 결과',
-    description: [
-      '일반 게임 진행 시 점수 입력 없음',
-      '게임 시작 후 10분이 경과해야 게임 종료 가능',
-    ],
+    description: ['일반 게임 진행 시 점수 입력 없음'],
   },
   {
     title: '🚨 경기 시 주의사항',
@@ -100,7 +97,7 @@ const modalContentsRank: { title: string; description: string[] }[] = [
     title: '📖 랭크 경기 규칙',
     description: [
       '11점 3판 2선승제',
-      '경기는 10분 동안 진행',
+      '경기는 15분 동안 진행',
       '점수가 10:10 인 경우 듀스',
       '듀스인 경우, 2점 차가 나면 경기 종료',
       '탁구채를 잡지 않은 손으로 탁구대를 짚으면 실점',
@@ -122,7 +119,7 @@ const modalContentsRank: { title: string; description: string[] }[] = [
     description: [
       '경기 종료 후 그 자리에서 세트 점수 입력',
       '종료시간에 다음 경기가 있을 시 현재 스코어가 높은 선수가 승리',
-      '다음 경기가 없을 시 계속 진행',
+      '다음 경기가 없을 시 계속 진행 가능',
     ],
   },
   {
