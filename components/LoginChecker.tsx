@@ -1,13 +1,12 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { loginState } from 'utils/recoil/login';
 import { firstVisitedState } from 'utils/recoil/modal';
 // import Load from 'pages/load';
 import Login from 'pages/login';
 import WelcomeModal from './modal/event/WelcomeModal';
 import styles from 'styles/Layout/Layout.module.scss';
-import modalStyles from 'styles/modal/Modal.module.scss';
 
 interface LoginCheckerProps {
   children: React.ReactNode;
@@ -20,26 +19,6 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
   const router = useRouter();
   const presentPath = router.asPath;
   const token = presentPath.split('?token=')[1];
-
-  const closeModalHandler = (e: React.MouseEvent) => {
-    if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
-      setFirstVisited(false);
-    }
-  };
-
-  const welcomeModal = () => {
-    return (
-      <div
-        className={modalStyles.backdrop}
-        id='modalOutside'
-        onClick={closeModalHandler}
-      >
-        <div className={modalStyles.modalContainer}>
-          <WelcomeModal />
-        </div>
-      </div>
-    );
-  };
 
   useEffect(() => {
     if (token) {
@@ -55,7 +34,7 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
 
   return loggedIn ? (
     <>
-      {firstVisited && welcomeModal()}
+      {firstVisited && <WelcomeModal />}
       {children}
     </>
   ) : (
