@@ -12,7 +12,7 @@ interface User {
   level: number | null;
 }
 
-interface RankListItemRrops {
+interface RankListItemProps {
   index: number;
   user: User;
   toggleMode: MatchMode;
@@ -22,7 +22,7 @@ export default function RankListItem({
   index,
   user,
   toggleMode,
-}: RankListItemRrops) {
+}: RankListItemProps) {
   const { rank, intraId, statusMessage, point, level } = user;
   const myIntraId = useRecoilValue(userState).intraId;
 
@@ -36,6 +36,7 @@ export default function RankListItem({
       </span>
     </Link>
   );
+  console.log('RankListItem toggle mode : ', toggleMode);
 
   return (
     <div className={styles.rankData}>
