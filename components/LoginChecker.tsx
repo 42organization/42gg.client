@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { loginState } from 'utils/recoil/login';
 import { firstVisitedState } from 'utils/recoil/modal';
-// import Load from 'pages/load';
-import Login from 'pages/login';
+import Load from 'pages/load';
+// import Login from 'pages/login';
 import WelcomeModal from './modal/event/WelcomeModal';
 import styles from 'styles/Layout/Layout.module.scss';
 
@@ -32,15 +32,20 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
     setIsLoading(false);
   }, []);
 
-  return loggedIn ? (
-    <>
-      {firstVisited && <WelcomeModal />}
-      {children}
-    </>
-  ) : (
+  // return loggedIn ? (
+  //   <>
+  //     {firstVisited && <WelcomeModal />}
+  //     {children}
+  //   </>
+  // ) : (
+  //   <div className={styles.appContainer}>
+  //     <div className={styles.background}>{!isLoading && <Login />}</div>
+  //   </div>
+  // );
+
+  return (
     <div className={styles.appContainer}>
-      <div className={styles.background}>{!isLoading && <Login />}</div>
-      {/* <div className={styles.background}>{!isLoading && <Load />}</div> */}
+      <div className={styles.background}>{!isLoading && <Load />}</div>
     </div>
   );
 }
