@@ -5,8 +5,8 @@ import { loginState } from 'utils/recoil/login';
 import { firstVisitedState } from 'utils/recoil/modal';
 // import Load from 'pages/load';
 import Login from 'pages/login';
-import styles from 'styles/Layout/Layout.module.scss';
 import WelcomeModal from './modal/event/WelcomeModal';
+import styles from 'styles/Layout/Layout.module.scss';
 import modalStyles from 'styles/modal/Modal.module.scss';
 
 interface LoginCheckerProps {
