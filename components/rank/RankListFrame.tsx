@@ -11,13 +11,13 @@ interface PageInfo {
 interface RankListFrameProps {
   children: React.ReactNode;
   pageInfo: PageInfo;
-  mode: MatchMode;
+  toggleMode: MatchMode;
 }
 
 export default function RankListFrame({
   children,
   pageInfo,
-  mode,
+  toggleMode,
 }: RankListFrameProps) {
   const router = useRouter();
   const division: { [key: string]: string[] } = {
@@ -35,9 +35,9 @@ export default function RankListFrame({
       <div className={styles.container}>
         <div
           className={`${styles.division}
-					${mode === 'normal' && styles.normal}`}
+					${toggleMode === 'normal' && styles.normal}`}
         >
-          {division[mode].map((item: string) => (
+          {division[toggleMode].map((item: string) => (
             <div key={item}>{item}</div>
           ))}
         </div>

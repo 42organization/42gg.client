@@ -15,7 +15,7 @@ type pathType = {
 export default function Section({ path }: SectionProps) {
   const pathCheck: pathType = {
     game: <GameResult />,
-    rank: <RankList mode={'rank'} isMain={true} />,
+    rank: <RankList toggleMode={'rank'} isMain={true} />,
   };
 
   return (
