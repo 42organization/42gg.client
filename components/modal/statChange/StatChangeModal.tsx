@@ -4,6 +4,7 @@ import { Exp } from 'types/modalTypes';
 import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
+import { reloadMatchState } from 'utils/recoil/match';
 import ExpStat from './ExpStat';
 import PppStat from 'components/modal/statChange/PppStat';
 import styles from 'styles/modal/StatChangeModal.module.scss';
@@ -11,6 +12,7 @@ import styles from 'styles/modal/StatChangeModal.module.scss';
 export default function StatChangeModal({ gameId, mode }: Exp) {
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
+  const setReloadMatch = useSetRecoilState(reloadMatchState);
   const [stat, setStat] = useState();
 
   useEffect(() => {
@@ -28,14 +30,19 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
     }
   };
 
+  const closeModal = () => {
+    setReloadMatch(true);
+    setModal({ modalName: null });
+  };
+
   if (!stat) return null;
 
   return (
     <div>
       <div
         className={`${styles.fixedContainer} ${styles.front}`}
-        onClick={() => setModal({ modalName: null })}
-      ></div>
+        onClick={closeModal}
+      />
       <div className={styles.container}>
         <div className={styles.emoji}>🏓</div>
         {mode === 'rank' && <PppStat stat={stat} />}
