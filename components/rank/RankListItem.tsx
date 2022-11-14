@@ -3,7 +3,6 @@ import { useRecoilValue } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
 import styles from 'styles/rank/RankList.module.scss';
-import { useEffect } from 'react';
 
 interface User {
   intraId: string;
