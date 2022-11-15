@@ -29,7 +29,6 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
       const res = await instance.get(`/pingpong/users`);
       setUser(res?.data);
       console.log(router.asPath);
-      alert('request ok');
     } catch (e) {
       alert('request fail');
     }
@@ -59,7 +58,7 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
   //   </div>
   // );
 
-  return user.isAdmin === true ? (
+  return user.isAdmin && loggedIn === true ? (
     <>
       {firstVisited && <WelcomeModal />}
       {children}
