@@ -25,6 +25,14 @@ export default function RankListItem({
 }: RankListItemProps) {
   const { rank, intraId, statusMessage, point, level } = user;
   const myIntraId = useRecoilValue(userState).intraId;
+  const wrapStyle = {
+    evenOdd: index % 2 === 0 ? styles.even : styles.odd,
+    topStandard: rank < 4 ? styles.top : styles.standard,
+    myRankItem: {
+      rank: intraId === myIntraId && level === null ? styles.myRanking : '',
+      normal: intraId === myIntraId && level !== null ? styles.myVip : '',
+    },
+  };
 
   const makeIntraIdLink = () => (
     <Link href={`/users/detail?intraId=${intraId}`}>
@@ -38,20 +46,14 @@ export default function RankListItem({
   );
 
   return (
-    <div className={styles.rankData}>
-      <div
-        className={`${index % 2 === 0 ? styles.even : styles.odd}
-            ${rank < 4 ? styles.topRank : styles.rank}
-            ${
-              intraId === myIntraId &&
-              (toggleMode === 'rank' ? styles.myRanking : styles.myVip)
-            }`}
-      >
-        {rank}
-        <div className={styles.intraId}>{makeIntraIdLink()}</div>
-        <div className={styles.statusMessage}>{statusMessage}</div>
-        <div className={styles.ppp}>{point}</div>
-      </div>
+    <div
+      className={`${styles.rankItemWrap} ${wrapStyle.evenOdd}
+			${wrapStyle.topStandard} ${wrapStyle.myRankItem[toggleMode]}`}
+    >
+      {rank}
+      <div className={styles.intraId}>{makeIntraIdLink()}</div>
+      <div className={styles.statusMessage}>{statusMessage}</div>
+      <div className={styles.ppp}>{point}</div>
     </div>
   );
 }

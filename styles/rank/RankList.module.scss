@@ -1,19 +1,18 @@
 @import '../common.scss';
 
-/* Ranking 타이틀 */
+/* Rank */
 .pageWrap {
   @include pageWrap;
 }
 
 .title {
   @include pageTitle;
+  &.vip {
+    text-shadow: $text-shadow, 0.3rem 0.3rem 0 $norm-lightblue2;
+  }
 }
 
-.vip {
-  text-shadow: $text-shadow, 0.3rem 0.3rem 0 $norm-lightblue2;
-}
-
-/* 나의 랭킹 */
+/* MyRank */
 .myRank {
   width: fit-content;
   margin-bottom: 1.7rem;
@@ -31,11 +30,7 @@
   }
 }
 
-.container {
-  font-size: $small-font;
-}
-
-/* Rank List 구분 */
+/* RankListFrame */
 @mixin rankGrid {
   display: grid;
   grid-template-columns: 12% 22% auto 14%;
@@ -51,52 +46,43 @@
   }
 }
 
+.container {
+  font-size: $small-font;
+}
+
 .division {
   @include rankGrid;
   background: $rank-red;
   color: white;
   font-weight: 700;
+  &.normal {
+    background: $norm-lightblue2;
+  }
 }
 
-.normal {
-  background: $norm-lightblue2;
-}
-
-.level {
-  color: $dark-gray;
-  font-weight: 500;
-  font-size: 0.7rem;
-}
-
-/* RankList */
-.odd {
+/* RankListItem */
+.rankItemWrap {
   @include rankGrid;
-  background: white;
-}
-.even {
-  @include rankGrid;
-  background: $gray;
-}
-.myRanking {
-  @include rankGrid;
-  border: 0.07rem solid $rank-red;
-  background: $g1-bottom;
-}
-.myVip {
-  @include rankGrid;
-  border: 0.07rem solid $norm-lightblue2;
-  background: $norm-emerald;
-}
-
-.rankData {
-  .topRank {
-    justify-self: center;
+  &.odd {
+    background: white;
+  }
+  &.even {
+    background: $gray;
+  }
+  &.top {
     color: $loser-red;
     font-weight: 700;
   }
-  .rank {
-    justify-self: center;
+  &.standard {
     color: $dark-gray;
+  }
+  &.myRanking {
+    border: 0.07rem solid $rank-red;
+    background: $g1-bottom;
+  }
+  &.myVip {
+    border: 0.07rem solid $norm-lightblue2;
+    background: $norm-emerald;
   }
   .intraId {
     justify-self: start;
@@ -115,4 +101,10 @@
     color: $winner-blue;
     font-weight: 600;
   }
+}
+
+.level {
+  color: $dark-gray;
+  font-weight: 500;
+  font-size: 0.7rem;
 }
