@@ -7,6 +7,8 @@ import Load from 'pages/load';
 // import Login from 'pages/login';
 import WelcomeModal from './modal/event/WelcomeModal';
 import styles from 'styles/Layout/Layout.module.scss';
+import instance from 'utils/axios';
+import { userState } from 'utils/recoil/layout';
 
 interface LoginCheckerProps {
   children: React.ReactNode;
@@ -16,9 +18,22 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [loggedIn, setLoggedIn] = useRecoilState(loginState);
   const [firstVisited, setFirstVisited] = useRecoilState(firstVisitedState);
+  const [user, setUser] = useRecoilState(userState);
+
   const router = useRouter();
   const presentPath = router.asPath;
   const token = presentPath.split('?token=')[1];
+
+  const getUserHandler = async () => {
+    try {
+      const res = await instance.get(`/pingpong/users`);
+      setUser(res?.data);
+      console.log(router.asPath);
+      alert('request ok');
+    } catch (e) {
+      alert('request fail');
+    }
+  };
 
   useEffect(() => {
     if (token) {
@@ -28,6 +43,7 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
     }
     if (localStorage.getItem('42gg-token')) {
       setLoggedIn(true);
+      getUserHandler();
     }
     setIsLoading(false);
   }, []);
@@ -43,9 +59,16 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
   //   </div>
   // );
 
-  return (
-    <div className={styles.appContainer}>
-      <div className={styles.background}>{!isLoading && <Load />}</div>
-    </div>
+  return user.isAdmin === true ? (
+    <>
+      {firstVisited && <WelcomeModal />}
+      {children}
+    </>
+  ) : (
+    <>
+      <div className={styles.appContainer}>
+        <div className={styles.background}>{!isLoading && <Load />}</div>
+      </div>
+    </>
   );
 }
