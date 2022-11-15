@@ -7,8 +7,6 @@ import Load from 'pages/load';
 // import Login from 'pages/login';
 import WelcomeModal from './modal/event/WelcomeModal';
 import styles from 'styles/Layout/Layout.module.scss';
-import instance from 'utils/axios';
-import { userState } from 'utils/recoil/layout';
 
 interface LoginCheckerProps {
   children: React.ReactNode;
@@ -47,10 +45,8 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
   // );
 
   return (
-    <>
-      <div className={styles.appContainer}>
-        <div className={styles.background}>{!isLoading && <Load />}</div>
-      </div>
-    </>
+    <div className={styles.appContainer}>
+      <div className={styles.background}>{!isLoading && <Load />}</div>
+    </div>
   );
 }
