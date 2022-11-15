@@ -42,8 +42,20 @@ export default function RankList({
   };
 
   useEffect(() => {
-    getRankDataHandler();
-  }, [page]);
+    async function waitRankList() {
+      await getRankDataHandler();
+    }
+
+    waitRankList().then(() => {
+      if (isScroll) {
+        window.scrollTo({
+          top: ((myRank[toggleMode] - 1) % 20) * 45,
+          behavior: 'smooth',
+        });
+        setIsScroll(false);
+      }
+    });
+  }, [page, isScroll]);
 
   useEffect(() => {
     page !== 1
@@ -56,16 +68,6 @@ export default function RankList({
       setPage(Math.ceil(myRank[toggleMode] / 20));
     }
   }, [isScroll]);
-
-  useEffect(() => {
-    if (isScroll) {
-      window.scrollTo({
-        top: ((myRank[toggleMode] - 1) % 20) * 45,
-        behavior: 'smooth',
-      });
-      setIsScroll(false);
-    }
-  }, [rank, isScroll]);
 
   const getRankDataHandler = async () => {
     try {
