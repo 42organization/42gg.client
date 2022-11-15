@@ -18,21 +18,10 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [loggedIn, setLoggedIn] = useRecoilState(loginState);
   const [firstVisited, setFirstVisited] = useRecoilState(firstVisitedState);
-  const [user, setUser] = useRecoilState(userState);
 
   const router = useRouter();
   const presentPath = router.asPath;
   const token = presentPath.split('?token=')[1];
-
-  const getUserHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/users`);
-      setUser(res?.data);
-      console.log(router.asPath);
-    } catch (e) {
-      alert('request fail');
-    }
-  };
 
   useEffect(() => {
     if (token) {
@@ -42,7 +31,6 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
     }
     if (localStorage.getItem('42gg-token')) {
       setLoggedIn(true);
-      getUserHandler();
     }
     setIsLoading(false);
   }, []);
@@ -58,12 +46,7 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
   //   </div>
   // );
 
-  return user.isAdmin && loggedIn === true ? (
-    <>
-      {firstVisited && <WelcomeModal />}
-      {children}
-    </>
-  ) : (
+  return (
     <>
       <div className={styles.appContainer}>
         <div className={styles.background}>{!isLoading && <Load />}</div>
