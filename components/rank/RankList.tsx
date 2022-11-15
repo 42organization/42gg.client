@@ -15,11 +15,6 @@ interface RankListProps {
   season?: number;
   isMain?: boolean;
 }
-
-function isRankModeType(arg: RankUser | NormalUser): arg is RankUser {
-  return 'ppp' in arg;
-}
-
 export default function RankList({
   toggleMode,
   season,
@@ -96,6 +91,10 @@ export default function RankList({
       ))}
     </RankListFrame>
   );
+}
+
+function isRankModeType(arg: RankUser | NormalUser): arg is RankUser {
+  return 'ppp' in arg;
 }
 
 function makeUser(user: NormalUser | RankUser) {
