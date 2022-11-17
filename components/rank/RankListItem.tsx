@@ -38,9 +38,7 @@ export default function RankListItem({
     <Link href={`/users/detail?intraId=${intraId}`}>
       <span>
         {intraId}
-        {toggleMode === 'normal' && level && (
-          <span className={styles.level}> ({level})</span>
-        )}
+        {level && <span className={styles.level}> ({level})</span>}
       </span>
     </Link>
   );
