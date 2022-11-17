@@ -3,6 +3,7 @@ import { sleep } from 'utils/sleep';
 import Celebration from './Celebration';
 import styles from 'styles/modal/StatChangeModal.module.scss';
 
+const MAX_LEVEL = 42;
 interface ExpGuageProps {
   stat: { [key: string]: number };
 }
@@ -58,8 +59,7 @@ export default function ExpStat({ stat }: ExpGuageProps) {
         <div className={styles.expWrap}>
           <div className={styles.expString}>
             <div className={styles.expRate}>
-              <span>{currentExp} </span>
-              <span>/ {maxExp}</span>
+              {`EXP : ${currentExp} / ${level === MAX_LEVEL ? maxExp : 'Max'}`}
             </div>
             <div className={styles.increasedExp}>
               <span>+</span>
