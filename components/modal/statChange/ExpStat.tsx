@@ -59,7 +59,9 @@ export default function ExpStat({ stat }: ExpGuageProps) {
         <div className={styles.expWrap}>
           <div className={styles.expString}>
             <div className={styles.expRate}>
-              {`EXP : ${currentExp} / ${level === MAX_LEVEL ? maxExp : 'Max'}`}
+              <span>{`EXP : ${currentExp} / ${
+                level === MAX_LEVEL ? maxExp : 'Max'
+              }`}</span>
             </div>
             <div className={styles.increasedExp}>
               <span>+</span>
