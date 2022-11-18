@@ -3,7 +3,6 @@ import { sleep } from 'utils/sleep';
 import Celebration from './Celebration';
 import styles from 'styles/modal/StatChangeModal.module.scss';
 
-const MAX_LEVEL = 42;
 interface ExpGuageProps {
   stat: { [key: string]: number };
 }
@@ -24,6 +23,7 @@ export default function ExpStat({ stat }: ExpGuageProps) {
   const [addedExp, setAddedExp] = useState<number>(0);
   const [currentExp, setCurrentExp] = useState<number>(beforeExp);
   const [celebrateEvent, setCelebrateEvent] = useState<boolean>(false);
+  const MAX_LEVEL = 42;
 
   useEffect(() => {
     expGaugeAnimation();
