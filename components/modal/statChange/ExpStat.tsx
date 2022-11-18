@@ -23,6 +23,7 @@ export default function ExpStat({ stat }: ExpGuageProps) {
   const [addedExp, setAddedExp] = useState<number>(0);
   const [currentExp, setCurrentExp] = useState<number>(beforeExp);
   const [celebrateEvent, setCelebrateEvent] = useState<boolean>(false);
+  const MAX_LEVEL = 42;
 
   useEffect(() => {
     expGaugeAnimation();
@@ -58,8 +59,9 @@ export default function ExpStat({ stat }: ExpGuageProps) {
         <div className={styles.expWrap}>
           <div className={styles.expString}>
             <div className={styles.expRate}>
-              <span>{currentExp} </span>
-              <span>/ {maxExp}</span>
+              <span>{`EXP : ${currentExp} / ${
+                level === MAX_LEVEL ? maxExp : 'Max'
+              }`}</span>
             </div>
             <div className={styles.increasedExp}>
               <span>+</span>
