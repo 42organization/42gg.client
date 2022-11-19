@@ -22,7 +22,7 @@ export default function RankListFrame({
   const router = useRouter();
   const division: { [key: string]: string[] } = {
     rank: ['순위', 'intraId', '상태메시지', '탁구력'],
-    normal: ['열정', 'intraId (Lv)', '상태메시지', '경험치'],
+    normal: ['순위', 'intraId (Lv)', '상태메시지', '경험치'],
   };
 
   const pageChangeHandler = (pages: number) => {
