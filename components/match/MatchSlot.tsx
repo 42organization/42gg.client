@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { Slot } from 'types/matchTypes';
@@ -15,12 +15,7 @@ interface MatchSlotProps {
   intervalMinute: number;
 }
 
-export default function MatchSlot({
-  type,
-  slot,
-  toggleMode,
-  intervalMinute,
-}: MatchSlotProps) {
+function MatchSlot({ type, slot, toggleMode, intervalMinute }: MatchSlotProps) {
   const setModal = useSetRecoilState(modalState);
   const [currentMatch] = useRecoilState(currentMatchState);
   const { event } = useRecoilValue(liveState);
@@ -86,3 +81,5 @@ export default function MatchSlot({
 function minuiteToStr(min: number) {
   return fillZero(min.toString(), 2);
 }
+
+export default React.memo(MatchSlot);
