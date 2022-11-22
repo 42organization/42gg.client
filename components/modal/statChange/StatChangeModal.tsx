@@ -21,7 +21,9 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
 
   const getExpHandler = async () => {
     try {
-      const res = await instance.get(`/pingpong/games/392/result/rank`);
+      const res = await instance.get(
+        `/pingpong/games/${gameId}/result/${mode}`
+      );
       setStat({ ...res.data });
     } catch (e) {
       setError('KP03');

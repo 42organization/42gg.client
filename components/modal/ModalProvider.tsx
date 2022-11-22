@@ -21,8 +21,7 @@ export default function ModalProvider() {
   const content: { [key: string]: JSX.Element | null } = {
     'MAIN-WELCOME': <WelcomeModal />,
     'MENU-REPORT': <ReportModal />,
-    // 'MENU-LOGOUT': <LogoutModal />,
-    'MENU-LOGOUT': <StatChangeModal />,
+    'MENU-LOGOUT': <LogoutModal />,
     'MATCH-REJECT': <MatchRejectModal />,
     'MATCH-ENROLL': enroll ? <MatchEnrollModal {...enroll} /> : null,
     'MATCH-CANCEL': cancel ? <CancelModal {...cancel} /> : null,
