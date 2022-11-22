@@ -36,6 +36,9 @@ export default function ExpStat({ stat }: ExpGuageProps) {
       setMaxExp(afterMaxExp);
       setLevel(beforeLevel + increasedLevel);
       setCelebrateEvent(true);
+      setTimeout(() => {
+        setPercent(0);
+      }, 100);
     }
   }, [addedExp]);
 
@@ -60,7 +63,7 @@ export default function ExpStat({ stat }: ExpGuageProps) {
           <div className={styles.expString}>
             <div className={styles.expRate}>
               <span>{`EXP : ${currentExp} / ${
-                level === MAX_LEVEL ? maxExp : 'Max'
+                level !== MAX_LEVEL ? maxExp : 'Max'
               }`}</span>
             </div>
             <div className={styles.increasedExp}>
