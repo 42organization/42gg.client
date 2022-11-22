@@ -7,14 +7,8 @@ interface ExpGuageProps {
   stat: { [key: string]: number };
 }
 export default function ExpStat({ stat }: ExpGuageProps) {
-  const {
-    afterMaxExp,
-    beforeExp,
-    beforeLevel,
-    beforeMaxExp,
-    increasedExp,
-    increasedLevel,
-  } = stat;
+  const { afterMaxExp, beforeExp, beforeLevel, beforeMaxExp, increasedExp } =
+    stat;
   const [level, setLevel] = useState<number>(beforeLevel);
   const [maxExp, setMaxExp] = useState<number>(beforeMaxExp);
   const [percent, setPercent] = useState<number>(
@@ -32,9 +26,9 @@ export default function ExpStat({ stat }: ExpGuageProps) {
   useEffect(() => {
     setPercent(getPercent());
     if (currentExp >= maxExp) {
-      setCurrentExp(0);
+      setCurrentExp(maxExp - currentExp);
       setMaxExp(afterMaxExp);
-      setLevel(beforeLevel + increasedLevel);
+      setLevel(level + 1);
       setCelebrateEvent(true);
       setTimeout(() => {
         setPercent(0);
