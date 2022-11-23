@@ -1,19 +1,12 @@
 import { useSetRecoilState } from 'recoil';
 import { Enroll } from 'types/modalTypes';
-import { gameTimeToString } from 'utils/handleTime';
 import { reloadMatchState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/modal/MatchEnrollModal.module.scss';
 
-export default function MatchEnrollModal({
-  slotId,
-  type,
-  mode,
-  startTime,
-  endTime,
-}: Enroll) {
+export default function MatchEnrollModal({ slotId, type, mode }: Enroll) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
@@ -51,13 +44,11 @@ export default function MatchEnrollModal({
       <div className={styles.phrase}>
         <div className={styles.emoji}>🏓</div>
         <div className={styles.time}>
-          {gameTimeToString(startTime)} - {gameTimeToString(endTime)}
-        </div>
-        <div>
-          {mode === 'rank' ? '(랭크전)' : '(일반전)'}
+          {slotId}번 방
           <br />
-          경기에 참여하시겠습니까?
+          슬롯 예약을 확정하시겠습니까 ?
         </div>
+        <div>예약 확정 후 상대를 확인해 주세요 !</div>
       </div>
       <div className={styles.buttons}>
         <div className={styles.negative}>
