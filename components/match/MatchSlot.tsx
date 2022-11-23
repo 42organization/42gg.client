@@ -72,8 +72,9 @@ export default function MatchSlot({
       onClick={enrollHandler}
     >
       <span className={styles.time}>
-        {minuiteToStr(startTime.getMinutes())} -{' '}
-        {minuiteToStr(endTime.getMinutes())}
+        {/* {minuiteToStr(startTime.getMinutes())} -{' '} */}
+        {/* {minuiteToStr(endTime.getMinutes())} */}
+        {slotId}
         {status === 'mytable' && ' 🙋'}
       </span>
       <span className={`${styles.headCount} ${headCount === 0 && styles.plus}`}>

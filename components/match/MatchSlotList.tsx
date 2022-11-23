@@ -21,7 +21,7 @@ export default function MatchSlotList({
 
   return (
     <>
-      <div className={styles.slotHour}>{slotHourIn12}</div>
+      <div className={styles.slotHour}></div>
       <div className={styles.slotGrid}>
         {matchSlots.map((slot) => (
           <MatchSlot

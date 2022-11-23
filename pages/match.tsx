@@ -14,6 +14,7 @@ export default function Match() {
   return (
     <div className={styles.container}>
       <h1 className={`${styles.title} ${content[toggleMode].style}`}>Match</h1>
+      <div className={styles.checkbox}></div>
       <MatchModeWrap toggleMode={toggleMode} setToggleMode={setToggleMode}>
         <MatchBoard toggleMode={toggleMode} type='single' />
       </MatchModeWrap>

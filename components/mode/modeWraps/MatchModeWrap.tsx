@@ -4,6 +4,7 @@ import { MatchMode } from 'types/mainType';
 import { seasonListState } from 'utils/recoil/seasons';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import styles from 'styles/mode/ModeWrap.module.scss';
+import ModeCheckBox from '../modeItems/ModeCheckBox';
 
 interface MatchModeWrapProps {
   children: React.ReactNode;
@@ -26,7 +27,7 @@ export default function MatchModeWrap({
     <div>
       {seasonMode === 'both' && (
         <div className={styles.matchModeWrap}>
-          <ModeToggle
+          <ModeCheckBox
             checked={toggleMode === 'rank'}
             onToggle={modeToggleHandler}
             id={'matchToggle'}
