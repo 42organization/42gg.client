@@ -2,7 +2,7 @@ import { MatchMode } from './mainType';
 
 type MainModal = 'WELCOME';
 
-type MenuModal = 'REPORT' | 'LOGOUT';
+type MenuModal = 'REPORT' | 'LOGOUT' | 'MATCHTRIGGER';
 
 type MatchModal = 'ENROLL' | 'REJECT' | 'CANCEL' | 'MANUAL';
 

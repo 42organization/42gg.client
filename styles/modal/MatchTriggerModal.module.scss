@@ -1,0 +1,44 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modal-container;
+  align-items: stretch;
+}
+
+.title {
+  padding-bottom: 1.5rem;
+  color: white;
+  font-size: 1.8rem;
+  text-align: center;
+  text-shadow: $text-shadow;
+  letter-spacing: 0.1rem;
+}
+
+.slotId {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 15rem;
+  padding: 0.3rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid $pp-blue;
+  border-radius: $small-radius;
+  background: white;
+
+  textarea {
+    resize: none;
+    height: 4rem;
+    padding: 1.5rem 0;
+    border: none;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  :focus {
+    outline: none;
+  }
+}
+
+.buttons {
+  @include select-buttons(5rem);
+}
