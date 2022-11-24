@@ -6,21 +6,16 @@
 }
 
 .check {
-  // display: flex;
   width: 20px;
   height: 20px;
   border: 2px solid #707070;
   position: relative;
-  // align-items:center
 }
 .checking {
-  // content:'✔';
   font-size: 15px;
   width: 10rem;
   height: 1.4rem;
   margin-left: 0.4rem;
-  // text-align: center;
-  // position: absolute;
   left: 0;
   top: 0;
   .checkBoxText {
