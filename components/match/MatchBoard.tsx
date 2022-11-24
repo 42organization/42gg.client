@@ -50,7 +50,7 @@ export default function MatchBoard({ type, checkBoxMode }: MatchBoardProps) {
 
   if (!match) return null;
 
-  const { matchBoards, intervalMinute } = match;
+  const { matchBoards } = match;
 
   if (matchBoards.length === 0)
     return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
@@ -89,8 +89,7 @@ export default function MatchBoard({ type, checkBoxMode }: MatchBoardProps) {
             <div className={styles.matchSlotList} key={index}>
               <MatchSlotList
                 type={type}
-                intervalMinute={intervalMinute}
-                toggleMode={checkBoxMode}
+                checkBoxMode={checkBoxMode}
                 matchSlots={matchSlots}
               />
             </div>

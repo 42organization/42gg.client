@@ -2,7 +2,6 @@ export interface Slot {
   slotId: number;
   status: string;
   headCount: number;
-  time: string;
   mode: string;
 }
 

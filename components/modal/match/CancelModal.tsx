@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Cancel } from 'types/modalTypes';
 import instance from 'utils/axios';
-import { isBeforeMin } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';
 import {
   currentMatchState,
@@ -12,26 +11,16 @@ import {
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/CancelModal.module.scss';
 
-export default function CancelModal({ isMatched, slotId, time }: Cancel) {
+export default function CancelModal({ slotId }: Cancel) {
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const [currentMatch, setCurrentMatch] = useRecoilState(currentMatchState);
-  const cancelLimitTime = 5;
-  const rejectCancel = isBeforeMin(time, cancelLimitTime) && isMatched;
-  const contentType = rejectCancel ? 'reject' : 'cancel';
   const content = {
-    cancel: {
-      emoji: '🤔',
-      main: '해당 경기를\n취소하시겠습니까?',
-      sub: '⚠︎ 매칭이 완료된 경기를 취소하면\n1분 간 새로운 예약이 불가합니다!',
-    },
-    reject: {
-      emoji: '😰',
-      main: '매칭이 완료되어\n경기를 취소할 수 없습니다!!',
-      sub: `경기시작 ${cancelLimitTime}분 전부터는\n경기를 취소할 수 없습니다..`,
-    },
+    emoji: '🤔',
+    main: '해당 경기를\n취소하시겠습니까?',
+    sub: '⚠︎ 매칭이 완료된 경기를 취소하면\n1분 간 새로운 예약이 불가합니다!',
   };
   const cancelResponse: { [key: string]: string } = {
     SUCCESS: '경기가 성공적으로 취소되었습니다.',
@@ -79,18 +68,12 @@ export default function CancelModal({ isMatched, slotId, time }: Cancel) {
   return (
     <div className={styles.container}>
       <div className={styles.phrase}>
-        <div className={styles.emoji}>{content[contentType].emoji}</div>
-        {content[contentType].main}
-        {(rejectCancel || (!rejectCancel && currentMatch.isMatched)) && (
-          <div className={styles.subContent}>{content[contentType].sub}</div>
-        )}
+        <div className={styles.emoji}>{content.emoji}</div>
+        {content.main}
+        {<div className={styles.subContent}>{content.sub}</div>}
       </div>
       <div className={styles.buttons}>
-        {rejectCancel ? (
-          <div className={styles.positive}>
-            <input onClick={onReturn} type='button' value='확인' />
-          </div>
-        ) : (
+        {
           <>
             <div className={styles.negative}>
               <input onClick={onReturn} type='button' value='아니오' />
@@ -99,7 +82,7 @@ export default function CancelModal({ isMatched, slotId, time }: Cancel) {
               <input onClick={onCancel} type='button' value='예' />
             </div>
           </>
-        )}
+        }
       </div>
     </div>
   );

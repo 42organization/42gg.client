@@ -19,9 +19,7 @@ type ModalName =
   | `FIXED-${FixedModal}`;
 
 export interface Cancel {
-  isMatched: boolean;
   slotId: number;
-  time: string;
 }
 
 export interface Enroll {
