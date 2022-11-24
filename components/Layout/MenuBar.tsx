@@ -78,6 +78,15 @@ export default function MenuBar() {
               {/*<div onClick={() => setModal({ modalName: 'MENU-LOGOUT' })}>*/}
               {/*  로그아웃*/}
               {/*</div>*/}
+              {isAdmin && (
+                <>
+                  <div
+                    onClick={() => setModal({ modalName: 'MENU-MATCHTRIGGER' })}
+                  >
+                    🛎️ 매치 시작
+                  </div>
+                </>
+              )}
             </div>
           </nav>
         </div>
