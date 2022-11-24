@@ -75,9 +75,9 @@ export default function MenuBar() {
                   <div onClick={goToAdminPage}>😎 관리자</div>
                 </>
               )}
-              <div onClick={() => setModal({ modalName: 'MENU-LOGOUT' })}>
-                로그아웃
-              </div>
+              {/*<div onClick={() => setModal({ modalName: 'MENU-LOGOUT' })}>*/}
+              {/*  로그아웃*/}
+              {/*</div>*/}
             </div>
           </nav>
         </div>
