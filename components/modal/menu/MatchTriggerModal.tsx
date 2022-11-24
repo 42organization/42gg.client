@@ -31,7 +31,7 @@ export default function MatchTriggerModal() {
   const matchTriggerHandler = async () => {
     if (slotId.slotId) {
       try {
-        await instance.post('/pingpong/matchtrigger', slotId);
+        await instance.post('/pingpong/admin/matchtrigger', slotId);
         setModal({ modalName: null });
         resetOpenMenuBar();
         alert('매치 시작 요청 완료 !');
