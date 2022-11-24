@@ -11,10 +11,10 @@ import styles from 'styles/match/MatchBoard.module.scss';
 
 interface MatchBoardProps {
   type: string;
-  toggleMode: MatchMode;
+  checkBoxMode: MatchMode;
 }
 
-export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
+export default function MatchBoard({ type, checkBoxMode }: MatchBoardProps) {
   const [match, setMatch] = useState<Match | null>(null);
   const [spinReloadButton, setSpinReloadButton] = useState<boolean>(false);
   const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
@@ -24,7 +24,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
 
   useEffect(() => {
     setReloadMatch(true);
-  }, [toggleMode]);
+  }, [checkBoxMode]);
 
   useEffect(() => {
     currentRef.current?.scrollIntoView({
@@ -40,7 +40,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   const getMatchHandler = async () => {
     try {
       const res = await instance.get(
-        `/pingpong/match/tables/${1}/${toggleMode}/${type}`
+        `/pingpong/match/tables/${1}/${checkBoxMode}/${type}`
       );
       setMatch(res?.data);
     } catch (e) {
@@ -55,12 +55,11 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   if (matchBoards.length === 0)
     return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
 
-  // const lastSlotTime = matchBoards[matchBoards.length - 1][0].time;
-  // const lastSlotHour = new Date(lastSlotTime).getHours();
-  // const currentHour = new Date().getHours();
-
   const openManual = () => {
-    setModal({ modalName: 'MATCH-MANUAL', manual: { toggleMode: toggleMode } });
+    setModal({
+      modalName: 'MATCH-MANUAL',
+      manual: { toggleMode: checkBoxMode },
+    });
   };
 
   const reloadMatchHandler = () => {
@@ -70,13 +69,6 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
     }, 1000);
     setReloadMatch(true);
   };
-
-  // const getScrollCurrentRef = (slotsHour: number) => {
-  // if (currentHour === lastSlotHour && currentHour === slotsHour)
-  // return currentRef;
-  // if (slotsHour === currentHour + 1) return currentRef;
-  // return null;
-  // };
 
   return (
     <div>
@@ -91,24 +83,14 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
           &#8635;
         </button>
       </div>
-      {/* {currentHour > lastSlotHour && ( */}
-      {/* <div className={styles.notice}>
-          ❌ 오늘의 매치가 모두 끝났습니다! ❌
-        </div> */}
-      {/* )} */}
       <div className={styles.matchBoard}>
         {matchBoards.map((matchSlots, index) => {
-          // const slotTime = new Date(matchSlots[0].time);
           return (
-            <div
-              className={styles.matchSlotList}
-              key={index}
-              // ref={getScrollCurrentRef(slotTime.getHours())}
-            >
+            <div className={styles.matchSlotList} key={index}>
               <MatchSlotList
                 type={type}
                 intervalMinute={intervalMinute}
-                toggleMode={toggleMode}
+                toggleMode={checkBoxMode}
                 matchSlots={matchSlots}
               />
             </div>

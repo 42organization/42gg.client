@@ -2,25 +2,24 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { seasonListState } from 'utils/recoil/seasons';
-import ModeToggle from 'components/mode/modeItems/ModeToggle';
-import styles from 'styles/mode/ModeWrap.module.scss';
 import ModeCheckBox from '../modeItems/ModeCheckBox';
+import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface MatchModeWrapProps {
   children: React.ReactNode;
-  toggleMode: MatchMode;
-  setToggleMode: React.Dispatch<React.SetStateAction<MatchMode>>;
+  checkBoxMode: MatchMode;
+  setCheckBoxMode: React.Dispatch<React.SetStateAction<MatchMode>>;
 }
 
 export default function MatchModeWrap({
   children,
-  toggleMode,
-  setToggleMode,
+  checkBoxMode,
+  setCheckBoxMode,
 }: MatchModeWrapProps) {
   const { seasonMode } = useRecoilValue(seasonListState);
 
-  const modeToggleHandler = () => {
-    setToggleMode((mode) => (mode === 'rank' ? 'normal' : 'rank'));
+  const modeCheckBoxHandler = () => {
+    setCheckBoxMode((mode) => (mode === 'rank' ? 'normal' : 'rank'));
   };
 
   return (
@@ -28,15 +27,14 @@ export default function MatchModeWrap({
       {seasonMode === 'both' && (
         <div className={styles.matchModeWrap}>
           <ModeCheckBox
-            checked={toggleMode === 'rank'}
-            onToggle={modeToggleHandler}
-            id={'matchToggle'}
-            // text={toggleMode === 'rank' ? '랭크' : '일반'}
+            checked={checkBoxMode === 'challenge'}
+            onCheckBox={modeCheckBoxHandler}
+            id={'matchCheckBox'}
           />
         </div>
       )}
       {React.cloneElement(children as React.ReactElement, {
-        toggleMode: toggleMode,
+        toggleMode: checkBoxMode,
       })}
     </div>
   );

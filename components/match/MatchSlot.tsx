@@ -4,7 +4,6 @@ import { MatchMode } from 'types/mainType';
 import { Slot } from 'types/matchTypes';
 import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
-import { fillZero } from 'utils/handleTime';
 import { currentMatchState } from 'utils/recoil/match';
 import styles from 'styles/match/MatchSlot.module.scss';
 
@@ -53,8 +52,6 @@ function MatchSlot({ type, slot, toggleMode, intervalMinute }: MatchSlotProps) {
           slotId,
           type,
           mode: toggleMode,
-          startTime,
-          endTime,
         },
       });
     }
@@ -67,8 +64,6 @@ function MatchSlot({ type, slot, toggleMode, intervalMinute }: MatchSlotProps) {
       onClick={enrollHandler}
     >
       <span className={styles.time}>
-        {/* {minuiteToStr(startTime.getMinutes())} -{' '} */}
-        {/* {minuiteToStr(endTime.getMinutes())} */}
         {slotId}
         {status === 'mytable' && ' 🙋'}
       </span>
@@ -77,10 +72,6 @@ function MatchSlot({ type, slot, toggleMode, intervalMinute }: MatchSlotProps) {
       </span>
     </button>
   );
-}
-
-function minuiteToStr(min: number) {
-  return fillZero(min.toString(), 2);
 }
 
 export default React.memo(MatchSlot);

@@ -2,16 +2,14 @@ import styles from 'styles/mode/ModeCheckBox.module.scss';
 
 interface ModeCheckBoxProps {
   id: string;
-  // text: string;
   checked: boolean;
-  onToggle: () => void;
+  onCheckBox: () => void;
 }
 
 export default function ModeCheckBox({
   id,
-  // text,
   checked,
-  onToggle,
+  onCheckBox,
 }: ModeCheckBoxProps) {
   return (
     <div className={styles.checkBox}>
@@ -20,11 +18,10 @@ export default function ModeCheckBox({
         id={id}
         className={styles.check}
         checked={checked}
-        onChange={onToggle}
+        onChange={onCheckBox}
       />
       <label htmlFor={id} className={styles.checking}>
         <span className={styles.checkBoxText}>42gg와 함께하기</span>
-        {/* <span className={styles.toggleButton}></span> */}
       </label>
     </div>
   );
