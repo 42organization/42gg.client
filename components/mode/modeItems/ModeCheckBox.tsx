@@ -1,8 +1,8 @@
-import styles from 'styles/mode/ModeToggle.module.scss';
+import styles from 'styles/mode/ModeCheckBox.module.scss';
 
 interface ModeCheckBoxProps {
   id: string;
-  text: string;
+  // text: string;
   checked: boolean;
   onToggle: () => void;
 }
@@ -10,7 +10,7 @@ interface ModeCheckBoxProps {
 export default function ModeCheckBox({
   id,
   // text,
-  // checked,
+  checked,
   onToggle,
 }: ModeCheckBoxProps) {
   return (
@@ -19,7 +19,7 @@ export default function ModeCheckBox({
         type='checkbox'
         id={id}
         className={styles.check}
-        // checked={checked}
+        checked={checked}
         onChange={onToggle}
       />
       <label htmlFor={id} className={styles.checking}>

@@ -31,7 +31,7 @@ export default function MatchModeWrap({
             checked={toggleMode === 'rank'}
             onToggle={modeToggleHandler}
             id={'matchToggle'}
-            text={toggleMode === 'rank' ? '랭크' : '일반'}
+            // text={toggleMode === 'rank' ? '랭크' : '일반'}
           />
         </div>
       )}
