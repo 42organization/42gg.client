@@ -19,7 +19,7 @@ export default function MatchModeWrap({
   const { seasonMode } = useRecoilValue(seasonListState);
 
   const modeCheckBoxHandler = () => {
-    setCheckBoxMode((mode) => (mode === 'rank' ? 'normal' : 'rank'));
+    setCheckBoxMode((mode) => (mode === 'rank' ? 'challenge' : 'rank'));
   };
 
   return (
