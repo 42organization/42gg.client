@@ -2,14 +2,15 @@ import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { reloadMatchState } from 'utils/recoil/match';
-import CancelModal from './match/CancelModal';
-import EditProfileModal from './profile/EditProfileModal';
-import LogoutModal from './menu/LogoutModal';
-import MatchEnrollModal from './match/MatchEnrollModal';
-import MatchManualModal from './match/MatchManualModal';
-import MatchRejectModal from './match/MatchRejectModal';
-import ReportModal from './menu/ReportModal';
 import WelcomeModal from './event/WelcomeModal';
+import ReportModal from './menu/ReportModal';
+import LogoutModal from './menu/LogoutModal';
+import MatchTriggerModal from './menu/MatchTriggerModal';
+import MatchRejectModal from './match/MatchRejectModal';
+import MatchEnrollModal from './match/MatchEnrollModal';
+import CancelModal from './match/CancelModal';
+import MatchManualModal from './match/MatchManualModal';
+import EditProfileModal from './profile/EditProfileModal';
 import AfterGameModal from './afterGame/AfterGameModal';
 import StatChangeModal from './statChange/StatChangeModal';
 import styles from 'styles/modal/Modal.module.scss';
@@ -22,6 +23,7 @@ export default function ModalProvider() {
     'MAIN-WELCOME': <WelcomeModal />,
     'MENU-REPORT': <ReportModal />,
     'MENU-LOGOUT': <LogoutModal />,
+    'MENU-MATCHTRIGGER': <MatchTriggerModal />,
     'MATCH-REJECT': <MatchRejectModal />,
     'MATCH-ENROLL': enroll ? <MatchEnrollModal {...enroll} /> : null,
     'MATCH-CANCEL': cancel ? <CancelModal {...cancel} /> : null,
