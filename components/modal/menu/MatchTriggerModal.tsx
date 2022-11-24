@@ -7,26 +7,25 @@ import instance from 'utils/axios';
 import styles from '/styles/modal/MatchTriggerModal.module.scss';
 
 interface SlotId {
-  slotId: string;
+  slotId: number;
 }
 
 export default function MatchTriggerModal() {
   const [slotId, setSlotId] = useState<SlotId>({
-    slotId: '',
+    slotId: 0,
   });
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
   const resetOpenMenuBar = useResetRecoilState(openMenuBarState);
 
   const inputChangeHandler = ({
-    target: { name, value },
-  }:
-    | React.ChangeEvent<HTMLTextAreaElement>
-    | React.ChangeEvent<HTMLInputElement>) => {
-    setSlotId((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    target: { value },
+  }: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (isNaN(Number(value))) {
+      setSlotId({ slotId: 0 });
+    } else {
+      setSlotId({ slotId: Number(value) });
+    }
   };
 
   const matchTriggerHandler = async () => {
@@ -40,7 +39,7 @@ export default function MatchTriggerModal() {
         setError('RJ01');
       }
     } else {
-      alert('슬롯 아이디를 입력해 주세요 !');
+      alert('슬롯 아이디(숫자)를 입력해 주세요 !');
     }
   };
 
