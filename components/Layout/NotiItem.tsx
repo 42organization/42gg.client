@@ -13,13 +13,13 @@ export default function NotiItem({ data }: NotiItemProps) {
     [key: string]: { [key: string]: string | JSX.Element | undefined };
   } = {
     imminent: {
-      title: '경기 준비',
-      content: MakeImminentContent(data.enemyTeam),
+      title: '삭제 예정',
+      content: '삭제될 타입',
     },
     announce: { title: '공 지', content: makeAnnounceContent(data.message) },
     matched: {
       title: '매칭 성사',
-      content: makeContent(data.id, '번 방 신청한 매칭이 성사되었습니다.'),
+      content: MakeMatchedContent(data.enemyTeam),
     },
     canceledbyman: {
       title: '매칭 취소',
@@ -64,7 +64,7 @@ function makeAnnounceContent(message: string | undefined) {
   );
 }
 
-function MakeImminentContent(enemyTeam: string[] | undefined) {
+function MakeMatchedContent(enemyTeam: string[] | undefined) {
   const setOpenNotiBar = useSetRecoilState(openNotiBarState);
   const makeEnemyUsers = (enemyTeam: string[]) => {
     return enemyTeam.map((intraId: string, i: number) => (
