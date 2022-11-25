@@ -7,7 +7,6 @@ interface NotiItemProps {
 
 export default function NotiItem({ data }: NotiItemProps) {
   const date = data.createdAt.slice(5, 16).replace('T', ' ');
-  console.log(data);
   const noti: {
     [key: string]: { [key: string]: string | JSX.Element | undefined };
   } = {
