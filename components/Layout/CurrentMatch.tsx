@@ -15,7 +15,7 @@ export default function CurrentMatch() {
   const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
-  const matchingMessage = time && makeMessage(time, isMatched);
+  const matchingMessage = time && makeMessage(slotId, isMatched);
   const blockCancelButton = isBeforeMin(time, 5) && enemyTeam.length;
   const presentPath = useRouter().asPath;
 
@@ -66,17 +66,16 @@ export default function CurrentMatch() {
   );
 }
 
-function makeMessage(time: string, isMatched: boolean) {
-  const formattedTime = gameTimeToString(time);
+function makeMessage(slotId: number, isMatched: boolean) {
   return (
     <div className={styles.message}>
-      <span>{formattedTime}</span>
+      <span>{slotId}</span>
       <span>
         {isMatched ? (
-          '에 경기가 시작됩니다!'
+          '번 방 경기가 시작됩니다!'
         ) : (
           <>
-            <span> 참가자 기다리는 중</span>
+            <span>번 방 참가자 기다리는 중</span>
             <span className={styles.waitUpDown}>
               <span className={styles.span1}>.</span>
               <span className={styles.span2}>.</span>
