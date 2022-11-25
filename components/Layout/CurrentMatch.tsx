@@ -6,17 +6,15 @@ import instance from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { reloadMatchState, currentMatchState } from 'utils/recoil/match';
-import { gameTimeToString, isBeforeMin } from 'utils/handleTime';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 export default function CurrentMatch() {
-  const [{ isMatched, enemyTeam, time, slotId }, setCurrentMatch] =
+  const [{ isMatched, enemyTeam, slotId }, setCurrentMatch] =
     useRecoilState(currentMatchState);
   const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
-  const matchingMessage = time && makeMessage(slotId, isMatched);
-  const blockCancelButton = isBeforeMin(time, 5) && enemyTeam.length;
+  const matchingMessage = slotId && makeMessage(slotId, isMatched);
   const presentPath = useRouter().asPath;
 
   useEffect(() => {
@@ -47,19 +45,11 @@ export default function CurrentMatch() {
           <div className={styles.icon}> ⏰ </div>
           <div className={styles.messageWrapper}>
             {matchingMessage}
-            <EnemyTeam enemyTeam={enemyTeam} time={time} />
+            <EnemyTeam enemyTeam={enemyTeam} slotId={slotId} />
           </div>
         </div>
-        <div
-          className={
-            blockCancelButton ? styles.blockCancelButton : styles.cancelButton
-          }
-        >
-          <input
-            type='button'
-            onClick={onCancel}
-            value={blockCancelButton ? '취소불가' : '취소하기'}
-          />
+        <div className={styles.cancelButton}>
+          <input type='button' onClick={onCancel} value={'취소하기'} />
         </div>
       </div>
     </>
@@ -89,16 +79,16 @@ function makeMessage(slotId: number, isMatched: boolean) {
 }
 interface EnemyTeam {
   enemyTeam: string[];
-  time: string;
+  slotId: number;
 }
 
-function EnemyTeam({ enemyTeam, time }: EnemyTeam) {
-  if (!isBeforeMin(time, 5) || enemyTeam.length === 0) return <></>;
+function EnemyTeam({ enemyTeam, slotId }: EnemyTeam) {
+  if (!slotId || enemyTeam.length === 0) return <></>;
   const enemyUsers = enemyTeam.map((intraId, index) => (
     <span key={intraId} id={styles.enemyUsers}>
       <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
       {index < enemyTeam.length - 1 ? ', ' : ''}
     </span>
   ));
-  return <div className={styles.enemyTeam}> 상대팀 : {enemyUsers}</div>;
+  return <div className={styles.enemyTeam}> 상대 : {enemyUsers}</div>;
 }
