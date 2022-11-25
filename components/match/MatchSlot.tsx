@@ -56,7 +56,7 @@ function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
       disabled={status === 'close'}
       onClick={enrollHandler}
     >
-      <span className={styles.time}>
+      <span className={styles.slotId}>
         {slotId}
         {status === 'mytable' && ' 🙋'}
       </span>
