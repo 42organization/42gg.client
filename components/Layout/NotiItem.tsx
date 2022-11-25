@@ -1,6 +1,8 @@
+import Link from 'next/link';
+import { useSetRecoilState } from 'recoil';
 import { Noti } from 'types/notiTypes';
+import { openNotiBarState } from 'utils/recoil/layout';
 import styles from 'styles/Layout/NotiItem.module.scss';
-
 interface NotiItemProps {
   data: Noti;
 }
@@ -12,7 +14,7 @@ export default function NotiItem({ data }: NotiItemProps) {
   } = {
     imminent: {
       title: '경기 준비',
-      content: makeContent(data.id, '번 방 경기를 준비하세요.'),
+      content: MakeImminentContent(data.enemyTeam),
     },
     announce: { title: '공 지', content: makeAnnounceContent(data.message) },
     matched: {
@@ -59,5 +61,20 @@ function makeAnnounceContent(message: string | undefined) {
       {content} {'=>'}
       <span onClick={() => window.open(`https${url}`)}>{linkedContent}</span>
     </>
+  );
+}
+
+function MakeImminentContent(enemyTeam: string[] | undefined) {
+  const setOpenNotiBar = useSetRecoilState(openNotiBarState);
+  const makeEnemyUsers = (enemyTeam: string[]) => {
+    return enemyTeam.map((intraId: string, i: number) => (
+      <span key={intraId} onClick={() => setOpenNotiBar(false)}>
+        <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
+        {enemyTeam && i < enemyTeam.length - 1 ? ', ' : ''}
+      </span>
+    ));
+  };
+  return (
+    <>{enemyTeam && <>{makeEnemyUsers(enemyTeam)}님과 경기를 준비하세요!</>}</>
   );
 }
