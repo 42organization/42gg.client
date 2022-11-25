@@ -90,6 +90,10 @@
 
 <a href="https://github.com/pearpearB">배재영 @jabae</a>
 
+<a href="https://github.com/raehy19">정래현 @rjeong</a>
+
+<a href="https://github.com/HyeongwooIM">임형우 @him</a>
+
 <!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
