@@ -1,0 +1,13 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modal-container;
+}
+
+.phrase {
+  @include modal-phrase;
+}
+
+.buttons {
+  @include select-buttons(6rem);
+}

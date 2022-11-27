@@ -4,7 +4,7 @@ type MainModal = 'WELCOME';
 
 type MenuModal = 'REPORT' | 'LOGOUT' | 'MATCHTRIGGER';
 
-type MatchModal = 'ENROLL' | 'REJECT' | 'CANCEL' | 'MANUAL';
+type MatchModal = 'ENROLL' | 'REJECT' | 'CANCEL' | 'MANUAL' | 'CHALLENGE';
 
 type UserModal = 'PROFILE_EDIT';
 
@@ -28,6 +28,12 @@ export interface Enroll {
   mode?: MatchMode;
 }
 
+export interface Challenge {
+  slotId: number;
+  type: string;
+  mode?: MatchMode;
+}
+
 export interface Exp {
   gameId?: number;
   mode?: MatchMode | null;
@@ -42,6 +48,7 @@ export interface Modal {
   manual?: Manual;
   cancel?: Cancel;
   enroll?: Enroll;
+  challenge?: Challenge;
   exp?: Exp;
   gameId?: number;
 }
