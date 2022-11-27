@@ -17,7 +17,7 @@ import styles from 'styles/modal/Modal.module.scss';
 import MatchChallengeModal from './match/MatchChallengeModal';
 
 export default function ModalProvider() {
-  const [{ modalName, cancel, enroll, challenge, manual, exp }, setModal] =
+  const [{ modalName, cancel, enroll, challenge, exp }, setModal] =
     useRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const content: { [key: string]: JSX.Element | null } = {
@@ -31,7 +31,7 @@ export default function ModalProvider() {
       <MatchChallengeModal {...challenge} />
     ) : null,
     'MATCH-CANCEL': cancel ? <CancelModal {...cancel} /> : null,
-    'MATCH-MANUAL': manual ? <MatchManualModal {...manual} /> : null,
+    'MATCH-MANUAL': <MatchManualModal />,
     'USER-PROFILE_EDIT': <EditProfileModal />,
     'FIXED-AFTER_GAME': <AfterGameModal />,
     'FIXED-STAT': <StatChangeModal {...exp} />,

@@ -39,13 +39,8 @@ export interface Exp {
   mode?: MatchMode | null;
 }
 
-export interface Manual {
-  toggleMode: MatchMode;
-}
-
 export interface Modal {
   modalName: ModalName;
-  manual?: Manual;
   cancel?: Cancel;
   enroll?: Enroll;
   challenge?: Challenge;
