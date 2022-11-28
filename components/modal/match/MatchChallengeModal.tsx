@@ -39,10 +39,13 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
       detail: '상세 정보1',
     },
     {
-      intraId: 'intraID2',
-      nick: 'nickname2',
+      intraId: 'donghyuk',
+      nick: '42gg의 성시경',
       imageUrl: fallBack,
-      detail: '상세 정보2',
+      detail:
+        '😵‍💫 막걸리를 좋아함\n' +
+        '🧨 스매싱을 날릴때 주변을 폭파함\n' +
+        '그러나 오늘은 컨디션이 좋지 않음',
     },
     {
       intraId: 'intraID3',
@@ -59,12 +62,10 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
   const getOpponents = async () => {
     try {
       const res = await instance.get(`/pingpong/match/opponent`);
-      console.log(res);
       setOpponents(res?.data);
     } catch {
       // setError('RJ03');
     }
-    console.log(opponents);
   };
 
   const onEnroll = async () => {

@@ -1,11 +1,12 @@
 @import 'styles/common.scss';
 
 .opponentCard {
-  box-sizing: border-box;
+  width: 20rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   background: rgba(255, 255, 255, 0.4);
+  border: rgba(0, 0, 0, 0) solid 0.05rem;
   border-radius: 0.5rem;
   margin: 0.5rem 0.1rem;
   padding: 0.3rem;
@@ -13,18 +14,19 @@
 
 .cardInfo {
   display: flex;
+  max-width: 14rem;
   flex-direction: column;
-  margin: 0 1rem;
+  margin: 0 0.5rem;
 }
 
 .userImage {
-  @include userImage(5rem);
+  @include userImage(4rem);
 }
 
 .intraId {
   margin: 0.5rem;
   color: white;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-family: $title-font;
   text-shadow: $text-shadow, 0.2rem 0.2rem 0 $pp-red;
   letter-spacing: 0.1rem;
@@ -32,7 +34,7 @@
 
 .isSelected {
   background: rgba(100, 100, 100, 0.4);
-  border: $pp-red solid 1px;
+  border: $pp-red solid 0.05rem;
 }
 
 .cardTitle {
@@ -41,9 +43,14 @@
 }
 
 .nick {
-  margin: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.7rem;
+  margin: 0.2rem;
 }
 
 .detail {
-  margin: 0.5rem;
+  font-size: 0.7rem;
+  margin: 0.2rem;
 }

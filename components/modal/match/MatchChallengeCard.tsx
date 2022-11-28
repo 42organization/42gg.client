@@ -23,8 +23,7 @@ export default function MatchChallengeCard({
   const selectHandler = () => {
     setSelectedOpponent(opponent);
   };
-  console.log('selected oppo :', selectedOpponent);
-  console.log('opponent', opponent);
+
   return (
     <div
       className={`${styles.opponentCard} ${
@@ -34,9 +33,9 @@ export default function MatchChallengeCard({
       }`}
       onClick={selectHandler}
     >
-      <span className={styles.userImage}>
+      <div className={styles.userImage}>
         <Image src={opponent.imageUrl} layout={'fill'}></Image>
-      </span>
+      </div>
       <div className={styles.cardInfo}>
         <div className={styles.cardTitle}>
           <span className={styles.intraId}>{opponent.intraId}</span>

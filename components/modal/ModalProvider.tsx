@@ -45,7 +45,6 @@ export default function ModalProvider() {
     (document.body.style.overflow = modalName ? 'hidden' : 'unset');
 
   const closeModalHandler = (e: React.MouseEvent) => {
-    console.log(modalName);
     if (modalName?.split('-')[0] === 'FIXED') return;
     if (modalName?.split('-')[1] === 'CHALLENGE') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
