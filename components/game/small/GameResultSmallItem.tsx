@@ -19,13 +19,13 @@ function GameResultSmallItem({ game }: GameResultSmallItemProps) {
 			${mode === 'normal' ? styles.normal : styles.rank}`}
       onClick={() => setClickedItemId(gameId)}
     >
-      <GameResultSmallTeam team={team1} userLeft={true} />
+      <GameResultSmallTeam team={team1} position={'Left'} />
       <GameResultSmallScore
         mode={mode}
         scoreTeam1={team1.score}
         scoreTeam2={team2.score}
       />
-      <GameResultSmallTeam team={team2} userLeft={false} />
+      <GameResultSmallTeam team={team2} position={'Right'} />
     </div>
   );
 }

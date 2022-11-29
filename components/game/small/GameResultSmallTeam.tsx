@@ -1,37 +1,28 @@
-import Image from 'next/image';
-import { useState } from 'react';
 import { RankResult } from 'types/gameTypes';
-import fallBack from 'public/image/fallBackSrc.jpeg';
+import PlayerImg from 'components/PlayerImg';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultSmallTeamProps {
   team: RankResult;
-  userLeft: boolean;
+  position: string;
 }
 
 export default function GameResultSmallTeam({
   team,
-  userLeft,
+  position,
 }: GameResultSmallTeamProps) {
-  const [imgError, setImgError] = useState(false);
   return (
     <div className={styles.smallTeam}>
-      <div className={userLeft ? styles.smallLeft : styles.smallRight}>
-        <span className={styles.userImage}>
-          {team.players.map((player, index) => (
-            <Image
-              key={index}
-              src={imgError ? fallBack : player.userImageUri}
-              alt='prfImg'
-              layout='fill'
-              objectFit='cover'
-              sizes='20vw'
-              quality='20'
-              unoptimized={imgError}
-              onError={() => setImgError(true)}
-            />
-          ))}
-        </span>
+      <div className={styles[position]}>
+        {team.players.map((player, index) => (
+          <PlayerImg
+            key={index}
+            keyNum={index}
+            src={player.userImageUri}
+            styleName={'gameResultSmall' + position}
+            size={20}
+          />
+        ))}
         <span>
           {team.players.map((player) => (
             <div key={player.intraId}>{player.intraId}</div>
