@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
   openMenuBarState,
@@ -10,10 +9,10 @@ import {
 } from 'utils/recoil/layout';
 import MenuBar from './MenuBar';
 import NotiBar from './NotiBar';
+import PlayerImage from 'components/PlayerImage';
 import { FiMenu } from 'react-icons/fi';
 import { BsMegaphone } from 'react-icons/bs';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
-import fallBack from 'public/image/fallBackSrc.jpeg';
 import styles from 'styles/Layout/Header.module.scss';
 
 export default function Header() {
@@ -21,7 +20,6 @@ export default function Header() {
   const [live, setLive] = useRecoilState(liveState);
   const [openMenuBar, setOpenMenuBar] = useRecoilState(openMenuBarState);
   const [openNotiBar, setOpenNotiBar] = useRecoilState(openNotiBarState);
-  const [imgError, setImgError] = useState(false);
 
   const openMenuBarHandler = () => {
     setOpenMenuBar(!openMenuBar);
@@ -72,20 +70,13 @@ export default function Header() {
             )}
           </div>
           <Link href={`/users/detail?intraId=${user.intraId}`}>
-            <div className={styles.userImage}>
-              {user.userImageUri && (
-                <Image
-                  src={imgError ? fallBack : user.userImageUri}
-                  alt='prfImg'
-                  layout='fill'
-                  objectFit='cover'
-                  sizes='20vw'
-                  quality='20'
-                  unoptimized={imgError}
-                  onError={() => setImgError(true)}
-                />
-              )}
-            </div>
+            <a>
+              <PlayerImage
+                src={user.userImageUri}
+                styleName={'header'}
+                size={20}
+              />
+            </a>
           </Link>
         </div>
       </div>

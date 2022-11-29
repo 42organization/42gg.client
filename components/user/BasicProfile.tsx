@@ -1,24 +1,24 @@
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
 import { profileState } from 'utils/recoil/user';
 import { userState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
-import fallBack from 'public/image/fallBackSrc.jpeg';
+import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/user/Profile.module.scss';
 
 interface ProfileProps {
-  intraId: string;
+  profileId: string;
 }
 
-export default function BasicProfile({ intraId }: ProfileProps) {
+export default function BasicProfile({ profileId }: ProfileProps) {
   const user = useRecoilValue(userState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const [
     {
+      intraId,
       userImageUri,
       racketType,
       statusMessage,
@@ -29,7 +29,6 @@ export default function BasicProfile({ intraId }: ProfileProps) {
     },
     setProfile,
   ] = useRecoilState(profileState);
-  const [imgError, setImgError] = useState(false);
   const MAX_LEVEL = 42;
 
   useEffect(() => {
@@ -38,9 +37,8 @@ export default function BasicProfile({ intraId }: ProfileProps) {
 
   const getBasicProfileHandler = async () => {
     try {
-      const res = await instance.get(`/pingpong/users/${intraId}/detail`);
+      const res = await instance.get(`/pingpong/users/${profileId}/detail`);
       setProfile(res?.data);
-      setImgError(false);
     } catch (e) {
       setError('SJ03');
     }
@@ -53,22 +51,9 @@ export default function BasicProfile({ intraId }: ProfileProps) {
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
-        <div className={styles.userImage}>
-          <div>
-            {userImageUri && (
-              <Image
-                src={imgError ? fallBack : userImageUri}
-                alt='prfImg'
-                layout='fill'
-                objectFit='cover'
-                sizes='30vw'
-                quality='30'
-                unoptimized={imgError}
-                onError={() => setImgError(true)}
-              />
-            )}
-          </div>
-        </div>
+        {intraId && (
+          <PlayerImage src={userImageUri} styleName={'profile'} size={30} />
+        )}
         <div className={styles.levelRacketWrap}>
           <div className={styles.level}>Lv. {level}</div>
           <div className={styles.exp}>
@@ -94,12 +79,12 @@ export default function BasicProfile({ intraId }: ProfileProps) {
       <div className={styles.bottomContainer}>
         <div className={styles.statusMessage}>
           <div className={styles.messaage}>
-            {user.intraId === intraId && statusMessage.length === 0
+            {user.intraId === profileId && statusMessage.length === 0
               ? '상태메시지를 입력해보세요!'
               : statusMessage}
           </div>
           <div className={styles.buttons}>
-            {user.intraId === intraId && (
+            {user.intraId === profileId && (
               <div className={styles.positive}>
                 <input type='button' onClick={startEditHandler} value='edit' />
               </div>

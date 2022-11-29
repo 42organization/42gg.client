@@ -5,7 +5,7 @@ import GameResult from 'components/game/GameResult';
 import RankProfile from 'components/user/RankProfile';
 import styles from 'styles/user/user.module.scss';
 
-export default function user() {
+export default function User() {
   const router = useRouter();
   const { intraId } = router.query;
 
@@ -14,8 +14,8 @@ export default function user() {
       {typeof intraId === 'string' && (
         <div key={intraId}>
           <h1 className={styles.title}>{intraId}</h1>
-          <BasicProfile intraId={intraId} />
-          <RankProfile intraId={intraId} />
+          <BasicProfile profileId={intraId} />
+          <RankProfile profileId={intraId} />
           <Link
             href={{
               pathname: '/game',

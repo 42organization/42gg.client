@@ -1,9 +1,7 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import router from 'next/router';
-import { useState } from 'react';
 import { RankResult, RankPlayer, NormalPlayer } from 'types/gameTypes';
-import fallBack from 'public/image/fallBackSrc.jpeg';
+import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultBigTeamProps {
@@ -17,40 +15,29 @@ export function isRankPlayerType(
 }
 
 export default function GameResultBigTeam({ team }: GameResultBigTeamProps) {
-  const [imgError, setImgError] = useState(false);
-  const makeRate = (player: RankPlayer | NormalPlayer) =>
-    isRankPlayerType(player) ? (
+  const makeRate = (player: RankPlayer | NormalPlayer) => {
+    return (
       <span>
-        {player.wins}승 {player.losses}패
+        {isRankPlayerType(player)
+          ? `${player.wins}승 ${player.losses}패`
+          : `Lv. ${player.level}`}
       </span>
-    ) : (
-      <span>Lv. {player.level}</span>
     );
+  };
 
   return (
     <div className={styles.bigTeam}>
-      <div className={styles.userImage}>
-        {team.players.map((player, index) => (
-          <Image
-            key={index}
-            src={imgError ? fallBack : player.userImageUri}
-            alt='prfImg'
-            layout='fill'
-            objectFit='cover'
-            sizes='30vw'
-            quality='30'
-            unoptimized={imgError}
-            onError={() => setImgError(true)}
-            onClick={() => {
-              router.push(`/users/detail?intraId=${player.intraId}`);
-            }}
-          />
-        ))}
-      </div>
-      {team.players.map((player) => (
-        <div key={player.intraId}>
+      {team.players.map((player, index) => (
+        <div key={index}>
           <Link href={`/users/detail?intraId=${player.intraId}`}>
-            <div className={styles.userId}>{player.intraId}</div>
+            <div>
+              <PlayerImage
+                src={player.userImageUri}
+                styleName={'gameResultBig'}
+                size={30}
+              />
+              <div className={styles.userId}>{player.intraId}</div>
+            </div>
           </Link>
           <div className={styles.winRate}>{makeRate(player)}</div>
         </div>
