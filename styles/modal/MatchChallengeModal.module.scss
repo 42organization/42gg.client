@@ -6,6 +6,32 @@
 
 .phrase {
   @include modal-phrase;
+  font-size: $big-giant-font;
+}
+
+.reloadContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+
+  span {
+    font-size: $big-font;
+    margin: 0 1rem;
+  }
+
+  .reloadButton {
+    @include reload-button;
+  }
+
+  .spinReloadButton {
+    @include reload-button;
+    opacity: 0.7;
+    animation: spin 1s infinite;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
 }
 
 .buttons {

@@ -27,7 +27,6 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
     SC002: '이미 등록이 완료된 경기입니다.',
     SC003: '경기 취소 후 1분 동안 경기를 예약할 수 없습니다.',
   };
-
   const [selectedOpponent, setSelectedOpponent] = useState<Opponent | null>(
     null
   );
@@ -54,10 +53,8 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
       detail: '상세 정보3',
     },
   ]);
-
-  useEffect(() => {
-    getOpponents();
-  });
+  const [clickReloadChallenge, setClickReloadChallenge] = useState(false);
+  const [spinReloadButton, setSpinReloadButton] = useState(false);
 
   const getOpponents = async () => {
     try {
@@ -65,6 +62,25 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
       setOpponents(res?.data);
     } catch {
       // setError('RJ03');
+    }
+  };
+
+  useEffect(() => {
+    getOpponents();
+  }, []);
+
+  useEffect(() => {
+    if (clickReloadChallenge) reloadClickHandler();
+  }, [clickReloadChallenge]);
+
+  const reloadClickHandler = async () => {
+    if (clickReloadChallenge) {
+      setSpinReloadButton(true);
+      getOpponents();
+      setTimeout(() => {
+        setSpinReloadButton(false);
+        setClickReloadChallenge(false);
+      }, 1000);
     }
   };
 
@@ -100,7 +116,7 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
   return (
     <div className={styles.container}>
       <div>
-        <div className={styles.phrase}>🏓42gg를 이겨라🏓</div>
+        <div className={styles.phrase}>🏓 42gg를 이겨라 🏓</div>
         <div>42gg 팀원 중 상대를 선택해 주세요</div>
         {opponents.map((opponent, index) => (
           <MatchChallengeCard
@@ -111,7 +127,13 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
           />
         ))}
       </div>
-      <div>새로고침</div>
+      <div className={styles.reloadContainer}>
+        <span>새로고침</span>
+        <ReloadButton
+          spinReloadButton={spinReloadButton}
+          setClickReloadChallenge={setClickReloadChallenge}
+        />
+      </div>
       <div className={styles.buttons}>
         <div className={styles.negative}>
           <input onClick={onCancel} type='button' value='취소' />
@@ -121,5 +143,26 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
         </div>
       </div>
     </div>
+  );
+}
+
+interface ReloadChallengeButtonProps {
+  spinReloadButton: boolean;
+  setClickReloadChallenge: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function ReloadButton({
+  spinReloadButton,
+  setClickReloadChallenge,
+}: ReloadChallengeButtonProps) {
+  return (
+    <button
+      className={
+        spinReloadButton ? styles.spinReloadButton : styles.reloadButton
+      }
+      onClick={() => setClickReloadChallenge(true)}
+    >
+      &#8635;
+    </button>
   );
 }
