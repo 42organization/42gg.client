@@ -5,6 +5,8 @@ import { Slot } from 'types/matchTypes';
 import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { currentMatchState } from 'utils/recoil/match';
+import { errorState } from 'utils/recoil/error';
+import instance from 'utils/axios';
 import styles from 'styles/match/MatchSlot.module.scss';
 
 interface MatchSlotProps {
@@ -14,6 +16,7 @@ interface MatchSlotProps {
 }
 
 function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
+  const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const [currentMatch] = useRecoilState(currentMatchState);
   const { event } = useRecoilValue(liveState);
@@ -28,6 +31,15 @@ function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
     [slot]
   );
 
+  const challengeSlotEnroll = async () => {
+    try {
+      const body = { slotId: slotId, mode: mode, opponent: null };
+      await instance.post(`/pingpong/match/tables/${1}/${type}`, body);
+    } catch (e: any) {
+      setError('RJ02');
+    }
+  };
+
   const enrollHandler = async () => {
     if (status === 'mytable') {
       setModal({
@@ -38,6 +50,16 @@ function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
       });
     } else if (event === 'match') {
       setModal({ modalName: 'MATCH-REJECT' });
+    } else if (checkBoxMode === 'challenge') {
+      await challengeSlotEnroll();
+      setModal({
+        modalName: 'MATCH-CHALLENGE',
+        challenge: {
+          slotId,
+          type,
+          mode: checkBoxMode,
+        },
+      });
     } else {
       setModal({
         modalName: 'MATCH-ENROLL',
@@ -56,7 +78,7 @@ function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
       disabled={status === 'close'}
       onClick={enrollHandler}
     >
-      <span className={styles.time}>
+      <span className={styles.slotId}>
         {slotId}
         {status === 'mytable' && ' 🙋'}
       </span>

@@ -6,7 +6,7 @@
 
 .phrase {
   @include modal-phrase;
-  .time {
+  .slotId {
     margin-bottom: 0.5rem;
     font-size: $giant-font;
   }

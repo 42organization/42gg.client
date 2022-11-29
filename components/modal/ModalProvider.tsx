@@ -14,9 +14,10 @@ import EditProfileModal from './profile/EditProfileModal';
 import AfterGameModal from './afterGame/AfterGameModal';
 import StatChangeModal from './statChange/StatChangeModal';
 import styles from 'styles/modal/Modal.module.scss';
+import MatchChallengeModal from './match/MatchChallengeModal';
 
 export default function ModalProvider() {
-  const [{ modalName, cancel, enroll, manual, exp }, setModal] =
+  const [{ modalName, cancel, enroll, challenge, exp }, setModal] =
     useRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const content: { [key: string]: JSX.Element | null } = {
@@ -26,8 +27,11 @@ export default function ModalProvider() {
     'MENU-MATCHTRIGGER': <MatchTriggerModal />,
     'MATCH-REJECT': <MatchRejectModal />,
     'MATCH-ENROLL': enroll ? <MatchEnrollModal {...enroll} /> : null,
+    'MATCH-CHALLENGE': challenge ? (
+      <MatchChallengeModal {...challenge} />
+    ) : null,
     'MATCH-CANCEL': cancel ? <CancelModal {...cancel} /> : null,
-    'MATCH-MANUAL': manual ? <MatchManualModal {...manual} /> : null,
+    'MATCH-MANUAL': <MatchManualModal />,
     'USER-PROFILE_EDIT': <EditProfileModal />,
     'FIXED-AFTER_GAME': <AfterGameModal />,
     'FIXED-STAT': <StatChangeModal {...exp} />,
@@ -42,6 +46,7 @@ export default function ModalProvider() {
 
   const closeModalHandler = (e: React.MouseEvent) => {
     if (modalName?.split('-')[0] === 'FIXED') return;
+    if (modalName?.split('-')[1] === 'CHALLENGE') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
       if (modalName === 'MATCH-CANCEL') setReloadMatch(true);
       setModal({ modalName: null });

@@ -43,7 +43,7 @@ export default function MatchEnrollModal({ slotId, type, mode }: Enroll) {
     <div className={styles.container}>
       <div className={styles.phrase}>
         <div className={styles.emoji}>🏓</div>
-        <div className={styles.time}>
+        <div className={styles.slotId}>
           {slotId}번 방
           <br />
           슬롯 예약을 확정하시겠습니까 ?

@@ -58,7 +58,6 @@ export default function MatchBoard({ type, checkBoxMode }: MatchBoardProps) {
   const openManual = () => {
     setModal({
       modalName: 'MATCH-MANUAL',
-      manual: { toggleMode: checkBoxMode },
     });
   };
 
