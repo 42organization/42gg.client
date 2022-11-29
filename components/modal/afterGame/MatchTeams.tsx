@@ -18,7 +18,6 @@ function Team({ team }: { team: Player[] }) {
       {team.map((player, index) => (
         <PlayerImg
           key={index}
-          keyNum={index}
           src={player.userImageUri}
           styleName={'afterGameModal'}
           size={30}

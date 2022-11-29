@@ -72,7 +72,6 @@ export default function Header() {
           <Link href={`/users/detail?intraId=${user.intraId}`}>
             <a>
               <PlayerImg
-                keyNum={1}
                 src={user.userImageUri}
                 styleName={'header'}
                 size={20}

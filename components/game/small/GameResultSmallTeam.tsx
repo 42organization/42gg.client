@@ -17,7 +17,6 @@ export default function GameResultSmallTeam({
         {team.players.map((player, index) => (
           <PlayerImg
             key={index}
-            keyNum={index}
             src={player.userImageUri}
             styleName={'gameResultSmall' + position}
             size={20}

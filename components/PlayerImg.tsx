@@ -6,23 +6,16 @@ import fallBack from 'public/image/fallBackSrc.jpeg';
 interface PlayerImgProps {
   src: string;
   size: number;
-  keyNum: number;
   styleName: string;
 }
 
-export default function PlayerImg({
-  src,
-  size,
-  keyNum,
-  styleName,
-}: PlayerImgProps) {
+export default function PlayerImg({ src, size, styleName }: PlayerImgProps) {
   const [imgError, setImgError] = useState(false);
   const imgSrc = !src || imgError ? fallBack : src;
   return (
     <div className={styles[styleName]}>
       <div>
         <Image
-          key={keyNum}
           src={imgSrc}
           alt='prfImg'
           layout='fill'

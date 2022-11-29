@@ -52,12 +52,7 @@ export default function BasicProfile({ pageId }: ProfileProps) {
     <div className={styles.container}>
       <div className={styles.topContainer}>
         {intraId && (
-          <PlayerImg
-            keyNum={1}
-            src={userImageUri}
-            styleName={'profile'}
-            size={30}
-          />
+          <PlayerImg src={userImageUri} styleName={'profile'} size={30} />
         )}
         <div className={styles.levelRacketWrap}>
           <div className={styles.level}>Lv. {level}</div>

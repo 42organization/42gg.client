@@ -28,13 +28,12 @@ export default function GameResultBigTeam({ team }: GameResultBigTeamProps) {
     <div className={styles.bigTeam}>
       {team.players.map((player, index) => (
         <div
-          key={player.intraId}
+          key={index}
           onClick={() => {
             router.push(`/users/detail?intraId=${player.intraId}`);
           }}
         >
           <PlayerImg
-            keyNum={index}
             src={player.userImageUri}
             styleName={'gameResultBig'}
             size={30}
