@@ -31,6 +31,7 @@ export default function RankListItem({
     myRankItem: {
       rank: intraId === myIntraId && level === null ? styles.myRanking : '',
       normal: intraId === myIntraId && level !== null ? styles.myVip : '',
+      challenge: 'challenge',
     },
   };
 
