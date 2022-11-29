@@ -5,9 +5,9 @@ import { Slot } from 'types/matchTypes';
 import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { currentMatchState } from 'utils/recoil/match';
+import { errorState } from 'utils/recoil/error';
+import instance from 'utils/axios';
 import styles from 'styles/match/MatchSlot.module.scss';
-import instance from '../../utils/axios';
-import { errorState } from '../../utils/recoil/error';
 
 interface MatchSlotProps {
   type: string;
