@@ -5,7 +5,7 @@ import GameResult from 'components/game/GameResult';
 import RankProfile from 'components/user/RankProfile';
 import styles from 'styles/user/user.module.scss';
 
-export default function user() {
+export default function User() {
   const router = useRouter();
   const { intraId } = router.query;
 

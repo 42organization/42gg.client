@@ -9,14 +9,14 @@ body {
 
 @font-face {
   font-family: 'Agonostic Italic';
-  src: url('../public/font/Agnostic\ Italic.otf') format('opentype');
+  src: url('../public/font/Agnostic Italic.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Reality Hyper Regular';
-  src: url('../public/font/Reality\ Hyper\ Regular.ttf') format('opentype');
+  src: url('../public/font/Reality Hyper Regular.ttf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
@@ -52,11 +52,10 @@ ul {
 }
 
 ul.pagination li {
-  display: inline-block;
+  display: flex;
   cursor: pointer;
   width: 27px;
   height: 27px;
-  display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.2rem; /* $big-font */

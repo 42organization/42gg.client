@@ -15,6 +15,7 @@ export default function Rank() {
   const content = {
     rank: { style: '', title: 'Ranking' },
     normal: { style: styles.vip, title: 'VIP' },
+    challenge: { style: '', title: 'challenge' },
   };
 
   return (

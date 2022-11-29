@@ -17,6 +17,7 @@ export interface NormalUser {
 export interface MyRank {
   rank: number;
   normal: number;
+  challenge: number;
 }
 
 export interface Rank {

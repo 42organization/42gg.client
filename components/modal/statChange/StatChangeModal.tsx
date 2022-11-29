@@ -9,7 +9,7 @@ import ExpStat from './ExpStat';
 import PppStat from 'components/modal/statChange/PppStat';
 import styles from 'styles/modal/StatChangeModal.module.scss';
 
-export default function StatChangeModal({ gameId, mode }: Exp) {
+export default function StatChangeModal({ gameId }: Exp) {
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
@@ -21,9 +21,7 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
 
   const getExpHandler = async () => {
     try {
-      const res = await instance.get(
-        `/pingpong/games/${gameId}/result/${mode}`
-      );
+      const res = await instance.get(`/pingpong/games/${gameId}/result/rank`);
       setStat({ ...res.data });
     } catch (e) {
       setError('KP03');
@@ -45,7 +43,7 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
       />
       <div className={styles.container}>
         <div className={styles.emoji}>🏓</div>
-        {mode === 'rank' && <PppStat stat={stat} />}
+        <PppStat stat={stat} />
         <ExpStat stat={stat} />
         <div className={styles.guide}>화면을 클릭해주세요!</div>
       </div>

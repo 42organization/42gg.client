@@ -61,7 +61,7 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
       const res = await instance.get(`/pingpong/match/opponent`);
       setOpponents(res?.data);
     } catch {
-      // setError('RJ03');
+      setError('RJ03');
     }
   };
 
@@ -86,7 +86,11 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
 
   const onEnroll = async () => {
     try {
-      const body = { slotId: slotId, mode: mode, opponent: selectedOpponent };
+      const body = {
+        slotId,
+        mode,
+        opponent: selectedOpponent?.intraId,
+      };
       await instance.post(`/pingpong/match/tables/${1}/${type}`, body);
       alert(enrollResponse.SUCCESS);
     } catch (e: any) {

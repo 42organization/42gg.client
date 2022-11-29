@@ -24,6 +24,11 @@ export default function Guide({ condition, modalMode }: GuideProps) {
       after: '경기 결과!',
       explains: '이미 입력된 경기입니다. 점수를 확인하세요!\n',
     },
+    challenge: {
+      before: 'challenge',
+      after: 'challenge',
+      explains: 'challenge',
+    },
   };
 
   return (
