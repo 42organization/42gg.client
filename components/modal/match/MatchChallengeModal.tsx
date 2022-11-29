@@ -87,8 +87,8 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
   const onEnroll = async () => {
     try {
       const body = {
-        slotId: slotId,
-        mode: mode,
+        slotId,
+        mode,
         opponent: selectedOpponent?.intraId,
       };
       await instance.post(`/pingpong/match/tables/${1}/${type}`, body);
