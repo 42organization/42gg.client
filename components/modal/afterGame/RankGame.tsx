@@ -80,11 +80,11 @@ const isCorrectScore = (score1: number | '', score2: number | '') => {
   if (score1 === '' || score2 === '') {
     alert('점수를 입력해주세요.');
     return false;
-  } else if (score1 > 2 || score2 > 2) {
-    alert('점수로 3점이상 입력이 불가합니다! (3판 2선승제)');
+  } else if (score1 > 5 || score2 > 5) {
+    alert('6점 이상 입력이 불가합니다! (단판, 5점 내기)');
     return false;
   } else if (score1 === score2) {
-    alert('동점 입력은 불가합니다. 1점 내기로 승부를 결정해주세요!');
+    alert('동점 입력은 불가합니다.');
     return false;
   }
   return true;
