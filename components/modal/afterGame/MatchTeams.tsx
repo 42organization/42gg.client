@@ -1,5 +1,5 @@
 import { Player, Players } from 'types/scoreTypes';
-import PlayerImg from 'components/PlayerImg';
+import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/modal/AfterGameModal.module.scss';
 
 export function MatchTeams({ matchTeams }: { matchTeams: Players }) {
@@ -16,7 +16,7 @@ function Team({ team }: { team: Player[] }) {
   return (
     <div className={styles.user}>
       {team.map((player, index) => (
-        <PlayerImg
+        <PlayerImage
           key={index}
           src={player.userImageUri}
           styleName={'afterGameModal'}

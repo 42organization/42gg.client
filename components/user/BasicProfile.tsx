@@ -5,7 +5,7 @@ import { userState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
-import PlayerImg from 'components/PlayerImg';
+import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/user/Profile.module.scss';
 
 interface ProfileProps {
@@ -52,7 +52,7 @@ export default function BasicProfile({ pageId }: ProfileProps) {
     <div className={styles.container}>
       <div className={styles.topContainer}>
         {intraId && (
-          <PlayerImg src={userImageUri} styleName={'profile'} size={30} />
+          <PlayerImage src={userImageUri} styleName={'profile'} size={30} />
         )}
         <div className={styles.levelRacketWrap}>
           <div className={styles.level}>Lv. {level}</div>

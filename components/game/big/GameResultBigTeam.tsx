@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import router from 'next/router';
 import { RankResult, RankPlayer, NormalPlayer } from 'types/gameTypes';
-import PlayerImg from 'components/PlayerImg';
+import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultBigTeamProps {
@@ -31,7 +31,7 @@ export default function GameResultBigTeam({ team }: GameResultBigTeamProps) {
         <div key={index}>
           <Link href={`/users/detail?intraId=${player.intraId}`}>
             <div>
-              <PlayerImg
+              <PlayerImage
                 src={player.userImageUri}
                 styleName={'gameResultBig'}
                 size={30}

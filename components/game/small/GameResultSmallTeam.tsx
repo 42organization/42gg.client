@@ -1,5 +1,5 @@
 import { RankResult } from 'types/gameTypes';
-import PlayerImg from 'components/PlayerImg';
+import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultSmallTeamProps {
@@ -15,7 +15,7 @@ export default function GameResultSmallTeam({
     <div className={styles.smallTeam}>
       <div className={styles[position]}>
         {team.players.map((player, index) => (
-          <PlayerImg
+          <PlayerImage
             key={index}
             src={player.userImageUri}
             styleName={'gameResultSmall' + position}

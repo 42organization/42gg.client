@@ -1,15 +1,19 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import styles from 'styles/PlayerImg.module.scss';
+import styles from 'styles/PlayerImage.module.scss';
 import fallBack from 'public/image/fallBackSrc.jpeg';
 
-interface PlayerImgProps {
+interface PlayerImageProps {
   src: string;
   size: number;
   styleName: string;
 }
 
-export default function PlayerImg({ src, size, styleName }: PlayerImgProps) {
+export default function PlayerImage({
+  src,
+  size,
+  styleName,
+}: PlayerImageProps) {
   const [imgError, setImgError] = useState(false);
   const imgSrc = !src || imgError ? fallBack : src;
   return (

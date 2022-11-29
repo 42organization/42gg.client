@@ -9,7 +9,7 @@ import {
 } from 'utils/recoil/layout';
 import MenuBar from './MenuBar';
 import NotiBar from './NotiBar';
-import PlayerImg from 'components/PlayerImg';
+import PlayerImage from 'components/PlayerImage';
 import { FiMenu } from 'react-icons/fi';
 import { BsMegaphone } from 'react-icons/bs';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
@@ -71,7 +71,7 @@ export default function Header() {
           </div>
           <Link href={`/users/detail?intraId=${user.intraId}`}>
             <a>
-              <PlayerImg
+              <PlayerImage
                 src={user.userImageUri}
                 styleName={'header'}
                 size={20}
