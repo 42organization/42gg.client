@@ -9,10 +9,10 @@ import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/user/Profile.module.scss';
 
 interface ProfileProps {
-  pageId: string;
+  profileId: string;
 }
 
-export default function BasicProfile({ pageId }: ProfileProps) {
+export default function BasicProfile({ profileId }: ProfileProps) {
   const user = useRecoilValue(userState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
@@ -37,7 +37,7 @@ export default function BasicProfile({ pageId }: ProfileProps) {
 
   const getBasicProfileHandler = async () => {
     try {
-      const res = await instance.get(`/pingpong/users/${pageId}/detail`);
+      const res = await instance.get(`/pingpong/users/${profileId}/detail`);
       setProfile(res?.data);
     } catch (e) {
       setError('SJ03');
@@ -79,12 +79,12 @@ export default function BasicProfile({ pageId }: ProfileProps) {
       <div className={styles.bottomContainer}>
         <div className={styles.statusMessage}>
           <div className={styles.messaage}>
-            {user.intraId === pageId && statusMessage.length === 0
+            {user.intraId === profileId && statusMessage.length === 0
               ? '상태메시지를 입력해보세요!'
               : statusMessage}
           </div>
           <div className={styles.buttons}>
-            {user.intraId === pageId && (
+            {user.intraId === profileId && (
               <div className={styles.positive}>
                 <input type='button' onClick={startEditHandler} value='edit' />
               </div>

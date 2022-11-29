@@ -66,11 +66,11 @@ export const options = {
 };
 
 interface ProfileChartProps {
-  intraId: string;
+  profileId: string;
   season?: number;
 }
 
-export default function ProfileChart({ intraId, season }: ProfileChartProps) {
+export default function ProfileChart({ profileId, season }: ProfileChartProps) {
   const setError = useSetRecoilState(errorState);
   const [chart, setChart] = useState<PppChart[]>([
     { ppp: 0, date: '1970-01-01' },
@@ -83,7 +83,7 @@ export default function ProfileChart({ intraId, season }: ProfileChartProps) {
   const getProfileChartHandler = async () => {
     try {
       const res = await instance.get(
-        `/pingpong/users/${intraId}/historics?season=${season}`
+        `/pingpong/users/${profileId}/historics?season=${season}`
       );
       setChart(res?.data.historics);
     } catch (e) {

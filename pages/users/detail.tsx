@@ -14,8 +14,8 @@ export default function User() {
       {typeof intraId === 'string' && (
         <div key={intraId}>
           <h1 className={styles.title}>{intraId}</h1>
-          <BasicProfile pageId={intraId} />
-          <RankProfile intraId={intraId} />
+          <BasicProfile profileId={intraId} />
+          <RankProfile profileId={intraId} />
           <Link
             href={{
               pathname: '/game',
