@@ -37,3 +37,9 @@
 .buttons {
   @include select-buttons(6rem);
 }
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
