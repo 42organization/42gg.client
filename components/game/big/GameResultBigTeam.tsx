@@ -15,35 +15,29 @@ export function isRankPlayerType(
 }
 
 export default function GameResultBigTeam({ team }: GameResultBigTeamProps) {
-  const makeRate = (player: RankPlayer | NormalPlayer) =>
-    isRankPlayerType(player) ? (
+  const makeRate = (player: RankPlayer | NormalPlayer) => {
+    return (
       <span>
-        {player.wins}승 {player.losses}패
+        {isRankPlayerType(player)
+          ? `${player.wins}승 ${player.losses}패`
+          : `Lv. ${player.level}`}
       </span>
-    ) : (
-      <span>Lv. {player.level}</span>
     );
+  };
 
   return (
     <div className={styles.bigTeam}>
       {team.players.map((player, index) => (
-        <div
-          key={index}
-          onClick={() => {
-            router.push(`/users/detail?intraId=${player.intraId}`);
-          }}
-        >
-          <PlayerImg
-            src={player.userImageUri}
-            styleName={'gameResultBig'}
-            size={30}
-          />
-        </div>
-      ))}
-      {team.players.map((player) => (
-        <div key={player.intraId}>
+        <div key={index}>
           <Link href={`/users/detail?intraId=${player.intraId}`}>
-            <div className={styles.userId}>{player.intraId}</div>
+            <div>
+              <PlayerImg
+                src={player.userImageUri}
+                styleName={'gameResultBig'}
+                size={30}
+              />
+              <div className={styles.userId}>{player.intraId}</div>
+            </div>
           </Link>
           <div className={styles.winRate}>{makeRate(player)}</div>
         </div>

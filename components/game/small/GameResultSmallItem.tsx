@@ -16,7 +16,7 @@ function GameResultSmallItem({ game }: GameResultSmallItemProps) {
   return (
     <div
       className={`${styles.smallContainer}
-			${mode === 'normal' ? styles.normal : styles.rank}`}
+			${styles[mode]}`}
       onClick={() => setClickedItemId(gameId)}
     >
       <GameResultSmallTeam team={team1} position={'Left'} />
