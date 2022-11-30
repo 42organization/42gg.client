@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { Enroll } from 'types/modalTypes';
+import { Challenge } from 'types/modalTypes';
 import { reloadMatchState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
@@ -17,7 +17,7 @@ interface Opponent {
   detail: string;
 }
 
-export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
+export default function MatchChallengeModal({ slotId, type }: Challenge) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
@@ -88,7 +88,7 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
     try {
       const body = {
         slotId,
-        mode,
+        mode: 'challenge',
         opponent: selectedOpponent?.intraId,
       };
       await instance.post(`/pingpong/match/tables/${1}/${type}`, body);

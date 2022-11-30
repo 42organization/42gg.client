@@ -31,7 +31,6 @@ export interface Enroll {
 export interface Challenge {
   slotId: number;
   type: string;
-  mode?: MatchMode;
 }
 
 export interface Exp {
