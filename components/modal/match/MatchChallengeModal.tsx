@@ -108,8 +108,7 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
     try {
       await instance.delete(`/pingpong/match/slots/${slotId}`);
     } catch (e: any) {
-      setError('RJ03');
-      return;
+      alert(`잘못된 요청입니다!`);
     }
     setModal({ modalName: null });
     setReloadMatch(true);
