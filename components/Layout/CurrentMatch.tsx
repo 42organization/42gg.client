@@ -22,10 +22,21 @@ export default function CurrentMatch() {
     if (reloadMatch) setReloadMatch(false);
   }, [presentPath, reloadMatch]);
 
+  const challengeUnselectCancel = async (slotId: string) => {
+    try {
+      await instance.delete(`/pingpong/match/slots/${slotId}`);
+      setReloadMatch(true);
+    } catch (e: any) {
+      setError('RJ06');
+    }
+  };
+
   const getCurrentMatchHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/match/current`);
       setCurrentMatch(res?.data);
+      if (res.data.mode === 'CHALLENGE' && !res.data.isMatched)
+        await challengeUnselectCancel(res.data.slotId);
     } catch (e) {
       setError('JB01');
     }
