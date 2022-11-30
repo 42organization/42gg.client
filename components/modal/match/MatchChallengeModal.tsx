@@ -97,7 +97,7 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
       if (e.response?.data?.code in enrollResponse)
         alert(enrollResponse[e.response.data.code]);
       else {
-        alert(`잘못된 요청입니다. 페이지를 새로고침 해 주세요!`);
+        alert(`잘못된 요청입니다!`);
       }
     }
     setModal({ modalName: null });
