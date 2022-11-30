@@ -36,13 +36,10 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
       detail: '상세 정보1',
     },
     {
-      intraId: 'donghyuk',
-      nick: '42gg의 성시경',
+      intraId: 'intraID22',
+      nick: 'nickname2',
       imageUrl: fallBack,
-      detail:
-        '😵‍💫 막걸리를 좋아함\n' +
-        '🧨 스매싱을 날릴때 주변을 폭파함\n' +
-        '그러나 오늘은 컨디션이 좋지 않음',
+      detail: '상세 정보2',
     },
     {
       intraId: 'intraID3',
@@ -72,6 +69,7 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
   }, [clickReloadChallenge]);
 
   const reloadClickHandler = async () => {
+    setSelectedOpponent(null);
     if (clickReloadChallenge) {
       setSpinReloadButton(true);
       getOpponents();
@@ -83,6 +81,10 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
   };
 
   const onEnroll = async () => {
+    if (selectedOpponent === null) {
+      alert('상대를 선택해 주세요!');
+      return;
+    }
     try {
       const body = {
         slotId,
@@ -92,7 +94,6 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
       await instance.post(`/pingpong/match/tables/${1}/${type}`, body);
       alert(enrollResponse.SUCCESS);
     } catch (e: any) {
-      console.log('enroll e : ', e);
       if (e.response?.data?.code in enrollResponse)
         alert(enrollResponse[e.response.data.code]);
       else {
