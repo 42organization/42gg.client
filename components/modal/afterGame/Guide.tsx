@@ -17,7 +17,7 @@ export default function Guide({ condition, modalMode }: GuideProps) {
     rank: {
       before: '경기 후 점수를 입력해주세요',
       after: '경기 결과 확인',
-      explains: '💡 3판 2선승제!\n💡 동점은 1점 내기로 승부를 결정!',
+      explains: '💡 단판, 5점 내기!',
     },
     confirm: {
       before: '경기 결과!',

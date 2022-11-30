@@ -40,7 +40,7 @@ const modalContentsRank: { title: string; description: string[] }[] = [
     title: '🔍 매칭',
     description: [
       '등록한 경기가 끝나야만 다음 경기 등록 가능',
-      '경기가 매칭이 완료되면 상대방 공개되며\n부스로 방문하여 경기 진행',
+      '매칭이 완료되면 상대방이 공개되며\n부스로 방문하여 경기 진행',
       '매칭이 완료된 상태에서 취소 시,\n1분간 경기 등록 불가',
       '상대방이 경기를 취소하면 매칭 대기 상태로 전환',
     ],
@@ -56,8 +56,8 @@ const modalContentsRank: { title: string; description: string[] }[] = [
   {
     title: '✅ 경기 룰',
     description: [
-      '단판으로 진행되며 선 5점 내기',
-      '경기 종료 된 후 이긴 사람이 점수 입력',
+      '경기는 단판, 5점 내기',
+      '경기가 종료된 후 이긴 사람이 점수 입력',
       '입력 전 상호 간 확인이 이루어지므로\n잘못 기입 시 상호 책임',
     ],
   },
