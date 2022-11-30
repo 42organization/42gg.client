@@ -19,7 +19,7 @@ export default function UserGameSearchBar() {
   const searchBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const checkId = /^[a-z|A-Z|0-9|-]+$/;
+    const checkId = /^[a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+$/;
     if (keyword === '' || (keyword.length && !checkId.test(keyword))) {
       clearTimeout(timer);
       setSearchResult([]);
