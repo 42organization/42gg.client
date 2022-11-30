@@ -8,25 +8,25 @@ import ProfileModeWrap from 'components/mode/modeWraps/ProfileModeWrap';
 import styles from 'styles/user/Profile.module.scss';
 
 interface RankProfileProps {
-  intraId: string;
+  profileId: string;
 }
 
 interface ProfileProps {
-  intraId: string;
+  profileId: string;
   season?: number;
 }
 
-export default function RankProfile({ intraId }: RankProfileProps) {
+export default function RankProfile({ profileId }: RankProfileProps) {
   return (
     <div className={styles.container}>
       <ProfileModeWrap>
-        <Profile intraId={intraId} />
+        <Profile profileId={profileId} />
       </ProfileModeWrap>
     </div>
   );
 }
 
-function Profile({ intraId, season }: ProfileProps) {
+function Profile({ profileId, season }: ProfileProps) {
   const setError = useSetRecoilState(errorState);
   const [rankProfile, setRankProfile] = useState<ProfileRank>({
     rank: 0,
@@ -43,7 +43,7 @@ function Profile({ intraId, season }: ProfileProps) {
   const getRankProfileHandler = async () => {
     try {
       const res = await instance.get(
-        `/pingpong/users/${intraId}/rank?season=${season}`
+        `/pingpong/users/${profileId}/rank?season=${season}`
       );
       setRankProfile(res?.data);
     } catch (e) {
@@ -77,7 +77,7 @@ function Profile({ intraId, season }: ProfileProps) {
           ></span>
         </div>
       </div>
-      <ProfileChart intraId={intraId} season={season} />
+      <ProfileChart profileId={profileId} season={season} />
     </div>
   );
 }

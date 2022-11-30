@@ -41,23 +41,15 @@
 }
 
 .smallTeam {
-  .smallLeft {
+  .Left {
     display: flex;
     flex-direction: row;
     align-items: center;
-    .userImage {
-      @include userImage(2rem);
-      margin-right: 0.7rem;
-    }
   }
-  .smallRight {
+  .Right {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    .userImage {
-      @include userImage(2rem);
-      margin-left: 0.7rem;
-    }
   }
 }
 
@@ -71,10 +63,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  .userImage {
-    @include userImage(4.5rem);
-    cursor: pointer;
-  }
   .userId {
     margin: 0.5rem 0;
     color: white;

@@ -29,11 +29,6 @@
   align-items: center;
   font-size: $big-font;
   font-weight: 600;
-  .userImage {
-    @include userImage(5rem);
-    margin-bottom: 1rem;
-    box-shadow: 5px 5px 6px $dark-gray;
-  }
   .user {
     .intraId {
       text-align: center;

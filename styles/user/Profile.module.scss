@@ -19,19 +19,6 @@
   margin-top: 1rem;
 }
 
-.userImage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.3rem;
-  border: solid 1px white;
-  border-radius: $mini-radius;
-  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
-  div {
-    @include userImage(4.7rem);
-  }
-}
-
 .levelRacketWrap {
   display: flex;
   flex-direction: column;
