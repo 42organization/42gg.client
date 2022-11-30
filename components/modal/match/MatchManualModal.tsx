@@ -41,7 +41,6 @@ const modalContentsRank: { title: string; description: string[] }[] = [
     description: [
       '등록한 경기가 끝나야만 다음 경기 등록 가능',
       '매칭이 완료되면 상대방이 공개되며\n부스로 방문하여 경기 진행',
-      '매칭이 완료된 상태에서 취소 시,\n1분간 경기 등록 불가',
       '상대방이 경기를 취소하면 매칭 대기 상태로 전환',
     ],
   },
