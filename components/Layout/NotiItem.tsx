@@ -23,17 +23,11 @@ export default function NotiItem({ data }: NotiItemProps) {
     },
     canceledbyman: {
       title: '매칭 취소',
-      content: makeContent(
-        data.id,
-        '번 방 신청한 매칭이 상대에 의해 취소되었습니다.'
-      ),
+      content: makeContent(data.id, '번 방 신청한 매칭이 취소되었습니다.'),
     },
     canceledbytime: {
       title: '매칭 취소',
-      content: makeContent(
-        data.id,
-        '번 방 신청한 매칭이 상대 없음으로 취소되었습니다.'
-      ),
+      content: makeContent(data.id, '번 방 신청한 매칭이 취소되었습니다.'),
     },
   };
   return (
