@@ -1,13 +1,11 @@
 import { useSetRecoilState } from 'recoil';
 import { Enroll } from 'types/modalTypes';
 import { reloadMatchState } from 'utils/recoil/match';
-import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/modal/MatchEnrollModal.module.scss';
 
 export default function MatchEnrollModal({ slotId, type, mode }: Enroll) {
-  const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const enrollResponse: { [key: string]: string } = {
@@ -26,9 +24,7 @@ export default function MatchEnrollModal({ slotId, type, mode }: Enroll) {
       if (e.response.data.code in enrollResponse)
         alert(enrollResponse[e.response.data.code]);
       else {
-        setModal({ modalName: null });
-        setError('JH05');
-        return;
+        alert('경기 등록에 실패하였습니다.');
       }
     }
     setModal({ modalName: null });

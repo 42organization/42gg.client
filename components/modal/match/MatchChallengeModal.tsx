@@ -56,7 +56,7 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
       const res = await instance.get(`/pingpong/match/opponent`);
       setOpponents(res?.data);
     } catch {
-      setError('RJ03');
+      setError('RJ02');
     }
   };
 
@@ -108,7 +108,7 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
     try {
       await instance.delete(`/pingpong/match/slots/${slotId}`);
     } catch (e: any) {
-      setError('RJ04');
+      setError('RJ03');
       return;
     }
     setModal({ modalName: null });

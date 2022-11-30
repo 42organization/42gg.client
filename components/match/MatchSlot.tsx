@@ -4,8 +4,7 @@ import { MatchMode } from 'types/mainType';
 import { Slot } from 'types/matchTypes';
 import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
-import { currentMatchState } from 'utils/recoil/match';
-import { errorState } from 'utils/recoil/error';
+import { currentMatchState, reloadMatchState } from 'utils/recoil/match';
 import instance from 'utils/axios';
 import styles from 'styles/match/MatchSlot.module.scss';
 
@@ -16,8 +15,8 @@ interface MatchSlotProps {
 }
 
 function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
-  const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
+  const setReloadMatch = useSetRecoilState(reloadMatchState);
   const [currentMatch] = useRecoilState(currentMatchState);
   const { event } = useRecoilValue(liveState);
   const { headCount, slotId, status, mode } = slot;
@@ -35,8 +34,16 @@ function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
     try {
       const body = { slotId: slotId, mode: 'challenge', opponent: null };
       await instance.post(`/pingpong/match/tables/${1}/${type}`, body);
+      setModal({
+        modalName: 'MATCH-CHALLENGE',
+        challenge: {
+          slotId,
+          type,
+        },
+      });
     } catch (e: any) {
-      setError('RJ02');
+      alert('경기 등록에 실패하였습니다.');
+      setReloadMatch(true);
     }
   };
 
@@ -52,13 +59,6 @@ function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
       setModal({ modalName: 'MATCH-REJECT' });
     } else if (checkBoxMode === 'challenge') {
       await challengeSlotEnroll();
-      setModal({
-        modalName: 'MATCH-CHALLENGE',
-        challenge: {
-          slotId,
-          type,
-        },
-      });
     } else {
       setModal({
         modalName: 'MATCH-ENROLL',
