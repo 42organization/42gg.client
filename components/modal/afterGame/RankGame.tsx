@@ -81,10 +81,10 @@ const isCorrectScore = (score1: number | '', score2: number | '') => {
     alert('점수를 입력해주세요.');
     return false;
   } else if (score1 > 5 || score2 > 5) {
-    alert('6점 이상 입력이 불가합니다! (단판, 5점 내기)');
+    alert('6점 이상 입력은 불가능합니다! (단판, 5점 내기)');
     return false;
   } else if (score1 === score2) {
-    alert('동점 입력은 불가합니다.');
+    alert('동점 입력은 불가능합니다.');
     return false;
   }
   return true;
