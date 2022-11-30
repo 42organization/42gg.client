@@ -52,8 +52,8 @@ export default function NotiBar() {
               />
             </div>
             <div>
-              {noti.map((data: Noti) => (
-                <NotiItem key={data.id} data={data} />
+              {noti.map((data: Noti, index) => (
+                <NotiItem key={index} data={data} />
               ))}
             </div>
           </>
