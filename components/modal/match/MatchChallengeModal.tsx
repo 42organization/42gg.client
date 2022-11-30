@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { Enroll } from 'types/modalTypes';
+import { Challenge } from 'types/modalTypes';
 import { reloadMatchState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
@@ -17,15 +17,13 @@ interface Opponent {
   detail: string;
 }
 
-export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
+export default function MatchChallengeModal({ slotId, type }: Challenge) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const enrollResponse: { [key: string]: string } = {
     SUCCESS: '경기가 성공적으로 등록되었습니다.',
     SC001: '경기 등록에 실패하였습니다.',
-    SC002: '이미 등록이 완료된 경기입니다.',
-    SC003: '경기 취소 후 1분 동안 경기를 예약할 수 없습니다.',
   };
   const [selectedOpponent, setSelectedOpponent] = useState<Opponent | null>(
     null
@@ -38,13 +36,10 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
       detail: '상세 정보1',
     },
     {
-      intraId: 'donghyuk',
-      nick: '42gg의 성시경',
+      intraId: 'intraID22',
+      nick: 'nickname2',
       imageUrl: fallBack,
-      detail:
-        '😵‍💫 막걸리를 좋아함\n' +
-        '🧨 스매싱을 날릴때 주변을 폭파함\n' +
-        '그러나 오늘은 컨디션이 좋지 않음',
+      detail: '상세 정보2',
     },
     {
       intraId: 'intraID3',
@@ -74,6 +69,7 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
   }, [clickReloadChallenge]);
 
   const reloadClickHandler = async () => {
+    setSelectedOpponent(null);
     if (clickReloadChallenge) {
       setSpinReloadButton(true);
       getOpponents();
@@ -85,21 +81,23 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
   };
 
   const onEnroll = async () => {
+    if (selectedOpponent === null) {
+      alert('상대를 선택해 주세요!');
+      return;
+    }
     try {
       const body = {
         slotId,
-        mode,
+        mode: 'challenge',
         opponent: selectedOpponent?.intraId,
       };
       await instance.post(`/pingpong/match/tables/${1}/${type}`, body);
       alert(enrollResponse.SUCCESS);
     } catch (e: any) {
-      if (e.response.data.code in enrollResponse)
+      if (e.response?.data?.code in enrollResponse)
         alert(enrollResponse[e.response.data.code]);
       else {
-        setModal({ modalName: null });
-        setError('RJ04');
-        return;
+        alert(`잘못된 요청입니다!`);
       }
     }
     setModal({ modalName: null });
@@ -110,7 +108,7 @@ export default function MatchChallengeModal({ slotId, type, mode }: Enroll) {
     try {
       await instance.delete(`/pingpong/match/slots/${slotId}`);
     } catch (e: any) {
-      setError('RJ05');
+      setError('RJ04');
       return;
     }
     setModal({ modalName: null });

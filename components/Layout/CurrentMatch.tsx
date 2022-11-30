@@ -26,6 +26,15 @@ export default function CurrentMatch() {
     try {
       const res = await instance.get(`/pingpong/match/current`);
       setCurrentMatch(res?.data);
+      if (res.data.mode === 'CHALLENGE' && !res.data.isMatched) {
+        setModal({
+          modalName: 'MATCH-CHALLENGE',
+          challenge: {
+            slotId: res.data.slotId,
+            type: 'single',
+          },
+        });
+      }
     } catch (e) {
       setError('JB01');
     }

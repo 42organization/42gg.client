@@ -33,7 +33,7 @@ function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
 
   const challengeSlotEnroll = async () => {
     try {
-      const body = { slotId: slotId, mode: mode, opponent: null };
+      const body = { slotId: slotId, mode: 'challenge', opponent: null };
       await instance.post(`/pingpong/match/tables/${1}/${type}`, body);
     } catch (e: any) {
       setError('RJ02');
@@ -57,7 +57,6 @@ function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
         challenge: {
           slotId,
           type,
-          mode: checkBoxMode,
         },
       });
     } else {
