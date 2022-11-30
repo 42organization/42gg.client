@@ -1,6 +1,13 @@
 @import 'styles/common.scss';
 
+@mixin imageWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .header {
+  @include imageWrap;
   div {
     @include userImage(2.2rem);
     cursor: pointer;
@@ -8,6 +15,7 @@
 }
 
 .gameResultBig {
+  @include imageWrap;
   div {
     @include userImage(4.5rem);
     cursor: pointer;
@@ -15,6 +23,7 @@
 }
 
 .gameResultSmallLeft {
+  @include imageWrap;
   div {
     @include userImage(2rem);
     margin-right: 0.7rem;
@@ -22,6 +31,7 @@
 }
 
 .gameResultSmallRight {
+  @include imageWrap;
   div {
     @include userImage(2rem);
     margin-left: 0.7rem;
@@ -29,6 +39,7 @@
 }
 
 .afterGameModal {
+  @include imageWrap;
   div {
     @include userImage(5rem);
     margin-bottom: 1rem;
