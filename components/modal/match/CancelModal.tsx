@@ -20,7 +20,6 @@ export default function CancelModal({ slotId }: Cancel) {
   const content = {
     emoji: '🤔',
     main: '해당 경기를\n취소하시겠습니까?',
-    sub: '⚠︎ 매칭이 완료된 경기를 취소하면\n1분 간 새로운 예약이 불가합니다!',
   };
   const cancelResponse: { [key: string]: string } = {
     SUCCESS: '경기가 성공적으로 취소되었습니다.',
@@ -70,7 +69,7 @@ export default function CancelModal({ slotId }: Cancel) {
       <div className={styles.phrase}>
         <div className={styles.emoji}>{content.emoji}</div>
         {content.main}
-        {<div className={styles.subContent}>{content.sub}</div>}
+        {<div className={styles.subContent}></div>}
       </div>
       <div className={styles.buttons}>
         {
