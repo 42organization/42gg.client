@@ -24,6 +24,10 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
   const enrollResponse: { [key: string]: string } = {
     SUCCESS: '경기가 성공적으로 등록되었습니다.',
     SC001: '경기 등록에 실패하였습니다.',
+    E0001: '경기 등록에 실패하였습니다.',
+  };
+  const selectCancelResponse: { [key: string]: string } = {
+    E0001: '잘못된 요청입니다.',
   };
   const [selectedOpponent, setSelectedOpponent] = useState<Opponent | null>(
     null
@@ -94,10 +98,12 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
       await instance.post(`/pingpong/match/tables/${1}/${type}`, body);
       alert(enrollResponse.SUCCESS);
     } catch (e: any) {
-      if (e.response?.data?.code in enrollResponse)
+      if (e.response.data.code in enrollResponse) {
         alert(enrollResponse[e.response.data.code]);
-      else {
-        alert(`잘못된 요청입니다!`);
+      } else {
+        setModal({ modalName: null });
+        setError('RJ04');
+        return;
       }
     }
     setModal({ modalName: null });
@@ -108,8 +114,13 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
     try {
       await instance.delete(`/pingpong/match/slots/${slotId}`);
     } catch (e: any) {
-      setError('RJ03');
-      return;
+      if (e.response.data.code in selectCancelResponse) {
+        alert(selectCancelResponse[e.response.data.code]);
+      } else {
+        setModal({ modalName: null });
+        setError('RJ05');
+        return;
+      }
     }
     setModal({ modalName: null });
     setReloadMatch(true);
