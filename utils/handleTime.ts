@@ -90,7 +90,7 @@ export const getElapsedTimeSeconds = (gameTime: string) => {
  * @return 현재 시간으로부터 얼마 전
  * */
 export const getTimeAgo = (gameTime: string) => {
-  const elapsedTimeSeconds = getElapsedTimeSeconds(gameTime) - 60 * 10;
+  const elapsedTimeSeconds = getElapsedTimeSeconds(gameTime) - 60;
   const timeUnits = [
     { unit: '년', second: 60 * 60 * 24 * 365 },
     { unit: '개월', second: 60 * 60 * 24 * 30 },
