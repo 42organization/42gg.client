@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { Slot } from 'types/matchTypes';
@@ -18,6 +18,7 @@ interface MatchSlotProps {
 function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
+  const currentRef = useRef<HTMLButtonElement>(null);
   const [currentMatch] = useRecoilState(currentMatchState);
   const setError = useSetRecoilState(errorState);
   const { event } = useRecoilValue(liveState);
@@ -31,6 +32,13 @@ function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
     }),
     [slot]
   );
+
+  useEffect(() => {
+    currentRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }, []);
 
   const challengeSlotEnroll = async () => {
     const challengeSlotEnrollResponse: { [key: string]: string } = {
@@ -82,11 +90,17 @@ function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
     }
   };
 
+  const getScrollCurrentRef = (mytable: string) => {
+    if (mytable === 'mytable') return currentRef;
+    return null;
+  };
+
   return (
     <button
       className={`${styles.slotButton} ${buttonStyle[status]}`}
       disabled={status === 'close'}
       onClick={enrollHandler}
+      ref={getScrollCurrentRef(status)}
     >
       <span className={styles.slotId}>
         {slotId}
