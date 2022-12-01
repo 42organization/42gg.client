@@ -4,6 +4,7 @@ import { MatchMode } from 'types/mainType';
 import { Slot } from 'types/matchTypes';
 import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import { errorState } from 'utils/recoil/error';
 import { currentMatchState, reloadMatchState } from 'utils/recoil/match';
 import instance from 'utils/axios';
 import styles from 'styles/match/MatchSlot.module.scss';
@@ -18,6 +19,7 @@ function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const [currentMatch] = useRecoilState(currentMatchState);
+  const setError = useSetRecoilState(errorState);
   const { event } = useRecoilValue(liveState);
   const { headCount, slotId, status, mode } = slot;
   const headMax = type === 'single' ? 2 : 4;
@@ -31,6 +33,9 @@ function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
   );
 
   const challengeSlotEnroll = async () => {
+    const challengeSlotEnrollResponse: { [key: string]: string } = {
+      E0001: '경기 등록에 실패하였습니다.',
+    };
     try {
       const body = { slotId: slotId, mode: 'challenge', opponent: null };
       await instance.post(`/pingpong/match/tables/${1}/${type}`, body);
@@ -42,7 +47,13 @@ function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
         },
       });
     } catch (e: any) {
-      alert('경기 등록에 실패하였습니다.');
+      if (e.response.data.code in challengeSlotEnrollResponse) {
+        alert(challengeSlotEnrollResponse[e.response.data.code]);
+      } else {
+        setModal({ modalName: null });
+        setError('RJ03');
+        return;
+      }
       setReloadMatch(true);
     }
   };

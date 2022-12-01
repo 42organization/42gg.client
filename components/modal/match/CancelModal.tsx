@@ -25,6 +25,7 @@ export default function CancelModal({ slotId }: Cancel) {
     SUCCESS: '경기가 성공적으로 취소되었습니다.',
     SD001: '이미 지난 경기입니다.',
     SD002: '이미 매칭이 완료된 경기입니다.',
+    E0001: '잘못된 요청입니다.',
   };
 
   useEffect(() => {
