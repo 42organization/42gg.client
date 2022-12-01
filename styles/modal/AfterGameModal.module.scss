@@ -26,10 +26,14 @@
 .players {
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
   font-size: $big-font;
   font-weight: 600;
+  #versus {
+    display: flex;
+    align-items: center;
+  }
   .user {
+    width: 35%;
     .intraId {
       text-align: center;
     }

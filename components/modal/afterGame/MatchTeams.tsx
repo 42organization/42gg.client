@@ -6,7 +6,7 @@ export function MatchTeams({ matchTeams }: { matchTeams: Players }) {
   return (
     <div className={styles.players}>
       <Team team={matchTeams.myTeam.teams} />
-      <div>vs</div>
+      <div id={styles.versus}>vs</div>
       <Team team={matchTeams.enemyTeam.teams} />
     </div>
   );
