@@ -31,10 +31,5 @@ function Team({ team }: { team: Player[] }) {
 }
 
 function PlayerId({ intraId }: { intraId: string }) {
-  const flag = intraId.lastIndexOf('한');
-  const name =
-    flag < 0
-      ? intraId
-      : intraId.slice(0, flag + 1) + ' ' + intraId.slice(flag + 1);
-  return <div className={styles.intraId}>{name}</div>;
+  return <div className={styles.intraId}>{intraId}</div>;
 }

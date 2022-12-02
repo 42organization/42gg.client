@@ -6,6 +6,8 @@
 
 .title {
   @include pageTitle;
+  font-size: $giant-big-font;
+  word-break: keep-all;
 }
 
 .subtitle {

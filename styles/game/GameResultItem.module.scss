@@ -17,6 +17,7 @@
 .smallContainer {
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
+  height: 3.3rem;
   align-items: center;
   padding: 0.5rem 0.9rem;
   margin-bottom: 0.2rem;
@@ -41,8 +42,9 @@
 }
 
 .smallTeam {
-  font-size: $small-font;
+  font-size: 0.9rem;
   font-weight: 500;
+  word-break: keep-all;
   .Left {
     display: flex;
     flex-direction: row;
@@ -65,6 +67,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  word-break: keep-all;
   .userId {
     margin: 0.5rem 0;
     color: white;
