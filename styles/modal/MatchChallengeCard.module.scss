@@ -1,56 +1,54 @@
 @import 'styles/common.scss';
 
 .opponentCard {
-  width: 20rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.4);
-  border: rgba(0, 0, 0, 0) solid 0.05rem;
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  width: 17rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.3rem;
+  border: solid 0.1rem rgba(0, 0, 0, 0);
   border-radius: 0.5rem;
-  margin: 0.5rem 0.1rem;
-  padding: 0.3rem;
+  background: rgba(255, 255, 255, 0.4);
+  &.isSelected {
+    border: solid 0.1rem $pp-blue;
+    background: rgba(100, 100, 100, 0.2);
+  }
 }
 
-.cardInfo {
+.imageIdWrap {
   display: flex;
-  max-width: 14rem;
   flex-direction: column;
-  margin: 0 0.5rem;
-}
-
-.userImage {
-  @include userImage(4rem);
-}
-
-.intraId {
-  margin: 0.5rem;
-  color: white;
-  font-size: 1.1rem;
-  font-family: $title-font;
-  text-shadow: $text-shadow, 0.2rem 0.2rem 0 $pp-red;
-  letter-spacing: 0.1rem;
-}
-
-.isSelected {
-  background: rgba(100, 100, 100, 0.4);
-  border: $pp-red solid 0.05rem;
-}
-
-.cardTitle {
-  display: flex;
-  flex-direction: row;
-}
-
-.nick {
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  font-size: 0.7rem;
-  margin: 0.2rem;
+  justify-content: center;
+  .userImage {
+    @include userImage(3.5rem);
+  }
+  .intraId {
+    margin-top: 0.3rem;
+    color: black;
+    font-size: $small-font;
+    font-weight: 600;
+    word-break: keep-all;
+    text-align: center;
+  }
 }
 
-.detail {
-  font-size: 0.7rem;
-  margin: 0.2rem;
+.nickDetailWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 0.3rem;
+  .nick {
+    margin-left: 0.5rem;
+    color: $pp-blue;
+    font-size: $small-font;
+  }
+  .detail {
+    margin: 0.2rem;
+    color: black;
+    font-size: 0.8rem;
+    li {
+      list-style: none;
+    }
+  }
 }

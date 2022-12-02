@@ -1,26 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Challenge } from 'types/modalTypes';
+import { Opponent } from 'types/matchTypes';
 import { reloadMatchState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/modal/MatchChallengeModal.module.scss';
-import fallBack from 'public/image/fallBackSrc.jpeg';
 import MatchChallengeCard from './MatchChallengeCard';
-import { StaticImageData } from 'next/image';
-
-interface Opponent {
-  intraId: string;
-  nick: string;
-  imageUrl: StaticImageData;
-  detail: string;
-}
 
 export default function MatchChallengeModal({ slotId, type }: Challenge) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
+  const [selectedOpponent, setSelectedOpponent] = useState<Opponent | null>(
+    null
+  );
+  const [opponents, setOpponents] = useState<Opponent[]>([]);
+  const [clickReloadChallenge, setClickReloadChallenge] = useState(false);
+  const [spinReloadButton, setSpinReloadButton] = useState(false);
   const enrollResponse: { [key: string]: string } = {
     SUCCESS: '경기가 성공적으로 등록되었습니다.',
     SC001: '경기 등록에 실패하였습니다.',
@@ -29,39 +27,10 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
   const selectCancelResponse: { [key: string]: string } = {
     E0001: '잘못된 요청입니다.',
   };
-  const [selectedOpponent, setSelectedOpponent] = useState<Opponent | null>(
-    null
-  );
-  const [opponents, setOpponents] = useState<[Opponent, Opponent, Opponent]>([
-    {
-      intraId: 'intraID1',
-      nick: 'nickname1',
-      imageUrl: fallBack,
-      detail: '상세 정보1',
-    },
-    {
-      intraId: 'intraID22',
-      nick: 'nickname2',
-      imageUrl: fallBack,
-      detail: '상세 정보2',
-    },
-    {
-      intraId: 'intraID3',
-      nick: 'nickname3',
-      imageUrl: fallBack,
-      detail: '상세 정보3',
-    },
-  ]);
-  const [clickReloadChallenge, setClickReloadChallenge] = useState(false);
-  const [spinReloadButton, setSpinReloadButton] = useState(false);
-
-  const getOpponents = async () => {
-    try {
-      const res = await instance.get(`/pingpong/match/opponent`);
-      setOpponents(res?.data);
-    } catch {
-      setError('RJ02');
-    }
+  const content = {
+    title: 'CHALLENGE',
+    main: '42gg를 이겨라!',
+    sub: '42gg 팀원 중 상대를 선택해 주세요.',
   };
 
   useEffect(() => {
@@ -71,6 +40,15 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
   useEffect(() => {
     if (clickReloadChallenge) reloadClickHandler();
   }, [clickReloadChallenge]);
+
+  const getOpponents = async () => {
+    try {
+      const res = await instance.get(`/pingpong/match/opponent`);
+      setOpponents(res?.data);
+    } catch {
+      setError('RJ02');
+    }
+  };
 
   const reloadClickHandler = async () => {
     setSelectedOpponent(null);
@@ -126,11 +104,22 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
     setReloadMatch(true);
   };
 
+  if (opponents.length === 0) return null;
+
   return (
     <div className={styles.container}>
-      <div>
-        <div className={styles.phrase}>🏓 42gg를 이겨라 🏓</div>
-        <div>42gg 팀원 중 상대를 선택해 주세요</div>
+      <div className={styles.phrase}>
+        <div className={styles.title}>{content.title}</div>
+        <div>{content.main}</div>
+        <div className={styles.subContent}>
+          {content.sub}
+          <ReloadButton
+            spinReloadButton={spinReloadButton}
+            setClickReloadChallenge={setClickReloadChallenge}
+          />
+        </div>
+      </div>
+      <div className={styles.cardWrap}>
         {opponents.map((opponent, index) => (
           <MatchChallengeCard
             opponent={opponent}
@@ -139,13 +128,6 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
             key={index}
           />
         ))}
-      </div>
-      <div className={styles.reloadContainer}>
-        <span>새로고침</span>
-        <ReloadButton
-          spinReloadButton={spinReloadButton}
-          setClickReloadChallenge={setClickReloadChallenge}
-        />
       </div>
       <div className={styles.buttons}>
         <div className={styles.negative}>

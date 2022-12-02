@@ -17,6 +17,10 @@ export default function MatchEnrollModal({ slotId, type, mode }: Enroll) {
     SC003: '경기 취소 후 1분 동안 경기를 예약할 수 없습니다.',
     E0001: '잘못된 요청입니다.',
   };
+  const content = {
+    main: '경기를 등록하시겠습니까?',
+    sub: '예약 확정 후 상대를 확인해 주세요!',
+  };
 
   const onEnroll = async () => {
     try {
@@ -44,12 +48,9 @@ export default function MatchEnrollModal({ slotId, type, mode }: Enroll) {
     <div className={styles.container}>
       <div className={styles.phrase}>
         <div className={styles.emoji}>🏓</div>
-        <div className={styles.slotId}>
-          {slotId}번 방
-          <br />
-          슬롯 예약을 확정하시겠습니까 ?
-        </div>
-        <div>예약 확정 후 상대를 확인해 주세요 !</div>
+        <div>{slotId}번 방</div>
+        <div>{content.main}</div>
+        <div className={styles.subContent}>{content.sub}</div>
       </div>
       <div className={styles.buttons}>
         <div className={styles.negative}>

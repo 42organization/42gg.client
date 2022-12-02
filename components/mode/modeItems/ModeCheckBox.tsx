@@ -16,7 +16,7 @@ export default function ModeCheckBox({
       <input
         type='checkbox'
         id={id}
-        className={styles.check}
+        className={styles.box}
         checked={checked}
         onChange={onCheckBox}
       />

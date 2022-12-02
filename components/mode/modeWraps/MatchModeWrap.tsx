@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { MatchMode } from 'types/mainType';
+import { showModeWrapState } from 'utils/recoil/match';
 import { seasonListState } from 'utils/recoil/seasons';
 import ModeCheckBox from '../modeItems/ModeCheckBox';
 import styles from 'styles/mode/ModeWrap.module.scss';
@@ -16,6 +17,7 @@ export default function MatchModeWrap({
   checkBoxMode,
   setCheckBoxMode,
 }: MatchModeWrapProps) {
+  const showModeWrap = useRecoilValue(showModeWrapState);
   const { seasonMode } = useRecoilValue(seasonListState);
 
   const modeCheckBoxHandler = () => {
@@ -24,7 +26,7 @@ export default function MatchModeWrap({
 
   return (
     <div>
-      {seasonMode === 'both' && (
+      {seasonMode === 'both' && showModeWrap && (
         <div className={styles.matchModeWrap}>
           <ModeCheckBox
             checked={checkBoxMode === 'challenge'}

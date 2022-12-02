@@ -12,6 +12,11 @@ export const reloadMatchState = atom<boolean>({
   default: false,
 });
 
+export const showModeWrapState = atom<boolean>({
+  key: `showModeWrapState/${v1()}`,
+  default: false,
+});
+
 export const currentMatchState = atom<CurrentMatch>({
   key: `currentMatchState/${v1()}`,
   default: {

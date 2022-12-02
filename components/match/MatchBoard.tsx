@@ -5,7 +5,7 @@ import { MatchMode } from 'types/mainType';
 import instance from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import { reloadMatchState } from 'utils/recoil/match';
+import { reloadMatchState, showModeWrapState } from 'utils/recoil/match';
 import MatchSlotList from './MatchSlotList';
 import styles from 'styles/match/MatchBoard.module.scss';
 
@@ -15,9 +15,10 @@ interface MatchBoardProps {
 }
 
 export default function MatchBoard({ type, checkBoxMode }: MatchBoardProps) {
+  const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
+  const setShowModeWrap = useSetRecoilState(showModeWrapState);
   const [match, setMatch] = useState<Match | null>(null);
   const [spinReloadButton, setSpinReloadButton] = useState<boolean>(false);
-  const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
 
@@ -46,6 +47,7 @@ export default function MatchBoard({ type, checkBoxMode }: MatchBoardProps) {
 
   if (matchBoards.length === 0)
     return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
+  else setShowModeWrap(true);
 
   const openManual = () => {
     setModal({

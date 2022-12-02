@@ -1,13 +1,7 @@
-import styles from '/styles/modal/MatchChallengeCard.module.scss';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
-
-interface Opponent {
-  intraId: string;
-  nick: string;
-  imageUrl: StaticImageData;
-  detail: string;
-}
+import { Opponent } from 'types/matchTypes';
+import styles from '/styles/modal/MatchChallengeCard.module.scss';
 
 interface MatchChallengeCardProps {
   opponent: Opponent;
@@ -20,6 +14,7 @@ export default function MatchChallengeCard({
   selectedOpponent,
   setSelectedOpponent,
 }: MatchChallengeCardProps) {
+  const { intraId, nick, imageUrl, detail } = opponent;
   const selectHandler = () => {
     setSelectedOpponent(opponent);
   };
@@ -27,21 +22,25 @@ export default function MatchChallengeCard({
   return (
     <div
       className={`${styles.opponentCard} ${
-        selectedOpponent && opponent.intraId === selectedOpponent.intraId
+        selectedOpponent && intraId === selectedOpponent.intraId
           ? styles.isSelected
           : ''
       }`}
       onClick={selectHandler}
     >
-      <div className={styles.userImage}>
-        <Image src={opponent.imageUrl} layout={'fill'}></Image>
-      </div>
-      <div className={styles.cardInfo}>
-        <div className={styles.cardTitle}>
-          <span className={styles.intraId}>{opponent.intraId}</span>
-          <span className={styles.nick}>{opponent.nick}</span>
+      <div className={styles.imageIdWrap}>
+        <div className={styles.userImage}>
+          <Image src={imageUrl} layout={'fill'}></Image>
         </div>
-        <div className={styles.detail}>{opponent.detail}</div>
+        <div className={styles.intraId}>{intraId}</div>
+      </div>
+      <div className={styles.nickDetailWrap}>
+        <div className={styles.nick}>{nick}</div>
+        <div className={styles.detail}>
+          {detail.map((detail, index) => {
+            return <li key={index}>• {detail}</li>;
+          })}
+        </div>
       </div>
     </div>
   );

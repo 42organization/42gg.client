@@ -6,25 +6,52 @@
 
 .phrase {
   @include modal-phrase;
-  font-size: $big-giant-font;
+  margin-bottom: 0;
+  font-size: $medium-font;
+  .title {
+    margin-bottom: 0.8rem;
+    color: white;
+    font-size: $big-giant-font;
+    font-family: $title-font;
+    font-weight: 700;
+    text-shadow: $text-shadow;
+    letter-spacing: 0.1rem;
+  }
+  .subContent {
+    margin-top: 0rem;
+    text-align: center;
+    .reloadButton {
+      @include reload-button;
+      margin-left: 0.5rem;
+    }
+    .spinReloadButton {
+      @include reload-button;
+      margin-left: 0.5rem;
+      opacity: 0.7;
+      animation: spin 1s infinite;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+  }
 }
 
-.reloadContainer {
+.cardWrap {
+  margin-bottom: 1rem;
+}
+
+.reloadWrap {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 1rem;
-
+  margin-bottom: 0.5rem;
   span {
-    font-size: $big-font;
-    margin: 0 1rem;
+    margin-right: 1rem;
+    font-size: $medium-font;
+    text-align: center;
   }
-
   .reloadButton {
     @include reload-button;
   }
-
   .spinReloadButton {
     @include reload-button;
     opacity: 0.7;
@@ -35,7 +62,7 @@
 }
 
 .buttons {
-  @include select-buttons(6rem);
+  @include select-buttons;
 }
 
 @keyframes spin {

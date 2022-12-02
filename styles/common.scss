@@ -75,8 +75,10 @@ $winner-blue: #040eff;
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 50%;
+  color: black;
   background: linear-gradient(to bottom, white, $gray);
   text-align: center;
+  font-size: $medium-font;
   cursor: pointer;
   &:hover {
     color: $dark-gray;
