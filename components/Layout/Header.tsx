@@ -50,16 +50,6 @@ export default function Header() {
           </Link>
         </div>
         <div className={styles.headerRight}>
-          <div
-            id={styles.announceIcon}
-            onClick={() =>
-              window.open(
-                'https://far-moonstone-7ff.notion.site/91925f9c945340c6a139f64fb849990d'
-              )
-            }
-          >
-            <BsMegaphone />
-          </div>
           <div id={styles.notiIcon} onClick={openNotiBarHandler}>
             {live.notiCount ? (
               <div className={styles.bellWhole}>
