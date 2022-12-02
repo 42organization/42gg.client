@@ -4,7 +4,11 @@ export default function Footer() {
   return (
     <footer className={styles.footerContainer}>
       <div className={styles.link}>
-        <div onClick={() => window.open('https://github.com/42organization')}>
+        <div
+          onClick={() =>
+            window.open('https://github.com/42organization/42gg_softwave')
+          }
+        >
           Github
         </div>
         <div className={styles.bar}>|</div>
