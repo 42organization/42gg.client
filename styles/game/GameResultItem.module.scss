@@ -18,7 +18,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   align-items: center;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 0.9rem;
   margin-bottom: 0.2rem;
   border-radius: $medium-radius;
   background: $gray;
@@ -41,6 +41,8 @@
 }
 
 .smallTeam {
+  font-size: $small-font;
+  font-weight: 500;
   .Left {
     display: flex;
     flex-direction: row;
@@ -66,7 +68,7 @@
   .userId {
     margin: 0.5rem 0;
     color: white;
-    font-size: $big-font;
+    font-size: $medium-font;
     font-weight: 600;
     text-align: center;
     text-shadow: $text-shadow;
