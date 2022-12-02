@@ -7,7 +7,7 @@ import MatchModeWrap from 'components/mode/modeWraps/MatchModeWrap';
 import styles from 'styles/match/match.module.scss';
 
 export default function Match() {
-  const currentMatch = useRecoilValue(currentMatchState);
+  const { mode } = useRecoilValue(currentMatchState);
   const [checkBoxMode, setCheckBoxMode] = useState<MatchMode>('rank');
   const content = {
     normal: { style: styles.normal },
@@ -16,8 +16,8 @@ export default function Match() {
   };
 
   useEffect(() => {
-    setCheckBoxMode(currentMatch.mode === 'CHALLENGE' ? 'challenge' : 'rank');
-  }, [currentMatch.mode]);
+    setCheckBoxMode(mode === 'CHALLENGE' ? 'challenge' : 'rank');
+  }, [mode]);
 
   return (
     <div className={styles.container}>
