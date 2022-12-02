@@ -5,42 +5,16 @@
   align-items: center;
 }
 
-.check {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #707070;
+.box {
   position: relative;
+  width: 19px;
+  height: 19px;
+  border: 2px solid #707070;
 }
 .checking {
-  font-size: 15px;
-  width: 10rem;
-  height: 1.4rem;
   margin-left: 0.4rem;
-  left: 0;
-  top: 0;
   .checkBoxText {
-    font-size: 1.2rem;
     color: white;
-    align-items: center;
-  }
-}
-
-.toggleSwitch {
-  display: block;
-  position: relative;
-  width: 4rem;
-  height: 1.6rem;
-  border-radius: 2rem;
-  background: $norm-lightblue2;
-  color: white;
-  box-shadow: 0 0 1rem 3px rgba(0 0 0 / 15%);
-  cursor: pointer;
-  .toggleText {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: $small-font;
-    font-weight: 600;
-    transform: translate(0, -50%);
+    font-size: 1rem;
   }
 }

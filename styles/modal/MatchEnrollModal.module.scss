@@ -6,9 +6,8 @@
 
 .phrase {
   @include modal-phrase;
-  .slotId {
-    margin-bottom: 0.5rem;
-    font-size: $giant-font;
+  div:nth-child(2) {
+    font-weight: 700;
   }
 }
 
