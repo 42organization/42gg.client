@@ -13,9 +13,15 @@ interface MatchSlotProps {
   type: string;
   slot: Slot;
   checkBoxMode?: MatchMode;
+  scrollTargetId: number;
 }
 
-function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
+function MatchSlot({
+  type,
+  slot,
+  checkBoxMode,
+  scrollTargetId,
+}: MatchSlotProps) {
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const currentRef = useRef<HTMLButtonElement>(null);
@@ -90,17 +96,13 @@ function MatchSlot({ type, slot, checkBoxMode }: MatchSlotProps) {
     }
   };
 
-  const getScrollCurrentRef = (mytable: string) => {
-    if (mytable === 'mytable') return currentRef;
-    return null;
-  };
-
   return (
     <button
+      id={slotId.toString()}
       className={`${styles.slotButton} ${buttonStyle[status]}`}
       disabled={status === 'close'}
       onClick={enrollHandler}
-      ref={getScrollCurrentRef(status)}
+      ref={scrollTargetId === slot.slotId ? currentRef : null}
     >
       <span className={styles.slotId}>
         {slotId}
