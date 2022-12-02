@@ -43,26 +43,17 @@ export default function MenuBar() {
                 </Link>
               ))}
               <div className={styles.subMenu}>
-                <div
-                  onClick={() =>
-                    window.open(
-                      'https://far-moonstone-7ff.notion.site/91925f9c945340c6a139f64fb849990d'
-                    )
-                  }
-                >
-                  공지사항
+                <div onClick={() => setModal({ modalName: 'MENU-REPORT' })}>
+                  건의하기
                 </div>
                 <div
                   onClick={() =>
                     window.open(
-                      'https://far-moonstone-7ff.notion.site/917df2bd339d42c3a7689277246e7f64'
+                      'https://github.com/42organization/42arcade.gg.client/wiki/42gg.kr--%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B0%80%EC%9D%B4%EB%93%9C'
                     )
                   }
                 >
                   사용 설명서
-                </div>
-                <div onClick={() => setModal({ modalName: 'MENU-REPORT' })}>
-                  건의하기
                 </div>
               </div>
             </div>
