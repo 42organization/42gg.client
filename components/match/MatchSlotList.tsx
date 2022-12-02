@@ -42,7 +42,7 @@ export default function MatchSlotList({
                   ? myTableId.current
                   : isFirstOpenedSlotId.current
               }
-            ></MatchSlot>
+            />
           );
         })}
       </div>
