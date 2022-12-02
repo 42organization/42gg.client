@@ -13,6 +13,7 @@ export interface CurrentMatch {
   isMatched: boolean;
   myTeam: string[];
   enemyTeam: string[];
+  mode: string;
 }
 
 export interface Match {

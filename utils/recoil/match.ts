@@ -14,5 +14,12 @@ export const reloadMatchState = atom<boolean>({
 
 export const currentMatchState = atom<CurrentMatch>({
   key: `currentMatchState/${v1()}`,
-  default: { slotId: 0, time: '', isMatched: false, myTeam: [], enemyTeam: [] },
+  default: {
+    slotId: 0,
+    time: '',
+    isMatched: false,
+    myTeam: [],
+    enemyTeam: [],
+    mode: '',
+  },
 });
