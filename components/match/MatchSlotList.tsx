@@ -15,7 +15,7 @@ export default function MatchSlotList({
   checkBoxMode,
   matchSlots,
 }: MatchSlotListProps) {
-  const isFirstOpendSlotId = useRef<number>(0);
+  const isFirstOpenedSlotId = useRef<number>(0);
   const myTableId = useRef<number>(0);
 
   return (
@@ -23,8 +23,8 @@ export default function MatchSlotList({
       <div className={styles.slotHour}></div>
       <div className={styles.slotGrid}>
         {matchSlots.map((slot) => {
-          if (slot.status === 'open' && isFirstOpendSlotId.current === 0) {
-            isFirstOpendSlotId.current = slot.slotId;
+          if (slot.status === 'open' && isFirstOpenedSlotId.current === 0) {
+            isFirstOpenedSlotId.current = slot.slotId;
           }
 
           if (slot.status === 'mytable' && myTableId.current === 0) {
@@ -40,7 +40,7 @@ export default function MatchSlotList({
               scrollTargetId={
                 myTableId.current !== 0
                   ? myTableId.current
-                  : isFirstOpendSlotId.current
+                  : isFirstOpenedSlotId.current
               }
             ></MatchSlot>
           );
