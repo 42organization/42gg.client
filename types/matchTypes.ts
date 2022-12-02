@@ -1,3 +1,11 @@
+import { StaticImageData } from 'next/image';
+
+export interface Opponent {
+  intraId: string;
+  nick: string;
+  imageUrl: StaticImageData;
+  detail: string[];
+}
 export interface Slot {
   slotId: number;
   status: string;
