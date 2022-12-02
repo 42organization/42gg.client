@@ -101,7 +101,7 @@ function isRankModeType(arg: RankUser | NormalUser): arg is RankUser {
 
 function makeUser(user: NormalUser | RankUser) {
   const makeStatusMessage = (message: string) =>
-    message.length > 20 ? `${message.slice(0, 20)}...` : message;
+    message.length > 10 ? `${message.slice(0, 10)}...` : message;
   const makeInit = (init: number) => (user.rank < 0 ? '-' : init);
   return {
     intraId: user.intraId,
