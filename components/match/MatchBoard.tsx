@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Match } from 'types/matchTypes';
 import { MatchMode } from 'types/mainType';
@@ -20,18 +20,10 @@ export default function MatchBoard({ type, checkBoxMode }: MatchBoardProps) {
   const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
-  const currentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setReloadMatch(true);
   }, [checkBoxMode]);
-
-  useEffect(() => {
-    currentRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-    });
-  }, [match]);
 
   useEffect(() => {
     if (reloadMatch) getMatchHandler();
