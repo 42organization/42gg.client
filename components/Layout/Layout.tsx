@@ -3,7 +3,11 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { userState, liveState } from 'utils/recoil/layout';
-import { reloadMatchState, openCurrentMatchState } from 'utils/recoil/match';
+import {
+  reloadMatchState,
+  openCurrentMatchState,
+  currentMatchState,
+} from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { seasonListState } from 'utils/recoil/seasons';
@@ -26,6 +30,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   );
   const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
   const setSeasonList = useSetRecoilState(seasonListState);
+  const setCurrentMatch = useSetRecoilState(currentMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const presentPath = useRouter().asPath;
@@ -59,6 +64,14 @@ export default function AppLayout({ children }: AppLayoutProps) {
     if (live?.event === 'match') setOpenCurrentMatch(true);
     else {
       if (live?.event === 'game') setModal({ modalName: 'FIXED-AFTER_GAME' });
+      setCurrentMatch({
+        slotId: 0,
+        time: '',
+        isMatched: false,
+        myTeam: [],
+        enemyTeam: [],
+        mode: '',
+      });
       setOpenCurrentMatch(false);
     }
   }, [live]);
