@@ -4,7 +4,6 @@ import { userState } from 'utils/recoil/layout';
 import { seasonListState } from 'utils/recoil/seasons';
 import { openMenuBarState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
-import instance from 'utils/axios';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 export default function MenuBar() {
@@ -23,8 +22,11 @@ export default function MenuBar() {
 
   const goToAdminPage = async () => {
     try {
-      await instance.get('/admin');
-      window.open(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/admin`);
+      window.open(
+        `${
+          process.env.NEXT_PUBLIC_SERVER_ENDPOINT
+        }/admin?token=${localStorage.getItem('42gg-token')}`
+      );
     } catch (e) {
       alert('👊 콱 씨...!');
     }
