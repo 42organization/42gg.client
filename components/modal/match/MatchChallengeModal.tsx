@@ -25,6 +25,7 @@ export default function MatchChallengeModal({ slotId, type }: Challenge) {
     E0001: '경기 등록에 실패하였습니다.',
   };
   const selectCancelResponse: { [key: string]: string } = {
+    SD001: '잘못된 요청입니다.',
     E0001: '잘못된 요청입니다.',
   };
   const content = {
