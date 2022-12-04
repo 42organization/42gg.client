@@ -12,7 +12,6 @@ import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { seasonListState } from 'utils/recoil/seasons';
 import instance from 'utils/axios';
-import Statistics from 'pages/statistics';
 import Header from './Header';
 import Footer from './Footer';
 import CurrentMatch from './CurrentMatch';
@@ -97,35 +96,27 @@ export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className={styles.appContainer}>
       <div className={styles.background}>
-        <div>
-          {presentPath === '/statistics' && user.isAdmin ? (
-            <Statistics />
-          ) : (
-            user.intraId && (
-              <>
-                <Header />
-                {openCurrentMatch && <CurrentMatch />}
-                {user.isAdmin && (
-                  <button
-                    className={styles.adminMatchTriggerButton}
-                    onClick={() => setModal({ modalName: 'MENU-MATCHTRIGGER' })}
-                  >
-                    🛎️
-                  </button>
-                )}
-                {presentPath !== '/match' && (
-                  <Link href='/match'>
-                    <div className={styles.buttonContainer}>
-                      <a className={styles.matchingButton}>🏓</a>
-                    </div>
-                  </Link>
-                )}
-                {children}
-                <Footer />
-              </>
-            )
+        <>
+          <Header />
+          {openCurrentMatch && <CurrentMatch />}
+          {user.isAdmin && (
+            <button
+              className={styles.adminMatchTriggerButton}
+              onClick={() => setModal({ modalName: 'MENU-MATCHTRIGGER' })}
+            >
+              🛎️
+            </button>
           )}
-        </div>
+          {presentPath !== '/match' && (
+            <Link href='/match'>
+              <div className={styles.buttonContainer}>
+                <a className={styles.matchingButton}>🏓</a>
+              </div>
+            </Link>
+          )}
+          {children}
+          <Footer />
+        </>
       </div>
     </div>
   );

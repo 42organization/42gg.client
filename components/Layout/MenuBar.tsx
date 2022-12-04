@@ -62,21 +62,14 @@ export default function MenuBar() {
             <div className={styles.subMenu} id={styles.logout}>
               {isAdmin && (
                 <>
-                  <Link href='/statistics'>
-                    <div>📊 통계페이지</div>
-                  </Link>
                   <div onClick={goToAdminPage}>😎 관리자</div>
-                </>
-              )}
-              {/*<div onClick={() => setModal({ modalName: 'MENU-LOGOUT' })}>*/}
-              {/*  로그아웃*/}
-              {/*</div>*/}
-              {isAdmin && (
-                <>
                   <div
                     onClick={() => setModal({ modalName: 'MENU-MATCHTRIGGER' })}
                   >
                     🛎️ 매치 시작
+                  </div>
+                  <div onClick={() => setModal({ modalName: 'MENU-LOGOUT' })}>
+                    로그아웃
                   </div>
                 </>
               )}
