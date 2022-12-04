@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   width: 100vw;
+  max-height: -webkit-fill-available;
   background: black;
 }
 
@@ -12,7 +13,7 @@
   position: relative;
   width: 100vw;
   max-width: 100vh;
-  min-height: 100vh;
+  min-height: 100%;
   background-image: url('../../public/image/background_img.png');
   background-size: cover;
   background-position: center;
