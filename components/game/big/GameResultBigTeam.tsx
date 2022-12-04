@@ -26,9 +26,9 @@ export default function GameResultBigTeam({ team }: GameResultBigTeamProps) {
   };
 
   return (
-    <div className={styles.bigTeam}>
+    <>
       {team.players.map((player, index) => (
-        <div key={index}>
+        <div className={styles.bigTeam} key={index}>
           <Link href={`/users/detail?intraId=${player.intraId}`}>
             <div>
               <PlayerImage
@@ -42,6 +42,6 @@ export default function GameResultBigTeam({ team }: GameResultBigTeamProps) {
           <div className={styles.winRate}>{makeRate(player)}</div>
         </div>
       ))}
-    </div>
+    </>
   );
 }
