@@ -99,6 +99,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
         <Header />
         <div className={styles.pageContent}>
           {openCurrentMatch && <CurrentMatch />}
+          {openCurrentMatch && <div className={styles.blank}></div>}
           {user.isAdmin && (
             <div className={`${styles.buttonContainer} ${styles.trigger}`}>
               <button
