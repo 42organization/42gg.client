@@ -17,6 +17,9 @@ export default function MatchTriggerModal() {
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
   const resetOpenMenuBar = useResetRecoilState(openMenuBarState);
+  const matchTriggerResponse: { [key: string]: string } = {
+    E0001: '잘못된 요청입니다.',
+  };
 
   const inputChangeHandler = ({
     target: { value },
@@ -35,8 +38,12 @@ export default function MatchTriggerModal() {
         setModal({ modalName: null });
         resetOpenMenuBar();
         alert('매치 시작 요청 완료 !');
-      } catch (e) {
-        setError('RJ01');
+      } catch (e: any) {
+        if (e.response.data.code in matchTriggerResponse) {
+          alert(matchTriggerResponse[e.response.data.code]);
+        } else {
+          setError('RJ01');
+        }
       }
     } else {
       alert('슬롯 아이디(숫자)를 입력해 주세요 !');
