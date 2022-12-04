@@ -13,6 +13,7 @@
   width: 100vw;
   max-width: 100vh;
   height: 100vh;
+  max-height: -webkit-fill-available;
   background-image: url('../../public/image/background_img.png');
   background-size: cover;
   background-position: center;
@@ -20,9 +21,15 @@
 }
 
 .pageContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: calc(100vh - 4rem);
   max-height: -webkit-fill-available;
   overflow-y: scroll;
+  .blank {
+    height: 3rem;
+  }
 }
 
 .buttonContainer {
