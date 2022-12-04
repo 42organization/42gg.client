@@ -116,6 +116,7 @@ $winner-blue: #040eff;
   left: 0;
   width: 100vw;
   height: 100vh;
+  max-height: -webkit-fill-available;
   background: rgba(0, 0, 0, 0.5);
 }
 
