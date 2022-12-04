@@ -21,14 +21,14 @@
 }
 
 .pageContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: calc(100vh - 4rem);
   max-height: -webkit-fill-available;
   overflow-y: scroll;
   .blank {
     height: 3rem;
-  }
-  .footerWrap {
-    margin-top: auto;
   }
 }
 
