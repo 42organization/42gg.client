@@ -19,6 +19,19 @@
   background-attachment: fixed;
 }
 
+.adminMatchTriggerButton {
+  @include button(white, black, 5rem, 5rem);
+  z-index: 1;
+  position: sticky;
+  top: 73%;
+  margin-left: 75%;
+  border-radius: 50%;
+  background: white;
+  font-size: 2.3rem;
+  box-shadow: 3px 3px 10px black;
+  cursor: pointer;
+}
+
 .buttonContainer {
   z-index: 1;
   position: sticky;

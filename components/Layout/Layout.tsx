@@ -105,7 +105,15 @@ export default function AppLayout({ children }: AppLayoutProps) {
               <>
                 <Header />
                 {openCurrentMatch && <CurrentMatch />}
-                {presentPath !== '/match' && presentPath !== '/manual' && (
+                {user.isAdmin && (
+                  <button
+                    className={styles.adminMatchTriggerButton}
+                    onClick={() => setModal({ modalName: 'MENU-MATCHTRIGGER' })}
+                  >
+                    🛎️
+                  </button>
+                )}
+                {presentPath !== '/match' && (
                   <Link href='/match'>
                     <div className={styles.buttonContainer}>
                       <a className={styles.matchingButton}>🏓</a>
