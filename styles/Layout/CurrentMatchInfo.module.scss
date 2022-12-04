@@ -1,9 +1,13 @@
 @import 'styles/common.scss';
 
 .container {
+  z-index: 1;
+  position: absolute;
+  top: 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   padding: 0.8rem 1rem;
   background: rgba(255, 255, 255, 0.35);
 }
