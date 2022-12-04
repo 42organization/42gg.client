@@ -13,6 +13,7 @@
   width: 100vw;
   max-width: 100vh;
   height: 100vh;
+  max-height: -webkit-fill-available;
   background-image: url('../../public/image/background_img.png');
   background-size: cover;
   background-position: center;
