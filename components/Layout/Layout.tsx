@@ -118,7 +118,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
             </Link>
           )}
           {children}
-          <Footer />
+          <div className={styles.footerWrap}>
+            <Footer />
+          </div>
         </div>
       </div>
     </div>
