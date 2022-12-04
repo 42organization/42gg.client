@@ -96,27 +96,29 @@ export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className={styles.appContainer}>
       <div className={styles.background}>
-        <>
-          <Header />
+        <Header />
+        <div className={styles.pageContent}>
           {openCurrentMatch && <CurrentMatch />}
           {user.isAdmin && (
-            <button
-              className={styles.adminMatchTriggerButton}
-              onClick={() => setModal({ modalName: 'MENU-MATCHTRIGGER' })}
-            >
-              🛎️
-            </button>
+            <div className={`${styles.buttonContainer} ${styles.trigger}`}>
+              <button
+                className={styles.fixedButton}
+                onClick={() => setModal({ modalName: 'MENU-MATCHTRIGGER' })}
+              >
+                🛎️
+              </button>
+            </div>
           )}
           {presentPath !== '/match' && (
             <Link href='/match'>
               <div className={styles.buttonContainer}>
-                <a className={styles.matchingButton}>🏓</a>
+                <a className={styles.fixedButton}>🏓</a>
               </div>
             </Link>
           )}
           {children}
           <Footer />
-        </>
+        </div>
       </div>
     </div>
   );
