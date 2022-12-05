@@ -1,16 +1,16 @@
 @import 'styles/common.scss';
 
 .container {
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   top: 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 4rem;
+  height: 4.2rem;
   padding: 0 1rem;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .stringWrapper {
@@ -42,8 +42,9 @@
 }
 
 .messageWrapper {
-  color: white;
-  text-shadow: 2px 2px 2px rgb(70, 70, 70);
+  // color: white;
+  // text-shadow: 2px 2px 2px rgb(70, 70, 70);
+  color: black;
 }
 
 .icon {
@@ -85,6 +86,7 @@
 
 #enemyUsers {
   font-weight: 600;
-  text-shadow: 0.1rem 0.1rem 0.1rem $pp-blue;
+  color: $pp-blue;
+  // text-shadow: 0.1rem 0.1rem 0.1rem $pp-blue;
   cursor: pointer;
 }
