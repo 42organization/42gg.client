@@ -21,10 +21,10 @@ export default function RankGame({ currentGame, onSubmit }: RankGameProps) {
   const inputScoreHandler = ({
     target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    const filteredValue = value.replace(/[^0-9]/g, '');
+    const intValue = parseInt(value);
     setResult((prev) => ({
       ...prev,
-      [name]: filteredValue === '' ? filteredValue : parseInt(filteredValue),
+      [name]: intValue > 5 || intValue < 0 ? '' : intValue,
     }));
   };
 
@@ -54,7 +54,12 @@ export default function RankGame({ currentGame, onSubmit }: RankGameProps) {
       <Guide condition={onCheck} modalMode='rank' />
       <div className={styles.resultContainer}>
         <MatchTeams matchTeams={matchTeamsInfo} />
-        <Score onCheck={onCheck} result={result} onChange={inputScoreHandler} />
+        <Score
+          onCheck={onCheck}
+          result={result}
+          onChange={inputScoreHandler}
+          onEnter={enterHandler}
+        />
       </div>
       {isScoreExist ? (
         <div className={styles.buttons}>
