@@ -54,7 +54,12 @@ export default function RankGame({ currentGame, onSubmit }: RankGameProps) {
       <Guide condition={onCheck} modalMode='rank' />
       <div className={styles.resultContainer}>
         <MatchTeams matchTeams={matchTeamsInfo} />
-        <Score onCheck={onCheck} result={result} onChange={inputScoreHandler} />
+        <Score
+          onCheck={onCheck}
+          result={result}
+          onChange={inputScoreHandler}
+          onEnter={enterHandler}
+        />
       </div>
       {isScoreExist ? (
         <div className={styles.buttons}>
