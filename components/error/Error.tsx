@@ -21,9 +21,10 @@ export default function ErrorPage() {
     <div className={styles.container}>
       <div className={styles.errorContainer}>
         <div className={styles.title}>42GG</div>
+        {error === '404' && <div className={styles.img404} />}
         <div className={styles.error}>
-          {error === 'DK404'
-            ? '잘못된 요청입니다!'
+          {error === '404'
+            ? '요청하신 페이지를 찾을 수 없습니다.'
             : '데이터 요청에 실패하였습니다.'}
           <div className={styles.errorCode}>({error})</div>
         </div>
