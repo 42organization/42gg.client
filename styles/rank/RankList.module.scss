@@ -33,7 +33,7 @@
 /* RankListFrame */
 @mixin rankGrid {
   display: grid;
-  grid-template-columns: 13% 32% auto 14%;
+  grid-template-columns: 12.5% 38% auto 14%;
   justify-items: center;
   align-items: center;
   height: 2.5rem;
@@ -94,6 +94,10 @@
     }
   }
   .statusMessage {
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
     justify-self: left;
     color: $dark-gray;
   }
