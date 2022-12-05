@@ -7,7 +7,7 @@ const Error = () => {
   const setError = useSetRecoilState(errorState);
 
   useEffect(() => {
-    setError('DK404');
+    setError('404');
   }, []);
   return <ErrorPage />;
 };
