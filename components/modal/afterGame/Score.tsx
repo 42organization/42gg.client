@@ -27,6 +27,7 @@ function InputScore({ result, onChange }: InputScoreProps) {
         <input
           id='myTeamScore'
           name='myTeamScore'
+          type='number'
           value={result.myTeamScore}
           onChange={onChange}
           maxLength={1}
@@ -37,6 +38,7 @@ function InputScore({ result, onChange }: InputScoreProps) {
         <input
           id='enemyTeamScore'
           name='enemyTeamScore'
+          type='number'
           value={result.enemyTeamScore}
           onChange={onChange}
           maxLength={1}
