@@ -16,7 +16,8 @@ export default function Match() {
   };
 
   useEffect(() => {
-    setCheckBoxMode(mode === 'CHALLENGE' ? 'challenge' : 'rank');
+    if (mode !== '')
+      setCheckBoxMode(mode === 'CHALLENGE' ? 'challenge' : 'rank');
   }, [mode]);
 
   return (
