@@ -1,13 +1,15 @@
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { userState } from 'utils/recoil/layout';
 import { firstVisitedState } from 'utils/recoil/modal';
 import styles from 'styles/modal/WelcomeModal.module.scss';
 import modalStyles from 'styles/modal/Modal.module.scss';
 
 export default function WelcomeModal() {
   const setFirstVisited = useSetRecoilState(firstVisitedState);
-
+  const { intraId } = useRecoilValue(userState);
   const content = {
     title: 'Welcome',
+    name: `"${intraId}" 님!`,
     message:
       '42GG에 오신걸 환영합니다.\n당신의 행복한 탁구 생활을\n응원합니다! 총총총...',
   };
@@ -38,8 +40,9 @@ export default function WelcomeModal() {
         <div className={styles.container}>
           <div className={styles.phrase}>
             <div className={styles.emoji}></div>
-            <div className={styles.title}>Welcome</div>
-            {content.message}
+            <div className={styles.title}>{content.title}</div>
+            <div className={styles.user}>{content.name}</div>
+            <div>{content.message}</div>
             <div className={styles.rose}>
               <span>{`@`}</span>
               <span>{`)->->--`}</span>
