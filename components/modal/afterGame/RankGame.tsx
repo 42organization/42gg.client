@@ -14,8 +14,8 @@ interface RankGameProps {
 export default function RankGame({ currentGame, onSubmit }: RankGameProps) {
   const { isScoreExist, matchTeamsInfo } = currentGame;
   const [result, setResult] = useState<TeamScore>({
-    myTeamScore: 0,
-    enemyTeamScore: 0,
+    myTeamScore: '',
+    enemyTeamScore: '',
   });
   const [onCheck, setOnCheck] = useState<boolean>(false);
   const inputScoreHandler = ({

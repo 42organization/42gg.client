@@ -30,7 +30,6 @@ function InputScore({ result, onChange }: InputScoreProps) {
           type='number'
           value={result.myTeamScore}
           onChange={onChange}
-          maxLength={1}
         />
       </div>
       <div>:</div>
@@ -41,7 +40,6 @@ function InputScore({ result, onChange }: InputScoreProps) {
           type='number'
           value={result.enemyTeamScore}
           onChange={onChange}
-          maxLength={1}
         />
       </div>
     </div>
