@@ -54,7 +54,6 @@ export default function RankList({
   }, [page]);
 
   useEffect(() => {
-    if (!myRank.clicked) return;
     async function waitRankList() {
       await getRankHandler();
     }
