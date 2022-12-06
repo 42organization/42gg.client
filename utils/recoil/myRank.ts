@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { MyRank } from 'types/rankTypes';
+import { MyRank, Scroll } from 'types/rankTypes';
 import { v1 } from 'uuid';
 
 export const myRankState = atom<MyRank>({
@@ -12,12 +12,7 @@ export const pageState = atom<number>({
   default: 1,
 });
 
-export const myRankScrollState = atom<boolean>({
-  key: `myRankScrollState/${v1()}`,
-  default: false,
-});
-
-export const topScrollState = atom<boolean>({
-  key: `topScrollState/${v1()}`,
-  default: false,
+export const scrollState = atom<Scroll>({
+  key: `scrollState/${v1()}`,
+  default: { top: false, myRank: false },
 });

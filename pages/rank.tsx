@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { seasonListState } from 'utils/recoil/seasons';
-import { topScrollState } from 'utils/recoil/myRank';
+import { scrollState } from 'utils/recoil/myRank';
 import RankModeWrap from 'components/mode/modeWraps/RankModeWrap';
 import MyRank from 'components/rank/MyRank';
 import RankList from 'components/rank/RankList';
@@ -10,7 +10,7 @@ import styles from 'styles/rank/RankList.module.scss';
 
 export default function Rank() {
   const { seasonMode } = useRecoilValue(seasonListState);
-  const [topScroll, setTopScroll] = useRecoilState(topScrollState);
+  const [scroll, setScroll] = useRecoilState(scrollState);
   const [mode, setMode] = useState<MatchMode>(
     seasonMode === 'normal' ? 'normal' : 'rank'
   );
@@ -22,14 +22,14 @@ export default function Rank() {
   };
 
   useEffect(() => {
-    if (topScroll) {
+    if (scroll.top) {
       topRef.current?.scrollIntoView({
         behavior: 'smooth',
         block: 'start',
       });
-      setTopScroll(false);
+      setScroll((prev) => ({ ...prev, top: false }));
     }
-  }, [topScroll]);
+  }, [scroll.top]);
 
   return (
     <div className={styles.pageWrap} ref={topRef}>

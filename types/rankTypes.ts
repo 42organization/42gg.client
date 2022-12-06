@@ -27,3 +27,8 @@ export interface Rank {
   totalPage: number;
   rankList: RankUser[] | NormalUser[];
 }
+
+export interface Scroll {
+  top: boolean;
+  myRank: boolean;
+}
