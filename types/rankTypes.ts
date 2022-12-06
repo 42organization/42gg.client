@@ -18,6 +18,7 @@ export interface MyRank {
   rank: number;
   normal: number;
   challenge: number;
+  clicked: boolean;
 }
 
 export interface Rank {
@@ -25,4 +26,9 @@ export interface Rank {
   currentPage: number;
   totalPage: number;
   rankList: RankUser[] | NormalUser[];
+}
+
+export interface Scroll {
+  top: boolean;
+  myRank: boolean;
 }

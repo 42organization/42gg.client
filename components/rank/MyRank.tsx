@@ -1,6 +1,6 @@
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
-import { myRankState, scrollState } from 'utils/recoil/myRank';
+import { myRankState, pageState } from 'utils/recoil/myRank';
 import styles from 'styles/rank/RankList.module.scss';
 
 interface MyRankProps {
@@ -8,8 +8,8 @@ interface MyRankProps {
 }
 
 export default function MyRank({ toggleMode }: MyRankProps) {
-  const myRank = useRecoilValue(myRankState);
-  const setIsScroll = useSetRecoilState(scrollState);
+  const [myRank, setMyRank] = useRecoilState(myRankState);
+  const setPage = useSetRecoilState(pageState);
   const rankType = toggleMode === 'rank' ? '랭크' : '열정';
   const isRanked = myRank[toggleMode] === -1 ? 'unrank' : 'rank';
   const content = {
@@ -33,7 +33,8 @@ export default function MyRank({ toggleMode }: MyRankProps) {
 
   const myRankHandler = () => {
     if (myRank[toggleMode] === -1) return;
-    setIsScroll(true);
+    setMyRank((prev) => ({ ...prev, clicked: true }));
+    setPage(Math.ceil(myRank[toggleMode] / 20));
   };
 
   return (
@@ -41,9 +42,10 @@ export default function MyRank({ toggleMode }: MyRankProps) {
       className={`${styles.myRank} ${content[isRanked].style}`}
       onClick={myRankHandler}
     >
-      {content[isRanked].message.map((e, index) => (
-        <span key={index}>{e}</span>
-      ))}
+      {myRank[toggleMode] !== 0 &&
+        content[isRanked].message.map((e, index) => (
+          <span key={index}>{e}</span>
+        ))}
     </div>
   );
 }

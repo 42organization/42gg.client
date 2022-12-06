@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import PageNation from 'components/Pagination';
+import { pageState } from 'utils/recoil/myRank';
 import styles from 'styles/rank/RankList.module.scss';
 
 interface PageInfo {
   currentPage?: number;
   totalPage?: number;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 interface RankListFrameProps {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ export default function RankListFrame({
   pageInfo,
   toggleMode,
 }: RankListFrameProps) {
+  const setPage = useSetRecoilState(pageState);
   const router = useRouter();
   const division: { [key: string]: string[] } = {
     rank: ['순위', 'intraId', '상태메시지', '탁구력'],
@@ -26,7 +28,7 @@ export default function RankListFrame({
   };
 
   const pageChangeHandler = (pages: number) => {
-    pageInfo.setPage(pages);
+    setPage(pages);
     router.push('/rank');
   };
 
