@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { RankUser, NormalUser, Rank } from 'types/rankTypes';
-import { myRankState, pageState, scrollState } from 'utils/recoil/myRank';
+import { myRankState, pageState } from 'utils/recoil/myRank';
 import { seasonListState } from 'utils/recoil/seasons';
 import { errorState } from 'utils/recoil/error';
 import { userState } from 'utils/recoil/layout';
@@ -23,7 +23,6 @@ export default function RankList({
 }: RankListProps) {
   const [myRank, setMyRank] = useRecoilState(myRankState);
   const [page, setPage] = useRecoilState(pageState);
-  const [scroll, setScroll] = useRecoilState(scrollState);
   const { seasonMode } = useRecoilValue(seasonListState);
   const myIntraId = useRecoilValue(userState).intraId;
   const setError = useSetRecoilState(errorState);
@@ -44,34 +43,22 @@ export default function RankList({
   };
 
   useEffect(() => {
-    if (myRank.clicked) return;
-    async function waitRankList() {
-      await getRankHandler();
-    }
-    waitRankList().then(() => {
-      setScroll((prev) => ({ ...prev, top: true }));
-    });
+    getRankHandler();
   }, [page]);
 
   useEffect(() => {
+    if (!myRank.clicked) return;
     async function waitRankList() {
       await getRankHandler();
     }
     waitRankList().then(() => {
-      setScroll((prev) => ({ ...prev, myRank: true }));
+      myRankRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
       setMyRank((prev) => ({ ...prev, clicked: false }));
     });
   }, [myRank.clicked]);
-
-  useEffect(() => {
-    if (scroll.myRank) {
-      myRankRef.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-      setScroll((prev) => ({ ...prev, myRank: false }));
-    }
-  }, [scroll.myRank]);
 
   useEffect(() => {
     page !== 1 ? ((pageInfo.currentPage = 1), setPage(1)) : getRankHandler();

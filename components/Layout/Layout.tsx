@@ -16,7 +16,7 @@ import Header from './Header';
 import Footer from './Footer';
 import CurrentMatch from './CurrentMatch';
 import styles from 'styles/Layout/Layout.module.scss';
-import { pageState, scrollState } from 'utils/recoil/myRank';
+import { pageState } from 'utils/recoil/myRank';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -30,7 +30,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
   );
   const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
   const page = useRecoilValue(pageState);
-  const [scroll, setScroll] = useRecoilState(scrollState);
   const setSeasonList = useSetRecoilState(seasonListState);
   const setCurrentMatch = useSetRecoilState(currentMatchState);
   const setError = useSetRecoilState(errorState);
@@ -54,7 +53,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   useEffect(() => {
     setModal({ modalName: null });
-    if (!scroll.myRank) topScroll.current?.scrollIntoView(true);
+    topScroll.current?.scrollIntoView(true);
   }, [presentPath, page]);
 
   useEffect(() => {
