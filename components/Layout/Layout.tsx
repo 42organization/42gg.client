@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { userState, liveState } from 'utils/recoil/layout';
 import {
   reloadMatchState,
@@ -16,6 +16,7 @@ import Header from './Header';
 import Footer from './Footer';
 import CurrentMatch from './CurrentMatch';
 import styles from 'styles/Layout/Layout.module.scss';
+import { pageState, scrollState } from 'utils/recoil/myRank';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -28,12 +29,14 @@ export default function AppLayout({ children }: AppLayoutProps) {
     openCurrentMatchState
   );
   const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
+  const page = useRecoilValue(pageState);
+  const [scroll, setScroll] = useRecoilState(scrollState);
   const setSeasonList = useSetRecoilState(seasonListState);
   const setCurrentMatch = useSetRecoilState(currentMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const presentPath = useRouter().asPath;
-  const scroll = useRef<HTMLInputElement>(null);
+  const topScroll = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     getUserHandler();
@@ -51,8 +54,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   useEffect(() => {
     setModal({ modalName: null });
-    scroll.current?.scrollIntoView(true);
-  }, [presentPath]);
+    if (!scroll.myRank) topScroll.current?.scrollIntoView(true);
+  }, [presentPath, page]);
 
   useEffect(() => {
     if (user.intraId) {
@@ -118,7 +121,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
           </div>
         )}
         <div className={styles.pageContent}>
-          <div ref={scroll}>
+          <div ref={topScroll}>
             {openCurrentMatch && <div className={styles.blank}></div>}
             {children}
           </div>
