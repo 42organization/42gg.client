@@ -18,6 +18,7 @@ export interface MyRank {
   rank: number;
   normal: number;
   challenge: number;
+  clicked: boolean;
 }
 
 export interface Rank {
