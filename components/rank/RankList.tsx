@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { RankUser, NormalUser, Rank } from 'types/rankTypes';
-import { myRankState, scrollState } from 'utils/recoil/myRank';
+import {
+  myRankState,
+  pageState,
+  myRankScrollState,
+  topScrollState,
+} from 'utils/recoil/myRank';
 import { seasonListState } from 'utils/recoil/seasons';
 import { errorState } from 'utils/recoil/error';
 import instance from 'utils/axios';
@@ -21,15 +26,15 @@ export default function RankList({
   isMain = false,
 }: RankListProps) {
   const [myRank, setMyRank] = useRecoilState(myRankState);
-  const [isScroll, setIsScroll] = useRecoilState(scrollState);
+  const [page, setPage] = useRecoilState(pageState);
   const { seasonMode } = useRecoilValue(seasonListState);
   const setError = useSetRecoilState(errorState);
+  const setMyRankScroll = useSetRecoilState(myRankScrollState);
+  const setTopScroll = useSetRecoilState(topScrollState);
   const [rank, setRank] = useState<Rank>();
-  const [page, setPage] = useState<number>(1);
   const pageInfo = {
     currentPage: rank?.currentPage,
     totalPage: rank?.totalPage,
-    setPage,
   };
 
   const makePath = () => {
@@ -43,33 +48,25 @@ export default function RankList({
 
   useEffect(() => {
     async function waitRankList() {
-      await getRankDataHandler();
+      await getRankHandler();
     }
-
     waitRankList().then(() => {
-      if (isScroll) {
-        window.scrollTo({
-          top: ((myRank[toggleMode] - 1) % 20) * 45,
-          behavior: 'smooth',
-        });
-        setIsScroll(false);
-      }
+      if (myRank.clicked) {
+        setMyRankScroll(true);
+        setMyRank((prev) => ({ ...prev, clicked: false }));
+      } else setTopScroll(true);
     });
-  }, [page, isScroll]);
+  }, [page]);
 
   useEffect(() => {
-    page !== 1
-      ? ((pageInfo.currentPage = 1), setPage(1))
-      : getRankDataHandler();
+    if (myRank.clicked) setPage(Math.ceil(myRank[toggleMode] / 20));
+  }, [myRank]);
+
+  useEffect(() => {
+    page !== 1 ? ((pageInfo.currentPage = 1), setPage(1)) : getRankHandler();
   }, [toggleMode, season]);
 
-  useEffect(() => {
-    if (isScroll) {
-      setPage(Math.ceil(myRank[toggleMode] / 20));
-    }
-  }, [isScroll]);
-
-  const getRankDataHandler = async () => {
+  const getRankHandler = async () => {
     try {
       const res = await instance.get(`${makePath()}`);
       setRank(res?.data);
