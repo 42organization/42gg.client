@@ -51,13 +51,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   useEffect(() => {
     setModal({ modalName: null });
+    scroll.current?.scrollIntoView(true);
   }, [presentPath]);
 
   useEffect(() => {
     if (user.intraId) {
       getLiveHandler();
       if (reloadMatch) setReloadMatch(false);
-      scroll.current?.scrollIntoView(false);
     }
   }, [presentPath, user, reloadMatch]);
 
