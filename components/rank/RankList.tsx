@@ -86,7 +86,6 @@ export default function RankList({
       setError('DK01');
     }
   };
-  // console.log(`rank: ${scroll.myRank}, top: ${scroll.top}`);
 
   if (isMain) return <RankListMain rank={rank} />;
 
