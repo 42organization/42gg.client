@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { userState, liveState } from 'utils/recoil/layout';
 import {
@@ -33,6 +33,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const presentPath = useRouter().asPath;
+  const scroll = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     getUserHandler();
@@ -56,6 +57,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     if (user.intraId) {
       getLiveHandler();
       if (reloadMatch) setReloadMatch(false);
+      scroll.current?.scrollIntoView(false);
     }
   }, [presentPath, user, reloadMatch]);
 
@@ -116,7 +118,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
           </div>
         )}
         <div className={styles.pageContent}>
-          <div>
+          <div ref={scroll}>
             {openCurrentMatch && <div className={styles.blank}></div>}
             {children}
           </div>
