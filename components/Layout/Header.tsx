@@ -11,7 +11,6 @@ import MenuBar from './MenuBar';
 import NotiBar from './NotiBar';
 import PlayerImage from 'components/PlayerImage';
 import { FiMenu } from 'react-icons/fi';
-import { BsMegaphone } from 'react-icons/bs';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
 import styles from 'styles/Layout/Header.module.scss';
 
@@ -39,7 +38,7 @@ export default function Header() {
       openMenuBar || openNotiBar ? 'hidden' : 'unset');
 
   return (
-    <div className={styles.headerContainer}>
+    <div>
       <div className={styles.headerWrap}>
         <div className={styles.headerLeft} onClick={openMenuBarHandler}>
           <FiMenu id={styles.menuIcon} />
