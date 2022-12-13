@@ -78,6 +78,9 @@
 
 ## 시스템 구성도
 
+<img width="2034" alt="42gg Information Architecture" src="https://user-images.githubusercontent.com/86528844/207284031-dcad810f-6ea8-4d83-b1b1-8baec506ddf6.png">
+
+
 ## 기여자 정보
 
 <a href="https://github.com/KimDae-hyun">김대현 @daekim</a>
