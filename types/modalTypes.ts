@@ -1,6 +1,6 @@
 import { MatchMode } from './mainType';
 
-type MainModal = 'WELCOME';
+type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
 type MenuModal = 'REPORT' | 'LOGOUT';
 
@@ -12,7 +12,7 @@ type FixedModal = 'AFTER_GAME' | 'STAT';
 
 type ModalName =
   | null
-  | `MAIN-${MainModal}`
+  | `EVENT-${EventModal}`
   | `MENU-${MenuModal}`
   | `MATCH-${MatchModal}`
   | `USER-${UserModal}`
