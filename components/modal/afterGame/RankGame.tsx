@@ -21,10 +21,10 @@ export default function RankGame({ currentGame, onSubmit }: RankGameProps) {
   const inputScoreHandler = ({
     target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    const filteredValue = value.replace(/[^0-9]/g, '');
+    const intValue = parseInt(value);
     setResult((prev) => ({
       ...prev,
-      [name]: filteredValue === '' ? filteredValue : parseInt(filteredValue),
+      [name]: intValue > 2 || intValue < 0 ? '' : intValue,
     }));
   };
 
