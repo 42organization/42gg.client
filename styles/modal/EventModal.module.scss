@@ -1,1 +1,68 @@
 @import 'styles/common.scss';
+
+.container {
+  @include modal-container;
+  width: 80vw;
+  max-width: 20rem;
+}
+
+.title {
+  color: white;
+  font-size: 2.5rem;
+  font-family: $title-font;
+  text-shadow: $text-shadow;
+  letter-spacing: 0.1rem;
+}
+
+.toggleContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  padding-top: 0.5rem;
+  padding-right: 1rem;
+  margin-bottom: 0.1rem;
+}
+
+.ruleList {
+  list-style: none;
+  width: auto;
+  height: 60vh;
+  max-height: 60vh;
+  margin: 0 0.6rem 0.5rem;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 700;
+  overflow-y: scroll;
+
+  > li {
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.ruleDetail {
+  margin-left: 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+
+  > li {
+    list-style: square;
+    margin: 0.4rem 0;
+    white-space: pre-wrap;
+  }
+}
+
+.ruleList::-webkit-scrollbar {
+  display: inherit;
+  width: 5px;
+  height: 1rem;
+}
+
+.ruleList::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: white;
+}
+
+.buttons {
+  @include select-buttons;
+}
