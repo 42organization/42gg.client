@@ -5,7 +5,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { userState, liveState } from 'utils/recoil/layout';
 import { reloadMatchState, openCurrentMatchState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
-import { modalState } from 'utils/recoil/modal';
+import { modalState, eventState } from 'utils/recoil/modal';
 import { seasonListState } from 'utils/recoil/seasons';
 import instance from 'utils/axios';
 import Statistics from 'pages/statistics';
@@ -21,6 +21,7 @@ type AppLayoutProps = {
 export default function AppLayout({ children }: AppLayoutProps) {
   const [user, setUser] = useRecoilState(userState);
   const [live, setLive] = useRecoilState(liveState);
+  const [event, setEvent] = useRecoilState(eventState);
   const [openCurrentMatch, setOpenCurrentMatch] = useRecoilState(
     openCurrentMatchState
   );
@@ -45,7 +46,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
   };
 
   useEffect(() => {
-    setModal({ modalName: null });
+    if (presentPath === '/' && event)
+      setModal({ modalName: 'EVENT-ANNOUNCEMENT' });
+    else setModal({ modalName: null });
   }, [presentPath]);
 
   useEffect(() => {
