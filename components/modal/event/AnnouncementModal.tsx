@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import styles from 'styles/modal/EventModal.module.scss';
-import instance from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
+import styles from 'styles/modal/AnnouncementModal.module.scss';
 import { Announcement } from 'types/modalTypes';
 
 type AnnouncementModalProps = {
@@ -26,12 +24,10 @@ export default function AnnouncementModal({
     }
     setModal({ modalName: null });
   };
-  // useEffect(() => {
-  // console.log(announcements);
-  // }, []);
 
   return (
     <div className={styles.container}>
+      <div className={styles.announcementTitle}>Notice!</div>
       <div className={styles.phrase}>
         <div className={styles.emoji}></div>
         <ul className={styles.announcementList}>
@@ -39,7 +35,7 @@ export default function AnnouncementModal({
             return (
               <li key={index}>
                 <div className={styles.title}>{el.title}</div>
-                <ul>
+                <ul className={styles.content}>
                   {el.content.map((e: string, idx) => (
                     <li key={idx}>{e}</li>
                   ))}
@@ -56,9 +52,10 @@ export default function AnnouncementModal({
           name='neverSeeAgain'
           onChange={onCheck}
           checked={neverSeeAgain}
+          className={styles.checkBox}
         />
-        <label htmlFor='neverSeeAgain'>
-          <div>하루동안 열지 않기</div>
+        <label htmlFor='neverSeeAgain' className={styles.checkBoxLabel}>
+          <div>하루 동안 열지 않기</div>
         </label>
       </div>
       <div className={styles.buttons}>

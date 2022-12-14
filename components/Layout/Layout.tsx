@@ -34,7 +34,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
   useEffect(() => {
     getUserHandler();
     getSeasonListHandler();
-    getAnnouncementHandler();
   }, []);
 
   const getAnnouncementHandler = async () => {
@@ -62,7 +61,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     if (presentPath === '/') {
       if (
         !announcementTime ||
-        Date.parse(announcementTime) > Date.parse(new Date().toString())
+        Date.parse(announcementTime) < Date.parse(new Date().toString())
       )
         getAnnouncementHandler();
     } else setModal({ modalName: null });
