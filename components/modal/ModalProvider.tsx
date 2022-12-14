@@ -15,11 +15,13 @@ import StatChangeModal from './statChange/StatChangeModal';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
-  const [{ modalName, cancel, enroll, manual, exp }, setModal] =
+  const [{ modalName, cancel, enroll, manual, announcements, exp }, setModal] =
     useRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const content: { [key: string]: JSX.Element | null } = {
-    'EVENT-ANNOUNCEMENT': <AnnouncementModal />,
+    'EVENT-ANNOUNCEMENT': announcements ? (
+      <AnnouncementModal announcements={announcements} />
+    ) : null,
     'MENU-REPORT': <ReportModal />,
     'MENU-LOGOUT': <LogoutModal />,
     'MATCH-REJECT': <MatchRejectModal />,

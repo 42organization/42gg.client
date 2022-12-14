@@ -32,6 +32,11 @@ export interface Enroll {
   endTime: Date;
 }
 
+export interface Announcement {
+  title: string;
+  content: string[];
+}
+
 export interface Exp {
   gameId?: number;
   mode?: MatchMode | null;
@@ -46,6 +51,7 @@ export interface Modal {
   manual?: Manual;
   cancel?: Cancel;
   enroll?: Enroll;
+  announcements?: Announcement[];
   exp?: Exp;
   gameId?: number;
 }
