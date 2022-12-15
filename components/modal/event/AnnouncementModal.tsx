@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import styles from 'styles/modal/AnnouncementModal.module.scss';
 import { Announcement } from 'types/modalTypes';
+import styles from 'styles/modal/AnnouncementModal.module.scss';
 
 type AnnouncementModalProps = {
   announcements: Announcement[];

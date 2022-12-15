@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { userState, liveState } from 'utils/recoil/layout';
 import { reloadMatchState, openCurrentMatchState } from 'utils/recoil/match';
@@ -27,7 +27,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
   const setSeasonList = useSetRecoilState(seasonListState);
   const setError = useSetRecoilState(errorState);
-  const [modal, setModal] = useRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
   const presentPath = useRouter().asPath;
   const announcementTime = localStorage.getItem('announcementTime');
 
@@ -43,7 +43,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
         modalName: 'EVENT-ANNOUNCEMENT',
         announcements: res.data.announcements,
       });
-      console.log(res.data.announcements);
     } catch (e) {
       setError('HW01');
     }
