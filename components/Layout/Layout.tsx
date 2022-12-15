@@ -27,7 +27,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
   const setSeasonList = useSetRecoilState(seasonListState);
   const setError = useSetRecoilState(errorState);
-  const setModal = useRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
   const presentPath = useRouter().asPath;
   const announcementTime = localStorage.getItem('announcementTime');
 
