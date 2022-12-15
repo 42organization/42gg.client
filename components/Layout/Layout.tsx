@@ -29,12 +29,24 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const presentPath = useRouter().asPath;
+  const announcementTime = localStorage.getItem('announcementTime');
 
   useEffect(() => {
     getUserHandler();
     getSeasonListHandler();
   }, []);
 
+  const getAnnouncementHandler = async () => {
+    try {
+      const res = await instance.get(`/pingpong/announcements`);
+      setModal({
+        modalName: 'EVENT-ANNOUNCEMENT',
+        announcements: res.data.announcements,
+      });
+    } catch (e) {
+      setError('HW01');
+    }
+  };
   const getSeasonListHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/seasonlist`);
@@ -45,7 +57,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
   };
 
   useEffect(() => {
-    setModal({ modalName: null });
+    if (presentPath === '/') {
+      if (
+        !announcementTime ||
+        Date.parse(announcementTime) < Date.parse(new Date().toString())
+      )
+        getAnnouncementHandler();
+    } else setModal({ modalName: null });
   }, [presentPath]);
 
   useEffect(() => {
