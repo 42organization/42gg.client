@@ -43,7 +43,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
         modalName: 'EVENT-ANNOUNCEMENT',
         announcements: res.data.announcements,
       });
-      console.log(res.data.announcements);
     } catch (e) {
       setError('HW01');
     }
