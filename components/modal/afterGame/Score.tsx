@@ -1,6 +1,6 @@
 import { KeyboardEvent } from 'react';
 import { TeamScore } from 'types/scoreTypes';
-import styles from 'styles/modal/AfterGameModal.module.scss';
+import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
 
 interface ScoreProps {
   result: TeamScore;

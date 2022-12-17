@@ -10,7 +10,7 @@ import {
   reloadMatchState,
 } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
-import styles from 'styles/modal/CancelModal.module.scss';
+import styles from 'styles/modal/match/MatchCancelModal.module.scss';
 
 export default function MatchCancelModal({ isMatched, slotId, time }: Cancel) {
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);

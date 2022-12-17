@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { firstVisitedState } from 'utils/recoil/modal';
-import styles from 'styles/modal/WelcomeModal.module.scss';
+import styles from 'styles/modal/event/WelcomeModal.module.scss';
 import modalStyles from 'styles/modal/Modal.module.scss';
 
 export default function WelcomeModal() {

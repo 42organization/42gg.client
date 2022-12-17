@@ -1,4 +1,4 @@
-import styles from 'styles/modal/AfterGameModal.module.scss';
+import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
 
 interface ButtonsProps {
   onCheck: boolean;

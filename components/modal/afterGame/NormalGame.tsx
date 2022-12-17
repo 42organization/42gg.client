@@ -2,7 +2,7 @@ import { AfterGame } from 'types/scoreTypes';
 import { Button } from './Buttons';
 import { MatchTeams } from './MatchTeams';
 import Guide from './Guide';
-import styles from 'styles/modal/AfterGameModal.module.scss';
+import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
 
 interface NormalGameProps {
   currentGame: AfterGame;
