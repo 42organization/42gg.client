@@ -14,7 +14,7 @@
 .announcementList {
   list-style: none;
   width: 100%;
-  max-height: 60vh;
+  max-height: 50vh;
   color: black;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -24,20 +24,9 @@
     margin-block: 1rem;
     > div {
       margin-left: 0.3rem;
-      font-size: 1.2rem;
+      font-size: $big-font;
       font-weight: 700;
     }
-  }
-}
-
-.content {
-  margin-top: 0.8rem;
-  font-size: 0.9rem;
-
-  > li {
-    list-style: none;
-    margin-bottom: 0.3rem;
-    white-space: pre-wrap;
   }
 }
 
@@ -52,21 +41,45 @@
   background: white;
 }
 
-.checkBox {
-  display: inline-block;
-  position: relative;
-  top: 2px;
-  width: 1rem;
-  height: 1rem;
-  margin-right: 0.5rem;
+.contentList {
+  margin-top: 0.8rem;
+  font-size: $medium-font;
+
+  > li {
+    list-style: none;
+    margin-bottom: 0.3rem;
+    white-space: pre-wrap;
+  }
+  a {
+    color: $pp-blue;
+    text-decoration: none;
+  }
+  a:visited {
+    color: $dark-blue;
+  }
+  a:hover {
+    background: $g1-bottom;
+  }
+  a:active {
+    background: $g1-top;
+  }
 }
 
-.checkBoxLabel {
-  display: inline-block;
+.checkBox {
+  margin-bottom: 0.5rem;
+  input {
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    width: 1rem;
+    height: 1rem;
+    margin: 0 0.5rem 0 0;
+  }
+  label {
+    display: inline-block;
+  }
 }
 
 .buttons {
   @include select-buttons;
-  display: inline-block;
-  margin-top: 0.5rem;
 }

@@ -1,8 +1,3 @@
-/* font */
-$logo-font: 'Agonostic Italic', cursive;
-$title-font: 'Reality Hyper Regular', cursive;
-$text-shadow: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black, 0 -0.1rem black;
-
 /* font-size */
 $giant-giant-font: 2.4rem;
 $giant-big-font: 2.1rem;
@@ -39,7 +34,6 @@ $dark-gray: #676767;
 
 $btn-blue: #2d80ed;
 $dark-blue: #24098f;
-
 $g1-top: #8dbbf9;
 $g1-bottom: #f0b5f2;
 $g2-top: #c4fff8;
@@ -47,6 +41,14 @@ $g2-bottom: #b5bbf2;
 
 $loser-red: #ff0303;
 $winner-blue: #040eff;
+
+/* font */
+$logo-font: 'Agonostic Italic', cursive;
+$title-font: 'Reality Hyper Regular', cursive;
+$text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
+  0 -0.1rem black;
+$text-shadow-red: 2px 2px 0px $pp-red;
+$text-shadow-blue: 2px 2px 0px $pp-blue;
 
 @mixin menu-noti-Bar {
   display: flex;
@@ -104,7 +106,7 @@ $winner-blue: #040eff;
   font-size: 2.8rem;
   font-family: $title-font;
   text-align: center;
-  text-shadow: $text-shadow, 0.3rem 0.3rem 0 $pp-red;
+  text-shadow: $text-border-black, 0.3rem 0.3rem 0 $pp-red;
   letter-spacing: 0.1rem;
 }
 
@@ -112,7 +114,7 @@ $winner-blue: #040eff;
   color: white;
   font-size: 2.5rem;
   font-family: $title-font;
-  text-shadow: $text-shadow;
+  text-shadow: $text-border-black;
   letter-spacing: 0.1rem;
 }
 
