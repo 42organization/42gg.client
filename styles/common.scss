@@ -108,6 +108,14 @@ $winner-blue: #040eff;
   letter-spacing: 0.1rem;
 }
 
+@mixin modalTitle {
+  color: white;
+  font-size: 2.5rem;
+  font-family: $title-font;
+  text-shadow: $text-shadow;
+  letter-spacing: 0.1rem;
+}
+
 @mixin backdrop {
   z-index: 5;
   position: fixed;
