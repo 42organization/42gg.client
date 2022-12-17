@@ -35,6 +35,7 @@ export interface Enroll {
 export interface Announcement {
   title: string;
   content: string[];
+  link: string | null;
 }
 
 export interface Exp {

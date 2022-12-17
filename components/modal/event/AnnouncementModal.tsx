@@ -33,25 +33,29 @@ export default function AnnouncementModal({
           return (
             <li key={index}>
               <div>{`<${el.title}>`}</div>
-              <ul className={styles.content}>
+              <ul className={styles.contentList}>
                 {el.content.map((e: string, idx) => (
                   <li key={idx}>{e}</li>
                 ))}
+                {el.link && (
+                  <a href={el.link} target='_blank' rel="noreferrer">
+                    {`-> 링크 바로가기`}
+                  </a>
+                )}
               </ul>
             </li>
           );
         })}
       </ul>
-      <div>
+      <div className={styles.checkBox}>
         <input
           type='checkbox'
           id='neverSeeAgain'
           name='neverSeeAgain'
           onChange={onCheck}
           checked={neverSeeAgain}
-          className={styles.checkBox}
         />
-        <label htmlFor='neverSeeAgain' className={styles.checkBoxLabel}>
+        <label htmlFor='neverSeeAgain'>
           <div>하루 동안 열지 않기</div>
         </label>
       </div>
