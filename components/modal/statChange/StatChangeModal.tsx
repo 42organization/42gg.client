@@ -7,7 +7,7 @@ import { errorState } from 'utils/recoil/error';
 import { reloadMatchState } from 'utils/recoil/match';
 import ExpStat from './ExpStat';
 import PppStat from 'components/modal/statChange/PppStat';
-import styles from 'styles/modal/StatChangeModal.module.scss';
+import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
 
 export default function StatChangeModal({ gameId, mode }: Exp) {
   const setModal = useSetRecoilState(modalState);

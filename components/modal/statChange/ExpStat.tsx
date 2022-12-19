@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { sleep } from 'utils/sleep';
 import Celebration from './Celebration';
-import styles from 'styles/modal/StatChangeModal.module.scss';
+import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
 
 interface ExpGuageProps {
   stat: { [key: string]: number };

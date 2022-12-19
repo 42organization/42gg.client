@@ -4,7 +4,7 @@ import { MatchTeams } from './MatchTeams';
 import Score from './Score';
 import { Button, Buttons } from './Buttons';
 import Guide from './Guide';
-import styles from 'styles/modal/AfterGameModal.module.scss';
+import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
 
 interface RankGameProps {
   currentGame: AfterGame;

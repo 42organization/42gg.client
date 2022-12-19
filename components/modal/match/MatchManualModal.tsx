@@ -5,7 +5,7 @@ import { Manual } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import { seasonListState } from 'utils/recoil/seasons';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
-import styles from 'styles/modal/MatchManualModal.module.scss';
+import styles from 'styles/modal/match/MatchManualModal.module.scss';
 
 export default function MatchManualModal({ toggleMode }: Manual) {
   const setModal = useSetRecoilState(modalState);
