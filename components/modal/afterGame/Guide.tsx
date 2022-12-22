@@ -1,5 +1,5 @@
 import { MatchMode } from 'types/mainType';
-import styles from 'styles/modal/AfterGameModal.module.scss';
+import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
 
 type ModalMode = MatchMode | 'confirm';
 interface GuideProps {

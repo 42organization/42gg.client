@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { Announcement } from 'types/modalTypes';
-import styles from 'styles/modal/AnnouncementModal.module.scss';
+import styles from 'styles/modal/event/AnnouncementModal.module.scss';
 
 type AnnouncementModalProps = {
   announcements: Announcement[];
@@ -10,7 +10,7 @@ type AnnouncementModalProps = {
 export default function AnnouncementModal({
   announcements,
 }: AnnouncementModalProps) {
-  const [modal, setModal] = useRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
   const [neverSeeAgain, setNeverSeeAgain] = useState<boolean>(false);
   const onCheck = () => {
     setNeverSeeAgain((prev) => !prev);
@@ -27,34 +27,35 @@ export default function AnnouncementModal({
 
   return (
     <div className={styles.container}>
-      <div className={styles.announcementTitle}>Notice!</div>
-      <div className={styles.phrase}>
-        <div className={styles.emoji}></div>
-        <ul className={styles.announcementList}>
-          {announcements.map((el: Announcement, index) => {
-            return (
-              <li key={index}>
-                <div className={styles.title}>{el.title}</div>
-                <ul className={styles.content}>
-                  {el.content.map((e: string, idx) => (
-                    <li key={idx}>{e}</li>
-                  ))}
-                </ul>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div>
+      <div className={styles.title}>Notice!</div>
+      <ul className={styles.announcementList}>
+        {announcements.map((el: Announcement, index) => {
+          return (
+            <li key={index}>
+              <div>{`<${el.title}>`}</div>
+              <ul className={styles.contentList}>
+                {el.content.map((e: string, idx) => (
+                  <li key={idx}>{e}</li>
+                ))}
+                {el.link && (
+                  <a href={el.link} target='_blank' rel="noreferrer">
+                    {`-> 링크 바로가기`}
+                  </a>
+                )}
+              </ul>
+            </li>
+          );
+        })}
+      </ul>
+      <div className={styles.checkBox}>
         <input
           type='checkbox'
           id='neverSeeAgain'
           name='neverSeeAgain'
           onChange={onCheck}
           checked={neverSeeAgain}
-          className={styles.checkBox}
         />
-        <label htmlFor='neverSeeAgain' className={styles.checkBoxLabel}>
+        <label htmlFor='neverSeeAgain'>
           <div>하루 동안 열지 않기</div>
         </label>
       </div>
