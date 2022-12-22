@@ -39,10 +39,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const getAnnouncementHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/announcements`);
-      setModal({
-        modalName: 'EVENT-ANNOUNCEMENT',
-        announcements: res.data.announcements,
-      });
+      res.data.announcements.length &&
+        setModal({
+          modalName: 'EVENT-ANNOUNCEMENT',
+          announcements: res.data.announcements,
+        });
     } catch (e) {
       setError('HW01');
     }
