@@ -10,7 +10,7 @@
   margin-inline: auto;
   cursor: pointer;
   &.normal {
-    text-shadow: $text-shadow, 0.3rem 0.3rem 0 $norm-lightblue2;
+    text-shadow: $text-border-black, 0.3rem 0.3rem 0 $norm-lightblue2;
   }
 }
 
@@ -41,23 +41,15 @@
 }
 
 .smallTeam {
-  .smallLeft {
+  .Left {
     display: flex;
     flex-direction: row;
     align-items: center;
-    .userImage {
-      @include userImage(2rem);
-      margin-right: 0.7rem;
-    }
   }
-  .smallRight {
+  .Right {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    .userImage {
-      @include userImage(2rem);
-      margin-left: 0.7rem;
-    }
   }
 }
 
@@ -71,17 +63,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  .userImage {
-    @include userImage(4.5rem);
-    cursor: pointer;
-  }
   .userId {
     margin: 0.5rem 0;
     color: white;
     font-size: $big-font;
     font-weight: 600;
     text-align: center;
-    text-shadow: $text-shadow;
+    text-shadow: $text-border-black;
     cursor: pointer;
   }
   .winRate {
@@ -108,7 +96,7 @@
     background: $pp-red;
     color: white;
     text-align: center;
-    text-shadow: $text-shadow;
+    text-shadow: $text-border-black;
     animation: upDown 1.3s infinite;
   }
   .gameStatusWait {
@@ -117,7 +105,7 @@
     padding: 0.2rem;
     color: white;
     text-align: center;
-    text-shadow: $text-shadow;
+    text-shadow: $text-border-black;
     span {
       display: inline-block;
       position: relative;
@@ -129,7 +117,7 @@
     color: white;
     font-size: 0.8rem;
     font-weight: 400;
-    text-shadow: $text-shadow;
+    text-shadow: $text-border-black;
     text-align: center;
   }
 
@@ -151,7 +139,7 @@
     font-size: 2rem;
     font-weight: 600;
     text-align: center;
-    text-shadow: $text-shadow;
+    text-shadow: $text-border-black;
   }
 }
 

@@ -1,6 +1,6 @@
 import { MatchMode } from './mainType';
 
-type MainModal = 'WELCOME';
+type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
 type MenuModal = 'REPORT' | 'LOGOUT';
 
@@ -12,7 +12,7 @@ type FixedModal = 'AFTER_GAME' | 'STAT';
 
 type ModalName =
   | null
-  | `MAIN-${MainModal}`
+  | `EVENT-${EventModal}`
   | `MENU-${MenuModal}`
   | `MATCH-${MatchModal}`
   | `USER-${UserModal}`
@@ -32,6 +32,12 @@ export interface Enroll {
   endTime: Date;
 }
 
+export interface Announcement {
+  title: string;
+  content: string[];
+  link: string | null;
+}
+
 export interface Exp {
   gameId?: number;
   mode?: MatchMode | null;
@@ -46,6 +52,7 @@ export interface Modal {
   manual?: Manual;
   cancel?: Cancel;
   enroll?: Enroll;
+  announcements?: Announcement[];
   exp?: Exp;
   gameId?: number;
 }

@@ -1,20 +1,14 @@
 import { useEffect, useState } from 'react';
 import { sleep } from 'utils/sleep';
 import Celebration from './Celebration';
-import styles from 'styles/modal/StatChangeModal.module.scss';
+import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
 
 interface ExpGuageProps {
   stat: { [key: string]: number };
 }
 export default function ExpStat({ stat }: ExpGuageProps) {
-  const {
-    afterMaxExp,
-    beforeExp,
-    beforeLevel,
-    beforeMaxExp,
-    increasedExp,
-    increasedLevel,
-  } = stat;
+  const { afterMaxExp, beforeExp, beforeLevel, beforeMaxExp, increasedExp } =
+    stat;
   const [level, setLevel] = useState<number>(beforeLevel);
   const [maxExp, setMaxExp] = useState<number>(beforeMaxExp);
   const [percent, setPercent] = useState<number>(
@@ -23,6 +17,7 @@ export default function ExpStat({ stat }: ExpGuageProps) {
   const [addedExp, setAddedExp] = useState<number>(0);
   const [currentExp, setCurrentExp] = useState<number>(beforeExp);
   const [celebrateEvent, setCelebrateEvent] = useState<boolean>(false);
+  const MAX_LEVEL = 42;
 
   useEffect(() => {
     expGaugeAnimation();
@@ -31,10 +26,13 @@ export default function ExpStat({ stat }: ExpGuageProps) {
   useEffect(() => {
     setPercent(getPercent());
     if (currentExp >= maxExp) {
-      setCurrentExp(0);
+      setCurrentExp(maxExp - currentExp);
       setMaxExp(afterMaxExp);
-      setLevel(beforeLevel + increasedLevel);
+      setLevel(level + 1);
       setCelebrateEvent(true);
+      setTimeout(() => {
+        setPercent(0);
+      }, 100);
     }
   }, [addedExp]);
 
@@ -58,8 +56,9 @@ export default function ExpStat({ stat }: ExpGuageProps) {
         <div className={styles.expWrap}>
           <div className={styles.expString}>
             <div className={styles.expRate}>
-              <span>{currentExp} </span>
-              <span>/ {maxExp}</span>
+              <span>{`EXP : ${currentExp} / ${
+                level !== MAX_LEVEL ? maxExp : 'Max'
+              }`}</span>
             </div>
             <div className={styles.increasedExp}>
               <span>+</span>

@@ -16,7 +16,7 @@ function GameResultBigItem({ game }: GameResultBigItemProps) {
   return (
     <div
       className={`${styles.bigContainer}
-			${mode === 'normal' ? styles.normal : styles.rank}`}
+			${styles[mode]}`}
       onClick={() => setClickedItemId(gameId)}
     >
       <GameResultBigTeam team={team1} />

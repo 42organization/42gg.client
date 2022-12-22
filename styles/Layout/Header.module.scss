@@ -44,10 +44,6 @@
       font-size: 1.7rem;
       cursor: pointer;
     }
-    .userImage {
-      @include userImage(2.2rem);
-      cursor: pointer;
-    }
   }
 }
 

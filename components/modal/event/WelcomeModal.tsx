@@ -1,11 +1,10 @@
 import { useSetRecoilState } from 'recoil';
 import { firstVisitedState } from 'utils/recoil/modal';
-import styles from 'styles/modal/WelcomeModal.module.scss';
+import styles from 'styles/modal/event/WelcomeModal.module.scss';
 import modalStyles from 'styles/modal/Modal.module.scss';
 
 export default function WelcomeModal() {
   const setFirstVisited = useSetRecoilState(firstVisitedState);
-
   const content = {
     title: 'Welcome',
     message:
@@ -38,7 +37,7 @@ export default function WelcomeModal() {
         <div className={styles.container}>
           <div className={styles.phrase}>
             <div className={styles.emoji}></div>
-            <div className={styles.title}>Welcome</div>
+            <div className={styles.title}>{content.title}</div>
             {content.message}
             <div className={styles.rose}>
               <span>{`@`}</span>
