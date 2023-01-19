@@ -13,7 +13,6 @@ interface GameResultListProps {
   path: string;
 }
 
-// path === /pingpong/games/users/him?mode=rank&season=1&gameId=
 export default function GameResultList({ path }: GameResultListProps) {
   const { data, fetchNextPage, status, remove, refetch } = InfScroll(path);
   const [isLast, setIsLast] = useState<boolean>(false);
