@@ -23,5 +23,6 @@
     "utils/infinityScroll.js",
     "utils/infinityScoll.js"
   ],
+  "typeRoots" : ["./@types", "./node_modules/@types"],
   "exclude": ["node_modules"]
 }

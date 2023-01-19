@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { Game } from 'types/gameTypes';
-import infScroll from 'utils/infinityScroll';
+import InfScroll from 'utils/infinityScroll';
 import { clickedGameItemState } from 'utils/recoil/game';
 import GameResultEmptyItem from './GameResultEmptyItem';
 import GameResultBigItem from './big/GameResultBigItem';
@@ -13,8 +13,9 @@ interface GameResultListProps {
   path: string;
 }
 
+// path === /pingpong/games/users/him?mode=rank&season=1&gameId=
 export default function GameResultList({ path }: GameResultListProps) {
-  const { data, fetchNextPage, status, remove, refetch } = infScroll(path);
+  const { data, fetchNextPage, status, remove, refetch } = InfScroll(path);
   const [isLast, setIsLast] = useState<boolean>(false);
   const [clickedGameItem, setClickedGameItem] =
     useRecoilState(clickedGameItemState);
