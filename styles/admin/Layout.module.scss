@@ -1,0 +1,47 @@
+@import 'styles/common.scss';
+
+.adminContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  min-width: 720px;
+  height: 100vh;
+  background: white;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 5rem;
+  padding: 1rem 2rem;
+  background: white;
+  border: 2px solid $light-gray;
+}
+
+.title {
+  color: black;
+  font-size: $giant-font;
+  font-family: $title-font;
+}
+
+.homeButton {
+  @include button(white, black);
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar {
+  height: 100%;
+  width: 150px;
+  border: 2px solid $light-gray;
+}
