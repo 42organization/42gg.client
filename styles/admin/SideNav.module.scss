@@ -18,8 +18,12 @@
   padding: 0 0.5rem;
   margin-bottom: 0.5rem;
   border-radius: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
 }
-
+.content:hover {
+  border: 1px solid $medium-gray;
+}
 .logo {
   width: 18px;
   height: 18px;

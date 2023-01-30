@@ -26,10 +26,17 @@
   color: black;
   font-family: $admin-font;
   font-size: $giant-font;
+  cursor: pointer;
 }
 
 .homeButton {
   @include button(white, black, 4rem, 2.5rem);
+  background: white;
+  border: 1px solid $medium-gray;
+}
+
+.homeButton:hover {
+  background: linear-gradient(to bottom, white, $light-gray);
 }
 
 .container {
