@@ -10,13 +10,16 @@ type UserModal = 'PROFILE_EDIT';
 
 type FixedModal = 'AFTER_GAME' | 'STAT';
 
+type AdminModal = 'PROFILE';
+
 type ModalName =
   | null
   | `EVENT-${EventModal}`
   | `MENU-${MenuModal}`
   | `MATCH-${MatchModal}`
   | `USER-${UserModal}`
-  | `FIXED-${FixedModal}`;
+  | `FIXED-${FixedModal}`
+  | `ADMIN-${AdminModal}`;
 
 export interface Cancel {
   isMatched: boolean;
@@ -47,6 +50,11 @@ export interface Manual {
   toggleMode: MatchMode;
 }
 
+export interface AdminProfile {
+  title: string;
+  content: string[];
+}
+
 export interface Modal {
   modalName: ModalName;
   manual?: Manual;
@@ -55,4 +63,5 @@ export interface Modal {
   announcements?: Announcement[];
   exp?: Exp;
   gameId?: number;
+  adminProfile?: AdminProfile;
 }

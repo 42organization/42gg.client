@@ -13,6 +13,7 @@ import AnnouncementModal from './event/AnnouncementModal';
 import AfterGameModal from './afterGame/AfterGameModal';
 import StatChangeModal from './statChange/StatChangeModal';
 import styles from 'styles/modal/Modal.module.scss';
+import AdminProfileModal from './admin/adminProfileModal';
 
 export default function ModalProvider() {
   const [{ modalName, cancel, enroll, manual, announcements, exp }, setModal] =
@@ -31,6 +32,7 @@ export default function ModalProvider() {
     'USER-PROFILE_EDIT': <EditProfileModal />,
     'FIXED-AFTER_GAME': <AfterGameModal />,
     'FIXED-STAT': <StatChangeModal {...exp} />,
+    'ADMIN-PROFILE': <AdminProfileModal />,
   };
 
   useEffect(() => {
