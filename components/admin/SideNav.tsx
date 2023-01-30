@@ -1,9 +1,15 @@
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import styles from 'styles/admin/SideNav.module.scss';
-import userLogo from '/public/image/adminNav/userLogo.svg';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { GoSettings } from 'react-icons/go';
+import { MdOutlineMessage } from 'react-icons/md';
+import {
+  GrUserSettings,
+  GrNotification,
+  GrStatusWarning,
+  GrAnnounce,
+} from 'react-icons/gr';
+import styles from 'styles/admin/SideNav.module.scss';
 
 export default function SideNav() {
   const currentPath = useRouter().asPath;
@@ -22,9 +28,7 @@ export default function SideNav() {
             selectedPath === '/users' && styles.selected
           }`}
         >
-          <div className={styles.img}>
-            <Image src={userLogo} alt='userLogo' width={18} height={18} />
-          </div>
+          <GrUserSettings className={styles.logo} />
           <div className={styles.contentText}>유저 관리</div>
         </div>
       </Link>
@@ -34,9 +38,7 @@ export default function SideNav() {
             selectedPath === '/feedback' && styles.selected
           }`}
         >
-          <div className={styles.img}>
-            <Image src={userLogo} alt='userLogo' width={18} height={18} />
-          </div>
+          <MdOutlineMessage className={styles.logo} />
           <div className={styles.contentText}>피드백 관리</div>
         </div>
       </Link>
@@ -46,9 +48,7 @@ export default function SideNav() {
             selectedPath === '/announcement' && styles.selected
           }`}
         >
-          <div className={styles.img}>
-            <Image src={userLogo} alt='userLogo' width={18} height={18} />
-          </div>
+          <GrAnnounce className={styles.logo} />
           <div className={styles.contentText}>공지사항 관리</div>
         </div>
       </Link>
@@ -58,9 +58,7 @@ export default function SideNav() {
             selectedPath === '/notification' && styles.selected
           }`}
         >
-          <div className={styles.img}>
-            <Image src={userLogo} alt='userLogo' width={18} height={18} />
-          </div>
+          <GrNotification className={styles.logo} />
           <div className={styles.contentText}>알림 관리</div>
         </div>
       </Link>
@@ -70,10 +68,18 @@ export default function SideNav() {
             selectedPath === '/penalty' && styles.selected
           }`}
         >
-          <div className={styles.img}>
-            <Image src={userLogo} alt='userLogo' width={18} height={18} />
-          </div>
+          <GrStatusWarning className={styles.logo} />
           <div className={styles.contentText}>페널티 관리</div>
+        </div>
+      </Link>
+      <Link href='/admin/slot'>
+        <div
+          className={`${styles.content} ${
+            selectedPath === '/slot' && styles.selected
+          }`}
+        >
+          <GoSettings className={styles.logo} />
+          <div className={styles.contentText}>슬롯 관리</div>
         </div>
       </Link>
     </div>
