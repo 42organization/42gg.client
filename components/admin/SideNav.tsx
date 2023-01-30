@@ -1,6 +1,5 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import SideNavContent from './SideNavContent';
 import { GoSettings } from 'react-icons/go';
 import { MdOutlineMessage } from 'react-icons/md';
 import {
@@ -12,76 +11,57 @@ import {
 import styles from 'styles/admin/SideNav.module.scss';
 
 export default function SideNav() {
-  const currentPath = useRouter().asPath;
-  const [selectedPath, setSelectedPath] = useState(currentPath);
-
-  useEffect(
-    () => setSelectedPath(currentPath.replace('/admin', '')),
-    [currentPath]
-  );
+  const currentPath = useRouter().asPath.replace('/admin', '');
 
   return (
     <div className={styles.container}>
-      <Link href='/admin/users'>
-        <div
-          className={`${styles.content} ${
-            selectedPath === '/users' && styles.selected
-          }`}
-        >
-          <GrUserSettings className={styles.logo} />
-          <div className={styles.contentText}>유저 관리</div>
-        </div>
-      </Link>
-      <Link href='/admin/feedback'>
-        <div
-          className={`${styles.content} ${
-            selectedPath === '/feedback' && styles.selected
-          }`}
-        >
-          <MdOutlineMessage className={styles.logo} />
-          <div className={styles.contentText}>피드백 관리</div>
-        </div>
-      </Link>
-      <Link href='/admin/announcement'>
-        <div
-          className={`${styles.content} ${
-            selectedPath === '/announcement' && styles.selected
-          }`}
-        >
-          <GrAnnounce className={styles.logo} />
-          <div className={styles.contentText}>공지사항 관리</div>
-        </div>
-      </Link>
-      <Link href='/admin/notification'>
-        <div
-          className={`${styles.content} ${
-            selectedPath === '/notification' && styles.selected
-          }`}
-        >
-          <GrNotification className={styles.logo} />
-          <div className={styles.contentText}>알림 관리</div>
-        </div>
-      </Link>
-      <Link href='/admin/penalty'>
-        <div
-          className={`${styles.content} ${
-            selectedPath === '/penalty' && styles.selected
-          }`}
-        >
-          <GrStatusWarning className={styles.logo} />
-          <div className={styles.contentText}>페널티 관리</div>
-        </div>
-      </Link>
-      <Link href='/admin/slot'>
-        <div
-          className={`${styles.content} ${
-            selectedPath === '/slot' && styles.selected
-          }`}
-        >
-          <GoSettings className={styles.logo} />
-          <div className={styles.contentText}>슬롯 관리</div>
-        </div>
-      </Link>
+      <SideNavContent
+        url={'/users'}
+        menuName={'유저 관리'}
+        currentPath={currentPath}
+      >
+        <GrUserSettings className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/feedback'}
+        menuName={'피드백 관리'}
+        currentPath={currentPath}
+      >
+        <MdOutlineMessage className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/announcement'}
+        menuName={'공지사항 관리'}
+        currentPath={currentPath}
+      >
+        <GrAnnounce className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/notification'}
+        menuName={'알림 관리'}
+        currentPath={currentPath}
+      >
+        <GrNotification className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/penalty'}
+        menuName={'페널티 관리'}
+        currentPath={currentPath}
+      >
+        <GrStatusWarning className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/slot'}
+        menuName={'슬롯 관리'}
+        currentPath={currentPath}
+      >
+        <GoSettings className={styles.logo} />
+      </SideNavContent>
     </div>
   );
 }
