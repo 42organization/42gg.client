@@ -10,7 +10,7 @@ type UserModal = 'PROFILE_EDIT';
 
 type FixedModal = 'AFTER_GAME' | 'STAT';
 
-type AdminModal = 'PROFILE';
+type AdminModal = 'PROFILE' | 'PENALTY';
 
 type ModalName =
   | null
@@ -50,11 +50,6 @@ export interface Manual {
   toggleMode: MatchMode;
 }
 
-export interface AdminProfile {
-  title: string;
-  content: string[];
-}
-
 export interface Modal {
   modalName: ModalName;
   manual?: Manual;
@@ -63,5 +58,5 @@ export interface Modal {
   announcements?: Announcement[];
   exp?: Exp;
   gameId?: number;
-  adminProfile?: AdminProfile;
+  intraId?: string;
 }

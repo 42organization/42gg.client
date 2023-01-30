@@ -5,7 +5,7 @@ import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import Image from 'next/image';
 
-export default function AdminProfileModal(user: any) {
+export default function AdminProfileModal(props: any) {
   const [userInfo, setUserInfo] = useState<any>();
   //   userId
   //   intraId

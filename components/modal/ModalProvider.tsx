@@ -14,10 +14,13 @@ import AfterGameModal from './afterGame/AfterGameModal';
 import StatChangeModal from './statChange/StatChangeModal';
 import styles from 'styles/modal/Modal.module.scss';
 import AdminProfileModal from './admin/adminProfileModal';
+import AdminPenaltyModal from './admin/adminPenaltyModal';
 
 export default function ModalProvider() {
-  const [{ modalName, cancel, enroll, manual, announcements, exp }, setModal] =
-    useRecoilState(modalState);
+  const [
+    { modalName, cancel, enroll, manual, announcements, exp, intraId },
+    setModal,
+  ] = useRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const content: { [key: string]: JSX.Element | null } = {
     'EVENT-ANNOUNCEMENT': announcements ? (
@@ -32,7 +35,8 @@ export default function ModalProvider() {
     'USER-PROFILE_EDIT': <EditProfileModal />,
     'FIXED-AFTER_GAME': <AfterGameModal />,
     'FIXED-STAT': <StatChangeModal {...exp} />,
-    'ADMIN-PROFILE': <AdminProfileModal />,
+    'ADMIN-PROFILE': intraId ? <AdminProfileModal value={intraId} /> : null,
+    'ADMIN-PENALTY': intraId ? <AdminPenaltyModal value={intraId} /> : null,
   };
 
   useEffect(() => {
