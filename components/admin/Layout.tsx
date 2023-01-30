@@ -10,9 +10,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <div className={styles.adminContainer}>
       <div className={styles.header}>
-        <div className={styles.title}>관리자 페이지</div>
+        <Link href='/admin'>
+          <div className={styles.title}>관리자 페이지</div>
+        </Link>
         <Link href='/'>
-          <button className={styles.homeButton}>홈으로</button>
+          <button className={styles.homeButton}>Home</button>
         </Link>
       </div>
       <div className={styles.container}>
