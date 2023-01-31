@@ -1,27 +1,119 @@
 import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
-import styles from 'styles/user/Profile.module.scss';
+import styles from 'styles/admin/adminPenalty.module.scss';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
+import { finished } from 'stream';
+
+interface EditedPenalty {
+  reason: string;
+  penaltyHour: number | string;
+  penaltyMinute: number | string;
+}
+
+const MINUTE_LIMIT = 59;
 
 export default function AdminPenaltyModal(props: any) {
   const [userPenalty, setUserPenalty] = useState<any>();
+  const [editedPenalty, setEditedPenalty] = useState<EditedPenalty>({
+    reason: '',
+    penaltyHour: '',
+    penaltyMinute: '',
+  });
 
-  const setModal = useSetRecoilState(modalState);
-  const onChange = (e: any) => {
-    setUserPenalty(e.target.value);
+  const inputChangeHandler = ({
+    target: { name, value },
+  }:
+    | React.ChangeEvent<HTMLTextAreaElement>
+    | React.ChangeEvent<HTMLInputElement>) => {
+    setEditedPenalty((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
+
+  const finishEditHandler = () => {
+    let errMsg = '';
+    if (editedPenalty.penaltyHour < 0) {
+      errMsg += '시간은 0 이상이어야합니다.\n';
+      console.log(errMsg);
+      editedPenalty.penaltyHour = '';
+    }
+    if (editedPenalty.penaltyMinute < 0) {
+      errMsg += '분은 0 이상이어야합나다\n';
+      editedPenalty.penaltyMinute = '';
+    }
+    if (editedPenalty.penaltyMinute > MINUTE_LIMIT) {
+      errMsg += '분은 59분까지 입력 가능합니다.\n';
+      editedPenalty.penaltyMinute = '';
+    }
+    if (errMsg) alert(errMsg);
+    setUserPenalty({
+      ...editedPenalty,
+      intraID: props.value,
+    });
+    // setModal({ modalName: null });
+  };
+  useEffect(() => {
+    console.log({ userPenalty });
+    return () => {
+      console.log({ userPenalty });
+    };
+  }, [userPenalty]);
+  const setModal = useSetRecoilState(modalState);
+  const cancelEditHandler = () => setModal({ modalName: null });
+
   return (
-    <div>
-      <div>intra ID: {props.value}</div>
-      <div>사유:</div>
-      <label>
-        적용시간(분): <input onChange={onChange} />
-      </label>
-      <button onClick={() => console.log([`${props.value}`, { userPenalty }])}>
-        적용
-      </button>
-      <button onClick={() => setModal({ modalName: null })}></button>
+    <div className={styles.whole}>
+      <div className={styles.body}>
+        <div className={styles.title}>intra ID: {props.value}</div>
+
+        <label className={styles.body}>
+          사유:
+          <input
+            type='text'
+            pattern='[a-zA-Z0-9가-힣]'
+            name='reason'
+            onChange={inputChangeHandler}
+            value={editedPenalty.reason}
+            placeholder={'사유를 입력해주세요'}
+          />
+        </label>
+
+        <label className={styles.body}>
+          시간:
+          <input
+            type='number'
+            pattern='[0-9]+'
+            min='1'
+            name='penaltyHour'
+            onChange={inputChangeHandler}
+            value={editedPenalty.penaltyHour}
+            placeholder={'시간을 입력해주세요'}
+          />
+        </label>
+
+        <label className={styles.body}>
+          분:
+          <input
+            type='number'
+            pattern='[0-9]+'
+            min='1'
+            name='penaltyMinute'
+            onChange={inputChangeHandler}
+            value={editedPenalty.penaltyMinute}
+            placeholder={'분을 입력해주세요'}
+          />
+        </label>
+        <div style={{ display: 'inline-block' }}>
+          <button className={styles.btn} onClick={finishEditHandler}>
+            적용
+          </button>
+          <button className={styles.btn} onClick={cancelEditHandler}>
+            취소
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

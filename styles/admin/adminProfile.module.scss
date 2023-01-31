@@ -1,0 +1,24 @@
+.title {
+  font-size: 2rem;
+}
+
+.modal {
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+}
+
+.image {
+  align-items: flex-start;
+}
+
+.topRight {
+  flex-direction: column;
+  align-items: space-between;
+}

@@ -1,0 +1,27 @@
+.whole {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.body {
+  display: flex;
+  margin-bottom: 0.2px;
+  padding: 1rem 1rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn {
+  display: flex;
+  justify-items: center;
+  margin-bottom: 10px;
+  width: 100px;
+  height: 20px;
+}
