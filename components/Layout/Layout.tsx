@@ -12,6 +12,7 @@ import Statistics from 'pages/statistics';
 import Header from './Header';
 import Footer from './Footer';
 import CurrentMatch from './CurrentMatch';
+import AdminLayout from '../admin/Layout';
 import styles from 'styles/Layout/Layout.module.scss';
 
 type AppLayoutProps = {
@@ -100,7 +101,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
     }
   };
 
-  return (
+  return presentPath.includes('/admin') && user.isAdmin ? (
+    <AdminLayout>{children}</AdminLayout>
+  ) : (
     <div className={styles.appContainer}>
       <div className={styles.background}>
         <div>
