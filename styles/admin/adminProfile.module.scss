@@ -16,6 +16,19 @@
   padding: 0 2rem;
 }
 
+.rate {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.rate input {
+  text-align: center;
+  margin-top: 2.5px;
+  margin-bottom: 2.5px;
+}
+
 .image {
   display: flex;
   float: left;
@@ -49,12 +62,16 @@
   flex-direction: column;
   text-align: center;
   object-fit: contain;
-  padding: 1rem 0;
+  align-items: stretch;
 }
 
 .btn {
   display: flex;
   flex-direction: column;
+  padding: 1rem 2rem;
+}
+
+.editType {
   padding: 1rem;
 }
 
@@ -63,6 +80,7 @@
   flex-direction: column;
   align-items: stretch;
   margin-bottom: 2rem;
+  padding: 0rem 2rem;
   .racketRadioButtons {
     display: flex;
     justify-content: space-between;

@@ -106,7 +106,7 @@ export default function AdminProfileModal(props: any) {
                 <label key={index} htmlFor={racket.id}>
                   <input
                     type='radio'
-                    name='racketType'
+                    name='racket_type'
                     id={racket.id}
                     value={racket.id}
                     onChange={onChange}
@@ -118,18 +118,14 @@ export default function AdminProfileModal(props: any) {
             })}
           </div>
         </div>
-        <label>
-          승 :
-          <input id='wins' onChange={onChange} value={userInfo?.wins} />
-        </label>
-        <label>
-          패 :
-          <input id='losses' onChange={onChange} value={userInfo?.losses} />
-        </label>
-        <label>
-          PPP :
-          <input id='ppp' onChange={onChange} value={userInfo?.ppp} />
-        </label>
+        <div className={styles.rate}>
+          <label>승</label>
+          <input name='wins' onChange={onChange} value={userInfo?.wins} />
+          <label>패</label>
+          <input name='losses' onChange={onChange} value={userInfo?.losses} />
+          <label>PPP</label>
+          <input name='ppp' onChange={onChange} value={userInfo?.ppp} />
+        </div>
       </div>
       <div className={styles.btn}>
         <button onClick={() => console.log(userInfo)}>Edit</button>
