@@ -28,7 +28,7 @@ interface INotificaionTable {
 
 export default function NotificationTable() {
   const [notificationInfo, setNotificationInfo] = useState<INotificaionTable>();
-  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     axios
