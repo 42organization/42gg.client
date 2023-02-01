@@ -26,6 +26,7 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-js-pagination": "^3.0.3",
     "react-query": "^3.39.1",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.3.0",
     "recoil": "^0.7.3",
     "recoil-persist": "^4.2.0",
