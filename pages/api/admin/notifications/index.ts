@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const TOTAL_PAGE = 21;
+const PER_PAGE = 15;
+const TOTAL_NOTI = 40;
 
 const makeNotifications = (page: string) => {
   const notiList = [];
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < TOTAL_NOTI; i++) {
     notiList.push({
       notiId: i,
       intraId: `mosong${i}`,
@@ -15,8 +16,11 @@ const makeNotifications = (page: string) => {
     });
   }
   return {
-    notiList,
-    totalPage: TOTAL_PAGE,
+    notiList: notiList.slice(
+      (parseInt(page) - 1) * PER_PAGE,
+      parseInt(page) * PER_PAGE
+    ),
+    totalPage: TOTAL_NOTI / PER_PAGE,
     currentPage: parseInt(page),
   };
 };
