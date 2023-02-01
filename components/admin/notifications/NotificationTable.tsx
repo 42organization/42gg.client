@@ -43,38 +43,40 @@ export default function NotificationTable() {
   }
 
   return (
-    <TableContainer sx={{ width: 700 }} component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label='customized table'>
-        <TableHead sx={{ backgroundColor: 'lightgray' }}>
-          <TableRow>
-            <TableCell align='center'>Noti Id</TableCell>
-            <TableCell align='center'>Intra Id</TableCell>
-            <TableCell align='center'>Slot Id</TableCell>
-            <TableCell align='center'>Type</TableCell>
-            <TableCell align='center'>생성일</TableCell>
-            <TableCell align='center'>유저 확인 여부</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {notificationInfo.notiList.map((notification: INotification) => (
-            <TableRow key={notification.notiId}>
-              {Object.values(notification).map(
-                (value: number | string | boolean, index: number) => {
-                  return (
-                    <TableCell align='center' key={index}>
-                      {typeof value === 'boolean'
-                        ? value
-                          ? 'Checked'
-                          : 'Unchecked'
-                        : value}
-                    </TableCell>
-                  );
-                }
-              )}
+    <>
+      <TableContainer sx={{ width: 700 }} component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label='customized table'>
+          <TableHead sx={{ backgroundColor: 'lightgray' }}>
+            <TableRow>
+              <TableCell align='center'>Noti Id</TableCell>
+              <TableCell align='center'>Intra Id</TableCell>
+              <TableCell align='center'>Slot Id</TableCell>
+              <TableCell align='center'>Type</TableCell>
+              <TableCell align='center'>생성일</TableCell>
+              <TableCell align='center'>유저 확인 여부</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {notificationInfo.notiList.map((notification: INotification) => (
+              <TableRow key={notification.notiId}>
+                {Object.values(notification).map(
+                  (value: number | string | boolean, index: number) => {
+                    return (
+                      <TableCell align='center' key={index}>
+                        {typeof value === 'boolean'
+                          ? value
+                            ? 'Checked'
+                            : 'Unchecked'
+                          : value}
+                      </TableCell>
+                    );
+                  }
+                )}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       <PageNation
         curPage={notificationInfo.currentPage}
         totalPages={notificationInfo.totalPage}
@@ -82,6 +84,6 @@ export default function NotificationTable() {
           setCurrentPage(pageNumber);
         }}
       />
-    </TableContainer>
+    </>
   );
 }
