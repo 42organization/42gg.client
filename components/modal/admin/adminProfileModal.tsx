@@ -69,7 +69,7 @@ export default function AdminProfileModal(props: any) {
     <div className={styles.modal}>
       <div className={styles.title}>회원 정보 수정</div>
       <div className={styles.top}>
-        <div className={styles.image}>
+        <label className={styles.image}>
           <Image
             src={userPreviewImg ? userPreviewImg : `${userInfo?.userImageUrl}`}
             layout='fill'
@@ -80,7 +80,7 @@ export default function AdminProfileModal(props: any) {
             style={{ display: 'none' }}
             onChange={photoUpload}
           />
-        </div>
+        </label>
         <div className={styles.topRight}>
           <ul>ID : {userInfo?.intraId}</ul>
           <ul>
@@ -91,11 +91,11 @@ export default function AdminProfileModal(props: any) {
       </div>
       <div className={styles.middle}>
         <label>상태 메시지:</label>
-        <input
+        <textarea
           name='status_message'
           onChange={onChange}
           value={userInfo?.status_message}
-        />
+        ></textarea>
       </div>
       <div className={styles.bottom}>
         <div className={styles.racketTypeWrap}>
