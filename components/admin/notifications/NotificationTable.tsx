@@ -28,14 +28,15 @@ interface INotificaionTable {
 
 export default function NotificationTable() {
   const [notificationInfo, setNotificationInfo] = useState<INotificaionTable>();
+  const [currentPage, setCurrentPage] = useState<number>(0);
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/api/admin/notifications?page=1')
+      .get(`http://localhost:3000/api/admin/notifications?page=${currentPage}`)
       .then((data) => {
         setNotificationInfo({ ...data.data });
       });
-  }, []);
+  }, [currentPage]);
 
   if (notificationInfo === undefined) {
     return <div>loading...</div>;
@@ -77,8 +78,8 @@ export default function NotificationTable() {
       <PageNation
         curPage={notificationInfo.currentPage}
         totalPages={notificationInfo.totalPage}
-        pageChangeHandler={() => {
-          console.log('hello');
+        pageChangeHandler={(pageNumber: number) => {
+          setCurrentPage(pageNumber);
         }}
       />
     </TableContainer>
