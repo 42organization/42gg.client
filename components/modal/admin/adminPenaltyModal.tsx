@@ -26,11 +26,23 @@ export default function AdminPenaltyModal(props: any) {
   }:
     | React.ChangeEvent<HTMLTextAreaElement>
     | React.ChangeEvent<HTMLInputElement>) => {
-    setEditedPenalty((prev) => ({
+    setEditedPenalty((prev: any) => ({
       ...prev,
       [name]: value,
     }));
   };
+
+  const getBasicPenaltyHandler = async () => {
+    const res = await fetch(
+      `http://localhost:3000/api/admin/users/intraId/penalty`
+    );
+    const data = await res.json();
+    setUserPenalty(data[0]);
+  };
+
+  // useEffect(() => {
+  //   getBasicPenaltyHandler();
+  // }, []);
 
   const finishEditHandler = () => {
     let errMsg = '';
@@ -69,44 +81,47 @@ export default function AdminPenaltyModal(props: any) {
         <div className={styles.title}>intra ID: {props.value}</div>
 
         <label className={styles.body}>
-          사유:
+          사유
           <input
             type='text'
             pattern='[a-zA-Z0-9가-힣]'
             name='reason'
             onChange={inputChangeHandler}
-            value={editedPenalty.reason}
+            value={userPenalty?.reason}
             placeholder={'사유를 입력해주세요'}
           />
         </label>
 
         <label className={styles.body}>
-          시간:
+          시간
           <input
             type='number'
             pattern='[0-9]+'
             min='1'
             name='penaltyHour'
             onChange={inputChangeHandler}
-            value={editedPenalty.penaltyHour}
+            value={userPenalty?.penaltyHour}
             placeholder={'시간을 입력해주세요'}
           />
         </label>
 
         <label className={styles.body}>
-          분:
+          분
           <input
             type='number'
             pattern='[0-9]+'
             min='1'
             name='penaltyMinute'
             onChange={inputChangeHandler}
-            value={editedPenalty.penaltyMinute}
+            value={userPenalty?.penaltyMinute}
             placeholder={'분을 입력해주세요'}
           />
         </label>
-        <div style={{ display: 'inline-block' }}>
-          <button className={styles.btn} onClick={finishEditHandler}>
+        <div className={styles.btns}>
+          <button
+            className={userPenalty ? `${styles.hide}` : `${styles.btn}`}
+            onClick={finishEditHandler}
+          >
             적용
           </button>
           <button className={styles.btn} onClick={cancelEditHandler}>

@@ -1,24 +1,88 @@
 .title {
   font-size: 2rem;
+  text-align: center;
+  padding: 1rem;
 }
 
 .modal {
-  justify-content: space-between;
-  justify-items: center;
-  align-items: center;
+  width: 25rem;
+  height: 40rem;
+  align-items: stretch;
 }
 
 .top {
   display: flex;
   justify-content: space-between;
-  padding: 1rem 1rem;
+  padding: 0 2rem;
 }
 
 .image {
-  align-items: flex-start;
+  display: flex;
+  float: left;
+  position: relative;
+  width: 40%;
+  background-size: cover;
+  left: 1rem;
 }
 
 .topRight {
+  padding: 0 1rem;
   flex-direction: column;
   align-items: space-between;
+  width: 50%;
+}
+
+.middle {
+  text-align: center;
+  position: inline;
+  flex-direction: column;
+  padding: 1rem 1rem;
+}
+
+.middle input {
+  width: 80%;
+  height: 5rem;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  object-fit: contain;
+  padding: 1rem 0;
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.racketTypeWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: 2rem;
+  .racketRadioButtons {
+    display: flex;
+    justify-content: space-between;
+    input[type='radio'] {
+      position: absolute;
+      opacity: 0;
+    }
+    :checked + .radioButton {
+      border: solid 1px blue;
+      color: blue;
+    }
+    .radioButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 6rem;
+      height: 2rem;
+      border: 1px solid white;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
 }

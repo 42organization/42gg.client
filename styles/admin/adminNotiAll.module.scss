@@ -5,12 +5,15 @@
   display: inline-block;
   align-items: center;
   display: inline-block;
+  width: 25rem;
+  height: 40rem;
 }
 
 .title {
   font-size: 1.5rem;
+  font-weight: bold;
   font-style: normal;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .body {
@@ -20,6 +23,15 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  font-size: 30px;
+}
+
+.blank {
+  display: flex;
+  text-align: center;
+  margin: auto;
+  width: 20rem;
+  height: 25rem;
 }
 
 .btns {

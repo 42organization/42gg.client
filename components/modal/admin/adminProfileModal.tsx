@@ -72,8 +72,7 @@ export default function AdminProfileModal(props: any) {
         <div className={styles.image}>
           <Image
             src={userPreviewImg ? userPreviewImg : `${userInfo?.userImageUrl}`}
-            width='150'
-            height='150'
+            layout='fill'
             alt=''
           />
           <input
@@ -90,7 +89,7 @@ export default function AdminProfileModal(props: any) {
           </ul>
         </div>
       </div>
-      <div>
+      <div className={styles.middle}>
         <label>상태 메시지:</label>
         <input
           name='status_message'
@@ -98,22 +97,27 @@ export default function AdminProfileModal(props: any) {
           value={userInfo?.status_message}
         />
       </div>
-      <div>
-        {racketTypes.map((racket, index) => {
-          return (
-            <label key={index} htmlFor={racket.id}>
-              <div>{racket.label}</div>
-              <input
-                type='radio'
-                name='racket_type'
-                id={racket.id}
-                value={racket.id}
-                onChange={onChange}
-                checked={userInfo?.racket_type === racket.id}
-              />
-            </label>
-          );
-        })}
+      <div className={styles.bottom}>
+        <div className={styles.racketTypeWrap}>
+          <div className={styles.editType}>라켓 타입</div>
+          <div className={styles.racketRadioButtons}>
+            {racketTypes.map((racket, index) => {
+              return (
+                <label key={index} htmlFor={racket.id}>
+                  <input
+                    type='radio'
+                    name='racketType'
+                    id={racket.id}
+                    value={racket.id}
+                    onChange={onChange}
+                    checked={userInfo?.racket_type === racket.id}
+                  />
+                  <div className={styles.radioButton}>{racket.label}</div>
+                </label>
+              );
+            })}
+          </div>
+        </div>
         <label>
           승 :
           <input id='wins' onChange={onChange} value={userInfo?.wins} />
@@ -127,7 +131,7 @@ export default function AdminProfileModal(props: any) {
           <input id='ppp' onChange={onChange} value={userInfo?.ppp} />
         </label>
       </div>
-      <div>
+      <div className={styles.btn}>
         <button onClick={() => console.log(userInfo)}>Edit</button>
         <button onClick={() => setModal({ modalName: null })}>CANCEL</button>
       </div>
