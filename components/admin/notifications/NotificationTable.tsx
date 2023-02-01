@@ -55,15 +55,21 @@ export default function NotificationTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {notificationInfo.notiList.map((notification: any) => (
+          {notificationInfo.notiList.map((notification: INotification) => (
             <TableRow key={notification.notiId}>
-              {Object.values(notification).map((value: any, index: number) => {
-                return (
-                  <TableCell align='center' key={index}>
-                    {value}
-                  </TableCell>
-                );
-              })}
+              {Object.values(notification).map(
+                (value: number | string | boolean, index: number) => {
+                  return (
+                    <TableCell align='center' key={index}>
+                      {typeof value === 'boolean'
+                        ? value
+                          ? 'Checked'
+                          : 'Unchecked'
+                        : value}
+                    </TableCell>
+                  );
+                }
+              )}
             </TableRow>
           ))}
         </TableBody>
