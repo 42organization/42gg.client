@@ -19,7 +19,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       </div>
       <div className={styles.container}>
         <SideNav />
-        {children}
+        <div className={styles.pageContent}>{children}</div>
       </div>
     </div>
   );
