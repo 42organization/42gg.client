@@ -13,7 +13,7 @@ const Quill = dynamic(() => import('react-quill'), {
   loading: () => <p>Loading ...</p>,
 });
 
-const editorModules = {
+const QUILL_EDIT_MODULES = {
   toolbar: [
     [{ header: [] }, { size: [] }],
     ['bold', 'italic', 'underline', 'strike'],
@@ -25,7 +25,7 @@ const editorModules = {
   ],
 };
 
-const formats = [
+const QUILL_FORMATS = [
   'header',
   'size',
   'bold',
@@ -86,7 +86,7 @@ export default function AnnounceEdit() {
           <Quill
             className={styles.quillViewer}
             readOnly={true}
-            formats={formats}
+            formats={QUILL_FORMATS}
             value={content}
             theme='bubble'
           />
@@ -106,8 +106,8 @@ export default function AnnounceEdit() {
       <div className={styles.editorContainer}>
         <Quill
           className={styles.quillEditor}
-          modules={editorModules}
-          formats={formats}
+          modules={QUILL_EDIT_MODULES}
+          formats={QUILL_FORMATS}
           theme='snow'
           value={content}
           onChange={(content) => setContent(content)}
