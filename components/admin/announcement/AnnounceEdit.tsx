@@ -5,6 +5,9 @@ import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import styles from 'styles/admin/announcement/AnnounceEdit.module.scss';
 
+// for test
+import axios from 'axios';
+
 const Quill = dynamic(() => import('react-quill'), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
@@ -38,11 +41,15 @@ const formats = [
 
 export default function AnnounceEdit() {
   const [content, setContent] = useState('');
-  const API_URL = `/pingpong/admin/announcement`;
+  // api url
+  // const API_URL = `/pingpong/admin/announcement`;
+
+  // test url
+  const API_URL = `http://localhost:3000/api/pingpong/admin/announcement`;
 
   const resetHandler = async () => {
     try {
-      const res = await instance.get(API_URL);
+      const res = await axios.get(API_URL);
       alert(res?.data.text);
       setContent(res?.data.content);
     } catch (e) {
@@ -53,7 +60,7 @@ export default function AnnounceEdit() {
 
   const postHandler = async () => {
     try {
-      const res = await instance.post(API_URL, { content });
+      const res = await axios.post(API_URL, { content });
       alert(res?.data.text);
     } catch (e) {
       alert(e);
@@ -63,7 +70,7 @@ export default function AnnounceEdit() {
 
   const deleteHandler = async () => {
     try {
-      const res = await instance.delete(API_URL);
+      const res = await axios.delete(API_URL);
       alert(res?.data.text);
     } catch (e) {
       alert(e);
