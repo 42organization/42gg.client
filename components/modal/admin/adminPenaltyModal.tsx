@@ -7,8 +7,8 @@ import { finished } from 'stream';
 
 interface EditedPenalty {
   reason: string;
-  penaltyHour: number | string;
-  penaltyMinute: number | string;
+  penaltyHour: number;
+  penaltyMinute: number;
 }
 
 const MINUTE_LIMIT = 59;
@@ -17,8 +17,8 @@ export default function AdminPenaltyModal(props: any) {
   const [userPenalty, setUserPenalty] = useState<any>();
   const [editedPenalty, setEditedPenalty] = useState<EditedPenalty>({
     reason: '',
-    penaltyHour: '',
-    penaltyMinute: '',
+    penaltyHour: parseInt('', 10),
+    penaltyMinute: parseInt('', 10),
   });
 
   const inputChangeHandler = ({
@@ -49,15 +49,15 @@ export default function AdminPenaltyModal(props: any) {
     if (editedPenalty.penaltyHour < 0) {
       errMsg += '시간은 0 이상이어야합니다.\n';
       console.log(errMsg);
-      editedPenalty.penaltyHour = '';
+      editedPenalty.penaltyHour = parseInt('', 10);
     }
     if (editedPenalty.penaltyMinute < 0) {
       errMsg += '분은 0 이상이어야합나다\n';
-      editedPenalty.penaltyMinute = '';
+      editedPenalty.penaltyMinute = parseInt('', 10);
     }
     if (editedPenalty.penaltyMinute > MINUTE_LIMIT) {
       errMsg += '분은 59분까지 입력 가능합니다.\n';
-      editedPenalty.penaltyMinute = '';
+      editedPenalty.penaltyMinute = parseInt('', 10);
     }
     if (errMsg) alert(errMsg);
     setUserPenalty({
