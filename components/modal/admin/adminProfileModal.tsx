@@ -9,14 +9,14 @@ export default function AdminProfileModal(props: any) {
   const [userInfo, setUserInfo] = useState<any>();
   //   userId
   //   intraId
-  //   userImageUrl
-  //   racket_type
-  //   status_message
+  //   userImageUri
+  //   racketType
+  //   statusMessage
   //   wins
   //   losses
   //   ppp
-  //   e_mail
-  //   role_type
+  //   email
+  //   roleType
 
   const [userProfileImg, setUserProfileImg] = useState<File>();
   const [userPreviewImg, setPreviewImg] = useState<string>();
@@ -24,7 +24,7 @@ export default function AdminProfileModal(props: any) {
     { id: 'penholder', label: 'PENHOLDER' },
     { id: 'shakehand', label: 'SHAKEHAND' },
     { id: 'dual', label: 'DUAL' },
-  ];
+  ]; //따로 util로 뺄 것
   const onChange = ({ target: { name, value } }: any | any) => {
     setUserInfo((current: any) => ({
       ...current,
@@ -71,7 +71,7 @@ export default function AdminProfileModal(props: any) {
       <div className={styles.top}>
         <label className={styles.image}>
           <Image
-            src={userPreviewImg ? userPreviewImg : `${userInfo?.userImageUrl}`}
+            src={userPreviewImg ? userPreviewImg : `${userInfo?.userImageUri}`}
             layout='fill'
             alt=''
           />
@@ -85,16 +85,16 @@ export default function AdminProfileModal(props: any) {
           <ul>ID : {userInfo?.intraId}</ul>
           <ul>
             이메일:
-            <input name='e_mail' onChange={onChange} value={userInfo?.e_mail} />
+            <input name='email' onChange={onChange} value={userInfo?.email} />
           </ul>
         </div>
       </div>
       <div className={styles.middle}>
         <label>상태 메시지:</label>
         <textarea
-          name='status_message'
+          name='statusMessage'
           onChange={onChange}
-          value={userInfo?.status_message}
+          value={userInfo?.statusMessage}
         ></textarea>
       </div>
       <div className={styles.bottom}>
@@ -106,11 +106,11 @@ export default function AdminProfileModal(props: any) {
                 <label key={index} htmlFor={racket.id}>
                   <input
                     type='radio'
-                    name='racket_type'
+                    name='racketType'
                     id={racket.id}
                     value={racket.id}
                     onChange={onChange}
-                    checked={userInfo?.racket_type === racket.id}
+                    checked={userInfo?.racketType === racket.id}
                   />
                   <div className={styles.radioButton}>{racket.label}</div>
                 </label>

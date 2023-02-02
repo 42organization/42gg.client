@@ -9,10 +9,12 @@ interface EditedAllNoti {
   notification: string | number;
 }
 
+//noti가 비어있을 때 적용안되게 수정필요
+
 const MINUTE_LIMIT = 59;
 
 export default function AdminNotiAllModal(props: any) {
-  const [allNoti, setAllNoti] = useState<any>();
+  const [allNoti, setAllNoti] = useState<any>(/* 초기값 필요 */);
   const [editedAllNoti, setEditedAllNoti] = useState<EditedAllNoti>({
     notification: '',
   });
@@ -31,6 +33,7 @@ export default function AdminNotiAllModal(props: any) {
   const getBasicNotiAllHandler = async () => {
     const res = await fetch(
       `http://localhost:3000/api/admin/users/intraId/penalty`
+      /* noti 모달인데 패널티 api를 불러옴 post요청인데 애초에 fetch로 정보 불러온게 이상 */
     );
     const data = await res.json();
     setAllNoti(data[0]);
