@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
-import styles from 'styles/admin/announcement/AnnounceEditor.module.scss';
+import styles from 'styles/admin/announcement/AnnounceEdit.module.scss';
 import { useState } from 'react';
 
 const Quill = dynamic(() => import('react-quill'), {
@@ -35,7 +35,7 @@ const formats = [
   'link',
 ];
 
-export default function AnnounceEditor() {
+export default function AnnounceEdit() {
   const [content, setContent] = useState('');
 
   return (
@@ -74,6 +74,7 @@ export default function AnnounceEditor() {
         <div className={styles.editorBtnContainer}>
           <button>초기화</button>
           <button>수정</button>
+          <button>공지 삭제</button>
         </div>
       </div>
     </div>

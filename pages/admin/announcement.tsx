@@ -1,10 +1,9 @@
-import AnnounceEditor from 'components/admin/announcement/AnnounceEditor';
+import AnnounceEdit from 'components/admin/announcement/AnnounceEdit';
 
 export default function Announcement() {
   return (
     <div>
-      <div>announcement page</div>
-      <AnnounceEditor />
+      <AnnounceEdit />
     </div>
   );
 }
