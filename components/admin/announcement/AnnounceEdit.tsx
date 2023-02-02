@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic';
+import { useState } from 'react';
+import instance from 'utils/axios';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import styles from 'styles/admin/announcement/AnnounceEdit.module.scss';
-import { useState } from 'react';
 
 const Quill = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -37,6 +38,38 @@ const formats = [
 
 export default function AnnounceEdit() {
   const [content, setContent] = useState('');
+  const API_URL = `/pingpong/admin/announcement`;
+
+  const resetHandler = async () => {
+    try {
+      const res = await instance.get(API_URL);
+      alert(res?.data.text);
+      setContent(res?.data.content);
+    } catch (e) {
+      alert(e);
+      return;
+    }
+  };
+
+  const postHandler = async () => {
+    try {
+      const res = await instance.post(API_URL, { content });
+      alert(res?.data.text);
+    } catch (e) {
+      alert(e);
+      return;
+    }
+  };
+
+  const deleteHandler = async () => {
+    try {
+      const res = await instance.delete(API_URL);
+      alert(res?.data.text);
+    } catch (e) {
+      alert(e);
+      return;
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -69,12 +102,13 @@ export default function AnnounceEdit() {
           modules={editorModules}
           formats={formats}
           theme='snow'
-          onChange={(e) => setContent(e)}
+          value={content}
+          onChange={(content) => setContent(content)}
         />
         <div className={styles.editorBtnContainer}>
-          <button>초기화</button>
-          <button>수정</button>
-          <button>공지 삭제</button>
+          <button onClick={resetHandler}>초기화</button>
+          <button onClick={postHandler}>수정</button>
+          <button onClick={deleteHandler}>공지 삭제</button>
         </div>
       </div>
     </div>
