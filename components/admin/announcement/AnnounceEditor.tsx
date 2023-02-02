@@ -63,13 +63,19 @@ export default function AnnounceEditor() {
           </div>
         </div>
       </div>
-      <Quill
-        className={styles.quillEditor}
-        modules={editorModules}
-        formats={formats}
-        theme='snow'
-        onChange={(e) => setContent(e)}
-      />
+      <div className={styles.editorContainer}>
+        <Quill
+          className={styles.quillEditor}
+          modules={editorModules}
+          formats={formats}
+          theme='snow'
+          onChange={(e) => setContent(e)}
+        />
+        <div className={styles.editorBtnContainer}>
+          <button>초기화</button>
+          <button>수정</button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -19,11 +19,13 @@
   color: white;
   font-size: $medium-font;
   min-width: 12rem;
-  max-width: 15rem;
+  height: min-content;
+  max-height: 32rem;
 }
 
 .announceModalContainer {
   @include modal-container;
+  margin: 1.6rem 1.5rem;
 }
 
 .modalTitle {
@@ -36,18 +38,30 @@
   min-width: 10rem;
   max-width: 15rem;
   height: 100%;
-  max-height: 24rem;
+  max-height: 20rem;
   overflow-y: scroll;
   margin: 1rem 0;
   color: black;
-  border: 0.5px dashed white;
+
   :link {
     color: blue;
   }
 }
 
+.quillViewer::-webkit-scrollbar {
+  display: inherit;
+  width: 5px;
+  height: 1rem;
+}
+
+.quillViewer::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: white;
+}
+
 .checkBox {
   margin-bottom: 0.5rem;
+
   input {
     display: inline-block;
     position: relative;
@@ -56,6 +70,7 @@
     height: 1rem;
     margin: 0 0.5rem 0 0;
   }
+
   label {
     display: inline-block;
   }
@@ -65,8 +80,40 @@
   @include select-buttons;
 }
 
+.editorBtnContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+  button {
+    all: unset;
+    width: 6rem;
+    height: 2rem;
+    background: gray;
+    border-radius: 0.5rem;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+  }
+
+  :last-child {
+    background: $btn-blue;
+  }
+}
+
+.editorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4rem;
+  width: 100%;
+  padding: 1rem;
+  border-radius: $small-radius;
+  border: 1px solid $gray;
+}
+
 .quillEditor {
   width: 100%;
-  max-width: 48rem;
   height: 24rem;
+  box-sizing: border-box;
 }
