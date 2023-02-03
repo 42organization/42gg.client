@@ -19,6 +19,7 @@ const QUILL_EDIT_MODULES = {
   toolbar: [
     [{ header: [] }, { size: [] }],
     ['bold', 'italic', 'underline', 'strike'],
+    [{ color: [] }],
     [{ list: 'ordered' }, { list: 'bullet' }],
     [{ indent: '-1' }, { indent: '+1' }],
     [{ align: [] }],
@@ -34,6 +35,7 @@ const QUILL_FORMATS = [
   'italic',
   'underline',
   'strike',
+  'color',
   'list',
   'bullet',
   'indent',
@@ -93,7 +95,7 @@ export default function AnnounceEdit() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.announceModalView}>
+      <div className={styles.announceModal}>
         <div className={styles.announceModalContainer}>
           <div className={styles.modalTitle}>Notice!</div>
           <Quill
