@@ -11,6 +11,9 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.7",
     "@react-icons/all-files": "^4.1.0",
     "@types/react-js-pagination": "^3.0.4",
     "@types/react-router-dom": "^5.3.3",
