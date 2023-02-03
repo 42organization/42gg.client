@@ -27,6 +27,8 @@ interface INotificaionTable {
   currentPage: number;
 }
 
+// TODO 각 페이지별 column name을 contants object로 분류, 각 페이지에서 indexing해서 사용
+
 export default function NotificationTable() {
   const [notificationInfo, setNotificationInfo] = useState<INotificaionTable>();
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -56,6 +58,8 @@ export default function NotificationTable() {
               <TableCell align='center'>Type</TableCell>
               <TableCell align='center'>생성일</TableCell>
               <TableCell align='center'>유저 확인 여부</TableCell>
+              {/* 버튼이 필요할 경우 아래처럼 column name을 기타(또는 다른 이름)로 설정 */}
+              {/* <TableCell align='center'>기타</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -74,6 +78,19 @@ export default function NotificationTable() {
                     );
                   }
                 )}
+                {/* 버튼이 필요할 경우 아래처럼 단독으로 생성 */}
+                {/* <TableCell align='center'>
+                  <button
+                    onClick={() =>
+                      console.log(
+                        `자세히 id : ${notification.notiId}`,
+                        `유저 id : ${notification.intraId}`
+                      )
+                    }
+                  >
+                    자세히
+                  </button>
+                </TableCell> */}
               </TableRow>
             ))}
           </TableBody>
