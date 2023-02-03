@@ -21,6 +21,13 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Inter';
+  src: url('../public/font/Inter-VariableFont_slnt,wght.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }

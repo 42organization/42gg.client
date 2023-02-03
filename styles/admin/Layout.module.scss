@@ -1,0 +1,53 @@
+@import 'styles/common.scss';
+
+.adminContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  min-width: 72rem;
+  height: 100vh;
+  background: white;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 4.5rem;
+  padding: 0 1.5rem;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.title {
+  color: black;
+  font-family: $admin-font;
+  font-size: $giant-font;
+  cursor: pointer;
+}
+
+.homeButton {
+  @include button(white, black, 4rem, 2.5rem);
+  background: white;
+  border: 1px solid $medium-gray;
+}
+
+.homeButton:hover {
+  background: linear-gradient(to bottom, white, $light-gray);
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.pageContent {
+  width: 100%;
+  height: 100%;
+}
