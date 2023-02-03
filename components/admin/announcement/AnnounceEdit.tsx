@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { userState } from 'utils/recoil/layout';
 import instance from 'utils/axios';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
@@ -40,41 +42,52 @@ const QUILL_FORMATS = [
 ];
 
 export default function AnnounceEdit() {
+  const currentUserId = useRecoilValue(userState).intraId;
   const [content, setContent] = useState('');
-  // api url
-  // const API_URL = `/pingpong/admin/announcement`;
 
-  // test url
-  const API_URL = `http://localhost:3000/api/pingpong/admin/announcement`;
+  useEffect(() => {
+    resetHandler();
+  }, []);
 
   const resetHandler = async () => {
     try {
-      const res = await axios.get(API_URL);
-      alert(res?.data.text);
+      const res = await axios.get(
+        `http://localhost:3000/api/pingpong/announcement`
+      );
       setContent(res?.data.content);
     } catch (e) {
       alert(e);
-      return;
     }
   };
 
   const postHandler = async () => {
     try {
-      const res = await axios.post(API_URL, { content });
+      const res = await axios.post(
+        `http://localhost:3000/api/pingpong/admin/announcement`,
+        {
+          content,
+          creatorIntraId: currentUserId,
+          createdTime: new Date(),
+        }
+      );
       alert(res?.data.text);
     } catch (e) {
       alert(e);
-      return;
     }
   };
 
   const deleteHandler = async () => {
     try {
-      const res = await axios.delete(API_URL);
+      const res = await axios.put(
+        `http://localhost:3000/api/pingpong/admin/announcement`,
+        {
+          deleterIntraId: currentUserId,
+          deletedTime: new Date(),
+        }
+      );
       alert(res?.data.text);
     } catch (e) {
       alert(e);
-      return;
     }
   };
 
@@ -114,7 +127,7 @@ export default function AnnounceEdit() {
         />
         <div className={styles.editorBtnContainer}>
           <button onClick={resetHandler}>초기화</button>
-          <button onClick={postHandler}>수정</button>
+          <button onClick={postHandler}>생성</button>
           <button onClick={deleteHandler}>공지 삭제</button>
         </div>
       </div>
