@@ -1,12 +1,43 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+interface IPenalty {
+  intraId: string;
+  penaltyTime: string;
+  reason: string;
+}
+
+const penalties: IPenalty[] = [
+  {
+    intraId: 'mosong',
+    penaltyTime: '2021-10-10 10:10:10',
+    reason: '노쇼',
+  },
+  {
+    intraId: 'mosong2',
+    penaltyTime: '2021-10-10 10:10:12',
+    reason: '노쇼2',
+  },
+  {
+    intraId: 'mmmm',
+    penaltyTime: '2021-10-10 10:30:12',
+    reason: '기물파손',
+  },
+];
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  // ! 빈 객체 체크 로직 필요
-  if (req.query.intraId) {
-    res
-      .status(200)
-      .json({ query: { ...req.query }, text: '패털티 받은 특정 유저 조회' });
+  const { method, query } = req;
+
+  if (method === 'GET') {
+    if (query.q) {
+      const result: IPenalty[] = penalties.filter(
+        (penalty) => penalty.intraId === query.q
+      );
+      res.status(200).json(result);
+    } else {
+      res.status(200).json(penalties);
+    }
   } else {
-    res.status(200).json({ text: '패널티 전체 조회' });
+    res.setHeader('Allow', ['GET']);
+    res.status(405).end(`Method ${method} Not Allowed`);
   }
 }

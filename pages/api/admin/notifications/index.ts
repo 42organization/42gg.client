@@ -1,11 +1,30 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const PER_PAGE = 15;
-const TOTAL_NOTI = 40;
+interface IAllNotification {
+  message: string;
+  sendMail: boolean;
+}
 
-const makeNotifications = (page: string) => {
-  const notiList = [];
-  for (let i = 0; i < TOTAL_NOTI; i++) {
+interface INotification {
+  notiId: number;
+  intraId: string;
+  slotId: number;
+  type: string;
+  createdTime: string;
+  isChecked: boolean;
+}
+
+interface IPagedNotification {
+  notiList: INotification[];
+  totalPage: number;
+  currentPage: number;
+}
+
+const TOTAL_PAGE = 21;
+
+const makeNotifications = (page: string): IPagedNotification => {
+  const notiList: INotification[] = [];
+  for (let i = 0; i < 40; i++) {
     notiList.push({
       notiId: i,
       intraId: `mosong${i}`,
@@ -26,11 +45,17 @@ const makeNotifications = (page: string) => {
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'GET') {
-    const { page } = req.query;
-    const notifications = makeNotifications(page as string);
+  const { method, query, body } = req;
+
+  if (method === 'GET') {
+    const page = query.page as string;
+    const notifications: IPagedNotification = makeNotifications(page);
     res.status(200).json(notifications);
-  } else if (req.method === 'POST') {
-    res.status(201).json({ text: 'Hello' });
+  } else if (method === 'POST') {
+    const { message, sendMail }: IAllNotification = body;
+    res.status(201).json({ message, sendMail });
+  } else {
+    res.setHeader('Allow', ['GET', 'POST']);
+    res.status(405).end(`Method ${method} Not Allowed`);
   }
 }
