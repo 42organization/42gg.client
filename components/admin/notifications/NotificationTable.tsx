@@ -10,6 +10,7 @@ import {
 import axios from 'axios';
 import PageNation from 'components/Pagination';
 import { useEffect, useState } from 'react';
+import CreateNotiButton from './CreateNotiButton';
 
 interface INotification {
   notiId: number;
@@ -44,6 +45,7 @@ export default function NotificationTable() {
 
   return (
     <>
+      <CreateNotiButton />
       <TableContainer sx={{ width: 700 }} component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label='customized table'>
           <TableHead sx={{ backgroundColor: 'lightgray' }}>
