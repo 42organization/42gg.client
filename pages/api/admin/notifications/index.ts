@@ -35,8 +35,11 @@ const makeNotifications = (page: string): IPagedNotification => {
     });
   }
   return {
-    notiList,
-    totalPage: TOTAL_PAGE,
+    notiList: notiList.slice(
+      (parseInt(page) - 1) * PER_PAGE,
+      parseInt(page) * PER_PAGE
+    ),
+    totalPage: TOTAL_NOTI / PER_PAGE,
     currentPage: parseInt(page),
   };
 };
