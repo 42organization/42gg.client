@@ -8,6 +8,7 @@ import {
   TableRow,
 } from '@mui/material';
 import axios from 'axios';
+import SearchBar from 'components/main/SearchBar';
 import PageNation from 'components/Pagination';
 import { useEffect, useState } from 'react';
 import CreateNotiButton from './CreateNotiButton';
@@ -47,39 +48,49 @@ export default function NotificationTable() {
 
   return (
     <>
-      <CreateNotiButton />
-      <TableContainer sx={{ width: 700 }} component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label='customized table'>
-          <TableHead sx={{ backgroundColor: 'lightgray' }}>
-            <TableRow>
-              <TableCell align='center'>Noti Id</TableCell>
-              <TableCell align='center'>Intra Id</TableCell>
-              <TableCell align='center'>Slot Id</TableCell>
-              <TableCell align='center'>Type</TableCell>
-              <TableCell align='center'>생성일</TableCell>
-              <TableCell align='center'>유저 확인 여부</TableCell>
-              {/* 버튼이 필요할 경우 아래처럼 column name을 기타(또는 다른 이름)로 설정 */}
-              {/* <TableCell align='center'>기타</TableCell> */}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {notificationInfo.notiList.map((notification: INotification) => (
-              <TableRow key={notification.notiId}>
-                {Object.values(notification).map(
-                  (value: number | string | boolean, index: number) => {
-                    return (
-                      <TableCell align='center' key={index}>
-                        {typeof value === 'boolean'
-                          ? value
-                            ? 'Checked'
-                            : 'Unchecked'
-                          : value}
-                      </TableCell>
-                    );
-                  }
-                )}
-                {/* 버튼이 필요할 경우 아래처럼 단독으로 생성 */}
-                {/* <TableCell align='center'>
+      <div style={{ width: '100%' }}>
+        <div
+          style={{
+            width: 700,
+            margin: 'auto',
+            display: 'flex',
+          }}
+        >
+          <SearchBar />
+          <CreateNotiButton />
+        </div>
+        <TableContainer sx={{ width: 700, margin: 'auto' }} component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label='customized table'>
+            <TableHead sx={{ backgroundColor: 'lightgray' }}>
+              <TableRow>
+                <TableCell align='center'>Noti Id</TableCell>
+                <TableCell align='center'>Intra Id</TableCell>
+                <TableCell align='center'>Slot Id</TableCell>
+                <TableCell align='center'>Type</TableCell>
+                <TableCell align='center'>생성일</TableCell>
+                <TableCell align='center'>유저 확인 여부</TableCell>
+                {/* 버튼이 필요할 경우 아래처럼 column name을 기타(또는 다른 이름)로 설정 */}
+                {/* <TableCell align='center'>기타</TableCell> */}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {notificationInfo.notiList.map((notification: INotification) => (
+                <TableRow key={notification.notiId}>
+                  {Object.values(notification).map(
+                    (value: number | string | boolean, index: number) => {
+                      return (
+                        <TableCell align='center' key={index}>
+                          {typeof value === 'boolean'
+                            ? value
+                              ? 'Checked'
+                              : 'Unchecked'
+                            : value}
+                        </TableCell>
+                      );
+                    }
+                  )}
+                  {/* 버튼이 필요할 경우 아래처럼 단독으로 생성 */}
+                  {/* <TableCell align='center'>
                   <button
                     onClick={() =>
                       console.log(
@@ -91,11 +102,12 @@ export default function NotificationTable() {
                     자세히
                   </button>
                 </TableCell> */}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
       <PageNation
         curPage={notificationInfo.currentPage}
         totalPages={notificationInfo.totalPage}

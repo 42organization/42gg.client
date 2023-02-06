@@ -16,11 +16,10 @@ export default function CreateNotiButton() {
   };
   return (
     <>
-      <button onClick={() => openModal()}>Create All Notification</button>;
+      <button onClick={() => openModal()}>Create All Notification</button>
       <button onClick={() => openModal('SOME-ONE')}>
         Create Someone Notification
       </button>
-      ;
     </>
   );
 }
