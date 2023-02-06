@@ -8,9 +8,6 @@ import 'react-quill/dist/quill.bubble.css';
 import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
 import styles from 'styles/admin/announcement/AnnounceEdit.module.scss';
 
-// for test
-import axios from 'axios';
-
 const Quill = dynamic(() => import('react-quill'), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
@@ -26,9 +23,7 @@ export default function AnnounceEdit() {
 
   const resetHandler = async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:3000/api/pingpong/announcement`
-      );
+      const res = await instance.get(`/pingpong/announcement`);
       setContent(res?.data.content);
     } catch (e) {
       alert(e);
@@ -37,14 +32,11 @@ export default function AnnounceEdit() {
 
   const postHandler = async () => {
     try {
-      const res = await axios.post(
-        `http://localhost:3000/api/pingpong/admin/announcement`,
-        {
-          content,
-          creatorIntraId: currentUserId,
-          createdTime: new Date(),
-        }
-      );
+      const res = await instance.post(`pingpong/admin/announcement`, {
+        content,
+        creatorIntraId: currentUserId,
+        createdTime: new Date(),
+      });
       alert(res?.data.text);
     } catch (e) {
       alert(e);
@@ -53,13 +45,10 @@ export default function AnnounceEdit() {
 
   const deleteHandler = async () => {
     try {
-      const res = await axios.put(
-        `http://localhost:3000/api/pingpong/admin/announcement`,
-        {
-          deleterIntraId: currentUserId,
-          deletedTime: new Date(),
-        }
-      );
+      const res = await instance.put(`pingpong/admin/announcement`, {
+        deleterIntraId: currentUserId,
+        deletedTime: new Date(),
+      });
       alert(res?.data.text);
     } catch (e) {
       alert(e);
