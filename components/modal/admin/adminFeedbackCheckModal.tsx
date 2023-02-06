@@ -61,18 +61,19 @@ export default function AdminFeedbackCheck(props: any) {
   return (
     <div className={styles.whole}>
       <div className={styles.body}>
+        <div className={styles.title}>FEEDBACK REMINDER</div>
         <div className={styles.text}>
-          Are you sure you want to apply the changes?
+          Are you sure you want send the remind message?
         </div>
         <div className={styles.btns}>
           <button
             className={userPenalty ? `${styles.hide}` : `${styles.btn}`}
             onClick={finishEditHandler}
           >
-            YES
+            <div className={styles.btntext}>YES</div>
           </button>
           <button className={styles.btn} onClick={cancelEditHandler}>
-            NO
+            <div className={styles.btntext}>NO</div>
           </button>
         </div>
       </div>

@@ -5,11 +5,15 @@
   display: inline-block;
   align-items: center;
   display: inline-block;
+  background-color: aliceblue;
 }
 
 .title {
-  font-size: 1.5rem;
+  color: cornflowerblue;
+  font-size: 2.5rem;
   font-style: normal;
+  font-weight: bold;
+  margin: auto;
   margin-bottom: 20px;
   margin: auto;
 }
@@ -34,9 +38,11 @@
   margin-bottom: 30px;
   margin-left: 30px;
   margin-right: 30px;
+  color: cadetblue;
 }
 
 .btns {
+  color: aliceblue;
   text-align: center;
   flex-direction: column;
   display: flex;
@@ -45,15 +51,21 @@
 }
 
 .btn {
+  background-color: aliceblue;
   display: flex;
   text-align: center;
   justify-content: center;
   margin-bottom: 10px;
-  width: 100px;
-  height: 20px;
+  width: 400px;
+  height: 60px;
   margin-left: auto;
   margin-right: auto;
   font-weight: bold;
+}
+
+.btntext {
+  color: cadetblue;
+  margin: auto;
 }
 
 .hide {
