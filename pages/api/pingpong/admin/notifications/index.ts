@@ -21,11 +21,11 @@ interface IPagedNotification {
 }
 
 const PER_PAGE = 10;
-const TOTAL_NOTI = 40;
+const TOTAL_NOTI = 46;
 
 const makeNotifications = (page: string): IPagedNotification => {
   const notiList: INotification[] = [];
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 46; i++) {
     notiList.push({
       notiId: i,
       intraId: `mosong${i}`,
