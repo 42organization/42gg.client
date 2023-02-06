@@ -20,7 +20,8 @@ interface IPagedNotification {
   currentPage: number;
 }
 
-const TOTAL_PAGE = 21;
+const PER_PAGE = 10;
+const TOTAL_NOTI = 40;
 
 const makeNotifications = (page: string): IPagedNotification => {
   const notiList: INotification[] = [];
