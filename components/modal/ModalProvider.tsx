@@ -17,6 +17,8 @@ import AdminProfileModal from './admin/adminProfileModal';
 import AdminPenaltyModal from './admin/adminPenaltyModal';
 import AdminNotiAllModal from './admin/adminNotiAllModal';
 import AdminNotiUserModal from './admin/adminNotiUserModal';
+import AdminCheckFeedback from './admin/adminFeedbackCheckModal';
+import AdminFeedbackCheck from './admin/adminFeedbackCheckModal';
 
 export default function ModalProvider() {
   const [
@@ -41,6 +43,7 @@ export default function ModalProvider() {
     'ADMIN-PENALTY': intraId ? <AdminPenaltyModal value={intraId} /> : null,
     'ADMIN-NOTI_ALL': intraId ? <AdminNotiAllModal value={intraId} /> : null,
     'ADMIN-NOTI_USER': intraId ? <AdminNotiUserModal value={intraId} /> : null,
+    'ADMIN-CHECK_FEEDBACK': intraId ? <AdminCheckFeedback /> : null,
   };
 
   useEffect(() => {
