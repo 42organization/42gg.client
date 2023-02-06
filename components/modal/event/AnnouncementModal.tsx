@@ -1,14 +1,23 @@
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { Announcement } from 'types/modalTypes';
+import { QUILL_FORMATS } from 'types/quillTypes';
+import 'react-quill/dist/quill.bubble.css';
 import styles from 'styles/modal/event/AnnouncementModal.module.scss';
 
 type AnnouncementModalProps = {
-  announcements: Announcement[];
+  announcement: Announcement;
 };
+
+const Quill = dynamic(() => import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
+
 export default function AnnouncementModal({
-  announcements,
+  announcement,
 }: AnnouncementModalProps) {
   const setModal = useSetRecoilState(modalState);
   const [neverSeeAgain, setNeverSeeAgain] = useState<boolean>(false);
@@ -28,25 +37,13 @@ export default function AnnouncementModal({
   return (
     <div className={styles.container}>
       <div className={styles.title}>Notice!</div>
-      <ul className={styles.announcementList}>
-        {announcements.map((el: Announcement, index) => {
-          return (
-            <li key={index}>
-              <div>{`<${el.title}>`}</div>
-              <ul className={styles.contentList}>
-                {el.content.map((e: string, idx) => (
-                  <li key={idx}>{e}</li>
-                ))}
-                {el.link && (
-                  <a href={el.link} target='_blank' rel="noreferrer">
-                    {`-> 링크 바로가기`}
-                  </a>
-                )}
-              </ul>
-            </li>
-          );
-        })}
-      </ul>
+      <Quill
+        className={styles.quillViewer}
+        readOnly={true}
+        formats={QUILL_FORMATS}
+        value={announcement.content}
+        theme='bubble'
+      />
       <div className={styles.checkBox}>
         <input
           type='checkbox'

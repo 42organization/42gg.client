@@ -1,4 +1,5 @@
 import { MatchMode } from './mainType';
+import { Value } from 'react-quill';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -33,9 +34,7 @@ export interface Enroll {
 }
 
 export interface Announcement {
-  title: string;
-  content: string[];
-  link: string | null;
+  content: Value;
 }
 
 export interface Exp {
@@ -52,7 +51,7 @@ export interface Modal {
   manual?: Manual;
   cancel?: Cancel;
   enroll?: Enroll;
-  announcements?: Announcement[];
+  announcement?: Announcement;
   exp?: Exp;
   gameId?: number;
 }

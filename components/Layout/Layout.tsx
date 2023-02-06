@@ -15,6 +15,9 @@ import CurrentMatch from './CurrentMatch';
 import AdminLayout from '../admin/Layout';
 import styles from 'styles/Layout/Layout.module.scss';
 
+// test
+import axios from 'axios';
+
 type AppLayoutProps = {
   children: React.ReactNode;
 };
@@ -39,14 +42,19 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   const getAnnouncementHandler = async () => {
     try {
-      const res = await instance.get(`/pingpong/announcements`);
-      res.data.announcements.length &&
+      // const res = await instance.get(`/pingpong/announcements`);
+
+      // test
+      const res = await axios.get(
+        `http://localhost:3000/api/pingpong/announcement`
+      );
+      res.data.content !== '' &&
         setModal({
           modalName: 'EVENT-ANNOUNCEMENT',
-          announcements: res.data.announcements,
+          announcement: res.data,
         });
     } catch (e) {
-      setError('HW01');
+      setError('RJ01');
     }
   };
   const getSeasonListHandler = async () => {
