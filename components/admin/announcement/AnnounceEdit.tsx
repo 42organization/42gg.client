@@ -5,6 +5,7 @@ import { userState } from 'utils/recoil/layout';
 import instance from 'utils/axios';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
+import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
 import styles from 'styles/admin/announcement/AnnounceEdit.module.scss';
 
 // for test
@@ -14,34 +15,6 @@ const Quill = dynamic(() => import('react-quill'), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
 });
-
-const QUILL_EDIT_MODULES = {
-  toolbar: [
-    [{ header: [] }, { size: [] }],
-    ['bold', 'italic', 'underline', 'strike'],
-    [{ color: [] }],
-    [{ list: 'ordered' }, { list: 'bullet' }],
-    [{ indent: '-1' }, { indent: '+1' }],
-    [{ align: [] }],
-    ['link'],
-    ['clean'],
-  ],
-};
-
-const QUILL_FORMATS = [
-  'header',
-  'size',
-  'bold',
-  'italic',
-  'underline',
-  'strike',
-  'color',
-  'list',
-  'bullet',
-  'indent',
-  'align',
-  'link',
-];
 
 export default function AnnounceEdit() {
   const currentUserId = useRecoilValue(userState).intraId;
