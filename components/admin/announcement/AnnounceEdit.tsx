@@ -68,29 +68,31 @@ export default function AnnounceEdit() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.announceModal}>
-        <div className={styles.announceModalContainer}>
-          <div className={styles.modalTitle}>Notice!</div>
-          <Quill
-            className={styles.quillViewer}
-            readOnly={true}
-            formats={QUILL_FORMATS}
-            value={content}
-            theme='bubble'
-          />
-          <div className={styles.checkBox}>
-            <input type='checkbox' id='neverSeeAgain' name='neverSeeAgain' />
-            <label htmlFor='neverSeeAgain'>
-              <div>하루 동안 열지 않기</div>
-            </label>
-          </div>
-          <div className={styles.buttons}>
-            <div className={styles.positive}>
-              <input type='button' value='닫기' />
+      {content && (
+        <div className={styles.announceModal}>
+          <div className={styles.announceModalContainer}>
+            <div className={styles.modalTitle}>Notice!</div>
+            <Quill
+              className={styles.quillViewer}
+              readOnly={true}
+              formats={QUILL_FORMATS}
+              value={content}
+              theme='bubble'
+            />
+            <div className={styles.checkBox}>
+              <input type='checkbox' id='neverSeeAgain' name='neverSeeAgain' />
+              <label htmlFor='neverSeeAgain'>
+                <div>하루 동안 열지 않기</div>
+              </label>
+            </div>
+            <div className={styles.buttons}>
+              <div className={styles.positive}>
+                <input type='button' value='닫기' />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
       <div className={styles.editorContainer}>
         <Quill
           className={styles.quillEditor}
