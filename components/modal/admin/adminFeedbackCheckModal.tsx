@@ -5,74 +5,54 @@ import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 // import { finished } from 'stream';
 import { useRouter } from 'next/router';
+import GameResultSmallItem from 'components/game/small/GameResultSmallItem';
 
-interface EditedPenalty {
-  reason: string;
-  penaltyHour: number;
-  penaltyMinute: number;
-  // presentPath: boolean;
+interface Result {
+  status: string;
 }
 
-const MINUTE_LIMIT = 59;
-
 export default function AdminFeedbackCheck(props: any) {
-  const [userPenalty, setUserPenalty] = useState<any>(/* 초기값 지정 */);
-  const [editedPenalty, setEditedPenalty] = useState<EditedPenalty>({
-    reason: '',
-    penaltyHour: parseInt('', 10),
-    penaltyMinute: parseInt('', 10),
-    // presentPath: true,
+  const [result, setResult] = useState<Result>({
+    status: '',
   });
-
   const setModal = useSetRecoilState(modalState);
-  const cancelEditHandler = () => setModal({ modalName: null });
 
-  // useEffect(() => {
-  //   if (editedPenalty.presentPath === true) {
-  //     if (!userPenalty) inputChangeHandler;
-  //   } else finishEditHandler;
-  // }, [presentPath]);
-
-  const inputChangeHandler = ({
-    target: { name, value },
-  }:
-    | React.ChangeEvent<HTMLTextAreaElement>
-    | React.ChangeEvent<HTMLInputElement>) => {
-    setEditedPenalty((prev: any) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const sendReminder: { [key: string]: string } = {
+    YES: '성공적으로 전송되었습니다',
+    NO: '전송이 취소되었습니다',
   };
 
-  const finishEditHandler = () => {
-    setUserPenalty({
-      ...editedPenalty,
-      intraID: props.value,
-    });
-    // setModal({ modalName: null });
+  const finishSendHandler = async () => {
+    if (result.status == 'completed') {
+      try {
+        await instance.post(`/pingpong/feedback/${props.id}/reminder`);
+        setModal({ modalName: null });
+      } catch (e) {
+        console.log(e);
+      }
+    }
   };
-  useEffect(() => {
-    console.log({ userPenalty });
-    return () => {
-      console.log({ userPenalty });
-    };
-  }, [userPenalty]);
 
+  const cancelReminderHandler = () => {
+    if (result.status == 'completed') {
+      setModal({ modalName: null });
+    }
+  };
   return (
     <div className={styles.whole}>
       <div className={styles.body}>
         <div className={styles.title}>FEEDBACK REMINDER</div>
         <div className={styles.text}>
-          Are you sure you want send the remind message?
+          Are you sure you want to send the reminder?
         </div>
         <div className={styles.btns}>
           <button
-            className={userPenalty ? `${styles.hide}` : `${styles.btn}`}
-            onClick={finishEditHandler}
+            className={sendReminder ? `${styles.hide}` : `${styles.btn}`}
+            onClick={finishSendHandler}
           >
             <div className={styles.btntext}>YES</div>
           </button>
-          <button className={styles.btn} onClick={cancelEditHandler}>
+          <button className={styles.btn} onClick={cancelReminderHandler}>
             <div className={styles.btntext}>NO</div>
           </button>
         </div>
