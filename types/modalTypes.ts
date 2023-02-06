@@ -10,7 +10,7 @@ type UserModal = 'PROFILE_EDIT';
 
 type FixedModal = 'AFTER_GAME' | 'STAT';
 
-type AdminModal = 'PROFILE' | 'PENALTY' | 'NOTI_ALL';
+type AdminModal = 'PROFILE' | 'PENALTY' | 'NOTI_ALL' | 'NOTI_USER';
 
 type ModalName =
   | null
