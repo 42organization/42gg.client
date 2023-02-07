@@ -4,8 +4,8 @@ import styles from 'styles/admin/adminProfile.module.scss';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import Image from 'next/image';
-import imageCompression from 'browser-image-compression';
 import axios from 'axios';
+import useUploadImg from 'hooks/useUploadImg';
 
 export default function AdminProfileModal(props: any) {
   const [userInfo, setUserInfo] = useState<any>();
@@ -20,69 +20,17 @@ export default function AdminProfileModal(props: any) {
   //   email
   //   roleType
 
+  const { imgData, imgPreview, uploadImg } = useUploadImg();
+
   const racketTypes = [
     { id: 'penholder', label: 'PENHOLDER' },
     { id: 'shakehand', label: 'SHAKEHAND' },
     { id: 'dual', label: 'DUAL' },
   ];
 
-  const [userProfileImg, setUserProfileImg] = useState<File>();
-  const [userPreviewImg, setPreviewImg] = useState<string>();
   const setModal = useSetRecoilState(modalState);
 
-  const imgCompress = async (fileSrc: File) => {
-    const options = {
-      maxSizeMB: 0.1,
-      maxWidthOrHeight: 320,
-      useWebWorker: true,
-    };
-    try {
-      const userProfileImg = await imageCompression(fileSrc, options);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewImg(reader.result as string);
-      };
-      reader.readAsDataURL(userProfileImg);
-      setUserInfo((current: any) => ({
-        ...current,
-        userImageUri: userProfileImg,
-      }));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const onChange = ({ target: { name, value } }: any | any) => {
-    setUserInfo((current: any) => ({
-      ...current,
-      [name]: value,
-    }));
-  };
   useEffect(() => {
-    if (userProfileImg) {
-      imgCompress(userProfileImg);
-    }
-  }, [userProfileImg]);
-
-  const photoUpload = (e: any) => {
-    e.preventDefault();
-    const file = e.target.files[0];
-    if (file) {
-      setUserProfileImg(file);
-    }
-  };
-
-  useEffect(() => {
-    fetch('/admin/users?page=1', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
     getBasicProfileHandler();
   }, []);
 
@@ -92,25 +40,41 @@ export default function AdminProfileModal(props: any) {
     setUserInfo(data[0]);
   };
 
+  const onChange = ({ target: { name, value } }: any | any) => {
+    setUserInfo((current: any) => ({
+      ...current,
+      [name]: value,
+    }));
+  };
+
   const submitHandler = async (e: any) => {
     const formData = new FormData();
-    formData.append('userId', userInfo.userId);
-    formData.append('intraId', userInfo.intraId);
-    //formData.append('userImageUri', userInfo.userImageUri);
-    formData.append('statusMessage', userInfo.statusMessage);
-    formData.append('racketType', userInfo.racketType);
-    formData.append('wins', userInfo.wins);
-    formData.append('losses', userInfo.losses);
-    formData.append('ppp', userInfo.ppp);
-    formData.append('email', userInfo.email);
-    formData.append('roleType', userInfo.roleType);
+    console.log(imgData);
+    const data = {
+      userId: userInfo.userId,
+      intraId: userInfo.intraId,
+      statusMessage: userInfo.statusMessage,
+      racketType: userInfo.racketType,
+      wins: userInfo.wins,
+      losses: userInfo.losses,
+      ppp: userInfo.ppp,
+      email: userInfo.email,
+      roleType: userInfo.roleType,
+    };
+    //formData.append('files', imgData);
+    // formData.append(
+    //   'data',
+    //   new Blob([JSON.stringify(data)], {
+    //     type: 'application/json',
+    //   })
+    // );
     // await instance.put(`/admin/users/${userInfo.userId}`, e);
-    try {
-      const result = await axios.put(`/admin/users/daijeong/detail`);
-      console.log(result);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const result = await axios.put(`/admin/users/daijeong/detail`);
+    //   console.log(result);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
@@ -124,16 +88,14 @@ export default function AdminProfileModal(props: any) {
         <div className={styles.top}>
           <label className={styles.image}>
             <Image
-              src={
-                userPreviewImg ? userPreviewImg : `${userInfo?.userImageUri}`
-              }
+              src={imgPreview ? imgPreview : `${userInfo?.userImageUri}`}
               layout='fill'
               alt=''
             />
             <input
               type='file'
               style={{ display: 'none' }}
-              onChange={photoUpload}
+              onChange={uploadImg}
             />
           </label>
           <div className={styles.topRight}>
@@ -175,23 +137,12 @@ export default function AdminProfileModal(props: any) {
           </div>
           <div className={styles.rate}>
             <label>승</label>
-            <input
-              pattern='[0-9]+'
-              name='wins'
-              onChange={onChange}
-              value={userInfo?.wins}
-            />
+            <input name='wins' onChange={onChange} value={userInfo?.wins} />
             <label>패</label>
-            <input
-              pattern='[0-9]+'
-              name='losses'
-              onChange={onChange}
-              value={userInfo?.losses}
-            />
+            <input name='losses' onChange={onChange} value={userInfo?.losses} />
             <label>PPP</label>
             <input
               type='text'
-              pattern='[0-9]+'
               name='ppp'
               onChange={onChange}
               value={userInfo?.ppp}

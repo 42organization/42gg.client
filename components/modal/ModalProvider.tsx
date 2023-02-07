@@ -13,12 +13,12 @@ import AnnouncementModal from './event/AnnouncementModal';
 import AfterGameModal from './afterGame/AfterGameModal';
 import StatChangeModal from './statChange/StatChangeModal';
 import styles from 'styles/modal/Modal.module.scss';
-import AdminProfileModal from './admin/adminProfileModal';
-import AdminPenaltyModal from './admin/adminPenaltyModal';
-import AdminNotiAllModal from './admin/adminNotiAllModal';
-import AdminNotiUserModal from './admin/adminNotiUserModal';
-import AdminCheckFeedback from './admin/adminFeedbackCheckModal';
-import AdminFeedbackCheck from './admin/adminFeedbackCheckModal';
+import AdminProfileModal from './admin/AdminProfileModal';
+import AdminPenaltyModal from './admin/AdminPenaltyModal';
+import AdminNotiAllModal from './admin/AdminNotiAllModal';
+import AdminNotiUserModal from './admin/AdminNotiUserModal';
+import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
+import AdminFeedbackCheck from './admin/AdminFeedbackCheckModal';
 
 export default function ModalProvider() {
   const [
