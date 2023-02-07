@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { makeNotifications } from '.';
 
 interface IPartialNotification {
   intraId: string;
@@ -7,9 +8,24 @@ interface IPartialNotification {
   sendMail: boolean;
 }
 
+interface INotification {
+  notiId: number;
+  intraId: string;
+  slotId: number;
+  type: string;
+  createdTime: string;
+  isChecked: boolean;
+}
+
+interface IPagedNotification {
+  notiList: INotification[];
+  totalPage: number;
+  currentPage: number;
+}
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, query, body } = req;
-  const { intraId } = query;
+  const { intraId, page } = query as { intraId: string; page: string };
 
   const notification: IPartialNotification = {
     intraId: intraId as string,
@@ -19,7 +35,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   };
 
   if (method === 'POST') {
-    res.status(200).json({ ...body });
+    res.status(200).json(notification);
+  } else if (method === 'GET') {
+    if (intraId && page) {
+      const notifications: IPagedNotification = makeNotifications(
+        page,
+        intraId
+      );
+      return res.status(200).json(notifications);
+    }
   } else {
     res.setHeader('Allow', ['POST']);
     res.status(405).end(`Method ${method} Not Allowed`);

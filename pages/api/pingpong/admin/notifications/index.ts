@@ -23,35 +23,52 @@ interface IPagedNotification {
 const PER_PAGE = 10;
 const TOTAL_NOTI = 46;
 
-const makeNotifications = (page: string): IPagedNotification => {
+export const makeNotifications = (
+  page: string,
+  intraId?: string
+): IPagedNotification => {
+  let totalPage = (TOTAL_NOTI / PER_PAGE) as number;
+  let filteredNotiList: INotification[] = [];
   const notiList: INotification[] = [];
-  for (let i = 0; i < 46; i++) {
+
+  for (let i = 0; i < TOTAL_NOTI; i++) {
     notiList.push({
       notiId: i,
-      intraId: `mosong${i}`,
+      intraId: `${i % 2 ? 'mosong' : `mosong${i}`}`,
       slotId: 1,
       type: 'matched',
       createdTime: '2021-10-10 10:10:10',
       isChecked: i % 3 ? true : false,
     });
   }
+
+  if (intraId) {
+    filteredNotiList = notiList.filter((noti) => noti.intraId === intraId);
+    totalPage = (filteredNotiList.length / PER_PAGE) as number;
+  }
+
   return {
-    notiList: notiList.slice(
-      (parseInt(page) - 1) * PER_PAGE,
-      parseInt(page) * PER_PAGE
-    ),
-    totalPage: TOTAL_NOTI / PER_PAGE,
+    notiList: intraId
+      ? filteredNotiList.slice(
+          (parseInt(page) - 1) * PER_PAGE,
+          parseInt(page) * PER_PAGE
+        )
+      : notiList.slice(
+          (parseInt(page) - 1) * PER_PAGE,
+          parseInt(page) * PER_PAGE
+        ),
+    totalPage,
     currentPage: parseInt(page),
   };
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, query, body } = req;
+  const { page } = query as { page: string };
 
   if (method === 'GET') {
-    const page = query.page as string;
     const notifications: IPagedNotification = makeNotifications(page);
-    res.status(200).json(notifications);
+    return res.status(200).json(notifications);
   } else if (method === 'POST') {
     const { message, sendMail }: IAllNotification = body;
     res.status(201).json({ message, sendMail });
