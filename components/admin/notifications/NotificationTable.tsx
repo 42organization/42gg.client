@@ -11,6 +11,7 @@ import axios from 'axios';
 import SearchBar from 'components/main/SearchBar';
 import PageNation from 'components/Pagination';
 import { useCallback, useEffect, useState } from 'react';
+import { tableColumnNames } from 'types/admin/tableTypes';
 import CreateNotiButton from './CreateNotiButton';
 
 interface INotification {
@@ -27,8 +28,6 @@ interface INotificaionTable {
   totalPage: number;
   currentPage: number;
 }
-
-// TODO 각 페이지별 column name을 contants object로 분류, 각 페이지에서 indexing해서 사용
 
 export default function NotificationTable() {
   const [notificationInfo, setNotificationInfo] = useState<INotificaionTable>();
@@ -88,26 +87,15 @@ export default function NotificationTable() {
           <Table sx={{ minWidth: 700 }} aria-label='customized table'>
             <TableHead sx={{ backgroundColor: 'lightgray' }}>
               <TableRow>
-                <TableCell sx={{ padding: '5px' }} align='center'>
-                  Noti Id
-                </TableCell>
-                <TableCell sx={{ padding: '5px' }} align='center'>
-                  Intra Id
-                </TableCell>
-                <TableCell sx={{ padding: '5px' }} align='center'>
-                  Slot Id
-                </TableCell>
-                <TableCell sx={{ padding: '5px' }} align='center'>
-                  Type
-                </TableCell>
-                <TableCell sx={{ padding: '5px' }} align='center'>
-                  생성일
-                </TableCell>
-                <TableCell sx={{ padding: '5px' }} align='center'>
-                  유저 확인 여부
-                </TableCell>
-                {/* 버튼이 필요할 경우 아래처럼 column name을 기타(또는 다른 이름)로 설정 */}
-                {/* <TableCell align='center'>기타</TableCell> */}
+                {tableColumnNames['notification'].map((columnName) => (
+                  <TableCell
+                    sx={{ padding: '5px' }}
+                    align='center'
+                    key={columnName}
+                  >
+                    {columnName}
+                  </TableCell>
+                ))}
               </TableRow>
             </TableHead>
             <TableBody>
