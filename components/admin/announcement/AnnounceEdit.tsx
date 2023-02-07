@@ -5,43 +5,13 @@ import { userState } from 'utils/recoil/layout';
 import instance from 'utils/axios';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
+import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
 import styles from 'styles/admin/announcement/AnnounceEdit.module.scss';
-
-// for test
-import axios from 'axios';
 
 const Quill = dynamic(() => import('react-quill'), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
 });
-
-const QUILL_EDIT_MODULES = {
-  toolbar: [
-    [{ header: [] }, { size: [] }],
-    ['bold', 'italic', 'underline', 'strike'],
-    [{ color: [] }],
-    [{ list: 'ordered' }, { list: 'bullet' }],
-    [{ indent: '-1' }, { indent: '+1' }],
-    [{ align: [] }],
-    ['link'],
-    ['clean'],
-  ],
-};
-
-const QUILL_FORMATS = [
-  'header',
-  'size',
-  'bold',
-  'italic',
-  'underline',
-  'strike',
-  'color',
-  'list',
-  'bullet',
-  'indent',
-  'align',
-  'link',
-];
 
 export default function AnnounceEdit() {
   const currentUserId = useRecoilValue(userState).intraId;
@@ -53,9 +23,7 @@ export default function AnnounceEdit() {
 
   const resetHandler = async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:3000/api/pingpong/announcement`
-      );
+      const res = await instance.get(`/pingpong/announcement`);
       setContent(res?.data.content);
     } catch (e) {
       alert(e);
@@ -64,14 +32,11 @@ export default function AnnounceEdit() {
 
   const postHandler = async () => {
     try {
-      const res = await axios.post(
-        `http://localhost:3000/api/pingpong/admin/announcement`,
-        {
-          content,
-          creatorIntraId: currentUserId,
-          createdTime: new Date(),
-        }
-      );
+      const res = await instance.post(`pingpong/admin/announcement`, {
+        content,
+        creatorIntraId: currentUserId,
+        createdTime: new Date(),
+      });
       alert(res?.data.text);
     } catch (e) {
       alert(e);
@@ -80,13 +45,10 @@ export default function AnnounceEdit() {
 
   const deleteHandler = async () => {
     try {
-      const res = await axios.put(
-        `http://localhost:3000/api/pingpong/admin/announcement`,
-        {
-          deleterIntraId: currentUserId,
-          deletedTime: new Date(),
-        }
-      );
+      const res = await instance.put(`pingpong/admin/announcement`, {
+        deleterIntraId: currentUserId,
+        deletedTime: new Date(),
+      });
       alert(res?.data.text);
     } catch (e) {
       alert(e);
@@ -95,29 +57,31 @@ export default function AnnounceEdit() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.announceModal}>
-        <div className={styles.announceModalContainer}>
-          <div className={styles.modalTitle}>Notice!</div>
-          <Quill
-            className={styles.quillViewer}
-            readOnly={true}
-            formats={QUILL_FORMATS}
-            value={content}
-            theme='bubble'
-          />
-          <div className={styles.checkBox}>
-            <input type='checkbox' id='neverSeeAgain' name='neverSeeAgain' />
-            <label htmlFor='neverSeeAgain'>
-              <div>하루 동안 열지 않기</div>
-            </label>
-          </div>
-          <div className={styles.buttons}>
-            <div className={styles.positive}>
-              <input type='button' value='닫기' />
+      {content && (
+        <div className={styles.announceModal}>
+          <div className={styles.announceModalContainer}>
+            <div className={styles.modalTitle}>Notice!</div>
+            <Quill
+              className={styles.quillViewer}
+              readOnly={true}
+              formats={QUILL_FORMATS}
+              value={content}
+              theme='bubble'
+            />
+            <div className={styles.checkBox}>
+              <input type='checkbox' id='neverSeeAgain' name='neverSeeAgain' />
+              <label htmlFor='neverSeeAgain'>
+                <div>하루 동안 열지 않기</div>
+              </label>
+            </div>
+            <div className={styles.buttons}>
+              <div className={styles.positive}>
+                <input type='button' value='닫기' />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
       <div className={styles.editorContainer}>
         <Quill
           className={styles.quillEditor}
