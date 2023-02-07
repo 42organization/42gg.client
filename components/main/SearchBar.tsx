@@ -9,11 +9,7 @@ import styles from 'styles/main/SearchBar.module.scss';
 
 let timer: ReturnType<typeof setTimeout>;
 
-export default function SearchBar({
-  initSearch,
-}: {
-  initSearch?: (intraId: string) => void;
-}) {
+export default function SearchBar() {
   const [keyword, setKeyword] = useState<string>('');
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<string[]>([]);
@@ -82,23 +78,11 @@ export default function SearchBar({
       {showDropDown && keyword && (
         <div className={styles.dropdown}>
           {searchResult.length ? (
-            searchResult.map((intraId: string) =>
-              !initSearch ? (
-                <Link href={`/users/detail?intraId=${intraId}`} key={intraId}>
-                  <div>{intraId}</div>
-                </Link>
-              ) : (
-                <div
-                  key={intraId}
-                  onClick={() => {
-                    initSearch(intraId);
-                    setShowDropDown(false);
-                  }}
-                >
-                  {intraId}
-                </div>
-              )
-            )
+            searchResult.map((intraId: string) => (
+              <Link href={`/users/detail?intraId=${intraId}`} key={intraId}>
+                <div>{intraId}</div>
+              </Link>
+            ))
           ) : (
             <div>검색 결과가 없습니다.</div>
           )}
