@@ -1,3 +1,5 @@
+import { useCallback, useEffect, useState } from 'react';
+import { tableColumnNames } from 'types/admin/tableTypes';
 import {
   Paper,
   Table,
@@ -9,10 +11,8 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import PageNation from 'components/Pagination';
-import { useCallback, useEffect, useState } from 'react';
-import { tableColumnNames } from 'types/admin/tableTypes';
-import AdminSearchBar from '../common/AdminSearchBar';
-import CreateNotiButton from './CreateNotiButton';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import CreateNotiButton from 'components/admin/notification/CreateNotiButton';
 import style from 'styles/admin/notification/NotificationTable.module.scss';
 
 interface INotification {
