@@ -31,7 +31,11 @@ interface INotificaionTable {
 }
 
 export default function NotificationTable() {
-  const [notificationInfo, setNotificationInfo] = useState<INotificaionTable>();
+  const [notificationInfo, setNotificationInfo] = useState<INotificaionTable>({
+    notiList: [],
+    totalPage: 0,
+    currentPage: 0,
+  });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
 
