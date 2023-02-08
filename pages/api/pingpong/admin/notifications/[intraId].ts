@@ -13,6 +13,7 @@ interface INotification {
   intraId: string;
   slotId: number;
   type: string;
+  message: string;
   createdTime: string;
   isChecked: boolean;
 }

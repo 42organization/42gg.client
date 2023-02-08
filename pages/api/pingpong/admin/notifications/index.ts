@@ -1,5 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+const NOTI_TYPE = [
+  'cancelByMan',
+  'cancelByTime',
+  'imminent',
+  'matched',
+  'announce',
+];
+
 interface IAllNotification {
   message: string;
   sendMail: boolean;
@@ -10,6 +18,7 @@ interface INotification {
   intraId: string;
   slotId: number;
   type: string;
+  message: string;
   createdTime: string;
   isChecked: boolean;
 }
@@ -34,11 +43,14 @@ export const makeNotifications = (
   for (let i = 0; i < TOTAL_NOTI; i++) {
     notiList.push({
       notiId: i,
-      intraId: `${i % 2 ? 'mosong' : `mosong${i}`}`,
+      intraId: `${
+        Math.floor(Math.random() * 10) % 2 ? 'mosong' : `mosong${i}`
+      }`,
       slotId: 1,
-      type: 'matched',
+      type: NOTI_TYPE[Math.floor(Math.random() * NOTI_TYPE.length)],
+      message: `Hello, World! ${Math.floor(Math.random() * 10)}`,
       createdTime: '2021-10-10 10:10:10',
-      isChecked: i % 3 ? true : false,
+      isChecked: Math.floor(Math.random() * 10) % 3 ? true : false,
     });
   }
 
