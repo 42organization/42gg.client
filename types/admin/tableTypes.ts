@@ -4,6 +4,7 @@ export const tableColumnNames = {
     'intraId',
     'slotId',
     'type',
+    'message',
     'createdTime',
     'isChecked',
   ],
