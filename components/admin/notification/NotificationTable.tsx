@@ -41,6 +41,7 @@ export default function NotificationTable() {
 
   const getUserNotifications = useCallback(async () => {
     try {
+      // TODO! : change to real endpoint
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_ADMIN_MOCK_ENDPOINT}/notifications/${intraId}?page=${currentPage}`
       );
@@ -58,6 +59,7 @@ export default function NotificationTable() {
 
   const getAllUserNotifications = useCallback(async () => {
     try {
+      // TODO! : change to real endpoint
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_ADMIN_MOCK_ENDPOINT}/notifications?page=${currentPage}`
       );
@@ -111,19 +113,6 @@ export default function NotificationTable() {
                       );
                     }
                   )}
-                  {/* 버튼이 필요할 경우 아래처럼 단독으로 생성 */}
-                  {/* <TableCell align='center'>
-                  <button
-                    onClick={() =>
-                      console.log(
-                        `자세히 id : ${notification.notiId}`,
-                        `유저 id : ${notification.intraId}`
-                      )
-                    }
-                  >
-                    자세히
-                  </button>
-                </TableCell> */}
                 </TableRow>
               ))}
             </TableBody>
