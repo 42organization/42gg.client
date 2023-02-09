@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
-import styles from 'styles/admin/AdminNotiAll.module.scss';
+import styles from 'styles/admin/modal/AdminNotiAll.module.scss';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import { finished } from 'stream';

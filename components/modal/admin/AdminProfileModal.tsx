@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
-import styles from 'styles/admin/AdminProfile.module.scss';
+import styles from 'styles/admin/modal/AdminProfile.module.scss';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import Image from 'next/image';
@@ -68,30 +68,44 @@ export default function AdminProfileModal(props: Props) {
           styles.modal
         } /* method="put"  */ /* encType="multipart/form-data" */
       >
-        <div className={styles.title}>회원 정보 수정</div>
-        <div className={styles.top}>
-          <label className={styles.image}>
-            <Image
-              src={imgPreview ? imgPreview : `${userInfo?.userImageUri}`}
-              layout='fill'
-              alt=''
-            />
-            <input
-              type='file'
-              style={{ display: 'none' }}
-              onChange={uploadImg}
-            />
-          </label>
-          <div className={styles.topRight}>
-            <ul>ID : {userInfo?.intraId}</ul>
-            <ul>
-              이메일:
-              <input name='eMail' onChange={onChange} value={userInfo?.eMail} />
-            </ul>
+        <div className={styles.title}>
+          <div>회원 정보 수정</div>
+        </div>
+        <div className={styles.topWrap}>
+          <div className={styles.top}>
+            <div className={styles.imageWrap}>
+              <label className={styles.image}>
+                <Image
+                  src={imgPreview ? imgPreview : `${userInfo?.userImageUri}`}
+                  layout='fill'
+                  alt=''
+                />
+                <input
+                  type='file'
+                  style={{ display: 'none' }}
+                  onChange={uploadImg}
+                />
+              </label>
+            </div>
+            <div className={styles.topRightWrap}>
+              <div className={styles.topRight}>
+                <div>ID</div>
+                <div className={styles.topRightInput}>{userInfo?.intraId}</div>
+                <div>이메일</div>
+                <div>
+                  <input
+                    className={styles.topRightInput}
+                    name='eMail'
+                    onChange={onChange}
+                    value={userInfo?.eMail}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className={styles.middle}>
-          <label>상태 메시지:</label>
+          <label>상태 메시지</label>
           <textarea
             name='statusMessage'
             onChange={onChange}
@@ -99,65 +113,88 @@ export default function AdminProfileModal(props: Props) {
           ></textarea>
         </div>
         <div className={styles.bottom}>
-          <div className={styles.racketTypeWrap}>
-            <div className={styles.editType}>라켓 타입</div>
-            <div className={styles.racketRadioButtons}>
-              {racketTypes.map((racket, index) => {
-                return (
-                  <label key={index} htmlFor={racket.id}>
-                    <input
-                      type='radio'
-                      name='racketType'
-                      id={racket.id}
-                      value={racket.id}
-                      onChange={onChange}
-                      checked={userInfo?.racketType === racket.id}
-                    />
-                    <div className={styles.radioButton}>{racket.label}</div>
-                  </label>
-                );
-              })}
+          <div className={styles.choice}>
+            <div className={styles.choiceName}>
+              <div>라켓 타입</div>
+              <div>ROLE 타입</div>
+              <div>승</div>
+              <div>패</div>
+              <div>PPP</div>
             </div>
-          </div>
-          <div className={styles.racketTypeWrap}>
-            <div className={styles.editType}>ROLE 타입</div>
-            <div className={styles.racketRadioButtons}>
-              {roleTypes.map((role, index) => {
-                return (
-                  <label key={index} htmlFor={role.id}>
-                    <input
-                      type='radio'
-                      name='racketType'
-                      id={role.id}
-                      value={role.id}
-                      onChange={onChange}
-                      checked={userInfo?.roleType === role.id}
-                    />
-                    <div className={styles.radioButton}>{role.label}</div>
-                  </label>
-                );
-              })}
+            <div className={styles.choiceBtn}>
+              <div className={styles.racketTypeWrap}>
+                <div className={styles.racketRadioButtons}>
+                  {racketTypes.map((racket, index) => {
+                    return (
+                      <label key={index} htmlFor={racket.id}>
+                        <input
+                          type='radio'
+                          name='racketType'
+                          id={racket.id}
+                          value={racket.id}
+                          onChange={onChange}
+                          checked={userInfo?.racketType === racket.id}
+                        />
+                        <div className={styles.radioButton}>{racket.label}</div>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className={styles.racketTypeWrap}>
+                <div className={styles.racketRadioButtons}>
+                  {roleTypes.map((role, index) => {
+                    return (
+                      <label key={index} htmlFor={role.id}>
+                        <input
+                          type='radio'
+                          name='roleType'
+                          id={role.id}
+                          value={role.id}
+                          onChange={onChange}
+                          checked={userInfo?.roleType === role.id}
+                        />
+                        <div className={styles.radioButton}>{role.label}</div>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+              <div>
+                <input name='wins' onChange={onChange} value={userInfo?.wins} />
+              </div>
+              <div>
+                <input
+                  name='losses'
+                  onChange={onChange}
+                  value={userInfo?.losses}
+                />
+              </div>
+              <div>
+                <input
+                  type='text'
+                  name='ppp'
+                  onChange={onChange}
+                  value={userInfo?.ppp}
+                />
+              </div>
             </div>
-          </div>
-          <div className={styles.rate}>
-            <label>승</label>
-            <input name='wins' onChange={onChange} value={userInfo?.wins} />
-            <label>패</label>
-            <input name='losses' onChange={onChange} value={userInfo?.losses} />
-            <label>PPP</label>
-            <input
-              type='text'
-              name='ppp'
-              onChange={onChange}
-              value={userInfo?.ppp}
-            />
           </div>
         </div>
-        <div className={styles.btn}>
-          <button onClick={() => submitHandler()}>Edit</button>
+        <div className={styles.btnWrap}>
+          <div className={styles.btns}>
+            <button className={styles.btnBlue} onClick={() => submitHandler()}>
+              수정
+            </button>
+            <button
+              className={styles.btnGray}
+              onClick={() => setModal({ modalName: null })}
+            >
+              취소
+            </button>
+          </div>
         </div>
       </div>
-      <button onClick={() => setModal({ modalName: null })}>CANCEL</button>
     </>
   );
 }

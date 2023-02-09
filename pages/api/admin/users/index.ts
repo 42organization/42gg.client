@@ -16,7 +16,7 @@ export default function handler(
       losses: 7,
       ppp: 1004,
       email: '42gg@42seoul.kr',
-      roleType: 3,
+      roleType: 'ROLE_ADMIN',
     },
   ];
   res.status(200).json(user);

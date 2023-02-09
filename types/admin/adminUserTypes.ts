@@ -12,8 +12,8 @@ export type UserInfo = {
 };
 
 export type Props = {
-  modalName: 'ADMIN-PROFILE';
-  intraId: string;
+  modalName?: 'ADMIN-PROFILE';
+  value: string;
 };
 
 export const roleTypes = [
