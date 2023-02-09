@@ -16,6 +16,15 @@ const Quill = dynamic(() => import('react-quill'), {
 export default function AnnounceEdit() {
   const currentUserId = useRecoilValue(userState).intraId;
   const [content, setContent] = useState('');
+  const announceCreateResponse: { [key: string]: string } = {
+    SUCCESS: '공지사항이 성공적으로 등록되었습니다.',
+    AC001:
+      '이미 활성화된 공지사항이 있습니다 새로운 공지사항을 등록하시려면 활성화된 공지사항을 삭제해 주세요.',
+  };
+  const announceDeleteResponse: { [key: string]: string } = {
+    SUCCESS: '공지사항이 성공적으로 삭제되었습니다.',
+    AD001: '삭제할 활성화된 공지사항이 없습니다',
+  };
 
   useEffect(() => {
     resetHandler();
@@ -32,26 +41,26 @@ export default function AnnounceEdit() {
 
   const postHandler = async () => {
     try {
-      const res = await instance.post(`pingpong/admin/announcement`, {
+      await instance.post(`pingpong/admin/announcement`, {
         content,
         creatorIntraId: currentUserId,
         createdTime: new Date(),
       });
-      alert(res?.data.text);
-    } catch (e) {
-      alert(e);
+      alert(announceCreateResponse.SUCCESS);
+    } catch (e: any) {
+      alert(announceCreateResponse[e.response.data.code]);
     }
   };
 
   const deleteHandler = async () => {
     try {
-      const res = await instance.put(`pingpong/admin/announcement`, {
+      await instance.put(`pingpong/admin/announcement`, {
         deleterIntraId: currentUserId,
         deletedTime: new Date(),
       });
-      alert(res?.data.text);
-    } catch (e) {
-      alert(e);
+      alert(announceDeleteResponse.SUCCESS);
+    } catch (e: any) {
+      alert(announceDeleteResponse[e.response.data.code]);
     }
   };
 
