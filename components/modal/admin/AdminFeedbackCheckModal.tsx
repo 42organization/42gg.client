@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
-import styles from 'styles/admin/adminFeedbackCheck.module.scss';
+import styles from 'styles/admin/AdminFeedbackCheck.module.scss';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 // import { finished } from 'stream';

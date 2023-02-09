@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
-import styles from 'styles/admin/adminProfile.module.scss';
+import styles from 'styles/admin/AdminProfile.module.scss';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import Image from 'next/image';
