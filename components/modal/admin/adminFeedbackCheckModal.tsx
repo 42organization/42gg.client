@@ -25,7 +25,7 @@ export default function AdminFeedbackCheck(props: any) {
   const finishSendHandler = async () => {
     if (result.status == 'completed') {
       try {
-        await instance.post(`/pingpong/feedback/${props.id}/reminder`);
+        await instance.post(`/admin/feedback/is-solved`);
         setModal({ modalName: null });
       } catch (e) {
         console.log(e);
