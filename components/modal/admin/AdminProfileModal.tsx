@@ -6,28 +6,12 @@ import instance from 'utils/axios';
 import Image from 'next/image';
 import axios from 'axios';
 import useUploadImg from 'hooks/useUploadImg';
+import { Props, roleTypes, UserInfo } from 'types/admin/adminUserTypes';
+import { racketTypes } from 'types/userTypes';
 
-export default function AdminProfileModal(props: any) {
-  const [userInfo, setUserInfo] = useState<any>();
-  //   userId
-  //   intraId
-  //   userImageUri
-  //   racketType
-  //   statusMessage
-  //   wins
-  //   losses
-  //   ppp
-  //   email
-  //   roleType
-
+export default function AdminProfileModal(props: Props) {
+  const [userInfo, setUserInfo] = useState<UserInfo>();
   const { imgData, imgPreview, uploadImg } = useUploadImg();
-
-  const racketTypes = [
-    { id: 'penholder', label: 'PENHOLDER' },
-    { id: 'shakehand', label: 'SHAKEHAND' },
-    { id: 'dual', label: 'DUAL' },
-  ];
-
   const setModal = useSetRecoilState(modalState);
 
   useEffect(() => {
@@ -35,7 +19,7 @@ export default function AdminProfileModal(props: any) {
   }, []);
 
   const getBasicProfileHandler = async () => {
-    const res = await fetch(`http://localhost:3000/api/admin/users`);
+    const res = await fetch(`http://localhost:3000/api/admin/users`); //admin/users/{props.intraId}/detail
     const data = await res.json();
     setUserInfo(data[0]);
   };
@@ -47,20 +31,20 @@ export default function AdminProfileModal(props: any) {
     }));
   };
 
-  const submitHandler = async (e: any) => {
-    const formData = new FormData();
-    console.log(imgData);
-    const data = {
-      userId: userInfo.userId,
-      intraId: userInfo.intraId,
-      statusMessage: userInfo.statusMessage,
-      racketType: userInfo.racketType,
-      wins: userInfo.wins,
-      losses: userInfo.losses,
-      ppp: userInfo.ppp,
-      email: userInfo.email,
-      roleType: userInfo.roleType,
-    };
+  const submitHandler = async () => {
+    //const formData = new FormData();
+    console.log(userInfo);
+    // const data = {
+    //   userId: userInfo.userId,
+    //   intraId: userInfo.intraId,
+    //   statusMessage: userInfo.statusMessage,
+    //   racketType: userInfo.racketType,
+    //   wins: userInfo.wins,
+    //   losses: userInfo.losses,
+    //   ppp: userInfo.ppp,
+    //   eMail: userInfo.eMail,
+    //   roleType: userInfo.roleType,
+    // };
     //formData.append('files', imgData);
     // formData.append(
     //   'data',
@@ -102,7 +86,7 @@ export default function AdminProfileModal(props: any) {
             <ul>ID : {userInfo?.intraId}</ul>
             <ul>
               이메일:
-              <input name='email' onChange={onChange} value={userInfo?.email} />
+              <input name='eMail' onChange={onChange} value={userInfo?.eMail} />
             </ul>
           </div>
         </div>
@@ -135,6 +119,26 @@ export default function AdminProfileModal(props: any) {
               })}
             </div>
           </div>
+          <div className={styles.racketTypeWrap}>
+            <div className={styles.editType}>ROLE 타입</div>
+            <div className={styles.racketRadioButtons}>
+              {roleTypes.map((role, index) => {
+                return (
+                  <label key={index} htmlFor={role.id}>
+                    <input
+                      type='radio'
+                      name='racketType'
+                      id={role.id}
+                      value={role.id}
+                      onChange={onChange}
+                      checked={userInfo?.roleType === role.id}
+                    />
+                    <div className={styles.radioButton}>{role.label}</div>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
           <div className={styles.rate}>
             <label>승</label>
             <input name='wins' onChange={onChange} value={userInfo?.wins} />
@@ -150,7 +154,7 @@ export default function AdminProfileModal(props: any) {
           </div>
         </div>
         <div className={styles.btn}>
-          <button onClick={() => submitHandler(userInfo)}>Edit</button>
+          <button onClick={() => submitHandler()}>Edit</button>
         </div>
       </div>
       <button onClick={() => setModal({ modalName: null })}>CANCEL</button>

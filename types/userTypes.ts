@@ -20,3 +20,9 @@ export interface PppChart {
   ppp: number;
   date: string;
 }
+
+export const racketTypes = [
+  { id: 'penholder', label: 'PENHOLDER' },
+  { id: 'shakehand', label: 'SHAKEHAND' },
+  { id: 'dual', label: 'DUAL' },
+];

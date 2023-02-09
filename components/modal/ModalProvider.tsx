@@ -18,7 +18,6 @@ import AdminPenaltyModal from './admin/AdminPenaltyModal';
 import AdminNotiAllModal from './admin/AdminNotiAllModal';
 import AdminNotiUserModal from './admin/AdminNotiUserModal';
 import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
-import AdminFeedbackCheck from './admin/AdminFeedbackCheckModal';
 
 export default function ModalProvider() {
   const [

@@ -5,6 +5,7 @@ import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from 'styles/user/Profile.module.scss';
+import { racketTypes } from 'types/userTypes';
 
 interface EditedProfile {
   racketType: string;
@@ -22,11 +23,6 @@ export default function EditProfileModal() {
     statusMessage: '',
   });
   const { racketType, statusMessage } = profile;
-  const racketTypes = [
-    { id: 'penholder', label: 'PENHOLDER' },
-    { id: 'shakehand', label: 'SHAKEHAND' },
-    { id: 'dual', label: 'DUAL' },
-  ];
 
   useEffect(() => {
     setEditedProfile((prev) => ({
