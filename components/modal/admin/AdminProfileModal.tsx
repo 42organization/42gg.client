@@ -24,11 +24,21 @@ export default function AdminProfileModal(props: Props) {
     setUserInfo(data[0]);
   };
 
-  const onChange = ({ target: { name, value } }: any | any) => {
-    setUserInfo((current: any) => ({
-      ...current,
-      [name]: value,
-    }));
+  const inputHandler = ({
+    target: { name, value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    if (name === 'wins' || name === 'losses' || name === 'ppp') {
+      const intValue = parseInt(value);
+      setUserInfo((prev: any) => ({
+        ...prev,
+        [name]: intValue,
+      }));
+    } else {
+      setUserInfo((prev: any) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const submitHandler = async () => {
@@ -96,7 +106,7 @@ export default function AdminProfileModal(props: Props) {
                   <input
                     className={styles.topRightInput}
                     name='eMail'
-                    onChange={onChange}
+                    onChange={inputHandler}
                     value={userInfo?.eMail}
                   />
                 </div>
@@ -108,7 +118,7 @@ export default function AdminProfileModal(props: Props) {
           <label>상태 메시지</label>
           <textarea
             name='statusMessage'
-            onChange={onChange}
+            onChange={inputHandler}
             value={userInfo?.statusMessage}
           ></textarea>
         </div>
@@ -132,7 +142,7 @@ export default function AdminProfileModal(props: Props) {
                           name='racketType'
                           id={racket.id}
                           value={racket.id}
-                          onChange={onChange}
+                          onChange={inputHandler}
                           checked={userInfo?.racketType === racket.id}
                         />
                         <div className={styles.radioButton}>{racket.label}</div>
@@ -151,7 +161,7 @@ export default function AdminProfileModal(props: Props) {
                           name='roleType'
                           id={role.id}
                           value={role.id}
-                          onChange={onChange}
+                          onChange={inputHandler}
                           checked={userInfo?.roleType === role.id}
                         />
                         <div className={styles.radioButton}>{role.label}</div>
@@ -161,12 +171,16 @@ export default function AdminProfileModal(props: Props) {
                 </div>
               </div>
               <div>
-                <input name='wins' onChange={onChange} value={userInfo?.wins} />
+                <input
+                  name='wins'
+                  onChange={inputHandler}
+                  value={userInfo?.wins}
+                />
               </div>
               <div>
                 <input
                   name='losses'
-                  onChange={onChange}
+                  onChange={inputHandler}
                   value={userInfo?.losses}
                 />
               </div>
@@ -174,7 +188,7 @@ export default function AdminProfileModal(props: Props) {
                 <input
                   type='text'
                   name='ppp'
-                  onChange={onChange}
+                  onChange={inputHandler}
                   value={userInfo?.ppp}
                 />
               </div>

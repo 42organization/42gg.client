@@ -1,13 +1,13 @@
 export type UserInfo = {
   userId: number;
   intraId: string;
-  userImageUri: string;
+  userImageUri: string | '';
   racketType: string;
-  statusMessage: string;
-  wins: number;
-  losses: number;
-  ppp: number;
-  eMail: string;
+  statusMessage: string | '';
+  wins: number | '';
+  losses: number | '';
+  ppp: number | '';
+  eMail: string | '';
   roleType: string;
 };
 

@@ -15,7 +15,7 @@ export default function handler(
       wins: 10,
       losses: 7,
       ppp: 1004,
-      email: '42gg@42seoul.kr',
+      eMail: '42gg@42seoul.kr',
       roleType: 'ROLE_ADMIN',
     },
   ];
