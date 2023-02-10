@@ -14,7 +14,7 @@ const Quill = dynamic(() => import('react-quill'), {
 });
 
 export default function AnnounceEdit() {
-  const currentUserId = useRecoilValue(userState).intraId;
+  const { intraId: currentUserId } = useRecoilValue(userState);
   const [content, setContent] = useState('');
   const announceCreateResponse: { [key: string]: string } = {
     SUCCESS: '공지사항이 성공적으로 등록되었습니다.',
