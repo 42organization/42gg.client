@@ -11,7 +11,10 @@ import axios from 'axios';
 import PageNation from 'components/Pagination';
 import { tableFormat } from 'constants/admin/table';
 import { useCallback, useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import style from 'styles/admin/notification/NotificationTable.module.scss';
+import { modalState } from 'utils/recoil/modal';
+import AdminSearchBar from '../common/AdminSearchBar';
 
 interface IFeedback {
   id: number;
@@ -36,6 +39,20 @@ export default function FeedbackTable() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
+  const setModal = useSetRecoilState(modalState);
+
+  const getUserFeedbacks = useCallback(async () => {
+    try {
+      // TODO! : change to real endpoint
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_ADMIN_MOCK_ENDPOINT}/feedback/users/${intraId}?page=${currentPage}`
+      );
+      setIntraId(intraId);
+      setFeedbackInfo({ ...res.data });
+    } catch (e) {
+      console.error('MS04');
+    }
+  }, [intraId, currentPage]);
 
   const getAllFeedbacks = useCallback(async () => {
     try {
@@ -49,12 +66,31 @@ export default function FeedbackTable() {
     }
   }, [currentPage]);
 
+  const initSearch = useCallback((intraId?: string) => {
+    setIntraId(intraId || '');
+    setCurrentPage(1);
+  }, []);
+
+  const solvingFeedback = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    feedback: IFeedback
+  ) => {
+    setModal({
+      modalName: 'ADMIN-CHECK_FEEDBACK',
+      intraId: feedback.intraId,
+    });
+  };
+
   useEffect(() => {
-    getAllFeedbacks();
-  }, [getAllFeedbacks]);
+    intraId ? getUserFeedbacks() : getAllFeedbacks();
+  }, [intraId, getUserFeedbacks, getAllFeedbacks]);
 
   return (
     <>
+      <div>
+        <span className={style.title}>알림 관리</span>
+        <AdminSearchBar initSearch={initSearch} />
+      </div>
       <TableContainer className={style.tableContainer} component={Paper}>
         <Table className={style.table} aria-label='customized table'>
           <TableHead className={style.tableHeader}>
@@ -75,9 +111,7 @@ export default function FeedbackTable() {
                       <TableCell className={style.tableBodyItem} key={index}>
                         {typeof value === 'boolean' ? (
                           <select
-                            onChange={(e) =>
-                              console.log(feedback.id, e.target.value)
-                            }
+                            onChange={(e) => solvingFeedback(e, feedback)}
                           >
                             <option value='1'>처리중</option>
                             <option value='2'>처리완료</option>
