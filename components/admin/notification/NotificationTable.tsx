@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { tableColumnNames } from 'types/admin/tableTypes';
+import { tableFormat } from 'constants/admin/table';
 import {
   Paper,
   Table,
@@ -90,7 +90,7 @@ export default function NotificationTable() {
           <Table className={style.table} aria-label='customized table'>
             <TableHead className={style.tableHeader}>
               <TableRow>
-                {tableColumnNames['notification'].map((columnName) => (
+                {tableFormat['notification'].columns.map((columnName) => (
                   <TableCell className={style.tableHeaderItem} key={columnName}>
                     {columnName}
                   </TableCell>
