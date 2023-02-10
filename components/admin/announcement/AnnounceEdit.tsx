@@ -41,7 +41,7 @@ export default function AnnounceEdit() {
 
   const postHandler = async () => {
     try {
-      await instance.post(`pingpong/admin/announcement`, {
+      await instance.post(`/pingpong/admin/announcement`, {
         content,
         creatorIntraId: currentUserId,
         createdTime: new Date(),
@@ -54,7 +54,7 @@ export default function AnnounceEdit() {
 
   const deleteHandler = async () => {
     try {
-      await instance.put(`pingpong/admin/announcement`, {
+      await instance.put(`/pingpong/admin/announcement`, {
         deleterIntraId: currentUserId,
         deletedTime: new Date(),
       });

@@ -39,7 +39,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   const getAnnouncementHandler = async () => {
     try {
-      const res = await instance.get(`pingpong/announcement`);
+      const res = await instance.get(`/pingpong/announcement`);
       res.data.content !== '' &&
         setModal({
           modalName: 'EVENT-ANNOUNCEMENT',
