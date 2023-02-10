@@ -24,12 +24,12 @@ export const tableFormat: TableFormat = {
   feedback: {
     name: '피드백 관리',
     columns: [
+      'id',
       'intraId',
       'category',
-      'feedback',
-      'submittedTime',
-      'isCompleted',
-      'etc',
+      'content',
+      'createdTime',
+      'isSolved',
     ],
     etc: {
       type: 'toggle',
