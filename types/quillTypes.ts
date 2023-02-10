@@ -19,6 +19,7 @@ export const QUILL_FORMATS = [
   'underline',
   'strike',
   'color',
+  'blockquote',
   'list',
   'bullet',
   'indent',
