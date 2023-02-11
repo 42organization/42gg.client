@@ -100,7 +100,7 @@ export default function AdminProfileModal(props: Props) {
                 <Image
                   src={imgPreview ? imgPreview : `${userInfo?.userImageUri}`}
                   layout='fill'
-                  alt=''
+                  alt='Profile Image'
                 />
                 <input
                   type='file'
