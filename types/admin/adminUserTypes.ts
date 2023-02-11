@@ -11,7 +11,7 @@ export type UserInfo = {
   roleType: string;
 };
 
-export type Props = {
+export type AdminProfileProps = {
   modalName?: 'ADMIN-PROFILE';
   value: string;
 };
