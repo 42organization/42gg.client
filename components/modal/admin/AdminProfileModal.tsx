@@ -1,13 +1,12 @@
-import { useSetRecoilState } from 'recoil';
-import { useEffect, useState } from 'react';
-import styles from 'styles/admin/modal/AdminProfile.module.scss';
-import { modalState } from 'utils/recoil/modal';
-import instance from 'utils/axios';
 import Image from 'next/image';
-import axios from 'axios';
-import useUploadImg from 'hooks/useUploadImg';
+import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { Props, roleTypes, UserInfo } from 'types/admin/adminUserTypes';
 import { racketTypes } from 'types/userTypes';
+import { modalState } from 'utils/recoil/modal';
+import instance from 'utils/axios';
+import useUploadImg from 'hooks/useUploadImg';
+import styles from 'styles/admin/modal/AdminProfile.module.scss';
 
 export default function AdminProfileModal(props: Props) {
   const [userInfo, setUserInfo] = useState<UserInfo>({
