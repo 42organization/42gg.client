@@ -40,10 +40,7 @@ export default function AdminProfileModal(props: Props) {
   }:
     | React.ChangeEvent<HTMLTextAreaElement>
     | React.ChangeEvent<HTMLInputElement>) => {
-    setUserInfo((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setUserInfo({ ...userInfo, [name]: value });
   };
 
   const inputNumHandler = ({
@@ -53,10 +50,7 @@ export default function AdminProfileModal(props: Props) {
     if (isNaN(intValue)) {
       intValue = 0;
     }
-    setUserInfo((prev) => ({
-      ...prev,
-      [name]: intValue,
-    }));
+    setUserInfo({ ...userInfo, [name]: intValue });
   };
 
   const submitHandler = async () => {
