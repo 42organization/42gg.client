@@ -12,6 +12,8 @@ import instance from 'utils/axios';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminProfile.module.scss';
 
+const CHAR_LIMIT = 30;
+
 export default function AdminProfileModal(props: AdminProfileProps) {
   const [userInfo, setUserInfo] = useState<UserInfo>({
     userId: 0,
@@ -44,6 +46,8 @@ export default function AdminProfileModal(props: AdminProfileProps) {
   }:
     | React.ChangeEvent<HTMLTextAreaElement>
     | React.ChangeEvent<HTMLInputElement>) => {
+    if (name === 'statusMessage' && value.length > CHAR_LIMIT)
+      value = value.slice(0, CHAR_LIMIT);
     setUserInfo({ ...userInfo, [name]: value });
   };
 
@@ -132,6 +136,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
         </div>
         <div className={styles.middle}>
           <label>상태 메시지</label>
+          <div>{`${userInfo.statusMessage.length} / ${CHAR_LIMIT}`}</div>
           <textarea
             name='statusMessage'
             onChange={inputHandler}

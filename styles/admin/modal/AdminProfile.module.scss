@@ -69,8 +69,12 @@
 
 .middle {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
   padding: 1rem 2rem;
+  :nth-child(2) {
+    color: #2678f3;
+  }
 }
 
 .middle textarea {
@@ -171,8 +175,8 @@
       display: none;
     }
     :checked + .radioButton {
-      border: solid 1px blue;
-      color: blue;
+      border: solid 1px #2678f3;
+      color: #2678f3;
     }
     .radioButton {
       display: flex;
