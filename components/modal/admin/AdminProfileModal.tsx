@@ -49,9 +49,9 @@ export default function AdminProfileModal(props: Props) {
   const inputNumHandler = ({
     target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    const intValue = parseInt(value);
+    let intValue = parseInt(value);
     if (isNaN(intValue)) {
-      return 0;
+      intValue = 0;
     }
     setUserInfo((prev) => ({
       ...prev,
