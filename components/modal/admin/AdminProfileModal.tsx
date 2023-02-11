@@ -10,7 +10,19 @@ import { Props, roleTypes, UserInfo } from 'types/admin/adminUserTypes';
 import { racketTypes } from 'types/userTypes';
 
 export default function AdminProfileModal(props: Props) {
-  const [userInfo, setUserInfo] = useState<UserInfo>();
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    userId: 0,
+    intraId: props.value,
+    userImageUri: null,
+    statusMessage: '',
+    racketType: 'shakeHand',
+    wins: 0,
+    losses: 0,
+    ppp: 0,
+    eMail: '',
+    roleType: 'ROLE_USER',
+  });
+
   const { imgData, imgPreview, uploadImg } = useUploadImg();
   const setModal = useSetRecoilState(modalState);
 
@@ -26,19 +38,23 @@ export default function AdminProfileModal(props: Props) {
 
   const inputHandler = ({
     target: { name, value },
+  }:
+    | React.ChangeEvent<HTMLTextAreaElement>
+    | React.ChangeEvent<HTMLInputElement>) => {
+    setUserInfo((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const inputNumHandler = ({
+    target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    if (name === 'wins' || name === 'losses' || name === 'ppp') {
-      const intValue = parseInt(value);
-      setUserInfo((prev: any) => ({
-        ...prev,
-        [name]: intValue,
-      }));
-    } else {
-      setUserInfo((prev: any) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
+    const intValue = parseInt(value);
+    setUserInfo((prev) => ({
+      ...prev,
+      [name]: intValue,
+    }));
   };
 
   const submitHandler = async () => {
@@ -173,22 +189,21 @@ export default function AdminProfileModal(props: Props) {
               <div>
                 <input
                   name='wins'
-                  onChange={inputHandler}
+                  onChange={inputNumHandler}
                   value={userInfo?.wins}
                 />
               </div>
               <div>
                 <input
                   name='losses'
-                  onChange={inputHandler}
+                  onChange={inputNumHandler}
                   value={userInfo?.losses}
                 />
               </div>
               <div>
                 <input
-                  type='text'
                   name='ppp'
-                  onChange={inputHandler}
+                  onChange={inputNumHandler}
                   value={userInfo?.ppp}
                 />
               </div>
