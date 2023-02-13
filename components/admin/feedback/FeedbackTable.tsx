@@ -7,12 +7,12 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import axios from 'axios';
 import PageNation from 'components/Pagination';
 import { tableFormat } from 'constants/admin/table';
 import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import style from 'styles/admin/notification/NotificationTable.module.scss';
+import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import AdminSearchBar from '../common/AdminSearchBar';
 
@@ -43,9 +43,8 @@ export default function FeedbackTable() {
 
   const getUserFeedbacks = useCallback(async () => {
     try {
-      // TODO! : change to real endpoint
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_ADMIN_MOCK_ENDPOINT}/feedback/users/${intraId}?page=${currentPage}`
+      const res = await instance.get(
+        `/pingpong/admin/feedback/users/${intraId}?page=${currentPage}`
       );
       setIntraId(intraId);
       setFeedbackInfo({ ...res.data });
@@ -56,9 +55,8 @@ export default function FeedbackTable() {
 
   const getAllFeedbacks = useCallback(async () => {
     try {
-      // TODO! : change to real endpoint
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_ADMIN_MOCK_ENDPOINT}/feedback?page=${currentPage}`
+      const res = await instance.get(
+        `/pingpong/admin/feedback?page=${currentPage}`
       );
       setFeedbackInfo({ ...res.data });
     } catch (e) {
@@ -111,10 +109,11 @@ export default function FeedbackTable() {
                       <TableCell className={style.tableBodyItem} key={index}>
                         {typeof value === 'boolean' ? (
                           <select
+                            value={feedback.isSolved ? 1 : 0}
                             onChange={(e) => solvingFeedback(e, feedback)}
                           >
-                            <option value='1'>처리중</option>
-                            <option value='2'>처리완료</option>
+                            <option value='0'>처리중</option>
+                            <option value='1'>처리완료</option>
                           </select>
                         ) : (
                           value
