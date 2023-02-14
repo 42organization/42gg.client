@@ -62,33 +62,31 @@ export default function AdminProfileModal(props: AdminProfileProps) {
   };
 
   const submitHandler = async () => {
-    //const formData = new FormData();
-    console.log(userInfo);
-    // const data = {
-    //   userId: userInfo.userId,
-    //   intraId: userInfo.intraId,
-    //   statusMessage: userInfo.statusMessage,
-    //   racketType: userInfo.racketType,
-    //   wins: userInfo.wins,
-    //   losses: userInfo.losses,
-    //   ppp: userInfo.ppp,
-    //   eMail: userInfo.eMail,
-    //   roleType: userInfo.roleType,
-    // };
-    //formData.append('files', imgData);
-    // formData.append(
-    //   'data',
-    //   new Blob([JSON.stringify(data)], {
-    //     type: 'application/json',
-    //   })
-    // );
-    // await instance.put(`/admin/users/${userInfo.userId}`, e);
-    // try {
-    //   const result = await axios.put(`/admin/users/daijeong/detail`);
-    //   console.log(result);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    const formData = new FormData();
+    const data = {
+      userId: userInfo.userId,
+      intraId: userInfo.intraId,
+      statusMessage: userInfo.statusMessage,
+      racketType: userInfo.racketType,
+      wins: userInfo.wins,
+      losses: userInfo.losses,
+      ppp: userInfo.ppp,
+      eMail: userInfo.eMail,
+      roleType: userInfo.roleType,
+    };
+    formData.append(
+      'data',
+      new Blob([JSON.stringify(data)], {
+        type: 'application/json',
+      })
+    );
+    formData.append('multipartFile', imgPreview);
+
+    try {
+      await instance.put(`/admin/users/${userInfo.userId}`, formData);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
