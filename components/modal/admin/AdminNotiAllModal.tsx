@@ -2,8 +2,19 @@ import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
 import styles from 'styles/admin/modal/AdminNotiAll.module.scss';
 import { modalState } from 'utils/recoil/modal';
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import instance from 'utils/axios';
 import { finished } from 'stream';
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
+});
 
 interface EditedAllNoti {
   notification: string | number;
@@ -42,20 +53,20 @@ export default function AdminNotiAllModal(props: any) {
   // useEffect(() => {
   //   getBasicPenaltyHandler();
   // }, []);
-  const finishEditHandler = () => {
-    let errMsg = '';
-    if (editedAllNoti.notification < 0) {
-      errMsg += '시간은 0 이상이어야합니다.\n';
-      console.log(errMsg);
-      editedAllNoti.notification = '';
-    }
-    if (errMsg) alert(errMsg);
-    setAllNoti({
-      ...editedAllNoti,
-      intraID: props.value,
-    });
-    // setModal({ modalName: null });
-  };
+  // const finishEditHandler = () => {
+  //   let errMsg = '';
+  //   if (editedAllNoti.notification < 0) {
+  //     errMsg += '시간은 0 이상이어야합니다.\n';
+  //     console.log(errMsg);
+  //     editedAllNoti.notification = '';
+  //   }
+  //   if (errMsg) alert(errMsg);
+  //   setAllNoti({
+  //     ...editedAllNoti,
+  //     intraID: props.value,
+  //   });
+  //   // setModal({ modalName: null });
+  // };
   useEffect(() => {
     console.log({ allNoti });
     return () => {
@@ -63,7 +74,24 @@ export default function AdminNotiAllModal(props: any) {
     };
   }, [allNoti]);
   const setModal = useSetRecoilState(modalState);
+  const finishEditHandler = () => setModal({ modalName: null });
   const cancelEditHandler = () => setModal({ modalName: null });
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   return (
     <div className={styles.whole}>
@@ -84,12 +112,25 @@ export default function AdminNotiAllModal(props: any) {
         </label>
 
         <div className={styles.btns}>
-          <button
-            className={allNoti ? `${styles.hide}` : `${styles.btn}`}
-            onClick={finishEditHandler}
-          >
-            적용
-          </button>
+          <Stack spacing={2} sx={{ width: '100%' }}>
+            <button
+              onClick={() => {
+                handleClick();
+              }}
+              className={styles.btn}
+            >
+              적용
+            </button>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert
+                onClose={handleClose}
+                severity='success'
+                sx={{ width: '100%' }}
+              >
+                This is a success message!
+              </Alert>
+            </Snackbar>
+          </Stack>
           <button className={styles.btn} onClick={cancelEditHandler}>
             취소
           </button>
