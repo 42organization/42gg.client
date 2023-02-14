@@ -11,6 +11,7 @@ import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminProfile.module.scss';
+import { NULL } from 'sass';
 
 const CHAR_LIMIT = 30;
 
@@ -24,7 +25,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
     wins: 0,
     losses: 0,
     ppp: 0,
-    eMail: '',
+    email: '',
     roleType: 'ROLE_USER',
   });
 
@@ -71,19 +72,22 @@ export default function AdminProfileModal(props: AdminProfileProps) {
       wins: userInfo.wins,
       losses: userInfo.losses,
       ppp: userInfo.ppp,
-      eMail: userInfo.eMail,
+      email: userInfo.email,
       roleType: userInfo.roleType,
     };
     formData.append(
-      'data',
+      'updateRequestDto',
       new Blob([JSON.stringify(data)], {
         type: 'application/json',
       })
     );
-    formData.append('multipartFile', imgPreview);
+    formData.append(
+      'multipartFile',
+      new Blob([imgData as File], { type: 'image' })
+    );
 
     try {
-      await instance.put(`/admin/users/${userInfo.userId}`, formData);
+      await instance.put(`/pingpong/admin/users/jiyun/detail`, formData);
     } catch (e) {
       console.log(e);
     }
@@ -123,9 +127,9 @@ export default function AdminProfileModal(props: AdminProfileProps) {
                 <div>
                   <input
                     className={styles.topRightInput}
-                    name='eMail'
+                    name='email'
                     onChange={inputHandler}
-                    value={userInfo?.eMail}
+                    value={userInfo?.email}
                   />
                 </div>
               </div>

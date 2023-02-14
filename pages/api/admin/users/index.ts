@@ -6,16 +6,16 @@ export default function handler(
 ) {
   const user: any = [
     {
-      userId: 1,
-      intraId: 'sungwook',
+      userId: 5,
+      intraId: 'jiyun',
       userImageUri:
-        'https://42gg-public-image.s3.ap-northeast-2.amazonaws.com/images/sungwook.jpeg',
+        'https://42gg-public-image.s3.ap-northeast-2.amazonaws.com/images/jiyun.jpeg',
       racketType: 'penholder',
       statusMessage: 'hello',
       wins: 10,
       losses: 7,
       ppp: 1004,
-      eMail: '42gg@42seoul.kr',
+      email: '42gg@42seoul.kr',
       roleType: 'ROLE_ADMIN',
     },
   ];

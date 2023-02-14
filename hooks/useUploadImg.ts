@@ -3,7 +3,7 @@ import imageCompression from 'browser-image-compression';
 
 export default function useUploadImg() {
   const [imgData, setImgData] = useState<File>();
-  const [imgPreview, setImgPreview] = useState<any>();
+  const [imgPreview, setImgPreview] = useState<string>();
 
   const uploadImg = (e: any) => {
     const file = e.target.files[0];
@@ -13,17 +13,17 @@ export default function useUploadImg() {
   };
 
   const imgCompress = async (fileSrc: File) => {
-    const options = {
-      maxSizeMB: 0.1,
-      maxWidthOrHeight: 320,
-      useWebWorker: true,
-    };
+    // const options = {
+    //   maxSizeMB: 0.1,
+    //   maxWidthOrHeight: 320,
+    //   useWebWorker: true,
+    // };
     try {
-      const res = await imageCompression(fileSrc, options);
+      //   const res = await imageCompression(fileSrc, options);
       const reader = new FileReader();
-      reader.readAsDataURL(res);
+      reader.readAsDataURL(fileSrc);
       reader.onloadend = () => {
-        setImgPreview(reader.result);
+        setImgPreview(reader.result as string);
       };
     } catch (error) {
       console.log(error);
