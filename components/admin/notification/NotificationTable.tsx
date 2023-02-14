@@ -99,15 +99,13 @@ export default function NotificationTable() {
             <TableBody className={style.tableBody}>
               {notificationInfo.notiList.map((notification: INotification) => (
                 <TableRow key={notification.notiId}>
-                  {Object.values(notification).map(
-                    (value: number | string | boolean, index: number) => {
+                  {tableFormat['notification'].columns.map(
+                    (columnName: string, index: number) => {
                       return (
                         <TableCell className={style.tableBodyItem} key={index}>
-                          {typeof value === 'boolean'
-                            ? value
-                              ? 'Checked'
-                              : 'Unchecked'
-                            : value}
+                          {notification[
+                            columnName as keyof INotification
+                          ]?.toString()}
                         </TableCell>
                       );
                     }
