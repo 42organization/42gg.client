@@ -43,7 +43,7 @@ export default function NotificationTable() {
   const getUserNotifications = useCallback(async () => {
     try {
       const res = await instance.get(
-        `pingpong/admin/notifications/${intraId}?page=${currentPage}&size=10`
+        `pingpong/admin/notifications?q=${intraId}&page=${currentPage}&size=10`
       );
       setIntraId(intraId);
       setNotificationInfo({ ...res.data });
@@ -74,7 +74,7 @@ export default function NotificationTable() {
   }, [intraId, getUserNotifications, getAllUserNotifications]);
 
   if (notificationInfo.notiList.length === 0) {
-    return <div>loading...</div>;
+    return <div>비어있습니다!</div>;
   }
 
   return (
