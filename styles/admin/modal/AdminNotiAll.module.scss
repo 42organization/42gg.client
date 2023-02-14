@@ -35,6 +35,7 @@
 }
 
 .btns {
+  // align-items: center;
   text-align: center;
   flex-direction: column;
   display: flex;
@@ -43,12 +44,13 @@
 }
 
 .btn {
+  align-items: center;
   display: flex;
   text-align: center;
   justify-content: center;
   margin-bottom: 10px;
-  width: 100px;
-  height: 20px;
+  width: 20rem;
+  height: 40px;
   margin-left: auto;
   margin-right: auto;
   font-weight: bold;
