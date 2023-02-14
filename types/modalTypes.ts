@@ -11,13 +11,21 @@ type UserModal = 'PROFILE_EDIT';
 
 type FixedModal = 'AFTER_GAME' | 'STAT';
 
+type AdminModal =
+  | 'PROFILE'
+  | 'PENALTY'
+  | 'NOTI_ALL'
+  | 'NOTI_USER'
+  | 'CHECK_FEEDBACK';
+
 type ModalName =
   | null
   | `EVENT-${EventModal}`
   | `MENU-${MenuModal}`
   | `MATCH-${MatchModal}`
   | `USER-${UserModal}`
-  | `FIXED-${FixedModal}`;
+  | `FIXED-${FixedModal}`
+  | `ADMIN-${AdminModal}`;
 
 export interface Cancel {
   isMatched: boolean;
@@ -54,4 +62,5 @@ export interface Modal {
   announcement?: Announcement;
   exp?: Exp;
   gameId?: number;
+  intraId?: string;
 }

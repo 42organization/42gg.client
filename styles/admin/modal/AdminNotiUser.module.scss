@@ -1,0 +1,62 @@
+.whole {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  display: inline-block;
+  align-items: center;
+  display: inline-block;
+  width: 25rem;
+  height: 40rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-style: normal;
+  margin-top: 20px;
+}
+
+.body {
+  display: flex;
+  margin-bottom: 0.2px;
+  padding: 1rem 1rem;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 30px;
+}
+
+.blank {
+  display: flex;
+  text-align: center;
+  margin: auto;
+  width: 20rem;
+  height: 25rem;
+}
+
+.btns {
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  // justify-items: center;
+}
+
+.btn {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  width: 100px;
+  height: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+}
+
+.hide {
+  display: none;
+  visibility: hidden;
+  margin-left: auto;
+  margin-right: auto;
+}

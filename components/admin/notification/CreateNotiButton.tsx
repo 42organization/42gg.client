@@ -1,5 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
+import style from 'styles/admin/notification/CreateNotificationButton.module.scss';
 
 export default function CreateNotiButton() {
   const setModal = useSetRecoilState(modalState);
@@ -16,11 +17,17 @@ export default function CreateNotiButton() {
   };
   return (
     <>
-      <button onClick={() => openModal()}>Create All Notification</button>;
-      <button onClick={() => openModal('SOME-ONE')}>
-        Create Someone Notification
-      </button>
-      ;
+      <div className={style.container}>
+        <button className={style.createAllButton} onClick={() => openModal()}>
+          Create All
+        </button>
+        <button
+          className={style.createSomeoneButton}
+          onClick={() => openModal('SOME-ONE')}
+        >
+          Create Someone
+        </button>
+      </div>
     </>
   );
 }

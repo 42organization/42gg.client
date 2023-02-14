@@ -1,0 +1,28 @@
+.container {
+  @mixin button {
+    padding: 8px 16px;
+    color: #6b7280;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+  }
+  .createAllButton {
+    @include button;
+    background: #c3ddfd;
+    margin: 0 8px 0 0;
+    &:hover {
+      background-color: #b3ccfd;
+    }
+  }
+  .createSomeoneButton {
+    @include button;
+    background: #e5e7eb;
+    &:hover {
+      background-color: #d5d7eb;
+    }
+  }
+}
