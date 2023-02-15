@@ -7,7 +7,7 @@ export type UserInfo = {
   wins: number;
   losses: number;
   ppp: number;
-  email: string | '';
+  eMail: string | '';
   roleType: string;
 };
 
