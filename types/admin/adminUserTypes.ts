@@ -12,7 +12,6 @@ export type UserInfo = {
 };
 
 export type AdminProfileProps = {
-  modalName?: 'ADMIN-PROFILE';
   value: string;
 };
 
