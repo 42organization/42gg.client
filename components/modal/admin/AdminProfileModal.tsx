@@ -28,7 +28,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
     roleType: 'ROLE_USER',
   });
 
-  const { imgData, imgPreview, uploadImg } = useUploadImg();
+  const { imgPreview, uploadImg } = useUploadImg();
   const setModal = useSetRecoilState(modalState);
 
   useEffect(() => {
@@ -79,7 +79,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
     );
     formData.append(
       'multipartFile',
-      new Blob([imgData as File], { type: 'image' })
+      new Blob([imgPreview as string], { type: 'image' })
     );
 
     try {
