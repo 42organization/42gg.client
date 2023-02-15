@@ -94,11 +94,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
 
   return (
     <>
-      <div
-        className={
-          styles.modal
-        } /* method="put"  */ /* encType="multipart/form-data" */
-      >
+      <div className={styles.modal}>
         <div className={styles.title}>
           <div>회원 정보 수정</div>
         </div>
@@ -142,7 +138,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
             name='statusMessage'
             onChange={inputHandler}
             value={userInfo?.statusMessage}
-          ></textarea>
+          />
         </div>
         <div className={styles.bottom}>
           <div className={styles.choice}>
