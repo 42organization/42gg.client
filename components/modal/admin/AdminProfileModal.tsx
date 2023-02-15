@@ -54,10 +54,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
   const inputNumHandler = ({
     target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    let intValue = parseInt(value);
-    if (isNaN(intValue)) {
-      intValue = 0;
-    }
+    const intValue = parseInt(value);
     setUserInfo({ ...userInfo, [name]: intValue });
   };
 
@@ -195,6 +192,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
               <div>
                 <input
                   name='wins'
+                  type='number'
                   onChange={inputNumHandler}
                   value={userInfo?.wins}
                 />
@@ -202,6 +200,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
               <div>
                 <input
                   name='losses'
+                  type='number'
                   onChange={inputNumHandler}
                   value={userInfo?.losses}
                 />
@@ -209,6 +208,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
               <div>
                 <input
                   name='ppp'
+                  type='number'
                   onChange={inputNumHandler}
                   value={userInfo?.ppp}
                 />
