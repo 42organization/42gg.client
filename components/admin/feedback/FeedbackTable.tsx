@@ -43,8 +43,9 @@ export default function FeedbackTable() {
 
   const getUserFeedbacks = useCallback(async () => {
     try {
+      // TODO : api 수정 필요
       const res = await instance.get(
-        `/pingpong/admin/feedback/users/${intraId}?page=${currentPage}`
+        `/pingpong/admin/feedback/users/${intraId}?page=${currentPage}&size=10`
       );
       setIntraId(intraId);
       setFeedbackInfo({ ...res.data });
@@ -56,7 +57,7 @@ export default function FeedbackTable() {
   const getAllFeedbacks = useCallback(async () => {
     try {
       const res = await instance.get(
-        `/pingpong/admin/feedback?page=${currentPage}`
+        `/pingpong/admin/feedback?page=${currentPage}&size=10`
       );
       setFeedbackInfo({ ...res.data });
     } catch (e) {
@@ -103,8 +104,9 @@ export default function FeedbackTable() {
           <TableBody className={style.tableBody}>
             {feedbackInfo.feedbackList.map((feedback: IFeedback) => (
               <TableRow key={feedback.id}>
-                {Object.values(feedback).map(
-                  (value: number | string | boolean, index: number) => {
+                {tableFormat['feedback'].columns.map(
+                  (columnName: string, index: number) => {
+                    const value = feedback[columnName as keyof IFeedback];
                     return (
                       <TableCell className={style.tableBodyItem} key={index}>
                         {typeof value === 'boolean' ? (
@@ -116,7 +118,7 @@ export default function FeedbackTable() {
                             <option value='1'>처리완료</option>
                           </select>
                         ) : (
-                          value
+                          value.toString()
                         )}
                       </TableCell>
                     );
