@@ -72,10 +72,8 @@ export default function AdminNotiAllModal(props: any) {
 
         <label className={styles.body}>
           To: everyone
-          <input
+          <textarea
             className={styles.blank}
-            type='text'
-            pattern='[a-zA-Z0-9가-힣]'
             name='notification'
             onChange={inputChangeHandler}
             value={allNoti?.notification}
