@@ -83,7 +83,10 @@ export default function AdminProfileModal(props: AdminProfileProps) {
     );
 
     try {
-      await instance.put(`/pingpong/admin/users/jiyun/detail`, formData);
+      await instance.put(
+        `/pingpong/admin/users/${userInfo.intraId}/detail`,
+        formData
+      );
     } catch (e) {
       console.log(e);
     }
