@@ -12,22 +12,22 @@ import ReportModal from './menu/ReportModal';
 import AnnouncementModal from './event/AnnouncementModal';
 import AfterGameModal from './afterGame/AfterGameModal';
 import StatChangeModal from './statChange/StatChangeModal';
-import styles from 'styles/modal/Modal.module.scss';
 import AdminProfileModal from './admin/AdminProfileModal';
 import AdminPenaltyModal from './admin/AdminPenaltyModal';
 import AdminNotiAllModal from './admin/AdminNotiAllModal';
 import AdminNotiUserModal from './admin/AdminNotiUserModal';
 import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
+import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
   const [
-    { modalName, cancel, enroll, manual, announcements, exp, intraId },
+    { modalName, cancel, enroll, manual, announcement, exp, intraId },
     setModal,
   ] = useRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const content: { [key: string]: JSX.Element | null } = {
-    'EVENT-ANNOUNCEMENT': announcements ? (
-      <AnnouncementModal announcements={announcements} />
+    'EVENT-ANNOUNCEMENT': announcement ? (
+      <AnnouncementModal announcement={announcement} />
     ) : null,
     'MENU-REPORT': <ReportModal />,
     'MENU-LOGOUT': <LogoutModal />,
