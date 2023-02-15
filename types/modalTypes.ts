@@ -16,7 +16,8 @@ type AdminModal =
   | 'PENALTY'
   | 'NOTI_ALL'
   | 'NOTI_USER'
-  | 'CHECK_FEEDBACK';
+  | 'CHECK_FEEDBACK'
+  | 'DETAIL_CONTENT';
 
 type ModalName =
   | null
@@ -63,4 +64,5 @@ export interface Modal {
   exp?: Exp;
   gameId?: number;
   intraId?: string;
+  detailContent?: string;
 }

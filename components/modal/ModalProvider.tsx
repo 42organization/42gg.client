@@ -18,10 +18,20 @@ import AdminNotiAllModal from './admin/AdminNotiAllModal';
 import AdminNotiUserModal from './admin/AdminNotiUserModal';
 import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
 import styles from 'styles/modal/Modal.module.scss';
+import AdminDetailContentModal from './admin/AdminDetailContentModal';
 
 export default function ModalProvider() {
   const [
-    { modalName, cancel, enroll, manual, announcement, exp, intraId },
+    {
+      modalName,
+      cancel,
+      enroll,
+      manual,
+      announcement,
+      exp,
+      intraId,
+      detailContent,
+    },
     setModal,
   ] = useRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
@@ -43,6 +53,13 @@ export default function ModalProvider() {
     'ADMIN-NOTI_ALL': intraId ? <AdminNotiAllModal value={intraId} /> : null,
     'ADMIN-NOTI_USER': intraId ? <AdminNotiUserModal value={intraId} /> : null,
     'ADMIN-CHECK_FEEDBACK': intraId ? <AdminCheckFeedback /> : null,
+    'ADMIN-DETAIL_CONTENT':
+      intraId && detailContent ? (
+        <AdminDetailContentModal
+          intraId={intraId}
+          detailContent={detailContent}
+        />
+      ) : null,
   };
 
   useEffect(() => {
