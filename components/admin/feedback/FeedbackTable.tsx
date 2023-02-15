@@ -31,6 +31,8 @@ interface IFeedbackTable {
   currentPage: number;
 }
 
+const MAX_CONTENT_LENGTH = 20;
+
 export default function FeedbackTable() {
   const [feedbackInfo, setFeedbackInfo] = useState<IFeedbackTable>({
     feedbackList: [],
@@ -80,6 +82,14 @@ export default function FeedbackTable() {
     });
   };
 
+  const openDetailModal = (feedback: IFeedback) => {
+    setModal({
+      modalName: 'ADMIN-DETAIL_CONTENT',
+      intraId: feedback.intraId,
+      detailContent: feedback.content,
+    });
+  };
+
   useEffect(() => {
     intraId ? getUserFeedbacks() : getAllFeedbacks();
   }, [intraId, getUserFeedbacks, getAllFeedbacks]);
@@ -118,6 +128,16 @@ export default function FeedbackTable() {
                               <option value='0'>처리중</option>
                               <option value='1'>처리완료</option>
                             </select>
+                          ) : value.toString().length > MAX_CONTENT_LENGTH ? (
+                            <div>
+                              {value.toString().slice(0, MAX_CONTENT_LENGTH)}
+                              <span
+                                style={{ cursor: 'pointer', color: 'grey' }}
+                                onClick={() => openDetailModal(feedback)}
+                              >
+                                ...더보기
+                              </span>
+                            </div>
                           ) : (
                             value.toString()
                           )}
