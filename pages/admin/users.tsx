@@ -9,7 +9,7 @@ export default function Users() {
       users page
       <button
         onClick={() =>
-          setModal({ modalName: 'ADMIN-PROFILE', intraId: 'daijeong' })
+          setModal({ modalName: 'ADMIN-PROFILE', intraId: 'jiyun' })
         }
       >
         자세히

@@ -11,7 +11,6 @@ import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminProfile.module.scss';
-import { NULL } from 'sass';
 
 const CHAR_LIMIT = 30;
 
@@ -37,9 +36,10 @@ export default function AdminProfileModal(props: AdminProfileProps) {
   }, []);
 
   const getBasicProfileHandler = async () => {
-    const res = await fetch(`http://localhost:3000/api/admin/users`); //admin/users/{props.intraId}/detail
-    const data = await res.json();
-    setUserInfo(data[0]);
+    const res = await instance.get(
+      `/pingpong/admin/users/${props.value}/detail`
+    );
+    setUserInfo(res?.data);
   };
 
   const inputHandler = ({
@@ -47,8 +47,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
   }:
     | React.ChangeEvent<HTMLTextAreaElement>
     | React.ChangeEvent<HTMLInputElement>) => {
-    if (name === 'statusMessage' && value.length > CHAR_LIMIT)
-      value = value.slice(0, CHAR_LIMIT);
+    if (name === 'statusMessage' && value.length > CHAR_LIMIT) return;
     setUserInfo({ ...userInfo, [name]: value });
   };
 
