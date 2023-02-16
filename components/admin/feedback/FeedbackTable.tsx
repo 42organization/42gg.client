@@ -98,7 +98,7 @@ export default function FeedbackTable() {
     <>
       <div className={style.feedbackWrap}>
         <div className={style.header}>
-          <span className={style.title}>알림 관리</span>
+          <span className={style.title}>피드백 관리</span>
           <AdminSearchBar initSearch={initSearch} />
         </div>
         <TableContainer className={style.tableContainer} component={Paper}>
