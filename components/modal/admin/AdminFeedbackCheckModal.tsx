@@ -1,23 +1,28 @@
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
+import { IFeedback } from 'components/admin/feedback/FeedbackTable';
+import instance from 'utils/axios';
 import { IoSend } from 'react-icons/io5';
 import styles from 'styles/admin/modal/AdminFeedbackCheck.module.scss';
 
-export default function AdminFeedbackCheck() {
+export default function AdminFeedbackCheck({ id, intraId }: IFeedback) {
   const setModal = useSetRecoilState(modalState);
 
-  const finishSendHandler = async () => {
-    // try {
-    //   await instance.put(`/admin/feedback/is-solved`, {
-    //     feedbackId: 1,
-    // });
-    //   setModal({ modalName: null });
-    // } catch (e) {
-    //   console.error(e);
-    // }
+  const sendNotificationHandler = async (isSend: boolean) => {
+    try {
+      await instance.put(`pingpong/admin/feedback/is-solved`, {
+        feedbackId: id,
+      });
+      await instance.post(`pingpong/admin/notifications/${intraId}`, {
+        intraId,
+        message: '피드백이 반영되었습니다.',
+        sendMail: !isSend,
+      });
+      setModal({ modalName: null });
+    } catch (e) {
+      console.error(e);
+    }
   };
-
-  const cancelReminderHandler = () => setModal({ modalName: null });
 
   return (
     <div className={styles.whole}>
@@ -29,13 +34,13 @@ export default function AdminFeedbackCheck() {
         <div className={styles.btns}>
           <button
             className={`${styles.btn} ${styles.first}`}
-            onClick={finishSendHandler}
+            onClick={() => sendNotificationHandler(true)}
           >
             확인
           </button>
           <button
             className={`${styles.btn} ${styles.second}`}
-            onClick={cancelReminderHandler}
+            onClick={() => sendNotificationHandler(false)}
           >
             취소
           </button>
