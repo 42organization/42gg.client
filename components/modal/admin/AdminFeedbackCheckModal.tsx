@@ -5,7 +5,11 @@ import instance from 'utils/axios';
 import { IoSend } from 'react-icons/io5';
 import styles from 'styles/admin/modal/AdminFeedbackCheck.module.scss';
 
-export default function AdminFeedbackCheck({ id, intraId }: IFeedback) {
+export default function AdminFeedbackCheck({
+  id,
+  intraId,
+  isSolved,
+}: IFeedback) {
   const setModal = useSetRecoilState(modalState);
 
   const sendNotificationHandler = async (isSend: boolean) => {
@@ -15,7 +19,9 @@ export default function AdminFeedbackCheck({ id, intraId }: IFeedback) {
       });
       await instance.post(`pingpong/admin/notifications/${intraId}`, {
         intraId,
-        message: '피드백이 반영되었습니다.',
+        message: isSolved
+          ? '피드백을 검토중입니다.'
+          : '피드백이 반영되었습니다.',
         sendMail: !isSend,
       });
       setModal({ modalName: null });

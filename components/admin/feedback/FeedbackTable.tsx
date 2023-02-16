@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import PageNation from 'components/Pagination';
@@ -41,7 +41,7 @@ export default function FeedbackTable() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
-  const setModal = useSetRecoilState(modalState);
+  const [modal, setModal] = useRecoilState(modalState);
 
   const getUserFeedbacks = useCallback(async () => {
     try {
@@ -72,10 +72,7 @@ export default function FeedbackTable() {
     setCurrentPage(1);
   }, []);
 
-  const solvingFeedback = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    feedback: IFeedback
-  ) => {
+  const solvingFeedback = (feedback: IFeedback) => {
     setModal({
       modalName: 'ADMIN-CHECK_FEEDBACK',
       feedback,
@@ -92,7 +89,7 @@ export default function FeedbackTable() {
 
   useEffect(() => {
     intraId ? getUserFeedbacks() : getAllFeedbacks();
-  }, [intraId, getUserFeedbacks, getAllFeedbacks]);
+  }, [intraId, getUserFeedbacks, getAllFeedbacks, modal]);
 
   return (
     <>
@@ -123,7 +120,7 @@ export default function FeedbackTable() {
                           {typeof value === 'boolean' ? (
                             <select
                               value={feedback.isSolved ? 1 : 0}
-                              onChange={(e) => solvingFeedback(e, feedback)}
+                              onChange={() => solvingFeedback(feedback)}
                             >
                               <option value='0'>처리중</option>
                               <option value='1'>처리완료</option>
