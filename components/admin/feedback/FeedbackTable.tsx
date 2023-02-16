@@ -1,3 +1,10 @@
+import { useCallback, useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import instance from 'utils/axios';
+import { modalState } from 'utils/recoil/modal';
+import PageNation from 'components/Pagination';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import { tableFormat } from 'constants/admin/table';
 import {
   Paper,
   Table,
@@ -7,13 +14,6 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import PageNation from 'components/Pagination';
-import { tableFormat } from 'constants/admin/table';
-import { useCallback, useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import instance from 'utils/axios';
-import { modalState } from 'utils/recoil/modal';
-import AdminSearchBar from '../common/AdminSearchBar';
 import style from 'styles/admin/feedback/FeedbackTable.module.scss';
 
 interface IFeedback {

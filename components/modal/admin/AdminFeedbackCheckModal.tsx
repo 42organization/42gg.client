@@ -1,7 +1,7 @@
-import { IoSend } from 'react-icons/io5';
 import { useSetRecoilState } from 'recoil';
-import styles from 'styles/admin/modal/AdminFeedbackCheck.module.scss';
 import { modalState } from 'utils/recoil/modal';
+import { IoSend } from 'react-icons/io5';
+import styles from 'styles/admin/modal/AdminFeedbackCheck.module.scss';
 
 export default function AdminFeedbackCheck() {
   const setModal = useSetRecoilState(modalState);
