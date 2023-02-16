@@ -1,5 +1,6 @@
 import { MatchMode } from './mainType';
 import { Value } from 'react-quill';
+import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -65,4 +66,5 @@ export interface Modal {
   gameId?: number;
   intraId?: string;
   detailContent?: string;
+  feedback?: IFeedback;
 }

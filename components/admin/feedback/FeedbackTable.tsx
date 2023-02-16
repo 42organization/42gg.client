@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import style from 'styles/admin/feedback/FeedbackTable.module.scss';
 
-interface IFeedback {
+export interface IFeedback {
   id: number;
   intraId: string;
   category: number; // 1: bug, 2: suggestion, 3: question
@@ -78,7 +78,7 @@ export default function FeedbackTable() {
   ) => {
     setModal({
       modalName: 'ADMIN-CHECK_FEEDBACK',
-      intraId: feedback.intraId,
+      feedback,
     });
   };
 

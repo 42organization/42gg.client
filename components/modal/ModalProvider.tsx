@@ -31,6 +31,7 @@ export default function ModalProvider() {
       exp,
       intraId,
       detailContent,
+      feedback,
     },
     setModal,
   ] = useRecoilState(modalState);
@@ -52,7 +53,9 @@ export default function ModalProvider() {
     'ADMIN-PENALTY': intraId ? <AdminPenaltyModal value={intraId} /> : null,
     'ADMIN-NOTI_ALL': intraId ? <AdminNotiAllModal value={intraId} /> : null,
     'ADMIN-NOTI_USER': intraId ? <AdminNotiUserModal value={intraId} /> : null,
-    'ADMIN-CHECK_FEEDBACK': intraId ? <AdminCheckFeedback /> : null,
+    'ADMIN-CHECK_FEEDBACK': feedback ? (
+      <AdminCheckFeedback {...feedback} />
+    ) : null,
     'ADMIN-DETAIL_CONTENT':
       intraId && detailContent ? (
         <AdminDetailContentModal
