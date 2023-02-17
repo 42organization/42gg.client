@@ -40,8 +40,6 @@ export default function AdminProfileModal(props: AdminProfileProps) {
     const res = await instance.get(
       `/pingpong/admin/users/${props.value}/detail`
     );
-    console.log(props.value);
-    console.log(res.data);
     setUserInfo(res?.data);
   };
 
