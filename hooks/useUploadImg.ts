@@ -9,7 +9,6 @@ export default function useUploadImg() {
 
   const setError = useSetRecoilState(errorState);
   const uploadImg = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
     const file = e.target.files?.[0];
     if (file) {
       setImgData(file);
