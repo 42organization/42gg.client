@@ -12,7 +12,7 @@ export type UserInfo = {
 };
 
 export type AdminProfileProps = {
-  value: string;
+  value: number;
 };
 
 export const roleTypes = [

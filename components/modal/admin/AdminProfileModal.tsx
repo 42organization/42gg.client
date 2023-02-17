@@ -11,13 +11,14 @@ import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminProfile.module.scss';
+import { errorState } from 'utils/recoil/error';
 
 const STAT_MSG_LIMIT = 30;
 
 export default function AdminProfileModal(props: AdminProfileProps) {
   const [userInfo, setUserInfo] = useState<UserInfo>({
-    userId: 0,
-    intraId: props.value,
+    userId: props.value,
+    intraId: '',
     userImageUri: null,
     statusMessage: '',
     racketType: 'shakeHand',
@@ -30,6 +31,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
 
   const { imgPreview, uploadImg } = useUploadImg();
   const setModal = useSetRecoilState(modalState);
+  const setError = useSetRecoilState(errorState);
 
   useEffect(() => {
     getBasicProfileHandler();
@@ -84,11 +86,11 @@ export default function AdminProfileModal(props: AdminProfileProps) {
 
     try {
       await instance.put(
-        `/pingpong/admin/users/${userInfo.intraId}/detail`,
+        `/pingpong/admin/users/${userInfo.userId}/detail`,
         formData
       );
     } catch (e) {
-      console.log(e);
+      setError('SW01');
     }
   };
 
