@@ -7,6 +7,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import PageNation from 'components/Pagination';
 import { useCallback, useEffect, useState } from 'react';
 import { tableColumnNames } from 'types/admin/tableTypes';
 import instance from 'utils/axios';
@@ -109,6 +110,15 @@ export default function UserManagementTable() {
             </TableBody>
           </Table>
         </TableContainer>
+        <div>
+          <PageNation
+            curPage={userManagements.currentPage}
+            totalPages={userManagements.totalPage}
+            pageChangeHandler={(pageNumber: number) => {
+              setCurrentPage(pageNumber);
+            }}
+          />
+        </div>
       </div>
     </>
   );
