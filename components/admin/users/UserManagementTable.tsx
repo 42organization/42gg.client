@@ -51,7 +51,9 @@ export default function UserManagementTable() {
 
   const getAllUserInfo = useCallback(async () => {
     try {
-      const res = await instance.get('pingpong/admin/users?page=1');
+      const res = await instance.get(
+        `pingpong/admin/users?page=${currentPage}`
+      );
       console.log(res.data);
       setUserManagements({
         userInfoList: res.data.userSearchAdminDtos,
@@ -61,11 +63,26 @@ export default function UserManagementTable() {
     } catch (e) {
       console.error('MS06');
     }
-  }, []);
+  }, [currentPage]);
+
+  const getUserInfo = useCallback(async () => {
+    try {
+      const res = await instance.get(
+        `pingpong/admin/users/${intraId}?page=${currentPage}`
+      );
+      setUserManagements({
+        userInfoList: res.data.userSearchAdminDtos,
+        totalPage: res.data.totalPage,
+        currentPage: res.data.currentPage,
+      });
+    } catch (e) {
+      console.error('MS05');
+    }
+  }, [intraId, currentPage]);
 
   useEffect(() => {
-    getAllUserInfo();
-  }, [intraId, getAllUserInfo]);
+    intraId ? getUserInfo() : getAllUserInfo();
+  }, [intraId, getAllUserInfo, getUserInfo]);
 
   // ? 검색결과가 없을 때, currentPage === 0 인가?
   if (userManagements.currentPage === 0) return <div>loading...</div>;
