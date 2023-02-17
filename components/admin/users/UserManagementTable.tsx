@@ -12,6 +12,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { tableColumnNames } from 'types/admin/tableTypes';
 import instance from 'utils/axios';
 import AdminSearchBar from '../common/AdminSearchBar';
+import styles from 'styles/admin/users/UserManagementTable.module.scss';
 
 interface IUser {
   id: number;
@@ -71,29 +72,32 @@ export default function UserManagementTable() {
 
   return (
     <>
-      <div>
-        <div>
-          <span>유저 관리</span>
+      <div className={styles.userManagementWrap}>
+        <div className={styles.header}>
+          <span className={styles.title}>유저 관리</span>
           <AdminSearchBar initSearch={initSearch} />
         </div>
-        <TableContainer component={Paper}>
-          <Table aria-label='customized table'>
-            <TableHead>
+        <TableContainer className={styles.tableContainer} component={Paper}>
+          <Table className={styles.table} aria-label='customized table'>
+            <TableHead className={styles.tableHeader}>
               <TableRow>
                 {tableColumnNames['userInfo'].columns.map((columnName) => (
-                  <TableCell key={columnName}>
+                  <TableCell
+                    className={styles.tableHeaderItem}
+                    key={columnName}
+                  >
                     {tableTitle[columnName]}
                   </TableCell>
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody className={styles.tableBody}>
               {userManagements.userInfoList.map((userInfo: IUser) => (
                 <TableRow key={userInfo.id}>
                   {tableColumnNames['userInfo'].columns.map(
                     (columnName: string, index: number) => {
                       return (
-                        <TableCell key={index}>
+                        <TableCell className={styles.tableBodyItem} key={index}>
                           {columnName !== 'etc'
                             ? userInfo[columnName as keyof IUser]
                             : tableColumnNames['userInfo'].etc.value.map(
@@ -110,7 +114,7 @@ export default function UserManagementTable() {
             </TableBody>
           </Table>
         </TableContainer>
-        <div>
+        <div className={styles.pageNationContainer}>
           <PageNation
             curPage={userManagements.currentPage}
             totalPages={userManagements.totalPage}
