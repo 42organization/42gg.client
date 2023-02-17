@@ -112,36 +112,37 @@ export default function FeedbackTable() {
             <TableBody className={style.tableBody}>
               {feedbackInfo.feedbackList.map((feedback: IFeedback) => (
                 <TableRow key={feedback.id}>
-                  {tableFormat['feedback'].columns.map(
-                    (columnName: string, index: number) => {
-                      const value = feedback[columnName as keyof IFeedback];
-                      return (
-                        <TableCell className={style.tableBodyItem} key={index}>
-                          {typeof value === 'boolean' ? (
-                            <select
-                              value={feedback.isSolved ? 1 : 0}
-                              onChange={() => solvingFeedback(feedback)}
+                  {tableFormat['feedback'].columns.map((columnName: string) => {
+                    const value = feedback[columnName as keyof IFeedback];
+                    return (
+                      <TableCell
+                        className={style.tableBodyItem}
+                        key={columnName}
+                      >
+                        {typeof value === 'boolean' ? (
+                          <select
+                            value={feedback.isSolved ? 1 : 0}
+                            onChange={() => solvingFeedback(feedback)}
+                          >
+                            <option value='0'>처리중</option>
+                            <option value='1'>처리완료</option>
+                          </select>
+                        ) : value.toString().length > MAX_CONTENT_LENGTH ? (
+                          <div>
+                            {value.toString().slice(0, MAX_CONTENT_LENGTH)}
+                            <span
+                              style={{ cursor: 'pointer', color: 'grey' }}
+                              onClick={() => openDetailModal(feedback)}
                             >
-                              <option value='0'>처리중</option>
-                              <option value='1'>처리완료</option>
-                            </select>
-                          ) : value.toString().length > MAX_CONTENT_LENGTH ? (
-                            <div>
-                              {value.toString().slice(0, MAX_CONTENT_LENGTH)}
-                              <span
-                                style={{ cursor: 'pointer', color: 'grey' }}
-                                onClick={() => openDetailModal(feedback)}
-                              >
-                                ...더보기
-                              </span>
-                            </div>
-                          ) : (
-                            value.toString()
-                          )}
-                        </TableCell>
-                      );
-                    }
-                  )}
+                              ...더보기
+                            </span>
+                          </div>
+                        ) : (
+                          value.toString()
+                        )}
+                      </TableCell>
+                    );
+                  })}
                 </TableRow>
               ))}
             </TableBody>
