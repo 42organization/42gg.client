@@ -44,6 +44,19 @@ export default function UserManagementTable() {
     etc: '기타',
   };
 
+  const buttonList: string[] = [styles.detail, styles.penalty];
+
+  const handleButtonAction = (buttonName: string) => {
+    switch (buttonName) {
+      case '자세히':
+        console.log('상세보기'); // TODO insert modalHandler
+        break;
+      case '패널티 부여':
+        console.log('패널티 부여'); // TODO insert modalHandler
+        break;
+    }
+  };
+
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
     setCurrentPage(1);
@@ -54,7 +67,6 @@ export default function UserManagementTable() {
       const res = await instance.get(
         `pingpong/admin/users?page=${currentPage}`
       );
-      console.log(res.data);
       setUserManagements({
         userInfoList: res.data.userSearchAdminDtos,
         totalPage: res.data.totalPage,
@@ -119,7 +131,15 @@ export default function UserManagementTable() {
                             ? userInfo[columnName as keyof IUser]
                             : tableColumnNames['userInfo'].etc.value.map(
                                 (buttonName, index) => (
-                                  <button key={index}>{buttonName}</button>
+                                  <button
+                                    key={index}
+                                    className={`${styles.button} ${buttonList[index]}`}
+                                    onClick={() =>
+                                      handleButtonAction(buttonName)
+                                    }
+                                  >
+                                    {buttonName}
+                                  </button>
                                 )
                               )}
                         </TableCell>
