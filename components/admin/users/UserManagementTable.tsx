@@ -1,3 +1,8 @@
+import { useCallback, useEffect, useState } from 'react';
+import { tableColumnNames } from 'types/admin/tableTypes';
+import instance from 'utils/axios';
+import PageNation from 'components/Pagination';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import {
   Paper,
   Table,
@@ -7,11 +12,6 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import PageNation from 'components/Pagination';
-import { useCallback, useEffect, useState } from 'react';
-import { tableColumnNames } from 'types/admin/tableTypes';
-import instance from 'utils/axios';
-import AdminSearchBar from '../common/AdminSearchBar';
 import styles from 'styles/admin/users/UserManagementTable.module.scss';
 
 interface IUser {
