@@ -16,15 +16,15 @@ export default function useUploadImg() {
   };
 
   const imgCompress = async (fileSrc: File) => {
-    const options = {
+    /* const options = {
       maxSizeMB: 0.1,
       maxWidthOrHeight: 320,
       useWebWorker: true,
-    };
+    }; */
     try {
-      const res = await imageCompression(fileSrc, options);
+      //   const res = await imageCompression(fileSrc, options);
       const reader = new FileReader();
-      reader.readAsDataURL(res);
+      reader.readAsDataURL(fileSrc);
       reader.onloadend = () => {
         setImgPreview(reader.result as string);
       };
@@ -39,5 +39,5 @@ export default function useUploadImg() {
     }
   }, [imgData]);
 
-  return { imgPreview, uploadImg };
+  return { imgData, imgPreview, uploadImg };
 }
