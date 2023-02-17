@@ -8,9 +8,7 @@ export default function Users() {
     <div>
       users page
       <button
-        onClick={() =>
-          setModal({ modalName: 'ADMIN-PROFILE', intraId: 'jiyun' })
-        }
+        onClick={() => setModal({ modalName: 'ADMIN-PROFILE', userId: 5 })}
       >
         자세히
       </button>
