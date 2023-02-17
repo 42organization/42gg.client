@@ -17,8 +17,8 @@ import AdminPenaltyModal from './admin/AdminPenaltyModal';
 import AdminNotiAllModal from './admin/AdminNotiAllModal';
 import AdminNotiUserModal from './admin/AdminNotiUserModal';
 import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
+import FeedbackDetailModal from './admin/FeedbackDetailModal';
 import styles from 'styles/modal/Modal.module.scss';
-import AdminDetailContentModal from './admin/AdminDetailContentModal';
 
 export default function ModalProvider() {
   const [
@@ -58,10 +58,7 @@ export default function ModalProvider() {
     ) : null,
     'ADMIN-DETAIL_CONTENT':
       intraId && detailContent ? (
-        <AdminDetailContentModal
-          intraId={intraId}
-          detailContent={detailContent}
-        />
+        <FeedbackDetailModal intraId={intraId} detailContent={detailContent} />
       ) : null,
   };
 

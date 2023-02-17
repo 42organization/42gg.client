@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function AdminDetailContentModal({
+export default function FeedbackDetailModal({
   intraId,
   detailContent,
 }: {
@@ -25,7 +25,7 @@ export default function AdminDetailContentModal({
   return (
     <>
       <h2>{intraId}</h2>
-      {contentWithNewLine.split('\r\n').map((value, index) => {
+      {contentWithNewLine.split('\r\n').map((value: string, index: number) => {
         return (
           <span
             key={index}
