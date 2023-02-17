@@ -1,5 +1,4 @@
 export type UserInfo = {
-  userId: number;
   intraId: string;
   userImageUri: string | null;
   racketType: string;

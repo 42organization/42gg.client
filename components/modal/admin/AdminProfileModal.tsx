@@ -17,7 +17,6 @@ const STAT_MSG_LIMIT = 30;
 
 export default function AdminProfileModal(props: AdminProfileProps) {
   const [userInfo, setUserInfo] = useState<UserInfo>({
-    userId: props.value,
     intraId: '',
     userImageUri: null,
     statusMessage: '',
@@ -41,6 +40,8 @@ export default function AdminProfileModal(props: AdminProfileProps) {
     const res = await instance.get(
       `/pingpong/admin/users/${props.value}/detail`
     );
+    console.log(props.value);
+    console.log(res.data);
     setUserInfo(res?.data);
   };
 
@@ -63,7 +64,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
   const submitHandler = async () => {
     const formData = new FormData();
     const data = {
-      userId: userInfo.userId,
+      userId: props.value,
       intraId: userInfo.intraId,
       statusMessage: userInfo.statusMessage,
       racketType: userInfo.racketType,
@@ -86,7 +87,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
 
     try {
       await instance.put(
-        `/pingpong/admin/users/${userInfo.userId}/detail`,
+        `/pingpong/admin/users/${props.value}/detail`,
         formData
       );
     } catch (e) {
@@ -106,7 +107,8 @@ export default function AdminProfileModal(props: AdminProfileProps) {
               <label className={styles.image}>
                 <Image
                   src={imgPreview ? imgPreview : `${userInfo?.userImageUri}`}
-                  layout='fill'
+                  width='120'
+                  height='110'
                   alt='Profile Image'
                 />
                 <input
