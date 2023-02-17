@@ -1,10 +1,13 @@
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { errorState } from 'utils/recoil/error';
 import imageCompression from 'browser-image-compression';
 
 export default function useUploadImg() {
   const [imgData, setImgData] = useState<File>();
   const [imgPreview, setImgPreview] = useState<string>();
 
+  const setError = useSetRecoilState(errorState);
   const uploadImg = (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e);
     const file = e.target.files?.[0];
@@ -27,7 +30,7 @@ export default function useUploadImg() {
         setImgPreview(reader.result as string);
       };
     } catch (error) {
-      console.log(error);
+      setError('SW00');
     }
   };
 
