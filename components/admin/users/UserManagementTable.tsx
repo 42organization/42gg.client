@@ -68,7 +68,7 @@ export default function UserManagementTable() {
   const getUserInfo = useCallback(async () => {
     try {
       const res = await instance.get(
-        `pingpong/admin/users/${intraId}?page=${currentPage}`
+        `pingpong/admin/users?q=${intraId}&page=${currentPage}`
       );
       setUserManagements({
         userInfoList: res.data.userSearchAdminDtos,
