@@ -36,6 +36,22 @@
           padding: 10px;
           text-align: center;
           line-height: 150%;
+
+          .button {
+            border: none;
+            border-radius: 10px;
+            padding: 4px 12px;
+            margin-left: 10px;
+            cursor: pointer;
+          }
+          .detail {
+            background-color: #e5e7eb;
+            color: #6b7280;
+          }
+          .penalty {
+            background-color: #2678f3;
+            color: white;
+          }
         }
       }
     }
