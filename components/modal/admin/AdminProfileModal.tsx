@@ -37,10 +37,14 @@ export default function AdminProfileModal(props: AdminProfileProps) {
   }, []);
 
   const getBasicProfileHandler = async () => {
-    const res = await instance.get(
-      `/pingpong/admin/users/${props.value}/detail`
-    );
-    setUserInfo(res?.data);
+    try {
+      const res = await instance.get(
+        `/pingpong/admin/users/${props.value}/detail`
+      );
+      setUserInfo(res?.data);
+    } catch (e) {
+      setError('SW01');
+    }
   };
 
   const inputHandler = ({
@@ -89,7 +93,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
         formData
       );
     } catch (e) {
-      setError('SW01');
+      setError('SW02');
     }
   };
 
