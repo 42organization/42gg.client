@@ -124,15 +124,18 @@ export default function UserManagementTable() {
               {userManagements.userInfoList.map((userInfo: IUser) => (
                 <TableRow key={userInfo.id}>
                   {tableColumnNames['userInfo'].columns.map(
-                    (columnName: string, index: number) => {
+                    (columnName: string) => {
                       return (
-                        <TableCell className={styles.tableBodyItem} key={index}>
+                        <TableCell
+                          className={styles.tableBodyItem}
+                          key={columnName}
+                        >
                           {columnName !== 'etc'
                             ? userInfo[columnName as keyof IUser]
                             : tableColumnNames['userInfo'].etc.value.map(
-                                (buttonName, index) => (
+                                (buttonName: string, index: number) => (
                                   <button
-                                    key={index}
+                                    key={buttonName}
                                     className={`${styles.button} ${buttonList[index]}`}
                                     onClick={() =>
                                       handleButtonAction(buttonName)
