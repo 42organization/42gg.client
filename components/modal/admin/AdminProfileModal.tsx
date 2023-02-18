@@ -1,83 +1,105 @@
-import { useSetRecoilState } from 'recoil';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import styles from 'styles/admin/modal/AdminProfile.module.scss';
+import { useSetRecoilState } from 'recoil';
+import {
+  AdminProfileProps,
+  roleTypes,
+  UserInfo,
+} from 'types/admin/adminUserTypes';
+import { racketTypes } from 'types/userTypes';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
-import Image from 'next/image';
-import axios from 'axios';
 import useUploadImg from 'hooks/useUploadImg';
-import { Props, roleTypes, UserInfo } from 'types/admin/adminUserTypes';
-import { racketTypes } from 'types/userTypes';
+import styles from 'styles/admin/modal/AdminProfile.module.scss';
+import { errorState } from 'utils/recoil/error';
 
-export default function AdminProfileModal(props: Props) {
-  const [userInfo, setUserInfo] = useState<UserInfo>();
+const STAT_MSG_LIMIT = 30;
+
+export default function AdminProfileModal(props: AdminProfileProps) {
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    intraId: '',
+    userImageUri: null,
+    statusMessage: '',
+    racketType: 'shakeHand',
+    wins: 0,
+    losses: 0,
+    ppp: 0,
+    eMail: '',
+    roleType: 'ROLE_USER',
+  });
+
   const { imgData, imgPreview, uploadImg } = useUploadImg();
   const setModal = useSetRecoilState(modalState);
+  const setError = useSetRecoilState(errorState);
 
   useEffect(() => {
     getBasicProfileHandler();
   }, []);
 
   const getBasicProfileHandler = async () => {
-    const res = await fetch(`http://localhost:3000/api/admin/users`); //admin/users/{props.intraId}/detail
-    const data = await res.json();
-    setUserInfo(data[0]);
+    try {
+      const res = await instance.get(
+        `/pingpong/admin/users/${props.value}/detail`
+      );
+      setUserInfo(res?.data);
+    } catch (e) {
+      setError('SW01');
+    }
   };
 
   const inputHandler = ({
     target: { name, value },
+  }:
+    | React.ChangeEvent<HTMLTextAreaElement>
+    | React.ChangeEvent<HTMLInputElement>) => {
+    if (name === 'statusMessage' && value.length > STAT_MSG_LIMIT) return;
+    setUserInfo({ ...userInfo, [name]: value });
+  };
+
+  const inputNumHandler = ({
+    target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    if (name === 'wins' || name === 'losses' || name === 'ppp') {
-      const intValue = parseInt(value);
-      setUserInfo((prev: any) => ({
-        ...prev,
-        [name]: intValue,
-      }));
-    } else {
-      setUserInfo((prev: any) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
+    const intValue = parseInt(value);
+    setUserInfo({ ...userInfo, [name]: intValue });
   };
 
   const submitHandler = async () => {
-    //const formData = new FormData();
-    console.log(userInfo);
-    // const data = {
-    //   userId: userInfo.userId,
-    //   intraId: userInfo.intraId,
-    //   statusMessage: userInfo.statusMessage,
-    //   racketType: userInfo.racketType,
-    //   wins: userInfo.wins,
-    //   losses: userInfo.losses,
-    //   ppp: userInfo.ppp,
-    //   eMail: userInfo.eMail,
-    //   roleType: userInfo.roleType,
-    // };
-    //formData.append('files', imgData);
-    // formData.append(
-    //   'data',
-    //   new Blob([JSON.stringify(data)], {
-    //     type: 'application/json',
-    //   })
-    // );
-    // await instance.put(`/admin/users/${userInfo.userId}`, e);
-    // try {
-    //   const result = await axios.put(`/admin/users/daijeong/detail`);
-    //   console.log(result);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    const formData = new FormData();
+    const data = {
+      userId: props.value,
+      intraId: userInfo.intraId,
+      statusMessage: userInfo.statusMessage,
+      racketType: userInfo.racketType,
+      wins: userInfo.wins,
+      losses: userInfo.losses,
+      ppp: userInfo.ppp,
+      eMail: userInfo.eMail,
+      roleType: userInfo.roleType,
+    };
+    formData.append(
+      'updateRequestDto',
+      new Blob([JSON.stringify(data)], {
+        type: 'application/json',
+      })
+    );
+    formData.append(
+      'multipartFile',
+      new Blob([imgData as File], { type: 'image/jpeg' })
+    );
+
+    try {
+      await instance.put(
+        `/pingpong/admin/users/${props.value}/detail`,
+        formData
+      );
+    } catch (e) {
+      setError('SW02');
+    }
   };
 
   return (
     <>
-      <div
-        className={
-          styles.modal
-        } /* method="put"  */ /* encType="multipart/form-data" */
-      >
+      <div className={styles.modal}>
         <div className={styles.title}>
           <div>회원 정보 수정</div>
         </div>
@@ -87,8 +109,9 @@ export default function AdminProfileModal(props: Props) {
               <label className={styles.image}>
                 <Image
                   src={imgPreview ? imgPreview : `${userInfo?.userImageUri}`}
-                  layout='fill'
-                  alt=''
+                  width='120'
+                  height='110'
+                  alt='Profile Image'
                 />
                 <input
                   type='file'
@@ -116,11 +139,12 @@ export default function AdminProfileModal(props: Props) {
         </div>
         <div className={styles.middle}>
           <label>상태 메시지</label>
+          <div>{`${userInfo.statusMessage.length} / ${STAT_MSG_LIMIT}`}</div>
           <textarea
             name='statusMessage'
             onChange={inputHandler}
             value={userInfo?.statusMessage}
-          ></textarea>
+          />
         </div>
         <div className={styles.bottom}>
           <div className={styles.choice}>
@@ -173,22 +197,24 @@ export default function AdminProfileModal(props: Props) {
               <div>
                 <input
                   name='wins'
-                  onChange={inputHandler}
+                  type='number'
+                  onChange={inputNumHandler}
                   value={userInfo?.wins}
                 />
               </div>
               <div>
                 <input
                   name='losses'
-                  onChange={inputHandler}
+                  type='number'
+                  onChange={inputNumHandler}
                   value={userInfo?.losses}
                 />
               </div>
               <div>
                 <input
-                  type='text'
                   name='ppp'
-                  onChange={inputHandler}
+                  type='number'
+                  onChange={inputNumHandler}
                   value={userInfo?.ppp}
                 />
               </div>
