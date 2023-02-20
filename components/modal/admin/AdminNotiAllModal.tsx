@@ -1,15 +1,13 @@
 import { useSetRecoilState } from 'recoil';
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import styles from 'styles/admin/modal/AdminNotiAll.module.scss';
 import { modalState } from 'utils/recoil/modal';
-import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
+import CustomizedSnackbars from 'components/toastmsg/toastmsg';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import instance from 'utils/axios';
 import { finished } from 'stream';
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
   ref
 ) {
@@ -19,10 +17,6 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 interface EditedAllNoti {
   notification: string | number;
 }
-
-//noti가 비어있을 때 적용안되게 수정필요
-
-const MINUTE_LIMIT = 59;
 
 export default function AdminNotiAllModal(props: any) {
   const [allNoti, setAllNoti] = useState<any>(/* 초기값 필요 */);
@@ -41,32 +35,6 @@ export default function AdminNotiAllModal(props: any) {
     }));
   };
 
-  const getBasicNotiAllHandler = async () => {
-    const res = await fetch(
-      `http://localhost:3000/api/admin/users/intraId/penalty`
-      /* noti 모달인데 패널티 api를 불러옴 post요청인데 애초에 fetch로 정보 불러온게 이상 */
-    );
-    const data = await res.json();
-    setAllNoti(data[0]);
-  };
-
-  // useEffect(() => {
-  //   getBasicPenaltyHandler();
-  // }, []);
-  // const finishEditHandler = () => {
-  //   let errMsg = '';
-  //   if (editedAllNoti.notification < 0) {
-  //     errMsg += '시간은 0 이상이어야합니다.\n';
-  //     console.log(errMsg);
-  //     editedAllNoti.notification = '';
-  //   }
-  //   if (errMsg) alert(errMsg);
-  //   setAllNoti({
-  //     ...editedAllNoti,
-  //     intraID: props.value,
-  //   });
-  //   // setModal({ modalName: null });
-  // };
   useEffect(() => {
     console.log({ allNoti });
     return () => {
@@ -76,21 +44,10 @@ export default function AdminNotiAllModal(props: any) {
   const setModal = useSetRecoilState(modalState);
   const finishEditHandler = () => setModal({ modalName: null });
   const cancelEditHandler = () => setModal({ modalName: null });
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     setOpen(true);
-  };
-
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
   };
 
   return (
@@ -110,25 +67,19 @@ export default function AdminNotiAllModal(props: any) {
         </label>
 
         <div className={styles.btns}>
-          <Stack spacing={2} sx={{ width: '100%' }}>
-            <button
-              onClick={() => {
-                handleClick();
-              }}
-              className={styles.btn}
-            >
-              적용
-            </button>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-              <Alert
-                onClose={handleClose}
-                severity='success'
-                sx={{ width: '100%' }}
-              >
-                This is a success message!
-              </Alert>
-            </Snackbar>
-          </Stack>
+          <button
+            onClick={() => {
+              handleClick();
+            }}
+            className={styles.btn}
+          >
+            적용
+          </button>
+          <CustomizedSnackbars
+            clicked={open}
+            severity='success'
+            message='Successfully Sent!'
+          />
           <button className={styles.btn} onClick={cancelEditHandler}>
             취소
           </button>
