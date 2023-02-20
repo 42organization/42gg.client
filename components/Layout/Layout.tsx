@@ -13,6 +13,7 @@ import Header from './Header';
 import Footer from './Footer';
 import CurrentMatch from './CurrentMatch';
 import AdminLayout from '../admin/Layout';
+import AdminReject from '../admin/AdminReject';
 import styles from 'styles/Layout/Layout.module.scss';
 
 type AppLayoutProps = {
@@ -105,7 +106,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     user.isAdmin ? (
       <AdminLayout>{children}</AdminLayout>
     ) : (
-      <>reject</>
+      <AdminReject />
     )
   ) : (
     <div className={styles.appContainer}>

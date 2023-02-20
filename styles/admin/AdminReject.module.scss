@@ -1,0 +1,52 @@
+@import 'styles/common';
+
+.background {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  min-width: 30rem;
+  height: 100vh;
+  padding: 0 4rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 32rem;
+  min-width: 24rem;
+  height: 100%;
+  max-height: calc(100vh - 8rem);
+  min-height: 28rem;
+  padding: 4rem 2.5rem;
+  border-radius: $medium-radius;
+  background: white;
+  box-shadow: 0.2rem 0.2rem 1rem $gray;
+}
+
+.title {
+  font-size: 3rem;
+  font-family: $logo-font;
+  text-align: center;
+  letter-spacing: 0.2rem;
+}
+
+.content {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.home {
+  @include select-buttons(10rem, 3.5rem);
+  .positive {
+    input {
+      font-size: $big-font;
+      font-weight: 500;
+      box-shadow: 0.1rem 0.1rem 0.3rem $pp-blue;
+    }
+  }
+}
