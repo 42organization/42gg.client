@@ -63,4 +63,5 @@ export interface Modal {
   exp?: Exp;
   gameId?: number;
   intraId?: string;
+  userId?: number;
 }
