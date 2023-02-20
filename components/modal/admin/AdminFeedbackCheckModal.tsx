@@ -1,59 +1,54 @@
 import { useSetRecoilState } from 'recoil';
-import { useEffect, useState } from 'react';
-import styles from 'styles/admin/modal/AdminFeedbackCheck.module.scss';
 import { modalState } from 'utils/recoil/modal';
+import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 import instance from 'utils/axios';
-// import { finished } from 'stream';
-import { useRouter } from 'next/router';
-import GameResultSmallItem from 'components/game/small/GameResultSmallItem';
+import { IoSend } from 'react-icons/io5';
+import styles from 'styles/admin/modal/AdminFeedbackCheck.module.scss';
 
-interface Result {
-  status: string;
-}
-
-export default function AdminFeedbackCheck(props: any) {
-  const [result, setResult] = useState<Result>({
-    status: '',
-  });
+export default function AdminFeedbackCheck({
+  id,
+  intraId,
+  isSolved,
+}: IFeedback) {
   const setModal = useSetRecoilState(modalState);
 
-  const sendReminder: { [key: string]: string } = {
-    YES: '성공적으로 전송되었습니다',
-    NO: '전송이 취소되었습니다',
-  };
-
-  const finishSendHandler = async () => {
-    if (result.status == 'completed') {
-      try {
-        await instance.post(`/admin/feedback/is-solved`);
-        setModal({ modalName: null });
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  };
-
-  const cancelReminderHandler = () => {
-    if (result.status == 'completed') {
+  const sendNotificationHandler = async (isSend: boolean) => {
+    try {
+      await instance.put(`pingpong/admin/feedback/is-solved`, {
+        feedbackId: id,
+      });
+      await instance.post(`pingpong/admin/notifications/${intraId}`, {
+        intraId,
+        message: isSolved
+          ? '피드백을 검토중입니다.'
+          : '피드백이 반영되었습니다.',
+        sendMail: !isSend,
+      });
       setModal({ modalName: null });
+    } catch (e) {
+      console.error(e);
     }
   };
+
   return (
     <div className={styles.whole}>
       <div className={styles.body}>
-        <div className={styles.title}>FEEDBACK REMINDER</div>
-        <div className={styles.text}>
-          Are you sure you want to send the reminder?
+        <div>
+          <IoSend size={42} color={'#1556B8'} />
         </div>
+        <div className={styles.content}>알림을 보내겠습니까?</div>
         <div className={styles.btns}>
           <button
-            className={sendReminder ? `${styles.hide}` : `${styles.btn}`}
-            onClick={finishSendHandler}
+            className={`${styles.btn} ${styles.first}`}
+            onClick={() => sendNotificationHandler(true)}
           >
-            <div className={styles.btntext}>YES</div>
+            확인
           </button>
-          <button className={styles.btn} onClick={cancelReminderHandler}>
-            <div className={styles.btntext}>NO</div>
+          <button
+            className={`${styles.btn} ${styles.second}`}
+            onClick={() => sendNotificationHandler(false)}
+          >
+            취소
           </button>
         </div>
       </div>

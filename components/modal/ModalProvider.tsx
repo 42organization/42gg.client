@@ -17,11 +17,23 @@ import AdminPenaltyModal from './admin/AdminPenaltyModal';
 import AdminNotiAllModal from './admin/AdminNotiAllModal';
 import AdminNotiUserModal from './admin/AdminNotiUserModal';
 import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
+import FeedbackDetailModal from './admin/FeedbackDetailModal';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
   const [
-    { modalName, cancel, enroll, manual, announcement, exp, intraId },
+    {
+      modalName,
+      cancel,
+      enroll,
+      manual,
+      announcement,
+      exp,
+      intraId,
+      detailContent,
+      feedback,
+      userId,
+    },
     setModal,
   ] = useRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
@@ -38,11 +50,17 @@ export default function ModalProvider() {
     'USER-PROFILE_EDIT': <EditProfileModal />,
     'FIXED-AFTER_GAME': <AfterGameModal />,
     'FIXED-STAT': <StatChangeModal {...exp} />,
-    'ADMIN-PROFILE': intraId ? <AdminProfileModal value={intraId} /> : null,
+    'ADMIN-PROFILE': userId ? <AdminProfileModal value={userId} /> : null,
     'ADMIN-PENALTY': intraId ? <AdminPenaltyModal value={intraId} /> : null,
     'ADMIN-NOTI_ALL': intraId ? <AdminNotiAllModal value={intraId} /> : null,
     'ADMIN-NOTI_USER': intraId ? <AdminNotiUserModal value={intraId} /> : null,
-    'ADMIN-CHECK_FEEDBACK': intraId ? <AdminCheckFeedback /> : null,
+    'ADMIN-CHECK_FEEDBACK': feedback ? (
+      <AdminCheckFeedback {...feedback} />
+    ) : null,
+    'ADMIN-DETAIL_CONTENT':
+      intraId && detailContent ? (
+        <FeedbackDetailModal intraId={intraId} detailContent={detailContent} />
+      ) : null,
   };
 
   useEffect(() => {
