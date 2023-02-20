@@ -67,4 +67,5 @@ export interface Modal {
   intraId?: string;
   detailContent?: string;
   feedback?: IFeedback;
+  userId?: number;
 }

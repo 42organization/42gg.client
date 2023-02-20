@@ -32,6 +32,7 @@ export default function ModalProvider() {
       intraId,
       detailContent,
       feedback,
+      userId,
     },
     setModal,
   ] = useRecoilState(modalState);
@@ -49,7 +50,7 @@ export default function ModalProvider() {
     'USER-PROFILE_EDIT': <EditProfileModal />,
     'FIXED-AFTER_GAME': <AfterGameModal />,
     'FIXED-STAT': <StatChangeModal {...exp} />,
-    'ADMIN-PROFILE': intraId ? <AdminProfileModal value={intraId} /> : null,
+    'ADMIN-PROFILE': userId ? <AdminProfileModal value={userId} /> : null,
     'ADMIN-PENALTY': intraId ? <AdminPenaltyModal value={intraId} /> : null,
     'ADMIN-NOTI_ALL': intraId ? <AdminNotiAllModal value={intraId} /> : null,
     'ADMIN-NOTI_USER': intraId ? <AdminNotiUserModal value={intraId} /> : null,
