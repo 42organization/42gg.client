@@ -1,18 +1,8 @@
 import { useSetRecoilState } from 'recoil';
-import { forwardRef, useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from 'styles/admin/modal/AdminNotiAll.module.scss';
 import { modalState } from 'utils/recoil/modal';
 import CustomizedSnackbars from 'components/toastmsg/toastmsg';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import instance from 'utils/axios';
-import { finished } from 'stream';
-
-const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref
-) {
-  return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
-});
 
 interface EditedAllNoti {
   notification: string | number;
@@ -35,12 +25,6 @@ export default function AdminNotiAllModal(props: any) {
     }));
   };
 
-  useEffect(() => {
-    console.log({ allNoti });
-    return () => {
-      console.log({ allNoti });
-    };
-  }, [allNoti]);
   const setModal = useSetRecoilState(modalState);
   const finishEditHandler = () => setModal({ modalName: null });
   const cancelEditHandler = () => setModal({ modalName: null });
