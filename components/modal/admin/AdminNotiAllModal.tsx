@@ -40,7 +40,6 @@ export default function AdminNotiAllModal(props: any) {
         <div className={styles.title}>NOTI FOR ALL</div>
 
         <label className={styles.body}>
-          To: everyone
           <textarea
             className={styles.blank}
             name='notification'
