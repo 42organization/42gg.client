@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import instance from 'utils/axios';
 import styles from 'styles/admin/scheduler/SchedulerEdit.module.scss';
+import SchedulerPreview from './SchedulerPreview';
 
 interface EditedSchedule {
   viewTimePast: number;
   viewTimeFuture: number;
   gameTime: 15 | 30 | 60;
   blindShowTime: number;
-  extraSlotTime: number;
-  slotCreateCycle: number;
 }
 
 export default function SchedulerEdit() {
@@ -17,8 +16,6 @@ export default function SchedulerEdit() {
     viewTimeFuture: 6,
     gameTime: 15,
     blindShowTime: 5,
-    extraSlotTime: 1,
-    slotCreateCycle: 1,
   });
 
   const initInfo = async () => {
@@ -48,7 +45,9 @@ export default function SchedulerEdit() {
 
   return (
     <div className={styles.content}>
-      <div className={styles.imgContainer}>image</div>
+      <div className={styles.imgContainer}>
+        <SchedulerPreview />
+      </div>
       <div className={styles.inputContainer}>
         <div>
           보여주는 시간: ({scheduleInfo.viewTimePast}시간) 현재 (
