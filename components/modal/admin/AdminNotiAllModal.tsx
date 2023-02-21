@@ -31,7 +31,7 @@ export default function AdminNotiAllModal(props: any) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
-    setOpen(true);
+    setOpen((prev) => !prev);
   };
 
   return (
