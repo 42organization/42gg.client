@@ -1,7 +1,7 @@
+import { forwardRef, useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertColor, AlertProps } from '@mui/material/Alert';
-import { forwardRef, useEffect, useState } from 'react';
 
 interface Props {
   severity: AlertColor;
