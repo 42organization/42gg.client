@@ -82,11 +82,12 @@ export default function AdminProfileModal(props: AdminProfileProps) {
         type: 'application/json',
       })
     );
-    formData.append(
-      'multipartFile',
-      new Blob([imgData as File], { type: 'image/jpeg' })
-    );
-
+    if (imgData) {
+      formData.append(
+        'multipartFile',
+        new Blob([imgData], { type: 'image/jpeg' })
+      );
+    }
     try {
       await instance.put(
         `/pingpong/admin/users/${props.value}/detail`,
@@ -109,8 +110,8 @@ export default function AdminProfileModal(props: AdminProfileProps) {
               <label className={styles.image}>
                 <Image
                   src={imgPreview ? imgPreview : `${userInfo?.userImageUri}`}
-                  width='120'
-                  height='110'
+                  width='200'
+                  height='200'
                   alt='Profile Image'
                 />
                 <input
