@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { tableColumnNames } from 'types/admin/tableTypes';
+import { tableFormat } from 'constants/admin/table';
 import instance from 'utils/axios';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
@@ -110,7 +110,7 @@ export default function UserManagementTable() {
           <Table className={styles.table} aria-label='customized table'>
             <TableHead className={styles.tableHeader}>
               <TableRow>
-                {tableColumnNames['userInfo'].columns.map((columnName) => (
+                {tableFormat['userInfo'].columns.map((columnName) => (
                   <TableCell
                     className={styles.tableHeaderItem}
                     key={columnName}
@@ -123,32 +123,28 @@ export default function UserManagementTable() {
             <TableBody className={styles.tableBody}>
               {userManagements.userInfoList.map((userInfo: IUser) => (
                 <TableRow key={userInfo.id}>
-                  {tableColumnNames['userInfo'].columns.map(
-                    (columnName: string) => {
-                      return (
-                        <TableCell
-                          className={styles.tableBodyItem}
-                          key={columnName}
-                        >
-                          {columnName !== 'etc'
-                            ? userInfo[columnName as keyof IUser]
-                            : tableColumnNames['userInfo'].etc.value.map(
-                                (buttonName: string, index: number) => (
-                                  <button
-                                    key={buttonName}
-                                    className={`${styles.button} ${buttonList[index]}`}
-                                    onClick={() =>
-                                      handleButtonAction(buttonName)
-                                    }
-                                  >
-                                    {buttonName}
-                                  </button>
-                                )
-                              )}
-                        </TableCell>
-                      );
-                    }
-                  )}
+                  {tableFormat['userInfo'].columns.map((columnName: string) => {
+                    return (
+                      <TableCell
+                        className={styles.tableBodyItem}
+                        key={columnName}
+                      >
+                        {columnName !== 'etc'
+                          ? userInfo[columnName as keyof IUser]
+                          : tableFormat['userInfo'].etc?.value.map(
+                              (buttonName: string, index: number) => (
+                                <button
+                                  key={buttonName}
+                                  className={`${styles.button} ${buttonList[index]}`}
+                                  onClick={() => handleButtonAction(buttonName)}
+                                >
+                                  {buttonName}
+                                </button>
+                              )
+                            )}
+                      </TableCell>
+                    );
+                  })}
                 </TableRow>
               ))}
             </TableBody>
