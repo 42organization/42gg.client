@@ -11,57 +11,26 @@
   font-size: 2rem;
 }
 
-.announcementList {
-  list-style: none;
+.quillViewer {
   width: 100%;
-  max-height: 50vh;
-  color: black;
+  min-width: 10rem;
+  max-width: 15rem;
+  height: 100%;
+  max-height: 19rem;
   overflow-y: scroll;
-
-  > li {
-    list-style: none;
-    margin-block: 1rem;
-    > div {
-      margin-left: 0.3rem;
-      font-size: $big-font;
-      font-weight: 700;
-    }
-  }
+  margin: 1rem 0;
+  color: black;
 }
 
-.announcementList::-webkit-scrollbar {
+.quillViewer::-webkit-scrollbar {
   display: inherit;
   width: 5px;
   height: 1rem;
 }
 
-.announcementList::-webkit-scrollbar-thumb {
+.quillViewer::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background: white;
-}
-
-.contentList {
-  margin-top: 0.8rem;
-  font-size: $medium-font;
-
-  > li {
-    list-style: none;
-    margin-bottom: 0.3rem;
-    white-space: pre-wrap;
-  }
-  a {
-    color: $pp-blue;
-    text-decoration: none;
-  }
-  a:visited {
-    color: $dark-blue;
-  }
-  a:hover {
-    background: $g1-bottom;
-  }
-  a:active {
-    background: $g1-top;
-  }
 }
 
 .checkBox {
