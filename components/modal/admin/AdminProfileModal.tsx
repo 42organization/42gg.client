@@ -114,6 +114,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
                     width='200'
                     height='200'
                     alt='이미지가 규격에 맞지 않거나 없습니다'
+                    layout='fill'
                   />
                 )}
                 <input
