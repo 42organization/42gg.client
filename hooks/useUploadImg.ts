@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import imageCompression from 'browser-image-compression';
 
-export default async function useUploadImg() {
+export default function useUploadImg() {
   const [imgData, setImgData] = useState<File | null>(null);
   const [imgPreview, setImgPreview] = useState<string>('');
   const [file, setFile] = useState<File | null>(null);
