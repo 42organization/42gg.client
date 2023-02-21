@@ -24,7 +24,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
     wins: 0,
     losses: 0,
     ppp: 0,
-    eMail: '',
+    email: '',
     roleType: 'ROLE_USER',
   });
 
@@ -73,7 +73,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
       wins: userInfo.wins,
       losses: userInfo.losses,
       ppp: userInfo.ppp,
-      eMail: userInfo.eMail,
+      email: userInfo.email,
       roleType: userInfo.roleType,
     };
     formData.append(
@@ -128,9 +128,9 @@ export default function AdminProfileModal(props: AdminProfileProps) {
                 <div>
                   <input
                     className={styles.topRightInput}
-                    name='eMail'
+                    name='email'
                     onChange={inputHandler}
-                    value={userInfo?.eMail}
+                    value={userInfo?.email}
                   />
                 </div>
               </div>
