@@ -108,12 +108,14 @@ export default function AdminProfileModal(props: AdminProfileProps) {
           <div className={styles.top}>
             <div className={styles.imageWrap}>
               <label className={styles.image}>
-                <Image
-                  src={imgPreview ? imgPreview : `${userInfo?.userImageUri}`}
-                  width='200'
-                  height='200'
-                  alt='Profile Image'
-                />
+                {userInfo.userImageUri && (
+                  <Image
+                    src={imgPreview ? imgPreview : `${userInfo?.userImageUri}`}
+                    width='200'
+                    height='200'
+                    alt='Profile Image'
+                  />
+                )}
                 <input
                   type='file'
                   style={{ display: 'none' }}
