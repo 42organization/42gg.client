@@ -20,8 +20,8 @@ export default function SchedulerEdit() {
 
   const initInfo = async () => {
     try {
-      const res = await instance.get(`/pingpong/admin/scheduler`); //api 명세 아직 없음
-      setScheduleInfo(res?.data);
+      // const res = await instance.get(`/pingpong/admin/scheduler`); //api 명세 아직 없음
+      // setScheduleInfo(res?.data);
     } catch (e) {
       console.error(e);
     }
