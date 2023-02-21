@@ -15,7 +15,7 @@ export const tableFormat: TableFormat = {
   },
   userInfo: {
     name: '사용자 정보',
-    columns: ['Index', 'role', 'intraId', 'message', 'etc'],
+    columns: ['id', 'roleType', 'intraId', 'statusMessage', 'etc'],
     etc: {
       type: 'button',
       value: ['자세히', '패널티 부여'],
