@@ -1,8 +1,8 @@
-import { useSetRecoilState } from 'recoil';
 import { useState } from 'react';
-import styles from 'styles/admin/modal/AdminNotiAll.module.scss';
+import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import CustomizedSnackbars from 'components/toastmsg/toastmsg';
+import styles from 'styles/admin/modal/AdminNotiAll.module.scss';
 
 interface EditedAllNoti {
   notification: string | number;
