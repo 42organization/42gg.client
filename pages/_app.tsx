@@ -8,6 +8,7 @@ import Layout from 'components/Layout/Layout';
 import ErrorChecker from 'components/error/ErrorChecker';
 import LoginChecker from 'components/LoginChecker';
 import ModalProvider from 'components/modal/ModalProvider';
+import CustomizedSnackbars from 'components/toastmsg/toastmsg';
 import * as gtag from 'lib/gtag';
 import 'styles/globals.css';
 
@@ -54,6 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
             </Layout>
             <ModalProvider />
+            <CustomizedSnackbars />
           </ErrorChecker>
         </LoginChecker>
       </RecoilRoot>
