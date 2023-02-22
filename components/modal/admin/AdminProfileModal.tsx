@@ -203,21 +203,21 @@ export default function AdminProfileModal(props: AdminProfileProps) {
                 <input
                   name='wins'
                   onChange={inputNumHandler}
-                  value={userInfo?.wins}
+                  value={userInfo.wins ?? ''}
                 />
               </div>
               <div>
                 <input
                   name='losses'
                   onChange={inputNumHandler}
-                  value={userInfo?.losses}
+                  value={userInfo.losses ?? ''}
                 />
               </div>
               <div>
                 <input
                   name='ppp'
                   onChange={inputNumHandler}
-                  value={userInfo?.ppp}
+                  value={userInfo.ppp ?? ''}
                 />
               </div>
             </div>
