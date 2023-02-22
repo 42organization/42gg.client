@@ -23,9 +23,7 @@ export default function CustomizedSnackbars() {
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    if (reason === 'clickaway' || reason === 'escapeKeyDown') {
-      return;
-    }
+    if (reason === 'clickaway' || reason === 'escapeKeyDown') return;
     setSnackBar({ toastName: null });
   };
 
