@@ -90,10 +90,12 @@ export default function AdminProfileModal(props: AdminProfileProps) {
       );
     }
     try {
-      await instance.put(
+      const res = await instance.put(
         `/pingpong/admin/users/${props.value}/detail`,
         formData
       );
+      //if (res.status === 207)
+      // CustomizedSnackbars
     } catch (e) {
       //   CustomizedSnackbars(severity='error', message=`${e.response.message}`, clicked=true);
     }
