@@ -2,11 +2,11 @@
   display: flex;
   display: inline-block;
   display: inline-block;
+  align-items: center;
   justify-content: center;
   width: 25rem;
   height: 40rem;
   text-align: center;
-  align-items: center;
 }
 
 .title {
@@ -41,6 +41,7 @@
 
 .btn {
   display: flex;
+  align-items: center;
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
@@ -49,7 +50,6 @@
   height: 40px;
   font-weight: bold;
   text-align: center;
-  align-items: center;
 }
 
 .hide {
