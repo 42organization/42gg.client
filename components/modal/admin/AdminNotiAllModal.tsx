@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import CustomizedSnackbars from 'components/toastmsg/toastmsg';
 import styles from 'styles/admin/modal/AdminNotiAll.module.scss';
+import { toastState } from 'utils/recoil/toast';
 
 interface EditedAllNoti {
   notification: string | number;
 }
 
-export default function AdminNotiAllModal(props: any) {
+export default function AdminNotiAllModal() {
   const [allNoti, setAllNoti] = useState<any>(/* 초기값 필요 */);
   const [editedAllNoti, setEditedAllNoti] = useState<EditedAllNoti>({
     notification: '',
@@ -28,10 +28,15 @@ export default function AdminNotiAllModal(props: any) {
   const setModal = useSetRecoilState(modalState);
   const finishEditHandler = () => setModal({ modalName: null });
   const cancelEditHandler = () => setModal({ modalName: null });
-  const [open, setOpen] = useState(false);
+  const setSnackBar = useSetRecoilState(toastState);
 
   const handleClick = () => {
-    setOpen((prev) => !prev);
+    setSnackBar({
+      toastName: 'noti all',
+      severity: 'success',
+      message: 'Successfully Sent!',
+      clicked: true,
+    });
   };
 
   return (
@@ -58,11 +63,6 @@ export default function AdminNotiAllModal(props: any) {
           >
             적용
           </button>
-          <CustomizedSnackbars
-            clicked={open}
-            severity='success'
-            message='Successfully Sent!'
-          />
           <button className={styles.btn} onClick={cancelEditHandler}>
             취소
           </button>

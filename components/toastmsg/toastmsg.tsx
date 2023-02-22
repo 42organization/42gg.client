@@ -1,13 +1,9 @@
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { toastState } from 'utils/recoil/toast';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertColor, AlertProps } from '@mui/material/Alert';
-
-interface Props {
-  severity: AlertColor;
-  message: string;
-  clicked: boolean;
-}
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -16,18 +12,12 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
 });
 
-export default function CustomizedSnackbars({
-  severity,
-  message,
-  clicked,
-}: Props) {
-  const [open, setOpen] = useState(false);
-
+export default function CustomizedSnackbars() {
+  const [{ severity, message, clicked }, setSnackBar] =
+    useRecoilState(toastState);
   useEffect(() => {
-    if (clicked) {
-      setOpen(true);
-    }
-  }, [clicked]);
+    if (clicked) setSnackBar({ toastName: null });
+  }, []);
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -36,13 +26,16 @@ export default function CustomizedSnackbars({
     if (reason === 'clickaway' || reason === 'escapeKeyDown') {
       return;
     }
-
-    setOpen(false);
+    setSnackBar({ toastName: null });
   };
 
   return (
     <Stack spacing={2} sx={{ width: '100%' }}>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar
+        open={clicked ?? false}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
         <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
           {message}
         </Alert>
