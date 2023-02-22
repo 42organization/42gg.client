@@ -21,9 +21,9 @@ export default function AdminProfileModal(props: AdminProfileProps) {
     userImageUri: null,
     statusMessage: '',
     racketType: 'shakeHand',
-    wins: 0,
-    losses: 0,
-    ppp: 0,
+    wins: '',
+    losses: '',
+    ppp: '',
     email: '',
     roleType: 'ROLE_USER',
   });
@@ -59,7 +59,8 @@ export default function AdminProfileModal(props: AdminProfileProps) {
   const inputNumHandler = ({
     target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    const intValue = parseInt(value);
+    let intValue = parseInt(value);
+    if (isNaN(intValue)) intValue = 0;
     setUserInfo({ ...userInfo, [name]: intValue });
   };
 
@@ -111,8 +112,6 @@ export default function AdminProfileModal(props: AdminProfileProps) {
                 {userInfo.userImageUri && (
                   <Image
                     src={imgPreview ? imgPreview : `${userInfo?.userImageUri}`}
-                    width='200'
-                    height='200'
                     alt='이미지가 규격에 맞지 않거나 없습니다'
                     layout='fill'
                   />
@@ -134,7 +133,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
                     className={styles.topRightInput}
                     name='email'
                     onChange={inputHandler}
-                    value={userInfo?.email}
+                    value={userInfo.email ?? ''}
                   />
                 </div>
               </div>
@@ -147,7 +146,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
           <textarea
             name='statusMessage'
             onChange={inputHandler}
-            value={userInfo?.statusMessage}
+            value={userInfo.statusMessage ?? ''}
           />
         </div>
         <div className={styles.bottom}>
@@ -201,7 +200,6 @@ export default function AdminProfileModal(props: AdminProfileProps) {
               <div>
                 <input
                   name='wins'
-                  type='number'
                   onChange={inputNumHandler}
                   value={userInfo?.wins}
                 />
@@ -209,7 +207,6 @@ export default function AdminProfileModal(props: AdminProfileProps) {
               <div>
                 <input
                   name='losses'
-                  type='number'
                   onChange={inputNumHandler}
                   value={userInfo?.losses}
                 />
@@ -217,7 +214,6 @@ export default function AdminProfileModal(props: AdminProfileProps) {
               <div>
                 <input
                   name='ppp'
-                  type='number'
                   onChange={inputNumHandler}
                   value={userInfo?.ppp}
                 />

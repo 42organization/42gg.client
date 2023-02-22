@@ -2,11 +2,11 @@ export type UserInfo = {
   intraId: string;
   userImageUri: string | null;
   racketType: string;
-  statusMessage: string | '';
-  wins: number;
-  losses: number;
-  ppp: number;
-  email: string | '';
+  statusMessage: string;
+  wins: number | '';
+  losses: number | '';
+  ppp: number | '';
+  email: string;
   roleType: string;
 };
 
