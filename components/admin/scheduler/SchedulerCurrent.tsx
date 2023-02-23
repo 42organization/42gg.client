@@ -43,37 +43,25 @@ export default function SchedulerCurrent() {
       {slotInfo.matchBoards.map((slot: Slots[], index) => {
         console.log(slot.length);
         return (
-          <>
-            <div>
+          <div key={index} className={styles.hourContainer}>
+            <div className={styles.time}>
               {slot[0].time[11] === '0' ? '' : slot[0].time[11]}
               {slot[0].time[12]}시
             </div>
-            <div key={index} className={styles.hourContainer}>
-              {slot.map((item, i) => (
-                <div key={i}>
+            <div className={styles[`hourSlot${slot.length}`]}>
+              {slot.map((item) => (
+                <div
+                  key={item.slotId}
+                  className={`${styles[`minuteSlot${slot.length}`]}
+					${styles[`${item.status}`]}`}
+                >
                   <div>{item.status}</div>
                 </div>
               ))}
             </div>
-          </>
+          </div>
         );
       })}
     </div>
   );
 }
-
-// {racketTypes.map((racket, index) => {
-// 	return (
-// 	  <label key={index} htmlFor={racket.id}>
-// 		<input
-// 		  type='radio'
-// 		  name='racketType'
-// 		  id={racket.id}
-// 		  value={racket.id}
-// 		  onChange={inputHandler}
-// 		  checked={userInfo?.racketType === racket.id}
-// 		/>
-// 		<div className={styles.radioButton}>{racket.label}</div>
-// 	  </label>
-// 	);
-//   })}
