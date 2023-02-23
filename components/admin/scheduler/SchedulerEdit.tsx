@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import instance from 'utils/axios';
 import styles from 'styles/admin/scheduler/SchedulerEdit.module.scss';
+import SchedulerCurrent from './SchedulerCurrent';
 import SchedulerPreview from './SchedulerPreview';
 
 interface EditedSchedule {
@@ -46,6 +47,7 @@ export default function SchedulerEdit() {
   return (
     <div className={styles.content}>
       <div className={styles.imgContainer}>
+        <SchedulerCurrent />
         <SchedulerPreview />
       </div>
       <div className={styles.inputContainer}>

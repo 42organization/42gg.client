@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react';
 
-// type ISlotInfo = {
-//   slotId: number;
-//   time: string;
-//   isMatched: boolean;
-//   myTeam: string[];
-//   enemyTeam: string[];
-// };
-
-export default function SchedulerPreview() {
-  const [slotInfo, setSlotInfo] = useState<any>({
+export default function SchedulerCurrent() {
+  const [slotPrevInfo, setSlotPrevInfo] = useState<any>({
     slot: [],
   });
+
+  useEffect(() => {
+    initSlotInfo();
+  }, []);
 
   const initSlotInfo = async () => {
     try {
@@ -19,16 +15,10 @@ export default function SchedulerPreview() {
         `http://localhost:3000/api/pingpong/admin/scheduler/preview`
       ); //api 명세 아직 없음
       const data = await res.json();
-      setSlotInfo({ ...data });
-      console.log(slotInfo);
+      setSlotPrevInfo({ ...data });
     } catch (e) {
       console.error(e);
     }
   };
-
-  useEffect(() => {
-    initSlotInfo();
-  }, []);
-
   return <div></div>;
 }

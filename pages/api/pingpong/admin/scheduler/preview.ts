@@ -16,7 +16,6 @@ export default function handler(
 
   for (let i = 0; i < 24; i++) {
     const hour = 10 + i / 4;
-    console.log(hour);
     const minute = String((i % 4) * 15);
 
     slot.push({
@@ -27,6 +26,5 @@ export default function handler(
       enemyTeam: [],
     });
   }
-  console.log(slot);
   res.status(200).json(slot);
 }
