@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { tableColumnNames } from 'types/admin/tableTypes';
+import { tableFormat } from 'constants/admin/table';
 import {
   Paper,
   Table,
@@ -14,6 +14,7 @@ import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import CreateNotiButton from 'components/admin/notification/CreateNotiButton';
 import style from 'styles/admin/notification/NotificationTable.module.scss';
+import instance from 'utils/axios';
 
 interface INotification {
   notiId: number;
@@ -41,9 +42,8 @@ export default function NotificationTable() {
 
   const getUserNotifications = useCallback(async () => {
     try {
-      // TODO! : change to real endpoint
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_ADMIN_MOCK_ENDPOINT}/notifications/${intraId}?page=${currentPage}`
+      const res = await instance.get(
+        `pingpong/admin/notifications?q=${intraId}&page=${currentPage}&size=10`
       );
       setIntraId(intraId);
       setNotificationInfo({ ...res.data });
@@ -59,9 +59,8 @@ export default function NotificationTable() {
 
   const getAllUserNotifications = useCallback(async () => {
     try {
-      // TODO! : change to real endpoint
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_ADMIN_MOCK_ENDPOINT}/notifications?page=${currentPage}`
+      const res = await instance.get(
+        `pingpong/admin/notifications?page=${currentPage}&size=10`
       );
       setIntraId('');
       setNotificationInfo({ ...res.data });
@@ -74,8 +73,8 @@ export default function NotificationTable() {
     intraId ? getUserNotifications() : getAllUserNotifications();
   }, [intraId, getUserNotifications, getAllUserNotifications]);
 
-  if (notificationInfo === undefined) {
-    return <div>loading...</div>;
+  if (notificationInfo.notiList.length === 0) {
+    return <div>비어있습니다!</div>;
   }
 
   return (
@@ -90,7 +89,7 @@ export default function NotificationTable() {
           <Table className={style.table} aria-label='customized table'>
             <TableHead className={style.tableHeader}>
               <TableRow>
-                {tableColumnNames['notification'].map((columnName) => (
+                {tableFormat['notification'].columns.map((columnName) => (
                   <TableCell className={style.tableHeaderItem} key={columnName}>
                     {columnName}
                   </TableCell>
@@ -100,15 +99,13 @@ export default function NotificationTable() {
             <TableBody className={style.tableBody}>
               {notificationInfo.notiList.map((notification: INotification) => (
                 <TableRow key={notification.notiId}>
-                  {Object.values(notification).map(
-                    (value: number | string | boolean, index: number) => {
+                  {tableFormat['notification'].columns.map(
+                    (columnName: string, index: number) => {
                       return (
                         <TableCell className={style.tableBodyItem} key={index}>
-                          {typeof value === 'boolean'
-                            ? value
-                              ? 'Checked'
-                              : 'Unchecked'
-                            : value}
+                          {notification[
+                            columnName as keyof INotification
+                          ]?.toString()}
                         </TableCell>
                       );
                     }
