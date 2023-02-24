@@ -1,4 +1,4 @@
-export type TableName = 'notification' | 'userInfo' | 'feedback';
+export type TableName = 'notification' | 'userInfo' | 'feedback' | 'games';
 export type EtcType = 'button' | 'toggle';
 
 export type TableFormat = {

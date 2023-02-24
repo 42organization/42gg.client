@@ -36,4 +36,8 @@ export const tableFormat: TableFormat = {
       value: ['completed', 'notCompleted'],
     },
   },
+  games: {
+    name: '게임 관리',
+    columns: ['gameId', 'startAt', 'playTime', 'mode', 'team1', 'team2'],
+  },
 };
