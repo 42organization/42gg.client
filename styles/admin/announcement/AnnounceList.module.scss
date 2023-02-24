@@ -2,18 +2,22 @@
 @import 'styles/admin/common/Pagination.module.scss';
 
 .container {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
   width: 100%;
+  max-width: 61.5rem;
   height: 100%;
 }
 
 .quillViewer {
   width: 100%;
-  min-width: 10rem;
-  max-width: 15rem;
+  max-width: 16rem;
   height: 100%;
   max-height: 19rem;
+  margin: 0.5rem;
+  padding: 0;
   overflow-y: scroll;
-  margin: 1rem 0;
   color: black;
 }
 
@@ -25,47 +29,41 @@
 
 .quillViewer::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: white;
+  background: $gray;
 }
 
 .header {
-  width: 700px;
-  margin: 10px auto;
+  width: 100%;
+  padding: 0.5rem 1rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .title {
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 700;
+  font-size: $big-font;
   line-height: 150%;
 }
 
 .tableContainer {
-  width: 700px;
-  margin: auto;
-
   .table {
-    min-width: 700px;
-
     .tableHeader {
       background-color: lightgray;
 
       .tableHeaderItem {
-        padding: 10px;
+        padding: 0.5rem;
         text-align: center;
         font-weight: 600;
-        font-size: 14px;
+        font-size: $small-font;
         line-height: 150%;
       }
     }
 
     .tableBody {
       .tableBodyItem {
-        padding: 10px;
+        padding: 0.5rem;
         text-align: center;
-        line-height: 150%;
+        font-size: $small-font;
+        line-height: 100%;
       }
     }
   }

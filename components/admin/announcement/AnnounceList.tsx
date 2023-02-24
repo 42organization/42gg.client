@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import instance from 'utils/axios';
-import 'react-quill/dist/quill.snow.css';
-import 'react-quill/dist/quill.bubble.css';
+import PageNation from 'components/Pagination';
+import { tableFormat } from 'constants/admin/table';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import {
   Paper,
@@ -13,8 +13,8 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { tableFormat } from '../../../constants/admin/table';
-import PageNation from '../../Pagination';
+import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.bubble.css';
 import styles from 'styles/admin/announcement/AnnounceList.module.scss';
 
 const Quill = dynamic(() => import('react-quill'), {
@@ -48,7 +48,7 @@ export default function AnnounceList() {
   const getAnnouncements = useCallback(async () => {
     try {
       const res = await instance.get(
-        `pingpong/admin/announcement?page=${currentPage}&size=10`
+        `pingpong/admin/announcement?page=${currentPage}&size=5`
       );
       console.log(res.data);
       setAnnouncementInfo({ ...res.data });
