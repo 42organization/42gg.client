@@ -15,19 +15,14 @@ type Slots = {
   mode: string;
 };
 
-export default function SchedulerCurrent() {
+export default function SchedulerCurrent(props: { slotInfo: Match }) {
   const [slotInfo, setSlotInfo] = useState<Match>({
     intervalMinute: 0,
     matchBoards: [],
   });
 
-  const initSlotInfo = async () => {
-    try {
-      const res = await instance.get(`/pingpong/match/tables/${1}/rank/single`);
-      setSlotInfo({ ...res?.data });
-    } catch (e) {
-      console.error(e);
-    }
+  const initSlotInfo = () => {
+    setSlotInfo(props.slotInfo);
   };
 
   useEffect(() => {
@@ -37,7 +32,6 @@ export default function SchedulerCurrent() {
   return (
     <div className={styles.current}>
       {slotInfo.matchBoards.map((slot: Slots[], index) => {
-        console.log(slot.length);
         return (
           <div key={index} className={styles.hourContainer}>
             <div className={styles.time}>
