@@ -8,6 +8,7 @@ import {
   TableRow,
 } from '@mui/material';
 import axios from 'axios';
+import PageNation from 'components/Pagination';
 import { tableFormat } from 'constants/admin/table';
 import { useCallback, useEffect, useState } from 'react';
 import style from 'styles/admin/games/GamesTable.module.scss';
@@ -54,7 +55,7 @@ export default function GamesTable() {
         currentPage: res.data.currentPage,
       });
     } catch (e) {
-      console.error('MS07');
+      console.error('MS08');
     }
   }, [intraId, currentPage]);
 
@@ -68,7 +69,7 @@ export default function GamesTable() {
     <>
       <div className={style.gamesWrap}>
         <div className={style.header}>
-          <div className={style.title}>게임 관리!!</div>
+          <div className={style.title}>게임 관리</div>
           <AdminSearchBar initSearch={initSearch} />
         </div>
         <TableContainer className={style.tableContainer} component={Paper}>
@@ -123,6 +124,13 @@ export default function GamesTable() {
             </TableBody>
           </Table>
         </TableContainer>
+        <div className={style.pageNationContainer}>
+          <PageNation
+            curPage={gameInfo.currentPage}
+            totalPages={gameInfo.totalPage}
+            pageChangeHandler={setCurrentPage}
+          />
+        </div>
       </div>
     </>
   );
