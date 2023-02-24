@@ -1,3 +1,9 @@
+.current {
+  width: auto;
+  height: 500px;
+  overflow-y: scroll;
+}
+
 .hourContainer {
   display: flex;
   margin-top: 5px;
@@ -14,6 +20,7 @@
   height: 52px;
   border: 1px solid black;
 }
+
 .hourSlot4 {
   display: flex;
   flex-wrap: wrap;
@@ -21,11 +28,13 @@
   height: 52px;
   border: 1px solid black;
 }
+
 .minuteSlot3 {
   width: 100px;
   height: 25px;
   border: 1px solid black;
 }
+
 .minuteSlot4 {
   width: 100px;
   height: 25px;

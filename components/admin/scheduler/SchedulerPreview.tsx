@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function SchedulerCurrent() {
+export default function SchedulerPreview(props: any) {
   const [slotPrevInfo, setSlotPrevInfo] = useState<any>({
     slot: [],
   });
@@ -9,16 +9,8 @@ export default function SchedulerCurrent() {
     initSlotInfo();
   }, []);
 
-  const initSlotInfo = async () => {
-    try {
-      const res = await fetch(
-        `http://localhost:3000/api/pingpong/admin/scheduler/preview`
-      ); //api 명세 아직 없음
-      const data = await res.json();
-      setSlotPrevInfo({ ...data });
-    } catch (e) {
-      console.error(e);
-    }
+  const initSlotInfo = () => {
+    //ToDo: props.scheduleInfo 토대로 슬롯 정보 객체 생성
   };
-  return <div></div>;
+  return <div>{/* ToDo: 새로 생성되는 슬롯 */}</div>;
 }

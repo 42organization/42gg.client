@@ -1,9 +1,9 @@
-import SchedulerEdit from 'components/admin/scheduler/SchedulerEdit';
+import SchedulerMain from 'components/admin/scheduler/SchedulerMain';
 
 export default function Scheduler() {
   return (
     <>
-      <SchedulerEdit />
+      <SchedulerMain />
     </>
   );
 }

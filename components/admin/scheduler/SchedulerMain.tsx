@@ -11,7 +11,7 @@ interface EditedSchedule {
   blindShowTime: number;
 }
 
-export default function SchedulerEdit() {
+export default function SchedulerMain() {
   const [scheduleInfo, setScheduleInfo] = useState<EditedSchedule>({
     viewTimePast: 6,
     viewTimeFuture: 6,
@@ -21,7 +21,7 @@ export default function SchedulerEdit() {
 
   const initInfo = async () => {
     try {
-      // const res = await instance.get(`/pingpong/admin/scheduler`); //api 명세 아직 없음
+      // const res = await instance.get(``); //ToDo: api 명세 나오면 바꾸기
       // setScheduleInfo(res?.data);
     } catch (e) {
       console.error(e);
@@ -48,7 +48,7 @@ export default function SchedulerEdit() {
     <div className={styles.content}>
       <div className={styles.imgContainer}>
         <SchedulerCurrent />
-        <SchedulerPreview />
+        <SchedulerPreview scheduleInfo={scheduleInfo} />
       </div>
       <div className={styles.inputContainer}>
         <div>
@@ -72,14 +72,6 @@ export default function SchedulerEdit() {
         <div>
           블라인드 해제 시간
           <input type='number' name='blindShowTime' onChange={inputHandler} />
-        </div>
-        <div>
-          여유 슬롯 시간
-          <input type='number' name='extraSlotTime' onChange={inputHandler} />
-        </div>
-        <div>
-          슬롯 생성 주기
-          <input type='number' name='slotCreateCycle' onChange={inputHandler} />
         </div>
       </div>
     </div>

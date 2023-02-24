@@ -39,7 +39,7 @@ export default function SchedulerCurrent() {
   }, [slotInfo]);
 
   return (
-    <div>
+    <div className={styles.current}>
       {slotInfo.matchBoards.map((slot: Slots[], index) => {
         console.log(slot.length);
         return (
