@@ -1,8 +1,9 @@
 export interface ITeam {
-  intraId: string;
+  intraId1: string;
+  intraId2?: string;
   teamId: number;
-  score?: number;
-  win?: boolean;
+  score: number;
+  win: boolean;
 }
 
 export interface IGameLog {
@@ -15,7 +16,7 @@ export interface IGameLog {
 }
 
 export interface IGames {
-  gameLog: IGameLog[] | null;
+  gameLog: IGameLog[] | [];
   currentPage: number;
   totalPage: number;
 }
