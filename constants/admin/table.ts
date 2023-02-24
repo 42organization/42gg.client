@@ -36,4 +36,15 @@ export const tableFormat: TableFormat = {
       value: ['completed', 'notCompleted'],
     },
   },
+  announcement: {
+    name: '과거 공지사항',
+    columns: [
+      'content',
+      'createdTime',
+      'creatorIntraId',
+      'deletedTime',
+      'deleterIntraId',
+      'isDel',
+    ],
+  },
 };
