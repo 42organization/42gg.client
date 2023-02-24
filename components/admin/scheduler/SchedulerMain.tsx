@@ -4,22 +4,43 @@ import styles from 'styles/admin/scheduler/SchedulerEdit.module.scss';
 import SchedulerCurrent from './SchedulerCurrent';
 import SchedulerPreview from './SchedulerPreview';
 
-interface EditedSchedule {
+type EditedSchedule = {
   viewTimePast: number;
   viewTimeFuture: number;
-  gameTime: 15 | 30 | 60;
+  gameTime: number;
   blindShowTime: number;
-}
+};
+
+type Match = {
+  intervalMinute: number;
+  matchBoards: Slots[][];
+};
+
+type Slots = {
+  slotId: number;
+  status: string;
+  headCount: number;
+  time: string;
+  mode: string;
+};
 
 export default function SchedulerMain() {
   const [scheduleInfo, setScheduleInfo] = useState<EditedSchedule>({
-    viewTimePast: 6,
-    viewTimeFuture: 6,
+    viewTimePast: 0,
+    viewTimeFuture: 0,
     gameTime: 15,
     blindShowTime: 5,
   });
 
-  const initInfo = async () => {
+  const [slotInfo, setSlotInfo] = useState<Match>({
+    intervalMinute: 0,
+    matchBoards: [],
+  });
+
+  const [showTime, setShowTime] = useState<number>(0);
+  const [lastHour, setLastHour] = useState<number>(0);
+
+  const initScheduleInfo = async () => {
     try {
       // const res = await instance.get(``); //ToDo: api 명세 나오면 바꾸기
       // setScheduleInfo(res?.data);
@@ -28,15 +49,32 @@ export default function SchedulerMain() {
     }
   };
 
+  const initSlotInfo = async () => {
+    try {
+      const res = await instance.get(`/pingpong/match/tables/${1}/rank/single`);
+      setSlotInfo({ ...res?.data });
+      setShowTime(res?.data.matchBoards.length);
+      setLastHour(
+        parseInt(
+          res?.data.matchBoards[res?.data.matchBoards.length - 1][0].time[11]
+        ) *
+          10 +
+          parseInt(
+            res?.data.matchBoards[res?.data.matchBoards.length - 1][0].time[12]
+          ) +
+          1
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   useEffect(() => {
-    initInfo();
+    initScheduleInfo();
+    initSlotInfo();
   }, []);
 
-  const inputHandler = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setScheduleInfo((prev) => ({
       ...prev,
@@ -44,11 +82,30 @@ export default function SchedulerMain() {
     }));
   };
 
+  const inputNumHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    const intValue = parseInt(value);
+    console.log(intValue);
+    setScheduleInfo((prev) => ({
+      ...prev,
+      [name]: intValue,
+    }));
+  };
+
   return (
     <div className={styles.content}>
       <div className={styles.imgContainer}>
-        <SchedulerCurrent />
-        <SchedulerPreview scheduleInfo={scheduleInfo} />
+        {slotInfo.matchBoards.length > 0 && (
+          <SchedulerCurrent slotInfo={slotInfo} />
+        )}
+        {scheduleInfo.viewTimeFuture + scheduleInfo.viewTimeFuture > 0 &&
+          showTime > 0 && (
+            <SchedulerPreview
+              lastHour={lastHour}
+              showTime={showTime}
+              scheduleInfo={scheduleInfo}
+            />
+          )}
       </div>
       <div className={styles.inputContainer}>
         <div>
@@ -63,7 +120,7 @@ export default function SchedulerMain() {
         </div>
         <div>
           게임 시간
-          <select name='gameTime' onChange={() => inputHandler}>
+          <select name='gameTime' onChange={inputNumHandler}>
             <option value='15'>15분</option>
             <option value='30'>30분</option>
             <option value='60'>60분</option>
