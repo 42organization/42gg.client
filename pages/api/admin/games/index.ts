@@ -15,7 +15,7 @@ function generateGamelog(): IGames {
   const teams = [
     [
       {
-        intraId: intraIds[0],
+        intraId1: intraIds[0],
         teamId: teamNumber[0],
         score: 10,
         win: true,
@@ -23,7 +23,7 @@ function generateGamelog(): IGames {
     ],
     [
       {
-        intraId: intraIds[1],
+        intraId1: intraIds[1],
         teamId: teamNumber[1],
         score: 5,
         win: false,
@@ -31,27 +31,17 @@ function generateGamelog(): IGames {
     ],
     [
       {
-        intraId: intraIds[0],
+        intraId1: intraIds[0],
+        intraId2: intraIds[1],
         teamId: teamNumber[0],
-        score: 15,
-        win: true,
-      },
-      {
-        intraId: intraIds[1],
-        teamId: teamNumber[0],
-        score: 15,
+        score: 10,
         win: true,
       },
     ],
     [
       {
-        intraId: intraIds[2],
-        teamId: teamNumber[1],
-        score: 7,
-        win: false,
-      },
-      {
-        intraId: intraIds[3],
+        intraId1: intraIds[2],
+        intraId2: intraIds[3],
         teamId: teamNumber[1],
         score: 7,
         win: false,
