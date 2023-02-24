@@ -4,7 +4,7 @@ import styles from 'styles/admin/scheduler/SchedulerCurrent.module.scss';
 
 type Match = {
   intervalMinute: number;
-  matchBoards: Slots[];
+  matchBoards: Slots[][];
 };
 
 type Slots = {
@@ -33,10 +33,6 @@ export default function SchedulerCurrent() {
   useEffect(() => {
     initSlotInfo();
   }, []);
-
-  useEffect(() => {
-    console.log(slotInfo);
-  }, [slotInfo]);
 
   return (
     <div className={styles.current}>
