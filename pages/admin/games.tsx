@@ -1,3 +1,9 @@
+import GamesTable from 'components/admin/games/GamesTable';
+
 export default function Game() {
-  return <div>game page</div>;
+  return (
+    <>
+      <GamesTable />
+    </>
+  );
 }
