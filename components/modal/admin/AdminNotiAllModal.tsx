@@ -1,8 +1,8 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import styles from 'styles/admin/modal/AdminNotiAll.module.scss';
 import { toastState } from 'utils/recoil/toast';
+import styles from 'styles/admin/modal/AdminNotiAll.module.scss';
 
 export default function AdminNotiAllModal() {
   const setModal = useSetRecoilState(modalState);
