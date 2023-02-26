@@ -27,18 +27,15 @@ export default function SchedulerCurrent(props: {
   });
 
   const initSlotInfo = () => {
+    const noSlotIndex: number =
+      parseInt(`${props.currentHour}`) +
+      parseInt(`${props.scheduleInfo.futurePreview}`) -
+      parseInt(`${props.scheduleInfo.viewTimePast}`);
     const updatedMatchBoards = props.slotInfo.matchBoards.map(
       (slots, index) => {
         if (
           parseInt(`${props.firstHour}`) + index <
-          (parseInt(`${props.currentHour}`) -
-            parseInt(`${props.scheduleInfo.viewTimePast}`) <
-          0
-            ? parseInt(`${props.currentHour}`) -
-              parseInt(`${props.scheduleInfo.viewTimePast}`) +
-              24
-            : parseInt(`${props.currentHour}`) -
-              parseInt(`${props.scheduleInfo.viewTimePast}`))
+          (noSlotIndex < 0 ? noSlotIndex + 24 : noSlotIndex)
         ) {
           const updatedSlots = slots.map((slot) => {
             return { ...slot, status: 'noSlot' };
