@@ -41,6 +41,8 @@ export default function SchedulerMain() {
 
   const [showTime, setShowTime] = useState<number>(0);
   const [lastHour, setLastHour] = useState<number>(0);
+  const [firstHour, setFirstHour] = useState<number>(0);
+  const currentHour = new Date().getHours();
 
   const initScheduleInfo = async () => {
     try {
@@ -56,6 +58,10 @@ export default function SchedulerMain() {
       const res = await instance.get(`/pingpong/match/tables/${1}/rank/single`);
       setSlotInfo({ ...res?.data });
       setShowTime(res?.data.matchBoards.length);
+      setFirstHour(
+        parseInt(res?.data.matchBoards[0][0].time[11]) * 10 +
+          parseInt(res?.data.matchBoards[0][0].time[12])
+      );
       setLastHour(
         parseInt(
           res?.data.matchBoards[res?.data.matchBoards.length - 1][0].time[11]
@@ -98,13 +104,19 @@ export default function SchedulerMain() {
     <div className={styles.content}>
       <div className={styles.imgContainer}>
         {slotInfo.matchBoards.length > 0 && (
-          <SchedulerCurrent slotInfo={slotInfo} scheduleInfo={scheduleInfo} />
+          <SchedulerCurrent
+            slotInfo={slotInfo}
+            firstHour={firstHour}
+            currentHour={currentHour}
+            scheduleInfo={scheduleInfo}
+          />
         )}
         {scheduleInfo.viewTimeFuture + scheduleInfo.viewTimeFuture > 0 &&
           showTime > 0 && (
             <SchedulerPreview
               lastHour={lastHour}
               showTime={showTime}
+              currentHour={currentHour}
               scheduleInfo={scheduleInfo}
             />
           )}

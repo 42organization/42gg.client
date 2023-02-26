@@ -18,6 +18,8 @@ type Slots = {
 export default function SchedulerCurrent(props: {
   slotInfo: Match;
   scheduleInfo: any;
+  firstHour: number;
+  currentHour: number;
 }) {
   const [slotInfo, setSlotInfo] = useState<Match>({
     intervalMinute: 0,
@@ -27,16 +29,26 @@ export default function SchedulerCurrent(props: {
   const initSlotInfo = () => {
     const updatedMatchBoards = props.slotInfo.matchBoards.map(
       (slots, index) => {
-        if (index < props.scheduleInfo.futurePreview) {
+        if (
+          parseInt(`${props.firstHour}`) + index <
+          (parseInt(`${props.currentHour}`) -
+            parseInt(`${props.scheduleInfo.viewTimePast}`) <
+          0
+            ? parseInt(`${props.currentHour}`) -
+              parseInt(`${props.scheduleInfo.viewTimePast}`) +
+              24
+            : parseInt(`${props.currentHour}`) -
+              parseInt(`${props.scheduleInfo.viewTimePast}`))
+        ) {
           const updatedSlots = slots.map((slot) => {
             return { ...slot, status: 'noSlot' };
           });
           return updatedSlots;
         } else if (
-          index <=
-          parseInt(`${props.scheduleInfo.viewTimePast}`) +
-            parseInt(`${props.scheduleInfo.futurePreview}`) +
-            1
+          index <
+          parseInt(`${props.currentHour}`) -
+            parseInt(`${props.firstHour}`) +
+            parseInt(`${props.scheduleInfo.futurePreview}`)
         ) {
           const updatedSlots = slots.map((slot) => {
             return { ...slot, status: 'close' };
