@@ -45,12 +45,17 @@ export default function SchedulerPreview(props: {
     if (scheduleTime >= showTime) {
       const slots: Slots[][] = Array(scheduleTime - showTime + 1)
         .fill(null)
-        .map((i: number, index: number) =>
-          Array(60 / scheduleInfo.gameTime).fill({
-            status: 'preview',
-            time: lastHour + i >= 24 ? (lastHour + i) % 24 : lastHour + i,
-            slotId: `${index}-${i}`,
-          })
+        .map((_, index: number) =>
+          Array(60 / scheduleInfo.gameTime)
+            .fill(null)
+            .map((_, slotIndex: number) => ({
+              status: 'preview',
+              time:
+                lastHour + index >= 24
+                  ? (lastHour + index) % 24
+                  : lastHour + index,
+              slotId: `${index}-${slotIndex}`,
+            }))
         );
       setSlotInfo({
         intervalMinute: scheduleInfo.gameTime,

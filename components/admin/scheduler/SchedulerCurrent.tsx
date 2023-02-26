@@ -15,7 +15,10 @@ type Slots = {
   mode: string;
 };
 
-export default function SchedulerCurrent(props: { slotInfo: Match }) {
+export default function SchedulerCurrent(props: {
+  slotInfo: Match;
+  scheduleInfo: any;
+}) {
   const [slotInfo, setSlotInfo] = useState<Match>({
     intervalMinute: 0,
     matchBoards: [],

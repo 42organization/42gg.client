@@ -9,6 +9,7 @@ type EditedSchedule = {
   viewTimeFuture: number;
   gameTime: number;
   blindShowTime: number;
+  futurePreview: number;
 };
 
 type Match = {
@@ -30,6 +31,7 @@ export default function SchedulerMain() {
     viewTimeFuture: 0,
     gameTime: 15,
     blindShowTime: 5,
+    futurePreview: 0,
   });
 
   const [slotInfo, setSlotInfo] = useState<Match>({
@@ -96,7 +98,7 @@ export default function SchedulerMain() {
     <div className={styles.content}>
       <div className={styles.imgContainer}>
         {slotInfo.matchBoards.length > 0 && (
-          <SchedulerCurrent slotInfo={slotInfo} />
+          <SchedulerCurrent slotInfo={slotInfo} scheduleInfo={scheduleInfo} />
         )}
         {scheduleInfo.viewTimeFuture + scheduleInfo.viewTimeFuture > 0 &&
           showTime > 0 && (
@@ -129,6 +131,10 @@ export default function SchedulerMain() {
         <div>
           블라인드 해제 시간
           <input type='number' name='blindShowTime' onChange={inputHandler} />
+        </div>
+        <div>
+          N시간 후:
+          <input type='number' name='futurePreview' onChange={inputHandler} />
         </div>
       </div>
     </div>
