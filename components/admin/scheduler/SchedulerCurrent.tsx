@@ -25,12 +25,26 @@ export default function SchedulerCurrent(props: {
   });
 
   const initSlotInfo = () => {
-    setSlotInfo(props.slotInfo);
+    const updatedMatchBoards = props.slotInfo.matchBoards.map(
+      (slots, index) => {
+        if (index < props.scheduleInfo.futurePreview) {
+          const updatedSlots = slots.map((slot) => {
+            return { ...slot, status: 'noSlot' };
+          });
+          return updatedSlots;
+        }
+        return slots;
+      }
+    );
+    setSlotInfo({
+      ...props.slotInfo,
+      matchBoards: updatedMatchBoards,
+    });
   };
 
   useEffect(() => {
     initSlotInfo();
-  }, []);
+  }, [props]);
 
   return (
     <div className={styles.current}>
