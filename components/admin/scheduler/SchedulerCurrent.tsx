@@ -32,6 +32,16 @@ export default function SchedulerCurrent(props: {
             return { ...slot, status: 'noSlot' };
           });
           return updatedSlots;
+        } else if (
+          index <=
+          parseInt(`${props.scheduleInfo.viewTimePast}`) +
+            parseInt(`${props.scheduleInfo.futurePreview}`) +
+            1
+        ) {
+          const updatedSlots = slots.map((slot) => {
+            return { ...slot, status: 'close' };
+          });
+          return updatedSlots;
         }
         return slots;
       }

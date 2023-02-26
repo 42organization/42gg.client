@@ -6,6 +6,7 @@ type EditedSchedule = {
   viewTimeFuture: number;
   gameTime: number;
   blindShowTime: number;
+  futurePreview: number;
 };
 
 type Slots = {
@@ -41,15 +42,30 @@ export default function SchedulerPreview(props: {
   const initSlotInfo = () => {
     const scheduleTime: number =
       parseInt(`${scheduleInfo.viewTimePast}`) +
-      parseInt(`${scheduleInfo.viewTimeFuture}`);
+      parseInt(`${scheduleInfo.viewTimeFuture}`) +
+      parseInt(`${scheduleInfo.futurePreview}`);
     if (scheduleTime >= showTime) {
-      const slots: Slots[][] = Array(scheduleTime - showTime + 1)
+      const slots: Slots[][] = Array(
+        parseInt(`${scheduleInfo.viewTimePast}`) +
+          parseInt(`${scheduleInfo.viewTimeFuture}`) >
+          showTime
+          ? scheduleTime - showTime
+          : scheduleTime - showTime + 1
+      )
         .fill(null)
         .map((_, index: number) =>
           Array(60 / scheduleInfo.gameTime)
             .fill(null)
             .map((_, slotIndex: number) => ({
-              status: 'preview',
+              status:
+                showTime + index < scheduleInfo.futurePreview
+                  ? 'noSlot'
+                  : index >= scheduleInfo.futurePreview
+                  ? 'preview'
+                  : scheduleInfo.futurePreview >
+                    parseInt(`${scheduleInfo.viewTimePast}`) + index
+                  ? 'close'
+                  : 'open',
               time:
                 lastHour + index >= 24
                   ? (lastHour + index) % 24
