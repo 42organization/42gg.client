@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styles from 'styles/admin/scheduler/SchedulerCurrent.module.scss';
 
 type EditedSchedule = {
   viewTimePast: number;
@@ -10,6 +11,7 @@ type EditedSchedule = {
 type Slots = {
   status: string;
   time: number;
+  slotId: string;
 };
 
 type Match = {
@@ -43,10 +45,11 @@ export default function SchedulerPreview(props: {
     if (scheduleTime >= showTime) {
       const slots: Slots[][] = Array(scheduleTime - showTime + 1)
         .fill(null)
-        .map((i: number) =>
+        .map((i: number, index: number) =>
           Array(60 / scheduleInfo.gameTime).fill({
-            status: 'open',
+            status: 'preview',
             time: lastHour + i >= 24 ? (lastHour + i) % 24 : lastHour + i,
+            slotId: `${index}-${i}`,
           })
         );
       setSlotInfo({
@@ -55,5 +58,26 @@ export default function SchedulerPreview(props: {
       });
     }
   };
-  return <div></div>;
+  return (
+    <div className={styles.current}>
+      {slotInfo.matchBoards.map((slot: Slots[], index) => {
+        return (
+          <div key={index} className={styles.hourContainer}>
+            <div className={styles.time}>{slot[0].time}시</div>
+            <div className={styles[`hourSlot${slot.length}`]}>
+              {slot.map((item) => (
+                <div
+                  key={item.slotId}
+                  className={`${styles[`minuteSlot${slot.length}`]}
+				${styles[`${item.status}`]}`}
+                >
+                  <div>{item.status}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
