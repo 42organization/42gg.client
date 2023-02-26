@@ -50,6 +50,7 @@ export default function SchedulerPreview(props: {
       const newSlots: Slots[][] = Array(
         parseInt(`${scheduleInfo.viewTimeFuture}`) -
           parseInt(`${scheduleTime}`) +
+          parseInt(`${scheduleInfo.futurePreview}`) +
           1
       )
         .fill(null)
@@ -57,7 +58,23 @@ export default function SchedulerPreview(props: {
           Array(60 / scheduleInfo.gameTime)
             .fill(null)
             .map((_, slotIndex: number) => ({
-              status: 'preview',
+              status:
+                parseInt(`${currentHour}`) +
+                  parseInt(`${scheduleInfo.futurePreview}`) -
+                  parseInt(`${scheduleInfo.viewTimePast}`) >
+                parseInt(`${lastHour}`) + parseInt(`${index}`)
+                  ? 'noSlot'
+                  : parseInt(`${currentHour}`) +
+                      parseInt(`${scheduleInfo.futurePreview}`) >
+                    parseInt(`${lastHour}`) + parseInt(`${index}`)
+                  ? 'close'
+                  : scheduleInfo.futurePreview > 0 &&
+                    index !==
+                      parseInt(`${scheduleInfo.viewTimeFuture}`) -
+                        parseInt(`${scheduleTime}`) +
+                        parseInt(`${scheduleInfo.futurePreview}`)
+                  ? 'open'
+                  : 'preview',
               time:
                 lastHour + index >= 24
                   ? (lastHour + index) % 24
