@@ -66,7 +66,7 @@ export default function SchedulerCurrent(props: {
   }, [props]);
 
   return (
-    <div className={styles.current}>
+    <div>
       {slotInfo.matchBoards.map((slot: Slots[], index) => {
         return (
           <div key={index} className={styles.hourContainer}>
@@ -74,7 +74,7 @@ export default function SchedulerCurrent(props: {
               {slot[0].time[11] === '0' ? '' : slot[0].time[11]}
               {slot[0].time[12]}시
             </div>
-            <div className={styles[`hourSlot${slot.length}`]}>
+            <div className={styles.hourSlot}>
               {slot.map((item) => (
                 <div
                   key={item.slotId}

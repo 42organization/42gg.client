@@ -100,11 +100,13 @@ export default function SchedulerPreview(props: {
         return (
           <div key={index} className={styles.hourContainer}>
             <div className={styles.time}>{slot[0].time}시</div>
-            <div className={styles[`hourSlot${slot.length}`]}>
+            <div className={styles.hourSlot}>
               {slot.map((item) => (
                 <div
                   key={item.slotId}
-                  className={`${styles[`minuteSlot${slot.length}`]}
+                  className={`${
+                    styles[`minuteSlot${slot.length}`]
+                  } //todo slot.length가 1,2,4가 아닐 때 처리 필요
 				${styles[`${item.status}`]}`}
                 >
                   <div>{item.status}</div>
