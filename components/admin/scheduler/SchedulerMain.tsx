@@ -27,8 +27,8 @@ type Slots = {
 
 export default function SchedulerMain() {
   const [scheduleInfo, setScheduleInfo] = useState<EditedSchedule>({
-    viewTimePast: 0,
-    viewTimeFuture: 0,
+    viewTimePast: 12,
+    viewTimeFuture: 12,
     gameTime: 15,
     blindShowTime: 5,
     futurePreview: 0,
@@ -82,18 +82,21 @@ export default function SchedulerMain() {
     initSlotInfo();
   }, []);
 
-  const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const inputHandler = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setScheduleInfo((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+    let intValue = parseInt(value);
+    if (isNaN(intValue)) intValue = 0;
+    if (
+      ((name === 'futurePreview' || name === 'blindShowTime') &&
+        intValue < 0) ||
+      ((name === 'viewTimePast' || name === 'viewTimeFuture') && intValue < 1)
+    )
+      return;
 
-  const inputNumHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    const intValue = parseInt(value);
-    console.log(intValue);
     setScheduleInfo((prev) => ({
       ...prev,
       [name]: intValue,
@@ -128,13 +131,23 @@ export default function SchedulerMain() {
         </div>
         <div>
           과거
-          <input type='number' name='viewTimePast' onChange={inputHandler} />
+          <input
+            type='number'
+            value={scheduleInfo.viewTimePast}
+            name='viewTimePast'
+            onChange={inputHandler}
+          />
           미래
-          <input type='number' name='viewTimeFuture' onChange={inputHandler} />
+          <input
+            type='number'
+            value={scheduleInfo.viewTimeFuture}
+            name='viewTimeFuture'
+            onChange={inputHandler}
+          />
         </div>
         <div>
           게임 시간
-          <select name='gameTime' onChange={inputNumHandler}>
+          <select name='gameTime' onChange={inputHandler}>
             <option value='15'>15분</option>
             <option value='30'>30분</option>
             <option value='60'>60분</option>
@@ -142,11 +155,21 @@ export default function SchedulerMain() {
         </div>
         <div>
           블라인드 해제 시간
-          <input type='number' name='blindShowTime' onChange={inputHandler} />
+          <input
+            type='number'
+            value={scheduleInfo.blindShowTime}
+            name='blindShowTime'
+            onChange={inputHandler}
+          />
         </div>
         <div>
           N시간 후:
-          <input type='number' name='futurePreview' onChange={inputHandler} />
+          <input
+            type='number'
+            value={scheduleInfo.futurePreview}
+            name='futurePreview'
+            onChange={inputHandler}
+          />
         </div>
       </div>
     </div>
