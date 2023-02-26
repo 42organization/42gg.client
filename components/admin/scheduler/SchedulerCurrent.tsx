@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import instance from 'utils/axios';
 import styles from 'styles/admin/scheduler/SchedulerCurrent.module.scss';
 
 type Match = {
@@ -15,9 +14,17 @@ type Slots = {
   mode: string;
 };
 
+type EditedSchedule = {
+  viewTimePast: number;
+  viewTimeFuture: number;
+  gameTime: number;
+  blindShowTime: number;
+  futurePreview: number;
+};
+
 export default function SchedulerCurrent(props: {
   slotInfo: Match;
-  scheduleInfo: any;
+  scheduleInfo: EditedSchedule;
   firstHour: number;
   currentHour: number;
 }) {
