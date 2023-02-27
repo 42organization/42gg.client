@@ -138,7 +138,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
                 {userInfo.userImageUri && (
                   <Image
                     src={imgPreview ? imgPreview : `${userInfo?.userImageUri}`}
-                    alt='이미지가 규격에 맞지 않거나 없습니다'
+                    alt='Profile Image'
                     layout='fill'
                   />
                 )}
