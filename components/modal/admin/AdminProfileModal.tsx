@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   AdminProfileProps,
@@ -12,7 +12,6 @@ import { toastState } from 'utils/recoil/toast';
 import instance from 'utils/axios';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminProfile.module.scss';
-import { errorState } from 'utils/recoil/error';
 
 const STAT_MSG_LIMIT = 30;
 
@@ -115,6 +114,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
           clicked: true,
         });
       }
+      setModal({ modalName: null });
     } catch (e: any) {
       setSnackBar({
         toastName: 'profile',
