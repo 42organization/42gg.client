@@ -5,27 +5,20 @@ import style from 'styles/admin/notification/CreateNotificationButton.module.scs
 export default function CreateNotiButton() {
   const setModal = useSetRecoilState(modalState);
 
-  // TODO Create Modal Distinguishing Criteria(param)
-  const openModal = (param?: string) => {
-    if (!param) {
-      // TODO all notification modal
-      console.log('Create all notification');
-    } else {
-      // TODO someone notification modal
-      console.log(`Create ${param} notification`);
-    }
-  };
   return (
     <>
       <div className={style.container}>
-        <button className={style.createAllButton} onClick={() => openModal()}>
-          Create All
+        <button
+          className={style.createAllButton}
+          onClick={() => setModal({ modalName: 'ADMIN-NOTI_ALL' })}
+        >
+          All
         </button>
         <button
           className={style.createSomeoneButton}
-          onClick={() => openModal('SOME-ONE')}
+          onClick={() => setModal({ modalName: 'ADMIN-NOTI_USER' })}
         >
-          Create Someone
+          User
         </button>
       </div>
     </>

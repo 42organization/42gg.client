@@ -1,57 +1,56 @@
 .whole {
-  text-align: center;
   display: flex;
-  justify-content: center;
+  display: inline-block;
   display: inline-block;
   align-items: center;
-  display: inline-block;
+  justify-content: center;
   width: 25rem;
   height: 40rem;
+  text-align: center;
 }
 
 .title {
+  margin-top: 20px;
   font-size: 1.5rem;
   font-weight: bold;
   font-style: normal;
-  margin-top: 20px;
 }
 
 .body {
   display: flex;
   margin-bottom: 0.2px;
+  justify-content: center;
   padding: 1rem 1rem;
   flex-direction: column;
-  justify-content: center;
-  text-align: center;
   font-size: 30px;
 }
 
 .blank {
   display: flex;
-  text-align: center;
   margin: auto;
   width: 20rem;
   height: 25rem;
+  resize: none;
 }
 
 .btns {
-  text-align: center;
-  flex-direction: column;
   display: flex;
   justify-content: center;
-  // justify-items: center;
+  flex-direction: column;
+  text-align: center;
 }
 
 .btn {
   display: flex;
-  text-align: center;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
-  width: 100px;
-  height: 20px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 10px;
+  width: 20rem;
+  height: 40px;
   font-weight: bold;
+  text-align: center;
 }
 
 .hide {
