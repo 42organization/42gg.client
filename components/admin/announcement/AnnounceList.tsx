@@ -101,9 +101,14 @@ export default function AnnounceList() {
                         </TableCell>
                       ) : (
                         <TableCell className={styles.tableBodyItem} key={index}>
-                          {announcement[
-                            columnName as keyof IAnnouncement
-                          ]?.toString()}
+                          {columnName === 'createdTime' ||
+                          columnName === 'deletedTime'
+                            ? announcement[columnName as keyof IAnnouncement]
+                                ?.toString()
+                                .replace('T', ' ')
+                            : announcement[
+                                columnName as keyof IAnnouncement
+                              ]?.toString()}
                         </TableCell>
                       );
                     }
