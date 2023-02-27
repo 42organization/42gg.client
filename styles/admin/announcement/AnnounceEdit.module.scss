@@ -101,6 +101,13 @@
   }
 }
 
+.noActive {
+  @include modal-container;
+  margin: 1.5rem;
+  font-size: $big-font;
+  color: black;
+}
+
 .editorContainer {
   display: flex;
   flex-direction: column;
