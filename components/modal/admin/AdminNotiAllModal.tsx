@@ -10,7 +10,6 @@ export default function AdminNotiAllModal() {
   const notiContent = useRef<HTMLTextAreaElement>(null);
 
   const handleClick = useCallback(() => {
-    // TODO : define the types of properties in toast
     setSnackBar({
       toastName: 'noti all',
       severity: 'success',
