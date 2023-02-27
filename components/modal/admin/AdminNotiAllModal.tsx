@@ -13,7 +13,7 @@ export default function AdminNotiAllModal() {
     setSnackBar({
       toastName: 'noti all',
       severity: 'success',
-      message: `Successfully Sent! ${notiContent.current?.value}`,
+      message: `성공적으로 전송되었습니다! ${notiContent.current?.value}`,
       clicked: true,
     });
     // TODO : 실제 서버에 요청 보내기
@@ -22,7 +22,7 @@ export default function AdminNotiAllModal() {
   return (
     <div className={styles.whole}>
       <div className={styles.body}>
-        <div className={styles.title}>NOTI FOR ALL</div>
+        <div className={styles.title}>모두에게 적용</div>
 
         <label className={styles.body}>
           <textarea
@@ -39,12 +39,12 @@ export default function AdminNotiAllModal() {
               handleClick();
               setModal({ modalName: null });
             }}
-            className={styles.btn}
+            className={styles.btn1}
           >
-            적용
+            수정
           </button>
           <button
-            className={styles.btn}
+            className={styles.btn2}
             onClick={() => setModal({ modalName: null })}
           >
             취소

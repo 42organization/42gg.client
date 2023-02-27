@@ -1,19 +1,23 @@
 .whole {
   display: flex;
-  display: inline-block;
-  display: inline-block;
-  align-items: center;
-  justify-content: center;
   width: 25rem;
   height: 40rem;
-  text-align: center;
+  background: #ffffff;
+  border-radius: 8px;
 }
 
 .title {
-  margin-top: 20px;
-  font-size: 1.5rem;
-  font-weight: bold;
+  margin-top: 5px;
+  margin-left: 17px;
+  width: 162px;
+  height: 42px;
+  font-family: 'Inter';
   font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 150%;
+  text-transform: capitalize;
+  color: #000000;
 }
 
 .body {
@@ -31,6 +35,10 @@
   width: 20rem;
   height: 25rem;
   resize: none;
+  box-sizing: border-box;
+  background: #f9fafb;
+  border: 0.5px solid #ced4da;
+  border-radius: 1px;
 }
 
 .btns {
@@ -40,17 +48,38 @@
   text-align: center;
 }
 
-.btn {
+.btn1 {
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 10px;
   width: 20rem;
   height: 40px;
-  font-weight: bold;
-  text-align: center;
+  background: #2678f3;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  width: 20rem;
+  height: 40px;
+  background: #6c757d;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .hide {
