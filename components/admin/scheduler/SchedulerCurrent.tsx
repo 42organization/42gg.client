@@ -57,34 +57,9 @@ export default function SchedulerCurrent(props: {
             return { ...slot, status: 'close' };
           });
           return updatedSlots;
-        } else if (
-          index >
-          props.currentHour -
-            props.firstHour +
-            props.scheduleInfo.futurePreview +
-            props.scheduleInfo.viewTimeFuture
-        ) {
-          const updatedSlots: Slots[] = slots.map((slot) => {
-            return { ...slot, status: 'noslot' };
-          });
-          return updatedSlots;
-        } else if (
-          //   props.lastHour -
-          //     props.currentHour +
-          //     props.scheduleInfo.futurePreview <
-          //     props.scheduleInfo.viewTimeFuture &&
-          index ===
-          props.currentHour -
-            props.firstHour +
-            props.scheduleInfo.futurePreview +
-            props.scheduleInfo.viewTimeFuture
-        ) {
-          const updatedSlots = slots.map((slot) => {
-            return { ...slot, status: 'preview' };
-          });
-          return updatedSlots;
+        } else {
+          return slots;
         }
-        return slots;
       }
     );
     setSlotInfo({
