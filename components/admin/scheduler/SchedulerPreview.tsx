@@ -91,6 +91,12 @@ export default function SchedulerPreview(props: {
         intervalMinute: scheduleInfo.gameTime,
         matchBoards: newSlots.concat(slots),
       });
+    } else {
+      const slots: Slots[][] = Array(0).fill(null);
+      setSlotInfo({
+        intervalMinute: scheduleInfo.gameTime,
+        matchBoards: slots,
+      });
     }
   };
 
