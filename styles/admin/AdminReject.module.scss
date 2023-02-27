@@ -1,0 +1,57 @@
+@import 'styles/common';
+
+.background {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  min-width: 24rem;
+  height: 100vh;
+  min-height: 40rem;
+  padding: 0 4rem;
+  background-image: url('../../public/image/background_img.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 32rem;
+  min-width: 18rem;
+  height: 40rem;
+  max-height: calc(100vh - 8rem);
+  min-height: 28rem;
+  padding: 4rem 2.5rem;
+  border-radius: $medium-radius;
+  background: white;
+  box-shadow: 0.2rem 0.2rem 1rem $gray;
+}
+
+.title {
+  font-size: 3rem;
+  font-family: $logo-font;
+  text-align: center;
+  letter-spacing: 0.2rem;
+}
+
+.content {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.home {
+  @include select-buttons(10rem, 3.5rem);
+  .positive {
+    input {
+      font-size: $big-font;
+      font-weight: 500;
+      box-shadow: 0.1rem 0.1rem 0.3rem $pp-blue;
+    }
+  }
+}
