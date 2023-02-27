@@ -45,7 +45,7 @@ export default function SchedulerCurrent(props: {
           parseInt(`${props.firstHour}`) + index <
           /* noSlotIndex < 0 ? noSlotIndex + 24 :  */ noSlotIndex //todo: 오후 12시 전/후 확인필요
         ) {
-          const updatedSlots = slots.map((slot) => {
+          const updatedSlots: Slots[] = slots.map((slot) => {
             return { ...slot, status: 'noSlot' };
           });
           return updatedSlots;
@@ -53,7 +53,7 @@ export default function SchedulerCurrent(props: {
           index <
           props.currentHour - props.firstHour + props.scheduleInfo.futurePreview
         ) {
-          const updatedSlots = slots.map((slot) => {
+          const updatedSlots: Slots[] = slots.map((slot) => {
             return { ...slot, status: 'close' };
           });
           return updatedSlots;
@@ -64,7 +64,7 @@ export default function SchedulerCurrent(props: {
             props.scheduleInfo.futurePreview +
             props.scheduleInfo.viewTimeFuture
         ) {
-          const updatedSlots = slots.map((slot) => {
+          const updatedSlots: Slots[] = slots.map((slot) => {
             return { ...slot, status: 'noslot' };
           });
           return updatedSlots;
