@@ -42,7 +42,7 @@ export default function SchedulerCurrent(props: {
       (slots, index) => {
         if (
           parseInt(`${props.firstHour}`) + index <
-          (noSlotIndex < 0 ? noSlotIndex + 24 : noSlotIndex)
+          /* noSlotIndex < 0 ? noSlotIndex + 24 :  */ noSlotIndex //todo: 오후 12시 전/후 확인필요
         ) {
           const updatedSlots = slots.map((slot) => {
             return { ...slot, status: 'noSlot' };

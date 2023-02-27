@@ -43,8 +43,14 @@ export default function SchedulerPreview(props: {
         ? parseInt(`${lastHour}`) - parseInt(`${currentHour}`) + 24
         : parseInt(`${lastHour}`) - parseInt(`${currentHour}`);
     if (
-      scheduleTime <= scheduleInfo.viewTimeFuture &&
-      scheduleInfo.futurePreview >= 0
+      scheduleTime <=
+        scheduleInfo.viewTimeFuture + scheduleInfo.futurePreview &&
+      scheduleInfo.futurePreview >= 0 &&
+      parseInt(`${scheduleInfo.viewTimeFuture}`) -
+        parseInt(`${scheduleTime}`) +
+        parseInt(`${scheduleInfo.futurePreview}`) +
+        1 >
+        0
     ) {
       const newSlots: Slots[][] = Array(
         parseInt(`${scheduleInfo.viewTimeFuture}`) -
