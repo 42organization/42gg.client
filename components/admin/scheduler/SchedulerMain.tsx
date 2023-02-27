@@ -110,6 +110,7 @@ export default function SchedulerMain() {
           <SchedulerCurrent
             slotInfo={slotInfo}
             firstHour={firstHour}
+            lastHour={lastHour}
             currentHour={currentHour}
             scheduleInfo={scheduleInfo}
           />

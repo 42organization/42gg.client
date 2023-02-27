@@ -26,6 +26,7 @@ export default function SchedulerCurrent(props: {
   slotInfo: Match;
   scheduleInfo: EditedSchedule;
   firstHour: number;
+  lastHour: number;
   currentHour: number;
 }) {
   const [slotInfo, setSlotInfo] = useState<Match>({
@@ -35,9 +36,9 @@ export default function SchedulerCurrent(props: {
 
   const initSlotInfo = () => {
     const noSlotIndex: number =
-      parseInt(`${props.currentHour}`) +
-      parseInt(`${props.scheduleInfo.futurePreview}`) -
-      parseInt(`${props.scheduleInfo.viewTimePast}`);
+      props.currentHour +
+      props.scheduleInfo.futurePreview -
+      props.scheduleInfo.viewTimePast;
     const updatedMatchBoards = props.slotInfo.matchBoards.map(
       (slots, index) => {
         if (
@@ -50,12 +51,36 @@ export default function SchedulerCurrent(props: {
           return updatedSlots;
         } else if (
           index <
-          parseInt(`${props.currentHour}`) -
-            parseInt(`${props.firstHour}`) +
-            parseInt(`${props.scheduleInfo.futurePreview}`)
+          props.currentHour - props.firstHour + props.scheduleInfo.futurePreview
         ) {
           const updatedSlots = slots.map((slot) => {
             return { ...slot, status: 'close' };
+          });
+          return updatedSlots;
+        } else if (
+          index >
+          props.currentHour -
+            props.firstHour +
+            props.scheduleInfo.futurePreview +
+            props.scheduleInfo.viewTimeFuture
+        ) {
+          const updatedSlots = slots.map((slot) => {
+            return { ...slot, status: 'noslot' };
+          });
+          return updatedSlots;
+        } else if (
+          //   props.lastHour -
+          //     props.currentHour +
+          //     props.scheduleInfo.futurePreview <
+          //     props.scheduleInfo.viewTimeFuture &&
+          index ===
+          props.currentHour -
+            props.firstHour +
+            props.scheduleInfo.futurePreview +
+            props.scheduleInfo.viewTimeFuture
+        ) {
+          const updatedSlots = slots.map((slot) => {
+            return { ...slot, status: 'preview' };
           });
           return updatedSlots;
         }

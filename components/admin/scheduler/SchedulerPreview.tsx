@@ -39,45 +39,43 @@ export default function SchedulerPreview(props: {
 
   const initSlotInfo = (slots: Slots[][]) => {
     const scheduleTime: number =
-      parseInt(`${lastHour}`) - parseInt(`${currentHour}`) < 0
-        ? parseInt(`${lastHour}`) - parseInt(`${currentHour}`) + 24
-        : parseInt(`${lastHour}`) - parseInt(`${currentHour}`);
+      lastHour - currentHour < 0
+        ? lastHour - currentHour + 24
+        : lastHour - currentHour;
     if (
       scheduleTime <=
         scheduleInfo.viewTimeFuture + scheduleInfo.futurePreview &&
       scheduleInfo.futurePreview >= 0 &&
-      parseInt(`${scheduleInfo.viewTimeFuture}`) -
-        parseInt(`${scheduleTime}`) +
-        parseInt(`${scheduleInfo.futurePreview}`) +
+      scheduleInfo.viewTimeFuture -
+        scheduleTime +
+        scheduleInfo.futurePreview +
         1 >
         0
     ) {
-      const newSlots: Slots[][] = Array(
-        parseInt(`${scheduleInfo.viewTimeFuture}`) -
-          parseInt(`${scheduleTime}`) +
-          parseInt(`${scheduleInfo.futurePreview}`) +
-          1
-      )
+      const countNewSlot: number =
+        scheduleInfo.viewTimeFuture -
+        scheduleTime +
+        scheduleInfo.futurePreview +
+        1;
+      const newSlots: Slots[][] = Array(countNewSlot)
         .fill(null)
         .map((_, index: number) =>
           Array(60 / scheduleInfo.gameTime)
             .fill(null)
             .map((_, slotIndex: number) => ({
               status:
-                parseInt(`${currentHour}`) +
-                  parseInt(`${scheduleInfo.futurePreview}`) -
-                  parseInt(`${scheduleInfo.viewTimePast}`) >
-                parseInt(`${lastHour}`) + parseInt(`${index}`)
+                currentHour +
+                  scheduleInfo.futurePreview -
+                  scheduleInfo.viewTimePast >
+                lastHour + index
                   ? 'noSlot'
-                  : parseInt(`${currentHour}`) +
-                      parseInt(`${scheduleInfo.futurePreview}`) >
-                    parseInt(`${lastHour}`) + parseInt(`${index}`)
+                  : currentHour + scheduleInfo.futurePreview > lastHour + index
                   ? 'close'
                   : scheduleInfo.futurePreview > 0 &&
                     index !==
-                      parseInt(`${scheduleInfo.viewTimeFuture}`) -
-                        parseInt(`${scheduleTime}`) +
-                        parseInt(`${scheduleInfo.futurePreview}`)
+                      scheduleInfo.viewTimeFuture -
+                        scheduleTime +
+                        scheduleInfo.futurePreview
                   ? 'open'
                   : 'preview',
               time:
@@ -129,7 +127,7 @@ export default function SchedulerPreview(props: {
                   className={`${
                     styles[`minuteSlot${slot.length}`]
                   } //todo slot.length가 1,2,4가 아닐 때 처리 필요
-				${styles[`${item.status}`]}`}
+                ${styles[`${item.status}`]}`}
                 >
                   <div>{item.status}</div>
                 </div>
