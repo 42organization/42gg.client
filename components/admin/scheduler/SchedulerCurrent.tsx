@@ -75,11 +75,19 @@ export default function SchedulerCurrent(props: {
   return (
     <div>
       {slotInfo.matchBoards.map((slot: Slots[], index) => {
+        const slotTime =
+          parseInt(slot[0].time[11]) * 10 + parseInt(slot[0].time[12]);
         return (
           <div key={index} className={styles.hourContainer}>
-            <div className={styles.time}>
-              {slot[0].time[11] === '0' ? '' : slot[0].time[11]}
-              {slot[0].time[12]}시
+            <div
+              className={
+                slotTime ===
+                props.currentHour + props.scheduleInfo.futurePreview
+                  ? styles.currentTime
+                  : styles.time
+              }
+            >
+              {slotTime}시
             </div>
             <div className={styles.hourSlot}>
               {slot.map((item) => (

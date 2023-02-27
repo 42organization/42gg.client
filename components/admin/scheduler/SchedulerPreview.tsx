@@ -110,7 +110,18 @@ export default function SchedulerPreview(props: {
       {slotInfo.matchBoards.map((slot: Slots[], index) => {
         return (
           <div key={index} className={styles.hourContainer}>
-            <div className={styles.time}>{slot[0].time}시</div>
+            <div
+              className={
+                slot[0].time ===
+                (currentHour + scheduleInfo.futurePreview >= 24
+                  ? (currentHour + scheduleInfo.futurePreview) % 24
+                  : currentHour + scheduleInfo.futurePreview)
+                  ? styles.currentTime
+                  : styles.time
+              }
+            >
+              {slot[0].time}시
+            </div>
             <div className={styles.hourSlot}>
               {slot.map((item) => (
                 <div
