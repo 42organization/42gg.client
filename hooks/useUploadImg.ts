@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { errorState } from 'utils/recoil/error';
+import { toastState } from 'utils/recoil/toast';
 import imageCompression from 'browser-image-compression';
 
 export default function useUploadImg() {
@@ -8,7 +8,7 @@ export default function useUploadImg() {
   const [imgPreview, setImgPreview] = useState<string>('');
   const [file, setFile] = useState<File | null>(null);
 
-  const setError = useSetRecoilState(errorState);
+  const setSnackbar = useSetRecoilState(toastState);
   const uploadImg = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) setFile(e.target.files?.[0]);
   };
@@ -29,7 +29,12 @@ export default function useUploadImg() {
         setImgPreview(reader.result as string);
       };
     } catch (error) {
-      setError('SW00');
+      setSnackbar({
+        toastName: 'uploadImg',
+        severity: 'error',
+        message: '이미지 압축에 실패했습니다.',
+        clicked: false,
+      });
     }
   };
 

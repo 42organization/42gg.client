@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   AdminProfileProps,
@@ -8,6 +8,7 @@ import {
 } from 'types/admin/adminUserTypes';
 import { racketTypes } from 'types/userTypes';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
 import instance from 'utils/axios';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminProfile.module.scss';
@@ -30,7 +31,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
 
   const { imgData, imgPreview, uploadImg } = useUploadImg();
   const setModal = useSetRecoilState(modalState);
-  const setError = useSetRecoilState(errorState);
+  const setSnackBar = useSetRecoilState(toastState);
 
   useEffect(() => {
     getBasicProfileHandler();
@@ -43,7 +44,12 @@ export default function AdminProfileModal(props: AdminProfileProps) {
       );
       setUserInfo(res?.data);
     } catch (e) {
-      setError('SW01');
+      setSnackBar({
+        toastName: 'profile',
+        severity: 'error',
+        message: `api 불러오기 실패 ${userInfo.intraId}`,
+        clicked: true,
+      });
     }
   };
 
@@ -94,10 +100,28 @@ export default function AdminProfileModal(props: AdminProfileProps) {
         `/pingpong/admin/users/${props.value}/detail`,
         formData
       );
-      //if (res.status === 207)
-      // CustomizedSnackbars
-    } catch (e) {
-      //   CustomizedSnackbars(severity='error', message=`${e.response.message}`, clicked=true);
+      if (res.status === 207) {
+        setSnackBar({
+          toastName: 'profile',
+          severity: 'info',
+          message: '이 유저는 승,패,ppp를 수정할 수 없습니다.',
+          clicked: true,
+        });
+      } else {
+        setSnackBar({
+          toastName: 'profile',
+          severity: 'success',
+          message: '수정 완료',
+          clicked: true,
+        });
+      }
+    } catch (e: any) {
+      setSnackBar({
+        toastName: 'profile',
+        severity: 'error',
+        message: `${e.response.message}`,
+        clicked: true,
+      });
     }
   };
 
