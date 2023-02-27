@@ -1,12 +1,13 @@
-export const tableColumnNames = {
-  notification: [
-    'notiId',
-    'intraId',
-    'slotId',
-    'type',
-    'message',
-    'createdTime',
-    'isChecked',
-  ],
-  // TODO: 각 페이지별 column name을 contants object로 분류, 각 페이지에서 indexing해서 사용
+export type TableName = 'notification' | 'userInfo' | 'feedback';
+export type EtcType = 'button' | 'toggle';
+
+export type TableFormat = {
+  [key in TableName]: {
+    name: string;
+    columns: string[];
+    etc?: {
+      type: EtcType;
+      value: string[];
+    };
+  };
 };
