@@ -49,13 +49,17 @@ export default function UserManagementTable() {
 
   const buttonList: string[] = [styles.detail, styles.penalty];
 
-  const handleButtonAction = (buttonName: string, userId: number) => {
+  const handleButtonAction = (
+    buttonName: string,
+    userId: number,
+    intraId: string
+  ) => {
     switch (buttonName) {
       case '자세히':
         setModal({ modalName: 'ADMIN-PROFILE', userId });
         break;
       case '패널티 부여':
-        //  setModal({ modalName: 'ADMIN-PENALTY', userId });
+        setModal({ modalName: 'ADMIN-PENALTY', intraId });
         break;
     }
   };
@@ -140,7 +144,11 @@ export default function UserManagementTable() {
                                   key={buttonName}
                                   className={`${styles.button} ${buttonList[index]}`}
                                   onClick={() =>
-                                    handleButtonAction(buttonName, userInfo.id)
+                                    handleButtonAction(
+                                      buttonName,
+                                      userInfo.id,
+                                      userInfo.intraId
+                                    )
                                   }
                                 >
                                   {buttonName}
