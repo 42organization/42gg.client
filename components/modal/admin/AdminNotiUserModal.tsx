@@ -31,19 +31,23 @@ export default function AdminNotiUserModal(props: any) {
       </div>
       <label className={styles.body}>
         <div className={styles.bodyWrap}>
-          <div className={styles.bodyText}>intra ID</div>
-          <textarea
-            className={styles.intraBlank}
-            name='intraID'
-            placeholder={'intra ID를 입력하세요'}
-          />
-          <div className={styles.bodyText}>message</div>
-          <textarea
-            className={styles.messageBlank}
-            name='notification'
-            ref={notiContent}
-            placeholder={'전달할 내용을 입력해주세요'}
-          />
+          <div className={styles.intraWrap}>
+            <div className={styles.bodyText}>intra ID</div>
+            <textarea
+              className={styles.intraBlank}
+              name='intraID'
+              placeholder={'intra ID를 입력하세요'}
+            />
+          </div>
+          <div className={styles.messageWrap}>
+            <div className={styles.bodyText}>message</div>
+            <textarea
+              className={styles.messageBlank}
+              name='notification'
+              ref={notiContent}
+              placeholder={'전달할 알림을 입력해주세요'}
+            />
+          </div>
         </div>
         <div className={styles.btns}>
           <button
