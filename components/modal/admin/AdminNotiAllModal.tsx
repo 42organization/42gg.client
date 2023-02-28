@@ -21,18 +21,20 @@ export default function AdminNotiAllModal() {
 
   return (
     <div className={styles.whole}>
-      <div className={styles.body}>
-        <div className={styles.title}>모두에게 적용</div>
-
-        <label className={styles.body}>
+      <div className={styles.title}>
+        <div className={styles.titleText}>모두에게 적용</div>
+        <hr className={styles.hr} />
+      </div>
+      <label className={styles.body}>
+        <div className={styles.bodyWrap}>
+          <div className={styles.bodyText}>message</div>
           <textarea
             className={styles.blank}
             name='notification'
             ref={notiContent}
             placeholder={'모두에게 전달할 알림을 입력해주세요'}
           />
-        </label>
-
+        </div>
         <div className={styles.btns}>
           <button
             onClick={() => {
@@ -50,7 +52,7 @@ export default function AdminNotiAllModal() {
             취소
           </button>
         </div>
-      </div>
+      </label>
     </div>
   );
 }
