@@ -22,7 +22,7 @@ export default function AdminFeedbackCheck({
         message: isSolved
           ? '피드백을 검토중입니다.'
           : '피드백이 반영되었습니다.',
-        sendMail: !isSend,
+        sendMail: isSend,
       });
       setModal({ modalName: null });
     } catch (e) {
