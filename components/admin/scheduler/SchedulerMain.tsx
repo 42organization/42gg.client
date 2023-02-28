@@ -98,23 +98,23 @@ export default function SchedulerMain() {
     }));
   };
 
-  const gameTimeOptions = Array.from({ length: 60 }, (_, i) => i + 1)
+  const gameTimeOptions = Array.from({ length: 60 }, (_, i: number) => i + 1)
     .filter((num) => 60 % num === 0)
     .map((num) => (
-      <option key={'gameTime'} value={num}>
+      <option key={`gt-${num}`} value={num}>
         {num}분
       </option>
     ));
 
   const pastTimeOptions = Array.from({ length: 4 }, (_, i) => i).map((num) => (
-    <option key={'viewTimePast'} value={num}>
+    <option key={`pt-${num}`} value={num}>
       {num}시간
     </option>
   ));
 
   const futureTimeOptions = Array.from({ length: 23 }, (_, i) => i + 1).map(
     (num) => (
-      <option key={'viewTimeFuture'} value={num}>
+      <option key={`ft-${num}`} value={num}>
         {num}시간
       </option>
     )
