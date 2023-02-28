@@ -1,55 +1,27 @@
+import { useCallback, useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { useEffect, useState } from 'react';
-import styles from 'styles/admin/modal/AdminNoti.module.scss';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
 import instance from 'utils/axios';
 import { finished } from 'stream';
-
-interface EditedNotiUser {
-  notification: string | number;
-}
+import styles from 'styles/admin/modal/AdminNoti.module.scss';
 
 //noti가 비어있을 때 적용안되게 수정필요
 
 export default function AdminNotiUserModal(props: any) {
-  const [userNoti, setUserNoti] = useState<any>(/* 초기값 필요 */);
-  const [editedNotiUser, setEditedNotiUser] = useState<EditedNotiUser>({
-    notification: '',
-  });
-
-  const inputChangeHandler = ({
-    target: { name, value },
-  }:
-    | React.ChangeEvent<HTMLTextAreaElement>
-    | React.ChangeEvent<HTMLInputElement>) => {
-    setEditedNotiUser((prev: any) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const finishEditHandler = () => {
-    let errMsg = '';
-    if (editedNotiUser.notification < 0) {
-      errMsg += '시간은 0 이상이어야합니다.\n';
-      console.log(errMsg);
-      editedNotiUser.notification = '';
-    }
-    if (errMsg) alert(errMsg);
-    setUserNoti({
-      ...editedNotiUser,
-      intraID: props.value,
-    });
-    // setModal({ modalName: null });
-  };
-  useEffect(() => {
-    console.log({ userNoti });
-    return () => {
-      console.log({ userNoti });
-    };
-  }, [userNoti]);
   const setModal = useSetRecoilState(modalState);
-  const cancelEditHandler = () => setModal({ modalName: null });
+  const setSnackBar = useSetRecoilState(toastState);
+  const notiContent = useRef<HTMLTextAreaElement>(null);
+
+  const handleClick = useCallback(() => {
+    setSnackBar({
+      toastName: 'noti all',
+      severity: 'success',
+      message: `성공적으로 전송되었습니다! ${notiContent.current?.value}`,
+      clicked: true,
+    });
+    // TODO : 실제 서버에 요청 보내기
+  }, []);
 
   return (
     <div className={styles.whole}>
@@ -61,26 +33,36 @@ export default function AdminNotiUserModal(props: any) {
         <div className={styles.bodyWrap}>
           <div className={styles.bodyText}>intra ID</div>
           <textarea
-            className={styles.blank}
+            className={styles.intraBlank}
+            name='intraID'
+            placeholder={'intra ID를 입력하세요'}
+          />
+          <div className={styles.bodyText}>message</div>
+          <textarea
+            className={styles.messageBlank}
             name='notification'
-            onChange={inputChangeHandler}
-            value={userNoti?.notification}
-            placeholder={'특정 유저에게 전달할 알림을 입력해주세요'}
+            ref={notiContent}
+            placeholder={'전달할 내용을 입력해주세요'}
           />
         </div>
+        <div className={styles.btns}>
+          <button
+            onClick={() => {
+              handleClick();
+              setModal({ modalName: null });
+            }}
+            className={styles.btn1}
+          >
+            전송
+          </button>
+          <button
+            className={styles.btn2}
+            onClick={() => setModal({ modalName: null })}
+          >
+            취소
+          </button>
+        </div>
       </label>
-
-      <div className={styles.btns}>
-        <button
-          className={userNoti ? `${styles.hide}` : `${styles.btn1}`}
-          onClick={finishEditHandler}
-        >
-          전송
-        </button>
-        <button className={styles.btn2} onClick={cancelEditHandler}>
-          취소
-        </button>
-      </div>
     </div>
   );
 }
