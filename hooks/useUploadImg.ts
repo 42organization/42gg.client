@@ -33,7 +33,7 @@ export default function useUploadImg() {
         toastName: 'uploadImg',
         severity: 'error',
         message: '이미지 압축에 실패했습니다.',
-        clicked: false,
+        clicked: true,
       });
     }
   };
