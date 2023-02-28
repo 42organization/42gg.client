@@ -43,7 +43,7 @@ export default function AdminNotiAllModal() {
             }}
             className={styles.btn1}
           >
-            수정
+            전송
           </button>
           <button
             className={styles.btn2}
