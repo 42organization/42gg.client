@@ -22,7 +22,7 @@ export default function AdminNotiAllModal() {
   return (
     <div className={styles.whole}>
       <div className={styles.title}>
-        <div className={styles.titleText}>모두에게 적용</div>
+        <div className={styles.titleText}>전체 알림</div>
         <hr className={styles.hr} />
       </div>
       <label className={styles.body}>

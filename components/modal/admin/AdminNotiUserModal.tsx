@@ -26,7 +26,7 @@ export default function AdminNotiUserModal(props: any) {
   return (
     <div className={styles.whole}>
       <div className={styles.title}>
-        <div className={styles.titleText}>Noti For {props.value}</div>
+        <div className={styles.titleText}>특정 유저 알림</div>
         <hr className={styles.hr} />
       </div>
       <label className={styles.body}>
