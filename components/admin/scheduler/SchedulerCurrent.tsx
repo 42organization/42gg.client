@@ -78,7 +78,12 @@ export default function SchedulerCurrent(props: {
         const slotTime =
           parseInt(slot[0].time[11]) * 10 + parseInt(slot[0].time[12]);
         return (
-          <div key={index} className={styles.hourContainer}>
+          <div
+            key={index}
+            className={
+              styles[slot[0].status === 'noSlot' ? 'none' : 'hourContainer']
+            }
+          >
             <div
               className={
                 slotTime ===
