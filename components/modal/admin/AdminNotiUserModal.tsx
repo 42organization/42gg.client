@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
-import styles from 'styles/admin/modal/AdminNotiAll.module.scss';
+import styles from 'styles/admin/modal/AdminNoti.module.scss';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import { finished } from 'stream';
@@ -53,33 +53,33 @@ export default function AdminNotiUserModal(props: any) {
 
   return (
     <div className={styles.whole}>
-      <div className={styles.body}>
-        <div className={styles.title}>NOTI FOR [{props.value}] </div>
-
-        <label className={styles.body}>
-          To: {props.value}
-          <input
+      <div className={styles.title}>
+        <div className={styles.titleText}>Noti For {props.value}</div>
+        <hr className={styles.hr} />
+      </div>
+      <label className={styles.body}>
+        <div className={styles.bodyWrap}>
+          <div className={styles.bodyText}>intra ID</div>
+          <textarea
             className={styles.blank}
-            type='text'
-            pattern='[a-zA-Z0-9가-힣]'
             name='notification'
             onChange={inputChangeHandler}
             value={userNoti?.notification}
             placeholder={'특정 유저에게 전달할 알림을 입력해주세요'}
           />
-        </label>
-
-        <div className={styles.btns}>
-          <button
-            className={userNoti ? `${styles.hide}` : `${styles.btn}`}
-            onClick={finishEditHandler}
-          >
-            적용
-          </button>
-          <button className={styles.btn} onClick={cancelEditHandler}>
-            취소
-          </button>
         </div>
+      </label>
+
+      <div className={styles.btns}>
+        <button
+          className={userNoti ? `${styles.hide}` : `${styles.btn1}`}
+          onClick={finishEditHandler}
+        >
+          전송
+        </button>
+        <button className={styles.btn2} onClick={cancelEditHandler}>
+          취소
+        </button>
       </div>
     </div>
   );
