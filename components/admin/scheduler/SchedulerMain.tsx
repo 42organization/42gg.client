@@ -27,7 +27,7 @@ type Slots = {
 
 export default function SchedulerMain() {
   const [scheduleInfo, setScheduleInfo] = useState<EditedSchedule>({
-    viewTimePast: 12,
+    viewTimePast: 0,
     viewTimeFuture: 12,
     gameTime: 15,
     blindShowTime: 5,
@@ -81,15 +81,15 @@ export default function SchedulerMain() {
     initSlotInfo();
   }, []);
 
-  const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const inputHandler = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     let intValue = parseInt(value);
     if (isNaN(intValue)) intValue = 0;
-    if (
-      ((name === 'futurePreview' || name === 'blindShowTime') &&
-        intValue < 0) ||
-      ((name === 'viewTimePast' || name === 'viewTimeFuture') && intValue < 1)
-    )
+    if ((name === 'futurePreview' || name === 'blindShowTime') && intValue < 0)
       return;
 
     setScheduleInfo((prev) => ({
@@ -98,15 +98,27 @@ export default function SchedulerMain() {
     }));
   };
 
-  const inputNumHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    const intValue = parseInt(value);
-    console.log(intValue);
-    setScheduleInfo((prev) => ({
-      ...prev,
-      [name]: intValue,
-    }));
-  };
+  const gameTimeOptions = Array.from({ length: 60 }, (_, i) => i + 1)
+    .filter((num) => 60 % num === 0)
+    .map((num) => (
+      <option key={'gameTime'} value={num}>
+        {num}분
+      </option>
+    ));
+
+  const pastTimeOptions = Array.from({ length: 4 }, (_, i) => i).map((num) => (
+    <option key={'viewTimePast'} value={num}>
+      {num}시간
+    </option>
+  ));
+
+  const futureTimeOptions = Array.from({ length: 23 }, (_, i) => i + 1).map(
+    (num) => (
+      <option key={'viewTimeFuture'} value={num}>
+        {num}시간
+      </option>
+    )
+  );
 
   return (
     <div className={styles.content}>
@@ -137,26 +149,18 @@ export default function SchedulerMain() {
         </div>
         <div>
           과거
-          <input
-            type='number'
-            value={scheduleInfo.viewTimePast}
-            name='viewTimePast'
-            onChange={inputHandler}
-          />
+          <select name='viewTimePast' onChange={inputHandler}>
+            {pastTimeOptions}
+          </select>
           미래
-          <input
-            type='number'
-            value={scheduleInfo.viewTimeFuture}
-            name='viewTimeFuture'
-            onChange={inputHandler}
-          />
+          <select name='viewTimeFuture' onChange={inputHandler}>
+            {futureTimeOptions}
+          </select>
         </div>
         <div>
           게임 시간
           <select name='gameTime' onChange={inputHandler}>
-            <option value='15'>15분</option>
-            <option value='30'>30분</option>
-            <option value='60'>60분</option>
+            {gameTimeOptions}
           </select>
         </div>
         <div>
