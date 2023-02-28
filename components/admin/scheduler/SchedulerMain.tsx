@@ -43,7 +43,6 @@ export default function SchedulerMain() {
   const [lastHour, setLastHour] = useState<number>(0);
   const [firstHour, setFirstHour] = useState<number>(0);
   const currentHour = new Date().getHours();
-
   const initScheduleInfo = async () => {
     try {
       // const res = await instance.get(``); //ToDo: api 명세 나오면 바꾸기
@@ -82,11 +81,7 @@ export default function SchedulerMain() {
     initSlotInfo();
   }, []);
 
-  const inputHandler = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     let intValue = parseInt(value);
     if (isNaN(intValue)) intValue = 0;
@@ -97,6 +92,16 @@ export default function SchedulerMain() {
     )
       return;
 
+    setScheduleInfo((prev) => ({
+      ...prev,
+      [name]: intValue,
+    }));
+  };
+
+  const inputNumHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    const intValue = parseInt(value);
+    console.log(intValue);
     setScheduleInfo((prev) => ({
       ...prev,
       [name]: intValue,
