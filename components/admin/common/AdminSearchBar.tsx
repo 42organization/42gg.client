@@ -98,6 +98,7 @@ export default function AdminSearchBar({
               <div
                 key={intraId}
                 onClick={() => {
+                  setKeyword(intraId);
                   initSearch(intraId);
                   setShowDropDown(false);
                 }}
