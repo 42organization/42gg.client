@@ -1,14 +1,31 @@
 .content {
   display: flex;
+  justify-content: space-around;
+  padding: 1rem;
 }
 
-.imgContainer {
+.previewContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
   height: 700px;
-  width: 50%;
+  background-color: #afadad;
+  border-radius: 16px;
+}
+
+.previewWrap {
+  width: 80%;
+  height: 500px;
+  background-color: white;
+  border-radius: 6px;
   overflow-y: scroll;
 }
 
 .inputContainer {
   flex-direction: column;
-  width: 50%;
+  background-color: lightcyan;
+  border-radius: 16px;
+  width: 55%;
+  height: 700px;
 }

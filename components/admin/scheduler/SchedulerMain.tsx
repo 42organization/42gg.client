@@ -122,25 +122,27 @@ export default function SchedulerMain() {
 
   return (
     <div className={styles.content}>
-      <div className={styles.imgContainer}>
-        {slotInfo.matchBoards.length > 0 && (
-          <SchedulerCurrent
-            slotInfo={slotInfo}
-            firstHour={firstHour}
-            lastHour={lastHour}
-            currentHour={currentHour}
-            scheduleInfo={scheduleInfo}
-          />
-        )}
-        {scheduleInfo.viewTimeFuture + scheduleInfo.viewTimeFuture > 0 &&
-          showTime > 0 && (
-            <SchedulerPreview
+      <div className={styles.previewContainer}>
+        <div className={styles.previewWrap}>
+          {slotInfo.matchBoards.length > 0 && (
+            <SchedulerCurrent
+              slotInfo={slotInfo}
+              firstHour={firstHour}
               lastHour={lastHour}
-              showTime={showTime}
               currentHour={currentHour}
               scheduleInfo={scheduleInfo}
             />
           )}
+          {scheduleInfo.viewTimeFuture + scheduleInfo.viewTimeFuture > 0 &&
+            showTime > 0 && (
+              <SchedulerPreview
+                lastHour={lastHour}
+                showTime={showTime}
+                currentHour={currentHour}
+                scheduleInfo={scheduleInfo}
+              />
+            )}
+        </div>
       </div>
       <div className={styles.inputContainer}>
         <div>
