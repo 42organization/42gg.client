@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from 'react';
 import {
   Paper,
   Table,
@@ -7,14 +8,13 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import axios from 'axios';
 import PageNation from 'components/Pagination';
 import { tableFormat } from 'constants/admin/table';
-import { useCallback, useEffect, useState } from 'react';
-import style from 'styles/admin/games/GamesTable.module.scss';
-import { IGames, ITeam } from 'types/admin/gameLogTypes';
+import { IGames, IGameLog } from 'types/admin/gameLogTypes';
+import instance from 'utils/axios';
 import { dateToString } from 'utils/handleTime';
 import AdminSearchBar from '../common/AdminSearchBar';
+import style from 'styles/admin/games/GamesTable.module.scss';
 
 export default function GamesTable() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -32,25 +32,15 @@ export default function GamesTable() {
 
   const getAllGames = useCallback(async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:3000/api/admin/games?season=0&page=${currentPage}&size=10`
+      const res = await instance.get(
+        `pingpong/admin/games?season=0&page=${currentPage}&size=10`
       );
 
       setGameInfo({
-        gameLog: res.data.gameLog.map((game: IGameLog) => {
+        gameLog: res.data.gameLogList.map((game: IGameLog) => {
           return {
             ...game,
             startAt: dateToString(new Date(game.startAt)),
-            team1: game.team1.map((member: ITeam) => {
-              return {
-                ...member,
-              };
-            }),
-            team2: game.team2.map((member: ITeam) => {
-              return {
-                ...member,
-              };
-            }),
           };
         }),
         totalPage: res.data.totalPage,
@@ -63,24 +53,14 @@ export default function GamesTable() {
 
   const getUserGames = useCallback(async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:3000/api/admin/games?q=${intraId}&page=${currentPage}&size=10`
+      const res = await instance.get(
+        `pingpong/admin/games?q=${intraId}&page=${currentPage}&size=10`
       );
       setGameInfo({
         gameLog: res.data.gameLog.map((game: IGameLog) => {
           return {
             ...game,
             startAt: dateToString(new Date(game.startAt)),
-            team1: game.team1.map((member: ITeam) => {
-              return {
-                ...member,
-              };
-            }),
-            team2: game.team2.map((member: ITeam) => {
-              return {
-                ...member,
-              };
-            }),
           };
         }),
         totalPage: res.data.totalPage,
@@ -120,33 +100,31 @@ export default function GamesTable() {
                 <TableRow key={game.gameId}>
                   {tableFormat['games'].columns.map((column: string) => {
                     if (column === 'team1' || column === 'team2') {
-                      return game[column].map((member: ITeam) => {
-                        return (
-                          <TableCell
-                            className={style.tableBodyItem}
-                            key={member.intraId1}
+                      return (
+                        <TableCell
+                          className={style.tableBodyItem}
+                          key={game[column].intraId1}
+                        >
+                          <div
+                            style={{
+                              background: game[column].win
+                                ? 'lawngreen'
+                                : 'orangered',
+                            }}
                           >
-                            <div
-                              style={{
-                                background: member.win
-                                  ? 'lawngreen'
-                                  : 'orangered',
-                              }}
-                            >
-                              <div>
-                                {member.intraId1 +
-                                  ' ' +
-                                  (member.intraId2 ?? '')}
-                              </div>
-                              <div>{member.score}점</div>
+                            <div>
+                              {game[column].intraId1 +
+                                ' ' +
+                                (game[column].intraId2 ?? '')}
                             </div>
-                          </TableCell>
-                        );
-                      });
+                            <div>{game[column].score}점</div>
+                          </div>
+                        </TableCell>
+                      );
                     } else {
                       return (
                         <TableCell className={style.tableBodyItem} key={column}>
-                          {game[column as keyof IGameLog].toString()}
+                          {game[column as keyof IGameLog]?.toString()}
                         </TableCell>
                       );
                     }
@@ -166,12 +144,4 @@ export default function GamesTable() {
       </div>
     </>
   );
-}
-export interface IGameLog {
-  gameId: number;
-  startAt: Date;
-  playTime: string;
-  mode: string;
-  team1: ITeam[];
-  team2: ITeam[];
 }
