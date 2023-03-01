@@ -11,8 +11,8 @@ export interface IGameLog {
   startAt: Date;
   playTime: string;
   mode: string;
-  team1: ITeam[];
-  team2: ITeam[];
+  team1: ITeam;
+  team2: ITeam;
 }
 
 export interface IGames {
