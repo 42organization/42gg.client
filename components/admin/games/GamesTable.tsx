@@ -12,7 +12,7 @@ import PageNation from 'components/Pagination';
 import { tableFormat } from 'constants/admin/table';
 import { IGames, IGameLog } from 'types/admin/gameLogTypes';
 import instance from 'utils/axios';
-import { dateToString } from 'utils/handleTime';
+import { getFormattedDateToString } from 'utils/handleTime';
 import AdminSearchBar from '../common/AdminSearchBar';
 import style from 'styles/admin/games/GamesTable.module.scss';
 
@@ -38,9 +38,12 @@ export default function GamesTable() {
 
       setGameInfo({
         gameLog: res.data.gameLogList.map((game: IGameLog) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(game.startAt)
+          );
           return {
             ...game,
-            startAt: dateToString(new Date(game.startAt)),
+            startAt: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
         totalPage: res.data.totalPage,
@@ -58,9 +61,12 @@ export default function GamesTable() {
       );
       setGameInfo({
         gameLog: res.data.gameLog.map((game: IGameLog) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(game.startAt)
+          );
           return {
             ...game,
-            startAt: dateToString(new Date(game.startAt)),
+            startAt: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
         totalPage: res.data.totalPage,
