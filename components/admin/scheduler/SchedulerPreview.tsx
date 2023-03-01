@@ -37,6 +37,37 @@ export default function SchedulerPreview(props: {
     return slots;
   };
 
+  const initSlotStatus = (index: number) => {
+    const remainTime =
+      lastHour > currentHour
+        ? lastHour - currentHour
+        : lastHour - currentHour + 24;
+    if (scheduleInfo.futurePreview > 0) {
+      if (
+        currentHour +
+          scheduleInfo.futurePreview -
+          scheduleInfo.viewTimePast -
+          24 >
+        lastHour + index
+      )
+        return 'noSlot';
+      else if (
+        scheduleInfo.viewTimeFuture + scheduleInfo.futurePreview >
+        index + remainTime
+      )
+        return 'open';
+      else if (
+        scheduleInfo.viewTimeFuture + scheduleInfo.futurePreview ===
+        index + remainTime
+      )
+        return 'preview';
+      else return 'noSlot';
+    } else {
+      if (remainTime + scheduleInfo.viewTimeFuture > index) return 'preview';
+      else return 'noSlot';
+    }
+  };
+
   const initSlotInfo = (slots: Slots[][]) => {
     const scheduleTime: number =
       lastHour - currentHour < 0
@@ -63,21 +94,7 @@ export default function SchedulerPreview(props: {
           Array(60 / scheduleInfo.gameTime)
             .fill(null)
             .map((_, slotIndex: number) => ({
-              status:
-                currentHour +
-                  scheduleInfo.futurePreview -
-                  scheduleInfo.viewTimePast >
-                lastHour + index
-                  ? 'noSlot'
-                  : currentHour + scheduleInfo.futurePreview > lastHour + index
-                  ? 'close'
-                  : scheduleInfo.futurePreview > 0 &&
-                    index !==
-                      scheduleInfo.viewTimeFuture -
-                        scheduleTime +
-                        scheduleInfo.futurePreview
-                  ? 'open'
-                  : 'preview',
+              status: initSlotStatus(index),
               time:
                 lastHour + index >= 24
                   ? (lastHour + index) % 24
@@ -99,12 +116,16 @@ export default function SchedulerPreview(props: {
   };
 
   useEffect(() => {
+    console.log(slotInfo);
+  }, [slotInfo]);
+
+  useEffect(() => {
     const emptySlots = initEmptySlot();
     initSlotInfo(emptySlots);
   }, [props]);
 
   return (
-    <div className={styles.current}>
+    <div>
       {slotInfo.matchBoards.map((slot: Slots[], index) => {
         return (
           <div
