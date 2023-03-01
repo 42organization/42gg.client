@@ -3,7 +3,6 @@ import { useSetRecoilState } from 'recoil';
 import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import { errorState } from 'utils/recoil/error';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
 import styles from 'styles/admin/modal/AdminNoti.module.scss';
@@ -21,7 +20,6 @@ export default function AdminNotiUserModal(props: any) {
   const [keyword, setKeyword] = useState<string>('');
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<string[]>([]);
-  const setError = useSetRecoilState(errorState);
   const searchBarRef = useRef<HTMLDivElement>(null);
 
   const getSearchResultHandler = useCallback(async () => {
@@ -29,9 +27,14 @@ export default function AdminNotiUserModal(props: any) {
       const res = await instance.get(`/pingpong/users/searches?q=${keyword}`);
       setSearchResult(res?.data.users);
     } catch (e) {
-      setError('MS02');
+      setSnackBar({
+        toastName: 'noti user',
+        severity: 'error',
+        message: `MS02`,
+        clicked: true,
+      });
     }
-  }, [keyword, setError]);
+  }, [keyword, setSnackBar]);
 
   useEffect(() => {
     const checkId = /^[a-z|A-Z|0-9|-]+$/;
@@ -64,7 +67,7 @@ export default function AdminNotiUserModal(props: any) {
 
   const handleClick = useCallback(() => {
     setSnackBar({
-      toastName: 'noti all',
+      toastName: 'noti user',
       severity: 'success',
       message: `성공적으로 전송되었습니다! ${notiContent.current?.value}`,
       clicked: true,
