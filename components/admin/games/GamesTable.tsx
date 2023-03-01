@@ -13,6 +13,7 @@ import { tableFormat } from 'constants/admin/table';
 import { useCallback, useEffect, useState } from 'react';
 import style from 'styles/admin/games/GamesTable.module.scss';
 import { IGames, ITeam } from 'types/admin/gameLogTypes';
+import { dateToString } from 'utils/handleTime';
 import AdminSearchBar from '../common/AdminSearchBar';
 
 export default function GamesTable() {
@@ -34,8 +35,24 @@ export default function GamesTable() {
       const res = await axios.get(
         `http://localhost:3000/api/admin/games?season=0&page=${currentPage}&size=10`
       );
+
       setGameInfo({
-        gameLog: res.data.gameLog,
+        gameLog: res.data.gameLog.map((game: IGameLog) => {
+          return {
+            ...game,
+            startAt: dateToString(new Date(game.startAt)),
+            team1: game.team1.map((member: ITeam) => {
+              return {
+                ...member,
+              };
+            }),
+            team2: game.team2.map((member: ITeam) => {
+              return {
+                ...member,
+              };
+            }),
+          };
+        }),
         totalPage: res.data.totalPage,
         currentPage: res.data.currentPage,
       });
@@ -50,7 +67,22 @@ export default function GamesTable() {
         `http://localhost:3000/api/admin/games?q=${intraId}&page=${currentPage}&size=10`
       );
       setGameInfo({
-        gameLog: res.data.gameLog,
+        gameLog: res.data.gameLog.map((game: IGameLog) => {
+          return {
+            ...game,
+            startAt: dateToString(new Date(game.startAt)),
+            team1: game.team1.map((member: ITeam) => {
+              return {
+                ...member,
+              };
+            }),
+            team2: game.team2.map((member: ITeam) => {
+              return {
+                ...member,
+              };
+            }),
+          };
+        }),
         totalPage: res.data.totalPage,
         currentPage: res.data.currentPage,
       });
