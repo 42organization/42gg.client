@@ -96,7 +96,6 @@ export default function AdminNotiUserModal(props: any) {
                   <span
                     className={styles.reset}
                     onClick={() => {
-                      // setKeyword;
                       setKeyword('');
                     }}
                   >
@@ -105,7 +104,6 @@ export default function AdminNotiUserModal(props: any) {
                 ) : (
                   <span
                     onClick={() => {
-                      // initSearch();
                       setKeyword('');
                       setShowDropDown(false);
                     }}
