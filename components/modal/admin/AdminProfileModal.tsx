@@ -8,10 +8,10 @@ import {
 } from 'types/admin/adminUserTypes';
 import { racketTypes } from 'types/userTypes';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
 import instance from 'utils/axios';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminProfile.module.scss';
-import { errorState } from 'utils/recoil/error';
 
 const STAT_MSG_LIMIT = 30;
 
@@ -21,16 +21,16 @@ export default function AdminProfileModal(props: AdminProfileProps) {
     userImageUri: null,
     statusMessage: '',
     racketType: 'shakeHand',
-    wins: 0,
-    losses: 0,
-    ppp: 0,
-    eMail: '',
+    wins: '',
+    losses: '',
+    ppp: '',
+    email: '',
     roleType: 'ROLE_USER',
   });
 
   const { imgData, imgPreview, uploadImg } = useUploadImg();
   const setModal = useSetRecoilState(modalState);
-  const setError = useSetRecoilState(errorState);
+  const setSnackBar = useSetRecoilState(toastState);
 
   useEffect(() => {
     getBasicProfileHandler();
@@ -43,7 +43,12 @@ export default function AdminProfileModal(props: AdminProfileProps) {
       );
       setUserInfo(res?.data);
     } catch (e) {
-      setError('SW01');
+      setSnackBar({
+        toastName: 'profile',
+        severity: 'error',
+        message: `api 불러오기 실패 ${userInfo.intraId}`,
+        clicked: true,
+      });
     }
   };
 
@@ -59,7 +64,8 @@ export default function AdminProfileModal(props: AdminProfileProps) {
   const inputNumHandler = ({
     target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    const intValue = parseInt(value);
+    let intValue = parseInt(value);
+    if (isNaN(intValue)) intValue = 0;
     setUserInfo({ ...userInfo, [name]: intValue });
   };
 
@@ -73,7 +79,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
       wins: userInfo.wins,
       losses: userInfo.losses,
       ppp: userInfo.ppp,
-      eMail: userInfo.eMail,
+      email: userInfo.email,
       roleType: userInfo.roleType,
     };
     formData.append(
@@ -82,18 +88,40 @@ export default function AdminProfileModal(props: AdminProfileProps) {
         type: 'application/json',
       })
     );
-    formData.append(
-      'multipartFile',
-      new Blob([imgData as File], { type: 'image/jpeg' })
-    );
-
+    if (imgData) {
+      formData.append(
+        'multipartFile',
+        new Blob([imgData], { type: 'image/jpeg' })
+      );
+    }
     try {
-      await instance.put(
+      const res = await instance.put(
         `/pingpong/admin/users/${props.value}/detail`,
         formData
       );
-    } catch (e) {
-      setError('SW02');
+      if (res.status === 207) {
+        setSnackBar({
+          toastName: 'profile',
+          severity: 'info',
+          message: '이 유저는 승,패,ppp를 수정할 수 없습니다.',
+          clicked: true,
+        });
+      } else {
+        setSnackBar({
+          toastName: 'profile',
+          severity: 'success',
+          message: '수정 완료',
+          clicked: true,
+        });
+      }
+      setModal({ modalName: null });
+    } catch (e: any) {
+      setSnackBar({
+        toastName: 'profile',
+        severity: 'error',
+        message: `${e.response.message}`,
+        clicked: true,
+      });
     }
   };
 
@@ -107,12 +135,13 @@ export default function AdminProfileModal(props: AdminProfileProps) {
           <div className={styles.top}>
             <div className={styles.imageWrap}>
               <label className={styles.image}>
-                <Image
-                  src={imgPreview ? imgPreview : `${userInfo?.userImageUri}`}
-                  width='120'
-                  height='110'
-                  alt='Profile Image'
-                />
+                {userInfo.userImageUri && (
+                  <Image
+                    src={imgPreview ? imgPreview : `${userInfo?.userImageUri}`}
+                    alt='Profile Image'
+                    layout='fill'
+                  />
+                )}
                 <input
                   type='file'
                   style={{ display: 'none' }}
@@ -128,9 +157,9 @@ export default function AdminProfileModal(props: AdminProfileProps) {
                 <div>
                   <input
                     className={styles.topRightInput}
-                    name='eMail'
+                    name='email'
                     onChange={inputHandler}
-                    value={userInfo?.eMail}
+                    value={userInfo.email ?? ''}
                   />
                 </div>
               </div>
@@ -143,7 +172,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
           <textarea
             name='statusMessage'
             onChange={inputHandler}
-            value={userInfo?.statusMessage}
+            value={userInfo.statusMessage ?? ''}
           />
         </div>
         <div className={styles.bottom}>
@@ -197,25 +226,22 @@ export default function AdminProfileModal(props: AdminProfileProps) {
               <div>
                 <input
                   name='wins'
-                  type='number'
                   onChange={inputNumHandler}
-                  value={userInfo?.wins}
+                  value={userInfo.wins ?? ''}
                 />
               </div>
               <div>
                 <input
                   name='losses'
-                  type='number'
                   onChange={inputNumHandler}
-                  value={userInfo?.losses}
+                  value={userInfo.losses ?? ''}
                 />
               </div>
               <div>
                 <input
                   name='ppp'
-                  type='number'
                   onChange={inputNumHandler}
-                  value={userInfo?.ppp}
+                  value={userInfo.ppp ?? ''}
                 />
               </div>
             </div>
