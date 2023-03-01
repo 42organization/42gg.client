@@ -9,7 +9,7 @@ type EditedSchedule = {
   futurePreview: number;
 };
 
-type Slots = {
+type Slot = {
   status: string;
   time: number;
   slotId: string;
@@ -17,107 +17,82 @@ type Slots = {
 
 type Match = {
   intervalMinute: number;
-  matchBoards: Slots[][];
+  matchBoards: Slot[][];
 };
 
-export default function SchedulerPreview(props: {
+type Props = {
   scheduleInfo: EditedSchedule;
-  showTime: number;
   lastHour: number;
   currentHour: number;
-}) {
-  const { showTime, lastHour, scheduleInfo, currentHour } = props;
+};
+
+export default function SchedulerPreview(props: Props) {
+  const { lastHour, scheduleInfo, currentHour } = props;
+  const { viewTimePast, viewTimeFuture, futurePreview, gameTime } =
+    scheduleInfo;
+
   const [slotInfo, setSlotInfo] = useState<Match>({
     intervalMinute: 0,
     matchBoards: [],
   });
 
-  const initEmptySlot = () => {
-    const slots: Slots[][] = Array(0).fill(null);
-    return slots;
-  };
+  const initEmptySlot = () => Array(0).fill(null);
 
-  const initSlotStatus = (index: number) => {
-    const remainTime =
-      lastHour > currentHour
-        ? lastHour - currentHour
-        : lastHour - currentHour + 24;
-    if (scheduleInfo.futurePreview > 0) {
-      if (
-        currentHour +
-          scheduleInfo.futurePreview -
-          scheduleInfo.viewTimePast -
-          24 >
-        lastHour + index
-      )
+  const initSlotStatus = (index: number, remainTime: number) => {
+    if (futurePreview > 0) {
+      if (currentHour + futurePreview - viewTimePast - 24 > lastHour + index) {
         return 'noSlot';
-      else if (
-        scheduleInfo.viewTimeFuture + scheduleInfo.futurePreview >
-        index + remainTime
-      )
+      } else if (viewTimeFuture + futurePreview > index + remainTime) {
         return 'open';
-      else if (
-        scheduleInfo.viewTimeFuture + scheduleInfo.futurePreview ===
-        index + remainTime
-      )
+      } else if (viewTimeFuture + futurePreview === index + remainTime) {
         return 'preview';
-      else return 'noSlot';
+      } else {
+        return 'noSlot';
+      }
     } else {
-      if (remainTime + scheduleInfo.viewTimeFuture > index) return 'preview';
-      else return 'noSlot';
+      if (remainTime + viewTimeFuture > index) {
+        return 'preview';
+      } else {
+        return 'noSlot';
+      }
     }
   };
 
-  const initSlotInfo = (slots: Slots[][]) => {
-    const scheduleTime: number =
+  const initSlotInfo = (slots: Slot[][]) => {
+    const scheduleTime =
       lastHour - currentHour < 0
         ? lastHour - currentHour + 24
         : lastHour - currentHour;
     if (
-      scheduleTime <=
-        scheduleInfo.viewTimeFuture + scheduleInfo.futurePreview &&
-      scheduleInfo.futurePreview >= 0 &&
-      scheduleInfo.viewTimeFuture -
-        scheduleTime +
-        scheduleInfo.futurePreview +
-        1 >
-        0
+      scheduleTime <= viewTimeFuture + futurePreview &&
+      futurePreview >= 0 &&
+      viewTimeFuture - scheduleTime + futurePreview + 1 > 0
     ) {
-      const countNewSlot: number =
-        scheduleInfo.viewTimeFuture -
-        scheduleTime +
-        scheduleInfo.futurePreview +
-        1;
-      const newSlots: Slots[][] = Array(countNewSlot)
+      const countNewSlot = viewTimeFuture - scheduleTime + futurePreview + 1;
+      const newSlots: Slot[][] = Array(countNewSlot)
         .fill(null)
-        .map((_, index: number) =>
-          Array(60 / scheduleInfo.gameTime)
+        .map((_, index) => {
+          const slotTime =
+            lastHour + index >= 24 ? (lastHour + index) % 24 : lastHour + index;
+          return Array(60 / gameTime)
             .fill(null)
-            .map((_, slotIndex: number) => ({
-              status: initSlotStatus(index),
-              time:
-                lastHour + index >= 24
-                  ? (lastHour + index) % 24
-                  : lastHour + index,
+            .map((_, slotIndex) => ({
+              status: initSlotStatus(index, scheduleTime),
+              time: slotTime,
               slotId: `${index}-${slotIndex}`,
-            }))
-        );
+            }));
+        });
       setSlotInfo({
-        intervalMinute: scheduleInfo.gameTime,
+        intervalMinute: gameTime,
         matchBoards: newSlots.concat(slots),
       });
     } else {
-      const slots: Slots[][] = Array(0).fill(null);
       setSlotInfo({
-        intervalMinute: scheduleInfo.gameTime,
-        matchBoards: slots,
+        intervalMinute: gameTime,
+        matchBoards: [],
       });
     }
   };
-
-  useEffect(() => {
-    console.log(slotInfo);
-  }, [slotInfo]);
 
   useEffect(() => {
     const emptySlots = initEmptySlot();
@@ -126,7 +101,7 @@ export default function SchedulerPreview(props: {
 
   return (
     <div>
-      {slotInfo.matchBoards.map((slot: Slots[], index) => {
+      {slotInfo.matchBoards.map((slot: Slot[], index) => {
         return (
           <div
             key={index}
@@ -137,9 +112,9 @@ export default function SchedulerPreview(props: {
             <div
               className={
                 slot[0].time ===
-                (currentHour + scheduleInfo.futurePreview >= 24
-                  ? (currentHour + scheduleInfo.futurePreview) % 24
-                  : currentHour + scheduleInfo.futurePreview)
+                (currentHour + futurePreview >= 24
+                  ? (currentHour + futurePreview) % 24
+                  : currentHour + futurePreview)
                   ? styles.currentTime
                   : styles.time
               }

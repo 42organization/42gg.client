@@ -137,7 +137,6 @@ export default function SchedulerMain() {
             showTime > 0 && (
               <SchedulerPreview
                 lastHour={lastHour}
-                showTime={showTime}
                 currentHour={currentHour}
                 scheduleInfo={scheduleInfo}
               />
