@@ -1,3 +1,9 @@
+import SeasonCreate from '../../components/admin/season/SeasonCreate';
+
 export default function Season() {
-  return <div>시즌 관리</div>;
+  return (
+    <div>
+      <SeasonCreate />
+    </div>
+  );
 }
