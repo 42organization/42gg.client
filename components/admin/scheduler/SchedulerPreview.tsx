@@ -129,9 +129,7 @@ export default function SchedulerPreview(props: {
               {slot.map((item) => (
                 <div
                   key={item.slotId}
-                  className={`${
-                    styles[`minuteSlot${slot.length}`]
-                  } //todo slot.length가 1,2,4가 아닐 때 처리 필요
+                  className={`${styles.minuteSlot}
                 ${styles[`${item.status}`]}`}
                 >
                   <div>{item.status}</div>

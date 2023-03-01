@@ -1,50 +1,41 @@
+@import 'styles/common.scss';
+
 .hourContainer {
   display: flex;
-  margin-top: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  margin: 1rem 0 1rem 0;
 }
 
 .time {
-  width: 50px;
+  margin-left: 0.3rem;
+  color: black;
+  font-size: $big-font;
 }
 
 .currentTime {
-  width: 50px;
+  margin-left: 0.3rem;
   color: blue;
+  font-size: $big-font;
   font-weight: 700;
 }
 
 .hourSlot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 0.6rem;
+}
+
+.minuteSlot {
+  all: unset;
   display: flex;
-  flex-wrap: wrap;
-  width: 202px;
-  height: 52px;
-  border: 1px solid black;
-  text-align: center;
-}
-
-.minuteSlot1 {
-  width: 200px;
-  height: 50px;
-  border: 1px solid black;
-  line-height: 40px;
-}
-
-.minuteSlot2 {
-  width: 200px;
-  height: 25px;
-  border: 1px solid black;
-}
-
-.minuteSlot3 {
-  width: 100px;
-  height: 25px;
-  border: 1px solid black;
-}
-
-.minuteSlot4 {
-  width: 100px;
-  height: 25px;
-  border: 1px solid black;
+  justify-content: space-between;
+  align-items: center;
+  height: 2.3rem;
+  padding: 0 0.6rem;
+  margin: 0.1rem;
+  border-radius: $mini-radius;
 }
 
 .open {

@@ -98,7 +98,7 @@ export default function SchedulerCurrent(props: {
               {slot.map((item) => (
                 <div
                   key={item.slotId}
-                  className={`${styles[`minuteSlot${slot.length}`]}
+                  className={`${styles.minuteSlot}
 					${styles[`${item.status}`]}`}
                 >
                   <div>{item.status}</div>
