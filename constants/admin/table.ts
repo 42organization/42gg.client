@@ -59,4 +59,17 @@ export const tableFormat: TableFormat = {
       value: ['해제'],
     },
   },
+  season: {
+    name: '시즌 목록',
+    columns: [
+      'seasonId',
+      'seasonName',
+      'startTime',
+      'endTime',
+      'startPpp',
+      'pppGap',
+      'mode',
+      'status',
+    ],
+  },
 };

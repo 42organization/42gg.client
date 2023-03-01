@@ -4,6 +4,7 @@ export type TableName =
   | 'feedback'
   | 'games'
   | 'announcement'
+  | 'season'
   | 'penalty';
 
 export type EtcType = 'button' | 'toggle';

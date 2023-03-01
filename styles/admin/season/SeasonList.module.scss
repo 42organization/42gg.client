@@ -1,0 +1,35 @@
+@import 'styles/common.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 61.5rem;
+  height: 100%;
+}
+
+.tableContainer {
+  .table {
+    .tableHeader {
+      background-color: lightgray;
+
+      .tableHeaderItem {
+        padding: 0.5rem;
+        text-align: center;
+        font-weight: 600;
+        font-size: $small-font;
+        line-height: 150%;
+      }
+    }
+
+    .tableBody {
+      .tableBodyItem {
+        padding: 0.5rem;
+        text-align: center;
+        font-size: $small-font;
+        line-height: 100%;
+      }
+    }
+  }
+}
