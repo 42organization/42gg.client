@@ -4,7 +4,7 @@ import styles from 'styles/admin/modal/AdminPenalty.module.scss';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 
-export default function AdminPenaltyModal(props: any) {
+export default function AdminPenaltyModal(props: { value: string }) {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
@@ -28,10 +28,11 @@ export default function AdminPenaltyModal(props: any) {
         <div className={styles.bodyWrap}>
           <div className={styles.intraWrap}>
             <div className={styles.bodyText}>intra ID:</div>
-            <textarea
+            <input
               className={styles.intraBlank}
               name='intraID'
-              placeholder={'intra ID를 입력하세요'}
+              value={props.value}
+              readOnly
             />
           </div>
           <div className={styles.reasonWrap}>
@@ -52,12 +53,7 @@ export default function AdminPenaltyModal(props: any) {
           </div>
           <div className={styles.dateWrap}>
             <div className={styles.bodyText}>해방 날짜:</div>
-            <input
-              className={styles.dateBlank}
-              name='date'
-              type='date'
-              placeholder='날짜 선택'
-            />
+            <input className={styles.dateBlank} name='date' type='date' />
           </div>
         </div>
         <div className={styles.btns}>

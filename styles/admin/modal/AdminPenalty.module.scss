@@ -72,6 +72,9 @@
   align-items: center;
   margin-bottom: 10px;
   padding: 0rem 1rem;
+  :focus {
+    outline: none;
+  }
 }
 
 .intraBlank {
