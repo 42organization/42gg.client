@@ -13,13 +13,13 @@ import { useEffect, useState } from 'react';
 import instance from 'utils/axios';
 
 interface ISeason {
-  seasonId: number;
+  id: number;
+  seasonMode: string;
   seasonName: string;
   startTime: Date;
   endTime: Date;
   startPpp: number;
   pppGap: number;
-  mode: string;
   status: number;
 }
 

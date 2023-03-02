@@ -62,13 +62,12 @@ export const tableFormat: TableFormat = {
   season: {
     name: '시즌 목록',
     columns: [
-      'seasonId',
+      'id',
       'seasonName',
       'startTime',
       'endTime',
       'startPpp',
       'pppGap',
-      'mode',
       'status',
     ],
   },
