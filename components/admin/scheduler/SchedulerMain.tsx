@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import instance from 'utils/axios';
-import styles from 'styles/admin/scheduler/SchedulerEdit.module.scss';
+import styles from 'styles/admin/scheduler/SchedulerMain.module.scss';
 import SchedulerCurrent from './SchedulerCurrent';
 import SchedulerPreview from './SchedulerPreview';
 
@@ -144,25 +144,36 @@ export default function SchedulerMain() {
         </div>
       </div>
       <div className={styles.inputContainer}>
-        <div>
-          보여주는 시간: ({scheduleInfo.viewTimePast}시간) 현재 (
-          {scheduleInfo.viewTimeFuture}시간)
-        </div>
-        <div>
-          과거
-          <select name='viewTimePast' onChange={inputHandler}>
-            {pastTimeOptions}
-          </select>
-          미래
-          <select name='viewTimeFuture' onChange={inputHandler}>
-            {futureTimeOptions}
-          </select>
-        </div>
-        <div>
+        <div className={styles.gameTime}>
           게임 시간
           <select name='gameTime' onChange={inputHandler}>
             {gameTimeOptions}
           </select>
+        </div>
+        <div className={styles.viewTime}>
+          <div>
+            보여주는 시간: ({scheduleInfo.viewTimePast}시간) 현재 (
+            {scheduleInfo.viewTimeFuture}시간)
+          </div>
+          <div>
+            과거
+            <select name='viewTimePast' onChange={inputHandler}>
+              {pastTimeOptions}
+            </select>
+            <div>
+              N시간 후:
+              <input
+                type='number'
+                value={scheduleInfo.futurePreview}
+                name='futurePreview'
+                onChange={inputHandler}
+              />
+            </div>
+            미래
+            <select name='viewTimeFuture' onChange={inputHandler}>
+              {futureTimeOptions}
+            </select>
+          </div>
         </div>
         <div>
           블라인드 해제 시간
@@ -173,15 +184,7 @@ export default function SchedulerMain() {
             onChange={inputHandler}
           />
         </div>
-        <div>
-          N시간 후:
-          <input
-            type='number'
-            value={scheduleInfo.futurePreview}
-            name='futurePreview'
-            onChange={inputHandler}
-          />
-        </div>
+        <div>적용</div>
       </div>
     </div>
   );
