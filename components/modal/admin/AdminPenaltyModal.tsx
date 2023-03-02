@@ -53,7 +53,12 @@ export default function AdminPenaltyModal(props: { value: string }) {
           </div>
           <div className={styles.dateWrap}>
             <div className={styles.bodyText}>해방 날짜:</div>
-            <input className={styles.dateBlank} name='date' type='date' />
+            <input
+              className={styles.dateBlank}
+              name='date'
+              placeholder={'날짜를 선택하세요'}
+              onFocus={(e) => (e.target.type = 'date')}
+            />
           </div>
         </div>
         <div className={styles.btns}>
