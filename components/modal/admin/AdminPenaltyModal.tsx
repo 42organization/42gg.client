@@ -1,5 +1,5 @@
 import { useSetRecoilState } from 'recoil';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import styles from 'styles/admin/modal/AdminPenalty.module.scss';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
@@ -24,7 +24,7 @@ export default function AdminPenaltyModal(props: any) {
         <div className={styles.titleText}>패널티 부여 설정</div>
         <hr className={styles.hr} />
       </div>
-      <label className={styles.body}>
+      <div className={styles.body}>
         <div className={styles.bodyWrap}>
           <div className={styles.intraWrap}>
             <div className={styles.bodyText}>intra ID:</div>
@@ -52,10 +52,11 @@ export default function AdminPenaltyModal(props: any) {
           </div>
           <div className={styles.dateWrap}>
             <div className={styles.bodyText}>해방 날짜:</div>
-            <textarea
+            <input
               className={styles.dateBlank}
               name='date'
-              placeholder={'날짜를 입력하세요'}
+              type='date'
+              placeholder='날짜 선택'
             />
           </div>
         </div>
@@ -76,7 +77,7 @@ export default function AdminPenaltyModal(props: any) {
             취소
           </button>
         </div>
-      </label>
+      </div>
     </div>
   );
 }
