@@ -81,7 +81,7 @@ export default function AdminNotiUserModal(props: any) {
         <div className={styles.titleText}>특정 유저 알림</div>
         <hr className={styles.hr} />
       </div>
-      <label className={styles.body}>
+      <div className={styles.body}>
         <div className={styles.bodyWrap}>
           <div className={styles.intraWrap}>
             <div className={styles.bodyText}>intra ID</div>
@@ -168,7 +168,7 @@ export default function AdminNotiUserModal(props: any) {
             취소
           </button>
         </div>
-      </label>
+      </div>
     </div>
   );
 }
