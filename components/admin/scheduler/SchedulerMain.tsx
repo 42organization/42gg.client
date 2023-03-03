@@ -101,20 +101,32 @@ export default function SchedulerMain() {
   const gameTimeOptions = Array.from({ length: 60 }, (_, i: number) => i + 1)
     .filter((num) => 60 % num === 0)
     .map((num) => (
-      <option key={`gt-${num}`} value={num}>
+      <option
+        key={`gt-${num}`}
+        value={num}
+        selected={scheduleInfo.gameTime === num}
+      >
         {num}분
       </option>
     ));
 
   const pastTimeOptions = Array.from({ length: 4 }, (_, i) => i).map((num) => (
-    <option key={`pt-${num}`} value={num}>
+    <option
+      key={`pt-${num}`}
+      value={num}
+      selected={scheduleInfo.viewTimePast === num}
+    >
       {num}시간
     </option>
   ));
 
   const futureTimeOptions = Array.from({ length: 23 }, (_, i) => i + 1).map(
     (num) => (
-      <option key={`ft-${num}`} value={num}>
+      <option
+        key={`ft-${num}`}
+        value={num}
+        selected={scheduleInfo.viewTimeFuture === num}
+      >
         {num}시간
       </option>
     )
