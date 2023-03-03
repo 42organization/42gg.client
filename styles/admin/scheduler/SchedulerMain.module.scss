@@ -67,8 +67,24 @@
 }
 
 .viewTime {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 40%;
-  font-size: $giant-font;
+}
+
+.currentHour {
+  display: flex;
+  justify-content: center;
+  margin-right: 10px;
+  margin-top: 2rem;
+  color: #2678f3;
+}
+
+.pinIcon {
+  display: flex;
+  justify-content: center;
+  margin-right: 10px;
 }
 
 .futurePreview {
@@ -93,14 +109,12 @@
 }
 
 .hourLine {
-  margin-top: 3rem;
   border-left: 1px solid #555;
   height: 20px;
   width: 10%;
 }
 
 .minLine {
-  margin-top: 3rem;
   border-left: 1px solid #555;
   height: 10px;
   width: 10%;
@@ -115,4 +129,9 @@
   display: flex;
   flex-direction: row-reverse;
   margin-right: 1rem;
+}
+
+.btn button {
+  width: 5rem;
+  height: 2rem;
 }

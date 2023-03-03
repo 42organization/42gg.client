@@ -3,6 +3,7 @@ import instance from 'utils/axios';
 import styles from 'styles/admin/scheduler/SchedulerMain.module.scss';
 import SchedulerCurrent from './SchedulerCurrent';
 import SchedulerPreview from './SchedulerPreview';
+import { GrLocationPin } from 'react-icons/gr';
 
 type EditedSchedule = {
   viewTimePast: number;
@@ -52,6 +53,7 @@ export default function SchedulerMain() {
     }
   };
 
+  //ToDo 적용 모달 만들기
   const initSlotInfo = async () => {
     try {
       const res = await instance.get(`/pingpong/match/tables/${1}/rank/single`);
@@ -177,6 +179,15 @@ export default function SchedulerMain() {
               />
             </div>
           </div>
+          <div className={styles.currentHour}>
+            {currentHour + scheduleInfo.futurePreview > 24
+              ? (currentHour + scheduleInfo.futurePreview) % 24
+              : currentHour + scheduleInfo.futurePreview}
+            시
+          </div>
+          <div className={styles.pinIcon}>
+            <GrLocationPin size='60' />
+          </div>
           <div className={styles.timeLine}>
             <div className={styles.hourLine}></div>
             <div className={styles.minLine}></div>
@@ -230,7 +241,9 @@ export default function SchedulerMain() {
             onChange={inputHandler}
           />
         </div>
-        <div className={styles.btn}>적용</div>
+        <div className={styles.btn}>
+          <button>적용</button>
+        </div>
       </div>
     </div>
   );
