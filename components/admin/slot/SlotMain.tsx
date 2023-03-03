@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import instance from 'utils/axios';
-import styles from 'styles/admin/scheduler/SchedulerMain.module.scss';
-import SchedulerCurrent from './SchedulerCurrent';
-import SchedulerPreview from './SchedulerPreview';
+import styles from 'styles/admin/slot/SlotMain.module.scss';
+import SlotCurrent from './SlotCurrent';
+import SlotPreview from './SlotPreview';
 import { GrLocationPin } from 'react-icons/gr';
 
 type EditedSchedule = {
@@ -26,7 +26,7 @@ type Slots = {
   mode: string;
 };
 
-export default function SchedulerMain() {
+export default function SlotMain() {
   const [scheduleInfo, setScheduleInfo] = useState<EditedSchedule>({
     viewTimePast: 0,
     viewTimeFuture: 12,
@@ -139,7 +139,7 @@ export default function SchedulerMain() {
       <div className={styles.previewContainer}>
         <div className={styles.previewWrap}>
           {slotInfo.matchBoards.length > 0 && (
-            <SchedulerCurrent
+            <SlotCurrent
               slotInfo={slotInfo}
               firstHour={firstHour}
               lastHour={lastHour}
@@ -149,7 +149,7 @@ export default function SchedulerMain() {
           )}
           {scheduleInfo.viewTimeFuture + scheduleInfo.viewTimeFuture > 0 &&
             showTime > 0 && (
-              <SchedulerPreview
+              <SlotPreview
                 lastHour={lastHour}
                 currentHour={currentHour}
                 scheduleInfo={scheduleInfo}

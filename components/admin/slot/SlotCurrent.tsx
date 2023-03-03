@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import styles from 'styles/admin/scheduler/SchedulerCurrent.module.scss';
+import styles from 'styles/admin/slot/SlotCurrent.module.scss';
 
 type Match = {
   intervalMinute: number;
@@ -22,7 +22,7 @@ type EditedSchedule = {
   futurePreview: number;
 };
 
-export default function SchedulerCurrent(props: {
+export default function SlotCurrent(props: {
   slotInfo: Match;
   scheduleInfo: EditedSchedule;
   firstHour: number;
