@@ -112,7 +112,7 @@ export default function SchedulerPreview(props: Props) {
             <div
               className={
                 slot[0].time ===
-                (currentHour + futurePreview >= 24
+                (currentHour + futurePreview > 23
                   ? (currentHour + futurePreview) % 24
                   : currentHour + futurePreview)
                   ? styles.currentTime

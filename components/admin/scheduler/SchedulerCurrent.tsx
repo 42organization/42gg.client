@@ -34,25 +34,18 @@ export default function SchedulerCurrent(props: {
     matchBoards: [],
   });
 
+  const { currentHour, scheduleInfo, firstHour } = props;
+  const { viewTimePast, futurePreview } = scheduleInfo;
   const initSlotInfo = () => {
-    const noSlotIndex: number =
-      props.currentHour +
-      props.scheduleInfo.futurePreview -
-      props.scheduleInfo.viewTimePast;
+    const noSlotIndex: number = currentHour + futurePreview - viewTimePast;
     const updatedMatchBoards = props.slotInfo.matchBoards.map(
       (slots, index) => {
-        if (
-          parseInt(`${props.firstHour}`) + index <
-          /* noSlotIndex < 0 ? noSlotIndex + 24 :  */ noSlotIndex //todo: 오후 12시 전/후 확인필요
-        ) {
+        if (parseInt(`${firstHour}`) + index < noSlotIndex) {
           const updatedSlots: Slots[] = slots.map((slot) => {
             return { ...slot, status: 'noSlot' };
           });
           return updatedSlots;
-        } else if (
-          index <
-          props.currentHour - props.firstHour + props.scheduleInfo.futurePreview
-        ) {
+        } else if (index < currentHour - firstHour + futurePreview) {
           const updatedSlots: Slots[] = slots.map((slot) => {
             return { ...slot, status: 'close' };
           });
@@ -86,8 +79,10 @@ export default function SchedulerCurrent(props: {
           >
             <div
               className={
-                slotTime ===
-                props.currentHour + props.scheduleInfo.futurePreview
+                parseInt(slot[0].time[11]) * 10 + parseInt(slot[0].time[12]) ===
+                (currentHour + futurePreview > 23
+                  ? (currentHour + futurePreview) % 24
+                  : currentHour + futurePreview)
                   ? styles.currentTime
                   : styles.time
               }
