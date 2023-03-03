@@ -180,7 +180,7 @@ export default function SchedulerMain() {
             </div>
           </div>
           <div className={styles.currentHour}>
-            {currentHour + scheduleInfo.futurePreview > 24
+            {currentHour + scheduleInfo.futurePreview > 23
               ? (currentHour + scheduleInfo.futurePreview) % 24
               : currentHour + scheduleInfo.futurePreview}
             시
