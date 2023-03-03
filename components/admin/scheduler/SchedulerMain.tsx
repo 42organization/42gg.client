@@ -142,26 +142,21 @@ export default function SchedulerMain() {
               />
             )}
         </div>
+        <div className={styles.initBtn}></div>
       </div>
       <div className={styles.inputContainer}>
         <div className={styles.gameTime}>
-          게임 시간
+          <div>게임 시간:</div>
           <select name='gameTime' onChange={inputHandler}>
             {gameTimeOptions}
           </select>
         </div>
+        <hr />
         <div className={styles.viewTime}>
-          <div>
-            보여주는 시간: ({scheduleInfo.viewTimePast}시간) 현재 (
-            {scheduleInfo.viewTimeFuture}시간)
-          </div>
-          <div>
-            과거
-            <select name='viewTimePast' onChange={inputHandler}>
-              {pastTimeOptions}
-            </select>
-            <div>
-              N시간 후:
+          <div className={styles.futurePreview}>
+            <div>보여주는 시간:</div>
+            <div className={styles.nTime}>
+              <div>N시간 뒤:</div>
               <input
                 type='number'
                 value={scheduleInfo.futurePreview}
@@ -169,14 +164,53 @@ export default function SchedulerMain() {
                 onChange={inputHandler}
               />
             </div>
-            미래
-            <select name='viewTimeFuture' onChange={inputHandler}>
-              {futureTimeOptions}
-            </select>
+          </div>
+          <div className={styles.timeLine}>
+            <div className={styles.hourLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.hourLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.hourLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.hourLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.hourLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.minLine}></div>
+            <div className={styles.hourLine}></div>
+          </div>
+          <div className={styles.viewTimeBottom}>
+            <div>
+              <div>과거</div>
+              <select name='viewTimePast' onChange={inputHandler}>
+                {pastTimeOptions}
+              </select>
+            </div>
+            <div>
+              <div>미래</div>
+              <select name='viewTimeFuture' onChange={inputHandler}>
+                {futureTimeOptions}
+              </select>
+            </div>
           </div>
         </div>
-        <div>
-          블라인드 해제 시간
+        <hr />
+        <div className={styles.blindShowTime}>
+          <div>블라인드 해제 시간:</div>
           <input
             type='number'
             value={scheduleInfo.blindShowTime}
@@ -184,7 +218,7 @@ export default function SchedulerMain() {
             onChange={inputHandler}
           />
         </div>
-        <div>적용</div>
+        <div className={styles.btn}>적용</div>
       </div>
     </div>
   );

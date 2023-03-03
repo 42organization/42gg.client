@@ -4,15 +4,17 @@
   display: flex;
   justify-content: space-around;
   padding: 1rem;
+  font-size: $giant-font;
 }
 
 .previewContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 40%;
   height: 700px;
-  background-color: #afadad;
+  background-color: #e5e7eb;
   border-radius: 16px;
 }
 
@@ -24,21 +26,93 @@
   overflow-y: scroll;
 }
 
+.initBtn {
+  height: 3rem;
+  width: 8rem;
+  margin-top: 2rem;
+  border-radius: 6px;
+  background-color: #ced4da;
+}
+
 .inputContainer {
   flex-direction: column;
-  background-color: lightcyan;
+  border: 1px solid #afadad;
   border-radius: 16px;
-  padding: 2rem 3rem;
+  padding: 3rem 4rem 2rem 8rem;
   width: 55%;
   height: 700px;
 }
 
 .gameTime {
-  height: 20%;
-  font-size: $giant-font;
+  display: flex;
+  justify-content: space-between;
+  height: 10%;
+}
+
+.gameTime select {
+  width: 100px;
+  height: 30px;
+  margin-right: 8rem;
+}
+
+.blindShowTime {
+  display: flex;
+  height: 10%;
+}
+
+.blindShowTime input {
+  width: 100px;
+  height: 30px;
+  margin-left: 1rem;
 }
 
 .viewTime {
-  height: 50%;
+  height: 40%;
   font-size: $giant-font;
+}
+
+.futurePreview {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nTime {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+}
+
+.nTime input {
+  width: 30%;
+}
+
+.timeLine {
+  display: flex;
+  height: 40%;
+}
+
+.hourLine {
+  margin-top: 3rem;
+  border-left: 1px solid #555;
+  height: 20px;
+  width: 10%;
+}
+
+.minLine {
+  margin-top: 3rem;
+  border-left: 1px solid #555;
+  height: 10px;
+  width: 10%;
+}
+
+.viewTimeBottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 1rem;
 }
