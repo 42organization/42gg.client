@@ -135,11 +135,6 @@ export default function AdminNotiUserModal(props: any) {
                 </div>
               )}
             </div>
-            {/* <textarea
-              className={styles.intraBlank}
-              name='intraID'
-              placeholder={'intra ID를 입력하세요'}
-            /> */}
           </div>
           <div className={styles.messageWrap}>
             <div className={styles.bodyText}>message</div>
