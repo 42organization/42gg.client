@@ -16,9 +16,7 @@ export default function CreateNotiButton() {
         </button>
         <button
           className={style.createSomeoneButton}
-          onClick={() =>
-            setModal({ modalName: 'ADMIN-NOTI_USER', intraId: 'test' })
-          }
+          onClick={() => setModal({ modalName: 'ADMIN-NOTI_USER' })}
         >
           User
         </button>

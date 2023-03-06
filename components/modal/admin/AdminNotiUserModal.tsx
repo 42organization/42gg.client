@@ -12,7 +12,7 @@ let timer: ReturnType<typeof setTimeout>;
 
 const MAX_SEARCH_LENGTH = 15;
 
-export default function AdminNotiUserModal(props: any) {
+export default function AdminNotiUserModal() {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
   const notiContent = useRef<HTMLTextAreaElement>(null);
