@@ -55,9 +55,6 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   if (matchBoards.length === 0)
     return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
 
-  const lastSlotTime = matchBoards[matchBoards.length - 1][0].time;
-  const lastSlotHour = new Date(lastSlotTime).getHours();
-
   const openManual = () => {
     setModal({ modalName: 'MATCH-MANUAL', manual: { toggleMode: toggleMode } });
   };
