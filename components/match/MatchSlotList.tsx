@@ -14,12 +14,18 @@ export default function MatchSlotList({
   toggleMode,
   matchSlots,
 }: MatchSlotListProps) {
-  const slotHour = new Date(matchSlots[0].time).getHours();
+  const slotTime = new Date(matchSlots[0].time);
+  const slotHour = slotTime.getHours();
   const slotHourIn12 = ChangeHourFrom24To12(slotHour);
 
   return (
     <>
-      <div className={styles.slotHour}>{slotHourIn12}</div>
+      <div className={styles.slotHour}>
+        {slotHourIn12}
+        {slotHourIn12 === '오전  12시' && (
+          <div>{`${slotTime.getMonth()}월 ${slotTime.getDate()}일`}</div>
+        )}
+      </div>
       <div className={styles.slotGrid}>
         {matchSlots.map((slot) => (
           <MatchSlot
