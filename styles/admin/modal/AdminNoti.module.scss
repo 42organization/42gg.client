@@ -1,3 +1,5 @@
+@import 'styles/common.scss';
+
 .whole {
   display: flex;
   flex-direction: column;
@@ -68,17 +70,6 @@
   margin-bottom: 10px;
 }
 
-.intraBlank {
-  display: flex;
-  width: 275px;
-  height: 33px;
-  resize: none;
-  box-sizing: border-box;
-  background: #f9fafb;
-  border: 0.5px solid #ced4da;
-  border-radius: 1px;
-}
-
 .messageWrap {
   padding: 0rem 0rem;
 }
@@ -134,4 +125,54 @@
   visibility: hidden;
   margin-left: auto;
   margin-right: auto;
+}
+
+.adminSearchBar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 275px;
+  height: 33px;
+  background: white;
+  border: 0.5px solid #ced4da;
+  border-radius: 1px;
+  cursor: text;
+
+  input {
+    padding: 0.5rem 0.8rem;
+    all: unset;
+    margin-left: 0.5rem;
+    width: calc(100% - 4rem);
+    color: black;
+  }
+  .icons {
+    span {
+      margin-left: 30px;
+      height: 33px;
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+    }
+    .reset {
+      height: 33px;
+      color: gray;
+      cursor: pointer;
+    }
+  }
+  .dropdown {
+    width: 275px;
+    width: 100%;
+    z-index: 999;
+    padding: 0 0.8rem 0.5rem 0.5rem;
+    color: black;
+    border: 1px solid #ced4da;
+    border-radius: 0 0 $small-radius $small-radius;
+    background: white;
+    div {
+      padding: 0.5rem 0;
+      cursor: pointer;
+    }
+    .noneText {
+      color: black;
+    }
+  }
 }
