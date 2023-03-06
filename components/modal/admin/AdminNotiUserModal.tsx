@@ -85,7 +85,7 @@ export default function AdminNotiUserModal() {
       setSnackBar({
         toastName: 'noti user',
         severity: 'error',
-        message: `피드백을 입력해주세요.`,
+        message: `알림 내용을 입력해주세요.`,
         clicked: true,
       });
       return;
