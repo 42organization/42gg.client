@@ -37,8 +37,8 @@ export interface Enroll {
   slotId: number;
   type: string;
   mode?: MatchMode;
-  startTime: Date;
-  endTime: Date;
+  slotStartTime: Date;
+  slotEndTime: Date;
 }
 
 export interface Announcement {

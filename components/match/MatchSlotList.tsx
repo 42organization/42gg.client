@@ -5,14 +5,12 @@ import styles from 'styles/match/MatchSlotList.module.scss';
 
 interface MatchSlotListProps {
   type: string;
-  intervalMinute: number;
   toggleMode?: MatchMode;
   matchSlots: Slot[];
 }
 
 export default function MatchSlotList({
   type,
-  intervalMinute,
   toggleMode,
   matchSlots,
 }: MatchSlotListProps) {
@@ -29,7 +27,6 @@ export default function MatchSlotList({
             type={type}
             toggleMode={toggleMode}
             slot={slot}
-            intervalMinute={intervalMinute}
           ></MatchSlot>
         ))}
       </div>
