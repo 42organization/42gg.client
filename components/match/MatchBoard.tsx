@@ -72,7 +72,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
         }
       }
     }
-    return lastSlotHour;
+    return null;
   };
 
   const reloadMatchHandler = () => {
@@ -89,36 +89,41 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   };
 
   return (
-    <div>
-      <div className={styles.buttonWrap}>
-        <button className={styles.manual} onClick={openManual}>
-          매뉴얼
-        </button>
-        <button
-          className={`${styles.reload} ${spinReloadButton && styles.spin}`}
-          onClick={reloadMatchHandler}
-        >
-          &#8635;
-        </button>
+    <>
+      {getFirstOpenSlot === null && (
+        <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>
+      )}
+      <div>
+        <div className={styles.buttonWrap}>
+          <button className={styles.manual} onClick={openManual}>
+            매뉴얼
+          </button>
+          <button
+            className={`${styles.reload} ${spinReloadButton && styles.spin}`}
+            onClick={reloadMatchHandler}
+          >
+            &#8635;
+          </button>
+        </div>
+        <div className={styles.matchBoard}>
+          {matchBoards.map((matchSlots, index) => {
+            const slotTime = new Date(matchSlots[0].time);
+            return (
+              <div
+                className={styles.matchSlotList}
+                key={index}
+                ref={getScrollCurrentRef(slotTime.getHours())}
+              >
+                <MatchSlotList
+                  type={type}
+                  toggleMode={toggleMode}
+                  matchSlots={matchSlots}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <div className={styles.matchBoard}>
-        {matchBoards.map((matchSlots, index) => {
-          const slotTime = new Date(matchSlots[0].time);
-          return (
-            <div
-              className={styles.matchSlotList}
-              key={index}
-              ref={getScrollCurrentRef(slotTime.getHours())}
-            >
-              <MatchSlotList
-                type={type}
-                toggleMode={toggleMode}
-                matchSlots={matchSlots}
-              />
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    </>
   );
 }
