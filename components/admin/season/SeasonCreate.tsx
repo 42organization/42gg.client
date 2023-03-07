@@ -12,25 +12,28 @@ import React, { useState } from 'react';
 
 interface SeasonCreateInfo {
   seasonName: string;
-  start_time: Date;
-  start_ppp: number;
-  ppp_gap: number;
+  startTime: Date;
+  startPpp: number;
+  pppGap: number;
   mode: string;
 }
 
 export default function SeasonCreate() {
   const [seasonInfo, setSeasonInfo] = useState<SeasonCreateInfo>({
     seasonName: '',
-    start_time: new Date(),
-    start_ppp: 0,
-    ppp_gap: 0,
-    mode: '',
+    startTime: new Date(),
+    startPpp: 0,
+    pppGap: 0,
+    mode: 'both',
   });
 
   const inputChangeHandler = ({
     target: { name, value },
-  }: React.ChangeEvent<HTMLInputElement>) =>
+  }:
+    | React.ChangeEvent<HTMLInputElement>
+    | React.ChangeEvent<HTMLSelectElement>) => {
     setSeasonInfo({ ...seasonInfo, [name]: value });
+  };
 
   return (
     <div className={styles.container}>
@@ -56,14 +59,7 @@ export default function SeasonCreate() {
               </TableCell>
               <TableCell>
                 <input
-                  type='date'
-                  name='seasonName'
-                  onChange={inputChangeHandler}
-                />
-              </TableCell>
-              <TableCell>
-                <input
-                  type='number'
+                  type='datetime-local'
                   name='startTime'
                   onChange={inputChangeHandler}
                 />
@@ -71,16 +67,23 @@ export default function SeasonCreate() {
               <TableCell>
                 <input
                   type='number'
-                  name='seasonName'
+                  name='startPpp'
                   onChange={inputChangeHandler}
                 />
               </TableCell>
               <TableCell>
                 <input
-                  type='texts'
-                  name='seasonName'
+                  type='number'
+                  name='pppGap'
                   onChange={inputChangeHandler}
                 />
+              </TableCell>
+              <TableCell>
+                <select name='mode' onChange={inputChangeHandler}>
+                  <option value='both'>both</option>
+                  <option value='rank'>rank</option>
+                  <option value='normal'>normal</option>
+                </select>
               </TableCell>
             </TableRow>
           </TableBody>
