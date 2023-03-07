@@ -1,0 +1,50 @@
+@import 'styles/admin/common/Pagination.module.scss';
+
+.tableWrap {
+  width: 700px;
+  margin: auto;
+  background-color: #fff;
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 700px;
+    margin: 10px auto;
+    .title {
+      font-weight: 600;
+      font-size: 10px;
+      line-height: 150%;
+    }
+  }
+
+  .table {
+    min-width: 700px;
+    width: 100%;
+    background-color: lightgray;
+    border-spacing: 0px;
+    border-radius: 10px;
+    .tableHeader {
+      :nth-child(1) {
+        border-top-left-radius: 10px;
+      }
+      :nth-last-child(1) {
+        border-top-right-radius: 10px;
+      }
+      .tableHeaderItem {
+        background-color: lightblue;
+        padding: 10px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 150%;
+      }
+    }
+    .tableBody {
+      .tableBodyItem {
+        padding: 10px;
+        text-align: center;
+        line-height: 150%;
+      }
+    }
+  }
+}
