@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import instance from 'utils/axios';
 import PageNation from 'components/Pagination';
@@ -35,6 +37,7 @@ export default function UserManagementTable() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
+  const setModal = useSetRecoilState(modalState);
 
   const tableTitle: { [key: string]: string } = {
     id: 'Id',
@@ -46,13 +49,17 @@ export default function UserManagementTable() {
 
   const buttonList: string[] = [styles.detail, styles.penalty];
 
-  const handleButtonAction = (buttonName: string) => {
+  const handleButtonAction = (
+    buttonName: string,
+    userId: number,
+    intraId: string
+  ) => {
     switch (buttonName) {
       case '자세히':
-        console.log('상세보기'); // TODO insert modalHandler
+        setModal({ modalName: 'ADMIN-PROFILE', userId });
         break;
       case '패널티 부여':
-        console.log('패널티 부여'); // TODO insert modalHandler
+        setModal({ modalName: 'ADMIN-PENALTY', intraId });
         break;
     }
   };
@@ -136,7 +143,13 @@ export default function UserManagementTable() {
                                 <button
                                   key={buttonName}
                                   className={`${styles.button} ${buttonList[index]}`}
-                                  onClick={() => handleButtonAction(buttonName)}
+                                  onClick={() =>
+                                    handleButtonAction(
+                                      buttonName,
+                                      userInfo.id,
+                                      userInfo.intraId
+                                    )
+                                  }
                                 >
                                   {buttonName}
                                 </button>

@@ -1,43 +1,48 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { errorState } from 'utils/recoil/error';
+import { toastState } from 'utils/recoil/toast';
 import imageCompression from 'browser-image-compression';
 
 export default function useUploadImg() {
-  const [imgData, setImgData] = useState<File>();
-  const [imgPreview, setImgPreview] = useState<string>();
+  const [imgData, setImgData] = useState<File | null>(null);
+  const [imgPreview, setImgPreview] = useState<string>('');
+  const [file, setFile] = useState<File | null>(null);
 
-  const setError = useSetRecoilState(errorState);
+  const setSnackbar = useSetRecoilState(toastState);
   const uploadImg = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setImgData(file);
-    }
+    if (e.target.files?.[0]) setFile(e.target.files?.[0]);
   };
 
   const imgCompress = async (fileSrc: File) => {
-    /* const options = {
-      maxSizeMB: 0.1,
-      maxWidthOrHeight: 320,
+    const options = {
+      maxSizeMB: 0.03,
+      maxWidthOrHeight: 150,
+      filetype: 'image/jpeg',
       useWebWorker: true,
-    }; */
+    };
     try {
-      //   const res = await imageCompression(fileSrc, options);
+      const res = await imageCompression(fileSrc, options);
       const reader = new FileReader();
-      reader.readAsDataURL(fileSrc);
+      setImgData(res);
+      reader.readAsDataURL(res);
       reader.onloadend = () => {
         setImgPreview(reader.result as string);
       };
     } catch (error) {
-      setError('SW00');
+      setSnackbar({
+        toastName: 'uploadImg',
+        severity: 'error',
+        message: '이미지 압축에 실패했습니다.',
+        clicked: true,
+      });
     }
   };
 
   useEffect(() => {
-    if (imgData) {
-      imgCompress(imgData);
+    if (file) {
+      imgCompress(file);
     }
-  }, [imgData]);
+  }, [file]);
 
   return { imgData, imgPreview, uploadImg };
 }

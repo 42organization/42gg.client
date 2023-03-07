@@ -40,4 +40,15 @@ export const tableFormat: TableFormat = {
     name: '게임 관리',
     columns: ['gameId', 'startAt', 'slotTime', 'mode', 'team1', 'team2'],
   },
+  announcement: {
+    name: '과거 공지사항',
+    columns: [
+      'content',
+      'createdTime',
+      'creatorIntraId',
+      'deletedTime',
+      'deleterIntraId',
+      'isDel',
+    ],
+  },
 };
