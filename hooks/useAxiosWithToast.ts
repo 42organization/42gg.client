@@ -48,13 +48,15 @@ export default function useAxiosWithToast() {
   };
 
   const responseHandler = (response: AxiosResponse) => {
-    // * Admin page가 아니면 toast를 띄우지 않는다.
-    if (!checkAdminURL(response.config.url as string)) return response;
-    if (response.config.method === 'get') return response;
+    const { status, config } = response;
+    const { method, url } = config;
 
-    const requestURL = response.config.url;
+    // * Admin page가 아니면 toast를 띄우지 않는다.
+    if (!checkAdminURL(url as string)) return response;
+    if (method === 'get' && status === 200) return response;
+
     // PUT feedback
-    if (requestURL?.includes('feedback')) {
+    if (url?.includes('feedback')) {
       setSnackbar({
         toastName: 'feedback success',
         severity: 'info',
