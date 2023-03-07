@@ -1,23 +1,56 @@
-import { useCallback, useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
+import { NotiAllInfo } from 'types/admin/adminNotiAllTypes';
+import instance from 'utils/axios';
 import styles from 'styles/admin/modal/AdminNoti.module.scss';
 
 export default function AdminNotiAllModal() {
+  const [notiAllInfo, setNotiAllInfo] = useState<NotiAllInfo>({
+    message: '',
+    sendMail: false,
+  });
+
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
   const notiContent = useRef<HTMLTextAreaElement>(null);
 
-  const handleClick = useCallback(() => {
-    setSnackBar({
-      toastName: 'noti all',
-      severity: 'success',
-      message: `성공적으로 전송되었습니다! ${notiContent.current?.value}`,
-      clicked: true,
-    });
-    // TODO : 실제 서버에 요청 보내기
-  }, []);
+  const sendNotificationHandler = async (sendMail: boolean) => {
+    if (notiContent.current?.value === '') {
+      setSnackBar({
+        toastName: 'noti all',
+        severity: 'warning',
+        message: `알림 내용을 입력해주세요.`,
+        clicked: true,
+      });
+      return;
+    } else {
+      setSnackBar({
+        toastName: 'noti all',
+        severity: 'success',
+        message: `성공적으로 전송되었습니다!`,
+        clicked: true,
+      });
+      setModal({ modalName: null });
+    }
+    try {
+      await instance.post(`pingpong/admin/notifications/`, {
+        message: notiContent.current?.value
+          ? notiContent.current?.value
+          : '알림 전송 실패',
+        sendMail: false,
+      });
+    } catch (e) {
+      setSnackBar({
+        toastName: 'noti all',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
+      setModal({ modalName: null });
+    }
+  };
 
   return (
     <div className={styles.whole}>
@@ -38,8 +71,7 @@ export default function AdminNotiAllModal() {
         <div className={styles.btns}>
           <button
             onClick={() => {
-              handleClick();
-              setModal({ modalName: null });
+              sendNotificationHandler(true);
             }}
             className={styles.btn1}
           >
