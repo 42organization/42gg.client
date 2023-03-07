@@ -38,6 +38,6 @@ export const tableFormat: TableFormat = {
   },
   games: {
     name: '게임 관리',
-    columns: ['gameId', 'startAt', 'playTime', 'mode', 'team1', 'team2'],
+    columns: ['gameId', 'startAt', 'slotTime', 'mode', 'team1', 'team2'],
   },
 };
