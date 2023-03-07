@@ -1,5 +1,5 @@
 export type PenaltyInfo = {
   intraId: string;
-  penaltyTime: number | '';
+  penaltyTime: number | string;
   reason: string;
 };

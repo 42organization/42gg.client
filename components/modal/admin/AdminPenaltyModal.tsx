@@ -1,5 +1,5 @@
 import { useSetRecoilState } from 'recoil';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PenaltyInfo } from 'types/admin/adminPenaltyTypes';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
@@ -27,7 +27,21 @@ export default function AdminPenaltyModal(props: { value: string }) {
         message: '적용시간은 2자리 이하로 입력해주세요.',
         clicked: true,
       });
-    else setPenaltyInfo({ ...penaltyInfo, [name]: value });
+    setPenaltyInfo({ ...penaltyInfo, [name]: value });
+  };
+
+  const timeHandler = (e: any) => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const date = now.getDate();
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    const second = now.getSeconds();
+    const result = `${year}-${month}-${date} ${
+      hour + Number(penaltyInfo.penaltyTime)
+    }:${minute}:${second}`;
+    return result;
   };
 
   const sendPenaltyHandler = async () => {
@@ -129,7 +143,11 @@ export default function AdminPenaltyModal(props: { value: string }) {
           </div>
           <div className={styles.dateWrap}>
             <div className={styles.bodyText}>해방시간:</div>
-            <div className={styles.dateBlank}></div>
+            <input
+              className={styles.dateBlank}
+              name='freeTime'
+              value={timeHandler(penaltyInfo.penaltyTime)}
+            ></input>
           </div>
         </div>
         <div className={styles.btns}>
