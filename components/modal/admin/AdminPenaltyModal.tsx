@@ -1,22 +1,81 @@
 import { useSetRecoilState } from 'recoil';
-import { useCallback } from 'react';
-import styles from 'styles/admin/modal/AdminPenalty.module.scss';
+import { useState } from 'react';
+import { PenaltyInfo } from 'types/admin/adminPenaltyTypes';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
+import instance from 'utils/axios';
+import styles from 'styles/admin/modal/AdminPenalty.module.scss';
 
 export default function AdminPenaltyModal(props: { value: string }) {
+  const [penaltyInfo, setPenaltyInfo] = useState<PenaltyInfo>({
+    intraId: props.value,
+    reason: '',
+    penaltyTime: '',
+  });
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  const handleClick = useCallback(() => {
-    setSnackBar({
-      toastName: 'noti all',
-      severity: 'success',
-      message: `성공적으로 전송되었습니다!`,
-      clicked: true,
-    });
-    // TODO : 실제 서버에 요청 보내기
-  }, []);
+  const inputHandler = ({
+    target: { name, value },
+  }:
+    | React.ChangeEvent<HTMLTextAreaElement>
+    | React.ChangeEvent<HTMLInputElement>) => {
+    setPenaltyInfo({ ...penaltyInfo, [name]: value });
+  };
+
+  const sendPenaltyHandler = async () => {
+    const { intraId, penaltyTime, reason } = penaltyInfo;
+    if (intraId !== props.value) {
+      setSnackBar({
+        toastName: 'penalty',
+        severity: 'error',
+        message: `intra ID가 일치하지 않습니다.`,
+        clicked: true,
+      });
+      return;
+    }
+    if (!reason || !penaltyTime) {
+      setSnackBar({
+        toastName: 'penalty',
+        severity: 'error',
+        message: `모든 항목을 입력해주세요.`,
+        clicked: true,
+      });
+      return;
+    }
+    try {
+      const res = await instance.post(
+        `pingpong/admin/users/${props.value}/penalty`,
+        {
+          reason,
+          penaltyTime,
+        }
+      );
+      if (res.status === 403) {
+        setSnackBar({
+          toastName: 'penalty',
+          severity: 'error',
+          message: '권한이 없습니다',
+          clicked: true,
+        });
+      } else {
+        setSnackBar({
+          toastName: 'penalty',
+          severity: 'success',
+          message: '부여 성공',
+          clicked: true,
+        });
+      }
+      setModal({ modalName: null });
+    } catch (e) {
+      setSnackBar({
+        toastName: 'penalty',
+        severity: 'error',
+        message: `잘못된 요청입니다`,
+        clicked: true,
+      });
+    }
+  };
 
   return (
     <div className={styles.whole}>
@@ -41,31 +100,23 @@ export default function AdminPenaltyModal(props: { value: string }) {
               className={styles.reasonBlank}
               name='reason'
               placeholder={'사유를 입력하세요'}
-            />
-          </div>
-          <div className={styles.durationWrap}>
-            <div className={styles.bodyText}>적용기간:</div>
-            <textarea
-              className={styles.durationBlank}
-              name='duration'
-              placeholder={'기간을 입력하세요'}
+              onChange={inputHandler}
             />
           </div>
           <div className={styles.dateWrap}>
-            <div className={styles.bodyText}>해방 날짜:</div>
+            <div className={styles.bodyText}>적용 시간:</div>
             <input
               className={styles.dateBlank}
-              name='date'
-              placeholder={'날짜를 선택하세요'}
-              onFocus={(e) => (e.target.type = 'date')}
+              name='penaltyTime'
+              placeholder={'적용 시간을 입력하세요'}
+              onChange={inputHandler}
             />
           </div>
         </div>
         <div className={styles.btns}>
           <button
             onClick={() => {
-              handleClick();
-              setModal({ modalName: null });
+              sendPenaltyHandler();
             }}
             className={styles.btn1}
           >
