@@ -9,9 +9,12 @@ export default function useAxiosWithToast() {
 
   const checkAdminURL = (url: string) => url.includes('admin');
 
+  const getRequestRoute = (apiUrl: string) =>
+    apiUrl.split('/').slice(3).join('/');
+
   const errorRequestHandler = (error: AxiosError) => {
     setSnackbar({
-      toastName: 'error',
+      toastName: 'request error',
       severity: 'error',
       message: `🔥 ${error.status}: ${error.message} 🔥`,
       clicked: true,
@@ -20,9 +23,9 @@ export default function useAxiosWithToast() {
 
   const errorResponseHandler = (error: AxiosError) => {
     switch (error.response?.status) {
-      case 401:
+      case 400:
         setSnackbar({
-          toastName: 'unauthorized',
+          toastName: `bad request`,
           severity: 'error',
           message: `🔥 ${error.message} 🔥`,
           clicked: true,
@@ -36,11 +39,27 @@ export default function useAxiosWithToast() {
           clicked: true,
         });
         break;
+      case 413:
+        setSnackbar({
+          toastName: 'file size error',
+          severity: 'error',
+          message: `🔥 ${error.message} 🔥`,
+          clicked: true,
+        });
+        break;
+      case 415:
+        setSnackbar({
+          toastName: 'file extension error',
+          severity: 'error',
+          message: `🔥 ${error.message} 🔥`,
+          clicked: true,
+        });
+        break;
       default:
         setSnackbar({
-          toastName: 'error',
+          toastName: 'default error',
           severity: 'error',
-          message: `🔥 ${error.status}: ${error.message} 🔥`,
+          message: `🔥 ${error.code}: ${error.message} 🔥`,
           clicked: true,
         });
         break;
@@ -55,27 +74,30 @@ export default function useAxiosWithToast() {
     if (!checkAdminURL(url as string)) return response;
     if (method === 'get' && status === 200) return response;
 
-    // PUT feedback
-    if (url?.includes('feedback')) {
-      setSnackbar({
-        toastName: 'feedback success',
-        severity: 'info',
-        message: `피드백 상태가 변경되었습니다.`,
-        clicked: true,
-      });
-      return response;
-    }
-    // ? 많이 발생하는 status code 파악 중요
-    switch (response.status) {
-      case 201:
+    switch (status) {
+      case 200:
         setSnackbar({
-          toastName: 'create success',
+          toastName: `${getRequestRoute(url as string)} success`,
           severity: 'success',
           message: `🎉 ${response.data.message} 🎉`,
           clicked: true,
         });
         break;
+      case 207:
+        setSnackbar({
+          toastName: `${getRequestRoute(url as string)} info`,
+          severity: 'info',
+          message: `🤔 ${response.data.message} 🤔`,
+          clicked: true,
+        });
+        break;
       default:
+        setSnackbar({
+          toastName: `${getRequestRoute(url as string)} info`,
+          severity: 'info',
+          message: `default: ${response.data.message} `,
+          clicked: true,
+        });
         break;
     }
     return response;
