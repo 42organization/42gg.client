@@ -4,25 +4,7 @@ import styles from 'styles/admin/slot/SlotMain.module.scss';
 import SlotCurrent from './SlotCurrent';
 import SlotPreview from './SlotPreview';
 import { GrLocationPin } from 'react-icons/gr';
-
-type EditedSchedule = {
-  pastSlotTime: number;
-  futureSlotTime: number;
-  interval: number;
-  openMinute: number;
-};
-
-type Match = {
-  matchBoards: Slots[][];
-};
-
-type Slots = {
-  slotId: number;
-  status: string;
-  headCount: number;
-  time: string;
-  mode: string;
-};
+import { CurrentMatch, EditedSchedule } from 'types/admin/adminSlotTypes';
 
 export default function SlotMain() {
   const [scheduleInfo, setScheduleInfo] = useState<EditedSchedule>({
@@ -32,7 +14,7 @@ export default function SlotMain() {
     openMinute: 5,
   });
 
-  const [slotInfo, setSlotInfo] = useState<Match>({
+  const [slotInfo, setSlotInfo] = useState<CurrentMatch>({
     matchBoards: [],
   });
 

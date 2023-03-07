@@ -1,34 +1,13 @@
 import { useEffect, useState } from 'react';
 import styles from 'styles/admin/slot/SlotCurrent.module.scss';
+import {
+  CurrentMatch,
+  SlotCurrentProps,
+  Slots,
+} from 'types/admin/adminSlotTypes';
 
-type Match = {
-  matchBoards: Slots[][];
-};
-
-type Slots = {
-  slotId: number;
-  status: string;
-  headCount: number;
-  time: string;
-  mode: string;
-};
-
-type EditedSchedule = {
-  pastSlotTime: number;
-  futureSlotTime: number;
-  interval: number;
-  openMinute: number;
-};
-
-export default function SlotCurrent(props: {
-  slotInfo: Match;
-  scheduleInfo: EditedSchedule;
-  firstHour: number;
-  lastHour: number;
-  currentHour: number;
-  futurePreview: number;
-}) {
-  const [slotInfo, setSlotInfo] = useState<Match>({
+export default function SlotCurrent(props: SlotCurrentProps) {
+  const [slotInfo, setSlotInfo] = useState<CurrentMatch>({
     matchBoards: [],
   });
 
@@ -37,14 +16,14 @@ export default function SlotCurrent(props: {
   const initSlotInfo = () => {
     const noSlotIndex: number = currentHour + futurePreview - pastSlotTime;
     const updatedMatchBoards = props.slotInfo.matchBoards.map(
-      (slots, index) => {
+      (slots: Slots[], index: number) => {
         if (parseInt(`${firstHour}`) + index < noSlotIndex) {
-          const updatedSlots: Slots[] = slots.map((slot) => {
+          const updatedSlots: Slots[] = slots.map((slot: Slots) => {
             return { ...slot, status: 'noSlot' };
           });
           return updatedSlots;
         } else if (index < currentHour - firstHour + futurePreview) {
-          const updatedSlots: Slots[] = slots.map((slot) => {
+          const updatedSlots: Slots[] = slots.map((slot: Slots) => {
             return { ...slot, status: 'close' };
           });
           return updatedSlots;

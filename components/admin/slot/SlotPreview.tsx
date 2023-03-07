@@ -1,35 +1,16 @@
 import { useEffect, useState } from 'react';
 import styles from 'styles/admin/slot/SlotCurrent.module.scss';
+import {
+  PreviewMatch,
+  SlotPreviewProps,
+  Slot,
+} from 'types/admin/adminSlotTypes';
 
-type EditedSchedule = {
-  pastSlotTime: number;
-  futureSlotTime: number;
-  interval: number;
-  openMinute: number;
-};
-
-type Slot = {
-  status: string;
-  time: number;
-  slotId: string;
-};
-
-type Match = {
-  matchBoards: Slot[][];
-};
-
-type Props = {
-  scheduleInfo: EditedSchedule;
-  lastHour: number;
-  currentHour: number;
-  futurePreview: number;
-};
-
-export default function SlotPreview(props: Props) {
+export default function SlotPreview(props: SlotPreviewProps) {
   const { lastHour, scheduleInfo, currentHour, futurePreview } = props;
   const { pastSlotTime, futureSlotTime, interval } = scheduleInfo;
 
-  const [slotInfo, setSlotInfo] = useState<Match>({
+  const [slotInfo, setSlotInfo] = useState<PreviewMatch>({
     matchBoards: [],
   });
 
@@ -68,12 +49,12 @@ export default function SlotPreview(props: Props) {
       const countNewSlot = futureSlotTime - scheduleTime + futurePreview + 1;
       const newSlots: Slot[][] = Array(countNewSlot)
         .fill(null)
-        .map((_, index) => {
+        .map((_, index: number) => {
           const slotTime =
             lastHour + index >= 24 ? (lastHour + index) % 24 : lastHour + index;
           return Array(60 / interval)
             .fill(null)
-            .map((_, slotIndex) => ({
+            .map((_, slotIndex: number) => ({
               status: initSlotStatus(index, scheduleTime),
               time: slotTime,
               slotId: `${index}-${slotIndex}`,
@@ -96,7 +77,7 @@ export default function SlotPreview(props: Props) {
 
   return (
     <div>
-      {slotInfo.matchBoards.map((slot: Slot[], index) => {
+      {slotInfo.matchBoards.map((slot: Slot[], index: number) => {
         return (
           <div
             key={index}
