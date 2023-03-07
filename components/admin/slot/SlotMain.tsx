@@ -6,15 +6,13 @@ import SlotPreview from './SlotPreview';
 import { GrLocationPin } from 'react-icons/gr';
 
 type EditedSchedule = {
-  viewTimePast: number;
-  viewTimeFuture: number;
-  gameTime: number;
-  blindShowTime: number;
-  futurePreview: number;
+  pastSlotTime: number;
+  futureSlotTime: number;
+  interval: number;
+  openMinute: number;
 };
 
 type Match = {
-  intervalMinute: number;
   matchBoards: Slots[][];
 };
 
@@ -28,17 +26,17 @@ type Slots = {
 
 export default function SlotMain() {
   const [scheduleInfo, setScheduleInfo] = useState<EditedSchedule>({
-    viewTimePast: 0,
-    viewTimeFuture: 12,
-    gameTime: 15,
-    blindShowTime: 5,
-    futurePreview: 0,
+    pastSlotTime: 0,
+    futureSlotTime: 12,
+    interval: 15,
+    openMinute: 5,
   });
 
   const [slotInfo, setSlotInfo] = useState<Match>({
-    intervalMinute: 0,
     matchBoards: [],
   });
+
+  const [futurePreview, setFuturePreview] = useState<number>(0);
 
   const [showTime, setShowTime] = useState<number>(0);
   const [lastHour, setLastHour] = useState<number>(0);
@@ -46,14 +44,13 @@ export default function SlotMain() {
   const currentHour = new Date().getHours();
   const initScheduleInfo = async () => {
     try {
-      // const res = await instance.get(``); //ToDo: api 명세 나오면 바꾸기
-      // setScheduleInfo(res?.data);
+      const res = await instance.get(`/pingpong/admin/slot`); //ToDo: api 명세 나오면 바꾸기
+      setScheduleInfo(res?.data);
     } catch (e) {
       console.error(e);
     }
   };
 
-  //ToDo 적용 모달 만들기
   const initSlotInfo = async () => {
     try {
       const res = await instance.get(`/pingpong/match/tables/${1}/rank/single`);
@@ -91,22 +88,22 @@ export default function SlotMain() {
     const { name, value } = e.target;
     let intValue = parseInt(value);
     if (isNaN(intValue)) intValue = 0;
-    if ((name === 'futurePreview' || name === 'blindShowTime') && intValue < 0)
+    if ((name === 'futurePreview' || name === 'openMinute') && intValue < 0)
       return;
-
+    if (name === 'futurePreview') return setFuturePreview(intValue);
     setScheduleInfo((prev) => ({
       ...prev,
       [name]: intValue,
     }));
   };
 
-  const gameTimeOptions = Array.from({ length: 60 }, (_, i: number) => i + 1)
+  const intervalOptions = Array.from({ length: 60 }, (_, i: number) => i + 1)
     .filter((num) => 60 % num === 0)
     .map((num) => (
       <option
         key={`gt-${num}`}
         value={num}
-        selected={scheduleInfo.gameTime === num}
+        selected={scheduleInfo.interval === num}
       >
         {num}분
       </option>
@@ -116,7 +113,7 @@ export default function SlotMain() {
     <option
       key={`pt-${num}`}
       value={num}
-      selected={scheduleInfo.viewTimePast === num}
+      selected={scheduleInfo.pastSlotTime === num}
     >
       {num}시간
     </option>
@@ -127,13 +124,21 @@ export default function SlotMain() {
       <option
         key={`ft-${num}`}
         value={num}
-        selected={scheduleInfo.viewTimeFuture === num}
+        selected={scheduleInfo.futureSlotTime === num}
       >
         {num}시간
       </option>
     )
   );
 
+  const finishHandler = async () => {
+    try {
+      const res = await instance.put(`/pingpong/admin/slot`, scheduleInfo);
+      console.log(res);
+    } catch (e) {
+      console.error(e);
+    }
+  };
   return (
     <div className={styles.content}>
       <div className={styles.previewContainer}>
@@ -145,24 +150,26 @@ export default function SlotMain() {
               lastHour={lastHour}
               currentHour={currentHour}
               scheduleInfo={scheduleInfo}
+              futurePreview={futurePreview}
             />
           )}
-          {scheduleInfo.viewTimeFuture + scheduleInfo.viewTimeFuture > 0 &&
+          {scheduleInfo.futureSlotTime + scheduleInfo.futureSlotTime > 0 &&
             showTime > 0 && (
               <SlotPreview
                 lastHour={lastHour}
                 currentHour={currentHour}
                 scheduleInfo={scheduleInfo}
+                futurePreview={futurePreview}
               />
             )}
         </div>
         <div className={styles.initBtn}></div>
       </div>
       <div className={styles.inputContainer}>
-        <div className={styles.gameTime}>
+        <div className={styles.interval}>
           <div>게임 시간:</div>
-          <select name='gameTime' onChange={inputHandler}>
-            {gameTimeOptions}
+          <select name='interval' onChange={inputHandler}>
+            {intervalOptions}
           </select>
         </div>
         <hr />
@@ -173,16 +180,16 @@ export default function SlotMain() {
               <div>N시간 뒤:</div>
               <input
                 type='number'
-                value={scheduleInfo.futurePreview}
+                value={futurePreview}
                 name='futurePreview'
                 onChange={inputHandler}
               />
             </div>
           </div>
           <div className={styles.currentHour}>
-            {currentHour + scheduleInfo.futurePreview > 23
-              ? (currentHour + scheduleInfo.futurePreview) % 24
-              : currentHour + scheduleInfo.futurePreview}
+            {currentHour + futurePreview > 23
+              ? (currentHour + futurePreview) % 24
+              : currentHour + futurePreview}
             시
           </div>
           <div className={styles.pinIcon}>
@@ -219,30 +226,30 @@ export default function SlotMain() {
           <div className={styles.viewTimeBottom}>
             <div>
               <div>과거</div>
-              <select name='viewTimePast' onChange={inputHandler}>
+              <select name='pastSlotTime' onChange={inputHandler}>
                 {pastTimeOptions}
               </select>
             </div>
             <div>
               <div>미래</div>
-              <select name='viewTimeFuture' onChange={inputHandler}>
+              <select name='futureSlotTime' onChange={inputHandler}>
                 {futureTimeOptions}
               </select>
             </div>
           </div>
         </div>
         <hr />
-        <div className={styles.blindShowTime}>
+        <div className={styles.openMinute}>
           <div>블라인드 해제 시간:</div>
           <input
             type='number'
-            value={scheduleInfo.blindShowTime}
-            name='blindShowTime'
+            value={scheduleInfo.openMinute}
+            name='openMinute'
             onChange={inputHandler}
           />
         </div>
         <div className={styles.btn}>
-          <button>적용</button>
+          <button onClick={finishHandler}>적용</button>
         </div>
       </div>
     </div>

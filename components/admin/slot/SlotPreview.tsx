@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import styles from 'styles/admin/slot/SlotCurrent.module.scss';
 
 type EditedSchedule = {
-  viewTimePast: number;
-  viewTimeFuture: number;
-  gameTime: number;
-  blindShowTime: number;
-  futurePreview: number;
+  pastSlotTime: number;
+  futureSlotTime: number;
+  interval: number;
+  openMinute: number;
 };
 
 type Slot = {
@@ -16,7 +15,6 @@ type Slot = {
 };
 
 type Match = {
-  intervalMinute: number;
   matchBoards: Slot[][];
 };
 
@@ -24,15 +22,14 @@ type Props = {
   scheduleInfo: EditedSchedule;
   lastHour: number;
   currentHour: number;
+  futurePreview: number;
 };
 
 export default function SlotPreview(props: Props) {
-  const { lastHour, scheduleInfo, currentHour } = props;
-  const { viewTimePast, viewTimeFuture, futurePreview, gameTime } =
-    scheduleInfo;
+  const { lastHour, scheduleInfo, currentHour, futurePreview } = props;
+  const { pastSlotTime, futureSlotTime, interval } = scheduleInfo;
 
   const [slotInfo, setSlotInfo] = useState<Match>({
-    intervalMinute: 0,
     matchBoards: [],
   });
 
@@ -40,17 +37,17 @@ export default function SlotPreview(props: Props) {
 
   const initSlotStatus = (index: number, remainTime: number) => {
     if (futurePreview > 0) {
-      if (currentHour + futurePreview - viewTimePast - 24 > lastHour + index) {
+      if (currentHour + futurePreview - pastSlotTime - 24 > lastHour + index) {
         return 'noSlot';
-      } else if (viewTimeFuture + futurePreview > index + remainTime) {
+      } else if (futureSlotTime + futurePreview > index + remainTime) {
         return 'open';
-      } else if (viewTimeFuture + futurePreview === index + remainTime) {
+      } else if (futureSlotTime + futurePreview === index + remainTime) {
         return 'preview';
       } else {
         return 'noSlot';
       }
     } else {
-      if (remainTime + viewTimeFuture > index) {
+      if (remainTime + futureSlotTime > index) {
         return 'preview';
       } else {
         return 'noSlot';
@@ -64,17 +61,17 @@ export default function SlotPreview(props: Props) {
         ? lastHour - currentHour + 24
         : lastHour - currentHour;
     if (
-      scheduleTime <= viewTimeFuture + futurePreview &&
+      scheduleTime <= futureSlotTime + futurePreview &&
       futurePreview >= 0 &&
-      viewTimeFuture - scheduleTime + futurePreview + 1 > 0
+      futureSlotTime - scheduleTime + futurePreview + 1 > 0
     ) {
-      const countNewSlot = viewTimeFuture - scheduleTime + futurePreview + 1;
+      const countNewSlot = futureSlotTime - scheduleTime + futurePreview + 1;
       const newSlots: Slot[][] = Array(countNewSlot)
         .fill(null)
         .map((_, index) => {
           const slotTime =
             lastHour + index >= 24 ? (lastHour + index) % 24 : lastHour + index;
-          return Array(60 / gameTime)
+          return Array(60 / interval)
             .fill(null)
             .map((_, slotIndex) => ({
               status: initSlotStatus(index, scheduleTime),
@@ -83,12 +80,10 @@ export default function SlotPreview(props: Props) {
             }));
         });
       setSlotInfo({
-        intervalMinute: gameTime,
         matchBoards: newSlots.concat(slots),
       });
     } else {
       setSlotInfo({
-        intervalMinute: gameTime,
         matchBoards: [],
       });
     }

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import styles from 'styles/admin/slot/SlotCurrent.module.scss';
 
 type Match = {
-  intervalMinute: number;
   matchBoards: Slots[][];
 };
 
@@ -15,11 +14,10 @@ type Slots = {
 };
 
 type EditedSchedule = {
-  viewTimePast: number;
-  viewTimeFuture: number;
-  gameTime: number;
-  blindShowTime: number;
-  futurePreview: number;
+  pastSlotTime: number;
+  futureSlotTime: number;
+  interval: number;
+  openMinute: number;
 };
 
 export default function SlotCurrent(props: {
@@ -28,16 +26,16 @@ export default function SlotCurrent(props: {
   firstHour: number;
   lastHour: number;
   currentHour: number;
+  futurePreview: number;
 }) {
   const [slotInfo, setSlotInfo] = useState<Match>({
-    intervalMinute: 0,
     matchBoards: [],
   });
 
-  const { currentHour, scheduleInfo, firstHour } = props;
-  const { viewTimePast, futurePreview } = scheduleInfo;
+  const { currentHour, scheduleInfo, firstHour, futurePreview } = props;
+  const { pastSlotTime } = scheduleInfo;
   const initSlotInfo = () => {
-    const noSlotIndex: number = currentHour + futurePreview - viewTimePast;
+    const noSlotIndex: number = currentHour + futurePreview - pastSlotTime;
     const updatedMatchBoards = props.slotInfo.matchBoards.map(
       (slots, index) => {
         if (parseInt(`${firstHour}`) + index < noSlotIndex) {
