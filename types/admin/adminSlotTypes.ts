@@ -35,7 +35,7 @@ export type SlotPreviewProps = {
 };
 
 export type SlotCurrentProps = {
-  slotInfo: Match;
+  slotInfo: CurrentMatch;
   scheduleInfo: EditedSchedule;
   firstHour: number;
   lastHour: number;
