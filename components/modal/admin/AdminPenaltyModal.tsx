@@ -20,7 +20,14 @@ export default function AdminPenaltyModal(props: { value: string }) {
   }:
     | React.ChangeEvent<HTMLTextAreaElement>
     | React.ChangeEvent<HTMLInputElement>) => {
-    setPenaltyInfo({ ...penaltyInfo, [name]: value });
+    if (name === 'penaltyTime' && value.length > 2)
+      return setSnackBar({
+        toastName: 'penalty',
+        severity: 'error',
+        message: '적용시간은 2자리 이하로 입력해주세요.',
+        clicked: true,
+      });
+    else setPenaltyInfo({ ...penaltyInfo, [name]: value });
   };
 
   const sendPenaltyHandler = async () => {
@@ -39,6 +46,14 @@ export default function AdminPenaltyModal(props: { value: string }) {
         toastName: 'penalty',
         severity: 'error',
         message: `모든 항목을 입력해주세요.`,
+        clicked: true,
+      });
+      return;
+    } else if (isNaN(Number(penaltyTime))) {
+      setSnackBar({
+        toastName: 'penalty',
+        severity: 'error',
+        message: `적용시간은 숫자만 입력해주세요.`,
         clicked: true,
       });
       return;
@@ -104,13 +119,17 @@ export default function AdminPenaltyModal(props: { value: string }) {
             />
           </div>
           <div className={styles.dateWrap}>
-            <div className={styles.bodyText}>적용 시간:</div>
+            <div className={styles.bodyText}>적용시간:</div>
             <input
               className={styles.dateBlank}
               name='penaltyTime'
               placeholder={'적용 시간을 입력하세요'}
               onChange={inputHandler}
             />
+          </div>
+          <div className={styles.dateWrap}>
+            <div className={styles.bodyText}>해방시간:</div>
+            <div className={styles.dateBlank}></div>
           </div>
         </div>
         <div className={styles.btns}>
