@@ -87,11 +87,11 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
 
   return (
     <>
-      {getFirstOpenSlot === null && (
-        <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>
-      )}
       <div>
         <div className={styles.buttonWrap}>
+          {getFirstOpenSlot === null && (
+            <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>
+          )}
           <button className={styles.manual} onClick={openManual}>
             매뉴얼
           </button>

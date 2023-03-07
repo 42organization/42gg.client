@@ -17,7 +17,7 @@ export default function SlotCurrent(props: SlotCurrentProps) {
     const noSlotIndex: number = currentHour + futurePreview - pastSlotTime;
     const updatedMatchBoards = props.slotInfo.matchBoards.map(
       (slots: Slots[], index: number) => {
-        if (parseInt(`${firstHour}`) + index < noSlotIndex) {
+        if (firstHour + index < noSlotIndex) {
           const updatedSlots: Slots[] = slots.map((slot: Slots) => {
             return { ...slot, status: 'noSlot' };
           });
@@ -56,7 +56,7 @@ export default function SlotCurrent(props: SlotCurrentProps) {
           >
             <div
               className={
-                parseInt(slot[0].time[11]) * 10 + parseInt(slot[0].time[12]) ===
+                slotTime ===
                 (currentHour + futurePreview > 23
                   ? (currentHour + futurePreview) % 24
                   : currentHour + futurePreview)
