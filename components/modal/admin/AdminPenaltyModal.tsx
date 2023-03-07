@@ -1,8 +1,9 @@
 import { useSetRecoilState } from 'recoil';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { PenaltyInfo } from 'types/admin/adminPenaltyTypes';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
+import { fillZero } from 'utils/handleTime';
 import instance from 'utils/axios';
 import styles from 'styles/admin/modal/AdminPenalty.module.scss';
 
@@ -10,7 +11,7 @@ export default function AdminPenaltyModal(props: { value: string }) {
   const [penaltyInfo, setPenaltyInfo] = useState<PenaltyInfo>({
     intraId: props.value,
     reason: '',
-    penaltyTime: '',
+    penaltyTime: 0,
   });
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
@@ -30,16 +31,13 @@ export default function AdminPenaltyModal(props: { value: string }) {
     setPenaltyInfo({ ...penaltyInfo, [name]: value });
   };
 
-  const timeHandler = (e: any) => {
+  const timeHandler = (e: number) => {
     const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth() + 1;
-    const date = now.getDate();
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    const result = `${year}-${month}-${date} ${
-      hour + Number(penaltyInfo.penaltyTime)
-    }:${minute}`;
+    const newDate = new Date(now.getTime() + e * 3600000);
+    const resultMinute = fillZero(newDate.getMinutes().toString(), 2);
+    const result = `${newDate.getFullYear()}-${
+      newDate.getMonth() + 1
+    }-${newDate.getDate()} ${newDate.getHours()}:${resultMinute}`;
     return result;
   };
 
@@ -146,7 +144,8 @@ export default function AdminPenaltyModal(props: { value: string }) {
               className={styles.dateBlank}
               name='freeTime'
               value={timeHandler(penaltyInfo.penaltyTime)}
-            ></input>
+              readOnly
+            />
           </div>
         </div>
         <div className={styles.btns}>
