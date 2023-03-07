@@ -37,10 +37,9 @@ export default function AdminPenaltyModal(props: { value: string }) {
     const date = now.getDate();
     const hour = now.getHours();
     const minute = now.getMinutes();
-    const second = now.getSeconds();
     const result = `${year}-${month}-${date} ${
       hour + Number(penaltyInfo.penaltyTime)
-    }:${minute}:${second}`;
+    }:${minute}`;
     return result;
   };
 
