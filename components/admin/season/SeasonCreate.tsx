@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import styles from 'styles/admin/season/SeasonCreate.module.scss';
 import React, { useState } from 'react';
+import instance from 'utils/axios';
 
 interface SeasonCreateInfo {
   seasonName: string;
@@ -33,6 +34,15 @@ export default function SeasonCreate() {
     | React.ChangeEvent<HTMLInputElement>
     | React.ChangeEvent<HTMLSelectElement>) => {
     setSeasonInfo({ ...seasonInfo, [name]: value });
+  };
+
+  const postHandler = async () => {
+    try {
+      await instance.post(`/pingpong/admin/season`, seasonInfo);
+      alert('SUCCESS');
+    } catch (e: any) {
+      alert(e.response?.data.code);
+    }
   };
 
   return (
@@ -89,6 +99,9 @@ export default function SeasonCreate() {
           </TableBody>
         </Table>
       </TableContainer>
+      <div className={styles.BtnContainer}>
+        <button onClick={postHandler}>생성</button>
+      </div>
     </div>
   );
 }
