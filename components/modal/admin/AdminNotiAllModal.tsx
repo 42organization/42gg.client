@@ -7,16 +7,11 @@ import instance from 'utils/axios';
 import styles from 'styles/admin/modal/AdminNoti.module.scss';
 
 export default function AdminNotiAllModal() {
-  const [notiAllInfo, setNotiAllInfo] = useState<NotiAllInfo>({
-    message: '',
-    sendMail: false,
-  });
-
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
   const notiContent = useRef<HTMLTextAreaElement>(null);
 
-  const sendNotificationHandler = async (sendMail: boolean) => {
+  const sendNotificationHandler = async () => {
     if (notiContent.current?.value === '') {
       setSnackBar({
         toastName: 'noti all',
@@ -35,12 +30,28 @@ export default function AdminNotiAllModal() {
       setModal({ modalName: null });
     }
     try {
-      await instance.post(`pingpong/admin/notifications/`, {
+      const res = await instance.post(`pingpong/admin/notifications/`, {
         message: notiContent.current?.value
           ? notiContent.current?.value
           : '알림 전송 실패',
-        sendMail: false,
       });
+      if (res.status === 200) {
+        setSnackBar({
+          toastName: 'noti all',
+          severity: 'success',
+          message: `성공적으로 전송되었습니다!`,
+          clicked: true,
+        });
+        setModal({ modalName: null });
+      } else {
+        setSnackBar({
+          toastName: 'noti all',
+          severity: 'error',
+          message: `전송에 실패하였습니다!`,
+          clicked: true,
+        });
+        setModal({ modalName: null });
+      }
     } catch (e) {
       setSnackBar({
         toastName: 'noti all',
@@ -71,7 +82,7 @@ export default function AdminNotiAllModal() {
         <div className={styles.btns}>
           <button
             onClick={() => {
-              sendNotificationHandler(true);
+              sendNotificationHandler();
             }}
             className={styles.btn1}
           >
