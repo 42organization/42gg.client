@@ -13,5 +13,6 @@ export const profileState = atom<ProfileBasic>({
     currentExp: 0,
     maxExp: 0,
     expRate: 0,
+    snsNotiOpt: 'SLACK',
   },
 });
