@@ -82,22 +82,36 @@ export default function AdminNotiUserModal() {
         clicked: true,
       });
       return;
-    } else {
-      setSnackBar({
-        toastName: 'noti user',
-        severity: 'success',
-        message: `성공적으로 전송되었습니다!`,
-        clicked: true,
-      });
-      setModal({ modalName: null });
     }
     try {
-      await instance.post(`pingpong/admin/notifications/${keyword}`, {
-        keyword,
-        message: notiContent.current?.value
-          ? notiContent.current?.value
-          : '알림 전송 실패',
-      });
+      const res = await instance.post(
+        `pingpong/admin/notifications/${keyword}`,
+        {
+          keyword,
+          message: notiContent.current?.value
+            ? notiContent.current?.value
+            : '알림 전송 실패',
+        }
+      );
+      if (res.status === 200) {
+        setSnackBar({
+          toastName: 'noti user',
+          severity: 'success',
+          message: `성공적으로 전송되었습니다!`,
+          clicked: true,
+        });
+        console.log(res);
+        setModal({ modalName: null });
+      } else {
+        setSnackBar({
+          toastName: 'noti user',
+          severity: 'error',
+          message: `알림 전송에 실패했습니다.`,
+          clicked: true,
+        });
+        console.log(res);
+        setModal({ modalName: null });
+      }
     } catch (e) {
       setSnackBar({
         toastName: 'noti user',
