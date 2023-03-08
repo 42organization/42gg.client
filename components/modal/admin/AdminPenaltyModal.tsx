@@ -34,10 +34,11 @@ export default function AdminPenaltyModal(props: { value: string }) {
   const timeHandler = (e: number) => {
     const now = new Date();
     const newDate = new Date(now.getTime() + e * 3600000);
+    const resultMonth = fillZero((newDate.getMonth() + 1).toString(), 2);
+    const resultDate = fillZero(newDate.getDate().toString(), 2);
+    const resultHour = fillZero(newDate.getHours().toString(), 2);
     const resultMinute = fillZero(newDate.getMinutes().toString(), 2);
-    const result = `${newDate.getFullYear()}-${
-      newDate.getMonth() + 1
-    }-${newDate.getDate()} ${newDate.getHours()}:${resultMinute}`;
+    const result = `${newDate.getFullYear()}-${resultMonth}-${resultDate} ${resultHour}:${resultMinute}`;
     return result;
   };
 
