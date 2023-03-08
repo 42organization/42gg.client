@@ -64,7 +64,7 @@ export default function AdminNotiUserModal() {
     setKeyword(event.target.value);
   };
 
-  const sendNotificationHandler = async (sendMail: boolean) => {
+  const sendNotificationHandler = async () => {
     if (keyword === '') {
       setSnackBar({
         toastName: 'noti user',
@@ -97,7 +97,6 @@ export default function AdminNotiUserModal() {
         message: notiContent.current?.value
           ? notiContent.current?.value
           : '알림 전송 실패',
-        sendMail,
       });
     } catch (e) {
       setSnackBar({
@@ -184,7 +183,7 @@ export default function AdminNotiUserModal() {
         <div className={styles.btns}>
           <button
             onClick={() => {
-              sendNotificationHandler(true);
+              sendNotificationHandler();
             }}
             className={styles.btn1}
           >
