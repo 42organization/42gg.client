@@ -90,11 +90,29 @@ export default function SeasonList() {
                 {tableFormat['season'].columns.map(
                   (columnName, index: number) => (
                     <TableCell className={styles.tableBodyItem} key={index}>
-                      {columnName === 'startTime' || columnName === 'endTime'
-                        ? seasonL[columnName as keyof ISeason]
-                            ?.toString()
-                            .replace('T', ' ')
-                        : seasonL[columnName as keyof ISeason]?.toString()}
+                      {columnName === 'startTime' ||
+                      columnName === 'endTime' ? (
+                        seasonL[columnName as keyof ISeason]
+                          ?.toString()
+                          .replace('T', ' ')
+                      ) : columnName === 'edit' ? (
+                        seasonL['status'] === 0 ? (
+                          <div>과거 시즌입니다 !</div>
+                        ) : seasonL['status'] === 1 ? (
+                          <div>
+                            <button className={styles.editBtn}>수정</button>
+                          </div>
+                        ) : seasonL['status'] === 2 ? (
+                          <div>
+                            <button className={styles.editBtn}>수정</button>
+                            <button className={styles.editBtn}>삭제</button>
+                          </div>
+                        ) : (
+                          <div>error status</div>
+                        )
+                      ) : (
+                        seasonL[columnName as keyof ISeason]?.toString()
+                      )}
                     </TableCell>
                   )
                 )}

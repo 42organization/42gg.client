@@ -69,6 +69,7 @@ export const tableFormat: TableFormat = {
       'startPpp',
       'pppGap',
       'status',
+      'edit',
     ],
   },
 };
