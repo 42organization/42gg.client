@@ -16,6 +16,15 @@ import {
 } from '@mui/material';
 import styles from 'styles/admin/feedback/FeedbackTable.module.scss';
 
+const tableTitle: { [key: string]: string } = {
+  id: 'ID',
+  intraId: 'intra ID',
+  category: '종류',
+  content: '내용',
+  createdTime: '생성일',
+  isSolved: '해결 여부',
+};
+
 export interface IFeedback {
   id: number;
   intraId: string;
@@ -107,7 +116,7 @@ export default function FeedbackTable() {
                     className={styles.tableHeaderItem}
                     key={columnName}
                   >
-                    {columnName}
+                    {tableTitle[columnName]}
                   </TableCell>
                 ))}
               </TableRow>

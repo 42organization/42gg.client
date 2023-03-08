@@ -9,12 +9,22 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import axios from 'axios';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import CreateNotiButton from 'components/admin/notification/CreateNotiButton';
 import styles from 'styles/admin/notification/NotificationTable.module.scss';
 import instance from 'utils/axios';
+
+const tableTitle: { [key: string]: string } = {
+  notiId: 'ID',
+  roleType: '권한',
+  intraId: 'Intra ID',
+  slotId: '슬롯 ID',
+  type: '종류',
+  message: '내용',
+  createdTime: '생성일',
+  isChecked: '확인 여부',
+};
 
 interface INotification {
   notiId: number;
@@ -94,7 +104,7 @@ export default function NotificationTable() {
                     className={styles.tableHeaderItem}
                     key={columnName}
                   >
-                    {columnName}
+                    {tableTitle[columnName]}
                   </TableCell>
                 ))}
               </TableRow>

@@ -40,7 +40,7 @@ export default function UserManagementTable() {
   const setModal = useSetRecoilState(modalState);
 
   const tableTitle: { [key: string]: string } = {
-    id: 'Id',
+    id: 'ID',
     roleType: '권한',
     intraId: 'Intra ID',
     statusMessage: '상태 메시지',
