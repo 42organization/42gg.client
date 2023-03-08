@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { NotiUserInfo } from 'types/admin/adminNotiUserTypes';
 import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
@@ -13,12 +12,6 @@ let timer: ReturnType<typeof setTimeout>;
 const MAX_SEARCH_LENGTH = 15;
 
 export default function AdminNotiUserModal() {
-  const [notiUserInfo, setNotiUserInfo] = useState<NotiUserInfo>({
-    intraId: '',
-    message: '',
-    sendMail: false,
-  });
-
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
   const notiContent = useRef<HTMLTextAreaElement>(null);
@@ -104,7 +97,7 @@ export default function AdminNotiUserModal() {
         message: notiContent.current?.value
           ? notiContent.current?.value
           : '알림 전송 실패',
-        sendMail: true,
+        sendMail,
       });
     } catch (e) {
       setSnackBar({
