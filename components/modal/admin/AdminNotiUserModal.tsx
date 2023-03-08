@@ -100,7 +100,6 @@ export default function AdminNotiUserModal() {
           message: `성공적으로 전송되었습니다!`,
           clicked: true,
         });
-        console.log(res);
         setModal({ modalName: null });
       } else {
         setSnackBar({
@@ -109,7 +108,6 @@ export default function AdminNotiUserModal() {
           message: `알림 전송에 실패했습니다.`,
           clicked: true,
         });
-        console.log(res);
         setModal({ modalName: null });
       }
     } catch (e) {
