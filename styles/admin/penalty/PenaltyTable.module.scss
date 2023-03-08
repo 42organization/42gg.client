@@ -46,6 +46,19 @@
             text-align: center;
             line-height: 150%;
             font-size: $medium-font;
+            .button {
+              padding: 4px 12px;
+              background-color: #2678f3;
+              border: none;
+              border-radius: $medium-radius;
+              font-size: $medium-font;
+              color: white;
+              cursor: pointer;
+              &:hover {
+                background-color: #1e64d2;
+                transition: 0.3s;
+              }
+            }
           }
         }
       }

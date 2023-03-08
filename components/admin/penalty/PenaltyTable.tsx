@@ -1,3 +1,5 @@
+import { useCallback, useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import {
   Table,
   TableBody,
@@ -8,15 +10,11 @@ import {
   Paper,
 } from '@mui/material';
 import PageNation from 'components/Pagination';
-import { tableFormat } from 'constants/admin/table';
-import { useCallback, useEffect, useState } from 'react';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import instance from 'utils/axios';
-import AdminSearchBar from '../common/AdminSearchBar';
-import styles from 'styles/admin/penalty/PenaltyTable.module.scss';
-import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-
-// intra id, 사유, 해방 시간, 삭제 버튼
+import { tableFormat } from 'constants/admin/table';
+import styles from 'styles/admin/penalty/PenaltyTable.module.scss';
 
 interface IPenalty {
   intraId: string;
@@ -29,6 +27,13 @@ interface IPenaltyTable {
   totalPage: number;
   currentPage: number;
 }
+
+const tableTitle: { [key: string]: string } = {
+  intraId: '유저 ID',
+  reason: '사유',
+  releaseTime: '해제 시간',
+  etc: '기타',
+};
 
 export default function PenaltyTable() {
   const [penaltyInfo, setPenaltyInfo] = useState<IPenaltyTable>({
@@ -94,7 +99,7 @@ export default function PenaltyTable() {
                     key={columnName}
                     className={styles.tableHeaderItem}
                   >
-                    {columnName}
+                    {tableTitle[columnName]}
                   </TableCell>
                 ))}
               </TableRow>
@@ -113,6 +118,7 @@ export default function PenaltyTable() {
                             (buttonName: string) => (
                               <button
                                 key={buttonName}
+                                className={styles.button}
                                 onClick={() =>
                                   handleButtonAction(penalty.intraId)
                                 }
