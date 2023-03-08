@@ -10,6 +10,7 @@ import { racketTypes } from 'types/userTypes';
 interface EditedProfile {
   racketType: string;
   statusMessage: string;
+  snsNotiOpt: 'NONE' | 'SLACK' | 'EMAIL' | 'BOTH';
 }
 
 const CHAR_LIMIT = 30;
@@ -21,14 +22,19 @@ export default function EditProfileModal() {
   const [editedProfile, setEditedProfile] = useState<EditedProfile>({
     racketType: profile.racketType,
     statusMessage: '',
+    snsNotiOpt: 'SLACK',
   });
-  const { racketType, statusMessage } = profile;
+  const [slack, setSlack] = useState<boolean>(true);
+  const [email, setEmail] = useState<boolean>(false);
+
+  const { racketType, statusMessage, snsNotiOpt } = profile;
 
   useEffect(() => {
     setEditedProfile((prev) => ({
       ...prev,
       racketType,
       statusMessage,
+      snsNotiOpt,
     }));
   }, [profile]);
 
@@ -46,6 +52,11 @@ export default function EditProfileModal() {
   };
 
   const finishEditHandler = async () => {
+    if (slack && email) editedProfile.snsNotiOpt = 'BOTH';
+    else if (slack && !email) editedProfile.snsNotiOpt = 'SLACK';
+    else if (!slack && email) editedProfile.snsNotiOpt = 'EMAIL';
+    else editedProfile.snsNotiOpt = 'NONE';
+
     setProfile((prev) => ({
       ...prev,
       ...editedProfile,
@@ -98,6 +109,27 @@ export default function EditProfileModal() {
               </label>
             );
           })}
+        </div>
+      </div>
+      <div>
+        <div className={styles.editType}>알림 받기</div>
+        <div className={styles.snsWrap}>
+          <div
+            className={`${styles.snsButton} ${
+              slack === true ? styles.snsClicked : ''
+            }`}
+            onClick={() => setSlack(!slack)}
+          >
+            Slack
+          </div>
+          <div
+            className={`${styles.snsButton} ${
+              email === true ? styles.snsClicked : ''
+            }`}
+            onClick={() => setEmail(!email)}
+          >
+            Email
+          </div>
         </div>
       </div>
       <div className={styles.buttons}>
