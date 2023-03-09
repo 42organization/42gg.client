@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
@@ -6,8 +6,16 @@ import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/SeasonEdit.module.scss';
 import { ISeason } from '../../../types/modalTypes';
 
+interface SeasonEditInfo {
+  seasonName: string;
+  startTime: Date;
+  startPpp: number;
+  pppGap: number;
+  seasonMode: string;
+}
+
 export const AdminSeasonEdit = ({
-  id,
+  seasonId,
   seasonName,
   seasonMode,
   pppGap,
@@ -17,6 +25,13 @@ export const AdminSeasonEdit = ({
 }: ISeason) => {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
+  const [seasonInfo, setSeasonInfo] = useState<SeasonEditInfo>({
+    seasonName,
+    startTime,
+    startPpp,
+    pppGap,
+    seasonMode,
+  });
 
   const handleClick = () => {
     setSnackBar({
@@ -25,6 +40,17 @@ export const AdminSeasonEdit = ({
       message: `성공적으로 수정되었습니다! `,
       clicked: true,
     });
+  };
+
+  const inputChangeHandler = ({
+    target: { name, value },
+  }:
+    | React.ChangeEvent<HTMLInputElement>
+    | React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(name, value);
+    name === 'startPpp' || name === 'pppGap'
+      ? setSeasonInfo({ ...seasonInfo, [name]: parseInt(value) })
+      : setSeasonInfo({ ...seasonInfo, [name]: value });
   };
 
   return (
@@ -36,32 +62,68 @@ export const AdminSeasonEdit = ({
       <div className={styles.body}>
         <div className={styles.inputContainer}>
           <div>
-            <div className={styles.bodyText}>SeasonId</div>
-            <input value={id} disabled={true} />
+            <div className={styles.bodyText}>seasonId</div>
+            <input value={seasonId} disabled={true} />
           </div>
           <div>
-            <div className={styles.bodyText}>SeasonName</div>
-            <input value={seasonName} />
-          </div>
-          <div>
-            <div className={styles.bodyText}>SeasonMode</div>
-            <input value={seasonMode} disabled={status == 1} />
-          </div>
-          <div>
-            <div className={styles.bodyText}>StartTime</div>
+            <div className={styles.bodyText}>seasonName</div>
             <input
-              value={startTime.toString()}
-              type='datetime-local'
-              disabled={status == 1}
+              value={seasonInfo.seasonName}
+              name='seasonName'
+              onChange={inputChangeHandler}
             />
           </div>
           <div>
-            <div className={styles.bodyText}>StartPpp</div>
-            <input value={startPpp} disabled={status == 1} />
+            <div className={styles.bodyText}>seasonMode</div>
+            {status === 1 ? (
+              <input value={seasonInfo.seasonMode} disabled={true} />
+            ) : (
+              <select name='seasonMode' onChange={inputChangeHandler}>
+                <option value='BOTH'>BOTH</option>
+                <option value='RANK'>RANK</option>
+                <option value='NORMAL'>NORMAL</option>
+              </select>
+            )}
+          </div>
+          <div>
+            <div className={styles.bodyText}>startTime</div>
+            {status === 1 ? (
+              <input
+                value={seasonInfo.startPpp.toString()}
+                type='datetime-local'
+                disabled={true}
+              />
+            ) : (
+              <input
+                value={seasonInfo.startTime.toString()}
+                type='datetime-local'
+                name='startTime'
+                disabled={status === 1}
+                onChange={inputChangeHandler}
+              />
+            )}
+          </div>
+          <div>
+            <div className={styles.bodyText}>startPpp</div>
+            {status === 1 ? (
+              <input value={seasonInfo.startPpp.toString()} disabled={true} />
+            ) : (
+              <input
+                type='number'
+                name='startPpp'
+                value={seasonInfo.startPpp.toString()}
+                onChange={inputChangeHandler}
+              />
+            )}
           </div>
           <div>
             <div className={styles.bodyText}>pppGap</div>
-            <input value={pppGap} />
+            <input
+              type='number'
+              name='pppGap'
+              value={seasonInfo.pppGap.toString()}
+              onChange={inputChangeHandler}
+            />
           </div>
         </div>
         <div className={styles.btnContainer}>
