@@ -20,19 +20,19 @@ export default function SlotPreview(props: SlotPreviewProps) {
     if (futurePreview > 0) {
       if (currentHour + futurePreview - pastSlotTime - 24 > lastHour + index) {
         return 'noSlot';
+      } else if (currentHour + futurePreview - 24 > lastHour + index) {
+        return 'close';
       } else if (futureSlotTime + futurePreview > index + remainTime) {
         return 'open';
       } else if (futureSlotTime + futurePreview === index + remainTime) {
         return 'preview';
-      } else {
-        return 'noSlot';
       }
+      return 'noSlot';
     } else {
       if (remainTime + futureSlotTime > index) {
         return 'preview';
-      } else {
-        return 'noSlot';
       }
+      return 'noSlot';
     }
   };
 
