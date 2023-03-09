@@ -6,7 +6,6 @@ import { toastState } from 'utils/recoil/toast';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
 import styles from 'styles/admin/modal/AdminNoti.module.scss';
-import { finished } from 'stream';
 
 let timer: ReturnType<typeof setTimeout>;
 
@@ -30,7 +29,7 @@ export default function AdminNotiUserModal() {
       setSnackBar({
         toastName: 'noti user',
         severity: 'error',
-        message: `MS02`,
+        message: `api 불러오기 실패 ${keyword}`,
         clicked: true,
       });
     }
@@ -65,15 +64,60 @@ export default function AdminNotiUserModal() {
     setKeyword(event.target.value);
   };
 
-  const handleClick = useCallback(() => {
-    setSnackBar({
-      toastName: 'noti user',
-      severity: 'success',
-      message: `성공적으로 전송되었습니다! ${notiContent.current?.value}`,
-      clicked: true,
-    });
-    // TODO : 실제 서버에 요청 보내기
-  }, []);
+  const sendNotificationHandler = async () => {
+    if (keyword === '') {
+      setSnackBar({
+        toastName: 'noti user',
+        severity: 'error',
+        message: `intra ID를 입력해주세요.`,
+        clicked: true,
+      });
+      return;
+    }
+    if (notiContent.current?.value === '') {
+      setSnackBar({
+        toastName: 'noti user',
+        severity: 'error',
+        message: `알림 내용을 입력해주세요.`,
+        clicked: true,
+      });
+      return;
+    }
+    try {
+      const res = await instance.post(
+        `pingpong/admin/notifications/${keyword}`,
+        {
+          keyword,
+          message: notiContent.current?.value
+            ? notiContent.current?.value
+            : '알림 전송 실패',
+        }
+      );
+      if (res.status === 200) {
+        setSnackBar({
+          toastName: 'noti user',
+          severity: 'success',
+          message: `성공적으로 전송되었습니다!`,
+          clicked: true,
+        });
+        setModal({ modalName: null });
+      } else {
+        setSnackBar({
+          toastName: 'noti user',
+          severity: 'error',
+          message: `알림 전송에 실패했습니다.`,
+          clicked: true,
+        });
+      }
+    } catch (e) {
+      setSnackBar({
+        toastName: 'noti user',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
+    }
+  };
 
   return (
     <div className={styles.whole}>
@@ -149,8 +193,7 @@ export default function AdminNotiUserModal() {
         <div className={styles.btns}>
           <button
             onClick={() => {
-              handleClick();
-              setModal({ modalName: null });
+              sendNotificationHandler();
             }}
             className={styles.btn1}
           >
