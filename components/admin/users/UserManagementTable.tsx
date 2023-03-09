@@ -40,7 +40,7 @@ export default function UserManagementTable() {
   const setModal = useSetRecoilState(modalState);
 
   const tableTitle: { [key: string]: string } = {
-    id: 'Id',
+    id: 'ID',
     roleType: '권한',
     intraId: 'Intra ID',
     statusMessage: '상태 메시지',
@@ -114,7 +114,7 @@ export default function UserManagementTable() {
           <AdminSearchBar initSearch={initSearch} />
         </div>
         <TableContainer className={styles.tableContainer} component={Paper}>
-          <Table className={styles.table} aria-label='customized table'>
+          <Table className={styles.table} aria-label='UserManagementTable'>
             <TableHead className={styles.tableHeader}>
               <TableRow>
                 {tableFormat['userInfo'].columns.map((columnName) => (
@@ -129,7 +129,7 @@ export default function UserManagementTable() {
             </TableHead>
             <TableBody className={styles.tableBody}>
               {userManagements.userInfoList.map((userInfo: IUser) => (
-                <TableRow key={userInfo.id}>
+                <TableRow key={userInfo.id} className={styles.tableRow}>
                   {tableFormat['userInfo'].columns.map((columnName: string) => {
                     return (
                       <TableCell

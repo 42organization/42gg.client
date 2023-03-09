@@ -9,12 +9,22 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import axios from 'axios';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import CreateNotiButton from 'components/admin/notification/CreateNotiButton';
-import style from 'styles/admin/notification/NotificationTable.module.scss';
+import styles from 'styles/admin/notification/NotificationTable.module.scss';
 import instance from 'utils/axios';
+
+const tableTitle: { [key: string]: string } = {
+  notiId: 'ID',
+  roleType: '권한',
+  intraId: 'Intra ID',
+  slotId: '슬롯 ID',
+  type: '종류',
+  message: '내용',
+  createdTime: '생성일',
+  isChecked: '확인 여부',
+};
 
 interface INotification {
   notiId: number;
@@ -79,30 +89,33 @@ export default function NotificationTable() {
 
   return (
     <>
-      <div className={style.notificationWrap}>
-        <div className={style.header}>
-          <span className={style.title}>알림 관리</span>
+      <div className={styles.notificationWrap}>
+        <div className={styles.header}>
+          <span className={styles.title}>알림 관리</span>
           <AdminSearchBar initSearch={initSearch} />
           <CreateNotiButton />
         </div>
-        <TableContainer className={style.tableContainer} component={Paper}>
-          <Table className={style.table} aria-label='customized table'>
-            <TableHead className={style.tableHeader}>
+        <TableContainer className={styles.tableContainer} component={Paper}>
+          <Table className={styles.table} aria-label='customized table'>
+            <TableHead className={styles.tableHeader}>
               <TableRow>
                 {tableFormat['notification'].columns.map((columnName) => (
-                  <TableCell className={style.tableHeaderItem} key={columnName}>
-                    {columnName}
+                  <TableCell
+                    className={styles.tableHeaderItem}
+                    key={columnName}
+                  >
+                    {tableTitle[columnName]}
                   </TableCell>
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody className={style.tableBody}>
+            <TableBody className={styles.tableBody}>
               {notificationInfo.notiList.map((notification: INotification) => (
-                <TableRow key={notification.notiId}>
+                <TableRow key={notification.notiId} className={styles.tableRow}>
                   {tableFormat['notification'].columns.map(
                     (columnName: string, index: number) => {
                       return (
-                        <TableCell className={style.tableBodyItem} key={index}>
+                        <TableCell className={styles.tableBodyItem} key={index}>
                           {notification[
                             columnName as keyof INotification
                           ]?.toString()}
@@ -115,7 +128,7 @@ export default function NotificationTable() {
             </TableBody>
           </Table>
         </TableContainer>
-        <div className={style.pageNationContainer}>
+        <div className={styles.pageNationContainer}>
           <PageNation
             curPage={notificationInfo.currentPage}
             totalPages={notificationInfo.totalPage}

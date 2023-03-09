@@ -14,7 +14,16 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import style from 'styles/admin/feedback/FeedbackTable.module.scss';
+import styles from 'styles/admin/feedback/FeedbackTable.module.scss';
+
+const tableTitle: { [key: string]: string } = {
+  id: 'ID',
+  intraId: 'intra ID',
+  category: '종류',
+  content: '내용',
+  createdTime: '생성일',
+  isSolved: '해결 여부',
+};
 
 export interface IFeedback {
   id: number;
@@ -93,30 +102,33 @@ export default function FeedbackTable() {
 
   return (
     <>
-      <div className={style.feedbackWrap}>
-        <div className={style.header}>
-          <span className={style.title}>피드백 관리</span>
+      <div className={styles.feedbackWrap}>
+        <div className={styles.header}>
+          <span className={styles.title}>피드백 관리</span>
           <AdminSearchBar initSearch={initSearch} />
         </div>
-        <TableContainer className={style.tableContainer} component={Paper}>
-          <Table className={style.table} aria-label='customized table'>
-            <TableHead className={style.tableHeader}>
+        <TableContainer className={styles.tableContainer} component={Paper}>
+          <Table className={styles.table} aria-label='customized table'>
+            <TableHead className={styles.tableHeader}>
               <TableRow>
                 {tableFormat['feedback'].columns.map((columnName) => (
-                  <TableCell className={style.tableHeaderItem} key={columnName}>
-                    {columnName}
+                  <TableCell
+                    className={styles.tableHeaderItem}
+                    key={columnName}
+                  >
+                    {tableTitle[columnName]}
                   </TableCell>
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody className={style.tableBody}>
+            <TableBody className={styles.tableBody}>
               {feedbackInfo.feedbackList.map((feedback: IFeedback) => (
-                <TableRow key={feedback.id}>
+                <TableRow key={feedback.id} className={styles.tableRow}>
                   {tableFormat['feedback'].columns.map((columnName: string) => {
                     const value = feedback[columnName as keyof IFeedback];
                     return (
                       <TableCell
-                        className={style.tableBodyItem}
+                        className={styles.tableBodyItem}
                         key={columnName}
                       >
                         {typeof value === 'boolean' ? (
@@ -148,7 +160,7 @@ export default function FeedbackTable() {
             </TableBody>
           </Table>
         </TableContainer>
-        <div className={style.pageNationContainer}>
+        <div className={styles.pageNationContainer}>
           <PageNation
             curPage={feedbackInfo.currentPage}
             totalPages={feedbackInfo.totalPage}
