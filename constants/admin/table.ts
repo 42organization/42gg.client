@@ -36,6 +36,10 @@ export const tableFormat: TableFormat = {
       value: ['completed', 'notCompleted'],
     },
   },
+  games: {
+    name: '게임 관리',
+    columns: ['gameId', 'startAt', 'slotTime', 'mode', 'team1', 'team2'],
+  },
   announcement: {
     name: '과거 공지사항',
     columns: [
