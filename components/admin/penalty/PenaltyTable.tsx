@@ -81,8 +81,6 @@ export default function PenaltyTable() {
     intraId ? getUserPenalty() : getAllUserPenalty();
   }, [intraId, getUserPenalty, getAllUserPenalty]);
 
-  if (!penaltyInfo.penaltyList.length) return <div>비어있습니다!</div>;
-
   return (
     <>
       <div className={styles.penaltyWrap}>
@@ -105,43 +103,53 @@ export default function PenaltyTable() {
               </TableRow>
             </TableHead>
             <TableBody className={styles.tableBody}>
-              {penaltyInfo.penaltyList.map((penalty: IPenalty) => (
-                <TableRow key={penalty.intraId} className={styles.tableRow}>
-                  {tableFormat['penalty'].columns.map((columnName: string) => (
-                    <TableCell
-                      key={columnName}
-                      className={styles.tableBodyItem}
-                    >
-                      {columnName !== 'etc'
-                        ? penalty[columnName as keyof IPenalty]?.toString()
-                        : tableFormat['penalty'].etc?.value.map(
-                            (buttonName: string) => (
-                              <button
-                                key={buttonName}
-                                className={styles.button}
-                                onClick={() =>
-                                  handleButtonAction(penalty.intraId)
-                                }
-                              >
-                                {buttonName}
-                              </button>
-                            )
-                          )}
-                    </TableCell>
-                  ))}
+              {penaltyInfo.penaltyList.length ? (
+                penaltyInfo.penaltyList.map((penalty: IPenalty) => (
+                  <TableRow key={penalty.intraId} className={styles.tableRow}>
+                    {tableFormat['penalty'].columns.map(
+                      (columnName: string) => (
+                        <TableCell
+                          key={columnName}
+                          className={styles.tableBodyItem}
+                        >
+                          {columnName !== 'etc'
+                            ? penalty[columnName as keyof IPenalty]?.toString()
+                            : tableFormat['penalty'].etc?.value.map(
+                                (buttonName: string) => (
+                                  <button
+                                    key={buttonName}
+                                    className={styles.button}
+                                    onClick={() =>
+                                      handleButtonAction(penalty.intraId)
+                                    }
+                                  >
+                                    {buttonName}
+                                  </button>
+                                )
+                              )}
+                        </TableCell>
+                      )
+                    )}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell>비어있습니다</TableCell>
                 </TableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
         </TableContainer>
         <div className={styles.pageNationContainer}>
-          <PageNation
-            curPage={penaltyInfo.currentPage}
-            totalPages={penaltyInfo.totalPage}
-            pageChangeHandler={(pageNumber: number) => {
-              setCurrentPage(pageNumber);
-            }}
-          />
+          {penaltyInfo.totalPage > 1 && (
+            <PageNation
+              curPage={penaltyInfo.currentPage}
+              totalPages={penaltyInfo.totalPage}
+              pageChangeHandler={(pageNumber: number) => {
+                setCurrentPage(pageNumber);
+              }}
+            />
+          )}
         </div>
       </div>
     </>
