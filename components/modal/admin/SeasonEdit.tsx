@@ -44,7 +44,12 @@ const AdminSeasonEdit = ({
       });
       setModal({ modalName: null });
     } catch (e: any) {
-      alert(e.response?.data.code);
+      setSnackBar({
+        toastName: 'Edit Error',
+        severity: 'error',
+        message: `Put 실패 ${e.response?.data.code}`,
+        clicked: true,
+      });
     }
   };
 

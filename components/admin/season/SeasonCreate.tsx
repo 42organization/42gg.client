@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import instance from 'utils/axios';
+import { toastState } from 'utils/recoil/toast';
 import {
   Paper,
   Table,
@@ -27,6 +29,7 @@ export default function SeasonCreate() {
     pppGap: 0,
     seasonMode: 'BOTH',
   });
+  const setSnackBar = useSetRecoilState(toastState);
 
   const inputChangeHandler = ({
     target: { name, value },
@@ -41,10 +44,19 @@ export default function SeasonCreate() {
   const postHandler = async () => {
     try {
       await instance.post(`/pingpong/admin/season`, seasonInfo);
-      alert('SUCCESS');
+      setSnackBar({
+        toastName: 'Season Create',
+        severity: 'success',
+        message: `성공적으로 생성되었습니다! `,
+        clicked: true,
+      });
     } catch (e: any) {
-      console.log(e);
-      alert(e.response?.data.code);
+      setSnackBar({
+        toastName: 'Create Error',
+        severity: 'error',
+        message: `Post 실패 ${e.response?.data.code}`,
+        clicked: true,
+      });
     }
   };
 

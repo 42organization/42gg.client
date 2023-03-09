@@ -55,7 +55,12 @@ export default function SeasonList() {
       const res = await instance.get(`pingpong/admin/season/${mode}`);
       setSeasonList({ ...res.data });
     } catch (e: any) {
-      console.log(e);
+      setSnackBar({
+        toastName: 'Get Error',
+        severity: 'error',
+        message: `로딩 실패 ${e.response?.data.code}`,
+        clicked: true,
+      });
     }
   };
 
@@ -73,8 +78,12 @@ export default function SeasonList() {
         clicked: true,
       });
     } catch (e: any) {
-      console.log(e);
-      alert(e.response?.data.code);
+      setSnackBar({
+        toastName: 'Delete Error',
+        severity: 'error',
+        message: `삭제 실패 ${e.response?.data.code}`,
+        clicked: true,
+      });
     }
   };
 
