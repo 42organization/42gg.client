@@ -2,7 +2,10 @@ export type TableName =
   | 'notification'
   | 'userInfo'
   | 'feedback'
+  | 'games'
   | 'announcement';
+  | 'penalty';
+  
 export type EtcType = 'button' | 'toggle';
 
 export type TableFormat = {
