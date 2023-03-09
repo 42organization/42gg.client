@@ -14,7 +14,7 @@ import { IGames, IGameLog } from 'types/admin/gameLogTypes';
 import instance from 'utils/axios';
 import { getFormattedDateToString } from 'utils/handleTime';
 import AdminSearchBar from '../common/AdminSearchBar';
-import style from 'styles/admin/games/GamesTable.module.scss';
+import styles from 'styles/admin/games/GamesTable.module.scss';
 
 export default function GamesTable() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -30,10 +30,14 @@ export default function GamesTable() {
     setCurrentPage(1);
   }, []);
 
+  useEffect(() => {
+    console.log(gameInfo);
+  }, [gameInfo]);
+
   const getAllGames = useCallback(async () => {
     try {
       const res = await instance.get(
-        `pingpong/admin/games?season=0&page=${currentPage}&size=10`
+        `pingpong/admin/games?season=0&page=${currentPage}&size=5`
       );
 
       setGameInfo({
@@ -85,62 +89,61 @@ export default function GamesTable() {
 
   return (
     <>
-      <div className={style.gamesWrap}>
-        <div className={style.header}>
-          <div className={style.title}>게임 관리</div>
+      <div className={styles.gamesWrap}>
+        <div className={styles.header}>
+          <div className={styles.title}>게임 관리</div>
           <AdminSearchBar initSearch={initSearch} />
         </div>
-        <TableContainer className={style.tableContainer} component={Paper}>
-          <Table className={style.table}>
-            <TableHead className={style.tableHeader}>
-              <TableRow>
-                {tableFormat['games'].columns.map((column: string) => (
-                  <TableCell className={style.tableHeaderItem} key={column}>
-                    {column}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody className={style.tableBody}>
-              {gameInfo.gameLog.map((game: IGameLog) => (
-                <TableRow key={game.gameId}>
-                  {tableFormat['games'].columns.map((column: string) => {
-                    if (column === 'team1' || column === 'team2') {
-                      return (
-                        <TableCell
-                          className={style.tableBodyItem}
-                          key={game[column].intraId1}
-                        >
-                          <div
-                            style={{
-                              background: game[column].win
-                                ? 'lawngreen'
-                                : 'orangered',
-                            }}
-                          >
-                            <div>
-                              {game[column].intraId1 +
-                                ' ' +
-                                (game[column].intraId2 ?? '')}
-                            </div>
-                            <div>{game[column].score}점</div>
-                          </div>
-                        </TableCell>
-                      );
-                    } else {
-                      return (
-                        <TableCell className={style.tableBodyItem} key={column}>
-                          {game[column as keyof IGameLog]?.toString()}
-                        </TableCell>
-                      );
+        <div className={styles.tableWrap}>
+          {gameInfo.gameLog.map((game: IGameLog) => {
+            return (
+              <div className={styles.tableRow} key={game.gameId}>
+                <div className={styles.gameId}>{game.gameId}</div>
+                <div className={styles.gameInfo}>
+                  <div>
+                    시작 날짜: {game.startAt.toLocaleString().split(' ')[0]}
+                  </div>
+                  <div>게임 모드: {game.mode}</div>
+                  <div>슬롯 시간: {game.slotTime}분</div>
+                  <div>
+                    {game.mode === 'Normal'
+                      ? ''
+                      : `Team 1 (${game.team1.score}) : Team 2 (${game.team2.score})`}
+                  </div>
+                </div>
+                <div className={styles.tableTeam}>
+                  <div>team1</div>
+                  <div
+                    className={
+                      game.mode === 'Normal'
+                        ? styles.normal
+                        : game.team1.score === 2
+                        ? styles.win
+                        : styles.lose
                     }
-                  })}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <div className={style.pageNationContainer}>
+                  >
+                    {game.team1.intraId1} {game.team1.intraId2}
+                  </div>
+                </div>
+                <div className={styles.tableTeam}>
+                  <div>team2</div>
+                  <div
+                    className={
+                      game.mode === 'Normal'
+                        ? styles.normal
+                        : game.team2.score === 2
+                        ? styles.win
+                        : styles.lose
+                    }
+                  >
+                    {game.team2.intraId1} {game.team2.intraId2}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className={styles.pageNationContainer}>
           <PageNation
             curPage={gameInfo.currentPage}
             totalPages={gameInfo.totalPage}
