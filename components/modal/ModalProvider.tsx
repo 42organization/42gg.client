@@ -20,6 +20,7 @@ import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
 import FeedbackDetailModal from './admin/FeedbackDetailModal';
 import DeletePenaltyModal from './admin/DeletePenaltyModal';
 import styles from 'styles/modal/Modal.module.scss';
+import { AdminSeasonEdit } from './admin/SeasonEdit';
 
 export default function ModalProvider() {
   const [
@@ -34,6 +35,7 @@ export default function ModalProvider() {
       detailContent,
       feedback,
       userId,
+      ISeason,
     },
     setModal,
   ] = useRecoilState(modalState);
@@ -58,6 +60,7 @@ export default function ModalProvider() {
     ) : null,
     'ADMIN-NOTI_ALL': <AdminNotiAllModal />,
     'ADMIN-NOTI_USER': <AdminNotiUserModal />,
+    'ADMIN-SEASON_EDIT': ISeason ? <AdminSeasonEdit {...ISeason} /> : null,
     'ADMIN-CHECK_FEEDBACK': feedback ? (
       <AdminCheckFeedback {...feedback} />
     ) : null,

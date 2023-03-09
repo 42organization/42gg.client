@@ -13,6 +13,8 @@ import styles from 'styles/admin/season/SeasonList.module.scss';
 import { tableFormat } from 'constants/admin/table';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import instance from 'utils/axios';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from '../../../utils/recoil/modal';
 
 interface ISeason {
   id: number;
@@ -36,6 +38,7 @@ const VAL_SEASON_MODE: { [key: number]: string } = {
   2: 'normal',
 };
 export default function SeasonList() {
+  const setModal = useSetRecoilState(modalState);
   const [seasonList, setSeasonList] = useState<ISeasonTable>({
     mode: '',
     seasonList: [],
@@ -100,11 +103,31 @@ export default function SeasonList() {
                           <div>과거 시즌입니다 !</div>
                         ) : seasonL['status'] === 1 ? (
                           <div>
-                            <button className={styles.editBtn}>수정</button>
+                            <button
+                              className={styles.editBtn}
+                              onClick={() => {
+                                setModal({
+                                  modalName: 'ADMIN-SEASON_EDIT',
+                                  ISeason: seasonL,
+                                });
+                              }}
+                            >
+                              수정
+                            </button>
                           </div>
                         ) : seasonL['status'] === 2 ? (
                           <div>
-                            <button className={styles.editBtn}>수정</button>
+                            <button
+                              className={styles.editBtn}
+                              onClick={() => {
+                                setModal({
+                                  modalName: 'ADMIN-SEASON_EDIT',
+                                  ISeason: seasonL,
+                                });
+                              }}
+                            >
+                              수정
+                            </button>
                             <button className={styles.editBtn}>삭제</button>
                           </div>
                         ) : (
