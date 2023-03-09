@@ -27,13 +27,11 @@ export default function CustomizedSnackbars() {
     setSnackBar({ toastName: null });
   };
 
+  if (!clicked) return <></>;
+
   return (
     <Stack spacing={2} sx={{ width: '100%' }}>
-      <Snackbar
-        open={clicked ?? false}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
+      <Snackbar open={clicked} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
           {message}
         </Alert>
