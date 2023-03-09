@@ -81,32 +81,20 @@ export default function SlotMain() {
   const intervalOptions = Array.from({ length: 60 }, (_, i: number) => i + 1)
     .filter((num) => 60 % num === 0)
     .map((num) => (
-      <option
-        key={`gt-${num}`}
-        value={num}
-        selected={scheduleInfo.interval === num}
-      >
+      <option key={`gt-${num}`} value={num}>
         {num}분
       </option>
     ));
 
   const pastTimeOptions = Array.from({ length: 4 }, (_, i) => i).map((num) => (
-    <option
-      key={`pt-${num}`}
-      value={num}
-      selected={scheduleInfo.pastSlotTime === num}
-    >
+    <option key={`pt-${num}`} value={num}>
       {num}시간
     </option>
   ));
 
   const futureTimeOptions = Array.from({ length: 23 }, (_, i) => i + 1).map(
     (num) => (
-      <option
-        key={`ft-${num}`}
-        value={num}
-        selected={scheduleInfo.futureSlotTime === num}
-      >
+      <option key={`ft-${num}`} value={num}>
         {num}시간
       </option>
     )
@@ -158,7 +146,11 @@ export default function SlotMain() {
       <div className={styles.inputContainer}>
         <div className={styles.interval}>
           <div>게임 시간:</div>
-          <select name='interval' onChange={inputHandler}>
+          <select
+            value={scheduleInfo.interval}
+            name='interval'
+            onChange={inputHandler}
+          >
             {intervalOptions}
           </select>
         </div>
@@ -216,13 +208,21 @@ export default function SlotMain() {
           <div className={styles.viewTimeBottom}>
             <div>
               <div>과거</div>
-              <select name='pastSlotTime' onChange={inputHandler}>
+              <select
+                value={scheduleInfo.pastSlotTime}
+                name='pastSlotTime'
+                onChange={inputHandler}
+              >
                 {pastTimeOptions}
               </select>
             </div>
             <div>
               <div>미래</div>
-              <select name='futureSlotTime' onChange={inputHandler}>
+              <select
+                value={scheduleInfo.futureSlotTime}
+                name='futureSlotTime'
+                onChange={inputHandler}
+              >
                 {futureTimeOptions}
               </select>
             </div>
