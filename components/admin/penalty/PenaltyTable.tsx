@@ -46,7 +46,7 @@ export default function PenaltyTable() {
   const setModal = useSetRecoilState(modalState);
 
   const handleButtonAction = (intraId: string) =>
-    setModal({ modalName: 'ADMIN-PENALTY_DETETE', intraId });
+    setModal({ modalName: 'ADMIN-PENALTY_DELETE', intraId });
 
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');

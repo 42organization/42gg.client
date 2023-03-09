@@ -15,6 +15,7 @@ type FixedModal = 'AFTER_GAME' | 'STAT';
 type AdminModal =
   | 'PROFILE'
   | 'PENALTY'
+  | 'PENALTY_DELETE'
   | 'NOTI_ALL'
   | 'NOTI_USER'
   | 'CHECK_FEEDBACK'
@@ -28,7 +29,6 @@ type ModalName =
   | `USER-${UserModal}`
   | `FIXED-${FixedModal}`
   | `ADMIN-${AdminModal}`;
-
 export interface Cancel {
   isMatched: boolean;
   slotId: number;
