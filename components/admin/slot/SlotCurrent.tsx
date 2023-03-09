@@ -39,7 +39,6 @@ export default function SlotCurrent(props: SlotCurrentProps) {
       }
     );
     setSlotInfo({
-      ...props.slotInfo,
       matchBoards: updatedMatchBoards,
     });
   };
