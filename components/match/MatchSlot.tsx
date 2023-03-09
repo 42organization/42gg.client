@@ -22,6 +22,10 @@ function MatchSlot({ type, slot, toggleMode }: MatchSlotProps) {
   const headMax = type === 'single' ? 2 : 4;
   const slotStartTime = new Date(time);
   const slotEndTime = new Date(endTime);
+  const slotData = `${minuiteToStr(
+    slotStartTime.getMinutes()
+  )} - ${minuiteToStr(slotEndTime.getMinutes())}`;
+
   const isAfterSlot: boolean =
     slotStartTime.getTime() - new Date().getTime() >= 0;
   const buttonStyle: { [key: string]: string } = useMemo(
@@ -66,8 +70,11 @@ function MatchSlot({ type, slot, toggleMode }: MatchSlotProps) {
       onClick={enrollHandler}
     >
       <span className={styles.time}>
-        {minuiteToStr(slotStartTime.getMinutes())} -{' '}
-        {minuiteToStr(slotEndTime.getMinutes())}
+        {slotData === '00 - 00'
+          ? `${slotStartTime.getHours() % 12}:00 - ${
+              slotEndTime.getHours() % 12
+            }:00`
+          : slotData}
         {status === 'mytable' && ' 🙋'}
       </span>
       <span className={`${styles.headCount} ${headCount === 0 && styles.plus}`}>
