@@ -16,7 +16,7 @@ interface SeasonCreateInfo {
   startTime: Date;
   startPpp: number;
   pppGap: number;
-  mode: string;
+  seasonMode: string;
 }
 
 export default function SeasonCreate() {
@@ -25,7 +25,7 @@ export default function SeasonCreate() {
     startTime: new Date(),
     startPpp: 0,
     pppGap: 0,
-    mode: 'both',
+    seasonMode: 'BOTH',
   });
 
   const inputChangeHandler = ({
@@ -89,10 +89,10 @@ export default function SeasonCreate() {
                 />
               </TableCell>
               <TableCell>
-                <select name='mode' onChange={inputChangeHandler}>
-                  <option value='both'>both</option>
-                  <option value='rank'>rank</option>
-                  <option value='normal'>normal</option>
+                <select name='seasonMode' onChange={inputChangeHandler}>
+                  <option value='BOTH'>both</option>
+                  <option value='RANK'>rank</option>
+                  <option value='NORMAL'>normal</option>
                 </select>
               </TableCell>
             </TableRow>
