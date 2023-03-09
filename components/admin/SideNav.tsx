@@ -62,14 +62,6 @@ export default function SideNav() {
       >
         <GoSettings className={styles.logo} />
       </SideNavContent>
-
-      <SideNavContent
-        url={'/scheduler'}
-        menuName={'스케쥴러 관리'}
-        currentPath={currentPath}
-      >
-        <GoSettings className={styles.logo} />
-      </SideNavContent>
     </div>
   );
 }

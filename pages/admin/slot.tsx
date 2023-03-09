@@ -1,3 +1,9 @@
-export default function Slot() {
-  return <div>slot page</div>;
+import SlotMain from 'components/admin/slot/SlotMain';
+
+export default function Scheduler() {
+  return (
+    <>
+      <SlotMain />
+    </>
+  );
 }
