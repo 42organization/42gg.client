@@ -108,7 +108,6 @@ export default function AdminNotiUserModal() {
           message: `알림 전송에 실패했습니다.`,
           clicked: true,
         });
-        setModal({ modalName: null });
       }
     } catch (e) {
       setSnackBar({
@@ -117,7 +116,6 @@ export default function AdminNotiUserModal() {
         message: `API 요청에 문제가 발생했습니다.`,
         clicked: true,
       });
-      setModal({ modalName: null });
     }
   };
 
