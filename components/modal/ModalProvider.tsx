@@ -18,6 +18,7 @@ import AdminNotiAllModal from './admin/AdminNotiAllModal';
 import AdminNotiUserModal from './admin/AdminNotiUserModal';
 import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
 import FeedbackDetailModal from './admin/FeedbackDetailModal';
+import DeletePenaltyModal from './admin/DeletePenaltyModal';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
@@ -52,8 +53,11 @@ export default function ModalProvider() {
     'FIXED-STAT': <StatChangeModal {...exp} />,
     'ADMIN-PROFILE': userId ? <AdminProfileModal value={userId} /> : null,
     'ADMIN-PENALTY': intraId ? <AdminPenaltyModal value={intraId} /> : null,
+    'ADMIN-PENALTY_DELETE': intraId ? (
+      <DeletePenaltyModal intraId={intraId} />
+    ) : null,
     'ADMIN-NOTI_ALL': <AdminNotiAllModal />,
-    'ADMIN-NOTI_USER': intraId ? <AdminNotiUserModal value={intraId} /> : null,
+    'ADMIN-NOTI_USER': <AdminNotiUserModal />,
     'ADMIN-CHECK_FEEDBACK': feedback ? (
       <AdminCheckFeedback {...feedback} />
     ) : null,

@@ -1,6 +1,8 @@
 @import 'styles/common.scss';
 
 .slotHour {
+  display: flex;
+  justify-content: space-between;
   margin-left: 0.3rem;
   color: white;
   font-size: $big-font;

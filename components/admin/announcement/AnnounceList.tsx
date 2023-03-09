@@ -22,6 +22,15 @@ const Quill = dynamic(() => import('react-quill'), {
   loading: () => <p>Loading ...</p>,
 });
 
+const tableTitle: { [key: string]: string } = {
+  content: '내용',
+  createdTime: '생성일',
+  creatorIntraId: '생성한 사람',
+  deletedTime: '삭제일',
+  deleterIntraId: '삭제한 사람',
+  isDel: '삭제 여부',
+};
+
 interface IAnnouncement {
   content: string;
   creatorIntraId: string;
@@ -76,7 +85,7 @@ export default function AnnounceList() {
             <TableRow>
               {tableFormat['announcement'].columns.map((columnName) => (
                 <TableCell className={styles.tableHeaderItem} key={columnName}>
-                  {columnName}
+                  {tableTitle[columnName]}
                 </TableCell>
               ))}
             </TableRow>

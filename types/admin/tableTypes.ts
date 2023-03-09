@@ -4,7 +4,8 @@ export type TableName =
   | 'feedback'
   | 'games'
   | 'announcement';
-
+  | 'penalty';
+  
 export type EtcType = 'button' | 'toggle';
 
 export type TableFormat = {

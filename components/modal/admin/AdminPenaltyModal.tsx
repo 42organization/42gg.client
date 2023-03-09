@@ -1,172 +1,167 @@
 import { useSetRecoilState } from 'recoil';
-import { useEffect, useState } from 'react';
-import styles from 'styles/admin/modal/AdminPenalty.module.scss';
+import { useState } from 'react';
+import { PenaltyInfo } from 'types/admin/adminPenaltyTypes';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
+import { fillZero } from 'utils/handleTime';
 import instance from 'utils/axios';
-import { finished } from 'stream';
-import { useRouter } from 'next/router';
+import styles from 'styles/admin/modal/AdminPenalty.module.scss';
 
-interface EditedPenalty {
-  reason: string;
-  penaltyHour: number;
-  penaltyMinute: number;
-  // presentPath: boolean;
-}
-
-const MINUTE_LIMIT = 59;
-
-export default function AdminPenaltyModal(props: any) {
-  const [userPenalty, setUserPenalty] = useState<any>(/* 초기값 지정 */);
-  const [editedPenalty, setEditedPenalty] = useState<EditedPenalty>({
+export default function AdminPenaltyModal(props: { value: string }) {
+  const [penaltyInfo, setPenaltyInfo] = useState<PenaltyInfo>({
+    intraId: props.value,
     reason: '',
-    penaltyHour: parseInt('', 10),
-    penaltyMinute: parseInt('', 10),
-    // presentPath: true,
+    penaltyTime: 0,
   });
-
   const setModal = useSetRecoilState(modalState);
-  const cancelEditHandler = () => setModal({ modalName: null });
+  const setSnackBar = useSetRecoilState(toastState);
 
-  // useEffect(() => {
-  //   if (editedPenalty.presentPath === true) {
-  //     if (!userPenalty) inputChangeHandler;
-  //   } else finishEditHandler;
-  // }, [presentPath]);
-
-  const inputChangeHandler = ({
+  const inputHandler = ({
     target: { name, value },
   }:
     | React.ChangeEvent<HTMLTextAreaElement>
     | React.ChangeEvent<HTMLInputElement>) => {
-    setEditedPenalty((prev: any) => ({
-      ...prev,
-      [name]: value,
-    }));
+    if (name === 'penaltyTime' && value.length > 2)
+      return setSnackBar({
+        toastName: 'penalty',
+        severity: 'error',
+        message: '적용시간은 2자리 이하로 입력해주세요.',
+        clicked: true,
+      });
+    setPenaltyInfo({ ...penaltyInfo, [name]: value });
   };
 
-  const getBasicPenaltyHandler = async () => {
-    const res = await fetch(
-      `http://localhost:3000/api/admin/users/intraId/penalty`
-    );
-    const data = await res.json();
-    setUserPenalty(data[0]);
+  const timeHandler = (e: number) => {
+    const now = new Date();
+    const newDate = new Date(now.getTime() + e * 3600000);
+    const resultMonth = fillZero((newDate.getMonth() + 1).toString(), 2);
+    const resultDate = fillZero(newDate.getDate().toString(), 2);
+    const resultHour = fillZero(newDate.getHours().toString(), 2);
+    const resultMinute = fillZero(newDate.getMinutes().toString(), 2);
+    const result = `${newDate.getFullYear()}-${resultMonth}-${resultDate} ${resultHour}:${resultMinute}`;
+    return result;
   };
 
-  // useEffect(() => {
-  //   getBasicPenaltyHandler();
-  // }, []);
-
-  const finishEditHandler = () => {
-    let errMsg = '';
-    if (editedPenalty.penaltyHour < 0) {
-      errMsg += '시간은 0 이상이어야합니다.\n';
-      console.log(errMsg);
-      editedPenalty.penaltyHour = parseInt('', 10);
+  const sendPenaltyHandler = async () => {
+    const { intraId, penaltyTime, reason } = penaltyInfo;
+    if (intraId !== props.value) {
+      setSnackBar({
+        toastName: 'penalty',
+        severity: 'error',
+        message: `intra ID가 일치하지 않습니다.`,
+        clicked: true,
+      });
+      return;
     }
-    if (editedPenalty.penaltyMinute < 0) {
-      errMsg += '분은 0 이상이어야합나다\n';
-      editedPenalty.penaltyMinute = parseInt('', 10);
+    if (!reason || !penaltyTime) {
+      setSnackBar({
+        toastName: 'penalty',
+        severity: 'error',
+        message: `모든 항목을 입력해주세요.`,
+        clicked: true,
+      });
+      return;
+    } else if (isNaN(Number(penaltyTime))) {
+      setSnackBar({
+        toastName: 'penalty',
+        severity: 'error',
+        message: `적용시간은 숫자만 입력해주세요.`,
+        clicked: true,
+      });
+      return;
     }
-    if (editedPenalty.penaltyMinute > MINUTE_LIMIT) {
-      errMsg += '분은 59분까지 입력 가능합니다.\n';
-      editedPenalty.penaltyMinute = parseInt('', 10);
+    try {
+      const res = await instance.post(
+        `pingpong/admin/users/${props.value}/penalty`,
+        {
+          reason,
+          penaltyTime,
+        }
+      );
+      if (res.status === 403) {
+        setSnackBar({
+          toastName: 'penalty',
+          severity: 'error',
+          message: '권한이 없습니다',
+          clicked: true,
+        });
+      } else {
+        setSnackBar({
+          toastName: 'penalty',
+          severity: 'success',
+          message: '부여 성공',
+          clicked: true,
+        });
+      }
+      setModal({ modalName: null });
+    } catch (e) {
+      setSnackBar({
+        toastName: 'penalty',
+        severity: 'error',
+        message: `잘못된 요청입니다`,
+        clicked: true,
+      });
     }
-    //useState를 이용해서 errMsg 관리하는게 더 좋음!
-    //+)alert가 아닌 모달의 하단부에 errMsg가 나타나도록 적용해볼것
-    if (errMsg) alert(errMsg);
-    setUserPenalty({
-      ...editedPenalty,
-      intraID: props.value,
-    });
-    // setModal({ modalName: null });
   };
-  useEffect(() => {
-    console.log({ userPenalty });
-    return () => {
-      console.log({ userPenalty });
-    };
-  }, [userPenalty]);
 
   return (
     <div className={styles.whole}>
+      <div className={styles.title}>
+        <div className={styles.titleText}>패널티 부여 설정</div>
+        <hr className={styles.hr} />
+      </div>
       <div className={styles.body}>
-        <div className={styles.title}>intra ID: {props.value}</div>
-
-        <label className={styles.body}>
-          사유
-          <div>
-            {userPenalty ? (
-              <input
-                className={styles.unfocus}
-                value={userPenalty.reason}
-                readOnly
-              />
-            ) : (
-              <input
-                type='text'
-                pattern='[a-zA-Z0-9가-힣]'
-                name='reason'
-                onChange={inputChangeHandler}
-                value={userPenalty?.reason}
-                placeholder={'사유를 입력해주세요'}
-              />
-            )}
+        <div className={styles.bodyWrap}>
+          <div className={styles.intraWrap}>
+            <div className={styles.bodyText}>intra ID:</div>
+            <input
+              className={styles.intraBlank}
+              name='intraID'
+              value={props.value}
+              readOnly
+            />
           </div>
-        </label>
-
-        <label className={styles.body}>
-          시간
-          <div>
-            {userPenalty ? (
-              <input
-                className={styles.unfocus}
-                value={userPenalty.penaltyHour}
-                readOnly
-              />
-            ) : (
-              <input
-                type='number'
-                pattern='[0-9]+'
-                min='1'
-                name='penaltyHour'
-                onChange={inputChangeHandler}
-                value={userPenalty?.penaltyHour}
-                placeholder={'시간을 입력해주세요'}
-              />
-            )}
+          <div className={styles.reasonWrap}>
+            <div className={styles.bodyText}>사유:</div>
+            <textarea
+              className={styles.reasonBlank}
+              name='reason'
+              placeholder={'사유를 입력하세요'}
+              onChange={inputHandler}
+            />
           </div>
-        </label>
-
-        <label className={styles.body}>
-          분
-          <div>
-            {userPenalty ? (
-              <input
-                className={styles.unfocus}
-                value={userPenalty.penaltyMinute}
-                readOnly
-              />
-            ) : (
-              <input
-                type='number'
-                pattern='[0-9]+'
-                min='1'
-                name='penaltyMinute'
-                onChange={inputChangeHandler}
-                value={userPenalty?.penaltyMinute}
-                placeholder={'분을 입력해주세요'}
-              />
-            )}
+          <div className={styles.dateWrap}>
+            <div className={styles.bodyText}>적용시간:</div>
+            <input
+              className={styles.dateBlank}
+              name='penaltyTime'
+              placeholder={'적용 시간을 입력하세요'}
+              onChange={inputHandler}
+            />
           </div>
-        </label>
+          <div className={styles.dateWrap}>
+            <div className={styles.bodyText}>해방시간:</div>
+            <input
+              className={styles.dateBlank}
+              name='freeTime'
+              value={timeHandler(penaltyInfo.penaltyTime)}
+              readOnly
+            />
+          </div>
+        </div>
         <div className={styles.btns}>
           <button
-            className={userPenalty ? `${styles.hide}` : `${styles.btn}`}
-            onClick={finishEditHandler}
+            onClick={() => {
+              sendPenaltyHandler();
+            }}
+            className={styles.btn1}
           >
             적용
           </button>
-          <button className={styles.btn} onClick={cancelEditHandler}>
+          <button
+            className={styles.btn2}
+            onClick={() => setModal({ modalName: null })}
+          >
             취소
           </button>
         </div>

@@ -7,6 +7,7 @@ export interface ProfileBasic {
   currentExp: number;
   maxExp: number;
   expRate: number;
+  snsNotiOpt: 'NONE' | 'SLACK' | 'EMAIL' | 'BOTH';
 }
 
 export interface ProfileRank {

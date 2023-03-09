@@ -1,3 +1,9 @@
+import PenaltyTable from 'components/admin/penalty/PenaltyTable';
+
 export default function Penalty() {
-  return <div></div>;
+  return (
+    <>
+      <PenaltyTable />
+    </>
+  );
 }

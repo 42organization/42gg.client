@@ -29,7 +29,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   useEffect(() => {
     currentRef.current?.scrollIntoView({
       behavior: 'smooth',
-      block: 'nearest',
+      block: 'center',
     });
   }, [match]);
 
@@ -50,17 +50,26 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
 
   if (!match) return null;
 
-  const { matchBoards, intervalMinute } = match;
+  const { matchBoards } = match;
 
   if (matchBoards.length === 0)
     return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
 
-  const lastSlotTime = matchBoards[matchBoards.length - 1][0].time;
-  const lastSlotHour = new Date(lastSlotTime).getHours();
-  const currentHour = new Date().getHours();
-
   const openManual = () => {
     setModal({ modalName: 'MATCH-MANUAL', manual: { toggleMode: toggleMode } });
+  };
+
+  const getFirstOpenSlot = () => {
+    for (let i = 0; i < matchBoards.length; i++) {
+      for (let j = 0; j < matchBoards[i].length; j++) {
+        const match = matchBoards[i][j];
+        if (match.status === 'open') {
+          const openSlotHour = new Date(match.time).getHours();
+          return openSlotHour;
+        }
+      }
+    }
+    return null;
   };
 
   const reloadMatchHandler = () => {
@@ -72,49 +81,46 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   };
 
   const getScrollCurrentRef = (slotsHour: number) => {
-    if (currentHour === lastSlotHour && currentHour === slotsHour)
-      return currentRef;
-    if (slotsHour === currentHour + 1) return currentRef;
+    if (getFirstOpenSlot() === slotsHour) return currentRef;
     return null;
   };
 
   return (
-    <div>
-      <div className={styles.buttonWrap}>
-        <button className={styles.manual} onClick={openManual}>
-          매뉴얼
-        </button>
-        <button
-          className={`${styles.reload} ${spinReloadButton && styles.spin}`}
-          onClick={reloadMatchHandler}
-        >
-          &#8635;
-        </button>
-      </div>
-      {currentHour > lastSlotHour && (
-        <div className={styles.notice}>
-          ❌ 오늘의 매치가 모두 끝났습니다! ❌
+    <>
+      <div>
+        <div className={styles.buttonWrap}>
+          {getFirstOpenSlot === null && (
+            <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>
+          )}
+          <button className={styles.manual} onClick={openManual}>
+            매뉴얼
+          </button>
+          <button
+            className={`${styles.reload} ${spinReloadButton && styles.spin}`}
+            onClick={reloadMatchHandler}
+          >
+            &#8635;
+          </button>
         </div>
-      )}
-      <div className={styles.matchBoard}>
-        {matchBoards.map((matchSlots, index) => {
-          const slotTime = new Date(matchSlots[0].time);
-          return (
-            <div
-              className={styles.matchSlotList}
-              key={index}
-              ref={getScrollCurrentRef(slotTime.getHours())}
-            >
-              <MatchSlotList
-                type={type}
-                intervalMinute={intervalMinute}
-                toggleMode={toggleMode}
-                matchSlots={matchSlots}
-              />
-            </div>
-          );
-        })}
+        <div className={styles.matchBoard}>
+          {matchBoards.map((matchSlots, index) => {
+            const slotTime = new Date(matchSlots[0].time);
+            return (
+              <div
+                className={styles.matchSlotList}
+                key={index}
+                ref={getScrollCurrentRef(slotTime.getHours())}
+              >
+                <MatchSlotList
+                  type={type}
+                  toggleMode={toggleMode}
+                  matchSlots={matchSlots}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

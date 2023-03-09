@@ -51,4 +51,12 @@ export const tableFormat: TableFormat = {
       'isDel',
     ],
   },
+  penalty: {
+    name: '패널티 관리',
+    columns: ['intraId', 'reason', 'releaseTime', 'etc'],
+    etc: {
+      type: 'button',
+      value: ['해제'],
+    },
+  },
 };

@@ -21,15 +21,6 @@ export default function MenuBar() {
     { name: '내 정보', link: `/users/detail?intraId=${intraId}` },
   ];
 
-  const goToAdminPage = async () => {
-    try {
-      await instance.get('/admin');
-      window.open(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/admin`);
-    } catch (e) {
-      alert('👊 콱 씨...!');
-    }
-  };
-
   return (
     <>
       <div className={styles.backdrop} onClick={resetOpenMenuBar}>
@@ -72,7 +63,9 @@ export default function MenuBar() {
                   <Link href='/statistics'>
                     <div>📊 통계페이지</div>
                   </Link>
-                  <div onClick={goToAdminPage}>😎 관리자</div>
+                  <Link href='/admin'>
+                    <div>😎 관리자</div>
+                  </Link>
                 </>
               )}
               <div onClick={() => setModal({ modalName: 'MENU-LOGOUT' })}>

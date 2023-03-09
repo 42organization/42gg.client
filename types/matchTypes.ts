@@ -3,6 +3,7 @@ export interface Slot {
   status: string;
   headCount: number;
   time: string;
+  endTime: string;
   mode: string;
 }
 
@@ -17,6 +18,5 @@ export interface CurrentMatch {
 }
 
 export interface Match {
-  intervalMinute: number;
   matchBoards: Slots[];
 }
