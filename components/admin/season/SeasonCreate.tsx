@@ -33,14 +33,18 @@ export default function SeasonCreate() {
   }:
     | React.ChangeEvent<HTMLInputElement>
     | React.ChangeEvent<HTMLSelectElement>) => {
-    setSeasonInfo({ ...seasonInfo, [name]: value });
+    name === 'startPpp' || name === 'pppGap'
+      ? setSeasonInfo({ ...seasonInfo, [name]: parseInt(value) })
+      : setSeasonInfo({ ...seasonInfo, [name]: value });
   };
 
   const postHandler = async () => {
     try {
+      console.log(seasonInfo);
       await instance.post(`/pingpong/admin/season`, seasonInfo);
       alert('SUCCESS');
     } catch (e: any) {
+      console.log(e);
       alert(e.response?.data.code);
     }
   };
@@ -90,9 +94,9 @@ export default function SeasonCreate() {
               </TableCell>
               <TableCell>
                 <select name='seasonMode' onChange={inputChangeHandler}>
-                  <option value='BOTH'>both</option>
-                  <option value='RANK'>rank</option>
-                  <option value='NORMAL'>normal</option>
+                  <option value='BOTH'>BOTH</option>
+                  <option value='RANK'>RANK</option>
+                  <option value='NORMAL'>NORMAL</option>
                 </select>
               </TableCell>
             </TableRow>

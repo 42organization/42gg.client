@@ -58,7 +58,7 @@ export interface Manual {
 }
 
 export interface ISeason {
-  id: number;
+  seasonId: number;
   seasonMode: string;
   seasonName: string;
   startTime: Date;

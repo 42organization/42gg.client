@@ -17,7 +17,7 @@ import { useSetRecoilState } from 'recoil';
 import { modalState } from '../../../utils/recoil/modal';
 
 interface ISeason {
-  id: number;
+  seasonId: number;
   seasonMode: string;
   seasonName: string;
   startTime: Date;
