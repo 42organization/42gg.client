@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import instance from 'utils/axios';
 import {
   Paper,
   Table,
@@ -8,8 +10,6 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from 'styles/admin/season/SeasonCreate.module.scss';
-import React, { useState } from 'react';
-import instance from 'utils/axios';
 
 interface SeasonCreateInfo {
   seasonName: string;
@@ -40,7 +40,6 @@ export default function SeasonCreate() {
 
   const postHandler = async () => {
     try {
-      console.log(seasonInfo);
       await instance.post(`/pingpong/admin/season`, seasonInfo);
       alert('SUCCESS');
     } catch (e: any) {

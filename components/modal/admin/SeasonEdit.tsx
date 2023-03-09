@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { ISeason } from 'types/modalTypes';
 import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/SeasonEdit.module.scss';
-import { ISeason } from '../../../types/modalTypes';
 
 interface SeasonEditInfo {
   seasonName: string;
@@ -35,7 +35,6 @@ const AdminSeasonEdit = ({
 
   const editHandler = async () => {
     try {
-      console.log(seasonInfo);
       await instance.put(`/pingpong/admin/season/${seasonId}`, seasonInfo);
       setSnackBar({
         toastName: 'Season Edit',
@@ -45,7 +44,6 @@ const AdminSeasonEdit = ({
       });
       setModal({ modalName: null });
     } catch (e: any) {
-      console.log(e);
       alert(e.response?.data.code);
     }
   };
@@ -55,7 +53,6 @@ const AdminSeasonEdit = ({
   }:
     | React.ChangeEvent<HTMLInputElement>
     | React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(name, value);
     name === 'startPpp' || name === 'pppGap'
       ? setSeasonInfo({ ...seasonInfo, [name]: parseInt(value) })
       : setSeasonInfo({ ...seasonInfo, [name]: value });

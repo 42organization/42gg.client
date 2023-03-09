@@ -1,3 +1,9 @@
+import { SyntheticEvent, useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { tableFormat } from 'constants/admin/table';
+import instance from 'utils/axios';
+import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
 import {
   Paper,
   Table,
@@ -10,12 +16,6 @@ import {
   Tab,
 } from '@mui/material';
 import styles from 'styles/admin/season/SeasonList.module.scss';
-import { tableFormat } from 'constants/admin/table';
-import { SyntheticEvent, useEffect, useState } from 'react';
-import instance from 'utils/axios';
-import { useSetRecoilState } from 'recoil';
-import { modalState } from '../../../utils/recoil/modal';
-import { toastState } from '../../../utils/recoil/toast';
 
 interface ISeason {
   seasonId: number;
@@ -53,7 +53,6 @@ export default function SeasonList() {
   const getSeasonList = async (mode: string) => {
     try {
       const res = await instance.get(`pingpong/admin/season/${mode}`);
-      console.log(res.data);
       setSeasonList({ ...res.data });
     } catch (e: any) {
       console.log(e);
