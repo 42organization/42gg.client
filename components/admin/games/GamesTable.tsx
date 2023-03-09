@@ -33,7 +33,7 @@ export default function GamesTable() {
   const getAllGames = useCallback(async () => {
     try {
       const res = await instance.get(
-        `pingpong/admin/games?season=0&page=${currentPage}&size=10`
+        `pingpong/admin/games?season=0&page=${currentPage}&size=5`
       );
 
       setGameInfo({
