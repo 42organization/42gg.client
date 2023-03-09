@@ -61,6 +61,12 @@ export default function AdminProfileModal(props: AdminProfileProps) {
     setUserInfo({ ...userInfo, [name]: value });
   };
 
+  useEffect(() => {
+    if (userInfo.wins === 0 && userInfo.losses === 0) {
+      setUserInfo({ ...userInfo, ppp: 1000 });
+    }
+  }, [userInfo.wins, userInfo.losses, userInfo.ppp]);
+
   const inputNumHandler = ({
     target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
