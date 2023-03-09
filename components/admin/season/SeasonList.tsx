@@ -15,6 +15,7 @@ import { SyntheticEvent, useEffect, useState } from 'react';
 import instance from 'utils/axios';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from '../../../utils/recoil/modal';
+import { toastState } from '../../../utils/recoil/toast';
 
 interface ISeason {
   seasonId: number;
@@ -47,6 +48,7 @@ export default function SeasonList() {
   const [selectedSeasonMode, setSelectedSeasonMode] = useState<string>(
     VAL_SEASON_MODE[tabVal]
   );
+  const setSnackBar = useSetRecoilState(toastState);
 
   const getSeasonList = async (mode: string) => {
     try {
@@ -61,6 +63,21 @@ export default function SeasonList() {
   useEffect(() => {
     getSeasonList(selectedSeasonMode);
   }, [selectedSeasonMode]);
+
+  const deleteHandler = async (deleteId: number) => {
+    try {
+      await instance.delete(`/pingpong/admin/season/${deleteId}`);
+      setSnackBar({
+        toastName: 'Season Delete',
+        severity: 'success',
+        message: `성공적으로 삭제되었습니다! `,
+        clicked: true,
+      });
+    } catch (e: any) {
+      console.log(e);
+      alert(e.response?.data.code);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -128,7 +145,12 @@ export default function SeasonList() {
                             >
                               수정
                             </button>
-                            <button className={styles.editBtn}>삭제</button>
+                            <button
+                              className={styles.editBtn}
+                              onClick={() => deleteHandler(seasonL.seasonId)}
+                            >
+                              삭제
+                            </button>
                           </div>
                         ) : (
                           <div>error status</div>
