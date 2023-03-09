@@ -14,7 +14,7 @@ interface SeasonEditInfo {
   seasonMode: string;
 }
 
-export const AdminSeasonEdit = ({
+const AdminSeasonEdit = ({
   seasonId,
   seasonName,
   seasonMode,
@@ -33,13 +33,21 @@ export const AdminSeasonEdit = ({
     seasonMode,
   });
 
-  const handleClick = () => {
-    setSnackBar({
-      toastName: 'Season Edit',
-      severity: 'success',
-      message: `성공적으로 수정되었습니다! `,
-      clicked: true,
-    });
+  const editHandler = async () => {
+    try {
+      console.log(seasonInfo);
+      await instance.put(`/pingpong/admin/season/${seasonId}`, seasonInfo);
+      setSnackBar({
+        toastName: 'Season Edit',
+        severity: 'success',
+        message: `성공적으로 수정되었습니다! `,
+        clicked: true,
+      });
+      setModal({ modalName: null });
+    } catch (e: any) {
+      console.log(e);
+      alert(e.response?.data.code);
+    }
   };
 
   const inputChangeHandler = ({
@@ -127,17 +135,12 @@ export const AdminSeasonEdit = ({
           </div>
         </div>
         <div className={styles.btnContainer}>
-          <button
-            onClick={() => {
-              handleClick();
-              setModal({ modalName: null });
-            }}
-          >
-            수정
-          </button>
+          <button onClick={editHandler}>수정</button>
           <button onClick={() => setModal({ modalName: null })}>취소</button>
         </div>
       </div>
     </div>
   );
 };
+
+export default AdminSeasonEdit;

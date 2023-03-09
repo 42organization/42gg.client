@@ -17,10 +17,10 @@ import AdminPenaltyModal from './admin/AdminPenaltyModal';
 import AdminNotiAllModal from './admin/AdminNotiAllModal';
 import AdminNotiUserModal from './admin/AdminNotiUserModal';
 import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
+import AdminSeasonEdit from './admin/SeasonEdit';
 import FeedbackDetailModal from './admin/FeedbackDetailModal';
 import DeletePenaltyModal from './admin/DeletePenaltyModal';
 import styles from 'styles/modal/Modal.module.scss';
-import { AdminSeasonEdit } from './admin/SeasonEdit';
 
 export default function ModalProvider() {
   const [
