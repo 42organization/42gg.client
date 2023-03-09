@@ -124,6 +124,7 @@ export default function SlotMain() {
     }
     try {
       await instance.put(`/pingpong/admin/slot`, scheduleInfo);
+      initSlotInfo();
     } catch (e) {
       console.error(e);
     }
