@@ -19,14 +19,6 @@ export default function AdminNotiAllModal() {
         clicked: true,
       });
       return;
-    } else {
-      setSnackBar({
-        toastName: 'noti all',
-        severity: 'success',
-        message: `성공적으로 전송되었습니다!`,
-        clicked: true,
-      });
-      setModal({ modalName: null });
     }
     try {
       const res = await instance.post(`pingpong/admin/notifications/`, {
