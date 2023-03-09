@@ -3,6 +3,7 @@ import instance from 'utils/axios';
 import styles from 'styles/admin/slot/SlotMain.module.scss';
 import SlotCurrent from './SlotCurrent';
 import SlotPreview from './SlotPreview';
+import { toastState } from 'utils/recoil/toast';
 import { GrLocationPin } from 'react-icons/gr';
 import { CurrentMatch, EditedSchedule } from 'types/admin/adminSlotTypes';
 
@@ -19,10 +20,10 @@ export default function SlotMain() {
   });
 
   const [futurePreview, setFuturePreview] = useState<number>(0);
-
   const [showTime, setShowTime] = useState<number>(0);
   const [lastHour, setLastHour] = useState<number>(0);
   const [firstHour, setFirstHour] = useState<number>(0);
+  const setSnackbar = useSetRecoilState(toastState);
   const currentHour = new Date().getHours();
   const initScheduleInfo = async () => {
     try {
@@ -33,24 +34,21 @@ export default function SlotMain() {
     }
   };
 
+  const slotHour = (date: string) => {
+    const time = new Date(date).getHours();
+    return time;
+  };
+
   const initSlotInfo = async () => {
     try {
       const res = await instance.get(`/pingpong/match/tables/${1}/rank/single`);
       setSlotInfo({ ...res?.data });
       setShowTime(res?.data.matchBoards.length);
-      setFirstHour(
-        parseInt(res?.data.matchBoards[0][0].time[11]) * 10 +
-          parseInt(res?.data.matchBoards[0][0].time[12])
-      );
+      setFirstHour(slotHour(res?.data.matchBoards[0][0].time));
       setLastHour(
-        parseInt(
-          res?.data.matchBoards[res?.data.matchBoards.length - 1][0].time[11]
-        ) *
-          10 +
-          parseInt(
-            res?.data.matchBoards[res?.data.matchBoards.length - 1][0].time[12]
-          ) +
-          1
+        slotHour(
+          res?.data.matchBoards[res?.data.matchBoards.length - 1][0].time
+        ) + 1
       );
     } catch (e) {
       console.error(e);
@@ -114,9 +112,17 @@ export default function SlotMain() {
   );
 
   const finishHandler = async () => {
+    if (scheduleInfo.openMinute > scheduleInfo.interval) {
+      setSnackbar({
+        toastName: 'scheduler error',
+        severity: 'error',
+        message: `🔥 블라인드 해제 시간이 게임 시간보다 길 수 없습니다 🔥`,
+        clicked: true,
+      });
+      return;
+    }
     try {
-      const res = await instance.put(`/pingpong/admin/slot`, scheduleInfo);
-      console.log(res);
+      await instance.put(`/pingpong/admin/slot`, scheduleInfo);
     } catch (e) {
       console.error(e);
     }

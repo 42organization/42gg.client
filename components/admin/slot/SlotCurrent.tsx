@@ -13,6 +13,12 @@ export default function SlotCurrent(props: SlotCurrentProps) {
 
   const { currentHour, scheduleInfo, firstHour, futurePreview } = props;
   const { pastSlotTime } = scheduleInfo;
+
+  const slotHour = (date: string) => {
+    const time = new Date(date).getHours();
+    return time;
+  };
+
   const initSlotInfo = () => {
     const noSlotIndex: number = currentHour + futurePreview - pastSlotTime;
     const updatedMatchBoards = props.slotInfo.matchBoards.map(
@@ -45,8 +51,7 @@ export default function SlotCurrent(props: SlotCurrentProps) {
   return (
     <div>
       {slotInfo.matchBoards.map((slot: Slots[], index) => {
-        const slotTime =
-          parseInt(slot[0].time[11]) * 10 + parseInt(slot[0].time[12]);
+        const slotTime = slotHour(slot[0].time);
         return (
           <div
             key={index}
