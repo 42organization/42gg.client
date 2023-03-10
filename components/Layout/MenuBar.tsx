@@ -4,7 +4,6 @@ import { userState } from 'utils/recoil/layout';
 import { seasonListState } from 'utils/recoil/seasons';
 import { openMenuBarState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
-import instance from 'utils/axios';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 export default function MenuBar() {
