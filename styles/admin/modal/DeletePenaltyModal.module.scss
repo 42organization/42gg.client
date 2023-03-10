@@ -1,0 +1,55 @@
+@import 'styles/common.scss';
+
+.modalWrap {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  border-radius: $medium-radius;
+  width: 20rem;
+  height: 15rem;
+}
+.body {
+  padding: 1rem 1rem;
+  flex-direction: column;
+  text-align: center;
+  .content {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 150%;
+    color: #6b7280;
+    padding: 1rem 2rem;
+  }
+}
+
+.btns {
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+  color: white;
+  .btn {
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0.5rem 0;
+    border-radius: 10px;
+    border: none;
+    font-size: $medium-font;
+    cursor: pointer;
+    color: white;
+    &.first {
+      background-color: #2678f3;
+      &:hover {
+        background-color: #1e6ad1;
+      }
+    }
+    &.second {
+      background-color: #6c757d;
+      &:hover {
+        background-color: #5a6268;
+      }
+    }
+  }
+}

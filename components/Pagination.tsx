@@ -19,7 +19,7 @@ function PageNation({
 }: GreetingProps) {
   return (
     <>
-      {totalPages && (
+      {!!totalPages && (
         <Pagination
           activePage={curPage}
           itemsCountPerPage={1}

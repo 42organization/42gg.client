@@ -9,6 +9,7 @@ import {
   GrAnnounce,
 } from 'react-icons/gr';
 import styles from 'styles/admin/SideNav.module.scss';
+import { IoGameControllerOutline } from 'react-icons/io5';
 
 export default function SideNav() {
   const currentPath = useRouter().asPath.replace('/admin', '');
@@ -61,6 +62,14 @@ export default function SideNav() {
         currentPath={currentPath}
       >
         <GoSettings className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/games'}
+        menuName={'게임 관리'}
+        currentPath={currentPath}
+      >
+        <IoGameControllerOutline className={styles.logo} />
       </SideNavContent>
     </div>
   );

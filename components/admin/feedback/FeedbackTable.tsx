@@ -15,6 +15,7 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from 'styles/admin/feedback/FeedbackTable.module.scss';
+import { getFormattedDateToString } from 'utils/handleTime';
 
 const tableTitle: { [key: string]: string } = {
   id: 'ID',
@@ -54,12 +55,23 @@ export default function FeedbackTable() {
 
   const getUserFeedbacks = useCallback(async () => {
     try {
-      // TODO : api 수정 필요
       const res = await instance.get(
         `/pingpong/admin/feedback/users/${intraId}?page=${currentPage}&size=10`
       );
       setIntraId(intraId);
-      setFeedbackInfo({ ...res.data });
+      setFeedbackInfo({
+        feedbackList: res.data.feedbackList.map((feedback: IFeedback) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(feedback.createdTime)
+          );
+          return {
+            ...feedback,
+            createdTime: `${year}-${month}-${date} ${hour}:${min}`,
+          };
+        }),
+        totalPage: res.data.totalPage,
+        currentPage: res.data.currentPage,
+      });
     } catch (e) {
       console.error('MS04');
     }
@@ -70,7 +82,19 @@ export default function FeedbackTable() {
       const res = await instance.get(
         `/pingpong/admin/feedback?page=${currentPage}&size=10`
       );
-      setFeedbackInfo({ ...res.data });
+      setFeedbackInfo({
+        feedbackList: res.data.feedbackList.map((feedback: IFeedback) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(feedback.createdTime)
+          );
+          return {
+            ...feedback,
+            createdTime: `${year}-${month}-${date} ${hour}:${min}`,
+          };
+        }),
+        totalPage: res.data.totalPage,
+        currentPage: res.data.currentPage,
+      });
     } catch (e) {
       console.error('MS03');
     }
@@ -122,41 +146,49 @@ export default function FeedbackTable() {
               </TableRow>
             </TableHead>
             <TableBody className={styles.tableBody}>
-              {feedbackInfo.feedbackList.map((feedback: IFeedback) => (
-                <TableRow key={feedback.id} className={styles.tableRow}>
-                  {tableFormat['feedback'].columns.map((columnName: string) => {
-                    const value = feedback[columnName as keyof IFeedback];
-                    return (
-                      <TableCell
-                        className={styles.tableBodyItem}
-                        key={columnName}
-                      >
-                        {typeof value === 'boolean' ? (
-                          <select
-                            value={feedback.isSolved ? 1 : 0}
-                            onChange={() => solvingFeedback(feedback)}
+              {feedbackInfo.feedbackList.length > 0 ? (
+                feedbackInfo.feedbackList.map((feedback: IFeedback) => (
+                  <TableRow key={feedback.id} className={styles.tableRow}>
+                    {tableFormat['feedback'].columns.map(
+                      (columnName: string) => {
+                        const value = feedback[columnName as keyof IFeedback];
+                        return (
+                          <TableCell
+                            className={styles.tableBodyItem}
+                            key={columnName}
                           >
-                            <option value='0'>처리중</option>
-                            <option value='1'>처리완료</option>
-                          </select>
-                        ) : value.toString().length > MAX_CONTENT_LENGTH ? (
-                          <div>
-                            {value.toString().slice(0, MAX_CONTENT_LENGTH)}
-                            <span
-                              style={{ cursor: 'pointer', color: 'grey' }}
-                              onClick={() => openDetailModal(feedback)}
-                            >
-                              ...더보기
-                            </span>
-                          </div>
-                        ) : (
-                          value.toString()
-                        )}
-                      </TableCell>
-                    );
-                  })}
+                            {typeof value === 'boolean' ? (
+                              <select
+                                value={feedback.isSolved ? 1 : 0}
+                                onChange={() => solvingFeedback(feedback)}
+                              >
+                                <option value='0'>처리중</option>
+                                <option value='1'>처리완료</option>
+                              </select>
+                            ) : value.toString().length > MAX_CONTENT_LENGTH ? (
+                              <div>
+                                {value.toString().slice(0, MAX_CONTENT_LENGTH)}
+                                <span
+                                  style={{ cursor: 'pointer', color: 'grey' }}
+                                  onClick={() => openDetailModal(feedback)}
+                                >
+                                  ...더보기
+                                </span>
+                              </div>
+                            ) : (
+                              value.toString()
+                            )}
+                          </TableCell>
+                        );
+                      }
+                    )}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell>접수된 피드백이 없습니다</TableCell>
                 </TableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
         </TableContainer>

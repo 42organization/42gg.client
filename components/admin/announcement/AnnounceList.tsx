@@ -59,7 +59,6 @@ export default function AnnounceList() {
       const res = await instance.get(
         `pingpong/admin/announcement?page=${currentPage}&size=5`
       );
-      console.log(res.data);
       setAnnouncementInfo({ ...res.data });
     } catch (e) {
       console.error('MS01');
@@ -69,10 +68,6 @@ export default function AnnounceList() {
   useEffect(() => {
     getAnnouncements();
   }, [getAnnouncements]);
-
-  if (announcementInfo.announcementList.length === 0) {
-    return <div>비어있습니다!</div>;
-  }
 
   return (
     <div className={styles.container}>
@@ -91,39 +86,48 @@ export default function AnnounceList() {
             </TableRow>
           </TableHead>
           <TableBody className={styles.tableBody}>
-            {announcementInfo.announcementList.map(
-              (announcement: IAnnouncement, index: number) => (
-                <TableRow key={index}>
-                  {tableFormat['announcement'].columns.map(
-                    (columnName: string, index: number) => {
-                      return columnName == 'content' ? (
-                        <TableCell>
-                          <Quill
-                            className={styles.quillViewer}
-                            readOnly={true}
-                            formats={QUILL_FORMATS}
-                            value={announcement[
-                              columnName as keyof IAnnouncement
-                            ]?.toString()}
-                            theme='bubble'
-                          />
-                        </TableCell>
-                      ) : (
-                        <TableCell className={styles.tableBodyItem} key={index}>
-                          {columnName === 'createdTime' ||
-                          columnName === 'deletedTime'
-                            ? announcement[columnName as keyof IAnnouncement]
-                                ?.toString()
-                                .replace('T', ' ')
-                            : announcement[
+            {announcementInfo.announcementList.length > 0 ? (
+              announcementInfo.announcementList.map(
+                (announcement: IAnnouncement, index: number) => (
+                  <TableRow key={index}>
+                    {tableFormat['announcement'].columns.map(
+                      (columnName: string, index: number) => {
+                        return columnName == 'content' ? (
+                          <TableCell key={index}>
+                            <Quill
+                              className={styles.quillViewer}
+                              readOnly={true}
+                              formats={QUILL_FORMATS}
+                              value={announcement[
                                 columnName as keyof IAnnouncement
                               ]?.toString()}
-                        </TableCell>
-                      );
-                    }
-                  )}
-                </TableRow>
+                              theme='bubble'
+                            />
+                          </TableCell>
+                        ) : (
+                          <TableCell
+                            className={styles.tableBodyItem}
+                            key={index}
+                          >
+                            {columnName === 'createdTime' ||
+                            columnName === 'deletedTime'
+                              ? announcement[columnName as keyof IAnnouncement]
+                                  ?.toString()
+                                  .replace('T', ' ')
+                              : announcement[
+                                  columnName as keyof IAnnouncement
+                                ]?.toString()}
+                          </TableCell>
+                        );
+                      }
+                    )}
+                  </TableRow>
+                )
               )
+            ) : (
+              <TableRow>
+                <TableCell>기존 공지사항이 없습니다</TableCell>
+              </TableRow>
             )}
           </TableBody>
         </Table>

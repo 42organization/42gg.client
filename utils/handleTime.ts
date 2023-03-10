@@ -104,3 +104,24 @@ export const getTimeAgo = (gameTime: string) => {
   }
   return '방금 전';
 };
+
+export const getFormattedDateToString = (
+  d: Date
+): {
+  year: string;
+  month: string;
+  date: string;
+  hour: string;
+  min: string;
+} => {
+  const year = d.getFullYear().toString();
+  const month =
+    d.getMonth() + 1 < 10
+      ? `0${d.getMonth() + 1}`
+      : (d.getMonth() + 1).toString();
+  const date = d.getDate() < 10 ? `0${d.getDate()}` : d.getDate().toString();
+  const hour = d.getHours() < 10 ? `0${d.getHours()}` : d.getHours().toString();
+  const min =
+    d.getMinutes() < 10 ? `0${d.getMinutes()}` : d.getMinutes().toString();
+  return { year, month, date, hour, min };
+};

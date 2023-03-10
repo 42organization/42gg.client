@@ -1,0 +1,69 @@
+@import 'styles/admin/common/Pagination.module.scss';
+@import 'styles/common.scss';
+
+.penaltyWrap {
+  width: 100%;
+  height: 100%;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+    min-width: 700px;
+    margin: 10px auto;
+    .title {
+      font-weight: 600;
+      font-size: $giant-font;
+      line-height: 150%;
+    }
+  }
+  .tableContainer {
+    width: 70%;
+    min-width: 700px;
+    margin: auto;
+    .table {
+      .tableHeader {
+        background-color: lightgray;
+        .tableHeaderItem {
+          padding: 0.7rem;
+          text-align: center;
+          font-weight: 600;
+          font-size: $medium-font;
+          line-height: 150%;
+        }
+      }
+      .tableBody {
+        .tableRow {
+          &:nth-child(odd) {
+            background-color: #f9fafb;
+          }
+          &:nth-child(even) {
+            background-color: #fff;
+          }
+          .tableBodyItem {
+            padding: 10px;
+            text-align: center;
+            line-height: 150%;
+            font-size: $medium-font;
+            .button {
+              padding: 4px 12px;
+              background-color: #2678f3;
+              border: none;
+              border-radius: $medium-radius;
+              font-size: $medium-font;
+              color: white;
+              cursor: pointer;
+              &:hover {
+                background-color: #1e64d2;
+                transition: 0.3s;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include pagination;
