@@ -16,7 +16,7 @@ export default function CurrentMatch() {
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
   const matchingMessage = time && makeMessage(time, isMatched);
-  const blockCancelButton = isBeforeMin(time, 5) && enemyTeam.length;
+  const blockCancelButton = isImminent && enemyTeam.length;
   const presentPath = useRouter().asPath;
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function CurrentMatch() {
           <div className={styles.icon}> ⏰ </div>
           <div className={styles.messageWrapper}>
             {matchingMessage}
-            <EnemyTeam enemyTeam={enemyTeam} time={time} />
+            <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
           </div>
         </div>
         <div
@@ -90,11 +90,11 @@ function makeMessage(time: string, isMatched: boolean) {
 }
 interface EnemyTeam {
   enemyTeam: string[];
-  time: string;
+  isImminent: boolean;
 }
 
-function EnemyTeam({ enemyTeam, time }: EnemyTeam) {
-  if (!isBeforeMin(time, 5) || enemyTeam.length === 0) return <></>;
+function EnemyTeam({ enemyTeam, isImminent }: EnemyTeam) {
+  if (!isImminent || enemyTeam.length === 0) return <></>;
   const enemyUsers = enemyTeam.map((intraId, index) => (
     <span key={intraId} id={styles.enemyUsers}>
       <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
