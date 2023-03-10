@@ -50,7 +50,7 @@ export default function GamesTable() {
         `pingpong/admin/games?q=${intraId}&page=${currentPage}&size=10`
       );
       setGameInfo({
-        gameLog: res.data.gameLog.map((game: IGameLog) => {
+        gameLog: res.data.gameLogList.map((game: IGameLog) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
             new Date(game.startAt)
           );
