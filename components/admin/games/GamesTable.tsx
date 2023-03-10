@@ -81,8 +81,6 @@ export default function GamesTable() {
     intraId ? getUserGames() : getAllGames();
   }, [intraId, getAllGames, getUserGames]);
 
-  if (!gameInfo.gameLog) return <div>게임 로그가 없습니다.</div>;
-
   return (
     <>
       <div className={style.gamesWrap}>
@@ -102,41 +100,50 @@ export default function GamesTable() {
               </TableRow>
             </TableHead>
             <TableBody className={style.tableBody}>
-              {gameInfo.gameLog.map((game: IGameLog) => (
-                <TableRow key={game.gameId}>
-                  {tableFormat['games'].columns.map((column: string) => {
-                    if (column === 'team1' || column === 'team2') {
-                      return (
-                        <TableCell
-                          className={style.tableBodyItem}
-                          key={game[column].intraId1}
-                        >
-                          <div
-                            style={{
-                              background: game[column].win
-                                ? 'lawngreen'
-                                : 'orangered',
-                            }}
+              {gameInfo.gameLog.length > 0 ? (
+                gameInfo.gameLog.map((game: IGameLog) => (
+                  <TableRow key={game.gameId}>
+                    {tableFormat['games'].columns.map((column: string) => {
+                      if (column === 'team1' || column === 'team2') {
+                        return (
+                          <TableCell
+                            className={style.tableBodyItem}
+                            key={game[column].intraId1}
                           >
-                            <div>
-                              {game[column].intraId1 +
-                                ' ' +
-                                (game[column].intraId2 ?? '')}
+                            <div
+                              style={{
+                                background: game[column].win
+                                  ? 'lawngreen'
+                                  : 'orangered',
+                              }}
+                            >
+                              <div>
+                                {game[column].intraId1 +
+                                  ' ' +
+                                  (game[column].intraId2 ?? '')}
+                              </div>
+                              <div>{game[column].score}점</div>
                             </div>
-                            <div>{game[column].score}점</div>
-                          </div>
-                        </TableCell>
-                      );
-                    } else {
-                      return (
-                        <TableCell className={style.tableBodyItem} key={column}>
-                          {game[column as keyof IGameLog]?.toString()}
-                        </TableCell>
-                      );
-                    }
-                  })}
+                          </TableCell>
+                        );
+                      } else {
+                        return (
+                          <TableCell
+                            className={style.tableBodyItem}
+                            key={column}
+                          >
+                            {game[column as keyof IGameLog]?.toString()}
+                          </TableCell>
+                        );
+                      }
+                    })}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell>게임 기록이 없습니다.</TableCell>
                 </TableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
         </TableContainer>

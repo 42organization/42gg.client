@@ -103,7 +103,7 @@ export default function PenaltyTable() {
               </TableRow>
             </TableHead>
             <TableBody className={styles.tableBody}>
-              {penaltyInfo.penaltyList.length ? (
+              {penaltyInfo.penaltyList.length > 0 ? (
                 penaltyInfo.penaltyList.map((penalty: IPenalty) => (
                   <TableRow key={penalty.intraId} className={styles.tableRow}>
                     {tableFormat['penalty'].columns.map(
@@ -141,15 +141,13 @@ export default function PenaltyTable() {
           </Table>
         </TableContainer>
         <div className={styles.pageNationContainer}>
-          {penaltyInfo.totalPage > 1 && (
-            <PageNation
-              curPage={penaltyInfo.currentPage}
-              totalPages={penaltyInfo.totalPage}
-              pageChangeHandler={(pageNumber: number) => {
-                setCurrentPage(pageNumber);
-              }}
-            />
-          )}
+          <PageNation
+            curPage={penaltyInfo.currentPage}
+            totalPages={penaltyInfo.totalPage}
+            pageChangeHandler={(pageNumber: number) => {
+              setCurrentPage(pageNumber);
+            }}
+          />
         </div>
       </div>
     </>

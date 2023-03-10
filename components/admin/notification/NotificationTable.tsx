@@ -83,10 +83,6 @@ export default function NotificationTable() {
     intraId ? getUserNotifications() : getAllUserNotifications();
   }, [intraId, getUserNotifications, getAllUserNotifications]);
 
-  if (notificationInfo.notiList.length === 0) {
-    return <div>비어있습니다!</div>;
-  }
-
   return (
     <>
       <div className={styles.notificationWrap}>
@@ -110,21 +106,33 @@ export default function NotificationTable() {
               </TableRow>
             </TableHead>
             <TableBody className={styles.tableBody}>
-              {notificationInfo.notiList.map((notification: INotification) => (
-                <TableRow key={notification.notiId} className={styles.tableRow}>
-                  {tableFormat['notification'].columns.map(
-                    (columnName: string, index: number) => {
-                      return (
-                        <TableCell className={styles.tableBodyItem} key={index}>
-                          {notification[
-                            columnName as keyof INotification
-                          ]?.toString()}
-                        </TableCell>
-                      );
-                    }
-                  )}
+              {notificationInfo.notiList.length ? (
+                notificationInfo.notiList.map((notification: INotification) => (
+                  <TableRow
+                    key={notification.notiId}
+                    className={styles.tableRow}
+                  >
+                    {tableFormat['notification'].columns.map(
+                      (columnName: string, index: number) => {
+                        return (
+                          <TableCell
+                            className={styles.tableBodyItem}
+                            key={index}
+                          >
+                            {notification[
+                              columnName as keyof INotification
+                            ]?.toString()}
+                          </TableCell>
+                        );
+                      }
+                    )}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell>알림이 없습니다.</TableCell>
                 </TableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
         </TableContainer>

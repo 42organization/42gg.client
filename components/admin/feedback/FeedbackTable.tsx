@@ -122,41 +122,49 @@ export default function FeedbackTable() {
               </TableRow>
             </TableHead>
             <TableBody className={styles.tableBody}>
-              {feedbackInfo.feedbackList.map((feedback: IFeedback) => (
-                <TableRow key={feedback.id} className={styles.tableRow}>
-                  {tableFormat['feedback'].columns.map((columnName: string) => {
-                    const value = feedback[columnName as keyof IFeedback];
-                    return (
-                      <TableCell
-                        className={styles.tableBodyItem}
-                        key={columnName}
-                      >
-                        {typeof value === 'boolean' ? (
-                          <select
-                            value={feedback.isSolved ? 1 : 0}
-                            onChange={() => solvingFeedback(feedback)}
+              {feedbackInfo.feedbackList.length > 0 ? (
+                feedbackInfo.feedbackList.map((feedback: IFeedback) => (
+                  <TableRow key={feedback.id} className={styles.tableRow}>
+                    {tableFormat['feedback'].columns.map(
+                      (columnName: string) => {
+                        const value = feedback[columnName as keyof IFeedback];
+                        return (
+                          <TableCell
+                            className={styles.tableBodyItem}
+                            key={columnName}
                           >
-                            <option value='0'>처리중</option>
-                            <option value='1'>처리완료</option>
-                          </select>
-                        ) : value.toString().length > MAX_CONTENT_LENGTH ? (
-                          <div>
-                            {value.toString().slice(0, MAX_CONTENT_LENGTH)}
-                            <span
-                              style={{ cursor: 'pointer', color: 'grey' }}
-                              onClick={() => openDetailModal(feedback)}
-                            >
-                              ...더보기
-                            </span>
-                          </div>
-                        ) : (
-                          value.toString()
-                        )}
-                      </TableCell>
-                    );
-                  })}
+                            {typeof value === 'boolean' ? (
+                              <select
+                                value={feedback.isSolved ? 1 : 0}
+                                onChange={() => solvingFeedback(feedback)}
+                              >
+                                <option value='0'>처리중</option>
+                                <option value='1'>처리완료</option>
+                              </select>
+                            ) : value.toString().length > MAX_CONTENT_LENGTH ? (
+                              <div>
+                                {value.toString().slice(0, MAX_CONTENT_LENGTH)}
+                                <span
+                                  style={{ cursor: 'pointer', color: 'grey' }}
+                                  onClick={() => openDetailModal(feedback)}
+                                >
+                                  ...더보기
+                                </span>
+                              </div>
+                            ) : (
+                              value.toString()
+                            )}
+                          </TableCell>
+                        );
+                      }
+                    )}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell>접수된 피드백이 없습니다</TableCell>
                 </TableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
         </TableContainer>
