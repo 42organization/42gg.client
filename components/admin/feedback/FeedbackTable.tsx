@@ -56,7 +56,7 @@ export default function FeedbackTable() {
   const getUserFeedbacks = useCallback(async () => {
     try {
       const res = await instance.get(
-        `/pingpong/admin/feedback/users/${intraId}?page=${currentPage}&size=10`
+        `/pingpong/admin/feedback/users?q=${intraId}&page=${currentPage}&size=10`
       );
       setIntraId(intraId);
       setFeedbackInfo({
