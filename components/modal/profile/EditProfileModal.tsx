@@ -129,7 +129,10 @@ export default function EditProfileModal() {
         <div className={styles.snsWrap}>
           <div
             className={`${styles.snsButton} ${slack ? styles.snsClicked : ''}`}
-            onClick={() => setSlack(!slack)}
+            onClick={
+              () =>
+                alert('슬랙 알림은 현재 준비중입니다.') /* setSlack(!slack) */
+            }
           >
             Slack
           </div>
