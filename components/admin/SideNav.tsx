@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import SideNavContent from './SideNavContent';
 import { GoSettings } from 'react-icons/go';
 import { MdOutlineMessage } from 'react-icons/md';
+import { TbCalendarTime } from 'react-icons/tb';
 import {
   GrUserSettings,
   GrNotification,
@@ -65,19 +66,19 @@ export default function SideNav() {
       </SideNavContent>
 
       <SideNavContent
-        url={'/season'}
-        menuName={'시즌 관리'}
-        currentPath={currentPath}
-      >
-        <GoSettings className={styles.logo} />
-      </SideNavContent>
-
-      <SideNavContent
         url={'/games'}
         menuName={'게임 관리'}
         currentPath={currentPath}
       >
         <IoGameControllerOutline className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/season'}
+        menuName={'시즌 관리'}
+        currentPath={currentPath}
+      >
+        <TbCalendarTime className={styles.logo} />
       </SideNavContent>
     </div>
   );
