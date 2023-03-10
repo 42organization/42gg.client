@@ -14,6 +14,7 @@ import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import CreateNotiButton from 'components/admin/notification/CreateNotiButton';
 import styles from 'styles/admin/notification/NotificationTable.module.scss';
 import instance from 'utils/axios';
+import { getFormattedDateToString } from 'utils/handleTime';
 
 const tableTitle: { [key: string]: string } = {
   notiId: 'ID',
@@ -56,6 +57,19 @@ export default function NotificationTable() {
         `pingpong/admin/notifications?q=${intraId}&page=${currentPage}&size=10`
       );
       setIntraId(intraId);
+      setNotificationInfo({
+        notiList: res.data.notiList.map((noti: INotification) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(noti.createdTime)
+          );
+          return {
+            ...noti,
+            createdTime: `${year}-${month}-${date} ${hour}:${min}`,
+          };
+        }),
+        totalPage: res.data.totalPage,
+        currentPage: res.data.currentPage,
+      });
       setNotificationInfo({ ...res.data });
     } catch (e) {
       console.error('MS00');
@@ -73,7 +87,19 @@ export default function NotificationTable() {
         `pingpong/admin/notifications?page=${currentPage}&size=10`
       );
       setIntraId('');
-      setNotificationInfo({ ...res.data });
+      setNotificationInfo({
+        notiList: res.data.notiList.map((noti: INotification) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(noti.createdTime)
+          );
+          return {
+            ...noti,
+            createdTime: `${year}-${month}-${date} ${hour}:${min}`,
+          };
+        }),
+        totalPage: res.data.totalPage,
+        currentPage: res.data.currentPage,
+      });
     } catch (e) {
       console.error('MS01');
     }

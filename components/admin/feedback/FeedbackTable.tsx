@@ -15,6 +15,7 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from 'styles/admin/feedback/FeedbackTable.module.scss';
+import { getFormattedDateToString } from 'utils/handleTime';
 
 const tableTitle: { [key: string]: string } = {
   id: 'ID',
@@ -59,6 +60,19 @@ export default function FeedbackTable() {
         `/pingpong/admin/feedback/users/${intraId}?page=${currentPage}&size=10`
       );
       setIntraId(intraId);
+      setFeedbackInfo({
+        feedbackList: res.data.feedbackList.map((feedback: IFeedback) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(feedback.createdTime)
+          );
+          return {
+            ...feedback,
+            createdTime: `${year}-${month}-${date} ${hour}:${min}`,
+          };
+        }),
+        totalPage: res.data.totalPage,
+        currentPage: res.data.currentPage,
+      });
       setFeedbackInfo({ ...res.data });
     } catch (e) {
       console.error('MS04');
@@ -70,7 +84,19 @@ export default function FeedbackTable() {
       const res = await instance.get(
         `/pingpong/admin/feedback?page=${currentPage}&size=10`
       );
-      setFeedbackInfo({ ...res.data });
+      setFeedbackInfo({
+        feedbackList: res.data.feedbackList.map((feedback: IFeedback) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(feedback.createdTime)
+          );
+          return {
+            ...feedback,
+            createdTime: `${year}-${month}-${date} ${hour}:${min}`,
+          };
+        }),
+        totalPage: res.data.totalPage,
+        currentPage: res.data.currentPage,
+      });
     } catch (e) {
       console.error('MS03');
     }
