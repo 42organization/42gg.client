@@ -15,8 +15,7 @@ export default function SlotCurrent(props: SlotCurrentProps) {
   const { pastSlotTime } = scheduleInfo;
 
   const slotHour = (date: string) => {
-    const time = new Date(date).getHours();
-    return time;
+    return new Date(date).getHours();
   };
 
   const initSlotInfo = () => {

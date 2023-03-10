@@ -1,11 +1,11 @@
-</br>
+<br>
 
 <div align=center>
 
 <img width="600" alt="Frame 3" src="https://user-images.githubusercontent.com/86540825/209137349-57356fde-777f-4d4f-877f-b5f2b2053da0.png">
 
-</br>
-</br>
+<br>
+<br>
 
 <h2>프로젝트 소개</h2>
 
@@ -13,13 +13,13 @@
 
 42 Cadet들만 이용 가능!
 
-</br>
+<br>
 
 <h2>배포 주소</h2>
 
 [42gg.kr](https://42gg.kr)
 
-</br>
+<br>
 
 <h2>Front-end 기술 스택</h2>
 
@@ -34,7 +34,7 @@
 <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=AmazonEC2&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/Amazon S3-569A31?style=for-the-badge&logo=AmazonS3&logoColor=white"/>
 
-<br/>
+<br>
 
 <h2>멤버</h2>
 
@@ -72,7 +72,7 @@
   </tr>
 </table>
 
-</br>
+<br>
 
 <h2>주요 기능 소개</h2>
 

@@ -188,7 +188,7 @@ export default function NotificationTable() {
                     }
                   )}
                 </TableRow>
-              )}
+              ))}
             </TableBody>
           </Table>
         </TableContainer>

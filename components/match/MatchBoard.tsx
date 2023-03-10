@@ -64,8 +64,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
       for (let j = 0; j < matchBoards[i].length; j++) {
         const match = matchBoards[i][j];
         if (match.status === 'open') {
-          const openSlotHour = new Date(match.time).getHours();
-          return openSlotHour;
+          return new Date(match.time).getHours();
         }
       }
     }

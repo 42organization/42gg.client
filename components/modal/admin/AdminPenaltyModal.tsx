@@ -38,8 +38,7 @@ export default function AdminPenaltyModal(props: { value: string }) {
     const resultDate = fillZero(newDate.getDate().toString(), 2);
     const resultHour = fillZero(newDate.getHours().toString(), 2);
     const resultMinute = fillZero(newDate.getMinutes().toString(), 2);
-    const result = `${newDate.getFullYear()}-${resultMonth}-${resultDate} ${resultHour}:${resultMinute}`;
-    return result;
+    return `${newDate.getFullYear()}-${resultMonth}-${resultDate} ${resultHour}:${resultMinute}`;
   };
 
   const sendPenaltyHandler = async () => {
