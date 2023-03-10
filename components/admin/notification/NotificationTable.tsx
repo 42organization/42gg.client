@@ -15,6 +15,8 @@ import CreateNotiButton from 'components/admin/notification/CreateNotiButton';
 import styles from 'styles/admin/notification/NotificationTable.module.scss';
 import instance from 'utils/axios';
 import { getFormattedDateToString } from 'utils/handleTime';
+import { useRecoilState } from 'recoil';
+import { modalState } from 'utils/recoil/modal';
 
 const tableTitle: { [key: string]: string } = {
   notiId: 'ID',
@@ -31,6 +33,7 @@ interface INotification {
   notiId: number;
   intraId: string;
   slotId: number;
+  message: string;
   type: string;
   createdTime: Date;
   isChecked: boolean;
@@ -42,6 +45,8 @@ interface INotificaionTable {
   currentPage: number;
 }
 
+const MAX_CONTENT_LENGTH = 15;
+
 export default function NotificationTable() {
   const [notificationInfo, setNotificationInfo] = useState<INotificaionTable>({
     notiList: [],
@@ -50,6 +55,7 @@ export default function NotificationTable() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
+  const [modal, setModal] = useRecoilState(modalState);
 
   const getUserNotifications = useCallback(async () => {
     try {
@@ -74,6 +80,10 @@ export default function NotificationTable() {
       console.error('MS00');
     }
   }, [intraId, currentPage]);
+
+  useEffect(() => {
+    console.log(notificationInfo);
+  }, [notificationInfo]);
 
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
@@ -106,8 +116,19 @@ export default function NotificationTable() {
 
   useEffect(() => {
     intraId ? getUserNotifications() : getAllUserNotifications();
-  }, [intraId, getUserNotifications, getAllUserNotifications]);
+  }, [intraId, getUserNotifications, getAllUserNotifications, modal]);
 
+  if (notificationInfo.notiList.length === 0) {
+    return <div>비어있습니다!</div>;
+  }
+
+  const openDetailModal = (noti: INotification) => {
+    setModal({
+      modalName: 'ADMIN-DETAIL_CONTENT',
+      intraId: noti.intraId,
+      detailContent: noti.message,
+    });
+  };
   return (
     <>
       <div className={styles.notificationWrap}>
@@ -131,33 +152,43 @@ export default function NotificationTable() {
               </TableRow>
             </TableHead>
             <TableBody className={styles.tableBody}>
-              {notificationInfo.notiList.length ? (
-                notificationInfo.notiList.map((notification: INotification) => (
-                  <TableRow
-                    key={notification.notiId}
-                    className={styles.tableRow}
-                  >
-                    {tableFormat['notification'].columns.map(
-                      (columnName: string, index: number) => {
-                        return (
-                          <TableCell
-                            className={styles.tableBodyItem}
-                            key={index}
-                          >
-                            {notification[
+              {notificationInfo.notiList.map((notification: INotification) => (
+                <TableRow key={notification.notiId} className={styles.tableRow}>
+                  {tableFormat['notification'].columns.map(
+                    (columnName: string, index: number) => {
+                      return (
+                        <TableCell className={styles.tableBodyItem} key={index}>
+                          {columnName === 'createdTime' ? (
+                            <div>
+                              {notification.createdTime.toString().slice(0, 4)}
+                              <br />
+                              {notification.createdTime.toString().slice(5, 10)}
+                            </div>
+                          ) : notification[
                               columnName as keyof INotification
-                            ]?.toString()}
-                          </TableCell>
-                        );
-                      }
-                    )}
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell>알림이 없습니다.</TableCell>
+                            ]?.toString().length > MAX_CONTENT_LENGTH ? (
+                            <div>
+                              {notification[columnName as keyof INotification]
+                                ?.toString()
+                                .slice(0, MAX_CONTENT_LENGTH)}
+                              <span
+                                style={{ cursor: 'pointer', color: 'grey' }}
+                                onClick={() => openDetailModal(notification)}
+                              >
+                                ...더보기
+                              </span>
+                            </div>
+                          ) : (
+                            notification[
+                              columnName as keyof INotification
+                            ]?.toString()
+                          )}
+                        </TableCell>
+                      );
+                    }
+                  )}
                 </TableRow>
-              )}
+              ))}
             </TableBody>
           </Table>
         </TableContainer>

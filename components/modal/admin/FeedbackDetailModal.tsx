@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styles from 'styles/admin/modal/FeedbackDetail.module.scss';
 
 export default function FeedbackDetailModal({
   intraId,
@@ -8,7 +9,7 @@ export default function FeedbackDetailModal({
   detailContent: string;
 }) {
   const [contentWithNewLine, setContent] = useState<string>('');
-  const MAX_CONTENT_LENGTH = 30;
+  const MAX_CONTENT_LENGTH = 32;
 
   useEffect(() => {
     const contentWithNewLine = detailContent
@@ -24,20 +25,18 @@ export default function FeedbackDetailModal({
   }, [detailContent]);
   return (
     <>
-      <h2>{intraId}</h2>
-      {contentWithNewLine.split('\r\n').map((value: string, index: number) => {
-        return (
-          <span
-            key={index}
-            style={{
-              padding: '5px',
-              fontSize: '1.2rem',
-            }}
-          >
-            {value}
-          </span>
-        );
-      })}
+      <div className={styles.whole}>
+        <h2 className={styles.writer}>{intraId}</h2>
+        {contentWithNewLine
+          .split('\r\n')
+          .map((value: string, index: number) => {
+            return (
+              <span key={index} className={styles.content}>
+                {value}
+              </span>
+            );
+          })}
+      </div>
     </>
   );
 }

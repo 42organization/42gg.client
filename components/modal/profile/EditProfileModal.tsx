@@ -4,8 +4,8 @@ import { profileState } from 'utils/recoil/user';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
-import styles from 'styles/user/Profile.module.scss';
 import { racketTypes } from 'types/userTypes';
+import styles from 'styles/user/Profile.module.scss';
 
 interface EditedProfile {
   racketType: string;
@@ -128,17 +128,13 @@ export default function EditProfileModal() {
         <div className={styles.editType}>알림 받기</div>
         <div className={styles.snsWrap}>
           <div
-            className={`${styles.snsButton} ${
-              slack === true ? styles.snsClicked : ''
-            }`}
+            className={`${styles.snsButton} ${slack ? styles.snsClicked : ''}`}
             onClick={() => setSlack(!slack)}
           >
             Slack
           </div>
           <div
-            className={`${styles.snsButton} ${
-              email === true ? styles.snsClicked : ''
-            }`}
+            className={`${styles.snsButton} ${email ? styles.snsClicked : ''}`}
             onClick={() => setEmail(!email)}
           >
             Email

@@ -36,8 +36,7 @@ export default function SlotMain() {
   };
 
   const slotHour = (date: string) => {
-    const time = new Date(date).getHours();
-    return time;
+    return new Date(date).getHours();
   };
 
   const initSlotInfo = async () => {
