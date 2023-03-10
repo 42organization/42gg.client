@@ -81,8 +81,6 @@ export default function GamesTable() {
     intraId ? getUserGames() : getAllGames();
   }, [intraId, getAllGames, getUserGames]);
 
-  if (!gameInfo.gameLog) return <div>게임 로그가 없습니다.</div>;
-
   return (
     <>
       <div className={styles.gamesWrap}>

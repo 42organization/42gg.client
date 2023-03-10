@@ -15,6 +15,7 @@ import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import styles from 'styles/admin/penalty/PenaltyTable.module.scss';
+import { getFormattedDateToString } from 'utils/handleTime';
 
 interface IPenalty {
   intraId: string;
@@ -59,7 +60,19 @@ export default function PenaltyTable() {
         `pingpong/admin/penalty/users?q=${intraId}&page=${currentPage}&size=10`
       );
       setIntraId(intraId);
-      setPenaltyInfo({ ...res.data });
+      setPenaltyInfo({
+        penaltyList: res.data.penaltyList.map((penalty: IPenalty) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(penalty.releaseTime)
+          );
+          return {
+            ...penalty,
+            releaseTime: `${year}-${month}-${date} ${hour}:${min}`,
+          };
+        }),
+        totalPage: res.data.totalPage,
+        currentPage: res.data.currentPage,
+      });
     } catch (e) {
       console.error('MS07');
     }
@@ -71,7 +84,19 @@ export default function PenaltyTable() {
         `pingpong/admin/penalty/users?page=${currentPage}&size=10`
       );
       setIntraId('');
-      setPenaltyInfo({ ...res.data });
+      setPenaltyInfo({
+        penaltyList: res.data.penaltyList.map((penalty: IPenalty) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(penalty.releaseTime)
+          );
+          return {
+            ...penalty,
+            releaseTime: `${year}-${month}-${date} ${hour}:${min}`,
+          };
+        }),
+        totalPage: res.data.totalPage,
+        currentPage: res.data.currentPage,
+      });
     } catch (e) {
       console.error('MS08');
     }
@@ -103,7 +128,7 @@ export default function PenaltyTable() {
               </TableRow>
             </TableHead>
             <TableBody className={styles.tableBody}>
-              {penaltyInfo.penaltyList.length ? (
+              {penaltyInfo.penaltyList.length > 0 ? (
                 penaltyInfo.penaltyList.map((penalty: IPenalty) => (
                   <TableRow key={penalty.intraId} className={styles.tableRow}>
                     {tableFormat['penalty'].columns.map(
@@ -141,15 +166,13 @@ export default function PenaltyTable() {
           </Table>
         </TableContainer>
         <div className={styles.pageNationContainer}>
-          {penaltyInfo.totalPage > 1 && (
-            <PageNation
-              curPage={penaltyInfo.currentPage}
-              totalPages={penaltyInfo.totalPage}
-              pageChangeHandler={(pageNumber: number) => {
-                setCurrentPage(pageNumber);
-              }}
-            />
-          )}
+          <PageNation
+            curPage={penaltyInfo.currentPage}
+            totalPages={penaltyInfo.totalPage}
+            pageChangeHandler={(pageNumber: number) => {
+              setCurrentPage(pageNumber);
+            }}
+          />
         </div>
       </div>
     </>

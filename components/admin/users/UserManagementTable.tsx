@@ -103,9 +103,6 @@ export default function UserManagementTable() {
     intraId ? getUserInfo() : getAllUserInfo();
   }, [intraId, getAllUserInfo, getUserInfo]);
 
-  // ? 검색결과가 없을 때, currentPage === 0 인가?
-  if (userManagements.currentPage === 0) return <div>loading...</div>;
-
   return (
     <>
       <div className={styles.userManagementWrap}>
@@ -128,38 +125,46 @@ export default function UserManagementTable() {
               </TableRow>
             </TableHead>
             <TableBody className={styles.tableBody}>
-              {userManagements.userInfoList.map((userInfo: IUser) => (
-                <TableRow key={userInfo.id} className={styles.tableRow}>
-                  {tableFormat['userInfo'].columns.map((columnName: string) => {
-                    return (
-                      <TableCell
-                        className={styles.tableBodyItem}
-                        key={columnName}
-                      >
-                        {columnName !== 'etc'
-                          ? userInfo[columnName as keyof IUser]
-                          : tableFormat['userInfo'].etc?.value.map(
-                              (buttonName: string, index: number) => (
-                                <button
-                                  key={buttonName}
-                                  className={`${styles.button} ${buttonList[index]}`}
-                                  onClick={() =>
-                                    handleButtonAction(
-                                      buttonName,
-                                      userInfo.id,
-                                      userInfo.intraId
-                                    )
-                                  }
-                                >
-                                  {buttonName}
-                                </button>
-                              )
-                            )}
-                      </TableCell>
-                    );
-                  })}
+              {userManagements.userInfoList.length > 0 ? (
+                userManagements.userInfoList.map((userInfo: IUser) => (
+                  <TableRow key={userInfo.id} className={styles.tableRow}>
+                    {tableFormat['userInfo'].columns.map(
+                      (columnName: string) => {
+                        return (
+                          <TableCell
+                            className={styles.tableBodyItem}
+                            key={columnName}
+                          >
+                            {columnName !== 'etc'
+                              ? userInfo[columnName as keyof IUser]
+                              : tableFormat['userInfo'].etc?.value.map(
+                                  (buttonName: string, index: number) => (
+                                    <button
+                                      key={buttonName}
+                                      className={`${styles.button} ${buttonList[index]}`}
+                                      onClick={() =>
+                                        handleButtonAction(
+                                          buttonName,
+                                          userInfo.id,
+                                          userInfo.intraId
+                                        )
+                                      }
+                                    >
+                                      {buttonName}
+                                    </button>
+                                  )
+                                )}
+                          </TableCell>
+                        );
+                      }
+                    )}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell>가입 유저가 없습니다</TableCell>
                 </TableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
         </TableContainer>
