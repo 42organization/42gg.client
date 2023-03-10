@@ -46,7 +46,7 @@ function generateGamelog(): IGames {
       {
         gameId: 1,
         startAt: new Date(),
-        playTime: '15분',
+        slotTime: '15분',
         mode: 'rank',
         team1: teams[0],
         team2: teams[1],
@@ -54,7 +54,7 @@ function generateGamelog(): IGames {
       {
         gameId: 2,
         startAt: new Date(),
-        playTime: '15분',
+        slotTime: '15분',
         mode: 'rank',
         team1: teams[1],
         team2: teams[0],
@@ -62,7 +62,7 @@ function generateGamelog(): IGames {
       {
         gameId: 3,
         startAt: new Date(),
-        playTime: '30분',
+        slotTime: '30분',
         mode: 'rank',
         team1: teams[2],
         team2: teams[3],
