@@ -31,7 +31,7 @@ export default function SlotMain() {
       const res = await instance.get(`/pingpong/admin/slot`); //ToDo: api 명세 나오면 바꾸기
       setScheduleInfo(res?.data);
     } catch (e) {
-      console.error(e);
+      console.error('SW00');
     }
   };
 
@@ -51,7 +51,7 @@ export default function SlotMain() {
         ) + 1
       );
     } catch (e) {
-      console.error(e);
+      console.error('SW01');
     }
   };
 
@@ -113,7 +113,7 @@ export default function SlotMain() {
       await instance.put(`/pingpong/admin/slot`, scheduleInfo);
       initSlotInfo();
     } catch (e) {
-      console.error(e);
+      console.error('SW02');
     }
   };
   return (

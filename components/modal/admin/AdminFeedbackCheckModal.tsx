@@ -26,7 +26,7 @@ export default function AdminFeedbackCheck({
       });
       setModal({ modalName: null });
     } catch (e) {
-      console.error(e);
+      console.error('SW03');
     }
   };
 
