@@ -55,7 +55,6 @@ export default function FeedbackTable() {
 
   const getUserFeedbacks = useCallback(async () => {
     try {
-      // TODO : api 수정 필요
       const res = await instance.get(
         `/pingpong/admin/feedback/users/${intraId}?page=${currentPage}&size=10`
       );
@@ -73,7 +72,6 @@ export default function FeedbackTable() {
         totalPage: res.data.totalPage,
         currentPage: res.data.currentPage,
       });
-      setFeedbackInfo({ ...res.data });
     } catch (e) {
       console.error('MS04');
     }

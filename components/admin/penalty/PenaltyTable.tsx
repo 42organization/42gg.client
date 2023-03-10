@@ -73,7 +73,6 @@ export default function PenaltyTable() {
         totalPage: res.data.totalPage,
         currentPage: res.data.currentPage,
       });
-      setPenaltyInfo({ ...res.data });
     } catch (e) {
       console.error('MS07');
     }

@@ -70,7 +70,6 @@ export default function NotificationTable() {
         totalPage: res.data.totalPage,
         currentPage: res.data.currentPage,
       });
-      setNotificationInfo({ ...res.data });
     } catch (e) {
       console.error('MS00');
     }
