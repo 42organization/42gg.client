@@ -143,7 +143,7 @@ export default function SlotMain() {
         <div className={styles.initBtn}></div>
       </div>
       <div className={styles.inputContainer}>
-        <div className={styles.interval}>
+        <div className={styles.gameTime}>
           <div>게임 시간:</div>
           <select
             value={scheduleInfo.interval}
@@ -228,7 +228,7 @@ export default function SlotMain() {
           </div>
         </div>
         <hr />
-        <div className={styles.openMinute}>
+        <div className={styles.blindShowTime}>
           <div>블라인드 해제 시간:</div>
           <input
             type='number'

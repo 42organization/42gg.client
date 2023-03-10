@@ -81,10 +81,6 @@ export default function NotificationTable() {
     }
   }, [intraId, currentPage]);
 
-  useEffect(() => {
-    console.log(notificationInfo);
-  }, [notificationInfo]);
-
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
     setCurrentPage(1);

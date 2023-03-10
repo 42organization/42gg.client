@@ -1,0 +1,50 @@
+@import 'styles/common.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 1rem;
+  width: 100%;
+  min-width: 64rem;
+  max-width: 72rem;
+  height: 100%;
+}
+
+.tableContainer {
+  .table {
+    .tableHeader {
+      background-color: lightgray;
+
+      .tableHeaderItem {
+        padding: 0.5rem;
+        text-align: center;
+        font-weight: 600;
+        font-size: $small-font;
+        line-height: 150%;
+      }
+    }
+
+    .tableBody {
+      .tableBodyItem {
+        padding: 0.5rem;
+        text-align: center;
+        font-size: $small-font;
+        line-height: 100%;
+      }
+    }
+  }
+}
+
+.editBtn {
+  all: unset;
+  width: 3rem;
+  height: 1.6rem;
+  background: $dark-gray;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-size: $small-font;
+  color: white;
+  cursor: pointer;
+  margin: 0 0.2rem;
+}

@@ -19,7 +19,8 @@ type AdminModal =
   | 'NOTI_ALL'
   | 'NOTI_USER'
   | 'CHECK_FEEDBACK'
-  | 'DETAIL_CONTENT';
+  | 'DETAIL_CONTENT'
+  | 'SEASON_EDIT';
 
 type ModalName =
   | null
@@ -56,6 +57,17 @@ export interface Manual {
   toggleMode: MatchMode;
 }
 
+export interface ISeason {
+  seasonId: number;
+  seasonMode: string;
+  seasonName: string;
+  startTime: Date;
+  endTime: Date;
+  startPpp: number;
+  pppGap: number;
+  status: number;
+}
+
 export interface Modal {
   modalName: ModalName;
   manual?: Manual;
@@ -68,4 +80,5 @@ export interface Modal {
   detailContent?: string;
   feedback?: IFeedback;
   userId?: number;
+  ISeason?: ISeason;
 }

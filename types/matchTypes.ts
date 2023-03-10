@@ -15,6 +15,7 @@ export interface CurrentMatch {
   isMatched: boolean;
   myTeam: string[];
   enemyTeam: string[];
+  isImminent: boolean;
 }
 
 export interface Match {

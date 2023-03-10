@@ -18,8 +18,8 @@ export default function MatchCancelModal({ isMatched, slotId, time }: Cancel) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const [currentMatch, setCurrentMatch] = useRecoilState(currentMatchState);
-  const cancelLimitTime = 5;
-  const rejectCancel = isBeforeMin(time, cancelLimitTime) && isMatched;
+  const cancelLimitTime = currentMatch.isImminent;
+  const rejectCancel = cancelLimitTime && isMatched;
   const contentType = rejectCancel ? 'reject' : 'cancel';
   const content = {
     cancel: {

@@ -88,7 +88,7 @@ export default function GamesTable() {
                     시작 날짜: {game.startAt.toLocaleString().split(' ')[0]}
                   </div>
                   <div>게임 모드: {game.mode}</div>
-                  <div>슬롯 시간: {game.playTime}분</div>
+                  <div>슬롯 시간: {game.slotTime}분</div>
                   <div>
                     {game.mode === 'Normal'
                       ? ''

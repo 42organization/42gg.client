@@ -2,14 +2,15 @@ import { useRouter } from 'next/router';
 import SideNavContent from './SideNavContent';
 import { GoSettings } from 'react-icons/go';
 import { MdOutlineMessage } from 'react-icons/md';
+import { TbCalendarTime } from 'react-icons/tb';
 import {
   GrUserSettings,
   GrNotification,
   GrStatusWarning,
   GrAnnounce,
 } from 'react-icons/gr';
-import styles from 'styles/admin/SideNav.module.scss';
 import { IoGameControllerOutline } from 'react-icons/io5';
+import styles from 'styles/admin/SideNav.module.scss';
 
 export default function SideNav() {
   const currentPath = useRouter().asPath.replace('/admin', '');
@@ -70,6 +71,14 @@ export default function SideNav() {
         currentPath={currentPath}
       >
         <IoGameControllerOutline className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/season'}
+        menuName={'시즌 관리'}
+        currentPath={currentPath}
+      >
+        <TbCalendarTime className={styles.logo} />
       </SideNavContent>
     </div>
   );

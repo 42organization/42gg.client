@@ -1,0 +1,108 @@
+@import 'styles/common.scss';
+
+.whole {
+  display: flex;
+  flex-direction: column;
+  width: 510px;
+  height: 569px;
+  background: #ffffff;
+  border-radius: 9px;
+}
+
+.title {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-evenly;
+  width: 510px;
+  height: 130px;
+  padding: 0 1rem;
+}
+
+.titleText {
+  margin-top: 15px;
+  margin-left: 1rem;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 150%;
+  color: #000000;
+}
+
+.hr {
+  width: 455px;
+  height: 0.5px;
+  background: #e5e5e5;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+}
+
+.inputContainer {
+  padding: 0 1rem;
+}
+
+.bodyText {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 150%;
+  color: #6b7280;
+}
+
+.blank {
+  display: flex;
+  margin: auto;
+  width: 100%;
+  height: 16rem;
+  resize: none;
+  box-sizing: border-box;
+  background: #f9fafb;
+  border: 0.5px solid #ced4da;
+  border-radius: 1px;
+}
+
+.messageBlank {
+  display: flex;
+  width: 430px;
+  height: 202px;
+  resize: none;
+  box-sizing: border-box;
+  background: #f9fafb;
+  border: 0.5px solid #ced4da;
+  border-radius: 1px;
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+  padding: 1rem 1rem;
+  align-content: space-evenly;
+
+  button {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+
+  :nth-child(1) {
+    background: $btn-blue;
+  }
+
+  :nth-child(2) {
+    background: gray;
+  }
+}

@@ -10,7 +10,7 @@ import { gameTimeToString, isBeforeMin } from 'utils/handleTime';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 export default function CurrentMatch() {
-  const [{ isMatched, enemyTeam, time, slotId }, setCurrentMatch] =
+  const [{ isMatched, enemyTeam, time, slotId, isImminent }, setCurrentMatch] =
     useRecoilState(currentMatchState);
   const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
   const setModal = useSetRecoilState(modalState);

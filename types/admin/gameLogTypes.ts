@@ -9,7 +9,7 @@ export interface ITeam {
 export interface IGameLog {
   gameId: number;
   startAt: Date;
-  playTime: string;
+  slotTime: string;
   mode: string;
   team1: ITeam;
   team2: ITeam;
