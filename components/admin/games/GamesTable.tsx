@@ -30,10 +30,6 @@ export default function GamesTable() {
     setCurrentPage(1);
   }, []);
 
-  useEffect(() => {
-    console.log(gameInfo);
-  }, [gameInfo]);
-
   const getAllGames = useCallback(async () => {
     try {
       const res = await instance.get(
