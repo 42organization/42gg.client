@@ -71,9 +71,10 @@ function MatchSlot({ type, slot, toggleMode }: MatchSlotProps) {
     >
       <span className={styles.time}>
         {slotData === '00 - 00'
-          ? `${slotStartTime.getHours() % 12}:00 - ${
-              slotEndTime.getHours() % 12
-            }:00`
+          ? `${fillZero(
+              (slotStartTime.getHours() % 12).toString(),
+              2
+            )}:00 - ${fillZero((slotEndTime.getHours() % 12).toString(), 2)}:00`
           : slotData}
         {status === 'mytable' && ' 🙋'}
       </span>
