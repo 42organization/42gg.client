@@ -47,7 +47,7 @@ export default function GamesTable() {
   const getUserGames = useCallback(async () => {
     try {
       const res = await instance.get(
-        `pingpong/admin/games?q=${intraId}&page=${currentPage}&size=10`
+        `pingpong/admin/games/users?q=${intraId}&page=${currentPage}&size=5`
       );
       setGameInfo({
         gameLog: res.data.gameLogList.map((game: IGameLog) => {
