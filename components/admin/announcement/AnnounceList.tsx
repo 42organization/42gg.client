@@ -59,7 +59,6 @@ export default function AnnounceList() {
       const res = await instance.get(
         `pingpong/admin/announcement?page=${currentPage}&size=5`
       );
-      console.log(res.data);
       setAnnouncementInfo({ ...res.data });
     } catch (e) {
       console.error('MS01');
@@ -94,7 +93,7 @@ export default function AnnounceList() {
                     {tableFormat['announcement'].columns.map(
                       (columnName: string, index: number) => {
                         return columnName == 'content' ? (
-                          <TableCell>
+                          <TableCell key={index}>
                             <Quill
                               className={styles.quillViewer}
                               readOnly={true}
