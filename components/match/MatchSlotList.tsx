@@ -23,7 +23,7 @@ export default function MatchSlotList({
       <div className={styles.slotHour}>
         {slotHourIn12}
         {slotHourIn12 === '오전  12시' && (
-          <div>{`${slotTime.getMonth()}월 ${slotTime.getDate()}일`}</div>
+          <div>{`${slotTime.getMonth() + 1}월 ${slotTime.getDate()}일`}</div>
         )}
       </div>
       <div className={styles.slotGrid}>
