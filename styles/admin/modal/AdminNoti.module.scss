@@ -15,7 +15,7 @@
   align-content: space-evenly;
   width: 510px;
   height: 130px;
-  padding: 0rem 1rem;
+  padding: 0 1rem;
 }
 
 .titleText {
@@ -38,11 +38,11 @@
 .body {
   display: flex;
   flex-direction: column;
-  padding: 0rem 1rem;
+  padding: 0 1rem;
 }
 
 .bodyWrap {
-  padding: 0rem 1rem;
+  padding: 0 1rem;
 }
 
 .bodyText {
@@ -71,7 +71,7 @@
 }
 
 .messageWrap {
-  padding: 0rem 0rem;
+  padding: 0 0;
 }
 
 .messageBlank {

@@ -63,6 +63,6 @@
 .buttons {
   @include select-buttons;
   .single {
-    margin-right: 0rem;
+    margin-right: 0;
   }
 }

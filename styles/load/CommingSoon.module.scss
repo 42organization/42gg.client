@@ -18,8 +18,8 @@
 
 .title {
   @include pageTitle;
-  height: 0rem;
-  padding: 1.3rem 0rem 3rem;
+  height: 0;
+  padding: 1.3rem 0 3rem;
   font-family: $logo-font;
 }
 
@@ -37,32 +37,32 @@
 }
 
 .loadTextRed {
-  height: 0rem;
+  height: 0;
   color: $pp-red;
   font-size: 3rem;
 }
 
 .loadTextWhite {
-  height: 0rem;
+  height: 0;
   margin-bottom: 10rem;
   color: white;
   font-size: 3rem;
 }
 
 .loadTextRedBottom {
-  height: 0rem;
+  height: 0;
   color: $pp-red;
   font-size: 3rem;
 }
 
 .loadTextWhiteBottom {
-  height: 0%;
+  height: 0;
   color: white;
   font-size: 3rem;
 }
 
 .loadTextBlack {
-  height: 0rem;
+  height: 0;
   padding-bottom: 2rem;
   color: black;
   font-size: 3rem;
