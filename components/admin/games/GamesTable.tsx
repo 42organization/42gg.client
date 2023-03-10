@@ -1,15 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@mui/material';
 import PageNation from 'components/Pagination';
-import { tableFormat } from 'constants/admin/table';
 import { IGames, IGameLog } from 'types/admin/gameLogTypes';
 import instance from 'utils/axios';
 import { getFormattedDateToString } from 'utils/handleTime';
@@ -98,7 +88,7 @@ export default function GamesTable() {
                     시작 날짜: {game.startAt.toLocaleString().split(' ')[0]}
                   </div>
                   <div>게임 모드: {game.mode}</div>
-                  <div>슬롯 시간: {game.slotTime}분</div>
+                  <div>슬롯 시간: {game.playTime}분</div>
                   <div>
                     {game.mode === 'Normal'
                       ? ''

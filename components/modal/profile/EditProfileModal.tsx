@@ -4,8 +4,8 @@ import { profileState } from 'utils/recoil/user';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
-import styles from 'styles/user/Profile.module.scss';
 import { racketTypes } from 'types/userTypes';
+import styles from 'styles/user/Profile.module.scss';
 
 interface EditedProfile {
   racketType: string;
