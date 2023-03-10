@@ -36,6 +36,19 @@ export default function EditProfileModal() {
       statusMessage,
       snsNotiOpt,
     }));
+    if (snsNotiOpt === 'BOTH') {
+      setSlack(true);
+      setEmail(true);
+    } else if (snsNotiOpt === 'SLACK') {
+      setSlack(true);
+      setEmail(false);
+    } else if (snsNotiOpt === 'EMAIL') {
+      setSlack(false);
+      setEmail(true);
+    } else {
+      setSlack(false);
+      setEmail(false);
+    }
   }, [profile]);
 
   const inputChangeHandler = ({

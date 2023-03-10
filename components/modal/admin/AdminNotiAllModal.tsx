@@ -5,10 +5,25 @@ import { toastState } from 'utils/recoil/toast';
 import instance from 'utils/axios';
 import styles from 'styles/admin/modal/AdminNoti.module.scss';
 
+const STAT_MSG_LIMIT = 25;
+
 export default function AdminNotiAllModal() {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
   const notiContent = useRef<HTMLTextAreaElement>(null);
+
+  const inputHandler = ({
+    target: { name, value },
+  }: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (name === 'notification' && value.length > STAT_MSG_LIMIT)
+      setSnackBar({
+        toastName: 'noti all',
+        severity: 'warning',
+        message: `${STAT_MSG_LIMIT}자 이내로 입력하세요`,
+        clicked: true,
+      });
+    return;
+  };
 
   const sendNotificationHandler = async () => {
     if (notiContent.current?.value === '') {
@@ -66,6 +81,8 @@ export default function AdminNotiAllModal() {
             name='notification'
             ref={notiContent}
             placeholder={'모두에게 전달할 알림을 입력해주세요'}
+            maxLength={STAT_MSG_LIMIT}
+            onChange={inputHandler}
           />
         </div>
         <div className={styles.btns}>

@@ -10,6 +10,7 @@ import styles from 'styles/admin/modal/AdminNoti.module.scss';
 let timer: ReturnType<typeof setTimeout>;
 
 const MAX_SEARCH_LENGTH = 15;
+const STAT_MSG_LIMIT = 25;
 
 export default function AdminNotiUserModal() {
   const setModal = useSetRecoilState(modalState);
@@ -51,6 +52,19 @@ export default function AdminNotiUserModal() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const inputHandler = ({
+    target: { name, value },
+  }: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (name === 'notification' && value.length > STAT_MSG_LIMIT)
+      setSnackBar({
+        toastName: 'noti user',
+        severity: 'warning',
+        message: `${STAT_MSG_LIMIT}자 이내로 입력하세요`,
+        clicked: true,
+      });
+    return;
+  };
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -187,6 +201,8 @@ export default function AdminNotiUserModal() {
               name='notification'
               ref={notiContent}
               placeholder={'전달할 알림을 입력해주세요'}
+              maxLength={STAT_MSG_LIMIT}
+              onChange={inputHandler}
             />
           </div>
         </div>
