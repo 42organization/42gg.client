@@ -4,11 +4,13 @@ import { profileState } from 'utils/recoil/user';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
+import { racketTypes } from 'types/userTypes';
 import styles from 'styles/user/Profile.module.scss';
 
 interface EditedProfile {
   racketType: string;
   statusMessage: string;
+  snsNotiOpt: 'NONE' | 'SLACK' | 'EMAIL' | 'BOTH';
 }
 
 const CHAR_LIMIT = 30;
@@ -20,20 +22,33 @@ export default function EditProfileModal() {
   const [editedProfile, setEditedProfile] = useState<EditedProfile>({
     racketType: profile.racketType,
     statusMessage: '',
+    snsNotiOpt: 'SLACK',
   });
-  const { racketType, statusMessage } = profile;
-  const racketTypes = [
-    { id: 'penholder', label: 'PENHOLDER' },
-    { id: 'shakehand', label: 'SHAKEHAND' },
-    { id: 'dual', label: 'DUAL' },
-  ];
+  const [slack, setSlack] = useState<boolean>(true);
+  const [email, setEmail] = useState<boolean>(false);
+
+  const { racketType, statusMessage, snsNotiOpt } = profile;
 
   useEffect(() => {
     setEditedProfile((prev) => ({
       ...prev,
       racketType,
       statusMessage,
+      snsNotiOpt,
     }));
+    if (snsNotiOpt === 'BOTH') {
+      setSlack(true);
+      setEmail(true);
+    } else if (snsNotiOpt === 'SLACK') {
+      setSlack(true);
+      setEmail(false);
+    } else if (snsNotiOpt === 'EMAIL') {
+      setSlack(false);
+      setEmail(true);
+    } else {
+      setSlack(false);
+      setEmail(false);
+    }
   }, [profile]);
 
   const inputChangeHandler = ({
@@ -50,6 +65,11 @@ export default function EditProfileModal() {
   };
 
   const finishEditHandler = async () => {
+    if (slack && email) editedProfile.snsNotiOpt = 'BOTH';
+    else if (slack && !email) editedProfile.snsNotiOpt = 'SLACK';
+    else if (!slack && email) editedProfile.snsNotiOpt = 'EMAIL';
+    else editedProfile.snsNotiOpt = 'NONE';
+
     setProfile((prev) => ({
       ...prev,
       ...editedProfile,
@@ -102,6 +122,23 @@ export default function EditProfileModal() {
               </label>
             );
           })}
+        </div>
+      </div>
+      <div>
+        <div className={styles.editType}>알림 받기</div>
+        <div className={styles.snsWrap}>
+          <div
+            className={`${styles.snsButton} ${slack ? styles.snsClicked : ''}`}
+            onClick={() => setSlack(!slack)}
+          >
+            Slack
+          </div>
+          <div
+            className={`${styles.snsButton} ${email ? styles.snsClicked : ''}`}
+            onClick={() => setEmail(!email)}
+          >
+            Email
+          </div>
         </div>
       </div>
       <div className={styles.buttons}>

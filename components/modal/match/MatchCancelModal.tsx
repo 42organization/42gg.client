@@ -18,8 +18,8 @@ export default function MatchCancelModal({ isMatched, slotId, time }: Cancel) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const [currentMatch, setCurrentMatch] = useRecoilState(currentMatchState);
-  const cancelLimitTime = 5;
-  const rejectCancel = isBeforeMin(time, cancelLimitTime) && isMatched;
+  const cancelLimitTime = currentMatch.isImminent;
+  const rejectCancel = cancelLimitTime && isMatched;
   const contentType = rejectCancel ? 'reject' : 'cancel';
   const content = {
     cancel: {
@@ -30,7 +30,7 @@ export default function MatchCancelModal({ isMatched, slotId, time }: Cancel) {
     reject: {
       emoji: '😰',
       main: '매칭이 완료되어\n경기를 취소할 수 없습니다!!',
-      sub: `경기시작 ${cancelLimitTime}분 전부터는\n경기를 취소할 수 없습니다..`,
+      sub: `상대방이 공개된 이후부터는\n경기를 취소할 수 없습니다..`,
     },
   };
   const cancelResponse: { [key: string]: string } = {

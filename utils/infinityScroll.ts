@@ -3,7 +3,7 @@ import { useInfiniteQuery } from 'react-query';
 import { errorState } from 'utils/recoil/error';
 import instance from './axios';
 
-export default function infScroll(path: string) {
+export default function InfScroll(path: string) {
   const setError = useSetRecoilState(errorState);
 
   const getList = ({ pageParam = 0 }) =>
@@ -11,7 +11,7 @@ export default function infScroll(path: string) {
       return res?.data;
     });
 
-  const result = useInfiniteQuery('infiniteList', getList, {
+  return useInfiniteQuery('infiniteList', getList, {
     getNextPageParam: (pages) => {
       return pages.lastGameId;
     },
@@ -22,6 +22,4 @@ export default function infScroll(path: string) {
     retry: 0,
     keepPreviousData: true,
   });
-
-  return result;
 }

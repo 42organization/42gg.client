@@ -12,7 +12,10 @@ import Statistics from 'pages/statistics';
 import Header from './Header';
 import Footer from './Footer';
 import CurrentMatch from './CurrentMatch';
+import AdminLayout from '../admin/Layout';
+import AdminReject from '../admin/AdminReject';
 import styles from 'styles/Layout/Layout.module.scss';
+import useAxiosWithToast from 'hooks/useAxiosWithToast';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -31,6 +34,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const presentPath = useRouter().asPath;
   const announcementTime = localStorage.getItem('announcementTime');
 
+  useAxiosWithToast();
+
   useEffect(() => {
     getUserHandler();
     getSeasonListHandler();
@@ -38,14 +43,14 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   const getAnnouncementHandler = async () => {
     try {
-      const res = await instance.get(`/pingpong/announcements`);
-      res.data.announcements.length &&
+      const res = await instance.get(`/pingpong/announcement`);
+      res.data.content !== '' &&
         setModal({
           modalName: 'EVENT-ANNOUNCEMENT',
-          announcements: res.data.announcements,
+          announcement: res.data,
         });
     } catch (e) {
-      setError('HW01');
+      setError('RJ01');
     }
   };
   const getSeasonListHandler = async () => {
@@ -100,7 +105,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
     }
   };
 
-  return (
+  return presentPath.includes('/admin') ? (
+    user.isAdmin ? (
+      <AdminLayout>{children}</AdminLayout>
+    ) : (
+      <AdminReject />
+    )
+  ) : (
     <div className={styles.appContainer}>
       <div className={styles.background}>
         <div>

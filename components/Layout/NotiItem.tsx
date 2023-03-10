@@ -16,9 +16,9 @@ export default function NotiItem({ data }: NotiItemProps) {
   } = {
     imminent: {
       title: '경기 준비',
-      content: makeImminentContent(data.enemyTeam, data.time, data.createdAt),
+      content: MakeImminentContent(data.enemyTeam, data.time, data.createdAt),
     },
-    announce: { title: '공 지', content: makeAnnounceContent(data.message) },
+    announce: { title: '공 지', content: MakeAnnounceContent(data.message) },
     matched: {
       title: '매칭 성사',
       content: makeContent(data.time, '에 신청한 매칭이 성사되었습니다.'),
@@ -53,7 +53,7 @@ function makeContent(time: string | undefined, message: string) {
   if (time) return gameTimeToString(time) + message;
 }
 
-function makeAnnounceContent(message: string | undefined) {
+function MakeAnnounceContent(message: string | undefined) {
   if (message && !message.includes('https')) return message;
   const url = message?.split('https')[1];
   const content = message?.split('https')[0].split('=>')[0];
@@ -66,7 +66,7 @@ function makeAnnounceContent(message: string | undefined) {
   );
 }
 
-function makeImminentContent(
+function MakeImminentContent(
   enemyTeam: string[] | undefined,
   time: string | undefined,
   createdAt: string

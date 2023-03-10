@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import router from 'next/router';
 import { RankResult, RankPlayer, NormalPlayer } from 'types/gameTypes';
 import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/game/GameResultItem.module.scss';

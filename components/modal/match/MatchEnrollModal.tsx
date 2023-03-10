@@ -11,8 +11,8 @@ export default function MatchEnrollModal({
   slotId,
   type,
   mode,
-  startTime,
-  endTime,
+  slotStartTime,
+  slotEndTime,
 }: Enroll) {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
@@ -22,6 +22,7 @@ export default function MatchEnrollModal({
     SC001: '경기 등록에 실패하였습니다.',
     SC002: '이미 등록이 완료된 경기입니다.',
     SC003: '경기 취소 후 1분 동안 경기를 예약할 수 없습니다.',
+    SC005: '패널티를 부여받은 유저는 경기에 등록할 수 없습니다.',
   };
 
   const onEnroll = async () => {
@@ -51,7 +52,7 @@ export default function MatchEnrollModal({
       <div className={styles.phrase}>
         <div className={styles.emoji}>🏓</div>
         <div className={styles.time}>
-          {gameTimeToString(startTime)} - {gameTimeToString(endTime)}
+          {gameTimeToString(slotStartTime)} - {gameTimeToString(slotEndTime)}
         </div>
         <div>
           {mode === 'rank' ? '(랭크전)' : '(일반전)'}

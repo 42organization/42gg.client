@@ -4,7 +4,6 @@ import { userState } from 'utils/recoil/layout';
 import { seasonListState } from 'utils/recoil/seasons';
 import { openMenuBarState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
-import instance from 'utils/axios';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 export default function MenuBar() {
@@ -20,15 +19,6 @@ export default function MenuBar() {
     { name: '최근 경기', link: '/game' },
     { name: '내 정보', link: `/users/detail?intraId=${intraId}` },
   ];
-
-  const goToAdminPage = async () => {
-    try {
-      await instance.get('/admin');
-      window.open(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/admin`);
-    } catch (e) {
-      alert('👊 콱 씨...!');
-    }
-  };
 
   return (
     <>
@@ -72,7 +62,9 @@ export default function MenuBar() {
                   <Link href='/statistics'>
                     <div>📊 통계페이지</div>
                   </Link>
-                  <div onClick={goToAdminPage}>😎 관리자</div>
+                  <Link href='/admin'>
+                    <div onClick={resetOpenMenuBar}>😎 관리자</div>
+                  </Link>
                 </>
               )}
               <div onClick={() => setModal({ modalName: 'MENU-LOGOUT' })}>
