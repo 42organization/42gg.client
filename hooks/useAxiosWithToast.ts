@@ -68,6 +68,7 @@ export default function useAxiosWithToast() {
         });
         break;
     }
+    throw error;
   };
 
   const responseHandler = (response: AxiosResponse) => {
