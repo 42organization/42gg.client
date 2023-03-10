@@ -13,6 +13,8 @@ export default function useAxiosWithToast() {
     apiUrl.split('/').slice(3).join('/');
 
   const errorRequestHandler = (error: AxiosError) => {
+    if (!checkAdminURL(error.config.url as string)) throw error;
+
     setSnackbar({
       toastName: 'request error',
       severity: 'error',
@@ -22,6 +24,8 @@ export default function useAxiosWithToast() {
   };
 
   const errorResponseHandler = (error: AxiosError) => {
+    if (!checkAdminURL(error.config.url as string)) throw error;
+
     switch (error.response?.status) {
       case 400:
         setSnackbar({
@@ -79,7 +83,7 @@ export default function useAxiosWithToast() {
         setSnackbar({
           toastName: `${getRequestRoute(url as string)} success`,
           severity: 'success',
-          message: `🎉 ${response.data.message} 🎉`,
+          message: `🎉 ${response.data.message || '성공했습니다!'} 🎉`,
           clicked: true,
         });
         break;
@@ -87,7 +91,7 @@ export default function useAxiosWithToast() {
         setSnackbar({
           toastName: `${getRequestRoute(url as string)} info`,
           severity: 'info',
-          message: `🤔 ${response.data.message} 🤔`,
+          message: `🤔 ${response.data.message || '성공했습니다!'} 🤔`,
           clicked: true,
         });
         break;
@@ -95,7 +99,9 @@ export default function useAxiosWithToast() {
         setSnackbar({
           toastName: `${getRequestRoute(url as string)} info`,
           severity: 'info',
-          message: `default: ${response.data.message} `,
+          message: `default: ${response.data.message} at ${getRequestRoute(
+            url as string
+          )}`,
           clicked: true,
         });
         break;
@@ -109,12 +115,12 @@ export default function useAxiosWithToast() {
 
   const responseInterceptor = instance.interceptors.response.use(
     (response) => responseHandler(response),
-    (error) => errorRequestHandler(error.response.data)
+    (error) => errorResponseHandler(error)
   );
 
   const requestInterceptor = instance.interceptors.request.use(
     (config) => requestHandler(config),
-    (error) => errorResponseHandler(error.response.data)
+    (error) => errorRequestHandler(error)
   );
 
   useEffect(() => {

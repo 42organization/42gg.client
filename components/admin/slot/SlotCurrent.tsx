@@ -23,19 +23,17 @@ export default function SlotCurrent(props: SlotCurrentProps) {
     const noSlotIndex: number = currentHour + futurePreview - pastSlotTime;
     const updatedMatchBoards = props.slotInfo.matchBoards.map(
       (slots: Slots[], index: number) => {
-        if (firstHour + index < noSlotIndex) {
-          const updatedSlots: Slots[] = slots.map((slot: Slots) => {
+        const updatedSlots: Slots[] = slots.map((slot: Slots) => {
+          if (firstHour + index < noSlotIndex) {
             return { ...slot, status: 'noSlot' };
-          });
-          return updatedSlots;
-        } else if (index < currentHour - firstHour + futurePreview) {
-          const updatedSlots: Slots[] = slots.map((slot: Slots) => {
+          } else if (index < currentHour - firstHour + futurePreview) {
             return { ...slot, status: 'close' };
-          });
-          return updatedSlots;
-        } else {
-          return slots;
-        }
+          } else if (slot.status === 'mytable') {
+            return { ...slot, status: 'close' };
+          }
+          return slot;
+        });
+        return updatedSlots;
       }
     );
     setSlotInfo({

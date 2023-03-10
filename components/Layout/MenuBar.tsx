@@ -64,7 +64,7 @@ export default function MenuBar() {
                     <div>📊 통계페이지</div>
                   </Link>
                   <Link href='/admin'>
-                    <div>😎 관리자</div>
+                    <div onClick={resetOpenMenuBar}>😎 관리자</div>
                   </Link>
                 </>
               )}

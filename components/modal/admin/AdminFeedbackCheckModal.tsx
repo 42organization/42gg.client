@@ -36,19 +36,19 @@ export default function AdminFeedbackCheck({
         <div>
           <IoSend size={42} color={'#1556B8'} />
         </div>
-        <div className={styles.content}>알림을 보내겠습니까?</div>
+        <div className={styles.content}>유저에게 알림을 보내겠습니까?</div>
         <div className={styles.btns}>
           <button
             className={`${styles.btn} ${styles.first}`}
             onClick={() => sendNotificationHandler(true)}
           >
-            확인
+            예
           </button>
           <button
             className={`${styles.btn} ${styles.second}`}
             onClick={() => sendNotificationHandler(false)}
           >
-            취소
+            아니오
           </button>
         </div>
       </div>
