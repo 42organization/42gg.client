@@ -39,6 +39,4 @@ yarn-error.log*
 
 .history
 
-.husky
-
 .eslintcache
