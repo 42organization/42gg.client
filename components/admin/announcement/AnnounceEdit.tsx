@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import { instanceInManage, instance } from 'utils/axios';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
 import styles from 'styles/admin/announcement/AnnounceEdit.module.scss';
+import { toastState } from 'utils/recoil/toast';
 
 const Quill = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -15,6 +16,7 @@ const Quill = dynamic(() => import('react-quill'), {
 
 export default function AnnounceEdit() {
   const { intraId: currentUserId } = useRecoilValue(userState);
+  const setSnackbar = useSetRecoilState(toastState);
   const [content, setContent] = useState('');
   const announceCreateResponse: { [key: string]: string } = {
     SUCCESS: '공지사항이 성공적으로 등록되었습니다.',
@@ -47,9 +49,19 @@ export default function AnnounceEdit() {
         creatorIntraId: currentUserId,
         createdTime: new Date(new Date().getTime() + koreaTimeOffset),
       });
-      alert(announceCreateResponse.SUCCESS);
+      setSnackbar({
+        toastName: `post request`,
+        severity: 'success',
+        message: `🔥 ${announceCreateResponse.SUCCESS} 🔥`,
+        clicked: true,
+      });
     } catch (e: any) {
-      alert(announceCreateResponse[e.response.data.code]);
+      setSnackbar({
+        toastName: `bad request`,
+        severity: 'error',
+        message: `🔥 ${announceCreateResponse[e.response.data.code]} 🔥`,
+        clicked: true,
+      });
     }
   };
 
@@ -59,9 +71,19 @@ export default function AnnounceEdit() {
         deleterIntraId: currentUserId,
         deletedTime: new Date(new Date().getTime() + koreaTimeOffset),
       });
-      alert(announceDeleteResponse.SUCCESS);
+      setSnackbar({
+        toastName: `delete request`,
+        severity: 'success',
+        message: `🔥 ${announceDeleteResponse.SUCCESS} 🔥`,
+        clicked: true,
+      });
     } catch (e: any) {
-      alert(announceDeleteResponse[e.response.data.code]);
+      setSnackbar({
+        toastName: `bad request`,
+        severity: 'error',
+        message: `🔥 ${announceDeleteResponse[e.response.data.code]} 🔥`,
+        clicked: true,
+      });
     }
   };
 
