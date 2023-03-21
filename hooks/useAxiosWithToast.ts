@@ -20,6 +20,8 @@ export default function useAxiosWithToast() {
   };
 
   const errorResponseHandler = (error: AxiosError) => {
+    if (error.response?.data) return Promise.reject(error);
+
     switch (error.response?.status) {
       case 400:
         setSnackbar({
@@ -62,7 +64,7 @@ export default function useAxiosWithToast() {
         });
         break;
     }
-    throw error;
+    return;
   };
 
   const responseHandler = (response: AxiosResponse) => {
