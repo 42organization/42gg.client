@@ -7,14 +7,10 @@ import { instanceInManage } from 'utils/axios';
 export default function useAxiosWithToast() {
   const setSnackbar = useSetRecoilState(toastState);
 
-  const checkAdminURL = (url: string) => url.includes('admin');
-
   const getRequestRoute = (apiUrl: string) =>
     apiUrl.split('/').slice(3).join('/');
 
   const errorRequestHandler = (error: AxiosError) => {
-    if (!checkAdminURL(error.config.url as string)) throw error;
-
     setSnackbar({
       toastName: 'request error',
       severity: 'error',
@@ -24,8 +20,6 @@ export default function useAxiosWithToast() {
   };
 
   const errorResponseHandler = (error: AxiosError) => {
-    if (!checkAdminURL(error.config.url as string)) throw error;
-
     switch (error.response?.status) {
       case 400:
         setSnackbar({
@@ -75,8 +69,6 @@ export default function useAxiosWithToast() {
     const { status, config } = response;
     const { method, url } = config;
 
-    // * Admin page가 아니면 toast를 띄우지 않는다.
-    if (!checkAdminURL(url as string)) return response;
     if (method === 'get' && status === 200) return response;
 
     switch (status) {
