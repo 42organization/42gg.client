@@ -1,7 +1,7 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { tableFormat } from 'constants/admin/table';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import {
@@ -52,7 +52,7 @@ export default function SeasonList() {
 
   const getSeasonList = async (mode: string) => {
     try {
-      const res = await instance.get(`pingpong/admin/season/${mode}`);
+      const res = await instanceInManage.get(`/season/${mode}`);
       setSeasonList({ ...res.data });
     } catch (e: any) {
       setSnackBar({
@@ -70,7 +70,7 @@ export default function SeasonList() {
 
   const deleteHandler = async (deleteId: number) => {
     try {
-      await instance.delete(`/pingpong/admin/season/${deleteId}`);
+      await instanceInManage.delete(`/season/${deleteId}`);
       setSnackBar({
         toastName: 'Season Delete',
         severity: 'success',

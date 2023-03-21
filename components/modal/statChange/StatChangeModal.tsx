@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Exp } from 'types/modalTypes';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import { reloadMatchState } from 'utils/recoil/match';

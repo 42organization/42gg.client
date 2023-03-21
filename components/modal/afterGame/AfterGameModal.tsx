@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AfterGame, TeamScore } from 'types/scoreTypes';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import { liveState } from 'utils/recoil/layout';

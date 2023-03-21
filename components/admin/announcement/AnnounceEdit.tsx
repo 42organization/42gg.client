@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useRecoilValue } from 'recoil';
 import { userState } from 'utils/recoil/layout';
-import instance from 'utils/axios';
+import { instanceInManage, instance } from 'utils/axios';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
@@ -42,7 +42,7 @@ export default function AnnounceEdit() {
 
   const postHandler = async () => {
     try {
-      await instance.post(`/pingpong/admin/announcement`, {
+      await instanceInManage.post(`/announcement`, {
         content,
         creatorIntraId: currentUserId,
         createdTime: new Date(new Date().getTime() + koreaTimeOffset),
@@ -55,7 +55,7 @@ export default function AnnounceEdit() {
 
   const deleteHandler = async () => {
     try {
-      await instance.put(`/pingpong/admin/announcement`, {
+      await instanceInManage.put(`/announcement`, {
         deleterIntraId: currentUserId,
         deletedTime: new Date(new Date().getTime() + koreaTimeOffset),
       });

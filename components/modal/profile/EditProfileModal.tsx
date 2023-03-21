@@ -3,7 +3,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { profileState } from 'utils/recoil/user';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 import { racketTypes } from 'types/userTypes';
 import styles from 'styles/user/Profile.module.scss';
 

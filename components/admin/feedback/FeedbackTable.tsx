@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
@@ -55,8 +55,8 @@ export default function FeedbackTable() {
 
   const getUserFeedbacks = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `/pingpong/admin/feedback/users?q=${intraId}&page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/feedback/users?q=${intraId}&page=${currentPage}&size=10`
       );
       setIntraId(intraId);
       setFeedbackInfo({
@@ -79,8 +79,8 @@ export default function FeedbackTable() {
 
   const getAllFeedbacks = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `/pingpong/admin/feedback?page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/feedback?page=${currentPage}&size=10`
       );
       setFeedbackInfo({
         feedbackList: res.data.feedbackList.map((feedback: IFeedback) => {

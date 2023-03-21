@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { toastState } from 'utils/recoil/toast';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 
 export default function useAxiosWithToast() {
   const setSnackbar = useSetRecoilState(toastState);
@@ -114,20 +114,20 @@ export default function useAxiosWithToast() {
     return config;
   };
 
-  const responseInterceptor = instance.interceptors.response.use(
+  const responseInterceptor = instanceInManage.interceptors.response.use(
     (response) => responseHandler(response),
     (error) => errorResponseHandler(error)
   );
 
-  const requestInterceptor = instance.interceptors.request.use(
+  const requestInterceptor = instanceInManage.interceptors.request.use(
     (config) => requestHandler(config),
     (error) => errorRequestHandler(error)
   );
 
   useEffect(() => {
     return () => {
-      instance.interceptors.request.eject(requestInterceptor);
-      instance.interceptors.response.eject(responseInterceptor);
+      instanceInManage.interceptors.request.eject(requestInterceptor);
+      instanceInManage.interceptors.response.eject(responseInterceptor);
     };
   }, [responseInterceptor, requestInterceptor]);
 }
