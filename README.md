@@ -63,10 +63,10 @@
 <table>
   <tr>
     <td align=center>역할</td>
-    <td align=center>🐱</td>
+    <td align=center>LEAD🐱</td>
     <td align=center>🐬</td>
     <td align=center>🔥</td>
-    <td align=center>🐙</td>
+    <td align=center>PO🐙</td>
     <td align=center>🐣</td>
   </tr>
   <tr>
