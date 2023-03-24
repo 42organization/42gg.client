@@ -11,13 +11,7 @@
 
 42 서울 내에서 탁구 경기 매칭, 전적 서비스를 제공하는 프로젝트 입니다.
 
-42 Cadet들만 이용 가능!
-
-<br>
-
-<h2>배포 주소</h2>
-
-[42gg.kr](https://42gg.kr)
+(현재는) 42 Cadet들만 이용 가능!
 
 <br>
 
@@ -30,9 +24,16 @@
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=white"/>
 <img src="https://img.shields.io/badge/Recoil-3578E5?style=for-the-badge&logo=&logoColor=white"/>
+<img src="https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white"/>
 
 <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=AmazonEC2&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/Amazon S3-569A31?style=for-the-badge&logo=AmazonS3&logoColor=white"/>
+
+<br>
+
+<h2>프로젝트 사이트 주소</h2>
+
+[42gg.kr](https://42gg.kr)
 
 <br>
 
@@ -64,11 +65,17 @@
     <td align=center>역할</td>
     <td align=center>🐱</td>
     <td align=center>🐬</td>
+    <td align=center>🔥</td>
+    <td align=center>🐙</td>
+    <td align=center>🐣</td>
   </tr>
   <tr>
     <td align=center>이름</td>
     <td align=center><a href="https://github.com/raehy19">정래현 @rjeong</a></td>
     <td align=center><a href="https://github.com/HyeongwooIM">임형우 @him</a></td>
+    <td align=center><a href="https://github.com/42sungwook">김성욱 @sungwook</a></td>
+    <td align=center><a href="https://github.com/mike2ox">송문혁 @mosong</a></td>
+    <td align=center><a href="https://github.com/Wilbur0306">정다인 @daijeong</a></td>
   </tr>
 </table>
 
