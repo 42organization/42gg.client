@@ -18,7 +18,7 @@ export default function Footer() {
           Page Guide
         </div>
       </div>
-      <div className={styles.copyright}>© 2022 42gg</div>
+      <div className={styles.copyright}>© 2023 42gg</div>
     </footer>
   );
 }
