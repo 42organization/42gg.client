@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { SetStateAction, useEffect } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
   openMenuBarState,
@@ -15,28 +15,48 @@ import { BsMegaphone } from 'react-icons/bs';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
 import styles from 'styles/Layout/Header.module.scss';
 
+import { HeaderContext } from './HeaderContext';
+import { useContext } from 'react';
+
 export default function Header() {
   const user = useRecoilValue(userState);
   const [live, setLive] = useRecoilState(liveState);
-  const [openMenuBar, setOpenMenuBar] = useRecoilState(openMenuBarState);
-  const [openNotiBar, setOpenNotiBar] = useRecoilState(openNotiBarState);
+  // const [openMenuBar, setOpenMenuBar] = useRecoilState(openMenuBarState);
+  // const [openNotiBar, setOpenNotiBar] = useRecoilState(openNotiBarState);
 
+  const info = useContext(HeaderContext);
+  console.log(info);
+
+  // const openMenuBarHandler = () => {
+  //   setOpenMenuBar(!openMenuBar);
+  // };
   const openMenuBarHandler = () => {
-    setOpenMenuBar(!openMenuBar);
+    info.setMenu(!info.menu);
   };
 
+  // const openNotiBarHandler = () => {
+  //   setOpenNotiBar(!openNotiBar);
+  //   setLive((prev) => ({ ...prev, notiCount: 0 }));
+  // };
   const openNotiBarHandler = () => {
-    setOpenNotiBar(!openNotiBar);
+    info.setNoti(!info.noti);
     setLive((prev) => ({ ...prev, notiCount: 0 }));
   };
 
+  // useEffect(() => {
+  //   setMenuOutsideScroll();
+  // }, [openMenuBar, openNotiBar]);
+
+  // const setMenuOutsideScroll = () =>
+  //   (document.body.style.overflow =
+  //     openMenuBar || openNotiBar ? 'hidden' : 'unset');
   useEffect(() => {
     setMenuOutsideScroll();
-  }, [openMenuBar, openNotiBar]);
+  }, [info.menu, info.noti]);
 
   const setMenuOutsideScroll = () =>
     (document.body.style.overflow =
-      openMenuBar || openNotiBar ? 'hidden' : 'unset');
+      info.menu || info.noti ? 'hidden' : 'unset');
 
   return (
     <div className={styles.headerContainer}>
@@ -80,8 +100,8 @@ export default function Header() {
           </Link>
         </div>
       </div>
-      {openMenuBar && <MenuBar />}
-      {openNotiBar && <NotiBar />}
+      {info.menu && <MenuBar />}
+      {info.noti && <NotiBar />}
     </div>
   );
 }

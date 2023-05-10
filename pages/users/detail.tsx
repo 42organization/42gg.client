@@ -5,6 +5,8 @@ import GameResult from 'components/game/GameResult';
 import RankProfile from 'components/user/RankProfile';
 import styles from 'styles/user/user.module.scss';
 
+import ErrorBoundary from 'test/ErrorBoundary';
+
 export default function User() {
   const router = useRouter();
   const { intraId } = router.query;
@@ -14,7 +16,9 @@ export default function User() {
       {typeof intraId === 'string' && (
         <div key={intraId}>
           <h1 className={styles.title}>{intraId}</h1>
-          <BasicProfile profileId={intraId} />
+          <ErrorBoundary>
+            <BasicProfile profileId={intraId} />
+          </ErrorBoundary>
           <RankProfile profileId={intraId} />
           <Link
             href={{

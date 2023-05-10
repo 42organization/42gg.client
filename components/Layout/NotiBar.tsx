@@ -7,12 +7,17 @@ import instance from 'utils/axios';
 import NotiItem from './NotiItem';
 import styles from 'styles/Layout/NotiBar.module.scss';
 
+import { HeaderContext } from './HeaderContext';
+import { useContext } from 'react';
+
 export default function NotiBar() {
   const [noti, setNoti] = useState<Noti[]>([]);
   const [clickReloadNoti, setClickReloadNoti] = useState(false);
   const [spinReloadButton, setSpinReloadButton] = useState(false);
-  const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
+  // const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
   const setError = useSetRecoilState(errorState);
+
+  const info = useContext(HeaderContext);
 
   useEffect(() => {
     getNotiHandler();
@@ -39,9 +44,11 @@ export default function NotiBar() {
   };
 
   return (
-    <div className={styles.backdrop} onClick={resetOpenNotiBar}>
+    // <div className={styles.backdrop} onClick={resetOpenNotiBar}>
+    <div className={styles.backdrop} onClick={() => info.setNoti(false)}>
       <div className={styles.container} onClick={(e) => e.stopPropagation()}>
-        <button onClick={resetOpenNotiBar}>&#10005;</button>
+        {/* <button onClick={resetOpenNotiBar}>&#10005;</button> */}
+        <button onClick={() => info.setNoti(false)}>&#10005;</button>
         {noti.length ? (
           <>
             <div className={styles.buttonWrap}>

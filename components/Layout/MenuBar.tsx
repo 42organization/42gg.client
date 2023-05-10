@@ -6,10 +6,14 @@ import { openMenuBarState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
+import { HeaderContext } from './HeaderContext';
+import { useContext } from 'react';
+
 export default function MenuBar() {
   const { intraId, isAdmin } = useRecoilValue(userState);
   const { seasonMode } = useRecoilValue(seasonListState);
-  const resetOpenMenuBar = useResetRecoilState(openMenuBarState);
+  // const resetOpenMenuBar = useResetRecoilState(openMenuBarState);
+  const info = useContext(HeaderContext);
   const setModal = useSetRecoilState(modalState);
   const menuList = [
     {
@@ -22,14 +26,17 @@ export default function MenuBar() {
 
   return (
     <>
-      <div className={styles.backdrop} onClick={resetOpenMenuBar}>
+      {/* <div className={styles.backdrop} onClick={resetOpenMenuBar}> */}
+      <div className={styles.backdrop} onClick={() => info.setMenu(false)}>
         <div className={styles.container} onClick={(e) => e.stopPropagation()}>
-          <button onClick={resetOpenMenuBar}>&#10005;</button>
+          {/* <button onClick={resetOpenMenuBar}>&#10005;</button> */}
+          <button onClick={() => info.setMenu(false)}>&#10005;</button>
           <nav>
             <div className={styles.menu}>
               {menuList.map((menuList, index: number) => (
                 <Link href={menuList.link} key={index}>
-                  <div onClick={resetOpenMenuBar}>{menuList.name}</div>
+                  {/* <div onClick={resetOpenMenuBar}>{menuList.name}</div> */}
+                  <div onClick={() => info.setMenu(false)}>{menuList.name}</div>
                 </Link>
               ))}
               <div className={styles.subMenu}>
@@ -63,7 +70,8 @@ export default function MenuBar() {
                     <div>📊 통계페이지</div>
                   </Link>
                   <Link href='/admin'>
-                    <div onClick={resetOpenMenuBar}>😎 관리자</div>
+                    {/* <div onClick={resetOpenMenuBar}>😎 관리자</div> */}
+                    <div onClick={() => info.setMenu(false)}>😎 관리자</div>
                   </Link>
                 </>
               )}

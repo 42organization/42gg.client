@@ -12,7 +12,7 @@ type pathType = {
   [key: string]: JSX.Element;
 };
 
-export default function Section({ path }: SectionProps) {
+export default function xSection({ path }: SectionProps) {
   const pathCheck: pathType = {
     game: <GameResult />,
     rank: <RankList toggleMode={'rank'} isMain={true} />,

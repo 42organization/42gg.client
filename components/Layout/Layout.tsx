@@ -17,6 +17,8 @@ import AdminReject from '../admin/AdminReject';
 import styles from 'styles/Layout/Layout.module.scss';
 import useAxiosWithToast from 'hooks/useAxiosWithToast';
 
+import HeaderInfoContext from './HeaderContext';
+
 type AppLayoutProps = {
   children: React.ReactNode;
 };
@@ -120,7 +122,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
           ) : (
             user.intraId && (
               <>
-                <Header />
+                <HeaderInfoContext>
+                  <Header />
+                </HeaderInfoContext>
                 {openCurrentMatch && <CurrentMatch />}
                 {presentPath !== '/match' && presentPath !== '/manual' && (
                   <Link href='/match'>

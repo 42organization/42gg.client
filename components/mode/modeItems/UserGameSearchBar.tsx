@@ -1,65 +1,28 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState, useRef } from 'react';
-import { useSetRecoilState } from 'recoil';
-import instance from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
+import { useEffect } from 'react';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
 import styles from 'styles/main/SearchBar.module.scss';
 
-let timer: ReturnType<typeof setTimeout>;
+import useSearchBar from 'hooks/useSearchBar';
 
 export default function UserGameSearchBar() {
   const router = useRouter();
   const { intraId } = router.query;
-  const [keyword, setKeyword] = useState<string>('');
-  const [showDropDown, setShowDropDown] = useState<boolean>(false);
-  const [searchResult, setSearchResult] = useState<string[]>([]);
-  const setError = useSetRecoilState(errorState);
-  const searchBarRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const checkId = /^[a-z|A-Z|0-9|-]+$/;
-    if (keyword === '' || (keyword.length && !checkId.test(keyword))) {
-      clearTimeout(timer);
-      setSearchResult([]);
-    } else if (checkId.test(keyword)) {
-      debounce(getSearchResultHandler, 500)();
-    }
-  }, [keyword]);
+  const [
+    keyword,
+    setKeyword,
+    keywordHandler,
+    showDropDown,
+    setShowDropDown,
+    searchResult,
+    searchBarRef,
+  ] = useSearchBar();
 
   useEffect(() => {
     if (intraId) setKeyword(String(intraId));
     else setKeyword('');
-  }, [router]);
-
-  useEffect(() => {
-    document.addEventListener('mousedown', clickOutsideHandler);
-    return () => {
-      document.removeEventListener('mousedown', clickOutsideHandler);
-    };
-  }, []);
-
-  const getSearchResultHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/users/searches?q=${keyword}`);
-      setSearchResult(res?.data.users);
-    } catch (e) {
-      setError('JB06');
-    }
-  };
-
-  const clickOutsideHandler = (event: MouseEvent) => {
-    if (
-      searchBarRef.current &&
-      !searchBarRef.current.contains(event.target as Node)
-    )
-      setShowDropDown(false);
-  };
-
-  const keywordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyword(event.target.value);
-  };
+  }, [intraId, setKeyword]);
 
   const clickResultHandler = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -116,13 +79,4 @@ export default function UserGameSearchBar() {
       )}
     </div>
   );
-}
-
-function debounce(callback: () => void, timeout: number) {
-  return () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      callback();
-    }, timeout);
-  };
 }

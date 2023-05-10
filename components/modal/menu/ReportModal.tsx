@@ -18,7 +18,7 @@ export default function ReportModal() {
   });
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
-  const resetOpenMenuBar = useResetRecoilState(openMenuBarState);
+  // const resetOpenMenuBar = useResetRecoilState(openMenuBarState);
   const reportCategory = [
     { id: 'CHEERS', label: '응원의 한 마디' },
     { id: 'OPINION', label: '의견 제시' },
@@ -47,7 +47,7 @@ export default function ReportModal() {
       try {
         await instance.post('/pingpong/feedback', report);
         setModal({ modalName: null });
-        resetOpenMenuBar();
+        // resetOpenMenuBar();
         alert(reportResponse.SUCCESS);
       } catch (e) {
         setError('JH06');
