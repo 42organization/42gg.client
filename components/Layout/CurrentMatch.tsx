@@ -44,7 +44,7 @@ export default function CurrentMatch() {
     <>
       <div className={styles.container}>
         <div className={styles.stringWrapper}>
-          <div className={styles.icon}> ⏰ </div>
+          <div className={styles.icon}>⏰</div>
           <div className={styles.messageWrapper}>
             {matchingMessage}
             <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />

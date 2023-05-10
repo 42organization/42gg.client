@@ -1,3 +1,4 @@
+//  /game record에서 전체 일반 랭크를 표시
 import { SeasonMode } from 'types/mainType';
 import styles from 'styles/mode/ModeRadiobox.module.scss';
 

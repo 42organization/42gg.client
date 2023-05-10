@@ -1,9 +1,11 @@
+// /game 레코드의 전체 부분
+//gameresultlist부분에서 value를 더 보기로 준다.
+//랭크일 경우 시즌리스트를 표시한다.
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import React, { useEffect } from 'react';
 import { SeasonMode } from 'types/mainType';
-import { seasonListState, latestSeasonIdState } from 'utils/recoil/seasons';
 import UserGameSearchBar from 'components/mode/modeItems/UserGameSearchBar';
+import useSeasonDropDown from 'hooks/useSeasonDropDown';
 import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
 import ModeRadiobox from 'components/mode/modeItems/ModeRadiobox';
 import styles from 'styles/mode/ModeWrap.module.scss';
@@ -23,23 +25,17 @@ export default function GameModeWrap({
   radioMode,
   setRadioMode,
 }: GameModeWrapProps) {
-  const latestSeasonId = useRecoilValue(latestSeasonIdState);
-  const { seasonList } = useRecoilValue(seasonListState);
-  const [season, setSeason] = useState<number>(latestSeasonId);
   const intraId = useRouter().query.intraId;
-
+  const { seasonList, season, seasonDropDownHandler, TitleSeasonHandler } =
+    useSeasonDropDown(clickTitle, intraId);
   useEffect(() => {
     setRadioMode('both');
-    setSeason(latestSeasonId);
+    TitleSeasonHandler;
     if (clickTitle) setClickTitle(false);
   }, [clickTitle, intraId]);
 
   const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRadioMode(e.target.value as SeasonMode);
-  };
-
-  const seasonDropDownHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSeason(parseInt(e.target.value));
   };
 
   return (

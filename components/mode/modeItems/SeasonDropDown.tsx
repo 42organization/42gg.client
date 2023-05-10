@@ -1,3 +1,5 @@
+// /game record 부분에서 경기 경과창
+// onSelect 텍스트가 선택되었을때 실행 = season.name이 선택되면 실행
 import { Season } from 'types/seasonTypes';
 import styles from 'styles/mode/SeasonDropDown.module.scss';
 
