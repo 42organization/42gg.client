@@ -6,6 +6,8 @@ import GameResultBigScore from 'components/game/big/GameResultBigScore';
 import GameResultBigTeam from 'components/game/big/GameResultBigTeam';
 import styles from 'styles/game/GameResultItem.module.scss';
 
+// /game에서 resultlist부분에서 더 자세히 보여주는 부분
+
 interface GameResultBigItemProps {
   game: Game;
 }
