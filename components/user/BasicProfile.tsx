@@ -8,6 +8,8 @@ import instance from 'utils/axios';
 import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/user/Profile.module.scss';
 
+import { useState } from 'react';
+
 interface ProfileProps {
   profileId: string;
 }
@@ -31,6 +33,14 @@ export default function BasicProfile({ profileId }: ProfileProps) {
   ] = useRecoilState(profileState);
   const MAX_LEVEL = 42;
 
+  const [err, setErr] = useState<Error | null>(null);
+
+  useEffect(() => {
+    if (err) {
+      throw err;
+    }
+  }, [err]);
+
   useEffect(() => {
     getBasicProfileHandler();
   }, []);
@@ -40,14 +50,17 @@ export default function BasicProfile({ profileId }: ProfileProps) {
       const res = await instance.get(`/pingpong/users/${profileId}/detail`);
       setProfile(res?.data);
     } catch (e) {
-      setError('SJ03');
+      if (e instanceof Error) {
+        setErr(e);
+        // throw e;
+      }
+      // setError('SJ03');
     }
   };
 
   const startEditHandler = () => {
     setModal({ modalName: 'USER-PROFILE_EDIT' });
   };
-
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>

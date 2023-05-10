@@ -7,12 +7,17 @@ import instance from 'utils/axios';
 import NotiItem from './NotiItem';
 import styles from 'styles/Layout/NotiBar.module.scss';
 
+import { HeaderContextState, HeaderContext } from './HeaderContext';
+import { useContext } from 'react';
+
 export default function NotiBar() {
   const [noti, setNoti] = useState<Noti[]>([]);
   const [clickReloadNoti, setClickReloadNoti] = useState(false);
   const [spinReloadButton, setSpinReloadButton] = useState(false);
-  const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
+  // const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
   const setError = useSetRecoilState(errorState);
+
+  const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
 
   useEffect(() => {
     getNotiHandler();
@@ -39,9 +44,16 @@ export default function NotiBar() {
   };
 
   return (
-    <div className={styles.backdrop} onClick={resetOpenNotiBar}>
+    // <div className={styles.backdrop} onClick={resetOpenNotiBar}>
+    <div
+      className={styles.backdrop}
+      onClick={() => HeaderState?.resetOpenNotiBarState()}
+    >
       <div className={styles.container} onClick={(e) => e.stopPropagation()}>
-        <button onClick={resetOpenNotiBar}>&#10005;</button>
+        {/* <button onClick={resetOpenNotiBar}>&#10005;</button> */}
+        <button onClick={() => HeaderState?.resetOpenNotiBarState()}>
+          &#10005;
+        </button>
         {noti.length ? (
           <>
             <div className={styles.buttonWrap}>
@@ -94,13 +106,16 @@ function ReloadNotiButton({
 }
 
 function DeleteAllButton() {
-  const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
+  // const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
+  const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
+
   const setError = useSetRecoilState(errorState);
   const allNotiDeleteHandler = async () => {
     try {
       await instance.delete(`/pingpong/notifications`);
       alert('알림이 성공적으로 삭제되었습니다.');
-      resetOpenNotiBar();
+      // resetOpenNotiBar();
+      HeaderState?.resetOpenNotiBarState();
     } catch (e) {
       setError('JB05');
     }

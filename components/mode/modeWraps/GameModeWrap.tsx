@@ -40,6 +40,7 @@ export default function GameModeWrap({
 
   const seasonDropDownHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSeason(parseInt(e.target.value));
+    console.log(season);
   };
 
   return (

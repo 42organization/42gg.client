@@ -19,8 +19,8 @@ export default function RankListMain({ rank }: RankListMainProps) {
 
   return (
     <div className={styles.mainContainer}>
-      <div className={`${styles.title} ${content[seasonMode].style}`}>
-        {content[seasonMode].title}
+      <div className={`${styles.title} ${content.rank.style}`}>
+        {content.rank.title}
       </div>
       {rank?.rankList.map((item: NormalUser | RankUser) => (
         <RankListItemMain

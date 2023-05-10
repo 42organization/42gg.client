@@ -80,7 +80,9 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   };
 
   const getScrollCurrentRef = (slotsHour: number) => {
-    if (getFirstOpenSlot() === slotsHour) return currentRef;
+    if (getFirstOpenSlot() === slotsHour) {
+      return currentRef;
+    }
     return null;
   };
 

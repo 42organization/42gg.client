@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { SetStateAction, useEffect } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
   openMenuBarState,
@@ -15,28 +15,49 @@ import { BsMegaphone } from 'react-icons/bs';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
 import styles from 'styles/Layout/Header.module.scss';
 
+import { HeaderContextState, HeaderContext } from './HeaderContext';
+import { useContext } from 'react';
+
 export default function Header() {
   const user = useRecoilValue(userState);
   const [live, setLive] = useRecoilState(liveState);
-  const [openMenuBar, setOpenMenuBar] = useRecoilState(openMenuBarState);
-  const [openNotiBar, setOpenNotiBar] = useRecoilState(openNotiBarState);
+  // const [openMenuBar, setOpenMenuBar] = useRecoilState(openMenuBarState);
+  // const [openNotiBar, setOpenNotiBar] = useRecoilState(openNotiBarState);
 
+  const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
+
+  // const openMenuBarHandler = () => {
+  //   setOpenMenuBar(!openMenuBar);
+  // };
   const openMenuBarHandler = () => {
-    setOpenMenuBar(!openMenuBar);
+    HeaderState?.setOpenMenuBarState(!HeaderState?.openMenuBarState);
   };
 
+  // const openNotiBarHandler = () => {
+  //   setOpenNotiBar(!openNotiBar);
+  //   setLive((prev) => ({ ...prev, notiCount: 0 }));
+  // };
   const openNotiBarHandler = () => {
-    setOpenNotiBar(!openNotiBar);
+    HeaderState?.setOpenNotiBarState(!HeaderState?.openNotiBarState);
     setLive((prev) => ({ ...prev, notiCount: 0 }));
   };
 
+  // useEffect(() => {
+  //   setMenuOutsideScroll();
+  // }, [openMenuBar, openNotiBar]);
+
+  // const setMenuOutsideScroll = () =>
+  //   (document.body.style.overflow =
+  //     openMenuBar || openNotiBar ? 'hidden' : 'unset');
   useEffect(() => {
     setMenuOutsideScroll();
-  }, [openMenuBar, openNotiBar]);
+  }, [HeaderState?.openMenuBarState, HeaderState?.openNotiBarState]);
 
   const setMenuOutsideScroll = () =>
     (document.body.style.overflow =
-      openMenuBar || openNotiBar ? 'hidden' : 'unset');
+      HeaderState?.openMenuBarState || HeaderState?.openNotiBarState
+        ? 'hidden'
+        : 'unset');
 
   return (
     <div className={styles.headerContainer}>
@@ -80,8 +101,8 @@ export default function Header() {
           </Link>
         </div>
       </div>
-      {openMenuBar && <MenuBar />}
-      {openNotiBar && <NotiBar />}
+      {HeaderState?.openMenuBarState && <MenuBar />}
+      {HeaderState?.openNotiBarState && <NotiBar />}
     </div>
   );
 }
