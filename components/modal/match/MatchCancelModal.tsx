@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Cancel } from 'types/modalTypes';
 import instance from 'utils/axios';
@@ -65,16 +65,16 @@ export default function MatchCancelModal({ isMatched, slotId, time }: Cancel) {
   const getCurrentMatchHandler = async () => {
     try {
       const res = await instance.get('/pingpong/match/current');
-      setCurrentMatch(res.data);
+      setCurrentMatch(res?.data);
     } catch (e) {
-      setError('JH08');
+      setError('JB01');
     }
   };
 
-  const onReturn = () => {
+  const onReturn = useCallback(() => {
     setModal({ modalName: null });
     setReloadMatch(true);
-  };
+  }, []);
 
   return (
     <div className={styles.container}>

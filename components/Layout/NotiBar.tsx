@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import { Noti } from 'types/notiTypes';
 import { openNotiBarState } from 'utils/recoil/layout';
@@ -7,36 +6,12 @@ import instance from 'utils/axios';
 import NotiItem from './NotiItem';
 import styles from 'styles/Layout/NotiBar.module.scss';
 
+import useNotiReload from 'hooks/Layout/useNotiReload';
+
 export default function NotiBar() {
-  const [noti, setNoti] = useState<Noti[]>([]);
-  const [clickReloadNoti, setClickReloadNoti] = useState(false);
-  const [spinReloadButton, setSpinReloadButton] = useState(false);
   const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
-  const setError = useSetRecoilState(errorState);
 
-  useEffect(() => {
-    getNotiHandler();
-  }, []);
-
-  useEffect(() => {
-    if (clickReloadNoti) getNotiHandler();
-  }, [clickReloadNoti]);
-
-  const getNotiHandler = async () => {
-    if (clickReloadNoti) {
-      setSpinReloadButton(true);
-      setTimeout(() => {
-        setSpinReloadButton(false);
-      }, 1000);
-    }
-    try {
-      const res = await instance.get(`/pingpong/notifications`);
-      setNoti(res?.data.notifications);
-      setClickReloadNoti(false);
-    } catch (e) {
-      setError('JB04');
-    }
-  };
+  const [noti, spinReloadButton, setClickReloadNoti] = useNotiReload();
 
   return (
     <div className={styles.backdrop} onClick={resetOpenNotiBar}>

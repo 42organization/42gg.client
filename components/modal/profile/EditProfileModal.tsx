@@ -1,89 +1,20 @@
-import { useEffect, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { profileState } from 'utils/recoil/user';
-import { errorState } from 'utils/recoil/error';
-import { modalState } from 'utils/recoil/modal';
-import instance from 'utils/axios';
 import { racketTypes } from 'types/userTypes';
 import styles from 'styles/user/Profile.module.scss';
 
-interface EditedProfile {
-  racketType: string;
-  statusMessage: string;
-  snsNotiOpt: 'NONE' | 'SLACK' | 'EMAIL' | 'BOTH';
-}
+import useEditProfileModal from 'hooks/modal/useEditProfileModal';
 
 const CHAR_LIMIT = 30;
 
 export default function EditProfileModal() {
-  const setError = useSetRecoilState(errorState);
-  const setModal = useSetRecoilState(modalState);
-  const [profile, setProfile] = useRecoilState(profileState);
-  const [editedProfile, setEditedProfile] = useState<EditedProfile>({
-    racketType: profile.racketType,
-    statusMessage: '',
-    snsNotiOpt: 'SLACK',
-  });
-  const [slack, setSlack] = useState<boolean>(true);
-  const [email, setEmail] = useState<boolean>(false);
-
-  const { racketType, statusMessage, snsNotiOpt } = profile;
-
-  useEffect(() => {
-    setEditedProfile((prev) => ({
-      ...prev,
-      racketType,
-      statusMessage,
-      snsNotiOpt,
-    }));
-    if (snsNotiOpt === 'BOTH') {
-      setSlack(true);
-      setEmail(true);
-    } else if (snsNotiOpt === 'SLACK') {
-      setSlack(true);
-      setEmail(false);
-    } else if (snsNotiOpt === 'EMAIL') {
-      setSlack(false);
-      setEmail(true);
-    } else {
-      setSlack(false);
-      setEmail(false);
-    }
-  }, [profile]);
-
-  const inputChangeHandler = ({
-    target: { name, value },
-  }:
-    | React.ChangeEvent<HTMLTextAreaElement>
-    | React.ChangeEvent<HTMLInputElement>) => {
-    if (name === 'statusMessage' && value.length > CHAR_LIMIT)
-      value = value.slice(0, CHAR_LIMIT);
-    setEditedProfile((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const finishEditHandler = async () => {
-    if (slack && email) editedProfile.snsNotiOpt = 'BOTH';
-    else if (slack && !email) editedProfile.snsNotiOpt = 'SLACK';
-    else if (!slack && email) editedProfile.snsNotiOpt = 'EMAIL';
-    else editedProfile.snsNotiOpt = 'NONE';
-
-    setProfile((prev) => ({
-      ...prev,
-      ...editedProfile,
-    }));
-    try {
-      await instance.put(`/pingpong/users/detail`, editedProfile);
-      alert('프로필이 성공적으로 등록되었습니다.');
-    } catch (e) {
-      setError('JH02');
-    }
-    setModal({ modalName: null });
-  };
-
-  const cancelEditHandler = () => setModal({ modalName: null });
+  const [
+    slack,
+    email,
+    setEmail,
+    editedProfile,
+    inputChangeHandler,
+    finishEditHandler,
+    cancelEditHandler,
+  ] = useEditProfileModal();
 
   return (
     <div className={styles.editContainer}>

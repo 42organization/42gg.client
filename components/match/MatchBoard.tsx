@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { Match } from 'types/matchTypes';
 import { MatchMode } from 'types/mainType';
-import instance from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import { reloadMatchState } from 'utils/recoil/match';
 import MatchSlotList from './MatchSlotList';
 import styles from 'styles/match/MatchBoard.module.scss';
 
+import useGetReloadMatchHandler from 'hooks/match/useGetReloadMatchHandler';
 interface MatchBoardProps {
   type: string;
   toggleMode: MatchMode;
@@ -17,47 +15,19 @@ interface MatchBoardProps {
 export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   const [match, setMatch] = useState<Match | null>(null);
   const [spinReloadButton, setSpinReloadButton] = useState<boolean>(false);
-  const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
-  const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const currentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setReloadMatch(true);
-  }, [toggleMode]);
-
-  useEffect(() => {
-    currentRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center',
-    });
-  }, [match]);
-
-  useEffect(() => {
-    if (reloadMatch) getMatchHandler();
-  }, [reloadMatch]);
-
-  const getMatchHandler = async () => {
-    try {
-      const res = await instance.get(
-        `/pingpong/match/tables/${1}/${toggleMode}/${type}`
-      );
-      setMatch(res?.data);
-    } catch (e) {
-      setError('SJ01');
-    }
-  };
-
-  if (!match) return null;
-
-  const { matchBoards } = match;
-
-  if (matchBoards.length === 0)
-    return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
 
   const openManual = () => {
     setModal({ modalName: 'MATCH-MANUAL', manual: { toggleMode: toggleMode } });
   };
+
+  const reloadMatchHandler = useGetReloadMatchHandler([
+    setMatch,
+    setSpinReloadButton,
+    type,
+    toggleMode,
+  ]);
 
   const getFirstOpenSlot = () => {
     for (let i = 0; i < matchBoards.length; i++) {
@@ -71,18 +41,24 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
     return null;
   };
 
-  const reloadMatchHandler = () => {
-    setSpinReloadButton(true);
-    setTimeout(() => {
-      setSpinReloadButton(false);
-    }, 1000);
-    setReloadMatch(true);
-  };
-
   const getScrollCurrentRef = (slotsHour: number) => {
     if (getFirstOpenSlot() === slotsHour) return currentRef;
     return null;
   };
+
+  useEffect(() => {
+    currentRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    });
+  }, [match]);
+
+  if (!match) return null;
+
+  const { matchBoards } = match;
+
+  if (matchBoards.length === 0)
+    return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
 
   return (
     <>

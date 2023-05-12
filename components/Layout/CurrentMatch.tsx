@@ -1,37 +1,20 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import instance from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import { reloadMatchState, currentMatchState } from 'utils/recoil/match';
-import { gameTimeToString, isBeforeMin } from 'utils/handleTime';
+import { currentMatchState } from 'utils/recoil/match';
+import { gameTimeToString } from 'utils/handleTime';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
+import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
+
 export default function CurrentMatch() {
-  const [{ isMatched, enemyTeam, time, slotId, isImminent }, setCurrentMatch] =
-    useRecoilState(currentMatchState);
-  const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
+  const { isMatched, enemyTeam, time, slotId, isImminent } =
+    useRecoilValue(currentMatchState);
   const setModal = useSetRecoilState(modalState);
-  const setError = useSetRecoilState(errorState);
   const matchingMessage = time && makeMessage(time, isMatched);
   const blockCancelButton = isImminent && enemyTeam.length;
-  const presentPath = useRouter().asPath;
 
-  useEffect(() => {
-    getCurrentMatchHandler();
-    if (reloadMatch) setReloadMatch(false);
-  }, [presentPath, reloadMatch]);
-
-  const getCurrentMatchHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/match/current`);
-      setCurrentMatch(res?.data);
-    } catch (e) {
-      setError('JB01');
-    }
-  };
+  useGetCurrentMatch();
 
   const onCancel = () => {
     setModal({
