@@ -25,7 +25,7 @@ Cypress.Commands.add('login', (username: string, password: string) => {
   cy.wait(2000);
   // check if logged in successfully
   cy.origin(Cypress.env('HOME'), () => {
-    cy.url().should('include', Cypress.env('HOME'));
+    cy.url().should('eq', Cypress.env('HOME'));
     cy.get('body').then(($body) => {
       // body 내 공지 모달이 있는 경우에 모달 닫기
       if ($body.find('[class^=AnnouncementModal]').length) {
