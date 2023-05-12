@@ -39,6 +39,34 @@ Cypress.Commands.add('login', (username: string, password: string) => {
     });
   });
 });
+
+Cypress.Commands.add('logout', (username: string) => {
+  // step 1. 42gg logout
+  cy.visit(Cypress.env('HOME'));
+  cy.origin(Cypress.env('HOME'), () => {
+    cy.get('[class^=Header_headerLeft]').click();
+    cy.get('div[id^=MenuBar_logout] > div').contains('로그아웃').click();
+    cy.get('div[class^=LogoutModal_positive] > input[type=button]').click();
+  });
+  // step 2. intra logout
+  cy.visit('https://profile.intra.42.fr/');
+  cy.url().should('eq', 'https://profile.intra.42.fr/');
+  cy.wait(500);
+  cy.get('span[class=dropdown]').contains(username).click();
+  cy.get('ul[class=dropdown-menu] > li').contains('Logout').click();
+  Cypress.on('uncaught:exception', (err: Error, runnable: Mocha.Runnable) => {
+    // FIXME : 원인 모를 에러 임시 처리. 해결 필요.
+    if (
+      err.message.includes(
+        "Cannot read properties of undefined (reading 'reset')"
+      )
+    ) {
+      return false;
+    }
+  });
+  cy.visit(Cypress.env('HOME'));
+});
+
 //
 //
 // -- This is a child command --

@@ -3,5 +3,6 @@
 declare namespace Cypress {
   interface Chainable {
     login(username: string, password: string): Chainable<void>;
+    logout(username: string): Chainable<void>;
   }
 }
