@@ -1,6 +1,6 @@
 import StatisticsChart from './StatisticsCharts';
 import styles from 'styles/statistics/StatisticsSelect.module.scss';
-import { useChartSelection } from 'hooks/statistics/useChartSelection';
+import useChartSelection from 'hooks/statistics/useChartSelection';
 
 export default function StatisticsSelect() {
   const { selectedChart, setSelectedChart, chartList } = useChartSelection();

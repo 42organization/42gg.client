@@ -1,7 +1,7 @@
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
-import { useBasicProfile } from 'hooks/users/useBasicProfile';
+import useBasicProfile from 'hooks/users/useBasicProfile';
 import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/user/Profile.module.scss';
 

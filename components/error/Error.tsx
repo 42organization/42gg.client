@@ -1,5 +1,5 @@
 import React from 'react';
-import { useErrorPage } from 'hooks/error/useErrorPage';
+import useErrorPage from 'hooks/error/useErrorPage';
 import styles from 'styles/Error.module.scss';
 
 export default function ErrorPage() {

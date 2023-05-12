@@ -33,7 +33,7 @@ const useGameResult = ({ mode, season }: GameResultProps) => {
     makePath();
   }, [asPath, intraId, mode, season]);
 
-  return { path };
+  return path;
 };
 
 export default useGameResult;

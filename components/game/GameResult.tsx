@@ -1,5 +1,5 @@
 import { SeasonMode } from 'types/mainType';
-import { useGameResult } from 'hooks/game/useGameResult';
+import useGameResult from 'hooks/game/useGameResult';
 import GameResultList from 'components/game/GameResultList';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -10,7 +10,7 @@ interface GameResultProps {
 
 export default function GameResult({ mode, season }: GameResultProps) {
   const queryClient = new QueryClient();
-  const { path } = useGameResult({ mode, season });
+  const path = useGameResult({ mode: mode, season: season });
 
   /* const makeQuery = () => {
     if (asPath === '/' || asPath.includes('token')) {

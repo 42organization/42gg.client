@@ -10,7 +10,7 @@ import {
   BarElement,
   ChartTypeRegistry,
 } from 'chart.js';
-import { useChartData } from 'hooks/statistics/useChartData';
+import useChartData from 'hooks/statistics/useChartData';
 import { Chart } from 'react-chartjs-2';
 import { Graphs } from 'types/chartTypes';
 ChartJS.register(
