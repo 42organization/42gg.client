@@ -15,8 +15,8 @@
 Cypress.Commands.add('login', (username: string, password: string) => {
   // intra login
   cy.visit('https://profile.intra.42.fr/users/auth/keycloak_student');
-  cy.get('#username').type(Cypress.env('normal_username'));
-  cy.get('#password').type(Cypress.env('normal_password'));
+  cy.get('#username').type(username);
+  cy.get('#password').type(password);
   cy.get('#kc-login').click();
   // check if logged in successfully
   cy.url().should('include', 'https://profile.intra.42.fr/');
@@ -24,8 +24,8 @@ Cypress.Commands.add('login', (username: string, password: string) => {
   cy.visit(`${Cypress.env('SERVER_ENDPOINT')}/oauth2/authorization/42`);
   cy.wait(2000);
   // check if logged in successfully
-  cy.origin(Cypress.env('home'), () => {
-    cy.url().should('include', Cypress.env('home'));
+  cy.origin(Cypress.env('HOME'), () => {
+    cy.url().should('include', Cypress.env('HOME'));
     cy.get('body').then(($body) => {
       // body 내 공지 모달이 있는 경우에 모달 닫기
       if ($body.find('[class^=AnnouncementModal]').length) {
