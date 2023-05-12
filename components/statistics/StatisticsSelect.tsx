@@ -1,33 +1,16 @@
-import { useState } from 'react';
-import { getChartList } from 'utils/handleChartList';
 import StatisticsChart from './StatisticsCharts';
 import styles from 'styles/statistics/StatisticsSelect.module.scss';
-
-type chartListElement = {
-  chartName: string;
-  chartType: string;
-  apiPath: string;
-};
+import { useChartSelection } from 'hooks/useChartSelection';
 
 export default function StatisticsSelect() {
-  const defaultChart: chartListElement = {
-    chartName: '통계 페이지',
-    chartType: '',
-    apiPath: '',
-  };
-  const [selectChart, setSelectChart] =
-    useState<chartListElement>(defaultChart);
+  const { selectedChart, setSelectedChart, chartList } = useChartSelection();
 
-  const charts = getChartList();
-  const setNewChart = (chart: chartListElement) => {
-    setSelectChart(chart);
-  };
   const returnCharList = () => {
-    return charts.chartName.map((chart, index) => (
+    return chartList.map((chart, index) => (
       <div
         className={styles.listText}
         onClick={() => {
-          setNewChart(chart);
+          setSelectedChart(chart);
         }}
         key={index}
       >
@@ -35,16 +18,16 @@ export default function StatisticsSelect() {
       </div>
     ));
   };
-  const { chartName, chartType, apiPath } = selectChart;
+
   return (
     <div className={styles.container}>
       <div className={styles.chartSelectContainer}>
         <div>{returnCharList()}</div>
       </div>
       <StatisticsChart
-        chartName={chartName}
-        chartType={chartType}
-        apiPath={apiPath}
+        chartName={selectedChart.chartName}
+        chartType={selectedChart.chartType}
+        apiPath={selectedChart.apiPath}
       />
     </div>
   );

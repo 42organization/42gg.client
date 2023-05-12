@@ -5,36 +5,35 @@ import { Manual } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import { seasonListState } from 'utils/recoil/seasons';
 import useModeToggle from 'hooks/useModeToggle';
-import ModeToggle from 'components/mode/modeItems/ModeToggle';
+//import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import styles from 'styles/modal/match/MatchManualModal.module.scss';
+import ModeToggles from './ModeToggles';
 
 export default function MatchManualModal({ toggleMode }: Manual) {
   const setModal = useSetRecoilState(modalState);
   const { seasonMode } = useRecoilValue(seasonListState);
-  //const [manualMode, setManualMode] = useState(toggleMode);
-  const { onToggle, Mode } = useModeToggle(toggleMode);
+  const { Mode } = useModeToggle(toggleMode);
 
   const onReturn = () => {
     setModal({ modalName: null });
   };
 
-  /*   const onToggle = () => {
-    setManualMode(manualMode === 'rank' ? 'normal' : 'rank');
-  }; */
+  /*  const ModeToggles = () => {
+    //const { onToggle, Mode } = useModeToggle('rank');
+    return (
+      <div className={styles.toggleContainer}>
+            <ModeToggle
+              checked={Mode === 'rank'}
+              onToggle={onToggle}
+              id={'manualToggle'}
+              text={Mode === 'rank' ? '랭크' : '일반'}
+            />
+          </div>
+    )
+  } */
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.title}>Please!!</div>
-      {seasonMode === 'both' && (
-        <div className={styles.toggleContainer}>
-          <ModeToggle
-            checked={Mode === 'rank'}
-            onToggle={onToggle}
-            id={'manualToggle'}
-            text={Mode === 'rank' ? '랭크' : '일반'}
-          />
-        </div>
-      )}
+  const ManualSelects = () => {
+    return (
       <ul className={styles.ruleList}>
         {manualSelect(Mode).map(
           (item: { title: string; description: string[] }, index) => (
@@ -48,6 +47,32 @@ export default function MatchManualModal({ toggleMode }: Manual) {
             </li>
           )
         )}
+      </ul>
+    );
+  };
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.title}>Please!!</div>
+      {seasonMode === 'both' && (
+        <div className={styles.toggleContainer}>
+          <ModeToggles />
+        </div>
+      )}
+      <ul className={styles.ruleList}>
+        {/* {manualSelect(Mode).map(
+          (item: { title: string; description: string[] }, index) => (
+            <li key={index}>
+              {item.title}
+              <ul className={styles.ruleDetail}>
+                {item.description.map((e, idx) => (
+                  <li key={idx}>{e}</li>
+                ))}
+              </ul>
+            </li>
+          )
+        )} */}
+        <ManualSelects />
       </ul>
       <div className={styles.buttons}>
         <div className={styles.positive}>

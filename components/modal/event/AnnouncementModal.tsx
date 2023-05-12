@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { Announcement } from 'types/modalTypes';
@@ -21,6 +21,10 @@ export default function AnnouncementModal({
 }: AnnouncementModalProps) {
   const setModal = useSetRecoilState(modalState);
   const [neverSeeAgain, setNeverSeeAgain] = useState<boolean>(false);
+
+  /*   const onCheck = useCallback(() => {
+    setNeverSeeAgain((prev) => !prev);
+  }, [setNeverSeeAgain]); */
   const onCheck = () => {
     setNeverSeeAgain((prev) => !prev);
   };

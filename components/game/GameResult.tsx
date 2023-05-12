@@ -16,6 +16,23 @@ export default function GameResult({ mode, season }: GameResultProps) {
   const asPath = router.asPath;
   const intraId = router.query.intraId;
 
+  const makeQuery = () => {
+    if (asPath === '/' || asPath.includes('token')) {
+      return { count: 3, status: 'live', gameId: '' };
+    }
+    const query: any = { gameId: '' };
+    if (mode === 'rank') {
+      query.season = season;
+    }
+    if (mode !== 'both') {
+      query.mode = mode;
+    }
+    if (router.pathname === '/users/detail') {
+      query.count = 5;
+    }
+    return query;
+  };
+
   const makePath = () => {
     if (asPath === '/' || asPath.includes('token')) {
       setPath(`/pingpong/games?count=${3}&status=${'live'}&gameId=`);

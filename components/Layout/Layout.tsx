@@ -98,10 +98,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   const getLiveHandler = async () => {
     try {
-      const res = await instance.get(`/pingpong/users/live`);
-      setLive({ ...res?.data });
+      //const res = await instance.get(`/pingpong/users/live`);
+      //setLive({ ...res?.data });
     } catch (e) {
-      setError('JB03');
+      //setError('JB03');
     }
   };
 

@@ -28,6 +28,7 @@ export default function GameModeWrap({
   const intraId = useRouter().query.intraId;
   const { seasonList, season, seasonDropDownHandler, TitleSeasonHandler } =
     useSeasonDropDown(clickTitle, intraId);
+
   useEffect(() => {
     setRadioMode('both');
     TitleSeasonHandler;

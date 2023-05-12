@@ -10,8 +10,9 @@ import {
   BarElement,
   ChartTypeRegistry,
 } from 'chart.js';
+import { useChartData } from 'hooks/useChartData';
 import { Chart } from 'react-chartjs-2';
-import { Graphs, GraphValue } from 'types/chartTypes';
+import { Graphs } from 'types/chartTypes';
 ChartJS.register(
   ArcElement,
   LinearScale,
@@ -30,23 +31,18 @@ type ChartType = {
 
 export default function StatisticsChart({ chartType, chart }: ChartType) {
   const chartLabel = chart ? chart.graphs[0].graphName : '';
-  const chartLabels = chart
-    ? chart.graphs[0].graphData.map((item: GraphValue) => item.date)
-    : [];
-  const charData = chart
-    ? chart.graphs[0].graphData.map((item: GraphValue) => item.count)
-    : '';
+  const { labels, data } = useChartData(chart);
   const options = {
     responsive: true,
   };
   const chartData = {
-    labels: chartLabels,
+    labels,
     datasets: [
       {
         type: chartType as keyof ChartTypeRegistry,
         label: chartLabel,
         backgroundColor: ['rgba(255, 99, 132, 1)'],
-        data: charData,
+        data,
       },
     ],
   };
