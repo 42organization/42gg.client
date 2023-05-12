@@ -21,6 +21,23 @@ ChartJS.register(
   Legend
 );
 
+import useChartModule from 'hooks/users/useChartModule';
+
+interface ProfileChartProps {
+  profileId: string;
+  season?: number;
+}
+
+export default function ProfileChart({ profileId, season }: ProfileChartProps) {
+  const { data } = useChartModule(profileId, season);
+
+  return (
+    <div className={styles.chartWrapper}>
+      <Line options={options} data={data} height={180} />
+    </div>
+  );
+}
+
 export const options = {
   responsive: true,
   plugins: {
@@ -59,20 +76,3 @@ export const options = {
     },
   },
 };
-
-import useChartModule from 'hooks/useChartModule';
-
-interface ProfileChartProps {
-  profileId: string;
-  season?: number;
-}
-
-export default function ProfileChart({ profileId, season }: ProfileChartProps) {
-  const { data } = useChartModule(profileId, season);
-
-  return (
-    <div className={styles.chartWrapper}>
-      <Line options={options} data={data} height={180} />
-    </div>
-  );
-}
