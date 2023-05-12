@@ -19,7 +19,7 @@ Cypress.Commands.add('login', (username: string, password: string) => {
   cy.get('#password').type(password);
   cy.get('#kc-login').click();
   // check if logged in successfully
-  cy.url().should('include', 'https://profile.intra.42.fr/');
+  cy.url().should('eq', 'https://profile.intra.42.fr/');
   // 42gg login
   cy.visit(`${Cypress.env('SERVER_ENDPOINT')}/oauth2/authorization/42`);
   cy.wait(2000);
