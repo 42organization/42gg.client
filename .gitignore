@@ -40,3 +40,6 @@ yarn-error.log*
 .history
 
 .eslintcache
+
+#cypressConfig
+cypress.config.*
