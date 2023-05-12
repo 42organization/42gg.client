@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { SeasonMode } from 'types/mainType';
 import UserGameSearchBar from 'components/mode/modeItems/UserGameSearchBar';
-import useSeasonDropDown from 'hooks/useSeasonDropDown';
+import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
 import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
 import ModeRadiobox from 'components/mode/modeItems/ModeRadiobox';
 import styles from 'styles/mode/ModeWrap.module.scss';

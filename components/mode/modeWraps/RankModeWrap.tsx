@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { MatchMode } from 'types/mainType';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
-import useModeToggle from 'hooks/useModeToggle';
-import useSeasonDropDown from 'hooks/useSeasonDropDown';
+import useModeToggle from 'hooks/mode/useModeToggle';
+import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
 import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
 import styles from 'styles/mode/ModeWrap.module.scss';
 
