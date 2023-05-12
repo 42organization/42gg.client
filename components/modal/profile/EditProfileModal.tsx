@@ -1,20 +1,71 @@
+import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { profileState } from 'utils/recoil/user';
 import { racketTypes } from 'types/userTypes';
 import styles from 'styles/user/Profile.module.scss';
-
 import useEditProfileModal from 'hooks/modal/useEditProfileModal';
+
+export interface EditedProfile {
+  racketType: string;
+  statusMessage: string;
+  snsNotiOpt: 'NONE' | 'SLACK' | 'EMAIL' | 'BOTH';
+}
 
 const CHAR_LIMIT = 30;
 
 export default function EditProfileModal() {
-  const [
+  const [profile, setProfile] = useRecoilState(profileState);
+  const [editedProfile, setEditedProfile] = useState<EditedProfile>({
+    racketType: profile.racketType,
+    statusMessage: '',
+    snsNotiOpt: 'SLACK',
+  });
+  const [slack, setSlack] = useState<boolean>(true);
+  const [email, setEmail] = useState<boolean>(false);
+
+  const { racketType, statusMessage, snsNotiOpt } = profile;
+
+  const [finishEditHandler, cancelEditHandler] = useEditProfileModal([
     slack,
     email,
-    setEmail,
     editedProfile,
-    inputChangeHandler,
-    finishEditHandler,
-    cancelEditHandler,
-  ] = useEditProfileModal();
+    setProfile,
+  ]);
+
+  useEffect(() => {
+    setEditedProfile((prev) => ({
+      ...prev,
+      racketType,
+      statusMessage,
+      snsNotiOpt,
+    }));
+    if (snsNotiOpt === 'BOTH') {
+      setSlack(true);
+      setEmail(true);
+    } else if (snsNotiOpt === 'SLACK') {
+      setSlack(true);
+      setEmail(false);
+    } else if (snsNotiOpt === 'EMAIL') {
+      setSlack(false);
+      setEmail(true);
+    } else {
+      setSlack(false);
+      setEmail(false);
+    }
+  }, [profile]);
+
+  const inputChangeHandler = ({
+    target: { name, value },
+  }:
+    | React.ChangeEvent<HTMLTextAreaElement>
+    | React.ChangeEvent<HTMLInputElement>) => {
+    if (name === 'statusMessage' && value.length > CHAR_LIMIT)
+      value = value.slice(0, CHAR_LIMIT);
+    setEditedProfile((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   return (
     <div className={styles.editContainer}>
