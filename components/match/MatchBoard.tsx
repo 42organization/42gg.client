@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Match } from 'types/matchTypes';
 import { MatchMode } from 'types/mainType';
 import { modalState } from 'utils/recoil/modal';
 import MatchSlotList from './MatchSlotList';
 import styles from 'styles/match/MatchBoard.module.scss';
 
+import { errorState } from 'utils/recoil/error';
+import instance from 'utils/axios';
+
 import useGetReloadMatchHandler from 'hooks/match/useGetReloadMatchHandler';
+import { reloadMatchState } from 'utils/recoil/match';
 interface MatchBoardProps {
   type: string;
   toggleMode: MatchMode;
@@ -18,16 +22,30 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   const setModal = useSetRecoilState(modalState);
   const currentRef = useRef<HTMLDivElement>(null);
 
-  const openManual = () => {
-    setModal({ modalName: 'MATCH-MANUAL', manual: { toggleMode: toggleMode } });
-  };
-
   const reloadMatchHandler = useGetReloadMatchHandler([
     setMatch,
     setSpinReloadButton,
     type,
     toggleMode,
   ]);
+
+  useEffect(() => {
+    currentRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    });
+  }, [match]);
+
+  if (!match) return null;
+
+  const { matchBoards } = match;
+
+  if (matchBoards.length === 0)
+    return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
+
+  const openManual = () => {
+    setModal({ modalName: 'MATCH-MANUAL', manual: { toggleMode: toggleMode } });
+  };
 
   const getFirstOpenSlot = () => {
     for (let i = 0; i < matchBoards.length; i++) {
@@ -45,20 +63,6 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
     if (getFirstOpenSlot() === slotsHour) return currentRef;
     return null;
   };
-
-  useEffect(() => {
-    currentRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center',
-    });
-  }, [match]);
-
-  if (!match) return null;
-
-  const { matchBoards } = match;
-
-  if (matchBoards.length === 0)
-    return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
 
   return (
     <>

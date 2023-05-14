@@ -29,7 +29,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   useAxiosWithToast();
   useGetUserInfo();
   useSetAfterGameModal();
-  // useLiveCheck(presentPath);
+  useLiveCheck(presentPath);
   useAnnouncementCheck(presentPath);
 
   return presentPath.includes('/admin') ? (

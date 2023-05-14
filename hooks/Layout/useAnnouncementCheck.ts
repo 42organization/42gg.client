@@ -11,7 +11,7 @@ const useAnnouncementCheck = (presentPath) => {
 
   const getAnnouncementHandler = async () => {
     try {
-      const res = await instance.get('/pingpong/announcemnet');
+      const res = await instance.get('/pingpong/announcement');
       res?.data.content !== '' &&
         setModal({
           modalName: 'EVENT-ANNOUNCEMENT',
