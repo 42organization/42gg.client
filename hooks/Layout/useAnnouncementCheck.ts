@@ -1,26 +1,24 @@
+import useAxiosGet from 'hooks/useAxiosGet';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import instance from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 
 const useAnnouncementCheck = (presentPath) => {
   const setModal = useSetRecoilState(modalState);
-  const setError = useSetRecoilState(errorState);
   const announcementTime = localStorage.getItem('announcementTime');
 
-  const getAnnouncementHandler = async () => {
-    try {
-      const res = await instance.get('/pingpong/announcement');
-      res?.data.content !== '' &&
+  const getAnnouncementHandler = useAxiosGet({
+    url: '/pingpong/announcement',
+    setState: (data) => {
+      data.content !== '' &&
         setModal({
           modalName: 'EVENT-ANNOUNCEMENT',
-          announcement: res.data,
+          announcement: data,
         });
-    } catch (e) {
-      setError('RJ01');
-    }
-  };
+    },
+    err: 'RJ01',
+    type: 'setError',
+  });
 
   useEffect(() => {
     if (presentPath === '/') {

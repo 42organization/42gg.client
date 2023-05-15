@@ -1,53 +1,40 @@
 import { useEffect, Dispatch, SetStateAction } from 'react';
-import {
-  useSetRecoilState,
-  useRecoilValue,
-  useRecoilState,
-  SetterOrUpdater,
-} from 'recoil';
+import { useRecoilState } from 'recoil';
 import { Match } from 'types/matchTypes';
-import instance from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
 import { MatchMode } from 'types/mainType';
 import { reloadMatchState } from 'utils/recoil/match';
 
-type useGetReloadMatchHandlerProps = [
-  Dispatch<SetStateAction<Match | null>>,
-  Dispatch<SetStateAction<boolean>>,
-  string,
-  MatchMode
-];
+import useAxiosGet from 'hooks/useAxiosGet';
+import useReloadHandler from 'hooks/useReloadHandler';
 
-type useGetReloadMatchHandlerReturn = () => void;
+interface useGetReloadMatchHandlerProps {
+  setMatch: Dispatch<SetStateAction<Match | null>>;
+  setSpinReloadButton: Dispatch<SetStateAction<boolean>>;
+  type: string;
+  toggleMode: MatchMode;
+}
 
-const useGetReloadMatchHandler = ([
+const useGetReloadMatchHandler = ({
   setMatch,
   setSpinReloadButton,
   type,
   toggleMode,
-]: useGetReloadMatchHandlerProps): useGetReloadMatchHandlerReturn => {
+}: useGetReloadMatchHandlerProps): (() => void) => {
   const [reloadMatch, setReloadMatch] =
     useRecoilState<boolean>(reloadMatchState);
-  const setError = useSetRecoilState<string>(errorState);
 
-  const getMatchHandler = async () => {
-    try {
-      const res = await instance.get(
-        `/pingpong/match/tables/${1}/${toggleMode}/${type}`
-      );
-      setMatch(res?.data);
-    } catch (e) {
-      setError('SJ01');
-    }
-  };
+  const getMatchHandler = useAxiosGet({
+    url: `/pingpong/match/tables/${1}/${toggleMode}/${type}`,
+    setState: setMatch,
+    err: 'SJ01',
+    type: 'setError',
+  });
 
-  const reloadMatchHandler = () => {
-    setSpinReloadButton(true);
-    setTimeout(() => {
-      setSpinReloadButton(false);
-    }, 1000);
-    setReloadMatch(true);
-  };
+  const reloadMatchHandler = useReloadHandler({
+    setSpinReloadButton: setSpinReloadButton,
+    setState: setReloadMatch,
+    state: true,
+  });
 
   useEffect(() => {
     setReloadMatch(true);

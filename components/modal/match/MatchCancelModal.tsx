@@ -11,6 +11,7 @@ import {
 } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/match/MatchCancelModal.module.scss';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 export default function MatchCancelModal({ isMatched, slotId, time }: Cancel) {
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
@@ -62,14 +63,12 @@ export default function MatchCancelModal({ isMatched, slotId, time }: Cancel) {
     setReloadMatch(true);
   };
 
-  const getCurrentMatchHandler = async () => {
-    try {
-      const res = await instance.get('/pingpong/match/current');
-      setCurrentMatch(res?.data);
-    } catch (e) {
-      setError('JB01');
-    }
-  };
+  const getCurrentMatchHandler = useAxiosGet({
+    url: '/pingpong/match/current',
+    setState: setCurrentMatch,
+    err: 'JB01',
+    type: 'setError',
+  });
 
   const onReturn = useCallback(() => {
     setModal({ modalName: null });

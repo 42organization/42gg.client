@@ -6,7 +6,7 @@ import styles from 'styles/main/SearchBar.module.scss';
 import useSearchBar from 'hooks/useSearchBar';
 
 export default function SearchBar() {
-  const [
+  const {
     keyword,
     setKeyword,
     keywordHandler,
@@ -14,7 +14,7 @@ export default function SearchBar() {
     setShowDropDown,
     searchResult,
     searchBarRef,
-  ] = useSearchBar();
+  } = useSearchBar();
 
   return (
     <div className={styles.searchBar} ref={searchBarRef}>

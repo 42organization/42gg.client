@@ -7,6 +7,7 @@ import { errorState } from 'utils/recoil/error';
 import { liveState } from 'utils/recoil/layout';
 import NormalGame from './NormalGame';
 import RankGame from './RankGame';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 export default function AfterGameModal() {
   const setError = useSetRecoilState(errorState);
@@ -32,14 +33,12 @@ export default function AfterGameModal() {
     getCurrentGameHandler();
   }, []);
 
-  const getCurrentGameHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/games/players`);
-      setCurrentGame(res.data);
-    } catch (e) {
-      setError('JH03');
-    }
-  };
+  const getCurrentGameHandler = useAxiosGet({
+    url: '/pingpong/games/players',
+    setState: setCurrentGame,
+    err: 'JH03',
+    type: 'setError',
+  });
 
   const openStatChangeModal = () => {
     setModal({

@@ -10,11 +10,9 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useEffect, useState, useMemo } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { PppChart } from 'types/userTypes';
-import { errorState } from 'utils/recoil/error';
-import instance from 'utils/axios';
 import styles from 'styles/user/Chart.module.scss';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 ChartJS.register(
   CategoryScale,
@@ -71,7 +69,6 @@ interface ProfileChartProps {
 }
 
 export default function ProfileChart({ profileId, season }: ProfileChartProps) {
-  const setError = useSetRecoilState(errorState);
   const [chart, setChart] = useState<PppChart[]>([
     { ppp: 0, date: '1970-01-01' },
   ]);
@@ -80,16 +77,14 @@ export default function ProfileChart({ profileId, season }: ProfileChartProps) {
     if (season != undefined) getProfileChartHandler();
   }, [season]);
 
-  const getProfileChartHandler = async () => {
-    try {
-      const res = await instance.get(
-        `/pingpong/users/${profileId}/historics?season=${season}`
-      );
-      setChart(res?.data.historics);
-    } catch (e) {
-      setError('SJ02');
-    }
-  };
+  const getProfileChartHandler = useAxiosGet({
+    url: `/pingpong/users/${profileId}/historics?season=${season}`,
+    setState: (data) => {
+      setChart(data.historics);
+    },
+    err: 'SJ02',
+    type: 'setError',
+  });
 
   const data = useMemo(
     () => ({

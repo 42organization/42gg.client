@@ -2,11 +2,10 @@ import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
 import { profileState } from 'utils/recoil/user';
 import { userState } from 'utils/recoil/layout';
-import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import instance from 'utils/axios';
 import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/user/Profile.module.scss';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 interface ProfileProps {
   profileId: string;
@@ -14,7 +13,6 @@ interface ProfileProps {
 
 export default function BasicProfile({ profileId }: ProfileProps) {
   const user = useRecoilValue(userState);
-  const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const [
     {
@@ -35,14 +33,12 @@ export default function BasicProfile({ profileId }: ProfileProps) {
     getBasicProfileHandler();
   }, []);
 
-  const getBasicProfileHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/users/${profileId}/detail`);
-      setProfile(res?.data);
-    } catch (e) {
-      setError('SJ03');
-    }
-  };
+  const getBasicProfileHandler = useAxiosGet({
+    url: `/pingpong/users/${profileId}/detail`,
+    setState: setProfile,
+    err: 'SJ03',
+    type: 'setError',
+  });
 
   const startEditHandler = () => {
     setModal({ modalName: 'USER-PROFILE_EDIT' });

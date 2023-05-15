@@ -1,9 +1,8 @@
+import useAxiosGet from 'hooks/useAxiosGet';
 import { useEffect, Dispatch, SetStateAction } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { Rank } from 'types/rankTypes';
-import instance from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
 import { myRankState, scrollState } from 'utils/recoil/myRank';
 
 type useRankListProps = [
@@ -31,17 +30,16 @@ const useRankList = ([
 ]: useRankListProps): void => {
   const [myRank, setMyRank] = useRecoilState(myRankState);
   const [isScroll, setIsScroll] = useRecoilState(scrollState);
-  const setError = useSetRecoilState(errorState);
 
-  const getRankDataHandler = async () => {
-    try {
-      const res = await instance.get(`${makePath}`);
-      setRank(res?.data);
-      setMyRank((prev) => ({ ...prev, [toggleMode]: res?.data.myRank }));
-    } catch (e) {
-      setError('DK01');
-    }
-  };
+  const getRankDataHandler = useAxiosGet({
+    url: makePath,
+    setState: (data) => {
+      setRank(data);
+      setMyRank((prev) => ({ ...prev, [toggleMode]: data.myRank }));
+    },
+    err: 'DK01',
+    type: 'setError',
+  });
 
   useEffect(() => {
     async function waitRankList() {

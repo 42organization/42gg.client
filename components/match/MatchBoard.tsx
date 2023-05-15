@@ -1,16 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { Match } from 'types/matchTypes';
 import { MatchMode } from 'types/mainType';
 import { modalState } from 'utils/recoil/modal';
 import MatchSlotList from './MatchSlotList';
 import styles from 'styles/match/MatchBoard.module.scss';
 
-import { errorState } from 'utils/recoil/error';
-import instance from 'utils/axios';
-
 import useGetReloadMatchHandler from 'hooks/match/useGetReloadMatchHandler';
-import { reloadMatchState } from 'utils/recoil/match';
 interface MatchBoardProps {
   type: string;
   toggleMode: MatchMode;
@@ -22,12 +18,12 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   const setModal = useSetRecoilState(modalState);
   const currentRef = useRef<HTMLDivElement>(null);
 
-  const reloadMatchHandler = useGetReloadMatchHandler([
+  const reloadMatchHandler = useGetReloadMatchHandler({
     setMatch,
     setSpinReloadButton,
     type,
     toggleMode,
-  ]);
+  });
 
   useEffect(() => {
     currentRef.current?.scrollIntoView({

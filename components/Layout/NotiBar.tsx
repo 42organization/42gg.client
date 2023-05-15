@@ -6,12 +6,42 @@ import instance from 'utils/axios';
 import NotiItem from './NotiItem';
 import styles from 'styles/Layout/NotiBar.module.scss';
 
-import useNotiReload from 'hooks/Layout/useNotiReload';
+import { useEffect, useState } from 'react';
+
+import useAxiosGet from 'hooks/useAxiosGet';
+import useReloadHandler from 'hooks/useReloadHandler';
 
 export default function NotiBar() {
   const resetOpenNotiBar = useResetRecoilState(openNotiBarState);
+  const [noti, setNoti] = useState<Noti[]>([]);
+  const [clickReloadNoti, setClickReloadNoti] = useState(false);
+  const [spinReloadButton, setSpinReloadButton] = useState(false);
 
-  const [noti, spinReloadButton, setClickReloadNoti] = useNotiReload();
+  const getNotiHandler = useAxiosGet({
+    url: '/pingpong/notifications',
+    setState: (data) => {
+      setNoti(data.notifications);
+    },
+    err: 'JB04',
+    type: 'setError',
+  });
+
+  const reloadNotiHandler = useReloadHandler({
+    setSpinReloadButton: setSpinReloadButton,
+    setState: setClickReloadNoti,
+    state: false,
+  });
+
+  useEffect(() => {
+    getNotiHandler();
+  }, []);
+
+  useEffect(() => {
+    if (clickReloadNoti) {
+      reloadNotiHandler();
+      getNotiHandler();
+    }
+  }, [clickReloadNoti]);
 
   return (
     <div className={styles.backdrop} onClick={resetOpenNotiBar}>

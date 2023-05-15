@@ -5,15 +5,15 @@ import { useSetRecoilState } from 'recoil';
 import { Dispatch } from 'react';
 import { useCallback } from 'react';
 
-type useSearchBarResult = [
-  string,
-  Dispatch<SetStateAction<string>>,
-  (event: React.ChangeEvent<HTMLInputElement>) => void,
-  boolean,
-  Dispatch<SetStateAction<boolean>>,
-  string[],
-  RefObject<HTMLDivElement>
-];
+interface useSearchBarResult {
+  keyword: string;
+  setKeyword: Dispatch<SetStateAction<string>>;
+  keywordHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  showDropDown: boolean;
+  setShowDropDown: Dispatch<SetStateAction<boolean>>;
+  searchResult: string[];
+  searchBarRef: RefObject<HTMLDivElement>;
+}
 
 let timer: ReturnType<typeof setTimeout>;
 
@@ -71,7 +71,7 @@ export default function useSearchBar(): useSearchBarResult {
     };
   }, []);
 
-  return [
+  return {
     keyword,
     setKeyword,
     keywordHandler,
@@ -79,5 +79,5 @@ export default function useSearchBar(): useSearchBarResult {
     setShowDropDown,
     searchResult,
     searchBarRef,
-  ];
+  };
 }

@@ -10,7 +10,7 @@ export default function UserGameSearchBar() {
   const router = useRouter();
   const { intraId } = router.query;
 
-  const [
+  const {
     keyword,
     setKeyword,
     keywordHandler,
@@ -18,7 +18,7 @@ export default function UserGameSearchBar() {
     setShowDropDown,
     searchResult,
     searchBarRef,
-  ] = useSearchBar();
+  } = useSearchBar();
 
   useEffect(() => {
     if (intraId) setKeyword(String(intraId));

@@ -11,7 +11,7 @@ export default function AdminSearchBar({
 }: {
   initSearch: (intraId?: string) => void;
 }) {
-  const [
+  const {
     keyword,
     setKeyword,
     keywordHandler,
@@ -19,7 +19,7 @@ export default function AdminSearchBar({
     setShowDropDown,
     searchResult,
     searchBarRef,
-  ] = useSearchBar();
+  } = useSearchBar();
 
   return (
     <div className={styles.adminSearchBar} ref={searchBarRef}>
