@@ -1,8 +1,4 @@
-// 프로필
 import React from 'react';
-/* import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { seasonListState, latestSeasonIdState } from 'utils/recoil/seasons'; */
 import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
 import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
 import styles from 'styles/mode/ModeWrap.module.scss';

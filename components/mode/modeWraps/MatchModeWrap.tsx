@@ -1,5 +1,3 @@
-// /match 레코드의 전체 부분
-
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { MatchMode } from 'types/mainType';

@@ -1,6 +1,3 @@
-// /game 레코드의 전체 부분
-//gameresultlist부분에서 value를 더 보기로 준다.
-//랭크일 경우 시즌리스트를 표시한다.
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { SeasonMode } from 'types/mainType';

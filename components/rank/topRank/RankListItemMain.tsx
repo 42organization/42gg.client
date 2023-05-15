@@ -1,4 +1,3 @@
-//
 import Link from 'next/link';
 import { RankUser, NormalUser } from 'types/rankTypes';
 import styles from 'styles/rank/RankListMain.module.scss';

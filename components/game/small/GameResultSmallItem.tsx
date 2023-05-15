@@ -6,8 +6,6 @@ import GameResultSmallScore from 'components/game/small/GameResultSmallScore';
 import GameResultSmallTeam from 'components/game/small/GameResultSmallTeam';
 import styles from 'styles/game/GameResultItem.module.scss';
 
-// /game에서 resultlist부분에서 결과와 이름만 간단히 보여주는 부분
-
 interface GameResultSmallItemProps {
   game: Game;
 }

@@ -1,5 +1,4 @@
 import { TeamScore } from 'types/scoreTypes';
-//import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
 import InputScore from './InputScore';
 import CheckedScore from './CheckedScore';
 

@@ -1,4 +1,3 @@
-// 토글
 import styles from 'styles/mode/ModeToggle.module.scss';
 
 interface ModeToggleProps {

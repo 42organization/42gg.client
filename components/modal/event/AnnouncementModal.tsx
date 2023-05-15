@@ -22,9 +22,6 @@ export default function AnnouncementModal({
   const setModal = useSetRecoilState(modalState);
   const [neverSeeAgain, setNeverSeeAgain] = useState<boolean>(false);
 
-  /*   const onCheck = useCallback(() => {
-    setNeverSeeAgain((prev) => !prev);
-  }, [setNeverSeeAgain]); */
   const onCheck = () => {
     setNeverSeeAgain((prev) => !prev);
   };

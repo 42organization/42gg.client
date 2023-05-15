@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { AfterGame, TeamScore } from 'types/scoreTypes';
-import useSubmitModal from './useSubmitModal';
 
 interface UseRankGameProps {
   currentGame: AfterGame;
@@ -58,7 +57,6 @@ const useRankGame = ({ currentGame, onSubmit }: UseRankGameProps) => {
     }
     return true;
   };
-  //이 부분의 용도
   const handleSubmit = () => {
     onSubmit(result);
   };
