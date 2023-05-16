@@ -7,8 +7,11 @@ interface Report {
 }
 
 import useReportHandler from 'hooks/modal/useReportHandler';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from 'utils/recoil/modal';
 
 export default function ReportModal() {
+  const setModal = useSetRecoilState(modalState);
   const [report, setReport] = useState<Report>({
     category: '',
     content: '',
