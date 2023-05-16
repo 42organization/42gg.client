@@ -1,4 +1,7 @@
 /// <reference types="cypress" />
+
+import { valuesIn } from 'cypress/types/lodash';
+
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -66,6 +69,72 @@ Cypress.Commands.add('logout', (username: string) => {
   });
   cy.visit(Cypress.env('HOME'));
 });
+
+Cypress.Commands.add('register', (flag: number, target: '+' | '1/2') => {
+  let count = 0;
+  cy.get('[class*=MatchSlot_plus]').each(($el4) => {
+    if ($el4.text() === target) {
+      if (flag != count) {
+        count++;
+        return;
+      }
+      cy.wrap($el4).click();
+      return false;
+    }
+  });
+  cy.wait(1000);
+  cy.get('input[value=확인]').click();
+});
+
+Cypress.Commands.add(
+  'typeScore',
+  (myScore: number | string, enemyScore: number | string, success: boolean) => {
+    cy.origin(
+      Cypress.env('HOME'),
+      { args: { myScore, enemyScore, success } },
+      ({ myScore, enemyScore, success }) => {
+        cy.wait(1000);
+
+        const myTeamScore = cy.get('#myTeamScore');
+        const enemyTeamScore = cy.get('#enemyTeamScore');
+        enemyTeamScore.clear();
+        myTeamScore.clear();
+        if (myScore !== '') myTeamScore.type(String(myScore));
+        if (enemyScore !== '') enemyTeamScore.type(String(enemyScore));
+
+        let myTeamInput = '';
+        let enemyTeamInput = '';
+        cy.get('#myTeamScore')
+          .invoke('val')
+          .then((value) => {
+            myTeamInput = value as string;
+            cy.get('#enemyTeamScore')
+              .invoke('val')
+              .then((value) => {
+                enemyTeamInput = value as string;
+                if (
+                  myTeamInput === String(myScore) &&
+                  enemyTeamInput === String(enemyScore)
+                ) {
+                  cy.get('[class^=AfterGameModal_container]')
+                    .find('input[type=button]')
+                    .click();
+                  cy.wait(1000);
+                }
+              });
+          });
+
+        if (success) {
+          cy.get('[class^=AfterGameModal_container]')
+            .find('input[value=제출하기]')
+            .click();
+          cy.wait(3000);
+          cy.get('div[class^=AfterGameModal]').should('not.exist');
+        } else cy.get('div[class^=AfterGameModal]').should('exist');
+      }
+    );
+  }
+);
 
 //
 //
