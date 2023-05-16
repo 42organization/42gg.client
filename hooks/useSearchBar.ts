@@ -5,7 +5,7 @@ import { useSetRecoilState } from 'recoil';
 import { Dispatch } from 'react';
 import { useCallback } from 'react';
 
-interface useSearchBarResult {
+interface useSearchBarReturn {
   keyword: string;
   setKeyword: Dispatch<SetStateAction<string>>;
   keywordHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -26,11 +26,11 @@ function debounce(callback: () => void, timeout: number) {
   };
 }
 
-export default function useSearchBar(): useSearchBarResult {
+export default function useSearchBar(): useSearchBarReturn {
   const [keyword, setKeyword] = useState<string>('');
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<string[]>([]);
-  const setError = useSetRecoilState(errorState);
+  const setError = useSetRecoilState<string>(errorState);
   const searchBarRef = useRef<HTMLDivElement>(null);
 
   const getSearchResultHandler = useCallback(async () => {

@@ -8,6 +8,7 @@ import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 
 import useRankList from 'hooks/rank/useRankList';
+import { SeasonList } from 'types/seasonTypes';
 
 interface RankListProps {
   toggleMode: MatchMode;
@@ -19,7 +20,7 @@ export default function RankList({
   season,
   isMain = false,
 }: RankListProps) {
-  const { seasonMode } = useRecoilValue(seasonListState);
+  const { seasonMode } = useRecoilValue<SeasonList>(seasonListState);
   const [rank, setRank] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
   const pageInfo = {
@@ -37,15 +38,15 @@ export default function RankList({
       : `/pingpong/${modeQuery(toggleMode)}?page=${page}${seasonQuery}`;
   };
 
-  useRankList([
-    makePath(),
-    toggleMode,
-    season,
-    setRank,
-    page,
-    setPage,
-    pageInfo,
-  ]);
+  useRankList({
+    makePath: makePath(),
+    toggleMode: toggleMode,
+    season: season,
+    setRank: setRank,
+    page: page,
+    setPage: setPage,
+    pageInfo: pageInfo,
+  });
 
   if (isMain) return <RankListMain rank={rank} />;
 

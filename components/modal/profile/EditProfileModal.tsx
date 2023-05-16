@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { profileState } from 'utils/recoil/user';
-import { racketTypes } from 'types/userTypes';
+import { ProfileBasic, racketTypes } from 'types/userTypes';
 import styles from 'styles/user/Profile.module.scss';
 import useEditProfileModal from 'hooks/modal/useEditProfileModal';
 
@@ -14,7 +14,7 @@ export interface EditedProfile {
 const CHAR_LIMIT = 30;
 
 export default function EditProfileModal() {
-  const [profile, setProfile] = useRecoilState(profileState);
+  const [profile, setProfile] = useRecoilState<ProfileBasic>(profileState);
   const [editedProfile, setEditedProfile] = useState<EditedProfile>({
     racketType: profile.racketType,
     statusMessage: '',
@@ -25,12 +25,12 @@ export default function EditProfileModal() {
 
   const { racketType, statusMessage, snsNotiOpt } = profile;
 
-  const [finishEditHandler, cancelEditHandler] = useEditProfileModal([
-    slack,
-    email,
-    editedProfile,
-    setProfile,
-  ]);
+  const [finishEditHandler, cancelEditHandler] = useEditProfileModal({
+    slack: slack,
+    email: email,
+    editedProfile: editedProfile,
+    setProfile: setProfile,
+  });
 
   useEffect(() => {
     setEditedProfile((prev) => ({

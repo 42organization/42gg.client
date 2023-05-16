@@ -3,7 +3,7 @@ import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { openMenuBarState } from 'utils/recoil/layout';
-
+import { Modal } from 'types/modalTypes';
 interface Report {
   category: string;
   content: string;
@@ -12,8 +12,8 @@ interface Report {
 type useReportHandlerReturn = () => Promise<void>;
 
 const useReportHandler = (report: Report): useReportHandlerReturn => {
-  const setModal = useSetRecoilState(modalState);
-  const setError = useSetRecoilState(errorState);
+  const setModal = useSetRecoilState<Modal>(modalState);
+  const setError = useSetRecoilState<string>(errorState);
   const resetOpenMenuBar = useResetRecoilState(openMenuBarState);
   const reportResponse: { [key: string]: string } = {
     SUCCESS: '의견 주셔서 감사합니다 ❤️',

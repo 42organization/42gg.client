@@ -4,24 +4,25 @@ import instance from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { EditedProfile } from 'components/modal/profile/EditProfileModal';
+import { Modal } from 'types/modalTypes';
 
-type useEditProfileModalProps = [
-  boolean,
-  boolean,
-  EditedProfile,
-  SetterOrUpdater<ProfileBasic>
-];
+interface useEditProfileModalProps {
+  slack: boolean;
+  email: boolean;
+  editedProfile: EditedProfile;
+  setProfile: SetterOrUpdater<ProfileBasic>;
+}
 
-type useEditProfileModalResult = [() => Promise<void>, () => void];
+type useEditProfileModalReturn = [() => Promise<void>, () => void];
 
-const useEditProfileModal = ([
+const useEditProfileModal = ({
   slack,
   email,
   editedProfile,
   setProfile,
-]: useEditProfileModalProps): useEditProfileModalResult => {
-  const setError = useSetRecoilState(errorState);
-  const setModal = useSetRecoilState(modalState);
+}: useEditProfileModalProps): useEditProfileModalReturn => {
+  const setError = useSetRecoilState<string>(errorState);
+  const setModal = useSetRecoilState<Modal>(modalState);
 
   const finishEditHandler = async () => {
     if (slack && email) {

@@ -4,22 +4,23 @@ import { useRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { Rank } from 'types/rankTypes';
 import { myRankState, scrollState } from 'utils/recoil/myRank';
+import { MyRank } from 'types/rankTypes';
 
-type useRankListProps = [
-  string,
-  MatchMode,
-  number | undefined,
-  Dispatch<SetStateAction<Rank | undefined>>,
-  number,
-  Dispatch<SetStateAction<number>>,
-  {
+interface useRankListProps {
+  makePath: string;
+  toggleMode: MatchMode;
+  season: number | undefined;
+  setRank: Dispatch<SetStateAction<Rank | undefined>>;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
+  pageInfo: {
     currentPage: number | undefined;
     totalPage: number | undefined;
     setPage: Dispatch<SetStateAction<number>>;
-  }
-];
+  };
+}
 
-const useRankList = ([
+const useRankList = ({
   makePath,
   toggleMode,
   season,
@@ -27,9 +28,9 @@ const useRankList = ([
   page,
   setPage,
   pageInfo,
-]: useRankListProps): void => {
-  const [myRank, setMyRank] = useRecoilState(myRankState);
-  const [isScroll, setIsScroll] = useRecoilState(scrollState);
+}: useRankListProps): void => {
+  const [myRank, setMyRank] = useRecoilState<MyRank>(myRankState);
+  const [isScroll, setIsScroll] = useRecoilState<boolean>(scrollState);
 
   const getRankDataHandler = useAxiosGet({
     url: makePath,

@@ -1,11 +1,13 @@
 import useAxiosGet from 'hooks/useAxiosGet';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 
-const useAnnouncementCheck = (presentPath) => {
-  const setModal = useSetRecoilState(modalState);
-  const announcementTime = localStorage.getItem('announcementTime');
+const useAnnouncementCheck = (presentPath: string) => {
+  const setModal = useSetRecoilState<Modal>(modalState);
+  const announcementTime: string | null =
+    localStorage.getItem('announcementTime');
 
   const getAnnouncementHandler = useAxiosGet({
     url: '/pingpong/announcement',

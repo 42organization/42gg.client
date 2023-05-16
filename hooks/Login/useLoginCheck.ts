@@ -1,17 +1,20 @@
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { loginState } from 'utils/recoil/login';
 import { firstVisitedState } from 'utils/recoil/modal';
 
-const useLoginCheck = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [loggedIn, setLoggedIn] = useRecoilState(loginState);
-  const [firstVisited, setFirestVisited] = useRecoilState(firstVisitedState);
+type useLoginCheckReturn = [boolean, boolean, boolean];
 
-  const router = useRouter();
-  const presentPath = router.asPath;
-  const token = presentPath.split('?token=')[1];
+const useLoginCheck = (): useLoginCheckReturn => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [loggedIn, setLoggedIn] = useRecoilState<boolean>(loginState);
+  const [firstVisited, setFirestVisited] =
+    useRecoilState<boolean>(firstVisitedState);
+
+  const router: NextRouter = useRouter();
+  const presentPath: string = router.asPath;
+  const token: string = presentPath.split('?token=')[1];
 
   useEffect(() => {
     if (token) {
