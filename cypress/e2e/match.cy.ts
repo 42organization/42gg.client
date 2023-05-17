@@ -1,9 +1,6 @@
 describe('매치 기능 테스트', () => {
   it('게임 매치부터 게임 결과 입력까지 🤔', () => {
     cy.login(Cypress.env('NORMAL_USERNAME'), Cypress.env('NORMAL_PASSWORD'));
-    cy.intercept(
-      `${Cypress.env('SERVER_ENDPOINT')}pingpong/match/tables/1/single`
-    ).as('singleApi');
     cy.origin(Cypress.env('HOME'), () => {
       // 매치 버튼 눌러 매치 페이지로
       cy.get('a').filter('[class^=Layout_matchingButton]').click();
@@ -19,8 +16,8 @@ describe('매치 기능 테스트', () => {
       cy.wait(3000);
       cy.get('[class^=CurrentMatchInfo_container]').should('exist');
       cy.get('[class^=CurrentMatchInfo_cancelButton]').should('exist');
-      // 2. 두번째 유저 로그인
     });
+    // 2. 두번째 유저 로그인
     cy.logout(Cypress.env('NORMAL_USERNAME'));
     cy.login(Cypress.env('ADMIN_USERNAME'), Cypress.env('ADMIN_PASSWORD'));
     cy.origin(Cypress.env('HOME'), () => {
@@ -56,9 +53,6 @@ describe('매치 기능 테스트', () => {
       cy.register(0, '+');
       // api error 확인
       cy.get('input[value=확인]').click();
-      // cy.wait('@singleApi').then((interception) => {
-      //   expect(interception.response?.statusCode).to.equal(400);
-      // });
       cy.wait(3000); // api 처리 결과 기다림
       cy.get('[class^=CurrentMatchInfo_container]').should('not.exist'); // 경기가 잡히지 않아야 함.
     });

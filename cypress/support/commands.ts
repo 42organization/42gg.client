@@ -2,19 +2,7 @@
 
 import { valuesIn } from 'cypress/types/lodash';
 
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+// 로그인
 Cypress.Commands.add('login', (username: string, password: string) => {
   // intra login
   cy.visit('https://profile.intra.42.fr/users/auth/keycloak_student');
@@ -43,6 +31,7 @@ Cypress.Commands.add('login', (username: string, password: string) => {
   });
 });
 
+// 로그아웃
 Cypress.Commands.add('logout', (username: string) => {
   // step 1. 42gg logout
   cy.visit(Cypress.env('HOME'));
@@ -70,6 +59,7 @@ Cypress.Commands.add('logout', (username: string) => {
   cy.visit(Cypress.env('HOME'));
 });
 
+// target 표시의 슬롯 중 flag 번째의 슬롯을 등록하는 command
 Cypress.Commands.add('register', (flag: number, target: '+' | '1/2') => {
   let count = 0;
   cy.get('[class*=MatchSlot_plus]').each(($el4) => {
@@ -86,6 +76,7 @@ Cypress.Commands.add('register', (flag: number, target: '+' | '1/2') => {
   cy.get('input[value=확인]').click();
 });
 
+// 경기 결과 입력 테스트 command (success: true => 의도한 성공, false => 의도한 실패)
 Cypress.Commands.add(
   'typeScore',
   (myScore: number | string, enemyScore: number | string, success: boolean) => {
@@ -135,27 +126,3 @@ Cypress.Commands.add(
     );
   }
 );
-
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
