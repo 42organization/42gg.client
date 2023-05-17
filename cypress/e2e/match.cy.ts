@@ -1,5 +1,5 @@
 describe('매치 기능 테스트', () => {
-  it('게임 매치부터 게임 결과 입력까지 🤔', () => {
+  it('일반전 매칭과 패널티 테스트 🤔', () => {
     cy.login(Cypress.env('NORMAL_USERNAME'), Cypress.env('NORMAL_PASSWORD'));
     cy.origin(Cypress.env('HOME'), () => {
       // 매치 버튼 눌러 매치 페이지로
@@ -17,8 +17,8 @@ describe('매치 기능 테스트', () => {
       cy.get('[class^=CurrentMatchInfo_container]').should('exist');
       cy.get('[class^=CurrentMatchInfo_cancelButton]').should('exist');
     });
-    // 2. 두번째 유저 로그인
     cy.logout(Cypress.env('NORMAL_USERNAME'));
+    // 2. 두번째 유저 로그인
     cy.login(Cypress.env('ADMIN_USERNAME'), Cypress.env('ADMIN_PASSWORD'));
     cy.origin(Cypress.env('HOME'), () => {
       cy.wait(1000);
@@ -58,6 +58,8 @@ describe('매치 기능 테스트', () => {
     });
     // 두번째 유저 로그아웃
     cy.logout(Cypress.env('ADMIN_USERNAME'));
+  });
+  it('랭크전 매칭 테스트 🤔', () => {
     // 첫번째 유저 로그인
     cy.login(Cypress.env('NORMAL_USERNAME'), Cypress.env('NORMAL_PASSWORD'));
     cy.origin(Cypress.env('HOME'), () => {
@@ -104,7 +106,7 @@ describe('매치 기능 테스트', () => {
       cy.wait(Cypress.env('GAME_SLOT_TIME'));
     });
   });
-  it('게임 결과 입력 테스트', () => {
+  it('게임 결과 입력 테스트 🤔', () => {
     // 위 주석때문에 추가함. 로그인 주석도 추가함.
     cy.login(Cypress.env('ADMIN_USERNAME'), Cypress.env('ADMIN_PASSWORD'));
     cy.origin(Cypress.env('HOME'), () => {
@@ -151,7 +153,7 @@ describe('매치 기능 테스트', () => {
     // 두번째 유저 로그아웃
     cy.logout(Cypress.env('ADMIN_USERNAME'));
   });
-  it('경기 기록 테스트', () => {
+  it('경기 기록 테스트 🤔', () => {
     // 첫번째 유저 로그인
     cy.login(Cypress.env('NORMAL_USERNAME'), Cypress.env('NORMAL_PASSWORD'));
     cy.origin(Cypress.env('HOME'), () => {
