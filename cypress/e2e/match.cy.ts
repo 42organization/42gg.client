@@ -88,14 +88,7 @@ describe('매치 기능 테스트', () => {
       cy.get('a').filter('[class^=Layout_matchingButton]').click();
       cy.wait(1000);
       // 랭크전에 등록 가능한 슬롯 등록
-      cy.get('[class*=MatchSlot_headCount]').each(($el5) => {
-        if ($el5.text() === '1/2') {
-          cy.wrap($el5).click();
-          return false;
-        }
-      });
-      cy.wait(1000);
-      cy.get('input[value=확인]').click();
+      cy.register(0, '1/2');
       //랭크 게임 매치 상태 확인
       cy.get('[id^=Header_notiIcon]').click();
       cy.wait(500);
