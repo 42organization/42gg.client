@@ -67,13 +67,37 @@ describe('헤더 테스트 🥳', () => {
   });
 
   it('Noti 기능 테스트 🔔', () => {
-    // TODO : 미리 알림을 만들어두어야 함.
-    cy.origin(Cypress.env('HOME'), () => {
-      // const noti = '미리 만들어둔 알림';
-      const noti = '피드백이 반영되었습니다.';
+    const noti = '테스트용 알림 ୧(﹒︠ᴗ﹒︡)୨';
+
+    cy.origin(Cypress.env('HOME'), { args: { noti } }, ({ noti }) => {
+      // notibar 열기
+      cy.get('[id^=Header_notiIcon]').click();
+      cy.wait(500);
+      // 기존 알림 모두 삭제
+      cy.get('button[class^=NotiBar_deleteButton]').click();
+      cy.wait(500);
+      // 테스트용 알림 전송
+      cy.request({
+        method: 'POST',
+        url: `${Cypress.env(
+          'SERVER_ENDPOINT'
+        )}/pingpong/admin/notifications/${Cypress.env('ADMIN_USERNAME')}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('42gg-token')}`,
+        },
+        body: {
+          keyword: Cypress.env('ADMIN_USERNAME'),
+          message: noti,
+        },
+      }).then((res) => {
+        expect(res.status).to.equal(200);
+      });
+      cy.wait(1000);
       // 1. 버튼을 누르면 노티 바가 보여야 함.
       cy.get('[id^=Header_notiIcon]').click();
       cy.get('[class^=NotiBar_container]').should('exist');
+      cy.wait(1000);
       // 노티바에 미리 만들어둔 알림에 대한 항목이 있을 것
       cy.get('[class^=NotiItem_content]').should('have.text', noti);
       // 2. 전체 삭제 버튼을 누르기
