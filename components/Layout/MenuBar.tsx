@@ -1,8 +1,7 @@
 import Link from 'next/link';
-import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import { seasonListState } from 'utils/recoil/seasons';
-import { openMenuBarState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
@@ -27,13 +26,11 @@ export default function MenuBar() {
 
   return (
     <>
-      {/* <div className={styles.backdrop} onClick={resetOpenMenuBar}> */}
       <div
         className={styles.backdrop}
         onClick={() => HeaderState?.resetOpenMenuBarState()}
       >
         <div className={styles.container} onClick={(e) => e.stopPropagation()}>
-          {/* <button onClick={resetOpenMenuBar}>&#10005;</button> */}
           <button onClick={() => HeaderState?.resetOpenMenuBarState()}>
             &#10005;
           </button>
@@ -41,7 +38,6 @@ export default function MenuBar() {
             <div className={styles.menu}>
               {menuList.map((menuList, index: number) => (
                 <Link href={menuList.link} key={index}>
-                  {/* <div onClick={resetOpenMenuBar}>{menuList.name}</div> */}
                   <div onClick={() => HeaderState?.resetOpenMenuBarState()}>
                     {menuList.name}
                   </div>

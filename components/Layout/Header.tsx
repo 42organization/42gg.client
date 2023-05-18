@@ -15,8 +15,12 @@ import { BsMegaphone } from 'react-icons/bs';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
 import styles from 'styles/Layout/Header.module.scss';
 
+import NewNotiBar from './NewNoti/NewNotiBar';
+
 import { HeaderContextState, HeaderContext } from './HeaderContext';
 import { useContext } from 'react';
+
+import NewNotiStateContext from './NewNoti/NewNotiProvider';
 
 export default function Header() {
   const user = useRecoilValue(userState);
@@ -102,7 +106,10 @@ export default function Header() {
         </div>
       </div>
       {HeaderState?.openMenuBarState && <MenuBar />}
-      {HeaderState?.openNotiBarState && <NotiBar />}
+      {/* {HeaderState?.openNotiBarState && <NotiBar />} */}
+      <NewNotiStateContext>
+        {HeaderState?.openNotiBarState && <NewNotiBar />}
+      </NewNotiStateContext>
     </div>
   );
 }
