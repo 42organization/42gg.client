@@ -7,7 +7,9 @@ import {
   userState,
   liveState,
 } from 'utils/recoil/layout';
-import MenuBar from './MenuBar';
+//import MenuBar from './MenuBar';
+import NewMenuBar from './NewMenuBar/newMenuBar';
+import NewMenuContext from './NewMenuBar/MenuBarProvider';
 import NotiBar from './NotiBar';
 import PlayerImage from 'components/PlayerImage';
 import { FiMenu } from 'react-icons/fi';
@@ -80,7 +82,8 @@ export default function Header() {
           </Link>
         </div>
       </div>
-      {openMenuBar && <MenuBar />}
+      {/* {openMenuBar && <MenuBar />} */}
+      <NewMenuContext>{openMenuBar && <NewMenuBar />}</NewMenuContext>
       {openNotiBar && <NotiBar />}
     </div>
   );

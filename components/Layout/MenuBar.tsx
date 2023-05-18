@@ -5,6 +5,7 @@ import { seasonListState } from 'utils/recoil/seasons';
 import { openMenuBarState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/Layout/MenuBar.module.scss';
+import { isMainThread } from 'worker_threads';
 
 export default function MenuBar() {
   const { intraId, isAdmin } = useRecoilValue(userState);
