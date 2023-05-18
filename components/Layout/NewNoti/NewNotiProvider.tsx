@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, createContext } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Noti } from 'types/notiTypes';
 import { errorState } from 'utils/recoil/error';
@@ -37,6 +37,14 @@ const NewNotiStateContext = (props) => {
       setError('JB04');
     }
   };
+
+  useEffect(() => {
+    getNotiHandler();
+  }, []);
+
+  useEffect(() => {
+    if (clickReloadNoti) getNotiHandler();
+  }, [clickReloadNoti]);
 
   const NewNotiState: NewNotiContextState = {
     noti: noti,

@@ -20,8 +20,6 @@ import NewNotiBar from './NewNoti/NewNotiBar';
 import { HeaderContextState, HeaderContext } from './HeaderContext';
 import { useContext } from 'react';
 
-import NewNotiStateContext from './NewNoti/NewNotiProvider';
-
 export default function Header() {
   const user = useRecoilValue(userState);
   const [live, setLive] = useRecoilState(liveState);
@@ -106,10 +104,7 @@ export default function Header() {
         </div>
       </div>
       {HeaderState?.openMenuBarState && <MenuBar />}
-      {/* {HeaderState?.openNotiBarState && <NotiBar />} */}
-      <NewNotiStateContext>
-        {HeaderState?.openNotiBarState && <NewNotiBar />}
-      </NewNotiStateContext>
+      {HeaderState?.openNotiBarState && <NewNotiBar />}
     </div>
   );
 }
