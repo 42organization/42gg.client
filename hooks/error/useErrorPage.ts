@@ -7,14 +7,14 @@ export const useErrorPage = () => {
   const [error, setError] = useRecoilState(errorState);
   const router = useRouter();
 
-  useEffect(() => {
-    router.replace(`/`);
-  }, []);
-
   const goHome = () => {
     setError('');
     router.push('/');
   };
+
+  useEffect(() => {
+    router.replace(`/`);
+  }, []);
 
   return { error, goHome };
 };
