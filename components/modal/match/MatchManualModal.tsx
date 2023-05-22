@@ -1,23 +1,19 @@
-import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { Manual } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import { seasonListState } from 'utils/recoil/seasons';
-import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import styles from 'styles/modal/match/MatchManualModal.module.scss';
+import useModeToggle from 'hooks/mode/useModeToggle';
+import ModeToggle from 'components/mode/modeItems/ModeToggle';
 
 export default function MatchManualModal({ toggleMode }: Manual) {
   const setModal = useSetRecoilState(modalState);
   const { seasonMode } = useRecoilValue(seasonListState);
-  const [manualMode, setManualMode] = useState(toggleMode);
+  const { onToggle, Mode } = useModeToggle(toggleMode);
 
   const onReturn = () => {
     setModal({ modalName: null });
-  };
-
-  const onToggle = () => {
-    setManualMode(manualMode === 'rank' ? 'normal' : 'rank');
   };
 
   return (
@@ -26,15 +22,15 @@ export default function MatchManualModal({ toggleMode }: Manual) {
       {seasonMode === 'both' && (
         <div className={styles.toggleContainer}>
           <ModeToggle
-            checked={manualMode === 'rank'}
+            checked={Mode === 'rank'}
             onToggle={onToggle}
             id={'manualToggle'}
-            text={manualMode === 'rank' ? '랭크' : '일반'}
+            text={Mode === 'rank' ? '랭크' : '일반'}
           />
         </div>
       )}
       <ul className={styles.ruleList}>
-        {manualSelect(manualMode).map(
+        {manualSelect(Mode).map(
           (item: { title: string; description: string[] }, index) => (
             <li key={index}>
               {item.title}

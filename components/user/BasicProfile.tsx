@@ -1,14 +1,9 @@
-import { useEffect } from 'react';
-import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
-import { profileState } from 'utils/recoil/user';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { userState } from 'utils/recoil/layout';
-import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import instance from 'utils/axios';
+import useBasicProfile from 'hooks/users/useBasicProfile';
 import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/user/Profile.module.scss';
-
-import { useState } from 'react';
 
 interface ProfileProps {
   profileId: string;
@@ -16,47 +11,18 @@ interface ProfileProps {
 
 export default function BasicProfile({ profileId }: ProfileProps) {
   const user = useRecoilValue(userState);
-  const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
-  const [
-    {
-      intraId,
-      userImageUri,
-      racketType,
-      statusMessage,
-      level,
-      currentExp,
-      maxExp,
-      expRate,
-    },
-    setProfile,
-  ] = useRecoilState(profileState);
-  const MAX_LEVEL = 42;
-
-  const [err, setErr] = useState<Error | null>(null);
-
-  useEffect(() => {
-    if (err) {
-      throw err;
-    }
-  }, [err]);
-
-  useEffect(() => {
-    getBasicProfileHandler();
-  }, []);
-
-  const getBasicProfileHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/users/${profileId}/detail`);
-      setProfile(res?.data);
-    } catch (e) {
-      if (e instanceof Error) {
-        setErr(e);
-        // throw e;
-      }
-      // setError('SJ03');
-    }
-  };
+  const {
+    intraId,
+    userImageUri,
+    racketType,
+    statusMessage,
+    level,
+    currentExp,
+    maxExp,
+    expRate,
+    MAX_LEVEL,
+  } = useBasicProfile({ profileId });
 
   const startEditHandler = () => {
     setModal({ modalName: 'USER-PROFILE_EDIT' });

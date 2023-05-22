@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { Match } from 'types/matchTypes';
 import { MatchMode } from 'types/mainType';
-import instance from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import { reloadMatchState } from 'utils/recoil/match';
 import MatchSlotList from './MatchSlotList';
 import styles from 'styles/match/MatchBoard.module.scss';
 
+import useGetReloadMatchHandler from 'hooks/match/useGetReloadMatchHandler';
 interface MatchBoardProps {
   type: string;
   toggleMode: MatchMode;
@@ -17,14 +15,15 @@ interface MatchBoardProps {
 export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   const [match, setMatch] = useState<Match | null>(null);
   const [spinReloadButton, setSpinReloadButton] = useState<boolean>(false);
-  const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
-  const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const currentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setReloadMatch(true);
-  }, [toggleMode]);
+  const reloadMatchHandler = useGetReloadMatchHandler({
+    setMatch,
+    setSpinReloadButton,
+    type,
+    toggleMode,
+  });
 
   useEffect(() => {
     currentRef.current?.scrollIntoView({
@@ -32,21 +31,6 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
       block: 'center',
     });
   }, [match]);
-
-  useEffect(() => {
-    if (reloadMatch) getMatchHandler();
-  }, [reloadMatch]);
-
-  const getMatchHandler = async () => {
-    try {
-      const res = await instance.get(
-        `/pingpong/match/tables/${1}/${toggleMode}/${type}`
-      );
-      setMatch(res?.data);
-    } catch (e) {
-      setError('SJ01');
-    }
-  };
 
   if (!match) return null;
 
@@ -69,14 +53,6 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
       }
     }
     return null;
-  };
-
-  const reloadMatchHandler = () => {
-    setSpinReloadButton(true);
-    setTimeout(() => {
-      setSpinReloadButton(false);
-    }, 1000);
-    setReloadMatch(true);
   };
 
   const getScrollCurrentRef = (slotsHour: number) => {

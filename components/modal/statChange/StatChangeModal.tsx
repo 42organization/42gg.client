@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Exp } from 'types/modalTypes';
-import instance from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
-import { errorState } from 'utils/recoil/error';
 import { reloadMatchState } from 'utils/recoil/match';
 import ExpStat from './ExpStat';
 import PppStat from 'components/modal/statChange/PppStat';
 import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 export default function StatChangeModal({ gameId, mode }: Exp) {
   const setModal = useSetRecoilState(modalState);
-  const setError = useSetRecoilState(errorState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const [stat, setStat] = useState();
 
@@ -19,16 +17,14 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
     getExpHandler();
   }, []);
 
-  const getExpHandler = async () => {
-    try {
-      const res = await instance.get(
-        `/pingpong/games/${gameId}/result/${mode}`
-      );
-      setStat({ ...res.data });
-    } catch (e) {
-      setError('KP03');
-    }
-  };
+  const getExpHandler = useAxiosGet({
+    url: `/pingpong/games/${gameId}/result/${mode}`,
+    setState: (data) => {
+      setStat({ ...data });
+    },
+    err: 'KP03',
+    type: 'setError',
+  });
 
   const closeModal = () => {
     setReloadMatch(true);

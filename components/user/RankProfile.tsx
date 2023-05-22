@@ -1,10 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { ProfileRank } from 'types/userTypes';
-import { errorState } from 'utils/recoil/error';
-import instance from 'utils/axios';
 import ProfileChart from 'components/user/ProfileChart';
 import ProfileModeWrap from 'components/mode/modeWraps/ProfileModeWrap';
+import useGetRankProfile from 'hooks/users/useGetRankProfile';
 import styles from 'styles/user/Profile.module.scss';
 
 interface RankProfileProps {
@@ -27,29 +23,7 @@ export default function RankProfile({ profileId }: RankProfileProps) {
 }
 
 function Profile({ profileId, season }: ProfileProps) {
-  const setError = useSetRecoilState(errorState);
-  const [rankProfile, setRankProfile] = useState<ProfileRank>({
-    rank: 0,
-    ppp: 0,
-    wins: 0,
-    losses: 0,
-    winRate: '',
-  });
-
-  useEffect(() => {
-    if (season != undefined) getRankProfileHandler();
-  }, [season]);
-
-  const getRankProfileHandler = async () => {
-    try {
-      const res = await instance.get(
-        `/pingpong/users/${profileId}/rank?season=${season}`
-      );
-      setRankProfile(res?.data);
-    } catch (e) {
-      setError('JH07');
-    }
-  };
+  const rankProfile = useGetRankProfile(profileId, season);
 
   const { rank, ppp, wins, losses, winRate } = rankProfile;
 

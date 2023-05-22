@@ -4,6 +4,7 @@ import { userState } from 'utils/recoil/layout';
 import { seasonListState } from 'utils/recoil/seasons';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/Layout/MenuBar.module.scss';
+import { isMainThread } from 'worker_threads';
 
 import { HeaderContextState, HeaderContext } from './HeaderContext';
 import { useContext } from 'react';

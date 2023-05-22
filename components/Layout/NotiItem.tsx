@@ -1,7 +1,5 @@
 import Link from 'next/link';
-import { useSetRecoilState } from 'recoil';
 import { Noti } from 'types/notiTypes';
-import { openNotiBarState } from 'utils/recoil/layout';
 import { gameTimeToString } from 'utils/handleTime';
 import styles from 'styles/Layout/NotiItem.module.scss';
 
@@ -74,11 +72,9 @@ function MakeImminentContent(
   time: string | undefined,
   createdAt: string
 ) {
-  // const setOpenNotiBar = useSetRecoilState(openNotiBarState);
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const makeEnemyUsers = (enemyTeam: string[]) => {
     return enemyTeam.map((intraId: string, i: number) => (
-      // <span key={intraId} onClick={() => setOpenNotiBar(false)}>
       <span key={intraId} onClick={() => HeaderState?.resetOpenNotiBarState()}>
         <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
         {enemyTeam && i < enemyTeam.length - 1 ? ', ' : ''}

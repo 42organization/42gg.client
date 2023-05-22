@@ -9,7 +9,8 @@ import useSearchBar from 'hooks/useSearchBar';
 export default function UserGameSearchBar() {
   const router = useRouter();
   const { intraId } = router.query;
-  const [
+
+  const {
     keyword,
     setKeyword,
     keywordHandler,
@@ -17,12 +18,12 @@ export default function UserGameSearchBar() {
     setShowDropDown,
     searchResult,
     searchBarRef,
-  ] = useSearchBar();
+  } = useSearchBar();
 
   useEffect(() => {
     if (intraId) setKeyword(String(intraId));
     else setKeyword('');
-  }, [intraId, setKeyword]);
+  }, [router]);
 
   const clickResultHandler = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,

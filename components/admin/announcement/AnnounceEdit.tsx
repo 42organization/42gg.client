@@ -31,15 +31,6 @@ export default function AnnounceEdit() {
     resetHandler();
   }, []);
 
-  const resetHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/announcement`);
-      setContent(res?.data.content);
-    } catch (e) {
-      alert(e);
-    }
-  };
-
   const postHandler = async () => {
     try {
       await instance.post(`/pingpong/admin/announcement`, {
@@ -62,6 +53,15 @@ export default function AnnounceEdit() {
       alert(announceDeleteResponse.SUCCESS);
     } catch (e: any) {
       alert(announceDeleteResponse[e.response.data.code]);
+    }
+  };
+
+  const resetHandler = async () => {
+    try {
+      const res = await instance.get('/pingpong/announcement');
+      setContent(res?.data.content);
+    } catch (e) {
+      alert(e);
     }
   };
 

@@ -1,7 +1,3 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
-import { useSetRecoilState } from 'recoil';
-import instance from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
 import styles from 'styles/admin/common/AdminSearchBar.module.scss';
@@ -14,7 +10,7 @@ export default function AdminSearchBar({
 }: {
   initSearch: (intraId?: string) => void;
 }) {
-  const [
+  const {
     keyword,
     setKeyword,
     keywordHandler,
@@ -22,7 +18,7 @@ export default function AdminSearchBar({
     setShowDropDown,
     searchResult,
     searchBarRef,
-  ] = useSearchBar();
+  } = useSearchBar();
 
   return (
     <div className={styles.adminSearchBar} ref={searchBarRef}>

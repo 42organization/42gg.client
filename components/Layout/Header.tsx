@@ -1,14 +1,10 @@
 import Link from 'next/link';
-import { SetStateAction, useEffect } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import {
-  openMenuBarState,
-  openNotiBarState,
-  userState,
-  liveState,
-} from 'utils/recoil/layout';
-import MenuBar from './MenuBar';
-import NotiBar from './NotiBar';
+import { userState, liveState } from 'utils/recoil/layout';
+import { useEffect } from 'react';
+import NewMenuBar from './NewMenuBar/newMenuBar';
+// import NotiBar from './NotiBar';
+//import MenuBar from './MenuBar';
 import PlayerImage from 'components/PlayerImage';
 import { FiMenu } from 'react-icons/fi';
 import { BsMegaphone } from 'react-icons/bs';
@@ -23,34 +19,18 @@ import { useContext } from 'react';
 export default function Header() {
   const user = useRecoilValue(userState);
   const [live, setLive] = useRecoilState(liveState);
-  // const [openMenuBar, setOpenMenuBar] = useRecoilState(openMenuBarState);
-  // const [openNotiBar, setOpenNotiBar] = useRecoilState(openNotiBarState);
 
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
 
-  // const openMenuBarHandler = () => {
-  //   setOpenMenuBar(!openMenuBar);
-  // };
   const openMenuBarHandler = () => {
     HeaderState?.setOpenMenuBarState(!HeaderState?.openMenuBarState);
   };
 
-  // const openNotiBarHandler = () => {
-  //   setOpenNotiBar(!openNotiBar);
-  //   setLive((prev) => ({ ...prev, notiCount: 0 }));
-  // };
   const openNotiBarHandler = () => {
     HeaderState?.setOpenNotiBarState(!HeaderState?.openNotiBarState);
     setLive((prev) => ({ ...prev, notiCount: 0 }));
   };
 
-  // useEffect(() => {
-  //   setMenuOutsideScroll();
-  // }, [openMenuBar, openNotiBar]);
-
-  // const setMenuOutsideScroll = () =>
-  //   (document.body.style.overflow =
-  //     openMenuBar || openNotiBar ? 'hidden' : 'unset');
   useEffect(() => {
     setMenuOutsideScroll();
   }, [HeaderState?.openMenuBarState, HeaderState?.openNotiBarState]);
@@ -103,7 +83,7 @@ export default function Header() {
           </Link>
         </div>
       </div>
-      {HeaderState?.openMenuBarState && <MenuBar />}
+      {HeaderState?.openMenuBarState && <NewMenuBar />}
       {HeaderState?.openNotiBarState && <NewNotiBar />}
     </div>
   );
