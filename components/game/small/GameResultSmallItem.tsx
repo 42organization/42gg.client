@@ -18,6 +18,7 @@ function GameResultSmallItem({ game }: GameResultSmallItemProps) {
       className={`${styles.smallContainer}
 			${styles[mode]}`}
       onClick={() => setClickedItemId(gameId)}
+      id={String(gameId)}
     >
       <GameResultSmallTeam team={team1} position={'Left'} />
       <GameResultSmallScore

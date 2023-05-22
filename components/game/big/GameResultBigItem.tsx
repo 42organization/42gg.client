@@ -18,6 +18,7 @@ function GameResultBigItem({ game }: GameResultBigItemProps) {
       className={`${styles.bigContainer}
 			${styles[mode]}`}
       onClick={() => setClickedItemId(gameId)}
+      id={String(gameId)}
     >
       <GameResultBigTeam team={team1} />
       <GameResultBigScore

@@ -159,23 +159,68 @@ describe('매치 기능 테스트', () => {
       cy.wait(1000);
       cy.get('[class^=StatChangeModal]').click();
       // 2. 최근 경기가 첫번째, 두번째 아이디로 되어있는지 확인
-      cy.get('[class^=GameResultItem_bigContainer]').each(($bigContainer) => {
+      let gameId = '';
+      cy.get('[class^=GameResultItem_bigContainer]').then(($bigContainer) => {
         const $bigTeams = $bigContainer.find('[class^=GameResultItem_userId]');
         const intraId1 = $bigTeams.eq(0).text();
         const intraId2 = $bigTeams.eq(1).text();
-
+        // 최근 경기 id 저장
+        cy.wrap($bigContainer)
+          .invoke('attr', 'id')
+          .then((id) => {
+            gameId = String(id);
+          });
         if (
-          intraId1 === Cypress.env('NORMAL_USERNAME') &&
-          intraId2 === Cypress.env('ADMIN_USERNAME')
+          intraId1 === 'hyungjpa' /* Cypress.env('NORMAL_USERNAME') */ &&
+          intraId2 === 'sangmipa' /* Cypress.env('ADMIN_USERNAME') */
         ) {
           return;
         } else {
           throw new Error('일치하는 유저 아이디가 없습니다');
         }
       });
+      cy.get('a').filter("[href='/game']").click();
+      cy.wait(1000);
       // 3. 시즌 바꿔서 확인 (다른 시즌에는 없어야 함)
-
+      cy.get('input[type="radio"][value="rank"]')
+        .as('rankRadioBtn')
+        .click()
+        .then(() => {
+          cy.wait(1000);
+          cy.get('select[class^=SeasonDropDown_select]').trigger('change', {
+            value: '3',
+          });
+          cy.wait(1000);
+          cy.get('[class^=GameResultItem_bigContainer]').then(
+            ($bigContainer) => {
+              cy.wrap($bigContainer)
+                .invoke('attr', 'id')
+                .then((id) => {
+                  if (String(id) == gameId) {
+                    throw new Error('다른 시즌에 게임이 존재합니다');
+                  }
+                });
+            }
+          );
+        });
       // 4. 일반 버튼을 눌러서 확인 (기록이 없어야 함)
+      cy.get('input[type="radio"][value="normal"]')
+        .as('normalRadioBtn')
+        .click()
+        .then(() => {
+          cy.wait(1000);
+          cy.get('[class^=GameResultItem_bigContainer]').then(
+            ($bigContainer) => {
+              cy.wrap($bigContainer)
+                .invoke('attr', 'id')
+                .then((id) => {
+                  if (String(id) == gameId) {
+                    throw new Error('일반게임에 랭크게임이 존재합니다');
+                  }
+                });
+            }
+          );
+        });
     });
   });
 });
