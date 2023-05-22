@@ -1,12 +1,6 @@
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { useRecoilValue, useRecoilState } from 'recoil';
-import {
-  openMenuBarState,
-  openNotiBarState,
-  userState,
-  liveState,
-} from 'utils/recoil/layout';
+import { useRecoilValue } from 'recoil';
+import { userState, liveState } from 'utils/recoil/layout';
 //import MenuBar from './MenuBar';
 import NewMenuBar from './NewMenuBar/newMenuBar';
 import NewMenuContext from './NewMenuBar/MenuBarProvider';
@@ -17,28 +11,14 @@ import { BsMegaphone } from 'react-icons/bs';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
 import styles from 'styles/Layout/Header.module.scss';
 
+import useHeaderHandler from 'hooks/Layout/useHeaderHandler';
+
 export default function Header() {
   const user = useRecoilValue(userState);
-  const [live, setLive] = useRecoilState(liveState);
-  const [openMenuBar, setOpenMenuBar] = useRecoilState(openMenuBarState);
-  const [openNotiBar, setOpenNotiBar] = useRecoilState(openNotiBarState);
+  const live = useRecoilValue(liveState);
 
-  const openMenuBarHandler = () => {
-    setOpenMenuBar(!openMenuBar);
-  };
-
-  const openNotiBarHandler = () => {
-    setOpenNotiBar(!openNotiBar);
-    setLive((prev) => ({ ...prev, notiCount: 0 }));
-  };
-
-  useEffect(() => {
-    setMenuOutsideScroll();
-  }, [openMenuBar, openNotiBar]);
-
-  const setMenuOutsideScroll = () =>
-    (document.body.style.overflow =
-      openMenuBar || openNotiBar ? 'hidden' : 'unset');
+  const [openMenuBar, openNotiBar, openMenuBarHandler, openNotiBarHandler] =
+    useHeaderHandler();
 
   return (
     <div className={styles.headerContainer}>
