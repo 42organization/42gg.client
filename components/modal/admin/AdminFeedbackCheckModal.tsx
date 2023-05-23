@@ -14,7 +14,7 @@ export default function AdminFeedbackCheck({
 
   const sendNotificationHandler = async (isSend: boolean) => {
     try {
-      await instanceInManage.put(`/feedback/${id}`, {
+      await instanceInManage.patch(`/feedback/${id}`, {
         isSolved: isSolved,
       });
       await instanceInManage.post(`/notifications`, {
