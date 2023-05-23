@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import {
@@ -71,9 +71,7 @@ export default function UserManagementTable() {
 
   const getAllUserInfo = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `pingpong/admin/users?page=${currentPage}`
-      );
+      const res = await instanceInManage.get(`/users?page=${currentPage}`);
       setUserManagements({
         userInfoList: res.data.userSearchAdminDtos,
         totalPage: res.data.totalPage,
@@ -86,8 +84,8 @@ export default function UserManagementTable() {
 
   const getUserInfo = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `pingpong/admin/users?q=${intraId}&page=${currentPage}`
+      const res = await instanceInManage.get(
+        `/users?q=${intraId}&page=${currentPage}`
       );
       setUserManagements({
         userInfoList: res.data.userSearchAdminDtos,

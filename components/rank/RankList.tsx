@@ -5,7 +5,7 @@ import { RankUser, NormalUser, Rank } from 'types/rankTypes';
 import { myRankState, scrollState } from 'utils/recoil/myRank';
 import { seasonListState } from 'utils/recoil/seasons';
 import { errorState } from 'utils/recoil/error';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 import RankListMain from './topRank/RankListMain';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';

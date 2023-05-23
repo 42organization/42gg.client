@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import styles from 'styles/admin/modal/AdminNoti.module.scss';
 
 const STAT_MSG_LIMIT = 25;
@@ -36,7 +36,7 @@ export default function AdminNotiAllModal() {
       return;
     }
     try {
-      const res = await instance.post(`pingpong/admin/notifications/`, {
+      const res = await instanceInManage.post(`/notifications/`, {
         message: notiContent.current?.value
           ? notiContent.current?.value
           : '알림 전송 실패',

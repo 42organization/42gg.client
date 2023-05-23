@@ -7,7 +7,7 @@ import { reloadMatchState, openCurrentMatchState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { seasonListState } from 'utils/recoil/seasons';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 import Statistics from 'pages/statistics';
 import Header from './Header';
 import Footer from './Footer';
@@ -15,7 +15,6 @@ import CurrentMatch from './CurrentMatch';
 import AdminLayout from '../admin/Layout';
 import AdminReject from '../admin/AdminReject';
 import styles from 'styles/Layout/Layout.module.scss';
-import useAxiosWithToast from 'hooks/useAxiosWithToast';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -33,9 +32,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const setModal = useSetRecoilState(modalState);
   const presentPath = useRouter().asPath;
   const announcementTime = localStorage.getItem('announcementTime');
-
-  useAxiosWithToast();
-
   useEffect(() => {
     getUserHandler();
     getSeasonListHandler();

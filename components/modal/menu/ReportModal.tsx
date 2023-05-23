@@ -3,7 +3,7 @@ import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import { openMenuBarState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 import styles from 'styles/modal/menu/ReportModal.module.scss';
 
 interface Report {

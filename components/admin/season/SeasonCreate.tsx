@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import {
   Paper,
@@ -43,7 +43,7 @@ export default function SeasonCreate() {
 
   const postHandler = async () => {
     try {
-      await instance.post(`/pingpong/admin/season`, seasonInfo);
+      await instanceInManage.post(`/season`, seasonInfo);
       setSnackBar({
         toastName: 'Season Create',
         severity: 'success',

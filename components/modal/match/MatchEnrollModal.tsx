@@ -4,7 +4,7 @@ import { gameTimeToString } from 'utils/handleTime';
 import { reloadMatchState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 import styles from 'styles/modal/match/MatchEnrollModal.module.scss';
 
 export default function MatchEnrollModal({

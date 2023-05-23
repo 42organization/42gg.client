@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import PageNation from 'components/Pagination';
 import { IGames, IGameLog } from 'types/admin/gameLogTypes';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import { getFormattedDateToString } from 'utils/handleTime';
 import AdminSearchBar from '../common/AdminSearchBar';
 import styles from 'styles/admin/games/GamesTable.module.scss';
@@ -22,8 +22,8 @@ export default function GamesTable() {
 
   const getAllGames = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `pingpong/admin/games?season=0&page=${currentPage}&size=5`
+      const res = await instanceInManage.get(
+        `/games?season=0&page=${currentPage}&size=5`
       );
 
       setGameInfo({
@@ -46,8 +46,8 @@ export default function GamesTable() {
 
   const getUserGames = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `pingpong/admin/games/users?q=${intraId}&page=${currentPage}&size=5`
+      const res = await instanceInManage.get(
+        `/games/users?q=${intraId}&page=${currentPage}&size=5`
       );
       setGameInfo({
         gameLog: res.data.gameLogList.map((game: IGameLog) => {
