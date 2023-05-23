@@ -12,6 +12,12 @@ type rankRequest = {
   enemyTeamScore: number | '';
 };
 
+type normalRequest = {
+  gameId: number;
+  myTeamId: number;
+  enemyTeamId: number;
+};
+
 const useSubmitModal = (currentGame: AfterGame) => {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
@@ -41,8 +47,13 @@ const useSubmitModal = (currentGame: AfterGame) => {
   };
 
   const submitNormalHandler = async () => {
+    const requestBody: normalRequest = {
+      gameId: currentGame.gameId,
+      myTeamId: currentGame.matchTeamsInfo.myTeam.teamId,
+      enemyTeamId: currentGame.matchTeamsInfo.enemyTeam.teamId,
+    };
     try {
-      await instance.post(`/pingpong/games/result/normal`);
+      await instance.post(`/pingpong/games/normal`, requestBody);
       await instance.put(`/pingpong/match/current`);
     } catch (e) {
       setError('KP04');
