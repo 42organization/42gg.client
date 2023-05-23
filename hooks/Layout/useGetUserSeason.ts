@@ -6,7 +6,7 @@ import { SeasonList } from 'types/seasonTypes';
 import { userState } from 'utils/recoil/layout';
 import { seasonListState } from 'utils/recoil/seasons';
 
-const useGetUserInfo = () => {
+const useGetUserSeason = () => {
   const setUser = useSetRecoilState<User>(userState);
   const setSeasonList = useSetRecoilState<SeasonList>(seasonListState);
 
@@ -30,4 +30,4 @@ const useGetUserInfo = () => {
   }, []);
 };
 
-export default useGetUserInfo;
+export default useGetUserSeason;

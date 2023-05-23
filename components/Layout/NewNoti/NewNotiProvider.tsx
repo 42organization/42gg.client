@@ -16,7 +16,11 @@ export interface NewNotiContextState {
 
 export const NewNotiContext = createContext<NewNotiContextState | null>(null);
 
-const NewNotiStateContext = (props) => {
+interface NewNotiStateContextProps {
+  children: React.ReactNode;
+}
+
+const NewNotiStateContext = (props: NewNotiStateContextProps) => {
   const [noti, setNoti] = useState<Noti[]>([]);
   const [clickReloadNoti, setClickReloadNoti] = useState(false);
   const [spinReloadButton, setSpinReloadButton] = useState(false);

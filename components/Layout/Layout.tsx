@@ -14,7 +14,7 @@ import useAxiosWithToast from 'hooks/useAxiosWithToast';
 
 import useAnnouncementCheck from 'hooks/Layout/useAnnouncementCheck';
 import useSetAfterGameModal from 'hooks/Layout/useSetAfterGameModal';
-import useGetUserInfo from 'hooks/Layout/useGetUserInfo';
+import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
 import useLiveCheck from 'hooks/Layout/useLiveCheck';
 import HeaderStateContext from './HeaderContext';
 
@@ -28,7 +28,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const presentPath = useRouter().asPath;
 
   useAxiosWithToast();
-  useGetUserInfo();
+  useGetUserSeason();
   useSetAfterGameModal();
   useLiveCheck(presentPath);
   useAnnouncementCheck(presentPath);

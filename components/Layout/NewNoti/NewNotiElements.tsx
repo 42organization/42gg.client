@@ -26,8 +26,8 @@ export const NotiExist = () => {
       <div className={styles.buttonWrap}>
         <DeleteAllButton />
         <ReloadNotiButton
-          spinReloadButton={NotiContext.spinReloadButton}
-          setClickReloadNoti={NotiContext.setClickReloadNoti}
+          spinReloadButton={NotiContext?.spinReloadButton ?? false}
+          setClickReloadNoti={NotiContext?.setClickReloadNoti}
         />
       </div>
       <div>
@@ -46,8 +46,8 @@ export const NotiEmpty = () => {
     <div className={styles.emptyContent}>
       <></>
       <ReloadNotiButton
-        spinReloadButton={NotiContext.spinReloadButton}
-        setClickReloadNoti={NotiContext.setClickReloadNoti}
+        spinReloadButton={NotiContext?.spinReloadButton}
+        setClickReloadNoti={NotiContext?.setClickReloadNoti}
       />
       <div>💭 새로운 알림이 없습니다!</div>
     </div>
@@ -64,8 +64,8 @@ export const NotiMain = () => {
 };
 
 interface ReloadNotiButtonProps {
-  spinReloadButton: boolean;
-  setClickReloadNoti: React.Dispatch<React.SetStateAction<boolean>>;
+  spinReloadButton: boolean | undefined;
+  setClickReloadNoti: React.Dispatch<React.SetStateAction<boolean>> | undefined;
 }
 
 function ReloadNotiButton({
@@ -77,7 +77,7 @@ function ReloadNotiButton({
       className={
         spinReloadButton ? styles.spinReloadButton : styles.reloadButton
       }
-      onClick={() => setClickReloadNoti(true)}
+      onClick={() => setClickReloadNoti?.(true)}
     >
       &#8635;
     </button>
@@ -92,7 +92,6 @@ function DeleteAllButton() {
     try {
       await instance.delete(`/pingpong/notifications`);
       alert('알림이 성공적으로 삭제되었습니다.');
-      // resetOpenNotiBar();
       HeaderState?.resetOpenNotiBarState();
     } catch (e) {
       setError('JB05');
