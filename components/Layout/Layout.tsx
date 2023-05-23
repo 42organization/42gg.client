@@ -121,7 +121,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 {presentPath !== '/match' && presentPath !== '/manual' && (
                   <Link href='/match'>
                     <div className={styles.buttonContainer}>
-                      <a className={styles.matchingButton}>🏓</a>
+                      <div className={styles.matchingButton}>🏓</div>
                     </div>
                   </Link>
                 )}

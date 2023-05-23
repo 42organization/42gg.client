@@ -5,9 +5,10 @@ const nextConfig = {
     BASE_URL: process.env.BASE_URL,
   },
   images: {
-    domains: ['cdn.intra.42.fr'],
-    loader: 'akamai',
-    path: '',
+    domains: [
+      '42gg-public-test-image.s3.ap-northeast-2.amazonaws.com',
+      '42gg-public-image.s3.ap-northeast-2.amazonaws.com',
+    ],
   },
   eslint: {
     ignoreDuringBuilds: true,
