@@ -4,6 +4,14 @@ import { errorState } from 'utils/recoil/error';
 import { AfterGame, TeamScore } from 'types/scoreTypes';
 import { instance } from 'utils/axios';
 
+type rankRequest = {
+  gameId: number;
+  myTeamId: number;
+  myTeamScore: number | '';
+  enemyTeamId: number;
+  enemyTeamScore: number | '';
+};
+
 const useSubmitModal = (currentGame: AfterGame) => {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
@@ -15,7 +23,14 @@ const useSubmitModal = (currentGame: AfterGame) => {
 
   const submitRankHandler = async (result: TeamScore) => {
     try {
-      const res = await instance.post(`/pingpong/games/result/rank`, result);
+      const requestBody: rankRequest = {
+        gameId: currentGame.gameId,
+        myTeamId: currentGame.matchTeamsInfo.myTeam.teamId,
+        myTeamScore: result.myTeamScore,
+        enemyTeamId: currentGame.matchTeamsInfo.enemyTeam.teamId,
+        enemyTeamScore: result.enemyTeamScore,
+      };
+      const res = await instance.post(`/pingpong/games/rank`, requestBody);
       alert(rankResponse[`${res?.status}`]);
       await instance.put(`/pingpong/match/current`);
     } catch (e) {
