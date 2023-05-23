@@ -73,8 +73,6 @@ export default function AdminProfileModal(props: { intraId: string }) {
   const submitHandler = async () => {
     const formData = new FormData();
     const data = {
-      userId: userInfo.userId,
-      intraId: props.intraId,
       statusMessage: userInfo.statusMessage,
       racketType: userInfo.racketType,
       wins: userInfo.wins,
@@ -97,7 +95,7 @@ export default function AdminProfileModal(props: { intraId: string }) {
     }
     try {
       const res = await instanceInManage.put(
-        `/users/${props.intraId}/detail`,
+        `/users/${props.intraId}`,
         formData
       );
       if (res.status === 207) {
