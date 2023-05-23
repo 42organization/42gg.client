@@ -3,16 +3,14 @@ branch_name=$(git symbolic-ref --short HEAD)
 
 commit_msg_title=$(head -n 1 $1)
 commit_msg_body=$(tail -n +2 $1)
-issue_number=$(echo $branch_name | sed -n 's/^.*#\([0-9]*\)$/\1/p')
-issue_number_in_msg=$(grep -c "\#$issue_number" $1)
+contains_ggfe=$(echo $branch_name | grep -c "GGFE")
 
-if [[ -n $issue_number ]] && [[ ! $issue_number_in_msg -ge 1 ]]; then
-    # echo "$commit_msg #$issue_number" > $1
-		echo "$commit_msg_title #$issue_number" > $1
-		if [[ -n $commit_msg_body ]]; then
-			echo "$commit_msg_body" >> $1
-		fi
+if [[ -n $branch_name ]] && [[ $contains_ggfe -eq 1 ]]; then
+    echo "[Chores] $commit_msg_title" > $1
+    if [[ -n $commit_msg_body ]]; then
+        echo "$commit_msg_body" >> $1
+    fi
 else
-		echo "check issue number in branch name"
-		exit 1
+    echo "Please check the branch name to ensure it contains 'GGFE'."
+    exit 1
 fi
