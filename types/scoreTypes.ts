@@ -11,10 +11,12 @@ export interface TeamScore {
 export interface Player {
   intraId: string;
   userImageUri: string;
+  level: number;
 }
 export interface Team {
   teamScore: number;
-  teams: Player[];
+  teamId: number;
+  players: Player[];
 }
 
 export interface Players {

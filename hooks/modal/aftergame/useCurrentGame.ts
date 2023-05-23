@@ -14,8 +14,8 @@ const useCurrentGame = () => {
     startTime: '2022-07-13 11:50',
     isScoreExist: false,
     matchTeamsInfo: {
-      myTeam: { teamScore: 0, teams: [] },
-      enemyTeam: { teamScore: 0, teams: [] },
+      myTeam: { teamScore: 0, teamId: 0, players: [] },
+      enemyTeam: { teamScore: 0, teamId: 0, players: [] },
     },
   });
 
