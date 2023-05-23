@@ -75,7 +75,7 @@ export default function UserManagementTable() {
       setUserManagements({
         userInfoList: res.data.userSearchAdminDtos,
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS06');
@@ -85,12 +85,12 @@ export default function UserManagementTable() {
   const getUserInfo = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/users?q=${intraId}&page=${currentPage}`
+        `/users?intraId=${intraId}&page=${currentPage}`
       );
       setUserManagements({
         userInfoList: res.data.userSearchAdminDtos,
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS05');
