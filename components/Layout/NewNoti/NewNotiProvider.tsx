@@ -1,9 +1,8 @@
 import { Dispatch, SetStateAction, createContext } from 'react';
 import { useState, useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { Noti } from 'types/notiTypes';
-import { errorState } from 'utils/recoil/error';
-import instance from 'utils/axios';
+import useReloadHandler from 'hooks/useReloadHandler';
+import useAxiosGet from 'hooks/useAxiosGet';
 import { NotiCloseButton, NotiMain } from './NewNotiElements';
 
 export interface NewNotiContextState {
@@ -11,7 +10,6 @@ export interface NewNotiContextState {
   spinReloadButton: boolean;
   clickReloadNoti: boolean;
   setClickReloadNoti: Dispatch<SetStateAction<boolean>>;
-  getNotiHandler: () => Promise<void>;
 }
 
 export const NewNotiContext = createContext<NewNotiContextState | null>(null);
@@ -24,30 +22,31 @@ const NewNotiStateContext = (props: NewNotiStateContextProps) => {
   const [noti, setNoti] = useState<Noti[]>([]);
   const [clickReloadNoti, setClickReloadNoti] = useState(false);
   const [spinReloadButton, setSpinReloadButton] = useState(false);
-  const setError = useSetRecoilState(errorState);
 
-  const getNotiHandler = async () => {
-    if (clickReloadNoti) {
-      setSpinReloadButton(true);
-      setTimeout(() => {
-        setSpinReloadButton(false);
-      }, 1000);
-    }
-    try {
-      const res = await instance.get(`/pingpong/notifications`);
-      setNoti(res?.data.notifications);
-      setClickReloadNoti(false);
-    } catch (e) {
-      setError('JB04');
-    }
-  };
+  const getNotiHandler = useAxiosGet({
+    url: '/pingpong/notifications',
+    setState: (data) => {
+      setNoti(data.notifications);
+    },
+    err: 'JB04',
+    type: 'setError',
+  });
+
+  const reloadNotiHandler = useReloadHandler({
+    setSpinReloadButton: setSpinReloadButton,
+    setState: setClickReloadNoti,
+    state: false,
+  });
 
   useEffect(() => {
     getNotiHandler();
   }, []);
 
   useEffect(() => {
-    if (clickReloadNoti) getNotiHandler();
+    if (clickReloadNoti) {
+      reloadNotiHandler();
+      getNotiHandler();
+    }
   }, [clickReloadNoti]);
 
   const NewNotiState: NewNotiContextState = {
@@ -55,7 +54,6 @@ const NewNotiStateContext = (props: NewNotiStateContextProps) => {
     spinReloadButton: spinReloadButton,
     clickReloadNoti: clickReloadNoti,
     setClickReloadNoti: setClickReloadNoti,
-    getNotiHandler: getNotiHandler,
   };
 
   return (
