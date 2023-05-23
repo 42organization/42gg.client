@@ -56,7 +56,7 @@ export default function FeedbackTable() {
   const getUserFeedbacks = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/feedback/users?q=${intraId}&page=${currentPage}&size=10`
+        `/feedback?intraId=${intraId}&page=${currentPage}&size=10`
       );
       setIntraId(intraId);
       setFeedbackInfo({
@@ -70,7 +70,7 @@ export default function FeedbackTable() {
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS04');
@@ -93,7 +93,7 @@ export default function FeedbackTable() {
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS03');
