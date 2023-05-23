@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import instance from 'utils/axios';
+import { instance, instanceInManage } from 'utils/axios';
 import SlotCurrent from './SlotCurrent';
 import SlotPreview from './SlotPreview';
 import { toastState } from 'utils/recoil/toast';
@@ -28,7 +28,7 @@ export default function SlotMain() {
   const currentHour = new Date().getHours();
   const initScheduleInfo = async () => {
     try {
-      const res = await instance.get(`/pingpong/admin/slot`); //ToDo: api 명세 나오면 바꾸기
+      const res = await instanceInManage.get(`/slot`); //ToDo: api 명세 나오면 바꾸기
       setScheduleInfo(res?.data);
     } catch (e) {
       console.error('SW00');
@@ -110,7 +110,7 @@ export default function SlotMain() {
       return;
     }
     try {
-      await instance.put(`/pingpong/admin/slot`, scheduleInfo);
+      await instanceInManage.put(`/slot`, scheduleInfo);
       initSlotInfo();
     } catch (e) {
       console.error('SW02');

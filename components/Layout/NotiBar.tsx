@@ -2,7 +2,7 @@ import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import { Noti } from 'types/notiTypes';
 import { openNotiBarState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 import NotiItem from './NotiItem';
 import styles from 'styles/Layout/NotiBar.module.scss';
 import { useContext } from 'react';

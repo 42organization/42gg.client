@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { profileState } from 'utils/recoil/user';
 import { errorState } from 'utils/recoil/error';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 
 interface UseBasicProfileProps {
   profileId: string;

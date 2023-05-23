@@ -13,7 +13,7 @@ import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import CreateNotiButton from 'components/admin/notification/CreateNotiButton';
 import styles from 'styles/admin/notification/NotificationTable.module.scss';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import { getFormattedDateToString } from 'utils/handleTime';
 import { useRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
@@ -59,8 +59,8 @@ export default function NotificationTable() {
 
   const getUserNotifications = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `pingpong/admin/notifications?q=${intraId}&page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/notifications?q=${intraId}&page=${currentPage}&size=10`
       );
       setIntraId(intraId);
       setNotificationInfo({
@@ -88,8 +88,8 @@ export default function NotificationTable() {
 
   const getAllUserNotifications = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `pingpong/admin/notifications?page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/notifications?page=${currentPage}&size=10`
       );
       setIntraId('');
       setNotificationInfo({

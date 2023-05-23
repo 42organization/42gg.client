@@ -20,9 +20,7 @@ export default function xSection({ path }: SectionProps) {
 
   return (
     <div className={styles.sectionWrap}>
-      <Link href={`/${path}`}>
-        <a>더보기 &#9657;</a>
-      </Link>
+      <Link href={`/${path}`}>더보기 &#9657;</Link>
       <section>{pathCheck[path]}</section>
     </div>
   );

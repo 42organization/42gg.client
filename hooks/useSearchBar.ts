@@ -1,6 +1,6 @@
 import { RefObject, SetStateAction, useEffect, useRef, useState } from 'react';
 import { errorState } from 'utils/recoil/error';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 import { useSetRecoilState } from 'recoil';
 import { Dispatch } from 'react';
 import { useCallback } from 'react';

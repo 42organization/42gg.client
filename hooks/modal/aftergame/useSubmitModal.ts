@@ -2,7 +2,7 @@ import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import { AfterGame, TeamScore } from 'types/scoreTypes';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 
 const useSubmitModal = (currentGame: AfterGame) => {
   const setError = useSetRecoilState(errorState);

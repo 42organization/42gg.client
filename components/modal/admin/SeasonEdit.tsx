@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { ISeason } from 'types/modalTypes';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/SeasonEdit.module.scss';
@@ -35,7 +35,7 @@ const AdminSeasonEdit = ({
 
   const editHandler = async () => {
     try {
-      await instance.put(`/pingpong/admin/season/${seasonId}`, seasonInfo);
+      await instanceInManage.put(`/season/${seasonId}`, seasonInfo);
       setSnackBar({
         toastName: 'Season Edit',
         severity: 'success',

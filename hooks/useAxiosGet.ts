@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { SetterOrUpdater, useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 import { Noti } from 'types/notiTypes';
 import { CurrentMatch, Match } from 'types/matchTypes';
 import { SeasonList } from 'types/seasonTypes';

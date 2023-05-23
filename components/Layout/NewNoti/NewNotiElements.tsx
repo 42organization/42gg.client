@@ -3,7 +3,7 @@ import { HeaderContextState, HeaderContext } from '../HeaderContext';
 import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import styles from 'styles/Layout/NotiBar.module.scss';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 import { NewNotiContext, NewNotiContextState } from './NewNotiProvider';
 import { Noti } from 'types/notiTypes';
 import NotiItem from '../NotiItem';

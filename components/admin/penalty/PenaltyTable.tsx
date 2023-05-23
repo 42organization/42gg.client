@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import styles from 'styles/admin/penalty/PenaltyTable.module.scss';
@@ -56,8 +56,8 @@ export default function PenaltyTable() {
 
   const getUserPenalty = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `pingpong/admin/penalty/users?q=${intraId}&page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/penalty/users?q=${intraId}&page=${currentPage}&size=10`
       );
       setIntraId(intraId);
       setPenaltyInfo({
@@ -80,8 +80,8 @@ export default function PenaltyTable() {
 
   const getAllUserPenalty = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `pingpong/admin/penalty/users?page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/penalty/users?page=${currentPage}&size=10`
       );
       setIntraId('');
       setPenaltyInfo({

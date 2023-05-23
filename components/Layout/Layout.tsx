@@ -10,7 +10,6 @@ import CurrentMatch from './CurrentMatch';
 import AdminLayout from '../admin/Layout';
 import AdminReject from '../admin/AdminReject';
 import styles from 'styles/Layout/Layout.module.scss';
-import useAxiosWithToast from 'hooks/useAxiosWithToast';
 
 import useAnnouncementCheck from 'hooks/Layout/useAnnouncementCheck';
 import useSetAfterGameModal from 'hooks/Layout/useSetAfterGameModal';
@@ -27,7 +26,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
   const presentPath = useRouter().asPath;
 
-  useAxiosWithToast();
   useGetUserSeason();
   useSetAfterGameModal();
   useLiveCheck(presentPath);
@@ -55,7 +53,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 {presentPath !== '/match' && presentPath !== '/manual' && (
                   <Link href='/match'>
                     <div className={styles.buttonContainer}>
-                      <a className={styles.matchingButton}>🏓</a>
+                      <div className={styles.matchingButton}>🏓</div>
                     </div>
                   </Link>
                 )}

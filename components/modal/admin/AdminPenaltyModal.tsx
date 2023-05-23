@@ -4,7 +4,7 @@ import { PenaltyInfo } from 'types/admin/adminPenaltyTypes';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { fillZero } from 'utils/handleTime';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import styles from 'styles/admin/modal/AdminPenalty.module.scss';
 
 export default function AdminPenaltyModal(props: { value: string }) {
@@ -70,13 +70,10 @@ export default function AdminPenaltyModal(props: { value: string }) {
       return;
     }
     try {
-      const res = await instance.post(
-        `pingpong/admin/users/${props.value}/penalty`,
-        {
-          reason,
-          penaltyTime,
-        }
-      );
+      const res = await instanceInManage.post(`/users/${props.value}/penalty`, {
+        reason,
+        penaltyTime,
+      });
       if (res.status === 403) {
         setSnackBar({
           toastName: 'penalty',
