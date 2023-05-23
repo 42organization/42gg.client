@@ -1,11 +1,7 @@
 import Image from 'next/legacy/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import {
-  AdminProfileProps,
-  roleTypes,
-  UserInfo,
-} from 'types/admin/adminUserTypes';
+import { roleTypes, UserInfo } from 'types/admin/adminUserTypes';
 import { racketTypes } from 'types/userTypes';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
@@ -15,8 +11,9 @@ import styles from 'styles/admin/modal/AdminProfile.module.scss';
 
 const STAT_MSG_LIMIT = 30;
 
-export default function AdminProfileModal(props: AdminProfileProps) {
+export default function AdminProfileModal(props: { intraId: string }) {
   const [userInfo, setUserInfo] = useState<UserInfo>({
+    userId: 0,
     intraId: '',
     userImageUri: null,
     statusMessage: '',
@@ -38,7 +35,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
 
   const getBasicProfileHandler = async () => {
     try {
-      const res = await instanceInManage.get(`/users/${props.value}/detail`);
+      const res = await instanceInManage.get(`/users/${props.intraId}`);
       setUserInfo(res?.data);
     } catch (e) {
       setSnackBar({
@@ -76,8 +73,8 @@ export default function AdminProfileModal(props: AdminProfileProps) {
   const submitHandler = async () => {
     const formData = new FormData();
     const data = {
-      userId: props.value,
-      intraId: userInfo.intraId,
+      userId: userInfo.userId,
+      intraId: props.intraId,
       statusMessage: userInfo.statusMessage,
       racketType: userInfo.racketType,
       wins: userInfo.wins,
@@ -100,7 +97,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
     }
     try {
       const res = await instanceInManage.put(
-        `/users/${props.value}/detail`,
+        `/users/${props.intraId}/detail`,
         formData
       );
       if (res.status === 207) {

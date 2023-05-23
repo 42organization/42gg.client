@@ -1,4 +1,5 @@
 export type UserInfo = {
+  userId: number;
   intraId: string;
   userImageUri: string | null;
   racketType: string;
@@ -8,10 +9,6 @@ export type UserInfo = {
   ppp: number | '';
   email: string;
   roleType: string;
-};
-
-export type AdminProfileProps = {
-  value: number;
 };
 
 export const roleTypes = [
