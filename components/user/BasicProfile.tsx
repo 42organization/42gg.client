@@ -4,7 +4,7 @@ import { profileState } from 'utils/recoil/user';
 import { userState } from 'utils/recoil/layout';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/user/Profile.module.scss';
 

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';

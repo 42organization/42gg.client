@@ -1,7 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { IFeedback } from 'components/admin/feedback/FeedbackTable';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import { IoSend } from 'react-icons/io5';
 import styles from 'styles/admin/modal/AdminFeedbackCheck.module.scss';
 
@@ -14,10 +14,10 @@ export default function AdminFeedbackCheck({
 
   const sendNotificationHandler = async (isSend: boolean) => {
     try {
-      await instance.put(`pingpong/admin/feedback/is-solved`, {
+      await instanceInManage.put(`/feedback/is-solved`, {
         feedbackId: id,
       });
-      await instance.post(`pingpong/admin/notifications/${intraId}`, {
+      await instanceInManage.post(`/notifications/${intraId}`, {
         intraId,
         message: isSolved
           ? '피드백을 검토중입니다.'

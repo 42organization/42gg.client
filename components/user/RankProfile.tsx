@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { ProfileRank } from 'types/userTypes';
 import { errorState } from 'utils/recoil/error';
-import instance from 'utils/axios';
+import { instance } from 'utils/axios';
 import ProfileChart from 'components/user/ProfileChart';
 import ProfileModeWrap from 'components/mode/modeWraps/ProfileModeWrap';
 import styles from 'styles/user/Profile.module.scss';

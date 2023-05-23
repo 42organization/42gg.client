@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
@@ -9,7 +9,7 @@ import {
 import { racketTypes } from 'types/userTypes';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminProfile.module.scss';
 
@@ -38,9 +38,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
 
   const getBasicProfileHandler = async () => {
     try {
-      const res = await instance.get(
-        `/pingpong/admin/users/${props.value}/detail`
-      );
+      const res = await instanceInManage.get(`/users/${props.value}/detail`);
       setUserInfo(res?.data);
     } catch (e) {
       setSnackBar({
@@ -101,8 +99,8 @@ export default function AdminProfileModal(props: AdminProfileProps) {
       );
     }
     try {
-      const res = await instance.put(
-        `/pingpong/admin/users/${props.value}/detail`,
+      const res = await instanceInManage.put(
+        `/users/${props.value}/detail`,
         formData
       );
       if (res.status === 207) {

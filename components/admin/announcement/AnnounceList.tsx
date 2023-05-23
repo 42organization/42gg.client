@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import PageNation from 'components/Pagination';
 import { tableFormat } from 'constants/admin/table';
 import { QUILL_FORMATS } from 'types/quillTypes';
@@ -56,8 +56,8 @@ export default function AnnounceList() {
 
   const getAnnouncements = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `pingpong/admin/announcement?page=${currentPage}&size=5`
+      const res = await instanceInManage.get(
+        `/announcement?page=${currentPage}&size=5`
       );
       setAnnouncementInfo({ ...res.data });
     } catch (e) {

@@ -23,7 +23,7 @@ export default function GameResult({ mode, season }: GameResultProps) {
     }
     const userQuery = intraId ? `/users/${intraId}` : '';
     const seasonQuery = mode === 'rank' && `season=${season}`;
-    const modeQuery = mode !== 'both' && `mode=${mode}`;
+    const modeQuery = mode && mode !== 'both' ? `mode=${mode}` : '';
     const countQuery = router.pathname === '/users/detail' && `count=${5}`;
     const query = [modeQuery, seasonQuery, countQuery, 'gameId=']
       .filter((item) => item)
