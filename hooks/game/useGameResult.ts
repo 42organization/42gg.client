@@ -4,10 +4,10 @@ import { SeasonMode } from 'types/mainType';
 
 interface GameResultProps {
   mode?: SeasonMode;
-  seasonId?: number;
+  season?: number;
 }
 
-const useGameResult = ({ mode, seasonId }: GameResultProps) => {
+const useGameResult = ({ mode, season }: GameResultProps) => {
   const [path, setPath] = useState('');
   const router = useRouter();
   const asPath = router.asPath;
@@ -21,10 +21,11 @@ const useGameResult = ({ mode, seasonId }: GameResultProps) => {
         setPath(`${basePath}?page=${0}&size=${3}&status=${'LIVE'}`);
         return;
       }
-      const modePath = mode === 'both' ? '/' : `/${mode}`;
+      const modePath = mode === 'both' ? '' : `/${mode}`;
       const userQuery = intraId && `intraId=${intraId}`;
-      const seasonQuery = mode === 'rank' && `season=${seasonId}`;
-      const sizeQuery = router.pathname === '/users/detail' && `size=${5}`;
+      const seasonQuery = mode === 'rank' && `season=${season}`;
+      const sizeQuery =
+        router.pathname === '/users/detail' ? `size=${5}` : `size=${10}`;
       const query = [userQuery, seasonQuery, sizeQuery]
         .filter((item) => item)
         .join('&');
@@ -32,7 +33,7 @@ const useGameResult = ({ mode, seasonId }: GameResultProps) => {
       return;
     };
     makePath();
-  }, [asPath, intraId, mode, seasonId]);
+  }, [asPath, intraId, mode, season]);
 
   return path;
 };
