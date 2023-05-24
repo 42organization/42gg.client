@@ -59,8 +59,7 @@ export default function AnnounceList() {
       const res = await instanceInManage.get(
         `/announcement?page=${currentPage}&size=5`
       );
-      setAnnouncementInfo({ ...res.data });
-      setAnnouncementInfo({ currentPage: currentPage });
+      setAnnouncementInfo({ ...res.data, currentPage: currentPage });
     } catch (e) {
       console.error('MS01');
     }
