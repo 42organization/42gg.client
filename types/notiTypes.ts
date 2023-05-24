@@ -2,6 +2,14 @@ export interface NotiList {
   noti: Noti[];
 }
 
+export interface Noti {
+  id: number;
+  type: string;
+  isChecked: boolean;
+  message: string;
+  createdAt: string;
+}
+
 // export interface Noti {
 //   id: number;
 //   type: string;
@@ -12,10 +20,3 @@ export interface NotiList {
 //   enemyTeam?: string[];
 //   createdAt: string;
 // }
-export interface Noti {
-  id: number;
-  type: string;
-  isChecked: boolean;
-  message: string;
-  createdAt: Date;
-}
