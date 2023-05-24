@@ -31,10 +31,14 @@ type ModalName =
   | `FIXED-${FixedModal}`
   | `ADMIN-${AdminModal}`;
 export interface Cancel {
+  startTime: Date;
   isMatched: boolean;
-  slotId: number;
-  time: string;
 }
+// export interface Cancel {
+//   isMatched: boolean;
+//   slotId: number;
+//   time: string;
+// }
 
 export interface Enroll {
   slotId: number;
