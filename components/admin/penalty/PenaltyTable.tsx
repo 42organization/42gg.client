@@ -72,7 +72,7 @@ export default function PenaltyTable() {
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS07');
@@ -96,7 +96,7 @@ export default function PenaltyTable() {
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS08');
