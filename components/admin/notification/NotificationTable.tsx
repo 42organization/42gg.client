@@ -74,7 +74,7 @@ export default function NotificationTable() {
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS00');
@@ -103,7 +103,7 @@ export default function NotificationTable() {
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS01');
