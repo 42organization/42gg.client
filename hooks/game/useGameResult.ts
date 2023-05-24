@@ -4,34 +4,35 @@ import { SeasonMode } from 'types/mainType';
 
 interface GameResultProps {
   mode?: SeasonMode;
-  season?: number;
+  seasonId?: number;
 }
 
-const useGameResult = ({ mode, season }: GameResultProps) => {
+const useGameResult = ({ mode, seasonId }: GameResultProps) => {
   const [path, setPath] = useState('');
   const router = useRouter();
   const asPath = router.asPath;
   const intraId = router.query.intraId;
 
-  const makePath = () => {
-    if (asPath === '/' || asPath.includes('token')) {
-      setPath(`/pingpong/games?count=${3}&status=${'live'}&gameId=`);
-      return;
-    }
-    const userQuery = intraId ? `/users/${intraId}` : '';
-    const seasonQuery = mode === 'rank' && `season=${season}`;
-    const modeQuery = mode !== 'both' && `mode=${mode}`;
-    const countQuery = router.pathname === '/users/detail' && `count=${5}`;
-    const query = [modeQuery, seasonQuery, countQuery, 'gameId=']
-      .filter((item) => item)
-      .join('&');
-    setPath(`/pingpong/games${userQuery}?${query}`);
-    return;
-  };
-
   useEffect(() => {
+    const makePath = () => {
+      const basePath = '/pingpong/games';
+      if (asPath === '/' || asPath.includes('token')) {
+        // live 상태 포함 최근 3개의 게임만 가져온다.
+        setPath(`${basePath}?page=${0}&size=${3}&status=${'LIVE'}`);
+        return;
+      }
+      const modePath = mode === 'both' ? '/' : `/${mode}`;
+      const userQuery = intraId && `intraId=${intraId}`;
+      const seasonQuery = mode === 'rank' && `season=${seasonId}`;
+      const sizeQuery = router.pathname === '/users/detail' && `size=${5}`;
+      const query = [userQuery, seasonQuery, sizeQuery]
+        .filter((item) => item)
+        .join('&');
+      setPath(`${basePath}${modePath}?${query}`);
+      return;
+    };
     makePath();
-  }, [asPath, intraId, mode, season]);
+  }, [asPath, intraId, mode, seasonId]);
 
   return path;
 };
