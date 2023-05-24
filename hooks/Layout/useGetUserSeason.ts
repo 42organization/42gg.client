@@ -18,8 +18,10 @@ const useGetUserSeason = () => {
   });
 
   const getSeasonListHandler = useAxiosGet({
-    url: '/pingpong/seasonlist',
-    setState: setSeasonList,
+    url: '/pingpong/season',
+    setState: (data) => {
+      setSeasonList(data.seasonlist);
+    },
     err: 'DK02',
     type: 'setError',
   });
