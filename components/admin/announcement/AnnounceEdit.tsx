@@ -38,7 +38,6 @@ export default function AnnounceEdit() {
       await instanceInManage.post(`/announcement`, {
         content,
         creatorIntraId: currentUserId,
-        createdTime: new Date(new Date().getTime() + koreaTimeOffset),
       });
       setSnackbar({
         toastName: `post request`,
