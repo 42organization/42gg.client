@@ -22,7 +22,7 @@ const tableTitle: { [key: string]: string } = {
   intraId: 'intra ID',
   category: '종류',
   content: '내용',
-  createdTime: '생성일',
+  createdAt: '생성일',
   isSolved: '해결 여부',
 };
 
@@ -31,7 +31,7 @@ export interface IFeedback {
   intraId: string;
   category: number; // 1: bug, 2: suggestion, 3: question
   content: string;
-  createdTime: Date;
+  createdAt: Date;
   isSolved: boolean;
 }
 
@@ -62,11 +62,11 @@ export default function FeedbackTable() {
       setFeedbackInfo({
         feedbackList: res.data.feedbackList.map((feedback: IFeedback) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(feedback.createdTime)
+            new Date(feedback.createdAt)
           );
           return {
             ...feedback,
-            createdTime: `${year}-${month}-${date} ${hour}:${min}`,
+            createdAt: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
         totalPage: res.data.totalPage,
@@ -85,11 +85,11 @@ export default function FeedbackTable() {
       setFeedbackInfo({
         feedbackList: res.data.feedbackList.map((feedback: IFeedback) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(feedback.createdTime)
+            new Date(feedback.createdAt)
           );
           return {
             ...feedback,
-            createdTime: `${year}-${month}-${date} ${hour}:${min}`,
+            createdAt: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
         totalPage: res.data.totalPage,
