@@ -17,14 +17,13 @@ export default function NotiItem({ data }: NotiItemProps) {
     type: string,
     message: string
   ): [string[], string] => {
-    const charIdx = [];
     const enemyId = [];
     let enemyMessage = '';
     if (type === 'imminent') {
-      charIdx.push(message.indexOf('<'));
-      charIdx.push(message.indexOf('>'));
-      enemyId.push(message.slice(charIdx[0] + 9, charIdx[1]));
-      enemyMessage = message.slice(charIdx[1] + 1);
+      enemyId.push(
+        message.slice(message.indexOf('<') + 9, message.indexOf('>'))
+      );
+      enemyMessage = message.slice(message.indexOf('>') + 1);
     }
     return [enemyId, enemyMessage];
   };
