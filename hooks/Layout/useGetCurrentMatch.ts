@@ -12,7 +12,7 @@ const useGetCurrentMatch = () => {
   const presentPath: string = useRouter().asPath;
 
   const getCurrentMatchHandler = useAxiosGet({
-    url: '/pingpong/match/current',
+    url: '/pingpong/match',
     setState: setCurrentMatch,
     err: 'JB01',
     type: 'setError',
