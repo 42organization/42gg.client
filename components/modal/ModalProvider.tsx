@@ -54,7 +54,7 @@ export default function ModalProvider() {
     'FIXED-AFTER_GAME': <AfterGameModal />,
     'FIXED-STAT': <StatChangeModal {...exp} />,
     'ADMIN-PROFILE': userId ? <AdminProfileModal value={userId} /> : null,
-    'ADMIN-PENALTY': intraId ? <AdminPenaltyModal value={intraId} /> : null,
+    'ADMIN-PENALTY': intraId ? <AdminPenaltyModal intraId={intraId} /> : null,
     'ADMIN-PENALTY_DELETE': intraId ? (
       <DeletePenaltyModal intraId={intraId} />
     ) : null,
