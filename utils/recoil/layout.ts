@@ -17,6 +17,7 @@ export const liveState = atom<Live>({
     notiCount: 0,
     event: null,
     currentMatchMode: null,
+    gameId: null,
   },
 });
 

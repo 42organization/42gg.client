@@ -11,4 +11,5 @@ export interface Live {
   notiCount: number;
   event: 'match' | 'game' | null;
   currentMatchMode: MatchMode | null;
+  gameId: number | null;
 }
