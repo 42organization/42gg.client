@@ -82,16 +82,13 @@ export default function AdminProfileModal(props: { intraId: string }) {
       roleType: userInfo.roleType,
     };
     formData.append(
-      'updateRequestDto',
+      'updateUserInfo',
       new Blob([JSON.stringify(data)], {
         type: 'application/json',
       })
     );
     if (imgData) {
-      formData.append(
-        'multipartFile',
-        new Blob([imgData], { type: 'image/jpeg' })
-      );
+      formData.append('imgData', new Blob([imgData], { type: 'image/jpeg' }));
     }
     try {
       const res = await instanceInManage.put(
