@@ -29,6 +29,21 @@ const useGetReloadMatchHandler = ({
     err: 'SJ01',
     type: 'setError',
   });
+  // const useGetReloadMatchHandler = ({
+  //   setMatch,
+  //   setSpinReloadButton,
+  //   type,
+  //   toggleMode,
+  // }: useGetReloadMatchHandlerProps): (() => void) => {
+  //   const [reloadMatch, setReloadMatch] =
+  //     useRecoilState<boolean>(reloadMatchState);
+
+  //   const getMatchHandler = useAxiosGet({
+  //     url: `/pingpong/match/tables/${1}/${toggleMode}/${type}`,
+  //     setState: setMatch,
+  //     err: 'SJ01',
+  //     type: 'setError',
+  //   });
 
   const reloadMatchHandler = useReloadHandler({
     setSpinReloadButton: setSpinReloadButton,

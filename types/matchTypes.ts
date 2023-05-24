@@ -1,13 +1,12 @@
 export interface Slot {
-  slotId: number;
-  status: string;
-  headCount: number;
-  time: string;
+  startTime: string;
   endTime: string;
-  mode: string;
+  status: string;
 }
 
-export type Slots = Slot[];
+export interface Match {
+  matchBoards: Slot[];
+}
 
 export interface CurrentMatch {
   startTime: string;
@@ -18,9 +17,6 @@ export interface CurrentMatch {
   isImminent: boolean;
 }
 
-export interface Match {
-  matchBoards: Slots[];
-}
 // export interface Slot {
 //   slotId: number;
 //   status: string;
