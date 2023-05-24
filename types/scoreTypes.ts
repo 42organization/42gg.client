@@ -11,10 +11,12 @@ export interface TeamScore {
 export interface Player {
   intraId: string;
   userImageUri: string;
+  level: number;
 }
 export interface Team {
   teamScore: number;
-  teams: Player[];
+  teamId: number;
+  players: Player[];
 }
 
 export interface Players {
@@ -22,10 +24,11 @@ export interface Players {
   enemyTeam: Team;
 }
 
-export interface AfterGame {
+export type AfterGame = {
+  mode: Uppercase<MatchMode> | null;
   gameId: number;
-  mode: MatchMode | null;
   startTime: string;
   isScoreExist: boolean;
+  status: 'LIVE' | 'WAIT' | 'END';
   matchTeamsInfo: Players;
-}
+};

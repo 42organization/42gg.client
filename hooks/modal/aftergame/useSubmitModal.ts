@@ -3,6 +3,7 @@ import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import { AfterGame, TeamScore } from 'types/scoreTypes';
 import { instance } from 'utils/axios';
+import { MatchMode } from 'types/mainType';
 
 const useSubmitModal = (currentGame: AfterGame) => {
   const setError = useSetRecoilState(errorState);
@@ -51,7 +52,9 @@ const useSubmitModal = (currentGame: AfterGame) => {
       modalName: 'FIXED-STAT',
       exp: {
         gameId: currentGame.gameId,
-        mode: currentGame.mode,
+        mode: currentGame.mode?.toLowerCase() as Lowercase<
+          Uppercase<MatchMode>
+        >,
       },
     });
   };
