@@ -31,7 +31,7 @@ type ModalName =
   | `FIXED-${FixedModal}`
   | `ADMIN-${AdminModal}`;
 export interface Cancel {
-  startTime: Date;
+  startTime: string;
   isMatched: boolean;
 }
 // export interface Cancel {

@@ -125,9 +125,3 @@ export const getFormattedDateToString = (
     d.getMinutes() < 10 ? `0${d.getMinutes()}` : d.getMinutes().toString();
   return { year, month, date, hour, min };
 };
-
-export const getFormattedDateToPattern = (d: Date): string => {
-  const dateToString = getFormattedDateToString(d);
-
-  return `${dateToString.year}-${dateToString.month}-${dateToString.date}T${dateToString.hour}-${dateToString.min}`;
-};

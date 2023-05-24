@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Cancel } from 'types/modalTypes';
 import { instance } from 'utils/axios';
-import { getFormattedDateToPattern } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';
 import {
   currentMatchState,
@@ -20,8 +19,6 @@ const useMatchCancelModal = ({ startTime, isMatched }: Cancel) => {
   const cancelLimitTime = currentMatch.isImminent;
   const rejectCancel = cancelLimitTime && isMatched;
   const contentType: 'reject' | 'cancel' = rejectCancel ? 'reject' : 'cancel';
-
-  const dateToPattern = getFormattedDateToPattern(startTime);
 
   const content = {
     cancel: {
@@ -47,7 +44,7 @@ const useMatchCancelModal = ({ startTime, isMatched }: Cancel) => {
 
   const onCancel = async () => {
     try {
-      await instance.delete(`/pingpong/match?/startTime=${dateToPattern}`);
+      await instance.delete(`/pingpong/match?/startTime=${startTime}`);
       alert(cancelResponse.SUCCESS);
     } catch (e: any) {
       if (e.response.data.code in cancelResponse)

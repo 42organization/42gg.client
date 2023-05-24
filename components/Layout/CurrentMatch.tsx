@@ -90,7 +90,7 @@ export default function CurrentMatch() {
 //   );
 // }
 
-function makeMessage(time: Date, isMatched: boolean) {
+function makeMessage(time: string, isMatched: boolean) {
   const formattedTime = gameTimeToString(time);
   return (
     <div className={styles.message}>
