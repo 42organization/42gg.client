@@ -128,8 +128,10 @@ export default function NotificationTable() {
       <div className={styles.notificationWrap}>
         <div className={styles.header}>
           <span className={styles.title}>알림 관리</span>
-          <AdminSearchBar initSearch={initSearch} />
-          <CreateNotiButton />
+          <div className={styles.searchWrap}>
+            <AdminSearchBar initSearch={initSearch} />
+            <CreateNotiButton />
+          </div>
         </div>
         <TableContainer className={styles.tableContainer} component={Paper}>
           <Table className={styles.table} aria-label='customized table'>
