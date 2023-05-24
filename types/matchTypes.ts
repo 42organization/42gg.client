@@ -8,7 +8,9 @@ export interface Slot {
 }
 
 export type Slots = Slot[];
-
+export interface Match {
+  matchBoards: Slots[];
+}
 export interface CurrentMatch {
   startTime: string;
   endTime: string;
@@ -18,9 +20,8 @@ export interface CurrentMatch {
   isImminent: boolean;
 }
 
-export interface Match {
-  matchBoards: Slots[];
-}
+export type CurrentMatchList = CurrentMatch[];
+
 // export interface Slot {
 //   slotId: number;
 //   status: string;

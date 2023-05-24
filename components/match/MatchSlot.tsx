@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
-import { MatchMode } from 'types/mainType';
-import { Slot } from 'types/matchTypes';
+import { Live, MatchMode } from 'types/mainType';
+import { CurrentMatchList, Slot } from 'types/matchTypes';
 import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { fillZero } from 'utils/handleTime';
 import { currentMatchState } from 'utils/recoil/match';
 import styles from 'styles/match/MatchSlot.module.scss';
+import { Modal } from 'types/modalTypes';
 
 interface MatchSlotProps {
   type: string;
@@ -15,9 +16,9 @@ interface MatchSlotProps {
 }
 
 function MatchSlot({ type, slot, toggleMode }: MatchSlotProps) {
-  const setModal = useSetRecoilState(modalState);
-  const [currentMatch] = useRecoilState(currentMatchState);
-  const { event } = useRecoilValue(liveState);
+  const setModal = useSetRecoilState<Modal>(modalState);
+  const myMatchList = useRecoilValue<CurrentMatchList>(currentMatchState);
+  const { event } = useRecoilValue<Live>(liveState);
   const { headCount, slotId, status, time, endTime, mode } = slot;
   const headMax = type === 'single' ? 2 : 4;
   const slotStartTime = new Date(time);
@@ -37,14 +38,23 @@ function MatchSlot({ type, slot, toggleMode }: MatchSlotProps) {
     [slot]
   );
 
+  const getMyMatch = (myMatchList: CurrentMatchList) => {
+    for (const myMatch of myMatchList) {
+      if (myMatch.isMatched === true) {
+        return myMatch;
+      }
+    }
+    return myMatchList[0];
+  };
+  const myMatch = getMyMatch(myMatchList);
+
   const enrollHandler = async () => {
     if (status === 'mytable') {
       setModal({
         modalName: 'MATCH-CANCEL',
         cancel: {
-          isMatched: currentMatch.isMatched,
-          slotId: currentMatch.slotId,
-          time: currentMatch.time,
+          startTime: myMatch.startTime,
+          isMatched: myMatch.isMatched,
         },
       });
     } else if (event === 'match') {

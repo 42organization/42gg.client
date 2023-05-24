@@ -3,7 +3,7 @@ import { SetterOrUpdater, useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import { instance } from 'utils/axios';
 import { Noti } from 'types/notiTypes';
-import { CurrentMatch, Match } from 'types/matchTypes';
+import { CurrentMatchList, Match } from 'types/matchTypes';
 import { SeasonList } from 'types/seasonTypes';
 import { Live, User } from 'types/mainType';
 import { PppChart, ProfileBasic, ProfileRank } from 'types/userTypes';
@@ -27,9 +27,8 @@ interface useAxiosGetProps {
     | Dispatch<SetStateAction<undefined>>
     | SetterOrUpdater<User>
     | SetterOrUpdater<SeasonList>
-    | SetterOrUpdater<CurrentMatch>
     | SetterOrUpdater<Live>
-    | SetterOrUpdater<CurrentMatch>
+    | SetterOrUpdater<CurrentMatchList>
     | SetterOrUpdater<ProfileBasic>;
   err: string;
   type: null | string;
