@@ -2,9 +2,9 @@ import { useSetRecoilState } from 'recoil';
 import { useInfiniteQuery } from 'react-query';
 import { errorState } from 'utils/recoil/error';
 import { instance } from './axios';
+import { GameListData } from 'types/gameTypes';
 
 export default function InfScroll(path: string) {
-  console.log(path);
   const setError = useSetRecoilState(errorState);
 
   const getGameList = ({ pageParam = 0 }) =>
@@ -12,9 +12,9 @@ export default function InfScroll(path: string) {
       return res?.data;
     });
 
-  return useInfiniteQuery('infiniteList', getGameList, {
+  return useInfiniteQuery<GameListData, Error>('infiniteList', getGameList, {
     getNextPageParam: (lastPage, allPages) => {
-      return allPages.length;
+      return lastPage.isLast ? undefined : allPages.length;
     },
     onError: (e: any) => {
       if (e.response.data.code === 'UF001') setError('JB07');
