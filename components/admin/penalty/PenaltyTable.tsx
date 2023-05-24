@@ -44,6 +44,7 @@ export default function PenaltyTable() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
+  const [current, setCurrent] = useState<boolean>(false);
   const setModal = useSetRecoilState(modalState);
 
   const handleButtonAction = (intraId: string) =>
@@ -57,7 +58,7 @@ export default function PenaltyTable() {
   const getUserPenalty = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/penalty/users?q=${intraId}&page=${currentPage}&size=10`
+        `/penalty?intraId=${intraId}&page=${currentPage}&size=10&current=${current}`
       );
       setIntraId(intraId);
       setPenaltyInfo({
@@ -81,7 +82,7 @@ export default function PenaltyTable() {
   const getAllUserPenalty = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/penalty/users?page=${currentPage}&size=10`
+        `/penalty?page=${currentPage}&size=10&current=${current}`
       );
       setIntraId('');
       setPenaltyInfo({
@@ -110,7 +111,15 @@ export default function PenaltyTable() {
     <>
       <div className={styles.penaltyWrap}>
         <div className={styles.header}>
-          <span className={styles.title}>패널티 관리</span>
+          <span className={styles.title}>
+            <div>패널티 관리</div>
+            <button
+              className={styles.currentBtn}
+              onClick={() => setCurrent(!current)}
+            >
+              {current ? '전체기록' : '현재기록'}
+            </button>
+          </span>
           <AdminSearchBar initSearch={initSearch} />
         </div>
         <TableContainer className={styles.tableContainer} component={Paper}>
