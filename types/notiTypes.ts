@@ -17,5 +17,5 @@ export interface Noti {
   type: string;
   isChecked: boolean;
   message: string;
-  createdAt: string;
+  createdAt: Date;
 }
