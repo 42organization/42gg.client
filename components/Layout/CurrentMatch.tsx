@@ -8,7 +8,7 @@ import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
 
 export default function CurrentMatch() {
-  const { isMatched, enemyTeam, time, slotId, isImminent } =
+  const { startTime, endTime, isMatched, enemyTeam, isImminent } =
     useRecoilValue(currentMatchState);
   const setModal = useSetRecoilState(modalState);
   const matchingMessage = time && makeMessage(time, isMatched);
@@ -48,6 +48,47 @@ export default function CurrentMatch() {
     </>
   );
 }
+// export default function CurrentMatch() {
+//   const { isMatched, enemyTeam, time, slotId, isImminent } =
+//     useRecoilValue(currentMatchState);
+//   const setModal = useSetRecoilState(modalState);
+//   const matchingMessage = time && makeMessage(time, isMatched);
+//   const blockCancelButton = isImminent && enemyTeam.length;
+
+//   useGetCurrentMatch();
+
+//   const onCancel = () => {
+//     setModal({
+//       modalName: 'MATCH-CANCEL',
+//       cancel: { isMatched, slotId, time },
+//     });
+//   };
+
+//   return (
+//     <>
+//       <div className={styles.container}>
+//         <div className={styles.stringWrapper}>
+//           <div className={styles.icon}>⏰</div>
+//           <div className={styles.messageWrapper}>
+//             {matchingMessage}
+//             <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
+//           </div>
+//         </div>
+//         <div
+//           className={
+//             blockCancelButton ? styles.blockCancelButton : styles.cancelButton
+//           }
+//         >
+//           <input
+//             type='button'
+//             onClick={onCancel}
+//             value={blockCancelButton ? '취소불가' : '취소하기'}
+//           />
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
 
 function makeMessage(time: string, isMatched: boolean) {
   const formattedTime = gameTimeToString(time);
