@@ -37,13 +37,19 @@ export type Player = {
   level: number;
 };
 
+export type Team = {
+  players: Player[];
+  isWin?: boolean;
+  score?: number;
+};
+
 export type Game = {
   gameId: number;
   status: string;
   mode: string;
   time: string;
-  team1: Player[];
-  team2: Player[];
+  team1: Team;
+  team2: Team;
 };
 
 export type GameListData = {
