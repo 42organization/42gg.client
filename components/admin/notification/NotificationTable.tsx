@@ -58,7 +58,7 @@ export default function NotificationTable() {
   const getUserNotifications = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/notifications?q=${intraId}&page=${currentPage}&size=10`
+        `/notifications?intraId=${intraId}&page=${currentPage}&size=10`
       );
       setIntraId(intraId);
       setNotificationInfo({
