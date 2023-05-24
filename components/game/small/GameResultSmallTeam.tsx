@@ -1,10 +1,10 @@
-import { RankResult } from 'types/gameTypes';
+import { Team } from 'types/gameTypes';
 import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultSmallTeamProps {
-  team: RankResult;
-  position: string;
+  team: Team;
+  position: 'Left' | 'Right';
 }
 
 export default function GameResultSmallTeam({

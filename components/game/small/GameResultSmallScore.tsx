@@ -1,7 +1,8 @@
+import { GameMode } from 'types/gameTypes';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultSmallScoreProps {
-  mode: string;
+  mode: GameMode;
   scoreTeam1?: number;
   scoreTeam2?: number;
 }
@@ -13,7 +14,7 @@ export default function GameResultSmallScore({
 }: GameResultSmallScoreProps) {
   return (
     <div className={styles.smallScoreBoard}>
-      {mode === 'normal' ? '일반전' : `${scoreTeam1} : ${scoreTeam2}`}
+      {mode === 'NORMAL' ? '일반전' : `${scoreTeam1} : ${scoreTeam2}`}
     </div>
   );
 }

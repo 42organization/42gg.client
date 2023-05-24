@@ -43,10 +43,12 @@ export type Team = {
   score?: number;
 };
 
+export type GameMode = 'NORMAL' | 'RANK';
+
 export type Game = {
   gameId: number;
   status: string;
-  mode: string;
+  mode: GameMode;
   time: string;
   team1: Team;
   team2: Team;
