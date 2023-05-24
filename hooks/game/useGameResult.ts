@@ -21,7 +21,7 @@ const useGameResult = ({ mode, season }: GameResultProps) => {
     const userQuery = intraId ? `/users/${intraId}` : '';
     const seasonQuery = mode === 'rank' && `season=${season}`;
     const modeQuery = mode !== 'both' && `mode=${mode}`;
-    const countQuery = router.pathname === '/users/detail' && `count=${5}`;
+    const countQuery = router.pathname === '/users/' && `count=${5}`;
     const query = [modeQuery, seasonQuery, countQuery, 'gameId=']
       .filter((item) => item)
       .join('&');

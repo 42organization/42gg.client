@@ -22,7 +22,7 @@ export default function MenuBar() {
       link: '/rank',
     },
     { name: '최근 경기', link: '/game' },
-    { name: '내 정보', link: `/users/detail?intraId=${intraId}` },
+    { name: '내 정보', link: `/users/${intraId}` },
   ];
 
   return (

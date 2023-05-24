@@ -11,10 +11,7 @@ describe('프로필 기능 테스트 🥳', () => {
   it('페이지 이동 및 이름 랜더링 확인 🤔', () => {
     cy.origin(Cypress.env('HOME'), () => {
       // 1. 페이지 이동 확인
-      cy.url().should(
-        'include',
-        `users/detail?intraId=${Cypress.env('ADMIN_USERNAME')}`
-      );
+      cy.url().should('include', `users/${Cypress.env('ADMIN_USERNAME')}`);
       // wait for rendering
       cy.wait(1000);
       // 2. 이름 랜더링 확인
@@ -55,10 +52,9 @@ describe('프로필 기능 테스트 🥳', () => {
     });
   });
   it('프로필 edit 기능 확인 🤔 - 알림', () => {
-    cy.intercept(
-      'PUT',
-      `${Cypress.env('SERVER_ENDPOINT')}/pingpong/users/detail`
-    ).as('profileApi');
+    cy.intercept('PUT', `${Cypress.env('SERVER_ENDPOINT')}/pingpong/users/`).as(
+      'profileApi'
+    );
     cy.origin(Cypress.env('HOME'), () => {
       cy.wait(1000);
       cy.get('input[value=edit]').click();

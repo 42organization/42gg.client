@@ -41,7 +41,7 @@ const useEditProfileModal = ({
     }));
 
     try {
-      await instance.put(`/pingpong/users/detail`, editedProfile);
+      await instance.put(`/pingpong/users/`, editedProfile);
       alert('프로필이 성공적으로 등록되었습니다.');
     } catch (e) {
       setError('JH02');
