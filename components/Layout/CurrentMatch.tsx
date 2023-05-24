@@ -8,10 +8,10 @@ import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
 
 export default function CurrentMatch() {
-  const { startTime, endTime, isMatched, enemyTeam, isImminent } =
+  const { startTime, isMatched, enemyTeam, isImminent } =
     useRecoilValue(currentMatchState);
   const setModal = useSetRecoilState(modalState);
-  const matchingMessage = time && makeMessage(time, isMatched);
+  const matchingMessage = startTime && makeMessage(startTime, isMatched);
   const blockCancelButton = isImminent && enemyTeam.length;
 
   useGetCurrentMatch();
@@ -19,7 +19,7 @@ export default function CurrentMatch() {
   const onCancel = () => {
     setModal({
       modalName: 'MATCH-CANCEL',
-      cancel: { isMatched, slotId, time },
+      cancel: { startTime: startTime, isMatched: isMatched },
     });
   };
 
@@ -90,7 +90,7 @@ export default function CurrentMatch() {
 //   );
 // }
 
-function makeMessage(time: string, isMatched: boolean) {
+function makeMessage(time: Date, isMatched: boolean) {
   const formattedTime = gameTimeToString(time);
   return (
     <div className={styles.message}>
