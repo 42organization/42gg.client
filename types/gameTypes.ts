@@ -28,3 +28,14 @@ export interface Game {
   status: string;
   time: string;
 }
+
+export type GameResult = {
+  beforeExp: number;
+  beforeMaxExp: number;
+  beforeLevel: number;
+  increasedExp: number;
+  increasedLevel: number;
+  afterMaxExp: number;
+  changedPpp?: number;
+  beforePpp?: number;
+};
