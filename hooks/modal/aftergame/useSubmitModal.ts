@@ -17,7 +17,6 @@ const useSubmitModal = (currentGame: AfterGame) => {
     try {
       const res = await instance.post(`/pingpong/games/result/rank`, result);
       alert(rankResponse[`${res?.status}`]);
-      await instance.put(`/pingpong/match/current`);
     } catch (e) {
       setError('JH04');
       return;
@@ -28,7 +27,6 @@ const useSubmitModal = (currentGame: AfterGame) => {
   const submitNormalHandler = async () => {
     try {
       await instance.post(`/pingpong/games/result/normal`);
-      await instance.put(`/pingpong/match/current`);
     } catch (e) {
       setError('KP04');
       return;
@@ -36,15 +34,41 @@ const useSubmitModal = (currentGame: AfterGame) => {
     openStatChangeModal();
   };
 
-  const confirmRankHandler = async () => {
-    try {
-      await instance.put(`/pingpong/match/current`);
-    } catch (e) {
-      setError('KP05');
-      return;
-    }
+  const confirmRankHandler = () => {
     openStatChangeModal();
   };
+  // const submitRankHandler = async (result: TeamScore) => {
+  //   try {
+  //     const res = await instance.post(`/pingpong/games/result/rank`, result);
+  //     alert(rankResponse[`${res?.status}`]);
+  //     await instance.put(`/pingpong/match/current`);
+  //   } catch (e) {
+  //     setError('JH04');
+  //     return;
+  //   }
+  //   openStatChangeModal();
+  // };
+
+  // const submitNormalHandler = async () => {
+  //   try {
+  //     await instance.post(`/pingpong/games/result/normal`);
+  //     await instance.put(`/pingpong/match/current`);
+  //   } catch (e) {
+  //     setError('KP04');
+  //     return;
+  //   }
+  //   openStatChangeModal();
+  // };
+
+  // const confirmRankHandler = async () => {
+  //   try {
+  //     await instance.put(`/pingpong/match/current`);
+  //   } catch (e) {
+  //     setError('KP05');
+  //     return;
+  //   }
+  //   openStatChangeModal();
+  // };
 
   const openStatChangeModal = () => {
     setModal({
