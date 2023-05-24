@@ -57,10 +57,7 @@ export default function AnnounceEdit() {
 
   const deleteHandler = async () => {
     try {
-      await instanceInManage.put(`/announcement`, {
-        deleterIntraId: currentUserId,
-        deletedTime: new Date(new Date().getTime() + koreaTimeOffset),
-      });
+      await instanceInManage.delete(`/announcement/${currentUserId}`);
       setSnackbar({
         toastName: `delete request`,
         severity: 'success',
