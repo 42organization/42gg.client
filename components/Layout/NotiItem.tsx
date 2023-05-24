@@ -5,13 +5,16 @@ import styles from 'styles/Layout/NotiItem.module.scss';
 
 import { HeaderContextState, HeaderContext } from './HeaderContext';
 import { useContext } from 'react';
+import { getFormattedDateToPattern } from 'utils/handleTime';
 
 interface NotiItemProps {
   data: Noti;
 }
 
 export default function NotiItem({ data }: NotiItemProps) {
-  const date = data.createdAt.slice(5, 16).replace('T', ' ');
+  const date = getFormattedDateToPattern(data.createdAt)
+    .slice(5)
+    .replace('T', ' ');
 
   const parseEnemyIdMessage = (
     type: string,
