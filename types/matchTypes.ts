@@ -4,9 +4,7 @@ export interface Slot {
   status: string;
 }
 
-export interface Match {
-  matchBoards: Slot[];
-}
+export type Match = Slot[];
 
 export interface CurrentMatch {
   startTime: string;
