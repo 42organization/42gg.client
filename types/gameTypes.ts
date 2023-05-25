@@ -18,10 +18,11 @@ export type Team = {
 };
 
 export type GameMode = 'NORMAL' | 'RANK';
+export type GameStatus = 'LIVE' | 'WAIT' | 'END';
 
 export type Game = {
   gameId: number;
-  status: string;
+  status: GameStatus;
   mode: GameMode;
   time: string;
   team1: Team;
