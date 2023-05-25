@@ -38,9 +38,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
 
   if (!match) return null;
 
-  const { matchBoards } = match;
-
-  if (matchBoards.length === 0)
+  if (match.length === 0)
     return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
 
   const openManual = () => {
@@ -48,10 +46,10 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   };
 
   const getFirstOpenSlot = () => {
-    for (let i = 0; i < matchBoards.length; i++) {
-      const match = matchBoards[i];
-      if (match.status === 'open') {
-        return new Date(match.startTime).getHours();
+    for (let i = 0; i < match.length; i++) {
+      const matchSlot = match[i];
+      if (matchSlot.status === 'open') {
+        return new Date(matchSlot.startTime).getHours();
       }
     }
     return null;
@@ -82,7 +80,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
           </button>
         </div>
         <div className={styles.matchBoard}>
-          {matchBoards.map((slot, index) => (
+          {match.map((slot, index) => (
             <div key={index}>
               {slot.startTime.slice(-2) === '00' && (
                 <NewMatchTime key={index} startTime={slot.startTime} />
