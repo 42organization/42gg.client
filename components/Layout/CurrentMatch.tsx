@@ -6,20 +6,35 @@ import { gameTimeToString } from 'utils/handleTime';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
+import { CurrentMatchList } from 'types/matchTypes';
+import { Modal } from 'types/modalTypes';
 
 export default function CurrentMatch() {
-  const { startTime, isMatched, enemyTeam, isImminent } =
-    useRecoilValue(currentMatchState);
-  const setModal = useSetRecoilState(modalState);
-  const matchingMessage = startTime && makeMessage(startTime, isMatched);
-  const blockCancelButton = isImminent && enemyTeam.length;
+  const myMatchList = useRecoilValue<CurrentMatchList>(currentMatchState);
+  const setModal = useSetRecoilState<Modal>(modalState);
+
+  const getMyMatch = (myMatchList: CurrentMatchList) => {
+    for (const myMatch of myMatchList) {
+      if (myMatch.isMatched === true) {
+        return myMatch;
+      }
+    }
+    return myMatchList[0];
+  };
+
+  const myMatch = getMyMatch(myMatchList);
+  const matchingMessage =
+    myMatch && makeMessage(myMatch.startTime, myMatch.isMatched);
+
+  const blockCancelButton =
+    myMatch && myMatch.isImminent && myMatch.enemyTeam.length;
 
   useGetCurrentMatch();
 
   const onCancel = () => {
     setModal({
       modalName: 'MATCH-CANCEL',
-      cancel: { startTime: startTime, isMatched: isMatched },
+      cancel: { startTime: myMatch.startTime, isMatched: myMatch.isMatched },
     });
   };
 
@@ -30,7 +45,10 @@ export default function CurrentMatch() {
           <div className={styles.icon}>⏰</div>
           <div className={styles.messageWrapper}>
             {matchingMessage}
-            <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
+            <EnemyTeam
+              enemyTeam={myMatch.enemyTeam}
+              isImminent={myMatch.isImminent}
+            />
           </div>
         </div>
         <div

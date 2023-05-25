@@ -17,6 +17,8 @@ export interface CurrentMatch {
   isImminent: boolean;
 }
 
+export type CurrentMatchList = CurrentMatch[];
+
 // export interface Slot {
 //   slotId: number;
 //   status: string;

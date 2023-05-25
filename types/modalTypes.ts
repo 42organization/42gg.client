@@ -41,12 +41,19 @@ export interface Cancel {
 // }
 
 export interface Enroll {
-  slotId: number;
+  startTime: string;
+  endTime: string;
   type: string;
   mode?: MatchMode;
-  slotStartTime: Date;
-  slotEndTime: Date;
 }
+
+// export interface Enroll {
+//   slotId: number;
+//   type: string;
+//   mode?: MatchMode;
+//   slotStartTime: Date;
+//   slotEndTime: Date;
+// }
 
 export interface Announcement {
   content: Value;

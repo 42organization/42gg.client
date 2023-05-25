@@ -2,11 +2,12 @@ import useAxiosGet from 'hooks/useAxiosGet';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { CurrentMatch } from 'types/matchTypes';
+import { CurrentMatchList } from 'types/matchTypes';
 import { currentMatchState, reloadMatchState } from 'utils/recoil/match';
 
 const useGetCurrentMatch = () => {
-  const setCurrentMatch = useSetRecoilState<CurrentMatch>(currentMatchState);
+  const setCurrentMatch =
+    useSetRecoilState<CurrentMatchList>(currentMatchState);
   const [reloadMatch, setReloadMatch] =
     useRecoilState<boolean>(reloadMatchState);
   const presentPath: string = useRouter().asPath;
