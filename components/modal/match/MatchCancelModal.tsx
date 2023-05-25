@@ -2,22 +2,33 @@ import { Cancel } from 'types/modalTypes';
 import styles from 'styles/modal/match/MatchCancelModal.module.scss';
 import useMatchCancelModal from 'hooks/modal/match/useMatchCancelModal';
 
-export default function MatchCancelModal({ isMatched, slotId, time }: Cancel) {
+export default function MatchCancelModal({ startTime, isMatched }: Cancel) {
   const {
     content,
     contentType,
     rejectCancel,
     onCancel,
-    currentMatch,
+    currentMatchList,
     onReturn,
-  } = useMatchCancelModal({ isMatched, slotId, time });
+  } = useMatchCancelModal({ startTime, isMatched });
+
+  const getCurrentMatch = () => {
+    for (const currentMatch of currentMatchList) {
+      if (currentMatch.startTime === startTime) {
+        return currentMatch;
+      }
+      return currentMatchList[0];
+    }
+  };
+
+  const currentMatch = getCurrentMatch();
 
   return (
     <div className={styles.container}>
       <div className={styles.phrase}>
         <div className={styles.emoji}>{content[contentType].emoji}</div>
         {content[contentType].main}
-        {(rejectCancel || (!rejectCancel && currentMatch.isMatched)) && (
+        {(rejectCancel || (!rejectCancel && currentMatch?.isMatched)) && (
           <div className={styles.subContent}>{content[contentType].sub}</div>
         )}
       </div>

@@ -6,7 +6,7 @@ import { CurrentMatchList } from 'types/matchTypes';
 import { currentMatchState, reloadMatchState } from 'utils/recoil/match';
 
 const useGetCurrentMatch = () => {
-  const setCurrentMatch =
+  const setCurrentMatchList =
     useSetRecoilState<CurrentMatchList>(currentMatchState);
   const [reloadMatch, setReloadMatch] =
     useRecoilState<boolean>(reloadMatchState);
@@ -14,7 +14,7 @@ const useGetCurrentMatch = () => {
 
   const getCurrentMatchHandler = useAxiosGet({
     url: '/pingpong/match',
-    setState: setCurrentMatch,
+    setState: setCurrentMatchList,
     err: 'JB01',
     type: 'setError',
   });
