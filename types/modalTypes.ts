@@ -43,7 +43,6 @@ export interface Cancel {
 export interface Enroll {
   startTime: string;
   endTime: string;
-  type: string;
   mode?: MatchMode;
 }
 

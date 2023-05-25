@@ -9,6 +9,7 @@ export default function Match() {
   const content = {
     normal: { style: styles.normal },
     rank: { style: '' },
+    both: { style: '' },
   };
 
   return (

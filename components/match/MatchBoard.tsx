@@ -87,12 +87,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
               {slot.startTime.slice(-2) === '00' && (
                 <NewMatchTime key={index} startTime={slot.startTime} />
               )}
-              <NewMatchSlot
-                key={index}
-                type={type}
-                toggleMode={toggleMode}
-                slot={slot}
-              />
+              <NewMatchSlot key={index} toggleMode={toggleMode} slot={slot} />
             </div>
           ))}
         </div>
@@ -127,12 +122,11 @@ export const NewMatchTime = ({ startTime }: NewMatchTimeProps) => {
 };
 
 interface NewMatchSlotProps {
-  type: string;
   toggleMode: MatchMode;
   slot: Slot;
 }
 
-export const NewMatchSlot = ({ type, toggleMode, slot }: NewMatchSlotProps) => {
+export const NewMatchSlot = ({ toggleMode, slot }: NewMatchSlotProps) => {
   const setModal = useSetRecoilState<Modal>(modalState);
   const myMatchList = useRecoilValue<CurrentMatchList>(currentMatchState);
   const { event } = useRecoilValue<Live>(liveState);
@@ -169,7 +163,6 @@ export const NewMatchSlot = ({ type, toggleMode, slot }: NewMatchSlotProps) => {
         enroll: {
           startTime: startTime,
           endTime: endTime,
-          type: type,
           mode: toggleMode,
         },
       });
