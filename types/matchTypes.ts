@@ -7,10 +7,8 @@ export interface Slot {
   mode: string;
 }
 
-export type Slots = Slot[];
-export interface Match {
-  matchBoards: Slots[];
-}
+export type Match = Slot[];
+
 export interface CurrentMatch {
   startTime: string;
   endTime: string;

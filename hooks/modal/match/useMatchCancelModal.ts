@@ -15,8 +15,16 @@ const useMatchCancelModal = ({ startTime, isMatched }: Cancel) => {
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
-  const [currentMatch, setCurrentMatch] = useRecoilState(currentMatchState);
-  const cancelLimitTime = currentMatch.isImminent;
+  const [currentMatchList, setCurrentMatchList] =
+    useRecoilState(currentMatchState);
+
+  let cancelLimitTime = false;
+  for (const currentMatch of currentMatchList) {
+    if (currentMatch.startTime === startTime) {
+      cancelLimitTime = currentMatch.isImminent;
+    }
+  }
+
   const rejectCancel = cancelLimitTime && isMatched;
   const contentType: 'reject' | 'cancel' = rejectCancel ? 'reject' : 'cancel';
 
@@ -64,7 +72,7 @@ const useMatchCancelModal = ({ startTime, isMatched }: Cancel) => {
   const getCurrentMatchHandler = async () => {
     try {
       const res = await instance.get('/pingpong/match');
-      setCurrentMatch(res.data);
+      setCurrentMatchList(res.data);
     } catch (e) {
       setError('JH08');
     }
@@ -80,7 +88,7 @@ const useMatchCancelModal = ({ startTime, isMatched }: Cancel) => {
     contentType,
     rejectCancel,
     onCancel,
-    currentMatch,
+    currentMatchList,
     onReturn,
   };
 };
