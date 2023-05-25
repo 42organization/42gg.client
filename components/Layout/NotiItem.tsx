@@ -11,7 +11,7 @@ interface NotiItemProps {
 }
 
 export default function NotiItem({ data }: NotiItemProps) {
-  const date = data.createdAt.slice(5).replace('T', ' ');
+  const date = data.createdAt.slice(5, -8).replace('T', ' ');
 
   const parseEnemyIdMessage = (
     type: string,
