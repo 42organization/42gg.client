@@ -55,33 +55,6 @@ export default function NotiItem({ data }: NotiItemProps) {
     },
   };
 
-  // const noti: {
-  //   [key: string]: { [key: string]: string | JSX.Element | undefined };
-  // } = {
-  //   imminent: {
-  //     title: '경기 준비',
-  //     content: MakeImminentContent(data.enemyTeam, data.time, data.createdAt),
-  //   },
-  //   announce: { title: '공 지', content: MakeAnnounceContent(data.message) },
-  //   matched: {
-  //     title: '매칭 성사',
-  //     content: makeContent(data.time, '에 신청한 매칭이 성사되었습니다.'),
-  //   },
-  //   canceledbyman: {
-  //     title: '매칭 취소',
-  //     content: makeContent(
-  //       data.time,
-  //       '에 신청한 매칭이 상대에 의해 취소되었습니다.'
-  //     ),
-  //   },
-  //   canceledbytime: {
-  //     title: '매칭 취소',
-  //     content: makeContent(
-  //       data.time,
-  //       '에 신청한 매칭이 상대 없음으로 취소되었습니다.'
-  //     ),
-  //   },
-  // };
   return (
     <div
       className={data.isChecked ? `${styles.readWrap}` : `${styles.unreadWrap}`}
@@ -92,10 +65,6 @@ export default function NotiItem({ data }: NotiItemProps) {
     </div>
   );
 }
-
-// function makeContent(time: string | undefined, message: string) {
-//   if (time) return gameTimeToString(time) + message;
-// }
 
 function MakeAnnounceContent(message: string | undefined) {
   if (message && !message.includes('https')) return message;
@@ -110,12 +79,7 @@ function MakeAnnounceContent(message: string | undefined) {
   );
 }
 
-function MakeImminentContent(
-  enemyTeam: string[],
-  message: string
-  // time: string | undefined,
-  // createdAt: string
-) {
+function MakeImminentContent(enemyTeam: string[], message: string) {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const makeEnemyUsers = (enemyTeam: string[]) => {
     return enemyTeam.map((intraId: string, i: number) => (
@@ -135,32 +99,3 @@ function MakeImminentContent(
     </>
   );
 }
-// function MakeImminentContent(
-//   enemyTeam: string[] | undefined,
-//   time: string | undefined,
-//   createdAt: string
-// ) {
-//   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
-//   const makeEnemyUsers = (enemyTeam: string[]) => {
-//     return enemyTeam.map((intraId: string, i: number) => (
-//       <span key={intraId} onClick={() => HeaderState?.resetOpenNotiBarState()}>
-//         <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
-//         {enemyTeam && i < enemyTeam.length - 1 ? ', ' : ''}
-//       </span>
-//     ));
-//   };
-//   const makeImminentMinute = (gameTime: string, createdAt: string) =>
-//     Math.floor(
-//       (Number(new Date(gameTime)) - Number(new Date(createdAt))) / 60000
-//     );
-//   return (
-//     <>
-//       {enemyTeam && time && (
-//         <>
-//           {makeEnemyUsers(enemyTeam)}님과 경기{' '}
-//           {makeImminentMinute(time, createdAt)}분 전 입니다. 서두르세요!
-//         </>
-//       )}
-//     </>
-//   );
-// }
