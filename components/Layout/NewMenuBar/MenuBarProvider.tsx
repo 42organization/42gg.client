@@ -9,7 +9,7 @@ import { SeasonList } from 'types/seasonTypes';
 import { Modal } from 'types/modalTypes';
 
 export interface NewMenuContextState {
-  seasonMode: SeasonList;
+  seasonMode: string;
   isAdmin: boolean;
   setModal: SetterOrUpdater<Modal>;
   intraId: string;
@@ -18,12 +18,12 @@ export interface NewMenuContextState {
 export const NewMenuContext = createContext<NewMenuContextState | null>(null);
 
 const NewMenuStateContext = (props) => {
-  const seasonMode = useRecoilValue(seasonListState);
+  const seasonMode = 'rank';
   const { intraId, isAdmin } = useRecoilValue(userState);
   const setModal = useSetRecoilState(modalState);
 
   const NewMenuState: NewMenuContextState = {
-    seasonMode: seasonMode,
+    seasonMode,
     isAdmin: isAdmin,
     intraId: intraId,
     setModal: setModal,

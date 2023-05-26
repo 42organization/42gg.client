@@ -6,6 +6,6 @@ export interface Season {
 }
 
 export interface SeasonList {
-  seasonMode: SeasonMode;
+  //seasonMode: SeasonMode;
   seasonList: Season[];
 }

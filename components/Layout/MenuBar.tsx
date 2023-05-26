@@ -11,14 +11,13 @@ import { useContext } from 'react';
 
 export default function MenuBar() {
   const { intraId, isAdmin } = useRecoilValue(userState);
-  const { seasonMode } = useRecoilValue(seasonListState);
   // const resetOpenMenuBar = useResetRecoilState(openMenuBarState);
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
 
   const setModal = useSetRecoilState(modalState);
   const menuList = [
     {
-      name: `${seasonMode === 'normal' ? 'VIP' : '랭킹'}`,
+      name: `'랭킹'`,
       link: '/rank',
     },
     { name: '최근 경기', link: '/game' },
