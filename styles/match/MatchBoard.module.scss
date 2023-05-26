@@ -55,3 +55,66 @@
   align-items: stretch;
   margin: 1rem 0 1rem 0;
 }
+
+//////
+.slotButton {
+  all: unset;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2.3rem;
+  padding: 0 0.6rem;
+  margin: 0.1rem;
+  border-radius: $mini-radius;
+  cursor: pointer;
+
+  &.my {
+    background: linear-gradient(to bottom, white, #68ff77);
+  }
+
+  &.rank {
+    background: linear-gradient(to bottom, white, $g1-bottom);
+  }
+
+  &.normal {
+    background: linear-gradient(to bottom, white, $norm-lightblue);
+  }
+
+  &.disabled {
+    background: linear-gradient(to bottom, $gray, rgba(217, 217, 217, 0.6));
+    cursor: default;
+  }
+}
+
+.time {
+  color: black;
+  font-size: 0.9rem;
+}
+
+.headCount {
+  color: $rank-blue;
+  font-size: $small-font;
+  font-weight: 600;
+  text-shadow: 1px 1px 7px #a6a6a6;
+}
+
+.plus {
+  color: $rank-blue;
+  font-size: $big-font;
+  font-weight: 600;
+  text-shadow: 1px 1px 7px #a6a6a6;
+}
+
+.slotHour {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 0.3rem;
+  color: white;
+  font-size: $big-font;
+}
+
+.slotGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 0.6rem;
+}

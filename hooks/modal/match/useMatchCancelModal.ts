@@ -10,6 +10,10 @@ import {
 } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
 
+import { useState } from 'react';
+import { NewCurrentMatch } from 'types/matchTypes';
+import { CurrentMatch } from 'types/matchTypes';
+
 const useMatchCancelModal = ({ startTime, isMatched }: Cancel) => {
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
@@ -18,12 +22,30 @@ const useMatchCancelModal = ({ startTime, isMatched }: Cancel) => {
   const [currentMatchList, setCurrentMatchList] =
     useRecoilState(currentMatchState);
 
-  let cancelLimitTime = false;
-  for (const currentMatch of currentMatchList) {
-    if (currentMatch.startTime === startTime) {
-      cancelLimitTime = currentMatch.isImminent;
+  const [myMatch, setMyMatch] = useState<NewCurrentMatch>({
+    startTime: '0000-00-00T00:00',
+    endTime: '0000-00-00T00:00',
+    isMatched: false,
+    myTeam: [],
+    enemyTeam: [],
+    isImminent: false,
+  });
+
+  const { match } = currentMatchList;
+
+  const getMyMatch = (match: CurrentMatch[]) => {
+    for (const currentMatch of match) {
+      if (currentMatch.isMatched) {
+        setMyMatch(currentMatch);
+      }
     }
-  }
+  };
+
+  useEffect(() => {
+    getMyMatch(match);
+  }, [match]);
+
+  const cancelLimitTime = myMatch.isImminent;
 
   const rejectCancel = cancelLimitTime && isMatched;
   const contentType: 'reject' | 'cancel' = rejectCancel ? 'reject' : 'cancel';
@@ -88,82 +110,9 @@ const useMatchCancelModal = ({ startTime, isMatched }: Cancel) => {
     contentType,
     rejectCancel,
     onCancel,
-    currentMatchList,
     onReturn,
+    myMatch,
   };
 };
-// const useMatchCancelModal = ({ isMatched, slotId, time }: Cancel) => {
-//   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
-//   const setReloadMatch = useSetRecoilState(reloadMatchState);
-//   const setError = useSetRecoilState(errorState);
-//   const setModal = useSetRecoilState(modalState);
-//   const [currentMatch, setCurrentMatch] = useRecoilState(currentMatchState);
-//   const cancelLimitTime = currentMatch.isImminent;
-//   const rejectCancel = cancelLimitTime && isMatched;
-//   const contentType: 'reject' | 'cancel' = rejectCancel ? 'reject' : 'cancel';
-//   const content = {
-//     cancel: {
-//       emoji: '🤔',
-//       main: '해당 경기를\n취소하시겠습니까?',
-//       sub: '⚠︎ 매칭이 완료된 경기를 취소하면\n1분 간 새로운 예약이 불가합니다!',
-//     },
-//     reject: {
-//       emoji: '😰',
-//       main: '매칭이 완료되어\n경기를 취소할 수 없습니다!!',
-//       sub: `상대방이 공개된 이후부터는\n경기를 취소할 수 없습니다..`,
-//     },
-//   };
-//   const cancelResponse: { [key: string]: string } = {
-//     SUCCESS: '경기가 성공적으로 취소되었습니다.',
-//     SD001: '이미 지난 경기입니다.',
-//     SD002: '이미 매칭이 완료된 경기입니다.',
-//   };
-
-//   useEffect(() => {
-//     getCurrentMatchHandler();
-//   }, []);
-
-//   const onCancel = async () => {
-//     try {
-//       await instance.delete(`/pingpong/match/slots/${slotId}`);
-//       alert(cancelResponse.SUCCESS);
-//     } catch (e: any) {
-//       if (e.response.data.code in cancelResponse)
-//         alert(cancelResponse[e.response.data.code]);
-//       else {
-//         setModal({ modalName: null });
-//         setOpenCurrentMatch(false);
-//         setError('JH01');
-//         return;
-//       }
-//     }
-//     setModal({ modalName: null });
-//     setOpenCurrentMatch(false);
-//     setReloadMatch(true);
-//   };
-
-//   const getCurrentMatchHandler = async () => {
-//     try {
-//       const res = await instance.get('/pingpong/match/current');
-//       setCurrentMatch(res.data);
-//     } catch (e) {
-//       setError('JH08');
-//     }
-//   };
-
-//   const onReturn = () => {
-//     setModal({ modalName: null });
-//     setReloadMatch(true);
-//   };
-
-//   return {
-//     content,
-//     contentType,
-//     rejectCancel,
-//     onCancel,
-//     currentMatch,
-//     onReturn,
-//   };
-// };
 
 export default useMatchCancelModal;

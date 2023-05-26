@@ -16,7 +16,6 @@ import useSetAfterGameModal from 'hooks/Layout/useSetAfterGameModal';
 import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
 import useLiveCheck from 'hooks/Layout/useLiveCheck';
 import HeaderStateContext from './HeaderContext';
-import { gameTimeToString } from 'utils/handleTime';
 
 type AppLayoutProps = {
   children: React.ReactNode;

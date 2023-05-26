@@ -1,19 +1,22 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { CurrentMatchList, Match, Slot } from 'types/matchTypes';
-import { Live, MatchMode } from 'types/mainType';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { CurrentMatch, CurrentMatchList, Match, Slot } from 'types/matchTypes';
+import { Live } from 'types/mainType';
 import { modalState } from 'utils/recoil/modal';
-import MatchSlotList from './MatchSlotList';
 import styles from 'styles/match/MatchBoard.module.scss';
 
 import useGetReloadMatchHandler from 'hooks/match/useGetReloadMatchHandler';
-import { fillZero, gameTimeToString } from 'utils/handleTime';
+import { fillZero } from 'utils/handleTime';
 import { currentMatchState } from 'utils/recoil/match';
 import { liveState } from 'utils/recoil/layout';
 import { Modal } from 'types/modalTypes';
+import { NewMatchMode } from 'types/mainType';
+
+import { NewCurrentMatch } from 'types/matchTypes';
+
 interface MatchBoardProps {
   type: string;
-  toggleMode: MatchMode;
+  toggleMode: NewMatchMode;
 }
 
 export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
@@ -38,7 +41,9 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
 
   if (!match) return null;
 
-  if (match.length === 0)
+  const { matchBoards } = match;
+
+  if (matchBoards.length === 0)
     return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
 
   const openManual = () => {
@@ -46,8 +51,8 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   };
 
   const getFirstOpenSlot = () => {
-    for (let i = 0; i < match.length; i++) {
-      const matchSlot = match[i];
+    for (let i = 0; i < matchBoards.length; i++) {
+      const matchSlot = matchBoards[i];
       if (matchSlot.status === 'open') {
         return new Date(matchSlot.startTime).getHours();
       }
@@ -80,12 +85,19 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
           </button>
         </div>
         <div className={styles.matchBoard}>
-          {match.map((slot, index) => (
-            <div key={index}>
-              {slot.startTime.slice(-2) === '00' && (
+          {matchBoards.map((slot, index) => (
+            <div
+              key={index}
+              ref={getScrollCurrentRef(parseInt(slot.startTime.slice(-8, -6)))}
+            >
+              {slot.startTime.slice(-5, -3) === '00' && (
                 <NewMatchTime key={index} startTime={slot.startTime} />
               )}
-              <NewMatchSlot key={index} toggleMode={toggleMode} slot={slot} />
+              <NewMatchSlot
+                key={index - 1}
+                toggleMode={toggleMode}
+                slot={slot}
+              />
             </div>
           ))}
         </div>
@@ -120,29 +132,41 @@ export const NewMatchTime = ({ startTime }: NewMatchTimeProps) => {
 };
 
 interface NewMatchSlotProps {
-  toggleMode: MatchMode;
+  toggleMode: NewMatchMode;
   slot: Slot;
 }
 
 export const NewMatchSlot = ({ toggleMode, slot }: NewMatchSlotProps) => {
   const setModal = useSetRecoilState<Modal>(modalState);
-  const myMatchList = useRecoilValue<CurrentMatchList>(currentMatchState);
+  const currentMatchList = useRecoilValue<CurrentMatchList>(currentMatchState);
   const { event } = useRecoilValue<Live>(liveState);
   const { startTime, endTime, status } = slot;
   const slotData = `${slot.startTime.slice(-2)} - ${slot.endTime.slice(-2)}`;
 
-  const getMyMatch = (myMatchList: CurrentMatchList) => {
-    for (const myMatch of myMatchList) {
-      if (myMatch.isMatched === true) {
-        return myMatch;
+  const [myMatch, setMyMatch] = useState<NewCurrentMatch>({
+    startTime: '0000-00-00T00:00',
+    endTime: '0000-00-00T00:00',
+    isMatched: false,
+    myTeam: [],
+    enemyTeam: [],
+    isImminent: false,
+  });
+
+  const { match } = currentMatchList;
+
+  const getMyMatch = (match: CurrentMatch[]) => {
+    for (const currentMatch of match) {
+      if (currentMatch.isMatched) {
+        setMyMatch(currentMatch);
       }
     }
-    return myMatchList[0];
   };
 
-  const mode = window.location.search.slice(1);
+  useEffect(() => {
+    getMyMatch(match);
+  }, [match]);
 
-  const myMatch = getMyMatch(myMatchList);
+  const mode = window.location.search.slice(1);
 
   const enrollhandler = async () => {
     if (status === 'mytable') {
@@ -171,7 +195,7 @@ export const NewMatchSlot = ({ toggleMode, slot }: NewMatchSlotProps) => {
     () => ({
       mytable: toggleMode === mode ? styles.my : styles.disabled,
       close: styles.disabled,
-      open: toggleMode === 'rank' ? styles.rank : styles.normal,
+      open: toggleMode === 'RANK' ? styles.rank : styles.normal,
     }),
     [slot]
   );
@@ -180,114 +204,23 @@ export const NewMatchSlot = ({ toggleMode, slot }: NewMatchSlotProps) => {
     new Date(startTime).getTime() - new Date().getTime() >= 0;
 
   return (
-    <button
-      className={`${styles.slotButton} ${buttonStyle[status]}`}
-      disabled={status === 'close'}
-      onClick={enrollhandler}
-    >
-      <span>
-        {slotData === '00 - 00'
-          ? `${fillZero(
-              (parseInt(startTime.slice(-5, -3)) % 12).toString(),
-              2
-            )}:00 - ${fillZero(
-              (parseInt(endTime.slice(-5, -3)) % 12).toString(),
-              2
-            )}:00`
-          : slotData}
-        {status === 'mytable' && ' 🙋'}
-      </span>
-      <span>{isAfterSlot && 'undefined'}</span>
-    </button>
+    <div className={styles.slotGrid}>
+      <button
+        className={`${styles.slotButton} ${buttonStyle[status]}`}
+        disabled={status === 'close'}
+        onClick={enrollhandler}
+      >
+        <span className={styles.time}>
+          {slotData === '00 - 00'
+            ? `${fillZero(
+                parseInt(startTime.slice(-5, -3)).toString(),
+                2
+              )} - ${fillZero(parseInt(endTime.slice(-5, -3)).toString(), 2)}`
+            : slotData}
+          {status === 'mytable' && ' 🙋'}
+        </span>
+        {/* <span>{isAfterSlot && ''}</span> */}
+      </button>
+    </div>
   );
 };
-
-// export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
-//   const [match, setMatch] = useState<Match | null>(null);
-//   const [spinReloadButton, setSpinReloadButton] = useState<boolean>(false);
-//   const setModal = useSetRecoilState(modalState);
-//   const currentRef = useRef<HTMLDivElement>(null);
-
-//   const reloadMatchHandler = useGetReloadMatchHandler({
-//     setMatch,
-//     setSpinReloadButton,
-//     type,
-//     toggleMode,
-//   });
-
-//   useEffect(() => {
-//     currentRef.current?.scrollIntoView({
-//       behavior: 'smooth',
-//       block: 'center',
-//     });
-//   }, [match]);
-
-//   if (!match) return null;
-
-//   const { matchBoards } = match;
-
-//   if (matchBoards.length === 0)
-//     return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
-
-//   const openManual = () => {
-//     setModal({ modalName: 'MATCH-MANUAL', manual: { toggleMode: toggleMode } });
-//   };
-
-//   const getFirstOpenSlot = () => {
-//     for (let i = 0; i < matchBoards.length; i++) {
-//       for (let j = 0; j < matchBoards[i].length; j++) {
-//         const match = matchBoards[i][j];
-//         if (match.status === 'open') {
-//           return new Date(match.time).getHours();
-//         }
-//       }
-//     }
-//     return null;
-//   };
-
-//   const getScrollCurrentRef = (slotsHour: number) => {
-//     if (getFirstOpenSlot() === slotsHour) {
-//       return currentRef;
-//     }
-//     return null;
-//   };
-
-//   return (
-//     <>
-//       <div>
-//         <div className={styles.buttonWrap}>
-//           {getFirstOpenSlot() === null && (
-//             <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>
-//           )}
-//           <button className={styles.manual} onClick={openManual}>
-//             매뉴얼
-//           </button>
-//           <button
-//             className={`${styles.reload} ${spinReloadButton && styles.spin}`}
-//             onClick={reloadMatchHandler}
-//           >
-//             &#8635;
-//           </button>
-//         </div>
-//         <div className={styles.matchBoard}>
-//           {matchBoards.map((matchSlots, index) => {
-//             const slotTime = new Date(matchSlots[0].time);
-//             return (
-//               <div
-//                 className={styles.matchSlotList}
-//                 key={index}
-//                 ref={getScrollCurrentRef(slotTime.getHours())}
-//               >
-//                 <MatchSlotList
-//                   type={type}
-//                   toggleMode={toggleMode}
-//                   matchSlots={matchSlots}
-//                 />
-//               </div>
-//             );
-//           })}
-//         </div>
-//       </div>
-//     </>
-//   );
-// }

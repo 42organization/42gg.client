@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { MatchMode } from 'types/mainType';
+import { NewMatchMode } from 'types/mainType';
 import { seasonListState } from 'utils/recoil/seasons';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import useModeToggle from 'hooks/mode/useModeToggle';
@@ -8,7 +8,7 @@ import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface MatchModeWrapProps {
   children: React.ReactNode;
-  toggleMode: MatchMode;
+  toggleMode: NewMatchMode;
   //setToggleMode: React.Dispatch<React.SetStateAction<MatchMode>>;
 }
 
@@ -24,10 +24,10 @@ export default function MatchModeWrap({
       {seasonMode === 'both' && (
         <div className={styles.matchModeWrap}>
           <ModeToggle
-            checked={Mode === 'rank'}
+            checked={Mode === 'RANK'}
             onToggle={onToggle}
             id={'matchToggle'}
-            text={Mode === 'rank' ? '랭크' : '일반'}
+            text={Mode === 'RANK' ? '랭크' : '일반'}
           />
         </div>
       )}

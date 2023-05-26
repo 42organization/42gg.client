@@ -6,23 +6,33 @@ import { gameTimeToString } from 'utils/handleTime';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
-import { CurrentMatchList } from 'types/matchTypes';
+import { CurrentMatchList, NewCurrentMatch } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
+import { useEffect, useState } from 'react';
 
 export default function CurrentMatch() {
-  const myMatchList = useRecoilValue<CurrentMatchList>(currentMatchState);
+  const currentMatchList = useRecoilValue<CurrentMatchList>(currentMatchState);
   const setModal = useSetRecoilState<Modal>(modalState);
 
-  const getMyMatch = (myMatchList: CurrentMatchList) => {
-    for (const myMatch of myMatchList) {
-      if (myMatch.isMatched === true) {
-        return myMatch;
-      }
-    }
-    return myMatchList[0];
-  };
+  const [myMatch, setMyMatch] = useState<NewCurrentMatch>({
+    startTime: '0000-00-00T00:00',
+    endTime: '0000-00-00T00:00',
+    isMatched: false,
+    myTeam: [],
+    enemyTeam: [],
+    isImminent: false,
+  });
 
-  const myMatch = getMyMatch(myMatchList);
+  const { match } = currentMatchList;
+
+  useEffect(() => {
+    match.map((currentMatch) => {
+      if (currentMatch.isMatched) {
+        setMyMatch(currentMatch);
+      }
+    });
+  }, [currentMatchList]);
+
   const matchingMessage =
     myMatch && makeMessage(myMatch.startTime, myMatch.isMatched);
 
@@ -66,47 +76,6 @@ export default function CurrentMatch() {
     </>
   );
 }
-// export default function CurrentMatch() {
-//   const { isMatched, enemyTeam, time, slotId, isImminent } =
-//     useRecoilValue(currentMatchState);
-//   const setModal = useSetRecoilState(modalState);
-//   const matchingMessage = time && makeMessage(time, isMatched);
-//   const blockCancelButton = isImminent && enemyTeam.length;
-
-//   useGetCurrentMatch();
-
-//   const onCancel = () => {
-//     setModal({
-//       modalName: 'MATCH-CANCEL',
-//       cancel: { isMatched, slotId, time },
-//     });
-//   };
-
-//   return (
-//     <>
-//       <div className={styles.container}>
-//         <div className={styles.stringWrapper}>
-//           <div className={styles.icon}>⏰</div>
-//           <div className={styles.messageWrapper}>
-//             {matchingMessage}
-//             <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
-//           </div>
-//         </div>
-//         <div
-//           className={
-//             blockCancelButton ? styles.blockCancelButton : styles.cancelButton
-//           }
-//         >
-//           <input
-//             type='button'
-//             onClick={onCancel}
-//             value={blockCancelButton ? '취소불가' : '취소하기'}
-//           />
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
 
 function makeMessage(time: string, isMatched: boolean) {
   const formattedTime = gameTimeToString(time);
