@@ -21,9 +21,9 @@ const useGameResult = ({ mode, season }: GameResultProps) => {
         setPath(`${basePath}?page=${1}&size=${3}&status=${'LIVE'}`);
         return;
       }
-      const modePath = mode === 'both' ? '' : `/${mode}`;
+      const modePath = mode === 'BOTH' ? '' : `/${mode?.toLowerCase()}`;
       const userQuery = intraId && `intraId=${intraId}`;
-      const seasonQuery = mode === 'rank' && `season=${season}`;
+      const seasonQuery = mode === 'RANK' && `season=${season}`;
       const sizeQuery =
         router.pathname === '/users/detail' ? `size=${5}` : `size=${10}`;
       const query = [userQuery, seasonQuery, sizeQuery]
