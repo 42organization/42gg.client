@@ -24,7 +24,7 @@ const useMatchEnrollModal = ({ startTime, mode }: EnrollProps) => {
   //type any
   const onEnroll = async () => {
     try {
-      const body = { startTime: startTime, mode: mode };
+      const body = { startTime: startTime.slice(0, -3), mode: mode };
       await instance.post(`/pingpong/match?type=${mode}`, body);
       alert(enrollResponse.SUCCESS);
     } catch (e: any) {

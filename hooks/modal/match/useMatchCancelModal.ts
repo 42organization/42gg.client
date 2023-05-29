@@ -74,7 +74,9 @@ const useMatchCancelModal = ({ startTime, isMatched }: Cancel) => {
 
   const onCancel = async () => {
     try {
-      await instance.delete(`/pingpong/match?/startTime=${startTime}`);
+      await instance.delete(
+        `/pingpong/match?startTime=${startTime.slice(0, -3)}`
+      );
       alert(cancelResponse.SUCCESS);
     } catch (e: any) {
       if (e.response.data.code in cancelResponse)
