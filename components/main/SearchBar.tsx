@@ -41,7 +41,7 @@ export default function SearchBar() {
         <div className={styles.dropdown}>
           {searchResult.length ? (
             searchResult.map((intraId: string) => (
-              <Link href={`/users/${intraId}`} key={intraId}>
+              <Link href={`/users/detail?intraId=${intraId}`} key={intraId}>
                 <div>{intraId}</div>
               </Link>
             ))

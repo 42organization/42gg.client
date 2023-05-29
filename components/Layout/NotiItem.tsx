@@ -76,7 +76,7 @@ function MakeImminentContent(
   const makeEnemyUsers = (enemyTeam: string[]) => {
     return enemyTeam.map((intraId: string, i: number) => (
       <span key={intraId} onClick={() => HeaderState?.resetOpenNotiBarState()}>
-        <Link href={`/users/${intraId}`}>{intraId}</Link>
+        <Link href={`/users/detail?intraId${intraId}`}>{intraId}</Link>
         {enemyTeam && i < enemyTeam.length - 1 ? ', ' : ''}
       </span>
     ));

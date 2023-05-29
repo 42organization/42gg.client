@@ -35,7 +35,7 @@ export default function RankListItem({
   };
 
   const makeIntraIdLink = () => (
-    <Link href={`/users/${intraId}`}>
+    <Link href={`/users/detail?intraId=${intraId}`}>
       <span>
         {intraId}
         {level && <span className={styles.level}> ({level})</span>}

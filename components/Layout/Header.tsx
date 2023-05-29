@@ -72,7 +72,7 @@ export default function Header() {
               <VscBell />
             )}
           </div>
-          <Link href={`/users/${user.intraId}`}>
+          <Link href={`/users/detail?intraId=${user.intraId}`}>
             <PlayerImage
               src={user.userImageUri}
               styleName={'header'}

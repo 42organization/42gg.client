@@ -28,7 +28,7 @@ export default function GameResultBigTeam({ team }: GameResultBigTeamProps) {
     <div className={styles.bigTeam}>
       {team.players.map((player, index) => (
         <div key={index}>
-          <Link href={`/users/${player.intraId}`}>
+          <Link href={`/users/detail?intraId=${player.intraId}`}>
             <div>
               <PlayerImage
                 src={player.userImageUri}

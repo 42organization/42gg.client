@@ -118,7 +118,10 @@ describe('헤더 테스트 🥳', () => {
     cy.origin(Cypress.env('HOME'), () => {
       // 1. 프로필 페이지 이동
       cy.get('[class^=PlayerImage_header]').click();
-      cy.url().should('include', `users/${Cypress.env('ADMIN_USERNAME')}`);
+      cy.url().should(
+        'include',
+        `users/detail?intraId=${Cypress.env('ADMIN_USERNAME')}`
+      );
       // 2. 로고 클릭해서 홈 이동
       cy.get('[id^=Header_logo]').click();
       cy.url().should('eq', Cypress.env('HOME'));
