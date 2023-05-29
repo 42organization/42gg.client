@@ -19,7 +19,7 @@ export default function NotiItem({ data }: NotiItemProps) {
   ): [string[], string] => {
     const enemyId = [];
     let enemyMessage = '';
-    if (type === 'imminent') {
+    if (type === 'IMMINENT') {
       enemyId.push(
         message.slice(message.indexOf('<') + 9, message.indexOf('>'))
       );
@@ -33,24 +33,16 @@ export default function NotiItem({ data }: NotiItemProps) {
   const noti: {
     [key: string]: { [key: string]: string | JSX.Element | undefined };
   } = {
-    imminent: {
+    IMMINENT: {
       title: '경기 준비',
       content: MakeImminentContent(enemyIdMessage[0], enemyIdMessage[1]),
     },
-    announce: {
+    ANNOUNCE: {
       title: '공 지',
       content: MakeAnnounceContent(data.message),
     },
-    matched: {
+    MATCHED: {
       title: '매칭 성사',
-      content: data.message,
-    },
-    canceledbyman: {
-      title: '매칭 취소',
-      content: data.message,
-    },
-    canceledbytime: {
-      title: '매칭 취소',
       content: data.message,
     },
   };
