@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
 import { v1 } from 'uuid';
 import { CurrentMatchList } from 'types/matchTypes';
+import { selectorFamily } from 'recoil';
 
 export const openCurrentMatchState = atom<boolean>({
   key: `openCurrentMatchState/${v1()}`,
@@ -26,4 +27,20 @@ export const currentMatchState = atom<CurrentMatchList>({
       },
     ],
   },
+});
+
+export const myCurrentMatch = selectorFamily({
+  key: `myCurrentMatch`,
+  get:
+    (startTime) =>
+    ({ get }) => {
+      const currentMatchList = get(currentMatchState);
+      const match = currentMatchList.match;
+      for (const currentMatch of match) {
+        if (currentMatch.startTime === startTime) {
+          return currentMatch;
+        }
+      }
+      return null;
+    },
 });
