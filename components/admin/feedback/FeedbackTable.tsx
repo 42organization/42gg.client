@@ -165,9 +165,13 @@ export default function FeedbackTable() {
                                 <option value='0'>처리중</option>
                                 <option value='1'>처리완료</option>
                               </select>
-                            ) : value.toString().length > MAX_CONTENT_LENGTH ? (
+                            ) : (value?.toString() || '').length >
+                              MAX_CONTENT_LENGTH ? (
                               <div>
-                                {value.toString().slice(0, MAX_CONTENT_LENGTH)}
+                                {(value?.toString() || '').slice(
+                                  0,
+                                  MAX_CONTENT_LENGTH
+                                )}
                                 <span
                                   style={{ cursor: 'pointer', color: 'grey' }}
                                   onClick={() => openDetailModal(feedback)}
@@ -176,7 +180,7 @@ export default function FeedbackTable() {
                                 </span>
                               </div>
                             ) : (
-                              value.toString()
+                              value?.toString() || ''
                             )}
                           </TableCell>
                         );
