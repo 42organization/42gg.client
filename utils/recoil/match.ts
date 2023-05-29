@@ -14,7 +14,7 @@ export const reloadMatchState = atom<boolean>({
 });
 
 export const currentMatchState = atom<CurrentMatchList>({
-  key: `currentMatchState/${v1()}`,
+  key: `currentMatchState`,
   default: {
     match: [
       {

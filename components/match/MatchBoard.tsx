@@ -1,18 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { CurrentMatch, CurrentMatchList, Match, Slot } from 'types/matchTypes';
+import { Match, Slot } from 'types/matchTypes';
 import { Live } from 'types/mainType';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/match/MatchBoard.module.scss';
 
 import useGetReloadMatchHandler from 'hooks/match/useGetReloadMatchHandler';
 import { fillZero } from 'utils/handleTime';
-import { currentMatchState } from 'utils/recoil/match';
 import { liveState } from 'utils/recoil/layout';
 import { Modal } from 'types/modalTypes';
 import { NewMatchMode } from 'types/mainType';
-
-import { NewCurrentMatch } from 'types/matchTypes';
 
 interface MatchBoardProps {
   type: string;
@@ -138,33 +135,9 @@ interface NewMatchSlotProps {
 
 export const NewMatchSlot = ({ toggleMode, slot }: NewMatchSlotProps) => {
   const setModal = useSetRecoilState<Modal>(modalState);
-  const currentMatchList = useRecoilValue<CurrentMatchList>(currentMatchState);
   const { event } = useRecoilValue<Live>(liveState);
   const { startTime, endTime, status } = slot;
   const slotData = `${slot.startTime.slice(-2)} - ${slot.endTime.slice(-2)}`;
-
-  const [myMatch, setMyMatch] = useState<NewCurrentMatch>({
-    startTime: '0000-00-00T00:00',
-    endTime: '0000-00-00T00:00',
-    isMatched: false,
-    myTeam: [],
-    enemyTeam: [],
-    isImminent: false,
-  });
-
-  const { match } = currentMatchList;
-
-  const getMyMatch = (match: CurrentMatch[]) => {
-    for (const currentMatch of match) {
-      if (currentMatch.isMatched) {
-        setMyMatch(currentMatch);
-      }
-    }
-  };
-
-  useEffect(() => {
-    getMyMatch(match);
-  }, [match]);
 
   const mode = window.location.search.slice(1);
 
@@ -173,8 +146,7 @@ export const NewMatchSlot = ({ toggleMode, slot }: NewMatchSlotProps) => {
       setModal({
         modalName: 'MATCH-CANCEL',
         cancel: {
-          startTime: myMatch.startTime,
-          isMatched: myMatch.isMatched,
+          startTime: startTime,
         },
       });
     } else if (event === 'match') {

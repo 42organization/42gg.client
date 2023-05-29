@@ -1,53 +1,29 @@
 import { useEffect } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Cancel } from 'types/modalTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import {
   currentMatchState,
+  myCurrentMatch,
   openCurrentMatchState,
   reloadMatchState,
 } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
 
-import { useState } from 'react';
-import { NewCurrentMatch } from 'types/matchTypes';
-import { CurrentMatch } from 'types/matchTypes';
-
-const useMatchCancelModal = ({ startTime, isMatched }: Cancel) => {
+const useMatchCancelModal = ({ startTime }: Cancel) => {
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
-  const [currentMatchList, setCurrentMatchList] =
-    useRecoilState(currentMatchState);
+  const setCurrentMatchList = useSetRecoilState(currentMatchState);
 
-  const [myMatch, setMyMatch] = useState<NewCurrentMatch>({
-    startTime: '0000-00-00T00:00',
-    endTime: '0000-00-00T00:00',
-    isMatched: false,
-    myTeam: [],
-    enemyTeam: [],
-    isImminent: false,
-  });
+  const myMatch = useRecoilValue(myCurrentMatch(startTime));
 
-  const { match } = currentMatchList;
+  console.log(myMatch);
+  const cancelLimitTime = myMatch?.isImminent;
 
-  const getMyMatch = (match: CurrentMatch[]) => {
-    for (const currentMatch of match) {
-      if (currentMatch.isMatched) {
-        setMyMatch(currentMatch);
-      }
-    }
-  };
-
-  useEffect(() => {
-    getMyMatch(match);
-  }, [match]);
-
-  const cancelLimitTime = myMatch.isImminent;
-
-  const rejectCancel = cancelLimitTime && isMatched;
+  const rejectCancel = cancelLimitTime && myMatch.isMatched;
   const contentType: 'reject' | 'cancel' = rejectCancel ? 'reject' : 'cancel';
 
   const content = {
