@@ -1,5 +1,5 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { MatchMode } from 'types/mainType';
+import { NewMatchMode } from 'types/mainType';
 import { Manual } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import { seasonListState } from 'utils/recoil/seasons';
@@ -22,10 +22,10 @@ export default function MatchManualModal({ toggleMode }: Manual) {
       {seasonMode === 'both' && (
         <div className={styles.toggleContainer}>
           <ModeToggle
-            checked={Mode === 'rank'}
+            checked={Mode === 'RANK'}
             onToggle={onToggle}
             id={'manualToggle'}
-            text={Mode === 'rank' ? '랭크' : '일반'}
+            text={Mode === 'RANK' ? '랭크' : '일반'}
           />
         </div>
       )}
@@ -127,5 +127,5 @@ const modalContentsRank: { title: string; description: string[] }[] = [
   },
 ];
 
-const manualSelect = (modalToggleMode: MatchMode) =>
-  modalToggleMode === 'rank' ? modalContentsRank : modalContentsNormal;
+const manualSelect = (modalToggleMode: NewMatchMode) =>
+  modalToggleMode === 'RANK' ? modalContentsRank : modalContentsNormal;

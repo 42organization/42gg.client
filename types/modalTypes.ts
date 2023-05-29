@@ -63,7 +63,7 @@ export interface Exp {
 }
 
 export interface Manual {
-  toggleMode: MatchMode;
+  toggleMode: NewMatchMode;
 }
 
 export interface NewManual {
