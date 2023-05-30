@@ -7,8 +7,8 @@ interface RankListMainProps {
 }
 
 export default function RankListMain({ rank }: RankListMainProps) {
-  const seasonMode = 'rank';
-  const isNormalSeason = seasonMode === 'normal';
+  //const isNormalSeason = seasonMode === 'normal';
+  const isNormalSeason = false;
   const content = {
     normal: { style: styles.normal, title: 'VIP' },
     rank: { style: '', title: 'Champion' },
@@ -24,7 +24,7 @@ export default function RankListMain({ rank }: RankListMainProps) {
         <RankListItemMain
           key={item.intraId}
           user={item}
-          isSeasonNormal={isNormalSeason}
+          //isSeasonNormal={isNormalSeason}
         />
       ))}
     </div>

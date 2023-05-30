@@ -9,7 +9,7 @@ import ModeToggle from 'components/mode/modeItems/ModeToggle';
 
 export default function MatchManualModal({ toggleMode }: Manual) {
   const setModal = useSetRecoilState(modalState);
-  const { seasonMode } = useRecoilValue(seasonListState);
+  const seasonMode = 'both';
   const { onToggle, Mode } = useModeToggle(toggleMode);
 
   const onReturn = () => {

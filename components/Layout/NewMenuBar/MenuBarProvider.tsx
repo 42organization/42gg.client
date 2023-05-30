@@ -1,11 +1,9 @@
 import { createContext } from 'react';
-import { Resetter, SetterOrUpdater } from 'recoil';
+import { SetterOrUpdater } from 'recoil';
 import { MainMenu, SubMenu, AdminMenu } from './MenuBarElement';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { seasonListState } from 'utils/recoil/seasons';
 import { modalState } from 'utils/recoil/modal';
 import { userState } from 'utils/recoil/layout';
-import { SeasonList } from 'types/seasonTypes';
 import { Modal } from 'types/modalTypes';
 
 export interface NewMenuContextState {

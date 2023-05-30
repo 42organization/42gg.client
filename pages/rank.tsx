@@ -6,10 +6,7 @@ import RankList from 'components/rank/RankList';
 import styles from 'styles/rank/RankList.module.scss';
 
 export default function Rank() {
-  const seasonMode = 'rank';
-  const [mode, setMode] = useState<MatchMode>(
-    seasonMode === 'normal' ? 'normal' : 'rank'
-  );
+  const [mode, setMode] = useState<MatchMode>('rank');
   const content = {
     rank: { style: '', title: 'Ranking' },
     normal: { style: styles.vip, title: 'VIP' },
