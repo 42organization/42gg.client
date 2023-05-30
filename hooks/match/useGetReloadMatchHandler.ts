@@ -36,7 +36,7 @@ const useGetReloadMatchHandler = ({
   });
 
   useEffect(() => {
-    setReloadMatch(true);
+    getMatchHandler();
   }, [toggleMode]);
 
   useEffect(() => {
