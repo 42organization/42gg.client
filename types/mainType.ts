@@ -1,5 +1,7 @@
 export type MatchMode = 'normal' | 'rank';
-export type SeasonMode = 'normal' | 'rank' | 'both';
+
+export type SeasonMode = 'NORMAL' | 'RANK' | 'BOTH';
+
 export interface User {
   intraId: string;
   isAdmin: boolean;

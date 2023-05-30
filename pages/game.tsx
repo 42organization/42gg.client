@@ -8,12 +8,7 @@ import styles from 'styles/game/GameResultItem.module.scss';
 export default function Game() {
   const router = useRouter();
   const [clickTitle, setClickTitle] = useState<boolean>(false);
-  const [radioMode, setRadioMode] = useState<SeasonMode>('both');
-  const content = {
-    normal: { style: styles.normal },
-    rank: { style: '' },
-    both: { style: '' },
-  };
+  const [radioMode, setRadioMode] = useState<SeasonMode>('BOTH');
 
   const clickTitleHandler = () => {
     router.push(`/game`, undefined, {
@@ -25,7 +20,7 @@ export default function Game() {
   return (
     <div className={styles.pageWrap}>
       <h1
-        className={`${styles.title} ${content[radioMode].style}`}
+        className={`${styles.title} ${styles[radioMode.toLowerCase()]}`}
         onClick={clickTitleHandler}
       >
         Record
