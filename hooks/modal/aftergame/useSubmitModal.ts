@@ -21,6 +21,8 @@ type normalRequest = {
 const useSubmitModal = (currentGame: AfterGame) => {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
+  const { gameId, matchTeamsInfo, mode } = currentGame;
+  const { myTeam, enemyTeam } = matchTeamsInfo;
 
   const rankResponse: { [key: string]: string } = {
     '201': '결과 입력이 완료되었습니다.',
@@ -30,10 +32,10 @@ const useSubmitModal = (currentGame: AfterGame) => {
   const submitRankHandler = async (result: TeamScore) => {
     try {
       const requestBody: rankRequest = {
-        gameId: currentGame.gameId,
-        myTeamId: currentGame.matchTeamsInfo.myTeam.teamId,
+        gameId: gameId,
+        myTeamId: myTeam.teamId,
         myTeamScore: result.myTeamScore,
-        enemyTeamId: currentGame.matchTeamsInfo.enemyTeam.teamId,
+        enemyTeamId: enemyTeam.teamId,
         enemyTeamScore: result.enemyTeamScore,
       };
       const res = await instance.post(`/pingpong/games/rank`, requestBody);
@@ -48,9 +50,9 @@ const useSubmitModal = (currentGame: AfterGame) => {
 
   const submitNormalHandler = async () => {
     const requestBody: normalRequest = {
-      gameId: currentGame.gameId,
-      myTeamId: currentGame.matchTeamsInfo.myTeam.teamId,
-      enemyTeamId: currentGame.matchTeamsInfo.enemyTeam.teamId,
+      gameId: gameId,
+      myTeamId: myTeam.teamId,
+      enemyTeamId: enemyTeam.teamId,
     };
     try {
       await instance.post(`/pingpong/games/normal`, requestBody);
@@ -76,8 +78,8 @@ const useSubmitModal = (currentGame: AfterGame) => {
     setModal({
       modalName: 'FIXED-STAT',
       exp: {
-        gameId: currentGame.gameId,
-        mode: currentGame.mode,
+        gameId: gameId,
+        mode: mode,
       },
     });
   };
