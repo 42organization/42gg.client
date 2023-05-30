@@ -7,7 +7,7 @@ import { modalState } from 'utils/recoil/modal';
 export default function DeletePenaltyModal({ intraId }: { intraId: string }) {
   const resetModal = useResetRecoilState(modalState);
   const deletePenalty = async (intraId: string) => {
-    await instanceInManage.delete(`/penalty/users/${intraId}`);
+    await instanceInManage.delete(`/penalty/${intraId}`);
     resetModal();
   };
   return (

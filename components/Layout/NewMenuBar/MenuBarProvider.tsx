@@ -1,15 +1,13 @@
 import { createContext } from 'react';
-import { Resetter, SetterOrUpdater } from 'recoil';
+import { SetterOrUpdater } from 'recoil';
 import { MainMenu, SubMenu, AdminMenu } from './MenuBarElement';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { seasonListState } from 'utils/recoil/seasons';
 import { modalState } from 'utils/recoil/modal';
 import { userState } from 'utils/recoil/layout';
-import { SeasonList } from 'types/seasonTypes';
 import { Modal } from 'types/modalTypes';
-
+import { SeasonMode } from 'types/mainType';
 export interface NewMenuContextState {
-  seasonMode: SeasonList;
+  seasonMode: SeasonMode;
   isAdmin: boolean;
   setModal: SetterOrUpdater<Modal>;
   intraId: string;
@@ -18,12 +16,12 @@ export interface NewMenuContextState {
 export const NewMenuContext = createContext<NewMenuContextState | null>(null);
 
 const NewMenuStateContext = (props) => {
-  const seasonMode = useRecoilValue(seasonListState);
+  const seasonMode = 'rank';
   const { intraId, isAdmin } = useRecoilValue(userState);
   const setModal = useSetRecoilState(modalState);
 
   const NewMenuState: NewMenuContextState = {
-    seasonMode: seasonMode,
+    seasonMode,
     isAdmin: isAdmin,
     intraId: intraId,
     setModal: setModal,

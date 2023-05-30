@@ -49,14 +49,10 @@ export default function UserManagementTable() {
 
   const buttonList: string[] = [styles.detail, styles.penalty];
 
-  const handleButtonAction = (
-    buttonName: string,
-    userId: number,
-    intraId: string
-  ) => {
+  const handleButtonAction = (buttonName: string, intraId: string) => {
     switch (buttonName) {
       case '자세히':
-        setModal({ modalName: 'ADMIN-PROFILE', userId });
+        setModal({ modalName: 'ADMIN-PROFILE', intraId });
         break;
       case '패널티 부여':
         setModal({ modalName: 'ADMIN-PENALTY', intraId });
@@ -75,7 +71,7 @@ export default function UserManagementTable() {
       setUserManagements({
         userInfoList: res.data.userSearchAdminDtos,
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS06');
@@ -85,12 +81,12 @@ export default function UserManagementTable() {
   const getUserInfo = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/users?q=${intraId}&page=${currentPage}`
+        `/users?intraId=${intraId}&page=${currentPage}`
       );
       setUserManagements({
         userInfoList: res.data.userSearchAdminDtos,
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS05');
@@ -143,7 +139,6 @@ export default function UserManagementTable() {
                                       onClick={() =>
                                         handleButtonAction(
                                           buttonName,
-                                          userInfo.id,
                                           userInfo.intraId
                                         )
                                       }
