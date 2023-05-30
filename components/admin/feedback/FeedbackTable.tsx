@@ -22,7 +22,7 @@ const tableTitle: { [key: string]: string } = {
   intraId: 'intra ID',
   category: '종류',
   content: '내용',
-  createdTime: '생성일',
+  createdAt: '생성일',
   isSolved: '해결 여부',
 };
 
@@ -31,7 +31,7 @@ export interface IFeedback {
   intraId: string;
   category: number; // 1: bug, 2: suggestion, 3: question
   content: string;
-  createdTime: Date;
+  createdAt: Date;
   isSolved: boolean;
 }
 
@@ -56,21 +56,21 @@ export default function FeedbackTable() {
   const getUserFeedbacks = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/feedback/users?q=${intraId}&page=${currentPage}&size=10`
+        `/feedback?intraId=${intraId}&page=${currentPage}&size=10`
       );
       setIntraId(intraId);
       setFeedbackInfo({
         feedbackList: res.data.feedbackList.map((feedback: IFeedback) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(feedback.createdTime)
+            new Date(feedback.createdAt)
           );
           return {
             ...feedback,
-            createdTime: `${year}-${month}-${date} ${hour}:${min}`,
+            createdAt: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS04');
@@ -85,15 +85,15 @@ export default function FeedbackTable() {
       setFeedbackInfo({
         feedbackList: res.data.feedbackList.map((feedback: IFeedback) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(feedback.createdTime)
+            new Date(feedback.createdAt)
           );
           return {
             ...feedback,
-            createdTime: `${year}-${month}-${date} ${hour}:${min}`,
+            createdAt: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS03');
@@ -165,9 +165,13 @@ export default function FeedbackTable() {
                                 <option value='0'>처리중</option>
                                 <option value='1'>처리완료</option>
                               </select>
-                            ) : value.toString().length > MAX_CONTENT_LENGTH ? (
+                            ) : (value?.toString() || '').length >
+                              MAX_CONTENT_LENGTH ? (
                               <div>
-                                {value.toString().slice(0, MAX_CONTENT_LENGTH)}
+                                {(value?.toString() || '').slice(
+                                  0,
+                                  MAX_CONTENT_LENGTH
+                                )}
                                 <span
                                   style={{ cursor: 'pointer', color: 'grey' }}
                                   onClick={() => openDetailModal(feedback)}
@@ -176,7 +180,7 @@ export default function FeedbackTable() {
                                 </span>
                               </div>
                             ) : (
-                              value.toString()
+                              value?.toString() || ''
                             )}
                           </TableCell>
                         );
