@@ -9,11 +9,11 @@ import useGetReloadMatchHandler from 'hooks/match/useGetReloadMatchHandler';
 import { fillZero } from 'utils/handleTime';
 import { liveState } from 'utils/recoil/layout';
 import { Modal } from 'types/modalTypes';
-import { NewMatchMode } from 'types/mainType';
+import { MatchMode } from 'types/mainType';
 
 interface MatchBoardProps {
   type: string;
-  toggleMode: NewMatchMode;
+  toggleMode: MatchMode;
 }
 
 export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
@@ -88,13 +88,9 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
               ref={getScrollCurrentRef(parseInt(slot.startTime.slice(-8, -6)))}
             >
               {slot.startTime.slice(-5, -3) === '00' && (
-                <NewMatchTime key={index} startTime={slot.startTime} />
+                <MatchTime key={index} startTime={slot.startTime} />
               )}
-              <NewMatchSlot
-                key={index - 1}
-                toggleMode={toggleMode}
-                slot={slot}
-              />
+              <MatchSlot key={index - 1} toggleMode={toggleMode} slot={slot} />
             </div>
           ))}
         </div>
@@ -109,11 +105,11 @@ function ChangeHourFrom24To12(hour: number) {
   }시`;
 }
 
-interface NewMatchTimeProps {
+interface MatchTimeProps {
   startTime: string;
 }
 
-export const NewMatchTime = ({ startTime }: NewMatchTimeProps) => {
+export const MatchTime = ({ startTime }: MatchTimeProps) => {
   const slotTime = new Date(startTime);
   const slotHour = slotTime.getHours();
   const slotHourIn12 = ChangeHourFrom24To12(slotHour);
@@ -128,12 +124,12 @@ export const NewMatchTime = ({ startTime }: NewMatchTimeProps) => {
   );
 };
 
-interface NewMatchSlotProps {
-  toggleMode: NewMatchMode;
+interface MatchSlotProps {
+  toggleMode: MatchMode;
   slot: Slot;
 }
 
-export const NewMatchSlot = ({ toggleMode, slot }: NewMatchSlotProps) => {
+export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
   const setModal = useSetRecoilState<Modal>(modalState);
   const { event } = useRecoilValue<Live>(liveState);
   const { startTime, endTime, status } = slot;
@@ -173,11 +169,14 @@ export const NewMatchSlot = ({ toggleMode, slot }: NewMatchSlotProps) => {
   const isAfterSlot: boolean =
     new Date(startTime).getTime() - new Date().getTime() >= 0;
 
+  const headCount =
+    status === 'closed' ? 2 : status === ('mytable' || 'match') ? 1 : 0;
+
   return (
     <div className={styles.slotGrid}>
       <button
         className={`${styles.slotButton} ${buttonStyle[status]}`}
-        disabled={status === 'close'}
+        disabled={status === 'closed'}
         onClick={enrollhandler}
       >
         <span className={styles.time}>
@@ -189,7 +188,11 @@ export const NewMatchSlot = ({ toggleMode, slot }: NewMatchSlotProps) => {
             : slotData}
           {status === 'mytable' && ' 🙋'}
         </span>
-        <span>{isAfterSlot && status === 'match' ? '1/2' : '+'}</span>
+        <span
+          className={`${styles.headCount} ${headCount === 0 && styles.plus}`}
+        >
+          {isAfterSlot && (headCount === 0 ? '+' : `${headCount}/2`)}
+        </span>
       </button>
     </div>
   );

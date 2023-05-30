@@ -1,4 +1,4 @@
-import { MatchMode, NewMatchMode } from './mainType';
+import { MatchMode } from './mainType';
 import { Value } from 'react-quill';
 import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 
@@ -34,10 +34,10 @@ export interface Cancel {
   startTime: string;
 }
 
-export interface NewEnroll {
+export interface Enroll {
   startTime: string;
   endTime: string;
-  mode?: NewMatchMode;
+  mode?: MatchMode;
 }
 
 export interface Announcement {
@@ -50,11 +50,11 @@ export interface Exp {
 }
 
 export interface Manual {
-  toggleMode: NewMatchMode;
+  toggleMode: MatchMode;
 }
 
-export interface NewManual {
-  toggleMode: NewMatchMode;
+export interface manual {
+  toggleMode: MatchMode;
 }
 
 export interface ISeason {
@@ -70,9 +70,9 @@ export interface ISeason {
 
 export interface Modal {
   modalName: ModalName;
-  manual?: NewManual;
+  manual?: manual;
   cancel?: Cancel;
-  enroll?: NewEnroll;
+  enroll?: Enroll;
   announcement?: Announcement;
   exp?: Exp;
   gameId?: number;

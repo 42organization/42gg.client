@@ -1,12 +1,8 @@
-import { NewEnroll } from 'types/modalTypes';
+import { Enroll } from 'types/modalTypes';
 import styles from 'styles/modal/match/MatchEnrollModal.module.scss';
 import useMatchEnrollModal from 'hooks/modal/match/useMatchEnrollModal';
 
-export default function MatchEnrollModal({
-  startTime,
-  endTime,
-  mode,
-}: NewEnroll) {
+export default function MatchEnrollModal({ startTime, endTime, mode }: Enroll) {
   const { onEnroll, onCancel } = useMatchEnrollModal({
     startTime,
     mode,

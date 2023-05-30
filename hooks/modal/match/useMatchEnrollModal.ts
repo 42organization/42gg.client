@@ -3,11 +3,11 @@ import { reloadMatchState } from 'utils/recoil/match';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { instance } from 'utils/axios';
-import { NewMatchMode } from 'types/mainType';
+import { MatchMode } from 'types/mainType';
 
 interface EnrollProps {
   startTime: string;
-  mode: NewMatchMode | undefined;
+  mode: MatchMode | undefined;
 }
 
 const useMatchEnrollModal = ({ startTime, mode }: EnrollProps) => {

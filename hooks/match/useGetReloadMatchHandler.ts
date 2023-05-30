@@ -1,7 +1,7 @@
 import { useEffect, Dispatch, SetStateAction } from 'react';
 import { useRecoilState } from 'recoil';
 import { Match } from 'types/matchTypes';
-import { NewMatchMode } from 'types/mainType';
+import { MatchMode } from 'types/mainType';
 import { reloadMatchState } from 'utils/recoil/match';
 
 import useAxiosGet from 'hooks/useAxiosGet';
@@ -11,7 +11,7 @@ interface useGetReloadMatchHandlerProps {
   setMatch: Dispatch<SetStateAction<Match | null>>;
   setSpinReloadButton: Dispatch<SetStateAction<boolean>>;
   type: string;
-  toggleMode: NewMatchMode;
+  toggleMode: MatchMode;
 }
 
 const useGetReloadMatchHandler = ({

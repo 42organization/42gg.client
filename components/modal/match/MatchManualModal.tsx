@@ -1,5 +1,5 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { NewMatchMode } from 'types/mainType';
+import { MatchMode } from 'types/mainType';
 import { Manual } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import { seasonListState } from 'utils/recoil/seasons';
@@ -127,5 +127,5 @@ const modalContentsRank: { title: string; description: string[] }[] = [
   },
 ];
 
-const manualSelect = (modalToggleMode: NewMatchMode) =>
+const manualSelect = (modalToggleMode: MatchMode) =>
   modalToggleMode === 'RANK' ? modalContentsRank : modalContentsNormal;

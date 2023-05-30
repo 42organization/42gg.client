@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { NewMatchMode } from 'types/mainType';
+import { MatchMode } from 'types/mainType';
 import { seasonListState } from 'utils/recoil/seasons';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import useModeToggle from 'hooks/mode/useModeToggle';
@@ -8,7 +8,7 @@ import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface MatchModeWrapProps {
   children: React.ReactNode;
-  toggleMode: NewMatchMode;
+  toggleMode: MatchMode;
   //setToggleMode: React.Dispatch<React.SetStateAction<MatchMode>>;
 }
 
