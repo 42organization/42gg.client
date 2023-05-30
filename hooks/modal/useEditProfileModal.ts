@@ -11,6 +11,7 @@ interface useEditProfileModalProps {
   email: boolean;
   editedProfile: EditedProfile;
   setProfile: SetterOrUpdater<ProfileBasic>;
+  intraId: string;
 }
 
 type useEditProfileModalReturn = [() => Promise<void>, () => void];
@@ -20,6 +21,7 @@ const useEditProfileModal = ({
   email,
   editedProfile,
   setProfile,
+  intraId,
 }: useEditProfileModalProps): useEditProfileModalReturn => {
   const setError = useSetRecoilState<string>(errorState);
   const setModal = useSetRecoilState<Modal>(modalState);
@@ -41,7 +43,7 @@ const useEditProfileModal = ({
     }));
 
     try {
-      await instance.put(`/pingpong/users/`, editedProfile);
+      await instance.put(`/pingpong/users/${intraId}`, editedProfile);
       alert('프로필이 성공적으로 등록되었습니다.');
     } catch (e) {
       setError('JH02');
