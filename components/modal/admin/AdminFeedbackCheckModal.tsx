@@ -14,15 +14,15 @@ export default function AdminFeedbackCheck({
 
   const sendNotificationHandler = async (isSend: boolean) => {
     try {
-      await instanceInManage.put(`/feedback/is-solved`, {
-        feedbackId: id,
+      await instanceInManage.patch(`/feedback/${id}`, {
+        isSolved: isSolved,
       });
-      await instanceInManage.post(`/notifications/${intraId}`, {
+      await instanceInManage.post(`/notifications`, {
         intraId,
         message: isSolved
           ? '피드백을 검토중입니다.'
           : '피드백이 반영되었습니다.',
-        sendMail: isSend,
+        // sendMail: isSend, todo: 슬랙으로 보내는 것으로 변경
       });
       setModal({ modalName: null });
     } catch (e) {
