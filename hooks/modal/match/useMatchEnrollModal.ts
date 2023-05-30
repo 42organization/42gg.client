@@ -21,7 +21,6 @@ const useMatchEnrollModal = ({ slotId, type, mode }: Enroll) => {
     SC003: '경기 취소 후 1분 동안 경기를 예약할 수 없습니다.',
     SC005: '패널티를 부여받은 유저는 경기에 등록할 수 없습니다.',
   };
-  //type any
   const onEnroll = async () => {
     try {
       const body = { slotId: slotId, mode: mode };
