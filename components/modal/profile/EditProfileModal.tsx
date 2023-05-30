@@ -30,6 +30,7 @@ export default function EditProfileModal() {
     email: email,
     editedProfile: editedProfile,
     setProfile: setProfile,
+    intraId: profile.intraId,
   });
 
   useEffect(() => {
