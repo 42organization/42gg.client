@@ -14,7 +14,7 @@ export const reloadMatchState = atom<boolean>({
 });
 
 export const currentMatchState = atom<CurrentMatchList>({
-  key: `currentMatchState`,
+  key: `currentMatchState/${v1()}`,
   default: {
     match: [
       {
@@ -30,7 +30,7 @@ export const currentMatchState = atom<CurrentMatchList>({
 });
 
 export const myCurrentMatch = selectorFamily({
-  key: `myCurrentMatch`,
+  key: `myCurrentMatch/${v1()}`,
   get:
     (startTime) =>
     ({ get }) => {

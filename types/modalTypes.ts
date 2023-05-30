@@ -33,25 +33,12 @@ type ModalName =
 export interface Cancel {
   startTime: string;
 }
-// export interface Cancel {
-//   isMatched: boolean;
-//   slotId: number;
-//   time: string;
-// }
 
 export interface NewEnroll {
   startTime: string;
   endTime: string;
   mode?: NewMatchMode;
 }
-
-// export interface Enroll {
-//   slotId: number;
-//   type: string;
-//   mode?: MatchMode;
-//   slotStartTime: Date;
-//   slotEndTime: Date;
-// }
 
 export interface Announcement {
   content: Value;
@@ -83,10 +70,8 @@ export interface ISeason {
 
 export interface Modal {
   modalName: ModalName;
-  // manual?: Manual;
   manual?: NewManual;
   cancel?: Cancel;
-  // enroll?: Enroll;
   enroll?: NewEnroll;
   announcement?: Announcement;
   exp?: Exp;
