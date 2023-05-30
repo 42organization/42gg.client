@@ -9,8 +9,8 @@ interface RankListItemMainProps {
 
 export default function RankListItemMain({
   user,
-}: //isSeasonNormal,
-RankListItemMainProps) {
+  isSeasonNormal,
+}: RankListItemMainProps) {
   const { rank, intraId, statusMessage } = user;
   const messageFiltered =
     statusMessage.length > 10

@@ -24,7 +24,7 @@ export default function RankListMain({ rank }: RankListMainProps) {
         <RankListItemMain
           key={item.intraId}
           user={item}
-          //isSeasonNormal={isNormalSeason}
+          isSeasonNormal={isNormalSeason}
         />
       ))}
     </div>
