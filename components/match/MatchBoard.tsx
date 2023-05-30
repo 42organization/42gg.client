@@ -162,6 +162,7 @@ export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
       mytable: status === 'mytable' ? styles.mytable : styles.disabled,
       close: styles.disabled,
       open: toggleMode === 'RANK' ? styles.rank : styles.normal,
+      match: toggleMode === 'RANK' ? styles.rank : styles.normal,
     }),
     [slot]
   );
