@@ -9,7 +9,7 @@ import { liveState } from 'utils/recoil/layout';
 
 const useCurrentGame = () => {
   const setError = useSetRecoilState(errorState);
-  const { currentMatchMode } = useRecoilValue(liveState);
+  const { currentMatchMode, gameId } = useRecoilValue(liveState);
   const [currentGame, setCurrentGame] = useState<AfterGame>({
     gameId: 0,
     mode: currentMatchMode
@@ -28,7 +28,7 @@ const useCurrentGame = () => {
     const getCurrentGameHandler = async () => {
       try {
         const res: AxiosResponse<AfterGame> = await instance.get(
-          `/pingpong/games/${currentGame.gameId}`
+          `/pingpong/games/${gameId}`
         );
         setCurrentGame(res.data);
       } catch (e) {
