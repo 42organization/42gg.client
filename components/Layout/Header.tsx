@@ -74,7 +74,7 @@ export default function Header() {
           </div>
           <Link href={`/users/detail?intraId=${user.intraId}`}>
             <PlayerImage
-              src={user.userImageUri}
+              src={user.userImageUrl}
               styleName={'header'}
               size={20}
             />
