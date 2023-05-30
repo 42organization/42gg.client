@@ -14,7 +14,6 @@ import AfterGameModal from './afterGame/AfterGameModal';
 import StatChangeModal from './statChange/StatChangeModal';
 import AdminProfileModal from './admin/AdminProfileModal';
 import AdminPenaltyModal from './admin/AdminPenaltyModal';
-import AdminNotiAllModal from './admin/AdminNotiAllModal';
 import AdminNotiUserModal from './admin/AdminNotiUserModal';
 import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
 import AdminSeasonEdit from './admin/SeasonEdit';
@@ -58,7 +57,6 @@ export default function ModalProvider() {
     'ADMIN-PENALTY_DELETE': intraId ? (
       <DeletePenaltyModal intraId={intraId} />
     ) : null,
-    'ADMIN-NOTI_ALL': <AdminNotiAllModal />,
     'ADMIN-NOTI_USER': <AdminNotiUserModal />,
     'ADMIN-SEASON_EDIT': ISeason ? <AdminSeasonEdit {...ISeason} /> : null,
     'ADMIN-CHECK_FEEDBACK': feedback ? (
