@@ -70,13 +70,11 @@ export default function AdminPenaltyModal(props: { intraId: string }) {
       return;
     }
     try {
-      const res = await instanceInManage.post(
-        `/users/${props.intraId}/penalty`,
-        {
-          reason,
-          penaltyTime,
-        }
-      );
+      const res = await instanceInManage.post(`/penalty`, {
+        intraId,
+        reason,
+        penaltyTime,
+      });
       if (res.status === 403) {
         setSnackBar({
           toastName: 'penalty',
