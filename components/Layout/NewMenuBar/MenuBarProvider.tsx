@@ -5,9 +5,9 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { userState } from 'utils/recoil/layout';
 import { Modal } from 'types/modalTypes';
-
+import { SeasonMode } from 'types/mainType';
 export interface NewMenuContextState {
-  seasonMode: string;
+  seasonMode: SeasonMode;
   isAdmin: boolean;
   setModal: SetterOrUpdater<Modal>;
   intraId: string;
