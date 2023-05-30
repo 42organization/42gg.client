@@ -1,6 +1,4 @@
-import { useRecoilValue } from 'recoil';
 import { RankUser, NormalUser, Rank } from 'types/rankTypes';
-import { seasonListState } from 'utils/recoil/seasons';
 import RankListItemMain from './RankListItemMain';
 import styles from 'styles/rank/RankListMain.module.scss';
 
@@ -9,8 +7,8 @@ interface RankListMainProps {
 }
 
 export default function RankListMain({ rank }: RankListMainProps) {
-  const { seasonMode } = useRecoilValue(seasonListState);
-  const isNormalSeason = seasonMode === 'normal';
+  //const isNormalSeason = seasonMode === 'normal';
+  const isNormalSeason = false;
   const content = {
     normal: { style: styles.normal, title: 'VIP' },
     rank: { style: '', title: 'Champion' },

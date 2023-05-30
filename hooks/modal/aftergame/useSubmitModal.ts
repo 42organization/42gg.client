@@ -5,9 +5,25 @@ import { AfterGame, TeamScore } from 'types/scoreTypes';
 import { instance } from 'utils/axios';
 import { MatchMode } from 'types/mainType';
 
+type rankRequest = {
+  gameId: number;
+  myTeamId: number;
+  myTeamScore: number | '';
+  enemyTeamId: number;
+  enemyTeamScore: number | '';
+};
+
+type normalRequest = {
+  gameId: number;
+  myTeamId: number;
+  enemyTeamId: number;
+};
+
 const useSubmitModal = (currentGame: AfterGame) => {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
+  const { gameId, matchTeamsInfo, mode } = currentGame;
+  const { myTeam, enemyTeam } = matchTeamsInfo;
 
   const rankResponse: { [key: string]: string } = {
     '201': '결과 입력이 완료되었습니다.',
@@ -16,7 +32,14 @@ const useSubmitModal = (currentGame: AfterGame) => {
 
   const submitRankHandler = async (result: TeamScore) => {
     try {
-      const res = await instance.post(`/pingpong/games/result/rank`, result);
+      const requestBody: rankRequest = {
+        gameId: gameId,
+        myTeamId: myTeam.teamId,
+        myTeamScore: result.myTeamScore,
+        enemyTeamId: enemyTeam.teamId,
+        enemyTeamScore: result.enemyTeamScore,
+      };
+      const res = await instance.post(`/pingpong/games/rank`, requestBody);
       alert(rankResponse[`${res?.status}`]);
       await instance.put(`/pingpong/match/current`);
     } catch (e) {
@@ -27,8 +50,13 @@ const useSubmitModal = (currentGame: AfterGame) => {
   };
 
   const submitNormalHandler = async () => {
+    const requestBody: normalRequest = {
+      gameId: gameId,
+      myTeamId: myTeam.teamId,
+      enemyTeamId: enemyTeam.teamId,
+    };
     try {
-      await instance.post(`/pingpong/games/result/normal`);
+      await instance.post(`/pingpong/games/normal`, requestBody);
       await instance.put(`/pingpong/match/current`);
     } catch (e) {
       setError('KP04');

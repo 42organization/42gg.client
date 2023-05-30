@@ -98,7 +98,7 @@ export default function AdminNotiUserModal() {
       return;
     }
     try {
-      const res = await instanceInManage.post(`/notifications/${keyword}`, {
+      const res = await instanceInManage.post(`/notifications`, {
         keyword,
         message: notiContent.current?.value
           ? notiContent.current?.value

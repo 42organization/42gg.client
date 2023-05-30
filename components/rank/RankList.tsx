@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { RankUser, NormalUser, Rank } from 'types/rankTypes';
-import { seasonListState } from 'utils/recoil/seasons';
 import RankListMain from './topRank/RankListMain';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 
 import useRankList from 'hooks/rank/useRankList';
-import { SeasonList } from 'types/seasonTypes';
 
 interface RankListProps {
   toggleMode: MatchMode;
@@ -20,7 +17,7 @@ export default function RankList({
   season,
   isMain = false,
 }: RankListProps) {
-  const { seasonMode } = useRecoilValue<SeasonList>(seasonListState);
+  const seasonMode = 'rank';
   const [rank, setRank] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
   const pageInfo = {
@@ -31,10 +28,10 @@ export default function RankList({
 
   const makePath = (): string => {
     const modeQuery = (targetMode?: string) =>
-      targetMode !== 'normal' ? 'ranks/single' : 'vip';
+      targetMode !== 'normal' ? 'ranks/single' : 'exp';
     const seasonQuery = toggleMode === 'rank' ? `&season=${season}` : '';
     return isMain
-      ? `/pingpong/${modeQuery(seasonMode)}?page=1&count=3`
+      ? `/pingpong/${modeQuery(seasonMode)}?page=1&size=3`
       : `/pingpong/${modeQuery(toggleMode)}?page=${page}${seasonQuery}`;
   };
 

@@ -22,20 +22,18 @@ const tableTitle: { [key: string]: string } = {
   notiId: 'ID',
   roleType: '권한',
   intraId: 'Intra ID',
-  slotId: '슬롯 ID',
   type: '종류',
   message: '내용',
-  createdTime: '생성일',
+  createdAt: '생성일',
   isChecked: '확인 여부',
 };
 
 interface INotification {
   notiId: number;
   intraId: string;
-  slotId: number;
   message: string;
   type: string;
-  createdTime: Date;
+  createdAt: Date;
   isChecked: boolean;
 }
 
@@ -60,21 +58,21 @@ export default function NotificationTable() {
   const getUserNotifications = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/notifications?q=${intraId}&page=${currentPage}&size=10`
+        `/notifications?intraId=${intraId}&page=${currentPage}&size=10`
       );
       setIntraId(intraId);
       setNotificationInfo({
         notiList: res.data.notiList.map((noti: INotification) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(noti.createdTime)
+            new Date(noti.createdAt)
           );
           return {
             ...noti,
-            createdTime: `${year}-${month}-${date} ${hour}:${min}`,
+            createdAt: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS00');
@@ -95,15 +93,15 @@ export default function NotificationTable() {
       setNotificationInfo({
         notiList: res.data.notiList.map((noti: INotification) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(noti.createdTime)
+            new Date(noti.createdAt)
           );
           return {
             ...noti,
-            createdTime: `${year}-${month}-${date} ${hour}:${min}`,
+            createdAt: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS01');
@@ -130,8 +128,10 @@ export default function NotificationTable() {
       <div className={styles.notificationWrap}>
         <div className={styles.header}>
           <span className={styles.title}>알림 관리</span>
-          <AdminSearchBar initSearch={initSearch} />
-          <CreateNotiButton />
+          <div className={styles.searchWrap}>
+            <AdminSearchBar initSearch={initSearch} />
+            <CreateNotiButton />
+          </div>
         </div>
         <TableContainer className={styles.tableContainer} component={Paper}>
           <Table className={styles.table} aria-label='customized table'>
@@ -154,11 +154,11 @@ export default function NotificationTable() {
                     (columnName: string, index: number) => {
                       return (
                         <TableCell className={styles.tableBodyItem} key={index}>
-                          {columnName === 'createdTime' ? (
+                          {columnName === 'createdAt' ? (
                             <div>
-                              {notification.createdTime.toString().slice(0, 4)}
+                              {notification.createdAt.toString().slice(0, 4)}
                               <br />
-                              {notification.createdTime.toString().slice(5, 10)}
+                              {notification.createdAt.toString().slice(5, 10)}
                             </div>
                           ) : notification[
                               columnName as keyof INotification

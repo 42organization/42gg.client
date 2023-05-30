@@ -1,9 +1,8 @@
 import Link from 'next/link';
 import { Noti } from 'types/notiTypes';
-import { gameTimeToString } from 'utils/handleTime';
 import styles from 'styles/Layout/NotiItem.module.scss';
 
-import { HeaderContextState, HeaderContext } from './HeaderContext';
+import { HeaderContextState, HeaderContext } from '../HeaderContext';
 import { useContext } from 'react';
 
 interface NotiItemProps {
@@ -11,34 +10,43 @@ interface NotiItemProps {
 }
 
 export default function NotiItem({ data }: NotiItemProps) {
-  const date = data.createdAt.slice(5, 16).replace('T', ' ');
+  const date = data.createdAt.slice(5).replace('T', ' ');
+
+  const parseEnemyIdMessage = (
+    type: string,
+    message: string
+  ): [string[], string] => {
+    let enemyId: string[] = [];
+    let enemyMessage = '';
+    if (type === 'IMMINENT') {
+      const regList = /<intraId::(.+?)>/;
+      const regId = /^[a-zA-Z0-9]*$/;
+      const parseList = message.split(regList).filter((str) => str !== '');
+      enemyId = parseList.filter((id) => regId.test(id) !== false);
+      enemyMessage = parseList.filter((id) => regId.test(id) === false)[0];
+    }
+    return [enemyId, enemyMessage];
+  };
+
+  const enemyIdMessage = parseEnemyIdMessage(data.type, data.message);
+
   const noti: {
     [key: string]: { [key: string]: string | JSX.Element | undefined };
   } = {
-    imminent: {
+    IMMINENT: {
       title: '경기 준비',
-      content: MakeImminentContent(data.enemyTeam, data.time, data.createdAt),
+      content: MakeImminentContent(enemyIdMessage[0], enemyIdMessage[1]),
     },
-    announce: { title: '공 지', content: MakeAnnounceContent(data.message) },
-    matched: {
+    ANNOUNCE: {
+      title: '공 지',
+      content: MakeAnnounceContent(data.message),
+    },
+    MATCHED: {
       title: '매칭 성사',
-      content: makeContent(data.time, '에 신청한 매칭이 성사되었습니다.'),
-    },
-    canceledbyman: {
-      title: '매칭 취소',
-      content: makeContent(
-        data.time,
-        '에 신청한 매칭이 상대에 의해 취소되었습니다.'
-      ),
-    },
-    canceledbytime: {
-      title: '매칭 취소',
-      content: makeContent(
-        data.time,
-        '에 신청한 매칭이 상대 없음으로 취소되었습니다.'
-      ),
+      content: data.message,
     },
   };
+
   return (
     <div
       className={data.isChecked ? `${styles.readWrap}` : `${styles.unreadWrap}`}
@@ -48,10 +56,6 @@ export default function NotiItem({ data }: NotiItemProps) {
       <div className={styles.date}>{date}</div>
     </div>
   );
-}
-
-function makeContent(time: string | undefined, message: string) {
-  if (time) return gameTimeToString(time) + message;
 }
 
 function MakeAnnounceContent(message: string | undefined) {
@@ -67,11 +71,7 @@ function MakeAnnounceContent(message: string | undefined) {
   );
 }
 
-function MakeImminentContent(
-  enemyTeam: string[] | undefined,
-  time: string | undefined,
-  createdAt: string
-) {
+function MakeImminentContent(enemyTeam: string[], message: string) {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const makeEnemyUsers = (enemyTeam: string[]) => {
     return enemyTeam.map((intraId: string, i: number) => (
@@ -81,16 +81,11 @@ function MakeImminentContent(
       </span>
     ));
   };
-  const makeImminentMinute = (gameTime: string, createdAt: string) =>
-    Math.floor(
-      (Number(new Date(gameTime)) - Number(new Date(createdAt))) / 60000
-    );
   return (
     <>
-      {enemyTeam && time && (
+      {enemyTeam.length && (
         <>
-          {makeEnemyUsers(enemyTeam)}님과 경기{' '}
-          {makeImminentMinute(time, createdAt)}분 전 입니다. 서두르세요!
+          {makeEnemyUsers(enemyTeam)} {message}
         </>
       )}
     </>

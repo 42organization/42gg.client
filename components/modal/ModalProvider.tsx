@@ -14,7 +14,6 @@ import AfterGameModal from './afterGame/AfterGameModal';
 import StatChangeModal from './statChange/StatChangeModal';
 import AdminProfileModal from './admin/AdminProfileModal';
 import AdminPenaltyModal from './admin/AdminPenaltyModal';
-import AdminNotiAllModal from './admin/AdminNotiAllModal';
 import AdminNotiUserModal from './admin/AdminNotiUserModal';
 import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
 import AdminSeasonEdit from './admin/SeasonEdit';
@@ -53,12 +52,11 @@ export default function ModalProvider() {
     'USER-PROFILE_EDIT': <EditProfileModal />,
     'FIXED-AFTER_GAME': <AfterGameModal />,
     'FIXED-STAT': <StatChangeModal {...exp} />,
-    'ADMIN-PROFILE': userId ? <AdminProfileModal value={userId} /> : null,
-    'ADMIN-PENALTY': intraId ? <AdminPenaltyModal value={intraId} /> : null,
+    'ADMIN-PROFILE': intraId ? <AdminProfileModal intraId={intraId} /> : null,
+    'ADMIN-PENALTY': intraId ? <AdminPenaltyModal intraId={intraId} /> : null,
     'ADMIN-PENALTY_DELETE': intraId ? (
       <DeletePenaltyModal intraId={intraId} />
     ) : null,
-    'ADMIN-NOTI_ALL': <AdminNotiAllModal />,
     'ADMIN-NOTI_USER': <AdminNotiUserModal />,
     'ADMIN-SEASON_EDIT': ISeason ? <AdminSeasonEdit {...ISeason} /> : null,
     'ADMIN-CHECK_FEEDBACK': feedback ? (
