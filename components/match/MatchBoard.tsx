@@ -171,13 +171,13 @@ export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
     new Date(startTime).getTime() - new Date().getTime() >= 0;
 
   const headCount =
-    status === 'closed' ? 2 : status === ('mytable' || 'match') ? 1 : 0;
+    status === 'close' ? 2 : status === ('mytable' || 'match') ? 1 : 0;
 
   return (
     <div className={styles.slotGrid}>
       <button
         className={`${styles.slotButton} ${buttonStyle[status]}`}
-        disabled={status === 'closed'}
+        disabled={status === 'close'}
         onClick={enrollhandler}
       >
         <span className={styles.time}>
