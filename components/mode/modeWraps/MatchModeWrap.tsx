@@ -21,7 +21,7 @@ export default function MatchModeWrap({
 
   return (
     <div>
-      {seasonMode === 'both' && (
+      {seasonMode === 'rank' && (
         <div className={styles.matchModeWrap}>
           <ModeToggle
             checked={Mode === 'RANK'}

@@ -139,8 +139,6 @@ export const NewMatchSlot = ({ toggleMode, slot }: NewMatchSlotProps) => {
   const { startTime, endTime, status } = slot;
   const slotData = `${slot.startTime.slice(-2)} - ${slot.endTime.slice(-2)}`;
 
-  const mode = window.location.search.slice(1);
-
   const enrollhandler = async () => {
     if (status === 'mytable') {
       setModal({
@@ -165,7 +163,7 @@ export const NewMatchSlot = ({ toggleMode, slot }: NewMatchSlotProps) => {
 
   const buttonStyle: { [key: string]: string } = useMemo(
     () => ({
-      mytable: toggleMode === mode ? styles.my : styles.disabled,
+      mytable: status === 'mytable' ? styles.mytable : styles.disabled,
       close: styles.disabled,
       open: toggleMode === 'RANK' ? styles.rank : styles.normal,
     }),

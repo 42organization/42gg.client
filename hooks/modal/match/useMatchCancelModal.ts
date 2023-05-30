@@ -20,7 +20,6 @@ const useMatchCancelModal = ({ startTime }: Cancel) => {
 
   const myMatch = useRecoilValue(myCurrentMatch(startTime));
 
-  console.log(myMatch);
   const cancelLimitTime = myMatch?.isImminent;
 
   const rejectCancel = cancelLimitTime && myMatch.isMatched;
