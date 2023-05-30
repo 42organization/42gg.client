@@ -31,10 +31,10 @@ export default function RankList({
 
   const makePath = (): string => {
     const modeQuery = (targetMode?: string) =>
-      targetMode !== 'normal' ? 'ranks/single' : 'vip';
+      targetMode !== 'normal' ? 'ranks/single' : 'exp';
     const seasonQuery = toggleMode === 'rank' ? `&season=${season}` : '';
     return isMain
-      ? `/pingpong/${modeQuery(seasonMode)}?page=1&count=3`
+      ? `/pingpong/${modeQuery(seasonMode)}?page=1&size=3`
       : `/pingpong/${modeQuery(toggleMode)}?page=${page}${seasonQuery}`;
   };
 
