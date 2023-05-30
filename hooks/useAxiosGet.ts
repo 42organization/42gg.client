@@ -10,6 +10,7 @@ import { PppChart, ProfileBasic, ProfileRank } from 'types/userTypes';
 import { UserInfo } from 'types/admin/adminUserTypes';
 import { EditedSchedule } from 'types/admin/adminSlotTypes';
 import { AfterGame } from 'types/scoreTypes';
+import { GameResult } from 'types/gameTypes';
 
 interface useAxiosGetProps {
   url: string;
@@ -24,6 +25,7 @@ interface useAxiosGetProps {
     | Dispatch<SetStateAction<string>>
     | Dispatch<SetStateAction<EditedSchedule>>
     | Dispatch<SetStateAction<AfterGame>>
+    | Dispatch<SetStateAction<GameResult | undefined>>
     | Dispatch<SetStateAction<undefined>>
     | SetterOrUpdater<User>
     | SetterOrUpdater<SeasonList>
