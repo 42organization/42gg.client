@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { userState, liveState } from 'utils/recoil/layout';
 import { useEffect } from 'react';
-import NewMenuBar from './MenuBar/MenuBar';
+import MenuBar from './MenuBar/MenuBar';
 import PlayerImage from 'components/PlayerImage';
 import { FiMenu } from 'react-icons/fi';
 import { BsMegaphone } from 'react-icons/bs';
@@ -79,7 +79,7 @@ export default function Header() {
           </Link>
         </div>
       </div>
-      {HeaderState?.openMenuBarState && <NewMenuBar />}
+      {HeaderState?.openMenuBarState && <MenuBar />}
       {HeaderState?.openNotiBarState && <NewNotiBar />}
     </div>
   );
