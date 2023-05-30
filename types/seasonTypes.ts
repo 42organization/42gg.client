@@ -1,4 +1,4 @@
-import { SeasonMode } from './mainType';
+//import { SeasonMode } from './mainType';
 
 export interface Season {
   id: number;
@@ -6,6 +6,6 @@ export interface Season {
 }
 
 export interface SeasonList {
-  seasonMode: SeasonMode;
+  //seasonMode: SeasonMode;
   seasonList: Season[];
 }

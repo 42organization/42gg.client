@@ -1,7 +1,5 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
 import { MatchMode } from 'types/mainType';
-import { seasonListState } from 'utils/recoil/seasons';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import useModeToggle from 'hooks/mode/useModeToggle';
 import styles from 'styles/mode/ModeWrap.module.scss';
@@ -16,7 +14,7 @@ export default function MatchModeWrap({
   children,
   toggleMode,
 }: MatchModeWrapProps) {
-  const { seasonMode } = useRecoilValue(seasonListState);
+  const seasonMode = 'both';
   const { onToggle, Mode } = useModeToggle(toggleMode);
 
   return (

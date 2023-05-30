@@ -59,9 +59,7 @@ export const MainMenu = () => {
 
   const menuList = [
     {
-      name: `${
-        MenuContext?.seasonMode.seasonMode === 'normal' ? 'VIP' : '랭킹'
-      }`,
+      name: `${MenuContext?.seasonMode === 'normal' ? 'VIP' : '랭킹'}`,
       link: '/rank',
     },
     { name: '최근 경기', link: '/game' },
