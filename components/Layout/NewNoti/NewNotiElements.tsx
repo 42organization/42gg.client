@@ -6,7 +6,7 @@ import styles from 'styles/Layout/NotiBar.module.scss';
 import { instance } from 'utils/axios';
 import { NewNotiContext, NewNotiContextState } from './NewNotiProvider';
 import { Noti } from 'types/notiTypes';
-import NotiItem from '../NotiItem';
+import NotiItem from './NotiItem';
 
 export const NotiCloseButton = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
