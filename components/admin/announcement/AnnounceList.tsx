@@ -24,20 +24,20 @@ const Quill = dynamic(() => import('react-quill'), {
 
 const tableTitle: { [key: string]: string } = {
   content: '내용',
-  createdTime: '생성일',
+  createdAt: '생성일',
   creatorIntraId: '생성한 사람',
-  deletedTime: '삭제일',
+  deletedAt: '삭제일',
   deleterIntraId: '삭제한 사람',
-  isDel: '삭제 여부',
+  modifiedAt: '수정 여부',
 };
 
 interface IAnnouncement {
   content: string;
   creatorIntraId: string;
   deleterIntraId: string;
-  deletedTime: Date;
-  createdTime: Date;
-  isDel: boolean;
+  deletedAt: Date;
+  createdAt: Date;
+  modifiedAt: Date;
 }
 
 interface IAnnouncementTable {
@@ -59,7 +59,7 @@ export default function AnnounceList() {
       const res = await instanceInManage.get(
         `/announcement?page=${currentPage}&size=5`
       );
-      setAnnouncementInfo({ ...res.data });
+      setAnnouncementInfo({ ...res.data, currentPage: currentPage });
     } catch (e) {
       console.error('MS01');
     }
@@ -109,8 +109,9 @@ export default function AnnounceList() {
                             className={styles.tableBodyItem}
                             key={index}
                           >
-                            {columnName === 'createdTime' ||
-                            columnName === 'deletedTime'
+                            {columnName === 'createdAt' ||
+                            columnName === 'deletedAt' ||
+                            columnName === 'modifiedAt'
                               ? announcement[columnName as keyof IAnnouncement]
                                   ?.toString()
                                   .replace('T', ' ')

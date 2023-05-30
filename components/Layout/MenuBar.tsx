@@ -1,24 +1,20 @@
 import Link from 'next/link';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userState } from 'utils/recoil/layout';
-import { seasonListState } from 'utils/recoil/seasons';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/Layout/MenuBar.module.scss';
-import { isMainThread } from 'worker_threads';
 
 import { HeaderContextState, HeaderContext } from './HeaderContext';
 import { useContext } from 'react';
 
 export default function MenuBar() {
   const { intraId, isAdmin } = useRecoilValue(userState);
-  const { seasonMode } = useRecoilValue(seasonListState);
-  // const resetOpenMenuBar = useResetRecoilState(openMenuBarState);
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
 
   const setModal = useSetRecoilState(modalState);
   const menuList = [
     {
-      name: `${seasonMode === 'normal' ? 'VIP' : '랭킹'}`,
+      name: '랭킹',
       link: '/rank',
     },
     { name: '최근 경기', link: '/game' },

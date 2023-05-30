@@ -16,7 +16,6 @@ type AdminModal =
   | 'PROFILE'
   | 'PENALTY'
   | 'PENALTY_DELETE'
-  | 'NOTI_ALL'
   | 'NOTI_USER'
   | 'CHECK_FEEDBACK'
   | 'DETAIL_CONTENT'

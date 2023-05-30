@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Exp } from 'types/modalTypes';
+import { GameResult } from 'types/gameTypes';
 import { modalState } from 'utils/recoil/modal';
 import { reloadMatchState } from 'utils/recoil/match';
 import ExpStat from './ExpStat';
@@ -11,17 +12,14 @@ import useAxiosGet from 'hooks/useAxiosGet';
 export default function StatChangeModal({ gameId, mode }: Exp) {
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
-  const [stat, setStat] = useState();
-
+  const [stat, setStat] = useState<GameResult | undefined>();
   useEffect(() => {
     getExpHandler();
   }, []);
 
   const getExpHandler = useAxiosGet({
     url: `/pingpong/games/${gameId}/result/${mode}`,
-    setState: (data) => {
-      setStat({ ...data });
-    },
+    setState: setStat,
     err: 'KP03',
     type: 'setError',
   });
