@@ -10,7 +10,7 @@ export default function AfterGameModal() {
 
   if (currentGame.startTime === '2022-07-13 11:50') return null;
 
-  return currentGame.mode === 'normal' ? (
+  return currentGame.mode === 'NORMAL' ? (
     <NormalGame currentGame={currentGame} onSubmit={submitNormalHandler} />
   ) : (
     <RankGame

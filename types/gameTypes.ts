@@ -25,6 +25,7 @@ export type Game = {
   status: GameStatus;
   mode: GameMode;
   time: string;
+
   team1: Team;
   team2: Team;
 };
