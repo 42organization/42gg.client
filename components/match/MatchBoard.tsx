@@ -189,7 +189,7 @@ export const NewMatchSlot = ({ toggleMode, slot }: NewMatchSlotProps) => {
             : slotData}
           {status === 'mytable' && ' 🙋'}
         </span>
-        {/* <span>{isAfterSlot && ''}</span> */}
+        <span>{isAfterSlot && status === 'match' ? '1/2' : '+'}</span>
       </button>
     </div>
   );
