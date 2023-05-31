@@ -1,10 +1,9 @@
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { MatchMode } from 'types/mainType';
 import { myRankState, scrollState } from 'utils/recoil/myRank';
 import styles from 'styles/rank/RankList.module.scss';
 
 interface MyRankProps {
-  toggleMode: MatchMode;
+  toggleMode: 'normal' | 'rank';
 }
 
 export default function MyRank({ toggleMode }: MyRankProps) {
