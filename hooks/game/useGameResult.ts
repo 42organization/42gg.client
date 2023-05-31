@@ -23,7 +23,7 @@ const useGameResult = ({ mode, season }: GameResultProps) => {
       }
       const modePath = mode === 'BOTH' ? '' : `/${mode?.toLowerCase()}`;
       const userQuery = intraId && `intraId=${intraId}`;
-      const seasonQuery = mode === 'RANK' && `season=${season}`;
+      const seasonQuery = mode === 'RANK' && `seasonId=${season}`;
       const sizeQuery =
         router.pathname === '/users/detail' ? `size=${5}` : `size=${10}`;
       const query = [userQuery, seasonQuery, sizeQuery]
