@@ -24,11 +24,20 @@ export default function GameResultList({ path }: GameResultListProps) {
         <>
           {data?.pages.map((gameList, index) => (
             <div key={index}>
-              {gameList.games.map((game: Game) => {
+              {gameList.games.map((game: Game, index) => {
+                const type = Number.isInteger(index / 2) ? 'LIGHT' : 'DARK';
                 return clickedGameItem === game.gameId ? (
-                  <GameResultBigItem key={game.gameId} game={game} />
+                  <GameResultBigItem
+                    key={game.gameId}
+                    type={type}
+                    game={game}
+                  />
                 ) : (
-                  <GameResultSmallItem key={game.gameId} game={game} />
+                  <GameResultSmallItem
+                    key={game.gameId}
+                    type={type}
+                    game={game}
+                  />
                 );
               })}
             </div>

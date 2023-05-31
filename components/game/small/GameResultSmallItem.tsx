@@ -8,15 +8,16 @@ import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultSmallItemProps {
   game: Game;
+  type: 'LIGHT' | 'DARK';
 }
 
-function GameResultSmallItem({ game }: GameResultSmallItemProps) {
+function GameResultSmallItem({ game, type }: GameResultSmallItemProps) {
   const { mode, team1, team2, gameId } = game;
   const setClickedItemId = useSetRecoilState(clickedGameItemState);
   return (
     <div
       className={`${styles.smallContainer}
-			${styles[mode.toLowerCase()]}`}
+			${styles[type.toLowerCase()]}`}
       onClick={() => setClickedItemId(gameId)}
       id={String(gameId)}
     >

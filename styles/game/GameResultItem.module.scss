@@ -14,33 +14,60 @@
   }
 }
 
-.smallContainer {
+@mixin gameContainer($size) {
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   align-items: center;
-  padding: 0.5rem 1.5rem;
-  margin-bottom: 0.2rem;
-  border-radius: $medium-radius;
-  background: $gray;
+  min-width: 318px;
+  min-width: 3.5rem;
+  border-radius: 1.2rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
+  @if $size == 'small' {
+    height: 71.86px;
+    padding: 0.5rem 1.5rem;
+  } @else if $size == 'big' {
+    height: 98px;
+    padding: 0.5rem 0;
+  }
+}
+
+@mixin backgroudGradient($color) {
+  @if $color == 'light' {
+    background: linear-gradient(
+      93.81deg,
+      #8135f8 48.67%,
+      #8135f8 48.68%,
+      #820f95 127.66%,
+      #820f95 127.66%
+    );
+  } @else if $color == 'dark' {
+    background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
+  }
+}
+
+.smallContainer {
+  @include gameContainer('small');
   cursor: pointer;
+  &.light {
+    @include backgroudGradient('light');
+  }
+  &.dark {
+    @include backgroudGradient('dark');
+  }
 }
 
 .bigContainer {
-  display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
-  align-items: center;
-  padding: 0.8rem 0;
-  margin-bottom: 0.2rem;
-  border-radius: $medium-radius;
-  &.rank {
-    background: linear-gradient(135deg, $rank-red, $rank-blue);
+  @include gameContainer('big');
+  &.light {
+    @include backgroudGradient('light');
   }
-  &.normal {
-    background: linear-gradient(135deg, $norm-lightblue, $norm-hotpink);
+  &.dark {
+    @include backgroudGradient('dark');
   }
 }
 
 .smallTeam {
+  color: #ffffff;
   .Left {
     display: flex;
     flex-direction: row;
@@ -54,7 +81,7 @@
 }
 
 .smallScoreBoard {
-  color: black;
+  color: #ffffff;
   font-weight: 500;
   text-align: center;
 }
@@ -64,21 +91,26 @@
   flex-direction: column;
   align-items: center;
   .userId {
-    margin: 0.5rem 0;
-    color: white;
-    font-size: $big-font;
-    font-weight: 600;
+    font-family: Roboto;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     text-align: center;
-    text-shadow: $text-border-black;
+    color: #ffffff;
     cursor: pointer;
   }
   .winRate {
-    min-width: 5rem;
-    padding: 0.1rem 0.8rem;
-    border-radius: $small-radius;
-    border: 0.1rem white solid;
-    color: white;
-    font-size: $small-font;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.7rem;
+    height: 1rem;
+    background: #fefefe;
+    font-family: Roboto;
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 11px;
+    letter-spacing: 0.04em;
     text-align: center;
   }
 }
@@ -115,9 +147,9 @@
     position: relative;
     padding: 0.2rem;
     color: white;
-    font-size: 0.8rem;
+    font-size: 0.5rem;
     font-weight: 400;
-    text-shadow: $text-border-black;
+    // text-shadow: $text-border-black;
     text-align: center;
   }
 
@@ -135,11 +167,11 @@
   }
 
   .gameScore {
+    font-family: Roboto;
     color: white;
-    font-size: 2rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 700;
     text-align: center;
-    text-shadow: $text-border-black;
   }
 }
 
