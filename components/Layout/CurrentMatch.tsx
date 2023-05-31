@@ -8,6 +8,7 @@ import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
 import { CurrentMatchList, CurrentMatchListElement } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
+import { useMemo } from 'react';
 
 export default function CurrentMatch() {
   const currentMatchList = useRecoilValue<CurrentMatchList>(currentMatchState);
@@ -30,12 +31,27 @@ export default function CurrentMatch() {
     });
   };
 
+  const currentMatchStyle: { [key: string]: string } = useMemo(
+    () => ({
+      0: styles.none,
+      1: styles.one,
+      2: styles.two,
+      3: styles.three,
+    }),
+    []
+  );
+
   return (
     <>
       <div className={styles.container}>
         {currentMatchList.match.map((currentMatch, index) => (
           <>
-            <div className={styles.stringWrapper} key={index}>
+            <div
+              className={`${styles.stringWrapper} ${
+                currentMatchStyle[currentMatchList.match.length]
+              }`}
+              key={index}
+            >
               <div className={styles.icon}>⏰</div>
               <div className={styles.messageWrapper}>
                 {currentMatch &&
@@ -49,8 +65,12 @@ export default function CurrentMatch() {
             <div
               className={
                 blockCancelButton(currentMatch)
-                  ? styles.blockCancelButton
-                  : styles.cancelButton
+                  ? `${styles.blockCancelButton} ${
+                      currentMatchStyle[currentMatchList.match.length]
+                    }`
+                  : `${styles.cancelButton} ${
+                      currentMatchStyle[currentMatchList.match.length]
+                    }`
               }
             >
               <input
