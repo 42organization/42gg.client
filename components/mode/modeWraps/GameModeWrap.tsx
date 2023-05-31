@@ -27,7 +27,7 @@ export default function GameModeWrap({
     useSeasonDropDown(clickTitle, intraId);
 
   useEffect(() => {
-    setRadioMode('both');
+    setRadioMode('BOTH');
     TitleSeasonHandler;
     if (clickTitle) setClickTitle(false);
   }, [clickTitle, intraId]);
@@ -40,7 +40,7 @@ export default function GameModeWrap({
     <div>
       <div className={styles.gameModeWrap}>
         <UserGameSearchBar />
-        {radioMode === 'rank' && seasonList && (
+        {radioMode === 'BOTH' && seasonList && (
           <SeasonDropDown
             seasonList={seasonList}
             value={season}

@@ -1,5 +1,6 @@
 export type MatchMode = 'normal' | 'rank';
-export type SeasonMode = 'normal' | 'rank' | 'both';
+
+export type SeasonMode = 'NORMAL' | 'RANK' | 'BOTH';
 
 export interface User {
   intraId: string;
@@ -11,5 +12,5 @@ export interface Live {
   notiCount: number;
   event: 'match' | 'game' | null;
   currentMatchMode: MatchMode | null;
-  gameId: number;
+  gameId: number | null;
 }

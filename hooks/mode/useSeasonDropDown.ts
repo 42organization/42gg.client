@@ -7,7 +7,8 @@ const useSeasonDropDown = (
   intraId?: string | string[] | undefined
 ) => {
   const latestSeasonId = useRecoilValue(latestSeasonIdState);
-  const { seasonList, seasonMode } = useRecoilValue(seasonListState);
+  const { seasonList } = useRecoilValue(seasonListState);
+  const seasonMode = 'rank';
   const [season, setSeason] = useState<number>(
     useRecoilValue(latestSeasonIdState)
   );

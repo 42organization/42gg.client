@@ -5,10 +5,7 @@ export interface NotiList {
 export interface Noti {
   id: number;
   type: string;
-  message?: string;
-  time?: string;
   isChecked: boolean;
-  myTeam?: string[];
-  enemyTeam?: string[];
+  message: string;
   createdAt: string;
 }

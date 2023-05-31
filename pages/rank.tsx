@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { seasonListState } from 'utils/recoil/seasons';
 import { MatchMode } from 'types/mainType';
 import RankModeWrap from 'components/mode/modeWraps/RankModeWrap';
 import MyRank from 'components/rank/MyRank';
@@ -8,10 +6,7 @@ import RankList from 'components/rank/RankList';
 import styles from 'styles/rank/RankList.module.scss';
 
 export default function Rank() {
-  const { seasonMode } = useRecoilValue(seasonListState);
-  const [mode, setMode] = useState<MatchMode>(
-    seasonMode === 'normal' ? 'normal' : 'rank'
-  );
+  const [mode, setMode] = useState<MatchMode>('rank');
   const content = {
     rank: { style: '', title: 'Ranking' },
     normal: { style: styles.vip, title: 'VIP' },
