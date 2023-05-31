@@ -14,6 +14,7 @@ export default function SearchBar() {
     setShowDropDown,
     searchResult,
     searchBarRef,
+    handleKeyDown,
   } = useSearchBar();
 
   return (
@@ -21,6 +22,7 @@ export default function SearchBar() {
       <input
         type='text'
         onChange={keywordHandler}
+        onKeyDown={handleKeyDown}
         onFocus={() => setShowDropDown(true)}
         placeholder='유저 검색하기'
         maxLength={15}

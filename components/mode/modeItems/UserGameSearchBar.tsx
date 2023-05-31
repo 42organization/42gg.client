@@ -18,6 +18,7 @@ export default function UserGameSearchBar() {
     setShowDropDown,
     searchResult,
     searchBarRef,
+    handleKeyDown,
   } = useSearchBar();
 
   useEffect(() => {
@@ -41,6 +42,7 @@ export default function UserGameSearchBar() {
       <input
         type='text'
         onChange={keywordHandler}
+        onKeyDown={handleKeyDown}
         onFocus={() => setShowDropDown(true)}
         placeholder='유저 검색하기'
         maxLength={15}

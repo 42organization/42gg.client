@@ -18,6 +18,7 @@ export default function AdminSearchBar({
     setShowDropDown,
     searchResult,
     searchBarRef,
+    handleKeyDown,
   } = useSearchBar();
 
   return (
@@ -25,6 +26,7 @@ export default function AdminSearchBar({
       <input
         type='text'
         onChange={keywordHandler}
+        onKeyDown={handleKeyDown}
         onFocus={() => setShowDropDown(true)}
         placeholder='유저 검색하기'
         maxLength={MAX_SEARCH_LENGTH}

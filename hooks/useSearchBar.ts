@@ -4,6 +4,7 @@ import { instance } from 'utils/axios';
 import { useSetRecoilState } from 'recoil';
 import { Dispatch } from 'react';
 import { useCallback } from 'react';
+import { useRouter } from 'next/router';
 
 interface useSearchBarReturn {
   keyword: string;
@@ -13,6 +14,7 @@ interface useSearchBarReturn {
   setShowDropDown: Dispatch<SetStateAction<boolean>>;
   searchResult: string[];
   searchBarRef: RefObject<HTMLDivElement>;
+  handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 let timer: ReturnType<typeof setTimeout>;
@@ -32,6 +34,7 @@ export default function useSearchBar(): useSearchBarReturn {
   const [searchResult, setSearchResult] = useState<string[]>([]);
   const setError = useSetRecoilState<string>(errorState);
   const searchBarRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const getSearchResultHandler = useCallback(async () => {
     try {
@@ -43,6 +46,15 @@ export default function useSearchBar(): useSearchBarReturn {
       setError('JB06');
     }
   }, [keyword, setError]);
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      if (keyword === searchResult[0]) {
+        const intraId = searchResult[0];
+        router.push(`/users/detail?intraId=${intraId}`);
+      }
+    }
+  };
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -62,7 +74,7 @@ export default function useSearchBar(): useSearchBarReturn {
       clearTimeout(timer);
       setSearchResult([]);
     } else if (checkId.test(keyword)) {
-      debounce(getSearchResultHandler, 500)();
+      debounce(getSearchResultHandler, 300)();
     }
   }, [keyword, getSearchResultHandler]);
 
@@ -81,5 +93,6 @@ export default function useSearchBar(): useSearchBarReturn {
     setShowDropDown,
     searchResult,
     searchBarRef,
+    handleKeyDown,
   };
 }
