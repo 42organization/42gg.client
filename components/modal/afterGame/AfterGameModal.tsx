@@ -5,18 +5,18 @@ import RankGame from './RankGame';
 
 export default function AfterGameModal() {
   const { currentGame } = useCurrentGame();
-  const { submitRankHandler, submitNormalHandler, confirmRankHandler } =
+  const { submitRankHandler, submitNormalHandler, openStatChangeModal } =
     useSubmitModal(currentGame);
 
   if (currentGame.startTime === '2022-07-13 11:50') return null;
 
-  return currentGame.mode === 'normal' ? (
+  return currentGame.mode === 'NORMAL' ? (
     <NormalGame currentGame={currentGame} onSubmit={submitNormalHandler} />
   ) : (
     <RankGame
       currentGame={currentGame}
       onSubmit={
-        currentGame.isScoreExist ? confirmRankHandler : submitRankHandler
+        currentGame.isScoreExist ? openStatChangeModal : submitRankHandler
       }
     />
   );

@@ -54,15 +54,11 @@ const useSubmitModal = (currentGame: AfterGame) => {
       enemyTeamId: enemyTeam.teamId,
     };
     try {
-      await instance.post(`/pingpong/games/result/normal`);
+      await instance.post(`/pingpong/games/result/normal`, requestBody);
     } catch (e) {
       setError('KP04');
       return;
     }
-    openStatChangeModal();
-  };
-
-  const confirmRankHandler = () => {
     openStatChangeModal();
   };
 
@@ -79,7 +75,7 @@ const useSubmitModal = (currentGame: AfterGame) => {
   return {
     submitRankHandler,
     submitNormalHandler,
-    confirmRankHandler,
+    openStatChangeModal,
   };
 };
 

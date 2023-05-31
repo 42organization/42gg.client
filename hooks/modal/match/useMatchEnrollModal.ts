@@ -22,7 +22,6 @@ const useMatchEnrollModal = ({ startTime, mode }: EnrollProps) => {
     MA302: '패널티를 부여받은 유저는 경기에 등록할 수 없습니다.',
     MA303: '경기 등록에 실패하였습니다.',
   };
-  //type any
   const onEnroll = async () => {
     try {
       const body = { startTime: startTime.slice(0, -3), mode: mode };
