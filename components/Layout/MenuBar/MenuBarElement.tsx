@@ -16,7 +16,6 @@ interface SubLinkProps {
   children: ReactNode;
 }
 interface AdminMenuProps {
-  //link: string;
   isAdmin: boolean | undefined;
   onClick?: (event: MouseEvent<HTMLDivElement>) => void;
   children?: ReactNode;
@@ -28,13 +27,7 @@ const MenuLink = ({ link, onClick, children }: MenuLinkProps) => (
   </Link>
 );
 
-const SubMenuLink = ({ onClick, children }: SubLinkProps) => (
-  <div onClick={onClick} className={styles.subMenuLink}>
-    {children}
-  </div>
-);
-
-const SubMenuLink2 = ({ link, children }: SubLinkProps) => (
+const SubMenuLink = ({ link, children }: SubLinkProps) => (
   <div onClick={() => window.open(link)}>{children}</div>
 );
 
@@ -98,9 +91,9 @@ export const SubMenu = () => {
   return (
     <div className={styles.subMenu}>
       {submenuList.map((submenu, index) => (
-        <SubMenuLink2 key={index} link={submenu.link}>
+        <SubMenuLink key={index} link={submenu.link}>
           {submenu.name}
-        </SubMenuLink2>
+        </SubMenuLink>
       ))}
       <div onClick={() => MenuContext?.setModal({ modalName: 'MENU-REPORT' })}>
         건의하기

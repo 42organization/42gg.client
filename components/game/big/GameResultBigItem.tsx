@@ -16,7 +16,7 @@ function GameResultBigItem({ game }: GameResultBigItemProps) {
   return (
     <div
       className={`${styles.bigContainer}
-			${styles[mode]}`}
+			${styles[mode.toLowerCase()]}`}
       onClick={() => setClickedItemId(gameId)}
       id={String(gameId)}
     >

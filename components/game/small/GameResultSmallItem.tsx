@@ -16,7 +16,7 @@ function GameResultSmallItem({ game }: GameResultSmallItemProps) {
   return (
     <div
       className={`${styles.smallContainer}
-			${styles[mode]}`}
+			${styles[mode.toLowerCase()]}`}
       onClick={() => setClickedItemId(gameId)}
       id={String(gameId)}
     >

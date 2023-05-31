@@ -31,7 +31,7 @@ const useBasicProfile = ({ profileId }: UseBasicProfileProps) => {
 
   const getBasicProfileHandler = async () => {
     try {
-      const res = await instance.get(`/pingpong/users/${profileId}/detail`);
+      const res = await instance.get(`/pingpong/users/${profileId}`);
       setProfile(res?.data);
     } catch (e) {
       setError('SJ03');

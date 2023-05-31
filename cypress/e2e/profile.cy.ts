@@ -57,7 +57,7 @@ describe('프로필 기능 테스트 🥳', () => {
   it('프로필 edit 기능 확인 🤔 - 알림', () => {
     cy.intercept(
       'PUT',
-      `${Cypress.env('SERVER_ENDPOINT')}/pingpong/users/detail`
+      `${Cypress.env('SERVER_ENDPOINT')}/pingpong/users/detail?intraId=`
     ).as('profileApi');
     cy.origin(Cypress.env('HOME'), () => {
       cy.wait(1000);

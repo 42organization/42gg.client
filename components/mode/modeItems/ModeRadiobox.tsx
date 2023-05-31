@@ -7,10 +7,10 @@ interface ModeRadioboxProps {
 }
 
 export default function ModeRadiobox({ mode, onChange }: ModeRadioboxProps) {
-  const modes = [
-    { type: 'both', name: '전체' },
-    { type: 'normal', name: '일반' },
-    { type: 'rank', name: '랭크' },
+  const modes: { type: SeasonMode; name: string }[] = [
+    { type: 'BOTH', name: '전체' },
+    { type: 'NORMAL', name: '일반' },
+    { type: 'RANK', name: '랭크' },
   ];
 
   return (

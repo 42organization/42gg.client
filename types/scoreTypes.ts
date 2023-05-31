@@ -24,10 +24,11 @@ export interface Players {
   enemyTeam: Team;
 }
 
-export interface AfterGame {
+export type AfterGame = {
+  mode: Uppercase<MatchMode> | null;
   gameId: number;
-  mode: MatchMode | null;
   startTime: string;
   isScoreExist: boolean;
+  status: 'LIVE' | 'WAIT' | 'END';
   matchTeamsInfo: Players;
-}
+};
