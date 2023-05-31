@@ -1,22 +1,22 @@
 import { useContext } from 'react';
 import styles from 'styles/Layout/NotiBar.module.scss';
 import { HeaderContextState, HeaderContext } from '../HeaderContext';
-import NewNotiStateContext from './NewNotiProvider';
+import NotiStateContext from './NotiContext';
 
-export default function NewNotiBar() {
+export default function NotiBar() {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
 
   return (
-    <NewNotiStateContext>
+    <NotiStateContext>
       <div
         className={styles.backdrop}
         onClick={() => HeaderState?.resetOpenNotiBarState()}
       >
         <div className={styles.container} onClick={(e) => e.stopPropagation()}>
-          <NewNotiStateContext.NotiCloseButton />
-          <NewNotiStateContext.NotiMain />
+          <NotiStateContext.NotiCloseButton />
+          <NotiStateContext.NotiMain />
         </div>
       </div>
-    </NewNotiStateContext>
+    </NotiStateContext>
   );
 }

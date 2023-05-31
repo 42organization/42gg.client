@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import styles from 'styles/Layout/NotiBar.module.scss';
 import { instance } from 'utils/axios';
-import { NewNotiContext, NewNotiContextState } from './NewNotiProvider';
+import { NotiProvider, NotiContextState } from './NotiContext';
 import { Noti } from 'types/notiTypes';
 import NotiItem from './NotiItem';
 
@@ -19,7 +19,7 @@ export const NotiCloseButton = () => {
 };
 
 export const NotiExist = () => {
-  const NotiContext = useContext<NewNotiContextState | null>(NewNotiContext);
+  const NotiContext = useContext<NotiContextState | null>(NotiProvider);
 
   return (
     <>
@@ -40,7 +40,7 @@ export const NotiExist = () => {
 };
 
 export const NotiEmpty = () => {
-  const NotiContext = useContext<NewNotiContextState | null>(NewNotiContext);
+  const NotiContext = useContext<NotiContextState | null>(NotiProvider);
 
   return (
     <div className={styles.emptyContent}>
@@ -55,7 +55,7 @@ export const NotiEmpty = () => {
 };
 
 export const NotiMain = () => {
-  const NotiContext = useContext<NewNotiContextState | null>(NewNotiContext);
+  const NotiContext = useContext<NotiContextState | null>(NotiProvider);
 
   if (NotiContext?.noti.length) {
     return <NotiExist />;
