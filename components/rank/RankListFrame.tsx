@@ -21,8 +21,8 @@ export default function RankListFrame({
 }: RankListFrameProps) {
   const router = useRouter();
   const division: { [key: string]: string[] } = {
-    rank: ['순위', 'intraId', '상태메시지', '탁구력'],
-    normal: ['순위', 'intraId (Lv)', '상태메시지', '경험치'],
+    RANK: ['순위', 'intraId', '상태메시지', '탁구력'],
+    NORMAL: ['순위', 'intraId (Lv)', '상태메시지', '경험치'],
   };
 
   const pageChangeHandler = (pages: number) => {
@@ -35,7 +35,7 @@ export default function RankListFrame({
       <div className={styles.container}>
         <div
           className={`${styles.division}
-					${toggleMode === 'normal' && styles.normal}`}
+					${toggleMode === 'NORMAL' && styles.normal}`}
         >
           {division[toggleMode].map((item: string) => (
             <div key={item}>{item}</div>

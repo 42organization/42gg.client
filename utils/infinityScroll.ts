@@ -18,7 +18,7 @@ export default function InfScroll(path: string) {
     },
     onError: (e: any) => {
       if (e.response.data.code === 'UF001') setError('JB07');
-      else setError('KP01');
+      //else setError('KP01');
     },
     retry: 0,
     keepPreviousData: true,

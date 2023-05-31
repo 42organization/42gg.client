@@ -6,10 +6,10 @@ import RankList from 'components/rank/RankList';
 import styles from 'styles/rank/RankList.module.scss';
 
 export default function Rank() {
-  const [mode, setMode] = useState<MatchMode>('rank');
+  const [mode, setMode] = useState<MatchMode>('RANK');
   const content = {
-    rank: { style: '', title: 'Ranking' },
-    normal: { style: styles.vip, title: 'VIP' },
+    RANK: { style: '', title: 'Ranking' },
+    NORMAL: { style: styles.vip, title: 'VIP' },
   };
 
   return (
