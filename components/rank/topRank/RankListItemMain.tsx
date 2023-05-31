@@ -25,7 +25,7 @@ export default function RankListItemMain({
     >
       <div className={styles.rankNumber}>{rankFiltered}</div>
       <div className={styles.intraId}>
-        <Link href={`/users/detail?intraId=${intraId}`}>
+        <Link href={`users/detail?intraId=${intraId}`}>
           <span>{intraId}</span>
         </Link>
       </div>

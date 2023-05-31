@@ -35,7 +35,9 @@ export default function useSearchBar(): useSearchBarReturn {
 
   const getSearchResultHandler = useCallback(async () => {
     try {
-      const res = await instance.get(`/pingpong/users/searches?q=${keyword}`);
+      const res = await instance.get(
+        `/pingpong/users/searches?intraId=${keyword}`
+      );
       setSearchResult(res?.data.users);
     } catch (e) {
       setError('JB06');
