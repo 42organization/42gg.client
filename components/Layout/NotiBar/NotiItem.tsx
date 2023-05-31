@@ -13,29 +13,33 @@ export default function NotiItem({ data }: NotiItemProps) {
   const date = data.createdAt.slice(5).replace('T', ' ');
 
   const parseEnemyIdMessage = (
-    type: string,
     message: string
-  ): [string[], string] => {
-    let enemyId: string[] = [];
-    let enemyMessage = '';
-    if (type === 'IMMINENT') {
-      const regList = /<intraId::(.+?)>/;
-      const regId = /^[a-zA-Z0-9]*$/;
-      const parseList = message.split(regList).filter((str) => str !== '');
-      enemyId = parseList.filter((id) => regId.test(id) !== false);
-      enemyMessage = parseList.filter((id) => regId.test(id) === false)[0];
-    }
-    return [enemyId, enemyMessage];
+  ): {
+    enemyId: string[];
+    enemyMessage: string;
+  } => {
+    const regList = /<intraId::(.+?)>/;
+    const regId = /^[a-zA-Z0-9]*$/;
+    const parseList = message.split(regList).filter((str) => str !== '');
+    const enemyId = parseList.filter((id) => regId.test(id) !== false);
+    const enemyMessage = parseList.filter((id) => regId.test(id) === false)[0];
+    return { enemyId, enemyMessage };
   };
 
-  const enemyIdMessage = parseEnemyIdMessage(data.type, data.message);
+  let enemyId: string[] = [];
+  let enemyMessage = '';
+
+  if (data.type === 'IMMINENT') {
+    enemyId = parseEnemyIdMessage(data.message).enemyId;
+    enemyMessage = parseEnemyIdMessage(data.message).enemyMessage;
+  }
 
   const noti: {
     [key: string]: { [key: string]: string | JSX.Element | undefined };
   } = {
     IMMINENT: {
       title: '경기 준비',
-      content: MakeImminentContent(enemyIdMessage[0], enemyIdMessage[1]),
+      content: MakeImminentContent(enemyId, enemyMessage),
     },
     ANNOUNCE: {
       title: '공 지',
