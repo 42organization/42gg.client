@@ -41,7 +41,6 @@ const useSubmitModal = (currentGame: AfterGame) => {
       };
       const res = await instance.post(`/pingpong/games/rank`, requestBody);
       alert(rankResponse[`${res?.status}`]);
-      await instance.put(`/pingpong/match/current`);
     } catch (e) {
       setError('JH04');
       return;
@@ -56,20 +55,9 @@ const useSubmitModal = (currentGame: AfterGame) => {
       enemyTeamId: enemyTeam.teamId,
     };
     try {
-      await instance.post(`/pingpong/games/normal`, requestBody);
-      await instance.put(`/pingpong/match/current`);
+      await instance.post(`/pingpong/games/result/normal`, requestBody);
     } catch (e) {
       setError('KP04');
-      return;
-    }
-    openStatChangeModal();
-  };
-
-  const confirmRankHandler = async () => {
-    try {
-      await instance.put(`/pingpong/match/current`);
-    } catch (e) {
-      setError('KP05');
       return;
     }
     openStatChangeModal();
@@ -90,7 +78,7 @@ const useSubmitModal = (currentGame: AfterGame) => {
   return {
     submitRankHandler,
     submitNormalHandler,
-    confirmRankHandler,
+    openStatChangeModal,
   };
 };
 

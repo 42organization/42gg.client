@@ -30,17 +30,13 @@ type ModalName =
   | `FIXED-${FixedModal}`
   | `ADMIN-${AdminModal}`;
 export interface Cancel {
-  isMatched: boolean;
-  slotId: number;
-  time: string;
+  startTime: string;
 }
 
 export interface Enroll {
-  slotId: number;
-  type: string;
+  startTime: string;
+  endTime: string;
   mode?: MatchMode;
-  slotStartTime: Date;
-  slotEndTime: Date;
 }
 
 export interface Announcement {
@@ -53,6 +49,10 @@ export interface Exp {
 }
 
 export interface Manual {
+  toggleMode: MatchMode;
+}
+
+export interface manual {
   toggleMode: MatchMode;
 }
 
@@ -69,7 +69,7 @@ export interface ISeason {
 
 export interface Modal {
   modalName: ModalName;
-  manual?: Manual;
+  manual?: manual;
   cancel?: Cancel;
   enroll?: Enroll;
   announcement?: Announcement;

@@ -5,9 +5,15 @@
   position: relative; // match refresh 버튼을 위해 필요함
 }
 
+// .title {
+//   @include pageTitle;
+//   &.normal {
+//     text-shadow: $text-border-black, 0.3rem 0.3rem 0 $norm-lightblue2;
+//   }
+// }
 .title {
   @include pageTitle;
-  &.normal {
+  &.NORMAL {
     text-shadow: $text-border-black, 0.3rem 0.3rem 0 $norm-lightblue2;
   }
 }

@@ -22,10 +22,10 @@ export default function MatchManualModal({ toggleMode }: Manual) {
       {seasonMode === 'both' && (
         <div className={styles.toggleContainer}>
           <ModeToggle
-            checked={Mode === 'rank'}
+            checked={Mode === 'RANK'}
             onToggle={onToggle}
             id={'manualToggle'}
-            text={Mode === 'rank' ? '랭크' : '일반'}
+            text={Mode === 'RANK' ? '랭크' : '일반'}
           />
         </div>
       )}
@@ -128,4 +128,4 @@ const modalContentsRank: { title: string; description: string[] }[] = [
 ];
 
 const manualSelect = (modalToggleMode: MatchMode) =>
-  modalToggleMode === 'rank' ? modalContentsRank : modalContentsNormal;
+  modalToggleMode === 'RANK' ? modalContentsRank : modalContentsNormal;

@@ -54,6 +54,21 @@ export default function SlotMain() {
       console.error('SW01');
     }
   };
+  // const initSlotInfo = async () => {
+  //   try {
+  //     const res = await instance.get(`/pingpong/match/tables/${1}/rank/single`);
+  //     setSlotInfo({ ...res?.data });
+  //     setShowTime(res?.data.matchBoards.length);
+  //     setFirstHour(slotHour(res?.data.matchBoards[0][0].time));
+  //     setLastHour(
+  //       slotHour(
+  //         res?.data.matchBoards[res?.data.matchBoards.length - 1][0].time
+  //       ) + 1
+  //     );
+  //   } catch (e) {
+  //     console.error('SW01');
+  //   }
+  // };
 
   useEffect(() => {
     initScheduleInfo();

@@ -1,24 +1,30 @@
 import { useEffect } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Cancel } from 'types/modalTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import {
   currentMatchState,
+  myCurrentMatch,
   openCurrentMatchState,
   reloadMatchState,
 } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
 
-const useMatchCancelModal = ({ isMatched, slotId, time }: Cancel) => {
+const useMatchCancelModal = ({ startTime }: Cancel) => {
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
-  const [currentMatch, setCurrentMatch] = useRecoilState(currentMatchState);
-  const cancelLimitTime = currentMatch.isImminent;
-  const rejectCancel = cancelLimitTime && isMatched;
+  const setCurrentMatchList = useSetRecoilState(currentMatchState);
+
+  const myMatch = useRecoilValue(myCurrentMatch(startTime));
+
+  const cancelLimitTime = myMatch?.isImminent;
+
+  const rejectCancel = cancelLimitTime && myMatch.isMatched;
   const contentType: 'reject' | 'cancel' = rejectCancel ? 'reject' : 'cancel';
+
   const content = {
     cancel: {
       emoji: '🤔',
@@ -43,7 +49,9 @@ const useMatchCancelModal = ({ isMatched, slotId, time }: Cancel) => {
 
   const onCancel = async () => {
     try {
-      await instance.delete(`/pingpong/match/slots/${slotId}`);
+      await instance.delete(
+        `/pingpong/match?startTime=${startTime.slice(0, -3)}` // 초 단위 슬라이스
+      );
       alert(cancelResponse.SUCCESS);
     } catch (e: any) {
       if (e.response.data.code in cancelResponse)
@@ -62,8 +70,8 @@ const useMatchCancelModal = ({ isMatched, slotId, time }: Cancel) => {
 
   const getCurrentMatchHandler = async () => {
     try {
-      const res = await instance.get('/pingpong/match/current');
-      setCurrentMatch(res.data);
+      const res = await instance.get('/pingpong/match');
+      setCurrentMatchList(res.data);
     } catch (e) {
       setError('JH08');
     }
@@ -79,8 +87,8 @@ const useMatchCancelModal = ({ isMatched, slotId, time }: Cancel) => {
     contentType,
     rejectCancel,
     onCancel,
-    currentMatch,
     onReturn,
+    myMatch,
   };
 };
 

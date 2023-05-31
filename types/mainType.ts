@@ -1,4 +1,4 @@
-export type MatchMode = 'normal' | 'rank';
+export type MatchMode = 'NORMAL' | 'RANK' | 'BOTH';
 
 export type SeasonMode = 'NORMAL' | 'RANK' | 'BOTH';
 

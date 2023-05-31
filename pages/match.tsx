@@ -5,10 +5,11 @@ import MatchModeWrap from 'components/mode/modeWraps/MatchModeWrap';
 import styles from 'styles/match/match.module.scss';
 
 export default function Match() {
-  const [toggleMode] = useState<MatchMode>('rank');
+  const [toggleMode] = useState<MatchMode>('RANK');
   const content = {
-    normal: { style: styles.normal },
-    rank: { style: '' },
+    NORMAL: { style: styles.normal },
+    RANK: { style: '' },
+    BOTH: { style: '' },
   };
 
   return (

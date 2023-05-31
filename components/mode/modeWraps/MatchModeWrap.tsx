@@ -19,13 +19,13 @@ export default function MatchModeWrap({
 
   return (
     <div>
-      {seasonMode === 'both' && (
+      {seasonMode === 'rank' && (
         <div className={styles.matchModeWrap}>
           <ModeToggle
-            checked={Mode === 'rank'}
+            checked={Mode === 'RANK'}
             onToggle={onToggle}
             id={'matchToggle'}
-            text={Mode === 'rank' ? '랭크' : '일반'}
+            text={Mode === 'RANK' ? '랭크' : '일반'}
           />
         </div>
       )}

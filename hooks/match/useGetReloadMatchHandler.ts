@@ -17,14 +17,13 @@ interface useGetReloadMatchHandlerProps {
 const useGetReloadMatchHandler = ({
   setMatch,
   setSpinReloadButton,
-  type,
   toggleMode,
 }: useGetReloadMatchHandlerProps): (() => void) => {
   const [reloadMatch, setReloadMatch] =
     useRecoilState<boolean>(reloadMatchState);
 
   const getMatchHandler = useAxiosGet({
-    url: `/pingpong/match/tables/${1}/${toggleMode}/${type}`,
+    url: `/pingpong/match/time/scope?mode=${toggleMode}`,
     setState: setMatch,
     err: 'SJ01',
     type: 'setError',
@@ -37,7 +36,7 @@ const useGetReloadMatchHandler = ({
   });
 
   useEffect(() => {
-    setReloadMatch(true);
+    getMatchHandler();
   }, [toggleMode]);
 
   useEffect(() => {

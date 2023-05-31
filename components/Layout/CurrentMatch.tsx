@@ -6,44 +6,63 @@ import { gameTimeToString } from 'utils/handleTime';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
+import { CurrentMatchList, CurrentMatchListElement } from 'types/matchTypes';
+import { Modal } from 'types/modalTypes';
 
 export default function CurrentMatch() {
-  const { isMatched, enemyTeam, time, slotId, isImminent } =
-    useRecoilValue(currentMatchState);
-  const setModal = useSetRecoilState(modalState);
-  const matchingMessage = time && makeMessage(time, isMatched);
-  const blockCancelButton = isImminent && enemyTeam.length;
+  const currentMatchList = useRecoilValue<CurrentMatchList>(currentMatchState);
+  const setModal = useSetRecoilState<Modal>(modalState);
+
+  const blockCancelButton = (myCurrentMatch: CurrentMatchListElement) => {
+    return (
+      myCurrentMatch &&
+      myCurrentMatch.isImminent &&
+      myCurrentMatch.enemyTeam.length
+    );
+  };
 
   useGetCurrentMatch();
 
-  const onCancel = () => {
+  const onCancel = (startTime: string) => {
     setModal({
       modalName: 'MATCH-CANCEL',
-      cancel: { isMatched, slotId, time },
+      cancel: { startTime: startTime },
     });
   };
 
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.stringWrapper}>
-          <div className={styles.icon}>⏰</div>
-          <div className={styles.messageWrapper}>
-            {matchingMessage}
-            <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
-          </div>
-        </div>
-        <div
-          className={
-            blockCancelButton ? styles.blockCancelButton : styles.cancelButton
-          }
-        >
-          <input
-            type='button'
-            onClick={onCancel}
-            value={blockCancelButton ? '취소불가' : '취소하기'}
-          />
-        </div>
+        {currentMatchList.match.map((currentMatch, index) => (
+          <>
+            <div className={styles.stringWrapper} key={index}>
+              <div className={styles.icon}>⏰</div>
+              <div className={styles.messageWrapper}>
+                {currentMatch &&
+                  makeMessage(currentMatch.startTime, currentMatch.isMatched)}
+                <EnemyTeam
+                  enemyTeam={currentMatch.enemyTeam}
+                  isImminent={currentMatch.isImminent}
+                />
+              </div>
+            </div>
+            <div
+              className={
+                blockCancelButton(currentMatch)
+                  ? styles.blockCancelButton
+                  : styles.cancelButton
+              }
+            >
+              <input
+                type='button'
+                onClick={() => onCancel(currentMatch.startTime)}
+                value={
+                  blockCancelButton(currentMatch) ? '취소불가' : '취소하기'
+                }
+              />
+            </div>
+          </>
+        ))}
       </div>
     </>
   );
