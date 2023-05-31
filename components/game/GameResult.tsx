@@ -11,7 +11,7 @@ interface GameResultProps {
 export default function GameResult({ mode, season }: GameResultProps) {
   const queryClient = new QueryClient();
   const path = useGameResult({ mode: mode, season: season });
-
+  console.log(path);
   return (
     <div>
       {path && (
