@@ -7,19 +7,18 @@ import styles from 'styles/mode/ModeWrap.module.scss';
 interface MatchModeWrapProps {
   children: React.ReactNode;
   toggleMode: MatchMode;
-  //setToggleMode: React.Dispatch<React.SetStateAction<MatchMode>>;
 }
 
 export default function MatchModeWrap({
   children,
   toggleMode,
 }: MatchModeWrapProps) {
-  const seasonMode = 'both';
+  const seasonMode = 'RANK';
   const { onToggle, Mode } = useModeToggle(toggleMode);
 
   return (
     <div>
-      {seasonMode === 'rank' && (
+      {seasonMode === 'RANK' && (
         <div className={styles.matchModeWrap}>
           <ModeToggle
             checked={Mode === 'RANK'}
