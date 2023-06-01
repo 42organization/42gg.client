@@ -3,12 +3,13 @@ import { useRecoilValue } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/Layout/MainPageProfile.module.scss';
-import { openCurrentMatchState } from 'utils/recoil/match';
+import { currentMatchState, openCurrentMatchState } from 'utils/recoil/match';
 import CurrentMatch from './CurrentMatch';
 
 const MainPageProfile = () => {
   const user = useRecoilValue(userState);
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
+  const currentMatchList = useRecoilValue(currentMatchState).match;
 
   return (
     <div className={styles.gridContainer}>
@@ -30,7 +31,10 @@ const MainPageProfile = () => {
         탁구왕 {user.intraId} 님
       </Link>
       <div className={styles.currentMatch}>
-        {openCurrentMatch ? <CurrentMatch /> : <div>매치가 없습니다.</div>}
+        {openCurrentMatch &&
+          currentMatchList?.map((currentMatch, index) => (
+            <CurrentMatch currentMatch={currentMatch} key={index} />
+          ))}
       </div>
     </div>
   );

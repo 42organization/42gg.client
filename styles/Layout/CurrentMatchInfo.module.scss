@@ -4,7 +4,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 1rem;
 }
 
 .stringWrapper {
@@ -21,7 +20,6 @@
 
 .span1 {
   @include spanUpDownAnimation(1.5rem, 0.1rem);
-  margin-left: 0.2rem;
   animation-delay: 0.3s;
 }
 
@@ -50,7 +48,6 @@
 
 .cancelButton {
   input {
-    @include button($btn-blue, white, 4rem, 2rem);
     font-size: $small-font;
   }
   :hover {
@@ -60,7 +57,6 @@
 
 .blockCancelButton {
   input {
-    @include button($medium-gray, white, 4rem, 2rem);
     background: linear-gradient(to bottom, $medium-gray, $dark-gray);
     font-size: $small-font;
   }
@@ -69,9 +65,9 @@
   }
 }
 
-.message {
-  margin-bottom: 0.1rem;
-}
+// .message {
+//   margin-bottom: 0.1rem;
+// }
 
 .enemyTeam {
   font-size: 0.85rem;
