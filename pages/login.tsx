@@ -20,8 +20,10 @@ function Login() {
     <>
       <div className={styles.loginContainer}>
         <div className={styles.innerContainer}>
-          <div className={styles.chrome}>{'42GG'}</div>
-          <StyledButton onClick={login}>로그인</StyledButton>
+          <div className={styles.title}>{'42GG'}</div>
+          <StyledButton onClick={login} width={'14rem'}>
+            Sign In
+          </StyledButton>
         </div>
       </div>
     </>
