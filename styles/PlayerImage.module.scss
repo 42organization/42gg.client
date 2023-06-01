@@ -38,6 +38,21 @@
   }
 }
 
+.mainPageProfile {
+  @include imageWrap;
+  div {
+    @include userImage(4rem);
+    cursor: pointer;
+    border: 0.2rem solid;
+    border-image-source: linear-gradient(
+      300deg,
+      #cb8fff 13.4%,
+      #91a5ff 59.91%,
+      #0030ac 86.6%
+    );
+  }
+}
+
 .afterGameModal {
   @include imageWrap;
   div {

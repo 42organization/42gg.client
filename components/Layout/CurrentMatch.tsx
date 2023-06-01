@@ -9,7 +9,7 @@ import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
 import { CurrentMatchList, CurrentMatchListElement } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
 
-export default function CurrentMatch() {
+export default function CurrentMatch(myCurrentMatch: Current) {
   const currentMatchList = useRecoilValue<CurrentMatchList>(currentMatchState);
   const setModal = useSetRecoilState<Modal>(modalState);
 

@@ -1,0 +1,46 @@
+@import 'styles/common.scss';
+
+.gridContainer {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-areas:
+    'image greetings currentMatch'
+    'image intraId currentMatch'
+    'image intraId currentMatch';
+  height: 6rem;
+  color: white;
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+}
+
+.myImage {
+  grid-area: image;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.greetings {
+  grid-area: greetings;
+  display: flex;
+  justify-content: left;
+  align-items: end;
+  font-size: 1rem;
+}
+
+.intraId {
+  grid-area: intraId;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.currentMatch {
+  grid-area: currentMatch;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 1.3rem;
+}

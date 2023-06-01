@@ -16,6 +16,7 @@ import useSetAfterGameModal from 'hooks/Layout/useSetAfterGameModal';
 import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
 import useLiveCheck from 'hooks/Layout/useLiveCheck';
 import HeaderStateContext from './HeaderContext';
+import MainPageProfile from './MainPageProfile';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -49,7 +50,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 <HeaderStateContext>
                   <Header />
                 </HeaderStateContext>
-                {openCurrentMatch && <CurrentMatch />}
+                {/* {openCurrentMatch && <CurrentMatch />}
                 {presentPath !== '/match' && presentPath !== '/manual' && (
                   <Link href='/match'>
                     <div className={styles.buttonContainer}>
@@ -57,7 +58,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     </div>
                   </Link>
                 )}
-                {children}
+                {children} */}
+                <MainPageProfile />
                 <Footer />
               </>
             )
