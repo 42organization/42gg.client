@@ -2,16 +2,18 @@
 
 .gridContainer {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1.2fr 3fr 2fr;
   grid-template-areas:
     'image greetings currentMatch'
     'image intraId currentMatch'
-    'image intraId currentMatch';
-  height: 6rem;
+    'image intraId currentMatch'
+    'board board board';
   color: white;
   margin-left: 0.7rem;
   margin-right: 0.7rem;
+
+  // background-color: black;
 }
 
 .myImage {
@@ -26,7 +28,7 @@
   display: flex;
   justify-content: left;
   align-items: end;
-  font-size: 1rem;
+  font-size: $medium-font;
 }
 
 .intraId {
@@ -34,14 +36,59 @@
   display: flex;
   justify-content: left;
   align-items: center;
-  font-size: 1.5rem;
+  font-weight: 600;
+  font-size: $giant-font;
 }
 
 .currentMatch {
   grid-area: currentMatch;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  font-size: 1.3rem;
+}
+
+.currentMatchBoard {
+  grid-area: board;
+  position: relative;
+}
+
+.currentMatchBoardInner {
+  background: rgba(84, 53, 121, 1);
+  text-align: center;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.currentMatchScroll {
+  display: inline-block;
+  animation: text-scroll 15s linear infinite;
+}
+
+@keyframes text-scroll {
+  from {
+    transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    -o-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+  }
+}
+
+.currentMatchScroll ul {
+  display: inline;
+}
+
+.currentMatchScroll ul li {
+  display: inline-block;
+  padding-right: 100px;
 }

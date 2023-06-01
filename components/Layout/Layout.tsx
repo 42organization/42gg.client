@@ -56,7 +56,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
                   </Link>
                 )}
                 {children}
-                <MainPageProfile />
                 <Footer />
               </>
             )

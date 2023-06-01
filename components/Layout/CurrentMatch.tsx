@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import { gameTimeToString } from 'utils/handleTime';
+import { stringToHourMin } from 'utils/handleTime';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
@@ -16,7 +16,6 @@ export default function CurrentMatch(prop: CurrentMatchProp) {
   const { currentMatch } = prop;
   const { startTime, isMatched, enemyTeam, isImminent } = currentMatch;
   const setModal = useSetRecoilState<Modal>(modalState);
-  console.log(startTime);
 
   const blockCancelButton: number | false =
     currentMatch && isImminent && enemyTeam.length;
@@ -31,41 +30,37 @@ export default function CurrentMatch(prop: CurrentMatchProp) {
   };
 
   return (
-    <>
-      <div className={styles.container}>
-        <>
-          <div className={styles.stringWrapper}>
-            <div className={styles.icon}>🏓</div>
-            <div className={styles.messageWrapper}>
-              {currentMatch && makeMessage(startTime, isMatched)}
-              <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
-            </div>
+    <div
+      className={
+        blockCancelButton ? styles.blockCancelButton : styles.cancelButton
+      }
+    >
+      <button
+        className={styles.container}
+        onClick={() => onCancel(startTime)}
+        value={blockCancelButton ? '취소불가' : '취소하기'}
+      >
+        <div className={styles.stringWrapper}>
+          <div className={styles.icon}>🏓</div>
+          <div className={styles.messageWrapper}>
+            {currentMatch && makeMessage(startTime, isMatched)}
+            <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
           </div>
-          <div
-            className={
-              blockCancelButton ? styles.blockCancelButton : styles.cancelButton
-            }
-          >
-            <input
+        </div>
+        {/* <input
               type='button'
               onClick={() => onCancel(startTime)}
               value={blockCancelButton ? '취소불가' : '취소하기'}
-            />
-            <button
-              onClick={() => onCancel(startTime)}
-              value={blockCancelButton ? '취소불가' : '취소하기'}
-            >
-              새로운 취소
-            </button>
-          </div>
-        </>
-      </div>
-    </>
+            /> */}
+      </button>
+    </div>
   );
 }
 
 function makeMessage(time: string, isMatched: boolean) {
-  const formattedTime = gameTimeToString(time);
+  const formattedTime = `${stringToHourMin(time).sHour}시 ${
+    stringToHourMin(time).sMin
+  }분`;
   return (
     <div className={styles.message}>
       <span>{formattedTime}</span>

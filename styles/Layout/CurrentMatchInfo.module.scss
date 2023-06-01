@@ -1,80 +1,98 @@
 @import 'styles/common.scss';
 
+$currentMatchBtn: rgba(255, 147, 147, 1);
+$currentMatchBtnFont: rgba(173, 35, 35, 1);
+
 .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: $currentMatchBtn;
+  border-radius: $small-radius;
+  height: 100%;
+  padding: 0;
+  border: solid;
 }
 
 .stringWrapper {
+  border-radius: $small-radius;
   display: flex;
   align-items: center;
+  font-size: $small-font;
 }
 
 .waitUpDown {
   span {
     display: inline-block;
     position: relative;
+    border-radius: $small-radius;
   }
 }
 
 .span1 {
-  @include spanUpDownAnimation(1.5rem, 0.1rem);
+  @include spanUpDownAnimation($small-font, 0.1rem);
   animation-delay: 0.3s;
+  border-radius: $small-radius;
 }
 
 .span2 {
-  @include spanUpDownAnimation(1.5rem, 0.1rem);
+  @include spanUpDownAnimation($small-font, 0.1rem);
   animation-delay: 0.5s;
+  border-radius: $small-radius;
 }
 
 .span3 {
-  @include spanUpDownAnimation(1.5rem, 0.1rem);
+  @include spanUpDownAnimation($small-font, 0.1rem);
   animation-delay: 0.7s;
+  border-radius: $small-radius;
+  margin-right: 0.3rem;
 }
 
 .messageWrapper {
-  color: white;
-  text-shadow: 2px 2px 2px rgb(70, 70, 70);
+  color: $currentMatchBtnFont;
+  font-weight: bold;
+  border-radius: $small-radius;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message {
+  display: fles;
+  justify-content: center;
+  align-items: center;
+  border-radius: $small-radius;
 }
 
 .icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 1rem;
-  font-size: 1.3rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  font-size: $medium-font;
+  border-radius: $small-radius;
 }
 
 .cancelButton {
-  input {
-    font-size: $small-font;
-  }
   :hover {
-    background: linear-gradient(to bottom, $dark-blue, $btn-blue);
+    background-color: rgba(173, 35, 35, 1);
+    color: white;
+    border-radius: $small-radius;
   }
 }
 
 .blockCancelButton {
-  input {
-    background: linear-gradient(to bottom, $medium-gray, $dark-gray);
-    font-size: $small-font;
-  }
-  :hover {
-    background: linear-gradient(to bottom, $dark-gray, $medium-gray);
-  }
+  background: rgba(173, 35, 35, 1);
 }
-
-// .message {
-//   margin-bottom: 0.1rem;
-// }
 
 .enemyTeam {
   font-size: 0.85rem;
+  border-radius: $small-radius;
 }
 
 #enemyUsers {
   font-weight: 600;
-  text-shadow: 0.1rem 0.1rem 0.1rem $pp-blue;
   cursor: pointer;
+  border-radius: $small-radius;
 }
