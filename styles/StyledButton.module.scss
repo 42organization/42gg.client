@@ -1,6 +1,6 @@
 @import 'styles/common.scss';
 
-.background {
+.button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,14 +11,18 @@
     #cb8fff 100%
   );
   border-radius: 3rem;
+  border-width: 0;
   padding: 0.3rem;
-  .button {
-    border-width: 0;
-    border-radius: 3rem;
-    background-color: black;
-    font-size: $big-giant-font;
-    cursor: pointer;
-    color: white;
-    height: 4rem;
-  }
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3rem;
+  background-color: black;
+  font-size: $big-giant-font;
+  color: white;
+  height: 4rem;
 }

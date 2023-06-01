@@ -4,7 +4,7 @@ import styles from 'styles/StyledButton.module.scss';
 type StyledButtonProps = {
   onClick: MouseEventHandler<HTMLButtonElement>;
   children: React.ReactNode;
-  width: string;
+  width?: string;
 };
 
 export default function StyledButton({
@@ -12,14 +12,14 @@ export default function StyledButton({
   children,
   width,
 }: StyledButtonProps) {
-  const buttonStyle = {
+  const buttonWidth = {
     width: width || 'auto',
   };
   return (
-    <div className={styles.background}>
-      <button className={styles.button} onClick={onClick} style={buttonStyle}>
+    <button className={styles.button} onClick={onClick}>
+      <div className={styles.container} style={buttonWidth}>
         {children}
-      </button>
-    </div>
+      </div>
+    </button>
   );
 }

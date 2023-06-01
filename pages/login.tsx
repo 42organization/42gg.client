@@ -22,7 +22,7 @@ function Login() {
         <div className={styles.innerContainer}>
           <div className={styles.title}>{'42GG'}</div>
           <StyledButton onClick={login} width={'14rem'}>
-            Sign In
+            Sign in
           </StyledButton>
         </div>
       </div>
