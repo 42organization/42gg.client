@@ -14,42 +14,8 @@
     height: 50vh;
     padding-bottom: 5rem;
   }
-  .chrome {
-    position: relative;
-    background-image: -webkit-linear-gradient(
-      #00031e 0%,
-      #0a23e3 30%,
-      #0889ec 40%,
-      #e3e5f2 50%,
-      #e3e5f2 55%,
-      #270b42 58%,
-      #270b42 63%,
-      #4d187f 70%,
-      #b63ae7 80%,
-      #fd6ffa 100%
-    );
-    -webkit-text-stroke: 5px rgb(255, 255, 255, 0.3);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 200px;
-    // text-shadow: 4px 4px 2px rgba(110, 6, 129, 0.7);
-    font-weight: bold;
-    margin: 0;
-    line-height: 1;
-  }
   .title {
     @include logoTitle(0.4rem);
     font-size: 5rem;
-  }
-
-  .buttons {
-    @include select-buttons(13rem, 3.5rem);
-    .positive {
-      input {
-        font-size: $big-font;
-        font-weight: 500;
-        box-shadow: 0.1rem 0.1rem 0.3rem $pp-blue;
-      }
-    }
   }
 }

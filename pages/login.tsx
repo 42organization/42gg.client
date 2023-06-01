@@ -10,7 +10,7 @@ function Login() {
     router.replace('/');
   }, []);
 
-  const login = () => {
+  const onLogin = () => {
     router.push(
       `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/oauth2/authorization/42`
     );
@@ -21,7 +21,7 @@ function Login() {
       <div className={styles.loginContainer}>
         <div className={styles.innerContainer}>
           <div className={styles.title}>{'42GG'}</div>
-          <StyledButton onClick={login} width={'14rem'}>
+          <StyledButton onClick={onLogin} width={'14rem'}>
             Sign in
           </StyledButton>
         </div>
