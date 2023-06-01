@@ -16,6 +16,7 @@ export default function CurrentMatch(prop: CurrentMatchProp) {
   const { currentMatch } = prop;
   const { startTime, isMatched, enemyTeam, isImminent } = currentMatch;
   const setModal = useSetRecoilState<Modal>(modalState);
+  console.log(startTime);
 
   const blockCancelButton: number | false =
     currentMatch && isImminent && enemyTeam.length;
