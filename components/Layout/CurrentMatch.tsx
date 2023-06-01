@@ -10,8 +10,8 @@ import { CurrentMatchList, CurrentMatchListElement } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
 import { useMemo } from 'react';
 
-export default function CurrentMatch() {
-  const currentMatchList = useRecoilValue<CurrentMatchList>(currentMatchState);
+export default function CurrentMatch(myCurrentMatch: CurrentMatchListElement) {
+  // const currentMatchList = useRecoilValue<CurrentMatchList>(currentMatchState);
   const setModal = useSetRecoilState<Modal>(modalState);
 
   const blockCancelButton = (myCurrentMatch: CurrentMatchListElement) => {
@@ -30,16 +30,6 @@ export default function CurrentMatch() {
       cancel: { startTime: startTime },
     });
   };
-
-  const currentMatchStyle: { [key: string]: string } = useMemo(
-    () => ({
-      0: styles.none,
-      1: styles.one,
-      2: styles.two,
-      3: styles.three,
-    }),
-    []
-  );
 
   return (
     <>

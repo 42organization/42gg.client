@@ -11,17 +11,6 @@
 .stringWrapper {
   display: flex;
   align-items: center;
-
-  &.none &.one {
-    width: 90%;
-  }
-  &.two {
-    width: 40%;
-  }
-
-  &.three {
-    width: 30;
-  }
 }
 
 .waitUpDown {
@@ -67,18 +56,6 @@
   :hover {
     background: linear-gradient(to bottom, $dark-blue, $btn-blue);
   }
-
-  &.none &.one {
-    @include button($btn-blue, white, 4rem, 2rem);
-  }
-
-  &.two {
-    @include button($btn-blue, white, 1.8rem, 1rem);
-  }
-
-  &.three {
-    @include button($btn-blue, white, 1.3rem, 0.5rem);
-  }
 }
 
 .blockCancelButton {
@@ -88,17 +65,6 @@
   }
   :hover {
     background: linear-gradient(to bottom, $dark-gray, $medium-gray);
-  }
-  &.none &.one {
-    @include button($medium-gray, white, 4rem, 2rem);
-  }
-
-  &.two {
-    @include button($medium-gray, white, 1.8rem, 1rem);
-  }
-
-  &.three {
-    @include button($medium-gray, white, 1.3rem, 0.5rem);
   }
 }
 
