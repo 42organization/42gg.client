@@ -11,6 +11,7 @@ interface NotiItemProps {
 
 export default function NotiItem({ data }: NotiItemProps) {
   const date = data.createdAt.slice(5).replace('T', ' ');
+  const { type, message, isChecked } = data;
 
   const parseEnemyIdMessage = (
     message: string
@@ -30,9 +31,9 @@ export default function NotiItem({ data }: NotiItemProps) {
   let enemyId: string[] = [];
   let enemyMessage = '';
 
-  if (data.type === 'IMMINENT') {
-    enemyId = parseEnemyIdMessage(data.message).enemyId;
-    enemyMessage = parseEnemyIdMessage(data.message).enemyMessage;
+  if (type === 'IMMINENT') {
+    enemyId = parseEnemyIdMessage(message).enemyId;
+    enemyMessage = parseEnemyIdMessage(message).enemyMessage;
   }
 
   const noti: {
@@ -44,20 +45,20 @@ export default function NotiItem({ data }: NotiItemProps) {
     },
     ANNOUNCE: {
       title: '공 지',
-      content: MakeAnnounceContent(data.message),
+      content: MakeAnnounceContent(message),
     },
     MATCHED: {
       title: '매칭 성사',
-      content: data.message,
+      content: message,
     },
   };
 
   return (
-    <div
-      className={data.isChecked ? `${styles.readWrap}` : `${styles.unreadWrap}`}
-    >
-      <span className={styles.title}>{noti[data.type].title}</span>
-      <div className={styles.content}>{noti[data.type].content}</div>
+    <div className={isChecked ? `${styles.readWrap}` : `${styles.unreadWrap}`}>
+      <span className={styles.title}>{noti[type].title}</span>
+      <div className={styles.content}>
+        {message ? noti[type].content : '알림을 불러올 수 없습니다.'}
+      </div>
       <div className={styles.date}>{date}</div>
     </div>
   );
