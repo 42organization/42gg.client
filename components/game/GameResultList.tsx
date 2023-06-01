@@ -27,7 +27,7 @@ export default function GameResultList({ path }: GameResultListProps) {
   return (
     <div className={styles['item-list']}>
       {status === 'success' && (
-        <div>
+        <>
           {data?.pages.map((gameList, pageIndex) => (
             <>
               {gameList.games.map((game: Game, index) => {
@@ -62,7 +62,7 @@ export default function GameResultList({ path }: GameResultListProps) {
               />
             </div>
           )}
-        </div>
+        </>
       )}
     </div>
   );

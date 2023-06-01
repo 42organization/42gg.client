@@ -28,6 +28,7 @@ function GameResultSmallItem({
       isFirst={isFirst}
       zIndex={zIndex}
       type={type}
+      onClick={() => setClickedItemId(gameId)}
     >
       <GameResultSmallTeam team={team1} position={'Left'} />
       <GameResultSmallScore
