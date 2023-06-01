@@ -13,7 +13,7 @@ function Login() {
     <>
       <div className={styles.loginContainer}>
         <div className={styles.innerContainer}>
-          <div className={styles.title}>{'42GG'}</div>
+          <div className={styles.chrome}>{'42GG'}</div>
           <a
             href={`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/oauth2/authorization/42`}
           >
