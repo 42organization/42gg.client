@@ -18,15 +18,13 @@ export default function GameResultSmallTeam({
           <PlayerImage
             key={index}
             src={player.userImageUri}
-            styleName={'gameResultSmall' + position}
+            styleName={'gameResultSmall'}
             size={20}
           />
         ))}
-        <span>
-          {team.players.map((player) => (
-            <div key={player.intraId}>{player.intraId}</div>
-          ))}
-        </span>
+        {team.players.map((player) => (
+          <span key={player.intraId}>{player.intraId}</span>
+        ))}
       </div>
     </div>
   );
