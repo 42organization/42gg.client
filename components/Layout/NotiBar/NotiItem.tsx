@@ -20,9 +20,10 @@ export default function NotiItem({ data }: NotiItemProps) {
   } => {
     const regList = /<intraId::(.+?)>/;
     const regId = /^[a-zA-Z0-9]*$/;
-    const parseList = message.split(regList).filter((str) => str !== '');
-    const enemyId = parseList.filter((id) => regId.test(id) !== false);
-    const enemyMessage = parseList.filter((id) => regId.test(id) === false)[0];
+    const parseList = [] || message.split(regList).filter((str) => str !== '');
+    const enemyId = [] || parseList.filter((id) => regId.test(id) !== false);
+    const enemyMessage =
+      '' || parseList.filter((id) => regId.test(id) === false)[0];
     return { enemyId, enemyMessage };
   };
 
