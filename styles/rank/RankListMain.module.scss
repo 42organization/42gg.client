@@ -6,8 +6,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr; /* grid-template-rows로 변경 */
   align-items: end;
-  margin-top: 0.2rem;
-  height: 12rem;
+  margin-top: 2rem;
+  height: 16rem;
 }
 
 .mainData:nth-child(1) {
@@ -72,6 +72,9 @@
 }
 
 .rankNumber1 {
+  position: relative;
+  top: 2rem;
+  left: -1rem;
   font-family: 'Life Savers';
   font-weight: 400;
   text-align: end;
@@ -89,15 +92,19 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
+  //text-fill-color: transparent;
 }
 
 .rankNumber2 {
+  position: relative;
+  top: -1rem;
+  left: -1rem;
   font-family: 'Life Savers';
   font-weight: 400;
+  text-align: end;
   font-size: 90px;
-  line-height: 110px;
-  align-items: center;
+  line-height: 10rem;
+  line-height: 114px;
   letter-spacing: 0.04em;
   background: linear-gradient(
     180.89deg,
@@ -109,9 +116,12 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
+  //text-fill-color: transparent;
 }
 .rankNumber3 {
+  position: relative;
+  top: -1rem;
+  left: -1rem;
   font-family: 'Life Savers';
   font-weight: 400;
   text-align: end;
@@ -129,12 +139,12 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
+  //text-fill-color: transparent;
 }
 
 .intraId {
-  position: static;
-  top: 10rem;
+  position: relative;
+  top: -2rem;
   height: 7.5rem;
   color: black;
   font-weight: 700;

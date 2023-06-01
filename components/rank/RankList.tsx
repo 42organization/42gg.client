@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { RankUser, NormalUser, Rank } from 'types/rankTypes';
 import RankListMain from './topRank/RankListMain';
 import RankListFrame from './RankListFrame';
@@ -15,52 +15,68 @@ export default function RankList({
   season,
   isMain = false,
 }: RankListProps) {
-  const seasonMode = 'rank';
   const [rank, setRank] = useState<Rank>();
+  const [ranker, setRanker] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
   const pageInfo = {
     currentPage: rank?.currentPage,
     totalPage: rank?.totalPage,
     setPage,
   };
-  console.log(rank);
   const makePath = (): string => {
     const modeQuery = (targetMode?: string) =>
       targetMode !== 'normal' ? 'ranks/single' : 'exp';
     const seasonQuery = toggleMode === 'rank' ? `&season=${season}` : '';
-    return isMain
-      ? `/pingpong/${modeQuery(seasonMode)}?page=1&size=3`
-      : `/pingpong/${modeQuery(toggleMode)}?page=${page}${seasonQuery}`;
+    return `/pingpong/${modeQuery(
+      toggleMode
+    )}?page=${page}&size=20${seasonQuery}`;
+  };
+
+  const makePathRanker = (): string => {
+    const modeQuery = (targetMode?: string) =>
+      targetMode !== 'normal' ? 'ranks/single' : 'exp';
+    //const seasonQuery = toggleMode === 'rank' ? `&season=${season}` : '';
+    //return `/pingpong/${modeQuery(toggleMode)}?page=1&size=3${seasonQuery}`;
+    return `/pingpong/${modeQuery(toggleMode)}?page=1&size=3`;
   };
 
   useRankList({
     makePath: makePath(),
+    makePathRanker: makePathRanker(),
     toggleMode: toggleMode,
     season: season,
     setRank: setRank,
+    setRanker: setRanker,
     page: page,
     setPage: setPage,
     pageInfo: pageInfo,
   });
 
+  useMemo(() => {
+    console.log('123', ranker);
+    const temp = ranker?.rankList[1];
+    ranker?.rankList.splice(1, 1);
+    ranker?.rankList.unshift(temp); //타입 에러
+  }, [ranker]);
+
   if (isMain) {
-    const temp = rank?.rankList[1];
-    rank?.rankList.splice(1, 1);
-    rank?.rankList.unshift(temp); //타입 에러
-    return <RankListMain rank={rank} />;
+    return <RankListMain rank={ranker} />;
   }
 
   return (
-    <RankListFrame toggleMode={toggleMode} pageInfo={pageInfo}>
-      {rank?.rankList.map((item: NormalUser | RankUser, index) => (
-        <RankListItem
-          key={index}
-          index={index}
-          toggleMode={toggleMode}
-          user={makeUser(item)}
-        />
-      ))}
-    </RankListFrame>
+    <div>
+      <RankListMain rank={ranker} />
+      <RankListFrame toggleMode={toggleMode} pageInfo={pageInfo}>
+        {rank?.rankList.map((item: NormalUser | RankUser, index) => (
+          <RankListItem
+            key={index}
+            index={index}
+            toggleMode={toggleMode}
+            user={makeUser(item)}
+          />
+        ))}
+      </RankListFrame>
+    </div>
   );
 }
 

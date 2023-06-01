@@ -12,7 +12,7 @@ export default function RankListMain({ rank }: RankListMainProps) {
     rank: { style: '', title: 'Champion' },
     both: { style: '', title: 'Champion' },
   };
-
+  //console.log(rank);
   return (
     <div>
       <div className={`${styles.title} ${content.rank.style}`}>

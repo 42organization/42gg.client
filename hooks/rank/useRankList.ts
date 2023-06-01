@@ -7,9 +7,11 @@ import { MyRank } from 'types/rankTypes';
 
 interface useRankListProps {
   makePath: string;
+  makePathRanker: string;
   toggleMode: 'normal' | 'rank';
   season: number | undefined;
   setRank: Dispatch<SetStateAction<Rank | undefined>>;
+  setRanker: Dispatch<SetStateAction<Rank | undefined>>;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
   pageInfo: {
@@ -21,9 +23,11 @@ interface useRankListProps {
 
 const useRankList = ({
   makePath,
+  makePathRanker,
   toggleMode,
   season,
   setRank,
+  setRanker,
   page,
   setPage,
   pageInfo,
@@ -41,11 +45,24 @@ const useRankList = ({
     type: 'setError',
   });
 
+  const getRankerDataHandler = useAxiosGet({
+    url: makePathRanker,
+    setState: (data) => {
+      setRanker(data);
+      setMyRank((prev) => ({ ...prev, [toggleMode]: data.myRank }));
+    },
+    err: 'DK01',
+    type: 'setError',
+  });
+
+  useEffect(() => {
+    getRankerDataHandler();
+  }, [page]);
+
   useEffect(() => {
     async function waitRankList() {
       await getRankDataHandler();
     }
-
     waitRankList().then(() => {
       if (isScroll) {
         window.scrollTo({
