@@ -1,26 +1,24 @@
 import Link from 'next/link';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import { currentMatchState } from 'utils/recoil/match';
 import { gameTimeToString } from 'utils/handleTime';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
-import { CurrentMatchList, CurrentMatchListElement } from 'types/matchTypes';
+import { CurrentMatchListElement } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
-import { useMemo } from 'react';
 
-export default function CurrentMatch(myCurrentMatch: CurrentMatchListElement) {
-  // const currentMatchList = useRecoilValue<CurrentMatchList>(currentMatchState);
+interface CurrentMatchProp {
+  currentMatch: CurrentMatchListElement;
+}
+
+export default function CurrentMatch(prop: CurrentMatchProp) {
+  const { currentMatch } = prop;
+  const { startTime, isMatched, enemyTeam, isImminent } = currentMatch;
   const setModal = useSetRecoilState<Modal>(modalState);
 
-  const blockCancelButton = (myCurrentMatch: CurrentMatchListElement) => {
-    return (
-      myCurrentMatch &&
-      myCurrentMatch.isImminent &&
-      myCurrentMatch.enemyTeam.length
-    );
-  };
+  const blockCancelButton: number | false =
+    currentMatch && isImminent && enemyTeam.length;
 
   useGetCurrentMatch();
 
@@ -34,45 +32,26 @@ export default function CurrentMatch(myCurrentMatch: CurrentMatchListElement) {
   return (
     <>
       <div className={styles.container}>
-        {currentMatchList.match.map((currentMatch, index) => (
-          <>
-            <div
-              className={`${styles.stringWrapper} ${
-                currentMatchStyle[currentMatchList.match.length]
-              }`}
-              key={index}
-            >
-              <div className={styles.icon}>⏰</div>
-              <div className={styles.messageWrapper}>
-                {currentMatch &&
-                  makeMessage(currentMatch.startTime, currentMatch.isMatched)}
-                <EnemyTeam
-                  enemyTeam={currentMatch.enemyTeam}
-                  isImminent={currentMatch.isImminent}
-                />
-              </div>
+        <>
+          <div className={styles.stringWrapper}>
+            <div className={styles.icon}>⏰</div>
+            <div className={styles.messageWrapper}>
+              {currentMatch && makeMessage(startTime, isMatched)}
+              <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
             </div>
-            <div
-              className={
-                blockCancelButton(currentMatch)
-                  ? `${styles.blockCancelButton} ${
-                      currentMatchStyle[currentMatchList.match.length]
-                    }`
-                  : `${styles.cancelButton} ${
-                      currentMatchStyle[currentMatchList.match.length]
-                    }`
-              }
-            >
-              <input
-                type='button'
-                onClick={() => onCancel(currentMatch.startTime)}
-                value={
-                  blockCancelButton(currentMatch) ? '취소불가' : '취소하기'
-                }
-              />
-            </div>
-          </>
-        ))}
+          </div>
+          <div
+            className={
+              blockCancelButton ? styles.blockCancelButton : styles.cancelButton
+            }
+          >
+            <input
+              type='button'
+              onClick={() => onCancel(startTime)}
+              value={blockCancelButton ? '취소불가' : '취소하기'}
+            />
+          </div>
+        </>
       </div>
     </>
   );
