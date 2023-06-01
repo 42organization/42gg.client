@@ -8,11 +8,7 @@ interface RankListItemMainProps {
 }
 
 export default function RankListItemMain({ user }: RankListItemMainProps) {
-  const { rank, intraId } = user;
-  /*   const messageFiltered =
-    statusMessage.length > 10
-      ? statusMessage.slice(0, 10) + '...'
-      : statusMessage;*/
+  const { rank, intraId, userImageUri } = user;
   const rankFiltered = rank < 0 ? '-' : rank;
 
   return (
@@ -22,7 +18,7 @@ export default function RankListItemMain({ user }: RankListItemMainProps) {
           <div className={styles.intraId}>
             <Link href={`users/detail?intraId=${intraId}`}>
               <PlayerImage
-                src={intraId.userImageUri} //사진 크기 키우기,
+                src={userImageUri} //사진 크기 키우기,
                 styleName={rank === 1 ? 'ranktropy' : 'gameResultBig'}
                 size={50}
               />

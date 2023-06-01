@@ -23,6 +23,7 @@ export default function RankList({
     totalPage: rank?.totalPage,
     setPage,
   };
+
   const makePath = (): string => {
     const modeQuery = (targetMode?: string) =>
       targetMode !== 'normal' ? 'ranks/single' : 'exp';
@@ -35,9 +36,10 @@ export default function RankList({
   const makePathRanker = (): string => {
     const modeQuery = (targetMode?: string) =>
       targetMode !== 'normal' ? 'ranks/single' : 'exp';
-    //const seasonQuery = toggleMode === 'rank' ? `&season=${season}` : '';
-    //return `/pingpong/${modeQuery(toggleMode)}?page=1&size=3${seasonQuery}`;
-    return `/pingpong/${modeQuery(toggleMode)}?page=1&size=3`;
+    const seasonQuery = toggleMode === 'rank' ? `&season=${season}` : '';
+    return isMain
+      ? `/pingpong/${modeQuery(toggleMode)}?page=1&size=3`
+      : `/pingpong/${modeQuery(toggleMode)}?page=1&size=3${seasonQuery}`;
   };
 
   useRankList({
@@ -51,13 +53,6 @@ export default function RankList({
     setPage: setPage,
     pageInfo: pageInfo,
   });
-
-  useMemo(() => {
-    console.log('123', ranker);
-    const temp = ranker?.rankList[1];
-    ranker?.rankList.splice(1, 1);
-    ranker?.rankList.unshift(temp); //타입 에러
-  }, [ranker]);
 
   if (isMain) {
     return <RankListMain rank={ranker} />;
