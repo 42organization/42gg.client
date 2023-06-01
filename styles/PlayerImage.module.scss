@@ -27,7 +27,7 @@
 .gameResultBig {
   @include imageWrap;
   div {
-    @include gameResultImage(2.75rem);
+    @include gameResultImage(2.734rem);
     cursor: pointer;
   }
 }
