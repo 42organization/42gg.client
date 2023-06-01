@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { Match, Slot } from 'types/matchTypes';
+import { CurrentMatchList, Match, Slot } from 'types/matchTypes';
 import { Live } from 'types/mainType';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/match/MatchBoard.module.scss';
@@ -10,6 +10,7 @@ import { stringToHourMin } from 'utils/handleTime';
 import { liveState } from 'utils/recoil/layout';
 import { Modal } from 'types/modalTypes';
 import { MatchMode } from 'types/mainType';
+import { currentMatchState } from 'utils/recoil/match';
 
 interface MatchBoardProps {
   type: string;
@@ -131,6 +132,7 @@ interface MatchSlotProps {
 export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
   const setModal = useSetRecoilState<Modal>(modalState);
   const { event } = useRecoilValue<Live>(liveState);
+  const { match } = useRecoilValue<CurrentMatchList>(currentMatchState);
   const { startTime, endTime, status } = slot;
   const slotData = `${stringToHourMin(startTime).sMin} - ${
     stringToHourMin(endTime).sMin
@@ -144,7 +146,7 @@ export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
           startTime: startTime,
         },
       });
-    } else if (event === 'match') {
+    } else if (event === 'match' && match.length === 3) {
       setModal({ modalName: 'MATCH-REJECT' });
     } else {
       setModal({
