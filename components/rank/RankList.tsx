@@ -3,7 +3,6 @@ import { RankUser, NormalUser, Rank } from 'types/rankTypes';
 import RankListMain from './topRank/RankListMain';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
-
 import useRankList from 'hooks/rank/useRankList';
 
 interface RankListProps {
@@ -24,7 +23,7 @@ export default function RankList({
     totalPage: rank?.totalPage,
     setPage,
   };
-
+  console.log(rank);
   const makePath = (): string => {
     const modeQuery = (targetMode?: string) =>
       targetMode !== 'normal' ? 'ranks/single' : 'exp';
@@ -44,7 +43,12 @@ export default function RankList({
     pageInfo: pageInfo,
   });
 
-  if (isMain) return <RankListMain rank={rank} />;
+  if (isMain) {
+    const temp = rank?.rankList[1];
+    rank?.rankList.splice(1, 1);
+    rank?.rankList.unshift(temp); //타입 에러
+    return <RankListMain rank={rank} />;
+  }
 
   return (
     <RankListFrame toggleMode={toggleMode} pageInfo={pageInfo}>

@@ -1,49 +1,144 @@
 @import '../common.scss';
+@import url('https://fonts.googleapis.com/css2?family=Life+Savers&display=swap');
 
 .mainContainer {
   font-size: 1.05rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* grid-template-rows로 변경 */
+  align-items: end;
+  margin-top: 0.2rem;
+  height: 12rem;
 }
 
+.mainData:nth-child(1) {
+  background: linear-gradient(to top, #30114e, #d30399, #ff67d4);
+  height: 15rem;
+  border-radius: 58px;
+}
+.mainData:nth-child(3) {
+  background: linear-gradient(to top, #30114e, #40798d, #57a4ff);
+  height: 15rem;
+  border-radius: 58px;
+}
 .title {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   height: 2.9rem;
-  border-radius: $big-radius;
   color: white;
   font-size: 1.8rem;
   font-family: $title-font;
-  text-shadow: $text-border-black;
+  //text-shadow: $text-border-black;
   letter-spacing: 0.1rem;
-  background: $rank-red;
   &.normal {
     background: $norm-lightblue2;
   }
 }
 
-.mainData {
-  display: grid;
-  grid-template-columns: 1.5fr 2.1fr 4fr;
-  align-items: center;
-  height: 2.9rem;
-  margin-top: 0.2rem;
-  border-radius: $big-radius;
-  background: $rank-pink;
-  &.normal {
-    background: $norm-emerald;
-  }
+.mainData:nth-child(2) {
+  height: 18rem;
+  border-radius: 65px;
+  z-index: 1;
+  transform: scaleX(1.12);
+  background: linear-gradient(
+    179.91deg,
+    #f8e118 24.66%,
+    #fe7a00 58.93%,
+    #740b6d 79.38%,
+    #490e5a 87.56%
+  );
 }
 
-.rankNumber {
-  color: $rank-red;
-  font-weight: 700;
-  text-align: center;
+.leaf {
+  height: 10.5rem;
+  z-index: 2;
+  background: linear-gradient(
+    70.48deg,
+    #693200 28.73%,
+    #ed9b00 38.5%,
+    #fede5d 41.72%,
+    #fffdd2 60.48%,
+    #b5661d 73.6%,
+    #5c2f06 76.05%
+  );
+  border-radius: 65px 65px 100px 0px;
+}
+
+.leaf1 {
+  height: 10.2rem;
+  z-index: 3;
+  background: linear-gradient(180deg, #ffcf55 36.24%, #ff823c 73.96%);
+  border-radius: 65px 65px 100px 0px;
+}
+
+.rankNumber1 {
+  font-family: 'Life Savers';
+  font-weight: 400;
+  text-align: end;
+  font-size: 90px;
+  line-height: 10rem;
+  line-height: 114px;
+  letter-spacing: 0.04em;
+  background: linear-gradient(
+    180.89deg,
+    rgba(255, 233, 194, 0.552801) 26.68%,
+    rgba(202, 165, 69, 0.3) 47.47%,
+    rgba(255, 209, 91, 0.51) 65.76%,
+    rgba(155, 117, 19, 0) 84.03%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.rankNumber2 {
+  font-family: 'Life Savers';
+  font-weight: 400;
+  font-size: 90px;
+  line-height: 110px;
+  align-items: center;
+  letter-spacing: 0.04em;
+  background: linear-gradient(
+    180.89deg,
+    #cb20a5 28.21%,
+    rgba(194, 74, 168, 0.3) 34.24%,
+    #930072 51.62%,
+    #351050 76.19%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+.rankNumber3 {
+  font-family: 'Life Savers';
+  font-weight: 400;
+  text-align: end;
+  font-size: 90px;
+  line-height: 10rem;
+  line-height: 114px;
+  letter-spacing: 0.04em;
+  background: linear-gradient(
+    179.14deg,
+    #6fb1d0 22.37%,
+    rgba(80, 123, 137, 0.3) 46.14%,
+    #3d3285 56.64%,
+    #411868 68.3%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
 }
 
 .intraId {
+  position: static;
+  top: 10rem;
+  height: 7.5rem;
   color: black;
   font-weight: 700;
-  text-align: left;
+  text-align: center;
   span {
     cursor: pointer;
   }
@@ -53,5 +148,5 @@
   color: $dark-blue;
   font-size: $medium-font;
   font-weight: 500;
-  text-align: left;
+  text-align: center;
 }

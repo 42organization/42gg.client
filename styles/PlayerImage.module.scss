@@ -59,3 +59,11 @@
     @include userImage(4.7rem);
   }
 }
+
+.ranktropy {
+  @include imageWrap;
+  div {
+    @include userImage(6rem);
+    cursor: pointer;
+  }
+}

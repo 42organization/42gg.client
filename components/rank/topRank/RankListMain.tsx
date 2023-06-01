@@ -7,8 +7,6 @@ interface RankListMainProps {
 }
 
 export default function RankListMain({ rank }: RankListMainProps) {
-  //const isNormalSeason = seasonMode === 'normal';
-  const isNormalSeason = false;
   const content = {
     normal: { style: styles.normal, title: 'VIP' },
     rank: { style: '', title: 'Champion' },
@@ -16,17 +14,15 @@ export default function RankListMain({ rank }: RankListMainProps) {
   };
 
   return (
-    <div className={styles.mainContainer}>
+    <div>
       <div className={`${styles.title} ${content.rank.style}`}>
         {content.rank.title}
       </div>
-      {rank?.rankList.map((item: NormalUser | RankUser) => (
-        <RankListItemMain
-          key={item.intraId}
-          user={item}
-          isSeasonNormal={isNormalSeason}
-        />
-      ))}
+      <div className={styles.mainContainer}>
+        {rank?.rankList.map((item: NormalUser | RankUser) => (
+          <RankListItemMain key={item.intraId} user={item} />
+        ))}
+      </div>
     </div>
   );
 }

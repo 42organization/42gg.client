@@ -1,35 +1,47 @@
 import Link from 'next/link';
 import { RankUser, NormalUser } from 'types/rankTypes';
 import styles from 'styles/rank/RankListMain.module.scss';
+import PlayerImage from 'components/PlayerImage';
 
 interface RankListItemMainProps {
   user: NormalUser | RankUser;
-  isSeasonNormal: boolean;
 }
 
-export default function RankListItemMain({
-  user,
-  isSeasonNormal,
-}: RankListItemMainProps) {
-  const { rank, intraId, statusMessage } = user;
-  const messageFiltered =
+export default function RankListItemMain({ user }: RankListItemMainProps) {
+  const { rank, intraId } = user;
+  /*   const messageFiltered =
     statusMessage.length > 10
       ? statusMessage.slice(0, 10) + '...'
-      : statusMessage;
+      : statusMessage;*/
   const rankFiltered = rank < 0 ? '-' : rank;
 
   return (
-    <div
-      className={`${styles.mainData}
-			${isSeasonNormal && styles.normal}`}
-    >
-      <div className={styles.rankNumber}>{rankFiltered}</div>
-      <div className={styles.intraId}>
-        <Link href={`users/detail?intraId=${intraId}`}>
-          <span>{intraId}</span>
-        </Link>
+    <div className={`${styles.mainData}`}>
+      <div className={rank === 1 ? styles.leaf : ''}>
+        <div className={rank === 1 ? styles.leaf1 : ''}>
+          <div className={styles.intraId}>
+            <Link href={`users/detail?intraId=${intraId}`}>
+              <PlayerImage
+                src={intraId.userImageUri} //사진 크기 키우기,
+                styleName={rank === 1 ? 'ranktropy' : 'gameResultBig'}
+                size={50}
+              />
+              <span>{intraId}</span>
+            </Link>
+          </div>
+          <div
+            className={
+              rank === 1
+                ? styles.rankNumber1
+                : rank === 2
+                ? styles.rankNumber2
+                : styles.rankNumber3
+            }
+          >
+            {rankFiltered}
+          </div>
+        </div>
       </div>
-      <div className={styles.statusMessage}>{messageFiltered}</div>
     </div>
   );
 }
