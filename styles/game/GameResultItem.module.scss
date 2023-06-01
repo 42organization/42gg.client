@@ -14,56 +14,6 @@
   }
 }
 
-@mixin gameContainer($size) {
-  display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
-  @if $size == 'small' {
-    align-items: end;
-    min-width: 19.874rem;
-    border-radius: 0.938rem;
-    height: 4.491rem;
-    padding: 0.505rem 0.954rem;
-    margin: 0 0.978rem;
-  } @else if $size == 'big' {
-    align-items: center;
-    min-width: 22.125rem;
-    border-radius: 1.5rem;
-    height: 6.091rem;
-    padding: 0.5rem 0;
-  }
-}
-
-@mixin backgroudGradient($color) {
-  @if $color == 'light' {
-    background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
-  } @else if $color == 'dark' {
-    background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
-  }
-}
-
-.smallContainer {
-  @include gameContainer('small');
-  cursor: pointer;
-  &.light {
-    @include backgroudGradient('light');
-  }
-  &.dark {
-    @include backgroudGradient('dark');
-  }
-}
-
-.bigContainer {
-  @include gameContainer('big');
-  &.light {
-    @include backgroudGradient('light');
-  }
-  &.dark {
-    @include backgroudGradient('dark');
-  }
-}
-
 .smallTeam {
   color: #ffffff;
   .Left {
