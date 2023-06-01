@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { MatchMode } from 'types/mainType';
 import RankModeWrap from 'components/mode/modeWraps/RankModeWrap';
 import MyRank from 'components/rank/MyRank';
 import RankList from 'components/rank/RankList';

@@ -11,7 +11,7 @@ interface PageInfo {
 interface RankListFrameProps {
   children: React.ReactNode;
   pageInfo: PageInfo;
-  toggleMode: MatchMode;
+  toggleMode: 'normal' | 'rank';
 }
 
 export default function RankListFrame({

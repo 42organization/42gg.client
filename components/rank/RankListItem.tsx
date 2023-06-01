@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
-import { MatchMode } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
 import styles from 'styles/rank/RankList.module.scss';
 
@@ -15,7 +14,7 @@ interface User {
 interface RankListItemProps {
   index: number;
   user: User;
-  toggleMode: MatchMode;
+  toggleMode: 'normal' | 'rank';
 }
 
 export default function RankListItem({
