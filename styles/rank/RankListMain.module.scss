@@ -9,12 +9,10 @@
   grid-template-columns: 1fr 1fr 1fr; /* grid-template-rows로 변경 */
   align-items: end;
   margin-top: 2rem;
-  //height: 10rem;
-  height: 18.5rem;
+  height: 20.5rem;
   &.isMain {
     height: 15.5rem;
   }
-
   transform: scale(1.1);
 }
 
@@ -52,6 +50,7 @@
   color: white;
   font-size: 1.8rem;
   font-family: $title-font;
+  z-index: 1;
   //text-shadow: $text-border-black;
   letter-spacing: 0.1rem;
   &.normal {
@@ -72,6 +71,37 @@
     #884609 69.15%,
     rgba(53, 16, 80, 0) 87.56%
   );
+}
+
+.bang {
+  position: relative;
+  width: 78.92px;
+  height: 120.5px;
+  background: linear-gradient(
+    180deg,
+    rgba(44, 16, 74, 0.69) 0%,
+    #5e3c83 84.38%
+  );
+}
+
+.bang:nth-child(1) {
+  left: -5rem;
+  top: 6rem;
+  transform: rotate(-47.37deg);
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
+}
+
+.bang:nth-child(2) {
+  left: -4.9rem;
+  top: 3rem;
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
+}
+
+.bang:nth-child(3) {
+  left: -4.9rem;
+  top: 6rem;
+  transform: rotate(47.37deg);
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
 }
 
 .leaf {
@@ -96,7 +126,6 @@
 
 .rankNumber1 {
   position: relative;
-  //top: rem;
   left: -1rem;
   font-family: 'Life Savers';
   font-weight: 400;

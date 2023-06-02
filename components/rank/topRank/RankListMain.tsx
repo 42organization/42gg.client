@@ -18,6 +18,9 @@ export default function RankListMain({ rank, isMain }: RankListMainProps) {
     <div>
       <div className={`${styles.title} ${content.rank.style}`}>
         {content.rank.title}
+        <div className={`${!isMain && styles.bang}`} />
+        <div className={`${!isMain && styles.bang}`} />
+        <div className={`${!isMain && styles.bang}`} />
       </div>
       <div className={`${styles.mainContainer} ${isMain && styles.isMain}`}>
         {rank?.rankList.map((item: NormalUser | RankUser) => (
