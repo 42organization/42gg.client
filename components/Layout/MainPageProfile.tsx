@@ -20,6 +20,12 @@ const MainPageProfile = () => {
 
   return (
     <div className={styles.gridContainer}>
+      <div className={styles.currentMatch}>
+        {openCurrentMatch &&
+          currentMatchList?.map((currentMatch, index) => (
+            <CurrentMatch currentMatch={currentMatch} key={index} />
+          ))}
+      </div>
       <Link
         className={styles.myImage}
         href={`/users/detail?intraId=${user.intraId}`}
@@ -38,7 +44,7 @@ const MainPageProfile = () => {
         탁구왕 {user.intraId} 님
       </Link>
 
-      <div className={styles.currentMatchBoard}>
+      {/* <div className={styles.currentMatchBoard}>
         <div className={styles.currentMatchBoardInner}>
           <div className={styles.currentMatchScroll}>
             <ul>
@@ -49,14 +55,7 @@ const MainPageProfile = () => {
             </ul>
           </div>
         </div>
-      </div>
-
-      <div className={styles.currentMatch}>
-        {openCurrentMatch &&
-          currentMatchList?.map((currentMatch, index) => (
-            <CurrentMatch currentMatch={currentMatch} key={index} />
-          ))}
-      </div>
+      </div> */}
     </div>
   );
 };

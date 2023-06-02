@@ -8,6 +8,8 @@ import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
 import { CurrentMatchListElement } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
 
+import { MdCampaign } from 'react-icons/md';
+
 interface CurrentMatchProp {
   currentMatch: CurrentMatchListElement;
 }
@@ -35,24 +37,22 @@ export default function CurrentMatch(prop: CurrentMatchProp) {
         blockCancelButton ? styles.blockCancelButton : styles.cancelButton
       }
     >
-      <button
-        className={styles.container}
-        onClick={() => onCancel(startTime)}
-        value={blockCancelButton ? '취소불가' : '취소하기'}
-      >
+      <div className={styles.container}>
         <div className={styles.stringWrapper}>
-          <div className={styles.icon}>🏓</div>
+          <div className={styles.icon}>
+            <MdCampaign />
+          </div>
           <div className={styles.messageWrapper}>
             {currentMatch && makeMessage(startTime, isMatched)}
             <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
           </div>
         </div>
-        {/* <input
-              type='button'
-              onClick={() => onCancel(startTime)}
-              value={blockCancelButton ? '취소불가' : '취소하기'}
-            /> */}
-      </button>
+        <input
+          type='button'
+          onClick={() => onCancel(startTime)}
+          value={blockCancelButton ? '취소불가' : '취소하기'}
+        />
+      </div>
     </div>
   );
 }
