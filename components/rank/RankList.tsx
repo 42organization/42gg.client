@@ -3,7 +3,6 @@ import { RankUser, NormalUser, Rank } from 'types/rankTypes';
 import RankListMain from './topRank/RankListMain';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
-
 import useRankList from 'hooks/rank/useRankList';
 
 interface RankListProps {
@@ -11,6 +10,7 @@ interface RankListProps {
   season?: number;
   isMain?: boolean;
 }
+
 export default function RankList({
   toggleMode,
   season,
