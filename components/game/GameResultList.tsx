@@ -1,3 +1,4 @@
+import React from 'react';
 import { Game } from 'types/gameTypes';
 import GameResultEmptyItem from './GameResultEmptyItem';
 import GameResultBigItem from './big/GameResultBigItem';
@@ -29,7 +30,7 @@ export default function GameResultList({ path }: GameResultListProps) {
       {status === 'success' && (
         <>
           {data?.pages.map((gameList, pageIndex) => (
-            <>
+            <React.Fragment key={pageIndex}>
               {gameList.games.map((game: Game, index) => {
                 const type = Number.isInteger(index / 2) ? 'LIGHT' : 'DARK';
                 const zIndex =
@@ -51,7 +52,7 @@ export default function GameResultList({ path }: GameResultListProps) {
                   />
                 );
               })}
-            </>
+            </React.Fragment>
           ))}
           {pathName === '/game' && !isLast && (
             <div className={styles.getButton}>
