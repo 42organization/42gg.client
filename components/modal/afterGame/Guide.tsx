@@ -1,29 +1,29 @@
-import { MatchMode } from 'types/mainType';
+// import { MatchMode } from 'types/mainType';
 import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
 
-type ModalMode = MatchMode | 'confirm';
+// type ModalMode = MatchMode | 'confirm';
 interface GuideProps {
   condition: boolean;
-  modalMode: ModalMode;
+  modalMode: 'NORMAL' | 'RANK';
 }
 
 export default function Guide({ condition, modalMode }: GuideProps) {
   const content = {
-    normal: {
+    NORMAL: {
       before: '즐거운 경기 하셨나요?',
       after: '즐거운 경기 하셨나요?',
       explains: '다음에도 사용해 주실거죠? 😉',
     },
-    rank: {
+    RANK: {
       before: '경기 후 점수를 입력해주세요',
       after: '경기 결과 확인',
       explains: '💡 3판 2선승제!\n💡 동점은 1점 내기로 승부를 결정!',
     },
-    confirm: {
-      before: '경기 결과!',
-      after: '경기 결과!',
-      explains: '이미 입력된 경기입니다. 점수를 확인하세요!\n',
-    },
+    // CONFIRM: {
+    //   before: '경기 결과!',
+    //   after: '경기 결과!',
+    //   explains: '이미 입력된 경기입니다. 점수를 확인하세요!\n',
+    // },
   };
 
   return (
