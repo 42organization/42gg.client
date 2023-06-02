@@ -54,7 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Layout>
             <Component {...pageProps} />
           </Layout>
-          <ModalProvider />
+          {/* <ModalProvider /> */}
           <CustomizedSnackbars />
           {/* </ErrorChecker> */}
         </LoginChecker>

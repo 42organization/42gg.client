@@ -1,28 +1,59 @@
 import Link from 'next/link';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { stringToHourMin } from 'utils/handleTime';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
-import { CurrentMatchListElement } from 'types/matchTypes';
+import { CurrentMatchList, CurrentMatchListElement } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
 
 import { MdCampaign } from 'react-icons/md';
+import { currentMatchState } from 'utils/recoil/match';
+import { useState } from 'react';
 
 interface CurrentMatchProp {
   currentMatch: CurrentMatchListElement;
 }
 
-export default function CurrentMatch(prop: CurrentMatchProp) {
+export default function CurrentMatch() {
+  const currentMatchList =
+    useRecoilValue<CurrentMatchList>(currentMatchState).match;
+  const [showCurrentMatch, setShowCurrentMatch] = useState<boolean>(false);
+
+  useGetCurrentMatch();
+
+  const currentMatchFirstItem = currentMatchList[0];
+  const currentMatchDropDown = currentMatchList.slice(1);
+
+  return (
+    <div className={styles.banner}>
+      <div className={styles.openCurrentMatch}>
+        {currentMatchList.length > 1 && (
+          <button
+            className={styles.openCurrentMatchBtn}
+            onClick={() => setShowCurrentMatch(!showCurrentMatch)}
+          >
+            더보기
+          </button>
+        )}
+      </div>
+      <div className={styles.currentMatchContainer}>
+        <CurrentMatchContent currentMatch={currentMatchFirstItem} />
+        {showCurrentMatch &&
+          currentMatchDropDown.map((currentMatch, index) => (
+            <CurrentMatchContent key={index} currentMatch={currentMatch} />
+          ))}
+      </div>
+    </div>
+  );
+}
+
+function CurrentMatchContent(prop: CurrentMatchProp) {
   const { currentMatch } = prop;
   const { startTime, isMatched, enemyTeam, isImminent } = currentMatch;
   const setModal = useSetRecoilState<Modal>(modalState);
-
-  const blockCancelButton: number | false =
-    currentMatch && isImminent && enemyTeam.length;
-
-  useGetCurrentMatch();
+  const blockCancelButton: number | false = isImminent && enemyTeam.length;
 
   const onCancel = (startTime: string) => {
     setModal({
@@ -32,28 +63,25 @@ export default function CurrentMatch(prop: CurrentMatchProp) {
   };
 
   return (
-    <div
-      className={
-        blockCancelButton ? styles.blockCancelButton : styles.cancelButton
-      }
-    >
-      <div className={styles.container}>
-        <div className={styles.stringWrapper}>
-          <div className={styles.icon}>
-            <MdCampaign />
-          </div>
-          <div className={styles.messageWrapper}>
-            {currentMatch && makeMessage(startTime, isMatched)}
-            <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
-          </div>
+    <>
+      <div className={styles.stringWrapper}>
+        <div className={styles.icon}>
+          <MdCampaign />
         </div>
-        <input
-          type='button'
+        <div className={styles.messageWrapper}>
+          {makeMessage(startTime, isMatched)}
+          <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
+        </div>
+        <button
+          className={
+            blockCancelButton ? styles.blockCancelButton : styles.cancelButton
+          }
           onClick={() => onCancel(startTime)}
-          value={blockCancelButton ? '취소불가' : '취소하기'}
-        />
+        >
+          {blockCancelButton ? '취소불가' : '취소하기'}
+        </button>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -69,7 +97,7 @@ function makeMessage(time: string, isMatched: boolean) {
           '에 경기가 시작됩니다!'
         ) : (
           <>
-            {/* <span> 참가자 기다리는 중</span> */}
+            <span> 참가자 기다리는 중</span>
             <span className={styles.waitUpDown}>
               <span className={styles.span1}>.</span>
               <span className={styles.span2}>.</span>
