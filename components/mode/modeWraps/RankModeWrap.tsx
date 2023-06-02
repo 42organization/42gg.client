@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { MatchMode } from 'types/mainType';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import useModeToggle from 'hooks/mode/useModeToggle';
 import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
@@ -8,7 +7,7 @@ import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface RankModeWrapProps {
   children: React.ReactNode;
-  setMode: React.Dispatch<React.SetStateAction<MatchMode>>;
+  setMode: React.Dispatch<React.SetStateAction<'normal' | 'rank'>>;
 }
 
 export default function RankModeWrap({ children, setMode }: RankModeWrapProps) {
