@@ -48,9 +48,10 @@ const useRankList = ({
   const getRankerDataHandler = useAxiosGet({
     url: makePathRanker,
     setState: (data) => {
-      const temp = data?.rankList[1];
-      data?.rankList.splice(1, 1);
-      data?.rankList.unshift(temp);
+      [data.rankList[0], data.rankList[1]] = [
+        data.rankList[1],
+        data.rankList[0],
+      ];
       setRanker(data);
       setMyRank((prev) => ({ ...prev, [toggleMode]: data.myRank }));
     },
