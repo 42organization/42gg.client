@@ -4,9 +4,10 @@ import styles from 'styles/rank/RankListMain.module.scss';
 
 interface RankListMainProps {
   rank?: Rank;
+  isMain: boolean;
 }
 
-export default function RankListMain({ rank }: RankListMainProps) {
+export default function RankListMain({ rank, isMain }: RankListMainProps) {
   const content = {
     normal: { style: styles.normal, title: 'VIP' },
     rank: { style: '', title: 'Champion' },
@@ -18,7 +19,7 @@ export default function RankListMain({ rank }: RankListMainProps) {
       <div className={`${styles.title} ${content.rank.style}`}>
         {content.rank.title}
       </div>
-      <div className={styles.mainContainer}>
+      <div className={`${styles.mainContainer} ${isMain && styles.isMain}`}>
         {rank?.rankList.map((item: NormalUser | RankUser) => (
           <RankListItemMain key={item.intraId} user={item} />
         ))}

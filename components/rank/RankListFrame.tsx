@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import PageNation from 'components/Pagination';
 import styles from 'styles/rank/RankList.module.scss';
-import RankListMain from './topRank/RankListMain';
 
 interface PageInfo {
   currentPage?: number;
@@ -32,8 +31,6 @@ export default function RankListFrame({
   return (
     <>
       <div className={styles.container}>
-        {/*         <RankListMain rank={division[toggleMode]} />
-         */}{' '}
         <div
           className={`${styles.division}
 					${toggleMode === 'normal' && styles.normal}`}

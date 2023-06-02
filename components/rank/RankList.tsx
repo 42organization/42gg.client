@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { RankUser, NormalUser, Rank } from 'types/rankTypes';
 import RankListMain from './topRank/RankListMain';
 import RankListFrame from './RankListFrame';
@@ -55,12 +55,12 @@ export default function RankList({
   });
 
   if (isMain) {
-    return <RankListMain rank={ranker} />;
+    return <RankListMain rank={ranker} isMain={true} />;
   }
 
   return (
     <div>
-      <RankListMain rank={ranker} />
+      <RankListMain rank={ranker} isMain={false} />
       <RankListFrame toggleMode={toggleMode} pageInfo={pageInfo}>
         {rank?.rankList.map((item: NormalUser | RankUser, index) => (
           <RankListItem
