@@ -3,7 +3,7 @@ export interface RankUser {
   intraId: string;
   statusMessage: string;
   ppp: number;
-  winRate: number;
+  userImageUri: string;
 }
 
 export interface NormalUser {
@@ -12,6 +12,7 @@ export interface NormalUser {
   statusMessage: string;
   level: number;
   exp: number;
+  userImageUri: string;
 }
 
 export interface MyRank {
