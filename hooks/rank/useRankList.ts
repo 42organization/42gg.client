@@ -1,14 +1,13 @@
 import useAxiosGet from 'hooks/useAxiosGet';
 import { useEffect, Dispatch, SetStateAction } from 'react';
 import { useRecoilState } from 'recoil';
-import { MatchMode } from 'types/mainType';
 import { Rank } from 'types/rankTypes';
 import { myRankState, scrollState } from 'utils/recoil/myRank';
 import { MyRank } from 'types/rankTypes';
 
 interface useRankListProps {
   makePath: string;
-  toggleMode: MatchMode;
+  toggleMode: 'normal' | 'rank';
   season: number | undefined;
   setRank: Dispatch<SetStateAction<Rank | undefined>>;
   page: number;

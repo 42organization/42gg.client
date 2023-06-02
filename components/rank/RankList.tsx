@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { MatchMode } from 'types/mainType';
 import { RankUser, NormalUser, Rank } from 'types/rankTypes';
 import RankListMain from './topRank/RankListMain';
 import RankListFrame from './RankListFrame';
@@ -8,7 +7,7 @@ import RankListItem from './RankListItem';
 import useRankList from 'hooks/rank/useRankList';
 
 interface RankListProps {
-  toggleMode: MatchMode;
+  toggleMode: 'normal' | 'rank';
   season?: number;
   isMain?: boolean;
 }

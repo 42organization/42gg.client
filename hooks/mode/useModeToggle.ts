@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-const useModeToggle = (toggleMode: 'NORMAL' | 'RANK' | 'BOTH') => {
+const useModeToggle = (toggleMode: 'normal' | 'rank') => {
   const [Mode, setMode] = useState(toggleMode);
 
   const onToggle = (): void => {
-    setMode(Mode === 'RANK' ? 'NORMAL' : 'RANK');
+    setMode(Mode === 'rank' ? 'normal' : 'rank');
   };
 
   return { onToggle, Mode };
