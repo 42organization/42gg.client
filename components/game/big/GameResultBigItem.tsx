@@ -5,23 +5,20 @@ import { clickedGameItemState } from 'utils/recoil/game';
 import GameResultBigScore from 'components/game/big/GameResultBigScore';
 import GameResultBigTeam from 'components/game/big/GameResultBigTeam';
 import styles from 'styles/game/GameResultItem.module.scss';
-import { BigGameContainer } from 'styles/game/GameResultItem.styles';
 
 interface GameResultBigItemProps {
   game: Game;
   type: 'LIGHT' | 'DARK';
-  zIndex: number;
 }
 
-function GameResultBigItem({ game, type, zIndex }: GameResultBigItemProps) {
+function GameResultBigItem({ game, type }: GameResultBigItemProps) {
   const { mode, team1, team2, status, time, gameId } = game;
   const setClickedItemId = useSetRecoilState(clickedGameItemState);
   return (
-    <BigGameContainer
+    <div
       onClick={() => setClickedItemId(gameId)}
       id={String(gameId)}
-      zIndex={zIndex}
-      type={type}
+      className={`${styles['bigItemContainer']} ${styles[type.toLowerCase()]}`}
     >
       <GameResultBigTeam team={team1} />
       <GameResultBigScore
@@ -32,7 +29,7 @@ function GameResultBigItem({ game, type, zIndex }: GameResultBigItemProps) {
         scoreTeam2={team2.score}
       />
       <GameResultBigTeam team={team2} />
-    </BigGameContainer>
+    </div>
   );
 }
 
