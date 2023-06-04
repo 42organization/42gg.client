@@ -1,37 +1,63 @@
 @import 'styles/common.scss';
 
+$bannerBackground: rgba(255, 255, 255, 0.4);
+$cancelButton: rgba(0, 0, 0, 0.34);
+
+$message: rgba(39, 10, 70, 1);
+
 .banner {
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: 1fr 5fr;
-  grid-template-areas: 'more bannerMain';
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   width: 90%;
   height: 100%;
   border-radius: $small-radius;
   padding: 0;
-  border: solid;
+  border: 0;
+  background: $bannerBackground;
 }
 
 .openCurrentMatch {
-  grid-area: more;
   padding: $small-font;
+  height: 100%;
+  flex-shrink: 0;
 }
 
 .openCurrentMatchBtn {
+  height: 100%;
   border-radius: $small-radius;
+  border: 0;
+  background: $cancelButton;
+  color: white;
+  font-size: $small-font;
+  padding: 0.5rem;
 }
 
-.currentMatchMain {
-  grid-area: bannerMain;
-  width: 70%;
+.currentMatchMainDropDown {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.currentMatchMainOne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
 .stringWrapper {
+  height: 100%;
+  width: 100%;
   border-radius: $small-radius;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  font-size: $small-font;
+  font-size: $medium-font;
 }
 
 .waitUpDown {
@@ -62,7 +88,6 @@
 }
 
 .messageWrapper {
-  font-weight: bold;
   border-radius: $small-radius;
   display: flex;
   justify-content: center;
@@ -74,6 +99,7 @@
   justify-content: center;
   align-items: center;
   border-radius: $small-radius;
+  color: $message;
 }
 
 .icon {
@@ -84,13 +110,28 @@
   margin-right: 0.5rem;
   font-size: $medium-font;
   border-radius: $small-radius;
+  color: $message;
 }
 
-// .cancelButton {
-// }
+.cancelButton {
+  height: 100%;
+  border-radius: $small-radius;
+  border: 0;
+  background: $cancelButton;
+  color: white;
+  font-size: $small-font;
+  padding: 0.5rem;
+}
 
-// .blockCancelButton {
-// }
+.blockCancelButton {
+  height: 100%;
+  border-radius: $small-radius;
+  border: 0;
+  background: $cancelButton;
+  color: red;
+  font-size: $small-font;
+  padding: 0.5rem;
+}
 
 .enemyTeam {
   font-size: 0.85rem;

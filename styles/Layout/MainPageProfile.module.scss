@@ -1,18 +1,25 @@
 @import 'styles/common.scss';
 
+.mainPageProfile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .gridContainer {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 0.5fr 1fr;
   grid-template-columns: 1fr 3fr;
   grid-template-areas:
-    'banner banner'
     'image greetings'
     'image intraId';
   color: white;
   margin-left: 0.7rem;
   margin-right: 0.7rem;
-
-  background-color: black;
+  flex-shrink: 0;
+  width: 90%;
 }
 
 .myImage {
@@ -35,14 +42,17 @@
   display: flex;
   justify-content: left;
   align-items: center;
-  font-weight: 600;
+}
+
+.intraIdLink {
   font-size: $giant-font;
+  font-weight: 600;
 }
 
 .currentMatch {
-  grid-area: banner;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  width: 90%;
 }

@@ -45,15 +45,15 @@ function CurrentMatchMain(prop: CurrentMatchMainProp) {
   const currentMatchList =
     useRecoilValue<CurrentMatchList>(currentMatchState).match;
 
-  return (
-    <div className={styles.currentMatchMain}>
-      {showDropDown ? (
-        currentMatchList.map((currentMatch, index) => (
-          <CurrentMatchContent key={index} currentMatch={currentMatch} />
-        ))
-      ) : (
-        <CurrentMatchContent currentMatch={currentMatchList[0]} />
-      )}
+  return showDropDown ? (
+    <div className={styles.currentMatchMainDropDown}>
+      {currentMatchList.map((currentMatch, index) => (
+        <CurrentMatchContent key={index} currentMatch={currentMatch} />
+      ))}
+    </div>
+  ) : (
+    <div className={styles.currentMatchMainOne}>
+      <CurrentMatchContent currentMatch={currentMatchList[0]} />
     </div>
   );
 }
@@ -90,7 +90,7 @@ function CurrentMatchContent(prop: CurrentMatchContentProp) {
         }
         onClick={() => onCancel(startTime)}
       >
-        {blockCancelButton ? '취소불가' : '취소하기'}
+        {blockCancelButton ? '경기 취소 불가' : '경기 예약 취소'}
       </button>
     </div>
   );
