@@ -12,19 +12,12 @@ import { MdCampaign } from 'react-icons/md';
 import { currentMatchState } from 'utils/recoil/match';
 import { useState } from 'react';
 
-interface CurrentMatchProp {
-  currentMatch: CurrentMatchListElement;
-}
-
 export default function CurrentMatch() {
   const currentMatchList =
     useRecoilValue<CurrentMatchList>(currentMatchState).match;
   const [showCurrentMatch, setShowCurrentMatch] = useState<boolean>(false);
 
   useGetCurrentMatch();
-
-  const currentMatchFirstItem = currentMatchList[0];
-  const currentMatchDropDown = currentMatchList.slice(1);
 
   return (
     <div className={styles.banner}>
@@ -34,22 +27,42 @@ export default function CurrentMatch() {
             className={styles.openCurrentMatchBtn}
             onClick={() => setShowCurrentMatch(!showCurrentMatch)}
           >
-            더보기
+            {showCurrentMatch ? '닫기' : '더보기'}
           </button>
         )}
       </div>
-      <div className={styles.currentMatchContainer}>
-        <CurrentMatchContent currentMatch={currentMatchFirstItem} />
-        {showCurrentMatch &&
-          currentMatchDropDown.map((currentMatch, index) => (
-            <CurrentMatchContent key={index} currentMatch={currentMatch} />
-          ))}
-      </div>
+      <CurrentMatchMain showDropDown={showCurrentMatch} />
     </div>
   );
 }
 
-function CurrentMatchContent(prop: CurrentMatchProp) {
+interface CurrentMatchMainProp {
+  showDropDown: boolean;
+}
+
+function CurrentMatchMain(prop: CurrentMatchMainProp) {
+  const { showDropDown } = prop;
+  const currentMatchList =
+    useRecoilValue<CurrentMatchList>(currentMatchState).match;
+
+  return (
+    <div className={styles.currentMatchMain}>
+      {showDropDown ? (
+        currentMatchList.map((currentMatch, index) => (
+          <CurrentMatchContent key={index} currentMatch={currentMatch} />
+        ))
+      ) : (
+        <CurrentMatchContent currentMatch={currentMatchList[0]} />
+      )}
+    </div>
+  );
+}
+
+interface CurrentMatchContentProp {
+  currentMatch: CurrentMatchListElement;
+}
+
+function CurrentMatchContent(prop: CurrentMatchContentProp) {
   const { currentMatch } = prop;
   const { startTime, isMatched, enemyTeam, isImminent } = currentMatch;
   const setModal = useSetRecoilState<Modal>(modalState);
@@ -63,25 +76,23 @@ function CurrentMatchContent(prop: CurrentMatchProp) {
   };
 
   return (
-    <>
-      <div className={styles.stringWrapper}>
-        <div className={styles.icon}>
-          <MdCampaign />
-        </div>
-        <div className={styles.messageWrapper}>
-          {makeMessage(startTime, isMatched)}
-          <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
-        </div>
-        <button
-          className={
-            blockCancelButton ? styles.blockCancelButton : styles.cancelButton
-          }
-          onClick={() => onCancel(startTime)}
-        >
-          {blockCancelButton ? '취소불가' : '취소하기'}
-        </button>
+    <div className={styles.stringWrapper}>
+      <div className={styles.icon}>
+        <MdCampaign />
       </div>
-    </>
+      <div className={styles.messageWrapper}>
+        {makeMessage(startTime, isMatched)}
+        <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
+      </div>
+      <button
+        className={
+          blockCancelButton ? styles.blockCancelButton : styles.cancelButton
+        }
+        onClick={() => onCancel(startTime)}
+      >
+        {blockCancelButton ? '취소불가' : '취소하기'}
+      </button>
+    </div>
   );
 }
 

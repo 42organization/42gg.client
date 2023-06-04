@@ -1,17 +1,19 @@
 @import 'styles/common.scss';
 
 .banner {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas: 'more bannerMain';
   width: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
   border-radius: $small-radius;
-  height: 70%;
   padding: 0;
   border: solid;
 }
 
 .openCurrentMatch {
+  grid-area: more;
   padding: $small-font;
 }
 
@@ -19,13 +21,15 @@
   border-radius: $small-radius;
 }
 
-.currentMatchContainer {
+.currentMatchMain {
+  grid-area: bannerMain;
   width: 70%;
 }
 
 .stringWrapper {
   border-radius: $small-radius;
   display: flex;
+  justify-content: center;
   align-items: center;
   font-size: $small-font;
 }
