@@ -7,10 +7,9 @@ import styles from 'styles/modal/match/MatchManualModal.module.scss';
 import useModeToggle from 'hooks/mode/useModeToggle';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
 
-export default function MatchManualModal({ toggleMode }: Manual) {
+// export default function MatchManualModal({ toggleMode }: Manual) {
+export default function MatchManualModal({ radioMode }: Manual) {
   const setModal = useSetRecoilState(modalState);
-  const seasonMode = 'both';
-  const { onToggle, Mode } = useModeToggle(toggleMode);
 
   const onReturn = () => {
     setModal({ modalName: null });
@@ -19,18 +18,8 @@ export default function MatchManualModal({ toggleMode }: Manual) {
   return (
     <div className={styles.container}>
       <div className={styles.title}>Please!!</div>
-      {seasonMode === 'both' && (
-        <div className={styles.toggleContainer}>
-          <ModeToggle
-            checked={Mode === 'RANK'}
-            onToggle={onToggle}
-            id={'manualToggle'}
-            text={Mode === 'RANK' ? '랭크' : '일반'}
-          />
-        </div>
-      )}
       <ul className={styles.ruleList}>
-        {manualSelect(Mode).map(
+        {manualSelect(radioMode).map(
           (item: { title: string; description: string[] }, index) => (
             <li key={index}>
               {item.title}
@@ -127,5 +116,5 @@ const modalContentsRank: { title: string; description: string[] }[] = [
   },
 ];
 
-const manualSelect = (modalToggleMode: MatchMode) =>
-  modalToggleMode === 'RANK' ? modalContentsRank : modalContentsNormal;
+const manualSelect = (radioMode: MatchMode) =>
+  radioMode === ('RANK' || 'BOTH') ? modalContentsRank : modalContentsNormal;
