@@ -5,17 +5,44 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-image: url('../public/image/login_background_img.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   height: 100vh;
   .innerContainer {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     align-items: center;
     height: 50vh;
-    padding-bottom: 5rem;
-  }
-  .title {
-    @include logoTitle(0.4rem);
-    font-size: 5rem;
+    margin-bottom: 5rem;
+    .logoContainer {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 18rem;
+      height: 7rem;
+    }
+    .logo1 {
+      position: absolute;
+      width: 12rem;
+      min-width: 110px;
+      height: 1.8rem;
+      min-height: 45px;
+    }
+
+    .logo2 {
+      position: absolute;
+      width: 20rem;
+      height: 7.5rem;
+      margin-top: 7rem;
+    }
+
+    .buttonContainer {
+      margin-top: 7rem;
+    }
   }
 }

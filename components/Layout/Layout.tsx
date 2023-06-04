@@ -58,7 +58,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 {openCurrentMatch && <CurrentMatch />}
                 {presentPath !== '/match' && presentPath !== '/manual' && (
                   <div className={styles.buttonContainer}>
-                    <StyledButton onClick={onClickMatch} width={'8rem'}>
+                    <StyledButton onClick={onClickMatch} width={'8.2rem'}>
                       Play
                     </StyledButton>
                   </div>
