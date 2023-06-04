@@ -6,7 +6,6 @@ import { modalState } from 'utils/recoil/modal';
 import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import styles from 'styles/modal/match/MatchManualModal.module.scss';
 
-// export default function MatchManualModal({ toggleMode }: Manual) {
 export default function MatchManualModal({ radioMode }: Manual) {
   const setModal = useSetRecoilState(modalState);
   const [manualMode, setManualMode] = useState<MatchMode>(radioMode);
