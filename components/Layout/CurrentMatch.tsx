@@ -34,8 +34,8 @@ export default function CurrentMatch() {
     <>
       <div className={styles.container}>
         {currentMatchList.match.map((currentMatch, index) => (
-          <div key={index}>
-            <div className={styles.stringWrapper}>
+          <>
+            <div className={styles.stringWrapper} key={index}>
               <div className={styles.icon}>⏰</div>
               <div className={styles.messageWrapper}>
                 {currentMatch &&
@@ -61,7 +61,7 @@ export default function CurrentMatch() {
                 }
               />
             </div>
-          </div>
+          </>
         ))}
       </div>
     </>
