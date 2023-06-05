@@ -1,16 +1,14 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { stringToHourMin } from 'utils/handleTime';
-import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
-
 import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
+import { currentMatchState } from 'utils/recoil/match';
 import { CurrentMatchList, CurrentMatchListElement } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
-
-import { MdCampaign } from 'react-icons/md';
-import { currentMatchState } from 'utils/recoil/match';
-import { useState } from 'react';
+import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 export default function CurrentMatch() {
   const currentMatchList =
@@ -73,7 +71,14 @@ function CurrentMatchContent(prop: CurrentMatchContentProp) {
   return (
     <div className={styles.currentMatchContent}>
       <div className={styles.icon}>
-        <MdCampaign />
+        <div>
+          <Image
+            src='/image/loudspeaker.webp'
+            alt='loudspeaker'
+            width={25}
+            height={25}
+          />
+        </div>
       </div>
       <div className={styles.messageWrapper}>
         {makeMessage(startTime, isMatched)}
