@@ -94,7 +94,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
               return null;
             }
             const count = countSlotsInHour(slot);
-            const nextSlots = array.slice(index + 1, index + count + 1);
+            const nextSlots = array.slice(index, index + count);
 
             return (
               <div
@@ -107,7 +107,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
                 <div className={styles.slotGrid}>
                   {nextSlots.map((nextSlot, nextIndex) => (
                     <MatchSlot
-                      key={index + nextIndex + 1}
+                      key={index + nextIndex}
                       toggleMode={toggleMode}
                       slot={nextSlot}
                     />
