@@ -27,11 +27,9 @@ export default function GameResultBigTeam({ team }: GameResultBigTeamProps) {
             </div>
           </Link>
           <div className={styles.winRate}>
-            <span>
-              {isRankPlayerType(player)
-                ? `${player.wins}승 ${player.losses}패`
-                : `Lv. ${player.level}`}
-            </span>
+            {isRankPlayerType(player)
+              ? `${player.wins}승 ${player.losses}패`
+              : `Lv. ${player.level}`}
           </div>
         </div>
       ))}
