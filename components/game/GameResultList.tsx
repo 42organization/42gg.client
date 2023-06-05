@@ -21,7 +21,7 @@ export default function GameResultList({ path }: GameResultListProps) {
     return <GameResultEmptyItem status={status} />;
 
   return (
-    <div className={styles['item-list']}>
+    <div>
       {status === 'success' && (
         <>
           {data?.pages.map((gameList, pageIndex) => (

@@ -21,7 +21,6 @@
 @mixin itemContainer($type) {
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
-  box-sizing: border-box;
   align-items: center;
   &.light {
     background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
