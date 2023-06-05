@@ -18,10 +18,10 @@ const useGameResult = ({ mode, season }: GameResultProps) => {
       const basePath = '/pingpong/games';
       if (asPath === '/' || asPath.includes('token')) {
         // live 상태 포함 최근 3개의 게임만 가져온다.
-        setPath(`${basePath}?page=${1}&size=${3}&status=${'LIVE'}`);
+        setPath(`${basePath}?size=${3}&status=${'LIVE'}`);
         return;
       }
-      const modePath = mode === 'BOTH' ? '' : `/${mode?.toLowerCase()}`;
+      const modePath = mode === 'BOTH' || !mode ? '' : `/${mode.toLowerCase()}`;
       const userQuery = intraId && `intraId=${intraId}`;
       const seasonQuery = mode === 'RANK' && `seasonId=${season}`;
       const sizeQuery =
