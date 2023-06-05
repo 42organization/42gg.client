@@ -7,9 +7,9 @@
 
 .title {
   @include pageTitle;
-  text-shadow: $text-border-black, 0.3rem 0.3rem 0 #c9a5e6;
+  //text-shadow: $text-border-black, 0.3rem 0.3rem 0 #c9a5e6;
   &.vip {
-    text-shadow: $text-border-black, 0.3rem 0.3rem 0 $norm-lightblue2;
+    //text-shadow: $text-border-black, 0.3rem 0.3rem 0 $norm-lightblue2;
   }
 }
 
@@ -17,17 +17,21 @@
 .myRank {
   width: fit-content;
   margin-bottom: 1.7rem;
-  margin-inline: auto;
+  //margin-inline: auto;
   color: white;
+  opacity: 0.5;
   font-weight: 600;
   font-size: $medium-font;
   text-shadow: 0.1rem 0.1rem 0.1rem $rank-blue;
-  text-align: center;
-  span:nth-child(2) {
-    color: $g1-top;
-  }
+  //text-align: center;
+  /*   span:nth-child(2) {
+    //color: $g1-top;
+  } */
   &.rank {
     cursor: pointer;
+  }
+  .myRank-text {
+    pointer-events: auto;
   }
 }
 
@@ -39,14 +43,11 @@
   align-items: center;
   height: 2.5rem;
   padding: 0 0.2rem;
-  margin-top: 0.15rem;
-  //border-radius: $big-radius;
-  //border-radius: 1rem;
+  margin-top: 0rem;
   color: $dark-gray;
-  //color: #E8D1FC;
-  /*   div:nth-child(2) {
-    //justify-self: start;
-  } */
+  &:not(:nth-child(2)) {
+    margin-top: 0.15rem;
+  }
 }
 
 .container {
@@ -56,26 +57,19 @@
 .division {
   @include rankGrid;
   background: #c9a5e6;
-  color: white;
-  //color: black;
-  font-weight: 700;
+  //color: white;
+  color: black;
+  font-weight: 500;
   border-radius: 0.5rem 0.5rem 0 0;
   &.normal {
-    background: $norm-lightblue2;
+    background: $rank-hotpink;
   }
 }
 
 /* RankListItem */
-.rankItemWrap {
+/* .rankItemWrap {
   @include rankGrid;
-  &.odd {
-    background: white;
-    //background: #E8D1FC;
-  }
-  &.even {
-    //background: $gray;
-    background: #e8d1fc;
-  }
+  background: #EDD0FF;
   &.top {
     color: $loser-red;
     font-weight: 700;
@@ -83,15 +77,8 @@
   &.standard {
     color: $dark-gray;
   }
-  &.myRanking {
-    //border: 0.07rem solid $rank-red;
-    border: 0.1rem solid #962fea;
-    background: $g1-bottom;
-    background: #c9a5e6;
-  }
   &.myVip {
-    border: 0.07rem solid $norm-lightblue2;
-    background: $norm-emerald;
+    background: $rank-pink3;
   }
   .intraId {
     color: black;
@@ -105,8 +92,54 @@
     color: $dark-gray;
   }
   .ppp {
-    color: $winner-blue;
+    //color: $winner-blue;
+    color: #6C00D9;
     font-weight: 600;
+    myVip {
+      color: #CB0C9F;
+    }
+  }
+} */
+
+.rankItemWrap {
+  @include rankGrid;
+  background: #e8d1fc;
+  &.Vip {
+    background: $rank-pink3;
+  }
+  &.top {
+    color: $loser-red;
+    font-weight: 700;
+  }
+  &.standard {
+    color: $dark-gray;
+  }
+  &.myRanking {
+    border: 0.1rem solid #962fea;
+    background: #c9a5e6;
+  }
+  &.myVip {
+    border: 0.07rem solid #cb0c9f;
+    background: $rank-hotpink;
+  }
+  .intraId {
+    color: black;
+    font-weight: 700;
+    span {
+      cursor: pointer;
+    }
+  }
+  .statusMessage {
+    justify-self: left;
+    color: $dark-gray;
+  }
+  .ppp {
+    color: #6c00d9;
+    font-weight: 600;
+  }
+
+  &.Vip .ppp {
+    color: #cb0c9f;
   }
 }
 

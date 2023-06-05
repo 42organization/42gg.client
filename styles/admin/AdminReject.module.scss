@@ -10,7 +10,13 @@
   height: 100vh;
   min-height: 40rem;
   padding: 0 4rem;
-  background-image: url('../../public/image/background_img.png');
+  //background-image: url('../../public/image/background_img.png');
+  background: linear-gradient(
+    180deg,
+    #590350 0%,
+    #480041 42.91%,
+    #490042 54.17%
+  );
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

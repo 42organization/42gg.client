@@ -31,7 +31,6 @@ export default function RankModeWrap({ children, setMode }: RankModeWrapProps) {
         <ModeToggle
           checked={Mode === 'rank'}
           onToggle={onToggle}
-          text={Mode === 'rank' ? '랭크' : '열정'}
           id={'rankToggle'}
         />
         {showSeasons && seasonList && (

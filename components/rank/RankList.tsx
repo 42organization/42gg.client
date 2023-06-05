@@ -51,7 +51,6 @@ export default function RankList({
       {rank?.rankList.map((item: NormalUser | RankUser, index) => (
         <RankListItem
           key={index}
-          index={index}
           toggleMode={toggleMode}
           user={makeUser(item)}
         />
