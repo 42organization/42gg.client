@@ -11,6 +11,7 @@ import { liveState } from 'utils/recoil/layout';
 import { Modal } from 'types/modalTypes';
 import { MatchMode } from 'types/mainType';
 import { currentMatchState } from 'utils/recoil/match';
+import { start } from 'repl';
 
 interface MatchBoardProps {
   type: string;
@@ -163,24 +164,34 @@ export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
   const buttonStyle: { [key: string]: string } = useMemo(
     () => ({
       mytable: status === 'mytable' ? styles.mytable : styles.disabled,
-      close: styles.disabled,
+      close:
+        event === 'match' && match[0].startTime === startTime
+          ? styles.mytable
+          : styles.disabled,
       open: toggleMode === 'RANK' ? styles.rank : styles.normal,
       match: toggleMode === 'RANK' ? styles.rank : styles.normal,
     }),
     [slot]
   );
 
+  const isDisabled =
+    status === 'close' &&
+    !(event === 'match' && match[0].startTime === startTime)
+      ? true
+      : false;
+
   const isAfterSlot: boolean =
     new Date(startTime).getTime() - new Date().getTime() >= 0;
 
   const headCount =
-    status === 'close' ? 2 : status === ('mytable' || 'match') ? 1 : 0;
+    status === 'close' ? 2 : status === 'mytable' || status === 'match' ? 1 : 0;
 
   return (
     <div className={styles.slotGrid}>
       <button
         className={`${styles.slotButton} ${buttonStyle[status]}`}
-        disabled={status === 'close'}
+        // disabled={status === 'close' && !(match[0].startTime === startTime)}
+        disabled={isDisabled}
         onClick={enrollhandler}
       >
         <span className={styles.time}>
