@@ -23,10 +23,9 @@ export default function AdminSearchBar({
   const adminhandleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       if (keyword === searchResult[0]) {
-        setKeyword(keyword);
+        setShowDropDown(false);
+        event.currentTarget.blur();
         initSearch(keyword);
-        setShowDropDown(false);
-        setShowDropDown(false);
       }
     }
   };

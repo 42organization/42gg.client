@@ -50,21 +50,23 @@ export default function useSearchBar(): useSearchBarReturn {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      if (keyword === searchResult[0]) {
-        setShowDropDown(false);
+      searchResult.map((data) => {
+        if (data === keyword) setShowDropDown(false);
+        event.currentTarget.blur();
         router.push(`/users/detail?intraId=${keyword}`);
-      }
+      });
     }
   };
 
   const gamehandleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      if (keyword === searchResult[0]) {
-        setShowDropDown(false);
+      searchResult.map((data) => {
+        if (data === keyword) setShowDropDown(false);
+        event.currentTarget.blur();
         router.push(`/game?intraId=${keyword}`, undefined, {
           shallow: true,
         });
-      }
+      });
     }
   };
 
