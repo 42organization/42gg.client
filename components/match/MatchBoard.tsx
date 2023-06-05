@@ -163,21 +163,21 @@ export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
   const buttonStyle: { [key: string]: string } = useMemo(
     () => ({
       mytable: status === 'mytable' ? styles.mytable : styles.disabled,
-      close:
-        event === 'match' && match[0].startTime === startTime
-          ? styles.mytable
-          : styles.disabled,
+      close: styles.disabled,
+      // event === 'match' && match[0].startTime === startTime
+      //   ? styles.mytable
+      //   : styles.disabled, // 나의 매칭 경기가 close일 때 mytable 상태 표시
       open: toggleMode === 'RANK' ? styles.rank : styles.normal,
       match: toggleMode === 'RANK' ? styles.rank : styles.normal,
     }),
     [slot]
   );
 
-  const isDisabled =
-    status === 'close' &&
-    !(event === 'match' && match[0].startTime === startTime)
-      ? true
-      : false;
+  // const isDisabled =
+  //   status === 'close' &&
+  //   !(event === 'match' && match[0].startTime === startTime)
+  //     ? true
+  //     : false; // 나의 매칭 경기가 close일 때 disabled 안 되게
 
   const isAfterSlot: boolean =
     new Date(startTime).getTime() - new Date().getTime() >= 0;
@@ -189,7 +189,8 @@ export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
     <div className={styles.slotGrid}>
       <button
         className={`${styles.slotButton} ${buttonStyle[status]}`}
-        disabled={isDisabled}
+        // disabled={isDisabled}
+        disabled={status === 'close'}
         onClick={enrollhandler}
       >
         <span className={styles.time}>
