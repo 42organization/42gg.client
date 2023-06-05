@@ -9,9 +9,9 @@
   grid-template-columns: 1fr 1fr 1fr; /* grid-template-rows로 변경 */
   align-items: end;
   margin-top: 2rem;
-  height: 20.5rem;
   &.isMain {
     height: 15.5rem;
+    margin-top: 9.5rem;
   }
   transform: scale(1.1);
 }
@@ -42,25 +42,8 @@
   border-radius: 58px;
 }
 
-.title {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  height: 2.9rem;
-  color: white;
-  font-size: 1.8rem;
-  font-family: $title-font;
-  z-index: 1;
-  //text-shadow: $text-border-black;
-  letter-spacing: 0.1rem;
-  &.normal {
-    background: $norm-lightblue2;
-  }
-}
-
 .mainData:nth-child(2) {
   position: relative;
-  //top: 0.5rem;
   height: 18rem;
   border-radius: 65px;
   z-index: 1;
@@ -71,6 +54,13 @@
     #884609 69.15%,
     rgba(53, 16, 80, 0) 87.56%
   );
+}
+
+.bangContainer {
+  display: flex;
+}
+.bangContainer2 {
+  margin-top: -7.5rem;
 }
 
 .bang {
@@ -85,21 +75,22 @@
 }
 
 .bang:nth-child(1) {
-  left: -5rem;
-  top: 6rem;
+  left: 6rem;
+  top: 6.1rem;
   transform: rotate(-47.37deg);
   clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
 }
 
 .bang:nth-child(2) {
-  left: -4.9rem;
-  top: 3rem;
+  left: 6rem;
+  top: 5rem;
+  height: 60.5px;
   clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
 }
 
 .bang:nth-child(3) {
-  left: -4.9rem;
-  top: 6rem;
+  left: 6rem;
+  top: 6.3rem;
   transform: rotate(47.37deg);
   clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
 }

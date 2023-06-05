@@ -18,7 +18,7 @@ export default function RankListItemMain({ user }: RankListItemMainProps) {
           <div className={styles.intraId}>
             <Link href={`users/detail?intraId=${intraId}`}>
               <PlayerImage
-                src={userImageUri} //사진 크기 키우기,
+                src={userImageUri}
                 styleName={rank === 1 ? 'ranktropy' : 'gameResultBig'}
                 size={50}
               />

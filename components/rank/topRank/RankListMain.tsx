@@ -8,16 +8,9 @@ interface RankListMainProps {
 }
 
 export default function RankListMain({ rank, isMain }: RankListMainProps) {
-  const content = {
-    normal: { style: styles.normal, title: 'VIP' },
-    rank: { style: '', title: 'Champion' },
-    both: { style: '', title: 'Champion' },
-  };
-  //console.log(rank);
   return (
-    <div>
-      <div className={`${styles.title} ${content.rank.style}`}>
-        {content.rank.title}
+    <div className={`${styles.bangContainer2}`}>
+      <div className={`${styles.bangContainer}`}>
         <div className={`${!isMain && styles.bang}`} />
         <div className={`${!isMain && styles.bang}`} />
         <div className={`${!isMain && styles.bang}`} />
