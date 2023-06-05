@@ -20,40 +20,34 @@ export default function CurrentMatch() {
   useGetCurrentMatch();
 
   return (
-    <div className={styles.banner}>
-      <div className={styles.openCurrentMatch}>
-        {currentMatchList.length > 1 && (
-          <button
-            className={styles.openCurrentMatchBtn}
-            onClick={() => setShowCurrentMatch(!showCurrentMatch)}
-          >
-            {showCurrentMatch ? '닫기' : '더보기'}
-          </button>
-        )}
-      </div>
-      <CurrentMatchMain showDropDown={showCurrentMatch} />
-    </div>
+    <button
+      className={styles.currentMatchBanner}
+      onClick={() => setShowCurrentMatch(!showCurrentMatch)}
+      disabled={currentMatchList.length === 1 ? true : false}
+    >
+      <CurrentMatchMain showDropdown={showCurrentMatch} />
+    </button>
   );
 }
 
 interface CurrentMatchMainProp {
-  showDropDown: boolean;
+  showDropdown: boolean;
 }
 
 function CurrentMatchMain(prop: CurrentMatchMainProp) {
-  const { showDropDown } = prop;
+  const { showDropdown } = prop;
   const currentMatchList =
     useRecoilValue<CurrentMatchList>(currentMatchState).match;
 
-  return showDropDown ? (
-    <div className={styles.currentMatchMainDropDown}>
-      {currentMatchList.map((currentMatch, index) => (
-        <CurrentMatchContent key={index} currentMatch={currentMatch} />
-      ))}
-    </div>
-  ) : (
-    <div className={styles.currentMatchMainOne}>
-      <CurrentMatchContent currentMatch={currentMatchList[0]} />
+  return (
+    <div className={styles.currentMatchMain}>
+      {showDropdown ? (
+        currentMatchList.map((currentMatch, index) => (
+          <CurrentMatchContent key={index} currentMatch={currentMatch} />
+        ))
+      ) : (
+        <CurrentMatchContent currentMatch={currentMatchList[0]} />
+      )}
     </div>
   );
 }
@@ -66,7 +60,8 @@ function CurrentMatchContent(prop: CurrentMatchContentProp) {
   const { currentMatch } = prop;
   const { startTime, isMatched, enemyTeam, isImminent } = currentMatch;
   const setModal = useSetRecoilState<Modal>(modalState);
-  const blockCancelButton: number | false = isImminent && enemyTeam.length;
+  const cancelButtonStyle =
+    isImminent && enemyTeam.length ? styles.block : styles.nonBlock;
 
   const onCancel = (startTime: string) => {
     setModal({
@@ -76,7 +71,7 @@ function CurrentMatchContent(prop: CurrentMatchContentProp) {
   };
 
   return (
-    <div className={styles.stringWrapper}>
+    <div className={styles.currentMatchContent}>
       <div className={styles.icon}>
         <MdCampaign />
       </div>
@@ -85,12 +80,15 @@ function CurrentMatchContent(prop: CurrentMatchContentProp) {
         <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
       </div>
       <button
-        className={
-          blockCancelButton ? styles.blockCancelButton : styles.cancelButton
-        }
-        onClick={() => onCancel(startTime)}
+        className={`${styles.cancelButton} ${cancelButtonStyle}`}
+        onClick={(event) => {
+          event.stopPropagation();
+          onCancel(startTime);
+        }}
       >
-        {blockCancelButton ? '경기 취소 불가' : '경기 예약 취소'}
+        {cancelButtonStyle === styles.block
+          ? '경기 취소 불가'
+          : '경기 예약 취소'}
       </button>
     </div>
   );
@@ -108,7 +106,7 @@ function makeMessage(time: string, isMatched: boolean) {
           '에 경기가 시작됩니다!'
         ) : (
           <>
-            <span> 참가자 기다리는 중</span>
+            <span>&nbsp;참가자 기다리는 중</span>
             <span className={styles.waitUpDown}>
               <span className={styles.span1}>.</span>
               <span className={styles.span2}>.</span>

@@ -1,14 +1,17 @@
 @import 'styles/common.scss';
 
 .mainPageProfile {
+  height: max-content;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
 
 .gridContainer {
+  flex-shrink: 0;
+  width: 90%;
   display: grid;
   grid-template-rows: 0.5fr 1fr;
   grid-template-columns: 1fr 3fr;
@@ -18,8 +21,6 @@
   color: white;
   margin-left: 0.7rem;
   margin-right: 0.7rem;
-  flex-shrink: 0;
-  width: 90%;
 }
 
 .myImage {
@@ -33,7 +34,7 @@
   grid-area: greetings;
   display: flex;
   justify-content: left;
-  align-items: end;
+  align-items: flex-end;
   font-size: $medium-font;
 }
 
@@ -50,9 +51,10 @@
 }
 
 .currentMatch {
+  width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 90%;
+  padding-bottom: 0.5rem;
 }
