@@ -9,6 +9,7 @@
   grid-template-columns: 1fr 1fr 1fr; /* grid-template-rows로 변경 */
   align-items: end;
   margin-top: 2rem;
+  height: 16rem;
   &.isMain {
     height: 15.5rem;
     margin-top: 9.5rem;
