@@ -11,7 +11,6 @@ import { liveState } from 'utils/recoil/layout';
 import { Modal } from 'types/modalTypes';
 import { MatchMode } from 'types/mainType';
 import { currentMatchState } from 'utils/recoil/match';
-import { start } from 'repl';
 
 interface MatchBoardProps {
   type: string;
@@ -190,7 +189,6 @@ export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
     <div className={styles.slotGrid}>
       <button
         className={`${styles.slotButton} ${buttonStyle[status]}`}
-        // disabled={status === 'close' && !(match[0].startTime === startTime)}
         disabled={isDisabled}
         onClick={enrollhandler}
       >
