@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { userState } from 'utils/recoil/layout';
-import { openCurrentMatchState } from 'utils/recoil/match';
+import { currentMatchState, openCurrentMatchState } from 'utils/recoil/match';
 import Statistics from 'pages/statistics';
 import Header from './Header';
 import Footer from './Footer';
@@ -25,6 +25,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const user = useRecoilValue(userState);
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
   const presentPath = useRouter().asPath;
+  const currentMatchList = useRecoilValue(currentMatchState).match;
 
   useGetUserSeason();
   useSetAfterGameModal();
@@ -49,7 +50,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 <HeaderStateContext>
                   <Header />
                 </HeaderStateContext>
-                {openCurrentMatch && <CurrentMatch />}
+                {openCurrentMatch &&
+                  currentMatchList?.map((currentMatch, index) => (
+                    <CurrentMatch currentMatch={currentMatch} key={index} />
+                  ))}
                 {presentPath !== '/match' && presentPath !== '/manual' && (
                   <Link href='/match'>
                     <div className={styles.buttonContainer}>
