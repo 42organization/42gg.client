@@ -181,17 +181,16 @@
 }
 
 .getButton {
-  width: 100%;
-  border-radius: $small-radius;
-  background: linear-gradient(to bottom, white, $gray);
-  color: black;
-  font-size: $small-font;
-  input {
-    all: unset;
-    width: 100%;
-    padding: 0.2rem 0;
-    text-align: center;
-    cursor: pointer;
+  display: block;
+  width: 2.125rem;
+  height: 2.125rem;
+  margin: 0.688rem auto 0 auto;
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  svg {
+    height: 1.183rem;
   }
 }
 

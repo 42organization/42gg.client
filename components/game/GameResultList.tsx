@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaChevronDown } from 'react-icons/fa';
 import { Game } from 'types/gameTypes';
 import GameResultEmptyItem from './GameResultEmptyItem';
 import GameResultBigItem from './big/GameResultBigItem';
@@ -44,13 +45,12 @@ export default function GameResultList({ path }: GameResultListProps) {
             </React.Fragment>
           ))}
           {pathName === '/game' && !isLast && (
-            <div className={styles.getButton}>
-              <input
-                type='button'
-                value='더 보기'
-                onClick={() => fetchNextPage()}
-              />
-            </div>
+            <button
+              className={styles['getButton']}
+              onClick={() => fetchNextPage()}
+            >
+              <FaChevronDown />
+            </button>
           )}
         </>
       )}
