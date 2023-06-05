@@ -4,24 +4,25 @@ import useModeToggle from 'hooks/mode/useModeToggle';
 import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
 import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
 import styles from 'styles/mode/ModeWrap.module.scss';
+import { ToggleMode } from 'types/rankTypes';
 
 interface RankModeWrapProps {
   children: React.ReactNode;
-  setMode: React.Dispatch<React.SetStateAction<'normal' | 'rank'>>;
+  setMode: React.Dispatch<React.SetStateAction<ToggleMode>>;
 }
 
 export default function RankModeWrap({ children, setMode }: RankModeWrapProps) {
   const { seasonList, season, seasonDropDownHandler, seasonMode } =
     useSeasonDropDown();
   const { onToggle, Mode } = useModeToggle(
-    seasonMode === 'normal' ? 'normal' : 'rank'
+    seasonMode === 'NORMAL' ? 'NORMAL' : 'RANK'
   );
   const [showSeasons, setShowSeasons] = useState<boolean>(
-    seasonMode !== 'normal'
+    seasonMode !== 'NORMAL'
   );
 
   useEffect(() => {
-    setShowSeasons(Mode === 'rank');
+    setShowSeasons(Mode === 'RANK');
     setMode(Mode);
   }, [Mode]);
 
@@ -29,9 +30,9 @@ export default function RankModeWrap({ children, setMode }: RankModeWrapProps) {
     <div>
       <div className={styles.rankModeWrap}>
         <ModeToggle
-          checked={Mode === 'rank'}
+          checked={Mode === 'RANK'}
           onToggle={onToggle}
-          text={Mode === 'rank' ? '랭크' : '열정'}
+          text={Mode === 'RANK' ? '랭크' : '열정'}
           id={'rankToggle'}
         />
         {showSeasons && seasonList && (
