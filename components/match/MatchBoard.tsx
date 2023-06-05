@@ -65,6 +65,12 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
     return null;
   };
 
+  const countSlotsInHour = (slot: Slot) => {
+    const firstSlotEndMin = stringToHourMin(slot.endTime).nMin;
+    if (firstSlotEndMin === 0) return 1;
+    return 60 / stringToHourMin(slot.endTime).nMin;
+  };
+
   return (
     <>
       <div>
@@ -83,17 +89,33 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
           </button>
         </div>
         <div className={styles.matchBoard}>
-          {matchBoards.map((slot, index) => (
-            <div
-              key={index}
-              ref={getScrollCurrentRef(stringToHourMin(slot.startTime).nHour)}
-            >
-              {stringToHourMin(slot.startTime).sMin === '00' && (
-                <MatchTime key={index} startTime={slot.startTime} />
-              )}
-              <MatchSlot key={index - 1} toggleMode={toggleMode} slot={slot} />
-            </div>
-          ))}
+          {matchBoards.map((slot, index, array) => {
+            if (stringToHourMin(slot.startTime).sMin !== '00') {
+              return null;
+            }
+            const count = countSlotsInHour(slot);
+            const nextSlots = array.slice(index + 1, index + count + 1);
+
+            return (
+              <div
+                key={index}
+                ref={getScrollCurrentRef(stringToHourMin(slot.startTime).nHour)}
+              >
+                {stringToHourMin(slot.startTime).sMin === '00' && (
+                  <MatchTime key={index} startTime={slot.startTime} />
+                )}
+                <div className={styles.slotGrid}>
+                  {nextSlots.map((nextSlot, nextIndex) => (
+                    <MatchSlot
+                      key={index + nextIndex + 1}
+                      toggleMode={toggleMode}
+                      slot={nextSlot}
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
@@ -177,7 +199,7 @@ export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
     status === 'close' ? 2 : status === ('mytable' || 'match') ? 1 : 0;
 
   return (
-    <div className={styles.slotGrid}>
+    <>
       <button
         className={`${styles.slotButton} ${buttonStyle[status]}`}
         disabled={status === 'close'}
@@ -197,6 +219,6 @@ export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
           {isAfterSlot && (headCount === 0 ? '+' : `${headCount}/2`)}
         </span>
       </button>
-    </div>
+    </>
   );
 };

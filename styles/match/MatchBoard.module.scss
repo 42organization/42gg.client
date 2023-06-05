@@ -99,6 +99,8 @@
 .slotHour {
   display: flex;
   justify-content: space-between;
+  margin-top: 0.7rem;
+  margin-bottom: 0.5rem;
   margin-left: 0.3rem;
   color: white;
   font-size: $big-font;
@@ -107,5 +109,4 @@
 .slotGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-top: 0.6rem;
 }
