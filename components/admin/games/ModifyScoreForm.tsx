@@ -1,24 +1,24 @@
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import { ScoreModifyType } from 'types/admin/gameLogTypes';
+import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import styles from 'styles/admin/games/GamesTable.module.scss';
 
-export default function ScoreModifyForm({
+export default function ModifyScoreForm({
   gameId,
   team1,
   team2,
-}: ScoreModifyType) {
+}: ModifyScoreType) {
   const setModal = useSetRecoilState(modalState);
 
-  const handleScoreModify = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleModifyScore = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const team1Score = Number(form.get('team1Score'));
     const team2Score = Number(form.get('team2Score'));
     if (team1Score !== null && team2Score !== null) {
       setModal({
-        modalName: 'ADMIN-SCORE_MODIFY',
-        scoreModify: {
+        modalName: 'ADMIN-MODIFY_SCORE',
+        ModifyScore: {
           gameId: gameId,
           team1: { ...team1, score: team1Score, win: team1Score > team2Score },
           team2: { ...team2, score: team2Score, win: team2Score > team1Score },
@@ -28,7 +28,7 @@ export default function ScoreModifyForm({
   };
   return (
     <form
-      onSubmit={handleScoreModify}
+      onSubmit={handleModifyScore}
       id={`Score-Modify-Form-${gameId}`}
       className={styles['scoreForm']}
     >

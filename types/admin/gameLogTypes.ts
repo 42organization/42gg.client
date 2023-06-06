@@ -23,7 +23,7 @@ export interface IGames {
   totalPage: number;
 }
 
-export type ScoreModifyType = {
+export type ModifyScoreType = {
   gameId: number;
   team1: ITeam;
   team2: ITeam;

@@ -5,7 +5,7 @@ import { instanceInManage } from 'utils/axios';
 import { getFormattedDateToString } from 'utils/handleTime';
 import AdminSearchBar from '../common/AdminSearchBar';
 import styles from 'styles/admin/games/GamesTable.module.scss';
-import ScoreModifyForm from './ScoreModifyForm';
+import ModifyScoreForm from './ModifyScoreForm';
 
 export default function GamesTable() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -93,7 +93,7 @@ export default function GamesTable() {
                   <div>슬롯 시간: {game.slotTime}분</div>
                   <div>
                     {game.mode === 'RANK' && (
-                      <ScoreModifyForm
+                      <ModifyScoreForm
                         gameId={game.gameId}
                         team1={team1}
                         team2={team2}

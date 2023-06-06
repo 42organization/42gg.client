@@ -19,7 +19,7 @@ import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
 import AdminSeasonEdit from './admin/SeasonEdit';
 import FeedbackDetailModal from './admin/FeedbackDetailModal';
 import DeletePenaltyModal from './admin/DeletePenaltyModal';
-import AdminScoreModifyModal from './admin/AdminScoreModifyModal';
+import AdminModifyScoreModal from './admin/AdminModifyScoreModal';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
@@ -36,7 +36,7 @@ export default function ModalProvider() {
       feedback,
       userId,
       ISeason,
-      scoreModify,
+      ModifyScore,
     },
     setModal,
   ] = useRecoilState(modalState);
@@ -68,8 +68,8 @@ export default function ModalProvider() {
       intraId && detailContent ? (
         <FeedbackDetailModal intraId={intraId} detailContent={detailContent} />
       ) : null,
-    'ADMIN-SCORE_MODIFY': scoreModify ? (
-      <AdminScoreModifyModal {...scoreModify} />
+    'ADMIN-MODIFY_SCORE': ModifyScore ? (
+      <AdminModifyScoreModal {...ModifyScore} />
     ) : null,
   };
 
