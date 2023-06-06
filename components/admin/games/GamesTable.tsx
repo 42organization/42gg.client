@@ -144,7 +144,7 @@ export default function GamesTable() {
           <PageNation
             curPage={currentPage}
             totalPages={gameInfo.totalPage}
-            setCurrentPage={setCurrentPage}
+            pageChangeHandler={setCurrentPage}
           />
         </div>
       </div>

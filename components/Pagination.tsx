@@ -10,13 +10,13 @@ import {
 interface GreetingProps {
   curPage: number | undefined;
   totalPages: number | undefined;
-  setCurrentPage: Dispatch<SetStateAction<number>>;
+  pageChangeHandler: (pageNumber: number) => void;
 }
 
 function PageNation({
   curPage = 1,
   totalPages,
-  setCurrentPage,
+  pageChangeHandler,
 }: GreetingProps) {
   return (
     <>
@@ -30,7 +30,7 @@ function PageNation({
           lastPageText={<IoPlaySkipForwardSharp />}
           prevPageText={<IoCaretBackSharp />}
           nextPageText={<IoCaretForwardSharp />}
-          onChange={(page) => setCurrentPage(page)}
+          onChange={(page) => pageChangeHandler(page)}
         />
       )}
     </>
