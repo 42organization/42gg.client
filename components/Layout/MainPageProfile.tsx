@@ -23,17 +23,18 @@ const MainPageProfile = () => {
           <PlayerImage
             src={user.userImageUrl}
             styleName={'mainPageProfile'}
-            size={30}
+            size={18}
           />
         </Link>
-        <div className={styles.greetings}>안녕하세요,</div>
-        <div className={styles.intraId}>
-          <Link
-            className={styles.intraIdLink}
-            href={`/users/detail?intraId=${user.intraId}`}
-          >
-            탁구왕 {user.intraId} 님
-          </Link>
+        <div className={styles.userGreetings}>
+          <div className={styles.greetings}>안녕하세요,</div>
+          <div className={styles.intraId}>
+            탁구왕&nbsp;
+            <Link href={`/users/detail?intraId=${user.intraId}`}>
+              {user.intraId}
+            </Link>
+            님
+          </div>
         </div>
       </div>
     </div>

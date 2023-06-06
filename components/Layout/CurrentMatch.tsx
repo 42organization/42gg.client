@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { stringToHourMin } from 'utils/handleTime';
@@ -13,50 +13,76 @@ import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 export default function CurrentMatch() {
   const currentMatchList =
     useRecoilValue<CurrentMatchList>(currentMatchState).match;
-  const [showCurrentMatch, setShowCurrentMatch] = useState<boolean>(false);
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
   useGetCurrentMatch();
 
-  return (
-    <button
-      className={styles.currentMatchBanner}
-      onClick={() => setShowCurrentMatch(!showCurrentMatch)}
-      disabled={currentMatchList.length === 1 ? true : false}
-    >
-      <CurrentMatchMain showDropdown={showCurrentMatch} />
-    </button>
-  );
-}
+  const dropdownStyle = showDropdown
+    ? styles.visibleDropdown
+    : styles.hiddenDropdown;
 
-interface CurrentMatchMainProp {
-  showDropdown: boolean;
-}
+  const [dropdownAnimation, setDropdownAnimation] = useState(false);
 
-function CurrentMatchMain(prop: CurrentMatchMainProp) {
-  const { showDropdown } = prop;
-  const currentMatchList =
-    useRecoilValue<CurrentMatchList>(currentMatchState).match;
+  useEffect(() => {
+    if (showDropdown) {
+      setDropdownAnimation(true);
+    } else {
+      setTimeout(() => {
+        setDropdownAnimation(false);
+      }, 400);
+    }
+  }, [showDropdown]);
 
   return (
-    <div className={styles.currentMatchMain}>
-      {showDropdown ? (
-        currentMatchList.map((currentMatch, index) => (
-          <CurrentMatchContent key={index} currentMatch={currentMatch} />
-        ))
-      ) : (
-        <CurrentMatchContent currentMatch={currentMatchList[0]} />
-      )}
+    <div className={styles.currentMatchBanner}>
+      <div className={styles.currentMatchMain}>
+        <CurrentMatchContent
+          currentMatch={currentMatchList[0]}
+          index={0}
+          setShowDropdown={setShowDropdown}
+        />
+      </div>
+
+      <div className={`${dropdownStyle}`}>
+        {dropdownAnimation && (
+          <div className={styles.dropdown}>
+            {currentMatchList.slice(1).map((currentMatch, index) => (
+              <CurrentMatchContent
+                key={index}
+                currentMatch={currentMatch}
+                index={index + 2}
+                setShowDropdown={setShowDropdown}
+              />
+            ))}
+          </div>
+        )}
+        {!dropdownAnimation && (
+          <button
+            className={styles.dropdownButton}
+            disabled={currentMatchList.length === 1 ? true : false}
+            onClick={() => setShowDropdown(true)}
+          >
+            =
+          </button>
+        )}
+      </div>
     </div>
   );
 }
 
 interface CurrentMatchContentProp {
   currentMatch: CurrentMatchListElement;
+  index: number;
+  setShowDropdown: Dispatch<SetStateAction<boolean>>;
 }
 
 function CurrentMatchContent(prop: CurrentMatchContentProp) {
-  const { currentMatch } = prop;
+  const { currentMatch, index, setShowDropdown } = prop;
   const { startTime, isMatched, enemyTeam, isImminent } = currentMatch;
+
+  const currentMatchList =
+    useRecoilValue<CurrentMatchList>(currentMatchState).match;
+
   const setModal = useSetRecoilState<Modal>(modalState);
   const cancelButtonStyle =
     isImminent && enemyTeam.length ? styles.block : styles.nonBlock;
@@ -68,34 +94,49 @@ function CurrentMatchContent(prop: CurrentMatchContentProp) {
     });
   };
 
+  const currentMatchContentStyle = index ? styles.middle : styles.main;
+
   return (
-    <div className={styles.currentMatchContent}>
-      <div className={styles.icon}>
-        <div>
-          <Image
-            src='/image/loudspeaker.webp'
-            alt='loudspeaker'
-            width={25}
-            height={25}
-          />
-        </div>
-      </div>
-      <div className={styles.messageWrapper}>
-        {makeMessage(startTime, isMatched)}
-        <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
-      </div>
-      <button
-        className={`${styles.cancelButton} ${cancelButtonStyle}`}
-        onClick={(event) => {
-          event.stopPropagation();
-          onCancel(startTime);
-        }}
+    <>
+      <div
+        className={`${styles.currentMatchContent} ${currentMatchContentStyle}`}
       >
-        {cancelButtonStyle === styles.block
-          ? '경기 취소 불가'
-          : '경기 예약 취소'}
-      </button>
-    </div>
+        <div className={styles.icon}>
+          <div>
+            <Image
+              src='/image/loudspeaker.webp'
+              alt='loudspeaker'
+              width={15}
+              height={15}
+            />
+          </div>
+        </div>
+        <div className={styles.messageWrapper}>
+          {makeMessage(startTime, isMatched)}
+          <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
+        </div>
+        <button
+          className={`${styles.cancelButton} ${cancelButtonStyle}`}
+          onClick={(event) => {
+            event.stopPropagation();
+            onCancel(startTime);
+          }}
+        >
+          {cancelButtonStyle === styles.block
+            ? '경기 취소 불가'
+            : '경기 예약 취소'}
+        </button>
+      </div>
+      {currentMatchList.length > 1 && index === currentMatchList.length && (
+        <button
+          className={styles.dropdownButton}
+          disabled={currentMatchList.length === 1 ? true : false}
+          onClick={() => setShowDropdown(false)}
+        >
+          =
+        </button>
+      )}
+    </>
   );
 }
 

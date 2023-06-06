@@ -1,8 +1,8 @@
 @import 'styles/common.scss';
 
 .mainPageProfile {
-  height: max-content;
   width: 100%;
+  height: max-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,17 +10,13 @@
 }
 
 .gridContainer {
+  width: 22.125rem;
   flex-shrink: 0;
-  width: 90%;
   display: grid;
-  grid-template-rows: 0.5fr 1fr;
   grid-template-columns: 1fr 3fr;
-  grid-template-areas:
-    'image greetings'
-    'image intraId';
+  grid-template-areas: 'image greetingsArea';
+  padding: 0.1rem 0.2rem 0 0.2rem;
   color: white;
-  margin-left: 0.7rem;
-  margin-right: 0.7rem;
 }
 
 .myImage {
@@ -30,31 +26,31 @@
   align-items: center;
 }
 
-.greetings {
-  grid-area: greetings;
+.userGreetings {
+  grid-area: greetingsArea;
   display: flex;
-  justify-content: left;
-  align-items: flex-end;
-  font-size: $medium-font;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 0.8rem;
+}
+
+.greetings {
+  font-size: 0.75rem;
+  margin-bottom: 0.2rem;
 }
 
 .intraId {
-  grid-area: intraId;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
-
-.intraIdLink {
-  font-size: $giant-font;
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
 }
 
 .currentMatch {
-  width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.2rem;
 }
