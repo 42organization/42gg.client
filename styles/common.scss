@@ -31,6 +31,8 @@ $light-gray: #f0f0f0;
 $gray: #dadada;
 $medium-gray: #cccccc;
 $dark-gray: #676767;
+$white1: #e3e2e2;
+$white2: #f6f6f6;
 
 $btn-blue: #2d80ed;
 $dark-blue: #24098f;
@@ -204,7 +206,6 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   position: relative;
   width: $size;
   height: $size;
-  border: 1px solid white;
   border-radius: 50%;
   background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
   img {

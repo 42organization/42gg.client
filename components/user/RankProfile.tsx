@@ -1,7 +1,7 @@
 import ProfileChart from 'components/user/ProfileChart';
 import ProfileModeWrap from 'components/mode/modeWraps/ProfileModeWrap';
 import useGetRankProfile from 'hooks/users/useGetRankProfile';
-import styles from 'styles/user/Profile.module.scss';
+import styles from 'styles/user/ProfileRank.module.scss';
 
 interface RankProfileProps {
   profileId: string;

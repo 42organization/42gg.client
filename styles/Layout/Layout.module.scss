@@ -13,7 +13,12 @@
   width: 100vw;
   max-width: 100vh;
   min-height: 100vh;
-  background-image: url('../../public/image/background_img.png');
+  background: linear-gradient(
+    180deg,
+    #301451 23.82%,
+    #481570 58.85%,
+    #300e4b 98.44%
+  );
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
