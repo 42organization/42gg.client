@@ -22,3 +22,9 @@ export interface IGames {
   // currentPage: number;
   totalPage: number;
 }
+
+export type ScoreModifyType = {
+  gameId: number;
+  team1: ITeam;
+  team2: ITeam;
+};

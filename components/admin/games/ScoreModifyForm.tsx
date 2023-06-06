@@ -1,17 +1,11 @@
-import { ITeam } from 'types/admin/gameLogTypes';
+import { ScoreModifyType } from 'types/admin/gameLogTypes';
 import styles from 'styles/admin/games/GamesTable.module.scss';
-
-type ScoreModifyFormProps = {
-  gameId: number;
-  team1: ITeam;
-  team2: ITeam;
-};
 
 export default function ScoreModifyForm({
   gameId,
   team1,
   team2,
-}: ScoreModifyFormProps) {
+}: ScoreModifyType) {
   const handleScoreModify = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
