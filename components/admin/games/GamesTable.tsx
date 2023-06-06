@@ -93,7 +93,11 @@ export default function GamesTable() {
                   <div>슬롯 시간: {game.slotTime}분</div>
                   <div>
                     {game.mode === 'RANK' && (
-                      <ScoreModifyForm team1={team1} team2={team2} />
+                      <ScoreModifyForm
+                        gameId={game.gameId}
+                        team1={team1}
+                        team2={team2}
+                      />
                     )}
                   </div>
                 </div>
@@ -125,6 +129,13 @@ export default function GamesTable() {
                     {game.team2.intraId1} {game.team2.intraId2}
                   </div>
                 </div>
+                <button
+                  type='submit'
+                  form='Score-Modify-Form'
+                  disabled={game.mode === 'NORMAL'}
+                >
+                  수정
+                </button>
               </div>
             );
           })}
