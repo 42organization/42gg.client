@@ -164,22 +164,32 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
     () => ({
       mytable: status === 'mytable' ? styles.mytable : styles.disabled,
       close: styles.disabled,
-      open: radioMode === 'RANK' ? styles.rank : styles.normal,
-      match: radioMode === 'RANK' ? styles.rank : styles.normal,
+      // event === 'match' && match[0].startTime === startTime
+      //   ? styles.mytable
+      //   : styles.disabled, // 나의 매칭 경기가 close일 때 mytable 상태 표시
+      open: toggleMode === 'RANK' ? styles.rank : styles.normal,
+      match: toggleMode === 'RANK' ? styles.rank : styles.normal,
     }),
     [slot]
   );
+
+  // const isDisabled =
+  //   status === 'close' &&
+  //   !(event === 'match' && match[0].startTime === startTime)
+  //     ? true
+  //     : false; // 나의 매칭 경기가 close일 때 disabled 안 되게
 
   const isAfterSlot: boolean =
     new Date(startTime).getTime() - new Date().getTime() >= 0;
 
   const headCount =
-    status === 'close' ? 2 : status === ('mytable' || 'match') ? 1 : 0;
+    status === 'close' ? 2 : status === 'mytable' || status === 'match' ? 1 : 0;
 
   return (
     <div className={styles.slotGrid}>
       <button
         className={`${styles.slotButton} ${buttonStyle[status]}`}
+        // disabled={isDisabled}
         disabled={status === 'close'}
         onClick={enrollhandler}
       >
