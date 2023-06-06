@@ -58,13 +58,12 @@ export interface manual {
 
 export interface ISeason {
   seasonId: number;
-  seasonMode: string;
   seasonName: string;
   startTime: Date;
   endTime: Date;
   startPpp: number;
   pppGap: number;
-  status: number;
+  status: string;
 }
 
 export interface Modal {

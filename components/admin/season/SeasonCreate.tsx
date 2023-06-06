@@ -43,7 +43,7 @@ export default function SeasonCreate() {
 
   const postHandler = async () => {
     try {
-      await instanceInManage.post(`/season`, seasonInfo);
+      await instanceInManage.post(`/seasons`, seasonInfo);
       setSnackBar({
         toastName: 'Season Create',
         severity: 'success',

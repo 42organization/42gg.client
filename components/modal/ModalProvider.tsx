@@ -33,7 +33,6 @@ export default function ModalProvider() {
       intraId,
       detailContent,
       feedback,
-      userId,
       ISeason,
     },
     setModal,
