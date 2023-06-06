@@ -1,5 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
 import { instanceInManage } from 'utils/axios';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { HiCheckCircle } from 'react-icons/hi';
@@ -18,9 +19,32 @@ export default function AdminModifyScoreModal({
   team2,
 }: ModifyScoreType) {
   const setModal = useSetRecoilState(modalState);
+  const setSnackbar = useSetRecoilState(toastState);
 
   const handleModifyScore = async () => {
-    console.log('click!');
+    const requestBody: ModifyScoreBodyType = {
+      team1Score: team1.score,
+      team2Score: team2.score,
+      team1Id: team1.teamId,
+      team2Id: team2.teamId,
+    };
+    try {
+      await instanceInManage.put(`/games/${gameId}`, requestBody);
+      setSnackbar({
+        toastName: `put request`,
+        severity: 'success',
+        message: `🔥 스코어가 수정되었습니다. 🔥`,
+        clicked: true,
+      });
+    } catch (e: any) {
+      setSnackbar({
+        toastName: `bad request`,
+        severity: 'error',
+        message: `🔥 ${e.response.data.message} 🔥`,
+        clicked: true,
+      });
+    }
+    setModal({ modalName: null });
   };
 
   return (
