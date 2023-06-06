@@ -14,10 +14,10 @@ import { currentMatchState } from 'utils/recoil/match';
 
 interface MatchBoardProps {
   type: string;
-  toggleMode: MatchMode;
+  radioMode: MatchMode;
 }
 
-export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
+export default function MatchBoard({ type, radioMode }: MatchBoardProps) {
   const [match, setMatch] = useState<Match | null>(null);
   const [spinReloadButton, setSpinReloadButton] = useState<boolean>(false);
   const setModal = useSetRecoilState(modalState);
@@ -27,7 +27,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
     setMatch,
     setSpinReloadButton,
     type,
-    toggleMode,
+    radioMode,
   });
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
     return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
 
   const openManual = () => {
-    setModal({ modalName: 'MATCH-MANUAL', manual: { toggleMode: toggleMode } });
+    setModal({ modalName: 'MATCH-MANUAL', manual: { radioMode: radioMode } });
   };
 
   const getFirstOpenSlot = () => {
@@ -89,9 +89,9 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
               ref={getScrollCurrentRef(stringToHourMin(slot.startTime).nHour)}
             >
               {stringToHourMin(slot.startTime).sMin === '00' && (
-                <MatchTime key={index} startTime={slot.startTime} />
+                <MatchTime startTime={slot.startTime} />
               )}
-              <MatchSlot key={index - 1} toggleMode={toggleMode} slot={slot} />
+              <MatchSlot radioMode={radioMode} slot={slot} />
             </div>
           ))}
         </div>
@@ -125,11 +125,11 @@ export const MatchTime = ({ startTime }: MatchTimeProps) => {
 };
 
 interface MatchSlotProps {
-  toggleMode: MatchMode;
+  radioMode: MatchMode;
   slot: Slot;
 }
 
-export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
+export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
   const setModal = useSetRecoilState<Modal>(modalState);
   const { event } = useRecoilValue<Live>(liveState);
   const { match } = useRecoilValue<CurrentMatchList>(currentMatchState);
@@ -154,7 +154,7 @@ export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
         enroll: {
           startTime: startTime,
           endTime: endTime,
-          mode: toggleMode,
+          mode: radioMode,
         },
       });
     }
