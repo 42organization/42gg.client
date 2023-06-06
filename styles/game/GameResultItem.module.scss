@@ -16,6 +16,11 @@
   }
 }
 
+.gameResultWrapper {
+  position: relative;
+  z-index: 0;
+}
+
 // ANCHOR : item container mixin
 
 @mixin itemContainer($type) {
