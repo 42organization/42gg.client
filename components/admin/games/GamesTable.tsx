@@ -131,7 +131,7 @@ export default function GamesTable() {
                 </div>
                 <button
                   type='submit'
-                  form='Score-Modify-Form'
+                  form={`Score-Modify-Form-${game.gameId}`}
                   disabled={game.mode === 'NORMAL'}
                 >
                   수정
