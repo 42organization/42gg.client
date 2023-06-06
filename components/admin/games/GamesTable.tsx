@@ -5,6 +5,7 @@ import { instanceInManage } from 'utils/axios';
 import { getFormattedDateToString } from 'utils/handleTime';
 import AdminSearchBar from '../common/AdminSearchBar';
 import styles from 'styles/admin/games/GamesTable.module.scss';
+import ScoreModifyForm from './ScoreModifyForm';
 
 export default function GamesTable() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -80,6 +81,7 @@ export default function GamesTable() {
         </div>
         <div className={styles.tableWrap}>
           {gameInfo.gameLog.map((game: IGameLog) => {
+            const { team1, team2 } = game;
             return (
               <div className={styles.tableRow} key={game.gameId}>
                 <div className={styles.gameId}>{game.gameId}</div>
@@ -90,16 +92,16 @@ export default function GamesTable() {
                   <div>게임 모드: {game.mode}</div>
                   <div>슬롯 시간: {game.slotTime}분</div>
                   <div>
-                    {game.mode === 'Normal'
-                      ? ''
-                      : `Team 1 (${game.team1.score}) : Team 2 (${game.team2.score})`}
+                    {game.mode === 'RANK' && (
+                      <ScoreModifyForm team1={team1} team2={team2} />
+                    )}
                   </div>
                 </div>
                 <div className={styles.tableTeam}>
                   <div>team1</div>
                   <div
                     className={
-                      game.mode === 'Normal'
+                      game.mode === 'NORMAL'
                         ? styles.normal
                         : game.team1.score === 2
                         ? styles.win
@@ -113,7 +115,7 @@ export default function GamesTable() {
                   <div>team2</div>
                   <div
                     className={
-                      game.mode === 'Normal'
+                      game.mode === 'NORMAL'
                         ? styles.normal
                         : game.team2.score === 2
                         ? styles.win
