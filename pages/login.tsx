@@ -1,5 +1,4 @@
 import StyledButton from 'components/StyledButton';
-import { fill } from 'cypress/types/lodash';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';

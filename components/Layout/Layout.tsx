@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { userState } from 'utils/recoil/layout';
@@ -58,7 +57,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 {openCurrentMatch && <CurrentMatch />}
                 {presentPath !== '/match' && presentPath !== '/manual' && (
                   <div className={styles.buttonContainer}>
-                    <StyledButton onClick={onClickMatch} width={'8.2rem'}>
+                    <StyledButton onClick={onClickMatch} width={'5.5rem'}>
                       Play
                     </StyledButton>
                   </div>
