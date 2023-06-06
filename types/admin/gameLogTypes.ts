@@ -19,7 +19,6 @@ export interface IGameLog {
 
 export interface IGames {
   gameLog: IGameLog[] | [];
-  // currentPage: number;
   totalPage: number;
 }
 

@@ -13,7 +13,6 @@ export default function GamesTable() {
   const [gameInfo, setGameInfo] = useState<IGames>({
     gameLog: [],
     totalPage: 1,
-    // currentPage: 1,
   });
 
   const initSearch = useCallback((intraId?: string) => {
@@ -38,7 +37,6 @@ export default function GamesTable() {
           };
         }),
         totalPage: res.data.totalPage,
-        // currentPage: res.data.currentPage,
       });
     } catch (e) {
       console.error('MS07');
@@ -61,7 +59,6 @@ export default function GamesTable() {
           };
         }),
         totalPage: res.data.totalPage,
-        // currentPage: res.data.currentPage,
       });
     } catch (e) {
       console.error('MS08');
