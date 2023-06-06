@@ -12,7 +12,7 @@ export default function GamesTable() {
   const [gameInfo, setGameInfo] = useState<IGames>({
     gameLog: [],
     totalPage: 1,
-    currentPage: 1,
+    // currentPage: 1,
   });
 
   const initSearch = useCallback((intraId?: string) => {
@@ -37,7 +37,7 @@ export default function GamesTable() {
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        // currentPage: res.data.currentPage,
       });
     } catch (e) {
       console.error('MS07');
@@ -47,7 +47,7 @@ export default function GamesTable() {
   const getUserGames = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/games/users?q=${intraId}&page=${currentPage}&size=5`
+        `/games/users?intraId=${intraId}&page=${currentPage}&size=5`
       );
       setGameInfo({
         gameLog: res.data.gameLogList.map((game: IGameLog) => {
@@ -60,7 +60,7 @@ export default function GamesTable() {
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        // currentPage: res.data.currentPage,
       });
     } catch (e) {
       console.error('MS08');
@@ -129,9 +129,9 @@ export default function GamesTable() {
         </div>
         <div className={styles.pageNationContainer}>
           <PageNation
-            curPage={gameInfo.currentPage}
+            curPage={currentPage}
             totalPages={gameInfo.totalPage}
-            pageChangeHandler={setCurrentPage}
+            setCurrentPage={setCurrentPage}
           />
         </div>
       </div>

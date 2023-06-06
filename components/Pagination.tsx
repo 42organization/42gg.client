@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import Pagination from 'react-js-pagination';
 import {
   IoPlaySkipBackSharp,
@@ -9,13 +10,13 @@ import {
 interface GreetingProps {
   curPage: number | undefined;
   totalPages: number | undefined;
-  pageChangeHandler: (page: number) => void;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
 }
 
 function PageNation({
   curPage = 1,
   totalPages,
-  pageChangeHandler,
+  setCurrentPage,
 }: GreetingProps) {
   return (
     <>
@@ -29,7 +30,7 @@ function PageNation({
           lastPageText={<IoPlaySkipForwardSharp />}
           prevPageText={<IoCaretBackSharp />}
           nextPageText={<IoCaretForwardSharp />}
-          onChange={pageChangeHandler}
+          onChange={(page) => setCurrentPage(page)}
         />
       )}
     </>
