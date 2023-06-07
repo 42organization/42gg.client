@@ -32,28 +32,30 @@ export default function ModifyScoreForm({
       id={`Score-Modify-Form-${gameId}`}
       className={styles['scoreForm']}
     >
-      <label>
-        <span>Team1 Score:</span>
-        <input
-          type='number'
-          name='team1Score'
-          min='0'
-          max='2'
-          defaultValue={team1.score}
-          required
-        />
-      </label>
-      <label>
-        <span>Team2 Score:</span>
-        <input
-          type='number'
-          name='team2Score'
-          min='0'
-          max='2'
-          defaultValue={team2.score}
-          required
-        />
-      </label>
+      <span>게임 점수: </span>
+      {/* <label> */}
+      {/* <span>Team1 Score:</span> */}
+      <input
+        type='number'
+        name='team1Score'
+        min='0'
+        max='2'
+        defaultValue={team1.score}
+        required
+      />
+      <span> : </span>
+      {/* </label> */}
+      {/* <label> */}
+      {/* <span>Team2 Score:</span> */}
+      <input
+        type='number'
+        name='team2Score'
+        min='0'
+        max='2'
+        defaultValue={team2.score}
+        required
+      />
+      {/* </label> */}
     </form>
   );
 }

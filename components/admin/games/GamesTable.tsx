@@ -23,7 +23,7 @@ export default function GamesTable() {
   const getAllGames = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/games?season=0&page=${currentPage}&size=5`
+        `/games?season=0&page=${currentPage}&size=4`
       );
 
       setGameInfo({
@@ -46,7 +46,7 @@ export default function GamesTable() {
   const getUserGames = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/games/users?intraId=${intraId}&page=${currentPage}&size=5`
+        `/games/users?intraId=${intraId}&page=${currentPage}&size=4`
       );
       setGameInfo({
         gameLog: res.data.gameLogList.map((game: IGameLog) => {
