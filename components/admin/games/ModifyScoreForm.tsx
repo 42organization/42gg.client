@@ -33,8 +33,6 @@ export default function ModifyScoreForm({
       className={styles['scoreForm']}
     >
       <span>게임 점수: </span>
-      {/* <label> */}
-      {/* <span>Team1 Score:</span> */}
       <input
         type='number'
         name='team1Score'
@@ -44,9 +42,6 @@ export default function ModifyScoreForm({
         required
       />
       <span> : </span>
-      {/* </label> */}
-      {/* <label> */}
-      {/* <span>Team2 Score:</span> */}
       <input
         type='number'
         name='team2Score'
@@ -55,7 +50,6 @@ export default function ModifyScoreForm({
         defaultValue={team2.score}
         required
       />
-      {/* </label> */}
     </form>
   );
 }
