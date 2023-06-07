@@ -10,7 +10,7 @@ interface RankListProps {
   season?: number;
   isMain?: boolean;
 }
-export const ToggleModeContext = createContext<'rank' | 'normal'>('rank');
+export const ToggleModeContext = createContext<'RANK' | 'NORMAL'>('RANK');
 
 export default function RankList({
   toggleMode,

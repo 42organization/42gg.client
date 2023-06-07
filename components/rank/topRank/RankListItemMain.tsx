@@ -16,17 +16,17 @@ export default function RankListItemMain({ user }: RankListItemMainProps) {
   return (
     <div
       className={`${styles.mainData} ${
-        toggleMode === 'normal' && styles.normal
+        toggleMode === 'NORAML' && styles.normal
       }`}
     >
       <div
         className={`${rank === 1 ? styles.leaf : ''} ${
-          toggleMode === 'normal' && styles.normal
+          toggleMode === 'NORAML' && styles.normal
         }`}
       >
         <div
           className={`${rank === 1 ? styles.leaf1 : ''} ${
-            toggleMode === 'normal' && styles.normal
+            toggleMode === 'NORAML' && styles.normal
           }`}
         >
           <div className={`${styles.intraId} ${rank === 1 && styles.first}`}>
@@ -46,7 +46,7 @@ export default function RankListItemMain({ user }: RankListItemMainProps) {
                 : rank === 2
                 ? styles.rankNumber2
                 : styles.rankNumber3
-            } ${toggleMode === 'normal' && styles.normal}`}
+            } ${toggleMode === 'NORMAL' && styles.normal}`}
           >
             {rankFiltered}
           </div>
