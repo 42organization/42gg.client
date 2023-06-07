@@ -104,7 +104,7 @@ export default function GamesTable() {
                     className={
                       game.mode === 'NORMAL'
                         ? styles.normal
-                        : game.team1.score === 2
+                        : game.team1.win
                         ? styles.win
                         : styles.lose
                     }
@@ -118,7 +118,7 @@ export default function GamesTable() {
                     className={
                       game.mode === 'NORMAL'
                         ? styles.normal
-                        : game.team2.score === 2
+                        : game.team2.win
                         ? styles.win
                         : styles.lose
                     }
