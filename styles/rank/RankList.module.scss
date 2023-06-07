@@ -7,26 +7,20 @@
 
 .title {
   @include pageTitle;
-  //text-shadow: $text-border-black, 0.3rem 0.3rem 0 #c9a5e6;
-  &.vip {
-    //text-shadow: $text-border-black, 0.3rem 0.3rem 0 $norm-lightblue2;
-  }
+  margin-top: -2rem;
 }
 
 /* MyRank */
 .myRank {
-  width: fit-content;
-  margin-bottom: 1.7rem;
-  //margin-inline: auto;
+  margin-bottom: 0.5rem;
   color: white;
   opacity: 0.5;
-  font-weight: 600;
-  font-size: $medium-font;
-  text-shadow: 0.1rem 0.1rem 0.1rem $rank-blue;
-  //text-align: center;
-  /*   span:nth-child(2) {
-    //color: $g1-top;
-  } */
+  font-weight: 700;
+  font-size: $big-font;
+  font-family: $title-font;
+  text-align: right;
+  text-decoration-line: underline;
+  color: #df98d7;
   &.rank {
     cursor: pointer;
   }
@@ -57,7 +51,6 @@
 .division {
   @include rankGrid;
   background: #c9a5e6;
-  //color: white;
   color: black;
   font-weight: 500;
   border-radius: 0.5rem 0.5rem 0 0;
@@ -65,41 +58,6 @@
     background: $rank-hotpink;
   }
 }
-
-/* RankListItem */
-/* .rankItemWrap {
-  @include rankGrid;
-  background: #EDD0FF;
-  &.top {
-    color: $loser-red;
-    font-weight: 700;
-  }
-  &.standard {
-    color: $dark-gray;
-  }
-  &.myVip {
-    background: $rank-pink3;
-  }
-  .intraId {
-    color: black;
-    font-weight: 700;
-    span {
-      cursor: pointer;
-    }
-  }
-  .statusMessage {
-    justify-self: left;
-    color: $dark-gray;
-  }
-  .ppp {
-    //color: $winner-blue;
-    color: #6C00D9;
-    font-weight: 600;
-    myVip {
-      color: #CB0C9F;
-    }
-  }
-} */
 
 .rankItemWrap {
   @include rankGrid;
