@@ -98,6 +98,9 @@
   margin: 0 30px;
   padding: 0.344rem 0.75rem;
   border-radius: 0.625rem;
+  &:disabled {
+    @include admin-button('PALE-BLUE', disabled);
+  }
 }
 
 @include pagination;

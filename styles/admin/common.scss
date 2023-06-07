@@ -9,7 +9,7 @@
   color: #6b7280;
 }
 
-@mixin admin-button($color) {
+@mixin admin-button($color, $disabled: '') {
   border: none;
   @if ($color == 'BLUE') {
     background-color: #2678f3;
@@ -27,5 +27,8 @@
     // 기본 : 'BLUE'
     background-color: #2678f3;
     color: #ffffff;
+  }
+  @if ($disabled == 'disabled') {
+    opacity: 0.3;
   }
 }
