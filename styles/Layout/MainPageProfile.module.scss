@@ -1,5 +1,32 @@
 @import 'styles/common.scss';
 
+@media screen and (min-width: 320px) and (max-width: 360px) {
+  .gridContainer {
+    width: 85vw;
+  }
+  .currentMatch {
+    width: 85vw;
+  }
+}
+
+@media screen and (min-width: 361px) and (max-width: 500px) {
+  .gridContainer {
+    width: 22.125rem;
+  }
+  .currentMatch {
+    width: 22.125rem;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .gridContainer {
+    width: 25rem;
+  }
+  .currentMatch {
+    width: 25rem;
+  }
+}
+
 .mainPageProfile {
   width: 100%;
   height: max-content;
@@ -10,7 +37,7 @@
 }
 
 .gridContainer {
-  width: 22.125rem;
+  // width: 22.125rem;
   flex-shrink: 0;
   display: grid;
   grid-template-columns: 1fr 3fr;
