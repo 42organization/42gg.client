@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
 import Pagination from 'react-js-pagination';
 import {
   IoPlaySkipBackSharp,
