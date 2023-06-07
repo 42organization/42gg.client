@@ -9,6 +9,7 @@ import { currentMatchState } from 'utils/recoil/match';
 import { CurrentMatchList, CurrentMatchListElement } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
+import { TbMenu } from 'react-icons/tb';
 
 export default function CurrentMatch() {
   const currentMatchList =
@@ -60,9 +61,9 @@ export default function CurrentMatch() {
           <button
             className={styles.dropdownButton}
             disabled={currentMatchList.length === 1 ? true : false}
-            onClick={() => setShowDropdown(true)}
+            onMouseDown={() => setShowDropdown(true)}
           >
-            =
+            <TbMenu />
           </button>
         )}
       </div>
@@ -133,7 +134,7 @@ function CurrentMatchContent(prop: CurrentMatchContentProp) {
           disabled={currentMatchList.length === 1 ? true : false}
           onClick={() => setShowDropdown(false)}
         >
-          =
+          <TbMenu />
         </button>
       )}
     </>
