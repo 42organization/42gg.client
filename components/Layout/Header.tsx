@@ -1,18 +1,17 @@
 import Link from 'next/link';
-import { useRecoilValue, useRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import { userState, liveState } from 'utils/recoil/layout';
 import { useEffect } from 'react';
 import MenuBar from './MenuBar/MenuBar';
-import PlayerImage from 'components/PlayerImage';
-import { FiMenu } from 'react-icons/fi';
+import { FiMenu, FiBell } from 'react-icons/fi';
 import { BsMegaphone } from 'react-icons/bs';
-import { VscBell, VscBellDot } from 'react-icons/vsc';
 import styles from 'styles/Layout/Header.module.scss';
-
 import NotiBar from './NotiBar/NotiBar';
-
 import { HeaderContextState, HeaderContext } from './HeaderContext';
 import { useContext } from 'react';
+import { Modal } from 'types/modalTypes';
+import { modalState } from 'utils/recoil/modal';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 export default function Header() {
   const user = useRecoilValue(userState);
@@ -39,44 +38,52 @@ export default function Header() {
         ? 'hidden'
         : 'unset');
 
+  const setModal = useSetRecoilState<Modal>(modalState);
+
+  const getAnnouncementHandler = useAxiosGet({
+    url: '/pingpong/announcement',
+    setState: (data) => {
+      data.content !== '' &&
+        setModal({
+          modalName: 'EVENT-ANNOUNCEMENT',
+          announcement: data,
+        });
+    },
+    err: 'RJ01',
+    type: 'setError',
+  });
+
   return (
     <div className={styles.headerContainer}>
       <div className={styles.headerWrap}>
         <div className={styles.headerLeft} onClick={openMenuBarHandler}>
-          <FiMenu id={styles.menuIcon} />
+          <FiMenu className={styles.menuIcon} />
         </div>
-        <div id={styles.logo}>
-          <Link href={'/'}>
-            <div>42GG</div>
-          </Link>
-        </div>
+        <Link className={styles.logoWrap} href={'/'}>
+          42GG
+        </Link>
         <div className={styles.headerRight}>
           <div
-            id={styles.announceIcon}
-            onClick={() =>
-              window.open(
-                'https://far-moonstone-7ff.notion.site/91925f9c945340c6a139f64fb849990d'
-              )
-            }
+            className={styles.announceIcon}
+            onClick={() => getAnnouncementHandler()}
           >
             <BsMegaphone />
           </div>
-          <div id={styles.notiIcon} onClick={openNotiBarHandler}>
+          <div className={styles.notiIcon} onClick={openNotiBarHandler}>
             {live.notiCount ? (
               <div className={styles.bellWhole}>
-                <VscBellDot />
+                <div className={styles.notiBellWrapper}>
+                  <span className={styles.notiCount}>{live.notiCount}</span>
+                  <FiBell />
+                </div>
               </div>
             ) : (
-              <VscBell />
+              <div className={styles.notiBellWrapper}>
+                <div className={styles.notiCount}>{live.notiCount}</div>
+                <FiBell />
+              </div>
             )}
           </div>
-          <Link href={`/users/detail?intraId=${user.intraId}`}>
-            <PlayerImage
-              src={user.userImageUri}
-              styleName={'header'}
-              size={20}
-            />
-          </Link>
         </div>
       </div>
       {HeaderState?.openMenuBarState && <MenuBar />}

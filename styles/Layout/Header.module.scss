@@ -1,5 +1,7 @@
 @import 'styles/common.scss';
 
+@import url('https://fonts.cdnfonts.com/css/overgrow');
+
 .headerWrap {
   z-index: 2;
   display: flex;
@@ -9,42 +11,69 @@
   margin: 0 0.7rem;
   color: white;
   font-size: $giant-font;
-  .headerLeft {
-    flex: 2;
-    display: flex;
-    align-items: center;
-    #menuIcon {
-      cursor: pointer;
-    }
-  }
-  #logo {
-    div {
-      @include logoTitle(0.25rem);
-      flex: 5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-  }
-  .headerRight {
-    flex: 2;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    #announceIcon {
-      margin-right: 0.7rem;
-      transform: scaleX(-1);
-      cursor: pointer;
-    }
-    #notiIcon {
-      display: flex;
-      align-items: center;
-      margin-right: 0.7rem;
-      font-size: 1.7rem;
-      cursor: pointer;
-    }
-  }
+}
+
+.headerLeft {
+  height: 100%;
+  flex: 2;
+  display: flex;
+  align-items: center;
+}
+
+.menuIcon {
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.logoWrap {
+  height: 100%;
+  font-family: 'Overgrow', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.headerRight {
+  height: 100%;
+  flex: 2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.announceIcon {
+  margin-right: 0.7rem;
+  transform: scaleX(-1);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.notiIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.7rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.notiBellWrapper {
+  position: relative;
+  text-align: center;
+}
+
+.notiCount {
+  width: 1.125rem;
+  height: 1.125rem;
+  position: absolute;
+  z-index: 1;
+  font-size: 0.375rem;
+  border-radius: 50%;
+  background-color: red;
+  left: 45%;
+  top: -20%;
 }
 
 .bellWhole {
