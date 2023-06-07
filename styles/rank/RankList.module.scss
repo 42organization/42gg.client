@@ -47,13 +47,13 @@
 }
 
 .container {
+  position: relative;
+  z-index: 1;
   font-size: $small-font;
 }
 
 .division {
   @include rankGrid;
-  position: relative;
-  z-index: 1;
   background: $rank-red;
   color: white;
   font-weight: 700;

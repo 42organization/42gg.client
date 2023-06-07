@@ -14,7 +14,7 @@
     height: 15.5rem;
     margin-top: 9.5rem;
   }
-  transform: scale(1.1);
+  transform: scale(1.14);
 }
 
 .mainData:nth-child(1) {
@@ -26,19 +26,14 @@
     #d30399 36.24%,
     rgba(49, 18, 79, 0) 83.85%
   );
-  height: 15rem;
-  border-radius: 58px;
-}
-.mainData:nth-child(3) {
-  position: relative;
-  right: 1.3rem;
-  background: linear-gradient(
-    180deg,
-    #57a4ff 9.9%,
-    #40798d 36.24%,
-    #30114e 83.85%,
-    rgba(48, 18, 79, 0) 83.86%
-  );
+  &.normal {
+    background: linear-gradient(
+      180deg,
+      #ff96e1 16.67%,
+      #ff61d3 39.58%,
+      #0d3299 83.85%
+    );
+  }
   height: 15rem;
   border-radius: 58px;
 }
@@ -52,22 +47,51 @@
     179.91deg,
     #f8e118 10.95%,
     #fe7a00 34.38%,
-    #884609 69.15%,
-    rgba(53, 16, 80, 0) 87.56%
+    #884609 66.08%,
+    #490142 81.99%
   );
+  &.normal {
+    background: linear-gradient(
+      179.91deg,
+      #39db7a 34.61%,
+      #067741 63.98%,
+      #0b2d8e 80.37%
+    );
+  }
+}
+
+.mainData:nth-child(3) {
+  position: relative;
+  right: 1.3rem;
+  background: linear-gradient(
+    180deg,
+    #57a4ff 9.9%,
+    #40798d 36.24%,
+    #30114e 83.85%,
+    rgba(48, 18, 79, 0) 83.86%
+  );
+  &.normal {
+    background: linear-gradient(
+      180deg,
+      #b6d7ff 9.9%,
+      #6aaeff 36.24%,
+      #4076b6 65.1%,
+      #0e36a3 86.46%
+    );
+  }
+  height: 15rem;
+  border-radius: 58px;
 }
 
 .bangContainer {
   display: flex;
-}
-.bangContainer2 {
   margin-top: -7.5rem;
 }
 
 .bang {
   position: relative;
-  width: 78.92px;
-  height: 120.5px;
+  width: 3.5rem;
+  height: 7rem;
   background: linear-gradient(
     180deg,
     rgba(44, 16, 74, 0.69) 0%,
@@ -76,23 +100,36 @@
 }
 
 .bang:nth-child(1) {
-  left: 6rem;
-  top: 6.1rem;
+  left: 9rem;
+  top: 4rem;
   transform: rotate(-47.37deg);
   clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
 }
 
 .bang:nth-child(2) {
-  left: 6rem;
-  top: 5rem;
-  height: 60.5px;
+  left: 8.5rem;
+  top: 1.5rem;
   clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
 }
 
 .bang:nth-child(3) {
-  left: 6rem;
-  top: 6.3rem;
+  left: 8rem;
+  top: 4rem;
   transform: rotate(47.37deg);
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
+}
+
+.bang:nth-child(4) {
+  left: 8rem;
+  top: 7.5rem;
+  transform: rotate(90deg);
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
+}
+
+.bang:nth-child(5) {
+  left: -8rem;
+  top: 7.5rem;
+  transform: rotate(-90deg);
   clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
 }
 
@@ -107,12 +144,26 @@
     #b5661d 73.6%,
     #5c2f06 76.05%
   );
+  &.normal {
+    background: linear-gradient(
+      70.48deg,
+      #21621c 28.73%,
+      #279d25 38.5%,
+      #bdfba0 41.72%,
+      #deffd2 60.48%,
+      #33b51d 73.6%,
+      #065c09 76.05%
+    );
+  }
   border-radius: 65px 65px 100px 0px;
 }
 
 .leaf1 {
   height: 8rem;
   background: linear-gradient(180deg, #ffcf55 36.24%, #ff823c 73.96%);
+  &.normal {
+    background: linear-gradient(180deg, #b4ff55 31.48%, #35cd0f 79.34%);
+  }
   border-radius: 65px 65px 100px 0px;
 }
 
@@ -136,7 +187,18 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  //text-fill-color: transparent;
+  &.normal {
+    background: linear-gradient(
+      180.75deg,
+      #9fff72 20.79%,
+      #7ecf90 40.34%,
+      #12aa61 51.48%,
+      #1a9126 64.98%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
 .rankNumber2 {
@@ -157,11 +219,23 @@
     #930072 51.62%,
     #351050 76.19%
   );
+  &.normal {
+    background: linear-gradient(
+      180.89deg,
+      #ff95e1 28.21%,
+      #bf54c3 44.44%,
+      #7f48b4 51.62%,
+      #5840ab 67.12%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  //text-fill-color: transparent;
 }
+
 .rankNumber3 {
   position: relative;
   top: -3rem;
@@ -183,7 +257,18 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  //text-fill-color: transparent;
+  &.normal {
+    background: linear-gradient(
+      179.14deg,
+      #add3ff 29.82%,
+      #7ab7ff 39.23%,
+      #4880c4 51.49%,
+      #2d5dae 62.84%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
 .intraId {
@@ -195,6 +280,9 @@
   text-align: center;
   span {
     cursor: pointer;
+  }
+  &.first {
+    top: -3rem;
   }
 }
 

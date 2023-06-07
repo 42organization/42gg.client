@@ -2,17 +2,19 @@
 
 .selectBox {
   position: relative;
-  width: 6rem;
+  z-index: 1;
+  width: 5rem;
   height: 1.6rem;
   border-radius: $mini-radius;
   font-size: $small-font;
   background: white;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .select {
   z-index: 1;
   position: relative;
-  width: 5rem;
+  width: 4rem;
   height: inherit;
   margin: 0 0.5rem;
   border: 0 none;

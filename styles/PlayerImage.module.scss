@@ -63,7 +63,7 @@
 .ranktropy {
   @include imageWrap;
   div {
-    @include userImage(5rem);
+    @include userImage(6.5rem);
     cursor: pointer;
   }
 }
