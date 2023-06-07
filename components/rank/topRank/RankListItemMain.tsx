@@ -33,7 +33,7 @@ export default function RankListItemMain({ user }: RankListItemMainProps) {
             <Link href={`users/detail?intraId=${intraId}`}>
               <PlayerImage
                 src={userImageUri}
-                styleName={rank === 1 ? 'ranktropy' : 'gameResultBig'}
+                styleName={rank === 1 ? 'ranktropybig' : 'ranktropy'}
                 size={50}
               />
               <span>{intraId}</span>

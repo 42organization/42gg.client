@@ -60,10 +60,17 @@
   }
 }
 
-.ranktropy {
+.ranktropybig {
   @include imageWrap;
   div {
     @include userImage(6.5rem);
+    cursor: pointer;
+  }
+}
+.ranktropy {
+  @include imageWrap;
+  div {
+    @include userImage(4.5rem);
     cursor: pointer;
   }
 }
