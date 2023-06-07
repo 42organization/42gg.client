@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   background-image: url('../public/image/login_background_img.png');
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   height: 100vh;
@@ -16,7 +16,6 @@
     justify-content: flex-end;
     align-items: center;
     height: 50vh;
-    margin-bottom: 5rem;
     .logoContainer {
       position: relative;
       display: flex;
