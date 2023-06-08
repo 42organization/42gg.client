@@ -28,6 +28,13 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Roboto';
+  src: url('../public/font/Roboto-medium.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
