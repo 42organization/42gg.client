@@ -51,8 +51,8 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
   const getFirstOpenSlot = () => {
     for (let i = 0; i < matchBoards.length; i++) {
       const matchSlot = matchBoards[i];
-      if (matchSlot.status === 'open') {
-        return stringToHourMin(matchSlot.startTime).nHour;
+      if (matchSlot[0].status === 'open') {
+        return stringToHourMin(matchSlot[0].startTime).nHour;
       }
     }
     return null;
@@ -63,12 +63,6 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
       return currentRef;
     }
     return null;
-  };
-
-  const countSlotsInHour = (slot: Slot) => {
-    const firstSlotEndMin = stringToHourMin(slot.endTime).nMin;
-    if (firstSlotEndMin === 0) return 1;
-    return 60 / stringToHourMin(slot.endTime).nMin;
   };
 
   return (
@@ -89,27 +83,23 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
           </button>
         </div>
         <div className={styles.matchBoard}>
-          {matchBoards.map((slot, index, array) => {
-            if (stringToHourMin(slot.startTime).sMin !== '00') {
-              return null;
-            }
-            const count = countSlotsInHour(slot);
-            const nextSlots = array.slice(index, index + count);
-
+          {matchBoards.map((slot, index) => {
             return (
               <div
                 key={index}
-                ref={getScrollCurrentRef(stringToHourMin(slot.startTime).nHour)}
+                ref={getScrollCurrentRef(
+                  stringToHourMin(slot[0].startTime).nHour
+                )}
               >
-                {stringToHourMin(slot.startTime).sMin === '00' && (
-                  <MatchTime key={index} startTime={slot.startTime} />
+                {stringToHourMin(slot[0].startTime).sMin === '00' && (
+                  <MatchTime key={index} startTime={slot[0].startTime} />
                 )}
                 <div className={styles.slotGrid}>
-                  {nextSlots.map((nextSlot, nextIndex) => (
+                  {slot.map((minSlots, minIndex) => (
                     <MatchSlot
-                      key={index + nextIndex}
+                      key={index + minIndex}
                       toggleMode={toggleMode}
-                      slot={nextSlot}
+                      slot={minSlots}
                     />
                   ))}
                 </div>
