@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { seasonListState, latestSeasonIdState } from 'utils/recoil/seasons';
 import { useRecoilValue } from 'recoil';
+import { ToggleMode } from 'types/rankTypes';
 
 const useSeasonDropDown = (
   clickTitle?: boolean,
@@ -8,7 +9,7 @@ const useSeasonDropDown = (
 ) => {
   const latestSeasonId = useRecoilValue(latestSeasonIdState);
   const { seasonList } = useRecoilValue(seasonListState);
-  const seasonMode = 'rank';
+  const seasonMode: ToggleMode = 'RANK';
   const [season, setSeason] = useState<number>(
     useRecoilValue(latestSeasonIdState)
   );
