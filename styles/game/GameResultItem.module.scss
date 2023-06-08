@@ -27,12 +27,6 @@
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   align-items: center;
-  &.light {
-    background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
-  }
-  &.dark {
-    background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
-  }
   @if ($type == 'SMALL') {
     min-width: 18.36rem;
     border-radius: 0.938rem;
@@ -43,6 +37,47 @@
     border-radius: 1.5rem;
     height: 6.091rem;
     padding: 0.5rem 0;
+  }
+}
+
+@mixin itemBackgroud($type) {
+  @if ($type == 'SMALL') {
+    // &.light {
+    //   background: linear-gradient(0deg, #9134f7, #9134f7);
+    //   &.both {
+    //     background: #ff7fb8;
+    //   }
+    //   &.normal {
+    //     background: #5fa5ef;
+    //   }
+    //   &.rank {
+    //     background: linear-gradient(180deg, #8f2fea 0%, #8c29da 100%);
+    //   }
+    // }
+    // &.dark {
+    //   background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
+    //   &.both {
+    //     background: linear-gradient(180deg, #dd3b89 0%, #c71b82 100%);
+    //   }
+    //   &.normal {
+    //     background: linear-gradient(180deg, #3d61bc 0%, #4f45c4 92.19%);
+    //   }
+    //   &.rank {
+    //     background: linear-gradient(180deg, #631db2 0%, #6a0db2 92.19%);
+    //   }
+    // }
+  } @else {
+    // BIG
+    background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
+    &.both {
+      background: linear-gradient(90.88deg, #ff86dd 10.44%, #ff7272 99.52%);
+    }
+    &.normal {
+      background: linear-gradient(90.88deg, #8fc7fb 10.44%, #4e8fdb 99.52%);
+    }
+    &.rank {
+      background: linear-gradient(90.88deg, #9134f7 10.44%, #8921c5 99.52%);
+    }
   }
 }
 
@@ -60,6 +95,10 @@
 
 .smallItemContainer {
   @include itemContainer('SMALL');
+  // @include itemBackgroud('SMALL');
+  &.both {
+    background: linear-gradient(0deg, #ff7fb8, #ff7fb8);
+  }
   &.zIndexList {
     @include zIndexItem('SMALL');
   }
@@ -100,6 +139,7 @@
 
 .bigItemContainer {
   @include itemContainer('BIG');
+  @include itemBackgroud('BIG');
   &.zIndexList {
     @include zIndexItem('BIG');
   }

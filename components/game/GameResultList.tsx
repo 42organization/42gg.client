@@ -6,12 +6,17 @@ import GameResultBigItem from './big/GameResultBigItem';
 import GameResultSmallItem from './small/GameResultSmallItem';
 import styles from 'styles/game/GameResultItem.module.scss';
 import useGameResultList from 'hooks/game/useGameResultList';
+import { SeasonMode } from 'types/mainType';
 
 interface GameResultListProps {
   path: string;
+  radioMode?: SeasonMode;
 }
 
-export default function GameResultList({ path }: GameResultListProps) {
+export default function GameResultList({
+  path,
+  radioMode,
+}: GameResultListProps) {
   const { data, status, fetchNextPage, isLast, clickedGameItem, pathName } =
     useGameResultList(path);
 
@@ -33,9 +38,10 @@ export default function GameResultList({ path }: GameResultListProps) {
                 return clickedGameItem === game.gameId ? (
                   <GameResultBigItem
                     key={game.gameId}
-                    type={type}
+                    // type={type}
                     game={game}
                     zIndexList={!isGamePage}
+                    radioMode={radioMode}
                   />
                 ) : (
                   <GameResultSmallItem
@@ -43,6 +49,7 @@ export default function GameResultList({ path }: GameResultListProps) {
                     type={type}
                     game={game}
                     zIndexList={!isGamePage}
+                    radioMode={radioMode}
                   />
                 );
               })}

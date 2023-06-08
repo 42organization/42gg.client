@@ -16,7 +16,7 @@ export default function GameResult({ mode, season }: GameResultProps) {
     <div>
       {path && (
         <QueryClientProvider client={queryClient}>
-          <GameResultList path={path} />
+          <GameResultList path={path} radioMode={mode} />
         </QueryClientProvider>
       )}
     </div>
