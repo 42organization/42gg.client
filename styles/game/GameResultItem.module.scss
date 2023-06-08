@@ -34,12 +34,12 @@
     background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
   }
   @if ($type == 'SMALL') {
-    min-width: 19.875rem;
+    min-width: 18.36rem;
     border-radius: 0.938rem;
     height: 2.688rem;
     padding: 0.505rem 0.954rem;
   } @else if ($type == 'BIG') {
-    min-width: 22.125rem;
+    min-width: 20.438rem;
     border-radius: 1.5rem;
     height: 6.091rem;
     padding: 0.5rem 0;
