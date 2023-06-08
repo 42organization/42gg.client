@@ -3,7 +3,13 @@ import { myRankState, scrollState } from 'utils/recoil/myRank';
 import styles from 'styles/rank/RankList.module.scss';
 import { ToggleMode } from 'types/rankTypes';
 
-export default function MyRank(toggleMode: ToggleMode) {
+interface MyRankProp {
+  toggleMode: ToggleMode;
+}
+
+// export default function MyRank(toggleMode: ToggleMode) {
+export default function MyRank(prop: MyRankProp) {
+  const { toggleMode } = prop;
   const myRank = useRecoilValue(myRankState);
   const setIsScroll = useSetRecoilState(scrollState);
   const rankType = toggleMode === 'RANK' ? '랭크' : '열정';
