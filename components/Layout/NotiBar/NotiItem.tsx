@@ -13,35 +13,12 @@ export default function NotiItem({ data }: NotiItemProps) {
   const date = data.createdAt.slice(5).replace('T', ' ');
   const { type, message, isChecked } = data;
 
-  const parseEnemyIdMessage = (
-    message: string
-  ): {
-    enemyId: string[];
-    enemyMessage: string;
-  } => {
-    const regList = /<intraId::(.+?)>/;
-    const regId = /^[a-zA-Z0-9]*$/;
-    const parseList = [] || message.split(regList).filter((str) => str !== '');
-    const enemyId = [] || parseList.filter((id) => regId.test(id) !== false);
-    const enemyMessage =
-      '' || parseList.filter((id) => regId.test(id) === false)[0];
-    return { enemyId, enemyMessage };
-  };
-
-  let enemyId: string[] = [];
-  let enemyMessage = '';
-
-  if (type === 'IMMINENT') {
-    enemyId = parseEnemyIdMessage(message).enemyId;
-    enemyMessage = parseEnemyIdMessage(message).enemyMessage;
-  }
-
   const noti: {
     [key: string]: { [key: string]: string | JSX.Element | undefined };
   } = {
     IMMINENT: {
       title: '경기 준비',
-      content: MakeImminentContent(enemyId, enemyMessage),
+      content: MakeImminentContent(message),
     },
     ANNOUNCE: {
       title: '공 지',
@@ -77,8 +54,26 @@ function MakeAnnounceContent(message: string | undefined) {
   );
 }
 
-function MakeImminentContent(enemyTeam: string[], message: string) {
+function MakeImminentContent(message: string) {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
+
+  const parseEnemyIdMessage = (
+    message: string
+  ): {
+    enemyId: string[];
+    enemyMessage: string;
+  } => {
+    const regList = /<intraId::(.+?)>/;
+    const regId = /^[a-zA-Z0-9]*$/;
+    const parseList = message.split(regList).filter((str) => str !== '');
+    const enemyId = parseList.filter((id) => regId.test(id) !== false);
+    const enemyMessage = parseList.filter((id) => regId.test(id) === false)[0];
+    return { enemyId, enemyMessage };
+  };
+
+  const enemyId = parseEnemyIdMessage(message).enemyId;
+  const enemyMessage = parseEnemyIdMessage(message).enemyMessage;
+
   const makeEnemyUsers = (enemyTeam: string[]) => {
     return enemyTeam.map((intraId: string, i: number) => (
       <span key={intraId} onClick={() => HeaderState?.resetOpenNotiBarState()}>
@@ -89,9 +84,10 @@ function MakeImminentContent(enemyTeam: string[], message: string) {
   };
   return (
     <>
-      {enemyTeam.length && (
+      {enemyId.length && (
         <>
-          {makeEnemyUsers(enemyTeam)} {message}
+          {makeEnemyUsers(enemyId)}
+          {enemyMessage}
         </>
       )}
     </>
