@@ -128,9 +128,13 @@
       font-size: 0.56rem;
       text-align: center;
       letter-spacing: 0.04em;
-      color: #ffffff;
-      background: rgba(0, 0, 0, 0.33);
+      color: #000000;
+      background: #ffffff;
       border-radius: 0.188rem;
+      &.zIndexWinRate {
+        background: rgba(0, 0, 0, 0.33);
+        color: #ffffff;
+      }
     }
   }
 

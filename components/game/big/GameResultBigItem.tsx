@@ -22,7 +22,7 @@ function GameResultBigItem({ game, type, zIndexList }: GameResultBigItemProps) {
       className={`${styles['bigItemContainer']} ${styles[type.toLowerCase()]} 
       ${zIndexList && styles['zIndexList']}`}
     >
-      <GameResultBigTeam team={team1} />
+      <GameResultBigTeam team={team1} zIndexList={zIndexList} />
       <GameResultBigScore
         mode={mode}
         status={status}
@@ -30,7 +30,7 @@ function GameResultBigItem({ game, type, zIndexList }: GameResultBigItemProps) {
         scoreTeam1={team1.score}
         scoreTeam2={team2.score}
       />
-      <GameResultBigTeam team={team2} />
+      <GameResultBigTeam team={team2} zIndexList={zIndexList} />
     </div>
   );
 }
