@@ -4,7 +4,7 @@ import { v1 } from 'uuid';
 
 export const myRankState = atom<MyRank>({
   key: `myRankState/${v1()}`,
-  default: { rank: 0, normal: 0 },
+  default: { RANK: 0, NORMAL: 0 },
 });
 
 export const scrollState = atom<boolean>({
