@@ -179,8 +179,8 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
       // event === 'match' && match[0].startTime === startTime
       //   ? styles.mytable
       //   : styles.disabled, // 나의 매칭 경기가 close일 때 mytable 상태 표시
-      open: toggleMode === 'RANK' ? styles.rank : styles.normal,
-      match: toggleMode === 'RANK' ? styles.rank : styles.normal,
+      open: radioMode === 'RANK' ? styles.rank : styles.normal,
+      match: radioMode === 'RANK' ? styles.rank : styles.normal,
     }),
     [slot]
   );
