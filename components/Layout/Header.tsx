@@ -73,13 +73,16 @@ export default function Header() {
             {live.notiCount ? (
               <div className={styles.bellWhole}>
                 <div className={styles.notiBellWrapper}>
-                  <span className={styles.notiCount}>{live.notiCount}</span>
+                  <div className={styles.notiCountCircle}>
+                    <div className={styles.notiCount}>
+                      {live.notiCount > 3 ? '9+' : live.notiCount}
+                    </div>
+                  </div>
                   <FiBell />
                 </div>
               </div>
             ) : (
               <div className={styles.notiBellWrapper}>
-                <div className={styles.notiCount}>{live.notiCount}</div>
                 <FiBell />
               </div>
             )}
