@@ -6,7 +6,8 @@
   align-items: stretch;
   padding: 1rem;
   margin-bottom: 0.6rem;
-  border-radius: $small-radius;
+  border-radius: $medium-radius;
+  border-radius: 2rem;
   background: linear-gradient(
     180deg,
     rgba(178, 118, 255, 0.414) 26.8%,
@@ -28,7 +29,7 @@
   align-items: flex-end;
   line-height: 100%;
   margin-bottom: 0.3rem;
-  color: $rank-red;
+  color: #9e426e;
   font-size: 2rem;
   font-weight: 700;
   span:nth-child(1) {
@@ -65,6 +66,6 @@
     background: $winner-blue;
   }
   .losses {
-    background: $loser-red;
+    background: #9e426e;
   }
 }

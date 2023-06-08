@@ -4,10 +4,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
   margin-bottom: 0.6rem;
   border-radius: $small-radius;
   font-family: 'Roboto', sans-serif;
+  justify-content: space-between;
   color: $white1;
 }
 
@@ -16,6 +16,7 @@
   font-weight: 800;
   font-style: normal;
   font-size: 3.5rem;
+  margin-top: -2rem;
   color: white;
 }
 
@@ -25,8 +26,8 @@
   height: 0.7rem;
   border-radius: $mini-radius;
   overflow: hidden;
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
   .expCurrent {
     background: linear-gradient(
       89.81deg,
@@ -40,8 +41,10 @@
   }
 }
 
-.bottomContainer {
-  margin-top: 1rem;
+.idContainer {
+  display: flex;
+  width: 12rem;
+  justify-content: space-around;
 }
 
 .intraId {
@@ -49,6 +52,19 @@
   font-size: $giant-font;
   font-weight: 700;
   margin-top: 0.5rem;
+  text-align: center;
+}
+
+.buttons {
+  @include select-buttons(3rem, 2rem);
+  .positive {
+    input {
+      font-size: $big-font;
+      font-weight: 600;
+      background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
+      box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.2);
+    }
+  }
 }
 
 .exp {
@@ -61,25 +77,38 @@
   }
 }
 
-.racket {
-  width: 6.5rem;
+.boxContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 12rem;
+  margin-bottom: 0.5rem;
+}
+
+.expbox {
+  width: 5.5rem;
   padding: 0.5rem 0;
   border-radius: $mini-radius;
-  background: $white1;
+  background: #9e426e;
   font-size: $small-font;
   text-align: center;
-  color: black;
+  color: #ff80bd;
+}
+
+.racket {
+  width: 5.5rem;
+  padding: 0.5rem 0;
+  border-radius: $mini-radius;
+  background: #cbffb9;
+  font-size: $small-font;
+  text-align: center;
+  color: #008234;
 }
 
 .statusMessage {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 5rem;
-  padding: 0.5rem;
-  border-radius: $mini-radius;
+  padding: 1rem;
   font-size: $medium-font;
+  text-align: center;
+  align-items: center;
 }
 
 .editContainer {
@@ -188,8 +217,4 @@
       font-size: $small-font;
     }
   }
-}
-
-.buttons {
-  @include select-buttons(9rem);
 }

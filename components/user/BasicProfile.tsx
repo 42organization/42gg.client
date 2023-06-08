@@ -43,24 +43,31 @@ export default function BasicProfile({ profileId }: ProfileProps) {
       {intraId && (
         <PlayerImage src={userImageUri} styleName={'mainProfile'} size={30} />
       )}
-      <div className={styles.intraId}>{intraId}</div>
-      <div className={styles.bottomContainer}>
-        <div className={styles.statusMessage}>
-          <div className={styles.messaage}>
-            {user.intraId === profileId && statusMessage.length === 0
-              ? '상태메시지를 입력해보세요!'
-              : statusMessage}
-          </div>
-          {/* <div className={styles.buttons}>
-            {user.intraId === profileId && (
-              <div className={styles.positive}>
-                <input type='button' onClick={startEditHandler} value='edit' />
-              </div>
-            )}
-          </div> */}
+      <div className={styles.idContainer}>
+        <div className={styles.intraId}>{intraId}</div>
+        <div className={styles.buttons}>
+          {user.intraId === profileId && (
+            <div className={styles.positive}>
+              <input type='button' onClick={startEditHandler} value='edit' />
+            </div>
+          )}
         </div>
       </div>
-      <div className={styles.racket}>{racketType.toUpperCase()}</div>
+      <div className={styles.statusMessage}>
+        <div className={styles.messaage}>
+          {user.intraId === profileId && statusMessage.length === 0
+            ? '상태메시지를 입력해보세요!'
+            : statusMessage}
+        </div>
+      </div>
+      <div className={styles.boxContainer}>
+        <div className={styles.expbox}>
+          {level !== MAX_LEVEL
+            ? `${currentExp} / ${maxExp}exp`
+            : `${currentExp} / Max Exp`}
+        </div>
+        <div className={styles.racket}>{racketType.toUpperCase()}</div>
+      </div>
     </div>
   );
 }
