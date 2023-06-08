@@ -7,7 +7,6 @@ interface MyRankProp {
   toggleMode: ToggleMode;
 }
 
-// export default function MyRank(toggleMode: ToggleMode) {
 export default function MyRank(prop: MyRankProp) {
   const { toggleMode } = prop;
   const myRank = useRecoilValue(myRankState);
