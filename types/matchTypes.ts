@@ -5,7 +5,7 @@ export interface Slot {
 }
 
 export interface Match {
-  matchBoards: Slot[];
+  matchBoards: Slot[][];
 }
 export interface CurrentMatchListElement {
   startTime: string;
