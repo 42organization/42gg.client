@@ -1,29 +1,16 @@
 @import 'styles/common.scss';
 
-@media screen and (min-width: 320px) and (max-width: 360px) {
-  .gridContainer {
-    width: 85vw;
-  }
+@media screen and (max-width: 635px) {
+  .gridContainer,
   .currentMatch {
     width: 85vw;
   }
 }
 
-@media screen and (min-width: 361px) and (max-width: 500px) {
-  .gridContainer {
-    width: 22.125rem;
-  }
+@media screen and (min-width: 636px) {
+  .gridContainer,
   .currentMatch {
-    width: 22.125rem;
-  }
-}
-
-@media screen and (min-width: 500px) {
-  .gridContainer {
-    width: 25rem;
-  }
-  .currentMatch {
-    width: 25rem;
+    width: 90vw;
   }
 }
 
@@ -34,50 +21,47 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
 
-.gridContainer {
-  // width: 22.125rem;
-  flex-shrink: 0;
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  grid-template-areas: 'image greetingsArea';
-  padding: 0.1rem 0.2rem 0 0.2rem;
-  color: white;
-}
+  .currentMatch {
+    max-width: 28rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 0.2rem;
+  }
 
-.myImage {
-  grid-area: image;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.userGreetings {
-  grid-area: greetingsArea;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding-left: 0.8rem;
-}
-
-.greetings {
-  font-size: 0.75rem;
-  margin-bottom: 0.2rem;
-}
-
-.intraId {
-  font-size: 1.25rem;
-  font-weight: 700;
-  padding: 0;
-  margin: 0;
-}
-
-.currentMatch {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  padding-bottom: 0.2rem;
+  .gridContainer {
+    max-width: 28rem;
+    flex-shrink: 0;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: 'image greetingsArea';
+    padding: 0.1rem 0.2rem 0 0.2rem;
+    color: white;
+    .myImage {
+      grid-area: image;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .userGreetings {
+      grid-area: greetingsArea;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding-left: 0.8rem;
+      .greetings {
+        font-size: 0.75rem;
+        margin-bottom: 0.2rem;
+      }
+      .intraId {
+        font-size: 1.25rem;
+        font-weight: 700;
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
 }

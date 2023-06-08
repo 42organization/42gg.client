@@ -43,8 +43,7 @@ export default function CurrentMatch() {
           setShowDropdown={setShowDropdown}
         />
       </div>
-
-      <div className={`${dropdownStyle}`}>
+      <div className={`${styles.dropdownWrapper} ${dropdownStyle}`}>
         {dropdownAnimation && (
           <div className={styles.dropdown}>
             {currentMatchList.slice(1).map((currentMatch, index) => (
