@@ -10,7 +10,7 @@
     "lint": "next lint",
     "prepare": "husky install",
     "cypress:open": "cypress open",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 3000",
     "build-storybook": "storybook build"
   },
   "dependencies": {
