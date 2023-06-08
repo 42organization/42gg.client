@@ -1,0 +1,28 @@
+@import 'styles/common.scss';
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    to bottom right,
+    #0030ac 0%,
+    #90a5ff 50%,
+    #cb8fff 100%
+  );
+  border-radius: 3rem;
+  border-width: 0;
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2.5rem;
+  background-color: black;
+  font-size: $big-font;
+  color: white;
+  height: 2.3rem;
+}
