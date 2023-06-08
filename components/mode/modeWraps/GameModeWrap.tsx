@@ -40,7 +40,7 @@ export default function GameModeWrap({
     <div>
       <div className={styles.gameModeWrap}>
         <UserGameSearchBar />
-        {radioMode === 'BOTH' && seasonList && (
+        {radioMode === 'RANK' && seasonList && (
           <SeasonDropDown
             seasonList={seasonList}
             value={season}

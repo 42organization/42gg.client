@@ -1,22 +1,23 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { Match, Slot } from 'types/matchTypes';
+import { CurrentMatchList, Match, Slot } from 'types/matchTypes';
 import { Live } from 'types/mainType';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/match/MatchBoard.module.scss';
 
 import useGetReloadMatchHandler from 'hooks/match/useGetReloadMatchHandler';
-import { fillZero } from 'utils/handleTime';
+import { stringToHourMin } from 'utils/handleTime';
 import { liveState } from 'utils/recoil/layout';
 import { Modal } from 'types/modalTypes';
 import { MatchMode } from 'types/mainType';
+import { currentMatchState } from 'utils/recoil/match';
 
 interface MatchBoardProps {
   type: string;
-  toggleMode: MatchMode;
+  radioMode: MatchMode;
 }
 
-export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
+export default function MatchBoard({ type, radioMode }: MatchBoardProps) {
   const [match, setMatch] = useState<Match | null>(null);
   const [spinReloadButton, setSpinReloadButton] = useState<boolean>(false);
   const setModal = useSetRecoilState(modalState);
@@ -26,7 +27,7 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
     setMatch,
     setSpinReloadButton,
     type,
-    toggleMode,
+    radioMode,
   });
 
   useEffect(() => {
@@ -44,14 +45,14 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
     return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
 
   const openManual = () => {
-    setModal({ modalName: 'MATCH-MANUAL', manual: { toggleMode: toggleMode } });
+    setModal({ modalName: 'MATCH-MANUAL', manual: { radioMode: radioMode } });
   };
 
   const getFirstOpenSlot = () => {
     for (let i = 0; i < matchBoards.length; i++) {
       const matchSlot = matchBoards[i];
       if (matchSlot.status === 'open') {
-        return new Date(matchSlot.startTime).getHours();
+        return stringToHourMin(matchSlot.startTime).nHour;
       }
     }
     return null;
@@ -85,12 +86,12 @@ export default function MatchBoard({ type, toggleMode }: MatchBoardProps) {
           {matchBoards.map((slot, index) => (
             <div
               key={index}
-              ref={getScrollCurrentRef(parseInt(slot.startTime.slice(-8, -6)))}
+              ref={getScrollCurrentRef(stringToHourMin(slot.startTime).nHour)}
             >
-              {slot.startTime.slice(-5, -3) === '00' && (
-                <MatchTime key={index} startTime={slot.startTime} />
+              {stringToHourMin(slot.startTime).sMin === '00' && (
+                <MatchTime startTime={slot.startTime} />
               )}
-              <MatchSlot key={index - 1} toggleMode={toggleMode} slot={slot} />
+              <MatchSlot radioMode={radioMode} slot={slot} />
             </div>
           ))}
         </div>
@@ -111,8 +112,7 @@ interface MatchTimeProps {
 
 export const MatchTime = ({ startTime }: MatchTimeProps) => {
   const slotTime = new Date(startTime);
-  const slotHour = slotTime.getHours();
-  const slotHourIn12 = ChangeHourFrom24To12(slotHour);
+  const slotHourIn12 = ChangeHourFrom24To12(slotTime.getHours());
 
   return (
     <div className={styles.slotHour}>
@@ -125,15 +125,18 @@ export const MatchTime = ({ startTime }: MatchTimeProps) => {
 };
 
 interface MatchSlotProps {
-  toggleMode: MatchMode;
+  radioMode: MatchMode;
   slot: Slot;
 }
 
-export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
+export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
   const setModal = useSetRecoilState<Modal>(modalState);
   const { event } = useRecoilValue<Live>(liveState);
+  const { match } = useRecoilValue<CurrentMatchList>(currentMatchState);
   const { startTime, endTime, status } = slot;
-  const slotData = `${slot.startTime.slice(-2)} - ${slot.endTime.slice(-2)}`;
+  const slotData = `${stringToHourMin(startTime).sMin} - ${
+    stringToHourMin(endTime).sMin
+  }`;
 
   const enrollhandler = async () => {
     if (status === 'mytable') {
@@ -143,7 +146,7 @@ export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
           startTime: startTime,
         },
       });
-    } else if (event === 'match') {
+    } else if (event === 'match' && match.length === 3) {
       setModal({ modalName: 'MATCH-REJECT' });
     } else {
       setModal({
@@ -151,7 +154,7 @@ export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
         enroll: {
           startTime: startTime,
           endTime: endTime,
-          mode: toggleMode,
+          mode: radioMode,
         },
       });
     }
@@ -161,31 +164,40 @@ export const MatchSlot = ({ toggleMode, slot }: MatchSlotProps) => {
     () => ({
       mytable: status === 'mytable' ? styles.mytable : styles.disabled,
       close: styles.disabled,
+      // event === 'match' && match[0].startTime === startTime
+      //   ? styles.mytable
+      //   : styles.disabled, // 나의 매칭 경기가 close일 때 mytable 상태 표시
       open: toggleMode === 'RANK' ? styles.rank : styles.normal,
       match: toggleMode === 'RANK' ? styles.rank : styles.normal,
     }),
     [slot]
   );
 
+  // const isDisabled =
+  //   status === 'close' &&
+  //   !(event === 'match' && match[0].startTime === startTime)
+  //     ? true
+  //     : false; // 나의 매칭 경기가 close일 때 disabled 안 되게
+
   const isAfterSlot: boolean =
     new Date(startTime).getTime() - new Date().getTime() >= 0;
 
   const headCount =
-    status === 'close' ? 2 : status === ('mytable' || 'match') ? 1 : 0;
+    status === 'close' ? 2 : status === 'mytable' || status === 'match' ? 1 : 0;
 
   return (
     <div className={styles.slotGrid}>
       <button
         className={`${styles.slotButton} ${buttonStyle[status]}`}
+        // disabled={isDisabled}
         disabled={status === 'close'}
         onClick={enrollhandler}
       >
         <span className={styles.time}>
           {slotData === '00 - 00'
-            ? `${fillZero(
-                parseInt(startTime.slice(-5, -3)).toString(),
-                2
-              )} - ${fillZero(parseInt(endTime.slice(-5, -3)).toString(), 2)}`
+            ? `${stringToHourMin(startTime).sMin} - ${
+                stringToHourMin(endTime).sMin
+              }`
             : slotData}
           {status === 'mytable' && ' 🙋'}
         </span>

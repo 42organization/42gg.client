@@ -49,11 +49,11 @@ export interface Exp {
 }
 
 export interface Manual {
-  toggleMode: MatchMode;
+  radioMode: MatchMode;
 }
 
 export interface manual {
-  toggleMode: MatchMode;
+  radioMode: MatchMode;
 }
 
 export interface ISeason {

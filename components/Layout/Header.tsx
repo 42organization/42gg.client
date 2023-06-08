@@ -9,7 +9,7 @@ import { BsMegaphone } from 'react-icons/bs';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
 import styles from 'styles/Layout/Header.module.scss';
 
-import NewNotiBar from './NewNoti/NewNotiBar';
+import NotiBar from './NotiBar/NotiBar';
 
 import { HeaderContextState, HeaderContext } from './HeaderContext';
 import { useContext } from 'react';
@@ -72,7 +72,7 @@ export default function Header() {
           </div>
           <Link href={`/users/detail?intraId=${user.intraId}`}>
             <PlayerImage
-              src={user.userImageUrl}
+              src={user.userImageUri}
               styleName={'header'}
               size={20}
             />
@@ -80,7 +80,7 @@ export default function Header() {
         </div>
       </div>
       {HeaderState?.openMenuBarState && <MenuBar />}
-      {HeaderState?.openNotiBarState && <NewNotiBar />}
+      {HeaderState?.openNotiBarState && <NotiBar />}
     </div>
   );
 }

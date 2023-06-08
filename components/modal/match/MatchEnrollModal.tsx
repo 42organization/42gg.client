@@ -1,6 +1,7 @@
 import { Enroll } from 'types/modalTypes';
 import styles from 'styles/modal/match/MatchEnrollModal.module.scss';
 import useMatchEnrollModal from 'hooks/modal/match/useMatchEnrollModal';
+import { gameTimeToString } from 'utils/handleTime';
 
 export default function MatchEnrollModal({ startTime, endTime, mode }: Enroll) {
   const { onEnroll, onCancel } = useMatchEnrollModal({
@@ -13,7 +14,7 @@ export default function MatchEnrollModal({ startTime, endTime, mode }: Enroll) {
       <div className={styles.phrase}>
         <div className={styles.emoji}>🏓</div>
         <div className={styles.time}>
-          {startTime.slice(-8, -3)} - {endTime.slice(-8, -3)}
+          {gameTimeToString(startTime)} - {gameTimeToString(endTime)}
         </div>
         <div>
           {mode === 'RANK' ? '(랭크전)' : '(일반전)'}

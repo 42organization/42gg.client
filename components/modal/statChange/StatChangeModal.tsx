@@ -18,7 +18,7 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
   }, []);
 
   const getExpHandler = useAxiosGet({
-    url: `/pingpong/games/${gameId}/result/${mode}`,
+    url: `/pingpong/games/${gameId}/result/${mode?.toLowerCase()}`,
     setState: setStat,
     err: 'KP03',
     type: 'setError',
@@ -39,7 +39,7 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
       />
       <div className={styles.container}>
         <div className={styles.emoji}>🏓</div>
-        {mode === 'rank' && <PppStat stat={stat} />}
+        {mode === 'RANK' && <PppStat stat={stat} />}
         <ExpStat stat={stat} />
         <div className={styles.guide}>화면을 클릭해주세요!</div>
       </div>
