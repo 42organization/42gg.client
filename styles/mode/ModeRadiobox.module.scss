@@ -5,7 +5,10 @@
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: stretch;
   align-items: stretch;
-  margin: 0 1.916rem;
+  margin: 0 1.25rem;
+  &.zIndexListButton {
+    margin: 0 1.916rem;
+  }
   input[type='radio'] {
     position: absolute;
     opacity: 0;

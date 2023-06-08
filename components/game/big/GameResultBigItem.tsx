@@ -9,16 +9,18 @@ import styles from 'styles/game/GameResultItem.module.scss';
 interface GameResultBigItemProps {
   game: Game;
   type: 'LIGHT' | 'DARK';
+  zIndexList: boolean;
 }
 
-function GameResultBigItem({ game, type }: GameResultBigItemProps) {
+function GameResultBigItem({ game, type, zIndexList }: GameResultBigItemProps) {
   const { mode, team1, team2, status, time, gameId } = game;
   const setClickedItemId = useSetRecoilState(clickedGameItemState);
   return (
     <div
       onClick={() => setClickedItemId(gameId)}
       id={String(gameId)}
-      className={`${styles['bigItemContainer']} ${styles[type.toLowerCase()]}`}
+      className={`${styles['bigItemContainer']} ${styles[type.toLowerCase()]} 
+      ${zIndexList && styles['zIndexList']}`}
     >
       <GameResultBigTeam team={team1} />
       <GameResultBigScore

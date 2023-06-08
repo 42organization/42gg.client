@@ -9,17 +9,21 @@ import styles from 'styles/game/GameResultItem.module.scss';
 interface GameResultSmallItemProps {
   game: Game;
   type: 'LIGHT' | 'DARK';
+  zIndexList: boolean;
 }
 
-function GameResultSmallItem({ game, type }: GameResultSmallItemProps) {
+function GameResultSmallItem({
+  game,
+  type,
+  zIndexList,
+}: GameResultSmallItemProps) {
   const { mode, team1, team2, gameId } = game;
   const setClickedItemId = useSetRecoilState(clickedGameItemState);
   return (
     <div
       id={String(gameId)}
-      className={`${styles['smallItemContainer']} ${
-        styles[type.toLowerCase()]
-      }`}
+      className={`${styles['smallItemContainer']} 
+      ${styles[type.toLowerCase()]} ${zIndexList && styles['zIndexList']}`}
       onClick={() => setClickedItemId(gameId)}
     >
       <GameResultSmallTeam team={team1} position={'Left'} />
