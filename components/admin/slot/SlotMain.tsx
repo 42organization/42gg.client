@@ -41,34 +41,19 @@ export default function SlotMain() {
 
   const initSlotInfo = async () => {
     try {
-      const res = await instance.get(`/pingpong/match/tables/${1}/rank/single`);
+      const res = await instance.get(`/pingpong/match/time/scope?mode=rank`);
       setSlotInfo({ ...res?.data });
       setShowTime(res?.data.matchBoards.length);
-      setFirstHour(slotHour(res?.data.matchBoards[0][0].time));
+      setFirstHour(slotHour(res?.data.matchBoards[0][0].startTime));
       setLastHour(
         slotHour(
-          res?.data.matchBoards[res?.data.matchBoards.length - 1][0].time
+          res?.data.matchBoards[res?.data.matchBoards.length - 1][0].startTime
         ) + 1
       );
     } catch (e) {
       console.error('SW01');
     }
   };
-  // const initSlotInfo = async () => {
-  //   try {
-  //     const res = await instance.get(`/pingpong/match/tables/${1}/rank/single`);
-  //     setSlotInfo({ ...res?.data });
-  //     setShowTime(res?.data.matchBoards.length);
-  //     setFirstHour(slotHour(res?.data.matchBoards[0][0].time));
-  //     setLastHour(
-  //       slotHour(
-  //         res?.data.matchBoards[res?.data.matchBoards.length - 1][0].time
-  //       ) + 1
-  //     );
-  //   } catch (e) {
-  //     console.error('SW01');
-  //   }
-  // };
 
   useEffect(() => {
     initScheduleInfo();
@@ -93,7 +78,7 @@ export default function SlotMain() {
   };
 
   const intervalOptions = Array.from({ length: 60 }, (_, i: number) => i + 1)
-    .filter((num) => 60 % num === 0)
+    .filter((num) => 60 % num === 0 && num >= 5)
     .map((num) => (
       <option key={`gt-${num}`} value={num}>
         {num}분

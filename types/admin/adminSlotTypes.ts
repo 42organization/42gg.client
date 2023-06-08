@@ -6,11 +6,9 @@ export type EditedSchedule = {
 };
 
 export type Slots = {
-  slotId: number;
+  startTime: string;
+  endTime: string;
   status: string;
-  headCount: number;
-  time: string;
-  mode: string;
 };
 
 export type Slot = {
