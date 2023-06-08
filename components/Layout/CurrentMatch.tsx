@@ -104,7 +104,7 @@ function CurrentMatchContent(prop: CurrentMatchContentProp) {
         <div className={styles.icon}>
           <div>
             <Image
-              src='/image/loudspeaker.webp'
+              src='/image/loudspeaker.png'
               alt='loudspeaker'
               width={15}
               height={15}
