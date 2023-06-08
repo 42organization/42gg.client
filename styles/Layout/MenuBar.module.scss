@@ -8,7 +8,8 @@
 .container {
   @include menu-noti-Bar;
   padding: 1.15rem 0.7rem;
-  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  // background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  background: rgba(244, 221, 247, 1);
   color: white;
   text-shadow: 2px 2px 2px $dark-gray;
   button {
