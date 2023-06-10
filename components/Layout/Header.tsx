@@ -12,6 +12,7 @@ import { useContext } from 'react';
 import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import useAxiosGet from 'hooks/useAxiosGet';
+import Image from 'next/image';
 
 export default function Header() {
   const user = useRecoilValue(userState);
@@ -75,15 +76,25 @@ export default function Header() {
                 <div className={styles.notiBellWrapper}>
                   <div className={styles.notiCountCircle}>
                     <div className={styles.notiCount}>
-                      {live.notiCount > 3 ? '9+' : live.notiCount}
+                      {live.notiCount > 9 ? '9+' : live.notiCount}
                     </div>
                   </div>
-                  <FiBell />
+                  <Image
+                    src='/image/notibell.png'
+                    width={18}
+                    height={18}
+                    alt='notibell'
+                  />
                 </div>
               </div>
             ) : (
               <div className={styles.notiBellWrapper}>
-                <FiBell />
+                <Image
+                  src='/image/notibell.png'
+                  width={18}
+                  height={18}
+                  alt='notibell'
+                />
               </div>
             )}
           </div>
