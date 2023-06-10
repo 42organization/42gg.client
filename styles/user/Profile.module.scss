@@ -42,9 +42,8 @@
 }
 
 .idContainer {
-  display: flex;
-  width: 12rem;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .intraId {

@@ -101,7 +101,7 @@ export default function EditProfileModal() {
                   onChange={inputChangeHandler}
                   checked={editedProfile.racketType === racket.id}
                 />
-                <div className={styles.radioButton}>{racket.label}</div>
+                <div className={styles.radioButton}>{racket.id}</div>
               </label>
             );
           })}

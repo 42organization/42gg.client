@@ -44,6 +44,7 @@ export default function BasicProfile({ profileId }: ProfileProps) {
         <PlayerImage src={userImageUri} styleName={'mainProfile'} size={30} />
       )}
       <div className={styles.idContainer}>
+        <div></div>
         <div className={styles.intraId}>{intraId}</div>
         <div className={styles.buttons}>
           {user.intraId === profileId && (
