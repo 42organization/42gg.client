@@ -60,6 +60,21 @@
   }
 }
 
+.menuProfile {
+  @include imageWrap;
+  height: 4.3rem;
+  width: 4.3rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  border-radius: 50%;
+  background: rgba(163, 85, 155, 1);
+  div {
+    @include userImage(3.9rem);
+    cursor: pointer;
+    border: 0;
+  }
+}
+
 .afterGameModal {
   @include imageWrap;
   div {

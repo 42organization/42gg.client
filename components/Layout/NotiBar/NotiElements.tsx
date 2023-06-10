@@ -86,7 +86,6 @@ function ReloadNotiButton({
 
 function DeleteAllButton() {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
-
   const setError = useSetRecoilState(errorState);
   const allNotiDeleteHandler = async () => {
     try {
