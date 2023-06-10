@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { Noti } from 'types/notiTypes';
 import useReloadHandler from 'hooks/useReloadHandler';
 import useAxiosGet from 'hooks/useAxiosGet';
-import { NotiCloseButton, NotiMain } from './NotiElements';
 
 export interface NotiContextState {
   noti: Noti[];
@@ -62,8 +61,5 @@ const NotiStateContext = (props: NotiStateContextProps) => {
     </NotiProvider.Provider>
   );
 };
-
-NotiStateContext.NotiCloseButton = NotiCloseButton;
-NotiStateContext.NotiMain = NotiMain;
 
 export default NotiStateContext;

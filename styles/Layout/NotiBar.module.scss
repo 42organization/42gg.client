@@ -7,18 +7,26 @@
 
 .container {
   @include menu-noti-Bar;
-  padding: 1.15rem 0.7rem 2rem;
+  width: 20rem;
+  padding: 3rem 1.5rem 2rem 1.5rem;
   margin-left: auto;
-  background: linear-gradient(to right bottom, $g2-top, $g2-bottom);
-  button {
-    all: unset;
-    width: 1.5rem;
-    color: $dark-gray;
-    font-size: 1.5rem;
-    text-shadow: none;
-    text-align: center;
-    cursor: pointer;
+  background: rgba(244, 221, 247, 1);
+
+  .closeButtonWrapper {
+    padding-bottom: 1.4rem;
+    button {
+      color: rgba(101, 97, 102, 1);
+      all: unset;
+      width: 1.2rem;
+      margin-left: auto;
+      color: rgba(101, 97, 102, 1);
+      font-size: 1.5rem;
+      text-shadow: none;
+      text-align: center;
+      cursor: pointer;
+    }
   }
+
   .buttonWrap {
     display: flex;
     justify-content: space-between;
