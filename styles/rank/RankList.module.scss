@@ -55,7 +55,7 @@
   font-weight: 500;
   border-radius: 0.5rem 0.5rem 0 0;
   &.normal {
-    background: $rank-hotpink;
+    background: #59afdf;
   }
 }
 
@@ -63,7 +63,7 @@
   @include rankGrid;
   background: #e8d1fc;
   &.Vip {
-    background: $rank-pink3;
+    background: #d9e3ff;
   }
   &.top {
     color: $loser-red;
@@ -77,8 +77,8 @@
     background: #c9a5e6;
   }
   &.myVip {
-    border: 0.07rem solid #cb0c9f;
-    background: $rank-hotpink;
+    border: 0.07rem solid #59afdf;
+    background: #59afdf;
   }
   .intraId {
     color: black;
