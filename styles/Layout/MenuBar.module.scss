@@ -8,10 +8,10 @@
 .container {
   @include menu-noti-Bar;
   padding: 1.15rem 0.7rem;
-  // background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
   background: rgba(244, 221, 247, 1);
-  color: white;
-  text-shadow: 2px 2px 2px $dark-gray;
+  // color: white;
+  // text-shadow: 2px 2px 2px $dark-gray;
+  font-family: 'Roboto', sans-serif;
   button {
     all: unset;
     width: 1.5rem;
@@ -51,6 +51,21 @@
     div {
       margin-bottom: 1.2rem;
       cursor: pointer;
+    }
+  }
+}
+
+.menuProfileWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 0.5fr;
+  padding: 3rem 1rem 0 1rem;
+
+  .userInfoWrapper {
+    .userId {
+      font-size: 1.5rem;
+    }
+    .userLevel {
+      font-size: 0.75rem;
     }
   }
 }
