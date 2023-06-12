@@ -51,7 +51,6 @@
 
 .cancelButton {
   input {
-    @include button($btn-blue, white, 4rem, 2rem);
     font-size: $small-font;
   }
   :hover {
@@ -61,7 +60,6 @@
 
 .blockCancelButton {
   input {
-    @include button($medium-gray, white, 4rem, 2rem);
     background: linear-gradient(to bottom, $medium-gray, $dark-gray);
     font-size: $small-font;
   }

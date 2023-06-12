@@ -3,12 +3,11 @@ import { useEffect, Dispatch, SetStateAction } from 'react';
 import { useRecoilState } from 'recoil';
 import { Rank } from 'types/rankTypes';
 import { myRankState, scrollState } from 'utils/recoil/myRank';
-import { MyRank } from 'types/rankTypes';
-
+import { MyRank, ToggleMode } from 'types/rankTypes';
 interface useRankListProps {
   makePath: string;
   makePathRanker: string;
-  toggleMode: 'normal' | 'rank';
+  toggleMode: ToggleMode;
   season: number | undefined;
   setRank: Dispatch<SetStateAction<Rank | undefined>>;
   setRanker: Dispatch<SetStateAction<Rank | undefined>>;
