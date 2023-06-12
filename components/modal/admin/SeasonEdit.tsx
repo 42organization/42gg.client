@@ -35,7 +35,7 @@ const AdminSeasonEdit = ({
 
   const editHandler = async () => {
     try {
-      await instanceInManage.put(`/season/${seasonId}`, seasonInfo);
+      await instanceInManage.put(`/seasons/${seasonId}`, seasonInfo);
       setSnackBar({
         toastName: 'Season Edit',
         severity: 'success',
@@ -85,7 +85,7 @@ const AdminSeasonEdit = ({
           </div>
           <div>
             <div className={styles.bodyText}>seasonMode</div>
-            {status === 1 ? (
+            {status === 'CURRENT' ? (
               <input value={seasonInfo.seasonMode} disabled={true} />
             ) : (
               <select name='seasonMode' onChange={inputChangeHandler}>
@@ -97,7 +97,7 @@ const AdminSeasonEdit = ({
           </div>
           <div>
             <div className={styles.bodyText}>startTime</div>
-            {status === 1 ? (
+            {status === 'CURRENT' ? (
               <input
                 value={seasonInfo.startPpp.toString()}
                 type='datetime-local'
@@ -108,14 +108,14 @@ const AdminSeasonEdit = ({
                 value={seasonInfo.startTime.toString()}
                 type='datetime-local'
                 name='startTime'
-                disabled={status === 1}
+                disabled={status === 'CURRENT'}
                 onChange={inputChangeHandler}
               />
             )}
           </div>
           <div>
             <div className={styles.bodyText}>startPpp</div>
-            {status === 1 ? (
+            {status === 'CURRENT' ? (
               <input value={seasonInfo.startPpp.toString()} disabled={true} />
             ) : (
               <input
