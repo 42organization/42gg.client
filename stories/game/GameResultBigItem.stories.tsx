@@ -5,6 +5,10 @@ const meta: Meta<typeof GameResultBigItem> = {
   title: 'Game/GameResultBigItem',
   component: GameResultBigItem,
   tags: ['autodocs'],
+  argTypes: {
+    radioMode: ['NORMAL', 'RANK', 'BOTH'],
+    zIndexList: Boolean,
+  },
 };
 
 export default meta;
