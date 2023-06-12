@@ -215,7 +215,9 @@
     }
     .gameStatusEnd {
       @include gameStatus();
+      background-color: #d4a3fb;
       font-weight: 700;
+      color: #8c28d9;
       &.both {
         background-color: #ffb1d9;
         color: #b94b80;
@@ -236,7 +238,7 @@
       font-size: 1.25rem;
       font-weight: 700;
       text-align: center;
-      letter-spacing: 0.3rem;
+      // letter-spacing: 0.3rem;
     }
   }
 }

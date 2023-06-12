@@ -24,7 +24,7 @@ export default function GameResultBigScore({
     <div className={styles.bigScoreBoard}>
       {makeScoreStatus(status, time, radioMode)}
       <div className={styles.gameScore}>
-        {mode === 'NORMAL' ? 'VS' : `${scoreTeam1}:${scoreTeam2}`}
+        {mode === 'NORMAL' ? 'VS' : `${scoreTeam1} : ${scoreTeam2}`}
       </div>
     </div>
   );
@@ -49,9 +49,8 @@ function makeScoreStatus(
     case 'END':
       return (
         <div
-          className={`${styles['gameStatusEnd']} ${
-            styles[radioMode.toLowerCase()]
-          }`}
+          className={`${styles['gameStatusEnd']} 
+          ${radioMode ? styles[radioMode.toLowerCase()] : ''}`}
         >
           {getTimeAgo(time)}
         </div>
