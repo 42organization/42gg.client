@@ -7,6 +7,8 @@ import NotiItem from './NotiItem';
 import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import { instance } from 'utils/axios';
+import { Noti } from 'types/notiTypes';
+import Image from 'next/image';
 
 export default function NotiBar() {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
@@ -24,22 +26,34 @@ export default function NotiBar() {
           </button>
         </div>
         <NotiStateContext>
+          <div className={styles.buttonWrap}>
+            <DeleteAllButton />
+            <ReloadNotiButton />
+          </div>
           {NotiContext?.noti.length ? (
             <div className={styles.notiExistWrapper}>
-              <div className={styles.buttonWrap}>
-                <DeleteAllButton />
-                <ReloadNotiButton />
-              </div>
-              <div>
-                {NotiContext?.noti.map((data: Noti) => (
-                  <NotiItem key={data.id} data={data} />
-                ))}
-              </div>
+              {NotiContext?.noti.map((data: Noti) => (
+                <NotiItem key={data.id} data={data} />
+              ))}
             </div>
           ) : (
             <div className={styles.notiEmptyWrapper}>
-              <ReloadNotiButton />
-              <div>💭 새로운 알림이 없습니다!</div>
+              <div className={styles.notiEmptyText}>
+                새로운 알림이 없습니다!
+              </div>
+              <div className={styles.notiEmptyImoji}>
+                <div className={styles.threeDotImage}>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <Image
+                  src='/image/notiempty.png'
+                  width={105}
+                  height={100}
+                  alt='notiempty'
+                />
+              </div>
             </div>
           )}
         </NotiStateContext>
@@ -50,14 +64,13 @@ export default function NotiBar() {
 
 function ReloadNotiButton() {
   const NotiContext = useContext<NotiContextState | null>(NotiProvider);
+  const reloadButtonStyle = NotiContext?.spinReloadButton
+    ? styles.spinReloadButton
+    : styles.reloadButton;
 
   return (
     <button
-      className={
-        NotiContext?.spinReloadButton
-          ? styles.spinReloadButton
-          : styles.reloadButton
-      }
+      className={`${reloadButtonStyle}`}
       onClick={() => NotiContext?.setClickReloadNoti?.(true)}
     >
       &#8635;
@@ -79,7 +92,7 @@ function DeleteAllButton() {
   };
   return (
     <button className={styles.deleteButton} onClick={allNotiDeleteHandler}>
-      &#9745; 전체삭제
+      전체 삭제
     </button>
   );
 }

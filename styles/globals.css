@@ -49,6 +49,13 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Heebo';
+  src: url('../public/font/Heebo-Regular.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
