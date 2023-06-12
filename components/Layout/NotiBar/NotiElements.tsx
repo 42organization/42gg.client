@@ -85,7 +85,6 @@ export const NotiMain = () => {
   if (NotiContext?.noti.length) {
     return <NotiExist />;
   }
-  // return <NotiEmpty />;
   return <NotiExist />;
 };
 

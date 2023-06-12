@@ -69,8 +69,7 @@ function MakeImminentContent(message: string) {
     return { enemyId, enemyMessage };
   };
 
-  const enemyId = parseEnemyIdMessage(message).enemyId;
-  const enemyMessage = parseEnemyIdMessage(message).enemyMessage;
+  const { enemyId, enemyMessage } = parseEnemyIdMessage(message);
 
   const makeEnemyUsers = (enemyTeam: string[]) => {
     return enemyTeam.map((intraId: string, i: number) => (
