@@ -15,6 +15,7 @@ interface useSearchBarReturn {
   searchResult: string[];
   searchBarRef: RefObject<HTMLDivElement>;
   handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  gamehandleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 let timer: ReturnType<typeof setTimeout>;
@@ -49,10 +50,23 @@ export default function useSearchBar(): useSearchBarReturn {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      if (keyword === searchResult[0]) {
-        const intraId = searchResult[0];
-        router.push(`/users/detail?intraId=${intraId}`);
-      }
+      searchResult.map((data) => {
+        if (data === keyword) setShowDropDown(false);
+        event.currentTarget.blur();
+        router.push(`/users/detail?intraId=${keyword}`);
+      });
+    }
+  };
+
+  const gamehandleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      searchResult.map((data) => {
+        if (data === keyword) setShowDropDown(false);
+        event.currentTarget.blur();
+        router.push(`/game?intraId=${keyword}`, undefined, {
+          shallow: true,
+        });
+      });
     }
   };
 
@@ -94,5 +108,6 @@ export default function useSearchBar(): useSearchBarReturn {
     searchResult,
     searchBarRef,
     handleKeyDown,
+    gamehandleKeyDown,
   };
 }

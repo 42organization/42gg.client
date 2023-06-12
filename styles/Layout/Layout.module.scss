@@ -14,10 +14,10 @@
   max-width: 100vh;
   min-height: 100vh;
   background: linear-gradient(
-    180deg,
-    #250843 0%,
-    #301451 44.79%,
-    #300e4b 98.44%
+    to bottom,
+    rgba(37, 8, 67, 1),
+    rgba(48, 20, 81, 1),
+    rgba(48, 14, 75, 1)
   );
   background-size: cover;
   background-position: center;
@@ -29,17 +29,7 @@
   position: sticky;
   top: 83%;
   margin-left: 75%;
-  .matchingButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
-    background: white;
-    font-size: 2.3rem;
-    box-shadow: 3px 3px 10px black;
-    cursor: pointer;
-  }
+  border-radius: 3rem;
+  width: 5.7rem;
+  box-shadow: 0 0 2rem 0.5rem rgba(245, 0, 165, 1);
 }

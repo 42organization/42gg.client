@@ -3,12 +3,13 @@ import RankModeWrap from 'components/mode/modeWraps/RankModeWrap';
 import MyRank from 'components/rank/MyRank';
 import RankList from 'components/rank/RankList';
 import styles from 'styles/rank/RankList.module.scss';
+import { ToggleMode } from 'types/rankTypes';
 
 export default function Rank() {
-  const [mode, setMode] = useState<'normal' | 'rank'>('rank');
+  const [mode, setMode] = useState<ToggleMode>('RANK');
   const content = {
-    rank: { style: '', title: 'Ranking' },
-    normal: { style: styles.vip, title: 'VIP' },
+    RANK: { style: '', title: 'Ranking' },
+    NORMAL: { style: styles.vip, title: 'VIP' },
   };
 
   return (

@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { RankUser, NormalUser, Rank } from 'types/rankTypes';
+import { RankUser, NormalUser, Rank, ToggleMode } from 'types/rankTypes';
 import RankListMain from './topRank/RankListMain';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 import useRankList from 'hooks/rank/useRankList';
 
 interface RankListProps {
-  toggleMode: 'normal' | 'rank';
+  toggleMode: ToggleMode;
   season?: number;
   isMain?: boolean;
 }
@@ -16,7 +16,7 @@ export default function RankList({
   season,
   isMain = false,
 }: RankListProps) {
-  const seasonMode = 'rank';
+  const seasonMode = 'RANK';
   const [rank, setRank] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
   const pageInfo = {
@@ -27,8 +27,8 @@ export default function RankList({
 
   const makePath = (): string => {
     const modeQuery = (targetMode?: string) =>
-      targetMode !== 'normal' ? 'ranks/single' : 'exp';
-    const seasonQuery = toggleMode === 'rank' ? `&season=${season}` : '';
+      targetMode !== 'NORMAL' ? 'ranks/single' : 'exp';
+    const seasonQuery = toggleMode === 'RANK' ? `&season=${season}` : '';
     return isMain
       ? `/pingpong/${modeQuery(seasonMode)}?page=1&size=3`
       : `/pingpong/${modeQuery(toggleMode)}?page=${page}${seasonQuery}`;

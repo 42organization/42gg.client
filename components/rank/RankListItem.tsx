@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import styles from 'styles/rank/RankList.module.scss';
+import { ToggleMode } from 'types/rankTypes';
 
 interface User {
   intraId: string;
@@ -13,7 +14,7 @@ interface User {
 
 interface RankListItemProps {
   user: User;
-  toggleMode: 'normal' | 'rank';
+  toggleMode: ToggleMode;
 }
 
 export default function RankListItem({ user, toggleMode }: RankListItemProps) {
