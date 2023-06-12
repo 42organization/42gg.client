@@ -11,24 +11,16 @@ export default function MyRank(prop: MyRankProp) {
   const { toggleMode } = prop;
   const myRank = useRecoilValue(myRankState);
   const setIsScroll = useSetRecoilState(scrollState);
-  const rankType = toggleMode === 'RANK' ? '랭크' : '열정';
+  const rankType = toggleMode === 'RANK' ? 'rank' : 'vip';
   const isRanked = myRank[toggleMode] === -1 ? 'unrank' : 'RANK';
   const content = {
     unrank: {
       style: '',
-      message: [
-        `💡 나의 ${
-          rankType + (toggleMode === 'RANK' ? '가' : '이')
-        } 정해지지 않았습니다 💡`,
-      ],
+      message: [`My ${rankType}:`, ` ???`],
     },
     RANK: {
       style: styles.rank,
-      message: [
-        `🚀🚀 나의 ${rankType}`,
-        ` ${myRank[toggleMode]}위`,
-        ' 바로가기 🚀🚀',
-      ],
+      message: [`My ${rankType}:`, ` ${myRank[toggleMode]}`],
     },
   };
 

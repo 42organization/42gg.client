@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Life+Savers&display=swap');
+
 /* font-size */
 $giant-giant-font: 2.4rem;
 $giant-big-font: 2.1rem;
@@ -19,12 +21,17 @@ $pp-pink: #ffc5c8;
 $pp-blue: #471df0;
 
 $rank-red: #de1825;
+$rank-purple: #b24bf1;
+$rank-hotpink: #ff7ac2;
 $rank-pink: #ffc5c8;
+$rank-pink2: #feede3;
+$rank-pink3: #ffc0d3;
 $rank-blue: #471df0;
 
 $norm-hotpink: #dc3789;
 $norm-lightblue: #5acfe8;
 $norm-lightblue2: #1ea1c8;
+$norm-purple: #b24bf1;
 $norm-emerald: #cef1d0;
 
 $light-gray: #f0f0f0;
@@ -45,7 +52,7 @@ $winner-blue: #040eff;
 
 /* font */
 $logo-font: 'Agonostic Italic', cursive;
-$title-font: 'Reality Hyper Regular', cursive;
+$title-font: 'Lexend';
 $admin-font: 'Inter', sans-serif;
 $text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
   0 -0.1rem black;
@@ -103,13 +110,8 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin pageTitle {
-  margin-bottom: 1rem;
   color: white;
-  font-size: 2.8rem;
   font-family: $title-font;
-  text-align: center;
-  text-shadow: $text-border-black, 0.3rem 0.3rem 0 $pp-red;
-  letter-spacing: 0.1rem;
 }
 
 @mixin modalTitle {
