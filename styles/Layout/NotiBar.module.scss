@@ -3,6 +3,10 @@
 @mixin noti-reload-button {
   width: 1.7rem;
   height: 1.7rem;
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(180deg, #e5c9e8 0%, #e4c8e8 100%);
   border: 0;
   border-radius: 50%;
@@ -43,6 +47,7 @@
     padding-bottom: 1.625rem;
     .reloadButton {
       @include noti-reload-button;
+      font-size: 1.4rem;
     }
     .spinReloadButton {
       @include noti-reload-button;
