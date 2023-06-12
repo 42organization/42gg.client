@@ -22,19 +22,13 @@ function GameResultSmallItem({
 }: GameResultSmallItemProps) {
   const { mode, team1, team2, gameId } = game;
   const setClickedItemId = useSetRecoilState(clickedGameItemState);
-  console.log('type', type.toLowerCase());
-  console.log('radioMode', radioMode?.toLowerCase());
-  console.log('zIndexList', zIndexList);
 
-  // ${
-  //   radioMode ? styles[radioMode.toLowerCase()] : ''
-  // }}
   return (
     <div
       id={String(gameId)}
       className={`${styles['smallItemContainer']} 
       ${styles[type.toLowerCase()]} ${
-        radioMode !== undefined ? radioMode.toLowerCase() : ''
+        radioMode !== undefined ? styles[radioMode.toLowerCase()] : ''
       } ${zIndexList ? styles['zIndexList'] : ''}`}
       onClick={() => setClickedItemId(gameId)}
     >

@@ -42,30 +42,30 @@
 
 @mixin itemBackgroud($type) {
   @if ($type == 'SMALL') {
-    // &.light {
-    //   background: linear-gradient(0deg, #9134f7, #9134f7);
-    //   &.both {
-    //     background: #ff7fb8;
-    //   }
-    //   &.normal {
-    //     background: #5fa5ef;
-    //   }
-    //   &.rank {
-    //     background: linear-gradient(180deg, #8f2fea 0%, #8c29da 100%);
-    //   }
-    // }
-    // &.dark {
-    //   background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
-    //   &.both {
-    //     background: linear-gradient(180deg, #dd3b89 0%, #c71b82 100%);
-    //   }
-    //   &.normal {
-    //     background: linear-gradient(180deg, #3d61bc 0%, #4f45c4 92.19%);
-    //   }
-    //   &.rank {
-    //     background: linear-gradient(180deg, #631db2 0%, #6a0db2 92.19%);
-    //   }
-    // }
+    &.light {
+      background: linear-gradient(0deg, #9134f7, #9134f7);
+      &.both {
+        background: #ff7fb8;
+      }
+      &.normal {
+        background: #5fa5ef;
+      }
+      &.rank {
+        background: linear-gradient(180deg, #8f2fea 0%, #8c29da 100%);
+      }
+    }
+    &.dark {
+      background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
+      &.both {
+        background: linear-gradient(180deg, #dd3b89 0%, #c71b82 100%);
+      }
+      &.normal {
+        background: linear-gradient(180deg, #3d61bc 0%, #4f45c4 92.19%);
+      }
+      &.rank {
+        background: linear-gradient(180deg, #631db2 0%, #6a0db2 92.19%);
+      }
+    }
   } @else {
     // BIG
     background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
@@ -95,10 +95,7 @@
 
 .smallItemContainer {
   @include itemContainer('SMALL');
-  // @include itemBackgroud('SMALL');
-  &.both {
-    background: linear-gradient(0deg, #ff7fb8, #ff7fb8);
-  }
+  @include itemBackgroud('SMALL');
   &.zIndexList {
     @include zIndexItem('SMALL');
   }
