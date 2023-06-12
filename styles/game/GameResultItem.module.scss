@@ -176,54 +176,58 @@
   }
 
   // score
+  @mixin gameStatus() {
+    min-width: 2rem;
+    border-radius: 0.188rem;
+    color: white;
+    font-size: 0.35rem;
+    text-align: center;
+    padding: 0.2rem 0.3rem;
+    margin-bottom: 0.4rem;
+  }
+
+  @mixin waitAnimation($delay) {
+    @include spanUpDownAnimation(0.2rem, 0.2rem);
+    display: inline-block;
+    position: relative;
+    animation-delay: $delay;
+  }
+
   .bigScoreBoard {
     display: flex;
     flex-direction: column;
     align-items: center;
     .gameStatusLive {
-      position: relative;
-      top: -0.8rem;
-      width: 4rem;
-      padding: 0.2rem;
-      border: 0.1rem solid black;
-      background: $pp-red;
-      color: white;
-      text-align: center;
-      text-shadow: $text-border-black;
-      animation: upDown 1.3s infinite;
+      @include gameStatus;
+      background: #ff007a;
     }
     .gameStatusWait {
-      position: relative;
-      top: -0.8rem;
-      padding: 0.2rem;
-      color: white;
-      text-align: center;
-      text-shadow: $text-border-black;
-      span {
-        display: inline-block;
-        position: relative;
+      @include gameStatus;
+      .span1 {
+        @include waitAnimation(0.3s);
+      }
+      .span2 {
+        @include waitAnimation(0.5s);
+      }
+      .span3 {
+        @include waitAnimation(0.7s);
       }
     }
     .gameStatusEnd {
-      position: relative;
-      padding: 0.2rem;
-      color: white;
-      font-size: 0.4rem;
-      font-weight: 400;
-      text-align: center;
-    }
-
-    .span1 {
-      @include spanUpDownAnimation(0.2rem, 0.2rem);
-      animation-delay: 0.3s;
-    }
-    .span2 {
-      @include spanUpDownAnimation(0.2rem, 0.2rem);
-      animation-delay: 0.5s;
-    }
-    .span3 {
-      @include spanUpDownAnimation(0.2rem, 0.2rem);
-      animation-delay: 0.7s;
+      @include gameStatus();
+      font-weight: 700;
+      &.both {
+        background-color: #ffb1d9;
+        color: #b94b80;
+      }
+      &.normal {
+        background-color: #b4dbff;
+        color: #5695df;
+      }
+      &.rank {
+        background-color: #d4a3fb;
+        color: #8c28d9;
+      }
     }
 
     .gameScore {
@@ -232,6 +236,7 @@
       font-size: 1.25rem;
       font-weight: 700;
       text-align: center;
+      letter-spacing: 0.3rem;
     }
   }
 }

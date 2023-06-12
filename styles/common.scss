@@ -195,7 +195,7 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin spanUpDownAnimation($fontSize, $padding) {
-  padding: $padding;
+  padding: 0 $padding;
   font-size: $fontSize;
   animation: upDown 0.75s infinite;
 }

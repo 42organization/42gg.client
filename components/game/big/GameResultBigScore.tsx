@@ -19,7 +19,7 @@ export default function GameResultBigScore({
 }: GameResultBigScoreProps) {
   return (
     <div className={styles.bigScoreBoard}>
-      {makeScoreStatus(status, time)}
+      {makeScoreStatus(status, time, mode)}
       <div className={styles.gameScore}>
         {mode === 'NORMAL' ? 'VS' : `${scoreTeam1}:${scoreTeam2}`}
       </div>
@@ -27,20 +27,26 @@ export default function GameResultBigScore({
   );
 }
 
-function makeScoreStatus(status: GameStatus, time: string) {
+function makeScoreStatus(status: GameStatus, time: string, mode: GameMode) {
   switch (status) {
     case 'LIVE':
-      return <div className={styles.gameStatusEnd}>Live</div>;
+      return <div className={styles.gameStatusLive}>Live</div>;
     case 'WAIT':
       return (
-        <div className={styles.gameStatusEnd}>
+        <div className={styles.gameStatusWait}>
           <span className={styles.span1}>o</span>
           <span className={styles.span2}>o</span>
           <span className={styles.span3}>o</span>
         </div>
       );
     case 'END':
-      return <div className={styles.gameStatusEnd}>{getTimeAgo(time)}</div>;
+      return (
+        <div
+          className={`${styles['gameStatusEnd']} ${styles[mode.toLowerCase()]}`}
+        >
+          {getTimeAgo(time)}
+        </div>
+      );
     default:
       return null;
   }
