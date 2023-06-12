@@ -17,24 +17,23 @@ export default function NotiItem({ data }: NotiItemProps) {
     [key: string]: { [key: string]: string | JSX.Element | undefined };
   } = {
     IMMINENT: {
-      title: '경기 준비',
+      style: styles.imminent,
       content: MakeImminentContent(message),
     },
     ANNOUNCE: {
-      title: '공 지',
+      style: styles.announcement,
       content: MakeAnnounceContent(message),
     },
     MATCHED: {
-      title: '매칭 성사',
+      style: styles.matched,
       content: message,
     },
   };
 
   return (
     <div className={isChecked ? `${styles.readWrap}` : `${styles.unreadWrap}`}>
-      <span className={styles.title}>{noti[type].title}</span>
-      <div className={styles.content}>
-        {message ? noti[type].content : '알림을 불러올 수 없습니다.'}
+      <div className={`${styles.content} ${noti[type].style}`}>
+        {noti[type].content}
       </div>
       <div className={styles.date}>{date}</div>
     </div>

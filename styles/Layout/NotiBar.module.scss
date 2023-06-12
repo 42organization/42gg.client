@@ -103,6 +103,11 @@
 }
 
 .notiExistWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 1.625rem;
 }
 
 @keyframes spin {
