@@ -5,24 +5,35 @@
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: stretch;
   align-items: stretch;
-  margin: 0.5rem 0.6rem 0 0.6rem;
+  margin: 0 1.25rem;
+  color: #ffffff;
+  &.zIndexListButton {
+    margin: 0 1.916rem;
+  }
   input[type='radio'] {
     position: absolute;
     opacity: 0;
   }
   :checked + .modeButton {
-    background: #f9f6ff;
+    &.both {
+      background: #f82f9a;
+    }
+    &.normal {
+      background: #3270cd;
+    }
+    &.rank {
+      background: #a06cbf;
+    }
   }
   .modeButton {
     display: flex;
+    box-sizing: border-box;
     justify-content: center;
     align-items: center;
-    height: 2rem;
-    background: #e4caf4;
-    border: solid 1px $dark-gray;
-    border-radius: $small-radius;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    height: 2.063rem;
+    margin: 0 0.125rem;
+    background: #0e0518;
+    border-radius: 0.625rem 0.625rem 0 0;
     font-size: 0.9rem;
     letter-spacing: 2px;
     text-align: center;

@@ -36,6 +36,8 @@ export default function GameModeWrap({
     setRadioMode(e.target.value as SeasonMode);
   };
 
+  const isGamePage = useRouter().pathname === '/game';
+
   return (
     <div>
       <div className={styles.gameModeWrap}>
@@ -48,7 +50,11 @@ export default function GameModeWrap({
           />
         )}
       </div>
-      <ModeRadiobox mode={radioMode} onChange={modeChangeHandler} />
+      <ModeRadiobox
+        mode={radioMode}
+        onChange={modeChangeHandler}
+        zIndexList={!isGamePage}
+      />
       {React.cloneElement(children as React.ReactElement, {
         mode: radioMode,
         season,

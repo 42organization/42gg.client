@@ -45,7 +45,7 @@ $winner-blue: #040eff;
 
 /* font */
 $logo-font: 'Agonostic Italic', cursive;
-$title-font: 'Reality Hyper Regular', cursive;
+$title-font: 'Lexend';
 $admin-font: 'Inter', sans-serif;
 $text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
   0 -0.1rem black;
@@ -103,13 +103,10 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin pageTitle {
-  margin-bottom: 1rem;
   color: white;
-  font-size: 2.8rem;
   font-family: $title-font;
-  text-align: center;
-  text-shadow: $text-border-black, 0.3rem 0.3rem 0 $pp-red;
-  letter-spacing: 0.1rem;
+  font-size: 1.625rem;
+  margin-bottom: 1rem;
 }
 
 @mixin modalTitle {
@@ -195,7 +192,7 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin spanUpDownAnimation($fontSize, $padding) {
-  padding: $padding;
+  padding: 0 $padding;
   font-size: $fontSize;
   animation: upDown 0.75s infinite;
 }

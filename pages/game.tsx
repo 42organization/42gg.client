@@ -19,10 +19,7 @@ export default function Game() {
 
   return (
     <div className={styles.pageWrap}>
-      <h1
-        className={`${styles.title} ${styles[radioMode.toLowerCase()]}`}
-        onClick={clickTitleHandler}
-      >
+      <h1 className={`${styles.title}`} onClick={clickTitleHandler}>
         Record
       </h1>
       <GameModeWrap
