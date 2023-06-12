@@ -29,8 +29,8 @@ export default function RankListItem({
     evenOdd: index % 2 === 0 ? styles.even : styles.odd,
     topStandard: rank < 4 ? styles.top : styles.standard,
     myRankItem: {
-      rank: intraId === myIntraId && level === null ? styles.myRanking : '',
-      normal: intraId === myIntraId && level !== null ? styles.myVip : '',
+      RANK: intraId === myIntraId && level === null ? styles.myRanking : '',
+      NORMAL: intraId === myIntraId && level !== null ? styles.myVip : '',
     },
   };
 
