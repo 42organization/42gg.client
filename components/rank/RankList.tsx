@@ -53,7 +53,7 @@ export default function RankList(prop: RankListProps) {
     setPage: setPage,
     pageInfo: pageInfo,
   });
-  
+  console.log(toggleMode);
   if (isMain) {
     return <RankListMain rank={ranker} isMain={true} />;
   }
