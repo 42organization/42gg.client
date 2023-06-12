@@ -30,10 +30,10 @@ export default function GameResultBigScore({
 function makeScoreStatus(status: GameStatus, time: string) {
   switch (status) {
     case 'LIVE':
-      return <div className={styles.gameStatusLive}>Live</div>;
+      return <div className={styles.gameStatusEnd}>Live</div>;
     case 'WAIT':
       return (
-        <div className={styles.gameStatusWait}>
+        <div className={styles.gameStatusEnd}>
           <span className={styles.span1}>o</span>
           <span className={styles.span2}>o</span>
           <span className={styles.span3}>o</span>
