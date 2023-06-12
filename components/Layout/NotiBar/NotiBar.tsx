@@ -30,33 +30,49 @@ export default function NotiBar() {
             <DeleteAllButton />
             <ReloadNotiButton />
           </div>
-          {NotiContext?.noti.length ? (
-            <div className={styles.notiExistWrapper}>
-              {NotiContext?.noti.map((data: Noti) => (
-                <NotiItem key={data.id} data={data} />
-              ))}
-            </div>
-          ) : (
-            <div className={styles.notiEmptyWrapper}>
-              <div className={styles.notiEmptyText}>
-                새로운 알림이 없습니다!
-              </div>
-              <div className={styles.notiEmptyImoji}>
-                <div className={styles.threeDotImage}>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                </div>
-                <Image
-                  src='/image/notiempty.png'
-                  width={105}
-                  height={100}
-                  alt='notiempty'
-                />
-              </div>
-            </div>
-          )}
+          {NotiContext?.noti.length ? <NotiExist /> : <NotiEmpty />}
         </NotiStateContext>
+      </div>
+    </div>
+  );
+}
+
+function NotiExist() {
+  const NotiContext = useContext<NotiContextState | null>(NotiProvider);
+
+  return (
+    <div className={styles.notiExistWrapper}>
+      {NotiContext?.noti.map((data: Noti) =>
+        data.message ? (
+          <NotiItem key={data.id} data={data} />
+        ) : (
+          <NullNoti
+            key={data.id}
+            createdAt={data.createdAt}
+            isChecked={data.isChecked}
+          />
+        )
+      )}
+    </div>
+  );
+}
+
+function NotiEmpty() {
+  return (
+    <div className={styles.notiEmptyWrapper}>
+      <div className={styles.notiEmptyText}>새로운 알림이 없습니다!</div>
+      <div className={styles.notiEmptyImoji}>
+        <div className={styles.threeDotImage}>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <Image
+          src='/image/notiempty.png'
+          width={105}
+          height={100}
+          alt='notiempty'
+        />
       </div>
     </div>
   );
@@ -94,5 +110,22 @@ function DeleteAllButton() {
     <button className={styles.deleteButton} onClick={allNotiDeleteHandler}>
       전체 삭제
     </button>
+  );
+}
+
+interface NullNotiProps {
+  createdAt: string;
+  isChecked: boolean;
+}
+
+function NullNoti({ createdAt, isChecked }: NullNotiProps) {
+  const date = createdAt.slice(5).replace('T', ' ');
+
+  return (
+    <div className={isChecked ? `${styles.readWrap}` : `${styles.unreadWrap}`}>
+      <span className={styles.title}>실패</span>
+      <div className={styles.content}>알림을 불러올 수 없습니다!</div>
+      <div className={styles.date}>{date}</div>
+    </div>
   );
 }

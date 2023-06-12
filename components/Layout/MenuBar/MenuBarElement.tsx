@@ -103,7 +103,16 @@ export const MainMenu = () => {
         itemName='CurrentMatch'
         onClick={HeaderState?.resetOpenMenuBarState}
       />
-      <MenuItem itemName='Manual' onClick={() => getAnnouncementHandler()} />
+      <MenuItem
+        itemName='Announcement'
+        onClick={() => getAnnouncementHandler()}
+      />
+      <MenuItem
+        itemName='Manual'
+        onClick={() =>
+          setModal({ modalName: 'MATCH-MANUAL', manual: { radioMode: 'BOTH' } })
+        }
+      />
       <MenuItem
         itemName='Report'
         onClick={() => setModal({ modalName: 'MENU-REPORT' })}
