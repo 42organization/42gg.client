@@ -9,11 +9,7 @@
 .title {
   @include pageTitle;
   width: fit-content;
-  margin-inline: auto;
   cursor: pointer;
-  &.normal {
-    text-shadow: $text-border-black, 0.3rem 0.3rem 0 $norm-lightblue2;
-  }
 }
 
 .gameResultWrapper {
