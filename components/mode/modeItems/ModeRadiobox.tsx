@@ -32,7 +32,9 @@ export default function ModeRadiobox({
             onChange={onChange}
             checked={mode === type}
           />
-          <div className={styles.modeButton}>{name}</div>
+          <div className={`${styles.modeButton} ${styles[mode.toLowerCase()]}`}>
+            {name}
+          </div>
         </label>
       ))}
     </div>
