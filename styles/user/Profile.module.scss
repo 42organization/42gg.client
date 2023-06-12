@@ -44,26 +44,23 @@
 .idContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 0.5rem;
+  align-items: center;
 }
 
 .intraId {
   color: $white1;
   font-size: $giant-font;
   font-weight: 700;
-  margin-top: 0.5rem;
   text-align: center;
 }
 
 .buttons {
-  @include select-buttons(3rem, 2rem);
-  .positive {
-    input {
-      font-size: $big-font;
-      font-weight: 600;
-      background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
-      box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.2);
-    }
-  }
+  @include select-buttons(3rem, 2.3rem);
+}
+
+.modalbuttons {
+  @include select-buttons(9rem);
 }
 
 .exp {
@@ -119,7 +116,7 @@
 }
 
 .editModalTitle {
-  color: $pp-blue;
+  color: $pp-gray;
 }
 
 .phrase {
@@ -128,7 +125,7 @@
 
 .editType {
   margin: 0 0 0.3rem 0.5rem;
-  color: $pp-blue;
+  color: $pp-gray;
   font-size: $medium-font;
 }
 
@@ -151,8 +148,8 @@
 }
 
 .snsClicked {
-  color: $pp-blue;
-  border: solid 1px $pp-blue;
+  color: $pp-gray;
+  border: solid 1px $pp-gray;
 }
 
 .racketTypeWrap {
@@ -168,8 +165,8 @@
       opacity: 0;
     }
     :checked + .radioButton {
-      border: solid 1px $pp-blue;
-      color: $pp-blue;
+      border: solid 1px $pp-gray;
+      color: $pp-gray;
     }
     .radioButton {
       display: flex;
@@ -194,9 +191,8 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    border: 1px solid $pp-blue;
     border-radius: $small-radius;
-    background: $white1;
+    background: white;
     overflow: hidden;
     textarea {
       resize: none;

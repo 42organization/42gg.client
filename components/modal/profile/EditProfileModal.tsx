@@ -127,7 +127,7 @@ export default function EditProfileModal() {
           </div>
         </div>
       </div>
-      <div className={styles.buttons}>
+      <div className={styles.modalbuttons}>
         <div className={styles.negative}>
           <input type='button' onClick={cancelEditHandler} value='취소' />
         </div>
