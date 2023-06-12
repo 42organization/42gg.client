@@ -33,9 +33,7 @@ export default function NotiItem({ data }: NotiItemProps) {
   return (
     <div className={isChecked ? `${styles.readWrap}` : `${styles.unreadWrap}`}>
       <span className={styles.title}>{noti[type].title}</span>
-      <div className={styles.content}>
-        {message ? noti[type].content : '알림을 불러올 수 없습니다.'}
-      </div>
+      <div className={styles.content}>{noti[type].content}</div>
       <div className={styles.date}>{date}</div>
     </div>
   );

@@ -18,6 +18,23 @@ export const NotiCloseButton = () => {
   );
 };
 
+interface NullNotiProps {
+  createdAt: string;
+  isChecked: boolean;
+}
+
+const NullNoti = ({ createdAt, isChecked }: NullNotiProps) => {
+  const date = createdAt.slice(5).replace('T', ' ');
+
+  return (
+    <div className={isChecked ? `${styles.readWrap}` : `${styles.unreadWrap}`}>
+      <span className={styles.title}>실패</span>
+      <div className={styles.content}>알림을 불러올 수 없습니다!</div>
+      <div className={styles.date}>{date}</div>
+    </div>
+  );
+};
+
 export const NotiExist = () => {
   const NotiContext = useContext<NotiContextState | null>(NotiProvider);
 
@@ -31,9 +48,17 @@ export const NotiExist = () => {
         />
       </div>
       <div>
-        {NotiContext?.noti.map((data: Noti) => (
-          <NotiItem key={data.id} data={data} />
-        ))}
+        {NotiContext?.noti.map((data: Noti) =>
+          data.message ? (
+            <NotiItem key={data.id} data={data} />
+          ) : (
+            <NullNoti
+              key={data.id}
+              createdAt={data.createdAt}
+              isChecked={data.isChecked}
+            />
+          )
+        )}
       </div>
     </>
   );
@@ -60,7 +85,8 @@ export const NotiMain = () => {
   if (NotiContext?.noti.length) {
     return <NotiExist />;
   }
-  return <NotiEmpty />;
+  // return <NotiEmpty />;
+  return <NotiExist />;
 };
 
 interface ReloadNotiButtonProps {
