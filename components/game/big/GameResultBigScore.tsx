@@ -1,6 +1,5 @@
 import { getTimeAgo } from 'utils/handleTime';
 import { GameStatus, GameMode } from 'types/gameTypes';
-import { SeasonMode } from 'types/mainType';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultBigScoreProps {
@@ -9,7 +8,6 @@ interface GameResultBigScoreProps {
   time: string;
   scoreTeam1?: number;
   scoreTeam2?: number;
-  radioMode?: SeasonMode;
 }
 
 export default function GameResultBigScore({
@@ -18,11 +16,10 @@ export default function GameResultBigScore({
   time,
   scoreTeam1,
   scoreTeam2,
-  radioMode,
 }: GameResultBigScoreProps) {
   return (
     <div className={styles.bigScoreBoard}>
-      {makeScoreStatus(status, time, radioMode)}
+      {makeScoreStatus(status, time)}
       <div className={styles.gameScore}>
         {mode === 'NORMAL' ? 'VS' : `${scoreTeam1} : ${scoreTeam2}`}
       </div>
@@ -30,11 +27,7 @@ export default function GameResultBigScore({
   );
 }
 
-function makeScoreStatus(
-  status: GameStatus,
-  time: string,
-  radioMode: SeasonMode
-) {
+function makeScoreStatus(status: GameStatus, time: string) {
   switch (status) {
     case 'LIVE':
       return <div className={styles.gameStatusLive}>Live</div>;
@@ -47,14 +40,7 @@ function makeScoreStatus(
         </div>
       );
     case 'END':
-      return (
-        <div
-          className={`${styles['gameStatusEnd']} 
-          ${radioMode ? styles[radioMode.toLowerCase()] : ''}`}
-        >
-          {getTimeAgo(time)}
-        </div>
-      );
+      return <div className={styles.gameStatusEnd}>{getTimeAgo(time)}</div>;
     default:
       return null;
   }

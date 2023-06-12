@@ -4,14 +4,9 @@ import styles from 'styles/mode/ModeRadiobox.module.scss';
 interface ModeRadioboxProps {
   mode: SeasonMode;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  zIndexList?: boolean;
 }
 
-export default function ModeRadiobox({
-  mode,
-  onChange,
-  zIndexList,
-}: ModeRadioboxProps) {
+export default function ModeRadiobox({ mode, onChange }: ModeRadioboxProps) {
   const modes: { type: SeasonMode; name: string }[] = [
     { type: 'BOTH', name: '전체' },
     { type: 'NORMAL', name: '일반' },
@@ -19,10 +14,7 @@ export default function ModeRadiobox({
   ];
 
   return (
-    <div
-      className={`${styles.modeButtons} 
-      ${zIndexList && styles['zIndexListButton']}`}
-    >
+    <div className={styles.modeButtons}>
       {modes.map(({ type, name }) => (
         <label key={type} htmlFor={type}>
           <input
@@ -32,9 +24,7 @@ export default function ModeRadiobox({
             onChange={onChange}
             checked={mode === type}
           />
-          <div className={`${styles.modeButton} ${styles[mode.toLowerCase()]}`}>
-            {name}
-          </div>
+          <div className={styles.modeButton}>{name}</div>
         </label>
       ))}
     </div>

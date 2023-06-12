@@ -6,16 +6,6 @@
   align-items: center;
 }
 
-@mixin gameResultImage($size) {
-  position: relative;
-  width: $size;
-  height: $size;
-  border-radius: 50%;
-  img {
-    border-radius: 50%;
-  }
-}
-
 .header {
   @include imageWrap;
   div {
@@ -27,15 +17,24 @@
 .gameResultBig {
   @include imageWrap;
   div {
-    @include gameResultImage(2.734rem);
+    @include userImage(4.5rem);
     cursor: pointer;
   }
 }
 
-.gameResultSmall {
+.gameResultSmallLeft {
   @include imageWrap;
   div {
-    @include gameResultImage(1.853rem);
+    @include userImage(2rem);
+    margin-right: 0.7rem;
+  }
+}
+
+.gameResultSmallRight {
+  @include imageWrap;
+  div {
+    @include userImage(2rem);
+    margin-left: 0.7rem;
   }
 }
 

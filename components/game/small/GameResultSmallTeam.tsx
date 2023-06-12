@@ -12,18 +12,22 @@ export default function GameResultSmallTeam({
   position,
 }: GameResultSmallTeamProps) {
   return (
-    <div className={`${styles['smallTeam']} ${styles[position]}`}>
-      {team.players.map((player, index) => (
-        <PlayerImage
-          key={index}
-          src={player.userImageUri}
-          styleName={'gameResultSmall'}
-          size={20}
-        />
-      ))}
-      {team.players.map((player) => (
-        <span key={player.intraId}>{player.intraId}</span>
-      ))}
+    <div className={styles.smallTeam}>
+      <div className={styles[position]}>
+        {team.players.map((player, index) => (
+          <PlayerImage
+            key={index}
+            src={player.userImageUri}
+            styleName={'gameResultSmall' + position}
+            size={20}
+          />
+        ))}
+        <span>
+          {team.players.map((player) => (
+            <div key={player.intraId}>{player.intraId}</div>
+          ))}
+        </span>
+      </div>
     </div>
   );
 }
