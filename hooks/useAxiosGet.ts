@@ -54,7 +54,7 @@ const useAxiosGet = ({
       } else if (type === 'console') {
         console.log(err);
       } else if (type === 'setError') {
-        //    setError(err);
+        setError(err);
       }
     }
   };
