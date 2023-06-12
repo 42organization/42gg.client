@@ -11,7 +11,6 @@ export default function Rank() {
     RANK: { style: '', title: 'Ranking' },
     NORMAL: { style: styles.vip, title: 'VIP' },
   };
-
   return (
     <div className={styles.pageWrap}>
       <h1 className={`${styles.title} ${content[mode].style}`}>

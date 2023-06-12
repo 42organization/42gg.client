@@ -12,14 +12,9 @@ interface RankModeWrapProps {
 }
 
 export default function RankModeWrap({ children, setMode }: RankModeWrapProps) {
-  const { seasonList, season, seasonDropDownHandler, seasonMode } =
-    useSeasonDropDown();
-  const { onToggle, Mode } = useModeToggle(
-    seasonMode === 'NORMAL' ? 'NORMAL' : 'RANK'
-  );
-  const [showSeasons, setShowSeasons] = useState<boolean>(
-    seasonMode !== 'NORMAL'
-  );
+  const { seasonList, season, seasonDropDownHandler } = useSeasonDropDown();
+  const { onToggle, Mode } = useModeToggle('RANK');
+  const [showSeasons, setShowSeasons] = useState<boolean>(true);
 
   useEffect(() => {
     setShowSeasons(Mode === 'RANK');

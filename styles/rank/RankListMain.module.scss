@@ -42,13 +42,13 @@
   position: relative;
   height: 18rem;
   border-radius: 65px;
-  z-index: 1;
   background: linear-gradient(
     179.91deg,
     #f8e118 10.95%,
     #fe7a00 34.38%,
     #884609 66.08%,
-    #490142 81.99%
+    #490142 91%,
+    rgba(49, 18, 79, 0) 85.85%
   );
   &.normal {
     background: linear-gradient(

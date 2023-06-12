@@ -16,17 +16,17 @@ export default function RankListItemMain({ user }: RankListItemMainProps) {
   return (
     <div
       className={`${styles.mainData} ${
-        toggleMode === 'NORAML' && styles.normal
+        toggleMode === 'NORMAL' && styles.normal
       }`}
     >
       <div
         className={`${rank === 1 ? styles.leaf : ''} ${
-          toggleMode === 'NORAML' && styles.normal
+          toggleMode === 'NORMAL' && styles.normal
         }`}
       >
         <div
           className={`${rank === 1 ? styles.leaf1 : ''} ${
-            toggleMode === 'NORAML' && styles.normal
+            toggleMode === 'NORMAL' && styles.normal
           }`}
         >
           <div className={`${styles.intraId} ${rank === 1 && styles.first}`}>

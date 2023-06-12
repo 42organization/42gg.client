@@ -29,6 +29,7 @@ export default function RankListFrame({
     pageInfo.setPage(pages);
     router.push('/rank');
   };
+
   return (
     <>
       <div className={styles.container}>

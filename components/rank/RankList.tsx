@@ -4,6 +4,7 @@ import RankListMain from './topRank/RankListMain';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 import useRankList from 'hooks/rank/useRankList';
+import { ToggleMode } from 'types/rankTypes';
 
 interface RankListProps {
   toggleMode: ToggleMode;
@@ -12,12 +13,8 @@ interface RankListProps {
 }
 export const ToggleModeContext = createContext<'RANK' | 'NORMAL'>('RANK');
 
-export default function RankList({
-  toggleMode,
-  season,
-  isMain = false,
-}: RankListProps) {
-  const seasonMode = 'RANK';
+export default function RankList(prop: RankListProps) {
+  const { toggleMode, season, isMain } = prop;
   const [rank, setRank] = useState<Rank>();
   const [ranker, setRanker] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
@@ -56,7 +53,7 @@ export default function RankList({
     setPage: setPage,
     pageInfo: pageInfo,
   });
-
+  console.log(toggleMode);
   if (isMain) {
     return <RankListMain rank={ranker} isMain={true} />;
   }
