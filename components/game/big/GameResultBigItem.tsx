@@ -9,7 +9,6 @@ import { SeasonMode } from 'types/mainType';
 
 interface GameResultBigItemProps {
   game: Game;
-  // type: 'LIGHT' | 'DARK';
   radioMode?: SeasonMode;
   zIndexList: boolean;
 }
@@ -37,6 +36,7 @@ function GameResultBigItem({
         time={time}
         scoreTeam1={team1.score}
         scoreTeam2={team2.score}
+        radioMode={radioMode}
       />
       <GameResultBigTeam team={team2} zIndexList={zIndexList} />
     </div>
