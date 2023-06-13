@@ -56,7 +56,9 @@
 }
 
 .buttons {
-  @include select-buttons(3rem, 2.3rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modalbuttons {
@@ -120,7 +122,10 @@
 }
 
 .phrase {
-  @include modal-phrase;
+  font-size: $big-font;
+  text-align: left;
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
 }
 
 .editType {

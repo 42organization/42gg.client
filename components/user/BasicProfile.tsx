@@ -4,7 +4,7 @@ import { modalState } from 'utils/recoil/modal';
 import useBasicProfile from 'hooks/users/useBasicProfile';
 import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/user/Profile.module.scss';
-
+import { AiOutlineEdit } from 'react-icons/ai';
 interface ProfileProps {
   profileId: string;
 }
@@ -48,9 +48,7 @@ export default function BasicProfile({ profileId }: ProfileProps) {
         <div className={styles.intraId}>{intraId}</div>
         <div className={styles.buttons}>
           {user.intraId === profileId && (
-            <div className={styles.positive}>
-              <input type='button' onClick={startEditHandler} value='edit' />
-            </div>
+            <AiOutlineEdit onClick={startEditHandler} size='30' />
           )}
         </div>
       </div>

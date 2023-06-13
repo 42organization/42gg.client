@@ -168,8 +168,11 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
       @include button($btn-purple, white, $width, $height);
     }
     :hover {
-      background: $btn-purple;
-      background: $dark-blue;
+      background: linear-gradient(
+        180deg,
+        #ac3ce0 0%,
+        rgba(65, 4, 94, 0.72) 100%
+      );
     }
   }
 }
