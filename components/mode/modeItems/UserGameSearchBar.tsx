@@ -38,6 +38,7 @@ export default function UserGameSearchBar() {
 
   return (
     <div id={styles.game} className={styles.searchBar} ref={searchBarRef}>
+      <GoSearch />
       <input
         type='text'
         onChange={keywordHandler}
@@ -48,7 +49,7 @@ export default function UserGameSearchBar() {
         value={keyword}
       />
       <div className={styles.icons}>
-        {keyword ? (
+        {keyword && (
           <span
             className={styles.reset}
             onClick={() => {
@@ -56,10 +57,6 @@ export default function UserGameSearchBar() {
             }}
           >
             <IoIosCloseCircle />
-          </span>
-        ) : (
-          <span>
-            <GoSearch />
           </span>
         )}
       </div>
