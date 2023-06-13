@@ -22,30 +22,8 @@
   }
 }
 
-@media screen and (min-width: 386px) and (max-width: 635px) {
+@media screen and (min-width: 386px) {
   $ratio: 1;
-  .message,
-  .icon {
-    font-size: 0.875rem * $ratio;
-  }
-  .cancelButton {
-    width: 6.5rem * $ratio;
-    height: 1.5rem * $ratio;
-    font-size: 0.75rem * $ratio;
-  }
-  .span1,
-  .span2,
-  .span3 {
-    @include spanUpDownAnimation(0.875rem * $ratio, 0.1rem);
-  }
-  .enemyTeam,
-  .dropdownButton {
-    font-size: 0.7rem * $ratio;
-  }
-}
-
-@media screen and (min-width: 636px) {
-  $ratio: 1.15;
   .message,
   .icon {
     font-size: 0.875rem * $ratio;

@@ -1,19 +1,5 @@
 @import 'styles/common.scss';
 
-@media screen and (max-width: 635px) {
-  .gridContainer,
-  .currentMatch {
-    width: 85vw;
-  }
-}
-
-@media screen and (min-width: 636px) {
-  .gridContainer,
-  .currentMatch {
-    width: 90vw;
-  }
-}
-
 .mainPageProfile {
   width: 100%;
   height: max-content;
@@ -24,6 +10,7 @@
   font-family: 'Roboto', sans-serif;
 
   .currentMatch {
+    width: 100%;
     max-width: 28rem;
     display: flex;
     flex-direction: column;
@@ -33,6 +20,7 @@
   }
 
   .gridContainer {
+    width: 100%;
     max-width: 28rem;
     flex-shrink: 0;
     display: grid;
