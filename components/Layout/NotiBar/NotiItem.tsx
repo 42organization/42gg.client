@@ -45,7 +45,7 @@ export default function NotiItem({ data }: NotiItemProps) {
       </div>
       <div className={styles.date}>
         {date}&nbsp;
-        {isChecked ? <BsCheckLg /> : <></>}
+        {isChecked ? <BsCheckLg size='9' /> : <></>}
       </div>
     </div>
   );
