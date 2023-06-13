@@ -214,6 +214,16 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   }
 }
 
+@mixin userRankImage($size) {
+  position: relative;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  img {
+    border-radius: 50%;
+  }
+}
+
 @keyframes upDown {
   0%,
   40%,

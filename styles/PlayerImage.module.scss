@@ -63,14 +63,14 @@
 .ranktropybig {
   @include imageWrap;
   div {
-    @include userImage(6.5rem);
+    @include userRankImage(6.5rem);
     cursor: pointer;
   }
 }
 .ranktropy {
   @include imageWrap;
   div {
-    @include userImage(4.5rem);
+    @include userRankImage(4.5rem);
     cursor: pointer;
   }
 }
@@ -78,12 +78,12 @@
 @media (max-width: 467px) {
   .ranktropy {
     div {
-      @include userImage(4rem);
+      @include userRankImage(4rem);
     }
   }
   .ranktropybig {
     div {
-      @include userImage(5rem);
+      @include userRankImage(5rem);
     }
   }
 }

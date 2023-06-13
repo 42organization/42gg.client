@@ -275,7 +275,7 @@
   position: relative;
   top: -2.5rem;
   height: 7.5rem;
-  color: black;
+  color: #5b0539;
   font-weight: 700;
   text-align: center;
   span {
@@ -283,6 +283,10 @@
   }
   &.first {
     top: -3rem;
+    color: #640000;
+  }
+  &.last {
+    color: #001b44;
   }
 }
 

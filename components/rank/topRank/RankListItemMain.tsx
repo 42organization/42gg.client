@@ -29,7 +29,11 @@ export default function RankListItemMain({ user }: RankListItemMainProps) {
             toggleMode === 'NORMAL' && styles.normal
           }`}
         >
-          <div className={`${styles.intraId} ${rank === 1 && styles.first}`}>
+          <div
+            className={`${styles.intraId} ${rank === 1 && styles.first} ${
+              rank === 3 && styles.last
+            }`}
+          >
             <Link href={`users/detail?intraId=${intraId}`}>
               <PlayerImage
                 src={userImageUri}
