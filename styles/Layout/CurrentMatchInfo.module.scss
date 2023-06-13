@@ -170,7 +170,7 @@ $message-color: rgba(39, 10, 70, 1);
 
 @keyframes dropdown {
   0% {
-    transform: translateY(-70%);
+    transform: translateY(-4rem);
   }
   100% {
     transform: translateY(0);
@@ -182,7 +182,7 @@ $message-color: rgba(39, 10, 70, 1);
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-70%);
+    transform: translateY(-4rem);
   }
 }
 
@@ -207,6 +207,7 @@ $message-color: rgba(39, 10, 70, 1);
     animation: dropup 0.4s ease;
     animation-fill-mode: forwards;
   }
+
   .dropdown {
     width: 100%;
     height: fit-content;
@@ -223,5 +224,11 @@ $message-color: rgba(39, 10, 70, 1);
     border-bottom-right-radius: 0.5rem;
     border: 0;
     padding: 0;
+    &.dropup {
+      animation: dropdown 0.4s ease;
+    }
+    &.dropdown {
+      animation: dropup 0.4s ease;
+    }
   }
 }

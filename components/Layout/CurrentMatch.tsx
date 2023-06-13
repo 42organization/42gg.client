@@ -34,14 +34,12 @@ export default function CurrentMatch() {
     }
   }, [showDropdown]);
 
+  const btnStyle = showDropdown ? styles.dropup : styles.dropdown;
+
   return (
     <div className={styles.currentMatchBanner}>
       <div className={styles.currentMatchMain}>
-        <CurrentMatchContent
-          currentMatch={currentMatchList[0]}
-          index={0}
-          setShowDropdown={setShowDropdown}
-        />
+        <CurrentMatchContent currentMatch={currentMatchList[0]} index={0} />
       </div>
       <div className={`${styles.dropdownWrapper} ${dropdownStyle}`}>
         {dropdownAnimation && (
@@ -51,16 +49,14 @@ export default function CurrentMatch() {
                 key={index}
                 currentMatch={currentMatch}
                 index={index + 2}
-                setShowDropdown={setShowDropdown}
               />
             ))}
           </div>
         )}
-        {!dropdownAnimation && currentMatchList.length > 1 ? (
+        {currentMatchList.length > 1 ? (
           <button
-            className={styles.dropdownButton}
-            disabled={currentMatchList.length === 1 ? true : false}
-            onMouseDown={() => setShowDropdown(true)}
+            className={`${styles.dropdownButton} ${btnStyle}`}
+            onMouseDown={() => setShowDropdown(!showDropdown)}
           >
             <TbMenu />
           </button>
@@ -75,11 +71,10 @@ export default function CurrentMatch() {
 interface CurrentMatchContentProp {
   currentMatch: CurrentMatchListElement;
   index: number;
-  setShowDropdown: Dispatch<SetStateAction<boolean>>;
 }
 
 function CurrentMatchContent(prop: CurrentMatchContentProp) {
-  const { currentMatch, index, setShowDropdown } = prop;
+  const { currentMatch, index } = prop;
   const { startTime, isMatched, enemyTeam, isImminent } = currentMatch;
 
   const currentMatchList =
@@ -133,15 +128,6 @@ function CurrentMatchContent(prop: CurrentMatchContentProp) {
             : '경기 예약 취소'}
         </button>
       </div>
-      {currentMatchList.length > 1 && index === currentMatchList.length && (
-        <button
-          className={styles.dropdownButton}
-          disabled={currentMatchList.length === 1 ? true : false}
-          onClick={() => setShowDropdown(false)}
-        >
-          <TbMenu />
-        </button>
-      )}
     </>
   );
 }
