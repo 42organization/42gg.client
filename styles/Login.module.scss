@@ -5,29 +5,43 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-image: url('../public/image/login_background_img.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   height: 100vh;
   .innerContainer {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     align-items: center;
     height: 50vh;
-    padding-bottom: 5rem;
-  }
+    .logoContainer {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 18rem;
+      height: 7rem;
+    }
+    .logo1 {
+      position: absolute;
+      width: 12rem;
+      min-width: 110px;
+      height: 1.8rem;
+      min-height: 45px;
+    }
 
-  .title {
-    @include logoTitle(0.4rem);
-    font-size: 5rem;
-  }
+    .logo2 {
+      position: absolute;
+      width: 20rem;
+      height: 7.5rem;
+      margin-top: 7rem;
+    }
 
-  .buttons {
-    @include select-buttons(13rem, 3.5rem);
-    .positive {
-      input {
-        font-size: $big-font;
-        font-weight: 500;
-        box-shadow: 0.1rem 0.1rem 0.3rem $pp-blue;
-      }
+    .buttonContainer {
+      margin-top: 7rem;
     }
   }
 }

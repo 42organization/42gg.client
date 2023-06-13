@@ -18,15 +18,24 @@ export default function AdminSearchBar({
     setShowDropDown,
     searchResult,
     searchBarRef,
-    handleKeyDown,
   } = useSearchBar();
+
+  const adminhandleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      if (keyword === searchResult[0]) {
+        setShowDropDown(false);
+        event.currentTarget.blur();
+        initSearch(keyword);
+      }
+    }
+  };
 
   return (
     <div className={styles.adminSearchBar} ref={searchBarRef}>
       <input
         type='text'
         onChange={keywordHandler}
-        onKeyDown={handleKeyDown}
+        onKeyDown={adminhandleKeyDown}
         onFocus={() => setShowDropDown(true)}
         placeholder='유저 검색하기'
         maxLength={MAX_SEARCH_LENGTH}
