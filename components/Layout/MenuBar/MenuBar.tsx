@@ -27,11 +27,16 @@ const MenuProfile = () => {
 
   return (
     <div className={styles.menuProfileWrapper}>
-      <PlayerImage
-        src={user.userImageUri}
-        styleName={'menuProfile'}
-        size={18}
-      />
+      <Link
+        className={styles.myImage}
+        href={`/users/detail?intraId=${user.intraId}`}
+      >
+        <PlayerImage
+          src={user.userImageUri}
+          styleName={'menuProfile'}
+          size={18}
+        />
+      </Link>
       <div className={styles.userInfoWrapper}>
         <div className={styles.userId}>
           탁구왕&nbsp;
@@ -42,10 +47,6 @@ const MenuProfile = () => {
         </div>
         <div className={styles.userLevel}>LV.{userLevel}</div>
       </div>
-      <Link
-        className={styles.myImage}
-        href={`/users/detail?intraId=${user.intraId}`}
-      ></Link>
     </div>
   );
 };
