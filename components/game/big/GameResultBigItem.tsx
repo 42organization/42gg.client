@@ -15,7 +15,6 @@ interface GameResultBigItemProps {
 
 function GameResultBigItem({
   game,
-  // type,
   zIndexList,
   radioMode,
 }: GameResultBigItemProps) {

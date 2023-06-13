@@ -38,7 +38,6 @@ export default function GameResultList({
                 return clickedGameItem === game.gameId ? (
                   <GameResultBigItem
                     key={game.gameId}
-                    // type={type}
                     game={game}
                     zIndexList={!isGamePage}
                     radioMode={radioMode}
