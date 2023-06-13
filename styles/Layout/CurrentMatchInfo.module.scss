@@ -1,7 +1,7 @@
 @import 'styles/common.scss';
 
-@media screen and (max-width: 360px) {
-  $ratio: 0.8;
+@media screen and (max-width: 385px) {
+  $ratio: 0.85;
   .message,
   .icon {
     font-size: 0.875rem * $ratio;
@@ -22,7 +22,7 @@
   }
 }
 
-@media screen and (min-width: 361px) and (max-width: 635px) {
+@media screen and (min-width: 386px) and (max-width: 635px) {
   $ratio: 1;
   .message,
   .icon {
@@ -45,7 +45,7 @@
 }
 
 @media screen and (min-width: 636px) {
-  $ratio: 1.2;
+  $ratio: 1.15;
   .message,
   .icon {
     font-size: 0.875rem * $ratio;
@@ -124,12 +124,6 @@ $message-color: rgba(39, 10, 70, 1);
     color: $message-color;
     font-weight: 500;
   }
-  .icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: $message-color;
-  }
   .waitUpDown {
     span {
       display: inline-block;
@@ -168,7 +162,24 @@ $message-color: rgba(39, 10, 70, 1);
   }
 }
 
-@keyframes dropdown {
+@keyframes twoDropdown {
+  0% {
+    transform: translateY(-2rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes twoDropup {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-2rem);
+  }
+}
+@keyframes threeDropdown {
   0% {
     transform: translateY(-4rem);
   }
@@ -177,7 +188,7 @@ $message-color: rgba(39, 10, 70, 1);
   }
 }
 
-@keyframes dropup {
+@keyframes threeDropup {
   0% {
     transform: translateY(0);
   }
@@ -199,13 +210,23 @@ $message-color: rgba(39, 10, 70, 1);
     align-items: center;
     overflow: hidden;
   }
-  &.visibleDropdown > div {
-    animation: dropdown 0.4s ease;
+  &.visibleDropdown {
     animation-fill-mode: forwards;
+    &.two > div {
+      animation: twoDropdown 0.4s ease;
+    }
+    &.three > div {
+      animation: threeDropdown 0.4s ease;
+    }
   }
-  &.hiddenDropdown > div {
-    animation: dropup 0.4s ease;
+  &.hiddenDropdown {
     animation-fill-mode: forwards;
+    &.two > div {
+      animation: twoDropup 0.4s ease;
+    }
+    &.three > div {
+      animation: threeDropup 0.4s ease;
+    }
   }
 
   .dropdown {
@@ -225,10 +246,20 @@ $message-color: rgba(39, 10, 70, 1);
     border: 0;
     padding: 0;
     &.dropup {
-      animation: dropdown 0.4s ease;
+      &.two {
+        animation: twoDropdown 0.4s ease;
+      }
+      &.three {
+        animation: threeDropdown 0.4s ease;
+      }
     }
     &.dropdown {
-      animation: dropup 0.4s ease;
+      &.two {
+        animation: twoDropup 0.4s ease;
+      }
+      &.three {
+        animation: threeDropup 0.4s ease;
+      }
     }
   }
 }

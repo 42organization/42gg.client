@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { stringToHourMin } from 'utils/handleTime';
@@ -10,19 +9,19 @@ import { CurrentMatchList, CurrentMatchListElement } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 import { TbMenu } from 'react-icons/tb';
+import LoudSpeaker from 'components/Layout/LoudSpeaker';
 
 export default function CurrentMatch() {
   const currentMatchList =
     useRecoilValue<CurrentMatchList>(currentMatchState).match;
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
-
-  useGetCurrentMatch();
+  const [dropdownAnimation, setDropdownAnimation] = useState(false);
 
   const dropdownStyle = showDropdown
     ? styles.visibleDropdown
     : styles.hiddenDropdown;
 
-  const [dropdownAnimation, setDropdownAnimation] = useState(false);
+  useGetCurrentMatch();
 
   useEffect(() => {
     if (showDropdown) {
@@ -34,14 +33,22 @@ export default function CurrentMatch() {
     }
   }, [showDropdown]);
 
-  const btnStyle = showDropdown ? styles.dropup : styles.dropdown;
+  const dropButtonStyle = showDropdown ? styles.dropup : styles.dropdown;
+  const matchCountStyle =
+    currentMatchList.length === 2
+      ? styles.two
+      : currentMatchList.length === 3
+      ? styles.three
+      : styles.one;
 
   return (
     <div className={styles.currentMatchBanner}>
       <div className={styles.currentMatchMain}>
         <CurrentMatchContent currentMatch={currentMatchList[0]} index={0} />
       </div>
-      <div className={`${styles.dropdownWrapper} ${dropdownStyle}`}>
+      <div
+        className={`${styles.dropdownWrapper} ${dropdownStyle} ${matchCountStyle}`}
+      >
         {dropdownAnimation && (
           <div className={styles.dropdown}>
             {currentMatchList.slice(1).map((currentMatch, index) => (
@@ -55,7 +62,7 @@ export default function CurrentMatch() {
         )}
         {currentMatchList.length > 1 ? (
           <button
-            className={`${styles.dropdownButton} ${btnStyle}`}
+            className={`${styles.dropdownButton} ${dropButtonStyle} ${matchCountStyle}`}
             onMouseDown={() => setShowDropdown(!showDropdown)}
           >
             <TbMenu />
@@ -102,18 +109,9 @@ function CurrentMatchContent(prop: CurrentMatchContentProp) {
       <div
         className={`${styles.currentMatchContent} ${currentMatchContentStyle}`}
       >
-        <div className={styles.icon}>
-          <div>
-            <Image
-              src='/image/loudspeaker.png'
-              alt='loudspeaker'
-              width={15}
-              height={15}
-            />
-          </div>
-        </div>
+        <LoudSpeaker />
         <div className={styles.messageWrapper}>
-          {makeMessage(startTime, isMatched)}
+          <MakeMessage time={startTime} isMatched={isMatched} />
           <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
         </div>
         <button
@@ -132,7 +130,12 @@ function CurrentMatchContent(prop: CurrentMatchContentProp) {
   );
 }
 
-function makeMessage(time: string, isMatched: boolean) {
+interface MakeMessageProps {
+  time: string;
+  isMatched: boolean;
+}
+
+function MakeMessage({ time, isMatched }: MakeMessageProps) {
   const formattedTime = `${stringToHourMin(time).sHour}시 ${
     stringToHourMin(time).sMin
   }분`;
