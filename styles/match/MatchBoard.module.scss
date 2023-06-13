@@ -3,7 +3,7 @@
 .matchBoard {
   height: 60vh;
   padding: 1rem;
-  margin-block: 1rem;
+  margin-block: 0 1rem;
   border-radius: $small-radius;
   background: rgba(255, 255, 255, 0.2);
   overflow-y: scroll;
@@ -13,39 +13,6 @@
   margin: 0.2rem 1rem 0 0;
   color: white;
   text-align: center;
-}
-
-.buttonWrap {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-bottom: 0.7rem;
-  margin-right: 0.6rem;
-  .manual {
-    @include match-noti-button;
-    margin: 0 0.8rem 0 0;
-    padding: 0;
-    width: 4.2rem;
-    height: 1.6rem;
-    font-size: $small-font;
-    border-radius: $small-radius;
-  }
-  .reload {
-    @include reload-button;
-    cursor: pointer;
-  }
-  .spin {
-    opacity: 0.7;
-    pointer-events: none;
-    animation: spin 1s infinite;
-    cursor: not-allowed;
-  }
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 .slotButton {
@@ -60,37 +27,46 @@
   cursor: pointer;
 
   &.mytable {
-    background: linear-gradient(to bottom, white, #68ff77);
+    background: linear-gradient(to bottom, #4fffca, #12a779);
+  }
+
+  &.both {
+    background: linear-gradient(to bottom, #fe9cca, #fe6bb1);
   }
 
   &.rank {
-    background: linear-gradient(to bottom, white, $g1-bottom);
+    background: linear-gradient(to bottom, #9134f7, #8921c5);
   }
 
   &.normal {
-    background: linear-gradient(to bottom, white, $norm-lightblue);
+    background: linear-gradient(to bottom, #8fc7fb, #4e8fdb);
   }
 
   &.disabled {
-    background: linear-gradient(to bottom, $gray, rgba(217, 217, 217, 0.6));
+    background: linear-gradient(to bottom, #636671, #424550);
+    cursor: default;
+  }
+
+  &.mytableDisabled {
+    background: linear-gradient(to bottom, #4fffca, #12a779);
     cursor: default;
   }
 }
 
 .time {
-  color: black;
+  color: white;
   font-size: 0.9rem;
 }
 
 .headCount {
-  color: $rank-blue;
+  color: white;
   font-size: $small-font;
   font-weight: 600;
   text-shadow: 1px 1px 7px #a6a6a6;
 }
 
 .plus {
-  color: $rank-blue;
+  color: white;
   font-size: $big-font;
   font-weight: 600;
   text-shadow: 1px 1px 7px #a6a6a6;

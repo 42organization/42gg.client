@@ -3,32 +3,20 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { CurrentMatchList, Match, Slot } from 'types/matchTypes';
 import { Live } from 'types/mainType';
 import { modalState } from 'utils/recoil/modal';
-import styles from 'styles/match/MatchBoard.module.scss';
-
-import useGetReloadMatchHandler from 'hooks/match/useGetReloadMatchHandler';
 import { stringToHourMin } from 'utils/handleTime';
 import { liveState } from 'utils/recoil/layout';
 import { Modal } from 'types/modalTypes';
 import { MatchMode } from 'types/mainType';
 import { currentMatchState } from 'utils/recoil/match';
+import styles from 'styles/match/MatchBoard.module.scss';
 
 interface MatchBoardProps {
-  type: string;
   radioMode: MatchMode;
+  match: Match | null;
 }
 
-export default function MatchBoard({ type, radioMode }: MatchBoardProps) {
-  const [match, setMatch] = useState<Match | null>(null);
-  const [spinReloadButton, setSpinReloadButton] = useState<boolean>(false);
-  const setModal = useSetRecoilState(modalState);
+export default function MatchBoard({ radioMode, match }: MatchBoardProps) {
   const currentRef = useRef<HTMLDivElement>(null);
-
-  const reloadMatchHandler = useGetReloadMatchHandler({
-    setMatch,
-    setSpinReloadButton,
-    type,
-    radioMode,
-  });
 
   useEffect(() => {
     currentRef.current?.scrollIntoView({
@@ -43,10 +31,6 @@ export default function MatchBoard({ type, radioMode }: MatchBoardProps) {
 
   if (matchBoards.length === 0)
     return <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>;
-
-  const openManual = () => {
-    setModal({ modalName: 'MATCH-MANUAL', manual: { radioMode: radioMode } });
-  };
 
   const getFirstOpenSlot = () => {
     for (let i = 0; i < matchBoards.length; i++) {
@@ -67,46 +51,30 @@ export default function MatchBoard({ type, radioMode }: MatchBoardProps) {
 
   return (
     <>
-      <div>
-        <div className={styles.buttonWrap}>
-          {getFirstOpenSlot() === null && (
-            <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>
-          )}
-          <button className={styles.manual} onClick={openManual}>
-            매뉴얼
-          </button>
-          <button
-            className={`${styles.reload} ${spinReloadButton && styles.spin}`}
-            onClick={reloadMatchHandler}
-          >
-            &#8635;
-          </button>
-        </div>
-        <div className={styles.matchBoard}>
-          {matchBoards.map((slot, index) => {
-            return (
-              <div
-                key={index}
-                ref={getScrollCurrentRef(
-                  stringToHourMin(slot[0].startTime).nHour
-                )}
-              >
-                {stringToHourMin(slot[0].startTime).sMin === '00' && (
-                  <MatchTime key={index} startTime={slot[0].startTime} />
-                )}
-                <div className={styles.slotGrid}>
-                  {slot.map((minSlots, minIndex) => (
-                    <MatchSlot
-                      key={index + minIndex}
-                      radioMode={radioMode}
-                      slot={minSlots}
-                    />
-                  ))}
-                </div>
+      <div className={styles.matchBoard}>
+        {matchBoards.map((slot, index) => {
+          return (
+            <div
+              key={index}
+              ref={getScrollCurrentRef(
+                stringToHourMin(slot[0].startTime).nHour
+              )}
+            >
+              {stringToHourMin(slot[0].startTime).sMin === '00' && (
+                <MatchTime key={index} startTime={slot[0].startTime} />
+              )}
+              <div className={styles.slotGrid}>
+                {slot.map((minSlots, minIndex) => (
+                  <MatchSlot
+                    key={index + minIndex}
+                    radioMode={radioMode}
+                    slot={minSlots}
+                  />
+                ))}
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
     </>
   );
@@ -175,21 +143,31 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
   const buttonStyle: { [key: string]: string } = useMemo(
     () => ({
       mytable: status === 'mytable' ? styles.mytable : styles.disabled,
-      close: styles.disabled,
-      // event === 'match' && match[0].startTime === startTime
-      //   ? styles.mytable
-      //   : styles.disabled, // 나의 매칭 경기가 close일 때 mytable 상태 표시
-      open: radioMode === 'RANK' ? styles.rank : styles.normal,
-      match: radioMode === 'RANK' ? styles.rank : styles.normal,
+      close:
+        event === 'match' && match[0].startTime === startTime
+          ? styles.mytableDisabled
+          : styles.disabled,
+      open:
+        radioMode === 'BOTH'
+          ? styles.both
+          : radioMode === 'RANK'
+          ? styles.rank
+          : styles.normal,
+      match:
+        radioMode === 'BOTH'
+          ? styles.both
+          : radioMode === 'RANK'
+          ? styles.rank
+          : styles.normal,
     }),
     [slot]
   );
 
-  // const isDisabled =
-  //   status === 'close' &&
-  //   !(event === 'match' && match[0].startTime === startTime)
-  //     ? true
-  //     : false; // 나의 매칭 경기가 close일 때 disabled 안 되게
+  const isDisabled =
+    status === 'close' &&
+    !(event === 'match' && match[0].startTime === startTime)
+      ? true
+      : false; // 나의 매칭 경기가 close일 때 disabled 안 되게
 
   const isAfterSlot: boolean =
     new Date(startTime).getTime() - new Date().getTime() >= 0;
@@ -201,7 +179,7 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
     <>
       <button
         className={`${styles.slotButton} ${buttonStyle[status]}`}
-        // disabled={isDisabled}
+        //disabled={isDisabled}
         disabled={status === 'close'}
         onClick={enrollhandler}
       >

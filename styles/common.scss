@@ -65,13 +65,11 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   all: unset;
   padding: 0.2rem 0.5rem;
   margin: 0.7rem 0;
-  background: linear-gradient(to bottom, white, $gray);
+  background: rgba(255, 255, 255, 0.3);
+  color: $light-gray;
+  font-weight: 700;
   text-align: center;
   cursor: pointer;
-  &:hover {
-    background: linear-gradient(to bottom, $gray, white);
-    color: $dark-gray;
-  }
 }
 
 @mixin reload-button {
@@ -79,13 +77,11 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 50%;
-  background: linear-gradient(to bottom, white, $gray);
+  background: rgba(255, 255, 255, 0.3);
+  color: $light-gray;
+  font-weight: 700;
   text-align: center;
   cursor: pointer;
-  &:hover {
-    color: $dark-gray;
-    background: linear-gradient(to bottom, $gray, white);
-  }
 }
 
 @mixin pageWrap {
