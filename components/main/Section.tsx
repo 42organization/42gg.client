@@ -10,9 +10,7 @@ type SectionProps = {
   path: string;
 };
 
-type pathType = {
-  [key: string]: JSX.Element;
-};
+type pathType = Record<string, JSX.Element>;
 
 export default function Section({ sectionTitle, path }: SectionProps) {
   const router = useRouter();
