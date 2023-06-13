@@ -33,7 +33,13 @@ const MenuProfile = () => {
         size={18}
       />
       <div className={styles.userInfoWrapper}>
-        <div className={styles.userId}>탁구왕 {user.intraId}님</div>
+        <div className={styles.userId}>
+          탁구왕&nbsp;
+          <Link href={`/users/detail?intraId=${user.intraId}`}>
+            {user.intraId}
+          </Link>
+          님
+        </div>
         <div className={styles.userLevel}>LV.{userLevel}</div>
       </div>
       <Link

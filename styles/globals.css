@@ -56,6 +56,13 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Fenix';
+  src: url('../public/font/Fenix-Regular.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }

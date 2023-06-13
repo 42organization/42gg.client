@@ -12,7 +12,6 @@ import Image from 'next/image';
 
 export default function NotiBar() {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
-  const NotiContext = useContext<NotiContextState | null>(NotiProvider);
 
   return (
     <div
@@ -30,7 +29,7 @@ export default function NotiBar() {
             <DeleteAllButton />
             <ReloadNotiButton />
           </div>
-          {NotiContext?.noti.length ? <NotiExist /> : <NotiEmpty />}
+          <NotiMain />
         </NotiStateContext>
         <div className={styles.notiDecorate}>
           <div className={styles.circleOne}></div>
@@ -39,6 +38,12 @@ export default function NotiBar() {
       </div>
     </div>
   );
+}
+
+function NotiMain() {
+  const NotiContext = useContext<NotiContextState | null>(NotiProvider);
+
+  return NotiContext?.noti.length ? <NotiExist /> : <NotiEmpty />;
 }
 
 function NotiExist() {

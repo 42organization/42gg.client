@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import { Noti } from 'types/notiTypes';
 import styles from 'styles/Layout/NotiItem.module.scss';
-
 import { HeaderContextState, HeaderContext } from '../HeaderContext';
 import { useContext } from 'react';
+import { BsCheckLg } from 'react-icons/bs';
 
 interface NotiItemProps {
   data: Noti;
 }
 
 export default function NotiItem({ data }: NotiItemProps) {
-  const date = data.createdAt.slice(5).replace('T', ' ');
+  const date = data.createdAt.slice(5, -3).replace('T', ' ');
   const { type, message, isChecked } = data;
 
   const noti: {
@@ -43,7 +43,10 @@ export default function NotiItem({ data }: NotiItemProps) {
       <div className={`${notiWrapperStyle} ${notiContentStyle}`}>
         {noti[type].content}
       </div>
-      <div className={styles.date}>{date}</div>
+      <div className={styles.date}>
+        {date}&nbsp;
+        {isChecked ? <BsCheckLg /> : <></>}
+      </div>
     </div>
   );
 }
