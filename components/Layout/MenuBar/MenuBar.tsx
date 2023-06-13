@@ -22,6 +22,7 @@ const MenuTop = () => {
 };
 
 const MenuProfile = () => {
+  const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const user = useRecoilValue<User>(userState);
   const userLevel = useRecoilValue<ProfileBasic>(profileState).level;
 
@@ -30,6 +31,7 @@ const MenuProfile = () => {
       <Link
         className={styles.myImage}
         href={`/users/detail?intraId=${user.intraId}`}
+        onClick={HeaderState?.resetOpenMenuBarState}
       >
         <PlayerImage
           src={user.userImageUri}
@@ -40,7 +42,10 @@ const MenuProfile = () => {
       <div className={styles.userInfoWrapper}>
         <div className={styles.userId}>
           탁구왕&nbsp;
-          <Link href={`/users/detail?intraId=${user.intraId}`}>
+          <Link
+            href={`/users/detail?intraId=${user.intraId}`}
+            onClick={HeaderState?.resetOpenMenuBarState}
+          >
             {user.intraId}
           </Link>
           님
