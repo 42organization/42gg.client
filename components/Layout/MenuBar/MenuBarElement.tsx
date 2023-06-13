@@ -2,13 +2,20 @@ import React, { MouseEvent, useContext, MouseEventHandler } from 'react';
 import Link from 'next/link';
 import styles from 'styles/Layout/MenuBar.module.scss';
 import { HeaderContextState, HeaderContext } from '../HeaderContext';
-import Image from 'next/image';
 import useAxiosGet from 'hooks/useAxiosGet';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import { userState } from 'utils/recoil/layout';
 import { User } from 'types/mainType';
+import RankingEmoji from 'public/image/menu_ranking.svg';
+import CurrentMatchEmoji from 'public/image/menu_currentMatch.svg';
+import AnnouncementEmoji from 'public/image/menu_announcement.svg';
+import ManualEmoji from 'public/image/menu_manual.svg';
+import ReportEmoji from 'public/image/menu_report.svg';
+import StatisticsEmoji from 'public/image/menu_statistics.svg';
+import AdminEmoji from 'public/image/menu_admin.svg';
+import SignOutEmoji from 'public/image/menu_signOut.svg';
 
 interface MenuLinkProps {
   link: string;
@@ -21,46 +28,39 @@ interface menuItemProps {
 }
 
 const MenuItem = ({ itemName, onClick }: menuItemProps) => {
-  const menuList: { [key: string]: { [key: string]: string } } = {
+  const menuList: { [key: string]: { [key: string]: string | JSX.Element } } = {
     Ranking: {
       name: '랭킹',
-      src: '/image/ranking_menu.png',
+      svg: <RankingEmoji />,
     },
     CurrentMatch: {
       name: '최근 경기',
-      src: '/image/currentmatch_menu.png',
+      svg: <CurrentMatchEmoji />,
     },
     Announcement: {
       name: '공지사항',
-      src: '/image/announcement_menu.png',
+      svg: <AnnouncementEmoji />,
     },
     Manual: {
       name: '사용 설명서',
-      src: '/image/manual_menu.png',
+      svg: <ManualEmoji />,
     },
     Report: {
       name: '건의하기',
-      src: '/image/report_menu.png',
+      svg: <ReportEmoji />,
     },
     Statistics: {
       name: '통계페이지',
-      src: '/image/statistics_menu.png',
+      svg: <StatisticsEmoji />,
     },
     Admin: {
       name: '관리자',
-      src: '/image/admin_menu.png',
+      svg: <AdminEmoji />,
     },
   };
   return (
     <div className={styles.menuItem} onClick={onClick}>
-      <div className={styles.imageWrapper}>
-        <Image
-          src={menuList[itemName].src}
-          width={20}
-          height={20}
-          alt={itemName}
-        />
-      </div>
+      <div className={styles.imageWrapper}>{menuList[itemName].svg}</div>
       <div className={styles.menuText}>{menuList[itemName].name}</div>
     </div>
   );
@@ -143,7 +143,7 @@ export const AdminMenu = () => {
         onClick={() => setModal({ modalName: 'MENU-LOGOUT' })}
       >
         <div>로그아웃</div>
-        <Image src='/image/sign_out.png' width={20} height={20} alt='logout' />
+        <SignOutEmoji />
       </div>
     </nav>
   );

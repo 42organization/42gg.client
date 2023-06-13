@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
-import { userState, liveState } from 'utils/recoil/layout';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { liveState } from 'utils/recoil/layout';
 import { useEffect } from 'react';
 import MenuBar from './MenuBar/MenuBar';
-import { FiMenu, FiBell } from 'react-icons/fi';
+import { FiMenu } from 'react-icons/fi';
 import { BsMegaphone } from 'react-icons/bs';
 import styles from 'styles/Layout/Header.module.scss';
 import NotiBar from './NotiBar/NotiBar';
@@ -13,9 +13,9 @@ import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import useAxiosGet from 'hooks/useAxiosGet';
 import Image from 'next/image';
+import NotiBell from 'public/image/noti_bell.svg';
 
 export default function Header() {
-  const user = useRecoilValue(userState);
   const [live, setLive] = useRecoilState(liveState);
 
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
@@ -57,8 +57,12 @@ export default function Header() {
   return (
     <div className={styles.headerContainer}>
       <div className={styles.headerWrap}>
-        <div className={styles.headerLeft} onClick={openMenuBarHandler}>
-          <FiMenu className={styles.menuIcon} />
+        <div className={styles.headerLeft}>
+          <FiMenu
+            className={styles.menuIcon}
+            size='21'
+            onClick={openMenuBarHandler}
+          />
         </div>
         <Link className={styles.logoWrap} href={'/'}>
           42GG
@@ -68,7 +72,7 @@ export default function Header() {
             className={styles.announceIcon}
             onClick={() => getAnnouncementHandler()}
           >
-            <BsMegaphone />
+            <BsMegaphone size='21' />
           </div>
           <div className={styles.notiIcon} onClick={openNotiBarHandler}>
             {live.notiCount ? (
@@ -79,22 +83,12 @@ export default function Header() {
                       {live.notiCount > 9 ? '9+' : live.notiCount}
                     </div>
                   </div>
-                  <Image
-                    src='/image/notibell.png'
-                    width={18}
-                    height={18}
-                    alt='notibell'
-                  />
+                  <NotiBell />
                 </div>
               </div>
             ) : (
               <div className={styles.notiBellWrapper}>
-                <Image
-                  src='/image/notibell.png'
-                  width={18}
-                  height={18}
-                  alt='notibell'
-                />
+                <NotiBell />
               </div>
             )}
           </div>

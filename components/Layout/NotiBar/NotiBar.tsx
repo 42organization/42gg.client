@@ -8,7 +8,7 @@ import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import { instance } from 'utils/axios';
 import { Noti } from 'types/notiTypes';
-import Image from 'next/image';
+import NotiEmptyEmoji from 'public/image/noti_empty.svg';
 
 export default function NotiBar() {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
@@ -76,12 +76,7 @@ function NotiEmpty() {
           <div></div>
           <div></div>
         </div>
-        <Image
-          src='/image/notiempty.png'
-          width={105}
-          height={100}
-          alt='notiempty'
-        />
+        <NotiEmptyEmoji />
       </div>
     </div>
   );
