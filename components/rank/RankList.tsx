@@ -28,11 +28,10 @@ export default function RankList(prop: RankListProps) {
     const modeQuery = (targetMode?: string) =>
       targetMode !== 'NORMAL' ? 'ranks/single' : 'exp';
     const seasonQuery = toggleMode === 'RANK' ? `&season=${season}` : '';
-    return `/pingpong/${modeQuery(
-      toggleMode
-    )}?page=${page}&size=20${seasonQuery}`;
+    return isMain
+      ? `/pingpong/${modeQuery(toggleMode)}?page=1&size=3`
+      : `/pingpong/${modeQuery(toggleMode)}?page=${page}&size=20${seasonQuery}`;
   };
-
   const makePathRanker = (): string => {
     const modeQuery = (targetMode?: string) =>
       targetMode !== 'NORMAL' ? 'ranks/single' : 'exp';
@@ -53,6 +52,7 @@ export default function RankList(prop: RankListProps) {
     setPage: setPage,
     pageInfo: pageInfo,
   });
+
   if (isMain) {
     return <RankListMain rank={ranker} isMain={true} />;
   }

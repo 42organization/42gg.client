@@ -74,3 +74,16 @@
     cursor: pointer;
   }
 }
+
+@media (max-width: 767px) {
+  .ranktropy {
+    div {
+      @include userImage(4rem);
+    }
+  }
+  .ranktropybig {
+    div {
+      @include userImage(5rem);
+    }
+  }
+}
