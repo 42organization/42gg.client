@@ -30,9 +30,17 @@ export default function NotiItem({ data }: NotiItemProps) {
     },
   };
 
+  const notiWrapperStyle = isChecked ? styles.readWrap : styles.unreadWrap;
+  const notiContentStyle =
+    type === 'IMMINENT'
+      ? styles.imminent
+      : type === 'MATCHED'
+      ? styles.matched
+      : styles.announcement;
+
   return (
-    <div className={isChecked ? `${styles.readWrap}` : `${styles.unreadWrap}`}>
-      <div className={`${styles.content} ${noti[type].style}`}>
+    <div className={styles.notiWrapper}>
+      <div className={`${notiWrapperStyle} ${notiContentStyle}`}>
         {noti[type].content}
       </div>
       <div className={styles.date}>{date}</div>

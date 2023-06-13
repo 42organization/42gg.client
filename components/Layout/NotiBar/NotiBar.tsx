@@ -32,6 +32,10 @@ export default function NotiBar() {
           </div>
           {NotiContext?.noti.length ? <NotiExist /> : <NotiEmpty />}
         </NotiStateContext>
+        <div className={styles.notiDecorate}>
+          <div className={styles.circleOne}></div>
+          <div className={styles.circleTwo}></div>
+        </div>
       </div>
     </div>
   );
