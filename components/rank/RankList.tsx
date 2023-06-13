@@ -13,8 +13,11 @@ interface RankListProps {
 }
 export const ToggleModeContext = createContext<'RANK' | 'NORMAL'>('RANK');
 
-export default function RankList(prop: RankListProps) {
-  const { toggleMode, season, isMain } = prop;
+export default function RankList({
+  toggleMode,
+  season,
+  isMain,
+}: RankListProps) {
   const [rank, setRank] = useState<Rank>();
   const [ranker, setRanker] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
