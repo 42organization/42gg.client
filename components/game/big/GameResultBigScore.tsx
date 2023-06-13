@@ -22,7 +22,7 @@ export default function GameResultBigScore({
 }: GameResultBigScoreProps) {
   return (
     <div className={styles.bigScoreBoard}>
-      {makeScoreStatus(status, time, radioMode)}
+      <ScoreStatus status={status} time={time} radioMode={radioMode} />
       <div className={styles.gameScore}>
         {mode === 'NORMAL' ? 'VS' : `${scoreTeam1} : ${scoreTeam2}`}
       </div>
@@ -30,11 +30,13 @@ export default function GameResultBigScore({
   );
 }
 
-function makeScoreStatus(
-  status: GameStatus,
-  time: string,
-  radioMode: SeasonMode
-) {
+type scoreStatusProps = {
+  status: GameStatus;
+  time: string;
+  radioMode?: SeasonMode;
+};
+
+function ScoreStatus({ status, time, radioMode }: scoreStatusProps) {
   switch (status) {
     case 'LIVE':
       return <div className={styles.gameStatusLive}>Live</div>;
