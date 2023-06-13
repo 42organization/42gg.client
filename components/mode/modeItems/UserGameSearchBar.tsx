@@ -49,16 +49,15 @@ export default function UserGameSearchBar() {
         value={keyword}
       />
       <div className={styles.icons}>
-        {keyword && (
-          <span
-            className={styles.reset}
-            onClick={() => {
-              setKeyword('');
-            }}
-          >
-            <IoIosCloseCircle />
-          </span>
-        )}
+        <span
+          className={styles.reset}
+          style={{ visibility: `${keyword ? 'visible' : 'hidden'}` }}
+          onClick={() => {
+            setKeyword('');
+          }}
+        >
+          <IoIosCloseCircle />
+        </span>
       </div>
       {showDropDown && keyword && (
         <div className={styles.dropdown}>

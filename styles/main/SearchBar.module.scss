@@ -23,12 +23,8 @@
     }
   }
   .icons {
-    svg {
-      display: flex;
-      align-items: center;
-      padding: 0 0.5rem;
-      font-size: 1.2rem;
-    }
+    display: flex;
+    align-items: center;
     .reset {
       cursor: pointer;
     }
@@ -43,7 +39,8 @@
     width: 100%;
     padding: 0 0.8rem 0.5rem 0.8rem;
     border-radius: 0 0 $small-radius $small-radius;
-    background: white;
+    background: linear-gradient(90.17deg, #593781 18.13%, #543579 93.7%);
+    color: #ffffff;
     div {
       padding: 0.5rem 0;
       cursor: pointer;
