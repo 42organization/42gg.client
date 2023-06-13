@@ -7,7 +7,7 @@ export const userState = atom<User>({
   default: {
     intraId: '',
     isAdmin: false,
-    userImageUrl: '',
+    userImageUri: '',
   },
 });
 

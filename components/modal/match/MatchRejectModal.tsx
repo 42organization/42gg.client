@@ -7,7 +7,7 @@ export default function MatchRejectModal() {
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const content = {
-    main: '이미 예약된 경기가 있습니다.',
+    main: '이미 3개의 예약된 경기가 있습니다.',
     sub: '⚠︎ 해당 슬롯에 등록하고 싶다면\n예약되어 있는 경기를 취소해 주세요.',
   };
 

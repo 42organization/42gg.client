@@ -9,7 +9,6 @@ import useSearchBar from 'hooks/useSearchBar';
 export default function UserGameSearchBar() {
   const router = useRouter();
   const { intraId } = router.query;
-
   const {
     keyword,
     setKeyword,
@@ -18,7 +17,7 @@ export default function UserGameSearchBar() {
     setShowDropDown,
     searchResult,
     searchBarRef,
-    handleKeyDown,
+    gamehandleKeyDown,
   } = useSearchBar();
 
   useEffect(() => {
@@ -42,7 +41,7 @@ export default function UserGameSearchBar() {
       <input
         type='text'
         onChange={keywordHandler}
-        onKeyDown={handleKeyDown}
+        onKeyDown={gamehandleKeyDown}
         onFocus={() => setShowDropDown(true)}
         placeholder='유저 검색하기'
         maxLength={15}

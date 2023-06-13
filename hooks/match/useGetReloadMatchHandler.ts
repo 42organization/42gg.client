@@ -11,19 +11,19 @@ interface useGetReloadMatchHandlerProps {
   setMatch: Dispatch<SetStateAction<Match | null>>;
   setSpinReloadButton: Dispatch<SetStateAction<boolean>>;
   type: string;
-  toggleMode: MatchMode;
+  radioMode: MatchMode;
 }
 
 const useGetReloadMatchHandler = ({
   setMatch,
   setSpinReloadButton,
-  toggleMode,
+  radioMode,
 }: useGetReloadMatchHandlerProps): (() => void) => {
   const [reloadMatch, setReloadMatch] =
     useRecoilState<boolean>(reloadMatchState);
 
   const getMatchHandler = useAxiosGet({
-    url: `/pingpong/match/time/scope?mode=${toggleMode}`,
+    url: `/pingpong/match/time/scope?mode=${radioMode}`,
     setState: setMatch,
     err: 'SJ01',
     type: 'setError',
@@ -37,7 +37,7 @@ const useGetReloadMatchHandler = ({
 
   useEffect(() => {
     getMatchHandler();
-  }, [toggleMode]);
+  }, [radioMode]);
 
   useEffect(() => {
     if (reloadMatch) getMatchHandler();

@@ -125,3 +125,24 @@ export const getFormattedDateToString = (
     d.getMinutes() < 10 ? `0${d.getMinutes()}` : d.getMinutes().toString();
   return { year, month, date, hour, min };
 };
+
+/**
+ * 시간 문자열에서 hour와 min을 분리하여 반환하는
+ * @return : number 타입과 string 타입 둘 다 반환
+ * */
+
+export const stringToHourMin = (
+  d: string
+): {
+  nHour: number;
+  nMin: number;
+  sHour: string;
+  sMin: string;
+} => {
+  const date = new Date(d);
+  const nHour = date.getHours();
+  const nMin = date.getMinutes();
+  const sHour = fillZero(nHour.toString(), 2);
+  const sMin = fillZero(nMin.toString(), 2);
+  return { nHour, nMin, sHour, sMin };
+};

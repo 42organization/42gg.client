@@ -55,7 +55,7 @@ const useSubmitModal = (currentGame: AfterGame) => {
       enemyTeamId: enemyTeam.teamId,
     };
     try {
-      await instance.post(`/pingpong/games/result/normal`, requestBody);
+      await instance.post(`/pingpong/games/normal`, requestBody);
     } catch (e) {
       setError('KP04');
       return;
@@ -67,10 +67,8 @@ const useSubmitModal = (currentGame: AfterGame) => {
     setModal({
       modalName: 'FIXED-STAT',
       exp: {
-        gameId: currentGame.gameId,
-        mode: currentGame.mode?.toLowerCase() as Lowercase<
-          Uppercase<MatchMode>
-        >,
+        gameId: gameId,
+        mode: mode,
       },
     });
   };

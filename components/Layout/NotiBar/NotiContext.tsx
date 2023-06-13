@@ -3,22 +3,22 @@ import { useState, useEffect } from 'react';
 import { Noti } from 'types/notiTypes';
 import useReloadHandler from 'hooks/useReloadHandler';
 import useAxiosGet from 'hooks/useAxiosGet';
-import { NotiCloseButton, NotiMain } from './NewNotiElements';
+import { NotiCloseButton, NotiMain } from './NotiElements';
 
-export interface NewNotiContextState {
+export interface NotiContextState {
   noti: Noti[];
   spinReloadButton: boolean;
   clickReloadNoti: boolean;
   setClickReloadNoti: Dispatch<SetStateAction<boolean>>;
 }
 
-export const NewNotiContext = createContext<NewNotiContextState | null>(null);
+export const NotiProvider = createContext<NotiContextState | null>(null);
 
-interface NewNotiStateContextProps {
+interface NotiStateContextProps {
   children: React.ReactNode;
 }
 
-const NewNotiStateContext = (props: NewNotiStateContextProps) => {
+const NotiStateContext = (props: NotiStateContextProps) => {
   const [noti, setNoti] = useState<Noti[]>([]);
   const [clickReloadNoti, setClickReloadNoti] = useState(false);
   const [spinReloadButton, setSpinReloadButton] = useState(false);
@@ -49,7 +49,7 @@ const NewNotiStateContext = (props: NewNotiStateContextProps) => {
     }
   }, [clickReloadNoti]);
 
-  const NewNotiState: NewNotiContextState = {
+  const NotiState: NotiContextState = {
     noti: noti,
     spinReloadButton: spinReloadButton,
     clickReloadNoti: clickReloadNoti,
@@ -57,13 +57,13 @@ const NewNotiStateContext = (props: NewNotiStateContextProps) => {
   };
 
   return (
-    <NewNotiContext.Provider value={NewNotiState}>
+    <NotiProvider.Provider value={NotiState}>
       {props.children}
-    </NewNotiContext.Provider>
+    </NotiProvider.Provider>
   );
 };
 
-NewNotiStateContext.NotiCloseButton = NotiCloseButton;
-NewNotiStateContext.NotiMain = NotiMain;
+NotiStateContext.NotiCloseButton = NotiCloseButton;
+NotiStateContext.NotiMain = NotiMain;
 
-export default NewNotiStateContext;
+export default NotiStateContext;
