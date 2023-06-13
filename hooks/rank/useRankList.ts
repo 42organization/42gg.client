@@ -69,7 +69,7 @@ const useRankList = ({
     waitRankList().then(() => {
       if (isScroll) {
         window.scrollTo({
-          top: ((myRank[toggleMode] - 1) % 20) * 45,
+          top: ((myRank[toggleMode] - 1) % 20) * 60,
           behavior: 'smooth',
         });
         setIsScroll(false);

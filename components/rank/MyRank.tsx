@@ -16,7 +16,7 @@ export default function MyRank(prop: MyRankProp) {
   const content = {
     unrank: {
       style: '',
-      message: [`My ${rankType}:`, ` ???`],
+      message: [`My ${rankType}:`, ` ---`],
     },
     RANK: {
       style: styles.rank,
