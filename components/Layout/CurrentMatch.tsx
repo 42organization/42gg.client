@@ -56,7 +56,7 @@ export default function CurrentMatch() {
             ))}
           </div>
         )}
-        {!dropdownAnimation && (
+        {!dropdownAnimation && currentMatchList.length > 1 ? (
           <button
             className={styles.dropdownButton}
             disabled={currentMatchList.length === 1 ? true : false}
@@ -64,6 +64,8 @@ export default function CurrentMatch() {
           >
             <TbMenu />
           </button>
+        ) : (
+          <></>
         )}
       </div>
     </div>
@@ -94,7 +96,11 @@ function CurrentMatchContent(prop: CurrentMatchContentProp) {
     });
   };
 
-  const currentMatchContentStyle = index ? styles.middle : styles.main;
+  const currentMatchContentStyle = index
+    ? styles.middle
+    : currentMatchList.length > 1
+    ? styles.mainMore
+    : styles.mainOne;
 
   return (
     <>
