@@ -183,7 +183,27 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   margin-bottom: 2rem;
 }
 
-@mixin modal-container {
+// TODO: 다른 것들도 이름 변경
+@mixin modalContainer($type) {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 2rem 1.5rem;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  @if ($type == 'DARKPURPLE') {
+    background: linear-gradient(
+      180deg,
+      #7f5792 0%,
+      #1d0b25 48.44%,
+      #775189 95.91%
+    );
+  }
+}
+
+// TODO: 충돌로 인해 삭제하지 못함. 나중에 삭제할 것
+@mixin modal-container() {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

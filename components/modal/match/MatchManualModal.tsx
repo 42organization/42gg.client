@@ -20,15 +20,13 @@ export default function MatchManualModal({ radioMode }: Manual) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>Please!!</div>
-      <div className={styles.toggleContainer}>
-        <ModeRadiobox
-          mode={manualMode}
-          page='MANUAL'
-          onChange={modeChangeHandler}
-          zIndexList={false}
-        />
-      </div>
+      <div className={styles.title}>Important</div>
+      <ModeRadiobox
+        mode={manualMode}
+        page='MANUAL'
+        onChange={modeChangeHandler}
+        zIndexList={false}
+      />
       <ul className={styles.ruleList}>
         {manualSelect(radioMode).map(
           (item: { title: string; description: string[] }, index) => (
