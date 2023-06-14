@@ -9,6 +9,7 @@
 
 .title {
   @include modalTitle;
+  color: rgba(18, 23, 37, 1);
   padding-bottom: 1rem;
 }
 
