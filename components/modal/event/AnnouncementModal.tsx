@@ -37,7 +37,7 @@ export default function AnnouncementModal({
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>Notice!</div>
+      <div className={styles.title}>Notice</div>
       <Quill
         className={styles.quillViewer}
         readOnly={true}

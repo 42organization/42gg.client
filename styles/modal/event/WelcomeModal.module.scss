@@ -2,22 +2,22 @@
 
 .container {
   @include modal-container;
+  background: linear-gradient(180deg, #ce82c6 0%, #deb8ef 100%);
 }
 
 .phrase {
   @include modal-phrase;
-  color: black;
-  font-size: 1rem;
   white-space: pre-wrap;
   .title {
-    margin-bottom: 1.7rem;
-    color: white;
-    font-family: $title-font;
-    font-size: 2rem;
-    text-shadow: $text-border-black;
+    @include modalTitle;
+    padding-bottom: 2rem;
+  }
+  .message {
+    font-family: 'NanumSquare_acR';
+    line-height: 150%;
   }
   .rose {
-    margin-top: 1rem;
+    padding-top: 1rem;
     color: $pp-red;
     span:last-child {
       color: green;
@@ -26,5 +26,5 @@
 }
 
 .buttons {
-  @include select-buttons(7rem);
+  @include modalButton;
 }

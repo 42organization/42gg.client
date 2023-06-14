@@ -40,6 +40,13 @@ body {
   src: url('../public/font/NanumSquare_acEB.ttf') format('opentype');
   font-weight: normal;
   font-style: normal;
+
+}
+@font-face {
+  font-family: 'Lexend';
+  src: url('../public/font/Lexend-Regular.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 ::-webkit-scrollbar {
