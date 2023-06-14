@@ -27,7 +27,7 @@ export default function ModeRadiobox({
       ${zIndexList && styles['zIndexListButton']}`}
     >
       {modes.map(({ type, name }) => (
-        <label key={type} htmlFor={type}>
+        <label key={type}>
           <input
             type='radio'
             id={type}
