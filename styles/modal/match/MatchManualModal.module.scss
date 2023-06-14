@@ -39,6 +39,21 @@
   }
 }
 
+.ruleTitle {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  :first-child {
+    min-width: 1.5rem;
+    max-width: 1.5rem;
+    min-height: 1.5rem;
+    max-height: 1.5rem;
+  }
+  :last-child {
+    margin-left: 0.5rem;
+  }
+}
+
 .ruleDetail {
   margin-left: 0.8rem;
   padding: 0.5rem 0.5em 0.5rem 1.5rem;
