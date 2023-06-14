@@ -194,7 +194,13 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
         <span
           className={`${styles.headCount} ${headCount === 0 && styles.plus}`}
         >
-          {isAfterSlot && (headCount === 0 ? '+' : `${headCount}/2`)}
+          {isAfterSlot &&
+            !(
+              event === 'match' &&
+              match[0].startTime === startTime &&
+              headCount === 2
+            ) &&
+            (headCount === 0 ? '+' : `${headCount}/2`)}
         </span>
       </button>
     </>
