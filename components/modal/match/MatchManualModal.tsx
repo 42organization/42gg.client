@@ -101,7 +101,6 @@ export default function MatchManualModal({ radioMode }: Manual) {
   const [manualMode, setManualMode] = useState<MatchMode>(radioMode);
 
   const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('😆', e.target.value);
     setManualMode(e.target.value as MatchMode);
   };
 
