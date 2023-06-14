@@ -41,11 +41,12 @@ export default function MatchManualModal({ radioMode }: Manual) {
           )
         )}
       </ul>
-      <div className={styles.buttons}>
-        <div className={styles.positive}>
-          <input onClick={onReturn} type='button' value={'확 인'} />
-        </div>
-      </div>
+      <button
+        className={`${styles['modalButton']}`}
+        onClick={() => setModal({ modalName: null })}
+      >
+        확 인
+      </button>
     </div>
   );
 }

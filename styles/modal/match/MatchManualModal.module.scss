@@ -26,8 +26,11 @@
   list-style: none;
   width: auto;
   height: 60vh;
-  max-height: 60vh;
-  margin: 0 0.6rem 0.5rem;
+  max-height: 437px;
+  margin: 0 0.6rem 1.75rem;
+  padding: 1rem;
+  background: #ffffff;
+  border-radius: 0px 0px 10px 10px;
   color: black;
   font-size: 1.2rem;
   font-weight: 700;
@@ -41,6 +44,7 @@
 
 .ruleDetail {
   margin-left: 0.8rem;
+  padding: 0.5rem 0.5em 0.5rem 1.5rem;
   font-size: 0.9rem;
   font-weight: 400;
 
@@ -53,15 +57,30 @@
 
 .ruleList::-webkit-scrollbar {
   display: inherit;
-  width: 5px;
+  width: 6px;
   height: 1rem;
 }
 
 .ruleList::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background: white;
+  border-radius: 6px;
+  background: #c6c4c4;
 }
 
-.buttons {
-  @include select-buttons;
+@mixin modalButton($color) {
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 2.25rem;
+  color: #ffffff;
+  @if ($color == 'DARKPURPLE') {
+    background: linear-gradient(
+      180deg,
+      #c66bf2 0%,
+      rgba(96, 6, 138, 0.52) 100%
+    );
+  }
+}
+
+.modalButton {
+  @include modalButton('DARKPURPLE');
+  margin: 0 0.5rem;
 }
