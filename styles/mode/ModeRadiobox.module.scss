@@ -51,6 +51,7 @@
   }
   &.manual {
     @include ButtonBackground('MANUAL');
+    margin: 0 0.48rem;
   }
   .modeButton {
     display: flex;

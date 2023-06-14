@@ -10,10 +10,6 @@ export default function MatchManualModal({ radioMode }: Manual) {
   const setModal = useSetRecoilState(modalState);
   const [manualMode, setManualMode] = useState<MatchMode>(radioMode);
 
-  const onReturn = () => {
-    setModal({ modalName: null });
-  };
-
   const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setManualMode(e.target.value as MatchMode);
   };
@@ -21,12 +17,14 @@ export default function MatchManualModal({ radioMode }: Manual) {
   return (
     <div className={styles.container}>
       <div className={styles.title}>Important</div>
-      <ModeRadiobox
-        mode={manualMode}
-        page='MANUAL'
-        onChange={modeChangeHandler}
-        zIndexList={false}
-      />
+      <div className={styles.matchRadioBoxWrap}>
+        <ModeRadiobox
+          mode={manualMode}
+          page='MANUAL'
+          onChange={modeChangeHandler}
+          zIndexList={false}
+        />
+      </div>
       <ul className={styles.ruleList}>
         {manualSelect(radioMode).map(
           (item: { title: string; description: string[] }, index) => (
