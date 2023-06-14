@@ -1,4 +1,5 @@
 import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
+import { BsCheckCircle } from 'react-icons/bs';
 
 interface GuideProps {
   condition: boolean;
@@ -15,7 +16,7 @@ export default function Guide({ condition, modalMode }: GuideProps) {
     RANK: {
       before: '경기 후 점수를 입력해주세요',
       after: '경기 결과 확인',
-      explains: '💡 3판 2선승제!\n💡 동점은 1점 내기로 승부를 결정!',
+      explains: '3판 2선승제!\n동점은 1점 내기로 승부를 결정!',
     },
     // NOTE : 이전부터 사용이 안되던 부분인 것 같아서 일단 주석으로 남겨두었습니다.
     // CONFIRM: {
@@ -28,12 +29,18 @@ export default function Guide({ condition, modalMode }: GuideProps) {
   return (
     <>
       <div className={styles.phrase}>
-        <div className={styles.emoji}>✅</div>
-        <div>
+        {modalMode === 'NORMAL' ? (
+          <div className={styles.titleNormal}>42GG</div>
+        ) : (
+          <div className={styles.titleRank}>
+            <BsCheckCircle />
+          </div>
+        )}
+        <div className={styles.message}>
           {condition ? content[modalMode].after : content[modalMode].before}
         </div>
+        <div className={styles.rules}>{content[modalMode].explains}</div>
       </div>
-      <div className={styles.rules}>{content[modalMode].explains}</div>
     </>
   );
 }

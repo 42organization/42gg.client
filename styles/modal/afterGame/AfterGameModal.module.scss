@@ -2,12 +2,44 @@
 
 .container {
   @include modal-container;
+  background: rgba(237, 214, 240, 1);
 }
 
 .phrase {
   @include modal-phrase;
-  margin-bottom: 1rem;
-  font-size: $big-font;
+
+  .titleNormal,
+  .titleRank {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    padding-bottom: 1.5rem;
+  }
+  .titleNormal {
+    color: rgba(122, 110, 123, 1);
+    font-family: 'Overgrow', sans-serif;
+    font-weight: 500;
+  }
+  .titleRank {
+    color: rgba(165, 95, 195, 1);
+  }
+  .message {
+    font-size: 1.25rem;
+    font-family: 'NanumSquare_acR', sans-serif;
+    font-weight: 800;
+    padding-bottom: 2rem;
+  }
+
+  .rules {
+    font-size: 0.9rem;
+    font-family: 'NanumSquare_acR', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    white-space: pre-wrap;
+    padding-bottom: 1.8rem;
+    line-height: 1.5;
+  }
 }
 
 .resultContainer {
@@ -27,7 +59,8 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  font-size: $big-font;
+  font-size: 1rem;
+  font-family: 'Roboto';
   font-weight: 600;
   .user {
     .intraId {
@@ -52,15 +85,8 @@
   }
 }
 
-.rules {
-  margin-bottom: 1.4rem;
-  font-size: $medium-font;
-  text-align: center;
-  white-space: pre-wrap;
-}
-
 .buttons {
-  @include select-buttons;
+  @include modalButton;
   .single {
     margin-right: 0;
   }
