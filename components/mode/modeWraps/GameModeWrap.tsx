@@ -52,6 +52,7 @@ export default function GameModeWrap({
       </div>
       <ModeRadiobox
         mode={radioMode}
+        page='GAME'
         onChange={modeChangeHandler}
         zIndexList={!isGamePage}
       />

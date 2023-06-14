@@ -20,7 +20,12 @@ export default function MatchModeWrap({
 
   return (
     <div>
-      <ModeRadiobox mode={radioMode} onChange={modeChangeHandler} />
+      <ModeRadiobox
+        mode={radioMode}
+        page='MATCH'
+        onChange={modeChangeHandler}
+        zIndexList={false}
+      />
       {React.cloneElement(children as React.ReactElement, {
         mode: radioMode,
       })}

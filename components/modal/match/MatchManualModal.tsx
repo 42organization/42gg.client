@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { Manual } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
-import ModeToggle from 'components/mode/modeItems/ModeToggle';
+import ModeRadiobox from 'components/mode/modeItems/ModeRadiobox';
 import styles from 'styles/modal/match/MatchManualModal.module.scss';
 
 export default function MatchManualModal({ radioMode }: Manual) {
@@ -14,19 +14,19 @@ export default function MatchManualModal({ radioMode }: Manual) {
     setModal({ modalName: null });
   };
 
-  const onToggle = () => {
-    setManualMode(manualMode === ('RANK' || 'BOTH') ? 'NORMAL' : 'RANK');
+  const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setManualMode(e.target.value as MatchMode);
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.title}>Please!!</div>
       <div className={styles.toggleContainer}>
-        <ModeToggle
-          checked={manualMode === 'RANK'}
-          onToggle={onToggle}
-          id={'manualToggle'}
-          text={manualMode === 'RANK' ? '랭크' : '일반'}
+        <ModeRadiobox
+          mode={manualMode}
+          page='MANUAL'
+          onChange={modeChangeHandler}
+          zIndexList={false}
         />
       </div>
       <ul className={styles.ruleList}>
