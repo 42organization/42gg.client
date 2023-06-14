@@ -40,7 +40,7 @@ export default function ReportModal() {
   return (
     <div className={styles.container}>
       <div>
-        <div className={styles.emoji}>👮‍♀️</div>
+        <div className={styles.title}>42GG</div>
         <div className={styles.phrase}>Report</div>
       </div>
       <form>
@@ -58,13 +58,15 @@ export default function ReportModal() {
             </div>
           ))}
         </div>
-        <div className={styles.content}>
-          <textarea
-            name='content'
-            maxLength={300}
-            onChange={inputChangeHandler}
-          />
-          <div>{`${report.content.length}/300`}</div>
+        <div className={styles.contentWrapper}>
+          <div className={styles.content}>
+            <textarea
+              name='content'
+              maxLength={300}
+              onChange={inputChangeHandler}
+            />
+            <div>{`${report.content.length}/300`}</div>
+          </div>
         </div>
         <div className={styles.buttons}>
           <div className={styles.negative}>
