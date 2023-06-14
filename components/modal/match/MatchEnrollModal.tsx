@@ -16,7 +16,7 @@ export default function MatchEnrollModal({ startTime, endTime, mode }: Enroll) {
         <div className={styles.time}>
           {gameTimeToString(startTime)} - {gameTimeToString(endTime)}
         </div>
-        <div>
+        <div className={styles.message}>
           {mode === 'RANK' ? '(랭크전)' : '(일반전)'}
           <br />
           경기에 참여하시겠습니까?

@@ -10,9 +10,11 @@ export default function MatchCancelModal({ startTime }: Cancel) {
     <div className={styles.container}>
       <div className={styles.phrase}>
         <div className={styles.emoji}>{content[contentType].emoji}</div>
-        {content[contentType].main}
-        {(rejectCancel || (!rejectCancel && myMatch?.isMatched)) && (
+        <div className={styles.message}>{content[contentType].main}</div>
+        {rejectCancel || (!rejectCancel && myMatch?.isMatched) ? (
           <div className={styles.subContent}>{content[contentType].sub}</div>
+        ) : (
+          <></>
         )}
       </div>
       <div className={styles.buttons}>

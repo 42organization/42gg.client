@@ -28,6 +28,20 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'NanumSquare_acR';
+  src: url('../public/font/NanumSquare_acR.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumSquare_acEB';
+  src: url('../public/font/NanumSquare_acEB.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }

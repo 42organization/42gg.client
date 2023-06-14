@@ -2,16 +2,28 @@
 
 .container {
   @include modal-container;
+  background: linear-gradient(180deg, #829ace 0%, #deb8ef 100%);
 }
 
 .phrase {
   @include modal-phrase;
+  color: rgba(49, 47, 49, 1);
   .time {
     margin-bottom: 0.5rem;
-    font-size: $giant-font;
+    font-size: 1.125rem;
+    font-family: 'NanumSquare_acEB', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.06rem;
+  }
+  .message {
+    font-size: 0.9rem;
+    font-family: 'NanumSquare_acR', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04rem;
+    line-height: 200%;
   }
 }
 
 .buttons {
-  @include select-buttons(6rem);
+  @include modalButton;
 }
