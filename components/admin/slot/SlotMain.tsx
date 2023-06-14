@@ -14,6 +14,7 @@ export default function SlotMain() {
     futureSlotTime: 12,
     interval: 15,
     openMinute: 5,
+    startTime: new Date(),
   });
 
   const [slotInfo, setSlotInfo] = useState<CurrentMatch>({
@@ -24,6 +25,7 @@ export default function SlotMain() {
   const [showTime, setShowTime] = useState<number>(0);
   const [lastHour, setLastHour] = useState<number>(0);
   const [firstHour, setFirstHour] = useState<number>(0);
+  const [startDateTime, setStartDateTime] = useState<Date>(new Date());
   const setSnackbar = useSetRecoilState(toastState);
   const currentHour = new Date().getHours();
   const initScheduleInfo = async () => {
@@ -59,7 +61,6 @@ export default function SlotMain() {
     initScheduleInfo();
     initSlotInfo();
   }, []);
-
   const inputHandler = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -71,10 +72,28 @@ export default function SlotMain() {
     if ((name === 'futurePreview' || name === 'openMinute') && intValue < 0)
       return;
     if (name === 'futurePreview') return setFuturePreview(intValue);
-    setScheduleInfo((prev) => ({
-      ...prev,
-      [name]: intValue,
-    }));
+    if (name === 'startDate') {
+      const [year, month, day] = value.split('-');
+      const newDateTime = new Date(startDateTime);
+      newDateTime.setFullYear(
+        parseInt(year),
+        parseInt(month) - 1,
+        parseInt(day)
+      );
+      newDateTime.setMinutes(
+        newDateTime.getMinutes() - newDateTime.getTimezoneOffset()
+      );
+      setStartDateTime(newDateTime);
+    } else if (name === 'startTime') {
+      const newDateTime = new Date(startDateTime);
+      newDateTime.setHours(intValue);
+      setStartDateTime(newDateTime);
+    } else {
+      setScheduleInfo((prev) => ({
+        ...prev,
+        [name]: intValue,
+      }));
+    }
   };
 
   const intervalOptions = Array.from({ length: 60 }, (_, i: number) => i + 1)
@@ -110,12 +129,17 @@ export default function SlotMain() {
       return;
     }
     try {
-      await instanceInManage.put(`/slot`, scheduleInfo);
+      const updatedScheduleInfo = {
+        ...scheduleInfo,
+        startTime: startDateTime,
+      };
+      await instanceInManage.post(`/slot-management`, updatedScheduleInfo);
       initSlotInfo();
     } catch (e) {
       console.error('SW02');
     }
   };
+
   return (
     <div className={styles.content}>
       <div className={styles.previewContainer}>
@@ -156,9 +180,8 @@ export default function SlotMain() {
         <hr />
         <div className={styles.viewTime}>
           <div className={styles.futurePreview}>
-            <div>보여주는 시간:</div>
+            <div>보이는 슬롯(n시간 뒤):</div>
             <div className={styles.nTime}>
-              <div>N시간 뒤:</div>
               <input
                 type='number'
                 value={futurePreview}
@@ -228,12 +251,30 @@ export default function SlotMain() {
           </div>
         </div>
         <hr />
-        <div className={styles.blindShowTime}>
+        <div className={styles.timeContainer}>
           <div>블라인드 해제 시간:</div>
           <input
             type='number'
             value={scheduleInfo.openMinute}
             name='openMinute'
+            onChange={inputHandler}
+          />
+        </div>
+        <div className={styles.timeContainer}>
+          <div>슬롯 반영 시작날짜:</div>
+          <input
+            type='date'
+            value={startDateTime.toISOString().split('T')[0]}
+            name='startDate'
+            onChange={inputHandler}
+          />
+        </div>
+        <div className={styles.timeContainer}>
+          <div>슬롯 반영 시작시간(24hour):</div>
+          <input
+            type='number'
+            value={startDateTime.getHours()}
+            name='startTime'
             onChange={inputHandler}
           />
         </div>

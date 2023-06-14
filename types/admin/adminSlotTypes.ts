@@ -3,6 +3,7 @@ export type EditedSchedule = {
   futureSlotTime: number;
   interval: number;
   openMinute: number;
+  startTime: Date;
 };
 
 export type Slots = {
