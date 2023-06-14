@@ -8,8 +8,7 @@ import styles from 'styles/modal/match/MatchManualModal.module.scss';
 import { AiFillQuestionCircle } from 'react-icons/ai';
 
 type contentType = {
-  icon: React.ReactNode;
-  title: string;
+  title: React.ReactNode;
   description: string[];
 };
 
@@ -19,20 +18,22 @@ type contentsType = Record<MatchMode, contentType[]>;
 const modalContents: contentsType = {
   BOTH: [
     {
-      icon: <span></span>,
-      title: '아직 정해지지 않음',
+      title: <ContentTitle title={'아직 정해지지 않음'} />,
       description: [`아직 정해지지 않음`],
     },
     {
-      icon: <AiFillQuestionCircle />,
-      title: '엄청 긴 제목은 아마도 이렇게 보입니다 ',
+      title: (
+        <ContentTitle
+          title={'엄청 긴 제목은 아마도 이렇게 보입니다'}
+          icon={<AiFillQuestionCircle />}
+        />
+      ),
       description: [`아직 정해지지 않음`],
     },
   ],
   NORMAL: [
     {
-      icon: <span>🔍</span>,
-      title: '매칭',
+      title: <ContentTitle title={'매칭'} icon={'🔍'} />,
       description: [
         '등록한 경기가 끝나야만 다음 경기 등록 가능',
         '상대 팀이 공개되면 경기 취소 불가',
@@ -42,25 +43,21 @@ const modalContents: contentsType = {
       ],
     },
     {
-      icon: <span>📖</span>,
-      title: '일반 경기 규칙',
+      title: <ContentTitle title={'일반 경기 규칙'} icon={'📖'} />,
       description: ['자유 규칙 !'],
     },
     {
-      icon: <span>✅</span>,
-      title: '경기 결과',
+      title: <ContentTitle title={'경기 결과'} icon={'✅'} />,
       description: ['일반 게임 진행 시 점수 입력 없음'],
     },
     {
-      icon: <span>🚨</span>,
-      title: '노쇼',
+      title: <ContentTitle title={'노쇼'} icon={'🚨'} />,
       description: [`노쇼는 건의사항 기능 이용해서 신고`],
     },
   ],
   RANK: [
     {
-      icon: <span>🔍</span>,
-      title: '매칭',
+      title: <ContentTitle title={'매칭'} icon={'🔍'} />,
       description: [
         '등록한 경기가 끝나야만 다음 경기 등록 가능',
         '상대 팀이 공개되면 경기 취소 불가',
@@ -71,8 +68,7 @@ const modalContents: contentsType = {
       ],
     },
     {
-      icon: <span>📖</span>,
-      title: '랭크 경기 규칙',
+      title: <ContentTitle title={'랭크 경기 규칙'} icon={'📖'} />,
       description: [
         '11점 3판 2선승제',
         '경기시간은 슬롯에 표기',
@@ -83,8 +79,7 @@ const modalContents: contentsType = {
       ],
     },
     {
-      icon: <span>🚨</span>,
-      title: '서브 규칙',
+      title: <ContentTitle title={'서브 규칙'} icon={'🚨'} />,
       description: [
         '첫 세트만 서브 게임 진행',
         '서브 게임 승자부터 세트별 교대로 서브',
@@ -94,8 +89,7 @@ const modalContents: contentsType = {
       ],
     },
     {
-      icon: <span>✅</span>,
-      title: '경기 결과',
+      title: <ContentTitle title={'경기 결과'} icon={'✅'} />,
       description: [
         '경기 종료 후 그 자리에서 세트 점수 입력',
         '종료시간에 다음 경기가 있을 시 현재 스코어가 높은 선수가 승리',
@@ -103,8 +97,7 @@ const modalContents: contentsType = {
       ],
     },
     {
-      icon: <span>🚨</span>,
-      title: '노쇼',
+      title: <ContentTitle title={'노쇼'} icon={'🚨'} />,
       description: [
         `매치가 시작 되었으나 상대방이 나오지 않는다면 3분이 지날 때 마다 세트 점수 1점씩 획득`,
         '6분이 지났을 때도 나오지 않았다면 세트 점수 2:0 승리 처리',
@@ -136,17 +129,13 @@ export default function MatchManualModal({ radioMode }: Manual) {
         {modalContents[manualMode].map(
           (
             item: {
-              icon: React.ReactNode;
-              title: string;
+              title: React.ReactNode;
               description: string[];
             },
             index
           ) => (
             <li key={index}>
-              <div className={styles.ruleTitle}>
-                {item.icon}
-                <span>{item.title}</span>
-              </div>
+              {item.title}
               <ul className={styles.ruleDetail}>
                 {item.description.map((e, idx) => (
                   <li key={idx}>{e}</li>
@@ -162,6 +151,24 @@ export default function MatchManualModal({ radioMode }: Manual) {
       >
         확 인
       </button>
+    </div>
+  );
+}
+
+type contentTitleProps = {
+  title: string;
+  icon?: React.ReactNode | string;
+};
+
+function ContentTitle({ title, icon }: contentTitleProps) {
+  icon = typeof icon === 'string' ? <span>{icon}</span> : icon;
+  return (
+    <div
+      className={`${styles.ruleTitle} 
+      ${styles[icon ? 'withIcon' : 'withoutIcon']}`}
+    >
+      {icon ? icon : null}
+      <span>{title}</span>
     </div>
   );
 }
