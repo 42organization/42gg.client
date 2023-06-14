@@ -2,12 +2,20 @@
 
 .container {
   @include modal-container;
+  background: linear-gradient(180deg, #ce82c6 0%, #deb8ef 100%);
 }
 
 .phrase {
   @include modal-phrase;
+  .message {
+    font-family: 'NanumSqaure_acEB', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.04rem;
+    line-height: 150%;
+    padding: 1rem;
+  }
 }
 
 .buttons {
-  @include select-buttons(6rem);
+  @include modalButton;
 }

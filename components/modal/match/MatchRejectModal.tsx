@@ -20,7 +20,7 @@ export default function MatchRejectModal() {
     <div className={styles.container}>
       <div className={styles.phrase}>
         <div className={styles.emoji}>😤</div>
-        <div>{content.main}</div>
+        <div className={styles.message}>{content.main}</div>
         <div className={styles.subContent}>{content.sub}</div>
       </div>
       <div className={styles.buttons}>
