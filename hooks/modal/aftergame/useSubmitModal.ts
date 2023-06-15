@@ -67,10 +67,8 @@ const useSubmitModal = (currentGame: AfterGame) => {
     setModal({
       modalName: 'FIXED-STAT',
       exp: {
-        gameId: currentGame.gameId,
-        mode: currentGame.mode?.toLowerCase() as Lowercase<
-          Uppercase<MatchMode>
-        >,
+        gameId: gameId,
+        mode: mode,
       },
     });
   };

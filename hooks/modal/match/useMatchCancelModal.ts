@@ -49,7 +49,7 @@ const useMatchCancelModal = ({ startTime }: Cancel) => {
 
   const onCancel = async () => {
     try {
-      await instance.delete(`/pingpong/match?startTime=${startTime}`); // 초 단위 잘라내기
+      await instance.delete(`/pingpong/match?startTime=${startTime}`);
       alert(cancelResponse.SUCCESS);
     } catch (e: any) {
       if (e.response.data.code in cancelResponse)

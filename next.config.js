@@ -8,6 +8,7 @@ const nextConfig = {
     domains: [
       '42gg-public-test-image.s3.ap-northeast-2.amazonaws.com',
       '42gg-public-image.s3.ap-northeast-2.amazonaws.com',
+      'cdn.intra.42.fr',
     ],
   },
   eslint: {

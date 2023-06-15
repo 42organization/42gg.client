@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import styles from 'styles/Layout/NotiBar.module.scss';
 import { instance } from 'utils/axios';
-import { NewNotiContext, NewNotiContextState } from './NewNotiProvider';
+import { NotiProvider, NotiContextState } from './NotiContext';
 import { Noti } from 'types/notiTypes';
 import NotiItem from './NotiItem';
 
@@ -18,8 +18,25 @@ export const NotiCloseButton = () => {
   );
 };
 
+interface NullNotiProps {
+  createdAt: string;
+  isChecked: boolean;
+}
+
+const NullNoti = ({ createdAt, isChecked }: NullNotiProps) => {
+  const date = createdAt.slice(5).replace('T', ' ');
+
+  return (
+    <div className={isChecked ? `${styles.readWrap}` : `${styles.unreadWrap}`}>
+      <span className={styles.title}>실패</span>
+      <div className={styles.content}>알림을 불러올 수 없습니다!</div>
+      <div className={styles.date}>{date}</div>
+    </div>
+  );
+};
+
 export const NotiExist = () => {
-  const NotiContext = useContext<NewNotiContextState | null>(NewNotiContext);
+  const NotiContext = useContext<NotiContextState | null>(NotiProvider);
 
   return (
     <>
@@ -31,16 +48,24 @@ export const NotiExist = () => {
         />
       </div>
       <div>
-        {NotiContext?.noti.map((data: Noti) => (
-          <NotiItem key={data.id} data={data} />
-        ))}
+        {NotiContext?.noti.map((data: Noti) =>
+          data.message ? (
+            <NotiItem key={data.id} data={data} />
+          ) : (
+            <NullNoti
+              key={data.id}
+              createdAt={data.createdAt}
+              isChecked={data.isChecked}
+            />
+          )
+        )}
       </div>
     </>
   );
 };
 
 export const NotiEmpty = () => {
-  const NotiContext = useContext<NewNotiContextState | null>(NewNotiContext);
+  const NotiContext = useContext<NotiContextState | null>(NotiProvider);
 
   return (
     <div className={styles.emptyContent}>
@@ -55,12 +80,12 @@ export const NotiEmpty = () => {
 };
 
 export const NotiMain = () => {
-  const NotiContext = useContext<NewNotiContextState | null>(NewNotiContext);
+  const NotiContext = useContext<NotiContextState | null>(NotiProvider);
 
   if (NotiContext?.noti.length) {
     return <NotiExist />;
   }
-  return <NotiEmpty />;
+  return <NotiExist />;
 };
 
 interface ReloadNotiButtonProps {
