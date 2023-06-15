@@ -1,6 +1,7 @@
 @import 'styles/common.scss';
 
 @mixin notiWrap {
+  width: 15.75rem;
   height: 5rem;
   display: flex;
   flex-direction: column;
