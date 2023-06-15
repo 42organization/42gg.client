@@ -163,12 +163,6 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
     [slot]
   );
 
-  const isDisabled =
-    status === 'close' &&
-    !(event === 'match' && match[0].startTime === startTime)
-      ? true
-      : false; // 나의 매칭 경기가 close일 때 disabled 안 되게
-
   const isAfterSlot: boolean =
     new Date(startTime).getTime() - new Date().getTime() >= 0;
 
@@ -179,7 +173,6 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
     <>
       <button
         className={`${styles.slotButton} ${buttonStyle[status]}`}
-        //disabled={isDisabled}
         disabled={status === 'close'}
         onClick={enrollhandler}
       >
