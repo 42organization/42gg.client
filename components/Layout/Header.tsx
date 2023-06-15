@@ -37,7 +37,7 @@ export default function Header() {
 
   const setModal = useSetRecoilState<Modal>(modalState);
 
-  const getAnnouncementHandler = useAxiosGet({
+  const getAnnouncementHandler = useAxiosGet<any>({
     url: '/pingpong/announcement',
     setState: (data) => {
       data.content !== '' &&
