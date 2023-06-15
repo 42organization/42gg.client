@@ -23,10 +23,7 @@ export default function RankListMain({ rank, isMain }: RankListMainProps) {
   }, [rank]);
 
   const bangElements = Array.from({ length: 5 }, (_, index) => (
-    <div
-      key={index}
-      className={`${rank?.rankList[1].rank === 1 && !isMain && styles.bang}`}
-    />
+    <div key={index} className={`${!isMain && styles.bang}`} />
   ));
 
   return (

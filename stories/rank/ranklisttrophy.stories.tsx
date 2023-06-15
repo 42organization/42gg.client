@@ -4,7 +4,7 @@ import RankListMain, {
 } from 'components/rank/topRank/RankListMain';
 
 const meta: Meta<RankListMainProps> = {
-  title: 'RanklistMain',
+  title: 'RANK/RanklistMain',
   component: RankListMain,
   tags: ['autodocs'],
   argTypes: {},
@@ -14,6 +14,17 @@ export default meta;
 type Story = StoryObj<RankListMainProps>;
 
 export const Default: Story = {
+  args: {
+    rank: {
+      myRank: 150,
+      currentPage: 1,
+      totalPage: 20,
+      rankList: [],
+    },
+  },
+};
+
+export const NonDataRanker: Story = {
   args: {
     rank: {
       myRank: 150,
@@ -35,17 +46,6 @@ export const Default: Story = {
           userImageUri: 'image2.png',
         },
       ],
-    },
-  },
-};
-
-export const NonDataRanker: Story = {
-  args: {
-    rank: {
-      myRank: 150,
-      currentPage: -1,
-      totalPage: -1,
-      rankList: [],
     },
   },
 };
