@@ -78,7 +78,7 @@ export const MainMenu = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const setModal = useSetRecoilState<Modal>(modalState);
 
-  const getAnnouncementHandler = useAxiosGet({
+  const getAnnouncementHandler = useAxiosGet<any>({
     url: '/pingpong/announcement',
     setState: (data) => {
       data.content !== '' &&
