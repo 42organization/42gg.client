@@ -35,34 +35,6 @@ body {
   font-style: normal;
 }
 
-@font-face {
-  font-family: 'Roboto';
-  src: url('../public/font/Roboto-medium.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-
-}
-@font-face {
-  font-family: 'Fira Sans';
-  src: url('../public/font/FiraSans-Regular.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Heebo';
-  src: url('../public/font/Heebo-Regular.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Fenix';
-  src: url('../public/font/Fenix-Regular.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 ::-webkit-scrollbar {
   display: none;
 }
