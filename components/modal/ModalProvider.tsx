@@ -95,7 +95,7 @@ export default function ModalProvider() {
         id='modalOutside'
         onClick={closeModalHandler}
       >
-        <div className={styles.modalContainer}>{content[modalName]}</div>
+        {content[modalName]}
       </div>
     )
   );
