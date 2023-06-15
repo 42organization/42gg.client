@@ -51,8 +51,8 @@ export default function MatchBoard({ type, radioMode }: MatchBoardProps) {
   const getFirstOpenSlot = () => {
     for (let i = 0; i < matchBoards.length; i++) {
       const matchSlot = matchBoards[i];
-      if (matchSlot.status === 'open') {
-        return stringToHourMin(matchSlot.startTime).nHour;
+      if (matchSlot[0].status === 'open') {
+        return stringToHourMin(matchSlot[0].startTime).nHour;
       }
     }
     return null;
@@ -83,17 +83,29 @@ export default function MatchBoard({ type, radioMode }: MatchBoardProps) {
           </button>
         </div>
         <div className={styles.matchBoard}>
-          {matchBoards.map((slot, index) => (
-            <div
-              key={index}
-              ref={getScrollCurrentRef(stringToHourMin(slot.startTime).nHour)}
-            >
-              {stringToHourMin(slot.startTime).sMin === '00' && (
-                <MatchTime startTime={slot.startTime} />
-              )}
-              <MatchSlot radioMode={radioMode} slot={slot} />
-            </div>
-          ))}
+          {matchBoards.map((slot, index) => {
+            return (
+              <div
+                key={index}
+                ref={getScrollCurrentRef(
+                  stringToHourMin(slot[0].startTime).nHour
+                )}
+              >
+                {stringToHourMin(slot[0].startTime).sMin === '00' && (
+                  <MatchTime key={index} startTime={slot[0].startTime} />
+                )}
+                <div className={styles.slotGrid}>
+                  {slot.map((minSlots, minIndex) => (
+                    <MatchSlot
+                      key={index + minIndex}
+                      radioMode={radioMode}
+                      slot={minSlots}
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
@@ -167,8 +179,8 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
       // event === 'match' && match[0].startTime === startTime
       //   ? styles.mytable
       //   : styles.disabled, // 나의 매칭 경기가 close일 때 mytable 상태 표시
-      open: toggleMode === 'RANK' ? styles.rank : styles.normal,
-      match: toggleMode === 'RANK' ? styles.rank : styles.normal,
+      open: radioMode === 'RANK' ? styles.rank : styles.normal,
+      match: radioMode === 'RANK' ? styles.rank : styles.normal,
     }),
     [slot]
   );
@@ -186,7 +198,7 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
     status === 'close' ? 2 : status === 'mytable' || status === 'match' ? 1 : 0;
 
   return (
-    <div className={styles.slotGrid}>
+    <>
       <button
         className={`${styles.slotButton} ${buttonStyle[status]}`}
         // disabled={isDisabled}
@@ -207,6 +219,6 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
           {isAfterSlot && (headCount === 0 ? '+' : `${headCount}/2`)}
         </span>
       </button>
-    </div>
+    </>
   );
 };

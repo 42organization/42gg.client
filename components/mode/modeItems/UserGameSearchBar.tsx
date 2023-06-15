@@ -9,7 +9,6 @@ import useSearchBar from 'hooks/useSearchBar';
 export default function UserGameSearchBar() {
   const router = useRouter();
   const { intraId } = router.query;
-
   const {
     keyword,
     setKeyword,
@@ -18,7 +17,7 @@ export default function UserGameSearchBar() {
     setShowDropDown,
     searchResult,
     searchBarRef,
-    handleKeyDown,
+    gamehandleKeyDown,
   } = useSearchBar();
 
   useEffect(() => {
@@ -39,30 +38,26 @@ export default function UserGameSearchBar() {
 
   return (
     <div id={styles.game} className={styles.searchBar} ref={searchBarRef}>
+      <GoSearch />
       <input
         type='text'
         onChange={keywordHandler}
-        onKeyDown={handleKeyDown}
+        onKeyDown={gamehandleKeyDown}
         onFocus={() => setShowDropDown(true)}
         placeholder='유저 검색하기'
         maxLength={15}
         value={keyword}
       />
       <div className={styles.icons}>
-        {keyword ? (
-          <span
-            className={styles.reset}
-            onClick={() => {
-              setKeyword('');
-            }}
-          >
-            <IoIosCloseCircle />
-          </span>
-        ) : (
-          <span>
-            <GoSearch />
-          </span>
-        )}
+        <span
+          className={styles.reset}
+          style={{ visibility: `${keyword ? 'visible' : 'hidden'}` }}
+          onClick={() => {
+            setKeyword('');
+          }}
+        >
+          <IoIosCloseCircle />
+        </span>
       </div>
       {showDropDown && keyword && (
         <div className={styles.dropdown}>

@@ -1,0 +1,67 @@
+@import 'styles/admin/common.scss';
+
+.whole {
+  @include admin-modal;
+  svg {
+    width: 2.2rem;
+    height: 2.2rem;
+    color: #1556b8;
+  }
+}
+
+.msg {
+  margin: 1.375rem 0 1.65rem 0;
+}
+
+@mixin scoreItem {
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  &.win {
+    background: #e6faf1;
+    border: 1px solid #aedcc7;
+    color: #099255b0;
+  }
+  &.lose {
+    background: #f9eded;
+    border: 1px solid #efc4c4;
+    color: #f5353580;
+  }
+}
+
+.scoreInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'header1 header2'
+    'intra1 intra2'
+    'score1 score2';
+  margin: 1.65rem 0;
+}
+
+.header {
+  @include scoreItem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.intra {
+  @include scoreItem;
+}
+
+.score {
+  @include scoreItem;
+}
+
+.btns {
+  button {
+    padding: 0.469rem 2.188rem;
+    border-radius: 0.5rem;
+    &.cancelBtn {
+      @include admin-button('GRAY');
+      margin-right: 1.125rem;
+    }
+    &.modifyBtn {
+      @include admin-button('BLUE');
+    }
+  }
+}

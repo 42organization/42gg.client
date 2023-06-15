@@ -1,3 +1,5 @@
+export type ToggleMode = 'NORMAL' | 'RANK';
+
 export interface RankUser {
   rank: number;
   intraId: string;
@@ -16,8 +18,8 @@ export interface NormalUser {
 }
 
 export interface MyRank {
-  rank: number;
-  normal: number;
+  RANK: number;
+  NORMAL: number;
 }
 
 export interface Rank {
