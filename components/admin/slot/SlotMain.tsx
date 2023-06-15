@@ -25,13 +25,12 @@ export default function SlotMain() {
   const [showTime, setShowTime] = useState<number>(0);
   const [lastHour, setLastHour] = useState<number>(0);
   const [firstHour, setFirstHour] = useState<number>(0);
-  const [startDateTime, setStartDateTime] = useState<Date>(new Date());
   const setSnackbar = useSetRecoilState(toastState);
   const currentHour = new Date().getHours();
   const initScheduleInfo = async () => {
     try {
-      const res = await instanceInManage.get(`/slot`); //ToDo: api 명세 나오면 바꾸기
-      setScheduleInfo(res?.data);
+      const res = await instanceInManage.get(`/slot-management`); //ToDo: api 명세 나오면 바꾸기
+      setScheduleInfo(res?.data.slotList[0]);
     } catch (e) {
       console.error('SW00');
     }
@@ -61,6 +60,7 @@ export default function SlotMain() {
     initScheduleInfo();
     initSlotInfo();
   }, []);
+
   const inputHandler = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -72,28 +72,14 @@ export default function SlotMain() {
     if ((name === 'futurePreview' || name === 'openMinute') && intValue < 0)
       return;
     if (name === 'futurePreview') return setFuturePreview(intValue);
-    if (name === 'startDate') {
-      const [year, month, day] = value.split('-');
-      const newDateTime = new Date(startDateTime);
-      newDateTime.setFullYear(
-        parseInt(year),
-        parseInt(month) - 1,
-        parseInt(day)
-      );
-      newDateTime.setMinutes(
-        newDateTime.getMinutes() - newDateTime.getTimezoneOffset()
-      );
-      setStartDateTime(newDateTime);
-    } else if (name === 'startTime') {
-      const newDateTime = new Date(startDateTime);
-      newDateTime.setHours(intValue);
-      setStartDateTime(newDateTime);
-    } else {
-      setScheduleInfo((prev) => ({
-        ...prev,
-        [name]: intValue,
-      }));
+    if (name === 'startDateTime') {
+      setScheduleInfo((prev) => ({ ...prev, ['startTime']: new Date(value) }));
+      return;
     }
+    setScheduleInfo((prev) => ({
+      ...prev,
+      [name]: intValue,
+    }));
   };
 
   const intervalOptions = Array.from({ length: 60 }, (_, i: number) => i + 1)
@@ -129,11 +115,7 @@ export default function SlotMain() {
       return;
     }
     try {
-      const updatedScheduleInfo = {
-        ...scheduleInfo,
-        startTime: startDateTime,
-      };
-      await instanceInManage.post(`/slot-management`, updatedScheduleInfo);
+      await instanceInManage.post(`/slot-management`, scheduleInfo);
       initSlotInfo();
     } catch (e) {
       console.error('SW02');
@@ -263,18 +245,9 @@ export default function SlotMain() {
         <div className={styles.timeContainer}>
           <div>슬롯 반영 시작날짜:</div>
           <input
-            type='date'
-            value={startDateTime.toISOString().split('T')[0]}
-            name='startDate'
-            onChange={inputHandler}
-          />
-        </div>
-        <div className={styles.timeContainer}>
-          <div>슬롯 반영 시작시간(24hour):</div>
-          <input
-            type='number'
-            value={startDateTime.getHours()}
-            name='startTime'
+            type='datetime-local'
+            // value={scheduleInfo.startTime}
+            name='startDateTime'
             onChange={inputHandler}
           />
         </div>
