@@ -12,18 +12,14 @@ import { useContext } from 'react';
 import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import useAxiosGet from 'hooks/useAxiosGet';
-import Image from 'next/image';
 import NotiBell from 'public/image/noti_bell.svg';
 
 export default function Header() {
   const [live, setLive] = useRecoilState(liveState);
-
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
-
   const openMenuBarHandler = () => {
     HeaderState?.setOpenMenuBarState(!HeaderState?.openMenuBarState);
   };
-
   const openNotiBarHandler = () => {
     HeaderState?.setOpenNotiBarState(!HeaderState?.openNotiBarState);
     setLive((prev) => ({ ...prev, notiCount: 0 }));

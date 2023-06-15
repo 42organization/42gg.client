@@ -16,7 +16,11 @@ export interface HeaderContextState {
 
 export const HeaderContext = createContext<HeaderContextState | null>(null);
 
-const HeaderStateContext = (props) => {
+interface HeaderStateContextProps {
+  children: React.ReactNode;
+}
+
+const HeaderStateContext = (props: HeaderStateContextProps) => {
   const [menu, setMenu] = useState<boolean>(false);
   const [noti, setNoti] = useState<boolean>(false);
 

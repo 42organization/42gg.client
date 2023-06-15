@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styles from 'styles/Layout/MenuBar.module.scss';
 import { HeaderContextState, HeaderContext } from '../HeaderContext';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import { User } from 'types/mainType';
 import Link from 'next/link';
@@ -9,6 +9,7 @@ import PlayerImage from 'components/PlayerImage';
 import { profileState } from 'utils/recoil/user';
 import { ProfileBasic } from 'types/userTypes';
 import { MainMenu, AdminMenu } from './MenuBarElement';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 const MenuTop = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
@@ -24,7 +25,18 @@ const MenuTop = () => {
 const MenuProfile = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const user = useRecoilValue<User>(userState);
-  const userLevel = useRecoilValue<ProfileBasic>(profileState).level;
+  const [profile, setProfile] = useRecoilState<ProfileBasic>(profileState);
+
+  const getProfile = useAxiosGet({
+    url: `/pingpong/users/${user.intraId}`,
+    setState: setProfile,
+    err: 'SJ03',
+    type: 'setError',
+  });
+
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   return (
     <div className={styles.menuProfileWrapper}>
@@ -50,7 +62,7 @@ const MenuProfile = () => {
           </Link>
           님
         </div>
-        <div className={styles.userLevel}>LV.{userLevel}</div>
+        <div className={styles.userLevel}>LV.{profile.level}</div>
       </div>
     </div>
   );
