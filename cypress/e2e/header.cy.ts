@@ -1,3 +1,5 @@
+export {};
+
 describe('헤더 테스트 🥳', () => {
   before(() => {
     cy.login(Cypress.env('ADMIN_USERNAME'), Cypress.env('ADMIN_PASSWORD'));

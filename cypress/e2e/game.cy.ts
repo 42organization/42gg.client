@@ -1,3 +1,5 @@
+export {};
+
 describe('게임 기능 테스트', () => {
   before(() => {
     cy.login(Cypress.env('NORMAL_USERNAME'), Cypress.env('NORMAL_PASSWORD'));

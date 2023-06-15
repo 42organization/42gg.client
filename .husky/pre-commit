@@ -1,9 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-if [ $(git rev-parse --abbrev-ref HEAD) = 'deploy' ]; then
-    echo 'You cannot commit directly to the deploy branch'
-    exit 1
-fi
-
-npx lint-staged
