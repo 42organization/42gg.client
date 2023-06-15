@@ -6,7 +6,7 @@ import modalStyles from 'styles/modal/Modal.module.scss';
 export default function WelcomeModal() {
   const setFirstVisited = useSetRecoilState(firstVisitedState);
   const content = {
-    title: 'Welcome',
+    title: 'Welcome!',
     message:
       '42GG에 오신걸 환영합니다.\n당신의 행복한 탁구 생활을\n응원합니다! 총총총...',
   };
@@ -38,7 +38,7 @@ export default function WelcomeModal() {
           <div className={styles.phrase}>
             <div className={styles.emoji}></div>
             <div className={styles.title}>{content.title}</div>
-            {content.message}
+            <div className={styles.message}>{content.message}</div>
             <div className={styles.rose}>
               <span>{`@`}</span>
               <span>{`)->->--`}</span>

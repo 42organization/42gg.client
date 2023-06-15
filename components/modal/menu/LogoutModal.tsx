@@ -13,7 +13,7 @@ export default function LogoutModal() {
     <div className={styles.container}>
       <div className={styles.phrase}>
         <div className={styles.emoji}>🥲</div>
-        <div>
+        <div className={styles.message}>
           로그아웃
           <br />
           하시겠습니까?

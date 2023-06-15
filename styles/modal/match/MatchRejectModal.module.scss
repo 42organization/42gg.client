@@ -1,16 +1,24 @@
 @import 'styles/common.scss';
 
 .container {
-  @include modal-container;
-  padding: 0 0.5rem;
+  @include modalContainer('PINKWHITE');
 }
 
 .phrase {
   @include modal-phrase;
-  font-size: $medium-font;
   white-space: pre-wrap;
+  color: rgba(49, 47, 49, 1);
+  .message {
+    font-size: 1.125rem;
+    font-family: 'NanumSqaure_acEB', sans-serif;
+    padding: 1rem;
+  }
+  .subContent {
+    font-size: 0.9rem;
+    padding-bottom: 1rem;
+  }
 }
 
 .buttons {
-  @include select-buttons;
+  @include modalButton;
 }

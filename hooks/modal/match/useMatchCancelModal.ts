@@ -27,7 +27,7 @@ const useMatchCancelModal = ({ startTime }: Cancel) => {
 
   const content = {
     cancel: {
-      emoji: '🤔',
+      emoji: '😯',
       main: '해당 경기를\n취소하시겠습니까?',
       sub: '⚠︎ 매칭이 완료된 경기를 취소하면\n1분 간 새로운 예약이 불가합니다!',
     },

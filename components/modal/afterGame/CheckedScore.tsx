@@ -9,7 +9,7 @@ export default function CheckedScore({ result }: CheckedScoreProps) {
   return (
     <div className={styles.finalScore}>
       <div>{result.myTeamScore}</div>
-      <div>:</div>
+      <div className={styles.middle}>:</div>
       <div>{result.enemyTeamScore}</div>
     </div>
   );
