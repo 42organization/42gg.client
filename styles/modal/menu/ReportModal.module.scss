@@ -1,9 +1,8 @@
 @import 'styles/common.scss';
 
 .container {
-  @include modal-container;
+  @include modalContainer('MISTYPINK');
   align-items: stretch;
-  background: rgba(240, 210, 210, 1);
 }
 
 .title {

@@ -17,8 +17,7 @@ $ppp-font: 2.8rem;
 }
 
 .container {
-  @include modal-container;
-  background: linear-gradient(180deg, #8ba2d2 0%, #6233af 100%);
+  @include modalContainer('SKYVIOLET');
   align-items: stretch;
   min-height: 18.75rem;
   min-width: 21rem;

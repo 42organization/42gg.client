@@ -1,8 +1,7 @@
 @import 'styles/common.scss';
 
 .container {
-  @include modal-container;
-  background: linear-gradient(180deg, #829ace 0%, #deb8ef 100%);
+  @include modalContainer('SKYPINK');
 }
 
 .phrase {

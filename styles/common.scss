@@ -186,14 +186,36 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   margin-bottom: 2rem;
 }
 
-@mixin modal-container {
+@mixin modalContainer($type) {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  padding: 1.4rem 1.75rem 2.375rem 1.75rem;
-  border-radius: 0.625rem;
-  box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.25);
+  margin: 2rem 1.5rem;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.25);
+
+  @if ($type == 'DARKPURPLE') {
+    background: linear-gradient(
+      180deg,
+      #7f5792 0%,
+      #1d0b25 48.44%,
+      #775189 95.91%
+    );
+  } @else if ($type == 'LIGHTPINK') {
+    background: rgba(237, 214, 240, 1);
+  } @else if ($type == 'MISTYPINK') {
+    background: rgba(240, 210, 210, 1);
+  } @else if ($type == 'PINKWHITE') {
+    background: linear-gradient(180deg, #ce82c6 0%, #deb8ef 100%);
+  } @else if ($type == 'PINKVIOLET') {
+    background: linear-gradient(180deg, #cd82ce 0%, #ba9aff 100%);
+  } @else if ($type == 'SKYVIOLET') {
+    background: linear-gradient(180deg, #8ba2d2 0%, #6233af 100%);
+  } @else if ($type == 'SKYPINK') {
+    background: linear-gradient(180deg, #829ace 0%, #deb8ef 100%);
+  }
 }
 
 @mixin spanUpDownAnimation($fontSize, $padding) {

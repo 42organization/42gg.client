@@ -1,8 +1,7 @@
 @import 'styles/common.scss';
 
 .container {
-  @include modal-container;
-  background: rgba(237, 214, 240, 1);
+  @include modalContainer('LIGHTPINK');
 }
 
 .phrase {

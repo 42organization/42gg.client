@@ -1,10 +1,9 @@
 @import 'styles/common.scss';
 
 .container {
-  @include modal-container;
+  @include modalContainer('SKYPINK');
   width: 80vw;
   max-width: 22rem;
-  background: linear-gradient(180deg, #829ace 0%, #deb8ef 100%);
 }
 
 .title {
