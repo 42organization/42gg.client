@@ -19,6 +19,7 @@ import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
 import AdminSeasonEdit from './admin/SeasonEdit';
 import FeedbackDetailModal from './admin/FeedbackDetailModal';
 import DeletePenaltyModal from './admin/DeletePenaltyModal';
+import AdminModifyScoreModal from './admin/AdminModifyScoreModal';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
@@ -35,6 +36,7 @@ export default function ModalProvider() {
       feedback,
       userId,
       ISeason,
+      ModifyScore,
     },
     setModal,
   ] = useRecoilState(modalState);
@@ -66,6 +68,9 @@ export default function ModalProvider() {
       intraId && detailContent ? (
         <FeedbackDetailModal intraId={intraId} detailContent={detailContent} />
       ) : null,
+    'ADMIN-MODIFY_SCORE': ModifyScore ? (
+      <AdminModifyScoreModal {...ModifyScore} />
+    ) : null,
   };
 
   useEffect(() => {
@@ -90,7 +95,7 @@ export default function ModalProvider() {
         id='modalOutside'
         onClick={closeModalHandler}
       >
-        <div className={styles.modalContainer}>{content[modalName]}</div>
+        {content[modalName]}
       </div>
     )
   );

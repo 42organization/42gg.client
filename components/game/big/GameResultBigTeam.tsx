@@ -5,13 +5,17 @@ import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultBigTeamProps {
   team: Team;
+  zIndexList?: boolean;
 }
 
 export function isRankPlayerType(arg: Player | RankPlayer): arg is RankPlayer {
   return 'wins' in arg;
 }
 
-export default function GameResultBigTeam({ team }: GameResultBigTeamProps) {
+export default function GameResultBigTeam({
+  team,
+  zIndexList,
+}: GameResultBigTeamProps) {
   return (
     <div className={styles.bigTeam}>
       {team.players.map((player, index) => (
@@ -26,12 +30,13 @@ export default function GameResultBigTeam({ team }: GameResultBigTeamProps) {
               <div className={styles.userId}>{player.intraId}</div>
             </div>
           </Link>
-          <div className={styles.winRate}>
-            <span>
-              {isRankPlayerType(player)
-                ? `${player.wins}승 ${player.losses}패`
-                : `Lv. ${player.level}`}
-            </span>
+          <div
+            className={`${styles['winRate']} 
+            ${zIndexList && styles['zIndexWinRate']}`}
+          >
+            {isRankPlayerType(player)
+              ? `${player.wins}승 ${player.losses}패`
+              : `Lv. ${player.level}`}
           </div>
         </div>
       ))}

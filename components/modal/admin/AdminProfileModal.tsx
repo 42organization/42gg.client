@@ -194,7 +194,7 @@ export default function AdminProfileModal(props: { intraId: string }) {
                           onChange={inputHandler}
                           checked={userInfo?.racketType === racket.id}
                         />
-                        <div className={styles.radioButton}>{racket.label}</div>
+                        <div className={styles.radioButton}>{racket.id}</div>
                       </label>
                     );
                   })}

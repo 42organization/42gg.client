@@ -1,28 +1,66 @@
 @import '../common.scss';
 
+@mixin ButtonBackground($page) {
+  @if ($page == 'GAME') {
+    :checked + .modeButton {
+      &.both {
+        background: #f82f9a;
+      }
+      &.normal {
+        background: #3270cd;
+      }
+      &.rank {
+        background: #a06cbf;
+      }
+    }
+    .modeButton {
+      background: #000000;
+    }
+  } @else if ($page == 'MATCH') {
+    // TODO 매치 슬롯에서 쓰이는 모드 버튼 추가할 것
+  } @else if ($page == 'MANUAL') {
+    :checked + .modeButton {
+      background: #380052;
+    }
+    .modeButton {
+      background: #98819b;
+    }
+  }
+}
+
 .modeButtons {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 0.25rem;
   justify-items: stretch;
   align-items: stretch;
-  margin: 0.5rem 0.6rem 0 0.6rem;
+  margin: 0 1.25rem;
+  color: #ffffff;
+  &.zIndexListButton {
+    margin: 0 1.916rem;
+  }
   input[type='radio'] {
     position: absolute;
     opacity: 0;
   }
-  :checked + .modeButton {
-    background: #f9f6ff;
+  // 사용되는 페이지별로 다른 background 적용
+  &.game {
+    @include ButtonBackground('GAME');
+  }
+  &.match {
+    @include ButtonBackground('MATCH');
+  }
+  &.manual {
+    @include ButtonBackground('MANUAL');
+    margin: 0;
   }
   .modeButton {
     display: flex;
+    box-sizing: border-box;
     justify-content: center;
     align-items: center;
-    height: 2rem;
-    background: #e4caf4;
-    border: solid 1px $dark-gray;
-    border-radius: $small-radius;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    height: 2.063rem;
+    border-radius: 0.625rem 0.625rem 0 0;
     font-size: 0.9rem;
     letter-spacing: 2px;
     text-align: center;

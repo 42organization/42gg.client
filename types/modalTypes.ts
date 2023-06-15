@@ -1,6 +1,7 @@
 import { MatchMode } from './mainType';
 import { Value } from 'react-quill';
 import { IFeedback } from 'components/admin/feedback/FeedbackTable';
+import { ModifyScoreType } from 'types/admin/gameLogTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -19,7 +20,8 @@ type AdminModal =
   | 'NOTI_USER'
   | 'CHECK_FEEDBACK'
   | 'DETAIL_CONTENT'
-  | 'SEASON_EDIT';
+  | 'SEASON_EDIT'
+  | 'MODIFY_SCORE';
 
 type ModalName =
   | null
@@ -80,4 +82,5 @@ export interface Modal {
   feedback?: IFeedback;
   userId?: number;
   ISeason?: ISeason;
+  ModifyScore?: ModifyScoreType;
 }

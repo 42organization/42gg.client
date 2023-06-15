@@ -19,6 +19,7 @@ $big-radius: 5rem;
 $pp-red: #de1825;
 $pp-pink: #ffc5c8;
 $pp-blue: #471df0;
+$pp-gray: #7a6e7b;
 
 $rank-red: #de1825;
 $rank-purple: #b24bf1;
@@ -38,8 +39,11 @@ $light-gray: #f0f0f0;
 $gray: #dadada;
 $medium-gray: #cccccc;
 $dark-gray: #676767;
+$white1: #e3e2e2;
+$white2: #f6f6f6;
 
 $btn-blue: #2d80ed;
+$btn-purple: linear-gradient(180deg, #c66bf2 0%, rgba(96, 6, 138, 0.52) 100%);
 $dark-blue: #24098f;
 
 $g1-top: #8dbbf9;
@@ -139,8 +143,8 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   border-radius: $small-radius;
   background: if(
     $btn-color == white,
-    linear-gradient(to bottom, $btn-color, $medium-gray),
-    linear-gradient(to bottom, $btn-color, $dark-blue)
+    linear-gradient(180deg, rgba(44, 41, 46, 0.52) 0%, #454147 100%),
+    $btn-color
   );
   color: $txt-color;
   font-size: $medium-font;
@@ -154,7 +158,7 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   align-items: center;
   .negative {
     input {
-      @include button(white, black, $width, $height);
+      @include button(white, white, $width, $height);
     }
     margin-right: 1rem;
     :hover {
@@ -163,10 +167,14 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   }
   .positive {
     input {
-      @include button($btn-blue, white, $width, $height);
+      @include button($btn-purple, white, $width, $height);
     }
     :hover {
-      background: linear-gradient(to bottom, $dark-blue, $btn-blue);
+      background: linear-gradient(
+        180deg,
+        #ac3ce0 0%,
+        rgba(65, 4, 94, 0.72) 100%
+      );
     }
   }
 }
@@ -188,7 +196,27 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   margin-bottom: 2rem;
 }
 
-@mixin modal-container {
+// TODO: 다른 것들도 이름 변경
+@mixin modalContainer($type) {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 2rem 1.5rem;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  @if ($type == 'DARKPURPLE') {
+    background: linear-gradient(
+      180deg,
+      #7f5792 0%,
+      #1d0b25 48.44%,
+      #775189 95.91%
+    );
+  }
+}
+
+// TODO: 충돌로 인해 삭제하지 못함. 나중에 삭제할 것
+@mixin modal-container() {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -197,7 +225,7 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin spanUpDownAnimation($fontSize, $padding) {
-  padding: $padding;
+  padding: 0 $padding;
   font-size: $fontSize;
   animation: upDown 0.75s infinite;
 }
@@ -206,7 +234,6 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   position: relative;
   width: $size;
   height: $size;
-  border: 1px solid white;
   border-radius: 50%;
   background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
   img {

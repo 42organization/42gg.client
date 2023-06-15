@@ -1,0 +1,34 @@
+@mixin admin-modal {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  padding: 34px 54px;
+  color: #6b7280;
+}
+
+@mixin admin-button($color, $disabled: '') {
+  border: none;
+  @if ($color == 'BLUE') {
+    background-color: #2678f3;
+    color: #ffffff;
+  } @else if ($color == 'GRAY') {
+    background: #6c757d;
+    color: #ffffff;
+  } @else if ($color == 'PALE-BLUE') {
+    background: #c3ddfd;
+    color: #2678f3;
+  } @else if ($color == 'PALE-GRAY') {
+    background: #e5e7eb;
+    color: #6b7280;
+  } @else {
+    // 기본 : 'BLUE'
+    background-color: #2678f3;
+    color: #ffffff;
+  }
+  @if ($disabled == 'disabled') {
+    opacity: 0.3;
+  }
+}
