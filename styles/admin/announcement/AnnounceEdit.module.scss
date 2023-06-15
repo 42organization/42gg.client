@@ -24,7 +24,7 @@
 }
 
 .announceModalContainer {
-  @include modalContainer;
+  @include modalContainer('SKYPINK');
   margin: 1.6rem 1.5rem;
 }
 
