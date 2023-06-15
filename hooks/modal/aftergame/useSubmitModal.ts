@@ -52,8 +52,8 @@ const useSubmitModal = (currentGame: AfterGame) => {
       await instance.post(`/pingpong/games/rank`, requestBody);
       alert(rankResponse['SUCCESS']);
     } catch (e) {
-      if (axios.isAxiosError(e)) {
-        const { code } = e.response as unknown as errorResponse;
+      if (axios.isAxiosError(e) && e.response) {
+        const { code } = e.response.data as unknown as errorResponse;
         if (code == 'GM202' || code == 'GM204') {
           alert(rankResponse[code]);
         }
