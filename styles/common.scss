@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Life+Savers&display=swap');
+
 /* font-size */
 $giant-giant-font: 2.4rem;
 $giant-big-font: 2.1rem;
@@ -20,12 +22,17 @@ $pp-blue: #471df0;
 $pp-gray: #7a6e7b;
 
 $rank-red: #de1825;
+$rank-purple: #b24bf1;
+$rank-hotpink: #ff7ac2;
 $rank-pink: #ffc5c8;
+$rank-pink2: #feede3;
+$rank-pink3: #ffc0d3;
 $rank-blue: #471df0;
 
 $norm-hotpink: #dc3789;
 $norm-lightblue: #5acfe8;
 $norm-lightblue2: #1ea1c8;
+$norm-purple: #b24bf1;
 $norm-emerald: #cef1d0;
 
 $light-gray: #f0f0f0;
@@ -108,8 +115,6 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 @mixin pageTitle {
   color: white;
   font-family: $title-font;
-  font-size: 1.625rem;
-  margin-bottom: 1rem;
 }
 
 @mixin modalTitle {
@@ -230,6 +235,16 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   height: $size;
   border-radius: 50%;
   background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  img {
+    border-radius: 50%;
+  }
+}
+
+@mixin userRankImage($size) {
+  position: relative;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
   img {
     border-radius: 50%;
   }

@@ -1,6 +1,8 @@
 // @import 'styles/common.scss';
 
 .sectionWrap {
+  position: relative;
+  z-index: 1;
   margin-top: 2.5rem;
   > .titleWrap {
     display: flex;

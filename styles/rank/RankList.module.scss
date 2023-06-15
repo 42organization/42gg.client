@@ -7,24 +7,22 @@
 
 .title {
   @include pageTitle;
-  &.vip {
-    text-shadow: $text-border-black, 0.3rem 0.3rem 0 $norm-lightblue2;
-  }
 }
 
 /* MyRank */
 .myRank {
-  width: fit-content;
-  margin-bottom: 1.7rem;
-  margin-inline: auto;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0.5rem;
   color: white;
-  font-weight: 600;
-  font-size: $medium-font;
-  text-shadow: 0.1rem 0.1rem 0.1rem $rank-blue;
-  text-align: center;
-  span:nth-child(2) {
-    color: $g1-top;
-  }
+  opacity: 0.5;
+  width: fit-content;
+  font-weight: 700;
+  font-size: $big-font;
+  font-family: $title-font;
+  text-decoration-line: underline;
+  color: #df98d7;
+  margin-left: auto;
   &.rank {
     cursor: pointer;
   }
@@ -38,36 +36,35 @@
   align-items: center;
   height: 2.5rem;
   padding: 0 0.2rem;
-  margin-top: 0.15rem;
-  border-radius: $big-radius;
+  margin-top: 0rem;
   color: $dark-gray;
-  div:nth-child(2) {
-    justify-self: start;
+  &:not(:nth-child(2)) {
+    margin-top: 0.15rem;
   }
 }
 
 .container {
+  position: relative;
+  z-index: 1;
   font-size: $small-font;
 }
 
 .division {
   @include rankGrid;
-  background: $rank-red;
-  color: white;
-  font-weight: 700;
+  background: #c9a5e6;
+  color: black;
+  font-weight: 500;
+  border-radius: 0.5rem 0.5rem 0 0;
   &.normal {
-    background: $norm-lightblue2;
+    background: #59afdf;
   }
 }
 
-/* RankListItem */
 .rankItemWrap {
   @include rankGrid;
-  &.odd {
-    background: white;
-  }
-  &.even {
-    background: $gray;
+  background: #e8d1fc;
+  &.Vip {
+    background: #d9e3ff;
   }
   &.top {
     color: $loser-red;
@@ -77,15 +74,14 @@
     color: $dark-gray;
   }
   &.myRanking {
-    border: 0.07rem solid $rank-red;
-    background: $g1-bottom;
+    border: 0.1rem solid #962fea;
+    background: #c9a5e6;
   }
   &.myVip {
-    border: 0.07rem solid $norm-lightblue2;
-    background: $norm-emerald;
+    border: 0.07rem solid #59afdf;
+    background: #59afdf;
   }
   .intraId {
-    justify-self: start;
     color: black;
     font-weight: 700;
     span {
@@ -97,9 +93,12 @@
     color: $dark-gray;
   }
   .ppp {
-    justify-self: center;
-    color: $winner-blue;
+    color: #6c00d9;
     font-weight: 600;
+  }
+
+  &.Vip .ppp {
+    color: #cb0c9f;
   }
 }
 

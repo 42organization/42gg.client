@@ -139,3 +139,31 @@
     @include userImage(4.7rem);
   }
 }
+
+.ranktropybig {
+  @include imageWrap;
+  div {
+    @include userRankImage(6.5rem);
+    cursor: pointer;
+  }
+}
+.ranktropy {
+  @include imageWrap;
+  div {
+    @include userRankImage(4.5rem);
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 467px) {
+  .ranktropy {
+    div {
+      @include userRankImage(4rem);
+    }
+  }
+  .ranktropybig {
+    div {
+      @include userRankImage(5rem);
+    }
+  }
+}
