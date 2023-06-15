@@ -7,6 +7,7 @@ const meta: Meta<typeof ModeRadiobox> = {
   tags: ['autodocs'],
   argTypes: {
     mode: ['BOTH', 'NORMAL', 'RANK'],
+    page: ['GAME', 'MATCH', 'MANUAL'],
     zIndexList: Boolean,
   },
 };
@@ -14,23 +15,32 @@ const meta: Meta<typeof ModeRadiobox> = {
 export default meta;
 type Story = StoryObj<typeof ModeRadiobox>;
 
-export const Both: Story = {
+export const GameRadio: Story = {
   args: {
     mode: 'BOTH',
+    page: 'GAME',
     zIndexList: false,
   },
 };
 
-export const Normal: Story = {
+export const MatchRadio: Story = {
   args: {
-    mode: 'NORMAL',
+    mode: 'BOTH',
+    page: 'MATCH',
     zIndexList: false,
   },
 };
 
-export const Rank: Story = {
+export const ManualRadio: Story = {
   args: {
-    mode: 'RANK',
+    mode: 'BOTH',
+    page: 'MANUAL',
     zIndexList: false,
+  },
+  parameters: {
+    backgrounds: {
+      default: 'ManualModal',
+      values: [{ name: 'ManualModal', value: '#775189' }],
+    },
   },
 };

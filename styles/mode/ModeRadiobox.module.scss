@@ -1,8 +1,37 @@
 @import '../common.scss';
 
+@mixin ButtonBackground($page) {
+  @if ($page == 'GAME') {
+    :checked + .modeButton {
+      &.both {
+        background: #f82f9a;
+      }
+      &.normal {
+        background: #3270cd;
+      }
+      &.rank {
+        background: #a06cbf;
+      }
+    }
+    .modeButton {
+      background: #000000;
+    }
+  } @else if ($page == 'MATCH') {
+    // TODO 매치 슬롯에서 쓰이는 모드 버튼 추가할 것
+  } @else if ($page == 'MANUAL') {
+    :checked + .modeButton {
+      background: #380052;
+    }
+    .modeButton {
+      background: #98819b;
+    }
+  }
+}
+
 .modeButtons {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 0.25rem;
   justify-items: stretch;
   align-items: stretch;
   margin: 0 1.25rem;
@@ -14,16 +43,16 @@
     position: absolute;
     opacity: 0;
   }
-  :checked + .modeButton {
-    &.both {
-      background: #f82f9a;
-    }
-    &.normal {
-      background: #3270cd;
-    }
-    &.rank {
-      background: #a06cbf;
-    }
+  // 사용되는 페이지별로 다른 background 적용
+  &.game {
+    @include ButtonBackground('GAME');
+  }
+  &.match {
+    @include ButtonBackground('MATCH');
+  }
+  &.manual {
+    @include ButtonBackground('MANUAL');
+    margin: 0;
   }
   .modeButton {
     display: flex;
@@ -31,8 +60,6 @@
     justify-content: center;
     align-items: center;
     height: 2.063rem;
-    margin: 0 0.125rem;
-    background: #0e0518;
     border-radius: 0.625rem 0.625rem 0 0;
     font-size: 0.9rem;
     letter-spacing: 2px;
