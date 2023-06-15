@@ -69,14 +69,35 @@
   }
 }
 
+.mainProfile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem;
+  border-radius: 50%;
+  background: linear-gradient(
+    to right bottom,
+    #0030ac 0%,
+    #90a5ff 50%,
+    #cb8fff 100%
+  );
+  div {
+    @include userImage(8rem);
+  }
+}
+
 .profile {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.3rem;
-  border: solid 1px white;
-  border-radius: $mini-radius;
-  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  padding: 0.2rem;
+  border-radius: 50%;
+  background: linear-gradient(
+    to right bottom,
+    #0030ac 0%,
+    #90a5ff 50%,
+    #cb8fff 100%
+  );
   div {
     @include userImage(4.7rem);
   }
