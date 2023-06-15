@@ -1,120 +1,150 @@
-import React, { ReactNode, MouseEvent, useContext } from 'react';
+import React, { MouseEvent, useContext, MouseEventHandler } from 'react';
 import Link from 'next/link';
 import styles from 'styles/Layout/MenuBar.module.scss';
-import { NewMenuContextState, NewMenuContext } from './MenuBarProvider';
 import { HeaderContextState, HeaderContext } from '../HeaderContext';
+import useAxiosGet from 'hooks/useAxiosGet';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { Modal } from 'types/modalTypes';
+import { modalState } from 'utils/recoil/modal';
+import { userState } from 'utils/recoil/layout';
+import { User } from 'types/mainType';
+import RankingEmoji from 'public/image/menu_ranking.svg';
+import CurrentMatchEmoji from 'public/image/menu_currentMatch.svg';
+import AnnouncementEmoji from 'public/image/menu_announcement.svg';
+import ManualEmoji from 'public/image/menu_manual.svg';
+import ReportEmoji from 'public/image/menu_report.svg';
+import StatisticsEmoji from 'public/image/menu_statistics.svg';
+import AdminEmoji from 'public/image/menu_admin.svg';
+import SignOutEmoji from 'public/image/menu_signOut.svg';
 
 interface MenuLinkProps {
   link: string;
   onClick?: (event: MouseEvent<HTMLDivElement>) => void;
-  children: ReactNode;
+  itemName: string;
+}
+interface menuItemProps {
+  itemName: string;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
-interface SubLinkProps {
-  link: string;
-  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
-  children: ReactNode;
-}
-interface AdminMenuProps {
-  isAdmin: boolean | undefined;
-  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
-  children?: ReactNode;
-}
-
-const MenuLink = ({ link, onClick, children }: MenuLinkProps) => (
-  <Link href={link}>
-    <div onClick={onClick}>{children}</div>
-  </Link>
-);
-
-const SubMenuLink = ({ link, children }: SubLinkProps) => (
-  <div onClick={() => window.open(link)}>{children}</div>
-);
-
-const AdminMenuLink = ({ isAdmin, onClick }: AdminMenuProps) => (
-  <div>
-    {isAdmin && (
-      <div className={styles.subMenu}>
-        <Link href='/statistics'>
-          <div>📊 통계페이지</div>
-        </Link>
-        <Link href='/admin'>
-          <div onClick={onClick}>😎 관리자</div>
-        </Link>
-      </div>
-    )}
-  </div>
-);
-
-export const MainMenu = () => {
-  const MenuContext = useContext<NewMenuContextState | null>(NewMenuContext);
-  const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
-
-  const menuList = [
-    {
-      name: `${MenuContext?.seasonMode === 'normal' ? 'VIP' : '랭킹'}`,
-      link: '/rank',
+const MenuItem = ({ itemName, onClick }: menuItemProps) => {
+  const menuList: { [key: string]: { [key: string]: string | JSX.Element } } = {
+    Ranking: {
+      name: '랭킹',
+      svg: <RankingEmoji />,
     },
-    { name: '최근 경기', link: '/game' },
-    { name: '내 정보', link: `/users/detail?intraId=${MenuContext?.intraId}` },
-  ];
-
+    CurrentMatch: {
+      name: '최근 경기',
+      svg: <CurrentMatchEmoji />,
+    },
+    Announcement: {
+      name: '공지사항',
+      svg: <AnnouncementEmoji />,
+    },
+    Manual: {
+      name: '사용 설명서',
+      svg: <ManualEmoji />,
+    },
+    Report: {
+      name: '건의하기',
+      svg: <ReportEmoji />,
+    },
+    Statistics: {
+      name: '통계페이지',
+      svg: <StatisticsEmoji />,
+    },
+    Admin: {
+      name: '관리자',
+      svg: <AdminEmoji />,
+    },
+  };
   return (
-    <div>
-      {menuList.map((menu, index) => (
-        <MenuLink
-          key={index}
-          link={menu.link}
-          onClick={HeaderState?.resetOpenMenuBarState}
-        >
-          {menu.name}
-        </MenuLink>
-      ))}
+    <div className={styles.menuItem} onClick={onClick}>
+      <div className={styles.imageWrapper}>{menuList[itemName].svg}</div>
+      <div className={styles.menuText}>{menuList[itemName].name}</div>
     </div>
   );
 };
 
-export const SubMenu = () => {
-  const MenuContext = useContext<NewMenuContextState | null>(NewMenuContext);
+const MenuLink = ({ link, onClick, itemName }: MenuLinkProps) => {
+  return (
+    <Link href={link}>
+      <MenuItem itemName={itemName} onClick={onClick} />
+    </Link>
+  );
+};
 
-  const submenuList = [
-    {
-      name: '공지사항',
-      link: 'https://far-moonstone-7ff.notion.site/91925f9c945340c6a139f64fb849990d',
+export const MainMenu = () => {
+  const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
+  const setModal = useSetRecoilState<Modal>(modalState);
+
+  const getAnnouncementHandler = useAxiosGet({
+    url: '/pingpong/announcement',
+    setState: (data) => {
+      data.content !== '' &&
+        setModal({
+          modalName: 'EVENT-ANNOUNCEMENT',
+          announcement: data,
+        });
     },
-    {
-      name: '사용 설명서',
-      link: 'https://far-moonstone-7ff.notion.site/917df2bd339d42c3a7689277246e7f64',
-    },
-  ];
+    err: 'RJ01',
+    type: 'setError',
+  });
 
   return (
-    <div className={styles.subMenu}>
-      {submenuList.map((submenu, index) => (
-        <SubMenuLink key={index} link={submenu.link}>
-          {submenu.name}
-        </SubMenuLink>
-      ))}
-      <div onClick={() => MenuContext?.setModal({ modalName: 'MENU-REPORT' })}>
-        건의하기
-      </div>
-    </div>
+    <nav className={styles.mainMenu}>
+      <MenuLink
+        link='/rank'
+        itemName='Ranking'
+        onClick={HeaderState?.resetOpenMenuBarState}
+      />
+      <MenuLink
+        link='/game'
+        itemName='CurrentMatch'
+        onClick={HeaderState?.resetOpenMenuBarState}
+      />
+      <MenuItem
+        itemName='Announcement'
+        onClick={() => getAnnouncementHandler()}
+      />
+      <MenuItem
+        itemName='Manual'
+        onClick={() =>
+          setModal({ modalName: 'MATCH-MANUAL', manual: { radioMode: 'BOTH' } })
+        }
+      />
+      <MenuItem
+        itemName='Report'
+        onClick={() => setModal({ modalName: 'MENU-REPORT' })}
+      />
+    </nav>
   );
 };
 
 export const AdminMenu = () => {
-  const MenuContext = useContext<NewMenuContextState | null>(NewMenuContext);
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
+  const { isAdmin } = useRecoilValue<User>(userState);
+  const setModal = useSetRecoilState<Modal>(modalState);
 
   return (
-    <div className={styles.subMenu} id={styles.logout}>
-      <AdminMenuLink
-        isAdmin={MenuContext?.isAdmin}
-        onClick={HeaderState?.resetOpenMenuBarState}
-      ></AdminMenuLink>
-      <div onClick={() => MenuContext?.setModal({ modalName: 'MENU-LOGOUT' })}>
-        로그아웃
+    <nav className={styles.adminMenu} id={styles.logout}>
+      {isAdmin && (
+        <div>
+          <MenuLink link='/statistics' itemName='Statistics' />
+          <MenuLink
+            link='/admin'
+            onClick={HeaderState?.resetOpenMenuBarState}
+            itemName='Admin'
+          />
+        </div>
+      )}
+      <div
+        className={styles.logout}
+        onClick={() => setModal({ modalName: 'MENU-LOGOUT' })}
+      >
+        <div>로그아웃</div>
+        <SignOutEmoji />
       </div>
-    </div>
+    </nav>
   );
 };

@@ -9,42 +9,75 @@
   margin: 0 0.7rem;
   color: white;
   font-size: $giant-font;
-  .headerLeft {
-    flex: 2;
-    display: flex;
-    align-items: center;
-    #menuIcon {
-      cursor: pointer;
-    }
+}
+
+.headerLeft {
+  height: 100%;
+  flex: 2;
+  display: flex;
+  align-items: center;
+  .menuIcon {
+    cursor: pointer;
+    font-size: 1.1rem;
   }
-  #logo {
-    div {
-      @include logoTitle(0.25rem);
-      flex: 5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
+}
+
+.logoWrap {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Overgrow', sans-serif;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.headerRight {
+  height: 100%;
+  flex: 2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  .announceIcon {
+    margin-right: 0.7rem;
+    transform: scaleX(-1);
+    font-size: 1.25rem;
+    cursor: pointer;
   }
-  .headerRight {
-    flex: 2;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    #announceIcon {
-      margin-right: 0.7rem;
-      transform: scaleX(-1);
-      cursor: pointer;
-    }
-    #notiIcon {
-      display: flex;
-      align-items: center;
-      margin-right: 0.7rem;
-      font-size: 1.7rem;
-      cursor: pointer;
-    }
-  }
+}
+
+.notiIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.7rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.notiBellWrapper {
+  position: relative;
+  text-align: center;
+}
+
+.notiCountCircle {
+  width: 1.1rem;
+  height: 1.1rem;
+  position: absolute;
+  z-index: 1;
+  border-radius: 50%;
+  background-color: red;
+  left: 40%;
+  top: -30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notiCount {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.25rem;
+  font-weight: 400;
 }
 
 .bellWhole {

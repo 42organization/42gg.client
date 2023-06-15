@@ -28,6 +28,13 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Overgrow';
+  src: url('../public/font/Overgrow-Demo.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }

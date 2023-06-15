@@ -60,6 +60,43 @@
   }
 }
 
+.mainPageProfile {
+  @include imageWrap;
+  height: 4.3rem;
+  width: 4.3rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  border-radius: 50%;
+  background: linear-gradient(
+    140.76deg,
+    #0069ff 0%,
+    #be7bcf 43.97%,
+    #ff7ee3 70.25%,
+    #426bff 91.76%
+  );
+
+  div {
+    @include userImage(4rem);
+    cursor: pointer;
+    border: 0;
+  }
+}
+
+.menuProfile {
+  @include imageWrap;
+  height: 4.3rem;
+  width: 4.3rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  border-radius: 50%;
+  background: rgba(163, 85, 155, 1);
+  div {
+    @include userImage(3.9rem);
+    cursor: pointer;
+    border: 0;
+  }
+}
+
 .afterGameModal {
   @include imageWrap;
   div {

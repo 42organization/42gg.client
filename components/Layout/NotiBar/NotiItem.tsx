@@ -1,40 +1,58 @@
 import Link from 'next/link';
 import { Noti } from 'types/notiTypes';
 import styles from 'styles/Layout/NotiItem.module.scss';
-
 import { HeaderContextState, HeaderContext } from '../HeaderContext';
 import { useContext } from 'react';
+import { BsCheckLg } from 'react-icons/bs';
 
 interface NotiItemProps {
   data: Noti;
 }
 
 export default function NotiItem({ data }: NotiItemProps) {
-  const date = data.createdAt.slice(5).replace('T', ' ');
+  const date = data.createdAt.slice(5, -3).replace('T', ' ');
   const { type, message, isChecked } = data;
 
   const noti: {
     [key: string]: { [key: string]: string | JSX.Element | undefined };
   } = {
     IMMINENT: {
-      title: '경기 준비',
+      style: styles.imminent,
       content: MakeImminentContent(message),
     },
     ANNOUNCE: {
-      title: '공 지',
+      style: styles.announcement,
       content: MakeAnnounceContent(message),
     },
     MATCHED: {
-      title: '매칭 성사',
+      style: styles.matched,
+      content: message,
+    },
+    CANCELEDBYMAN: {
+      style: styles.canceldByMan,
       content: message,
     },
   };
 
+  const notiWrapperStyle = isChecked ? styles.readWrap : styles.unreadWrap;
+  const notiContentStyle =
+    type === 'IMMINENT'
+      ? styles.imminent
+      : type === 'MATCHED'
+      ? styles.matched
+      : type === 'CANCELEDBYMAN'
+      ? styles.canceledByMan
+      : styles.announcement;
+
   return (
-    <div className={isChecked ? `${styles.readWrap}` : `${styles.unreadWrap}`}>
-      <span className={styles.title}>{noti[type].title}</span>
-      <div className={styles.content}>{noti[type].content}</div>
-      <div className={styles.date}>{date}</div>
+    <div className={styles.notiWrapper}>
+      <div className={`${notiWrapperStyle} ${notiContentStyle}`}>
+        {noti[type].content}
+      </div>
+      <div className={styles.date}>
+        {date}&nbsp;
+        {isChecked ? <BsCheckLg size='9' /> : <></>}
+      </div>
     </div>
   );
 }
@@ -69,24 +87,23 @@ function MakeImminentContent(message: string) {
     return { enemyId, enemyMessage };
   };
 
-  const { enemyId, enemyMessage } = parseEnemyIdMessage(message);
+  const enemyId = parseEnemyIdMessage(message).enemyId;
+  const enemyMessage = parseEnemyIdMessage(message).enemyMessage;
 
-  const makeEnemyUsers = (enemyTeam: string[]) => {
-    return enemyTeam.map((intraId: string, i: number) => (
-      <span key={intraId} onClick={() => HeaderState?.resetOpenNotiBarState()}>
-        <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
-        {enemyTeam && i < enemyTeam.length - 1 ? ', ' : ''}
-      </span>
-    ));
-  };
-  return (
-    <>
-      {enemyId.length && (
-        <>
-          {makeEnemyUsers(enemyId)}
-          {enemyMessage}
-        </>
-      )}
-    </>
+  return enemyId.length ? (
+    <div className={styles.imminentContent}>
+      {enemyId.map((intraId: string, i: number) => (
+        <span
+          key={intraId}
+          onClick={() => HeaderState?.resetOpenNotiBarState()}
+        >
+          <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
+          {enemyId && i < enemyId.length - 1 ? ', ' : ''}
+        </span>
+      ))}
+      {enemyMessage}
+    </div>
+  ) : (
+    <></>
   );
 }
