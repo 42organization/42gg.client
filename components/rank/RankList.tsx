@@ -5,7 +5,6 @@ import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 import useRankList from 'hooks/rank/useRankList';
 import { ToggleMode } from 'types/rankTypes';
-
 interface RankListProps {
   toggleMode: ToggleMode;
   season?: number;
@@ -35,6 +34,7 @@ export default function RankList({
       ? `/pingpong/${modeQuery(toggleMode)}?page=1&size=3`
       : `/pingpong/${modeQuery(toggleMode)}?page=${page}&size=20${seasonQuery}`;
   };
+
   const makePathRanker = (): string => {
     const modeQuery = (targetMode?: string) =>
       targetMode !== 'NORMAL' ? 'ranks/single' : 'exp';
@@ -56,14 +56,14 @@ export default function RankList({
     pageInfo: pageInfo,
   });
 
-  if (isMain) {
+  if (isMain && ranker) {
     return <RankListMain rank={ranker} isMain={true} />;
   }
 
   return (
     <ToggleModeContext.Provider value={toggleMode}>
       <div>
-        <RankListMain rank={ranker} isMain={false} />
+        {ranker && <RankListMain rank={ranker} isMain={false} />}
         <RankListFrame toggleMode={toggleMode} pageInfo={pageInfo}>
           {rank?.rankList.map((item: NormalUser | RankUser, index) => (
             <RankListItem
@@ -88,7 +88,7 @@ function makeUser(user: NormalUser | RankUser) {
   const makeInit = (init: number) => (user.rank < 0 ? '-' : init);
   return {
     intraId: user.intraId,
-    rank: makeInit(user.rank),
+    rank: user.rank,
     statusMessage: makeStatusMessage(user.statusMessage),
     point: !isRankModeType(user) ? user.exp : makeInit(user.ppp),
     level: !isRankModeType(user) ? user.level : null,

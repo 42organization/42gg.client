@@ -6,7 +6,7 @@ import { ToggleMode } from 'types/rankTypes';
 
 interface User {
   intraId: string;
-  rank: number | string;
+  rank: number;
   statusMessage: string;
   point: number | string;
   level: number | null;

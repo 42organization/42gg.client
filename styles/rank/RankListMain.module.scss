@@ -99,6 +99,7 @@
     #5e3c83 84.38%
   );
 }
+
 .bang:nth-child(1) {
   left: 30%;
   top: 5rem;
@@ -167,9 +168,20 @@
   border-radius: 65px 65px 100px 0px;
 }
 
-.rankNumber1 {
+@mixin rankNumber($txt-color, $txt-normalcolor, $top: -3rem, $left: -1rem) {
   position: relative;
-  left: -1rem;
+  left: $left;
+  top: $top;
+  background: $txt-color;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  &.normal {
+    background: $txt-normalcolor;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
   font-family: 'Life Savers';
   font-weight: 400;
   text-align: end;
@@ -177,101 +189,78 @@
   line-height: 10rem;
   line-height: 114px;
   letter-spacing: 0.04em;
-  background: linear-gradient(
-    180.89deg,
-    rgba(255, 233, 194, 0.552801) 26.68%,
-    rgba(202, 165, 69, 0.3) 47.47%,
-    rgba(255, 209, 91, 0.51) 65.76%,
-    rgba(155, 117, 19, 0) 84.03%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  &.normal {
-    background: linear-gradient(
+}
+
+.rankNumber1 {
+  @include rankNumber(
+    linear-gradient(
+      180.89deg,
+      rgba(255, 233, 194, 0.552801) 26.68%,
+      rgba(202, 165, 69, 0.3) 47.47%,
+      rgba(255, 209, 91, 0.51) 65.76%,
+      rgba(155, 117, 19, 0) 84.03%
+    ),
+    linear-gradient(
       180.75deg,
       #9fff72 20.79%,
       #7ecf90 40.34%,
       #12aa61 51.48%,
       #1a9126 64.98%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+    ),
+    0rem
+  );
 }
 
 .rankNumber2 {
-  position: relative;
-  top: -2.6rem;
-  left: -1rem;
-  font-family: 'Life Savers';
-  font-weight: 400;
-  text-align: end;
-  font-size: 90px;
-  line-height: 10rem;
-  line-height: 114px;
-  letter-spacing: 0.04em;
-  background: linear-gradient(
-    180.89deg,
-    #cb20a5 28.21%,
-    rgba(194, 74, 168, 0.3) 34.24%,
-    #930072 51.62%,
-    #351050 76.19%
-  );
-  &.normal {
-    background: linear-gradient(
+  @include rankNumber(
+    linear-gradient(
+      180.89deg,
+      #cb20a5 28.21%,
+      rgba(194, 74, 168, 0.3) 34.24%,
+      #930072 51.62%,
+      #351050 76.19%
+    ),
+    linear-gradient(
       180.89deg,
       #ff95e1 28.21%,
       #bf54c3 44.44%,
       #7f48b4 51.62%,
       #5840ab 67.12%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+    ),
+    -2.6rem
+  );
 }
 
 .rankNumber3 {
-  position: relative;
-  top: -3rem;
-  left: -1rem;
-  font-family: 'Life Savers';
-  font-weight: 400;
-  text-align: end;
-  font-size: 90px;
-  line-height: 10rem;
-  line-height: 114px;
-  letter-spacing: 0.04em;
-  background: linear-gradient(
-    179.14deg,
-    #6fb1d0 22.37%,
-    rgba(80, 123, 137, 0.3) 46.14%,
-    #3d3285 56.64%,
-    #411868 68.3%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  &.normal {
-    background: linear-gradient(
+  @include rankNumber(
+    linear-gradient(
+      179.14deg,
+      #6fb1d0 22.37%,
+      rgba(80, 123, 137, 0.3) 46.14%,
+      #3d3285 56.64%,
+      #411868 68.3%
+    ),
+    linear-gradient(
       179.14deg,
       #add3ff 29.82%,
       #7ab7ff 39.23%,
       #4880c4 51.49%,
       #2d5dae 62.84%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+    )
+  );
+}
+
+.questionCircleRank {
+  display: flex;
+  justify-content: center;
+  background-color: #c7b1ee;
+  border-radius: 50%;
 }
 
 .intraId {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
   top: -2.5rem;
   height: 7.5rem;
@@ -343,7 +332,6 @@
   }
   .rankNumber3 {
     font-size: 70px;
-    top: -3rem;
   }
   .intraId {
     top: -2rem;

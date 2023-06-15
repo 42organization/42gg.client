@@ -7,7 +7,6 @@
 
 .title {
   @include pageTitle;
-  margin-top: -4rem;
 }
 
 /* MyRank */
@@ -17,17 +16,15 @@
   margin-bottom: 0.5rem;
   color: white;
   opacity: 0.5;
+  width: fit-content;
   font-weight: 700;
   font-size: $big-font;
   font-family: $title-font;
-  text-align: right;
   text-decoration-line: underline;
   color: #df98d7;
+  margin-left: auto;
   &.rank {
     cursor: pointer;
-  }
-  .myRank-text {
-    pointer-events: auto;
   }
 }
 
