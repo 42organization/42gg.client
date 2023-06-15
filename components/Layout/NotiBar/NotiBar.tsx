@@ -83,15 +83,21 @@ function NotiEmpty() {
 }
 
 function ReloadNotiButton() {
+  const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const NotiContext = useContext<NotiContextState | null>(NotiProvider);
   const reloadButtonStyle = NotiContext?.spinReloadButton
     ? styles.spinReloadButton
     : styles.reloadButton;
 
+  const clickReloadNoti = () => {
+    HeaderState?.putNotiHandler();
+    NotiContext?.setClickReloadNoti?.(true);
+  };
+
   return (
     <button
       className={`${reloadButtonStyle}`}
-      onClick={() => NotiContext?.setClickReloadNoti?.(true)}
+      onClick={() => clickReloadNoti()}
     >
       &#8635;
     </button>

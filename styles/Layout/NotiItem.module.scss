@@ -22,11 +22,11 @@
     background: linear-gradient(0deg, #ae8db3, #ae8db3),
       linear-gradient(0deg, #c5a7c9, #c5a7c9);
     border: 0.5px solid rgba(174, 141, 178, 1);
+    color: white;
   }
   .unreadWrap {
     &.imminent {
-      background: linear-gradient(0deg, #eb98bb, #eb98bb),
-        linear-gradient(0deg, #ed74a7, #ed74a7);
+      background: rgba(166, 100, 176, 1);
       border: 0.5px solid rgba(237, 116, 167, 1);
       color: rgba(255, 255, 255, 1);
       span {
@@ -34,16 +34,20 @@
       }
     }
     &.matched {
-      background: linear-gradient(0deg, #a664b0, #a664b0),
-        linear-gradient(0deg, #b678bf, #b678bf);
+      background: rgba(235, 152, 187, 1);
       border: 0.5px solid rgba(166, 100, 176, 1);
       color: rgba(255, 255, 255, 1);
     }
-    &.announcement {
-      background: linear-gradient(0deg, #fdfdfd, #fdfdfd),
-        linear-gradient(0deg, #e3e3e7, #e3e3e7);
+    &.announcement,
+    &.canceledByMan {
+      background: rgba(253, 253, 253, 1);
       border: 0.5px solid rgba(227, 227, 231, 1);
       color: rgba(26, 30, 37, 1);
+    }
+    &.canceledByMan {
+      background: rgba(204, 173, 218, 1);
+      border: 0.5px solid rgba(237, 116, 167, 1);
+      color: rgba(255, 255, 255, 1);
     }
   }
 

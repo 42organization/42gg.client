@@ -28,6 +28,10 @@ export default function NotiItem({ data }: NotiItemProps) {
       style: styles.matched,
       content: message,
     },
+    CANCELEDBYMAN: {
+      style: styles.canceldByMan,
+      content: message,
+    },
   };
 
   const notiWrapperStyle = isChecked ? styles.readWrap : styles.unreadWrap;
@@ -36,6 +40,8 @@ export default function NotiItem({ data }: NotiItemProps) {
       ? styles.imminent
       : type === 'MATCHED'
       ? styles.matched
+      : type === 'CANCELEDBYMAN'
+      ? styles.canceledByMan
       : styles.announcement;
 
   return (
