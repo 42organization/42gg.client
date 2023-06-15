@@ -3,134 +3,110 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  padding: 1rem;
+  align-items: center;
   margin-bottom: 0.6rem;
   border-radius: $small-radius;
-  background: $g2-bottom;
-  color: black;
+  font-family: 'Roboto', sans-serif;
+  justify-content: space-between;
+  color: $white1;
 }
 
-.topContainer {
+.level {
   display: flex;
-}
-
-.bottomContainer {
-  margin-top: 1rem;
-}
-
-.levelRacketWrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 1rem;
-  .level {
-    margin: 0 0 0.2rem 0.2rem;
-    color: $pp-blue;
-    font-size: $giant-font;
-    font-weight: 700;
-  }
-  .exp {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0.5rem;
-    .expRate {
-      margin: 0 0 0.2rem 0.2rem;
-      font-size: $small-font;
-    }
-    .bar {
-      display: flex;
-      width: 6.5rem;
-      height: 0.5rem;
-      border-radius: $mini-radius;
-      overflow: hidden;
-      .expCurrent {
-        background: $g2-top;
-      }
-      .expLeft {
-        background: $dark-gray;
-      }
-    }
-  }
-  .racket {
-    width: 6.5rem;
-    padding: 0.2rem 0;
-    margin-right: auto;
-    border-radius: $mini-radius;
-    background: white;
-    font-size: $small-font;
-    text-align: center;
-  }
-}
-
-.rankInfo {
-  display: flex;
-  flex-direction: column;
-  padding: 0 0.5rem;
-  margin: -1.8rem 0 0.7rem 0;
-}
-
-.rank {
-  display: flex;
-  align-items: flex-end;
-  line-height: 100%;
-  margin-bottom: 0.3rem;
-  color: $rank-red;
-  font-size: 2rem;
-  font-weight: 700;
-  span:nth-child(1) {
-    margin-right: 0.2rem;
-    font-size: 1.5rem;
-  }
-  span:nth-child(2) {
-    padding-bottom: 0.15rem;
-  }
-}
-
-.pppWinRateWrap {
-  display: flex;
-  align-items: flex-end;
-  margin-bottom: 0.3rem;
-  height: 1.7rem;
-  .ppp {
-    font-size: $big-font;
-  }
-  .winRate {
-    margin-left: auto;
-    font-size: $small-font;
-    font-weight: 400;
-  }
+  font-weight: 800;
+  font-style: normal;
+  font-size: 3.5rem;
+  margin-top: -2rem;
+  color: white;
 }
 
 .bar {
   display: flex;
-  width: 100%;
-  height: 0.8rem;
+  width: 10rem;
+  height: 0.7rem;
   border-radius: $mini-radius;
   overflow: hidden;
-  .wins {
-    background: $winner-blue;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  .expCurrent {
+    background: linear-gradient(
+      89.81deg,
+      #ff53a5 10.18%,
+      #ff017b 55.14%,
+      #ff409c 90.43%
+    );
   }
-  .losses {
-    background: $loser-red;
+  .expLeft {
+    background: $white2;
   }
 }
 
-.statusMessage {
-  flex: 2;
+.idContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 0.5rem;
+  align-items: center;
+}
+
+.intraId {
+  color: $white1;
+  font-size: $giant-font;
+  font-weight: 700;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalbuttons {
+  @include select-buttons(9rem);
+}
+
+.exp {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 5rem;
-  padding: 0.5rem;
-  border-radius: $mini-radius;
-  background: white;
-  font-size: $medium-font;
-  .buttons {
-    @include select-buttons(4.5rem, 1.5rem);
-    margin-left: auto;
-    margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+  .expRate {
+    margin: 0 0 0.2rem 0.2rem;
+    font-size: $small-font;
   }
+}
+
+.boxContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 12rem;
+  margin-bottom: 0.5rem;
+}
+
+.expbox {
+  width: 5.5rem;
+  padding: 0.5rem 0;
+  border-radius: $mini-radius;
+  background: #9e426e;
+  font-size: $small-font;
+  text-align: center;
+  color: #ff80bd;
+}
+
+.racket {
+  width: 5.5rem;
+  padding: 0.5rem 0;
+  border-radius: $mini-radius;
+  background: #cbffb9;
+  font-size: $small-font;
+  text-align: center;
+  color: #008234;
+}
+
+.statusMessage {
+  padding: 1rem;
+  font-size: $medium-font;
+  text-align: center;
+  align-items: center;
 }
 
 .editContainer {
@@ -142,16 +118,19 @@
 }
 
 .editModalTitle {
-  color: $pp-blue;
+  color: $pp-gray;
 }
 
 .phrase {
-  @include modal-phrase;
+  font-size: $big-font;
+  text-align: left;
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
 }
 
 .editType {
   margin: 0 0 0.3rem 0.5rem;
-  color: $pp-blue;
+  color: $pp-gray;
   font-size: $medium-font;
 }
 
@@ -165,17 +144,17 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
-  color: white;
+  color: $white1;
   width: 9rem;
   height: 2rem;
-  border: solid 1px white;
+  border: solid 1px $white1;
   border-radius: $mini-radius;
   cursor: pointer;
 }
 
 .snsClicked {
-  color: $pp-blue;
-  border: solid 1px $pp-blue;
+  color: $pp-gray;
+  border: solid 1px $pp-gray;
 }
 
 .racketTypeWrap {
@@ -191,8 +170,8 @@
       opacity: 0;
     }
     :checked + .radioButton {
-      border: solid 1px $pp-blue;
-      color: $pp-blue;
+      border: solid 1px $pp-gray;
+      color: $pp-gray;
     }
     .radioButton {
       display: flex;
@@ -200,7 +179,7 @@
       align-items: center;
       width: 6rem;
       height: 2rem;
-      border: 1px solid white;
+      border: 1px solid $white1;
       border-radius: $mini-radius;
       font-size: $small-font;
       text-align: center;
@@ -217,7 +196,6 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    border: 1px solid $pp-blue;
     border-radius: $small-radius;
     background: white;
     overflow: hidden;
@@ -239,8 +217,4 @@
       font-size: $small-font;
     }
   }
-}
-
-.buttons {
-  @include select-buttons(9rem);
 }

@@ -1,0 +1,23 @@
+@media screen and (max-width: 385px) {
+  $ratio: 0.85;
+  .loudSpeaker {
+    width: 0.875rem * $ratio;
+    height: 0.875rem * $ratio;
+  }
+}
+
+@media screen and (min-width: 386px) and (max-width: 635px) {
+  $ratio: 1;
+  .loudSpeaker {
+    width: 0.875rem * $ratio;
+    height: 0.875rem * $ratio;
+  }
+}
+
+@media screen and (min-width: 636px) {
+  $ratio: 1.15;
+  .loudSpeaker {
+    width: 0.875rem * $ratio;
+    height: 0.875rem * $ratio;
+  }
+}

@@ -1,57 +1,342 @@
 @import '../common.scss';
+@import url('https://fonts.googleapis.com/css2?family=Life+Savers&display=swap');
 
 .mainContainer {
+  position: relative;
+  top: 1.5rem;
   font-size: 1.05rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: end;
+  margin-top: 2rem;
+  height: 16rem;
+  &.isMain {
+    height: 15.5rem;
+    margin-top: 9.5rem;
+  }
+  transform: scale(1.14);
 }
 
-.title {
+.mainData:nth-child(1) {
+  position: relative;
+  right: -1.2rem;
+  background: linear-gradient(
+    180deg,
+    #ff67d4 16.67%,
+    #d30399 36.24%,
+    rgba(49, 18, 79, 0) 83.85%
+  );
+  &.normal {
+    background: linear-gradient(
+      180deg,
+      #ff96e1 16.67%,
+      #ff61d3 39.58%,
+      #0d3299 83.85%
+    );
+  }
+  height: 15rem;
+  border-radius: 58px;
+}
+
+.mainData:nth-child(2) {
+  position: relative;
+  height: 18rem;
+  border-radius: 65px;
+  z-index: 1;
+  background: linear-gradient(
+    179.91deg,
+    #f8e118 20.95%,
+    #fe7a00 44.38%,
+    #884609 76.08%,
+    #351050 85.99%,
+    rgba(48, 18, 79, 0) 90.86%
+  );
+  &.normal {
+    background: linear-gradient(
+      179.91deg,
+      #39db7a 34.61%,
+      #067741 63.98%,
+      #0b2d8e 80.37%
+    );
+  }
+}
+
+.mainData:nth-child(3) {
+  position: relative;
+  right: 1.2rem;
+  background: linear-gradient(
+    180deg,
+    #57a4ff 9.9%,
+    #40798d 36.24%,
+    rgba(48, 18, 79, 0) 83.86%
+  );
+  &.normal {
+    background: linear-gradient(
+      180deg,
+      #b6d7ff 9.9%,
+      #6aaeff 36.24%,
+      #4076b6 65.1%,
+      #0e36a3 86.46%
+    );
+  }
+  height: 15rem;
+  border-radius: 58px;
+}
+
+.bangContainer {
+  display: flex;
+  justify-content: space-around;
+  margin-top: -7.5rem;
+}
+
+.bang {
+  position: relative;
+  width: 3.5rem;
+  height: 7rem;
+  background: linear-gradient(
+    180deg,
+    rgba(44, 16, 74, 0.69) 0%,
+    #5e3c83 84.38%
+  );
+}
+
+.bang:nth-child(1) {
+  left: 30%;
+  top: 5rem;
+  transform: rotate(-47.37deg);
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
+}
+
+.bang:nth-child(2) {
+  left: 20%;
+  top: 3rem;
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
+}
+
+.bang:nth-child(3) {
+  left: 10%;
+  top: 5rem;
+  transform: rotate(47.37deg);
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
+}
+
+.bang:nth-child(4) {
+  right: 0%;
+  top: 8rem;
+  transform: rotate(90deg);
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
+}
+
+.bang:nth-child(5) {
+  right: 60%;
+  top: 8rem;
+  transform: rotate(-90deg);
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 99%);
+}
+
+.leaf {
+  height: 8.4rem;
+  background: linear-gradient(
+    70.48deg,
+    #693200 28.73%,
+    #ed9b00 38.5%,
+    #fede5d 41.72%,
+    #fffdd2 60.48%,
+    #b5661d 73.6%,
+    #5c2f06 76.05%
+  );
+  &.normal {
+    background: linear-gradient(
+      70.48deg,
+      #21621c 28.73%,
+      #279d25 38.5%,
+      #bdfba0 41.72%,
+      #deffd2 60.48%,
+      #33b51d 73.6%,
+      #065c09 76.05%
+    );
+  }
+  border-radius: 65px 65px 100px 0px;
+}
+
+.leaf1 {
+  height: 8rem;
+  background: linear-gradient(180deg, #ffcf55 36.24%, #ff823c 73.96%);
+  &.normal {
+    background: linear-gradient(180deg, #b4ff55 31.48%, #35cd0f 79.34%);
+  }
+  border-radius: 65px 65px 100px 0px;
+}
+
+@mixin rankNumber($txt-color, $txt-normalcolor, $top: -3rem, $left: -1rem) {
+  position: relative;
+  left: $left;
+  top: $top;
+  background: $txt-color;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  &.normal {
+    background: $txt-normalcolor;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  font-family: 'Life Savers';
+  font-weight: 400;
+  text-align: end;
+  font-size: 90px;
+  line-height: 10rem;
+  line-height: 114px;
+  letter-spacing: 0.04em;
+}
+
+.rankNumber1 {
+  @include rankNumber(
+    linear-gradient(
+      180.89deg,
+      rgba(255, 233, 194, 0.552801) 26.68%,
+      rgba(202, 165, 69, 0.3) 47.47%,
+      rgba(255, 209, 91, 0.51) 65.76%,
+      rgba(155, 117, 19, 0) 84.03%
+    ),
+    linear-gradient(
+      180.75deg,
+      #9fff72 20.79%,
+      #7ecf90 40.34%,
+      #12aa61 51.48%,
+      #1a9126 64.98%
+    ),
+    0rem
+  );
+}
+
+.rankNumber2 {
+  @include rankNumber(
+    linear-gradient(
+      180.89deg,
+      #cb20a5 28.21%,
+      rgba(194, 74, 168, 0.3) 34.24%,
+      #930072 51.62%,
+      #351050 76.19%
+    ),
+    linear-gradient(
+      180.89deg,
+      #ff95e1 28.21%,
+      #bf54c3 44.44%,
+      #7f48b4 51.62%,
+      #5840ab 67.12%
+    ),
+    -2.6rem
+  );
+}
+
+.rankNumber3 {
+  @include rankNumber(
+    linear-gradient(
+      179.14deg,
+      #6fb1d0 22.37%,
+      rgba(80, 123, 137, 0.3) 46.14%,
+      #3d3285 56.64%,
+      #411868 68.3%
+    ),
+    linear-gradient(
+      179.14deg,
+      #add3ff 29.82%,
+      #7ab7ff 39.23%,
+      #4880c4 51.49%,
+      #2d5dae 62.84%
+    )
+  );
+}
+
+.questionCircleRank {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 2.9rem;
-  border-radius: $big-radius;
-  color: white;
-  font-size: 1.8rem;
-  font-family: $title-font;
-  text-shadow: $text-border-black;
-  letter-spacing: 0.1rem;
-  background: $rank-red;
-  &.normal {
-    background: $norm-lightblue2;
-  }
-}
-
-.mainData {
-  display: grid;
-  grid-template-columns: 1.5fr 2.1fr 4fr;
-  align-items: center;
-  height: 2.9rem;
-  margin-top: 0.2rem;
-  border-radius: $big-radius;
-  background: $rank-pink;
-  &.normal {
-    background: $norm-emerald;
-  }
-}
-
-.rankNumber {
-  color: $rank-red;
-  font-weight: 700;
-  text-align: center;
+  background-color: #c7b1ee;
+  border-radius: 50%;
 }
 
 .intraId {
-  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: -2.5rem;
+  height: 7.5rem;
+  color: #5b0539;
   font-weight: 700;
-  text-align: left;
+  text-align: center;
   span {
     cursor: pointer;
   }
+  &.first {
+    top: -3rem;
+    color: #640000;
+  }
+  &.last {
+    color: #001b44;
+  }
 }
 
-.statusMessage {
-  color: $dark-blue;
-  font-size: $medium-font;
-  font-weight: 500;
-  text-align: left;
+@media (max-width: 467px) {
+  .mainData:nth-child(1) {
+    right: -0.9rem;
+    height: 12rem;
+  }
+
+  .mainData:nth-child(2) {
+    height: 13.5rem;
+  }
+
+  .mainData:nth-child(3) {
+    right: 0.9rem;
+    height: 12rem;
+  }
+
+  .mainContainer {
+    margin-top: 1rem;
+    &.isMain {
+      height: 11.5rem;
+    }
+  }
+  .bang {
+    width: 2.5rem;
+    height: 5rem;
+  }
+
+  .bang:nth-child(1) {
+    top: 5.5rem;
+  }
+  .bang:nth-child(2) {
+    top: 3.5rem;
+  }
+  .bang:nth-child(3) {
+    top: 5.5rem;
+  }
+  .leaf {
+    height: 6.4rem;
+  }
+
+  .leaf1 {
+    height: 6rem;
+  }
+
+  .rankNumber1 {
+    font-size: 70px;
+    top: -1.6rem;
+  }
+  .rankNumber2 {
+    font-size: 70px;
+    top: -3rem;
+  }
+  .rankNumber3 {
+    font-size: 70px;
+  }
+  .intraId {
+    top: -2rem;
+    &.first {
+      top: -2.5rem;
+    }
+  }
 }

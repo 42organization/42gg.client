@@ -71,7 +71,6 @@ export default function EditProfileModal() {
   return (
     <div className={styles.editContainer}>
       <div className={styles.phrase}>
-        <div className={styles.emoji}>✏️</div>
         <div className={styles.editModalTitle}>프로필 수정</div>
       </div>
       <div className={styles.statusMessageWrap}>
@@ -101,7 +100,7 @@ export default function EditProfileModal() {
                   onChange={inputChangeHandler}
                   checked={editedProfile.racketType === racket.id}
                 />
-                <div className={styles.radioButton}>{racket.label}</div>
+                <div className={styles.radioButton}>{racket.id}</div>
               </label>
             );
           })}
@@ -127,7 +126,7 @@ export default function EditProfileModal() {
           </div>
         </div>
       </div>
-      <div className={styles.buttons}>
+      <div className={styles.modalbuttons}>
         <div className={styles.negative}>
           <input type='button' onClick={cancelEditHandler} value='취소' />
         </div>

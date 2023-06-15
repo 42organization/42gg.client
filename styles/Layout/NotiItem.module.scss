@@ -1,56 +1,61 @@
 @import 'styles/common.scss';
 
 @mixin notiWrap {
+  height: 5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 0.7rem;
-  margin-bottom: 0.7rem;
-  border-radius: $small-radius;
-  height: 7rem;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
 }
 
-.unreadWrap {
+.notiWrapper {
   @include notiWrap;
-  background: white;
-  .title {
-    background: $pp-blue;
+
+  .readWrap,
+  .unreadWrap {
+    width: 15.75rem;
+    border-radius: 0.625rem 0.625rem 0.625rem 0;
+    padding: 0.75rem 1.25rem;
   }
-}
 
-.readWrap {
-  @include notiWrap;
-  background: $light-gray;
-  .title {
-    background: $dark-gray;
+  .readWrap {
+    background: linear-gradient(0deg, #ae8db3, #ae8db3),
+      linear-gradient(0deg, #c5a7c9, #c5a7c9);
+    border: 0.5px solid rgba(174, 141, 178, 1);
+    color: white;
   }
-}
-
-.title {
-  width: 4.6rem;
-  padding: 0.3rem 0;
-  margin: 0.2rem 0;
-  border-radius: $small-radius;
-  color: white;
-  font-size: $small-font;
-  font-weight: 600;
-  text-align: center;
-  letter-spacing: 0.1rem;
-}
-
-.content {
-  margin: 0 0.4rem;
-  font-size: $medium-font;
-  span {
-    color: $pp-blue;
-    font-weight: 600;
-    cursor: pointer;
+  .unreadWrap {
+    &.imminent {
+      background: rgba(166, 100, 176, 1);
+      border: 0.5px solid rgba(237, 116, 167, 1);
+      color: rgba(255, 255, 255, 1);
+      span {
+        color: rgba(220, 0, 92, 1);
+      }
+    }
+    &.matched {
+      background: rgba(235, 152, 187, 1);
+      border: 0.5px solid rgba(166, 100, 176, 1);
+      color: rgba(255, 255, 255, 1);
+    }
+    &.announcement {
+      background: rgba(253, 253, 253, 1);
+      border: 0.5px solid rgba(227, 227, 231, 1);
+      color: rgba(26, 30, 37, 1);
+    }
+    &.canceledByMan {
+      background: rgba(204, 173, 218, 1);
+      border: 0.5px solid rgba(237, 116, 167, 1);
+      color: rgba(255, 255, 255, 1);
+    }
   }
-}
 
-.date {
-  margin-right: 0.4rem;
-  color: $dark-gray;
-  font-size: $small-font;
-  text-align: right;
+  .date {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 0.8rem;
+    font-family: 'Heebo', sans-serif;
+    color: rgba(125, 127, 136, 1);
+  }
 }

@@ -1,65 +1,58 @@
 import Link from 'next/link';
 import { Noti } from 'types/notiTypes';
 import styles from 'styles/Layout/NotiItem.module.scss';
-
 import { HeaderContextState, HeaderContext } from '../HeaderContext';
 import { useContext } from 'react';
+import { BsCheckLg } from 'react-icons/bs';
 
 interface NotiItemProps {
   data: Noti;
 }
 
 export default function NotiItem({ data }: NotiItemProps) {
-  const date = data.createdAt.slice(5).replace('T', ' ');
+  const date = data.createdAt.slice(5, -3).replace('T', ' ');
   const { type, message, isChecked } = data;
-
-  const parseEnemyIdMessage = (
-    message: string
-  ): {
-    enemyId: string[];
-    enemyMessage: string;
-  } => {
-    const regList = /<intraId::(.+?)>/;
-    const regId = /^[a-zA-Z0-9]*$/;
-    const parseList = [] || message.split(regList).filter((str) => str !== '');
-    const enemyId = [] || parseList.filter((id) => regId.test(id) !== false);
-    const enemyMessage =
-      '' || parseList.filter((id) => regId.test(id) === false)[0];
-    return { enemyId, enemyMessage };
-  };
-
-  let enemyId: string[] = [];
-  let enemyMessage = '';
-
-  if (type === 'IMMINENT') {
-    enemyId = parseEnemyIdMessage(message).enemyId;
-    enemyMessage = parseEnemyIdMessage(message).enemyMessage;
-  }
 
   const noti: {
     [key: string]: { [key: string]: string | JSX.Element | undefined };
   } = {
     IMMINENT: {
-      title: '경기 준비',
-      content: MakeImminentContent(enemyId, enemyMessage),
+      style: styles.imminent,
+      content: MakeImminentContent(message),
     },
     ANNOUNCE: {
-      title: '공 지',
+      style: styles.announcement,
       content: MakeAnnounceContent(message),
     },
     MATCHED: {
-      title: '매칭 성사',
+      style: styles.matched,
+      content: message,
+    },
+    CANCELEDBYMAN: {
+      style: styles.canceldByMan,
       content: message,
     },
   };
 
+  const notiWrapperStyle = isChecked ? styles.readWrap : styles.unreadWrap;
+  const notiContentStyle =
+    type === 'IMMINENT'
+      ? styles.imminent
+      : type === 'MATCHED'
+      ? styles.matched
+      : type === 'CANCELEDBYMAN'
+      ? styles.canceledByMan
+      : styles.announcement;
+
   return (
-    <div className={isChecked ? `${styles.readWrap}` : `${styles.unreadWrap}`}>
-      <span className={styles.title}>{noti[type].title}</span>
-      <div className={styles.content}>
-        {message ? noti[type].content : '알림을 불러올 수 없습니다.'}
+    <div className={styles.notiWrapper}>
+      <div className={`${notiWrapperStyle} ${notiContentStyle}`}>
+        {noti[type].content}
       </div>
-      <div className={styles.date}>{date}</div>
+      <div className={styles.date}>
+        {date}&nbsp;
+        {isChecked ? <BsCheckLg size='9' /> : <></>}
+      </div>
     </div>
   );
 }
@@ -77,23 +70,40 @@ function MakeAnnounceContent(message: string | undefined) {
   );
 }
 
-function MakeImminentContent(enemyTeam: string[], message: string) {
+function MakeImminentContent(message: string) {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
-  const makeEnemyUsers = (enemyTeam: string[]) => {
-    return enemyTeam.map((intraId: string, i: number) => (
-      <span key={intraId} onClick={() => HeaderState?.resetOpenNotiBarState()}>
-        <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
-        {enemyTeam && i < enemyTeam.length - 1 ? ', ' : ''}
-      </span>
-    ));
+
+  const parseEnemyIdMessage = (
+    message: string
+  ): {
+    enemyId: string[];
+    enemyMessage: string;
+  } => {
+    const regList = /<intraId::(.+?)>/;
+    const regId = /^[a-zA-Z0-9]*$/;
+    const parseList = message.split(regList).filter((str) => str !== '');
+    const enemyId = parseList.filter((id) => regId.test(id) !== false);
+    const enemyMessage = parseList.filter((id) => regId.test(id) === false)[0];
+    return { enemyId, enemyMessage };
   };
-  return (
-    <>
-      {enemyTeam.length && (
-        <>
-          {makeEnemyUsers(enemyTeam)} {message}
-        </>
-      )}
-    </>
+
+  const enemyId = parseEnemyIdMessage(message).enemyId;
+  const enemyMessage = parseEnemyIdMessage(message).enemyMessage;
+
+  return enemyId.length ? (
+    <div className={styles.imminentContent}>
+      {enemyId.map((intraId: string, i: number) => (
+        <span
+          key={intraId}
+          onClick={() => HeaderState?.resetOpenNotiBarState()}
+        >
+          <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
+          {enemyId && i < enemyId.length - 1 ? ', ' : ''}
+        </span>
+      ))}
+      {enemyMessage}
+    </div>
+  ) : (
+    <></>
   );
 }

@@ -12,6 +12,10 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    backgrounds: {
+      default: 'purple',
+      values: [{ name: 'purple', value: '#301451' }],
+    },
   },
   decorators: [
     (Story: StoryFn) => (

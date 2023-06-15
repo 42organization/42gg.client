@@ -4,6 +4,9 @@ import React, {
   useState,
   createContext,
 } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { instance } from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
 
 export interface HeaderContextState {
   openMenuBarState: boolean;
@@ -12,19 +15,34 @@ export interface HeaderContextState {
   setOpenNotiBarState: Dispatch<SetStateAction<boolean>>;
   resetOpenMenuBarState: () => void;
   resetOpenNotiBarState: () => void;
+  putNotiHandler: () => Promise<void>;
 }
 
 export const HeaderContext = createContext<HeaderContextState | null>(null);
 
-const HeaderStateContext = (props) => {
+interface HeaderStateContextProps {
+  children: React.ReactNode;
+}
+
+const HeaderStateContext = (props: HeaderStateContextProps) => {
   const [menu, setMenu] = useState<boolean>(false);
   const [noti, setNoti] = useState<boolean>(false);
+  const setError = useSetRecoilState(errorState);
 
-  const resetMenuHandler = (): void => {
+  const resetMenuHandler = () => {
     setMenu(false);
   };
 
-  const resetNotiHandler = (): void => {
+  const putNotiHandler = async () => {
+    try {
+      await instance.put(`/pingpong/notifications/check`);
+    } catch (e) {
+      setError('JB05');
+    }
+  };
+
+  const resetNotiHandler = () => {
+    putNotiHandler();
     setNoti(false);
   };
 
@@ -35,6 +53,7 @@ const HeaderStateContext = (props) => {
     setOpenNotiBarState: setNoti,
     resetOpenMenuBarState: resetMenuHandler,
     resetOpenNotiBarState: resetNotiHandler,
+    putNotiHandler: putNotiHandler,
   };
   return (
     <HeaderContext.Provider value={HeaderState}>

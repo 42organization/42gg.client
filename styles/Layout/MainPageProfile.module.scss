@@ -1,0 +1,56 @@
+@import 'styles/common.scss';
+
+.mainPageProfile {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+
+  .currentMatch {
+    width: 100%;
+    max-width: 28rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 0.2rem;
+  }
+
+  .gridContainer {
+    width: 100%;
+    max-width: 28rem;
+    flex-shrink: 0;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: 'image greetingsArea';
+    padding: 0.1rem 0.2rem 0 0.2rem;
+    color: white;
+    .myImage {
+      grid-area: image;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .userGreetings {
+      grid-area: greetingsArea;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding-left: 0.8rem;
+      .greetings {
+        font-size: 0.75rem;
+        margin-bottom: 0.2rem;
+      }
+      .intraId {
+        font-size: 1.25rem;
+        font-weight: 700;
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+}

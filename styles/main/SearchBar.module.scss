@@ -5,36 +5,43 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
+  z-index: 2;
   height: 2.5rem;
   margin: 1rem 0.8rem 0;
-  padding: 0 0.8rem;
+  padding: 0.8rem 1rem;
   border-radius: $small-radius;
-  background: white;
+  background: linear-gradient(90.17deg, #593781 18.13%, #543579 93.7%);
   font-size: $medium-font;
+  color: #1f0b36;
   input {
     all: unset;
+    box-sizing: border-box;
     width: calc(100% - 4rem);
+    padding: 0.7rem 0.5rem;
+    color: #ffffff;
+    &::placeholder {
+      color: #1f0b36;
+    }
   }
   .icons {
-    span {
-      display: flex;
-      align-items: center;
-      font-size: 1.2rem;
-    }
+    display: flex;
+    align-items: center;
     .reset {
-      color: gray;
       cursor: pointer;
     }
   }
   .dropdown {
     display: block;
+    box-sizing: border-box;
     position: absolute;
+    z-index: 3;
     top: 2.1rem;
     left: 0;
     width: 100%;
     padding: 0 0.8rem 0.5rem 0.8rem;
     border-radius: 0 0 $small-radius $small-radius;
-    background: white;
+    background: linear-gradient(90.17deg, #593781 18.13%, #543579 93.7%);
+    color: #ffffff;
     div {
       padding: 0.5rem 0;
       cursor: pointer;

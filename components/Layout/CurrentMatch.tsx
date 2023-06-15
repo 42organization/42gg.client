@@ -1,26 +1,97 @@
 import Link from 'next/link';
-import { useSetRecoilState } from 'recoil';
+import { useEffect, useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import { gameTimeToString } from 'utils/handleTime';
-import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
-
+import { stringToHourMin } from 'utils/handleTime';
 import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
-import { CurrentMatchListElement } from 'types/matchTypes';
+import { currentMatchState } from 'utils/recoil/match';
+import { CurrentMatchList, CurrentMatchListElement } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
+import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
+import { TbMenu } from 'react-icons/tb';
+import LoudSpeaker from 'components/Layout/LoudSpeaker';
 
-interface CurrentMatchProp {
-  currentMatch: CurrentMatchListElement;
-}
+export default function CurrentMatch() {
+  const currentMatchList =
+    useRecoilValue<CurrentMatchList>(currentMatchState).match;
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const [dropdownAnimation, setDropdownAnimation] = useState(false);
 
-export default function CurrentMatch(prop: CurrentMatchProp) {
-  const { currentMatch } = prop;
-  const { startTime, isMatched, enemyTeam, isImminent } = currentMatch;
-  const setModal = useSetRecoilState<Modal>(modalState);
-
-  const blockCancelButton: number | false =
-    currentMatch && isImminent && enemyTeam.length;
+  const dropdownStyle = showDropdown
+    ? styles.visibleDropdown
+    : styles.hiddenDropdown;
 
   useGetCurrentMatch();
+
+  useEffect(() => {
+    if (showDropdown) {
+      setDropdownAnimation(true);
+    } else {
+      setTimeout(() => {
+        setDropdownAnimation(false);
+      }, 400);
+    }
+  }, [showDropdown]);
+
+  const dropButtonStyle = showDropdown ? styles.dropup : styles.dropdown;
+  const matchCountStyle =
+    currentMatchList.length === 2
+      ? styles.two
+      : currentMatchList.length === 3
+      ? styles.three
+      : styles.one;
+
+  return (
+    <div className={styles.currentMatchBanner}>
+      <div className={styles.currentMatchMain}>
+        <CurrentMatchContent currentMatch={currentMatchList[0]} index={0} />
+      </div>
+      <div
+        className={`${styles.dropdownWrapper} ${dropdownStyle} ${matchCountStyle}`}
+      >
+        {dropdownAnimation ? (
+          <div className={styles.dropdown}>
+            {currentMatchList.slice(1).map((currentMatch, index) => (
+              <CurrentMatchContent
+                key={index}
+                currentMatch={currentMatch}
+                index={index + 2}
+              />
+            ))}
+          </div>
+        ) : (
+          <></>
+        )}
+        {currentMatchList.length > 1 ? (
+          <button
+            className={`${styles.dropdownButton} ${dropButtonStyle} ${matchCountStyle}`}
+            onMouseDown={() => setShowDropdown(!showDropdown)}
+          >
+            <TbMenu />
+          </button>
+        ) : (
+          <></>
+        )}
+      </div>
+    </div>
+  );
+}
+
+interface CurrentMatchContentProp {
+  currentMatch: CurrentMatchListElement;
+  index: number;
+}
+
+function CurrentMatchContent(prop: CurrentMatchContentProp) {
+  const { currentMatch, index } = prop;
+  const { startTime, isMatched, enemyTeam, isImminent } = currentMatch;
+
+  const currentMatchList =
+    useRecoilValue<CurrentMatchList>(currentMatchState).match;
+
+  const setModal = useSetRecoilState<Modal>(modalState);
+  const cancelButtonStyle =
+    isImminent && enemyTeam.length ? styles.block : styles.nonBlock;
 
   const onCancel = (startTime: string) => {
     setModal({
@@ -29,36 +100,47 @@ export default function CurrentMatch(prop: CurrentMatchProp) {
     });
   };
 
+  const currentMatchContentStyle = index
+    ? styles.middle
+    : currentMatchList.length > 1
+    ? styles.mainMore
+    : styles.mainOne;
+
   return (
     <>
-      <div className={styles.container}>
-        <>
-          <div className={styles.stringWrapper}>
-            <div className={styles.icon}>⏰</div>
-            <div className={styles.messageWrapper}>
-              {currentMatch && makeMessage(startTime, isMatched)}
-              <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
-            </div>
-          </div>
-          <div
-            className={
-              blockCancelButton ? styles.blockCancelButton : styles.cancelButton
-            }
-          >
-            <input
-              type='button'
-              onClick={() => onCancel(startTime)}
-              value={blockCancelButton ? '취소불가' : '취소하기'}
-            />
-          </div>
-        </>
+      <div
+        className={`${styles.currentMatchContent} ${currentMatchContentStyle}`}
+      >
+        <LoudSpeaker />
+        <div className={styles.messageWrapper}>
+          <MakeMessage time={startTime} isMatched={isMatched} />
+          <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
+        </div>
+        <button
+          className={`${styles.cancelButton} ${cancelButtonStyle}`}
+          onClick={(event) => {
+            event.stopPropagation();
+            onCancel(startTime);
+          }}
+        >
+          {cancelButtonStyle === styles.block
+            ? '경기 취소 불가'
+            : '경기 예약 취소'}
+        </button>
       </div>
     </>
   );
 }
 
-function makeMessage(time: string, isMatched: boolean) {
-  const formattedTime = gameTimeToString(time);
+interface MakeMessageProps {
+  time: string;
+  isMatched: boolean;
+}
+
+function MakeMessage({ time, isMatched }: MakeMessageProps) {
+  const formattedTime = `${stringToHourMin(time).sHour}시 ${
+    stringToHourMin(time).sMin
+  }분`;
   return (
     <div className={styles.message}>
       <span>{formattedTime}</span>
@@ -67,7 +149,7 @@ function makeMessage(time: string, isMatched: boolean) {
           '에 경기가 시작됩니다!'
         ) : (
           <>
-            <span> 참가자 기다리는 중</span>
+            <span>&nbsp;참가자 기다리는 중</span>
             <span className={styles.waitUpDown}>
               <span className={styles.span1}>.</span>
               <span className={styles.span2}>.</span>

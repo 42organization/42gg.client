@@ -1,35 +1,68 @@
 import Link from 'next/link';
+import React, { useContext } from 'react';
 import { RankUser, NormalUser } from 'types/rankTypes';
 import styles from 'styles/rank/RankListMain.module.scss';
-
+import PlayerImage from 'components/PlayerImage';
+import { ToggleModeContext } from '../RankList';
+import { TbQuestionMark } from 'react-icons/tb';
 interface RankListItemMainProps {
   user: NormalUser | RankUser;
-  isSeasonNormal: boolean;
 }
 
-export default function RankListItemMain({
-  user,
-  isSeasonNormal,
-}: RankListItemMainProps) {
-  const { rank, intraId, statusMessage } = user;
-  const messageFiltered =
-    statusMessage.length > 10
-      ? statusMessage.slice(0, 10) + '...'
-      : statusMessage;
+export default function RankListItemMain({ user }: RankListItemMainProps) {
+  const { rank, intraId, userImageUri } = user;
   const rankFiltered = rank < 0 ? '-' : rank;
-
+  const toggleMode = useContext(ToggleModeContext);
+  const renderLink = intraId !== 'intraId';
   return (
     <div
-      className={`${styles.mainData}
-			${isSeasonNormal && styles.normal}`}
+      className={`${styles.mainData} ${
+        toggleMode === 'NORMAL' && styles.normal
+      }`}
     >
-      <div className={styles.rankNumber}>{rankFiltered}</div>
-      <div className={styles.intraId}>
-        <Link href={`users/detail?intraId=${intraId}`}>
-          <span>{intraId}</span>
-        </Link>
+      <div
+        className={`${rank === 1 ? styles.leaf : ''} ${
+          toggleMode === 'NORMAL' && styles.normal
+        }`}
+      >
+        <div
+          className={`${rank === 1 ? styles.leaf1 : ''} ${
+            toggleMode === 'NORMAL' && styles.normal
+          }`}
+        >
+          <div
+            className={`${styles.intraId} ${rank === 1 && styles.first} ${
+              rank === 3 && styles.last
+            }`}
+          >
+            {renderLink ? (
+              <Link href={`users/detail?intraId=${intraId}`}>
+                <PlayerImage
+                  src={userImageUri}
+                  styleName={rank === 1 ? 'ranktropybig' : 'ranktropy'}
+                  size={50}
+                />
+              </Link>
+            ) : (
+              <div className={`${styles.questionCircleRank}`}>
+                {
+                  <TbQuestionMark
+                    color='603B88'
+                    size={rank === 1 ? '80' : '65'}
+                  />
+                }
+              </div>
+            )}
+            <span>{intraId}</span>
+          </div>
+          <div
+            className={`${styles[`rankNumber${rank}`]} 
+            ${toggleMode === 'NORMAL' && styles.normal}`}
+          >
+            {rankFiltered}
+          </div>
+        </div>
       </div>
-      <div className={styles.statusMessage}>{messageFiltered}</div>
     </div>
   );
 }

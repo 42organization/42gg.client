@@ -28,6 +28,7 @@ export default function PlayerImage({
           quality={`${size}`}
           unoptimized={imgError}
           onError={() => setImgError(true)}
+          priority={true}
         />
       </div>
     </div>

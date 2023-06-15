@@ -38,6 +38,7 @@ export default function UserGameSearchBar() {
 
   return (
     <div id={styles.game} className={styles.searchBar} ref={searchBarRef}>
+      <GoSearch />
       <input
         type='text'
         onChange={keywordHandler}
@@ -48,20 +49,15 @@ export default function UserGameSearchBar() {
         value={keyword}
       />
       <div className={styles.icons}>
-        {keyword ? (
-          <span
-            className={styles.reset}
-            onClick={() => {
-              setKeyword('');
-            }}
-          >
-            <IoIosCloseCircle />
-          </span>
-        ) : (
-          <span>
-            <GoSearch />
-          </span>
-        )}
+        <span
+          className={styles.reset}
+          style={{ visibility: `${keyword ? 'visible' : 'hidden'}` }}
+          onClick={() => {
+            setKeyword('');
+          }}
+        >
+          <IoIosCloseCircle />
+        </span>
       </div>
       {showDropDown && keyword && (
         <div className={styles.dropdown}>

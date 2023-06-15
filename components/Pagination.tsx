@@ -9,7 +9,7 @@ import {
 interface GreetingProps {
   curPage: number | undefined;
   totalPages: number | undefined;
-  pageChangeHandler: (page: number) => void;
+  pageChangeHandler: (pageNumber: number) => void;
 }
 
 function PageNation({
@@ -29,7 +29,7 @@ function PageNation({
           lastPageText={<IoPlaySkipForwardSharp />}
           prevPageText={<IoCaretBackSharp />}
           nextPageText={<IoCaretForwardSharp />}
-          onChange={pageChangeHandler}
+          onChange={(page) => pageChangeHandler(page)}
         />
       )}
     </>

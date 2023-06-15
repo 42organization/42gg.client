@@ -2,58 +2,119 @@
 
 .backdrop {
   @include backdrop;
-  z-index: 2;
+  z-index: 4;
 }
 
 .container {
   @include menu-noti-Bar;
-  padding: 1.15rem 0.7rem;
-  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
-  color: white;
-  text-shadow: 2px 2px 2px $dark-gray;
-  button {
-    all: unset;
-    width: 1.5rem;
-    margin-left: auto;
-    color: $dark-gray;
-    font-size: 1.5rem;
-    text-shadow: none;
-    text-align: center;
-    cursor: pointer;
+  padding-top: 2.8rem;
+  padding-left: 1.8rem;
+  background: rgba(244, 221, 247, 1);
+  width: 20rem;
+  .menuTopWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 1.8rem;
+    .menuLogo {
+      font-family: 'Overgrow', sans-serif;
+      font-size: 1.8rem;
+    }
+    button {
+      all: unset;
+      width: 1.2rem;
+      margin-left: auto;
+      color: rgba(101, 97, 102, 1);
+      font-size: 1.5rem;
+      text-shadow: none;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+  .menuProfileWrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    font-family: 'Roboto', sans-serif;
+    .userInfoWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding-left: 0.8rem;
+      .userId {
+        font-size: 1.3rem;
+        padding-bottom: 0.1rem;
+        font-weight: 700;
+        color: rgba(43, 43, 43, 1);
+      }
+      .userLevel {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: rgba(69, 69, 69, 1);
+      }
+    }
   }
   nav {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    margin: 2rem 1rem;
+    justify-content: flex-start;
   }
-  .menu {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 1rem;
-    font-size: $big-giant-font;
-    font-weight: 600;
-    div {
-      margin-bottom: 1.7rem;
-      cursor: pointer;
+  .mainMenu {
+    padding-bottom: 3rem;
+    .imageWrapper {
+      background-color: rgba(244, 221, 247, 1);
     }
   }
-  .subMenu {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 2rem;
-    font-size: $medium-font;
-    font-weight: normal;
-    div {
-      margin-bottom: 1.2rem;
-      cursor: pointer;
+  .adminMenu {
+    padding-bottom: 2.5rem;
+    .imageWrapper {
+      background-color: rgba(252, 235, 255, 1);
     }
   }
-}
-
-#logout {
-  margin-top: 0;
+  .menuItem {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.375rem;
+    margin-bottom: 1.125rem;
+    border-top-left-radius: 0.625rem;
+    border-bottom-left-radius: 0.625rem;
+    &:hover {
+      background-color: rgba(212, 191, 215, 1);
+    }
+    .imageWrapper {
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 0.75rem;
+      box-shadow: 0px 4px 16px 0px rgba(69, 69, 69, 0.15);
+      border-radius: 0.625rem;
+    }
+    .menuText {
+      font-size: 1rem;
+      font-family: 'Fira Sans', sans-serif;
+      font-weight: 500;
+      color: rgba(26, 30, 37, 1);
+    }
+  }
+  .logout {
+    padding-top: 1.3rem;
+    padding-right: 1.8rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    div {
+      padding-right: 0.375rem;
+      font-size: 1rem;
+      font-family: 'Fira Sans', sans-serif;
+      font-weight: 600;
+      color: rgba(26, 30, 37, 1);
+    }
+  }
 }

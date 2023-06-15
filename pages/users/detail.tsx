@@ -13,7 +13,6 @@ export default function User() {
     <div className={styles.container}>
       {typeof intraId === 'string' && (
         <div key={intraId}>
-          <h1 className={styles.title}>{intraId}</h1>
           <BasicProfile profileId={intraId} />
           <RankProfile profileId={intraId} />
           <Link

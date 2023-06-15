@@ -1,8 +1,7 @@
 @mixin modeWrapBasic {
   display: flex;
   justify-content: space-between;
-  margin-inline: 0.6rem;
-  margin-bottom: 0.7rem;
+  margin: 0 0.6rem 2rem 0.6rem;
 }
 
 .rankModeWrap {
@@ -11,12 +10,13 @@
 
 .gameModeWrap {
   @include modeWrapBasic;
+  position: relative;
 }
 
 .profileModeWrap {
   display: flex;
   justify-content: right;
-  margin-bottom: 0.7rem;
+  margin-top: 0.5rem;
 }
 
 .matchModeWrap {

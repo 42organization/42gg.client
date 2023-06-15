@@ -1,66 +1,140 @@
 @import 'styles/common.scss';
 
+@mixin noti-reload-button {
+  width: 1.7rem;
+  height: 1.7rem;
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #e5c9e8 0%, #e4c8e8 100%);
+  border: 0;
+  border-radius: 50%;
+  color: rgba(101, 97, 102, 1);
+  font-size: 1.4rem;
+}
+
 .backdrop {
   @include backdrop;
-  z-index: 2;
+  z-index: 4;
 }
 
 .container {
   @include menu-noti-Bar;
-  padding: 1.15rem 0.7rem 2rem;
+  width: 20rem;
+  padding: 2.8rem 2.5rem 2rem 1.5rem;
   margin-left: auto;
-  background: linear-gradient(to right bottom, $g2-top, $g2-bottom);
-  button {
-    all: unset;
-    width: 1.5rem;
-    color: $dark-gray;
-    font-size: 1.5rem;
-    text-shadow: none;
-    text-align: center;
-    cursor: pointer;
+  background: rgba(244, 221, 247, 1);
+
+  .closeButtonWrapper {
+    padding-bottom: 1.4rem;
+    button {
+      color: rgba(101, 97, 102, 1);
+      all: unset;
+      width: 1.2rem;
+      margin-left: auto;
+      color: rgba(101, 97, 102, 1);
+      font-size: 1.5rem;
+      text-shadow: none;
+      text-align: center;
+      cursor: pointer;
+    }
   }
+
   .buttonWrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-left: 0.3rem;
+    padding-bottom: 1.625rem;
     .reloadButton {
-      @include reload-button;
+      @include noti-reload-button;
     }
     .spinReloadButton {
-      @include reload-button;
+      @include noti-reload-button;
       opacity: 0.7;
       animation: spin 1s infinite;
       pointer-events: none;
       cursor: not-allowed;
     }
     .deleteButton {
-      @include match-noti-button;
-      border-radius: $small-radius;
+      width: 4.3rem;
+      height: 1.7rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem;
+      background: linear-gradient(180deg, #e5cae9 0%, #e4c8e8 100%);
+      border: 0;
+      border-radius: 0.3rem;
+      font-size: 0.8rem;
+      font-family: 'Heebo', sans-serif;
+      color: rgba(101, 97, 102, 1);
     }
   }
 }
 
-.emptyContent {
-  text-align: right;
-  .reloadButton {
-    @include match-noti-button;
-    border-radius: $big-radius;
+.notiEmptyWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2.8rem;
+  font-family: 'Fenix', sans-serif;
+  .notiEmptyText {
+    padding-bottom: 1.25rem;
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: rgba(141, 119, 144, 1);
   }
-  .spinReloadButton {
-    @include match-noti-button;
-    border-radius: $big-radius;
-    opacity: 0.7;
-    pointer-events: none;
-    animation: spin 1s infinite;
-    cursor: not-allowed;
+  .threeDotImage {
+    width: 6.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.25rem;
+    div {
+      width: 0.75rem;
+      height: 0.75rem;
+      background: rgba(169, 128, 175, 1);
+      border-radius: 50%;
+    }
   }
-  div {
-    padding: 1rem;
-    border-radius: $small-radius;
-    background: white;
-    color: black;
-    font-size: $medium-font;
-    text-align: center;
+}
+
+.notiExistWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: 'Fenix', sans-serif;
+}
+
+.notiDecorate {
+  width: 100%;
+  position: relative;
+  padding-top: 3rem;
+
+  .circleOne {
+    width: 8.5rem;
+    height: 8.5rem;
+    position: relative;
+    top: 60%;
+    left: 25%;
+    background-color: rgba(238, 201, 243, 0.5);
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  .circleTwo {
+    width: 200px;
+    height: 100px;
+    position: relative;
+    top: 33%;
+    left: -10%;
+    border-radius: 100px 100px 0px 0px;
+    background-color: rgba(243, 211, 248, 1);
   }
 }
 

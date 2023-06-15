@@ -2,17 +2,11 @@ import styles from 'styles/mode/ModeToggle.module.scss';
 
 interface ModeToggleProps {
   id: string;
-  text: string;
   checked: boolean;
   onToggle: () => void;
 }
 
-export default function ModeToggle({
-  id,
-  text,
-  checked,
-  onToggle,
-}: ModeToggleProps) {
+export default function ModeToggle({ id, checked, onToggle }: ModeToggleProps) {
   return (
     <div>
       <input
@@ -24,7 +18,7 @@ export default function ModeToggle({
         hidden
       />
       <label htmlFor={id} className={styles.toggleSwitch}>
-        <span className={styles.toggleText}>{text}</span>
+        <span className={styles.toggleText}></span>
         <span className={styles.toggleButton}></span>
       </label>
     </div>
