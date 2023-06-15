@@ -49,7 +49,7 @@ export default function CurrentMatch() {
       <div
         className={`${styles.dropdownWrapper} ${dropdownStyle} ${matchCountStyle}`}
       >
-        {dropdownAnimation && (
+        {dropdownAnimation ? (
           <div className={styles.dropdown}>
             {currentMatchList.slice(1).map((currentMatch, index) => (
               <CurrentMatchContent
@@ -59,6 +59,8 @@ export default function CurrentMatch() {
               />
             ))}
           </div>
+        ) : (
+          <></>
         )}
         {currentMatchList.length > 1 ? (
           <button
