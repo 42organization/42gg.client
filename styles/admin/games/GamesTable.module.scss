@@ -1,3 +1,4 @@
+@import 'styles/admin/common.scss';
 @import 'styles/admin/common/Pagination.module.scss';
 
 .gamesWrap {
@@ -22,17 +23,19 @@
   .tableWrap {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    width: 700px;
-    height: 600px;
+    width: fit-content;
+    height: fit-content;
     margin: 10px auto;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+    gap: 26px;
+    padding: 26px 10px;
     .tableRow {
       display: flex;
       justify-content: flex-end;
-      height: 100px;
-      padding: 0 10px;
+      align-items: center;
+      box-sizing: content-box;
+      height: 6.25rem;
       .gameId {
         display: flex;
         justify-content: center;
@@ -49,12 +52,12 @@
         justify-content: center;
         background-color: #eff0f3;
         padding: 0 0 0 11px;
-        height: 100px;
-        width: 200px;
+        height: 6.25rem;
+        width: 12.5rem;
       }
       .tableTeam {
-        height: 100px;
-        width: 200px;
+        height: 6.25rem;
+        width: 12.5rem;
         :nth-child(1) {
           display: flex;
           justify-content: center;
@@ -87,6 +90,16 @@
         border: 1px solid #e5e7eb;
       }
     }
+  }
+}
+
+.modifyBtn {
+  @include admin-button('PALE-BLUE');
+  margin: 0 30px;
+  padding: 0.344rem 0.75rem;
+  border-radius: 0.625rem;
+  &:disabled {
+    @include admin-button('PALE-BLUE', disabled);
   }
 }
 
