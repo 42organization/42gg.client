@@ -1,4 +1,5 @@
 import { useSetRecoilState } from 'recoil';
+import axios from 'axios';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import { AfterGame, TeamScore } from 'types/scoreTypes';
@@ -19,15 +20,24 @@ type normalRequest = {
   enemyTeamId: number;
 };
 
+type responseTypes = Record<'SUCCESS' | 'GM202' | 'GM204', string>;
+
+type errorResponse = {
+  status: number;
+  message: string;
+  code: string;
+};
+
 const useSubmitModal = (currentGame: AfterGame) => {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const { gameId, matchTeamsInfo, mode } = currentGame;
   const { myTeam, enemyTeam } = matchTeamsInfo;
 
-  const rankResponse: { [key: string]: string } = {
-    '201': '결과 입력이 완료되었습니다.',
-    '202': '상대가 이미 점수를 입력했습니다.',
+  const rankResponse: responseTypes = {
+    SUCCESS: '결과 입력이 완료되었습니다.',
+    GM202: '입력한 점수가 저장된 점수와 다릅니다.',
+    GM204: '상대가 이미 점수를 입력했습니다.',
   };
 
   const submitRankHandler = async (result: TeamScore) => {
@@ -39,10 +49,17 @@ const useSubmitModal = (currentGame: AfterGame) => {
         enemyTeamId: enemyTeam.teamId,
         enemyTeamScore: result.enemyTeamScore,
       };
-      const res = await instance.post(`/pingpong/games/rank`, requestBody);
-      alert(rankResponse[`${res?.status}`]);
+      await instance.post(`/pingpong/games/rank`, requestBody);
+      alert(rankResponse['SUCCESS']);
     } catch (e) {
-      setError('JH04');
+      if (axios.isAxiosError(e)) {
+        const { code } = e.response as unknown as errorResponse;
+        if (code == 'GM202' || code == 'GM204') {
+          alert(rankResponse[code]);
+        }
+      } else {
+        setError('JH04');
+      }
       return;
     }
     openStatChangeModal();
