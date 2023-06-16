@@ -25,7 +25,7 @@ export const UnreadAnnounce: Story = {
       id: 101010,
       type: 'ANNOUNCE',
       isChecked: false,
-      message: '공지다',
+      message: '공지다 읽음x',
       createdAt: '1900-01-01T01:01:01',
     },
   },
@@ -37,7 +37,7 @@ export const UnreadImminent: Story = {
       id: 101010,
       type: 'IMMINENT',
       isChecked: false,
-      message: '<intraId::Cypress>님과 곧 경기가 시작됩니다',
+      message: '<intraId::Cypress>님과 곧 경기가 시작됩니다 읽음x',
       createdAt: '1900-01-01T01:01:01',
     },
   },
@@ -48,30 +48,66 @@ export const UnreadCancedByMan: Story = {
       id: 101010,
       type: 'CANCELEDBYMAN',
       isChecked: false,
-      message: '경기가 취소되었다',
+      message: '경기가 취소되었다 읽음x',
       createdAt: '1900-01-01T01:01:01',
     },
   },
 };
+
 export const UnreadMatched: Story = {
   args: {
     data: {
       id: 101010,
       type: 'MATCHED',
       isChecked: false,
-      message: '매칭 잡혔다',
+      message: '매칭 잡혔다 읽음x',
       createdAt: '1900-01-01T01:01:01',
     },
   },
 };
 
-export const readNoti: Story = {
+export const ReadAnnounce: Story = {
+  args: {
+    data: {
+      id: 101010,
+      type: 'ANNOUNCE',
+      isChecked: true,
+      message: '공지다 읽음o',
+      createdAt: '1900-01-01T01:01:01',
+    },
+  },
+};
+
+export const ReadImminent: Story = {
+  args: {
+    data: {
+      id: 101010,
+      type: 'IMMINENT',
+      isChecked: true,
+      message: '<intraId::Cypress>님과 곧 경기가 시작됩니다 읽음o',
+      createdAt: '1900-01-01T01:01:01',
+    },
+  },
+};
+export const ReadCancedByMan: Story = {
+  args: {
+    data: {
+      id: 101010,
+      type: 'CANCELEDBYMAN',
+      isChecked: true,
+      message: '경기가 취소되었다 읽음o',
+      createdAt: '1900-01-01T01:01:01',
+    },
+  },
+};
+
+export const ReadMatched: Story = {
   args: {
     data: {
       id: 101010,
       type: 'MATCHED',
       isChecked: true,
-      message: '매칭 잡혔다',
+      message: '매칭 잡혔다 읽음o',
       createdAt: '1900-01-01T01:01:01',
     },
   },
