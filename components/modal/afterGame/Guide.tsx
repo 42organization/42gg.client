@@ -2,7 +2,7 @@ import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
 
 interface GuideProps {
   condition: boolean;
-  modalMode: 'NORMAL' | 'RANK';
+  modalMode: 'NORMAL' | 'RANK' | 'CONFIRM';
 }
 
 export default function Guide({ condition, modalMode }: GuideProps) {
@@ -17,12 +17,11 @@ export default function Guide({ condition, modalMode }: GuideProps) {
       after: '경기 결과 확인',
       explains: '💡 3판 2선승제!\n💡 동점은 1점 내기로 승부를 결정!',
     },
-    // NOTE : 이전부터 사용이 안되던 부분인 것 같아서 일단 주석으로 남겨두었습니다.
-    // CONFIRM: {
-    //   before: '경기 결과!',
-    //   after: '경기 결과!',
-    //   explains: '이미 입력된 경기입니다. 점수를 확인하세요!\n',
-    // },
+    CONFIRM: {
+      before: '경기 결과!',
+      after: '경기 결과!',
+      explains: '이미 입력된 경기입니다. 점수를 확인하세요!\n',
+    },
   };
 
   return (
