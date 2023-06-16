@@ -89,8 +89,8 @@ function ReloadNotiButton() {
     ? styles.spinReloadButton
     : styles.reloadButton;
 
-  const clickReloadNoti = () => {
-    HeaderState?.putNotiHandler();
+  const clickReloadNoti = async () => {
+    await HeaderState?.putNotiHandler();
     NotiContext?.setClickReloadNoti?.(true);
   };
 
