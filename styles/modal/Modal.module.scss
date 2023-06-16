@@ -2,7 +2,7 @@
 
 .backdrop {
   @include backdrop;
-  z-index: 3 !important;
+  z-index: 5 !important;
   display: flex;
   justify-content: center;
   align-items: center;
