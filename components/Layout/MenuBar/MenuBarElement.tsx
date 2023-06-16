@@ -27,7 +27,7 @@ interface menuItemProps {
   onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
-const MenuItem = ({ itemName, onClick }: menuItemProps) => {
+export const MenuItem = ({ itemName, onClick }: menuItemProps) => {
   const menuList: { [key: string]: { [key: string]: string | JSX.Element } } = {
     Ranking: {
       name: '랭킹',
