@@ -15,6 +15,8 @@ import useLiveCheck from 'hooks/Layout/useLiveCheck';
 import HeaderStateContext from './HeaderContext';
 import StyledButton from 'components/StyledButton';
 
+import useModeToggle from 'hooks/mode/useModeToggle';
+import { useEffect } from 'react';
 type AppLayoutProps = {
   children: React.ReactNode;
 };
@@ -23,6 +25,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const user = useRecoilValue(userState);
   const presentPath = useRouter().asPath;
   const router = useRouter();
+  const { Mode } = useModeToggle();
+  console.log(Mode);
 
   useGetUserSeason();
   useSetAfterGameModal();
@@ -41,7 +45,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
     )
   ) : (
     <div className={styles.appContainer}>
-      <div className={styles.background}>
+      <div
+        className={`${
+          Mode === 'RANK' ? styles.background : styles.backgroundnormal
+        }`}
+      >
         <div>
           {presentPath === '/statistics' && user.isAdmin ? (
             <Statistics />

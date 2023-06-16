@@ -24,6 +24,22 @@
   background-attachment: fixed;
 }
 
+.backgroundnormal {
+  position: relative;
+  width: 100vw;
+  max-width: 100vh;
+  min-height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #1f2157 0%,
+    #1549cd 42.91%,
+    #001049 59.9%
+  );
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 .buttonContainer {
   z-index: 3;
   position: sticky;
