@@ -17,6 +17,12 @@ function Login() {
     );
   };
 
+  const onKakaoLogin = () => {
+    router.push(
+      `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/oauth2/authorization/kakao`
+    );
+  };
+
   return (
     <>
       <div className={styles.loginContainer}>
@@ -36,6 +42,9 @@ function Login() {
           <div className={styles.buttonContainer}>
             <StyledButton onClick={onLogin} width={'9rem'}>
               Sign in
+            </StyledButton>
+            <StyledButton onClick={onKakaoLogin} width={'9rem'}>
+              kakao login
             </StyledButton>
           </div>
         </div>
