@@ -1,10 +1,10 @@
-import { useSetRecoilState } from 'recoil';
 import axios from 'axios';
+import { useSetRecoilState } from 'recoil';
+import { reloadMatchState } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import { AfterGame, TeamScore } from 'types/scoreTypes';
 import { instance } from 'utils/axios';
-import { MatchMode } from 'types/mainType';
 
 type rankRequest = {
   gameId: number;
@@ -31,6 +31,7 @@ type errorResponse = {
 const useSubmitModal = (currentGame: AfterGame) => {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
+  const setReloadMatch = useSetRecoilState(reloadMatchState);
   const { gameId, matchTeamsInfo, mode } = currentGame;
   const { myTeam, enemyTeam } = matchTeamsInfo;
 
@@ -55,12 +56,12 @@ const useSubmitModal = (currentGame: AfterGame) => {
         const { code } = e.response.data as unknown as errorResponse;
         if (code == 'GM202' || code == 'GM204') {
           alert(rankResponse['DUPLICATED']);
-          location.reload(); // 현재 유저 event 상태 재확인
+          setReloadMatch(true); // 현재 유저 event 상태 재확인
         }
       } else {
         setError('JH04');
+        return;
       }
-      return;
     }
     openStatChangeModal();
   };
