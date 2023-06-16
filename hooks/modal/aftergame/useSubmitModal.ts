@@ -20,7 +20,7 @@ type normalRequest = {
   enemyTeamId: number;
 };
 
-type responseTypes = Record<'SUCCESS' | 'GM202' | 'GM204', string>;
+type responseTypes = Record<'SUCCESS' | 'DUPLICATED', string>;
 
 type errorResponse = {
   status: number;
@@ -36,8 +36,7 @@ const useSubmitModal = (currentGame: AfterGame) => {
 
   const rankResponse: responseTypes = {
     SUCCESS: '결과 입력이 완료되었습니다.',
-    GM202: '입력한 점수가 저장된 점수와 다릅니다.',
-    GM204: '상대가 이미 점수를 입력했습니다.',
+    DUPLICATED: '상대가 이미 점수를 입력했습니다.',
   };
 
   const submitRankHandler = async (result: TeamScore) => {
@@ -55,7 +54,8 @@ const useSubmitModal = (currentGame: AfterGame) => {
       if (axios.isAxiosError(e) && e.response) {
         const { code } = e.response.data as unknown as errorResponse;
         if (code == 'GM202' || code == 'GM204') {
-          alert(rankResponse[code]);
+          alert(rankResponse['DUPLICATED']);
+          location.reload(); // 현재 유저 event 상태 재확인
         }
       } else {
         setError('JH04');
