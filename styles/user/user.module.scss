@@ -20,3 +20,34 @@
 #mine {
   cursor: pointer;
 }
+
+.sectionWrap {
+  position: relative;
+  z-index: 1;
+  margin-top: 2.5rem;
+  > .titleWrap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.813rem;
+    > span {
+      display: flex;
+      align-items: center;
+      font-family: 'Lexend';
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.25rem;
+      letter-spacing: 0.04em;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      color: #ffffff;
+    }
+    > Link {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      height: 1.563rem;
+      width: 1.563rem;
+      color: #ffffff;
+    }
+  }
+}
