@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { CurrentMatchList, Match, Slot } from 'types/matchTypes';
 import { Live } from 'types/mainType';
@@ -144,7 +144,7 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
     () => ({
       mytable: status === 'mytable' ? styles.mytable : styles.disabled,
       close:
-        event === 'match' && match[0].startTime === startTime
+        event === 'match' && match.every((m) => m.startTime === startTime)
           ? styles.mytableDisabled
           : styles.disabled,
       open:
@@ -190,7 +190,7 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
           {isAfterSlot &&
             !(
               event === 'match' &&
-              match[0].startTime === startTime &&
+              match.every((m) => m.startTime === startTime) &&
               headCount === 2
             ) &&
             (headCount === 0 ? '+' : `${headCount}/2`)}
