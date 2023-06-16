@@ -27,6 +27,7 @@ export default function SlotMain() {
   const [firstHour, setFirstHour] = useState<number>(0);
   const setSnackbar = useSetRecoilState(toastState);
   const currentHour = new Date().getHours();
+  const koreaTimeOffset = 1000 * 60 * 60 * 9;
   const initScheduleInfo = async () => {
     try {
       const res = await instanceInManage.get(`/slot-management`); //ToDo: api 명세 나오면 바꾸기
@@ -103,7 +104,6 @@ export default function SlotMain() {
       </option>
     )
   );
-
   const finishHandler = async () => {
     if (scheduleInfo.openMinute > scheduleInfo.interval) {
       setSnackbar({
@@ -114,8 +114,15 @@ export default function SlotMain() {
       });
       return;
     }
+
+    const adjustedStartTime =
+      scheduleInfo.startTime.getTime() + koreaTimeOffset;
+
     try {
-      await instanceInManage.post(`/slot-management`, scheduleInfo);
+      await instanceInManage.post(`/slot-management`, {
+        ...scheduleInfo,
+        startTime: new Date(adjustedStartTime),
+      });
       initSlotInfo();
     } catch (e) {
       console.error('SW02');
@@ -246,7 +253,6 @@ export default function SlotMain() {
           <div>슬롯 반영 시작날짜:</div>
           <input
             type='datetime-local'
-            // value={scheduleInfo.startTime}
             name='startDateTime'
             onChange={inputHandler}
           />
