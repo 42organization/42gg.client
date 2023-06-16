@@ -160,7 +160,7 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
           ? styles.rank
           : styles.normal,
     }),
-    [slot]
+    [slot, match]
   );
 
   const isAfterSlot: boolean =
@@ -193,7 +193,11 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
               match.some((m) => m.startTime === startTime) &&
               headCount === 2
             ) &&
-            (headCount === 0 ? '+' : `${headCount}/2`)}
+            (match[0].isMatched === true && status === 'mytable'
+              ? '2/2'
+              : headCount === 0
+              ? '+'
+              : `${headCount}/2`)}
         </span>
       </button>
     </>
