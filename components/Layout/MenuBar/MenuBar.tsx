@@ -11,7 +11,7 @@ import { ProfileBasic } from 'types/userTypes';
 import { MainMenu, AdminMenu } from './MenuBarElement';
 import useAxiosGet from 'hooks/useAxiosGet';
 
-export const MenuTop = () => {
+const MenuTop = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
 
   return (
@@ -22,7 +22,7 @@ export const MenuTop = () => {
   );
 };
 
-export const MenuProfile = () => {
+const MenuProfile = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const user = useRecoilValue<User>(userState);
   const [profile, setProfile] = useRecoilState<ProfileBasic>(profileState);
