@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
+import { ISeasonEditInfo } from 'types/seasonTypes';
 import {
   Paper,
   Table,
@@ -13,15 +14,8 @@ import {
 } from '@mui/material';
 import styles from 'styles/admin/season/SeasonCreate.module.scss';
 
-interface SeasonCreateInfo {
-  seasonName: string;
-  startTime: Date;
-  startPpp: number;
-  pppGap: number;
-}
-
 export default function SeasonCreate() {
-  const [seasonInfo, setSeasonInfo] = useState<SeasonCreateInfo>({
+  const [seasonInfo, setSeasonInfo] = useState<ISeasonEditInfo>({
     seasonName: '',
     startTime: new Date(),
     startPpp: 0,

@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { ISeason } from 'types/modalTypes';
+import { ISeason, ISeasonEditInfo } from 'types/seasonTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/SeasonEdit.module.scss';
-
-interface SeasonEditInfo {
-  seasonName: string;
-  startTime: Date;
-  startPpp: number;
-  pppGap: number;
-}
 
 const AdminSeasonEdit = ({
   seasonId,
@@ -23,7 +16,7 @@ const AdminSeasonEdit = ({
 }: ISeason) => {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
-  const [seasonInfo, setSeasonInfo] = useState<SeasonEditInfo>({
+  const [seasonInfo, setSeasonInfo] = useState<ISeasonEditInfo>({
     seasonName,
     startTime,
     startPpp,

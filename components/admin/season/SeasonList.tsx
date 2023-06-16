@@ -4,6 +4,7 @@ import { tableFormat } from 'constants/admin/table';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
+import { ISeason, ISeasonList } from 'types/seasonTypes';
 import {
   Paper,
   Table,
@@ -15,23 +16,9 @@ import {
 } from '@mui/material';
 import styles from 'styles/admin/season/SeasonList.module.scss';
 
-interface ISeason {
-  seasonId: number;
-  seasonName: string;
-  startTime: Date;
-  endTime: Date;
-  startPpp: number;
-  pppGap: number;
-  status: string;
-}
-
-interface ISeasonTable {
-  seasonList: ISeason[];
-}
-
 export default function SeasonList() {
   const setModal = useSetRecoilState(modalState);
-  const [seasonList, setSeasonList] = useState<ISeasonTable>({
+  const [useSeasonList, setUseSeasonList] = useState<ISeasonList>({
     seasonList: [],
   });
 
@@ -40,7 +27,7 @@ export default function SeasonList() {
   const getSeasonList = async () => {
     try {
       const res = await instanceInManage.get(`/seasons`);
-      setSeasonList({ ...res.data });
+      setUseSeasonList({ ...res.data });
     } catch (e: any) {
       setSnackBar({
         toastName: 'Get Error',
@@ -88,7 +75,7 @@ export default function SeasonList() {
             </TableRow>
           </TableHead>
           <TableBody className={styles.tableBody}>
-            {seasonList.seasonList.map((seasonL: ISeason, index: number) => (
+            {useSeasonList.seasonList.map((seasonL: ISeason, index: number) => (
               <TableRow key={index}>
                 {tableFormat['season'].columns.map(
                   (columnName, index: number) => (

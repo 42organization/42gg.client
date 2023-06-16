@@ -1,4 +1,5 @@
 import { MatchMode } from './mainType';
+import { ISeason } from './seasonTypes';
 import { Value } from 'react-quill';
 import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 
@@ -54,16 +55,6 @@ export interface Manual {
 
 export interface manual {
   radioMode: MatchMode;
-}
-
-export interface ISeason {
-  seasonId: number;
-  seasonName: string;
-  startTime: Date;
-  endTime: Date;
-  startPpp: number;
-  pppGap: number;
-  status: string;
 }
 
 export interface Modal {
