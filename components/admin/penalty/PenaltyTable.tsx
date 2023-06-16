@@ -77,7 +77,7 @@ export default function PenaltyTable() {
     } catch (e) {
       console.error('MS07');
     }
-  }, [intraId, currentPage]);
+  }, [intraId, currentPage, current]);
 
   const getAllUserPenalty = useCallback(async () => {
     try {
@@ -138,34 +138,38 @@ export default function PenaltyTable() {
             </TableHead>
             <TableBody className={styles.tableBody}>
               {penaltyInfo.penaltyList.length > 0 ? (
-                penaltyInfo.penaltyList.map((penalty: IPenalty) => (
-                  <TableRow key={penalty.intraId} className={styles.tableRow}>
-                    {tableFormat['penalty'].columns.map(
-                      (columnName: string) => (
-                        <TableCell
-                          key={columnName}
-                          className={styles.tableBodyItem}
-                        >
-                          {columnName !== 'etc'
-                            ? penalty[columnName as keyof IPenalty]?.toString()
-                            : tableFormat['penalty'].etc?.value.map(
-                                (buttonName: string) => (
-                                  <button
-                                    key={buttonName}
-                                    className={styles.button}
-                                    onClick={() =>
-                                      handleButtonAction(penalty.intraId)
-                                    }
-                                  >
-                                    {buttonName}
-                                  </button>
-                                )
-                              )}
-                        </TableCell>
-                      )
-                    )}
-                  </TableRow>
-                ))
+                penaltyInfo.penaltyList.map(
+                  (penalty: IPenalty, index: number) => (
+                    <TableRow key={index} className={styles.tableRow}>
+                      {tableFormat['penalty'].columns.map(
+                        (columnName: string) => (
+                          <TableCell
+                            key={columnName}
+                            className={styles.tableBodyItem}
+                          >
+                            {columnName !== 'etc'
+                              ? penalty[
+                                  columnName as keyof IPenalty
+                                ]?.toString()
+                              : tableFormat['penalty'].etc?.value.map(
+                                  (buttonName: string) => (
+                                    <button
+                                      key={buttonName}
+                                      className={styles.button}
+                                      onClick={() =>
+                                        handleButtonAction(index.toString())
+                                      }
+                                    >
+                                      {buttonName}
+                                    </button>
+                                  )
+                                )}
+                          </TableCell>
+                        )
+                      )}
+                    </TableRow>
+                  )
+                )
               ) : (
                 <TableRow>
                   <TableCell>비어있습니다</TableCell>
