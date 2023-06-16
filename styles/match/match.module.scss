@@ -37,12 +37,7 @@
     transform: rotate(360deg);
   }
 }
-// .title {
-//   @include pageTitle;
-//   &.normal {
-//     text-shadow: $text-border-black, 0.3rem 0.3rem 0 $norm-lightblue2;
-//   }
-// }
+
 .title {
   @include pageTitle;
   &.NORMAL {
