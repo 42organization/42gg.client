@@ -11,13 +11,11 @@ interface SeasonEditInfo {
   startTime: Date;
   startPpp: number;
   pppGap: number;
-  seasonMode: string;
 }
 
 const AdminSeasonEdit = ({
   seasonId,
   seasonName,
-  seasonMode,
   pppGap,
   status,
   startPpp,
@@ -30,7 +28,6 @@ const AdminSeasonEdit = ({
     startTime,
     startPpp,
     pppGap,
-    seasonMode,
   });
 
   const editHandler = async () => {
@@ -82,18 +79,6 @@ const AdminSeasonEdit = ({
               name='seasonName'
               onChange={inputChangeHandler}
             />
-          </div>
-          <div>
-            <div className={styles.bodyText}>seasonMode</div>
-            {status === 'CURRENT' ? (
-              <input value={seasonInfo.seasonMode} disabled={true} />
-            ) : (
-              <select name='seasonMode' onChange={inputChangeHandler}>
-                <option value='BOTH'>BOTH</option>
-                <option value='RANK'>RANK</option>
-                <option value='NORMAL'>NORMAL</option>
-              </select>
-            )}
           </div>
           <div>
             <div className={styles.bodyText}>startTime</div>

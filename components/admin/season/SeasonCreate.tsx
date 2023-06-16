@@ -18,7 +18,6 @@ interface SeasonCreateInfo {
   startTime: Date;
   startPpp: number;
   pppGap: number;
-  seasonMode: string;
 }
 
 export default function SeasonCreate() {
@@ -27,7 +26,6 @@ export default function SeasonCreate() {
     startTime: new Date(),
     startPpp: 0,
     pppGap: 0,
-    seasonMode: 'BOTH',
   });
   const setSnackBar = useSetRecoilState(toastState);
 
@@ -102,13 +100,6 @@ export default function SeasonCreate() {
                   name='pppGap'
                   onChange={inputChangeHandler}
                 />
-              </TableCell>
-              <TableCell>
-                <select name='seasonMode' onChange={inputChangeHandler}>
-                  <option value='BOTH'>BOTH</option>
-                  <option value='RANK'>RANK</option>
-                  <option value='NORMAL'>NORMAL</option>
-                </select>
               </TableCell>
             </TableRow>
           </TableBody>
