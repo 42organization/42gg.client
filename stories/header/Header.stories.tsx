@@ -26,37 +26,11 @@ const meta: Meta<typeof Header> = {
 export default meta;
 type Story = StoryObj<typeof Header>;
 
-const NotiZeroHeader = () => {
+const NotiHeader = ({ notiCnt }: { notiCnt: number }) => {
   const setLive = useSetRecoilState(liveState);
 
   setLive({
-    notiCount: 0,
-    event: null,
-    currentMatchMode: null,
-    gameId: null,
-  });
-
-  return <Header />;
-};
-
-const NotiOneHeader = () => {
-  const setLive = useSetRecoilState(liveState);
-
-  setLive({
-    notiCount: 1,
-    event: null,
-    currentMatchMode: null,
-    gameId: null,
-  });
-
-  return <Header />;
-};
-
-const NotiTenHeader = () => {
-  const setLive = useSetRecoilState(liveState);
-
-  setLive({
-    notiCount: 10,
+    notiCount: notiCnt,
     event: null,
     currentMatchMode: null,
     gameId: null,
@@ -101,15 +75,15 @@ const MenuOpenHeader = () => {
 };
 
 export const NotiZero: Story = {
-  render: () => <NotiZeroHeader />,
+  render: () => <NotiHeader notiCnt={0} />,
 };
 
 export const NotiOne: Story = {
-  render: () => <NotiOneHeader />,
+  render: () => <NotiHeader notiCnt={1} />,
 };
 
 export const NotiTen: Story = {
-  render: () => <NotiTenHeader />,
+  render: () => <NotiHeader notiCnt={10} />,
 };
 
 export const MenuOpen: Story = {

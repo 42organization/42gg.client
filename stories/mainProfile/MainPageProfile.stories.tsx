@@ -13,7 +13,7 @@ const meta: Meta<typeof MainPageProfile> = {
 export default meta;
 type Story = StoryObj<typeof MainPageProfile>;
 
-const MatchOne = () => {
+function SetUser() {
   const setUser = useSetRecoilState(userState);
 
   setUser({
@@ -21,6 +21,10 @@ const MatchOne = () => {
     isAdmin: false,
     userImageUri: 'https://picsum.photos/200/300?grayscale',
   });
+}
+
+const MatchOne = () => {
+  SetUser();
 
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   setOpenCurrentMatch(false);
@@ -33,13 +37,7 @@ const MatchOne = () => {
 };
 
 const MatchTwo = () => {
-  const setUser = useSetRecoilState(userState);
-
-  setUser({
-    intraId: 'Storybook',
-    isAdmin: false,
-    userImageUri: 'https://picsum.photos/200/300?grayscale',
-  });
+  SetUser();
 
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   setOpenCurrentMatch(true);
@@ -61,13 +59,7 @@ const MatchTwo = () => {
 };
 
 const MatchThree = () => {
-  const setUser = useSetRecoilState(userState);
-
-  setUser({
-    intraId: 'Storybook',
-    isAdmin: false,
-    userImageUri: 'https://picsum.photos/200/300?grayscale',
-  });
+  SetUser();
 
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   setOpenCurrentMatch(true);
@@ -89,13 +81,7 @@ const MatchThree = () => {
 };
 
 const MatchFour = () => {
-  const setUser = useSetRecoilState(userState);
-
-  setUser({
-    intraId: 'Storybook',
-    isAdmin: false,
-    userImageUri: 'https://picsum.photos/200/300?grayscale',
-  });
+  SetUser();
 
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   setOpenCurrentMatch(true);
@@ -125,13 +111,7 @@ const MatchFour = () => {
 };
 
 const MatchFive = () => {
-  const setUser = useSetRecoilState(userState);
-
-  setUser({
-    intraId: 'Storybook',
-    isAdmin: false,
-    userImageUri: 'https://picsum.photos/200/300?grayscale',
-  });
+  SetUser();
 
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   setOpenCurrentMatch(true);
