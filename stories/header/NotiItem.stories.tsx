@@ -37,7 +37,7 @@ export const UnreadImminent: Story = {
       id: 101010,
       type: 'IMMINENT',
       isChecked: false,
-      message: '<intraId::hyungjpa>님과 곧 경기가 시작됩니다',
+      message: '<intraId::Cypress>님과 곧 경기가 시작됩니다',
       createdAt: '1900-01-01T01:01:01',
     },
   },
@@ -59,6 +59,18 @@ export const UnreadMatched: Story = {
       id: 101010,
       type: 'MATCHED',
       isChecked: false,
+      message: '매칭 잡혔다',
+      createdAt: '1900-01-01T01:01:01',
+    },
+  },
+};
+
+export const readNoti: Story = {
+  args: {
+    data: {
+      id: 101010,
+      type: 'MATCHED',
+      isChecked: true,
       message: '매칭 잡혔다',
       createdAt: '1900-01-01T01:01:01',
     },
