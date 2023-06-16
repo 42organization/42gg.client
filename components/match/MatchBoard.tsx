@@ -144,7 +144,7 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
     () => ({
       mytable: status === 'mytable' ? styles.mytable : styles.disabled,
       close:
-        event === 'match' && match.every((m) => m.startTime === startTime)
+        event === 'match' && match.some((m) => m.startTime === startTime)
           ? styles.mytableDisabled
           : styles.disabled,
       open:
@@ -190,7 +190,7 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
           {isAfterSlot &&
             !(
               event === 'match' &&
-              match.every((m) => m.startTime === startTime) &&
+              match.some((m) => m.startTime === startTime) &&
               headCount === 2
             ) &&
             (headCount === 0 ? '+' : `${headCount}/2`)}
