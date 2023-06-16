@@ -1,5 +1,4 @@
 @import '../common.scss';
-@import url('https://fonts.googleapis.com/css2?family=Life+Savers&display=swap');
 
 .mainContainer {
   position: relative;
@@ -182,8 +181,7 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  font-family: 'Life Savers';
-  font-weight: 400;
+  font-family: 'LifeSavers';
   text-align: end;
   font-size: 90px;
   line-height: 10rem;
