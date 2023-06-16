@@ -1,3 +1,5 @@
+export {};
+
 describe('프로필 기능 테스트 🥳', () => {
   before(() => {
     cy.login(Cypress.env('ADMIN_USERNAME'), Cypress.env('ADMIN_PASSWORD'));

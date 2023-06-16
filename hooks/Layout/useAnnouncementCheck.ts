@@ -9,7 +9,7 @@ const useAnnouncementCheck = (presentPath: string) => {
   const announcementTime: string | null =
     localStorage.getItem('announcementTime');
 
-  const getAnnouncementHandler = useAxiosGet({
+  const getAnnouncementHandler = useAxiosGet<any>({
     url: '/pingpong/announcement',
     setState: (data) => {
       data.content !== '' &&

@@ -12,36 +12,19 @@ import { EditedSchedule } from 'types/admin/adminSlotTypes';
 import { AfterGame } from 'types/scoreTypes';
 import { GameResult } from 'types/gameTypes';
 
-interface useAxiosGetProps {
+interface useAxiosGetProps<T> {
   url: string;
-  setState:
-    | Dispatch<SetStateAction<boolean>>
-    | Dispatch<SetStateAction<Noti[]>>
-    | Dispatch<SetStateAction<Match | null>>
-    | Dispatch<SetStateAction<ProfileRank>>
-    | Dispatch<SetStateAction<PppChart[]>>
-    | Dispatch<SetStateAction<UserInfo>>
-    | Dispatch<SetStateAction<string[]>>
-    | Dispatch<SetStateAction<string>>
-    | Dispatch<SetStateAction<EditedSchedule>>
-    | Dispatch<SetStateAction<AfterGame>>
-    | Dispatch<SetStateAction<GameResult | undefined>>
-    | Dispatch<SetStateAction<undefined>>
-    | SetterOrUpdater<User>
-    | SetterOrUpdater<SeasonList>
-    | SetterOrUpdater<Live>
-    | SetterOrUpdater<CurrentMatchList>
-    | SetterOrUpdater<ProfileBasic>;
+  setState: Dispatch<SetStateAction<T>>;
   err: string;
   type: null | string;
 }
 
-const useAxiosGet = ({
+const useAxiosGet = <T>({
   url,
   setState,
   err,
   type,
-}: useAxiosGetProps): (() => void) => {
+}: useAxiosGetProps<T>): (() => void) => {
   const setError = useSetRecoilState<string>(errorState);
 
   const axiosGet = async () => {

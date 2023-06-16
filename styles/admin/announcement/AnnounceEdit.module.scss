@@ -24,7 +24,7 @@
 }
 
 .announceModalContainer {
-  @include modal-container;
+  @include modalContainer('SKYPINK');
   margin: 1.6rem 1.5rem;
 }
 
@@ -102,7 +102,7 @@
 }
 
 .noActive {
-  @include modal-container;
+  @include modalContainer('SKYPINK');
   margin: 1.5rem;
   font-size: $big-font;
   color: black;
