@@ -40,7 +40,7 @@
 .mainData:nth-child(2) {
   position: relative;
   height: 18rem;
-  border-radius: 65px;
+  border-radius: 55px;
   z-index: 1;
   background: 
   linear-gradient(
@@ -134,7 +134,7 @@
 }
 
 .leaf {
-  height: 8.4rem;
+  height: 9.4rem;
   background: linear-gradient(
     70.48deg,
     #693200 28.73%,
@@ -155,19 +155,19 @@
       #065c09 76.05%
     );
   }
-  border-radius: 65px 65px 100px 0px;
+  border-radius: 65px 55px 110px 0px;
 }
 
 .leaf1 {
-  height: 8rem;
+  height: 9rem;
   background: linear-gradient(180deg, #ffcf55 36.24%, #ff823c 73.96%);
   &.normal {
     background: linear-gradient(180deg, #b4ff55 31.48%, #35cd0f 79.34%);
   }
-  border-radius: 65px 65px 100px 0px;
+  border-radius: 65px 55px 120px 0px;
 }
 
-@mixin rankNumber($txt-color, $txt-normalcolor, $top: -3rem, $left: -1rem) {
+@mixin rankNumber($txt-color, $txt-normalcolor, $top: -2.5rem, $left: -1rem) {
   position: relative;
   left: $left;
   top: $top;
@@ -205,7 +205,7 @@
       #12aa61 51.48%,
       #1a9126 64.98%
     ),
-    0rem
+    0.5rem
   );
 }
 
@@ -225,7 +225,7 @@
       #7f48b4 51.62%,
       #5840ab 67.12%
     ),
-    -2.6rem
+    -2.4rem
   );
 }
 
@@ -260,7 +260,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  top: -2.5rem;
+  top: -2rem;
   height: 7.5rem;
   color: #5b0539;
   font-weight: 700;
@@ -269,7 +269,7 @@
     cursor: pointer;
   }
   &.first {
-    top: -3rem;
+    top: -2.8rem;
     color: #640000;
   }
   &.last {
