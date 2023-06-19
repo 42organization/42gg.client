@@ -44,12 +44,14 @@
 
   &.disabled {
     background: linear-gradient(to bottom, #636671, #424550);
-    cursor: default;
+    pointer-events: all;
+    cursor: not-allowed;
   }
 
   &.mytableDisabled {
     background: linear-gradient(to bottom, #4fffca, #12a779);
-    cursor: default;
+    pointer-events: all;
+    cursor: not-allowed;
   }
 }
 
