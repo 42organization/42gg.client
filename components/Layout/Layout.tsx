@@ -14,6 +14,7 @@ import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
 import useLiveCheck from 'hooks/Layout/useLiveCheck';
 import HeaderStateContext from './HeaderContext';
 import StyledButton from 'components/StyledButton';
+import MainPageProfile from './MainPageProfile';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -60,6 +61,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     </div>
                   </div>
                 )}
+                <MainPageProfile />
                 {children}
                 <Footer />
               </>
