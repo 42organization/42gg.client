@@ -5,12 +5,14 @@
   flex-direction: column;
   align-items: center;
   width: 100vw;
+  min-width: 380px;
   background: black;
 }
 
 .background {
   position: relative;
   width: 100vw;
+  min-width: 380px;
   max-width: 100vh;
   min-height: 100vh;
   background: linear-gradient(
