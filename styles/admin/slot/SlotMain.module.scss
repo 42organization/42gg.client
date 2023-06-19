@@ -128,9 +128,7 @@
 
 .btn {
   display: flex;
-  flex-direction: row-reverse;
-  margin-right: 1rem;
-  margin-bottom: 5rem;
+  justify-content: space-between;
 }
 
 .btn button {

@@ -30,7 +30,7 @@ export default function SlotMain() {
   const koreaTimeOffset = 1000 * 60 * 60 * 9;
   const initScheduleInfo = async () => {
     try {
-      const res = await instanceInManage.get(`/slot-management`); //ToDo: api 명세 나오면 바꾸기
+      const res = await instanceInManage.get(`/slot-management`);
       setScheduleInfo(res?.data.slotList[0]);
     } catch (e) {
       console.error('SW00');
@@ -104,6 +104,27 @@ export default function SlotMain() {
       </option>
     )
   );
+
+  const deleteHandler = async () => {
+    try {
+      await instanceInManage.delete(`/slot-management`);
+      setSnackbar({
+        toastName: `delete request`,
+        severity: 'success',
+        message: `최근 스케쥴이 삭제되었습니다.`,
+        clicked: true,
+      });
+      initSlotInfo();
+    } catch (e: any) {
+      setSnackbar({
+        toastName: `bad request`,
+        severity: 'error',
+        message: `🔥 ${e.response.data.message} 🔥`,
+        clicked: true,
+      });
+    }
+  };
+
   const finishHandler = async () => {
     if (scheduleInfo.openMinute > scheduleInfo.interval) {
       setSnackbar({
@@ -123,9 +144,20 @@ export default function SlotMain() {
         ...scheduleInfo,
         startTime: new Date(adjustedStartTime),
       });
+      setSnackbar({
+        toastName: `post request`,
+        severity: 'success',
+        message: `스케쥴이 새로 등록되었습니다.`,
+        clicked: true,
+      });
       initSlotInfo();
-    } catch (e) {
-      console.error('SW02');
+    } catch (e: any) {
+      setSnackbar({
+        toastName: `bad request`,
+        severity: 'error',
+        message: `🔥 ${e.response.data.message} 🔥`,
+        clicked: true,
+      });
     }
   };
 
@@ -258,6 +290,7 @@ export default function SlotMain() {
           />
         </div>
         <div className={styles.btn}>
+          <button onClick={deleteHandler}>스케쥴 삭제</button>
           <button onClick={finishHandler}>적용</button>
         </div>
       </div>
