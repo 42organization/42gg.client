@@ -1,5 +1,6 @@
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import MainPageProfile from 'components/Layout/MainPageProfile';
+import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import { currentMatchState, openCurrentMatchState } from 'utils/recoil/match';
@@ -13,18 +14,20 @@ const meta: Meta<typeof MainPageProfile> = {
 export default meta;
 type Story = StoryObj<typeof MainPageProfile>;
 
-function SetUser() {
+function useSetUser() {
   const setUser = useSetRecoilState(userState);
 
-  setUser({
-    intraId: 'Storybook',
-    isAdmin: false,
-    userImageUri: 'https://picsum.photos/200/300?grayscale',
-  });
+  useEffect(() => {
+    setUser({
+      intraId: 'Storybook',
+      isAdmin: false,
+      userImageUri: 'https://picsum.photos/200/300?grayscale',
+    });
+  }, []);
 }
 
 const MatchOne = () => {
-  SetUser();
+  useSetUser();
 
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   setOpenCurrentMatch(false);
@@ -37,7 +40,7 @@ const MatchOne = () => {
 };
 
 const MatchTwo = () => {
-  SetUser();
+  useSetUser();
 
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);
   setOpenCurrentMatch(true);

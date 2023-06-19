@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import NotiItem from 'components/Layout/NotiBar/NotiItem';
 
 const meta: Meta<typeof NotiItem> = {
-  title: 'Header/NotiItem',
+  title: 'Drawer/NotiItem',
   component: NotiItem,
   tags: ['autodocs'],
   argTypes: {
@@ -42,7 +42,7 @@ export const UnreadImminent: Story = {
     },
   },
 };
-export const UnreadCancedByMan: Story = {
+export const UnreadCanceledByMan: Story = {
   args: {
     data: {
       id: 101010,
@@ -89,7 +89,7 @@ export const ReadImminent: Story = {
     },
   },
 };
-export const ReadCancedByMan: Story = {
+export const ReadCanceledByMan: Story = {
   args: {
     data: {
       id: 101010,
