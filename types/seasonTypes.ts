@@ -2,11 +2,6 @@ export interface Season {
   id: number;
   name: string;
 }
-
-export interface ISeasonList {
-  seasonList: Season[];
-}
-
 export interface ISeason {
   seasonId: number;
   seasonName: string;
@@ -15,6 +10,10 @@ export interface ISeason {
   startPpp: number;
   pppGap: number;
   status: string;
+}
+
+export interface ISeasonList {
+  seasonList: ISeason[];
 }
 
 export interface ISeasonEditInfo {

@@ -78,8 +78,11 @@ export default function SeasonList() {
             {useSeasonList.seasonList.map((seasonL: ISeason, index: number) => (
               <TableRow key={index}>
                 {tableFormat['season'].columns.map(
-                  (columnName, index: number) => (
-                    <TableCell className={styles.tableBodyItem} key={index}>
+                  (columnName, innerIndex: number) => (
+                    <TableCell
+                      className={styles.tableBodyItem}
+                      key={`${index}-${innerIndex}`}
+                    >
                       {columnName === 'startTime' ||
                       columnName === 'endTime' ? (
                         seasonL[columnName as keyof ISeason]
