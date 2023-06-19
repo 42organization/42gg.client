@@ -157,7 +157,7 @@ export default function PenaltyTable() {
                                       key={buttonName}
                                       className={styles.button}
                                       onClick={() =>
-                                        handleButtonAction(index.toString())
+                                        handleButtonAction(penalty.intraId.toString())
                                       }
                                     >
                                       {buttonName}
