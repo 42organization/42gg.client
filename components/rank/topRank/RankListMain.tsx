@@ -2,6 +2,8 @@ import { RankUser, NormalUser, Rank } from 'types/rankTypes';
 import RankListItemMain from './RankListItemMain';
 import styles from 'styles/rank/RankListMain.module.scss';
 import { useEffect, useState } from 'react';
+import useModeToggle from 'hooks/mode/useModeToggle';
+
 interface RankListMainProps {
   rank?: Rank;
   isMain: boolean;
@@ -9,6 +11,7 @@ interface RankListMainProps {
 
 export default function RankListMain({ rank, isMain }: RankListMainProps) {
   const [rankList, setRankList] = useState<NormalUser[] | RankUser[]>([]);
+  const { Mode } = useModeToggle();
 
   useEffect(() => {
     if (rank?.rankList.length === 3) {
@@ -23,7 +26,12 @@ export default function RankListMain({ rank, isMain }: RankListMainProps) {
   }, [rank]);
 
   const bangElements = Array.from({ length: 5 }, (_, index) => (
-    <div key={index} className={`${!isMain && styles.bang}`} />
+    <div
+      key={index}
+      className={`${!isMain && styles.bang} ${
+        Mode === 'NORMAL' && styles.normal
+      }`}
+    />
   ));
 
   return (

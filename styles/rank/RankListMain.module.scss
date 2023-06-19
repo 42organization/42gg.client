@@ -98,6 +98,13 @@
     rgba(44, 16, 74, 0.69) 0%,
     #5e3c83 84.38%
   );
+  &.normal {
+    background: linear-gradient(
+      180deg,
+      rgba(26, 51, 141, 0.79) 0%,
+      #5c75da 100%
+    );
+  }
 }
 
 .bang:nth-child(1) {

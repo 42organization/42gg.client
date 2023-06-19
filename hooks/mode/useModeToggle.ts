@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ToggleMode } from 'types/rankTypes';
 import { useRecoilState } from 'recoil';
 import { toggleState } from 'utils/recoil/toggle';
