@@ -1,9 +1,10 @@
+import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
+import { reloadMatchState } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import { AfterGame, TeamScore } from 'types/scoreTypes';
 import { instance } from 'utils/axios';
-import { MatchMode } from 'types/mainType';
 
 type rankRequest = {
   gameId: number;
@@ -19,15 +20,24 @@ type normalRequest = {
   enemyTeamId: number;
 };
 
+type responseTypes = Record<'SUCCESS' | 'DUPLICATED', string>;
+
+type errorResponse = {
+  status: number;
+  message: string;
+  code: string;
+};
+
 const useSubmitModal = (currentGame: AfterGame) => {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
+  const setReloadMatch = useSetRecoilState(reloadMatchState);
   const { gameId, matchTeamsInfo, mode } = currentGame;
   const { myTeam, enemyTeam } = matchTeamsInfo;
 
-  const rankResponse: { [key: string]: string } = {
-    '201': '결과 입력이 완료되었습니다.',
-    '202': '상대가 이미 점수를 입력했습니다.',
+  const rankResponse: responseTypes = {
+    SUCCESS: '결과 입력이 완료되었습니다.',
+    DUPLICATED: '상대가 이미 점수를 입력했습니다.',
   };
 
   const submitRankHandler = async (result: TeamScore) => {
@@ -39,11 +49,19 @@ const useSubmitModal = (currentGame: AfterGame) => {
         enemyTeamId: enemyTeam.teamId,
         enemyTeamScore: result.enemyTeamScore,
       };
-      const res = await instance.post(`/pingpong/games/rank`, requestBody);
-      alert(rankResponse[`${res?.status}`]);
+      await instance.post(`/pingpong/games/rank`, requestBody);
+      alert(rankResponse['SUCCESS']);
     } catch (e) {
-      setError('JH04');
-      return;
+      if (axios.isAxiosError(e) && e.response) {
+        const { code } = e.response.data as unknown as errorResponse;
+        if (code == 'GM202' || code == 'GM204') {
+          alert(rankResponse['DUPLICATED']);
+          setReloadMatch(true); // 현재 유저 event 상태 재확인
+        }
+      } else {
+        setError('JH04');
+        return;
+      }
     }
     openStatChangeModal();
   };
