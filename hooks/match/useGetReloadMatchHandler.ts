@@ -10,7 +10,6 @@ import useReloadHandler from 'hooks/useReloadHandler';
 interface useGetReloadMatchHandlerProps {
   setMatch: Dispatch<SetStateAction<Match | null>>;
   setSpinReloadButton: Dispatch<SetStateAction<boolean>>;
-  type: string;
   radioMode: MatchMode;
 }
 
