@@ -42,13 +42,13 @@
   height: 18rem;
   border-radius: 65px;
   z-index: 1;
-  background: linear-gradient(
+  background: 
+  linear-gradient(
     179.91deg,
-    #f8e118 20.95%,
-    #fe7a00 44.38%,
-    #884609 76.08%,
-    #351050 85.99%,
-    rgba(48, 18, 79, 0) 90.86%
+    #f8e118 21%,
+    #fe7a00 44%,
+    #884609 78.5%,
+    rgba(48, 18, 79, 0) 86.86%
   );
   &.normal {
     background: linear-gradient(
