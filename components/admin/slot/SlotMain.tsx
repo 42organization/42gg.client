@@ -84,7 +84,7 @@ export default function SlotMain() {
   };
 
   const intervalOptions = Array.from({ length: 60 }, (_, i: number) => i + 1)
-    .filter((num) => 60 % num === 0 && num >= 5)
+    .filter((num) => 60 % num === 0 && num >= 5 && num % 5 === 0)
     .map((num) => (
       <option key={`gt-${num}`} value={num}>
         {num}분
