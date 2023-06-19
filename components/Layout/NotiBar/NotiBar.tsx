@@ -70,7 +70,7 @@ function NotiEmpty() {
   return (
     <div className={styles.notiEmptyWrapper}>
       <div className={styles.notiEmptyText}>새로운 알림이 없습니다!</div>
-      <div className={styles.notiEmptyImoji}>
+      <div>
         <div className={styles.threeDotImage}>
           <div></div>
           <div></div>
@@ -89,8 +89,8 @@ function ReloadNotiButton() {
     ? styles.spinReloadButton
     : styles.reloadButton;
 
-  const clickReloadNoti = () => {
-    HeaderState?.putNotiHandler();
+  const clickReloadNoti = async () => {
+    await HeaderState?.putNotiHandler();
     NotiContext?.setClickReloadNoti?.(true);
   };
 

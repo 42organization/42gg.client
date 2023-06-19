@@ -12,7 +12,6 @@
   background: rgba(244, 221, 247, 1);
   width: 20rem;
   .menuTopWrapper {
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,7 +23,6 @@
     button {
       all: unset;
       width: 1.2rem;
-      margin-left: auto;
       color: rgba(101, 97, 102, 1);
       font-size: 1.5rem;
       text-shadow: none;
