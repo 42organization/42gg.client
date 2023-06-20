@@ -1,7 +1,7 @@
 @import '../common.scss';
 
 @mixin ButtonBackground($page) {
-  @if ($page == 'GAME') {
+  @if ($page == 'GAME' or $page == 'MATCH') {
     :checked + .modeButton {
       &.both {
         background: #f82f9a;
@@ -16,8 +16,6 @@
     .modeButton {
       background: #000000;
     }
-  } @else if ($page == 'MATCH') {
-    // TODO 매치 슬롯에서 쓰이는 모드 버튼 추가할 것
   } @else if ($page == 'MANUAL') {
     :checked + .modeButton {
       background: #380052;
