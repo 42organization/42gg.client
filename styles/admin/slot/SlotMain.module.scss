@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-around;
   padding: 1rem;
-  font-size: $giant-font;
+  font-size: $big-font;
 }
 
 .previewContainer {
@@ -56,14 +56,14 @@
   height: 30px;
 }
 
-.blindShowTime {
+.timeContainer {
   display: flex;
   justify-content: space-between;
   height: 10%;
 }
 
-.blindShowTime input {
-  width: 100px;
+.timeContainer input {
+  width: 150px;
   height: 30px;
 }
 
@@ -96,7 +96,7 @@
 
 .nTime {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 40%;
 }
 
@@ -128,9 +128,7 @@
 
 .btn {
   display: flex;
-  flex-direction: row-reverse;
-  margin-right: 1rem;
-  margin-bottom: 5rem;
+  justify-content: space-between;
 }
 
 .btn button {
