@@ -42,18 +42,21 @@ export default function RankListItemMain({ user }: RankListItemMainProps) {
                   styleName={rank === 1 ? 'ranktropybig' : 'ranktropy'}
                   size={50}
                 />
+                <span>{intraId}</span>
               </Link>
             ) : (
-              <div className={`${styles.questionCircleRank}`}>
-                {
-                  <TbQuestionMark
-                    color='603B88'
-                    size={rank === 1 ? '80' : '65'}
-                  />
-                }
+              <div>
+                <div className={`${styles.questionCircleRank}`}>
+                  {
+                    <TbQuestionMark
+                      color='603B88'
+                      size={rank === 1 ? '80' : '65'}
+                    />
+                  }
+                </div>
+                <span>{intraId}</span>
               </div>
             )}
-            <span>{intraId}</span>
           </div>
           <div
             className={`${styles[`rankNumber${rank}`]} 
