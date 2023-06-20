@@ -11,7 +11,7 @@ export default function Game() {
   const [clickTitle, setClickTitle] = useState<boolean>(false);
   const [radioMode, setRadioMode] = useState<SeasonMode>('BOTH');
 
-  useColorMode();
+  useColorMode('GAME');
 
   const clickTitleHandler = () => {
     router.push(`/game`, undefined, {
