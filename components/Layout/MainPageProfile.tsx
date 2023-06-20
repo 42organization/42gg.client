@@ -3,18 +3,12 @@ import { useRecoilValue } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/Layout/MainPageProfile.module.scss';
-import { openCurrentMatchState } from 'utils/recoil/match';
-import CurrentMatch from './CurrentMatch';
 
 const MainPageProfile = () => {
   const user = useRecoilValue(userState);
-  const openCurrentMatch = useRecoilValue(openCurrentMatchState);
 
   return (
     <div className={styles.mainPageProfile}>
-      <div className={styles.currentMatch}>
-        {openCurrentMatch && <CurrentMatch />}
-      </div>
       <div className={styles.gridContainer}>
         <Link
           className={styles.myImage}

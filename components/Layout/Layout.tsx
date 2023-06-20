@@ -8,7 +8,6 @@ import Footer from './Footer';
 import AdminLayout from '../admin/Layout';
 import AdminReject from '../admin/AdminReject';
 import styles from 'styles/Layout/Layout.module.scss';
-
 import useAnnouncementCheck from 'hooks/Layout/useAnnouncementCheck';
 import useSetAfterGameModal from 'hooks/Layout/useSetAfterGameModal';
 import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
@@ -16,8 +15,9 @@ import useLiveCheck from 'hooks/Layout/useLiveCheck';
 import HeaderStateContext from './HeaderContext';
 import StyledButton from 'components/StyledButton';
 import MainPageProfile from './MainPageProfile';
+import { openCurrentMatchState } from 'utils/recoil/match';
+import CurrentMatch from './CurrentMatch';
 
-import { useEffect } from 'react';
 type AppLayoutProps = {
   children: React.ReactNode;
 };
@@ -27,6 +27,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const colorMode = useRecoilValue(colorModeState);
   const presentPath = useRouter().asPath;
   const router = useRouter();
+  const openCurrentMatch = useRecoilValue(openCurrentMatchState);
 
   useGetUserSeason();
   useSetAfterGameModal();
@@ -36,11 +37,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
     router.replace('/');
     router.push(`/match`);
   };
-
-  // NOTE : 어떤 이유로 필요한건지 잘 모르겠어서 일단 주석처리 해 두었습니다!
-  // useEffect(() => {
-  //   setMode('RANK');
-  // }, [router]);
 
   return presentPath.includes('/admin') ? (
     user.isAdmin ? (
@@ -71,7 +67,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     </div>
                   </div>
                 )}
-                {presentPath !== `/users/detail?intraId=${user.intraId}` && <MainPageProfile />}
+                <div className={styles.topInfo}>
+                  {openCurrentMatch && <CurrentMatch />}
+                  {presentPath === '/' && <MainPageProfile />}
+                </div>
                 {children}
                 <Footer />
               </>

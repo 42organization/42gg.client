@@ -42,6 +42,14 @@
   background-attachment: fixed;
 }
 
+.topInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .buttonContainer {
   z-index: 3;
   position: sticky;

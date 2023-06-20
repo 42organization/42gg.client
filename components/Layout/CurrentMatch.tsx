@@ -42,36 +42,38 @@ export default function CurrentMatch() {
       : styles.one;
 
   return (
-    <div className={styles.currentMatchBanner}>
-      <div className={styles.currentMatchMain}>
-        <CurrentMatchContent currentMatch={currentMatchList[0]} index={0} />
-      </div>
-      <div
-        className={`${styles.dropdownWrapper} ${dropdownStyle} ${matchCountStyle}`}
-      >
-        {dropdownAnimation ? (
-          <div className={styles.dropdown}>
-            {currentMatchList.slice(1).map((currentMatch, index) => (
-              <CurrentMatchContent
+    <div className={styles.currentMatchWrapper}>
+      <div className={styles.currentMatchBanner}>
+        <div className={styles.currentMatchMain}>
+          <CurrentMatchContent currentMatch={currentMatchList[0]} index={0} />
+        </div>
+        <div
+          className={`${styles.dropdownWrapper} ${dropdownStyle} ${matchCountStyle}`}
+          >
+          {dropdownAnimation ? (
+            <div className={styles.dropdown}>
+              {currentMatchList.slice(1).map((currentMatch, index) => (
+                <CurrentMatchContent
                 key={index}
                 currentMatch={currentMatch}
                 index={index + 2}
-              />
-            ))}
-          </div>
-        ) : (
-          <></>
-        )}
-        {currentMatchList.length > 1 ? (
-          <button
-            className={`${styles.dropdownButton} ${dropButtonStyle} ${matchCountStyle}`}
-            onMouseDown={() => setShowDropdown(!showDropdown)}
-          >
-            <TbMenu />
-          </button>
-        ) : (
-          <></>
-        )}
+                />
+                ))}
+            </div>
+          ) : (
+            <></>
+            )}
+          {currentMatchList.length > 1 ? (
+            <button
+              className={`${styles.dropdownButton} ${dropButtonStyle} ${matchCountStyle}`}
+              onMouseDown={() => setShowDropdown(!showDropdown)}
+              >
+              <TbMenu />
+            </button>
+          ) : (
+            <></>
+            )}
+        </div>
       </div>
     </div>
   );
