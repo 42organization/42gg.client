@@ -137,7 +137,9 @@ export default function SlotMain() {
     }
 
     const adjustedStartTime =
-      scheduleInfo.startTime.getTime() + koreaTimeOffset;
+      scheduleInfo.startTime instanceof Date
+        ? scheduleInfo.startTime.getTime() + koreaTimeOffset
+        : scheduleInfo.startTime;
 
     try {
       await instanceInManage.post(`/slot-management`, {
