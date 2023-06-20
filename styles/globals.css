@@ -7,6 +7,48 @@ body {
   -ms-overflow-style: none;
 }
 
+@media all and (max-width: 379px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media all and (min-width: 380px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media all and (min-width: 480px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+@media all and (min-width: 768px) {
+  html {
+    font-size: 19px;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media all and (min-width: 1280px) {
+  html {
+    font-size: 21px;
+  }
+}
+
+@media all and (min-width: 1440px) {
+  html {
+    font-size: 22px;
+  }
+}
+
 @font-face {
   font-family: 'Agonostic Italic';
   src: url('../public/font/Agnostic\ Italic.otf') format('opentype');
