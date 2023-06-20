@@ -53,7 +53,7 @@ const MenuProfile = () => {
       </Link>
       <div className={styles.userInfoWrapper}>
         <div className={styles.userId}>
-          탁구왕&nbsp;
+          탁구왕<br/>
           <Link
             href={`/users/detail?intraId=${user.intraId}`}
             onClick={HeaderState?.resetOpenMenuBarState}
