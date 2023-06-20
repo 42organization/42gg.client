@@ -31,7 +31,7 @@ export default function InputScore({
           onKeyDown={keyPressHandler}
         />
       </div>
-      <div>:</div>
+      <div className={styles.middle}>:</div>
       <div>
         <input
           id='enemyTeamScore'

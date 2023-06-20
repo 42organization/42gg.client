@@ -34,7 +34,7 @@ const useRankList = ({
   const [myRank, setMyRank] = useRecoilState<MyRank>(myRankState);
   const [isScroll, setIsScroll] = useRecoilState<boolean>(scrollState);
 
-  const getRankDataHandler = useAxiosGet({
+  const getRankDataHandler = useAxiosGet<any>({
     url: makePath,
     setState: (data) => {
       setRank(data);
@@ -44,7 +44,7 @@ const useRankList = ({
     type: 'setError',
   });
 
-  const getRankerDataHandler = useAxiosGet({
+  const getRankerDataHandler = useAxiosGet<any>({
     url: makePathRanker,
     setState: (data) => {
       [data.rankList[0], data.rankList[1]] = [

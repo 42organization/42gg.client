@@ -17,6 +17,8 @@ const useSetAfterGameModal = () => {
     } else if (live?.event === 'game') {
       setModal({ modalName: 'FIXED-AFTER_GAME' });
       setOpenCurrentMatch(false);
+    } else {
+      setOpenCurrentMatch(false);
     }
   }, [live]);
 };

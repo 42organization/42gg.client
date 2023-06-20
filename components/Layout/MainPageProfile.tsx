@@ -21,7 +21,7 @@ const MainPageProfile = () => {
           href={`/users/detail?intraId=${user.intraId}`}
         >
           <PlayerImage
-            src={user.userImageUrl}
+            src={user.userImageUri}
             styleName={'mainPageProfile'}
             size={18}
           />

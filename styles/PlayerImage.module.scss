@@ -100,9 +100,8 @@
 .afterGameModal {
   @include imageWrap;
   div {
-    @include userImage(5rem);
+    @include userImage(4.375rem);
     margin-bottom: 1rem;
-    box-shadow: 5px 5px 6px $dark-gray;
   }
 }
 

@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Rank } from 'types/rankTypes';
 import RankListMain from 'components/rank/topRank/RankListMain';
+
 interface RankListMainProps {
   rank?: Rank;
   isMain: boolean;
 }
+
 const meta: Meta<RankListMainProps> = {
   title: 'RANK/RanklistMain',
   component: RankListMain,

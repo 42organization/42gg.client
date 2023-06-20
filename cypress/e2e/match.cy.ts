@@ -1,3 +1,5 @@
+export {};
+
 describe('매치 기능 테스트', () => {
   it('일반전 매칭과 패널티 테스트 🤔', () => {
     cy.login(Cypress.env('NORMAL_USERNAME'), Cypress.env('NORMAL_PASSWORD'));

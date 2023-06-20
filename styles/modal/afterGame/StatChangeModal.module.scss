@@ -17,15 +17,16 @@ $ppp-font: 2.8rem;
 }
 
 .container {
-  @include modal-container;
+  @include modalContainer('SKYVIOLET');
   align-items: stretch;
-  min-height: 10rem;
-  min-width: 17rem;
-  border-radius: $small-radius;
+  min-height: 18.75rem;
+  min-width: 21rem;
+  box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.25);
+  border-radius: 0.625rem;
   color: black;
   .emoji {
-    margin-bottom: 1rem;
-    font-size: $giant-big-font;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
     text-align: center;
   }
 }
@@ -38,17 +39,15 @@ $ppp-font: 2.8rem;
   .ppp {
     display: flex;
     align-items: center;
-    color: $pp-blue;
+    color: rgba(255, 255, 255, 1);
+    font-family: 'NanumSquare_acEB', sans-serif;
     font-size: $ppp-font;
-    font-weight: 700;
+    font-weight: 800;
     text-align: center;
-    text-shadow: $text-shadow-red;
-    &.winner {
-      color: $pp-red;
-      text-shadow: $text-shadow-blue;
-    }
+    letter-spacing: 0.04rem;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
+
     span:nth-child(2) {
-      margin-left: 0.5rem;
       margin-top: 0.5rem;
       font-size: $big-giant-font;
     }
@@ -59,13 +58,14 @@ $ppp-font: 2.8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-family: 'NanumSquare_acEB', sans-serif;
+  font-weight: 800;
   .level {
     margin-bottom: 0.5rem;
     margin-inline: 0.2rem;
-    font-size: $big-giant-font;
-    font-weight: 700;
-    color: #f2e6e6;
-    text-shadow: 2px 2px 0 #040eff;
+    font-size: 1.5rem;
+    color: rgba(255, 208, 250, 1);
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
   }
   .expWrap {
     display: flex;
@@ -77,12 +77,13 @@ $ppp-font: 2.8rem;
       align-items: flex-end;
       margin-bottom: 0.2rem;
       padding-inline: 0.2rem;
+      color: rgba(203, 185, 255, 1);
       .expRate {
         margin-bottom: 0.2rem;
         font-style: normal;
         font-weight: 700;
-        font-size: $big-font;
-        line-height: $big-font;
+        font-size: 1.25rem;
+        line-height: 1.25rem;
         span:nth-child(1) {
           width: 5rem;
         }
@@ -91,8 +92,9 @@ $ppp-font: 2.8rem;
         margin-bottom: 0.1rem;
         font-style: normal;
         font-weight: 700;
-        font-size: $medium-font;
-        color: #746f84;
+        font-size: 0.875rem;
+        letter-spacing: 0.04rem;
+        color: rgba(203, 185, 255, 1);
         span:nth-child(2) {
           width: 5rem;
         }
@@ -102,28 +104,33 @@ $ppp-font: 2.8rem;
       display: flex;
       width: 100%;
       height: 1.5rem;
-      border-radius: $mini-radius;
+      border-radius: 0.4rem;
       overflow: hidden;
+      margin-bottom: 1rem;
       .expCurrent {
-        background: $g2-top;
+        background: linear-gradient(
+          89.81deg,
+          #ff53a5 10.18%,
+          #ff017b 55.14%,
+          #ff409c 90.43%
+        );
       }
       .expLeft {
-        background: $dark-gray;
+        background: rgba(47, 28, 71, 1);
       }
     }
   }
 }
 
 .guide {
-  margin-top: 0.3rem;
-  color: $dark-gray;
+  color: rgba(203, 185, 255, 1);
+  letter-spacing: 0.04rem;
   font-size: $medium-font;
-  font-weight: 700;
   text-align: center;
 }
 
 .buttons {
-  @include select-buttons(12rem);
+  @include modalButton;
 }
 
 .confetti {

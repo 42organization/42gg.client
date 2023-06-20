@@ -22,7 +22,7 @@ const NotiStateContext = (props: NotiStateContextProps) => {
   const [clickReloadNoti, setClickReloadNoti] = useState(false);
   const [spinReloadButton, setSpinReloadButton] = useState(false);
 
-  const getNotiHandler = useAxiosGet({
+  const getNotiHandler = useAxiosGet<any>({
     url: '/pingpong/notifications',
     setState: (data) => {
       setNoti(data.notifications);
