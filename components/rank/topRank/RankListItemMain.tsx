@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import React, { useContext } from 'react';
+import React from 'react';
 import { RankUser, NormalUser } from 'types/rankTypes';
 import styles from 'styles/rank/RankListMain.module.scss';
 import PlayerImage from 'components/PlayerImage';
-import { ToggleModeContext } from '../RankList';
 import { TbQuestionMark } from 'react-icons/tb';
+import useModeToggle from 'hooks/mode/useModeToggle';
 interface RankListItemMainProps {
   user: NormalUser | RankUser;
 }
@@ -12,22 +12,18 @@ interface RankListItemMainProps {
 export default function RankListItemMain({ user }: RankListItemMainProps) {
   const { rank, intraId, userImageUri } = user;
   const rankFiltered = rank < 0 ? '-' : rank;
-  const toggleMode = useContext(ToggleModeContext);
+  const { Mode } = useModeToggle();
   const renderLink = intraId !== 'intraId';
   return (
-    <div
-      className={`${styles.mainData} ${
-        toggleMode === 'NORMAL' && styles.normal
-      }`}
-    >
+    <div className={`${styles.mainData} ${Mode === 'NORMAL' && styles.normal}`}>
       <div
         className={`${rank === 1 ? styles.leaf : ''} ${
-          toggleMode === 'NORMAL' && styles.normal
+          Mode === 'NORMAL' && styles.normal
         }`}
       >
         <div
           className={`${rank === 1 ? styles.leaf1 : ''} ${
-            toggleMode === 'NORMAL' && styles.normal
+            Mode === 'NORMAL' && styles.normal
           }`}
         >
           <div
@@ -60,7 +56,7 @@ export default function RankListItemMain({ user }: RankListItemMainProps) {
           </div>
           <div
             className={`${styles[`rankNumber${rank}`]} 
-            ${toggleMode === 'NORMAL' && styles.normal}`}
+            ${Mode === 'NORMAL' && styles.normal}`}
           >
             {rankFiltered}
           </div>

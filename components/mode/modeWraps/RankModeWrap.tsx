@@ -13,7 +13,7 @@ interface RankModeWrapProps {
 
 export default function RankModeWrap({ children, setMode }: RankModeWrapProps) {
   const { seasonList, season, seasonDropDownHandler } = useSeasonDropDown();
-  const { onToggle, Mode } = useModeToggle('RANK');
+  const { onToggle, Mode } = useModeToggle();
   const [showSeasons, setShowSeasons] = useState<boolean>(true);
 
   useEffect(() => {

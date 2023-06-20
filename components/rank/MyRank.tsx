@@ -31,7 +31,9 @@ export default function MyRank(prop: MyRankProp) {
 
   return (
     <div
-      className={`${styles.myRank} ${content[isRanked].style}`}
+      className={`${styles.myRank} ${content[isRanked].style} ${
+        toggleMode === 'NORMAL' && styles.normal
+      }`}
       onClick={myRankHandler}
     >
       {content[isRanked].message.map((e, index) => (
