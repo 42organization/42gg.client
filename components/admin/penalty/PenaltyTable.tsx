@@ -44,7 +44,7 @@ export default function PenaltyTable() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
-  const [current, setCurrent] = useState<boolean>(false);
+  const [current, setCurrent] = useState<boolean>(true);
   const setModal = useSetRecoilState(modalState);
 
   const handleButtonAction = (intraId: string) =>
@@ -101,7 +101,7 @@ export default function PenaltyTable() {
     } catch (e) {
       console.error('MS08');
     }
-  }, [currentPage]);
+  }, [currentPage, current]);
 
   useEffect(() => {
     intraId ? getUserPenalty() : getAllUserPenalty();
@@ -117,7 +117,7 @@ export default function PenaltyTable() {
               className={styles.currentBtn}
               onClick={() => setCurrent(!current)}
             >
-              {current ? '전체기록' : '현재기록'}
+              {current ? '현재기록' : '전체기록'}
             </button>
           </span>
           <AdminSearchBar initSearch={initSearch} />
@@ -152,17 +152,22 @@ export default function PenaltyTable() {
                                   columnName as keyof IPenalty
                                 ]?.toString()
                               : tableFormat['penalty'].etc?.value.map(
-                                  (buttonName: string) => (
-                                    <button
-                                      key={buttonName}
-                                      className={styles.button}
-                                      onClick={() =>
-                                        handleButtonAction(penalty.intraId.toString())
-                                      }
-                                    >
-                                      {buttonName}
-                                    </button>
-                                  )
+                                  (buttonName: string) =>
+                                    current ? (
+                                      <button
+                                        key={buttonName}
+                                        className={styles.button}
+                                        onClick={() =>
+                                          handleButtonAction(
+                                            penalty.intraId.toString()
+                                          )
+                                        }
+                                      >
+                                        {buttonName}
+                                      </button>
+                                    ) : (
+                                      <></>
+                                    )
                                 )}
                           </TableCell>
                         )
