@@ -21,19 +21,31 @@ body {
 
 @media all and (min-width: 480px) {
   html {
-    font-size: 18px;
+    font-size: 17px;
   }
 }
 
 @media all and (min-width: 768px) {
   html {
-    font-size: 20px;
+    font-size: 19px;
   }
 }
 
 @media all and (min-width: 1024px) {
   html {
-    font-size: 22px;
+    font-size: 21px;
+  }
+}
+
+@media all and (min-width: 1280px) {
+  html {
+    font-size: 23px;
+  }
+}
+
+@media all and (min-width: 1440px) {
+  html {
+    font-size: 25px;
   }
 }
 
