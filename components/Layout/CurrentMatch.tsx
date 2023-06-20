@@ -124,8 +124,8 @@ export function CurrentMatchContent(prop: CurrentMatchContentProp) {
           }}
         >
           {cancelButtonStyle === styles.block
-            ? '경기 취소 불가'
-            : '경기 예약 취소'}
+            ? '취소 불가'
+            : '예약 취소'}
         </button>
       </div>
     </>
