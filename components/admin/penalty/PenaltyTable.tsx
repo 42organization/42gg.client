@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import {
   Table,
   TableBody,
@@ -18,6 +18,7 @@ import styles from 'styles/admin/penalty/PenaltyTable.module.scss';
 import { getFormattedDateToString } from 'utils/handleTime';
 
 interface IPenalty {
+  penaltyId: number;
   intraId: string;
   reason: string;
   releaseTime: Date;
@@ -44,11 +45,11 @@ export default function PenaltyTable() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
-  const [current, setCurrent] = useState<boolean>(false);
-  const setModal = useSetRecoilState(modalState);
+  const [current, setCurrent] = useState<boolean>(true);
+  const [modal, setModal] = useRecoilState(modalState);
 
-  const handleButtonAction = (intraId: string) =>
-    setModal({ modalName: 'ADMIN-PENALTY_DELETE', intraId });
+  const handleButtonAction = (intraId: string, penaltyId: number) =>
+    setModal({ modalName: 'ADMIN-PENALTY_DELETE', intraId, penaltyId });
 
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
@@ -77,7 +78,7 @@ export default function PenaltyTable() {
     } catch (e) {
       console.error('MS07');
     }
-  }, [intraId, currentPage]);
+  }, [intraId, currentPage, current]);
 
   const getAllUserPenalty = useCallback(async () => {
     try {
@@ -101,11 +102,11 @@ export default function PenaltyTable() {
     } catch (e) {
       console.error('MS08');
     }
-  }, [currentPage]);
+  }, [currentPage, current]);
 
   useEffect(() => {
     intraId ? getUserPenalty() : getAllUserPenalty();
-  }, [intraId, getUserPenalty, getAllUserPenalty]);
+  }, [intraId, getUserPenalty, getAllUserPenalty, modal]);
 
   return (
     <>
@@ -117,7 +118,7 @@ export default function PenaltyTable() {
               className={styles.currentBtn}
               onClick={() => setCurrent(!current)}
             >
-              {current ? '전체기록' : '현재기록'}
+              {current ? '현재기록' : '전체기록'}
             </button>
           </span>
           <AdminSearchBar initSearch={initSearch} />
@@ -138,34 +139,44 @@ export default function PenaltyTable() {
             </TableHead>
             <TableBody className={styles.tableBody}>
               {penaltyInfo.penaltyList.length > 0 ? (
-                penaltyInfo.penaltyList.map((penalty: IPenalty) => (
-                  <TableRow key={penalty.intraId} className={styles.tableRow}>
-                    {tableFormat['penalty'].columns.map(
-                      (columnName: string) => (
-                        <TableCell
-                          key={columnName}
-                          className={styles.tableBodyItem}
-                        >
-                          {columnName !== 'etc'
-                            ? penalty[columnName as keyof IPenalty]?.toString()
-                            : tableFormat['penalty'].etc?.value.map(
-                                (buttonName: string) => (
-                                  <button
-                                    key={buttonName}
-                                    className={styles.button}
-                                    onClick={() =>
-                                      handleButtonAction(penalty.intraId)
-                                    }
-                                  >
-                                    {buttonName}
-                                  </button>
-                                )
-                              )}
-                        </TableCell>
-                      )
-                    )}
-                  </TableRow>
-                ))
+                penaltyInfo.penaltyList.map(
+                  (penalty: IPenalty, index: number) => (
+                    <TableRow key={index} className={styles.tableRow}>
+                      {tableFormat['penalty'].columns.map(
+                        (columnName: string) => (
+                          <TableCell
+                            key={columnName}
+                            className={styles.tableBodyItem}
+                          >
+                            {columnName !== 'etc'
+                              ? penalty[
+                                  columnName as keyof IPenalty
+                                ]?.toString()
+                              : tableFormat['penalty'].etc?.value.map(
+                                  (buttonName: string) =>
+                                    current ? (
+                                      <button
+                                        key={buttonName}
+                                        className={styles.button}
+                                        onClick={() =>
+                                          handleButtonAction(
+                                            penalty.intraId,
+                                            penalty.penaltyId
+                                          )
+                                        }
+                                      >
+                                        {buttonName}
+                                      </button>
+                                    ) : (
+                                      <></>
+                                    )
+                                )}
+                          </TableCell>
+                        )
+                      )}
+                    </TableRow>
+                  )
+                )
               ) : (
                 <TableRow>
                   <TableCell>비어있습니다</TableCell>

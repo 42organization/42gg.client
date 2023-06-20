@@ -14,7 +14,10 @@ import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
 import useLiveCheck from 'hooks/Layout/useLiveCheck';
 import HeaderStateContext from './HeaderContext';
 import StyledButton from 'components/StyledButton';
+import MainPageProfile from './MainPageProfile';
 
+import useModeToggle from 'hooks/mode/useModeToggle';
+import { useEffect } from 'react';
 type AppLayoutProps = {
   children: React.ReactNode;
 };
@@ -23,6 +26,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const user = useRecoilValue(userState);
   const presentPath = useRouter().asPath;
   const router = useRouter();
+  const { Mode, setMode } = useModeToggle();
 
   useGetUserSeason();
   useSetAfterGameModal();
@@ -33,6 +37,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
     router.push(`/match`);
   };
 
+  useEffect(() => {
+    setMode('RANK');
+  }, [router]);
+
   return presentPath.includes('/admin') ? (
     user.isAdmin ? (
       <AdminLayout>{children}</AdminLayout>
@@ -41,7 +49,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
     )
   ) : (
     <div className={styles.appContainer}>
-      <div className={styles.background}>
+      <div
+        className={`${styles.background} ${Mode === 'NORMAL' && styles.normal}`}
+      >
         <div>
           {presentPath === '/statistics' && user.isAdmin ? (
             <Statistics />
@@ -60,6 +70,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     </div>
                   </div>
                 )}
+                {presentPath !== `/users/detail?intraId=${user.intraId}` && <MainPageProfile />}
                 {children}
                 <Footer />
               </>

@@ -34,6 +34,7 @@ export default function ModalProvider() {
       intraId,
       detailContent,
       feedback,
+      penaltyId,
       ISeason,
       ModifyScore,
     },
@@ -55,8 +56,8 @@ export default function ModalProvider() {
     'FIXED-STAT': <StatChangeModal {...exp} />,
     'ADMIN-PROFILE': intraId ? <AdminProfileModal intraId={intraId} /> : null,
     'ADMIN-PENALTY': intraId ? <AdminPenaltyModal intraId={intraId} /> : null,
-    'ADMIN-PENALTY_DELETE': intraId ? (
-      <DeletePenaltyModal intraId={intraId} />
+    'ADMIN-PENALTY_DELETE': penaltyId && intraId ? (
+      <DeletePenaltyModal intraId={intraId} penaltyId={penaltyId} />
     ) : null,
     'ADMIN-NOTI_USER': <AdminNotiUserModal />,
     'ADMIN-SEASON_EDIT': ISeason ? <AdminSeasonEdit {...ISeason} /> : null,

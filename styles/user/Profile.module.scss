@@ -115,6 +115,7 @@
   justify-content: space-between;
   align-items: stretch;
   margin: 2rem 1.5rem;
+  @include modalContainer('LIGHTPINK');
 }
 
 .editModalTitle {
@@ -144,17 +145,16 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
-  color: $white1;
+  color: $pp-gray;
   width: 9rem;
   height: 2rem;
-  border: solid 1px $white1;
   border-radius: $mini-radius;
   cursor: pointer;
 }
 
 .snsClicked {
-  color: $pp-gray;
-  border: solid 1px $pp-gray;
+  color: #C66BF2;
+  border: solid 1px #C66BF2;
 }
 
 .racketTypeWrap {
@@ -170,8 +170,8 @@
       opacity: 0;
     }
     :checked + .radioButton {
-      border: solid 1px $pp-gray;
-      color: $pp-gray;
+      border: solid 1px #C66BF2;
+      color: #C66BF2;
     }
     .radioButton {
       display: flex;
@@ -179,7 +179,7 @@
       align-items: center;
       width: 6rem;
       height: 2rem;
-      border: 1px solid $white1;
+      color: $pp-gray;
       border-radius: $mini-radius;
       font-size: $small-font;
       text-align: center;

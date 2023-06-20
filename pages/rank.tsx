@@ -7,6 +7,7 @@ import { ToggleMode } from 'types/rankTypes';
 
 export default function Rank() {
   const [mode, setMode] = useState<ToggleMode>('RANK');
+
   const content = {
     RANK: { style: '', title: 'Ranking' },
     NORMAL: { style: styles.vip, title: 'VIP' },

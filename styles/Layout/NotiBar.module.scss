@@ -36,15 +36,17 @@
     align-items: center;
     padding-left: 0.3rem;
     padding-bottom: 1.625rem;
+
     .reloadButton, .spinReloadButton {
       @include reload-button;
       background: linear-gradient(180deg, #e5c9e8 0%, #e4c8e8 100%);
       color: rgba(101, 97, 102, 1);
+      cursor: pointer;
     }
     .spinReloadButton {
       opacity: 0.7;
       animation: spin 1s infinite;
-      cursor: not-allowed;
+      cursor: wait;
     }
     .deleteButton {
       width: 4.3rem;
@@ -60,6 +62,7 @@
       font-weight: 500;
       font-family: 'Heebo', sans-serif;
       color: rgba(101, 97, 102, 1);
+      cursor: pointer;
     }
   }
 }

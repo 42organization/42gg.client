@@ -1,7 +1,3 @@
-import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
-import { loginState } from 'utils/recoil/login';
-import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/menu/LogoutModal.module.scss';
 
 import useLogoutCheck from 'hooks/Login/useLogoutCheck';

@@ -82,7 +82,7 @@ interface CurrentMatchContentProp {
   index: number;
 }
 
-function CurrentMatchContent(prop: CurrentMatchContentProp) {
+export function CurrentMatchContent(prop: CurrentMatchContentProp) {
   const { currentMatch, index } = prop;
   const { startTime, isMatched, enemyTeam, isImminent } = currentMatch;
 
@@ -124,8 +124,8 @@ function CurrentMatchContent(prop: CurrentMatchContentProp) {
           }}
         >
           {cancelButtonStyle === styles.block
-            ? '경기 취소 불가'
-            : '경기 예약 취소'}
+            ? '취소 불가'
+            : '예약 취소'}
         </button>
       </div>
     </>

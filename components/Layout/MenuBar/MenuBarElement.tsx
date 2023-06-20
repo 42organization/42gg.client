@@ -138,12 +138,14 @@ export const AdminMenu = () => {
           />
         </div>
       )}
-      <div
-        className={styles.logout}
-        onClick={() => setModal({ modalName: 'MENU-LOGOUT' })}
-      >
-        <div>로그아웃</div>
-        <SignOutEmoji />
+      <div className={styles.logoutWrap}>
+        <div
+          className={styles.logout}
+          onClick={() => setModal({ modalName: 'MENU-LOGOUT' })}
+        >
+          <div>로그아웃</div>
+          <SignOutEmoji />
+        </div>
       </div>
     </nav>
   );
