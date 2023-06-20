@@ -34,6 +34,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
     router.push(`/match`);
   };
 
+  
+
   return presentPath.includes('/admin') ? (
     user.isAdmin ? (
       <AdminLayout>{children}</AdminLayout>
@@ -61,7 +63,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     </div>
                   </div>
                 )}
-                <MainPageProfile />
+                {presentPath !== `/users/detail?intraId=${user.intraId}` && <MainPageProfile />}
                 {children}
                 <Footer />
               </>
