@@ -17,6 +17,9 @@ import StyledButton from 'components/StyledButton';
 
 import useModeToggle from 'hooks/mode/useModeToggle';
 import { useEffect } from 'react';
+import { openCurrentMatchState } from 'utils/recoil/match';
+import CurrentMatch from './CurrentMatch';
+import MainPageProfile from './MainPageProfile';
 type AppLayoutProps = {
   children: React.ReactNode;
 };
@@ -26,6 +29,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const presentPath = useRouter().asPath;
   const router = useRouter();
   const { Mode, setMode } = useModeToggle();
+  const openCurrentMatch = useRecoilValue(openCurrentMatchState);
 
   useGetUserSeason();
   useSetAfterGameModal();
@@ -69,6 +73,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     </div>
                   </div>
                 )}
+                <div className={styles.topInfo}>
+                  {openCurrentMatch && <CurrentMatch />}
+                  {presentPath === '/' && <MainPageProfile/>}
+                </div>
                 {children}
                 <Footer />
               </>
