@@ -1,8 +1,9 @@
-import React, { SetStateAction, useState } from 'react';
+import React, { SetStateAction, Dispatch } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
-import { Dispatch } from 'react';
-import ModeRadiobox from '../modeItems/ModeRadiobox';
 import { Match } from 'types/matchTypes';
+import { colorModeState } from 'utils/recoil/colorMode';
+import ModeRadiobox from '../modeItems/ModeRadiobox';
 
 interface MatchModeWrapProps {
   children: React.ReactNode;
@@ -17,7 +18,9 @@ export default function MatchModeWrap({
   match,
   setRadioMode,
 }: MatchModeWrapProps) {
+  const setColorMode = useSetRecoilState(colorModeState);
   const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setColorMode(e.target.value as MatchMode);
     setRadioMode(e.target.value as MatchMode);
   };
 

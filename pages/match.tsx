@@ -3,6 +3,7 @@ import { MatchMode } from 'types/mainType';
 import MatchBoard from 'components/match/MatchBoard';
 import MatchModeWrap from 'components/mode/modeWraps/MatchModeWrap';
 import useGetReloadMatchHandler from 'hooks/match/useGetReloadMatchHandler';
+import useColorMode from 'hooks/useColorMode';
 import { Match } from 'types/matchTypes';
 import { stringToHourMin } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
@@ -27,6 +28,8 @@ export default function MatchPage() {
     setSpinReloadButton,
     radioMode,
   });
+
+  useColorMode('MATCH');
 
   const openManual = () => {
     setModal({ modalName: 'MATCH-MANUAL', manual: { radioMode: radioMode } });

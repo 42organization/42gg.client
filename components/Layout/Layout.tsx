@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
+import { colorModeState } from 'utils/recoil/colorMode';
 import { userState } from 'utils/recoil/layout';
 import Statistics from 'pages/statistics';
 import Header from './Header';
@@ -16,7 +17,6 @@ import HeaderStateContext from './HeaderContext';
 import StyledButton from 'components/StyledButton';
 import MainPageProfile from './MainPageProfile';
 
-import useModeToggle from 'hooks/mode/useModeToggle';
 import { useEffect } from 'react';
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -24,9 +24,9 @@ type AppLayoutProps = {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   const user = useRecoilValue(userState);
+  const colorMode = useRecoilValue(colorModeState);
   const presentPath = useRouter().asPath;
   const router = useRouter();
-  const { Mode, setMode } = useModeToggle();
 
   useGetUserSeason();
   useSetAfterGameModal();
@@ -37,9 +37,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
     router.push(`/match`);
   };
 
-  useEffect(() => {
-    setMode('RANK');
-  }, [router]);
+  // NOTE : 어떤 이유로 필요한건지 잘 모르겠어서 일단 주석처리 해 두었습니다!
+  // useEffect(() => {
+  //   setMode('RANK');
+  // }, [router]);
 
   return presentPath.includes('/admin') ? (
     user.isAdmin ? (
@@ -50,7 +51,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   ) : (
     <div className={styles.appContainer}>
       <div
-        className={`${styles.background} ${Mode === 'NORMAL' && styles.normal}`}
+        className={`${styles.background} ${styles[colorMode.toLowerCase()]}`}
       >
         <div>
           {presentPath === '/statistics' && user.isAdmin ? (
