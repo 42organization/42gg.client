@@ -10,7 +10,7 @@
   margin: 1rem 0.8rem 0;
   padding: 0.8rem 1rem;
   border-radius: $small-radius;
-  background: linear-gradient(90.17deg, #593781 18.13%, #543579 93.7%);
+  background: rgba(255, 255, 255, 0.3);
   font-size: $medium-font;
   color: #1f0b36;
   input {
@@ -40,8 +40,8 @@
     width: 100%;
     padding: 0 0.8rem 0.5rem 0.8rem;
     border-radius: 0 0 $small-radius $small-radius;
-    background: linear-gradient(90.17deg, #593781 18.13%, #543579 93.7%);
-    color: #ffffff;
+    background: #ffffff;
+    color: #1f0b36;
     div {
       padding: 0.5rem 0;
       cursor: pointer;
