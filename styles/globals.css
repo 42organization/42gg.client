@@ -21,22 +21,21 @@ body {
 
 @media all and (min-width: 480px) {
   html {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
 @media all and (min-width: 768px) {
   html {
-    font-size: 23px;
+    font-size: 20px;
   }
 }
 
 @media all and (min-width: 1024px) {
   html {
-    font-size: 26px;
+    font-size: 22px;
   }
 }
-
 
 @font-face {
   font-family: 'Agonostic Italic';
