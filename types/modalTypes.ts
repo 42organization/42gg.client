@@ -1,4 +1,5 @@
 import { MatchMode } from './mainType';
+import { ISeason } from './seasonTypes';
 import { Value } from 'react-quill';
 import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
@@ -56,17 +57,6 @@ export interface Manual {
 
 export interface manual {
   radioMode: MatchMode;
-}
-
-export interface ISeason {
-  seasonId: number;
-  seasonMode: string;
-  seasonName: string;
-  startTime: Date;
-  endTime: Date;
-  startPpp: number;
-  pppGap: number;
-  status: number;
 }
 
 export interface Modal {

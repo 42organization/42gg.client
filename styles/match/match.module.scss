@@ -5,12 +5,39 @@
   position: relative; // match refresh 버튼을 위해 필요함
 }
 
-// .title {
-//   @include pageTitle;
-//   &.normal {
-//     text-shadow: $text-border-black, 0.3rem 0.3rem 0 $norm-lightblue2;
-//   }
-// }
+.buttonWrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-right: 0.6rem;
+  .manual {
+    @include match-noti-button;
+    margin: 0 0.8rem 0 0;
+    padding: 0;
+    width: 4.2rem;
+    height: 1.6rem;
+    font-size: $small-font;
+    border-radius: $small-radius;
+  }
+  .reload {
+    @include reload-button;
+    cursor: pointer;
+  }
+  .spin {
+    opacity: 0.7;
+    pointer-events: none;
+    animation: spin 1s infinite;
+    cursor: not-allowed;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .title {
   @include pageTitle;
   &.NORMAL {

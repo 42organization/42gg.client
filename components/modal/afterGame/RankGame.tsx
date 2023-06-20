@@ -24,7 +24,11 @@ export default function RankGame({ currentGame, onSubmit }: RankGameProps) {
 
   return (
     <div className={styles.container}>
-      <Guide condition={onCheck} modalMode='RANK' />
+      {isScoreExist ? (
+        <Guide condition={onCheck} modalMode='CONFIRM' />
+      ) : (
+        <Guide condition={onCheck} modalMode='RANK' />
+      )}
       <div className={styles.resultContainer}>
         <MatchTeams matchTeams={matchTeamsInfo} />
         <Score
