@@ -21,6 +21,14 @@
     #481570 58.85%,
     #300e4b 98.44%
   );
+  &.both {
+    background: linear-gradient(
+      180deg,
+      #500247 0%,
+      #480141 21.35%,
+      #40013a 98.44%
+    );
+  }
   &.normal {
     background: linear-gradient(
       180deg,
