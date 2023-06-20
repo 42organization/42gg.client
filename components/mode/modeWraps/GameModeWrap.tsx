@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { SeasonMode } from 'types/mainType';
+import { useSetRecoilState } from 'recoil';
+import { SeasonMode, MatchMode } from 'types/mainType';
+import { colorModeState } from 'utils/recoil/colorMode';
 import UserGameSearchBar from 'components/mode/modeItems/UserGameSearchBar';
 import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
 import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
@@ -25,6 +27,7 @@ export default function GameModeWrap({
   const intraId = useRouter().query.intraId;
   const { seasonList, season, seasonDropDownHandler, TitleSeasonHandler } =
     useSeasonDropDown(clickTitle, intraId);
+  const setColorMode = useSetRecoilState(colorModeState);
 
   useEffect(() => {
     setRadioMode('BOTH');
@@ -33,6 +36,7 @@ export default function GameModeWrap({
   }, [clickTitle, intraId]);
 
   const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setColorMode(e.target.value as MatchMode);
     setRadioMode(e.target.value as SeasonMode);
   };
 
