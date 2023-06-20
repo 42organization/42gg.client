@@ -14,6 +14,7 @@ import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
 import useLiveCheck from 'hooks/Layout/useLiveCheck';
 import HeaderStateContext from './HeaderContext';
 import StyledButton from 'components/StyledButton';
+import MainPageProfile from './MainPageProfile';
 
 import useModeToggle from 'hooks/mode/useModeToggle';
 import { useEffect } from 'react';
