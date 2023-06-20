@@ -4,11 +4,18 @@ import styles from 'styles/admin/modal/DeletePenaltyModal.module.scss';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 
-export default function DeletePenaltyModal({ intraId, penaltyId }: { intraId: string, penaltyId: number }) {
+export default function DeletePenaltyModal({
+  intraId,
+  penaltyId,
+}: {
+  intraId: string;
+  penaltyId: number;
+}) {
   const resetModal = useResetRecoilState(modalState);
   const deletePenalty = async (penaltyId: number) => {
     await instanceInManage.delete(`/penalty/${penaltyId}`);
     resetModal();
+    window.location.reload();
   };
   return (
     <div className={styles.modalWrap}>
