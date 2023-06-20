@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import {
   Table,
   TableBody,
@@ -46,7 +46,7 @@ export default function PenaltyTable() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
   const [current, setCurrent] = useState<boolean>(true);
-  const setModal = useSetRecoilState(modalState);
+  const [modal, setModal] = useRecoilState(modalState);
 
   const handleButtonAction = (intraId: string, penaltyId: number) =>
     setModal({ modalName: 'ADMIN-PENALTY_DELETE', intraId, penaltyId });
@@ -106,7 +106,7 @@ export default function PenaltyTable() {
 
   useEffect(() => {
     intraId ? getUserPenalty() : getAllUserPenalty();
-  }, [intraId, getUserPenalty, getAllUserPenalty]);
+  }, [intraId, getUserPenalty, getAllUserPenalty, modal]);
 
   return (
     <>

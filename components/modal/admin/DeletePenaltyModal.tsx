@@ -15,7 +15,6 @@ export default function DeletePenaltyModal({
   const deletePenalty = async (penaltyId: number) => {
     await instanceInManage.delete(`/penalty/${penaltyId}`);
     resetModal();
-    window.location.reload();
   };
   return (
     <div className={styles.modalWrap}>
