@@ -7,6 +7,9 @@
 
 .container {
   @include menu-noti-Bar;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 20rem;
   padding: 2.8rem 2.5rem 2rem 1.5rem;
   margin-left: auto;
@@ -99,6 +102,7 @@
 }
 
 .notiDecorate {
+  margin-top: auto;
   width: 100%;
   position: relative;
   padding-top: 3rem;
