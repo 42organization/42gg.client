@@ -18,6 +18,7 @@ import styles from 'styles/admin/penalty/PenaltyTable.module.scss';
 import { getFormattedDateToString } from 'utils/handleTime';
 
 interface IPenalty {
+  penaltyId: number;
   intraId: string;
   reason: string;
   releaseTime: Date;
@@ -47,8 +48,8 @@ export default function PenaltyTable() {
   const [current, setCurrent] = useState<boolean>(true);
   const setModal = useSetRecoilState(modalState);
 
-  const handleButtonAction = (intraId: string) =>
-    setModal({ modalName: 'ADMIN-PENALTY_DELETE', intraId });
+  const handleButtonAction = (intraId: string, penaltyId: number) =>
+    setModal({ modalName: 'ADMIN-PENALTY_DELETE', intraId, penaltyId });
 
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
@@ -159,7 +160,8 @@ export default function PenaltyTable() {
                                         className={styles.button}
                                         onClick={() =>
                                           handleButtonAction(
-                                            penalty.intraId.toString()
+                                            penalty.intraId,
+                                            penalty.penaltyId
                                           )
                                         }
                                       >
