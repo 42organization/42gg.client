@@ -33,19 +33,19 @@ body {
 
 @media all and (min-width: 1024px) {
   html {
-    font-size: 21px;
+    font-size: 20px;
   }
 }
 
 @media all and (min-width: 1280px) {
   html {
-    font-size: 23px;
+    font-size: 21px;
   }
 }
 
 @media all and (min-width: 1440px) {
   html {
-    font-size: 25px;
+    font-size: 22px;
   }
 }
 
