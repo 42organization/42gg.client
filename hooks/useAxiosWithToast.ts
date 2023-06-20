@@ -82,6 +82,14 @@ export default function useAxiosWithToast() {
           clicked: true,
         });
         break;
+      case 204:
+        setSnackbar({
+          toastName: `${getRequestRoute(url as string)} info`,
+          severity: 'success',
+          message: `🤔 ${response.data.message || '성공했습니다!'} 🤔`,
+          clicked: true,
+        });
+        break;
       case 207:
         setSnackbar({
           toastName: `${getRequestRoute(url as string)} info`,

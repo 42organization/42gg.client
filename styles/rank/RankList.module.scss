@@ -26,6 +26,9 @@
   &.rank {
     cursor: pointer;
   }
+  &.normal {
+    color: #677abd;
+  }
 }
 
 /* RankListFrame */
@@ -78,8 +81,8 @@
     background: #c9a5e6;
   }
   &.myVip {
-    border: 0.07rem solid #59afdf;
-    background: #59afdf;
+    border: 0.1rem solid #022a40;
+    background: #60b4e2;
   }
   .intraId {
     color: black;

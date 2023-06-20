@@ -9,6 +9,7 @@ const nextConfig = {
       '42gg-public-test-image.s3.ap-northeast-2.amazonaws.com',
       '42gg-public-image.s3.ap-northeast-2.amazonaws.com',
       'cdn.intra.42.fr',
+      'k.kakaocdn.net',
     ],
   },
   eslint: {
@@ -32,7 +33,7 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
-      use: ["@svgr/webpack"],
+      use: ['@svgr/webpack'],
     });
     return config;
   },

@@ -18,24 +18,49 @@ type contentsType = Record<MatchMode, contentType[]>;
 const modalContents: contentsType = {
   BOTH: [
     {
-      title: <ContentTitle title={'아직 정해지지 않음'} />,
-      description: [`아직 정해지지 않음`],
+      title: <ContentTitle title={'빠른매칭'} icon={'🔍'} />,
+      description: [
+        '빠른매칭 등록시 일반 또는 랭크 중 먼저 매칭되는 경기 진행',
+        '상대방 매칭시 해당 모드에 🙋 표시',
+        '3경기까지 등록 가능',
+        '매칭 성공시 등록된 다른 경기들은 취소',
+        '상대 팀이 공개되면 경기 취소 불가',
+        '매칭 알림은 이메일로 전달',
+        '경기가 매칭된 상태에서 취소 시, 1분간 경기 등록 불가',
+        '상대방이 경기를 취소하면 나의 경기는 매칭 대기 상태로 전환',
+      ],
     },
     {
-      title: (
-        <ContentTitle
-          title={'엄청 긴 제목은 아마도 이렇게 보입니다'}
-          icon={<AiFillQuestionCircle />}
-        />
-      ),
-      description: [`아직 정해지지 않음`],
+      title: <ContentTitle title={'랭크 경기 규칙'} icon={'📖'} />,
+      description: [
+        '11점 3판 2선승제',
+        '경기시간은 슬롯에 표기',
+        '점수가 10:10 인 경우 듀스',
+        '듀스인 경우, 2점 차가 나면 경기 종료',
+        '탁구채를 잡지 않은 손으로 탁구대를 짚으면 실점',
+        '탁구대 및 네트가 아닌 곳에 공이 맞을 시 실점',
+        '자세한 규칙은 랭크 규칙을 참고해주세요',
+      ],
+    },
+    {
+      title: <ContentTitle title={'일반 경기 규칙'} icon={'📖'} />,
+      description: ['자유 규칙 !'],
+    },
+    {
+      title: <ContentTitle title={'경기 결과'} icon={'✅'} />,
+      description: ['일반 게임 진행 시 점수 입력 없음'],
+    },
+    {
+      title: <ContentTitle title={'노쇼'} icon={'🚨'} />,
+      description: [`노쇼는 건의사항 기능 이용해서 신고`],
     },
   ],
   NORMAL: [
     {
       title: <ContentTitle title={'매칭'} icon={'🔍'} />,
       description: [
-        '등록한 경기가 끝나야만 다음 경기 등록 가능',
+        '3경기까지 등록 가능',
+        '매칭 성공시 등록된 다른 경기들은 취소',
         '상대 팀이 공개되면 경기 취소 불가',
         '매칭 알림은 이메일로 전달',
         '경기가 매칭된 상태에서 취소 시, 1분간 경기 등록 불가',
@@ -59,7 +84,8 @@ const modalContents: contentsType = {
     {
       title: <ContentTitle title={'매칭'} icon={'🔍'} />,
       description: [
-        '등록한 경기가 끝나야만 다음 경기 등록 가능',
+        '3경기까지 등록 가능',
+        '매칭 성공시 등록된 다른 경기들은 취소',
         '상대 팀이 공개되면 경기 취소 불가',
         '매칭 알림은 이메일로 전달',
         '경기가 매칭된 상태에서 취소 시, 1분간 경기 등록 불가',

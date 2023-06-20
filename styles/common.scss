@@ -156,7 +156,7 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
     }
     margin-right: 1rem;
     :hover {
-      background: linear-gradient(to bottom, $medium-gray, white);
+      background: linear-gradient(180deg, rgba(38, 36, 40, 0.52) 0%, #1d1b1e 100%);
     }
   }
   .positive {
@@ -287,6 +287,7 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
         #454147 100%
       );
       margin-right: 1rem;
+      cursor: pointer;
     }
     :hover {
       background: linear-gradient(
@@ -303,6 +304,7 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
         #c66bf2 0%,
         rgba(96, 6, 138, 0.52) 100%
       );
+      cursor: pointer;
     }
     :hover {
       background: linear-gradient(

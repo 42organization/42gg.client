@@ -10,7 +10,7 @@
   height: 100vh;
   min-height: 40rem;
   padding: 0 4rem;
-  background-image: url('../../public/image/background_img.png');
+  background-image: url('../../public/image/login_background_img.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -29,13 +29,13 @@
   min-height: 28rem;
   padding: 4rem 2.5rem;
   border-radius: $medium-radius;
-  background: white;
-  box-shadow: 0.2rem 0.2rem 1rem $gray;
+  background: linear-gradient(180deg, #cd82ce 0%, #ba9aff 100%);
+  box-shadow: 0.2rem 0.2rem 1rem black;
 }
 
 .title {
   font-size: 3rem;
-  font-family: $logo-font;
+  font-family: 'Overgrow', sans-serif;
   text-align: center;
   letter-spacing: 0.2rem;
 }

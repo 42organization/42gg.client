@@ -82,7 +82,7 @@ interface CurrentMatchContentProp {
   index: number;
 }
 
-function CurrentMatchContent(prop: CurrentMatchContentProp) {
+export function CurrentMatchContent(prop: CurrentMatchContentProp) {
   const { currentMatch, index } = prop;
   const { startTime, isMatched, enemyTeam, isImminent } = currentMatch;
 

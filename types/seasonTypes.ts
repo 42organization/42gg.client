@@ -15,6 +15,9 @@ export interface ISeason {
 export interface ISeasonList {
   seasonList: ISeason[];
 }
+export interface SeasonList {
+  seasonList: Season[];
+}
 
 export interface ISeasonEditInfo {
   seasonName: string;
