@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import styles from 'styles/Layout/MenuBar.module.scss';
 import { HeaderContextState, HeaderContext } from '../HeaderContext';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import { User } from 'types/mainType';
 import Link from 'next/link';
