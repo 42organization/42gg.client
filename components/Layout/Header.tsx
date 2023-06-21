@@ -56,7 +56,6 @@ export default function Header() {
         <div className={styles.headerLeft}>
           <FiMenu
             className={styles.menuIcon}
-            size='21'
             onClick={openMenuBarHandler}
           />
         </div>
@@ -68,9 +67,9 @@ export default function Header() {
             className={styles.announceIcon}
             onClick={() => getAnnouncementHandler()}
           >
-            <BsMegaphone size='21' />
+            <BsMegaphone className={styles.megaphoneIcon} />
           </div>
-          <div className={styles.notiIcon} onClick={openNotiBarHandler}>
+          <div className={styles.notiIconWrapper} onClick={openNotiBarHandler}>
             {live.notiCount ? (
               <div className={styles.bellWhole}>
                 <div className={styles.notiBellWrapper}>
@@ -79,12 +78,12 @@ export default function Header() {
                       {live.notiCount > 9 ? '9+' : live.notiCount}
                     </div>
                   </div>
-                  <NotiBell />
+                  <NotiBell className={styles.bellIcon}/>
                 </div>
               </div>
             ) : (
               <div className={styles.notiBellWrapper}>
-                <NotiBell />
+                <NotiBell className={styles.bellIcon}/>
               </div>
             )}
           </div>
