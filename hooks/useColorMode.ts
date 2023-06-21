@@ -8,7 +8,7 @@ function useColorMode(page: 'GAME' | 'MATCH' | 'RANK') {
 
   useEffect(() => {
     if (page === 'RANK') {
-      // TODO : rank page color mode 초기화
+      setColorMode('RANK');
     } else {
       setColorMode('BOTH');
     }

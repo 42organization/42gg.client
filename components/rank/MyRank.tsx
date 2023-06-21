@@ -1,18 +1,16 @@
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { myRankState, scrollState } from 'utils/recoil/myRank';
 import styles from 'styles/rank/RankList.module.scss';
-import { ToggleMode } from 'types/rankTypes';
+import { useContext } from 'react';
+import { ToggleModeContext } from '../../pages/rank';
 
-interface MyRankProp {
-  toggleMode: ToggleMode;
-}
-
-export default function MyRank(prop: MyRankProp) {
-  const { toggleMode } = prop;
+export default function MyRank() {
+  const toggleMode = useContext(ToggleModeContext);
   const myRank = useRecoilValue(myRankState);
   const setIsScroll = useSetRecoilState(scrollState);
   const rankType = toggleMode === 'RANK' ? 'rank' : 'vip';
   const isRanked = myRank[toggleMode] === -1 ? 'unrank' : 'RANK';
+
   const content = {
     unrank: {
       style: '',

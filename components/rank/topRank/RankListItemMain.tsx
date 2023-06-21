@@ -4,15 +4,16 @@ import { RankUser, NormalUser } from 'types/rankTypes';
 import styles from 'styles/rank/RankListMain.module.scss';
 import PlayerImage from 'components/PlayerImage';
 import { TbQuestionMark } from 'react-icons/tb';
-import useModeToggle from 'hooks/mode/useModeToggle';
+import { useContext } from 'react';
+import { ToggleModeContext } from '../../../pages/rank';
 interface RankListItemMainProps {
   user: NormalUser | RankUser;
 }
 
 export default function RankListItemMain({ user }: RankListItemMainProps) {
   const { rank, intraId, userImageUri } = user;
+  const Mode = useContext(ToggleModeContext);
   const rankFiltered = rank < 0 ? '-' : rank;
-  const { Mode } = useModeToggle();
   const renderLink = intraId !== 'intraId';
   return (
     <div className={`${styles.mainData} ${Mode === 'NORMAL' && styles.normal}`}>

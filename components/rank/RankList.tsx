@@ -4,18 +4,19 @@ import RankListMain from './topRank/RankListMain';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 import useRankList from 'hooks/rank/useRankList';
-import { ToggleMode } from 'types/rankTypes';
+import { useContext } from 'react';
+import { ToggleModeContext } from '../../pages/rank';
+
 interface RankListProps {
-  toggleMode: ToggleMode;
   season?: number;
   isMain?: boolean;
 }
 
 export default function RankList({
-  toggleMode,
   season,
   isMain,
 }: RankListProps) {
+  const toggleMode = useContext(ToggleModeContext);
   const [rank, setRank] = useState<Rank>();
   const [ranker, setRanker] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
@@ -62,11 +63,10 @@ export default function RankList({
   return (
     <div>
       {ranker && <RankListMain rank={ranker} isMain={false} />}
-      <RankListFrame toggleMode={toggleMode} pageInfo={pageInfo}>
+      <RankListFrame pageInfo={pageInfo}>
         {rank?.rankList.map((item: NormalUser | RankUser, index) => (
           <RankListItem
             key={index}
-            toggleMode={toggleMode}
             user={makeUser(item)}
           />
         ))}
