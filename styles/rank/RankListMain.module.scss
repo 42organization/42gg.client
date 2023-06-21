@@ -161,7 +161,7 @@
       #065c09 76.05%
     );
   }
-  border-radius: 95px 95px 110px 0px;
+  border-radius: 95px 95px 130px 0px;
 }
 
 .leaf1 {
@@ -170,7 +170,7 @@
   &.normal {
     background: linear-gradient(180deg, #b4ff55 31.48%, #35cd0f 79.34%);
   }
-  border-radius: 95px 95px 150px 0px;
+  border-radius: 95px 95px 145px 0px;
 }
 
 @mixin rankNumber($txt-color, $txt-normalcolor, $top: -2.5rem, $left: -0.2rem) {
