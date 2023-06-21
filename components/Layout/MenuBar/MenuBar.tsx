@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styles from 'styles/Layout/MenuBar.module.scss';
 import { HeaderContextState, HeaderContext } from '../HeaderContext';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import { User } from 'types/mainType';
 import Link from 'next/link';
 import PlayerImage from 'components/PlayerImage';
-import { profileState } from 'utils/recoil/user';
 import { ProfileBasic } from 'types/userTypes';
 import { MainMenu, AdminMenu } from './MenuBarElement';
 import useAxiosGet from 'hooks/useAxiosGet';
