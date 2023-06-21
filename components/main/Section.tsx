@@ -16,7 +16,7 @@ export default function Section({ sectionTitle, path }: SectionProps) {
   const router = useRouter();
   const pathCheck: pathType = {
     game: <GameResult />,
-    rank: <RankList toggleMode={'RANK'} isMain={true} />,
+    rank: <RankList isMain={true} />,
   };
 
   return (

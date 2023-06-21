@@ -7,11 +7,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: end;
-  margin-top: 2rem;
+  margin-top: 1rem;
   height: 16rem;
   &.isMain {
     height: 15.5rem;
-    margin-top: 9.5rem;
+    margin-top: 7.5rem;
   }
 }
 
@@ -39,7 +39,7 @@
 .mainData:nth-child(2) {
   position: relative;
   height: 18rem;
-  border-radius: 55px;
+  border-radius: 55rem;
   z-index: 1;
   background: 
   linear-gradient(
@@ -173,7 +173,7 @@
   border-radius: 65px 55px 120px 0px;
 }
 
-@mixin rankNumber($txt-color, $txt-normalcolor, $top: -2.5rem, $left: -1rem) {
+@mixin rankNumber($txt-color, $txt-normalcolor, $top: -2.5rem, $left: -0.2rem) {
   position: relative;
   left: $left;
   top: $top;
@@ -231,7 +231,8 @@
       #7f48b4 51.62%,
       #5840ab 67.12%
     ),
-    -2.4rem
+    -2.4rem,
+    -1.1rem
   );
 }
 
@@ -283,7 +284,7 @@
   }
 }
 
-@media (max-width: 467px) {
+@media (max-width: 440px) {
   .mainData:nth-child(1) {
     right: -0.9rem;
     height: 12rem;
@@ -299,7 +300,7 @@
   }
 
   .mainContainer {
-    margin-top: 1rem;
+    margin-top: 0rem;
     &.isMain {
       height: 11.5rem;
     }
