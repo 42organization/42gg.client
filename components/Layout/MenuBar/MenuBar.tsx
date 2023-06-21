@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from 'styles/Layout/MenuBar.module.scss';
 import { HeaderContextState, HeaderContext } from '../HeaderContext';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -25,7 +25,17 @@ const MenuTop = () => {
 const MenuProfile = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const user = useRecoilValue<User>(userState);
-  const [profile, setProfile] = useRecoilState<ProfileBasic>(profileState);
+  const [profile, setProfile] = useState<ProfileBasic>({
+    intraId: '',
+    userImageUri: '',
+    racketType: 'shakeHand',
+    statusMessage: '',
+    level: 0,
+    currentExp: 0,
+    maxExp: 0,
+    expRate: 0,
+    snsNotiOpt: 'SLACK',
+  });
 
   const getProfile = useAxiosGet({
     url: `/pingpong/users/${user.intraId}`,
