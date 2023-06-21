@@ -33,7 +33,7 @@
     );
   }
   height: 15rem;
-  border-radius: 58px;
+  border-radius: 75px;
 }
 
 .mainData:nth-child(2) {
@@ -78,7 +78,7 @@
     );
   }
   height: 15rem;
-  border-radius: 58px;
+  border-radius: 75px;
 }
 
 .bangContainer {
@@ -288,6 +288,7 @@
   .mainData:nth-child(1) {
     right: -0.9rem;
     height: 12rem;
+    border-radius: 50px;
   }
 
   .mainData:nth-child(2) {
@@ -297,6 +298,7 @@
   .mainData:nth-child(3) {
     right: 0.9rem;
     height: 12rem;
+    border-radius: 50px;
   }
 
   .mainContainer {
