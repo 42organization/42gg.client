@@ -10,7 +10,7 @@ type MenuModal = 'REPORT' | 'LOGOUT';
 
 type MatchModal = 'ENROLL' | 'REJECT' | 'CANCEL' | 'MANUAL';
 
-type UserModal = 'PROFILE_EDIT';
+type UserModal = 'PROFILE_EDIT' | 'KAKAO_EDIT';
 
 type FixedModal = 'AFTER_GAME' | 'STAT';
 

@@ -1,0 +1,38 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modalContainer('YELLOW');
+}
+
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 18rem;
+  height: 3rem;
+  border-radius: 0.625rem;
+  font-size: 1.2rem;
+  font-family: 'Roboto', sans-serif;
+  color: black;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  button {
+    width: 15rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border: 0;
+    border-radius: 0.625rem;
+    padding: 0.75rem 3.1rem;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+}

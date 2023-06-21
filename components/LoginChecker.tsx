@@ -26,10 +26,4 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
       <div className={styles.background}>{!isLoading && <Login />}</div>
     </div>
   );
-
-  // return (
-  //   <div className={styles.appContainer}>
-  //     <div className={styles.background}>{!isLoading && <Load />}</div>
-  //   </div>
-  // );
 }

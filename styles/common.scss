@@ -156,7 +156,11 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
     }
     margin-right: 1rem;
     :hover {
-      background: linear-gradient(180deg, rgba(38, 36, 40, 0.52) 0%, #1d1b1e 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(38, 36, 40, 0.52) 0%,
+        #1d1b1e 100%
+      );
     }
   }
   .positive {
@@ -220,6 +224,8 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
     background: linear-gradient(180deg, #8ba2d2 0%, #6233af 100%);
   } @else if ($type == 'SKYPINK') {
     background: linear-gradient(180deg, #829ace 0%, #deb8ef 100%);
+  } @else if ($type == 'YELLOW') {
+    background: linear-gradient(180deg, #f2d210 0%, #f2b210 100%);
   }
 }
 
