@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import PageNation from 'components/Pagination';
 import styles from 'styles/rank/RankList.module.scss';
-import { useContext } from 'react';
-import { ToggleModeContext } from '../../pages/rank';
+import { useRecoilValue } from 'recoil';
+import { colorToggleSelector } from 'utils/recoil/colorMode';
 interface PageInfo {
   currentPage?: number;
   totalPage?: number;
@@ -17,7 +17,8 @@ export default function RankListFrame({
   children,
   pageInfo,
 }: RankListFrameProps) {
-  const toggleMode = useContext(ToggleModeContext);
+  const toggleMode = useRecoilValue(colorToggleSelector);
+
   const router = useRouter();
   const division: { [key: string]: string[] } = {
     RANK: ['순위', 'intraId', '상태메시지', '탁구력'],

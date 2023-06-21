@@ -4,8 +4,8 @@ import RankListMain from './topRank/RankListMain';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 import useRankList from 'hooks/rank/useRankList';
-import { useContext } from 'react';
-import { ToggleModeContext } from '../../pages/rank';
+import { useRecoilValue } from 'recoil';
+import { colorToggleSelector } from 'utils/recoil/colorMode';
 
 interface RankListProps {
   season?: number;
@@ -16,7 +16,7 @@ export default function RankList({
   season,
   isMain,
 }: RankListProps) {
-  const toggleMode = useContext(ToggleModeContext);
+  const Mode = useRecoilValue(colorToggleSelector);
   const [rank, setRank] = useState<Rank>();
   const [ranker, setRanker] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
@@ -25,29 +25,28 @@ export default function RankList({
     totalPage: rank?.totalPage,
     setPage,
   };
-
   const makePath = (): string => {
     const modeQuery = (targetMode?: string) =>
       targetMode !== 'NORMAL' ? 'ranks/single' : 'exp';
-    const seasonQuery = toggleMode === 'RANK' ? `&season=${season}` : '';
+    const seasonQuery = Mode === 'RANK' ? `&season=${season}` : '';
     return isMain
-      ? `/pingpong/${modeQuery(toggleMode)}?page=1&size=3`
-      : `/pingpong/${modeQuery(toggleMode)}?page=${page}&size=20${seasonQuery}`;
+      ? `/pingpong/${modeQuery('RANK')}?page=1&size=3`
+      : `/pingpong/${modeQuery(Mode)}?page=${page}&size=20${seasonQuery}`;
   };
 
   const makePathRanker = (): string => {
     const modeQuery = (targetMode?: string) =>
       targetMode !== 'NORMAL' ? 'ranks/single' : 'exp';
-    const seasonQuery = toggleMode === 'RANK' ? `&season=${season}` : '';
+    const seasonQuery = Mode === 'RANK' ? `&season=${season}` : '';
     return isMain
-      ? `/pingpong/${modeQuery(toggleMode)}?page=1&size=3`
-      : `/pingpong/${modeQuery(toggleMode)}?page=1&size=3${seasonQuery}`;
+      ? `/pingpong/${modeQuery('RANK')}?page=1&size=3`
+      : `/pingpong/${modeQuery(Mode)}?page=1&size=3${seasonQuery}`;
   };
 
   useRankList({
     makePath: makePath(),
     makePathRanker: makePathRanker(),
-    toggleMode: toggleMode,
+    toggleMode: Mode,
     season: season,
     setRank: setRank,
     setRanker: setRanker,

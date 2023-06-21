@@ -3,21 +3,16 @@ import ModeToggle from 'components/mode/modeItems/ModeToggle';
 import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
 import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
 import styles from 'styles/mode/ModeWrap.module.scss';
-import { ToggleMode } from 'types/rankTypes';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
-import { useContext } from 'react';
-import { ToggleModeContext } from '../../../pages/rank';
 interface RankModeWrapProps {
   children: React.ReactNode;
-  setMode: React.Dispatch<React.SetStateAction<ToggleMode>>;
 }
 
-export default function RankModeWrap({ children, setMode }: RankModeWrapProps) {
-  const Mode = useContext(ToggleModeContext);
+export default function RankModeWrap({ children }: RankModeWrapProps) {
+  const [Mode, setMode] = useRecoilState(colorToggleSelector);
   const { seasonList, season, seasonDropDownHandler } = useSeasonDropDown();
   const [showSeasons, setShowSeasons] = useState<boolean>(true);
-  const setcolorToggleSelector = useSetRecoilState(colorToggleSelector);
   
   const onToggle = (): void => {
     setMode(Mode === 'RANK' ? 'NORMAL' : 'RANK');
@@ -26,7 +21,6 @@ export default function RankModeWrap({ children, setMode }: RankModeWrapProps) {
   useEffect(() => {
     setShowSeasons(Mode === 'RANK');
     setMode(Mode);
-    setcolorToggleSelector(Mode);
   }, [Mode]);
 
   return (

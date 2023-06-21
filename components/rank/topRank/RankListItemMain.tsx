@@ -4,17 +4,19 @@ import { RankUser, NormalUser } from 'types/rankTypes';
 import styles from 'styles/rank/RankListMain.module.scss';
 import PlayerImage from 'components/PlayerImage';
 import { TbQuestionMark } from 'react-icons/tb';
-import { useContext } from 'react';
-import { ToggleModeContext } from '../../../pages/rank';
+import { useRecoilValue } from 'recoil';
+import { colorToggleSelector } from 'utils/recoil/colorMode';
+
 interface RankListItemMainProps {
   user: NormalUser | RankUser;
 }
 
 export default function RankListItemMain({ user }: RankListItemMainProps) {
   const { rank, intraId, userImageUri } = user;
-  const Mode = useContext(ToggleModeContext);
+  const Mode = useRecoilValue(colorToggleSelector);
   const rankFiltered = rank < 0 ? '-' : rank;
   const renderLink = intraId !== 'intraId';
+
   return (
     <div className={`${styles.mainData} ${Mode === 'NORMAL' && styles.normal}`}>
       <div

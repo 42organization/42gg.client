@@ -3,14 +3,11 @@ import MyRank from 'components/rank/MyRank';
 import RankList from 'components/rank/RankList';
 import styles from 'styles/rank/RankList.module.scss';
 import useColorMode from 'hooks/useColorMode';
-import { createContext } from 'react';
-import { ToggleMode } from 'types/rankTypes';
-import { useState } from 'react';
-
-export const ToggleModeContext = createContext<ToggleMode>('RANK');
+import { useRecoilValue } from 'recoil';
+import { colorToggleSelector } from 'utils/recoil/colorMode';
 
 export default function Rank() {
-  const [Mode, setMode] = useState<ToggleMode>('RANK');
+  const Mode = useRecoilValue(colorToggleSelector);
 
   useColorMode('RANK');
 
@@ -18,17 +15,16 @@ export default function Rank() {
     RANK: { style: '', title: 'Ranking' },
     NORMAL: { style: styles.vip, title: 'VIP' },
   };
+
   return (
-    <ToggleModeContext.Provider value={Mode}>
       <div className={styles.pageWrap}>
         <h1 className={`${styles.title} ${content[Mode].style}`}>
           {content[Mode].title}
         </h1>
         <MyRank/>
-        <RankModeWrap setMode={setMode}>
+        <RankModeWrap>
           <RankList/>
         </RankModeWrap>
       </div>
-    </ToggleModeContext.Provider>
   );
 }
