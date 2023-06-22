@@ -49,35 +49,35 @@ describe('게임 기능 테스트', () => {
   it('게임 페이지 이동 및 컴포넌트 렌더링 확인 🤔', () => {
     cy.origin(Cypress.env('HOME'), () => {
       //1. 게임 페이지 이동
-      cy.get('a').filter("[href='/game']").click();
+      cy.contains('Current Play').parent().find('button').click();
       // wait for rendering
       cy.wait(1000);
       // 2. 게임 컴포넌트 랜더링 확인
-      cy.get('input[value="더 보기"]').click();
+      cy.get('button[class*="getButton"]').click();
       // wait for rendering
       cy.wait(1000);
-      cy.get('div[class*="smallContainer"]').each(($el1) => {
+      cy.get('div[class*="smallItemContainer"]').each(($el1) => {
         cy.wrap($el1).click();
       });
       // 3. 노말 게임으로 변경 및 컴포넌트 렌더링 확인
-      cy.get('input[type="radio"][value="normal"]')
+      cy.get('input[type="radio"][value="NORMAL"]')
         .as('normalRadioBtn')
         .click()
         .then(() => {
           cy.wait(1000);
-          cy.get('div[class*="smallContainer"]').each(($el2) => {
+          cy.get('div[class*="smallItemContainer"]').each(($el2) => {
             cy.wrap($el2).click();
           });
         });
       // wait for rendering
       cy.wait(1000);
       // 4. 랭크 게임으로 변경 및 컴포넌트 렌더링 확인
-      cy.get('input[type="radio"][value="rank"]')
+      cy.get('input[type="radio"][value="RANK"]')
         .as('rankRadioBtn')
         .click()
         .then(() => {
           cy.wait(1000);
-          cy.get('div[class*="smallContainer"]').each(($el3) => {
+          cy.get('div[class*="smallItemContainer"]').each(($el3) => {
             cy.wrap($el3).click();
           });
         });
