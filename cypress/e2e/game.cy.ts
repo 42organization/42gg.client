@@ -13,29 +13,31 @@ describe('게임 기능 테스트', () => {
     cy.origin(Cypress.env('HOME'), () => {
       cy.wait(1000);
       // 1. 게임 컴포넌트 랜더링 확인
-      cy.get('[class^=GameResultItem]').then((gameResultItem) => {
+      const gameComponentRegex =
+        '[class^="GameResultItem"][class*="ItemContainer"]';
+      cy.get(gameComponentRegex).then(() => {
         // 2. big 컴포넌트와 small 컴포넌트 갯수 확인
-        cy.get('[class^=GameResultItem]')
-          .filter('[class^=GameResultItem_bigContainer]')
+        cy.get(gameComponentRegex)
+          .filter('[class^=GameResultItem_bigItemContainer]')
           .should('have.length', 1);
 
-        cy.get('[class^=GameResultItem]')
-          .filter('[class^=GameResultItem_smallContainer]')
+        cy.get(gameComponentRegex)
+          .filter('[class^=GameResultItem_smallItemContainer]')
           .should('have.length', 2);
 
         // 3. 첫번째 컴포넌트가 big인지 확인
-        cy.get('[class^=GameResultItem')
+        cy.get(gameComponentRegex)
           .first()
           .invoke('attr', 'class')
           .then((className) => {
             expect(className).to.include('big');
           });
         // 4. 첫번째 small 컴포넌트 클릭
-        cy.get('[class^=GameResultItem_smallContainer]').first().click();
+        cy.get('[class^=GameResultItem_smallItemContainer]').first().click();
         // wait for rendering
         cy.wait(1000);
         // 5. 첫번째 Container 컴포넌트가 small인지 확인
-        cy.get('[class^=GameResultItem')
+        cy.get(gameComponentRegex)
           .first()
           .invoke('attr', 'class')
           .then((className) => {
