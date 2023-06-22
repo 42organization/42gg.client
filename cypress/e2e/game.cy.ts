@@ -125,38 +125,40 @@ describe('게임 기능 테스트', () => {
     // 1. live 상태 컴포넌트 랜더링 확인
     cy.origin(Cypress.env('HOME'), () => {
       let gameId = '';
-      cy.get('[class^=GameResultItem_bigContainer]').each(($bigContainer) => {
-        const $bigScore = $bigContainer.find(
-          '[class^=GameResultItem_bigScore]'
-        );
-        const $status = $bigScore.find('[class^=GameResultItem_gameStatus]');
+      cy.get('[class^=GameResultItem_bigItemContainer]').each(
+        ($bigContainer) => {
+          const $bigScore = $bigContainer.find(
+            '[class^=GameResultItem_bigScore]'
+          );
+          const $status = $bigScore.find('[class^=GameResultItem_gameStatus]');
 
-        // 첫번째 컴포넌트 live 상태인지 확인 및 맞으면 저장
-        if (
-          $status.hasClass('GameResultItem_gameStatusWait') ||
-          ($status.text() && $status.text() === 'LIVE')
-        ) {
-          cy.wrap($bigContainer)
-            .invoke('attr', 'id')
-            .then((id) => {
-              gameId = String(id);
-            });
+          // 첫번째 컴포넌트 live 상태인지 확인 및 맞으면 저장
+          if (
+            $status.hasClass('GameResultItem_gameStatusWait') ||
+            ($status.text() && $status.text() === 'LIVE')
+          ) {
+            cy.wrap($bigContainer)
+              .invoke('attr', 'id')
+              .then((id) => {
+                gameId = String(id);
+              });
+          }
         }
-      });
-      cy.get('a').filter("[href='/game']").click();
+      );
+      cy.contains('Current Play').parent().find('button').click();
       // Wait for rendering
       cy.wait(2000);
-      cy.get('[class^=GameResultItem_bigContainer]')
+      cy.get('[class^=GameResultItem_bigItemContainer]')
         .invoke('attr', 'id')
         .then((id) => {
           if (gameId === id) {
             throw new Error('live 상태가 있습니다');
           }
         });
-      cy.get('div[class*="smallContainer"]').each(($el1) => {
+      cy.get('div[class*="smallItemContainer"]').each(($el1) => {
         cy.wrap($el1).click();
         cy.wait(1000);
-        cy.get('[class^=GameResultItem_bigContainer]')
+        cy.get('[class^=GameResultItem_bigItemContainer]')
           .invoke('attr', 'id')
           .then((id) => {
             if (gameId === id) {
