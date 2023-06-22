@@ -57,19 +57,19 @@
 
 .buttons {
   display: flex;
-  justify-content: center;
   align-items: center;
+  margin-left: 15px;
+  cursor: pointer;
   .kakao {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 0.5rem;
+    margin-left: 10px;
     border-radius: 2px;
     width: 30px;
     height: 30px;
     background: linear-gradient(180deg, #f2d210 0%, #f2b210 100%);
     color: black;
-    cursor: pointer;
   }
 }
 
