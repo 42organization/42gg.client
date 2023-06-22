@@ -16,7 +16,7 @@ export default function RankListMain({ rank, isMain }: RankListMainProps) {
   useEffect(() => {
     if (rank?.rankList.length === 3) {
       setRankList(rank.rankList);
-    } else if (rank?.rankList.length === 2) {
+    } else if (rank?.rankList.length === 2 && rank?.rankList[0] !== undefined) {
       dummyRankList[0] = rank.rankList[0];
       dummyRankList[1] = rank.rankList[1];
       setRankList(dummyRankList);
@@ -39,7 +39,7 @@ export default function RankListMain({ rank, isMain }: RankListMainProps) {
       <div className={`${styles.bangContainer}`}>{bangElements}</div>
       <div className={`${styles.mainContainer} ${isMain && styles.isMain}`}>
         {rankList.map((item: NormalUser | RankUser) => (
-          <RankListItemMain key={item.intraId} user={item} />
+          <RankListItemMain key={item.rank} user={item} />
         ))}
       </div>
     </div>
