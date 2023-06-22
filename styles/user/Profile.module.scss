@@ -35,6 +35,11 @@
       #ff017b 55.14%,
       #ff409c 90.43%
     );
+    background: linear-gradient(
+      89.81deg,
+      #8fc7fb , 
+      #4e8fdb 
+    );
   }
   .expLeft {
     background: $white2;
@@ -59,6 +64,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .modalbuttons {
