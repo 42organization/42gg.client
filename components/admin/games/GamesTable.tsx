@@ -79,6 +79,7 @@ export default function GamesTable() {
         <div className={styles.tableWrap}>
           {gameInfo.gameLog.map((game: IGameLog) => {
             const { team1, team2 } = game;
+            const mode = game.mode.toUpperCase();
             return (
               <div className={styles.tableRow} key={game.gameId}>
                 <div className={styles.gameId}>{game.gameId}</div>
@@ -86,10 +87,10 @@ export default function GamesTable() {
                   <div>
                     시작 날짜: {game.startAt.toLocaleString().split(' ')[0]}
                   </div>
-                  <div>게임 모드: {game.mode}</div>
+                  <div>게임 모드: {mode}</div>
                   <div>슬롯 시간: {game.slotTime}분</div>
                   <div>
-                    {game.mode === 'RANK' && (
+                    {mode === 'RANK' && (
                       <ModifyScoreForm
                         gameId={game.gameId}
                         team1={team1}
@@ -102,7 +103,7 @@ export default function GamesTable() {
                   <div>team1</div>
                   <div
                     className={
-                      game.mode === 'NORMAL'
+                      mode === 'NORMAL'
                         ? styles.normal
                         : game.team1.win
                         ? styles.win
@@ -116,7 +117,7 @@ export default function GamesTable() {
                   <div>team2</div>
                   <div
                     className={
-                      game.mode === 'NORMAL'
+                      mode === 'NORMAL'
                         ? styles.normal
                         : game.team2.win
                         ? styles.win
@@ -129,7 +130,7 @@ export default function GamesTable() {
                 <button
                   type='submit'
                   form={`Score-Modify-Form-${game.gameId}`}
-                  disabled={game.mode === 'NORMAL'}
+                  disabled={mode === 'NORMAL'}
                   className={styles['modifyBtn']}
                 >
                   수정
