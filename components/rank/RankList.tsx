@@ -4,18 +4,19 @@ import RankListMain from './topRank/RankListMain';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
 import useRankList from 'hooks/rank/useRankList';
-import { ToggleMode } from 'types/rankTypes';
+import { useRecoilValue } from 'recoil';
+import { colorToggleSelector } from 'utils/recoil/colorMode';
+
 interface RankListProps {
-  toggleMode: ToggleMode;
   season?: number;
   isMain?: boolean;
 }
 
 export default function RankList({
-  toggleMode,
   season,
   isMain,
 }: RankListProps) {
+  const Mode = useRecoilValue(colorToggleSelector);
   const [rank, setRank] = useState<Rank>();
   const [ranker, setRanker] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
@@ -24,29 +25,28 @@ export default function RankList({
     totalPage: rank?.totalPage,
     setPage,
   };
-
   const makePath = (): string => {
     const modeQuery = (targetMode?: string) =>
       targetMode !== 'NORMAL' ? 'ranks/single' : 'exp';
-    const seasonQuery = toggleMode === 'RANK' ? `&season=${season}` : '';
+    const seasonQuery = Mode === 'RANK' ? `&season=${season}` : '';
     return isMain
-      ? `/pingpong/${modeQuery(toggleMode)}?page=1&size=3`
-      : `/pingpong/${modeQuery(toggleMode)}?page=${page}&size=20${seasonQuery}`;
+      ? `/pingpong/${modeQuery('RANK')}?page=1&size=3`
+      : `/pingpong/${modeQuery(Mode)}?page=${page}&size=20${seasonQuery}`;
   };
 
   const makePathRanker = (): string => {
     const modeQuery = (targetMode?: string) =>
       targetMode !== 'NORMAL' ? 'ranks/single' : 'exp';
-    const seasonQuery = toggleMode === 'RANK' ? `&season=${season}` : '';
+    const seasonQuery = Mode === 'RANK' ? `&season=${season}` : '';
     return isMain
-      ? `/pingpong/${modeQuery(toggleMode)}?page=1&size=3`
-      : `/pingpong/${modeQuery(toggleMode)}?page=1&size=3${seasonQuery}`;
+      ? `/pingpong/${modeQuery('RANK')}?page=1&size=3`
+      : `/pingpong/${modeQuery(Mode)}?page=1&size=3${seasonQuery}`;
   };
 
   useRankList({
     makePath: makePath(),
     makePathRanker: makePathRanker(),
-    toggleMode: toggleMode,
+    toggleMode: Mode,
     season: season,
     setRank: setRank,
     setRanker: setRanker,
@@ -62,11 +62,10 @@ export default function RankList({
   return (
     <div>
       {ranker && <RankListMain rank={ranker} isMain={false} />}
-      <RankListFrame toggleMode={toggleMode} pageInfo={pageInfo}>
+      <RankListFrame pageInfo={pageInfo}>
         {rank?.rankList.map((item: NormalUser | RankUser, index) => (
           <RankListItem
             key={index}
-            toggleMode={toggleMode}
             user={makeUser(item)}
           />
         ))}

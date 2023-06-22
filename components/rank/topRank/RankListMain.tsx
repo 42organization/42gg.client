@@ -2,7 +2,8 @@ import { RankUser, NormalUser, Rank } from 'types/rankTypes';
 import RankListItemMain from './RankListItemMain';
 import styles from 'styles/rank/RankListMain.module.scss';
 import { useEffect, useState } from 'react';
-import useModeToggle from 'hooks/mode/useModeToggle';
+import { useRecoilValue } from 'recoil';
+import { colorToggleSelector } from 'utils/recoil/colorMode';
 
 interface RankListMainProps {
   rank?: Rank;
@@ -11,7 +12,7 @@ interface RankListMainProps {
 
 export default function RankListMain({ rank, isMain }: RankListMainProps) {
   const [rankList, setRankList] = useState<NormalUser[] | RankUser[]>([]);
-  const { Mode } = useModeToggle();
+  const Mode = useRecoilValue(colorToggleSelector);
 
   useEffect(() => {
     if (rank?.rankList.length === 3) {
@@ -23,7 +24,7 @@ export default function RankListMain({ rank, isMain }: RankListMainProps) {
     } else {
       setRankList(dummyRankList);
     }
-  }, [rank]);
+  }, [rank, Mode]);
 
   const bangElements = Array.from({ length: 5 }, (_, index) => (
     <div
