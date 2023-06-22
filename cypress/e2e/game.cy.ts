@@ -86,7 +86,7 @@ describe('게임 기능 테스트', () => {
   it('유저 검색 확인 🤔', () => {
     cy.origin(Cypress.env('HOME'), () => {
       // 1. 게임 페이지 이동
-      cy.get('a').filter("[href='/game']").click();
+      cy.contains('Current Play').parent().find('button').click();
       // wait for rendering
       cy.wait(1000);
       // 2. 가장 최근 경기한 유저 아이디 검색
@@ -103,13 +103,13 @@ describe('게임 기능 테스트', () => {
           // wait for rendering
           cy.wait(1000);
           // 3. 모든 작은 게임 컴포넌트에 유저 아이디가 일치하는지 확인
-          cy.get('[class^=GameResultItem_smallContainer]').each(
+          cy.get('[class^=GameResultItem_smallItemContainer]').each(
             ($smallContainer) => {
               const $smallTeams = $smallContainer.find(
                 '[class^=GameResultItem_smallTeam]'
               );
-              const intraId1 = $smallTeams.eq(0).find('span div').text();
-              const intraId2 = $smallTeams.eq(1).find('span div').text();
+              const intraId1 = $smallTeams.eq(0).find('span').text();
+              const intraId2 = $smallTeams.eq(1).find('span').text();
 
               if (intraId1 === userId || intraId2 === userId) {
                 return;
