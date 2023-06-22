@@ -8,6 +8,8 @@ $message-color: rgba(39, 10, 70, 1);
 .currentMatchWrapper {
   width: 100%;
   max-width: 28rem;
+  position: relative;
+  z-index: 2;
 }
 
 .currentMatchBanner {
@@ -196,6 +198,7 @@ $message-color: rgba(39, 10, 70, 1);
     border: 0;
     padding: 0;
     font-size: 0.7rem;
+    cursor: pointer;
     &.dropup {
       &.two {
         animation: twoDropdown 0.4s ease;
