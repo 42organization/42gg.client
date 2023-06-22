@@ -23,7 +23,7 @@ export default function GamesTable() {
   const getAllGames = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/games?season=0&page=${currentPage}&size=4`
+        `/games?page=${currentPage}&size=4`
       );
 
       setGameInfo({
