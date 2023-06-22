@@ -93,13 +93,13 @@
   height: 7rem;
   background: linear-gradient(
     180deg,
-    rgba(44, 16, 74, 0.69) 0%,
+    rgba(44, 16, 74, 0) 0%,
     #5e3c83 84.38%
   );
   &.normal {
     background: linear-gradient(
       180deg,
-      rgba(26, 51, 141, 0.79) 0%,
+      rgba(26, 51, 141, 0) 0%,
       #5c75da 100%
     );
   }
@@ -187,11 +187,10 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  font-family: 'LifeSavers';
+  font-family: 'Sacramento';
   text-align: end;
-  font-size: 90px;
-  line-height: 10rem;
-  line-height: 114px;
+  font-size: 4.5rem;
+  line-height: -10rem;
   letter-spacing: 0.04em;
 }
 
@@ -211,8 +210,9 @@
       #12aa61 51.48%,
       #1a9126 64.98%
     ),
-    0.5rem
+    -0.5rem
   );
+  font-size: 6rem;
 }
 
 .rankNumber2 {
@@ -260,6 +260,16 @@
   justify-content: center;
   background-color: #c7b1ee;
   border-radius: 50%;
+  .rank1 {
+    color: #603B88;
+    width: 6.8rem;
+    height: 6.8rem;
+  }
+  .ranks {
+    color: #603B88;
+    width: 4.5rem;
+    height: 4.5rem;
+  }
 }
 
 .intraId {
@@ -293,6 +303,7 @@
 
   .mainData:nth-child(2) {
     height: 13.5rem;
+    border-radius: 50px;
   }
 
   .mainData:nth-child(3) {
@@ -336,21 +347,31 @@
   }
 
   .rankNumber1 {
-    font-size: 70px;
+    font-size: 5rem;
     top: -2rem;
   }
   .rankNumber2 {
-    font-size: 70px;
-    top: -3.4rem;
+    font-size: 4rem;
+    top: -2.8rem;
   }
   .rankNumber3 {
-    font-size: 70px;
-    top: -3.6rem;
+    font-size: 4rem;
+    top: -3rem;
   }
   .intraId {
     top: -2rem;
     &.first {
       top: -2.5rem;
+    }
+  }
+  .questionCircleRank {
+    .rank1 {
+      width: 5rem;
+      height: 5rem;
+    }
+    .ranks {
+      width: 4rem;
+      height: 4rem;
     }
   }
 }

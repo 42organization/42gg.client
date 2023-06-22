@@ -20,7 +20,6 @@ export default function RankModeWrap({ children }: RankModeWrapProps) {
 
   useEffect(() => {
     setShowSeasons(Mode === 'RANK');
-    setMode(Mode);
   }, [Mode]);
 
   return (

@@ -47,10 +47,7 @@ export default function RankListItemMain({ user }: RankListItemMainProps) {
               <div>
                 <div className={`${styles.questionCircleRank}`}>
                   {
-                    <TbQuestionMark
-                      color='603B88'
-                      size={rank === 1 ? '80' : '65'}
-                    />
+                    <TbQuestionMark className={` ${rank === 1 ? styles.rank1 : styles.ranks}`}/>
                   }
                 </div>
                 <span>{intraId}</span>
