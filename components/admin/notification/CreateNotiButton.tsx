@@ -9,16 +9,10 @@ export default function CreateNotiButton() {
     <>
       <div className={style.container}>
         <button
-          className={style.createAllButton}
-          onClick={() => setModal({ modalName: 'ADMIN-NOTI_ALL' })}
-        >
-          All
-        </button>
-        <button
           className={style.createSomeoneButton}
           onClick={() => setModal({ modalName: 'ADMIN-NOTI_USER' })}
         >
-          User
+          알림 보내기
         </button>
       </div>
     </>

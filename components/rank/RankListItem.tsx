@@ -1,36 +1,33 @@
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
-import { MatchMode } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
 import styles from 'styles/rank/RankList.module.scss';
-
+import { colorToggleSelector } from 'utils/recoil/colorMode';
 interface User {
   intraId: string;
-  rank: number | string;
+  rank: number;
   statusMessage: string;
   point: number | string;
   level: number | null;
 }
 
 interface RankListItemProps {
-  index: number;
   user: User;
-  toggleMode: MatchMode;
 }
 
-export default function RankListItem({
-  index,
-  user,
-  toggleMode,
-}: RankListItemProps) {
+export default function RankListItem({ user }: RankListItemProps) {
+  const Mode = useRecoilValue(colorToggleSelector);
   const { rank, intraId, statusMessage, point, level } = user;
   const myIntraId = useRecoilValue(userState).intraId;
   const wrapStyle = {
-    evenOdd: index % 2 === 0 ? styles.even : styles.odd,
     topStandard: rank < 4 ? styles.top : styles.standard,
+    rankItem: {
+      RANK: styles.Ranking,
+      NORMAL: styles.Vip,
+    },
     myRankItem: {
-      rank: intraId === myIntraId && level === null ? styles.myRanking : '',
-      normal: intraId === myIntraId && level !== null ? styles.myVip : '',
+      RANK: intraId === myIntraId && level === null ? styles.myRanking : '',
+      NORMAL: intraId === myIntraId && level !== null ? styles.myVip : '',
     },
   };
 
@@ -45,8 +42,8 @@ export default function RankListItem({
 
   return (
     <div
-      className={`${styles.rankItemWrap} ${wrapStyle.evenOdd}
-			${wrapStyle.topStandard} ${wrapStyle.myRankItem[toggleMode]}`}
+      className={`${styles.rankItemWrap} ${wrapStyle.topStandard}
+        ${wrapStyle.myRankItem[Mode]} ${wrapStyle.rankItem[Mode]}`}
     >
       {rank}
       <div className={styles.intraId}>{makeIntraIdLink()}</div>

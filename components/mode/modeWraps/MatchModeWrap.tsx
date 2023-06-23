@@ -1,41 +1,40 @@
-import React from 'react';
-import { useRecoilValue } from 'recoil';
+import React, { SetStateAction, Dispatch } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
-import { seasonListState } from 'utils/recoil/seasons';
-import ModeToggle from 'components/mode/modeItems/ModeToggle';
-import styles from 'styles/mode/ModeWrap.module.scss';
+import { Match } from 'types/matchTypes';
+import { colorModeState } from 'utils/recoil/colorMode';
+import ModeRadiobox from '../modeItems/ModeRadiobox';
 
 interface MatchModeWrapProps {
   children: React.ReactNode;
-  toggleMode: MatchMode;
-  setToggleMode: React.Dispatch<React.SetStateAction<MatchMode>>;
+  radioMode: MatchMode;
+  match: Match | null;
+  setRadioMode: Dispatch<SetStateAction<MatchMode>>;
 }
 
 export default function MatchModeWrap({
   children,
-  toggleMode,
-  setToggleMode,
+  radioMode,
+  match,
+  setRadioMode,
 }: MatchModeWrapProps) {
-  const { seasonMode } = useRecoilValue(seasonListState);
-
-  const modeToggleHandler = () => {
-    setToggleMode((mode) => (mode === 'rank' ? 'normal' : 'rank'));
+  const setColorMode = useSetRecoilState(colorModeState);
+  const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setColorMode(e.target.value as MatchMode);
+    setRadioMode(e.target.value as MatchMode);
   };
 
   return (
     <div>
-      {seasonMode === 'both' && (
-        <div className={styles.matchModeWrap}>
-          <ModeToggle
-            checked={toggleMode === 'rank'}
-            onToggle={modeToggleHandler}
-            id={'matchToggle'}
-            text={toggleMode === 'rank' ? '랭크' : '일반'}
-          />
-        </div>
-      )}
+      <ModeRadiobox
+        mode={radioMode}
+        page='MATCH'
+        onChange={modeChangeHandler}
+        zIndexList={false}
+      />
       {React.cloneElement(children as React.ReactElement, {
-        toggleMode: toggleMode,
+        mode: radioMode,
+        match: match,
       })}
     </div>
   );

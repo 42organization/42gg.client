@@ -1,21 +1,10 @@
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { errorState } from 'utils/recoil/error';
+import React from 'react';
+import useErrorPage from 'hooks/error/useErrorPage';
 import styles from 'styles/Error.module.scss';
+import ErrorEmoji from 'public/image/noti_empty.svg';
 
 export default function ErrorPage() {
-  const [error, setError] = useRecoilState(errorState);
-  const router = useRouter();
-
-  useEffect(() => {
-    router.replace(`/`);
-  }, []);
-
-  const goHome = () => {
-    setError('');
-    router.push('/');
-  };
+  const { error, goHome } = useErrorPage();
 
   return (
     <div className={styles.container}>
@@ -26,6 +15,14 @@ export default function ErrorPage() {
             ? '잘못된 요청입니다!'
             : '데이터 요청에 실패하였습니다.'}
           <div className={styles.errorCode}>({error})</div>
+          <div className={styles.emojiWrapper}>
+            <div className={styles.threeDotImage}>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <ErrorEmoji/>
+          </div>
         </div>
         <div className={styles.home} onClick={goHome}>
           <div className={styles.positive}>

@@ -33,21 +33,11 @@ export default function AnnounceEdit() {
     resetHandler();
   }, []);
 
-  const resetHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/announcement`);
-      setContent(res?.data.content);
-    } catch (e) {
-      alert(e);
-    }
-  };
-
   const postHandler = async () => {
     try {
       await instanceInManage.post(`/announcement`, {
         content,
         creatorIntraId: currentUserId,
-        createdTime: new Date(new Date().getTime() + koreaTimeOffset),
       });
       setSnackbar({
         toastName: `post request`,
@@ -67,10 +57,7 @@ export default function AnnounceEdit() {
 
   const deleteHandler = async () => {
     try {
-      await instanceInManage.put(`/announcement`, {
-        deleterIntraId: currentUserId,
-        deletedTime: new Date(new Date().getTime() + koreaTimeOffset),
-      });
+      await instanceInManage.delete(`/announcement/${currentUserId}`);
       setSnackbar({
         toastName: `delete request`,
         severity: 'success',
@@ -84,6 +71,15 @@ export default function AnnounceEdit() {
         message: `🔥 ${announceDeleteResponse[e.response.data.code]} 🔥`,
         clicked: true,
       });
+    }
+  };
+
+  const resetHandler = async () => {
+    try {
+      const res = await instance.get('/pingpong/announcement');
+      setContent(res?.data.content);
+    } catch (e) {
+      alert(e);
     }
   };
 

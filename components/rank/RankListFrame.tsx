@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
-import { MatchMode } from 'types/mainType';
 import PageNation from 'components/Pagination';
 import styles from 'styles/rank/RankList.module.scss';
-
+import { useRecoilValue } from 'recoil';
+import { colorToggleSelector } from 'utils/recoil/colorMode';
 interface PageInfo {
   currentPage?: number;
   totalPage?: number;
@@ -11,20 +11,20 @@ interface PageInfo {
 interface RankListFrameProps {
   children: React.ReactNode;
   pageInfo: PageInfo;
-  toggleMode: MatchMode;
 }
 
 export default function RankListFrame({
   children,
   pageInfo,
-  toggleMode,
 }: RankListFrameProps) {
+  const toggleMode = useRecoilValue(colorToggleSelector);
+
   const router = useRouter();
   const division: { [key: string]: string[] } = {
-    rank: ['순위', 'intraId', '상태메시지', '탁구력'],
-    normal: ['순위', 'intraId (Lv)', '상태메시지', '경험치'],
+    RANK: ['순위', 'intraId', '상태메시지', '탁구력'],
+    NORMAL: ['순위', 'intraId (Lv)', '상태메시지', '경험치'],
   };
-
+  
   const pageChangeHandler = (pages: number) => {
     pageInfo.setPage(pages);
     router.push('/rank');
@@ -35,7 +35,7 @@ export default function RankListFrame({
       <div className={styles.container}>
         <div
           className={`${styles.division}
-					${toggleMode === 'normal' && styles.normal}`}
+					${toggleMode === 'NORMAL' && styles.normal}`}
         >
           {division[toggleMode].map((item: string) => (
             <div key={item}>{item}</div>

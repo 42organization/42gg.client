@@ -6,6 +6,16 @@
   align-items: center;
 }
 
+@mixin gameResultImage($size) {
+  position: relative;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  img {
+    border-radius: 50%;
+  }
+}
+
 .header {
   @include imageWrap;
   div {
@@ -17,33 +27,98 @@
 .gameResultBig {
   @include imageWrap;
   div {
-    @include userImage(4.5rem);
+    @include gameResultImage(2.8rem);
     cursor: pointer;
   }
 }
 
-.gameResultSmallLeft {
+.gameResultSmall {
   @include imageWrap;
   div {
-    @include userImage(2rem);
-    margin-right: 0.7rem;
+    @include gameResultImage(2rem);
   }
 }
 
-.gameResultSmallRight {
+.mainPageProfile {
   @include imageWrap;
+  height: 4.3rem;
+  width: 4.3rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  border-radius: 50%;
+  background: linear-gradient(
+    140.76deg,
+    #0069ff 0%,
+    #be7bcf 43.97%,
+    #ff7ee3 70.25%,
+    #426bff 91.76%
+  );
   div {
-    @include userImage(2rem);
-    margin-left: 0.7rem;
+    @include userImage(4rem);
+    cursor: pointer;
+    border: 0;
+  }
+}
+
+.mainPageProfile {
+  @include imageWrap;
+  height: 4.3rem;
+  width: 4.3rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  border-radius: 50%;
+  background: linear-gradient(
+    140.76deg,
+    #0069ff 0%,
+    #be7bcf 43.97%,
+    #ff7ee3 70.25%,
+    #426bff 91.76%
+  );
+
+  div {
+    @include userImage(4rem);
+    cursor: pointer;
+    border: 0;
+  }
+}
+
+.menuProfile {
+  @include imageWrap;
+  height: 4.3rem;
+  width: 4.3rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  border-radius: 50%;
+  background: rgba(163, 85, 155, 1);
+  div {
+    @include userImage(3.9rem);
+    cursor: pointer;
+    border: 0;
   }
 }
 
 .afterGameModal {
   @include imageWrap;
   div {
-    @include userImage(5rem);
+    @include userImage(4.375rem);
     margin-bottom: 1rem;
-    box-shadow: 5px 5px 6px $dark-gray;
+  }
+}
+
+.mainProfile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem;
+  border-radius: 50%;
+  background: linear-gradient(
+    to right bottom,
+    #0030ac 0%,
+    #90a5ff 50%,
+    #cb8fff 100%
+  );
+  div {
+    @include userImage(8rem);
   }
 }
 
@@ -51,11 +126,43 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.3rem;
-  border: solid 1px white;
-  border-radius: $mini-radius;
-  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  padding: 0.2rem;
+  border-radius: 50%;
+  background: linear-gradient(
+    to right bottom,
+    #0030ac 0%,
+    #90a5ff 50%,
+    #cb8fff 100%
+  );
   div {
     @include userImage(4.7rem);
+  }
+}
+
+.ranktropybig {
+  @include imageWrap;
+  div {
+    @include userRankImage(6.5rem);
+    cursor: pointer;
+  }
+}
+.ranktropy {
+  @include imageWrap;
+  div {
+    @include userRankImage(4.5rem);
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 457px) {
+  .ranktropy {
+    div {
+      @include userRankImage(4rem);
+    }
+  }
+  .ranktropybig {
+    div {
+      @include userRankImage(5rem);
+    }
   }
 }

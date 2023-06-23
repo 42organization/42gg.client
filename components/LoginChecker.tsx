@@ -8,30 +8,13 @@ import Login from 'pages/login';
 import WelcomeModal from './modal/event/WelcomeModal';
 import styles from 'styles/Layout/Layout.module.scss';
 
+import useLoginCheck from 'hooks/Login/useLoginCheck';
 interface LoginCheckerProps {
   children: React.ReactNode;
 }
 
 export default function LoginChecker({ children }: LoginCheckerProps) {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [loggedIn, setLoggedIn] = useRecoilState(loginState);
-  const [firstVisited, setFirstVisited] = useRecoilState(firstVisitedState);
-
-  const router = useRouter();
-  const presentPath = router.asPath;
-  const token = presentPath.split('?token=')[1];
-
-  useEffect(() => {
-    if (token) {
-      localStorage.setItem('42gg-token', token);
-      setFirstVisited(true);
-      router.replace(`/`);
-    }
-    if (localStorage.getItem('42gg-token')) {
-      setLoggedIn(true);
-    }
-    setIsLoading(false);
-  }, []);
+  const [isLoading, loggedIn, firstVisited] = useLoginCheck();
 
   return loggedIn ? (
     <>
@@ -43,10 +26,4 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
       <div className={styles.background}>{!isLoading && <Login />}</div>
     </div>
   );
-
-  // return (
-  //   <div className={styles.appContainer}>
-  //     <div className={styles.background}>{!isLoading && <Load />}</div>
-  //   </div>
-  // );
 }

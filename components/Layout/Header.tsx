@@ -1,85 +1,96 @@
 import Link from 'next/link';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { liveState } from 'utils/recoil/layout';
 import { useEffect } from 'react';
-import { useRecoilValue, useRecoilState } from 'recoil';
-import {
-  openMenuBarState,
-  openNotiBarState,
-  userState,
-  liveState,
-} from 'utils/recoil/layout';
-import MenuBar from './MenuBar';
-import NotiBar from './NotiBar';
-import PlayerImage from 'components/PlayerImage';
+import MenuBar from './MenuBar/MenuBar';
 import { FiMenu } from 'react-icons/fi';
 import { BsMegaphone } from 'react-icons/bs';
-import { VscBell, VscBellDot } from 'react-icons/vsc';
 import styles from 'styles/Layout/Header.module.scss';
+import NotiBar from './NotiBar/NotiBar';
+import { HeaderContextState, HeaderContext } from './HeaderContext';
+import { useContext } from 'react';
+import { Modal } from 'types/modalTypes';
+import { modalState } from 'utils/recoil/modal';
+import useAxiosGet from 'hooks/useAxiosGet';
+import NotiBell from 'public/image/noti_bell.svg';
 
 export default function Header() {
-  const user = useRecoilValue(userState);
   const [live, setLive] = useRecoilState(liveState);
-  const [openMenuBar, setOpenMenuBar] = useRecoilState(openMenuBarState);
-  const [openNotiBar, setOpenNotiBar] = useRecoilState(openNotiBarState);
-
+  const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const openMenuBarHandler = () => {
-    setOpenMenuBar(!openMenuBar);
+    HeaderState?.setOpenMenuBarState(!HeaderState?.openMenuBarState);
   };
-
   const openNotiBarHandler = () => {
-    setOpenNotiBar(!openNotiBar);
+    HeaderState?.setOpenNotiBarState(!HeaderState?.openNotiBarState);
     setLive((prev) => ({ ...prev, notiCount: 0 }));
   };
 
   useEffect(() => {
     setMenuOutsideScroll();
-  }, [openMenuBar, openNotiBar]);
+  }, [HeaderState?.openMenuBarState, HeaderState?.openNotiBarState]);
 
   const setMenuOutsideScroll = () =>
     (document.body.style.overflow =
-      openMenuBar || openNotiBar ? 'hidden' : 'unset');
+      HeaderState?.openMenuBarState || HeaderState?.openNotiBarState
+        ? 'hidden'
+        : 'unset');
+
+  const setModal = useSetRecoilState<Modal>(modalState);
+
+  const getAnnouncementHandler = useAxiosGet<any>({
+    url: '/pingpong/announcement',
+    setState: (data) => {
+      data.content !== '' &&
+        setModal({
+          modalName: 'EVENT-ANNOUNCEMENT',
+          announcement: data,
+        });
+    },
+    err: 'RJ01',
+    type: 'setError',
+  });
 
   return (
     <div className={styles.headerContainer}>
       <div className={styles.headerWrap}>
-        <div className={styles.headerLeft} onClick={openMenuBarHandler}>
-          <FiMenu id={styles.menuIcon} />
+        <div className={styles.headerLeft}>
+          <FiMenu
+            className={styles.menuIcon}
+            onClick={openMenuBarHandler}
+          />
         </div>
-        <div id={styles.logo}>
-          <Link href={'/'}>
-            <div>42GG</div>
-          </Link>
-        </div>
+        <Link className={styles.logoWrap} href={'/'}>
+          42GG
+        </Link>
         <div className={styles.headerRight}>
           <div
-            id={styles.announceIcon}
-            onClick={() =>
-              window.open(
-                'https://far-moonstone-7ff.notion.site/91925f9c945340c6a139f64fb849990d'
-              )
-            }
+            className={styles.announceIcon}
+            onClick={() => getAnnouncementHandler()}
           >
-            <BsMegaphone />
+            <BsMegaphone className={styles.megaphoneIcon} />
           </div>
-          <div id={styles.notiIcon} onClick={openNotiBarHandler}>
+          <div className={styles.notiIconWrapper} onClick={openNotiBarHandler}>
             {live.notiCount ? (
               <div className={styles.bellWhole}>
-                <VscBellDot />
+                <div className={styles.notiBellWrapper}>
+                  <div className={styles.notiCountCircle}>
+                    <div className={styles.notiCount}>
+                      {live.notiCount > 9 ? '9+' : live.notiCount}
+                    </div>
+                  </div>
+                  <NotiBell className={styles.bellIcon}/>
+                </div>
               </div>
             ) : (
-              <VscBell />
+              <div className={styles.notiBellWrapper}>
+                <NotiBell className={styles.bellIcon}/>
+              </div>
             )}
           </div>
-          <Link href={`/users/detail?intraId=${user.intraId}`}>
-            <PlayerImage
-              src={user.userImageUri}
-              styleName={'header'}
-              size={20}
-            />
-          </Link>
         </div>
       </div>
-      {openMenuBar && <MenuBar />}
-      {openNotiBar && <NotiBar />}
+      {HeaderState?.openMenuBarState && <MenuBar />}
+      {HeaderState?.openNotiBarState && <NotiBar />}
     </div>
   );
 }

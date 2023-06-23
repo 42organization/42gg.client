@@ -1,31 +1,30 @@
-import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { seasonListState } from 'utils/recoil/seasons';
-import { MatchMode } from 'types/mainType';
 import RankModeWrap from 'components/mode/modeWraps/RankModeWrap';
 import MyRank from 'components/rank/MyRank';
 import RankList from 'components/rank/RankList';
 import styles from 'styles/rank/RankList.module.scss';
+import useColorMode from 'hooks/useColorMode';
+import { useRecoilValue } from 'recoil';
+import { colorToggleSelector } from 'utils/recoil/colorMode';
 
 export default function Rank() {
-  const { seasonMode } = useRecoilValue(seasonListState);
-  const [mode, setMode] = useState<MatchMode>(
-    seasonMode === 'normal' ? 'normal' : 'rank'
-  );
+  const Mode = useRecoilValue(colorToggleSelector);
+
+  useColorMode('RANK');
+
   const content = {
-    rank: { style: '', title: 'Ranking' },
-    normal: { style: styles.vip, title: 'VIP' },
+    RANK: { style: '', title: 'Ranking' },
+    NORMAL: { style: styles.vip, title: 'VIP' },
   };
 
   return (
-    <div className={styles.pageWrap}>
-      <h1 className={`${styles.title} ${content[mode].style}`}>
-        {content[mode].title}
-      </h1>
-      <MyRank toggleMode={mode} />
-      <RankModeWrap setMode={setMode}>
-        <RankList toggleMode={mode} />
-      </RankModeWrap>
-    </div>
+      <div className={styles.pageWrap}>
+        <h1 className={`${styles.title} ${content[Mode].style}`}>
+          {content[Mode].title}
+        </h1>
+        <MyRank/>
+        <RankModeWrap>
+          <RankList/>
+        </RankModeWrap>
+      </div>
   );
 }

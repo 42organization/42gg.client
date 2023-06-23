@@ -1,53 +1,20 @@
-import { useEffect, useState } from 'react';
-import { sleep } from 'utils/sleep';
 import Celebration from './Celebration';
 import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
+import useExpStat from 'hooks/modal/statchange/useExpStat';
 
 interface ExpGuageProps {
   stat: { [key: string]: number };
 }
 export default function ExpStat({ stat }: ExpGuageProps) {
-  const { afterMaxExp, beforeExp, beforeLevel, beforeMaxExp, increasedExp } =
-    stat;
-  const [level, setLevel] = useState<number>(beforeLevel);
-  const [maxExp, setMaxExp] = useState<number>(beforeMaxExp);
-  const [percent, setPercent] = useState<number>(
-    (beforeExp / beforeMaxExp) * 100
-  );
-  const [addedExp, setAddedExp] = useState<number>(0);
-  const [currentExp, setCurrentExp] = useState<number>(beforeExp);
-  const [celebrateEvent, setCelebrateEvent] = useState<boolean>(false);
-  const MAX_LEVEL = 42;
-
-  useEffect(() => {
-    expGaugeAnimation();
-  }, []);
-
-  useEffect(() => {
-    setPercent(getPercent());
-    if (currentExp >= maxExp) {
-      setCurrentExp(maxExp - currentExp);
-      setMaxExp(afterMaxExp);
-      setLevel(level + 1);
-      setCelebrateEvent(true);
-      setTimeout(() => {
-        setPercent(0);
-      }, 100);
-    }
-  }, [addedExp]);
-
-  const getPercent = () => {
-    return (currentExp / maxExp) * 100;
-  };
-
-  const expGaugeAnimation = () => {
-    for (let i = 0; i < increasedExp; ++i) {
-      sleep(i * 20).then(() => {
-        setAddedExp((thisExp) => thisExp + 1);
-        setCurrentExp((thisExp) => thisExp + 1);
-      });
-    }
-  };
+  const {
+    percent,
+    celebrateEvent,
+    MAX_LEVEL,
+    level,
+    currentExp,
+    maxExp,
+    addedExp,
+  } = useExpStat({ stat });
 
   return (
     <div>
@@ -56,7 +23,7 @@ export default function ExpStat({ stat }: ExpGuageProps) {
         <div className={styles.expWrap}>
           <div className={styles.expString}>
             <div className={styles.expRate}>
-              <span>{`EXP : ${currentExp} / ${
+              <span>{`Exp : ${currentExp} / ${
                 level !== MAX_LEVEL ? maxExp : 'Max'
               }`}</span>
             </div>

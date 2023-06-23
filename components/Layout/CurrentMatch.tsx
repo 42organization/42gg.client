@@ -1,73 +1,148 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { instance } from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
+import { useEffect, useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import { reloadMatchState, currentMatchState } from 'utils/recoil/match';
-import { gameTimeToString, isBeforeMin } from 'utils/handleTime';
+import { stringToHourMin } from 'utils/handleTime';
+import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
+import { currentMatchState } from 'utils/recoil/match';
+import { CurrentMatchList, CurrentMatchListElement } from 'types/matchTypes';
+import { Modal } from 'types/modalTypes';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
+import { TbMenu } from 'react-icons/tb';
+import LoudSpeaker from './LoudSpeaker';
 
 export default function CurrentMatch() {
-  const [{ isMatched, enemyTeam, time, slotId, isImminent }, setCurrentMatch] =
-    useRecoilState(currentMatchState);
-  const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
-  const setModal = useSetRecoilState(modalState);
-  const setError = useSetRecoilState(errorState);
-  const matchingMessage = time && makeMessage(time, isMatched);
-  const blockCancelButton = isImminent && enemyTeam.length;
-  const presentPath = useRouter().asPath;
+  const currentMatchList =
+    useRecoilValue<CurrentMatchList>(currentMatchState).match;
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const [dropdownAnimation, setDropdownAnimation] = useState(false);
+
+  const dropdownStyle = showDropdown
+    ? styles.visibleDropdown
+    : styles.hiddenDropdown;
+
+  useGetCurrentMatch();
 
   useEffect(() => {
-    getCurrentMatchHandler();
-    if (reloadMatch) setReloadMatch(false);
-  }, [presentPath, reloadMatch]);
-
-  const getCurrentMatchHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/match/current`);
-      setCurrentMatch(res?.data);
-    } catch (e) {
-      setError('JB01');
+    if (showDropdown) {
+      setDropdownAnimation(true);
+    } else {
+      setTimeout(() => {
+        setDropdownAnimation(false);
+      }, 400);
     }
-  };
+  }, [showDropdown]);
 
-  const onCancel = () => {
+  const dropButtonStyle = showDropdown ? styles.dropup : styles.dropdown;
+  const matchCountStyle =
+    currentMatchList.length === 2
+      ? styles.two
+      : currentMatchList.length === 3
+      ? styles.three
+      : styles.one;
+
+  return (
+    <div className={styles.currentMatchWrapper}>
+      <div className={styles.currentMatchBanner}>
+        <div className={styles.currentMatchMain}>
+          {currentMatchList && <CurrentMatchContent currentMatch={currentMatchList[0]} index={0} />}
+        </div>
+        <div
+          className={`${styles.dropdownWrapper} ${dropdownStyle} ${matchCountStyle}`}
+          >
+          {dropdownAnimation ? (
+            <div className={styles.dropdown}>
+              {currentMatchList.slice(1).map((currentMatch, index) => (
+                <CurrentMatchContent
+                key={index}
+                currentMatch={currentMatch}
+                index={index + 2}
+                />
+                ))}
+            </div>
+          ) : (
+            <></>
+            )}
+          {currentMatchList.length > 1 ? (
+            <button
+              className={`${styles.dropdownButton} ${dropButtonStyle} ${matchCountStyle}`}
+              onMouseDown={() => setShowDropdown(!showDropdown)}
+              >
+              <TbMenu />
+            </button>
+          ) : (
+            <></>
+            )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface CurrentMatchContentProp {
+  currentMatch: CurrentMatchListElement;
+  index: number;
+}
+
+export function CurrentMatchContent(prop: CurrentMatchContentProp) {
+  const { currentMatch, index } = prop;
+  const { startTime, isMatched, enemyTeam, isImminent } = currentMatch;
+
+  const currentMatchList =
+    useRecoilValue<CurrentMatchList>(currentMatchState).match;
+
+  const setModal = useSetRecoilState<Modal>(modalState);
+  const cancelButtonStyle =
+    isImminent && enemyTeam.length ? styles.block : styles.nonBlock;
+
+  const onCancel = (startTime: string) => {
     setModal({
       modalName: 'MATCH-CANCEL',
-      cancel: { isMatched, slotId, time },
+      cancel: { startTime: startTime },
     });
   };
 
+  const currentMatchContentStyle = index
+    ? styles.middle
+    : currentMatchList.length > 1
+    ? styles.mainMore
+    : styles.mainOne;
+
   return (
     <>
-      <div className={styles.container}>
-        <div className={styles.stringWrapper}>
-          <div className={styles.icon}> ⏰ </div>
-          <div className={styles.messageWrapper}>
-            {matchingMessage}
-            <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
-          </div>
+      <div
+        className={`${styles.currentMatchContent} ${currentMatchContentStyle}`}
+      >
+        <LoudSpeaker />
+        <div className={styles.messageWrapper}>
+          <MakeMessage time={startTime} isMatched={isMatched} />
+          <EnemyTeam enemyTeam={enemyTeam} isImminent={isImminent} />
         </div>
-        <div
-          className={
-            blockCancelButton ? styles.blockCancelButton : styles.cancelButton
-          }
+        <button
+          className={`${styles.cancelButton} ${cancelButtonStyle}`}
+          onClick={(event) => {
+            event.stopPropagation();
+            onCancel(startTime);
+          }}
         >
-          <input
-            type='button'
-            onClick={onCancel}
-            value={blockCancelButton ? '취소불가' : '취소하기'}
-          />
-        </div>
+          {cancelButtonStyle === styles.block
+            ? '취소 불가'
+            : '예약 취소'}
+        </button>
       </div>
     </>
   );
 }
 
-function makeMessage(time: string, isMatched: boolean) {
-  const formattedTime = gameTimeToString(time);
+interface MakeMessageProps {
+  time: string;
+  isMatched: boolean;
+}
+
+function MakeMessage({ time, isMatched }: MakeMessageProps) {
+  const formattedTime = `${stringToHourMin(time).sHour}시 ${
+    stringToHourMin(time).sMin
+  }분`;
   return (
     <div className={styles.message}>
       <span>{formattedTime}</span>
@@ -76,7 +151,7 @@ function makeMessage(time: string, isMatched: boolean) {
           '에 경기가 시작됩니다!'
         ) : (
           <>
-            <span> 참가자 기다리는 중</span>
+            <span>&nbsp;참가자 기다리는 중</span>
             <span className={styles.waitUpDown}>
               <span className={styles.span1}>.</span>
               <span className={styles.span2}>.</span>

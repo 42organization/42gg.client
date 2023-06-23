@@ -1,20 +1,23 @@
+export {};
+
 describe('매치 기능 테스트', () => {
   it('일반전 매칭과 패널티 테스트 🤔', () => {
     cy.login(Cypress.env('NORMAL_USERNAME'), Cypress.env('NORMAL_PASSWORD'));
     cy.origin(Cypress.env('HOME'), () => {
       // 매치 버튼 눌러 매치 페이지로
-      cy.get('a').filter('[class^=Layout_matchingButton]').click();
-      // 토글 눌러서 일반전으로 변경
+      cy.get('[class^=StyledButton_button]').click();
+      // 일반전으로 이동
       cy.wait(1000);
-      cy.get('[class^=ModeToggle_toggleButton]').click();
-      cy.get('span[class^=ModeToggle_toggleText]').should('have.text', '일반');
+      cy.get('[class^=ModeRadiobox_normal]').click();
       cy.wait(1000);
-      // 두번째로 가능한 슬롯 잡기
-      cy.register(1, '1/2');
+    });
+    // 첫번째로 가능한 슬롯 잡기
+    cy.register(0, '1/2');
+    cy.origin(Cypress.env('HOME'), () => {
       // TODO : alert 확인
       // 위 현재 매치 정보 확인, 취소 버튼 뜨는지 확인
       cy.wait(3000);
-      cy.get('[class^=CurrentMatchInfo_container]').should('exist');
+      cy.get('[class^=CurrentMatchInfo_currentMatchContent]').should('exist');
       cy.get('[class^=CurrentMatchInfo_cancelButton]').should('exist');
     });
     cy.logout(Cypress.env('NORMAL_USERNAME'));

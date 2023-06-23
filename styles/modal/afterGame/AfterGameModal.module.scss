@@ -1,37 +1,81 @@
 @import 'styles/common.scss';
 
 .container {
-  @include modal-container;
+  @include modalContainer('LIGHTPINK');
 }
 
 .phrase {
   @include modal-phrase;
-  margin-bottom: 1rem;
-  font-size: $big-font;
+
+  .titleNormal,
+  .titleRank {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    padding-bottom: 1.5rem;
+  }
+  .titleNormal {
+    color: rgba(122, 110, 123, 1);
+    font-family: 'Overgrow', sans-serif;
+    font-weight: 500;
+  }
+  .titleRank {
+    color: rgba(165, 95, 195, 1);
+  }
+  .message {
+    font-size: 1.25rem;
+    font-family: 'NanumSquare_acR', sans-serif;
+    font-weight: 800;
+    padding-bottom: 1.5rem;
+    letter-spacing: 0.04rem;
+  }
+
+  .rules {
+    font-size: 0.9rem;
+    font-family: 'NanumSquare_acR', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    white-space: pre-wrap;
+    line-height: 150%;
+    letter-spacing: 0.04rem;
+  }
 }
 
 .resultContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: stretch;
   width: 18rem;
-  height: 16rem;
-  padding: 0.8rem 0;
-  margin-bottom: 2rem;
-  border: 3px solid white;
-  border-radius: $small-radius;
+  height: 13.5rem;
+  margin-bottom: 3rem;
+  border: 1px solid rgba(221, 200, 224, 1);
+  border-radius: 0.625rem;
+  background-color: rgba(255, 255, 255, 1);
+  &.normal {
+    background-color: rgba(204, 173, 218, 1);
+  }
 }
 
 .players {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  font-size: $big-font;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-family: 'Roboto';
+  font-weight: 500;
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  .vs {
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 0.04rem;
+  }
   .user {
     .intraId {
       text-align: center;
+      letter-spacing: 0.04rem;
     }
   }
 }
@@ -41,26 +85,26 @@
   justify-content: space-evenly;
   align-items: center;
   height: 3rem;
-  font-size: $giant-font;
-  font-weight: 600;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
   text-align: center;
+  .middle {
+    font-size: 1.3rem;
+  }
   input {
-    font-size: $big-font;
+    font-size: 1.6rem;
+    font-weight: 800;
     text-align: center;
-    width: 5rem;
-    height: 2.5rem;
+    width: 4.25rem;
+    height: 2.2rem;
+    border: 2px solid rgba(221, 200, 224, 1);
+    border-radius: 0.3rem;
   }
 }
 
-.rules {
-  margin-bottom: 1.4rem;
-  font-size: $medium-font;
-  text-align: center;
-  white-space: pre-wrap;
-}
-
 .buttons {
-  @include select-buttons;
+  @include modalButton;
   .single {
     margin-right: 0;
   }

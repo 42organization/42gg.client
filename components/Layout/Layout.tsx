@@ -1,104 +1,46 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { userState, liveState } from 'utils/recoil/layout';
-import { reloadMatchState, openCurrentMatchState } from 'utils/recoil/match';
-import { errorState } from 'utils/recoil/error';
-import { modalState } from 'utils/recoil/modal';
-import { seasonListState } from 'utils/recoil/seasons';
-import { instance } from 'utils/axios';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { colorModeState } from 'utils/recoil/colorMode';
+import { loginState } from 'utils/recoil/login';
+import { userState } from 'utils/recoil/layout';
 import Statistics from 'pages/statistics';
 import Header from './Header';
 import Footer from './Footer';
-import CurrentMatch from './CurrentMatch';
 import AdminLayout from '../admin/Layout';
 import AdminReject from '../admin/AdminReject';
 import styles from 'styles/Layout/Layout.module.scss';
+import useAnnouncementCheck from 'hooks/Layout/useAnnouncementCheck';
+import useSetAfterGameModal from 'hooks/Layout/useSetAfterGameModal';
+import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
+import useLiveCheck from 'hooks/Layout/useLiveCheck';
+import HeaderStateContext from './HeaderContext';
+import StyledButton from 'components/StyledButton';
+import MainPageProfile from './MainPageProfile';
+import { openCurrentMatchState } from 'utils/recoil/match';
+import CurrentMatch from './CurrentMatch';
+import useAxiosResponse from 'hooks/useAxiosResponse';
+import { useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 type AppLayoutProps = {
   children: React.ReactNode;
 };
 
 export default function AppLayout({ children }: AppLayoutProps) {
-  const [user, setUser] = useRecoilState(userState);
-  const [live, setLive] = useRecoilState(liveState);
-  const [openCurrentMatch, setOpenCurrentMatch] = useRecoilState(
-    openCurrentMatchState
-  );
-  const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
-  const setSeasonList = useSetRecoilState(seasonListState);
-  const setError = useSetRecoilState(errorState);
-  const setModal = useSetRecoilState(modalState);
+  const user = useRecoilValue(userState);
+  const colorMode = useRecoilValue(colorModeState);
   const presentPath = useRouter().asPath;
-  const announcementTime = localStorage.getItem('announcementTime');
-  useEffect(() => {
-    getUserHandler();
-    getSeasonListHandler();
-  }, []);
+  const router = useRouter();
+  const openCurrentMatch = useRecoilValue(openCurrentMatchState);
 
-  const getAnnouncementHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/announcement`);
-      res.data.content !== '' &&
-        setModal({
-          modalName: 'EVENT-ANNOUNCEMENT',
-          announcement: res.data,
-        });
-    } catch (e) {
-      setError('RJ01');
-    }
-  };
-  const getSeasonListHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/seasonlist`);
-      setSeasonList({ ...res?.data });
-    } catch (e) {
-      setError('DK02');
-    }
-  };
-
-  useEffect(() => {
-    if (presentPath === '/') {
-      if (
-        !announcementTime ||
-        Date.parse(announcementTime) < Date.parse(new Date().toString())
-      )
-        getAnnouncementHandler();
-    } else setModal({ modalName: null });
-  }, [presentPath]);
-
-  useEffect(() => {
-    if (user.intraId) {
-      getLiveHandler();
-      if (reloadMatch) setReloadMatch(false);
-    }
-  }, [presentPath, user, reloadMatch]);
-
-  useEffect(() => {
-    if (live?.event === 'match') setOpenCurrentMatch(true);
-    else {
-      if (live?.event === 'game') setModal({ modalName: 'FIXED-AFTER_GAME' });
-      setOpenCurrentMatch(false);
-    }
-  }, [live]);
-
-  const getUserHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/users`);
-      setUser(res?.data);
-    } catch (e) {
-      setError('JB02');
-    }
-  };
-
-  const getLiveHandler = async () => {
-    try {
-      const res = await instance.get(`/pingpong/users/live`);
-      setLive({ ...res?.data });
-    } catch (e) {
-      setError('JB03');
-    }
+  useAxiosResponse();
+  useGetUserSeason();
+  useSetAfterGameModal();
+  useLiveCheck(presentPath);
+  useAnnouncementCheck(presentPath);
+  const onClickMatch = () => {
+    router.replace('/');
+    router.push(`/match`);
   };
 
   return presentPath.includes('/admin') ? (
@@ -109,22 +51,31 @@ export default function AppLayout({ children }: AppLayoutProps) {
     )
   ) : (
     <div className={styles.appContainer}>
-      <div className={styles.background}>
+      <div
+        className={`${styles.background} ${styles[colorMode.toLowerCase()]}`}
+      >
         <div>
           {presentPath === '/statistics' && user.isAdmin ? (
             <Statistics />
           ) : (
             user.intraId && (
               <>
-                <Header />
-                {openCurrentMatch && <CurrentMatch />}
+                <HeaderStateContext>
+                  <Header />
+                </HeaderStateContext>
                 {presentPath !== '/match' && presentPath !== '/manual' && (
-                  <Link href='/match'>
-                    <div className={styles.buttonContainer}>
-                      <div className={styles.matchingButton}>🏓</div>
+                  <div className={styles.buttonContainer}>
+                    <div className={styles.buttonWrapper}>
+                      <StyledButton onClick={onClickMatch} width={'5.5rem'}>
+                        Play
+                      </StyledButton>
                     </div>
-                  </Link>
+                  </div>
                 )}
+                <div className={styles.topInfo}>
+                  {openCurrentMatch && <CurrentMatch />}
+                  {presentPath === '/' && <MainPageProfile />}
+                </div>
                 {children}
                 <Footer />
               </>

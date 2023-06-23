@@ -1,6 +1,8 @@
 import { MatchMode } from './mainType';
+import { ISeason } from './seasonTypes';
 import { Value } from 'react-quill';
 import { IFeedback } from 'components/admin/feedback/FeedbackTable';
+import { ModifyScoreType } from 'types/admin/gameLogTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -8,7 +10,7 @@ type MenuModal = 'REPORT' | 'LOGOUT';
 
 type MatchModal = 'ENROLL' | 'REJECT' | 'CANCEL' | 'MANUAL';
 
-type UserModal = 'PROFILE_EDIT';
+type UserModal = 'PROFILE_EDIT' | 'KAKAO_EDIT';
 
 type FixedModal = 'AFTER_GAME' | 'STAT';
 
@@ -16,11 +18,11 @@ type AdminModal =
   | 'PROFILE'
   | 'PENALTY'
   | 'PENALTY_DELETE'
-  | 'NOTI_ALL'
   | 'NOTI_USER'
   | 'CHECK_FEEDBACK'
   | 'DETAIL_CONTENT'
-  | 'SEASON_EDIT';
+  | 'SEASON_EDIT'
+  | 'MODIFY_SCORE';
 
 type ModalName =
   | null
@@ -31,17 +33,13 @@ type ModalName =
   | `FIXED-${FixedModal}`
   | `ADMIN-${AdminModal}`;
 export interface Cancel {
-  isMatched: boolean;
-  slotId: number;
-  time: string;
+  startTime: string;
 }
 
 export interface Enroll {
-  slotId: number;
-  type: string;
+  startTime: string;
+  endTime: string;
   mode?: MatchMode;
-  slotStartTime: Date;
-  slotEndTime: Date;
 }
 
 export interface Announcement {
@@ -54,23 +52,16 @@ export interface Exp {
 }
 
 export interface Manual {
-  toggleMode: MatchMode;
+  radioMode: MatchMode;
 }
 
-export interface ISeason {
-  seasonId: number;
-  seasonMode: string;
-  seasonName: string;
-  startTime: Date;
-  endTime: Date;
-  startPpp: number;
-  pppGap: number;
-  status: number;
+export interface manual {
+  radioMode: MatchMode;
 }
 
 export interface Modal {
   modalName: ModalName;
-  manual?: Manual;
+  manual?: manual;
   cancel?: Cancel;
   enroll?: Enroll;
   announcement?: Announcement;
@@ -79,6 +70,7 @@ export interface Modal {
   intraId?: string;
   detailContent?: string;
   feedback?: IFeedback;
-  userId?: number;
+  penaltyId?: number;
   ISeason?: ISeason;
+  ModifyScore?: ModifyScoreType;
 }
