@@ -4,7 +4,6 @@ import { modalState } from 'utils/recoil/modal';
 import useBasicProfile from 'hooks/users/useBasicProfile';
 import PlayerImage from 'components/PlayerImage';
 import { AiOutlineEdit } from 'react-icons/ai';
-import { BsChatFill } from 'react-icons/bs';
 import styles from 'styles/user/Profile.module.scss';
 import Image from 'next/image';
 interface ProfileProps {
@@ -60,7 +59,12 @@ export default function BasicProfile({ profileId }: ProfileProps) {
                   setModal({ modalName: 'USER-KAKAO_EDIT' });
                 }}
               >
-                <Image src='/image/kakao.png' alt='kakao_login' fill />
+                <Image
+                  src='/image/kakao.png'
+                  alt='kakao_login'
+                  width='30'
+                  height='30'
+                />
               </div>
             </>
           )}
