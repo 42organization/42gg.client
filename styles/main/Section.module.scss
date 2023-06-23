@@ -4,6 +4,9 @@
   position: relative;
   z-index: 1;
   margin-top: 2.5rem;
+  &.mainRank {
+    margin-top: 1rem;
+  }
   > .titleWrap {
     display: flex;
     justify-content: space-between;

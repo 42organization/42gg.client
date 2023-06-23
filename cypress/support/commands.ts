@@ -61,19 +61,21 @@ Cypress.Commands.add('logout', (username: string) => {
 
 // target 표시의 슬롯 중 flag 번째의 슬롯을 등록하는 command
 Cypress.Commands.add('register', (flag: number, target: '+' | '1/2') => {
-  let count = 0;
-  cy.get('[class*=MatchSlot_plus]').each(($el4) => {
-    if ($el4.text() === target) {
-      if (flag != count) {
-        count++;
-        return;
+  cy.origin(Cypress.env('HOME'), () => {
+    let count = 0;
+    cy.get('[class*=MatchSlot_plus]').each(($el4) => {
+      if ($el4.text() === target) {
+        if (flag != count) {
+          count++;
+          return;
+        }
+        cy.wrap($el4).click();
+        return false;
       }
-      cy.wrap($el4).click();
-      return false;
-    }
+    });
+    cy.wait(1000);
+    cy.get('input[value=확인]').click();
   });
-  cy.wait(1000);
-  cy.get('input[value=확인]').click();
 });
 
 // 경기 결과 입력 테스트 command (success: true => 의도한 성공, false => 의도한 실패)

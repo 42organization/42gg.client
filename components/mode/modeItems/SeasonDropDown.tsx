@@ -16,8 +16,6 @@ export default function SeasonDropDown({
     <div className={styles.selectBox}>
       <select className={styles.select} onChange={onSelect} value={value}>
         {seasonList
-          .slice(0)
-          .reverse()
           .map((season: Season) => (
             <option key={season.id} value={season.id}>
               {season.name}
