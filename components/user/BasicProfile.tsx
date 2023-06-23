@@ -6,6 +6,7 @@ import PlayerImage from 'components/PlayerImage';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsChatFill } from 'react-icons/bs';
 import styles from 'styles/user/Profile.module.scss';
+import Image from 'next/image';
 interface ProfileProps {
   profileId: string;
 }
@@ -59,7 +60,7 @@ export default function BasicProfile({ profileId }: ProfileProps) {
                   setModal({ modalName: 'USER-KAKAO_EDIT' });
                 }}
               >
-                <BsChatFill size='20' />
+                <Image src='/image/kakao.png' alt='kakao_login' fill />
               </div>
             </>
           )}

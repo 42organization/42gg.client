@@ -2,7 +2,6 @@ import StyledButton from 'components/StyledButton';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { BsChatFill } from 'react-icons/bs';
 import styles from 'styles/Login.module.scss';
 
 function Login() {
@@ -44,9 +43,9 @@ function Login() {
             <StyledButton onClick={onLogin} width={'9rem'}>
               Sign in
             </StyledButton>
-            <button className={styles.kakaoBtn} onClick={onKakaoLogin}>
-              <BsChatFill size='1.5rem' />
-            </button>
+            <div className={styles.kakaoBtn} onClick={onKakaoLogin}>
+              <Image src='/image/kakao.png' alt='kakao_login' fill />
+            </div>
           </div>
         </div>
       </div>
