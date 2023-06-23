@@ -11,22 +11,27 @@ const instanceInManage = axios.create({ baseURL: manageBaseURL });
 
 // Function to refresh the access token
 const refreshAccessToken = async () => {
-  const setLoggedIn = useSetRecoilState<boolean>(loginState);
-
   try {
     const refreshToken = Cookies.get('refresh_token'); // Get the refresh token from the cookie
-    const response = await axios.post(
-      `${manageBaseURL}/pingpong/users/accesstoken?refreshToken=${refreshToken}`
+    const response = await fetch(
+      `${manageBaseURL}/pingpong/users/accesstoken?refreshToken=${refreshToken}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
     );
-    const newAccessToken = response.data.accessToken;
+    const data = await response.json();
+    const newAccessToken = data.accessToken;
 
     // Update the access token in localStorage
     localStorage.setItem('42gg-token', newAccessToken);
 
     return newAccessToken;
   } catch (error) {
-    setLoggedIn(false);
     // Handle error while refreshing the access token
+    throw new Error('Failed to refresh access token');
   }
 };
 
@@ -37,8 +42,8 @@ instance.interceptors.response.use(
   },
   async function onError(error) {
     const originalRequest = error.config;
+    const setLoggedIn = useSetRecoilState<boolean>(loginState);
 
-    console.log(originalRequest);
     if (
       error.response &&
       error.response.status === 401 &&
@@ -51,6 +56,7 @@ instance.interceptors.response.use(
         originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
         return instance(originalRequest);
       } catch (error) {
+        setLoggedIn(false);
         // Handle error while refreshing the access token or retrying the original request
         return Promise.reject(error);
       }
