@@ -1,19 +1,20 @@
+import { GameMode, GameStatus } from 'types/gameTypes';
 import styles from 'styles/game/GameResultItem.module.scss';
+import gameScore from '../GameScore';
 
 interface GameResultSmallScoreProps {
-  mode: string;
+  mode: GameMode;
+  status: GameStatus;
   scoreTeam1?: number;
   scoreTeam2?: number;
 }
 
 export default function GameResultSmallScore({
   mode,
+  status,
   scoreTeam1,
   scoreTeam2,
 }: GameResultSmallScoreProps) {
-  return (
-    <div className={styles.smallScoreBoard}>
-      {mode === 'normal' ? '일반전' : `${scoreTeam1} : ${scoreTeam2}`}
-    </div>
-  );
+  const score = gameScore('SMALL', mode, status, scoreTeam1, scoreTeam2);
+  return <div className={styles.smallScoreBoard}>{score}</div>;
 }

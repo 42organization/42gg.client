@@ -1,3 +1,5 @@
+export type GameType = 'NORMAL' | 'RANK';
+
 export interface ITeam {
   intraId1: string;
   intraId2?: string;
@@ -10,13 +12,18 @@ export interface IGameLog {
   gameId: number;
   startAt: Date;
   slotTime: string;
-  mode: string;
+  mode: GameType;
   team1: ITeam;
   team2: ITeam;
 }
 
 export interface IGames {
   gameLog: IGameLog[] | [];
-  currentPage: number;
   totalPage: number;
 }
+
+export type ModifyScoreType = {
+  gameId: number;
+  team1: ITeam;
+  team2: ITeam;
+};

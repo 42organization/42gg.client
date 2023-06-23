@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Life+Savers&display=swap');
+
 /* font-size */
 $giant-giant-font: 2.4rem;
 $giant-big-font: 2.1rem;
@@ -17,22 +19,31 @@ $big-radius: 5rem;
 $pp-red: #de1825;
 $pp-pink: #ffc5c8;
 $pp-blue: #471df0;
+$pp-gray: #7a6e7b;
 
 $rank-red: #de1825;
+$rank-purple: #b24bf1;
+$rank-hotpink: #ff7ac2;
 $rank-pink: #ffc5c8;
+$rank-pink2: #feede3;
+$rank-pink3: #ffc0d3;
 $rank-blue: #471df0;
 
 $norm-hotpink: #dc3789;
 $norm-lightblue: #5acfe8;
 $norm-lightblue2: #1ea1c8;
+$norm-purple: #b24bf1;
 $norm-emerald: #cef1d0;
 
 $light-gray: #f0f0f0;
 $gray: #dadada;
 $medium-gray: #cccccc;
 $dark-gray: #676767;
+$white1: #e3e2e2;
+$white2: #f6f6f6;
 
 $btn-blue: #2d80ed;
+$btn-purple: linear-gradient(180deg, #c66bf2 0%, rgba(96, 6, 138, 0.52) 100%);
 $dark-blue: #24098f;
 
 $g1-top: #8dbbf9;
@@ -45,7 +56,7 @@ $winner-blue: #040eff;
 
 /* font */
 $logo-font: 'Agonostic Italic', cursive;
-$title-font: 'Reality Hyper Regular', cursive;
+$title-font: 'Lexend';
 $admin-font: 'Inter', sans-serif;
 $text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
   0 -0.1rem black;
@@ -56,7 +67,6 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: 16rem;
   height: 100vh;
   overflow: auto;
 }
@@ -65,13 +75,11 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   all: unset;
   padding: 0.2rem 0.5rem;
   margin: 0.7rem 0;
-  background: linear-gradient(to bottom, white, $gray);
+  background: rgba(255, 255, 255, 0.3);
+  color: $light-gray;
+  font-weight: 700;
   text-align: center;
   cursor: pointer;
-  &:hover {
-    background: linear-gradient(to bottom, $gray, white);
-    color: $dark-gray;
-  }
 }
 
 @mixin reload-button {
@@ -79,13 +87,11 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 50%;
-  background: linear-gradient(to bottom, white, $gray);
+  background: rgba(255, 255, 255, 0.3);
+  color: $light-gray;
+  font-weight: 700;
   text-align: center;
   cursor: pointer;
-  &:hover {
-    color: $dark-gray;
-    background: linear-gradient(to bottom, $gray, white);
-  }
 }
 
 @mixin pageWrap {
@@ -103,21 +109,15 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin pageTitle {
-  margin-bottom: 1rem;
   color: white;
-  font-size: 2.8rem;
   font-family: $title-font;
-  text-align: center;
-  text-shadow: $text-border-black, 0.3rem 0.3rem 0 $pp-red;
-  letter-spacing: 0.1rem;
 }
 
 @mixin modalTitle {
-  color: white;
-  font-size: 2.5rem;
-  font-family: $title-font;
-  text-shadow: $text-border-black;
-  letter-spacing: 0.1rem;
+  font-size: 2rem;
+  font-family: 'Lexend', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
 }
 
 @mixin backdrop {
@@ -125,8 +125,8 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
   background: rgba(0, 0, 0, 0.5);
 }
 
@@ -137,8 +137,8 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   border-radius: $small-radius;
   background: if(
     $btn-color == white,
-    linear-gradient(to bottom, $btn-color, $medium-gray),
-    linear-gradient(to bottom, $btn-color, $dark-blue)
+    linear-gradient(180deg, rgba(44, 41, 46, 0.52) 0%, #454147 100%),
+    $btn-color
   );
   color: $txt-color;
   font-size: $medium-font;
@@ -152,50 +152,85 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   align-items: center;
   .negative {
     input {
-      @include button(white, black, $width, $height);
+      @include button(white, white, $width, $height);
     }
     margin-right: 1rem;
     :hover {
-      background: linear-gradient(to bottom, $medium-gray, white);
+      background: linear-gradient(
+        180deg,
+        rgba(38, 36, 40, 0.52) 0%,
+        #1d1b1e 100%
+      );
     }
   }
   .positive {
     input {
-      @include button($btn-blue, white, $width, $height);
+      background: linear-gradient(
+        180deg,
+        #c66bf2 0%,
+        rgba(96, 6, 138, 0.52) 100%
+      );
+      @include button($btn-purple, white, $width, $height);
     }
     :hover {
-      background: linear-gradient(to bottom, $dark-blue, $btn-blue);
+      background: linear-gradient(
+        180deg,
+        #ac3ce0 0%,
+        rgba(65, 4, 94, 0.72) 100%
+      );
     }
   }
 }
 
 @mixin modal-phrase {
-  line-height: 150%;
-  font-size: $big-font;
   text-align: center;
   .emoji {
-    margin-bottom: 1rem;
-    font-size: $giant-big-font;
+    padding-bottom: 1rem;
+    font-size: 2.5rem;
   }
   .subContent {
     line-height: 1.5;
     margin-top: 0.5rem;
-    color: $pp-blue;
-    font-size: $small-font;
   }
   margin-bottom: 2rem;
 }
 
-@mixin modal-container {
+@mixin modalContainer($type) {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   margin: 2rem 1.5rem;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.25);
+
+  @if ($type == 'DARKPURPLE') {
+    background: linear-gradient(
+      180deg,
+      #7f5792 0%,
+      #1d0b25 48.44%,
+      #775189 95.91%
+    );
+  } @else if ($type == 'LIGHTPINK') {
+    background: rgba(237, 214, 240, 1);
+  } @else if ($type == 'MISTYPINK') {
+    background: rgba(240, 210, 210, 1);
+  } @else if ($type == 'PINKWHITE') {
+    background: linear-gradient(180deg, #ce82c6 0%, #deb8ef 100%);
+  } @else if ($type == 'PINKVIOLET') {
+    background: linear-gradient(180deg, #cd82ce 0%, #ba9aff 100%);
+  } @else if ($type == 'SKYVIOLET') {
+    background: linear-gradient(180deg, #8ba2d2 0%, #6233af 100%);
+  } @else if ($type == 'SKYPINK') {
+    background: linear-gradient(180deg, #829ace 0%, #deb8ef 100%);
+  } @else if ($type == 'YELLOW') {
+    background: linear-gradient(180deg, #f2d210 0%, #f2b210 100%);
+  }
 }
 
 @mixin spanUpDownAnimation($fontSize, $padding) {
-  padding: $padding;
+  padding: 0 $padding;
   font-size: $fontSize;
   animation: upDown 0.75s infinite;
 }
@@ -204,9 +239,18 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   position: relative;
   width: $size;
   height: $size;
-  border: 1px solid white;
   border-radius: 50%;
   background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  img {
+    border-radius: 50%;
+  }
+}
+
+@mixin userRankImage($size) {
+  position: relative;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
   img {
     border-radius: 50%;
   }
@@ -220,5 +264,60 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   }
   20% {
     transform: translateY(-0.2rem);
+  }
+}
+
+@mixin modalButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'NanumSquare_acR', sans-serif;
+  .negative > input,
+  .positive > input {
+    width: 8rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 1);
+    border: 0;
+    border-radius: 0.625rem;
+    padding: 0.75rem 3.1rem;
+    font-size: 0.9rem;
+  }
+  .negative {
+    input {
+      background: linear-gradient(
+        180deg,
+        rgba(44, 41, 46, 0.52) 0%,
+        #454147 100%
+      );
+      margin-right: 1rem;
+      cursor: pointer;
+    }
+    :hover {
+      background: linear-gradient(
+        to right bottom,
+        rgba(44, 41, 46, 0.52) 0%,
+        #454147 100%
+      );
+    }
+  }
+  .positive {
+    input {
+      background: linear-gradient(
+        180deg,
+        #c66bf2 0%,
+        rgba(96, 6, 138, 0.52) 100%
+      );
+      cursor: pointer;
+    }
+    :hover {
+      background: linear-gradient(
+        to right bottom,
+        #c66bf2 0%,
+        rgba(96, 6, 138, 0.52) 100%
+      );
+    }
   }
 }

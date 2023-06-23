@@ -13,9 +13,15 @@
     min-width: 700px;
     margin: 10px auto;
     .title {
+      display: flex;
       font-weight: 600;
       font-size: $giant-font;
       line-height: 150%;
+      .currentBtn {
+        margin-left: 20px;
+        border: none;
+        border-radius: $small-radius;
+      }
     }
   }
   .tableContainer {

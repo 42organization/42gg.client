@@ -1,9 +1,4 @@
 import { useState } from 'react';
-import { useSetRecoilState, useResetRecoilState } from 'recoil';
-import { errorState } from 'utils/recoil/error';
-import { openMenuBarState } from 'utils/recoil/layout';
-import { modalState } from 'utils/recoil/modal';
-import { instance } from 'utils/axios';
 import styles from 'styles/modal/menu/ReportModal.module.scss';
 
 interface Report {
@@ -11,14 +6,16 @@ interface Report {
   content: string;
 }
 
+import useReportHandler from 'hooks/modal/useReportHandler';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from 'utils/recoil/modal';
+
 export default function ReportModal() {
+  const setModal = useSetRecoilState(modalState);
   const [report, setReport] = useState<Report>({
     category: '',
     content: '',
   });
-  const setModal = useSetRecoilState(modalState);
-  const setError = useSetRecoilState(errorState);
-  const resetOpenMenuBar = useResetRecoilState(openMenuBarState);
   const reportCategory = [
     { id: 'CHEERS', label: '응원의 한 마디' },
     { id: 'OPINION', label: '의견 제시' },
@@ -26,10 +23,6 @@ export default function ReportModal() {
     { id: 'BUG', label: '버그 신고' },
     { id: 'ETC', label: '기타' },
   ];
-  const reportResponse: { [key: string]: string } = {
-    SUCCESS: '의견 주셔서 감사합니다 ❤️',
-    REJECT: '마음을 담아 의견을 보내주세요 ❤️',
-  };
 
   const inputChangeHandler = ({
     target: { name, value },
@@ -42,25 +35,12 @@ export default function ReportModal() {
     }));
   };
 
-  const reportHandler = async () => {
-    if (report.category && report.content.replace(/^\s+|\s+$/g, '')) {
-      try {
-        await instance.post('/pingpong/feedback', report);
-        setModal({ modalName: null });
-        resetOpenMenuBar();
-        alert(reportResponse.SUCCESS);
-      } catch (e) {
-        setError('JH06');
-      }
-    } else {
-      alert(reportResponse.REJECT);
-    }
-  };
+  const reportHandler = useReportHandler(report);
 
   return (
     <div className={styles.container}>
       <div>
-        <div className={styles.emoji}>👮‍♀️</div>
+        <div className={styles.title}>42GG</div>
         <div className={styles.phrase}>Report</div>
       </div>
       <form>
@@ -78,13 +58,15 @@ export default function ReportModal() {
             </div>
           ))}
         </div>
-        <div className={styles.content}>
-          <textarea
-            name='content'
-            maxLength={300}
-            onChange={inputChangeHandler}
-          />
-          <div>{`${report.content.length}/300`}</div>
+        <div className={styles.contentWrapper}>
+          <div className={styles.content}>
+            <textarea
+              name='content'
+              maxLength={300}
+              onChange={inputChangeHandler}
+            />
+            <div>{`${report.content.length}/300`}</div>
+          </div>
         </div>
         <div className={styles.buttons}>
           <div className={styles.negative}>

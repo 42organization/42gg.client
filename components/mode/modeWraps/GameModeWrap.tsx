@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { SeasonMode } from 'types/mainType';
-import { seasonListState, latestSeasonIdState } from 'utils/recoil/seasons';
+import React, { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { SeasonMode, MatchMode } from 'types/mainType';
+import { colorModeState } from 'utils/recoil/colorMode';
 import UserGameSearchBar from 'components/mode/modeItems/UserGameSearchBar';
+import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
 import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
 import ModeRadiobox from 'components/mode/modeItems/ModeRadiobox';
 import styles from 'styles/mode/ModeWrap.module.scss';
@@ -23,30 +24,29 @@ export default function GameModeWrap({
   radioMode,
   setRadioMode,
 }: GameModeWrapProps) {
-  const latestSeasonId = useRecoilValue(latestSeasonIdState);
-  const { seasonList } = useRecoilValue(seasonListState);
-  const [season, setSeason] = useState<number>(latestSeasonId);
   const intraId = useRouter().query.intraId;
+  const { seasonList, season, seasonDropDownHandler, TitleSeasonHandler } =
+    useSeasonDropDown(clickTitle, intraId);
+  const setColorMode = useSetRecoilState(colorModeState);
 
   useEffect(() => {
-    setRadioMode('both');
-    setSeason(latestSeasonId);
+    setRadioMode('BOTH');
+    TitleSeasonHandler;
     if (clickTitle) setClickTitle(false);
   }, [clickTitle, intraId]);
 
   const modeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setColorMode(e.target.value as MatchMode);
     setRadioMode(e.target.value as SeasonMode);
   };
 
-  const seasonDropDownHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSeason(parseInt(e.target.value));
-  };
+  const isGamePage = useRouter().pathname === '/game';
 
   return (
     <div>
       <div className={styles.gameModeWrap}>
         <UserGameSearchBar />
-        {radioMode === 'rank' && seasonList && (
+        {radioMode === 'RANK' && seasonList && (
           <SeasonDropDown
             seasonList={seasonList}
             value={season}
@@ -54,7 +54,12 @@ export default function GameModeWrap({
           />
         )}
       </div>
-      <ModeRadiobox mode={radioMode} onChange={modeChangeHandler} />
+      <ModeRadiobox
+        mode={radioMode}
+        page='GAME'
+        onChange={modeChangeHandler}
+        zIndexList={!isGamePage}
+      />
       {React.cloneElement(children as React.ReactElement, {
         mode: radioMode,
         season,

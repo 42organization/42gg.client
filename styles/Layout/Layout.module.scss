@@ -5,36 +5,63 @@
   flex-direction: column;
   align-items: center;
   width: 100vw;
+  min-width: 380px;
   background: black;
 }
 
 .background {
   position: relative;
   width: 100vw;
+  min-width: 380px;
   max-width: 100vh;
   min-height: 100vh;
-  background-image: url('../../public/image/background_img.png');
+  background: linear-gradient(
+    180deg,
+    #301451 23.82%,
+    #481570 58.85%,
+    #300e4b 98.44%
+  );
+  &.both {
+    background: linear-gradient(
+      180deg,
+      #500247 0%,
+      #480141 21.35%,
+      #40013a 98.44%
+    );
+  }
+  &.normal {
+    background: linear-gradient(
+      180deg,
+      #1f2157 0%,
+      #1549cd 42.91%,
+      #001049 59.9%
+    );
+  }
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
 }
 
+.topInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .buttonContainer {
-  z-index: 1;
+  z-index: 3;
   position: sticky;
   top: 83%;
   margin-left: 75%;
-  .matchingButton {
+  .buttonWrapper {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
-    background: white;
-    font-size: 2.3rem;
-    box-shadow: 3px 3px 10px black;
-    cursor: pointer;
+    border-radius: 3rem;
+    width: 5.7rem;
+    box-shadow: 0 0 2rem 0.5rem rgba(245, 0, 165, 1);
   }
 }

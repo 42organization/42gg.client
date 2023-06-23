@@ -4,10 +4,16 @@ import styles from 'styles/admin/modal/DeletePenaltyModal.module.scss';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 
-export default function DeletePenaltyModal({ intraId }: { intraId: string }) {
+export default function DeletePenaltyModal({
+  intraId,
+  penaltyId,
+}: {
+  intraId: string;
+  penaltyId: number;
+}) {
   const resetModal = useResetRecoilState(modalState);
-  const deletePenalty = async (intraId: string) => {
-    await instanceInManage.delete(`/penalty/users/${intraId}`);
+  const deletePenalty = async (penaltyId: number) => {
+    await instanceInManage.delete(`/penalty/${penaltyId}`);
     resetModal();
   };
   return (
@@ -20,7 +26,7 @@ export default function DeletePenaltyModal({ intraId }: { intraId: string }) {
         <div className={styles.btns}>
           <button
             className={`${styles.btn} ${styles.first}`}
-            onClick={() => deletePenalty(intraId)}
+            onClick={() => deletePenalty(penaltyId)}
           >
             확인
           </button>

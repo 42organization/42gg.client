@@ -23,8 +23,8 @@ export default function PppStat({ stat }: PppChangeProps) {
 
   return (
     <div className={styles.pppWrap}>
-      <div className={`${styles.ppp} ${isWinner && styles.winner}`}>
-        <span>{ppp}</span>
+      <div className={styles.ppp}>
+        <span>{ppp}&nbsp;</span>
         <span>[{(changedPpp >= 0 ? '+' : '') + changedPpp}]</span>
       </div>
     </div>

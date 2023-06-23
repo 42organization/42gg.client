@@ -1,30 +1,47 @@
-export interface RankPlayer {
-  intraId: string;
-  userImageUri: string;
+// 전체, 일반, 랭크 게임 목록을 받아오는데 사용되는 데이터 타입들
+
+export type RankPlayer = Player & {
   wins: number;
   losses: number;
-  winRate: number;
-  pppChange: number | null;
-}
+};
 
-export interface NormalPlayer {
+export type Player = {
   intraId: string;
   userImageUri: string;
   level: number;
-}
+};
 
-export interface RankResult {
-  players: RankPlayer[] | NormalPlayer[];
+export type Team = {
+  players: Player[] | RankPlayer[];
   isWin?: boolean;
   score?: number;
-}
+};
 
-export interface Game {
+export type GameMode = 'NORMAL' | 'RANK';
+export type GameStatus = 'LIVE' | 'WAIT' | 'END';
+
+export type Game = {
   gameId: number;
-  mode: string;
-  team1: RankResult;
-  team2: RankResult;
-  type: string;
-  status: string;
+  status: GameStatus;
+  mode: GameMode;
   time: string;
-}
+
+  team1: Team;
+  team2: Team;
+};
+
+export type GameListData = {
+  games: Game[];
+  isLast: boolean;
+};
+
+export type GameResult = {
+  beforeExp: number;
+  beforeMaxExp: number;
+  beforeLevel: number;
+  increasedExp: number;
+  increasedLevel: number;
+  afterMaxExp: number;
+  changedPpp?: number;
+  beforePpp?: number;
+};

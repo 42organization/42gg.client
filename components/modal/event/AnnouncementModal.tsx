@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { Announcement } from 'types/modalTypes';
@@ -21,6 +21,7 @@ export default function AnnouncementModal({
 }: AnnouncementModalProps) {
   const setModal = useSetRecoilState(modalState);
   const [neverSeeAgain, setNeverSeeAgain] = useState<boolean>(false);
+
   const onCheck = () => {
     setNeverSeeAgain((prev) => !prev);
   };
@@ -30,13 +31,25 @@ export default function AnnouncementModal({
       const expires = new Date();
       expires.setHours(expires.getHours() + 24);
       localStorage.setItem('announcementTime', expires.toString());
+    } else {
+      localStorage.removeItem('announcementTime');
     }
     setModal({ modalName: null });
   };
 
+  useEffect(() => {
+    const announcementTime = localStorage.getItem('announcementTime');
+    if (announcementTime) {
+      const now = new Date();
+      if (new Date(announcementTime) > now) {
+        setNeverSeeAgain(true);
+      }
+    }
+  }, []);
+
   return (
     <div className={styles.container}>
-      <div className={styles.title}>Notice!</div>
+      <div className={styles.title}>Notice</div>
       <Quill
         className={styles.quillViewer}
         readOnly={true}

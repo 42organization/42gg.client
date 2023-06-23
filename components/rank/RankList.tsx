@@ -1,97 +1,76 @@
-import { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { MatchMode } from 'types/mainType';
+import React, { useState } from 'react';
 import { RankUser, NormalUser, Rank } from 'types/rankTypes';
-import { myRankState, scrollState } from 'utils/recoil/myRank';
-import { seasonListState } from 'utils/recoil/seasons';
-import { errorState } from 'utils/recoil/error';
-import { instance } from 'utils/axios';
 import RankListMain from './topRank/RankListMain';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
+import useRankList from 'hooks/rank/useRankList';
+import { useRecoilValue } from 'recoil';
+import { colorToggleSelector } from 'utils/recoil/colorMode';
 
 interface RankListProps {
-  toggleMode: MatchMode;
   season?: number;
   isMain?: boolean;
 }
+
 export default function RankList({
-  toggleMode,
   season,
-  isMain = false,
+  isMain,
 }: RankListProps) {
-  const [myRank, setMyRank] = useRecoilState(myRankState);
-  const [isScroll, setIsScroll] = useRecoilState(scrollState);
-  const { seasonMode } = useRecoilValue(seasonListState);
-  const setError = useSetRecoilState(errorState);
+  const Mode = useRecoilValue(colorToggleSelector);
   const [rank, setRank] = useState<Rank>();
+  const [ranker, setRanker] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
   const pageInfo = {
     currentPage: rank?.currentPage,
     totalPage: rank?.totalPage,
     setPage,
   };
-
-  const makePath = () => {
+  const makePath = (): string => {
     const modeQuery = (targetMode?: string) =>
-      targetMode !== 'normal' ? 'ranks/single' : 'vip';
-    const seasonQuery = toggleMode === 'rank' ? `&season=${season}` : '';
+      targetMode !== 'NORMAL' ? 'ranks/single' : 'exp';
+    const seasonQuery = Mode === 'RANK' ? `&season=${season}` : '';
     return isMain
-      ? `/pingpong/${modeQuery(seasonMode)}?page=1&count=3`
-      : `/pingpong/${modeQuery(toggleMode)}?page=${page}${seasonQuery}`;
+      ? `/pingpong/${modeQuery('RANK')}?page=1&size=3`
+      : `/pingpong/${modeQuery(Mode)}?page=${page}&size=20${seasonQuery}`;
   };
 
-  useEffect(() => {
-    async function waitRankList() {
-      await getRankDataHandler();
-    }
-
-    waitRankList().then(() => {
-      if (isScroll) {
-        window.scrollTo({
-          top: ((myRank[toggleMode] - 1) % 20) * 45,
-          behavior: 'smooth',
-        });
-        setIsScroll(false);
-      }
-    });
-  }, [page, isScroll]);
-
-  useEffect(() => {
-    page !== 1
-      ? ((pageInfo.currentPage = 1), setPage(1))
-      : getRankDataHandler();
-  }, [toggleMode, season]);
-
-  useEffect(() => {
-    if (isScroll) {
-      setPage(Math.ceil(myRank[toggleMode] / 20));
-    }
-  }, [isScroll]);
-
-  const getRankDataHandler = async () => {
-    try {
-      const res = await instance.get(`${makePath()}`);
-      setRank(res?.data);
-      setMyRank((prev) => ({ ...prev, [toggleMode]: res?.data.myRank }));
-    } catch (e) {
-      setError('DK01');
-    }
+  const makePathRanker = (): string => {
+    const modeQuery = (targetMode?: string) =>
+      targetMode !== 'NORMAL' ? 'ranks/single' : 'exp';
+    const seasonQuery = Mode === 'RANK' ? `&season=${season}` : '';
+    return isMain
+      ? `/pingpong/${modeQuery('RANK')}?page=1&size=3`
+      : `/pingpong/${modeQuery(Mode)}?page=1&size=3${seasonQuery}`;
   };
 
-  if (isMain) return <RankListMain rank={rank} />;
+  useRankList({
+    makePath: makePath(),
+    makePathRanker: makePathRanker(),
+    toggleMode: Mode,
+    season: season,
+    setRank: setRank,
+    setRanker: setRanker,
+    page: page,
+    setPage: setPage,
+    pageInfo: pageInfo,
+  });
+
+  if (isMain && ranker) {
+    return <RankListMain rank={ranker} isMain={true} />;
+  }
 
   return (
-    <RankListFrame toggleMode={toggleMode} pageInfo={pageInfo}>
-      {rank?.rankList.map((item: NormalUser | RankUser, index) => (
-        <RankListItem
-          key={index}
-          index={index}
-          toggleMode={toggleMode}
-          user={makeUser(item)}
-        />
-      ))}
-    </RankListFrame>
+    <div>
+      {ranker && <RankListMain rank={ranker} isMain={false} />}
+      <RankListFrame pageInfo={pageInfo}>
+        {rank?.rankList.map((item: NormalUser | RankUser, index) => (
+          <RankListItem
+            key={index}
+            user={makeUser(item)}
+          />
+        ))}
+      </RankListFrame>
+    </div>
   );
 }
 
@@ -105,7 +84,7 @@ function makeUser(user: NormalUser | RankUser) {
   const makeInit = (init: number) => (user.rank < 0 ? '-' : init);
   return {
     intraId: user.intraId,
-    rank: makeInit(user.rank),
+    rank: user.rank,
     statusMessage: makeStatusMessage(user.statusMessage),
     point: !isRankModeType(user) ? user.exp : makeInit(user.ppp),
     level: !isRankModeType(user) ? user.level : null,

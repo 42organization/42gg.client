@@ -3,6 +3,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { reloadMatchState } from 'utils/recoil/match';
 import EditProfileModal from './profile/EditProfileModal';
+import KakaoEditModal from './profile/KakaoEditModal';
 import LogoutModal from './menu/LogoutModal';
 import MatchCancelModal from './match/MatchCancelModal';
 import MatchEnrollModal from './match/MatchEnrollModal';
@@ -14,12 +15,12 @@ import AfterGameModal from './afterGame/AfterGameModal';
 import StatChangeModal from './statChange/StatChangeModal';
 import AdminProfileModal from './admin/AdminProfileModal';
 import AdminPenaltyModal from './admin/AdminPenaltyModal';
-import AdminNotiAllModal from './admin/AdminNotiAllModal';
 import AdminNotiUserModal from './admin/AdminNotiUserModal';
 import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
 import AdminSeasonEdit from './admin/SeasonEdit';
 import FeedbackDetailModal from './admin/FeedbackDetailModal';
 import DeletePenaltyModal from './admin/DeletePenaltyModal';
+import AdminModifyScoreModal from './admin/AdminModifyScoreModal';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
@@ -34,8 +35,9 @@ export default function ModalProvider() {
       intraId,
       detailContent,
       feedback,
-      userId,
+      penaltyId,
       ISeason,
+      ModifyScore,
     },
     setModal,
   ] = useRecoilState(modalState);
@@ -53,12 +55,12 @@ export default function ModalProvider() {
     'USER-PROFILE_EDIT': <EditProfileModal />,
     'FIXED-AFTER_GAME': <AfterGameModal />,
     'FIXED-STAT': <StatChangeModal {...exp} />,
-    'ADMIN-PROFILE': userId ? <AdminProfileModal value={userId} /> : null,
-    'ADMIN-PENALTY': intraId ? <AdminPenaltyModal value={intraId} /> : null,
-    'ADMIN-PENALTY_DELETE': intraId ? (
-      <DeletePenaltyModal intraId={intraId} />
-    ) : null,
-    'ADMIN-NOTI_ALL': <AdminNotiAllModal />,
+    'ADMIN-PROFILE': intraId ? <AdminProfileModal intraId={intraId} /> : null,
+    'ADMIN-PENALTY': intraId ? <AdminPenaltyModal intraId={intraId} /> : null,
+    'ADMIN-PENALTY_DELETE':
+      penaltyId && intraId ? (
+        <DeletePenaltyModal intraId={intraId} penaltyId={penaltyId} />
+      ) : null,
     'ADMIN-NOTI_USER': <AdminNotiUserModal />,
     'ADMIN-SEASON_EDIT': ISeason ? <AdminSeasonEdit {...ISeason} /> : null,
     'ADMIN-CHECK_FEEDBACK': feedback ? (
@@ -68,6 +70,10 @@ export default function ModalProvider() {
       intraId && detailContent ? (
         <FeedbackDetailModal intraId={intraId} detailContent={detailContent} />
       ) : null,
+    'ADMIN-MODIFY_SCORE': ModifyScore ? (
+      <AdminModifyScoreModal {...ModifyScore} />
+    ) : null,
+    'USER-KAKAO_EDIT': <KakaoEditModal />,
   };
 
   useEffect(() => {
@@ -92,7 +98,7 @@ export default function ModalProvider() {
         id='modalOutside'
         onClick={closeModalHandler}
       >
-        <div className={styles.modalContainer}>{content[modalName]}</div>
+        {content[modalName]}
       </div>
     )
   );

@@ -5,9 +5,9 @@ import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
 export function MatchTeams({ matchTeams }: { matchTeams: Players }) {
   return (
     <div className={styles.players}>
-      <Team team={matchTeams.myTeam.teams} />
-      <div>vs</div>
-      <Team team={matchTeams.enemyTeam.teams} />
+      <Team team={matchTeams.myTeam.players} />
+      <div className={styles.vs}>vs</div>
+      <Team team={matchTeams.enemyTeam.players} />
     </div>
   );
 }

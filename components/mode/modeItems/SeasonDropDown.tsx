@@ -15,11 +15,12 @@ export default function SeasonDropDown({
   return (
     <div className={styles.selectBox}>
       <select className={styles.select} onChange={onSelect} value={value}>
-        {seasonList.map((season: Season) => (
-          <option key={season.id} value={season.id}>
-            {season.name}
-          </option>
-        ))}
+        {seasonList
+          .map((season: Season) => (
+            <option key={season.id} value={season.id}>
+              {season.name}
+            </option>
+          ))}
       </select>
     </div>
   );

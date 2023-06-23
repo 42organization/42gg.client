@@ -14,8 +14,8 @@ export default function NormalGame({ currentGame, onSubmit }: NormalGameProps) {
 
   return (
     <div className={styles.container}>
-      <Guide condition={true} modalMode='normal' />
-      <div className={styles.resultContainer}>
+      <Guide condition={true} modalMode='NORMAL' />
+      <div className={`${styles.resultContainer} ${styles.normal}`}>
         <MatchTeams matchTeams={matchTeamsInfo} />
       </div>
       <div className={styles.buttons}>
