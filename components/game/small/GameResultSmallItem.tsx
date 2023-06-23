@@ -35,6 +35,7 @@ function GameResultSmallItem({
       <GameResultSmallTeam team={team1} position={'Left'} />
       <GameResultSmallScore
         mode={mode}
+        status={game.status}
         scoreTeam1={team1.score}
         scoreTeam2={team2.score}
       />
