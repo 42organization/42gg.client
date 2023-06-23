@@ -42,8 +42,10 @@ export default function MatchPage() {
   const getFirstOpenSlot = () => {
     for (let i = 0; i < matchBoards.length; i++) {
       const matchSlot = matchBoards[i];
-      if (matchSlot[0].status === 'open') {
-        return stringToHourMin(matchSlot[0].startTime).nHour;
+      for (let j = 0; j < matchSlot.length; j++) {
+        if (matchSlot[j].status === 'open') {
+          return stringToHourMin(matchSlot[j].startTime).nHour;
+        }
       }
     }
     return null;
