@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import useLogoutCheck from 'hooks/Login/useLogoutCheck';
 
-const baseURL = `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}`;
+const baseURL = process.env.NEXT_PUBLIC_SERVER_ENDPOINT;
 const manageBaseURL = process.env.NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT ?? '/';
 
 const instance = axios.create({ baseURL, withCredentials: true });
@@ -24,89 +24,81 @@ const refreshAccessToken = async () => {
   } catch (error) {
     const [onLogout] = useLogoutCheck();
     onLogout();
-    // throw error;
+    throw error;
   }
 };
 
+const setAuthHeaders = (config: any) => {
+  config.headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${accessToken}`,
+  };
+  return config;
+};
+
+const handleAuthError = async (error: any, originalRequest: any) => {
+  if (
+    error.response &&
+    error.response.status === 401 &&
+    !originalRequest._retry
+  ) {
+    originalRequest._retry = true;
+    await refreshAccessToken();
+    originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+    return axios(originalRequest);
+  }
+  return Promise.reject(error);
+};
+
+// Add a request interceptor to set authorization headers
 instance.interceptors.request.use(
-  async function setConfig(config) {
+  async function (config) {
     if (accessToken) {
-      config.headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      };
+      setAuthHeaders(config);
     } else {
-      try {
-        const newAccessToken = await refreshAccessToken();
-        config.headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${newAccessToken}`,
-        };
-      } catch (error) {
-        // Handle error
-        // throw error;
-      }
+      await refreshAccessToken();
+      setAuthHeaders(config);
     }
     return config;
   },
-  function getError(error) {
+  function (error) {
     return Promise.reject(error);
   }
 );
 
+// Add a response interceptor to handle token expiration
 instance.interceptors.response.use(
-  function handleResponse(response) {
+  function (response) {
     return response;
   },
-  async function handleErrorResponse(error) {
-    if (error.response && error.response.status === 401) {
-      const originalRequest = error.config;
-      const newAccessToken = await refreshAccessToken();
-      originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-      return axios(originalRequest);
-    }
-    return Promise.reject(error);
+  function (error) {
+    return handleAuthError(error, error.config);
   }
 );
 
+// Add a request interceptor for instanceInManage
 instanceInManage.interceptors.request.use(
-  async function setConfig(config) {
+  async function (config) {
     if (accessToken) {
-      config.headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      };
+      setAuthHeaders(config);
     } else {
-      try {
-        const newAccessToken = await refreshAccessToken();
-        config.headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${newAccessToken}`,
-        };
-      } catch (error) {
-        // Handle error
-        // throw error;
-      }
+      await refreshAccessToken();
+      setAuthHeaders(config);
     }
     return config;
   },
-  function getError(error) {
+  function (error) {
     return Promise.reject(error);
   }
 );
 
+// Add a response interceptor for instanceInManage
 instanceInManage.interceptors.response.use(
-  function handleResponse(response) {
+  function (response) {
     return response;
   },
-  async function handleErrorResponse(error) {
-    if (error.response && error.response.status === 401) {
-      const originalRequest = error.config;
-      const newAccessToken = await refreshAccessToken();
-      originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-      return axios(originalRequest);
-    }
-    return Promise.reject(error);
+  function (error) {
+    return handleAuthError(error, error.config);
   }
 );
 
