@@ -13,7 +13,7 @@ export default function KakaoEditModal() {
 
   const userTypeHandler = async () => {
     try {
-      const res = await instance.post('/pingpong/users/oauth');
+      const res = await instance.get('/pingpong/users/oauth');
       setUserType(res.data.oauthType);
     } catch (e: any) {
       setError('SW04');
