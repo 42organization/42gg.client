@@ -1,6 +1,5 @@
 import { Season } from 'types/seasonTypes';
 import styles from 'styles/mode/SeasonDropDown.module.scss';
-import { slice } from 'cypress/types/lodash';
 
 interface SeasonDropDownProps {
   seasonList: Season[];
@@ -13,7 +12,6 @@ export default function SeasonDropDown({
   value,
   onSelect,
 }: SeasonDropDownProps) {
-  console.log(seasonList);
   return (
     <div className={styles.selectBox}>
       <select className={styles.select} onChange={onSelect} value={value}>
