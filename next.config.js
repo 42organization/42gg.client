@@ -11,6 +11,7 @@ const nextConfig = {
       'cdn.intra.42.fr',
       'k.kakaocdn.net',
     ],
+    unoptimized: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
