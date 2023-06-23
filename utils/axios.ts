@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import useLogoutCheck from 'hooks/Login/useLogoutCheck';
 
 const baseURL = `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}`;
 const manageBaseURL = process.env.NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT ?? '/';
@@ -21,7 +22,8 @@ const refreshAccessToken = async () => {
     accessToken = response.data.access_token; // Update the access token
     return accessToken;
   } catch (error) {
-    // Handle error, e.g., redirect to login page
+    const [onLogout] = useLogoutCheck();
+    onLogout();
     // throw error;
   }
 };
