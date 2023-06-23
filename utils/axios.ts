@@ -19,6 +19,7 @@ const refreshAccessToken = async () => {
     const response = await axios.post(
       `${baseURL}/pingpong/users/accesstoken?refreshToken=${refreshToken}`
     );
+    console.log(accessToken);
     accessToken = response.data.access_token; // Update the access token
     return accessToken;
   } catch (error) {
