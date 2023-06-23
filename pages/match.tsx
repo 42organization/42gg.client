@@ -42,8 +42,10 @@ export default function MatchPage() {
   const getFirstOpenSlot = () => {
     for (let i = 0; i < matchBoards.length; i++) {
       const matchSlot = matchBoards[i];
-      if (matchSlot[0].status === 'open') {
-        return stringToHourMin(matchSlot[0].startTime).nHour;
+      for (let j = 0; j < matchSlot.length; j++) {
+        if (matchSlot[j].status === 'open' || matchSlot[j].status === 'match' || matchSlot[j].status === 'mytable') {
+          return stringToHourMin(matchSlot[j].startTime).nHour;
+        }
       }
     }
     return null;
@@ -54,7 +56,7 @@ export default function MatchPage() {
       <h1 className={`${styles.title} ${content[radioMode].style}`}>Match</h1>
       <div className={styles.buttonWrap}>
         {getFirstOpenSlot() === null && (
-          <div className={styles.notice}>❌ 열린 슬롯이 없습니다 😵‍💫 ❌</div>
+          <div className={styles.notice}>열린 슬롯이 없습니다 🫥</div>
         )}
         <button className={styles.manual} onClick={openManual}>
           매뉴얼

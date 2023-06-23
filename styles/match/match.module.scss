@@ -11,6 +11,11 @@
   align-items: center;
   margin-bottom: 1rem;
   margin-right: 0.6rem;
+  .notice {
+    margin-right: 1.8rem;
+    color: white;
+
+  }
   .manual {
     @include match-noti-button;
     margin: 0 0.8rem 0 0;
