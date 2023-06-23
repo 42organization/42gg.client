@@ -17,6 +17,7 @@ import StyledButton from 'components/StyledButton';
 import MainPageProfile from './MainPageProfile';
 import { openCurrentMatchState } from 'utils/recoil/match';
 import CurrentMatch from './CurrentMatch';
+import useAxiosResponse from 'hooks/useAxiosResponse';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -28,6 +29,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const presentPath = useRouter().asPath;
   const router = useRouter();
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
+
+  useAxiosResponse();
 
   useGetUserSeason();
   useSetAfterGameModal();
