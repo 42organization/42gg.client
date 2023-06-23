@@ -45,7 +45,7 @@ export default function CurrentMatch() {
     <div className={styles.currentMatchWrapper}>
       <div className={styles.currentMatchBanner}>
         <div className={styles.currentMatchMain}>
-          <CurrentMatchContent currentMatch={currentMatchList[0]} index={0} />
+          {currentMatchList && <CurrentMatchContent currentMatch={currentMatchList[0]} index={0} />}
         </div>
         <div
           className={`${styles.dropdownWrapper} ${dropdownStyle} ${matchCountStyle}`}
