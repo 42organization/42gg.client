@@ -1,12 +1,15 @@
-
 import styles from 'styles/modal/menu/KakaoEditModal.module.scss';
 import { instance } from 'utils/axios';
+import router from 'next/router';
 
 export default function NormalGame() {
   const clickLinkHandler = async () => {
     try {
       const accessToken = localStorage.getItem('42gg-token'); //localStorage에 토큰 저장을 안할시 수정필요
       await instance.post(`/pingpong/users/oauth/kakao?${accessToken}`);
+      router.push(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/oauth2/authorization/kakao`
+      );
     } catch (e: any) {
       alert(e.response.data.message);
     }
