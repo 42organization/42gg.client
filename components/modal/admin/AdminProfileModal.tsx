@@ -22,7 +22,7 @@ export default function AdminProfileModal(props: { intraId: string }) {
     losses: '',
     ppp: '',
     email: '',
-    roleType: 'USER',
+    roleType: 'ROLE_USER',
   });
 
   const { imgData, imgPreview, uploadImg } = useUploadImg();
