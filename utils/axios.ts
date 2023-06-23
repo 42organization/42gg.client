@@ -14,7 +14,7 @@ const refreshAccessToken = async () => {
   try {
     const refreshToken = Cookies.get('refresh_token'); // Get the refresh token from the cookie
     const response = await fetch(
-      `${manageBaseURL}/pingpong/users/accesstoken?refreshToken=${refreshToken}`,
+      `${baseURL}/pingpong/users/accesstoken?refreshToken=${refreshToken}`,
       {
         method: 'POST',
         headers: {
