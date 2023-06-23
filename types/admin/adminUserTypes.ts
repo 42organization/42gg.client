@@ -12,7 +12,7 @@ export type UserInfo = {
 };
 
 export const roleTypes = [
-  { id: 'USER', label: 'USER' },
-  { id: 'GUEST', label: 'GUEST' },
-  { id: 'ADMIN', label: 'ADMIN' },
+  { id: 'ROLE_USER', label: 'USER' },
+  { id: 'ROLE_MANAGER', label: 'MANAGER' },
+  { id: 'ROLE_ADMIN', label: 'ADMIN' },
 ];
