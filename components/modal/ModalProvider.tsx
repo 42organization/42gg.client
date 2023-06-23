@@ -3,6 +3,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { reloadMatchState } from 'utils/recoil/match';
 import EditProfileModal from './profile/EditProfileModal';
+import KakaoEditModal from './profile/KakaoEditModal';
 import LogoutModal from './menu/LogoutModal';
 import MatchCancelModal from './match/MatchCancelModal';
 import MatchEnrollModal from './match/MatchEnrollModal';
@@ -56,9 +57,10 @@ export default function ModalProvider() {
     'FIXED-STAT': <StatChangeModal {...exp} />,
     'ADMIN-PROFILE': intraId ? <AdminProfileModal intraId={intraId} /> : null,
     'ADMIN-PENALTY': intraId ? <AdminPenaltyModal intraId={intraId} /> : null,
-    'ADMIN-PENALTY_DELETE': penaltyId && intraId ? (
-      <DeletePenaltyModal intraId={intraId} penaltyId={penaltyId} />
-    ) : null,
+    'ADMIN-PENALTY_DELETE':
+      penaltyId && intraId ? (
+        <DeletePenaltyModal intraId={intraId} penaltyId={penaltyId} />
+      ) : null,
     'ADMIN-NOTI_USER': <AdminNotiUserModal />,
     'ADMIN-SEASON_EDIT': ISeason ? <AdminSeasonEdit {...ISeason} /> : null,
     'ADMIN-CHECK_FEEDBACK': feedback ? (
@@ -71,6 +73,7 @@ export default function ModalProvider() {
     'ADMIN-MODIFY_SCORE': ModifyScore ? (
       <AdminModifyScoreModal {...ModifyScore} />
     ) : null,
+    'USER-KAKAO_EDIT': <KakaoEditModal />,
   };
 
   useEffect(() => {

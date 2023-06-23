@@ -3,8 +3,9 @@ import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import useBasicProfile from 'hooks/users/useBasicProfile';
 import PlayerImage from 'components/PlayerImage';
-import styles from 'styles/user/Profile.module.scss';
 import { AiOutlineEdit } from 'react-icons/ai';
+import { BsChatFill } from 'react-icons/bs';
+import styles from 'styles/user/Profile.module.scss';
 interface ProfileProps {
   profileId: string;
 }
@@ -24,9 +25,6 @@ export default function BasicProfile({ profileId }: ProfileProps) {
     MAX_LEVEL,
   } = useBasicProfile({ profileId });
 
-  const startEditHandler = () => {
-    setModal({ modalName: 'USER-PROFILE_EDIT' });
-  };
   return (
     <div className={styles.container}>
       <div className={styles.level}>LV.{level}</div>
@@ -48,7 +46,22 @@ export default function BasicProfile({ profileId }: ProfileProps) {
         <div className={styles.intraId}>{intraId}</div>
         <div className={styles.buttons}>
           {user.intraId === profileId && (
-            <AiOutlineEdit onClick={startEditHandler} size='30' />
+            <>
+              <AiOutlineEdit
+                onClick={() => {
+                  setModal({ modalName: 'USER-PROFILE_EDIT' });
+                }}
+                size='30'
+              />
+              <div
+                className={styles.kakao}
+                onClick={() => {
+                  setModal({ modalName: 'USER-KAKAO_EDIT' });
+                }}
+              >
+                <BsChatFill size='20' />
+              </div>
+            </>
           )}
         </div>
       </div>

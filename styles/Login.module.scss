@@ -42,8 +42,19 @@
 
     .buttonContainer {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       margin-top: 7rem;
+    }
+
+    .kakaoBtn {
+      background: linear-gradient(180deg, #f2d210 0%, #f2b210 100%);
+      position: absolute;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-left: 15rem;
+      border-radius: 10%;
+      cursor: pointer;
     }
   }
 }

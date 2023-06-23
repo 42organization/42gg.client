@@ -62,9 +62,20 @@
 
 .buttons {
   display: flex;
-  justify-content: center;
   align-items: center;
+  margin-left: 15px;
   cursor: pointer;
+  .kakao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    border-radius: 2px;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(180deg, #f2d210 0%, #f2b210 100%);
+    color: black;
+  }
 }
 
 .modalbuttons {
@@ -159,8 +170,8 @@
 }
 
 .snsClicked {
-  color: #C66BF2;
-  border: solid 1px #C66BF2;
+  color: #c66bf2;
+  border: solid 1px #c66bf2;
 }
 
 .racketTypeWrap {
@@ -176,8 +187,8 @@
       opacity: 0;
     }
     :checked + .radioButton {
-      border: solid 1px #C66BF2;
-      color: #C66BF2;
+      border: solid 1px #c66bf2;
+      color: #c66bf2;
     }
     .radioButton {
       display: flex;
