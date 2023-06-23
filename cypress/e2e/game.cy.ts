@@ -71,6 +71,7 @@ describe('게임 기능 테스트', () => {
         });
       // wait for rendering
       cy.wait(1000);
+      // NOTE : 새로운 시즌이 시작된 경우에는 컴포넌트가 없는게 정상입니다.
       // 4. 랭크 게임으로 변경 및 컴포넌트 렌더링 확인
       cy.get('input[type="radio"][value="RANK"]')
         .as('rankRadioBtn')
