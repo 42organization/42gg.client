@@ -125,8 +125,8 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
   background: rgba(0, 0, 0, 0.5);
 }
 
@@ -156,7 +156,11 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
     }
     margin-right: 1rem;
     :hover {
-      background: linear-gradient(180deg, rgba(38, 36, 40, 0.52) 0%, #1d1b1e 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(38, 36, 40, 0.52) 0%,
+        #1d1b1e 100%
+      );
     }
   }
   .positive {

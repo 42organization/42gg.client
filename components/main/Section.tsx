@@ -20,7 +20,7 @@ export default function Section({ sectionTitle, path }: SectionProps) {
   };
 
   return (
-    <div className={styles['sectionWrap']}>
+    <div className={`${styles['sectionWrap']} ${path === 'rank' ? styles['mainRank'] : styles['sectionWrap']}`}>
       <div className={styles['titleWrap']}>
         <span>{sectionTitle}</span>
         <button onClick={() => router.push(`/${path}`)}>

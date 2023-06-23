@@ -17,9 +17,10 @@ const useRankGame = ({ currentGame, onSubmit }: UseRankGameProps) => {
     target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
     const intValue = parseInt(value);
+    const score: number | '' = isNaN(intValue) ? '' : (intValue > 2 || intValue < 0 ? '' : intValue);
     setResult((prev) => ({
       ...prev,
-      [name]: intValue > 2 || intValue < 0 ? '' : intValue,
+      [name]: score,
     }));
   };
 

@@ -16,8 +16,6 @@ type rankRequest = {
 
 type normalRequest = {
   gameId: number;
-  myTeamId: number;
-  enemyTeamId: number;
 };
 
 type responseTypes = Record<'SUCCESS' | 'DUPLICATED', string>;
@@ -69,8 +67,6 @@ const useSubmitModal = (currentGame: AfterGame) => {
   const submitNormalHandler = async () => {
     const requestBody: normalRequest = {
       gameId: gameId,
-      myTeamId: myTeam.teamId,
-      enemyTeamId: enemyTeam.teamId,
     };
     try {
       await instance.post(`/pingpong/games/normal`, requestBody);

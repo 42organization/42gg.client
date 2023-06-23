@@ -9,7 +9,7 @@ import { CurrentMatchList, CurrentMatchListElement } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 import { TbMenu } from 'react-icons/tb';
-import LoudSpeaker from 'components/Layout/LoudSpeaker';
+import LoudSpeaker from './LoudSpeaker';
 
 export default function CurrentMatch() {
   const currentMatchList =

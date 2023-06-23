@@ -28,11 +28,14 @@ const useMatchEnrollModal = ({ startTime, mode }: EnrollProps) => {
       await instance.post(`/pingpong/match?type=${mode}`, body);
       alert(enrollResponse.SUCCESS);
     } catch (e: any) {
-      console.log(e);
       if (e.response.data.code in enrollResponse)
         alert(enrollResponse[e.response.data.code]);
       else {
         setModal({ modalName: null });
+        if (e.response.status === 403) {
+          alert('카카오 유저는 경기에 등록할 수 없습니다.');
+          return;
+        }
         setError('JH05');
         return;
       }
