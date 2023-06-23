@@ -32,14 +32,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const presentPath = useRouter().asPath;
   const router = useRouter();
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
-  const setLogin = useSetRecoilState(loginState);
-  const token = Cookies.get('refresh_token');
-
-  useEffect(() => {
-    if (!token) {
-      setLogin(false);
-    }
-  }, [token]);
 
   useAxiosResponse();
   useGetUserSeason();
