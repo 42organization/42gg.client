@@ -1,114 +1,73 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import useLogoutCheck from 'hooks/Login/useLogoutCheck';
 
 const baseURL = `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}`;
 const manageBaseURL = process.env.NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT ?? '/';
 
-const instance = axios.create({ baseURL, withCredentials: true });
-const instanceInManage = axios.create({
-  baseURL: manageBaseURL,
-  withCredentials: true,
-});
+const instance = axios.create({ baseURL });
+const instanceInManage = axios.create({ baseURL: manageBaseURL });
 
-let accessToken = '';
-
+// Function to refresh the access token
 const refreshAccessToken = async () => {
   try {
-    const refreshToken = Cookies.get('refresh_token');
-    const response = await axios.post(
-      `${baseURL}/pingpong/users/accesstoken?refreshToken=${refreshToken}`
+    const refreshToken = Cookies.get('refresh_token'); // Get the refresh token from the cookie
+    const response = await instanceInManage.post(
+      '/pingpong/users/accessToken',
+      { refreshToken }
     );
-    console.log(accessToken);
-    accessToken = response.data.access_token; // Update the access token
-    return accessToken;
+    const newAccessToken = response.data.accessToken;
+
+    // Update the access token in localStorage
+    localStorage.setItem('42gg-token', newAccessToken);
+
+    return newAccessToken;
   } catch (error) {
-    const [onLogout] = useLogoutCheck();
-    onLogout();
-    // throw error;
+    // Handle error while refreshing the access token
+    throw new Error('Failed to refresh access token');
   }
 };
 
-instance.interceptors.request.use(
-  async function setConfig(config) {
-    if (accessToken) {
-      config.headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      };
-    } else {
-      try {
-        const newAccessToken = await refreshAccessToken();
-        config.headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${newAccessToken}`,
-        };
-      } catch (error) {
-        // Handle error
-        // throw error;
-      }
-    }
-    return config;
-  },
-  function getError(error) {
-    return Promise.reject(error);
-  }
-);
-
+// Axios interceptor for refreshing the access token
 instance.interceptors.response.use(
-  function handleResponse(response) {
+  function onSuccess(response) {
     return response;
   },
-  async function handleErrorResponse(error) {
-    if (error.response && error.response.status === 401) {
-      const originalRequest = error.config;
-      const newAccessToken = await refreshAccessToken();
-      originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-      return axios(originalRequest);
-    }
-    return Promise.reject(error);
-  }
-);
+  async function onError(error) {
+    const originalRequest = error.config;
 
-instanceInManage.interceptors.request.use(
-  async function setConfig(config) {
-    if (accessToken) {
-      config.headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      };
-    } else {
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true;
+
       try {
         const newAccessToken = await refreshAccessToken();
-        config.headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${newAccessToken}`,
-        };
+        originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+        return instance(originalRequest);
       } catch (error) {
-        // Handle error
-        // throw error;
+        // Handle error while refreshing the access token or retrying the original request
+        return Promise.reject(error);
       }
     }
-    return config;
-  },
-  function getError(error) {
+
     return Promise.reject(error);
   }
 );
 
-instanceInManage.interceptors.response.use(
-  function handleResponse(response) {
-    return response;
-  },
-  async function handleErrorResponse(error) {
-    if (error.response && error.response.status === 401) {
-      const originalRequest = error.config;
-      const newAccessToken = await refreshAccessToken();
-      originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-      return axios(originalRequest);
-    }
-    return Promise.reject(error);
-  }
-);
+// Request interceptor to set headers and withCredentials option
+const requestInterceptor = function setConfig(config: any) {
+  config.headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('42gg-token')}`,
+  };
+  config.withCredentials = true; // Add the withCredentials option
+  return config;
+};
+
+// Add request interceptor to both instances
+instance.interceptors.request.use(requestInterceptor);
+instanceInManage.interceptors.request.use(requestInterceptor);
 
 export { instance, instanceInManage };
