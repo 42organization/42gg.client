@@ -93,8 +93,22 @@ body {
 }
 
 @font-face {
-  font-family: 'LifeSavers';
-  src: url('../public/font/LifeSavers-Regular.ttf') format('opentype');
+  font-family: 'Sacramento';
+  src: url('../public/font/Sacramento-Regular.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../public/font/Roboto-Medium.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../public/font/Lexend-Medium.ttf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }

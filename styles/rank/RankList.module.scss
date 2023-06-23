@@ -41,9 +41,7 @@
   padding: 0 0.2rem;
   margin-top: 0rem;
   color: $dark-gray;
-  &:not(:nth-child(2)) {
-    margin-top: 0.15rem;
-  }
+  margin-top: 0.15rem;
 }
 
 .container {
