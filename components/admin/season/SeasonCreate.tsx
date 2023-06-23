@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
+import { ISeasonEditInfo } from 'types/seasonTypes';
 import {
   Paper,
   Table,
@@ -13,21 +14,12 @@ import {
 } from '@mui/material';
 import styles from 'styles/admin/season/SeasonCreate.module.scss';
 
-interface SeasonCreateInfo {
-  seasonName: string;
-  startTime: Date;
-  startPpp: number;
-  pppGap: number;
-  seasonMode: string;
-}
-
 export default function SeasonCreate() {
-  const [seasonInfo, setSeasonInfo] = useState<SeasonCreateInfo>({
+  const [seasonInfo, setSeasonInfo] = useState<ISeasonEditInfo>({
     seasonName: '',
     startTime: new Date(),
     startPpp: 0,
     pppGap: 0,
-    seasonMode: 'BOTH',
   });
   const setSnackBar = useSetRecoilState(toastState);
 
@@ -43,7 +35,7 @@ export default function SeasonCreate() {
 
   const postHandler = async () => {
     try {
-      await instance.post(`/pingpong/admin/season`, seasonInfo);
+      await instanceInManage.post(`/seasons`, seasonInfo);
       setSnackBar({
         toastName: 'Season Create',
         severity: 'success',
@@ -102,13 +94,6 @@ export default function SeasonCreate() {
                   name='pppGap'
                   onChange={inputChangeHandler}
                 />
-              </TableCell>
-              <TableCell>
-                <select name='seasonMode' onChange={inputChangeHandler}>
-                  <option value='BOTH'>BOTH</option>
-                  <option value='RANK'>RANK</option>
-                  <option value='NORMAL'>NORMAL</option>
-                </select>
               </TableCell>
             </TableRow>
           </TableBody>

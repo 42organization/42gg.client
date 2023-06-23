@@ -1,23 +1,14 @@
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { ISeason } from 'types/modalTypes';
-import instance from 'utils/axios';
+import { ISeason, ISeasonEditInfo } from 'types/seasonTypes';
+import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/SeasonEdit.module.scss';
 
-interface SeasonEditInfo {
-  seasonName: string;
-  startTime: Date;
-  startPpp: number;
-  pppGap: number;
-  seasonMode: string;
-}
-
 const AdminSeasonEdit = ({
   seasonId,
   seasonName,
-  seasonMode,
   pppGap,
   status,
   startPpp,
@@ -25,17 +16,16 @@ const AdminSeasonEdit = ({
 }: ISeason) => {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
-  const [seasonInfo, setSeasonInfo] = useState<SeasonEditInfo>({
+  const [seasonInfo, setSeasonInfo] = useState<ISeasonEditInfo>({
     seasonName,
     startTime,
     startPpp,
     pppGap,
-    seasonMode,
   });
 
   const editHandler = async () => {
     try {
-      await instance.put(`/pingpong/admin/season/${seasonId}`, seasonInfo);
+      await instanceInManage.put(`/seasons/${seasonId}`, seasonInfo);
       setSnackBar({
         toastName: 'Season Edit',
         severity: 'success',
@@ -84,20 +74,8 @@ const AdminSeasonEdit = ({
             />
           </div>
           <div>
-            <div className={styles.bodyText}>seasonMode</div>
-            {status === 1 ? (
-              <input value={seasonInfo.seasonMode} disabled={true} />
-            ) : (
-              <select name='seasonMode' onChange={inputChangeHandler}>
-                <option value='BOTH'>BOTH</option>
-                <option value='RANK'>RANK</option>
-                <option value='NORMAL'>NORMAL</option>
-              </select>
-            )}
-          </div>
-          <div>
             <div className={styles.bodyText}>startTime</div>
-            {status === 1 ? (
+            {status === 'CURRENT' ? (
               <input
                 value={seasonInfo.startPpp.toString()}
                 type='datetime-local'
@@ -108,14 +86,14 @@ const AdminSeasonEdit = ({
                 value={seasonInfo.startTime.toString()}
                 type='datetime-local'
                 name='startTime'
-                disabled={status === 1}
+                disabled={status === 'CURRENT'}
                 onChange={inputChangeHandler}
               />
             )}
           </div>
           <div>
             <div className={styles.bodyText}>startPpp</div>
-            {status === 1 ? (
+            {status === 'CURRENT' ? (
               <input value={seasonInfo.startPpp.toString()} disabled={true} />
             ) : (
               <input

@@ -2,19 +2,15 @@ import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { toastState } from 'utils/recoil/toast';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 
 export default function useAxiosWithToast() {
   const setSnackbar = useSetRecoilState(toastState);
-
-  const checkAdminURL = (url: string) => url.includes('admin');
 
   const getRequestRoute = (apiUrl: string) =>
     apiUrl.split('/').slice(3).join('/');
 
   const errorRequestHandler = (error: AxiosError) => {
-    if (!checkAdminURL(error.config.url as string)) throw error;
-
     setSnackbar({
       toastName: 'request error',
       severity: 'error',
@@ -24,7 +20,7 @@ export default function useAxiosWithToast() {
   };
 
   const errorResponseHandler = (error: AxiosError) => {
-    if (!checkAdminURL(error.config.url as string)) throw error;
+    if (error.response?.data) return Promise.reject(error);
 
     switch (error.response?.status) {
       case 400:
@@ -68,15 +64,13 @@ export default function useAxiosWithToast() {
         });
         break;
     }
-    throw error;
+    return;
   };
 
   const responseHandler = (response: AxiosResponse) => {
     const { status, config } = response;
     const { method, url } = config;
 
-    // * Admin page가 아니면 toast를 띄우지 않는다.
-    if (!checkAdminURL(url as string)) return response;
     if (method === 'get' && status === 200) return response;
 
     switch (status) {
@@ -85,6 +79,14 @@ export default function useAxiosWithToast() {
           toastName: `${getRequestRoute(url as string)} success`,
           severity: 'success',
           message: `🎉 ${response.data.message || '성공했습니다!'} 🎉`,
+          clicked: true,
+        });
+        break;
+      case 204:
+        setSnackbar({
+          toastName: `${getRequestRoute(url as string)} info`,
+          severity: 'success',
+          message: `🤔 ${response.data.message || '성공했습니다!'} 🤔`,
           clicked: true,
         });
         break;
@@ -114,20 +116,20 @@ export default function useAxiosWithToast() {
     return config;
   };
 
-  const responseInterceptor = instance.interceptors.response.use(
+  const responseInterceptor = instanceInManage.interceptors.response.use(
     (response) => responseHandler(response),
     (error) => errorResponseHandler(error)
   );
 
-  const requestInterceptor = instance.interceptors.request.use(
+  const requestInterceptor = instanceInManage.interceptors.request.use(
     (config) => requestHandler(config),
     (error) => errorRequestHandler(error)
   );
 
   useEffect(() => {
     return () => {
-      instance.interceptors.request.eject(requestInterceptor);
-      instance.interceptors.response.eject(responseInterceptor);
+      instanceInManage.interceptors.request.eject(requestInterceptor);
+      instanceInManage.interceptors.response.eject(responseInterceptor);
     };
   }, [responseInterceptor, requestInterceptor]);
 }

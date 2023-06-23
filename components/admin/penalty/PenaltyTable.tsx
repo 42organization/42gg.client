@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import {
   Table,
   TableBody,
@@ -11,13 +11,14 @@ import {
 } from '@mui/material';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import styles from 'styles/admin/penalty/PenaltyTable.module.scss';
 import { getFormattedDateToString } from 'utils/handleTime';
 
 interface IPenalty {
+  penaltyId: number;
   intraId: string;
   reason: string;
   releaseTime: Date;
@@ -44,10 +45,11 @@ export default function PenaltyTable() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
-  const setModal = useSetRecoilState(modalState);
+  const [current, setCurrent] = useState<boolean>(true);
+  const [modal, setModal] = useRecoilState(modalState);
 
-  const handleButtonAction = (intraId: string) =>
-    setModal({ modalName: 'ADMIN-PENALTY_DELETE', intraId });
+  const handleButtonAction = (intraId: string, penaltyId: number) =>
+    setModal({ modalName: 'ADMIN-PENALTY_DELETE', intraId, penaltyId });
 
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
@@ -56,8 +58,8 @@ export default function PenaltyTable() {
 
   const getUserPenalty = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `pingpong/admin/penalty/users?q=${intraId}&page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/penalty?intraId=${intraId}&page=${currentPage}&size=10&current=${current}`
       );
       setIntraId(intraId);
       setPenaltyInfo({
@@ -71,17 +73,17 @@ export default function PenaltyTable() {
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS07');
     }
-  }, [intraId, currentPage]);
+  }, [intraId, currentPage, current]);
 
   const getAllUserPenalty = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `pingpong/admin/penalty/users?page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/penalty?page=${currentPage}&size=10&current=${current}`
       );
       setIntraId('');
       setPenaltyInfo({
@@ -95,22 +97,30 @@ export default function PenaltyTable() {
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
+        currentPage: currentPage,
       });
     } catch (e) {
       console.error('MS08');
     }
-  }, [currentPage]);
+  }, [currentPage, current]);
 
   useEffect(() => {
     intraId ? getUserPenalty() : getAllUserPenalty();
-  }, [intraId, getUserPenalty, getAllUserPenalty]);
+  }, [intraId, getUserPenalty, getAllUserPenalty, modal]);
 
   return (
     <>
       <div className={styles.penaltyWrap}>
         <div className={styles.header}>
-          <span className={styles.title}>패널티 관리</span>
+          <span className={styles.title}>
+            <div>패널티 관리</div>
+            <button
+              className={styles.currentBtn}
+              onClick={() => setCurrent(!current)}
+            >
+              {current ? '현재기록' : '전체기록'}
+            </button>
+          </span>
           <AdminSearchBar initSearch={initSearch} />
         </div>
         <TableContainer className={styles.tableContainer} component={Paper}>
@@ -129,34 +139,44 @@ export default function PenaltyTable() {
             </TableHead>
             <TableBody className={styles.tableBody}>
               {penaltyInfo.penaltyList.length > 0 ? (
-                penaltyInfo.penaltyList.map((penalty: IPenalty) => (
-                  <TableRow key={penalty.intraId} className={styles.tableRow}>
-                    {tableFormat['penalty'].columns.map(
-                      (columnName: string) => (
-                        <TableCell
-                          key={columnName}
-                          className={styles.tableBodyItem}
-                        >
-                          {columnName !== 'etc'
-                            ? penalty[columnName as keyof IPenalty]?.toString()
-                            : tableFormat['penalty'].etc?.value.map(
-                                (buttonName: string) => (
-                                  <button
-                                    key={buttonName}
-                                    className={styles.button}
-                                    onClick={() =>
-                                      handleButtonAction(penalty.intraId)
-                                    }
-                                  >
-                                    {buttonName}
-                                  </button>
-                                )
-                              )}
-                        </TableCell>
-                      )
-                    )}
-                  </TableRow>
-                ))
+                penaltyInfo.penaltyList.map(
+                  (penalty: IPenalty, index: number) => (
+                    <TableRow key={index} className={styles.tableRow}>
+                      {tableFormat['penalty'].columns.map(
+                        (columnName: string) => (
+                          <TableCell
+                            key={columnName}
+                            className={styles.tableBodyItem}
+                          >
+                            {columnName !== 'etc'
+                              ? penalty[
+                                  columnName as keyof IPenalty
+                                ]?.toString()
+                              : tableFormat['penalty'].etc?.value.map(
+                                  (buttonName: string) =>
+                                    current ? (
+                                      <button
+                                        key={buttonName}
+                                        className={styles.button}
+                                        onClick={() =>
+                                          handleButtonAction(
+                                            penalty.intraId,
+                                            penalty.penaltyId
+                                          )
+                                        }
+                                      >
+                                        {buttonName}
+                                      </button>
+                                    ) : (
+                                      <></>
+                                    )
+                                )}
+                          </TableCell>
+                        )
+                      )}
+                    </TableRow>
+                  )
+                )
               ) : (
                 <TableRow>
                   <TableCell>비어있습니다</TableCell>

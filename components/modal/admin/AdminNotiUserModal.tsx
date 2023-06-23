@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import instance from 'utils/axios';
+import { instance, instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { GoSearch } from 'react-icons/go';
@@ -24,7 +24,7 @@ export default function AdminNotiUserModal() {
 
   const getSearchResultHandler = useCallback(async () => {
     try {
-      const res = await instance.get(`/pingpong/users/searches?q=${keyword}`);
+      const res = await instance.get(`/pingpong/users/searches?intraId=${keyword}`);
       setSearchResult(res?.data.users);
     } catch (e) {
       setSnackBar({
@@ -98,16 +98,12 @@ export default function AdminNotiUserModal() {
       return;
     }
     try {
-      const res = await instance.post(
-        `pingpong/admin/notifications/${keyword}`,
-        {
-          keyword,
-          message: notiContent.current?.value
-            ? notiContent.current?.value
-            : '알림 전송 실패',
-        }
-      );
-      if (res.status === 200) {
+      await instanceInManage.post(`/notifications`, {
+        intraId: keyword,
+        message: notiContent.current?.value
+          ? notiContent.current?.value
+          : '알림 전송 실패',
+      });
         setSnackBar({
           toastName: 'noti user',
           severity: 'success',
@@ -115,14 +111,6 @@ export default function AdminNotiUserModal() {
           clicked: true,
         });
         setModal({ modalName: null });
-      } else {
-        setSnackBar({
-          toastName: 'noti user',
-          severity: 'error',
-          message: `알림 전송에 실패했습니다.`,
-          clicked: true,
-        });
-      }
     } catch (e) {
       setSnackBar({
         toastName: 'noti user',

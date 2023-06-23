@@ -1,22 +1,19 @@
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import {
-  AdminProfileProps,
-  roleTypes,
-  UserInfo,
-} from 'types/admin/adminUserTypes';
+import { roleTypes, UserInfo } from 'types/admin/adminUserTypes';
 import { racketTypes } from 'types/userTypes';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminProfile.module.scss';
 
 const STAT_MSG_LIMIT = 30;
 
-export default function AdminProfileModal(props: AdminProfileProps) {
+export default function AdminProfileModal(props: { intraId: string }) {
   const [userInfo, setUserInfo] = useState<UserInfo>({
+    userId: 0,
     intraId: '',
     userImageUri: null,
     statusMessage: '',
@@ -38,9 +35,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
 
   const getBasicProfileHandler = async () => {
     try {
-      const res = await instance.get(
-        `/pingpong/admin/users/${props.value}/detail`
-      );
+      const res = await instanceInManage.get(`/users/${props.intraId}`);
       setUserInfo(res?.data);
     } catch (e) {
       setSnackBar({
@@ -78,8 +73,6 @@ export default function AdminProfileModal(props: AdminProfileProps) {
   const submitHandler = async () => {
     const formData = new FormData();
     const data = {
-      userId: props.value,
-      intraId: userInfo.intraId,
       statusMessage: userInfo.statusMessage,
       racketType: userInfo.racketType,
       wins: userInfo.wins,
@@ -89,20 +82,17 @@ export default function AdminProfileModal(props: AdminProfileProps) {
       roleType: userInfo.roleType,
     };
     formData.append(
-      'updateRequestDto',
+      'updateUserInfo',
       new Blob([JSON.stringify(data)], {
         type: 'application/json',
       })
     );
     if (imgData) {
-      formData.append(
-        'multipartFile',
-        new Blob([imgData], { type: 'image/jpeg' })
-      );
+      formData.append('imgData', new Blob([imgData], { type: 'image/jpeg' }));
     }
     try {
-      const res = await instance.put(
-        `/pingpong/admin/users/${props.value}/detail`,
+      const res = await instanceInManage.put(
+        `/users/${props.intraId}`,
         formData
       );
       if (res.status === 207) {
@@ -204,7 +194,7 @@ export default function AdminProfileModal(props: AdminProfileProps) {
                           onChange={inputHandler}
                           checked={userInfo?.racketType === racket.id}
                         />
-                        <div className={styles.radioButton}>{racket.label}</div>
+                        <div className={styles.radioButton}>{racket.id}</div>
                       </label>
                     );
                   })}

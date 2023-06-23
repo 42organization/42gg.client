@@ -47,7 +47,7 @@ export default function SlotCurrent(props: SlotCurrentProps) {
   return (
     <div>
       {slotInfo.matchBoards.map((slot: Slots[], index) => {
-        const slotTime = slotHour(slot[0].time);
+        const slotTime = slotHour(slot[0].startTime);
         return (
           <div
             key={index}
@@ -70,7 +70,7 @@ export default function SlotCurrent(props: SlotCurrentProps) {
             <div className={styles.hourSlot}>
               {slot.map((item) => (
                 <div
-                  key={item.slotId}
+                  key={item.startTime}
                   className={`${styles.minuteSlot}
 					${styles[`${item.status}`]}`}
                 >

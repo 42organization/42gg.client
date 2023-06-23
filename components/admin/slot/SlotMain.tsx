@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import instance from 'utils/axios';
+import { instance, instanceInManage } from 'utils/axios';
 import SlotCurrent from './SlotCurrent';
 import SlotPreview from './SlotPreview';
 import { toastState } from 'utils/recoil/toast';
@@ -14,6 +14,7 @@ export default function SlotMain() {
     futureSlotTime: 12,
     interval: 15,
     openMinute: 5,
+    startTime: new Date(),
   });
 
   const [slotInfo, setSlotInfo] = useState<CurrentMatch>({
@@ -26,10 +27,11 @@ export default function SlotMain() {
   const [firstHour, setFirstHour] = useState<number>(0);
   const setSnackbar = useSetRecoilState(toastState);
   const currentHour = new Date().getHours();
+  const koreaTimeOffset = 1000 * 60 * 60 * 9;
   const initScheduleInfo = async () => {
     try {
-      const res = await instance.get(`/pingpong/admin/slot`); //ToDo: api 명세 나오면 바꾸기
-      setScheduleInfo(res?.data);
+      const res = await instanceInManage.get(`/slot-management`);
+      setScheduleInfo(res?.data.slotList[0]);
     } catch (e) {
       console.error('SW00');
     }
@@ -41,13 +43,13 @@ export default function SlotMain() {
 
   const initSlotInfo = async () => {
     try {
-      const res = await instance.get(`/pingpong/match/tables/${1}/rank/single`);
+      const res = await instance.get(`/pingpong/match/time/scope?mode=rank`);
       setSlotInfo({ ...res?.data });
       setShowTime(res?.data.matchBoards.length);
-      setFirstHour(slotHour(res?.data.matchBoards[0][0].time));
+      setFirstHour(slotHour(res?.data.matchBoards[0][0].startTime));
       setLastHour(
         slotHour(
-          res?.data.matchBoards[res?.data.matchBoards.length - 1][0].time
+          res?.data.matchBoards[res?.data.matchBoards.length - 1][0].startTime
         ) + 1
       );
     } catch (e) {
@@ -71,6 +73,10 @@ export default function SlotMain() {
     if ((name === 'futurePreview' || name === 'openMinute') && intValue < 0)
       return;
     if (name === 'futurePreview') return setFuturePreview(intValue);
+    if (name === 'startDateTime') {
+      setScheduleInfo((prev) => ({ ...prev, ['startTime']: new Date(value) }));
+      return;
+    }
     setScheduleInfo((prev) => ({
       ...prev,
       [name]: intValue,
@@ -78,7 +84,7 @@ export default function SlotMain() {
   };
 
   const intervalOptions = Array.from({ length: 60 }, (_, i: number) => i + 1)
-    .filter((num) => 60 % num === 0)
+    .filter((num) => 60 % num === 0 && num >= 5 && num % 5 === 0)
     .map((num) => (
       <option key={`gt-${num}`} value={num}>
         {num}분
@@ -99,6 +105,26 @@ export default function SlotMain() {
     )
   );
 
+  const deleteHandler = async () => {
+    try {
+      await instanceInManage.delete(`/slot-management`);
+      setSnackbar({
+        toastName: `delete request`,
+        severity: 'success',
+        message: `최근 스케쥴이 삭제되었습니다.`,
+        clicked: true,
+      });
+      initSlotInfo();
+    } catch (e: any) {
+      setSnackbar({
+        toastName: `bad request`,
+        severity: 'error',
+        message: `🔥 ${e.response.data.message} 🔥`,
+        clicked: true,
+      });
+    }
+  };
+
   const finishHandler = async () => {
     if (scheduleInfo.openMinute > scheduleInfo.interval) {
       setSnackbar({
@@ -109,13 +135,34 @@ export default function SlotMain() {
       });
       return;
     }
+
+    const adjustedStartTime =
+      scheduleInfo.startTime instanceof Date
+        ? scheduleInfo.startTime.getTime() + koreaTimeOffset
+        : scheduleInfo.startTime;
+
     try {
-      await instance.put(`/pingpong/admin/slot`, scheduleInfo);
+      await instanceInManage.post(`/slot-management`, {
+        ...scheduleInfo,
+        startTime: new Date(adjustedStartTime),
+      });
+      setSnackbar({
+        toastName: `post request`,
+        severity: 'success',
+        message: `스케쥴이 새로 등록되었습니다.`,
+        clicked: true,
+      });
       initSlotInfo();
-    } catch (e) {
-      console.error('SW02');
+    } catch (e: any) {
+      setSnackbar({
+        toastName: `bad request`,
+        severity: 'error',
+        message: `🔥 ${e.response.data.message} 🔥`,
+        clicked: true,
+      });
     }
   };
+
   return (
     <div className={styles.content}>
       <div className={styles.previewContainer}>
@@ -156,9 +203,8 @@ export default function SlotMain() {
         <hr />
         <div className={styles.viewTime}>
           <div className={styles.futurePreview}>
-            <div>보여주는 시간:</div>
+            <div>보이는 슬롯(n시간 뒤):</div>
             <div className={styles.nTime}>
-              <div>N시간 뒤:</div>
               <input
                 type='number'
                 value={futurePreview}
@@ -228,7 +274,7 @@ export default function SlotMain() {
           </div>
         </div>
         <hr />
-        <div className={styles.blindShowTime}>
+        <div className={styles.timeContainer}>
           <div>블라인드 해제 시간:</div>
           <input
             type='number'
@@ -237,7 +283,16 @@ export default function SlotMain() {
             onChange={inputHandler}
           />
         </div>
+        <div className={styles.timeContainer}>
+          <div>슬롯 반영 시작날짜:</div>
+          <input
+            type='datetime-local'
+            name='startDateTime'
+            onChange={inputHandler}
+          />
+        </div>
         <div className={styles.btn}>
+          <button onClick={deleteHandler}>스케쥴 삭제</button>
           <button onClick={finishHandler}>적용</button>
         </div>
       </div>

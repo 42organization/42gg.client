@@ -1,12 +1,7 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
-import { useSetRecoilState } from 'recoil';
-import instance from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
 import styles from 'styles/admin/common/AdminSearchBar.module.scss';
-
-let timer: ReturnType<typeof setTimeout>;
+import useSearchBar from 'hooks/useSearchBar';
 
 const MAX_SEARCH_LENGTH = 15;
 
@@ -15,48 +10,24 @@ export default function AdminSearchBar({
 }: {
   initSearch: (intraId?: string) => void;
 }) {
-  const [keyword, setKeyword] = useState<string>('');
-  const [showDropDown, setShowDropDown] = useState<boolean>(false);
-  const [searchResult, setSearchResult] = useState<string[]>([]);
-  const setError = useSetRecoilState(errorState);
-  const searchBarRef = useRef<HTMLDivElement>(null);
+  const {
+    keyword,
+    setKeyword,
+    keywordHandler,
+    showDropDown,
+    setShowDropDown,
+    searchResult,
+    searchBarRef,
+  } = useSearchBar();
 
-  const getSearchResultHandler = useCallback(async () => {
-    try {
-      const res = await instance.get(`/pingpong/users/searches?q=${keyword}`);
-      setSearchResult(res?.data.users);
-    } catch (e) {
-      setError('MS02');
+  const adminhandleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      if (keyword === searchResult[0]) {
+        setShowDropDown(false);
+        event.currentTarget.blur();
+        initSearch(keyword);
+      }
     }
-  }, [keyword, setError]);
-
-  useEffect(() => {
-    const checkId = /^[a-z|A-Z|0-9|-]+$/;
-    if (keyword === '' || (keyword.length && !checkId.test(keyword))) {
-      clearTimeout(timer);
-      setSearchResult([]);
-    } else if (checkId.test(keyword)) {
-      debounce(getSearchResultHandler, 500)();
-    }
-  }, [keyword, getSearchResultHandler]);
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      searchBarRef.current &&
-      !searchBarRef.current.contains(event.target as Node)
-    )
-      setShowDropDown(false);
-  };
-
-  const keywordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyword(event.target.value);
   };
 
   return (
@@ -64,6 +35,7 @@ export default function AdminSearchBar({
       <input
         type='text'
         onChange={keywordHandler}
+        onKeyDown={adminhandleKeyDown}
         onFocus={() => setShowDropDown(true)}
         placeholder='유저 검색하기'
         maxLength={MAX_SEARCH_LENGTH}
@@ -113,13 +85,4 @@ export default function AdminSearchBar({
       )}
     </div>
   );
-}
-
-function debounce(callback: () => void, timeout: number) {
-  return () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      callback();
-    }, timeout);
-  };
 }

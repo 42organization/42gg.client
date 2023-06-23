@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import PageNation from 'components/Pagination';
 import { IGames, IGameLog } from 'types/admin/gameLogTypes';
-import instance from 'utils/axios';
-import { getFormattedDateToString } from 'utils/handleTime';
+import { instanceInManage } from 'utils/axios';
+import { getFormattedDateToString, gameTimeToString } from 'utils/handleTime';
 import AdminSearchBar from '../common/AdminSearchBar';
 import styles from 'styles/admin/games/GamesTable.module.scss';
+import ModifyScoreForm from './ModifyScoreForm';
 
 export default function GamesTable() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -12,7 +13,6 @@ export default function GamesTable() {
   const [gameInfo, setGameInfo] = useState<IGames>({
     gameLog: [],
     totalPage: 1,
-    currentPage: 1,
   });
 
   const initSearch = useCallback((intraId?: string) => {
@@ -22,8 +22,8 @@ export default function GamesTable() {
 
   const getAllGames = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `pingpong/admin/games?season=0&page=${currentPage}&size=5`
+      const res = await instanceInManage.get(
+        `/games?page=${currentPage}&size=4`
       );
 
       setGameInfo({
@@ -37,7 +37,6 @@ export default function GamesTable() {
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
       });
     } catch (e) {
       console.error('MS07');
@@ -46,8 +45,8 @@ export default function GamesTable() {
 
   const getUserGames = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `pingpong/admin/games/users?q=${intraId}&page=${currentPage}&size=5`
+      const res = await instanceInManage.get(
+        `/games/users?intraId=${intraId}&page=${currentPage}&size=4`
       );
       setGameInfo({
         gameLog: res.data.gameLogList.map((game: IGameLog) => {
@@ -60,7 +59,6 @@ export default function GamesTable() {
           };
         }),
         totalPage: res.data.totalPage,
-        currentPage: res.data.currentPage,
       });
     } catch (e) {
       console.error('MS08');
@@ -80,6 +78,8 @@ export default function GamesTable() {
         </div>
         <div className={styles.tableWrap}>
           {gameInfo.gameLog.map((game: IGameLog) => {
+            const { team1, team2 } = game;
+            const mode = game.mode.toUpperCase();
             return (
               <div className={styles.tableRow} key={game.gameId}>
                 <div className={styles.gameId}>{game.gameId}</div>
@@ -87,21 +87,28 @@ export default function GamesTable() {
                   <div>
                     시작 날짜: {game.startAt.toLocaleString().split(' ')[0]}
                   </div>
-                  <div>게임 모드: {game.mode}</div>
+                  <div>
+                    시작 시간: {gameTimeToString(game.startAt)}
+                  </div>
+                  <div>게임 모드: {mode}</div>
                   <div>슬롯 시간: {game.slotTime}분</div>
                   <div>
-                    {game.mode === 'Normal'
-                      ? ''
-                      : `Team 1 (${game.team1.score}) : Team 2 (${game.team2.score})`}
+                    {mode === 'RANK' && (
+                      <ModifyScoreForm
+                        gameId={game.gameId}
+                        team1={team1}
+                        team2={team2}
+                      />
+                    )}
                   </div>
                 </div>
                 <div className={styles.tableTeam}>
                   <div>team1</div>
                   <div
                     className={
-                      game.mode === 'Normal'
+                      mode === 'NORMAL'
                         ? styles.normal
-                        : game.team1.score === 2
+                        : game.team1.win
                         ? styles.win
                         : styles.lose
                     }
@@ -113,9 +120,9 @@ export default function GamesTable() {
                   <div>team2</div>
                   <div
                     className={
-                      game.mode === 'Normal'
+                      mode === 'NORMAL'
                         ? styles.normal
-                        : game.team2.score === 2
+                        : game.team2.win
                         ? styles.win
                         : styles.lose
                     }
@@ -123,13 +130,21 @@ export default function GamesTable() {
                     {game.team2.intraId1} {game.team2.intraId2}
                   </div>
                 </div>
+                <button
+                  type='submit'
+                  form={`Score-Modify-Form-${game.gameId}`}
+                  disabled={mode === 'NORMAL'}
+                  className={styles['modifyBtn']}
+                >
+                  수정
+                </button>
               </div>
             );
           })}
         </div>
         <div className={styles.pageNationContainer}>
           <PageNation
-            curPage={gameInfo.currentPage}
+            curPage={currentPage}
             totalPages={gameInfo.totalPage}
             pageChangeHandler={setCurrentPage}
           />

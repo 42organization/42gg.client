@@ -1,9 +1,10 @@
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { tableFormat } from 'constants/admin/table';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
+import { ISeason, ISeasonList } from 'types/seasonTypes';
 import {
   Paper,
   Table,
@@ -12,48 +13,21 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Tabs,
-  Tab,
 } from '@mui/material';
 import styles from 'styles/admin/season/SeasonList.module.scss';
 
-interface ISeason {
-  seasonId: number;
-  seasonMode: string;
-  seasonName: string;
-  startTime: Date;
-  endTime: Date;
-  startPpp: number;
-  pppGap: number;
-  status: number;
-}
-
-interface ISeasonTable {
-  mode: string;
-  seasonList: ISeason[];
-}
-
-const VAL_SEASON_MODE: { [key: number]: string } = {
-  0: 'both',
-  1: 'rank',
-  2: 'normal',
-};
 export default function SeasonList() {
   const setModal = useSetRecoilState(modalState);
-  const [seasonList, setSeasonList] = useState<ISeasonTable>({
-    mode: '',
+  const [useSeasonList, setUseSeasonList] = useState<ISeasonList>({
     seasonList: [],
   });
-  const [tabVal, setTabVal] = useState<number>(0);
-  const [selectedSeasonMode, setSelectedSeasonMode] = useState<string>(
-    VAL_SEASON_MODE[tabVal]
-  );
+
   const setSnackBar = useSetRecoilState(toastState);
 
-  const getSeasonList = async (mode: string) => {
+  const getSeasonList = async () => {
     try {
-      const res = await instance.get(`pingpong/admin/season/${mode}`);
-      setSeasonList({ ...res.data });
+      const res = await instanceInManage.get(`/seasons`);
+      setUseSeasonList({ ...res.data });
     } catch (e: any) {
       setSnackBar({
         toastName: 'Get Error',
@@ -65,12 +39,12 @@ export default function SeasonList() {
   };
 
   useEffect(() => {
-    getSeasonList(selectedSeasonMode);
-  }, [selectedSeasonMode]);
+    getSeasonList();
+  }, []);
 
   const deleteHandler = async (deleteId: number) => {
     try {
-      await instance.delete(`/pingpong/admin/season/${deleteId}`);
+      await instanceInManage.delete(`/seasons/${deleteId}`);
       setSnackBar({
         toastName: 'Season Delete',
         severity: 'success',
@@ -89,18 +63,6 @@ export default function SeasonList() {
 
   return (
     <div className={styles.container}>
-      <Tabs
-        value={tabVal}
-        onChange={(e: SyntheticEvent, newVal: number) => {
-          setTabVal(newVal);
-          setSelectedSeasonMode(VAL_SEASON_MODE[newVal]);
-        }}
-      >
-        <Tab label='BOTH' />
-        <Tab label='RANK' />
-        <Tab label='NORMAL' />
-      </Tabs>
-
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <TableHead className={styles.tableHeader}>
@@ -113,20 +75,23 @@ export default function SeasonList() {
             </TableRow>
           </TableHead>
           <TableBody className={styles.tableBody}>
-            {seasonList.seasonList.map((seasonL: ISeason, index: number) => (
+            {useSeasonList.seasonList.map((seasonL: ISeason, index: number) => (
               <TableRow key={index}>
                 {tableFormat['season'].columns.map(
-                  (columnName, index: number) => (
-                    <TableCell className={styles.tableBodyItem} key={index}>
+                  (columnName, innerIndex: number) => (
+                    <TableCell
+                      className={styles.tableBodyItem}
+                      key={`${index}-${innerIndex}`}
+                    >
                       {columnName === 'startTime' ||
                       columnName === 'endTime' ? (
                         seasonL[columnName as keyof ISeason]
                           ?.toString()
                           .replace('T', ' ')
                       ) : columnName === 'edit' ? (
-                        seasonL['status'] === 0 ? (
+                        seasonL['status'] === 'PAST' ? (
                           <div>과거 시즌입니다 !</div>
-                        ) : seasonL['status'] === 1 ? (
+                        ) : seasonL['status'] === 'CURRENT' ? (
                           <div>
                             <button
                               className={styles.editBtn}
@@ -140,7 +105,7 @@ export default function SeasonList() {
                               수정
                             </button>
                           </div>
-                        ) : seasonL['status'] === 2 ? (
+                        ) : seasonL['status'] === 'FUTURE' ? (
                           <div>
                             <button
                               className={styles.editBtn}

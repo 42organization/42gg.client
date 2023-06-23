@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { profileState } from 'utils/recoil/user';
-import { errorState } from 'utils/recoil/error';
-import { modalState } from 'utils/recoil/modal';
-import instance from 'utils/axios';
-import { racketTypes } from 'types/userTypes';
+import { ProfileBasic, racketTypes } from 'types/userTypes';
 import styles from 'styles/user/Profile.module.scss';
+import useEditProfileModal from 'hooks/modal/useEditProfileModal';
 
-interface EditedProfile {
+export interface EditedProfile {
   racketType: string;
   statusMessage: string;
   snsNotiOpt: 'NONE' | 'SLACK' | 'EMAIL' | 'BOTH';
@@ -16,9 +14,7 @@ interface EditedProfile {
 const CHAR_LIMIT = 30;
 
 export default function EditProfileModal() {
-  const setError = useSetRecoilState(errorState);
-  const setModal = useSetRecoilState(modalState);
-  const [profile, setProfile] = useRecoilState(profileState);
+  const [profile, setProfile] = useRecoilState<ProfileBasic>(profileState);
   const [editedProfile, setEditedProfile] = useState<EditedProfile>({
     racketType: profile.racketType,
     statusMessage: '',
@@ -28,6 +24,14 @@ export default function EditProfileModal() {
   const [email, setEmail] = useState<boolean>(false);
 
   const { racketType, statusMessage, snsNotiOpt } = profile;
+
+  const [finishEditHandler, cancelEditHandler] = useEditProfileModal({
+    slack: slack,
+    email: email,
+    editedProfile: editedProfile,
+    setProfile: setProfile,
+    intraId: profile.intraId,
+  });
 
   useEffect(() => {
     setEditedProfile((prev) => ({
@@ -64,31 +68,9 @@ export default function EditProfileModal() {
     }));
   };
 
-  const finishEditHandler = async () => {
-    if (slack && email) editedProfile.snsNotiOpt = 'BOTH';
-    else if (slack && !email) editedProfile.snsNotiOpt = 'SLACK';
-    else if (!slack && email) editedProfile.snsNotiOpt = 'EMAIL';
-    else editedProfile.snsNotiOpt = 'NONE';
-
-    setProfile((prev) => ({
-      ...prev,
-      ...editedProfile,
-    }));
-    try {
-      await instance.put(`/pingpong/users/detail`, editedProfile);
-      alert('프로필이 성공적으로 등록되었습니다.');
-    } catch (e) {
-      setError('JH02');
-    }
-    setModal({ modalName: null });
-  };
-
-  const cancelEditHandler = () => setModal({ modalName: null });
-
   return (
     <div className={styles.editContainer}>
       <div className={styles.phrase}>
-        <div className={styles.emoji}>✏️</div>
         <div className={styles.editModalTitle}>프로필 수정</div>
       </div>
       <div className={styles.statusMessageWrap}>
@@ -118,7 +100,7 @@ export default function EditProfileModal() {
                   onChange={inputChangeHandler}
                   checked={editedProfile.racketType === racket.id}
                 />
-                <div className={styles.radioButton}>{racket.label}</div>
+                <div className={styles.radioButton}>{racket.id}</div>
               </label>
             );
           })}
@@ -144,7 +126,7 @@ export default function EditProfileModal() {
           </div>
         </div>
       </div>
-      <div className={styles.buttons}>
+      <div className={styles.modalbuttons}>
         <div className={styles.negative}>
           <input type='button' onClick={cancelEditHandler} value='취소' />
         </div>

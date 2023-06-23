@@ -4,12 +4,12 @@ import { PenaltyInfo } from 'types/admin/adminPenaltyTypes';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { fillZero } from 'utils/handleTime';
-import instance from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import styles from 'styles/admin/modal/AdminPenalty.module.scss';
 
-export default function AdminPenaltyModal(props: { value: string }) {
+export default function AdminPenaltyModal(props: { intraId: string }) {
   const [penaltyInfo, setPenaltyInfo] = useState<PenaltyInfo>({
-    intraId: props.value,
+    intraId: props.intraId,
     reason: '',
     penaltyTime: 0,
   });
@@ -43,7 +43,7 @@ export default function AdminPenaltyModal(props: { value: string }) {
 
   const sendPenaltyHandler = async () => {
     const { intraId, penaltyTime, reason } = penaltyInfo;
-    if (intraId !== props.value) {
+    if (intraId !== props.intraId) {
       setSnackBar({
         toastName: 'penalty',
         severity: 'error',
@@ -70,13 +70,11 @@ export default function AdminPenaltyModal(props: { value: string }) {
       return;
     }
     try {
-      const res = await instance.post(
-        `pingpong/admin/users/${props.value}/penalty`,
-        {
-          reason,
-          penaltyTime,
-        }
-      );
+      const res = await instanceInManage.post(`/penalty`, {
+        intraId,
+        reason,
+        penaltyTime,
+      });
       if (res.status === 403) {
         setSnackBar({
           toastName: 'penalty',
@@ -116,7 +114,7 @@ export default function AdminPenaltyModal(props: { value: string }) {
             <input
               className={styles.intraBlank}
               name='intraID'
-              value={props.value}
+              value={props.intraId}
               readOnly
             />
           </div>

@@ -9,10 +9,10 @@
     "next/core-web-vitals",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "prettier",
+    "plugin:storybook/recommended"
   ],
-  "overrides": [
-  ],
+  "overrides": [],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -22,6 +22,5 @@
     "react",
     "@typescript-eslint"
   ],
-  "rules": {
-  }
+  "rules": {}
 }

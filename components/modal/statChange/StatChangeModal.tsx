@@ -1,34 +1,28 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Exp } from 'types/modalTypes';
-import instance from 'utils/axios';
+import { GameResult } from 'types/gameTypes';
 import { modalState } from 'utils/recoil/modal';
-import { errorState } from 'utils/recoil/error';
 import { reloadMatchState } from 'utils/recoil/match';
 import ExpStat from './ExpStat';
 import PppStat from 'components/modal/statChange/PppStat';
 import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 export default function StatChangeModal({ gameId, mode }: Exp) {
   const setModal = useSetRecoilState(modalState);
-  const setError = useSetRecoilState(errorState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
-  const [stat, setStat] = useState();
-
+  const [stat, setStat] = useState<GameResult | undefined>();
   useEffect(() => {
     getExpHandler();
   }, []);
 
-  const getExpHandler = async () => {
-    try {
-      const res = await instance.get(
-        `/pingpong/games/${gameId}/result/${mode}`
-      );
-      setStat({ ...res.data });
-    } catch (e) {
-      setError('KP03');
-    }
-  };
+  const getExpHandler = useAxiosGet({
+    url: `/pingpong/games/${gameId}/result/${mode?.toLowerCase()}`,
+    setState: setStat,
+    err: 'KP03',
+    type: 'setError',
+  });
 
   const closeModal = () => {
     setReloadMatch(true);
@@ -45,7 +39,7 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
       />
       <div className={styles.container}>
         <div className={styles.emoji}>🏓</div>
-        {mode === 'rank' && <PppStat stat={stat} />}
+        {mode === 'RANK' && <PppStat stat={stat} />}
         <ExpStat stat={stat} />
         <div className={styles.guide}>화면을 클릭해주세요!</div>
       </div>

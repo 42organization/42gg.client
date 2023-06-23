@@ -1,0 +1,76 @@
+@import 'styles/common.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1rem;
+  margin-bottom: 0.6rem;
+  border-radius: $medium-radius;
+  border-radius: 2rem;
+  background: linear-gradient(
+    180deg,
+    rgba(178, 118, 255, 0.414) 26.8%,
+    rgba(133, 112, 160, 0.46) 100%
+  );
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+  color: white;
+}
+
+.rankInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.5rem;
+  margin: -1.8rem 0 0.7rem 0;
+}
+
+.rank {
+  display: flex;
+  align-items: flex-end;
+  line-height: 100%;
+  margin-bottom: 0.3rem;
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  span:nth-child(1) {
+    margin-right: 0.2rem;
+    font-size: 1.5rem;
+  }
+  span:nth-child(2) {
+    padding-bottom: 0.15rem;
+  }
+}
+
+.pppWinRateWrap {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 0.3rem;
+  height: 1.7rem;
+  .ppp {
+    font-size: $medium-font;
+  }
+  .winRate {
+    margin-left: auto;
+    font-size: $small-font;
+    font-weight: 400;
+  }
+}
+
+.bar {
+  display: flex;
+  width: 100%;
+  height: 0.8rem;
+  border-radius: $mini-radius;
+  overflow: hidden;
+  .wins {
+    background: linear-gradient(
+      89.81deg,
+      #ff53a5 10.18%,
+      #ff017b 55.14%,
+      #ff409c 90.43%
+    );
+  }
+  .losses {
+    background: $white2;
+  }
+}

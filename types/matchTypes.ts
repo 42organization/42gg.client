@@ -1,23 +1,21 @@
 export interface Slot {
-  slotId: number;
-  status: string;
-  headCount: number;
-  time: string;
+  startTime: string;
   endTime: string;
-  mode: string;
+  status: string;
 }
 
-export type Slots = Slot[];
-
-export interface CurrentMatch {
-  slotId: number;
-  time: string;
+export interface Match {
+  matchBoards: Slot[][];
+}
+export interface CurrentMatchListElement {
+  startTime: string;
+  endTime: string;
   isMatched: boolean;
   myTeam: string[];
   enemyTeam: string[];
   isImminent: boolean;
 }
 
-export interface Match {
-  matchBoards: Slots[];
+export interface CurrentMatchList {
+  match: CurrentMatchListElement[];
 }
