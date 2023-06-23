@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import useLogoutCheck from 'hooks/Login/useLogoutCheck';
 
-const baseURL = process.env.NEXT_PUBLIC_SERVER_ENDPOINT;
+const baseURL = `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}`;
 const manageBaseURL = process.env.NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT ?? '/';
 
 const instance = axios.create({ baseURL, withCredentials: true });
@@ -15,7 +15,7 @@ let accessToken = '';
 
 const refreshAccessToken = async () => {
   try {
-    const refreshToken = Cookies.get('refreshToken');
+    const refreshToken = Cookies.get('refresh_token');
     const response = await axios.post(
       `${baseURL}/pingpong/users/accesstoken?refreshToken=${refreshToken}`
     );
@@ -24,81 +24,89 @@ const refreshAccessToken = async () => {
   } catch (error) {
     const [onLogout] = useLogoutCheck();
     onLogout();
-    throw error;
+    // throw error;
   }
 };
 
-const setAuthHeaders = (config: any) => {
-  config.headers = {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${accessToken}`,
-  };
-  return config;
-};
-
-const handleAuthError = async (error: any, originalRequest: any) => {
-  if (
-    error.response &&
-    error.response.status === 401 &&
-    !originalRequest._retry
-  ) {
-    originalRequest._retry = true;
-    await refreshAccessToken();
-    originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-    return axios(originalRequest);
-  }
-  return Promise.reject(error);
-};
-
-// Add a request interceptor to set authorization headers
 instance.interceptors.request.use(
-  async function (config) {
+  async function setConfig(config) {
     if (accessToken) {
-      setAuthHeaders(config);
+      config.headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      };
     } else {
-      await refreshAccessToken();
-      setAuthHeaders(config);
+      try {
+        const newAccessToken = await refreshAccessToken();
+        config.headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${newAccessToken}`,
+        };
+      } catch (error) {
+        // Handle error
+        // throw error;
+      }
     }
     return config;
   },
-  function (error) {
+  function getError(error) {
     return Promise.reject(error);
   }
 );
 
-// Add a response interceptor to handle token expiration
 instance.interceptors.response.use(
-  function (response) {
+  function handleResponse(response) {
     return response;
   },
-  function (error) {
-    return handleAuthError(error, error.config);
-  }
-);
-
-// Add a request interceptor for instanceInManage
-instanceInManage.interceptors.request.use(
-  async function (config) {
-    if (accessToken) {
-      setAuthHeaders(config);
-    } else {
-      await refreshAccessToken();
-      setAuthHeaders(config);
+  async function handleErrorResponse(error) {
+    if (error.response && error.response.status === 401) {
+      const originalRequest = error.config;
+      const newAccessToken = await refreshAccessToken();
+      originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+      return axios(originalRequest);
     }
-    return config;
-  },
-  function (error) {
     return Promise.reject(error);
   }
 );
 
-// Add a response interceptor for instanceInManage
+instanceInManage.interceptors.request.use(
+  async function setConfig(config) {
+    if (accessToken) {
+      config.headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      };
+    } else {
+      try {
+        const newAccessToken = await refreshAccessToken();
+        config.headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${newAccessToken}`,
+        };
+      } catch (error) {
+        // Handle error
+        // throw error;
+      }
+    }
+    return config;
+  },
+  function getError(error) {
+    return Promise.reject(error);
+  }
+);
+
 instanceInManage.interceptors.response.use(
-  function (response) {
+  function handleResponse(response) {
     return response;
   },
-  function (error) {
-    return handleAuthError(error, error.config);
+  async function handleErrorResponse(error) {
+    if (error.response && error.response.status === 401) {
+      const originalRequest = error.config;
+      const newAccessToken = await refreshAccessToken();
+      originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+      return axios(originalRequest);
+    }
+    return Promise.reject(error);
   }
 );
 
