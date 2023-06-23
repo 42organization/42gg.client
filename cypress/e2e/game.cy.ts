@@ -1,7 +1,7 @@
 export {};
 
 describe('게임 기능 테스트', () => {
-  before(() => {
+  beforeEach(() => {
     cy.login(Cypress.env('NORMAL_USERNAME'), Cypress.env('NORMAL_PASSWORD'));
   });
   beforeEach(() => {
@@ -13,29 +13,31 @@ describe('게임 기능 테스트', () => {
     cy.origin(Cypress.env('HOME'), () => {
       cy.wait(1000);
       // 1. 게임 컴포넌트 랜더링 확인
-      cy.get('[class^=GameResultItem]').then((gameResultItem) => {
+      const gameComponentRegex =
+        '[class^="GameResultItem"][class*="ItemContainer"]';
+      cy.get(gameComponentRegex).then(() => {
         // 2. big 컴포넌트와 small 컴포넌트 갯수 확인
-        cy.get('[class^=GameResultItem]')
-          .filter('[class^=GameResultItem_bigContainer]')
+        cy.get(gameComponentRegex)
+          .filter('[class^=GameResultItem_bigItemContainer]')
           .should('have.length', 1);
 
-        cy.get('[class^=GameResultItem]')
-          .filter('[class^=GameResultItem_smallContainer]')
+        cy.get(gameComponentRegex)
+          .filter('[class^=GameResultItem_smallItemContainer]')
           .should('have.length', 2);
 
         // 3. 첫번째 컴포넌트가 big인지 확인
-        cy.get('[class^=GameResultItem')
+        cy.get(gameComponentRegex)
           .first()
           .invoke('attr', 'class')
           .then((className) => {
             expect(className).to.include('big');
           });
         // 4. 첫번째 small 컴포넌트 클릭
-        cy.get('[class^=GameResultItem_smallContainer]').first().click();
+        cy.get('[class^=GameResultItem_smallItemContainer]').first().click();
         // wait for rendering
         cy.wait(1000);
         // 5. 첫번째 Container 컴포넌트가 small인지 확인
-        cy.get('[class^=GameResultItem')
+        cy.get(gameComponentRegex)
           .first()
           .invoke('attr', 'class')
           .then((className) => {
@@ -47,35 +49,36 @@ describe('게임 기능 테스트', () => {
   it('게임 페이지 이동 및 컴포넌트 렌더링 확인 🤔', () => {
     cy.origin(Cypress.env('HOME'), () => {
       //1. 게임 페이지 이동
-      cy.get('a').filter("[href='/game']").click();
+      cy.contains('Current Play').parent().find('button').click();
       // wait for rendering
       cy.wait(1000);
       // 2. 게임 컴포넌트 랜더링 확인
-      cy.get('input[value="더 보기"]').click();
+      cy.get('button[class*="getButton"]').click();
       // wait for rendering
       cy.wait(1000);
-      cy.get('div[class*="smallContainer"]').each(($el1) => {
+      cy.get('div[class*="smallItemContainer"]').each(($el1) => {
         cy.wrap($el1).click();
       });
       // 3. 노말 게임으로 변경 및 컴포넌트 렌더링 확인
-      cy.get('input[type="radio"][value="normal"]')
+      cy.get('input[type="radio"][value="NORMAL"]')
         .as('normalRadioBtn')
         .click()
         .then(() => {
           cy.wait(1000);
-          cy.get('div[class*="smallContainer"]').each(($el2) => {
+          cy.get('div[class*="smallItemContainer"]').each(($el2) => {
             cy.wrap($el2).click();
           });
         });
       // wait for rendering
       cy.wait(1000);
+      // NOTE : 새로운 시즌이 시작된 경우에는 컴포넌트가 없는게 정상입니다.
       // 4. 랭크 게임으로 변경 및 컴포넌트 렌더링 확인
-      cy.get('input[type="radio"][value="rank"]')
+      cy.get('input[type="radio"][value="RANK"]')
         .as('rankRadioBtn')
         .click()
         .then(() => {
           cy.wait(1000);
-          cy.get('div[class*="smallContainer"]').each(($el3) => {
+          cy.get('div[class*="smallItemContainer"]').each(($el3) => {
             cy.wrap($el3).click();
           });
         });
@@ -84,7 +87,7 @@ describe('게임 기능 테스트', () => {
   it('유저 검색 확인 🤔', () => {
     cy.origin(Cypress.env('HOME'), () => {
       // 1. 게임 페이지 이동
-      cy.get('a').filter("[href='/game']").click();
+      cy.contains('Current Play').parent().find('button').click();
       // wait for rendering
       cy.wait(1000);
       // 2. 가장 최근 경기한 유저 아이디 검색
@@ -101,13 +104,13 @@ describe('게임 기능 테스트', () => {
           // wait for rendering
           cy.wait(1000);
           // 3. 모든 작은 게임 컴포넌트에 유저 아이디가 일치하는지 확인
-          cy.get('[class^=GameResultItem_smallContainer]').each(
+          cy.get('[class^=GameResultItem_smallItemContainer]').each(
             ($smallContainer) => {
               const $smallTeams = $smallContainer.find(
                 '[class^=GameResultItem_smallTeam]'
               );
-              const intraId1 = $smallTeams.eq(0).find('span div').text();
-              const intraId2 = $smallTeams.eq(1).find('span div').text();
+              const intraId1 = $smallTeams.eq(0).find('span').text();
+              const intraId2 = $smallTeams.eq(1).find('span').text();
 
               if (intraId1 === userId || intraId2 === userId) {
                 return;
@@ -123,38 +126,40 @@ describe('게임 기능 테스트', () => {
     // 1. live 상태 컴포넌트 랜더링 확인
     cy.origin(Cypress.env('HOME'), () => {
       let gameId = '';
-      cy.get('[class^=GameResultItem_bigContainer]').each(($bigContainer) => {
-        const $bigScore = $bigContainer.find(
-          '[class^=GameResultItem_bigScore]'
-        );
-        const $status = $bigScore.find('[class^=GameResultItem_gameStatus]');
+      cy.get('[class^=GameResultItem_bigItemContainer]').each(
+        ($bigContainer) => {
+          const $bigScore = $bigContainer.find(
+            '[class^=GameResultItem_bigScore]'
+          );
+          const $status = $bigScore.find('[class^=GameResultItem_gameStatus]');
 
-        // 첫번째 컴포넌트 live 상태인지 확인 및 맞으면 저장
-        if (
-          $status.hasClass('GameResultItem_gameStatusWait') ||
-          ($status.text() && $status.text() === 'LIVE')
-        ) {
-          cy.wrap($bigContainer)
-            .invoke('attr', 'id')
-            .then((id) => {
-              gameId = String(id);
-            });
+          // 첫번째 컴포넌트 live 상태인지 확인 및 맞으면 저장
+          if (
+            $status.hasClass('GameResultItem_gameStatusWait') ||
+            ($status.text() && $status.text() === 'LIVE')
+          ) {
+            cy.wrap($bigContainer)
+              .invoke('attr', 'id')
+              .then((id) => {
+                gameId = String(id);
+              });
+          }
         }
-      });
-      cy.get('a').filter("[href='/game']").click();
+      );
+      cy.contains('Current Play').parent().find('button').click();
       // Wait for rendering
       cy.wait(2000);
-      cy.get('[class^=GameResultItem_bigContainer]')
+      cy.get('[class^=GameResultItem_bigItemContainer]')
         .invoke('attr', 'id')
         .then((id) => {
           if (gameId === id) {
             throw new Error('live 상태가 있습니다');
           }
         });
-      cy.get('div[class*="smallContainer"]').each(($el1) => {
+      cy.get('div[class*="smallItemContainer"]').each(($el1) => {
         cy.wrap($el1).click();
         cy.wait(1000);
-        cy.get('[class^=GameResultItem_bigContainer]')
+        cy.get('[class^=GameResultItem_bigItemContainer]')
           .invoke('attr', 'id')
           .then((id) => {
             if (gameId === id) {

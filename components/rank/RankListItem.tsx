@@ -2,8 +2,7 @@ import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import styles from 'styles/rank/RankList.module.scss';
-import { ToggleMode } from 'types/rankTypes';
-
+import { colorToggleSelector } from 'utils/recoil/colorMode';
 interface User {
   intraId: string;
   rank: number;
@@ -14,10 +13,10 @@ interface User {
 
 interface RankListItemProps {
   user: User;
-  toggleMode: ToggleMode;
 }
 
-export default function RankListItem({ user, toggleMode }: RankListItemProps) {
+export default function RankListItem({ user }: RankListItemProps) {
+  const Mode = useRecoilValue(colorToggleSelector);
   const { rank, intraId, statusMessage, point, level } = user;
   const myIntraId = useRecoilValue(userState).intraId;
   const wrapStyle = {
@@ -44,7 +43,7 @@ export default function RankListItem({ user, toggleMode }: RankListItemProps) {
   return (
     <div
       className={`${styles.rankItemWrap} ${wrapStyle.topStandard}
-        ${wrapStyle.myRankItem[toggleMode]} ${wrapStyle.rankItem[toggleMode]}`}
+        ${wrapStyle.myRankItem[Mode]} ${wrapStyle.rankItem[Mode]}`}
     >
       {rank}
       <div className={styles.intraId}>{makeIntraIdLink()}</div>

@@ -51,9 +51,11 @@ export default function useSearchBar(): useSearchBarReturn {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       searchResult.map((data) => {
-        if (data === keyword) setShowDropDown(false);
-        event.currentTarget.blur();
-        router.push(`/users/detail?intraId=${keyword}`);
+        if (data === keyword) {
+          setShowDropDown(false);
+          event.currentTarget.blur();
+          router.push(`/users/detail?intraId=${keyword}`);
+        }
       });
     }
   };
@@ -61,11 +63,13 @@ export default function useSearchBar(): useSearchBarReturn {
   const gamehandleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       searchResult.map((data) => {
-        if (data === keyword) setShowDropDown(false);
-        event.currentTarget.blur();
-        router.push(`/game?intraId=${keyword}`, undefined, {
-          shallow: true,
-        });
+        if (data === keyword) {
+          setShowDropDown(false);
+          event.currentTarget.blur();
+          router.push(`/game?intraId=${keyword}`, undefined, {
+            shallow: true,
+          });
+        }
       });
     }
   };

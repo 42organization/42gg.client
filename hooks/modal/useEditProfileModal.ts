@@ -37,16 +37,17 @@ const useEditProfileModal = ({
       editedProfile.snsNotiOpt = 'NONE';
     }
 
-    setProfile((prev) => ({
-      ...prev,
-      ...editedProfile,
-    }));
-
     try {
       await instance.put(`/pingpong/users/${intraId}`, editedProfile);
+      setProfile((prev) => ({
+        ...prev,
+        ...editedProfile,
+      }));
       alert('프로필이 성공적으로 등록되었습니다.');
-    } catch (e) {
-      setError('JH02');
+    } catch (e: any) {
+      if (e.response.status === 403) {
+        alert('카카오 유저는 프로필을 수정할 수 없습니다.');
+      } else setError('JH02');
     }
     setModal({ modalName: null });
   };
