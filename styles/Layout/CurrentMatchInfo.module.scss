@@ -1,6 +1,6 @@
 @import 'styles/common.scss';
 
-$bannerBackground: rgba(122, 105, 140, 0.9);
+$bannerBackground: rgba(255, 255, 255, 0.3);
 $cancelButton: rgba(0, 0, 0, 0.34);
 
 $message-color: rgba(39, 10, 70, 1);
@@ -41,6 +41,7 @@ $message-color: rgba(39, 10, 70, 1);
   align-items: center;
   padding: 0.28rem 0.375rem 0.28rem 0.75rem;
   background-color: $bannerBackground;
+  opacity: 100%;
   &.mainOne {
     border-radius: 0.5rem;
   }
