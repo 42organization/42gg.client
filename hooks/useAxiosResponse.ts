@@ -26,6 +26,10 @@ export default function useAxiosResponse() {
         return Promise.reject(error);
       }
     } else {
+      if (isRecalling === true) {
+        setLogin(false);
+        setIsRecalling(false);
+      }
       return Promise.reject(error);
     }
   };
