@@ -14,14 +14,14 @@ export default function User() {
       {typeof intraId === 'string' && (
         <div key={intraId}>
           <BasicProfile profileId={intraId} />
-          {/*<RankProfile profileId={intraId} />
+          <RankProfile profileId={intraId} />
           <div>
             <Section
               path={`game?intraId=${intraId}`}
               sectionTitle={'Recent Record'}
             />
           </div>
-          <GameResult />*/}
+          <GameResult />
         </div>
       )}
     </div>
