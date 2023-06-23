@@ -34,13 +34,7 @@ instance.interceptors.response.use(
   async function onError(error) {
     const originalRequest = error.config;
 
-    if (
-      error.response &&
-      error.response.status === 401 &&
-      !originalRequest._retry
-    ) {
-      originalRequest._retry = true;
-
+    if (error.response && error.response.status === 401) {
       try {
         const newAccessToken = await refreshAccessToken();
         originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
