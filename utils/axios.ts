@@ -1,5 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useSetRecoilState } from 'recoil';
+import { loginState } from 'utils/recoil/login';
 
 const baseURL = `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}`;
 const manageBaseURL = process.env.NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT ?? '/';
@@ -9,10 +11,13 @@ const instanceInManage = axios.create({ baseURL: manageBaseURL });
 
 // Function to refresh the access token
 const refreshAccessToken = async () => {
+  const setLoggedIn = useSetRecoilState<boolean>(loginState);
+
   try {
     const refreshToken = Cookies.get('refresh_token'); // Get the refresh token from the cookie
     const response = await instanceInManage.post(
-      `/pingpong/users/accessToken?refreshToken=${refreshToken}`
+      '/pingpong/users/accessToken',
+      { refreshToken }
     );
     const newAccessToken = response.data.accessToken;
 
@@ -21,8 +26,8 @@ const refreshAccessToken = async () => {
 
     return newAccessToken;
   } catch (error) {
+    setLoggedIn(false);
     // Handle error while refreshing the access token
-    throw new Error('Failed to refresh access token');
   }
 };
 
@@ -34,7 +39,13 @@ instance.interceptors.response.use(
   async function onError(error) {
     const originalRequest = error.config;
 
-    if (error.response && error.response.status === 401) {
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true;
+
       try {
         const newAccessToken = await refreshAccessToken();
         originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
