@@ -16,7 +16,7 @@ const refreshAccessToken = async () => {
   try {
     const refreshToken = Cookies.get('refresh_token'); // Get the refresh token from the cookie
     const response = await instanceInManage.post(
-      `/pingpong/users/accessToken?refreshToken=${refreshToken}`
+      `/pingpong/users/accesstoken?refreshToken=${refreshToken}`
     );
     const newAccessToken = response.data.accessToken;
 
