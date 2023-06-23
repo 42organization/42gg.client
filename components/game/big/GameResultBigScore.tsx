@@ -2,6 +2,7 @@ import { getTimeAgo } from 'utils/handleTime';
 import { GameStatus, GameMode } from 'types/gameTypes';
 import { SeasonMode } from 'types/mainType';
 import styles from 'styles/game/GameResultItem.module.scss';
+import gameScore from '../GameScore';
 
 interface GameResultBigScoreProps {
   mode: GameMode;
@@ -20,12 +21,11 @@ export default function GameResultBigScore({
   scoreTeam2,
   radioMode,
 }: GameResultBigScoreProps) {
+  const score = gameScore('BIG', mode, status, scoreTeam1, scoreTeam2);
   return (
     <div className={styles.bigScoreBoard}>
       <ScoreStatus status={status} time={time} radioMode={radioMode} />
-      <div className={styles.gameScore}>
-        {mode === 'NORMAL' ? 'VS' : `${scoreTeam1} : ${scoreTeam2}`}
-      </div>
+      <div className={styles.gameScore}>{score}</div>
     </div>
   );
 }
