@@ -12,7 +12,7 @@ instance.interceptors.request.use(
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('42gg-token')}`,
     };
-    config.withCredentials = true; // Add the withCredentials option
+    config.withCredentials = true;
     return config;
   },
   function getError(error) {
@@ -26,7 +26,7 @@ instanceInManage.interceptors.request.use(
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('42gg-token')}`,
     };
-    config.withCredentials = true; // Add the withCredentials option
+    config.withCredentials = true;
     return config;
   },
   function getError(error) {

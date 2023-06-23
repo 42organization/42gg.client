@@ -1,6 +1,6 @@
 @import 'styles/common.scss';
 
-$bannerBackground: rgba(122, 105, 140, 0.9);
+$bannerBackground: rgba(255, 255, 255, 0.3);
 $cancelButton: rgba(0, 0, 0, 0.34);
 
 $message-color: rgba(39, 10, 70, 1);
@@ -8,6 +8,8 @@ $message-color: rgba(39, 10, 70, 1);
 .currentMatchWrapper {
   width: 100%;
   max-width: 28rem;
+  position: relative;
+  z-index: 2;
 }
 
 .currentMatchBanner {
@@ -196,6 +198,7 @@ $message-color: rgba(39, 10, 70, 1);
     border: 0;
     padding: 0;
     font-size: 0.7rem;
+    cursor: pointer;
     &.dropup {
       &.two {
         animation: twoDropdown 0.4s ease;

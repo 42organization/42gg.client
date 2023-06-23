@@ -17,7 +17,7 @@ export default function InfScroll(path: string) {
       return lastPage.isLast ? undefined : allPages.length + 1;
     },
     onError: (e: any) => {
-      if (e.response.data.code === 'UF001') setError('JB07');
+      if (e.response.data && e.response.data.code === 'UF001') setError('JB07');
       else setError('KP01');
     },
     retry: 0,

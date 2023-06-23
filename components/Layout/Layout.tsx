@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { colorModeState } from 'utils/recoil/colorMode';
+import { loginState } from 'utils/recoil/login';
 import { userState } from 'utils/recoil/layout';
 import Statistics from 'pages/statistics';
 import Header from './Header';
@@ -18,6 +19,8 @@ import MainPageProfile from './MainPageProfile';
 import { openCurrentMatchState } from 'utils/recoil/match';
 import CurrentMatch from './CurrentMatch';
 import useAxiosResponse from 'hooks/useAxiosResponse';
+import { useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -29,9 +32,16 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const presentPath = useRouter().asPath;
   const router = useRouter();
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
+  const setLogin = useSetRecoilState(loginState);
+  const token = Cookies.get('refresh_token');
+
+  useEffect(() => {
+    if (!token) {
+      setLogin(false);
+    }
+  }, [token]);
 
   useAxiosResponse();
-
   useGetUserSeason();
   useSetAfterGameModal();
   useLiveCheck(presentPath);

@@ -27,6 +27,8 @@ export default function InputScore({
           name='myTeamScore'
           type='number'
           value={result.myTeamScore}
+          min={0}
+          max={2}
           onChange={onChange}
           onKeyDown={keyPressHandler}
         />
@@ -38,6 +40,8 @@ export default function InputScore({
           name='enemyTeamScore'
           type='number'
           value={result.enemyTeamScore}
+          min={0}
+          max={2}
           onChange={onChange}
           onKeyDown={keyPressHandler}
         />

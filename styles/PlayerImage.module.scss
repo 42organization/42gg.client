@@ -27,7 +27,7 @@
 .gameResultBig {
   @include imageWrap;
   div {
-    @include gameResultImage(2.734rem);
+    @include gameResultImage(2.8rem);
     cursor: pointer;
   }
 }
@@ -35,7 +35,7 @@
 .gameResultSmall {
   @include imageWrap;
   div {
-    @include gameResultImage(1.853rem);
+    @include gameResultImage(2rem);
   }
 }
 
@@ -154,7 +154,7 @@
   }
 }
 
-@media (max-width: 467px) {
+@media (max-width: 457px) {
   .ranktropy {
     div {
       @include userRankImage(4rem);

@@ -125,8 +125,8 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
   background: rgba(0, 0, 0, 0.5);
 }
 

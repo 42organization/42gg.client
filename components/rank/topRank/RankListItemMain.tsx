@@ -4,16 +4,19 @@ import { RankUser, NormalUser } from 'types/rankTypes';
 import styles from 'styles/rank/RankListMain.module.scss';
 import PlayerImage from 'components/PlayerImage';
 import { TbQuestionMark } from 'react-icons/tb';
-import useModeToggle from 'hooks/mode/useModeToggle';
+import { useRecoilValue } from 'recoil';
+import { colorToggleSelector } from 'utils/recoil/colorMode';
+
 interface RankListItemMainProps {
   user: NormalUser | RankUser;
 }
 
 export default function RankListItemMain({ user }: RankListItemMainProps) {
   const { rank, intraId, userImageUri } = user;
+  const Mode = useRecoilValue(colorToggleSelector);
   const rankFiltered = rank < 0 ? '-' : rank;
-  const { Mode } = useModeToggle();
   const renderLink = intraId !== 'intraId';
+
   return (
     <div className={`${styles.mainData} ${Mode === 'NORMAL' && styles.normal}`}>
       <div
@@ -44,10 +47,7 @@ export default function RankListItemMain({ user }: RankListItemMainProps) {
               <div>
                 <div className={`${styles.questionCircleRank}`}>
                   {
-                    <TbQuestionMark
-                      color='603B88'
-                      size={rank === 1 ? '80' : '65'}
-                    />
+                    <TbQuestionMark className={` ${rank === 1 ? styles.rank1 : styles.ranks}`}/>
                   }
                 </div>
                 <span>{intraId}</span>

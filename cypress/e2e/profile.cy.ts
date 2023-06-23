@@ -1,13 +1,13 @@
 export {};
 
 describe('프로필 기능 테스트 🥳', () => {
-  before(() => {
+  beforeEach(() => {
     cy.login(Cypress.env('ADMIN_USERNAME'), Cypress.env('ADMIN_PASSWORD'));
   });
   beforeEach(() => {
     cy.origin(Cypress.env('HOME'), () => {
       cy.visit(Cypress.env('HOME'));
-      cy.get('[class^=PlayerImage_header]').click();
+      cy.get('[class^=MainPageProfile_myImage]').click();
     });
   });
   it('페이지 이동 및 이름 랜더링 확인 🤔', () => {
@@ -20,7 +20,7 @@ describe('프로필 기능 테스트 🥳', () => {
       // wait for rendering
       cy.wait(1000);
       // 2. 이름 랜더링 확인
-      cy.get('[class^=user_title]').should(
+      cy.get('[class^=Profile_intraId]').should(
         'have.text',
         Cypress.env('ADMIN_USERNAME')
       );
@@ -34,7 +34,7 @@ describe('프로필 기능 테스트 🥳', () => {
         const oldStatusMessage = statusElement.text();
         const newStatusMessage = 'not changed';
         // 1. 취소 버튼 작동 확인
-        cy.get('input[value=edit]').click();
+        cy.get('[class^=Profile_buttons] > svg').click();
         cy.get('textarea').clear();
         cy.wait(1000);
         cy.get('textarea').type(newStatusMessage);
@@ -44,7 +44,7 @@ describe('프로필 기능 테스트 🥳', () => {
           oldStatusMessage
         );
         // 2. modal close 작동 확인
-        cy.get('input[value=edit]').click();
+        cy.get('[class^=Profile_buttons] > svg').click();
         cy.get('textarea').clear();
         cy.wait(1000);
         cy.get('textarea').type(newStatusMessage);
@@ -59,11 +59,11 @@ describe('프로필 기능 테스트 🥳', () => {
   it('프로필 edit 기능 확인 🤔 - 알림', () => {
     cy.intercept(
       'PUT',
-      `${Cypress.env('SERVER_ENDPOINT')}/pingpong/users/detail?intraId=`
+      `${Cypress.env('SERVER_ENDPOINT')}/pingpong/users/${Cypress.env('ADMIN_USERNAME')}`
     ).as('profileApi');
     cy.origin(Cypress.env('HOME'), () => {
       cy.wait(1000);
-      cy.get('input[value=edit]').click();
+      cy.get('[class^=Profile_buttons] > svg').click();
       cy.wait(1000);
       // 0. 기존 email click 여부 저장하기 (이후 원래대로 돌려놓기 위함)
       let emailClicked: boolean;
@@ -85,13 +85,13 @@ describe('프로필 기능 테스트 🥳', () => {
       // 2. 이메일 적용 결과가 잘 전송되는지 확인
       cy.get('[class^=Profile_snsButton]').contains('Email').click();
       cy.get('input[value=확인]').click();
-      cy.wait(1000);
+      //cy.wait(1000);
       cy.wait('@profileApi').then((interception) => {
         const res = interception.request.body.snsNotiOpt;
         const expected = emailClicked ? 'NONE' : 'EMAIL';
         expect(res).to.equal(expected);
         // 원래대로 돌려두기
-        cy.get('input[value=edit]').click();
+        cy.get('[class^=Profile_buttons] > svg').click();
         cy.wait(1000);
         cy.get('[class^=Profile_snsButton]').contains('Email').click();
         cy.get('input[value=확인]').click();
@@ -106,7 +106,7 @@ describe('프로필 기능 테스트 🥳', () => {
         const oldStatusMessage = statusElement.text();
         const newStatusMessage = 'changed';
         // 1. 상태메시지 변경이 실제로 적용되는지 확인
-        cy.get('input[value=edit]').click();
+        cy.get('[class^=Profile_buttons] > svg').click();
         cy.wait(1000);
         cy.get('textarea').clear();
         cy.wait(1000);
@@ -118,7 +118,7 @@ describe('프로필 기능 테스트 🥳', () => {
           newStatusMessage
         );
         // 원래대로 돌려놓기
-        cy.get('input[value=edit]').click();
+        cy.get('[class^=Profile_buttons] > svg').click();
         cy.wait(1000);
         cy.get('textarea').clear();
         cy.wait(1000);
@@ -144,14 +144,14 @@ describe('프로필 기능 테스트 🥳', () => {
             newRacket = 'PENHOLDER';
         }
         // 1. 라켓 종류 변경이 적용되는지 확인
-        cy.get('input[value=edit]').click();
+        cy.get('[class^=Profile_buttons] > svg').click();
         cy.wait(1000);
         cy.get('[class^=Profile_radioButton]').contains(newRacket).click();
         cy.get('input[value=확인]').click();
         cy.wait(1000);
         cy.get('[class^=Profile_racket]').should('have.text', newRacket);
         // 원래대로 돌려놓기
-        cy.get('input[value=edit]').click();
+        cy.get('[class^=Profile_buttons] > svg').click();
         cy.wait(1000);
         cy.get('[class^=Profile_radioButton]').contains(oldRacket).click();
         cy.get('input[value=확인]').click();
@@ -197,7 +197,7 @@ describe('프로필 기능 테스트 🥳', () => {
   });
   it('경기 기록 api 확인 🤔', () => {
     cy.intercept(
-      `${Cypress.env('SERVER_ENDPOINT')}/pingpong/games/users/${Cypress.env(
+      `${Cypress.env('SERVER_ENDPOINT')}/pingpong/games?intraId=${Cypress.env(
         'ADMIN_USERNAME'
       )}*`
     ).as('gameApi');
@@ -205,16 +205,16 @@ describe('프로필 기능 테스트 🥳', () => {
       cy.wait('@gameApi').then((interception) => {
         // 1. api 쿼리에 적절한 값이 들어가는지 확인. 응답코드가 성공인지 확인
         const querys = interception.request.url.split('?')[1].split('&');
-        const mode = querys[0].split('=')[1];
+        const intraId = querys[0].split('=')[1];
         const count = querys[1].split('=')[1];
-        const gameId = querys[2].split('=')[1];
-        expect(mode).to.equal('undefined');
+        const size = querys[2].split('=')[1];
+        expect(intraId).to.equal(`${Cypress.env('ADMIN_USERNAME')}`);
         expect(count).to.equal('5');
-        expect(gameId).to.equal('0');
+        expect(size).to.equal('1');
         expect(interception.response?.statusCode).to.equal(200);
       });
       // 2. 버튼을 눌렀을 때 유저별 game 페이지로 이동하는지 확인
-      cy.get('[id^=user_mine]').click();
+      cy.get('[class^=Section_titleWrap] > button').click();// get 확인
       cy.wait(500);
       cy.url().should(
         'include',

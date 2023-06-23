@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import PageNation from 'components/Pagination';
 import { IGames, IGameLog } from 'types/admin/gameLogTypes';
 import { instanceInManage } from 'utils/axios';
-import { getFormattedDateToString } from 'utils/handleTime';
+import { getFormattedDateToString, gameTimeToString } from 'utils/handleTime';
 import AdminSearchBar from '../common/AdminSearchBar';
 import styles from 'styles/admin/games/GamesTable.module.scss';
 import ModifyScoreForm from './ModifyScoreForm';
@@ -23,7 +23,7 @@ export default function GamesTable() {
   const getAllGames = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/games?season=0&page=${currentPage}&size=4`
+        `/games?page=${currentPage}&size=4`
       );
 
       setGameInfo({
@@ -79,6 +79,7 @@ export default function GamesTable() {
         <div className={styles.tableWrap}>
           {gameInfo.gameLog.map((game: IGameLog) => {
             const { team1, team2 } = game;
+            const mode = game.mode.toUpperCase();
             return (
               <div className={styles.tableRow} key={game.gameId}>
                 <div className={styles.gameId}>{game.gameId}</div>
@@ -86,10 +87,13 @@ export default function GamesTable() {
                   <div>
                     시작 날짜: {game.startAt.toLocaleString().split(' ')[0]}
                   </div>
-                  <div>게임 모드: {game.mode}</div>
+                  <div>
+                    시작 시간: {gameTimeToString(game.startAt)}
+                  </div>
+                  <div>게임 모드: {mode}</div>
                   <div>슬롯 시간: {game.slotTime}분</div>
                   <div>
-                    {game.mode === 'RANK' && (
+                    {mode === 'RANK' && (
                       <ModifyScoreForm
                         gameId={game.gameId}
                         team1={team1}
@@ -102,7 +106,7 @@ export default function GamesTable() {
                   <div>team1</div>
                   <div
                     className={
-                      game.mode === 'NORMAL'
+                      mode === 'NORMAL'
                         ? styles.normal
                         : game.team1.win
                         ? styles.win
@@ -116,7 +120,7 @@ export default function GamesTable() {
                   <div>team2</div>
                   <div
                     className={
-                      game.mode === 'NORMAL'
+                      mode === 'NORMAL'
                         ? styles.normal
                         : game.team2.win
                         ? styles.win
@@ -129,7 +133,7 @@ export default function GamesTable() {
                 <button
                   type='submit'
                   form={`Score-Modify-Form-${game.gameId}`}
-                  disabled={game.mode === 'NORMAL'}
+                  disabled={mode === 'NORMAL'}
                   className={styles['modifyBtn']}
                 >
                   수정

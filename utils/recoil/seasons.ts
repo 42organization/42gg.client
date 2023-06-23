@@ -18,7 +18,7 @@ export const latestSeasonIdState = selector<number>({
   key: `latestSeasonIdState/${v1()}`,
   get: ({ get }) => {
     return get(seasonListState).seasonList[
-      get(seasonListState).seasonList.length - 1
+      0
     ].id;
   },
 });
