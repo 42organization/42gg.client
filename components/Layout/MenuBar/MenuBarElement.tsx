@@ -1,13 +1,13 @@
-import React, { MouseEvent, useContext, MouseEventHandler } from 'react';
 import Link from 'next/link';
-import styles from 'styles/Layout/MenuBar.module.scss';
-import { HeaderContextState, HeaderContext } from '../HeaderContext';
-import useAxiosGet from 'hooks/useAxiosGet';
+import React, { MouseEvent, useContext, MouseEventHandler } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { User } from 'types/mainType';
 import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import { userState } from 'utils/recoil/layout';
-import { User } from 'types/mainType';
+import { HeaderContextState, HeaderContext } from '../HeaderContext';
+import useAxiosGet from 'hooks/useAxiosGet';
+import styles from 'styles/Layout/MenuBar.module.scss';
 import RankingEmoji from 'public/image/menu_ranking.svg';
 import CurrentMatchEmoji from 'public/image/menu_currentMatch.svg';
 import AnnouncementEmoji from 'public/image/menu_announcement.svg';

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { profileState } from 'utils/recoil/user';
 import { ProfileBasic, racketTypes } from 'types/userTypes';
-import styles from 'styles/user/Profile.module.scss';
+import { profileState } from 'utils/recoil/user';
 import useEditProfileModal from 'hooks/modal/useEditProfileModal';
+import styles from 'styles/user/Profile.module.scss';
 
 export interface EditedProfile {
   racketType: string;

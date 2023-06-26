@@ -1,10 +1,10 @@
 import { SetterOrUpdater, useSetRecoilState } from 'recoil';
 import { ProfileBasic } from 'types/userTypes';
+import { Modal } from 'types/modalTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { EditedProfile } from 'components/modal/profile/EditProfileModal';
-import { Modal } from 'types/modalTypes';
 
 interface useEditProfileModalProps {
   slack: boolean;

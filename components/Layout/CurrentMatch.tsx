@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
-import { stringToHourMin } from 'utils/handleTime';
-import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
-import { currentMatchState } from 'utils/recoil/match';
 import { CurrentMatchList, CurrentMatchListElement } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
-import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
+import { stringToHourMin } from 'utils/handleTime';
+import { currentMatchState } from 'utils/recoil/match';
+import { modalState } from 'utils/recoil/modal';
+import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
 import { TbMenu } from 'react-icons/tb';
+import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 import LoudSpeaker from './LoudSpeaker';
 
 export default function CurrentMatch() {

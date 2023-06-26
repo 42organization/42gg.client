@@ -4,9 +4,9 @@ import { useSetRecoilState } from 'recoil';
 import { SeasonMode, MatchMode } from 'types/mainType';
 import { colorModeState } from 'utils/recoil/colorMode';
 import UserGameSearchBar from 'components/mode/modeItems/UserGameSearchBar';
-import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
 import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
 import ModeRadiobox from 'components/mode/modeItems/ModeRadiobox';
+import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
 import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface GameModeWrapProps {

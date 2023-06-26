@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import MainPageProfile from 'components/Layout/MainPageProfile';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { userState } from 'utils/recoil/layout';
+import MainPageProfile from 'components/Layout/MainPageProfile';
 
 const meta: Meta<typeof MainPageProfile> = {
   title: 'MainPageProfile/MainPageProfile',

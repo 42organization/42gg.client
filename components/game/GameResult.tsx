@@ -1,6 +1,6 @@
 import { SeasonMode } from 'types/mainType';
-import useGameResult from 'hooks/game/useGameResult';
 import GameResultList from 'components/game/GameResultList';
+import useGameResult from 'hooks/game/useGameResult';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 interface GameResultProps {

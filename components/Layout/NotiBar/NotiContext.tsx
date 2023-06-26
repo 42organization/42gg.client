@@ -1,8 +1,7 @@
-import { Dispatch, SetStateAction, createContext } from 'react';
-import { useState, useEffect } from 'react';
+import { Dispatch, SetStateAction, createContext, useState, useEffect } from 'react';
 import { Noti } from 'types/notiTypes';
-import useReloadHandler from 'hooks/useReloadHandler';
 import useAxiosGet from 'hooks/useAxiosGet';
+import useReloadHandler from 'hooks/useReloadHandler';
 
 export interface NotiContextState {
   noti: Noti[];

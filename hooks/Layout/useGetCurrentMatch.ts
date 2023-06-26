@@ -1,9 +1,9 @@
-import useAxiosGet from 'hooks/useAxiosGet';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { CurrentMatchList } from 'types/matchTypes';
 import { currentMatchState, reloadMatchState } from 'utils/recoil/match';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 const useGetCurrentMatch = () => {
   const setCurrentMatchList =

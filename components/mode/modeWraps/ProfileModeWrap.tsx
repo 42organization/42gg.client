@@ -1,6 +1,6 @@
 import React from 'react';
-import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
 import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
+import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
 import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface ProfileModeWrapProps {

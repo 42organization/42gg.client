@@ -1,10 +1,10 @@
-import { openCurrentMatchState } from 'utils/recoil/match';
 import { useEffect } from 'react';
-import { modalState } from 'utils/recoil/modal';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { liveState } from 'utils/recoil/layout';
 import { Live } from 'types/mainType';
 import { Modal } from 'types/modalTypes';
+import { openCurrentMatchState } from 'utils/recoil/match';
+import { modalState } from 'utils/recoil/modal';
+import { liveState } from 'utils/recoil/layout';
 
 const useSetAfterGameModal = () => {
   const live = useRecoilValue<Live>(liveState);

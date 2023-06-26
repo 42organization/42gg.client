@@ -1,14 +1,14 @@
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
+import { Match } from 'types/matchTypes';
+import { Modal } from 'types/modalTypes';
+import { stringToHourMin } from 'utils/handleTime';
+import { modalState } from 'utils/recoil/modal';
 import MatchBoard from 'components/match/MatchBoard';
 import MatchModeWrap from 'components/mode/modeWraps/MatchModeWrap';
 import useGetReloadMatchHandler from 'hooks/match/useGetReloadMatchHandler';
 import useColorMode from 'hooks/useColorMode';
-import { Match } from 'types/matchTypes';
-import { stringToHourMin } from 'utils/handleTime';
-import { modalState } from 'utils/recoil/modal';
-import { useSetRecoilState } from 'recoil';
-import { Modal } from 'types/modalTypes';
 import styles from 'styles/match/match.module.scss';
 
 export default function MatchPage() {

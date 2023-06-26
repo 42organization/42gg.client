@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Game } from 'types/gameTypes';
+import { SeasonMode } from 'types/mainType';
 import { clickedGameItemState } from 'utils/recoil/game';
 import GameResultSmallScore from 'components/game/small/GameResultSmallScore';
 import GameResultSmallTeam from 'components/game/small/GameResultSmallTeam';
 import styles from 'styles/game/GameResultItem.module.scss';
-import { SeasonMode } from 'types/mainType';
 
 interface GameResultSmallItemProps {
   game: Game;

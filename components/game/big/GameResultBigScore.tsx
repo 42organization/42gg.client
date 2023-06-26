@@ -1,8 +1,8 @@
-import { getTimeAgo } from 'utils/handleTime';
 import { GameStatus, GameMode } from 'types/gameTypes';
 import { SeasonMode } from 'types/mainType';
-import styles from 'styles/game/GameResultItem.module.scss';
+import { getTimeAgo } from 'utils/handleTime';
 import gameScore from '../GameScore';
+import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultBigScoreProps {
   mode: GameMode;

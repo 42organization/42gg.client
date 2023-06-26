@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import SideNav from './SideNav';
-import styles from 'styles/admin/Layout.module.scss';
 import useAxiosWithToast from 'hooks/useAxiosWithToast';
+import styles from 'styles/admin/Layout.module.scss';
 
 type AdminLayoutProps = {
   children: React.ReactNode;

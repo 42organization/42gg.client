@@ -1,5 +1,5 @@
-import { useSetRecoilState } from 'recoil';
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { PenaltyInfo } from 'types/admin/adminPenaltyTypes';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
