@@ -1,14 +1,14 @@
 @import '../common.scss';
 
 .mainContainer {
-  position: relative;
-  top: 1.5rem;
-  font-size: 1.05rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  position: relative;
   align-items: end;
+  top: 1.5rem;
   margin-top: 1rem;
   height: 16rem;
+  font-size: 1.05rem;
   &.isMain {
     height: 15.5rem;
     margin-top: 7.5rem;
@@ -37,10 +37,10 @@
 }
 
 .mainData:nth-child(2) {
+  z-index: 1;
   position: relative;
   height: 18rem;
   border-radius: 3.5rem;
-  z-index: 1;
   background: 
   linear-gradient(
     179.91deg,
@@ -261,14 +261,14 @@
   background-color: #c7b1ee;
   border-radius: 50%;
   .rank1 {
-    color: #603B88;
     width: 6.8rem;
     height: 6.8rem;
+    color: #603B88;
   }
   .ranks {
-    color: #603B88;
     width: 4.5rem;
     height: 4.5rem;
+    color: #603B88;
   }
 }
 

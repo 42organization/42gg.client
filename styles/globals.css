@@ -144,14 +144,14 @@ ul {
 }
 
 ul.pagination li {
-  cursor: pointer;
-  width: 27px;
-  height: 27px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 27px;
+  height: 27px;
   font-size: 1.2rem; /* $big-font */
   font-weight: 600;
+  cursor: pointer;
 }
 
 ul.pagination li a {

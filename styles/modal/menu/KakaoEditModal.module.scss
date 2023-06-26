@@ -22,17 +22,17 @@
   justify-content: space-between;
   align-items: center;
   button {
-    width: 15rem;
-    height: 2.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
+    margin-top: 1rem;
+    width: 15rem;
+    height: 2.5rem;
     border: 0;
     border-radius: 0.625rem;
     padding: 0.75rem 3.1rem;
+    color: black;
     font-size: 0.9rem;
-    margin-top: 1rem;
     cursor: pointer;
   }
 }

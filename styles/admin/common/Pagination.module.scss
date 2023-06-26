@@ -5,23 +5,23 @@
       padding: 0;
 
       li {
-        cursor: pointer;
-        width: 27px;
-        height: 27px;
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 27px;
+        height: 27px;
         font-size: 1.2rem; /* $big-font */
         font-weight: 600;
+        cursor: pointer;
         a {
-          text-decoration: none;
           color: gray; /* $g1-bottom */
           font-size: 1rem;
+          text-decoration: none;
         }
         :hover,
         :active {
-          font-weight: 700;
           color: black; /* $pp-red */
+          font-weight: 700;
         }
       }
     }
