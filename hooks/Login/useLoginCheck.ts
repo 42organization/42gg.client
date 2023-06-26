@@ -31,7 +31,7 @@ const useLoginCheck = (): useLoginCheckReturn => {
   };
 
   useEffect(() => {
-	setRefreshToken(Cookies.get('refreshToken') || '');
+	setRefreshToken(Cookies.get('refresh_token') || '');
 	if (refreshToken)
     	getAccessToken();
     if (accessToken) {
