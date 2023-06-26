@@ -17,7 +17,7 @@ const useLoginCheck = (): useLoginCheckReturn => {
     useRecoilState<boolean>(firstVisitedState);
   const setError = useSetRecoilState(errorState);
   const router: NextRouter = useRouter();
-  const refreshToken: string = Cookies.get('refresh_token') || '';
+  const [refreshToken, setRefreshToken] = useState<string>('');
 
   const getAccessToken = async () => {
     try {
@@ -31,6 +31,7 @@ const useLoginCheck = (): useLoginCheckReturn => {
   };
 
   useEffect(() => {
+	setRefreshToken(Cookies.get('refreshToken') || '');
 	if (refreshToken)
     	getAccessToken();
     if (accessToken) {
