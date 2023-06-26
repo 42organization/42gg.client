@@ -31,7 +31,8 @@ const useLoginCheck = (): useLoginCheckReturn => {
   };
 
   useEffect(() => {
-    getAccessToken();
+	if (refreshToken)
+    	getAccessToken();
     if (accessToken) {
       localStorage.setItem('42gg-token', accessToken);
       setFirestVisited(true);
