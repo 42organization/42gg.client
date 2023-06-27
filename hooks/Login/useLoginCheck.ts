@@ -17,31 +17,17 @@ const useLoginCheck = (): useLoginCheckReturn => {
     useRecoilState<boolean>(firstVisitedState);
   const setError = useSetRecoilState(errorState);
   const router: NextRouter = useRouter();
-  const [refreshToken, setRefreshToken] = useState<string>('');
-
-//  const getAccessToken = async () => {
-//    try {
-//      const res = await instance.post(
-//        `/pingpong/users/accesstoken?refreshToken=${refreshToken}`
-//      );
-//      setAccessToken(res.data.accessToken);
-//    } catch (error) {
-//      setError('SW05');
-//    }
-//  };
 
   useEffect(() => {
-	//setRefreshToken(Cookies.get('refresh_token') || '');
-	//if (refreshToken)
-    //	getAccessToken();
-    //if (accessToken) {
-    //  localStorage.setItem('42gg-token', accessToken);
-    //  router.replace('/');
-    //}
-    //if (localStorage.getItem('42gg-token')) {
-		setLoggedIn(true);
-		setFirestVisited(true);
-    //}
+    const token = localStorage.getItem('login');
+    if (token) {
+      localStorage.deleteItem('login');
+      setFirestVisited(true);
+      router.replace('/');
+    }
+    if (localStorage.getItem('42gg-token')) {
+      setLoggedIn(true);
+    }
     setIsLoading(false);
   }, []);
 

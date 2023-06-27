@@ -12,12 +12,14 @@ function Login() {
   }, []);
 
   const onLogin = () => {
+    localStorage.setItem('login', 'true');
     router.push(
       `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/oauth2/authorization/42`
     );
   };
 
   const onKakaoLogin = () => {
+    localStorage.setItem('login', 'true');
     router.push(
       `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/oauth2/authorization/kakao`
     );
