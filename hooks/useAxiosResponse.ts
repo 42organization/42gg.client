@@ -4,11 +4,24 @@ import { instance } from 'utils/axios';
 import Cookies from 'js-cookie';
 import { loginState } from 'utils/recoil/login';
 import { useSetRecoilState } from 'recoil';
+import { errorState } from 'utils/recoil/error';
 
 export default function useAxiosResponse() {
   const setLogin = useSetRecoilState(loginState);
   const token = Cookies.get('refresh_token');
   const [isRecalling, setIsRecalling] = useState(false);
+  const setError = useSetRecoilState(errorState);
+
+  const accessTokenHandler = async () => {
+    try {
+      const res = await instance.post(
+        `/pingpong/users/accesstoken?refreshToken=${token}`
+      );
+      localStorage.setItem('42gg-token', res.data.accessToken);
+    } catch (error) {
+      setError('SW05');
+    }
+  };
 
   const errorResponseHandler = async (error: AxiosError) => {
     if (error.response && error.response.status === 401 && !isRecalling) {
@@ -42,6 +55,11 @@ export default function useAxiosResponse() {
   useEffect(() => {
     if (!token) {
       setLogin(false);
+    } else if (localStorage.getItem('42gg-token')) {
+      setLogin(true);
+    } else {
+      accessTokenHandler();
+      setLogin(true);
     }
   }, [token]);
 

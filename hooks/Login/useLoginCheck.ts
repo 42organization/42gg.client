@@ -13,12 +13,11 @@ const useLoginCheck = (): useLoginCheckReturn => {
     useRecoilState<boolean>(firstVisitedState);
 
   const router: NextRouter = useRouter();
-  const presentPath: string = router.asPath;
-  const token: string = presentPath.split('?token=')[1];
 
   useEffect(() => {
+    const token = localStorage.getItem('login');
     if (token) {
-      localStorage.setItem('42gg-token', token);
+      localStorage.deleteItem('login');
       setFirestVisited(true);
       router.replace('/');
     }
