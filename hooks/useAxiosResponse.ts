@@ -8,7 +8,7 @@ import { errorState } from 'utils/recoil/error';
 
 export default function useAxiosResponse() {
   const setLogin = useSetRecoilState(loginState);
-  const token = Cookies.get('refresh_token');
+  const [token, setToken] = useState('');
   const [isRecalling, setIsRecalling] = useState(false);
   const setError = useSetRecoilState(errorState);
 

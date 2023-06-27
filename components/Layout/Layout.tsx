@@ -19,8 +19,6 @@ import MainPageProfile from './MainPageProfile';
 import { openCurrentMatchState } from 'utils/recoil/match';
 import CurrentMatch from './CurrentMatch';
 import useAxiosResponse from 'hooks/useAxiosResponse';
-import { useEffect } from 'react';
-import Cookies from 'js-cookie';
 
 type AppLayoutProps = {
   children: React.ReactNode;
