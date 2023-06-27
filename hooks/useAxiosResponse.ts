@@ -8,7 +8,7 @@ import { errorState } from 'utils/recoil/error';
 
 export default function useAxiosResponse() {
   const setLogin = useSetRecoilState(loginState);
-  const [token, setToken] = useState('');
+  const token = Cookies.get('access_token') || '';
   const [isRecalling, setIsRecalling] = useState(false);
   const setError = useSetRecoilState(errorState);
 
@@ -61,7 +61,7 @@ export default function useAxiosResponse() {
       accessTokenHandler();
       setLogin(true);
     }
-  }, [token]);
+  }, []);
 
   useEffect(() => {
     return () => {
