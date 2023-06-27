@@ -8,7 +8,7 @@ import { errorState } from 'utils/recoil/error';
 
 export default function useAxiosResponse() {
   const setLogin = useSetRecoilState(loginState);
-  const token = Cookies.get('access_token') || '';
+  const [token, setToken] = useState<string>('');
   const [isRecalling, setIsRecalling] = useState(false);
   const setError = useSetRecoilState(errorState);
 
@@ -54,14 +54,20 @@ export default function useAxiosResponse() {
 
   useEffect(() => {
     if (!token) {
-      setLogin(false);
+		const refreshToken = Cookies.get('refresh_token');
+		if (refreshToken) {
+			setToken(refreshToken);
+		} 
+		else {
+      		setLogin(false);
+		}
     } else if (localStorage.getItem('42gg-token')) {
       setLogin(true);
     } else {
       accessTokenHandler();
       setLogin(true);
     }
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     return () => {
