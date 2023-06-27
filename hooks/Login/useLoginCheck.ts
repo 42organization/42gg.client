@@ -18,10 +18,8 @@ const useLoginCheck = (): useLoginCheckReturn => {
     if (token) {
       localStorage.removeItem('login');
       setFirestVisited(true);
-      router.replace('/');
-    }
-    if (localStorage.getItem('42gg-token')) {
       setLoggedIn(true);
+      router.replace('/');
     }
     setIsLoading(false);
   }, []);
