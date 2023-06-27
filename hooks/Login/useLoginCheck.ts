@@ -14,7 +14,7 @@ const useLoginCheck = (): useLoginCheckReturn => {
   const router: NextRouter = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem('login');
+    const token = localStorage.getItem('login') || '';
     if (token) {
       localStorage.removeItem('login');
       setFirestVisited(true);
@@ -25,7 +25,6 @@ const useLoginCheck = (): useLoginCheckReturn => {
     }
     setIsLoading(false);
   }, []);
-
   return [isLoading, loggedIn, firstVisited];
 };
 
