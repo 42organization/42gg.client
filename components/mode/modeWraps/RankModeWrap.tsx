@@ -39,7 +39,6 @@ export default function RankModeWrap({ children }: RankModeWrapProps) {
         )}
       </div>
       {React.cloneElement(children as React.ReactElement, {
-        mode: Mode,
         season,
       })}
     </div>
