@@ -21,7 +21,7 @@ const useLoginCheck = (): useLoginCheckReturn => {
   useEffect(() => {
     const token = localStorage.getItem('login');
     if (token) {
-      localStorage.deleteItem('login');
+      localStorage.removeItem('login');
       setFirestVisited(true);
       router.replace('/');
     }
