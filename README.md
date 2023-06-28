@@ -2,7 +2,7 @@
 
 <div align=center>
 
-<img width="600" alt="Frame 3" src="https://user-images.githubusercontent.com/86540825/209137349-57356fde-777f-4d4f-877f-b5f2b2053da0.png">
+<img width="10%" alt="42GG_Logo" src="https://github.com/42organization/42gg.client/assets/57761286/210c65a0-5e81-4b35-860d-7107442b987c">
 
 <br>
 <br>
@@ -25,6 +25,9 @@
 <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=white"/>
 <img src="https://img.shields.io/badge/Recoil-3578E5?style=for-the-badge&logo=&logoColor=white"/>
 <img src="https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/Storybook-FF4785.svg?style=for-the-badge&logo=storybook&logoColor=white"/>
+<img src="https://img.shields.io/badge/Cypress-17202C.svg?style=for-the-badge&logo=cypress&logoColor=white"/>
 
 <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=AmazonEC2&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/Amazon S3-569A31?style=for-the-badge&logo=AmazonS3&logoColor=white"/>
@@ -85,7 +88,7 @@
     <td align=center>역할</td>
     <td align=center>🌚</td>
     <td align=center>🐧</td>
-    <td align=center>🫥</td>
+    <td align=center>🥨</td>
   </tr>
   <tr>
     <td align=center>이름</td>
