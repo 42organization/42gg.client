@@ -13,10 +13,10 @@
 .myRank {
   position: relative;
   z-index: 1;
+  width: fit-content;
   margin-bottom: 0.5rem;
   color: white;
   opacity: 0.5;
-  width: fit-content;
   font-weight: 700;
   font-size: $big-font;
   font-family: $title-font;

@@ -7,10 +7,10 @@
   position: relative;
   height: 2.5rem;
   padding: 0 0.8rem;
-  border-radius: $medium-radius;
   background: white;
-  font-size: $medium-font;
   border: 1px solid #e5e7eb;
+  border-radius: $medium-radius;
+  font-size: $medium-font;
   input {
     all: unset;
     width: calc(100% - 4rem);

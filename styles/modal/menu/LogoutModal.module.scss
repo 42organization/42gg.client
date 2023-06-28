@@ -7,11 +7,11 @@
 .phrase {
   @include modal-phrase;
   .message {
+    padding: 1rem;
     font-family: 'NanumSqaure_acEB', sans-serif;
     font-size: 1.5rem;
     letter-spacing: 0.04rem;
     line-height: 150%;
-    padding: 1rem;
   }
 }
 

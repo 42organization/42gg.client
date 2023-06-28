@@ -1,32 +1,32 @@
 .whole {
-  text-align: center;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
   width: 20rem;
   height: 15rem;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
 }
 .body {
-  padding: 1rem 1rem;
   flex-direction: column;
+  padding: 1rem 1rem;
   text-align: center;
   .content {
+    padding: 1rem 2rem;
+    color: #6b7280;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
     font-size: 1rem;
     line-height: 150%;
-    color: #6b7280;
-    padding: 1rem 2rem;
   }
 }
 
 .btns {
-  text-align: center;
-  flex-direction: column;
   display: flex;
+  flex-direction: column;
+  text-align: center;
   color: white;
   .btn {
     width: 100%;
@@ -34,9 +34,9 @@
     padding: 0.5rem 0;
     border-radius: 10px;
     border: none;
+    color: white;
     font-size: 1rem;
     cursor: pointer;
-    color: white;
     &.first {
       background-color: #2678f3;
     }
