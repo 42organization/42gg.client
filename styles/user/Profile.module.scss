@@ -91,12 +91,13 @@
 .boxContainer {
   display: flex;
   justify-content: space-between;
-  width: 12rem;
+  width: 14rem;
   margin-bottom: 0.5rem;
+  align-items: center;
 }
 
 .expbox {
-  width: 5.5rem;
+  width: 6.5rem;
   padding: 0.5rem 0;
   border-radius: $mini-radius;
   background: #9e426e;
@@ -106,7 +107,7 @@
 }
 
 .racket {
-  width: 5.5rem;
+  width: 6.5rem;
   padding: 0.5rem 0;
   border-radius: $mini-radius;
   background: #cbffb9;
