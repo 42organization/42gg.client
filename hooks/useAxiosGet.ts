@@ -1,16 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
-import { SetterOrUpdater, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import { instance } from 'utils/axios';
-import { Noti } from 'types/notiTypes';
-import { CurrentMatchList, Match } from 'types/matchTypes';
-import { SeasonList } from 'types/seasonTypes';
-import { Live, User } from 'types/mainType';
-import { PppChart, ProfileBasic, ProfileRank } from 'types/userTypes';
-import { UserInfo } from 'types/admin/adminUserTypes';
-import { EditedSchedule } from 'types/admin/adminSlotTypes';
-import { AfterGame } from 'types/scoreTypes';
-import { GameResult } from 'types/gameTypes';
 
 interface useAxiosGetProps<T> {
   url: string;

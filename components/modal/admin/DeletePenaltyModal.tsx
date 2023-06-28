@@ -1,8 +1,8 @@
-import { FiAlertTriangle } from 'react-icons/fi';
 import { useResetRecoilState } from 'recoil';
-import styles from 'styles/admin/modal/DeletePenaltyModal.module.scss';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
+import { FiAlertTriangle } from 'react-icons/fi';
+import styles from 'styles/admin/modal/DeletePenaltyModal.module.scss';
 
 export default function DeletePenaltyModal({
   intraId,

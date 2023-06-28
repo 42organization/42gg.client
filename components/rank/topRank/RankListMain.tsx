@@ -1,9 +1,9 @@
-import { RankUser, NormalUser, Rank } from 'types/rankTypes';
-import RankListItemMain from './RankListItemMain';
-import styles from 'styles/rank/RankListMain.module.scss';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import { RankUser, NormalUser, Rank } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
+import RankListItemMain from './RankListItemMain';
+import styles from 'styles/rank/RankListMain.module.scss';
 
 interface RankListMainProps {
   rank?: Rank;

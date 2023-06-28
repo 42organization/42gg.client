@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { ISeasonEditInfo } from 'types/seasonTypes';
 import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
-import { ISeasonEditInfo } from 'types/seasonTypes';
 import {
   Paper,
   Table,

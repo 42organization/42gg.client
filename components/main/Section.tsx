@@ -1,8 +1,8 @@
-import React from 'react';
 import { useRouter } from 'next/router';
-import { FaChevronRight } from 'react-icons/fa';
+import React from 'react';
 import GameResult from 'components/game/GameResult';
 import RankList from 'components/rank/RankList';
+import { FaChevronRight } from 'react-icons/fa';
 import styles from 'styles/main/Section.module.scss';
 
 type SectionProps = {

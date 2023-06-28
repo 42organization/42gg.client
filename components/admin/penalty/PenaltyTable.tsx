@@ -1,5 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import { instanceInManage } from 'utils/axios';
+import { getFormattedDateToString } from 'utils/handleTime';
+import { modalState } from 'utils/recoil/modal';
+import { tableFormat } from 'constants/admin/table';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import PageNation from 'components/Pagination';
 import {
   Table,
   TableBody,
@@ -9,13 +15,7 @@ import {
   TableCell,
   Paper,
 } from '@mui/material';
-import PageNation from 'components/Pagination';
-import AdminSearchBar from 'components/admin/common/AdminSearchBar';
-import { instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/recoil/modal';
-import { tableFormat } from 'constants/admin/table';
 import styles from 'styles/admin/penalty/PenaltyTable.module.scss';
-import { getFormattedDateToString } from 'utils/handleTime';
 
 interface IPenalty {
   penaltyId: number;

@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
-import styles from 'styles/Layout/MenuBar.module.scss';
-import { HeaderContextState, HeaderContext } from '../HeaderContext';
-import { useRecoilValue } from 'recoil';
-import { userState } from 'utils/recoil/layout';
-import { User } from 'types/mainType';
 import Link from 'next/link';
-import PlayerImage from 'components/PlayerImage';
+import React, { useContext, useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { User } from 'types/mainType';
 import { ProfileBasic } from 'types/userTypes';
+import { userState } from 'utils/recoil/layout';
+import PlayerImage from 'components/PlayerImage';
+import { HeaderContextState, HeaderContext } from '../HeaderContext';
 import { MainMenu, AdminMenu } from './MenuBarElement';
 import useAxiosGet from 'hooks/useAxiosGet';
+import styles from 'styles/Layout/MenuBar.module.scss';
 
 const MenuTop = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);

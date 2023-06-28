@@ -1,9 +1,9 @@
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
+import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { openMenuBarState } from 'utils/recoil/layout';
-import { Modal } from 'types/modalTypes';
 interface Report {
   category: string;
   content: string;

@@ -1,9 +1,9 @@
-import useAxiosGet from 'hooks/useAxiosGet';
 import { useEffect, Dispatch, SetStateAction } from 'react';
 import { useRecoilState } from 'recoil';
 import { Rank } from 'types/rankTypes';
-import { myRankState, scrollState } from 'utils/recoil/myRank';
 import { MyRank, ToggleMode } from 'types/rankTypes';
+import { myRankState, scrollState } from 'utils/recoil/myRank';
+import useAxiosGet from 'hooks/useAxiosGet';
 interface useRankListProps {
   makePath: string;
   makePathRanker: string;

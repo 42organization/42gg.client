@@ -1,12 +1,12 @@
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
-import Header from 'components/Layout/Header';
-import HeaderStateContext, {
-  HeaderContext,
-} from 'components/Layout/HeaderContext';
 import { useContext, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import { profileState } from 'utils/recoil/user';
+import Header from 'components/Layout/Header';
+import HeaderStateContext, {
+  HeaderContext,
+} from 'components/Layout/HeaderContext';
 
 const meta: Meta<typeof Header> = {
   title: 'Drawer/MenuBar',

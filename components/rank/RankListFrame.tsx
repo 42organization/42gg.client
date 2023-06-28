@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
-import PageNation from 'components/Pagination';
-import styles from 'styles/rank/RankList.module.scss';
 import { useRecoilValue } from 'recoil';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
+import PageNation from 'components/Pagination';
+import styles from 'styles/rank/RankList.module.scss';
 interface PageInfo {
   currentPage?: number;
   totalPage?: number;
