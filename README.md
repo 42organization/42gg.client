@@ -1,8 +1,10 @@
 <br>
 
 <div align=center>
+  
+<img height="100px" alt="42GG_Logo" src="https://github.com/42organization/42gg.client/assets/57761286/210c65a0-5e81-4b35-860d-7107442b987c">
+<img height="100px" alt="42GG_neon_logo" src="https://github.com/42organization/42gg.client/assets/57761286/63f1e8b1-d254-407c-ae3d-9cf60166ed41">
 
-<img width="10%" alt="42GG_Logo" src="https://github.com/42organization/42gg.client/assets/57761286/210c65a0-5e81-4b35-860d-7107442b987c">
 
 <br>
 <br>
