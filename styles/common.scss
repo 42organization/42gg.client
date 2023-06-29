@@ -68,9 +68,6 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   flex-direction: column;
   align-items: stretch;
   height: -webkit-fill-available;
-  @supports (-webkit-appearance:none) and (stroke-color: transparent) {
-    min-height: -webkit-fill-available;
-  }
   overflow: auto;
 }
 
