@@ -190,6 +190,12 @@
 &nbsp;&nbsp;&nbsp;
 <img width="25%" alt="Profile_Edit2" src="https://github.com/42organization/42gg.client/assets/57761286/7774bf6d-1957-4e44-9080-8612ecabf440">
 
+#### 👤 42 계정과 Kakao 계정을 연동할 수 있어요!
+
+<img width="25%" alt="Profile_Connect_Kakao" src="https://github.com/42organization/42gg.client/assets/57761286/654fae13-7e1a-4afa-930e-1fbbb2807744">
+&nbsp;&nbsp;&nbsp;
+<img width="25%" alt="Profile_Connect_42" src="https://github.com/42organization/42gg.client/assets/57761286/41e978d9-57ca-420d-855f-0aadc8625d10">
+
 <br/>
 
 ### ⏰ 42 intra에 등록된 이메일을 통해 알림을 받을 수 있습니다
