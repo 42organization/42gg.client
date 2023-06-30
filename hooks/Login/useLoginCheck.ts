@@ -15,18 +15,18 @@ const useLoginCheck = (): useLoginCheckReturn => {
   const router: NextRouter = useRouter();
   const presentPath: string = router.asPath;
   const token: string = presentPath.split('?token=')[1];
-  const refreshToken: string = Cookies.get('refresh_token');
+  const refreshToken: string = Cookies.get('refresh_token') || '';
 
   useEffect(() => {
     if (token) {
-	  localStorage.setItem('42gg-token', token);
-	  setFirestVisited(true);
-	  setLoggedIn(true);
+      localStorage.setItem('42gg-token', token);
+      setFirestVisited(true);
+      setLoggedIn(true);
       router.replace('/');
     }
-	if (refreshToken) {
-	  setLoggedIn(true);
-	}
+    if (refreshToken) {
+      setLoggedIn(true);
+    }
     setIsLoading(false);
   }, []);
   return [isLoading, loggedIn, firstVisited];
