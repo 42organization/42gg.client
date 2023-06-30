@@ -42,7 +42,7 @@ export default function RankList({
 
   return (
     <div>
-      {<RankListMain isMain={false} season={season}/>}
+      <RankListMain isMain={false} season={season}/>
       <RankListFrame pageInfo={pageInfo}>
         {rank?.rankList.map((item: NormalUser | RankUser, index) => (
           <RankListItem

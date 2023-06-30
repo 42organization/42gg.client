@@ -1,7 +1,7 @@
 import { userImages } from 'types/rankTypes';
 import RankListItemMain from './RankListItemMain';
 import styles from 'styles/rank/RankListMain.module.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
 import useRankListMain from 'hooks/rank/useRankListMain'
@@ -14,12 +14,13 @@ export default function RankListMain({ isMain, season }: RankListMainProps) {
   const Mode = useRecoilValue(colorToggleSelector);
   const [rank, setRanker] = useState<userImages[]>([]);
   const [page] = useState<number>(1);
-  const makePathRanker = (): string => {
+
+  const makePathRanker = useMemo(() => {
     return `/pingpong/users/images?seasonId=${season}&mode=${Mode}`;
-  };
+  }, [season, Mode])
 
   useRankListMain({
-    makePathRanker: makePathRanker(),
+    makePathRanker,
     setRanker: setRanker,
     toggleMode: Mode,
     page: page,
