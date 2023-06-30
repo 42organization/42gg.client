@@ -8,14 +8,14 @@ import { errorState } from 'utils/recoil/error';
 
 export default function useAxiosResponse() {
   const setLogin = useSetRecoilState(loginState);
-  const [token, setToken] = useState<string>('');
   const [isRecalling, setIsRecalling] = useState(false);
   const setError = useSetRecoilState(errorState);
 
   const accessTokenHandler = async () => {
+	const refreshToken = Cookies.get('refresh_token');
     try {
       const res = await instance.post(
-        `/pingpong/users/accesstoken?refreshToken=${token}`
+        `/pingpong/users/accesstoken?refreshToken=${refreshToken}`
       );
       localStorage.setItem('42gg-token', res.data.accessToken);
     } catch (error) {
@@ -53,20 +53,13 @@ export default function useAxiosResponse() {
   );
 
   useEffect(() => {
-    if (!token) {
-      const refreshToken = Cookies.get('refresh_token');
-      if (refreshToken) {
-        setToken(refreshToken);
-      } else {
-        setLogin(false);
-      }
-    } else if (localStorage.getItem('42gg-token')) {
+	if (localStorage.getItem('42gg-token')) {
       setLogin(true);
     } else {
       accessTokenHandler();
       setLogin(true);
     }
-  }, [token]);
+  }, []);
 
   useEffect(() => {
     return () => {
