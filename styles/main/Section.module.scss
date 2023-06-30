@@ -1,8 +1,8 @@
 // @import 'styles/common.scss';
 
 .sectionWrap {
-  position: relative;
   z-index: 1;
+  position: relative;
   margin-top: 2.5rem;
   &.mainRank {
     margin-top: 1rem;
@@ -23,13 +23,13 @@
       color: #ffffff;
     }
     > button {
+      height: 1.563rem;
+      width: 1.563rem;
       background: none;
       border: none;
       outline: none;
-      cursor: pointer;
-      height: 1.563rem;
-      width: 1.563rem;
       color: #ffffff;
+      cursor: pointer;
     }
   }
 

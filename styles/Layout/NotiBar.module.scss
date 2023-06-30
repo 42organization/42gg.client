@@ -18,7 +18,6 @@
   .closeButtonWrapper {
     padding-bottom: 1.4rem;
     button {
-      color: rgba(101, 97, 102, 1);
       all: unset;
       width: 1.2rem;
       margin-left: auto;
@@ -103,28 +102,28 @@
 }
 
 .notiDecorate {
-  margin-top: auto;
-  width: 100%;
   position: relative;
+  width: 100%;
+  margin-top: auto;
   padding-top: 3rem;
 
   .circleOne {
-    width: 8.5rem;
-    height: 8.5rem;
+    z-index: 1;
     position: relative;
     top: 60%;
     left: 25%;
+    width: 8.5rem;
+    height: 8.5rem;
     background-color: rgba(238, 201, 243, 0.5);
     border-radius: 50%;
-    z-index: 1;
   }
 
   .circleTwo {
-    width: 12.5rem;
-    height: 6.25rem;
     position: relative;
     top: 33%;
     left: -10%;
+    width: 12.5rem;
+    height: 6.25rem;
     border-radius: 6.25rem 6.25rem 0rem 0rem;
     background-color: rgba(243, 211, 248, 1);
   }

@@ -3,20 +3,20 @@
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 0.6rem;
   border-radius: $small-radius;
   font-family: 'Roboto', sans-serif;
-  justify-content: space-between;
   color: $white1;
 }
 
 .level {
   display: flex;
+  margin-top: -2rem;
   font-weight: 800;
   font-style: normal;
   font-size: 3.5rem;
-  margin-top: -2rem;
   color: white;
 }
 
@@ -24,10 +24,10 @@
   display: flex;
   width: 10rem;
   height: 0.7rem;
-  border-radius: $mini-radius;
-  overflow: hidden;
   margin-top: 0rem;
   margin-bottom: 1rem;
+  border-radius: $mini-radius;
+  overflow: hidden;
   .expCurrent {
     background: linear-gradient(
       89.81deg,
@@ -45,8 +45,8 @@
 .idContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  margin-top: 0.5rem;
   align-items: center;
+  margin-top: 0.5rem;
 }
 
 .intraId {
@@ -65,10 +65,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 10px;
-    border-radius: 2px;
     width: 30px;
     height: 30px;
+    margin-left: 10px;
+    border-radius: 2px;
     background: linear-gradient(180deg, #f2d210 0%, #f2b210 100%);
     color: black;
   }
@@ -91,12 +91,13 @@
 .boxContainer {
   display: flex;
   justify-content: space-between;
-  width: 12rem;
+  width: 14rem;
   margin-bottom: 0.5rem;
+  align-items: center;
 }
 
 .expbox {
-  width: 5.5rem;
+  width: 6.5rem;
   padding: 0.5rem 0;
   border-radius: $mini-radius;
   background: #9e426e;
@@ -106,7 +107,7 @@
 }
 
 .racket {
-  width: 5.5rem;
+  width: 6.5rem;
   padding: 0.5rem 0;
   border-radius: $mini-radius;
   background: #cbffb9;
@@ -136,10 +137,10 @@
 }
 
 .phrase {
-  font-size: $big-font;
-  text-align: left;
   margin-bottom: 1rem;
   margin-left: 0.5rem;
+  font-size: $big-font;
+  text-align: left;
 }
 
 .editType {
@@ -158,16 +159,16 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
-  color: $pp-gray;
   width: 9rem;
   height: 2rem;
   border-radius: $mini-radius;
+  color: $pp-gray;
   cursor: pointer;
 }
 
 .snsClicked {
-  color: #c66bf2;
   border: solid 1px #c66bf2;
+  color: #c66bf2;
 }
 
 .racketTypeWrap {
@@ -192,8 +193,8 @@
       align-items: center;
       width: 6rem;
       height: 2rem;
-      color: $pp-gray;
       border-radius: $mini-radius;
+      color: $pp-gray;
       font-size: $small-font;
       text-align: center;
       cursor: pointer;

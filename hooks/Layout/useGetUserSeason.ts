@@ -1,10 +1,10 @@
-import useAxiosGet from 'hooks/useAxiosGet';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { User } from 'types/mainType';
 import { SeasonList } from 'types/seasonTypes';
 import { userState } from 'utils/recoil/layout';
 import { seasonListState } from 'utils/recoil/seasons';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 const useGetUserSeason = () => {
   const setUser = useSetRecoilState<User>(userState);

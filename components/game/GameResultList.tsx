@@ -1,12 +1,12 @@
 import React from 'react';
-import { FaChevronDown } from 'react-icons/fa';
 import { Game } from 'types/gameTypes';
+import { SeasonMode } from 'types/mainType';
 import GameResultEmptyItem from './GameResultEmptyItem';
 import GameResultBigItem from './big/GameResultBigItem';
 import GameResultSmallItem from './small/GameResultSmallItem';
-import styles from 'styles/game/GameResultItem.module.scss';
 import useGameResultList from 'hooks/game/useGameResultList';
-import { SeasonMode } from 'types/mainType';
+import { FaChevronDown } from 'react-icons/fa';
+import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultListProps {
   path: string;

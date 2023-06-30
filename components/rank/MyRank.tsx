@@ -1,7 +1,7 @@
 import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { colorToggleSelector } from 'utils/recoil/colorMode';
 import { myRankState, scrollState } from 'utils/recoil/myRank';
 import styles from 'styles/rank/RankList.module.scss';
-import { colorToggleSelector } from 'utils/recoil/colorMode';
 
 export default function MyRank() {
   const toggleMode = useRecoilValue(colorToggleSelector);

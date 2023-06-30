@@ -1,11 +1,11 @@
 import dynamic from 'next/dynamic';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
 import { Announcement } from 'types/modalTypes';
 import { QUILL_FORMATS } from 'types/quillTypes';
-import 'react-quill/dist/quill.bubble.css';
+import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/modal/event/AnnouncementModal.module.scss';
+import 'react-quill/dist/quill.bubble.css';
 
 type AnnouncementModalProps = {
   announcement: Announcement;

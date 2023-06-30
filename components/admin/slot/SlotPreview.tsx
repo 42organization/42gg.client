@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import styles from 'styles/admin/slot/SlotCurrent.module.scss';
 import {
   PreviewMatch,
   SlotPreviewProps,
   Slot,
 } from 'types/admin/adminSlotTypes';
+import styles from 'styles/admin/slot/SlotCurrent.module.scss';
 
 export default function SlotPreview(props: SlotPreviewProps) {
   const { lastHour, scheduleInfo, currentHour, futurePreview } = props;

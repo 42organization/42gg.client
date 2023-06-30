@@ -10,9 +10,10 @@ import {
   BarElement,
   ChartTypeRegistry,
 } from 'chart.js';
+import { Graphs } from 'types/chartTypes';
 import useChartData from 'hooks/statistics/useChartData';
 import { Chart } from 'react-chartjs-2';
-import { Graphs } from 'types/chartTypes';
+
 ChartJS.register(
   ArcElement,
   LinearScale,
