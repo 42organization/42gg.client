@@ -18,7 +18,12 @@
   height: min-content;
   max-height: 31rem;
   border-radius: $small-radius;
-  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  background: linear-gradient(
+    180deg,
+    #301451 23.82%,
+    #481570 58.85%,
+    #300e4b 98.44%
+  );
   color: white;
   font-size: $medium-font;
 }
@@ -31,6 +36,7 @@
 .modalTitle {
   @include modalTitle;
   font-size: 2rem;
+  color: #121725;
 }
 
 .quillViewer {
