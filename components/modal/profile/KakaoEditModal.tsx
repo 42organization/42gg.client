@@ -22,7 +22,7 @@ export default function KakaoEditModal() {
 
   useEffect(() => {
     userTypeHandler();
-  }, [userType]);
+  }, []);
 
   const clickLinkHandler = () => {
     if (userType === 'fortyTwo') {
