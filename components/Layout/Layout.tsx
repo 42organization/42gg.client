@@ -1,26 +1,25 @@
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { colorModeState } from 'utils/recoil/colorMode';
 import { loginState } from 'utils/recoil/login';
 import { userState } from 'utils/recoil/layout';
+import { openCurrentMatchState } from 'utils/recoil/match';
 import Statistics from 'pages/statistics';
 import Header from './Header';
 import Footer from './Footer';
 import AdminLayout from '../admin/Layout';
 import AdminReject from '../admin/AdminReject';
-import styles from 'styles/Layout/Layout.module.scss';
+import HeaderStateContext from './HeaderContext';
+import StyledButton from 'components/StyledButton';
+import MainPageProfile from './MainPageProfile';
+import CurrentMatch from './CurrentMatch';
 import useAnnouncementCheck from 'hooks/Layout/useAnnouncementCheck';
 import useSetAfterGameModal from 'hooks/Layout/useSetAfterGameModal';
 import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
 import useLiveCheck from 'hooks/Layout/useLiveCheck';
-import HeaderStateContext from './HeaderContext';
-import StyledButton from 'components/StyledButton';
-import MainPageProfile from './MainPageProfile';
-import { openCurrentMatchState } from 'utils/recoil/match';
-import CurrentMatch from './CurrentMatch';
 import useAxiosResponse from 'hooks/useAxiosResponse';
-import { useEffect } from 'react';
-import Cookies from 'js-cookie';
+import styles from 'styles/Layout/Layout.module.scss';
 
 type AppLayoutProps = {
   children: React.ReactNode;

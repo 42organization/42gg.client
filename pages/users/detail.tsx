@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import BasicProfile from 'components/user/BasicProfile';
 import GameResult from 'components/game/GameResult';
 import RankProfile from 'components/user/RankProfile';
-import styles from 'styles/user/user.module.scss';
 import Section from 'components/main/Section';
+import styles from 'styles/user/user.module.scss';
 
 export default function User() {
   const router = useRouter();

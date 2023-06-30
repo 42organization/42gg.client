@@ -28,3 +28,12 @@ export interface Rank {
   totalPage: number;
   rankList: RankUser[] | NormalUser[];
 }
+
+export interface userImages {
+  intraId: string;
+  userImageUri: string;
+}
+
+export interface RankMain {
+  rankList: userImages[];
+}

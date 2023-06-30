@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import ModeToggle from 'components/mode/modeItems/ModeToggle';
-import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
-import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
-import styles from 'styles/mode/ModeWrap.module.scss';
 import { useRecoilState } from 'recoil';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
+import ModeToggle from 'components/mode/modeItems/ModeToggle';
+import SeasonDropDown from 'components/mode/modeItems/SeasonDropDown';
+import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
+import styles from 'styles/mode/ModeWrap.module.scss';
 interface RankModeWrapProps {
   children: React.ReactNode;
 }
@@ -39,7 +39,6 @@ export default function RankModeWrap({ children }: RankModeWrapProps) {
         )}
       </div>
       {React.cloneElement(children as React.ReactElement, {
-        mode: Mode,
         season,
       })}
     </div>

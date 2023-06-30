@@ -1,7 +1,7 @@
+import useSearchBar from 'hooks/useSearchBar';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
 import styles from 'styles/admin/common/AdminSearchBar.module.scss';
-import useSearchBar from 'hooks/useSearchBar';
 
 const MAX_SEARCH_LENGTH = 15;
 

@@ -1,9 +1,9 @@
-import useAxiosGet from 'hooks/useAxiosGet';
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Live, User } from 'types/mainType';
 import { liveState, userState } from 'utils/recoil/layout';
 import { reloadMatchState } from 'utils/recoil/match';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 const useLiveCheck = (presentPath: string) => {
   const user = useRecoilValue<User>(userState);

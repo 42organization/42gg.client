@@ -2,10 +2,10 @@
 
 .searchBar {
   display: flex;
+  z-index: 2;
   justify-content: space-between;
   align-items: center;
   position: relative;
-  z-index: 2;
   height: 2.5rem;
   margin: 1rem 0.8rem 0;
   padding: 0.8rem 1rem;
@@ -15,8 +15,8 @@
   color: #1f0b36;
   input {
     all: unset;
-    box-sizing: border-box;
     width: calc(100% - 4rem);
+    box-sizing: border-box;
     padding: 0.7rem 0.5rem;
     color: #ffffff;
     &::placeholder {
@@ -31,10 +31,10 @@
     }
   }
   .dropdown {
+    z-index: 3;
     display: block;
     box-sizing: border-box;
     position: absolute;
-    z-index: 3;
     top: 2.1rem;
     left: 0;
     width: 100%;
@@ -54,8 +54,8 @@
   height: 1.6rem;
   margin: 0;
   padding: 0 0.5rem;
-  font-size: $small-font;
   border-radius: $mini-radius;
+  font-size: $small-font;
   input {
     width: calc(100% - 1.5rem);
   }

@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
-import PageNation from 'components/Pagination';
 import { IGames, IGameLog } from 'types/admin/gameLogTypes';
 import { instanceInManage } from 'utils/axios';
 import { getFormattedDateToString, gameTimeToString } from 'utils/handleTime';
 import AdminSearchBar from '../common/AdminSearchBar';
-import styles from 'styles/admin/games/GamesTable.module.scss';
+import PageNation from 'components/Pagination';
 import ModifyScoreForm from './ModifyScoreForm';
+import styles from 'styles/admin/games/GamesTable.module.scss';
 
 export default function GamesTable() {
   const [currentPage, setCurrentPage] = useState<number>(1);

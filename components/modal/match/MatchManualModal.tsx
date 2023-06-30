@@ -5,7 +5,6 @@ import { Manual } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import ModeRadiobox from 'components/mode/modeItems/ModeRadiobox';
 import styles from 'styles/modal/match/MatchManualModal.module.scss';
-import { AiFillQuestionCircle } from 'react-icons/ai';
 
 type contentType = {
   title: React.ReactNode;

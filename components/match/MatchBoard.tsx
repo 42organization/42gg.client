@@ -1,13 +1,12 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { CurrentMatchList, Match, Slot } from 'types/matchTypes';
-import { Live } from 'types/mainType';
-import { modalState } from 'utils/recoil/modal';
+import { Live, MatchMode } from 'types/mainType';
+import { Modal } from 'types/modalTypes';
 import { stringToHourMin } from 'utils/handleTime';
 import { liveState } from 'utils/recoil/layout';
-import { Modal } from 'types/modalTypes';
-import { MatchMode } from 'types/mainType';
 import { currentMatchState } from 'utils/recoil/match';
+import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/match/MatchBoard.module.scss';
 
 interface MatchBoardProps {

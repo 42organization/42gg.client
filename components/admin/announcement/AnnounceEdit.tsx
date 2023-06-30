@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { userState } from 'utils/recoil/layout';
+import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
 import { instanceInManage, instance } from 'utils/axios';
+import { userState } from 'utils/recoil/layout';
+import { toastState } from 'utils/recoil/toast';
+import styles from 'styles/admin/announcement/AnnounceEdit.module.scss';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
-import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
-import styles from 'styles/admin/announcement/AnnounceEdit.module.scss';
-import { toastState } from 'utils/recoil/toast';
 
 const Quill = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -20,12 +20,12 @@ export default function AnnounceEdit() {
   const [content, setContent] = useState('');
   const announceCreateResponse: { [key: string]: string } = {
     SUCCESS: '공지사항이 성공적으로 등록되었습니다.',
-    AC001:
+    AN300:
       '이미 활성화된 공지사항이 있습니다. 새로운 공지사항을 등록하시려면 활성화된 공지사항을 삭제해 주세요.',
   };
   const announceDeleteResponse: { [key: string]: string } = {
     SUCCESS: '공지사항이 성공적으로 삭제되었습니다.',
-    AD001: '삭제 할 활성화된 공지사항이 없습니다.',
+    AN100: '삭제 할 활성화된 공지사항이 없습니다.',
   };
   const koreaTimeOffset = 1000 * 60 * 60 * 9;
 

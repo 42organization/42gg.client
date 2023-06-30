@@ -1,7 +1,7 @@
-import StyledButton from 'components/StyledButton';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import StyledButton from 'components/StyledButton';
 import styles from 'styles/Login.module.scss';
 
 function Login() {
@@ -12,12 +12,14 @@ function Login() {
   }, []);
 
   const onLogin = () => {
+    localStorage.setItem('login', 'true');
     router.push(
       `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/oauth2/authorization/42`
     );
   };
 
   const onKakaoLogin = () => {
+    localStorage.setItem('login', 'true');
     router.push(
       `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/oauth2/authorization/kakao`
     );

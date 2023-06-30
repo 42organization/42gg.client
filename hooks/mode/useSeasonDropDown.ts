@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { seasonListState, latestSeasonIdState } from 'utils/recoil/seasons';
 import { useRecoilValue } from 'recoil';
 import { ToggleMode } from 'types/rankTypes';
+import { seasonListState, latestSeasonIdState } from 'utils/recoil/seasons';
 
 const useSeasonDropDown = (
   clickTitle?: boolean,

@@ -7,10 +7,10 @@
 
 .container {
   @include menu-noti-Bar;
+  width: 20rem;
   padding-top: 2.8rem;
   padding-left: 1.8rem;
   background: rgba(244, 221, 247, 1);
-  width: 20rem;
   .menuTopWrapper {
     display: flex;
     justify-content: space-between;
@@ -31,9 +31,9 @@
     }
   }
   .menuProfileWrapper {
-    width: 100%;
     display: flex;
     align-items: center;
+    width: 100%;
     padding-top: 2rem;
     padding-bottom: 2rem;
     font-family: 'Roboto', sans-serif;
@@ -44,8 +44,8 @@
       align-items: flex-start;
       padding-left: 0.8rem;
       .userId {
-        font-size: 1.3rem;
         padding-bottom: 0.1rem;
+        font-size: 1.3rem;
         font-weight: 700;
         color: rgba(43, 43, 43, 1);
       }
@@ -86,11 +86,11 @@
       background-color: rgba(212, 191, 215, 1);
     }
     .imageWrapper {
-      width: 2.5rem;
-      height: 2.5rem;
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 2.5rem;
+      height: 2.5rem;
       margin-right: 0.75rem;
       box-shadow: 0px 4px 16px 0px rgba(69, 69, 69, 0.15);
       border-radius: 0.625rem;

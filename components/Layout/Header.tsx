@@ -1,17 +1,16 @@
 import Link from 'next/link';
+import { useEffect, useContext } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import { Modal } from 'types/modalTypes';
 import { liveState } from 'utils/recoil/layout';
-import { useEffect } from 'react';
+import { modalState } from 'utils/recoil/modal';
 import MenuBar from './MenuBar/MenuBar';
+import NotiBar from './NotiBar/NotiBar';
+import { HeaderContextState, HeaderContext } from './HeaderContext';
+import useAxiosGet from 'hooks/useAxiosGet';
 import { FiMenu } from 'react-icons/fi';
 import { BsMegaphone } from 'react-icons/bs';
 import styles from 'styles/Layout/Header.module.scss';
-import NotiBar from './NotiBar/NotiBar';
-import { HeaderContextState, HeaderContext } from './HeaderContext';
-import { useContext } from 'react';
-import { Modal } from 'types/modalTypes';
-import { modalState } from 'utils/recoil/modal';
-import useAxiosGet from 'hooks/useAxiosGet';
 import NotiBell from 'public/image/noti_bell.svg';
 
 export default function Header() {

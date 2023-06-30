@@ -17,8 +17,8 @@ const useLogoutCheck = (): useLogoutCheckReturn => {
   };
 
   const onLogout = async () => {
-    localStorage.removeItem('42gg-token');
     await instance.post('/pingpong/users/logout');
+    localStorage.removeItem('42gg-token');
     setLoggedIn(false);
     router.push('/');
   };

@@ -1,9 +1,9 @@
-import styles from 'styles/modal/menu/KakaoEditModal.module.scss';
-import { instance } from 'utils/axios';
 import router from 'next/router';
 import { useEffect, useState } from 'react';
-import { errorState } from 'utils/recoil/error';
 import { useSetRecoilState } from 'recoil';
+import { instance } from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
+import styles from 'styles/modal/menu/KakaoEditModal.module.scss';
 
 type UserType = 'kakao' | 'fortyTwo' | 'both' | '';
 
@@ -22,7 +22,7 @@ export default function KakaoEditModal() {
 
   useEffect(() => {
     userTypeHandler();
-  }, [userType]);
+  }, []);
 
   const clickLinkHandler = () => {
     if (userType === 'fortyTwo') {

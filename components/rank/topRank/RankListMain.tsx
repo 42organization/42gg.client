@@ -1,28 +1,43 @@
+import { userImages } from 'types/rankTypes';
+import { useEffect, useMemo, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import { RankUser, NormalUser, Rank } from 'types/rankTypes';
+import { colorToggleSelector } from 'utils/recoil/colorMode';
+import useRankListMain from 'hooks/rank/useRankListMain'
 import RankListItemMain from './RankListItemMain';
 import styles from 'styles/rank/RankListMain.module.scss';
-import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { colorToggleSelector } from 'utils/recoil/colorMode';
 
 interface RankListMainProps {
-  rank?: Rank;
   isMain: boolean;
+  season?: number;
 }
 
-export default function RankListMain({ rank, isMain }: RankListMainProps) {
-  const [rankList, setRankList] = useState<NormalUser[] | RankUser[]>([]);
+export default function RankListMain({ isMain, season }: RankListMainProps) {
   const Mode = useRecoilValue(colorToggleSelector);
+  const [rank, setRanker] = useState<userImages[]>([]);
+  const [page] = useState<number>(1);
+
+  const makePathRanker = useMemo(() => {
+    return `/pingpong/users/images?seasonId=${season}&mode=${Mode}`;
+  }, [season, Mode])
+
+  useRankListMain({
+    makePathRanker,
+    setRanker: setRanker,
+    toggleMode: Mode,
+    page: page,
+    season: season,
+  })
 
   useEffect(() => {
-    if (rank?.rankList.length === 3) {
-      setRankList(rank.rankList);
-    } else if (rank?.rankList.length === 2 && rank?.rankList[0] !== undefined) {
-      dummyRankList[0] = rank.rankList[0];
-      dummyRankList[1] = rank.rankList[1];
-      setRankList(dummyRankList);
+    if (rank?.length === 3) {
+      setRanker(rank);
+    } else if (rank?.length === 2 && rank[0] !== undefined) {
+      dummyRankList[0] = rank[0];
+      dummyRankList[1] = rank[1];
+      setRanker(dummyRankList);
     } else {
-      setRankList(dummyRankList);
+      setRanker(dummyRankList);
     }
   }, [rank, Mode]);
 
@@ -39,34 +54,25 @@ export default function RankListMain({ rank, isMain }: RankListMainProps) {
     <div>
       <div className={`${styles.bangContainer}`}>{bangElements}</div>
       <div className={`${styles.mainContainer} ${isMain && styles.isMain}`}>
-        {rankList.map((item: NormalUser | RankUser) => (
-          <RankListItemMain key={item.rank} user={item} />
+        {rank !== undefined && rank.map((item: userImages, index: number) => (
+          <RankListItemMain key={index} user={item} rank={index}/>
         ))}
       </div>
     </div>
   );
 }
 
-const dummyRankList: RankUser[] | NormalUser[] = [
+const dummyRankList: userImages[] = [
   {
-    rank: 2,
     intraId: 'intraId',
-    statusMessage: 'Hi',
-    ppp: 100,
     userImageUri: '',
   },
   {
-    rank: 1,
     intraId: 'intraId',
-    statusMessage: 'Hi',
-    ppp: 90,
     userImageUri: '',
   },
   {
-    rank: 3,
     intraId: 'intraId',
-    statusMessage: 'Hi',
-    ppp: 80,
     userImageUri: '',
   },
 ];

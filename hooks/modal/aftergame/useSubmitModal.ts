@@ -1,9 +1,9 @@
-import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
+import { AfterGame, TeamScore } from 'types/scoreTypes';
 import { reloadMatchState } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
-import { AfterGame, TeamScore } from 'types/scoreTypes';
+import axios from 'axios';
 import { instance } from 'utils/axios';
 
 type rankRequest = {

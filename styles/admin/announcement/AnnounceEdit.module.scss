@@ -3,10 +3,10 @@
 .container {
   display: flex;
   flex-direction: row;
-  padding: 1.5rem;
   gap: 1.5rem;
   width: 100%;
   height: 34rem;
+  padding: 1.5rem;
 }
 
 .announceModal {
@@ -14,13 +14,18 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  border-radius: $small-radius;
-  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
-  color: white;
-  font-size: $medium-font;
   min-width: 16rem;
   height: min-content;
   max-height: 31rem;
+  border-radius: $small-radius;
+  background: linear-gradient(
+    180deg,
+    #301451 23.82%,
+    #481570 58.85%,
+    #300e4b 98.44%
+  );
+  color: white;
+  font-size: $medium-font;
 }
 
 .announceModalContainer {
@@ -31,6 +36,7 @@
 .modalTitle {
   @include modalTitle;
   font-size: 2rem;
+  color: #121725;
 }
 
 .quillViewer {
