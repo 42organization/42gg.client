@@ -20,13 +20,3 @@ export const liveState = atom<Live>({
     gameId: null,
   },
 });
-
-export const openMenuBarState = atom<boolean>({
-  key: `openMenuBarState/${v1()}`,
-  default: false,
-});
-
-export const openNotiBarState = atom<boolean>({
-  key: `openNotiBarState/${v1()}`,
-  default: false,
-});
