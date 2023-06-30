@@ -10,9 +10,9 @@ export default function useAxiosResponse() {
   const setLogin = useSetRecoilState(loginState);
   const [isRecalling, setIsRecalling] = useState(false);
   const setError = useSetRecoilState(errorState);
+  const refreshToken = Cookies.get('refresh_token') || '';
 
   const accessTokenHandler = async () => {
-	const refreshToken = Cookies.get('refresh_token');
     try {
       const res = await instance.post(
         `/pingpong/users/accesstoken?refreshToken=${refreshToken}`
@@ -26,7 +26,6 @@ export default function useAxiosResponse() {
   const errorResponseHandler = async (error: AxiosError) => {
     if (error.response && error.response.status === 401 && !isRecalling) {
       setIsRecalling(true);
-      const refreshToken = Cookies.get('refresh_token');
       try {
         const res = await instance.post(
           `/pingpong/users/accesstoken?refreshToken=${refreshToken}`
@@ -53,7 +52,7 @@ export default function useAxiosResponse() {
   );
 
   useEffect(() => {
-	if (localStorage.getItem('42gg-token')) {
+    if (localStorage.getItem('42gg-token')) {
       setLogin(true);
     } else {
       accessTokenHandler();
