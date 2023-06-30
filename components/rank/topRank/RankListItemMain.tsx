@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import { userImages } from 'types/rankTypes';
 import { useRecoilValue } from 'recoil';
 import { RankUser, NormalUser } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
@@ -8,13 +9,13 @@ import { TbQuestionMark } from 'react-icons/tb';
 import styles from 'styles/rank/RankListMain.module.scss';
 
 interface RankListItemMainProps {
-  user: NormalUser | RankUser;
+  rank: number;
+  user: userImages;
 }
 
-export default function RankListItemMain({ user }: RankListItemMainProps) {
-  const { rank, intraId, userImageUri } = user;
+export default function RankListItemMain({ user, rank }: RankListItemMainProps) {
+  const { intraId, userImageUri } = user || {};
   const Mode = useRecoilValue(colorToggleSelector);
-  const rankFiltered = rank < 0 ? '-' : rank;
   const renderLink = intraId !== 'intraId';
 
   return (
@@ -58,7 +59,6 @@ export default function RankListItemMain({ user }: RankListItemMainProps) {
             className={`${styles[`rankNumber${rank}`]} 
             ${Mode === 'NORMAL' && styles.normal}`}
           >
-            {rankFiltered}
           </div>
         </div>
       </div>

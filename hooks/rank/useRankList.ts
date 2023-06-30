@@ -6,11 +6,9 @@ import { myRankState, scrollState } from 'utils/recoil/myRank';
 import useAxiosGet from 'hooks/useAxiosGet';
 interface useRankListProps {
   makePath: string;
-  makePathRanker: string;
   toggleMode: ToggleMode;
   season: number | undefined;
   setRank: Dispatch<SetStateAction<Rank | undefined>>;
-  setRanker: Dispatch<SetStateAction<Rank | undefined>>;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
   pageInfo: {
@@ -22,11 +20,9 @@ interface useRankListProps {
 
 const useRankList = ({
   makePath,
-  makePathRanker,
   toggleMode,
   season,
   setRank,
-  setRanker,
   page,
   setPage,
   pageInfo,
@@ -43,24 +39,6 @@ const useRankList = ({
     err: 'DK01',
     type: 'setError',
   });
-
-  const getRankerDataHandler = useAxiosGet<any>({
-    url: makePathRanker,
-    setState: (data) => {
-      [data.rankList[0], data.rankList[1]] = [
-        data.rankList[1],
-        data.rankList[0],
-      ];
-      setRanker(data);
-      setMyRank((prev) => ({ ...prev, [toggleMode]: data.myRank }));
-    },
-    err: 'DK01',
-    type: 'setError',
-  });
-
-  useEffect(() => {
-    getRankerDataHandler();
-  }, [page, season, toggleMode]);
 
   useEffect(() => {
     async function waitRankList() {

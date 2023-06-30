@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import GameResult from 'components/game/GameResult';
-import RankList from 'components/rank/RankList';
+import RankListMain from 'components/rank/topRank/RankListMain';
 import { FaChevronRight } from 'react-icons/fa';
 import styles from 'styles/main/Section.module.scss';
 
@@ -16,7 +16,7 @@ export default function Section({ sectionTitle, path }: SectionProps) {
   const router = useRouter();
   const pathCheck: pathType = {
     game: <GameResult />,
-    rank: <RankList isMain={true} />,
+    rank: <RankListMain isMain={true} season={0}/>,
   };
 
   return (

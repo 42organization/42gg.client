@@ -14,11 +14,9 @@ interface RankListProps {
 
 export default function RankList({
   season,
-  isMain,
 }: RankListProps) {
   const Mode = useRecoilValue(colorToggleSelector);
   const [rank, setRank] = useState<Rank>();
-  const [ranker, setRanker] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
   const pageInfo = {
     currentPage: rank?.currentPage,
@@ -29,39 +27,22 @@ export default function RankList({
     const modeQuery = (targetMode?: string) =>
       targetMode !== 'NORMAL' ? 'ranks/single' : 'exp';
     const seasonQuery = Mode === 'RANK' ? `&season=${season}` : '';
-    return isMain
-      ? `/pingpong/${modeQuery('RANK')}?page=1&size=3`
-      : `/pingpong/${modeQuery(Mode)}?page=${page}&size=20${seasonQuery}`;
+    return `/pingpong/${modeQuery(Mode)}?page=${page}&size=20${seasonQuery}`;
   };
-
-  const makePathRanker = (): string => {
-    const modeQuery = (targetMode?: string) =>
-      targetMode !== 'NORMAL' ? 'ranks/single' : 'exp';
-    const seasonQuery = Mode === 'RANK' ? `&season=${season}` : '';
-    return isMain
-      ? `/pingpong/${modeQuery('RANK')}?page=1&size=3`
-      : `/pingpong/${modeQuery(Mode)}?page=1&size=3${seasonQuery}`;
-  };
-
+  
   useRankList({
     makePath: makePath(),
-    makePathRanker: makePathRanker(),
     toggleMode: Mode,
     season: season,
     setRank: setRank,
-    setRanker: setRanker,
     page: page,
     setPage: setPage,
     pageInfo: pageInfo,
   });
 
-  if (isMain && ranker) {
-    return <RankListMain rank={ranker} isMain={true} />;
-  }
-
   return (
     <div>
-      {ranker && <RankListMain rank={ranker} isMain={false} />}
+      <RankListMain isMain={false} season={season}/>
       <RankListFrame pageInfo={pageInfo}>
         {rank?.rankList.map((item: NormalUser | RankUser, index) => (
           <RankListItem
