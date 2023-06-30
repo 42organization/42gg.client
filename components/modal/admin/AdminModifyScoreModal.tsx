@@ -1,8 +1,8 @@
 import { useSetRecoilState } from 'recoil';
+import { ModifyScoreType } from 'types/admin/gameLogTypes';
+import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import { instanceInManage } from 'utils/axios';
-import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { HiCheckCircle } from 'react-icons/hi';
 import styles from 'styles/admin/modal/AdminModifyScoreModal.module.scss';
 

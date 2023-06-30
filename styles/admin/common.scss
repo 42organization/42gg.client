@@ -1,11 +1,11 @@
 @mixin admin-modal {
-  text-align: center;
   justify-content: center;
   align-items: center;
+  padding: 34px 54px;
+  border-radius: 16px;
   background-color: white;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
-  border-radius: 16px;
-  padding: 34px 54px;
+  text-align: center;
   color: #6b7280;
 }
 

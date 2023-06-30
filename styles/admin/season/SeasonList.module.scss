@@ -3,12 +3,12 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
   gap: 1rem;
   width: 100%;
   min-width: 64rem;
   max-width: 72rem;
   height: 100%;
+  padding: 1.5rem;
 }
 
 .tableContainer {

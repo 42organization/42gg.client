@@ -12,8 +12,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
     padding-bottom: 1.5rem;
+    font-size: 2rem;
   }
   .titleNormal {
     color: rgba(122, 110, 123, 1);
@@ -24,10 +24,10 @@
     color: rgba(165, 95, 195, 1);
   }
   .message {
+    padding-bottom: 1.5rem;
     font-size: 1.25rem;
     font-family: 'NanumSquare_acR', sans-serif;
     font-weight: 800;
-    padding-bottom: 1.5rem;
     letter-spacing: 0.04rem;
   }
 
@@ -62,11 +62,11 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
   font-size: 0.9rem;
   font-family: 'Roboto';
   font-weight: 500;
-  padding-top: 1.5rem;
-  padding-bottom: 1rem;
   .vs {
     font-size: 1.2rem;
     font-weight: 900;
@@ -93,13 +93,13 @@
     font-size: 1.3rem;
   }
   input {
-    font-size: 1.6rem;
-    font-weight: 800;
-    text-align: center;
     width: 4.25rem;
     height: 2.2rem;
     border: 2px solid rgba(221, 200, 224, 1);
     border-radius: 0.3rem;
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-align: center;
   }
 }
 

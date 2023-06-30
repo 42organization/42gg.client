@@ -1,7 +1,7 @@
 import { Enroll } from 'types/modalTypes';
-import styles from 'styles/modal/match/MatchEnrollModal.module.scss';
-import useMatchEnrollModal from 'hooks/modal/match/useMatchEnrollModal';
 import { gameTimeToString } from 'utils/handleTime';
+import useMatchEnrollModal from 'hooks/modal/match/useMatchEnrollModal';
+import styles from 'styles/modal/match/MatchEnrollModal.module.scss';
 
 export default function MatchEnrollModal({ startTime, endTime, mode }: Enroll) {
   const { onEnroll, onCancel } = useMatchEnrollModal({

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import RankListItem from 'components/rank/RankListItem';
 import { ToggleMode } from 'types/rankTypes';
+import RankListItem from 'components/rank/RankListItem';
 
 interface User {
   intraId: string;

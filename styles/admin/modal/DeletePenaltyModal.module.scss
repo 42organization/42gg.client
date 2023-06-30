@@ -1,34 +1,34 @@
 @import 'styles/common.scss';
 
 .modalWrap {
-  text-align: center;
   justify-content: center;
   align-items: center;
+  width: 20rem;
+  height: 15rem;
   background-color: white;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
   border-radius: $medium-radius;
-  width: 20rem;
-  height: 15rem;
+  text-align: center;
 }
 .body {
-  padding: 1rem 1rem;
   flex-direction: column;
+  padding: 1rem 1rem;
   text-align: center;
   .content {
+    padding: 1rem 2rem;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
     font-size: 1rem;
     line-height: 150%;
     color: #6b7280;
-    padding: 1rem 2rem;
   }
 }
 
 .btns {
-  text-align: center;
-  flex-direction: column;
   display: flex;
+  flex-direction: column;
+  text-align: center;
   color: white;
   .btn {
     width: 100%;

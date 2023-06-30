@@ -43,11 +43,11 @@
 }
 
 .topInfo {
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .buttonContainer {
@@ -56,12 +56,12 @@
   top: 83%;
   margin-left: 75%;
   .buttonWrapper {
-    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 3rem;
+    position: absolute;
     width: 5.7rem;
     box-shadow: 0 0 2rem 0.5rem rgba(245, 0, 165, 1);
+    border-radius: 3rem;
   }
 }

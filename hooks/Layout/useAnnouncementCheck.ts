@@ -1,8 +1,8 @@
-import useAxiosGet from 'hooks/useAxiosGet';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 const useAnnouncementCheck = (presentPath: string) => {
   const setModal = useSetRecoilState<Modal>(modalState);

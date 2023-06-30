@@ -56,10 +56,10 @@
 
 .blank {
   display: flex;
-  margin: auto;
   width: 100%;
   height: 16rem;
   resize: none;
+  margin: auto;
   box-sizing: border-box;
   background: #f9fafb;
   border: 0.5px solid #ced4da;
@@ -83,8 +83,8 @@
   justify-content: center;
   gap: 1rem;
   margin-top: 1rem;
-  text-align: center;
   padding: 1rem 1rem;
+  text-align: center;
   align-content: space-evenly;
 
   button {
@@ -92,9 +92,9 @@
     align-items: center;
     width: 100%;
     height: 40px;
-    color: #ffffff;
     border: none;
     border-radius: 0.5rem;
+    color: #ffffff;
     cursor: pointer;
   }
 

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import styles from 'styles/admin/slot/SlotCurrent.module.scss';
 import {
   CurrentMatch,
   SlotCurrentProps,
   Slots,
 } from 'types/admin/adminSlotTypes';
+import styles from 'styles/admin/slot/SlotCurrent.module.scss';
 
 export default function SlotCurrent(props: SlotCurrentProps) {
   const [slotInfo, setSlotInfo] = useState<CurrentMatch>({

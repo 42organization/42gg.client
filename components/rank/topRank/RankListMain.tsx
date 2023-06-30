@@ -1,10 +1,12 @@
 import { userImages } from 'types/rankTypes';
-import RankListItemMain from './RankListItemMain';
-import styles from 'styles/rank/RankListMain.module.scss';
 import { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import { RankUser, NormalUser, Rank } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
 import useRankListMain from 'hooks/rank/useRankListMain'
+import RankListItemMain from './RankListItemMain';
+import styles from 'styles/rank/RankListMain.module.scss';
+
 interface RankListMainProps {
   isMain: boolean;
   season?: number;

@@ -1,6 +1,6 @@
 import { Cancel } from 'types/modalTypes';
-import styles from 'styles/modal/match/MatchCancelModal.module.scss';
 import useMatchCancelModal from 'hooks/modal/match/useMatchCancelModal';
+import styles from 'styles/modal/match/MatchCancelModal.module.scss';
 
 export default function MatchCancelModal({ startTime }: Cancel) {
   const { content, contentType, rejectCancel, onCancel, onReturn, myMatch } =

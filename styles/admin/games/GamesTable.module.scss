@@ -9,11 +9,11 @@
   color: black;
 
   .header {
-    width: 700px;
-    margin: 10px auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 700px;
+    margin: 10px auto;
   }
   .title {
     font-weight: 600;
@@ -23,19 +23,19 @@
   .tableWrap {
     display: flex;
     flex-direction: column;
+    gap: 26px;
     width: fit-content;
     height: fit-content;
     margin: 10px auto;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
-    gap: 26px;
     padding: 26px 10px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
     .tableRow {
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      box-sizing: content-box;
       height: 6.25rem;
+      box-sizing: content-box;
       .gameId {
         display: flex;
         justify-content: center;
@@ -50,10 +50,10 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        background-color: #eff0f3;
-        padding: 0 0 0 11px;
         height: 6.25rem;
         width: 12.5rem;
+        padding: 0 0 0 11px;
+        background-color: #eff0f3;
       }
       .tableTeam {
         height: 6.25rem;
@@ -62,9 +62,9 @@
           display: flex;
           justify-content: center;
           align-items: center;
+          height: 30%;
           border: 1px solid #e5e7eb;
           background: #f9fafb;
-          height: 30%;
         }
         :nth-child(2) {
           display: flex;
@@ -76,18 +76,18 @@
         }
       }
       .win {
-        background: #e6faf1;
         border: 1px solid #aedcc7;
+        background: #e6faf1;
         color: #099255b0;
       }
       .lose {
-        background: #f9eded;
         border: 1px solid #efc4c4;
+        background: #f9eded;
         color: #f5353580;
       }
       .normal {
-        background-color: white;
         border: 1px solid #e5e7eb;
+        background-color: white;
       }
     }
   }
