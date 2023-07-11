@@ -108,6 +108,12 @@
     align-items: center;
     padding-top: 1.3rem;
     padding-right: 1.8rem;
+    &.admin {
+      padding-bottom: 10rem;
+    }
+    &.normal {
+      padding-bottom: 2rem;
+    }
     .logout {
       display: flex;
       align-items: center;
