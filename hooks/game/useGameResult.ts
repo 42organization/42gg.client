@@ -16,7 +16,7 @@ const useGameResult = ({ mode, season }: GameResultProps) => {
   useEffect(() => {
     const makePath = () => {
       const basePath = '/pingpong/games';
-      if (asPath === '/' || asPath.includes('token')) {
+      if (asPath === '/') {
         // live 상태 포함 최근 3개의 게임만 가져온다.
         setPath(`${basePath}?size=${3}&status=${'LIVE'}`);
         return;

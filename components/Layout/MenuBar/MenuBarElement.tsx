@@ -125,6 +125,7 @@ export const AdminMenu = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const { isAdmin } = useRecoilValue<User>(userState);
   const setModal = useSetRecoilState<Modal>(modalState);
+  const logutBottomStyle = isAdmin ? styles.admin : styles.normal;
 
   return (
     <nav className={styles.adminMenu} id={styles.logout}>
@@ -138,7 +139,7 @@ export const AdminMenu = () => {
           />
         </div>
       )}
-      <div className={styles.logoutWrap}>
+      <div className={`${styles.logoutWrap} ${logutBottomStyle}`}>
         <div
           className={styles.logout}
           onClick={() => setModal({ modalName: 'MENU-LOGOUT' })}

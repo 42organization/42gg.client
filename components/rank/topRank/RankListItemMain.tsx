@@ -59,6 +59,7 @@ export default function RankListItemMain({ user, rank }: RankListItemMainProps) 
             className={`${styles[`rankNumber${rank}`]} 
             ${Mode === 'NORMAL' && styles.normal}`}
           >
+            {rank}
           </div>
         </div>
       </div>
