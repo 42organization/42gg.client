@@ -2,9 +2,7 @@
 
 <div align=center>
   
-<img height="100px" alt="42GG_Logo" src="https://github.com/42organization/42gg.client/assets/57761286/210c65a0-5e81-4b35-860d-7107442b987c">
 <img height="100px" alt="42GG_neon_logo" src="https://github.com/42organization/42gg.client/assets/57761286/63f1e8b1-d254-407c-ae3d-9cf60166ed41">
-
 
 <br>
 <br>
@@ -13,7 +11,9 @@
 
 42 서울 내에서 탁구 경기 매칭, 전적 서비스를 제공하는 프로젝트 입니다.
 
-(현재는) 42 Cadet들만 이용 가능!
+🔸 Kakao 계정으로 로그인한 유저는 **매칭/전적 서비스**를 이용할 수 없습니다! 🔸
+
+🔹 42 계정으로 로그인한 유저는 모든 기능 이용 가능! 🔹
 
 <br>
 
