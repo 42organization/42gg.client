@@ -1,0 +1,49 @@
+
+.rollingBanner {
+    position: relative;
+    background: black;
+    width: 100%;
+}
+
+.wrapper {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    margin: 0 30px;
+    background: black;
+    text-align: center;
+
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.megaPhoneContent {
+    display: inline-block;
+    animation: text-scroll 8s linear infinite;
+}
+
+@keyframes text-scroll {
+    from {
+        transform: translateX(200%);
+        -moz-transform: translateX(200%);
+        -webkit-transform: translateX(200%);
+        -o-transform: translateX(200%);
+        -ms-transform: translateX(200%);
+    }
+    to {
+        transform: translateX(-200%);
+        -moz-transform: translateX(-200%);
+        -webkit-transform: translateX(-200%);
+        -o-transform: translateX(-200%);
+        -ms-transform: translateX(-200%);
+    }
+}
+
+.megaPhoneContent ul {
+    display: inline;
+}
+
+.megaPhoneContent ul li {
+    display: inline-block;
+    color: yellow;
+}
