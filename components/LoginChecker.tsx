@@ -12,7 +12,8 @@ export default function LoginChecker({ children }: LoginCheckerProps) {
 
   return loggedIn ? (
     <>
-      {firstVisited && <WelcomeModal />}
+{/*       {firstVisited && <WelcomeModal />}
+ */}      {<WelcomeModal />}
       {children}
     </>
   ) : (

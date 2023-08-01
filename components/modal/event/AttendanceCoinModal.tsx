@@ -1,15 +1,15 @@
 import { useSetRecoilState } from 'recoil';
 import { firstVisitedState } from 'utils/recoil/modal';
-import CoinAnimation from "../CoinAnimation";
+//import styles from 'styles/modal/event/AttendanceCoinModal.module.scss';
 import styles from 'styles/modal/event/WelcomeModal.module.scss';
 import modalStyles from 'styles/modal/Modal.module.scss';
 
-export default function WelcomeModal() {
+export default function AttendanceCoinModal() {
   const setFirstVisited = useSetRecoilState(firstVisitedState);
   const content = {
-    title: 'Welcome!',
+    title: '출 석',
     message:
-      '42GG에 오신걸 환영합니다.\n당신의 행복한 탁구 생활을\n응원합니다! 총총총...',
+      '출석하기를 클릭하시면 \n코인을 획득하실수 있습니다.',
   };
 
   const openPageManual = () => {
@@ -36,10 +36,12 @@ export default function WelcomeModal() {
     >
       <div className={styles.container}>
         <div className={styles.phrase}>
-          <div className={styles.emoji}></div>
           <div className={styles.title}>{content.title}</div>
           <div className={styles.message}>{content.message}</div>
-            <CoinAnimation amount={3}/>
+          <div className={styles.rose}>
+            <span>{`@`}</span>
+            <span>{`)->->--`}</span>
+          </div>
         </div>
         <div className={styles.buttons}>
           <div className={styles.negative}>
