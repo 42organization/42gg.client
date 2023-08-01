@@ -10,6 +10,9 @@ import {
   GrAnnounce,
 } from 'react-icons/gr';
 import { IoGameControllerOutline } from 'react-icons/io5';
+import { IoReceiptOutline } from 'react-icons/io5';
+import { BsShop } from 'react-icons/bs';
+import { TbCoin } from 'react-icons/tb';
 import styles from 'styles/admin/SideNav.module.scss';
 
 export default function SideNav() {
@@ -79,6 +82,30 @@ export default function SideNav() {
         currentPath={currentPath}
       >
         <TbCalendarTime className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+      url={'/purchaseHistory'}
+      menuName={'거래내역 관리'}
+      currentPath={currentPath}
+      >
+        <IoReceiptOutline className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+      url={'/store'}
+      menuName={'상점 관리'}
+      currentPath={currentPath}
+      >
+        <BsShop className={styles.logo}/>
+      </SideNavContent>
+
+      <SideNavContent
+      url={'/'}
+      menuName={'재화 정책 관리'}
+      currentPath={currentPath}
+      >
+        <TbCoin className={styles.logo}/>
       </SideNavContent>
     </div>
   );
