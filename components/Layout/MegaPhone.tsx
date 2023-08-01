@@ -3,6 +3,9 @@ import styles from 'styles/Layout/MegaPhone.module.scss';
 
 const MegaPhone = () => {
 
+    // api 호출해서 내용 받기
+
+
     return (
         <div className={styles.rollingBanner}>
             <div className={styles.wrapper}>

@@ -1,4 +1,3 @@
-
 .rollingBanner {
     position: relative;
     background: black;
@@ -12,30 +11,28 @@
     margin: 0 30px;
     background: black;
     text-align: center;
-
     overflow: hidden;
     white-space: nowrap;
 }
 
 .megaPhoneContent {
-    display: inline-block;
     animation: text-scroll 8s linear infinite;
 }
 
 @keyframes text-scroll {
     from {
-        transform: translateX(200%);
-        -moz-transform: translateX(200%);
-        -webkit-transform: translateX(200%);
-        -o-transform: translateX(200%);
-        -ms-transform: translateX(200%);
+        transform: translateX(120%);
+        -moz-transform: translateX(120%);
+        -webkit-transform: translateX(120%);
+        -o-transform: translateX(120%);
+        -ms-transform: translateX(120%);
     }
     to {
-        transform: translateX(-200%);
-        -moz-transform: translateX(-200%);
-        -webkit-transform: translateX(-200%);
-        -o-transform: translateX(-200%);
-        -ms-transform: translateX(-200%);
+        transform: translateX(-120%);
+        -moz-transform: translateX(-120%);
+        -webkit-transform: translateX(-120%);
+        -o-transform: translateX(-120%);
+        -ms-transform: translateX(-120%);
     }
 }
 
