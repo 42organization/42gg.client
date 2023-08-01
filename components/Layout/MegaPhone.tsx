@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import useAxiosGet from 'hooks/useAxiosGet';
-import styles from 'styles/Layout/MegaPhone.module.scss';
-
+import styles from 'styles/Layout/Megaphone.module.scss';
 
 interface MegaphoneContent {
     megaphoneId: number;
@@ -24,37 +23,61 @@ const Megaphone = () => {
             content: 'test2',
             intraId: 'hyungjpa2',
         },
-
+        {
+            megaphoneId: 3,
+            content: 'test3',
+            intraId: 'hyungjpa3',
+        },
+        {
+            megaphoneId: 4,
+            content: 'test4',
+            intraId: 'hyungjpa4',
+        },
+        {
+            megaphoneId: 5,
+            content: 'test5',
+            intraId: 'hyungjpa5',
+        },
     ]
+    
     // api 호출해서 내용 받기
-    const [contents, setContents] = useState<MegaphoneList>(defaultContents);
-
-    const getMegaphoneHandler = useAxiosGet({
-        url: `/pingpong/megaphones`,
-        setState: setContents,
-        err: 'HJ01',
-        type: 'setError'
-    })
+    // const getMegaphoneHandler = useAxiosGet({
+    //     url: `/pingpong/megaphones`,
+    //     setState: setContents,
+    //     err: 'HJ01',
+    //     type: 'setError'
+    // })
 
     // useEffect(() => {
     //     getMegaphoneHandler();
     // }, []);
+    
+    const [contents, setContents] = useState<MegaphoneList>(defaultContents);
+    const [play, setPlay] = useState('running');
+    
+    const clickPause = () => {
+        if (play === 'pause') {
+            setPlay('running');
+        } else {
+            setPlay('pause');
+            setTimeout(() => setPlay('running'), 5000);
+        }
+    }
+    
+    const pauseStyle: {[key: string]: string} = {
+        pause: styles.pause,
+        running: styles.running,
+    };
 
     return (
-        <div className={styles.rollingBanner}>
+        <div className={styles.rollingBanner}
+        onClick={() => clickPause()}>
             <div className={styles.wrapper}>
-                <div className={styles.megaPhoneContent}>
-                    <ul>
-                        {contents.map((content, idx) => (
-                            <>
-                                <li key={idx}>{content.intraId} {content.content}</li>
-                                <li key={idx}>&nbsp;</li>
-                            </>
-                        ))}
-                    </ul>
-
-                </div>
-
+                <ul className={`${styles.megaphoneContents} ${pauseStyle[play]}`}>
+                    {contents.map((content, idx) => (
+                            <li key={idx}>{content.intraId} {content.content} &nbsp;&nbsp;</li>
+                    ))}
+                </ul>
             </div>
         </div>
     )

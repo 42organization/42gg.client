@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import StyledButton from 'components/StyledButton';
 import styles from 'styles/Login.module.scss';
+import Megaphone from 'components/Layout/Megaphone';
 
 function Login() {
   const router = useRouter();
@@ -27,6 +28,7 @@ function Login() {
 
   return (
     <>
+      <Megaphone/>
       <div className={styles.loginContainer}>
         <div className={styles.innerContainer}>
           <div className={styles.logoContainer}>
