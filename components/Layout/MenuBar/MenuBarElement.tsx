@@ -29,6 +29,11 @@ interface menuItemProps {
 
 const MenuItem = ({ itemName, onClick }: menuItemProps) => {
   const menuList: { [key: string]: { [key: string]: string | JSX.Element } } = {
+    Store: {
+      name: '상점',
+      // TODO : 이미지 변경할 것
+      svg: <RankingEmoji />,
+    },
     Ranking: {
       name: '랭킹',
       svg: <RankingEmoji />,
@@ -93,6 +98,11 @@ export const MainMenu = () => {
 
   return (
     <nav className={styles.mainMenu}>
+      <MenuLink
+        link='/store'
+        itemName='Store'
+        onClick={HeaderState?.resetOpenMenuBarState}
+      />
       <MenuLink
         link='/rank'
         itemName='Ranking'
