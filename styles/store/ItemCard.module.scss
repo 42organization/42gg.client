@@ -1,0 +1,86 @@
+@import 'styles/common.scss';
+
+.itemCard {
+  width: 25rem;
+  //   position: relative;
+  box-shadow: 0 0.1rem 0.3rem #dfdfdf;
+  margin: 3rem auto;
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .preview {
+    position: relative;
+    height: inherit;
+
+    .badge {
+      position: absolute;
+      width: 3rem;
+      text-align: center;
+      background-color: rgb(128, 0, 0);
+      color: #fff;
+      top: 7%;
+      right: 0;
+      border-radius: 1.25rem 0 0 1.25rem;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  .title {
+    h4 {
+      font-weight: bold;
+      //   display: block;
+      //   margin-bottom: 18px;
+      //   text-transform: uppercase;
+      color: black;
+    }
+  }
+
+  .details {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-color: white;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    z-index: 1;
+
+    .itemPrice {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: space-between;
+
+      .discounted {
+        text-decoration: line-through 2px solid #666666;
+        padding: 0;
+        margin: 0;
+      }
+
+      .discountedPrice {
+        padding: 0;
+        margin: 0;
+        font-size: 1rem;
+        text-align: center;
+        font-weight: bold;
+        transform: translateY(-3px);
+      }
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
