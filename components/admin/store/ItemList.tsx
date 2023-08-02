@@ -9,37 +9,22 @@ import {
 } from '@mui/material';
 
 
-const profileTableTitle: { [key: string]: string } = {
-    id: 'ID',
-    usageTime: '사용 시간',
-    userIntraId: '사용자 id',
-    content: '현재 이미지',
-    status: '사용 상태',
-    delete: '삭제'
-}
 
-function ProfileList () {
-
-    const test = [    'id',
-    'usageTime',
-    'userIntraId',
-    'content',
-    'status',
-    'delete']
+function ItemList () {
 
     return (
         <>
             <TableContainer component={Paper}>
                 <Table aria-label='customized table'>
-                    <TableHead>
+                    {/* <TableHead>
                         <TableRow>
                             {test.map((content, idx) => (
                                 <TableCell key={idx}>
-                                    {profileTableTitle[content]}
+                                    {changeHistoryTableTitle[content]}
                                 </TableCell>
                             ))}
                         </TableRow>
-                    </TableHead>
+                    </TableHead> */}
                     <TableBody>
                         <TableRow>
                             <TableCell>비어있습니다</TableCell>
@@ -47,9 +32,8 @@ function ProfileList () {
                     </TableBody>
                 </Table>
             </TableContainer>
-
         </>
     )
 }
 
-export default ProfileList;
+export default ItemList;

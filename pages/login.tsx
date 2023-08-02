@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import StyledButton from 'components/StyledButton';
 import styles from 'styles/Login.module.scss';
+import MenuTab from 'components/admin/purchaseHistory.tsx/MenuTab';
+import StoreMain from 'components/admin/store/StoreMain';
 
 function Login() {
   const router = useRouter();
@@ -27,6 +29,9 @@ function Login() {
 
   return (
     <>
+      {/* <MenuTab/> */}
+      {/* <StoreMain /> */}
+      
       <div className={styles.loginContainer}>
         <div className={styles.innerContainer}>
           <div className={styles.logoContainer}>

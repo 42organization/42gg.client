@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PurchaseList from "./PurchaseList";
 import MegaphoneList from "./MegaphoneList";
 import ProfileList from "./ProfileList";
-
+import styles from "styles/admin/purchaseHistory/MenuTab.module.scss";
 
 function MenuTab() {
 
@@ -23,14 +23,23 @@ function MenuTab() {
 
     return (
         <>
-            {tabContents.map((content, idx) => {
-                return (
-                    <button key={idx} onClick={() => setTab(content)}>
-                        {content}
-                    </button>
-                )
-            })}
-            {child}
+            <div className={styles.top}>
+                <h2 className={styles.title}>
+                    거래내역 관리
+                </h2>
+                <div className={styles.tab}>
+                    {tabContents.map((content, idx) => {
+                        return (
+                            <button key={idx} onClick={() => setTab(content)}>
+                                {content}
+                            </button>
+                        )
+                    })}
+                </div>
+            </div>
+            <div>
+                {child}
+            </div>
         </>
     )
 

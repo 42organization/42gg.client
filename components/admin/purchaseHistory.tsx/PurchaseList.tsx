@@ -40,6 +40,11 @@ function PurchaseList () {
                             ))}
                         </TableRow>
                     </TableHead>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell>비어있습니다</TableCell>
+                        </TableRow>
+                    </TableBody>
                 </Table>
             </TableContainer>
         </>
