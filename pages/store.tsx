@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import styles from 'styles/store/StoreContainer.module.scss';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { StoreMode } from 'types/storeTypes';
 import { StoreModeWrap } from 'components/mode/modeWraps/StoreModeWrap';
-import { useRouter } from 'next/router';
+import styles from 'styles/store/StoreContainer.module.scss';
 
 export default function Store() {
   const [mode, setMode] = useState<StoreMode>('BUY');
@@ -20,6 +20,9 @@ export default function Store() {
         GG Store
       </h1>
       <StoreModeWrap currentMode={mode} setStoreMode={setMode} />
+      <div className={styles.storeContainer}>
+        {mode === 'BUY' ? <div>BUY</div> : <div>INVENTORY</div>}
+      </div>
     </div>
   );
 }
