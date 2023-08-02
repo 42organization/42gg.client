@@ -2,17 +2,17 @@ import { useState, useEffect } from 'react';
 import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/Megaphone.module.scss';
 
-interface MegaphoneContent {
+interface IMegaphoneContent {
     megaphoneId: number;
     content: string;
     intraId: string;
 }
 
-interface MegaphoneList {
-    megaphoneList: Array<MegaphoneContent>;
+interface IMegaphoneList {
+    megaphoneList: Array<IMegaphoneContent>;
 }
 
-const defaultContents: MegaphoneList = {
+const defaultContents: IMegaphoneList = {
     megaphoneList: [
         {
             megaphoneId: 1,
@@ -23,7 +23,7 @@ const defaultContents: MegaphoneList = {
 }
 
 const Megaphone = () => {
-    const [contents, setContents] = useState<MegaphoneList>(defaultContents);
+    const [contents, setContents] = useState<IMegaphoneList>(defaultContents);
     const [play, setPlay] = useState('running');
     
     

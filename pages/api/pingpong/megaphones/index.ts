@@ -1,13 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-interface Megaphone {
+interface IMegaphone {
     megaphoneId: number;
     content: string;
     intraId: string;
 }
 
 
-const test: Array<Megaphone> = [
+const test: Array<IMegaphone> = [
 {
     megaphoneId: 1,
     content: '<1>test test<1>',
