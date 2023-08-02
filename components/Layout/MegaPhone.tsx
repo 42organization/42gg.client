@@ -24,7 +24,7 @@ const Megaphone = () => {
 
   // 나중에 useAxiosGet으로 변경 필요
   const getMegaphoneHandler = useMockAxiosGet<any>({
-    url: `pingpong/megaphones`,
+    url: `megaphones`,
     setState: (data) => {
       setContents(data.megaphoneList);
     },
