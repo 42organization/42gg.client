@@ -42,6 +42,7 @@ export const useMockAxiosGet = <T>({
   err,
   type,
 }: useAxiosGetProps<T>): (() => void) => {
+  const setError = useSetRecoilState<string>(errorState);
   const axiosGet = async () => {
     try {
       const res = await mockInstance.get(url);
@@ -51,6 +52,8 @@ export const useMockAxiosGet = <T>({
         alert(e);
       } else if (type === 'console') {
         console.log(err);
+      } else if (type === 'setError') {
+        setError(err);
       }
     }
   };
