@@ -8,52 +8,37 @@ interface MegaphoneContent {
     intraId: string;
 }
 
-type MegaphoneList = Array<MegaphoneContent>;
+interface MegaphoneList {
+    megaphoneList: Array<MegaphoneContent>;
+}
 
-const Megaphone = () => {
-
-    const defaultContents: MegaphoneList = [
+const defaultContents: MegaphoneList = {
+    megaphoneList: [
         {
             megaphoneId: 1,
-            content: 'test1',
-            intraId: 'hyungjpa',
-        },
-        {
-            megaphoneId: 2,
-            content: 'test2',
-            intraId: 'hyungjpa2',
-        },
-        {
-            megaphoneId: 3,
-            content: 'test3',
-            intraId: 'hyungjpa3',
-        },
-        {
-            megaphoneId: 4,
-            content: 'test4',
-            intraId: 'hyungjpa4',
-        },
-        {
-            megaphoneId: 5,
-            content: 'test5',
-            intraId: 'hyungjpa5',
+            content: '문구를 입력해주세요',
+            intraId: 'admin',
         },
     ]
-    
-    // api 호출해서 내용 받기
-    // const getMegaphoneHandler = useAxiosGet({
-    //     url: `/pingpong/megaphones`,
-    //     setState: setContents,
-    //     err: 'HJ01',
-    //     type: 'setError'
-    // })
+}
 
-    // useEffect(() => {
-    //     getMegaphoneHandler();
-    // }, []);
-    
+const Megaphone = () => {
     const [contents, setContents] = useState<MegaphoneList>(defaultContents);
     const [play, setPlay] = useState('running');
+    
+    
+    // api 호출해서 내용 받기
+    const getMegaphoneHandler = useAxiosGet({
+        url: `'http://localhost:3000/api/pingpong/megaphones`,
+        setState: setContents,
+        err: 'HJ01',
+        type: 'setError'
+    })
+
+    useEffect(() => {
+        getMegaphoneHandler();
+    }, []);
+    
     
     const clickPause = () => {
         if (play === 'pause') {
@@ -74,7 +59,7 @@ const Megaphone = () => {
         onClick={() => clickPause()}>
             <div className={styles.wrapper}>
                 <ul className={`${styles.megaphoneContents} ${pauseStyle[play]}`}>
-                    {contents.map((content, idx) => (
+                    {contents.megaphoneList.map((content, idx) => (
                             <li key={idx}>{content.intraId} {content.content} &nbsp;&nbsp;</li>
                     ))}
                 </ul>
