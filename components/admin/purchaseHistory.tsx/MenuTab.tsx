@@ -6,44 +6,55 @@ import styles from "styles/admin/purchaseHistory/MenuTab.module.scss";
 
 function MenuTab() {
 
-    const tabContents = ['구매내역', '확성기', '프로필'];
+    const tabContents = [
+        {
+            contentId: 0,
+            contentName: '구매내역',
+        },
+        {
+            contentId: 1,
+            contentName: '확성기',
+        },
+        {
+            contentId: 2,
+            contentName: '프로필',
+        }
+    ];
 
-    const [tab, setTab] = useState<string>('구매내역');
-
+    const [tabIdx, setTabIdx] = useState(0);
+    
     const [child, setChild] = useState(<PurchaseList/>);
 
     useEffect(() => {
-        if (tab === '구매내역')
+        if (tabIdx === 0)
             setChild(<PurchaseList/>);
-        if (tab === '확성기')
+        if (tabIdx === 1)
             setChild(<MegaphoneList/>);
-        if (tab === '프로필')
+        if (tabIdx === 2)
             setChild(<ProfileList/>);
-    }, [tab]);
+    }, [tabIdx]);
+
 
     return (
-        <>
-            <div className={styles.top}>
-                <h2 className={styles.title}>
-                    거래내역 관리
-                </h2>
-                <div className={styles.tab}>
-                    {tabContents.map((content, idx) => {
-                        return (
-                            <button key={idx} onClick={() => setTab(content)}>
-                                {content}
-                            </button>
-                        )
-                    })}
-                </div>
+        <div className={styles.mainContainer}>
+            <div className={styles.title}>
+                <h2>거래내역 관리</h2>
             </div>
-            <div>
+            <ul className={styles.tabMenu}>
+                {tabContents.map(content => (
+                    <li key={content.contentId}
+                    className={tabIdx === content.contentId ? styles.active : styles.inactive}
+                    onClick={() => setTabIdx(content.contentId)}
+                    >
+                        {content.contentName}
+                    </li>
+                ))}
+            </ul>
+            <div className={styles.subContainer}>
                 {child}
             </div>
-        </>
+        </div>
     )
-
-
 }
 
 export default MenuTab;

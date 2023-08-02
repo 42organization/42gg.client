@@ -1,11 +1,39 @@
-.top {
-    width: 100%;
+.mainContainer {
+    position: relative;
+    width: 80%;
+    height: 100%;
+    left: 10%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+}
+
+.title {
+    width: 100%;
+    h2 {
+        width: fit-content;
+    }
+}
+
+.tabMenu {
+    width: 100%;
+    // background-color: green;
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
 }
 
-.tab {
-    width: 50%;
-    height: 100%;
+.active {
+    text-decoration: underline;
+    text-underline-offset: 0.4rem;
+    cursor: pointer;
+}
+
+.inactive {
+    cursor: pointer;
+}
+
+.subContainer {
+    
 }
