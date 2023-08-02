@@ -13,10 +13,10 @@ import {
 const coinPolicyHistoryTableTitle: { [key: string]: string} = {
     coinpollicyId : '정책 id',
     createUser : '등록 유저',
-    attendance : '출석 획득 코인',
-    nomal : '일반게임 획득 코인',
-    rank_win : '랭크게임 승리 획득 코인',
-    rank_lose : '랭크게임 패배 획득 코인',
+    attendance : '출석 획득',
+    nomal : '일반게임 획득',
+    rank_win : '랭크게임 승리 획득',
+    rank_lose : '랭크게임 패배 획득',
     created_at : '등록 날짜'
 }
 

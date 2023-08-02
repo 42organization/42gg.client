@@ -10,10 +10,10 @@ import {
 
 
 const coinPolicyTableTitle: { [key: string]: string} = {
-    attendance : '출석 획득 코인',
-    normal : '일반게임 획득 코인',
-    rankWin : '랭크게임 승리 획득 코인',
-    rankLose : '랭크게임 패배 획득 코인'
+    attendance : '출석 획득',
+    normal : '일반게임 획득',
+    rankWin : '랭크게임 승리 획득',
+    rankLose : '랭크게임 패배 획득'
 }
 
 
