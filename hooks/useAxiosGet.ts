@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import { instance } from 'utils/axios';
+import { mockInstance } from 'utils/mockAxios';
 
 interface useAxiosGetProps<T> {
   url: string;
@@ -29,6 +30,29 @@ const useAxiosGet = <T>({
         console.log(err);
       } else if (type === 'setError') {
         setError(err);
+      }
+    }
+  };
+  return axiosGet;
+};
+
+export const useMockAxiosGet = <T>({
+  url,
+  setState,
+  err,
+  type,
+}: useAxiosGetProps<T>): (() => void) => {
+  const axiosGet = async () => {
+    try {
+      console.log('mockInstance', mockInstance);
+      const res = await mockInstance.get(url);
+      console.log('res', res);
+      setState(res?.data);
+    } catch (e) {
+      if (type === 'alert') {
+        alert(e);
+      } else if (type === 'console') {
+        console.log(err);
       }
     }
   };
