@@ -101,7 +101,7 @@ export default function SideNav() {
       </SideNavContent>
 
       <SideNavContent
-      url={'/'}
+      url={'/coin'}
       menuName={'재화 정책 관리'}
       currentPath={currentPath}
       >

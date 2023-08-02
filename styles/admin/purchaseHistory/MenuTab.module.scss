@@ -16,12 +16,12 @@
 
 .tabMenu {
     width: 100%;
-    // background-color: green;
     height: 3rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    font-weight: 500;
 }
 
 .active {
@@ -35,5 +35,5 @@
 }
 
 .subContainer {
-    
+
 }
