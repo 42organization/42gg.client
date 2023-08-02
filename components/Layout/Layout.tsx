@@ -63,15 +63,17 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 <HeaderStateContext>
                   <Header />
                 </HeaderStateContext>
-                {presentPath !== '/match' && presentPath !== '/manual' && (
-                  <div className={styles.buttonContainer}>
-                    <div className={styles.buttonWrapper}>
-                      <StyledButton onClick={onClickMatch} width={'5.5rem'}>
-                        Play
-                      </StyledButton>
+                {presentPath !== '/match' &&
+                  presentPath !== '/manual' &&
+                  presentPath !== '/store' && (
+                    <div className={styles.buttonContainer}>
+                      <div className={styles.buttonWrapper}>
+                        <StyledButton onClick={onClickMatch} width={'5.5rem'}>
+                          Play
+                        </StyledButton>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
                 <div className={styles.topInfo}>
                   <Megaphone />
                   {openCurrentMatch && <CurrentMatch />}
