@@ -1,0 +1,15 @@
+.topMenu {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 1rem;
+  * {
+    margin-right: 0.5rem;
+  }
+}
+
+.coins {
+  color: #fbbc66;
+  svg {
+    margin-left: 0.5rem;
+  }
+}
