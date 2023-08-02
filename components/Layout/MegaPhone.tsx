@@ -45,6 +45,8 @@ const Megaphone = () => {
     }
   };
 
+  // 문구 수, 문구 길이에 따라 애니메이션 속도 조절하는 style 추가 필요
+
   const pauseStyle: { [key: string]: string } = {
     pause: styles.pause,
     running: styles.running,
