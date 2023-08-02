@@ -3,8 +3,8 @@
 .itemCard {
   width: 25rem;
   //   position: relative;
-  box-shadow: 0 0.1rem 0.3rem #dfdfdf;
-  margin: 3rem auto;
+  box-shadow: 0 0.1rem 0.3rem #c66bf2;
+  margin: 1rem auto;
   background: white;
   border-radius: 1rem;
   overflow: hidden;
@@ -46,7 +46,7 @@
     height: 100%;
     width: 100%;
     position: relative;
-    background-color: white;
+    background-color: #f0b5f2;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     padding-top: 0.5rem;
@@ -80,7 +80,24 @@
       justify-content: space-evenly;
       align-items: center;
       margin-top: 1rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
+
+      .gift {
+        color: white;
+        width: 40%;
+        height: 1.5rem;
+        border-style: none;
+        border-radius: 1rem;
+        background-color: #fea2ce;
+      }
+      .buy {
+        color: white;
+        width: 40%;
+        height: 1.5rem;
+        border-style: none;
+        border-radius: 1rem;
+        background-color: #ff7dbc;
+      }
     }
   }
 }
