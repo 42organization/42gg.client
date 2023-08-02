@@ -8,38 +8,42 @@ interface IMegaphoneContent {
     intraId: string;
 }
 
-interface IMegaphoneList {
-    megaphoneList: Array<IMegaphoneContent>;
-}
+type MegaphoneList = Array<IMegaphoneContent>
 
-const defaultContents: IMegaphoneList = {
-    megaphoneList: [
-        {
-            megaphoneId: 1,
-            content: '문구를 입력해주세요',
-            intraId: 'admin',
-        },
-    ]
-}
+const defaultContents: MegaphoneList = [
+    {
+        megaphoneId: 1,
+        content: '문구를 입력해주세요',
+        intraId: 'admin',
+    },
+]
 
 const Megaphone = () => {
-    const [contents, setContents] = useState<IMegaphoneList>(defaultContents);
+    const [contents, setContents] = useState<MegaphoneList>(defaultContents);
     const [play, setPlay] = useState('running');
     
-    
-    // api 호출해서 내용 받기
-    const getMegaphoneHandler = useAxiosGet({
-        url: `'http://localhost:3000/api/pingpong/megaphones`,
-        setState: setContents,
-        err: 'HJ01',
-        type: 'setError'
-    })
+    // 실제 api 호출해서 내용 받기
+    // const getMegaphoneHandler = useAxiosGet({
+    //     url: `pingpong/megaphones`,
+    //     setState: (data) => {
+    //         setContents(data.megaphoneList);
+    //     },
+    //     err: 'HJ01',
+    //     type: 'setError'
+    // })
+
+    // test api
+    const getMegaphoneHandler = async () => {
+        const res = await fetch(`http://localhost:3000/api/pingpong/megaphones`);
+        const data = await res.json();
+        console.log(data);
+        await setContents(data.megaphoneList);
+    }
 
     useEffect(() => {
         getMegaphoneHandler();
     }, []);
-    
-    
+
     const clickPause = () => {
         if (play === 'pause') {
             setPlay('running');
@@ -59,8 +63,8 @@ const Megaphone = () => {
         onClick={() => clickPause()}>
             <div className={styles.wrapper}>
                 <ul className={`${styles.megaphoneContents} ${pauseStyle[play]}`}>
-                    {contents.megaphoneList.map((content, idx) => (
-                            <li key={idx}>{content.intraId} {content.content} &nbsp;&nbsp;</li>
+                    {contents.map((content, idx) => (
+                            <li key={idx}> {idx} {content.intraId} : {content.content}&nbsp;&nbsp;</li>
                     ))}
                 </ul>
             </div>

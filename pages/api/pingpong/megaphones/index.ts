@@ -9,28 +9,53 @@ interface IMegaphone {
 
 const test: Array<IMegaphone> = [
 {
+    megaphoneId: 0,
+    content: 'test test',
+    intraId: 'testUser',
+},
+{
     megaphoneId: 1,
-    content: '<1>test test<1>',
+    content: 'test test',    
     intraId: 'testUser',
 },
 {
     megaphoneId: 2,
-    content: '<2>test test<2>',
+    content: 'test test',
     intraId: 'testUser',
 },
 {
     megaphoneId: 3,
-    content: '<3>test test<3>',
+    content: 'test test',
     intraId: 'testUser',
 },
 {
     megaphoneId: 4,
-    content: '<4>test test<4>',
+    content: 'test test',
     intraId: 'testUser',
 },
 {
     megaphoneId: 5,
-    content: '<5>test test<5>',
+    content: 'test test',
+    intraId: 'testUser',
+},
+{
+    megaphoneId: 6,
+    content: 'test test',
+    intraId: 'testUser',
+},
+{
+    megaphoneId: 7,
+    content: 'test test',
+    intraId: 'testUser',
+},
+{
+    megaphoneId: 8,
+    content: 'test test',
+    intraId: 'testUser',
+},
+{
+    megaphoneId: 9,
+    content: 'test test',
     intraId: 'testUser',
 },
 ]
