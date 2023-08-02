@@ -11,8 +11,6 @@ export function StoreModeWrap({
   currentMode,
   setStoreMode,
 }: StoreModeWrapProps) {
-  console.log('StoreModeWrap: ', currentMode);
-
   return (
     // TODO: 매뉴얼 모달 띄우기
     <StoreModeRadioBox

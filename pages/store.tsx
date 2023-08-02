@@ -14,10 +14,6 @@ export default function Store() {
     });
   };
 
-  useEffect(() => {
-    console.log(mode);
-  }, [mode]);
-
   return (
     <div className={styles.pageWrap}>
       <h1 className={styles.title} onClick={clickTitleHandler}>

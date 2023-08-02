@@ -11,8 +11,6 @@ export function RadioBoxWrapper({
   page,
   zIndexList,
 }: RadioBoxWrapperProps) {
-  console.log('RadioBoxWrapper: ', page);
-
   return (
     <div
       className={`${styles[page === 'STORE' ? 'twoButtons' : 'threeButtons']}

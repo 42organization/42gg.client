@@ -17,10 +17,6 @@ export default function StoreModeRadioBox({
     { type: 'INVENTORY', name: '보관함' },
   ];
 
-  useEffect(() => {
-    console.log('StoreModeRadioBox: ', mode);
-  }, [mode]);
-
   return (
     <RadioBoxWrapper page='STORE'>
       {modes.map(({ type, name }) => (
