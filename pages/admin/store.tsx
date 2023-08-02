@@ -1,11 +1,9 @@
 import StoreMain from "components/admin/store/StoreMain";
 
 
-function Store () {
+export default function Store () {
 
     return (
         <StoreMain />
     )
 }
-
-export default Store;

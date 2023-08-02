@@ -1,23 +1,24 @@
 import ItemList from "./ItemList";
-import ChangeHistory from "./changeHistory";
-
-
+import ChangeHistory from "./ChangeHistory";
+import styles from "styles/admin/store/StoreMain.module.scss";
 
 function StoreMain () {
 
 
     return (
-        <>
-            <h2>상점 관리</h2>
-            <div>
+        <div className={styles.mainContainer}>
+            <div className={styles.title}>
+                <h2>상점 관리</h2>
+            </div>
+            <div className={styles.subContainer}>
                 <h4>아이템 목록</h4>
                 <ItemList />
             </div>
-            <div>
+            <div className={styles.subContainer}>
                 <h4>변경 이력</h4>
                 <ChangeHistory />
             </div>
-        </>
+        </div>
     )
 }
 

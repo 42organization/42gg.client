@@ -1,0 +1,21 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 10%;
+    width: 80%;
+    height: 100%;
+
+
+
+    // background-color: blue;
+}
+
+.title {
+    width: 100%;
+    // background-color: green;
+    h2 {
+        width: fit-content;
+        // background-color: yellow;
+    }
+}
