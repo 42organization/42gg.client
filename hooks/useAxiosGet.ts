@@ -44,9 +44,7 @@ export const useMockAxiosGet = <T>({
 }: useAxiosGetProps<T>): (() => void) => {
   const axiosGet = async () => {
     try {
-      console.log('mockInstance', mockInstance);
       const res = await mockInstance.get(url);
-      console.log('res', res);
       setState(res?.data);
     } catch (e) {
       if (type === 'alert') {
