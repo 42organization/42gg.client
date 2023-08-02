@@ -23,34 +23,26 @@
     .modeButton {
       background: #98819b;
     }
+  } @else if ($page == 'STORE') {
+    :checked + .modeButton {
+      background: #a06cbf;
+    }
+    .modeButton {
+      background: #000000;
+    }
   }
 }
 
-.modeButtons {
+@mixin Buttons {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   column-gap: 0.25rem;
   justify-items: stretch;
   align-items: stretch;
   margin: 0 1.25rem;
   color: #ffffff;
-  &.zIndexListButton {
-    margin: 0 1.916rem;
-  }
   input[type='radio'] {
     position: absolute;
     opacity: 0;
-  }
-  // 사용되는 페이지별로 다른 background 적용
-  &.game {
-    @include ButtonBackground('GAME');
-  }
-  &.match {
-    @include ButtonBackground('MATCH');
-  }
-  &.manual {
-    @include ButtonBackground('MANUAL');
-    margin: 0;
   }
   .modeButton {
     display: flex;
@@ -63,5 +55,35 @@
     letter-spacing: 2px;
     text-align: center;
     cursor: pointer;
+  }
+}
+
+.threeButtons {
+  @include Buttons;
+  grid-template-columns: 1fr 1fr 1fr;
+  &.zIndexListButton {
+    margin: 0 1.916rem;
+  }
+  // 사용되는 페이지별로 다른 background 적용
+  &.game {
+    @include ButtonBackground('GAME');
+  }
+  &.match {
+    @include ButtonBackground('MATCH');
+  }
+  &.manual {
+    @include ButtonBackground('MANUAL');
+    margin: 0;
+  }
+}
+
+.twoButtons {
+  @include Buttons;
+  grid-template-columns: 1fr 1fr;
+  &.zIndexListButton {
+    margin: 0 1.916rem;
+  }
+  &.store {
+    @include ButtonBackground('STORE');
   }
 }
