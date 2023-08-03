@@ -6,8 +6,3 @@ export const modalState = atom<Modal>({
   key: `modalState/${v1()}`,
   default: { modalName: null },
 });
-
-export const firstVisitedState = atom<boolean>({
-  key: `firtVisitedState/${v1()}`,
-  default: false,
-});

@@ -21,6 +21,9 @@ import AdminSeasonEdit from './admin/SeasonEdit';
 import FeedbackDetailModal from './admin/FeedbackDetailModal';
 import DeletePenaltyModal from './admin/DeletePenaltyModal';
 import AdminModifyScoreModal from './admin/AdminModifyScoreModal';
+import CoinChangeModal from './statChange/CoinChangeModal';
+import WelcomeModal from './event/WelcomeModal';
+
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
@@ -38,6 +41,7 @@ export default function ModalProvider() {
       penaltyId,
       ISeason,
       ModifyScore,
+      CoinResult,
     },
     setModal,
   ] = useRecoilState(modalState);
@@ -74,6 +78,8 @@ export default function ModalProvider() {
       <AdminModifyScoreModal {...ModifyScore} />
     ) : null,
     'USER-KAKAO_EDIT': <KakaoEditModal />,
+    'COIN-ANIMATION': CoinResult ? <CoinChangeModal {...CoinResult} /> : null,
+    'EVENT-WELCOME': <WelcomeModal />,
   };
 
   useEffect(() => {

@@ -21,6 +21,11 @@ import useLiveCheck from 'hooks/Layout/useLiveCheck';
 import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/Layout/Layout.module.scss';
 
+import { Modal } from 'types/modalTypes';
+//import { useSetRecoilState } from 'recoil';
+import { modalState } from 'utils/recoil/modal';
+//import { useEffect } from 'react';
+
 type AppLayoutProps = {
   children: React.ReactNode;
 };
@@ -31,12 +36,20 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const presentPath = useRouter().asPath;
   const router = useRouter();
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
+  const setModal = useSetRecoilState<Modal>(modalState);
 
   useAxiosResponse();
   useGetUserSeason();
   useSetAfterGameModal();
   useLiveCheck(presentPath);
   useAnnouncementCheck(presentPath);
+
+  useEffect(() => {
+    /*     if (user.isAttended)
+      setModal({modalName: 'WELCOME'}); */
+    setModal({ modalName: 'EVENT-WELCOME' });
+  }, []);
+
   const onClickMatch = () => {
     router.replace('/');
     router.push(`/match`);

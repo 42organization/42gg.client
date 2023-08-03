@@ -3,6 +3,7 @@ import { ISeason } from './seasonTypes';
 import { Value } from 'react-quill';
 import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
+import { CoinResult } from 'types/coinTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -31,7 +32,8 @@ type ModalName =
   | `MATCH-${MatchModal}`
   | `USER-${UserModal}`
   | `FIXED-${FixedModal}`
-  | `ADMIN-${AdminModal}`;
+  | `ADMIN-${AdminModal}`
+  | `COIN-ANIMATION`;
 export interface Cancel {
   startTime: string;
 }
@@ -48,6 +50,10 @@ export interface Announcement {
 
 export interface Exp {
   gameId?: number;
+  mode?: MatchMode | null;
+}
+export interface Coin {
+  //gameId?: number;
   mode?: MatchMode | null;
 }
 
@@ -73,4 +79,5 @@ export interface Modal {
   penaltyId?: number;
   ISeason?: ISeason;
   ModifyScore?: ModifyScoreType;
+  CoinResult?: CoinResult;
 }
