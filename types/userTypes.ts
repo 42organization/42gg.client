@@ -27,3 +27,7 @@ export const racketTypes = [
   { id: 'SHAKEHAND' },
   { id: 'DUAL' },
 ];
+
+export interface ICoin {
+  coin: number;
+}
