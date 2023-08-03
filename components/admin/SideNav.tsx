@@ -85,27 +85,27 @@ export default function SideNav() {
       </SideNavContent>
 
       <SideNavContent
-      url={'/purchaseHistory'}
-      menuName={'거래내역 관리'}
-      currentPath={currentPath}
+        url={'/receipt'}
+        menuName={'거래내역 관리'}
+        currentPath={currentPath}
       >
         <IoReceiptOutline className={styles.logo} />
       </SideNavContent>
 
       <SideNavContent
-      url={'/store'}
-      menuName={'상점 관리'}
-      currentPath={currentPath}
+        url={'/store'}
+        menuName={'상점 관리'}
+        currentPath={currentPath}
       >
-        <BsShop className={styles.logo}/>
+        <BsShop className={styles.logo} />
       </SideNavContent>
 
       <SideNavContent
-      url={'/coin'}
-      menuName={'재화 정책 관리'}
-      currentPath={currentPath}
+        url={'/coin'}
+        menuName={'재화 정책 관리'}
+        currentPath={currentPath}
       >
-        <TbCoin className={styles.logo}/>
+        <TbCoin className={styles.logo} />
       </SideNavContent>
     </div>
   );

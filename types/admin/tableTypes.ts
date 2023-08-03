@@ -5,7 +5,10 @@ export type TableName =
   | 'games'
   | 'announcement'
   | 'season'
-  | 'penalty';
+  | 'penalty'
+  | 'receiptList'
+  | 'megaphoneList'
+  | 'profileList';
 
 export type EtcType = 'button' | 'toggle';
 

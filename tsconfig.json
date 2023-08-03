@@ -21,8 +21,9 @@
     "**/*.ts",
     "**/*.tsx",
     "utils/infinityScroll.js",
-    "utils/infinityScoll.js"
+    "utils/infinityScoll.js",
+    "components/admin/receipt"
   ],
-  "typeRoots" : ["./@types", "./node_modules/@types"],
+  "typeRoots": ["./@types", "./node_modules/@types"],
   "exclude": ["node_modules"]
 }

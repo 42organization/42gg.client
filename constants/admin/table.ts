@@ -72,4 +72,24 @@ export const tableFormat: TableFormat = {
       'edit',
     ],
   },
+  receiptList: {
+    name: '구매 내역',
+    columns: [
+      'receiptId',
+      'createdAt',
+      'itemName',
+      'itemPrice',
+      'purchaserIntra',
+      'ownerIntra',
+      'itemStatus',
+    ],
+  },
+  megaphoneList: {
+    name: '확성기 사용 내역',
+    columns: ['megaphoneId', 'usedAt', 'intraId', 'content', 'status'],
+  },
+  profileList: {
+    name: '프로필 변경권 사용 내역',
+    columns: [],
+  },
 };

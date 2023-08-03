@@ -3,6 +3,7 @@ import { ISeason } from './seasonTypes';
 import { Value } from 'react-quill';
 import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
+import { ImegaphoneId } from './admin/adminReceiptType';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -73,4 +74,5 @@ export interface Modal {
   penaltyId?: number;
   ISeason?: ISeason;
   ModifyScore?: ModifyScoreType;
+  megaphoneId?: ImegaphoneId;
 }

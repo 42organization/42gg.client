@@ -1,0 +1,121 @@
+import { useEffect, useState } from 'react';
+
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
+
+import { tableFormat } from 'constants/admin/table';
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material';
+import PageNation from 'components/Pagination';
+import { getFormattedDateToString } from 'utils/handleTime';
+import { Ireceipt, IreceiptTable } from 'types/admin/adminReceiptType';
+
+const receiptListTableTitle: { [key: string]: string } = {
+  receiptId: 'ID',
+  createdAt: '시간',
+  itemName: '아이템명',
+  itemPrice: '구매가격',
+  purchaserIntra: '구매자',
+  ownerIntra: '수령자',
+  itemStatus: '아이템 상태',
+};
+
+const tableColumnName = [
+  'receiptId',
+  'createdAt',
+  'itemName',
+  'itemPrice',
+  'purchaserIntra',
+  'ownerIntra',
+  'itemStatus',
+];
+
+function ReceiptList() {
+  const [receiptInfo, setReceiptInfo] = useState<IreceiptTable>({
+    receiptList: [],
+    totalPage: 0,
+    currentPage: 0,
+  });
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  // api 연결 시 useCallback, instanceInManage, try catch로 변경
+  const getReceiptList = useMockAxiosGet<any>({
+    url: `/admin/receipt/?page=${currentPage}&size=10`,
+    setState: (data) => {
+      setReceiptInfo({
+        receiptList: data.receiptList.map((receipt: Ireceipt) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(receipt.createdAt)
+          );
+          return {
+            ...receipt,
+            createdAt: `${year}-${month}-${date} ${hour}:${min}`,
+          };
+        }),
+        totalPage: data.totalPage,
+        currentPage: currentPage,
+      });
+    },
+    err: 'HJ02',
+    type: 'setError',
+  });
+
+  useEffect(() => {
+    getReceiptList();
+  }, [currentPage]);
+
+  return (
+    <>
+      <TableContainer component={Paper}>
+        <Table aria-label='customized table'>
+          <TableHead>
+            <TableRow>
+              {tableColumnName.map((column, idx) => (
+                <TableCell key={idx}>{receiptListTableTitle[column]}</TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {receiptInfo.receiptList.length > 0 ? (
+              receiptInfo.receiptList.map((receipt: Ireceipt) => (
+                <TableRow key={receipt.receiptId}>
+                  {tableFormat['receiptList'].columns.map(
+                    (columnName: string, index: number) => {
+                      return (
+                        <TableCell key={index}>
+                          {receipt[columnName as keyof Ireceipt].toString()}
+                        </TableCell>
+                      );
+                    }
+                  )}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell>비어있습니다</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <div>
+        <PageNation
+          curPage={receiptInfo.currentPage}
+          totalPages={receiptInfo.totalPage}
+          pageChangeHandler={(pageNumber: number) => {
+            setCurrentPage(pageNumber);
+          }}
+        />
+      </div>
+    </>
+  );
+}
+
+export default ReceiptList;
