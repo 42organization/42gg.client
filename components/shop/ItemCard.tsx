@@ -11,15 +11,17 @@ export default function ItemCard({ item }: { item: Item }) {
         </div>
         <div className={styles.badge}>{item.discount}%</div>
       </div>
-      <div className={styles.title}>
-        <h4>{item.itemName}</h4>
-      </div>
       <div className={styles.details}>
-        <div className={styles.itemPrice}>
-          <h5 className={styles.discounted}>${item.price}</h5>
-          <h5 className={styles.discountedPrice}>${item.salePrice}</h5>
+        <div className={styles.itemPriceTag}>
+          <div className={styles.title}>
+            <h4>{item.itemName}</h4>
+          </div>
+          <div className={styles.priceTags}>
+            <h5 className={styles.originalPrice}>${item.price}</h5>
+            <h5 className={styles.discountedPrice}>${item.salePrice}</h5>
+          </div>
         </div>
-        <div>
+        <div className={styles.content}>
           <p>{item.content}</p>
         </div>
         <div className={styles.buttons}>

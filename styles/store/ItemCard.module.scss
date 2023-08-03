@@ -48,33 +48,41 @@
     width: 100%;
     position: relative;
     background-color: $g1-bottom;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     padding-top: 0.5rem;
     z-index: 1;
 
-    .itemPrice {
+    .itemPriceTag {
       display: flex;
       flex-direction: row;
       align-items: baseline;
       justify-content: space-between;
-
-      .discounted {
-        text-decoration: line-through 2px solid #666666;
-        padding: 0;
-        margin: 0;
-      }
-
-      .discountedPrice {
-        padding: 0;
-        margin: 0;
-        font-size: 1rem;
+      color: #ffdc43;
+      .title {
         text-align: center;
         font-weight: bold;
-        transform: translateY(-3px);
+      }
+      .priceTags {
+        .originalPrice {
+          text-decoration: line-through 2px solid #666666;
+          padding: 0;
+          margin: 0;
+        }
+
+        .discountedPrice {
+          padding: 0;
+          margin: 0;
+          font-size: 1rem;
+          text-align: center;
+          font-weight: bold;
+          transform: translateY(-0.188rem);
+        }
       }
     }
-
+    .content {
+      color: #282828;
+    }
     .buttons {
       display: flex;
       flex-direction: row;
