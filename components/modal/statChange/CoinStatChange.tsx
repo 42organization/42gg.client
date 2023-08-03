@@ -25,7 +25,7 @@ export default function CoinStatChange({ after, before }: CoinChangeProps) {
     <div className={styles.coinWrap}>
       <div className={styles.coin}>
         <span>{coin}&nbsp;</span>
-        <span>[{(after >= 0 ? '+' : '') + after}]</span>
+        <span>[{(after >= 0 ? '+' : '') + (after - before)}]</span>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ import styles from 'styles/modal/event/WelcomeModal.module.scss';
 export default function WelcomeModal() {
   const setModal = useSetRecoilState<Modal>(modalState);
   const [coin, setCoin] = useState<CoinResult>({
-    afterCoin: 3,
+    afterCoin: 6,
     beforeCoin: 3,
     coinIncrement: 3,
   });
