@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
-import styles from 'styles/Layout/Megaphone.module.scss';
+import styles from 'styles/Layout/MegaPhone.module.scss';
 
 interface IMegaphoneContent {
   megaphoneId: number;
@@ -13,8 +13,9 @@ type MegaphoneList = Array<IMegaphoneContent>;
 const defaultContents: MegaphoneList = [
   {
     megaphoneId: 1,
-    content: '문구를 입력해주세요',
-    intraId: 'admin',
+    content:
+      '등록된 확성기가 없습니다. 상점에서 아이템을 구매해서 확성기를 등록해보세요!',
+    intraId: '관리자',
   },
 ];
 
@@ -26,7 +27,9 @@ const Megaphone = () => {
   const getMegaphoneHandler = useMockAxiosGet<any>({
     url: `megaphones`,
     setState: (data) => {
-      setContents(data.megaphoneList);
+      setContents(
+        data.megaphoneList.length ? data.megaphoneList : defaultContents
+      );
     },
     err: 'HJ01',
     type: 'setError',
@@ -56,11 +59,15 @@ const Megaphone = () => {
     <div className={styles.rollingBanner} onClick={() => clickPause()}>
       <div className={styles.wrapper}>
         <ul className={`${styles.megaphoneContents} ${pauseStyle[play]}`}>
-          {contents.map((content, idx) => (
-            <li key={idx}>
-              {content.intraId} : {content.content}&nbsp;&nbsp;
-            </li>
-          ))}
+          {contents.map((content, idx) =>
+            content === defaultContents[0] ? (
+              <li key={idx}>{content.content}</li>
+            ) : (
+              <li key={idx}>
+                {content.intraId} : {content.content}&nbsp;&nbsp;
+              </li>
+            )
+          )}
         </ul>
       </div>
     </div>

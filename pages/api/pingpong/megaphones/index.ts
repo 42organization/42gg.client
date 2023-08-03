@@ -1,71 +1,68 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from 'next';
 
 interface IMegaphone {
-    megaphoneId: number;
-    content: string;
-    intraId: string;
+  megaphoneId: number;
+  content: string;
+  intraId: string;
 }
 
-
 const test: Array<IMegaphone> = [
-{
-    megaphoneId: 0,
-    content: 'test test',
-    intraId: 'testUser',
-},
-{
-    megaphoneId: 1,
-    content: 'test test',    
-    intraId: 'testUser',
-},
-{
-    megaphoneId: 2,
-    content: 'test test',
-    intraId: 'testUser',
-},
-{
-    megaphoneId: 3,
-    content: 'test test',
-    intraId: 'testUser',
-},
-{
-    megaphoneId: 4,
-    content: 'test test',
-    intraId: 'testUser',
-},
-{
-    megaphoneId: 5,
-    content: 'test test',
-    intraId: 'testUser',
-},
-{
-    megaphoneId: 6,
-    content: 'test test',
-    intraId: 'testUser',
-},
-{
-    megaphoneId: 7,
-    content: 'test test',
-    intraId: 'testUser',
-},
-{
-    megaphoneId: 8,
-    content: 'test test',
-    intraId: 'testUser',
-},
-{
-    megaphoneId: 9,
-    content: 'test test',
-    intraId: 'testUser',
-},
-]
-
+  // {
+  //     megaphoneId: 0,
+  //     content: 'test test',
+  //     intraId: 'testUser',
+  // },
+  // {
+  //     megaphoneId: 1,
+  //     content: 'test test',
+  //     intraId: 'testUser',
+  // },
+  // {
+  //     megaphoneId: 2,
+  //     content: 'test test',
+  //     intraId: 'testUser',
+  // },
+  // {
+  //     megaphoneId: 3,
+  //     content: 'test test',
+  //     intraId: 'testUser',
+  // },
+  // {
+  //     megaphoneId: 4,
+  //     content: 'test test',
+  //     intraId: 'testUser',
+  // },
+  // {
+  //     megaphoneId: 5,
+  //     content: 'test test',
+  //     intraId: 'testUser',
+  // },
+  // {
+  //     megaphoneId: 6,
+  //     content: 'test test',
+  //     intraId: 'testUser',
+  // },
+  // {
+  //     megaphoneId: 7,
+  //     content: 'test test',
+  //     intraId: 'testUser',
+  // },
+  // {
+  //     megaphoneId: 8,
+  //     content: 'test test',
+  //     intraId: 'testUser',
+  // },
+  // {
+  //     megaphoneId: 9,
+  //     content: 'test test',
+  //     intraId: 'testUser',
+  // },
+];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { method } = req;
 
-    const { method } = req;
-
-    if (method === 'GET') {
-        res.status(200).json({"megaphoneList": test});
-    }
+  if (method === 'GET') {
+    res.status(200).json({ megaphoneList: test });
+  }
 }
