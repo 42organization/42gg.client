@@ -7,3 +7,7 @@ export interface Item {
   discount: number;
   salePrice: number;
 }
+
+export interface ItemList {
+  itemList: Item[];
+}

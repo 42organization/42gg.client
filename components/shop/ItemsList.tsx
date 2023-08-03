@@ -1,39 +1,25 @@
-import { Item } from 'types/itemTypes';
+import { useEffect, useState } from 'react';
+import { ItemList } from 'types/itemTypes';
 import ItemCard from './ItemCard';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
 
 export default function ItemsList() {
-  const itemList: Item[] = [
-    {
-      itemId: 1,
-      itemName: '프로필 사진 변경권',
-      content: '42gg의 프로필 사진을 변경할 수 있는 아이템',
-      imageUrl: '/image/fallBackSrc.jpeg',
-      price: 1000,
-      discount: 10,
-      salePrice: 900,
-    },
-    {
-      itemId: 2,
-      itemName: '확성기',
-      content: '확성기 설명',
-      imageUrl: '/image/fallBackSrc.jpeg',
-      price: 2000,
-      discount: 20,
-      salePrice: 1600,
-    },
-    {
-      itemId: 3,
-      itemName: '아이템3',
-      content: '아이템3 설명',
-      imageUrl: '/image/fallBackSrc.jpeg',
-      price: 3000,
-      discount: 30,
-      salePrice: 2100,
-    },
-  ];
+  const [itemList, setItemList] = useState<ItemList>({ itemList: [] });
+
+  useEffect(() => {
+    getItemList();
+  }, []);
+
+  const getItemList = useMockAxiosGet({
+    url: '/items/store',
+    setState: setItemList,
+    err: 'HB01',
+    type: 'setError',
+  });
+
   return (
     <div>
-      {itemList.map((item) => (
+      {itemList.itemList.map((item) => (
         <ItemCard key={item.itemId} item={item} />
       ))}
     </div>
