@@ -58,8 +58,7 @@ const Megaphone = () => {
         <ul className={`${styles.megaphoneContents} ${pauseStyle[play]}`}>
           {contents.map((content, idx) => (
             <li key={idx}>
-              {' '}
-              {idx} {content.intraId} : {content.content}&nbsp;&nbsp;
+              {content.intraId} : {content.content}&nbsp;&nbsp;
             </li>
           ))}
         </ul>
