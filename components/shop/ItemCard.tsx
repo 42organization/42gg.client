@@ -1,8 +1,24 @@
 import Image from 'next/image';
+import { useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
+import { Modal } from 'types/modalTypes';
 import styles from 'styles/store/ItemCard.module.scss';
+import { modalState } from 'utils/recoil/modal';
 
 export default function ItemCard({ item }: { item: Item }) {
+  const setModal = useSetRecoilState<Modal>(modalState);
+
+  const handleGift = () => {
+    setModal({
+      modalName: 'PURCHASE-GIFT',
+    });
+  };
+  const handleBuying = () => {
+    setModal({
+      modalName: 'PURCHASE-BUY',
+    });
+  };
+
   return (
     <div className={styles.itemCard}>
       <div className={styles.preview}>
@@ -25,8 +41,12 @@ export default function ItemCard({ item }: { item: Item }) {
           <p>{item.content}</p>
         </div>
         <div className={styles.buttons}>
-          <button className={styles.gift}>선물하기</button>
-          <button className={styles.buy}>구매하기</button>
+          <button className={styles.gift} onClick={handleGift}>
+            선물하기
+          </button>
+          <button className={styles.buy} onClick={handleBuying}>
+            구매하기
+          </button>
         </div>
       </div>
     </div>

@@ -1,8 +1,8 @@
 @import 'styles/common.scss';
 
 .itemCard {
-  width: 25rem;
-  //   position: relative;
+  width: 95%;
+  position: relative;
   box-shadow: 0 0.1rem 0.3rem #c66bf2;
   margin: 1rem auto;
   background: white;
@@ -16,8 +16,7 @@
     height: inherit;
 
     .img {
-      width: 25rem;
-      height: 18.75rem;
+      height: 8rem;
       max-width: 100%;
       max-height: 100%;
     }
@@ -30,16 +29,6 @@
       top: 7%;
       right: 0;
       border-radius: 1.25rem 0 0 1.25rem;
-    }
-  }
-
-  .title {
-    h4 {
-      font-weight: bold;
-      //   display: block;
-      //   margin-bottom: 18px;
-      //   text-transform: uppercase;
-      color: black;
     }
   }
 
@@ -62,6 +51,7 @@
       .title {
         text-align: center;
         font-weight: bold;
+        color: black;
       }
       .priceTags {
         .originalPrice {

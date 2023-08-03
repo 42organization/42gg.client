@@ -22,6 +22,8 @@ import FeedbackDetailModal from './admin/FeedbackDetailModal';
 import DeletePenaltyModal from './admin/DeletePenaltyModal';
 import AdminModifyScoreModal from './admin/AdminModifyScoreModal';
 import styles from 'styles/modal/Modal.module.scss';
+import BuyModal from './store/purchase/BuyModal';
+import GiftModal from './store/purchase/GiftModal';
 
 export default function ModalProvider() {
   const [
@@ -74,6 +76,8 @@ export default function ModalProvider() {
       <AdminModifyScoreModal {...ModifyScore} />
     ) : null,
     'USER-KAKAO_EDIT': <KakaoEditModal />,
+    'PURCHASE-BUY': <BuyModal />,
+    'PURCHASE-GIFT': <GiftModal />,
   };
 
   useEffect(() => {
