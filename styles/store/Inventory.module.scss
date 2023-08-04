@@ -65,8 +65,11 @@
 }
 
 .usingBadge {
+  display: flex;
+  align-items: center;
   svg {
     fill: #08f458;
+    margin-right: 0.3rem;
   }
 }
 
