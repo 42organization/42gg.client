@@ -1,6 +1,8 @@
 import React from 'react';
+import { InvetoryItem } from './InventoryItem';
 import { InfinityScroll } from 'utils/infinityScroll';
 import { mockInstance } from 'utils/mockAxios';
+import styles from 'styles/store/Inventory.module.scss';
 
 function fetchInventoryData(page: number) {
   return mockInstance.get(`items?page=${page}&size=${8}`).then((res) => {
@@ -20,13 +22,11 @@ export function InventoryList() {
   if (!data) return <div>No data</div>;
 
   return (
-    <div>
+    <div className={styles.inventoryList}>
       {data.pages.map((page, pageIndex) => (
         <React.Fragment key={pageIndex}>
           {page.storageItemList.map((item) => (
-            <div key={item.itemId}>
-              <div>{item.name}</div>
-            </div>
+            <InvetoryItem key={item.itemId} item={item} />
           ))}
         </React.Fragment>
       ))}
