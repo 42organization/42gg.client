@@ -20,7 +20,8 @@ const item2: InventoryItem = {
 const item3: InventoryItem = {
   itemId: 3,
   name: '테스트3',
-  imageUrl: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
+  imageUrl:
+    'https://dodo.ac/np/images/thumb/1/17/NH_Balloon.jpg/600px-NH_Balloon.jpg',
   purchaserIntra: 'jeyoon',
   itemStatus: 'USING',
 };
@@ -44,7 +45,8 @@ const item5: InventoryItem = {
 const item6: InventoryItem = {
   itemId: 6,
   name: '테스트6',
-  imageUrl: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
+  imageUrl:
+    'https://dodo.ac/np/images/thumb/1/17/NH_Balloon.jpg/600px-NH_Balloon.jpg',
   purchaserIntra: 'hyungjpa',
   itemStatus: 'BEFORE',
 };
@@ -68,7 +70,8 @@ const item8: InventoryItem = {
 const item9: InventoryItem = {
   itemId: 9,
   name: '테스트9',
-  imageUrl: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
+  imageUrl:
+    'https://dodo.ac/np/images/thumb/1/17/NH_Balloon.jpg/600px-NH_Balloon.jpg',
   purchaserIntra: 'hyobicho',
   itemStatus: 'BEFORE',
 };
