@@ -12,7 +12,19 @@ type inventoryItemProps = {
 
 export function InvetoryItem({ item }: inventoryItemProps) {
   const user = useRecoilValue(userState);
+
   const { itemId, name, imageUrl, purchaserIntra, itemStatus } = item;
+
+  function handleUseItem(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault();
+    console.log(`use item ${itemId}`);
+  }
+
+  function handleEditItem(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault;
+    console.log(`edit item ${itemId}`);
+  }
+
   return (
     <div key={itemId} className={styles.inventoryItem}>
       <div className={styles.topBadgeContainer}>
@@ -33,9 +45,9 @@ export function InvetoryItem({ item }: inventoryItemProps) {
       </div>
       <div className={styles.overlay}>
         {itemStatus === 'USING' ? (
-          <button>편집하기</button>
+          <button onClick={handleEditItem}>편집하기</button>
         ) : (
-          <button>사용하기</button>
+          <button onClick={handleUseItem}>사용하기</button>
         )}
       </div>
       <div className={styles.imgContainer}>
