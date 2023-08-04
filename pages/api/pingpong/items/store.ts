@@ -21,8 +21,8 @@ export default function handler(
       content: '확성기 설명',
       imageUrl: '/image/fallBackSrc.jpeg',
       price: 2000,
-      discount: 20,
-      salePrice: 1600,
+      discount: 0,
+      salePrice: 2000,
     },
     {
       itemId: 3,

@@ -25,7 +25,7 @@ export default function ItemCard({ item }: { item: Item }) {
         <div className={styles.img}>
           <Image src={item.imageUrl} alt={item.itemName} fill />
         </div>
-        <div className={styles.badge}>{item.discount}%</div>
+        {item.discount && <div className={styles.badge}>{item.discount}%</div>}
       </div>
       <div className={styles.details}>
         <div className={styles.itemPriceTag}>
@@ -33,8 +33,16 @@ export default function ItemCard({ item }: { item: Item }) {
             <h4>{item.itemName}</h4>
           </div>
           <div className={styles.priceTags}>
-            <h5 className={styles.originalPrice}>${item.price}</h5>
-            <h5 className={styles.discountedPrice}>${item.salePrice}</h5>
+            <h5
+              className={
+                item.discount ? styles.onDiscount : styles.originalPrice
+              }
+            >
+              ${item.price}
+            </h5>
+            {item.discount !== 0 && (
+              <h5 className={styles.discountedPrice}>${item.salePrice}</h5>
+            )}
           </div>
         </div>
         <div className={styles.content}>

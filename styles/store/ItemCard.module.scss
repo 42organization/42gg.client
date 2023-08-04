@@ -55,6 +55,12 @@
       }
       .priceTags {
         .originalPrice {
+          font-size: 1rem;
+          padding: 0;
+          margin: 0;
+        }
+
+        .onDiscount {
           text-decoration: line-through 2px solid #666666;
           padding: 0;
           margin: 0;
