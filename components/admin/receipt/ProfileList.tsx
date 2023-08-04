@@ -7,10 +7,18 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import PageNation from 'components/Pagination';
+import { tableFormat } from 'constants/admin/table';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import { useEffect, useState } from 'react';
-import { Iprofile, IprofileTable } from 'types/admin/adminReceiptType';
+import { useSetRecoilState } from 'recoil';
+import {
+  Iprofile,
+  IprofileInfo,
+  IprofileTable,
+} from 'types/admin/adminReceiptType';
 import { getFormattedDateToString } from 'utils/handleTime';
+import { modalState } from 'utils/recoil/modal';
 
 const profileTableTitle: { [key: string]: string } = {
   profileId: 'ID',
@@ -55,6 +63,15 @@ function ProfileList() {
     type: 'setError',
   });
 
+  const setModal = useSetRecoilState(modalState);
+
+  const deleteProfile = (profileInfo: IprofileInfo) => {
+    setModal({
+      modalName: 'ADMIN-PROFILE_DELETE',
+      profileInfo: profileInfo,
+    });
+  };
+
   useEffect(() => {
     getProfileHandler();
   }, [currentPage]);
@@ -71,14 +88,48 @@ function ProfileList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {profileData.profileList.le}
-
-            <TableRow>
-              <TableCell>비어있습니다</TableCell>
-            </TableRow>
+            {profileData.profileList.length > 0 ? (
+              profileData.profileList.map((profile: Iprofile) => (
+                <TableRow key={profile.profileId}>
+                  {tableFormat['profileList'].columns.map(
+                    (columnName: string, index: number) => {
+                      return (
+                        <TableCell key={index}>
+                          {profile[columnName as keyof Iprofile].toString()}
+                        </TableCell>
+                      );
+                    }
+                  )}
+                  <button
+                    onClick={() => {
+                      deleteProfile({
+                        profileId: profile.profileId,
+                        intraId: profile.intraId,
+                        imageUrl: profile.imageUrl,
+                      });
+                    }}
+                  >
+                    삭제
+                  </button>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell>비어있습니다</TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
+      <div>
+        <PageNation
+          curPage={profileData.currentPage}
+          totalPages={profileData.totalPage}
+          pageChangeHandler={(pageNumber: number) => {
+            setCurrentPage(pageNumber);
+          }}
+        />
+      </div>
     </>
   );
 }

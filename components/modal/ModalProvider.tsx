@@ -23,6 +23,7 @@ import DeletePenaltyModal from './admin/DeletePenaltyModal';
 import AdminModifyScoreModal from './admin/AdminModifyScoreModal';
 import styles from 'styles/modal/Modal.module.scss';
 import AdminDeleteMegaphoneModal from './admin/AdminDeleteMegaphoneModal';
+import AdminDeleteProfileModal from './admin/AdminDeleteProfile';
 
 export default function ModalProvider() {
   const [
@@ -40,6 +41,7 @@ export default function ModalProvider() {
       ISeason,
       ModifyScore,
       megaphoneInfo,
+      profileInfo,
     },
     setModal,
   ] = useRecoilState(modalState);
@@ -78,6 +80,9 @@ export default function ModalProvider() {
     'USER-KAKAO_EDIT': <KakaoEditModal />,
     'ADMIN-MEGAPHONE_DELETE': megaphoneInfo ? (
       <AdminDeleteMegaphoneModal {...megaphoneInfo} />
+    ) : null,
+    'ADMIN-PROFILE_DELETE': profileInfo ? (
+      <AdminDeleteProfileModal {...profileInfo} />
     ) : null,
   };
 

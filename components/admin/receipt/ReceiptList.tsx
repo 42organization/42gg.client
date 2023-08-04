@@ -46,7 +46,6 @@ function ReceiptList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   // 특정 유저 거래 내역만 가져오는 api 추가되면 handler 추가
-
   // api 연결 시 useCallback, instanceInManage, try catch로 변경
   const getReceiptHandler = useMockAxiosGet<any>({
     url: `/admin/receipt/?page=${currentPage}&size=10`,

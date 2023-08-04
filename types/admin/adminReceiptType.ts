@@ -34,6 +34,12 @@ export interface ImegaphoneTable {
   currentPage: number;
 }
 
+export interface IprofileInfo {
+  profileId: number;
+  intraId: string;
+  imageUrl: string;
+}
+
 export interface Iprofile {
   profileId: number;
   date: Date;

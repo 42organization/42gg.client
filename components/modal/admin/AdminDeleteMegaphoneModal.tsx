@@ -8,6 +8,7 @@ export default function AdminDeleteMegaphoneModal(props: ImegaphoneInfo) {
   const resetModal = useResetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
 
+  // 수정 필요 작동안함
   const deleteMegaphonehandler = async (id: number) => {
     try {
       await fetch(`http://localhost:3000/api/pingpong/admin/megaphones/${id}`, {
