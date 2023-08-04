@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { colorModeState } from 'utils/recoil/colorMode';
-import { loginState } from 'utils/recoil/login';
 import { userState } from 'utils/recoil/layout';
 import { openCurrentMatchState } from 'utils/recoil/match';
 import Statistics from 'pages/statistics';
@@ -21,11 +19,6 @@ import useLiveCheck from 'hooks/Layout/useLiveCheck';
 import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/Layout/Layout.module.scss';
 
-import { Modal } from 'types/modalTypes';
-//import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
-//import { useEffect } from 'react';
-
 type AppLayoutProps = {
   children: React.ReactNode;
 };
@@ -36,19 +29,12 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const presentPath = useRouter().asPath;
   const router = useRouter();
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
-  const setModal = useSetRecoilState<Modal>(modalState);
 
   useAxiosResponse();
-  useGetUserSeason();
+  useGetUserSeason(presentPath);
   useSetAfterGameModal();
   useLiveCheck(presentPath);
   useAnnouncementCheck(presentPath);
-
-  useEffect(() => {
-    /*     if (user.isAttended)
-      setModal({modalName: 'WELCOME'}); */
-    setModal({ modalName: 'EVENT-WELCOME' });
-  }, []);
 
   const onClickMatch = () => {
     router.replace('/');

@@ -3,8 +3,6 @@ import { AfterGame, TeamScore } from 'types/scoreTypes';
 import { reloadMatchState } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
-import { CoinResult } from 'types/coinTypes';
-import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { instance } from 'utils/axios';
 
@@ -32,16 +30,6 @@ const useSubmitModal = (currentGame: AfterGame) => {
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
-  const [normalcoin, setNormalCoin] = useState<CoinResult>({
-    afterCoin: 8,
-    beforeCoin: 6,
-    coinIncrement: 2,
-  });
-  const [rankcoin, setRankCoin] = useState<CoinResult>({
-    afterCoin: 10,
-    beforeCoin: 5,
-    coinIncrement: 5,
-  });
   const { gameId, matchTeamsInfo, mode } = currentGame;
   const { myTeam, enemyTeam } = matchTeamsInfo;
 
@@ -73,14 +61,8 @@ const useSubmitModal = (currentGame: AfterGame) => {
         return;
       }
     }
-    openChangeModal();
-  };
-
-  async function openChangeModal() {
     openStatChangeModal();
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // 2초 대기
-    openRankCoin();
-  }
+  };
 
   const submitNormalHandler = async () => {
     const requestBody: normalRequest = {
@@ -92,7 +74,7 @@ const useSubmitModal = (currentGame: AfterGame) => {
       setError('KP04');
       return;
     }
-    openChangeModal();
+    openStatChangeModal();
   };
 
   const openStatChangeModal = () => {
@@ -101,28 +83,6 @@ const useSubmitModal = (currentGame: AfterGame) => {
       exp: {
         gameId: gameId,
         mode: mode,
-      },
-    });
-  };
-
-  const openNormalCoin = () => {
-    setModal({
-      modalName: 'COIN-ANIMATION',
-      CoinResult: {
-        afterCoin: normalcoin?.afterCoin,
-        beforeCoin: normalcoin?.beforeCoin,
-        coinIncrement: normalcoin?.coinIncrement,
-      },
-    });
-  };
-
-  const openRankCoin = () => {
-    setModal({
-      modalName: 'COIN-ANIMATION',
-      CoinResult: {
-        afterCoin: rankcoin?.afterCoin,
-        beforeCoin: rankcoin?.beforeCoin,
-        coinIncrement: rankcoin?.coinIncrement,
       },
     });
   };

@@ -8,6 +8,8 @@ export const userState = atom<User>({
     intraId: '',
     isAdmin: false,
     userImageUri: '',
+    isAttended: false,
+    tierImageUri: '',
   },
 });
 
