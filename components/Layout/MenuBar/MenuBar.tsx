@@ -24,6 +24,10 @@ const MenuTop = () => {
 const MenuProfile = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const user = useRecoilValue<User>(userState);
+  const tierId = '빨강 탁구채';
+  const tierImageUri =
+    'https://42gg-public-image.s3.ap-northeast-2.amazonaws.com/images/sangmipa-0a8bc4cc-14a3-4d3a-bea9-cfea82bc5fb4.jpeg';
+
   const [profile, setProfile] = useState<ProfileBasic>({
     intraId: '',
     userImageUri: '',
@@ -62,7 +66,12 @@ const MenuProfile = () => {
       </Link>
       <div className={styles.userInfoWrapper}>
         <div className={styles.userId}>
-          탁구왕<br/>
+          <div className={styles.tierId}>
+            <PlayerImage src={tierImageUri} styleName={'ranktier'} size={50} />
+            &nbsp;
+            {tierId}
+            <br />
+          </div>
           <Link
             href={`/users/detail?intraId=${user.intraId}`}
             onClick={HeaderState?.resetOpenMenuBarState}

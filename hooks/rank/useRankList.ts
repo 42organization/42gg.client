@@ -4,6 +4,7 @@ import { Rank } from 'types/rankTypes';
 import { MyRank, ToggleMode } from 'types/rankTypes';
 import { myRankState, scrollState } from 'utils/recoil/myRank';
 import useAxiosGet from 'hooks/useAxiosGet';
+import useMockAxiosGet from 'hooks/useAxiosGet';
 interface useRankListProps {
   makePath: string;
   toggleMode: ToggleMode;
@@ -39,6 +40,15 @@ const useRankList = ({
     err: 'DK01',
     type: 'setError',
   });
+  /*   const getRankDataHandler = useMockAxiosGet<any>({
+    url: '/rank/ranklist',
+    setState: (data) => {
+      setRank(data);
+      setMyRank((prev) => ({ ...prev, [toggleMode]: data.myRank }));
+    },
+    err: 'DK01',
+    type: 'setError',
+  }); */
 
   useEffect(() => {
     async function waitRankList() {

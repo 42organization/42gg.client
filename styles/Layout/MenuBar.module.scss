@@ -48,6 +48,14 @@
         font-size: 1.3rem;
         font-weight: 700;
         color: rgba(43, 43, 43, 1);
+        .tierId {
+          display: flex;
+          flex-direction: row;
+          font-size: 0.8rem;
+          font-family: Gugi;
+          align-items: center;
+          color: black;
+        }
       }
       .userLevel {
         font-size: 0.8rem;

@@ -34,7 +34,7 @@
 /* RankListFrame */
 @mixin rankGrid {
   display: grid;
-  grid-template-columns: 12% 22% auto 14%;
+  grid-template-columns: 11% 8% 22% auto 14%;
   justify-items: center;
   align-items: center;
   height: 2.5rem;
@@ -65,6 +65,7 @@
   @include rankGrid;
   background: #e8d1fc;
   &.Vip {
+    grid-template-columns: 12% 22% auto 14%;
     background: #d9e3ff;
   }
   &.top {

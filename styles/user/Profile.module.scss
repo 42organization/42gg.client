@@ -49,6 +49,11 @@
   margin-top: 0.5rem;
 }
 
+.ranktier {
+  justify-self: end;
+  margin-right: 0.3rem;
+}
+
 .intraId {
   color: $white1;
   font-size: $giant-font;
@@ -91,7 +96,7 @@
 .boxContainer {
   display: flex;
   justify-content: space-between;
-  width: 14rem;
+  width: 21rem;
   margin-bottom: 0.5rem;
   align-items: center;
 }
@@ -114,6 +119,17 @@
   font-size: $small-font;
   text-align: center;
   color: #008234;
+}
+
+.tierId {
+  width: 6.5rem;
+  padding: 0.5rem 0;
+  border-radius: $mini-radius;
+  background: #48c7ea;
+  font-size: $small-font;
+  text-align: center;
+  font-family: Gugi;
+  color: #5a3fdf;
 }
 
 .statusMessage {

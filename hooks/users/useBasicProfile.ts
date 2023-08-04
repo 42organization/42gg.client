@@ -48,6 +48,7 @@ const useBasicProfile = ({ profileId }: UseBasicProfileProps) => {
     maxExp,
     expRate,
     MAX_LEVEL,
+    //tierImageUri,
   };
 };
 

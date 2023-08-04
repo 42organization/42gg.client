@@ -23,8 +23,12 @@ export default function BasicProfile({ profileId }: ProfileProps) {
     maxExp,
     expRate,
     MAX_LEVEL,
+    //tierImageUri,
+    //tierId
   } = useBasicProfile({ profileId });
-
+  const tierImageUri =
+    'https://42gg-public-image.s3.ap-northeast-2.amazonaws.com/images/sangmipa-0a8bc4cc-14a3-4d3a-bea9-cfea82bc5fb4.jpeg';
+  const tierId = '빨강 탁구채';
   return (
     <div className={styles.container}>
       <div className={styles.level}>LV.{level}</div>
@@ -42,7 +46,9 @@ export default function BasicProfile({ profileId }: ProfileProps) {
         <PlayerImage src={userImageUri} styleName={'mainProfile'} size={30} />
       )}
       <div className={styles.idContainer}>
-        <div></div>
+        <div className={styles.ranktier}>
+          <PlayerImage src={tierImageUri} styleName={'ranktier'} size={50} />
+        </div>
         <div className={styles.intraId}>{intraId}</div>
         <div className={styles.buttons}>
           {user.intraId === profileId && (
@@ -84,6 +90,7 @@ export default function BasicProfile({ profileId }: ProfileProps) {
             : `${currentExp} / Max Exp`}
         </div>
         <div className={styles.racket}>{racketType.toUpperCase()}</div>
+        <div className={styles.tierId}>{tierId}</div>
       </div>
     </div>
   );

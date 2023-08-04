@@ -5,6 +5,15 @@ export interface RankUser {
   intraId: string;
   statusMessage: string;
   ppp: number;
+  //tierImageUri: string,
+  userImageUri: string;
+}
+export interface RankUser_v3 {
+  rank: number;
+  intraId: string;
+  statusMessage: string;
+  ppp: number;
+  tierImageUri: string;
   userImageUri: string;
 }
 
@@ -32,6 +41,7 @@ export interface Rank {
 export interface userImages {
   intraId: string;
   userImageUri: string;
+  //tierImageUri : string;
 }
 
 export interface RankMain {

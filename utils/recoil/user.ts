@@ -12,6 +12,8 @@ export const profileState = atom<ProfileBasic>({
     level: 0,
     currentExp: 0,
     maxExp: 0,
+    /*     tierImgUri : '',
+    tierName : '', */
     expRate: 0,
     snsNotiOpt: 'SLACK',
   },

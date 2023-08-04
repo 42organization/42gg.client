@@ -41,8 +41,7 @@
   position: relative;
   height: 18rem;
   border-radius: 3.5rem;
-  background: 
-  linear-gradient(
+  background: linear-gradient(
     179.91deg,
     #f8e118 21%,
     #fe7a00 44%,
@@ -91,17 +90,9 @@
   position: relative;
   width: 3rem;
   height: 7rem;
-  background: linear-gradient(
-    180deg,
-    rgba(44, 16, 74, 0) 0%,
-    #5e3c83 84.38%
-  );
+  background: linear-gradient(180deg, rgba(44, 16, 74, 0) 0%, #5e3c83 84.38%);
   &.normal {
-    background: linear-gradient(
-      180deg,
-      rgba(26, 51, 141, 0) 0%,
-      #5c75da 100%
-    );
+    background: linear-gradient(180deg, rgba(26, 51, 141, 0) 0%, #5c75da 100%);
   }
 }
 
@@ -263,12 +254,12 @@
   .rank1 {
     width: 6.8rem;
     height: 6.8rem;
-    color: #603B88;
+    color: #603b88;
   }
   .ranks {
     width: 4.5rem;
     height: 4.5rem;
-    color: #603B88;
+    color: #603b88;
   }
 }
 
@@ -292,6 +283,12 @@
   &.last {
     color: #001b44;
   }
+}
+
+.tierImageId {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 @media (max-width: 440px) {

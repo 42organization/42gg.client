@@ -6,7 +6,8 @@ import styles from 'styles/Layout/MainPageProfile.module.scss';
 
 const MainPageProfile = () => {
   const user = useRecoilValue(userState);
-
+  const tierImageUri =
+    'https://42gg-public-image.s3.ap-northeast-2.amazonaws.com/images/sangmipa-0a8bc4cc-14a3-4d3a-bea9-cfea82bc5fb4.jpeg';
   return (
     <div className={styles.mainPageProfile}>
       <div className={styles.gridContainer}>
@@ -23,7 +24,8 @@ const MainPageProfile = () => {
         <div className={styles.userGreetings}>
           <div className={styles.greetings}>안녕하세요,</div>
           <div className={styles.intraId}>
-            탁구왕&nbsp;
+            <PlayerImage src={tierImageUri} styleName={'ranktier'} size={50} />
+            &nbsp;
             <Link href={`/users/detail?intraId=${user.intraId}`}>
               {user.intraId}
             </Link>
