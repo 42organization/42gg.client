@@ -8,7 +8,9 @@ export type TableName =
   | 'penalty'
   | 'receiptList'
   | 'megaphoneList'
-  | 'profileList';
+  | 'profileList'
+  | 'itemList'
+  | 'itemHistory';
 
 export type EtcType = 'button' | 'toggle';
 

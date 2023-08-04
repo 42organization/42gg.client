@@ -22,7 +22,7 @@ import { modalState } from 'utils/recoil/modal';
 
 const profileTableTitle: { [key: string]: string } = {
   profileId: 'ID',
-  date: '시간',
+  date: '사용일자',
   intraId: '사용자',
   imageUrl: '현재 이미지',
   delete: '삭제',

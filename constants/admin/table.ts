@@ -92,4 +92,30 @@ export const tableFormat: TableFormat = {
     name: '프로필 변경권 사용 내역',
     columns: ['profileId', 'date', 'intraId', 'imageUrl'],
   },
+  itemList: {
+    name: '상점 아이템 목록',
+    columns: [
+      'itemId',
+      'itemName',
+      'content',
+      'imageUrl',
+      'originalPrice',
+      'discount',
+      'salePrice',
+    ],
+  },
+  itemHistory: {
+    name: '상점 아이템 변경 이력',
+    columns: [
+      'itemId',
+      'createdAt',
+      'intraId',
+      'itemName',
+      'content',
+      'imageUrl',
+      'price',
+      'discount',
+      'salePrice',
+    ],
+  },
 };

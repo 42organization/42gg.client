@@ -18,7 +18,7 @@ import { Ireceipt, IreceiptTable } from 'types/admin/adminReceiptType';
 
 const receiptListTableTitle: { [key: string]: string } = {
   receiptId: 'ID',
-  createdAt: '시간',
+  createdAt: '구매일자',
   itemName: '아이템명',
   itemPrice: '구매가격',
   purchaserIntra: '구매자',

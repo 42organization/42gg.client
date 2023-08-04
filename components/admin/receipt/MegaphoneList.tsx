@@ -23,7 +23,7 @@ import { modalState } from 'utils/recoil/modal';
 
 const megaPhoneTableTitle: { [key: string]: string } = {
   megaphoneId: 'ID',
-  usedAt: '시간',
+  usedAt: '사용일자',
   intraId: '사용자',
   content: '내용',
   status: '상태',
