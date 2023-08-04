@@ -1,3 +1,4 @@
+import React from 'react';
 import { InfinityScroll } from 'utils/infinityScroll';
 import { mockInstance } from 'utils/mockAxios';
 
@@ -18,5 +19,17 @@ export function InventoryList() {
   if (error) return <div>{error.message}</div>;
   if (!data) return <div>No data</div>;
 
-  return <div>InventoryList</div>;
+  return (
+    <div>
+      {data.pages.map((page, pageIndex) => (
+        <React.Fragment key={pageIndex}>
+          {page.storageItemList.map((item) => (
+            <div key={item.itemId}>
+              <div>{item.name}</div>
+            </div>
+          ))}
+        </React.Fragment>
+      ))}
+    </div>
+  );
 }
