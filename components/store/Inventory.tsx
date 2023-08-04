@@ -1,7 +1,12 @@
-// import { useState } from 'react';
-import InfScroll from 'utils/infinityScroll';
-// import { InventoryData } from 'types/storeTypes';
+import { QueryClientProvider, QueryClient } from 'react-query';
+import { InventoryList } from './InventoryList';
 
 export function Inventory() {
-  return <div>Inventory</div>;
+  const queryClient = new QueryClient();
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <InventoryList />{' '}
+    </QueryClientProvider>
+  );
 }

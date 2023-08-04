@@ -36,7 +36,7 @@ export function InfinityScroll(
 ) {
   const setError = useSetRecoilState(errorState);
   return useInfiniteQuery<InventoryData, Error>(
-    [queryKey],
+    queryKey,
     ({ pageParam = 1 }) => fetchFunction(pageParam),
     {
       getNextPageParam: (lastPage, allPages) => {
