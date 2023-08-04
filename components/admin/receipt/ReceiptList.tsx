@@ -37,7 +37,7 @@ const tableColumnName = [
 ];
 
 function ReceiptList() {
-  const [receiptInfo, setReceiptInfo] = useState<IreceiptTable>({
+  const [receiptData, setReceiptData] = useState<IreceiptTable>({
     receiptList: [],
     totalPage: 0,
     currentPage: 0,
@@ -45,11 +45,13 @@ function ReceiptList() {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
+  // 특정 유저 거래 내역만 가져오는 api 추가되면 handler 추가
+
   // api 연결 시 useCallback, instanceInManage, try catch로 변경
-  const getReceiptList = useMockAxiosGet<any>({
+  const getReceiptHandler = useMockAxiosGet<any>({
     url: `/admin/receipt/?page=${currentPage}&size=10`,
     setState: (data) => {
-      setReceiptInfo({
+      setReceiptData({
         receiptList: data.receiptList.map((receipt: Ireceipt) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
             new Date(receipt.createdAt)
@@ -68,7 +70,7 @@ function ReceiptList() {
   });
 
   useEffect(() => {
-    getReceiptList();
+    getReceiptHandler();
   }, [currentPage]);
 
   return (
@@ -83,8 +85,8 @@ function ReceiptList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {receiptInfo.receiptList.length > 0 ? (
-              receiptInfo.receiptList.map((receipt: Ireceipt) => (
+            {receiptData.receiptList.length > 0 ? (
+              receiptData.receiptList.map((receipt: Ireceipt) => (
                 <TableRow key={receipt.receiptId}>
                   {tableFormat['receiptList'].columns.map(
                     (columnName: string, index: number) => {
@@ -107,8 +109,8 @@ function ReceiptList() {
       </TableContainer>
       <div>
         <PageNation
-          curPage={receiptInfo.currentPage}
-          totalPages={receiptInfo.totalPage}
+          curPage={receiptData.currentPage}
+          totalPages={receiptData.totalPage}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}

@@ -14,7 +14,11 @@ import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import PageNation from 'components/Pagination';
 import { getFormattedDateToString } from 'utils/handleTime';
 import { useSetRecoilState } from 'recoil';
-import { Imegaphone, ImegaphoneTable } from 'types/admin/adminReceiptType';
+import {
+  Imegaphone,
+  ImegaphoneInfo,
+  ImegaphoneTable,
+} from 'types/admin/adminReceiptType';
 import { modalState } from 'utils/recoil/modal';
 
 const megaPhoneTableTitle: { [key: string]: string } = {
@@ -36,7 +40,7 @@ const tableColumnName = [
 ];
 
 function MegaphoneList() {
-  const [megaphoneInfo, setMegaphoneInfo] = useState<ImegaphoneTable>({
+  const [megaphoneData, setMegaphoneData] = useState<ImegaphoneTable>({
     megaphoneList: [],
     totalPage: 0,
     currentPage: 0,
@@ -44,11 +48,13 @@ function MegaphoneList() {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
+  // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가
+
   // api 연결 시 useCallback, instanceInManage, try catch로 변경
   const getMegaphoneHandler = useMockAxiosGet<any>({
     url: `/admin/megaphones/history?page=${currentPage}&size=10`,
     setState: (data) => {
-      setMegaphoneInfo({
+      setMegaphoneData({
         megaphoneList: data.megaphoneList.map((megaphone: Imegaphone) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
             new Date(megaphone.usedAt)
@@ -68,6 +74,13 @@ function MegaphoneList() {
 
   const setModal = useSetRecoilState(modalState);
 
+  const deleteMegaphone = (megaphoneInfo: ImegaphoneInfo) => {
+    setModal({
+      modalName: 'ADMIN-MEGAPHONE_DELETE',
+      megaphoneInfo: megaphoneInfo,
+    });
+  };
+
   useEffect(() => {
     getMegaphoneHandler();
   }, [currentPage]);
@@ -84,8 +97,8 @@ function MegaphoneList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {megaphoneInfo.megaphoneList.length > 0 ? (
-              megaphoneInfo.megaphoneList.map((megaphone: Imegaphone) => (
+            {megaphoneData.megaphoneList.length > 0 ? (
+              megaphoneData.megaphoneList.map((megaphone: Imegaphone) => (
                 <TableRow key={megaphone.megaphoneId}>
                   {tableFormat['megaphoneList'].columns.map(
                     (columnName: string, index: number) => {
@@ -97,7 +110,17 @@ function MegaphoneList() {
                     }
                   )}
                   <TableCell>
-                    <button>삭제</button>
+                    <button
+                      onClick={() =>
+                        deleteMegaphone({
+                          megaphoneId: megaphone.megaphoneId,
+                          content: megaphone.content,
+                          intraId: megaphone.intraId,
+                        })
+                      }
+                    >
+                      삭제
+                    </button>
                   </TableCell>
                 </TableRow>
               ))
@@ -111,8 +134,8 @@ function MegaphoneList() {
       </TableContainer>
       <div>
         <PageNation
-          curPage={megaphoneInfo.currentPage}
-          totalPages={megaphoneInfo.totalPage}
+          curPage={megaphoneData.currentPage}
+          totalPages={megaphoneData.totalPage}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}

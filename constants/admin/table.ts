@@ -90,6 +90,6 @@ export const tableFormat: TableFormat = {
   },
   profileList: {
     name: '프로필 변경권 사용 내역',
-    columns: [],
+    columns: ['profileId', 'date', 'intraId', 'imageUrl'],
   },
 };
