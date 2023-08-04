@@ -16,13 +16,17 @@ export function InvetoryItem({ item }: inventoryItemProps) {
   return (
     <div key={itemId} className={styles.inventoryItem}>
       <div className={styles.topBadgeContainer}>
-        {user.intraId !== purchaserIntra && (
+        {user.intraId !== purchaserIntra ? (
           <Tooltip title={`from ${purchaserIntra}`}>
-            <BsGiftFill />
+            <button>
+              <BsGiftFill />
+            </button>
           </Tooltip>
+        ) : (
+          <div></div>
         )}
         {itemStatus === 'USING' && (
-          <div>
+          <div className={styles.usingBadge}>
             <BsCircleFill /> 사용중
           </div>
         )}
@@ -37,7 +41,7 @@ export function InvetoryItem({ item }: inventoryItemProps) {
       <div className={styles.imgContainer}>
         <Image className={styles.img} src={imageUrl} alt={name} fill />
       </div>
-      <div>{name}</div>
+      <div className={styles.itemName}>{name}</div>
     </div>
   );
 }

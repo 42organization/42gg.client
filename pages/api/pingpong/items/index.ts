@@ -6,7 +6,7 @@ const item1: InventoryItem = {
   name: '테스트1',
   imageUrl: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'hyobicho',
-  itemStatus: 'BEFORE',
+  itemStatus: 'USING',
 };
 
 const item2: InventoryItem = {
