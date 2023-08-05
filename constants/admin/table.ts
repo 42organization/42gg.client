@@ -121,13 +121,13 @@ export const tableFormat: TableFormat = {
   coinPolicyHistory: {
     name: '재화 정책 변경 이력',
     columns: [
-      'coinPollicyId',
+      'coinPolicyId',
+      'createdAt',
       'createUser',
       'attendance',
       'normal',
       'rankWin',
       'rankLose',
-      'createdAt',
     ],
   },
 };

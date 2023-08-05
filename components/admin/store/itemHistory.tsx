@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import PageNation from 'components/Pagination';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
@@ -94,9 +95,18 @@ function ItemHistory() {
                       (columnName: string, index: number) => {
                         return (
                           <TableCell key={index}>
-                            {itemHistory[
-                              columnName as keyof IitemHistory
-                            ].toString()}
+                            {columnName === 'imageUrl' ? (
+                              <Image
+                                src={itemHistory[columnName]}
+                                width={30}
+                                height={30}
+                                alt='no'
+                              />
+                            ) : (
+                              itemHistory[
+                                columnName as keyof IitemHistory
+                              ].toString()
+                            )}
                           </TableCell>
                         );
                       }

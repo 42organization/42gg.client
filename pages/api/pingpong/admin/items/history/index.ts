@@ -4,22 +4,21 @@ const testData1 = {
   itemHistoryList: [
     {
       itemId: 2,
-      createdAt: new Date(),
+      createdAt: '2023-08-05 20:10:10',
       intraId: 'hyungjpa',
       itemName: '확성기',
       content: '설명입니다',
-      imageUrl: 'no',
+      imageUrl: '/image/menu_manual.svg',
       price: 42,
       discount: 50,
       salePrice: 21,
     },
     {
       itemId: 1,
-      createdAt: new Date(),
+      createdAt: '2023-08-05 10:10:10',
       intraId: 'hyungjpa',
       itemName: '프로필 변경권',
       content: '설명입니다',
-      // imageUrl: '/image/favicon.svg',
       imageUrl: 'no',
       price: 20,
       discount: 50,
@@ -33,7 +32,7 @@ const testData2 = {
   itemHistoryList: [
     {
       itemId: 0,
-      createdAt: new Date(),
+      createdAt: '2023-08-05 20:10:10',
       intraId: 'hyungjpa',
       itemName: '확성기',
       content: '설명입니다',

@@ -4,7 +4,7 @@ const testData1 = {
   profileList: [
     {
       profileId: '12',
-      date: new Date(),
+      date: '2023-08-05 10:10:10',
       intraId: 'hyungjpa',
       imageUrl: '/image/noti_empty.svg',
     },
@@ -16,7 +16,7 @@ const testData2 = {
   profileList: [
     {
       profileId: '1',
-      date: new Date(),
+      date: '2023-08-04 10:10:10',
       intraId: 'hyungjpa',
       imageUrl: 'none',
     },

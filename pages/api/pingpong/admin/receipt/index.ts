@@ -4,7 +4,7 @@ const testData1 = {
   receiptList: [
     {
       receiptId: 13,
-      createdAt: new Date(),
+      createdAt: '2023-08-05 20:10:10',
       itemName: '확성기',
       itemPrice: 42,
       purchaserIntra: 'admin',
@@ -13,7 +13,7 @@ const testData1 = {
     },
     {
       receiptId: 12,
-      createdAt: new Date(),
+      createdAt: '2023-08-05 19:20:10',
       itemName: '프로필 사진 변경권',
       itemPrice: 21,
       purchaserIntra: 'admin',
@@ -22,7 +22,7 @@ const testData1 = {
     },
     {
       receiptId: 11,
-      createdAt: new Date(),
+      createdAt: '2023-08-04 10:10:10',
       itemName: '프로필 색상 변경권',
       itemPrice: 10,
       purchaserIntra: 'admin',
@@ -31,7 +31,7 @@ const testData1 = {
     },
     {
       receiptId: 10,
-      createdAt: new Date(),
+      createdAt: '2023-08-04 05:30:10',
       itemName: '확성기',
       itemPrice: 42,
       purchaserIntra: 'admin',
@@ -40,7 +40,7 @@ const testData1 = {
     },
     {
       receiptId: 9,
-      createdAt: new Date(),
+      createdAt: '2023-08-01 21:29:10',
       itemName: '프로필 사진 변경권',
       itemPrice: 21,
       purchaserIntra: 'admin',
@@ -49,7 +49,7 @@ const testData1 = {
     },
     {
       receiptId: 8,
-      createdAt: new Date(),
+      createdAt: '2023-07-29 18:24:10',
       itemName: '프로필 색상 변경권',
       itemPrice: 10,
       purchaserIntra: 'admin',
@@ -58,7 +58,7 @@ const testData1 = {
     },
     {
       receiptId: 7,
-      createdAt: new Date(),
+      createdAt: '2023-07-28 10:10:10',
       itemName: '확성기',
       itemPrice: 42,
       purchaserIntra: 'admin',
@@ -67,7 +67,7 @@ const testData1 = {
     },
     {
       receiptId: 6,
-      createdAt: new Date(),
+      createdAt: '2023-06-30 21:10:10',
       itemName: '프로필 사진 변경권',
       itemPrice: 21,
       purchaserIntra: 'admin',
@@ -76,7 +76,7 @@ const testData1 = {
     },
     {
       receiptId: 5,
-      createdAt: new Date(),
+      createdAt: '2023-06-21 20:13:10',
       itemName: '프로필 색상 변경권',
       itemPrice: 10,
       purchaserIntra: 'admin',
@@ -91,7 +91,7 @@ const testData2 = {
   receiptList: [
     {
       receiptId: 4,
-      createdAt: new Date(),
+      createdAt: '2023-04-05 10:10:10',
       itemName: '확성기',
       itemPrice: 42,
       purchaserIntra: 'admin',
@@ -100,7 +100,7 @@ const testData2 = {
     },
     {
       receiptId: 3,
-      createdAt: new Date(),
+      createdAt: '2023-03-05 10:10:10',
       itemName: '프로필 사진 변경권',
       itemPrice: 21,
       purchaserIntra: 'admin',
@@ -109,7 +109,7 @@ const testData2 = {
     },
     {
       receiptId: 2,
-      createdAt: new Date(),
+      createdAt: '2023-02-05 10:10:10',
       itemName: '프로필 색상 변경권',
       itemPrice: 10,
       purchaserIntra: 'admin',
@@ -118,7 +118,7 @@ const testData2 = {
     },
     {
       receiptId: 1,
-      createdAt: new Date(),
+      createdAt: '2023-01-05 10:10:10',
       itemName: '확성기',
       itemPrice: 42,
       purchaserIntra: 'admin',
@@ -127,7 +127,7 @@ const testData2 = {
     },
     {
       receiptId: 0,
-      createdAt: new Date(),
+      createdAt: '2023-01-03 10:10:10',
       itemName: '확성기',
       itemPrice: 42,
       purchaserIntra: 'admin',

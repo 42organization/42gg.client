@@ -10,9 +10,9 @@ export interface IcoinPolicyHistory {
   createUser: string;
   attendance: string;
   normal: number;
-  rank_win: number;
-  rank_lose: number;
-  created_at: Date;
+  rankWin: number;
+  rankLose: number;
+  createdAt: Date;
 }
 
 export interface IcoinPolicyHistoryTable {

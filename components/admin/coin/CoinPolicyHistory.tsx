@@ -19,22 +19,22 @@ import {
 
 const coinPolicyHistoryTableTitle: { [key: string]: string } = {
   coinPolicyId: 'ID',
-  created_at: '등록 날짜',
+  createdAt: '등록 날짜',
   createUser: '등록 유저',
   attendance: '출석 획득',
-  nomal: '일반게임 획득',
-  rank_win: '랭크게임 승리 획득',
-  rank_lose: '랭크게임 패배 획득',
+  normal: '일반게임 획득',
+  rankWin: '랭크게임 승리 획득',
+  rankLose: '랭크게임 패배 획득',
 };
 
 const tableColumnName = [
   'coinPolicyId',
-  'created_at',
+  'createdAt',
   'createUser',
   'attendance',
   'normal',
-  'rank_win',
-  'rank_lose',
+  'rankWin',
+  'rankLose',
 ];
 
 function CoinPolicyHistory() {
@@ -54,11 +54,11 @@ function CoinPolicyHistory() {
         coinPolicyList: data.coinPolicyList.map(
           (coinPolicyHistory: IcoinPolicyHistory) => {
             const { year, month, date, hour, min } = getFormattedDateToString(
-              new Date(coinPolicyHistory.created_at)
+              new Date(coinPolicyHistory.createdAt)
             );
             return {
               ...coinPolicyHistory,
-              created_at: `${year}-${month}-${date} ${hour}:${min}`,
+              createdAt: `${year}-${month}-${date} ${hour}:${min}`,
             };
           }
         ),
@@ -72,7 +72,6 @@ function CoinPolicyHistory() {
 
   useEffect(() => {
     getCoinPolicyHistoryHandler();
-    console.log(coinPolicyHistoryData);
   }, [currentPage]);
 
   return (
