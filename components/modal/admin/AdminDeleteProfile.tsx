@@ -9,7 +9,7 @@ export default function AdminDeleteProfileModal(props: IprofileInfo) {
   const resetModal = useResetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
 
-  // 수정 필요 작동안함
+  // 수정 필요
   // 기존 유저 수정 api에서 가져오기
   //   const deleteProfilehandler = async () => {
   //     try {
@@ -29,7 +29,9 @@ export default function AdminDeleteProfileModal(props: IprofileInfo) {
     <div>
       <div>사용자 : {intraId}</div>
       <label>
-        {imageUrl && <Image src={imageUrl} alt='Profile Image' fill={true} />}
+        {imageUrl && (
+          <Image src={imageUrl} alt='Profile Image' width={20} height={20} />
+        )}
       </label>
       <div>{profileId} 번 이미지를 삭제하시겠습니까?</div>
 

@@ -24,6 +24,9 @@ import AdminModifyScoreModal from './admin/AdminModifyScoreModal';
 import styles from 'styles/modal/Modal.module.scss';
 import AdminDeleteMegaphoneModal from './admin/AdminDeleteMegaphoneModal';
 import AdminDeleteProfileModal from './admin/AdminDeleteProfile';
+import AdminDeleteItemModal from './admin/AdminDeleteItem';
+import AdminEditItemModal from './admin/AdminEditItem';
+import AdminEditCoinPolicyModal from './admin/AdminEditCoinPolicy';
 
 export default function ModalProvider() {
   const [
@@ -42,6 +45,8 @@ export default function ModalProvider() {
       ModifyScore,
       megaphoneInfo,
       profileInfo,
+      itemInfo,
+      coinPolicy,
     },
     setModal,
   ] = useRecoilState(modalState);
@@ -83,6 +88,13 @@ export default function ModalProvider() {
     ) : null,
     'ADMIN-PROFILE_DELETE': profileInfo ? (
       <AdminDeleteProfileModal {...profileInfo} />
+    ) : null,
+    'ADMIN-ITEM_EDIT': itemInfo ? <AdminEditItemModal {...itemInfo} /> : null,
+    'ADMIN-ITEM_DELETE': itemInfo ? (
+      <AdminDeleteItemModal {...itemInfo} />
+    ) : null,
+    'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
+      <AdminEditCoinPolicyModal {...coinPolicy} />
     ) : null,
   };
 

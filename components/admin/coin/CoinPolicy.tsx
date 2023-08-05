@@ -9,28 +9,31 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from 'styles/admin/coin/CoinPolicy.module.scss';
+import { IcoinPolicy } from 'types/admin/adminCoinTypes';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from 'utils/recoil/modal';
 
 const coinPolicyTableTitle: { [key: string]: string } = {
   attendance: '출석 획득',
   normal: '일반게임 획득',
   rankWin: '랭크게임 승리 획득',
   rankLose: '랭크게임 패배 획득',
-  register: '정책 등록',
+  edit: '정책 변경',
 };
 
-const tableColumnName = [
-  'attendance',
-  'normal',
-  'rankWin',
-  'rankLose',
-  'register',
-];
+const tableColumnName = ['attendance', 'normal', 'rankWin', 'rankLose', 'edit'];
 
 function CoinPolicy() {
-  const inputRef = useRef<null[] | HTMLDivElement[]>([]);
+  const inputRef = useRef<any>([]);
+  const setModal = useSetRecoilState(modalState);
 
-  // inputRef 받아와서 요청 보내는 handler 추가 필요
-  // const putCoinPolicyHandler
+  // inputRef 적용
+  const editCoinPolicy = (coinPolicy: IcoinPolicy) => {
+    setModal({
+      modalName: 'ADMIN-COINPOLICY_EDIT',
+      coinPolicy: coinPolicy,
+    });
+  };
 
   return (
     <>
@@ -59,7 +62,18 @@ function CoinPolicy() {
                   </TableCell>
                 ))}
               <TableCell>
-                <button>등록</button>
+                <button
+                  onClick={() => {
+                    editCoinPolicy({
+                      attendance: inputRef.current[0]?.value,
+                      normal: inputRef.current[1]?.value,
+                      rankWin: inputRef.current[2]?.value,
+                      rankLose: inputRef.current[3]?.value,
+                    });
+                  }}
+                >
+                  등록
+                </button>
               </TableCell>
             </TableRow>
           </TableBody>

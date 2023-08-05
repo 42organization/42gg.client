@@ -12,6 +12,15 @@ export interface IitemList {
   itemList: Array<Iitem>;
 }
 
+export interface IitemInfo {
+  itemId: number;
+  itemName: string;
+  content: string;
+  imageUrl: string;
+  originalPrice?: number;
+  discount?: number;
+}
+
 export interface IitemHistory {
   itemId: number;
   createdAt: Date;

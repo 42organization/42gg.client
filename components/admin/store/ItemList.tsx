@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { Iitem, IitemList } from 'types/admin/adminStoreTypes';
+import { Iitem, IitemInfo, IitemList } from 'types/admin/adminStoreTypes';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
@@ -86,9 +86,21 @@ function ItemList() {
 
   const setModal = useSetRecoilState(modalState);
 
-  // 아이템 수정, 삭제 기능 추가
-  // const editItem
-  // const deleteItem
+  // 아이템 수정, 삭제 기능 수정
+  // 아이템 input ref 적용 필요
+  const editItem = (itemInfo: IitemInfo) => {
+    setModal({
+      modalName: 'ADMIN-ITEM_EDIT',
+      itemInfo: itemInfo,
+    });
+  };
+
+  const deleteItem = (itemInfo: IitemInfo) => {
+    setModal({
+      modalName: 'ADMIN-ITEM_DELETE',
+      itemInfo: itemInfo,
+    });
+  };
 
   useEffect(() => {
     // getItemListHandler();
@@ -122,18 +134,50 @@ function ItemList() {
                               height={30}
                               alt='no'
                             />
-                          ) : (
+                          ) : columnName === 'itemId' ? (
                             item[columnName as keyof Iitem].toString()
+                          ) : (
+                            <div key={index + 1}>
+                              <input
+                                key={index + 2}
+                                type='text'
+                                value={item[columnName as keyof Iitem]}
+                              />
+                            </div>
                           )}
                         </TableCell>
                       );
                     }
                   )}
                   <TableCell>
-                    <button>수정</button>
+                    <button
+                      onClick={() =>
+                        editItem({
+                          itemId: item.itemId,
+                          itemName: item.itemName,
+                          content: item.content,
+                          imageUrl: item.imageUrl,
+                          originalPrice: item.originalPrice,
+                          discount: item.discount,
+                        })
+                      }
+                    >
+                      수정
+                    </button>
                   </TableCell>
                   <TableCell>
-                    <button>삭제</button>
+                    <button
+                      onClick={() =>
+                        deleteItem({
+                          itemId: item.itemId,
+                          itemName: item.itemName,
+                          content: item.content,
+                          imageUrl: item.imageUrl,
+                        })
+                      }
+                    >
+                      삭제
+                    </button>
                   </TableCell>
                 </TableRow>
               ))
