@@ -9,6 +9,7 @@ export default function AdminEditCoinPolicyModal(props: IcoinPolicy) {
   const setError = useSetRecoilState(errorState);
 
   // 수정 필요 작동안함
+  // instanceInManage, try catch로 변경
   //   const editCoinPolicyHandler = async () => {
   //     try {
   //       await fetch(`http://localhost:3000/api/pingpong/admin/coinpolicy`, {

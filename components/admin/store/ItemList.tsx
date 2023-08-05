@@ -86,8 +86,9 @@ function ItemList() {
 
   const setModal = useSetRecoilState(modalState);
 
-  // 아이템 수정, 삭제 기능 수정
+  // 아이템 수정, 삭제 기능 수정 필요
   // 아이템 input ref 적용 필요
+  // 이미지 부분 수정 적용 유저 프로필 수정에서 가져와야
   const editItem = (itemInfo: IitemInfo) => {
     setModal({
       modalName: 'ADMIN-ITEM_EDIT',

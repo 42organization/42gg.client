@@ -11,6 +11,7 @@ export default function AdminEditItemModal(props: IitemInfo) {
   const setError = useSetRecoilState(errorState);
 
   // 수정 필요 작동안함
+  // instanceInManage, try catch로 변경
   //   const editItemHandler = async (id: number) => {
   //     try {
   //       await fetch(`http://localhost:3000/api/pingpong/admin/items/${id}`, {

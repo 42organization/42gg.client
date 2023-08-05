@@ -24,6 +24,7 @@ const coinPolicyTableTitle: { [key: string]: string } = {
 const tableColumnName = ['attendance', 'normal', 'rankWin', 'rankLose', 'edit'];
 
 function CoinPolicy() {
+  // any 타입말고 다른 방식 있으면 적용
   const inputRef = useRef<any>([]);
   const setModal = useSetRecoilState(modalState);
 

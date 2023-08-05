@@ -11,6 +11,7 @@ export default function AdminDeleteProfileModal(props: IprofileInfo) {
 
   // 수정 필요
   // 기존 유저 수정 api에서 가져오기
+  // instanceInManage, try catch로 변경
   //   const deleteProfilehandler = async () => {
   //     try {
   //       await fetch(`http://localhost:3000/api/pingpong/admin/`, {
