@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import PageNation from 'components/Pagination';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
-import { getFormattedDateToString } from 'utils/handleTime';
-import { modalState } from 'utils/recoil/modal';
-import { tableFormat } from 'constants/admin/table';
 import {
   Imegaphone,
   ImegaphoneInfo,
   ImegaphoneTable,
 } from 'types/admin/adminReceiptType';
+import { modalState } from 'utils/recoil/modal';
+import { tableFormat } from 'constants/admin/table';
+import { getFormattedDateToString } from 'utils/handleTime';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import PageNation from 'components/Pagination';
 import {
   Paper,
   Table,
@@ -19,6 +19,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import styles from 'styles/admin/receipt/MegaphoneList.module.scss';
 
 const megaPhoneTableTitle: { [key: string]: string } = {
   megaphoneId: 'ID',

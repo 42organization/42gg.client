@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import PageNation from 'components/Pagination';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
-import { getFormattedDateToString } from 'utils/handleTime';
-import { tableFormat } from 'constants/admin/table';
 import {
   IcoinPolicyHistory,
   IcoinPolicyHistoryTable,
 } from 'types/admin/adminCoinTypes';
+import { tableFormat } from 'constants/admin/table';
+import { getFormattedDateToString } from 'utils/handleTime';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import PageNation from 'components/Pagination';
 import {
   Paper,
   Table,
@@ -16,6 +16,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import styles from 'styles/admin/coin/CoinPolicyHistory.module.scss';
 
 const coinPolicyHistoryTableTitle: { [key: string]: string } = {
   coinPolicyId: 'ID',

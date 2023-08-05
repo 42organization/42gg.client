@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import PageNation from 'components/Pagination';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import { IitemHistory, IitemHistoryList } from 'types/admin/adminStoreTypes';
 import { tableFormat } from 'constants/admin/table';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { IitemHistory, IitemHistoryList } from 'types/admin/adminStoreTypes';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import PageNation from 'components/Pagination';
 import {
   Paper,
   Table,
@@ -14,6 +14,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import styles from 'styles/admin/store/ItemHistory.module.scss';
 
 const itemHistoryTableTitle: { [key: string]: string } = {
   itemId: 'ID',

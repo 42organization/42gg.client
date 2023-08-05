@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
-import { tableFormat } from 'constants/admin/table';
-import { modalState } from 'utils/recoil/modal';
 import { Iitem, IitemList } from 'types/admin/adminStoreTypes';
+import { modalState } from 'utils/recoil/modal';
+import { tableFormat } from 'constants/admin/table';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import {
   Paper,
   Table,
@@ -14,6 +14,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import styles from 'styles/admin/store/ItemList.module.scss';
 
 const itemListTableTitle: { [key: string]: string } = {
   itemId: 'ID',

@@ -8,6 +8,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import styles from 'styles/admin/coin/CoinPolicy.module.scss';
 
 const coinPolicyTableTitle: { [key: string]: string } = {
   attendance: '출석 획득',

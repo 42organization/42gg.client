@@ -1,15 +1,16 @@
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import PageNation from 'components/Pagination';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
-import { getFormattedDateToString } from 'utils/handleTime';
-import { tableFormat } from 'constants/admin/table';
-import { modalState } from 'utils/recoil/modal';
 import {
   Iprofile,
   IprofileInfo,
   IprofileTable,
 } from 'types/admin/adminReceiptType';
+import { modalState } from 'utils/recoil/modal';
+import { tableFormat } from 'constants/admin/table';
+import { getFormattedDateToString } from 'utils/handleTime';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import PageNation from 'components/Pagination';
 import {
   Paper,
   Table,
@@ -19,7 +20,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import Image from 'next/image';
+import styles from 'styles/admin/receipt/ProfileList.module.scss';
 
 const profileTableTitle: { [key: string]: string } = {
   profileId: 'ID',
