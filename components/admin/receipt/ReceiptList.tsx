@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
-
+import PageNation from 'components/Pagination';
+import { getFormattedDateToString } from 'utils/handleTime';
 import { tableFormat } from 'constants/admin/table';
+import { Ireceipt, IreceiptTable } from 'types/admin/adminReceiptType';
 import {
   Paper,
   Table,
@@ -12,9 +13,6 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import PageNation from 'components/Pagination';
-import { getFormattedDateToString } from 'utils/handleTime';
-import { Ireceipt, IreceiptTable } from 'types/admin/adminReceiptType';
 
 const receiptListTableTitle: { [key: string]: string } = {
   receiptId: 'ID',
@@ -45,7 +43,8 @@ function ReceiptList() {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  // 특정 유저 거래 내역만 가져오는 api 추가되면 handler 추가
+  // 특정 유저 거래 내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
+
   // api 연결 시 useCallback, instanceInManage, try catch로 변경
   const getReceiptHandler = useMockAxiosGet<any>({
     url: `/admin/receipt/?page=${currentPage}&size=10`,

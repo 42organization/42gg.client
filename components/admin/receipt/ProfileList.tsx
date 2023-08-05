@@ -1,3 +1,15 @@
+import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import PageNation from 'components/Pagination';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import { getFormattedDateToString } from 'utils/handleTime';
+import { tableFormat } from 'constants/admin/table';
+import { modalState } from 'utils/recoil/modal';
+import {
+  Iprofile,
+  IprofileInfo,
+  IprofileTable,
+} from 'types/admin/adminReceiptType';
 import {
   Paper,
   Table,
@@ -7,18 +19,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import PageNation from 'components/Pagination';
-import { tableFormat } from 'constants/admin/table';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
-import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import {
-  Iprofile,
-  IprofileInfo,
-  IprofileTable,
-} from 'types/admin/adminReceiptType';
-import { getFormattedDateToString } from 'utils/handleTime';
-import { modalState } from 'utils/recoil/modal';
+import Image from 'next/image';
 
 const profileTableTitle: { [key: string]: string } = {
   profileId: 'ID',
@@ -36,10 +37,9 @@ function ProfileList() {
     totalPage: 0,
     currentPage: 0,
   });
-
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가
+  // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler + 유저 검색 컴포넌트 추가
 
   // api 연결 시 useCallback, instanceInManage, try catch로 변경
   const getProfileHandler = useMockAxiosGet<any>({
@@ -95,22 +95,33 @@ function ProfileList() {
                     (columnName: string, index: number) => {
                       return (
                         <TableCell key={index}>
-                          {profile[columnName as keyof Iprofile].toString()}
+                          {columnName === 'imageUrl' ? (
+                            <Image
+                              src={profile[columnName]}
+                              width={30}
+                              height={30}
+                              alt='no'
+                            />
+                          ) : (
+                            profile[columnName as keyof Iprofile].toString()
+                          )}
                         </TableCell>
                       );
                     }
                   )}
-                  <button
-                    onClick={() => {
-                      deleteProfile({
-                        profileId: profile.profileId,
-                        intraId: profile.intraId,
-                        imageUrl: profile.imageUrl,
-                      });
-                    }}
-                  >
-                    삭제
-                  </button>
+                  <TableCell>
+                    <button
+                      onClick={() => {
+                        deleteProfile({
+                          profileId: profile.profileId,
+                          intraId: profile.intraId,
+                          imageUrl: profile.imageUrl,
+                        });
+                      }}
+                    >
+                      삭제
+                    </button>
+                  </TableCell>
                 </TableRow>
               ))
             ) : (

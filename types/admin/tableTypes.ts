@@ -10,7 +10,8 @@ export type TableName =
   | 'megaphoneList'
   | 'profileList'
   | 'itemList'
-  | 'itemHistory';
+  | 'itemHistory'
+  | 'coinPolicyHistory';
 
 export type EtcType = 'button' | 'toggle';
 

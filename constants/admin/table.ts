@@ -118,4 +118,16 @@ export const tableFormat: TableFormat = {
       'salePrice',
     ],
   },
+  coinPolicyHistory: {
+    name: '재화 정책 변경 이력',
+    columns: [
+      'coinPollicyId',
+      'createUser',
+      'attendance',
+      'normal',
+      'rankWin',
+      'rankLose',
+      'createdAt',
+    ],
+  },
 };

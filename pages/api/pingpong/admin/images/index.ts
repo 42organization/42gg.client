@@ -6,7 +6,7 @@ const testData1 = {
       profileId: '12',
       date: new Date(),
       intraId: 'hyungjpa',
-      imageUrl: 'none',
+      imageUrl: '/image/noti_empty.svg',
     },
   ],
   totalPage: 2,

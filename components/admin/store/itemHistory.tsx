@@ -1,3 +1,9 @@
+import { useEffect, useState } from 'react';
+import PageNation from 'components/Pagination';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import { tableFormat } from 'constants/admin/table';
+import { getFormattedDateToString } from 'utils/handleTime';
+import { IitemHistory, IitemHistoryList } from 'types/admin/adminStoreTypes';
 import {
   Paper,
   Table,
@@ -7,12 +13,6 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import PageNation from 'components/Pagination';
-import { tableFormat } from 'constants/admin/table';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
-import { useEffect, useState } from 'react';
-import { IitemHistory, IitemHistoryList } from 'types/admin/adminStoreTypes';
-import { getFormattedDateToString } from 'utils/handleTime';
 
 const itemHistoryTableTitle: { [key: string]: string } = {
   itemId: 'ID',
@@ -46,6 +46,7 @@ function ItemHistory() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
 
+  // api 연결 시 useCallback, instanceInManage, try catch로 변경
   const getItemHistoryListHandler = useMockAxiosGet<any>({
     url: `admin/items/history?page=${currentPage}&size=5`,
     setState: (data) => {

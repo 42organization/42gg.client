@@ -1,7 +1,10 @@
-import { tableFormat } from 'constants/admin/table';
-
 import Image from 'next/image';
-
+import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import { tableFormat } from 'constants/admin/table';
+import { modalState } from 'utils/recoil/modal';
+import { Iitem, IitemList } from 'types/admin/adminStoreTypes';
 import {
   Paper,
   Table,
@@ -11,11 +14,6 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { Iitem, IitemList } from 'types/admin/adminStoreTypes';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
-import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
 
 const itemListTableTitle: { [key: string]: string } = {
   itemId: 'ID',
@@ -51,8 +49,7 @@ function ItemList() {
       itemId: 3,
       itemName: '확성기',
       content: '확성기 설명',
-      // imageUrl: '/image/noti_empty.svg',
-      imageUrl: 'no',
+      imageUrl: '/image/noti_empty.svg',
       originalPrice: 42,
       discount: 50,
       salePrice: 21,
@@ -77,8 +74,8 @@ function ItemList() {
     },
   ];
 
-  // api handler 추후 수정필요
   // store에서 사용하는 api라 mock api 겹칠까봐 사용안함
+  // api 연결 시 useCallback, instanceInManage, try catch로 변경
   // const getItemListHandler = useMockAxiosGet<any>({
   //     url: `items/store`,
   //     setState: setItemListData,
@@ -94,7 +91,7 @@ function ItemList() {
 
   useEffect(() => {
     // getItemListHandler();
-    // test용
+    // 아래는 setter는 test용
     setItemListData({ itemList: testData });
   }, []);
 
@@ -118,11 +115,14 @@ function ItemList() {
                       return (
                         <TableCell key={index}>
                           {columnName === 'imageUrl' ? (
-                            // <Image src={item[columnName]}
-                            // alt='no' fill={true}/>
-                            <div>no</div>
+                            <Image
+                              src={item[columnName]}
+                              width={30}
+                              height={30}
+                              alt='no'
+                            />
                           ) : (
-                            item[columnName as keyof Iitem]
+                            item[columnName as keyof Iitem].toString()
                           )}
                         </TableCell>
                       );
