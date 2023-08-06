@@ -7,6 +7,7 @@
 .phrase {
   @include modal-phrase;
   color: rgba(49, 47, 49, 1);
+  margin-bottom: 0.875rem;
   .message {
     font-size: 1.125rem;
     font-family: 'NanumSquare_acR', sans-serif;
@@ -14,6 +15,16 @@
     letter-spacing: 0.04rem;
     line-height: 200%;
   }
+
+  .recipient {
+    font-size: 1rem;
+    margin-top: 0.875rem;
+    font-family: 'NanumSquare_acR', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04rem;
+    line-height: 200%;
+  }
+
   .itemInfo {
     display: flex;
     flex-direction: column;
