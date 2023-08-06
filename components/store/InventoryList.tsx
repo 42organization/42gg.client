@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import { RiPingPongFill } from 'react-icons/ri';
+import React from 'react';
 import { InvetoryItem } from './InventoryItem';
+import { InfiniteScrollComponent } from './InfiniteScrollComponent';
 import { InfinityScroll } from 'utils/infinityScroll';
 import { mockInstance } from 'utils/mockAxios';
 import styles from 'styles/store/Inventory.module.scss';
@@ -18,19 +18,7 @@ export function InventoryList() {
     'JY03'
   );
 
-  const interactionObserverRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!interactionObserverRef.current || !hasNextPage) return;
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        fetchNextPage();
-      }
-    });
-    observer.observe(interactionObserverRef.current);
-    return () => observer.disconnect();
-  }, [fetchNextPage, hasNextPage]);
-
+  // TODO : 에러 컴포넌트 구체화 필요함.
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
   if (!data) return <div>No data</div>;
@@ -44,11 +32,10 @@ export function InventoryList() {
           ))}
         </React.Fragment>
       ))}
-      {hasNextPage && (
-        <div className={styles.loadIcon} ref={interactionObserverRef}>
-          <RiPingPongFill />
-        </div>
-      )}
+      <InfiniteScrollComponent
+        fetchNextPage={fetchNextPage}
+        hasNextPage={hasNextPage}
+      />
     </div>
   );
 }
