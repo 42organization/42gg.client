@@ -16,6 +16,16 @@
   color: #d4b8f2;
 }
 
+.emptyMessage {
+  width: 100%;
+  grid-column: 1 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  color: #d4b8f2;
+}
+
 .inventoryItem {
   position: relative;
   display: flex;

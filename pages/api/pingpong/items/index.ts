@@ -148,7 +148,9 @@ export default function handler(
       Number(size as string),
       InventoryData.storageItemList
     );
-    ret.storageItemList = storageItemList;
+    if (InventoryData.totalPage !== 0) {
+      ret.storageItemList = storageItemList;
+    }
   }
 
   res.status(200).json(ret);

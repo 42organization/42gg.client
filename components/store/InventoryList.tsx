@@ -27,9 +27,16 @@ export function InventoryList() {
     <div className={styles.inventoryList}>
       {data.pages.map((page, pageIndex) => (
         <React.Fragment key={pageIndex}>
-          {page.storageItemList.map((item) => (
-            <InvetoryItem key={item.itemId} item={item} />
-          ))}
+          {page.storageItemList.length === 0 ? (
+            <div className={styles.emptyMessage}>
+              보유한 아이템이 없습니다.
+              <br /> 상점 탭에서 아이템을 구입해 보세요!
+            </div>
+          ) : (
+            page.storageItemList.map((item) => (
+              <InvetoryItem key={item.itemId} item={item} />
+            ))
+          )}
         </React.Fragment>
       ))}
       <InfiniteScrollComponent
