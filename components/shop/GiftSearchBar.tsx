@@ -1,10 +1,16 @@
 import { GoSearch } from 'react-icons/go';
+import { useEffect, Dispatch, SetStateAction } from 'react';
 import { IoIosCloseCircle } from 'react-icons/io';
 import styles from 'styles/main/SearchBar.module.scss';
-
 import useSearchBar from 'hooks/useSearchBar';
 
-export default function GiftSearchBar() {
+export default function GiftSearchBar({
+  recipient,
+  setRecipient,
+}: {
+  recipient: string;
+  setRecipient: Dispatch<SetStateAction<string>>;
+}) {
   const {
     keyword,
     setKeyword,
@@ -16,14 +22,23 @@ export default function GiftSearchBar() {
     handleKeyDown,
   } = useSearchBar();
 
+  const handleClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    intraId: string
+  ) => {
+    setKeyword(intraId);
+    setRecipient(intraId);
+    setShowDropDown(false);
+  };
+
   return (
-    <div className={styles.searchBar} ref={searchBarRef}>
+    <div id={styles.gift} className={styles.searchBar} ref={searchBarRef}>
       <input
         type='text'
         onChange={keywordHandler}
         onKeyDown={handleKeyDown}
         onFocus={() => setShowDropDown(true)}
-        placeholder='유저 검색하기'
+        placeholder='선물할 유저 검색하기'
         maxLength={15}
         value={keyword}
       />
@@ -43,7 +58,9 @@ export default function GiftSearchBar() {
           {searchResult.length ? (
             searchResult.map((intraId: string) => (
               // TODO: 선택한 유저 아이디를 FOR '검색한 사람 아이디' 부분에 넣어주기
-              <div key={intraId}>{intraId}</div>
+              <div key={intraId} onClick={(e) => handleClick(e, intraId)}>
+                {intraId}
+              </div>
             ))
           ) : (
             <div>검색 결과가 없습니다.</div>
