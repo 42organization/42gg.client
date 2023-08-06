@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { RiPingPongFill } from 'react-icons/ri';
 import { InvetoryItem } from './InventoryItem';
 import { InfinityScroll } from 'utils/infinityScroll';
 import { mockInstance } from 'utils/mockAxios';
@@ -17,6 +18,19 @@ export function InventoryList() {
     'JY03'
   );
 
+  const interactionObserverRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!interactionObserverRef.current || !hasNextPage) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        fetchNextPage();
+      }
+    });
+    observer.observe(interactionObserverRef.current);
+    return () => observer.disconnect();
+  }, [fetchNextPage, hasNextPage]);
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
   if (!data) return <div>No data</div>;
@@ -30,6 +44,11 @@ export function InventoryList() {
           ))}
         </React.Fragment>
       ))}
+      {hasNextPage && (
+        <div className={styles.loadIcon} ref={interactionObserverRef}>
+          <RiPingPongFill />
+        </div>
+      )}
     </div>
   );
 }

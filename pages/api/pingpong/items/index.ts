@@ -138,12 +138,15 @@ export default function handler(
 
   const { page, size } = req.query;
 
-  const ret = InventoryData;
+  const ret: InventoryData = {
+    storageItemList: [],
+    totalPage: InventoryData.totalPage,
+  };
   if (page && size) {
     const storageItemList = pagination(
       Number(page as string),
       Number(size as string),
-      InventoryDataDouble.storageItemList
+      InventoryData.storageItemList
     );
     ret.storageItemList = storageItemList;
   }

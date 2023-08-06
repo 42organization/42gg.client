@@ -6,6 +6,16 @@
   grid-gap: 1rem;
 }
 
+.loadIcon {
+  width: 100%;
+  grid-column: 1 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #d4b8f2;
+}
+
 .inventoryItem {
   position: relative;
   display: flex;
