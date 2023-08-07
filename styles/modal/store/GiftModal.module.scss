@@ -1,0 +1,21 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modalContainer('SKYPINK');
+}
+
+.phrase {
+  @include modal-phrase;
+  color: rgba(49, 47, 49, 1);
+  .message {
+    font-size: 1.125rem;
+    font-family: 'NanumSquare_acR', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04rem;
+    line-height: 200%;
+  }
+}
+
+.buttons {
+  @include modalButton;
+}

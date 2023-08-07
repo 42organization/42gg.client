@@ -25,6 +25,8 @@ import CoinChangeModal from './statChange/CoinChangeModal';
 import WelcomeModal from './event/WelcomeModal';
 
 import styles from 'styles/modal/Modal.module.scss';
+import BuyModal from './store/purchase/BuyModal';
+import GiftModal from './store/purchase/GiftModal';
 
 export default function ModalProvider() {
   const [
@@ -80,6 +82,8 @@ export default function ModalProvider() {
     'USER-KAKAO_EDIT': <KakaoEditModal />,
     'COIN-ANIMATION': CoinResult ? <CoinChangeModal {...CoinResult} /> : null,
     'EVENT-WELCOME': <WelcomeModal />,
+    'PURCHASE-BUY': <BuyModal />,
+    'PURCHASE-GIFT': <GiftModal />,
   };
 
   useEffect(() => {

@@ -18,6 +18,7 @@ import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
 import useLiveCheck from 'hooks/Layout/useLiveCheck';
 import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/Layout/Layout.module.scss';
+import Megaphone from './MegaPhone';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -73,6 +74,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     </div>
                   )}
                 <div className={styles.topInfo}>
+                  <Megaphone />
                   {openCurrentMatch && <CurrentMatch />}
                   {presentPath === '/' && <MainPageProfile />}
                 </div>

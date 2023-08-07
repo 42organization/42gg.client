@@ -1,0 +1,23 @@
+import useGiftModal from 'hooks/modal/store/purchase/useGiftModal';
+import styles from 'styles/modal/store/GiftModal.module.scss';
+
+export default function GiftModal() {
+  const { onPurchase, onCancel } = useGiftModal();
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.phrase}>
+        <div className={styles.emoji}>🏓</div>
+        <div className={styles.message}>선물하시겠습니까?</div>
+      </div>
+      <div className={styles.buttons}>
+        <div className={styles.negative}>
+          <input onClick={onCancel} type='button' value='취소' />
+        </div>
+        <div className={styles.positive}>
+          <input onClick={onPurchase} type='button' value='확인' />
+        </div>
+      </div>
+    </div>
+  );
+}
