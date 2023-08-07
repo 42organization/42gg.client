@@ -3,6 +3,9 @@ import { ISeason } from './seasonTypes';
 import { Value } from 'react-quill';
 import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
+import { ImegaphoneInfo, IprofileInfo } from './admin/adminReceiptType';
+import { IitemInfo } from './admin/adminStoreTypes';
+import { IcoinPolicy } from './admin/adminCoinTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -24,7 +27,12 @@ type AdminModal =
   | 'CHECK_FEEDBACK'
   | 'DETAIL_CONTENT'
   | 'SEASON_EDIT'
-  | 'MODIFY_SCORE';
+  | 'MODIFY_SCORE'
+  | 'MEGAPHONE_DELETE'
+  | 'PROFILE_DELETE'
+  | 'ITEM_EDIT'
+  | 'ITEM_DELETE'
+  | 'COINPOLICY_EDIT';
 
 type ModalName =
   | null
@@ -76,4 +84,8 @@ export interface Modal {
   penaltyId?: number;
   ISeason?: ISeason;
   ModifyScore?: ModifyScoreType;
+  megaphoneInfo?: ImegaphoneInfo;
+  profileInfo?: IprofileInfo;
+  itemInfo?: IitemInfo;
+  coinPolicy?: IcoinPolicy;
 }
