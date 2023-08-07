@@ -78,6 +78,7 @@ export interface manual {
 }
 
 export interface PriceTag {
+  itemId: number;
   product: string;
   price: number;
 }

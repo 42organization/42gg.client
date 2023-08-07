@@ -15,6 +15,7 @@ export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
     setModal({
       modalName: 'PURCHASE-GIFT',
       priceTag: {
+        itemId: item.itemId,
         product: item.itemName,
         price: item.salePrice,
       },
@@ -25,6 +26,7 @@ export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
     setModal({
       modalName: 'PURCHASE-BUY',
       priceTag: {
+        itemId: item.itemId,
         product: item.itemName,
         price: item.salePrice,
       },

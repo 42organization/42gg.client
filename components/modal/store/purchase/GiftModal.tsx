@@ -4,10 +4,9 @@ import { useEffect, useState } from 'react';
 import styles from 'styles/modal/store/GiftModal.module.scss';
 import { PriceTag } from 'types/modalTypes';
 
-// TODO: itemId도 받아오기
-export default function GiftModal({ product, price }: PriceTag) {
+export default function GiftModal({ itemId, product, price }: PriceTag) {
   const { onPurchase, onCancel } = useGiftModal();
-  const [recipient, setRecipient] = useState<string>(''); // TODO: recipient를 GiftSearchBar에서 받아오기
+  const [recipient, setRecipient] = useState<string>('');
 
   useEffect(() => {
     console.log('recipient: ', recipient);
@@ -28,7 +27,7 @@ export default function GiftModal({ product, price }: PriceTag) {
             <div>{price}</div>
           </div>
         </div>
-        <GiftSearchBar recipient={recipient} setRecipient={setRecipient} />
+        <GiftSearchBar setRecipient={setRecipient} />
         {recipient !== '' && (
           <div className={styles.recipient}>
             {recipient}님에게 선물하시겠습니까?

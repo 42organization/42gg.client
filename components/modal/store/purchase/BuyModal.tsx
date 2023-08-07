@@ -2,7 +2,7 @@ import useBuyModal from 'hooks/modal/store/purchase/useBuyModal';
 import styles from 'styles/modal/store/BuyModal.module.scss';
 import { PriceTag } from 'types/modalTypes';
 
-export default function BuyModal({ product, price }: PriceTag) {
+export default function BuyModal({ itemId, product, price }: PriceTag) {
   const { onPurchase, onCancel } = useBuyModal();
 
   return (
