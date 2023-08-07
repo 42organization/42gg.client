@@ -6,11 +6,12 @@
 
 .phrase {
   @include modal-phrase;
+  font-family: 'NanumSquare_acR', sans-serif;
   color: rgba(49, 47, 49, 1);
   margin-bottom: 0.875rem;
+
   .message {
     font-size: 1.125rem;
-    font-family: 'NanumSquare_acR', sans-serif;
     font-weight: 700;
     letter-spacing: 0.04rem;
     line-height: 200%;
@@ -26,21 +27,27 @@
   }
 
   .itemInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 0.875rem;
     font-size: 0.875rem;
     font-family: 'NanumSquare_acR', sans-serif;
     font-weight: 700;
     letter-spacing: 0.04rem;
     line-height: 150%;
+    color: #666666;
     .itemName {
-      color: #666666;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
     }
     .itemPrice {
-      color: #666666;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
     }
   }
+
   .warning {
     font-size: 0.875rem;
     font-family: 'NanumSquare_acR', sans-serif;

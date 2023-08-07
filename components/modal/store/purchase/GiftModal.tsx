@@ -19,8 +19,14 @@ export default function GiftModal({ product, price }: PriceTag) {
         <div className={styles.emoji}>🎁</div>
         <div className={styles.message}>선물하기</div>
         <div className={styles.itemInfo}>
-          <div className={styles.itemName}>아이템: {product}</div>
-          <div className={styles.itemPrice}>가격: {price}</div>
+          <div className={styles.itemName}>
+            <div>아이템:</div>
+            <div>{product}</div>
+          </div>
+          <div className={styles.itemPrice}>
+            <div>가격:</div>
+            <div>{price}</div>
+          </div>
         </div>
         <GiftSearchBar recipient={recipient} setRecipient={setRecipient} />
         {recipient !== '' && (

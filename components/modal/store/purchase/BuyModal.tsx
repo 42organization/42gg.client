@@ -11,8 +11,14 @@ export default function BuyModal({ product, price }: PriceTag) {
         <div className={styles.emoji}>🛍️</div>
         <div className={styles.message}>구매하시겠습니까?</div>
         <div className={styles.itemInfo}>
-          <div className={styles.itemName}>아이템: {product}</div>
-          <div className={styles.itemPrice}>가격: {price}</div>
+          <div className={styles.itemName}>
+            <div>아이템:</div>
+            <div>{product}</div>
+          </div>
+          <div className={styles.itemPrice}>
+            <div>가격:</div>
+            <div>{price}</div>
+          </div>
         </div>
         <div className={styles.warning}>
           <p>⚠ 구매한 아이템은 환불이 불가합니다 ⚠</p>
