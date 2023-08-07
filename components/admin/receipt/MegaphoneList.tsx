@@ -77,27 +77,6 @@ function MegaphoneList() {
     }
   }, [currentPage]);
 
-  // useMockAxiosGet<any>({
-  //   url: `/admin/megaphones/history?page=${currentPage}&size=10`,
-  //   setState: (data) => {
-  //     setMegaphoneData({
-  //       megaphoneList: data.megaphoneList.map((megaphone: Imegaphone) => {
-  //         const { year, month, date, hour, min } = getFormattedDateToString(
-  //           new Date(megaphone.usedAt)
-  //         );
-  //         return {
-  //           ...megaphone,
-  //           usedAt: `${year}-${month}-${date} ${hour}:${min}`,
-  //         };
-  //       }),
-  //       totalPage: data.totalPage,
-  //       currentPage: currentPage,
-  //     });
-  //   },
-  //   err: 'HJ03',
-  //   type: 'setError',
-  // });
-
   const deleteMegaphone = (megaphoneInfo: ImegaphoneInfo) => {
     setModal({
       modalName: 'ADMIN-MEGAPHONE_DELETE',

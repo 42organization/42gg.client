@@ -74,27 +74,6 @@ function ReceiptList() {
     }
   }, [currentPage]);
 
-  // useMockAxiosGet<any>({
-  //   url: `/admin/receipt/?page=${currentPage}&size=10`,
-  //   setState: (data) => {
-  //     setReceiptData({
-  //       receiptList: data.receiptList.map((receipt: Ireceipt) => {
-  //         const { year, month, date, hour, min } = getFormattedDateToString(
-  //           new Date(receipt.createdAt)
-  //         );
-  //         return {
-  //           ...receipt,
-  //           createdAt: `${year}-${month}-${date} ${hour}:${min}`,
-  //         };
-  //       }),
-  //       totalPage: data.totalPage,
-  //       currentPage: currentPage,
-  //     });
-  //   },
-  //   err: 'HJ02',
-  //   type: 'setError',
-  // });
-
   useEffect(() => {
     getReceiptHandler();
   }, [currentPage]);

@@ -70,27 +70,6 @@ function ProfileList() {
     }
   }, [currentPage]);
 
-  // useMockAxiosGet<any>({
-  //   url: `/admin/images?page=${currentPage}&size=5`,
-  //   setState: (data) => {
-  //     setProfileData({
-  //       profileList: data.profileList.map((profile: Iprofile) => {
-  //         const { year, month, date, hour, min } = getFormattedDateToString(
-  //           new Date(profile.date)
-  //         );
-  //         return {
-  //           ...profile,
-  //           date: `${year}-${month}-${date} ${hour}:${min}`,
-  //         };
-  //       }),
-  //       totalPage: data.totalPage,
-  //       currentPage: currentPage,
-  //     });
-  //   },
-  //   err: 'HJ04',
-  //   type: 'setError',
-  // });
-
   const deleteProfile = (profileInfo: IprofileInfo) => {
     setModal({
       modalName: 'ADMIN-PROFILE_DELETE',
