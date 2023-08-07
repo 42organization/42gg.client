@@ -1,0 +1,111 @@
+@import 'styles/common.scss';
+
+.inventoryList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+.loadIcon {
+  width: 100%;
+  grid-column: 1 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #d4b8f2;
+}
+
+.emptyMessage {
+  width: 100%;
+  grid-column: 1 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  color: #d4b8f2;
+}
+
+.inventoryItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #d4b8f2;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  color: #7a6e7b;
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1rem;
+    color: #7a6e7b;
+  }
+}
+
+.overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(#fe9cca, 0.7) 0%,
+    rgba(#fe6bb1, 0.7) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  z-index: 1;
+  &:hover {
+    opacity: 1;
+  }
+  button {
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+.topBadgeContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  z-index: 2;
+}
+
+.usingBadge {
+  display: flex;
+  align-items: center;
+  svg {
+    fill: #08f458;
+    margin-right: 0.3rem;
+  }
+}
+
+.imgContainer {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+}
+
+.img {
+  object-fit: contain;
+}
+
+.itemName {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
