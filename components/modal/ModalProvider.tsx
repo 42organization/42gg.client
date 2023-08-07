@@ -29,6 +29,7 @@ import AdminEditItemModal from './admin/AdminEditItem';
 import AdminEditCoinPolicyModal from './admin/AdminEditCoinPolicy';
 import BuyModal from './store/purchase/BuyModal';
 import GiftModal from './store/purchase/GiftModal';
+import NoCoinModal from './store/purchase/NoCoinModal';
 
 export default function ModalProvider() {
   const [
@@ -45,6 +46,7 @@ export default function ModalProvider() {
       penaltyId,
       ISeason,
       ModifyScore,
+      priceTag,
       megaphoneInfo,
       profileInfo,
       itemInfo,
@@ -85,6 +87,9 @@ export default function ModalProvider() {
       <AdminModifyScoreModal {...ModifyScore} />
     ) : null,
     'USER-KAKAO_EDIT': <KakaoEditModal />,
+    'PURCHASE-BUY': priceTag ? <BuyModal {...priceTag} /> : null,
+    'PURCHASE-GIFT': priceTag ? <GiftModal {...priceTag} /> : null,
+    'PURCHASE-NO_COIN': <NoCoinModal />,
     'ADMIN-MEGAPHONE_DELETE': megaphoneInfo ? (
       <AdminDeleteMegaphoneModal {...megaphoneInfo} />
     ) : null,
@@ -98,8 +103,6 @@ export default function ModalProvider() {
     'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
       <AdminEditCoinPolicyModal {...coinPolicy} />
     ) : null,
-    'PURCHASE-BUY': <BuyModal />,
-    'PURCHASE-GIFT': <GiftModal />,
   };
 
   useEffect(() => {

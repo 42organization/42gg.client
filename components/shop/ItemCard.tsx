@@ -8,14 +8,32 @@ import { modalState } from 'utils/recoil/modal';
 export default function ItemCard({ item }: { item: Item }) {
   const setModal = useSetRecoilState<Modal>(modalState);
 
+  // TODO: 상점 페이지에서 코인 정보 받아오기
+  const coin = 1000;
+
   const handleGift = () => {
     setModal({
       modalName: 'PURCHASE-GIFT',
+      priceTag: {
+        product: item.itemName,
+        price: item.salePrice,
+      },
     });
   };
+
   const handleBuying = () => {
     setModal({
       modalName: 'PURCHASE-BUY',
+      priceTag: {
+        product: item.itemName,
+        price: item.salePrice,
+      },
+    });
+  };
+
+  const handleNoCoin = () => {
+    setModal({
+      modalName: 'PURCHASE-NO_COIN',
     });
   };
 
@@ -49,10 +67,16 @@ export default function ItemCard({ item }: { item: Item }) {
           <p>{item.content}</p>
         </div>
         <div className={styles.buttons}>
-          <button className={styles.gift} onClick={handleGift}>
+          <button
+            className={styles.gift}
+            onClick={item.salePrice < coin ? handleGift : handleNoCoin}
+          >
             선물하기
           </button>
-          <button className={styles.buy} onClick={handleBuying}>
+          <button
+            className={styles.buy}
+            onClick={item.salePrice < coin ? handleBuying : handleNoCoin}
+          >
             구매하기
           </button>
         </div>

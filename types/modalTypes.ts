@@ -17,7 +17,7 @@ type UserModal = 'PROFILE_EDIT' | 'KAKAO_EDIT';
 
 type FixedModal = 'AFTER_GAME' | 'STAT';
 
-type PurchaseModal = 'BUY' | 'GIFT';
+type PurchaseModal = 'BUY' | 'GIFT' | 'NO_COIN';
 
 type AdminModal =
   | 'PROFILE'
@@ -70,6 +70,11 @@ export interface manual {
   radioMode: MatchMode;
 }
 
+export interface PriceTag {
+  product: string;
+  price: number;
+}
+
 export interface Modal {
   modalName: ModalName;
   manual?: manual;
@@ -84,6 +89,7 @@ export interface Modal {
   penaltyId?: number;
   ISeason?: ISeason;
   ModifyScore?: ModifyScoreType;
+  priceTag?: PriceTag;
   megaphoneInfo?: ImegaphoneInfo;
   profileInfo?: IprofileInfo;
   itemInfo?: IitemInfo;
