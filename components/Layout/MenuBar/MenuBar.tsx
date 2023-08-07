@@ -8,6 +8,7 @@ import PlayerImage from 'components/PlayerImage';
 import { HeaderContextState, HeaderContext } from '../HeaderContext';
 import { MainMenu, AdminMenu } from './MenuBarElement';
 import useAxiosGet from 'hooks/useAxiosGet';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 const MenuTop = () => {
@@ -24,6 +25,7 @@ const MenuTop = () => {
 const MenuProfile = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const user = useRecoilValue<User>(userState);
+
   const [profile, setProfile] = useState<ProfileBasic>({
     intraId: '',
     userImageUri: '',
@@ -34,10 +36,18 @@ const MenuProfile = () => {
     maxExp: 0,
     expRate: 0,
     snsNotiOpt: 'SLACK',
+    tierImageUri: '',
+    tierName: '',
   });
 
-  const getProfile = useAxiosGet({
+  /*   const getProfile = useAxiosGet({
     url: `/pingpong/users/${user.intraId}`,
+    setState: setProfile,
+    err: 'SJ03',
+    type: 'setError',
+  }); */
+  const getProfile = useMockAxiosGet({
+    url: `users/intraId`,
     setState: setProfile,
     err: 'SJ03',
     type: 'setError',
@@ -62,7 +72,16 @@ const MenuProfile = () => {
       </Link>
       <div className={styles.userInfoWrapper}>
         <div className={styles.userId}>
-          탁구왕<br/>
+          <div className={styles.tierId}>
+            <PlayerImage
+              src={profile.tierImageUri}
+              styleName={'ranktier'}
+              size={50}
+            />
+            &nbsp;
+            {profile.tierName}
+            <br />
+          </div>
           <Link
             href={`/users/detail?intraId=${user.intraId}`}
             onClick={HeaderState?.resetOpenMenuBarState}

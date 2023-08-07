@@ -3,12 +3,15 @@ import { useRecoilValue } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
 import styles from 'styles/rank/RankList.module.scss';
+import PlayerImage from 'components/PlayerImage';
+
 interface User {
   intraId: string;
   rank: number;
   statusMessage: string;
   point: number | string;
   level: number | null;
+  tierImageUri: string;
 }
 
 interface RankListItemProps {
@@ -17,7 +20,7 @@ interface RankListItemProps {
 
 export default function RankListItem({ user }: RankListItemProps) {
   const Mode = useRecoilValue(colorToggleSelector);
-  const { rank, intraId, statusMessage, point, level } = user;
+  const { rank, intraId, statusMessage, point, level, tierImageUri } = user;
   const myIntraId = useRecoilValue(userState).intraId;
   const wrapStyle = {
     topStandard: rank < 4 ? styles.top : styles.standard,
@@ -30,7 +33,6 @@ export default function RankListItem({ user }: RankListItemProps) {
       NORMAL: intraId === myIntraId && level !== null ? styles.myVip : '',
     },
   };
-
   const makeIntraIdLink = () => (
     <Link href={`/users/detail?intraId=${intraId}`}>
       <span>
@@ -46,6 +48,11 @@ export default function RankListItem({ user }: RankListItemProps) {
         ${wrapStyle.myRankItem[Mode]} ${wrapStyle.rankItem[Mode]}`}
     >
       {rank}
+      {Mode === 'RANK' ? (
+        <PlayerImage src={tierImageUri} styleName={'ranktier'} size={1} />
+      ) : (
+        ''
+      )}
       <div className={styles.intraId}>{makeIntraIdLink()}</div>
       <div className={styles.statusMessage}>{statusMessage}</div>
       <div className={styles.ppp}>{point}</div>

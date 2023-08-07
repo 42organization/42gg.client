@@ -13,8 +13,11 @@ interface RankListItemMainProps {
   user: userImages;
 }
 
-export default function RankListItemMain({ user, rank }: RankListItemMainProps) {
-  const { intraId, userImageUri } = user || {};
+export default function RankListItemMain({
+  user,
+  rank,
+}: RankListItemMainProps) {
+  const { intraId, userImageUri, tierImageUri } = user || {};
   const Mode = useRecoilValue(colorToggleSelector);
   const renderLink = intraId !== 'intraId';
 
@@ -42,13 +45,22 @@ export default function RankListItemMain({ user, rank }: RankListItemMainProps) 
                   styleName={rank === 1 ? 'ranktropybig' : 'ranktropy'}
                   size={50}
                 />
-                <span>{intraId}</span>
+                <div className={`${styles.tierImageId}`}>
+                  <PlayerImage
+                    src={tierImageUri}
+                    styleName={'ranktier'}
+                    size={10}
+                  />
+                  {intraId}
+                </div>
               </Link>
             ) : (
               <div>
                 <div className={`${styles.questionCircleRank}`}>
                   {
-                    <TbQuestionMark className={` ${rank === 1 ? styles.rank1 : styles.ranks}`}/>
+                    <TbQuestionMark
+                      className={` ${rank === 1 ? styles.rank1 : styles.ranks}`}
+                    />
                   }
                 </div>
                 <span>{intraId}</span>

@@ -23,7 +23,12 @@ const MainPageProfile = () => {
         <div className={styles.userGreetings}>
           <div className={styles.greetings}>안녕하세요,</div>
           <div className={styles.intraId}>
-            탁구왕&nbsp;
+            <PlayerImage
+              src={user.tierImageUri}
+              styleName={'ranktier'}
+              size={50}
+            />
+            &nbsp;
             <Link href={`/users/detail?intraId=${user.intraId}`}>
               {user.intraId}
             </Link>

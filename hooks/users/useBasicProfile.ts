@@ -3,6 +3,7 @@ import { useSetRecoilState, useRecoilState } from 'recoil';
 import { profileState } from 'utils/recoil/user';
 import { errorState } from 'utils/recoil/error';
 import { instance } from 'utils/axios';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
 
 interface UseBasicProfileProps {
   profileId: string;
@@ -20,6 +21,8 @@ const useBasicProfile = ({ profileId }: UseBasicProfileProps) => {
       currentExp,
       maxExp,
       expRate,
+      tierImageUri,
+      tierName,
     },
     setProfile,
   ] = useRecoilState(profileState);
@@ -29,14 +32,23 @@ const useBasicProfile = ({ profileId }: UseBasicProfileProps) => {
     getBasicProfileHandler();
   }, []);
 
-  const getBasicProfileHandler = async () => {
+  /*   const getBasicProfileHandler = async () => {
     try {
       const res = await instance.get(`/pingpong/users/${profileId}`);
       setProfile(res?.data);
     } catch (e) {
       setError('SJ03');
     }
-  };
+  }; */
+
+  const getBasicProfileHandler = useMockAxiosGet<any>({
+    url: '/users/intraId',
+    setState: (data) => {
+      setProfile(data);
+    },
+    err: 'DK01',
+    type: 'setError',
+  });
 
   return {
     intraId,
@@ -48,6 +60,8 @@ const useBasicProfile = ({ profileId }: UseBasicProfileProps) => {
     maxExp,
     expRate,
     MAX_LEVEL,
+    tierImageUri,
+    tierName,
   };
 };
 
