@@ -72,4 +72,62 @@ export const tableFormat: TableFormat = {
       'edit',
     ],
   },
+  receiptList: {
+    name: '구매 내역',
+    columns: [
+      'receiptId',
+      'createdAt',
+      'itemName',
+      'itemPrice',
+      'purchaserIntra',
+      'ownerIntra',
+      'itemStatus',
+    ],
+  },
+  megaphoneList: {
+    name: '확성기 사용 내역',
+    columns: ['megaphoneId', 'usedAt', 'intraId', 'content', 'status'],
+  },
+  profileList: {
+    name: '프로필 변경권 사용 내역',
+    columns: ['profileId', 'date', 'intraId', 'imageUrl'],
+  },
+  itemList: {
+    name: '상점 아이템 목록',
+    columns: [
+      'itemId',
+      'itemName',
+      'content',
+      'imageUrl',
+      'originalPrice',
+      'discount',
+      'salePrice',
+    ],
+  },
+  itemHistory: {
+    name: '상점 아이템 변경 이력',
+    columns: [
+      'itemId',
+      'createdAt',
+      'intraId',
+      'itemName',
+      'content',
+      'imageUrl',
+      'price',
+      'discount',
+      'salePrice',
+    ],
+  },
+  coinPolicyHistory: {
+    name: '재화 정책 변경 이력',
+    columns: [
+      'coinPolicyId',
+      'createdAt',
+      'createUser',
+      'attendance',
+      'normal',
+      'rankWin',
+      'rankLose',
+    ],
+  },
 };

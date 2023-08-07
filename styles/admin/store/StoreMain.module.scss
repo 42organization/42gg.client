@@ -1,0 +1,15 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 10%;
+    width: 80%;
+    height: 100%;
+}
+
+.title {
+    width: 100%;
+    h2 {
+        width: fit-content;
+    }
+}
