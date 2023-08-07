@@ -13,13 +13,7 @@ export default function Store() {
       <h1 className={styles.title}>GG Store</h1>
       <StoreModeWrap currentMode={mode} setStoreMode={setMode} />
       <div className={styles.storeContainer}>
-        {mode === 'BUY' ? (
-          <div>
-            <ItemsList />
-          </div>
-        ) : (
-          <Inventory />
-        )}
+        {mode === 'BUY' ? <ItemsList /> : <Inventory />}
       </div>
     </div>
   );
