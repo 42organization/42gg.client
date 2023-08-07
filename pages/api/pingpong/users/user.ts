@@ -8,11 +8,9 @@ export default function handler(
   const userData: User = {
     intraId: 'sangmipa',
     isAdmin: true,
-    userImageUri:
-      '/Users/sangminpark/Desktop/42gg.client/public/image/fallBackSrc.jpeg',
+    userImageUri: '/image/fallBackSrc.jpeg',
     isAttended: true,
-    tierImageUri:
-      '/Users/sangminpark/Desktop/42gg.client/public/image/fallBackSrc.jpeg',
+    tierImageUri: '/image/fallBackSrc.jpeg',
   };
 
   res.status(200).json(userData);
