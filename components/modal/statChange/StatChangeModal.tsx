@@ -39,11 +39,6 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
     openCoin();
   };
 
-  /*   async function openChangeModal() {
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // 2초 대기
-    openStatChangeModal();
-  } */
-
   if (!stat) return null;
 
   const openCoin = () => {
