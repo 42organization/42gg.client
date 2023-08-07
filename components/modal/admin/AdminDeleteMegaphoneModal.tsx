@@ -2,6 +2,7 @@ import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { ImegaphoneInfo } from 'types/admin/adminReceiptType';
+import styles from 'styles/admin/modal/AdminDeleteMegaphoneModal.module.scss';
 
 export default function AdminDeleteMegaphoneModal(props: ImegaphoneInfo) {
   const { megaphoneId, content, intraId } = props;
@@ -27,15 +28,37 @@ export default function AdminDeleteMegaphoneModal(props: ImegaphoneInfo) {
   // };
 
   return (
-    <div>
-      <div>
-        사용자 : {intraId}
-        확성기 내용 : {content}
+    <div className={styles.whole}>
+      <div className={styles.title}>
+        <div className={styles.titleText}>확성기 삭제</div>
+        <hr className={styles.hr} />
       </div>
-      <div>{megaphoneId} 번 확성기를 삭제하시겠습니까?</div>
-
-      <button onClick={() => resetModal()}>취소</button>
-      {/* <button onClick={() => deleteMegaphoneHandler(megaphoneId)}>삭제</button> */}
+      <div className={styles.body}>
+        <div className={styles.bodyWrap}>
+          <div className={styles.intraWrap}>
+            <div className={styles.bodyText}>사용자 :</div>
+            <input className={styles.intraBlank} value={intraId} readOnly />
+          </div>
+          <div className={styles.contentWrap}>
+            <div className={styles.bodyText}>확성기 내용 :</div>
+            <input
+              className={styles.contentBlank}
+              name='content'
+              value={content}
+              readOnly
+            />
+          </div>
+          <div className={styles.checkWrap}>
+            {megaphoneId} 번 확성기를 삭제하시겠습니까?
+          </div>
+        </div>
+        <div className={styles.buttonWrap}>
+          <button className={styles.cancelBtn} onClick={() => resetModal()}>
+            취소
+          </button>
+          <button className={styles.deleteBtn}>삭제</button>
+        </div>
+      </div>
     </div>
   );
 }
