@@ -27,6 +27,8 @@ import AdminDeleteProfileModal from './admin/AdminDeleteProfile';
 import AdminDeleteItemModal from './admin/AdminDeleteItem';
 import AdminEditItemModal from './admin/AdminEditItem';
 import AdminEditCoinPolicyModal from './admin/AdminEditCoinPolicy';
+import BuyModal from './store/purchase/BuyModal';
+import GiftModal from './store/purchase/GiftModal';
 
 export default function ModalProvider() {
   const [
@@ -96,6 +98,8 @@ export default function ModalProvider() {
     'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
       <AdminEditCoinPolicyModal {...coinPolicy} />
     ) : null,
+    'PURCHASE-BUY': <BuyModal />,
+    'PURCHASE-GIFT': <GiftModal />,
   };
 
   useEffect(() => {

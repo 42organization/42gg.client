@@ -17,6 +17,8 @@ type UserModal = 'PROFILE_EDIT' | 'KAKAO_EDIT';
 
 type FixedModal = 'AFTER_GAME' | 'STAT';
 
+type PurchaseModal = 'BUY' | 'GIFT';
+
 type AdminModal =
   | 'PROFILE'
   | 'PENALTY'
@@ -39,7 +41,8 @@ type ModalName =
   | `MATCH-${MatchModal}`
   | `USER-${UserModal}`
   | `FIXED-${FixedModal}`
-  | `ADMIN-${AdminModal}`;
+  | `ADMIN-${AdminModal}`
+  | `PURCHASE-${PurchaseModal}`;
 export interface Cancel {
   startTime: string;
 }
