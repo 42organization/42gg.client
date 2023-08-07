@@ -5,13 +5,10 @@ import styles from 'styles/modal/store/GiftModal.module.scss';
 import { PriceTag } from 'types/modalTypes';
 
 export default function GiftModal({ itemId, product, price }: PriceTag) {
-  const { onPurchase, onCancel } = useGiftModal();
   const [recipient, setRecipient] = useState<string>('');
-
-  useEffect(() => {
-    console.log('recipient: ', recipient);
-  }, [recipient]);
-
+  const { onPurchase, onCancel } = useGiftModal(itemId, recipient);
+  //   const {};
+  // TODO: 선물 모달 보내기 타입 만들기 - id와 recipient
   return (
     <div className={styles.container}>
       <div className={styles.phrase}>
@@ -30,7 +27,7 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
         <GiftSearchBar setRecipient={setRecipient} />
         {recipient !== '' && (
           <div className={styles.recipient}>
-            {recipient}님에게 선물하시겠습니까?
+            <span>{recipient}</span>님에게 선물하시겠습니까?
           </div>
         )}
         <div className={styles.warning}>
