@@ -1,4 +1,4 @@
-import { useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { ImegaphoneInfo } from 'types/admin/adminReceiptType';
@@ -8,24 +8,25 @@ import { mockInstance } from 'utils/mockAxios';
 
 export default function AdminDeleteMegaphoneModal(props: ImegaphoneInfo) {
   const { megaphoneId, content, intraId } = props;
-  const resetModal = useResetRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
 
   // 수정 필요 작동안함
   // instanceInManage, try catch로 변경
-  const deleteMegaphoneHandler = async (id: number) => {
-    console.log(id);
+  const deleteMegaphoneHandler = async (megaphoneId: number) => {
     try {
-      await mockInstance.delete(`/admin/megaphones/${id}`);
+      await mockInstance.delete(`/admin/megaphones/${megaphoneId}`);
     } catch (e: any) {
       if (e.response.status === 403) {
-        alert(`${id}번 확성기는 삭제할 수 없습니다`);
+        alert(`${megaphoneId}번 확성기는 삭제할 수 없습니다`);
+        setModal({ modalName: null });
+        return;
       } else {
         setError('HJ04');
       }
     }
-    alert(`${id}번 확성기가 삭제되었습니다`);
-    resetModal();
+    alert(`${megaphoneId}번 확성기가 삭제되었습니다`);
+    setModal({ modalName: null });
   };
 
   return (
@@ -54,14 +55,17 @@ export default function AdminDeleteMegaphoneModal(props: ImegaphoneInfo) {
           </div>
         </div>
         <div className={styles.buttonWrap}>
-          <button className={styles.cancelBtn} onClick={() => resetModal()}>
-            취소
-          </button>
           <button
             className={styles.deleteBtn}
             onClick={() => deleteMegaphoneHandler(megaphoneId)}
           >
             삭제
+          </button>
+          <button
+            className={styles.cancelBtn}
+            onClick={() => setModal({ modalName: null })}
+          >
+            취소
           </button>
         </div>
       </div>

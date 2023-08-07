@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 510px;
-  height: 569px;
+  height: 490px;
   background: #ffffff;
   border-radius: 9px;
 }
@@ -36,10 +36,9 @@
 .body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 100%;
-  background-color: yellow;
 }
 
 .bodyWrap {
@@ -47,10 +46,9 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 80%;
+  height: 60%;
   width: 80%;
-
-  background-color: blue;
+  margin-bottom: 30px;
 }
 
 .bodyText {
@@ -59,33 +57,68 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.8rem;
   line-height: 150%;
   color: #6b7280;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red;
 }
 
-.intraWrap {
+.intraWrap,
+.contentWrap {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
   padding: 0 1rem;
-  :focus {
-    outline: none;
-  }
 }
 
-.intraBlank {
+.intraBlank,
+.contentBlank {
   display: flex;
   margin-left: 1rem;
   width: 275px;
-  height: 33px;
+  height: 60px;
   resize: none;
   box-sizing: border-box;
   background: #f9fafb;
   border: 0.5px solid #ced4da;
   border-radius: 1px;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.contentBlank {
+  height: 100px;
+}
+
+.contentWrap {
+  margin-bottom: 30px;
+}
+
+.buttonWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  height: 25%;
+}
+
+.deleteBtn,
+.cancelBtn {
+  width: 246.45px;
+  height: 37.73px;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.deleteBtn {
+  background: #2678f3;
+}
+
+.cancelBtn {
+  background: #6c757d;
 }

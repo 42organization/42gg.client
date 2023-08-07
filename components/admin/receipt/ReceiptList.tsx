@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Ireceipt, IreceiptTable } from 'types/admin/adminReceiptType';
 import { tableFormat } from 'constants/admin/table';
 import { getFormattedDateToString } from 'utils/handleTime';
@@ -14,6 +14,9 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from 'styles/admin/receipt/ReceiptList.module.scss';
+import { useSetRecoilState } from 'recoil';
+import { errorState } from 'utils/recoil/error';
+import { mockInstance } from 'utils/mockAxios';
 
 const receiptListTableTitle: { [key: string]: string } = {
   receiptId: 'ID',
@@ -43,15 +46,18 @@ function ReceiptList() {
   });
 
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const setError = useSetRecoilState(errorState);
 
-  // 특정 유저 거래 내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
+  // todo: 특정 유저 거래 내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
 
-  // api 연결 시 useCallback, instanceInManage, try catch로 변경
-  const getReceiptHandler = useMockAxiosGet<any>({
-    url: `/admin/receipt/?page=${currentPage}&size=10`,
-    setState: (data) => {
+  // todo: api 연결 시 instanceInManage로 변경
+  const getReceiptHandler = useCallback(async () => {
+    try {
+      const res = await mockInstance.get(
+        `/admin/receipt/?page=${currentPage}&size=10`
+      );
       setReceiptData({
-        receiptList: data.receiptList.map((receipt: Ireceipt) => {
+        receiptList: res.data.receiptList.map((receipt: Ireceipt) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
             new Date(receipt.createdAt)
           );
@@ -60,13 +66,34 @@ function ReceiptList() {
             createdAt: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
-        totalPage: data.totalPage,
+        totalPage: res.data.totalPage,
         currentPage: currentPage,
       });
-    },
-    err: 'HJ02',
-    type: 'setError',
-  });
+    } catch (e: unknown) {
+      setError('HJ02');
+    }
+  }, [currentPage]);
+
+  // useMockAxiosGet<any>({
+  //   url: `/admin/receipt/?page=${currentPage}&size=10`,
+  //   setState: (data) => {
+  //     setReceiptData({
+  //       receiptList: data.receiptList.map((receipt: Ireceipt) => {
+  //         const { year, month, date, hour, min } = getFormattedDateToString(
+  //           new Date(receipt.createdAt)
+  //         );
+  //         return {
+  //           ...receipt,
+  //           createdAt: `${year}-${month}-${date} ${hour}:${min}`,
+  //         };
+  //       }),
+  //       totalPage: data.totalPage,
+  //       currentPage: currentPage,
+  //     });
+  //   },
+  //   err: 'HJ02',
+  //   type: 'setError',
+  // });
 
   useEffect(() => {
     getReceiptHandler();
@@ -74,23 +101,25 @@ function ReceiptList() {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table aria-label='customized table'>
-          <TableHead>
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='customized table'>
+          <TableHead className={styles.tableHeader}>
             <TableRow>
               {tableColumnName.map((column, idx) => (
-                <TableCell key={idx}>{receiptListTableTitle[column]}</TableCell>
+                <TableCell className={styles.tableHeaderItem} key={idx}>
+                  {receiptListTableTitle[column]}
+                </TableCell>
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {receiptData.receiptList.length > 0 ? (
               receiptData.receiptList.map((receipt: Ireceipt) => (
-                <TableRow key={receipt.receiptId}>
+                <TableRow className={styles.tableRow} key={receipt.receiptId}>
                   {tableFormat['receiptList'].columns.map(
                     (columnName: string, index: number) => {
                       return (
-                        <TableCell key={index}>
+                        <TableCell className={styles.tableBodyItem} key={index}>
                           {receipt[columnName as keyof Ireceipt].toString()}
                         </TableCell>
                       );
@@ -99,14 +128,16 @@ function ReceiptList() {
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell>비어있습니다</TableCell>
+              <TableRow className={styles.tableRow}>
+                <TableCell className={styles.tableBodyItem}>
+                  비어있습니다
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </TableContainer>
-      <div>
+      <div className={styles.pageNationContainer}>
         <PageNation
           curPage={receiptData.currentPage}
           totalPages={receiptData.totalPage}
