@@ -43,8 +43,9 @@ type ModalName =
   | `USER-${UserModal}`
   | `FIXED-${FixedModal}`
   | `ADMIN-${AdminModal}`
-  | `COIN-ANIMATION`;
+  | `COIN-ANIMATION`
   | `PURCHASE-${PurchaseModal}`;
+
 export interface Cancel {
   startTime: string;
 }
