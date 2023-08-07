@@ -58,6 +58,7 @@
   border-radius: 0.5rem 0.5rem 0 0;
   &.normal {
     background: #59afdf;
+    grid-template-columns: 12% 22% auto 14%;
   }
 }
 
