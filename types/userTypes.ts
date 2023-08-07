@@ -6,8 +6,8 @@ export interface ProfileBasic {
   level: number;
   currentExp: number;
   maxExp: number;
-  /*   tierImgUri : string,
-  tierName : string, */
+  tierImageUri: string;
+  tierName: string;
   expRate: number;
   snsNotiOpt: 'NONE' | 'SLACK' | 'EMAIL' | 'BOTH';
 }

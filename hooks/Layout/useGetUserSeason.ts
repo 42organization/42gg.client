@@ -5,13 +5,20 @@ import { SeasonList } from 'types/seasonTypes';
 import { userState } from 'utils/recoil/layout';
 import { seasonListState } from 'utils/recoil/seasons';
 import useAxiosGet from 'hooks/useAxiosGet';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
 
 const useGetUserSeason = () => {
   const setUser = useSetRecoilState<User>(userState);
   const setSeasonList = useSetRecoilState<SeasonList>(seasonListState);
 
-  const getUserHandler = useAxiosGet({
+  /*   const getUserHandler = useAxiosGet({
     url: '/pingpong/users',
+    setState: setUser,
+    err: 'JB02',
+    type: 'setError',
+  }); */
+  const getUserHandler = useMockAxiosGet({
+    url: 'users/user',
     setState: setUser,
     err: 'JB02',
     type: 'setError',

@@ -1,9 +1,0 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import {}
-
-export default function handler(
-	req: NextApiRequest,
-	res: NextApiResponse<ItemList>
-
-
-)

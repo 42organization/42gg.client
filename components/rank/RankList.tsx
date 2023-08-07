@@ -12,9 +12,7 @@ interface RankListProps {
   isMain?: boolean;
 }
 
-export default function RankList({
-  season,
-}: RankListProps) {
+export default function RankList({ season }: RankListProps) {
   const Mode = useRecoilValue(colorToggleSelector);
   const [rank, setRank] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
@@ -29,7 +27,7 @@ export default function RankList({
     const seasonQuery = Mode === 'RANK' ? `&season=${season}` : '';
     return `/pingpong/${modeQuery(Mode)}?page=${page}&size=20${seasonQuery}`;
   };
-  
+
   useRankList({
     makePath: makePath(),
     toggleMode: Mode,
@@ -42,13 +40,10 @@ export default function RankList({
 
   return (
     <div>
-      <RankListMain isMain={false} season={season}/>
+      <RankListMain isMain={false} season={season} />
       <RankListFrame pageInfo={pageInfo}>
         {rank?.rankList.map((item: NormalUser | RankUser, index) => (
-          <RankListItem
-            key={index}
-            user={makeUser(item)}
-          />
+          <RankListItem key={index} user={makeUser(item)} />
         ))}
       </RankListFrame>
     </div>
@@ -69,5 +64,6 @@ function makeUser(user: NormalUser | RankUser) {
     statusMessage: makeStatusMessage(user.statusMessage),
     point: !isRankModeType(user) ? user.exp : makeInit(user.ppp),
     level: !isRankModeType(user) ? user.level : null,
+    tierImageUri: !isRankModeType(user) ? '' : user.tierImageUri,
   };
 }

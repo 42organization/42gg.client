@@ -11,7 +11,7 @@ interface User {
   statusMessage: string;
   point: number | string;
   level: number | null;
-  //tierImageUri: string | null;
+  tierImageUri: string;
 }
 
 interface RankListItemProps {
@@ -20,7 +20,7 @@ interface RankListItemProps {
 
 export default function RankListItem({ user }: RankListItemProps) {
   const Mode = useRecoilValue(colorToggleSelector);
-  const { rank, intraId, statusMessage, point, level } = user;
+  const { rank, intraId, statusMessage, point, level, tierImageUri } = user;
   const myIntraId = useRecoilValue(userState).intraId;
   const wrapStyle = {
     topStandard: rank < 4 ? styles.top : styles.standard,
@@ -33,8 +33,6 @@ export default function RankListItem({ user }: RankListItemProps) {
       NORMAL: intraId === myIntraId && level !== null ? styles.myVip : '',
     },
   };
-  const tierImageUri =
-    'https://42gg-public-image.s3.ap-northeast-2.amazonaws.com/images/sangmipa-0a8bc4cc-14a3-4d3a-bea9-cfea82bc5fb4.jpeg';
   const makeIntraIdLink = () => (
     <Link href={`/users/detail?intraId=${intraId}`}>
       <span>

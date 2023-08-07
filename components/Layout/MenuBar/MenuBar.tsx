@@ -8,6 +8,7 @@ import PlayerImage from 'components/PlayerImage';
 import { HeaderContextState, HeaderContext } from '../HeaderContext';
 import { MainMenu, AdminMenu } from './MenuBarElement';
 import useAxiosGet from 'hooks/useAxiosGet';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 const MenuTop = () => {
@@ -24,9 +25,6 @@ const MenuTop = () => {
 const MenuProfile = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const user = useRecoilValue<User>(userState);
-  const tierId = '빨강 탁구채';
-  const tierImageUri =
-    'https://42gg-public-image.s3.ap-northeast-2.amazonaws.com/images/sangmipa-0a8bc4cc-14a3-4d3a-bea9-cfea82bc5fb4.jpeg';
 
   const [profile, setProfile] = useState<ProfileBasic>({
     intraId: '',
@@ -38,10 +36,18 @@ const MenuProfile = () => {
     maxExp: 0,
     expRate: 0,
     snsNotiOpt: 'SLACK',
+    tierImageUri: '',
+    tierName: '',
   });
 
-  const getProfile = useAxiosGet({
+  /*   const getProfile = useAxiosGet({
     url: `/pingpong/users/${user.intraId}`,
+    setState: setProfile,
+    err: 'SJ03',
+    type: 'setError',
+  }); */
+  const getProfile = useMockAxiosGet({
+    url: `users/intraId`,
     setState: setProfile,
     err: 'SJ03',
     type: 'setError',
@@ -67,9 +73,13 @@ const MenuProfile = () => {
       <div className={styles.userInfoWrapper}>
         <div className={styles.userId}>
           <div className={styles.tierId}>
-            <PlayerImage src={tierImageUri} styleName={'ranktier'} size={50} />
+            <PlayerImage
+              src={profile.tierImageUri}
+              styleName={'ranktier'}
+              size={50}
+            />
             &nbsp;
-            {tierId}
+            {profile.tierName}
             <br />
           </div>
           <Link

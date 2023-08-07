@@ -5,8 +5,8 @@ export type SeasonMode = 'NORMAL' | 'RANK' | 'BOTH';
 export interface User {
   intraId: string;
   isAdmin: boolean;
-  //isAttended : boolean,
   userImageUri: string;
+  tierImageUri: string;
 }
 
 export interface Live {
