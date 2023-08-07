@@ -5,11 +5,11 @@ import { Modal } from 'types/modalTypes';
 import styles from 'styles/store/ItemCard.module.scss';
 import { modalState } from 'utils/recoil/modal';
 
-export default function ItemCard({ item }: { item: Item }) {
+export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
   const setModal = useSetRecoilState<Modal>(modalState);
 
   // TODO: 상점 페이지에서 코인 정보 받아오기
-  const coin = 1000;
+  //   const coin = 1000;
 
   const handleGift = () => {
     setModal({
