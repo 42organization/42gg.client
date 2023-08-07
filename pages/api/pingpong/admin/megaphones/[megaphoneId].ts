@@ -5,7 +5,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { megaphoneId } = query as { megaphoneId: string };
 
   if (method === 'DELETE') {
-    if (parseInt(megaphoneId) > 5) res.status(204);
-    else res.status(400);
+    if (megaphoneId === undefined) {
+      res.status(400).end('Bad Request');
+      return;
+    } else {
+      if (parseInt(megaphoneId) < 5) res.status(204);
+      else res.status(405).end(`Megaphone ${megaphoneId} Not Found`);
+    }
   }
 }
