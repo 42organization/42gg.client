@@ -7,25 +7,16 @@ import StoreModeRadioBox from 'components/mode/modeItems/StoreModeRadioBox';
 import styles from 'styles/mode/StoreModeWrap.module.scss';
 
 type StoreModeWrapProps = {
+  coin: ICoin;
   currentMode: StoreMode;
   setStoreMode: Dispatch<SetStateAction<StoreMode>>;
 };
 
 export function StoreModeWrap({
+  coin,
   currentMode,
   setStoreMode,
 }: StoreModeWrapProps) {
-  const [coin, setCoin] = useState<ICoin>({ coin: 0 });
-  useEffect(() => {
-    getCoin();
-    // TODO : 코인이 바뀔 때 마다 다시 불러와야 한다.
-  }, []);
-  const getCoin = useMockAxiosGet({
-    url: '/users/coin',
-    setState: setCoin,
-    err: 'JY01',
-    type: 'setError',
-  });
   return (
     <div>
       <div className={styles.topMenu}>

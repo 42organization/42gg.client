@@ -5,7 +5,13 @@ export type TableName =
   | 'games'
   | 'announcement'
   | 'season'
-  | 'penalty';
+  | 'penalty'
+  | 'receiptList'
+  | 'megaphoneList'
+  | 'profileList'
+  | 'itemList'
+  | 'itemHistory'
+  | 'coinPolicyHistory';
 
 export type EtcType = 'button' | 'toggle';
 

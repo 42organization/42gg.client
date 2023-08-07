@@ -1,0 +1,16 @@
+.mainContainer {
+    position: relative;
+    width: 80%;
+    height: 100%;
+    left: 10%;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    width: 100%;
+
+    h2 {
+        width: fit-content;
+    }
+}

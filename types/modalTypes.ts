@@ -4,6 +4,9 @@ import { Value } from 'react-quill';
 import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { CoinResult } from 'types/coinTypes';
+import { ImegaphoneInfo, IprofileInfo } from './admin/adminReceiptType';
+import { IitemInfo } from './admin/adminStoreTypes';
+import { IcoinPolicy } from './admin/adminCoinTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -15,7 +18,7 @@ type UserModal = 'PROFILE_EDIT' | 'KAKAO_EDIT';
 
 type FixedModal = 'AFTER_GAME' | 'STAT';
 
-type PurchaseModal = 'BUY' | 'GIFT';
+type PurchaseModal = 'BUY' | 'GIFT' | 'NO_COIN';
 
 type AdminModal =
   | 'PROFILE'
@@ -25,7 +28,12 @@ type AdminModal =
   | 'CHECK_FEEDBACK'
   | 'DETAIL_CONTENT'
   | 'SEASON_EDIT'
-  | 'MODIFY_SCORE';
+  | 'MODIFY_SCORE'
+  | 'MEGAPHONE_DELETE'
+  | 'PROFILE_DELETE'
+  | 'ITEM_EDIT'
+  | 'ITEM_DELETE'
+  | 'COINPOLICY_EDIT';
 
 type ModalName =
   | null
@@ -68,6 +76,11 @@ export interface manual {
   radioMode: MatchMode;
 }
 
+export interface PriceTag {
+  product: string;
+  price: number;
+}
+
 export interface Modal {
   modalName: ModalName;
   manual?: manual;
@@ -83,4 +96,9 @@ export interface Modal {
   ISeason?: ISeason;
   ModifyScore?: ModifyScoreType;
   CoinResult?: CoinResult;
+  priceTag?: PriceTag;
+  megaphoneInfo?: ImegaphoneInfo;
+  profileInfo?: IprofileInfo;
+  itemInfo?: IitemInfo;
+  coinPolicy?: IcoinPolicy;
 }
