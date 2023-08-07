@@ -1,0 +1,112 @@
+@import 'styles/common.scss';
+
+.itemCard {
+  width: 95%;
+  position: relative;
+  box-shadow: 0 0.1rem 0.3rem #c66bf2;
+  margin: 1rem auto;
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .preview {
+    position: relative;
+    height: inherit;
+
+    .img {
+      height: 8rem;
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .badge {
+      position: absolute;
+      width: 3rem;
+      text-align: center;
+      background-color: rgb(128, 0, 0);
+      color: #fff;
+      top: 7%;
+      right: 0;
+      border-radius: 1.25rem 0 0 1.25rem;
+    }
+  }
+
+  .details {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-color: $g1-bottom;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    z-index: 1;
+
+    .itemPriceTag {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: space-between;
+      color: #ffdc43;
+      .title {
+        text-align: center;
+        font-weight: bold;
+        color: black;
+      }
+      .priceTags {
+        .originalPrice {
+          font-size: 1rem;
+          padding: 0;
+          margin: 0;
+        }
+
+        .onDiscount {
+          text-decoration: line-through 2px solid #666666;
+          padding: 0;
+          margin: 0;
+        }
+
+        .discountedPrice {
+          padding: 0;
+          margin: 0;
+          font-size: 1rem;
+          text-align: center;
+          font-weight: bold;
+          transform: translateY(-0.188rem);
+        }
+      }
+    }
+    .content {
+      color: #282828;
+    }
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+
+      .gift {
+        color: white;
+        width: 40%;
+        height: 1.5rem;
+        border-style: none;
+        border-radius: 0.625rem;
+        background: linear-gradient(
+          180deg,
+          #ea80ea 0%,
+          rgba(211, 36, 182, 0.72) 100%
+        );
+      }
+      .buy {
+        color: white;
+        width: 40%;
+        height: 1.5rem;
+        border-style: none;
+        border-radius: 0.625rem;
+        background: $btn-purple;
+      }
+    }
+  }
+}
