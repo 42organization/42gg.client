@@ -6,6 +6,8 @@ export interface User {
   intraId: string;
   isAdmin: boolean;
   userImageUri: string;
+  isAttended: boolean;
+  tierImageUri: string;
 }
 
 export interface Live {

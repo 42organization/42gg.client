@@ -1,17 +1,32 @@
 import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { loginState } from 'utils/recoil/login';
 import { User } from 'types/mainType';
 import { SeasonList } from 'types/seasonTypes';
 import { userState } from 'utils/recoil/layout';
 import { seasonListState } from 'utils/recoil/seasons';
 import useAxiosGet from 'hooks/useAxiosGet';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import { Modal } from 'types/modalTypes';
+import { modalState } from 'utils/recoil/modal';
 
-const useGetUserSeason = () => {
+const useGetUserSeason = (presentPath: string) => {
   const setUser = useSetRecoilState<User>(userState);
   const setSeasonList = useSetRecoilState<SeasonList>(seasonListState);
+  const isLogIn = useRecoilValue(loginState);
+  const user = useRecoilValue(userState);
 
-  const getUserHandler = useAxiosGet({
+  const setModal = useSetRecoilState<Modal>(modalState);
+
+  /*   const getUserHandler = useAxiosGet({
     url: '/pingpong/users',
+    setState: setUser,
+    err: 'JB02',
+    type: 'setError',
+  }); */
+
+  const getUserHandler = useMockAxiosGet({
+    url: '/users/user',
     setState: setUser,
     err: 'JB02',
     type: 'setError',
@@ -27,9 +42,15 @@ const useGetUserSeason = () => {
   });
 
   useEffect(() => {
+    if (user.isAttended && presentPath === '/' && isLogIn) {
+      setModal({ modalName: 'EVENT-WELCOME' });
+    }
+  }, [user.isAttended, presentPath, isLogIn]);
+
+  useEffect(() => {
     getUserHandler();
     getSeasonListHandler();
-  }, []);
+  }, [presentPath, isLogIn]);
 };
 
 export default useGetUserSeason;

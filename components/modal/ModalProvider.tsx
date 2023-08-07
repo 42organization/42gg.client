@@ -21,6 +21,9 @@ import AdminSeasonEdit from './admin/SeasonEdit';
 import FeedbackDetailModal from './admin/FeedbackDetailModal';
 import DeletePenaltyModal from './admin/DeletePenaltyModal';
 import AdminModifyScoreModal from './admin/AdminModifyScoreModal';
+import CoinChangeModal from './statChange/CoinChangeModal';
+import WelcomeModal from './event/WelcomeModal';
+
 import styles from 'styles/modal/Modal.module.scss';
 import AdminDeleteMegaphoneModal from './admin/AdminDeleteMegaphoneModal';
 import AdminDeleteProfileModal from './admin/AdminDeleteProfile';
@@ -46,6 +49,7 @@ export default function ModalProvider() {
       penaltyId,
       ISeason,
       ModifyScore,
+      CoinResult,
       priceTag,
       megaphoneInfo,
       profileInfo,
@@ -87,6 +91,10 @@ export default function ModalProvider() {
       <AdminModifyScoreModal {...ModifyScore} />
     ) : null,
     'USER-KAKAO_EDIT': <KakaoEditModal />,
+    'COIN-ANIMATION': CoinResult ? <CoinChangeModal {...CoinResult} /> : null,
+    'EVENT-WELCOME': <WelcomeModal />,
+    'PURCHASE-BUY': <BuyModal />,
+    'PURCHASE-GIFT': <GiftModal />,
     'PURCHASE-BUY': priceTag ? <BuyModal {...priceTag} /> : null,
     'PURCHASE-GIFT': priceTag ? <GiftModal {...priceTag} /> : null,
     'PURCHASE-NO_COIN': <NoCoinModal />,

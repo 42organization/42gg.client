@@ -3,6 +3,7 @@ import { ISeason } from './seasonTypes';
 import { Value } from 'react-quill';
 import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
+import { CoinResult } from 'types/coinTypes';
 import { ImegaphoneInfo, IprofileInfo } from './admin/adminReceiptType';
 import { IitemInfo } from './admin/adminStoreTypes';
 import { IcoinPolicy } from './admin/adminCoinTypes';
@@ -42,6 +43,7 @@ type ModalName =
   | `USER-${UserModal}`
   | `FIXED-${FixedModal}`
   | `ADMIN-${AdminModal}`
+  | `COIN-ANIMATION`;
   | `PURCHASE-${PurchaseModal}`;
 export interface Cancel {
   startTime: string;
@@ -59,6 +61,10 @@ export interface Announcement {
 
 export interface Exp {
   gameId?: number;
+  mode?: MatchMode | null;
+}
+export interface Coin {
+  //gameId?: number;
   mode?: MatchMode | null;
 }
 
@@ -89,6 +95,7 @@ export interface Modal {
   penaltyId?: number;
   ISeason?: ISeason;
   ModifyScore?: ModifyScoreType;
+  CoinResult?: CoinResult;
   priceTag?: PriceTag;
   megaphoneInfo?: ImegaphoneInfo;
   profileInfo?: IprofileInfo;

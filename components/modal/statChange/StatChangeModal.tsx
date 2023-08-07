@@ -7,6 +7,8 @@ import { reloadMatchState } from 'utils/recoil/match';
 import ExpStat from './ExpStat';
 import PppStat from 'components/modal/statChange/PppStat';
 import useAxiosGet from 'hooks/useAxiosGet';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import { CoinResult } from 'types/coinTypes';
 import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
 
 export default function StatChangeModal({ gameId, mode }: Exp) {
@@ -17,8 +19,15 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
     getExpHandler();
   }, []);
 
-  const getExpHandler = useAxiosGet({
+  /*   const getExpHandler = useAxiosGet({
     url: `/pingpong/games/${gameId}/result/${mode?.toLowerCase()}`,
+    setState: setStat,
+    err: 'KP03',
+    type: 'setError',
+  }); */
+
+  const getExpHandler = useMockAxiosGet({
+    url: `/games/normal`,
     setState: setStat,
     err: 'KP03',
     type: 'setError',
@@ -27,9 +36,21 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
   const closeModal = () => {
     setReloadMatch(true);
     setModal({ modalName: null });
+    openCoin();
   };
 
   if (!stat) return null;
+
+  const openCoin = () => {
+    setModal({
+      modalName: 'COIN-ANIMATION',
+      CoinResult: {
+        afterCoin: stat.afterCoin,
+        beforeCoin: stat.beforeCoin,
+        coinIncrement: stat.coinIncrement,
+      },
+    });
+  };
 
   return (
     <div>

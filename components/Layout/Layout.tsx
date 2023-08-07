@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { colorModeState } from 'utils/recoil/colorMode';
-import { loginState } from 'utils/recoil/login';
 import { userState } from 'utils/recoil/layout';
 import { openCurrentMatchState } from 'utils/recoil/match';
 import Statistics from 'pages/statistics';
@@ -34,10 +32,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
 
   useAxiosResponse();
-  useGetUserSeason();
+  useGetUserSeason(presentPath);
   useSetAfterGameModal();
   useLiveCheck(presentPath);
   useAnnouncementCheck(presentPath);
+
   const onClickMatch = () => {
     router.replace('/');
     router.push(`/match`);
