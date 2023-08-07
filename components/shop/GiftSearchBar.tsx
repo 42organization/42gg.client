@@ -5,10 +5,8 @@ import styles from 'styles/main/SearchBar.module.scss';
 import useSearchBar from 'hooks/useSearchBar';
 
 export default function GiftSearchBar({
-  recipient,
   setRecipient,
 }: {
-  recipient: string;
   setRecipient: Dispatch<SetStateAction<string>>;
 }) {
   const {
@@ -21,6 +19,12 @@ export default function GiftSearchBar({
     searchBarRef,
     handleKeyDown,
   } = useSearchBar();
+
+  useEffect(() => {
+    if (keyword === '') {
+      setRecipient('');
+    }
+  }, [keyword]);
 
   const handleClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
