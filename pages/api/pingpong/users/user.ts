@@ -6,9 +6,10 @@ export default function handler(
   res: NextApiResponse<User>
 ) {
   const userData: User = {
-    intraId: 'sangmipa1',
+    intraId: 'sangmipa',
     isAdmin: true,
     userImageUri: '/image/fallBackSrc.jpeg',
+    isAttended: true,
     tierImageUri: '/image/fallBackSrc.jpeg',
   };
 

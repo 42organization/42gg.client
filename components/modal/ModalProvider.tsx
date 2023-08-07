@@ -21,7 +21,18 @@ import AdminSeasonEdit from './admin/SeasonEdit';
 import FeedbackDetailModal from './admin/FeedbackDetailModal';
 import DeletePenaltyModal from './admin/DeletePenaltyModal';
 import AdminModifyScoreModal from './admin/AdminModifyScoreModal';
+import CoinChangeModal from './statChange/CoinChangeModal';
+import WelcomeModal from './event/WelcomeModal';
+
 import styles from 'styles/modal/Modal.module.scss';
+import AdminDeleteMegaphoneModal from './admin/AdminDeleteMegaphoneModal';
+import AdminDeleteProfileModal from './admin/AdminDeleteProfile';
+import AdminDeleteItemModal from './admin/AdminDeleteItem';
+import AdminEditItemModal from './admin/AdminEditItem';
+import AdminEditCoinPolicyModal from './admin/AdminEditCoinPolicy';
+import BuyModal from './store/purchase/BuyModal';
+import GiftModal from './store/purchase/GiftModal';
+import NoCoinModal from './store/purchase/NoCoinModal';
 
 export default function ModalProvider() {
   const [
@@ -38,6 +49,12 @@ export default function ModalProvider() {
       penaltyId,
       ISeason,
       ModifyScore,
+      CoinResult,
+      priceTag,
+      megaphoneInfo,
+      profileInfo,
+      itemInfo,
+      coinPolicy,
     },
     setModal,
   ] = useRecoilState(modalState);
@@ -74,6 +91,26 @@ export default function ModalProvider() {
       <AdminModifyScoreModal {...ModifyScore} />
     ) : null,
     'USER-KAKAO_EDIT': <KakaoEditModal />,
+    'COIN-ANIMATION': CoinResult ? <CoinChangeModal {...CoinResult} /> : null,
+    'EVENT-WELCOME': <WelcomeModal />,
+    'PURCHASE-BUY': <BuyModal />,
+    'PURCHASE-GIFT': <GiftModal />,
+    'PURCHASE-BUY': priceTag ? <BuyModal {...priceTag} /> : null,
+    'PURCHASE-GIFT': priceTag ? <GiftModal {...priceTag} /> : null,
+    'PURCHASE-NO_COIN': <NoCoinModal />,
+    'ADMIN-MEGAPHONE_DELETE': megaphoneInfo ? (
+      <AdminDeleteMegaphoneModal {...megaphoneInfo} />
+    ) : null,
+    'ADMIN-PROFILE_DELETE': profileInfo ? (
+      <AdminDeleteProfileModal {...profileInfo} />
+    ) : null,
+    'ADMIN-ITEM_EDIT': itemInfo ? <AdminEditItemModal {...itemInfo} /> : null,
+    'ADMIN-ITEM_DELETE': itemInfo ? (
+      <AdminDeleteItemModal {...itemInfo} />
+    ) : null,
+    'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
+      <AdminEditCoinPolicyModal {...coinPolicy} />
+    ) : null,
   };
 
   useEffect(() => {

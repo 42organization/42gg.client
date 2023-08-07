@@ -1,0 +1,62 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modalContainer('SKYPINK');
+}
+
+.phrase {
+  @include modal-phrase;
+  font-family: 'NanumSquare_acR', sans-serif;
+  color: rgba(49, 47, 49, 1);
+  margin-bottom: 0.875rem;
+
+  .message {
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: 0.04rem;
+    line-height: 200%;
+  }
+
+  .recipient {
+    font-size: 1rem;
+    margin-top: 0.875rem;
+    font-family: 'NanumSquare_acR', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04rem;
+    line-height: 200%;
+  }
+
+  .itemInfo {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 0.875rem;
+    font-size: 0.875rem;
+    font-family: 'NanumSquare_acR', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04rem;
+    line-height: 150%;
+    color: #666666;
+    .itemName {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+    }
+    .itemPrice {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+    }
+  }
+
+  .warning {
+    font-size: 0.875rem;
+    font-family: 'NanumSquare_acR', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04rem;
+    color: #ff0000;
+  }
+}
+
+.buttons {
+  @include modalButton;
+}

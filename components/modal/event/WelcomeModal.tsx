@@ -1,15 +1,50 @@
 import { useSetRecoilState } from 'recoil';
-import { firstVisitedState } from 'utils/recoil/modal';
+import { Modal } from 'types/modalTypes';
+import useAxiosGet from 'hooks/useAxiosGet';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import { useState, useEffect } from 'react';
+import { instance } from 'utils/axios';
+import { CoinResult } from 'types/coinTypes';
+import { modalState } from 'utils/recoil/modal';
+import { errorState } from 'utils/recoil/error';
 import styles from 'styles/modal/event/WelcomeModal.module.scss';
-import modalStyles from 'styles/modal/Modal.module.scss';
 
 export default function WelcomeModal() {
-  const setFirstVisited = useSetRecoilState(firstVisitedState);
+  const setModal = useSetRecoilState<Modal>(modalState);
+  const [coin, setCoin] = useState<CoinResult>();
+  const setError = useSetRecoilState(errorState);
+
   const content = {
     title: 'Welcome!',
     message:
       '42GG에 오신걸 환영합니다.\n당신의 행복한 탁구 생활을\n응원합니다! 총총총...',
   };
+
+  /*   const postCoinHandler = async() => {
+    try {
+      const res = await instance.post(
+        `/pingpong/users/attendance`
+      );
+      setCoin(res.data);
+    } catch (error) {
+      setError('SM01');
+    }
+  };
+
+  useEffect(() => {
+    postCoinHandler();
+	}, []); */
+
+  const getCoinHandler = useMockAxiosGet({
+    url: `/users/attendance`,
+    setState: setCoin,
+    err: 'SM01',
+    type: 'setError',
+  });
+
+  useEffect(() => {
+    getCoinHandler();
+  }, []);
 
   const openPageManual = () => {
     window.open(
@@ -17,22 +52,31 @@ export default function WelcomeModal() {
     );
   };
 
-  const closeModalBackdropHandler = (e: React.MouseEvent) => {
-    if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
-      setFirstVisited(false);
-    }
+  if (!coin) return null;
+
+  const openAttendanceCoin = () => {
+    setModal({
+      modalName: 'COIN-ANIMATION',
+      CoinResult: {
+        afterCoin: coin?.afterCoin,
+        beforeCoin: coin?.beforeCoin,
+        coinIncrement: coin?.coinIncrement,
+      },
+    });
   };
 
-  const closeModalButtonHandler = () => {
-    setFirstVisited(false);
+  const openStatChangeModal = () => {
+    setModal({
+      modalName: 'FIXED-STAT',
+      exp: {
+        gameId: 0,
+        mode: 'RANK',
+      },
+    });
   };
 
   return (
-    <div
-      className={modalStyles.backdrop}
-      id='modalOutside'
-      onClick={closeModalBackdropHandler}
-    >
+    <div>
       <div className={styles.container}>
         <div className={styles.phrase}>
           <div className={styles.emoji}></div>
@@ -49,9 +93,9 @@ export default function WelcomeModal() {
           </div>
           <div className={styles.positive}>
             <input
-              onClick={closeModalButtonHandler}
+              onClick={openStatChangeModal}
               type='button'
-              value='홈으로'
+              value='출석하기'
             />
           </div>
         </div>

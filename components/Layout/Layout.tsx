@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { colorModeState } from 'utils/recoil/colorMode';
-import { loginState } from 'utils/recoil/login';
 import { userState } from 'utils/recoil/layout';
 import { openCurrentMatchState } from 'utils/recoil/match';
 import Statistics from 'pages/statistics';
@@ -20,6 +18,7 @@ import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
 import useLiveCheck from 'hooks/Layout/useLiveCheck';
 import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/Layout/Layout.module.scss';
+import Megaphone from './MegaPhone';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -33,10 +32,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
 
   useAxiosResponse();
-  useGetUserSeason();
+  useGetUserSeason(presentPath);
   useSetAfterGameModal();
   useLiveCheck(presentPath);
   useAnnouncementCheck(presentPath);
+
   const onClickMatch = () => {
     router.replace('/');
     router.push(`/match`);
@@ -74,6 +74,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     </div>
                   )}
                 <div className={styles.topInfo}>
+                  <Megaphone />
                   {openCurrentMatch && <CurrentMatch />}
                   {presentPath === '/' && <MainPageProfile />}
                 </div>

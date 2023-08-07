@@ -70,3 +70,14 @@
     border-radius: 0 0 $mini-radius $mini-radius;
   }
 }
+
+#gift {
+  input {
+    width: calc(100% - 1.5rem);
+  }
+  .icons {
+    span {
+      font-size: 0.9rem;
+    }
+  }
+}

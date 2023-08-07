@@ -44,4 +44,7 @@ export type GameResult = {
   afterMaxExp: number;
   changedPpp?: number;
   beforePpp?: number;
+  beforeCoin: number;
+  afterCoin: number;
+  coinIncrement: number;
 };
