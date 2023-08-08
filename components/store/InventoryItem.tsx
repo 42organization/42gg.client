@@ -24,12 +24,16 @@ export function InvetoryItem({ item }: inventoryItemProps) {
 
   function handleUseItem(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
-    console.log(`use item ${itemCode}`);
+    // TODO : 해당하는 아이템에 맞는 사용 모달 띄우기
   }
 
   function handleEditItem(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault;
-    console.log(`edit item ${itemCode}`);
+    if (itemCode !== 'MEGAPHONE') {
+      alert('편집할 수 없는 아이템입니다.');
+      return;
+    }
+    // EditItemModal
   }
 
   return (
