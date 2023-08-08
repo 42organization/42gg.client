@@ -61,7 +61,6 @@ export default function GiftSearchBar({
         <div className={styles.dropdown}>
           {searchResult.length ? (
             searchResult.map((intraId: string) => (
-              // TODO: 선택한 유저 아이디를 FOR '검색한 사람 아이디' 부분에 넣어주기
               <div key={intraId} onClick={(e) => handleClick(e, intraId)}>
                 {intraId}
               </div>

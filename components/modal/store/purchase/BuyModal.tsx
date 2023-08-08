@@ -1,9 +1,19 @@
+import { useEffect, useState } from 'react';
 import useBuyModal from 'hooks/modal/store/purchase/useBuyModal';
+import { FaCoins } from 'react-icons/fa';
 import styles from 'styles/modal/store/BuyModal.module.scss';
 import { PriceTag } from 'types/modalTypes';
+import { Purchase } from 'types/itemTypes';
 
 export default function BuyModal({ itemId, product, price }: PriceTag) {
-  const { onPurchase, onCancel } = useBuyModal(itemId);
+  const [purchaseItem, setPurchaseItem] = useState<Purchase>({ itemId: -1 });
+  const { onPurchase, onCancel } = useBuyModal(purchaseItem);
+
+  useEffect(() => {
+    setPurchaseItem({
+      itemId: itemId,
+    });
+  }, [itemId]);
 
   return (
     <div className={styles.container}>
@@ -17,7 +27,9 @@ export default function BuyModal({ itemId, product, price }: PriceTag) {
           </div>
           <div className={styles.itemPrice}>
             <div>가격:</div>
-            <div>{price}</div>
+            <div>
+              {price} <FaCoins />
+            </div>
           </div>
         </div>
         <div className={styles.warning}>

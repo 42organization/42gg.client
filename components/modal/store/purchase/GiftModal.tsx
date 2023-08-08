@@ -1,14 +1,27 @@
 import GiftSearchBar from 'components/shop/GiftSearchBar';
 import useGiftModal from 'hooks/modal/store/purchase/useGiftModal';
 import { useEffect, useState } from 'react';
+import { FaCoins } from 'react-icons/fa';
 import styles from 'styles/modal/store/GiftModal.module.scss';
 import { PriceTag } from 'types/modalTypes';
+import { Gift } from 'types/itemTypes';
 
 export default function GiftModal({ itemId, product, price }: PriceTag) {
   const [recipient, setRecipient] = useState<string>('');
-  const { onPurchase, onCancel } = useGiftModal(itemId, recipient);
-  //   const {};
-  // TODO: 선물 모달 보내기 타입 만들기 - id와 recipient
+  const [gift, setGift] = useState<Gift>({
+    itemId: -1,
+    ownerId: '',
+  });
+  const { onPurchase, onCancel } = useGiftModal(gift);
+
+  useEffect(() => {
+    setGift({
+      itemId: itemId,
+      ownerId: recipient,
+    });
+    // console.log(`itemId: ${gift.itemId}, ownerId: ${gift.ownerId}`);
+  }, [itemId, recipient]);
+
   return (
     <div className={styles.container}>
       <div className={styles.phrase}>
@@ -21,7 +34,9 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
           </div>
           <div className={styles.itemPrice}>
             <div>가격:</div>
-            <div>{price}</div>
+            <div>
+              {price} <FaCoins />
+            </div>
           </div>
         </div>
         <GiftSearchBar setRecipient={setRecipient} />
@@ -38,7 +53,6 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
         <div className={styles.negative}>
           <input onClick={onCancel} type='button' value='취소' />
         </div>
-        {/* TODO: 보내기 버튼 클릭 시 POST */}
         <div className={styles.positive}>
           <input onClick={onPurchase} type='button' value='보내기' />
         </div>

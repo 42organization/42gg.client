@@ -1,5 +1,3 @@
-// TODO: storeTypes에 합치기
-
 export interface Item {
   itemId: number;
   itemName: string;
