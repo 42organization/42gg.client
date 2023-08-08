@@ -19,7 +19,7 @@ const megaphone2: Imegaphone = {
   content: '확성기입니다',
   usedAt: new Date('2023-07-05 10:10:10'),
   status: '사용 중',
-  intraId: 'hyungjpa',
+  intraId: 'hyobicho',
 };
 
 const megaphone3: Imegaphone = {
@@ -27,7 +27,7 @@ const megaphone3: Imegaphone = {
   content: '확성기입니다',
   usedAt: new Date('2023-07-05 06:10:10'),
   status: '사용 중',
-  intraId: 'hyungjpa',
+  intraId: 'sangmipa',
 };
 
 const megaphone4: Imegaphone = {
@@ -35,7 +35,7 @@ const megaphone4: Imegaphone = {
   content: '확성기입니다',
   usedAt: new Date('2023-07-03 10:10:10'),
   status: '사용 중',
-  intraId: 'hyungjpa',
+  intraId: 'jeyoon',
 };
 
 const megaphone5: Imegaphone = {
@@ -43,7 +43,7 @@ const megaphone5: Imegaphone = {
   content: '확성기입니다',
   usedAt: new Date('2023-07-02 10:20:10'),
   status: '사용 대기',
-  intraId: 'hyungjpa',
+  intraId: 'Hyungjpa',
 };
 
 const megaphone6: Imegaphone = {

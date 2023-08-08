@@ -1,32 +1,46 @@
 import { useSetRecoilState } from 'recoil';
-import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { ImegaphoneInfo } from 'types/admin/adminReceiptType';
-import styles from 'styles/admin/modal/AdminDeleteMegaphoneModal.module.scss';
-
 import { mockInstance } from 'utils/mockAxios';
+import { toastState } from 'utils/recoil/toast';
+import styles from 'styles/admin/modal/AdminDeleteMegaphoneModal.module.scss';
 
 export default function AdminDeleteMegaphoneModal(props: ImegaphoneInfo) {
   const { megaphoneId, content, intraId } = props;
   const setModal = useSetRecoilState(modalState);
-  const setError = useSetRecoilState(errorState);
+  const setSnackBar = useSetRecoilState(toastState);
 
-  // 수정 필요 작동안함
   // instanceInManage, try catch로 변경
   const deleteMegaphoneHandler = async (megaphoneId: number) => {
     try {
       await mockInstance.delete(`/admin/megaphones/${megaphoneId}`);
     } catch (e: any) {
       if (e.response.status === 403) {
-        alert(`${megaphoneId}번 확성기는 삭제할 수 없습니다`);
+        setSnackBar({
+          toastName: 'delete megaphone',
+          severity: 'error',
+          message: `${megaphoneId}번 확성기는 삭제할 수 없는 확성기입니다.`,
+          clicked: true,
+        });
         setModal({ modalName: null });
         return;
       } else {
-        setError('HJ04');
+        setSnackBar({
+          toastName: 'delete megaphone',
+          severity: 'error',
+          message: `API 요청에 문제가 발생했습니다.`,
+          clicked: true,
+        });
+        setModal({ modalName: null });
       }
     }
-    alert(`${megaphoneId}번 확성기가 삭제되었습니다`);
-    setModal({ modalName: null });
+    setSnackBar({
+      toastName: 'delete megaphone',
+      severity: 'success',
+      message: `${megaphoneId}번 확성기가 삭제되었습니다!`,
+      clicked: true,
+    });
+    setModal({ modalName: 'ADMIN-CHECK_SEND_NOTI', intraId: intraId });
   };
 
   return (
