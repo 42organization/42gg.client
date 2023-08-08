@@ -21,8 +21,8 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from 'styles/admin/receipt/ProfileList.module.scss';
-import { errorState } from 'utils/recoil/error';
 import { mockInstance } from 'utils/mockAxios';
+import { toastState } from 'utils/recoil/toast';
 
 const profileTableTitle: { [key: string]: string } = {
   profileId: 'ID',
@@ -42,7 +42,7 @@ function ProfileList() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const setModal = useSetRecoilState(modalState);
-  const setError = useSetRecoilState(errorState);
+  const setSnackBar = useSetRecoilState(toastState);
 
   // todo: 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler + 유저 검색 컴포넌트 추가
 
@@ -66,7 +66,12 @@ function ProfileList() {
         currentPage: currentPage,
       });
     } catch (e: unknown) {
-      setError('HJ04');
+      setSnackBar({
+        toastName: 'get profile',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
     }
   }, [currentPage]);
 

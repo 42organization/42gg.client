@@ -21,7 +21,7 @@ import {
 } from '@mui/material';
 import styles from 'styles/admin/receipt/MegaphoneList.module.scss';
 import { mockInstance } from 'utils/mockAxios';
-import { errorState } from 'utils/recoil/error';
+import { toastState } from 'utils/recoil/toast';
 
 const megaPhoneTableTitle: { [key: string]: string } = {
   megaphoneId: 'ID',
@@ -49,7 +49,7 @@ function MegaphoneList() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const setModal = useSetRecoilState(modalState);
-  const setError = useSetRecoilState(errorState);
+  const setSnackBar = useSetRecoilState(toastState);
 
   // todo: 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
 
@@ -73,7 +73,12 @@ function MegaphoneList() {
         currentPage: currentPage,
       });
     } catch (e: unknown) {
-      setError('HJ03');
+      setSnackBar({
+        toastName: 'get megaphone',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
     }
   }, [currentPage]);
 

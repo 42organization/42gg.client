@@ -15,8 +15,8 @@ import {
 } from '@mui/material';
 import styles from 'styles/admin/receipt/ReceiptList.module.scss';
 import { useSetRecoilState } from 'recoil';
-import { errorState } from 'utils/recoil/error';
 import { mockInstance } from 'utils/mockAxios';
+import { toastState } from 'utils/recoil/toast';
 
 const receiptListTableTitle: { [key: string]: string } = {
   receiptId: 'ID',
@@ -44,9 +44,8 @@ function ReceiptList() {
     totalPage: 0,
     currentPage: 0,
   });
-
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const setError = useSetRecoilState(errorState);
+  const setSnackBar = useSetRecoilState(toastState);
 
   // todo: 특정 유저 거래 내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
 
@@ -70,7 +69,12 @@ function ReceiptList() {
         currentPage: currentPage,
       });
     } catch (e: unknown) {
-      setError('HJ02');
+      setSnackBar({
+        toastName: 'get receipt',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
     }
   }, [currentPage]);
 
