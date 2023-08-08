@@ -26,7 +26,7 @@ import WelcomeModal from './event/WelcomeModal';
 
 import styles from 'styles/modal/Modal.module.scss';
 import AdminDeleteMegaphoneModal from './admin/AdminDeleteMegaphoneModal';
-import AdminDeleteProfileModal from './admin/AdminDeleteProfile';
+import AdminDeleteProfileModal from './admin/AdminDeleteProfileModal';
 import AdminDeleteItemModal from './admin/AdminDeleteItem';
 import AdminEditItemModal from './admin/AdminEditItem';
 import AdminEditCoinPolicyModal from './admin/AdminEditCoinPolicy';
