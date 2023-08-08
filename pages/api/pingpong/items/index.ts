@@ -2,86 +2,136 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { InventoryData, InventoryItem } from 'types/storeTypes';
 
 const item1: InventoryItem = {
-  itemId: 1,
-  name: '테스트1',
-  imageUrl: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
+  receiptId: 1,
+  itemName: '테스트1',
+  imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'hyobicho',
   itemStatus: 'USING',
+  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
+  itemPrice: 1000,
+  ownerIntra: 'aa',
+  itemCode: 'MEGAPHONE',
+  createdAt: '2021-08-07',
 };
 
 const item2: InventoryItem = {
-  itemId: 2,
-  name: '테스트2',
-  imageUrl: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
+  receiptId: 2,
+  itemName: '테스트2',
+  imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'hyungjpa',
   itemStatus: 'BEFORE',
+  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
+  itemPrice: 1000,
+  ownerIntra: 'aa',
+  itemCode: 'MEGAPHONE',
+  createdAt: '2021-08-07',
 };
 
 const item3: InventoryItem = {
-  itemId: 3,
-  name: '테스트3',
-  imageUrl:
+  receiptId: 3,
+  itemName: '테스트3',
+  imageUri:
     'https://dodo.ac/np/images/thumb/1/17/NH_Balloon.jpg/600px-NH_Balloon.jpg',
   purchaserIntra: 'jeyoon',
   itemStatus: 'USING',
+  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
+  itemPrice: 1000,
+  ownerIntra: 'aa',
+  itemCode: 'MEGAPHONE',
+  createdAt: '2021-08-07',
 };
 
 const item4: InventoryItem = {
-  itemId: 4,
-  name: '테스트4',
-  imageUrl: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
+  receiptId: 4,
+  itemName: '테스트4',
+  imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'sangmipa',
   itemStatus: 'USED',
+  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
+  itemPrice: 1000,
+  ownerIntra: 'aa',
+  itemCode: 'MEGAPHONE',
+  createdAt: '2021-08-07',
 };
 
 const item5: InventoryItem = {
-  itemId: 5,
-  name: '테스트5',
-  imageUrl: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
+  receiptId: 5,
+  itemName: '테스트5',
+  imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'hyobicho',
   itemStatus: 'BEFORE',
+  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
+  itemPrice: 1000,
+  ownerIntra: 'aa',
+  itemCode: 'MEGAPHONE',
+  createdAt: '2021-08-07',
 };
 
 const item6: InventoryItem = {
-  itemId: 6,
-  name: '테스트6',
-  imageUrl:
+  receiptId: 6,
+  itemName: '테스트6',
+  imageUri:
     'https://dodo.ac/np/images/thumb/1/17/NH_Balloon.jpg/600px-NH_Balloon.jpg',
   purchaserIntra: 'hyungjpa',
   itemStatus: 'BEFORE',
+  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
+  itemPrice: 1000,
+  ownerIntra: 'aa',
+  itemCode: 'MEGAPHONE',
+  createdAt: '2021-08-07',
 };
 
 const item7: InventoryItem = {
-  itemId: 7,
-  name: '테스트7',
-  imageUrl: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
+  receiptId: 7,
+  itemName: '테스트7',
+  imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'jeyoon',
   itemStatus: 'USING',
+  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
+  itemPrice: 1000,
+  ownerIntra: 'aa',
+  itemCode: 'MEGAPHONE',
+  createdAt: '2021-08-07',
 };
 
 const item8: InventoryItem = {
-  itemId: 8,
-  name: '테스트8',
-  imageUrl: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
+  receiptId: 8,
+  itemName: '테스트8',
+  imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'sangmipa',
   itemStatus: 'USED',
+  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
+  itemPrice: 1000,
+  ownerIntra: 'aa',
+  itemCode: 'MEGAPHONE',
+  createdAt: '2021-08-07',
 };
 
 const item9: InventoryItem = {
-  itemId: 9,
-  name: '테스트9',
-  imageUrl:
+  receiptId: 9,
+  itemName: '테스트9',
+  imageUri:
     'https://dodo.ac/np/images/thumb/1/17/NH_Balloon.jpg/600px-NH_Balloon.jpg',
   purchaserIntra: 'hyobicho',
   itemStatus: 'BEFORE',
+  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
+  itemPrice: 1000,
+  ownerIntra: 'aa',
+  itemCode: 'MEGAPHONE',
+  createdAt: '2021-08-07',
 };
 
 const item10: InventoryItem = {
-  itemId: 10,
-  name: '테스트10',
-  imageUrl: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
+  receiptId: 10,
+  itemName: '테스트10',
+  imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'hyungjpa',
   itemStatus: 'BEFORE',
+  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
+  itemPrice: 1000,
+  ownerIntra: 'aa',
+  itemCode: 'MEGAPHONE',
+  createdAt: '2021-08-07',
 };
 
 const storageItemList: InventoryItem[] = [

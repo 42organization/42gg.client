@@ -13,20 +13,27 @@ type inventoryItemProps = {
 export function InvetoryItem({ item }: inventoryItemProps) {
   const user = useRecoilValue(userState);
 
-  const { itemId, name, imageUrl, purchaserIntra, itemStatus } = item;
+  const {
+    receiptId,
+    itemName,
+    imageUri,
+    purchaserIntra,
+    itemCode,
+    itemStatus,
+  } = item;
 
   function handleUseItem(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
-    console.log(`use item ${itemId}`);
+    console.log(`use item ${itemCode}`);
   }
 
   function handleEditItem(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault;
-    console.log(`edit item ${itemId}`);
+    console.log(`edit item ${itemCode}`);
   }
 
   return (
-    <div key={itemId} className={styles.inventoryItem}>
+    <div key={receiptId} className={styles.inventoryItem}>
       <div className={styles.topBadgeContainer}>
         {user.intraId !== purchaserIntra ? (
           <Tooltip title={`from ${purchaserIntra}`}>
@@ -51,9 +58,9 @@ export function InvetoryItem({ item }: inventoryItemProps) {
         )}
       </div>
       <div className={styles.imgContainer}>
-        <Image className={styles.img} src={imageUrl} alt={name} fill />
+        <Image className={styles.img} src={imageUri} alt={itemName} fill />
       </div>
-      <div className={styles.itemName}>{name}</div>
+      <div className={styles.itemName}>{itemName}</div>
     </div>
   );
 }
