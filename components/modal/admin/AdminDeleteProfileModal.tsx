@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import { ImegaphoneInfo, IprofileInfo } from 'types/admin/adminReceiptType';
+import { IprofileInfo } from 'types/admin/adminReceiptType';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminDeleteProfileModal.module.scss';
@@ -12,6 +12,7 @@ export default function AdminDeleteProfileModal(props: IprofileInfo) {
   const setSnackBar = useSetRecoilState(toastState);
 
   // instanceInManage, try catch로 변경
+  // todo: 알림 보내기 모달 추가(메가폰과 동일)
   const deleteProfileHandler = async (intraId: string) => {
     try {
       await mockInstance.delete(`/admin/users/${intraId}`);
