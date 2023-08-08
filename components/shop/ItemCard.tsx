@@ -4,6 +4,7 @@ import { Item } from 'types/itemTypes';
 import { Modal } from 'types/modalTypes';
 import styles from 'styles/store/ItemCard.module.scss';
 import { modalState } from 'utils/recoil/modal';
+import { FaCoins } from 'react-icons/fa';
 
 export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
   const setModal = useSetRecoilState<Modal>(modalState);
@@ -58,10 +59,12 @@ export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
                 item.discount ? styles.onDiscount : styles.originalPrice
               }
             >
-              ${item.price}
+              {item.price} <FaCoins />
             </h5>
             {item.discount !== 0 && (
-              <h5 className={styles.discountedPrice}>${item.salePrice}</h5>
+              <h5 className={styles.discountedPrice}>
+                {item.salePrice} <FaCoins />{' '}
+              </h5>
             )}
           </div>
         </div>
