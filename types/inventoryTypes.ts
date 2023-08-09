@@ -20,3 +20,7 @@ export type InventoryData = {
   storageItemList: InventoryItem[];
   totalPage: number;
 };
+
+export type UseItemRequest = {
+  receiptId: number;
+};

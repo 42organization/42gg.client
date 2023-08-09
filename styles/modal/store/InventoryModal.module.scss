@@ -1,0 +1,40 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modalContainer('PINKWHITE');
+}
+
+.title {
+  @include modalTitle;
+}
+
+.phrase {
+  @include modal-phrase;
+}
+
+.textArea {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: $small-radius;
+  background: white;
+  overflow: hidden;
+  margin: 1rem 0;
+  textarea {
+    resize: none;
+    height: 4rem;
+    padding: 0.8rem;
+    border: none;
+    font-size: $big-font;
+  }
+  :focus {
+    outline: none;
+  }
+  div {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.7rem;
+    color: $dark-gray;
+    font-size: $small-font;
+  }
+}
