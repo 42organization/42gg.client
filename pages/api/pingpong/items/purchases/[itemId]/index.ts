@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-// import { Purchase } from 'types/itemTypes';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(201).json({ message: 'post success' });
-  console.log('req.body', req.body);
+  if (req.method === 'POST') {
+    const { itemId } = req.query;
+    res.status(201).json({ message: `${itemId} 구매 성공` });
+  }
 }
