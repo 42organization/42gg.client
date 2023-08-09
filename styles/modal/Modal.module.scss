@@ -20,3 +20,7 @@
   color: white;
   font-size: $medium-font;
 }
+
+.modalButtonContainer {
+  @include modalButton;
+}
