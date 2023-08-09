@@ -1,43 +1,67 @@
+import useUploadImg from 'hooks/useUploadImg';
 import Image from 'next/image';
+import { useCallback } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { IitemInfo } from 'types/admin/adminStoreTypes';
+import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
 
 export default function AdminEditItemModal(props: IitemInfo) {
   const { itemId, itemName, content, imageUrl, originalPrice, discount } =
     props;
-  const resetModal = useResetRecoilState(modalState);
-  const setError = useSetRecoilState(errorState);
+  const setModal = useSetRecoilState(modalState);
+  const setSnackBar = useSetRecoilState(toastState);
 
-  // 수정 필요 작동안함
-  // instanceInManage, try catch로 변경
-  //   const editItemHandler = async (id: number) => {
-  //     try {
-  //       await fetch(`http://localhost:3000/api/pingpong/admin/items/${id}`, {
-  //         method: 'PUT',
-  //         body: {
-  //             name : String,
-  //             content : String,
-  //             imageUrl : String.
-  //             price : integer,
-  //             discont : integer,
-  //             editor : String
-  //         },
-  //       });
-  //       alert(`${id}번 아이템이 삭제되었습니다`);
-  //     } catch (e: any) {
-  //       if (e.response.status === 400) {
-  //         alert(`${id}번 아이템을 삭제할 수 없습니다`);
-  //       } else {
-  //         setError('HJ10');
-  //       }
-  //     }
-  //     resetModal();
-  //   };
+  const { imgData, imgPreview, uploadImg } = useUploadImg();
+
+  // api 연결 시 instanceInManage로 변경 필요
+  const editItemHandler = async () => {
+    const formData = new FormData();
+    const data = {
+      // name: ,
+      // content: ,
+      // price: ,
+      // discount: ,
+      // creatorIntra: ,
+    };
+    formData.append(
+      'updateItemInfo',
+      new Blob([JSON.stringify(data)], {
+        type: 'application/json',
+      })
+    );
+    if (imgData) {
+      formData.append('imgData', new Blob([imgData], { type: 'image/jpeg' }));
+    }
+
+    try {
+      const res = await mockInstance.put(`/admin/items/${itemId}`, formData);
+      setSnackBar({
+        toastName: 'edit item',
+        severity: 'success',
+        message: '수정 완료',
+        clicked: true,
+      });
+      setModal({ modalName: null });
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'edit item',
+        severity: 'error',
+        message: `아이템 정보를 수정할 수 없습니다!`,
+        clicked: true,
+      });
+    }
+  };
 
   return (
-    <div>
+    <div className={Styles.modal}>
+      <div>
+        <label htmlFor='imageUrl'>이미지</label>
+        <input type='image' />
+        <Image src={imageUrl} width={20} height={20} alt='no' />
+      </div>
       <div>
         <label htmlFor='itemName'>아이템명</label>
         <input type='text' value={itemName} />
@@ -45,11 +69,6 @@ export default function AdminEditItemModal(props: IitemInfo) {
       <div>
         <label htmlFor='content'>아이템명</label>
         <input type='text' value={content} />
-      </div>
-      <div>
-        <label htmlFor='imageUrl'>이미지</label>
-        <input type='image' />
-        <Image src={imageUrl} width={20} height={20} alt='no' />
       </div>
       <div>
         <label htmlFor='price'>가격</label>
@@ -60,7 +79,7 @@ export default function AdminEditItemModal(props: IitemInfo) {
         <input type='number' value={discount} />
       </div>
       <div>{itemId} 번 아이템을 수정하시겠습니까?</div>
-      <button onClick={() => resetModal()}>취소</button>
+      <button onClick={() => setModal({ modalName: null })}>취소</button>
       {/* <button onClick={() => editItemHandler(itemId)}>삭제</button> */}
     </div>
   );
