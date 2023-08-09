@@ -12,7 +12,6 @@ export default function AdminDeleteProfileModal(props: IprofileInfo) {
   const setSnackBar = useSetRecoilState(toastState);
 
   // instanceInManage, try catch로 변경
-  // todo: 알림 보내기 모달 추가(메가폰과 동일)
   const deleteProfileHandler = async (intraId: string) => {
     try {
       await mockInstance.delete(`/admin/users/${intraId}`);
@@ -33,6 +32,7 @@ export default function AdminDeleteProfileModal(props: IprofileInfo) {
         });
       }
       setModal({ modalName: null });
+      return;
     }
     setSnackBar({
       toastName: 'delete profile',

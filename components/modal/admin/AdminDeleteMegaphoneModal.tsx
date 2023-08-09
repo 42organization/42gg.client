@@ -31,6 +31,7 @@ export default function AdminDeleteMegaphoneModal(props: ImegaphoneInfo) {
         });
       }
       setModal({ modalName: null });
+      return;
     }
     setSnackBar({
       toastName: 'delete megaphone',
