@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Tooltip } from '@mui/material';
 import { useRecoilValue } from 'recoil';
 import { BsGiftFill, BsCircleFill } from 'react-icons/bs';
-import { InventoryItem } from 'types/storeTypes';
+import { InventoryItem } from 'types/inventoryTypes';
 import { userState } from 'utils/recoil/layout';
 import styles from 'styles/store/Inventory.module.scss';
 

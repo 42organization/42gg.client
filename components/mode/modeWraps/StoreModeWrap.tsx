@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { FaCoins } from 'react-icons/fa';
-import { StoreMode } from 'types/storeTypes';
+import { StoreMode } from 'types/inventoryTypes';
 import { ICoin } from 'types/userTypes';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import StoreModeRadioBox from 'components/mode/modeItems/StoreModeRadioBox';

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ICoin } from 'types/userTypes';
-import { StoreMode } from 'types/storeTypes';
+import { StoreMode } from 'types/inventoryTypes';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import { StoreModeWrap } from 'components/mode/modeWraps/StoreModeWrap';
 import ItemsList from 'components/shop/ItemsList';

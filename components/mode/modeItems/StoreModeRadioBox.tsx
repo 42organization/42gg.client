@@ -1,7 +1,7 @@
 import { RadioBoxWrapper } from 'components/mode/modeItems/RadioBoxWrapper';
 import { useEffect } from 'react';
 import styles from 'styles/mode/ModeRadiobox.module.scss';
-import { StoreMode } from 'types/storeTypes';
+import { StoreMode } from 'types/inventoryTypes';
 
 type StoreModeRadioBoxProps = {
   mode: StoreMode;

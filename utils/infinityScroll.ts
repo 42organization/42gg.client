@@ -4,7 +4,7 @@ import axios from 'axios';
 import { errorState } from 'utils/recoil/error';
 import { instance } from './axios';
 import { GameListData } from 'types/gameTypes';
-import { InventoryData } from 'types/storeTypes';
+import { InventoryData } from 'types/inventoryTypes';
 
 // GameListDat를 받아오는 InfiniteQuery
 export default function InfScroll(path: string) {
