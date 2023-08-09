@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   Imegaphone,
@@ -20,6 +20,8 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from 'styles/admin/receipt/MegaphoneList.module.scss';
+import { mockInstance } from 'utils/mockAxios';
+import { toastState } from 'utils/recoil/toast';
 
 const megaPhoneTableTitle: { [key: string]: string } = {
   megaphoneId: 'ID',
@@ -46,15 +48,19 @@ function MegaphoneList() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const setModal = useSetRecoilState(modalState);
+  const setSnackBar = useSetRecoilState(toastState);
 
-  // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
+  // todo: 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
 
-  // api 연결 시 useCallback, instanceInManage, try catch로 변경
-  const getMegaphoneHandler = useMockAxiosGet<any>({
-    url: `/admin/megaphones/history?page=${currentPage}&size=10`,
-    setState: (data) => {
+  // todo: api 연결 시 instanceInManage로 변경
+  const getMegaphoneHandler = useCallback(async () => {
+    try {
+      const res = await mockInstance.get(
+        `/admin/megaphones/history?page=${currentPage}&size=10`
+      );
       setMegaphoneData({
-        megaphoneList: data.megaphoneList.map((megaphone: Imegaphone) => {
+        megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
             new Date(megaphone.usedAt)
           );
@@ -63,15 +69,18 @@ function MegaphoneList() {
             usedAt: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
-        totalPage: data.totalPage,
+        totalPage: res.data.totalPage,
         currentPage: currentPage,
       });
-    },
-    err: 'HJ03',
-    type: 'setError',
-  });
-
-  const setModal = useSetRecoilState(modalState);
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'get megaphone',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
+    }
+  }, [currentPage]);
 
   const deleteMegaphone = (megaphoneInfo: ImegaphoneInfo) => {
     setModal({
@@ -86,30 +95,36 @@ function MegaphoneList() {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table aria-label='customized table'>
-          <TableHead>
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='customized table'>
+          <TableHead className={styles.tableHeader}>
             <TableRow>
               {tableColumnName.map((column, idx) => (
-                <TableCell key={idx}>{megaPhoneTableTitle[column]}</TableCell>
+                <TableCell className={styles.tableHeaderItem} key={idx}>
+                  {megaPhoneTableTitle[column]}
+                </TableCell>
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {megaphoneData.megaphoneList.length > 0 ? (
               megaphoneData.megaphoneList.map((megaphone: Imegaphone) => (
-                <TableRow key={megaphone.megaphoneId}>
+                <TableRow
+                  className={styles.tableRow}
+                  key={megaphone.megaphoneId}
+                >
                   {tableFormat['megaphoneList'].columns.map(
                     (columnName: string, index: number) => {
                       return (
-                        <TableCell key={index}>
+                        <TableCell className={styles.tableBodyItem} key={index}>
                           {megaphone[columnName as keyof Imegaphone].toString()}
                         </TableCell>
                       );
                     }
                   )}
-                  <TableCell>
+                  <TableCell className={styles.tableBodyItem}>
                     <button
+                      className={styles.deleteBtn}
                       onClick={() =>
                         deleteMegaphone({
                           megaphoneId: megaphone.megaphoneId,
@@ -124,14 +139,16 @@ function MegaphoneList() {
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell>비어있습니다</TableCell>
+              <TableRow className={styles.tableBodyItem}>
+                <TableCell className={styles.tableBodyItem}>
+                  비어있습니다
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </TableContainer>
-      <div>
+      <div className={styles.pageNationContainer}>
         <PageNation
           curPage={megaphoneData.currentPage}
           totalPages={megaphoneData.totalPage}

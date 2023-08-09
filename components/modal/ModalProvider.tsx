@@ -33,6 +33,7 @@ import AdminEditCoinPolicyModal from './admin/AdminEditCoinPolicy';
 import BuyModal from './store/purchase/BuyModal';
 import GiftModal from './store/purchase/GiftModal';
 import NoCoinModal from './store/purchase/NoCoinModal';
+import AdminCheckSendNotiModal from './admin/AdminCheckSendNoti';
 
 export default function ModalProvider() {
   const [
@@ -110,6 +111,9 @@ export default function ModalProvider() {
     ) : null,
     'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
       <AdminEditCoinPolicyModal {...coinPolicy} />
+    ) : null,
+    'ADMIN-CHECK_SEND_NOTI': intraId ? (
+      <AdminCheckSendNotiModal intraId={intraId} />
     ) : null,
   };
 
