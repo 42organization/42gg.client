@@ -99,41 +99,42 @@ const megaphoneList: Array<Imegaphone> = [
   megaphone10,
 ];
 
-const ResEmpty: ImegaphoneRes = {
+const resEmpty: ImegaphoneRes = {
   megaphoneList: [],
   totalPage: 0,
 };
 
-const ResOne: ImegaphoneRes = {
+const resOne: ImegaphoneRes = {
   megaphoneList: megaphoneList.slice(0, 8),
   totalPage: 1,
 };
 
-const ResTwo: ImegaphoneRes = {
+const resTwo: ImegaphoneRes = {
   megaphoneList: megaphoneList,
   totalPage: 3,
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { query } = req;
+  const { method, query } = req;
   const { page } = query as { page: string };
 
-  // const temp: ImegaphoneTable = ResEmpty;
-  // const temp: ImegaphoneTable = ResOne;
-  const temp: ImegaphoneRes = ResTwo;
+  // const temp: ImegaphoneTable = resEmpty;
+  // const temp: ImegaphoneTable = resOne;
+  const temp: ImegaphoneRes = resTwo;
 
   const resData: ImegaphoneRes = {
     megaphoneList: [],
     totalPage: temp.totalPage,
   };
 
-  if (page) {
-    if (parseInt(page) === resData.totalPage) {
-      resData.megaphoneList = temp.megaphoneList.slice(0, 5);
-    } else {
-      resData.megaphoneList = temp.megaphoneList;
+  if (method === 'GET') {
+    if (page) {
+      if (parseInt(page) === resData.totalPage) {
+        resData.megaphoneList = temp.megaphoneList.slice(0, 5);
+      } else {
+        resData.megaphoneList = temp.megaphoneList;
+      }
     }
+    res.status(200).json(resData);
   }
-
-  res.status(200).json(resData);
 }

@@ -6,16 +6,18 @@ import { instanceInManage } from 'utils/axios';
 
 interface IsendNoti {
   intraId: string;
+  detailContent: string;
 }
 
 export default function AdminCheckSendNotiModal(props: IsendNoti) {
-  const { intraId } = props;
+  const { intraId, detailContent } = props;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
+  const content = detailContent === 'megaphone' ? '확성기' : '프로필 이미지';
+
   const sendNotificationHandler = async () => {
-    const notiContent =
-      '확성기 내용이 부적절하여 관리자에 의해 삭제되었습니다.';
+    const notiContent = `${content} 내용이 부적절하여 관리자에 의해 삭제되었습니다.`;
 
     try {
       await instanceInManage.post(`/notifications`, {
@@ -25,7 +27,7 @@ export default function AdminCheckSendNotiModal(props: IsendNoti) {
       setSnackBar({
         toastName: 'noti user',
         severity: 'success',
-        message: `확성기 삭제 알림이 성공적으로 전송되었습니다!`,
+        message: `${content} 삭제 알림이 성공적으로 전송되었습니다!`,
         clicked: true,
       });
       setModal({ modalName: null });
@@ -52,7 +54,9 @@ export default function AdminCheckSendNotiModal(props: IsendNoti) {
             <span className={styles.intraId}>{intraId}</span>
             님에게
           </div>
-          <div className={styles.text}>확성기 삭제 알림을 보내시겠습니까?</div>
+          <div className={styles.text}>
+            ${content} 삭제 알림을 보내시겠습니까?
+          </div>
         </div>
         <div className={styles.buttonWrap}>
           <button

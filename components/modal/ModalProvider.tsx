@@ -112,9 +112,13 @@ export default function ModalProvider() {
     'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
       <AdminEditCoinPolicyModal {...coinPolicy} />
     ) : null,
-    'ADMIN-CHECK_SEND_NOTI': intraId ? (
-      <AdminCheckSendNotiModal intraId={intraId} />
-    ) : null,
+    'ADMIN-CHECK_SEND_NOTI':
+      intraId && detailContent ? (
+        <AdminCheckSendNotiModal
+          intraId={intraId}
+          detailContent={detailContent}
+        />
+      ) : null,
   };
 
   useEffect(() => {
