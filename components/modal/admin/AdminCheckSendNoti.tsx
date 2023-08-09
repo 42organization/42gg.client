@@ -30,7 +30,6 @@ export default function AdminCheckSendNotiModal(props: IsendNoti) {
         message: `${content} 삭제 알림이 성공적으로 전송되었습니다!`,
         clicked: true,
       });
-      setModal({ modalName: null });
     } catch (e) {
       setSnackBar({
         toastName: 'noti user',

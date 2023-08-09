@@ -11,10 +11,21 @@ export default function AdminDeleteProfileModal(props: IprofileInfo) {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // instanceInManage, try catch로 변경
+  // instanceInManage로 변경
   const deleteProfileHandler = async (intraId: string) => {
     try {
       await mockInstance.delete(`/admin/users/${intraId}`);
+      setSnackBar({
+        toastName: 'delete profile',
+        severity: 'success',
+        message: `${profileId}번 ${intraId}님의 프로필 이미지가 삭제되었습니다!`,
+        clicked: true,
+      });
+      setModal({
+        modalName: 'ADMIN-CHECK_SEND_NOTI',
+        intraId: intraId,
+        detailContent: 'profile',
+      });
     } catch (e: any) {
       if (e.response.status === 403) {
         setSnackBar({
@@ -32,19 +43,7 @@ export default function AdminDeleteProfileModal(props: IprofileInfo) {
         });
       }
       setModal({ modalName: null });
-      return;
     }
-    setSnackBar({
-      toastName: 'delete profile',
-      severity: 'success',
-      message: `${profileId}번 ${intraId}님의 프로필 이미지가 삭제되었습니다!`,
-      clicked: true,
-    });
-    setModal({
-      modalName: 'ADMIN-CHECK_SEND_NOTI',
-      intraId: intraId,
-      detailContent: 'profile',
-    });
   };
 
   return (
