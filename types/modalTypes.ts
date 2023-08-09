@@ -7,6 +7,7 @@ import { CoinResult } from 'types/coinTypes';
 import { ImegaphoneInfo, IprofileInfo } from './admin/adminReceiptType';
 import { IitemInfo } from './admin/adminStoreTypes';
 import { IcoinPolicy } from './admin/adminCoinTypes';
+import { StoreManualMode } from './storeTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -19,6 +20,8 @@ type UserModal = 'PROFILE_EDIT' | 'KAKAO_EDIT';
 type FixedModal = 'AFTER_GAME' | 'STAT';
 
 type PurchaseModal = 'BUY' | 'GIFT' | 'NO_COIN';
+
+type StoreModal = 'MANUAL' | 'COIN_HISTORY';
 
 type AdminModal =
   | 'PROFILE'
@@ -43,8 +46,10 @@ type ModalName =
   | `USER-${UserModal}`
   | `FIXED-${FixedModal}`
   | `ADMIN-${AdminModal}`
-  | `COIN-ANIMATION`;
-  | `PURCHASE-${PurchaseModal}`;
+  | `COIN-ANIMATION`
+  | `PURCHASE-${PurchaseModal}`
+  | `STORE-${StoreModal}`;
+
 export interface Cancel {
   startTime: string;
 }
@@ -68,9 +73,10 @@ export interface Coin {
   mode?: MatchMode | null;
 }
 
-export interface Manual {
-  radioMode: MatchMode;
-}
+// 지워도 되는 것?
+// export interface Manual {
+//   radioMode: MatchMode;
+// }
 
 export interface manual {
   radioMode: MatchMode;
@@ -79,6 +85,10 @@ export interface manual {
 export interface PriceTag {
   product: string;
   price: number;
+}
+
+export interface StoreManual {
+  radioMode: StoreManualMode;
 }
 
 export interface Modal {
@@ -101,4 +111,5 @@ export interface Modal {
   profileInfo?: IprofileInfo;
   itemInfo?: IitemInfo;
   coinPolicy?: IcoinPolicy;
+  storeManual?: StoreManual;
 }

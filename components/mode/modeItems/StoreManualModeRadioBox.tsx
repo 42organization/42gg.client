@@ -1,23 +1,23 @@
 import { RadioBoxWrapper } from 'components/mode/modeItems/RadioBoxWrapper';
+import { StoreManualMode } from 'types/storeTypes';
 import styles from 'styles/mode/ModeRadiobox.module.scss';
-import { StoreMode } from 'types/storeTypes';
 
-type StoreModeRadioBoxProps = {
-  mode: StoreMode;
+type StoreManualModeRadioBoxProps = {
+  mode: StoreManualMode;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function StoreModeRadioBox({
+export default function StoreManualModeRadioBox({
   mode,
   onChange,
-}: StoreModeRadioBoxProps) {
-  const modes: { type: StoreMode; name: string }[] = [
-    { type: 'BUY', name: '상점' },
-    { type: 'INVENTORY', name: '보관함' },
+}: StoreManualModeRadioBoxProps) {
+  const modes: { type: StoreManualMode; name: string }[] = [
+    { type: 'COIN_POLICY', name: '코인 정책' },
+    { type: 'STORE_POLICY', name: '상점 이용' },
   ];
 
   return (
-    <RadioBoxWrapper page='STORE'>
+    <RadioBoxWrapper page='STORE_MANUAL'>
       {modes.map(({ type, name }) => (
         <label key={type}>
           <input
