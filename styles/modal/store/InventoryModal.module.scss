@@ -10,6 +10,19 @@
 
 .phrase {
   @include modal-phrase;
+  text-align: left;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  margin: 0 0 0.3rem 0.5rem;
+  color: $dark-gray;
+  font-size: $medium-font;
 }
 
 .textArea {
@@ -19,7 +32,7 @@
   border-radius: $small-radius;
   background: white;
   overflow: hidden;
-  margin: 1rem 0;
+  margin-bottom: 1rem;
   textarea {
     resize: none;
     height: 4rem;
@@ -36,5 +49,18 @@
     padding: 0.7rem;
     color: $dark-gray;
     font-size: $small-font;
+  }
+}
+
+.itemCautionContainer {
+  .title {
+    margin: 0 0 0.3rem 0.5rem;
+    color: $dark-gray;
+    font-size: $medium-font;
+  }
+  .list {
+    padding: 0 0 0.5rem 0.5rem;
+    list-style-type: '- ';
+    list-style-position: inside;
   }
 }
