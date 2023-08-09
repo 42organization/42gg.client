@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import StoreManualModeRadiobox from 'components/mode/modeItems/StoreManualModeRadioBox';
-import styles from 'styles/modal/match/StoreManualModal.module.scss';
+import styles from 'styles/modal/store/StoreManualModal.module.scss';
 import { StoreManual } from 'types/modalTypes';
 import { StoreManualMode } from 'types/storeTypes';
 
