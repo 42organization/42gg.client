@@ -24,3 +24,7 @@ export type InventoryData = {
 export type UseItemRequest = {
   receiptId: number;
 };
+
+export type UseMegaphoneRequest = UseItemRequest & {
+  content: string;
+};

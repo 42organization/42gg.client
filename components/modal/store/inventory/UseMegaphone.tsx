@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { userState } from 'utils/recoil/layout';
-import { UseItemRequest } from 'types/inventoryTypes';
+import { modalState } from 'utils/recoil/modal';
+import { UseItemRequest, UseMegaphoneRequest } from 'types/inventoryTypes';
 import { MegaphoneContainer } from 'components/Layout/MegaPhone';
 import { ItemCautionContainer } from './ItemCautionContainer';
 import {
   ModalButtonConatainer,
   ModalButton,
 } from 'components/modal/ModalButton';
+import { mockInstance } from 'utils/mockAxios';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 
 type UseMegaphoneProps = UseItemRequest;
@@ -24,6 +26,26 @@ const caution = [
 export default function UseMegaphone({ receiptId }: UseMegaphoneProps) {
   const user = useRecoilValue(userState);
   const [content, setContent] = useState('');
+  const resetModal = useResetRecoilState(modalState);
+  async function handleUseMegaphone() {
+    if (content.length === 0) {
+      alert('확성기 내용을 입력해주세요.');
+      return;
+    }
+    const data: UseMegaphoneRequest = {
+      receiptId: receiptId,
+      content: content,
+    };
+    try {
+      await mockInstance.post('/megaphones', data);
+      alert('확성기가 등록되었습니다.');
+    } catch (error: unknown) {
+      // TODO : error 정의 필요
+      console.log(error);
+    } finally {
+      resetModal();
+    }
+  }
   return (
     <div className={styles.container}>
       <div className={styles.title}>확성기 등록</div>
@@ -32,7 +54,7 @@ export default function UseMegaphone({ receiptId }: UseMegaphoneProps) {
           <div className={styles.sectionTitle}>미리보기</div>
           <MegaphoneContainer play={'running'} clickPause={() => void 0}>
             {content.length === 0 ? (
-              <li>등록할 확성기 내용을 입력해주세요.</li>
+              <li>등록할 내용을 입력해주세요.</li>
             ) : (
               <li>
                 {user.intraId} : {content}
@@ -58,8 +80,16 @@ export default function UseMegaphone({ receiptId }: UseMegaphoneProps) {
         </div>
         <ItemCautionContainer caution={caution} />
         <ModalButtonConatainer>
-          <ModalButton style='negative' value='취소' onClick={() => void 0} />
-          <ModalButton style='positive' value='등록' onClick={() => void 0} />
+          <ModalButton
+            style='negative'
+            value='취소'
+            onClick={() => resetModal()}
+          />
+          <ModalButton
+            style='positive'
+            value='등록'
+            onClick={() => handleUseMegaphone()}
+          />
         </ModalButtonConatainer>
       </div>
     </div>

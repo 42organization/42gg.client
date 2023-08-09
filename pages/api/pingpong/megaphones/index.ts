@@ -65,4 +65,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (method === 'GET') {
     res.status(200).json({ megaphoneList: test });
   }
+  if (method === 'POST') {
+    const { content, intraId } = req.body;
+    const newMegaphone: IMegaphone = {
+      megaphoneId: test.length,
+      content,
+      intraId,
+    };
+    test.push(newMegaphone);
+    res.status(200);
+  }
 }
