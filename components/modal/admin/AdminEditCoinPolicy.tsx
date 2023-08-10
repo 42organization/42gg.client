@@ -10,14 +10,14 @@ export default function AdminEditCoinPolicyModal(props: IcoinPolicy) {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // instanceInManage, try catch로 변경
+  // instanceInManage로 변경
   const editCoinPolicyHandler = async () => {
     try {
       await mockInstance.post(`/admin/coinpolicy`, props);
       setSnackBar({
         toastName: 'edit coinpolicy',
         severity: 'success',
-        message: '정책이 등록되었습니다!',
+        message: '새로운 재화 정책이 등록되었습니다.',
         clicked: true,
       });
     } catch (e: unknown) {

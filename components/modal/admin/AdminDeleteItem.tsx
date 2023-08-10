@@ -10,8 +10,7 @@ export default function AdminDeleteItemModal(props: Item) {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // 수정 필요 작동안함
-  // instanceInManage, try catch로 변경
+  // instanceInManage로 변경
   const deleteItemHandler = async (itemId: number) => {
     try {
       await mockInstance.delete(`/admin/items/${itemId}`);
@@ -21,24 +20,15 @@ export default function AdminDeleteItemModal(props: Item) {
         message: `${itemId}번 ${itemName}이 삭제되었습니다!`,
         clicked: true,
       });
-    } catch (e: any) {
-      if (e.response.status === 403) {
-        setSnackBar({
-          toastName: 'delete item',
-          severity: 'error',
-          message: `${itemId}번 ${itemName}을 삭제할 수 없습니다.`,
-          clicked: true,
-        });
-      } else {
-        setSnackBar({
-          toastName: 'delete item',
-          severity: 'error',
-          message: `API 요청에 문제가 발생했습니다.`,
-          clicked: true,
-        });
-      }
-      setModal({ modalName: null });
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'delete item',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
     }
+    setModal({ modalName: null });
   };
 
   return (

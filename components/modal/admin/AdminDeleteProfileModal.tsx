@@ -18,7 +18,7 @@ export default function AdminDeleteProfileModal(props: Iprofile) {
       setSnackBar({
         toastName: 'delete profile',
         severity: 'success',
-        message: `${profileId}번 ${intraId}님의 프로필 이미지가 삭제되었습니다!`,
+        message: `${profileId}번 ${intraId}님의 프로필 이미지가 삭제되었습니다.`,
         clicked: true,
       });
       setModal({
@@ -26,22 +26,13 @@ export default function AdminDeleteProfileModal(props: Iprofile) {
         intraId: intraId,
         detailContent: 'profile',
       });
-    } catch (e: any) {
-      if (e.response.status === 403) {
-        setSnackBar({
-          toastName: 'delete profile',
-          severity: 'error',
-          message: `API 요청에 문제가 발생했습니다.`,
-          clicked: true,
-        });
-      } else {
-        setSnackBar({
-          toastName: 'delete profile',
-          severity: 'success',
-          message: `${intraId}님의 프로필이 삭제되었습니다!`,
-          clicked: true,
-        });
-      }
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'delete profile',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
       setModal({ modalName: null });
     }
   };

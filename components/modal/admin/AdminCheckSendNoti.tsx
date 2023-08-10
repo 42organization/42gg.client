@@ -54,7 +54,7 @@ export default function AdminCheckSendNotiModal(props: IsendNoti) {
             님에게
           </div>
           <div className={styles.text}>
-            ${content} 삭제 알림을 보내시겠습니까?
+            {content} 삭제 알림을 보내시겠습니까?
           </div>
         </div>
         <div className={styles.buttonWrap}>

@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   IcoinPolicyHistory,
   IcoinPolicyHistoryTable,
 } from 'types/admin/adminCoinTypes';
 import { tableFormat } from 'constants/admin/table';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import PageNation from 'components/Pagination';
 import {
   Paper,
@@ -17,6 +16,9 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from 'styles/admin/coin/CoinPolicyHistory.module.scss';
+import { mockInstance } from 'utils/mockAxios';
+import { useSetRecoilState } from 'recoil';
+import { toastState } from 'utils/recoil/toast';
 
 const coinPolicyHistoryTableTitle: { [key: string]: string } = {
   coinPolicyId: 'ID',
@@ -46,13 +48,16 @@ function CoinPolicyHistory() {
       currentPage: 0,
     });
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const setSnackBar = useSetRecoilState(toastState);
 
-  // api 연결 시 useCallback, instanceInManage, try catch로 변경
-  const getCoinPolicyHistoryHandler = useMockAxiosGet<any>({
-    url: `/admin/coinpolicy?page=${currentPage}&size=5`,
-    setState: (data) => {
+  // instanceInManage로 변경
+  const getCoinPolicyHistoryHandler = useCallback(async () => {
+    try {
+      const res = await mockInstance.get(
+        `/admin/coinpolicy?page=${currentPage}&size=5`
+      );
       setCoinPolicyHistoryData({
-        coinPolicyList: data.coinPolicyList.map(
+        coinPolicyList: res.data.coinPolicyList.map(
           (coinPolicyHistory: IcoinPolicyHistory) => {
             const { year, month, date, hour, min } = getFormattedDateToString(
               new Date(coinPolicyHistory.createdAt)
@@ -63,13 +68,18 @@ function CoinPolicyHistory() {
             };
           }
         ),
-        totalPage: data.totalPage,
+        totalPage: res.data.totalPage,
         currentPage: currentPage,
       });
-    },
-    err: 'HJ08',
-    type: 'setError',
-  });
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'get coinpolicyhistory',
+        severity: 'error',
+        message: 'API 요청에 문제가 발생했습니다.',
+        clicked: true,
+      });
+    }
+  }, [currentPage]);
 
   useEffect(() => {
     getCoinPolicyHistoryHandler();

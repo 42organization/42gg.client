@@ -1,9 +1,8 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { IitemHistory, IitemHistoryList } from 'types/admin/adminStoreTypes';
 import { tableFormat } from 'constants/admin/table';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import PageNation from 'components/Pagination';
 import {
   Paper,
@@ -15,6 +14,9 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from 'styles/admin/store/ItemHistory.module.scss';
+import { mockInstance } from 'utils/mockAxios';
+import { useSetRecoilState } from 'recoil';
+import { toastState } from 'utils/recoil/toast';
 
 const itemHistoryTableTitle: { [key: string]: string } = {
   itemId: 'ID',
@@ -47,13 +49,16 @@ function ItemHistory() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const setSnackBar = useSetRecoilState(toastState);
 
-  // api 연결 시 useCallback, instanceInManage, try catch로 변경
-  const getItemHistoryListHandler = useMockAxiosGet<any>({
-    url: `admin/items/history?page=${currentPage}&size=5`,
-    setState: (data) => {
+  // instanceInManage로 변경
+  const getItemHistoryListHandler = useCallback(async () => {
+    try {
+      const res = await mockInstance.get(
+        `/admin/items/history?page=${currentPage}&size=5`
+      );
       setItemHistoryData({
-        itemHistoryList: data.itemHistoryList.map(
+        itemHistoryList: res.data.itemHistoryList.map(
           (itemHistory: IitemHistory) => {
             const { year, month, date, hour, min } = getFormattedDateToString(
               new Date(itemHistory.createdAt)
@@ -64,13 +69,18 @@ function ItemHistory() {
             };
           }
         ),
-        totalPage: data.totalPage,
+        totalPage: res.data.totalPage,
         currentPage: currentPage,
       });
-    },
-    err: 'HJ07',
-    type: 'setError',
-  });
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'get itemhistory',
+        severity: 'error',
+        message: 'API 요청에 문제가 발생했습니다.',
+        clicked: true,
+      });
+    }
+  }, [currentPage]);
 
   useEffect(() => {
     getItemHistoryListHandler();

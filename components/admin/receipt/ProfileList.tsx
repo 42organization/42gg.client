@@ -39,9 +39,9 @@ function ProfileList() {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // todo: 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler + 유저 검색 컴포넌트 추가
+  // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
 
-  // todo: api 연결 시 instanceInManage로 변경
+  // instanceInManage로 변경
   const getProfileHandler = useCallback(async () => {
     try {
       const res = await mockInstance.get(

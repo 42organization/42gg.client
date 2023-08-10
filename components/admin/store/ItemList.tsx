@@ -57,9 +57,9 @@ function ItemList() {
     try {
       const res = await mockInstance.get(`items/store`);
       setItemListData(res.data);
-    } catch (e) {
+    } catch (e: unknown) {
       setSnackBar({
-        toastName: 'get itemList',
+        toastName: 'get itemlist',
         severity: 'error',
         message: 'API 요청에 문제가 발생했습니다.',
         clicked: true,

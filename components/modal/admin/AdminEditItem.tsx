@@ -24,7 +24,7 @@ export default function AdminEditItemModal(props: Item) {
   const priceRef = useRef<HTMLInputElement>(null);
   const discountRef = useRef<HTMLInputElement>(null);
 
-  // api 연결 시 instanceInManage로 변경 필요
+  // instanceInManage로 변경
   const editItemHandler = async () => {
     const formData = new FormData();
     const data = {
@@ -49,18 +49,18 @@ export default function AdminEditItemModal(props: Item) {
       setSnackBar({
         toastName: 'edit item',
         severity: 'success',
-        message: '수정 완료',
+        message: '아이템 정보가 수정되었습니다.',
         clicked: true,
       });
-      setModal({ modalName: null });
     } catch (e: unknown) {
       setSnackBar({
         toastName: 'edit item',
         severity: 'error',
-        message: `아이템 정보를 수정할 수 없습니다!`,
+        message: `아이템 정보를 수정할 수 없습니다.`,
         clicked: true,
       });
     }
+    setModal({ modalName: null });
   };
 
   return (

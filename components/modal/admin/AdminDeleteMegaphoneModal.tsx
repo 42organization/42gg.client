@@ -10,40 +10,39 @@ export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // instanceInManage, try catch로 변경
+  // instanceInManage로 변경
   const deleteMegaphoneHandler = async (megaphoneId: number) => {
     try {
       await mockInstance.delete(`/admin/megaphones/${megaphoneId}`);
+      setSnackBar({
+        toastName: 'delete megaphone',
+        severity: 'success',
+        message: `${megaphoneId}번 확성기가 삭제되었습니다!`,
+        clicked: true,
+      });
+      setModal({
+        modalName: 'ADMIN-CHECK_SEND_NOTI',
+        intraId: intraId,
+        detailContent: 'megaphone',
+      });
     } catch (e: any) {
-      if (e.response.status === 403) {
-        setSnackBar({
-          toastName: 'delete megaphone',
-          severity: 'error',
-          message: `${megaphoneId}번 확성기는 삭제할 수 없는 확성기입니다.`,
-          clicked: true,
-        });
-      } else {
-        setSnackBar({
-          toastName: 'delete megaphone',
-          severity: 'error',
-          message: `API 요청에 문제가 발생했습니다.`,
-          clicked: true,
-        });
-      }
+      // 이미 사용완료 상태인 확성기 삭제 시도 시 에러 받아서 처리하는 부분
+      // if (e.response.status === 403) {
+      //   setSnackBar({
+      //     toastName: 'delete megaphone',
+      //     severity: 'error',
+      //     message: `${megaphoneId}번 확성기는 삭제할 수 없는 확성기입니다.`,
+      //     clicked: true,
+      //   });
+      // } else {
+      setSnackBar({
+        toastName: 'delete megaphone',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
       setModal({ modalName: null });
-      return;
     }
-    setSnackBar({
-      toastName: 'delete megaphone',
-      severity: 'success',
-      message: `${megaphoneId}번 확성기가 삭제되었습니다!`,
-      clicked: true,
-    });
-    setModal({
-      modalName: 'ADMIN-CHECK_SEND_NOTI',
-      intraId: intraId,
-      detailContent: 'megaphone',
-    });
   };
 
   return (
