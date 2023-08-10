@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   Iprofile,
@@ -21,6 +21,8 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from 'styles/admin/receipt/ProfileList.module.scss';
+import { mockInstance } from 'utils/mockAxios';
+import { toastState } from 'utils/recoil/toast';
 
 const profileTableTitle: { [key: string]: string } = {
   profileId: 'ID',
@@ -30,7 +32,7 @@ const profileTableTitle: { [key: string]: string } = {
   delete: '삭제',
 };
 
-const tableColumnName = ['profileId', 'data', 'intraId', 'imageUrl', 'delete'];
+const tableColumnName = ['profileId', 'date', 'intraId', 'imageUrl', 'delete'];
 
 function ProfileList() {
   const [profileData, setProfileData] = useState<IprofileTable>({
@@ -39,15 +41,19 @@ function ProfileList() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const setModal = useSetRecoilState(modalState);
+  const setSnackBar = useSetRecoilState(toastState);
 
-  // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler + 유저 검색 컴포넌트 추가
+  // todo: 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler + 유저 검색 컴포넌트 추가
 
-  // api 연결 시 useCallback, instanceInManage, try catch로 변경
-  const getProfileHandler = useMockAxiosGet<any>({
-    url: `/admin/images?page=${currentPage}&size=5`,
-    setState: (data) => {
+  // todo: api 연결 시 instanceInManage로 변경
+  const getProfileHandler = useCallback(async () => {
+    try {
+      const res = await mockInstance.get(
+        `/admin/images?page=${currentPage}&size=5`
+      );
       setProfileData({
-        profileList: data.profileList.map((profile: Iprofile) => {
+        profileList: res.data.profileList.map((profile: Iprofile) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
             new Date(profile.date)
           );
@@ -56,15 +62,18 @@ function ProfileList() {
             date: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
-        totalPage: data.totalPage,
+        totalPage: res.data.totalPage,
         currentPage: currentPage,
       });
-    },
-    err: 'HJ04',
-    type: 'setError',
-  });
-
-  const setModal = useSetRecoilState(modalState);
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'get profile',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
+    }
+  }, [currentPage]);
 
   const deleteProfile = (profileInfo: IprofileInfo) => {
     setModal({
@@ -79,23 +88,25 @@ function ProfileList() {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table aria-label='customized table'>
-          <TableHead>
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='customized table'>
+          <TableHead className={styles.tableHeader}>
             <TableRow>
               {tableColumnName.map((columnName, idx) => (
-                <TableCell key={idx}>{profileTableTitle[columnName]}</TableCell>
+                <TableCell className={styles.tableHeaderItem} key={idx}>
+                  {profileTableTitle[columnName]}
+                </TableCell>
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {profileData.profileList.length > 0 ? (
               profileData.profileList.map((profile: Iprofile) => (
-                <TableRow key={profile.profileId}>
+                <TableRow className={styles.tableRow} key={profile.profileId}>
                   {tableFormat['profileList'].columns.map(
                     (columnName: string, index: number) => {
                       return (
-                        <TableCell key={index}>
+                        <TableCell className={styles.tableBodyItem} key={index}>
                           {columnName === 'imageUrl' ? (
                             <Image
                               src={profile[columnName]}
@@ -110,8 +121,9 @@ function ProfileList() {
                       );
                     }
                   )}
-                  <TableCell>
+                  <TableCell className={styles.tableBodyItem}>
                     <button
+                      className={styles.deleteBtn}
                       onClick={() => {
                         deleteProfile({
                           profileId: profile.profileId,
@@ -126,14 +138,16 @@ function ProfileList() {
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell>비어있습니다</TableCell>
+              <TableRow className={styles.tableBodyItem}>
+                <TableCell className={styles.tableBodyItem}>
+                  비어있습니다
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </TableContainer>
-      <div>
+      <div className={styles.pageNationContainer}>
         <PageNation
           curPage={profileData.currentPage}
           totalPages={profileData.totalPage}

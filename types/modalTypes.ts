@@ -33,7 +33,8 @@ type AdminModal =
   | 'PROFILE_DELETE'
   | 'ITEM_EDIT'
   | 'ITEM_DELETE'
-  | 'COINPOLICY_EDIT';
+  | 'COINPOLICY_EDIT'
+  | 'CHECK_SEND_NOTI';
 
 type ModalName =
   | null
@@ -43,7 +44,7 @@ type ModalName =
   | `USER-${UserModal}`
   | `FIXED-${FixedModal}`
   | `ADMIN-${AdminModal}`
-  | `COIN-ANIMATION`;
+  | `COIN-ANIMATION`
   | `PURCHASE-${PurchaseModal}`;
 export interface Cancel {
   startTime: string;
