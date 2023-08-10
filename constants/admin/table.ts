@@ -96,7 +96,7 @@ export const tableFormat: TableFormat = {
     name: '상점 아이템 목록',
     columns: [
       'itemId',
-      'itemName',
+      'name',
       'content',
       'itemType',
       'imageUri',

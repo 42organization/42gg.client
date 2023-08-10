@@ -107,7 +107,7 @@ function ProfileList() {
                               src={profile[columnName]}
                               width={30}
                               height={30}
-                              alt='no'
+                              alt='ProfileImage'
                             />
                           ) : (
                             profile[columnName as keyof Iprofile].toString()
