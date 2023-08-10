@@ -1,11 +1,11 @@
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import { ImegaphoneInfo } from 'types/admin/adminReceiptType';
+import { Imegaphone } from 'types/admin/adminReceiptType';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminDeleteMegaphoneModal.module.scss';
 
-export default function AdminDeleteMegaphoneModal(props: ImegaphoneInfo) {
+export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
   const { megaphoneId, content, intraId } = props;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
@@ -57,9 +57,8 @@ export default function AdminDeleteMegaphoneModal(props: ImegaphoneInfo) {
           </div>
           <div className={styles.contentWrap}>
             <div className={styles.bodyText}>확성기 내용 :</div>
-            <input
+            <textarea
               className={styles.contentBlank}
-              name='content'
               value={content}
               readOnly
             />

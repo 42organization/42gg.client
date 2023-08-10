@@ -52,8 +52,8 @@ export default function ModalProvider() {
       ModifyScore,
       CoinResult,
       priceTag,
-      megaphoneInfo,
-      profileInfo,
+      megaphone,
+      profile,
       item,
       coinPolicy,
     },
@@ -99,11 +99,11 @@ export default function ModalProvider() {
     'PURCHASE-BUY': priceTag ? <BuyModal {...priceTag} /> : null,
     'PURCHASE-GIFT': priceTag ? <GiftModal {...priceTag} /> : null,
     'PURCHASE-NO_COIN': <NoCoinModal />,
-    'ADMIN-MEGAPHONE_DELETE': megaphoneInfo ? (
-      <AdminDeleteMegaphoneModal {...megaphoneInfo} />
+    'ADMIN-MEGAPHONE_DELETE': megaphone ? (
+      <AdminDeleteMegaphoneModal {...megaphone} />
     ) : null,
-    'ADMIN-PROFILE_DELETE': profileInfo ? (
-      <AdminDeleteProfileModal {...profileInfo} />
+    'ADMIN-PROFILE_DELETE': profile ? (
+      <AdminDeleteProfileModal {...profile} />
     ) : null,
     'ADMIN-ITEM_EDIT': item ? <AdminEditItemModal {...item} /> : null,
     'ADMIN-ITEM_DELETE': item ? <AdminDeleteItemModal {...item} /> : null,

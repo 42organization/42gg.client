@@ -14,12 +14,6 @@ export interface IreceiptTable {
   currentPage: number;
 }
 
-export interface ImegaphoneInfo {
-  megaphoneId: number;
-  content: string;
-  intraId: string;
-}
-
 export interface Imegaphone {
   megaphoneId: number;
   content: string;
@@ -32,12 +26,6 @@ export interface ImegaphoneTable {
   megaphoneList: Array<Imegaphone>;
   totalPage: number;
   currentPage: number;
-}
-
-export interface IprofileInfo {
-  profileId: number;
-  intraId: string;
-  imageUrl: string;
 }
 
 export interface Iprofile {

@@ -1,42 +1,85 @@
-import Image from 'next/image';
-import { useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
-import { errorState } from 'utils/recoil/error';
+import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
+import styles from 'styles/admin/modal/AdminDeleteItem.module.scss';
 
 export default function AdminDeleteItemModal(props: Item) {
-  const { itemId, itemName, content, imageUri } = props;
-  const resetModal = useResetRecoilState(modalState);
-  const setError = useSetRecoilState(errorState);
+  const { itemId, itemName, content } = props;
+  const setModal = useSetRecoilState(modalState);
+  const setSnackBar = useSetRecoilState(toastState);
 
   // 수정 필요 작동안함
   // instanceInManage, try catch로 변경
-  const deleteItemHandler = async (id: number) => {
+  const deleteItemHandler = async (itemId: number) => {
     try {
-      await fetch(`http://localhost:3000/api/pingpong/admin/items/${id}`, {
-        method: 'DELETE',
+      await mockInstance.delete(`/admin/items/${itemId}`);
+      setSnackBar({
+        toastName: 'delete item',
+        severity: 'success',
+        message: `${itemId}번 ${itemName}이 삭제되었습니다!`,
+        clicked: true,
       });
-      alert(`${id}번 아이템이 삭제되었습니다`);
     } catch (e: any) {
-      if (e.response.status === 400) {
-        alert(`${id}번 아이템을 삭제할 수 없습니다`);
+      if (e.response.status === 403) {
+        setSnackBar({
+          toastName: 'delete item',
+          severity: 'error',
+          message: `${itemId}번 ${itemName}을 삭제할 수 없습니다.`,
+          clicked: true,
+        });
       } else {
-        setError('HJ11');
+        setSnackBar({
+          toastName: 'delete item',
+          severity: 'error',
+          message: `API 요청에 문제가 발생했습니다.`,
+          clicked: true,
+        });
       }
+      setModal({ modalName: null });
     }
-    resetModal();
   };
 
   return (
-    <div>
-      <div>
-        아이템명 : {itemName}
-        설명 : {content}
+    <div className={styles.whole}>
+      <div className={styles.title}>
+        <div className={styles.titleText}>아이템 삭제</div>
+        <hr className={styles.hr} />
       </div>
-      <Image src={imageUri} width={20} height={20} alt='no' />
-      <div>{itemId} 번 아이템을 삭제하시겠습니까?</div>
-      <button onClick={() => resetModal()}>취소</button>
-      {/* <button onClick={() => deleteItemHandler(itemId)}>삭제</button> */}
+      <div className={styles.body}>
+        <div className={styles.bodyWrap}>
+          <div className={styles.intraWrap}>
+            <div className={styles.bodyText}>아이템명 :</div>
+            <input className={styles.intraBlank} value={itemName} readOnly />
+          </div>
+          <div className={styles.contentWrap}>
+            <div className={styles.bodyText}>설명 :</div>
+            <textarea
+              className={styles.contentBlank}
+              value={content}
+              readOnly
+            />
+          </div>
+          <div className={styles.checkWrap}>
+            {itemId} 번 아이템을 삭제하시겠습니까?
+          </div>
+        </div>
+        <div className={styles.buttonWrap}>
+          <button
+            className={styles.deleteBtn}
+            onClick={() => deleteItemHandler(itemId)}
+          >
+            삭제
+          </button>
+          <button
+            className={styles.cancelBtn}
+            onClick={() => setModal({ modalName: null })}
+          >
+            취소
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

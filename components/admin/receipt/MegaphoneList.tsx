@@ -89,6 +89,14 @@ function MegaphoneList() {
     });
   };
 
+  const openDetailModal = (item: Item) => {
+    setModal({
+      modalName: 'ADMIN-DETAIL_CONTENT',
+      intraId: item.itemName,
+      detailContent: item.content,
+    });
+  };
+
   useEffect(() => {
     getMegaphoneHandler();
   }, [currentPage]);

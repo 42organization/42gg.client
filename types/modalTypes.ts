@@ -4,7 +4,7 @@ import { Value } from 'react-quill';
 import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { CoinResult } from 'types/coinTypes';
-import { ImegaphoneInfo, IprofileInfo } from './admin/adminReceiptType';
+import { Imegaphone, Iprofile } from './admin/adminReceiptType';
 import { IcoinPolicy } from './admin/adminCoinTypes';
 import { Item } from './itemTypes';
 
@@ -98,8 +98,8 @@ export interface Modal {
   ModifyScore?: ModifyScoreType;
   CoinResult?: CoinResult;
   priceTag?: PriceTag;
-  megaphoneInfo?: ImegaphoneInfo;
-  profileInfo?: IprofileInfo;
+  megaphone?: Imegaphone;
+  profile?: Iprofile;
   item?: Item;
   coinPolicy?: IcoinPolicy;
 }

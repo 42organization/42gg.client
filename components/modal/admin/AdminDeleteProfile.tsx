@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
-import { IprofileInfo } from 'types/admin/adminReceiptType';
+import { Iprofile } from 'types/admin/adminReceiptType';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 
-export default function AdminDeleteProfileModal(props: IprofileInfo) {
+export default function AdminDeleteProfileModal(props: Iprofile) {
   const { profileId, intraId, imageUrl } = props;
   const resetModal = useResetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);

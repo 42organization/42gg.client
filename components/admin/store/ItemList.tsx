@@ -1,11 +1,9 @@
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { IitemInfo } from 'types/admin/adminStoreTypes';
 import { Item, ItemList } from 'types/itemTypes';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import {
   Paper,
   Table,
