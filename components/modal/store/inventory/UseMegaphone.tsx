@@ -37,7 +37,11 @@ export default function UseMegaphone({ receiptId }: UseMegaphoneProps) {
       content: content,
     };
     try {
-      await mockInstance.post('/megaphones', data);
+      // await mockInstance.post('/megaphones', data);
+      // NOTE : 테스트를 위해 응답 body를 console에 출력 <- 확성기 등록 결과 확인. 추후 삭제
+      const response = await mockInstance.post('/megaphones', data);
+      console.log(response.data.megaphoneList);
+      //
       alert('확성기가 등록되었습니다.');
     } catch (error: unknown) {
       // TODO : error 정의 필요
