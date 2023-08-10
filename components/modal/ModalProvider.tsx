@@ -54,7 +54,7 @@ export default function ModalProvider() {
       priceTag,
       megaphoneInfo,
       profileInfo,
-      itemInfo,
+      item,
       coinPolicy,
     },
     setModal,
@@ -105,10 +105,8 @@ export default function ModalProvider() {
     'ADMIN-PROFILE_DELETE': profileInfo ? (
       <AdminDeleteProfileModal {...profileInfo} />
     ) : null,
-    'ADMIN-ITEM_EDIT': itemInfo ? <AdminEditItemModal {...itemInfo} /> : null,
-    'ADMIN-ITEM_DELETE': itemInfo ? (
-      <AdminDeleteItemModal {...itemInfo} />
-    ) : null,
+    'ADMIN-ITEM_EDIT': item ? <AdminEditItemModal {...item} /> : null,
+    'ADMIN-ITEM_DELETE': item ? <AdminDeleteItemModal {...item} /> : null,
     'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
       <AdminEditCoinPolicyModal {...coinPolicy} />
     ) : null,

@@ -1,12 +1,3 @@
-export interface IitemInfo {
-  itemId: number;
-  itemName: string;
-  content: string;
-  imageUri: string;
-  originalPrice?: number;
-  discount?: number;
-}
-
 export interface IitemHistory {
   itemId: number;
   createdAt: Date;

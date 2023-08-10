@@ -5,8 +5,8 @@ import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { CoinResult } from 'types/coinTypes';
 import { ImegaphoneInfo, IprofileInfo } from './admin/adminReceiptType';
-import { IitemInfo } from './admin/adminStoreTypes';
 import { IcoinPolicy } from './admin/adminCoinTypes';
+import { Item } from './itemTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -100,6 +100,6 @@ export interface Modal {
   priceTag?: PriceTag;
   megaphoneInfo?: ImegaphoneInfo;
   profileInfo?: IprofileInfo;
-  itemInfo?: IitemInfo;
+  item?: Item;
   coinPolicy?: IcoinPolicy;
 }

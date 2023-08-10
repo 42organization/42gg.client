@@ -1,16 +1,16 @@
 import useUploadImg from 'hooks/useUploadImg';
 import Image from 'next/image';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { IitemInfo } from 'types/admin/adminStoreTypes';
 import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminEditItem.module.scss';
 import { userState } from 'utils/recoil/layout';
 import { useRef } from 'react';
+import { Item } from 'types/itemTypes';
 
-export default function AdminEditItemModal(props: IitemInfo) {
-  const { itemId, itemName, content, imageUrl, originalPrice, discount } =
+export default function AdminEditItemModal(props: Item) {
+  const { itemId, itemName, content, imageUri, originalPrice, discount } =
     props;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
@@ -73,7 +73,7 @@ export default function AdminEditItemModal(props: IitemInfo) {
         <div className={styles.bodyWrap}>
           <label className={styles.imageWrap}>
             <Image
-              src={imgPreview ? imgPreview : imageUrl}
+              src={imgPreview ? imgPreview : imageUri}
               alt='Item Image'
               width={90}
               height={80}

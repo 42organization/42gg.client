@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
-import { IitemInfo } from 'types/admin/adminStoreTypes';
+import { Item } from 'types/itemTypes';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 
-export default function AdminDeleteItemModal(props: IitemInfo) {
-  const { itemId, itemName, content, imageUrl } = props;
+export default function AdminDeleteItemModal(props: Item) {
+  const { itemId, itemName, content, imageUri } = props;
   const resetModal = useResetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
 
@@ -33,7 +33,7 @@ export default function AdminDeleteItemModal(props: IitemInfo) {
         아이템명 : {itemName}
         설명 : {content}
       </div>
-      <Image src={imageUrl} width={20} height={20} alt='no' />
+      <Image src={imageUri} width={20} height={20} alt='no' />
       <div>{itemId} 번 아이템을 삭제하시겠습니까?</div>
       <button onClick={() => resetModal()}>취소</button>
       {/* <button onClick={() => deleteItemHandler(itemId)}>삭제</button> */}
