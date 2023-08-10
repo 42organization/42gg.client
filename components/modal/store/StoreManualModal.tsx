@@ -16,11 +16,6 @@ type contentType = {
   description: descriptionType[];
 };
 
-// type contentType = {
-//   title: React.ReactNode;
-//   description: string[];
-// };
-
 type contentsType = Record<StoreManualMode, contentType[]>;
 
 // TODO: 내용 확정 후 수정하기
