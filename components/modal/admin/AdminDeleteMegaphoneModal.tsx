@@ -3,7 +3,7 @@ import { modalState } from 'utils/recoil/modal';
 import { Imegaphone } from 'types/admin/adminReceiptType';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/admin/modal/AdminDeleteMegaphoneModal.module.scss';
+import styles from 'styles/admin/modal/AdminDeleteMegaphone.module.scss';
 
 export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
   const { megaphoneId, content, intraId } = props;

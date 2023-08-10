@@ -77,26 +77,32 @@ function CoinPolicyHistory() {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table aria-label='customized table'>
-          <TableHead>
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='customized table'>
+          <TableHead className={styles.tableHeader}>
             <TableRow>
               {tableColumnName.map((column, idx) => (
-                <TableCell key={idx}>
+                <TableCell className={styles.tableHeaderItem} key={idx}>
                   {coinPolicyHistoryTableTitle[column]}
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {coinPolicyHistoryData.coinPolicyList.length > 0 ? (
               coinPolicyHistoryData.coinPolicyList.map(
                 (coinPolicyHistory: IcoinPolicyHistory) => (
-                  <TableRow key={coinPolicyHistory.coinPolicyId}>
+                  <TableRow
+                    className={styles.tableRow}
+                    key={coinPolicyHistory.coinPolicyId}
+                  >
                     {tableFormat['coinPolicyHistory'].columns.map(
                       (columnName: string, index: number) => {
                         return (
-                          <TableCell key={index}>
+                          <TableCell
+                            className={styles.tableBodyItem}
+                            key={index}
+                          >
                             {coinPolicyHistory[
                               columnName as keyof IcoinPolicyHistory
                             ].toString()}
@@ -108,14 +114,16 @@ function CoinPolicyHistory() {
                 )
               )
             ) : (
-              <TableRow>
-                <TableCell>비어있습니다</TableCell>
+              <TableRow className={styles.tableRow}>
+                <TableCell className={styles.tableBodyItem}>
+                  비어있습니다
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </TableContainer>
-      <div>
+      <div className={styles.pageNationContainer}>
         <PageNation
           curPage={coinPolicyHistoryData.currentPage}
           totalPages={coinPolicyHistoryData.totalPage}
