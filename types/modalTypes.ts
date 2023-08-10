@@ -73,11 +73,6 @@ export interface Coin {
   mode?: MatchMode | null;
 }
 
-// 지워도 되는 것?
-// export interface Manual {
-//   radioMode: MatchMode;
-// }
-
 export interface manual {
   radioMode: MatchMode;
 }
