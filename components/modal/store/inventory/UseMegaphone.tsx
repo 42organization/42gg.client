@@ -6,7 +6,7 @@ import { UseItemRequest, UseMegaphoneRequest } from 'types/inventoryTypes';
 import { MegaphoneContainer } from 'components/Layout/MegaPhone';
 import { ItemCautionContainer } from './ItemCautionContainer';
 import {
-  ModalButtonConatainer,
+  ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
 import { mockInstance } from 'utils/mockAxios';
@@ -79,7 +79,7 @@ export default function UseMegaphone({ receiptId }: UseMegaphoneProps) {
           </div>
         </div>
         <ItemCautionContainer caution={caution} />
-        <ModalButtonConatainer>
+        <ModalButtonContainer>
           <ModalButton
             style='negative'
             value='취소'
@@ -90,7 +90,7 @@ export default function UseMegaphone({ receiptId }: UseMegaphoneProps) {
             value='등록'
             onClick={() => handleUseMegaphone()}
           />
-        </ModalButtonConatainer>
+        </ModalButtonContainer>
       </div>
     </div>
   );

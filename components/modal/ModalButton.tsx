@@ -6,7 +6,7 @@ type ButtonProps = {
   onClick: () => void;
 };
 
-export function ModalButtonConatainer({
+export function ModalButtonContainer({
   children,
 }: {
   children: React.ReactNode;
@@ -17,7 +17,7 @@ export function ModalButtonConatainer({
 export function ModalButton({ style, value, onClick }: ButtonProps) {
   return (
     <div className={styles[style]}>
-      <input onClick={() => onClick} type='button' value={value} />
+      <input onClick={() => onClick()} type='button' value={value} />
     </div>
   );
 }
