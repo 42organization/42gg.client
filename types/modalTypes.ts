@@ -7,6 +7,7 @@ import { CoinResult } from 'types/coinTypes';
 import { ImegaphoneInfo, IprofileInfo } from './admin/adminReceiptType';
 import { IitemInfo } from './admin/adminStoreTypes';
 import { IcoinPolicy } from './admin/adminCoinTypes';
+import { UseItemRequest } from './inventoryTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -19,6 +20,10 @@ type UserModal = 'PROFILE_EDIT' | 'KAKAO_EDIT';
 type FixedModal = 'AFTER_GAME' | 'STAT';
 
 type PurchaseModal = 'BUY' | 'GIFT' | 'NO_COIN';
+
+type UseItemModal = 'MEGAPHONE';
+
+type EditItemModal = 'MEGAPHONE';
 
 type AdminModal =
   | 'PROFILE'
@@ -43,8 +48,10 @@ type ModalName =
   | `USER-${UserModal}`
   | `FIXED-${FixedModal}`
   | `ADMIN-${AdminModal}`
-  | `COIN-ANIMATION`;
-  | `PURCHASE-${PurchaseModal}`;
+  | `COIN-ANIMATION`
+  | `PURCHASE-${PurchaseModal}`
+  | `USE-ITEM-${UseItemModal}`
+  | `EDIT-ITEM-${EditItemModal}`;
 export interface Cancel {
   startTime: string;
 }
@@ -101,4 +108,5 @@ export interface Modal {
   profileInfo?: IprofileInfo;
   itemInfo?: IitemInfo;
   coinPolicy?: IcoinPolicy;
+  useItemInfo?: UseItemRequest;
 }
