@@ -5,7 +5,7 @@ const item1: InventoryItem = {
   receiptId: 1,
   itemName: '테스트1',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
-  purchaserIntra: 'hyobicho',
+  purchaserIntra: 'kim_takgu',
   itemStatus: 'USING',
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
@@ -18,7 +18,7 @@ const item2: InventoryItem = {
   receiptId: 2,
   itemName: '테스트2',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
-  purchaserIntra: 'hyungjpa',
+  purchaserIntra: 'kim_takgu',
   itemStatus: 'BEFORE',
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
@@ -45,7 +45,7 @@ const item4: InventoryItem = {
   receiptId: 4,
   itemName: '테스트4',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
-  purchaserIntra: 'sangmipa',
+  purchaserIntra: 'kim_takgu',
   itemStatus: 'USED',
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
@@ -58,7 +58,7 @@ const item5: InventoryItem = {
   receiptId: 5,
   itemName: '테스트5',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
-  purchaserIntra: 'hyobicho',
+  purchaserIntra: 'kim_takgu',
   itemStatus: 'BEFORE',
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
@@ -72,7 +72,7 @@ const item6: InventoryItem = {
   itemName: '테스트6',
   imageUri:
     'https://dodo.ac/np/images/thumb/1/17/NH_Balloon.jpg/600px-NH_Balloon.jpg',
-  purchaserIntra: 'hyungjpa',
+  purchaserIntra: 'kim_takgu',
   itemStatus: 'BEFORE',
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
@@ -98,7 +98,7 @@ const item8: InventoryItem = {
   receiptId: 8,
   itemName: '테스트8',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
-  purchaserIntra: 'sangmipa',
+  purchaserIntra: 'kim_takgu',
   itemStatus: 'USED',
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
@@ -112,7 +112,7 @@ const item9: InventoryItem = {
   itemName: '테스트9',
   imageUri:
     'https://dodo.ac/np/images/thumb/1/17/NH_Balloon.jpg/600px-NH_Balloon.jpg',
-  purchaserIntra: 'hyobicho',
+  purchaserIntra: 'kim_takgu',
   itemStatus: 'BEFORE',
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
@@ -125,7 +125,7 @@ const item10: InventoryItem = {
   receiptId: 10,
   itemName: '테스트10',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
-  purchaserIntra: 'hyungjpa',
+  purchaserIntra: 'kim_takgu',
   itemStatus: 'BEFORE',
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
