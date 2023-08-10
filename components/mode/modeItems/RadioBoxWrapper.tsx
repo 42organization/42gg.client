@@ -14,7 +14,7 @@ export function RadioBoxWrapper({
   return (
     <div
       className={`${
-        styles[page.includes('STORE') ? 'twoButtons' : 'threeButtons']
+        styles[page.startsWith('STORE') ? 'twoButtons' : 'threeButtons']
       }
       ${styles[page.toLowerCase()]}
       ${zIndexList && styles['zIndexListButton']}`}
