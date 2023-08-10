@@ -6,27 +6,23 @@ import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminEditItem.module.scss';
 import { userState } from 'utils/recoil/layout';
-import { useRef } from 'react';
 import { Item } from 'types/itemTypes';
 
 export default function AdminEditItemModal(props: Item) {
   const { itemId, name, content, imageUri, originalPrice, discount } = props;
+  const creator = useRecoilValue(userState).intraId;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
-
-  const creator = useRecoilValue(userState).intraId;
-
   const { imgData, imgPreview, uploadImg } = useUploadImg();
 
-  const nameRef = useRef<HTMLInputElement>(null);
-  const contentRef = useRef<HTMLInputElement>(null);
-  const priceRef = useRef<HTMLInputElement>(null);
-  const discountRef = useRef<HTMLInputElement>(null);
-
   // instanceInManage로 변경
-  const editItemHandler = async () => {
-    const price = Number(priceRef.current?.value);
-    const discount = Number(discountRef.current?.value);
+  const editItemHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const name = form.get('name');
+    const content = form.get('content');
+    const price = Number(form.get('price'));
+    const discount = Number(form.get('discount'));
 
     if (price < 0 || discount < 0 || discount > 100) {
       setSnackBar({
@@ -40,8 +36,8 @@ export default function AdminEditItemModal(props: Item) {
 
     const formData = new FormData();
     const data = {
-      name: nameRef.current?.value,
-      content: contentRef.current?.value,
+      name: name,
+      content: content,
       price: price,
       discount: discount,
       creatorIntra: creator,
@@ -82,7 +78,7 @@ export default function AdminEditItemModal(props: Item) {
         <hr className={styles.hr} />
       </div>
       <div className={styles.body}>
-        <div className={styles.bodyWrap}>
+        <form className={styles.bodyWrap} onSubmit={editItemHandler}>
           <label className={styles.imageWrap}>
             <Image
               src={imgPreview ? imgPreview : imageUri}
@@ -106,7 +102,7 @@ export default function AdminEditItemModal(props: Item) {
               <input
                 className={styles.nameBlank}
                 type='text'
-                ref={nameRef}
+                name='name'
                 defaultValue={name}
                 required
               />
@@ -117,7 +113,7 @@ export default function AdminEditItemModal(props: Item) {
             <input
               className={styles.contentBlank}
               type='text'
-              ref={contentRef}
+              name='content'
               defaultValue={content}
               required
             />
@@ -128,7 +124,7 @@ export default function AdminEditItemModal(props: Item) {
               <input
                 className={styles.priceBlank}
                 type='number'
-                ref={priceRef}
+                name='price'
                 defaultValue={originalPrice}
                 required
               />
@@ -138,24 +134,22 @@ export default function AdminEditItemModal(props: Item) {
               <input
                 className={styles.discountBlank}
                 type='number'
-                ref={discountRef}
+                name='discount'
                 defaultValue={discount}
                 required
               />
             </div>
           </div>
-        </div>
-        <div className={styles.buttonWrap}>
-          <button className={styles.editBtn} onClick={() => editItemHandler()}>
-            수정
-          </button>
-          <button
-            className={styles.cancelBtn}
-            onClick={() => setModal({ modalName: null })}
-          >
-            취소
-          </button>
-        </div>
+          <div className={styles.buttonWrap}>
+            <input className={styles.editBtn} type='submit' value='수정' />
+            <input
+              className={styles.cancelBtn}
+              type='button'
+              value='취소'
+              onClick={() => setModal({ modalName: null })}
+            />
+          </div>
+        </form>
       </div>
     </div>
   );
