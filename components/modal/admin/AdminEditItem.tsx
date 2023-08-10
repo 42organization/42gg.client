@@ -25,12 +25,25 @@ export default function AdminEditItemModal(props: Item) {
 
   // instanceInManage로 변경
   const editItemHandler = async () => {
+    const price = Number(priceRef.current?.value);
+    const discount = Number(discountRef.current?.value);
+
+    if (price < 0 || discount < 0) {
+      setSnackBar({
+        toastName: 'invalid value',
+        severity: 'error',
+        message: '가격 또는 할인율이 유효하지 않습니다.',
+        clicked: true,
+      });
+      return;
+    }
+
     const formData = new FormData();
     const data = {
       name: nameRef.current?.value,
       content: contentRef.current?.value,
-      price: priceRef.current?.value,
-      discount: discountRef.current?.value,
+      price: price,
+      discount: discount,
       creatorIntra: creator,
     };
     formData.append(

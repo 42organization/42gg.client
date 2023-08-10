@@ -1,23 +1,28 @@
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
 import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminDeleteItem.module.scss';
+import { userState } from 'utils/recoil/layout';
 
 export default function AdminDeleteItemModal(props: Item) {
-  const { itemId, itemName, content } = props;
+  const { itemId, name, content } = props;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
+  const user = useRecoilValue(userState).intraId;
 
   // instanceInManage로 변경
+  // delete에 body 담기
   const deleteItemHandler = async (itemId: number) => {
     try {
-      await mockInstance.delete(`/admin/items/${itemId}`);
+      await mockInstance.delete(`/admin/items/${itemId}`, {
+        data: { deleterIntraId: user },
+      });
       setSnackBar({
         toastName: 'delete item',
         severity: 'success',
-        message: `${itemId}번 ${itemName}이 삭제되었습니다!`,
+        message: `${itemId}번 ${name}이 삭제되었습니다!`,
         clicked: true,
       });
     } catch (e: unknown) {
@@ -41,7 +46,7 @@ export default function AdminDeleteItemModal(props: Item) {
         <div className={styles.bodyWrap}>
           <div className={styles.intraWrap}>
             <div className={styles.bodyText}>아이템명 :</div>
-            <input className={styles.intraBlank} value={itemName} readOnly />
+            <input className={styles.intraBlank} value={name} readOnly />
           </div>
           <div className={styles.contentWrap}>
             <div className={styles.bodyText}>설명 :</div>

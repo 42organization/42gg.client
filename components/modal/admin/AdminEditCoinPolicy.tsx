@@ -66,7 +66,7 @@ export default function AdminEditCoinPolicyModal(props: IcoinPolicy) {
         <div className={styles.buttonWrap}>
           <button
             className={styles.editBtn}
-            onClick={() => editCoinPolicyHandler}
+            onClick={() => editCoinPolicyHandler()}
           >
             등록
           </button>

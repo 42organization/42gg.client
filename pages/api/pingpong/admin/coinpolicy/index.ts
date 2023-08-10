@@ -79,8 +79,14 @@ const resTwo: IcoinPolicyHistoryRes = {
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { method, query } = req;
+  const { method, query, body } = req;
   const { page } = query as { page: string };
+  const { attendance, normal, rankWin, rankLose } = body as {
+    attendance: string;
+    normal: string;
+    rankWin: string;
+    rankLose: string;
+  };
 
   // const temp: IcoinPolicyHistoryRes = resEmpty;
   // const temp: IcoinPolicyHistoryRes = resOne;
@@ -100,5 +106,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       }
     }
     res.status(200).json(resData);
+  }
+  if (method === 'POST') {
+    console.log(attendance);
+    if (
+      parseInt(attendance) > 50 ||
+      parseInt(normal) > 50 ||
+      parseInt(rankWin) > 50 ||
+      parseInt(rankLose) > 50
+    )
+      res.status(400).end();
+    else res.status(201).end();
   }
 }
