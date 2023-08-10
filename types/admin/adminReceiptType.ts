@@ -32,7 +32,7 @@ export interface Iprofile {
   profileId: number;
   date: Date;
   intraId: string;
-  imageUrl: string;
+  imageUri: string;
 }
 
 export interface IprofileTable {

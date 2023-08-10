@@ -7,7 +7,7 @@ import styles from 'styles/admin/modal/AdminDeleteProfile.module.scss';
 import PlayerImage from 'components/PlayerImage';
 
 export default function AdminDeleteProfileModal(props: Iprofile) {
-  const { profileId, intraId, imageUrl } = props;
+  const { profileId, intraId, imageUri } = props;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
@@ -49,7 +49,7 @@ export default function AdminDeleteProfileModal(props: Iprofile) {
             <div className={styles.bodyText}>현재 프로필 :</div>
             <div className={styles.profileImage}>
               <PlayerImage
-                src={imageUrl}
+                src={imageUri}
                 size={18}
                 styleName={'mainPageProfile'}
               />

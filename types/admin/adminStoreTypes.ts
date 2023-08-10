@@ -1,13 +1,14 @@
 export interface IitemHistory {
   itemId: number;
   createdAt: Date;
-  intraId: string;
-  itemName: string;
+  name: string;
   content: string;
-  imageUrl: string;
+  imageUri: string;
   price: number;
   discount: number;
-  salePrice: number;
+  creatorIntraId: string;
+  deleterIntraId: string;
+  visible: boolean;
 }
 
 export interface IitemHistoryList {

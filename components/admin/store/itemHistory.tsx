@@ -17,30 +17,35 @@ import styles from 'styles/admin/store/ItemHistory.module.scss';
 import { mockInstance } from 'utils/mockAxios';
 import { useSetRecoilState } from 'recoil';
 import { toastState } from 'utils/recoil/toast';
+import { modalState } from 'utils/recoil/modal';
 
 const itemHistoryTableTitle: { [key: string]: string } = {
   itemId: 'ID',
   createdAt: '변경일',
-  intraId: '변경한 사람',
-  itemName: '이름',
+  name: '이름',
   content: '설명',
-  imageUrl: '이미지',
+  imageUri: '이미지',
   price: '원가',
   discount: '할인율',
-  salePrice: '판매가격',
+  creatorIntraId: '변경한 사람',
+  deleterIntraId: '삭제한 사람',
+  visible: '상점 노출',
 };
 
 const tableColumnName = [
   'itemId',
   'createdAt',
-  'intraId',
-  'itemName',
+  'name',
   'content',
-  'imageUrl',
+  'imageUri',
   'price',
   'discount',
-  'salePrice',
+  'creatorIntraId',
+  'deleterIntraId',
+  'visible',
 ];
+
+const MAX_CONTENT_LENGTH = 16;
 
 function ItemHistory() {
   const [itemHistoryData, setItemHistoryData] = useState<IitemHistoryList>({
@@ -49,6 +54,7 @@ function ItemHistory() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
   // instanceInManage로 변경
@@ -82,6 +88,14 @@ function ItemHistory() {
     }
   }, [currentPage]);
 
+  const openDetailModal = (itemHistory: IitemHistory) => {
+    setModal({
+      modalName: 'ADMIN-DETAIL_CONTENT',
+      intraId: itemHistory.name,
+      detailContent: itemHistory.content,
+    });
+  };
+
   useEffect(() => {
     getItemHistoryListHandler();
   }, [currentPage]);
@@ -114,13 +128,27 @@ function ItemHistory() {
                             className={styles.tableBodyItem}
                             key={index}
                           >
-                            {columnName === 'imageUrl' ? (
+                            {columnName === 'imageUri' ? (
                               <Image
                                 src={itemHistory[columnName]}
                                 width={30}
                                 height={30}
                                 alt='no'
                               />
+                            ) : itemHistory[
+                                columnName as keyof IitemHistory
+                              ].toString().length > MAX_CONTENT_LENGTH ? (
+                              <div>
+                                {itemHistory[columnName as keyof IitemHistory]
+                                  ?.toString()
+                                  .slice(0, MAX_CONTENT_LENGTH)}
+                                <span
+                                  style={{ cursor: 'pointer', color: 'grey' }}
+                                  onClick={() => openDetailModal(itemHistory)}
+                                >
+                                  ...더보기
+                                </span>
+                              </div>
                             ) : (
                               itemHistory[
                                 columnName as keyof IitemHistory

@@ -23,11 +23,11 @@ const profileTableTitle: { [key: string]: string } = {
   profileId: 'ID',
   date: '사용일자',
   intraId: '사용자',
-  imageUrl: '현재 이미지',
+  imageUri: '현재 이미지',
   delete: '삭제',
 };
 
-const tableColumnName = ['profileId', 'date', 'intraId', 'imageUrl', 'delete'];
+const tableColumnName = ['profileId', 'date', 'intraId', 'imageUri', 'delete'];
 
 function ProfileList() {
   const [profileData, setProfileData] = useState<IprofileTable>({
@@ -102,7 +102,7 @@ function ProfileList() {
                     (columnName: string, index: number) => {
                       return (
                         <TableCell className={styles.tableBodyItem} key={index}>
-                          {columnName === 'imageUrl' ? (
+                          {columnName === 'imageUri' ? (
                             <Image
                               src={profile[columnName]}
                               width={30}
