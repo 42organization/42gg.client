@@ -22,8 +22,6 @@ export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
           message: `${megaphoneId}번 확성기는 삭제할 수 없는 확성기입니다.`,
           clicked: true,
         });
-        setModal({ modalName: null });
-        return;
       } else {
         setSnackBar({
           toastName: 'delete megaphone',
@@ -31,8 +29,9 @@ export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
           message: `API 요청에 문제가 발생했습니다.`,
           clicked: true,
         });
-        setModal({ modalName: null });
       }
+      setModal({ modalName: null });
+      return;
     }
     setSnackBar({
       toastName: 'delete megaphone',
@@ -40,7 +39,11 @@ export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
       message: `${megaphoneId}번 확성기가 삭제되었습니다!`,
       clicked: true,
     });
-    setModal({ modalName: 'ADMIN-CHECK_SEND_NOTI', intraId: intraId });
+    setModal({
+      modalName: 'ADMIN-CHECK_SEND_NOTI',
+      intraId: intraId,
+      detailContent: 'megaphone',
+    });
   };
 
   return (

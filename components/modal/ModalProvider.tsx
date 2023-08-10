@@ -26,7 +26,7 @@ import WelcomeModal from './event/WelcomeModal';
 
 import styles from 'styles/modal/Modal.module.scss';
 import AdminDeleteMegaphoneModal from './admin/AdminDeleteMegaphoneModal';
-import AdminDeleteProfileModal from './admin/AdminDeleteProfile';
+import AdminDeleteProfileModal from './admin/AdminDeleteProfileModal';
 import AdminDeleteItemModal from './admin/AdminDeleteItem';
 import AdminEditItemModal from './admin/AdminEditItem';
 import AdminEditCoinPolicyModal from './admin/AdminEditCoinPolicy';
@@ -110,9 +110,13 @@ export default function ModalProvider() {
     'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
       <AdminEditCoinPolicyModal {...coinPolicy} />
     ) : null,
-    'ADMIN-CHECK_SEND_NOTI': intraId ? (
-      <AdminCheckSendNotiModal intraId={intraId} />
-    ) : null,
+    'ADMIN-CHECK_SEND_NOTI':
+      intraId && detailContent ? (
+        <AdminCheckSendNotiModal
+          intraId={intraId}
+          detailContent={detailContent}
+        />
+      ) : null,
   };
 
   useEffect(() => {
