@@ -2,8 +2,9 @@ export interface Item {
   itemId: number;
   itemName: string;
   content: string;
-  imageUrl: string;
-  price: number;
+  itemType: string;
+  imageUri: string;
+  originalPrice: number;
   discount: number;
   salePrice: number;
 }

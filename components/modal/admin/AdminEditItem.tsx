@@ -19,19 +19,19 @@ export default function AdminEditItemModal(props: IitemInfo) {
 
   const { imgData, imgPreview, uploadImg } = useUploadImg();
 
-  const nameRef = useRef();
-  const contentRef = useRef();
-  const priceRef = useRef();
-  const discountRef = useRef();
+  const nameRef = useRef<HTMLInputElement>(null);
+  const contentRef = useRef<HTMLInputElement>(null);
+  const priceRef = useRef<HTMLInputElement>(null);
+  const discountRef = useRef<HTMLInputElement>(null);
 
   // api 연결 시 instanceInManage로 변경 필요
   const editItemHandler = async () => {
     const formData = new FormData();
     const data = {
-      // name: ,
-      // content: ,
-      // price: ,
-      // discount: ,
+      name: nameRef.current?.value,
+      content: contentRef.current?.value,
+      price: priceRef.current?.value,
+      discount: discountRef.current?.value,
       creatorIntra: creator,
     };
     formData.append(
@@ -45,7 +45,7 @@ export default function AdminEditItemModal(props: IitemInfo) {
     }
 
     try {
-      const res = await mockInstance.put(`/admin/items/${itemId}`, formData);
+      await mockInstance.put(`/admin/items/${itemId}`, formData);
       setSnackBar({
         toastName: 'edit item',
         severity: 'success',
@@ -96,6 +96,7 @@ export default function AdminEditItemModal(props: IitemInfo) {
                 type='text'
                 ref={nameRef}
                 defaultValue={itemName}
+                required
               />
             </div>
           </div>
@@ -104,8 +105,9 @@ export default function AdminEditItemModal(props: IitemInfo) {
             <input
               className={styles.contentBlank}
               type='text'
-              name='content'
+              ref={contentRef}
               defaultValue={content}
+              required
             />
           </div>
           <div className={styles.priceDiscountWrap}>
@@ -114,8 +116,9 @@ export default function AdminEditItemModal(props: IitemInfo) {
               <input
                 className={styles.priceBlank}
                 type='number'
-                name='price'
+                ref={priceRef}
                 defaultValue={originalPrice}
+                required
               />
             </div>
             <div className={styles.discountWrap}>
@@ -123,14 +126,17 @@ export default function AdminEditItemModal(props: IitemInfo) {
               <input
                 className={styles.discountBlank}
                 type='number'
-                name='discount'
+                ref={discountRef}
                 defaultValue={discount}
+                required
               />
             </div>
           </div>
         </div>
         <div className={styles.buttonWrap}>
-          <button className={styles.editBtn}>수정</button>
+          <button className={styles.editBtn} onClick={() => editItemHandler()}>
+            수정
+          </button>
           <button
             className={styles.cancelBtn}
             onClick={() => setModal({ modalName: null })}

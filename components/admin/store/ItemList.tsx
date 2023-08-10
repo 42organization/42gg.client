@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { Iitem, IitemInfo, IitemList } from 'types/admin/adminStoreTypes';
+import { IitemInfo } from 'types/admin/adminStoreTypes';
+import { Item, ItemList } from 'types/itemTypes';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
@@ -17,13 +18,13 @@ import {
 import styles from 'styles/admin/store/ItemList.module.scss';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
-import useUploadImg from 'hooks/useUploadImg';
 
 const itemListTableTitle: { [key: string]: string } = {
   itemId: 'ID',
   itemName: '아이템명',
-  imageUrl: '이미지',
   content: '설명',
+  itemType: '타입',
+  imageUri: '이미지',
   originalPrice: '원가',
   discount: '할인율',
   salePrice: '판매가격',
@@ -34,8 +35,9 @@ const itemListTableTitle: { [key: string]: string } = {
 const tableColumnName = [
   'itemId',
   'itemName',
-  'imageUrl',
   'content',
+  'itemType',
+  'imageUri',
   'originalPrice',
   'discount',
   'salePrice',
@@ -44,7 +46,7 @@ const tableColumnName = [
 ];
 
 function ItemList() {
-  const [itemListData, setItemListData] = useState<IitemList>({
+  const [itemListData, setItemListData] = useState<ItemList>({
     itemList: [],
   });
   const setModal = useSetRecoilState(modalState);
@@ -99,13 +101,13 @@ function ItemList() {
           </TableHead>
           <TableBody>
             {itemListData.itemList.length > 0 ? (
-              itemListData.itemList.map((item: Iitem) => (
+              itemListData.itemList.map((item: Item) => (
                 <TableRow key={item.itemId}>
                   {tableFormat['itemList'].columns.map(
                     (columnName: string, index: number) => {
                       return (
                         <TableCell key={index}>
-                          {columnName === 'imageUrl' ? (
+                          {columnName === 'imageUri' ? (
                             <Image
                               src={item[columnName]}
                               alt='Item Iamge'
@@ -113,7 +115,7 @@ function ItemList() {
                               height={30}
                             />
                           ) : (
-                            item[columnName as keyof Iitem].toString()
+                            item[columnName as keyof Item]
                           )}
                         </TableCell>
                       );
