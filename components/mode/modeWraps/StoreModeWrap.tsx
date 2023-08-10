@@ -33,7 +33,9 @@ export function StoreModeWrap({
   return (
     <div>
       <div className={styles.topMenu}>
-        <button onClick={handleManual}>매뉴얼</button>
+        <button className={styles.manual} onClick={handleManual}>
+          매뉴얼
+        </button>
         <div className={styles.coins}>
           {coin.coin}
           <FaCoins />
