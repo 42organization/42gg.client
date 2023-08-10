@@ -8,7 +8,8 @@ interface ImegaphoneRes {
 
 const megaphone1: Imegaphone = {
   megaphoneId: 1,
-  content: '확성기입니다',
+  content:
+    '확성기입니다확성기입니다확성기입니다확성기입니다확성기입니다확성기입니다',
   usedAt: new Date('2023-08-05 10:10:10'),
   status: '사용 중',
   intraId: 'hyungjpa',
@@ -16,7 +17,8 @@ const megaphone1: Imegaphone = {
 
 const megaphone2: Imegaphone = {
   megaphoneId: 2,
-  content: '확성기입니다',
+  content:
+    '확성기입니다확성기입니다확성기입니다확성기입니다확성기입니다확성기입니다',
   usedAt: new Date('2023-07-05 10:10:10'),
   status: '사용 중',
   intraId: 'hyobicho',

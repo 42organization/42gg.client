@@ -78,24 +78,32 @@ function ItemHistory() {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table aria-label='customized table'>
-          <TableHead>
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='customized table'>
+          <TableHead className={styles.tableHeader}>
             <TableRow>
               {tableColumnName.map((column, idx) => (
-                <TableCell key={idx}>{itemHistoryTableTitle[column]}</TableCell>
+                <TableCell className={styles.tableHeaderItem} key={idx}>
+                  {itemHistoryTableTitle[column]}
+                </TableCell>
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {itemHistoryData.itemHistoryList.length > 0 ? (
               itemHistoryData.itemHistoryList.map(
                 (itemHistory: IitemHistory) => (
-                  <TableRow key={itemHistory.itemId}>
+                  <TableRow
+                    className={styles.tableRow}
+                    key={itemHistory.itemId}
+                  >
                     {tableFormat['itemHistory'].columns.map(
                       (columnName: string, index: number) => {
                         return (
-                          <TableCell key={index}>
+                          <TableCell
+                            className={styles.tableBodyItem}
+                            key={index}
+                          >
                             {columnName === 'imageUrl' ? (
                               <Image
                                 src={itemHistory[columnName]}
@@ -116,14 +124,16 @@ function ItemHistory() {
                 )
               )
             ) : (
-              <TableRow>
-                <TableCell>비어있습니다</TableCell>
+              <TableRow className={styles.tableRow}>
+                <TableCell className={styles.tableBodyItem}>
+                  비어있습니다
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </TableContainer>
-      <div>
+      <div className={styles.pageNationContainer}>
         <PageNation
           curPage={itemHistoryData.currentPage}
           totalPages={itemHistoryData.totalPage}

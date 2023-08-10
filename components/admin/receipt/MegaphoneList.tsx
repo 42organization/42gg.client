@@ -36,7 +36,7 @@ const tableColumnName = [
   'delete',
 ];
 
-const MAX_CONTENT_LENGTH = 15;
+const MAX_CONTENT_LENGTH = 20;
 
 function MegaphoneList() {
   const [megaphoneData, setMegaphoneData] = useState<ImegaphoneTable>({

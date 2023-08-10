@@ -73,7 +73,7 @@ export default function AdminDeleteProfileModal(props: Iprofile) {
               {profileId}번 {intraId}님의 프로필을 삭제하시겠습니까?
             </div>
             <div className={styles.checkTextSub}>
-              해당 유저의 이전 이미지로 설정됩니다.
+              해당 유저의 이전 이미지로 수정됩니다.
             </div>
           </div>
         </div>
