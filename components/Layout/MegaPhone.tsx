@@ -31,15 +31,11 @@ export const MegaphoneContainer = ({
   children,
 }: MegaphoneContainerProps) => {
   // 문구 수, 문구 길이에 따라 애니메이션 속도 조절하는 style 추가 필요
-  const pauseStyle: { [key: string]: string } = {
-    pause: styles.pause,
-    running: styles.running,
-  };
 
   return (
     <div className={styles.rollingBanner} onClick={() => clickPause()}>
       <div className={styles.wrapper}>
-        <ul className={`${styles.megaphoneContents} ${pauseStyle[play]}`}>
+        <ul className={`${styles.megaphoneContents} ${styles[play]}`}>
           {children}
         </ul>
       </div>
