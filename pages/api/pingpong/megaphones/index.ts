@@ -73,6 +73,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       intraId,
     };
     test.push(newMegaphone);
-    res.status(200);
+    return res.status(200).end();
   }
 }
