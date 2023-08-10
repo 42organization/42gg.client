@@ -2,9 +2,9 @@
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { Gift } from 'types/itemTypes';
-// import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { mockInstance } from 'utils/mockAxios';
+import { instanceInManage } from 'utils/axios';
 
 const useGiftModal = (gift: Gift) => {
   const setModal = useSetRecoilState(modalState);
@@ -21,8 +21,14 @@ const useGiftModal = (gift: Gift) => {
       const res = await mockInstance.post(`/items/gift/${gift.itemId}`, gift);
       // 테스트용 -> 지우기
       console.log(`message: ${res?.data?.message}`);
-      // TODO: alert 대신 toast 띄우거나 아무것도 안하기
-      alert(`${gift.ownerId}님께 선물이 전달되었습니다`);
+      if (res.status === 201) {
+        // TODO: alert 대신 toast 띄우거나 아무것도 안하기
+        alert(`${gift.ownerId}님께 선물이 전달되었습니다`);
+        await instanceInManage.post(`/notifications`, {
+          intraId: gift.ownerId,
+          message: `선물이 도착했어요🎁 상점 보관함에서 선물과 발송인을 확인하세요!`,
+        });
+      }
     } catch (error) {
       setError('HB02');
     }
