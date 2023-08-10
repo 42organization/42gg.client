@@ -18,7 +18,7 @@ import AdminPenaltyModal from './admin/AdminPenaltyModal';
 import AdminNotiUserModal from './admin/AdminNotiUserModal';
 import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
 import AdminSeasonEdit from './admin/SeasonEdit';
-import FeedbackDetailModal from './admin/FeedbackDetailModal';
+import DetailModal from './admin/DetailModal';
 import DeletePenaltyModal from './admin/DeletePenaltyModal';
 import AdminModifyScoreModal from './admin/AdminModifyScoreModal';
 import CoinChangeModal from './statChange/CoinChangeModal';
@@ -45,6 +45,7 @@ export default function ModalProvider() {
       announcement,
       exp,
       intraId,
+      detailTitle,
       detailContent,
       feedback,
       penaltyId,
@@ -85,8 +86,8 @@ export default function ModalProvider() {
       <AdminCheckFeedback {...feedback} />
     ) : null,
     'ADMIN-DETAIL_CONTENT':
-      intraId && detailContent ? (
-        <FeedbackDetailModal intraId={intraId} detailContent={detailContent} />
+      detailTitle && detailContent ? (
+        <DetailModal detailTitle={detailTitle} detailContent={detailContent} />
       ) : null,
     'ADMIN-MODIFY_SCORE': ModifyScore ? (
       <AdminModifyScoreModal {...ModifyScore} />

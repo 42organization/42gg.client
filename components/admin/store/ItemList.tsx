@@ -84,7 +84,7 @@ function ItemList() {
   const openDetailModal = (item: Item) => {
     setModal({
       modalName: 'ADMIN-DETAIL_CONTENT',
-      intraId: item.name,
+      detailTitle: item.name,
       detailContent: item.content,
     });
   };

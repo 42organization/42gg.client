@@ -37,7 +37,7 @@ function CoinPolicy() {
     const rankWin = Number(rankWinRef.current?.value);
     const rankLose = Number(rankLoseRef.current?.value);
 
-    if (attendance <= 0 || normal <= 0 || rankWin <= 0 || rankLose <= 0) {
+    if (attendance <= 0 || normal <= 0 || rankWin <= 0 || rankLose < 0) {
       setSnackBar({
         toastName: 'edit coinpolicy',
         severity: 'error',

@@ -91,6 +91,7 @@ export interface Modal {
   exp?: Exp;
   gameId?: number;
   intraId?: string;
+  detailTitle?: string;
   detailContent?: string;
   feedback?: IFeedback;
   penaltyId?: number;

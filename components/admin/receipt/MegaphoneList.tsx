@@ -89,7 +89,7 @@ function MegaphoneList() {
   const openDetailModal = (megaphone: Imegaphone) => {
     setModal({
       modalName: 'ADMIN-DETAIL_CONTENT',
-      intraId: megaphone.megaphoneId.toString(),
+      detailTitle: megaphone.megaphoneId.toString(),
       detailContent: megaphone.content,
     });
   };

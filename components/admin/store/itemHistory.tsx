@@ -91,7 +91,7 @@ function ItemHistory() {
   const openDetailModal = (itemHistory: IitemHistory) => {
     setModal({
       modalName: 'ADMIN-DETAIL_CONTENT',
-      intraId: itemHistory.name,
+      detailTitle: itemHistory.name,
       detailContent: itemHistory.content,
     });
   };

@@ -28,7 +28,7 @@ export default function AdminEditItemModal(props: Item) {
     const price = Number(priceRef.current?.value);
     const discount = Number(discountRef.current?.value);
 
-    if (price < 0 || discount < 0) {
+    if (price < 0 || discount < 0 || discount > 100) {
       setSnackBar({
         toastName: 'invalid value',
         severity: 'error',
