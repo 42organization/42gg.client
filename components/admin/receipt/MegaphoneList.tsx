@@ -1,14 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import {
-  Imegaphone,
-  ImegaphoneInfo,
-  ImegaphoneTable,
-} from 'types/admin/adminReceiptType';
+import { Imegaphone, ImegaphoneTable } from 'types/admin/adminReceiptType';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import PageNation from 'components/Pagination';
 import {
   Paper,
@@ -40,6 +35,8 @@ const tableColumnName = [
   'status',
   'delete',
 ];
+
+const MAX_CONTENT_LENGTH = 15;
 
 function MegaphoneList() {
   const [megaphoneData, setMegaphoneData] = useState<ImegaphoneTable>({
@@ -82,18 +79,18 @@ function MegaphoneList() {
     }
   }, [currentPage]);
 
-  const deleteMegaphone = (megaphoneInfo: ImegaphoneInfo) => {
+  const deleteMegaphone = (megaphone: Imegaphone) => {
     setModal({
       modalName: 'ADMIN-MEGAPHONE_DELETE',
-      megaphoneInfo: megaphoneInfo,
+      megaphone: megaphone,
     });
   };
 
-  const openDetailModal = (item: Item) => {
+  const openDetailModal = (megaphone: Imegaphone) => {
     setModal({
       modalName: 'ADMIN-DETAIL_CONTENT',
-      intraId: item.itemName,
-      detailContent: item.content,
+      intraId: megaphone.megaphoneId.toString(),
+      detailContent: megaphone.content,
     });
   };
 
@@ -125,7 +122,22 @@ function MegaphoneList() {
                     (columnName: string, index: number) => {
                       return (
                         <TableCell className={styles.tableBodyItem} key={index}>
-                          {megaphone[columnName as keyof Imegaphone].toString()}
+                          {megaphone[columnName as keyof Imegaphone].toString()
+                            .length > MAX_CONTENT_LENGTH ? (
+                            <div>
+                              {megaphone[columnName as keyof Imegaphone]
+                                .toString()
+                                .slice(0, MAX_CONTENT_LENGTH)}
+                              <span
+                                style={{ cursor: 'pointer', color: 'grey' }}
+                                onClick={() => openDetailModal(megaphone)}
+                              >
+                                ...더보기
+                              </span>
+                            </div>
+                          ) : (
+                            megaphone[columnName as keyof Imegaphone].toString()
+                          )}
                         </TableCell>
                       );
                     }
@@ -133,13 +145,7 @@ function MegaphoneList() {
                   <TableCell className={styles.tableBodyItem}>
                     <button
                       className={styles.deleteBtn}
-                      onClick={() =>
-                        deleteMegaphone({
-                          megaphoneId: megaphone.megaphoneId,
-                          content: megaphone.content,
-                          intraId: megaphone.intraId,
-                        })
-                      }
+                      onClick={() => deleteMegaphone(megaphone)}
                     >
                       삭제
                     </button>

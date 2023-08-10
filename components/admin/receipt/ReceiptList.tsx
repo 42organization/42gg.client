@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { Ireceipt, IreceiptTable } from 'types/admin/adminReceiptType';
 import { tableFormat } from 'constants/admin/table';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import PageNation from 'components/Pagination';
 import {
   Paper,

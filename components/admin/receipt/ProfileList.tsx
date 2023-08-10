@@ -1,15 +1,10 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import {
-  Iprofile,
-  IprofileInfo,
-  IprofileTable,
-} from 'types/admin/adminReceiptType';
+import { Iprofile, IprofileTable } from 'types/admin/adminReceiptType';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import PageNation from 'components/Pagination';
 import {
   Paper,
@@ -75,10 +70,10 @@ function ProfileList() {
     }
   }, [currentPage]);
 
-  const deleteProfile = (profileInfo: IprofileInfo) => {
+  const deleteProfile = (profile: Iprofile) => {
     setModal({
       modalName: 'ADMIN-PROFILE_DELETE',
-      profileInfo: profileInfo,
+      profile: profile,
     });
   };
 
@@ -124,13 +119,7 @@ function ProfileList() {
                   <TableCell className={styles.tableBodyItem}>
                     <button
                       className={styles.deleteBtn}
-                      onClick={() => {
-                        deleteProfile({
-                          profileId: profile.profileId,
-                          intraId: profile.intraId,
-                          imageUrl: profile.imageUrl,
-                        });
-                      }}
+                      onClick={() => deleteProfile(profile)}
                     >
                       삭제
                     </button>
