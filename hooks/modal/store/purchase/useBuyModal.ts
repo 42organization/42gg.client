@@ -22,7 +22,6 @@ const useBuyModal = (purchasedItem: Purchase) => {
     } catch (error) {
       setError('HB01');
     }
-    // console.log(`**itemId: ${purchasedItem.itemId}`);
     setModal({ modalName: null });
   };
 

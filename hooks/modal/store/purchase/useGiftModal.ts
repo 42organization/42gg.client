@@ -22,7 +22,7 @@ const useGiftModal = (gift: Gift) => {
       // 테스트용 -> 지우기
       console.log(`message: ${res?.data?.message}`);
       // TODO: alert 대신 toast 띄우거나 아무것도 안하기
-      alert(`${gift.ownerId}님께 선물이 전달되었습니다}`);
+      alert(`${gift.ownerId}님께 선물이 전달되었습니다`);
     } catch (error) {
       setError('HB02');
     }

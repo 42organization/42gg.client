@@ -19,7 +19,6 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
       itemId: itemId,
       ownerId: recipient,
     });
-    // console.log(`itemId: ${gift.itemId}, ownerId: ${gift.ownerId}`);
   }, [itemId, recipient]);
 
   return (
