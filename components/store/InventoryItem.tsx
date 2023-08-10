@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import { Tooltip } from '@mui/material';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { BsGiftFill, BsCircleFill } from 'react-icons/bs';
 import { InventoryItem } from 'types/inventoryTypes';
 import { userState } from 'utils/recoil/layout';
+import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/store/Inventory.module.scss';
 
 type inventoryItemProps = {
@@ -12,6 +13,7 @@ type inventoryItemProps = {
 
 export function InvetoryItem({ item }: inventoryItemProps) {
   const user = useRecoilValue(userState);
+  const setModal = useSetRecoilState(modalState);
 
   const {
     receiptId,
@@ -24,7 +26,12 @@ export function InvetoryItem({ item }: inventoryItemProps) {
 
   function handleUseItem(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
-    // TODO : 해당하는 아이템에 맞는 사용 모달 띄우기
+    setModal({
+      modalName: `USE-ITEM-${item.itemCode}`,
+      useItemInfo: {
+        receiptId: item.receiptId,
+      },
+    });
   }
 
   function handleEditItem(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
