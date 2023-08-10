@@ -26,13 +26,13 @@ const modalContents: contentsType = {
       description: [
         {
           tag: '출석하기',
-          content: ['- 하루 한 번 로그인 시 출석하기 버튼만 눌러도 1코인 획득'],
+          content: ['하루 한 번 로그인 시 출석하기 버튼만 눌러도 1코인 획득'],
         },
         {
           tag: '게임에 참가하기',
           content: [
-            '- 일반 게임: 승패 관계 없이 참가자 모두 2코인씩 획득',
-            '- 랭크 게임: 오직 승자만 5코인 획득',
+            '일반 게임: 승패 관계 없이 참가자 모두 2코인씩 획득',
+            '랭크 게임: 오직 승자만 5코인 획득',
           ],
         },
       ],
@@ -157,18 +157,18 @@ export default function MatchManualModal({ radioMode }: StoreManual) {
             <li key={index}>
               {item.title}
               <ul className={styles.ruleDetail}>
-                {item.description.map((e, idx) =>
-                  e.tag !== '' ? (
+                {item.description.map((rule, idx) =>
+                  rule.tag !== '' ? (
                     <li key={idx}>
-                      {e.tag}
+                      {rule.tag}
                       <ul className={styles.ruleContent}>
-                        {e.content.map((e, idx) => (
-                          <li key={idx}>{e}</li>
+                        {rule.content.map((rule, idx) => (
+                          <li key={idx}>{rule}</li>
                         ))}
                       </ul>
                     </li>
                   ) : (
-                    e.content.map((e, idx) => <li key={idx}>{e}</li>)
+                    rule.content.map((e, idx) => <li key={idx}>{e}</li>)
                   )
                 )}
               </ul>
