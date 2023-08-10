@@ -44,16 +44,15 @@
 .bodyWrap {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  height: 60%;
+  height: 70%;
   width: 80%;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .bodyText {
-  width: 5rem;
-  height: 3rem;
+  width: 200px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
@@ -75,8 +74,8 @@
 .contentBlank {
   display: flex;
   margin-left: 1rem;
-  width: 275px;
-  height: 60px;
+  width: 100px;
+  height: 30px;
   resize: none;
   box-sizing: border-box;
   background: #f9fafb;
