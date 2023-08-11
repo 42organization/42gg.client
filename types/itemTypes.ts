@@ -12,3 +12,12 @@ export interface Item {
 export interface ItemList {
   itemList: Item[];
 }
+
+export interface Gift {
+  itemId: number;
+  ownerId: string;
+}
+
+export interface Purchase {
+  itemId: number;
+}
