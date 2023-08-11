@@ -74,7 +74,12 @@ export default function UseMegaphone({ receiptId }: UseMegaphoneProps) {
               value={content}
               rows={1}
               name='newMegaphoneContent'
-              onChange={(e) => setContent(e.target.value)}
+              onChange={(e) => {
+                let input = e.target.value;
+                if (e.target.value.length > MAX_LENGTH)
+                  input = e.target.value.slice(0, MAX_LENGTH);
+                setContent(input);
+              }}
               maxLength={MAX_LENGTH}
               placeholder='확성기 내용을 입력해주세요.'
             ></textarea>
