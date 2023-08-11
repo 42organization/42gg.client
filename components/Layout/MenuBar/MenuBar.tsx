@@ -13,7 +13,6 @@ import styles from 'styles/Layout/MenuBar.module.scss';
 
 const MenuTop = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
-
   return (
     <div className={styles.menuTopWrapper}>
       <div className={styles.menuLogo}>42GG</div>
@@ -56,6 +55,11 @@ const MenuProfile = () => {
   useEffect(() => {
     getProfile();
   }, []);
+  const findTierIndex = (tierName: string): string => {
+    const tier = ['손', '빨', '노', '초', '파', '검', '무'];
+    const index = tier.findIndex((t) => t[0] === tierName[0]);
+    return index === -1 ? styles.tierId : styles['tierId' + index.toString()];
+  };
 
   return (
     <div className={styles.menuProfileWrapper}>
@@ -72,7 +76,9 @@ const MenuProfile = () => {
       </Link>
       <div className={styles.userInfoWrapper}>
         <div className={styles.userId}>
-          <div className={styles.tierId}>
+          <div
+            className={`${styles.tierId} ${findTierIndex(profile.tierName)}`}
+          >
             <PlayerImage
               src={profile.tierImageUri}
               styleName={'ranktier'}
