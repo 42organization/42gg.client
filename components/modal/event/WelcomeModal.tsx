@@ -42,9 +42,9 @@ export default function WelcomeModal() {
     type: 'setError',
   });
 
-  useEffect(() => {
+  /*   useEffect(() => {
     getCoinHandler();
-  }, []);
+  }, []); */
 
   const openPageManual = () => {
     window.open(
@@ -54,18 +54,24 @@ export default function WelcomeModal() {
 
   if (!coin) return null;
 
-  const openAttendanceCoin = () => {
-    setModal({
-      modalName: 'COIN-ANIMATION',
-      CoinResult: {
-        afterCoin: coin?.afterCoin,
-        beforeCoin: coin?.beforeCoin,
-        coinIncrement: coin?.coinIncrement,
-      },
-    });
+  const openAttendanceCoin = async () => {
+    try {
+      await getCoinHandler();
+      setModal({
+        modalName: 'COIN-ANIMATION',
+        CoinResult: {
+          afterCoin: coin?.afterCoin,
+          beforeCoin: coin?.beforeCoin,
+          coinIncrement: coin?.coinIncrement,
+        },
+      });
+    } catch (error) {
+      setError('SM02');
+    }
   };
 
   const openStatChangeModal = () => {
+    //getCoinHandler();
     setModal({
       modalName: 'FIXED-STAT',
       exp: {
@@ -93,7 +99,7 @@ export default function WelcomeModal() {
           </div>
           <div className={styles.positive}>
             <input
-              onClick={openStatChangeModal}
+              onClick={openAttendanceCoin}
               type='button'
               value='출석하기'
             />
