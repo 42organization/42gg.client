@@ -19,6 +19,30 @@ const defaultContents: MegaphoneList = [
   },
 ];
 
+type MegaphoneContainerProps = {
+  clickPause: () => void;
+  play: string;
+  children: React.ReactNode;
+};
+
+export const MegaphoneContainer = ({
+  clickPause,
+  play,
+  children,
+}: MegaphoneContainerProps) => {
+  // 문구 수, 문구 길이에 따라 애니메이션 속도 조절하는 style 추가 필요
+
+  return (
+    <div className={styles.rollingBanner} onClick={() => clickPause()}>
+      <div className={styles.wrapper}>
+        <ul className={`${styles.megaphoneContents} ${styles[play]}`}>
+          {children}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
 const Megaphone = () => {
   const [contents, setContents] = useState<MegaphoneList>(defaultContents);
   const [play, setPlay] = useState('running');
@@ -50,27 +74,29 @@ const Megaphone = () => {
 
   // 문구 수, 문구 길이에 따라 애니메이션 속도 조절하는 style 추가 필요
 
-  const pauseStyle: { [key: string]: string } = {
-    pause: styles.pause,
-    running: styles.running,
-  };
+  // const pauseStyle: { [key: string]: string } = {
+  //   pause: styles.pause,
+  //   running: styles.running,
+  // };
 
   return (
-    <div className={styles.rollingBanner} onClick={() => clickPause()}>
-      <div className={styles.wrapper}>
-        <ul className={`${styles.megaphoneContents} ${pauseStyle[play]}`}>
-          {contents.map((content, idx) =>
-            content === defaultContents[0] ? (
-              <li key={idx}>{content.content}</li>
-            ) : (
-              <li key={idx}>
-                {content.intraId} : {content.content}&nbsp;&nbsp;
-              </li>
-            )
-          )}
-        </ul>
-      </div>
-    </div>
+    // <div className={styles.rollingBanner} onClick={() => clickPause()}>
+    //   <div className={styles.wrapper}>
+    //     <ul className={`${styles.megaphoneContents} ${pauseStyle[play]}`}>
+    <MegaphoneContainer clickPause={clickPause} play={play}>
+      {contents.map((content, idx) =>
+        content === defaultContents[0] ? (
+          <li key={idx}>{content.content}</li>
+        ) : (
+          <li key={idx}>
+            {content.intraId} : {content.content}&nbsp;&nbsp;
+          </li>
+        )
+      )}
+    </MegaphoneContainer>
+    //     </ul>
+    //   </div>
+    // </div>
   );
 };
 

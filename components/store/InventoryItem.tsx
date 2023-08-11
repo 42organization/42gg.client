@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import { Tooltip } from '@mui/material';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { BsGiftFill, BsCircleFill } from 'react-icons/bs';
-import { InventoryItem } from 'types/storeTypes';
+import { InventoryItem } from 'types/inventoryTypes';
 import { userState } from 'utils/recoil/layout';
+import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/store/Inventory.module.scss';
 
 type inventoryItemProps = {
@@ -12,21 +13,38 @@ type inventoryItemProps = {
 
 export function InvetoryItem({ item }: inventoryItemProps) {
   const user = useRecoilValue(userState);
+  const setModal = useSetRecoilState(modalState);
 
-  const { itemId, name, imageUrl, purchaserIntra, itemStatus } = item;
+  const {
+    receiptId,
+    itemName,
+    imageUri,
+    purchaserIntra,
+    itemCode,
+    itemStatus,
+  } = item;
 
   function handleUseItem(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
-    console.log(`use item ${itemId}`);
+    setModal({
+      modalName: `USE-ITEM-${item.itemCode}`,
+      useItemInfo: {
+        receiptId: item.receiptId,
+      },
+    });
   }
 
   function handleEditItem(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault;
-    console.log(`edit item ${itemId}`);
+    if (itemCode !== 'MEGAPHONE') {
+      alert('편집할 수 없는 아이템입니다.');
+      return;
+    }
+    // EditItemModal
   }
 
   return (
-    <div key={itemId} className={styles.inventoryItem}>
+    <div key={receiptId} className={styles.inventoryItem}>
       <div className={styles.topBadgeContainer}>
         {user.intraId !== purchaserIntra ? (
           <Tooltip title={`from ${purchaserIntra}`}>
@@ -51,9 +69,9 @@ export function InvetoryItem({ item }: inventoryItemProps) {
         )}
       </div>
       <div className={styles.imgContainer}>
-        <Image className={styles.img} src={imageUrl} alt={name} fill />
+        <Image className={styles.img} src={imageUri} alt={itemName} fill />
       </div>
-      <div className={styles.itemName}>{name}</div>
+      <div className={styles.itemName}>{itemName}</div>
     </div>
   );
 }

@@ -3,7 +3,6 @@
 .itemCard {
   width: 95%;
   position: relative;
-  box-shadow: 0 0.1rem 0.3rem #c66bf2;
   margin: 1rem auto;
   background: white;
   border-radius: 1rem;
@@ -72,7 +71,7 @@
           font-size: 1rem;
           text-align: center;
           font-weight: bold;
-          transform: translateY(-0.188rem);
+          transform: translateY(-0.05rem);
         }
       }
     }

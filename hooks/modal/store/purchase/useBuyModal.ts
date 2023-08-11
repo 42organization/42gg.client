@@ -1,11 +1,27 @@
 import { useSetRecoilState } from 'recoil';
+import { Purchase } from 'types/itemTypes';
 import { modalState } from 'utils/recoil/modal';
+import { errorState } from 'utils/recoil/error';
+import { mockInstance } from 'utils/mockAxios';
 
-const useBuyModal = () => {
+const useBuyModal = (purchasedItem: Purchase) => {
   const setModal = useSetRecoilState(modalState);
+  const setError = useSetRecoilState<string>(errorState);
 
-  // TODO: 구매 API 받아서 적용하기
-  const onPurchase = () => {
+  // TODO: mockInstance 대신 instance로 변경하기
+  const onPurchase = async () => {
+    try {
+      const res = await mockInstance.post(
+        `/items/purchases/${purchasedItem.itemId}`,
+        purchasedItem
+      );
+      // 테스트용 -> 지우기
+      console.log(`message: ${res?.data?.message}`);
+      // TODO: alert 대신 toast 띄우거나 아무것도 안하기
+      alert(`구매 성공!`);
+    } catch (error) {
+      setError('HB01');
+    }
     setModal({ modalName: null });
   };
 

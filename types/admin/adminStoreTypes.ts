@@ -1,36 +1,14 @@
-export interface Iitem {
-  itemId: number;
-  itemName: string;
-  content: string;
-  imageUrl: string;
-  originalPrice: number;
-  discount: number;
-  salePrice: number;
-}
-
-export interface IitemList {
-  itemList: Array<Iitem>;
-}
-
-export interface IitemInfo {
-  itemId: number;
-  itemName: string;
-  content: string;
-  imageUrl: string;
-  originalPrice?: number;
-  discount?: number;
-}
-
 export interface IitemHistory {
   itemId: number;
   createdAt: Date;
-  intraId: string;
-  itemName: string;
+  name: string;
   content: string;
-  imageUrl: string;
+  imageUri: string;
   price: number;
   discount: number;
-  salePrice: number;
+  creatorIntraId: string;
+  deleterIntraId: string;
+  visible: boolean;
 }
 
 export interface IitemHistoryList {

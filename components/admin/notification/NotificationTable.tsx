@@ -119,7 +119,7 @@ export default function NotificationTable() {
   const openDetailModal = (noti: INotification) => {
     setModal({
       modalName: 'ADMIN-DETAIL_CONTENT',
-      intraId: noti.intraId,
+      detailTitle: noti.intraId,
       detailContent: noti.message,
     });
   };

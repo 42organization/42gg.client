@@ -1,9 +1,8 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { IitemHistory, IitemHistoryList } from 'types/admin/adminStoreTypes';
 import { tableFormat } from 'constants/admin/table';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import PageNation from 'components/Pagination';
 import {
   Paper,
@@ -15,30 +14,38 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from 'styles/admin/store/ItemHistory.module.scss';
+import { mockInstance } from 'utils/mockAxios';
+import { useSetRecoilState } from 'recoil';
+import { toastState } from 'utils/recoil/toast';
+import { modalState } from 'utils/recoil/modal';
 
 const itemHistoryTableTitle: { [key: string]: string } = {
   itemId: 'ID',
   createdAt: '변경일',
-  intraId: '변경한 사람',
-  itemName: '이름',
+  name: '이름',
   content: '설명',
-  imageUrl: '이미지',
+  imageUri: '이미지',
   price: '원가',
   discount: '할인율',
-  salePrice: '판매가격',
+  creatorIntraId: '변경한 사람',
+  deleterIntraId: '삭제한 사람',
+  visible: '상점 노출',
 };
 
 const tableColumnName = [
   'itemId',
   'createdAt',
-  'intraId',
-  'itemName',
+  'name',
   'content',
-  'imageUrl',
+  'imageUri',
   'price',
   'discount',
-  'salePrice',
+  'creatorIntraId',
+  'deleterIntraId',
+  'visible',
 ];
+
+const MAX_CONTENT_LENGTH = 16;
 
 function ItemHistory() {
   const [itemHistoryData, setItemHistoryData] = useState<IitemHistoryList>({
@@ -47,13 +54,17 @@ function ItemHistory() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const setModal = useSetRecoilState(modalState);
+  const setSnackBar = useSetRecoilState(toastState);
 
-  // api 연결 시 useCallback, instanceInManage, try catch로 변경
-  const getItemHistoryListHandler = useMockAxiosGet<any>({
-    url: `admin/items/history?page=${currentPage}&size=5`,
-    setState: (data) => {
+  // instanceInManage로 변경
+  const getItemHistoryListHandler = useCallback(async () => {
+    try {
+      const res = await mockInstance.get(
+        `/admin/items/history?page=${currentPage}&size=5`
+      );
       setItemHistoryData({
-        itemHistoryList: data.itemHistoryList.map(
+        itemHistoryList: res.data.itemHistoryList.map(
           (itemHistory: IitemHistory) => {
             const { year, month, date, hour, min } = getFormattedDateToString(
               new Date(itemHistory.createdAt)
@@ -64,13 +75,26 @@ function ItemHistory() {
             };
           }
         ),
-        totalPage: data.totalPage,
+        totalPage: res.data.totalPage,
         currentPage: currentPage,
       });
-    },
-    err: 'HJ07',
-    type: 'setError',
-  });
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'get itemhistory',
+        severity: 'error',
+        message: 'API 요청에 문제가 발생했습니다.',
+        clicked: true,
+      });
+    }
+  }, [currentPage]);
+
+  const openDetailModal = (itemHistory: IitemHistory) => {
+    setModal({
+      modalName: 'ADMIN-DETAIL_CONTENT',
+      detailTitle: itemHistory.name,
+      detailContent: itemHistory.content,
+    });
+  };
 
   useEffect(() => {
     getItemHistoryListHandler();
@@ -78,31 +102,53 @@ function ItemHistory() {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table aria-label='customized table'>
-          <TableHead>
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='customized table'>
+          <TableHead className={styles.tableHeader}>
             <TableRow>
               {tableColumnName.map((column, idx) => (
-                <TableCell key={idx}>{itemHistoryTableTitle[column]}</TableCell>
+                <TableCell className={styles.tableHeaderItem} key={idx}>
+                  {itemHistoryTableTitle[column]}
+                </TableCell>
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {itemHistoryData.itemHistoryList.length > 0 ? (
               itemHistoryData.itemHistoryList.map(
                 (itemHistory: IitemHistory) => (
-                  <TableRow key={itemHistory.itemId}>
+                  <TableRow
+                    className={styles.tableRow}
+                    key={itemHistory.itemId}
+                  >
                     {tableFormat['itemHistory'].columns.map(
                       (columnName: string, index: number) => {
                         return (
-                          <TableCell key={index}>
-                            {columnName === 'imageUrl' ? (
+                          <TableCell
+                            className={styles.tableBodyItem}
+                            key={index}
+                          >
+                            {columnName === 'imageUri' ? (
                               <Image
                                 src={itemHistory[columnName]}
                                 width={30}
                                 height={30}
                                 alt='no'
                               />
+                            ) : itemHistory[
+                                columnName as keyof IitemHistory
+                              ].toString().length > MAX_CONTENT_LENGTH ? (
+                              <div>
+                                {itemHistory[columnName as keyof IitemHistory]
+                                  ?.toString()
+                                  .slice(0, MAX_CONTENT_LENGTH)}
+                                <span
+                                  style={{ cursor: 'pointer', color: 'grey' }}
+                                  onClick={() => openDetailModal(itemHistory)}
+                                >
+                                  ...더보기
+                                </span>
+                              </div>
                             ) : (
                               itemHistory[
                                 columnName as keyof IitemHistory
@@ -116,14 +162,16 @@ function ItemHistory() {
                 )
               )
             ) : (
-              <TableRow>
-                <TableCell>비어있습니다</TableCell>
+              <TableRow className={styles.tableRow}>
+                <TableCell className={styles.tableBodyItem}>
+                  비어있습니다
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </TableContainer>
-      <div>
+      <div className={styles.pageNationContainer}>
         <PageNation
           curPage={itemHistoryData.currentPage}
           totalPages={itemHistoryData.totalPage}

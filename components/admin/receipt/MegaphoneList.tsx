@@ -1,14 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import {
-  Imegaphone,
-  ImegaphoneInfo,
-  ImegaphoneTable,
-} from 'types/admin/adminReceiptType';
+import { Imegaphone, ImegaphoneTable } from 'types/admin/adminReceiptType';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import PageNation from 'components/Pagination';
 import {
   Paper,
@@ -20,6 +15,8 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from 'styles/admin/receipt/MegaphoneList.module.scss';
+import { mockInstance } from 'utils/mockAxios';
+import { toastState } from 'utils/recoil/toast';
 
 const megaPhoneTableTitle: { [key: string]: string } = {
   megaphoneId: 'ID',
@@ -39,6 +36,8 @@ const tableColumnName = [
   'delete',
 ];
 
+const MAX_CONTENT_LENGTH = 16;
+
 function MegaphoneList() {
   const [megaphoneData, setMegaphoneData] = useState<ImegaphoneTable>({
     megaphoneList: [],
@@ -46,15 +45,19 @@ function MegaphoneList() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const setModal = useSetRecoilState(modalState);
+  const setSnackBar = useSetRecoilState(toastState);
 
   // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
 
-  // api 연결 시 useCallback, instanceInManage, try catch로 변경
-  const getMegaphoneHandler = useMockAxiosGet<any>({
-    url: `/admin/megaphones/history?page=${currentPage}&size=10`,
-    setState: (data) => {
+  // instanceInManage로 변경
+  const getMegaphoneHandler = useCallback(async () => {
+    try {
+      const res = await mockInstance.get(
+        `/admin/megaphones/history?page=${currentPage}&size=10`
+      );
       setMegaphoneData({
-        megaphoneList: data.megaphoneList.map((megaphone: Imegaphone) => {
+        megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
             new Date(megaphone.usedAt)
           );
@@ -63,20 +66,31 @@ function MegaphoneList() {
             usedAt: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
-        totalPage: data.totalPage,
+        totalPage: res.data.totalPage,
         currentPage: currentPage,
       });
-    },
-    err: 'HJ03',
-    type: 'setError',
-  });
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'get megaphone',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
+    }
+  }, [currentPage]);
 
-  const setModal = useSetRecoilState(modalState);
-
-  const deleteMegaphone = (megaphoneInfo: ImegaphoneInfo) => {
+  const deleteMegaphone = (megaphone: Imegaphone) => {
     setModal({
       modalName: 'ADMIN-MEGAPHONE_DELETE',
-      megaphoneInfo: megaphoneInfo,
+      megaphone: megaphone,
+    });
+  };
+
+  const openDetailModal = (megaphone: Imegaphone) => {
+    setModal({
+      modalName: 'ADMIN-DETAIL_CONTENT',
+      detailTitle: megaphone.megaphoneId.toString(),
+      detailContent: megaphone.content,
     });
   };
 
@@ -86,37 +100,52 @@ function MegaphoneList() {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table aria-label='customized table'>
-          <TableHead>
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='customized table'>
+          <TableHead className={styles.tableHeader}>
             <TableRow>
               {tableColumnName.map((column, idx) => (
-                <TableCell key={idx}>{megaPhoneTableTitle[column]}</TableCell>
+                <TableCell className={styles.tableHeaderItem} key={idx}>
+                  {megaPhoneTableTitle[column]}
+                </TableCell>
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {megaphoneData.megaphoneList.length > 0 ? (
               megaphoneData.megaphoneList.map((megaphone: Imegaphone) => (
-                <TableRow key={megaphone.megaphoneId}>
+                <TableRow
+                  className={styles.tableRow}
+                  key={megaphone.megaphoneId}
+                >
                   {tableFormat['megaphoneList'].columns.map(
                     (columnName: string, index: number) => {
                       return (
-                        <TableCell key={index}>
-                          {megaphone[columnName as keyof Imegaphone].toString()}
+                        <TableCell className={styles.tableBodyItem} key={index}>
+                          {megaphone[columnName as keyof Imegaphone].toString()
+                            .length > MAX_CONTENT_LENGTH ? (
+                            <div>
+                              {megaphone[columnName as keyof Imegaphone]
+                                .toString()
+                                .slice(0, MAX_CONTENT_LENGTH)}
+                              <span
+                                style={{ cursor: 'pointer', color: 'grey' }}
+                                onClick={() => openDetailModal(megaphone)}
+                              >
+                                ...더보기
+                              </span>
+                            </div>
+                          ) : (
+                            megaphone[columnName as keyof Imegaphone].toString()
+                          )}
                         </TableCell>
                       );
                     }
                   )}
-                  <TableCell>
+                  <TableCell className={styles.tableBodyItem}>
                     <button
-                      onClick={() =>
-                        deleteMegaphone({
-                          megaphoneId: megaphone.megaphoneId,
-                          content: megaphone.content,
-                          intraId: megaphone.intraId,
-                        })
-                      }
+                      className={styles.deleteBtn}
+                      onClick={() => deleteMegaphone(megaphone)}
                     >
                       삭제
                     </button>
@@ -124,14 +153,16 @@ function MegaphoneList() {
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell>비어있습니다</TableCell>
+              <TableRow className={styles.tableBodyItem}>
+                <TableCell className={styles.tableBodyItem}>
+                  비어있습니다
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </TableContainer>
-      <div>
+      <div className={styles.pageNationContainer}>
         <PageNation
           curPage={megaphoneData.currentPage}
           totalPages={megaphoneData.totalPage}

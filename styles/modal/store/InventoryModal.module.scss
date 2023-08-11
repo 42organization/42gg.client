@@ -1,0 +1,66 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modalContainer('PINKWHITE');
+}
+
+.title {
+  @include modalTitle;
+}
+
+.phrase {
+  @include modal-phrase;
+  text-align: left;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  margin: 0 0 0.3rem 0.5rem;
+  color: $dark-gray;
+  font-size: $medium-font;
+}
+
+.textArea {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: $small-radius;
+  background: white;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  textarea {
+    resize: none;
+    height: 4rem;
+    padding: 0.8rem;
+    border: none;
+    font-size: $big-font;
+  }
+  :focus {
+    outline: none;
+  }
+  div {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.7rem;
+    color: $dark-gray;
+    font-size: $small-font;
+  }
+}
+
+.itemCautionContainer {
+  .title {
+    margin: 0 0 0.3rem 0.5rem;
+    color: $dark-gray;
+    font-size: $medium-font;
+  }
+  .list {
+    padding: 0 0 0.5rem 0.5rem;
+    list-style-type: '- ';
+    list-style-position: inside;
+  }
+}
