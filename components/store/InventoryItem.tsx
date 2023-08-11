@@ -40,7 +40,12 @@ export function InvetoryItem({ item }: inventoryItemProps) {
       alert('편집할 수 없는 아이템입니다.');
       return;
     }
-    // EditItemModal
+    setModal({
+      modalName: `EDIT-ITEM-MEGAPHONE`,
+      useItemInfo: {
+        receiptId: item.receiptId,
+      },
+    });
   }
 
   return (
