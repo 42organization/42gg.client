@@ -8,11 +8,13 @@ import { CoinResult } from 'types/coinTypes';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import styles from 'styles/modal/event/WelcomeModal.module.scss';
+import CoinPopcon from '../CoinPopcon';
 
 export default function WelcomeModal() {
   const setModal = useSetRecoilState<Modal>(modalState);
   const [coin, setCoin] = useState<CoinResult>();
   const setError = useSetRecoilState(errorState);
+  const [buttonState, setButtonState] = useState(false);
 
   const content = {
     title: 'Welcome!',
@@ -55,6 +57,7 @@ export default function WelcomeModal() {
   if (!coin) return null;
 
   const openAttendanceCoin = () => {
+    setButtonState(true);
     setModal({
       modalName: 'COIN-ANIMATION',
       CoinResult: {
@@ -93,10 +96,11 @@ export default function WelcomeModal() {
           </div>
           <div className={styles.positive}>
             <input
-              onClick={openStatChangeModal}
+              onClick={openAttendanceCoin}
               type='button'
               value='출석하기'
             />
+            {buttonState && <CoinPopcon amount={coin?.coinIncrement} />}
           </div>
         </div>
       </div>

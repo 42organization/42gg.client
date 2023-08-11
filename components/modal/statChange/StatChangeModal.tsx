@@ -10,6 +10,7 @@ import useAxiosGet from 'hooks/useAxiosGet';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import { CoinResult } from 'types/coinTypes';
 import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
+import CoinPopcon from '../CoinPopcon';
 
 export default function StatChangeModal({ gameId, mode }: Exp) {
   const setModal = useSetRecoilState(modalState);
@@ -63,6 +64,7 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
         {mode === 'RANK' && <PppStat stat={stat} />}
         <ExpStat stat={stat} />
         <div className={styles.guide}>화면을 클릭해주세요!</div>
+        <CoinPopcon amount={stat.coinIncrement} />
       </div>
     </div>
   );
