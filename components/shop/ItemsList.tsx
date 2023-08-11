@@ -3,7 +3,7 @@ import { ItemList } from 'types/itemTypes';
 import ItemCard from './ItemCard';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
 
-export default function ItemsList() {
+export default function ItemsList({ coin }: { coin: number }) {
   const [itemList, setItemList] = useState<ItemList>({ itemList: [] });
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function ItemsList() {
   return (
     <div>
       {itemList.itemList.map((item) => (
-        <ItemCard key={item.itemId} item={item} />
+        <ItemCard key={item.itemId} item={item} coin={coin} />
       ))}
     </div>
   );
