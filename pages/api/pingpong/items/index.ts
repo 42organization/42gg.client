@@ -3,7 +3,7 @@ import { InventoryData, InventoryItem } from 'types/inventoryTypes';
 
 const item1: InventoryItem = {
   receiptId: 1,
-  itemName: '테스트1',
+  itemName: '확성기',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'kim_takgu',
   itemStatus: 'USING',
@@ -16,7 +16,7 @@ const item1: InventoryItem = {
 
 const item2: InventoryItem = {
   receiptId: 2,
-  itemName: '테스트2',
+  itemName: '확성기',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'kim_takgu',
   itemStatus: 'BEFORE',
@@ -29,7 +29,7 @@ const item2: InventoryItem = {
 
 const item3: InventoryItem = {
   receiptId: 3,
-  itemName: '테스트3',
+  itemName: '확성기',
   imageUri:
     'https://dodo.ac/np/images/thumb/1/17/NH_Balloon.jpg/600px-NH_Balloon.jpg',
   purchaserIntra: 'jeyoon',
