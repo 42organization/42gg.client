@@ -73,7 +73,7 @@ export interface Coin {
   mode?: MatchMode | null;
 }
 
-export interface manual {
+export interface Manual {
   radioMode: MatchMode;
 }
 
@@ -88,7 +88,7 @@ export interface StoreManual {
 
 export interface Modal {
   modalName: ModalName;
-  manual?: manual;
+  manual?: Manual;
   cancel?: Cancel;
   enroll?: Enroll;
   announcement?: Announcement;
