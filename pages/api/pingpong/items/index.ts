@@ -10,7 +10,7 @@ const item1: InventoryItem = {
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
-  itemCode: 'MEGAPHONE',
+  itemType: 'MEGAPHONE',
   createdAt: '2021-08-07',
 };
 
@@ -23,7 +23,7 @@ const item2: InventoryItem = {
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
-  itemCode: 'MEGAPHONE',
+  itemType: 'MEGAPHONE',
   createdAt: '2021-08-07',
 };
 
@@ -37,7 +37,7 @@ const item3: InventoryItem = {
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
-  itemCode: 'MEGAPHONE',
+  itemType: 'MEGAPHONE',
   createdAt: '2021-08-07',
 };
 
@@ -50,7 +50,7 @@ const item4: InventoryItem = {
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
-  itemCode: 'MEGAPHONE',
+  itemType: 'MEGAPHONE',
   createdAt: '2021-08-07',
 };
 
@@ -63,7 +63,7 @@ const item5: InventoryItem = {
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
-  itemCode: 'MEGAPHONE',
+  itemType: 'MEGAPHONE',
   createdAt: '2021-08-07',
 };
 
@@ -77,7 +77,7 @@ const item6: InventoryItem = {
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
-  itemCode: 'MEGAPHONE',
+  itemType: 'MEGAPHONE',
   createdAt: '2021-08-07',
 };
 
@@ -90,7 +90,7 @@ const item7: InventoryItem = {
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
-  itemCode: 'MEGAPHONE',
+  itemType: 'MEGAPHONE',
   createdAt: '2021-08-07',
 };
 
@@ -103,7 +103,7 @@ const item8: InventoryItem = {
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
-  itemCode: 'MEGAPHONE',
+  itemType: 'MEGAPHONE',
   createdAt: '2021-08-07',
 };
 
@@ -117,7 +117,7 @@ const item9: InventoryItem = {
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
-  itemCode: 'MEGAPHONE',
+  itemType: 'MEGAPHONE',
   createdAt: '2021-08-07',
 };
 
@@ -130,7 +130,7 @@ const item10: InventoryItem = {
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
-  itemCode: 'MEGAPHONE',
+  itemType: 'MEGAPHONE',
   createdAt: '2021-08-07',
 };
 

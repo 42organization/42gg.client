@@ -6,7 +6,7 @@ import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { CoinResult } from 'types/coinTypes';
 import { Imegaphone, Iprofile } from './admin/adminReceiptType';
 import { IcoinPolicy } from './admin/adminCoinTypes';
-import { UseItemRequest } from './inventoryTypes';
+import { ItemType, UseItemRequest } from './inventoryTypes';
 import { StoreManualMode } from './storeTypes';
 import { Item } from './itemTypes';
 
@@ -22,7 +22,7 @@ type FixedModal = 'AFTER_GAME' | 'STAT';
 
 type PurchaseModal = 'BUY' | 'GIFT' | 'NO_COIN';
 
-type UseItemModal = 'MEGAPHONE';
+type UseItemModal = ItemType;
 
 type EditItemModal = 'MEGAPHONE';
 type StoreModal = 'MANUAL' | 'COIN_HISTORY';
