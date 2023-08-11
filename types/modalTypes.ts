@@ -6,6 +6,7 @@ import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { CoinResult } from 'types/coinTypes';
 import { Imegaphone, Iprofile } from './admin/adminReceiptType';
 import { IcoinPolicy } from './admin/adminCoinTypes';
+import { UseItemRequest } from './inventoryTypes';
 import { StoreManualMode } from './storeTypes';
 import { Item } from './itemTypes';
 
@@ -21,6 +22,9 @@ type FixedModal = 'AFTER_GAME' | 'STAT';
 
 type PurchaseModal = 'BUY' | 'GIFT' | 'NO_COIN';
 
+type UseItemModal = 'MEGAPHONE';
+
+type EditItemModal = 'MEGAPHONE';
 type StoreModal = 'MANUAL' | 'COIN_HISTORY';
 
 type AdminModal =
@@ -49,6 +53,8 @@ type ModalName =
   | `ADMIN-${AdminModal}`
   | `COIN-ANIMATION`
   | `PURCHASE-${PurchaseModal}`
+  | `USE-ITEM-${UseItemModal}`
+  | `EDIT-ITEM-${EditItemModal}`
   | `STORE-${StoreModal}`
   | `PURCHASE-${PurchaseModal}`;
 
@@ -110,5 +116,6 @@ export interface Modal {
   profile?: Iprofile;
   item?: Item;
   coinPolicy?: IcoinPolicy;
+  useItemInfo?: UseItemRequest;
   storeManual?: StoreManual;
 }

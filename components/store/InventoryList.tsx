@@ -34,7 +34,7 @@ export function InventoryList() {
             </div>
           ) : (
             page.storageItemList.map((item) => (
-              <InvetoryItem key={item.itemId} item={item} />
+              <InvetoryItem key={item.receiptId} item={item} />
             ))
           )}
         </React.Fragment>

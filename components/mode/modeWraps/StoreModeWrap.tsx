@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { StoreMode } from 'types/storeTypes';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import { StoreMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
 import { Modal } from 'types/modalTypes';
 import { FaCoins } from 'react-icons/fa';

@@ -36,6 +36,9 @@ import NoCoinModal from './store/purchase/NoCoinModal';
 import StoreManualModal from './store/StoreManualModal';
 import AdminCheckSendNotiModal from './admin/AdminCheckSendNoti';
 
+// Inventory Modal
+import UseMegaphone from './store/inventory/UseMegaphone';
+
 export default function ModalProvider() {
   const [
     {
@@ -58,6 +61,7 @@ export default function ModalProvider() {
       profile,
       item,
       coinPolicy,
+      useItemInfo,
       storeManual,
     },
     setModal,
@@ -111,6 +115,9 @@ export default function ModalProvider() {
     'ADMIN-ITEM_DELETE': item ? <AdminDeleteItemModal {...item} /> : null,
     'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
       <AdminEditCoinPolicyModal {...coinPolicy} />
+    ) : null,
+    'USE-ITEM-MEGAPHONE': useItemInfo ? (
+      <UseMegaphone {...useItemInfo} />
     ) : null,
     'ADMIN-CHECK_SEND_NOTI':
       intraId && detailContent ? (
