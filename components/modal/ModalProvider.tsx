@@ -33,6 +33,7 @@ import AdminEditCoinPolicyModal from './admin/AdminEditCoinPolicy';
 import BuyModal from './store/purchase/BuyModal';
 import GiftModal from './store/purchase/GiftModal';
 import NoCoinModal from './store/purchase/NoCoinModal';
+import StoreManualModal from './store/StoreManualModal';
 import AdminCheckSendNotiModal from './admin/AdminCheckSendNoti';
 
 export default function ModalProvider() {
@@ -57,6 +58,7 @@ export default function ModalProvider() {
       profile,
       item,
       coinPolicy,
+      storeManual,
     },
     setModal,
   ] = useRecoilState(modalState);
@@ -95,6 +97,7 @@ export default function ModalProvider() {
     'USER-KAKAO_EDIT': <KakaoEditModal />,
     'COIN-ANIMATION': CoinResult ? <CoinChangeModal {...CoinResult} /> : null,
     'EVENT-WELCOME': <WelcomeModal />,
+    'STORE-MANUAL': storeManual ? <StoreManualModal {...storeManual} /> : null,
     'PURCHASE-BUY': priceTag ? <BuyModal {...priceTag} /> : null,
     'PURCHASE-GIFT': priceTag ? <GiftModal {...priceTag} /> : null,
     'PURCHASE-NO_COIN': <NoCoinModal />,

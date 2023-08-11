@@ -1,8 +1,10 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { FaCoins } from 'react-icons/fa';
+import { Dispatch, SetStateAction } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from 'utils/recoil/modal';
 import { StoreMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import { Modal } from 'types/modalTypes';
+import { FaCoins } from 'react-icons/fa';
 import StoreModeRadioBox from 'components/mode/modeItems/StoreModeRadioBox';
 import styles from 'styles/mode/StoreModeWrap.module.scss';
 
@@ -17,10 +19,23 @@ export function StoreModeWrap({
   currentMode,
   setStoreMode,
 }: StoreModeWrapProps) {
+  const setModal = useSetRecoilState<Modal>(modalState);
+
+  const handleManual = () => {
+    setModal({
+      modalName: 'STORE-MANUAL',
+      storeManual: {
+        radioMode: 'COIN_POLICY',
+      },
+    });
+  };
+
   return (
     <div>
       <div className={styles.topMenu}>
-        <button>매뉴얼</button>
+        <button className={styles.manual} onClick={handleManual}>
+          매뉴얼
+        </button>
         <div className={styles.coins}>
           {coin.coin}
           <FaCoins />

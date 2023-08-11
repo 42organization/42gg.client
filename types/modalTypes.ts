@@ -6,6 +6,7 @@ import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { CoinResult } from 'types/coinTypes';
 import { Imegaphone, Iprofile } from './admin/adminReceiptType';
 import { IcoinPolicy } from './admin/adminCoinTypes';
+import { StoreManualMode } from './storeTypes';
 import { Item } from './itemTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
@@ -19,6 +20,8 @@ type UserModal = 'PROFILE_EDIT' | 'KAKAO_EDIT';
 type FixedModal = 'AFTER_GAME' | 'STAT';
 
 type PurchaseModal = 'BUY' | 'GIFT' | 'NO_COIN';
+
+type StoreModal = 'MANUAL' | 'COIN_HISTORY';
 
 type AdminModal =
   | 'PROFILE'
@@ -45,6 +48,8 @@ type ModalName =
   | `FIXED-${FixedModal}`
   | `ADMIN-${AdminModal}`
   | `COIN-ANIMATION`
+  | `PURCHASE-${PurchaseModal}`
+  | `STORE-${StoreModal}`
   | `PURCHASE-${PurchaseModal}`;
 
 export interface Cancel {
@@ -74,19 +79,19 @@ export interface Manual {
   radioMode: MatchMode;
 }
 
-export interface manual {
-  radioMode: MatchMode;
-}
-
 export interface PriceTag {
   itemId: number;
   product: string;
   price: number;
 }
 
+export interface StoreManual {
+  radioMode: StoreManualMode;
+}
+
 export interface Modal {
   modalName: ModalName;
-  manual?: manual;
+  manual?: Manual;
   cancel?: Cancel;
   enroll?: Enroll;
   announcement?: Announcement;
@@ -105,4 +110,5 @@ export interface Modal {
   profile?: Iprofile;
   item?: Item;
   coinPolicy?: IcoinPolicy;
+  storeManual?: StoreManual;
 }
