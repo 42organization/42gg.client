@@ -5,6 +5,7 @@ import { User } from 'types/mainType';
 import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import { userState } from 'utils/recoil/layout';
+import { AiFillShop } from 'react-icons/ai';
 import { HeaderContextState, HeaderContext } from '../HeaderContext';
 import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/MenuBar.module.scss';
@@ -31,8 +32,7 @@ const MenuItem = ({ itemName, onClick }: menuItemProps) => {
   const menuList: { [key: string]: { [key: string]: string | JSX.Element } } = {
     Store: {
       name: '상점',
-      // TODO : 이미지 변경할 것
-      svg: <RankingEmoji />,
+      svg: <AiFillShop />,
     },
     Ranking: {
       name: '랭킹',

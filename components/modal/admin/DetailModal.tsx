@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import styles from 'styles/admin/modal/FeedbackDetail.module.scss';
 
-export default function FeedbackDetailModal({
-  intraId,
+export default function DetailModal({
+  detailTitle,
   detailContent,
 }: {
-  intraId: string;
+  detailTitle: string;
   detailContent: string;
 }) {
   const [contentWithNewLine, setContent] = useState<string>('');
@@ -26,7 +26,7 @@ export default function FeedbackDetailModal({
   return (
     <>
       <div className={styles.whole}>
-        <h2 className={styles.writer}>{intraId}</h2>
+        <h2 className={styles.writer}>{detailTitle}</h2>
         {contentWithNewLine
           .split('\r\n')
           .map((value: string, index: number) => {

@@ -115,7 +115,7 @@ export default function FeedbackTable() {
   const openDetailModal = (feedback: IFeedback) => {
     setModal({
       modalName: 'ADMIN-DETAIL_CONTENT',
-      intraId: feedback.intraId,
+      detailTitle: feedback.intraId,
       detailContent: feedback.content,
     });
   };

@@ -1,0 +1,38 @@
+@import 'styles/admin/common/Pagination.module.scss';
+@import 'styles/common.scss';
+
+.tableContainer {
+  width: 100%;
+  min-width: 700px;
+  margin: auto;
+  .table {
+    .tableHeader {
+      background-color: lightgray;
+      .tableHeaderItem {
+        padding: 0.7rem;
+        text-align: center;
+        font-weight: 600;
+        font-size: $small-font;
+        line-height: 150%;
+      }
+    }
+    .tableBody {
+      .tableRow {
+        &:nth-child(odd) {
+          background-color: #f9fafb;
+        }
+        &:nth-child(even) {
+          background-color: #fff;
+        }
+        .tableBodyItem {
+          padding: 10px;
+          text-align: center;
+          line-height: 150%;
+          font-size: $small-font;
+        }
+      }
+    }
+  }
+}
+
+@include pagination;

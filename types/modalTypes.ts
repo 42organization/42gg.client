@@ -4,10 +4,10 @@ import { Value } from 'react-quill';
 import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { CoinResult } from 'types/coinTypes';
-import { ImegaphoneInfo, IprofileInfo } from './admin/adminReceiptType';
-import { IitemInfo } from './admin/adminStoreTypes';
+import { Imegaphone, Iprofile } from './admin/adminReceiptType';
 import { IcoinPolicy } from './admin/adminCoinTypes';
 import { StoreManualMode } from './storeTypes';
+import { Item } from './itemTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -36,7 +36,8 @@ type AdminModal =
   | 'PROFILE_DELETE'
   | 'ITEM_EDIT'
   | 'ITEM_DELETE'
-  | 'COINPOLICY_EDIT';
+  | 'COINPOLICY_EDIT'
+  | 'CHECK_SEND_NOTI';
 
 type ModalName =
   | null
@@ -48,7 +49,8 @@ type ModalName =
   | `ADMIN-${AdminModal}`
   | `COIN-ANIMATION`
   | `PURCHASE-${PurchaseModal}`
-  | `STORE-${StoreModal}`;
+  | `STORE-${StoreModal}`
+  | `PURCHASE-${PurchaseModal}`;
 
 export interface Cancel {
   startTime: string;
@@ -78,6 +80,7 @@ export interface Manual {
 }
 
 export interface PriceTag {
+  itemId: number;
   product: string;
   price: number;
 }
@@ -95,6 +98,7 @@ export interface Modal {
   exp?: Exp;
   gameId?: number;
   intraId?: string;
+  detailTitle?: string;
   detailContent?: string;
   feedback?: IFeedback;
   penaltyId?: number;
@@ -102,9 +106,9 @@ export interface Modal {
   ModifyScore?: ModifyScoreType;
   CoinResult?: CoinResult;
   priceTag?: PriceTag;
-  megaphoneInfo?: ImegaphoneInfo;
-  profileInfo?: IprofileInfo;
-  itemInfo?: IitemInfo;
+  megaphone?: Imegaphone;
+  profile?: Iprofile;
+  item?: Item;
   coinPolicy?: IcoinPolicy;
   storeManual?: StoreManual;
 }
