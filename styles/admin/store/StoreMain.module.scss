@@ -1,15 +1,30 @@
+@import 'styles/common.scss';
+
 .mainContainer {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    left: 10%;
-    width: 80%;
-    height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  left: 2.5%;
+  width: 95%;
+  height: 100%;
 }
 
 .title {
-    width: 100%;
-    h2 {
-        width: fit-content;
-    }
+  font-weight: 600;
+  font-size: $giant-font;
+  line-height: 150%;
+  width: fit-content;
+}
+
+.subContainer {
+  width: 100%;
+  padding-top: 15px;
+}
+
+.sectionTitle {
+  font-weight: 500;
+  font-size: $medium-font;
+  line-height: 150%;
+  width: fit-content;
+  padding-left: 15px;
 }

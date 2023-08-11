@@ -2,16 +2,16 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, query } = req;
-  const { megaphoneId } = query as { megaphoneId: string };
+  const { intraId } = query as { intraId: string };
 
   if (method === 'DELETE') {
     if (
-      megaphoneId === '1' ||
-      megaphoneId === '2' ||
-      megaphoneId === '3' ||
-      megaphoneId === '4'
+      intraId === 'hyungjpa' ||
+      intraId === 'hyobicho' ||
+      intraId === 'sangmipa' ||
+      intraId === 'jeyoon'
     )
-      res.status(204).end();
+      res.status(200).end();
     else res.status(403).end();
   }
 }

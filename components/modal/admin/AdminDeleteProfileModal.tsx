@@ -1,42 +1,34 @@
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import { Imegaphone } from 'types/admin/adminReceiptType';
+import { Iprofile } from 'types/admin/adminReceiptType';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/admin/modal/AdminDeleteMegaphone.module.scss';
+import styles from 'styles/admin/modal/AdminDeleteProfile.module.scss';
+import PlayerImage from 'components/PlayerImage';
 
-export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
-  const { megaphoneId, content, intraId } = props;
+export default function AdminDeleteProfileModal(props: Iprofile) {
+  const { profileId, intraId, imageUri } = props;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
   // instanceInManage로 변경
-  const deleteMegaphoneHandler = async (megaphoneId: number) => {
+  const deleteProfileHandler = async (intraId: string) => {
     try {
-      await mockInstance.delete(`/admin/megaphones/${megaphoneId}`);
+      await mockInstance.delete(`/admin/users/${intraId}`);
       setSnackBar({
-        toastName: 'delete megaphone',
+        toastName: 'delete profile',
         severity: 'success',
-        message: `${megaphoneId}번 확성기가 삭제되었습니다!`,
+        message: `${profileId}번 ${intraId}님의 프로필 이미지가 삭제되었습니다.`,
         clicked: true,
       });
       setModal({
         modalName: 'ADMIN-CHECK_SEND_NOTI',
         intraId: intraId,
-        detailContent: 'megaphone',
+        detailContent: 'profile',
       });
-    } catch (e: any) {
-      // 이미 사용완료 상태인 확성기 삭제 시도 시 에러 받아서 처리하는 부분
-      // if (e.response.status === 403) {
-      //   setSnackBar({
-      //     toastName: 'delete megaphone',
-      //     severity: 'error',
-      //     message: `${megaphoneId}번 확성기는 삭제할 수 없는 확성기입니다.`,
-      //     clicked: true,
-      //   });
-      // } else {
+    } catch (e: unknown) {
       setSnackBar({
-        toastName: 'delete megaphone',
+        toastName: 'delete profile',
         severity: 'error',
         message: `API 요청에 문제가 발생했습니다.`,
         clicked: true,
@@ -48,31 +40,38 @@ export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
   return (
     <div className={styles.whole}>
       <div className={styles.title}>
-        <div className={styles.titleText}>확성기 삭제</div>
+        <div className={styles.titleText}>프로필 삭제</div>
         <hr className={styles.hr} />
       </div>
       <div className={styles.body}>
         <div className={styles.bodyWrap}>
+          <div className={styles.contentWrap}>
+            <div className={styles.bodyText}>현재 프로필 :</div>
+            <div className={styles.profileImage}>
+              <PlayerImage
+                src={imageUri}
+                size={18}
+                styleName={'mainPageProfile'}
+              />
+            </div>
+          </div>
           <div className={styles.intraWrap}>
             <div className={styles.bodyText}>사용자 :</div>
             <input className={styles.intraBlank} value={intraId} readOnly />
           </div>
-          <div className={styles.contentWrap}>
-            <div className={styles.bodyText}>확성기 내용 :</div>
-            <textarea
-              className={styles.contentBlank}
-              value={content}
-              readOnly
-            />
-          </div>
           <div className={styles.checkWrap}>
-            {megaphoneId} 번 확성기를 삭제하시겠습니까?
+            <div className={styles.checkTextMain}>
+              {profileId}번 {intraId}님의 프로필을 삭제하시겠습니까?
+            </div>
+            <div className={styles.checkTextSub}>
+              해당 유저의 이전 이미지로 수정됩니다.
+            </div>
           </div>
         </div>
         <div className={styles.buttonWrap}>
           <button
             className={styles.deleteBtn}
-            onClick={() => deleteMegaphoneHandler(megaphoneId)}
+            onClick={() => deleteProfileHandler(intraId)}
           >
             삭제
           </button>
