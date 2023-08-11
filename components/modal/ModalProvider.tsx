@@ -37,7 +37,7 @@ import StoreManualModal from './store/StoreManualModal';
 import AdminCheckSendNotiModal from './admin/AdminCheckSendNoti';
 
 // Inventory Modal
-import UseMegaphone from './store/inventory/UseMegaphone';
+import NewMegaphoneModal from './store/inventory/NewMegaphoneModal';
 
 export default function ModalProvider() {
   const [
@@ -117,7 +117,7 @@ export default function ModalProvider() {
       <AdminEditCoinPolicyModal {...coinPolicy} />
     ) : null,
     'USE-ITEM-MEGAPHONE': useItemInfo ? (
-      <UseMegaphone {...useItemInfo} />
+      <NewMegaphoneModal {...useItemInfo} />
     ) : null,
     'ADMIN-CHECK_SEND_NOTI':
       intraId && detailContent ? (
