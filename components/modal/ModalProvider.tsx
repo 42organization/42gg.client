@@ -18,7 +18,7 @@ import AdminPenaltyModal from './admin/AdminPenaltyModal';
 import AdminNotiUserModal from './admin/AdminNotiUserModal';
 import AdminCheckFeedback from './admin/AdminFeedbackCheckModal';
 import AdminSeasonEdit from './admin/SeasonEdit';
-import FeedbackDetailModal from './admin/FeedbackDetailModal';
+import DetailModal from './admin/DetailModal';
 import DeletePenaltyModal from './admin/DeletePenaltyModal';
 import AdminModifyScoreModal from './admin/AdminModifyScoreModal';
 import CoinChangeModal from './statChange/CoinChangeModal';
@@ -26,13 +26,15 @@ import WelcomeModal from './event/WelcomeModal';
 
 import styles from 'styles/modal/Modal.module.scss';
 import AdminDeleteMegaphoneModal from './admin/AdminDeleteMegaphoneModal';
-import AdminDeleteProfileModal from './admin/AdminDeleteProfile';
+import AdminDeleteProfileModal from './admin/AdminDeleteProfileModal';
 import AdminDeleteItemModal from './admin/AdminDeleteItem';
 import AdminEditItemModal from './admin/AdminEditItem';
 import AdminEditCoinPolicyModal from './admin/AdminEditCoinPolicy';
 import BuyModal from './store/purchase/BuyModal';
 import GiftModal from './store/purchase/GiftModal';
 import NoCoinModal from './store/purchase/NoCoinModal';
+import StoreManualModal from './store/StoreManualModal';
+import AdminCheckSendNotiModal from './admin/AdminCheckSendNoti';
 
 // Inventory Modal
 import UseMegaphone from './store/inventory/UseMegaphone';
@@ -47,6 +49,7 @@ export default function ModalProvider() {
       announcement,
       exp,
       intraId,
+      detailTitle,
       detailContent,
       feedback,
       penaltyId,
@@ -54,11 +57,12 @@ export default function ModalProvider() {
       ModifyScore,
       CoinResult,
       priceTag,
-      megaphoneInfo,
-      profileInfo,
-      itemInfo,
+      megaphone,
+      profile,
+      item,
       coinPolicy,
       useItemInfo,
+      storeManual,
     },
     setModal,
   ] = useRecoilState(modalState);
@@ -88,8 +92,8 @@ export default function ModalProvider() {
       <AdminCheckFeedback {...feedback} />
     ) : null,
     'ADMIN-DETAIL_CONTENT':
-      intraId && detailContent ? (
-        <FeedbackDetailModal intraId={intraId} detailContent={detailContent} />
+      detailTitle && detailContent ? (
+        <DetailModal detailTitle={detailTitle} detailContent={detailContent} />
       ) : null,
     'ADMIN-MODIFY_SCORE': ModifyScore ? (
       <AdminModifyScoreModal {...ModifyScore} />
@@ -97,27 +101,31 @@ export default function ModalProvider() {
     'USER-KAKAO_EDIT': <KakaoEditModal />,
     'COIN-ANIMATION': CoinResult ? <CoinChangeModal {...CoinResult} /> : null,
     'EVENT-WELCOME': <WelcomeModal />,
-    // 'PURCHASE-BUY': <BuyModal />,
-    // 'PURCHASE-GIFT': <GiftModal />,
+    'STORE-MANUAL': storeManual ? <StoreManualModal {...storeManual} /> : null,
     'PURCHASE-BUY': priceTag ? <BuyModal {...priceTag} /> : null,
     'PURCHASE-GIFT': priceTag ? <GiftModal {...priceTag} /> : null,
     'PURCHASE-NO_COIN': <NoCoinModal />,
-    'ADMIN-MEGAPHONE_DELETE': megaphoneInfo ? (
-      <AdminDeleteMegaphoneModal {...megaphoneInfo} />
+    'ADMIN-MEGAPHONE_DELETE': megaphone ? (
+      <AdminDeleteMegaphoneModal {...megaphone} />
     ) : null,
-    'ADMIN-PROFILE_DELETE': profileInfo ? (
-      <AdminDeleteProfileModal {...profileInfo} />
+    'ADMIN-PROFILE_DELETE': profile ? (
+      <AdminDeleteProfileModal {...profile} />
     ) : null,
-    'ADMIN-ITEM_EDIT': itemInfo ? <AdminEditItemModal {...itemInfo} /> : null,
-    'ADMIN-ITEM_DELETE': itemInfo ? (
-      <AdminDeleteItemModal {...itemInfo} />
-    ) : null,
+    'ADMIN-ITEM_EDIT': item ? <AdminEditItemModal {...item} /> : null,
+    'ADMIN-ITEM_DELETE': item ? <AdminDeleteItemModal {...item} /> : null,
     'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
       <AdminEditCoinPolicyModal {...coinPolicy} />
     ) : null,
     'USE-ITEM-MEGAPHONE': useItemInfo ? (
       <UseMegaphone {...useItemInfo} />
     ) : null,
+    'ADMIN-CHECK_SEND_NOTI':
+      intraId && detailContent ? (
+        <AdminCheckSendNotiModal
+          intraId={intraId}
+          detailContent={detailContent}
+        />
+      ) : null,
   };
 
   useEffect(() => {

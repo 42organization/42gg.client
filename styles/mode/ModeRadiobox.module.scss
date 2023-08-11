@@ -30,6 +30,13 @@
     .modeButton {
       background: #000000;
     }
+  } @else if ($page == 'STORE_MANUAL') {
+    :checked + .modeButton {
+      background: #a06cbf;
+    }
+    .modeButton {
+      background: #000000;
+    }
   }
 }
 
@@ -85,5 +92,8 @@
   }
   &.store {
     @include ButtonBackground('STORE');
+  }
+  &.store_manual {
+    @include ButtonBackground('STORE_MANUAL');
   }
 }

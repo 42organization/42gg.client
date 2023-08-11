@@ -1,10 +1,9 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { Iitem, IitemInfo, IitemList } from 'types/admin/adminStoreTypes';
+import { Item, ItemList } from 'types/itemTypes';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import {
   Paper,
   Table,
@@ -15,12 +14,15 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from 'styles/admin/store/ItemList.module.scss';
+import { mockInstance } from 'utils/mockAxios';
+import { toastState } from 'utils/recoil/toast';
 
 const itemListTableTitle: { [key: string]: string } = {
   itemId: 'ID',
-  itemName: '아이템명',
+  name: '아이템명',
   content: '설명',
-  imageUrl: '이미지',
+  itemType: '타입',
+  imageUri: '이미지',
   originalPrice: '원가',
   discount: '할인율',
   salePrice: '판매가격',
@@ -30,9 +32,10 @@ const itemListTableTitle: { [key: string]: string } = {
 
 const tableColumnName = [
   'itemId',
-  'itemName',
+  'name',
   'content',
-  'imageUrl',
+  'itemType',
+  'imageUri',
   'originalPrice',
   'discount',
   'salePrice',
@@ -40,142 +43,116 @@ const tableColumnName = [
   'delete',
 ];
 
+const MAX_CONTENT_LENGTH = 15;
+
 function ItemList() {
-  const [itemListData, setItemListData] = useState<IitemList>({
+  const [itemListData, setItemListData] = useState<ItemList>({
     itemList: [],
   });
-
-  const testData = [
-    {
-      itemId: 3,
-      itemName: '확성기',
-      content: '확성기 설명',
-      imageUrl: '/image/noti_empty.svg',
-      originalPrice: 42,
-      discount: 50,
-      salePrice: 21,
-    },
-    {
-      itemId: 2,
-      itemName: '프로필 변경권',
-      content: '프로필 설명',
-      imageUrl: 'no',
-      originalPrice: 50,
-      discount: 50,
-      salePrice: 25,
-    },
-    {
-      itemId: 1,
-      itemName: '프로필 배경 색상 변경',
-      content: '배경 색상 설명',
-      imageUrl: 'no',
-      originalPrice: 10,
-      discount: 50,
-      salePrice: 5,
-    },
-  ];
-
-  // store에서 사용하는 api라 mock api 겹칠까봐 사용안함
-  // api 연결 시 useCallback, instanceInManage, try catch로 변경
-  // const getItemListHandler = useMockAxiosGet<any>({
-  //     url: `items/store`,
-  //     setState: setItemListData,
-  //     err:  'HJ06',
-  //     type: 'setError'
-  // });
-
   const setModal = useSetRecoilState(modalState);
+  const setSnackBar = useSetRecoilState(toastState);
 
-  // 아이템 수정, 삭제 기능 수정 필요
-  // 아이템 input ref 적용 필요
-  // 이미지 부분 수정 적용 유저 프로필 수정에서 가져와야
-  const editItem = (itemInfo: IitemInfo) => {
+  // api 연결 시 instanceInManage로 변경
+  const getItemListHandler = useCallback(async () => {
+    try {
+      const res = await mockInstance.get(`items/store`);
+      setItemListData(res.data);
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'get itemlist',
+        severity: 'error',
+        message: 'API 요청에 문제가 발생했습니다.',
+        clicked: true,
+      });
+    }
+  }, []);
+
+  const editItem = (item: Item) => {
     setModal({
       modalName: 'ADMIN-ITEM_EDIT',
-      itemInfo: itemInfo,
+      item: item,
     });
   };
 
-  const deleteItem = (itemInfo: IitemInfo) => {
+  const deleteItem = (item: Item) => {
     setModal({
       modalName: 'ADMIN-ITEM_DELETE',
-      itemInfo: itemInfo,
+      item: item,
+    });
+  };
+
+  const openDetailModal = (item: Item) => {
+    setModal({
+      modalName: 'ADMIN-DETAIL_CONTENT',
+      detailTitle: item.name,
+      detailContent: item.content,
     });
   };
 
   useEffect(() => {
-    // getItemListHandler();
-    // 아래는 setter는 test용
-    setItemListData({ itemList: testData });
+    getItemListHandler();
   }, []);
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table aria-label='customized table'>
-          <TableHead>
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='customized table'>
+          <TableHead className={styles.tableHeader}>
             <TableRow>
               {tableColumnName.map((column, idx) => (
-                <TableCell key={idx}>{itemListTableTitle[column]}</TableCell>
+                <TableCell className={styles.tableHeaderItem} key={idx}>
+                  {itemListTableTitle[column]}
+                </TableCell>
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {itemListData.itemList.length > 0 ? (
-              itemListData.itemList.map((item: Iitem) => (
-                <TableRow key={item.itemId}>
+              itemListData.itemList.map((item: Item) => (
+                <TableRow className={styles.tableRow} key={item.itemId}>
                   {tableFormat['itemList'].columns.map(
                     (columnName: string, index: number) => {
                       return (
-                        <TableCell key={index}>
-                          {columnName === 'imageUrl' ? (
+                        <TableCell className={styles.tableBodyItem} key={index}>
+                          {columnName === 'imageUri' ? (
                             <Image
                               src={item[columnName]}
+                              alt='Item Iamge'
                               width={30}
                               height={30}
-                              alt='no'
                             />
-                          ) : columnName === 'itemId' ? (
-                            item[columnName as keyof Iitem].toString()
-                          ) : (
-                            <div key={index + 1}>
-                              <input
-                                key={index + 2}
-                                type='text'
-                                value={item[columnName as keyof Iitem]}
-                              />
+                          ) : item[columnName as keyof Item].toString().length >
+                            MAX_CONTENT_LENGTH ? (
+                            <div>
+                              {item[columnName as keyof Item]
+                                ?.toString()
+                                .slice(0, MAX_CONTENT_LENGTH)}
+                              <span
+                                style={{ cursor: 'pointer', color: 'grey' }}
+                                onClick={() => openDetailModal(item)}
+                              >
+                                ...더보기
+                              </span>
                             </div>
+                          ) : (
+                            item[columnName as keyof Item]?.toString()
                           )}
                         </TableCell>
                       );
                     }
                   )}
-                  <TableCell>
+                  <TableCell className={styles.tableBodyItem}>
                     <button
-                      onClick={() =>
-                        editItem({
-                          itemId: item.itemId,
-                          itemName: item.itemName,
-                          content: item.content,
-                          imageUrl: item.imageUrl,
-                          originalPrice: item.originalPrice,
-                          discount: item.discount,
-                        })
-                      }
+                      className={styles.editBtn}
+                      onClick={() => editItem(item)}
                     >
                       수정
                     </button>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className={styles.tableBodyItem}>
                     <button
-                      onClick={() =>
-                        deleteItem({
-                          itemId: item.itemId,
-                          itemName: item.itemName,
-                          content: item.content,
-                          imageUrl: item.imageUrl,
-                        })
-                      }
+                      className={styles.deleteBtn}
+                      onClick={() => deleteItem(item)}
                     >
                       삭제
                     </button>
@@ -183,8 +160,10 @@ function ItemList() {
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell>비어있습니다</TableCell>
+              <TableRow className={styles.tableRow}>
+                <TableCell className={styles.tableBodyItem}>
+                  비어있습니다
+                </TableCell>
               </TableRow>
             )}
           </TableBody>

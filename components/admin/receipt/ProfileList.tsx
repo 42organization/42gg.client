@@ -1,15 +1,10 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import {
-  Iprofile,
-  IprofileInfo,
-  IprofileTable,
-} from 'types/admin/adminReceiptType';
+import { Iprofile, IprofileTable } from 'types/admin/adminReceiptType';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import PageNation from 'components/Pagination';
 import {
   Paper,
@@ -21,16 +16,18 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from 'styles/admin/receipt/ProfileList.module.scss';
+import { mockInstance } from 'utils/mockAxios';
+import { toastState } from 'utils/recoil/toast';
 
 const profileTableTitle: { [key: string]: string } = {
   profileId: 'ID',
   date: '사용일자',
   intraId: '사용자',
-  imageUrl: '현재 이미지',
+  imageUri: '현재 이미지',
   delete: '삭제',
 };
 
-const tableColumnName = ['profileId', 'data', 'intraId', 'imageUrl', 'delete'];
+const tableColumnName = ['profileId', 'date', 'intraId', 'imageUri', 'delete'];
 
 function ProfileList() {
   const [profileData, setProfileData] = useState<IprofileTable>({
@@ -39,15 +36,19 @@ function ProfileList() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const setModal = useSetRecoilState(modalState);
+  const setSnackBar = useSetRecoilState(toastState);
 
-  // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler + 유저 검색 컴포넌트 추가
+  // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
 
-  // api 연결 시 useCallback, instanceInManage, try catch로 변경
-  const getProfileHandler = useMockAxiosGet<any>({
-    url: `/admin/images?page=${currentPage}&size=5`,
-    setState: (data) => {
+  // instanceInManage로 변경
+  const getProfileHandler = useCallback(async () => {
+    try {
+      const res = await mockInstance.get(
+        `/admin/images?page=${currentPage}&size=5`
+      );
       setProfileData({
-        profileList: data.profileList.map((profile: Iprofile) => {
+        profileList: res.data.profileList.map((profile: Iprofile) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
             new Date(profile.date)
           );
@@ -56,20 +57,23 @@ function ProfileList() {
             date: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
-        totalPage: data.totalPage,
+        totalPage: res.data.totalPage,
         currentPage: currentPage,
       });
-    },
-    err: 'HJ04',
-    type: 'setError',
-  });
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'get profile',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
+    }
+  }, [currentPage]);
 
-  const setModal = useSetRecoilState(modalState);
-
-  const deleteProfile = (profileInfo: IprofileInfo) => {
+  const deleteProfile = (profile: Iprofile) => {
     setModal({
       modalName: 'ADMIN-PROFILE_DELETE',
-      profileInfo: profileInfo,
+      profile: profile,
     });
   };
 
@@ -79,29 +83,31 @@ function ProfileList() {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table aria-label='customized table'>
-          <TableHead>
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='customized table'>
+          <TableHead className={styles.tableHeader}>
             <TableRow>
               {tableColumnName.map((columnName, idx) => (
-                <TableCell key={idx}>{profileTableTitle[columnName]}</TableCell>
+                <TableCell className={styles.tableHeaderItem} key={idx}>
+                  {profileTableTitle[columnName]}
+                </TableCell>
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {profileData.profileList.length > 0 ? (
               profileData.profileList.map((profile: Iprofile) => (
-                <TableRow key={profile.profileId}>
+                <TableRow className={styles.tableRow} key={profile.profileId}>
                   {tableFormat['profileList'].columns.map(
                     (columnName: string, index: number) => {
                       return (
-                        <TableCell key={index}>
-                          {columnName === 'imageUrl' ? (
+                        <TableCell className={styles.tableBodyItem} key={index}>
+                          {columnName === 'imageUri' ? (
                             <Image
                               src={profile[columnName]}
                               width={30}
                               height={30}
-                              alt='no'
+                              alt='ProfileImage'
                             />
                           ) : (
                             profile[columnName as keyof Iprofile].toString()
@@ -110,15 +116,10 @@ function ProfileList() {
                       );
                     }
                   )}
-                  <TableCell>
+                  <TableCell className={styles.tableBodyItem}>
                     <button
-                      onClick={() => {
-                        deleteProfile({
-                          profileId: profile.profileId,
-                          intraId: profile.intraId,
-                          imageUrl: profile.imageUrl,
-                        });
-                      }}
+                      className={styles.deleteBtn}
+                      onClick={() => deleteProfile(profile)}
                     >
                       삭제
                     </button>
@@ -126,14 +127,16 @@ function ProfileList() {
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell>비어있습니다</TableCell>
+              <TableRow className={styles.tableBodyItem}>
+                <TableCell className={styles.tableBodyItem}>
+                  비어있습니다
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </TableContainer>
-      <div>
+      <div className={styles.pageNationContainer}>
         <PageNation
           curPage={profileData.currentPage}
           totalPages={profileData.totalPage}

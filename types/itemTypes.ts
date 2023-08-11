@@ -1,13 +1,23 @@
 export interface Item {
   itemId: number;
-  itemName: string;
+  name: string;
   content: string;
-  imageUrl: string;
-  price: number;
+  itemType: string;
+  imageUri: string;
+  originalPrice: number;
   discount: number;
   salePrice: number;
 }
 
 export interface ItemList {
   itemList: Item[];
+}
+
+export interface Gift {
+  itemId: number;
+  ownerId: string;
+}
+
+export interface Purchase {
+  itemId: number;
 }

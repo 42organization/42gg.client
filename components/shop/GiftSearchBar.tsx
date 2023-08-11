@@ -5,10 +5,8 @@ import styles from 'styles/main/SearchBar.module.scss';
 import useSearchBar from 'hooks/useSearchBar';
 
 export default function GiftSearchBar({
-  recipient,
   setRecipient,
 }: {
-  recipient: string;
   setRecipient: Dispatch<SetStateAction<string>>;
 }) {
   const {
@@ -21,6 +19,12 @@ export default function GiftSearchBar({
     searchBarRef,
     handleKeyDown,
   } = useSearchBar();
+
+  useEffect(() => {
+    if (keyword === '') {
+      setRecipient('');
+    }
+  }, [keyword]);
 
   const handleClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -57,7 +61,6 @@ export default function GiftSearchBar({
         <div className={styles.dropdown}>
           {searchResult.length ? (
             searchResult.map((intraId: string) => (
-              // TODO: 선택한 유저 아이디를 FOR '검색한 사람 아이디' 부분에 넣어주기
               <div key={intraId} onClick={(e) => handleClick(e, intraId)}>
                 {intraId}
               </div>

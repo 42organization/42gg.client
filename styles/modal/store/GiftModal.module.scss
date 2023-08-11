@@ -24,6 +24,10 @@
     font-weight: 700;
     letter-spacing: 0.04rem;
     line-height: 200%;
+    span {
+      color: $norm-purple;
+      font-weight: 1000;
+    }
   }
 
   .itemInfo {
