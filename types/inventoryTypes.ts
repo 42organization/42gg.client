@@ -1,5 +1,3 @@
-export type StoreMode = 'BUY' | 'INVENTORY';
-
 export type InventoryItemStatus = 'BEFORE' | 'USING' | 'USED';
 
 export type ItemCodeType = 'MEGAPHONE';

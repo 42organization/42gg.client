@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { StoreMode } from 'types/inventoryTypes';
+import { StoreMode } from 'types/storeTypes';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { ICoin } from 'types/userTypes';
