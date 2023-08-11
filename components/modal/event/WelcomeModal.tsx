@@ -1,13 +1,13 @@
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'types/modalTypes';
 import useAxiosGet from 'hooks/useAxiosGet';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import { useState, useEffect } from 'react';
 import { instance } from 'utils/axios';
 import { CoinResult } from 'types/coinTypes';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import styles from 'styles/modal/event/WelcomeModal.module.scss';
+import { mockInstance } from 'utils/mockAxios';
 
 export default function WelcomeModal() {
   const setModal = useSetRecoilState<Modal>(modalState);
@@ -26,6 +26,7 @@ export default function WelcomeModal() {
         `/pingpong/users/attendance`
       );
       setCoin(res.data);
+      return res.data;
     } catch (error) {
       setError('SM01');
     }
@@ -35,16 +36,18 @@ export default function WelcomeModal() {
     postCoinHandler();
 	}, []); */
 
-  const getCoinHandler = useMockAxiosGet({
-    url: `/users/attendance`,
-    setState: setCoin,
-    err: 'SM01',
-    type: 'setError',
-  });
-
-  /*   useEffect(() => {
-    getCoinHandler();
-  }, []); */
+  const getCoinHandler = async () => {
+    try {
+      const res = await mockInstance.get(`/users/attendance`);
+      if (res && res.data) {
+        setCoin(res.data);
+        return res.data;
+      }
+    } catch (error) {
+      setError('SM01');
+      return null;
+    }
+  };
 
   const openPageManual = () => {
     window.open(
@@ -52,17 +55,19 @@ export default function WelcomeModal() {
     );
   };
 
-  if (!coin) return null;
-
   const openAttendanceCoin = async () => {
     try {
-      await getCoinHandler();
+      const updatedCoin = await getCoinHandler();
+      //const updatedCoin = await postCoinHandler();
+
+      if (!updatedCoin) return null;
+
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {
-          afterCoin: coin?.afterCoin,
-          beforeCoin: coin?.beforeCoin,
-          coinIncrement: coin?.coinIncrement,
+          afterCoin: updatedCoin?.afterCoin,
+          beforeCoin: updatedCoin?.beforeCoin,
+          coinIncrement: updatedCoin?.coinIncrement,
         },
       });
     } catch (error) {
@@ -71,7 +76,6 @@ export default function WelcomeModal() {
   };
 
   const openStatChangeModal = () => {
-    //getCoinHandler();
     setModal({
       modalName: 'FIXED-STAT',
       exp: {
