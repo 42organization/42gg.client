@@ -33,3 +33,14 @@ export const racketTypes = [
 export interface ICoin {
   coin: number;
 }
+
+export interface ICoinHistory {
+  history: string;
+  amount: number;
+  createdAt: Date;
+}
+
+export interface ICoinHistoryList {
+  useCoinList: ICoinHistory[];
+  totalPage: number;
+}
