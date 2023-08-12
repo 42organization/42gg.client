@@ -1,0 +1,39 @@
+@import 'styles/common.scss';
+
+.data {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff41;
+  padding: 0.5rem;
+  margin-bottom: 0.2rem;
+  font-size: 1rem;
+  .plus {
+    color: #00ff00;
+  }
+  .minus {
+    color: #ff0000;
+  }
+  .section1 {
+    display: flex;
+    align-items: center;
+    .icon {
+      display: flex;
+      align-items: center;
+      margin-right: 0.5rem;
+    }
+    .content {
+      .history {
+        color: black;
+      }
+      .date {
+        font-size: 0.8rem;
+        color: #3b363b;
+      }
+    }
+  }
+  .section2 {
+    display: flex;
+    align-items: center;
+    margin-left: 3rem;
+  }
+}
