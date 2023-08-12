@@ -123,7 +123,7 @@
 
 .tierContainer {
   width: 6.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   border-radius: $mini-radius;
   font-size: $small-font;
   align-items: center;
@@ -131,7 +131,8 @@
   background-color: #48c7ea;
   .tierId {
     @include tierNumber;
-    width: 6.5rem;
+    font-size: 0.9rem;
+    text-align: center;
   }
 }
 

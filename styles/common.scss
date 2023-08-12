@@ -329,11 +329,8 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin tierNumber() {
-  display: flex;
-  flex-direction: row;
   font-size: 0.8rem;
-  //font-family: Gugi;
-  align-items: center;
+  font-family: Gugi;
   background: linear-gradient(
     180.89deg,
     rgba(255, 255, 102, 1) 26.68%,
@@ -396,9 +393,9 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
     background: linear-gradient(
       180.89deg,
       rgba(255, 102, 102, 0.552801) 0%,
-      rgba(255, 255, 102, 0.552801) 16.66%,
+      rgba(255, 255, 102, 0.552801) 27.66%,
       rgba(128, 255, 128, 0.552801) 33.33%,
-      rgba(102, 178, 255, 0.552801) 50%,
+      rgba(102, 178, 255, 0.552801) 40%,
       rgba(102, 102, 102, 0.3) 66.66%,
       rgba(255, 209, 91, 0.51) 83.33%,
       rgba(255, 233, 194, 0.552801) 100%
