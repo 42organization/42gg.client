@@ -3,9 +3,10 @@ import styles from 'styles/modal/CoinPopcon.module.scss';
 
 interface amountProps {
   amount: number;
+  coin: number;
 }
 
-export default function CoinPopcon({ amount }: amountProps) {
+export default function CoinPopcon({ amount, coin }: amountProps) {
   const [circles, setCircles] = useState<(HTMLDivElement | null)[]>([]);
   const tilts = ['r', 'l'];
   const height = [0.015, 0.02, 0.025];
@@ -24,7 +25,7 @@ export default function CoinPopcon({ amount }: amountProps) {
   const handleClickMouse = (e: React.MouseEvent) => {
     const numElement = document.createElement('span');
     numElement.className = styles.appear;
-    numElement.textContent = `+${amount}`;
+    numElement.textContent = `+${coin}`;
     numElement.style.position = 'fixed';
     numElement.style.top = e.clientY + 'px';
     numElement.style.left = e.clientX - 20 + 'px';
@@ -68,7 +69,7 @@ export default function CoinPopcon({ amount }: amountProps) {
             prevCircles.filter((existingCircle) => existingCircle !== circle)
           );
         }
-      }, 3);
+      }, 5);
     }
     setTimeout(() => {
       document.body.removeChild(numElement);

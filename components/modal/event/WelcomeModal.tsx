@@ -110,7 +110,7 @@ export default function WelcomeModal() {
               type='button'
               value='출석하기'
             />
-            {buttonState && <CoinPopcon amount={6} />}
+            {buttonState && <CoinPopcon amount={10} coin={1} />}
           </div>
         </div>
       </div>

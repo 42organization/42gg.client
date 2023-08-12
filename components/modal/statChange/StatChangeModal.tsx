@@ -11,14 +11,12 @@ import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import { CoinResult } from 'types/coinTypes';
 import { errorState } from 'utils/recoil/error';
 import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
-import CoinPopcon from '../CoinPopcon';
 
 export default function StatChangeModal({ gameId, mode }: Exp) {
   const setModal = useSetRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const setError = useSetRecoilState(errorState);
   const [stat, setStat] = useState<GameResult | undefined>();
-  const [showCoinPopcon, setShowCoinPopcon] = useState(false);
 
   /*     const getExpHandler = useAxiosGet({
     url: `/pingpong/games/${gameId}/result/${mode?.toLowerCase()}`,
@@ -45,7 +43,6 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
 
   const openCoin = async () => {
     try {
-      setShowCoinPopcon(true);
       if (!stat) return null;
       setModal({
         modalName: 'COIN-ANIMATION',
@@ -66,7 +63,6 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
         className={`${styles.fixedContainer} ${styles.front}`}
         onClick={closeModal}
       />
-      <div>{<CoinPopcon amount={5} />}</div>
       <div className={styles.container}>
         <div className={styles.emoji}>🏓</div>
         {mode === 'RANK' && stat && <PppStat stat={stat} />}

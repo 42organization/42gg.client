@@ -1,5 +1,5 @@
 $anim_duration: 0.65;
-$anim_delay: 0.1;
+$anim_delay: 0;
 
 .circle {
   position: fixed;
@@ -15,7 +15,7 @@ $anim_delay: 0.1;
 
 .appear {
   position: fixed;
-  z-index: 6 !important;
+  z-index: 6;
   font-size: 2rem;
   text-align: center;
   color: white;
@@ -34,21 +34,17 @@ $anim_delay: 0.1;
     transform: translatey(0px);
     opacity: 0;
   }
-  20% {
+  25% {
     transform: translatey(-25px);
     opacity: 0.25;
   }
-  40% {
-    transform: translatey(-40px);
+  50% {
+    transform: translatey(-50px);
     opacity: 0.5;
   }
-  60% {
-    transform: translatey(-60px);
-    opacity: 0.7;
-  }
-  80% {
-    transform: translatey(-80px);
-    opacity: 1;
+  75% {
+    transform: translatey(-75px);
+    opacity: 0.75;
   }
   100% {
     transform: translatey(-100px);
