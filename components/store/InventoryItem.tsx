@@ -68,7 +68,7 @@ export function InvetoryItem({ item }: inventoryItemProps) {
       </div>
       <div className={styles.overlay}>
         {itemStatus === 'USING' ? (
-          <button onClick={handleEditItem}>편집하기</button>
+          <button onClick={handleEditItem}>삭제하기</button>
         ) : (
           <button onClick={handleUseItem}>사용하기</button>
         )}
