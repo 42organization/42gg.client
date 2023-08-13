@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
-import { HexColorPicker, HexColorInput } from 'react-colorful';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { UseItemRequest } from 'types/inventoryTypes';
@@ -11,6 +10,7 @@ import {
 import { ItemCautionContainer } from './ItemCautionContainer';
 import IdPreviewComponent from './IdPreviewComponent';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
+import ColorPicker from './ColorPicker';
 
 type ChangeIdColorModalProps = UseItemRequest;
 
@@ -36,10 +36,7 @@ export default function ChangeIdColorModal({
         </div>
         <div className={styles.section}>
           <div className={styles.sectionTitle}>색상 선택</div>
-          <div className={styles.colorPicker}>
-            <HexColorPicker color={color} onChange={setColor} />
-            <HexColorInput color={color} onChange={setColor} prefixed alpha />
-          </div>
+          <ColorPicker color={color} setColor={setColor} />
         </div>
         <ItemCautionContainer caution={caution} />
         <ModalButtonContainer>

@@ -1,0 +1,27 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+  grid-gap: 0.5rem;
+}
+
+.colorPreview {
+  padding: 0.5rem;
+  border: 3px solid #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+}
+
+.colorInput {
+  border: 3px solid #fff;
+  border-radius: 0.5rem;
+}
+
+.colorPicker {
+  grid-column: 1 / 3;
+}
