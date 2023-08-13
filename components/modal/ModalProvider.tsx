@@ -39,6 +39,7 @@ import AdminCheckSendNotiModal from './admin/AdminCheckSendNoti';
 // Inventory Modal
 import NewMegaphoneModal from './store/inventory/NewMegaphoneModal';
 import EditMegaphoneModal from './store/inventory/EditMegaphoneModal';
+import ChangeIdColorModal from './store/inventory/ChangeIdColorModal';
 
 export default function ModalProvider() {
   const [
@@ -129,6 +130,9 @@ export default function ModalProvider() {
     ) : null,
     'EDIT-ITEM-MEGAPHONE': useItemInfo ? (
       <EditMegaphoneModal {...useItemInfo} />
+    ) : null,
+    'USE-ITEM-TEXT_COLOR': useItemInfo ? (
+      <ChangeIdColorModal {...useItemInfo} />
     ) : null,
   };
 
