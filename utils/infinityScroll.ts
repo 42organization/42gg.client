@@ -46,7 +46,7 @@ export function InfinityScroll(
       onError: (e: unknown) => {
         if (axios.isAxiosError(e)) {
           setError(errorCode);
-        } else setError('JY02'); // axios에서 발생한 에러가 아닌 경우
+        } else setError('JY03'); // axios에서 발생한 에러가 아닌 경우
       },
       retry: 0,
       keepPreviousData: true,

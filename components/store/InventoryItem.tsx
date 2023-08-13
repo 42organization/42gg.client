@@ -20,14 +20,14 @@ export function InvetoryItem({ item }: inventoryItemProps) {
     itemName,
     imageUri,
     purchaserIntra,
-    itemCode,
+    itemType,
     itemStatus,
   } = item;
 
   function handleUseItem(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
     setModal({
-      modalName: `USE-ITEM-${item.itemCode}`,
+      modalName: `USE-ITEM-${item.itemType}`,
       useItemInfo: {
         receiptId: item.receiptId,
       },
@@ -36,11 +36,16 @@ export function InvetoryItem({ item }: inventoryItemProps) {
 
   function handleEditItem(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault;
-    if (itemCode !== 'MEGAPHONE') {
+    if (itemType !== 'MEGAPHONE') {
       alert('편집할 수 없는 아이템입니다.');
       return;
     }
-    // EditItemModal
+    setModal({
+      modalName: `EDIT-ITEM-MEGAPHONE`,
+      useItemInfo: {
+        receiptId: item.receiptId,
+      },
+    });
   }
 
   return (
@@ -63,7 +68,7 @@ export function InvetoryItem({ item }: inventoryItemProps) {
       </div>
       <div className={styles.overlay}>
         {itemStatus === 'USING' ? (
-          <button onClick={handleEditItem}>편집하기</button>
+          <button onClick={handleEditItem}>삭제하기</button>
         ) : (
           <button onClick={handleUseItem}>사용하기</button>
         )}
