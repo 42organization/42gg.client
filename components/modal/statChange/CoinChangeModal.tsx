@@ -20,12 +20,7 @@ export default function CoinChangeModal(coin: CoinResult) {
         onClick={closeModal}
       />
       <div>
-        {
-          <CoinPopcon
-            amount={coin.coinIncrement * 3}
-            coin={coin.coinIncrement}
-          />
-        }
+        <CoinPopcon amount={coin.coinIncrement * 3} coin={coin.coinIncrement} />
       </div>
       <div className={styles.container}>
         <div className={styles.emoji}>💲</div>

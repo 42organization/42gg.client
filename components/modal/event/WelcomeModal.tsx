@@ -67,9 +67,9 @@ export default function WelcomeModal() {
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {
-          afterCoin: updatedCoin?.afterCoin,
-          beforeCoin: updatedCoin?.beforeCoin,
-          coinIncrement: updatedCoin?.coinIncrement,
+          afterCoin: updatedCoin.afterCoin,
+          beforeCoin: updatedCoin.beforeCoin,
+          coinIncrement: updatedCoin.coinIncrement,
         },
       });
     } catch (error) {
