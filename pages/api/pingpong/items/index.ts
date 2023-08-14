@@ -43,14 +43,14 @@ const item3: InventoryItem = {
 
 const item4: InventoryItem = {
   receiptId: 4,
-  itemName: '테스트4',
+  itemName: '이름 색깔 변경',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'kim_takgu',
   itemStatus: 'USED',
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
-  itemType: 'MEGAPHONE',
+  itemType: 'TEXT_COLOR',
   createdAt: '2021-08-07',
 };
 

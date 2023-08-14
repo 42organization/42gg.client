@@ -61,6 +61,7 @@ function makeUser(user: NormalUser | RankUser) {
   return {
     intraId: user.intraId,
     rank: user.rank,
+    idColor: '#000000', // TODO : 랭크 정보에 아이디 색상 정보도 필요함.
     statusMessage: makeStatusMessage(user.statusMessage),
     point: !isRankModeType(user) ? user.exp : makeInit(user.ppp),
     level: !isRankModeType(user) ? user.level : null,

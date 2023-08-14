@@ -7,6 +7,7 @@ import PlayerImage from 'components/PlayerImage';
 
 interface User {
   intraId: string;
+  idColor: string;
   rank: number;
   statusMessage: string;
   point: number | string;
@@ -16,11 +17,17 @@ interface User {
 
 interface RankListItemProps {
   user: User;
+  idColorPreview?: string;
 }
 
-export default function RankListItem({ user }: RankListItemProps) {
+export default function RankListItem({
+  user,
+  idColorPreview,
+}: RankListItemProps) {
   const Mode = useRecoilValue(colorToggleSelector);
-  const { rank, intraId, statusMessage, point, level, tierImageUri } = user;
+  // TODO : 랭크 정보에 아이디 색상 정보도 필요함.
+  const { rank, intraId, statusMessage, point, level, tierImageUri, idColor } =
+    user;
   const myIntraId = useRecoilValue(userState).intraId;
   const wrapStyle = {
     topStandard: rank < 4 ? styles.top : styles.standard,
@@ -53,7 +60,14 @@ export default function RankListItem({ user }: RankListItemProps) {
       ) : (
         ''
       )}
-      <div className={styles.intraId}>{makeIntraIdLink()}</div>
+      <div
+        style={{
+          color: idColorPreview === undefined ? idColor : idColorPreview,
+        }}
+        className={styles.intraId}
+      >
+        {makeIntraIdLink()}
+      </div>
       <div className={styles.statusMessage}>{statusMessage}</div>
       <div className={styles.ppp}>{point}</div>
     </div>

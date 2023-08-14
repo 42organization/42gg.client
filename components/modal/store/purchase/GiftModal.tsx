@@ -5,6 +5,10 @@ import { FaCoins } from 'react-icons/fa';
 import styles from 'styles/modal/store/GiftModal.module.scss';
 import { PriceTag } from 'types/modalTypes';
 import { Gift } from 'types/itemTypes';
+import {
+  ModalButtonContainer,
+  ModalButton,
+} from 'components/modal/ModalButton';
 
 export default function GiftModal({ itemId, product, price }: PriceTag) {
   const [recipient, setRecipient] = useState<string>('');
@@ -48,14 +52,10 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
           <p>⚠ 선물한 아이템은 환불 및 취소가 불가합니다 ⚠</p>
         </div>
       </div>
-      <div className={styles.buttons}>
-        <div className={styles.negative}>
-          <input onClick={onCancel} type='button' value='취소' />
-        </div>
-        <div className={styles.positive}>
-          <input onClick={onPurchase} type='button' value='보내기' />
-        </div>
-      </div>
+      <ModalButtonContainer>
+        <ModalButton style='negative' value='취소' onClick={onCancel} />
+        <ModalButton style='positive' value='보내기' onClick={onPurchase} />
+      </ModalButtonContainer>
     </div>
   );
 }
