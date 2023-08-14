@@ -19,8 +19,6 @@ const useGiftModal = (gift: Gift) => {
     }
     try {
       const res = await mockInstance.post(`/items/gift/${gift.itemId}`, gift);
-      // 테스트용 -> 지우기
-      console.log(`message: ${res?.data?.message}`);
       if (res.status === 201) {
         // TODO: alert 대신 toast 띄우거나 아무것도 안하기
         alert(`${gift.ownerId}님께 선물이 전달되었습니다`);
@@ -32,7 +30,6 @@ const useGiftModal = (gift: Gift) => {
     } catch (error) {
       setError('HB02');
     }
-    // console.log(`**itemId: ${gift.itemId}, ownerId: ${gift.ownerId}`);
     setModal({ modalName: null });
   };
 

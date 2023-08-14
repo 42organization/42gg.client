@@ -9,9 +9,6 @@ import { FaCoins } from 'react-icons/fa';
 export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
   const setModal = useSetRecoilState<Modal>(modalState);
 
-  // TODO: 상점 페이지에서 코인 정보 받아오기
-  //   const coin = 1000;
-
   const handleGift = () => {
     setModal({
       modalName: 'PURCHASE-GIFT',
@@ -44,7 +41,7 @@ export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
     <div className={styles.itemCard}>
       <div className={styles.preview}>
         <div className={styles.img}>
-          <Image src={item.imageUrl} alt={item.itemName} fill />
+          <Image src={item.imageUri} alt={item.itemName} fill />
         </div>
         {item.discount && <div className={styles.badge}>{item.discount}%</div>}
       </div>
@@ -59,7 +56,7 @@ export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
                 item.discount ? styles.onDiscount : styles.originalPrice
               }
             >
-              {item.price} <FaCoins />
+              {item.originalPrice} <FaCoins />
             </h5>
             {item.discount !== 0 && (
               <h5 className={styles.discountedPrice}>

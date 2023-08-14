@@ -4,6 +4,10 @@ import { FaCoins } from 'react-icons/fa';
 import styles from 'styles/modal/store/BuyModal.module.scss';
 import { PriceTag } from 'types/modalTypes';
 import { Purchase } from 'types/itemTypes';
+import {
+  ModalButtonContainer,
+  ModalButton,
+} from 'components/modal/ModalButton';
 
 export default function BuyModal({ itemId, product, price }: PriceTag) {
   const [purchaseItem, setPurchaseItem] = useState<Purchase>({ itemId: -1 });
@@ -36,14 +40,10 @@ export default function BuyModal({ itemId, product, price }: PriceTag) {
           <p>⚠ 구매한 아이템은 환불이 불가합니다 ⚠</p>
         </div>
       </div>
-      <div className={styles.buttons}>
-        <div className={styles.negative}>
-          <input onClick={onCancel} type='button' value='아니오' />
-        </div>
-        <div className={styles.positive}>
-          <input onClick={onPurchase} type='button' value='예' />
-        </div>
-      </div>
+      <ModalButtonContainer>
+        <ModalButton style='negative' value='아니오' onClick={onCancel} />
+        <ModalButton style='positive' value='예' onClick={onPurchase} />
+      </ModalButtonContainer>
     </div>
   );
 }

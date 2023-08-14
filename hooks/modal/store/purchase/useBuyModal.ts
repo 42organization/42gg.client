@@ -15,8 +15,6 @@ const useBuyModal = (purchasedItem: Purchase) => {
         `/items/purchases/${purchasedItem.itemId}`,
         purchasedItem
       );
-      // 테스트용 -> 지우기
-      console.log(`message: ${res?.data?.message}`);
       // TODO: alert 대신 toast 띄우거나 아무것도 안하기
       alert(`구매 성공!`);
     } catch (error) {

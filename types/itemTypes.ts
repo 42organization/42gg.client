@@ -1,6 +1,6 @@
 export interface Item {
   itemId: number;
-  name: string;
+  itemName: string;
   content: string;
   itemType: string;
   imageUri: string;
