@@ -39,6 +39,7 @@ import AdminCheckSendNotiModal from './admin/AdminCheckSendNoti';
 // Inventory Modal
 import NewMegaphoneModal from './store/inventory/NewMegaphoneModal';
 import EditMegaphoneModal from './store/inventory/EditMegaphoneModal';
+import ProfileImageModal from './store/inventory/ProfileImageModal';
 
 export default function ModalProvider() {
   const [
@@ -126,6 +127,9 @@ export default function ModalProvider() {
       ) : null,
     'USE-ITEM-MEGAPHONE': useItemInfo ? (
       <NewMegaphoneModal {...useItemInfo} />
+    ) : null,
+    'USE-ITEM-PROFILE_IMAGE': useItemInfo ? (
+      <ProfileImageModal {...useItemInfo} />
     ) : null,
     'EDIT-ITEM-MEGAPHONE': useItemInfo ? (
       <EditMegaphoneModal {...useItemInfo} />
