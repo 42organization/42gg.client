@@ -140,9 +140,11 @@ export default function ModalProvider() {
     if (modalName?.split('-')[0] === 'FIXED') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
       if (modalName === 'MATCH-CANCEL') setReloadMatch(true);
-      else if (modalName === 'EVENT-ANNOUNCEMENT' && isAttended)
+      else if (modalName === 'EVENT-ANNOUNCEMENT' && isAttended) {
         setModal({ modalName: 'EVENT-WELCOME' });
-      else setModal({ modalName: null });
+      } else {
+        setModal({ modalName: null });
+      }
     }
   };
 

@@ -36,8 +36,11 @@ export default function AnnouncementModal({
     } else {
       localStorage.removeItem('announcementTime');
     }
-    if (isAttended) setModal({ modalName: 'EVENT-WELCOME' });
-    else setModal({ modalName: null });
+    if (isAttended) {
+      setModal({ modalName: 'EVENT-WELCOME' });
+    } else {
+      setModal({ modalName: null });
+    }
   };
 
   useEffect(() => {
