@@ -49,7 +49,7 @@ function ReceiptList() {
   const setSnackBar = useSetRecoilState(toastState);
 
   // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
-  const initSeaerch = useCallback((intraId?: string) => {
+  const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
     setCurrentPage(1);
   }, []);
@@ -73,8 +73,13 @@ function ReceiptList() {
         totalPage: res.data.totalPage,
         currentPage: currentPage,
       });
-    } catch (e) {
-      console.error('HJ00');
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'get user receipt',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
     }
   }, [intraId, currentPage]);
 
@@ -113,8 +118,8 @@ function ReceiptList() {
 
   return (
     <>
-      <div>
-        <AdminSearchBar initSearch={initSeaerch} />
+      <div className={styles.searchWrap}>
+        <AdminSearchBar initSearch={initSearch} />
       </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
