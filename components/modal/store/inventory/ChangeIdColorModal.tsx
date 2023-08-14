@@ -31,7 +31,7 @@ export default function ChangeIdColorModal({
   async function handleChangeIdColor() {
     const data: UseIdColorRequest = {
       receiptId: receiptId,
-      color: color,
+      textColor: color,
     };
     // 색상 입력값 확인.
     const ret = confirm(
