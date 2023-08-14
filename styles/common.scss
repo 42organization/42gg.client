@@ -331,52 +331,22 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 @mixin tierNumber() {
   font-size: 0.8rem;
   font-family: Gugi;
-  background: linear-gradient(
-    180.89deg,
-    rgba(255, 255, 102, 1) 26.68%,
-    rgba(204, 204, 0, 1) 47.47%,
-    rgba(255, 255, 51, 1) 65.76%,
-    rgba(139, 139, 0, 1) 84.03%
-  );
+  background: black;
   @include txtColor();
   &.tierId1 {
-    background: linear-gradient(
-      180.89deg,
-      rgba(255, 102, 102, 0.552801) 26.68%,
-      rgba(204, 0, 0, 0.3) 47.47%,
-      rgba(255, 51, 51, 0.51) 65.76%,
-      rgba(139, 0, 0, 0) 84.03%
-    );
+    background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
     @include txtColor();
   }
   &.tierId2 {
-    background: linear-gradient(
-      180.89deg,
-      rgba(255, 255, 102, 1) 26.68%,
-      rgba(204, 204, 0, 1) 47.47%,
-      rgba(255, 255, 51, 1) 65.76%,
-      rgba(139, 139, 0, 1) 84.03%
-    );
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
     @include txtColor();
   }
   &.tierId3 {
-    background: linear-gradient(
-      180.89deg,
-      rgba(128, 255, 128, 1) 26.68%,
-      rgba(0, 204, 0, 1) 47.47%,
-      rgba(51, 255, 51, 1) 65.76%,
-      rgba(0, 139, 0, 1) 84.03%
-    );
+    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
     @include txtColor();
   }
   &.tierId4 {
-    background: linear-gradient(
-      180.89deg,
-      rgba(102, 178, 255, 0.552801) 26.68%,
-      rgba(0, 102, 204, 0.3) 47.47%,
-      rgba(51, 153, 255, 0.51) 65.76%,
-      rgba(0, 90, 139, 0) 84.03%
-    );
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
     @include txtColor();
   }
   &.tierId5 {
@@ -391,14 +361,13 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   }
   &.tierId6 {
     background: linear-gradient(
-      180.89deg,
-      rgba(255, 102, 102, 0.552801) 0%,
-      rgba(255, 255, 102, 0.552801) 27.66%,
-      rgba(128, 255, 128, 0.552801) 33.33%,
-      rgba(102, 178, 255, 0.552801) 40%,
-      rgba(102, 102, 102, 0.3) 66.66%,
-      rgba(255, 209, 91, 0.51) 83.33%,
-      rgba(255, 233, 194, 0.552801) 100%
+      90deg,
+      rgba(239, 80, 80, 0.553) 15%,
+      rgba(255, 255, 102, 0.552801) 35.66%,
+      rgba(77, 233, 77, 0.553) 45.33%,
+      rgba(48, 145, 241, 0.553) 70%,
+      rgba(102, 102, 102, 0.3) 80.66%,
+      rgba(255, 209, 91, 0.51) 100%
     );
     @include txtColor();
   }
