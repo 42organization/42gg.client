@@ -24,7 +24,7 @@ const useAnnouncementCheck = (presentPath: string, user: User) => {
     type: 'setError',
   });
 
-  useEffect(() => {
+  const announcementHandler = () => {
     if (presentPath === '/') {
       if (
         !announcementTime ||
@@ -35,12 +35,17 @@ const useAnnouncementCheck = (presentPath: string, user: User) => {
     } else {
       setModal({ modalName: null });
     }
-  }, [presentPath]);
+  };
 
-  useEffect(() => {
-    if (user.isAttended && presentPath === '/') {
+  const attendedHandler = () => {
+    if (!user.isAttended && presentPath === '/') {
       setModal({ modalName: 'EVENT-WELCOME' });
     }
+  };
+
+  useEffect(() => {
+    announcementHandler();
+    attendedHandler();
   }, [user.isAttended, presentPath]);
 };
 

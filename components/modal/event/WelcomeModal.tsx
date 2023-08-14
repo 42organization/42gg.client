@@ -67,6 +67,7 @@ export default function WelcomeModal() {
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {
+          isAttended: true,
           afterCoin: updatedCoin.afterCoin,
           beforeCoin: updatedCoin.beforeCoin,
           coinIncrement: updatedCoin.coinIncrement,

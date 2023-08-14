@@ -47,6 +47,7 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {
+          isAttended: false,
           afterCoin: stat.afterCoin,
           beforeCoin: stat.beforeCoin,
           coinIncrement: stat.coinIncrement,
