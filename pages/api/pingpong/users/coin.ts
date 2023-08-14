@@ -75,6 +75,18 @@ const coinTrans10: ICoinHistory = {
   createdAt: new Date('2023-03-01 00:30:25.43464'),
 };
 
+const coinTrans11: ICoinHistory = {
+  history: '출석',
+  amount: 1,
+  createdAt: new Date('2023-03-11 00:30:25.343244544'),
+};
+
+const coinTrans12: ICoinHistory = {
+  history: '출석',
+  amount: 1,
+  createdAt: new Date('2023-03-01 00:30:25.9655554'),
+};
+
 const CoinHistoryList: ICoinHistory[] = [
   coinTrans1,
   coinTrans2,
@@ -86,15 +98,30 @@ const CoinHistoryList: ICoinHistory[] = [
   coinTrans8,
   coinTrans9,
   coinTrans10,
+  coinTrans11,
+  coinTrans12,
 ];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { page, size } = req.query;
-
-  if (page && size) {
+  const { page, size } = req.query as { page: string; size: string };
+  if (page) {
     // TEST : slice로 리스트 자르기 (10 넣으면 빈배열) && page 숫자 변경해서 테스트 가능
-    const TotalCoinHistory = createCoinHistoryReq(CoinHistoryList.slice(0), 1);
-    res.status(200).json(TotalCoinHistory);
+    const TOTAL_PAGE = 3;
+    const temp = createCoinHistoryReq(CoinHistoryList, TOTAL_PAGE);
+    const resData: ICoinHistoryList = {
+      useCoinList: [],
+      totalPage: temp.totalPage,
+    };
+    const PAGE = parseInt(page);
+    const SIZE = parseInt(size);
+    if (PAGE === 1) {
+      resData.useCoinList = temp.useCoinList.slice(0, SIZE);
+    } else if (PAGE === 2) {
+      resData.useCoinList = temp.useCoinList.slice(SIZE, 2 * SIZE);
+    } else if (PAGE === 3) {
+      resData.useCoinList = temp.useCoinList.slice(2 * SIZE);
+    }
+    res.status(200).json(resData);
   } else {
     res.status(200).json(coinData);
   }

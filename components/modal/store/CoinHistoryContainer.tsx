@@ -1,26 +1,41 @@
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import { useEffect, useState } from 'react';
 import CoinHistoryDetails from './CoinHistoryDetails';
-import { ICoinHistoryList } from 'types/userTypes';
 import styles from 'styles/modal/store/CoinHistoryContainer.module.scss';
+import { mockInstance } from 'utils/mockAxios';
+import { useSetRecoilState } from 'recoil';
+import { errorState } from 'utils/recoil/error';
+import PageNation from 'components/Pagination';
+import { ICoinHistoryTable } from 'types/userTypes';
 
-// TODO: 페이지네이션 구현
 export default function CoinHistoryContainer() {
-  const [coinHistoryList, setCoinHistoryList] = useState<ICoinHistoryList>({
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [coinHistoryList, setCoinHistoryList] = useState<ICoinHistoryTable>({
     useCoinList: [],
     totalPage: 0,
+    currentPage: 0,
   });
+  const setError = useSetRecoilState(errorState);
 
   useEffect(() => {
     getCoinHistoryList();
-  }, []);
+    console.log('coin history: ', coinHistoryList);
+  }, [currentPage]);
 
-  const getCoinHistoryList = useMockAxiosGet({
-    url: '/users/coin?page=1&size=5',
-    setState: setCoinHistoryList,
-    err: 'HB03',
-    type: 'setError',
-  });
+  const getCoinHistoryList = async () => {
+    try {
+      const res = await mockInstance.get(
+        `/users/coin/?page=${currentPage}&size=5`
+      );
+      console.log('coin history: ', res.data);
+      setCoinHistoryList({
+        useCoinList: res.data.useCoinList,
+        totalPage: res.data.totalPage,
+        currentPage: currentPage,
+      });
+    } catch (e) {
+      setError('HB03');
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -34,6 +49,15 @@ export default function CoinHistoryContainer() {
           />
         ))
       )}
+      <div>
+        <PageNation
+          curPage={currentPage}
+          totalPages={coinHistoryList.totalPage}
+          pageChangeHandler={(pageNumber: number) => {
+            setCurrentPage(pageNumber);
+          }}
+        />
+      </div>
     </div>
   );
 }

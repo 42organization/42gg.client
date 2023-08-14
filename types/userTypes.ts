@@ -44,3 +44,9 @@ export interface ICoinHistoryList {
   useCoinList: ICoinHistory[];
   totalPage: number;
 }
+
+export interface ICoinHistoryTable {
+  useCoinList: ICoinHistory[];
+  totalPage: number;
+  currentPage: number;
+}
