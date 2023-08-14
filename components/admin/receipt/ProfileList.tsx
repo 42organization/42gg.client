@@ -114,7 +114,7 @@ function ProfileList() {
 
   useEffect(() => {
     intraId ? getUserProfileHandler() : getAllProfileHandler();
-  }, [intraId, getUserProfileHandler, getAllProfileHandler]);
+  }, [intraId, getUserProfileHandler, getAllProfileHandler, modal]);
 
   return (
     <>

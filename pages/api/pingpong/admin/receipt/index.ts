@@ -153,6 +153,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         (receipt: Ireceipt) =>
           receipt.ownerIntra === intraId || receipt.purchaserIntra === intraId
       );
+      resData.totalPage = 1;
     } else {
       if (page) {
         if (parseInt(page) === resData.totalPage) {
