@@ -70,7 +70,7 @@ const profile9: Iprofile = {
 };
 
 const profile10: Iprofile = {
-  profileId: 5,
+  profileId: 10,
   date: new Date('2023-07-01 10:10:10'),
   intraId: 'hyungjpa1',
   imageUri: '/image/noti_empty.svg',

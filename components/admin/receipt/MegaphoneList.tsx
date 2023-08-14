@@ -61,7 +61,6 @@ function MegaphoneList() {
       const res = await mockInstance.get(
         `/admin/megaphones/history?intraId=${intraId}&page=${currentPage}&size=10`
       );
-      setIntraId(intraId);
       setMegaphoneData({
         megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {
           const { year, month, date, hour, min } = getFormattedDateToString(

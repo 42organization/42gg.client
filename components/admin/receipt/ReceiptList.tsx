@@ -59,7 +59,6 @@ function ReceiptList() {
       const res = await mockInstance.get(
         `/admin/receipt/?intraId=${intraId}&page=${currentPage}&size=10`
       );
-      setIntraId(intraId);
       setReceiptData({
         receiptList: res.data.receiptList.map((receipt: Ireceipt) => {
           const { year, month, date, hour, min } = getFormattedDateToString(

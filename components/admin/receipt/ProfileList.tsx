@@ -52,7 +52,6 @@ function ProfileList() {
       const res = await mockInstance.get(
         `/admin/images?intraId=${intraId}&page=${currentPage}&size=5`
       );
-      setIntraId(intraId);
       setProfileData({
         profileList: res.data.profileList.map((profile: Iprofile) => {
           const { year, month, date, hour, min } = getFormattedDateToString(
