@@ -42,15 +42,11 @@ const useGetUserSeason = (presentPath: string) => {
   });
 
   useEffect(() => {
-    if (user.isAttended && presentPath === '/' && isLogIn) {
-      setModal({ modalName: 'EVENT-WELCOME' });
-    }
-  }, [user.isAttended, presentPath, isLogIn]);
-
-  useEffect(() => {
     getUserHandler();
     getSeasonListHandler();
   }, [presentPath, isLogIn]);
+
+  return [user];
 };
 
 export default useGetUserSeason;

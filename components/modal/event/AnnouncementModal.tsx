@@ -9,6 +9,7 @@ import 'react-quill/dist/quill.bubble.css';
 
 type AnnouncementModalProps = {
   announcement: Announcement;
+  isAttended?: boolean;
 };
 
 const Quill = dynamic(() => import('react-quill'), {
@@ -18,6 +19,7 @@ const Quill = dynamic(() => import('react-quill'), {
 
 export default function AnnouncementModal({
   announcement,
+  isAttended,
 }: AnnouncementModalProps) {
   const setModal = useSetRecoilState(modalState);
   const [neverSeeAgain, setNeverSeeAgain] = useState<boolean>(false);
@@ -34,7 +36,8 @@ export default function AnnouncementModal({
     } else {
       localStorage.removeItem('announcementTime');
     }
-    setModal({ modalName: null });
+    if (isAttended) setModal({ modalName: 'EVENT-WELCOME' });
+    else setModal({ modalName: null });
   };
 
   useEffect(() => {

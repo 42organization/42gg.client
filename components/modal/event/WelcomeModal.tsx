@@ -106,7 +106,7 @@ export default function WelcomeModal() {
           <div className={styles.positive}>
             <input
               onClick={openAttendanceCoin}
-              /* onClick={openStatChangeModal} */
+              // onClick={openStatChangeModal}
               type='button'
               value='출석하기'
             />

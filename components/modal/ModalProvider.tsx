@@ -63,13 +63,14 @@ export default function ModalProvider() {
       coinPolicy,
       useItemInfo,
       storeManual,
+      isAttended,
     },
     setModal,
   ] = useRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const content: { [key: string]: JSX.Element | null } = {
     'EVENT-ANNOUNCEMENT': announcement ? (
-      <AnnouncementModal announcement={announcement} />
+      <AnnouncementModal announcement={announcement} isAttended={isAttended} />
     ) : null,
     'MENU-REPORT': <ReportModal />,
     'MENU-LOGOUT': <LogoutModal />,
@@ -139,7 +140,9 @@ export default function ModalProvider() {
     if (modalName?.split('-')[0] === 'FIXED') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
       if (modalName === 'MATCH-CANCEL') setReloadMatch(true);
-      setModal({ modalName: null });
+      else if (modalName === 'EVENT-ANNOUNCEMENT' && isAttended)
+        setModal({ modalName: 'EVENT-WELCOME' });
+      else setModal({ modalName: null });
     }
   };
 

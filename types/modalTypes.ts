@@ -118,4 +118,5 @@ export interface Modal {
   coinPolicy?: IcoinPolicy;
   useItemInfo?: UseItemRequest;
   storeManual?: StoreManual;
+  isAttended?: boolean;
 }
