@@ -72,17 +72,16 @@ const Megaphone = () => {
     }
   };
 
-  // 문구 수, 문구 길이에 따라 애니메이션 속도 조절하는 style 추가 필요
-
-  // const pauseStyle: { [key: string]: string } = {
-  //   pause: styles.pause,
-  //   running: styles.running,
-  // };
+  const getContentsLength = () => {
+    let len = 0;
+    for (let i = 0; i < contents.length; i++) {
+      len += contents[i].intraId.length;
+      len += contents[i].content.length;
+    }
+    return len;
+  };
 
   return (
-    // <div className={styles.rollingBanner} onClick={() => clickPause()}>
-    //   <div className={styles.wrapper}>
-    //     <ul className={`${styles.megaphoneContents} ${pauseStyle[play]}`}>
     <MegaphoneContainer clickPause={clickPause} play={play}>
       {contents.map((content, idx) =>
         content === defaultContents[0] ? (
@@ -94,9 +93,6 @@ const Megaphone = () => {
         )
       )}
     </MegaphoneContainer>
-    //     </ul>
-    //   </div>
-    // </div>
   );
 };
 
