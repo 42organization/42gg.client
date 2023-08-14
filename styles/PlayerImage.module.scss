@@ -46,6 +46,7 @@
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
   border-radius: 50%;
+  // 이미지띠
   background: linear-gradient(
     140.76deg,
     #0069ff 0%,
@@ -67,6 +68,7 @@
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
   border-radius: 50%;
+  // 이미지띠
   background: linear-gradient(
     140.76deg,
     #0069ff 0%,
@@ -74,7 +76,6 @@
     #ff7ee3 70.25%,
     #426bff 91.76%
   );
-
   div {
     @include userImage(4rem);
     cursor: pointer;
@@ -111,11 +112,12 @@
   align-items: center;
   padding: 0.2rem;
   border-radius: 50%;
+  // 이미지띠
   background: linear-gradient(
     to right bottom,
     #0030ac 0%,
     #90a5ff 50%,
-    #cb8fff 100%
+    #8fffa4 100%
   );
   div {
     @include userImage(8rem);
@@ -128,6 +130,7 @@
   align-items: center;
   padding: 0.2rem;
   border-radius: 50%;
+  // 이미지띠
   background: linear-gradient(
     to right bottom,
     #0030ac 0%,

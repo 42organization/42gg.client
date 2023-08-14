@@ -56,14 +56,14 @@ const item4: InventoryItem = {
 
 const item5: InventoryItem = {
   receiptId: 5,
-  itemName: '테스트5',
+  itemName: '프로필 이미지띠 변경',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'kim_takgu',
   itemStatus: 'BEFORE',
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
-  itemType: 'MEGAPHONE',
+  itemType: 'PROFILE_BAND',
   createdAt: '2021-08-07',
 };
 
