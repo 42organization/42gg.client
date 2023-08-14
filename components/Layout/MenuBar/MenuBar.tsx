@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import { tierIdSelector } from 'utils/recoil/tierColor';
 import { User } from 'types/mainType';
 import { ProfileBasic } from 'types/userTypes';
 import { userState } from 'utils/recoil/layout';
@@ -55,11 +56,10 @@ const MenuProfile = () => {
   useEffect(() => {
     getProfile();
   }, []);
-  const findTierIndex = (tierName: string): string => {
-    const tier = ['손', '빨', '노', '초', '파', '검', '무'];
-    const index = tier.findIndex((t) => t[0] === tierName[0]);
-    return index === -1 ? styles.tierId : styles['tierId' + index.toString()];
-  };
+
+  const tierIndex = useRecoilValue(tierIdSelector);
+  const findTierIndex =
+    tierIndex === -1 ? styles.tierId : styles['tierId' + tierIndex.toString()];
 
   return (
     <div className={styles.menuProfileWrapper}>
@@ -76,9 +76,7 @@ const MenuProfile = () => {
       </Link>
       <div className={styles.userInfoWrapper}>
         <div className={styles.userId}>
-          <div
-            className={`${styles.tierId} ${findTierIndex(profile.tierName)}`}
-          >
+          <div className={`${styles.tierId} ${findTierIndex}`}>
             <PlayerImage
               src={profile.tierImageUri}
               styleName={'ranktier'}

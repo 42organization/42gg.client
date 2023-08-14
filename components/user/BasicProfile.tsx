@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import { tierIdSelector } from 'utils/recoil/tierColor';
 import PlayerImage from 'components/PlayerImage';
 import useBasicProfile from 'hooks/users/useBasicProfile';
 import { AiOutlineEdit } from 'react-icons/ai';
@@ -12,6 +13,7 @@ interface ProfileProps {
 
 export default function BasicProfile({ profileId }: ProfileProps) {
   const user = useRecoilValue(userState);
+
   const setModal = useSetRecoilState(modalState);
   const {
     intraId,
@@ -27,11 +29,9 @@ export default function BasicProfile({ profileId }: ProfileProps) {
     tierName,
   } = useBasicProfile({ profileId });
 
-  const findTierIndex = (tierName: string): string => {
-    const tier = ['손', '빨', '노', '초', '파', '검', '무'];
-    const index = tier.findIndex((t) => t[0] === tierName[0]);
-    return index === -1 ? styles.tierId : styles['tierId' + index.toString()];
-  };
+  const tierIndex = useRecoilValue(tierIdSelector);
+  const findTierIndex =
+    tierIndex === -1 ? styles.tierId : styles['tierId' + tierIndex.toString()];
 
   return (
     <div className={styles.container}>
@@ -95,9 +95,7 @@ export default function BasicProfile({ profileId }: ProfileProps) {
         </div>
         <div className={styles.racket}>{racketType.toUpperCase()}</div>
         <div className={styles.tierContainer}>
-          <div className={`${styles.tierId} ${findTierIndex(tierName)}`}>
-            {tierName}
-          </div>
+          <div className={`${styles.tierId} ${findTierIndex}`}>{tierName}</div>
         </div>
       </div>
     </div>
