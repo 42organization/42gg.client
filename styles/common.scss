@@ -333,23 +333,23 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   font-family: Gugi;
   background: black;
   @include txtColor();
-  &.tierId1 {
+  &.tierIdred {
     background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
     @include txtColor();
   }
-  &.tierId2 {
+  &.tierIdyellow {
     background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
     @include txtColor();
   }
-  &.tierId3 {
+  &.tierIdgreen {
     background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
     @include txtColor();
   }
-  &.tierId4 {
+  &.tierIdblue {
     background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
     @include txtColor();
   }
-  &.tierId5 {
+  &.tierIdblack {
     background: linear-gradient(
       180.89deg,
       rgba(178, 178, 178, 0.552801) 26.68%,
@@ -359,7 +359,7 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
     );
     @include txtColor();
   }
-  &.tierId6 {
+  &.tierIdrainbow {
     background: linear-gradient(
       90deg,
       rgba(239, 80, 80, 0.553) 15%,
