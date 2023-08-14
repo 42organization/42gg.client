@@ -57,7 +57,7 @@ function ReceiptList() {
   const getUserReceiptHandler = useCallback(async () => {
     try {
       const res = await mockInstance.get(
-        `/admin/receipt/?intraId=${intraId}page=${currentPage}&size=10`
+        `/admin/receipt/?intraId=${intraId}&page=${currentPage}&size=10`
       );
       setIntraId(intraId);
       setReceiptData({
@@ -109,7 +109,7 @@ function ReceiptList() {
 
   useEffect(() => {
     intraId ? getUserReceiptHandler() : getAllReceiptHandler();
-  }, [intraId, getUserReceiptHandler, getAllReceiptHandler, currentPage]);
+  }, [intraId, getUserReceiptHandler, getAllReceiptHandler]);
 
   return (
     <>
