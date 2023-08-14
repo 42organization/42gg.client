@@ -4,7 +4,7 @@ import CoinHistoryDetails from './CoinHistoryDetails';
 import { ICoinHistoryList } from 'types/userTypes';
 import styles from 'styles/modal/store/CoinHistoryContainer.module.scss';
 
-// TODO: 무한 스크롤 구현
+// TODO: 페이지네이션 구현
 export default function CoinHistoryContainer() {
   const [coinHistoryList, setCoinHistoryList] = useState<ICoinHistoryList>({
     useCoinList: [],
