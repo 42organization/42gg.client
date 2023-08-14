@@ -16,6 +16,7 @@ import styles from 'styles/admin/receipt/ReceiptList.module.scss';
 import { useSetRecoilState } from 'recoil';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
+import AdminSearchBar from '../common/AdminSearchBar';
 
 const receiptListTableTitle: { [key: string]: string } = {
   receiptId: 'ID',
@@ -44,12 +45,41 @@ function ReceiptList() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [intraId, setIntraId] = useState<string>('');
   const setSnackBar = useSetRecoilState(toastState);
 
   // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
+  const initSeaerch = useCallback((intraId?: string) => {
+    setIntraId(intraId || '');
+    setCurrentPage(1);
+  }, []);
+
+  const getUserReceiptHandler = useCallback(async () => {
+    try {
+      const res = await mockInstance.get(
+        `/admin/receipt/?intraId=${intraId}page=${currentPage}&size=10`
+      );
+      setIntraId(intraId);
+      setReceiptData({
+        receiptList: res.data.receiptList.map((receipt: Ireceipt) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(receipt.createdAt)
+          );
+          return {
+            ...receipt,
+            createdAt: `${year}-${month}-${date} ${hour}:${min}`,
+          };
+        }),
+        totalPage: res.data.totalPage,
+        currentPage: currentPage,
+      });
+    } catch (e) {
+      console.error('HJ00');
+    }
+  }, [intraId, currentPage]);
 
   // instanceInManage로 변경
-  const getReceiptHandler = useCallback(async () => {
+  const getAllReceiptHandler = useCallback(async () => {
     try {
       const res = await mockInstance.get(
         `/admin/receipt/?page=${currentPage}&size=10`
@@ -78,11 +108,14 @@ function ReceiptList() {
   }, [currentPage]);
 
   useEffect(() => {
-    getReceiptHandler();
-  }, [currentPage]);
+    intraId ? getUserReceiptHandler() : getAllReceiptHandler();
+  }, [intraId, getUserReceiptHandler, getAllReceiptHandler, currentPage]);
 
   return (
     <>
+      <div>
+        <AdminSearchBar initSearch={initSeaerch} />
+      </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <TableHead className={styles.tableHeader}>
