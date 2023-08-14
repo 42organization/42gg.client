@@ -28,6 +28,7 @@ export default function WelcomeModal() {
         `/pingpong/users/attendance`
       );
       setCoin(res.data);
+      return res.data;
     } catch (error) {
       setError('SM01');
     }

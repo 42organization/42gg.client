@@ -12,7 +12,7 @@ import {
 import { mockInstance } from 'utils/mockAxios';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 
-type UseMegaphoneProps = UseItemRequest;
+type NewMegaphoneProps = UseItemRequest;
 
 const MAX_LENGTH = 30;
 
@@ -24,7 +24,7 @@ const caution = [
   '관리자의 판단에 따라 부적절한 내용의 확성기는 삭제될 수 있습니다.',
 ];
 
-export default function UseMegaphone({ receiptId }: UseMegaphoneProps) {
+export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
   const user = useRecoilValue(userState);
   const [content, setContent] = useState('');
   const resetModal = useResetRecoilState(modalState);

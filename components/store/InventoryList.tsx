@@ -15,7 +15,7 @@ export function InventoryList() {
   const { data, error, isLoading, hasNextPage, fetchNextPage } = InfinityScroll(
     'inventory',
     fetchInventoryData,
-    'JY03'
+    'JY04'
   );
 
   // TODO : 에러 컴포넌트 구체화 필요함.

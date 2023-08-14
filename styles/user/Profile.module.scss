@@ -121,15 +121,19 @@
   color: #008234;
 }
 
-.tierId {
+.tierContainer {
   width: 6.5rem;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   border-radius: $mini-radius;
-  background: #48c7ea;
   font-size: $small-font;
+  align-items: center;
   text-align: center;
-  font-family: Gugi;
-  color: #5a3fdf;
+  background-color: #73cce4;
+  .tierId {
+    @include tierNumber;
+    font-size: 0.9rem;
+    text-align: center;
+  }
 }
 
 .statusMessage {

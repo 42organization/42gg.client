@@ -49,12 +49,11 @@
         font-weight: 700;
         color: rgba(43, 43, 43, 1);
         .tierId {
+          @include tierNumber();
           display: flex;
           flex-direction: row;
-          font-size: 0.8rem;
-          font-family: Gugi;
           align-items: center;
-          color: black;
+          font-size: 1rem;
         }
       }
       .userLevel {
