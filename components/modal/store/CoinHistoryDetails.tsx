@@ -31,9 +31,15 @@ export default function CoinHistoryDetails({
         </div>
       </div>
       <div className={styles.section2}>
-        <div className={amount > 0 ? styles.plus : styles.minus}>
-          {amount} <FaCoins />
-        </div>
+        {amount > 0 ? (
+          <div className={styles.plus}>
+            +{amount} <FaCoins />
+          </div>
+        ) : (
+          <div className={styles.minus}>
+            {amount} <FaCoins />
+          </div>
+        )}
       </div>
     </div>
   );
