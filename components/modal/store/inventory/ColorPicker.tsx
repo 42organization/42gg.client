@@ -8,12 +8,10 @@ type ColorPickerProps = {
 };
 
 export default function ColorPicker({ color, setColor }: ColorPickerProps) {
-  const [showPicker, setShowPicker] = useState<boolean>(false);
   return (
     <>
       <div className={styles.container}>
         <div
-          onClick={() => setShowPicker(!showPicker)}
           style={{ backgroundColor: color }}
           className={styles.colorPreview}
         />
@@ -24,14 +22,12 @@ export default function ColorPicker({ color, setColor }: ColorPickerProps) {
           alpha
           className={styles.colorInput}
         />
-        {showPicker && (
-          <HexColorPicker
-            color={color}
-            onChange={setColor}
-            className={styles.colorPicker}
-            style={{ width: 'auto' }}
-          />
-        )}
+        <HexColorPicker
+          color={color}
+          onChange={setColor}
+          className={styles.colorPicker}
+          style={{ width: 'auto' }}
+        />
       </div>
     </>
   );
