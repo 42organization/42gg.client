@@ -18,7 +18,6 @@ export default function CoinHistoryContainer() {
 
   useEffect(() => {
     getCoinHistoryList();
-    console.log('coin history: ', coinHistoryList);
   }, [currentPage]);
 
   const getCoinHistoryList = async () => {
@@ -26,7 +25,6 @@ export default function CoinHistoryContainer() {
       const res = await mockInstance.get(
         `/users/coin/?page=${currentPage}&size=5`
       );
-      console.log('coin history: ', res.data);
       setCoinHistoryList({
         useCoinList: res.data.useCoinList,
         totalPage: res.data.totalPage,
