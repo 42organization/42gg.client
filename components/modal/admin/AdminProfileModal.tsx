@@ -23,6 +23,7 @@ export default function AdminProfileModal(props: { intraId: string }) {
     ppp: '',
     email: '',
     roleType: 'ROLE_USER',
+    coin: 0,
   });
 
   const { imgData, imgPreview, uploadImg } = useUploadImg();
@@ -80,6 +81,7 @@ export default function AdminProfileModal(props: { intraId: string }) {
       ppp: userInfo.ppp,
       email: userInfo.email,
       roleType: userInfo.roleType,
+      coin: userInfo.coin,
     };
     formData.append(
       'updateUserInfo',
@@ -163,8 +165,10 @@ export default function AdminProfileModal(props: { intraId: string }) {
           </div>
         </div>
         <div className={styles.middle}>
-          <label>상태 메시지</label>
-          <div>{`${userInfo.statusMessage.length} / ${STAT_MSG_LIMIT}`}</div>
+          <div className={styles.messageCount}>
+            <label>상태 메시지</label>
+            <div>{`${userInfo.statusMessage.length} / ${STAT_MSG_LIMIT}`}</div>
+          </div>
           <textarea
             name='statusMessage'
             onChange={inputHandler}
@@ -179,6 +183,7 @@ export default function AdminProfileModal(props: { intraId: string }) {
               <div>승</div>
               <div>패</div>
               <div>PPP</div>
+              <div>COIN</div>
             </div>
             <div className={styles.choiceBtn}>
               <div className={styles.racketTypeWrap}>
@@ -238,6 +243,13 @@ export default function AdminProfileModal(props: { intraId: string }) {
                   name='ppp'
                   onChange={inputNumHandler}
                   value={userInfo.ppp ?? ''}
+                />
+              </div>
+              <div>
+                <input
+                  name='coin'
+                  onChange={inputNumHandler}
+                  value={userInfo.coin ?? ''}
                 />
               </div>
             </div>

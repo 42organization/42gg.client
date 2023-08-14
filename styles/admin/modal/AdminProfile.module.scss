@@ -13,7 +13,7 @@
   align-items: center;
   line-height: 150%;
   margin-left: 2rem;
-  height: 70px;
+  height: 50px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
@@ -29,13 +29,13 @@
 .top {
   display: flex;
   justify-content: space-between;
-  height: 170px;
+  height: 130px;
   border-top: 1.5px solid #e5e5e5;
   border-bottom: 1.5px solid #e5e5e5;
 }
 
 .imageWrap {
-  padding: 1.7rem 2rem 1.7rem 1.5rem;
+  padding: 0.5rem 2rem 0.5rem 1.5rem;
 }
 
 .image {
@@ -50,7 +50,7 @@
   display: flex;
   justify-content: center;
   width: 250px;
-  padding: 1.8rem 0;
+  padding: 0.5rem 0;
 }
 
 .topRight {
@@ -70,11 +70,19 @@
 .middle {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 1rem 2rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem 0;
   :nth-child(2) {
     color: #2678f3;
   }
+}
+
+.messageCount {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
 }
 
 .middle textarea {
@@ -99,7 +107,7 @@
   justify-content: space-between;
   align-items: center;
   height: 200px;
-  padding: 0 1rem 1rem 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
 }
 
 .choiceName {
@@ -132,8 +140,8 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 120px;
-  padding: 1rem 0;
+  height: 90px;
+  padding: 0.3rem 0;
   border-top: 1.5px solid #e5e5e5;
 }
 
