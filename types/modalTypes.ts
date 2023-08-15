@@ -23,7 +23,7 @@ type FixedModal = 'AFTER_GAME' | 'STAT';
 
 type PurchaseModal = 'BUY' | 'GIFT' | 'NO_COIN';
 
-type UseItemModal = ItemType;
+type UseItemModal = ItemType | 'GACHA';
 
 type EditItemModal = 'MEGAPHONE';
 type StoreModal = 'MANUAL' | 'COIN_HISTORY';

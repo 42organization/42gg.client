@@ -1,0 +1,60 @@
+.machineContainer {
+  position: relative;
+  white-space: nowrap;
+
+  .machine {
+    position: relative;
+    z-index: 1;
+    max-height: 80vh;
+    pointer-events: none;
+    max-width: 80vw;
+  }
+
+  .box {
+    width: 12.5rem;
+    height: 12.5rem;
+    background-color: #38f3fd49;
+    border: 0.625rem solid #38f3fd;
+    border-radius: 15%;
+    box-shadow: inset 0 0.625rem 1.25rem #ffffff;
+    opacity: 0.8;
+  }
+
+  //   .title {
+  //     --stroke-color: #ad8bd6;
+  //     position: absolute;
+  //     display: block;
+  //     top: 10%;
+  //     width: 100%;
+  //     text-align: center;
+  //     @extend %stroke;
+  //     font-size: 5vh;
+  //     z-index: 3;
+
+  //     span {
+  //       animation: blink 0.8s linear both infinite;
+
+  //       @for $i from 1 through 10 {
+  //         &:nth-child(#{$i}) {
+  //           animation-delay: #{$i * 0.12}s;
+  //         }
+  //       }
+  //     }
+  //   }
+
+  .handle {
+    z-index: 3;
+    position: absolute;
+    height: 3.9vh;
+    left: 13%;
+    top: 69%;
+  }
+
+  .balls {
+    position: absolute;
+    top: 22%;
+    left: 2%;
+    width: 96%;
+    height: 34.5%;
+  }
+}

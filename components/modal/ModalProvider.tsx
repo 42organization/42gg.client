@@ -42,6 +42,7 @@ import NewMegaphoneModal from './store/inventory/NewMegaphoneModal';
 import EditMegaphoneModal from './store/inventory/EditMegaphoneModal';
 import ChangeIdColorModal from './store/inventory/ChangeIdColorModal';
 import ChangeProfileBandModal from './store/inventory/ChangeProfileBandModal';
+import GachaModal from './store/inventory/GachaModal';
 
 export default function ModalProvider() {
   const [
@@ -143,6 +144,7 @@ export default function ModalProvider() {
     'USE-ITEM-PROFILE_BAND': useItemInfo ? (
       <ChangeProfileBandModal {...useItemInfo} />
     ) : null,
+    'USE-ITEM-GACHA': <GachaModal />,
   };
 
   useEffect(() => {
