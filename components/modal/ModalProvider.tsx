@@ -66,6 +66,7 @@ export default function ModalProvider() {
       coinPolicy,
       useItemInfo,
       storeManual,
+      isAttended,
       totalCoin,
     },
     setModal,
@@ -73,7 +74,7 @@ export default function ModalProvider() {
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const content: { [key: string]: JSX.Element | null } = {
     'EVENT-ANNOUNCEMENT': announcement ? (
-      <AnnouncementModal announcement={announcement} />
+      <AnnouncementModal announcement={announcement} isAttended={isAttended} />
     ) : null,
     'MENU-REPORT': <ReportModal />,
     'MENU-LOGOUT': <LogoutModal />,
@@ -151,8 +152,13 @@ export default function ModalProvider() {
   const closeModalHandler = (e: React.MouseEvent) => {
     if (modalName?.split('-')[0] === 'FIXED') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
+      console.log(isAttended);
       if (modalName === 'MATCH-CANCEL') setReloadMatch(true);
-      setModal({ modalName: null });
+      else if (modalName === 'EVENT-ANNOUNCEMENT' && !isAttended) {
+        setModal({ modalName: 'EVENT-WELCOME' });
+      } else {
+        setModal({ modalName: null });
+      }
     }
   };
 

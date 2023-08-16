@@ -1,0 +1,53 @@
+$anim_duration: 0.65;
+$anim_delay: 0;
+
+.circle {
+  position: fixed;
+  z-index: 6 !important;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #d28e5d;
+  position: absolute;
+  display: none;
+  z-index: 2;
+}
+
+.appear {
+  position: fixed;
+  z-index: 6;
+  font-size: 2rem;
+  text-align: center;
+  color: white;
+  opacity: 0;
+  animation: appear #{$anim_duration}s ease-in forwards 1;
+}
+
+@for $i from 1 through 25 {
+  .appear:nth-child(#{$i}) {
+    animation-delay: #{($i * $anim_delay) * $anim_duration}s;
+  }
+}
+
+@keyframes appear {
+  0% {
+    transform: translatey(0px);
+    opacity: 0;
+  }
+  25% {
+    transform: translatey(-25px);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translatey(-50px);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translatey(-75px);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translatey(-100px);
+    opacity: 1;
+  }
+}
