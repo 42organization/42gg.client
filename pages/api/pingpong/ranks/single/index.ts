@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 type RankUserData = {
   intraId: string;
   rank: number;
+  textColor: string;
   ppp: number;
   tierImageUri: string;
   statusMessage: string;
@@ -20,6 +21,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     {
       intraId: 'kim_takgu',
       rank: 1,
+      textColor: '#000000',
       ppp: 1000,
       tierImageUri:
         'https://cdn.pixabay.com/photo/2022/07/29/05/52/table-tennis-7351159_1280.png',
@@ -28,6 +30,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     {
       intraId: 'kim_takgu',
       rank: 2,
+      textColor: '#F1F7B5',
       ppp: 1000,
       tierImageUri:
         'https://cdn.pixabay.com/photo/2022/07/29/05/52/table-tennis-7351159_1280.png',
@@ -36,6 +39,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     {
       intraId: 'kim_takgu',
       rank: 3,
+      textColor: '#A8D1D1',
       ppp: 1000,
       tierImageUri:
         'https://cdn.pixabay.com/photo/2022/07/29/05/52/table-tennis-7351159_1280.png',
@@ -44,6 +48,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     {
       intraId: 'kim_takgu',
       rank: 4,
+      textColor: '#c9a5e6',
       ppp: 1000,
       tierImageUri:
         'https://cdn.pixabay.com/photo/2022/07/29/05/52/table-tennis-7351159_1280.png',
@@ -52,6 +57,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     {
       intraId: 'kim_takgu',
       rank: 5,
+      textColor: '#9EA1D4',
       ppp: 1000,
       tierImageUri:
         'https://cdn.pixabay.com/photo/2022/07/29/05/52/table-tennis-7351159_1280.png',
