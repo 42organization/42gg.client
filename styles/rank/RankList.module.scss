@@ -93,6 +93,7 @@
   }
   .statusMessage {
     justify-self: left;
+    max-width: 100%;
     color: $dark-gray;
     overflow: hidden;
     text-overflow: ellipsis;
