@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { reloadMatchState } from 'utils/recoil/match';
+import styles from 'styles/modal/Modal.module.scss';
 import EditProfileModal from './profile/EditProfileModal';
 import KakaoEditModal from './profile/KakaoEditModal';
 import LogoutModal from './menu/LogoutModal';
@@ -23,22 +24,23 @@ import DeletePenaltyModal from './admin/DeletePenaltyModal';
 import AdminModifyScoreModal from './admin/AdminModifyScoreModal';
 import CoinChangeModal from './statChange/CoinChangeModal';
 import WelcomeModal from './event/WelcomeModal';
-
-import styles from 'styles/modal/Modal.module.scss';
 import AdminDeleteMegaphoneModal from './admin/AdminDeleteMegaphoneModal';
 import AdminDeleteProfileModal from './admin/AdminDeleteProfileModal';
 import AdminDeleteItemModal from './admin/AdminDeleteItem';
 import AdminEditItemModal from './admin/AdminEditItem';
 import AdminEditCoinPolicyModal from './admin/AdminEditCoinPolicy';
+import AdminCheckSendNotiModal from './admin/AdminCheckSendNoti';
+// Store Modal
+import StoreManualModal from './store/StoreManualModal';
+import UserCoinHistoryModal from './store/UserCoinHistoryModal';
+// Purchase Modal
 import BuyModal from './store/purchase/BuyModal';
 import GiftModal from './store/purchase/GiftModal';
 import NoCoinModal from './store/purchase/NoCoinModal';
-import StoreManualModal from './store/StoreManualModal';
-import AdminCheckSendNotiModal from './admin/AdminCheckSendNoti';
-
 // Inventory Modal
 import NewMegaphoneModal from './store/inventory/NewMegaphoneModal';
 import EditMegaphoneModal from './store/inventory/EditMegaphoneModal';
+import ChangeIdColorModal from './store/inventory/ChangeIdColorModal';
 
 export default function ModalProvider() {
   const [
@@ -64,13 +66,15 @@ export default function ModalProvider() {
       coinPolicy,
       useItemInfo,
       storeManual,
+      isAttended,
+      totalCoin,
     },
     setModal,
   ] = useRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const content: { [key: string]: JSX.Element | null } = {
     'EVENT-ANNOUNCEMENT': announcement ? (
-      <AnnouncementModal announcement={announcement} />
+      <AnnouncementModal announcement={announcement} isAttended={isAttended} />
     ) : null,
     'MENU-REPORT': <ReportModal />,
     'MENU-LOGOUT': <LogoutModal />,
@@ -103,6 +107,9 @@ export default function ModalProvider() {
     'COIN-ANIMATION': CoinResult ? <CoinChangeModal {...CoinResult} /> : null,
     'EVENT-WELCOME': <WelcomeModal />,
     'STORE-MANUAL': storeManual ? <StoreManualModal {...storeManual} /> : null,
+    'STORE-COIN_HISTORY': totalCoin ? (
+      <UserCoinHistoryModal {...totalCoin} />
+    ) : null,
     'PURCHASE-BUY': priceTag ? <BuyModal {...priceTag} /> : null,
     'PURCHASE-GIFT': priceTag ? <GiftModal {...priceTag} /> : null,
     'PURCHASE-NO_COIN': <NoCoinModal />,
@@ -130,6 +137,9 @@ export default function ModalProvider() {
     'EDIT-ITEM-MEGAPHONE': useItemInfo ? (
       <EditMegaphoneModal {...useItemInfo} />
     ) : null,
+    'USE-ITEM-TEXT_COLOR': useItemInfo ? (
+      <ChangeIdColorModal {...useItemInfo} />
+    ) : null,
   };
 
   useEffect(() => {
@@ -142,8 +152,13 @@ export default function ModalProvider() {
   const closeModalHandler = (e: React.MouseEvent) => {
     if (modalName?.split('-')[0] === 'FIXED') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
+      console.log(isAttended);
       if (modalName === 'MATCH-CANCEL') setReloadMatch(true);
-      setModal({ modalName: null });
+      else if (modalName === 'EVENT-ANNOUNCEMENT' && !isAttended) {
+        setModal({ modalName: 'EVENT-WELCOME' });
+      } else {
+        setModal({ modalName: null });
+      }
     }
   };
 

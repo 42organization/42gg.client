@@ -9,6 +9,7 @@ export type UserInfo = {
   ppp: number | '';
   email: string;
   roleType: string;
+  coin: number;
 };
 
 export const roleTypes = [

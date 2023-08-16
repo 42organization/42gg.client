@@ -1,5 +1,6 @@
 export type CoinResult = {
-	beforeCoin: number;
-	afterCoin: number;
-	coinIncrement: number;
-}
+  isAttended: boolean;
+  beforeCoin: number;
+  afterCoin: number;
+  coinIncrement: number;
+};

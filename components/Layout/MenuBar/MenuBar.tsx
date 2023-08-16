@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import { tierIdSelector } from 'utils/recoil/tierColor';
 import { User } from 'types/mainType';
 import { ProfileBasic } from 'types/userTypes';
 import { userState } from 'utils/recoil/layout';
@@ -13,7 +14,6 @@ import styles from 'styles/Layout/MenuBar.module.scss';
 
 const MenuTop = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
-
   return (
     <div className={styles.menuTopWrapper}>
       <div className={styles.menuLogo}>42GG</div>
@@ -57,6 +57,10 @@ const MenuProfile = () => {
     getProfile();
   }, []);
 
+  const tierId = useRecoilValue(tierIdSelector);
+  const findTierIndex =
+    tierId === 'none' ? styles.tierId : styles['tierId' + tierId];
+
   return (
     <div className={styles.menuProfileWrapper}>
       <Link
@@ -72,15 +76,16 @@ const MenuProfile = () => {
       </Link>
       <div className={styles.userInfoWrapper}>
         <div className={styles.userId}>
-          <div className={styles.tierId}>
+          <div className={`${styles.tierContainer}`}>
             <PlayerImage
               src={profile.tierImageUri}
               styleName={'ranktier'}
               size={50}
             />
             &nbsp;
-            {profile.tierName}
-            <br />
+            <div className={`${styles.tierId} ${findTierIndex}`}>
+              {profile.tierName}
+            </div>
           </div>
           <Link
             href={`/users/detail?intraId=${user.intraId}`}

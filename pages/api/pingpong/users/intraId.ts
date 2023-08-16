@@ -14,7 +14,7 @@ export default function handler(
     currentExp: 123,
     maxExp: 123,
     tierImageUri: '/image/fallBackSrc.jpeg',
-    tierName: '빨강 탁구채',
+    tierName: '노랑 탁구채',
     expRate: 123,
     snsNotiOpt: 'EMAIL',
   };

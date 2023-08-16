@@ -9,6 +9,7 @@ import { IcoinPolicy } from './admin/adminCoinTypes';
 import { ItemType, UseItemRequest } from './inventoryTypes';
 import { StoreManualMode } from './storeTypes';
 import { Item } from './itemTypes';
+import { ICoin } from './userTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -118,4 +119,6 @@ export interface Modal {
   coinPolicy?: IcoinPolicy;
   useItemInfo?: UseItemRequest;
   storeManual?: StoreManual;
+  isAttended?: boolean;
+  totalCoin?: ICoin;
 }

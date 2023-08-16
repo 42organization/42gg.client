@@ -31,3 +31,7 @@ export type UseItemRequest = {
 export type UseMegaphoneRequest = UseItemRequest & {
   content: string;
 };
+
+export type UseIdColorRequest = UseItemRequest & {
+  textColor: string;
+};

@@ -43,6 +43,7 @@ export default function Header() {
         setModal({
           modalName: 'EVENT-ANNOUNCEMENT',
           announcement: data,
+          isAttended: true,
         });
     },
     err: 'RJ01',
@@ -53,10 +54,7 @@ export default function Header() {
     <div className={styles.headerContainer}>
       <div className={styles.headerWrap}>
         <div className={styles.headerLeft}>
-          <FiMenu
-            className={styles.menuIcon}
-            onClick={openMenuBarHandler}
-          />
+          <FiMenu className={styles.menuIcon} onClick={openMenuBarHandler} />
         </div>
         <Link className={styles.logoWrap} href={'/'}>
           42GG
@@ -77,12 +75,12 @@ export default function Header() {
                       {live.notiCount > 9 ? '9+' : live.notiCount}
                     </div>
                   </div>
-                  <NotiBell className={styles.bellIcon}/>
+                  <NotiBell className={styles.bellIcon} />
                 </div>
               </div>
             ) : (
               <div className={styles.notiBellWrapper}>
-                <NotiBell className={styles.bellIcon}/>
+                <NotiBell className={styles.bellIcon} />
               </div>
             )}
           </div>

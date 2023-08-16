@@ -30,13 +30,20 @@ export function StoreModeWrap({
     });
   };
 
+  const viewCoinHistory = () => {
+    setModal({
+      modalName: 'STORE-COIN_HISTORY',
+      totalCoin: coin,
+    });
+  };
+
   return (
     <div>
       <div className={styles.topMenu}>
         <button className={styles.manual} onClick={handleManual}>
           매뉴얼
         </button>
-        <div className={styles.coins}>
+        <div className={styles.coins} onClick={viewCoinHistory}>
           {coin.coin}
           <FaCoins />
         </div>
