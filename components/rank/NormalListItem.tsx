@@ -1,9 +1,8 @@
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
-import styles from 'styles/rank/RankList.module.scss';
 import { NormalUser } from 'types/rankTypes';
-import { colorToggleSelector } from 'utils/recoil/colorMode';
 import { userState } from 'utils/recoil/layout';
+import styles from 'styles/rank/RankList.module.scss';
 
 type NormalListItemProps = {
   user: NormalUser;

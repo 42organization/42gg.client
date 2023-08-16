@@ -23,10 +23,9 @@ export default function RankList({ season }: RankListProps) {
     setPage,
   };
   const makePath = (): string => {
-    const modeQuery = (targetMode?: string) =>
-      targetMode !== 'NORMAL' ? 'ranks/single' : 'exp';
+    const modeQuery = Mode === 'RANK' ? 'ranks/single' : 'exp';
     const seasonQuery = Mode === 'RANK' ? `&season=${season}` : '';
-    return `/pingpong/${modeQuery(Mode)}?page=${page}&size=20${seasonQuery}`;
+    return `/${modeQuery}?page=${page}&size=20${seasonQuery}`;
   };
 
   useRankList({

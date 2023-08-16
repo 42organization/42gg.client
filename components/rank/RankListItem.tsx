@@ -6,20 +6,6 @@ import styles from 'styles/rank/RankList.module.scss';
 import PlayerImage from 'components/PlayerImage';
 import { RankUser } from 'types/rankTypes';
 
-// type RankItemUser = {
-//   intraId: string;
-//   rank: number;
-//   textColor: string;
-//   statusMessage: string;
-//   point: string;
-//   tierImageUri: string;
-// };
-
-// type RankListItemProps = {
-//   user: RankItemUser;
-//   textColorPreview?: string;
-// };
-
 type RankListItemProps = {
   user: RankUser;
   textColorPreview?: string;
@@ -42,14 +28,12 @@ export function RankListItem({ user, textColorPreview }: RankListItemProps) {
 
   return (
     <div
-      className={`${styles.rankItemWrap} ${topStyle(rank)} ${styles.Ranking} ${
+      className={`${styles.rankItemWrap} ${topStyle(rank)} ${
         intraId === myIntraId && styles.myRanking
       }`}
     >
       {rank}
-      {Mode === 'RANK' && (
-        <PlayerImage src={tierImageUri} styleName={'ranktier'} size={1} />
-      )}
+      <PlayerImage src={tierImageUri} styleName={'ranktier'} size={1} />
       <div
         style={{
           color: textColorPreview === undefined ? textColor : textColorPreview,
