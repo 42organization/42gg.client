@@ -94,6 +94,9 @@
   .statusMessage {
     justify-self: left;
     color: $dark-gray;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .ppp {
     color: #6c00d9;
