@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Iprofile, IprofileTable } from 'types/admin/adminReceiptType';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
@@ -18,6 +18,7 @@ import {
 import styles from 'styles/admin/receipt/ProfileList.module.scss';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
+import AdminSearchBar from '../common/AdminSearchBar';
 
 const profileTableTitle: { [key: string]: string } = {
   profileId: 'ID',
@@ -36,13 +37,46 @@ function ProfileList() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const setModal = useSetRecoilState(modalState);
+  const [intraId, setIntraId] = useState<string>('');
+  const [modal, setModal] = useRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
   // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
+  const initSearch = useCallback((intraId?: string) => {
+    setIntraId(intraId || '');
+    setCurrentPage(1);
+  }, []);
+
+  const getUserProfileHandler = useCallback(async () => {
+    try {
+      const res = await mockInstance.get(
+        `/admin/images?intraId=${intraId}&page=${currentPage}&size=5`
+      );
+      setProfileData({
+        profileList: res.data.profileList.map((profile: Iprofile) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(profile.date)
+          );
+          return {
+            ...profile,
+            date: `${year}-${month}-${date} ${hour}:${min}`,
+          };
+        }),
+        totalPage: res.data.totalPage,
+        currentPage: currentPage,
+      });
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'get user profile',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
+    }
+  }, [intraId, currentPage]);
 
   // instanceInManage로 변경
-  const getProfileHandler = useCallback(async () => {
+  const getAllProfileHandler = useCallback(async () => {
     try {
       const res = await mockInstance.get(
         `/admin/images?page=${currentPage}&size=5`
@@ -78,11 +112,14 @@ function ProfileList() {
   };
 
   useEffect(() => {
-    getProfileHandler();
-  }, [currentPage]);
+    intraId ? getUserProfileHandler() : getAllProfileHandler();
+  }, [intraId, getUserProfileHandler, getAllProfileHandler, modal]);
 
   return (
     <>
+      <div className={styles.searchWrap}>
+        <AdminSearchBar initSearch={initSearch} />
+      </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <TableHead className={styles.tableHeader}>

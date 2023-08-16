@@ -9,7 +9,8 @@ import { userState } from 'utils/recoil/layout';
 import { Item } from 'types/itemTypes';
 
 export default function AdminEditItemModal(props: Item) {
-  const { itemId, name, content, imageUri, originalPrice, discount } = props;
+  const { itemId, itemName, content, imageUri, originalPrice, discount } =
+    props;
   const creator = useRecoilValue(userState).intraId;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
@@ -103,7 +104,7 @@ export default function AdminEditItemModal(props: Item) {
                 className={styles.nameBlank}
                 type='text'
                 name='name'
-                defaultValue={name}
+                defaultValue={itemName}
                 required
               />
             </div>
