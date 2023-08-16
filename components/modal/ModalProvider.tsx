@@ -41,7 +41,7 @@ import NoCoinModal from './store/purchase/NoCoinModal';
 import NewMegaphoneModal from './store/inventory/NewMegaphoneModal';
 import EditMegaphoneModal from './store/inventory/EditMegaphoneModal';
 import ChangeIdColorModal from './store/inventory/ChangeIdColorModal';
-import ChangeProfileBandModal from './store/inventory/ChangeProfileBandModal';
+import ChangeProfileEdgeModal from './store/inventory/ChangeProfileEdgeModal';
 import GachaModal from './store/inventory/GachaModal';
 
 export default function ModalProvider() {
@@ -142,7 +142,7 @@ export default function ModalProvider() {
       <ChangeIdColorModal {...useItemInfo} />
     ) : null,
     'USE-ITEM-PROFILE_BAND': useItemInfo ? (
-      <ChangeProfileBandModal {...useItemInfo} />
+      <ChangeProfileEdgeModal {...useItemInfo} />
     ) : null,
     'USE-ITEM-GACHA': <GachaModal />,
   };

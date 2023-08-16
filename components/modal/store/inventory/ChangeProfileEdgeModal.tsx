@@ -1,6 +1,4 @@
-// import { useState } from 'react';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import { userState } from 'utils/recoil/layout';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { ItemCautionContainer } from './ItemCautionContainer';
@@ -10,10 +8,11 @@ import {
 } from 'components/modal/ModalButton';
 import { Modal } from 'types/modalTypes';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
-import GachaMachine from './GachaMachine';
 import GachaBall from './GachaBall';
+import { mockInstance } from 'utils/mockAxios';
+import { errorState } from 'utils/recoil/error';
 
-type ChangeProfileBandModalProps = UseItemRequest;
+type ChangeProfileEdgeModalProps = UseItemRequest;
 
 // TODO : 주의사항 구체화 필요
 const caution = [
@@ -22,17 +21,28 @@ const caution = [
 ];
 
 // 랜덤 프로필 이미지띠 변경
-export default function ChangeProfileBandModal({
+export default function ChangeProfileEdgeModal({
   receiptId,
-}: ChangeProfileBandModalProps) {
+}: ChangeProfileEdgeModalProps) {
   const resetModal = useResetRecoilState(modalState);
-  const user = useRecoilValue(userState);
   const setModal = useSetRecoilState<Modal>(modalState);
+  const setError = useSetRecoilState<string>(errorState);
 
-  const gachaAction = () => {
-    setModal({
-      modalName: 'USE-ITEM-GACHA',
-    });
+  const gachaAction = async () => {
+    const data: UseItemRequest = {
+      receiptId: receiptId,
+    };
+    try {
+      const res = await mockInstance.patch('/users/edge', data);
+      // api 테스트용 -> 나중에 지우기
+      console.log(`프로필 이미지띠: ${res.data}`);
+      // 가챠 애니메이션 모달
+      setModal({
+        modalName: 'USE-ITEM-GACHA',
+      });
+    } catch (error) {
+      setError('HB04');
+    }
   };
 
   return (
@@ -41,8 +51,7 @@ export default function ChangeProfileBandModal({
       <div className={styles.phrase}>
         <div className={styles.section}>
           <div className={styles.sectionTitle}></div>
-          <GachaMachine />
-          {/* <GachaBall /> */}
+          <GachaBall />
         </div>
         <ItemCautionContainer caution={caution} />
         <ModalButtonContainer>
