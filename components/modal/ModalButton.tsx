@@ -3,6 +3,7 @@ import styles from 'styles/modal/Modal.module.scss';
 type ButtonProps = {
   style: 'positive' | 'negative';
   value: string;
+  form?: string;
   onClick: () => void;
 };
 
@@ -14,10 +15,15 @@ export function ModalButtonContainer({
   return <div className={styles.modalButtonContainer}>{children}</div>;
 }
 
-export function ModalButton({ style, value, onClick }: ButtonProps) {
+export function ModalButton({ style, value, onClick, form }: ButtonProps) {
   return (
     <div className={styles[style]}>
-      <input onClick={() => onClick()} type='button' value={value} />
+      <input
+        onClick={() => onClick()}
+        type='button'
+        value={value}
+        form={form}
+      />
     </div>
   );
 }
