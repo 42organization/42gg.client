@@ -5,13 +5,14 @@
 
 .rollingBanner {
   position: relative;
-  background: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 85%;
   height: 2.2rem;
   overflow: hidden;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .wrapper {
@@ -58,7 +59,8 @@
   align-items: center;
   height: 2.2rem;
   color: yellow;
-  background-color: black;
+  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .content {
