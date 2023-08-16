@@ -12,6 +12,7 @@ import { FiMenu } from 'react-icons/fi';
 import { BsMegaphone } from 'react-icons/bs';
 import styles from 'styles/Layout/Header.module.scss';
 import NotiBell from 'public/image/noti_bell.svg';
+import { IoStorefrontOutline } from 'react-icons/io5';
 
 export default function Header() {
   const [live, setLive] = useRecoilState(liveState);
@@ -53,15 +54,17 @@ export default function Header() {
     <div className={styles.headerContainer}>
       <div className={styles.headerWrap}>
         <div className={styles.headerLeft}>
-          <FiMenu
-            className={styles.menuIcon}
-            onClick={openMenuBarHandler}
-          />
+          <FiMenu className={styles.menuIcon} onClick={openMenuBarHandler} />
         </div>
         <Link className={styles.logoWrap} href={'/'}>
           42GG
         </Link>
         <div className={styles.headerRight}>
+          <div className={styles.announceIcon}>
+            <Link href={'/store'}>
+              <IoStorefrontOutline className={styles.storeIcon} />
+            </Link>
+          </div>
           <div
             className={styles.announceIcon}
             onClick={() => getAnnouncementHandler()}
@@ -77,12 +80,12 @@ export default function Header() {
                       {live.notiCount > 9 ? '9+' : live.notiCount}
                     </div>
                   </div>
-                  <NotiBell className={styles.bellIcon}/>
+                  <NotiBell className={styles.bellIcon} />
                 </div>
               </div>
             ) : (
               <div className={styles.notiBellWrapper}>
-                <NotiBell className={styles.bellIcon}/>
+                <NotiBell className={styles.bellIcon} />
               </div>
             )}
           </div>

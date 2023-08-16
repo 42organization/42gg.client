@@ -43,10 +43,14 @@
     margin-right: 0.7rem;
     transform: scaleX(-1);
     cursor: pointer;
+    .storeIcon {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
     .megaphoneIcon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 }
 
