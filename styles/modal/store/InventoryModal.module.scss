@@ -64,3 +64,34 @@
     list-style-position: inside;
   }
 }
+
+.profilePreviewContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+  }
+  svg {
+    margin: 0 1rem;
+  }
+  .profilePreview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: #c7b1ee;
+    cursor: pointer;
+    svg {
+      width: 2.5rem;
+      height: 2.5rem;
+      color: #603b88;
+    }
+  }
+}
