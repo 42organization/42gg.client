@@ -148,11 +148,23 @@
 
 @media (max-width: 457px) {
   .ranktropy {
+    height: 4.4rem;
+    width: 4.4rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    border-radius: 50%;
+    background: $profile-edge0;
     div {
       @include userRankImage(4rem);
     }
   }
   .ranktropybig {
+    height: 5.5rem;
+    width: 5.5rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    border-radius: 50%;
+    background: $profile-edge0;
     div {
       @include userRankImage(5rem);
     }
