@@ -8,14 +8,14 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 27px;
-        height: 27px;
+        width: 2.4rem;
+        height: 1.5rem;
         font-size: 1.2rem; /* $big-font */
         font-weight: 600;
         cursor: pointer;
         a {
           color: gray; /* $g1-bottom */
-          font-size: 1rem;
+          font-size: 0.9rem;
           text-decoration: none;
         }
         :hover,

@@ -9,17 +9,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 70%;
+    width: 90%;
     min-width: 710px;
     margin: 10px auto;
     .title {
       font-weight: 600;
-      font-size: $giant-font;
+      font-size: $big-font;
       line-height: 150%;
     }
   }
   .tableContainer {
-    width: 70%;
+    width: 90%;
     min-width: 710px;
     margin: auto;
     .table {
@@ -29,7 +29,7 @@
           padding: 0.7rem;
           text-align: center;
           font-weight: 600;
-          font-size: $medium-font;
+          font-size: $small-font;
           line-height: 150%;
         }
       }
@@ -45,13 +45,13 @@
             padding: 10px;
             text-align: center;
             line-height: 150%;
-            font-size: $medium-font;
+            font-size: $small-font;
             .button {
               padding: 4px 12px;
               margin-left: 10px;
               border: none;
               border-radius: $medium-radius;
-              font-size: $medium-font;
+              font-size: $small-font;
               cursor: pointer;
             }
             .detail {

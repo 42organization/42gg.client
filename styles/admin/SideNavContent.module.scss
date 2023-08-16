@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 2rem;
+  height: 1.7rem;
   padding: 0 0.5rem;
   margin-bottom: 0.5rem;
   border-radius: 0.75rem;
@@ -18,6 +18,7 @@
 
 .contentText {
   font-family: $admin-font;
+  font-size: $small-font;
   margin-left: 0.75rem;
 }
 

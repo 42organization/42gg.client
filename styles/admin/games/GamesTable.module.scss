@@ -1,3 +1,4 @@
+@import 'styles/common.scss';
 @import 'styles/admin/common.scss';
 @import 'styles/admin/common/Pagination.module.scss';
 
@@ -12,12 +13,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 700px;
+    width: 90%;
     margin: 10px auto;
   }
   .title {
     font-weight: 600;
-    font-size: 18px;
+    font-size: $big-font;
     line-height: 150%;
   }
   .tableWrap {

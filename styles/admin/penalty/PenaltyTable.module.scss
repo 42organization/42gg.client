@@ -9,13 +9,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 70%;
+    width: 90%;
     min-width: 700px;
     margin: 10px auto;
     .title {
       display: flex;
       font-weight: 600;
-      font-size: $giant-font;
+      font-size: $big-font;
       line-height: 150%;
       .currentBtn {
         margin-left: 20px;
@@ -25,7 +25,7 @@
     }
   }
   .tableContainer {
-    width: 70%;
+    width: 90%;
     min-width: 700px;
     margin: auto;
     .table {
@@ -35,7 +35,7 @@
           padding: 0.7rem;
           text-align: center;
           font-weight: 600;
-          font-size: $medium-font;
+          font-size: $small-font;
           line-height: 150%;
         }
       }
@@ -51,13 +51,13 @@
             padding: 10px;
             text-align: center;
             line-height: 150%;
-            font-size: $medium-font;
+            font-size: $small-font;
             .button {
               padding: 4px 12px;
               background-color: #2678f3;
               border: none;
               border-radius: $medium-radius;
-              font-size: $medium-font;
+              font-size: $small-font;
               color: white;
               cursor: pointer;
               &:hover {

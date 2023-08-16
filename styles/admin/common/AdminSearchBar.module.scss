@@ -5,12 +5,12 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  height: 2.5rem;
+  height: 2rem;
   padding: 0 0.8rem;
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: $medium-radius;
-  font-size: $medium-font;
+  font-size: $small-font;
   input {
     all: unset;
     width: calc(100% - 4rem);
@@ -19,7 +19,7 @@
     span {
       display: flex;
       align-items: center;
-      font-size: 1.2rem;
+      font-size: $small-font;
     }
     .reset {
       color: gray;
