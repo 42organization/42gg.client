@@ -76,15 +76,16 @@ const MenuProfile = () => {
       </Link>
       <div className={styles.userInfoWrapper}>
         <div className={styles.userId}>
-          <div className={`${styles.tierId} ${findTierIndex}`}>
+          <div className={`${styles.tierContainer}`}>
             <PlayerImage
               src={profile.tierImageUri}
               styleName={'ranktier'}
               size={50}
             />
             &nbsp;
-            {profile.tierName}
-            <br />
+            <div className={`${styles.tierId} ${findTierIndex}`}>
+              {profile.tierName}
+            </div>
           </div>
           <Link
             href={`/users/detail?intraId=${user.intraId}`}
