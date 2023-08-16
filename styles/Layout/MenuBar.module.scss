@@ -48,12 +48,14 @@
         font-size: 1.3rem;
         font-weight: 700;
         color: rgba(43, 43, 43, 1);
-        .tierId {
-          @include tierNumber();
+        .tierContainer {
           display: flex;
           flex-direction: row;
           align-items: center;
-          font-size: 1rem;
+          .tierId {
+            @include tierNumber();
+            font-size: 1rem;
+          }
         }
       }
       .userLevel {
