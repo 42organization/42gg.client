@@ -18,7 +18,7 @@ type RankData = {
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const RankUserData: RankUserData[] = [
     {
-      intraId: 'hyungjpa',
+      intraId: 'kim_takgu',
       rank: 1,
       ppp: 1000,
       tierImageUri:
@@ -26,7 +26,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       statusMessage: '🏓🏓🏓🏓 42서울 최강 탁구왕 🏓🏓🏓🏓',
     },
     {
-      intraId: 'hyungjpa',
+      intraId: 'kim_takgu',
       rank: 2,
       ppp: 1000,
       tierImageUri:
@@ -34,7 +34,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       statusMessage: '안녕하세요',
     },
     {
-      intraId: 'hyungjpa',
+      intraId: 'kim_takgu',
       rank: 3,
       ppp: 1000,
       tierImageUri:
@@ -42,7 +42,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       statusMessage: '안녕하세요',
     },
     {
-      intraId: 'hyungjpa',
+      intraId: 'kim_takgu',
       rank: 4,
       ppp: 1000,
       tierImageUri:
@@ -50,7 +50,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       statusMessage: '안녕하세요',
     },
     {
-      intraId: 'hyungjpa',
+      intraId: 'kim_takgu',
       rank: 5,
       ppp: 1000,
       tierImageUri:
