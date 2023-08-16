@@ -16,6 +16,7 @@ export default function handler(
     tierImageUri: '/image/fallBackSrc.jpeg',
     tierName: '무지개 탁구채',
     expRate: 123,
+    edge: 'profile-edge0',
     snsNotiOpt: 'EMAIL',
   };
 

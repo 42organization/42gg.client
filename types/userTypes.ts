@@ -9,6 +9,7 @@ export interface ProfileBasic {
   tierImageUri: string;
   tierName: string;
   expRate: number;
+  edge: string;
   snsNotiOpt: 'NONE' | 'SLACK' | 'EMAIL' | 'BOTH';
 }
 

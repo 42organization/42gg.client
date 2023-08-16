@@ -27,6 +27,7 @@ export default function BasicProfile({ profileId }: ProfileProps) {
     MAX_LEVEL,
     tierImageUri,
     tierName,
+    edge,
   } = useBasicProfile({ profileId });
 
   const tierIndex = useRecoilValue(tierIdSelector);
