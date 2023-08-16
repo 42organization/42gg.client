@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { RankListItem } from 'components/rank/RankListItem';
+import { NormalListItem } from 'components/rank/NormalListItem';
 const meta: Meta = {
-  title: 'rank/RankListItem',
-  component: RankListItem,
+  title: 'rank/NormalListItem',
+  component: NormalListItem,
 };
 
 export default meta;
-type Story = StoryObj<typeof RankListItem>;
+type Story = StoryObj<typeof NormalListItem>;
 
 export const Default: Story = {
   args: {
@@ -14,9 +14,8 @@ export const Default: Story = {
       rank: 1,
       intraId: 'kim_takgu',
       statusMessage: '나는야 탁구왕 김탁구',
-      ppp: 1,
-      tierImageUri:
-        'https://cdn.pixabay.com/photo/2022/07/29/05/52/table-tennis-7351159_1280.png',
+      exp: 1,
+      level: 1,
       textColor: '#FFFFFF',
     },
   },
