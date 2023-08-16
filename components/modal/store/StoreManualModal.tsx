@@ -128,7 +128,7 @@ const modalContents: contentsType = {
   ],
 };
 
-export default function MatchManualModal({ radioMode }: StoreManual) {
+export default function StoreManualModal({ radioMode }: StoreManual) {
   const setModal = useSetRecoilState(modalState);
   const [manualMode, setManualMode] = useState<StoreManualMode>(radioMode);
 
