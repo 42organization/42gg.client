@@ -6,7 +6,7 @@ import styles from 'styles/rank/RankList.module.scss';
 
 type NormalListItemProps = {
   user: NormalUser;
-  textColorPreview?: string;
+  textColorPreview?: boolean;
 };
 
 export function NormalListItem({
@@ -24,16 +24,23 @@ export function NormalListItem({
     }
   };
 
+  const itemLayoutStyle = (textColorPreview?: boolean) => {
+    return textColorPreview
+      ? `${styles.rankItemWrap} ${styles.colorPreviewLayout}`
+      : `${styles.rankItemWrap} ${styles.Vip}`;
+  };
+
   return (
     <div
-      className={`${styles.rankItemWrap} ${topStyle(rank)} ${styles.Vip} ${
+      className={`${itemLayoutStyle(textColorPreview)} ${topStyle(rank)} ${
         intraId === myIntraId && styles.myVip
       }`}
     >
       {rank}
+      {textColorPreview ? <div></div> : null}
       <div
         style={{
-          color: textColorPreview === undefined ? textColor : textColorPreview,
+          color: textColor,
         }}
         className={styles.intraId}
       >
@@ -44,7 +51,9 @@ export function NormalListItem({
           </span>
         </Link>
       </div>
-      <div className={styles.statusMessage}>{statusMessage}</div>
+      {textColorPreview ? null : (
+        <div className={styles.statusMessage}>{statusMessage}</div>
+      )}
       <div className={styles.ppp}>{exp}</div>
     </div>
   );
