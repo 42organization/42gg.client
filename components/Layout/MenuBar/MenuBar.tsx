@@ -1,14 +1,11 @@
 import Link from 'next/link';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { useRecoilValue } from 'recoil';
 import { User } from 'types/mainType';
-import { ProfileBasic } from 'types/userTypes';
 import { userState } from 'utils/recoil/layout';
 import PlayerImage from 'components/PlayerImage';
 import { HeaderContextState, HeaderContext } from '../HeaderContext';
 import { MainMenu, AdminMenu } from './MenuBarElement';
-import useAxiosGet from 'hooks/useAxiosGet';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 const MenuTop = () => {
@@ -25,39 +22,6 @@ const MenuProfile = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const user = useRecoilValue<User>(userState);
 
-  const [profile, setProfile] = useState<ProfileBasic>({
-    intraId: '',
-    userImageUri: '',
-    racketType: 'shakeHand',
-    statusMessage: '',
-    level: 0,
-    currentExp: 0,
-    maxExp: 0,
-    expRate: 0,
-    snsNotiOpt: 'SLACK',
-    tierImageUri: '',
-    tierName: '손',
-    edge: '',
-  });
-  /*   const getProfile = useAxiosGet({
-    url: `/pingpong/users/${user.intraId}`,
-    setState: setProfile,
-    err: 'SJ03',
-    type: 'setError',
-  }); */
-  const getProfile = useMockAxiosGet<any>({
-    url: `users/intraId`,
-    setState: (data) => {
-      setProfile(data);
-    },
-    err: 'SJ03',
-    type: 'setError',
-  });
-
-  useEffect(() => {
-    getProfile();
-  }, []);
-
   const tierList = ['손', '빨', '노', '초', '파', '검', '무'];
   const tierColor = [
     'none',
@@ -68,7 +32,7 @@ const MenuProfile = () => {
     'black',
     'rainbow',
   ];
-  const index = tierList.findIndex((tier) => tier[0] === profile.tierName[0]);
+  const index = tierList.findIndex((tier) => tier[0] === user.tierName[0]);
   const tierId = tierColor[index];
   const findTierIndex =
     tierId === 'none' ? styles.tierId : styles['tierId' + tierId];
@@ -90,13 +54,13 @@ const MenuProfile = () => {
         <div className={styles.userId}>
           <div className={`${styles.tierContainer}`}>
             <PlayerImage
-              src={profile.tierImageUri}
+              src={user.tierImageUri}
               styleName={'ranktier'}
               size={50}
             />
             &nbsp;
             <div className={`${styles.tierId} ${findTierIndex}`}>
-              {profile.tierName}
+              {user.tierName}
             </div>
           </div>
           <Link
@@ -107,7 +71,7 @@ const MenuProfile = () => {
           </Link>
           님
         </div>
-        <div className={styles.userLevel}>LV.{profile.level}</div>
+        <div className={styles.userLevel}>LV.{user.level}</div>
       </div>
     </div>
   );

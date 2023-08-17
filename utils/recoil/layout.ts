@@ -11,6 +11,8 @@ export const userState = atom<User>({
     isAttended: true,
     tierImageUri: '',
     edge: '',
+    tierName: '손',
+    level: 0,
   },
 });
 
