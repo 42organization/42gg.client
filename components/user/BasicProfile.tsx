@@ -30,9 +30,9 @@ export default function BasicProfile({ profileId }: ProfileProps) {
     edge,
   } = useBasicProfile({ profileId });
 
-  const tierIndex = useRecoilValue(tierIdSelector);
+  const tierId = useRecoilValue(tierIdSelector);
   const findTierIndex =
-    tierIndex === -1 ? styles.tierId : styles['tierId' + tierIndex.toString()];
+    tierId === 'none' ? styles.tierId : styles['tierId' + tierId];
 
   return (
     <div className={styles.container}>

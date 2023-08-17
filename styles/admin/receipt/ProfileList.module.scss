@@ -35,6 +35,16 @@
   }
 }
 
+.searchWrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 0.3rem;
+  :nth-child(2) {
+    margin: 0 0 0 20px;
+  }
+}
+
 .deleteBtn {
   justify-content: center;
   align-items: center;

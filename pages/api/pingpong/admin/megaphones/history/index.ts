@@ -45,7 +45,7 @@ const megaphone5: Imegaphone = {
   content: '확성기입니다',
   usedAt: new Date('2023-07-02 10:20:10'),
   status: '사용 대기',
-  intraId: 'Hyungjpa',
+  intraId: 'hyungjpa',
 };
 
 const megaphone6: Imegaphone = {
@@ -53,7 +53,7 @@ const megaphone6: Imegaphone = {
   content: '확성기입니다',
   usedAt: new Date('2023-06-05 10:10:10'),
   status: '사용 대기',
-  intraId: 'hyungjpa',
+  intraId: 'jeyoon',
 };
 
 const megaphone7: Imegaphone = {
@@ -69,7 +69,7 @@ const megaphone8: Imegaphone = {
   content: '확성기입니다',
   usedAt: new Date('2023-05-05 10:10:10'),
   status: '사용 완료',
-  intraId: 'hyungjpa',
+  intraId: 'sangmipa',
 };
 
 const megaphone9: Imegaphone = {
@@ -77,7 +77,7 @@ const megaphone9: Imegaphone = {
   content: '확성기입니다',
   usedAt: new Date('2023-05-04 10:10:10'),
   status: '사용 완료',
-  intraId: 'hyungjpa',
+  intraId: 'sangmipa',
 };
 
 const megaphone10: Imegaphone = {
@@ -85,7 +85,7 @@ const megaphone10: Imegaphone = {
   content: '확성기입니다',
   usedAt: new Date('2023-05-03 10:10:10'),
   status: '사용 완료',
-  intraId: 'hyungjpa',
+  intraId: 'hyobicho',
 };
 
 const megaphoneList: Array<Imegaphone> = [
@@ -118,7 +118,7 @@ const resTwo: ImegaphoneRes = {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, query } = req;
-  const { page } = query as { page: string };
+  const { intraId, page } = query as { intraId: string; page: string };
 
   // const temp: ImegaphoneTable = resEmpty;
   // const temp: ImegaphoneTable = resOne;
@@ -130,11 +130,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   };
 
   if (method === 'GET') {
-    if (page) {
-      if (parseInt(page) === resData.totalPage) {
-        resData.megaphoneList = temp.megaphoneList.slice(0, 5);
-      } else {
-        resData.megaphoneList = temp.megaphoneList;
+    if (intraId) {
+      resData.megaphoneList = temp.megaphoneList.filter(
+        (megaphone: Imegaphone) => megaphone.intraId === intraId
+      );
+      resData.totalPage = 1;
+    } else {
+      if (page) {
+        if (parseInt(page) === resData.totalPage) {
+          resData.megaphoneList = temp.megaphoneList.slice(0, 5);
+        } else {
+          resData.megaphoneList = temp.megaphoneList;
+        }
       }
     }
     res.status(200).json(resData);

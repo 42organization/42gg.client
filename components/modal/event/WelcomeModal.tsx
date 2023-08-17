@@ -7,12 +7,14 @@ import { CoinResult } from 'types/coinTypes';
 import { modalState } from 'utils/recoil/modal';
 import { errorState } from 'utils/recoil/error';
 import styles from 'styles/modal/event/WelcomeModal.module.scss';
+import CoinPopcon from '../CoinPopcon';
 import { mockInstance } from 'utils/mockAxios';
 
 export default function WelcomeModal() {
   const setModal = useSetRecoilState<Modal>(modalState);
   const [coin, setCoin] = useState<CoinResult>();
   const setError = useSetRecoilState(errorState);
+  const [buttonState, setButtonState] = useState(false);
 
   const content = {
     title: 'Welcome!',
@@ -57,6 +59,7 @@ export default function WelcomeModal() {
 
   const openAttendanceCoin = async () => {
     try {
+      setButtonState(true);
       const updatedCoin = await getCoinHandler();
       //const updatedCoin = await postCoinHandler();
 
@@ -65,9 +68,10 @@ export default function WelcomeModal() {
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {
-          afterCoin: updatedCoin?.afterCoin,
-          beforeCoin: updatedCoin?.beforeCoin,
-          coinIncrement: updatedCoin?.coinIncrement,
+          isAttended: true,
+          afterCoin: updatedCoin.afterCoin,
+          beforeCoin: updatedCoin.beforeCoin,
+          coinIncrement: updatedCoin.coinIncrement,
         },
       });
     } catch (error) {
@@ -104,9 +108,11 @@ export default function WelcomeModal() {
           <div className={styles.positive}>
             <input
               onClick={openAttendanceCoin}
+              // onClick={openStatChangeModal}
               type='button'
               value='출석하기'
             />
+            {buttonState && <CoinPopcon amount={10} coin={1} />}
           </div>
         </div>
       </div>

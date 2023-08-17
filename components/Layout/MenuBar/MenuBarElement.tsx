@@ -90,6 +90,7 @@ export const MainMenu = () => {
         setModal({
           modalName: 'EVENT-ANNOUNCEMENT',
           announcement: data,
+          isAttended: true,
         });
     },
     err: 'RJ01',

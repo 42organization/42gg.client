@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Imegaphone, ImegaphoneTable } from 'types/admin/adminReceiptType';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
@@ -17,6 +17,7 @@ import {
 import styles from 'styles/admin/receipt/MegaphoneList.module.scss';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
+import AdminSearchBar from '../common/AdminSearchBar';
 
 const megaPhoneTableTitle: { [key: string]: string } = {
   megaphoneId: 'ID',
@@ -45,13 +46,46 @@ function MegaphoneList() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const setModal = useSetRecoilState(modalState);
+  const [intraId, setIntraId] = useState<string>('');
+  const [modal, setModal] = useRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
   // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
+  const initSearch = useCallback((intraId?: string) => {
+    setIntraId(intraId || '');
+    setCurrentPage(1);
+  }, []);
+
+  const getUserMegaphoneHandler = useCallback(async () => {
+    try {
+      const res = await mockInstance.get(
+        `/admin/megaphones/history?intraId=${intraId}&page=${currentPage}&size=10`
+      );
+      setMegaphoneData({
+        megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(megaphone.usedAt)
+          );
+          return {
+            ...megaphone,
+            usedAt: `${year}-${month}-${date} ${hour}:${min}`,
+          };
+        }),
+        totalPage: res.data.totalPage,
+        currentPage: currentPage,
+      });
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'get user megaphone',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
+    }
+  }, [intraId, currentPage]);
 
   // instanceInManage로 변경
-  const getMegaphoneHandler = useCallback(async () => {
+  const getAllMegaphoneHandler = useCallback(async () => {
     try {
       const res = await mockInstance.get(
         `/admin/megaphones/history?page=${currentPage}&size=10`
@@ -95,11 +129,14 @@ function MegaphoneList() {
   };
 
   useEffect(() => {
-    getMegaphoneHandler();
-  }, [currentPage]);
+    intraId ? getUserMegaphoneHandler() : getAllMegaphoneHandler();
+  }, [intraId, getUserMegaphoneHandler, getAllMegaphoneHandler, modal]);
 
   return (
     <>
+      <div className={styles.searchWrap}>
+        <AdminSearchBar initSearch={initSearch} />
+      </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <TableHead className={styles.tableHeader}>

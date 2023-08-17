@@ -1,15 +1,20 @@
 import { useSetRecoilState } from 'recoil';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
-import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 import { IoSend } from 'react-icons/io5';
 import styles from 'styles/admin/modal/AdminFeedbackCheck.module.scss';
+
+interface IfeedbackProps {
+  id: number;
+  intraId: string;
+  isSolved: boolean;
+}
 
 export default function AdminFeedbackCheck({
   id,
   intraId,
   isSolved,
-}: IFeedback) {
+}: IfeedbackProps) {
   const setModal = useSetRecoilState(modalState);
 
   const sendNotificationHandler = async (isSend: boolean) => {

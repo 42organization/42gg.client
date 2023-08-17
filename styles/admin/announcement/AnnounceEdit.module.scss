@@ -89,10 +89,11 @@
 
   button {
     all: unset;
-    width: 6rem;
+    width: 5rem;
     height: 2rem;
     background: gray;
     border-radius: 0.5rem;
+    font-size: $small-font;
     text-align: center;
     color: white;
     cursor: pointer;
@@ -110,7 +111,7 @@
 .noActive {
   @include modalContainer('SKYPINK');
   margin: 1.5rem;
-  font-size: $big-font;
+  font-size: $medium-font;
   color: black;
 }
 
@@ -121,6 +122,7 @@
   align-items: flex-end;
   width: 100%;
   max-width: 40rem;
+  height: 25rem;
   padding: 1rem;
   border-radius: $small-radius;
   border: 1px solid $gray;

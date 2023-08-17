@@ -22,7 +22,7 @@ import { modalState } from 'utils/recoil/modal';
 const itemHistoryTableTitle: { [key: string]: string } = {
   itemId: 'ID',
   createdAt: '변경일',
-  name: '이름',
+  itemName: '이름',
   content: '설명',
   imageUri: '이미지',
   price: '원가',
@@ -35,7 +35,7 @@ const itemHistoryTableTitle: { [key: string]: string } = {
 const tableColumnName = [
   'itemId',
   'createdAt',
-  'name',
+  'itemName',
   'content',
   'imageUri',
   'price',
@@ -91,7 +91,7 @@ function ItemHistory() {
   const openDetailModal = (itemHistory: IitemHistory) => {
     setModal({
       modalName: 'ADMIN-DETAIL_CONTENT',
-      detailTitle: itemHistory.name,
+      detailTitle: itemHistory.itemName,
       detailContent: itemHistory.content,
     });
   };

@@ -10,10 +10,9 @@ export default function handler(
     isAdmin: true,
     userImageUri:
       'https://cdn.pixabay.com/photo/2020/10/25/17/41/table-tennis-5685071_1280.jpg',
-    isAttended: true,
+    isAttended: false,
     tierImageUri:
       'https://cdn.pixabay.com/photo/2022/07/29/05/52/table-tennis-7351159_1280.png',
   };
-
   res.status(200).json(userData);
 }

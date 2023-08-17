@@ -350,41 +350,41 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   font-family: Gugi;
   background: black;
   @include txtColor();
-  &.tierId1 {
+  &.tierIdred {
     background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
     @include txtColor();
   }
-  &.tierId2 {
+  &.tierIdyellow {
     background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
     @include txtColor();
   }
-  &.tierId3 {
+  &.tierIdgreen {
     background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
     @include txtColor();
   }
-  &.tierId4 {
+  &.tierIdblue {
     background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
     @include txtColor();
   }
-  &.tierId5 {
+  &.tierIdblack {
     background: linear-gradient(
       180.89deg,
-      rgba(178, 178, 178, 0.552801) 26.68%,
-      rgba(102, 102, 102, 0.3) 47.47%,
-      rgba(102, 102, 102, 0.51) 65.76%,
+      rgba(114, 114, 114, 0.553) 26.68%,
+      rgba(82, 82, 82, 0.3) 47.47%,
+      rgba(61, 61, 61, 0.51) 65.76%,
       rgba(0, 0, 0, 0) 84.03%
     );
     @include txtColor();
   }
-  &.tierId6 {
+  &.tierIdrainbow {
     background: linear-gradient(
       90deg,
       rgba(239, 80, 80, 0.553) 15%,
-      rgba(255, 255, 102, 0.552801) 35.66%,
-      rgba(77, 233, 77, 0.553) 45.33%,
-      rgba(48, 145, 241, 0.553) 70%,
-      rgba(102, 102, 102, 0.3) 80.66%,
-      rgba(255, 209, 91, 0.51) 100%
+      #f6d365 38%,
+      rgba(60, 238, 60, 0.553) 45.33%,
+      rgba(10, 122, 234, 0.867) 70%,
+      rgba(26, 26, 27, 0.568) 80.66%,
+      rgb(123, 97, 224) 100%
     );
     @include txtColor();
   }

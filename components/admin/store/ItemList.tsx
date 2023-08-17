@@ -19,7 +19,7 @@ import { toastState } from 'utils/recoil/toast';
 
 const itemListTableTitle: { [key: string]: string } = {
   itemId: 'ID',
-  name: '아이템명',
+  itemName: '아이템명',
   content: '설명',
   itemType: '타입',
   imageUri: '이미지',
@@ -32,7 +32,7 @@ const itemListTableTitle: { [key: string]: string } = {
 
 const tableColumnName = [
   'itemId',
-  'name',
+  'itemName',
   'content',
   'itemType',
   'imageUri',
@@ -84,7 +84,7 @@ function ItemList() {
   const openDetailModal = (item: Item) => {
     setModal({
       modalName: 'ADMIN-DETAIL_CONTENT',
-      detailTitle: item.name,
+      detailTitle: item.itemName,
       detailContent: item.content,
     });
   };
