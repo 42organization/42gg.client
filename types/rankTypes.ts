@@ -27,6 +27,7 @@ export interface Rank {
   rankList: RankUser[] | NormalUser[];
 }
 
+// TODO: edge 추가
 export interface userImages {
   intraId: string;
   userImageUri: string;

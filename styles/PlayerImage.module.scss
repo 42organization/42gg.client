@@ -42,7 +42,8 @@
 
 .mainPageProfile {
   @include imageWrap;
-  @include profileEdge(4.4rem, $profile-edge1);
+  @include profileEdge(4.4rem);
+  background-color: white;
   div {
     @include userImage(4rem);
     cursor: pointer;
@@ -52,7 +53,7 @@
 
 .menuProfile {
   @include imageWrap;
-  @include profileEdge(4.3rem, $profile-edge3);
+  @include profileEdge(4.3rem);
   div {
     @include userImage(3.9rem);
     cursor: pointer;
@@ -73,7 +74,7 @@
   justify-content: center;
   align-items: center;
   padding: 0.2rem;
-  @include profileEdge(8.8rem, $profile-edge3);
+  @include profileEdge(8.8rem);
   div {
     @include userImage(8rem);
   }
@@ -81,7 +82,7 @@
 
 .ranktropybig {
   @include imageWrap;
-  @include profileEdge(7.2rem, $profile-edge2);
+  @include profileEdge(7.2rem);
   div {
     @include userRankImage(6.5rem);
     cursor: pointer;
@@ -90,7 +91,7 @@
 
 .ranktropy {
   @include imageWrap;
-  @include profileEdge(5rem, $profile-edge3);
+  @include profileEdge(5rem);
   div {
     @include userRankImage(4.5rem);
     cursor: pointer;
@@ -105,13 +106,13 @@
 
 @media (max-width: 457px) {
   .ranktropy {
-    @include profileEdge(4.4rem, $profile-edge3);
+    @include profileEdge(4.4rem);
     div {
       @include userRankImage(4rem);
     }
   }
   .ranktropybig {
-    @include profileEdge(5.5rem, $profile-edge5);
+    @include profileEdge(5.5rem);
     div {
       @include userRankImage(5rem);
     }

@@ -38,7 +38,7 @@ const MenuProfile = () => {
     snsNotiOpt: 'SLACK',
     tierImageUri: '',
     tierName: '',
-    edge: '',
+    edge: 'BASIC',
   });
 
   /*   const getProfile = useAxiosGet({
@@ -71,7 +71,7 @@ const MenuProfile = () => {
       >
         <PlayerImage
           src={user.userImageUri}
-          styleName={'menuProfile'}
+          styleName={`menuProfile ${user.edge.toLowerCase()}`}
           size={18}
         />
       </Link>

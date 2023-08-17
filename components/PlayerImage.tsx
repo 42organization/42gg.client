@@ -16,8 +16,15 @@ export default function PlayerImage({
 }: PlayerImageProps) {
   const [imgError, setImgError] = useState(false);
   const imgSrc = !src || imgError ? fallBack : src;
+  const [parentStyle, childStyle] = styleName.split(' ');
+
+  console.log(styleName);
   return (
-    <div className={styles[styleName]}>
+    <div
+      className={`${styles[parentStyle]} ${
+        childStyle ? styles[childStyle] : ''
+      }`}
+    >
       <div>
         <Image
           src={imgSrc}

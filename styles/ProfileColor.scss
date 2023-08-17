@@ -68,11 +68,61 @@ $profile-edge16: linear-gradient(
   #8fffa4 100%
 );
 
-@mixin profileEdge($size, $color) {
+@mixin profileEdge($size) {
   height: $size;
   width: $size;
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
   border-radius: 50%;
-  background: $color;
+  &.basic {
+    background: $profile-edge0;
+  }
+  &.edge1 {
+    background: $profile-edge1;
+  }
+  &.edge2 {
+    background: $profile-edge2;
+  }
+  &.edge3 {
+    background: $profile-edge3;
+  }
+  &.edge4 {
+    background: $profile-edge4;
+  }
+  &.edge5 {
+    background: $profile-edge5;
+  }
+  &.edge6 {
+    background: $profile-edge6;
+  }
+  &.edge7 {
+    background: $profile-edge7;
+  }
+  &.edge8 {
+    background: $profile-edge8;
+  }
+  &.edge9 {
+    background: $profile-edge9;
+  }
+  &.edge10 {
+    background: $profile-edge10;
+  }
+  &.edge11 {
+    background: $profile-edge11;
+  }
+  &.edge12 {
+    background: $profile-edge12;
+  }
+  &.edge13 {
+    background: $profile-edge13;
+  }
+  &.edge14 {
+    background: $profile-edge14;
+  }
+  &.edge15 {
+    background: $profile-edge15;
+  }
+  &.edge16 {
+    background: $profile-edge16;
+  }
 }

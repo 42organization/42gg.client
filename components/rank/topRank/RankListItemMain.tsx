@@ -42,7 +42,12 @@ export default function RankListItemMain({
               <Link href={`users/detail?intraId=${intraId}`}>
                 <PlayerImage
                   src={userImageUri}
-                  styleName={rank === 1 ? 'ranktropybig' : 'ranktropy'}
+                  // TODO: edge 추가
+                  styleName={
+                    rank === 1
+                      ? `ranktropybig ${'edge1'}`
+                      : `ranktropy ${'edge2'}`
+                  }
                   size={50}
                 />
                 <div className={`${styles.tierImageId}`}>

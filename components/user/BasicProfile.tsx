@@ -48,7 +48,11 @@ export default function BasicProfile({ profileId }: ProfileProps) {
         ></span>
       </div>
       {intraId && (
-        <PlayerImage src={userImageUri} styleName={'mainProfile'} size={30} />
+        <PlayerImage
+          src={userImageUri}
+          styleName={`mainProfile ${edge.toLowerCase()}`}
+          size={30}
+        />
       )}
       <div className={styles.idContainer}>
         <div className={styles.ranktier}>
