@@ -1,4 +1,5 @@
 @import 'styles/common.scss';
+@import 'styles/ProfileColor.scss';
 
 @mixin imageWrap {
   display: flex;
@@ -47,7 +48,7 @@
   margin-bottom: 0.2rem;
   border-radius: 50%;
   // 이미지띠 색상
-  background: $profile-edge0;
+  background: $profile-edge1;
   div {
     @include userImage(4rem);
     cursor: pointer;
@@ -93,14 +94,13 @@
   }
 }
 
-// TODO: 어디에 쓰이는지 확인
+// TODO: 지우기!!
 .profile {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0.2rem;
   border-radius: 50%;
-  // 이미지띠 색상
   background: linear-gradient(
     to right bottom,
     #0030ac 0%,
@@ -119,7 +119,7 @@
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
   border-radius: 50%;
-  background: $profile-edge0;
+  background: $profile-edge2;
   div {
     @include userRankImage(6.5rem);
     cursor: pointer;
@@ -133,7 +133,7 @@
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
   border-radius: 50%;
-  background: $profile-edge0;
+  background: $profile-edge3;
   div {
     @include userRankImage(4.5rem);
     cursor: pointer;

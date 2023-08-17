@@ -54,23 +54,6 @@ $g2-bottom: #b5bbf2;
 $loser-red: #ff0303;
 $winner-blue: #040eff;
 
-/* profile-edge color */
-// TODO: 16가지 색상 추가
-$profile-edge0: #666666;
-$profile-edge1: linear-gradient(
-  140.76deg,
-  #0069ff 0%,
-  #be7bcf 43.97%,
-  #ff7ee3 70.25%,
-  #426bff 91.76%
-);
-$profile-edge2: linear-gradient(
-  to right bottom,
-  #0030ac 0%,
-  #90a5ff 50%,
-  #8fffa4 100%
-);
-
 /* font */
 $logo-font: 'Agonostic Italic', cursive;
 $title-font: 'Lexend';
