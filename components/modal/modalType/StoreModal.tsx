@@ -40,5 +40,6 @@ export default function StoreModal() {
     ) : null,
   };
 
-  return <>{modalName && content[modalName]}</>;
+  if (!modalName) return null;
+  return content[modalName];
 }
