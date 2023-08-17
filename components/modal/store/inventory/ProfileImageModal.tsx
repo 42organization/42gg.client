@@ -42,7 +42,7 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
           type: 'application/json',
         })
       );
-      formData.append('imgData', new Blob([imgData], { type: 'image/jpg' }));
+      formData.append('imgData', new Blob([imgData], { type: 'image/jpeg' }));
       const ret = await mockInstance.post('/users/profile-image', formData);
       if (ret.status === 201) {
         alert('프로필 이미지가 변경되었습니다.');
@@ -84,7 +84,7 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
               )}
               <input
                 type='file'
-                accept='image/jpg'
+                accept='image/jpeg'
                 style={{ display: 'none' }}
                 onChange={uploadImg}
               />
