@@ -9,6 +9,8 @@ import NoCoinModal from '../store/purchase/NoCoinModal';
 import ChangeIdColorModal from '../store/inventory/ChangeIdColorModal';
 import NewMegaphoneModal from '../store/inventory/NewMegaphoneModal';
 import EditMegaphoneModal from '../store/inventory/EditMegaphoneModal';
+import ChangeProfileEdgeModal from '../store/inventory/ChangeProfileEdgeModal';
+import GachaModal from '../store/inventory/GachaModal';
 
 export default function StoreModal() {
   const {
@@ -35,6 +37,10 @@ export default function StoreModal() {
     'USE-ITEM-MEGAPHONE': useItemInfo ? (
       <NewMegaphoneModal {...useItemInfo} />
     ) : null,
+    'USE-ITEM-PROFILE_BAND': useItemInfo ? (
+      <ChangeProfileEdgeModal {...useItemInfo} />
+    ) : null,
+    'USE-ITEM-GACHA': <GachaModal />,
     'EDIT-ITEM-MEGAPHONE': useItemInfo ? (
       <EditMegaphoneModal {...useItemInfo} />
     ) : null,
