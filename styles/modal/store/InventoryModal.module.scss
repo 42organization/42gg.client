@@ -69,22 +69,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 3rem 0;
   img {
-    width: 5rem;
-    height: 5rem;
+    width: 5.5rem;
+    height: 5.5rem;
     border-radius: 50%;
     overflow: hidden;
     object-fit: cover;
   }
   svg {
-    margin: 0 1rem;
+    margin: 0 1.5rem;
   }
   .profilePreview {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 5rem;
-    height: 5rem;
+    width: 5.5rem;
+    height: 5.5rem;
     border-radius: 50%;
     background-color: #c7b1ee;
     cursor: pointer;
