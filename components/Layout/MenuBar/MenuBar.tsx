@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { profileState } from 'utils/recoil/user';
-import { tierIdSelector } from 'utils/recoil/tierColor';
+import { useRecoilValue } from 'recoil';
 import { User } from 'types/mainType';
 import { ProfileBasic } from 'types/userTypes';
 import { userState } from 'utils/recoil/layout';
