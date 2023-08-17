@@ -4,13 +4,10 @@ $anim_delay: 0;
 .circle {
   position: fixed;
   z-index: 6 !important;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #d28e5d;
-  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
   display: none;
-  z-index: 2;
 }
 
 .appear {

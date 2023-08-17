@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import styles from 'styles/modal/CoinPopcon.module.scss';
-
 interface amountProps {
   amount: number;
   coin: number;
@@ -48,8 +47,10 @@ export default function CoinPopcon({ amount, coin }: amountProps) {
       const x = randomTilt === 'l' ? x2 : x3;
       const b = (y1 - y_lr - a * (x1 * x1 - x * x)) / (x1 - x);
       const c = y1 - a * x1 * x1 - b * x1;
-      const circle = document.createElement('div');
+
+      const circle = document.createElement('img');
       circle.className = styles.circle;
+      circle.src = '/image/coinImage.svg';
       document.body.appendChild(circle);
       setCircles((prevCircles) => [...prevCircles, circle]);
       let sum = x1;
