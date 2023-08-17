@@ -4,8 +4,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-width: 64rem;
-  max-width: 72rem;
+  min-width: 50rem;
   height: 100%;
   padding: 1.5rem;
 }
@@ -29,7 +28,7 @@
         padding: 0.5rem;
         text-align: center;
         font-size: $small-font;
-        line-height: 100%;
+        // line-height: 100%;
       }
     }
   }
@@ -37,14 +36,13 @@
 
 .BtnContainer {
   display: flex;
-  flex-direction: row-reverse;
-  padding-top: 1rem;
-  padding-right: 1rem;
+  justify-content: center;
+  align-items: center;
 
   button {
     all: unset;
     width: 4rem;
-    height: 1.6rem;
+    height: 1.5rem;
     background: $btn-blue;
     border-radius: 0.5rem;
     text-align: center;

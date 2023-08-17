@@ -37,6 +37,7 @@ const MenuProfile = () => {
     snsNotiOpt: 'SLACK',
     tierImageUri: '',
     tierName: '손',
+    edge: '',
   });
   /*   const getProfile = useAxiosGet({
     url: `/pingpong/users/${user.intraId}`,

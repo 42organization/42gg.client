@@ -2,7 +2,7 @@ $anim_duration: 0.65;
 $anim_delay: 0.3;
 $fontsize: 50px;
 
-.stageCoins{
+.stageCoins {
   width: 4rem;
   height: 6rem;
   margin: auto;
@@ -12,9 +12,9 @@ $fontsize: 50px;
   width: 100%;
   height: 100%;
   font-size: $fontsize;
-  
+
   display: flex;
-  flex-direction: row;  
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
@@ -23,24 +23,24 @@ $fontsize: 50px;
   height: 100%;
   display: flex;
   flex-direction: column-reverse;
-  flex-grow:0;
+  flex-grow: 0;
 }
 
 .stack {
-  position:relative;
-  height: 0.15em;
+  position: relative;
+  height: 0.12em;
 }
 
 .stackl {
-  position:relative;
-  height: 0.15em;
-  left: -0.125em;
+  position: relative;
+  height: 0.12em;
+  left: -0.1em;
 }
 
 .stackr {
-  position:relative;
-  height: 0.15em;
-  left: 0.125em;
+  position: relative;
+  height: 0.12em;
+  left: 0.1em;
 }
 
 .fall {
@@ -48,16 +48,16 @@ $fontsize: 50px;
   animation: falling #{$anim_duration}s ease-in forwards 1;
 }
 
-.coin {  
+.coin {
   padding: 0 0.5em;
   width: 2.1em;
-  height: 1.1em;  
+  height: 1.1em;
   transform: translateY(-100%);
 }
 
 @for $i from 1 through 15 {
-  .fall:nth-child(#{$i}) {  
-    animation-delay: #{($i*$anim_delay) * $anim_duration}s;
+  .fall:nth-child(#{$i}) {
+    animation-delay: #{($i * $anim_delay) * $anim_duration}s;
   }
 }
 
@@ -69,9 +69,9 @@ $fontsize: 50px;
   animation: appear #{$anim_duration}s ease-in forwards 1;
 }
 
-@for $i from 1 through 25 { 
+@for $i from 1 through 25 {
   .appear:nth-child(#{$i}) {
-    animation-delay: #{($i*3.5*$anim_delay) * $anim_duration}s;
+    animation-delay: #{($i * 3.5 * $anim_delay) * $anim_duration}s;
   }
 }
 
@@ -80,16 +80,16 @@ $fontsize: 50px;
     transform: translatey(-100px);
     opacity: 0;
   }
-  
+
   80% {
     transform: translatey(0);
     opacity: 1;
   }
-  82%{
+  82% {
     transform: translatey(-3px);
     opacity: 1;
   }
-  
+
   100% {
     transform: translatey(0);
     opacity: 1;

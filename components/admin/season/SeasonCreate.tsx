@@ -63,45 +63,48 @@ export default function SeasonCreate() {
                   {columnName}
                 </TableCell>
               ))}
+              <TableCell className={styles.tableHeaderItem}>생성</TableCell>
             </TableRow>
           </TableHead>
           <TableBody className={styles.tableBody}>
             <TableRow>
-              <TableCell>
+              <TableCell className={styles.tableBodyItem}>
                 <input
                   type='text'
                   name='seasonName'
                   onChange={inputChangeHandler}
                 />
               </TableCell>
-              <TableCell>
+              <TableCell className={styles.tableBodyItem}>
                 <input
                   type='datetime-local'
                   name='startTime'
                   onChange={inputChangeHandler}
                 />
               </TableCell>
-              <TableCell>
+              <TableCell className={styles.tableBodyItem}>
                 <input
                   type='number'
                   name='startPpp'
                   onChange={inputChangeHandler}
                 />
               </TableCell>
-              <TableCell>
+              <TableCell className={styles.tableBodyItem}>
                 <input
                   type='number'
                   name='pppGap'
                   onChange={inputChangeHandler}
                 />
               </TableCell>
+              <TableCell className={styles.tableBodyItem}>
+                <div className={styles.BtnContainer}>
+                  <button onClick={postHandler}>생성</button>
+                </div>
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
-      <div className={styles.BtnContainer}>
-        <button onClick={postHandler}>생성</button>
-      </div>
     </div>
   );
 }
