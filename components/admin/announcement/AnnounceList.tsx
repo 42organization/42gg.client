@@ -5,7 +5,7 @@ import { instanceInManage } from 'utils/axios';
 import { tableFormat } from 'constants/admin/table';
 import PageNation from 'components/Pagination';
 import {
-Paper,
+  Paper,
   Table,
   TableBody,
   TableCell,
@@ -57,7 +57,7 @@ export default function AnnounceList() {
   const getAnnouncements = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/announcement?page=${currentPage}&size=5`
+        `/announcement?page=${currentPage}&size=3`
       );
       setAnnouncementInfo({ ...res.data, currentPage: currentPage });
     } catch (e) {
@@ -93,7 +93,10 @@ export default function AnnounceList() {
                     {tableFormat['announcement'].columns.map(
                       (columnName: string, index: number) => {
                         return columnName == 'content' ? (
-                          <TableCell key={index}>
+                          <TableCell
+                            className={styles.tableBodyItemQuill}
+                            key={index}
+                          >
                             <Quill
                               className={styles.quillViewer}
                               readOnly={true}
