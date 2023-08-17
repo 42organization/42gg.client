@@ -67,3 +67,12 @@ $profile-edge16: linear-gradient(
   #90a5ff 50%,
   #8fffa4 100%
 );
+
+@mixin profileEdge($size, $color) {
+  height: $size;
+  width: $size;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  border-radius: 50%;
+  background: $color;
+}
