@@ -11,10 +11,7 @@ const useBuyModal = (purchasedItem: Purchase) => {
   // TODO: mockInstance 대신 instance로 변경하기
   const onPurchase = async () => {
     try {
-      const res = await mockInstance.post(
-        `/items/purchases/${purchasedItem.itemId}`,
-        purchasedItem
-      );
+      await mockInstance.post(`/items/purchases/${purchasedItem.itemId}`, null);
       // TODO: alert 대신 toast 띄우거나 아무것도 안하기
       alert(`구매 성공!`);
     } catch (error) {
