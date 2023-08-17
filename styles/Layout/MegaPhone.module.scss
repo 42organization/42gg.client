@@ -1,51 +1,72 @@
+@mixin slide($num) {
+  transition: all 1s ease-in-out;
+  transform: translateY($num);
+}
+
 .rollingBanner {
-    position: relative;
-    background: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+  height: 2.2rem;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .wrapper {
-    width: 90%;
-    height: 100%;
-    background-color: black;
-    text-align: center;
-    overflow: hidden;
-    white-space: nowrap;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+
+  &.slideNext0 {
+    @include slide(0%);
+  }
+  &.slideNext1 {
+    @include slide(-100%);
+  }
+  &.slideNext2 {
+    @include slide(-200%);
+  }
+  &.slideNext3 {
+    @include slide(-300%);
+  }
+  &.slideNext4 {
+    @include slide(-400%);
+  }
+  &.slideNext5 {
+    @include slide(-500%);
+  }
+  &.slideNext6 {
+    @include slide(-600%);
+  }
+  &.slideNext7 {
+    @include slide(-700%);
+  }
+  &.slideNext8 {
+    @include slide(-800%);
+  }
+  &.slideNext9 {
+    @include slide(-900%);
+  }
 }
 
-.megaphoneContents {
-    animation: text-scroll 20s linear infinite;
-
-    &.pause {
-        animation-play-state: paused;
-    }
-    &.running {
-        animation-play-state: running;
-    }
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 2.2rem;
+  color: rgba(255, 255, 0, 0.8);
+  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
-@keyframes text-scroll {
-    from {
-        transform: translateX(120%);
-        -moz-transform: translateX(120%);
-        -webkit-transform: translateX(120%);
-        -o-transform: translateX(120%);
-        -ms-transform: translateX(120%);
-    }
-    to {
-        transform: translateX(-120%);
-        -moz-transform: translateX(-120%);
-        -webkit-transform: translateX(-120%);
-        -o-transform: translateX(-120%);
-        -ms-transform: translateX(-120%);
-    }
+.content {
+  font-size: 0.8rem;
 }
 
-
-.megaphoneContents li {
-    display: inline-block;
-    color: yellow;
+.intraId {
+  font-size: 0.6rem;
 }
