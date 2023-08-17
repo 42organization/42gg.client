@@ -10,6 +10,11 @@ interface IMegaphoneContent {
 
 type MegaphoneList = Array<IMegaphoneContent>;
 
+type MegaphoneContainerProps = {
+  children: React.ReactNode;
+  count: number;
+};
+
 const defaultContents: MegaphoneList = [
   {
     megaphoneId: 1,
@@ -17,23 +22,18 @@ const defaultContents: MegaphoneList = [
       '등록된 확성기가 없습니다. 상점에서 아이템을 구매해서 확성기를 등록해보세요!',
     intraId: '관리자',
   },
+  {
+    megaphoneId: 2,
+    content:
+      '등록된 확성기가 없습니다. 상점에서 아이템을 구매해서 확성기를 등록해보세요!',
+    intraId: '관리자',
+  },
 ];
 
-type MegaphoneContainerProps = {
-  clickPause: () => void;
-  play: string;
-  children: React.ReactNode;
-  count: number;
-};
-
 export const MegaphoneContainer = ({
-  clickPause,
-  play,
   children,
   count,
 }: MegaphoneContainerProps) => {
-  // 문구 수, 문구 길이에 따라 애니메이션 속도 조절하는 style 추가 필요
-
   const ref = useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [wrapperStyle, setWrapperStyle] = useState<string>('slideNext0');
@@ -57,11 +57,9 @@ export const MegaphoneContainer = ({
   }, [selectedIndex, count]);
 
   return (
-    <div className={styles.rollingBanner} onClick={() => clickPause()}>
+    <div className={styles.rollingBanner}>
       <div className={`${styles.wrapper} ${styles[wrapperStyle]}`} ref={ref}>
-        {/* <ul className={`${styles.megaphoneContents} ${styles[play]}`}> */}
         {children}
-        {/* </ul> */}
       </div>
     </div>
   );
@@ -96,40 +94,8 @@ const Megaphone = () => {
     getMegaphoneHandler();
   }, []);
 
-  const clickPause = () => {
-    if (play === 'pause') {
-      setPlay('running');
-    } else {
-      setPlay('pause');
-      setTimeout(() => setPlay('running'), 5000);
-    }
-  };
-
-  // 흐르는 배너 형태 사용 시 확성기 전체 길이 구하는 함수
-  // const getContentsLength = () => {
-  //   let len = 0;
-  //   for (let i = 0; i < contents.length; i++) {
-  //     len += contents[i].intraId.length;
-  //     len += contents[i].content.length;
-  //   }
-  //   return len;
-  // };
-
   return (
-    <MegaphoneContainer
-      clickPause={clickPause}
-      play={play}
-      count={contents.length}
-    >
-      {/* {contents.map((content, idx) =>
-        content === defaultContents[0] ? (
-          <li key={idx}>{content.content}</li>
-        ) : (
-          <li key={idx}>
-            {content.intraId} : {content.content}&nbsp;&nbsp;
-          </li>
-        )
-      )} */}
+    <MegaphoneContainer count={contents.length}>
       {contents.map((content, idx) => (
         <MegaphoneItem
           content={content.content}
@@ -137,7 +103,6 @@ const Megaphone = () => {
           key={idx}
         />
       ))}
-      {/* <MegaphoneItem content={contents[0].content} intraId={contents[0].intraId} /> */}
     </MegaphoneContainer>
   );
 };
