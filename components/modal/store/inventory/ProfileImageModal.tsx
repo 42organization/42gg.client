@@ -16,10 +16,11 @@ import styles from 'styles/modal/store/InventoryModal.module.scss';
 
 type ProfileImageProps = UseItemRequest;
 
+// TODO : 주의사항 문구 확정 필요
 const cautions = [
   '변경한 프로필 이미지는 취소할 수 없습니다.',
-  '프로필 이미지는 50KB 이하의 jpg 파일만 업로드 가능합니다.',
-  '관리자의 판단 하에 부적절한 이미지는 삭제될 수 있습니다.',
+  '프로필 이미지는 50KB 이하의 jpg 파일만 업로드 가능합니다.', // api 명세에 따라 변경될 수 있음
+  '관리자의 판단 결과 부적절한 이미지는 삭제될 수 있습니다.',
 ];
 
 export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
@@ -33,21 +34,17 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
       return;
     }
     try {
-      const ret = await mockInstance.post(
-        '/users/profile-image',
-        {
-          receiptId: receiptId,
-          imgData: new Blob([imgData], { type: 'image/*' }),
-        },
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
+      const formData = new FormData();
+      // TODO : receiptId 데이터에 대한 key는 결정되지 않음.
+      formData.append(
+        'receiptId',
+        new Blob([JSON.stringify({ receiptId: receiptId })], {
+          type: 'application/json',
+        })
       );
+      formData.append('imgData', new Blob([imgData], { type: 'image/jpg' }));
+      const ret = await mockInstance.post('/users/profile-image', formData);
       if (ret.status === 201) {
-        // NOTE : 테스트용 출력
-        console.log(ret.data);
         alert('프로필 이미지가 변경되었습니다.');
         resetModal();
       } else throw new Error();
@@ -87,7 +84,7 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
               )}
               <input
                 type='file'
-                accept='image/*'
+                accept='image/jpg'
                 style={{ display: 'none' }}
                 onChange={uploadImg}
               />
