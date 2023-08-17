@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { profileState } from 'utils/recoil/user';
 import { tierIdSelector } from 'utils/recoil/tierColor';
 import { User } from 'types/mainType';
 import { ProfileBasic } from 'types/userTypes';
@@ -37,18 +38,19 @@ const MenuProfile = () => {
     expRate: 0,
     snsNotiOpt: 'SLACK',
     tierImageUri: '',
-    tierName: '',
+    tierName: '손',
   });
-
   /*   const getProfile = useAxiosGet({
     url: `/pingpong/users/${user.intraId}`,
     setState: setProfile,
     err: 'SJ03',
     type: 'setError',
   }); */
-  const getProfile = useMockAxiosGet({
+  const getProfile = useMockAxiosGet<any>({
     url: `users/intraId`,
-    setState: setProfile,
+    setState: (data) => {
+      setProfile(data);
+    },
     err: 'SJ03',
     type: 'setError',
   });
@@ -57,7 +59,18 @@ const MenuProfile = () => {
     getProfile();
   }, []);
 
-  const tierId = useRecoilValue(tierIdSelector);
+  const tierList = ['손', '빨', '노', '초', '파', '검', '무'];
+  const tierColor = [
+    'none',
+    'red',
+    'yellow',
+    'green',
+    'blue',
+    'black',
+    'rainbow',
+  ];
+  const index = tierList.findIndex((tier) => tier[0] === profile.tierName[0]);
+  const tierId = tierColor[index];
   const findTierIndex =
     tierId === 'none' ? styles.tierId : styles['tierId' + tierId];
 
