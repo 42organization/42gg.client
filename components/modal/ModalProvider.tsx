@@ -10,7 +10,6 @@ import AdminModal from './modalType/AdminModal';
 export default function ModalProvider() {
   const [{ modalName, isAttended }, setModal] = useRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
-
   const modalType = useRecoilValue(modalTypeState);
 
   useEffect(() => {

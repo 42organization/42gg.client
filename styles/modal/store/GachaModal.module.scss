@@ -1,0 +1,25 @@
+@import 'styles/common.scss';
+
+.randomBox {
+  display: flex;
+  justify-content: center;
+  .capsule {
+    position: relative;
+    width: 12.5rem;
+    height: 12.5rem;
+    background: #fcb404;
+    border: 0.625rem solid #000000;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: inset -0.625rem 0.625rem 0 0.625rem #fc9014;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: calc(50% - 0.625rem);
+      width: 100%;
+      height: 0.5rem;
+      background: #000000;
+    }
+  }
+}

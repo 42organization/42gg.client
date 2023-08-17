@@ -38,6 +38,7 @@ const MenuProfile = () => {
     snsNotiOpt: 'SLACK',
     tierImageUri: '',
     tierName: '',
+    edge: '',
   });
 
   /*   const getProfile = useAxiosGet({

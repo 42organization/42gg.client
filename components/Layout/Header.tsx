@@ -12,6 +12,7 @@ import { FiMenu } from 'react-icons/fi';
 import { BsMegaphone } from 'react-icons/bs';
 import styles from 'styles/Layout/Header.module.scss';
 import NotiBell from 'public/image/noti_bell.svg';
+import { IoStorefrontOutline } from 'react-icons/io5';
 
 export default function Header() {
   const [live, setLive] = useRecoilState(liveState);
@@ -60,6 +61,11 @@ export default function Header() {
           42GG
         </Link>
         <div className={styles.headerRight}>
+          <div className={styles.announceIcon}>
+            <Link href={'/store'}>
+              <IoStorefrontOutline className={styles.storeIcon} />
+            </Link>
+          </div>
           <div
             className={styles.announceIcon}
             onClick={() => getAnnouncementHandler()}
