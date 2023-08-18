@@ -41,7 +41,6 @@ export default function RankListItemMain({
               <Link href={`users/detail?intraId=${intraId}`}>
                 <PlayerImage
                   src={userImageUri}
-                  // TODO: edge 추가
                   styleName={
                     rank === 1
                       ? `ranktropybig ${edge.toLowerCase()}`
