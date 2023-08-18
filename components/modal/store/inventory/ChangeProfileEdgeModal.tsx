@@ -8,9 +8,9 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
+import GachaBall from 'components/modal/store/inventory/GachaBall';
+import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
-import GachaBall from './GachaBall';
-import { ItemCautionContainer } from './ItemCautionContainer';
 
 type ChangeProfileEdgeModalProps = UseItemRequest;
 

@@ -6,6 +6,10 @@ import { User } from 'types/mainType';
 import { Modal } from 'types/modalTypes';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import {
+  HeaderContextState,
+  HeaderContext,
+} from 'components/Layout/HeaderContext';
 import AdminEmoji from 'public/image/menu_admin.svg';
 import AnnouncementEmoji from 'public/image/menu_announcement.svg';
 import CurrentMatchEmoji from 'public/image/menu_currentMatch.svg';
@@ -16,7 +20,6 @@ import SignOutEmoji from 'public/image/menu_signOut.svg';
 import StatisticsEmoji from 'public/image/menu_statistics.svg';
 import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/MenuBar.module.scss';
-import { HeaderContextState, HeaderContext } from '../HeaderContext';
 
 interface MenuLinkProps {
   link: string;

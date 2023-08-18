@@ -6,10 +6,10 @@ import { Exp } from 'types/modalTypes';
 import { errorState } from 'utils/recoil/error';
 import { reloadMatchState } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
+import ExpStat from 'components/modal/statChange/ExpStat';
 import PppStat from 'components/modal/statChange/PppStat';
 import useAxiosGet, { useMockAxiosGet } from 'hooks/useAxiosGet';
 import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
-import ExpStat from './ExpStat';
 
 export default function StatChangeModal({ gameId, mode }: Exp) {
   const setModal = useSetRecoilState(modalState);

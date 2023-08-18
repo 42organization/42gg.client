@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { reloadMatchState } from 'utils/recoil/match';
 import { modalState, modalTypeState } from 'utils/recoil/modal';
+import AdminModal from 'components/modal/modalType/AdminModal';
+import NormalModal from 'components/modal/modalType/NormalModal';
+import StoreModal from 'components/modal/modalType/StoreModal';
 import styles from 'styles/modal/Modal.module.scss';
-import AdminModal from './modalType/AdminModal';
-import NormalModal from './modalType/NormalModal';
-import StoreModal from './modalType/StoreModal';
 
 export default function ModalProvider() {
   const [{ modalName, isAttended }, setModal] = useRecoilState(modalState);

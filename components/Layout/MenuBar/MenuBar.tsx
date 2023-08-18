@@ -5,11 +5,14 @@ import { User } from 'types/mainType';
 import { ProfileBasic } from 'types/userTypes';
 import { userState } from 'utils/recoil/layout';
 import { tierIdSelector } from 'utils/recoil/tierColor';
+import {
+  HeaderContextState,
+  HeaderContext,
+} from 'components/Layout/HeaderContext';
+import { MainMenu, AdminMenu } from 'components/Layout/MenuBar/MenuBarElement';
 import PlayerImage from 'components/PlayerImage';
 import useAxiosGet, { useMockAxiosGet } from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/MenuBar.module.scss';
-import { MainMenu, AdminMenu } from './MenuBarElement';
-import { HeaderContextState, HeaderContext } from '../HeaderContext';
 
 const MenuTop = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);

@@ -15,9 +15,9 @@ import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/receipt/MegaphoneList.module.scss';
-import AdminSearchBar from '../common/AdminSearchBar';
 
 const megaPhoneTableTitle: { [key: string]: string } = {
   megaphoneId: 'ID',

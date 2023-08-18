@@ -2,10 +2,10 @@ import { useCallback, useEffect, useState } from 'react';
 import { IGames, IGameLog } from 'types/admin/gameLogTypes';
 import { instanceInManage } from 'utils/axios';
 import { getFormattedDateToString, gameTimeToString } from 'utils/handleTime';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import ModifyScoreForm from 'components/admin/games/ModifyScoreForm';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/games/GamesTable.module.scss';
-import ModifyScoreForm from './ModifyScoreForm';
-import AdminSearchBar from '../common/AdminSearchBar';
 
 export default function GamesTable() {
   const [currentPage, setCurrentPage] = useState<number>(1);

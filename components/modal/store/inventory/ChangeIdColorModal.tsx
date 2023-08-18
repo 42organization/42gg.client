@@ -8,10 +8,10 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
+import ColorPicker from 'components/modal/store/inventory/ColorPicker';
+import IdPreviewComponent from 'components/modal/store/inventory/IdPreviewComponent';
+import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
-import ColorPicker from './ColorPicker';
-import IdPreviewComponent from './IdPreviewComponent';
-import { ItemCautionContainer } from './ItemCautionContainer';
 
 type ChangeIdColorModalProps = UseItemRequest;
 

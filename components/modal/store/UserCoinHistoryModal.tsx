@@ -7,8 +7,8 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
+import CoinHistoryContainer from 'components/modal/store/CoinHistoryContainer';
 import styles from 'styles/modal/store/UserCoinHistoryModal.module.scss';
-import CoinHistoryContainer from './CoinHistoryContainer';
 
 export default function UserCoinHistoryModal({ coin }: ICoin) {
   const setModal = useSetRecoilState(modalState);

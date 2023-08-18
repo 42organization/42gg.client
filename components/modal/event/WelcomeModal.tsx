@@ -6,9 +6,9 @@ import { instance } from 'utils/axios';
 import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
+import CoinPopcon from 'components/modal/CoinPopcon';
 import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/modal/event/WelcomeModal.module.scss';
-import CoinPopcon from '../CoinPopcon';
 
 export default function WelcomeModal() {
   const setModal = useSetRecoilState<Modal>(modalState);

@@ -9,8 +9,8 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
+import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
-import { ItemCautionContainer } from './ItemCautionContainer';
 
 type NewMegaphoneProps = UseItemRequest;
 

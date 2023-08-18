@@ -1,19 +1,19 @@
 import { useRecoilValue } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import AdminCheckSendNotiModal from '../admin/AdminCheckSendNoti';
-import AdminDeleteItemModal from '../admin/AdminDeleteItem';
-import AdminDeleteMegaphoneModal from '../admin/AdminDeleteMegaphoneModal';
-import AdminDeleteProfileModal from '../admin/AdminDeleteProfileModal';
-import AdminEditCoinPolicyModal from '../admin/AdminEditCoinPolicy';
-import AdminEditItemModal from '../admin/AdminEditItem';
-import AdminFeedbackCheck from '../admin/AdminFeedbackCheckModal';
-import AdminModifyScoreModal from '../admin/AdminModifyScoreModal';
-import AdminNotiUserModal from '../admin/AdminNotiUserModal';
-import AdminPenaltyModal from '../admin/AdminPenaltyModal';
-import AdminProfileModal from '../admin/AdminProfileModal';
-import DeletePenaltyModal from '../admin/DeletePenaltyModal';
-import DetailModal from '../admin/DetailModal';
-import AdminSeasonEdit from '../admin/SeasonEdit';
+import AdminCheckSendNotiModal from 'components/modal/admin/AdminCheckSendNoti';
+import AdminDeleteItemModal from 'components/modal/admin/AdminDeleteItem';
+import AdminDeleteMegaphoneModal from 'components/modal/admin/AdminDeleteMegaphoneModal';
+import AdminDeleteProfileModal from 'components/modal/admin/AdminDeleteProfileModal';
+import AdminEditCoinPolicyModal from 'components/modal/admin/AdminEditCoinPolicy';
+import AdminEditItemModal from 'components/modal/admin/AdminEditItem';
+import AdminFeedbackCheck from 'components/modal/admin/AdminFeedbackCheckModal';
+import AdminModifyScoreModal from 'components/modal/admin/AdminModifyScoreModal';
+import AdminNotiUserModal from 'components/modal/admin/AdminNotiUserModal';
+import AdminPenaltyModal from 'components/modal/admin/AdminPenaltyModal';
+import AdminProfileModal from 'components/modal/admin/AdminProfileModal';
+import DeletePenaltyModal from 'components/modal/admin/DeletePenaltyModal';
+import DetailModal from 'components/modal/admin/DetailModal';
+import AdminSeasonEdit from 'components/modal/admin/SeasonEdit';
 
 export default function AdminModal() {
   const {

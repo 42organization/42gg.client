@@ -14,9 +14,9 @@ import { getFormattedDateToString } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/receipt/ReceiptList.module.scss';
-import AdminSearchBar from '../common/AdminSearchBar';
 
 const receiptListTableTitle: { [key: string]: string } = {
   receiptId: 'ID',

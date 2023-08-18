@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import MegaphoneList from 'components/admin/receipt/MegaphoneList';
+import ProfileList from 'components/admin/receipt/ProfileList';
+import ReceiptList from 'components/admin/receipt/ReceiptList';
 import styles from 'styles/admin/receipt/MenuTab.module.scss';
-import MegaphoneList from './MegaphoneList';
-import ProfileList from './ProfileList';
-import ReceiptList from './ReceiptList';
 
 function MenuTab() {
   const [tabIdx, setTabIdx] = useState(0);

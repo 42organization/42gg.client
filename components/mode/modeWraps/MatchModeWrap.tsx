@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { Match } from 'types/matchTypes';
 import { colorModeState } from 'utils/recoil/colorMode';
-import ModeRadiobox from '../modeItems/ModeRadiobox';
+import ModeRadiobox from 'components/mode/modeItems/ModeRadiobox';
 
 interface MatchModeWrapProps {
   children: React.ReactNode;

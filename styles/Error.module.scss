@@ -1,4 +1,4 @@
-@import './common.scss';
+@import 'styles/common.scss';
 
 .container {
   @include pageWrap;
@@ -18,7 +18,14 @@
   height: 30rem;
   margin: auto 0;
   border-radius: $small-radius;
-  background: linear-gradient(200deg, #660990, #742897, #823e9f, #8f52a6, #9b66ae);
+  background: linear-gradient(
+    200deg,
+    #660990,
+    #742897,
+    #823e9f,
+    #8f52a6,
+    #9b66ae
+  );
 }
 
 .title {

@@ -3,8 +3,8 @@ import { useInfiniteQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { GameListData } from 'types/gameTypes';
 import { InventoryData } from 'types/inventoryTypes';
+import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
-import { instance } from './axios';
 
 // GameListDat를 받아오는 InfiniteQuery
 export default function InfScroll(path: string) {

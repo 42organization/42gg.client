@@ -1,15 +1,15 @@
 import { Value } from 'react-quill';
+import { IcoinPolicy } from 'types/admin/adminCoinTypes';
+import { Imegaphone, Iprofile } from 'types/admin/adminReceiptType';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { CoinResult } from 'types/coinTypes';
+import { ItemType, UseItemRequest } from 'types/inventoryTypes';
+import { Item } from 'types/itemTypes';
+import { MatchMode } from 'types/mainType';
+import { ISeason } from 'types/seasonTypes';
+import { StoreManualMode } from 'types/storeTypes';
+import { ICoin } from 'types/userTypes';
 import { IFeedback } from 'components/admin/feedback/FeedbackTable';
-import { IcoinPolicy } from './admin/adminCoinTypes';
-import { Imegaphone, Iprofile } from './admin/adminReceiptType';
-import { ItemType, UseItemRequest } from './inventoryTypes';
-import { Item } from './itemTypes';
-import { MatchMode } from './mainType';
-import { ISeason } from './seasonTypes';
-import { StoreManualMode } from './storeTypes';
-import { ICoin } from './userTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 

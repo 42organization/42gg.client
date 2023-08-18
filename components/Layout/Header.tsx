@@ -7,12 +7,15 @@ import { IoStorefrontOutline } from 'react-icons/io5';
 import { Modal } from 'types/modalTypes';
 import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import {
+  HeaderContextState,
+  HeaderContext,
+} from 'components/Layout/HeaderContext';
+import MenuBar from 'components/Layout/MenuBar/MenuBar';
+import NotiBar from 'components/Layout/NotiBar/NotiBar';
 import NotiBell from 'public/image/noti_bell.svg';
 import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/Header.module.scss';
-import { HeaderContextState, HeaderContext } from './HeaderContext';
-import MenuBar from './MenuBar/MenuBar';
-import NotiBar from './NotiBar/NotiBar';
 
 export default function Header() {
   const [live, setLive] = useRecoilState(liveState);

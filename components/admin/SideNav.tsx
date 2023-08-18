@@ -10,8 +10,8 @@ import {
 import { IoGameControllerOutline, IoReceiptOutline } from 'react-icons/io5';
 import { MdOutlineMessage } from 'react-icons/md';
 import { TbCalendarTime, TbCoin } from 'react-icons/tb';
+import SideNavContent from 'components/admin/SideNavContent';
 import styles from 'styles/admin/SideNav.module.scss';
-import SideNavContent from './SideNavContent';
 
 export default function SideNav() {
   const currentPath = useRouter().asPath.replace('/admin', '');

@@ -7,9 +7,9 @@ import { Modal } from 'types/modalTypes';
 import { stringToHourMin } from 'utils/handleTime';
 import { currentMatchState } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
+import LoudSpeaker from 'components/Layout/LoudSpeaker';
 import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
-import LoudSpeaker from './LoudSpeaker';
 
 export default function CurrentMatch() {
   const currentMatchList =

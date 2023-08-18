@@ -1,10 +1,10 @@
 import { AfterGame, TeamScore } from 'types/scoreTypes';
+import { Button, Buttons } from 'components/modal/afterGame/Buttons';
+import Guide from 'components/modal/afterGame/Guide';
+import { MatchTeams } from 'components/modal/afterGame/MatchTeams';
+import Score from 'components/modal/afterGame/Score';
 import useRankGame from 'hooks/modal/aftergame/useRankGame';
 import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
-import { Button, Buttons } from './Buttons';
-import Guide from './Guide';
-import { MatchTeams } from './MatchTeams';
-import Score from './Score';
 
 interface RankGameProps {
   currentGame: AfterGame;

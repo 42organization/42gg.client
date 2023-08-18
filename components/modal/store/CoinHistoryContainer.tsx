@@ -3,9 +3,9 @@ import { useSetRecoilState } from 'recoil';
 import { ICoinHistoryTable } from 'types/userTypes';
 import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
+import CoinHistoryDetails from 'components/modal/store/CoinHistoryDetails';
 import PageNation from 'components/Pagination';
 import styles from 'styles/modal/store/CoinHistoryContainer.module.scss';
-import CoinHistoryDetails from './CoinHistoryDetails';
 
 export default function CoinHistoryContainer() {
   const [currentPage, setCurrentPage] = useState<number>(1);

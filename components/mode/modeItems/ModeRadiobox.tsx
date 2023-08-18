@@ -1,6 +1,6 @@
 import { SeasonMode } from 'types/mainType';
+import { RadioBoxWrapper } from 'components/mode/modeItems/RadioBoxWrapper';
 import styles from 'styles/mode/ModeRadiobox.module.scss';
-import { RadioBoxWrapper } from './RadioBoxWrapper';
 
 interface ModeRadioboxProps {
   mode: SeasonMode;
