@@ -19,7 +19,7 @@ type NormalData = {
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const NormalUserData: NormalUserData[] = [
     {
-      intraId: 'kim_takgu',
+      intraId: 'takgu_king',
       rank: 1,
       textColor: '#CDB4DB',
       statusMessage: '🏓🏓🏓🏓 42서울 최강 탁구왕 으하하하하 🏓🏓🏓🏓',
@@ -27,7 +27,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       exp: 100,
     },
     {
-      intraId: 'kim_takgu',
+      intraId: 'takgu_king',
       rank: 2,
       textColor: '#FFC8DD',
       statusMessage: '안녕하세요',
@@ -35,7 +35,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       exp: 100,
     },
     {
-      intraId: 'kim_takgu',
+      intraId: 'takgu_king',
       rank: 3,
       textColor: '#FFAFCC',
       statusMessage: '안녕하세요',
@@ -51,7 +51,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       exp: 100,
     },
     {
-      intraId: 'kim_takgu',
+      intraId: 'takgu_king',
       rank: 5,
       textColor: '#A2D2FF',
       statusMessage: '안녕하세요',
@@ -59,7 +59,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       exp: 100,
     },
     {
-      intraId: 'kim_takgu',
+      intraId: 'takgu_king',
       rank: 6,
       textColor: '#4062BB',
       statusMessage: '안녕하세요',

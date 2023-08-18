@@ -19,7 +19,7 @@ type RankData = {
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const RankUserData: RankUserData[] = [
     {
-      intraId: 'kim_takgu',
+      intraId: 'takgu_king',
       rank: 1,
       textColor: '#000000',
       ppp: 1000,
@@ -28,7 +28,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       statusMessage: '🏓🏓🏓🏓 42서울 최강 탁구왕 🏓🏓🏓🏓',
     },
     {
-      intraId: 'kim_takgu',
+      intraId: 'takgu_king',
       rank: 2,
       textColor: '#F1F7B5',
       ppp: 1000,
@@ -37,7 +37,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       statusMessage: '안녕하세요',
     },
     {
-      intraId: 'kim_takgu',
+      intraId: 'takgu_king',
       rank: 3,
       textColor: '#A8D1D1',
       ppp: 1000,
@@ -46,7 +46,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       statusMessage: '안녕하세요',
     },
     {
-      intraId: 'kim_takgu',
+      intraId: 'takgu_king',
       rank: 4,
       textColor: '#c9a5e6',
       ppp: 1000,
@@ -55,9 +55,27 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       statusMessage: '안녕하세요',
     },
     {
-      intraId: 'kim_takgu',
+      intraId: 'takgu_king',
       rank: 5,
       textColor: '#9EA1D4',
+      ppp: 1000,
+      tierImageUri:
+        'https://cdn.pixabay.com/photo/2022/07/29/05/52/table-tennis-7351159_1280.png',
+      statusMessage: '',
+    },
+    {
+      intraId: 'takgu_king',
+      rank: 6,
+      textColor: '#F1F7B5',
+      ppp: 1000,
+      tierImageUri:
+        'https://cdn.pixabay.com/photo/2022/07/29/05/52/table-tennis-7351159_1280.png',
+      statusMessage: '',
+    },
+    {
+      intraId: 'kim_takgu',
+      rank: 7,
+      textColor: '#A8D1D1',
       ppp: 1000,
       tierImageUri:
         'https://cdn.pixabay.com/photo/2022/07/29/05/52/table-tennis-7351159_1280.png',
