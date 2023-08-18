@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { UseItemRequest, UseMegaphoneRequest } from 'types/inventoryTypes';
+import { mockInstance } from 'utils/mockAxios';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
-import { UseItemRequest, UseMegaphoneRequest } from 'types/inventoryTypes';
 import { MegaphoneContainer } from 'components/Layout/MegaPhone';
-import { ItemCautionContainer } from './ItemCautionContainer';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
-import { mockInstance } from 'utils/mockAxios';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
+import { ItemCautionContainer } from './ItemCautionContainer';
 
 type NewMegaphoneProps = UseItemRequest;
 

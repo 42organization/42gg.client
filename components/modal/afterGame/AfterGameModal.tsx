@@ -1,7 +1,7 @@
+import useCurrentGame from 'hooks/modal/aftergame/useCurrentGame';
+import useSubmitModal from 'hooks/modal/aftergame/useSubmitModal';
 import NormalGame from './NormalGame';
 import RankGame from './RankGame';
-import useSubmitModal from 'hooks/modal/aftergame/useSubmitModal';
-import useCurrentGame from 'hooks/modal/aftergame/useCurrentGame';
 
 export default function AfterGameModal() {
   const { currentGame } = useCurrentGame();

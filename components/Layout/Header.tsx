@@ -1,18 +1,18 @@
 import Link from 'next/link';
 import { useEffect, useContext } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import { BsMegaphone } from 'react-icons/bs';
+import { FiMenu } from 'react-icons/fi';
+import { IoStorefrontOutline } from 'react-icons/io5';
 import { Modal } from 'types/modalTypes';
 import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import NotiBell from 'public/image/noti_bell.svg';
+import useAxiosGet from 'hooks/useAxiosGet';
+import styles from 'styles/Layout/Header.module.scss';
+import { HeaderContextState, HeaderContext } from './HeaderContext';
 import MenuBar from './MenuBar/MenuBar';
 import NotiBar from './NotiBar/NotiBar';
-import { HeaderContextState, HeaderContext } from './HeaderContext';
-import useAxiosGet from 'hooks/useAxiosGet';
-import { FiMenu } from 'react-icons/fi';
-import { BsMegaphone } from 'react-icons/bs';
-import styles from 'styles/Layout/Header.module.scss';
-import NotiBell from 'public/image/noti_bell.svg';
-import { IoStorefrontOutline } from 'react-icons/io5';
 
 export default function Header() {
   const [live, setLive] = useRecoilState(liveState);

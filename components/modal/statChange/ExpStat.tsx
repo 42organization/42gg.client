@@ -1,6 +1,6 @@
-import Celebration from './Celebration';
 import useExpStat from 'hooks/modal/statchange/useExpStat';
 import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
+import Celebration from './Celebration';
 
 interface ExpGuageProps {
   stat: { [key: string]: number };

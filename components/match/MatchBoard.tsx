@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { CurrentMatchList, Match, Slot } from 'types/matchTypes';
 import { Live, MatchMode } from 'types/mainType';
+import { CurrentMatchList, Match, Slot } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
 import { stringToHourMin } from 'utils/handleTime';
 import { liveState } from 'utils/recoil/layout';

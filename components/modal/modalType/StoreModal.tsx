@@ -1,14 +1,14 @@
 import { useRecoilValue } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import CoinChangeModal from '../statChange/CoinChangeModal';
-import StoreManualModal from '../store/StoreManualModal';
-import UserCoinHistoryModal from '../store/UserCoinHistoryModal';
+import ChangeIdColorModal from '../store/inventory/ChangeIdColorModal';
+import EditMegaphoneModal from '../store/inventory/EditMegaphoneModal';
+import NewMegaphoneModal from '../store/inventory/NewMegaphoneModal';
 import BuyModal from '../store/purchase/BuyModal';
 import GiftModal from '../store/purchase/GiftModal';
 import NoCoinModal from '../store/purchase/NoCoinModal';
-import ChangeIdColorModal from '../store/inventory/ChangeIdColorModal';
-import NewMegaphoneModal from '../store/inventory/NewMegaphoneModal';
-import EditMegaphoneModal from '../store/inventory/EditMegaphoneModal';
+import StoreManualModal from '../store/StoreManualModal';
+import UserCoinHistoryModal from '../store/UserCoinHistoryModal';
 
 export default function StoreModal() {
   const {

@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import { ToggleMode } from 'types/rankTypes';
+import type { Meta, StoryObj } from '@storybook/react';
 import RankListItem from 'components/rank/RankListItem';
 
 interface User {

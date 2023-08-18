@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
-import { userState } from 'utils/recoil/layout';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
-import styles from 'styles/rank/RankList.module.scss';
+import { userState } from 'utils/recoil/layout';
 import PlayerImage from 'components/PlayerImage';
+import styles from 'styles/rank/RankList.module.scss';
 
 interface User {
   intraId: string;

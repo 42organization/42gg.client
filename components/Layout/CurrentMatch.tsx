@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { TbMenu } from 'react-icons/tb';
 import { CurrentMatchList, CurrentMatchListElement } from 'types/matchTypes';
 import { Modal } from 'types/modalTypes';
 import { stringToHourMin } from 'utils/handleTime';
 import { currentMatchState } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
 import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
-import { TbMenu } from 'react-icons/tb';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 import LoudSpeaker from './LoudSpeaker';
 
@@ -45,34 +45,36 @@ export default function CurrentMatch() {
     <div className={styles.currentMatchWrapper}>
       <div className={styles.currentMatchBanner}>
         <div className={styles.currentMatchMain}>
-          {currentMatchList && <CurrentMatchContent currentMatch={currentMatchList[0]} index={0} />}
+          {currentMatchList && (
+            <CurrentMatchContent currentMatch={currentMatchList[0]} index={0} />
+          )}
         </div>
         <div
           className={`${styles.dropdownWrapper} ${dropdownStyle} ${matchCountStyle}`}
-          >
+        >
           {dropdownAnimation ? (
             <div className={styles.dropdown}>
               {currentMatchList.slice(1).map((currentMatch, index) => (
                 <CurrentMatchContent
-                key={index}
-                currentMatch={currentMatch}
-                index={index + 2}
+                  key={index}
+                  currentMatch={currentMatch}
+                  index={index + 2}
                 />
-                ))}
+              ))}
             </div>
           ) : (
             <></>
-            )}
+          )}
           {currentMatchList.length > 1 ? (
             <button
               className={`${styles.dropdownButton} ${dropButtonStyle} ${matchCountStyle}`}
               onMouseDown={() => setShowDropdown(!showDropdown)}
-              >
+            >
               <TbMenu />
             </button>
           ) : (
             <></>
-            )}
+          )}
         </div>
       </div>
     </div>
@@ -125,9 +127,7 @@ export function CurrentMatchContent(prop: CurrentMatchContentProp) {
             onCancel(startTime);
           }}
         >
-          {cancelButtonStyle === styles.block
-            ? '취소 불가'
-            : '예약 취소'}
+          {cancelButtonStyle === styles.block ? '취소 불가' : '예약 취소'}
         </button>
       </div>
     </>

@@ -1,6 +1,6 @@
-import StatisticsChart from './StatisticsChart';
 import useChartsData from 'hooks/statistics/useChartsData';
 import styles from 'styles/statistics/StatisticsSelect.module.scss';
+import StatisticsChart from './StatisticsChart';
 
 type chartElementprops = {
   chartName: string;

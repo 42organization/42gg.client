@@ -1,6 +1,6 @@
 import { TeamScore } from 'types/scoreTypes';
-import InputScore from './InputScore';
 import CheckedScore from './CheckedScore';
+import InputScore from './InputScore';
 
 interface ScoreProps {
   result: TeamScore;

@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { Exp } from 'types/modalTypes';
-import { GameResult } from 'types/gameTypes';
-import { modalState } from 'utils/recoil/modal';
-import { reloadMatchState } from 'utils/recoil/match';
-import ExpStat from './ExpStat';
-import PppStat from 'components/modal/statChange/PppStat';
-import useAxiosGet from 'hooks/useAxiosGet';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import { CoinResult } from 'types/coinTypes';
+import { GameResult } from 'types/gameTypes';
+import { Exp } from 'types/modalTypes';
 import { errorState } from 'utils/recoil/error';
+import { reloadMatchState } from 'utils/recoil/match';
+import { modalState } from 'utils/recoil/modal';
+import PppStat from 'components/modal/statChange/PppStat';
+import useAxiosGet, { useMockAxiosGet } from 'hooks/useAxiosGet';
 import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
+import ExpStat from './ExpStat';
 
 export default function StatChangeModal({ gameId, mode }: Exp) {
   const setModal = useSetRecoilState(modalState);

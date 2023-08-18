@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { GrLocationPin } from 'react-icons/gr';
 import { CurrentMatch, EditedSchedule } from 'types/admin/adminSlotTypes';
 import { instance, instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
+import styles from 'styles/admin/slot/SlotMain.module.scss';
 import SlotCurrent from './SlotCurrent';
 import SlotPreview from './SlotPreview';
-import { GrLocationPin } from 'react-icons/gr';
-import styles from 'styles/admin/slot/SlotMain.module.scss';
 
 export default function SlotMain() {
   const [scheduleInfo, setScheduleInfo] = useState<EditedSchedule>({

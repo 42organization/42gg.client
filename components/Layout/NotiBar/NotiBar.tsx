@@ -3,11 +3,14 @@ import { useSetRecoilState } from 'recoil';
 import { Noti } from 'types/notiTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
-import { HeaderContextState, HeaderContext } from '../HeaderContext';
-import NotiStateContext, { NotiContextState, NotiProvider } from './NotiContext';
-import NotiItem from './NotiItem';
-import styles from 'styles/Layout/NotiBar.module.scss';
 import NotiEmptyEmoji from 'public/image/noti_empty.svg';
+import styles from 'styles/Layout/NotiBar.module.scss';
+import NotiStateContext, {
+  NotiContextState,
+  NotiProvider,
+} from './NotiContext';
+import NotiItem from './NotiItem';
+import { HeaderContextState, HeaderContext } from '../HeaderContext';
 
 export default function NotiBar() {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);

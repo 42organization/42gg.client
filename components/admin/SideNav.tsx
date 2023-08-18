@@ -1,19 +1,17 @@
 import { useRouter } from 'next/router';
-import SideNavContent from './SideNavContent';
+import { BsShop } from 'react-icons/bs';
 import { GoSettings } from 'react-icons/go';
-import { MdOutlineMessage } from 'react-icons/md';
-import { TbCalendarTime } from 'react-icons/tb';
 import {
   GrUserSettings,
   GrNotification,
   GrStatusWarning,
   GrAnnounce,
 } from 'react-icons/gr';
-import { IoGameControllerOutline } from 'react-icons/io5';
-import { IoReceiptOutline } from 'react-icons/io5';
-import { BsShop } from 'react-icons/bs';
-import { TbCoin } from 'react-icons/tb';
+import { IoGameControllerOutline, IoReceiptOutline } from 'react-icons/io5';
+import { MdOutlineMessage } from 'react-icons/md';
+import { TbCalendarTime, TbCoin } from 'react-icons/tb';
 import styles from 'styles/admin/SideNav.module.scss';
+import SideNavContent from './SideNavContent';
 
 export default function SideNav() {
   const currentPath = useRouter().asPath.replace('/admin', '');

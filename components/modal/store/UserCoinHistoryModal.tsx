@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
+import { FaCoins } from 'react-icons/fa';
+import { ICoin } from 'types/userTypes';
 import { modalState } from 'utils/recoil/modal';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
-import { FaCoins } from 'react-icons/fa';
 import styles from 'styles/modal/store/UserCoinHistoryModal.module.scss';
-import { ICoin } from 'types/userTypes';
 import CoinHistoryContainer from './CoinHistoryContainer';
 
 export default function UserCoinHistoryModal({ coin }: ICoin) {

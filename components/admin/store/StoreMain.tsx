@@ -1,6 +1,6 @@
-import ItemList from './ItemList';
-import ChangeHistory from './itemHistory';
 import styles from 'styles/admin/store/StoreMain.module.scss';
+import ChangeHistory from './itemHistory';
+import ItemList from './ItemList';
 
 function StoreMain() {
   return (

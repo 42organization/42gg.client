@@ -1,10 +1,10 @@
+import { AxiosError, AxiosResponse } from 'axios';
+import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { instance } from 'utils/axios';
-import { loginState } from 'utils/recoil/login';
 import { errorState } from 'utils/recoil/error';
-import { AxiosError, AxiosResponse } from 'axios';
-import Cookies from 'js-cookie';
+import { loginState } from 'utils/recoil/login';
 
 export default function useAxiosResponse() {
   const setLogin = useSetRecoilState(loginState);

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { RankUser, NormalUser, Rank } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
-import RankListMain from './topRank/RankListMain';
+import useRankList from 'hooks/rank/useRankList';
 import RankListFrame from './RankListFrame';
 import RankListItem from './RankListItem';
-import useRankList from 'hooks/rank/useRankList';
+import RankListMain from './topRank/RankListMain';
 
 interface RankListProps {
   season?: number;

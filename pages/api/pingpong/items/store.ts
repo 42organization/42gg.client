@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { Item, ItemList } from 'types/itemTypes';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 const itemList: Item[] = [
   {

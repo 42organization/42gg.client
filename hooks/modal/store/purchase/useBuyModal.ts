@@ -1,8 +1,8 @@
 import { useSetRecoilState } from 'recoil';
 import { Purchase } from 'types/itemTypes';
-import { modalState } from 'utils/recoil/modal';
-import { errorState } from 'utils/recoil/error';
 import { mockInstance } from 'utils/mockAxios';
+import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/modal';
 
 const useBuyModal = (purchasedItem: Purchase) => {
   const setModal = useSetRecoilState(modalState);

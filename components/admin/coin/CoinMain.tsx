@@ -1,6 +1,6 @@
+import styles from 'styles/admin/coin/CoinMain.module.scss';
 import CoinPolicy from './CoinPolicy';
 import CoinPolicyHistory from './CoinPolicyHistory';
-import styles from 'styles/admin/coin/CoinMain.module.scss';
 
 export default function CoinMain() {
   return (

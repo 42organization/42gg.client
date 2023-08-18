@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { ICoin } from 'types/userTypes';
 import { StoreMode } from 'types/storeTypes';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import { ICoin } from 'types/userTypes';
 import { StoreModeWrap } from 'components/mode/modeWraps/StoreModeWrap';
 import ItemsList from 'components/shop/ItemsList';
 import { Inventory } from 'components/store/Inventory';
+import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import styles from 'styles/store/StoreContainer.module.scss';
 
 export default function Store() {

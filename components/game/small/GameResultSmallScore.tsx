@@ -1,6 +1,6 @@
 import { GameMode, GameStatus } from 'types/gameTypes';
-import gameScore from '../GameScore';
 import styles from 'styles/game/GameResultItem.module.scss';
+import gameScore from '../GameScore';
 
 interface GameResultSmallScoreProps {
   mode: GameMode;

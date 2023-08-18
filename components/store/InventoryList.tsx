@@ -1,9 +1,9 @@
 import React from 'react';
-import { InvetoryItem } from './InventoryItem';
-import { InfiniteScrollComponent } from './InfiniteScrollComponent';
 import { InfinityScroll } from 'utils/infinityScroll';
 import { mockInstance } from 'utils/mockAxios';
 import styles from 'styles/store/Inventory.module.scss';
+import { InfiniteScrollComponent } from './InfiniteScrollComponent';
+import { InvetoryItem } from './InventoryItem';
 
 function fetchInventoryData(page: number) {
   return mockInstance.get(`items?page=${page}&size=${8}`).then((res) => {

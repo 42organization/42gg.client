@@ -1,7 +1,7 @@
 import { useSetRecoilState } from 'recoil';
+import { IoSend } from 'react-icons/io5';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
-import { IoSend } from 'react-icons/io5';
 import styles from 'styles/admin/modal/AdminFeedbackCheck.module.scss';
 
 interface IfeedbackProps {

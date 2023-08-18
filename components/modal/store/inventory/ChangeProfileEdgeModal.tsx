@@ -1,16 +1,16 @@
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
 import { UseItemRequest } from 'types/inventoryTypes';
-import { ItemCautionContainer } from './ItemCautionContainer';
+import { Modal } from 'types/modalTypes';
+import { mockInstance } from 'utils/mockAxios';
+import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/modal';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
-import { Modal } from 'types/modalTypes';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 import GachaBall from './GachaBall';
-import { mockInstance } from 'utils/mockAxios';
-import { errorState } from 'utils/recoil/error';
+import { ItemCautionContainer } from './ItemCautionContainer';
 
 type ChangeProfileEdgeModalProps = UseItemRequest;
 

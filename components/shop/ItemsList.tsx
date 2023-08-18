@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ItemList } from 'types/itemTypes';
-import ItemCard from './ItemCard';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import ItemCard from './ItemCard';
 
 export default function ItemsList({ coin }: { coin: number }) {
   const [itemList, setItemList] = useState<ItemList>({ itemList: [] });
