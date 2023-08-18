@@ -2,7 +2,6 @@ import Link from 'next/link';
 import React from 'react';
 import { userImages } from 'types/rankTypes';
 import { useRecoilValue } from 'recoil';
-import { RankUser, NormalUser } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
 import PlayerImage from 'components/PlayerImage';
 import { TbQuestionMark } from 'react-icons/tb';
@@ -17,7 +16,7 @@ export default function RankListItemMain({
   user,
   rank,
 }: RankListItemMainProps) {
-  const { intraId, userImageUri, tierImageUri } = user || {};
+  const { intraId, userImageUri, tierImageUri, edge } = user || {};
   const Mode = useRecoilValue(colorToggleSelector);
   const renderLink = intraId !== 'intraId';
 
@@ -45,8 +44,8 @@ export default function RankListItemMain({
                   // TODO: edge 추가
                   styleName={
                     rank === 1
-                      ? `ranktropybig ${'edge1'}`
-                      : `ranktropy ${'edge2'}`
+                      ? `ranktropybig ${edge.toLowerCase()}`
+                      : `ranktropy ${edge.toLowerCase()}`
                   }
                   size={50}
                 />
