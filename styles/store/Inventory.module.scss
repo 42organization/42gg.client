@@ -3,7 +3,7 @@
 .inventoryList {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 1rem;
+  grid-gap: 0.5rem;
 }
 
 .loadIcon {
@@ -28,9 +28,11 @@
 
 .inventoryItem {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-areas: 'giftBadge usingBadge' 'itemImage itemImage' 'itemName itemName';
+  grid-template-rows: 1fr auto auto;
+  grid-row-gap: 1rem;
+  justify-content: space-between;
   background-color: #d4b8f2;
   border-radius: 0.5rem;
   padding: 1rem;
@@ -76,25 +78,28 @@
   }
 }
 
-.topBadgeContainer {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 0.5rem;
+.giftBadge {
+  grid-area: giftBadge;
   z-index: 2;
 }
 
 .usingBadge {
   display: flex;
+  grid-area: usingBadge;
   align-items: center;
-  svg {
+  &.using svg {
     fill: #08f458;
+    margin-right: 0.3rem;
+  }
+  &.before svg {
+    fill: #d3d3d3;
     margin-right: 0.3rem;
   }
 }
 
 .imgContainer {
   position: relative;
+  grid-area: itemImage;
   width: 100%;
   height: 100px;
   overflow: hidden;
@@ -105,6 +110,7 @@
 }
 
 .itemName {
+  grid-area: itemName;
   font-size: 1.3rem;
   font-weight: bold;
   margin-top: 0.5rem;

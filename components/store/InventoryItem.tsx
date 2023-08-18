@@ -50,21 +50,19 @@ export function InvetoryItem({ item }: inventoryItemProps) {
 
   return (
     <div key={receiptId} className={styles.inventoryItem}>
-      <div className={styles.topBadgeContainer}>
-        {user.intraId !== purchaserIntra ? (
-          <Tooltip title={`from ${purchaserIntra}`}>
-            <button>
-              <BsGiftFill />
-            </button>
-          </Tooltip>
-        ) : (
-          <div></div>
-        )}
-        {itemStatus === 'USING' && (
-          <div className={styles.usingBadge}>
-            <BsCircleFill /> 사용중
-          </div>
-        )}
+      {user.intraId !== purchaserIntra && (
+        <Tooltip title={`from ${purchaserIntra}`} className={styles.giftBadge}>
+          <button>
+            <BsGiftFill />
+          </button>
+        </Tooltip>
+      )}
+      <div
+        className={`${styles.usingBadge} ${
+          styles[itemStatus === 'USING' ? 'using' : 'before']
+        }`}
+      >
+        <BsCircleFill /> {itemStatus === 'USING' ? '사용중' : '사용 전'}
       </div>
       <div className={styles.overlay}>
         {itemStatus === 'USING' ? (
