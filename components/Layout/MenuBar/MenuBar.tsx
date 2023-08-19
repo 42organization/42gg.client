@@ -39,6 +39,7 @@ const MenuProfile = () => {
     tierImageUri: '',
     tierName: '',
     edge: 'BASIC',
+    backgroundType: 'BASIC',
   });
 
   /*   const getProfile = useAxiosGet({
