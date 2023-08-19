@@ -8,30 +8,30 @@
 
 .title {
   margin: 2.75rem 0;
-  font-size: 2.25rem;
   font-family: 'Lexend';
+  font-size: 2.25rem;
   color: #f8f8ff;
   text-shadow: 0px 0px 12px #ffffff;
 }
 
 .storeRadioBoxWrap {
-  width: 100%;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .ruleList {
-  list-style: none;
   width: 100%;
   height: 60vh;
   max-height: 285px;
-  margin: 0 0.6rem 1.75rem;
   padding: 1rem;
-  background: #ffffff;
-  border-radius: 0px 0px 10px 10px;
-  color: black;
+  margin: 0 0.6rem 1.75rem;
+  overflow-y: scroll;
   font-size: 1.2rem;
   font-weight: 700;
-  overflow-y: scroll;
+  color: black;
+  list-style: none;
+  background: #ffffff;
+  border-radius: 0px 0px 10px 10px;
 
   > li {
     margin-top: 1.2rem;
@@ -60,20 +60,20 @@
 }
 
 .ruleDetail {
-  margin-left: 0.8rem;
   padding: 0.5rem 0.5em 0.5rem 1.5rem;
+  margin-left: 0.8rem;
   font-size: 0.9rem;
   font-weight: 400;
 
   > li {
-    list-style: square;
     margin: 0.4rem 0;
     white-space: pre-wrap;
+    list-style: square;
   }
   .ruleContent {
-    list-style-type: '-';
-    line-height: 170%;
     padding-left: 0.5rem;
+    line-height: 170%;
+    list-style-type: '-';
   }
 }
 
@@ -84,16 +84,16 @@
 }
 
 .ruleList::-webkit-scrollbar-thumb {
-  border-radius: 6px;
   background: #c6c4c4;
+  border-radius: 6px;
 }
 
 @mixin modalButton($color) {
-  border: none;
-  border-radius: 10px;
   padding: 0.75rem 2.25rem;
   color: #ffffff;
   cursor: pointer;
+  border: none;
+  border-radius: 10px;
   @if ($color == 'DARKPURPLE') {
     background: linear-gradient(
       180deg,

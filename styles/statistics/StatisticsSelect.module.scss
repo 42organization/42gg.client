@@ -9,15 +9,15 @@
 
 .chartSelectContainer {
   height: 100vh;
-  background: rgba(white, 1);
   font-size: $small-font;
   text-align: center;
+  background: rgba(white, 1);
   .listText {
     padding: 1rem;
     margin: 0.1rem;
+    text-align: center;
     border: 0.1rem solid $gray;
     border-radius: $small-radius;
-    text-align: center;
   }
 }
 

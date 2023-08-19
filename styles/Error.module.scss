@@ -3,40 +3,47 @@
 .container {
   @include pageWrap;
   display: flex;
+  width: 100vw;
+  height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  width: 100vw;
-  height: 100vh;
 }
 
 .errorContainer {
   display: flex;
+  height: 30rem;
   flex-direction: column;
+  margin: auto 0;
+  background: linear-gradient(
+    200deg,
+    #660990,
+    #742897,
+    #823e9f,
+    #8f52a6,
+    #9b66ae
+  );
+  border-radius: $small-radius;
   justify-content: space-evenly;
   align-items: center;
-  height: 30rem;
-  margin: auto 0;
-  border-radius: $small-radius;
-  background: linear-gradient(200deg, #660990, #742897, #823e9f, #8f52a6, #9b66ae);
 }
 
 .title {
-  color: white;
-  font-size: 4rem;
   font-family: 'Overgrow';
+  font-size: 4rem;
+  color: white;
   letter-spacing: 0.2rem;
 }
 
 .error {
-  color: white;
-  font-size: $big-font;
   font-family: 'NanumSquare_acR';
+  font-size: $big-font;
+  color: white;
   letter-spacing: 0.05rem;
   .errorCode {
     margin-top: 0.5rem;
-    color: $medium-gray;
     font-size: $medium-font;
+    color: $medium-gray;
     text-align: center;
   }
 }
@@ -66,8 +73,8 @@
   @include select-buttons(10rem, 3.5rem);
   .positive {
     input {
-      font-size: $big-font;
       font-family: 'NanumSquare_acR';
+      font-size: $big-font;
       font-weight: 500;
       box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.2);
     }

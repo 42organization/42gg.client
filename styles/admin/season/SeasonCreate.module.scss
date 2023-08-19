@@ -2,10 +2,10 @@
 
 .container {
   display: flex;
-  flex-direction: column;
   width: 100%;
   min-width: 50rem;
   height: 100%;
+  flex-direction: column;
   padding: 1.5rem;
 }
 
@@ -16,18 +16,18 @@
 
       .tableHeaderItem {
         padding: 0.5rem;
-        text-align: center;
-        font-weight: 600;
         font-size: $small-font;
+        font-weight: 600;
         line-height: 150%;
+        text-align: center;
       }
     }
 
     .tableBody {
       .tableBodyItem {
         padding: 0.5rem;
-        text-align: center;
         font-size: $small-font;
+        text-align: center;
         // line-height: 100%;
       }
     }
@@ -40,14 +40,14 @@
   align-items: center;
 
   button {
-    all: unset;
     width: 4rem;
     height: 1.5rem;
-    background: $btn-blue;
-    border-radius: 0.5rem;
-    text-align: center;
     font-size: $small-font;
     color: white;
+    text-align: center;
     cursor: pointer;
+    background: $btn-blue;
+    border-radius: 0.5rem;
+    all: unset;
   }
 }
