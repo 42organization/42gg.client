@@ -18,14 +18,12 @@ type MegaphoneContainerProps = {
 const defaultContents: MegaphoneList = [
   {
     megaphoneId: 1,
-    content:
-      '등록된 확성기가 없습니다. 상점에서 아이템을 구매해서 확성기를 등록해보세요!',
+    content: '상점에서 아이템을 구매해서 확성기를 등록해보세요!(30자 제한)',
     intraId: '관리자',
   },
   {
     megaphoneId: 2,
-    content:
-      '등록된 확성기가 없습니다. 상점에서 아이템을 구매해서 확성기를 등록해보세요!',
+    content: '상점에서 아이템을 구매해서 확성기를 등록해보세요!(30자 제한)',
     intraId: '관리자',
   },
 ];
@@ -42,14 +40,10 @@ export const MegaphoneContainer = ({
       if (!ref.current) {
         return;
       }
-      setWrapperStyle('slideNext' + selectedIndex.toString());
-      if (selectedIndex === count) {
-        setWrapperStyle('slideNext0');
-        setSelectedIndex(0);
-      } else {
-        setSelectedIndex(selectedIndex + 1);
-      }
-    }, 3000);
+      const nextIndex = (selectedIndex + 1) % count;
+      setWrapperStyle('slideNext' + nextIndex.toString());
+      setSelectedIndex(nextIndex);
+    }, 4500);
 
     return () => {
       clearInterval(interval);
@@ -76,7 +70,6 @@ const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
 
 const Megaphone = () => {
   const [contents, setContents] = useState<MegaphoneList>(defaultContents);
-  const [play, setPlay] = useState('running');
 
   // 나중에 useAxiosGet으로 변경 필요
   const getMegaphoneHandler = useMockAxiosGet<any>({
