@@ -15,27 +15,63 @@
   min-width: 380px;
   max-width: 100vh;
   min-height: 100vh;
-  background: linear-gradient(
-    180deg,
-    #301451 23.82%,
-    #481570 58.85%,
-    #300e4b 98.44%
-  );
+  background: $main-background;
   &.both {
-    background: linear-gradient(
-      180deg,
-      #500247 0%,
-      #480141 21.35%,
-      #40013a 98.44%
-    );
+    background: $match-background;
   }
   &.normal {
-    background: linear-gradient(
-      180deg,
-      #1f2157 0%,
-      #1549cd 42.91%,
-      #001049 59.9%
-    );
+    background: $vip-background;
+  }
+  &.basic {
+    background: $profile-background0;
+  }
+  &.background1 {
+    background: $profile-background1;
+  }
+  &.background2 {
+    background: $profile-background2;
+  }
+  &.background3 {
+    background: $profile-background3;
+  }
+  &.background4 {
+    background: $profile-background4;
+  }
+  &.background5 {
+    background: $profile-background5;
+  }
+  &.background6 {
+    background: $profile-background6;
+  }
+  &.background7 {
+    background: $profile-background7;
+  }
+  &.background8 {
+    background: $profile-background8;
+  }
+  &.background9 {
+    background: $profile-background9;
+  }
+  &.background10 {
+    background: $profile-background10;
+  }
+  &.background11 {
+    background: $profile-background11;
+  }
+  &.background12 {
+    background: $profile-background12;
+  }
+  &.background13 {
+    background: $profile-background13;
+  }
+  &.background14 {
+    background: $profile-background14;
+  }
+  &.background15 {
+    background: $profile-background15;
+  }
+  &.background16 {
+    background: $profile-background16;
   }
   background-size: cover;
   background-position: center;

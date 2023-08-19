@@ -54,6 +54,116 @@ $g2-bottom: #b5bbf2;
 $loser-red: #ff0303;
 $winner-blue: #040eff;
 
+/* background-color */
+$main-background: linear-gradient(
+  180deg,
+  #301451 23.82%,
+  #481570 58.85%,
+  #300e4b 98.44%
+);
+$match-background: linear-gradient(
+  180deg,
+  #500247 0%,
+  #480141 21.35%,
+  #40013a 98.44%
+);
+
+$vip-background: linear-gradient(
+  180deg,
+  #1f2157 0%,
+  #1549cd 42.91%,
+  #001049 59.9%
+);
+
+/* profile-background color */
+$profile-background0: linear-gradient(
+  180deg,
+  #301451 23.82%,
+  #481570 58.85%,
+  #300e4b 98.44%
+);
+$profile-background1: linear-gradient(to bottom, #ef629f, #eecda3);
+
+$profile-background2: linear-gradient(to bottom, #acb6e5, #86fde8);
+
+$profile-background3: linear-gradient(to bottom, #00416a, #e4e5e6);
+
+$profile-background4: linear-gradient(to bottom, #2c3e50, #bdc3c7);
+
+$profile-background5: linear-gradient(to bottom, #c6ffdd, #fbd786, #f7797d);
+
+$profile-background6: linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff);
+
+$profile-background7: linear-gradient(
+  180deg,
+  #1f2157 0%,
+  #1549cd 42.91%,
+  #001049 59.9%
+);
+
+$profile-background8: linear-gradient(
+  180deg,
+  #1f2157 0%,
+  #1549cd 42.91%,
+  #001049 59.9%
+);
+
+$profile-background9: linear-gradient(
+  180deg,
+  #1f2157 0%,
+  #1549cd 42.91%,
+  #001049 59.9%
+);
+
+$profile-background10: linear-gradient(
+  180deg,
+  #ef629f 0%,
+  #eecda3 42.91%,
+  #fcfdff 59.9%
+);
+
+$profile-background11: linear-gradient(
+  180deg,
+  #ef629f 0%,
+  #eecda3 42.91%,
+  #fcfdff 59.9%
+);
+
+$profile-background12: linear-gradient(
+  180deg,
+  #ef629f 0%,
+  #eecda3 42.91%,
+  #fcfdff 59.9%
+);
+
+$profile-background13: linear-gradient(
+  180deg,
+  #ef629f 0%,
+  #eecda3 42.91%,
+  #fcfdff 59.9%
+);
+
+$profile-background14: linear-gradient(
+  180deg,
+  #ef629f 0%,
+  #eecda3 42.91%,
+  #fcfdff 59.9%
+);
+
+$profile-background15: linear-gradient(
+  180deg,
+  #ef629f 0%,
+  #eecda3 42.91%,
+  #fcfdff 59.9%
+);
+
+$profile-background16: linear-gradient(
+  180deg,
+  #ef629f 0%,
+  #eecda3 42.91%,
+  #fcfdff 59.9%
+);
+
 /* font */
 $logo-font: 'Agonostic Italic', cursive;
 $title-font: 'Lexend';
