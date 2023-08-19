@@ -26,7 +26,7 @@ export function EdgePreview() {
     <div className={styles.container}>
       <div className={styles.preview}>
         {edgeColorList.map((color) => (
-          <div key='color'>
+          <div key={color}>
             <div>{color}</div>
             <PlayerImage
               src='/image/fallBackSrc.jpeg'
