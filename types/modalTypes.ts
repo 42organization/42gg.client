@@ -121,4 +121,5 @@ export interface Modal {
   storeManual?: StoreManual;
   isAttended?: boolean;
   totalCoin?: ICoin;
+  randomItem?: string;
 }

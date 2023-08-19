@@ -6,15 +6,20 @@ import {
   ModalButton,
 } from 'components/modal/ModalButton';
 // import styles from 'styles/modal/store/GachaModal.module.scss';
-import { EdgePreview } from './EdgePreview';
 
-export default function GachaModal() {
+import { EdgePreview } from 'components/modal/store/inventory/EdgePreview';
+
+type GachaModalProps = {
+  randomItem: string;
+};
+
+export default function GachaModal({ randomItem }: GachaModalProps) {
   const user = useRecoilValue(userState);
   const resetModal = useResetRecoilState(modalState);
   return (
     <div>
-      {/* 미리보기용 임시 컴포넌트입니다 */}
-      <EdgePreview />
+      {/* 이미지띠 미리보기용 임시 컴포넌트입니다 */}
+      {randomItem === 'edge' ? <EdgePreview /> : null}
       <ModalButtonContainer>
         <ModalButton
           style='positive'
