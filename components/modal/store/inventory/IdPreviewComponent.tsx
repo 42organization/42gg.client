@@ -1,7 +1,7 @@
 import { RankUser, NormalUser } from 'types/rankTypes';
 import { RankListItem } from 'components/rank/RankListItem';
 import { NormalListItem } from 'components/rank/NormalListItem';
-import styles from 'styles/rank/RankList.module.scss';
+import styles from 'styles/modal/store/InventoryModal.module.scss';
 
 type IdPreviewProps = {
   intraId: string;
@@ -27,7 +27,9 @@ export default function IdPreviewComponent({ intraId, color }: IdPreviewProps) {
   };
   return (
     <div className={styles.idPreviewContainer}>
+      <div className={styles.title}>my ranking</div>
       <RankListItem user={rankDummyData} textColorPreview />
+      <div className={styles.title}>my vip</div>
       <NormalListItem user={normalDummyData} textColorPreview />
     </div>
   );
