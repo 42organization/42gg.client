@@ -64,3 +64,11 @@
     list-style-position: inside;
   }
 }
+
+.idPreviewContainer {
+  .title {
+    margin: 0 0 0.3rem 0.5rem;
+    color: $dark-gray;
+    font-size: $small-font;
+  }
+}
