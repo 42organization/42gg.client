@@ -1,83 +1,92 @@
-.randomBox {
+@mixin ball($color, $outline) {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+  background-color: $color;
+  border: solid 0.25rem $outline;
+  position: absolute;
+  overflow: hidden;
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    height: 200%;
+    width: 200%;
+    background-color: #f7fcff;
+    border-radius: 100%;
+    border: inherit;
+    transform: translate(-25%, -5%);
+  }
+}
+
+.container {
   display: flex;
   justify-content: center;
-  .capsule {
-    position: relative;
+  .box {
     width: 12.5rem;
     height: 12.5rem;
-    background: #fcb404;
-    border: 0.625rem solid #000000;
-    border-radius: 50%;
-    overflow: hidden;
-    box-shadow: inset -0.625rem 0.625rem 0 0.625rem #fc9014;
-    animation: fall 0.25s ease-in-out,
-      shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: calc(50% - 0.625rem);
-      width: 100%;
-      height: 0.5rem;
-      background: #000000;
-    }
-    // .capsuleButton {
-    //   position: absolute;
-    //   top: calc(50% - 1.25rem);
-    //   left: calc(50% - 1.25rem);
-    //   width: 2.5rem;
-    //   height: 2.5rem;
-    //   background: #7f8c8d;
-    //   border: 0.625rem solid #ffffff;
-    //   border-radius: 50%;
-    //   z-index: 10;
-    //   box-shadow: 0 0 0 0.625rem black;
-    //   animation: blink 0.5s alternate infinite;
-    // }
-  }
-
-  @keyframes blink {
-    from {
-      background: #eee;
-    }
-    to {
-      background: #e74c3c;
-    }
-  }
-
-  @keyframes shake {
-    0% {
-      transform: translate(0, 0) rotate(0);
-    }
-    20% {
-      transform: translate(-0.625rem, 0) rotate(-20deg);
-    }
-    30% {
-      transform: translate(0.625rem, 0) rotate(20deg);
-    }
-    50% {
-      transform: translate(-0.625rem, 0) rotate(-10deg);
-    }
-    60% {
-      transform: translate(0.625rem, 0) rotate(10deg);
-    }
-    100% {
-      transform: translate(0, 0) rotate(0);
-    }
-  }
-
-  @keyframes fall {
-    0% {
-      top: -12.5rem;
-    }
-    60% {
-      top: 0;
-    }
-    80% {
-      top: -1.25rem;
-    }
-    100% {
-      top: 0;
+    background-color: #38f3fd49;
+    border: 0.625rem solid #38f3fd;
+    border-radius: 15%;
+    opacity: 0.8;
+    box-shadow: 0 0.625rem 1.25rem rgb(255, 255, 255) inset;
+    .balls {
+      position: relative;
+      .ball0 {
+        @include ball(#ec6767, #d14040);
+        margin-top: 51%;
+        right: 15%;
+      }
+      .ball1 {
+        @include ball(#2facff, #3660bb);
+        margin-top: 65%;
+      }
+      .ball2 {
+        @include ball(#2fffc8, #1f9978);
+        margin-top: 55%;
+        left: 35%;
+      }
+      .ball3 {
+        @include ball(#e7ff2f, #abbd20);
+        margin-top: 70%;
+        left: 50%;
+      }
+      .ball4 {
+        @include ball(#eb7bff, #e23eff);
+        margin-top: 70%;
+        left: 30%;
+      }
+      .ball5 {
+        @include ball(#0aaf46, #02501f);
+        margin-top: 41%;
+        left: 1%;
+      }
+      .ball6 {
+        @include ball(#fffc68, #e5e11e);
+        margin-top: 40%;
+        right: 1%;
+      }
+      .ball7 {
+        @include ball(#b943f4, #66127d);
+        margin-top: 71%;
+        left: 10%;
+      }
+      .ball8 {
+        @include ball(#ff2f47, #911a28);
+        margin-top: 50%;
+        left: 13%;
+      }
+      .ball9 {
+        @include ball(#090488, #050173);
+        margin-top: 55%;
+        right: 5%;
+      }
+      .ball10 {
+        @include ball(#ff7b2f, #d94f00);
+        margin-top: 71%;
+        right: 2%;
+      }
     }
   }
 }
