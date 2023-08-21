@@ -82,7 +82,6 @@ body {
   src: url('../public/font/NanumSquare_acEB.ttf') format('opentype');
   font-weight: normal;
   font-style: normal;
-
 }
 
 @font-face {
@@ -153,8 +152,8 @@ ul.pagination li {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 27px;
-  height: 27px;
+  width: 2.4rem;
+  height: 1.5rem;
   font-size: 1.2rem; /* $big-font */
   font-weight: 600;
   cursor: pointer;
