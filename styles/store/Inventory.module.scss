@@ -29,11 +29,6 @@
 
 .inventoryItem {
   position: relative;
-  display: grid;
-  grid-template-areas: 'giftBadge usingBadge' 'itemImage itemImage' 'itemName itemName';
-  grid-template-rows: 1fr auto auto;
-  grid-row-gap: 1rem;
-  justify-content: space-between;
   background-color: #d4b8f2;
   border-radius: 0.5rem;
   padding: 1rem;
@@ -53,9 +48,7 @@
     rgba(#fe9cca, 0.7) 0%,
     rgba(#fe6bb1, 0.7) 100%
   );
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: none;
   border-radius: 0.5rem;
   position: absolute;
   height: 100%;
@@ -64,10 +57,11 @@
   top: 0;
   bottom: 0;
   right: 0;
-  opacity: 0;
   z-index: 1;
   &:hover {
-    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   button {
     border: 2px solid #fff;
@@ -79,14 +73,26 @@
   }
 }
 
+.badgeContainer {
+  display: grid;
+  grid-template-areas: 'giftBadge usingBadge';
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
 .giftBadge {
   grid-area: giftBadge;
+  display: flex;
+  justify-content: flex-start;
   z-index: 2;
 }
 
 .usingBadge {
   display: flex;
   grid-area: usingBadge;
+  justify-content: flex-end;
   align-items: center;
   &.using svg {
     fill: #08f458;

@@ -24,8 +24,7 @@ export function InvetoryItem({ item }: inventoryItemProps) {
     itemStatus,
   } = item;
 
-  function handleUseItem(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    e.preventDefault();
+  function handleUseItem() {
     setModal({
       modalName: `USE-ITEM-${item.itemType}`,
       useItemInfo: {
@@ -34,8 +33,7 @@ export function InvetoryItem({ item }: inventoryItemProps) {
     });
   }
 
-  function handleEditItem(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    e.preventDefault;
+  function handleEditItem() {
     if (itemType !== 'MEGAPHONE') {
       alert('편집할 수 없는 아이템입니다.');
       return;
@@ -48,21 +46,31 @@ export function InvetoryItem({ item }: inventoryItemProps) {
     });
   }
 
+  function handleTouch(e: React.TouchEvent<HTMLDivElement>) {
+    e.preventDefault();
+    itemStatus === 'USING' ? handleEditItem() : handleUseItem();
+  }
+
   return (
     <div key={receiptId} className={styles.inventoryItem}>
-      {user.intraId !== purchaserIntra && (
-        <Tooltip title={`from ${purchaserIntra}`} className={styles.giftBadge}>
-          <button>
-            <BsGiftFill />
-          </button>
-        </Tooltip>
-      )}
-      <div
-        className={`${styles.usingBadge} ${
-          styles[itemStatus === 'USING' ? 'using' : 'before']
-        }`}
-      >
-        <BsCircleFill /> {itemStatus === 'USING' ? '사용중' : '사용 전'}
+      <div className={styles.badgeContainer}>
+        {user.intraId !== purchaserIntra && (
+          <Tooltip
+            title={`from ${purchaserIntra}`}
+            className={styles.giftBadge}
+          >
+            <button>
+              <BsGiftFill />
+            </button>
+          </Tooltip>
+        )}
+        <div
+          className={`${styles.usingBadge} ${
+            styles[itemStatus === 'USING' ? 'using' : 'before']
+          }`}
+        >
+          <BsCircleFill /> {itemStatus === 'USING' ? '사용중' : '사용 전'}
+        </div>
       </div>
       <div className={styles.overlay}>
         {itemStatus === 'USING' ? (
@@ -71,10 +79,12 @@ export function InvetoryItem({ item }: inventoryItemProps) {
           <button onClick={handleUseItem}>사용하기</button>
         )}
       </div>
-      <div className={styles.imgContainer}>
-        <Image className={styles.img} src={imageUri} alt={itemName} fill />
+      <div onTouchEnd={handleTouch}>
+        <div className={styles.imgContainer}>
+          <Image className={styles.img} src={imageUri} alt={itemName} fill />
+        </div>
+        <div className={styles.itemName}>{itemName}</div>
       </div>
-      <div className={styles.itemName}>{itemName}</div>
     </div>
   );
 }
