@@ -2,11 +2,11 @@
 
 .appContainer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100vw;
   min-width: 380px;
+  flex-direction: column;
   background: black;
+  align-items: center;
 }
 
 .background {
@@ -16,6 +16,9 @@
   max-width: 100vh;
   min-height: 100vh;
   background: $main-background;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
   &.both {
     background: $match-background;
   }
@@ -23,81 +26,78 @@
     background: $vip-background;
   }
   &.basic {
-    background: $profile-background0;
+    background: $bg-basic;
   }
   &.background1 {
-    background: $profile-background1;
+    background: $bg-pink-orange;
   }
   &.background2 {
-    background: $profile-background2;
+    background: $bg-blue-green;
   }
   &.background3 {
-    background: $profile-background3;
+    background: $bg-midnight;
   }
   &.background4 {
-    background: $profile-background4;
+    background: $bg-orange;
   }
   &.background5 {
-    background: $profile-background5;
+    background: $bg-grass-green;
   }
   &.background6 {
-    background: $profile-background6;
+    background: $bg-lemon-blue;
   }
   &.background7 {
-    background: $profile-background7;
+    background: $bg-dracula;
   }
   &.background8 {
-    background: $profile-background8;
+    background: $bg-mint-green;
   }
   &.background9 {
-    background: $profile-background9;
+    background: $bg-steel-gray;
   }
   &.background10 {
-    background: $profile-background10;
+    background: $bg-blood-red;
   }
   &.background11 {
-    background: $profile-background11;
+    background: $bg-blue-sky;
   }
   &.background12 {
-    background: $profile-background12;
+    background: $bg-ocean-blue;
   }
   &.background13 {
-    background: $profile-background13;
+    background: $bg-pink-blue;
   }
   &.background14 {
-    background: $profile-background14;
+    background: $bg-sunset-pink;
   }
   &.background15 {
-    background: $profile-background15;
+    background: $bg-dark-navy;
   }
   &.background16 {
-    background: $profile-background16;
+    background: $bg-orange-green;
   }
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
 }
 
 .topInfo {
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
 
 .buttonContainer {
-  z-index: 3;
   position: sticky;
   top: 83%;
+  z-index: 3;
   margin-left: 75%;
   .buttonWrapper {
+    position: absolute;
     display: flex;
+    width: 5.7rem;
+    border-radius: 3rem;
+    box-shadow: 0 0 2rem 0.5rem rgba(245, 0, 165, 1);
     justify-content: center;
     align-items: center;
-    position: absolute;
-    width: 5.7rem;
-    box-shadow: 0 0 2rem 0.5rem rgba(245, 0, 165, 1);
-    border-radius: 3rem;
   }
 }

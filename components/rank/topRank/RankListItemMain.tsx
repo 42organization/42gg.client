@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
-import { userImages } from 'types/rankTypes';
 import { useRecoilValue } from 'recoil';
+import { TbQuestionMark } from 'react-icons/tb';
+import { userImages, RankUser, NormalUser } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
 import PlayerImage from 'components/PlayerImage';
-import { TbQuestionMark } from 'react-icons/tb';
 import styles from 'styles/rank/RankListMain.module.scss';
 
 interface RankListItemMainProps {

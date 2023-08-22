@@ -2,12 +2,12 @@
 
 .footerContainer {
   display: flex;
+  height: 4rem;
   flex-direction: column;
+  font-size: $small-font;
+  color: white;
   justify-content: center;
   align-items: center;
-  height: 4rem;
-  color: white;
-  font-size: $small-font;
   .link {
     display: flex;
     div {

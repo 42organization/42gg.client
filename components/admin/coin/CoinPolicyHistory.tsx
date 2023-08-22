@@ -1,11 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import {
-  IcoinPolicyHistory,
-  IcoinPolicyHistoryTable,
-} from 'types/admin/adminCoinTypes';
-import { tableFormat } from 'constants/admin/table';
-import { getFormattedDateToString } from 'utils/handleTime';
-import PageNation from 'components/Pagination';
+import { useSetRecoilState } from 'recoil';
 import {
   Paper,
   Table,
@@ -15,10 +9,16 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import styles from 'styles/admin/coin/CoinPolicyHistory.module.scss';
+import {
+  IcoinPolicyHistory,
+  IcoinPolicyHistoryTable,
+} from 'types/admin/adminCoinTypes';
+import { getFormattedDateToString } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
-import { useSetRecoilState } from 'recoil';
 import { toastState } from 'utils/recoil/toast';
+import { tableFormat } from 'constants/admin/table';
+import PageNation from 'components/Pagination';
+import styles from 'styles/admin/coin/CoinPolicyHistory.module.scss';
 
 const coinPolicyHistoryTableTitle: { [key: string]: string } = {
   coinPolicyId: 'ID',

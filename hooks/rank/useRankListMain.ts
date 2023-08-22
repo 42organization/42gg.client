@@ -1,8 +1,6 @@
-import useAxiosGet from 'hooks/useAxiosGet';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import { useEffect, Dispatch, SetStateAction } from 'react';
-import { userImages } from 'types/rankTypes';
-import { ToggleMode } from 'types/rankTypes';
+import { userImages, ToggleMode } from 'types/rankTypes';
+import useAxiosGet, { useMockAxiosGet } from 'hooks/useAxiosGet';
 
 interface useRankListProps {
   makePathRanker: string;

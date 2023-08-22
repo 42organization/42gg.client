@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import { Rank } from 'types/rankTypes';
+import type { Meta, StoryObj } from '@storybook/react';
 import RankListMain from 'components/rank/topRank/RankListMain';
 
 interface RankListMainProps {

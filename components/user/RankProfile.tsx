@@ -1,5 +1,5 @@
-import ProfileChart from 'components/user/ProfileChart';
 import ProfileModeWrap from 'components/mode/modeWraps/ProfileModeWrap';
+import ProfileChart from 'components/user/ProfileChart';
 import useGetRankProfile from 'hooks/users/useGetRankProfile';
 import styles from 'styles/user/ProfileRank.module.scss';
 

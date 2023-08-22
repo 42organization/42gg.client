@@ -1,8 +1,8 @@
-import { GoSearch } from 'react-icons/go';
 import { useEffect, Dispatch, SetStateAction } from 'react';
+import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
-import styles from 'styles/main/SearchBar.module.scss';
 import useSearchBar from 'hooks/useSearchBar';
+import styles from 'styles/main/SearchBar.module.scss';
 
 export default function GiftSearchBar({
   setRecipient,

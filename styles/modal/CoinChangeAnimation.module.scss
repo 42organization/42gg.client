@@ -9,14 +9,14 @@ $ppp-font: 2.8rem;
   margin-bottom: 0.6rem;
   .coin {
     display: flex;
-    align-items: center;
-    color: rgba(255, 255, 255, 1);
     font-family: 'NanumSquare_acEB', sans-serif;
     font-size: $ppp-font;
     font-weight: 800;
+    color: rgba(255, 255, 255, 1);
     text-align: center;
-    letter-spacing: 0.04rem;
     text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
+    letter-spacing: 0.04rem;
+    align-items: center;
 
     span:nth-child(2) {
       margin-top: 0.5rem;

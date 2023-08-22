@@ -1,5 +1,5 @@
-import ItemList from './ItemList';
-import ChangeHistory from './itemHistory';
+import ChangeHistory from 'components/admin/store/itemHistory';
+import ItemList from 'components/admin/store/ItemList';
 import styles from 'styles/admin/store/StoreMain.module.scss';
 
 function StoreMain() {

@@ -1,10 +1,10 @@
 import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
 import { Iprofile } from 'types/admin/adminReceiptType';
 import { mockInstance } from 'utils/mockAxios';
+import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/admin/modal/AdminDeleteProfile.module.scss';
 import PlayerImage from 'components/PlayerImage';
+import styles from 'styles/admin/modal/AdminDeleteProfile.module.scss';
 
 export default function AdminDeleteProfileModal(props: Iprofile) {
   const { profileId, intraId, imageUri } = props;

@@ -29,43 +29,43 @@
 }
 
 .display {
+  position: relative;
   display: flex;
+  height: 100vh;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
-  height: 100vh;
 }
 
 .loadTextRed {
   height: 0;
-  color: $pp-red;
   font-size: 3rem;
+  color: $pp-red;
 }
 
 .loadTextWhite {
   height: 0;
   margin-bottom: 10rem;
-  color: white;
   font-size: 3rem;
+  color: white;
 }
 
 .loadTextRedBottom {
   height: 0;
-  color: $pp-red;
   font-size: 3rem;
+  color: $pp-red;
 }
 
 .loadTextWhiteBottom {
   height: 0;
-  color: white;
   font-size: 3rem;
+  color: white;
 }
 
 .loadTextBlack {
   height: 0;
   padding-bottom: 2rem;
-  color: black;
   font-size: 3rem;
+  color: black;
 }
 
 .spinner {
@@ -73,13 +73,13 @@
   left: 50%;
   height: 20rem;
   padding: 1rem;
-  border-radius: $small-radius;
+  text-align: center;
   background: linear-gradient(
     to bottom,
     rgb(19, 27, 97),
     rgba(207, 21, 21, 0.6)
   );
-  text-align: center;
+  border-radius: $small-radius;
   transform: translateX(-50%);
   .ball_container {
     width: 40px;

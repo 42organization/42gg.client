@@ -1,8 +1,8 @@
 @mixin pagination {
   .pageNationContainer {
     ul {
-      list-style: none;
       padding: 0;
+      list-style: none;
 
       li {
         display: flex;
@@ -14,14 +14,14 @@
         font-weight: 600;
         cursor: pointer;
         a {
-          color: gray; /* $g1-bottom */
           font-size: 0.9rem;
+          color: gray; /* $g1-bottom */
           text-decoration: none;
         }
         :hover,
         :active {
-          color: black; /* $pp-red */
           font-weight: 700;
+          color: black; /* $pp-red */
         }
       }
     }

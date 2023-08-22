@@ -1,45 +1,45 @@
 @import 'styles/common.scss';
 
 .itemCard {
-  width: 95%;
   position: relative;
+  display: flex;
+  width: 95%;
+  flex-direction: column;
   margin: 1rem auto;
+  overflow: hidden;
   background: white;
   border-radius: 1rem;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
 
   .preview {
     position: relative;
     height: inherit;
 
     .img {
-      height: 8rem;
       max-width: 100%;
+      height: 8rem;
       max-height: 100%;
     }
     .badge {
       position: absolute;
-      width: 3rem;
-      text-align: center;
-      background-color: rgb(128, 0, 0);
-      color: #fff;
       top: 7%;
       right: 0;
+      width: 3rem;
+      color: #fff;
+      text-align: center;
+      background-color: rgb(128, 0, 0);
       border-radius: 1.25rem 0 0 1.25rem;
     }
   }
 
   .details {
-    height: 100%;
-    width: 100%;
     position: relative;
-    background-color: $g1-bottom;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 0.5rem;
     z-index: 1;
+    width: 100%;
+    height: 100%;
+    padding-top: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    background-color: $g1-bottom;
 
     .itemPriceTag {
       display: flex;
@@ -48,29 +48,29 @@
       justify-content: space-between;
       color: #ffdc43;
       .title {
-        text-align: center;
         font-weight: bold;
         color: black;
+        text-align: center;
       }
       .priceTags {
         .originalPrice {
-          font-size: 1rem;
           padding: 0;
           margin: 0;
+          font-size: 1rem;
         }
 
         .onDiscount {
-          text-decoration: line-through 2px solid #666666;
           padding: 0;
           margin: 0;
+          text-decoration: line-through 2px solid #666666;
         }
 
         .discountedPrice {
           padding: 0;
           margin: 0;
           font-size: 1rem;
-          text-align: center;
           font-weight: bold;
+          text-align: center;
           transform: translateY(-0.05rem);
         }
       }
@@ -87,24 +87,24 @@
       margin-bottom: 0.5rem;
 
       .gift {
-        color: white;
         width: 40%;
         height: 1.5rem;
-        border-style: none;
-        border-radius: 0.625rem;
+        color: white;
         background: linear-gradient(
           180deg,
           #ea80ea 0%,
           rgba(211, 36, 182, 0.72) 100%
         );
-      }
-      .buy {
-        color: white;
-        width: 40%;
-        height: 1.5rem;
         border-style: none;
         border-radius: 0.625rem;
+      }
+      .buy {
+        width: 40%;
+        height: 1.5rem;
+        color: white;
         background: $btn-purple;
+        border-style: none;
+        border-radius: 0.625rem;
       }
     }
   }
