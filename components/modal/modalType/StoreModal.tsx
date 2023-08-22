@@ -4,6 +4,7 @@ import CoinChangeModal from 'components/modal/statChange/CoinChangeModal';
 import ChangeIdColorModal from 'components/modal/store/inventory/ChangeIdColorModal';
 import EditMegaphoneModal from 'components/modal/store/inventory/EditMegaphoneModal';
 import NewMegaphoneModal from 'components/modal/store/inventory/NewMegaphoneModal';
+import ProfileImageModal from 'components/modal/store/inventory/ProfileImageModal';
 import BuyModal from 'components/modal/store/purchase/BuyModal';
 import GiftModal from 'components/modal/store/purchase/GiftModal';
 import NoCoinModal from 'components/modal/store/purchase/NoCoinModal';
@@ -34,6 +35,9 @@ export default function StoreModal() {
     ) : null,
     'USE-ITEM-MEGAPHONE': useItemInfo ? (
       <NewMegaphoneModal {...useItemInfo} />
+    ) : null,
+    'USE-ITEM-PROFILE_IMAGE': useItemInfo ? (
+      <ProfileImageModal {...useItemInfo} />
     ) : null,
     'EDIT-ITEM-MEGAPHONE': useItemInfo ? (
       <EditMegaphoneModal {...useItemInfo} />
