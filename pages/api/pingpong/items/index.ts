@@ -86,7 +86,7 @@ const item7: InventoryItem = {
   itemName: '프로필 이미지 변경',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'jeyoon',
-  itemStatus: 'USING',
+  itemStatus: 'BEFORE',
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
