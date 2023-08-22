@@ -39,10 +39,10 @@ const useRankList = ({
     type: 'setError',
   }); */
   const getRankDataHandler = useMockAxiosGet<any>({
-    url: '/rank/rankpage',
+    url: makePath,
     setState: (data) => {
       setRank(data);
-      setMyRank((prev) => ({ ...prev, ['RANK']: data.myRank }));
+      setMyRank((prev) => ({ ...prev, [toggleMode]: data.myRank }));
     },
     err: 'DK01',
     type: 'setError',
