@@ -1,68 +1,72 @@
 /* profile-edge color */
-$profile-edge0: #666666;
-$profile-edge1: linear-gradient(to right bottom, #a8ff78 30%, #78ffd6 70%);
-$profile-edge2: linear-gradient(to right bottom, #f05053 30%, #e1eec3 70%);
-$profile-edge3: linear-gradient(to right bottom, #b20a2c 30%, #fffbd5 70%);
-$profile-edge4: linear-gradient(to right bottom, #005aa7 30%, #fffde4 70%);
-$profile-edge5: linear-gradient(to right bottom, #74ebd5 30%, #acb6e5 70%);
-$profile-edge6: linear-gradient(to right bottom, #000c40 30%, #f0f2f0 70%);
-$profile-edge7: linear-gradient(
+$edge-basic: #666666;
+$edge-neon-green: linear-gradient(to right bottom, #a8ff78 30%, #78ffd6 70%);
+$edge-orange-red: linear-gradient(to right bottom, #f05053 30%, #e1eec3 70%);
+$edge-red: linear-gradient(to right bottom, #b20a2c 30%, #fffbd5 70%);
+$edge-blue: linear-gradient(to right bottom, #005aa7 30%, #fffde4 70%);
+$edge-pastel-green-blue: linear-gradient(
+  to right bottom,
+  #74ebd5 30%,
+  #acb6e5 70%
+);
+$edge-navy: linear-gradient(to right bottom, #000c40 30%, #f0f2f0 70%);
+$edge-orange-green: linear-gradient(
   to right bottom,
   #f12711 0%,
   #f5af19 50%,
   #9cecfb 100%
 );
-$profile-edge8: linear-gradient(
+$edge-neon-yellow: linear-gradient(
   to right bottom,
   #ffffff 0%,
   #d9ff4e 50%,
   #fffc68 100%
 );
-$profile-edge9: linear-gradient(
+$edge-blue-green: linear-gradient(
   to right bottom,
   #0030ac 0%,
   #90a5ff 50%,
   #8fffa4 100%
 );
-$profile-edge10: linear-gradient(
+$edge-pink-blue-purple: linear-gradient(
   to right bottom,
   #ff10af 0%,
   #8afbff 50%,
   #d452ff 100%
 );
-$profile-edge11: linear-gradient(
+$edge-tropical-green: linear-gradient(
   to right bottom,
   #00fbff 0%,
   #f0ff4e 50%,
   #ff7700 100%
 );
 
-$profile-edge12: linear-gradient(
+$edge-navy-green: linear-gradient(
   to right bottom,
   #6ea5ff 0%,
   #000000 50%,
   #9cecfb 100%
 );
 
-$profile-edge13: linear-gradient(
+$edge-green-yellow: linear-gradient(
   to right bottom,
   #00416a 0%,
   #799f0c 50%,
   #ffe000 100%
 );
-$profile-edge14: linear-gradient(
+$edge-pastel-orange: linear-gradient(
   to right bottom,
   #f7797d 0%,
   #fbd786 50%,
   #c6ffdd 100%
 );
-$profile-edge15: linear-gradient(
+$edge-pink-purple: linear-gradient(
   to right bottom,
   #f64f59 0%,
   #c471ed 50%,
   #12c2e9 100%
 );
-$profile-edge16: linear-gradient(
+$edge-skyblue: linear-gradient(
   to right bottom,
   #7f7fd5 0%,
   #86a8e7 50%,
@@ -76,54 +80,54 @@ $profile-edge16: linear-gradient(
   margin-bottom: 0.2rem;
   border-radius: 50%;
   &.basic {
-    background: $profile-edge0;
+    background: $edge-basic;
   }
   &.edge1 {
-    background: $profile-edge1;
+    background: $edge-neon-green;
   }
   &.edge2 {
-    background: $profile-edge2;
+    background: $edge-orange-red;
   }
   &.edge3 {
-    background: $profile-edge3;
+    background: $edge-red;
   }
   &.edge4 {
-    background: $profile-edge4;
+    background: $edge-blue;
   }
   &.edge5 {
-    background: $profile-edge5;
+    background: $edge-pastel-green-blue;
   }
   &.edge6 {
-    background: $profile-edge6;
+    background: $edge-navy;
   }
   &.edge7 {
-    background: $profile-edge7;
+    background: $edge-orange-green;
   }
   &.edge8 {
-    background: $profile-edge8;
+    background: $edge-neon-yellow;
   }
   &.edge9 {
-    background: $profile-edge9;
+    background: $edge-blue-green;
   }
   &.edge10 {
-    background: $profile-edge10;
+    background: $edge-pink-blue-purple;
   }
   &.edge11 {
-    background: $profile-edge11;
+    background: $edge-tropical-green;
   }
   &.edge12 {
-    background: $profile-edge12;
+    background: $edge-navy-green;
   }
   &.edge13 {
-    background: $profile-edge13;
+    background: $edge-green-yellow;
   }
   &.edge14 {
-    background: $profile-edge14;
+    background: $edge-pastel-orange;
   }
   &.edge15 {
-    background: $profile-edge15;
+    background: $edge-pink-purple;
   }
   &.edge16 {
-    background: $profile-edge16;
+    background: $edge-skyblue;
   }
 }
