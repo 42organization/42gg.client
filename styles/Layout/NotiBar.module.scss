@@ -18,6 +18,7 @@
   .closeButtonWrapper {
     padding-bottom: 1.4rem;
     button {
+      all: unset;
       width: 1.2rem;
       margin-left: auto;
       font-size: 1.5rem;
@@ -25,7 +26,6 @@
       text-align: center;
       text-shadow: none;
       cursor: pointer;
-      all: unset;
     }
   }
 

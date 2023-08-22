@@ -37,6 +37,7 @@
             "declarations"
         ],
         "order/properties-order": [
+            "all",
             "position",
             "top",
             "right",

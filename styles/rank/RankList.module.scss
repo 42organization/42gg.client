@@ -93,12 +93,12 @@
     }
   }
   .statusMessage {
-    justify-self: left;
     max-width: 100%;
-    color: $dark-gray;
     overflow: hidden;
+    color: $dark-gray;
     text-overflow: ellipsis;
     white-space: nowrap;
+    justify-self: left;
   }
   .ppp {
     font-weight: 600;

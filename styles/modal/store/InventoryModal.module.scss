@@ -68,8 +68,8 @@
 .idPreviewContainer {
   .title {
     margin: 0 0 0.3rem 0.5rem;
-    color: $dark-gray;
     font-size: $small-font;
+    color: $dark-gray;
   }
 }
 
@@ -81,8 +81,8 @@
   img {
     width: 5.5rem;
     height: 5.5rem;
-    border-radius: 50%;
     overflow: hidden;
+    border-radius: 50%;
     object-fit: cover;
   }
   svg {
@@ -90,13 +90,13 @@
   }
   .profilePreview {
     display: flex;
-    justify-content: center;
-    align-items: center;
     width: 5.5rem;
     height: 5.5rem;
-    border-radius: 50%;
-    background-color: #c7b1ee;
     cursor: pointer;
+    background-color: #c7b1ee;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
     svg {
       width: 2.5rem;
       height: 2.5rem;

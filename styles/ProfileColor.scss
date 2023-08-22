@@ -74,8 +74,8 @@ $edge-skyblue: linear-gradient(
 );
 
 @mixin profileEdge($size) {
-  height: $size;
   width: $size;
+  height: $size;
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
   border-radius: 50%;

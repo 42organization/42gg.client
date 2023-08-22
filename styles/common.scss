@@ -117,6 +117,7 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin match-noti-button {
+  all: unset;
   padding: 0.2rem 0.5rem;
   margin: 0.7rem 0;
   font-weight: 700;
@@ -124,10 +125,10 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   text-align: center;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.3);
-  all: unset;
 }
 
 @mixin reload-button {
+  all: unset;
   width: 1.6rem;
   height: 1.6rem;
   font-weight: 700;
@@ -136,7 +137,6 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  all: unset;
 }
 
 @mixin pageWrap {
@@ -176,6 +176,7 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin button($btn-color, $txt-color, $width: 8rem, $height: 2.8rem) {
+  all: unset;
   width: $width;
   height: $height;
   font-size: $medium-font;
@@ -188,7 +189,6 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
     $btn-color
   );
   border-radius: $small-radius;
-  all: unset;
 }
 
 @mixin select-buttons($width: 8rem, $height: 2.8rem) {
@@ -228,6 +228,7 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin modal-phrase {
+  margin: 1rem 0;
   margin-bottom: 2rem;
   text-align: center;
   .emoji {
@@ -238,7 +239,6 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
     margin-top: 0.5rem;
     line-height: 1.5;
   }
-  margin: 1rem 0;
 }
 
 @mixin modalContainer($type) {

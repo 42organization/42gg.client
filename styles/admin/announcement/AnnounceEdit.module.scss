@@ -88,6 +88,7 @@
   gap: 1rem;
 
   button {
+    all: unset;
     width: 5rem;
     height: 2rem;
     font-size: $small-font;
@@ -96,7 +97,6 @@
     cursor: pointer;
     background: gray;
     border-radius: 0.5rem;
-    all: unset;
   }
 
   :nth-child(2) {

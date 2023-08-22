@@ -138,11 +138,11 @@
   flex-wrap: wrap;
 
   input {
+    all: unset;
     width: calc(100% - 4rem);
     padding: 0.5rem 0.8rem;
     margin-left: 0.5rem;
     color: black;
-    all: unset;
   }
   .icons {
     span {
