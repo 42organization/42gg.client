@@ -15,8 +15,8 @@
 .storeContainer {
   height: 60vh;
   padding: 1rem;
-  margin-block: 0 1rem;
-  border-radius: $small-radius;
-  background: rgba(255, 255, 255, 0.2);
   overflow-y: scroll;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: $small-radius;
+  margin-block: 0 1rem;
 }

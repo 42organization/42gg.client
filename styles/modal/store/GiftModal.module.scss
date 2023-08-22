@@ -6,40 +6,40 @@
 
 .phrase {
   @include modal-phrase;
+  margin-bottom: 0.875rem;
   font-family: 'NanumSquare_acR', sans-serif;
   color: rgba(49, 47, 49, 1);
-  margin-bottom: 0.875rem;
 
   .message {
     font-size: 1.125rem;
     font-weight: 700;
-    letter-spacing: 0.04rem;
     line-height: 200%;
+    letter-spacing: 0.04rem;
   }
 
   .recipient {
-    font-size: 1rem;
     margin-top: 0.875rem;
     font-family: 'NanumSquare_acR', sans-serif;
+    font-size: 1rem;
     font-weight: 700;
-    letter-spacing: 0.04rem;
     line-height: 200%;
+    letter-spacing: 0.04rem;
     span {
-      color: $norm-purple;
       font-weight: 1000;
+      color: $norm-purple;
     }
   }
 
   .itemInfo {
     width: 80%;
-    margin-left: 10%;
     margin-top: 0.875rem;
-    font-size: 0.875rem;
+    margin-left: 10%;
     font-family: 'NanumSquare_acR', sans-serif;
+    font-size: 0.875rem;
     font-weight: 700;
-    letter-spacing: 0.04rem;
     line-height: 150%;
     color: #666666;
+    letter-spacing: 0.04rem;
     .itemName {
       display: flex;
       flex-flow: row wrap;
@@ -53,11 +53,11 @@
   }
 
   .warning {
-    font-size: 0.875rem;
     font-family: 'NanumSquare_acR', sans-serif;
+    font-size: 0.875rem;
     font-weight: 700;
-    letter-spacing: 0.04rem;
     color: #ff0000;
+    letter-spacing: 0.04rem;
   }
 }
 

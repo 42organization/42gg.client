@@ -10,10 +10,10 @@
       background-color: lightgray;
       .tableHeaderItem {
         padding: 0.7rem;
-        text-align: center;
-        font-weight: 600;
         font-size: $small-font;
+        font-weight: 600;
         line-height: 150%;
+        text-align: center;
       }
     }
     .tableBody {
@@ -26,9 +26,9 @@
         }
         .tableBodyItem {
           padding: 10px;
-          text-align: center;
-          line-height: 150%;
           font-size: $small-font;
+          line-height: 150%;
+          text-align: center;
         }
       }
     }
