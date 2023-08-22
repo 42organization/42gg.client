@@ -1,0 +1,31 @@
+@import 'styles/modal/store/GachaBall.module.scss';
+
+.container {
+  .ball {
+    @include gachaBalls;
+    animation: bounce 1s infinite;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(-5%) scaleY(1) scaleX(1);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: translateY(0) scaleY(0.75) scaleX(1.15);
+    animation-timing-function: ease-in;
+  }
+  10% {
+    transform: translateY(-5%) scaleY(1) scaleX(1);
+    animation-timing-function: ease-out;
+  }
+  50% {
+    transform: translateY(-85%) scaleY(1.1) scaleX(0.95);
+    animation-timing-function: ease-in;
+  }
+  90% {
+    transform: translateY(-5%) scaleY(1) scaleX(1);
+    animation-timing-function: ease-out;
+  }
+}
