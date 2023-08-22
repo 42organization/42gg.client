@@ -1,4 +1,4 @@
-import Celebration from './Celebration';
+import Celebration from 'components/modal/statChange/Celebration';
 import useExpStat from 'hooks/modal/statchange/useExpStat';
 import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
 

@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { User } from 'types/mainType';
 import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
-import { User } from 'types/mainType';
 import useAxiosGet from 'hooks/useAxiosGet';
 
 const useAnnouncementCheck = (presentPath: string, user: User) => {

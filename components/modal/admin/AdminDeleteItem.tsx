@@ -1,10 +1,10 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
 import { mockInstance } from 'utils/mockAxios';
+import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminDeleteItem.module.scss';
-import { userState } from 'utils/recoil/layout';
 
 export default function AdminDeleteItemModal(props: Item) {
   const { itemId, name, content } = props;

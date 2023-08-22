@@ -2,9 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { IGames, IGameLog } from 'types/admin/gameLogTypes';
 import { instanceInManage } from 'utils/axios';
 import { getFormattedDateToString, gameTimeToString } from 'utils/handleTime';
-import AdminSearchBar from '../common/AdminSearchBar';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import ModifyScoreForm from 'components/admin/games/ModifyScoreForm';
 import PageNation from 'components/Pagination';
-import ModifyScoreForm from './ModifyScoreForm';
 import styles from 'styles/admin/games/GamesTable.module.scss';
 
 export default function GamesTable() {
@@ -87,9 +87,7 @@ export default function GamesTable() {
                   <div>
                     시작 날짜: {game.startAt.toLocaleString().split(' ')[0]}
                   </div>
-                  <div>
-                    시작 시간: {gameTimeToString(game.startAt)}
-                  </div>
+                  <div>시작 시간: {gameTimeToString(game.startAt)}</div>
                   <div>게임 모드: {mode}</div>
                   <div>슬롯 시간: {game.slotTime}분</div>
                   <div>

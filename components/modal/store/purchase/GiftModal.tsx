@@ -1,14 +1,14 @@
-import GiftSearchBar from 'components/shop/GiftSearchBar';
-import useGiftModal from 'hooks/modal/store/purchase/useGiftModal';
 import { useEffect, useState } from 'react';
 import { FaCoins } from 'react-icons/fa';
-import styles from 'styles/modal/store/GiftModal.module.scss';
-import { PriceTag } from 'types/modalTypes';
 import { Gift } from 'types/itemTypes';
+import { PriceTag } from 'types/modalTypes';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
+import GiftSearchBar from 'components/shop/GiftSearchBar';
+import useGiftModal from 'hooks/modal/store/purchase/useGiftModal';
+import styles from 'styles/modal/store/GiftModal.module.scss';
 
 export default function GiftModal({ itemId, product, price }: PriceTag) {
   const [recipient, setRecipient] = useState<string>('');

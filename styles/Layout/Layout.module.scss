@@ -2,11 +2,11 @@
 
 .appContainer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100vw;
   min-width: 380px;
+  flex-direction: column;
   background: black;
+  align-items: center;
 }
 
 .background {
@@ -16,6 +16,9 @@
   max-width: 100vh;
   min-height: 100vh;
   background: $main-background;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
   &.both {
     background: $match-background;
   }
@@ -73,31 +76,28 @@
   &.background16 {
     background: $bg-orange-green;
   }
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
 }
 
 .topInfo {
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
 
 .buttonContainer {
-  z-index: 3;
   position: sticky;
   top: 83%;
+  z-index: 3;
   margin-left: 75%;
   .buttonWrapper {
+    position: absolute;
     display: flex;
+    width: 5.7rem;
+    border-radius: 3rem;
+    box-shadow: 0 0 2rem 0.5rem rgba(245, 0, 165, 1);
     justify-content: center;
     align-items: center;
-    position: absolute;
-    width: 5.7rem;
-    box-shadow: 0 0 2rem 0.5rem rgba(245, 0, 165, 1);
-    border-radius: 3rem;
   }
 }

@@ -18,6 +18,10 @@ export interface Gift {
   ownerId: string;
 }
 
+export interface GiftRequest {
+  ownerId: string;
+}
+
 export interface Purchase {
   itemId: number;
 }

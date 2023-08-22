@@ -16,43 +16,43 @@
     font-size: 2rem;
   }
   .titleNormal {
-    color: rgba(122, 110, 123, 1);
     font-family: 'Overgrow', sans-serif;
     font-weight: 500;
+    color: rgba(122, 110, 123, 1);
   }
   .titleRank {
     color: rgba(165, 95, 195, 1);
   }
   .message {
     padding-bottom: 1.5rem;
-    font-size: 1.25rem;
     font-family: 'NanumSquare_acR', sans-serif;
+    font-size: 1.25rem;
     font-weight: 800;
     letter-spacing: 0.04rem;
   }
 
   .rules {
-    font-size: 0.9rem;
     font-family: 'NanumSquare_acR', sans-serif;
+    font-size: 0.9rem;
     font-weight: 600;
-    text-align: center;
-    white-space: pre-wrap;
     line-height: 150%;
+    text-align: center;
     letter-spacing: 0.04rem;
+    white-space: pre-wrap;
   }
 }
 
 .resultContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
   width: 18rem;
   height: 13.5rem;
+  flex-direction: column;
   margin-bottom: 3rem;
+  background-color: rgba(255, 255, 255, 1);
   border: 1px solid rgba(221, 200, 224, 1);
   border-radius: 0.625rem;
-  background-color: rgba(255, 255, 255, 1);
+  justify-content: flex-start;
+  align-items: stretch;
   &.normal {
     background-color: rgba(204, 173, 218, 1);
   }
@@ -60,13 +60,13 @@
 
 .players {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
   padding-top: 1.5rem;
   padding-bottom: 1rem;
-  font-size: 0.9rem;
   font-family: 'Roboto';
+  font-size: 0.9rem;
   font-weight: 500;
+  justify-content: space-evenly;
+  align-items: center;
   .vs {
     font-size: 1.2rem;
     font-weight: 900;
@@ -95,11 +95,11 @@
   input {
     width: 4.25rem;
     height: 2.2rem;
-    border: 2px solid rgba(221, 200, 224, 1);
-    border-radius: 0.3rem;
     font-size: 1.6rem;
     font-weight: 800;
     text-align: center;
+    border: 2px solid rgba(221, 200, 224, 1);
+    border-radius: 0.3rem;
   }
 }
 

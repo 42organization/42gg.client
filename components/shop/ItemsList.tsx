@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ItemList } from 'types/itemTypes';
-import ItemCard from './ItemCard';
+import ItemCard from 'components/shop/ItemCard';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
 
 export default function ItemsList({ coin }: { coin: number }) {

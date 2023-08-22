@@ -5,20 +5,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  margin: 1rem 0 1rem 0;
+  margin: 1rem 0;
 }
 
 .time {
   margin-left: 0.3rem;
-  color: black;
   font-size: $medium-font;
+  color: black;
 }
 
 .currentTime {
   margin-left: 0.3rem;
-  color: blue;
   font-size: $medium-font;
   font-weight: 700;
+  color: blue;
 }
 
 .hourSlot {

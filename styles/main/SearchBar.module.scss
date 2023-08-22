@@ -1,24 +1,24 @@
 @import 'styles/common.scss';
 
 .searchBar {
-  display: flex;
-  z-index: 2;
-  justify-content: space-between;
-  align-items: center;
   position: relative;
+  z-index: 2;
+  display: flex;
   height: 2.5rem;
-  margin: 1rem 0.8rem 0;
   padding: 0.8rem 1rem;
-  border-radius: $small-radius;
-  background: rgba(255, 255, 255, 0.3);
+  margin: 1rem 0.8rem 0;
   font-size: $medium-font;
   color: #1f0b36;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: $small-radius;
+  justify-content: space-between;
+  align-items: center;
   input {
-    all: unset;
-    width: calc(100% - 4rem);
     box-sizing: border-box;
+    width: calc(100% - 4rem);
     padding: 0.7rem 0.5rem;
     color: #ffffff;
+    all: unset;
     &::placeholder {
       color: #1f0b36;
     }
@@ -31,17 +31,17 @@
     }
   }
   .dropdown {
-    z-index: 3;
-    display: block;
-    box-sizing: border-box;
     position: absolute;
     top: 2.1rem;
     left: 0;
+    z-index: 3;
+    box-sizing: border-box;
+    display: block;
     width: 100%;
-    padding: 0 0.8rem 0.5rem 0.8rem;
-    border-radius: 0 0 $small-radius $small-radius;
-    background: #ffffff;
+    padding: 0 0.8rem 0.5rem;
     color: #1f0b36;
+    background: #ffffff;
+    border-radius: 0 0 $small-radius $small-radius;
     div {
       padding: 0.5rem 0;
       cursor: pointer;
@@ -52,10 +52,10 @@
 #game {
   z-index: 1;
   height: 1.6rem;
-  margin: 0;
   padding: 0 0.5rem;
-  border-radius: $mini-radius;
+  margin: 0;
   font-size: $small-font;
+  border-radius: $mini-radius;
   input {
     width: calc(100% - 1.5rem);
   }
@@ -66,7 +66,7 @@
   }
   .dropdown {
     top: 1.33rem;
-    padding: 0 0.5rem 0.2rem 0.5rem;
+    padding: 0 0.5rem 0.2rem;
     border-radius: 0 0 $mini-radius $mini-radius;
   }
 }

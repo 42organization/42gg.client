@@ -1,4 +1,4 @@
-@import '../common.scss';
+@import 'styles/common.scss';
 
 .checkbox {
   color: white;
@@ -16,10 +16,10 @@
       z-index: 1;
       width: 1rem;
       height: 1rem;
+      content: '';
+      background: transparent;
       border: 2px solid white;
       border-radius: 50%;
-      background: transparent;
-      content: '';
     }
     &:after {
       z-index: 0;

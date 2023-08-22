@@ -18,13 +18,13 @@ $ppp-font: 2.8rem;
 
 .container {
   @include modalContainer('SKYVIOLET');
-  align-items: stretch;
-  min-height: 18.75rem;
-  min-width: 21rem;
-  box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.25);
-  border-radius: 0.625rem;
-  color: black;
   z-index: 6;
+  min-width: 21rem;
+  min-height: 18.75rem;
+  color: black;
+  border-radius: 0.625rem;
+  box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.25);
+  align-items: stretch;
   .emoji {
     margin-bottom: 1.5rem;
     font-size: 2.5rem;
@@ -39,14 +39,14 @@ $ppp-font: 2.8rem;
   margin-bottom: 0.6rem;
   .ppp {
     display: flex;
-    align-items: center;
-    color: rgba(255, 255, 255, 1);
     font-family: 'NanumSquare_acEB', sans-serif;
     font-size: $ppp-font;
     font-weight: 800;
+    color: rgba(255, 255, 255, 1);
     text-align: center;
-    letter-spacing: 0.04rem;
     text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
+    letter-spacing: 0.04rem;
+    align-items: center;
 
     span:nth-child(2) {
       margin-top: 0.5rem;
@@ -81,9 +81,9 @@ $ppp-font: 2.8rem;
       color: rgba(203, 185, 255, 1);
       .expRate {
         margin-bottom: 0.2rem;
+        font-size: 1.25rem;
         font-style: normal;
         font-weight: 700;
-        font-size: 1.25rem;
         line-height: 1.25rem;
         span:nth-child(1) {
           width: 5rem;
@@ -91,11 +91,11 @@ $ppp-font: 2.8rem;
       }
       .increasedExp {
         margin-bottom: 0.1rem;
+        font-size: 0.875rem;
         font-style: normal;
         font-weight: 700;
-        font-size: 0.875rem;
-        letter-spacing: 0.04rem;
         color: rgba(203, 185, 255, 1);
+        letter-spacing: 0.04rem;
         span:nth-child(2) {
           width: 5rem;
         }
@@ -106,8 +106,8 @@ $ppp-font: 2.8rem;
       width: 100%;
       height: 1.5rem;
       margin-bottom: 1rem;
-      border-radius: 0.4rem;
       overflow: hidden;
+      border-radius: 0.4rem;
       .expCurrent {
         background: linear-gradient(
           89.81deg,
@@ -124,10 +124,10 @@ $ppp-font: 2.8rem;
 }
 
 .guide {
-  color: rgba(203, 185, 255, 1);
-  letter-spacing: 0.04rem;
   font-size: $medium-font;
+  color: rgba(203, 185, 255, 1);
   text-align: center;
+  letter-spacing: 0.04rem;
 }
 
 .buttons {
