@@ -1,18 +1,18 @@
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
-import { UseItemRequest } from 'types/inventoryTypes';
-import { Modal } from 'types/modalTypes';
-import { mockInstance } from 'utils/mockAxios';
-import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
+import { UseItemRequest } from 'types/inventoryTypes';
+import { ItemCautionContainer } from './ItemCautionContainer';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
-import GachaBall from 'components/modal/store/inventory/GachaBall';
-import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
+import { Modal } from 'types/modalTypes';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
+import GachaBall from './GachaBall';
+import { mockInstance } from 'utils/mockAxios';
+import { errorState } from 'utils/recoil/error';
 
-type ChangeProfileEdgeModalProps = UseItemRequest;
+type ChangeProfileBackgroundModalProps = UseItemRequest;
 
 // TODO : 주의사항 구체화 필요
 const caution = [
@@ -21,9 +21,9 @@ const caution = [
 ];
 
 // 랜덤 프로필 이미지띠 변경
-export default function ChangeProfileEdgeModal({
+export default function ChangeProfileBackgroundModal({
   receiptId,
-}: ChangeProfileEdgeModalProps) {
+}: ChangeProfileBackgroundModalProps) {
   const resetModal = useResetRecoilState(modalState);
   const setModal = useSetRecoilState<Modal>(modalState);
   const setError = useSetRecoilState<string>(errorState);
@@ -33,22 +33,22 @@ export default function ChangeProfileEdgeModal({
       receiptId: receiptId,
     };
     try {
-      const res = await mockInstance.patch('/users/edge', data);
+      const res = await mockInstance.patch('/users/background', data);
       // api 테스트용 -> 나중에 지우기
-      console.log(`프로필 이미지띠: ${res.data}`);
+      console.log(`프로필 배경색: ${res.data}`);
       // 가챠 애니메이션 모달
       setModal({
         modalName: 'USE-ITEM-GACHA',
-        randomItem: 'edge',
+        randomItem: 'background',
       });
     } catch (error) {
-      setError('HB04');
+      setError('HB05');
     }
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>프로필 이미지띠 변경</div>
+      <div className={styles.title}>프로필 배경색 변경</div>
       <div className={styles.phrase}>
         <div className={styles.section}>
           <div className={styles.sectionTitle}></div>

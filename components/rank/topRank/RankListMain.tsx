@@ -71,15 +71,18 @@ const dummyRankList: userImages[] = [
     intraId: 'intraId',
     tierImageUri: '',
     userImageUri: '',
+    edge: 'BASIC',
   },
   {
     intraId: 'intraId',
     tierImageUri: '',
     userImageUri: '',
+    edge: 'BASIC',
   },
   {
     intraId: 'intraId',
     tierImageUri: '',
     userImageUri: '',
+    edge: 'BASIC',
   },
 ];
