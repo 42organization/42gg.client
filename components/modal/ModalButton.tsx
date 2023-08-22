@@ -18,12 +18,7 @@ export function ModalButtonContainer({
 export function ModalButton({ style, value, onClick, form }: ButtonProps) {
   return (
     <div className={styles[style]}>
-      <input
-        onClick={() => onClick()}
-        type='button'
-        value={value}
-        form={form}
-      />
+      <input onClick={onClick} type='button' value={value} form={form} />
     </div>
   );
 }
