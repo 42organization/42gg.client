@@ -2,27 +2,27 @@
 
 .button {
   display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 0.2rem;
+  cursor: pointer;
   background: linear-gradient(
     to bottom right,
     #0030ac 0%,
     #90a5ff 50%,
     #cb8fff 100%
   );
-  border-radius: 3rem;
   border-width: 0;
-  cursor: pointer;
+  border-radius: 3rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 2.5rem;
-  background-color: black;
+  height: 2.3rem;
   font-size: $big-font;
   color: white;
-  height: 2.3rem;
+  background-color: black;
+  border-radius: 2.5rem;
+  justify-content: center;
+  align-items: center;
 }

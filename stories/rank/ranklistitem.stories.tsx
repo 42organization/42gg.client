@@ -1,38 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ToggleMode } from 'types/rankTypes';
-import RankListItem from 'components/rank/RankListItem';
-
-interface User {
-  intraId: string;
-  rank: number;
-  statusMessage: string;
-  point: number | string;
-  level: number | null;
-}
-
-interface RankListItemProps {
-  user: User;
-  toggleMode: ToggleMode;
-}
-
-const meta: Meta<RankListItemProps> = {
-  title: 'RANK/ranklistItem',
+import { RankListItem } from 'components/rank/RankListItem';
+const meta: Meta = {
+  title: 'rank/RankListItem',
   component: RankListItem,
-  tags: ['autodocs'],
-  argTypes: {},
 };
 
 export default meta;
-type Story = StoryObj<RankListItemProps>;
+type Story = StoryObj<typeof RankListItem>;
 
 export const Default: Story = {
   args: {
     user: {
-      intraId: 'sansdf',
       rank: 1,
-      statusMessage: 'sadfsadfjhkjggkjggjgjhggk',
-      point: 100,
-      level: 5,
+      intraId: 'kim_takgu',
+      statusMessage: '나는야 탁구왕 김탁구',
+      ppp: 1,
+      tierImageUri:
+        'https://cdn.pixabay.com/photo/2022/07/29/05/52/table-tennis-7351159_1280.png',
+      textColor: '#FFFFFF',
     },
   },
 };

@@ -9,13 +9,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 70%;
+    width: 90%;
     min-width: 700px;
     margin: 10px auto;
     .title {
       display: flex;
+      font-size: $big-font;
       font-weight: 600;
-      font-size: $giant-font;
       line-height: 150%;
       .currentBtn {
         margin-left: 20px;
@@ -25,7 +25,7 @@
     }
   }
   .tableContainer {
-    width: 70%;
+    width: 90%;
     min-width: 700px;
     margin: auto;
     .table {
@@ -33,10 +33,10 @@
         background-color: lightgray;
         .tableHeaderItem {
           padding: 0.7rem;
-          text-align: center;
+          font-size: $small-font;
           font-weight: 600;
-          font-size: $medium-font;
           line-height: 150%;
+          text-align: center;
         }
       }
       .tableBody {
@@ -49,17 +49,17 @@
           }
           .tableBodyItem {
             padding: 10px;
-            text-align: center;
+            font-size: $small-font;
             line-height: 150%;
-            font-size: $medium-font;
+            text-align: center;
             .button {
               padding: 4px 12px;
+              font-size: $small-font;
+              color: white;
+              cursor: pointer;
               background-color: #2678f3;
               border: none;
               border-radius: $medium-radius;
-              font-size: $medium-font;
-              color: white;
-              cursor: pointer;
               &:hover {
                 background-color: #1e64d2;
                 transition: 0.3s;

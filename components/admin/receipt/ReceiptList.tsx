@@ -1,8 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Ireceipt, IreceiptTable } from 'types/admin/adminReceiptType';
-import { tableFormat } from 'constants/admin/table';
-import { getFormattedDateToString } from 'utils/handleTime';
-import PageNation from 'components/Pagination';
+import { useSetRecoilState } from 'recoil';
 import {
   Paper,
   Table,
@@ -12,10 +9,14 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import styles from 'styles/admin/receipt/ReceiptList.module.scss';
-import { useSetRecoilState } from 'recoil';
+import { Ireceipt, IreceiptTable } from 'types/admin/adminReceiptType';
+import { getFormattedDateToString } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
+import { tableFormat } from 'constants/admin/table';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import PageNation from 'components/Pagination';
+import styles from 'styles/admin/receipt/ReceiptList.module.scss';
 
 const receiptListTableTitle: { [key: string]: string } = {
   receiptId: 'ID',
@@ -44,12 +45,45 @@ function ReceiptList() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [intraId, setIntraId] = useState<string>('');
   const setSnackBar = useSetRecoilState(toastState);
 
   // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
+  const initSearch = useCallback((intraId?: string) => {
+    setIntraId(intraId || '');
+    setCurrentPage(1);
+  }, []);
+
+  const getUserReceiptHandler = useCallback(async () => {
+    try {
+      const res = await mockInstance.get(
+        `/admin/receipt/?intraId=${intraId}&page=${currentPage}&size=10`
+      );
+      setReceiptData({
+        receiptList: res.data.receiptList.map((receipt: Ireceipt) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(receipt.createdAt)
+          );
+          return {
+            ...receipt,
+            createdAt: `${year}-${month}-${date} ${hour}:${min}`,
+          };
+        }),
+        totalPage: res.data.totalPage,
+        currentPage: currentPage,
+      });
+    } catch (e: unknown) {
+      setSnackBar({
+        toastName: 'get user receipt',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
+    }
+  }, [intraId, currentPage]);
 
   // instanceInManage로 변경
-  const getReceiptHandler = useCallback(async () => {
+  const getAllReceiptHandler = useCallback(async () => {
     try {
       const res = await mockInstance.get(
         `/admin/receipt/?page=${currentPage}&size=10`
@@ -78,11 +112,14 @@ function ReceiptList() {
   }, [currentPage]);
 
   useEffect(() => {
-    getReceiptHandler();
-  }, [currentPage]);
+    intraId ? getUserReceiptHandler() : getAllReceiptHandler();
+  }, [intraId, getUserReceiptHandler, getAllReceiptHandler]);
 
   return (
     <>
+      <div className={styles.searchWrap}>
+        <AdminSearchBar initSearch={initSearch} />
+      </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <TableHead className={styles.tableHeader}>

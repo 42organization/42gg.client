@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { useSetRecoilState } from 'recoil';
+import { FaCoins } from 'react-icons/fa';
 import { Item } from 'types/itemTypes';
 import { Modal } from 'types/modalTypes';
-import styles from 'styles/store/ItemCard.module.scss';
 import { modalState } from 'utils/recoil/modal';
-import { FaCoins } from 'react-icons/fa';
+import styles from 'styles/store/ItemCard.module.scss';
 
 export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
   const setModal = useSetRecoilState<Modal>(modalState);

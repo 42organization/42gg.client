@@ -1,7 +1,7 @@
 export interface IitemHistory {
   itemId: number;
   createdAt: Date;
-  name: string;
+  itemName: string;
   content: string;
   imageUri: string;
   price: number;

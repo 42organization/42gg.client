@@ -1,22 +1,16 @@
 import { useEffect } from 'react';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { loginState } from 'utils/recoil/login';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { User } from 'types/mainType';
 import { SeasonList } from 'types/seasonTypes';
 import { userState } from 'utils/recoil/layout';
+import { loginState } from 'utils/recoil/login';
 import { seasonListState } from 'utils/recoil/seasons';
-import useAxiosGet from 'hooks/useAxiosGet';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
-import { Modal } from 'types/modalTypes';
-import { modalState } from 'utils/recoil/modal';
+import useAxiosGet, { useMockAxiosGet } from 'hooks/useAxiosGet';
 
 const useGetUserSeason = (presentPath: string) => {
-  const setUser = useSetRecoilState<User>(userState);
+  const [user, setUser] = useRecoilState<User>(userState);
   const setSeasonList = useSetRecoilState<SeasonList>(seasonListState);
   const isLogIn = useRecoilValue(loginState);
-  const user = useRecoilValue(userState);
-
-  const setModal = useSetRecoilState<Modal>(modalState);
 
   /*   const getUserHandler = useAxiosGet({
     url: '/pingpong/users',
@@ -42,15 +36,11 @@ const useGetUserSeason = (presentPath: string) => {
   });
 
   useEffect(() => {
-    if (user.isAttended && presentPath === '/' && isLogIn) {
-      setModal({ modalName: 'EVENT-WELCOME' });
-    }
-  }, [user.isAttended, presentPath, isLogIn]);
-
-  useEffect(() => {
     getUserHandler();
     getSeasonListHandler();
   }, [presentPath, isLogIn]);
+
+  return [user];
 };
 
 export default useGetUserSeason;

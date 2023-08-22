@@ -1,5 +1,5 @@
-import CoinPolicy from './CoinPolicy';
-import CoinPolicyHistory from './CoinPolicyHistory';
+import CoinPolicy from 'components/admin/coin/CoinPolicy';
+import CoinPolicyHistory from 'components/admin/coin/CoinPolicyHistory';
 import styles from 'styles/admin/coin/CoinMain.module.scss';
 
 export default function CoinMain() {

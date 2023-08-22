@@ -1,7 +1,7 @@
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { SeasonMode } from 'types/mainType';
 import GameResultList from 'components/game/GameResultList';
 import useGameResult from 'hooks/game/useGameResult';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
 interface GameResultProps {
   mode?: SeasonMode;

@@ -1,5 +1,5 @@
-import { sleep } from 'utils/sleep';
 import { useEffect, useState } from 'react';
+import { sleep } from 'utils/sleep';
 import styles from 'styles/modal/CoinChangeAnimation.module.scss';
 
 interface CoinChangeProps {

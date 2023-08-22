@@ -1,6 +1,6 @@
-import { ProfileBasic } from 'types/userTypes';
 import { atom } from 'recoil';
 import { v1 } from 'uuid';
+import { ProfileBasic } from 'types/userTypes';
 
 export const profileState = atom<ProfileBasic>({
   key: `profileState/${v1()}`,
@@ -15,6 +15,7 @@ export const profileState = atom<ProfileBasic>({
     tierImageUri: '',
     tierName: '',
     expRate: 0,
+    edge: '',
     snsNotiOpt: 'SLACK',
   },
 });

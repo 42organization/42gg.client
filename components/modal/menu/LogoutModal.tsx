@@ -1,6 +1,5 @@
-import styles from 'styles/modal/menu/LogoutModal.module.scss';
-
 import useLogoutCheck from 'hooks/Login/useLogoutCheck';
+import styles from 'styles/modal/menu/LogoutModal.module.scss';
 
 export default function LogoutModal() {
   const [onReturn, onLogout] = useLogoutCheck();

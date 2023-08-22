@@ -1,9 +1,6 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { Item, ItemList } from 'types/itemTypes';
-import { modalState } from 'utils/recoil/modal';
-import { tableFormat } from 'constants/admin/table';
 import {
   Paper,
   Table,
@@ -13,13 +10,16 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import styles from 'styles/admin/store/ItemList.module.scss';
+import { Item, ItemList } from 'types/itemTypes';
 import { mockInstance } from 'utils/mockAxios';
+import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
+import { tableFormat } from 'constants/admin/table';
+import styles from 'styles/admin/store/ItemList.module.scss';
 
 const itemListTableTitle: { [key: string]: string } = {
   itemId: 'ID',
-  name: '아이템명',
+  itemName: '아이템명',
   content: '설명',
   itemType: '타입',
   imageUri: '이미지',
@@ -32,7 +32,7 @@ const itemListTableTitle: { [key: string]: string } = {
 
 const tableColumnName = [
   'itemId',
-  'name',
+  'itemName',
   'content',
   'itemType',
   'imageUri',
@@ -84,7 +84,7 @@ function ItemList() {
   const openDetailModal = (item: Item) => {
     setModal({
       modalName: 'ADMIN-DETAIL_CONTENT',
-      detailTitle: item.name,
+      detailTitle: item.itemName,
       detailContent: item.content,
     });
   };

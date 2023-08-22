@@ -1,10 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/recoil/modal';
-import { tableFormat } from 'constants/admin/table';
-import AdminSearchBar from 'components/admin/common/AdminSearchBar';
-import PageNation from 'components/Pagination';
 import {
   Paper,
   Table,
@@ -14,6 +9,11 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import { instanceInManage } from 'utils/axios';
+import { modalState } from 'utils/recoil/modal';
+import { tableFormat } from 'constants/admin/table';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import PageNation from 'components/Pagination';
 import styles from 'styles/admin/users/UserManagementTable.module.scss';
 
 interface IUser {
@@ -67,7 +67,9 @@ export default function UserManagementTable() {
 
   const getAllUserInfo = useCallback(async () => {
     try {
-      const res = await instanceInManage.get(`/users?page=${currentPage}`);
+      const res = await instanceInManage.get(
+        `/users?page=${currentPage}&size=10`
+      );
       setUserManagements({
         userInfoList: res.data.userSearchAdminDtos,
         totalPage: res.data.totalPage,
@@ -81,7 +83,7 @@ export default function UserManagementTable() {
   const getUserInfo = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/users?intraId=${intraId}&page=${currentPage}`
+        `/users?intraId=${intraId}&page=${currentPage}&size=10`
       );
       setUserManagements({
         userInfoList: res.data.userSearchAdminDtos,

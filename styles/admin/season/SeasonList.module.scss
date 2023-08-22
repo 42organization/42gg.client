@@ -2,13 +2,12 @@
 
 .container {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
   width: 100%;
-  min-width: 64rem;
-  max-width: 72rem;
+  min-width: 50rem;
   height: 100%;
+  flex-direction: column;
   padding: 1.5rem;
+  gap: 1rem;
 }
 
 .tableContainer {
@@ -18,33 +17,33 @@
 
       .tableHeaderItem {
         padding: 0.5rem;
-        text-align: center;
-        font-weight: 600;
         font-size: $small-font;
+        font-weight: 600;
         line-height: 150%;
+        text-align: center;
       }
     }
 
     .tableBody {
       .tableBodyItem {
         padding: 0.5rem;
-        text-align: center;
         font-size: $small-font;
         line-height: 100%;
+        text-align: center;
       }
     }
   }
 }
 
 .editBtn {
-  all: unset;
   width: 3rem;
   height: 1.6rem;
-  background: $dark-gray;
-  border-radius: 0.5rem;
-  text-align: center;
+  margin: 0 0.2rem;
   font-size: $small-font;
   color: white;
+  text-align: center;
   cursor: pointer;
-  margin: 0 0.2rem;
+  background: $dark-gray;
+  border-radius: 0.5rem;
+  all: unset;
 }

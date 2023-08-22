@@ -1,6 +1,6 @@
 import React from 'react';
+import CoinIcon from 'public/image/coin_image.svg';
 import styles from 'styles/modal/CoinAnimation.module.scss';
-import CoinIcon from './CoinIcon';
 
 interface amountProps {
   amount: number;

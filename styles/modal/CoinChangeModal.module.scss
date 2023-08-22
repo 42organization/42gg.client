@@ -18,24 +18,25 @@ $ppp-font: 2.8rem;
 
 .container {
   @include modalContainer('SKYVIOLET');
-  align-items: stretch;
-  min-height: 18.75rem;
   min-width: 21rem;
-  box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.25);
-  border-radius: 0.625rem;
+  min-height: 18.75rem;
   color: black;
-  .emoji {
-    margin-bottom: 1.5rem;
-    font-size: 2.5rem;
-    text-align: center;
-  }
+  border-radius: 0.625rem;
+  box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.25);
+  align-items: stretch;
+}
+
+.coinImage {
+  display: flex;
+  margin-bottom: 1.5rem;
+  justify-content: center;
 }
 
 .guide {
-  color: rgba(203, 185, 255, 1);
-  letter-spacing: 0.04rem;
   font-size: $medium-font;
+  color: rgba(203, 185, 255, 1);
   text-align: center;
+  letter-spacing: 0.04rem;
 }
 
 .buttons {

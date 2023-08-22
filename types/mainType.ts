@@ -8,6 +8,7 @@ export interface User {
   userImageUri: string;
   isAttended: boolean;
   tierImageUri: string;
+  edge: string;
 }
 
 export interface Live {

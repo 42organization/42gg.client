@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { v1 } from 'uuid';
-import { User, Live } from '../../types/mainType';
+import { User, Live } from 'types/mainType';
 
 export const userState = atom<User>({
   key: `userState/${v1()}`,
@@ -8,8 +8,9 @@ export const userState = atom<User>({
     intraId: '',
     isAdmin: false,
     userImageUri: '',
-    isAttended: false,
+    isAttended: true,
     tierImageUri: '',
+    edge: '',
   },
 });
 

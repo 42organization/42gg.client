@@ -1,27 +1,27 @@
 @mixin pagination {
   .pageNationContainer {
     ul {
-      list-style: none;
       padding: 0;
+      list-style: none;
 
       li {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 27px;
-        height: 27px;
+        width: 2.4rem;
+        height: 1.5rem;
         font-size: 1.2rem; /* $big-font */
         font-weight: 600;
         cursor: pointer;
         a {
+          font-size: 0.9rem;
           color: gray; /* $g1-bottom */
-          font-size: 1rem;
           text-decoration: none;
         }
         :hover,
         :active {
-          color: black; /* $pp-red */
           font-weight: 700;
+          color: black; /* $pp-red */
         }
       }
     }

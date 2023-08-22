@@ -1,15 +1,16 @@
-import useUploadImg from 'hooks/useUploadImg';
 import Image from 'next/image';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { Item } from 'types/itemTypes';
 import { mockInstance } from 'utils/mockAxios';
+import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
+import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminEditItem.module.scss';
-import { userState } from 'utils/recoil/layout';
-import { Item } from 'types/itemTypes';
 
 export default function AdminEditItemModal(props: Item) {
-  const { itemId, name, content, imageUri, originalPrice, discount } = props;
+  const { itemId, itemName, content, imageUri, originalPrice, discount } =
+    props;
   const creator = useRecoilValue(userState).intraId;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
@@ -103,7 +104,7 @@ export default function AdminEditItemModal(props: Item) {
                 className={styles.nameBlank}
                 type='text'
                 name='name'
-                defaultValue={name}
+                defaultValue={itemName}
                 required
               />
             </div>

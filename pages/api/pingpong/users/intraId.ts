@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { ProfileBasic } from 'types/userTypes';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(
   req: NextApiRequest,
@@ -14,8 +14,9 @@ export default function handler(
     currentExp: 123,
     maxExp: 123,
     tierImageUri: '/image/fallBackSrc.jpeg',
-    tierName: '무지개 탁구채',
+    tierName: '노랑 탁구채',
     expRate: 123,
+    edge: 'profile-edge0',
     snsNotiOpt: 'EMAIL',
   };
 

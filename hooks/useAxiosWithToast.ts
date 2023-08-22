@@ -1,8 +1,8 @@
+import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { toastState } from 'utils/recoil/toast';
 import { instanceInManage } from 'utils/axios';
+import { toastState } from 'utils/recoil/toast';
 
 export default function useAxiosWithToast() {
   const setSnackbar = useSetRecoilState(toastState);

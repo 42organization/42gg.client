@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { PenaltyInfo } from 'types/admin/adminPenaltyTypes';
+import { instanceInManage } from 'utils/axios';
+import { fillZero } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import { fillZero } from 'utils/handleTime';
-import { instanceInManage } from 'utils/axios';
 import styles from 'styles/admin/modal/AdminPenalty.module.scss';
 
 export default function AdminPenaltyModal(props: { intraId: string }) {

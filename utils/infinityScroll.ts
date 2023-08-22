@@ -1,10 +1,10 @@
-import { useSetRecoilState } from 'recoil';
-import { useInfiniteQuery } from 'react-query';
 import axios from 'axios';
-import { errorState } from 'utils/recoil/error';
-import { instance } from './axios';
+import { useInfiniteQuery } from 'react-query';
+import { useSetRecoilState } from 'recoil';
 import { GameListData } from 'types/gameTypes';
 import { InventoryData } from 'types/inventoryTypes';
+import { instance } from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
 
 // GameListDat를 받아오는 InfiniteQuery
 export default function InfScroll(path: string) {
@@ -21,7 +21,7 @@ export default function InfScroll(path: string) {
     },
     onError: (e: any) => {
       if (e.response.data && e.response.data.code === 'UF001') setError('JB07');
-      // else setError('KP01');
+      else setError('KP01');
     },
     retry: 0,
     keepPreviousData: true,

@@ -1,7 +1,7 @@
+import { FaPlus, FaMinus, FaCoins } from 'react-icons/fa';
 import { ICoinHistory } from 'types/userTypes';
 import { getFormattedDateToString } from 'utils/handleTime';
 import styles from 'styles/modal/store/CoinHistoryDetails.module.scss';
-import { FaPlus, FaMinus, FaCoins } from 'react-icons/fa';
 
 export default function CoinHistoryDetails({
   details,
@@ -31,9 +31,15 @@ export default function CoinHistoryDetails({
         </div>
       </div>
       <div className={styles.section2}>
-        <div className={amount > 0 ? styles.plus : styles.minus}>
-          {amount} <FaCoins />
-        </div>
+        {amount > 0 ? (
+          <div className={styles.plus}>
+            +{amount} <FaCoins />
+          </div>
+        ) : (
+          <div className={styles.minus}>
+            {amount} <FaCoins />
+          </div>
+        )}
       </div>
     </div>
   );

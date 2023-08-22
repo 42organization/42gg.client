@@ -1,4 +1,4 @@
-@import '../common.scss';
+@import 'styles/common.scss';
 
 /* Rank */
 .pageWrap {
@@ -15,14 +15,13 @@
   z-index: 1;
   width: fit-content;
   margin-bottom: 0.5rem;
-  color: white;
-  opacity: 0.5;
-  font-weight: 700;
-  font-size: $big-font;
-  font-family: $title-font;
-  text-decoration-line: underline;
-  color: #df98d7;
   margin-left: auto;
+  font-family: $title-font;
+  font-size: $big-font;
+  font-weight: 700;
+  color: #df98d7;
+  opacity: 0.5;
+  text-decoration-line: underline;
   &.rank {
     cursor: pointer;
   }
@@ -34,14 +33,13 @@
 /* RankListFrame */
 @mixin rankGrid {
   display: grid;
+  height: 2.5rem;
+  padding: 0 0.2rem;
+  margin-top: 0.15rem;
+  color: $dark-gray;
   grid-template-columns: 11% 8% 22% auto 14%;
   justify-items: center;
   align-items: center;
-  height: 2.5rem;
-  padding: 0 0.2rem;
-  margin-top: 0rem;
-  color: $dark-gray;
-  margin-top: 0.15rem;
 }
 
 .container {
@@ -52,9 +50,9 @@
 
 .division {
   @include rankGrid;
-  background: #c9a5e6;
-  color: black;
   font-weight: 500;
+  color: black;
+  background: #c9a5e6;
   border-radius: 0.5rem 0.5rem 0 0;
   &.normal {
     background: #59afdf;
@@ -69,35 +67,42 @@
     grid-template-columns: 12% 22% auto 14%;
     background: #d9e3ff;
   }
+  &.colorPreviewLayout {
+    grid-template-columns: 1fr 1fr 4fr 1fr;
+  }
   &.top {
-    color: $loser-red;
     font-weight: 700;
+    color: $loser-red;
   }
   &.standard {
     color: $dark-gray;
   }
   &.myRanking {
-    border: 0.1rem solid #962fea;
     background: #c9a5e6;
+    border: 0.1rem solid #962fea;
   }
   &.myVip {
-    border: 0.1rem solid #022a40;
     background: #60b4e2;
+    border: 0.1rem solid #022a40;
   }
   .intraId {
-    color: black;
     font-weight: 700;
+    color: black;
     span {
       cursor: pointer;
     }
   }
   .statusMessage {
     justify-self: left;
+    max-width: 100%;
     color: $dark-gray;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .ppp {
-    color: #6c00d9;
     font-weight: 600;
+    color: #6c00d9;
   }
 
   &.Vip .ppp {
@@ -106,7 +111,7 @@
 }
 
 .level {
-  color: $dark-gray;
-  font-weight: 500;
   font-size: 0.7rem;
+  font-weight: 500;
+  color: $dark-gray;
 }

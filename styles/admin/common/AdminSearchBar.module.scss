@@ -1,16 +1,16 @@
 @import 'styles/common.scss';
 
 .adminSearchBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: relative;
-  height: 2.5rem;
+  display: flex;
+  height: 2rem;
   padding: 0 0.8rem;
+  font-size: $small-font;
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: $medium-radius;
-  font-size: $medium-font;
+  justify-content: space-between;
+  align-items: center;
   input {
     all: unset;
     width: calc(100% - 4rem);
@@ -19,7 +19,7 @@
     span {
       display: flex;
       align-items: center;
-      font-size: 1.2rem;
+      font-size: $small-font;
     }
     .reset {
       color: gray;
@@ -27,14 +27,14 @@
     }
   }
   .dropdown {
-    display: block;
     position: absolute;
     top: 2.1rem;
     left: 0;
+    display: block;
     width: 100%;
-    padding: 0 0.8rem 0.5rem 0.8rem;
-    border-radius: 0 0 $small-radius $small-radius;
+    padding: 0 0.8rem 0.5rem;
     background: white;
+    border-radius: 0 0 $small-radius $small-radius;
     div {
       padding: 0.5rem 0;
       cursor: pointer;

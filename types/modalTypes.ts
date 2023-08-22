@@ -1,15 +1,15 @@
-import { MatchMode } from './mainType';
-import { ISeason } from './seasonTypes';
 import { Value } from 'react-quill';
-import { IFeedback } from 'components/admin/feedback/FeedbackTable';
+import { IcoinPolicy } from 'types/admin/adminCoinTypes';
+import { Imegaphone, Iprofile } from 'types/admin/adminReceiptType';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { CoinResult } from 'types/coinTypes';
-import { Imegaphone, Iprofile } from './admin/adminReceiptType';
-import { IcoinPolicy } from './admin/adminCoinTypes';
-import { ItemType, UseItemRequest } from './inventoryTypes';
-import { StoreManualMode } from './storeTypes';
-import { Item } from './itemTypes';
-import { ICoin } from './userTypes';
+import { ItemType, UseItemRequest } from 'types/inventoryTypes';
+import { Item } from 'types/itemTypes';
+import { MatchMode } from 'types/mainType';
+import { ISeason } from 'types/seasonTypes';
+import { StoreManualMode } from 'types/storeTypes';
+import { ICoin } from 'types/userTypes';
+import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -23,7 +23,7 @@ type FixedModal = 'AFTER_GAME' | 'STAT';
 
 type PurchaseModal = 'BUY' | 'GIFT' | 'NO_COIN';
 
-type UseItemModal = ItemType;
+type UseItemModal = ItemType | 'GACHA';
 
 type EditItemModal = 'MEGAPHONE';
 type StoreModal = 'MANUAL' | 'COIN_HISTORY';
@@ -119,5 +119,6 @@ export interface Modal {
   coinPolicy?: IcoinPolicy;
   useItemInfo?: UseItemRequest;
   storeManual?: StoreManual;
+  isAttended?: boolean;
   totalCoin?: ICoin;
 }

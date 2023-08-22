@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import ReceiptList from './ReceiptList';
-import MegaphoneList from './MegaphoneList';
-import ProfileList from './ProfileList';
+import MegaphoneList from 'components/admin/receipt/MegaphoneList';
+import ProfileList from 'components/admin/receipt/ProfileList';
+import ReceiptList from 'components/admin/receipt/ReceiptList';
 import styles from 'styles/admin/receipt/MenuTab.module.scss';
 
 function MenuTab() {

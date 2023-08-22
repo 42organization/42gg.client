@@ -1,15 +1,17 @@
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { tierIdSelector } from 'utils/recoil/tierColor';
 import { User } from 'types/mainType';
 import { ProfileBasic } from 'types/userTypes';
 import { userState } from 'utils/recoil/layout';
+import { tierIdSelector } from 'utils/recoil/tierColor';
+import {
+  HeaderContextState,
+  HeaderContext,
+} from 'components/Layout/HeaderContext';
+import { MainMenu, AdminMenu } from 'components/Layout/MenuBar/MenuBarElement';
 import PlayerImage from 'components/PlayerImage';
-import { HeaderContextState, HeaderContext } from '../HeaderContext';
-import { MainMenu, AdminMenu } from './MenuBarElement';
-import useAxiosGet from 'hooks/useAxiosGet';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import useAxiosGet, { useMockAxiosGet } from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 const MenuTop = () => {
@@ -38,6 +40,7 @@ const MenuProfile = () => {
     snsNotiOpt: 'SLACK',
     tierImageUri: '',
     tierName: '',
+    edge: '',
   });
 
   /*   const getProfile = useAxiosGet({
@@ -57,9 +60,9 @@ const MenuProfile = () => {
     getProfile();
   }, []);
 
-  const tierIndex = useRecoilValue(tierIdSelector);
+  const tierId = useRecoilValue(tierIdSelector);
   const findTierIndex =
-    tierIndex === -1 ? styles.tierId : styles['tierId' + tierIndex.toString()];
+    tierId === 'none' ? styles.tierId : styles['tierId' + tierId];
 
   return (
     <div className={styles.menuProfileWrapper}>
@@ -76,15 +79,16 @@ const MenuProfile = () => {
       </Link>
       <div className={styles.userInfoWrapper}>
         <div className={styles.userId}>
-          <div className={`${styles.tierId} ${findTierIndex}`}>
+          <div className={`${styles.tierContainer}`}>
             <PlayerImage
               src={profile.tierImageUri}
               styleName={'ranktier'}
               size={50}
             />
             &nbsp;
-            {profile.tierName}
-            <br />
+            <div className={`${styles.tierId} ${findTierIndex}`}>
+              {profile.tierName}
+            </div>
           </div>
           <Link
             href={`/users/detail?intraId=${user.intraId}`}

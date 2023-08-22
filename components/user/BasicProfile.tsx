@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { AiOutlineEdit } from 'react-icons/ai';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { tierIdSelector } from 'utils/recoil/tierColor';
 import PlayerImage from 'components/PlayerImage';
 import useBasicProfile from 'hooks/users/useBasicProfile';
-import { AiOutlineEdit } from 'react-icons/ai';
 import styles from 'styles/user/Profile.module.scss';
 interface ProfileProps {
   profileId: string;
@@ -27,11 +27,12 @@ export default function BasicProfile({ profileId }: ProfileProps) {
     MAX_LEVEL,
     tierImageUri,
     tierName,
+    edge,
   } = useBasicProfile({ profileId });
 
-  const tierIndex = useRecoilValue(tierIdSelector);
+  const tierId = useRecoilValue(tierIdSelector);
   const findTierIndex =
-    tierIndex === -1 ? styles.tierId : styles['tierId' + tierIndex.toString()];
+    tierId === 'none' ? styles.tierId : styles['tierId' + tierId];
 
   return (
     <div className={styles.container}>

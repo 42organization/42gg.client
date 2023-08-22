@@ -1,6 +1,6 @@
+import router from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import router from 'next/router';
 
 const useNoCoinModal = () => {
   const setModal = useSetRecoilState(modalState);
