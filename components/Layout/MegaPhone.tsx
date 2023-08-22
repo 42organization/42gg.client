@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/MegaPhone.module.scss';
+import useInterval from 'hooks/useInterval';
 
 interface IMegaphoneContent {
   megaphoneId?: number;
@@ -35,20 +36,12 @@ export const MegaphoneContainer = ({
   const ref = useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [wrapperStyle, setWrapperStyle] = useState<string>('slideNext0');
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!ref.current) {
-        return;
-      }
-      const nextIndex = (selectedIndex + 1) % count;
-      setWrapperStyle('slideNext' + nextIndex.toString());
-      setSelectedIndex(nextIndex);
-    }, 4500);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, [selectedIndex, count]);
+  useInterval(() => {
+    const nextIndex = (selectedIndex + 1) % count;
+    setWrapperStyle('slideNext' + nextIndex.toString());
+    setSelectedIndex(nextIndex);
+  }, 4500);
 
   return (
     <div className={styles.rollingBanner}>
