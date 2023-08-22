@@ -1,8 +1,8 @@
 import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
-import styles from 'styles/admin/modal/AdminCheckSendNoti.module.scss';
-import { toastState } from 'utils/recoil/toast';
 import { instanceInManage } from 'utils/axios';
+import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
+import styles from 'styles/admin/modal/AdminCheckSendNoti.module.scss';
 
 interface IsendNoti {
   intraId: string;

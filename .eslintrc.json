@@ -1,4 +1,5 @@
 {
+  "root": true,
   "env": {
     "browser": true,
     "es2021": true,
@@ -10,7 +11,9 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
   ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
@@ -20,7 +23,97 @@
   },
   "plugins": [
     "react",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "import"
   ],
-  "rules": {}
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "rules": {
+    "import/order": [
+      "error", {
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "never",
+        "groups": ["builtin", "external", "type", "internal", "unknown"],
+        "pathGroups": [
+          {
+            "pattern": "next/**",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "react/**",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "recoil/**",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "recoil-persist/**",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "axios/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "uuid/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "react-icons/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "@mui/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "types/**",
+            "group": "type",
+            "position": "before"
+          },
+          {
+            "pattern": "utils/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "constants/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "compoenents/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "hooks/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "styles/**",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["next/**", "react/**", "recoil/**", "recoil-persist/**", "axios/**", "uuid/**", "react-icons/**", "@mui/**", "types/**", "utils/**", "constants/**", "compoenents/**", "hooks/**", "styles/**"]
+      }
+    ]
+  }
 }

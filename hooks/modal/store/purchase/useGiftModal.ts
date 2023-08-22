@@ -1,10 +1,10 @@
 // import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
 import { Gift, GiftRequest } from 'types/itemTypes';
-import { errorState } from 'utils/recoil/error';
-import { mockInstance } from 'utils/mockAxios';
 import { instanceInManage } from 'utils/axios';
+import { mockInstance } from 'utils/mockAxios';
+import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/modal';
 
 const useGiftModal = (gift: Gift) => {
   const setModal = useSetRecoilState(modalState);

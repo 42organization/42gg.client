@@ -1,5 +1,5 @@
 import { GameMode, GameStatus } from 'types/gameTypes';
-import gameScore from '../GameScore';
+import gameScore from 'components/game/GameScore';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultSmallScoreProps {

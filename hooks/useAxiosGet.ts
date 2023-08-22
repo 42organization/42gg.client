@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { errorState } from 'utils/recoil/error';
 import { instance } from 'utils/axios';
 import { mockInstance } from 'utils/mockAxios';
+import { errorState } from 'utils/recoil/error';
 
 interface useAxiosGetProps<T> {
   url: string;

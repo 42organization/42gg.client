@@ -1,4 +1,4 @@
-@import '../common.scss';
+@import 'styles/common.scss';
 
 /* Rank */
 .pageWrap {
@@ -67,6 +67,9 @@
     grid-template-columns: 12% 22% auto 14%;
     background: #d9e3ff;
   }
+  &.colorPreviewLayout {
+    grid-template-columns: 1fr 1fr 4fr 1fr;
+  }
   &.top {
     font-weight: 700;
     color: $loser-red;
@@ -91,7 +94,11 @@
   }
   .statusMessage {
     justify-self: left;
+    max-width: 100%;
     color: $dark-gray;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .ppp {
     font-weight: 600;

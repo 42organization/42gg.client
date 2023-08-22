@@ -1,8 +1,16 @@
 import { useRouter } from 'next/router';
-import { RefObject, SetStateAction, useEffect, useRef, useState, Dispatch, useCallback } from 'react';
+import {
+  RefObject,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+  Dispatch,
+  useCallback,
+} from 'react';
 import { useSetRecoilState } from 'recoil';
-import { errorState } from 'utils/recoil/error';
 import { instance } from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
 
 interface useSearchBarReturn {
   keyword: string;

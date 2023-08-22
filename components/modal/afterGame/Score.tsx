@@ -1,6 +1,6 @@
 import { TeamScore } from 'types/scoreTypes';
-import InputScore from './InputScore';
-import CheckedScore from './CheckedScore';
+import CheckedScore from 'components/modal/afterGame/CheckedScore';
+import InputScore from 'components/modal/afterGame/InputScore';
 
 interface ScoreProps {
   result: TeamScore;

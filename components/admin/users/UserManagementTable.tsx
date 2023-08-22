@@ -1,10 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/recoil/modal';
-import { tableFormat } from 'constants/admin/table';
-import AdminSearchBar from 'components/admin/common/AdminSearchBar';
-import PageNation from 'components/Pagination';
 import {
   Paper,
   Table,
@@ -14,6 +9,11 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import { instanceInManage } from 'utils/axios';
+import { modalState } from 'utils/recoil/modal';
+import { tableFormat } from 'constants/admin/table';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import PageNation from 'components/Pagination';
 import styles from 'styles/admin/users/UserManagementTable.module.scss';
 
 interface IUser {
