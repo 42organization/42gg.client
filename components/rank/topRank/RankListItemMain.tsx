@@ -60,11 +60,9 @@ export default function RankListItemMain({
             ) : (
               <div>
                 <div className={`${styles.questionCircleRank}`}>
-                  {
-                    <TbQuestionMark
-                      className={` ${rank === 1 ? styles.rank1 : styles.ranks}`}
-                    />
-                  }
+                  <TbQuestionMark
+                    className={` ${rank === 1 ? styles.rank1 : styles.ranks}`}
+                  />
                 </div>
                 <span>{intraId}</span>
               </div>

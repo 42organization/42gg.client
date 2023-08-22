@@ -1,17 +1,18 @@
 import { useRecoilValue } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import CoinChangeModal from 'components/modal/statChange/CoinChangeModal';
-import StoreManualModal from 'components/modal/store/StoreManualModal';
-import UserCoinHistoryModal from 'components/modal/store/UserCoinHistoryModal';
+import ChangeIdColorModal from 'components/modal/store/inventory/ChangeIdColorModal';
+import ChangeProfileBackgroundModal from 'components/modal/store/inventory/ChangeProfileBackgroundModal';
+import ChangeProfileEdgeModal from 'components/modal/store/inventory/ChangeProfileEdgeModal';
+import EditMegaphoneModal from 'components/modal/store/inventory/EditMegaphoneModal';
+import GachaModal from 'components/modal/store/inventory/GachaModal';
+import NewMegaphoneModal from 'components/modal/store/inventory/NewMegaphoneModal';
+import ProfileImageModal from 'components/modal/store/inventory/ProfileImageModal';
 import BuyModal from 'components/modal/store/purchase/BuyModal';
 import GiftModal from 'components/modal/store/purchase/GiftModal';
 import NoCoinModal from 'components/modal/store/purchase/NoCoinModal';
-import ChangeIdColorModal from 'components/modal/store/inventory/ChangeIdColorModal';
-import NewMegaphoneModal from 'components/modal/store/inventory/NewMegaphoneModal';
-import EditMegaphoneModal from 'components/modal/store/inventory/EditMegaphoneModal';
-import ChangeProfileEdgeModal from 'components/modal/store/inventory/ChangeProfileEdgeModal';
-import ChangeProfileBackgroundModal from 'components/modal/store/inventory/ChangeProfileBackgroundModal';
-import GachaModal from 'components/modal/store/inventory/GachaModal';
+import StoreManualModal from 'components/modal/store/StoreManualModal';
+import UserCoinHistoryModal from 'components/modal/store/UserCoinHistoryModal';
 
 export default function StoreModal() {
   const {
@@ -38,6 +39,9 @@ export default function StoreModal() {
     ) : null,
     'USE-ITEM-MEGAPHONE': useItemInfo ? (
       <NewMegaphoneModal {...useItemInfo} />
+    ) : null,
+    'USE-ITEM-PROFILE_IMAGE': useItemInfo ? (
+      <ProfileImageModal {...useItemInfo} />
     ) : null,
     'USE-ITEM-PROFILE_BAND': useItemInfo ? (
       <ChangeProfileEdgeModal {...useItemInfo} />
