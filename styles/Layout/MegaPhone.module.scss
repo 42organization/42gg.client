@@ -64,20 +64,20 @@
 }
 
 .content {
-  height: 1.1rem;
-  width: 95%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 95%;
+  height: 1.1rem;
   font-size: 0.7rem;
   white-space: nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .intraId {
-  height: 1rem;
-  width: 50%;
   display: flex;
+  width: 50%;
+  height: 1rem;
+  font-size: 0.5rem;
   justify-content: center;
   align-items: center;
-  font-size: 0.5rem;
 }

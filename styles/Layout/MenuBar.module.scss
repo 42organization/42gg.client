@@ -21,13 +21,13 @@
       font-size: 1.8rem;
     }
     button {
+      all: unset;
       width: 1.2rem;
       font-size: 1.5rem;
       color: rgba(101, 97, 102, 1);
       text-align: center;
       text-shadow: none;
       cursor: pointer;
-      all: unset;
     }
   }
   .menuProfileWrapper {

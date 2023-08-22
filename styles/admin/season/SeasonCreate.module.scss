@@ -40,6 +40,7 @@
   align-items: center;
 
   button {
+    all: unset;
     width: 4rem;
     height: 1.5rem;
     font-size: $small-font;
@@ -48,6 +49,5 @@
     cursor: pointer;
     background: $btn-blue;
     border-radius: 0.5rem;
-    all: unset;
   }
 }

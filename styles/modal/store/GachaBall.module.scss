@@ -1,23 +1,23 @@
 @mixin ball($color, $outline, $angle) {
+  position: absolute;
   width: 3rem;
   height: 3rem;
-  border-radius: 100%;
+  overflow: hidden;
   background-color: $color;
   border: solid 0.25rem $outline;
-  position: absolute;
-  overflow: hidden;
+  border-radius: 100%;
   transform: rotate($angle);
 
   &::after {
-    content: '';
-    display: block;
     position: absolute;
     top: 50%;
-    height: 200%;
+    display: block;
     width: 200%;
+    height: 200%;
+    content: '';
     background-color: #f7fcff;
-    border-radius: 100%;
     border: inherit;
+    border-radius: 100%;
     transform: translate(17%, -55%);
   }
 }
@@ -31,14 +31,14 @@
     background-color: #38f3fd49;
     border: 0.625rem solid #b2c9f7;
     border-radius: 15%;
-    opacity: 0.8;
     box-shadow: 0 0.625rem 1.25rem rgb(255, 255, 255) inset;
+    opacity: 0.8;
     .balls {
       position: relative;
       .ball0 {
         @include ball(#ec6767, #d14040, 90deg);
-        margin-top: 45%;
         right: 18%;
+        margin-top: 45%;
       }
       .ball1 {
         @include ball(#2facff, #3660bb, 60deg);
@@ -46,48 +46,48 @@
       }
       .ball2 {
         @include ball(#2fffc8, #1f9978, 230deg);
-        margin-top: 48%;
         left: 33%;
+        margin-top: 48%;
       }
       .ball3 {
         @include ball(#e7ff2f, #abbd20, 210deg);
-        margin-top: 67%;
         left: 50%;
+        margin-top: 67%;
       }
       .ball4 {
         @include ball(#eb7bff, #e23eff, 40deg);
-        margin-top: 70%;
         left: 30%;
+        margin-top: 70%;
       }
       .ball5 {
         @include ball(#0aaf46, #02501f, 230deg);
-        margin-top: 41%;
         left: 1%;
+        margin-top: 41%;
       }
       .ball6 {
         @include ball(#fffc68, #e5e11e, 200deg);
-        margin-top: 40%;
         right: 1%;
+        margin-top: 40%;
       }
       .ball7 {
         @include ball(#b943f4, #66127d, 180deg);
-        margin-top: 71%;
         left: 10%;
+        margin-top: 71%;
       }
       .ball8 {
         @include ball(#ff2f47, #911a28, 80deg);
-        margin-top: 50%;
         left: 13%;
+        margin-top: 50%;
       }
       .ball9 {
         @include ball(#090488, #04023f, 100deg);
-        margin-top: 55%;
         right: 5%;
+        margin-top: 55%;
       }
       .ball10 {
         @include ball(#ff7b2f, #d94f00, 270deg);
-        margin-top: 71%;
         right: 2%;
+        margin-top: 71%;
       }
     }
   }

@@ -14,11 +14,11 @@
   justify-content: space-between;
   align-items: center;
   input {
+    all: unset;
     box-sizing: border-box;
     width: calc(100% - 4rem);
     padding: 0.7rem 0.5rem;
     color: #ffffff;
-    all: unset;
     &::placeholder {
       color: #1f0b36;
     }

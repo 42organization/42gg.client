@@ -36,6 +36,7 @@
 }
 
 .editBtn {
+  all: unset;
   width: 3rem;
   height: 1.6rem;
   margin: 0 0.2rem;
@@ -45,5 +46,4 @@
   cursor: pointer;
   background: $dark-gray;
   border-radius: 0.5rem;
-  all: unset;
 }
