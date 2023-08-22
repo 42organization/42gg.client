@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { User } from 'types/mainType';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(
   req: NextApiRequest,

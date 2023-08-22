@@ -2,9 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
-import styles from 'styles/main/SearchBar.module.scss';
-
 import useSearchBar from 'hooks/useSearchBar';
+import styles from 'styles/main/SearchBar.module.scss';
 
 export default function UserGameSearchBar() {
   const router = useRouter();

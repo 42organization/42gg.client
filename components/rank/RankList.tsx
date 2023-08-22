@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { RankUser, NormalUser, Rank } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
-import RankListMain from './topRank/RankListMain';
-import RankListFrame from './RankListFrame';
-import { RankListItem } from './RankListItem';
-import { NormalListItem } from './NormalListItem';
+import { NormalListItem } from 'components/rank/NormalListItem';
+import RankListFrame from 'components/rank/RankListFrame';
+import { RankListItem } from 'components/rank/RankListItem';
+import RankListMain from 'components/rank/topRank/RankListMain';
 import useRankList from 'hooks/rank/useRankList';
 
 interface RankListProps {

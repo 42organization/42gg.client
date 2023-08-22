@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import { useSetRecoilState } from 'recoil';
+import type { Meta, StoryObj } from '@storybook/react';
 import { profileState } from 'utils/recoil/user';
 import EditProfileModal from 'components/modal/profile/EditProfileModal';
 

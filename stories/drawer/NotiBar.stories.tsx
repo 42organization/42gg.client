@@ -1,5 +1,5 @@
-import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { useContext, useEffect } from 'react';
+import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import Header from 'components/Layout/Header';
 import HeaderStateContext, {
   HeaderContext,

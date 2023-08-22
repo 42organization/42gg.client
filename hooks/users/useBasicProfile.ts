@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
-import { profileState } from 'utils/recoil/user';
-import { errorState } from 'utils/recoil/error';
 import { instance } from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
+import { profileState } from 'utils/recoil/user';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
 
 interface UseBasicProfileProps {

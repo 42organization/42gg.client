@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { UseItemRequest, UseIdColorRequest } from 'types/inventoryTypes';
+import { mockInstance } from 'utils/mockAxios';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
-import { UseItemRequest, UseIdColorRequest } from 'types/inventoryTypes';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
-import { ItemCautionContainer } from './ItemCautionContainer';
-import IdPreviewComponent from './IdPreviewComponent';
+import ColorPicker from 'components/modal/store/inventory/ColorPicker';
+import IdPreviewComponent from 'components/modal/store/inventory/IdPreviewComponent';
+import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
-import ColorPicker from './ColorPicker';
-import { mockInstance } from 'utils/mockAxios';
 
 type ChangeIdColorModalProps = UseItemRequest;
 

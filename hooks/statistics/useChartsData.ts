@@ -1,8 +1,8 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Graphs } from 'types/chartTypes';
 import { errorState } from 'utils/recoil/error';
-import axios from 'axios';
 
 export const useChartsData = () => {
   const [startDate, setStartDate] = useState('');

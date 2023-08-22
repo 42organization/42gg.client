@@ -1,6 +1,6 @@
 import { RankUser, NormalUser } from 'types/rankTypes';
-import { RankListItem } from 'components/rank/RankListItem';
 import { NormalListItem } from 'components/rank/NormalListItem';
+import { RankListItem } from 'components/rank/RankListItem';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 
 type IdPreviewProps = {

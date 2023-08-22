@@ -1,6 +1,6 @@
-import { SetterOrUpdater, useSetRecoilState } from 'recoil';
-import { ProfileBasic } from 'types/userTypes';
+import { useSetRecoilState, SetterOrUpdater } from 'recoil';
 import { Modal } from 'types/modalTypes';
+import { ProfileBasic } from 'types/userTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';

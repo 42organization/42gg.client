@@ -1,11 +1,11 @@
-import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
-import { CoinResult } from 'types/coinTypes';
 import Image from 'next/image';
-import CoinAnimation from '../CoinAnimation';
+import { useSetRecoilState } from 'recoil';
+import { CoinResult } from 'types/coinTypes';
+import { modalState } from 'utils/recoil/modal';
+import CoinAnimation from 'components/modal/CoinAnimation';
+import CoinPopcon from 'components/modal/CoinPopcon';
 import CoinStat from 'components/modal/statChange/CoinStatChange';
 import styles from 'styles/modal/CoinChangeModal.module.scss';
-import CoinPopcon from '../CoinPopcon';
 
 export default function CoinChangeModal(coin: CoinResult) {
   const setModal = useSetRecoilState(modalState);

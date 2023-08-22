@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { InventoryData, InventoryItem } from 'types/inventoryTypes';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 const item1: InventoryItem = {
   receiptId: 1,

@@ -1,17 +1,17 @@
 import { useRecoilValue } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import AnnouncementModal from '../event/AnnouncementModal';
-import ReportModal from '../menu/ReportModal';
-import LogoutModal from '../menu/LogoutModal';
-import MatchRejectModal from '../match/MatchRejectModal';
-import MatchEnrollModal from '../match/MatchEnrollModal';
-import MatchCancelModal from '../match/MatchCancelModal';
-import MatchManualModal from '../match/MatchManualModal';
-import EditProfileModal from '../profile/EditProfileModal';
-import AfterGameModal from '../afterGame/AfterGameModal';
-import StatChangeModal from '../statChange/StatChangeModal';
-import KakaoEditModal from '../profile/KakaoEditModal';
-import WelcomeModal from '../event/WelcomeModal';
+import AfterGameModal from 'components/modal/afterGame/AfterGameModal';
+import AnnouncementModal from 'components/modal/event/AnnouncementModal';
+import WelcomeModal from 'components/modal/event/WelcomeModal';
+import MatchCancelModal from 'components/modal/match/MatchCancelModal';
+import MatchEnrollModal from 'components/modal/match/MatchEnrollModal';
+import MatchManualModal from 'components/modal/match/MatchManualModal';
+import MatchRejectModal from 'components/modal/match/MatchRejectModal';
+import LogoutModal from 'components/modal/menu/LogoutModal';
+import ReportModal from 'components/modal/menu/ReportModal';
+import EditProfileModal from 'components/modal/profile/EditProfileModal';
+import KakaoEditModal from 'components/modal/profile/KakaoEditModal';
+import StatChangeModal from 'components/modal/statChange/StatChangeModal';
 
 export default function NormalModal() {
   const { modalName, announcement, isAttended, enroll, cancel, manual, exp } =

@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
+import type { Meta, StoryObj } from '@storybook/react';
 import { userState } from 'utils/recoil/layout';
 import MainPageProfile from 'components/Layout/MainPageProfile';
 

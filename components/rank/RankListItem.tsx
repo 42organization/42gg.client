@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
-import { userState } from 'utils/recoil/layout';
-import styles from 'styles/rank/RankList.module.scss';
-import PlayerImage from 'components/PlayerImage';
 import { RankUser } from 'types/rankTypes';
+import { userState } from 'utils/recoil/layout';
+import PlayerImage from 'components/PlayerImage';
+import styles from 'styles/rank/RankList.module.scss';
 
 type RankListItemProps = {
   user: RankUser;
