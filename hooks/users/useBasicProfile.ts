@@ -24,6 +24,7 @@ const useBasicProfile = ({ profileId }: UseBasicProfileProps) => {
       tierImageUri,
       tierName,
       edge,
+      backgroundType,
     },
     setProfile,
   ] = useRecoilState(profileState);
@@ -64,6 +65,7 @@ const useBasicProfile = ({ profileId }: UseBasicProfileProps) => {
     tierImageUri,
     tierName,
     edge,
+    backgroundType,
   };
 };
 

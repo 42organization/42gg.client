@@ -22,7 +22,6 @@ export default function ModalProvider() {
   const closeModalHandler = (e: React.MouseEvent) => {
     if (modalName?.split('-')[0] === 'FIXED') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
-      console.log(isAttended);
       if (modalName === 'MATCH-CANCEL') setReloadMatch(true);
       else if (modalName === 'EVENT-ANNOUNCEMENT' && !isAttended) {
         setModal({ modalName: 'EVENT-WELCOME' });

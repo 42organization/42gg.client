@@ -15,30 +15,66 @@
   min-width: 380px;
   max-width: 100vh;
   min-height: 100vh;
-  background: linear-gradient(
-    180deg,
-    #301451 23.82%,
-    #481570 58.85%,
-    #300e4b 98.44%
-  );
+  background: $main-background;
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
   &.both {
-    background: linear-gradient(
-      180deg,
-      #500247 0%,
-      #480141 21.35%,
-      #40013a 98.44%
-    );
+    background: $match-background;
   }
   &.normal {
-    background: linear-gradient(
-      180deg,
-      #1f2157 0%,
-      #1549cd 42.91%,
-      #001049 59.9%
-    );
+    background: $vip-background;
+  }
+  &.basic {
+    background: $bg-basic;
+  }
+  &.background1 {
+    background: $bg-pink-orange;
+  }
+  &.background2 {
+    background: $bg-blue-green;
+  }
+  &.background3 {
+    background: $bg-midnight;
+  }
+  &.background4 {
+    background: $bg-orange;
+  }
+  &.background5 {
+    background: $bg-grass-green;
+  }
+  &.background6 {
+    background: $bg-lemon-blue;
+  }
+  &.background7 {
+    background: $bg-dracula;
+  }
+  &.background8 {
+    background: $bg-mint-green;
+  }
+  &.background9 {
+    background: $bg-steel-gray;
+  }
+  &.background10 {
+    background: $bg-blood-red;
+  }
+  &.background11 {
+    background: $bg-blue-sky;
+  }
+  &.background12 {
+    background: $bg-ocean-blue;
+  }
+  &.background13 {
+    background: $bg-pink-blue;
+  }
+  &.background14 {
+    background: $bg-sunset-pink;
+  }
+  &.background15 {
+    background: $bg-dark-navy;
+  }
+  &.background16 {
+    background: $bg-orange-green;
   }
 }
 

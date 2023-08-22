@@ -5,19 +5,21 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
-import styles from 'styles/modal/store/GachaModal.module.scss';
+// import styles from 'styles/modal/store/GachaModal.module.scss';
 
-export default function GachaModal() {
-  // 미리보기에 사용할 예정
+import { EdgePreview } from 'components/modal/store/inventory/EdgePreview';
+
+type GachaModalProps = {
+  randomItem: string;
+};
+
+export default function GachaModal({ randomItem }: GachaModalProps) {
   const user = useRecoilValue(userState);
   const resetModal = useResetRecoilState(modalState);
   return (
     <div>
-      {/* TODO: 뽑기 당첨 애니메이션 적용 */}
-      <div className={styles.randomBox}>
-        <div className={styles.capsule}></div>
-      </div>
-      {/* TODO: 애니메이션이 끝나면 미리보기 결과와 확인 버튼 보이도록 하기 */}
+      {/* 이미지띠 미리보기용 임시 컴포넌트입니다 */}
+      {randomItem === 'edge' ? <EdgePreview /> : null}
       <ModalButtonContainer>
         <ModalButton
           style='positive'

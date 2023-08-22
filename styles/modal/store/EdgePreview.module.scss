@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  height: 80vh;
+  overflow-y: scroll;
+  color: white;
+  .preview {
+    color: white;
+  }
+}

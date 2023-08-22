@@ -1,14 +1,17 @@
 import { useRecoilValue } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import CoinChangeModal from 'components/modal/statChange/CoinChangeModal';
-import ChangeIdColorModal from 'components/modal/store/inventory/ChangeIdColorModal';
-import EditMegaphoneModal from 'components/modal/store/inventory/EditMegaphoneModal';
-import NewMegaphoneModal from 'components/modal/store/inventory/NewMegaphoneModal';
+import StoreManualModal from 'components/modal/store/StoreManualModal';
+import UserCoinHistoryModal from 'components/modal/store/UserCoinHistoryModal';
 import BuyModal from 'components/modal/store/purchase/BuyModal';
 import GiftModal from 'components/modal/store/purchase/GiftModal';
 import NoCoinModal from 'components/modal/store/purchase/NoCoinModal';
-import StoreManualModal from 'components/modal/store/StoreManualModal';
-import UserCoinHistoryModal from 'components/modal/store/UserCoinHistoryModal';
+import ChangeIdColorModal from 'components/modal/store/inventory/ChangeIdColorModal';
+import NewMegaphoneModal from 'components/modal/store/inventory/NewMegaphoneModal';
+import EditMegaphoneModal from 'components/modal/store/inventory/EditMegaphoneModal';
+import ChangeProfileEdgeModal from 'components/modal/store/inventory/ChangeProfileEdgeModal';
+import ChangeProfileBackgroundModal from 'components/modal/store/inventory/ChangeProfileBackgroundModal';
+import GachaModal from 'components/modal/store/inventory/GachaModal';
 
 export default function StoreModal() {
   const {
@@ -18,6 +21,7 @@ export default function StoreModal() {
     totalCoin,
     priceTag,
     useItemInfo,
+    randomItem,
   } = useRecoilValue(modalState);
 
   const content: { [key: string]: JSX.Element | null } = {
@@ -34,6 +38,15 @@ export default function StoreModal() {
     ) : null,
     'USE-ITEM-MEGAPHONE': useItemInfo ? (
       <NewMegaphoneModal {...useItemInfo} />
+    ) : null,
+    'USE-ITEM-PROFILE_BAND': useItemInfo ? (
+      <ChangeProfileEdgeModal {...useItemInfo} />
+    ) : null,
+    'USE-ITEM-PROFILE_BACKGROUND': useItemInfo ? (
+      <ChangeProfileBackgroundModal {...useItemInfo} />
+    ) : null,
+    'USE-ITEM-GACHA': randomItem ? (
+      <GachaModal randomItem={randomItem} />
     ) : null,
     'EDIT-ITEM-MEGAPHONE': useItemInfo ? (
       <EditMegaphoneModal {...useItemInfo} />

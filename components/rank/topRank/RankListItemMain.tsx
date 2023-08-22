@@ -16,7 +16,7 @@ export default function RankListItemMain({
   user,
   rank,
 }: RankListItemMainProps) {
-  const { intraId, userImageUri, tierImageUri } = user || {};
+  const { intraId, userImageUri, tierImageUri, edge } = user || {};
   const Mode = useRecoilValue(colorToggleSelector);
   const renderLink = intraId !== 'intraId';
 
@@ -41,7 +41,11 @@ export default function RankListItemMain({
               <Link href={`users/detail?intraId=${intraId}`}>
                 <PlayerImage
                   src={userImageUri}
-                  styleName={rank === 1 ? 'ranktropybig' : 'ranktropy'}
+                  styleName={
+                    rank === 1
+                      ? `ranktropybig ${edge.toLowerCase()}`
+                      : `ranktropy ${edge.toLowerCase()}`
+                  }
                   size={50}
                 />
                 <div className={`${styles.tierImageId}`}>
