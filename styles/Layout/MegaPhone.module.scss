@@ -64,9 +64,20 @@
 }
 
 .content {
-  font-size: 0.8rem;
+  height: 1.1rem;
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7rem;
+  white-space: nowrap;
 }
 
 .intraId {
-  font-size: 0.6rem;
+  height: 1rem;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.5rem;
 }
