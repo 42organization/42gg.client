@@ -55,6 +55,7 @@ export function InvetoryItem({ item }: inventoryItemProps) {
     <div key={receiptId} className={styles.inventoryItem}>
       <div className={styles.badgeContainer}>
         {user.intraId !== purchaserIntra && (
+          // 실제 모바일 환경에서 터치할 경우 툴팁이 나타나는지 확인 필요함.
           <Tooltip
             title={`from ${purchaserIntra}`}
             className={styles.giftBadge}
