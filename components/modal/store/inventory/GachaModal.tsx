@@ -17,7 +17,7 @@ export default function GachaModal({ randomItem }: GachaModalProps) {
   const user = useRecoilValue(userState);
   const resetModal = useResetRecoilState(modalState);
   return (
-    <div className={styles.randomBox}>
+    <div className={styles.container}>
       {/* 이미지띠 미리보기용 임시 컴포넌트입니다 */}
       {/* {randomItem === 'edge' ? <EdgePreview /> : null} */}
       <GachaAction randomItem={randomItem} />

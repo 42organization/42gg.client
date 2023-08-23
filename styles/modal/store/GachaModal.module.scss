@@ -1,5 +1,8 @@
 @import 'styles/common.scss';
 
-.randomBox {
-  display: relative;
+.container {
+  display: flex;
+  height: 30rem;
+  max-height: 80vh;
+  flex-direction: column;
 }

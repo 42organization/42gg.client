@@ -112,13 +112,3 @@
     transform: translateX(0);
   }
 }
-
-@keyframes spin {
-  to {
-    transform: rotate(0turn);
-  }
-
-  from {
-    transform: rotate(1turn);
-  }
-}

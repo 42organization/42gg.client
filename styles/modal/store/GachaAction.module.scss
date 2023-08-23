@@ -1,9 +1,18 @@
 @import 'styles/modal/store/GachaBall.module.scss';
 
 .container {
+  height: 100%;
+  background-color: white;
   .ball {
     @include gachaBalls;
+    margin-top: 17rem;
     animation: bounce 1s infinite;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
   }
 }
 
