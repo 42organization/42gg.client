@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instanceInManage } from 'utils/axios';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
@@ -16,7 +16,6 @@ export default function AdminEditItemModal(props: Item) {
   const setSnackBar = useSetRecoilState(toastState);
   const { imgData, imgPreview, uploadImg } = useUploadImg();
 
-  // instanceInManage로 변경
   const editItemHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -54,7 +53,7 @@ export default function AdminEditItemModal(props: Item) {
     }
 
     try {
-      await mockInstance.put(`/admin/items/${itemId}`, formData);
+      await instanceInManage.put(`/items/${itemId}`, formData);
       setSnackBar({
         toastName: 'edit item',
         severity: 'success',
@@ -82,7 +81,7 @@ export default function AdminEditItemModal(props: Item) {
         <form className={styles.bodyWrap} onSubmit={editItemHandler}>
           <label className={styles.imageWrap}>
             <Image
-              src={imgPreview ? imgPreview : imageUri}
+              src={imgPreview ? imgPreview : imageUri ? imageUri : ''}
               alt='Item Image'
               width={90}
               height={80}

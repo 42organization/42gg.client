@@ -11,7 +11,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { Item, ItemList } from 'types/itemTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -52,10 +52,9 @@ function ItemList() {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // api 연결 시 instanceInManage로 변경
   const getItemListHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(`items/store`);
+      const res = await instance.get(`/pingpong/items/store`);
       setItemListData(res.data);
     } catch (e: unknown) {
       setSnackBar({
@@ -116,7 +115,7 @@ function ItemList() {
                         <TableCell className={styles.tableBodyItem} key={index}>
                           {columnName === 'imageUri' ? (
                             <Image
-                              src={item[columnName]}
+                              src={item.imageUri ? item[columnName] : ''}
                               alt='Item Iamge'
                               width={30}
                               height={30}
