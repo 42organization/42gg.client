@@ -22,21 +22,16 @@ const MenuProfile = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const user = useRecoilValue<User>(userState);
 
-  const tierList = ['손', '빨', '노', '초', '파', '검', '무'];
-  const tierColor = [
-    'none',
-    'red',
-    'yellow',
-    'green',
-    'blue',
-    'black',
-    'rainbow',
-  ];
-  const index = tierList.findIndex((tier) => tier[0] === user.tierName[0]);
-  const tierId = tierColor[index];
-  const findTierIndex =
-    tierId === 'none' ? styles.tierId : styles['tierId' + tierId];
-
+  const tierColor: { [key: string]: string } = {
+    손: 'none',
+    빨: 'red',
+    노: 'yellow',
+    초: 'green',
+    파: 'blue',
+    검: 'black',
+    무: 'rainbow',
+  };
+  console.log(tierColor[user.tierName[0]]);
   return (
     <div className={styles.menuProfileWrapper}>
       <Link
@@ -59,7 +54,11 @@ const MenuProfile = () => {
               size={50}
             />
             &nbsp;
-            <div className={`${styles.tierId} ${findTierIndex}`}>
+            <div
+              className={`${styles.tierId} ${
+                styles[tierColor[user.tierName[0]]]
+              }`}
+            >
               {user.tierName}
             </div>
           </div>
