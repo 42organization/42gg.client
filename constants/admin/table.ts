@@ -79,9 +79,9 @@ export const tableFormat: TableFormat = {
       'createdAt',
       'itemName',
       'itemPrice',
-      'purchaserIntra',
-      'ownerIntra',
-      'itemStatus',
+      'purchaserIntraId',
+      'ownerIntraId',
+      'itemStatusType',
     ],
   },
   megaphoneList: {

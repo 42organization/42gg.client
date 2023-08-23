@@ -11,8 +11,8 @@ import {
   TableRow,
 } from '@mui/material';
 import { Iprofile, IprofileTable } from 'types/admin/adminReceiptType';
+import { instanceInManage } from 'utils/axios';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -41,7 +41,6 @@ function ProfileList() {
   const [modal, setModal] = useRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
     setCurrentPage(1);
@@ -49,8 +48,8 @@ function ProfileList() {
 
   const getUserProfileHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/images?intraId=${intraId}&page=${currentPage}&size=5`
+      const res = await instanceInManage.get(
+        `/images?intraId=${intraId}&page=${currentPage}&size=5`
       );
       setProfileData({
         profileList: res.data.profileList.map((profile: Iprofile) => {
@@ -75,11 +74,10 @@ function ProfileList() {
     }
   }, [intraId, currentPage]);
 
-  // instanceInManage로 변경
   const getAllProfileHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/images?page=${currentPage}&size=5`
+      const res = await instanceInManage.get(
+        `/images?&page=${currentPage}&size=5`
       );
       setProfileData({
         profileList: res.data.profileList.map((profile: Iprofile) => {

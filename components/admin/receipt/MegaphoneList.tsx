@@ -10,8 +10,8 @@ import {
   TableRow,
 } from '@mui/material';
 import { Imegaphone, ImegaphoneTable } from 'types/admin/adminReceiptType';
+import { instanceInManage } from 'utils/axios';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -50,7 +50,6 @@ function MegaphoneList() {
   const [modal, setModal] = useRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
     setCurrentPage(1);
@@ -58,8 +57,8 @@ function MegaphoneList() {
 
   const getUserMegaphoneHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/megaphones/history?intraId=${intraId}&page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/megaphones/history?intraId=${intraId}&page=${currentPage}&size=10`
       );
       setMegaphoneData({
         megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {
@@ -84,11 +83,10 @@ function MegaphoneList() {
     }
   }, [intraId, currentPage]);
 
-  // instanceInManage로 변경
   const getAllMegaphoneHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/megaphones/history?page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/megaphones/history?page=${currentPage}&size=10`
       );
       setMegaphoneData({
         megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {

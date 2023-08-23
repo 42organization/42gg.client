@@ -10,8 +10,8 @@ import {
   TableRow,
 } from '@mui/material';
 import { Ireceipt, IreceiptTable } from 'types/admin/adminReceiptType';
+import { instanceInManage } from 'utils/axios';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
@@ -23,9 +23,9 @@ const receiptListTableTitle: { [key: string]: string } = {
   createdAt: '구매일자',
   itemName: '아이템명',
   itemPrice: '구매가격',
-  purchaserIntra: '구매자',
-  ownerIntra: '수령자',
-  itemStatus: '아이템 상태',
+  purchaserIntraId: '구매자',
+  ownerIntraId: '수령자',
+  itemStatusType: '아이템 상태',
 };
 
 const tableColumnName = [
@@ -33,9 +33,9 @@ const tableColumnName = [
   'createdAt',
   'itemName',
   'itemPrice',
-  'purchaserIntra',
-  'ownerIntra',
-  'itemStatus',
+  'purchaserIntraId',
+  'ownerIntraId',
+  'itemStatusType',
 ];
 
 function ReceiptList() {
@@ -48,7 +48,6 @@ function ReceiptList() {
   const [intraId, setIntraId] = useState<string>('');
   const setSnackBar = useSetRecoilState(toastState);
 
-  // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
     setCurrentPage(1);
@@ -56,8 +55,8 @@ function ReceiptList() {
 
   const getUserReceiptHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/receipt/?intraId=${intraId}&page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/receipt/list?intraId=${intraId}&page=${currentPage}&size=10`
       );
       setReceiptData({
         receiptList: res.data.receiptList.map((receipt: Ireceipt) => {
@@ -82,11 +81,10 @@ function ReceiptList() {
     }
   }, [intraId, currentPage]);
 
-  // instanceInManage로 변경
   const getAllReceiptHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/receipt/?page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/receipt/list?&page=${currentPage}&size=10`
       );
       setReceiptData({
         receiptList: res.data.receiptList.map((receipt: Ireceipt) => {
