@@ -54,6 +54,8 @@ $g2-bottom: #b5bbf2;
 $loser-red: #ff0303;
 $winner-blue: #040eff;
 
+$coin-yellow: #e8e230;
+
 /* background-color */
 $main-background: linear-gradient(
   180deg,
@@ -107,6 +109,14 @@ $text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
   0 -0.1rem black;
 $text-shadow-red: 2px 2px 0px $pp-red;
 $text-shadow-blue: 2px 2px 0px $pp-blue;
+
+@mixin ggCoin {
+  color: $coin-yellow;
+  img {
+    margin-right: 0.2rem;
+    transform: translateY(0.2rem);
+  }
+}
 
 @mixin menu-noti-Bar {
   display: flex;

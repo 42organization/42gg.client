@@ -32,7 +32,8 @@ export default function BuyModal({ itemId, product, price }: PriceTag) {
           <div className={styles.itemPrice}>
             <div>가격:</div>
             <div>
-              {price} <FaCoins />
+              {price} 코인
+              {/* <FaCoins /> */}
             </div>
           </div>
         </div>

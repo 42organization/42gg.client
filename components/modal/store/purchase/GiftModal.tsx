@@ -6,7 +6,7 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
-import GiftSearchBar from 'components/shop/GiftSearchBar';
+import GiftSearchBar from 'components/store/purchase/GiftSearchBar';
 import useGiftModal from 'hooks/modal/store/purchase/useGiftModal';
 import styles from 'styles/modal/store/GiftModal.module.scss';
 
@@ -38,7 +38,8 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
           <div className={styles.itemPrice}>
             <div>가격:</div>
             <div>
-              {price} <FaCoins />
+              {price} 코인
+              {/* <FaCoins /> */}
             </div>
           </div>
         </div>

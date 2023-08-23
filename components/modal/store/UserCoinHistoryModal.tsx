@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { FaCoins } from 'react-icons/fa';
@@ -55,8 +56,13 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
       <div className={styles.balance}>
         <div>현재 코인</div>
         <div className={styles.currentCoin}>
+          <Image
+            src='/image/coinImage.svg'
+            alt={'coin'}
+            width={25}
+            height={25}
+          />
           {coin} &nbsp;
-          <FaCoins />
         </div>
       </div>
       <CoinHistoryContainer useCoinList={coinHistoryList.useCoinList} />

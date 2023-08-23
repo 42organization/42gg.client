@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import Image from 'next/image';
+import { Dispatch, SetStateAction } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { FaCoins } from 'react-icons/fa';
 import { Modal } from 'types/modalTypes';
 import { StoreMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
@@ -44,8 +44,8 @@ export function StoreModeWrap({
           매뉴얼
         </button>
         <div className={styles.coins} onClick={viewCoinHistory}>
+          <Image src='/image/coinImage.svg' alt='coin' width={20} height={20} />
           {coin.coin}
-          <FaCoins />
         </div>
       </div>
       <StoreModeRadioBox
