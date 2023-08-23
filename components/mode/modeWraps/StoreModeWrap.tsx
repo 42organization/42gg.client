@@ -44,7 +44,7 @@ export function StoreModeWrap({
           매뉴얼
         </button>
         <div className={styles.coins} onClick={viewCoinHistory}>
-          {coin.coin}
+          {coin.coin.toLocaleString()}
           <FaCoins />
         </div>
       </div>
