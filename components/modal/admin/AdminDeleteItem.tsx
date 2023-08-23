@@ -10,7 +10,6 @@ export default function AdminDeleteItemModal(props: Item) {
   const { itemId, itemName, content } = props;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
-  const user = useRecoilValue(userState).intraId;
 
   const deleteItemHandler = async (itemId: number) => {
     try {
