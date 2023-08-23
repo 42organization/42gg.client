@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { IcoinPolicy } from 'types/admin/adminCoinTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminEditCoinPolicy.module.scss';
@@ -10,10 +10,9 @@ export default function AdminEditCoinPolicyModal(props: IcoinPolicy) {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // instanceInManage로 변경
   const editCoinPolicyHandler = async () => {
     try {
-      await mockInstance.post(`/admin/coinpolicy`, props);
+      await instanceInManage.post(`/coinpolicy`, props);
       setSnackBar({
         toastName: 'edit coinpolicy',
         severity: 'success',

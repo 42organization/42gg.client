@@ -13,8 +13,8 @@ import {
   IcoinPolicyHistory,
   IcoinPolicyHistoryTable,
 } from 'types/admin/adminCoinTypes';
+import { instanceInManage } from 'utils/axios';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import PageNation from 'components/Pagination';
@@ -23,7 +23,7 @@ import styles from 'styles/admin/coin/CoinPolicyHistory.module.scss';
 const coinPolicyHistoryTableTitle: { [key: string]: string } = {
   coinPolicyId: 'ID',
   createdAt: '등록 날짜',
-  createUser: '등록 유저',
+  createUserId: '등록 유저',
   attendance: '출석 획득',
   normal: '일반게임 획득',
   rankWin: '랭크게임 승리 획득',
@@ -33,7 +33,7 @@ const coinPolicyHistoryTableTitle: { [key: string]: string } = {
 const tableColumnName = [
   'coinPolicyId',
   'createdAt',
-  'createUser',
+  'createUserId',
   'attendance',
   'normal',
   'rankWin',
@@ -50,11 +50,10 @@ function CoinPolicyHistory() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // instanceInManage로 변경
   const getCoinPolicyHistoryHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/coinpolicy?page=${currentPage}&size=5`
+      const res = await instanceInManage.get(
+        `/coinpolicy?page=${currentPage}&size=5`
       );
       setCoinPolicyHistoryData({
         coinPolicyList: res.data.coinPolicyList.map(

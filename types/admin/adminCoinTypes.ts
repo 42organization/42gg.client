@@ -7,7 +7,7 @@ export interface IcoinPolicy {
 
 export interface IcoinPolicyHistory {
   coinPolicyId: number;
-  createUser: string;
+  createUserId: string;
   attendance: number;
   normal: number;
   rankWin: number;

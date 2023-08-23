@@ -125,7 +125,7 @@ export const tableFormat: TableFormat = {
     columns: [
       'coinPolicyId',
       'createdAt',
-      'createUser',
+      'createUserId',
       'attendance',
       'normal',
       'rankWin',
