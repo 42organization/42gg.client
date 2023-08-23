@@ -9,6 +9,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import useChartModule from 'hooks/users/useChartModule';
 import styles from 'styles/user/Chart.module.scss';
 
 ChartJS.register(
@@ -20,8 +21,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-import useChartModule from 'hooks/users/useChartModule';
 
 interface ProfileChartProps {
   profileId: string;

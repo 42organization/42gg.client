@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import { Tooltip } from '@mui/material';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { BsGiftFill, BsCircleFill } from 'react-icons/bs';
+import { Tooltip } from '@mui/material';
 import { InventoryItem } from 'types/inventoryTypes';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';

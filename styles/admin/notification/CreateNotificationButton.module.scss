@@ -1,14 +1,14 @@
 .container {
   @mixin button {
     padding: 8px 16px;
-    border: none;
-    border-radius: 10px;
-    color: #6b7280;
-    font-weight: 400;
     font-size: 12px;
+    font-weight: 400;
     line-height: 150%;
+    color: #6b7280;
     text-align: center;
     cursor: pointer;
+    border: none;
+    border-radius: 10px;
   }
   .createAllButton {
     @include button;

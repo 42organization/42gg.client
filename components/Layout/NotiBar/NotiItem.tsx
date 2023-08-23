@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import { useContext } from 'react';
-import { Noti } from 'types/notiTypes';
-import { HeaderContextState, HeaderContext } from '../HeaderContext';
 import { BsCheckLg } from 'react-icons/bs';
+import { Noti } from 'types/notiTypes';
+import {
+  HeaderContextState,
+  HeaderContext,
+} from 'components/Layout/HeaderContext';
 import styles from 'styles/Layout/NotiItem.module.scss';
 
 interface NotiItemProps {

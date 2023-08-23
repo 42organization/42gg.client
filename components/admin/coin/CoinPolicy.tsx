@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useSetRecoilState } from 'recoil';
 import {
   Paper,
   Table,
@@ -8,10 +9,9 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import styles from 'styles/admin/coin/CoinPolicy.module.scss';
-import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
+import styles from 'styles/admin/coin/CoinPolicy.module.scss';
 
 const coinPolicyTableTitle: { [key: string]: string } = {
   attendance: '출석 획득',

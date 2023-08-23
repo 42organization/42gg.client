@@ -1,11 +1,11 @@
-import Head from 'next/head';
-import Script from 'next/script';
-import { useRouter } from 'next/router';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import Script from 'next/script';
 import { useEffect } from 'react';
 import { RecoilRoot } from 'recoil';
-import Layout from 'components/Layout/Layout';
 import ErrorChecker from 'components/error/ErrorChecker';
+import Layout from 'components/Layout/Layout';
 import LoginChecker from 'components/LoginChecker';
 import ModalProvider from 'components/modal/ModalProvider';
 import CustomizedSnackbars from 'components/toastmsg/toastmsg';

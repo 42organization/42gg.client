@@ -1,15 +1,17 @@
 // import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
-import { Gift } from 'types/itemTypes';
-import { errorState } from 'utils/recoil/error';
-import { mockInstance } from 'utils/mockAxios';
+import { Gift, GiftRequest } from 'types/itemTypes';
 import { instanceInManage } from 'utils/axios';
+import { mockInstance } from 'utils/mockAxios';
+import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/modal';
 
 const useGiftModal = (gift: Gift) => {
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState<string>(errorState);
-
+  const data: GiftRequest = {
+    ownerId: gift.ownerId,
+  };
   // TODO: mockInstance 대신 instance로 변경하기
   const onPurchase = async () => {
     if (gift.ownerId === '') {
@@ -18,7 +20,7 @@ const useGiftModal = (gift: Gift) => {
       return;
     }
     try {
-      const res = await mockInstance.post(`/items/gift/${gift.itemId}`, gift);
+      const res = await mockInstance.post(`/items/gift/${gift.itemId}`, data);
       if (res.status === 201) {
         // TODO: alert 대신 toast 띄우거나 아무것도 안하기
         alert(`${gift.ownerId}님께 선물이 전달되었습니다`);

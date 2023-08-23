@@ -2,18 +2,18 @@
 
 .mainContainer {
   position: relative;
-  display: flex;
-  flex-direction: column;
   left: 2.5%;
+  display: flex;
   width: 95%;
   height: 100%;
+  flex-direction: column;
 }
 
 .title {
-  font-weight: 600;
-  font-size: $big-font;
-  line-height: 150%;
   width: fit-content;
+  font-size: $big-font;
+  font-weight: 600;
+  line-height: 150%;
 }
 
 .subContainer {
@@ -22,9 +22,9 @@
 }
 
 .sectionTitle {
-  font-weight: 500;
-  font-size: $medium-font;
-  line-height: 150%;
   width: fit-content;
   padding-left: 15px;
+  font-size: $medium-font;
+  font-weight: 500;
+  line-height: 150%;
 }

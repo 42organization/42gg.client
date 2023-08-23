@@ -2,28 +2,28 @@
 
 .mainContainer {
   position: relative;
-  width: 95%;
-  height: 100%;
   left: 2.5%;
   display: flex;
+  width: 95%;
+  height: 100%;
   flex-direction: column;
 }
 
 .title {
-  font-weight: 600;
-  font-size: $big-font;
-  line-height: 150%;
   width: fit-content;
+  font-size: $big-font;
+  font-weight: 600;
+  line-height: 150%;
 }
 
 .tabMenu {
-  width: 100%;
   display: flex;
+  width: 100%;
   flex-direction: row;
+  font-size: $medium-font;
+  font-weight: 500;
   justify-content: space-around;
   align-items: center;
-  font-weight: 500;
-  font-size: $medium-font;
 }
 
 .active {

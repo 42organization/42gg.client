@@ -6,12 +6,12 @@
 
 .phrase {
   @include modal-phrase;
-  white-space: pre-wrap;
   color: rgba(49, 47, 49, 1);
+  white-space: pre-wrap;
   .message {
     padding: 1rem;
-    font-size: 1.125rem;
     font-family: 'NanumSqaure_acEB', sans-serif;
+    font-size: 1.125rem;
   }
   .subContent {
     padding-bottom: 1rem;

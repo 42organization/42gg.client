@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
-import { userImages } from 'types/rankTypes';
 import { useRecoilValue } from 'recoil';
-import { RankUser, NormalUser } from 'types/rankTypes';
+import { TbQuestionMark } from 'react-icons/tb';
+import { userImages, RankUser, NormalUser } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
 import PlayerImage from 'components/PlayerImage';
-import { TbQuestionMark } from 'react-icons/tb';
 import styles from 'styles/rank/RankListMain.module.scss';
 
 interface RankListItemMainProps {
@@ -17,7 +16,7 @@ export default function RankListItemMain({
   user,
   rank,
 }: RankListItemMainProps) {
-  const { intraId, userImageUri, tierImageUri } = user || {};
+  const { intraId, userImageUri, tierImageUri, edge } = user || {};
   const Mode = useRecoilValue(colorToggleSelector);
   const renderLink = intraId !== 'intraId';
 
@@ -42,7 +41,11 @@ export default function RankListItemMain({
               <Link href={`users/detail?intraId=${intraId}`}>
                 <PlayerImage
                   src={userImageUri}
-                  styleName={rank === 1 ? 'ranktropybig' : 'ranktropy'}
+                  styleName={
+                    rank === 1
+                      ? `ranktropybig ${edge.toLowerCase()}`
+                      : `ranktropy ${edge.toLowerCase()}`
+                  }
                   size={50}
                 />
                 <div className={`${styles.tierImageId}`}>
@@ -57,11 +60,9 @@ export default function RankListItemMain({
             ) : (
               <div>
                 <div className={`${styles.questionCircleRank}`}>
-                  {
-                    <TbQuestionMark
-                      className={` ${rank === 1 ? styles.rank1 : styles.ranks}`}
-                    />
-                  }
+                  <TbQuestionMark
+                    className={` ${rank === 1 ? styles.rank1 : styles.ranks}`}
+                  />
                 </div>
                 <span>{intraId}</span>
               </div>

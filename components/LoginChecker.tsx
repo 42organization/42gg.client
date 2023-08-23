@@ -1,7 +1,7 @@
 import Login from 'pages/login';
+import useLoginCheck from 'hooks/Login/useLoginCheck';
 import styles from 'styles/Layout/Layout.module.scss';
 
-import useLoginCheck from 'hooks/Login/useLoginCheck';
 interface LoginCheckerProps {
   children: React.ReactNode;
 }

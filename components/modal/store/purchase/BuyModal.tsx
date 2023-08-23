@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import useBuyModal from 'hooks/modal/store/purchase/useBuyModal';
 import { FaCoins } from 'react-icons/fa';
-import styles from 'styles/modal/store/BuyModal.module.scss';
-import { PriceTag } from 'types/modalTypes';
 import { Purchase } from 'types/itemTypes';
+import { PriceTag } from 'types/modalTypes';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
+import useBuyModal from 'hooks/modal/store/purchase/useBuyModal';
+import styles from 'styles/modal/store/BuyModal.module.scss';
 
 export default function BuyModal({ itemId, product, price }: PriceTag) {
   const [purchaseItem, setPurchaseItem] = useState<Purchase>({ itemId: -1 });

@@ -1,8 +1,8 @@
 .whole {
   display: flex;
-  flex-direction: column;
   width: 510px;
   height: 490px;
+  flex-direction: column;
   background: #ffffff;
   border-radius: 9px;
 }
@@ -20,9 +20,9 @@
   margin-top: 15px;
   margin-left: 1rem;
   font-family: 'Inter';
+  font-size: 28px;
   font-style: normal;
   font-weight: 500;
-  font-size: 28px;
   line-height: 150%;
   color: #000000;
 }
@@ -35,32 +35,32 @@
 
 .body {
   display: flex;
+  height: 100%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100%;
 }
 
 .bodyWrap {
   display: flex;
+  width: 80%;
+  height: 60%;
   flex-direction: column;
+  margin-bottom: 30px;
   justify-content: flex-start;
   align-items: center;
-  height: 60%;
-  width: 80%;
-  margin-bottom: 30px;
 }
 
 .bodyText {
+  display: flex;
   width: 5rem;
   height: 3rem;
   font-family: 'Inter';
+  font-size: 0.8rem;
   font-style: normal;
   font-weight: 500;
-  font-size: 0.8rem;
   line-height: 150%;
   color: #6b7280;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -68,23 +68,23 @@
 .intraWrap,
 .contentWrap {
   display: flex;
-  align-items: center;
-  margin-bottom: 10px;
   padding: 0 1rem;
+  margin-bottom: 10px;
+  align-items: center;
 }
 
 .intraBlank {
+  box-sizing: border-box;
   display: flex;
-  margin-left: 1rem;
   width: 275px;
   height: 60px;
+  margin-left: 1rem;
+  font-size: 0.8rem;
+  text-align: center;
   resize: none;
-  box-sizing: border-box;
   background: #f9fafb;
   border: 0.5px solid #ced4da;
   border-radius: 1px;
-  font-size: 0.8rem;
-  text-align: center;
 }
 
 .contentWrap {
@@ -93,18 +93,18 @@
 }
 
 .profileImage {
-  width: 275px;
   display: flex;
+  width: 275px;
   justify-content: center;
 }
 
 .buttonWrap {
   display: flex;
+  width: 90%;
+  height: 25%;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 90%;
-  height: 25%;
 }
 
 .checkWrap {
@@ -112,8 +112,8 @@
 }
 
 .checkTextMain {
-  font-size: 18px;
   padding-bottom: 15px;
+  font-size: 18px;
 }
 
 .checkTextSub {
@@ -126,9 +126,9 @@
   width: 246.45px;
   height: 37.73px;
   color: #ffffff;
+  cursor: pointer;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
 }
 
 .deleteBtn {

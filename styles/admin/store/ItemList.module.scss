@@ -11,10 +11,10 @@
 
       .tableHeaderItem {
         padding: 0.7rem;
-        text-align: center;
-        font-weight: 600;
         font-size: 0.7rem;
+        font-weight: 600;
         line-height: 150%;
+        text-align: center;
       }
     }
 
@@ -30,9 +30,9 @@
 
         .tableBodyItem {
           padding: 10px;
-          text-align: center;
-          line-height: 150%;
           font-size: 0.7rem;
+          line-height: 150%;
+          text-align: center;
         }
       }
     }
@@ -41,13 +41,13 @@
 
 .editBtn,
 .deleteBtn {
-  justify-content: center;
-  align-items: center;
   width: 3rem;
   height: 1.5rem;
-  background: #2678f3;
   color: #ffffff;
+  cursor: pointer;
+  background: #2678f3;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
+  justify-content: center;
+  align-items: center;
 }

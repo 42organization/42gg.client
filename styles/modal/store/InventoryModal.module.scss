@@ -21,46 +21,86 @@
 
 .sectionTitle {
   margin: 0 0 0.3rem 0.5rem;
-  color: $dark-gray;
   font-size: $medium-font;
+  color: $dark-gray;
 }
 
 .textArea {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  border-radius: $small-radius;
-  background: white;
-  overflow: hidden;
   margin-bottom: 1rem;
+  overflow: hidden;
+  background: white;
+  border-radius: $small-radius;
+  align-items: stretch;
   textarea {
-    resize: none;
     height: 4rem;
     padding: 0.8rem;
-    border: none;
     font-size: $big-font;
+    resize: none;
+    border: none;
   }
   :focus {
     outline: none;
   }
   div {
     display: flex;
-    justify-content: flex-end;
     padding: 0.7rem;
-    color: $dark-gray;
     font-size: $small-font;
+    color: $dark-gray;
+    justify-content: flex-end;
   }
 }
 
 .itemCautionContainer {
   .title {
     margin: 0 0 0.3rem 0.5rem;
-    color: $dark-gray;
     font-size: $medium-font;
+    color: $dark-gray;
   }
   .list {
     padding: 0 0 0.5rem 0.5rem;
-    list-style-type: '- ';
     list-style-position: inside;
+    list-style-type: '- ';
+  }
+}
+
+.idPreviewContainer {
+  .title {
+    margin: 0 0 0.3rem 0.5rem;
+    font-size: $small-font;
+    color: $dark-gray;
+  }
+}
+
+.profilePreviewContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0;
+  img {
+    width: 5.5rem;
+    height: 5.5rem;
+    overflow: hidden;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  svg {
+    margin: 0 1.5rem;
+  }
+  .profilePreview {
+    display: flex;
+    width: 5.5rem;
+    height: 5.5rem;
+    cursor: pointer;
+    background-color: #c7b1ee;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    svg {
+      width: 2.5rem;
+      height: 2.5rem;
+      color: #603b88;
+    }
   }
 }

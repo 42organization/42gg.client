@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { roleTypes, UserInfo } from 'types/admin/adminUserTypes';
 import { racketTypes } from 'types/userTypes';
+import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import { instanceInManage } from 'utils/axios';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminProfile.module.scss';
 

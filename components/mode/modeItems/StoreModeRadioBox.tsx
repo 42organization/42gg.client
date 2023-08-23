@@ -1,6 +1,6 @@
+import { StoreMode } from 'types/storeTypes';
 import { RadioBoxWrapper } from 'components/mode/modeItems/RadioBoxWrapper';
 import styles from 'styles/mode/ModeRadiobox.module.scss';
-import { StoreMode } from 'types/storeTypes';
 
 type StoreModeRadioBoxProps = {
   mode: StoreMode;

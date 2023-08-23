@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { AiOutlineEdit } from 'react-icons/ai';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { tierIdSelector } from 'utils/recoil/tierColor';
 import PlayerImage from 'components/PlayerImage';
 import useBasicProfile from 'hooks/users/useBasicProfile';
-import { AiOutlineEdit } from 'react-icons/ai';
 import styles from 'styles/user/Profile.module.scss';
 interface ProfileProps {
   profileId: string;
@@ -46,7 +46,11 @@ export default function BasicProfile({ profileId }: ProfileProps) {
         ></span>
       </div>
       {intraId && (
-        <PlayerImage src={userImageUri} styleName={'mainProfile'} size={30} />
+        <PlayerImage
+          src={userImageUri}
+          styleName={`mainProfile ${edge.toLowerCase()}`}
+          size={30}
+        />
       )}
       <div className={styles.idContainer}>
         <div className={styles.ranktier}>

@@ -2,9 +2,9 @@
 
 .whole {
   display: flex;
-  flex-direction: column;
   width: 510px;
   height: 569px;
+  flex-direction: column;
   background: #ffffff;
   border-radius: 9px;
 }
@@ -22,9 +22,9 @@
   margin-top: 15px;
   margin-left: 1rem;
   font-family: 'Inter';
+  font-size: 28px;
   font-style: normal;
   font-weight: 500;
-  font-size: 28px;
   line-height: 150%;
   color: #000000;
 }
@@ -47,31 +47,31 @@
 
 .bodyText {
   font-family: 'Inter';
+  font-size: 15px;
   font-style: normal;
   font-weight: 500;
-  font-size: 15px;
   line-height: 150%;
   color: #6b7280;
 }
 
 .blank {
+  box-sizing: border-box;
   display: flex;
   width: 100%;
   height: 16rem;
-  resize: none;
   margin: auto;
-  box-sizing: border-box;
+  resize: none;
   background: #f9fafb;
   border: 0.5px solid #ced4da;
   border-radius: 1px;
 }
 
 .messageBlank {
+  box-sizing: border-box;
   display: flex;
   width: 430px;
   height: 202px;
   resize: none;
-  box-sizing: border-box;
   background: #f9fafb;
   border: 0.5px solid #ced4da;
   border-radius: 1px;
@@ -80,22 +80,22 @@
 .btnContainer {
   display: flex;
   flex-direction: column;
+  padding: 1rem;
+  margin-top: 1rem;
+  text-align: center;
   justify-content: center;
   gap: 1rem;
-  margin-top: 1rem;
-  padding: 1rem 1rem;
-  text-align: center;
   align-content: space-evenly;
 
   button {
-    justify-content: center;
-    align-items: center;
     width: 100%;
     height: 40px;
-    border: none;
-    border-radius: 0.5rem;
     color: #ffffff;
     cursor: pointer;
+    border: none;
+    border-radius: 0.5rem;
+    justify-content: center;
+    align-items: center;
   }
 
   :nth-child(1) {
