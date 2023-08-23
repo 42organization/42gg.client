@@ -48,7 +48,9 @@
     rgba(#fe9cca, 0.7) 0%,
     rgba(#fe6bb1, 0.7) 100%
   );
-  display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 0.5rem;
   position: absolute;
   height: 100%;
@@ -58,10 +60,12 @@
   bottom: 0;
   right: 0;
   z-index: 1;
-  &:hover {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  opacity: 0;
+  @media (hover: hover) and (pointer: fine) {
+    /* when supported */
+    &:hover {
+      opacity: 1;
+    }
   }
   button {
     border: 2px solid #fff;

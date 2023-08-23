@@ -47,7 +47,7 @@ export function InvetoryItem({ item }: inventoryItemProps) {
   }
 
   function handleTouch(e: React.TouchEvent<HTMLDivElement>) {
-    e.preventDefault();
+    if (e.cancelable) e.preventDefault();
     itemStatus === 'USING' ? handleEditItem() : handleUseItem();
   }
 
@@ -79,7 +79,7 @@ export function InvetoryItem({ item }: inventoryItemProps) {
           <button onClick={handleUseItem}>사용하기</button>
         )}
       </div>
-      <div onTouchEnd={handleTouch}>
+      <div onTouchStart={handleTouch}>
         <div className={styles.imgContainer}>
           <Image className={styles.img} src={imageUri} alt={itemName} fill />
         </div>
