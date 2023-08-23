@@ -54,22 +54,50 @@ $g2-bottom: #b5bbf2;
 $loser-red: #ff0303;
 $winner-blue: #040eff;
 
-/* profile-edge color */
-// TODO: 16가지 색상 추가
-$profile-edge0: #666666;
-$profile-edge1: linear-gradient(
-  140.76deg,
-  #0069ff 0%,
-  #be7bcf 43.97%,
-  #ff7ee3 70.25%,
-  #426bff 91.76%
+/* background-color */
+$main-background: linear-gradient(
+  180deg,
+  #301451 23.82%,
+  #481570 58.85%,
+  #300e4b 98.44%
 );
-$profile-edge2: linear-gradient(
-  to right bottom,
-  #0030ac 0%,
-  #90a5ff 50%,
-  #8fffa4 100%
+$match-background: linear-gradient(
+  180deg,
+  #500247 0%,
+  #480141 21.35%,
+  #40013a 98.44%
 );
+
+$vip-background: linear-gradient(
+  180deg,
+  #1f2157 0%,
+  #1549cd 42.91%,
+  #001049 59.9%
+);
+
+/* profile-background color */
+$bg-basic: linear-gradient(
+  180deg,
+  #301451 23.82%,
+  #481570 58.85%,
+  #300e4b 98.44%
+);
+$bg-pink-orange: linear-gradient(to bottom, #ef629f, #eecda3);
+$bg-blue-green: linear-gradient(to bottom, #acb6e5, #86fde8);
+$bg-midnight: linear-gradient(to bottom, #00416a, #e4e5e6);
+$bg-orange: linear-gradient(to top, #ffe259, #ffa751);
+$bg-grass-green: linear-gradient(to bottom, #215f00, #e4e4d9);
+$bg-lemon-blue: linear-gradient(to top, #3d7eaa, #ffe47a);
+$bg-dracula: linear-gradient(to top, #dc2424, #4a569d);
+$bg-mint-green: linear-gradient(to bottom, #1cd8d2, #93edc7);
+$bg-steel-gray: linear-gradient(to bottom, #757f9a, #d7dde8);
+$bg-blood-red: linear-gradient(to bottom, #870000, #190a05);
+$bg-blue-sky: linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff);
+$bg-ocean-blue: linear-gradient(to top, #9cecfb, #65c7f7, #0052d4);
+$bg-pink-blue: linear-gradient(to top, #77a1d3, #79cbca, #e684ae);
+$bg-sunset-pink: linear-gradient(to top, #a770ef, #cf8bf3, #fdb99b);
+$bg-dark-navy: linear-gradient(to top, #bbd2c5, #536976, #292e49);
+$bg-orange-green: linear-gradient(to top, #c6ffdd, #fbd786, #f7797d);
 
 /* font */
 $logo-font: 'Agonostic Italic', cursive;
@@ -82,33 +110,33 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 
 @mixin menu-noti-Bar {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
   height: 100vh;
+  flex-direction: column;
   overflow: auto;
+  align-items: stretch;
 }
 
 @mixin match-noti-button {
   all: unset;
   padding: 0.2rem 0.5rem;
   margin: 0.7rem 0;
-  background: rgba(255, 255, 255, 0.3);
-  color: $light-gray;
   font-weight: 700;
+  color: $light-gray;
   text-align: center;
   cursor: pointer;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 @mixin reload-button {
   all: unset;
   width: 1.6rem;
   height: 1.6rem;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  color: $light-gray;
   font-weight: 700;
+  color: $light-gray;
   text-align: center;
   cursor: pointer;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
 }
 
 @mixin pageWrap {
@@ -119,29 +147,29 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin logoTitle($shadow) {
-  color: white;
   font-family: $logo-font;
   font-size: 2rem;
+  color: white;
   letter-spacing: 0.1rem;
 }
 
 @mixin pageTitle {
-  color: white;
   font-family: $title-font;
+  color: white;
 }
 
 @mixin modalTitle {
-  font-size: 2rem;
   font-family: 'Lexend', sans-serif;
+  font-size: 2rem;
   font-weight: 700;
   letter-spacing: 0.04rem;
 }
 
 @mixin backdrop {
-  z-index: 5;
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 5;
   width: -webkit-fill-available;
   height: -webkit-fill-available;
   background: rgba(0, 0, 0, 0.5);
@@ -151,16 +179,16 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   all: unset;
   width: $width;
   height: $height;
-  border-radius: $small-radius;
+  font-size: $medium-font;
+  color: $txt-color;
+  text-align: center;
+  cursor: pointer;
   background: if(
     $btn-color == white,
     linear-gradient(180deg, rgba(44, 41, 46, 0.52) 0%, #454147 100%),
     $btn-color
   );
-  color: $txt-color;
-  font-size: $medium-font;
-  text-align: center;
-  cursor: pointer;
+  border-radius: $small-radius;
 }
 
 @mixin select-buttons($width: 8rem, $height: 2.8rem) {
@@ -200,27 +228,28 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin modal-phrase {
+  margin: 1rem 0;
+  margin-bottom: 2rem;
   text-align: center;
   .emoji {
     padding-bottom: 1rem;
     font-size: 2.5rem;
   }
   .subContent {
-    line-height: 1.5;
     margin-top: 0.5rem;
+    line-height: 1.5;
   }
-  margin-bottom: 2rem;
 }
 
 @mixin modalContainer($type) {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  margin: 2rem 1.5rem;
   padding: 2rem 1rem;
+  margin: 2rem 1.5rem;
   border-radius: 1rem;
   box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.25);
+  justify-content: space-evenly;
+  align-items: center;
 
   @if ($type == 'DARKPURPLE') {
     background: linear-gradient(
@@ -256,8 +285,8 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   position: relative;
   width: $size;
   height: $size;
-  border-radius: 50%;
   background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  border-radius: 50%;
   img {
     border-radius: 50%;
   }
@@ -292,25 +321,25 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   .negative > input,
   .positive > input {
     display: flex;
-    justify-content: center;
-    align-items: center;
     width: 8rem;
     height: 2.5rem;
     padding: 0.75rem 3.1rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 1);
     border: 0;
     border-radius: 0.625rem;
-    color: rgba(255, 255, 255, 1);
-    font-size: 0.9rem;
+    justify-content: center;
+    align-items: center;
   }
   .negative {
     input {
+      margin-right: 1rem;
+      cursor: pointer;
       background: linear-gradient(
         180deg,
         rgba(44, 41, 46, 0.52) 0%,
         #454147 100%
       );
-      margin-right: 1rem;
-      cursor: pointer;
     }
     :hover {
       background: linear-gradient(
@@ -322,12 +351,12 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   }
   .positive {
     input {
+      cursor: pointer;
       background: linear-gradient(
         180deg,
         #c66bf2 0%,
         rgba(96, 6, 138, 0.52) 100%
       );
-      cursor: pointer;
     }
     :hover {
       background: linear-gradient(
@@ -346,8 +375,8 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin tierNumber() {
-  font-size: 0.8rem;
   font-family: Gugi;
+  font-size: 0.8rem;
   background: black;
   @include txtColor();
   &.tierIdred {

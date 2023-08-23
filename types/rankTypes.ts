@@ -1,16 +1,17 @@
 export type ToggleMode = 'NORMAL' | 'RANK';
 
-export interface RankUser {
+interface BaseUser {
   rank: number;
   intraId: string;
   statusMessage: string;
+  textColor: string;
+}
+
+export interface RankUser extends BaseUser {
   ppp: number;
   tierImageUri: string;
 }
-export interface NormalUser {
-  rank: number;
-  intraId: string;
-  statusMessage: string;
+export interface NormalUser extends BaseUser {
   level: number;
   exp: number;
 }
@@ -31,6 +32,7 @@ export interface userImages {
   intraId: string;
   userImageUri: string;
   tierImageUri: string;
+  edge: string;
 }
 
 export interface RankMain {

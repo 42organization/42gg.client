@@ -1,14 +1,14 @@
-import { useSetRecoilState } from 'recoil';
-import { Modal } from 'types/modalTypes';
-import useAxiosGet from 'hooks/useAxiosGet';
 import { useState, useEffect } from 'react';
-import { instance } from 'utils/axios';
+import { useSetRecoilState } from 'recoil';
 import { CoinResult } from 'types/coinTypes';
-import { modalState } from 'utils/recoil/modal';
-import { errorState } from 'utils/recoil/error';
-import styles from 'styles/modal/event/WelcomeModal.module.scss';
-import CoinPopcon from '../CoinPopcon';
+import { Modal } from 'types/modalTypes';
+import { instance } from 'utils/axios';
 import { mockInstance } from 'utils/mockAxios';
+import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/modal';
+import CoinPopcon from 'components/modal/CoinPopcon';
+import useAxiosGet from 'hooks/useAxiosGet';
+import styles from 'styles/modal/event/WelcomeModal.module.scss';
 
 export default function WelcomeModal() {
   const setModal = useSetRecoilState<Modal>(modalState);

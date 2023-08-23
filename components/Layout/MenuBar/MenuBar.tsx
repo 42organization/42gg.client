@@ -1,15 +1,17 @@
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { tierIdSelector } from 'utils/recoil/tierColor';
 import { User } from 'types/mainType';
 import { ProfileBasic } from 'types/userTypes';
 import { userState } from 'utils/recoil/layout';
+import { tierIdSelector } from 'utils/recoil/tierColor';
+import {
+  HeaderContextState,
+  HeaderContext,
+} from 'components/Layout/HeaderContext';
+import { MainMenu, AdminMenu } from 'components/Layout/MenuBar/MenuBarElement';
 import PlayerImage from 'components/PlayerImage';
-import { HeaderContextState, HeaderContext } from '../HeaderContext';
-import { MainMenu, AdminMenu } from './MenuBarElement';
-import useAxiosGet from 'hooks/useAxiosGet';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import useAxiosGet, { useMockAxiosGet } from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 const MenuTop = () => {
@@ -38,7 +40,8 @@ const MenuProfile = () => {
     snsNotiOpt: 'SLACK',
     tierImageUri: '',
     tierName: '',
-    edge: '',
+    edge: 'BASIC',
+    backgroundType: 'BASIC',
   });
 
   /*   const getProfile = useAxiosGet({
@@ -71,7 +74,7 @@ const MenuProfile = () => {
       >
         <PlayerImage
           src={user.userImageUri}
-          styleName={'menuProfile'}
+          styleName={`menuProfile ${user.edge.toLowerCase()}`}
           size={18}
         />
       </Link>

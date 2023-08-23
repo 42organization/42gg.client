@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { StoreManual } from 'types/modalTypes';
+import { StoreManualMode } from 'types/storeTypes';
 import { modalState } from 'utils/recoil/modal';
 import StoreManualModeRadiobox from 'components/mode/modeItems/StoreManualModeRadioBox';
 import styles from 'styles/modal/store/StoreManualModal.module.scss';
-import { StoreManual } from 'types/modalTypes';
-import { StoreManualMode } from 'types/storeTypes';
 
 type descriptionType = {
   tag: string;

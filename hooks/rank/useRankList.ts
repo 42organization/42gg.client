@@ -1,10 +1,8 @@
 import { useEffect, Dispatch, SetStateAction } from 'react';
 import { useRecoilState } from 'recoil';
-import { Rank } from 'types/rankTypes';
-import { MyRank, ToggleMode } from 'types/rankTypes';
+import { Rank, MyRank, ToggleMode } from 'types/rankTypes';
 import { myRankState, scrollState } from 'utils/recoil/myRank';
-import useAxiosGet from 'hooks/useAxiosGet';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import useAxiosGet, { useMockAxiosGet } from 'hooks/useAxiosGet';
 interface useRankListProps {
   makePath: string;
   toggleMode: ToggleMode;
@@ -41,10 +39,10 @@ const useRankList = ({
     type: 'setError',
   }); */
   const getRankDataHandler = useMockAxiosGet<any>({
-    url: '/rank/rankpage',
+    url: makePath,
     setState: (data) => {
       setRank(data);
-      setMyRank((prev) => ({ ...prev, ['RANK']: data.myRank }));
+      setMyRank((prev) => ({ ...prev, [toggleMode]: data.myRank }));
     },
     err: 'DK01',
     type: 'setError',

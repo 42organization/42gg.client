@@ -1,14 +1,13 @@
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from 'utils/recoil/modal';
+import useReportHandler from 'hooks/modal/useReportHandler';
 import styles from 'styles/modal/menu/ReportModal.module.scss';
 
 interface Report {
   category: string;
   content: string;
 }
-
-import useReportHandler from 'hooks/modal/useReportHandler';
-import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
 
 export default function ReportModal() {
   const setModal = useSetRecoilState(modalState);

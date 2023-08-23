@@ -1,11 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { instanceInManage } from 'utils/axios';
-import { getFormattedDateToString } from 'utils/handleTime';
-import { modalState } from 'utils/recoil/modal';
-import { tableFormat } from 'constants/admin/table';
-import AdminSearchBar from 'components/admin/common/AdminSearchBar';
-import PageNation from 'components/Pagination';
 import {
   Paper,
   Table,
@@ -15,6 +9,12 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import { instanceInManage } from 'utils/axios';
+import { getFormattedDateToString } from 'utils/handleTime';
+import { modalState } from 'utils/recoil/modal';
+import { tableFormat } from 'constants/admin/table';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import PageNation from 'components/Pagination';
 import styles from 'styles/admin/feedback/FeedbackTable.module.scss';
 
 const tableTitle: { [key: string]: string } = {

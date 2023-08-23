@@ -1,4 +1,5 @@
 @import 'styles/common.scss';
+@import 'styles/ProfileColor.scss';
 
 @mixin imageWrap {
   display: flex;
@@ -41,13 +42,8 @@
 
 .mainPageProfile {
   @include imageWrap;
-  height: 4.5rem;
-  width: 4.5rem;
-  margin-top: 0.2rem;
-  margin-bottom: 0.2rem;
-  border-radius: 50%;
-  // 이미지띠 색상
-  background: $profile-edge0;
+  @include profileEdge(4.4rem);
+  background-color: white;
   div {
     @include userImage(4rem);
     cursor: pointer;
@@ -57,12 +53,7 @@
 
 .menuProfile {
   @include imageWrap;
-  height: 4.3rem;
-  width: 4.3rem;
-  margin-top: 0.2rem;
-  margin-bottom: 0.2rem;
-  border-radius: 50%;
-  background: $profile-edge0;
+  @include profileEdge(4.3rem);
   div {
     @include userImage(3.9rem);
     cursor: pointer;
@@ -83,43 +74,15 @@
   justify-content: center;
   align-items: center;
   padding: 0.2rem;
-  border-radius: 50%;
-  width: 8.8rem;
-  height: 8.8rem;
-  // 이미지띠 색상
-  background: $profile-edge0;
+  @include profileEdge(8.8rem);
   div {
     @include userImage(8rem);
   }
 }
 
-// TODO: 어디에 쓰이는지 확인
-.profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.2rem;
-  border-radius: 50%;
-  // 이미지띠 색상
-  background: linear-gradient(
-    to right bottom,
-    #0030ac 0%,
-    #90a5ff 50%,
-    #cb8fff 100%
-  );
-  div {
-    @include userImage(4.7rem);
-  }
-}
-
 .ranktropybig {
   @include imageWrap;
-  height: 7.2rem;
-  width: 7.2rem;
-  margin-top: 0.2rem;
-  margin-bottom: 0.2rem;
-  border-radius: 50%;
-  background: $profile-edge0;
+  @include profileEdge(7.2rem);
   div {
     @include userRankImage(6.5rem);
     cursor: pointer;
@@ -128,12 +91,7 @@
 
 .ranktropy {
   @include imageWrap;
-  height: 5rem;
-  width: 5rem;
-  margin-top: 0.2rem;
-  margin-bottom: 0.2rem;
-  border-radius: 50%;
-  background: $profile-edge0;
+  @include profileEdge(5rem);
   div {
     @include userRankImage(4.5rem);
     cursor: pointer;
@@ -148,23 +106,13 @@
 
 @media (max-width: 457px) {
   .ranktropy {
-    height: 4.4rem;
-    width: 4.4rem;
-    margin-top: 0.2rem;
-    margin-bottom: 0.2rem;
-    border-radius: 50%;
-    background: $profile-edge0;
+    @include profileEdge(4.4rem);
     div {
       @include userRankImage(4rem);
     }
   }
   .ranktropybig {
-    height: 5.5rem;
-    width: 5.5rem;
-    margin-top: 0.2rem;
-    margin-bottom: 0.2rem;
-    border-radius: 50%;
-    background: $profile-edge0;
+    @include profileEdge(5.5rem);
     div {
       @include userRankImage(5rem);
     }

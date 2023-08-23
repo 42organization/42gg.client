@@ -1,6 +1,6 @@
 import { selector } from 'recoil';
-import { profileState } from './user';
 import { v1 } from 'uuid';
+import { profileState } from 'utils/recoil/user';
 
 export const tierIdSelector = selector<string>({
   key: `profileState/${v1()}`,

@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { InventoryData, InventoryItem } from 'types/inventoryTypes';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 const item1: InventoryItem = {
   receiptId: 1,
@@ -69,7 +69,7 @@ const item5: InventoryItem = {
 
 const item6: InventoryItem = {
   receiptId: 6,
-  itemName: '테스트6',
+  itemName: '프로필 배경색 변경',
   imageUri:
     'https://dodo.ac/np/images/thumb/1/17/NH_Balloon.jpg/600px-NH_Balloon.jpg',
   purchaserIntra: 'kim_takgu',
@@ -77,20 +77,20 @@ const item6: InventoryItem = {
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
-  itemType: 'MEGAPHONE',
+  itemType: 'PROFILE_BACKGROUND',
   createdAt: '2021-08-07',
 };
 
 const item7: InventoryItem = {
   receiptId: 7,
-  itemName: '테스트7',
+  itemName: '프로필 이미지 변경',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'jeyoon',
-  itemStatus: 'USING',
+  itemStatus: 'BEFORE',
   // ANCHOR - 추가된 속성. 필요 여부 논의 필요
   itemPrice: 1000,
   ownerIntra: 'aa',
-  itemType: 'MEGAPHONE',
+  itemType: 'PROFILE_IMAGE',
   createdAt: '2021-08-07',
 };
 

@@ -1,4 +1,4 @@
-import StatisticsChart from './StatisticsChart';
+import StatisticsChart from 'components/statistics/StatisticsChart';
 import useChartsData from 'hooks/statistics/useChartsData';
 import styles from 'styles/statistics/StatisticsSelect.module.scss';
 

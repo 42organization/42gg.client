@@ -1,75 +1,48 @@
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
+import { RankUser } from 'types/rankTypes';
 import { userState } from 'utils/recoil/layout';
-import { colorToggleSelector } from 'utils/recoil/colorMode';
-import styles from 'styles/rank/RankList.module.scss';
 import PlayerImage from 'components/PlayerImage';
+import styles from 'styles/rank/RankList.module.scss';
 
-interface User {
-  intraId: string;
-  idColor: string;
-  rank: number;
-  statusMessage: string;
-  point: number | string;
-  level: number | null;
-  tierImageUri: string;
-}
+type RankListItemProps = {
+  user: RankUser;
+  textColorPreview?: boolean;
+};
 
-interface RankListItemProps {
-  user: User;
-  idColorPreview?: string;
-}
-
-export default function RankListItem({
-  user,
-  idColorPreview,
-}: RankListItemProps) {
-  const Mode = useRecoilValue(colorToggleSelector);
-  // TODO : 랭크 정보에 아이디 색상 정보도 필요함.
-  const { rank, intraId, statusMessage, point, level, tierImageUri, idColor } =
-    user;
+export function RankListItem({ user, textColorPreview }: RankListItemProps) {
   const myIntraId = useRecoilValue(userState).intraId;
-  const wrapStyle = {
-    topStandard: rank < 4 ? styles.top : styles.standard,
-    rankItem: {
-      RANK: styles.Ranking,
-      NORMAL: styles.Vip,
-    },
-    myRankItem: {
-      RANK: intraId === myIntraId && level === null ? styles.myRanking : '',
-      NORMAL: intraId === myIntraId && level !== null ? styles.myVip : '',
-    },
+  const { rank, intraId, statusMessage, ppp, tierImageUri, textColor } = user;
+
+  const topStyle = (rank: number) => {
+    return rank < 4 ? styles.top : styles.standard;
   };
-  const makeIntraIdLink = () => (
-    <Link href={`/users/detail?intraId=${intraId}`}>
-      <span>
-        {intraId}
-        {level && <span className={styles.level}> ({level})</span>}
-      </span>
-    </Link>
-  );
+
+  const itemLayoutStyle = (textColorPreview?: boolean) => {
+    return textColorPreview
+      ? `${styles.rankItemWrap} ${styles.colorPreviewLayout}`
+      : styles.rankItemWrap;
+  };
+
+  const makeInitialPPP = (ppp: number) => (rank < 0 ? '-' : ppp);
 
   return (
     <div
-      className={`${styles.rankItemWrap} ${wrapStyle.topStandard}
-        ${wrapStyle.myRankItem[Mode]} ${wrapStyle.rankItem[Mode]}`}
+      className={`${itemLayoutStyle(textColorPreview)} ${topStyle(rank)} ${
+        intraId === myIntraId && styles.myRanking
+      }`}
     >
       {rank}
-      {Mode === 'RANK' ? (
-        <PlayerImage src={tierImageUri} styleName={'ranktier'} size={1} />
-      ) : (
-        ''
-      )}
-      <div
-        style={{
-          color: idColorPreview === undefined ? idColor : idColorPreview,
-        }}
-        className={styles.intraId}
-      >
-        {makeIntraIdLink()}
+      <PlayerImage src={tierImageUri} styleName={'ranktier'} size={1} />
+      <div style={{ color: textColor }} className={styles.intraId}>
+        <Link href={`/users/detail?intraId=${intraId}`}>
+          <span>{intraId}</span>
+        </Link>
       </div>
-      <div className={styles.statusMessage}>{statusMessage}</div>
-      <div className={styles.ppp}>{point}</div>
+      {textColorPreview ? null : (
+        <div className={styles.statusMessage}>{statusMessage}</div>
+      )}
+      <div className={styles.ppp}>{makeInitialPPP(ppp)}</div>
     </div>
   );
 }

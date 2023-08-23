@@ -1,7 +1,6 @@
-import { atom } from 'recoil';
+import { atom, selectorFamily } from 'recoil';
 import { v1 } from 'uuid';
 import { CurrentMatchList } from 'types/matchTypes';
-import { selectorFamily } from 'recoil';
 
 export const openCurrentMatchState = atom<boolean>({
   key: `openCurrentMatchState/${v1()}`,

@@ -1,83 +1,94 @@
-.randomBox {
+@mixin ball($color, $outline, $angle) {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  overflow: hidden;
+  background-color: $color;
+  border: solid 0.25rem $outline;
+  border-radius: 100%;
+  transform: rotate($angle);
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 200%;
+    height: 200%;
+    content: '';
+    background-color: #f7fcff;
+    border: inherit;
+    border-radius: 100%;
+    transform: translate(17%, -55%);
+  }
+}
+
+.container {
   display: flex;
   justify-content: center;
-  .capsule {
-    position: relative;
+  .box {
     width: 12.5rem;
     height: 12.5rem;
-    background: #fcb404;
-    border: 0.625rem solid #000000;
-    border-radius: 50%;
-    overflow: hidden;
-    box-shadow: inset -0.625rem 0.625rem 0 0.625rem #fc9014;
-    animation: fall 0.25s ease-in-out,
-      shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: calc(50% - 0.625rem);
-      width: 100%;
-      height: 0.5rem;
-      background: #000000;
-    }
-    // .capsuleButton {
-    //   position: absolute;
-    //   top: calc(50% - 1.25rem);
-    //   left: calc(50% - 1.25rem);
-    //   width: 2.5rem;
-    //   height: 2.5rem;
-    //   background: #7f8c8d;
-    //   border: 0.625rem solid #ffffff;
-    //   border-radius: 50%;
-    //   z-index: 10;
-    //   box-shadow: 0 0 0 0.625rem black;
-    //   animation: blink 0.5s alternate infinite;
-    // }
-  }
-
-  @keyframes blink {
-    from {
-      background: #eee;
-    }
-    to {
-      background: #e74c3c;
-    }
-  }
-
-  @keyframes shake {
-    0% {
-      transform: translate(0, 0) rotate(0);
-    }
-    20% {
-      transform: translate(-0.625rem, 0) rotate(-20deg);
-    }
-    30% {
-      transform: translate(0.625rem, 0) rotate(20deg);
-    }
-    50% {
-      transform: translate(-0.625rem, 0) rotate(-10deg);
-    }
-    60% {
-      transform: translate(0.625rem, 0) rotate(10deg);
-    }
-    100% {
-      transform: translate(0, 0) rotate(0);
-    }
-  }
-
-  @keyframes fall {
-    0% {
-      top: -12.5rem;
-    }
-    60% {
-      top: 0;
-    }
-    80% {
-      top: -1.25rem;
-    }
-    100% {
-      top: 0;
+    background-color: #38f3fd49;
+    border: 0.625rem solid #b2c9f7;
+    border-radius: 15%;
+    box-shadow: 0 0.625rem 1.25rem rgb(255, 255, 255) inset;
+    opacity: 0.8;
+    .balls {
+      position: relative;
+      .ball0 {
+        @include ball(#ec6767, #d14040, 90deg);
+        right: 18%;
+        margin-top: 45%;
+      }
+      .ball1 {
+        @include ball(#2facff, #3660bb, 60deg);
+        margin-top: 65%;
+      }
+      .ball2 {
+        @include ball(#2fffc8, #1f9978, 230deg);
+        left: 33%;
+        margin-top: 48%;
+      }
+      .ball3 {
+        @include ball(#e7ff2f, #abbd20, 210deg);
+        left: 50%;
+        margin-top: 67%;
+      }
+      .ball4 {
+        @include ball(#eb7bff, #e23eff, 40deg);
+        left: 30%;
+        margin-top: 70%;
+      }
+      .ball5 {
+        @include ball(#0aaf46, #02501f, 230deg);
+        left: 1%;
+        margin-top: 41%;
+      }
+      .ball6 {
+        @include ball(#fffc68, #e5e11e, 200deg);
+        right: 1%;
+        margin-top: 40%;
+      }
+      .ball7 {
+        @include ball(#b943f4, #66127d, 180deg);
+        left: 10%;
+        margin-top: 71%;
+      }
+      .ball8 {
+        @include ball(#ff2f47, #911a28, 80deg);
+        left: 13%;
+        margin-top: 50%;
+      }
+      .ball9 {
+        @include ball(#090488, #04023f, 100deg);
+        right: 5%;
+        margin-top: 55%;
+      }
+      .ball10 {
+        @include ball(#ff7b2f, #d94f00, 270deg);
+        right: 2%;
+        margin-top: 71%;
+      }
     }
   }
 }

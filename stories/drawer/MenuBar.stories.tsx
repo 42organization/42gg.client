@@ -1,6 +1,6 @@
-import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { useContext, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
+import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { userState } from 'utils/recoil/layout';
 import { profileState } from 'utils/recoil/user';
 import Header from 'components/Layout/Header';

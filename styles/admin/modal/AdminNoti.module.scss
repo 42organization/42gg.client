@@ -2,9 +2,9 @@
 
 .whole {
   display: flex;
-  flex-direction: column;
   width: 510px;
   height: 569px;
+  flex-direction: column;
   background: #ffffff;
   border-radius: 9px;
 }
@@ -22,9 +22,9 @@
   margin-top: 15px;
   margin-left: 1rem;
   font-family: 'Inter';
+  font-size: 28px;
   font-style: normal;
   font-weight: 500;
-  font-size: 28px;
   line-height: 150%;
   color: #000000;
 }
@@ -47,20 +47,20 @@
 
 .bodyText {
   font-family: 'Inter';
+  font-size: 15px;
   font-style: normal;
   font-weight: 500;
-  font-size: 15px;
   line-height: 150%;
   color: #6b7280;
 }
 
 .blank {
+  box-sizing: border-box;
   display: flex;
   width: 100%;
   height: 16rem;
   margin: auto;
   resize: none;
-  box-sizing: border-box;
   background: #f9fafb;
   border: 0.5px solid #ced4da;
   border-radius: 1px;
@@ -71,15 +71,15 @@
 }
 
 .messageWrap {
-  padding: 0 0;
+  padding: 0;
 }
 
 .messageBlank {
+  box-sizing: border-box;
   display: flex;
   width: 430px;
   height: 202px;
   resize: none;
-  box-sizing: border-box;
   background: #f9fafb;
   border: 0.5px solid #ced4da;
   border-radius: 1px;
@@ -87,70 +87,70 @@
 
 .btns {
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  padding: 1rem;
   margin-top: 1rem;
   text-align: center;
-  padding: 1rem 1rem;
+  justify-content: center;
   align-content: space-evenly;
 }
 
 .btn1 {
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
   width: 100%;
   height: 40px;
-  background: #2678f3;
+  margin-bottom: 10px;
   color: #ffffff;
+  cursor: pointer;
+  background: #2678f3;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn2 {
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 40px;
-  background: #6c757d;
   color: #ffffff;
+  cursor: pointer;
+  background: #6c757d;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
+  justify-content: center;
+  align-items: center;
 }
 
 .hide {
   display: none;
-  visibility: hidden;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
+  visibility: hidden;
 }
 
 .adminSearchBar {
   display: flex;
-  flex-wrap: wrap;
   width: 275px;
   height: 33px;
+  cursor: text;
   background: white;
   border: 0.5px solid #ced4da;
   border-radius: 1px;
-  cursor: text;
+  flex-wrap: wrap;
 
   input {
-    padding: 0.5rem 0.8rem;
     all: unset;
-    margin-left: 0.5rem;
     width: calc(100% - 4rem);
+    padding: 0.5rem 0.8rem;
+    margin-left: 0.5rem;
     color: black;
   }
   .icons {
     span {
-      margin-left: 30px;
-      height: 33px;
       display: flex;
-      align-items: center;
+      height: 33px;
+      margin-left: 30px;
       font-size: 1.2rem;
+      align-items: center;
     }
     .reset {
       height: 33px;
@@ -159,13 +159,13 @@
     }
   }
   .dropdown {
-    width: 100%;
     z-index: 999;
+    width: 100%;
     padding: 0 0.8rem 0.5rem 0.5rem;
     color: black;
+    background: white;
     border: 1px solid #ced4da;
     border-radius: 0 0 $small-radius $small-radius;
-    background: white;
     div {
       padding: 0.5rem 0;
       cursor: pointer;

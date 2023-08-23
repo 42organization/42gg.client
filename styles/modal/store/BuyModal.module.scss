@@ -6,25 +6,25 @@
 
 .phrase {
   @include modal-phrase;
-  color: rgba(49, 47, 49, 1);
   margin-bottom: 0.875rem;
+  color: rgba(49, 47, 49, 1);
   .message {
-    font-size: 1.125rem;
     font-family: 'NanumSquare_acR', sans-serif;
+    font-size: 1.125rem;
     font-weight: 700;
-    letter-spacing: 0.04rem;
     line-height: 200%;
+    letter-spacing: 0.04rem;
   }
   .itemInfo {
     width: 80%;
-    margin-left: 10%;
     margin-top: 0.875rem;
-    font-size: 0.875rem;
+    margin-left: 10%;
     font-family: 'NanumSquare_acR', sans-serif;
+    font-size: 0.875rem;
     font-weight: 700;
-    letter-spacing: 0.04rem;
     line-height: 150%;
     color: #666666;
+    letter-spacing: 0.04rem;
     .itemName {
       display: flex;
       flex-flow: row wrap;
@@ -37,11 +37,11 @@
     }
   }
   .warning {
-    font-size: 0.875rem;
     font-family: 'NanumSquare_acR', sans-serif;
+    font-size: 0.875rem;
     font-weight: 700;
-    letter-spacing: 0.04rem;
     color: #ff0000;
+    letter-spacing: 0.04rem;
   }
 }
 

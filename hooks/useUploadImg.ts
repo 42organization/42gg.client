@@ -1,7 +1,7 @@
+import imageCompression from 'browser-image-compression';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { toastState } from 'utils/recoil/toast';
-import imageCompression from 'browser-image-compression';
 
 export default function useUploadImg() {
   const [imgData, setImgData] = useState<File | null>(null);

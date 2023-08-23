@@ -4,18 +4,18 @@ $anim_delay: 0;
 .circle {
   position: fixed;
   z-index: 6 !important;
+  display: none;
   width: 30px;
   height: 30px;
   background-size: contain;
-  display: none;
 }
 
 .appear {
   position: fixed;
   z-index: 6;
   font-size: 2rem;
-  text-align: center;
   color: white;
+  text-align: center;
   opacity: 0;
   animation: appear #{$anim_duration}s ease-in forwards 1;
 }
@@ -28,23 +28,23 @@ $anim_delay: 0;
 
 @keyframes appear {
   0% {
-    transform: translatey(0px);
     opacity: 0;
+    transform: translatey(0px);
   }
   25% {
-    transform: translatey(-25px);
     opacity: 0.25;
+    transform: translatey(-25px);
   }
   50% {
-    transform: translatey(-50px);
     opacity: 0.5;
+    transform: translatey(-50px);
   }
   75% {
-    transform: translatey(-75px);
     opacity: 0.75;
+    transform: translatey(-75px);
   }
   100% {
-    transform: translatey(-100px);
     opacity: 1;
+    transform: translatey(-100px);
   }
 }

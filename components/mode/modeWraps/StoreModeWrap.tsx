@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { StoreMode } from 'types/storeTypes';
 import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
-import { ICoin } from 'types/userTypes';
-import { Modal } from 'types/modalTypes';
 import { FaCoins } from 'react-icons/fa';
+import { Modal } from 'types/modalTypes';
+import { StoreMode } from 'types/storeTypes';
+import { ICoin } from 'types/userTypes';
+import { modalState } from 'utils/recoil/modal';
 import StoreModeRadioBox from 'components/mode/modeItems/StoreModeRadioBox';
 import styles from 'styles/mode/StoreModeWrap.module.scss';
 

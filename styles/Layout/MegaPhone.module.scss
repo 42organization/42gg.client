@@ -6,13 +6,13 @@
 .rollingBanner {
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
   width: 85%;
   height: 2.2rem;
   overflow: hidden;
-  border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .wrapper {
@@ -54,19 +54,30 @@
 
 .contentWrapper {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
   height: 2.2rem;
+  flex-direction: column;
   color: rgba(255, 255, 0, 0.8);
   text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.8);
   background-color: rgba(0, 0, 0, 0.7);
+  justify-content: space-around;
+  align-items: center;
 }
 
 .content {
-  font-size: 0.8rem;
+  display: flex;
+  width: 95%;
+  height: 1.1rem;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .intraId {
-  font-size: 0.6rem;
+  display: flex;
+  width: 50%;
+  height: 1rem;
+  font-size: 0.5rem;
+  justify-content: center;
+  align-items: center;
 }

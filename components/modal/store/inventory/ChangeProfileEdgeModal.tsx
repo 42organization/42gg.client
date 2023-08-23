@@ -1,16 +1,16 @@
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
 import { UseItemRequest } from 'types/inventoryTypes';
-import { ItemCautionContainer } from './ItemCautionContainer';
+import { Modal } from 'types/modalTypes';
+import { mockInstance } from 'utils/mockAxios';
+import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/modal';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
-import { Modal } from 'types/modalTypes';
+import GachaBall from 'components/modal/store/inventory/GachaBall';
+import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
-import GachaBall from './GachaBall';
-import { mockInstance } from 'utils/mockAxios';
-import { errorState } from 'utils/recoil/error';
 
 type ChangeProfileEdgeModalProps = UseItemRequest;
 
@@ -39,6 +39,7 @@ export default function ChangeProfileEdgeModal({
       // 가챠 애니메이션 모달
       setModal({
         modalName: 'USE-ITEM-GACHA',
+        randomItem: 'edge',
       });
     } catch (error) {
       setError('HB04');

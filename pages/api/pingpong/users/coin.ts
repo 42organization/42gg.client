@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { ICoinHistory, ICoinHistoryList, ICoin } from 'types/userTypes';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 const coin = 100;
 

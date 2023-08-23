@@ -1,10 +1,9 @@
-import { userImages } from 'types/rankTypes';
 import { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { RankUser, NormalUser, Rank } from 'types/rankTypes';
+import { userImages, RankUser, NormalUser, Rank } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
+import RankListItemMain from 'components/rank/topRank/RankListItemMain';
 import useRankListMain from 'hooks/rank/useRankListMain';
-import RankListItemMain from './RankListItemMain';
 import styles from 'styles/rank/RankListMain.module.scss';
 
 interface RankListMainProps {
@@ -72,15 +71,18 @@ const dummyRankList: userImages[] = [
     intraId: 'intraId',
     tierImageUri: '',
     userImageUri: '',
+    edge: 'BASIC',
   },
   {
     intraId: 'intraId',
     tierImageUri: '',
     userImageUri: '',
+    edge: 'BASIC',
   },
   {
     intraId: 'intraId',
     tierImageUri: '',
     userImageUri: '',
+    edge: 'BASIC',
   },
 ];

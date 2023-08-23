@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { GoSearch } from 'react-icons/go';
+import { IoIosCloseCircle } from 'react-icons/io';
 import { instance, instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import { GoSearch } from 'react-icons/go';
-import { IoIosCloseCircle } from 'react-icons/io';
 import styles from 'styles/admin/modal/AdminNoti.module.scss';
 
 let timer: ReturnType<typeof setTimeout>;
@@ -24,7 +24,9 @@ export default function AdminNotiUserModal() {
 
   const getSearchResultHandler = useCallback(async () => {
     try {
-      const res = await instance.get(`/pingpong/users/searches?intraId=${keyword}`);
+      const res = await instance.get(
+        `/pingpong/users/searches?intraId=${keyword}`
+      );
       setSearchResult(res?.data.users);
     } catch (e) {
       setSnackBar({
@@ -104,13 +106,13 @@ export default function AdminNotiUserModal() {
           ? notiContent.current?.value
           : '알림 전송 실패',
       });
-        setSnackBar({
-          toastName: 'noti user',
-          severity: 'success',
-          message: `성공적으로 전송되었습니다!`,
-          clicked: true,
-        });
-        setModal({ modalName: null });
+      setSnackBar({
+        toastName: 'noti user',
+        severity: 'success',
+        message: `성공적으로 전송되었습니다!`,
+        clicked: true,
+      });
+      setModal({ modalName: null });
     } catch (e) {
       setSnackBar({
         toastName: 'noti user',
