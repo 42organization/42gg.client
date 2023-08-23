@@ -45,7 +45,7 @@ export default function CurrentMatch() {
     <div className={styles.currentMatchWrapper}>
       <div className={styles.currentMatchBanner}>
         <div className={styles.currentMatchMain}>
-          {currentMatchList && (
+          {currentMatchList.length > 0 && (
             <CurrentMatchContent currentMatch={currentMatchList[0]} index={0} />
           )}
         </div>
