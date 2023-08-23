@@ -41,7 +41,9 @@ export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
     <div className={styles.itemCard}>
       <div className={styles.preview}>
         <div className={styles.img}>
-          <Image src={item.imageUri} alt={item.itemName} fill />
+          {item.imageUri && (
+            <Image src={item.imageUri} alt={item.itemName} fill />
+          )}
         </div>
         {item.discount && <div className={styles.badge}>{item.discount}%</div>}
       </div>
@@ -51,16 +53,29 @@ export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
             <h4>{item.itemName}</h4>
           </div>
           <div className={styles.priceTags}>
-            <h5
-              className={
-                item.discount ? styles.onDiscount : styles.originalPrice
-              }
-            >
-              {item.originalPrice} <FaCoins />
-            </h5>
+            {item.discount ? (
+              <h5 className={styles.onDiscount}>{item.originalPrice}</h5>
+            ) : (
+              <h5 className={styles.originalPrice}>
+                <Image
+                  src='/image/coinImage.svg'
+                  alt={'coin'}
+                  width={16}
+                  height={16}
+                />
+                {item.originalPrice}
+              </h5>
+            )}
             {item.discount !== 0 && (
               <h5 className={styles.discountedPrice}>
-                {item.salePrice} <FaCoins />{' '}
+                <Image
+                  src='/image/coinImage.svg'
+                  alt={'coin'}
+                  width={20}
+                  height={20}
+                />
+                {item.salePrice}
+                {/* <FaCoins /> */}
               </h5>
             )}
           </div>

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { StoreMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
 import { StoreModeWrap } from 'components/mode/modeWraps/StoreModeWrap';
-import ItemsList from 'components/shop/ItemsList';
 import { Inventory } from 'components/store/Inventory';
+import ItemsList from 'components/store/purchase/ItemsList';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
 import styles from 'styles/store/StoreContainer.module.scss';
 
