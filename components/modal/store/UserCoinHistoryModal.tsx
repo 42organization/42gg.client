@@ -46,7 +46,7 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
         currentPage: currentPage,
       });
     } catch (e) {
-      setError('HB03');
+      setError('HB06');
     }
   };
 
