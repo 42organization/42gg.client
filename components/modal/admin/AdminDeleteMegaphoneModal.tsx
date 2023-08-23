@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { Imegaphone } from 'types/admin/adminReceiptType';
-import { mockInstance } from 'utils/mockAxios';
+import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminDeleteMegaphone.module.scss';
@@ -10,10 +10,9 @@ export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // instanceInManage로 변경
   const deleteMegaphoneHandler = async (megaphoneId: number) => {
     try {
-      await mockInstance.delete(`/admin/megaphones/${megaphoneId}`);
+      await instance.delete(`/admin/megaphones/${megaphoneId}`);
       setSnackBar({
         toastName: 'delete megaphone',
         severity: 'success',
