@@ -2,17 +2,11 @@
 
 .container {
   height: 100%;
-  background-color: white;
   .ball {
     @include gachaBalls;
     margin-top: 17rem;
-    animation: bounce 1s infinite;
-  }
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
+    transform: translate(0, 0);
+    animation: bounce 1s 3;
   }
 }
 

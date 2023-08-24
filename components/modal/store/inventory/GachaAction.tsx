@@ -1,4 +1,6 @@
 import styles from 'styles/modal/store/GachaAction.module.scss';
+import BackgroundPreview from './BackgroundPreview';
+import { EdgePreviewTemp } from './EdgePreview';
 
 type GachaActionProps = {
   randomItem: string;
@@ -11,7 +13,7 @@ export default function GachaAction({ randomItem }: GachaActionProps) {
       <div className={styles.ball}>
         <div className={`${styles[randomBall]}`}></div>
       </div>
-      <div>{randomItem}</div>
+      {randomItem === 'edge' ? <EdgePreviewTemp /> : <BackgroundPreview />}
     </div>
   );
 }
