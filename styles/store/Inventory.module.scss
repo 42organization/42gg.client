@@ -79,19 +79,19 @@
 }
 
 .badgeContainer {
+  position: relative;
   display: grid;
+  margin-bottom: 1rem;
   grid-template-areas: 'giftBadge usingBadge';
   grid-template-columns: 1fr 2fr;
   align-items: center;
-  position: relative;
-  margin-bottom: 1rem;
 }
 
 .giftBadge {
-  grid-area: giftBadge;
-  display: flex;
-  justify-content: flex-start;
   z-index: 2;
+  display: flex;
+  grid-area: giftBadge;
+  justify-content: flex-start;
 }
 
 .usingBadge {
@@ -100,12 +100,16 @@
   justify-content: flex-end;
   align-items: center;
   &.using svg {
-    fill: #08f458;
+    width: 0.75rem;
+    height: 0.75rem;
     margin-right: 0.3rem;
+    fill: #08f458;
   }
   &.before svg {
-    fill: #d3d3d3;
+    width: 0.75rem;
+    height: 0.75rem;
     margin-right: 0.3rem;
+    fill: #d3d3d3;
   }
 }
 
