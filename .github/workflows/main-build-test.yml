@@ -1,12 +1,9 @@
 name: Build Test before merge
 
 on:
-  push:
+  pull_request:
     branches:
-      - GGFE-211-pr-merge-전-build-테스트-조건-추가
-  # pull_request:
-  #   branches:
-  #     - main # main 브랜치에 PR 이벤트가 발생했을 때 trigger
+      - main # main 브랜치에 PR 이벤트가 발생했을 때 trigger
 
 jobs:
   build:
