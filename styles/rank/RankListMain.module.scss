@@ -164,11 +164,11 @@
   border-radius: 4rem 4rem 8.5rem 0rem;
 }
 
-@mixin rankNumber($txt-color, $txt-normalcolor, $top: -2.5rem, $left: -0.2rem) {
+@mixin rankNumber($txt-color, $txt-normalcolor, $top: -2.4rem, $left: -0.2rem) {
   position: relative;
   top: $top;
   left: $left;
-  font-family: 'Sacramento';
+  font-family: 'Montserrat';
   font-size: 4.5rem;
   line-height: -10rem;
   text-align: end;
@@ -222,7 +222,7 @@
       #7f48b4 51.62%,
       #5840ab 67.12%
     ),
-    -2.4rem,
+    -2rem,
     -1.1rem
   );
 }
