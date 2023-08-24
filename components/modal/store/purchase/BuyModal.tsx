@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { FaCoins } from 'react-icons/fa';
 import { Purchase } from 'types/itemTypes';
 import { PriceTag } from 'types/modalTypes';
 import {
@@ -31,9 +30,7 @@ export default function BuyModal({ itemId, product, price }: PriceTag) {
           </div>
           <div className={styles.itemPrice}>
             <div>가격:</div>
-            <div>
-              {price} <FaCoins />
-            </div>
+            <div>{price} 코인</div>
           </div>
         </div>
         <div className={styles.warning}>
