@@ -3,16 +3,12 @@ import React, { useContext } from 'react';
 import { useRecoilValue } from 'recoil';
 import { User } from 'types/mainType';
 import { userState } from 'utils/recoil/layout';
-import { tierIdSelector } from 'utils/recoil/tierColor';
 import {
   HeaderContextState,
   HeaderContext,
 } from 'components/Layout/HeaderContext';
 import { MainMenu, AdminMenu } from 'components/Layout/MenuBar/MenuBarElement';
 import PlayerImage from 'components/PlayerImage';
-import { HeaderContextState, HeaderContext } from '../HeaderContext';
-import { MainMenu, AdminMenu } from './MenuBarElement';
-
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 const MenuTop = () => {
