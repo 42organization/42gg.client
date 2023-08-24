@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useMockAxiosGet } from 'hooks/useAxiosGet';
-import styles from 'styles/Layout/MegaPhone.module.scss';
 import useInterval from 'hooks/useInterval';
+import styles from 'styles/Layout/MegaPhone.module.scss';
 
 interface IMegaphoneContent {
   megaphoneId?: number;
@@ -52,7 +52,7 @@ export const MegaphoneContainer = ({
   );
 };
 
-const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
+export const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
   return (
     <div className={styles.contentWrapper}>
       <div className={styles.intraId}>{intraId}</div>
