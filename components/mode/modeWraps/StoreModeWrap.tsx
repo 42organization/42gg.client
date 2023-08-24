@@ -45,7 +45,7 @@ export function StoreModeWrap({
         </button>
         <div className={styles.coins} onClick={viewCoinHistory}>
           <Image src='/image/coinImage.svg' alt='coin' width={20} height={20} />
-          {coin.coin}
+          {coin.coin.toLocaleString()}
         </div>
       </div>
       <StoreModeRadioBox
