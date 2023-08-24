@@ -4,7 +4,7 @@ import { UseItemRequest } from 'types/inventoryTypes';
 import { mockInstance } from 'utils/mockAxios';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
-import { MegaphoneContainer } from 'components/Layout/MegaPhone';
+import { MegaphoneItem } from 'components/Layout/MegaPhone';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -73,15 +73,12 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
         </div>
         <div className={styles.section}>
           <div className={styles.sectionTitle}>미리보기</div>
-          <MegaphoneContainer play={'running'} clickPause={() => void 0}>
-            {megaphoneData.content === '' ? (
-              <li>{failMessage}</li>
-            ) : (
-              <li>
-                {user.intraId} : {megaphoneData.content}
-              </li>
-            )}
-          </MegaphoneContainer>
+          <MegaphoneItem
+            content={
+              megaphoneData.content === '' ? failMessage : megaphoneData.content
+            }
+            intraId={user.intraId}
+          />
         </div>
         <ItemCautionContainer caution={caution} />
         <ModalButtonContainer>
