@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main # main 브랜치에 PR 이벤트가 발생했을 때 trigger
+    types: [opened, reopened] # PR이 open, reopen 되었을 때 trigger
 
 jobs:
   build:
