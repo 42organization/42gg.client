@@ -1,0 +1,29 @@
+name: Build Test before merge
+
+on:
+  push:
+    branches:
+      - GGFE-211-pr-merge-전-build-테스트-조건-추가
+  # pull_request:
+  #   branches:
+  #     - main # main 브랜치에 PR 이벤트가 발생했을 때 trigger
+
+jobs:
+  build:
+    runs-on: macos-12
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Dependency
+        run: npm install
+
+      - name: Build
+        env:
+          NEXT_PUBLIC_SERVER_ENDPOINT: ${{ secrets.DEV_NEXT_PUBLIC_SERVER_ENDPOINT }}
+          NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT: ${{ secrets.DEV_NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT }}
+          NEXT_PUBLIC_MOCK_ENDPOINT: ${{secrets.DEV_NEXT_PUBLIC_MOCK_ENDPOINT}}
+          NEXT_PUBLIC_ADMIN_MOCK_ENDPOINT: ${{secrets.DEV_NEXT_PUBLIC_ADMIN_MOCK_ENDPOINT}}
+          NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS }}
+          GENERATE_SOURCEMAP: ${{ secrets.GENERATE_SOURCEMAP }}
+        run: npm run build
