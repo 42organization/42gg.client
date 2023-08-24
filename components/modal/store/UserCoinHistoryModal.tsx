@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { FaCoins } from 'react-icons/fa';
 import { ICoin, ICoinHistoryTable } from 'types/userTypes';
 import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';

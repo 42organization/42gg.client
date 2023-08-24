@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { FaCoins } from 'react-icons/fa';
 import { Gift } from 'types/itemTypes';
 import { PriceTag } from 'types/modalTypes';
 import {
@@ -37,10 +36,7 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
           </div>
           <div className={styles.itemPrice}>
             <div>가격:</div>
-            <div>
-              {price} 코인
-              {/* <FaCoins /> */}
-            </div>
+            <div>{price} 코인</div>
           </div>
         </div>
         <GiftSearchBar setRecipient={setRecipient} />

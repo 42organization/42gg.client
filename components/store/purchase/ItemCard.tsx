@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { useSetRecoilState } from 'recoil';
-import { FaCoins } from 'react-icons/fa';
 import { Item } from 'types/itemTypes';
 import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
@@ -75,7 +74,6 @@ export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
                   height={20}
                 />
                 {item.salePrice}
-                {/* <FaCoins /> */}
               </h5>
             )}
           </div>
