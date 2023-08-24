@@ -1,4 +1,4 @@
-@mixin ball($color, $outline, $angle) {
+@mixin ball($color, $outline, $angle: 275deg) {
   position: absolute;
   width: 3rem;
   height: 3rem;

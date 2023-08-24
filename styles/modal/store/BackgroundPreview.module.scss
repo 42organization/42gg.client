@@ -7,8 +7,8 @@
   flex-direction: column;
   background: #edeff0;
   box-shadow: 0rem 0rem 5rem #ffffffa1;
-  //   opacity: 0%;
-  animation: appear 0.5s 3s ease-in-out;
+  opacity: 0%;
+  animation: appear 0.5s 3s ease-in-out forwards;
   justify-content: center;
   .colorName {
     margin-top: 5%;
