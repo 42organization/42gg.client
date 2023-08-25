@@ -7,19 +7,19 @@ export default function handler(
 ) {
   const userImages: userImages[] = [
     {
-      intraId: '1',
+      intraId: 'jeyoonnormal',
       userImageUri: '/image/fallBackSrc.jpeg',
       tierImageUri: '/image/fallBackSrc.jpeg',
       edge: 'COLOR2',
     },
     {
-      intraId: '2',
+      intraId: 'hyobicho',
       userImageUri: '/image/fallBackSrc.jpeg',
       tierImageUri: '/image/fallBackSrc.jpeg',
       edge: 'COLOR3',
     },
     {
-      intraId: '3',
+      intraId: 'hyungipa',
       userImageUri: '/image/fallBackSrc.jpeg',
       tierImageUri: '/image/fallBackSrc.jpeg',
       edge: 'COLOR4',
