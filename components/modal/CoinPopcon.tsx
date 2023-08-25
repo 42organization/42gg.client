@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styles from 'styles/modal/CoinPopcon.module.scss';
 interface amountProps {
   amount: number;
@@ -6,14 +6,14 @@ interface amountProps {
 }
 
 export default function CoinPopcon({ amount, coin }: amountProps) {
-  const [circles, setCircles] = useState<(HTMLDivElement | null)[]>([]);
   const tilts = ['r', 'l'];
   const height = [0.015, 0.02, 0.025];
   const width = [200, 230, 260];
 
   useEffect(() => {
-    const handleClickMouseWrapper = (e: React.MouseEvent) =>
+    const handleClickMouseWrapper = (e: MouseEvent) => {
       handleClickMouse(e);
+    };
     document.addEventListener('click', handleClickMouseWrapper);
 
     return () => {
@@ -21,7 +21,7 @@ export default function CoinPopcon({ amount, coin }: amountProps) {
     };
   }, []);
 
-  const handleClickMouse = (e: React.MouseEvent) => {
+  const handleClickMouse = (e: MouseEvent) => {
     const numElement = document.createElement('span');
     numElement.className = styles.appear;
     numElement.textContent = `+${coin}`;
@@ -52,7 +52,6 @@ export default function CoinPopcon({ amount, coin }: amountProps) {
       circle.className = styles.circle;
       circle.src = '/image/coinImage.svg';
       document.body.appendChild(circle);
-      setCircles((prevCircles) => [...prevCircles, circle]);
       let sum = x1;
 
       const t = setInterval(function () {
@@ -66,9 +65,6 @@ export default function CoinPopcon({ amount, coin }: amountProps) {
           clearInterval(t);
           circle.style.display = 'none';
           document.body.removeChild(circle);
-          setCircles((prevCircles) =>
-            prevCircles.filter((existingCircle) => existingCircle !== circle)
-          );
         }
       }, 5);
     }

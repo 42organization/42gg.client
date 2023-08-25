@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
-import styles from 'styles/Layout/MegaPhone.module.scss';
+import useAxiosGet from 'hooks/useAxiosGet';
 import useInterval from 'hooks/useInterval';
+import styles from 'styles/Layout/MegaPhone.module.scss';
 
 interface IMegaphoneContent {
   megaphoneId?: number;
@@ -52,7 +52,7 @@ export const MegaphoneContainer = ({
   );
 };
 
-const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
+export const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
   return (
     <div className={styles.contentWrapper}>
       <div className={styles.intraId}>{intraId}</div>
@@ -64,13 +64,10 @@ const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
 const Megaphone = () => {
   const [contents, setContents] = useState<MegaphoneList>(defaultContents);
 
-  // 나중에 useAxiosGet으로 변경 필요
-  const getMegaphoneHandler = useMockAxiosGet<any>({
-    url: `megaphones`,
+  const getMegaphoneHandler = useAxiosGet<any>({
+    url: `/pingpong/megaphones`,
     setState: (data) => {
-      setContents(
-        data.megaphoneList.length ? data.megaphoneList : defaultContents
-      );
+      setContents(data.length > 0 ? data : defaultContents);
     },
     err: 'HJ01',
     type: 'setError',

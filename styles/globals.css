@@ -92,8 +92,8 @@ body {
 }
 
 @font-face {
-  font-family: 'Sacramento';
-  src: url('../public/font/Sacramento-Regular.ttf') format('opentype');
+  font-family: 'Montserrat';
+  src: url('../public/font/Montserrat-Regular.ttf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
