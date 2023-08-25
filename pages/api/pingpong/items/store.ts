@@ -4,9 +4,9 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 const itemList: Item[] = [
   {
     itemId: 1,
-    itemName: '프로필 사진 변경권',
+    itemName: '이미지 변경권',
     mainContent: '프사 바꿔',
-    subContent: '42gg 프로필 사진을 변경할 수 있는 아이템',
+    subContent: '프로필 이미지를 원하는 이미지로 변경할 수 있는 아이템입니다.',
     itemType: 'PROFILE_IMAGE',
     imageUri: '/image/fallBackSrc.jpeg',
     originalPrice: 100,
@@ -16,8 +16,9 @@ const itemList: Item[] = [
   {
     itemId: 2,
     itemName: '확성기',
-    mainContent: '확성기다',
-    subContent: '확성기 설명',
+    mainContent: '오늘 하루 42GG는 내가 접수한다📢😎',
+    subContent:
+      '24시간 동안 모든 페이지 상단에 메시지를 띄울 수 있는 아이템입니다. 사용 다음날 적용됩니다.',
     itemType: 'MEGAPHONE',
     imageUri: '/image/fallBackSrc.jpeg',
     originalPrice: 20,
@@ -26,9 +27,10 @@ const itemList: Item[] = [
   },
   {
     itemId: 3,
-    itemName: '프로필 배경색',
-    mainContent: '배경 바꿔',
-    subContent: '프로필 배경색 설명',
+    itemName: '배경 뽑기',
+    mainContent: '난 “Background”부터가 달라',
+    subContent:
+      '랜덤으로 내 프로필 페이지의 배경을 변경할 수 있는 아이템입니다.',
     itemType: 'PROFILE_BACKGROUND',
     imageUri: '/image/fallBackSrc.jpeg',
     originalPrice: 300,
@@ -37,9 +39,9 @@ const itemList: Item[] = [
   },
   {
     itemId: 4,
-    itemName: '프로필 이미지띠',
-    mainContent: '엣지',
-    subContent: '프로필 이미지띠 설명',
+    itemName: 'Edge 뽑기',
+    mainContent: '난 “Edge”로 말해..',
+    subContent: '랜덤으로 프로필 테두리 색상을 변경할 수 있는 아이템입니다.',
     itemType: 'PROFILE_BAND',
     imageUri: '/image/fallBackSrc.jpeg',
     originalPrice: 50,
@@ -48,9 +50,10 @@ const itemList: Item[] = [
   },
   {
     itemId: 5,
-    itemName: '이름 색 변경',
-    mainContent: '이름색 바꿔',
-    subContent: '설명',
+    itemName: 'ID 색깔 변경권',
+    mainContent: '남들과는 다르게! ID 색깔을 바꿔보세요!',
+    subContent:
+      '색상코드를 직접 입력하여 랭킹 페이지의 ID 색상을 바꿀 수 있는 아이템입니다.',
     itemType: 'TEXT_COLOR',
     imageUri: '/image/fallBackSrc.jpeg',
     originalPrice: 200,

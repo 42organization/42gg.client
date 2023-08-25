@@ -1,96 +1,109 @@
 @import 'styles/common.scss';
 
 .itemCard {
-  position: relative;
   display: grid;
-  grid-template-areas:
-    'image haeder ribbon'
-    'image . .'
-    'image price price'
-    'image mainContent mainContent'
-    'image subContent subContent'
-    'image footer footer';
-  gap: 0.5rem;
   width: 100%;
-  height: 10rem;
+  height: 12.5rem;
+  padding: 0.2rem 0 0.2rem 0.2rem;
   margin-bottom: 0.7rem;
-  overflow: hidden;
   font-family: 'NanumSquare_acR', sans-serif;
   background: #ffffff5f;
   border-radius: 0.3rem;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: repeat(6, auto);
+  grid-template-areas:
+    'image header header ribbon'
+    'image price price price'
+    'image mainContent mainContent mainContent'
+    'image subContent subContent subContent'
+    'image subContent subContent subContent'
+    'image footer footer footer';
+  column-gap: 0.5rem;
 
-  .badge {
-    grid-area: ribbon;
-    // position: absolute;
-    top: 6%;
-    right: 0;
-    width: 3rem;
-    height: 1.5rem;
-    color: #fff;
-    text-align: center;
-    background-color: #c03434;
-    border-radius: 1.25rem 0 0 1.25rem;
-  }
   .preview {
     grid-area: image;
+    position: relative;
+    width: 10rem;
+    height: 10rem;
+    margin: 0.8rem 0;
     .img {
-      //   position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
+      object-fit: cover;
     }
   }
 
   .title {
-    font-size: 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
     font-weight: bold;
     color: black;
     grid-area: header;
   }
-
   .priceTag {
-    font-size: 1rem;
-    color: $coin-yellow;
     grid-area: price;
+    font-size: 0.8rem;
+    color: $coin-yellow;
     @include ggCoin;
     .salePrice {
       font-weight: bold;
     }
     .onDiscount {
       margin-right: 0.2rem;
-      text-decoration: line-through 0.1rem solid #ff4040;
+      text-decoration: line-through 0.1rem solid #c03434;
     }
   }
-
   .mainContent {
-    grid-area: mainContent;
+    padding-right: 0.3rem;
+    font-size: 0.85rem;
+    font-style: italic;
     color: #282828;
+    grid-area: mainContent;
   }
   .subContent {
-    font-size: 0.8rem;
+    padding-right: 0.5rem;
+    overflow: scroll;
+    font-size: 0.7rem;
     color: #343434;
     grid-area: subContent;
   }
-  .gift {
+  .buttons {
     grid-area: footer;
-    width: 4.5rem;
-    height: 1.5rem;
-    color: white;
-    background: linear-gradient(
-      180deg,
-      #ea80ea 0%,
-      rgba(211, 36, 182, 0.72) 100%
-    );
-    border-style: none;
-    border-radius: 0.3rem;
+    display: flex;
+    justify-content: space-evenly;
+    .gift {
+      width: auto;
+      min-width: 4rem;
+      height: 1.5rem;
+      font-family: 'NanumSquare_acR', sans-serif;
+      color: white;
+      background: linear-gradient(
+        180deg,
+        #ea80ea 0%,
+        rgba(211, 36, 182, 0.72) 100%
+      );
+      border-style: none;
+      border-radius: 0.3rem;
+    }
+    .buy {
+      width: auto;
+      min-width: 4rem;
+      height: 1.5rem;
+      font-family: 'NanumSquare_acR', sans-serif;
+      color: white;
+      background: $btn-purple;
+      border-style: none;
+      border-radius: 0.3rem;
+    }
   }
-  .buy {
-    grid-area: footer;
-    width: 4.5rem;
-    height: 1.5rem;
-    color: white;
-    background: $btn-purple;
-    border-style: none;
-    border-radius: 0.3rem;
-  }
+}
+
+.badge {
+  width: 3rem;
+  height: 1.5rem;
+  padding-top: 0.25rem;
+  margin-top: 0.5rem;
+  color: #fff;
+  text-align: center;
+  background-color: #c03434;
+  border-radius: 1.25rem 0 0 1.25rem;
+  grid-area: ribbon;
 }
