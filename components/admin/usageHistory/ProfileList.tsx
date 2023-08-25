@@ -18,7 +18,7 @@ import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import PageNation from 'components/Pagination';
-import styles from 'styles/admin/receipt/ProfileList.module.scss';
+import styles from 'styles/admin/usageHistory/ProfileList.module.scss';
 
 const profileTableTitle: { [key: string]: string } = {
   profileId: 'ID',

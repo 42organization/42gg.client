@@ -23,8 +23,8 @@ const receiptListTableTitle: { [key: string]: string } = {
   createdAt: '구매일자',
   itemName: '아이템명',
   itemPrice: '구매가격',
-  purchaserIntraId: '구매자',
-  ownerIntraId: '수령자',
+  purchaserIntraId: '구매자 ID',
+  ownerIntraId: '수령인 ID',
   itemStatusType: '아이템 상태',
 };
 
@@ -56,7 +56,7 @@ function ReceiptList() {
   const getUserReceiptHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/receipt/list?intraId=${intraId}&page=${currentPage}&size=10`
+        `/receipt?intraId=${intraId}&page=${currentPage}&size=10`
       );
       setReceiptData({
         receiptList: res.data.receiptList.map((receipt: Ireceipt) => {
@@ -84,7 +84,7 @@ function ReceiptList() {
   const getAllReceiptHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/receipt/list?&page=${currentPage}&size=10`
+        `/receipt?&page=${currentPage}&size=10`
       );
       setReceiptData({
         receiptList: res.data.receiptList.map((receipt: Ireceipt) => {
@@ -115,53 +115,59 @@ function ReceiptList() {
 
   return (
     <>
-      <div className={styles.searchWrap}>
-        <AdminSearchBar initSearch={initSearch} />
-      </div>
-      <TableContainer className={styles.tableContainer} component={Paper}>
-        <Table className={styles.table} aria-label='customized table'>
-          <TableHead className={styles.tableHeader}>
-            <TableRow>
-              {tableColumnName.map((column, idx) => (
-                <TableCell className={styles.tableHeaderItem} key={idx}>
-                  {receiptListTableTitle[column]}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody className={styles.tableBody}>
-            {receiptData.receiptList.length > 0 ? (
-              receiptData.receiptList.map((receipt: Ireceipt) => (
-                <TableRow className={styles.tableRow} key={receipt.receiptId}>
-                  {tableFormat['receiptList'].columns.map(
-                    (columnName: string, index: number) => {
-                      return (
-                        <TableCell className={styles.tableBodyItem} key={index}>
-                          {receipt[columnName as keyof Ireceipt].toString()}
-                        </TableCell>
-                      );
-                    }
-                  )}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow className={styles.tableRow}>
-                <TableCell className={styles.tableBodyItem}>
-                  비어있습니다
-                </TableCell>
+      <div className={styles.receiptListWrap}>
+        <div className={styles.header}>
+          <span className={styles.title}>구매내역 관리</span>
+          <AdminSearchBar initSearch={initSearch} />
+        </div>
+        <TableContainer className={styles.tableContainer} component={Paper}>
+          <Table className={styles.table} aria-label='customized table'>
+            <TableHead className={styles.tableHeader}>
+              <TableRow>
+                {tableColumnName.map((column, idx) => (
+                  <TableCell className={styles.tableHeaderItem} key={idx}>
+                    {receiptListTableTitle[column]}
+                  </TableCell>
+                ))}
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <div className={styles.pageNationContainer}>
-        <PageNation
-          curPage={receiptData.currentPage}
-          totalPages={receiptData.totalPage}
-          pageChangeHandler={(pageNumber: number) => {
-            setCurrentPage(pageNumber);
-          }}
-        />
+            </TableHead>
+            <TableBody className={styles.tableBody}>
+              {receiptData.receiptList.length > 0 ? (
+                receiptData.receiptList.map((receipt: Ireceipt) => (
+                  <TableRow className={styles.tableRow} key={receipt.receiptId}>
+                    {tableFormat['receiptList'].columns.map(
+                      (columnName: string, index: number) => {
+                        return (
+                          <TableCell
+                            className={styles.tableBodyItem}
+                            key={index}
+                          >
+                            {receipt[columnName as keyof Ireceipt].toString()}
+                          </TableCell>
+                        );
+                      }
+                    )}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow className={styles.tableRow}>
+                  <TableCell className={styles.tableBodyItem}>
+                    비어있습니다
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <div className={styles.pageNationContainer}>
+          <PageNation
+            curPage={receiptData.currentPage}
+            totalPages={receiptData.totalPage}
+            pageChangeHandler={(pageNumber: number) => {
+              setCurrentPage(pageNumber);
+            }}
+          />
+        </div>
       </div>
     </>
   );
