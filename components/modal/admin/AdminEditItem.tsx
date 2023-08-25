@@ -9,9 +9,15 @@ import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminEditItem.module.scss';
 
 export default function AdminEditItemModal(props: Item) {
-  const { itemId, itemName, content, imageUri, originalPrice, discount } =
-    props;
-  const creator = useRecoilValue(userState).intraId;
+  const {
+    itemId,
+    itemName,
+    content,
+    imageUri,
+    originalPrice,
+    discount,
+    itemType,
+  } = props;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
   const { imgData, imgPreview, uploadImg } = useUploadImg();
@@ -40,10 +46,10 @@ export default function AdminEditItemModal(props: Item) {
       content: content,
       price: price,
       discount: discount,
-      creatorIntra: creator,
+      itemType: itemType,
     };
     formData.append(
-      'updateItemInfo',
+      'itemRequestDto',
       new Blob([JSON.stringify(data)], {
         type: 'application/json',
       })
@@ -53,7 +59,7 @@ export default function AdminEditItemModal(props: Item) {
     }
 
     try {
-      await instanceInManage.put(`/items/${itemId}`, formData);
+      await instanceInManage.post(`/items/${itemId}`, formData);
       setSnackBar({
         toastName: 'edit item',
         severity: 'success',
