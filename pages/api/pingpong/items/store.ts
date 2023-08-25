@@ -5,7 +5,8 @@ const itemList: Item[] = [
   {
     itemId: 1,
     itemName: '프로필 사진 변경권',
-    content: '42gg의 프로필 사진을 변경할 수 있는 아이템',
+    mainContent: '프사 바꿔',
+    subContent: '42gg 프로필 사진을 변경할 수 있는 아이템',
     itemType: 'PROFILE_IMAGE',
     imageUri: '/image/fallBackSrc.jpeg',
     originalPrice: 100,
@@ -15,7 +16,8 @@ const itemList: Item[] = [
   {
     itemId: 2,
     itemName: '확성기',
-    content: '확성기 설명',
+    mainContent: '확성기다',
+    subContent: '확성기 설명',
     itemType: 'MEGAPHONE',
     imageUri: '/image/fallBackSrc.jpeg',
     originalPrice: 20,
@@ -25,7 +27,8 @@ const itemList: Item[] = [
   {
     itemId: 3,
     itemName: '프로필 배경색',
-    content: '프로필 배경색 설명',
+    mainContent: '배경 바꿔',
+    subContent: '프로필 배경색 설명',
     itemType: 'PROFILE_BACKGROUND',
     imageUri: '/image/fallBackSrc.jpeg',
     originalPrice: 300,
@@ -35,7 +38,8 @@ const itemList: Item[] = [
   {
     itemId: 4,
     itemName: '프로필 이미지띠',
-    content: '설명',
+    mainContent: '엣지',
+    subContent: '프로필 이미지띠 설명',
     itemType: 'PROFILE_BAND',
     imageUri: '/image/fallBackSrc.jpeg',
     originalPrice: 50,
@@ -45,7 +49,8 @@ const itemList: Item[] = [
   {
     itemId: 5,
     itemName: '이름 색 변경',
-    content: '설명',
+    mainContent: '이름색 바꿔',
+    subContent: '설명',
     itemType: 'TEXT_COLOR',
     imageUri: '/image/fallBackSrc.jpeg',
     originalPrice: 200,

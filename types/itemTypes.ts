@@ -1,7 +1,8 @@
 export interface Item {
   itemId: number;
   itemName: string;
-  content: string;
+  mainContent: string;
+  subContent: string;
   itemType: string;
   imageUri: string;
   originalPrice: number;
