@@ -52,7 +52,7 @@ export const MegaphoneContainer = ({
   );
 };
 
-const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
+export const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
   return (
     <div className={styles.contentWrapper}>
       <div className={styles.intraId}>{intraId}</div>
