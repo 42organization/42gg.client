@@ -1,5 +1,4 @@
-import { useResetRecoilState, useRecoilValue } from 'recoil';
-import { userState } from 'utils/recoil/layout';
+import { useResetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
 import {
   ModalButtonContainer,
@@ -7,29 +6,26 @@ import {
 } from 'components/modal/ModalButton';
 import BackgroundPreview from 'components/modal/store/inventory/BackgroundPreview';
 import EdgePreview from 'components/modal/store/inventory/EdgePreview';
-import useBasicProfile from 'hooks/users/useBasicProfile';
 import styles from 'styles/modal/store/GachaModal.module.scss';
 
 type GachaModalProps = {
-  randomItem: string;
+  item: string;
+  color: string;
 };
 
-export default function GachaModal({ randomItem }: GachaModalProps) {
+export default function GachaModal({ item, color }: GachaModalProps) {
   const resetModal = useResetRecoilState(modalState);
-  const { intraId } = useRecoilValue(userState);
-  const { userImageUri, edge, backgroundType } = useBasicProfile({
-    profileId: intraId,
-  });
   const randomBall = 'ball' + Math.floor(Math.random() * 11).toString();
+
   return (
     <div className={styles.container}>
       <div className={styles.ball}>
         <div className={`${styles[randomBall]}`}></div>
       </div>
-      {randomItem === 'edge' ? (
-        <EdgePreview userImageUri={userImageUri} edge={edge} />
+      {item === 'edge' ? (
+        <EdgePreview edge={color} />
       ) : (
-        <BackgroundPreview backgroundType={backgroundType} />
+        <BackgroundPreview backgroundType={color} />
       )}
       <div className={styles.button}>
         <ModalButtonContainer>

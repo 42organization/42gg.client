@@ -20,7 +20,6 @@ const caution = [
   '아이템을 사용한 후에는 취소가 불가능합니다.',
 ];
 
-// 랜덤 프로필 이미지띠 변경
 export default function ChangeProfileBackgroundModal({
   receiptId,
 }: ChangeProfileBackgroundModalProps) {
@@ -34,12 +33,12 @@ export default function ChangeProfileBackgroundModal({
     };
     try {
       const res = await mockInstance.patch('/users/background', data);
-      // api 테스트용 -> 나중에 지우기
-      console.log(`프로필 배경색: ${res.data}`);
-      // 가챠 애니메이션 모달
       setModal({
         modalName: 'USE-ITEM-GACHA',
-        randomItem: 'background',
+        randomItem: {
+          item: 'background',
+          color: res.data,
+        },
       });
     } catch (error) {
       setError('HB05');
