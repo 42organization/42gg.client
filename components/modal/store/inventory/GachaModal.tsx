@@ -6,6 +6,7 @@ import {
 } from 'components/modal/ModalButton';
 import BackgroundPreview from 'components/modal/store/inventory/BackgroundPreview';
 import EdgePreview from 'components/modal/store/inventory/EdgePreview';
+import GachaConfetti from 'components/modal/store/inventory/GachaConfetti';
 import styles from 'styles/modal/store/GachaModal.module.scss';
 
 type GachaModalProps = {
@@ -22,6 +23,7 @@ export default function GachaModal({ item, color }: GachaModalProps) {
       <div className={styles.ball}>
         <div className={`${styles[randomBall]}`}></div>
       </div>
+      <GachaConfetti />
       {item === 'edge' ? (
         <EdgePreview edge={color} />
       ) : (
