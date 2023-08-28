@@ -15,6 +15,15 @@ import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/users/UserManagementTable.module.scss';
+import { AdminEmptyItem, AdminTableHead } from '../common/AdminTable';
+
+const tableTitle: { [key: string]: string } = {
+  id: 'ID',
+  roleType: '권한',
+  intraId: '인트라ID',
+  statusMessage: '상태메시지',
+  etc: '기타',
+};
 
 interface IUser {
   id: number;
@@ -108,18 +117,7 @@ export default function UserManagementTable() {
         </div>
         <TableContainer className={styles.tableContainer} component={Paper}>
           <Table className={styles.table} aria-label='UserManagementTable'>
-            <TableHead className={styles.tableHeader}>
-              <TableRow>
-                {tableFormat['userInfo'].columns.map((columnName) => (
-                  <TableCell
-                    className={styles.tableHeaderItem}
-                    key={columnName}
-                  >
-                    {tableTitle[columnName]}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
+            <AdminTableHead tableName={'userInfo'} table={tableTitle} />
             <TableBody className={styles.tableBody}>
               {userManagements.userInfoList.length > 0 ? (
                 userManagements.userInfoList.map((userInfo: IUser) => (
@@ -156,9 +154,7 @@ export default function UserManagementTable() {
                   </TableRow>
                 ))
               ) : (
-                <TableRow>
-                  <TableCell>가입 유저가 없습니다</TableCell>
-                </TableRow>
+                <AdminEmptyItem content={'유저 정보가 비어있습니다'} />
               )}
             </TableBody>
           </Table>

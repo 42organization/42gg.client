@@ -4,7 +4,6 @@ import {
   Table,
   TableBody,
   TableContainer,
-  TableHead,
   TableRow,
   TableCell,
   Paper,
@@ -14,6 +13,10 @@ import { getFormattedDateToString } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import {
+  AdminEmptyItem,
+  AdminTableHead,
+} from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/penalty/PenaltyTable.module.scss';
 
@@ -125,18 +128,7 @@ export default function PenaltyTable() {
         </div>
         <TableContainer className={styles.tableContainer} component={Paper}>
           <Table className={styles.table} aria-label='penalty table'>
-            <TableHead className={styles.tableHeader}>
-              <TableRow>
-                {tableFormat['penalty'].columns.map((columnName: string) => (
-                  <TableCell
-                    key={columnName}
-                    className={styles.tableHeaderItem}
-                  >
-                    {tableTitle[columnName]}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
+            <AdminTableHead tableName={'penalty'} table={tableTitle} />
             <TableBody className={styles.tableBody}>
               {penaltyInfo.penaltyList.length > 0 ? (
                 penaltyInfo.penaltyList.map(
@@ -178,9 +170,7 @@ export default function PenaltyTable() {
                   )
                 )
               ) : (
-                <TableRow>
-                  <TableCell>비어있습니다</TableCell>
-                </TableRow>
+                <AdminEmptyItem content={'패널티 기록이 비어있습니다'} />
               )}
             </TableBody>
           </Table>

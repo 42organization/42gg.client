@@ -6,7 +6,6 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import { instanceInManage } from 'utils/axios';
@@ -14,6 +13,10 @@ import { getFormattedDateToString } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import {
+  AdminEmptyItem,
+  AdminTableHead,
+} from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/feedback/FeedbackTable.module.scss';
 
@@ -133,18 +136,7 @@ export default function FeedbackTable() {
         </div>
         <TableContainer className={styles.tableContainer} component={Paper}>
           <Table className={styles.table} aria-label='customized table'>
-            <TableHead className={styles.tableHeader}>
-              <TableRow>
-                {tableFormat['feedback'].columns.map((columnName) => (
-                  <TableCell
-                    className={styles.tableHeaderItem}
-                    key={columnName}
-                  >
-                    {tableTitle[columnName]}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
+            <AdminTableHead tableName={'feedback'} table={tableTitle} />
             <TableBody className={styles.tableBody}>
               {feedbackInfo.feedbackList.length > 0 ? (
                 feedbackInfo.feedbackList.map((feedback: IFeedback) => (
@@ -189,9 +181,7 @@ export default function FeedbackTable() {
                   </TableRow>
                 ))
               ) : (
-                <TableRow>
-                  <TableCell>접수된 피드백이 없습니다</TableCell>
-                </TableRow>
+                <AdminEmptyItem content={'접수된 피드백이 없습니다'} />
               )}
             </TableBody>
           </Table>

@@ -13,7 +13,7 @@ import { toastState } from 'utils/recoil/toast';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import styles from 'styles/admin/coin/CoinPolicy.module.scss';
 
-const coinPolicyTableTitle: { [key: string]: string } = {
+const tableTitle: { [key: string]: string } = {
   attendance: '출석 획득',
   normal: '일반게임 획득',
   rankWin: '랭크게임 승리 획득',
@@ -59,10 +59,7 @@ function CoinPolicy() {
     <>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <AdminTableHead
-            tableName={'coinPolicy'}
-            table={coinPolicyTableTitle}
-          />
+          <AdminTableHead tableName={'coinPolicy'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             <TableRow className={styles.tableRow}>
               <TableCell className={styles.tableBodyItem}>

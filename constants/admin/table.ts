@@ -59,7 +59,11 @@ export const tableFormat: TableFormat = {
       value: ['해제'],
     },
   },
-  season: {
+  seasonCreate: {
+    name: '시즌 생성',
+    columns: ['seasonName', 'startTime', 'startPpp', 'pppGap', 'create'],
+  },
+  seasonHistory: {
     name: '시즌 목록',
     columns: [
       'seasonId',
@@ -86,11 +90,18 @@ export const tableFormat: TableFormat = {
   },
   megaphoneList: {
     name: '확성기 사용 내역',
-    columns: ['megaphoneId', 'usedAt', 'intraId', 'content', 'status'],
+    columns: [
+      'megaphoneId',
+      'usedAt',
+      'intraId',
+      'content',
+      'status',
+      'delete',
+    ],
   },
   profileList: {
     name: '프로필 변경권 사용 내역',
-    columns: ['profileId', 'date', 'intraId', 'imageUri'],
+    columns: ['profileId', 'date', 'intraId', 'imageUri', 'delete'],
   },
   itemList: {
     name: '상점 아이템 목록',
@@ -103,6 +114,8 @@ export const tableFormat: TableFormat = {
       'originalPrice',
       'discount',
       'salePrice',
+      'edit',
+      'delete',
     ],
   },
   itemHistory: {

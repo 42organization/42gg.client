@@ -6,7 +6,6 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import { Ireceipt, IreceiptTable } from 'types/admin/adminReceiptType';
@@ -15,10 +14,14 @@ import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import {
+  AdminEmptyItem,
+  AdminTableHead,
+} from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/receipt/ReceiptList.module.scss';
 
-const receiptListTableTitle: { [key: string]: string } = {
+const tableTitle: { [key: string]: string } = {
   receiptId: 'ID',
   createdAt: '구매일자',
   itemName: '아이템명',
@@ -27,16 +30,6 @@ const receiptListTableTitle: { [key: string]: string } = {
   ownerIntra: '수령자',
   itemStatus: '아이템 상태',
 };
-
-const tableColumnName = [
-  'receiptId',
-  'createdAt',
-  'itemName',
-  'itemPrice',
-  'purchaserIntra',
-  'ownerIntra',
-  'itemStatus',
-];
 
 function ReceiptList() {
   const [receiptData, setReceiptData] = useState<IreceiptTable>({
@@ -122,15 +115,7 @@ function ReceiptList() {
       </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <TableHead className={styles.tableHeader}>
-            <TableRow>
-              {tableColumnName.map((column, idx) => (
-                <TableCell className={styles.tableHeaderItem} key={idx}>
-                  {receiptListTableTitle[column]}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+          <AdminTableHead tableName={'receiptList'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             {receiptData.receiptList.length > 0 ? (
               receiptData.receiptList.map((receipt: Ireceipt) => (
@@ -147,11 +132,7 @@ function ReceiptList() {
                 </TableRow>
               ))
             ) : (
-              <TableRow className={styles.tableRow}>
-                <TableCell className={styles.tableBodyItem}>
-                  비어있습니다
-                </TableCell>
-              </TableRow>
+              <AdminEmptyItem content={'아이템 거래내역이 비어있습니다'} />
             )}
           </TableBody>
         </Table>

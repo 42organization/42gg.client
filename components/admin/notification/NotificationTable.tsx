@@ -6,7 +6,6 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import { instanceInManage } from 'utils/axios';
@@ -14,6 +13,7 @@ import { getFormattedDateToString } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import { AdminTableHead } from 'components/admin/common/AdminTable';
 import CreateNotiButton from 'components/admin/notification/CreateNotiButton';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/notification/NotificationTable.module.scss';
@@ -135,18 +135,7 @@ export default function NotificationTable() {
         </div>
         <TableContainer className={styles.tableContainer} component={Paper}>
           <Table className={styles.table} aria-label='customized table'>
-            <TableHead className={styles.tableHeader}>
-              <TableRow>
-                {tableFormat['notification'].columns.map((columnName) => (
-                  <TableCell
-                    className={styles.tableHeaderItem}
-                    key={columnName}
-                  >
-                    {tableTitle[columnName]}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
+            <AdminTableHead tableName={'notification'} table={tableTitle} />
             <TableBody className={styles.tableBody}>
               {notificationInfo.notiList.map((notification: INotification) => (
                 <TableRow key={notification.notiId} className={styles.tableRow}>

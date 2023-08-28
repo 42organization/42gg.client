@@ -22,10 +22,14 @@ export function AdminTableHead({ tableName, table }: IAdminTableHead) {
   );
 }
 
-export function AdminEmptyItem(content: string) {
+interface IAdminEmpty {
+  content: string;
+}
+
+export function AdminEmptyItem({ content }: IAdminEmpty) {
   return (
-    <TableRow>
-      <TableCell>{content}</TableCell>
+    <TableRow className={styles.tableRow}>
+      <TableCell className={styles.tableBodyItem}>{content}</TableCell>
     </TableRow>
   );
 }

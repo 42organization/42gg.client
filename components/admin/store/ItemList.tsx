@@ -7,7 +7,6 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import { Item, ItemList } from 'types/itemTypes';
@@ -15,9 +14,13 @@ import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
+import {
+  AdminEmptyItem,
+  AdminTableHead,
+} from 'components/admin/common/AdminTable';
 import styles from 'styles/admin/store/ItemList.module.scss';
 
-const itemListTableTitle: { [key: string]: string } = {
+const tableTitle: { [key: string]: string } = {
   itemId: 'ID',
   itemName: '아이템명',
   content: '설명',
@@ -29,19 +32,6 @@ const itemListTableTitle: { [key: string]: string } = {
   edit: '수정',
   delete: '삭제',
 };
-
-const tableColumnName = [
-  'itemId',
-  'itemName',
-  'content',
-  'itemType',
-  'imageUri',
-  'originalPrice',
-  'discount',
-  'salePrice',
-  'edit',
-  'delete',
-];
 
 const MAX_CONTENT_LENGTH = 15;
 
@@ -97,15 +87,7 @@ function ItemList() {
     <>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <TableHead className={styles.tableHeader}>
-            <TableRow>
-              {tableColumnName.map((column, idx) => (
-                <TableCell className={styles.tableHeaderItem} key={idx}>
-                  {itemListTableTitle[column]}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+          <AdminTableHead tableName={'itemList'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             {itemListData.itemList.length > 0 ? (
               itemListData.itemList.map((item: Item) => (
@@ -121,6 +103,20 @@ function ItemList() {
                               width={30}
                               height={30}
                             />
+                          ) : columnName === 'edit' ? (
+                            <button
+                              className={styles.editBtn}
+                              onClick={() => editItem(item)}
+                            >
+                              수정
+                            </button>
+                          ) : columnName === 'delete' ? (
+                            <button
+                              className={styles.deleteBtn}
+                              onClick={() => deleteItem(item)}
+                            >
+                              삭제
+                            </button>
                           ) : item[columnName as keyof Item].toString().length >
                             MAX_CONTENT_LENGTH ? (
                             <div>
@@ -141,30 +137,10 @@ function ItemList() {
                       );
                     }
                   )}
-                  <TableCell className={styles.tableBodyItem}>
-                    <button
-                      className={styles.editBtn}
-                      onClick={() => editItem(item)}
-                    >
-                      수정
-                    </button>
-                  </TableCell>
-                  <TableCell className={styles.tableBodyItem}>
-                    <button
-                      className={styles.deleteBtn}
-                      onClick={() => deleteItem(item)}
-                    >
-                      삭제
-                    </button>
-                  </TableCell>
                 </TableRow>
               ))
             ) : (
-              <TableRow className={styles.tableRow}>
-                <TableCell className={styles.tableBodyItem}>
-                  비어있습니다
-                </TableCell>
-              </TableRow>
+              <AdminEmptyItem content={'아이템 목록이 비어있습니다'} />
             )}
           </TableBody>
         </Table>

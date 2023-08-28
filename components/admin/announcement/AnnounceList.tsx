@@ -11,7 +11,10 @@ import {
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { instanceInManage } from 'utils/axios';
 import { tableFormat } from 'constants/admin/table';
-import { AdminTableHead } from 'components/admin/common/AdminTable';
+import {
+  AdminEmptyItem,
+  AdminTableHead,
+} from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/announcement/AnnounceList.module.scss';
 import 'react-quill/dist/quill.snow.css';
@@ -121,9 +124,7 @@ export default function AnnounceList() {
                 )
               )
             ) : (
-              <TableRow>
-                <TableCell>기존 공지사항이 없습니다</TableCell>
-              </TableRow>
+              <AdminEmptyItem content={'기존 공지사항이 없습니다'} />
             )}
           </TableBody>
         </Table>
