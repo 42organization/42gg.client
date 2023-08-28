@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+export {};
+
 // 로그인
 Cypress.Commands.add('login', (username: string, password: string) => {
   // intra login
