@@ -1,5 +1,5 @@
 export interface IUser {
-  id?: number;
+  id: number;
   intraId: string;
   statusMessage: string;
   roleType: 'USER' | 'GUEST' | 'ADMIN';
@@ -11,10 +11,12 @@ export interface IUserTable {
   currentPage: number;
 }
 
-export interface IUserInfo extends IUser {
+export interface IUserInfo {
   userId: number;
   userImageUri: string | null;
+  statusMessage: string;
   racketType: string;
+  roleType: 'USER' | 'GUEST' | 'ADMIN';
   wins: number | '';
   losses: number | '';
   ppp: number | '';
