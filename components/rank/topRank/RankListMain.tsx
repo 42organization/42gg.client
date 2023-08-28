@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { userImages, RankUser, NormalUser, Rank } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
 import RankListItemMain from 'components/rank/topRank/RankListItemMain';
@@ -12,17 +12,11 @@ interface RankListMainProps {
 }
 
 export default function RankListMain({ isMain, season }: RankListMainProps) {
-  const [Mode, setMode] = useRecoilState(colorToggleSelector);
+  const Mode = useRecoilValue(colorToggleSelector);
   const [rank, setRanker] = useState<userImages[]>([]);
   const [page] = useState<number>(1);
 
-  useEffect(() => {
-    if (isMain) {
-      setMode('RANK');
-    }
-  }, [isMain]);
   const makePathRanker = useMemo(() => {
-    // return `/pingpong/users/images?seasonId=${season}&mode=${Mode}`;
     return `rank/${Mode}`;
   }, [season, Mode, isMain]);
 
