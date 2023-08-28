@@ -22,6 +22,12 @@ export default function AdminEditItemModal(props: Item) {
   const setSnackBar = useSetRecoilState(toastState);
   const { imgData, imgPreview, uploadImg } = useUploadImg();
 
+  const editErrorResponse: { [key: string]: string } = {
+    IT200: '아이템 타입이 일치하지 않습니다.',
+    IT413: '아이템 이미지가 너무 큽니다.',
+    IT415: '아이템 이미지 타입이 jpeg가 아닙니다.',
+  };
+
   const editItemHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -66,13 +72,22 @@ export default function AdminEditItemModal(props: Item) {
         message: '아이템 정보가 수정되었습니다.',
         clicked: true,
       });
-    } catch (e: unknown) {
-      setSnackBar({
-        toastName: 'edit item',
-        severity: 'error',
-        message: `아이템 정보를 수정할 수 없습니다.`,
-        clicked: true,
-      });
+    } catch (e: any) {
+      if (e.response.data.code in editErrorResponse) {
+        setSnackBar({
+          toastName: 'edit item',
+          severity: 'error',
+          message: editErrorResponse[e.response.data.code],
+          clicked: true,
+        });
+      } else {
+        setSnackBar({
+          toastName: 'edit item',
+          severity: 'error',
+          message: `아이템 정보를 수정할 수 없습니다.`,
+          clicked: true,
+        });
+      }
     }
     setModal({ modalName: null });
   };
