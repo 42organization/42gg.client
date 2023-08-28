@@ -6,12 +6,12 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { instanceInManage } from 'utils/axios';
 import { tableFormat } from 'constants/admin/table';
+import { AdminTableHead } from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/announcement/AnnounceList.module.scss';
 import 'react-quill/dist/quill.snow.css';
@@ -76,15 +76,7 @@ export default function AnnounceList() {
       </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <TableHead className={styles.tableHeader}>
-            <TableRow>
-              {tableFormat['announcement'].columns.map((columnName) => (
-                <TableCell className={styles.tableHeaderItem} key={columnName}>
-                  {tableTitle[columnName]}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+          <AdminTableHead tableName={'announcement'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             {announcementInfo.announcementList.length > 0 ? (
               announcementInfo.announcementList.map(

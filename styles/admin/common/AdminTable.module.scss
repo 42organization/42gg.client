@@ -1,0 +1,13 @@
+@import 'styles/common.scss';
+
+.tableHeader {
+  background-color: lightgray;
+
+  .tableHeaderItem {
+    padding: 0.5rem;
+    font-size: $small-font;
+    font-weight: 600;
+    line-height: 150%;
+    text-align: center;
+  }
+}

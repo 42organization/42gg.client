@@ -6,11 +6,11 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
+import { AdminTableHead } from 'components/admin/common/AdminTable';
 import styles from 'styles/admin/coin/CoinPolicy.module.scss';
 
 const coinPolicyTableTitle: { [key: string]: string } = {
@@ -20,8 +20,6 @@ const coinPolicyTableTitle: { [key: string]: string } = {
   rankLose: '랭크게임 패배 획득',
   edit: '정책 등록',
 };
-
-const tableColumnName = ['attendance', 'normal', 'rankWin', 'rankLose', 'edit'];
 
 function CoinPolicy() {
   const attendanceRef = useRef<HTMLInputElement>(null);
@@ -61,15 +59,10 @@ function CoinPolicy() {
     <>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <TableHead className={styles.tableHeader}>
-            <TableRow>
-              {tableColumnName.map((column, idx) => (
-                <TableCell className={styles.tableHeaderItem} key={idx}>
-                  {coinPolicyTableTitle[column]}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+          <AdminTableHead
+            tableName={'coinPolicy'}
+            table={coinPolicyTableTitle}
+          />
           <TableBody className={styles.tableBody}>
             <TableRow className={styles.tableRow}>
               <TableCell className={styles.tableBodyItem}>

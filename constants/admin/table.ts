@@ -120,6 +120,10 @@ export const tableFormat: TableFormat = {
       'visible',
     ],
   },
+  coinPolicy: {
+    name: '재화 정책 변경',
+    columns: ['attendance', 'normal', 'rankWin', 'rankLose', 'edit'],
+  },
   coinPolicyHistory: {
     name: '재화 정책 변경 이력',
     columns: [

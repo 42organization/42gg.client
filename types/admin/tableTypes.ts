@@ -11,6 +11,7 @@ export type TableName =
   | 'profileList'
   | 'itemList'
   | 'itemHistory'
+  | 'coinPolicy'
   | 'coinPolicyHistory';
 
 export type EtcType = 'button' | 'toggle';
