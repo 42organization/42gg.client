@@ -47,8 +47,8 @@
   .ball {
     @include Balls;
     position: absolute;
-    top: 25rem;
-    left: 45%;
+    top: calc(55% - 1.5rem);
+    left: calc(50% - 1.5rem);
     transform: translate(0, 0);
     animation: bounce 1s 3, disappear 0.1s 3.1s both;
   }
