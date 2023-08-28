@@ -1,11 +1,10 @@
-import { useRecoilValue } from 'recoil';
-import { userState } from 'utils/recoil/layout';
-import useBasicProfile from 'hooks/users/useBasicProfile';
 import styles from 'styles/modal/store/BackgroundPreview.module.scss';
 
-export default function BackgroundPreview() {
-  const { intraId } = useRecoilValue(userState);
-  const { backgroundType } = useBasicProfile({ profileId: intraId });
+export default function BackgroundPreview({
+  backgroundType,
+}: {
+  backgroundType: string;
+}) {
   // TODO: ui gradient에서 색상 이름 가져오기
   const colorList = new Map([
     ['BASIC', 'BASIC'],
