@@ -9,13 +9,14 @@ import {
   TableRow,
 } from '@mui/material';
 import { Imegaphone, ImegaphoneTable } from 'types/admin/adminReceiptType';
-import { getFormattedDateToString } from 'utils/handleTime';
+import { dateToStringShort } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import {
+  AdminContent,
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/admin/common/AdminTable';
@@ -24,8 +25,8 @@ import styles from 'styles/admin/receipt/MegaphoneList.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   megaphoneId: 'ID',
-  usedAt: '사용일자',
-  intraId: '사용자',
+  usedAt: '사용 시간',
+  intraId: 'Intra ID',
   content: '내용',
   status: '상태',
   delete: '삭제',
@@ -57,12 +58,9 @@ function MegaphoneList() {
       );
       setMegaphoneData({
         megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {
-          const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(megaphone.usedAt)
-          );
           return {
             ...megaphone,
-            usedAt: `${year}-${month}-${date} ${hour}:${min}`,
+            usedAt: dateToStringShort(new Date(megaphone.usedAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -86,12 +84,9 @@ function MegaphoneList() {
       );
       setMegaphoneData({
         megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {
-          const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(megaphone.usedAt)
-          );
           return {
             ...megaphone,
-            usedAt: `${year}-${month}-${date} ${hour}:${min}`,
+            usedAt: dateToStringShort(new Date(megaphone.usedAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -111,14 +106,6 @@ function MegaphoneList() {
     setModal({
       modalName: 'ADMIN-MEGAPHONE_DELETE',
       megaphone: megaphone,
-    });
-  };
-
-  const openDetailModal = (megaphone: Imegaphone) => {
-    setModal({
-      modalName: 'ADMIN-DETAIL_CONTENT',
-      detailTitle: megaphone.megaphoneId.toString(),
-      detailContent: megaphone.content,
     });
   };
 
@@ -152,22 +139,15 @@ function MegaphoneList() {
                             >
                               삭제
                             </button>
-                          ) : megaphone[
-                              columnName as keyof Imegaphone
-                            ].toString().length > MAX_CONTENT_LENGTH ? (
-                            <div>
-                              {megaphone[columnName as keyof Imegaphone]
-                                .toString()
-                                .slice(0, MAX_CONTENT_LENGTH)}
-                              <span
-                                style={{ cursor: 'pointer', color: 'grey' }}
-                                onClick={() => openDetailModal(megaphone)}
-                              >
-                                ...더보기
-                              </span>
-                            </div>
                           ) : (
-                            megaphone[columnName as keyof Imegaphone].toString()
+                            <AdminContent
+                              content={megaphone[
+                                columnName as keyof Imegaphone
+                              ].toString()}
+                              maxLen={MAX_CONTENT_LENGTH}
+                              detailTitle={megaphone.megaphoneId.toString()}
+                              detailContent={megaphone.content}
+                            />
                           )}
                         </TableCell>
                       );

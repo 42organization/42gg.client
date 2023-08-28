@@ -6,7 +6,6 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import { ISeason, ISeasonList } from 'types/seasonTypes';
@@ -18,10 +17,10 @@ import styles from 'styles/admin/season/SeasonList.module.scss';
 import { AdminTableHead } from '../common/AdminTable';
 
 const tableTitle: { [key: string]: string } = {
-  seasonId: '시즌ID',
-  seasonName: '시즌명',
-  startTime: '시작시간',
-  endTime: '종료시간',
+  seasonId: 'ID',
+  seasonName: '시즌 이름',
+  startTime: '시작 시간',
+  endTime: '종료 시간',
   startPpp: '시작 PPP',
   pppGap: '제한 PPP',
   status: '상태',

@@ -6,9 +6,9 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
+import { IUser, IUserTable } from 'types/admin/adminUserTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
@@ -20,23 +20,10 @@ import { AdminEmptyItem, AdminTableHead } from '../common/AdminTable';
 const tableTitle: { [key: string]: string } = {
   id: 'ID',
   roleType: '권한',
-  intraId: '인트라ID',
-  statusMessage: '상태메시지',
+  intraId: 'Intra ID',
+  statusMessage: '상태 메시지',
   etc: '기타',
 };
-
-interface IUser {
-  id: number;
-  intraId: string;
-  statusMessage: string;
-  roleType: string; // TODO : type으로 변경
-}
-
-interface IUserTable {
-  userInfoList: IUser[];
-  totalPage: number;
-  currentPage: number;
-}
 
 export default function UserManagementTable() {
   const [userManagements, setUserManagements] = useState<IUserTable>({
@@ -47,14 +34,6 @@ export default function UserManagementTable() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
   const setModal = useSetRecoilState(modalState);
-
-  const tableTitle: { [key: string]: string } = {
-    id: 'ID',
-    roleType: '권한',
-    intraId: 'Intra ID',
-    statusMessage: '상태 메시지',
-    etc: '기타',
-  };
 
   const buttonList: string[] = [styles.detail, styles.penalty];
 

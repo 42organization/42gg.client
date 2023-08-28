@@ -13,7 +13,7 @@ import {
   IcoinPolicyHistoryTable,
 } from 'types/admin/adminCoinTypes';
 import { instanceInManage } from 'utils/axios';
-import { getFormattedDateToString } from 'utils/handleTime';
+import { dateToStringShort } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
@@ -25,8 +25,8 @@ import styles from 'styles/admin/coin/CoinPolicyHistory.module.scss';
 
 const coinPolicyHistoryTableTitle: { [key: string]: string } = {
   coinPolicyId: 'ID',
-  createdAt: '등록 날짜',
-  createUserId: '등록 유저',
+  createdAt: '등록 시간',
+  createUserId: '등록한 사람',
   attendance: '출석 획득',
   normal: '일반게임 획득',
   rankWin: '랭크게임 승리 획득',
@@ -51,12 +51,13 @@ function CoinPolicyHistory() {
       setCoinPolicyHistoryData({
         coinPolicyList: res.data.coinPolicyList.map(
           (coinPolicyHistory: IcoinPolicyHistory) => {
-            const { year, month, date, hour, min } = getFormattedDateToString(
-              new Date(coinPolicyHistory.createdAt)
-            );
+            const date = new Date(coinPolicyHistory.createdAt);
             return {
               ...coinPolicyHistory,
-              createdAt: `${year}-${month}-${date} ${hour}:${min}`,
+              createdAt:
+                dateToStringShort(date) +
+                ':' +
+                date.getSeconds().toString().padStart(2, '0'),
             };
           }
         ),

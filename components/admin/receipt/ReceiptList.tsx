@@ -9,7 +9,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { Ireceipt, IreceiptTable } from 'types/admin/adminReceiptType';
-import { getFormattedDateToString } from 'utils/handleTime';
+import { dateToStringShort } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -23,12 +23,12 @@ import styles from 'styles/admin/receipt/ReceiptList.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   receiptId: 'ID',
-  createdAt: '구매일자',
-  itemName: '아이템명',
-  itemPrice: '구매가격',
+  createdAt: '구매 시간',
+  itemName: '아이템 이름',
+  itemPrice: '구매 가격',
   purchaserIntra: '구매자',
   ownerIntra: '수령자',
-  itemStatus: '아이템 상태',
+  itemStatus: '상태',
 };
 
 function ReceiptList() {
@@ -54,12 +54,9 @@ function ReceiptList() {
       );
       setReceiptData({
         receiptList: res.data.receiptList.map((receipt: Ireceipt) => {
-          const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(receipt.createdAt)
-          );
           return {
             ...receipt,
-            createdAt: `${year}-${month}-${date} ${hour}:${min}`,
+            createdAt: dateToStringShort(new Date(receipt.createdAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -83,12 +80,9 @@ function ReceiptList() {
       );
       setReceiptData({
         receiptList: res.data.receiptList.map((receipt: Ireceipt) => {
-          const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(receipt.createdAt)
-          );
           return {
             ...receipt,
-            createdAt: `${year}-${month}-${date} ${hour}:${min}`,
+            createdAt: dateToStringShort(new Date(receipt.createdAt)),
           };
         }),
         totalPage: res.data.totalPage,

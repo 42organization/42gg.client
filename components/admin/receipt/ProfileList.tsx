@@ -10,7 +10,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { Iprofile, IprofileTable } from 'types/admin/adminReceiptType';
-import { getFormattedDateToString } from 'utils/handleTime';
+import { dateToStringShort } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
@@ -25,7 +25,7 @@ import styles from 'styles/admin/receipt/ProfileList.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   profileId: 'ID',
-  date: '사용일자',
+  date: '사용 시간',
   intraId: '사용자',
   imageUri: '현재 이미지',
   delete: '삭제',
@@ -55,12 +55,9 @@ function ProfileList() {
       );
       setProfileData({
         profileList: res.data.profileList.map((profile: Iprofile) => {
-          const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(profile.date)
-          );
           return {
             ...profile,
-            date: `${year}-${month}-${date} ${hour}:${min}`,
+            date: dateToStringShort(new Date(profile.date)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -84,12 +81,9 @@ function ProfileList() {
       );
       setProfileData({
         profileList: res.data.profileList.map((profile: Iprofile) => {
-          const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(profile.date)
-          );
           return {
             ...profile,
-            date: `${year}-${month}-${date} ${hour}:${min}`,
+            date: dateToStringShort(new Date(profile.date)),
           };
         }),
         totalPage: res.data.totalPage,

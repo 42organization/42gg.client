@@ -56,37 +56,35 @@ function CoinPolicy() {
   };
 
   return (
-    <>
-      <TableContainer className={styles.tableContainer} component={Paper}>
-        <Table className={styles.table} aria-label='customized table'>
-          <AdminTableHead tableName={'coinPolicy'} table={tableTitle} />
-          <TableBody className={styles.tableBody}>
-            <TableRow className={styles.tableRow}>
-              <TableCell className={styles.tableBodyItem}>
-                <input type='number' ref={attendanceRef} />
-              </TableCell>
-              <TableCell className={styles.tableBodyItem}>
-                <input type='number' ref={normalRef} />
-              </TableCell>
-              <TableCell className={styles.tableBodyItem}>
-                <input type='number' ref={rankWinRef} />
-              </TableCell>
-              <TableCell className={styles.tableBodyItem}>
-                <input type='number' ref={rankLoseRef} />
-              </TableCell>
-              <TableCell className={styles.tableBodyItem}>
-                <button
-                  className={styles.editBtn}
-                  onClick={() => editCoinPolicy()}
-                >
-                  등록
-                </button>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </>
+    <TableContainer className={styles.tableContainer} component={Paper}>
+      <Table className={styles.table} aria-label='customized table'>
+        <AdminTableHead tableName={'coinPolicy'} table={tableTitle} />
+        <TableBody className={styles.tableBody}>
+          <TableRow className={styles.tableRow}>
+            <TableCell className={styles.tableBodyItem}>
+              <input type='number' ref={attendanceRef} />
+            </TableCell>
+            <TableCell className={styles.tableBodyItem}>
+              <input type='number' ref={normalRef} />
+            </TableCell>
+            <TableCell className={styles.tableBodyItem}>
+              <input type='number' ref={rankWinRef} />
+            </TableCell>
+            <TableCell className={styles.tableBodyItem}>
+              <input type='number' ref={rankLoseRef} />
+            </TableCell>
+            <TableCell className={styles.tableBodyItem}>
+              <button
+                className={styles.editBtn}
+                onClick={() => editCoinPolicy()}
+              >
+                등록
+              </button>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 

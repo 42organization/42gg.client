@@ -15,8 +15,8 @@ import { AdminTableHead } from 'components/admin/common/AdminTable';
 import styles from 'styles/admin/season/SeasonCreate.module.scss';
 
 const tableTitle: { [key: string]: string } = {
-  seasonName: '시즌명',
-  startTime: '시작시간',
+  seasonName: '시즌 이름',
+  startTime: '시작 시간',
   startPpp: '시작 PPP',
   pppGap: '제한 PPP',
   create: '생성',

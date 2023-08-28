@@ -8,12 +8,14 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
+import { IFeedback, IFeedbackTable } from 'types/admin/adminFeedbackTypes';
 import { instanceInManage } from 'utils/axios';
-import { getFormattedDateToString } from 'utils/handleTime';
+import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import {
+  AdminContent,
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/admin/common/AdminTable';
@@ -22,27 +24,12 @@ import styles from 'styles/admin/feedback/FeedbackTable.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: 'ID',
-  intraId: 'intra ID',
+  intraId: 'Intra ID',
   category: '종류',
   content: '내용',
-  createdAt: '생성일',
+  createdAt: '생성 시간',
   isSolved: '해결 여부',
 };
-
-export interface IFeedback {
-  id: number;
-  intraId: string;
-  category: number; // 1: bug, 2: suggestion, 3: question
-  content: string;
-  createdAt: Date;
-  isSolved: boolean;
-}
-
-interface IFeedbackTable {
-  feedbackList: IFeedback[];
-  totalPage: number;
-  currentPage: number;
-}
 
 const MAX_CONTENT_LENGTH = 20;
 
@@ -64,12 +51,9 @@ export default function FeedbackTable() {
       setIntraId(intraId);
       setFeedbackInfo({
         feedbackList: res.data.feedbackList.map((feedback: IFeedback) => {
-          const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(feedback.createdAt)
-          );
           return {
             ...feedback,
-            createdAt: `${year}-${month}-${date} ${hour}:${min}`,
+            createdAt: dateToStringShort(new Date(feedback.createdAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -87,12 +71,9 @@ export default function FeedbackTable() {
       );
       setFeedbackInfo({
         feedbackList: res.data.feedbackList.map((feedback: IFeedback) => {
-          const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(feedback.createdAt)
-          );
           return {
             ...feedback,
-            createdAt: `${year}-${month}-${date} ${hour}:${min}`,
+            createdAt: dateToStringShort(new Date(feedback.createdAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -112,14 +93,6 @@ export default function FeedbackTable() {
     setModal({
       modalName: 'ADMIN-CHECK_FEEDBACK',
       feedback,
-    });
-  };
-
-  const openDetailModal = (feedback: IFeedback) => {
-    setModal({
-      modalName: 'ADMIN-DETAIL_CONTENT',
-      detailTitle: feedback.intraId,
-      detailContent: feedback.content,
     });
   };
 
@@ -157,22 +130,13 @@ export default function FeedbackTable() {
                                 <option value='0'>처리중</option>
                                 <option value='1'>처리완료</option>
                               </select>
-                            ) : (value?.toString() || '').length >
-                              MAX_CONTENT_LENGTH ? (
-                              <div>
-                                {(value?.toString() || '').slice(
-                                  0,
-                                  MAX_CONTENT_LENGTH
-                                )}
-                                <span
-                                  style={{ cursor: 'pointer', color: 'grey' }}
-                                  onClick={() => openDetailModal(feedback)}
-                                >
-                                  ...더보기
-                                </span>
-                              </div>
                             ) : (
-                              value?.toString() || ''
+                              <AdminContent
+                                content={value?.toString() || ''}
+                                maxLen={MAX_CONTENT_LENGTH}
+                                detailTitle={feedback.intraId}
+                                detailContent={feedback.content}
+                              />
                             )}
                           </TableCell>
                         );
