@@ -43,8 +43,6 @@ const tableColumnName = [
   'delete',
 ];
 
-const MAX_CONTENT_LENGTH = 15;
-
 function ItemList() {
   const [itemListData, setItemListData] = useState<ItemList>({
     itemList: [],
@@ -83,8 +81,8 @@ function ItemList() {
   const openDetailModal = (item: Item) => {
     setModal({
       modalName: 'ADMIN-DETAIL_CONTENT',
-      detailTitle: item.itemName,
-      detailContent: item.content,
+      detailTitle: item.mainContent,
+      detailContent: item.subContent,
     });
   };
 
@@ -120,12 +118,9 @@ function ItemList() {
                               width={30}
                               height={30}
                             />
-                          ) : item[columnName as keyof Item].toString().length >
-                            MAX_CONTENT_LENGTH ? (
+                          ) : columnName === 'content' ? (
                             <div>
-                              {item[columnName as keyof Item]
-                                ?.toString()
-                                .slice(0, MAX_CONTENT_LENGTH)}
+                              {item.mainContent}
                               <span
                                 style={{ cursor: 'pointer', color: 'grey' }}
                                 onClick={() => openDetailModal(item)}

@@ -45,8 +45,6 @@ const tableColumnName = [
   'visible',
 ];
 
-const MAX_CONTENT_LENGTH = 16;
-
 function ItemHistory() {
   const [itemHistoryData, setItemHistoryData] = useState<IitemHistoryList>({
     itemHistoryList: [],
@@ -90,8 +88,8 @@ function ItemHistory() {
   const openDetailModal = (itemHistory: IitemHistory) => {
     setModal({
       modalName: 'ADMIN-DETAIL_CONTENT',
-      detailTitle: itemHistory.name,
-      detailContent: itemHistory.content,
+      detailTitle: itemHistory.mainContent,
+      detailContent: itemHistory.subContent,
     });
   };
 
@@ -138,13 +136,9 @@ function ItemHistory() {
                                 height={30}
                                 alt='no'
                               />
-                            ) : itemHistory[
-                                columnName as keyof IitemHistory
-                              ].toString().length > MAX_CONTENT_LENGTH ? (
+                            ) : columnName === 'content' ? (
                               <div>
-                                {itemHistory[columnName as keyof IitemHistory]
-                                  ?.toString()
-                                  .slice(0, MAX_CONTENT_LENGTH)}
+                                {itemHistory.mainContent}
                                 <span
                                   style={{ cursor: 'pointer', color: 'grey' }}
                                   onClick={() => openDetailModal(itemHistory)}
