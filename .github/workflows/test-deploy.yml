@@ -1,0 +1,27 @@
+name: Test Deploy to Vercel
+
+# 실행에 앞서 vercel과 연동되어 있는 fork된 repository가 필요합니다.
+
+# 실행에 필요한 secret을 설정해야 합니다.
+# - TEST_DEPLOY_REPO_OWNER : fork-sync로 동기화할 repo의 owner
+
+# Parameters
+# - owner : fork-sync로 동기화할 repo의 owner
+# - base, head : 동기화할 브랜치 (from head to base)
+
+on:
+  push:
+    branches:
+      # - test-deploy
+      - GGFE-208-test-deploy-브랜치-설정
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fork-sync
+        uses: tgymnich/fork-sync@v1.9
+        with:
+          owner: ${{ secrets.TEST_DEPLOY_REPO_OWNER }}
+          base: GGFE-208-test-deploy-브랜치-설정
+          head: test-test-deploy
