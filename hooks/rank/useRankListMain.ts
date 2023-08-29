@@ -8,6 +8,7 @@ interface useRankListProps {
   season: number | undefined;
   setRanker: Dispatch<SetStateAction<userImages[]>>;
   page: number;
+  isMain: boolean;
 }
 
 const useRankListMain = ({
@@ -16,6 +17,7 @@ const useRankListMain = ({
   season,
   setRanker,
   page,
+  isMain,
 }: useRankListProps): void => {
   /*   const getRankerDataHandler = useAxiosGet<any>({
     url: makePathRanker,
@@ -30,7 +32,7 @@ const useRankListMain = ({
     type: 'setError',
   }); */
   const getRankerDataHandler = useMockAxiosGet<any>({
-    url: 'rank/user',
+    url: makePathRanker,
     setState: (data) => {
       [data.rankList[0], data.rankList[1]] = [
         data.rankList[1],
@@ -44,7 +46,7 @@ const useRankListMain = ({
 
   useEffect(() => {
     getRankerDataHandler();
-  }, [page, season, toggleMode]);
+  }, [page, season, toggleMode, isMain]);
 };
 
 export default useRankListMain;

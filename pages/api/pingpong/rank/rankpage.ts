@@ -12,6 +12,7 @@ export default function handler(
       ppp: 1041,
       statusMessage: '',
       tierImageUri: '/image/fallBackSrc.jpeg',
+      textColor: '#000000',
     },
     {
       intraId: 'hyungjpa',
@@ -19,6 +20,7 @@ export default function handler(
       ppp: 1041,
       statusMessage: '',
       tierImageUri: '/image/fallBackSrc.jpeg',
+      textColor: '#000000',
     },
     {
       intraId: 'hyungjpa',
@@ -26,6 +28,7 @@ export default function handler(
       ppp: 1041,
       statusMessage: '',
       tierImageUri: '/image/fallBackSrc.jpeg',
+      textColor: '#000000',
     },
     {
       intraId: 'hyungjpa',
@@ -33,6 +36,7 @@ export default function handler(
       ppp: 1041,
       statusMessage: '',
       tierImageUri: '/image/fallBackSrc.jpeg',
+      textColor: '#000000',
     },
     {
       intraId: 'hyungjpa',
@@ -40,6 +44,7 @@ export default function handler(
       ppp: 1041,
       statusMessage: '',
       tierImageUri: '/image/fallBackSrc.jpeg',
+      textColor: '#000000',
     },
   ];
 

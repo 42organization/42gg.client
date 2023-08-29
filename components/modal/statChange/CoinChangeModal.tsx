@@ -30,9 +30,11 @@ export default function CoinChangeModal(coin: CoinResult) {
       </div>
       <div className={styles.container}>
         <div className={styles.coinImage}>
-          <Image src='/image/coinImage.svg' width={50} height={50} alt='Coin' />
+          <Image src='/image/coinImage.svg' width={70} height={70} alt='Coin' />
         </div>
-        <CoinStat before={coin?.beforeCoin} after={coin?.afterCoin} />
+        <div className={styles.coinStat}>
+          <CoinStat before={coin?.beforeCoin} after={coin?.afterCoin} />
+        </div>
         <CoinAnimation amount={coin?.coinIncrement} />
         <div className={styles.guide}>화면을 클릭해주세요!</div>
       </div>

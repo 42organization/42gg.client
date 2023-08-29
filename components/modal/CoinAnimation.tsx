@@ -1,5 +1,5 @@
+import Image from 'next/image';
 import React from 'react';
-import CoinIcon from 'public/image/coin_image.svg';
 import styles from 'styles/modal/CoinAnimation.module.scss';
 
 interface amountProps {
@@ -20,9 +20,14 @@ export default function CoinAnimation({ amount }: amountProps) {
 
     return (
       <div key={index} className={`${stackStyle} ${styles.fall}`}>
-        <svg className={`${styles.coin}`}>
-          <CoinIcon />
-        </svg>
+        <div className={`${styles.coin}`}>
+          <Image
+            src='/image/coin_image.svg'
+            width={60}
+            height={60}
+            alt='Coin'
+          />
+        </div>
       </div>
     );
   });

@@ -13,6 +13,7 @@ export default function handler(
     beforeCoin: bcoin,
     afterCoin: acoin,
     coinIncrement: icoin,
+    isAttended: false,
   };
 
   res.status(200).json(coinData);
