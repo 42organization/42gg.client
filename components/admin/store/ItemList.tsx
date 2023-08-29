@@ -20,7 +20,8 @@ import styles from 'styles/admin/store/ItemList.module.scss';
 const itemListTableTitle: { [key: string]: string } = {
   itemId: 'ID',
   itemName: '아이템명',
-  content: '설명',
+  mainContent: '주설명',
+  subContent: '부설명',
   itemType: '타입',
   imageUri: '이미지',
   originalPrice: '원가',
@@ -33,7 +34,8 @@ const itemListTableTitle: { [key: string]: string } = {
 const tableColumnName = [
   'itemId',
   'itemName',
-  'content',
+  'mainContent',
+  'subContent',
   'itemType',
   'imageUri',
   'originalPrice',

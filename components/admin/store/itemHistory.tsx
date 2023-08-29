@@ -23,6 +23,8 @@ const itemHistoryTableTitle: { [key: string]: string } = {
   itemId: 'ID',
   createdAt: '변경일',
   name: '이름',
+  // mainContent: '주설명',
+  // subContent: '부설명',
   content: '설명',
   imageUri: '이미지',
   price: '원가',
@@ -36,6 +38,8 @@ const tableColumnName = [
   'itemId',
   'createdAt',
   'name',
+  // 'mainContent',
+  // 'subContent',
   'content',
   'imageUri',
   'price',
@@ -88,8 +92,10 @@ function ItemHistory() {
   const openDetailModal = (itemHistory: IitemHistory) => {
     setModal({
       modalName: 'ADMIN-DETAIL_CONTENT',
-      detailTitle: itemHistory.mainContent,
-      detailContent: itemHistory.subContent,
+      // detailTitle: itemHistory.mainContent,
+      // detailContent: itemHistory.subContent,
+      detailTitle: itemHistory.name,
+      detailContent: itemHistory.content,
     });
   };
 
@@ -138,7 +144,8 @@ function ItemHistory() {
                               />
                             ) : columnName === 'content' ? (
                               <div>
-                                {itemHistory.mainContent}
+                                {/* {itemHistory.mainContent} */}
+                                {itemHistory.content}
                                 <span
                                   style={{ cursor: 'pointer', color: 'grey' }}
                                   onClick={() => openDetailModal(itemHistory)}

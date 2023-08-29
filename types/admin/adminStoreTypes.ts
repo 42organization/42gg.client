@@ -2,8 +2,9 @@ export interface IitemHistory {
   itemId: number;
   createdAt: Date;
   name: string;
-  mainContent: string;
-  subContent: string;
+  // mainContent: string;
+  // subContent: string;
+  content: string;
   imageUri: string;
   price: number;
   discount: number;
