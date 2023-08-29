@@ -29,7 +29,7 @@ export default function GachaConfetti() {
     const y = height / 2;
     const vx = -2 + Math.random() * 4;
     const vy = Math.random() * -3;
-    const size = 5 + Math.random() * 4;
+    const size = 5 + Math.random() * 10;
     const color = colors[Math.floor(Math.random() * colors.length)];
     const opacity = 0.5 + Math.random() * 0.5;
 
