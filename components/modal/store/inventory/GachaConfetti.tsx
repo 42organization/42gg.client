@@ -12,7 +12,8 @@ interface IParticle {
 
 export default function GachaConfetti() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [context, setCtx] = useState<CanvasRenderingContext2D | null>(null);
+  const reqAnimationRef = useRef<number>(0);
+  const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
   const width = window.innerWidth;
   const height = window.innerHeight;
   const particles: IParticle[] = [];
@@ -21,8 +22,15 @@ export default function GachaConfetti() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    setCtx(canvas.getContext('2d'));
+    setContext(canvas.getContext('2d'));
   }, []);
+
+  useEffect(() => {
+    if (!context) return;
+    initParticles();
+    reqAnimationRef.current = requestAnimationFrame(confettiAnimation);
+    return () => cancelAnimationFrame(reqAnimationRef.current);
+  }, [context]);
 
   function createParticle() {
     const x = width / 2;
@@ -65,11 +73,8 @@ export default function GachaConfetti() {
       updateParticle(particle);
       drawParticle(particle, context);
     });
-    requestAnimationFrame(confettiAnimation);
+    reqAnimationRef.current = requestAnimationFrame(confettiAnimation);
   }
-
-  initParticles();
-  confettiAnimation();
 
   return (
     <canvas
