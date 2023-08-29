@@ -1,10 +1,13 @@
 name: Test Deploy to Vercel
 
+# action을 돌리기 전에 secret을 설정해야 한다.
+# - TEST_DEPLOY_REPO_OWNER : vercel과 연결된 repository의 owner
+# - TEST_DEPLOY_REPO_OWNER_TOKEN : vercel과 연결된 repository의 owner의 token (repo 권한 필요)
+
 on:
   push:
     branches:
-      # - test-deploy
-      - GGFE-208-test-deploy-브랜치-설정
+      - test-deploy
 
 jobs:
   sync:
@@ -33,4 +36,5 @@ jobs:
           source-directory: 'output'
           destination-github-username: ${{ secrets.TEST_DEPLOY_REPO_OWNER }}
           destination-repository-name: '42gg.client'
-          target-branch: 'test-test-deploy'
+          target-branch: 'test-deploy'
+          commit-message: '[Test-Deploy] Update from 42gg.client'
