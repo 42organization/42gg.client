@@ -48,8 +48,7 @@ export default function BasicProfile({ profileId }: ProfileProps) {
       {intraId && (
         <PlayerImage
           src={userImageUri}
-          // styleName={`mainProfile ${edge.toLowerCase()}`}
-          styleName={`mainProfile`}
+          styleName={`mainProfile ${edge ? edge.toLowerCase() : 'basic'}`}
           size={30}
         />
       )}
