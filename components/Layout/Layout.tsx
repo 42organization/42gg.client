@@ -51,7 +51,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
   ) : (
     <div className={styles.appContainer}>
       <div
-        className={`${styles.background} ${styles[colorMode.toLowerCase()]}`}
+        // className={`${styles.background} ${styles[colorMode.toLowerCase()]}`}
+        className={`${styles.background}`}
       >
         <div>
           {presentPath === '/statistics' && user.isAdmin ? (

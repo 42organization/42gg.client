@@ -12,19 +12,19 @@ const useGetUserSeason = (presentPath: string) => {
   const setSeasonList = useSetRecoilState<SeasonList>(seasonListState);
   const isLogIn = useRecoilValue(loginState);
 
-  /*   const getUserHandler = useAxiosGet({
+  const getUserHandler = useAxiosGet({
     url: '/pingpong/users',
     setState: setUser,
     err: 'JB02',
     type: 'setError',
-  }); */
-
-  const getUserHandler = useMockAxiosGet({
-    url: '/users/user',
-    setState: setUser,
-    err: 'JB02',
-    type: 'setError',
   });
+
+  // const getUserHandler = useMockAxiosGet({
+  //   url: '/users/user',
+  //   setState: setUser,
+  //   err: 'JB02',
+  //   type: 'setError',
+  // });
 
   const getSeasonListHandler = useAxiosGet<any>({
     url: '/pingpong/seasons',

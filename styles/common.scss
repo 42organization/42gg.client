@@ -390,15 +390,15 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   background: black;
   @include txtColor();
   &.red {
-    background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+    background-image: linear-gradient(to right, #f77062 0%, #fe5196 100%);
     @include txtColor();
   }
   &.yellow {
-    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 100%);
     @include txtColor();
   }
   &.green {
-    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+    background-image: linear-gradient(135deg, #81fbb8 10%, #28c76f 100%);
     @include txtColor();
   }
   &.blue {
@@ -406,25 +406,19 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
     @include txtColor();
   }
   &.black {
-    background: linear-gradient(
-      180.89deg,
-      rgba(114, 114, 114, 0.553) 26.68%,
-      rgba(82, 82, 82, 0.3) 47.47%,
-      rgba(61, 61, 61, 0.51) 65.76%,
-      rgba(0, 0, 0, 0) 84.03%
-    );
+    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
     @include txtColor();
   }
   &.rainbow {
-    background: linear-gradient(
-      90deg,
-      rgba(239, 80, 80, 0.553) 15%,
-      #f6d365 38%,
-      rgba(60, 238, 60, 0.553) 45.33%,
-      rgba(10, 122, 234, 0.867) 70%,
-      rgba(26, 26, 27, 0.568) 80.66%,
-      rgb(123, 97, 224) 100%
-    );
+    // background: linear-gradient(
+    //   90deg,
+    //   rgba(239, 80, 80, 0.553) 15%,
+    //   #f6d365 38%,
+    //   rgba(60, 238, 60, 0.553) 45.33%,
+    //   rgba(10, 122, 234, 0.867) 70%,
+    //   rgba(26, 26, 27, 0.568) 80.66%,
+    //   rgb(123, 97, 224) 100%
+    // );
     @include txtColor();
   }
 }

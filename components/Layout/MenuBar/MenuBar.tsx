@@ -34,7 +34,7 @@ const MenuProfile = () => {
     검: 'black',
     무: 'rainbow',
   };
-
+  //user.tierImageUri =
   return (
     <div className={styles.menuProfileWrapper}>
       <Link
@@ -44,7 +44,8 @@ const MenuProfile = () => {
       >
         <PlayerImage
           src={user.userImageUri}
-          styleName={`menuProfile ${user.edge.toLowerCase()}`}
+          // styleName={`menuProfile ${user.edge.toLowerCase()}`}
+          styleName={`menuProfile`}
           size={18}
         />
       </Link>

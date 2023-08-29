@@ -6,7 +6,6 @@ import styles from 'styles/Layout/MainPageProfile.module.scss';
 
 const MainPageProfile = () => {
   const user = useRecoilValue(userState);
-
   return (
     <div className={styles.mainPageProfile}>
       <div className={styles.gridContainer}>
@@ -16,7 +15,8 @@ const MainPageProfile = () => {
         >
           <PlayerImage
             src={user.userImageUri}
-            styleName={`mainPageProfile ${user.edge.toLowerCase()}`}
+            // styleName={`mainPageProfile ${user.edge.toLowerCase()}`}
+            styleName={`mainPageProfile`}
             size={18}
           />
         </Link>
