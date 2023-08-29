@@ -6,6 +6,7 @@ import { StoreMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
 import { modalState } from 'utils/recoil/modal';
 import StoreModeRadioBox from 'components/mode/modeItems/StoreModeRadioBox';
+import CoinImage from 'components/store/CoinImage';
 import styles from 'styles/mode/StoreModeWrap.module.scss';
 
 type StoreModeWrapProps = {
@@ -44,8 +45,7 @@ export function StoreModeWrap({
           매뉴얼
         </button>
         <div className={styles.coins} onClick={viewCoinHistory}>
-          <Image src='/image/coinImage.svg' alt='coin' width={20} height={20} />
-          {coin.coin.toLocaleString()}
+          <CoinImage amount={coin.coin} size={20} />
         </div>
       </div>
       <StoreModeRadioBox

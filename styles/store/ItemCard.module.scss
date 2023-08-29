@@ -1,114 +1,110 @@
 @import 'styles/common.scss';
 
 .itemCard {
-  position: relative;
-  display: flex;
-  width: 90%;
-  flex-direction: column;
-  margin: 1rem auto;
-  overflow: hidden;
+  display: grid;
+  width: 100%;
+  height: 12.5rem;
+  padding: 0.2rem 0 0.2rem 0.2rem;
+  margin-bottom: 0.7rem;
   font-family: 'NanumSquare_acR', sans-serif;
-  background: white;
-  border-radius: 1rem;
+  background: #ffffff5f;
+  border-radius: 0.3rem;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: repeat(6, auto);
+  grid-template-areas:
+    'image header header ribbon'
+    'image price price price'
+    'image mainContent mainContent mainContent'
+    'image subContent subContent subContent'
+    'image subContent subContent subContent'
+    'image footer footer footer';
+  column-gap: 0.5rem;
 
   .preview {
+    grid-area: image;
     position: relative;
-    height: inherit;
-
+    width: 9.5rem;
+    height: 9.5rem;
+    margin: 1.25rem 0;
     .img {
-      max-width: 100%;
-      height: 8rem;
-      max-height: 100%;
-    }
-    .badge {
-      position: absolute;
-      top: 7%;
-      right: 0;
-      width: 3rem;
-      color: #fff;
-      text-align: center;
-      background-color: #c03434;
-      border-radius: 1.25rem 0 0 1.25rem;
+      object-fit: cover;
     }
   }
 
-  .details {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    padding-top: 0.5rem;
-    padding-right: 1rem;
-    padding-left: 1rem;
-    background-color: $g1-bottom;
-
-    .itemPriceTag {
-      display: flex;
-      flex-direction: row;
-      align-items: baseline;
-      justify-content: space-between;
-      color: $coin-yellow;
-      .title {
-        font-weight: bold;
-        color: black;
-        text-align: center;
-      }
-      .priceTags {
-        @include ggCoin;
-        .originalPrice {
-          padding: 0;
-          margin: 0;
-          font-size: 1rem;
-        }
-
-        .onDiscount {
-          padding: 0;
-          margin: 0;
-          font-size: 0.8rem;
-          text-decoration: line-through 0.1rem solid #ff4040;
-        }
-
-        .discountedPrice {
-          padding: 0;
-          margin: 0;
-          font-size: 1rem;
-          font-weight: bold;
-          text-align: center;
-          transform: translateY(-0.05rem);
-        }
-      }
+  .title {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: black;
+    grid-area: header;
+  }
+  .priceTag {
+    grid-area: price;
+    font-size: 0.9rem;
+    color: $coin-yellow;
+    @include ggCoin;
+    .salePrice {
+      font-weight: bold;
     }
-    .content {
-      color: #282828;
-    }
-    .buttons {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-      align-items: center;
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
-
-      .gift {
-        width: 40%;
-        height: 1.5rem;
-        color: white;
-        background: linear-gradient(
-          180deg,
-          #ea80ea 0%,
-          rgba(211, 36, 182, 0.72) 100%
-        );
-        border-style: none;
-        border-radius: 0.625rem;
-      }
-      .buy {
-        width: 40%;
-        height: 1.5rem;
-        color: white;
-        background: $btn-purple;
-        border-style: none;
-        border-radius: 0.625rem;
-      }
+    .onDiscount {
+      margin-right: 0.2rem;
+      text-decoration: line-through 0.1rem solid #c03434;
     }
   }
+  .mainContent {
+    padding-right: 0.3rem;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #282828;
+    grid-area: mainContent;
+  }
+  .subContent {
+    padding-right: 0.5rem;
+    overflow: scroll;
+    font-size: 0.8rem;
+    color: #343434;
+    grid-area: subContent;
+  }
+  .buttons {
+    grid-area: footer;
+    display: flex;
+    justify-content: space-evenly;
+    .gift {
+      width: auto;
+      min-width: 4rem;
+      height: 1.5rem;
+      font-family: 'NanumSquare_acR', sans-serif;
+      color: white;
+      background: linear-gradient(
+        180deg,
+        #ea80ea 0%,
+        rgba(211, 36, 182, 0.72) 100%
+      );
+      border-style: none;
+      border-radius: 0.3rem;
+    }
+    .buy {
+      width: auto;
+      min-width: 4rem;
+      height: 1.5rem;
+      font-family: 'NanumSquare_acR', sans-serif;
+      color: white;
+      background: $btn-purple;
+      border-style: none;
+      border-radius: 0.3rem;
+    }
+  }
+}
+
+.badge {
+  width: 2.5rem;
+  height: 1rem;
+  padding-top: 0.1rem;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #fff;
+  text-align: center;
+  background-color: #c03434;
+  border-radius: 1.25rem 0 0 1.25rem;
+  grid-area: ribbon;
 }

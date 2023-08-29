@@ -85,7 +85,7 @@ function ItemList() {
     setModal({
       modalName: 'ADMIN-DETAIL_CONTENT',
       detailTitle: item.itemName,
-      detailContent: item.content,
+      detailContent: item.mainContent,
     });
   };
 
