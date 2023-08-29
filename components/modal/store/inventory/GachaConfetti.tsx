@@ -53,7 +53,7 @@ export default function GachaConfetti() {
   }
 
   function initParticles() {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 100; i++) {
       setTimeout(createParticle, 3000 + 4 * i);
     }
   }
