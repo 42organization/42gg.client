@@ -51,13 +51,11 @@ function CoinPolicyHistory() {
       setCoinPolicyHistoryData({
         coinPolicyList: res.data.coinPolicyList.map(
           (coinPolicyHistory: IcoinPolicyHistory) => {
-            const date = new Date(coinPolicyHistory.createdAt);
             return {
               ...coinPolicyHistory,
-              createdAt:
-                dateToStringShort(date) +
-                ':' +
-                date.getSeconds().toString().padStart(2, '0'),
+              createdAt: dateToStringShort(
+                new Date(coinPolicyHistory.createdAt)
+              ),
             };
           }
         ),
