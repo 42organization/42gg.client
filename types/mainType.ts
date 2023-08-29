@@ -9,6 +9,8 @@ export interface User {
   isAttended: boolean;
   tierImageUri: string;
   edge: string;
+  tierName: string;
+  level: number;
 }
 
 export interface Live {

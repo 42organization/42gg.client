@@ -8,7 +8,7 @@ interface IcoinPolicyHistoryRes {
 
 const coinPolicyHistory1: IcoinPolicyHistory = {
   coinPolicyId: 1,
-  createUser: 'hyungjpa',
+  createUserId: 'hyungjpa',
   attendance: 3,
   normal: 5,
   rankWin: 7,
@@ -18,7 +18,7 @@ const coinPolicyHistory1: IcoinPolicyHistory = {
 
 const coinPolicyHistory2: IcoinPolicyHistory = {
   coinPolicyId: 2,
-  createUser: 'hyobicho',
+  createUserId: 'hyobicho',
   attendance: 1,
   normal: 2,
   rankWin: 3,
@@ -28,7 +28,7 @@ const coinPolicyHistory2: IcoinPolicyHistory = {
 
 const coinPolicyHistory3: IcoinPolicyHistory = {
   coinPolicyId: 3,
-  createUser: 'sangmipa',
+  createUserId: 'sangmipa',
   attendance: 2,
   normal: 3,
   rankWin: 4,
@@ -38,7 +38,7 @@ const coinPolicyHistory3: IcoinPolicyHistory = {
 
 const coinPolicyHistory4: IcoinPolicyHistory = {
   coinPolicyId: 4,
-  createUser: 'jeyoon',
+  createUserId: 'jeyoon',
   attendance: 3,
   normal: 4,
   rankWin: 5,
@@ -48,7 +48,7 @@ const coinPolicyHistory4: IcoinPolicyHistory = {
 
 const coinPolicyHistory5: IcoinPolicyHistory = {
   coinPolicyId: 5,
-  createUser: 'hyungjpa',
+  createUserId: 'hyungjpa',
   attendance: 6,
   normal: 7,
   rankWin: 7,

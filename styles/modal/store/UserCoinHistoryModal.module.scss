@@ -21,7 +21,7 @@
     color: #ffffff;
     justify-content: space-between;
     .currentCoin {
-      color: #e8e230;
+      @include ggCoin;
     }
   }
 }

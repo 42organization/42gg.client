@@ -54,6 +54,8 @@ $g2-bottom: #b5bbf2;
 $loser-red: #ff0303;
 $winner-blue: #040eff;
 
+$coin-yellow: #e8e230;
+
 /* background-color */
 $main-background: linear-gradient(
   180deg,
@@ -107,6 +109,14 @@ $text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
   0 -0.1rem black;
 $text-shadow-red: 2px 2px 0px $pp-red;
 $text-shadow-blue: 2px 2px 0px $pp-blue;
+
+@mixin ggCoin {
+  color: $coin-yellow;
+  img {
+    margin-right: 0.2rem;
+    transform: translateY(0.2rem);
+  }
+}
 
 @mixin menu-noti-Bar {
   display: flex;
@@ -379,23 +389,23 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   font-size: 0.8rem;
   background: black;
   @include txtColor();
-  &.tierIdred {
+  &.red {
     background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
     @include txtColor();
   }
-  &.tierIdyellow {
+  &.yellow {
     background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
     @include txtColor();
   }
-  &.tierIdgreen {
+  &.green {
     background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
     @include txtColor();
   }
-  &.tierIdblue {
+  &.blue {
     background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
     @include txtColor();
   }
-  &.tierIdblack {
+  &.black {
     background: linear-gradient(
       180.89deg,
       rgba(114, 114, 114, 0.553) 26.68%,
@@ -405,7 +415,7 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
     );
     @include txtColor();
   }
-  &.tierIdrainbow {
+  &.rainbow {
     background: linear-gradient(
       90deg,
       rgba(239, 80, 80, 0.553) 15%,

@@ -17,7 +17,6 @@ export default function handler(
     tierName: '노랑 탁구채',
     expRate: 123,
     edge: 'COLOR1',
-    // BASIC, COLOR1~16 사이 테스트 가능
     backgroundType: 'COLOR1',
     snsNotiOpt: 'EMAIL',
   };

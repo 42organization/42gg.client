@@ -10,10 +10,7 @@
 }
 
 .coins {
-  color: #fbbc66;
-  svg {
-    margin-left: 0.5rem;
-  }
+  @include ggCoin;
   cursor: pointer;
 }
 
