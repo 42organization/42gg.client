@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { Item, ItemList } from 'types/itemTypes';
 import { instance } from 'utils/axios';
+import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -20,8 +21,7 @@ import styles from 'styles/admin/store/ItemList.module.scss';
 const itemListTableTitle: { [key: string]: string } = {
   itemId: 'ID',
   itemName: '아이템명',
-  mainContent: '주설명',
-  subContent: '부설명',
+  content: '설명',
   itemType: '타입',
   imageUri: '이미지',
   originalPrice: '원가',
@@ -34,8 +34,7 @@ const itemListTableTitle: { [key: string]: string } = {
 const tableColumnName = [
   'itemId',
   'itemName',
-  'mainContent',
-  'subContent',
+  'content',
   'itemType',
   'imageUri',
   'originalPrice',
@@ -54,7 +53,8 @@ function ItemList() {
 
   const getItemListHandler = useCallback(async () => {
     try {
-      const res = await instance.get(`/pingpong/items/store`);
+      // const res = await instance.get(`/pingpong/items/store`);
+      const res = await mockInstance.get(`/items/store`);
       setItemListData(res.data);
     } catch (e: unknown) {
       setSnackBar({
