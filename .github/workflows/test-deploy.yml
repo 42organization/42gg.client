@@ -1,15 +1,5 @@
 name: Test Deploy to Vercel
 
-# 실행에 앞서 vercel과 연동되어 있는 fork된 repository가 필요합니다.
-
-# 실행에 필요한 secret을 설정해야 합니다.
-# - TEST_DEPLOY_REPO_OWNER : fork-sync로 동기화할 repo의 owner
-# - TEST_DEPLOY_REPO_OWNER_TOKEN : fork-sync로 동기화할 repo의 owner의 token (read and write permission 필요)
-
-# Parameters
-# - owner : fork-sync로 동기화할 repo의 owner
-# - base, head : 동기화할 브랜치 (from head to base)
-
 on:
   push:
     branches:
@@ -19,11 +9,28 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Fork-sync
-        uses: tgymnich/fork-sync@v1.9
+      - uses: actions/checkout@v2
+      - name: create build.sh
+        run: |
+          touch build.sh
+          echo "#!/bin/sh" >> build.sh
+          echo "cd ../" >> build.sh
+          echo "mkdir output" >> build.sh
+          echo "cp -R ./42gg.client/* ./output" >> build.sh
+          echo "cp -R ./output ./42gg.client/" >> build.sh
+          chmod +x build.sh
+
+      - name: run build.sh
+        run: sh ./build.sh
+
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.TEST_DEPLOY_REPO_OWNER_TOKEN }}
         with:
-          token: ${{ secrets.TEST_DEPLOY_REPO_OWNER_TOKEN }}
-          owner: ${{ secrets.TEST_DEPLOY_REPO_OWNER }}
-          base: GGFE-208-test-deploy-브랜치-설정
-          head: test-test-deploy
+          source-directory: 'output'
+          destination-github-username: ${{ secrets.TEST_DEPLOY_REPO_OWNER }}
+          destination-repository-name: '42gg.client'
+          target-branch: 'test-test-deploy'
