@@ -23,8 +23,8 @@
   .preview {
     grid-area: image;
     position: relative;
-    width: 10rem;
-    height: 10rem;
+    width: 9.5rem;
+    height: 9.5rem;
     margin: 0.8rem 0;
     .img {
       object-fit: cover;
@@ -33,14 +33,14 @@
 
   .title {
     margin-top: 1rem;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: black;
     grid-area: header;
   }
   .priceTag {
     grid-area: price;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: $coin-yellow;
     @include ggCoin;
     .salePrice {
@@ -53,7 +53,7 @@
   }
   .mainContent {
     padding-right: 0.3rem;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-style: italic;
     color: #282828;
     grid-area: mainContent;
@@ -61,7 +61,7 @@
   .subContent {
     padding-right: 0.5rem;
     overflow: scroll;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     color: #343434;
     grid-area: subContent;
   }
@@ -97,10 +97,11 @@
 }
 
 .badge {
-  width: 3rem;
-  height: 1.5rem;
-  padding-top: 0.25rem;
+  width: 2.5rem;
+  height: 1rem;
+  padding-top: 0.1rem;
   margin-top: 0.5rem;
+  font-size: 0.8rem;
   color: #fff;
   text-align: center;
   background-color: #c03434;

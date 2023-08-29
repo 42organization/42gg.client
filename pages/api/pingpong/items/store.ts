@@ -16,7 +16,7 @@ const itemList: Item[] = [
   {
     itemId: 2,
     itemName: '확성기',
-    mainContent: '오늘 하루 42GG는 내가 접수한다📢😎',
+    mainContent: '오늘 42GG는 내가 접수한다📢😎',
     subContent:
       '24시간 동안 모든 페이지 상단에 메시지를 띄울 수 있는 아이템입니다. 사용 다음날 적용됩니다.',
     itemType: 'MEGAPHONE',
