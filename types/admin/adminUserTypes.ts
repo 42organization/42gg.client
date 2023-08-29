@@ -13,6 +13,7 @@ export interface IUserTable {
 
 export interface IUserInfo {
   userId: number;
+  intraId: string;
   userImageUri: string | null;
   statusMessage: string;
   racketType: string;
