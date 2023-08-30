@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useSetRecoilState, useResetRecoilState } from 'recoil';
+import { RandomColors } from 'types/colorModeTypes';
 import { colorModeState } from 'utils/recoil/colorMode';
-import { BackgroundColor } from 'types/colorModeTypes';
 
-function useProfileColorMode(color: BackgroundColor) {
+function useProfileColorMode(color: RandomColors) {
   const setColorMode = useSetRecoilState(colorModeState);
   const resetColorMode = useResetRecoilState(colorModeState);
 

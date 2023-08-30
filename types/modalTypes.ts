@@ -96,6 +96,11 @@ export interface StoreManual {
   radioMode: StoreManualMode;
 }
 
+export interface RandomItem {
+  item: string;
+  color: string;
+}
+
 export interface Modal {
   modalName: ModalName;
   manual?: Manual;
@@ -121,5 +126,5 @@ export interface Modal {
   storeManual?: StoreManual;
   isAttended?: boolean;
   totalCoin?: ICoin;
-  randomItem?: string;
+  randomItem?: RandomItem;
 }
