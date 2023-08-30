@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { ICoin, ICoinHistoryTable } from 'types/userTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import {
@@ -34,11 +33,11 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
     getCoinHistoryList();
   }, [currentPage]);
 
-  // TODO: instance로 수정
+  // 현재는 출석만 되는 상태
   const getCoinHistoryList = async () => {
     try {
-      const res = await mockInstance.get(
-        `/users/coin/?page=${currentPage}&size=5`
+      const res = await instance.get(
+        `pingpong/users/coinhistory/?page=${currentPage}&size=5`
       );
       setCoinHistoryList({
         useCoinList: res.data.useCoinList,
