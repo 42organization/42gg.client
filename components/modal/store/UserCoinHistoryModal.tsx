@@ -11,6 +11,7 @@ import {
 } from 'components/modal/ModalButton';
 import CoinHistoryContainer from 'components/modal/store/CoinHistoryContainer';
 import PageNation from 'components/Pagination';
+import CoinImage from 'components/store/CoinImage';
 import styles from 'styles/modal/store/UserCoinHistoryModal.module.scss';
 
 export default function UserCoinHistoryModal({ coin }: ICoin) {
@@ -54,15 +55,7 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
       <div className={styles.title}>GG코인 내역</div>
       <div className={styles.balance}>
         <div>현재 코인</div>
-        <div className={styles.currentCoin}>
-          <Image
-            src='/image/coinImage.svg'
-            alt={'coin'}
-            width={25}
-            height={25}
-          />
-          {coin} &nbsp;
-        </div>
+        <CoinImage amount={coin} size={25} />
       </div>
       <CoinHistoryContainer useCoinList={coinHistoryList.useCoinList} />
       <div>
