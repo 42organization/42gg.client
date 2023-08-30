@@ -12,7 +12,6 @@ import {
 } from '@mui/material';
 import { Item, ItemList } from 'types/itemTypes';
 import { instance } from 'utils/axios';
-import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -53,8 +52,7 @@ function ItemList() {
 
   const getItemListHandler = useCallback(async () => {
     try {
-      // const res = await instance.get(`/pingpong/items/store`);
-      const res = await mockInstance.get(`/items/store`);
+      const res = await instance.get(`/pingpong/items/store`);
       setItemListData(res.data);
     } catch (e: unknown) {
       setSnackBar({
