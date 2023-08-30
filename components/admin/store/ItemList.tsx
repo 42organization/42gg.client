@@ -114,7 +114,7 @@ function ItemList() {
                             content={item[columnName as keyof Item].toString()}
                             maxLen={MAX_CONTENT_LENGTH}
                             detailTitle={item.itemName}
-                            detailContent={item.content}
+                            detailContent={item.mainContent}
                           />
                         )}
                       </TableCell>
