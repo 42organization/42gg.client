@@ -20,8 +20,5 @@
     font-size: 1.3rem;
     color: #ffffff;
     justify-content: space-between;
-    .currentCoin {
-      @include ggCoin;
-    }
   }
 }
