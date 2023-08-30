@@ -1,3 +1,4 @@
+import { RandomColors, BackgroundColors } from 'types/colorModeTypes';
 import styles from 'styles/modal/store/BackgroundPreview.module.scss';
 
 export default function BackgroundPreview({
@@ -5,25 +6,24 @@ export default function BackgroundPreview({
 }: {
   backgroundType: string;
 }) {
-  // TODO: ui gradient에서 색상 이름 가져오기
-  const colorList = new Map([
+  const colorList = new Map<RandomColors, BackgroundColors>([
     ['BASIC', 'BASIC'],
     ['COLOR1', 'TRANQUIL'],
-    ['COLOR2', 'BLUE GREEN'],
-    ['COLOR3', 'MIDNIGHT'],
-    ['COLOR4', 'ORANGE'],
-    ['COLOR5', 'GRASS GREEN'],
-    ['COLOR6', 'LEMON BLUE'],
+    ['COLOR2', 'WINDY'],
+    ['COLOR3', 'BUPE'],
+    ['COLOR4', 'MANGO'],
+    ['COLOR5', 'MISTY MEADOW'],
+    ['COLOR6', 'OPA'],
     ['COLOR7', 'DRACULA'],
-    ['COLOR8', 'MINT GREEN'],
-    ['COLOR9', 'STEEL GRAY'],
-    ['COLOR10', 'BLOOD RED'],
-    ['COLOR11', 'BLUE SKY'],
-    ['COLOR12', 'OCEAN BLUE'],
-    ['COLOR13', 'PINK BLUE'],
-    ['COLOR14', 'SUNSET PINK'],
-    ['COLOR15', 'DARK NAVY'],
-    ['COLOR16', 'ORANGE GREEN'],
+    ['COLOR8', 'SEA BLIZZ'],
+    ['COLOR9', 'MYSTIC'],
+    ['COLOR10', 'THE STRAIN'],
+    ['COLOR11', 'COOL SKY'],
+    ['COLOR12', 'JODHPUR'],
+    ['COLOR13', 'HAZEL'],
+    ['COLOR14', 'RADAR'],
+    ['COLOR15', 'ROYAL BLUE'],
+    ['COLOR16', 'MEGATRON'],
   ]);
 
   return (
@@ -32,7 +32,9 @@ export default function BackgroundPreview({
         className={`${styles['player']}
       ${styles[backgroundType.toLowerCase()]}`}
       ></div>
-      <div className={styles.colorName}>{colorList.get(backgroundType)}</div>
+      <div className={styles.colorName}>
+        {colorList.get(backgroundType as RandomColors)}
+      </div>
     </div>
   );
 }
