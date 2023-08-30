@@ -1,25 +1,101 @@
 @import 'styles/common.scss';
+@import 'styles/modal/store/GachaBall.module.scss';
 
-.randomBox {
+@mixin Balls {
+  .ball0 {
+    @include ball(#ec6767, #d14040);
+  }
+  .ball1 {
+    @include ball(#2facff, #3660bb);
+  }
+  .ball2 {
+    @include ball(#2fffc8, #1f9978);
+  }
+  .ball3 {
+    @include ball(#e7ff2f, #abbd20);
+  }
+  .ball4 {
+    @include ball(#eb7bff, #e23eff);
+  }
+  .ball5 {
+    @include ball(#0aaf46, #02501f);
+  }
+  .ball6 {
+    @include ball(#fffc68, #e5e11e);
+  }
+  .ball7 {
+    @include ball(#b943f4, #66127d);
+  }
+  .ball8 {
+    @include ball(#ff2f47, #911a28);
+  }
+  .ball9 {
+    @include ball(#090488, #04023f);
+  }
+  .ball10 {
+    @include ball(#ff7b2f, #d94f00);
+  }
+}
+
+.container {
   display: flex;
-  justify-content: center;
-  .capsule {
-    position: relative;
-    width: 12.5rem;
-    height: 12.5rem;
-    overflow: hidden;
-    background: #fcb404;
-    border: 0.625rem solid #000000;
-    border-radius: 50%;
-    box-shadow: inset -0.625rem 0.625rem 0 0.625rem #fc9014;
+  height: 30rem;
+  max-height: 80vh;
+  flex-direction: column;
+  justify-content: space-evenly;
 
-    &::after {
-      position: absolute;
-      top: calc(50% - 0.625rem);
-      width: 100%;
-      height: 0.5rem;
-      content: '';
-      background: #000000;
+  .ball {
+    @include Balls;
+    position: absolute;
+    top: calc(55% - 1.5rem);
+    left: calc(50% - 1.5rem);
+    transform: translate(0, 0);
+    animation: bounce 1s 3, disappear 0.1s 3.1s both;
+  }
+
+  .button {
+    opacity: 0%;
+    animation: appear 0.5s 3.1s forwards;
+  }
+
+  @keyframes bounce {
+    0% {
+      transform: translateY(-1rem) scaleY(1) scaleX(1);
+      animation-timing-function: ease-out;
     }
+    100% {
+      transform: translateY(0) scaleY(0.75) scaleX(1.15);
+      animation-timing-function: ease-in;
+    }
+    10% {
+      transform: translateY(-1rem) scaleY(1) scaleX(1);
+      animation-timing-function: ease-out;
+    }
+    50% {
+      transform: translateY(-10rem) scaleY(1.1) scaleX(0.95);
+      animation-timing-function: ease-in;
+    }
+    90% {
+      transform: translateY(-1rem) scaleY(1) scaleX(1);
+      animation-timing-function: ease-out;
+    }
+  }
+
+  @keyframes disappear {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
