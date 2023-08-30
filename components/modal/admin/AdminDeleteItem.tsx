@@ -1,13 +1,12 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
 import { instanceInManage } from 'utils/axios';
-import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminDeleteItem.module.scss';
 
 export default function AdminDeleteItemModal(props: Item) {
-  const { itemId, itemName, content } = props;
+  const { itemId, itemName, mainContent, subContent } = props;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
@@ -39,17 +38,40 @@ export default function AdminDeleteItemModal(props: Item) {
       </div>
       <div className={styles.body}>
         <div className={styles.bodyWrap}>
-          <div className={styles.intraWrap}>
-            <div className={styles.bodyText}>아이템명 :</div>
-            <input className={styles.intraBlank} value={itemName} readOnly />
-          </div>
-          <div className={styles.contentWrap}>
-            <div className={styles.bodyText}>설명 :</div>
-            <textarea
-              className={styles.contentBlank}
-              value={content}
+          <div className={styles.itemWrap}>
+            <label htmlFor='itemName' className={styles.bodyText}>
+              아이템명 :
+            </label>
+            <input
+              id='itemName'
+              className={styles.itemBlank}
+              value={itemName}
               readOnly
             />
+          </div>
+          <div className={styles.contentWrap}>
+            <div className={styles.mainContentWrap}>
+              <label htmlFor='itemMainContent' className={styles.bodyText}>
+                주설명 :
+              </label>
+              <input
+                id='itemMainContent'
+                className={styles.mainContentBlank}
+                value={mainContent}
+                readOnly
+              />
+            </div>
+            <div className={styles.subContentWrap}>
+              <label htmlFor='itemSubContent' className={styles.bodyText}>
+                부설명 :
+              </label>
+              <textarea
+                id='itemSubContent'
+                className={styles.subContentBlank}
+                value={subContent}
+                readOnly
+              />
+            </div>
           </div>
           <div className={styles.checkWrap}>
             {itemId} 번 아이템을 삭제하시겠습니까?
