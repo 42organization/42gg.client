@@ -9,7 +9,7 @@
 
 .notiWrapper {
   @include notiWrap;
-
+  word-break: keep-all;
   .readWrap,
   .unreadWrap {
     width: 15.75rem;
@@ -24,7 +24,6 @@
     border: 0.5px solid rgba(174, 141, 178, 1);
   }
   .unreadWrap {
-    word-break: keep-all;
     &.imminent {
       color: rgba(255, 255, 255, 1);
       background: rgba(166, 100, 176, 1);
