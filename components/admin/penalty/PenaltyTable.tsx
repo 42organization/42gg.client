@@ -143,7 +143,7 @@ export default function PenaltyTable() {
                                         {buttonName}
                                       </button>
                                     ) : (
-                                      <></>
+                                      <div key={index}></div>
                                     )
                                 )}
                           </TableCell>
