@@ -1,0 +1,40 @@
+name: Test Deploy to Vercel
+
+# action을 돌리기 전에 secret을 설정해야 한다.
+# - TEST_DEPLOY_REPO_OWNER : vercel과 연결된 repository의 owner
+# - TEST_DEPLOY_REPO_OWNER_TOKEN : vercel과 연결된 repository의 owner의 token (repo 권한 필요)
+
+on:
+  push:
+    branches:
+      - test-deploy
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: create build.sh
+        run: |
+          touch build.sh
+          echo "#!/bin/sh" >> build.sh
+          echo "cd ../" >> build.sh
+          echo "mkdir output" >> build.sh
+          echo "cp -R ./42gg.client/* ./output" >> build.sh
+          echo "cp -R ./output ./42gg.client/" >> build.sh
+          chmod +x build.sh
+
+      - name: run build.sh
+        run: sh ./build.sh
+
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.TEST_DEPLOY_REPO_OWNER_TOKEN }}
+        with:
+          source-directory: 'output'
+          destination-github-username: ${{ secrets.TEST_DEPLOY_REPO_OWNER }}
+          destination-repository-name: '42gg.client'
+          target-branch: 'test-deploy'
+          commit-message: '[Test-Deploy] Update from 42gg.client'
