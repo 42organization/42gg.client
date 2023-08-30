@@ -49,9 +49,7 @@ export default function StoreModal() {
     'USE-ITEM-PROFILE_BACKGROUND': useItemInfo ? (
       <ChangeProfileBackgroundModal {...useItemInfo} />
     ) : null,
-    'USE-ITEM-GACHA': randomItem ? (
-      <GachaModal randomItem={randomItem} />
-    ) : null,
+    'USE-ITEM-GACHA': randomItem ? <GachaModal {...randomItem} /> : null,
     'EDIT-ITEM-MEGAPHONE': useItemInfo ? (
       <EditMegaphoneModal {...useItemInfo} />
     ) : null,

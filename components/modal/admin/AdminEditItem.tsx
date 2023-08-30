@@ -9,7 +9,7 @@ import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminEditItem.module.scss';
 
 export default function AdminEditItemModal(props: Item) {
-  const { itemId, itemName, content, imageUri, originalPrice, discount } =
+  const { itemId, itemName, mainContent, imageUri, originalPrice, discount } =
     props;
   const creator = useRecoilValue(userState).intraId;
   const setModal = useSetRecoilState(modalState);
@@ -115,7 +115,7 @@ export default function AdminEditItemModal(props: Item) {
               className={styles.contentBlank}
               type='text'
               name='content'
-              defaultValue={content}
+              defaultValue={mainContent}
               required
             />
           </div>

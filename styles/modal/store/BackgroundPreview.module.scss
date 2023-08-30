@@ -1,0 +1,84 @@
+@import 'styles/common.scss';
+
+.container {
+  display: flex;
+  width: 12rem;
+  height: 16rem;
+  flex-direction: column;
+  background: #edeff0;
+  box-shadow: 0rem 0rem 5rem #ffffffa1;
+  opacity: 0%;
+  animation: appear 0.5s 3s ease-in-out forwards;
+  justify-content: center;
+  .colorName {
+    margin-top: 5%;
+    font-family: 'NanumSquare_acR', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  .player {
+    width: 90%;
+    height: 75%;
+    margin-left: 5%;
+    &.color1 {
+      background: $bg-pink-orange;
+    }
+    &.color2 {
+      background: $bg-blue-green;
+    }
+    &.color3 {
+      background: $bg-midnight;
+    }
+    &.color4 {
+      background: $bg-orange;
+    }
+    &.color5 {
+      background: $bg-grass-green;
+    }
+    &.color6 {
+      background: $bg-lemon-blue;
+    }
+    &.color7 {
+      background: $bg-dracula;
+    }
+    &.color8 {
+      background: $bg-mint-green;
+    }
+    &.color9 {
+      background: $bg-steel-gray;
+    }
+    &.color10 {
+      background: $bg-blood-red;
+    }
+    &.color11 {
+      background: $bg-blue-sky;
+    }
+    &.color12 {
+      background: $bg-ocean-blue;
+    }
+    &.color13 {
+      background: $bg-pink-blue;
+    }
+    &.color14 {
+      background: $bg-sunset-pink;
+    }
+    &.color15 {
+      background: $bg-dark-navy;
+    }
+    &.color16 {
+      background: $bg-orange-green;
+    }
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateY(5rem) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -7,22 +7,26 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import { IitemHistory, IitemHistoryList } from 'types/admin/adminStoreTypes';
-import { getFormattedDateToString } from 'utils/handleTime';
+import { dateToStringShort } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
+import {
+  AdminContent,
+  AdminEmptyItem,
+  AdminTableHead,
+} from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/store/ItemHistory.module.scss';
 
-const itemHistoryTableTitle: { [key: string]: string } = {
+const tableTitle: { [key: string]: string } = {
   itemId: 'ID',
-  createdAt: '변경일',
-  itemName: '이름',
+  createdAt: '변경 시간',
+  name: '이름',
   content: '설명',
   imageUri: '이미지',
   price: '원가',
@@ -31,19 +35,6 @@ const itemHistoryTableTitle: { [key: string]: string } = {
   deleterIntraId: '삭제한 사람',
   visible: '상점 노출',
 };
-
-const tableColumnName = [
-  'itemId',
-  'createdAt',
-  'itemName',
-  'content',
-  'imageUri',
-  'price',
-  'discount',
-  'creatorIntraId',
-  'deleterIntraId',
-  'visible',
-];
 
 const MAX_CONTENT_LENGTH = 16;
 
@@ -66,12 +57,9 @@ function ItemHistory() {
       setItemHistoryData({
         itemHistoryList: res.data.itemHistoryList.map(
           (itemHistory: IitemHistory) => {
-            const { year, month, date, hour, min } = getFormattedDateToString(
-              new Date(itemHistory.createdAt)
-            );
             return {
               ...itemHistory,
-              createdAt: `${year}-${month}-${date} ${hour}:${min}`,
+              createdAt: dateToStringShort(new Date(itemHistory.createdAt)),
             };
           }
         ),
@@ -88,14 +76,6 @@ function ItemHistory() {
     }
   }, [currentPage]);
 
-  const openDetailModal = (itemHistory: IitemHistory) => {
-    setModal({
-      modalName: 'ADMIN-DETAIL_CONTENT',
-      detailTitle: itemHistory.itemName,
-      detailContent: itemHistory.content,
-    });
-  };
-
   useEffect(() => {
     getItemHistoryListHandler();
   }, [currentPage]);
@@ -104,15 +84,7 @@ function ItemHistory() {
     <>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <TableHead className={styles.tableHeader}>
-            <TableRow>
-              {tableColumnName.map((column, idx) => (
-                <TableCell className={styles.tableHeaderItem} key={idx}>
-                  {itemHistoryTableTitle[column]}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+          <AdminTableHead tableName={'itemHistory'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             {itemHistoryData.itemHistoryList.length > 0 ? (
               itemHistoryData.itemHistoryList.map(
@@ -135,24 +107,29 @@ function ItemHistory() {
                                 height={30}
                                 alt='no'
                               />
-                            ) : itemHistory[
-                                columnName as keyof IitemHistory
-                              ].toString().length > MAX_CONTENT_LENGTH ? (
+                            ) : columnName === 'content' ? (
                               <div>
-                                {itemHistory[columnName as keyof IitemHistory]
-                                  ?.toString()
-                                  .slice(0, MAX_CONTENT_LENGTH)}
+                                {itemHistory.mainContent}
                                 <span
                                   style={{ cursor: 'pointer', color: 'grey' }}
-                                  onClick={() => openDetailModal(itemHistory)}
+                                  onClick={() =>
+                                    setModal({
+                                      modalName: 'ADMIN-DETAIL_CONTENT',
+                                      detailTitle: itemHistory.mainContent,
+                                      detailContent: itemHistory.subContent,
+                                    })
+                                  }
                                 >
                                   ...더보기
                                 </span>
                               </div>
                             ) : (
-                              itemHistory[
-                                columnName as keyof IitemHistory
-                              ].toString()
+                              <AdminContent
+                                content={itemHistory[
+                                  columnName as keyof IitemHistory
+                                ].toString()}
+                                maxLen={MAX_CONTENT_LENGTH}
+                              />
                             )}
                           </TableCell>
                         );
@@ -162,11 +139,7 @@ function ItemHistory() {
                 )
               )
             ) : (
-              <TableRow className={styles.tableRow}>
-                <TableCell className={styles.tableBodyItem}>
-                  비어있습니다
-                </TableCell>
-              </TableRow>
+              <AdminEmptyItem content={'아이템 변경 이력이 비어있습니다'} />
             )}
           </TableBody>
         </Table>

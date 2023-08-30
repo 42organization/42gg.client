@@ -7,7 +7,7 @@ import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminDeleteItem.module.scss';
 
 export default function AdminDeleteItemModal(props: Item) {
-  const { itemId, name, content } = props;
+  const { itemId, itemName, mainContent } = props;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
   const user = useRecoilValue(userState).intraId;
@@ -46,13 +46,13 @@ export default function AdminDeleteItemModal(props: Item) {
         <div className={styles.bodyWrap}>
           <div className={styles.intraWrap}>
             <div className={styles.bodyText}>아이템명 :</div>
-            <input className={styles.intraBlank} value={name} readOnly />
+            <input className={styles.intraBlank} value={itemName} readOnly />
           </div>
           <div className={styles.contentWrap}>
             <div className={styles.bodyText}>설명 :</div>
             <textarea
               className={styles.contentBlank}
-              value={content}
+              value={mainContent}
               readOnly
             />
           </div>

@@ -6,7 +6,6 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import { ISeason, ISeasonList } from 'types/seasonTypes';
@@ -15,6 +14,18 @@ import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import styles from 'styles/admin/season/SeasonList.module.scss';
+import { AdminTableHead } from '../common/AdminTable';
+
+const tableTitle: { [key: string]: string } = {
+  seasonId: 'ID',
+  seasonName: '시즌 이름',
+  startTime: '시작 시간',
+  endTime: '종료 시간',
+  startPpp: '시작 PPP',
+  pppGap: '제한 PPP',
+  status: '상태',
+  edit: '수정',
+};
 
 export default function SeasonList() {
   const setModal = useSetRecoilState(modalState);
@@ -65,19 +76,11 @@ export default function SeasonList() {
     <div className={styles.container}>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <TableHead className={styles.tableHeader}>
-            <TableRow>
-              {tableFormat['season'].columns.map((columnName) => (
-                <TableCell className={styles.tableHeaderItem} key={columnName}>
-                  {columnName}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+          <AdminTableHead tableName={'seasonHistory'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             {useSeasonList.seasonList.map((seasonL: ISeason, index: number) => (
               <TableRow key={index}>
-                {tableFormat['season'].columns.map(
+                {tableFormat['seasonHistory'].columns.map(
                   (columnName, innerIndex: number) => (
                     <TableCell
                       className={styles.tableBodyItem}

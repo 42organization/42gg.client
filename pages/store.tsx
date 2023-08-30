@@ -2,24 +2,29 @@ import { useEffect, useState } from 'react';
 import { StoreMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
 import { StoreModeWrap } from 'components/mode/modeWraps/StoreModeWrap';
-import ItemsList from 'components/shop/ItemsList';
 import { Inventory } from 'components/store/Inventory';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import ItemsList from 'components/store/purchase/ItemsList';
+import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/store/StoreContainer.module.scss';
 
 export default function Store() {
   const [mode, setMode] = useState<StoreMode>('BUY');
   const [coin, setCoin] = useState<ICoin>({ coin: 0 });
-  useEffect(() => {
-    getCoin();
-    // TODO : 코인이 바뀔 때 마다 다시 불러와야 한다.
-  }, []);
-  const getCoin = useMockAxiosGet({
-    url: '/users/coin',
+  const [updateCoin, setUpdateCoin] = useState<boolean>(true);
+
+  const getCoin = useAxiosGet({
+    url: '/pingpong/users/coin',
     setState: setCoin,
     err: 'JY01',
     type: 'setError',
   });
+
+  useEffect(() => {
+    if (updateCoin) {
+      getCoin();
+      setUpdateCoin(false);
+    }
+  }, [updateCoin]);
 
   return (
     <div className={styles.pageWrap}>

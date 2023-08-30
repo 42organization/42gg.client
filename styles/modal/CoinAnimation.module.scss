@@ -27,19 +27,19 @@ $fontsize: 50px;
 
 .stack {
   position: relative;
-  height: 0.12em;
+  height: 0.22em;
 }
 
 .stackl {
   position: relative;
   left: -0.1em;
-  height: 0.12em;
+  height: 0.22em;
 }
 
 .stackr {
   position: relative;
   left: 0.1em;
-  height: 0.12em;
+  height: 0.22em;
 }
 
 .fall {
@@ -50,7 +50,7 @@ $fontsize: 50px;
 .coin {
   width: 2.1em;
   height: 1.1em;
-  padding: 0 0.5em;
+  padding: 2rem 4.5rem 3rem 4rem;
   transform: translateY(-100%);
 }
 
@@ -61,9 +61,10 @@ $fontsize: 50px;
 }
 
 .appear {
-  height: -0.15em;
+  height: 4.15rem;
   font-size: 2rem;
   color: white;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
   opacity: 0;
   animation: appear #{$anim_duration}s ease-in forwards 1;
 }

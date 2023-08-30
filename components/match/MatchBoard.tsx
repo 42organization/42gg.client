@@ -192,6 +192,7 @@ export const MatchSlot = ({ radioMode, slot }: MatchSlotProps) => {
               match.some((m) => m.startTime === startTime) &&
               headCount === 2
             ) &&
+            match.length > 0 &&
             (match[0].isMatched === true && status === 'mytable'
               ? '2/2'
               : headCount === 0

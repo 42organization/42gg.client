@@ -9,13 +9,6 @@
   flex-direction: column;
 }
 
-.title {
-  width: fit-content;
-  font-size: $big-font;
-  font-weight: 600;
-  line-height: 150%;
-}
-
 .subContainer {
   width: 100%;
   padding-top: 15px;
@@ -24,6 +17,7 @@
 .sectionTitle {
   width: fit-content;
   padding-left: 15px;
+  margin-bottom: 0.5rem;
   font-size: $medium-font;
   font-weight: 500;
   line-height: 150%;

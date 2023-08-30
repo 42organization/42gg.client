@@ -32,6 +32,10 @@ $ppp-font: 2.8rem;
   justify-content: center;
 }
 
+.coinStat {
+  margin-bottom: 1.5rem;
+}
+
 .guide {
   font-size: $medium-font;
   color: rgba(203, 185, 255, 1);
@@ -41,4 +45,10 @@ $ppp-font: 2.8rem;
 
 .buttons {
   @include modalButton;
+}
+
+@media (max-width: 440px) {
+  .coinStat {
+    margin-bottom: 2.5rem;
+  }
 }

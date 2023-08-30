@@ -7,18 +7,6 @@
   margin: auto;
 
   .table {
-    .tableHeader {
-      background-color: lightgray;
-
-      .tableHeaderItem {
-        padding: 0.7rem;
-        font-size: 0.7rem;
-        font-weight: 600;
-        line-height: 150%;
-        text-align: center;
-      }
-    }
-
     .tableBody {
       .tableRow {
         &:nth-child(odd) {

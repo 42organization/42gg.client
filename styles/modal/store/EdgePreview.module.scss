@@ -1,9 +1,69 @@
 .container {
   display: flex;
+  justify-content: center;
+  height: 5rem;
+  color: white;
+  opacity: 0;
+  animation: appear 0.5s 3s ease-in-out forwards;
+  .preview {
+    color: white;
+    animation-name: img-poof;
+    animation-duration: 0.75s;
+    animation-timing-function: ease-out;
+    animation-delay: 3s;
+    animation-iteration-count: 1;
+    animation-direction: forwards;
+    animation-fill-mode: both;
+  }
+}
+
+.colorContiner {
+  display: flex;
   height: 80vh;
   overflow-y: scroll;
   color: white;
+  opacity: 0;
+  animation: appear 0.5s 3s ease-in-out forwards;
   .preview {
     color: white;
+    animation-name: img-poof;
+    animation-duration: 0.75s;
+    animation-timing-function: ease-out;
+    animation-delay: 3s;
+    animation-iteration-count: 1;
+    animation-direction: forwards;
+    animation-fill-mode: both;
+  }
+}
+
+@keyframes img-poof {
+  0% {
+    filter: blur(9px) contrast(0.3) brightness(0.7) sepia(1) saturate(4)
+      hue-rotate(140deg) contrast(2.2) brightness(6) blur(9px);
+    opacity: 0;
+    transform: scale(3);
+  }
+  30% {
+    opacity: 1;
+  }
+  75% {
+    filter: blur(2px) contrast(0.1) brightness(0.66) sepia(1) saturate(1)
+      hue-rotate(140deg) contrast(2.2) brightness(6) blur(2px);
+    transform: scale(1);
+  }
+  100% {
+    filter: blur(0px) contrast(1) brightness(1) sepia(0) saturate(1)
+      hue-rotate(0deg) contrast(1) brightness(1) blur(0px);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

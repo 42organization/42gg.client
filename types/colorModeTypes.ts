@@ -1,22 +1,47 @@
 import { MatchMode } from './mainType';
 
-export type BackgroundColor =
-  | 'BASIC'
-  | 'BACKGROUND1'
-  | 'BACKGROUND2'
-  | 'BACKGROUND3'
-  | 'BACKGROUND4'
-  | 'BACKGROUND5'
-  | 'BACKGROUND6'
-  | 'BACKGROUND7'
-  | 'BACKGROUND8'
-  | 'BACKGROUND9'
-  | 'BACKGROUND10'
-  | 'BACKGROUND11'
-  | 'BACKGROUND12'
-  | 'BACKGROUND13'
-  | 'BACKGROUND14'
-  | 'BACKGROUND15'
-  | 'BACKGROUND16';
+const randomColors = [
+  'BASIC',
+  'COLOR1',
+  'COLOR2',
+  'COLOR3',
+  'COLOR4',
+  'COLOR5',
+  'COLOR6',
+  'COLOR7',
+  'COLOR8',
+  'COLOR9',
+  'COLOR10',
+  'COLOR11',
+  'COLOR12',
+  'COLOR13',
+  'COLOR14',
+  'COLOR15',
+  'COLOR16',
+] as const;
 
-export type ColorMode = MatchMode | BackgroundColor;
+const backgroundColors = [
+  'BASIC',
+  'TRANQUIL',
+  'WINDY',
+  'BUPE',
+  'MANGO',
+  'MISTY MEADOW',
+  'OPA',
+  'DRACULA',
+  'SEA BLIZZ',
+  'MYSTIC',
+  'THE STRAIN',
+  'COOL SKY',
+  'JODHPUR',
+  'HAZEL',
+  'RADAR',
+  'ROYAL BLUE',
+  'MEGATRON',
+] as const;
+
+export type RandomColors = (typeof randomColors)[number];
+
+export type BackgroundColors = (typeof backgroundColors)[number];
+
+export type ColorMode = MatchMode | RandomColors;
