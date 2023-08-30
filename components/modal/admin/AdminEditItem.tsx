@@ -12,7 +12,8 @@ export default function AdminEditItemModal(props: Item) {
   const {
     itemId,
     itemName,
-    content,
+    mainContent,
+    subContent,
     imageUri,
     originalPrice,
     discount,
@@ -115,12 +116,22 @@ export default function AdminEditItemModal(props: Item) {
           </label>
           <div className={styles.idNameWrap}>
             <div className={styles.idWrap}>
-              <div className={styles.bodyText}>아이템 ID :</div>
-              <input className={styles.idBlank} value={itemId} readOnly />
+              <label htmlFor='itemId' className={styles.bodyText}>
+                아이템 ID :
+              </label>
+              <input
+                id='itemId'
+                className={styles.idBlank}
+                value={itemId}
+                readOnly
+              />
             </div>
             <div className={styles.nameWrap}>
-              <div className={styles.bodyText}>아이템명 :</div>
+              <label htmlFor='itemName' className={styles.bodyText}>
+                아이템명 :
+              </label>
               <input
+                id='itemName'
                 className={styles.nameBlank}
                 type='text'
                 name='name'
@@ -130,32 +141,58 @@ export default function AdminEditItemModal(props: Item) {
             </div>
           </div>
           <div className={styles.contentWrap}>
-            <div className={styles.bodyText}>설명 :</div>
-            <input
-              className={styles.contentBlank}
-              type='text'
-              name='content'
-              defaultValue={content}
-              required
-            />
+            <div className={styles.mainContentWrap}>
+              <label htmlFor='itemMainContent' className={styles.bodyText}>
+                주설명 :
+              </label>
+              <input
+                id='itemMainContent'
+                className={styles.mainContentBlank}
+                type='text'
+                name='content'
+                defaultValue={mainContent}
+                required
+              />
+            </div>
+            <div className={styles.subContentWrap}>
+              <label htmlFor='itemSubContent' className={styles.bodyText}>
+                부설명 :
+              </label>
+              <textarea
+                id='itemSubContent'
+                className={styles.subContentBlank}
+                name='content'
+                defaultValue={subContent}
+                required
+              />
+            </div>
           </div>
           <div className={styles.priceDiscountWrap}>
             <div className={styles.priceWrap}>
-              <div className={styles.bodyText}>원가 :</div>
+              <label htmlFor='itemOriginalPrice' className={styles.bodyText}>
+                원가 :
+              </label>
               <input
+                id='itemOriginalPrice'
                 className={styles.priceBlank}
                 type='number'
                 name='price'
+                min='0'
                 defaultValue={originalPrice}
                 required
               />
             </div>
             <div className={styles.discountWrap}>
-              <div className={styles.bodyText}>할인율 :</div>
+              <label htmlFor='itemDiscount' className={styles.bodyText}>
+                할인율 :
+              </label>
               <input
+                id='itemDiscount'
                 className={styles.discountBlank}
                 type='number'
                 name='discount'
+                min='0'
+                max='100'
                 defaultValue={discount}
                 required
               />
