@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import {
   Table,
@@ -143,7 +143,7 @@ export default function PenaltyTable() {
                                         {buttonName}
                                       </button>
                                     ) : (
-                                      <div key={index}></div>
+                                      <Fragment key={index}></Fragment>
                                     )
                                 )}
                           </TableCell>
