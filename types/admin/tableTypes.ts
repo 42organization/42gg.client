@@ -4,13 +4,15 @@ export type TableName =
   | 'feedback'
   | 'games'
   | 'announcement'
-  | 'season'
+  | 'seasonCreate'
+  | 'seasonHistory'
   | 'penalty'
   | 'receiptList'
   | 'megaphoneList'
   | 'profileList'
   | 'itemList'
   | 'itemHistory'
+  | 'coinPolicy'
   | 'coinPolicyHistory';
 
 export type EtcType = 'button' | 'toggle';

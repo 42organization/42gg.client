@@ -6,22 +6,20 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
+import { AdminTableHead } from 'components/admin/common/AdminTable';
 import styles from 'styles/admin/coin/CoinPolicy.module.scss';
 
-const coinPolicyTableTitle: { [key: string]: string } = {
+const tableTitle: { [key: string]: string } = {
   attendance: '출석 획득',
   normal: '일반게임 획득',
   rankWin: '랭크게임 승리 획득',
   rankLose: '랭크게임 패배 획득',
   edit: '정책 등록',
 };
-
-const tableColumnName = ['attendance', 'normal', 'rankWin', 'rankLose', 'edit'];
 
 function CoinPolicy() {
   const attendanceRef = useRef<HTMLInputElement>(null);
@@ -58,45 +56,35 @@ function CoinPolicy() {
   };
 
   return (
-    <>
-      <TableContainer className={styles.tableContainer} component={Paper}>
-        <Table className={styles.table} aria-label='customized table'>
-          <TableHead className={styles.tableHeader}>
-            <TableRow>
-              {tableColumnName.map((column, idx) => (
-                <TableCell className={styles.tableHeaderItem} key={idx}>
-                  {coinPolicyTableTitle[column]}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody className={styles.tableBody}>
-            <TableRow className={styles.tableRow}>
-              <TableCell className={styles.tableBodyItem}>
-                <input type='number' ref={attendanceRef} />
-              </TableCell>
-              <TableCell className={styles.tableBodyItem}>
-                <input type='number' ref={normalRef} />
-              </TableCell>
-              <TableCell className={styles.tableBodyItem}>
-                <input type='number' ref={rankWinRef} />
-              </TableCell>
-              <TableCell className={styles.tableBodyItem}>
-                <input type='number' ref={rankLoseRef} />
-              </TableCell>
-              <TableCell className={styles.tableBodyItem}>
-                <button
-                  className={styles.editBtn}
-                  onClick={() => editCoinPolicy()}
-                >
-                  등록
-                </button>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </>
+    <TableContainer className={styles.tableContainer} component={Paper}>
+      <Table className={styles.table} aria-label='customized table'>
+        <AdminTableHead tableName={'coinPolicy'} table={tableTitle} />
+        <TableBody className={styles.tableBody}>
+          <TableRow className={styles.tableRow}>
+            <TableCell className={styles.tableBodyItem}>
+              <input type='number' ref={attendanceRef} />
+            </TableCell>
+            <TableCell className={styles.tableBodyItem}>
+              <input type='number' ref={normalRef} />
+            </TableCell>
+            <TableCell className={styles.tableBodyItem}>
+              <input type='number' ref={rankWinRef} />
+            </TableCell>
+            <TableCell className={styles.tableBodyItem}>
+              <input type='number' ref={rankLoseRef} />
+            </TableCell>
+            <TableCell className={styles.tableBodyItem}>
+              <button
+                className={styles.editBtn}
+                onClick={() => editCoinPolicy()}
+              >
+                등록
+              </button>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 

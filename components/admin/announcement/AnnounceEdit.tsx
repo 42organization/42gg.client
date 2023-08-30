@@ -27,7 +27,6 @@ export default function AnnounceEdit() {
     SUCCESS: '공지사항이 성공적으로 삭제되었습니다.',
     AN100: '삭제 할 활성화된 공지사항이 없습니다.',
   };
-  const koreaTimeOffset = 1000 * 60 * 60 * 9;
 
   useEffect(() => {
     resetHandler();

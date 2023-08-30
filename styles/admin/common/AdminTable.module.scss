@@ -1,0 +1,30 @@
+@import 'styles/common.scss';
+
+.tableHeader {
+  background-color: lightgray;
+
+  .tableHeaderItem {
+    padding: 0.5rem;
+    font-size: $small-font;
+    font-weight: 600;
+    line-height: 150%;
+    text-align: center;
+  }
+}
+
+.tableRow {
+  &:nth-child(odd) {
+    background-color: #f9fafb;
+  }
+
+  &:nth-child(even) {
+    background-color: #fff;
+  }
+
+  .tableBodyItem {
+    padding: 10px;
+    font-size: 0.7rem;
+    line-height: 150%;
+    text-align: center;
+  }
+}
