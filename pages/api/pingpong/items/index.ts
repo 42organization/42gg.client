@@ -44,7 +44,7 @@ const item5: InventoryItem = {
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'kim_takgu',
   itemStatus: 'BEFORE',
-  itemType: 'PROFILE_BAND',
+  itemType: 'EDGE',
 };
 
 const item6: InventoryItem = {
@@ -54,7 +54,7 @@ const item6: InventoryItem = {
     'https://dodo.ac/np/images/thumb/1/17/NH_Balloon.jpg/600px-NH_Balloon.jpg',
   purchaserIntra: 'kim_takgu',
   itemStatus: 'BEFORE',
-  itemType: 'PROFILE_BACKGROUND',
+  itemType: 'BACKGROUND',
 };
 
 const item7: InventoryItem = {

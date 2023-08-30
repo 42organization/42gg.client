@@ -31,7 +31,7 @@ const itemList: Item[] = [
     mainContent: '난 “Background”부터가 달라',
     subContent:
       '랜덤으로 내 프로필 페이지의 배경을 변경할 수 있는 아이템입니다.',
-    itemType: 'PROFILE_BACKGROUND',
+    itemType: 'BACKGROUND',
     imageUri: '/image/fallBackSrc.jpeg',
     originalPrice: 300,
     discount: 30,
@@ -42,7 +42,7 @@ const itemList: Item[] = [
     itemName: 'Edge 뽑기',
     mainContent: '난 “Edge”로 말해..',
     subContent: '랜덤으로 프로필 테두리 색상을 변경할 수 있는 아이템입니다.',
-    itemType: 'PROFILE_BAND',
+    itemType: 'EDGE',
     imageUri: '/image/fallBackSrc.jpeg',
     originalPrice: 50,
     discount: 10,

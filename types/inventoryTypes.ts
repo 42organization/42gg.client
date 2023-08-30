@@ -2,8 +2,8 @@ export type InventoryItemStatus = 'BEFORE' | 'USING' | 'USED';
 
 export type ItemType =
   | 'MEGAPHONE'
-  | 'PROFILE_BACKGROUND'
-  | 'PROFILE_BAND'
+  | 'BACKGROUND'
+  | 'EDGE'
   | 'TEXT_COLOR'
   | 'PROFILE_IMAGE'; // REVIEW - 아이템 타입 추가 / 변경 가능성 있음.
 
