@@ -11,7 +11,7 @@ const useBuyModal = (purchasedItem: Purchase) => {
   const onPurchase = async () => {
     try {
       await instance.post(
-        `pingpong/items/purchases/${purchasedItem.itemId}`,
+        `/pingpong/items/purchases/${purchasedItem.itemId}`,
         null
       );
       alert(`구매 성공!`);
