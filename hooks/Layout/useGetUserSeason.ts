@@ -19,13 +19,6 @@ const useGetUserSeason = (presentPath: string) => {
     type: 'setError',
   });
 
-  // const getUserHandler = useMockAxiosGet({
-  //   url: '/users/user',
-  //   setState: setUser,
-  //   err: 'JB02',
-  //   type: 'setError',
-  // });
-
   const getSeasonListHandler = useAxiosGet<any>({
     url: '/pingpong/seasons',
     setState: (data) => {
