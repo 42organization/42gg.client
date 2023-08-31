@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 const baseURL = `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}`;
 const manageBaseURL = process.env.NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT ?? '/';
@@ -34,4 +34,10 @@ instanceInManage.interceptors.request.use(
   }
 );
 
-export { instance, instanceInManage };
+function isAxiosError<ErrorPayload>(
+  error: unknown
+): error is AxiosError<ErrorPayload> {
+  return axios.isAxiosError(error);
+}
+
+export { instance, instanceInManage, isAxiosError };
