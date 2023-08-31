@@ -18,7 +18,7 @@ export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
 
   const deleteMegaphoneHandler = async (megaphoneId: number) => {
     try {
-      await instance.delete(`/admin/megaphones/${megaphoneId}`);
+      await instance.delete(`/pingpong/megaphones/${megaphoneId}`);
       setSnackBar({
         toastName: 'delete megaphone',
         severity: 'success',
