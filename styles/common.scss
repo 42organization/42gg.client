@@ -410,15 +410,15 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
     @include txtColor();
   }
   &.rainbow {
-    // background: linear-gradient(
-    //   90deg,
-    //   rgba(239, 80, 80, 0.553) 15%,
-    //   #f6d365 38%,
-    //   rgba(60, 238, 60, 0.553) 45.33%,
-    //   rgba(10, 122, 234, 0.867) 70%,
-    //   rgba(26, 26, 27, 0.568) 80.66%,
-    //   rgb(123, 97, 224) 100%
-    // );
+    background: linear-gradient(
+      90deg,
+      rgba(255, 48, 21, 0.798) 15%,
+      #f6d365 38%,
+      rgba(60, 238, 60, 0.553) 55.33%,
+      rgba(14, 204, 238, 0.867) 70%,
+      rgba(4, 4, 235, 0.568) 80.66%,
+      rgb(123, 97, 224) 100%
+    );
     @include txtColor();
   }
 }
