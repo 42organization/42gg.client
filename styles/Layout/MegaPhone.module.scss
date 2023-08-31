@@ -3,6 +3,8 @@
   transform: translateY($num);
 }
 
+$slide_count: 1000;
+
 .rollingBanner {
   position: relative;
   display: flex;
@@ -21,35 +23,12 @@
   height: 100%;
   text-align: center;
 
-  &.slideNext0 {
-    @include slide(0%);
-  }
-  &.slideNext1 {
-    @include slide(-100%);
-  }
-  &.slideNext2 {
-    @include slide(-200%);
-  }
-  &.slideNext3 {
-    @include slide(-300%);
-  }
-  &.slideNext4 {
-    @include slide(-400%);
-  }
-  &.slideNext5 {
-    @include slide(-500%);
-  }
-  &.slideNext6 {
-    @include slide(-600%);
-  }
-  &.slideNext7 {
-    @include slide(-700%);
-  }
-  &.slideNext8 {
-    @include slide(-800%);
-  }
-  &.slideNext9 {
-    @include slide(-900%);
+  @for $i from 0 to $slide_count {
+    $class-name: 'slideNext#{$i}';
+    $slide-distance: $i * -100%;
+    &.#{$class-name} {
+      @include slide($slide-distance);
+    }
   }
 }
 
