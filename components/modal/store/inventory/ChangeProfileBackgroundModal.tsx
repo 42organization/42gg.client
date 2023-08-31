@@ -1,6 +1,7 @@
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { Modal } from 'types/modalTypes';
+import { instance } from 'utils/axios';
 import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
@@ -32,14 +33,20 @@ export default function ChangeProfileBackgroundModal({
       receiptId: receiptId,
     };
     try {
+      //   const res = await instance.patch('/pingpong/users/background', data);
       const res = await mockInstance.patch('/users/background', data);
-      setModal({
-        modalName: 'USE-ITEM-GACHA',
-        randomItem: {
-          item: 'background',
-          color: res.data,
-        },
-      });
+      if (res.data) {
+        setModal({
+          modalName: 'USE-ITEM-GACHA',
+          randomItem: {
+            item: 'BACKGROUND',
+            color: res.data,
+          },
+        });
+      } else {
+        alert('뽑기에 실패했습니다(˃̣̣̥ᴖ˂̣̣̥) 관리자에게 문의해주세요');
+        resetModal();
+      }
     } catch (error) {
       setError('HB05');
     }

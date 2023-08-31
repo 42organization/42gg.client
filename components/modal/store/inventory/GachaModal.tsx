@@ -24,7 +24,7 @@ export default function GachaModal({ item, color }: GachaModalProps) {
         <div className={`${styles[randomBall]}`}></div>
       </div>
       <GachaConfetti />
-      {item === 'edge' ? (
+      {item === 'EDGE' ? (
         <EdgePreview edge={color} />
       ) : (
         <BackgroundPreview backgroundType={color} />
