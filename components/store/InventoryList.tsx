@@ -1,6 +1,7 @@
 import React from 'react';
 import { instance } from 'utils/axios';
 import { InfinityScroll } from 'utils/infinityScroll';
+import EmptyImage from 'components/EmptyImage';
 import { InfiniteScrollComponent } from 'components/store/InfiniteScrollComponent';
 import { InvetoryItem } from 'components/store/InventoryItem';
 import styles from 'styles/store/Inventory.module.scss';
@@ -26,8 +27,11 @@ export function InventoryList() {
   if (data.pages[0].storageItemList.length === 0) {
     return (
       <div className={styles.emptyMessage}>
-        보유한 아이템이 없습니다.
-        <br /> 상점 탭에서 아이템을 구입해 보세요!
+        <p>
+          보유한 아이템이 없습니다.
+          <br /> 상점 탭에서 아이템을 구입해 보세요!
+        </p>
+        <EmptyImage />
       </div>
     );
   }
