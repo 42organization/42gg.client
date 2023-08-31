@@ -1,4 +1,4 @@
-export type InventoryItemStatus = 'BEFORE' | 'USING' | 'USED';
+export type InventoryItemStatus = 'BEFORE' | 'WAITING' | 'USING';
 
 export type ItemType =
   | 'MEGAPHONE'
