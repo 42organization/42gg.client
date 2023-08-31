@@ -73,17 +73,22 @@ export const MegaphoneContainer = ({
 }: MegaphoneContainerProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const [wrapperStyle, setWrapperStyle] = useState<string>('slideNext0');
 
   useInterval(() => {
     const nextIndex = (selectedIndex + 1) % count;
-    setWrapperStyle('slideNext' + nextIndex.toString());
     setSelectedIndex(nextIndex);
-  }, 1000);
+  }, 4000);
 
   return (
     <div className={styles.rollingBanner}>
-      <div className={`${styles.wrapper} ${styles[wrapperStyle]}`} ref={ref}>
+      <div
+        className={styles.wrapper}
+        style={{
+          transition: 'all 1s ease-in-out',
+          transform: `translateY(${selectedIndex * -100}%)`,
+        }}
+        ref={ref}
+      >
         {children}
       </div>
     </div>
