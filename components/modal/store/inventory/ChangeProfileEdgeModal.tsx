@@ -2,7 +2,6 @@ import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { Modal } from 'types/modalTypes';
 import { instance } from 'utils/axios';
-import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import {
@@ -33,8 +32,7 @@ export default function ChangeProfileEdgeModal({
       receiptId: receiptId,
     };
     try {
-      // const res = await instance.patch('/pingpong/users/edge', data);
-      const res = await mockInstance.patch('/users/edge', data);
+      const res = await instance.patch('/pingpong/users/edge', data);
       if (res.data) {
         setModal({
           modalName: 'USE-ITEM-GACHA',

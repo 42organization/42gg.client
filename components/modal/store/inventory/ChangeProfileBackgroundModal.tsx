@@ -2,7 +2,6 @@ import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { Modal } from 'types/modalTypes';
 import { instance } from 'utils/axios';
-import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import {
@@ -33,8 +32,7 @@ export default function ChangeProfileBackgroundModal({
       receiptId: receiptId,
     };
     try {
-      //   const res = await instance.patch('/pingpong/users/background', data);
-      const res = await mockInstance.patch('/users/background', data);
+      const res = await instance.patch('/pingpong/users/background', data);
       if (res.data) {
         setModal({
           modalName: 'USE-ITEM-GACHA',
