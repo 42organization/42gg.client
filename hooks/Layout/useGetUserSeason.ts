@@ -5,7 +5,7 @@ import { SeasonList } from 'types/seasonTypes';
 import { userState } from 'utils/recoil/layout';
 import { loginState } from 'utils/recoil/login';
 import { seasonListState } from 'utils/recoil/seasons';
-import useAxiosGet, { useMockAxiosGet } from 'hooks/useAxiosGet';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 const useGetUserSeason = (presentPath: string) => {
   const [user, setUser] = useRecoilState<User>(userState);

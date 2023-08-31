@@ -43,7 +43,7 @@ const MenuProfile = () => {
       >
         <PlayerImage
           src={user.userImageUri}
-          styleName={`menuPageProfile ${
+          styleName={`menuProfile ${
             user.edge ? user.edge.toLowerCase() : 'basic'
           }`}
           size={18}
