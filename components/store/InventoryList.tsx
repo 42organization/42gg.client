@@ -23,20 +23,24 @@ export function InventoryList() {
   if (error) return <div>{error.message}</div>;
   if (!data) return <div>No data</div>;
 
+  if (data.pages[0].storageItemList.length === 0) {
+    return (
+      <div className={styles.emptyMessage}>
+        보유한 아이템이 없습니다.
+        <br /> 상점 탭에서 아이템을 구입해 보세요!
+      </div>
+    );
+  }
+
   return (
     <div className={styles.inventoryList}>
       {data.pages.map((page, pageIndex) => (
         <React.Fragment key={pageIndex}>
-          {page.storageItemList.length === 0 ? (
-            <div className={styles.emptyMessage}>
-              보유한 아이템이 없습니다.
-              <br /> 상점 탭에서 아이템을 구입해 보세요!
-            </div>
-          ) : (
-            page.storageItemList.map((item) => (
-              <InvetoryItem key={item.receiptId} item={item} />
-            ))
-          )}
+          {page.storageItemList.length === 0
+            ? null
+            : page.storageItemList.map((item) => (
+                <InvetoryItem key={item.receiptId} item={item} />
+              ))}
         </React.Fragment>
       ))}
       <InfiniteScrollComponent
