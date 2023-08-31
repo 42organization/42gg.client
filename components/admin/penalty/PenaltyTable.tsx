@@ -1,37 +1,29 @@
-import { useCallback, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import {
   Table,
   TableBody,
   TableContainer,
-  TableHead,
   TableRow,
   TableCell,
   Paper,
 } from '@mui/material';
+import { IPenalty, IPenaltyTable } from 'types/admin/adminPenaltyTypes';
 import { instanceInManage } from 'utils/axios';
-import { getFormattedDateToString } from 'utils/handleTime';
+import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import {
+  AdminEmptyItem,
+  AdminTableHead,
+} from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/penalty/PenaltyTable.module.scss';
 
-interface IPenalty {
-  penaltyId: number;
-  intraId: string;
-  reason: string;
-  releaseTime: Date;
-}
-
-interface IPenaltyTable {
-  penaltyList: IPenalty[];
-  totalPage: number;
-  currentPage: number;
-}
-
 const tableTitle: { [key: string]: string } = {
-  intraId: '유저 ID',
+  penaltyId: 'ID',
+  intraId: 'Intra ID',
   reason: '사유',
   releaseTime: '해제 시간',
   etc: '기타',
@@ -64,12 +56,9 @@ export default function PenaltyTable() {
       setIntraId(intraId);
       setPenaltyInfo({
         penaltyList: res.data.penaltyList.map((penalty: IPenalty) => {
-          const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(penalty.releaseTime)
-          );
           return {
             ...penalty,
-            releaseTime: `${year}-${month}-${date} ${hour}:${min}`,
+            releaseTime: dateToStringShort(new Date(penalty.releaseTime)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -88,12 +77,9 @@ export default function PenaltyTable() {
       setIntraId('');
       setPenaltyInfo({
         penaltyList: res.data.penaltyList.map((penalty: IPenalty) => {
-          const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(penalty.releaseTime)
-          );
           return {
             ...penalty,
-            releaseTime: `${year}-${month}-${date} ${hour}:${min}`,
+            releaseTime: dateToStringShort(new Date(penalty.releaseTime)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -125,18 +111,7 @@ export default function PenaltyTable() {
         </div>
         <TableContainer className={styles.tableContainer} component={Paper}>
           <Table className={styles.table} aria-label='penalty table'>
-            <TableHead className={styles.tableHeader}>
-              <TableRow>
-                {tableFormat['penalty'].columns.map((columnName: string) => (
-                  <TableCell
-                    key={columnName}
-                    className={styles.tableHeaderItem}
-                  >
-                    {tableTitle[columnName]}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
+            <AdminTableHead tableName={'penalty'} table={tableTitle} />
             <TableBody className={styles.tableBody}>
               {penaltyInfo.penaltyList.length > 0 ? (
                 penaltyInfo.penaltyList.map(
@@ -168,7 +143,7 @@ export default function PenaltyTable() {
                                         {buttonName}
                                       </button>
                                     ) : (
-                                      <></>
+                                      <Fragment key={index}></Fragment>
                                     )
                                 )}
                           </TableCell>
@@ -178,9 +153,7 @@ export default function PenaltyTable() {
                   )
                 )
               ) : (
-                <TableRow>
-                  <TableCell>비어있습니다</TableCell>
-                </TableRow>
+                <AdminEmptyItem content={'패널티 기록이 비어있습니다'} />
               )}
             </TableBody>
           </Table>

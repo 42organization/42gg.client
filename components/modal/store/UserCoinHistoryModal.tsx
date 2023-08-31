@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { ICoin, ICoinHistoryTable } from 'types/userTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import {
@@ -11,6 +10,7 @@ import {
 } from 'components/modal/ModalButton';
 import CoinHistoryContainer from 'components/modal/store/CoinHistoryContainer';
 import PageNation from 'components/Pagination';
+import CoinImage from 'components/store/CoinImage';
 import styles from 'styles/modal/store/UserCoinHistoryModal.module.scss';
 
 export default function UserCoinHistoryModal({ coin }: ICoin) {
@@ -33,11 +33,11 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
     getCoinHistoryList();
   }, [currentPage]);
 
-  // TODO: instance로 수정
+  // 현재는 출석만 되는 상태
   const getCoinHistoryList = async () => {
     try {
-      const res = await mockInstance.get(
-        `/users/coin/?page=${currentPage}&size=5`
+      const res = await instance.get(
+        `pingpong/users/coinhistory/?page=${currentPage}&size=5`
       );
       setCoinHistoryList({
         useCoinList: res.data.useCoinList,
@@ -54,15 +54,7 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
       <div className={styles.title}>GG코인 내역</div>
       <div className={styles.balance}>
         <div>현재 코인</div>
-        <div className={styles.currentCoin}>
-          <Image
-            src='/image/coinImage.svg'
-            alt={'coin'}
-            width={25}
-            height={25}
-          />
-          {coin} &nbsp;
-        </div>
+        <CoinImage amount={coin} size={25} />
       </div>
       <CoinHistoryContainer useCoinList={coinHistoryList.useCoinList} />
       <div>

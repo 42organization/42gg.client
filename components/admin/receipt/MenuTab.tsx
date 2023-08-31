@@ -30,7 +30,6 @@ function MenuTab() {
 
   return (
     <div className={styles.mainContainer}>
-      <div className={styles.title}>거래내역 관리</div>
       <ul className={styles.tabMenu}>
         {tabContents.map((content) => (
           <li
