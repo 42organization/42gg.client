@@ -70,7 +70,10 @@ export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
       alert('확성기가 등록되었습니다.');
     } catch (error: unknown) {
       if (isAxiosError<errorPayload>(error) && error.response) {
-        alert(errorMessages[error.response.data.code]);
+        const { code } = error.response.data;
+        if (errorCode.includes(code) && code !== 'RC100')
+          alert(errorMessages[code]);
+        else setError('JY06');
       } else setError('JY06');
     } finally {
       resetModal();
