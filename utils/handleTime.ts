@@ -146,3 +146,17 @@ export const stringToHourMin = (
   const sMin = fillZero(nMin.toString(), 2);
   return { nHour, nMin, sHour, sMin };
 };
+
+/**
+ * 시간을 YY-MM-DD HH:MM 형식으로 반환
+ * @param {Date} d 시간 문자열
+ * @return 시간(YY-MM-DD HH:MM)
+ * */
+export const dateToStringShort = (d: Date) => {
+  const year = d.getFullYear().toString().slice(2, 4);
+  const month = (d.getMonth() + 1).toString().padStart(2, '0');
+  const date = d.getDate().toString().padStart(2, '0');
+  const hour = d.getHours().toString().padStart(2, '0');
+  const min = d.getMinutes().toString().padStart(2, '0');
+  return `${year}-${month}-${date} ${hour}:${min}`;
+};

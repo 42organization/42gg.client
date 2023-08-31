@@ -3,15 +3,7 @@ import { TableFormat } from 'types/admin/tableTypes';
 export const tableFormat: TableFormat = {
   notification: {
     name: '알림 관리',
-    columns: [
-      'notiId',
-      'intraId',
-      'slotId',
-      'type',
-      'message',
-      'createdTime',
-      'isChecked',
-    ],
+    columns: ['id', 'createdAt', 'intraId', 'type', 'message', 'isChecked'],
   },
   userInfo: {
     name: '사용자 정보',
@@ -23,14 +15,7 @@ export const tableFormat: TableFormat = {
   },
   feedback: {
     name: '피드백 관리',
-    columns: [
-      'id',
-      'intraId',
-      'category',
-      'content',
-      'createdTime',
-      'isSolved',
-    ],
+    columns: ['id', 'createdAt', 'intraId', 'category', 'content', 'isSolved'],
     etc: {
       type: 'toggle',
       value: ['completed', 'notCompleted'],
@@ -44,22 +29,26 @@ export const tableFormat: TableFormat = {
     name: '과거 공지사항',
     columns: [
       'content',
-      'createdTime',
+      'createdAt',
       'creatorIntraId',
-      'deletedTime',
+      'modifiedAt',
+      'deletedAt',
       'deleterIntraId',
-      'isDel',
     ],
   },
   penalty: {
     name: '패널티 관리',
-    columns: ['intraId', 'reason', 'releaseTime', 'etc'],
+    columns: ['penaltyId', 'releaseTime', 'intraId', 'reason', 'etc'],
     etc: {
       type: 'button',
       value: ['해제'],
     },
   },
-  season: {
+  seasonCreate: {
+    name: '시즌 생성',
+    columns: ['seasonName', 'startTime', 'startPpp', 'pppGap', 'create'],
+  },
+  seasonHistory: {
     name: '시즌 목록',
     columns: [
       'seasonId',
@@ -86,11 +75,18 @@ export const tableFormat: TableFormat = {
   },
   megaphoneList: {
     name: '확성기 사용 내역',
-    columns: ['megaphoneId', 'usedAt', 'intraId', 'content', 'status'],
+    columns: [
+      'megaphoneId',
+      'usedAt',
+      'intraId',
+      'content',
+      'status',
+      'delete',
+    ],
   },
   profileList: {
     name: '프로필 변경권 사용 내역',
-    columns: ['profileId', 'date', 'intraId', 'imageUri'],
+    columns: ['profileId', 'date', 'intraId', 'imageUri', 'delete'],
   },
   itemList: {
     name: '상점 아이템 목록',
@@ -103,6 +99,8 @@ export const tableFormat: TableFormat = {
       'originalPrice',
       'discount',
       'salePrice',
+      'edit',
+      'delete',
     ],
   },
   itemHistory: {
@@ -119,6 +117,10 @@ export const tableFormat: TableFormat = {
       'deleterIntraId',
       'visible',
     ],
+  },
+  coinPolicy: {
+    name: '재화 정책 변경',
+    columns: ['attendance', 'normal', 'rankWin', 'rankLose', 'edit'],
   },
   coinPolicyHistory: {
     name: '재화 정책 변경 이력',

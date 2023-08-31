@@ -6,13 +6,21 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import { ISeasonEditInfo } from 'types/seasonTypes';
 import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
+import { AdminTableHead } from 'components/admin/common/AdminTable';
 import styles from 'styles/admin/season/SeasonCreate.module.scss';
+
+const tableTitle: { [key: string]: string } = {
+  seasonName: '시즌 이름',
+  startTime: '시작 시간',
+  startPpp: '시작 PPP',
+  pppGap: '제한 PPP',
+  create: '생성',
+};
 
 export default function SeasonCreate() {
   const [seasonInfo, setSeasonInfo] = useState<ISeasonEditInfo>({
@@ -56,16 +64,7 @@ export default function SeasonCreate() {
     <div className={styles.container}>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <TableHead className={styles.tableHeader}>
-            <TableRow>
-              {Object.keys(seasonInfo).map((columnName) => (
-                <TableCell className={styles.tableHeaderItem} key={columnName}>
-                  {columnName}
-                </TableCell>
-              ))}
-              <TableCell className={styles.tableHeaderItem}>생성</TableCell>
-            </TableRow>
-          </TableHead>
+          <AdminTableHead tableName={'seasonCreate'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             <TableRow>
               <TableCell className={styles.tableBodyItem}>
