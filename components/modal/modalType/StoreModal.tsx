@@ -43,10 +43,10 @@ export default function StoreModal() {
     'USE-ITEM-PROFILE_IMAGE': useItemInfo ? (
       <ProfileImageModal {...useItemInfo} />
     ) : null,
-    'USE-ITEM-PROFILE_BAND': useItemInfo ? (
+    'USE-ITEM-EDGE': useItemInfo ? (
       <ChangeProfileEdgeModal {...useItemInfo} />
     ) : null,
-    'USE-ITEM-PROFILE_BACKGROUND': useItemInfo ? (
+    'USE-ITEM-BACKGROUND': useItemInfo ? (
       <ChangeProfileBackgroundModal {...useItemInfo} />
     ) : null,
     'USE-ITEM-GACHA': randomItem ? <GachaModal {...randomItem} /> : null,
