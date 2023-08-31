@@ -68,7 +68,7 @@ export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
               className={styles.contentBlank}
               value={content}
               readOnly
-            />
+            ></textarea>
           </div>
           <div className={styles.checkWrap}>
             {megaphoneId} 번 확성기를 삭제하시겠습니까?
