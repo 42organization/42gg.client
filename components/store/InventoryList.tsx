@@ -1,12 +1,13 @@
 import React from 'react';
+import { instance } from 'utils/axios';
 import { InfinityScroll } from 'utils/infinityScroll';
-import { mockInstance } from 'utils/mockAxios';
+import EmptyImage from 'components/EmptyImage';
 import { InfiniteScrollComponent } from 'components/store/InfiniteScrollComponent';
 import { InvetoryItem } from 'components/store/InventoryItem';
 import styles from 'styles/store/Inventory.module.scss';
 
 function fetchInventoryData(page: number) {
-  return mockInstance.get(`items?page=${page}&size=${8}`).then((res) => {
+  return instance.get(`/pingpong/items?page=${page}&size=${8}`).then((res) => {
     return res.data;
   });
 }
@@ -23,20 +24,27 @@ export function InventoryList() {
   if (error) return <div>{error.message}</div>;
   if (!data) return <div>No data</div>;
 
+  if (data.pages[0].storageItemList.length === 0) {
+    return (
+      <div className={styles.emptyMessage}>
+        <p>
+          보유한 아이템이 없습니다.
+          <br /> 상점 탭에서 아이템을 구입해 보세요!
+        </p>
+        <EmptyImage />
+      </div>
+    );
+  }
+
   return (
     <div className={styles.inventoryList}>
       {data.pages.map((page, pageIndex) => (
         <React.Fragment key={pageIndex}>
-          {page.storageItemList.length === 0 ? (
-            <div className={styles.emptyMessage}>
-              보유한 아이템이 없습니다.
-              <br /> 상점 탭에서 아이템을 구입해 보세요!
-            </div>
-          ) : (
-            page.storageItemList.map((item) => (
-              <InvetoryItem key={item.receiptId} item={item} />
-            ))
-          )}
+          {page.storageItemList.length === 0
+            ? null
+            : page.storageItemList.map((item) => (
+                <InvetoryItem key={item.receiptId} item={item} />
+              ))}
         </React.Fragment>
       ))}
       <InfiniteScrollComponent
