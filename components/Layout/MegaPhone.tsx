@@ -24,32 +24,32 @@ const adminContent: IMegaphoneContent = {
 
 const megaphoneContent: IMegaphoneContent = {
   megaphoneId: 2,
-  content: '오늘 하루 42GG는 내가 접수한다 📢😎',
-  intraId: '확성기',
+  content: '확성기 : 오늘 하루 42GG는 내가 접수한다 📢😎',
+  intraId: '절찬 판매 중!',
 };
 
 const profileContent: IMegaphoneContent = {
   megaphoneId: 3,
-  content: '얼굴 체인지',
-  intraId: '이미지 변경권',
+  content: '이미지 변경권 : 얼굴 체인지',
+  intraId: '절찬 판매 중!',
 };
 
 const edgeContent: IMegaphoneContent = {
   megaphoneId: 4,
-  content: '난 "Edge"로 말해.. -sishin 😝',
-  intraId: 'Edge 뽑기',
+  content: 'Edge 뽑기 : 난 "Edge"로 말해.. -sishin 😝',
+  intraId: '절찬 판매 중!',
 };
 
 const backgroundContent: IMegaphoneContent = {
   megaphoneId: 5,
-  content: '난 "Background"부터가 달라 - klew 😝',
-  intraId: '배경 뽑기',
+  content: '배경 뽑기 : 난 "Background"부터가 달라 - klew 😝',
+  intraId: '절찬 판매 중!',
 };
 
 const idContent: IMegaphoneContent = {
   megaphoneId: 6,
-  content: '남들과는 다르게! ID 색깔을 바꿔보세요!',
-  intraId: 'ID 색깔 변경권',
+  content: 'ID 색깔 변경권 : 남들과는 다르게! ID 색깔을 바꿔보세요!',
+  intraId: '절찬 판매 중!',
 };
 
 const defaultContents: MegaphoneList = [
