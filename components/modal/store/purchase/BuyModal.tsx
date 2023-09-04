@@ -1,22 +1,32 @@
-import { useEffect, useState } from 'react';
-import { Purchase } from 'types/itemTypes';
+import { useState } from 'react';
+import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import { PriceTag } from 'types/modalTypes';
+import { instance } from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/modal';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
-import useBuyModal from 'hooks/modal/store/purchase/useBuyModal';
 import styles from 'styles/modal/store/BuyModal.module.scss';
 
 export default function BuyModal({ itemId, product, price }: PriceTag) {
-  const [purchaseItem, setPurchaseItem] = useState<Purchase>({ itemId: -1 });
-  const { onPurchase, onCancel } = useBuyModal(purchaseItem);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const resetModal = useResetRecoilState(modalState);
+  const setError = useSetRecoilState<string>(errorState);
 
-  useEffect(() => {
-    setPurchaseItem({
-      itemId: itemId,
-    });
-  }, [itemId]);
+  // TODO: 에러 처리
+  const onPurchase = async () => {
+    setIsLoading(true);
+    try {
+      await instance.post(`/pingpong/items/purchases/${itemId}`, null);
+      alert(`구매 성공!`);
+    } catch (error) {
+      setError('HB03');
+    }
+    setIsLoading(false);
+    resetModal();
+  };
 
   return (
     <div className={styles.container}>
@@ -38,8 +48,13 @@ export default function BuyModal({ itemId, product, price }: PriceTag) {
         </div>
       </div>
       <ModalButtonContainer>
-        <ModalButton style='negative' value='아니오' onClick={onCancel} />
-        <ModalButton style='positive' value='예' onClick={onPurchase} />
+        <ModalButton style='negative' value='아니오' onClick={resetModal} />
+        <ModalButton
+          style='positive'
+          value='예'
+          isLoading={isLoading}
+          onClick={onPurchase}
+        />
       </ModalButtonContainer>
     </div>
   );
