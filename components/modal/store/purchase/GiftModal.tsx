@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import { GiftRequest } from 'types/itemTypes';
 import { PriceTag } from 'types/modalTypes';
