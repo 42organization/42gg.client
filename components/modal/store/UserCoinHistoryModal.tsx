@@ -60,7 +60,11 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
         <CoinImage amount={coin} size={25} />
       </div>
       {isLoading ? (
-        <div> 로딩 중... </div>
+        <div className={styles.loading}>
+          <span className={styles.span1}>*</span>
+          <span className={styles.span2}>*</span>
+          <span className={styles.span3}>*</span>
+        </div>
       ) : (
         <CoinHistoryContainer useCoinList={coinHistoryList.useCoinList} />
       )}
