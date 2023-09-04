@@ -25,6 +25,6 @@ const ErrorDefault = () => {
   return <ErrorPage />;
 };
 
-export const Case1: Story = {
+export const Default: Story = {
   render: () => <ErrorDefault />,
 };
