@@ -11,6 +11,6 @@ const meta: Meta<typeof Megaphone> = {
 export default meta;
 type Story = StoryObj<typeof Megaphone>;
 
-export const Empty: Story = {
+export const Default: Story = {
   args: {},
 };
