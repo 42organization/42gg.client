@@ -30,19 +30,19 @@ const megaphoneContent: IMegaphoneContent = {
 
 const profileContent: IMegaphoneContent = {
   megaphoneId: 3,
-  content: '이미지 변경권 : 얼굴 체인지',
+  content: '이미지 변경권 : 잘 지내? 프사 바꿨네...',
   intraId: '절찬 판매 중!',
 };
 
 const edgeContent: IMegaphoneContent = {
   megaphoneId: 4,
-  content: 'Edge 뽑기 : 난 "Edge"로 말해.. -sishin 😝',
+  content: 'Edge 뽑기 : 난 "Edge"로 말해',
   intraId: '절찬 판매 중!',
 };
 
 const backgroundContent: IMegaphoneContent = {
   megaphoneId: 5,
-  content: '배경 뽑기 : 난 "Background"부터가 달라 - klew 😝',
+  content: '배경 뽑기 : 난 "Background"부터가 달라',
   intraId: '절찬 판매 중!',
 };
 
@@ -60,12 +60,6 @@ const defaultContents: MegaphoneList = [
   backgroundContent,
   idContent,
 ];
-
-// 메가폰 10개 넘어도 잘 작동하는지 테스트하는 테스트용 temp 입니다.
-const temp = defaultContents;
-for (let i = 0; i < 4; i++) {
-  temp.push(...defaultContents);
-}
 
 export const MegaphoneContainer = ({
   children,
@@ -110,10 +104,7 @@ const Megaphone = () => {
   const getMegaphoneHandler = useAxiosGet<any>({
     url: `/pingpong/megaphones`,
     setState: (data) => {
-      // megaphone 아이템이 여러개 들어와도 잘 작동하는지 테스트용 임시 temp입니다.
-      // 위에서 temp 길이를 조정할 수 있습니다.
-      // setContents(data.length > 0 ? data : defaultContents);
-      setContents(data.length > 0 ? data : temp);
+      setContents(data.length > 0 ? data : defaultContents);
     },
     err: 'HJ01',
     type: 'setError',
