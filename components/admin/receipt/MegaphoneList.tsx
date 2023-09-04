@@ -6,36 +6,31 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import { Imegaphone, ImegaphoneTable } from 'types/admin/adminReceiptType';
-import { getFormattedDateToString } from 'utils/handleTime';
+import { dateToStringShort } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import {
+  AdminContent,
+  AdminEmptyItem,
+  AdminTableHead,
+} from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/receipt/MegaphoneList.module.scss';
 
-const megaPhoneTableTitle: { [key: string]: string } = {
+const tableTitle: { [key: string]: string } = {
   megaphoneId: 'ID',
-  usedAt: '사용일자',
-  intraId: '사용자',
+  usedAt: '사용 시간',
+  intraId: 'Intra ID',
   content: '내용',
   status: '상태',
   delete: '삭제',
 };
-
-const tableColumnName = [
-  'megaphoneId',
-  'usedAt',
-  'intraId',
-  'content',
-  'status',
-  'delete',
-];
 
 const MAX_CONTENT_LENGTH = 16;
 
@@ -63,12 +58,9 @@ function MegaphoneList() {
       );
       setMegaphoneData({
         megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {
-          const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(megaphone.usedAt)
-          );
           return {
             ...megaphone,
-            usedAt: `${year}-${month}-${date} ${hour}:${min}`,
+            usedAt: dateToStringShort(new Date(megaphone.usedAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -92,12 +84,9 @@ function MegaphoneList() {
       );
       setMegaphoneData({
         megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {
-          const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(megaphone.usedAt)
-          );
           return {
             ...megaphone,
-            usedAt: `${year}-${month}-${date} ${hour}:${min}`,
+            usedAt: dateToStringShort(new Date(megaphone.usedAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -120,14 +109,6 @@ function MegaphoneList() {
     });
   };
 
-  const openDetailModal = (megaphone: Imegaphone) => {
-    setModal({
-      modalName: 'ADMIN-DETAIL_CONTENT',
-      detailTitle: megaphone.megaphoneId.toString(),
-      detailContent: megaphone.content,
-    });
-  };
-
   useEffect(() => {
     intraId ? getUserMegaphoneHandler() : getAllMegaphoneHandler();
   }, [intraId, getUserMegaphoneHandler, getAllMegaphoneHandler, modal]);
@@ -139,15 +120,7 @@ function MegaphoneList() {
       </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <TableHead className={styles.tableHeader}>
-            <TableRow>
-              {tableColumnName.map((column, idx) => (
-                <TableCell className={styles.tableHeaderItem} key={idx}>
-                  {megaPhoneTableTitle[column]}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+          <AdminTableHead tableName={'megaphoneList'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             {megaphoneData.megaphoneList.length > 0 ? (
               megaphoneData.megaphoneList.map((megaphone: Imegaphone) => (
@@ -159,42 +132,31 @@ function MegaphoneList() {
                     (columnName: string, index: number) => {
                       return (
                         <TableCell className={styles.tableBodyItem} key={index}>
-                          {megaphone[columnName as keyof Imegaphone].toString()
-                            .length > MAX_CONTENT_LENGTH ? (
-                            <div>
-                              {megaphone[columnName as keyof Imegaphone]
-                                .toString()
-                                .slice(0, MAX_CONTENT_LENGTH)}
-                              <span
-                                style={{ cursor: 'pointer', color: 'grey' }}
-                                onClick={() => openDetailModal(megaphone)}
-                              >
-                                ...더보기
-                              </span>
-                            </div>
+                          {columnName === 'delete' ? (
+                            <button
+                              className={styles.deleteBtn}
+                              onClick={() => deleteMegaphone(megaphone)}
+                            >
+                              삭제
+                            </button>
                           ) : (
-                            megaphone[columnName as keyof Imegaphone].toString()
+                            <AdminContent
+                              content={megaphone[
+                                columnName as keyof Imegaphone
+                              ].toString()}
+                              maxLen={MAX_CONTENT_LENGTH}
+                              detailTitle={megaphone.megaphoneId.toString()}
+                              detailContent={megaphone.content}
+                            />
                           )}
                         </TableCell>
                       );
                     }
                   )}
-                  <TableCell className={styles.tableBodyItem}>
-                    <button
-                      className={styles.deleteBtn}
-                      onClick={() => deleteMegaphone(megaphone)}
-                    >
-                      삭제
-                    </button>
-                  </TableCell>
                 </TableRow>
               ))
             ) : (
-              <TableRow className={styles.tableBodyItem}>
-                <TableCell className={styles.tableBodyItem}>
-                  비어있습니다
-                </TableCell>
-              </TableRow>
+              <AdminEmptyItem content={'확성기 사용 내역이 비어있습니다'} />
             )}
           </TableBody>
         </Table>

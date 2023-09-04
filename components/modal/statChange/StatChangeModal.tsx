@@ -17,14 +17,8 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
   const setError = useSetRecoilState(errorState);
   const [stat, setStat] = useState<GameResult | undefined>();
 
-  /*     const getExpHandler = useAxiosGet({
+  const getExpHandler = useAxiosGet({
     url: `/pingpong/games/${gameId}/result/${mode?.toLowerCase()}`,
-    setState: setStat,
-    err: 'KP03',
-    type: 'setError',
-  }); */
-  const getExpHandler = useMockAxiosGet({
-    url: `/games/normal`,
     setState: setStat,
     err: 'KP03',
     type: 'setError',

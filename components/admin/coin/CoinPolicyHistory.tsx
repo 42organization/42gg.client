@@ -6,7 +6,6 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import {
@@ -14,31 +13,25 @@ import {
   IcoinPolicyHistoryTable,
 } from 'types/admin/adminCoinTypes';
 import { instanceInManage } from 'utils/axios';
-import { getFormattedDateToString } from 'utils/handleTime';
+import { dateToStringShort } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
+import {
+  AdminEmptyItem,
+  AdminTableHead,
+} from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/coin/CoinPolicyHistory.module.scss';
 
 const coinPolicyHistoryTableTitle: { [key: string]: string } = {
   coinPolicyId: 'ID',
-  createdAt: '등록 날짜',
-  createUserId: '등록 유저',
+  createdAt: '등록 시간',
+  createUserId: '등록한 사람',
   attendance: '출석 획득',
   normal: '일반게임 획득',
   rankWin: '랭크게임 승리 획득',
   rankLose: '랭크게임 패배 획득',
 };
-
-const tableColumnName = [
-  'coinPolicyId',
-  'createdAt',
-  'createUserId',
-  'attendance',
-  'normal',
-  'rankWin',
-  'rankLose',
-];
 
 function CoinPolicyHistory() {
   const [coinPolicyHistoryData, setCoinPolicyHistoryData] =
@@ -58,12 +51,11 @@ function CoinPolicyHistory() {
       setCoinPolicyHistoryData({
         coinPolicyList: res.data.coinPolicyList.map(
           (coinPolicyHistory: IcoinPolicyHistory) => {
-            const { year, month, date, hour, min } = getFormattedDateToString(
-              new Date(coinPolicyHistory.createdAt)
-            );
             return {
               ...coinPolicyHistory,
-              createdAt: `${year}-${month}-${date} ${hour}:${min}`,
+              createdAt: dateToStringShort(
+                new Date(coinPolicyHistory.createdAt)
+              ),
             };
           }
         ),
@@ -88,15 +80,10 @@ function CoinPolicyHistory() {
     <>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <TableHead className={styles.tableHeader}>
-            <TableRow>
-              {tableColumnName.map((column, idx) => (
-                <TableCell className={styles.tableHeaderItem} key={idx}>
-                  {coinPolicyHistoryTableTitle[column]}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+          <AdminTableHead
+            tableName={'coinPolicyHistory'}
+            table={coinPolicyHistoryTableTitle}
+          />
           <TableBody className={styles.tableBody}>
             {coinPolicyHistoryData.coinPolicyList.length > 0 ? (
               coinPolicyHistoryData.coinPolicyList.map(
@@ -123,11 +110,7 @@ function CoinPolicyHistory() {
                 )
               )
             ) : (
-              <TableRow className={styles.tableRow}>
-                <TableCell className={styles.tableBodyItem}>
-                  비어있습니다
-                </TableCell>
-              </TableRow>
+              <AdminEmptyItem content={'정책 변경 이력이 없습니다.'} />
             )}
           </TableBody>
         </Table>

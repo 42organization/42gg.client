@@ -82,7 +82,12 @@ export function InvetoryItem({ item }: inventoryItemProps) {
       </div>
       <div onTouchStart={handleTouch}>
         <div className={styles.imgContainer}>
-          <Image className={styles.img} src={imageUri} alt={itemName} fill />
+          <Image
+            className={styles.img}
+            src={imageUri === null ? '/image/fallBackSrc.jpeg' : imageUri}
+            alt={itemName}
+            fill
+          />
         </div>
         <div className={styles.itemName}>{itemName}</div>
       </div>

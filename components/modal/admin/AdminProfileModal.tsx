@@ -1,7 +1,7 @@
 import Image from 'next/legacy/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { roleTypes, UserInfo } from 'types/admin/adminUserTypes';
+import { roleTypes, IUserInfo } from 'types/admin/adminUserTypes';
 import { racketTypes } from 'types/userTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
@@ -12,7 +12,7 @@ import styles from 'styles/admin/modal/AdminProfile.module.scss';
 const STAT_MSG_LIMIT = 30;
 
 export default function AdminProfileModal(props: { intraId: string }) {
-  const [userInfo, setUserInfo] = useState<UserInfo>({
+  const [userInfo, setUserInfo] = useState<IUserInfo>({
     userId: 0,
     intraId: '',
     userImageUri: null,
@@ -22,7 +22,7 @@ export default function AdminProfileModal(props: { intraId: string }) {
     losses: '',
     ppp: '',
     email: '',
-    roleType: 'ROLE_USER',
+    roleType: 'USER',
     coin: 0,
   });
 

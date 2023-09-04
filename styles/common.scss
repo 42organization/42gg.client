@@ -84,21 +84,37 @@ $bg-basic: linear-gradient(
   #481570 58.85%,
   #300e4b 98.44%
 );
+// Tranquil
 $bg-pink-orange: linear-gradient(to bottom, #ef629f, #eecda3);
+// Windy
 $bg-blue-green: linear-gradient(to bottom, #acb6e5, #86fde8);
+// Bupe
 $bg-midnight: linear-gradient(to bottom, #00416a, #e4e5e6);
+// Mango
 $bg-orange: linear-gradient(to top, #ffe259, #ffa751);
+// Misty Meadow
 $bg-grass-green: linear-gradient(to bottom, #215f00, #e4e4d9);
+// Opa
 $bg-lemon-blue: linear-gradient(to top, #3d7eaa, #ffe47a);
+// Dracula
 $bg-dracula: linear-gradient(to top, #dc2424, #4a569d);
+// Sea Blizz
 $bg-mint-green: linear-gradient(to bottom, #1cd8d2, #93edc7);
+// Mystic
 $bg-steel-gray: linear-gradient(to bottom, #757f9a, #d7dde8);
+// The Strain
 $bg-blood-red: linear-gradient(to bottom, #870000, #190a05);
+// Cool Sky
 $bg-blue-sky: linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff);
+// Jodhpur
 $bg-ocean-blue: linear-gradient(to top, #9cecfb, #65c7f7, #0052d4);
+// Hazel
 $bg-pink-blue: linear-gradient(to top, #77a1d3, #79cbca, #e684ae);
+// Radar
 $bg-sunset-pink: linear-gradient(to top, #a770ef, #cf8bf3, #fdb99b);
+// Royal Blue + Petrol
 $bg-dark-navy: linear-gradient(to top, #bbd2c5, #536976, #292e49);
+// MegaTron
 $bg-orange-green: linear-gradient(to top, #c6ffdd, #fbd786, #f7797d);
 
 /* font */
@@ -390,15 +406,15 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   background: black;
   @include txtColor();
   &.red {
-    background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+    background-image: linear-gradient(to right, #f77062 0%, #fe5196 100%);
     @include txtColor();
   }
   &.yellow {
-    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 100%);
     @include txtColor();
   }
   &.green {
-    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+    background-image: linear-gradient(135deg, #81fbb8 10%, #28c76f 100%);
     @include txtColor();
   }
   &.blue {
@@ -406,23 +422,17 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
     @include txtColor();
   }
   &.black {
-    background: linear-gradient(
-      180.89deg,
-      rgba(114, 114, 114, 0.553) 26.68%,
-      rgba(82, 82, 82, 0.3) 47.47%,
-      rgba(61, 61, 61, 0.51) 65.76%,
-      rgba(0, 0, 0, 0) 84.03%
-    );
+    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
     @include txtColor();
   }
   &.rainbow {
     background: linear-gradient(
       90deg,
-      rgba(239, 80, 80, 0.553) 15%,
+      rgba(255, 48, 21, 0.798) 15%,
       #f6d365 38%,
-      rgba(60, 238, 60, 0.553) 45.33%,
-      rgba(10, 122, 234, 0.867) 70%,
-      rgba(26, 26, 27, 0.568) 80.66%,
+      rgba(60, 238, 60, 0.553) 55.33%,
+      rgba(14, 204, 238, 0.867) 70%,
+      rgba(4, 4, 235, 0.568) 80.66%,
       rgb(123, 97, 224) 100%
     );
     @include txtColor();

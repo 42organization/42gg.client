@@ -1,0 +1,9 @@
+@import 'styles/common.scss';
+
+.ggCoin {
+  color: $coin-yellow;
+  img {
+    margin-right: 0.2rem;
+    transform: translateY(0.2rem);
+  }
+}

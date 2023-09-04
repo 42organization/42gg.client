@@ -48,13 +48,13 @@ export default function BasicProfile({ profileId }: ProfileProps) {
       {intraId && (
         <PlayerImage
           src={userImageUri}
-          styleName={`mainProfile ${edge.toLowerCase()}`}
+          styleName={`mainProfile ${edge ? edge.toLowerCase() : 'basic'}`}
           size={30}
         />
       )}
       <div className={styles.idContainer}>
         <div className={styles.ranktier}>
-          <PlayerImage src={tierImageUri} styleName={'ranktier'} size={50} />
+          <PlayerImage src={tierImageUri} styleName={'profiletier'} size={50} />
         </div>
         <div className={styles.intraId}>{intraId}</div>
         <div className={styles.buttons}>

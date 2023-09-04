@@ -29,16 +29,7 @@ const useRankList = ({
   const [myRank, setMyRank] = useRecoilState<MyRank>(myRankState);
   const [isScroll, setIsScroll] = useRecoilState<boolean>(scrollState);
 
-  /*   const getRankDataHandler = useAxiosGet<any>({
-    url: makePath,
-    setState: (data) => {
-      setRank(data);
-      setMyRank((prev) => ({ ...prev, [toggleMode]: data.myRank }));
-    },
-    err: 'DK01',
-    type: 'setError',
-  }); */
-  const getRankDataHandler = useMockAxiosGet<any>({
+  const getRankDataHandler = useAxiosGet<any>({
     url: makePath,
     setState: (data) => {
       setRank(data);
