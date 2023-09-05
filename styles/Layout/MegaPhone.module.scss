@@ -1,8 +1,3 @@
-@mixin slide($num) {
-  transition: all 1s ease-in-out;
-  transform: translateY($num);
-}
-
 .rollingBanner {
   position: relative;
   display: flex;
@@ -20,37 +15,6 @@
   width: 100%;
   height: 100%;
   text-align: center;
-
-  &.slideNext0 {
-    @include slide(0%);
-  }
-  &.slideNext1 {
-    @include slide(-100%);
-  }
-  &.slideNext2 {
-    @include slide(-200%);
-  }
-  &.slideNext3 {
-    @include slide(-300%);
-  }
-  &.slideNext4 {
-    @include slide(-400%);
-  }
-  &.slideNext5 {
-    @include slide(-500%);
-  }
-  &.slideNext6 {
-    @include slide(-600%);
-  }
-  &.slideNext7 {
-    @include slide(-700%);
-  }
-  &.slideNext8 {
-    @include slide(-800%);
-  }
-  &.slideNext9 {
-    @include slide(-900%);
-  }
 }
 
 .contentWrapper {

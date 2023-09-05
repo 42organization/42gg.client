@@ -3,10 +3,12 @@ import { Purchase } from 'types/itemTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
+import { updateCoinState } from 'utils/recoil/updateCoin';
 
 const useBuyModal = (purchasedItem: Purchase) => {
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState<string>(errorState);
+  const updateCoin = useSetRecoilState(updateCoinState);
 
   const onPurchase = async () => {
     try {
@@ -15,6 +17,7 @@ const useBuyModal = (purchasedItem: Purchase) => {
         null
       );
       alert(`구매 성공!`);
+      updateCoin(true);
     } catch (error) {
       setError('HB03');
     }
