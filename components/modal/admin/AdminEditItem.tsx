@@ -32,7 +32,8 @@ export default function AdminEditItemModal(props: Item) {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const name = form.get('name');
-    const content = form.get('content');
+    const mainContent = form.get('mainContent');
+    const subContent = form.get('subContent');
     const price = Number(form.get('price'));
     const discount = Number(form.get('discount'));
 
@@ -49,13 +50,14 @@ export default function AdminEditItemModal(props: Item) {
     const formData = new FormData();
     const data = {
       name: name,
-      content: content,
+      mainContent: mainContent,
+      subContent: subContent,
       price: price,
       discount: discount,
       itemType: itemType,
     };
     formData.append(
-      'itemRequestDto',
+      'updateItemInfo',
       new Blob([JSON.stringify(data)], {
         type: 'application/json',
       })
@@ -148,7 +150,7 @@ export default function AdminEditItemModal(props: Item) {
                 id='itemMainContent'
                 className={styles.mainContentBlank}
                 type='text'
-                name='content'
+                name='mainContent'
                 defaultValue={mainContent}
                 required
               />
@@ -160,7 +162,7 @@ export default function AdminEditItemModal(props: Item) {
               <textarea
                 id='itemSubContent'
                 className={styles.subContentBlank}
-                name='content'
+                name='subContent'
                 defaultValue={subContent}
                 required
               />

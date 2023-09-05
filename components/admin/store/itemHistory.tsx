@@ -13,7 +13,6 @@ import {
 import { IitemHistory, IitemHistoryList } from 'types/admin/adminStoreTypes';
 import { instanceInManage } from 'utils/axios';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -58,15 +57,11 @@ function ItemHistory() {
 
   const getItemHistoryListHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/items/history?page=${currentPage}&size=5`
+      const res = await instanceInManage.get(
+        `/items/history?page=${currentPage}&size=5`
       );
-      // const res = await instanceInManage.get(
-      //   `/items/history?page=${currentPage}&size=5`
-      // );
       setItemHistoryData({
-        // itemHistoryList: res.data.historyList.map(
-        itemHistoryList: res.data.itemHistoryList.map(
+        itemHistoryList: res.data.historyList.map(
           (itemHistory: IitemHistory) => {
             const { year, month, date, hour, min } = getFormattedDateToString(
               new Date(itemHistory.createdAt)
