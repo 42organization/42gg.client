@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
+import { QueryClientProvider, QueryClient } from 'react-query';
 import { RecoilRoot } from 'recoil';
 import ErrorChecker from 'components/error/ErrorChecker';
 import Layout from 'components/Layout/Layout';
@@ -14,6 +15,7 @@ import 'styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const queryClient = new QueryClient();
 
   useEffect(() => {
     const handleRouteChange = (url: any) => {
@@ -49,15 +51,17 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
       <RecoilRoot>
-        <LoginChecker>
-          <ErrorChecker>
+        {/* <LoginChecker> */}
+        <ErrorChecker>
+          <QueryClientProvider client={queryClient}>
             <Layout>
               <Component {...pageProps} />
             </Layout>
             <ModalProvider />
             <CustomizedSnackbars />
-          </ErrorChecker>
-        </LoginChecker>
+          </QueryClientProvider>
+        </ErrorChecker>
+        {/* </LoginChecker> */}
       </RecoilRoot>
     </>
   );

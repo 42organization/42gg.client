@@ -5,10 +5,12 @@ import { SeasonList } from 'types/seasonTypes';
 import { userState } from 'utils/recoil/layout';
 import { loginState } from 'utils/recoil/login';
 import { seasonListState } from 'utils/recoil/seasons';
+import { useUser } from 'hooks/Layout/useUser';
 import useAxiosGet from 'hooks/useAxiosGet';
 
 const useGetUserSeason = (presentPath: string) => {
   const [user, setUser] = useRecoilState<User>(userState);
+  const userData = useUser();
   const setSeasonList = useSetRecoilState<SeasonList>(seasonListState);
   const isLogIn = useRecoilValue(loginState);
 
@@ -29,9 +31,10 @@ const useGetUserSeason = (presentPath: string) => {
   });
 
   useEffect(() => {
-    getUserHandler();
+    // getUserHandler();
+    if (userData) setUser(userData);
     getSeasonListHandler();
-  }, [presentPath, isLogIn]);
+  }, [presentPath, isLogIn, userData]);
 
   return [user];
 };
