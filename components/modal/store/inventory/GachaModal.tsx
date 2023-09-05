@@ -27,7 +27,7 @@ export default function GachaModal({ item, color }: GachaModalProps) {
       {item === 'EDGE' ? (
         <EdgePreview edge={color} />
       ) : (
-        <BackgroundPreview backgroundType={color} />
+        <BackgroundPreview background={color} />
       )}
       <div className={styles.button}>
         <ModalButtonContainer>
