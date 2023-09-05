@@ -43,8 +43,8 @@ export default function RankListItemMain({
                   src={userImageUri}
                   styleName={
                     rank === 1
-                      ? `ranktropybig ${edge.toLowerCase()}`
-                      : `ranktropy ${edge.toLowerCase()}`
+                      ? `ranktropybig ${edge ? edge.toLowerCase() : 'basic'}`
+                      : `ranktropy ${edge ? edge.toLowerCase() : 'basic'}`
                   }
                   size={50}
                 />
