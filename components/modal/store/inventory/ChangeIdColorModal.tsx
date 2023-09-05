@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { UseItemRequest, UseIdColorRequest } from 'types/inventoryTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instance } from 'utils/axios';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import {
@@ -39,11 +39,7 @@ export default function ChangeIdColorModal({
     );
     if (!ret) return;
     try {
-      // await mockInstance.post('/users/text-color', data);
-      // NOTE : 테스트를 위해 응답 body를 console에 출력 <- 아이디 색상 변경 결과 확인. 추후 삭제
-      const response = await mockInstance.patch('/users/text-color', data);
-      console.log(response.data);
-      //
+      await instance.patch('/users/text-color', data);
       alert('아이디 색상이 변경되었습니다.');
     } catch (error: unknown) {
       // TODO : error 정의 필요
