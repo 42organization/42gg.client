@@ -18,12 +18,15 @@ export default function CoinHistoryContainer({
           <ErrorEmoji />
         </div>
       ) : (
-        useCoinList.map((coinHistory) => (
-          <CoinHistoryDetails
-            key={coinHistory.createdAt.toString()}
-            details={coinHistory}
-          />
-        ))
+        useCoinList.map(
+          (coinHistory) =>
+            coinHistory.amount !== 0 && (
+              <CoinHistoryDetails
+                key={coinHistory.createdAt.toString()}
+                details={coinHistory}
+              />
+            )
+        )
       )}
     </div>
   );
