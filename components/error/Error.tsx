@@ -1,9 +1,6 @@
 import useErrorPage from 'hooks/error/useErrorPage';
 import styles from 'styles/Error.module.scss';
-import DizzyFace from '/public/image/dizzyface.svg';
-import DizzyFaceNoMouth from '/public/image/dizzyface-no_mouth.svg';
-import DizzyFaceLikeNoti from '/public/image/dizzyface-like_noti.svg';
-import DizzyFaceLikeNoti2 from '/public/image/dizzyface-like_noti_2.svg';
+import ErrorEmoji from '/public/image/error_face.svg';
 
 export default function ErrorPage() {
   const { error, goHome } = useErrorPage();
@@ -23,10 +20,7 @@ export default function ErrorPage() {
               <div></div>
               <div></div>
             </div>
-            <DizzyFaceNoMouth />
-            <DizzyFaceLikeNoti />
-            <DizzyFaceLikeNoti2 />
-            <DizzyFace />
+            <ErrorEmoji />
           </div>
         </div>
         <div className={styles.home} onClick={goHome}>
