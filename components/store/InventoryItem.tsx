@@ -78,7 +78,7 @@ export function InvetoryItem({ item }: inventoryItemProps) {
         </div>
       </div>
       <div className={styles.overlay}>
-        {itemStatus === 'USING' ? (
+        {itemStatus !== 'BEFORE' ? (
           <button onClick={handleEditItem}>삭제하기</button>
         ) : (
           <button onClick={handleUseItem}>사용하기</button>
