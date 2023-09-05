@@ -1,30 +1,29 @@
 import { useEffect, useState } from 'react';
-import MegaphoneList from 'components/admin/receipt/MegaphoneList';
-import ProfileList from 'components/admin/receipt/ProfileList';
-import ReceiptList from 'components/admin/receipt/ReceiptList';
-import styles from 'styles/admin/receipt/MenuTab.module.scss';
+import MegaphoneList from 'components/admin/usageHistory/MegaphoneList';
+import ProfileList from 'components/admin/usageHistory/ProfileList';
+import styles from 'styles/admin/usageHistory/MenuTab.module.scss';
 
 function MenuTab() {
   const [tabIdx, setTabIdx] = useState(0);
-  const [child, setChild] = useState(<ReceiptList />);
+  const [child, setChild] = useState(<MegaphoneList />);
   const tabContents = [
     {
       contentId: 0,
-      contentName: '구매 내역',
-    },
-    {
-      contentId: 1,
       contentName: '확성기 사용 내역',
     },
     {
-      contentId: 2,
+      contentId: 1,
       contentName: '프로필 변경권 사용 내역',
+    },
+    {
+      contentId: 2,
+      contentName: '부적절한 프로필 삭제 내역',
     },
   ];
 
   useEffect(() => {
-    if (tabIdx === 0) setChild(<ReceiptList />);
-    if (tabIdx === 1) setChild(<MegaphoneList />);
+    if (tabIdx === 0) setChild(<MegaphoneList />);
+    if (tabIdx === 1) setChild(<ProfileList />);
     if (tabIdx === 2) setChild(<ProfileList />);
   }, [tabIdx]);
 

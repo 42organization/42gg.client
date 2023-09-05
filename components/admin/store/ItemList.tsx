@@ -46,7 +46,7 @@ function ItemList() {
   // api 연결 시 instanceInManage로 변경
   const getItemListHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(`items/store`);
+      const res = await mockInstance.get(`/items/store`);
       setItemListData(res.data);
     } catch (e: unknown) {
       setSnackBar({
@@ -109,12 +109,26 @@ function ItemList() {
                           >
                             삭제
                           </button>
+                        ) : columnName === 'content' ? (
+                          <div>
+                            {item.mainContent}
+                            <span
+                              style={{ cursor: 'pointer', color: 'grey' }}
+                              onClick={() =>
+                                setModal({
+                                  modalName: 'ADMIN-DETAIL_CONTENT',
+                                  detailTitle: item.mainContent,
+                                  detailContent: item.subContent,
+                                })
+                              }
+                            >
+                              ...더보기
+                            </span>
+                          </div>
                         ) : (
                           <AdminContent
                             content={item[columnName as keyof Item].toString()}
                             maxLen={MAX_CONTENT_LENGTH}
-                            detailTitle={item.itemName}
-                            detailContent={item.mainContent}
                           />
                         )}
                       </TableCell>

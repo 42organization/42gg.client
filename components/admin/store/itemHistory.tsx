@@ -12,6 +12,7 @@ import {
 import { IitemHistory, IitemHistoryList } from 'types/admin/adminStoreTypes';
 import { dateToStringShort } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
+import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
@@ -25,7 +26,7 @@ import styles from 'styles/admin/store/ItemHistory.module.scss';
 const tableTitle: { [key: string]: string } = {
   itemId: 'ID',
   createdAt: '변경 시간',
-  itemName: '이름',
+  name: '이름',
   content: '설명',
   imageUri: '이미지',
   price: '원가',
@@ -44,6 +45,7 @@ function ItemHistory() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
   // instanceInManage로 변경
@@ -105,14 +107,28 @@ function ItemHistory() {
                                 height={30}
                                 alt='no'
                               />
+                            ) : columnName === 'content' ? (
+                              <div>
+                                {itemHistory.mainContent}
+                                <span
+                                  style={{ cursor: 'pointer', color: 'grey' }}
+                                  onClick={() =>
+                                    setModal({
+                                      modalName: 'ADMIN-DETAIL_CONTENT',
+                                      detailTitle: itemHistory.mainContent,
+                                      detailContent: itemHistory.subContent,
+                                    })
+                                  }
+                                >
+                                  ...더보기
+                                </span>
+                              </div>
                             ) : (
                               <AdminContent
                                 content={itemHistory[
                                   columnName as keyof IitemHistory
                                 ].toString()}
                                 maxLen={MAX_CONTENT_LENGTH}
-                                detailTitle={itemHistory.itemName}
-                                detailContent={itemHistory.content}
                               />
                             )}
                           </TableCell>
