@@ -1,5 +1,6 @@
 import { Value } from 'react-quill';
 import { IcoinPolicy } from 'types/admin/adminCoinTypes';
+import { IFeedback } from 'types/admin/adminFeedbackTypes';
 import { Imegaphone, Iprofile } from 'types/admin/adminReceiptType';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { CoinResult } from 'types/coinTypes';
@@ -9,7 +10,6 @@ import { MatchMode } from 'types/mainType';
 import { ISeason } from 'types/seasonTypes';
 import { StoreManualMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
-import { IFeedback } from 'components/admin/feedback/FeedbackTable';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -96,6 +96,11 @@ export interface StoreManual {
   radioMode: StoreManualMode;
 }
 
+export interface RandomItem {
+  item: string;
+  color: string;
+}
+
 export interface Modal {
   modalName: ModalName;
   manual?: Manual;
@@ -121,5 +126,5 @@ export interface Modal {
   storeManual?: StoreManual;
   isAttended?: boolean;
   totalCoin?: ICoin;
-  randomItem?: string;
+  randomItem?: RandomItem;
 }

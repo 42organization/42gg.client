@@ -7,11 +7,7 @@ const item1: InventoryItem = {
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'kim_takgu',
   itemStatus: 'USING',
-  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
-  itemPrice: 1000,
-  ownerIntra: 'aa',
   itemType: 'MEGAPHONE',
-  createdAt: '2021-08-07',
 };
 
 const item2: InventoryItem = {
@@ -20,11 +16,7 @@ const item2: InventoryItem = {
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'kim_takgu',
   itemStatus: 'BEFORE',
-  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
-  itemPrice: 1000,
-  ownerIntra: 'aa',
   itemType: 'MEGAPHONE',
-  createdAt: '2021-08-07',
 };
 
 const item3: InventoryItem = {
@@ -34,64 +26,44 @@ const item3: InventoryItem = {
     'https://dodo.ac/np/images/thumb/1/17/NH_Balloon.jpg/600px-NH_Balloon.jpg',
   purchaserIntra: 'jeyoon',
   itemStatus: 'USING',
-  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
-  itemPrice: 1000,
-  ownerIntra: 'aa',
   itemType: 'MEGAPHONE',
-  createdAt: '2021-08-07',
 };
 
 const item4: InventoryItem = {
   receiptId: 4,
-  itemName: '이름 색깔 변경',
+  itemName: 'ID 색깔 변경권',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'kim_takgu',
   itemStatus: 'USED',
-  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
-  itemPrice: 1000,
-  ownerIntra: 'aa',
   itemType: 'TEXT_COLOR',
-  createdAt: '2021-08-07',
 };
 
 const item5: InventoryItem = {
   receiptId: 5,
-  itemName: '프로필 이미지띠 변경',
+  itemName: 'Edge 뽑기',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'kim_takgu',
   itemStatus: 'BEFORE',
-  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
-  itemPrice: 1000,
-  ownerIntra: 'aa',
-  itemType: 'PROFILE_BAND',
-  createdAt: '2021-08-07',
+  itemType: 'EDGE',
 };
 
 const item6: InventoryItem = {
   receiptId: 6,
-  itemName: '프로필 배경색 변경',
+  itemName: '배경 뽑기',
   imageUri:
     'https://dodo.ac/np/images/thumb/1/17/NH_Balloon.jpg/600px-NH_Balloon.jpg',
   purchaserIntra: 'kim_takgu',
   itemStatus: 'BEFORE',
-  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
-  itemPrice: 1000,
-  ownerIntra: 'aa',
-  itemType: 'PROFILE_BACKGROUND',
-  createdAt: '2021-08-07',
+  itemType: 'BACKGROUND',
 };
 
 const item7: InventoryItem = {
   receiptId: 7,
-  itemName: '프로필 이미지 변경',
+  itemName: '이미지 변경권',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'jeyoon',
   itemStatus: 'BEFORE',
-  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
-  itemPrice: 1000,
-  ownerIntra: 'aa',
   itemType: 'PROFILE_IMAGE',
-  createdAt: '2021-08-07',
 };
 
 const item8: InventoryItem = {
@@ -100,11 +72,7 @@ const item8: InventoryItem = {
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'kim_takgu',
   itemStatus: 'USED',
-  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
-  itemPrice: 1000,
-  ownerIntra: 'aa',
   itemType: 'MEGAPHONE',
-  createdAt: '2021-08-07',
 };
 
 const item9: InventoryItem = {
@@ -114,11 +82,7 @@ const item9: InventoryItem = {
     'https://dodo.ac/np/images/thumb/1/17/NH_Balloon.jpg/600px-NH_Balloon.jpg',
   purchaserIntra: 'kim_takgu',
   itemStatus: 'BEFORE',
-  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
-  itemPrice: 1000,
-  ownerIntra: 'aa',
   itemType: 'MEGAPHONE',
-  createdAt: '2021-08-07',
 };
 
 const item10: InventoryItem = {
@@ -127,11 +91,7 @@ const item10: InventoryItem = {
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'kim_takgu',
   itemStatus: 'BEFORE',
-  // ANCHOR - 추가된 속성. 필요 여부 논의 필요
-  itemPrice: 1000,
-  ownerIntra: 'aa',
   itemType: 'MEGAPHONE',
-  createdAt: '2021-08-07',
 };
 
 const storageItemList: InventoryItem[] = [

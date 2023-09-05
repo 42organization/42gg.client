@@ -21,6 +21,12 @@ function useSetUser() {
       intraId: 'Storybook',
       isAdmin: false,
       userImageUri: 'https://picsum.photos/200/300?grayscale',
+      isAttended: false,
+      tierImageUri:
+        'https://cdn.pixabay.com/photo/2022/07/29/05/52/table-tennis-7351159_1280.png',
+      tierName: '무지개 탁구채',
+      level: 40,
+      edge: 'BASIC',
     });
   }, []);
 }

@@ -6,12 +6,20 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
+import {
+  IAnnouncement,
+  IAnnouncementTable,
+} from 'types/admin/adminAnnouncementTypes';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { instanceInManage } from 'utils/axios';
+import { dateToStringShort } from 'utils/handleTime';
 import { tableFormat } from 'constants/admin/table';
+import {
+  AdminEmptyItem,
+  AdminTableHead,
+} from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/announcement/AnnounceList.module.scss';
 import 'react-quill/dist/quill.snow.css';
@@ -24,27 +32,12 @@ const Quill = dynamic(() => import('react-quill'), {
 
 const tableTitle: { [key: string]: string } = {
   content: '내용',
-  createdAt: '생성일',
+  createdAt: '생성 시간',
   creatorIntraId: '생성한 사람',
-  deletedAt: '삭제일',
+  deletedAt: '삭제 시간',
   deleterIntraId: '삭제한 사람',
-  modifiedAt: '수정 여부',
+  modifiedAt: '수정 시간',
 };
-
-interface IAnnouncement {
-  content: string;
-  creatorIntraId: string;
-  deleterIntraId: string;
-  deletedAt: Date;
-  createdAt: Date;
-  modifiedAt: Date;
-}
-
-interface IAnnouncementTable {
-  announcementList: IAnnouncement[];
-  totalPage: number;
-  currentPage: number;
-}
 
 export default function AnnounceList() {
   const [announcementInfo, setAnnouncementInfo] = useState<IAnnouncementTable>({
@@ -59,7 +52,22 @@ export default function AnnounceList() {
       const res = await instanceInManage.get(
         `/announcement?page=${currentPage}&size=3`
       );
-      setAnnouncementInfo({ ...res.data, currentPage: currentPage });
+      setAnnouncementInfo({
+        announcementList: res.data.announcementList.map(
+          (announcement: IAnnouncement) => {
+            return {
+              ...announcement,
+              createdAt: dateToStringShort(new Date(announcement.createdAt)),
+              deletedAt: announcement.deletedAt
+                ? dateToStringShort(new Date(announcement.deletedAt))
+                : null,
+              modifiedAt: dateToStringShort(new Date(announcement.modifiedAt)),
+            };
+          }
+        ),
+        totalPage: res.data.totalPage,
+        currentPage: currentPage,
+      });
     } catch (e) {
       console.error('MS01');
     }
@@ -76,15 +84,7 @@ export default function AnnounceList() {
       </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <TableHead className={styles.tableHeader}>
-            <TableRow>
-              {tableFormat['announcement'].columns.map((columnName) => (
-                <TableCell className={styles.tableHeaderItem} key={columnName}>
-                  {tableTitle[columnName]}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+          <AdminTableHead tableName={'announcement'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             {announcementInfo.announcementList.length > 0 ? (
               announcementInfo.announcementList.map(
@@ -112,15 +112,9 @@ export default function AnnounceList() {
                             className={styles.tableBodyItem}
                             key={index}
                           >
-                            {columnName === 'createdAt' ||
-                            columnName === 'deletedAt' ||
-                            columnName === 'modifiedAt'
-                              ? announcement[columnName as keyof IAnnouncement]
-                                  ?.toString()
-                                  .replace('T', ' ')
-                              : announcement[
-                                  columnName as keyof IAnnouncement
-                                ]?.toString()}
+                            {announcement[
+                              columnName as keyof IAnnouncement
+                            ]?.toString()}
                           </TableCell>
                         );
                       }
@@ -129,9 +123,7 @@ export default function AnnounceList() {
                 )
               )
             ) : (
-              <TableRow>
-                <TableCell>기존 공지사항이 없습니다</TableCell>
-              </TableRow>
+              <AdminEmptyItem content={'기존 공지사항이 없습니다'} />
             )}
           </TableBody>
         </Table>

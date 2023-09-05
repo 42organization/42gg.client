@@ -35,6 +35,11 @@ export default function NotiItem({ data }: NotiItemProps) {
       style: styles.canceldByMan,
       content: message,
     },
+    // TODO: 고치기
+    GIFT: {
+      style: styles.gift,
+      content: message,
+    },
   };
 
   const notiWrapperStyle = isChecked ? styles.readWrap : styles.unreadWrap;

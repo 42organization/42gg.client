@@ -1,0 +1,42 @@
+name: Build Test before merge
+
+on:
+  pull_request:
+    branches:
+      - main # main 브랜치에 PR 이벤트가 발생했을 때 trigger
+    types: [opened, reopened, synchronize] # PR이 open, reopen 되었을 때 / main 브랜치의 내용과 동기화시켰을 때 trigger
+
+jobs:
+  build:
+    runs-on: macos-12
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      - name: Cache Node Modules
+        uses: actions/cache@v3
+        id: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Dependency
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm install
+
+      - name: Build
+        env:
+          NEXT_PUBLIC_SERVER_ENDPOINT: ${{ secrets.DEV_NEXT_PUBLIC_SERVER_ENDPOINT }}
+          NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT: ${{ secrets.DEV_NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT }}
+          NEXT_PUBLIC_MOCK_ENDPOINT: ${{secrets.DEV_NEXT_PUBLIC_MOCK_ENDPOINT}}
+          NEXT_PUBLIC_ADMIN_MOCK_ENDPOINT: ${{secrets.DEV_NEXT_PUBLIC_ADMIN_MOCK_ENDPOINT}}
+          NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS }}
+          GENERATE_SOURCEMAP: ${{ secrets.GENERATE_SOURCEMAP }}
+        run: npm run build

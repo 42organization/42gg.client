@@ -31,8 +31,6 @@ export default function BasicProfile({ profileId }: ProfileProps) {
   } = useBasicProfile({ profileId });
 
   const tierId = useRecoilValue(tierIdSelector);
-  const findTierIndex =
-    tierId === 'none' ? styles.tierId : styles['tierId' + tierId];
 
   return (
     <div className={styles.container}>
@@ -50,13 +48,13 @@ export default function BasicProfile({ profileId }: ProfileProps) {
       {intraId && (
         <PlayerImage
           src={userImageUri}
-          styleName={`mainProfile ${edge.toLowerCase()}`}
+          styleName={`mainProfile ${edge ? edge.toLowerCase() : 'basic'}`}
           size={30}
         />
       )}
       <div className={styles.idContainer}>
         <div className={styles.ranktier}>
-          <PlayerImage src={tierImageUri} styleName={'ranktier'} size={50} />
+          <PlayerImage src={tierImageUri} styleName={'profiletier'} size={50} />
         </div>
         <div className={styles.intraId}>{intraId}</div>
         <div className={styles.buttons}>
@@ -100,7 +98,7 @@ export default function BasicProfile({ profileId }: ProfileProps) {
         </div>
         <div className={styles.racket}>{racketType.toUpperCase()}</div>
         <div className={styles.tierContainer}>
-          <div className={`${styles.tierId} ${findTierIndex}`}>{tierName}</div>
+          <div className={`${styles.tierId} ${styles[tierId]}`}>{tierName}</div>
         </div>
       </div>
     </div>

@@ -7,19 +7,23 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import { IitemHistory, IitemHistoryList } from 'types/admin/adminStoreTypes';
 import { instanceInManage } from 'utils/axios';
-import { getFormattedDateToString } from 'utils/handleTime';
+import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
+import {
+  AdminContent,
+  AdminEmptyItem,
+  AdminTableHead,
+} from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/store/ItemHistory.module.scss';
 
-const itemHistoryTableTitle: { [key: string]: string } = {
+const tableTitle: { [key: string]: string } = {
   itemId: 'ID',
   createdAt: '변경일',
   name: '이름',
@@ -32,18 +36,7 @@ const itemHistoryTableTitle: { [key: string]: string } = {
   visible: '상점 노출',
 };
 
-const tableColumnName = [
-  'itemId',
-  'createdAt',
-  'name',
-  'content',
-  'imageUri',
-  'price',
-  'discount',
-  'creatorIntraId',
-  'deleterIntraId',
-  'visible',
-];
+const MAX_CONTENT_LENGTH = 16;
 
 function ItemHistory() {
   const [itemHistoryData, setItemHistoryData] = useState<IitemHistoryList>({
@@ -52,8 +45,8 @@ function ItemHistory() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
+  const setModal = useSetRecoilState(modalState);
 
   const getItemHistoryListHandler = useCallback(async () => {
     try {
@@ -63,12 +56,9 @@ function ItemHistory() {
       setItemHistoryData({
         itemHistoryList: res.data.historyList.map(
           (itemHistory: IitemHistory) => {
-            const { year, month, date, hour, min } = getFormattedDateToString(
-              new Date(itemHistory.createdAt)
-            );
             return {
               ...itemHistory,
-              createdAt: `${year}-${month}-${date} ${hour}:${min}`,
+              createdAt: dateToStringShort(new Date(itemHistory.createdAt)),
             };
           }
         ),
@@ -101,15 +91,7 @@ function ItemHistory() {
     <>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <TableHead className={styles.tableHeader}>
-            <TableRow>
-              {tableColumnName.map((column, idx) => (
-                <TableCell className={styles.tableHeaderItem} key={idx}>
-                  {itemHistoryTableTitle[column]}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+          <AdminTableHead tableName={'itemHistory'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             {itemHistoryData.itemHistoryList.length > 0 ? (
               itemHistoryData.itemHistoryList.map(
@@ -149,7 +131,7 @@ function ItemHistory() {
                             ) : (
                               itemHistory[
                                 columnName as keyof IitemHistory
-                              ].toString()
+                              ]?.toString()
                             )}
                           </TableCell>
                         );
@@ -159,11 +141,7 @@ function ItemHistory() {
                 )
               )
             ) : (
-              <TableRow className={styles.tableRow}>
-                <TableCell className={styles.tableBodyItem}>
-                  비어있습니다
-                </TableCell>
-              </TableRow>
+              <AdminEmptyItem content={'아이템 변경 이력이 비어있습니다'} />
             )}
           </TableBody>
         </Table>
