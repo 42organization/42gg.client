@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
 
-export const useErrorPage = () => {
+const useErrorPage = () => {
   const [error, setError] = useRecoilState(errorState);
   const router = useRouter();
 
