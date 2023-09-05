@@ -14,7 +14,6 @@ import styles from 'styles/modal/store/InventoryModal.module.scss';
 
 type ChangeProfileEdgeModalProps = UseItemRequest;
 
-// TODO : 주의사항 구체화 필요
 const caution = [
   '색상은 랜덤으로 결정됩니다.',
   '아이템을 사용한 후에는 취소가 불가능합니다.',
@@ -37,7 +36,7 @@ export default function ChangeProfileEdgeModal({
         modalName: 'USE-ITEM-GACHA',
         randomItem: {
           item: 'EDGE',
-          color: res.data,
+          color: res.data.edge,
         },
       });
     } catch (error) {
