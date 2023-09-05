@@ -71,7 +71,6 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
       .delete(`/pingpong/megaphones/${megaphoneData.megaphoneId}`)
       .then(() => {
         alert('확성기가 삭제되었습니다.');
-        resetModal();
       })
       .catch((error: unknown) => {
         if (isAxiosError<errorPayload>(error) && error.response) {
@@ -80,6 +79,9 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
             alert(errorMessages[code]);
           else setError('JY07');
         } else setError('JY07');
+      })
+      .finally(() => {
+        resetModal();
       });
   }
 
