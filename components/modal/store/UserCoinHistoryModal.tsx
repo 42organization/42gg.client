@@ -34,7 +34,6 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
     getCoinHistoryList();
   }, [currentPage]);
 
-  // 현재는 출석만 되는 상태
   const getCoinHistoryList = async () => {
     setIsLoading(true);
     try {
@@ -46,10 +45,11 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
         totalPage: res.data.totalPage,
         currentPage: currentPage,
       });
-      setIsLoading(false);
     } catch (e) {
       setError('HB06');
+      closeModal();
     }
+    setIsLoading(false);
   };
 
   return (
