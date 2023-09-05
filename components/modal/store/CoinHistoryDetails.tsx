@@ -1,6 +1,6 @@
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { ICoinHistory } from 'types/userTypes';
-import { getFormattedDateToString } from 'utils/handleTime';
+import { dateToStringShort } from 'utils/handleTime';
 import styles from 'styles/modal/store/CoinHistoryDetails.module.scss';
 
 export default function CoinHistoryDetails({
@@ -9,11 +9,6 @@ export default function CoinHistoryDetails({
   details: ICoinHistory;
 }) {
   const { createdAt, history, amount } = details;
-  const { year, month, date, hour, min } = getFormattedDateToString(
-    new Date(createdAt)
-  );
-  const DATE = `${year.slice(2)}-${month}-${date}`;
-  const TIME = `${hour}:${min}`;
 
   return (
     <div className={styles.data}>
@@ -27,7 +22,9 @@ export default function CoinHistoryDetails({
         </div>
         <div className={styles.content}>
           <div className={styles.history}>{history}</div>
-          <div className={styles.date}>{`${DATE} ${TIME}`}</div>
+          <div className={styles.date}>
+            {dateToStringShort(new Date(createdAt))}
+          </div>
         </div>
       </div>
       <div className={styles.section2}>
