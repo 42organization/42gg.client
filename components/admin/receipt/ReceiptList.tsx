@@ -26,9 +26,9 @@ const tableTitle: { [key: string]: string } = {
   createdAt: '구매 시간',
   itemName: '아이템 이름',
   itemPrice: '구매 가격',
-  purchaserIntra: '구매자',
-  ownerIntra: '수령자',
-  itemStatus: '상태',
+  purchaserIntraId: '구매자',
+  ownerIntraId: '수령자',
+  itemStatusType: '상태',
 };
 
 function ReceiptList() {

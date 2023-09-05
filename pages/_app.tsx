@@ -49,15 +49,15 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
       <RecoilRoot>
-        <LoginChecker>
-          <ErrorChecker>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-            <ModalProvider />
-            <CustomizedSnackbars />
-          </ErrorChecker>
-        </LoginChecker>
+        {/* <LoginChecker> */}
+        <ErrorChecker>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+          <ModalProvider />
+          <CustomizedSnackbars />
+        </ErrorChecker>
+        {/* </LoginChecker> */}
       </RecoilRoot>
     </>
   );
