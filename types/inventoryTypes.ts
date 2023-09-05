@@ -7,6 +7,8 @@ export type ItemType =
   | 'TEXT_COLOR'
   | 'PROFILE_IMAGE'; // REVIEW - 아이템 타입 추가 / 변경 가능성 있음.
 
+export type RandomItem = 'EDGE' | 'BACKGROUND';
+
 export type InventoryItem = {
   receiptId: number; // 거래내역 아이디
   itemName: string; // 아이템 이름

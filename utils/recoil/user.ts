@@ -16,7 +16,7 @@ export const profileState = atom<ProfileBasic>({
     tierName: '',
     expRate: 0,
     edge: 'BASIC',
-    backgroundType: 'BASIC',
+    background: 'BASIC',
     snsNotiOpt: 'SLACK',
   },
 });
