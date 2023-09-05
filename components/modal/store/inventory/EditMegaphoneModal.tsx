@@ -72,7 +72,6 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
       .then(() => {
         alert('확성기가 삭제되었습니다.');
         resetModal();
-        // TODO : 삭제 이후에 item 목록에 삭제된 확성기가 보이지 않는지 확인 필요함.
       })
       .catch((error: unknown) => {
         if (isAxiosError<errorPayload>(error) && error.response) {
