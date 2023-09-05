@@ -16,7 +16,7 @@ export default function CoinStatChange({ after, before }: CoinChangeProps) {
 
   const CoinChangeAnimation = () => {
     const toAdd = 1;
-    for (let i = before; i < after; i++) {
+    for (let i = 0; i < after - before; i++) {
       sleep(i * 500).then(() => setCoin((thisCoin) => thisCoin + toAdd));
     }
   };

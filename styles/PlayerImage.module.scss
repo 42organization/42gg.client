@@ -100,7 +100,18 @@
 .ranktier {
   @include imageWrap;
   div {
-    @include userRankImage(1.5rem);
+    position: relative;
+    width: 1.4rem;
+    height: 1.5rem;
+  }
+}
+
+.profiletier {
+  @include imageWrap;
+  div {
+    position: relative;
+    width: 1.7rem;
+    height: 2rem;
   }
 }
 
