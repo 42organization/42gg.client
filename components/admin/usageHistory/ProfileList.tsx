@@ -24,10 +24,11 @@ import PageNation from 'components/Pagination';
 import styles from 'styles/admin/usageHistory/ProfileList.module.scss';
 
 const tableTitle: { [key: string]: string } = {
-  profileId: 'ID',
-  date: '사용 시간',
-  intraId: '사용자',
-  imageUri: '현재 이미지',
+  id: 'ID',
+  createdAt: '변경일자',
+  userId: 'Intra ID',
+  imageUri: '변경 전 이미지',
+  isDeleted: '삭제 여부',
   delete: '삭제',
 };
 
@@ -50,13 +51,13 @@ function ProfileList() {
   const getUserProfileHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/images?intraId=${intraId}&page=${currentPage}&size=5`
+        `/users/images/{intraid}?page=${currentPage}&size=5`
       );
       setProfileData({
-        profileList: res.data.profileList.map((profile: Iprofile) => {
+        profileList: res.data.userImageList.map((profile: Iprofile) => {
           return {
             ...profile,
-            date: dateToStringShort(new Date(profile.date)),
+            date: dateToStringShort(new Date(profile.createdAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -78,10 +79,10 @@ function ProfileList() {
         `/images?&page=${currentPage}&size=5`
       );
       setProfileData({
-        profileList: res.data.profileList.map((profile: Iprofile) => {
+        profileList: res.data.userImageList.map((profile: Iprofile) => {
           return {
             ...profile,
-            date: dateToStringShort(new Date(profile.date)),
+            date: dateToStringShort(new Date(profile.createdAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -119,7 +120,7 @@ function ProfileList() {
           <TableBody className={styles.tableBody}>
             {profileData.profileList.length > 0 ? (
               profileData.profileList.map((profile: Iprofile) => (
-                <TableRow className={styles.tableRow} key={profile.profileId}>
+                <TableRow className={styles.tableRow} key={profile.id}>
                   {tableFormat['profileList'].columns.map(
                     (columnName: string, index: number) => {
                       return (

@@ -86,7 +86,7 @@ export const tableFormat: TableFormat = {
   },
   profileList: {
     name: '프로필 변경권 사용 내역',
-    columns: ['profileId', 'date', 'intraId', 'imageUri', 'delete'],
+    columns: ['id', 'createdAt', 'userId', 'imageUri', 'isDeleted', 'delete'],
   },
   itemList: {
     name: '상점 아이템 목록',

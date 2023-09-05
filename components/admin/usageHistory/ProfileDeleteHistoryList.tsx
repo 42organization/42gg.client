@@ -1,44 +1,44 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import {
   Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
 import { Iprofile, IprofileTable } from 'types/admin/adminReceiptType';
 import { instanceInManage } from 'utils/axios';
-import { getFormattedDateToString } from 'utils/handleTime';
-import { modalState } from 'utils/recoil/modal';
+import { dateToStringShort } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import {
+  AdminEmptyItem,
+  AdminTableHead,
+} from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/usageHistory/ProfileList.module.scss';
 
-const profileTableTitle: { [key: string]: string } = {
-  profileId: 'ID',
-  date: '사용일자',
-  intraId: '사용자',
-  imageUri: '현재 이미지',
-  delete: '삭제',
+const tableTitle: { [key: string]: string } = {
+  id: 'ID',
+  createdAt: '변경일자',
+  userId: 'Intra ID',
+  imageUri: '변경 전 이미지',
+  isDeleted: '삭제 여부',
 };
 
-const tableColumnName = ['profileId', 'date', 'intraId', 'imageUri', 'delete'];
-
-function ProfileList() {
-  const [profileData, setProfileData] = useState<IprofileTable>({
-    profileList: [],
-    totalPage: 0,
-    currentPage: 0,
-  });
+function ProfileDeleteHistoryList() {
+  const [profileDeleteHistoryData, setProfileDeleteHistoryData] =
+    useState<IprofileTable>({
+      profileList: [],
+      totalPage: 0,
+      currentPage: 0,
+    });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
-  const [modal, setModal] = useRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
   const initSearch = useCallback((intraId?: string) => {
@@ -46,19 +46,16 @@ function ProfileList() {
     setCurrentPage(1);
   }, []);
 
-  const getUserProfileHandler = useCallback(async () => {
+  const getUserProfileDeleteHistoryHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/images?intraId=${intraId}&page=${currentPage}&size=5`
+        `/users/images/{intraid}?page=${currentPage}&size=5`
       );
-      setProfileData({
-        profileList: res.data.profileList.map((profile: Iprofile) => {
-          const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(profile.date)
-          );
+      setProfileDeleteHistoryData({
+        profileList: res.data.userImageList.map((profile: Iprofile) => {
           return {
             ...profile,
-            date: `${year}-${month}-${date} ${hour}:${min}`,
+            date: dateToStringShort(new Date(profile.createdAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -74,19 +71,16 @@ function ProfileList() {
     }
   }, [intraId, currentPage]);
 
-  const getAllProfileHandler = useCallback(async () => {
+  const getAllProfileDeleteHistoryHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
         `/images?&page=${currentPage}&size=5`
       );
-      setProfileData({
-        profileList: res.data.profileList.map((profile: Iprofile) => {
-          const { year, month, date, hour, min } = getFormattedDateToString(
-            new Date(profile.date)
-          );
+      setProfileDeleteHistoryData({
+        profileList: res.data.userImageList.map((profile: Iprofile) => {
           return {
             ...profile,
-            date: `${year}-${month}-${date} ${hour}:${min}`,
+            date: dateToStringShort(new Date(profile.createdAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -102,16 +96,15 @@ function ProfileList() {
     }
   }, [currentPage]);
 
-  const deleteProfile = (profile: Iprofile) => {
-    setModal({
-      modalName: 'ADMIN-PROFILE_DELETE',
-      profile: profile,
-    });
-  };
-
   useEffect(() => {
-    intraId ? getUserProfileHandler() : getAllProfileHandler();
-  }, [intraId, getUserProfileHandler, getAllProfileHandler, modal]);
+    intraId
+      ? getUserProfileDeleteHistoryHandler()
+      : getAllProfileDeleteHistoryHandler();
+  }, [
+    intraId,
+    getUserProfileDeleteHistoryHandler,
+    getAllProfileDeleteHistoryHandler,
+  ]);
 
   return (
     <>
@@ -120,19 +113,11 @@ function ProfileList() {
       </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <TableHead className={styles.tableHeader}>
-            <TableRow>
-              {tableColumnName.map((columnName, idx) => (
-                <TableCell className={styles.tableHeaderItem} key={idx}>
-                  {profileTableTitle[columnName]}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+          <AdminTableHead tableName={'profileList'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {profileData.profileList.length > 0 ? (
-              profileData.profileList.map((profile: Iprofile) => (
-                <TableRow className={styles.tableRow} key={profile.profileId}>
+            {profileDeleteHistoryData.profileList.length > 0 ? (
+              profileDeleteHistoryData.profileList.map((profile: Iprofile) => (
+                <TableRow className={styles.tableRow} key={profile.id}>
                   {tableFormat['profileList'].columns.map(
                     (columnName: string, index: number) => {
                       return (
@@ -151,30 +136,20 @@ function ProfileList() {
                       );
                     }
                   )}
-                  <TableCell className={styles.tableBodyItem}>
-                    <button
-                      className={styles.deleteBtn}
-                      onClick={() => deleteProfile(profile)}
-                    >
-                      삭제
-                    </button>
-                  </TableCell>
                 </TableRow>
               ))
             ) : (
-              <TableRow className={styles.tableBodyItem}>
-                <TableCell className={styles.tableBodyItem}>
-                  비어있습니다
-                </TableCell>
-              </TableRow>
+              <AdminEmptyItem
+                content={'관리자 권한으로 삭제된 프로필 내역이 비어있습니다'}
+              />
             )}
           </TableBody>
         </Table>
       </TableContainer>
       <div className={styles.pageNationContainer}>
         <PageNation
-          curPage={profileData.currentPage}
-          totalPages={profileData.totalPage}
+          curPage={profileDeleteHistoryData.currentPage}
+          totalPages={profileDeleteHistoryData.totalPage}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}
@@ -184,4 +159,4 @@ function ProfileList() {
   );
 }
 
-export default ProfileList;
+export default ProfileDeleteHistoryList;

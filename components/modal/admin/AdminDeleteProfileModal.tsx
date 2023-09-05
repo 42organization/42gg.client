@@ -1,29 +1,28 @@
 import { useSetRecoilState } from 'recoil';
 import { Iprofile } from 'types/admin/adminReceiptType';
-import { mockInstance } from 'utils/mockAxios';
+import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/admin/modal/AdminDeleteProfile.module.scss';
 
 export default function AdminDeleteProfileModal(props: Iprofile) {
-  const { profileId, intraId, imageUri } = props;
+  const { id, userId, imageUri } = props;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // instanceInManage로 변경
-  const deleteProfileHandler = async (intraId: string) => {
+  const deleteProfileHandler = async (userId: string) => {
     try {
-      await mockInstance.delete(`/admin/users/${intraId}`);
+      await instanceInManage.delete(`/admin/users/${userId}`);
       setSnackBar({
         toastName: 'delete profile',
         severity: 'success',
-        message: `${profileId}번 ${intraId}님의 프로필 이미지가 삭제되었습니다.`,
+        message: `${id}번 ${userId}님의 프로필 이미지가 삭제되었습니다.`,
         clicked: true,
       });
       setModal({
         modalName: 'ADMIN-CHECK_SEND_NOTI',
-        intraId: intraId,
+        intraId: userId,
         detailContent: 'profile',
       });
     } catch (e: unknown) {
@@ -57,11 +56,11 @@ export default function AdminDeleteProfileModal(props: Iprofile) {
           </div>
           <div className={styles.intraWrap}>
             <div className={styles.bodyText}>사용자 :</div>
-            <input className={styles.intraBlank} value={intraId} readOnly />
+            <input className={styles.intraBlank} value={userId} readOnly />
           </div>
           <div className={styles.checkWrap}>
             <div className={styles.checkTextMain}>
-              {profileId}번 {intraId}님의 프로필을 삭제하시겠습니까?
+              {id}번 {userId}님의 프로필을 삭제하시겠습니까?
             </div>
             <div className={styles.checkTextSub}>
               해당 유저의 이전 이미지로 수정됩니다.
@@ -71,7 +70,7 @@ export default function AdminDeleteProfileModal(props: Iprofile) {
         <div className={styles.buttonWrap}>
           <button
             className={styles.deleteBtn}
-            onClick={() => deleteProfileHandler(intraId)}
+            onClick={() => deleteProfileHandler(userId)}
           >
             삭제
           </button>

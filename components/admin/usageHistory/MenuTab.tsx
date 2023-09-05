@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import MegaphoneList from 'components/admin/usageHistory/MegaphoneList';
 import ProfileList from 'components/admin/usageHistory/ProfileList';
 import styles from 'styles/admin/usageHistory/MenuTab.module.scss';
+import ProfileDeleteHistoryList from './ProfileDeleteHistoryList';
 
 function MenuTab() {
   const [tabIdx, setTabIdx] = useState(0);
@@ -17,14 +18,14 @@ function MenuTab() {
     },
     {
       contentId: 2,
-      contentName: '부적절한 프로필 삭제 내역',
+      contentName: '관리자 권한 프로필 삭제 내역',
     },
   ];
 
   useEffect(() => {
     if (tabIdx === 0) setChild(<MegaphoneList />);
     if (tabIdx === 1) setChild(<ProfileList />);
-    if (tabIdx === 2) setChild(<ProfileList />);
+    if (tabIdx === 2) setChild(<ProfileDeleteHistoryList />);
   }, [tabIdx]);
 
   return (
