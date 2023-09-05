@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { CoinResult } from 'types/coinTypes';
 import { Modal } from 'types/modalTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
@@ -10,10 +9,8 @@ import styles from 'styles/modal/event/WelcomeModal.module.scss';
 
 export default function WelcomeModal() {
   const setModal = useSetRecoilState<Modal>(modalState);
-  const [coin, setCoin] = useState<CoinResult>();
   const setError = useSetRecoilState(errorState);
   const [buttonState, setButtonState] = useState(false);
-
   const content = {
     title: 'Welcome!',
     message:
@@ -23,10 +20,14 @@ export default function WelcomeModal() {
   const postCoinHandler = async () => {
     try {
       const res = await instance.post(`/pingpong/users/attendance`);
-      setCoin(res.data);
       return res.data;
-    } catch (error) {
+    } catch (e: any) {
+      if (e.response.status === 400) {
+        alert('현재 출석완료상태입니다.');
+        return;
+      }
       setError('SM01');
+      return;
     }
   };
 
@@ -39,21 +40,20 @@ export default function WelcomeModal() {
   const openAttendanceCoin = async () => {
     try {
       setButtonState(true);
-      const updatedCoin = await postCoinHandler();
-
-      if (!updatedCoin) return null;
-
+      const updatedcoin = await postCoinHandler();
+      if (updatedcoin == null) return;
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {
           isAttended: true,
-          afterCoin: updatedCoin.afterCoin,
-          beforeCoin: updatedCoin.beforeCoin,
-          coinIncrement: updatedCoin.coinIncrement,
+          afterCoin: updatedcoin.afterCoin,
+          beforeCoin: updatedcoin.beforeCoin,
+          coinIncrement: updatedcoin.coinIncrement,
         },
       });
     } catch (error) {
       setError('SM02');
+      return;
     }
   };
 
@@ -79,7 +79,7 @@ export default function WelcomeModal() {
               type='button'
               value='출석하기'
             />
-            {buttonState && <CoinPopcon amount={8} coin={1} />}
+            {buttonState && <CoinPopcon amount={8} coin={0} />}
           </div>
         </div>
       </div>
