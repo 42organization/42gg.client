@@ -10,8 +10,8 @@ import {
   TableRow,
 } from '@mui/material';
 import { Iprofile, IprofileTable } from 'types/admin/adminReceiptType';
+import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
-import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
