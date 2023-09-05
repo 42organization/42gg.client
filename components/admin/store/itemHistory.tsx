@@ -16,7 +16,6 @@ import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
-  AdminContent,
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/admin/common/AdminTable';
