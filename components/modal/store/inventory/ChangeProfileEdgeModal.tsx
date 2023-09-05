@@ -33,20 +33,18 @@ export default function ChangeProfileEdgeModal({
     };
     try {
       const res = await instance.patch('/pingpong/users/edge', data);
-      if (res.data) {
-        setModal({
-          modalName: 'USE-ITEM-GACHA',
-          randomItem: {
-            item: 'EDGE',
-            color: res.data,
-          },
-        });
-      } else {
-        alert('뽑기에 실패했습니다(˃̣̣̥ᴖ˂̣̣̥) 관리자에게 문의해주세요');
-        resetModal();
-      }
+      setModal({
+        modalName: 'USE-ITEM-GACHA',
+        randomItem: {
+          item: 'EDGE',
+          color: res.data,
+        },
+      });
     } catch (error) {
+      // TODO: 에러 코드 확인 후 수정
+      alert('뽑기에 실패했습니다(˃̣̣̥ᴖ˂̣̣̥) 관리자에게 문의해주세요');
       setError('HB04');
+      resetModal();
     }
   };
 
