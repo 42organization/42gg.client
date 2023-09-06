@@ -18,7 +18,6 @@ export default function GiftSearchBar({
     setShowDropDown,
     searchResult,
     searchBarRef,
-    handleKeyDown,
   } = useSearchBar();
 
   useEffect(() => {
@@ -38,6 +37,20 @@ export default function GiftSearchBar({
       ownerId: intraId,
     });
     setShowDropDown(false);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      searchResult.map((data) => {
+        if (data === keyword) {
+          setShowDropDown(false);
+          event.currentTarget.blur();
+          setGiftReqData({
+            ownerId: data,
+          });
+        }
+      });
+    }
   };
 
   return (
