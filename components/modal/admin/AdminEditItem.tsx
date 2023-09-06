@@ -20,7 +20,10 @@ export default function AdminEditItemModal(props: Item) {
   } = props;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
-  const { imgData, imgPreview, uploadImg } = useUploadImg();
+  const { imgData, imgPreview, uploadImg } = useUploadImg({
+    maxSizeMB: 0.03,
+    maxWidthOrHeight: 250,
+  });
 
   const editErrorResponse: { [key: string]: string } = {
     IT200: '아이템 타입이 일치하지 않습니다.',
@@ -111,6 +114,7 @@ export default function AdminEditItemModal(props: Item) {
             />
             <input
               type='file'
+              accept='.svg, .png, .jpg, .jpeg'
               style={{ display: 'none' }}
               onChange={uploadImg}
             />

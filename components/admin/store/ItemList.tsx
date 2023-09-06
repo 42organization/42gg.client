@@ -94,7 +94,11 @@ function ItemList() {
                       <TableCell className={styles.tableBodyItem} key={index}>
                         {columnName === 'imageUri' ? (
                           <Image
-                            src={item.imageUri ? item[columnName] : ''}
+                            src={
+                              item.imageUri
+                                ? item[columnName]
+                                : '/public/image/fallBackSrc.jpeg'
+                            }
                             alt='Item Iamge'
                             width={30}
                             height={30}

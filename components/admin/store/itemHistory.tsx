@@ -35,8 +35,6 @@ const tableTitle: { [key: string]: string } = {
   visible: '상점 노출',
 };
 
-const MAX_CONTENT_LENGTH = 16;
-
 function ItemHistory() {
   const [itemHistoryData, setItemHistoryData] = useState<IitemHistoryList>({
     itemHistoryList: [],
@@ -111,7 +109,7 @@ function ItemHistory() {
                                 src={
                                   itemHistory.imageUri
                                     ? itemHistory[columnName]
-                                    : ''
+                                    : '/public/image/fallBackSrc.jpeg'
                                 }
                                 width={30}
                                 height={30}
