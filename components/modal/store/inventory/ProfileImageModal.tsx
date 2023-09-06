@@ -3,16 +3,16 @@ import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { FaArrowRight } from 'react-icons/fa';
 import { TbQuestionMark } from 'react-icons/tb';
 import { UseItemRequest } from 'types/inventoryTypes';
-import { modalState } from 'utils/recoil/modal';
-import { userState } from 'utils/recoil/layout';
 import { mockInstance } from 'utils/mockAxios';
-import useUploadImg from 'hooks/useUploadImg';
-import { ItemCautionContainer } from './ItemCautionContainer';
+import { userState } from 'utils/recoil/layout';
+import { modalState } from 'utils/recoil/modal';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
+import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
+import { ItemCautionContainer } from './ItemCautionContainer';
 
 type ProfileImageProps = UseItemRequest;
 
