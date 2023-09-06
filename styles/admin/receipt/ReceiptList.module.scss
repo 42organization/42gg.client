@@ -1,37 +1,55 @@
 @import 'styles/admin/common/Pagination.module.scss';
 @import 'styles/common.scss';
 
-.tableContainer {
+.receiptListWrap {
   width: 100%;
-  min-width: 700px;
-  margin: auto;
-  .table {
-    .tableBody {
-      .tableRow {
-        &:nth-child(odd) {
-          background-color: #f9fafb;
-        }
-        &:nth-child(even) {
-          background-color: #fff;
-        }
-        .tableBodyItem {
-          padding: 10px;
+  height: 100%;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    min-width: 700px;
+    margin: 10px auto;
+
+    .title {
+      font-size: $big-font;
+      font-weight: 600;
+      line-height: 150%;
+    }
+  }
+  .tableContainer {
+    width: 95%;
+    min-width: 710px;
+    margin: auto;
+    .table {
+      .tableHeader {
+        background-color: lightgray;
+        .tableHeaderItem {
+          padding: 0.7rem;
           font-size: $small-font;
+          font-weight: 600;
           line-height: 150%;
           text-align: center;
         }
       }
+      .tableBody {
+        .tableRow {
+          &:nth-child(odd) {
+            background-color: #f9fafb;
+          }
+          &:nth-child(even) {
+            background-color: #fff;
+          }
+          .tableBodyItem {
+            padding: 10px;
+            font-size: $small-font;
+            line-height: 150%;
+            text-align: center;
+          }
+        }
+      }
     }
-  }
-}
-
-.searchWrap {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-bottom: 0.3rem;
-  :nth-child(2) {
-    margin: 0 0 0 20px;
   }
 }
 

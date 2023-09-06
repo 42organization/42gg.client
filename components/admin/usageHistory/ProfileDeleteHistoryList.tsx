@@ -7,29 +7,28 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TableHead,
   TableRow,
 } from '@mui/material';
 import { Iprofile, IprofileTable } from 'types/admin/adminReceiptType';
-import { dateToStringShort } from 'utils/handleTime';
-import { mockInstance } from 'utils/mockAxios';
+import { instanceInManage } from 'utils/axios';
+import { getFormattedDateToString } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
-import {
-  AdminEmptyItem,
-  AdminTableHead,
-} from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
-import styles from 'styles/admin/receipt/ProfileList.module.scss';
+import styles from 'styles/admin/usageHistory/ProfileList.module.scss';
 
-const tableTitle: { [key: string]: string } = {
+const profileTableTitle: { [key: string]: string } = {
   profileId: 'ID',
-  date: '사용 시간',
+  date: '사용일자',
   intraId: '사용자',
   imageUri: '현재 이미지',
   delete: '삭제',
 };
+
+const tableColumnName = ['profileId', 'date', 'intraId', 'imageUri', 'delete'];
 
 function ProfileList() {
   const [profileData, setProfileData] = useState<IprofileTable>({
@@ -42,7 +41,6 @@ function ProfileList() {
   const [modal, setModal] = useRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
     setCurrentPage(1);
@@ -50,14 +48,17 @@ function ProfileList() {
 
   const getUserProfileHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/images?intraId=${intraId}&page=${currentPage}&size=5`
+      const res = await instanceInManage.get(
+        `/images?intraId=${intraId}&page=${currentPage}&size=5`
       );
       setProfileData({
         profileList: res.data.profileList.map((profile: Iprofile) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(profile.date)
+          );
           return {
             ...profile,
-            date: dateToStringShort(new Date(profile.date)),
+            date: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
         totalPage: res.data.totalPage,
@@ -73,17 +74,19 @@ function ProfileList() {
     }
   }, [intraId, currentPage]);
 
-  // instanceInManage로 변경
   const getAllProfileHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/images?page=${currentPage}&size=5`
+      const res = await instanceInManage.get(
+        `/images?&page=${currentPage}&size=5`
       );
       setProfileData({
         profileList: res.data.profileList.map((profile: Iprofile) => {
+          const { year, month, date, hour, min } = getFormattedDateToString(
+            new Date(profile.date)
+          );
           return {
             ...profile,
-            date: dateToStringShort(new Date(profile.date)),
+            date: `${year}-${month}-${date} ${hour}:${min}`,
           };
         }),
         totalPage: res.data.totalPage,
@@ -117,7 +120,15 @@ function ProfileList() {
       </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <AdminTableHead tableName={'profileList'} table={tableTitle} />
+          <TableHead className={styles.tableHeader}>
+            <TableRow>
+              {tableColumnName.map((columnName, idx) => (
+                <TableCell className={styles.tableHeaderItem} key={idx}>
+                  {profileTableTitle[columnName]}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
           <TableBody className={styles.tableBody}>
             {profileData.profileList.length > 0 ? (
               profileData.profileList.map((profile: Iprofile) => (
@@ -133,13 +144,6 @@ function ProfileList() {
                               height={30}
                               alt='ProfileImage'
                             />
-                          ) : columnName === 'delete' ? (
-                            <button
-                              className={styles.deleteBtn}
-                              onClick={() => deleteProfile(profile)}
-                            >
-                              삭제
-                            </button>
                           ) : (
                             profile[columnName as keyof Iprofile].toString()
                           )}
@@ -147,12 +151,22 @@ function ProfileList() {
                       );
                     }
                   )}
+                  <TableCell className={styles.tableBodyItem}>
+                    <button
+                      className={styles.deleteBtn}
+                      onClick={() => deleteProfile(profile)}
+                    >
+                      삭제
+                    </button>
+                  </TableCell>
                 </TableRow>
               ))
             ) : (
-              <AdminEmptyItem
-                content={'프로필 변경권 사용 내역이 비어있습니다'}
-              />
+              <TableRow className={styles.tableBodyItem}>
+                <TableCell className={styles.tableBodyItem}>
+                  비어있습니다
+                </TableCell>
+              </TableRow>
             )}
           </TableBody>
         </Table>

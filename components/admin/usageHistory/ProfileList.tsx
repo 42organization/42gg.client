@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
@@ -8,35 +9,31 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { Imegaphone, ImegaphoneTable } from 'types/admin/adminReceiptType';
+import { Iprofile, IprofileTable } from 'types/admin/adminReceiptType';
+import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
-import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import {
-  AdminContent,
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
-import styles from 'styles/admin/receipt/MegaphoneList.module.scss';
+import styles from 'styles/admin/usageHistory/ProfileList.module.scss';
 
 const tableTitle: { [key: string]: string } = {
-  megaphoneId: 'ID',
-  usedAt: '사용 시간',
-  intraId: 'Intra ID',
-  content: '내용',
-  status: '상태',
+  profileId: 'ID',
+  date: '사용 시간',
+  intraId: '사용자',
+  imageUri: '현재 이미지',
   delete: '삭제',
 };
 
-const MAX_CONTENT_LENGTH = 16;
-
-function MegaphoneList() {
-  const [megaphoneData, setMegaphoneData] = useState<ImegaphoneTable>({
-    megaphoneList: [],
+function ProfileList() {
+  const [profileData, setProfileData] = useState<IprofileTable>({
+    profileList: [],
     totalPage: 0,
     currentPage: 0,
   });
@@ -45,22 +42,21 @@ function MegaphoneList() {
   const [modal, setModal] = useRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
     setCurrentPage(1);
   }, []);
 
-  const getUserMegaphoneHandler = useCallback(async () => {
+  const getUserProfileHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/megaphones/history?intraId=${intraId}&page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/images?intraId=${intraId}&page=${currentPage}&size=5`
       );
-      setMegaphoneData({
-        megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {
+      setProfileData({
+        profileList: res.data.profileList.map((profile: Iprofile) => {
           return {
-            ...megaphone,
-            usedAt: dateToStringShort(new Date(megaphone.usedAt)),
+            ...profile,
+            date: dateToStringShort(new Date(profile.date)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -68,7 +64,7 @@ function MegaphoneList() {
       });
     } catch (e: unknown) {
       setSnackBar({
-        toastName: 'get user megaphone',
+        toastName: 'get user profile',
         severity: 'error',
         message: `API 요청에 문제가 발생했습니다.`,
         clicked: true,
@@ -76,17 +72,16 @@ function MegaphoneList() {
     }
   }, [intraId, currentPage]);
 
-  // instanceInManage로 변경
-  const getAllMegaphoneHandler = useCallback(async () => {
+  const getAllProfileHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/megaphones/history?page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/images?&page=${currentPage}&size=5`
       );
-      setMegaphoneData({
-        megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {
+      setProfileData({
+        profileList: res.data.profileList.map((profile: Iprofile) => {
           return {
-            ...megaphone,
-            usedAt: dateToStringShort(new Date(megaphone.usedAt)),
+            ...profile,
+            date: dateToStringShort(new Date(profile.date)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -94,7 +89,7 @@ function MegaphoneList() {
       });
     } catch (e: unknown) {
       setSnackBar({
-        toastName: 'get megaphone',
+        toastName: 'get profile',
         severity: 'error',
         message: `API 요청에 문제가 발생했습니다.`,
         clicked: true,
@@ -102,16 +97,16 @@ function MegaphoneList() {
     }
   }, [currentPage]);
 
-  const deleteMegaphone = (megaphone: Imegaphone) => {
+  const deleteProfile = (profile: Iprofile) => {
     setModal({
-      modalName: 'ADMIN-MEGAPHONE_DELETE',
-      megaphone: megaphone,
+      modalName: 'ADMIN-PROFILE_DELETE',
+      profile: profile,
     });
   };
 
   useEffect(() => {
-    intraId ? getUserMegaphoneHandler() : getAllMegaphoneHandler();
-  }, [intraId, getUserMegaphoneHandler, getAllMegaphoneHandler, modal]);
+    intraId ? getUserProfileHandler() : getAllProfileHandler();
+  }, [intraId, getUserProfileHandler, getAllProfileHandler, modal]);
 
   return (
     <>
@@ -120,34 +115,31 @@ function MegaphoneList() {
       </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <AdminTableHead tableName={'megaphoneList'} table={tableTitle} />
+          <AdminTableHead tableName={'profileList'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {megaphoneData.megaphoneList.length > 0 ? (
-              megaphoneData.megaphoneList.map((megaphone: Imegaphone) => (
-                <TableRow
-                  className={styles.tableRow}
-                  key={megaphone.megaphoneId}
-                >
-                  {tableFormat['megaphoneList'].columns.map(
+            {profileData.profileList.length > 0 ? (
+              profileData.profileList.map((profile: Iprofile) => (
+                <TableRow className={styles.tableRow} key={profile.profileId}>
+                  {tableFormat['profileList'].columns.map(
                     (columnName: string, index: number) => {
                       return (
                         <TableCell className={styles.tableBodyItem} key={index}>
-                          {columnName === 'delete' ? (
+                          {columnName === 'imageUri' ? (
+                            <Image
+                              src={profile[columnName]}
+                              width={30}
+                              height={30}
+                              alt='ProfileImage'
+                            />
+                          ) : columnName === 'delete' ? (
                             <button
                               className={styles.deleteBtn}
-                              onClick={() => deleteMegaphone(megaphone)}
+                              onClick={() => deleteProfile(profile)}
                             >
                               삭제
                             </button>
                           ) : (
-                            <AdminContent
-                              content={megaphone[
-                                columnName as keyof Imegaphone
-                              ].toString()}
-                              maxLen={MAX_CONTENT_LENGTH}
-                              detailTitle={megaphone.megaphoneId.toString()}
-                              detailContent={megaphone.content}
-                            />
+                            profile[columnName as keyof Iprofile].toString()
                           )}
                         </TableCell>
                       );
@@ -156,15 +148,17 @@ function MegaphoneList() {
                 </TableRow>
               ))
             ) : (
-              <AdminEmptyItem content={'확성기 사용 내역이 비어있습니다'} />
+              <AdminEmptyItem
+                content={'프로필 변경권 사용 내역이 비어있습니다'}
+              />
             )}
           </TableBody>
         </Table>
       </TableContainer>
       <div className={styles.pageNationContainer}>
         <PageNation
-          curPage={megaphoneData.currentPage}
-          totalPages={megaphoneData.totalPage}
+          curPage={profileData.currentPage}
+          totalPages={profileData.totalPage}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}
@@ -174,4 +168,4 @@ function MegaphoneList() {
   );
 }
 
-export default MegaphoneList;
+export default ProfileList;

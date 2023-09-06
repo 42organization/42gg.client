@@ -1,13 +1,14 @@
 import { useEffect, Dispatch, SetStateAction } from 'react';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
+import { GiftRequest } from 'types/itemTypes';
 import useSearchBar from 'hooks/useSearchBar';
 import styles from 'styles/main/SearchBar.module.scss';
 
 export default function GiftSearchBar({
-  setRecipient,
+  setGiftReqData,
 }: {
-  setRecipient: Dispatch<SetStateAction<string>>;
+  setGiftReqData: Dispatch<SetStateAction<GiftRequest>>;
 }) {
   const {
     keyword,
@@ -17,12 +18,13 @@ export default function GiftSearchBar({
     setShowDropDown,
     searchResult,
     searchBarRef,
-    handleKeyDown,
   } = useSearchBar();
 
   useEffect(() => {
     if (keyword === '') {
-      setRecipient('');
+      setGiftReqData({
+        ownerId: '',
+      });
     }
   }, [keyword]);
 
@@ -31,8 +33,24 @@ export default function GiftSearchBar({
     intraId: string
   ) => {
     setKeyword(intraId);
-    setRecipient(intraId);
+    setGiftReqData({
+      ownerId: intraId,
+    });
     setShowDropDown(false);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      searchResult.map((data) => {
+        if (data === keyword) {
+          setShowDropDown(false);
+          event.currentTarget.blur();
+          setGiftReqData({
+            ownerId: data,
+          });
+        }
+      });
+    }
   };
 
   return (

@@ -3,9 +3,9 @@ export interface Ireceipt {
   createdAt: Date;
   itemName: string;
   itemPrice: number;
-  purchaserIntra: string;
-  ownerIntra: string;
-  itemStatus: string;
+  purchaserIntraId: string;
+  ownerIntraId: string;
+  itemStatusType: string;
 }
 
 export interface IreceiptTable {
