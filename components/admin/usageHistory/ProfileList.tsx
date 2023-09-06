@@ -76,7 +76,7 @@ function ProfileList() {
   const getAllProfileHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/images?&page=${currentPage}&size=5`
+        `/images?page=${currentPage}&size=5`
       );
       setProfileData({
         profileList: res.data.userImageList.map((profile: Iprofile) => {
