@@ -28,13 +28,8 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
     }
     setIsLoading(true);
     try {
-      const res = await instance.post(
-        `/pingpong/items/gift/${itemId}`,
-        giftReqData
-      );
-      if (res.status === 201) {
-        alert(`${giftReqData.ownerId}님께 선물이 전달되었습니다.`);
-      }
+      await instance.post(`/pingpong/items/gift/${itemId}`, giftReqData);
+      alert(`${giftReqData.ownerId}님께 선물이 전달되었습니다.`);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
