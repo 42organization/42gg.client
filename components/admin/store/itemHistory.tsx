@@ -12,7 +12,6 @@ import {
 import { IitemHistory, IitemHistoryList } from 'types/admin/adminStoreTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
-
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -43,7 +42,6 @@ function ItemHistory() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
   const setModal = useSetRecoilState(modalState);
 
