@@ -1,4 +1,5 @@
-export type InventoryItemStatus = 'BEFORE' | 'USING' | 'USED';
+// USED, DELETED 는 응답으로 오지 않음.
+export type InventoryItemStatus = 'BEFORE' | 'WAITING' | 'USING';
 
 export type ItemType =
   | 'MEGAPHONE'
