@@ -10,12 +10,11 @@ import {
   TableRow,
 } from '@mui/material';
 import { Item, ItemList } from 'types/itemTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
-  AdminContent,
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/admin/common/AdminTable';
@@ -34,8 +33,6 @@ const tableTitle: { [key: string]: string } = {
   delete: '삭제',
 };
 
-const MAX_CONTENT_LENGTH = 15;
-
 function ItemList() {
   const [itemListData, setItemListData] = useState<ItemList>({
     itemList: [],
@@ -43,10 +40,9 @@ function ItemList() {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // api 연결 시 instanceInManage로 변경
   const getItemListHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(`items/store`);
+      const res = await instance.get(`/pingpong/items/store`);
       setItemListData(res.data);
     } catch (e: unknown) {
       setSnackBar({
@@ -72,6 +68,14 @@ function ItemList() {
     });
   };
 
+  const openDetailModal = (item: Item) => {
+    setModal({
+      modalName: 'ADMIN-DETAIL_CONTENT',
+      detailTitle: item.mainContent,
+      detailContent: item.subContent,
+    });
+  };
+
   useEffect(() => {
     getItemListHandler();
   }, []);
@@ -90,11 +94,26 @@ function ItemList() {
                       <TableCell className={styles.tableBodyItem} key={index}>
                         {columnName === 'imageUri' ? (
                           <Image
-                            src={item[columnName]}
+                            src={
+                              item.imageUri
+                                ? item[columnName]
+                                : '/public/image/fallBackSrc.jpeg'
+                            }
                             alt='Item Iamge'
                             width={30}
                             height={30}
                           />
+                        ) : columnName === 'content' ? (
+                          <div>
+                            {item.mainContent}
+                            <br />
+                            <span
+                              style={{ cursor: 'pointer', color: 'grey' }}
+                              onClick={() => openDetailModal(item)}
+                            >
+                              ...더보기
+                            </span>
+                          </div>
                         ) : columnName === 'edit' ? (
                           <button
                             className={styles.editBtn}
@@ -109,13 +128,24 @@ function ItemList() {
                           >
                             삭제
                           </button>
+                        ) : columnName === 'content' ? (
+                          <div>
+                            {item.mainContent}
+                            <span
+                              style={{ cursor: 'pointer', color: 'grey' }}
+                              onClick={() =>
+                                setModal({
+                                  modalName: 'ADMIN-DETAIL_CONTENT',
+                                  detailTitle: item.mainContent,
+                                  detailContent: item.subContent,
+                                })
+                              }
+                            >
+                              ...더보기
+                            </span>
+                          </div>
                         ) : (
-                          <AdminContent
-                            content={item[columnName as keyof Item].toString()}
-                            maxLen={MAX_CONTENT_LENGTH}
-                            detailTitle={item.itemName}
-                            detailContent={item.mainContent}
-                          />
+                          item[columnName as keyof Item]?.toString()
                         )}
                       </TableCell>
                     );

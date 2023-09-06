@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { Imegaphone } from 'types/admin/adminReceiptType';
-import { mockInstance } from 'utils/mockAxios';
+import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminDeleteMegaphone.module.scss';
@@ -10,10 +10,15 @@ export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  // instanceInManage로 변경
+  const deleteResponse: { [key: string]: string } = {
+    ME100: '확성기 조회에 실패했습니다.',
+    RC500: '권한이 없습니다.',
+    RC200: '확성기 상태가 사용대기, 사용중이 아닙니다.',
+  };
+
   const deleteMegaphoneHandler = async (megaphoneId: number) => {
     try {
-      await mockInstance.delete(`/admin/megaphones/${megaphoneId}`);
+      await instance.delete(`/pingpong/megaphones/${megaphoneId}`);
       setSnackBar({
         toastName: 'delete megaphone',
         severity: 'success',
@@ -26,21 +31,21 @@ export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
         detailContent: 'megaphone',
       });
     } catch (e: any) {
-      // 이미 사용완료 상태인 확성기 삭제 시도 시 에러 받아서 처리하는 부분
-      // if (e.response.status === 403) {
-      //   setSnackBar({
-      //     toastName: 'delete megaphone',
-      //     severity: 'error',
-      //     message: `${megaphoneId}번 확성기는 삭제할 수 없는 확성기입니다.`,
-      //     clicked: true,
-      //   });
-      // } else {
-      setSnackBar({
-        toastName: 'delete megaphone',
-        severity: 'error',
-        message: `API 요청에 문제가 발생했습니다.`,
-        clicked: true,
-      });
+      if (e.response.data.code in deleteResponse) {
+        setSnackBar({
+          toastName: 'delete megaphone',
+          severity: 'error',
+          message: deleteResponse[e.response.data.code],
+          clicked: true,
+        });
+      } else {
+        setSnackBar({
+          toastName: 'delete megaphone',
+          severity: 'error',
+          message: `API 요청에 문제가 발생했습니다.`,
+          clicked: true,
+        });
+      }
       setModal({ modalName: null });
     }
   };
@@ -63,7 +68,7 @@ export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
               className={styles.contentBlank}
               value={content}
               readOnly
-            />
+            ></textarea>
           </div>
           <div className={styles.checkWrap}>
             {megaphoneId} 번 확성기를 삭제하시겠습니까?

@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest, UseMegaphoneRequest } from 'types/inventoryTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instance, isAxiosError } from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { MegaphoneItem } from 'components/Layout/MegaPhone';
@@ -24,10 +25,37 @@ const caution = [
   '관리자의 판단에 따라 부적절한 내용의 확성기는 삭제될 수 있습니다.',
 ];
 
+const errorCode = [
+  'ME200',
+  'RC100',
+  'RC500',
+  'IT200',
+  'RC200',
+  'CM007',
+] as const;
+
+type errorCodeType = (typeof errorCode)[number];
+
+type errorPayload = {
+  status: number;
+  message: string;
+  code: errorCodeType;
+};
+
+const errorMessages: Record<errorCodeType, string> = {
+  ME200: '23:55-00:05 사이에는 확성기 사용이 불가능합니다.',
+  RC100: '아이템을 찾을 수 없습니다.',
+  RC500: '사용 불가능한 아이템입니다.',
+  IT200: '사용 불가능한 아이템입니다.',
+  RC200: '이미 등록한 확성기 아이템입니다.',
+  CM007: '확성기에 등록할 수 있는 글자수는 1 이상 30 이하입니다.',
+};
+
 export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
   const user = useRecoilValue(userState);
   const [content, setContent] = useState('');
   const resetModal = useResetRecoilState(modalState);
+  const setError = useSetRecoilState(errorState);
   async function handleUseMegaphone() {
     if (content.length === 0) {
       alert('확성기 내용을 입력해주세요.');
@@ -38,15 +66,15 @@ export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
       content: content,
     };
     try {
-      // await mockInstance.post('/megaphones', data);
-      // NOTE : 테스트를 위해 응답 body를 console에 출력 <- 확성기 등록 결과 확인. 추후 삭제
-      const response = await mockInstance.post('/megaphones', data);
-      console.log(response.data.megaphoneList);
-      //
+      await instance.post('/pingpong/megaphones', data);
       alert('확성기가 등록되었습니다.');
     } catch (error: unknown) {
-      // TODO : error 정의 필요
-      console.log(error);
+      if (isAxiosError<errorPayload>(error) && error.response) {
+        const { code } = error.response.data;
+        if (errorCode.includes(code) && code !== 'RC100')
+          alert(errorMessages[code]);
+        else setError('JY06');
+      } else setError('JY06');
     } finally {
       resetModal();
     }

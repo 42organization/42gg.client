@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { StoreMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
+import { updateCoinState } from 'utils/recoil/updateCoin';
 import { StoreModeWrap } from 'components/mode/modeWraps/StoreModeWrap';
 import { Inventory } from 'components/store/Inventory';
 import ItemsList from 'components/store/purchase/ItemsList';
@@ -10,7 +12,8 @@ import styles from 'styles/store/StoreContainer.module.scss';
 export default function Store() {
   const [mode, setMode] = useState<StoreMode>('BUY');
   const [coin, setCoin] = useState<ICoin>({ coin: 0 });
-  const [updateCoin, setUpdateCoin] = useState<boolean>(true);
+  const [reloadCoin, updateCoin] = useRecoilState(updateCoinState);
+  const resetUpdateCoinState = useResetRecoilState(updateCoinState);
 
   const getCoin = useAxiosGet({
     url: '/pingpong/users/coin',
@@ -20,11 +23,18 @@ export default function Store() {
   });
 
   useEffect(() => {
-    if (updateCoin) {
+    getCoin();
+    return () => {
+      resetUpdateCoinState();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (reloadCoin) {
       getCoin();
-      setUpdateCoin(false);
+      updateCoin(false);
     }
-  }, [updateCoin]);
+  }, [reloadCoin]);
 
   return (
     <div className={styles.pageWrap}>

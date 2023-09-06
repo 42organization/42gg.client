@@ -4,7 +4,7 @@ import { IFeedback } from 'types/admin/adminFeedbackTypes';
 import { Imegaphone, Iprofile } from 'types/admin/adminReceiptType';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { CoinResult } from 'types/coinTypes';
-import { ItemType, UseItemRequest } from 'types/inventoryTypes';
+import { RandomItem, ItemType, UseItemRequest } from 'types/inventoryTypes';
 import { Item } from 'types/itemTypes';
 import { MatchMode } from 'types/mainType';
 import { ISeason } from 'types/seasonTypes';
@@ -96,8 +96,8 @@ export interface StoreManual {
   radioMode: StoreManualMode;
 }
 
-export interface RandomItem {
-  item: string;
+export interface IRandomItem {
+  item: RandomItem;
   color: string;
 }
 
@@ -126,5 +126,5 @@ export interface Modal {
   storeManual?: StoreManual;
   isAttended?: boolean;
   totalCoin?: ICoin;
-  randomItem?: RandomItem;
+  randomItem?: IRandomItem;
 }

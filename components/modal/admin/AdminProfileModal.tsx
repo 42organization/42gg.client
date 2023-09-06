@@ -26,7 +26,10 @@ export default function AdminProfileModal(props: { intraId: string }) {
     coin: 0,
   });
 
-  const { imgData, imgPreview, uploadImg } = useUploadImg();
+  const { imgData, imgPreview, uploadImg } = useUploadImg({
+    maxSizeMB: 0.03,
+    maxWidthOrHeight: 150,
+  });
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 

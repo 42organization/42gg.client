@@ -339,6 +339,13 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   }
 }
 
+@mixin waitAnimation($delay) {
+  @include spanUpDownAnimation(0.2rem, 0.2rem);
+  position: relative;
+  display: inline-block;
+  animation-delay: $delay;
+}
+
 @mixin modalButton {
   display: flex;
   justify-content: center;

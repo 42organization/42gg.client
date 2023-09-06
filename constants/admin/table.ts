@@ -68,9 +68,9 @@ export const tableFormat: TableFormat = {
       'createdAt',
       'itemName',
       'itemPrice',
-      'purchaserIntra',
-      'ownerIntra',
-      'itemStatus',
+      'purchaserIntraId',
+      'ownerIntraId',
+      'itemStatusType',
     ],
   },
   megaphoneList: {
@@ -108,7 +108,7 @@ export const tableFormat: TableFormat = {
     columns: [
       'itemId',
       'createdAt',
-      'itemName',
+      'name',
       'content',
       'imageUri',
       'price',

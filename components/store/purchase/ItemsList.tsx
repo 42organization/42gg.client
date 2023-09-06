@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ItemList } from 'types/itemTypes';
 import ItemCard from 'components/store/purchase/ItemCard';
-import useAxiosGet, { useMockAxiosGet } from 'hooks/useAxiosGet';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 export default function ItemsList({ coin }: { coin: number }) {
   const [itemList, setItemList] = useState<ItemList>({ itemList: [] });
@@ -10,15 +10,8 @@ export default function ItemsList({ coin }: { coin: number }) {
     getItemList();
   }, []);
 
-  //   const getItemList = useAxiosGet({
-  //     url: 'pingpong/items/store',
-  //     setState: setItemList,
-  //     err: 'HB01',
-  //     type: 'setError',
-  //   });
-
-  const getItemList = useMockAxiosGet({
-    url: '/items/store',
+  const getItemList = useAxiosGet({
+    url: 'pingpong/items/store',
     setState: setItemList,
     err: 'HB01',
     type: 'setError',
