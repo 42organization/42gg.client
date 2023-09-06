@@ -1,28 +1,45 @@
-import { useEffect, useState } from 'react';
-import { Gift } from 'types/itemTypes';
+import { useState } from 'react';
+import { useSetRecoilState, useResetRecoilState } from 'recoil';
+import { GiftRequest } from 'types/itemTypes';
 import { PriceTag } from 'types/modalTypes';
+import { instance } from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/modal';
+import { updateCoinState } from 'utils/recoil/updateCoin';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
 import GiftSearchBar from 'components/store/purchase/GiftSearchBar';
-import useGiftModal from 'hooks/modal/store/purchase/useGiftModal';
 import styles from 'styles/modal/store/GiftModal.module.scss';
 
 export default function GiftModal({ itemId, product, price }: PriceTag) {
-  const [recipient, setRecipient] = useState<string>('');
-  const [gift, setGift] = useState<Gift>({
-    itemId: -1,
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const resetModal = useResetRecoilState(modalState);
+  const setError = useSetRecoilState<string>(errorState);
+  const updateCoin = useSetRecoilState(updateCoinState);
+  const [giftReqData, setGiftReqData] = useState<GiftRequest>({
     ownerId: '',
   });
-  const { onPurchase, onCancel } = useGiftModal(gift);
 
-  useEffect(() => {
-    setGift({
-      itemId: itemId,
-      ownerId: recipient,
-    });
-  }, [itemId, recipient]);
+  // TODO: 에러 처리
+  const onPurchase = async () => {
+    if (giftReqData.ownerId === '') {
+      alert('선물할 유저를 선택해주세요.');
+      return;
+    }
+    setIsLoading(true);
+    try {
+      await instance.post(`/pingpong/items/gift/${itemId}`, giftReqData);
+      alert(`${giftReqData.ownerId}님께 선물이 전달되었습니다.`);
+      updateCoin(true);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      setError('HB02');
+    }
+    resetModal();
+  };
 
   return (
     <div className={styles.container}>
@@ -39,10 +56,10 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
             <div>{price} 코인</div>
           </div>
         </div>
-        <GiftSearchBar setRecipient={setRecipient} />
-        {recipient !== '' && (
+        <GiftSearchBar setGiftReqData={setGiftReqData} />
+        {giftReqData.ownerId !== '' && (
           <div className={styles.recipient}>
-            <span>{recipient}</span>님에게 선물하시겠습니까?
+            <span>{giftReqData.ownerId}</span>님에게 선물하시겠습니까?
           </div>
         )}
         <div className={styles.warning}>
@@ -50,8 +67,13 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
         </div>
       </div>
       <ModalButtonContainer>
-        <ModalButton style='negative' value='취소' onClick={onCancel} />
-        <ModalButton style='positive' value='보내기' onClick={onPurchase} />
+        <ModalButton style='negative' value='취소' onClick={resetModal} />
+        <ModalButton
+          style='positive'
+          value='보내기'
+          isLoading={isLoading}
+          onClick={onPurchase}
+        />
       </ModalButtonContainer>
     </div>
   );

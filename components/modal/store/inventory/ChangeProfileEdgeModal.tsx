@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { Modal } from 'types/modalTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import {
@@ -14,7 +15,6 @@ import styles from 'styles/modal/store/InventoryModal.module.scss';
 
 type ChangeProfileEdgeModalProps = UseItemRequest;
 
-// TODO : 주의사항 구체화 필요
 const caution = [
   '색상은 랜덤으로 결정됩니다.',
   '아이템을 사용한 후에는 취소가 불가능합니다.',
@@ -23,26 +23,34 @@ const caution = [
 export default function ChangeProfileEdgeModal({
   receiptId,
 }: ChangeProfileEdgeModalProps) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const resetModal = useResetRecoilState(modalState);
   const setModal = useSetRecoilState<Modal>(modalState);
   const setError = useSetRecoilState<string>(errorState);
 
   const gachaAction = async () => {
+    setIsLoading(true);
     const data: UseItemRequest = {
       receiptId: receiptId,
     };
     try {
-      const res = await mockInstance.patch('/users/edge', data);
+      const res = await instance.patch('/pingpong/users/edge', data);
       setModal({
         modalName: 'USE-ITEM-GACHA',
         randomItem: {
-          item: 'edge',
-          color: res.data,
+          item: 'EDGE',
+          color: res.data.edge,
         },
       });
+      setIsLoading(false);
     } catch (error) {
+      // TODO: 에러 코드 확인 후 수정
+      alert('뽑기에 실패했습니다(˃̣̣̥ᴖ˂̣̣̥) 관리자에게 문의해주세요');
+      setIsLoading(false);
       setError('HB04');
+      resetModal();
     }
+    setIsLoading(false);
   };
 
   return (
@@ -55,15 +63,12 @@ export default function ChangeProfileEdgeModal({
         </div>
         <ItemCautionContainer caution={caution} />
         <ModalButtonContainer>
-          <ModalButton
-            style='negative'
-            value='취소'
-            onClick={() => resetModal()}
-          />
+          <ModalButton style='negative' value='취소' onClick={resetModal} />
           <ModalButton
             style='positive'
             value='뽑기'
-            onClick={() => gachaAction()}
+            isLoading={isLoading}
+            onClick={gachaAction}
           />
         </ModalButtonContainer>
       </div>

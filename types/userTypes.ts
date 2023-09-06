@@ -10,7 +10,7 @@ export interface ProfileBasic {
   tierName: string;
   expRate: number;
   edge: string;
-  backgroundType: string;
+  background: string;
   snsNotiOpt: 'NONE' | 'SLACK' | 'EMAIL' | 'BOTH';
 }
 
