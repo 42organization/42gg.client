@@ -118,6 +118,7 @@ function ItemHistory() {
                             ) : columnName === 'content' ? (
                               <div>
                                 {itemHistory.mainContent}
+                                <br />
                                 <span
                                   style={{ cursor: 'pointer', color: 'grey' }}
                                   onClick={() => openDetailModal(itemHistory)}

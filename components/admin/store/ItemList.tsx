@@ -106,6 +106,7 @@ function ItemList() {
                         ) : columnName === 'content' ? (
                           <div>
                             {item.mainContent}
+                            <br />
                             <span
                               style={{ cursor: 'pointer', color: 'grey' }}
                               onClick={() => openDetailModal(item)}
