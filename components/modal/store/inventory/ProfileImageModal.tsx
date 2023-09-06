@@ -92,9 +92,10 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
     } catch (error: unknown) {
       if (isAxiosError<errorPayload>(error) && error.response) {
         const { code } = error.response.data;
-        if (code === 'UR100') setError;
-        if (errorCode.includes(code)) alert(errorMessage[code]);
-      }
+        if (code === 'UR100') setError('JY08');
+        else if (errorCode.includes(code)) alert(errorMessage[code]);
+        else setError('JY08');
+      } else setError('JY08');
       resetModal();
     }
   }
