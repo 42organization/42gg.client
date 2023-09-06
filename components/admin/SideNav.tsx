@@ -9,7 +9,7 @@ import {
 } from 'react-icons/gr';
 import { IoGameControllerOutline, IoReceiptOutline } from 'react-icons/io5';
 import { MdOutlineMessage } from 'react-icons/md';
-import { TbCalendarTime, TbCoin } from 'react-icons/tb';
+import { TbCalendarTime, TbCoin, TbPaperBag } from 'react-icons/tb';
 import SideNavContent from 'components/admin/SideNavContent';
 import styles from 'styles/admin/SideNav.module.scss';
 
@@ -84,10 +84,18 @@ export default function SideNav() {
 
       <SideNavContent
         url={'/receipt'}
-        menuName={'거래내역 관리'}
+        menuName={'구매내역 관리'}
         currentPath={currentPath}
       >
         <IoReceiptOutline className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/usageHistory'}
+        menuName={'사용내역 관리'}
+        currentPath={currentPath}
+      >
+        <TbPaperBag className={styles.logo} />
       </SideNavContent>
 
       <SideNavContent

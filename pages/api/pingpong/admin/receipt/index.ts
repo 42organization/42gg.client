@@ -11,9 +11,9 @@ const receipt1: Ireceipt = {
   createdAt: new Date('2023-08-05 20:10:10'),
   itemName: '확성기',
   itemPrice: 42,
-  purchaserIntra: 'hyungjpa',
-  ownerIntra: 'hyungjpa',
-  itemStatus: '사용 전',
+  purchaserIntraId: 'hyungjpa',
+  ownerIntraId: 'hyungjpa',
+  itemStatusType: '사용 전',
 };
 
 const receipt2: Ireceipt = {
@@ -21,9 +21,9 @@ const receipt2: Ireceipt = {
   createdAt: new Date('2023-08-05 19:20:10'),
   itemName: '프로필 사진 변경권',
   itemPrice: 21,
-  purchaserIntra: 'jeyoon',
-  ownerIntra: 'hyobicho',
-  itemStatus: '사용 완료',
+  purchaserIntraId: 'jeyoon',
+  ownerIntraId: 'hyobicho',
+  itemStatusType: '사용 완료',
 };
 
 const receipt3: Ireceipt = {
@@ -31,9 +31,9 @@ const receipt3: Ireceipt = {
   createdAt: new Date('2023-08-04 10:10:10'),
   itemName: '프로필 색상 변경권',
   itemPrice: 10,
-  purchaserIntra: 'sangmipa',
-  ownerIntra: 'jeyoon',
-  itemStatus: '사용 완료',
+  purchaserIntraId: 'sangmipa',
+  ownerIntraId: 'jeyoon',
+  itemStatusType: '사용 완료',
 };
 
 const receipt4: Ireceipt = {
@@ -41,9 +41,9 @@ const receipt4: Ireceipt = {
   createdAt: new Date('2023-08-04 05:30:10'),
   itemName: '확성기',
   itemPrice: 42,
-  purchaserIntra: 'hyobicho',
-  ownerIntra: 'sangmipa',
-  itemStatus: '사용 전',
+  purchaserIntraId: 'hyobicho',
+  ownerIntraId: 'sangmipa',
+  itemStatusType: '사용 전',
 };
 
 const receipt5: Ireceipt = {
@@ -51,9 +51,9 @@ const receipt5: Ireceipt = {
   createdAt: new Date('2023-08-01 21:29:10'),
   itemName: '프로필 사진 변경권',
   itemPrice: 21,
-  purchaserIntra: 'jeyoon',
-  ownerIntra: 'hyungjpa',
-  itemStatus: '사용 완료',
+  purchaserIntraId: 'jeyoon',
+  ownerIntraId: 'hyungjpa',
+  itemStatusType: '사용 완료',
 };
 
 const receipt6: Ireceipt = {
@@ -61,9 +61,9 @@ const receipt6: Ireceipt = {
   createdAt: new Date('2023-07-29 18:24:10'),
   itemName: '프로필 색상 변경권',
   itemPrice: 10,
-  purchaserIntra: 'hyungjpa',
-  ownerIntra: 'hyobicho',
-  itemStatus: '사용 완료',
+  purchaserIntraId: 'hyungjpa',
+  ownerIntraId: 'hyobicho',
+  itemStatusType: '사용 완료',
 };
 
 const receipt7: Ireceipt = {
@@ -71,9 +71,9 @@ const receipt7: Ireceipt = {
   createdAt: new Date('2023-07-28 10:10:10'),
   itemName: '확성기',
   itemPrice: 42,
-  purchaserIntra: 'hyobicho',
-  ownerIntra: 'jeyoon',
-  itemStatus: '사용 전',
+  purchaserIntraId: 'hyobicho',
+  ownerIntraId: 'jeyoon',
+  itemStatusType: '사용 전',
 };
 
 const receipt8: Ireceipt = {
@@ -81,9 +81,9 @@ const receipt8: Ireceipt = {
   createdAt: new Date('2023-06-30 21:10:10'),
   itemName: '프로필 사진 변경권',
   itemPrice: 21,
-  purchaserIntra: 'sangmipa',
-  ownerIntra: 'sangmipa',
-  itemStatus: '사용 완료',
+  purchaserIntraId: 'sangmipa',
+  ownerIntraId: 'sangmipa',
+  itemStatusType: '사용 완료',
 };
 
 const receipt9: Ireceipt = {
@@ -91,9 +91,9 @@ const receipt9: Ireceipt = {
   createdAt: new Date('2023-06-21 20:13:10'),
   itemName: '프로필 색상 변경권',
   itemPrice: 10,
-  purchaserIntra: 'jeyoon',
-  ownerIntra: 'hyungjpa',
-  itemStatus: '사용 완료',
+  purchaserIntraId: 'jeyoon',
+  ownerIntraId: 'hyungjpa',
+  itemStatusType: '사용 완료',
 };
 
 const receipt10: Ireceipt = {
@@ -101,9 +101,9 @@ const receipt10: Ireceipt = {
   createdAt: new Date('2023-06-21 20:13:10'),
   itemName: '프로필 색상 변경권',
   itemPrice: 10,
-  purchaserIntra: 'sangmipa',
-  ownerIntra: 'hyungjpa',
-  itemStatus: '사용 완료',
+  purchaserIntraId: 'sangmipa',
+  ownerIntraId: 'hyungjpa',
+  itemStatusType: '사용 완료',
 };
 
 const receiptList: Array<Ireceipt> = [
@@ -151,7 +151,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (intraId) {
       resData.receiptList = temp.receiptList.filter(
         (receipt: Ireceipt) =>
-          receipt.ownerIntra === intraId || receipt.purchaserIntra === intraId
+          receipt.ownerIntraId === intraId ||
+          receipt.purchaserIntraId === intraId
       );
       resData.totalPage = 1;
     } else {
