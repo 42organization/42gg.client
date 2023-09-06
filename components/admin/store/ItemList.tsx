@@ -128,6 +128,22 @@ function ItemList() {
                           >
                             삭제
                           </button>
+                        ) : columnName === 'content' ? (
+                          <div>
+                            {item.mainContent}
+                            <span
+                              style={{ cursor: 'pointer', color: 'grey' }}
+                              onClick={() =>
+                                setModal({
+                                  modalName: 'ADMIN-DETAIL_CONTENT',
+                                  detailTitle: item.mainContent,
+                                  detailContent: item.subContent,
+                                })
+                              }
+                            >
+                              ...더보기
+                            </span>
+                          </div>
                         ) : (
                           item[columnName as keyof Item]?.toString()
                         )}

@@ -24,7 +24,7 @@ import styles from 'styles/admin/store/ItemHistory.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   itemId: 'ID',
-  createdAt: '변경일',
+  createdAt: '변경 시간',
   name: '이름',
   content: '설명',
   imageUri: '이미지',
