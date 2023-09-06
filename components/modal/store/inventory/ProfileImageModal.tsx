@@ -3,7 +3,7 @@ import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { FaArrowRight } from 'react-icons/fa';
 import { TbQuestionMark } from 'react-icons/tb';
 import { UseItemRequest } from 'types/inventoryTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instance, isAxiosError } from 'utils/axios';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import {
@@ -37,19 +37,24 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
       const formData = new FormData();
       // TODO : receiptId 데이터에 대한 key는 결정되지 않음.
       formData.append(
-        'receiptId',
+        'userProfileImageRequestDto',
         new Blob([JSON.stringify({ receiptId: receiptId })], {
           type: 'application/json',
         })
       );
-      formData.append('imgData', new Blob([imgData], { type: 'image/jpeg' }));
-      const ret = await mockInstance.post('/users/profile-image', formData);
-      if (ret.status === 201) {
-        alert('프로필 이미지가 변경되었습니다.');
-        resetModal();
-      } else throw new Error();
+      formData.append(
+        'profileImage',
+        new Blob([imgData], { type: 'image/jpeg' })
+      );
+      const ret = await instance.post(
+        '/pingpong/users/profile-image',
+        formData
+      );
+      alert('프로필 이미지가 변경되었습니다.');
+      resetModal();
     } catch (error) {
       alert('프로필 이미지 변경에 실패했습니다.');
+      resetModal();
     }
   }
 
