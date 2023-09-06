@@ -1,7 +1,7 @@
 .whole {
   display: flex;
   width: 510px;
-  height: 490px;
+  height: 550px;
   flex-direction: column;
   background: #ffffff;
   border-radius: 9px;
@@ -44,9 +44,8 @@
 .bodyWrap {
   display: flex;
   width: 80%;
-  height: 60%;
   flex-direction: column;
-  margin-bottom: 30px;
+  margin-bottom: 1rem;
   justify-content: flex-start;
   align-items: center;
 }
@@ -65,7 +64,7 @@
   align-items: center;
 }
 
-.intraWrap,
+.itemWrap,
 .contentWrap {
   display: flex;
   padding: 0 1rem;
@@ -73,8 +72,26 @@
   align-items: center;
 }
 
-.intraBlank,
-.contentBlank {
+.contentWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.mainContentWrap,
+.subContentWrap {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemBlank,
+.mainContentBlank,
+.subContentBlank {
   box-sizing: border-box;
   display: flex;
   width: 275px;
@@ -88,18 +105,15 @@
   border-radius: 1px;
 }
 
-.contentBlank {
+.subContentBlank {
   height: 100px;
-}
-
-.contentWrap {
-  margin-bottom: 30px;
+  padding: 20px;
 }
 
 .buttonWrap {
   display: flex;
   width: 90%;
-  height: 25%;
+  height: 20%;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
