@@ -9,8 +9,14 @@
   overflow-y: scroll;
   .empty {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     font-size: 1.2rem;
     color: $gray;
+    div {
+      margin: 2rem auto;
+    }
+    svg {
+      margin: 1.5rem auto;
+    }
   }
 }
