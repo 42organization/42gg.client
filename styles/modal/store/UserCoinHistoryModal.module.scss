@@ -22,6 +22,9 @@
     color: #ffffff;
     border-bottom: 1px solid #3b363b36;
     justify-content: space-between;
+    .current {
+      padding-top: 0.35rem;
+    }
   }
 
   .loading {

@@ -56,7 +56,7 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
     <div className={styles.container}>
       <div className={styles.title}>GG코인 내역</div>
       <div className={styles.balance}>
-        <div>현재 코인</div>
+        <div className={styles.current}>현재 코인</div>
         <CoinImage amount={coin} size={25} />
       </div>
       {isLoading ? (

@@ -5,6 +5,7 @@ import { PriceTag } from 'types/modalTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
+import { updateCoinState } from 'utils/recoil/updateCoin';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -16,6 +17,7 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const resetModal = useResetRecoilState(modalState);
   const setError = useSetRecoilState<string>(errorState);
+  const updateCoin = useSetRecoilState(updateCoinState);
   const [giftReqData, setGiftReqData] = useState<GiftRequest>({
     ownerId: '',
   });
@@ -30,6 +32,7 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
     try {
       await instance.post(`/pingpong/items/gift/${itemId}`, giftReqData);
       alert(`${giftReqData.ownerId}님께 선물이 전달되었습니다.`);
+      updateCoin(true);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);

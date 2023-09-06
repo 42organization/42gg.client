@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { Modal } from 'types/modalTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import {
@@ -15,7 +15,6 @@ import styles from 'styles/modal/store/InventoryModal.module.scss';
 
 type ChangeProfileBackgroundModalProps = UseItemRequest;
 
-// TODO : 주의사항 구체화 필요
 const caution = [
   '색상은 랜덤으로 결정됩니다.',
   '아이템을 사용한 후에는 취소가 불가능합니다.',
@@ -35,18 +34,21 @@ export default function ChangeProfileBackgroundModal({
       receiptId: receiptId,
     };
     try {
-      const res = await mockInstance.patch('/users/background', data);
+      const res = await instance.patch('/pingpong/users/background', data);
       setModal({
         modalName: 'USE-ITEM-GACHA',
         randomItem: {
-          item: 'background',
-          color: res.data,
+          item: 'BACKGROUND',
+          color: res.data.background,
         },
       });
       setIsLoading(false);
     } catch (error) {
+      // TODO: 에러 코드 확인 후 수정
+      alert('뽑기에 실패했습니다(˃̣̣̥ᴖ˂̣̣̥) 관리자에게 문의해주세요');
       setIsLoading(false);
       setError('HB05');
+      resetModal();
     }
   };
 

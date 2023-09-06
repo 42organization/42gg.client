@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { CurrentMatchContent } from 'components/Layout/CurrentMatch';
 
 const meta: Meta<typeof CurrentMatchContent> = {
-  title: 'MainPageProfile/CurrentMatch',
+  title: 'Layout/CurrentMatch',
   component: CurrentMatchContent,
   tags: ['autodocs'],
   argTypes: {

@@ -1,7 +1,6 @@
-import React from 'react';
-import ErrorEmoji from 'public/image/noti_empty.svg';
 import useErrorPage from 'hooks/error/useErrorPage';
 import styles from 'styles/Error.module.scss';
+import ErrorEmoji from '/public/image/error_face.svg';
 
 export default function ErrorPage() {
   const { error, goHome } = useErrorPage();

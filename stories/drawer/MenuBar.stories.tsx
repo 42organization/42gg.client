@@ -59,7 +59,7 @@ const MenuHeader = ({ open }: { open: boolean }) => {
         'https://cdn.pixabay.com/photo/2022/07/29/05/52/table-tennis-7351159_1280.png',
       tierName: '무지개 탁구채',
       edge: 'BASIC',
-      backgroundType: 'BASIC',
+      background: 'BASIC',
     });
   }, []);
 
