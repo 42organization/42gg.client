@@ -21,7 +21,9 @@ export default function BuyModal({ itemId, product, price }: PriceTag) {
     try {
       await instance.post(`/pingpong/items/purchases/${itemId}`, null);
       alert(`구매 성공!`);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       setError('HB03');
     }
     resetModal();

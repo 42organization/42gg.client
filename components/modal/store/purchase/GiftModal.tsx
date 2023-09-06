@@ -35,7 +35,9 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
       if (res.status === 201) {
         alert(`${giftReqData.ownerId}님께 선물이 전달되었습니다.`);
       }
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       setError('HB02');
     }
     resetModal();
