@@ -38,7 +38,6 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
     } catch (error) {
       setError('HB02');
     }
-    setIsLoading(false);
     resetModal();
   };
 

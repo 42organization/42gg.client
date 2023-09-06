@@ -24,7 +24,6 @@ export default function BuyModal({ itemId, product, price }: PriceTag) {
     } catch (error) {
       setError('HB03');
     }
-    setIsLoading(false);
     resetModal();
   };
 

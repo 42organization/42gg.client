@@ -46,7 +46,6 @@ export default function ChangeProfileBackgroundModal({
     } catch (error) {
       setError('HB05');
     }
-    setIsLoading(false);
   };
 
   return (
