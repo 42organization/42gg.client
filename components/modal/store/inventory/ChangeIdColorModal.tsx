@@ -39,7 +39,7 @@ export default function ChangeIdColorModal({
     );
     if (!ret) return;
     try {
-      await instance.patch('/users/text-color', data);
+      await instance.patch('/pingpong/users/text-color', data);
       alert('아이디 색상이 변경되었습니다.');
     } catch (error: unknown) {
       // TODO : error 정의 필요
