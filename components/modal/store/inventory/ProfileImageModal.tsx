@@ -4,7 +4,7 @@ import { FaArrowRight } from 'react-icons/fa';
 import { TbQuestionMark } from 'react-icons/tb';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
+import { errorState } from 'utils/recoil/error';n
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import {
@@ -67,7 +67,10 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
   const setError = useSetRecoilState(errorState);
   const user = useRecoilValue(userState);
   const resetModal = useResetRecoilState(modalState);
-  const { imgData, imgPreview, uploadImg } = useUploadImg();
+  const { imgData, imgPreview, uploadImg } = useUploadImg({
+    maxSizeMB: 0.03,
+    maxWidthOrHeight: 150,
+  });
 
   async function handleProfileImageUpload() {
     if (!imgData) {

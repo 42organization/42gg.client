@@ -108,7 +108,7 @@ export const tableFormat: TableFormat = {
     columns: [
       'itemId',
       'createdAt',
-      'itemName',
+      'name',
       'content',
       'imageUri',
       'price',
