@@ -107,17 +107,21 @@
   grid-area: usingBadge;
   justify-content: flex-end;
   align-items: center;
-  &.using svg {
+
+  svg {
     width: 0.75rem;
     height: 0.75rem;
     margin-right: 0.3rem;
+  }
+
+  &.using svg {
     fill: #08f458;
   }
   &.before svg {
-    width: 0.75rem;
-    height: 0.75rem;
-    margin-right: 0.3rem;
     fill: #d3d3d3;
+  }
+  &.waiting svg {
+    fill: #ff8e00;
   }
 }
 
