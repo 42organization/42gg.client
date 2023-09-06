@@ -1,6 +1,6 @@
 import { useEffect, Dispatch, SetStateAction } from 'react';
 import { userImages, ToggleMode } from 'types/rankTypes';
-import useAxiosGet, { useMockAxiosGet } from 'hooks/useAxiosGet';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 interface useRankListProps {
   makePathRanker: string;
@@ -19,7 +19,7 @@ const useRankListMain = ({
   page,
   isMain,
 }: useRankListProps): void => {
-  /*   const getRankerDataHandler = useAxiosGet<any>({
+  const getRankerDataHandler = useAxiosGet<any>({
     url: makePathRanker,
     setState: (data) => {
       [data.userImages[0], data.userImages[1]] = [
@@ -27,18 +27,6 @@ const useRankListMain = ({
         data.userImages[0],
       ];
       setRanker(data.userImages);
-    },
-    err: 'DK01',
-    type: 'setError',
-  }); */
-  const getRankerDataHandler = useMockAxiosGet<any>({
-    url: makePathRanker,
-    setState: (data) => {
-      [data.rankList[0], data.rankList[1]] = [
-        data.rankList[1],
-        data.rankList[0],
-      ];
-      setRanker(data.rankList);
     },
     err: 'DK01',
     type: 'setError',

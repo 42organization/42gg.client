@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { CoinResult } from 'types/coinTypes';
 import { Modal } from 'types/modalTypes';
 import { instance } from 'utils/axios';
-import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import CoinPopcon from 'components/modal/CoinPopcon';
-import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/modal/event/WelcomeModal.module.scss';
 
 export default function WelcomeModal() {
@@ -22,32 +20,13 @@ export default function WelcomeModal() {
       '42GG에 오신걸 환영합니다.\n당신의 행복한 탁구 생활을\n응원합니다! 총총총...',
   };
 
-  /*   const postCoinHandler = async() => {
+  const postCoinHandler = async () => {
     try {
-      const res = await instance.post(
-        `/pingpong/users/attendance`
-      );
+      const res = await instance.post(`/pingpong/users/attendance`);
       setCoin(res.data);
       return res.data;
     } catch (error) {
       setError('SM01');
-    }
-  };
-
-  useEffect(() => {
-    postCoinHandler();
-	}, []); */
-
-  const getCoinHandler = async () => {
-    try {
-      const res = await mockInstance.get(`/users/attendance`);
-      if (res && res.data) {
-        setCoin(res.data);
-        return res.data;
-      }
-    } catch (error) {
-      setError('SM01');
-      return null;
     }
   };
 
@@ -60,8 +39,7 @@ export default function WelcomeModal() {
   const openAttendanceCoin = async () => {
     try {
       setButtonState(true);
-      const updatedCoin = await getCoinHandler();
-      //const updatedCoin = await postCoinHandler();
+      const updatedCoin = await postCoinHandler();
 
       if (!updatedCoin) return null;
 
@@ -77,16 +55,6 @@ export default function WelcomeModal() {
     } catch (error) {
       setError('SM02');
     }
-  };
-
-  const openStatChangeModal = () => {
-    setModal({
-      modalName: 'FIXED-STAT',
-      exp: {
-        gameId: 0,
-        mode: 'RANK',
-      },
-    });
   };
 
   return (
@@ -108,11 +76,10 @@ export default function WelcomeModal() {
           <div className={styles.positive}>
             <input
               onClick={openAttendanceCoin}
-              // onClick={openStatChangeModal}
               type='button'
               value='출석하기'
             />
-            {buttonState && <CoinPopcon amount={10} coin={1} />}
+            {buttonState && <CoinPopcon amount={8} coin={1} />}
           </div>
         </div>
       </div>
