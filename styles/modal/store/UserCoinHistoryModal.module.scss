@@ -16,12 +16,31 @@
   .balance {
     display: flex;
     width: 80%;
+    padding-bottom: 0.5rem;
     margin-bottom: 0.5rem;
     font-size: 1.3rem;
     color: #ffffff;
+    border-bottom: 1px solid #3b363b36;
     justify-content: space-between;
     .current {
       padding-top: 0.35rem;
+    }
+  }
+
+  .loading {
+    margin: 5rem 0;
+    color: #ffffff;
+    .span1 {
+      @include waitAnimation(0.3s);
+      font-size: 1.8rem;
+    }
+    .span2 {
+      @include waitAnimation(0.5s);
+      font-size: 1.8rem;
+    }
+    .span3 {
+      @include waitAnimation(0.7s);
+      font-size: 1.8rem;
     }
   }
 }

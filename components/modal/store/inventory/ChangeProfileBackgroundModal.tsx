@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { Modal } from 'types/modalTypes';
@@ -22,11 +23,13 @@ const caution = [
 export default function ChangeProfileBackgroundModal({
   receiptId,
 }: ChangeProfileBackgroundModalProps) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const resetModal = useResetRecoilState(modalState);
   const setModal = useSetRecoilState<Modal>(modalState);
   const setError = useSetRecoilState<string>(errorState);
 
   const gachaAction = async () => {
+    setIsLoading(true);
     const data: UseItemRequest = {
       receiptId: receiptId,
     };
@@ -39,9 +42,11 @@ export default function ChangeProfileBackgroundModal({
           color: res.data.background,
         },
       });
+      setIsLoading(false);
     } catch (error) {
       // TODO: 에러 코드 확인 후 수정
       alert('뽑기에 실패했습니다(˃̣̣̥ᴖ˂̣̣̥) 관리자에게 문의해주세요');
+      setIsLoading(false);
       setError('HB05');
       resetModal();
     }
@@ -57,15 +62,12 @@ export default function ChangeProfileBackgroundModal({
         </div>
         <ItemCautionContainer caution={caution} />
         <ModalButtonContainer>
-          <ModalButton
-            style='negative'
-            value='취소'
-            onClick={() => resetModal()}
-          />
+          <ModalButton style='negative' value='취소' onClick={resetModal} />
           <ModalButton
             style='positive'
             value='뽑기'
-            onClick={() => gachaAction()}
+            isLoading={isLoading}
+            onClick={gachaAction}
           />
         </ModalButtonContainer>
       </div>

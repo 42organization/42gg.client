@@ -1,0 +1,25 @@
+@import 'styles/common.scss';
+
+.loadingButton {
+  display: flex;
+  width: 8rem;
+  height: 2.5rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 1);
+  background: linear-gradient(180deg, #c66bf2 0%, rgba(96, 6, 138, 0.52) 100%);
+  border: 0;
+  border-radius: 0.625rem;
+  justify-content: center;
+  align-items: center;
+  .loading {
+    .span1 {
+      @include waitAnimation(0.3s);
+    }
+    .span2 {
+      @include waitAnimation(0.5s);
+    }
+    .span3 {
+      @include waitAnimation(0.7s);
+    }
+  }
+}
