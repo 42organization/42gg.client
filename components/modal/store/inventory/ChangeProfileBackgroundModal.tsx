@@ -43,7 +43,9 @@ export default function ChangeProfileBackgroundModal({
           color: res.data,
         },
       });
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       setError('HB05');
     }
   };

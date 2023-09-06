@@ -43,7 +43,9 @@ export default function ChangeProfileEdgeModal({
           color: res.data,
         },
       });
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       setError('HB04');
     }
     setIsLoading(false);
