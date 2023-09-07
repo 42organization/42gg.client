@@ -3,7 +3,7 @@ import { ItemList } from 'types/itemTypes';
 import ItemCard from 'components/store/purchase/ItemCard';
 import useAxiosGet from 'hooks/useAxiosGet';
 
-export default function ItemsList({ coin }: { coin: number }) {
+export default function ItemsList() {
   const [itemList, setItemList] = useState<ItemList>({ itemList: [] });
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function ItemsList({ coin }: { coin: number }) {
   return (
     <div>
       {itemList.itemList.map((item) => (
-        <ItemCard key={item.itemId} item={item} coin={coin} />
+        <ItemCard key={item.itemId} item={item} />
       ))}
     </div>
   );

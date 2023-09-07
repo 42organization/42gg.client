@@ -5,7 +5,7 @@ import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/store/ItemCard.module.scss';
 
-export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
+export default function ItemCard({ item }: { item: Item }) {
   const setModal = useSetRecoilState<Modal>(modalState);
 
   const handleGift = () => {
@@ -30,12 +30,6 @@ export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
     });
   };
 
-  const handleNoCoin = () => {
-    setModal({
-      modalName: 'PURCHASE-NO_COIN',
-    });
-  };
-
   return (
     <div className={styles.itemCard}>
       {item.discount > 0 && (
@@ -44,8 +38,10 @@ export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
 
       <div className={styles.preview}>
         <div className={styles.img}>
-          {item.imageUri && (
+          {item.imageUri ? (
             <Image src={item.imageUri} alt={item.itemName} fill />
+          ) : (
+            <Image src='/image/not_found.svg' alt={'not_found'} fill />
           )}
         </div>
       </div>
@@ -64,16 +60,10 @@ export default function ItemCard({ item, coin }: { item: Item; coin: number }) {
       <div className={styles.mainContent}>{item.mainContent}</div>
       <div className={styles.subContent}>{item.subContent}</div>
       <div className={styles.buttons}>
-        <button
-          className={styles.gift}
-          onClick={item.salePrice < coin ? handleGift : handleNoCoin}
-        >
+        <button className={styles.gift} onClick={handleGift}>
           선물하기
         </button>
-        <button
-          className={styles.buy}
-          onClick={item.salePrice < coin ? handleBuying : handleNoCoin}
-        >
+        <button className={styles.buy} onClick={handleBuying}>
           구매하기
         </button>
       </div>
