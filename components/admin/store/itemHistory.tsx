@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import {
   Paper,
@@ -45,32 +46,42 @@ function ItemHistory() {
   const setSnackBar = useSetRecoilState(toastState);
   const setModal = useSetRecoilState(modalState);
 
-  const getItemHistoryListHandler = useCallback(async () => {
-    try {
-      const res = await instanceInManage.get(
-        `/items/history?page=${currentPage}&size=5`
-      );
-      setItemHistoryData({
-        itemHistoryList: res.data.historyList.map(
-          (itemHistory: IitemHistory) => {
-            return {
-              ...itemHistory,
-              createdAt: dateToStringShort(new Date(itemHistory.createdAt)),
-            };
-          }
-        ),
-        totalPage: res.data.totalPage,
-        currentPage: currentPage,
-      });
-    } catch (e: unknown) {
-      setSnackBar({
-        toastName: 'get itemhistory',
-        severity: 'error',
-        message: 'API 요청에 문제가 발생했습니다.',
-        clicked: true,
-      });
-    }
-  }, [currentPage]);
+  const getApi = (currentPage: number) => {
+    return instanceInManage.get(`/items/history?page=${currentPage}&size=5`);
+  };
+
+  const { data } = useQuery(
+    ['itemHistoryList', currentPage],
+    () => getApi(currentPage),
+    { keepPreviousData: true }
+  );
+
+  // const getItemHistoryListHandler = useCallback(async () => {
+  //   try {
+  //     const res = await instanceInManage.get(
+  //       `/items/history?page=${currentPage}&size=5`
+  //     );
+  //     setItemHistoryData({
+  //       itemHistoryList: res.data.historyList.map(
+  //         (itemHistory: IitemHistory) => {
+  //           return {
+  //             ...itemHistory,
+  //             createdAt: dateToStringShort(new Date(itemHistory.createdAt)),
+  //           };
+  //         }
+  //       ),
+  //       totalPage: res.data.totalPage,
+  //       currentPage: currentPage,
+  //     });
+  //   } catch (e: unknown) {
+  //     setSnackBar({
+  //       toastName: 'get itemhistory',
+  //       severity: 'error',
+  //       message: 'API 요청에 문제가 발생했습니다.',
+  //       clicked: true,
+  //     });
+  //   }
+  // }, [currentPage]);
 
   const openDetailModal = (itemHistory: IitemHistory) => {
     setModal({
@@ -80,9 +91,9 @@ function ItemHistory() {
     });
   };
 
-  useEffect(() => {
-    getItemHistoryListHandler();
-  }, [currentPage]);
+  // useEffect(() => {
+  //   getItemHistoryListHandler();
+  // }, [currentPage]);
 
   return (
     <>
@@ -90,54 +101,48 @@ function ItemHistory() {
         <Table className={styles.table} aria-label='customized table'>
           <AdminTableHead tableName={'itemHistory'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {itemHistoryData.itemHistoryList.length > 0 ? (
-              itemHistoryData.itemHistoryList.map(
-                (itemHistory: IitemHistory) => (
-                  <TableRow
-                    className={styles.tableRow}
-                    key={itemHistory.itemId}
-                  >
-                    {tableFormat['itemHistory'].columns.map(
-                      (columnName: string, index: number) => {
-                        return (
-                          <TableCell
-                            className={styles.tableBodyItem}
-                            key={index}
-                          >
-                            {columnName === 'imageUri' ? (
-                              <Image
-                                src={
-                                  itemHistory.imageUri
-                                    ? itemHistory[columnName]
-                                    : '/public/image/fallBackSrc.jpeg'
-                                }
-                                width={30}
-                                height={30}
-                                alt='no'
-                              />
-                            ) : columnName === 'content' ? (
-                              <div>
-                                {itemHistory.mainContent}
-                                <br />
-                                <span
-                                  style={{ cursor: 'pointer', color: 'grey' }}
-                                  onClick={() => openDetailModal(itemHistory)}
-                                >
-                                  ...더보기
-                                </span>
-                              </div>
-                            ) : (
-                              itemHistory[
-                                columnName as keyof IitemHistory
-                              ]?.toString()
-                            )}
-                          </TableCell>
-                        );
-                      }
-                    )}
-                  </TableRow>
-                )
-              )
+            {/* {itemHistoryData.itemHistoryList.length > 0 ? (
+              itemHistoryData.itemHistoryList.map( */}
+            {data?.data.historyList.length > 0 ? (
+              data?.data.historyList.map((itemHistory: IitemHistory) => (
+                <TableRow className={styles.tableRow} key={itemHistory.itemId}>
+                  {tableFormat['itemHistory'].columns.map(
+                    (columnName: string, index: number) => {
+                      return (
+                        <TableCell className={styles.tableBodyItem} key={index}>
+                          {columnName === 'imageUri' ? (
+                            <Image
+                              src={
+                                itemHistory.imageUri
+                                  ? itemHistory[columnName]
+                                  : '/public/image/fallBackSrc.jpeg'
+                              }
+                              width={30}
+                              height={30}
+                              alt='no'
+                            />
+                          ) : columnName === 'content' ? (
+                            <div>
+                              {itemHistory.mainContent}
+                              <br />
+                              <span
+                                style={{ cursor: 'pointer', color: 'grey' }}
+                                onClick={() => openDetailModal(itemHistory)}
+                              >
+                                ...더보기
+                              </span>
+                            </div>
+                          ) : (
+                            itemHistory[
+                              columnName as keyof IitemHistory
+                            ]?.toString()
+                          )}
+                        </TableCell>
+                      );
+                    }
+                  )}
+                </TableRow>
+              ))
             ) : (
               <AdminEmptyItem content={'아이템 변경 이력이 비어있습니다'} />
             )}

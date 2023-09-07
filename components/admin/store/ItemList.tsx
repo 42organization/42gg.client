@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import {
   Paper,
@@ -40,19 +41,25 @@ function ItemList() {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  const getItemListHandler = useCallback(async () => {
-    try {
-      const res = await instance.get(`/pingpong/items/store`);
-      setItemListData(res.data);
-    } catch (e: unknown) {
-      setSnackBar({
-        toastName: 'get itemlist',
-        severity: 'error',
-        message: 'API 요청에 문제가 발생했습니다.',
-        clicked: true,
-      });
-    }
-  }, []);
+  const getApi = () => {
+    return instance.get(`/pingpong/items/store`);
+  };
+
+  const { data } = useQuery('itemList', getApi);
+
+  // const getItemListHandler = useCallback(async () => {
+  //   try {
+  //     const res = await instance.get(`/pingpong/items/store`);
+  //     setItemListData(res.data);
+  //   } catch (e: unknown) {
+  //     setSnackBar({
+  //       toastName: 'get itemlist',
+  //       severity: 'error',
+  //       message: 'API 요청에 문제가 발생했습니다.',
+  //       clicked: true,
+  //     });
+  //   }
+  // }, []);
 
   const editItem = (item: Item) => {
     setModal({
@@ -76,17 +83,19 @@ function ItemList() {
     });
   };
 
-  useEffect(() => {
-    getItemListHandler();
-  }, []);
+  // useEffect(() => {
+  //   getItemListHandler();
+  // }, []);
 
   return (
     <TableContainer className={styles.tableContainer} component={Paper}>
       <Table className={styles.table} aria-label='customized table'>
         <AdminTableHead tableName={'itemList'} table={tableTitle} />
         <TableBody className={styles.tableBody}>
-          {itemListData.itemList.length > 0 ? (
-            itemListData.itemList.map((item: Item) => (
+          {/* {itemListData.itemList.length > 0 ? ( */}
+          {data?.data.itemList.length > 0 ? (
+            // itemListData.itemList.map((item: Item) => (
+            data?.data.itemList.map((item: Item) => (
               <TableRow className={styles.tableRow} key={item.itemId}>
                 {tableFormat['itemList'].columns.map(
                   (columnName: string, index: number) => {
