@@ -27,7 +27,7 @@ const tableTitle: { [key: string]: string } = {
   id: 'ID',
   createdAt: '변경일자',
   userId: 'Intra ID',
-  imageUri: '변경 전 이미지',
+  imageUri: '변경된 프로필 이미지',
   isDeleted: '삭제 여부',
   delete: '삭제',
 };
@@ -51,13 +51,13 @@ function ProfileList() {
   const getUserProfileHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/users/images/{intraid}?page=${currentPage}&size=5`
+        `/users/images/${intraId}?page=${currentPage}&size=10`
       );
       setProfileData({
         profileList: res.data.userImageList.map((profile: Iprofile) => {
           return {
             ...profile,
-            date: dateToStringShort(new Date(profile.createdAt)),
+            createdAt: dateToStringShort(new Date(profile.createdAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -76,13 +76,13 @@ function ProfileList() {
   const getAllProfileHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/images?page=${currentPage}&size=5`
+        `/users/images?page=${currentPage}&size=10`
       );
       setProfileData({
         profileList: res.data.userImageList.map((profile: Iprofile) => {
           return {
             ...profile,
-            date: dateToStringShort(new Date(profile.createdAt)),
+            createdAt: dateToStringShort(new Date(profile.createdAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -128,8 +128,8 @@ function ProfileList() {
                           {columnName === 'imageUri' ? (
                             <Image
                               src={profile[columnName]}
-                              width={30}
-                              height={30}
+                              width={60}
+                              height={60}
                               alt='ProfileImage'
                             />
                           ) : columnName === 'delete' ? (

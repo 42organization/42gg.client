@@ -49,13 +49,13 @@ function ProfileDeleteHistoryList() {
   const getUserProfileDeleteHistoryHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/users/images/{intraid}?page=${currentPage}&size=5`
+        `/users/delete-list?${intraId}page=${currentPage}&size=10`
       );
       setProfileDeleteHistoryData({
         profileList: res.data.userImageList.map((profile: Iprofile) => {
           return {
             ...profile,
-            date: dateToStringShort(new Date(profile.createdAt)),
+            createdAt: dateToStringShort(new Date(profile.createdAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -74,13 +74,13 @@ function ProfileDeleteHistoryList() {
   const getAllProfileDeleteHistoryHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/images?&page=${currentPage}&size=5`
+        `/users/delete-list?page=${currentPage}&size=5`
       );
       setProfileDeleteHistoryData({
         profileList: res.data.userImageList.map((profile: Iprofile) => {
           return {
             ...profile,
-            date: dateToStringShort(new Date(profile.createdAt)),
+            createdAt: dateToStringShort(new Date(profile.createdAt)),
           };
         }),
         totalPage: res.data.totalPage,
@@ -113,20 +113,20 @@ function ProfileDeleteHistoryList() {
       </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <AdminTableHead tableName={'profileList'} table={tableTitle} />
+          <AdminTableHead tableName={'profileDeletedList'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             {profileDeleteHistoryData.profileList.length > 0 ? (
               profileDeleteHistoryData.profileList.map((profile: Iprofile) => (
                 <TableRow className={styles.tableRow} key={profile.id}>
-                  {tableFormat['profileList'].columns.map(
+                  {tableFormat['profileDeletedList'].columns.map(
                     (columnName: string, index: number) => {
                       return (
                         <TableCell className={styles.tableBodyItem} key={index}>
                           {columnName === 'imageUri' ? (
                             <Image
                               src={profile[columnName]}
-                              width={30}
-                              height={30}
+                              width={60}
+                              height={60}
                               alt='ProfileImage'
                             />
                           ) : (

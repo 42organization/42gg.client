@@ -10,6 +10,7 @@ export type TableName =
   | 'receiptList'
   | 'megaphoneList'
   | 'profileList'
+  | 'profileDeletedList'
   | 'itemList'
   | 'itemHistory'
   | 'coinPolicy'
