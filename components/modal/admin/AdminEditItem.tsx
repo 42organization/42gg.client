@@ -1,13 +1,20 @@
 import Image from 'next/image';
 import { useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
+import { Irefresh } from 'types/modalTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminEditItem.module.scss';
 
-export default function AdminEditItemModal(props: Item) {
+export default function AdminEditItemModal({
+  item,
+  state,
+}: {
+  item: Item;
+  state: Irefresh;
+}) {
   const {
     itemId,
     itemName,
@@ -17,7 +24,8 @@ export default function AdminEditItemModal(props: Item) {
     originalPrice,
     discount,
     itemType,
-  } = props;
+  } = item;
+  const { refresh, setRefresh } = state;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
   const { imgData, imgPreview, uploadImg } = useUploadImg({
@@ -94,6 +102,7 @@ export default function AdminEditItemModal(props: Item) {
         });
       }
     }
+    setRefresh(true);
     setModal({ modalName: null });
   };
 
