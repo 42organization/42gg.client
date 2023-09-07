@@ -25,7 +25,7 @@ import styles from 'styles/admin/usageHistory/ProfileList.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: 'ID',
-  createdAt: '변경일자',
+  createdAt: '변경 시간',
   userId: 'Intra ID',
   imageUri: '변경된 프로필 이미지',
   isDeleted: '삭제 여부',

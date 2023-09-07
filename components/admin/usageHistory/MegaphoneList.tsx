@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { Imegaphone, ImegaphoneTable } from 'types/admin/adminReceiptType';
 import { instanceInManage } from 'utils/axios';
-import { dateToStringShort } from 'utils/handleTime';
+import { getFormattedDateToString } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -25,7 +25,7 @@ import styles from 'styles/admin/usageHistory/MegaphoneList.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   megaphoneId: 'ID',
-  usedAt: '사용 시간',
+  usedAt: '적용 시간',
   intraId: 'Intra ID',
   content: '내용',
   status: '상태',
@@ -57,9 +57,12 @@ function MegaphoneList() {
       );
       setMegaphoneData({
         megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {
+          const { year, month, date } = getFormattedDateToString(
+            new Date(megaphone.usedAt)
+          );
           return {
             ...megaphone,
-            usedAt: dateToStringShort(new Date(megaphone.usedAt)),
+            usedAt: `${year}-${month}-${date}`,
           };
         }),
         totalPage: res.data.totalPage,
@@ -82,9 +85,12 @@ function MegaphoneList() {
       );
       setMegaphoneData({
         megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {
+          const { year, month, date } = getFormattedDateToString(
+            new Date(megaphone.usedAt)
+          );
           return {
             ...megaphone,
-            usedAt: dateToStringShort(new Date(megaphone.usedAt)),
+            usedAt: `${year}-${month}-${date}`,
           };
         }),
         totalPage: res.data.totalPage,
