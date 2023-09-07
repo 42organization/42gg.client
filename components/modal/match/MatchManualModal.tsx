@@ -3,6 +3,10 @@ import { useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/mainType';
 import { Manual } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
+import {
+  ModalButtonContainer,
+  ModalButton,
+} from 'components/modal/ModalButton';
 import ModeRadiobox from 'components/mode/modeItems/ModeRadiobox';
 import styles from 'styles/modal/match/MatchManualModal.module.scss';
 
@@ -170,12 +174,13 @@ export default function MatchManualModal({ radioMode }: Manual) {
           )
         )}
       </ul>
-      <button
-        className={`${styles['modalButton']}`}
-        onClick={() => setModal({ modalName: null })}
-      >
-        확 인
-      </button>
+      <ModalButtonContainer>
+        <ModalButton
+          onClick={() => setModal({ modalName: null })}
+          style='positive'
+          value='확인'
+        />
+      </ModalButtonContainer>
     </div>
   );
 }
