@@ -29,7 +29,7 @@ export default function AdminModal() {
     profile,
     item,
     coinPolicy,
-    refresh,
+    update,
   } = useRecoilValue(modalState);
 
   const content: { [key: string]: JSX.Element | null } = {
@@ -69,12 +69,10 @@ export default function AdminModal() {
       <AdminDeleteProfileModal {...profile} />
     ) : null,
     'ADMIN-ITEM_EDIT':
-      item && refresh ? (
-        <AdminEditItemModal item={item} state={refresh} />
-      ) : null,
+      item && update ? <AdminEditItemModal item={item} state={update} /> : null,
     'ADMIN-ITEM_DELETE':
-      item && refresh ? (
-        <AdminDeleteItemModal item={item} state={refresh} />
+      item && update ? (
+        <AdminDeleteItemModal item={item} state={update} />
       ) : null,
     'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
       <AdminEditCoinPolicyModal {...coinPolicy} />

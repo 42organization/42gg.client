@@ -10,7 +10,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { IitemHistory, IitemHistoryList } from 'types/admin/adminStoreTypes';
-import { Irefresh } from 'types/modalTypes';
+import { IUpdate } from 'types/modalTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
@@ -36,7 +36,7 @@ const tableTitle: { [key: string]: string } = {
   visible: '상점 노출',
 };
 
-function ItemHistory({ refresh, setRefresh }: Irefresh) {
+function ItemHistory({ update, setUpdate }: IUpdate) {
   const [itemHistoryData, setItemHistoryData] = useState<IitemHistoryList>({
     itemHistoryList: [],
     totalPage: 0,
@@ -82,11 +82,11 @@ function ItemHistory({ refresh, setRefresh }: Irefresh) {
   };
 
   useEffect(() => {
-    if (refresh) {
+    if (update) {
       getItemHistoryListHandler();
-      setRefresh(false);
+      setUpdate(false);
     }
-  }, [currentPage, refresh]);
+  }, [currentPage, update]);
 
   return (
     <>
