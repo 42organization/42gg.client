@@ -19,9 +19,12 @@ export default function AfterGameModal() {
   ) : (
     <RankGame
       currentGame={currentGame}
-      onSubmit={
-        currentGame.isScoreExist ? openStatChangeModal : submitRankHandler
-      }
+      // FIXME - 동작 확인되면 주석 지울 것
+      // onSubmit={
+      //   currentGame.isScoreExist ? openStatChangeModal : submitRankHandler
+      // }
+      onSubmit={submitRankHandler}
+      openStatChange={openStatChangeModal}
     />
   );
 }
