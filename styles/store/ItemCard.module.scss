@@ -22,11 +22,11 @@
 
   .preview {
     grid-area: image;
-    position: relative;
-    width: 9.5rem;
-    height: 9.5rem;
-    margin: 1.25rem 0;
     .img {
+      position: relative;
+      width: 9.5rem;
+      height: 9.5rem;
+      margin: 1.25rem 0;
       object-fit: cover;
     }
   }
