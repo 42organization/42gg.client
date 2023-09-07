@@ -26,6 +26,7 @@
   }
 }
 
-.buttons {
-  @include modalButton;
-}
+// FIXME - 동작 확인되면 주석 지울 것
+// .buttons {
+//   @include modalButton;
+// }
