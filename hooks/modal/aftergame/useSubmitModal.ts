@@ -68,13 +68,15 @@ const useSubmitModal = (currentGame: AfterGame) => {
     const requestBody: normalRequest = {
       gameId: gameId,
     };
-    try {
-      await instance.post(`/pingpong/games/normal`, requestBody);
-    } catch (e) {
-      setError('KP04');
-      return;
-    }
-    openStatChangeModal();
+    await instance.post(`/pingpong/games/normal`, requestBody);
+    // FIXME - 동작 확인되면 주석 지울 것
+    // try {
+    //   await instance.post(`/pingpong/games/normal`, requestBody);
+    // } catch (e) {
+    //   setError('KP04');
+    //   return;
+    // }
+    // openStatChangeModal();
   };
 
   const openStatChangeModal = () => {
