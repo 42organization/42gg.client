@@ -25,16 +25,17 @@ export default function AdminEditItemModal({
     discount,
     itemType,
   } = item;
-  const { refresh, setRefresh } = state;
+  const { setRefresh } = state;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
   const { imgData, imgPreview, uploadImg } = useUploadImg({
     maxSizeMB: 0.03,
-    maxWidthOrHeight: 250,
+    maxWidthOrHeight: 300,
   });
 
   const editErrorResponse: { [key: string]: string } = {
     IT200: '아이템 타입이 일치하지 않습니다.',
+    IT205: '해당 아이템에 접근할 수 없습니다.',
     IT413: '아이템 이미지가 너무 큽니다.',
     IT415: '아이템 이미지 타입이 jpeg가 아닙니다.',
   };
