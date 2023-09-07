@@ -6,12 +6,18 @@ const meta: Meta<typeof AdminEditItemModal> = {
   component: AdminEditItemModal,
   tags: ['autodocs'],
   argTypes: {
-    itemId: Number,
-    itemName: String,
-    mainContent: String,
-    imageUri: String,
-    originalPrice: Number,
-    discount: Number,
+    item: {
+      itemId: Number,
+      itemName: String,
+      mainContent: String,
+      imageUri: String,
+      originalPrice: Number,
+      discount: Number,
+    },
+    state: {
+      refresh: Boolean,
+      setRefresh: undefined,
+    },
   },
 };
 
