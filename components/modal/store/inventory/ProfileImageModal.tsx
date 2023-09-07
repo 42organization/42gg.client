@@ -1,18 +1,19 @@
 import Image from 'next/image';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { FaArrowRight } from 'react-icons/fa';
 import { TbQuestionMark } from 'react-icons/tb';
 import { UseItemRequest } from 'types/inventoryTypes';
-import { modalState } from 'utils/recoil/modal';
+import { instance, isAxiosError } from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
 import { userState } from 'utils/recoil/layout';
-import { mockInstance } from 'utils/mockAxios';
-import useUploadImg from 'hooks/useUploadImg';
-import { ItemCautionContainer } from './ItemCautionContainer';
+import { modalState } from 'utils/recoil/modal';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
+import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
+import { ItemCautionContainer } from './ItemCautionContainer';
 
 type ProfileImageProps = UseItemRequest;
 
@@ -23,33 +24,82 @@ const cautions = [
   '관리자의 판단 결과 부적절한 이미지는 삭제될 수 있습니다.',
 ];
 
+// error types
+const errorCode = [
+  'IT200',
+  'RC200',
+  'RC100',
+  'RC403',
+  'UR100',
+  'UR200',
+  'UR401',
+  'UR402',
+] as const;
+
+type errorCodeType = (typeof errorCode)[number];
+
+type errorPayload = {
+  status: number;
+  message: string;
+  code: errorCodeType;
+};
+
+const message = {
+  SUCCESS: '프로필 이미지가 변경되었습니다.',
+  ITEM_ERROR: '사용할 수 없는 아이템입니다.',
+  USER_ERROR: 'USER NOT FOUND',
+  NULL_ERROR: '이미지를 선택해주세요.',
+  FORMAT_ERROR: '프로필 이미지는 50KB 이하의 jpeg 파일만 업로드 가능합니다.',
+};
+
+const errorMessage: Record<errorCodeType, string> = {
+  IT200: message.ITEM_ERROR,
+  RC200: message.ITEM_ERROR,
+  RC100: message.ITEM_ERROR,
+  RC403: message.ITEM_ERROR,
+  UR100: message.USER_ERROR, // alert을 띄우지 않고 setError만 호출
+  UR200: message.NULL_ERROR,
+  UR401: message.FORMAT_ERROR,
+  UR402: message.FORMAT_ERROR,
+};
+
 export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
+  const setError = useSetRecoilState(errorState);
   const user = useRecoilValue(userState);
   const resetModal = useResetRecoilState(modalState);
-  const { imgData, imgPreview, uploadImg } = useUploadImg();
+  const { imgData, imgPreview, uploadImg } = useUploadImg({
+    maxSizeMB: 0.03,
+    maxWidthOrHeight: 150,
+  });
 
   async function handleProfileImageUpload() {
     if (!imgData) {
-      alert('이미지를 선택해주세요.');
+      alert(message.NULL_ERROR);
       return;
     }
     try {
       const formData = new FormData();
-      // TODO : receiptId 데이터에 대한 key는 결정되지 않음.
       formData.append(
-        'receiptId',
+        'userProfileImageRequestDto',
         new Blob([JSON.stringify({ receiptId: receiptId })], {
           type: 'application/json',
         })
       );
-      formData.append('imgData', new Blob([imgData], { type: 'image/jpeg' }));
-      const ret = await mockInstance.post('/users/profile-image', formData);
-      if (ret.status === 201) {
-        alert('프로필 이미지가 변경되었습니다.');
-        resetModal();
-      } else throw new Error();
-    } catch (error) {
-      alert('프로필 이미지 변경에 실패했습니다.');
+      formData.append(
+        'profileImage',
+        new Blob([imgData], { type: 'image/jpeg' })
+      );
+      await instance.post('/pingpong/users/profile-image', formData);
+      alert(message.SUCCESS);
+      resetModal();
+    } catch (error: unknown) {
+      if (isAxiosError<errorPayload>(error) && error.response) {
+        const { code } = error.response.data;
+        if (code === 'UR100') setError('JY08');
+        else if (errorCode.includes(code)) alert(errorMessage[code]);
+        else setError('JY08');
+      } else setError('JY08');
+      resetModal();
     }
   }
 

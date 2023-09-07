@@ -15,6 +15,7 @@ import styles from 'styles/modal/store/UserCoinHistoryModal.module.scss';
 
 export default function UserCoinHistoryModal({ coin }: ICoin) {
   const setModal = useSetRecoilState(modalState);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [coinHistoryList, setCoinHistoryList] = useState<ICoinHistoryTable>({
     useCoinList: [],
@@ -33,8 +34,8 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
     getCoinHistoryList();
   }, [currentPage]);
 
-  // 현재는 출석만 되는 상태
   const getCoinHistoryList = async () => {
+    setIsLoading(true);
     try {
       const res = await instance.get(
         `pingpong/users/coinhistory/?page=${currentPage}&size=5`
@@ -46,7 +47,9 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
       });
     } catch (e) {
       setError('HB06');
+      closeModal();
     }
+    setIsLoading(false);
   };
 
   return (
@@ -56,7 +59,15 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
         <div className={styles.current}>현재 코인</div>
         <CoinImage amount={coin} size={25} />
       </div>
-      <CoinHistoryContainer useCoinList={coinHistoryList.useCoinList} />
+      {isLoading ? (
+        <div className={styles.loading}>
+          <span className={styles.span1}>*</span>
+          <span className={styles.span2}>*</span>
+          <span className={styles.span3}>*</span>
+        </div>
+      ) : (
+        <CoinHistoryContainer useCoinList={coinHistoryList.useCoinList} />
+      )}
       <div>
         <PageNation
           curPage={currentPage}

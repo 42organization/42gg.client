@@ -39,19 +39,19 @@ export function AdminEmptyItem({ content }: IAdminEmpty) {
 interface IAdminDetailContent {
   content: string;
   maxLen: number;
-  detailTitle: string;
-  detailContent: string;
+  detailTitle?: string;
+  detailContent?: string;
 }
 
 export function AdminContent({
   content,
   maxLen,
-  detailTitle,
-  detailContent,
+  detailTitle = '',
+  detailContent = '',
 }: IAdminDetailContent) {
   const setModal = useSetRecoilState(modalState);
 
-  return content?.length > maxLen ? (
+  return content?.length > maxLen && detailTitle && detailContent ? (
     <div>
       {(content?.toString() || '').slice(0, maxLen)}
       <span

@@ -1,9 +1,9 @@
-import MenuTab from 'components/admin/receipt/MenuTab';
+import ReceiptList from 'components/admin/receipt/ReceiptList';
 
 export default function Receipt() {
   return (
     <>
-      <MenuTab />
+      <ReceiptList />
     </>
   );
 }
