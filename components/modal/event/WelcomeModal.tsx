@@ -29,12 +29,12 @@ export default function WelcomeModal() {
     try {
       setIsLoading(true);
       const res = await instance.post(`/pingpong/users/attendance`);
-      setIsLoading(false);
       setCoin(res.data);
       return res.data;
     } catch (error) {
-      setIsLoading(false);
       setError('SM01');
+    } finally {
+      setIsLoading(false);
     }
   };
 
