@@ -68,7 +68,6 @@ const useSubmitModal = (currentGame: AfterGame) => {
     const requestBody: normalRequest = {
       gameId: gameId,
     };
-    await instance.post(`/pingpong/games/normal`, requestBody);
     try {
       await instance.post(`/pingpong/games/normal`, requestBody);
     } catch (e) {
