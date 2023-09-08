@@ -2,7 +2,7 @@
 import { useSetRecoilState } from 'recoil';
 import { AfterGame, TeamScore } from 'types/scoreTypes';
 import { instance } from 'utils/axios';
-// import { errorState } from 'utils/recoil/error';
+import { errorState } from 'utils/recoil/error';
 // import { reloadMatchState } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
 
@@ -28,7 +28,7 @@ type normalRequest = {
 // };
 
 const useSubmitModal = (currentGame: AfterGame) => {
-  // const setError = useSetRecoilState(errorState);
+  const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   // const setReloadMatch = useSetRecoilState(reloadMatchState);
   const { gameId, matchTeamsInfo, mode } = currentGame;
@@ -79,14 +79,12 @@ const useSubmitModal = (currentGame: AfterGame) => {
       gameId: gameId,
     };
     await instance.post(`/pingpong/games/normal`, requestBody);
-    // FIXME - 동작 확인되면 주석 지울 것
-    // try {
-    //   await instance.post(`/pingpong/games/normal`, requestBody);
-    // } catch (e) {
-    //   setError('KP04');
-    //   return;
-    // }
-    // openStatChangeModal();
+    try {
+      await instance.post(`/pingpong/games/normal`, requestBody);
+    } catch (e) {
+      setError('KP04');
+      return;
+    }
   };
 
   const openStatChangeModal = () => {
