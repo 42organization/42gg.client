@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest } from 'types/inventoryTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instance, isAxiosError } from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { MegaphoneItem } from 'components/Layout/MegaPhone';
@@ -10,10 +11,11 @@ import {
   ModalButton,
 } from 'components/modal/ModalButton';
 import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
-import { useMockAxiosGet } from 'hooks/useAxiosGet';
+import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 
 type EditMegaphoneProps = UseItemRequest;
+
 type MegaphoneData = {
   megaphoneId: number;
   content: string;
@@ -26,6 +28,22 @@ const caution = [
 
 const failMessage = '확성기 데이터를 불러오는데 실패했습니다.';
 
+const errorCode = ['ME200', 'RC500', 'RC200'] as const;
+
+type errorCodeType = (typeof errorCode)[number];
+
+type errorPayload = {
+  status: number;
+  message: string;
+  code: errorCodeType;
+};
+
+const errorMessages: Record<errorCodeType, string> = {
+  ME200: '확성기를 찾을 수 없습니다.',
+  RC500: '삭제할 수 없는 확성기입니다.',
+  RC200: '삭제할 수 없는 확성기입니다.',
+};
+
 export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
   const resetModal = useResetRecoilState(modalState);
   const user = useRecoilValue(userState);
@@ -33,8 +51,9 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
     megaphoneId: -1,
     content: '',
   });
-  const getMegaphoneData = useMockAxiosGet<MegaphoneData>({
-    url: `/megaphones/receipt/${receiptId}`,
+  const setError = useSetRecoilState(errorState);
+  const getMegaphoneData = useAxiosGet<MegaphoneData>({
+    url: `/pingpong/megaphones/receipt/${receiptId}`,
     setState: setMegaphoneData,
     err: 'JY05',
     type: 'setError',
@@ -48,16 +67,21 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
       '확성기를 삭제하시겠습니까?\n삭제한 확성기는 다시 복구할 수 없습니다.'
     );
     if (!confirm) return;
-    mockInstance
-      .delete(`/megaphones/${megaphoneData.megaphoneId}`)
+    instance
+      .delete(`/pingpong/megaphones/${megaphoneData.megaphoneId}`)
       .then(() => {
         alert('확성기가 삭제되었습니다.');
-        resetModal();
-        // TODO : 삭제 이후에 item 목록에 삭제된 확성기가 보이지 않는지 확인 필요함.
       })
-      .catch(() => {
-        // TODO : 에러 코드 정의 필요함.
-        alert('확성기 삭제에 실패했습니다.');
+      .catch((error: unknown) => {
+        if (isAxiosError<errorPayload>(error) && error.response) {
+          const { code } = error.response.data;
+          if (errorCode.includes(code) && code !== 'ME200')
+            alert(errorMessages[code]);
+          else setError('JY07');
+        } else setError('JY07');
+      })
+      .finally(() => {
+        resetModal();
       });
   }
 

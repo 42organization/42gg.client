@@ -9,10 +9,9 @@ interface IitemHistoryRes {
 const itemHistory1: IitemHistory = {
   itemId: 1,
   createdAt: new Date('2023-08-05 20:10:10'),
-  name: '확성기',
-  mainContent: '오늘 42GG는 내가 접수한다📢😎',
-  subContent:
-    '24시간 동안 모든 페이지 상단에 메시지를 띄울 수 있는 아이템입니다. 사용 다음날 적용됩니다.',
+  name: '이미지 변경권',
+  mainContent: '프사 바꿔',
+  subContent: '프로필 이미지를 원하는 이미지로 변경할 수 있는 아이템입니다.',
   imageUri: '/image/menu_manual.svg',
   price: 42,
   discount: 50,
@@ -24,9 +23,10 @@ const itemHistory1: IitemHistory = {
 const itemHistory2: IitemHistory = {
   itemId: 2,
   createdAt: new Date('2023-08-04 20:10:10'),
-  name: '배경 뽑기',
-  mainContent: '난 “Background”부터가 달라',
-  subContent: '랜덤으로 내 프로필 페이지의 배경을 변경할 수 있는 아이템입니다.',
+  name: '확성기',
+  mainContent: '오늘 42GG는 내가 접수한다📢😎',
+  subContent:
+    '24시간 동안 모든 페이지 상단에 메시지를 띄울 수 있는 아이템입니다. 사용 다음날 적용됩니다.',
   imageUri: '/image/menu_manual.svg',
   price: 50,
   discount: 50,
@@ -38,9 +38,9 @@ const itemHistory2: IitemHistory = {
 const itemHistory3: IitemHistory = {
   itemId: 3,
   createdAt: new Date('2023-08-03 20:10:10'),
-  name: '이미지 변경권',
-  mainContent: '프사 바꿔',
-  subContent: '프로필 이미지를 원하는 이미지로 변경할 수 있는 아이템입니다.',
+  name: '배경 뽑기',
+  mainContent: '난 “Background”부터가 달라',
+  subContent: '랜덤으로 내 프로필 페이지의 배경을 변경할 수 있는 아이템입니다.',
   imageUri: '/image/menu_manual.svg',
   price: 20,
   discount: 50,

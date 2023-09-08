@@ -1,9 +1,11 @@
+import LoadingButton from 'components/modal/LoadingButton';
 import styles from 'styles/modal/Modal.module.scss';
 
 type ButtonProps = {
   style: 'positive' | 'negative';
   value: string;
   form?: string;
+  isLoading?: boolean;
   onClick: () => void;
 };
 
@@ -15,10 +17,20 @@ export function ModalButtonContainer({
   return <div className={styles.modalButtonContainer}>{children}</div>;
 }
 
-export function ModalButton({ style, value, onClick, form }: ButtonProps) {
+export function ModalButton({
+  style,
+  value,
+  onClick,
+  form,
+  isLoading,
+}: ButtonProps) {
   return (
     <div className={styles[style]}>
-      <input onClick={onClick} type='button' value={value} form={form} />
+      {isLoading ? (
+        <LoadingButton />
+      ) : (
+        <input onClick={onClick} type='button' value={value} form={form} />
+      )}
     </div>
   );
 }

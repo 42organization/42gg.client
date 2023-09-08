@@ -3,7 +3,15 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { toastState } from 'utils/recoil/toast';
 
-export default function useUploadImg() {
+interface ICompressProps {
+  maxSizeMB: number;
+  maxWidthOrHeight: number;
+}
+
+export default function useUploadImg({
+  maxSizeMB,
+  maxWidthOrHeight,
+}: ICompressProps) {
   const [imgData, setImgData] = useState<File | null>(null);
   const [imgPreview, setImgPreview] = useState<string>('');
   const [file, setFile] = useState<File | null>(null);
@@ -15,8 +23,8 @@ export default function useUploadImg() {
 
   const imgCompress = async (fileSrc: File) => {
     const options = {
-      maxSizeMB: 0.03,
-      maxWidthOrHeight: 150,
+      maxSizeMB: maxSizeMB,
+      maxWidthOrHeight: maxWidthOrHeight,
       filetype: 'image/jpeg',
       useWebWorker: true,
     };
