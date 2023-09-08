@@ -19,7 +19,7 @@ type normalRequest = {
 
 const rankResponse: Record<'SUCCESS' | 'DUPLICATED', string> = {
   SUCCESS: '결과 입력이 완료되었습니다.',
-  DUPLICATED: '상대가 이미 점수를 입력했습니다.',
+  DUPLICATED: '이미 입력된 점수가 있습니다.',
 };
 
 const errorCode = ['GM202', 'GM204'] as const;
