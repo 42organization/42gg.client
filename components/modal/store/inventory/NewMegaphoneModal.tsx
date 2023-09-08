@@ -54,6 +54,7 @@ const errorMessages: Record<errorCodeType, string> = {
 export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
   const user = useRecoilValue(userState);
   const [content, setContent] = useState('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const resetModal = useResetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
   async function handleUseMegaphone() {
@@ -65,6 +66,7 @@ export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
       receiptId: receiptId,
       content: content,
     };
+    setIsLoading(true);
     try {
       await instance.post('/pingpong/megaphones', data);
       alert('확성기가 등록되었습니다.');
@@ -76,6 +78,7 @@ export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
         else setError('JY06');
       } else setError('JY06');
     } finally {
+      setIsLoading(false);
       resetModal();
     }
   }
@@ -124,6 +127,7 @@ export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
             style='positive'
             value='등록'
             onClick={() => handleUseMegaphone()}
+            isLoading={isLoading}
           />
         </ModalButtonContainer>
       </div>
