@@ -43,10 +43,10 @@ export default function KakaoEditModal() {
     try {
       await instance.delete('/pingpong/users/oauth/kakao');
       alert('카카오톡 연동이 해제되었습니다.');
-      setIsLoading(false);
       setUserType('fortyTwo');
     } catch (e: any) {
       alert('카카오톡 연동 해제에 실패했습니다.');
+    } finally {
       setIsLoading(false);
     }
   };
