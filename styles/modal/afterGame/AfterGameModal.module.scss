@@ -102,10 +102,3 @@
     border-radius: 0.3rem;
   }
 }
-
-.buttons {
-  @include modalButton;
-  .single {
-    margin-right: 0;
-  }
-}
