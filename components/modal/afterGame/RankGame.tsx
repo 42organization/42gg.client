@@ -64,7 +64,6 @@ export default function RankGame({
             style='positive'
             value='게임 종료'
             onClick={openStatChange}
-            isLoading={false}
           />
         </ModalButtonContainer>
       ) : (

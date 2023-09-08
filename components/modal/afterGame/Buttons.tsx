@@ -22,12 +22,7 @@ export function Buttons({
     <ModalButtonContainer>
       {onCheck ? (
         <>
-          <ModalButton
-            style='negative'
-            value='다시입력'
-            onClick={onReset}
-            isLoading={false}
-          />
+          <ModalButton style='negative' value='다시입력' onClick={onReset} />
           <ModalButton
             style='positive'
             value='제출하기'
@@ -36,12 +31,7 @@ export function Buttons({
           />
         </>
       ) : (
-        <ModalButton
-          style='positive'
-          value='확 인'
-          onClick={onEnter}
-          isLoading={false}
-        />
+        <ModalButton style='positive' value='확 인' onClick={onEnter} />
       )}
     </ModalButtonContainer>
   );
