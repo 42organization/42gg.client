@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useState } from 'react';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { FaArrowRight } from 'react-icons/fa';
 import { TbQuestionMark } from 'react-icons/tb';
@@ -64,6 +65,7 @@ const errorMessage: Record<errorCodeType, string> = {
 };
 
 export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const setError = useSetRecoilState(errorState);
   const user = useRecoilValue(userState);
   const resetModal = useResetRecoilState(modalState);
@@ -77,6 +79,7 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
       alert(message.NULL_ERROR);
       return;
     }
+    setIsLoading(true);
     try {
       const formData = new FormData();
       formData.append(
@@ -91,7 +94,6 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
       );
       await instance.post('/pingpong/users/profile-image', formData);
       alert(message.SUCCESS);
-      resetModal();
     } catch (error: unknown) {
       if (isAxiosError<errorPayload>(error) && error.response) {
         const { code } = error.response.data;
@@ -99,6 +101,8 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
         else if (errorCode.includes(code)) alert(errorMessage[code]);
         else setError('JY08');
       } else setError('JY08');
+    } finally {
+      setIsLoading(false);
       resetModal();
     }
   }
@@ -153,6 +157,7 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
             value='변경하기'
             form='profile-image-form'
             onClick={() => handleProfileImageUpload()}
+            isLoading={isLoading}
           />
         </ModalButtonContainer>
       </div>
