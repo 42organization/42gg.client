@@ -62,7 +62,6 @@ const useSubmitModal = (currentGame: AfterGame) => {
         return;
       }
     }
-    // openStatChangeModal();
   };
 
   const submitNormalHandler = async () => {
