@@ -77,20 +77,6 @@ export default function WelcomeModal() {
             <span>{`)->->--`}</span>
           </div>
         </div>
-        {/* FIXME - 동작 확인되면 주석 지울 것 */}
-        {/* <div className={styles.buttons}>
-          <div className={styles.negative}>
-            <input onClick={openPageManual} type='button' value='페이지 소개' />
-          </div>
-          <div className={styles.positive}>
-            <input
-              onClick={openAttendanceCoin}
-              type='button'
-              value='출석하기'
-            />
-            {buttonState && <CoinPopcon amount={8} coin={1} />}
-          </div>
-        </div> */}
         <ModalButtonContainer>
           <ModalButton
             style='negative'
