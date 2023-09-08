@@ -40,19 +40,73 @@
 @mixin itemBackgroud($type) {
   @if ($type == 'SMALL') {
     &.light {
-      background: linear-gradient(0deg, #9134f7, #9134f7);
-      &.both {
-        background: #ff7fb8;
+      &.main {
+        background: linear-gradient(0deg, #9134f7, #9134f7);
       }
-      &.normal {
-        background: #5fa5ef;
+      &.game {
+        &.both {
+          background: #ff7fb8;
+        }
+        &.normal {
+          background: #5fa5ef;
+        }
+        &.rank {
+          background: linear-gradient(180deg, #8f2fea 0%, #8c29da 100%);
+        }
       }
-      &.rank {
-        background: linear-gradient(180deg, #8f2fea 0%, #8c29da 100%);
+      &.COLOR1 {
+        @include gameResultItemBackgroundProfile('BG1', 'SMALL-LIGHT');
+      }
+      &.COLOR2 {
+        @include gameResultItemBackgroundProfile('BG2', 'SMALL-LIGHT');
+      }
+      &.COLOR3 {
+        @include gameResultItemBackgroundProfile('BG3', 'SMALL-LIGHT');
+      }
+      &.COLOR4 {
+        @include gameResultItemBackgroundProfile('BG4', 'SMALL-LIGHT');
+      }
+      &.COLOR5 {
+        @include gameResultItemBackgroundProfile('BG5', 'SMALL-LIGHT');
+      }
+      &.COLOR6 {
+        @include gameResultItemBackgroundProfile('BG6', 'SMALL-LIGHT');
+      }
+      &.COLOR7 {
+        @include gameResultItemBackgroundProfile('BG7', 'SMALL-LIGHT');
+      }
+      &.COLOR8 {
+        @include gameResultItemBackgroundProfile('BG8', 'SMALL-LIGHT');
+      }
+      &.COLOR9 {
+        @include gameResultItemBackgroundProfile('BG9', 'SMALL-LIGHT');
+      }
+      &.COLOR10 {
+        @include gameResultItemBackgroundProfile('BG10', 'SMALL-LIGHT');
+      }
+      &.COLOR11 {
+        @include gameResultItemBackgroundProfile('BG11', 'SMALL-LIGHT');
+      }
+      &.COLOR12 {
+        @include gameResultItemBackgroundProfile('BG12', 'SMALL-LIGHT');
+      }
+      &.COLOR13 {
+        @include gameResultItemBackgroundProfile('BG13', 'SMALL-LIGHT');
+      }
+      &.COLOR14 {
+        @include gameResultItemBackgroundProfile('BG14', 'SMALL-LIGHT');
+      }
+      &.COLOR15 {
+        @include gameResultItemBackgroundProfile('BG15', 'SMALL-LIGHT');
+      }
+      &.COLOR16 {
+        @include gameResultItemBackgroundProfile('BG16', 'SMALL-LIGHT');
       }
     }
     &.dark {
-      background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
+      &.main {
+        background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
+      }
       &.both {
         background: linear-gradient(180deg, #dd3b89 0%, #c71b82 100%);
       }
@@ -62,18 +116,118 @@
       &.rank {
         background: linear-gradient(180deg, #631db2 0%, #6a0db2 92.19%);
       }
+      &.COLOR1 {
+        @include gameResultItemBackgroundProfile('BG1', 'SMALL-DARK');
+      }
+      &.COLOR2 {
+        @include gameResultItemBackgroundProfile('BG2', 'SMALL-DARK');
+      }
+      &.COLOR3 {
+        @include gameResultItemBackgroundProfile('BG3', 'SMALL-DARK');
+      }
+      &.COLOR4 {
+        @include gameResultItemBackgroundProfile('BG4', 'SMALL-DARK');
+      }
+      &.COLOR5 {
+        @include gameResultItemBackgroundProfile('BG5', 'SMALL-DARK');
+      }
+      &.COLOR6 {
+        @include gameResultItemBackgroundProfile('BG6', 'SMALL-DARK');
+      }
+      &.COLOR7 {
+        @include gameResultItemBackgroundProfile('BG7', 'SMALL-DARK');
+      }
+      &.COLOR8 {
+        @include gameResultItemBackgroundProfile('BG8', 'SMALL-DARK');
+      }
+      &.COLOR9 {
+        @include gameResultItemBackgroundProfile('BG9', 'SMALL-DARK');
+      }
+      &.COLOR10 {
+        @include gameResultItemBackgroundProfile('BG10', 'SMALL-DARK');
+      }
+      &.COLOR11 {
+        @include gameResultItemBackgroundProfile('BG11', 'SMALL-DARK');
+      }
+      &.COLOR12 {
+        @include gameResultItemBackgroundProfile('BG12', 'SMALL-DARK');
+      }
+      &.COLOR13 {
+        @include gameResultItemBackgroundProfile('BG13', 'SMALL-DARK');
+      }
+      &.COLOR14 {
+        @include gameResultItemBackgroundProfile('BG14', 'SMALL-DARK');
+      }
+      &.COLOR15 {
+        @include gameResultItemBackgroundProfile('BG15', 'SMALL-DARK');
+      }
+      &.COLOR16 {
+        @include gameResultItemBackgroundProfile('BG16', 'SMALL-DARK');
+      }
     }
   } @else {
     // BIG
-    background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
-    &.both {
-      background: linear-gradient(90.88deg, #ff86dd 10.44%, #ff7272 99.52%);
+    &.main {
+      background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
     }
-    &.normal {
-      background: linear-gradient(90.88deg, #8fc7fb 10.44%, #4e8fdb 99.52%);
+    &.game {
+      &.both {
+        background: linear-gradient(90.88deg, #ff86dd 10.44%, #ff7272 99.52%);
+      }
+      &.normal {
+        background: linear-gradient(90.88deg, #8fc7fb 10.44%, #4e8fdb 99.52%);
+      }
+      &.rank {
+        background: linear-gradient(90.88deg, #9134f7 10.44%, #8921c5 99.52%);
+      }
     }
-    &.rank {
-      background: linear-gradient(90.88deg, #9134f7 10.44%, #8921c5 99.52%);
+    &.COLOR1 {
+      @include gameResultItemBackgroundProfile('BG1', 'BIG');
+    }
+    &.COLOR2 {
+      @include gameResultItemBackgroundProfile('BG2', 'BIG');
+    }
+    &.COLOR3 {
+      @include gameResultItemBackgroundProfile('BG3', 'BIG');
+    }
+    &.COLOR4 {
+      @include gameResultItemBackgroundProfile('BG4', 'BIG');
+    }
+    &.COLOR5 {
+      @include gameResultItemBackgroundProfile('BG5', 'BIG');
+    }
+    &.COLOR6 {
+      @include gameResultItemBackgroundProfile('BG6', 'BIG');
+    }
+    &.COLOR7 {
+      @include gameResultItemBackgroundProfile('BG7', 'BIG');
+    }
+    &.COLOR8 {
+      @include gameResultItemBackgroundProfile('BG8', 'BIG');
+    }
+    &.COLOR9 {
+      @include gameResultItemBackgroundProfile('BG9', 'BIG');
+    }
+    &.COLOR10 {
+      @include gameResultItemBackgroundProfile('BG10', 'BIG');
+    }
+    &.COLOR11 {
+      @include gameResultItemBackgroundProfile('BG11', 'BIG');
+    }
+    &.COLOR12 {
+      @include gameResultItemBackgroundProfile('BG12', 'BIG');
+    }
+    &.COLOR13 {
+      @include gameResultItemBackgroundProfile('BG13', 'BIG');
+    }
+    &.COLOR14 {
+      @include gameResultItemBackgroundProfile('BG14', 'BIG');
+    }
+    &.COLOR15 {
+      @include gameResultItemBackgroundProfile('BG15', 'BIG');
+    }
+    &.COLOR16 {
+      @include gameResultItemBackgroundProfile('BG16', 'BIG');
     }
   }
 }

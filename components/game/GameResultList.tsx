@@ -1,7 +1,9 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 import { FaChevronDown } from 'react-icons/fa';
 import { Game } from 'types/gameTypes';
 import { SeasonMode } from 'types/mainType';
+import { profileState } from 'utils/recoil/user';
 import GameResultBigItem from 'components/game/big/GameResultBigItem';
 import GameResultEmptyItem from 'components/game/GameResultEmptyItem';
 import GameResultSmallItem from 'components/game/small/GameResultSmallItem';
@@ -22,6 +24,9 @@ export default function GameResultList({
 
   const isGamePage = pathName === '/game';
 
+  const page =
+    pathName === '/' ? 'main' : pathName === '/game' ? 'game' : 'profile';
+
   if (status === 'loading') return <GameResultEmptyItem status={status} />;
 
   if (status === 'success' && !data?.pages[0].games.length)
@@ -41,6 +46,7 @@ export default function GameResultList({
                     game={game}
                     zIndexList={!isGamePage}
                     radioMode={radioMode}
+                    page={page}
                   />
                 ) : (
                   <GameResultSmallItem
@@ -49,6 +55,7 @@ export default function GameResultList({
                     game={game}
                     zIndexList={!isGamePage}
                     radioMode={radioMode}
+                    page={page}
                   />
                 );
               })}
