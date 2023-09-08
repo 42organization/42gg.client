@@ -32,6 +32,7 @@ export interface Iprofile {
   id: string;
   createdAt: Date;
   userId: string;
+  userIntraId: string;
   imageUri: string;
   isDeleted: boolean;
 }

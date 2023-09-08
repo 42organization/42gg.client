@@ -26,7 +26,8 @@ import styles from 'styles/admin/usageHistory/ProfileList.module.scss';
 const tableTitle: { [key: string]: string } = {
   id: 'ID',
   createdAt: '변경 시간',
-  userId: 'Intra ID',
+  userId: 'User ID',
+  userIntraId: 'Intra ID',
   imageUri: '변경된 프로필 이미지',
   isDeleted: '삭제 여부',
   delete: '삭제',
@@ -51,7 +52,7 @@ function ProfileList() {
   const getUserProfileHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/users/images/${intraId}?page=${currentPage}&size=10`
+        `/users/images/${intraId}?page=${currentPage}&size=5`
       );
       setProfileData({
         profileList: res.data.userImageList.map((profile: Iprofile) => {
@@ -76,7 +77,7 @@ function ProfileList() {
   const getAllProfileHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/users/images?page=${currentPage}&size=10`
+        `/users/images?page=${currentPage}&size=5`
       );
       setProfileData({
         profileList: res.data.userImageList.map((profile: Iprofile) => {

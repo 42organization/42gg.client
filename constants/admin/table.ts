@@ -86,11 +86,26 @@ export const tableFormat: TableFormat = {
   },
   profileList: {
     name: '프로필 변경권 사용 내역',
-    columns: ['id', 'createdAt', 'userId', 'imageUri', 'isDeleted', 'delete'],
+    columns: [
+      'id',
+      'createdAt',
+      'userId',
+      'userIntraId',
+      'imageUri',
+      'isDeleted',
+      'delete',
+    ],
   },
   profileDeletedList: {
     name: '프로필 변경권 사용 내역',
-    columns: ['id', 'createdAt', 'userId', 'imageUri', 'isDeleted'],
+    columns: [
+      'id',
+      'createdAt',
+      'userId',
+      'userIntraId',
+      'imageUri',
+      'isDeleted',
+    ],
   },
   itemList: {
     name: '상점 아이템 목록',

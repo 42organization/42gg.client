@@ -25,7 +25,8 @@ import styles from 'styles/admin/usageHistory/ProfileList.module.scss';
 const tableTitle: { [key: string]: string } = {
   id: 'ID',
   createdAt: '변경 시간',
-  userId: 'Intra ID',
+  userId: 'User ID',
+  userIntraId: 'Intra ID',
   imageUri: '삭제된 프로필 이미지',
   isDeleted: '삭제 여부',
 };
@@ -49,7 +50,7 @@ function ProfileDeleteHistoryList() {
   const getUserProfileDeleteHistoryHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/users/delete-list?${intraId}page=${currentPage}&size=10`
+        `/users/delete-list/${intraId}?page=${currentPage}&size=5`
       );
       setProfileDeleteHistoryData({
         profileList: res.data.userImageList.map((profile: Iprofile) => {
