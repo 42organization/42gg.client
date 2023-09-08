@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { ProfileBasic, racketTypes } from 'types/userTypes';
 import { profileState } from 'utils/recoil/user';
+import {
+  ModalButtonContainer,
+  ModalButton,
+} from 'components/modal/ModalButton';
 import useEditProfileModal from 'hooks/modal/useEditProfileModal';
 import styles from 'styles/user/Profile.module.scss';
 
@@ -22,6 +26,7 @@ export default function EditProfileModal() {
   });
   const [slack, setSlack] = useState<boolean>(true);
   const [email, setEmail] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { racketType, statusMessage, snsNotiOpt } = profile;
 
@@ -32,6 +37,11 @@ export default function EditProfileModal() {
     setProfile: setProfile,
     intraId: profile.intraId,
   });
+
+  const handleEditProfile = () => {
+    setIsLoading(true);
+    finishEditHandler().finally(() => setIsLoading(false));
+  };
 
   useEffect(() => {
     setEditedProfile((prev) => ({
@@ -126,14 +136,19 @@ export default function EditProfileModal() {
           </div>
         </div>
       </div>
-      <div className={styles.modalbuttons}>
-        <div className={styles.negative}>
-          <input type='button' onClick={cancelEditHandler} value='취소' />
-        </div>
-        <div className={styles.positive}>
-          <input type='button' onClick={finishEditHandler} value='확인' />
-        </div>
-      </div>
+      <ModalButtonContainer>
+        <ModalButton
+          onClick={cancelEditHandler}
+          style='negative'
+          value='취소'
+        />
+        <ModalButton
+          onClick={handleEditProfile}
+          style='positive'
+          value='확인'
+          isLoading={isLoading}
+        />
+      </ModalButtonContainer>
     </div>
   );
 }
