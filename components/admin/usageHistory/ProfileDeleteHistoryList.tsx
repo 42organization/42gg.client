@@ -42,6 +42,10 @@ function ProfileDeleteHistoryList() {
   const [intraId, setIntraId] = useState<string>('');
   const setSnackBar = useSetRecoilState(toastState);
 
+  const errorResponse: { [key: string]: string } = {
+    UR100: '존재하지 않는 유저입니다.',
+  };
+
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
     setCurrentPage(1);
@@ -62,13 +66,22 @@ function ProfileDeleteHistoryList() {
         totalPage: res.data.totalPage,
         currentPage: currentPage,
       });
-    } catch (e: unknown) {
-      setSnackBar({
-        toastName: 'get user profile',
-        severity: 'error',
-        message: `API 요청에 문제가 발생했습니다.`,
-        clicked: true,
-      });
+    } catch (e: any) {
+      if (e.response.data.code in errorResponse) {
+        setSnackBar({
+          toastName: 'get user profile',
+          severity: 'error',
+          message: errorResponse[e.response.data.code],
+          clicked: true,
+        });
+      } else {
+        setSnackBar({
+          toastName: 'get user profile',
+          severity: 'error',
+          message: `API 요청에 문제가 발생했습니다.`,
+          clicked: true,
+        });
+      }
     }
   }, [intraId, currentPage]);
 

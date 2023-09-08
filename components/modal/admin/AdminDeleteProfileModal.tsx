@@ -11,6 +11,10 @@ export default function AdminDeleteProfileModal(props: Iprofile) {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
+  const errorResponse: { [key: string]: string } = {
+    UR100: '존재하지 않는 유저입니다.',
+  };
+
   const deleteProfileHandler = async (userId: string) => {
     try {
       await instanceInManage.delete(`/users/images/${userIntraId}`);
@@ -25,13 +29,22 @@ export default function AdminDeleteProfileModal(props: Iprofile) {
         intraId: userIntraId,
         detailContent: 'profile',
       });
-    } catch (e: unknown) {
-      setSnackBar({
-        toastName: 'delete profile',
-        severity: 'error',
-        message: `API 요청에 문제가 발생했습니다.`,
-        clicked: true,
-      });
+    } catch (e: any) {
+      if (e.response.data.code in errorResponse) {
+        setSnackBar({
+          toastName: 'delete profile',
+          severity: 'error',
+          message: errorResponse[e.response.data.code],
+          clicked: true,
+        });
+      } else {
+        setSnackBar({
+          toastName: 'delete profile',
+          severity: 'error',
+          message: `API 요청에 문제가 발생했습니다.`,
+          clicked: true,
+        });
+      }
       setModal({ modalName: null });
     }
   };
