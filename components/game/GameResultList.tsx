@@ -1,9 +1,7 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
 import { FaChevronDown } from 'react-icons/fa';
 import { Game } from 'types/gameTypes';
 import { SeasonMode } from 'types/mainType';
-import { profileState } from 'utils/recoil/user';
 import GameResultBigItem from 'components/game/big/GameResultBigItem';
 import GameResultEmptyItem from 'components/game/GameResultEmptyItem';
 import GameResultSmallItem from 'components/game/small/GameResultSmallItem';
@@ -21,8 +19,6 @@ export default function GameResultList({
 }: GameResultListProps) {
   const { data, status, fetchNextPage, isLast, clickedGameItem, pathName } =
     useGameResultList(path);
-
-  const isGamePage = pathName === '/game';
 
   const page =
     pathName === '/' ? 'main' : pathName === '/game' ? 'game' : 'profile';
@@ -44,7 +40,7 @@ export default function GameResultList({
                   <GameResultBigItem
                     key={game.gameId}
                     game={game}
-                    zIndexList={!isGamePage}
+                    zIndexList={page !== 'game'}
                     radioMode={radioMode}
                     page={page}
                   />
@@ -53,7 +49,7 @@ export default function GameResultList({
                     key={game.gameId}
                     type={type}
                     game={game}
-                    zIndexList={!isGamePage}
+                    zIndexList={page !== 'game'}
                     radioMode={radioMode}
                     page={page}
                   />
@@ -61,7 +57,7 @@ export default function GameResultList({
               })}
             </React.Fragment>
           ))}
-          {isGamePage && !isLast && (
+          {page === 'game' && !isLast && (
             <button
               className={styles['getButton']}
               onClick={() => fetchNextPage()}
