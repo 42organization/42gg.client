@@ -26,8 +26,8 @@ const tableTitle: { [key: string]: string } = {
   createdAt: '구매 시간',
   itemName: '아이템 이름',
   itemPrice: '구매 가격',
-  purchaserIntraId: '구매자',
-  ownerIntraId: '수령자',
+  purchaserIntraId: '구매한 사람',
+  ownerIntraId: '받은 사람',
   itemStatusType: '상태',
 };
 
@@ -40,6 +40,14 @@ function ReceiptList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
   const setSnackBar = useSetRecoilState(toastState);
+
+  const itemStatus: { [key: string]: string } = {
+    BEFORE: '사용 전',
+    WAITING: '사용 대기',
+    USING: '사용 중',
+    USED: '사용 완료',
+    DELETED: '삭제',
+  };
 
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
@@ -117,7 +125,12 @@ function ReceiptList() {
                     (columnName: string, index: number) => {
                       return (
                         <TableCell className={styles.tableBodyItem} key={index}>
-                          {receipt[columnName as keyof Ireceipt].toString()}
+                          {columnName === 'itemStatusType'
+                            ? itemStatus[receipt['itemStatusType'].toString()]
+                            : columnName === 'ownerIntraId' &&
+                              receipt.purchaserIntraId === receipt.ownerIntraId
+                            ? ''
+                            : receipt[columnName as keyof Ireceipt].toString()}
                         </TableCell>
                       );
                     }
