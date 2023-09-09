@@ -29,9 +29,9 @@ export default function BuyModal({ itemId, product, price }: PriceTag) {
   };
 
   const errorMessages: Record<errorCodeType, string> = {
-    IT100: '해당 아이템이 없습니다.',
-    IT201: '지금은 구매할 수 없는 아이템입니다.',
-    IT202: 'GG코인이 부족합니다.',
+    IT100: '해당 아이템이 없습니다 (• ᴖ •｡)',
+    IT201: '지금은 구매할 수 없는 아이템입니다 (• ᴖ •｡)',
+    IT202: 'GG코인이 부족합니다 (• ᴖ •｡)',
     IT203: '카카오 유저는 상점을 이용할 수 없습니다 (• ᴖ •｡)',
     UR100: 'USER NOT FOUND',
   };
@@ -59,6 +59,8 @@ export default function BuyModal({ itemId, product, price }: PriceTag) {
         } else {
           setError('HB03');
         }
+      } else {
+        setError('HB03');
       }
     }
     resetModal();
@@ -76,7 +78,7 @@ export default function BuyModal({ itemId, product, price }: PriceTag) {
           </div>
           <div className={styles.itemPrice}>
             <div>가격:</div>
-            <div>{price} 코인</div>
+            <div>{price.toLocaleString()} 코인</div>
           </div>
         </div>
         <div className={styles.warning}>
