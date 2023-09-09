@@ -1,4 +1,5 @@
 @import 'styles/common.scss';
+@import 'styles/ProfileBackgroundTheme.scss';
 
 // ANCHOR : page
 
@@ -37,6 +38,71 @@
   }
 }
 
+$gameItemTheme1: map-get(
+  $map: $bg-pink-orange,
+  $key: 'profile-game-result',
+);
+$gameItemTheme2: map-get(
+  $map: $bg-blue-green,
+  $key: 'profile-game-result',
+);
+$gameItemTheme3: map-get(
+  $map: $bg-midnight,
+  $key: 'profile-game-result',
+);
+$gameItemTheme4: map-get(
+  $map: $bg-orange,
+  $key: 'profile-game-result',
+);
+$gameItemTheme5: map-get(
+  $map: $bg-grass-green,
+  $key: 'profile-game-result',
+);
+$gameItemTheme6: map-get(
+  $map: $bg-lemon-blue,
+  $key: 'profile-game-result',
+);
+$gameItemTheme7: map-get(
+  $map: $bg-dracula,
+  $key: 'profile-game-result',
+);
+$gameItemTheme8: map-get(
+  $map: $bg-mint-green,
+  $key: 'profile-game-result',
+);
+$gameItemTheme9: map-get(
+  $map: $bg-steel-gray,
+  $key: 'profile-game-result',
+);
+$gameItemTheme10: map-get(
+  $map: $bg-blood-red,
+  $key: 'profile-game-result',
+);
+$gameItemTheme11: map-get(
+  $map: $bg-blue-sky,
+  $key: 'profile-game-result',
+);
+$gameItemTheme12: map-get(
+  $map: $bg-ocean-blue,
+  $key: 'profile-game-result',
+);
+$gameItemTheme13: map-get(
+  $map: $bg-pink-blue,
+  $key: 'profile-game-result',
+);
+$gameItemTheme14: map-get(
+  $map: $bg-sunset-pink,
+  $key: 'profile-game-result',
+);
+$gameItemTheme15: map-get(
+  $map: $bg-dark-navy,
+  $key: 'profile-game-result',
+);
+$gameItemTheme16: map-get(
+  $map: $bg-orange-green,
+  $key: 'profile-game-result',
+);
+
 @mixin itemBackgroud($type) {
   @if ($type == 'SMALL') {
     &.light {
@@ -55,52 +121,52 @@
         }
       }
       &.COLOR1 {
-        @include gameResultItemBackgroundProfile('BG1', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme1, $key: 'light');
       }
       &.COLOR2 {
-        @include gameResultItemBackgroundProfile('BG2', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme2, $key: 'light');
       }
       &.COLOR3 {
-        @include gameResultItemBackgroundProfile('BG3', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme3, $key: 'light');
       }
       &.COLOR4 {
-        @include gameResultItemBackgroundProfile('BG4', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme4, $key: 'light');
       }
       &.COLOR5 {
-        @include gameResultItemBackgroundProfile('BG5', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme5, $key: 'light');
       }
       &.COLOR6 {
-        @include gameResultItemBackgroundProfile('BG6', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme6, $key: 'light');
       }
       &.COLOR7 {
-        @include gameResultItemBackgroundProfile('BG7', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme7, $key: 'light');
       }
       &.COLOR8 {
-        @include gameResultItemBackgroundProfile('BG8', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme8, $key: 'light');
       }
       &.COLOR9 {
-        @include gameResultItemBackgroundProfile('BG9', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme9, $key: 'light');
       }
       &.COLOR10 {
-        @include gameResultItemBackgroundProfile('BG10', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme10, $key: 'light');
       }
       &.COLOR11 {
-        @include gameResultItemBackgroundProfile('BG11', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme11, $key: 'light');
       }
       &.COLOR12 {
-        @include gameResultItemBackgroundProfile('BG12', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme12, $key: 'light');
       }
       &.COLOR13 {
-        @include gameResultItemBackgroundProfile('BG13', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme13, $key: 'light');
       }
       &.COLOR14 {
-        @include gameResultItemBackgroundProfile('BG14', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme14, $key: 'light');
       }
       &.COLOR15 {
-        @include gameResultItemBackgroundProfile('BG15', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme15, $key: 'light');
       }
       &.COLOR16 {
-        @include gameResultItemBackgroundProfile('BG16', 'SMALL-LIGHT');
+        background: map-get($map: $gameItemTheme16, $key: 'light');
       }
     }
     &.dark {
@@ -117,52 +183,52 @@
         background: linear-gradient(180deg, #631db2 0%, #6a0db2 92.19%);
       }
       &.COLOR1 {
-        @include gameResultItemBackgroundProfile('BG1', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme1, $key: 'dark');
       }
       &.COLOR2 {
-        @include gameResultItemBackgroundProfile('BG2', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme2, $key: 'dark');
       }
       &.COLOR3 {
-        @include gameResultItemBackgroundProfile('BG3', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme3, $key: 'dark');
       }
       &.COLOR4 {
-        @include gameResultItemBackgroundProfile('BG4', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme4, $key: 'dark');
       }
       &.COLOR5 {
-        @include gameResultItemBackgroundProfile('BG5', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme5, $key: 'dark');
       }
       &.COLOR6 {
-        @include gameResultItemBackgroundProfile('BG6', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme6, $key: 'dark');
       }
       &.COLOR7 {
-        @include gameResultItemBackgroundProfile('BG7', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme7, $key: 'dark');
       }
       &.COLOR8 {
-        @include gameResultItemBackgroundProfile('BG8', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme8, $key: 'dark');
       }
       &.COLOR9 {
-        @include gameResultItemBackgroundProfile('BG9', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme9, $key: 'dark');
       }
       &.COLOR10 {
-        @include gameResultItemBackgroundProfile('BG10', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme10, $key: 'dark');
       }
       &.COLOR11 {
-        @include gameResultItemBackgroundProfile('BG11', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme11, $key: 'dark');
       }
       &.COLOR12 {
-        @include gameResultItemBackgroundProfile('BG12', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme12, $key: 'dark');
       }
       &.COLOR13 {
-        @include gameResultItemBackgroundProfile('BG13', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme13, $key: 'dark');
       }
       &.COLOR14 {
-        @include gameResultItemBackgroundProfile('BG14', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme14, $key: 'dark');
       }
       &.COLOR15 {
-        @include gameResultItemBackgroundProfile('BG15', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme15, $key: 'dark');
       }
       &.COLOR16 {
-        @include gameResultItemBackgroundProfile('BG16', 'SMALL-DARK');
+        background: map-get($map: $gameItemTheme16, $key: 'dark');
       }
     }
   } @else {
@@ -182,52 +248,52 @@
       }
     }
     &.COLOR1 {
-      @include gameResultItemBackgroundProfile('BG1', 'BIG');
+      background: map-get($map: $gameItemTheme1, $key: 'big');
     }
     &.COLOR2 {
-      @include gameResultItemBackgroundProfile('BG2', 'BIG');
+      background: map-get($map: $gameItemTheme2, $key: 'big');
     }
     &.COLOR3 {
-      @include gameResultItemBackgroundProfile('BG3', 'BIG');
+      background: map-get($map: $gameItemTheme3, $key: 'big');
     }
     &.COLOR4 {
-      @include gameResultItemBackgroundProfile('BG4', 'BIG');
+      background: map-get($map: $gameItemTheme4, $key: 'big');
     }
     &.COLOR5 {
-      @include gameResultItemBackgroundProfile('BG5', 'BIG');
+      background: map-get($map: $gameItemTheme5, $key: 'big');
     }
     &.COLOR6 {
-      @include gameResultItemBackgroundProfile('BG6', 'BIG');
+      background: map-get($map: $gameItemTheme6, $key: 'big');
     }
     &.COLOR7 {
-      @include gameResultItemBackgroundProfile('BG7', 'BIG');
+      background: map-get($map: $gameItemTheme7, $key: 'big');
     }
     &.COLOR8 {
-      @include gameResultItemBackgroundProfile('BG8', 'BIG');
+      background: map-get($map: $gameItemTheme8, $key: 'big');
     }
     &.COLOR9 {
-      @include gameResultItemBackgroundProfile('BG9', 'BIG');
+      background: map-get($map: $gameItemTheme9, $key: 'big');
     }
     &.COLOR10 {
-      @include gameResultItemBackgroundProfile('BG10', 'BIG');
+      background: map-get($map: $gameItemTheme10, $key: 'big');
     }
     &.COLOR11 {
-      @include gameResultItemBackgroundProfile('BG11', 'BIG');
+      background: map-get($map: $gameItemTheme11, $key: 'big');
     }
     &.COLOR12 {
-      @include gameResultItemBackgroundProfile('BG12', 'BIG');
+      background: map-get($map: $gameItemTheme12, $key: 'big');
     }
     &.COLOR13 {
-      @include gameResultItemBackgroundProfile('BG13', 'BIG');
+      background: map-get($map: $gameItemTheme13, $key: 'big');
     }
     &.COLOR14 {
-      @include gameResultItemBackgroundProfile('BG14', 'BIG');
+      background: map-get($map: $gameItemTheme14, $key: 'big');
     }
     &.COLOR15 {
-      @include gameResultItemBackgroundProfile('BG15', 'BIG');
+      background: map-get($map: $gameItemTheme15, $key: 'big');
     }
     &.COLOR16 {
-      @include gameResultItemBackgroundProfile('BG16', 'BIG');
+      background: map-get($map: $gameItemTheme16, $key: 'big');
     }
   }
 }
