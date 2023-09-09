@@ -137,6 +137,10 @@ function MegaphoneList() {
                             <button
                               className={styles.deleteBtn}
                               onClick={() => deleteMegaphone(megaphone)}
+                              disabled={
+                                megaphone.status === '삭제' ||
+                                megaphone.status == '사용 완료'
+                              }
                             >
                               삭제
                             </button>
