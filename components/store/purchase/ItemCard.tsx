@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { SyntheticEvent } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
 import { Modal } from 'types/modalTypes';
@@ -30,6 +31,10 @@ export default function ItemCard({ item }: { item: Item }) {
     });
   };
 
+  const handleImageError = (e: SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = '/image/not_found.svg';
+  };
+
   return (
     <div className={styles.itemCard}>
       {item.discount > 0 && (
@@ -38,11 +43,12 @@ export default function ItemCard({ item }: { item: Item }) {
 
       <div className={styles.preview}>
         <div className={styles.img}>
-          {item.imageUri ? (
-            <Image src={item.imageUri} alt={item.itemName} fill />
-          ) : (
-            <Image src='/image/not_found.svg' alt={'not_found'} fill />
-          )}
+          <Image
+            src={item.imageUri}
+            alt={item.itemName}
+            onError={handleImageError}
+            fill
+          />
         </div>
       </div>
       <div className={styles.title}>{item.itemName}</div>
@@ -51,10 +57,12 @@ export default function ItemCard({ item }: { item: Item }) {
         <span
           className={item.discount > 0 ? styles.onDiscount : styles.salePrice}
         >
-          {item.originalPrice}
+          {item.originalPrice.toLocaleString()}
         </span>
         {item.discount > 0 && (
-          <span className={styles.salePrice}>{item.salePrice}</span>
+          <span className={styles.salePrice}>
+            {item.salePrice.toLocaleString()}
+          </span>
         )}
       </div>
       <div className={styles.mainContent}>{item.mainContent}</div>
