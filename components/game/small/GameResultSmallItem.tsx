@@ -33,7 +33,7 @@ function GameResultSmallItem({
       id={String(gameId)}
       className={`${styles['smallItemContainer']} 
         ${styles[type.toLowerCase()]}
-        ${page === 'profile' ? styles[background] : styles[page]}
+        ${page === 'profile' ? styles[background.toLowerCase()] : styles[page]}
         ${radioMode !== undefined ? styles[radioMode.toLowerCase()] : ''} 
         ${zIndexList ? styles['zIndexList'] : ''}`}
     >

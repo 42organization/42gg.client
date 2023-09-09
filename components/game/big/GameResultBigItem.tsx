@@ -31,7 +31,7 @@ function GameResultBigItem({
       id={String(gameId)}
       className={`${styles['bigItemContainer']} 
         ${zIndexList ? styles['zIndexList'] : ''} 
-        ${page === 'profile' ? styles[background] : styles[page]}
+        ${page === 'profile' ? styles[background.toLowerCase()] : styles[page]}
         ${radioMode ? styles[radioMode.toLowerCase()] : ''}`}
     >
       <GameResultBigTeam team={team1} zIndexList={zIndexList} />
