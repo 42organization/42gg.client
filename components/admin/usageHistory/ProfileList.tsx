@@ -150,6 +150,7 @@ function ProfileList() {
                             <button
                               className={styles.deleteBtn}
                               onClick={() => deleteProfile(profile)}
+                              disabled={profile.isDeleted}
                             >
                               삭제
                             </button>
