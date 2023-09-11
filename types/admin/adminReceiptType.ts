@@ -36,9 +36,8 @@ export interface ImegaphoneTable {
 }
 
 export interface Iprofile {
-  id: string;
+  id: number;
   createdAt: Date;
-  userId: string;
   userIntraId: string;
   imageUri: string;
   deletedAt: Date;
