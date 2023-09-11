@@ -387,10 +387,11 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   }
 }
 
-@mixin txtColor() {
+@mixin txtColor($color: black) {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-stroke: 0.2px $color;
 }
 
 @mixin tierNumber() {
@@ -400,19 +401,19 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   @include txtColor();
   &.red {
     background-image: linear-gradient(to right, #f77062 0%, #fe5196 100%);
-    @include txtColor();
+    @include txtColor(#fe5196);
   }
   &.yellow {
     background-image: linear-gradient(to right, #f6d365 0%, #fda085 100%);
-    @include txtColor();
+    @include txtColor(#f6d365);
   }
   &.green {
     background-image: linear-gradient(135deg, #81fbb8 10%, #28c76f 100%);
-    @include txtColor();
+    @include txtColor(#28c76f);
   }
   &.blue {
     background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-    @include txtColor();
+    @include txtColor(#4facfe);
   }
   &.black {
     background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
@@ -428,6 +429,6 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
       rgba(4, 4, 235, 0.568) 80.66%,
       rgb(123, 97, 224) 100%
     );
-    @include txtColor();
+    @include txtColor(rgb(123, 97, 224));
   }
 }
