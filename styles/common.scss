@@ -395,14 +395,14 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin txtColor() {
+  font-size: 1rem;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @mixin tierNumber() {
-  font-family: Gugi;
-  font-size: 0.8rem;
+  font-family: Jua;
   background: black;
   @include txtColor();
   &.red {
