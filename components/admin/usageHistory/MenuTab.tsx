@@ -28,10 +28,20 @@ function MenuTab() {
   ];
 
   useEffect(() => {
-    if (tabIdx === 0) setChild(<MegaphoneList />);
-    if (tabIdx === 1) setChild(<ProfileList />);
-    if (tabIdx === 2) setChild(<ProfileListCurrent />);
-    if (tabIdx === 3) setChild(<ProfileDeleteHistoryList />);
+    switch (tabIdx) {
+      case 0:
+        setChild(<MegaphoneList />);
+        break;
+      case 1:
+        setChild(<ProfileList />);
+        break;
+      case 2:
+        setChild(<ProfileListCurrent />);
+        break;
+      case 3:
+        setChild(<ProfileDeleteHistoryList />);
+        break;
+    }
   }, [tabIdx]);
 
   return (

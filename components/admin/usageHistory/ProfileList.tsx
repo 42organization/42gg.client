@@ -158,7 +158,7 @@ function ProfileList() {
                               onClick={() => deleteProfile(profile)}
                               disabled={!profile.isCurrent}
                             >
-                              삭제
+                              {profile.isCurrent ? '삭제' : 'X'}
                             </button>
                           ) : columnName === 'isCurrent' ? (
                             profile[columnName as keyof Iprofile] ? (
