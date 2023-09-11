@@ -411,6 +411,9 @@ $gameItemTheme16: map-get(
     .gameStatusLive {
       @include gameStatus;
       background: #ff007a;
+      &.profile {
+        background: #ffffff9b;
+      }
     }
     .gameStatusWait {
       @include gameStatus;
@@ -429,6 +432,10 @@ $gameItemTheme16: map-get(
       font-weight: 700;
       color: #8c28d9;
       background-color: #d4a3fb;
+      &.profile {
+        color: #0000004f;
+        background: #ffffff9b;
+      }
       &.both {
         color: #b94b80;
         background-color: #ffb1d9;

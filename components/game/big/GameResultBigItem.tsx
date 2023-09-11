@@ -39,6 +39,7 @@ function GameResultBigItem({
         mode={mode}
         status={status}
         time={time}
+        page={page}
         scoreTeam1={team1.score}
         scoreTeam2={team2.score}
         radioMode={radioMode}
