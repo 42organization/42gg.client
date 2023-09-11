@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import {
@@ -10,7 +10,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { IitemHistory, IitemHistoryList } from 'types/admin/adminStoreTypes';
+import { IitemHistory } from 'types/admin/adminStoreTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
@@ -37,11 +37,6 @@ const tableTitle: { [key: string]: string } = {
 };
 
 function ItemHistory() {
-  const [itemHistoryData, setItemHistoryData] = useState<IitemHistoryList>({
-    itemHistoryList: [],
-    totalPage: 0,
-    currentPage: 0,
-  });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const setSnackBar = useSetRecoilState(toastState);
   const setModal = useSetRecoilState(modalState);
@@ -50,50 +45,25 @@ function ItemHistory() {
     const res = await instanceInManage.get(
       `/items/history?page=${currentPage}&size=5`
     );
-    const itemHistoryList = await res.data.data.historyList.map(
-      (itemHistory: IitemHistory) => {
-        return {
-          ...itemHistory,
-          createdAt: dateToStringShort(itemHistory.createdAt),
-        };
-      }
-    );
-    return itemHistoryList;
+    return res.data;
   };
 
-  const { data } = useQuery(
+  const { data, isError } = useQuery(
     ['itemHistoryList', currentPage],
     () => getApi(currentPage),
-    { keepPreviousData: true }
+    {
+      keepPreviousData: true,
+      select: (data) => ({
+        historyList: data.historyList?.map((history: IitemHistory) => {
+          return {
+            ...history,
+            createdAt: dateToStringShort(new Date(history.createdAt)),
+          };
+        }),
+        totalPage: data.totalPage,
+      }),
+    }
   );
-
-  console.log(data);
-  // const getItemHistoryListHandler = useCallback(async () => {
-  //   try {
-  //     const res = await instanceInManage.get(
-  //       `/items/history?page=${currentPage}&size=5`
-  //     );
-  //     setItemHistoryData({
-  //       itemHistoryList: res.data.historyList.map(
-  //         (itemHistory: IitemHistory) => {
-  //           return {
-  //             ...itemHistory,
-  //             createdAt: dateToStringShort(new Date(itemHistory.createdAt)),
-  //           };
-  //         }
-  //       ),
-  //       totalPage: res.data.totalPage,
-  //       currentPage: currentPage,
-  //     });
-  //   } catch (e: unknown) {
-  //     setSnackBar({
-  //       toastName: 'get itemhistory',
-  //       severity: 'error',
-  //       message: 'API 요청에 문제가 발생했습니다.',
-  //       clicked: true,
-  //     });
-  //   }
-  // }, [currentPage]);
 
   const openDetailModal = (itemHistory: IitemHistory) => {
     setModal({
@@ -103,9 +73,14 @@ function ItemHistory() {
     });
   };
 
-  // useEffect(() => {
-  //   getItemHistoryListHandler();
-  // }, [currentPage]);
+  if (isError) {
+    return setSnackBar({
+      toastName: 'get itemhistory',
+      severity: 'error',
+      message: 'API 요청에 문제가 발생했습니다.',
+      clicked: true,
+    });
+  }
 
   return (
     <>
@@ -113,10 +88,8 @@ function ItemHistory() {
         <Table className={styles.table} aria-label='customized table'>
           <AdminTableHead tableName={'itemHistory'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {/* {itemHistoryData.itemHistoryList.length > 0 ? (
-              itemHistoryData.itemHistoryList.map( */}
-            {data?.length > 0 ? (
-              data?.map((itemHistory: IitemHistory) => (
+            {data?.historyList.length > 0 ? (
+              data?.historyList.map((itemHistory: IitemHistory) => (
                 <TableRow className={styles.tableRow} key={itemHistory.itemId}>
                   {tableFormat['itemHistory'].columns.map(
                     (columnName: string, index: number) => {
@@ -163,10 +136,8 @@ function ItemHistory() {
       </TableContainer>
       <div className={styles.pageNationContainer}>
         <PageNation
-          // curPage={itemHistoryData.currentPage}
-          // totalPages={itemHistoryData.totalPage}
-          curPage={data?.data.historyList.currentPage}
-          totalPages={data?.data.historyList.totalPage}
+          curPage={currentPage}
+          totalPages={data?.totalPage}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}
