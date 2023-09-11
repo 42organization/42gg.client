@@ -34,6 +34,7 @@ const MenuProfile = () => {
     검: 'black',
     무: 'rainbow',
   };
+
   return (
     <div className={styles.menuProfileWrapper}>
       <Link
@@ -44,7 +45,7 @@ const MenuProfile = () => {
         <PlayerImage
           src={user.userImageUri}
           styleName={`menuProfile ${
-            user.edge ? user.edge.toLowerCase() : 'basic'
+            user.edgeType ? user.edgeType.toLowerCase() : 'basic'
           }`}
           size={18}
         />

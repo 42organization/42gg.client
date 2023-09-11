@@ -16,7 +16,7 @@ const MainPageProfile = () => {
           <PlayerImage
             src={user.userImageUri}
             styleName={`mainPageProfile ${
-              user.edge ? user.edge.toLowerCase() : 'basic'
+              user.edgeType ? user.edgeType.toLowerCase() : 'basic'
             }`}
             size={18}
           />
