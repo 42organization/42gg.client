@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
+import {
+  ModalButtonContainer,
+  ModalButton,
+} from 'components/modal/ModalButton';
 import useReportHandler from 'hooks/modal/useReportHandler';
 import styles from 'styles/modal/menu/ReportModal.module.scss';
 
@@ -10,6 +14,7 @@ interface Report {
 }
 
 export default function ReportModal() {
+  const [isLoading, setIsLoading] = useState(false);
   const setModal = useSetRecoilState(modalState);
   const [report, setReport] = useState<Report>({
     category: '',
@@ -35,6 +40,11 @@ export default function ReportModal() {
   };
 
   const reportHandler = useReportHandler(report);
+
+  const handleReport = () => {
+    setIsLoading(true);
+    reportHandler().finally(() => setIsLoading(false));
+  };
 
   return (
     <div className={styles.container}>
@@ -67,18 +77,19 @@ export default function ReportModal() {
             <div>{`${report.content.length}/300`}</div>
           </div>
         </div>
-        <div className={styles.buttons}>
-          <div className={styles.negative}>
-            <input
-              type='button'
-              onClick={() => setModal({ modalName: null })}
-              value='취소'
-            />
-          </div>
-          <div className={styles.positive}>
-            <input type='button' onClick={reportHandler} value='보내기' />
-          </div>
-        </div>
+        <ModalButtonContainer>
+          <ModalButton
+            onClick={() => setModal({ modalName: null })}
+            style='negative'
+            value='취소'
+          />
+          <ModalButton
+            onClick={handleReport}
+            style='positive'
+            value='보내기'
+            isLoading={isLoading}
+          />
+        </ModalButtonContainer>
       </form>
     </div>
   );

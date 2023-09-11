@@ -2,13 +2,19 @@ import Image from 'next/image';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { BsGiftFill, BsCircleFill } from 'react-icons/bs';
 import { Tooltip } from '@mui/material';
-import { InventoryItem } from 'types/inventoryTypes';
+import { InventoryItem, InventoryItemStatus } from 'types/inventoryTypes';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/store/Inventory.module.scss';
 
 type inventoryItemProps = {
   item: InventoryItem;
+};
+
+const badge: Record<InventoryItemStatus, string> = {
+  BEFORE: '사용 전',
+  USING: '사용 중',
+  WAITING: '대기 중',
 };
 
 export function InvetoryItem({ item }: inventoryItemProps) {
@@ -66,15 +72,13 @@ export function InvetoryItem({ item }: inventoryItemProps) {
           </Tooltip>
         )}
         <div
-          className={`${styles.usingBadge} ${
-            styles[itemStatus === 'USING' ? 'using' : 'before']
-          }`}
+          className={`${styles.usingBadge} ${styles[itemStatus.toLowerCase()]}`}
         >
-          <BsCircleFill /> {itemStatus === 'USING' ? '사용중' : '사용 전'}
+          <BsCircleFill /> {badge[itemStatus]}
         </div>
       </div>
       <div className={styles.overlay}>
-        {itemStatus === 'USING' ? (
+        {itemStatus !== 'BEFORE' ? (
           <button onClick={handleEditItem}>삭제하기</button>
         ) : (
           <button onClick={handleUseItem}>사용하기</button>

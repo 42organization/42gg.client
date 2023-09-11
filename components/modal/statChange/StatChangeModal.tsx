@@ -47,7 +47,7 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
         },
       });
     } catch (error) {
-      setError('SM02');
+      setError('SM03');
     }
   };
 

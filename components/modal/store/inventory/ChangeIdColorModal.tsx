@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest, UseIdColorRequest } from 'types/inventoryTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instance, isAxiosError } from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import {
@@ -21,12 +22,41 @@ const caution = [
   '색상 변경은 아이템 당 1회만 가능합니다.',
 ];
 
+// error types
+const errorCode = [
+  'IT200',
+  'RC200',
+  'RC100',
+  'RC403',
+  'UR100',
+  'UR403',
+] as const;
+
+type errorCodeType = (typeof errorCode)[number];
+
+type errorPayload = {
+  status: number;
+  message: string;
+  code: errorCodeType;
+};
+
+const errorMessages: Record<errorCodeType, string> = {
+  IT200: '사용할 수 없는 아이템입니다.',
+  RC200: '이미 사용한 아이템입니다.',
+  RC100: '사용할 수 없는 아이템입니다.',
+  RC403: '사용할 수 없는 아이템입니다.',
+  UR100: 'USER NOT FOUND', // setError로 alert 띄우지 않고 처리
+  UR403: '유효하지 않은 색깔입니다.',
+};
+
 export default function ChangeIdColorModal({
   receiptId,
 }: ChangeIdColorModalProps) {
+  const setError = useSetRecoilState(errorState);
   const resetModal = useResetRecoilState(modalState);
   const user = useRecoilValue(userState);
   const [color, setColor] = useState<string>('#000000');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function handleChangeIdColor() {
     const data: UseIdColorRequest = {
@@ -38,17 +68,19 @@ export default function ChangeIdColorModal({
       `아이디 색상을 ${color}로 변경하시겠습니까?\n(아이템을 사용한 후에는 취소가 불가능합니다.)`
     );
     if (!ret) return;
+    setIsLoading(true);
     try {
-      // await mockInstance.post('/users/text-color', data);
-      // NOTE : 테스트를 위해 응답 body를 console에 출력 <- 아이디 색상 변경 결과 확인. 추후 삭제
-      const response = await mockInstance.patch('/users/text-color', data);
-      console.log(response.data);
-      //
+      await instance.patch('/pingpong/users/text-color', data);
       alert('아이디 색상이 변경되었습니다.');
     } catch (error: unknown) {
-      // TODO : error 정의 필요
-      console.log(error);
+      if (isAxiosError<errorPayload>(error) && error.response) {
+        const { code } = error.response.data;
+        if (code === 'UR100') setError('JY02');
+        else if (errorCode.includes(code)) alert(errorMessages[code]);
+        else setError('JY02');
+      } else setError('JY02');
     } finally {
+      setIsLoading(false);
       resetModal();
     }
   }
@@ -76,6 +108,7 @@ export default function ChangeIdColorModal({
             style='positive'
             value='등록'
             onClick={() => handleChangeIdColor()}
+            isLoading={isLoading}
           />
         </ModalButtonContainer>
       </div>

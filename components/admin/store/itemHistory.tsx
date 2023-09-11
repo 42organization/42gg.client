@@ -10,12 +10,13 @@ import {
   TableRow,
 } from '@mui/material';
 import { IitemHistory, IitemHistoryList } from 'types/admin/adminStoreTypes';
+import { IUpdate } from 'types/modalTypes';
+import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
-import { mockInstance } from 'utils/mockAxios';
+import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
-  AdminContent,
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/admin/common/AdminTable';
@@ -25,7 +26,7 @@ import styles from 'styles/admin/store/ItemHistory.module.scss';
 const tableTitle: { [key: string]: string } = {
   itemId: 'ID',
   createdAt: '변경 시간',
-  itemName: '이름',
+  name: '이름',
   content: '설명',
   imageUri: '이미지',
   price: '원가',
@@ -35,9 +36,7 @@ const tableTitle: { [key: string]: string } = {
   visible: '상점 노출',
 };
 
-const MAX_CONTENT_LENGTH = 16;
-
-function ItemHistory() {
+function ItemHistory({ update, setUpdate }: IUpdate) {
   const [itemHistoryData, setItemHistoryData] = useState<IitemHistoryList>({
     itemHistoryList: [],
     totalPage: 0,
@@ -45,15 +44,15 @@ function ItemHistory() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const setSnackBar = useSetRecoilState(toastState);
+  const setModal = useSetRecoilState(modalState);
 
-  // instanceInManage로 변경
   const getItemHistoryListHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/items/history?page=${currentPage}&size=5`
+      const res = await instanceInManage.get(
+        `/items/history?page=${currentPage}&size=5`
       );
       setItemHistoryData({
-        itemHistoryList: res.data.itemHistoryList.map(
+        itemHistoryList: res.data.historyList.map(
           (itemHistory: IitemHistory) => {
             return {
               ...itemHistory,
@@ -74,9 +73,20 @@ function ItemHistory() {
     }
   }, [currentPage]);
 
+  const openDetailModal = (itemHistory: IitemHistory) => {
+    setModal({
+      modalName: 'ADMIN-DETAIL_CONTENT',
+      detailTitle: itemHistory.mainContent,
+      detailContent: itemHistory.subContent,
+    });
+  };
+
   useEffect(() => {
-    getItemHistoryListHandler();
-  }, [currentPage]);
+    if (update) {
+      getItemHistoryListHandler();
+      setUpdate(false);
+    }
+  }, [currentPage, update]);
 
   return (
     <>
@@ -100,20 +110,30 @@ function ItemHistory() {
                           >
                             {columnName === 'imageUri' ? (
                               <Image
-                                src={itemHistory[columnName]}
+                                src={
+                                  itemHistory.imageUri
+                                    ? itemHistory[columnName]
+                                    : '/public/image/fallBackSrc.jpeg'
+                                }
                                 width={30}
                                 height={30}
                                 alt='no'
                               />
+                            ) : columnName === 'content' ? (
+                              <div>
+                                {itemHistory.mainContent}
+                                <br />
+                                <span
+                                  style={{ cursor: 'pointer', color: 'grey' }}
+                                  onClick={() => openDetailModal(itemHistory)}
+                                >
+                                  ...더보기
+                                </span>
+                              </div>
                             ) : (
-                              <AdminContent
-                                content={itemHistory[
-                                  columnName as keyof IitemHistory
-                                ].toString()}
-                                maxLen={MAX_CONTENT_LENGTH}
-                                detailTitle={itemHistory.itemName}
-                                detailContent={itemHistory.content}
-                              />
+                              itemHistory[
+                                columnName as keyof IitemHistory
+                              ]?.toString()
                             )}
                           </TableCell>
                         );

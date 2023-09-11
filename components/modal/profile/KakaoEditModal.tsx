@@ -10,6 +10,7 @@ type UserType = 'kakao' | 'fortyTwo' | 'both' | '';
 export default function KakaoEditModal() {
   const [userType, setUserType] = useState<UserType>('');
   const setError = useSetRecoilState<string>(errorState);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const userTypeHandler = async () => {
     try {
@@ -38,12 +39,15 @@ export default function KakaoEditModal() {
   };
 
   const clickUnlinkHandler = async () => {
+    setIsLoading(true);
     try {
       await instance.delete('/pingpong/users/oauth/kakao');
       alert('카카오톡 연동이 해제되었습니다.');
       setUserType('fortyTwo');
     } catch (e: any) {
       alert('카카오톡 연동 해제에 실패했습니다.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -52,11 +56,15 @@ export default function KakaoEditModal() {
       <div className={styles.resultContainer}>
         {userType === 'kakao' ? '42 intra 연동' : '카카오톡 연동'}
       </div>
+      {/* TODO : 공통 모달 버튼 적용할 수 있는 방법 고민해보기 🥲 */}
       <div className={styles.buttons}>
         <button onClick={clickLinkHandler} disabled={userType === 'both'}>
           연동하기
         </button>
-        <button onClick={clickUnlinkHandler} disabled={userType !== 'both'}>
+        <button
+          onClick={clickUnlinkHandler}
+          disabled={userType !== 'both' || isLoading}
+        >
           연동 해제하기
         </button>
       </div>

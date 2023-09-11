@@ -34,7 +34,7 @@ const item4: InventoryItem = {
   itemName: 'ID 색깔 변경권',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'kim_takgu',
-  itemStatus: 'USED',
+  itemStatus: 'BEFORE',
   itemType: 'TEXT_COLOR',
 };
 
@@ -71,7 +71,7 @@ const item8: InventoryItem = {
   itemName: '테스트8',
   imageUri: 'https://cdn.nookazon.com/nookazon/icons/leaf.png',
   purchaserIntra: 'kim_takgu',
-  itemStatus: 'USED',
+  itemStatus: 'BEFORE',
   itemType: 'MEGAPHONE',
 };
 

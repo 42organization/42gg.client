@@ -11,9 +11,9 @@ import styles from 'styles/user/user.module.scss';
 export default function User() {
   const router = useRouter();
   const { intraId } = router.query;
-  const { backgroundType } = useBasicProfile({ profileId: intraId as string });
+  const { background } = useBasicProfile({ profileId: intraId as string });
 
-  useProfileColorMode(backgroundType as RandomColors);
+  useProfileColorMode(background as RandomColors);
   return (
     <div className={styles.container}>
       {typeof intraId === 'string' && (

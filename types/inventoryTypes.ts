@@ -1,4 +1,5 @@
-export type InventoryItemStatus = 'BEFORE' | 'USING' | 'USED';
+// USED, DELETED 는 응답으로 오지 않음.
+export type InventoryItemStatus = 'BEFORE' | 'WAITING' | 'USING';
 
 export type ItemType =
   | 'MEGAPHONE'
@@ -6,6 +7,8 @@ export type ItemType =
   | 'EDGE'
   | 'TEXT_COLOR'
   | 'PROFILE_IMAGE'; // REVIEW - 아이템 타입 추가 / 변경 가능성 있음.
+
+export type RandomItem = 'EDGE' | 'BACKGROUND';
 
 export type InventoryItem = {
   receiptId: number; // 거래내역 아이디

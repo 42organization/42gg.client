@@ -11,13 +11,16 @@ export default function AfterGameModal() {
   if (currentGame.startTime === '2022-07-13 11:50') return null;
 
   return currentGame.mode === 'NORMAL' ? (
-    <NormalGame currentGame={currentGame} onSubmit={submitNormalHandler} />
+    <NormalGame
+      currentGame={currentGame}
+      onSubmit={submitNormalHandler}
+      openStatChange={openStatChangeModal}
+    />
   ) : (
     <RankGame
       currentGame={currentGame}
-      onSubmit={
-        currentGame.isScoreExist ? openStatChangeModal : submitRankHandler
-      }
+      onSubmit={submitRankHandler}
+      openStatChange={openStatChangeModal}
     />
   );
 }
