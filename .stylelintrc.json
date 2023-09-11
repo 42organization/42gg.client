@@ -31,6 +31,7 @@
         "function-name-case": null,
         "scss/dollar-variable-pattern": null,
         "number-max-precision": null,
+        "scss/no-global-function-names": null,
 
         "order/order": [
             "custom-properties",
