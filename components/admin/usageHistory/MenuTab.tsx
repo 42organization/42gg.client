@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import MegaphoneList from 'components/admin/usageHistory/MegaphoneList';
+import ProfileDeleteHistoryList from 'components/admin/usageHistory/ProfileDeleteHistoryList';
 import ProfileList from 'components/admin/usageHistory/ProfileList';
+import ProfileListCurrent from 'components/admin/usageHistory/ProfileListCurrent';
 import styles from 'styles/admin/usageHistory/MenuTab.module.scss';
-import ProfileDeleteHistoryList from './ProfileDeleteHistoryList';
 
 function MenuTab() {
   const [tabIdx, setTabIdx] = useState(0);
@@ -10,22 +11,27 @@ function MenuTab() {
   const tabContents = [
     {
       contentId: 0,
-      contentName: '확성기 사용 내역',
+      contentName: '확성기 사용내역',
     },
     {
       contentId: 1,
-      contentName: '프로필 변경권 사용 내역',
+      contentName: '프로필 변경권 사용내역',
     },
     {
       contentId: 2,
-      contentName: '관리자 권한 프로필 삭제 내역',
+      contentName: '현재 프로필 이미지 삭제',
+    },
+    {
+      contentId: 3,
+      contentName: '프로필 이미지 삭제 내역',
     },
   ];
 
   useEffect(() => {
     if (tabIdx === 0) setChild(<MegaphoneList />);
     if (tabIdx === 1) setChild(<ProfileList />);
-    if (tabIdx === 2) setChild(<ProfileDeleteHistoryList />);
+    if (tabIdx === 2) setChild(<ProfileListCurrent />);
+    if (tabIdx === 3) setChild(<ProfileDeleteHistoryList />);
   }, [tabIdx]);
 
   return (

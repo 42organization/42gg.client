@@ -29,9 +29,10 @@ const tableTitle: { [key: string]: string } = {
   userIntraId: 'Intra ID',
   imageUri: '변경된 프로필 이미지',
   isDeleted: '삭제 여부',
+  delete: '삭제',
 };
 
-function ProfileList() {
+function ProfileListCurrent() {
   const [profileData, setProfileData] = useState<IprofileTable>({
     profileList: [],
     totalPage: 0,
@@ -87,7 +88,6 @@ function ProfileList() {
 
   const getAllProfileHandler = useCallback(async () => {
     try {
-      // users/images/current 로 변경
       const res = await instanceInManage.get(
         `/users/images?page=${currentPage}&size=5`
       );
@@ -129,12 +129,12 @@ function ProfileList() {
       </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <AdminTableHead tableName={'profileList'} table={tableTitle} />
+          <AdminTableHead tableName={'profileListCurrent'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             {profileData.profileList.length > 0 ? (
               profileData.profileList.map((profile: Iprofile) => (
                 <TableRow className={styles.tableRow} key={profile.id}>
-                  {tableFormat['profileList'].columns.map(
+                  {tableFormat['profileListCurrent'].columns.map(
                     (columnName: string, index: number) => {
                       return (
                         <TableCell className={styles.tableBodyItem} key={index}>
@@ -145,6 +145,14 @@ function ProfileList() {
                               height={60}
                               alt='ProfileImage'
                             />
+                          ) : columnName === 'delete' ? (
+                            <button
+                              className={styles.deleteBtn}
+                              onClick={() => deleteProfile(profile)}
+                              disabled={profile.isDeleted}
+                            >
+                              삭제
+                            </button>
                           ) : (
                             profile[columnName as keyof Iprofile].toString()
                           )}
@@ -175,4 +183,4 @@ function ProfileList() {
   );
 }
 
-export default ProfileList;
+export default ProfileListCurrent;
