@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Noti } from 'types/notiTypes';
 import { instance } from 'utils/axios';
@@ -112,17 +112,26 @@ function ReloadNotiButton() {
 function DeleteAllButton() {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const setError = useSetRecoilState(errorState);
+  const [isLoading, setIsLoading] = useState(false);
+
   const allNotiDeleteHandler = async () => {
+    setIsLoading(true);
     try {
       await instance.delete(`/pingpong/notifications`);
       alert('알림이 성공적으로 삭제되었습니다.');
       HeaderState?.resetOpenNotiBarState();
     } catch (e) {
       setError('JB05');
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
-    <button className={styles.deleteButton} onClick={allNotiDeleteHandler}>
+    <button
+      className={styles.deleteButton}
+      onClick={allNotiDeleteHandler}
+      disabled={isLoading}
+    >
       전체 삭제
     </button>
   );

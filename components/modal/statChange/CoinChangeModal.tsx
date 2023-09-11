@@ -34,6 +34,9 @@ export default function CoinChangeModal(coin: CoinResult) {
         </div>
         <div className={styles.coinStat}>
           <CoinStat before={coin?.beforeCoin} after={coin?.afterCoin} />
+          {coin.coinIncrement === 0 && (
+            <div className={`${styles.appear}`}>획득한 코인이 없습니다. 😢</div>
+          )}
         </div>
         <CoinAnimation amount={coin?.coinIncrement} />
         <div className={styles.guide}>화면을 클릭해주세요!</div>

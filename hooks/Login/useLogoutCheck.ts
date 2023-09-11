@@ -5,7 +5,7 @@ import { instance } from 'utils/axios';
 import { loginState } from 'utils/recoil/login';
 import { modalState } from 'utils/recoil/modal';
 
-type useLogoutCheckReturn = [() => void, () => void];
+type useLogoutCheckReturn = [() => void, () => Promise<void>];
 
 const useLogoutCheck = (): useLogoutCheckReturn => {
   const setLoggedIn = useSetRecoilState<boolean>(loginState);
