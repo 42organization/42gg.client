@@ -56,6 +56,7 @@ export default function ChangeIdColorModal({
   const resetModal = useResetRecoilState(modalState);
   const user = useRecoilValue(userState);
   const [color, setColor] = useState<string>('#000000');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function handleChangeIdColor() {
     const data: UseIdColorRequest = {
@@ -67,6 +68,7 @@ export default function ChangeIdColorModal({
       `아이디 색상을 ${color}로 변경하시겠습니까?\n(아이템을 사용한 후에는 취소가 불가능합니다.)`
     );
     if (!ret) return;
+    setIsLoading(true);
     try {
       await instance.patch('/pingpong/users/text-color', data);
       alert('아이디 색상이 변경되었습니다.');
@@ -78,6 +80,7 @@ export default function ChangeIdColorModal({
         else setError('JY02');
       } else setError('JY02');
     } finally {
+      setIsLoading(false);
       resetModal();
     }
   }
@@ -105,6 +108,7 @@ export default function ChangeIdColorModal({
             style='positive'
             value='등록'
             onClick={() => handleChangeIdColor()}
+            isLoading={isLoading}
           />
         </ModalButtonContainer>
       </div>
