@@ -3,9 +3,9 @@ import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { Modal } from 'types/modalTypes';
 import { instance, isAxiosError } from 'utils/axios';
-import { ITEM_ALERT_MESSAGE } from 'utils/const/itemAlertMessage';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
+import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
 import {
   ModalButtonContainer,
   ModalButton,

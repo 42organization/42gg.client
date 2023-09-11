@@ -5,10 +5,10 @@ import { FaArrowRight } from 'react-icons/fa';
 import { TbQuestionMark } from 'react-icons/tb';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
-import { ITEM_ALERT_MESSAGE } from 'utils/const/itemAlertMessage';
 import { errorState } from 'utils/recoil/error';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
 import {
   ModalButtonContainer,
   ModalButton,
