@@ -45,7 +45,7 @@ function ItemList() {
     return instance.get(`/pingpong/items/store`);
   };
 
-  const { data } = useQuery('itemList', getApi);
+  const { data, isError } = useQuery('itemList', getApi);
 
   // const getItemListHandler = useCallback(async () => {
   //   try {
@@ -86,6 +86,15 @@ function ItemList() {
   // useEffect(() => {
   //   getItemListHandler();
   // }, []);
+
+  if (isError) {
+    setSnackBar({
+      toastName: 'get itemlist',
+      severity: 'error',
+      message: 'API 요청에 문제가 발생했습니다.',
+      clicked: true,
+    });
+  }
 
   return (
     <TableContainer className={styles.tableContainer} component={Paper}>

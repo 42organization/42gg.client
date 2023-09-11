@@ -46,8 +46,19 @@ function ItemHistory() {
   const setSnackBar = useSetRecoilState(toastState);
   const setModal = useSetRecoilState(modalState);
 
-  const getApi = (currentPage: number) => {
-    return instanceInManage.get(`/items/history?page=${currentPage}&size=5`);
+  const getApi = async (currentPage: number) => {
+    const res = await instanceInManage.get(
+      `/items/history?page=${currentPage}&size=5`
+    );
+    const itemHistoryList = await res.data.data.historyList.map(
+      (itemHistory: IitemHistory) => {
+        return {
+          ...itemHistory,
+          createdAt: dateToStringShort(itemHistory.createdAt),
+        };
+      }
+    );
+    return itemHistoryList;
   };
 
   const { data } = useQuery(
@@ -56,6 +67,7 @@ function ItemHistory() {
     { keepPreviousData: true }
   );
 
+  console.log(data);
   // const getItemHistoryListHandler = useCallback(async () => {
   //   try {
   //     const res = await instanceInManage.get(
@@ -103,8 +115,8 @@ function ItemHistory() {
           <TableBody className={styles.tableBody}>
             {/* {itemHistoryData.itemHistoryList.length > 0 ? (
               itemHistoryData.itemHistoryList.map( */}
-            {data?.data.historyList.length > 0 ? (
-              data?.data.historyList.map((itemHistory: IitemHistory) => (
+            {data?.length > 0 ? (
+              data?.map((itemHistory: IitemHistory) => (
                 <TableRow className={styles.tableRow} key={itemHistory.itemId}>
                   {tableFormat['itemHistory'].columns.map(
                     (columnName: string, index: number) => {
@@ -151,8 +163,10 @@ function ItemHistory() {
       </TableContainer>
       <div className={styles.pageNationContainer}>
         <PageNation
-          curPage={itemHistoryData.currentPage}
-          totalPages={itemHistoryData.totalPage}
+          // curPage={itemHistoryData.currentPage}
+          // totalPages={itemHistoryData.totalPage}
+          curPage={data?.data.historyList.currentPage}
+          totalPages={data?.data.historyList.totalPage}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}
