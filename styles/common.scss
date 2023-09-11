@@ -84,38 +84,6 @@ $bg-basic: linear-gradient(
   #481570 58.85%,
   #300e4b 98.44%
 );
-// Tranquil
-$bg-pink-orange: linear-gradient(to bottom, #ef629f, #eecda3);
-// Windy
-$bg-blue-green: linear-gradient(to bottom, #acb6e5, #86fde8);
-// Bupe
-$bg-midnight: linear-gradient(to bottom, #00416a, #e4e5e6);
-// Mango
-$bg-orange: linear-gradient(to top, #ffe259, #ffa751);
-// Misty Meadow
-$bg-grass-green: linear-gradient(to bottom, #215f00, #e4e4d9);
-// Opa
-$bg-lemon-blue: linear-gradient(to top, #3d7eaa, #ffe47a);
-// Dracula
-$bg-dracula: linear-gradient(to top, #dc2424, #4a569d);
-// Sea Blizz
-$bg-mint-green: linear-gradient(to bottom, #1cd8d2, #93edc7);
-// Mystic
-$bg-steel-gray: linear-gradient(to bottom, #757f9a, #d7dde8);
-// The Strain
-$bg-blood-red: linear-gradient(to bottom, #870000, #190a05);
-// Cool Sky
-$bg-blue-sky: linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff);
-// Jodhpur
-$bg-ocean-blue: linear-gradient(to top, #9cecfb, #65c7f7, #0052d4);
-// Hazel
-$bg-pink-blue: linear-gradient(to top, #77a1d3, #79cbca, #e684ae);
-// Radar
-$bg-sunset-pink: linear-gradient(to top, #a770ef, #cf8bf3, #fdb99b);
-// Royal Blue + Petrol
-$bg-dark-navy: linear-gradient(to top, #bbd2c5, #536976, #292e49);
-// MegaTron
-$bg-orange-green: linear-gradient(to top, #c6ffdd, #fbd786, #f7797d);
 
 /* font */
 $logo-font: 'Agonostic Italic', cursive;
@@ -374,13 +342,6 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
         #454147 100%
       );
     }
-    :hover {
-      background: linear-gradient(
-        to right bottom,
-        rgba(44, 41, 46, 0.52) 0%,
-        #454147 100%
-      );
-    }
   }
   .positive {
     input {
@@ -391,42 +352,35 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
         rgba(96, 6, 138, 0.52) 100%
       );
     }
-    :hover {
-      background: linear-gradient(
-        to right bottom,
-        #c66bf2 0%,
-        rgba(96, 6, 138, 0.52) 100%
-      );
-    }
   }
 }
 
-@mixin txtColor() {
+@mixin txtColor($color: black) {
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.2px $color;
 }
 
 @mixin tierNumber() {
-  font-family: Gugi;
-  font-size: 0.8rem;
+  font-family: Jua;
   background: black;
   @include txtColor();
   &.red {
     background-image: linear-gradient(to right, #f77062 0%, #fe5196 100%);
-    @include txtColor();
+    @include txtColor(#fe5196);
   }
   &.yellow {
     background-image: linear-gradient(to right, #f6d365 0%, #fda085 100%);
-    @include txtColor();
+    @include txtColor(#f6d365);
   }
   &.green {
     background-image: linear-gradient(135deg, #81fbb8 10%, #28c76f 100%);
-    @include txtColor();
+    @include txtColor(#28c76f);
   }
   &.blue {
     background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-    @include txtColor();
+    @include txtColor(#4facfe);
   }
   &.black {
     background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
@@ -442,6 +396,6 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
       rgba(4, 4, 235, 0.568) 80.66%,
       rgb(123, 97, 224) 100%
     );
-    @include txtColor();
+    @include txtColor(rgb(123, 97, 224));
   }
 }

@@ -1,4 +1,5 @@
 @import 'styles/common.scss';
+@import 'styles/ProfileBackgroundTheme.scss';
 
 // ANCHOR : page
 
@@ -37,22 +38,141 @@
   }
 }
 
+$gameItemTheme1: map-get(
+  $map: $bg-pink-orange,
+  $key: 'profile-game-result',
+);
+$gameItemTheme2: map-get(
+  $map: $bg-blue-green,
+  $key: 'profile-game-result',
+);
+$gameItemTheme3: map-get(
+  $map: $bg-midnight,
+  $key: 'profile-game-result',
+);
+$gameItemTheme4: map-get(
+  $map: $bg-orange,
+  $key: 'profile-game-result',
+);
+$gameItemTheme5: map-get(
+  $map: $bg-grass-green,
+  $key: 'profile-game-result',
+);
+$gameItemTheme6: map-get(
+  $map: $bg-lemon-blue,
+  $key: 'profile-game-result',
+);
+$gameItemTheme7: map-get(
+  $map: $bg-dracula,
+  $key: 'profile-game-result',
+);
+$gameItemTheme8: map-get(
+  $map: $bg-mint-green,
+  $key: 'profile-game-result',
+);
+$gameItemTheme9: map-get(
+  $map: $bg-steel-gray,
+  $key: 'profile-game-result',
+);
+$gameItemTheme10: map-get(
+  $map: $bg-blood-red,
+  $key: 'profile-game-result',
+);
+$gameItemTheme11: map-get(
+  $map: $bg-blue-sky,
+  $key: 'profile-game-result',
+);
+$gameItemTheme12: map-get(
+  $map: $bg-ocean-blue,
+  $key: 'profile-game-result',
+);
+$gameItemTheme13: map-get(
+  $map: $bg-pink-blue,
+  $key: 'profile-game-result',
+);
+$gameItemTheme14: map-get(
+  $map: $bg-sunset-pink,
+  $key: 'profile-game-result',
+);
+$gameItemTheme15: map-get(
+  $map: $bg-dark-navy,
+  $key: 'profile-game-result',
+);
+$gameItemTheme16: map-get(
+  $map: $bg-orange-green,
+  $key: 'profile-game-result',
+);
+
 @mixin itemBackgroud($type) {
   @if ($type == 'SMALL') {
     &.light {
-      background: linear-gradient(0deg, #9134f7, #9134f7);
-      &.both {
-        background: #ff7fb8;
+      &.main {
+        background: linear-gradient(0deg, #9134f7, #9134f7);
       }
-      &.normal {
-        background: #5fa5ef;
+      &.game {
+        &.both {
+          background: #ff7fb8;
+        }
+        &.normal {
+          background: #5fa5ef;
+        }
+        &.rank {
+          background: linear-gradient(180deg, #8f2fea 0%, #8c29da 100%);
+        }
       }
-      &.rank {
-        background: linear-gradient(180deg, #8f2fea 0%, #8c29da 100%);
+      &.color1 {
+        background: map-get($map: $gameItemTheme1, $key: 'light');
+      }
+      &.color2 {
+        background: map-get($map: $gameItemTheme2, $key: 'light');
+      }
+      &.color3 {
+        background: map-get($map: $gameItemTheme3, $key: 'light');
+      }
+      &.color4 {
+        background: map-get($map: $gameItemTheme4, $key: 'light');
+      }
+      &.color5 {
+        background: map-get($map: $gameItemTheme5, $key: 'light');
+      }
+      &.color6 {
+        background: map-get($map: $gameItemTheme6, $key: 'light');
+      }
+      &.color7 {
+        background: map-get($map: $gameItemTheme7, $key: 'light');
+      }
+      &.color8 {
+        background: map-get($map: $gameItemTheme8, $key: 'light');
+      }
+      &.color9 {
+        background: map-get($map: $gameItemTheme9, $key: 'light');
+      }
+      &.color10 {
+        background: map-get($map: $gameItemTheme10, $key: 'light');
+      }
+      &.color11 {
+        background: map-get($map: $gameItemTheme11, $key: 'light');
+      }
+      &.color12 {
+        background: map-get($map: $gameItemTheme12, $key: 'light');
+      }
+      &.color13 {
+        background: map-get($map: $gameItemTheme13, $key: 'light');
+      }
+      &.color14 {
+        background: map-get($map: $gameItemTheme14, $key: 'light');
+      }
+      &.color15 {
+        background: map-get($map: $gameItemTheme15, $key: 'light');
+      }
+      &.color16 {
+        background: map-get($map: $gameItemTheme16, $key: 'light');
       }
     }
     &.dark {
-      background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
+      &.main {
+        background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
+      }
       &.both {
         background: linear-gradient(180deg, #dd3b89 0%, #c71b82 100%);
       }
@@ -62,18 +182,118 @@
       &.rank {
         background: linear-gradient(180deg, #631db2 0%, #6a0db2 92.19%);
       }
+      &.color1 {
+        background: map-get($map: $gameItemTheme1, $key: 'dark');
+      }
+      &.color2 {
+        background: map-get($map: $gameItemTheme2, $key: 'dark');
+      }
+      &.color3 {
+        background: map-get($map: $gameItemTheme3, $key: 'dark');
+      }
+      &.color4 {
+        background: map-get($map: $gameItemTheme4, $key: 'dark');
+      }
+      &.color5 {
+        background: map-get($map: $gameItemTheme5, $key: 'dark');
+      }
+      &.color6 {
+        background: map-get($map: $gameItemTheme6, $key: 'dark');
+      }
+      &.color7 {
+        background: map-get($map: $gameItemTheme7, $key: 'dark');
+      }
+      &.color8 {
+        background: map-get($map: $gameItemTheme8, $key: 'dark');
+      }
+      &.color9 {
+        background: map-get($map: $gameItemTheme9, $key: 'dark');
+      }
+      &.color10 {
+        background: map-get($map: $gameItemTheme10, $key: 'dark');
+      }
+      &.color11 {
+        background: map-get($map: $gameItemTheme11, $key: 'dark');
+      }
+      &.color12 {
+        background: map-get($map: $gameItemTheme12, $key: 'dark');
+      }
+      &.color13 {
+        background: map-get($map: $gameItemTheme13, $key: 'dark');
+      }
+      &.color14 {
+        background: map-get($map: $gameItemTheme14, $key: 'dark');
+      }
+      &.color15 {
+        background: map-get($map: $gameItemTheme15, $key: 'dark');
+      }
+      &.color16 {
+        background: map-get($map: $gameItemTheme16, $key: 'dark');
+      }
     }
   } @else {
     // BIG
-    background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
-    &.both {
-      background: linear-gradient(90.88deg, #ff86dd 10.44%, #ff7272 99.52%);
+    &.main {
+      background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
     }
-    &.normal {
-      background: linear-gradient(90.88deg, #8fc7fb 10.44%, #4e8fdb 99.52%);
+    &.game {
+      &.both {
+        background: linear-gradient(90.88deg, #ff86dd 10.44%, #ff7272 99.52%);
+      }
+      &.normal {
+        background: linear-gradient(90.88deg, #8fc7fb 10.44%, #4e8fdb 99.52%);
+      }
+      &.rank {
+        background: linear-gradient(90.88deg, #9134f7 10.44%, #8921c5 99.52%);
+      }
     }
-    &.rank {
-      background: linear-gradient(90.88deg, #9134f7 10.44%, #8921c5 99.52%);
+    &.color1 {
+      background: map-get($map: $gameItemTheme1, $key: 'big');
+    }
+    &.color2 {
+      background: map-get($map: $gameItemTheme2, $key: 'big');
+    }
+    &.color3 {
+      background: map-get($map: $gameItemTheme3, $key: 'big');
+    }
+    &.color4 {
+      background: map-get($map: $gameItemTheme4, $key: 'big');
+    }
+    &.color5 {
+      background: map-get($map: $gameItemTheme5, $key: 'big');
+    }
+    &.color6 {
+      background: map-get($map: $gameItemTheme6, $key: 'big');
+    }
+    &.color7 {
+      background: map-get($map: $gameItemTheme7, $key: 'big');
+    }
+    &.color8 {
+      background: map-get($map: $gameItemTheme8, $key: 'big');
+    }
+    &.color9 {
+      background: map-get($map: $gameItemTheme9, $key: 'big');
+    }
+    &.color10 {
+      background: map-get($map: $gameItemTheme10, $key: 'big');
+    }
+    &.color11 {
+      background: map-get($map: $gameItemTheme11, $key: 'big');
+    }
+    &.color12 {
+      background: map-get($map: $gameItemTheme12, $key: 'big');
+    }
+    &.color13 {
+      background: map-get($map: $gameItemTheme13, $key: 'big');
+    }
+    &.color14 {
+      background: map-get($map: $gameItemTheme14, $key: 'big');
+    }
+    &.color15 {
+      background: map-get($map: $gameItemTheme15, $key: 'big');
+    }
+    &.color16 {
+      background: map-get($map: $gameItemTheme16, $key: 'big');
     }
   }
 }
@@ -191,6 +411,9 @@
     .gameStatusLive {
       @include gameStatus;
       background: #ff007a;
+      &.profile {
+        background: #ffffff9b;
+      }
     }
     .gameStatusWait {
       @include gameStatus;
@@ -209,6 +432,10 @@
       font-weight: 700;
       color: #8c28d9;
       background-color: #d4a3fb;
+      &.profile {
+        color: #0000004f;
+        background: #ffffff9b;
+      }
       &.both {
         color: #b94b80;
         background-color: #ffb1d9;

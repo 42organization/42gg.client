@@ -1,24 +1,39 @@
-import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
+import {
+  ModalButtonContainer,
+  ModalButton,
+} from 'components/modal/ModalButton';
 
 interface ButtonsProps {
   onCheck: boolean;
+  isLoading: boolean;
   onEnter: () => void;
   onReset: () => void;
   onSubmit: () => void;
 }
 
-export function Buttons({ onCheck, onEnter, onReset, onSubmit }: ButtonsProps) {
+export function Buttons({
+  onCheck,
+  isLoading,
+  onEnter,
+  onReset,
+  onSubmit,
+}: ButtonsProps) {
   return (
-    <div className={styles.buttons}>
+    <ModalButtonContainer>
       {onCheck ? (
         <>
-          <Button style={styles.negative} value='다시입력' onClick={onReset} />
-          <Button style={styles.positive} value='제출하기' onClick={onSubmit} />
+          <ModalButton style='negative' value='다시입력' onClick={onReset} />
+          <ModalButton
+            style='positive'
+            value='제출하기'
+            onClick={onSubmit}
+            isLoading={isLoading}
+          />
         </>
       ) : (
-        <Button style={styles.positive} value='확 인' onClick={onEnter} />
+        <ModalButton style='positive' value='확 인' onClick={onEnter} />
       )}
-    </div>
+    </ModalButtonContainer>
   );
 }
 
