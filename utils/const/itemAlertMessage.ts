@@ -14,8 +14,8 @@ export const ITEM_ALERT_MESSAGE = {
   MEGAPHONE: {
     SUCCESS: HAPPY_EMOJI + '확성기가 등록되었습니다.',
     TIME_ERROR: SAD_EMOJI + '23:55-00:05 사이에는 확성기 사용이 불가능합니다.',
-    FORMAT_ERROR:
-      SAD_EMOJI + '확성기에 등록할 수 있는 글자수는 1 이상 30 이하입니다.',
+    FORMAT_ERROR: SAD_EMOJI + '확성기에는 30자 이하의 문장만 입력 가능합니다.',
+    NULL_ERROR: SAD_EMOJI + '입력된 내용이 없습니다.',
   },
   EDIT_MEGAPHONE: {
     SUCCESS: HAPPY_EMOJI + '확성기가 삭제되었습니다.',
