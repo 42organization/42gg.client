@@ -1,12 +1,20 @@
 import { useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
+import { IUpdate } from 'types/modalTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminDeleteItem.module.scss';
 
-export default function AdminDeleteItemModal(props: Item) {
-  const { itemId, itemName, mainContent, subContent } = props;
+export default function AdminDeleteItemModal({
+  item,
+  state,
+}: {
+  item: Item;
+  state: IUpdate;
+}) {
+  const { itemId, itemName, mainContent, subContent } = item;
+  const { setUpdate } = state;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
@@ -27,6 +35,7 @@ export default function AdminDeleteItemModal(props: Item) {
         clicked: true,
       });
     }
+    setUpdate(true);
     setModal({ modalName: null });
   };
 

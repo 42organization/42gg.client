@@ -1,6 +1,10 @@
 import { useSetRecoilState } from 'recoil';
 import { reloadMatchState } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
+import {
+  ModalButtonContainer,
+  ModalButton,
+} from 'components/modal/ModalButton';
 import styles from 'styles/modal/match/MatchRejectModal.module.scss';
 
 export default function MatchRejectModal() {
@@ -23,11 +27,9 @@ export default function MatchRejectModal() {
         <div className={styles.message}>{content.main}</div>
         <div className={styles.subContent}>{content.sub}</div>
       </div>
-      <div className={styles.buttons}>
-        <div className={styles.positive}>
-          <input onClick={onReturn} type='button' value='확 인' />
-        </div>
-      </div>
+      <ModalButtonContainer>
+        <ModalButton onClick={onReturn} style='positive' value='확 인' />
+      </ModalButtonContainer>
     </div>
   );
 }

@@ -374,26 +374,12 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
         #454147 100%
       );
     }
-    :hover {
-      background: linear-gradient(
-        to right bottom,
-        rgba(44, 41, 46, 0.52) 0%,
-        #454147 100%
-      );
-    }
   }
   .positive {
     input {
       cursor: pointer;
       background: linear-gradient(
         180deg,
-        #c66bf2 0%,
-        rgba(96, 6, 138, 0.52) 100%
-      );
-    }
-    :hover {
-      background: linear-gradient(
-        to right bottom,
         #c66bf2 0%,
         rgba(96, 6, 138, 0.52) 100%
       );

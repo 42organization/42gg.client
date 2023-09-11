@@ -79,10 +79,10 @@
     align-items: center;
   }
 }
-
-.modalbuttons {
-  @include select-buttons(9rem);
-}
+// NOTE : select-buttons 믹스인 삭제 여부 판단하기 위해 남겨둠.
+// .modalbuttons {
+//   @include select-buttons(9rem);
+// }
 
 .exp {
   display: flex;
