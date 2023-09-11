@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import BuyModal from 'components/modal/store/purchase/BuyModal';
+import GiftModal from 'components/modal/store/purchase/GiftModal';
 
-const meta: Meta<typeof BuyModal> = {
-  title: 'Modal/BuyModal',
-  component: BuyModal,
+const meta: Meta<typeof GiftModal> = {
+  title: 'store/Modal/GiftModal',
+  component: GiftModal,
   tags: ['autodocs'],
   argTypes: {},
 };
 
 export default meta;
-type Story = StoryObj<typeof BuyModal>;
+type Story = StoryObj<typeof GiftModal>;
 
 export const Default: Story = {
   args: {
