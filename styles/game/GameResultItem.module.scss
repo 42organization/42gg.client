@@ -106,7 +106,8 @@ $gameItemTheme16: map-get(
 @mixin itemBackgroud($type) {
   @if ($type == 'SMALL') {
     &.light {
-      &.main {
+      &.main,
+      &.basic {
         background: linear-gradient(0deg, #9134f7, #9134f7);
       }
       &.game {
@@ -170,7 +171,8 @@ $gameItemTheme16: map-get(
       }
     }
     &.dark {
-      &.main {
+      &.main,
+      &.basic {
         background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
       }
       &.both {
@@ -233,7 +235,8 @@ $gameItemTheme16: map-get(
     }
   } @else {
     // BIG
-    &.main {
+    &.main,
+    &.basic {
       background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
     }
     &.game {
