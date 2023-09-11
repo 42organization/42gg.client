@@ -8,9 +8,13 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { Ireceipt, IreceiptTable } from 'types/admin/adminReceiptType';
+import {
+  Ireceipt,
+  IreceiptTable,
+  itemStatusType,
+} from 'types/admin/adminReceiptType';
+import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
-import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import AdminSearchBar from 'components/admin/common/AdminSearchBar';
@@ -26,9 +30,9 @@ const tableTitle: { [key: string]: string } = {
   createdAt: '구매 시간',
   itemName: '아이템 이름',
   itemPrice: '구매 가격',
-  purchaserIntra: '구매자',
-  ownerIntra: '수령자',
-  itemStatus: '상태',
+  purchaserIntraId: '구매한 사람',
+  ownerIntraId: '받은 사람',
+  itemStatusType: '상태',
 };
 
 function ReceiptList() {
@@ -41,7 +45,14 @@ function ReceiptList() {
   const [intraId, setIntraId] = useState<string>('');
   const setSnackBar = useSetRecoilState(toastState);
 
-  // 특정 유저 확성기 사용내역만 가져오는 api 추가되면 handler 추가 + 유저 검색 컴포넌트 추가
+  const itemStatus: Record<itemStatusType, string> = {
+    BEFORE: '사용 전',
+    WAITING: '사용 대기',
+    USING: '사용 중',
+    USED: '사용 완료',
+    DELETED: '삭제',
+  };
+
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
     setCurrentPage(1);
@@ -49,8 +60,8 @@ function ReceiptList() {
 
   const getUserReceiptHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/receipt/?intraId=${intraId}&page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/receipt?intraId=${intraId}&page=${currentPage}&size=10`
       );
       setReceiptData({
         receiptList: res.data.receiptList.map((receipt: Ireceipt) => {
@@ -72,11 +83,10 @@ function ReceiptList() {
     }
   }, [intraId, currentPage]);
 
-  // instanceInManage로 변경
   const getAllReceiptHandler = useCallback(async () => {
     try {
-      const res = await mockInstance.get(
-        `/admin/receipt/?page=${currentPage}&size=10`
+      const res = await instanceInManage.get(
+        `/receipt?&page=${currentPage}&size=10`
       );
       setReceiptData({
         receiptList: res.data.receiptList.map((receipt: Ireceipt) => {
@@ -103,8 +113,9 @@ function ReceiptList() {
   }, [intraId, getUserReceiptHandler, getAllReceiptHandler]);
 
   return (
-    <>
-      <div className={styles.searchWrap}>
+    <div className={styles.receiptListWrap}>
+      <div className={styles.header}>
+        <span className={styles.title}>구매내역 관리</span>
         <AdminSearchBar initSearch={initSearch} />
       </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
@@ -118,7 +129,12 @@ function ReceiptList() {
                     (columnName: string, index: number) => {
                       return (
                         <TableCell className={styles.tableBodyItem} key={index}>
-                          {receipt[columnName as keyof Ireceipt].toString()}
+                          {columnName === 'itemStatusType'
+                            ? itemStatus[receipt['itemStatusType']]
+                            : columnName === 'ownerIntraId' &&
+                              receipt.purchaserIntraId === receipt.ownerIntraId
+                            ? ''
+                            : receipt[columnName as keyof Ireceipt].toString()}
                         </TableCell>
                       );
                     }
@@ -140,7 +156,7 @@ function ReceiptList() {
           }}
         />
       </div>
-    </>
+    </div>
   );
 }
 

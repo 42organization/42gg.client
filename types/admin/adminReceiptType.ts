@@ -3,10 +3,17 @@ export interface Ireceipt {
   createdAt: Date;
   itemName: string;
   itemPrice: number;
-  purchaserIntra: string;
-  ownerIntra: string;
-  itemStatus: string;
+  purchaserIntraId: string;
+  ownerIntraId: string;
+  itemStatusType: 'BEFORE' | 'WAITING' | 'USING' | 'USED' | 'DELETED';
 }
+
+export type itemStatusType =
+  | 'BEFORE'
+  | 'WAITING'
+  | 'USING'
+  | 'USED'
+  | 'DELETED';
 
 export interface IreceiptTable {
   receiptList: Array<Ireceipt>;
@@ -18,7 +25,7 @@ export interface Imegaphone {
   megaphoneId: number;
   content: string;
   usedAt: Date;
-  status: string;
+  status: '사용 전' | '사용 대기' | '사용 중' | '사용 완료' | '삭제';
   intraId: string;
 }
 

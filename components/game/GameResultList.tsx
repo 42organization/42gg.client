@@ -20,7 +20,8 @@ export default function GameResultList({
   const { data, status, fetchNextPage, isLast, clickedGameItem, pathName } =
     useGameResultList(path);
 
-  const isGamePage = pathName === '/game';
+  const page =
+    pathName === '/' ? 'main' : pathName === '/game' ? 'game' : 'profile';
 
   if (status === 'loading') return <GameResultEmptyItem status={status} />;
 
@@ -39,22 +40,24 @@ export default function GameResultList({
                   <GameResultBigItem
                     key={game.gameId}
                     game={game}
-                    zIndexList={!isGamePage}
+                    zIndexList={page !== 'game'}
                     radioMode={radioMode}
+                    page={page}
                   />
                 ) : (
                   <GameResultSmallItem
                     key={game.gameId}
                     type={type}
                     game={game}
-                    zIndexList={!isGamePage}
+                    zIndexList={page !== 'game'}
                     radioMode={radioMode}
+                    page={page}
                   />
                 );
               })}
             </React.Fragment>
           ))}
-          {isGamePage && !isLast && (
+          {page === 'game' && !isLast && (
             <button
               className={styles['getButton']}
               onClick={() => fetchNextPage()}

@@ -1,19 +1,21 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { CoinResult } from 'types/coinTypes';
 import { Modal } from 'types/modalTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import CoinPopcon from 'components/modal/CoinPopcon';
+import {
+  ModalButtonContainer,
+  ModalButton,
+} from 'components/modal/ModalButton';
 import styles from 'styles/modal/event/WelcomeModal.module.scss';
 
 export default function WelcomeModal() {
   const setModal = useSetRecoilState<Modal>(modalState);
-  const [coin, setCoin] = useState<CoinResult>();
   const setError = useSetRecoilState(errorState);
   const [buttonState, setButtonState] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   const content = {
     title: 'Welcome!',
     message:
@@ -22,11 +24,17 @@ export default function WelcomeModal() {
 
   const postCoinHandler = async () => {
     try {
+      setIsLoading(true);
       const res = await instance.post(`/pingpong/users/attendance`);
-      setCoin(res.data);
       return res.data;
-    } catch (error) {
+    } catch (e: any) {
+      if (e.response.status === 400) {
+        alert('출석은 하루에 한 번만 가능합니다.');
+        return;
+      }
       setError('SM01');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -39,21 +47,20 @@ export default function WelcomeModal() {
   const openAttendanceCoin = async () => {
     try {
       setButtonState(true);
-      const updatedCoin = await postCoinHandler();
-
-      if (!updatedCoin) return null;
-
+      const updatedcoin = await postCoinHandler();
+      if (updatedcoin == null) return;
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {
           isAttended: true,
-          afterCoin: updatedCoin.afterCoin,
-          beforeCoin: updatedCoin.beforeCoin,
-          coinIncrement: updatedCoin.coinIncrement,
+          afterCoin: updatedcoin.afterCoin,
+          beforeCoin: updatedcoin.beforeCoin,
+          coinIncrement: updatedcoin.coinIncrement,
         },
       });
     } catch (error) {
       setError('SM02');
+      return;
     }
   };
 
@@ -69,19 +76,20 @@ export default function WelcomeModal() {
             <span>{`)->->--`}</span>
           </div>
         </div>
-        <div className={styles.buttons}>
-          <div className={styles.negative}>
-            <input onClick={openPageManual} type='button' value='페이지 소개' />
-          </div>
-          <div className={styles.positive}>
-            <input
-              onClick={openAttendanceCoin}
-              type='button'
-              value='출석하기'
-            />
-            {buttonState && <CoinPopcon amount={8} coin={1} />}
-          </div>
-        </div>
+        <ModalButtonContainer>
+          <ModalButton
+            style='negative'
+            onClick={openPageManual}
+            value='페이지 소개'
+          />
+          <ModalButton
+            style='positive'
+            onClick={openAttendanceCoin}
+            value='출석하기'
+            isLoading={isLoading}
+          />
+          {buttonState && <CoinPopcon amount={8} coin={1} />}
+        </ModalButtonContainer>
       </div>
     </div>
   );
