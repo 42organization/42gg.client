@@ -8,7 +8,11 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { Ireceipt, IreceiptTable } from 'types/admin/adminReceiptType';
+import {
+  Ireceipt,
+  IreceiptTable,
+  itemStatusType,
+} from 'types/admin/adminReceiptType';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
@@ -41,7 +45,7 @@ function ReceiptList() {
   const [intraId, setIntraId] = useState<string>('');
   const setSnackBar = useSetRecoilState(toastState);
 
-  const itemStatus: { [key: string]: string } = {
+  const itemStatus: Record<itemStatusType, string> = {
     BEFORE: '사용 전',
     WAITING: '사용 대기',
     USING: '사용 중',

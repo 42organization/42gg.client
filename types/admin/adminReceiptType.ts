@@ -8,6 +8,13 @@ export interface Ireceipt {
   itemStatusType: 'BEFORE' | 'WAITING' | 'USING' | 'USED' | 'DELETED';
 }
 
+export type itemStatusType =
+  | 'BEFORE'
+  | 'WAITING'
+  | 'USING'
+  | 'USED'
+  | 'DELETED';
+
 export interface IreceiptTable {
   receiptList: Array<Ireceipt>;
   totalPage: number;
