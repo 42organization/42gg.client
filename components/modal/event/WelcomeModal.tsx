@@ -6,6 +6,10 @@ import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import CoinPopcon from 'components/modal/CoinPopcon';
+import {
+  ModalButtonContainer,
+  ModalButton,
+} from 'components/modal/ModalButton';
 import styles from 'styles/modal/event/WelcomeModal.module.scss';
 
 export default function WelcomeModal() {
@@ -13,6 +17,7 @@ export default function WelcomeModal() {
   const [coin, setCoin] = useState<CoinResult>();
   const setError = useSetRecoilState(errorState);
   const [buttonState, setButtonState] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const content = {
     title: 'Welcome!',
@@ -22,11 +27,14 @@ export default function WelcomeModal() {
 
   const postCoinHandler = async () => {
     try {
+      setIsLoading(true);
       const res = await instance.post(`/pingpong/users/attendance`);
       setCoin(res.data);
       return res.data;
     } catch (error) {
       setError('SM01');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -69,19 +77,20 @@ export default function WelcomeModal() {
             <span>{`)->->--`}</span>
           </div>
         </div>
-        <div className={styles.buttons}>
-          <div className={styles.negative}>
-            <input onClick={openPageManual} type='button' value='페이지 소개' />
-          </div>
-          <div className={styles.positive}>
-            <input
-              onClick={openAttendanceCoin}
-              type='button'
-              value='출석하기'
-            />
-            {buttonState && <CoinPopcon amount={8} coin={1} />}
-          </div>
-        </div>
+        <ModalButtonContainer>
+          <ModalButton
+            style='negative'
+            onClick={openPageManual}
+            value='페이지 소개'
+          />
+          <ModalButton
+            style='positive'
+            onClick={openAttendanceCoin}
+            value='출석하기'
+            isLoading={isLoading}
+          />
+          {buttonState && <CoinPopcon amount={8} coin={1} />}
+        </ModalButtonContainer>
       </div>
     </div>
   );

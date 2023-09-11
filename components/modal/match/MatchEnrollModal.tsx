@@ -1,13 +1,26 @@
+import { useState } from 'react';
 import { Enroll } from 'types/modalTypes';
 import { gameTimeToString } from 'utils/handleTime';
+import {
+  ModalButtonContainer,
+  ModalButton,
+} from 'components/modal/ModalButton';
 import useMatchEnrollModal from 'hooks/modal/match/useMatchEnrollModal';
 import styles from 'styles/modal/match/MatchEnrollModal.module.scss';
 
 export default function MatchEnrollModal({ startTime, endTime, mode }: Enroll) {
+  const [isLoading, setIsLoading] = useState(false);
   const { onEnroll, onCancel } = useMatchEnrollModal({
     startTime,
     mode,
   });
+
+  const handleEnroll = () => {
+    setIsLoading(true);
+    onEnroll().finally(() => {
+      setIsLoading(false);
+    });
+  };
 
   return (
     <div className={styles.container}>
@@ -26,14 +39,15 @@ export default function MatchEnrollModal({ startTime, endTime, mode }: Enroll) {
           경기에 참여하시겠습니까?
         </div>
       </div>
-      <div className={styles.buttons}>
-        <div className={styles.negative}>
-          <input onClick={onCancel} type='button' value='취소' />
-        </div>
-        <div className={styles.positive}>
-          <input onClick={onEnroll} type='button' value='확인' />
-        </div>
-      </div>
+      <ModalButtonContainer>
+        <ModalButton onClick={onCancel} style='negative' value='취소' />
+        <ModalButton
+          onClick={handleEnroll}
+          style='positive'
+          value='확인'
+          isLoading={isLoading}
+        />
+      </ModalButtonContainer>
     </div>
   );
 }
