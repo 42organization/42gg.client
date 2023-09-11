@@ -22,53 +22,10 @@
     width: 90%;
     height: 75%;
     margin-left: 5%;
-    &.color1 {
-      background: map-get($map: $bg-tranquil, $key: 'background');
-    }
-    &.color2 {
-      background: map-get($map: $bg-windy, $key: 'background');
-    }
-    &.color3 {
-      background: map-get($map: $bg-bupe, $key: 'background');
-    }
-    &.color4 {
-      background: map-get($map: $bg-mango, $key: 'background');
-    }
-    &.color5 {
-      background: map-get($map: $bg-misty-meadow, $key: 'background');
-    }
-    &.color6 {
-      background: map-get($map: $bg-opa, $key: 'background');
-    }
-    &.color7 {
-      background: map-get($map: $bg-dracula, $key: 'background');
-    }
-    &.color8 {
-      background: map-get($map: $bg-sea-blizz, $key: 'background');
-    }
-    &.color9 {
-      background: map-get($map: $bg-mystic, $key: 'background');
-    }
-    &.color10 {
-      background: map-get($map: $bg-strain, $key: 'background');
-    }
-    &.color11 {
-      background: map-get($map: $bg-cool-sky, $key: 'background');
-    }
-    &.color12 {
-      background: map-get($map: $bg-jodhpur, $key: 'background');
-    }
-    &.color13 {
-      background: map-get($map: $bg-hazel, $key: 'background');
-    }
-    &.color14 {
-      background: map-get($map: $bg-radar, $key: 'background');
-    }
-    &.color15 {
-      background: map-get($map: $bg-royal-blue, $key: 'background');
-    }
-    &.color16 {
-      background: map-get($map: $bg-megatron, $key: 'background');
+    @each $theme, $color in $bg-theme-colors {
+      &.#{$theme} {
+        background: map-get($map: $color, $key: 'background');
+      }
     }
   }
 }
