@@ -35,9 +35,7 @@ export default function CoinChangeModal(coin: CoinResult) {
         <div className={styles.coinStat}>
           <CoinStat before={coin?.beforeCoin} after={coin?.afterCoin} />
           {coin.coinIncrement === 0 && (
-            <div className={`${styles.appear}`}>
-              획득한 코인이 없습니다.ㅜㅜ
-            </div>
+            <div className={`${styles.appear}`}>획득한 코인이 없습니다. 😢</div>
           )}
         </div>
         <CoinAnimation amount={coin?.coinIncrement} />
