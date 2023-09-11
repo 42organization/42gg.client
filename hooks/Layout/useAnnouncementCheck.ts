@@ -8,7 +8,9 @@ import useAxiosGet from 'hooks/useAxiosGet';
 const useAnnouncementCheck = (presentPath: string, user: User) => {
   const setModal = useSetRecoilState<Modal>(modalState);
   const announcementTime: string | null =
-    localStorage.getItem('announcementTime');
+    typeof window !== 'undefined'
+      ? localStorage.getItem('announcementTime')
+      : null;
 
   const getAnnouncementHandler = useAxiosGet<any>({
     url: '/pingpong/announcement',
