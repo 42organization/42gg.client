@@ -357,14 +357,13 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 
 @mixin txtColor($color: black) {
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 0.2px $color;
 }
 
 @mixin tierNumber() {
-  font-family: Gugi;
-  font-size: 0.8rem;
+  font-family: Jua;
   background: black;
   @include txtColor();
   &.red {
