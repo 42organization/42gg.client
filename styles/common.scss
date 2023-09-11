@@ -405,7 +405,7 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  -webkit-text-stroke: 1px $color;
+  -webkit-text-stroke: 0.2px $color;
 }
 
 @mixin tierNumber() {
@@ -417,11 +417,11 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
     background-image: linear-gradient(to right, #f77062 0%, #fe5196 100%);
     @include txtColor(#fe5196);
   }
-  &.yellow {
+  &.green {
     background-image: linear-gradient(to right, #f6d365 0%, #fda085 100%);
     @include txtColor(#f6d365);
   }
-  &.green {
+  &.greenm {
     background-image: linear-gradient(135deg, #81fbb8 10%, #28c76f 100%);
     @include txtColor(#28c76f);
   }

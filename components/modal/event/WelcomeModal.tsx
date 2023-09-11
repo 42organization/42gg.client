@@ -23,7 +23,7 @@ export default function WelcomeModal() {
       return res.data;
     } catch (e: any) {
       if (e.response.status === 400) {
-        alert('현재 출석완료상태입니다.');
+        alert('출석은 하루에 한 번만 가능합니다.');
         return;
       }
       setError('SM01');
