@@ -13,7 +13,7 @@ const receipt1: Ireceipt = {
   itemPrice: 42,
   purchaserIntraId: 'hyungjpa',
   ownerIntraId: 'hyungjpa',
-  itemStatusType: '사용 전',
+  itemStatusType: 'BEFORE',
 };
 
 const receipt2: Ireceipt = {
@@ -23,7 +23,7 @@ const receipt2: Ireceipt = {
   itemPrice: 21,
   purchaserIntraId: 'jeyoon',
   ownerIntraId: 'hyobicho',
-  itemStatusType: '사용 완료',
+  itemStatusType: 'USED',
 };
 
 const receipt3: Ireceipt = {
@@ -33,7 +33,7 @@ const receipt3: Ireceipt = {
   itemPrice: 10,
   purchaserIntraId: 'sangmipa',
   ownerIntraId: 'jeyoon',
-  itemStatusType: '사용 완료',
+  itemStatusType: 'USED',
 };
 
 const receipt4: Ireceipt = {
@@ -43,7 +43,7 @@ const receipt4: Ireceipt = {
   itemPrice: 42,
   purchaserIntraId: 'hyobicho',
   ownerIntraId: 'sangmipa',
-  itemStatusType: '사용 전',
+  itemStatusType: 'BEFORE',
 };
 
 const receipt5: Ireceipt = {
@@ -53,7 +53,7 @@ const receipt5: Ireceipt = {
   itemPrice: 21,
   purchaserIntraId: 'jeyoon',
   ownerIntraId: 'hyungjpa',
-  itemStatusType: '사용 완료',
+  itemStatusType: 'USED',
 };
 
 const receipt6: Ireceipt = {
@@ -63,7 +63,7 @@ const receipt6: Ireceipt = {
   itemPrice: 10,
   purchaserIntraId: 'hyungjpa',
   ownerIntraId: 'hyobicho',
-  itemStatusType: '사용 완료',
+  itemStatusType: 'USED',
 };
 
 const receipt7: Ireceipt = {
@@ -73,7 +73,7 @@ const receipt7: Ireceipt = {
   itemPrice: 42,
   purchaserIntraId: 'hyobicho',
   ownerIntraId: 'jeyoon',
-  itemStatusType: '사용 전',
+  itemStatusType: 'BEFORE',
 };
 
 const receipt8: Ireceipt = {
@@ -83,7 +83,7 @@ const receipt8: Ireceipt = {
   itemPrice: 21,
   purchaserIntraId: 'sangmipa',
   ownerIntraId: 'sangmipa',
-  itemStatusType: '사용 완료',
+  itemStatusType: 'USED',
 };
 
 const receipt9: Ireceipt = {
@@ -93,7 +93,7 @@ const receipt9: Ireceipt = {
   itemPrice: 10,
   purchaserIntraId: 'jeyoon',
   ownerIntraId: 'hyungjpa',
-  itemStatusType: '사용 완료',
+  itemStatusType: 'USED',
 };
 
 const receipt10: Ireceipt = {
@@ -103,7 +103,7 @@ const receipt10: Ireceipt = {
   itemPrice: 10,
   purchaserIntraId: 'sangmipa',
   ownerIntraId: 'hyungjpa',
-  itemStatusType: '사용 완료',
+  itemStatusType: 'USED',
 };
 
 const receiptList: Array<Ireceipt> = [
