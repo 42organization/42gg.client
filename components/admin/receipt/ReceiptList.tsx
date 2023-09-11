@@ -130,7 +130,7 @@ function ReceiptList() {
                       return (
                         <TableCell className={styles.tableBodyItem} key={index}>
                           {columnName === 'itemStatusType'
-                            ? itemStatus[receipt['itemStatusType'].toString()]
+                            ? itemStatus[receipt['itemStatusType']]
                             : columnName === 'ownerIntraId' &&
                               receipt.purchaserIntraId === receipt.ownerIntraId
                             ? ''
