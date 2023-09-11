@@ -140,7 +140,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (method === 'GET') {
     if (intraId) {
       resData.profileList = temp.profileList.filter(
-        (profile: Iprofile) => profile.intraId === intraId
+        (profile: Iprofile) => profile.userIntraId === intraId
       );
       resData.totalPage = 1;
     } else {
