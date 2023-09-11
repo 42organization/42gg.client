@@ -1,5 +1,5 @@
-const SAD_EMOJI = '(｡•́︿•̀｡)' + '\n';
-const HAPPY_EMOJI = '(｡•̀ᴗ-)✧' + '\n';
+const SAD_EMOJI = '(｡•́︿•̀｡)' + ' ';
+const HAPPY_EMOJI = '(｡•̀ᴗ-)✧' + ' ';
 
 export const ITEM_ALERT_MESSAGE = {
   COMMON: {
