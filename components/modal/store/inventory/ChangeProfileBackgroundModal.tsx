@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { Modal } from 'types/modalTypes';
-import { instance } from 'utils/axios';
+import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import {
@@ -20,6 +20,24 @@ const caution = [
   '아이템을 사용한 후에는 취소가 불가능합니다.',
 ];
 
+const errorCode = ['IT200', 'RC200', 'RC100', 'RC403', 'UR100'] as const;
+
+type errorCodeType = (typeof errorCode)[number];
+
+type errorPayload = {
+  status: number;
+  message: string;
+  code: errorCodeType;
+};
+
+const errorMessages: Record<errorCodeType, string> = {
+  IT200: '사용할 수 없는 아이템입니다 (｡•́︿•̀｡)',
+  RC200: '이미 사용한 아이템입니다 (｡•́︿•̀｡)',
+  RC100: '사용할 수 없는 아이템입니다 (｡•́︿•̀｡)',
+  RC403: '사용할 수 없는 아이템입니다 (｡•́︿•̀｡)',
+  UR100: 'USER NOT FOUND',
+};
+
 export default function ChangeProfileBackgroundModal({
   receiptId,
 }: ChangeProfileBackgroundModalProps) {
@@ -29,25 +47,36 @@ export default function ChangeProfileBackgroundModal({
   const setError = useSetRecoilState<string>(errorState);
 
   const gachaAction = async () => {
-    setIsLoading(true);
     const data: UseItemRequest = {
       receiptId: receiptId,
     };
+    const ret = confirm(
+      `정말로 사용하시겠습니까?\n(뽑은 색상은 바로 적용되며 되돌릴 수 없습니다.)`
+    );
+    if (!ret) return;
+    setIsLoading(true);
     try {
       const res = await instance.patch('/pingpong/users/background', data);
+      setIsLoading(false);
       setModal({
         modalName: 'USE-ITEM-GACHA',
         randomItem: {
           item: 'BACKGROUND',
-          color: res.data.background,
+          color: res.data.background ? res.data.background : 'BASIC',
         },
       });
+    } catch (error: unknown) {
       setIsLoading(false);
-    } catch (error) {
-      // TODO: 에러 코드 확인 후 수정
-      alert('뽑기에 실패했습니다(˃̣̣̥ᴖ˂̣̣̥) 관리자에게 문의해주세요');
-      setIsLoading(false);
-      setError('HB05');
+      if (isAxiosError<errorPayload>(error) && error.response) {
+        const { code } = error.response.data;
+        if (errorCode.includes(code) && code !== 'UR100') {
+          alert(errorMessages[code]);
+        } else {
+          setError('HB04');
+        }
+      } else {
+        setError('HB04');
+      }
       resetModal();
     }
   };
