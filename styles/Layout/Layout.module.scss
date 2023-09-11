@@ -30,52 +30,52 @@
     background: $bg-basic;
   }
   &.color1 {
-    background: map-get($map: $bg-pink-orange, $key: 'background');
+    background: map-get($map: $bg-tranquil, $key: 'background');
   }
   &.color2 {
-    background: map-get($map: $bg-blue-green, $key: 'background');
+    background: map-get($map: $bg-windy, $key: 'background');
   }
   &.color3 {
-    background: map-get($map: $bg-midnight, $key: 'background');
+    background: map-get($map: $bg-bupe, $key: 'background');
   }
   &.color4 {
-    background: map-get($map: $bg-orange, $key: 'background');
+    background: map-get($map: $bg-mango, $key: 'background');
   }
   &.color5 {
-    background: map-get($map: $bg-grass-green, $key: 'background');
+    background: map-get($map: $bg-misty-meadow, $key: 'background');
   }
   &.color6 {
-    background: map-get($map: $bg-lemon-blue, $key: 'background');
+    background: map-get($map: $bg-opa, $key: 'background');
   }
   &.color7 {
     background: map-get($map: $bg-dracula, $key: 'background');
   }
   &.color8 {
-    background: map-get($map: $bg-mint-green, $key: 'background');
+    background: map-get($map: $bg-sea-blizz, $key: 'background');
   }
   &.color9 {
-    background: map-get($map: $bg-steel-gray, $key: 'background');
+    background: map-get($map: $bg-mystic, $key: 'background');
   }
   &.color10 {
-    background: map-get($map: $bg-blood-red, $key: 'background');
+    background: map-get($map: $bg-strain, $key: 'background');
   }
   &.color11 {
-    background: map-get($map: $bg-blue-sky, $key: 'background');
+    background: map-get($map: $bg-cool-sky, $key: 'background');
   }
   &.color12 {
-    background: map-get($map: $bg-ocean-blue, $key: 'background');
+    background: map-get($map: $bg-jodhpur, $key: 'background');
   }
   &.color13 {
-    background: map-get($map: $bg-pink-blue, $key: 'background');
+    background: map-get($map: $bg-hazel, $key: 'background');
   }
   &.color14 {
-    background: map-get($map: $bg-sunset-pink, $key: 'background');
+    background: map-get($map: $bg-radar, $key: 'background');
   }
   &.color15 {
-    background: map-get($map: $bg-dark-navy, $key: 'background');
+    background: map-get($map: $bg-royal-blue, $key: 'background');
   }
   &.color16 {
-    background: map-get($map: $bg-orange-green, $key: 'background');
+    background: map-get($map: $bg-megatron, $key: 'background');
   }
 }
 
