@@ -38,6 +38,10 @@
   }
 }
 
+$gameItemThemeBasic: map-get(
+  $map: $bg-basic,
+  $key: 'profile-game-result',
+);
 $gameItemTheme1: map-get(
   $map: $bg-tranquil,
   $key: 'profile-game-result',
@@ -104,6 +108,7 @@ $gameItemTheme16: map-get(
 );
 
 $gameItemThemes: (
+  'basic': $gameItemThemeBasic,
   'color1': $gameItemTheme1,
   'color2': $gameItemTheme2,
   'color3': $gameItemTheme3,
@@ -125,8 +130,7 @@ $gameItemThemes: (
 @mixin itemBackgroud($type) {
   @if ($type == 'SMALL') {
     &.light {
-      &.main,
-      &.basic {
+      &.main {
         background: linear-gradient(0deg, #9134f7, #9134f7);
       }
       &.game {
@@ -147,8 +151,7 @@ $gameItemThemes: (
       }
     }
     &.dark {
-      &.main,
-      &.basic {
+      &.main {
         background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
       }
       &.both {
@@ -168,8 +171,7 @@ $gameItemThemes: (
     }
   } @else {
     // BIG
-    &.main,
-    &.basic {
+    &.main {
       background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
     }
     &.game {

@@ -127,7 +127,18 @@ $bg-megatron: (
   ),
 );
 
+$bg-basic: (
+  'background':
+    linear-gradient(180deg, #301451 23.82%, #481570 58.85%, #300e4b 98.44%),
+  'profile-game-result': (
+    'light': linear-gradient(0deg, #9134f7, #9134f7),
+    'dark': linear-gradient(180deg, #631db2 0%, #6a0db3 100%),
+    'big': linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%),
+  ),
+);
+
 $bg-theme-colors: (
+  basic: $bg-basic,
   color1: $bg-tranquil,
   color2: $bg-windy,
   color3: $bg-bupe,

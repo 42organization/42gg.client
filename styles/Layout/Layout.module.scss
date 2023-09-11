@@ -26,9 +26,6 @@
   &.normal {
     background: $vip-background;
   }
-  &.basic {
-    background: $bg-basic;
-  }
   @each $theme, $color in $bg-theme-colors {
     &.#{$theme} {
       background: map-get($map: $color, $key: 'background');
