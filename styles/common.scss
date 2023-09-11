@@ -417,11 +417,11 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
     background-image: linear-gradient(to right, #f77062 0%, #fe5196 100%);
     @include txtColor(#fe5196);
   }
-  &.green {
+  &.yellow {
     background-image: linear-gradient(to right, #f6d365 0%, #fda085 100%);
     @include txtColor(#f6d365);
   }
-  &.greenm {
+  &.green {
     background-image: linear-gradient(135deg, #81fbb8 10%, #28c76f 100%);
     @include txtColor(#28c76f);
   }
