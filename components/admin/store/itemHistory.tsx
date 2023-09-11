@@ -109,7 +109,7 @@ function ItemHistory() {
                                 src={
                                   itemHistory.imageUri
                                     ? itemHistory[columnName]
-                                    : '/public/image/fallBackSrc.jpeg'
+                                    : '/image/fallBackSrc.jpeg'
                                 }
                                 width={30}
                                 height={30}

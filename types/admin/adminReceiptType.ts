@@ -34,7 +34,8 @@ export interface Iprofile {
   userId: string;
   userIntraId: string;
   imageUri: string;
-  isDeleted: boolean;
+  deletedAt: Date;
+  isCurrent: boolean;
 }
 
 export interface IprofileTable {

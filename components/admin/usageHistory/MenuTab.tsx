@@ -19,11 +19,11 @@ function MenuTab() {
     },
     {
       contentId: 2,
-      contentName: '현재 프로필 이미지 삭제',
+      contentName: '현재 프로필 조회',
     },
     {
       contentId: 3,
-      contentName: '프로필 이미지 삭제 내역',
+      contentName: '프로필 삭제 내역',
     },
   ];
 

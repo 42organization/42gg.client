@@ -24,10 +24,10 @@ import styles from 'styles/admin/usageHistory/ProfileList.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: 'ID',
-  createdAt: '변경 시간',
+  createdAt: '사용 시간',
   userIntraId: 'Intra ID',
+  deletedAt: '삭제 시간',
   imageUri: '삭제된 프로필 이미지',
-  isDeleted: '삭제 여부',
 };
 
 function ProfileDeleteHistoryList() {
@@ -60,6 +60,9 @@ function ProfileDeleteHistoryList() {
           return {
             ...profile,
             createdAt: dateToStringShort(new Date(profile.createdAt)),
+            deletedAt: profile.deletedAt
+              ? dateToStringShort(new Date(profile.deletedAt))
+              : '',
           };
         }),
         totalPage: res.data.totalPage,
@@ -94,6 +97,9 @@ function ProfileDeleteHistoryList() {
           return {
             ...profile,
             createdAt: dateToStringShort(new Date(profile.createdAt)),
+            deletedAt: profile.deletedAt
+              ? dateToStringShort(new Date(profile.deletedAt))
+              : '',
           };
         }),
         totalPage: res.data.totalPage,

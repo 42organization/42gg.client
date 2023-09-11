@@ -27,9 +27,7 @@ const tableTitle: { [key: string]: string } = {
   id: 'ID',
   createdAt: '변경 시간',
   userIntraId: 'Intra ID',
-  imageUri: '변경된 프로필 이미지',
-  isDeleted: '삭제 여부',
-  delete: '삭제',
+  imageUri: '현재 프로필 이미지',
 };
 
 function ProfileListCurrent() {
@@ -55,13 +53,15 @@ function ProfileListCurrent() {
   const getUserProfileHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/users/images/${intraId}?page=${currentPage}&size=5`
+        `/users/images/current/${intraId}?page=${currentPage}&size=5`
       );
       setProfileData({
         profileList: res.data.userImageList.map((profile: Iprofile) => {
           return {
             ...profile,
-            createdAt: dateToStringShort(new Date(profile.createdAt)),
+            createdAt: profile.createdAt
+              ? dateToStringShort(new Date(profile.createdAt))
+              : '',
           };
         }),
         totalPage: res.data.totalPage,
@@ -89,13 +89,15 @@ function ProfileListCurrent() {
   const getAllProfileHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/users/images?page=${currentPage}&size=5`
+        `/users/images/current?page=${currentPage}&size=5`
       );
       setProfileData({
         profileList: res.data.userImageList.map((profile: Iprofile) => {
           return {
             ...profile,
-            createdAt: dateToStringShort(new Date(profile.createdAt)),
+            createdAt: profile.createdAt
+              ? dateToStringShort(new Date(profile.createdAt))
+              : '',
           };
         }),
         totalPage: res.data.totalPage,
@@ -110,13 +112,6 @@ function ProfileListCurrent() {
       });
     }
   }, [currentPage]);
-
-  const deleteProfile = (profile: Iprofile) => {
-    setModal({
-      modalName: 'ADMIN-PROFILE_DELETE',
-      profile: profile,
-    });
-  };
 
   useEffect(() => {
     intraId ? getUserProfileHandler() : getAllProfileHandler();
@@ -140,19 +135,15 @@ function ProfileListCurrent() {
                         <TableCell className={styles.tableBodyItem} key={index}>
                           {columnName === 'imageUri' ? (
                             <Image
-                              src={profile[columnName]}
+                              src={
+                                profile[columnName]
+                                  ? profile[columnName]
+                                  : '/image/fallBackSrc.jpeg'
+                              }
                               width={60}
                               height={60}
                               alt='ProfileImage'
                             />
-                          ) : columnName === 'delete' ? (
-                            <button
-                              className={styles.deleteBtn}
-                              onClick={() => deleteProfile(profile)}
-                              disabled={profile.isDeleted}
-                            >
-                              삭제
-                            </button>
                           ) : (
                             profile[columnName as keyof Iprofile].toString()
                           )}

@@ -25,10 +25,12 @@ import styles from 'styles/admin/usageHistory/ProfileList.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: 'ID',
-  createdAt: '변경 시간',
+  createdAt: '사용 시간',
   userIntraId: 'Intra ID',
   imageUri: '변경된 프로필 이미지',
-  isDeleted: '삭제 여부',
+  deletedAt: '삭제 시간',
+  delete: '삭제',
+  isCurrent: '비고',
 };
 
 function ProfileList() {
@@ -61,6 +63,9 @@ function ProfileList() {
           return {
             ...profile,
             createdAt: dateToStringShort(new Date(profile.createdAt)),
+            deletedAt: profile.deletedAt
+              ? dateToStringShort(new Date(profile.deletedAt))
+              : '',
           };
         }),
         totalPage: res.data.totalPage,
@@ -87,7 +92,6 @@ function ProfileList() {
 
   const getAllProfileHandler = useCallback(async () => {
     try {
-      // users/images/current 로 변경
       const res = await instanceInManage.get(
         `/users/images?page=${currentPage}&size=5`
       );
@@ -96,6 +100,9 @@ function ProfileList() {
           return {
             ...profile,
             createdAt: dateToStringShort(new Date(profile.createdAt)),
+            deletedAt: profile.deletedAt
+              ? dateToStringShort(new Date(profile.deletedAt))
+              : '',
           };
         }),
         totalPage: res.data.totalPage,
@@ -145,8 +152,22 @@ function ProfileList() {
                               height={60}
                               alt='ProfileImage'
                             />
+                          ) : columnName === 'delete' ? (
+                            <button
+                              className={styles.deleteBtn}
+                              onClick={() => deleteProfile(profile)}
+                              disabled={!profile.isCurrent}
+                            >
+                              삭제
+                            </button>
+                          ) : columnName === 'isCurrent' ? (
+                            profile[columnName as keyof Iprofile] ? (
+                              '현재 적용 중'
+                            ) : (
+                              ''
+                            )
                           ) : (
-                            profile[columnName as keyof Iprofile].toString()
+                            profile[columnName as keyof Iprofile]?.toString()
                           )}
                         </TableCell>
                       );
