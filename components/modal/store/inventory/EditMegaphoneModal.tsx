@@ -58,6 +58,8 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
     err: 'JY05',
     type: 'setError',
   });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   useEffect(() => {
     getMegaphoneData();
   }, []);
@@ -67,6 +69,7 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
       '확성기를 삭제하시겠습니까?\n삭제한 확성기는 다시 복구할 수 없습니다.'
     );
     if (!confirm) return;
+    setIsLoading(true);
     instance
       .delete(`/pingpong/megaphones/${megaphoneData.megaphoneId}`)
       .then(() => {
@@ -81,6 +84,7 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
         } else setError('JY07');
       })
       .finally(() => {
+        setIsLoading(false);
         resetModal();
       });
   }
@@ -109,6 +113,7 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
             style='positive'
             value='삭제하기'
             onClick={() => handleDeleteMegaphone()}
+            isLoading={isLoading}
           />
         </ModalButtonContainer>
       </div>

@@ -52,9 +52,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     <div className={styles.appContainer}>
       <div
         className={`${styles.background} ${
-          colorMode !== undefined
-            ? styles[colorMode.toLowerCase()]
-            : styles.basic
+          colorMode ? styles[colorMode.toLowerCase()] : styles.basic
         } `}
       >
         <div>

@@ -8,7 +8,7 @@ export default function NoCoinModal() {
     <div className={styles.container}>
       <div className={styles.phrase}>
         <div className={styles.emoji}>😥</div>
-        <div className={styles.message}>보유 코인이 부족합니다</div>
+        <div className={styles.message}>GG코인이 부족합니다</div>
         <div className={styles.details}>
           💸게임에 참여하여 코인을 획득해보세요💸
         </div>

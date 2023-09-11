@@ -30,8 +30,8 @@ export interface Rank {
 
 export interface userImages {
   intraId: string;
-  userImageUri: string;
-  tierImageUri: string;
+  imageUri: string;
+  tierImage: string;
   edge: string;
 }
 

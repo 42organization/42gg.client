@@ -10,6 +10,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { Item, ItemList } from 'types/itemTypes';
+import { IUpdate } from 'types/modalTypes';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
@@ -33,7 +34,7 @@ const tableTitle: { [key: string]: string } = {
   delete: '삭제',
 };
 
-function ItemList() {
+function ItemList({ update, setUpdate }: IUpdate) {
   const [itemListData, setItemListData] = useState<ItemList>({
     itemList: [],
   });
@@ -58,6 +59,7 @@ function ItemList() {
     setModal({
       modalName: 'ADMIN-ITEM_EDIT',
       item: item,
+      update: { update: update, setUpdate: setUpdate },
     });
   };
 
@@ -79,6 +81,13 @@ function ItemList() {
   useEffect(() => {
     getItemListHandler();
   }, []);
+
+  useEffect(() => {
+    if (update) {
+      getItemListHandler();
+      setUpdate(false);
+    }
+  }, [update, getItemListHandler]);
 
   return (
     <TableContainer className={styles.tableContainer} component={Paper}>

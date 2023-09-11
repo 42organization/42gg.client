@@ -22,11 +22,11 @@
 
   .preview {
     grid-area: image;
-    position: relative;
-    width: 9.5rem;
-    height: 9.5rem;
-    margin: 1.25rem 0;
     .img {
+      position: relative;
+      width: 9.5rem;
+      height: 9.5rem;
+      margin: 1.25rem 0;
       object-fit: cover;
     }
   }
@@ -48,7 +48,14 @@
     }
     .onDiscount {
       margin-right: 0.2rem;
-      text-decoration: line-through 0.1rem solid #c03434;
+      text-decoration-line: line-through;
+      text-decoration-color: #c03434;
+      text-decoration-style: solid;
+      text-decoration-thickness: 0.15rem;
+      -webkit-text-decoration-line: line-through;
+      -webkit-text-decoration-color: #c03434;
+      -webkit-text-decoration-style: solid;
+      -webkit-text-decoration-thickness: 0.15rem;
     }
   }
   .mainContent {

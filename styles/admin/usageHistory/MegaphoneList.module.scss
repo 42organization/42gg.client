@@ -45,6 +45,10 @@
   border-radius: 8px;
   justify-content: center;
   align-items: center;
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #929fb3;
+  }
 }
 
 @include pagination;

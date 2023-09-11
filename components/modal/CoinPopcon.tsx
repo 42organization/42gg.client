@@ -24,7 +24,7 @@ export default function CoinPopcon({ amount, coin }: amountProps) {
   const handleClickMouse = (e: MouseEvent) => {
     const numElement = document.createElement('span');
     numElement.className = styles.appear;
-    numElement.textContent = `+${coin}`;
+    if (coin != 0) numElement.textContent = `+${coin}`;
     numElement.style.position = 'fixed';
     numElement.style.top = e.clientY + 'px';
     numElement.style.left = e.clientX - 20 + 'px';

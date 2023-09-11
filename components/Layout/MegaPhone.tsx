@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Item } from 'types/itemTypes';
 import useAxiosGet from 'hooks/useAxiosGet';
 import useInterval from 'hooks/useInterval';
 import styles from 'styles/Layout/MegaPhone.module.scss';
@@ -17,49 +18,10 @@ type MegaphoneContainerProps = {
 };
 
 const adminContent: IMegaphoneContent = {
-  megaphoneId: 1,
+  megaphoneId: 0,
   content: '상점에서 아이템을 구매해서 확성기를 등록해보세요!(30자 제한)',
   intraId: '관리자',
 };
-
-const megaphoneContent: IMegaphoneContent = {
-  megaphoneId: 2,
-  content: '확성기 : 오늘 하루 42GG는 내가 접수한다 📢😎',
-  intraId: '절찬 판매 중!',
-};
-
-const profileContent: IMegaphoneContent = {
-  megaphoneId: 3,
-  content: '이미지 변경권 : 잘 지내? 프사 바꿨네...',
-  intraId: '절찬 판매 중!',
-};
-
-const edgeContent: IMegaphoneContent = {
-  megaphoneId: 4,
-  content: 'Edge 뽑기 : 난 "Edge"로 말해',
-  intraId: '절찬 판매 중!',
-};
-
-const backgroundContent: IMegaphoneContent = {
-  megaphoneId: 5,
-  content: '배경 뽑기 : 난 "Background"부터가 달라',
-  intraId: '절찬 판매 중!',
-};
-
-const idContent: IMegaphoneContent = {
-  megaphoneId: 6,
-  content: 'ID 색깔 변경권 : 남들과는 다르게! ID 색깔을 바꿔보세요!',
-  intraId: '절찬 판매 중!',
-};
-
-const defaultContents: MegaphoneList = [
-  adminContent,
-  megaphoneContent,
-  profileContent,
-  edgeContent,
-  backgroundContent,
-  idContent,
-];
 
 export const MegaphoneContainer = ({
   children,
@@ -99,27 +61,50 @@ export const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
 };
 
 const Megaphone = () => {
-  const [contents, setContents] = useState<MegaphoneList>(defaultContents);
+  const [contents, setContents] = useState<MegaphoneList>([]);
+  const [itemList, setItemList] = useState<Item[]>([]);
+
+  const getItemListHandler = useAxiosGet<any>({
+    url: `/pingpong/items/store`,
+    setState: (data) => {
+      setItemList(data.itemList);
+    },
+    err: 'HB01',
+    type: 'setError',
+  });
 
   const getMegaphoneHandler = useAxiosGet<any>({
     url: `/pingpong/megaphones`,
-    setState: (data) => {
-      setContents(data.length > 0 ? data : defaultContents);
-    },
+    setState: setContents,
     err: 'HJ01',
     type: 'setError',
   });
 
   useEffect(() => {
+    getItemListHandler();
     getMegaphoneHandler();
   }, []);
 
-  return (
+  return contents.length > 0 ? (
     <MegaphoneContainer count={contents.length}>
       {contents.map((content, idx) => (
         <MegaphoneItem
           content={content.content}
           intraId={content.intraId}
+          key={idx}
+        />
+      ))}
+    </MegaphoneContainer>
+  ) : (
+    <MegaphoneContainer count={itemList.length + 1}>
+      <MegaphoneItem
+        content={adminContent.content}
+        intraId={adminContent.intraId}
+      />
+      {itemList.map((item, idx) => (
+        <MegaphoneItem
+          content={item.itemName + ' : ' + item.mainContent}
+          intraId={'절찬 판매 중!'}
           key={idx}
         />
       ))}
