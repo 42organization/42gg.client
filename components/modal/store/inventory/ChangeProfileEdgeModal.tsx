@@ -59,6 +59,7 @@ export default function ChangeProfileEdgeModal({
     setIsLoading(true);
     try {
       const res = await instance.patch('/pingpong/users/edge', data);
+      queryClient.invalidateQueries('inventory');
       queryClient.invalidateQueries('user');
       setIsLoading(false);
       setModal({
