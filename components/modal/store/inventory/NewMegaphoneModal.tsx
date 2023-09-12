@@ -3,7 +3,7 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest, UseMegaphoneRequest } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
-import { userState } from 'utils/recoil/layout';
+// import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { MegaphoneItem } from 'components/Layout/MegaPhone';
 import {
@@ -11,6 +11,7 @@ import {
   ModalButton,
 } from 'components/modal/ModalButton';
 import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
+import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 
 type NewMegaphoneProps = UseItemRequest;
@@ -52,7 +53,8 @@ const errorMessages: Record<errorCodeType, string> = {
 };
 
 export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
-  const user = useRecoilValue(userState);
+  // const user = useRecoilValue(userState);
+  const user = useUser();
   const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const resetModal = useResetRecoilState(modalState);
@@ -82,6 +84,9 @@ export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
       resetModal();
     }
   }
+
+  if (!user) return null;
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>확성기 등록</div>

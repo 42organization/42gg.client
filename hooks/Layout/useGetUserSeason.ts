@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { User } from 'types/mainType';
+// import { User } from 'types/mainType';
 import { SeasonList } from 'types/seasonTypes';
-import { userState } from 'utils/recoil/layout';
+// import { userState } from 'utils/recoil/layout';
 import { loginState } from 'utils/recoil/login';
 import { seasonListState } from 'utils/recoil/seasons';
-import { useUser } from 'hooks/Layout/useUser';
+// import { useUser } from 'hooks/Layout/useUser';
 import useAxiosGet from 'hooks/useAxiosGet';
 
 const useGetUserSeason = (presentPath: string) => {
@@ -35,7 +35,7 @@ const useGetUserSeason = (presentPath: string) => {
     getSeasonListHandler();
   }, [presentPath, isLogIn]);
 
-  return [user];
+  // return [user];
 };
 
 export default useGetUserSeason;

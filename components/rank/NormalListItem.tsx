@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { useRecoilValue } from 'recoil';
+// import { useRecoilValue } from 'recoil';
 import { NormalUser } from 'types/rankTypes';
-import { userState } from 'utils/recoil/layout';
+// import { userState } from 'utils/recoil/layout';
+import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/rank/RankList.module.scss';
 
 type NormalListItemProps = {
@@ -13,7 +14,8 @@ export function NormalListItem({
   user,
   textColorPreview,
 }: NormalListItemProps) {
-  const myIntraId = useRecoilValue(userState).intraId;
+  // const myIntraId = useRecoilValue(userState).intraId;
+  const myInfo = useUser();
   const { rank, intraId, statusMessage, exp, level, textColor } = user;
 
   const topStyle = (rank: number) => {
@@ -29,6 +31,10 @@ export function NormalListItem({
       ? `${styles.rankItemWrap} ${styles.colorPreviewLayout}`
       : `${styles.rankItemWrap} ${styles.Vip}`;
   };
+
+  if (!myInfo) return null;
+
+  const { intraId: myIntraId } = myInfo;
 
   return (
     <div

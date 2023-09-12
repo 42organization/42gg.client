@@ -9,6 +9,7 @@ import {
 } from 'components/Layout/HeaderContext';
 import { MainMenu, AdminMenu } from 'components/Layout/MenuBar/MenuBarElement';
 import PlayerImage from 'components/PlayerImage';
+import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 const MenuTop = () => {
@@ -23,7 +24,8 @@ const MenuTop = () => {
 
 const MenuProfile = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
-  const user = useRecoilValue<User>(userState);
+  // const user = useRecoilValue<User>(userState);
+  const user = useUser();
 
   const tierColor: { [key: string]: string } = {
     손: 'none',
@@ -34,6 +36,8 @@ const MenuProfile = () => {
     검: 'black',
     무: 'rainbow',
   };
+
+  if (!user) return null;
 
   return (
     <div className={styles.menuProfileWrapper}>

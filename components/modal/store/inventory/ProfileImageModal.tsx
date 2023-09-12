@@ -12,6 +12,7 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
+import { useUser } from 'hooks/Layout/useUser';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 import { ItemCautionContainer } from './ItemCautionContainer';
@@ -67,7 +68,8 @@ const errorMessage: Record<errorCodeType, string> = {
 export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const setError = useSetRecoilState(errorState);
-  const user = useRecoilValue(userState);
+  // const user = useRecoilValue(userState);
+  const user = useUser();
   const resetModal = useResetRecoilState(modalState);
   const { imgData, imgPreview, uploadImg } = useUploadImg({
     maxSizeMB: 0.03,
@@ -106,6 +108,8 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
       resetModal();
     }
   }
+
+  if (!user) return null;
 
   return (
     <div className={styles.container}>

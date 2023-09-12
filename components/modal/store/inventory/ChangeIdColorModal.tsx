@@ -3,7 +3,7 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest, UseIdColorRequest } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
-import { userState } from 'utils/recoil/layout';
+// import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import {
   ModalButtonContainer,
@@ -12,6 +12,7 @@ import {
 import ColorPicker from 'components/modal/store/inventory/ColorPicker';
 import IdPreviewComponent from 'components/modal/store/inventory/IdPreviewComponent';
 import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
+import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 
 type ChangeIdColorModalProps = UseItemRequest;
@@ -54,9 +55,12 @@ export default function ChangeIdColorModal({
 }: ChangeIdColorModalProps) {
   const setError = useSetRecoilState(errorState);
   const resetModal = useResetRecoilState(modalState);
-  const user = useRecoilValue(userState);
+  // const user = useRecoilValue(userState);
+  const user = useUser();
   const [color, setColor] = useState<string>('#000000');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  if (!user) return null;
 
   async function handleChangeIdColor() {
     const data: UseIdColorRequest = {
