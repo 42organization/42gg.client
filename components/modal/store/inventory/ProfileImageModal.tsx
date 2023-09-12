@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
+import { useQueryClient } from 'react-query';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { FaArrowRight } from 'react-icons/fa';
 import { TbQuestionMark } from 'react-icons/tb';
@@ -75,6 +76,7 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
     maxSizeMB: 0.03,
     maxWidthOrHeight: 150,
   });
+  const queryClient = useQueryClient();
 
   async function handleProfileImageUpload() {
     if (!imgData) {
@@ -95,6 +97,7 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
         new Blob([imgData], { type: 'image/jpeg' })
       );
       await instance.post('/pingpong/users/profile-image', formData);
+      queryClient.invalidateQueries('user');
       alert(message.SUCCESS);
     } catch (error: unknown) {
       if (isAxiosError<errorPayload>(error) && error.response) {
