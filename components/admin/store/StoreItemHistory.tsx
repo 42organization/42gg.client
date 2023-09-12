@@ -100,7 +100,7 @@ function StoreItemHistory() {
                               src={
                                 itemHistory.imageUri
                                   ? itemHistory[columnName]
-                                  : '/public/image/fallBackSrc.jpeg'
+                                  : '/image/not_found.jpeg'
                               }
                               width={30}
                               height={30}

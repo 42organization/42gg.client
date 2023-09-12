@@ -93,7 +93,7 @@ function StoreItemList() {
                             src={
                               item.imageUri
                                 ? item[columnName]
-                                : '/public/image/fallBackSrc.jpeg'
+                                : '/image/not_found.jpeg'
                             }
                             alt='Item Iamge'
                             width={30}
