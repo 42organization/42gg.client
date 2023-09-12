@@ -5,6 +5,7 @@ import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
 import { MegaphoneItem } from 'components/Layout/MegaPhone';
 import {
   ModalButtonContainer,
@@ -38,10 +39,12 @@ type errorPayload = {
   code: errorCodeType;
 };
 
+const { EDIT_MEGAPHONE } = ITEM_ALERT_MESSAGE;
+
 const errorMessages: Record<errorCodeType, string> = {
-  ME200: '확성기를 찾을 수 없습니다.',
-  RC500: '삭제할 수 없는 확성기입니다.',
-  RC200: '삭제할 수 없는 확성기입니다.',
+  ME200: EDIT_MEGAPHONE.NOT_FOUND_ERROR,
+  RC500: EDIT_MEGAPHONE.ITEM_ERROR,
+  RC200: EDIT_MEGAPHONE.ITEM_ERROR,
 };
 
 export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
@@ -73,7 +76,7 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
     instance
       .delete(`/pingpong/megaphones/${megaphoneData.megaphoneId}`)
       .then(() => {
-        alert('확성기가 삭제되었습니다.');
+        alert(EDIT_MEGAPHONE.SUCCESS);
       })
       .catch((error: unknown) => {
         if (isAxiosError<errorPayload>(error) && error.response) {
