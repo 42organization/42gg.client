@@ -49,7 +49,7 @@ export default function RankListItemMain({
                   size={50}
                 />
                 <div className={`${styles.tierImageId}`}>
-                  {Mode == 'RANK' && (
+                  {Mode === 'RANK' && (
                     <PlayerImage
                       src={tierImage}
                       styleName={'ranktier'}

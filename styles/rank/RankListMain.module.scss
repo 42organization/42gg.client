@@ -276,9 +276,13 @@
   span {
     cursor: pointer;
   }
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .tierImageId {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
   }
