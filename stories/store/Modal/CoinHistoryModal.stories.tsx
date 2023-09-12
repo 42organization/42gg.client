@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import UserCoinHistoryModal from 'components/modal/store/UserCoinHistoryModal';
 
 const meta: Meta<typeof UserCoinHistoryModal> = {
-  title: 'Modal/UserCoinHistoryModal',
+  title: 'store/Modal/UserCoinHistoryModal',
   component: UserCoinHistoryModal,
   tags: ['autodocs'],
   argTypes: {},

@@ -36,10 +36,12 @@ export interface ImegaphoneTable {
 }
 
 export interface Iprofile {
-  profileId: number;
-  date: Date;
-  intraId: string;
+  id: number;
+  createdAt: Date;
+  userIntraId: string;
   imageUri: string;
+  deletedAt: Date;
+  isCurrent: boolean;
 }
 
 export interface IprofileTable {

@@ -24,11 +24,13 @@ import PageNation from 'components/Pagination';
 import styles from 'styles/admin/usageHistory/ProfileList.module.scss';
 
 const tableTitle: { [key: string]: string } = {
-  profileId: 'ID',
-  date: '사용 시간',
-  intraId: '사용자',
-  imageUri: '현재 이미지',
+  id: 'ID',
+  createdAt: '사용 시간',
+  userIntraId: 'Intra ID',
+  imageUri: '변경된 프로필 이미지',
+  deletedAt: '삭제 시간',
   delete: '삭제',
+  isCurrent: '비고',
 };
 
 function ProfileList() {
@@ -42,6 +44,10 @@ function ProfileList() {
   const [modal, setModal] = useRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
+  const errorResponse: { [key: string]: string } = {
+    UR100: '존재하지 않는 유저입니다.',
+  };
+
   const initSearch = useCallback((intraId?: string) => {
     setIntraId(intraId || '');
     setCurrentPage(1);
@@ -50,38 +56,53 @@ function ProfileList() {
   const getUserProfileHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/images?intraId=${intraId}&page=${currentPage}&size=5`
+        `/users/images/${intraId}?page=${currentPage}&size=5`
       );
       setProfileData({
-        profileList: res.data.profileList.map((profile: Iprofile) => {
+        profileList: res.data.userImageList.map((profile: Iprofile) => {
           return {
             ...profile,
-            date: dateToStringShort(new Date(profile.date)),
+            createdAt: dateToStringShort(new Date(profile.createdAt)),
+            deletedAt: profile.deletedAt
+              ? dateToStringShort(new Date(profile.deletedAt))
+              : '',
           };
         }),
         totalPage: res.data.totalPage,
         currentPage: currentPage,
       });
-    } catch (e: unknown) {
-      setSnackBar({
-        toastName: 'get user profile',
-        severity: 'error',
-        message: `API 요청에 문제가 발생했습니다.`,
-        clicked: true,
-      });
+    } catch (e: any) {
+      if (e.response.data.code in errorResponse) {
+        setSnackBar({
+          toastName: 'get user profile',
+          severity: 'error',
+          message: errorResponse[e.response.data.code],
+          clicked: true,
+        });
+      } else {
+        setSnackBar({
+          toastName: 'get user profile',
+          severity: 'error',
+          message: `API 요청에 문제가 발생했습니다.`,
+          clicked: true,
+        });
+      }
     }
   }, [intraId, currentPage]);
 
   const getAllProfileHandler = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/images?&page=${currentPage}&size=5`
+        `/users/images?page=${currentPage}&size=5`
       );
       setProfileData({
-        profileList: res.data.profileList.map((profile: Iprofile) => {
+        profileList: res.data.userImageList.map((profile: Iprofile) => {
           return {
             ...profile,
-            date: dateToStringShort(new Date(profile.date)),
+            createdAt: dateToStringShort(new Date(profile.createdAt)),
+            deletedAt: profile.deletedAt
+              ? dateToStringShort(new Date(profile.deletedAt))
+              : '',
           };
         }),
         totalPage: res.data.totalPage,
@@ -119,7 +140,7 @@ function ProfileList() {
           <TableBody className={styles.tableBody}>
             {profileData.profileList.length > 0 ? (
               profileData.profileList.map((profile: Iprofile) => (
-                <TableRow className={styles.tableRow} key={profile.profileId}>
+                <TableRow className={styles.tableRow} key={profile.id}>
                   {tableFormat['profileList'].columns.map(
                     (columnName: string, index: number) => {
                       return (
@@ -127,19 +148,26 @@ function ProfileList() {
                           {columnName === 'imageUri' ? (
                             <Image
                               src={profile[columnName]}
-                              width={30}
-                              height={30}
+                              width={60}
+                              height={60}
                               alt='ProfileImage'
                             />
                           ) : columnName === 'delete' ? (
                             <button
                               className={styles.deleteBtn}
                               onClick={() => deleteProfile(profile)}
+                              disabled={!profile.isCurrent}
                             >
-                              삭제
+                              {profile.isCurrent ? '삭제' : 'X'}
                             </button>
+                          ) : columnName === 'isCurrent' ? (
+                            profile[columnName as keyof Iprofile] ? (
+                              '현재 적용 중'
+                            ) : (
+                              ''
+                            )
                           ) : (
-                            profile[columnName as keyof Iprofile].toString()
+                            profile[columnName as keyof Iprofile]?.toString()
                           )}
                         </TableCell>
                       );
