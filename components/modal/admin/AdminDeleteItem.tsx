@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
 import { instanceInManage } from 'utils/axios';
@@ -10,25 +11,33 @@ export default function AdminDeleteItemModal(props: Item) {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  const deleteItemHandler = async (itemId: number) => {
-    try {
-      await instanceInManage.delete(`/items/${itemId}`);
-      setSnackBar({
-        toastName: 'delete item',
-        severity: 'success',
-        message: `${itemId}번 ${itemName}이 삭제되었습니다!`,
-        clicked: true,
-      });
-    } catch (e: unknown) {
-      setSnackBar({
-        toastName: 'delete item',
-        severity: 'error',
-        message: `API 요청에 문제가 발생했습니다.`,
-        clicked: true,
-      });
-    }
+  const queryClient = useQueryClient();
+
+  const { mutate, isError, isSuccess } = useMutation(() => {
+    return instanceInManage.delete(`/items/${itemId}`);
+  });
+
+  if (isError) {
+    setSnackBar({
+      toastName: 'delete item',
+      severity: 'error',
+      message: `API 요청에 문제가 발생했습니다.`,
+      clicked: true,
+    });
     setModal({ modalName: null });
-  };
+  }
+
+  if (isSuccess) {
+    setSnackBar({
+      toastName: 'delete item',
+      severity: 'success',
+      message: `${itemId}번 ${itemName}이 삭제되었습니다!`,
+      clicked: true,
+    });
+    queryClient.invalidateQueries('itemList');
+    queryClient.invalidateQueries('itemHistoryList');
+    setModal({ modalName: null });
+  }
 
   return (
     <div className={styles.whole}>
@@ -78,10 +87,7 @@ export default function AdminDeleteItemModal(props: Item) {
           </div>
         </div>
         <div className={styles.buttonWrap}>
-          <button
-            className={styles.deleteBtn}
-            onClick={() => deleteItemHandler(itemId)}
-          >
+          <button className={styles.deleteBtn} onClick={() => mutate}>
             삭제
           </button>
           <button

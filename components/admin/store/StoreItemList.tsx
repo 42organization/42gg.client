@@ -34,7 +34,7 @@ const tableTitle: { [key: string]: string } = {
   delete: '삭제',
 };
 
-function ItemList() {
+function StoreItemList() {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
@@ -158,4 +158,4 @@ function ItemList() {
   );
 }
 
-export default ItemList;
+export default StoreItemList;

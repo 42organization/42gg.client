@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { useMutation } from 'react-query';
+import { AxiosResponse } from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
 import { instanceInManage } from 'utils/axios';
@@ -26,79 +27,19 @@ export default function AdminEditItemModal(props: Item) {
     maxWidthOrHeight: 250,
   });
 
+  const queryClient = useQueryClient();
+
   const editErrorResponse: { [key: string]: string } = {
     IT200: '아이템 타입이 일치하지 않습니다.',
     IT413: '아이템 이미지가 너무 큽니다.',
     IT415: '아이템 이미지 타입이 jpeg가 아닙니다.',
   };
 
-  // const editItemHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   const form = new FormData(e.currentTarget);
-  //   const name = form.get('name');
-  //   const mainContent = form.get('mainContent');
-  //   const subContent = form.get('subContent');
-  //   const price = Number(form.get('price'));
-  //   const discount = Number(form.get('discount'));
+  const mutation = useMutation((formData: FormData): Promise<AxiosResponse> => {
+    return instanceInManage.post(`/items/${itemId}`, formData);
+  });
 
-  //   if (price < 0 || discount < 0 || discount > 100) {
-  //     setSnackBar({
-  //       toastName: 'invalid value',
-  //       severity: 'error',
-  //       message: '가격 또는 할인율이 유효하지 않습니다.',
-  //       clicked: true,
-  //     });
-  //     return;
-  //   }
-
-  //   const formData = new FormData();
-  //   const data = {
-  //     name: name,
-  //     mainContent: mainContent,
-  //     subContent: subContent,
-  //     price: price,
-  //     discount: discount,
-  //     itemType: itemType,
-  //   };
-  //   formData.append(
-  //     'updateItemInfo',
-  //     new Blob([JSON.stringify(data)], {
-  //       type: 'application/json',
-  //     })
-  //   );
-  //   if (imgData) {
-  //     formData.append('imgData', new Blob([imgData], { type: 'image/jpeg' }));
-  //   }
-
-  //   try {
-  //     await instanceInManage.post(`/items/${itemId}`, formData);
-  //     setSnackBar({
-  //       toastName: 'edit item',
-  //       severity: 'success',
-  //       message: '아이템 정보가 수정되었습니다.',
-  //       clicked: true,
-  //     });
-  //   } catch (e: any) {
-  //     if (e.response.data.code in editErrorResponse) {
-  //       setSnackBar({
-  //         toastName: 'edit item',
-  //         severity: 'error',
-  //         message: editErrorResponse[e.response.data.code],
-  //         clicked: true,
-  //       });
-  //     } else {
-  //       setSnackBar({
-  //         toastName: 'edit item',
-  //         severity: 'error',
-  //         message: `아이템 정보를 수정할 수 없습니다.`,
-  //         clicked: true,
-  //       });
-  //     }
-  //   }
-  //   setModal({ modalName: null });
-  // };
-
-  const editItemForm = async (e: React.FormEvent<HTMLFormElement>) => {
+  const editItemHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const name = form.get('name');
@@ -136,13 +77,31 @@ export default function AdminEditItemModal(props: Item) {
       formData.append('imgData', new Blob([imgData], { type: 'image/jpeg' }));
     }
 
-    return formData;
+    mutation.mutate(formData, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: 'itemHistoryList' });
+        queryClient.invalidateQueries({ queryKey: 'itemList' });
+        setModal({ modalName: null });
+      },
+      onError: (e: any) => {
+        if (e.response.data.code in editErrorResponse) {
+          setSnackBar({
+            toastName: 'edit item',
+            severity: 'error',
+            message: editErrorResponse[e.response.data.code],
+            clicked: true,
+          });
+        } else {
+          setSnackBar({
+            toastName: 'edit item',
+            severity: 'error',
+            message: 'API ERROR',
+            clicked: true,
+          });
+        }
+      },
+    });
   };
-
-  const { mutate, isError, isSuccess } = useMutation(
-    (e: React.FormEvent<HTMLFormElement>) =>
-      instanceInManage.post(`/items/${itemId}`, editItemForm(e))
-  );
 
   return (
     <div className={styles.whole}>

@@ -36,7 +36,7 @@ const tableTitle: { [key: string]: string } = {
   visible: '상점 노출',
 };
 
-function ItemHistory() {
+function StoreItemHistory() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const setSnackBar = useSetRecoilState(toastState);
   const setModal = useSetRecoilState(modalState);
@@ -74,7 +74,7 @@ function ItemHistory() {
   };
 
   if (isError) {
-    return setSnackBar({
+    setSnackBar({
       toastName: 'get itemhistory',
       severity: 'error',
       message: 'API 요청에 문제가 발생했습니다.',
@@ -147,4 +147,4 @@ function ItemHistory() {
   );
 }
 
-export default ItemHistory;
+export default StoreItemHistory;
