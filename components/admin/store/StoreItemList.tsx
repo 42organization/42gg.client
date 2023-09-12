@@ -93,7 +93,7 @@ function StoreItemList() {
                             src={
                               item.imageUri
                                 ? item[columnName]
-                                : '/image/not_found.jpeg'
+                                : '/image/not_found.svg'
                             }
                             alt='Item Iamge'
                             width={30}
