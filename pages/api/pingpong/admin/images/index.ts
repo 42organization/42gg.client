@@ -7,73 +7,93 @@ interface IprofileRes {
 }
 
 const profile1: Iprofile = {
-  profileId: 1,
-  date: new Date('2023-08-05 10:10:10'),
-  intraId: 'hyungjpa',
+  id: 1,
+  createdAt: new Date('2023-08-05 10:10:10'),
+  deletedAt: new Date('2023-08-05 10:10:10'),
+  userIntraId: 'hyungjpa',
   imageUri: '/image/noti_empty.svg',
+  isCurrent: true,
 };
 
 const profile2: Iprofile = {
-  profileId: 2,
-  date: new Date('2023-08-04 20:30:10'),
-  intraId: 'hyobicho',
+  id: 2,
+  createdAt: new Date('2023-08-05 10:10:10'),
+  deletedAt: new Date('2023-08-05 10:10:10'),
+  userIntraId: 'hyungjpa',
   imageUri: '/image/noti_empty.svg',
+  isCurrent: true,
 };
 
 const profile3: Iprofile = {
-  profileId: 3,
-  date: new Date('2023-07-05 10:10:10'),
-  intraId: 'sangmipa',
+  id: 3,
+  createdAt: new Date('2023-08-05 10:10:10'),
+  deletedAt: new Date('2023-08-05 10:10:10'),
+  userIntraId: 'hyungjpa',
   imageUri: '/image/noti_empty.svg',
+  isCurrent: true,
 };
 
 const profile4: Iprofile = {
-  profileId: 4,
-  date: new Date('2023-07-04 20:30:10'),
-  intraId: 'jeyoon',
+  id: 4,
+  createdAt: new Date('2023-08-05 10:10:10'),
+  deletedAt: new Date('2023-08-05 10:10:10'),
+  userIntraId: 'hyungjpa',
   imageUri: '/image/noti_empty.svg',
+  isCurrent: true,
 };
 
 const profile5: Iprofile = {
-  profileId: 5,
-  date: new Date('2023-07-01 10:10:10'),
-  intraId: 'hyungjpa1',
+  id: 5,
+  createdAt: new Date('2023-08-05 10:10:10'),
+  deletedAt: new Date('2023-08-05 10:10:10'),
+  userIntraId: 'hyungjpa',
   imageUri: '/image/noti_empty.svg',
+  isCurrent: true,
 };
 
 const profile6: Iprofile = {
-  profileId: 6,
-  date: new Date('2023-08-05 10:10:10'),
-  intraId: 'hyungjpa',
+  id: 6,
+  createdAt: new Date('2023-08-05 10:10:10'),
+  deletedAt: new Date('2023-08-05 10:10:10'),
+  userIntraId: 'hyungjpa',
   imageUri: '/image/noti_empty.svg',
+  isCurrent: true,
 };
 
 const profile7: Iprofile = {
-  profileId: 7,
-  date: new Date('2023-08-04 20:30:10'),
-  intraId: 'hyobicho',
+  id: 7,
+  createdAt: new Date('2023-08-05 10:10:10'),
+  deletedAt: new Date('2023-08-05 10:10:10'),
+  userIntraId: 'hyungjpa',
   imageUri: '/image/noti_empty.svg',
+  isCurrent: true,
 };
 
 const profile8: Iprofile = {
-  profileId: 8,
-  date: new Date('2023-07-05 10:10:10'),
-  intraId: 'sangmipa',
+  id: 8,
+  createdAt: new Date('2023-08-05 10:10:10'),
+  deletedAt: new Date('2023-08-05 10:10:10'),
+  userIntraId: 'hyungjpa',
   imageUri: '/image/noti_empty.svg',
+  isCurrent: true,
 };
 
 const profile9: Iprofile = {
-  profileId: 9,
-  date: new Date('2023-07-04 20:30:10'),
-  intraId: 'jeyoon',
+  id: 9,
+  createdAt: new Date('2023-08-05 10:10:10'),
+  deletedAt: new Date('2023-08-05 10:10:10'),
+  userIntraId: 'hyungjpa',
   imageUri: '/image/noti_empty.svg',
+  isCurrent: true,
 };
 
 const profile10: Iprofile = {
-  profileId: 10,
-  date: new Date('2023-07-01 10:10:10'),
-  intraId: 'hyungjpa1',
+  id: 10,
+  createdAt: new Date('2023-08-05 10:10:10'),
+  deletedAt: new Date('2023-08-05 10:10:10'),
+  userIntraId: 'hyungjpa',
   imageUri: '/image/noti_empty.svg',
+  isCurrent: true,
 };
 
 const profileList: Array<Iprofile> = [
@@ -120,7 +140,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (method === 'GET') {
     if (intraId) {
       resData.profileList = temp.profileList.filter(
-        (profile: Iprofile) => profile.intraId === intraId
+        (profile: Iprofile) => profile.userIntraId === intraId
       );
       resData.totalPage = 1;
     } else {

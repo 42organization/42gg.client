@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import ChangeProfileEdgeModal from 'components/modal/store/inventory/ChangeProfileEdgeModal';
 
 const meta: Meta<typeof ChangeProfileEdgeModal> = {
-  title: 'Modal/ChangeProfileEdgeModal',
+  title: 'store/Modal/ChangeProfileEdgeModal',
   component: ChangeProfileEdgeModal,
   tags: ['autodocs'],
   argTypes: {},

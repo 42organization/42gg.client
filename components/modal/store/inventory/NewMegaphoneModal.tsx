@@ -5,6 +5,7 @@ import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
 import { MegaphoneItem } from 'components/Layout/MegaPhone';
 import {
   ModalButtonContainer,
@@ -42,13 +43,15 @@ type errorPayload = {
   code: errorCodeType;
 };
 
+const { COMMON, MEGAPHONE } = ITEM_ALERT_MESSAGE;
+
 const errorMessages: Record<errorCodeType, string> = {
-  ME200: '23:55-00:05 사이에는 확성기 사용이 불가능합니다.',
-  RC100: '아이템을 찾을 수 없습니다.',
-  RC500: '사용 불가능한 아이템입니다.',
-  IT200: '사용 불가능한 아이템입니다.',
-  RC200: '이미 등록한 확성기 아이템입니다.',
-  CM007: '확성기에 등록할 수 있는 글자수는 1 이상 30 이하입니다.',
+  ME200: MEGAPHONE.TIME_ERROR,
+  RC100: COMMON.ITEM_ERROR,
+  RC500: COMMON.ITEM_ERROR,
+  IT200: COMMON.ITEM_ERROR,
+  RC200: COMMON.USED_ERROR,
+  CM007: MEGAPHONE.FORMAT_ERROR,
 };
 
 export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
@@ -59,7 +62,7 @@ export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
   const setError = useSetRecoilState(errorState);
   async function handleUseMegaphone() {
     if (content.length === 0) {
-      alert('확성기 내용을 입력해주세요.');
+      alert(MEGAPHONE.NULL_ERROR);
       return;
     }
     const data: UseMegaphoneRequest = {
@@ -69,7 +72,7 @@ export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
     setIsLoading(true);
     try {
       await instance.post('/pingpong/megaphones', data);
-      alert('확성기가 등록되었습니다.');
+      alert(MEGAPHONE.SUCCESS);
     } catch (error: unknown) {
       if (isAxiosError<errorPayload>(error) && error.response) {
         const { code } = error.response.data;

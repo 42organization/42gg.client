@@ -106,7 +106,7 @@ function ItemList({ update, setUpdate }: IUpdate) {
                             src={
                               item.imageUri
                                 ? item[columnName]
-                                : '/public/image/fallBackSrc.jpeg'
+                                : '/image/fallBackSrc.jpeg'
                             }
                             alt='Item Iamge'
                             width={30}

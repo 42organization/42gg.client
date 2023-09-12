@@ -5,6 +5,7 @@ import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -40,13 +41,15 @@ type errorPayload = {
   code: errorCodeType;
 };
 
+const { COMMON, ID_COLOR } = ITEM_ALERT_MESSAGE;
+
 const errorMessages: Record<errorCodeType, string> = {
-  IT200: '사용할 수 없는 아이템입니다.',
-  RC200: '이미 사용한 아이템입니다.',
-  RC100: '사용할 수 없는 아이템입니다.',
-  RC403: '사용할 수 없는 아이템입니다.',
-  UR100: 'USER NOT FOUND', // setError로 alert 띄우지 않고 처리
-  UR403: '유효하지 않은 색깔입니다.',
+  IT200: COMMON.ITEM_ERROR,
+  RC200: COMMON.USED_ERROR,
+  RC100: COMMON.ITEM_ERROR,
+  RC403: COMMON.ITEM_ERROR,
+  UR100: COMMON.USER_ERROR, // setError로 alert 띄우지 않고 처리
+  UR403: ID_COLOR.INVALID_ERROR,
 };
 
 export default function ChangeIdColorModal({
@@ -71,7 +74,7 @@ export default function ChangeIdColorModal({
     setIsLoading(true);
     try {
       await instance.patch('/pingpong/users/text-color', data);
-      alert('아이디 색상이 변경되었습니다.');
+      alert(ID_COLOR.SUCCESS);
     } catch (error: unknown) {
       if (isAxiosError<errorPayload>(error) && error.response) {
         const { code } = error.response.data;
