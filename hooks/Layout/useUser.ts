@@ -10,7 +10,8 @@ export const useUser = () => {
     'user',
     () => instance.get('/pingpong/users').then((res) => res.data),
     {
-      retry: 1,
+      staleTime: 60 * 1000 * 10, // 10분 동안은 캐시를 사용
+      retry: 1, // 에러가 났을 때 1번 재시도
     }
   );
   if (isError) {
