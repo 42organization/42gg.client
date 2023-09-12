@@ -9,6 +9,7 @@ import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -47,23 +48,17 @@ type errorPayload = {
   code: errorCodeType;
 };
 
-const message = {
-  SUCCESS: '프로필 이미지가 변경되었습니다.',
-  ITEM_ERROR: '사용할 수 없는 아이템입니다.',
-  USER_ERROR: 'USER NOT FOUND',
-  NULL_ERROR: '이미지를 선택해주세요.',
-  FORMAT_ERROR: '프로필 이미지는 50KB 이하의 jpeg 파일만 업로드 가능합니다.',
-};
+const { COMMON, PROFILE } = ITEM_ALERT_MESSAGE;
 
 const errorMessage: Record<errorCodeType, string> = {
-  IT200: message.ITEM_ERROR,
-  RC200: message.ITEM_ERROR,
-  RC100: message.ITEM_ERROR,
-  RC403: message.ITEM_ERROR,
-  UR100: message.USER_ERROR, // alert을 띄우지 않고 setError만 호출
-  UR200: message.NULL_ERROR,
-  UR401: message.FORMAT_ERROR,
-  UR402: message.FORMAT_ERROR,
+  IT200: COMMON.ITEM_ERROR,
+  RC200: COMMON.ITEM_ERROR,
+  RC100: COMMON.ITEM_ERROR,
+  RC403: COMMON.ITEM_ERROR,
+  UR100: COMMON.USER_ERROR, // alert을 띄우지 않고 setError만 호출
+  UR200: PROFILE.NULL_ERROR,
+  UR401: PROFILE.FORMAT_ERROR,
+  UR402: PROFILE.FORMAT_ERROR,
 };
 
 export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
@@ -80,7 +75,7 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
 
   async function handleProfileImageUpload() {
     if (!imgData) {
-      alert(message.NULL_ERROR);
+      alert(PROFILE.NULL_ERROR);
       return;
     }
     setIsLoading(true);
