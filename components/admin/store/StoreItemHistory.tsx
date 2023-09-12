@@ -88,7 +88,7 @@ function StoreItemHistory() {
         <Table className={styles.table} aria-label='customized table'>
           <AdminTableHead tableName={'itemHistory'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {data?.historyList.length > 0 ? (
+            {data?.historyList?.length > 0 ? (
               data?.historyList.map((itemHistory: IitemHistory) => (
                 <TableRow className={styles.tableRow} key={itemHistory.itemId}>
                   {tableFormat['itemHistory'].columns.map(

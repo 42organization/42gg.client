@@ -10,7 +10,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { Item, ItemList } from 'types/itemTypes';
+import { Item } from 'types/itemTypes';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
@@ -81,7 +81,7 @@ function StoreItemList() {
       <Table className={styles.table} aria-label='customized table'>
         <AdminTableHead tableName={'itemList'} table={tableTitle} />
         <TableBody className={styles.tableBody}>
-          {data?.itemList.length > 0 ? (
+          {data?.itemList?.length > 0 ? (
             data?.itemList.map((item: Item) => (
               <TableRow className={styles.tableRow} key={item.itemId}>
                 {tableFormat['itemList'].columns.map(
