@@ -26,7 +26,6 @@ export default function AdminEditItemModal(props: Item) {
     maxSizeMB: 0.03,
     maxWidthOrHeight: 250,
   });
-
   const queryClient = useQueryClient();
 
   const editErrorResponse: { [key: string]: string } = {

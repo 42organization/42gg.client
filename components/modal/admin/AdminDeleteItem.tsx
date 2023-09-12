@@ -10,7 +10,6 @@ export default function AdminDeleteItemModal(props: Item) {
   const { itemId, itemName, mainContent, subContent } = props;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
-
   const queryClient = useQueryClient();
 
   const { mutate, isError, isSuccess } = useMutation(() => {
