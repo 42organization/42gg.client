@@ -20,8 +20,7 @@
   @include pageTitle;
   height: 0;
   padding: 1.3rem 0 3rem;
-  // NOTE : $logo-font(Agonostic Italic)는 현재 메인 페이지에서 쓰이지 않는 폰트이므로 삭제함.
-  // font-family: $logo-font;
+  font-family: $logo-font;
 }
 
 .loadBottom {

@@ -51,6 +51,8 @@ $coin-yellow: #e8e230;
 $common-font: 'NotoSansKR', sans-serif;
 $title-font: 'Lexend', sans-serif;
 $admin-font: 'Inter', sans-serif;
+$logo-font: 'Overgrow', sans-serif;
+
 $text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
   0 -0.1rem black;
 $text-shadow-red: 2px 2px 0px $pp-red;
@@ -133,8 +135,7 @@ $vip-background: linear-gradient(
 }
 
 @mixin logoTitle($shadow) {
-  // NOTE : $logo-font(Agonostic Italic)는 현재 메인 페이지에서 쓰이지 않는 폰트이므로 삭제함.
-  // font-family: $logo-font;
+  font-family: $logo-font;
   font-size: 2rem;
   color: white;
   letter-spacing: 0.1rem;
