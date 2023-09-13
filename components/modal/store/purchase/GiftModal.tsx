@@ -108,7 +108,7 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
           </div>
         )}
         <div className={styles.warning}>
-          <p>⚠ 선물한 아이템은 환불 및 취소가 불가합니다 ⚠</p>
+          <p>⚠ 선물은 환불 및 취소가 불가합니다 ⚠</p>
         </div>
       </div>
       <ModalButtonContainer>
