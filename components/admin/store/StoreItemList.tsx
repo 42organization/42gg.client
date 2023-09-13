@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import {
