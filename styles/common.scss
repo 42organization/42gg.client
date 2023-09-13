@@ -49,7 +49,7 @@ $coin-yellow: #e8e230;
 
 /* font-family */
 $common-font: 'NotoSansKR', sans-serif;
-$title-font: 'Lexend';
+$title-font: 'Lexend', sans-serif;
 $admin-font: 'Inter', sans-serif;
 $text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
   0 -0.1rem black;
@@ -146,7 +146,7 @@ $vip-background: linear-gradient(
 }
 
 @mixin modalTitle {
-  font-family: 'Lexend', sans-serif;
+  font-family: $title-font;
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 0.04rem;
