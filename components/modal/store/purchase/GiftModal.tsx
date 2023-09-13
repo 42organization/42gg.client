@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { useQueryClient } from 'react-query';
 import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import { GiftRequest } from 'types/itemTypes';
 import { PriceTag } from 'types/modalTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import { updateCoinState } from 'utils/recoil/updateCoin';
+// import { updateCoinState } from 'utils/recoil/updateCoin';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -18,11 +19,11 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
   const setModal = useSetRecoilState(modalState);
   const resetModal = useResetRecoilState(modalState);
   const setError = useSetRecoilState<string>(errorState);
-  const updateCoin = useSetRecoilState(updateCoinState);
+  // const updateCoin = useSetRecoilState(updateCoinState);
   const [giftReqData, setGiftReqData] = useState<GiftRequest>({
     ownerId: '',
   });
-
+  const queryClient = useQueryClient();
   const errorCode = [
     'IT100',
     'IT201',
@@ -58,7 +59,8 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
     try {
       await instance.post(`/pingpong/items/gift/${itemId}`, giftReqData);
       alert(`${giftReqData.ownerId}님께 선물이 전달되었습니다 (◞ꈍ∇ꈍ)っ■`);
-      updateCoin(true);
+      // updateCoin(true);
+      queryClient.invalidateQueries('coin');
       setIsLoading(false);
     } catch (error: unknown) {
       setIsLoading(false);
