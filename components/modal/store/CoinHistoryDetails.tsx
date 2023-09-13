@@ -29,9 +29,9 @@ export default function CoinHistoryDetails({
       </div>
       <div className={styles.section2}>
         {amount > 0 ? (
-          <div className={styles.plus}>+{amount}</div>
+          <div className={styles.plus}>+{amount.toLocaleString()}</div>
         ) : (
-          <div className={styles.minus}>{amount}</div>
+          <div className={styles.minus}>{amount.toLocaleString()}</div>
         )}
       </div>
     </div>

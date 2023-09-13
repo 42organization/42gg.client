@@ -72,6 +72,57 @@ $edge-skyblue: linear-gradient(
   #86a8e7 50%,
   #91eae4 100%
 );
+$edge-rich-metal: linear-gradient(to right bottom, #304352 30%, #d7d2cc 70%);
+$edge-fruit-blend: linear-gradient(to right bottom, #f9d423 30%, #ff4e50 70%);
+$edge-seashore: linear-gradient(to right bottom, #68e0cf 30%, #209cff 70%);
+$edge-grown-early: linear-gradient(to right bottom, #0ba360 30%, #3cba92 70%);
+$edge-flying-lemon: linear-gradient(to right bottom, #c2e59c 30%, #64b3f4 70%);
+$edge-highflight: linear-gradient(to right bottom, #495aff 30%, #0acffe 70%);
+$edge-fabled-sunset: linear-gradient(
+  to right bottom,
+  #44107a 0%,
+  #ff1361 50%,
+  #fff800 100%
+);
+$edge-soft-cherish: linear-gradient(
+  to right bottom,
+  #b8235a 0%,
+  #e7627d 50%,
+  #dbdcd7 100%
+);
+$edge-palo-alto: linear-gradient(to right bottom, #f4d03f 30%, #16a085 70%);
+$edge-north-miracle: linear-gradient(to right bottom, #00dbde 30%, #fc00ff 70%);
+$edge-gagarin-view: linear-gradient(
+  to right bottom,
+  #69eacb 0%,
+  #eaccf8 50%,
+  #6654f1 100%
+);
+
+$edge-colors: (
+  basic: $edge-basic,
+  // 5티어
+  color1: $edge-rich-metal,
+  color2: $edge-fruit-blend,
+  color3: $edge-seashore,
+  color4: $edge-grown-early,
+  // 4티어
+  color5: $edge-flying-lemon,
+  color6: $edge-navy-green,
+  color7: $edge-highflight,
+  // 3티어
+  color8: $edge-fabled-sunset,
+  color9: $edge-pastel-green-blue,
+  color10: $edge-neon-green,
+  // 2티어
+  color11: $edge-pink-blue-purple,
+  color12: $edge-soft-cherish,
+  color13: $edge-palo-alto,
+  // 1티어
+  color14: $edge-pastel-orange,
+  color15: $edge-north-miracle,
+  color16: $edge-gagarin-view,
+);
 
 @mixin profileEdge($size) {
   width: $size;
@@ -79,55 +130,9 @@ $edge-skyblue: linear-gradient(
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
   border-radius: 50%;
-  &.basic {
-    background: $edge-basic;
-  }
-  &.color1 {
-    background: $edge-neon-green;
-  }
-  &.color2 {
-    background: $edge-orange-red;
-  }
-  &.color3 {
-    background: $edge-red;
-  }
-  &.color4 {
-    background: $edge-blue;
-  }
-  &.color5 {
-    background: $edge-pastel-green-blue;
-  }
-  &.color6 {
-    background: $edge-navy;
-  }
-  &.color7 {
-    background: $edge-orange-green;
-  }
-  &.color8 {
-    background: $edge-neon-yellow;
-  }
-  &.color9 {
-    background: $edge-blue-green;
-  }
-  &.color10 {
-    background: $edge-pink-blue-purple;
-  }
-  &.color11 {
-    background: $edge-tropical-green;
-  }
-  &.color12 {
-    background: $edge-navy-green;
-  }
-  &.color13 {
-    background: $edge-green-yellow;
-  }
-  &.color14 {
-    background: $edge-pastel-orange;
-  }
-  &.color15 {
-    background: $edge-pink-purple;
-  }
-  &.color16 {
-    background: $edge-skyblue;
+  @each $key, $value in $edge-colors {
+    &.#{$key} {
+      background: $value;
+    }
   }
 }
