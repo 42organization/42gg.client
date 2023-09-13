@@ -50,13 +50,6 @@ body {
 }
 
 @font-face {
-  font-family: 'Agonostic Italic';
-  src: url('../public/font/Agnostic\ Italic.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: 'Reality Hyper Regular';
   src: url('../public/font/Reality\ Hyper\ Regular.ttf') format('opentype');
   font-weight: normal;
