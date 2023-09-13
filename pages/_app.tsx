@@ -27,8 +27,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
   }, [router.events]);
 
-  const queryClient = new QueryClient();
-
   return (
     <>
       <Head>
