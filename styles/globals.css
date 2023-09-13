@@ -51,49 +51,55 @@ body {
 
 @font-face {
   font-family: 'Inter';
-  src: url('../public/font/Inter-VariableFont_slnt,wght.ttf') format('opentype');
+  src: url('../public/font/Inter/Inter.var.woff2') format('woff2'),
+    url('../public/font/Inter/Inter.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Overgrow';
-  src: url('../public/font/Overgrow-Demo.otf') format('opentype');
+  src: url('../public/font/Overgrow/Overgrow-Demo.woff') format('woff'),
+    url('../public/font/Overgrow/Overgrow-Demo.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Montserrat';
-  src: url('../public/font/Montserrat-Regular.ttf') format('opentype');
+  src: url('../public/font/Montserrat/Montserrat-Regular.woff') format('woff')
+    url('../public/font/Montserrat/Montserrat-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url('../public/font/Roboto-Medium.ttf') format('opentype');
+  src: url('../public/font/Roboto/Roboto-Medium.woff') format('woff'),
+    url('../public/font/Roboto/Roboto-Medium.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Lexend';
-  src: url('../public/font/Lexend-Medium.ttf') format('opentype');
+  src: url('../public/font/Lexend/Lexend-Medium.woff2') format('woff2'),
+    url('../public/font/Lexend/Lexend-Medium.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'Jua';
-  src: url('../public/font/Jua-Regular.ttf') format('opentype');
+  src: url('../public/font/Jua/Jua-Regular.woff') format('woff'),
+    url('../public/font/Jua/Jua-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'NotoSansKR';
-  src: url('../public/font/NotoSansKR-Medium.woff') format('woff'),
-    url('../public/font/NotoSansKR-Medium.ttf') format('truetype');
+  src: url('../public/font/NotoSansKR/NotoSansKR-Medium.woff') format('woff'),
+    url('../public/font/NotoSansKR/NotoSansKR-Medium.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
