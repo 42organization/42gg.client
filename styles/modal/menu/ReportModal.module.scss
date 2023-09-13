@@ -6,12 +6,9 @@
 }
 
 .title {
+  @include logoText(2rem, rgba(122, 110, 123, 1));
   display: flex;
   padding-bottom: 1rem;
-  font-family: 'Overgrow', sans-serif;
-  font-size: 2rem;
-  font-weight: 500;
-  color: rgba(122, 110, 123, 1);
   justify-content: center;
   align-items: center;
 }

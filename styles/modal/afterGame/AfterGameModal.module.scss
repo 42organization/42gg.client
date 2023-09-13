@@ -16,9 +16,7 @@
     font-size: 2rem;
   }
   .titleNormal {
-    font-family: 'Overgrow', sans-serif;
-    font-weight: 500;
-    color: rgba(122, 110, 123, 1);
+    @include logoText(2rem, rgba(122, 110, 123, 1));
   }
   .titleRank {
     color: rgba(165, 95, 195, 1);

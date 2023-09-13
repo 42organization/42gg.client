@@ -17,8 +17,7 @@
     align-items: center;
     padding-right: 1.8rem;
     .menuLogo {
-      font-family: 'Overgrow', sans-serif;
-      font-size: 1.8rem;
+      @include logoText(1.8rem, black);
     }
     button {
       all: unset;

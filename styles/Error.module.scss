@@ -29,9 +29,7 @@
 }
 
 .title {
-  font-family: 'Overgrow';
-  font-size: 4rem;
-  color: white;
+  @include logoText(4rem, white);
   letter-spacing: 0.2rem;
 }
 

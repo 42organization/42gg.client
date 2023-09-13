@@ -134,10 +134,12 @@ $vip-background: linear-gradient(
   margin: 0 auto;
 }
 
-@mixin logoTitle($shadow) {
+@mixin logoText($size, $color) {
   font-family: $logo-font;
-  font-size: 2rem;
-  color: white;
+  font-size: $size;
+  font-weight: 500;
+  color: $color;
+  text-align: center;
   letter-spacing: 0.1rem;
 }
 
