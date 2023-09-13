@@ -1,7 +1,5 @@
 import Link from 'next/link';
-// import { useRecoilValue } from 'recoil';
 import { RankUser } from 'types/rankTypes';
-// import { userState } from 'utils/recoil/layout';
 import PlayerImage from 'components/PlayerImage';
 import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/rank/RankList.module.scss';
@@ -12,7 +10,6 @@ type RankListItemProps = {
 };
 
 export function RankListItem({ user, textColorPreview }: RankListItemProps) {
-  // const myIntraId = useRecoilValue(userState).intraId;
   const myInfo = useUser();
   const { rank, intraId, statusMessage, ppp, tierImageUri, textColor } = user;
 

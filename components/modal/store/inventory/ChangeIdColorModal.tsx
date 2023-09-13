@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest, UseIdColorRequest } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
-// import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
 import {

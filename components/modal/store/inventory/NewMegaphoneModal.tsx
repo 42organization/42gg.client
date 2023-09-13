@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest, UseMegaphoneRequest } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
-// import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
 import { MegaphoneItem } from 'components/Layout/MegaPhone';
@@ -56,7 +55,6 @@ const errorMessages: Record<errorCodeType, string> = {
 };
 
 export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
-  // const user = useRecoilValue(userState);
   const user = useUser();
   const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState<boolean>(false);

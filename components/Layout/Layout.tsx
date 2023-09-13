@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { colorModeState } from 'utils/recoil/colorMode';
-// import { userState } from 'utils/recoil/layout';
 import { openCurrentMatchState } from 'utils/recoil/match';
 import AdminReject from 'components/admin/AdminReject';
 import AdminLayout from 'components/admin/Layout';
@@ -26,7 +25,6 @@ type AppLayoutProps = {
 };
 
 export default function AppLayout({ children }: AppLayoutProps) {
-  // const user = useRecoilValue(userState);
   const user = useUser();
   const colorMode = useRecoilValue(colorModeState);
   const presentPath = useRouter().asPath;

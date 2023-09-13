@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { AiOutlineEdit } from 'react-icons/ai';
-// import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { tierIdSelector } from 'utils/recoil/tierColor';
 import PlayerImage from 'components/PlayerImage';
@@ -13,7 +12,6 @@ interface ProfileProps {
 }
 
 export default function BasicProfile({ profileId }: ProfileProps) {
-  // const user = useRecoilValue(userState);
   const user = useUser();
   const setModal = useSetRecoilState(modalState);
   const {

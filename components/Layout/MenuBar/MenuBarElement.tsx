@@ -1,10 +1,8 @@
 import Link from 'next/link';
 import React, { MouseEvent, useContext, MouseEventHandler } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { AiFillShop } from 'react-icons/ai';
-import { User } from 'types/mainType';
 import { Modal } from 'types/modalTypes';
-// import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import {
   HeaderContextState,
@@ -138,7 +136,6 @@ export const MainMenu = () => {
 
 export const AdminMenu = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
-  // const { isAdmin } = useRecoilValue<User>(userState);
   const setModal = useSetRecoilState<Modal>(modalState);
   const user = useUser();
 

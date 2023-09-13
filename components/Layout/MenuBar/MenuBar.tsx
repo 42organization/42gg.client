@@ -1,8 +1,5 @@
 import Link from 'next/link';
 import React, { useContext } from 'react';
-import { useRecoilValue } from 'recoil';
-import { User } from 'types/mainType';
-import { userState } from 'utils/recoil/layout';
 import {
   HeaderContextState,
   HeaderContext,
@@ -24,7 +21,6 @@ const MenuTop = () => {
 
 const MenuProfile = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
-  // const user = useRecoilValue<User>(userState);
   const user = useUser();
 
   const tierColor: { [key: string]: string } = {

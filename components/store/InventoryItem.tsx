@@ -1,9 +1,8 @@
 import Image from 'next/image';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { BsGiftFill, BsCircleFill } from 'react-icons/bs';
 import { Tooltip } from '@mui/material';
 import { InventoryItem, InventoryItemStatus } from 'types/inventoryTypes';
-// import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/store/Inventory.module.scss';
@@ -19,7 +18,6 @@ const badge: Record<InventoryItemStatus, string> = {
 };
 
 export function InvetoryItem({ item }: inventoryItemProps) {
-  // const user = useRecoilValue(userState);
   const user = useUser();
   const setModal = useSetRecoilState(modalState);
 

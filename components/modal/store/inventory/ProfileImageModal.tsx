@@ -1,13 +1,12 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useQueryClient } from 'react-query';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { FaArrowRight } from 'react-icons/fa';
 import { TbQuestionMark } from 'react-icons/tb';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
-import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
 import {
@@ -64,7 +63,6 @@ const errorMessage: Record<errorCodeType, string> = {
 export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const setError = useSetRecoilState(errorState);
-  // const user = useRecoilValue(userState);
   const user = useUser();
   const resetModal = useResetRecoilState(modalState);
   const { imgData, imgPreview, uploadImg } = useUploadImg({
