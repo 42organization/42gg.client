@@ -36,7 +36,7 @@
 }
 
 .error {
-  font-family: 'NanumSquare_acR';
+  // font-family: 'NanumSquare_acR';
   font-size: $big-font;
   color: white;
   letter-spacing: 0.05rem;
@@ -73,7 +73,7 @@
   @include select-buttons(10rem, 3.5rem);
   .positive {
     input {
-      font-family: 'NanumSquare_acR';
+      // font-family: 'NanumSquare_acR';
       font-size: $big-font;
       font-weight: 500;
       box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.2);
