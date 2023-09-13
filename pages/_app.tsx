@@ -15,6 +15,7 @@ import 'styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const queryClient = new QueryClient();
 
   useEffect(() => {
     const handleRouteChange = (url: any) => {
@@ -25,8 +26,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
-
-  const queryClient = new QueryClient();
 
   return (
     <>
@@ -52,17 +51,17 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
       <RecoilRoot>
-        <QueryClientProvider client={queryClient}>
-          <LoginChecker>
-            <ErrorChecker>
+        <LoginChecker>
+          <ErrorChecker>
+            <QueryClientProvider client={queryClient}>
               <Layout>
                 <Component {...pageProps} />
               </Layout>
               <ModalProvider />
               <CustomizedSnackbars />
-            </ErrorChecker>
-          </LoginChecker>
-        </QueryClientProvider>
+            </QueryClientProvider>
+          </ErrorChecker>
+        </LoginChecker>
       </RecoilRoot>
     </>
   );

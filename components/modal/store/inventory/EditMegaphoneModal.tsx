@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
-import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
 import { MegaphoneItem } from 'components/Layout/MegaPhone';
@@ -12,6 +11,7 @@ import {
   ModalButton,
 } from 'components/modal/ModalButton';
 import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
+import { useUser } from 'hooks/Layout/useUser';
 import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 
@@ -49,7 +49,7 @@ const errorMessages: Record<errorCodeType, string> = {
 
 export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
   const resetModal = useResetRecoilState(modalState);
-  const user = useRecoilValue(userState);
+  const user = useUser();
   const [megaphoneData, setMegaphoneData] = useState<MegaphoneData>({
     megaphoneId: -1,
     content: '',
@@ -91,6 +91,8 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
         resetModal();
       });
   }
+
+  if (!user) return null;
 
   return (
     <div className={styles.container}>

@@ -1,10 +1,13 @@
-import { useRecoilValue } from 'recoil';
-import { userState } from 'utils/recoil/layout';
 import PlayerImage from 'components/PlayerImage';
+import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/modal/store/EdgePreview.module.scss';
 
 export default function EdgePreview({ edge }: { edge: string }) {
-  const { userImageUri } = useRecoilValue(userState);
+  const user = useUser();
+
+  if (!user) return null;
+
+  const { userImageUri } = user;
 
   return (
     <div className={styles.container}>

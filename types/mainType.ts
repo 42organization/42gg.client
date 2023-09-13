@@ -8,7 +8,7 @@ export interface User {
   userImageUri: string;
   isAttended: boolean;
   tierImageUri: string;
-  edge: string;
+  edgeType: string;
   tierName: string;
   level: number;
 }

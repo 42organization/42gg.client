@@ -1,18 +1,19 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useQueryClient } from 'react-query';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { FaArrowRight } from 'react-icons/fa';
 import { TbQuestionMark } from 'react-icons/tb';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
-import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
+import { useUser } from 'hooks/Layout/useUser';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 import { ItemCautionContainer } from './ItemCautionContainer';
@@ -62,12 +63,13 @@ const errorMessage: Record<errorCodeType, string> = {
 export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const setError = useSetRecoilState(errorState);
-  const user = useRecoilValue(userState);
+  const user = useUser();
   const resetModal = useResetRecoilState(modalState);
   const { imgData, imgPreview, uploadImg } = useUploadImg({
     maxSizeMB: 0.03,
     maxWidthOrHeight: 150,
   });
+  const queryClient = useQueryClient();
 
   async function handleProfileImageUpload() {
     if (!imgData) {
@@ -88,6 +90,7 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
         new Blob([imgData], { type: 'image/jpeg' })
       );
       await instance.post('/pingpong/users/profile-image', formData);
+      queryClient.invalidateQueries('user');
       alert(PROFILE.SUCCESS);
     } catch (error: unknown) {
       if (isAxiosError<errorPayload>(error) && error.response) {
@@ -101,6 +104,8 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
       resetModal();
     }
   }
+
+  if (!user) return null;
 
   return (
     <div className={styles.container}>

@@ -1,14 +1,12 @@
 import Link from 'next/link';
 import React, { useContext } from 'react';
-import { useRecoilValue } from 'recoil';
-import { User } from 'types/mainType';
-import { userState } from 'utils/recoil/layout';
 import {
   HeaderContextState,
   HeaderContext,
 } from 'components/Layout/HeaderContext';
 import { MainMenu, AdminMenu } from 'components/Layout/MenuBar/MenuBarElement';
 import PlayerImage from 'components/PlayerImage';
+import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 const MenuTop = () => {
@@ -23,7 +21,7 @@ const MenuTop = () => {
 
 const MenuProfile = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
-  const user = useRecoilValue<User>(userState);
+  const user = useUser();
 
   const tierColor: { [key: string]: string } = {
     손: 'none',
@@ -34,6 +32,9 @@ const MenuProfile = () => {
     검: 'black',
     무: 'rainbow',
   };
+
+  if (!user) return null;
+
   return (
     <div className={styles.menuProfileWrapper}>
       <Link
@@ -44,7 +45,7 @@ const MenuProfile = () => {
         <PlayerImage
           src={user.userImageUri}
           styleName={`menuProfile ${
-            user.edge ? user.edge.toLowerCase() : 'basic'
+            user.edgeType ? user.edgeType.toLowerCase() : 'basic'
           }`}
           size={18}
         />
