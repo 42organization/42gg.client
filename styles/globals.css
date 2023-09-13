@@ -112,12 +112,6 @@ body {
   font-style: normal;
 }
 @font-face {
-  font-family: 'Gugi';
-  src: url('../public/font/Gugi-Regular.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
   font-family: 'Jua';
   src: url('../public/font/Jua-Regular.ttf') format('opentype');
   font-weight: normal;
