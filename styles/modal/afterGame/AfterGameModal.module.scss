@@ -58,7 +58,7 @@
   display: flex;
   padding-top: 1.5rem;
   padding-bottom: 1rem;
-  font-family: 'Roboto';
+  font-family: $common-en-font;
   font-size: 0.9rem;
   font-weight: 500;
   justify-content: space-evenly;
@@ -81,7 +81,7 @@
   justify-content: space-evenly;
   align-items: center;
   height: 3rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: $common-en-font;
   font-size: 1.6rem;
   font-weight: 800;
   text-align: center;
