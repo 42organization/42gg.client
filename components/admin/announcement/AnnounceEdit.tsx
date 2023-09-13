@@ -1,10 +1,10 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
 import { instanceInManage, instance } from 'utils/axios';
-import { userState } from 'utils/recoil/layout';
 import { toastState } from 'utils/recoil/toast';
+import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/admin/announcement/AnnounceEdit.module.scss';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
@@ -15,7 +15,7 @@ const Quill = dynamic(() => import('react-quill'), {
 });
 
 export default function AnnounceEdit() {
-  const { intraId: currentUserId } = useRecoilValue(userState);
+  const user = useUser();
   const setSnackbar = useSetRecoilState(toastState);
   const [content, setContent] = useState('');
   const announceCreateResponse: { [key: string]: string } = {
@@ -31,6 +31,10 @@ export default function AnnounceEdit() {
   useEffect(() => {
     resetHandler();
   }, []);
+
+  if (!user) return null;
+
+  const currentUserId = user.intraId;
 
   const postHandler = async () => {
     try {

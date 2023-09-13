@@ -26,56 +26,10 @@
   &.normal {
     background: $vip-background;
   }
-  &.basic {
-    background: $bg-basic;
-  }
-  &.color1 {
-    background: map-get($map: $bg-pink-orange, $key: 'background');
-  }
-  &.color2 {
-    background: map-get($map: $bg-blue-green, $key: 'background');
-  }
-  &.color3 {
-    background: map-get($map: $bg-midnight, $key: 'background');
-  }
-  &.color4 {
-    background: map-get($map: $bg-orange, $key: 'background');
-  }
-  &.color5 {
-    background: map-get($map: $bg-grass-green, $key: 'background');
-  }
-  &.color6 {
-    background: map-get($map: $bg-lemon-blue, $key: 'background');
-  }
-  &.color7 {
-    background: map-get($map: $bg-dracula, $key: 'background');
-  }
-  &.color8 {
-    background: map-get($map: $bg-mint-green, $key: 'background');
-  }
-  &.color9 {
-    background: map-get($map: $bg-steel-gray, $key: 'background');
-  }
-  &.color10 {
-    background: map-get($map: $bg-blood-red, $key: 'background');
-  }
-  &.color11 {
-    background: map-get($map: $bg-blue-sky, $key: 'background');
-  }
-  &.color12 {
-    background: map-get($map: $bg-ocean-blue, $key: 'background');
-  }
-  &.color13 {
-    background: map-get($map: $bg-pink-blue, $key: 'background');
-  }
-  &.color14 {
-    background: map-get($map: $bg-sunset-pink, $key: 'background');
-  }
-  &.color15 {
-    background: map-get($map: $bg-dark-navy, $key: 'background');
-  }
-  &.color16 {
-    background: map-get($map: $bg-orange-green, $key: 'background');
+  @each $theme, $color in $bg-theme-colors {
+    &.#{$theme} {
+      background: map-get($map: $color, $key: 'background');
+    }
   }
 }
 

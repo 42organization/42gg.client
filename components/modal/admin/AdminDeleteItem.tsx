@@ -1,43 +1,42 @@
+import { useMutation, useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
-import { IUpdate } from 'types/modalTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminDeleteItem.module.scss';
 
-export default function AdminDeleteItemModal({
-  item,
-  state,
-}: {
-  item: Item;
-  state: IUpdate;
-}) {
+export default function AdminDeleteItemModal(item: Item) {
   const { itemId, itemName, mainContent, subContent } = item;
-  const { setUpdate } = state;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
+  const queryClient = useQueryClient();
 
-  const deleteItemHandler = async (itemId: number) => {
-    try {
-      await instanceInManage.delete(`/items/${itemId}`);
-      setSnackBar({
-        toastName: 'delete item',
-        severity: 'success',
-        message: `${itemId}번 ${itemName}이 삭제되었습니다!`,
-        clicked: true,
-      });
-    } catch (e: unknown) {
-      setSnackBar({
-        toastName: 'delete item',
-        severity: 'error',
-        message: `API 요청에 문제가 발생했습니다.`,
-        clicked: true,
-      });
-    }
-    setUpdate(true);
+  const { mutate, isError, isSuccess } = useMutation(() => {
+    return instanceInManage.delete(`/items/${itemId}`);
+  });
+
+  if (isError) {
+    setSnackBar({
+      toastName: 'delete item',
+      severity: 'error',
+      message: `API 요청에 문제가 발생했습니다.`,
+      clicked: true,
+    });
     setModal({ modalName: null });
-  };
+  }
+
+  if (isSuccess) {
+    setSnackBar({
+      toastName: 'delete item',
+      severity: 'success',
+      message: `${itemId}번 ${itemName}이 삭제되었습니다!`,
+      clicked: true,
+    });
+    queryClient.invalidateQueries('itemList');
+    queryClient.invalidateQueries('itemHistoryList');
+    setModal({ modalName: null });
+  }
 
   return (
     <div className={styles.whole}>
@@ -87,10 +86,7 @@ export default function AdminDeleteItemModal({
           </div>
         </div>
         <div className={styles.buttonWrap}>
-          <button
-            className={styles.deleteBtn}
-            onClick={() => deleteItemHandler(itemId)}
-          >
+          <button className={styles.deleteBtn} onClick={() => mutate}>
             삭제
           </button>
           <button

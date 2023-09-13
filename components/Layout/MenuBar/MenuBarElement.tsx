@@ -1,10 +1,8 @@
 import Link from 'next/link';
 import React, { MouseEvent, useContext, MouseEventHandler } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { AiFillShop } from 'react-icons/ai';
-import { User } from 'types/mainType';
 import { Modal } from 'types/modalTypes';
-import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
 import {
   HeaderContextState,
@@ -18,6 +16,7 @@ import RankingEmoji from 'public/image/menu_ranking.svg';
 import ReportEmoji from 'public/image/menu_report.svg';
 import SignOutEmoji from 'public/image/menu_signOut.svg';
 import StatisticsEmoji from 'public/image/menu_statistics.svg';
+import { useUser } from 'hooks/Layout/useUser';
 import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
@@ -137,8 +136,12 @@ export const MainMenu = () => {
 
 export const AdminMenu = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
-  const { isAdmin } = useRecoilValue<User>(userState);
   const setModal = useSetRecoilState<Modal>(modalState);
+  const user = useUser();
+
+  if (!user) return null;
+  const { isAdmin } = user;
+
   const logutBottomStyle = isAdmin ? styles.admin : styles.normal;
 
   return (

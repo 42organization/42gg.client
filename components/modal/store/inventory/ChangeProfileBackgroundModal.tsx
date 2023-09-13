@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useQueryClient } from 'react-query';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { Modal } from 'types/modalTypes';
@@ -48,6 +49,7 @@ export default function ChangeProfileBackgroundModal({
   const resetModal = useResetRecoilState(modalState);
   const setModal = useSetRecoilState<Modal>(modalState);
   const setError = useSetRecoilState<string>(errorState);
+  const queryClient = useQueryClient();
 
   const gachaAction = async () => {
     const data: UseItemRequest = {
@@ -60,6 +62,7 @@ export default function ChangeProfileBackgroundModal({
     setIsLoading(true);
     try {
       const res = await instance.patch('/pingpong/users/background', data);
+      queryClient.invalidateQueries('inventory');
       setIsLoading(false);
       setModal({
         modalName: 'USE-ITEM-GACHA',

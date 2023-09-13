@@ -7,6 +7,7 @@
   padding: 0.2rem 0 0.2rem 0.2rem;
   margin-bottom: 0.7rem;
   font-family: 'NanumSquare_acR', sans-serif;
+  word-break: keep-all;
   background: #ffffff5f;
   border-radius: 0.3rem;
   grid-template-columns: 1fr 3fr;
@@ -106,7 +107,7 @@
 .badge {
   width: 2.5rem;
   height: 1rem;
-  padding-top: 0.1rem;
+  padding-top: 0.05rem;
   margin-top: 0.5rem;
   font-size: 0.8rem;
   color: #fff;

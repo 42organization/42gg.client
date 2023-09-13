@@ -15,6 +15,7 @@ import 'styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const queryClient = new QueryClient();
 
   useEffect(() => {
     const handleRouteChange = (url: any) => {
