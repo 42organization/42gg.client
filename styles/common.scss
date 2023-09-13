@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Life+Savers&display=swap');
 
-/* font-size */
-$giant-giant-font: 2.4rem;
-$giant-big-font: 2.1rem;
-$big-giant-font: 1.8rem;
-$giant-font: 1.5rem;
-$big-font: 1.2rem;
-$medium-font: 1rem;
-$small-font: 0.8rem;
-
 /* radius */
 $mini-radius: 0.3rem;
 $small-radius: 0.5rem;
@@ -56,6 +47,25 @@ $winner-blue: #040eff;
 
 $coin-yellow: #e8e230;
 
+/* font-family */
+$common-font: 'NotoSansKR' sans-serif;
+$logo-font: 'Agonostic Italic', cursive;
+$title-font: 'Lexend';
+$admin-font: 'Inter', sans-serif;
+$text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
+  0 -0.1rem black;
+$text-shadow-red: 2px 2px 0px $pp-red;
+$text-shadow-blue: 2px 2px 0px $pp-blue;
+
+/* font-size */
+$giant-giant-font: 2.4rem;
+$giant-big-font: 2.1rem;
+$big-giant-font: 1.8rem;
+$giant-font: 1.5rem;
+$big-font: 1.2rem;
+$medium-font: 1rem;
+$small-font: 0.8rem;
+
 /* background-color */
 $main-background: linear-gradient(
   180deg,
@@ -76,15 +86,6 @@ $vip-background: linear-gradient(
   #1549cd 42.91%,
   #001049 59.9%
 );
-
-/* font */
-$logo-font: 'Agonostic Italic', cursive;
-$title-font: 'Lexend';
-$admin-font: 'Inter', sans-serif;
-$text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
-  0 -0.1rem black;
-$text-shadow-red: 2px 2px 0px $pp-red;
-$text-shadow-blue: 2px 2px 0px $pp-blue;
 
 @mixin ggCoin {
   color: $coin-yellow;

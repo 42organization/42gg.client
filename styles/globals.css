@@ -104,6 +104,14 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'NotoSansKR';
+  src: url('../public/font/NotoSansKR-Medium.woff') format('woff'),
+    url('../public/font/NotoSansKR-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -115,6 +123,7 @@ a {
 
 * {
   box-sizing: border-box;
+  font-family: 'NotoSansKR', sans-serif; /* common.scss의 $common-font */
 }
 
 h1 {
