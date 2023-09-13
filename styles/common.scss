@@ -52,7 +52,9 @@ $common-font: 'NotoSansKR', sans-serif;
 $title-font: 'Lexend', sans-serif;
 $admin-font: 'Inter', sans-serif;
 $logo-font: 'Overgrow', sans-serif;
+$tier-font: 'Jua', sans-serif;
 
+/* text-shadow */
 $text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
   0 -0.1rem black;
 $text-shadow-red: 2px 2px 0px $pp-red;
@@ -358,7 +360,7 @@ $vip-background: linear-gradient(
 }
 
 @mixin tierNumber() {
-  font-family: Jua;
+  font-family: $tier-font;
   background: black;
   @include txtColor();
   &.red {
