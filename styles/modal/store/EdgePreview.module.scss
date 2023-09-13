@@ -17,25 +17,6 @@
   }
 }
 
-.colorContiner {
-  display: flex;
-  height: 80vh;
-  overflow-y: scroll;
-  color: white;
-  opacity: 0;
-  animation: appear 0.5s 3s ease-in-out forwards;
-  .preview {
-    color: white;
-    animation-name: img-poof;
-    animation-duration: 0.75s;
-    animation-timing-function: ease-out;
-    animation-delay: 3s;
-    animation-iteration-count: 1;
-    animation-direction: forwards;
-    animation-fill-mode: both;
-  }
-}
-
 @keyframes img-poof {
   0% {
     filter: blur(9px) contrast(0.3) brightness(0.7) sepia(1) saturate(4)

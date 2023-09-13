@@ -27,7 +27,7 @@ const caution = [
   '삭제한 확성기는 다시 복구할 수 없습니다.',
 ];
 
-const failMessage = '확성기 데이터를 불러오는데 실패했습니다.';
+const loadingMessage = '확성기 불러오는 중... ᪤ࡇ᪤';
 
 const errorCode = ['ME200', 'RC500', 'RC200'] as const;
 
@@ -102,7 +102,7 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
           <div className={styles.sectionTitle}>미리보기</div>
           <MegaphoneItem
             content={
-              megaphoneData.content === '' ? failMessage : megaphoneData.content
+              megaphoneData.content ? megaphoneData.content : loadingMessage
             }
             intraId={user.intraId}
           />

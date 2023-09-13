@@ -1,5 +1,4 @@
-// Tranquil
-$bg-pink-orange: (
+$bg-tranquil: (
   'background': linear-gradient(to bottom, #ef629f, #eecda3),
   'profile-game-result': (
     'light': rgba(#f477ad, 0.5),
@@ -7,8 +6,7 @@ $bg-pink-orange: (
     'big': linear-gradient(110deg, #ef629f 10%, #eecda3 100%),
   ),
 );
-// Windy
-$bg-blue-green: (
+$bg-windy: (
   'background': linear-gradient(to bottom, #acb6e5, #86fde8),
   'profile-game-result': (
     'light': rgba(#acb6e5, 0.5),
@@ -16,8 +14,7 @@ $bg-blue-green: (
     'big': linear-gradient(110deg, #acb6e5 10%, #86fde8 100%),
   ),
 );
-// Bupe
-$bg-midnight: (
+$bg-bupe: (
   'background': linear-gradient(to bottom, #00416a, #e4e5e6),
   'profile-game-result': (
     'light': rgba(#6f95ad, 0.5),
@@ -25,8 +22,7 @@ $bg-midnight: (
     'big': linear-gradient(110deg, #4b83a6 10%, #e4e5e6 100%),
   ),
 );
-// Mango
-$bg-orange: (
+$bg-mango: (
   'background': linear-gradient(to top, #ffe259, #ffa751),
   'profile-game-result': (
     'light': rgba(#ea8520, 0.5),
@@ -34,8 +30,7 @@ $bg-orange: (
     'big': linear-gradient(110deg, #ea8520 10%, #ffe259 100%),
   ),
 );
-// Misty Meadow
-$bg-grass-green: (
+$bg-misty-meadow: (
   'background': linear-gradient(to bottom, #215f00, #e4e4d9),
   'profile-game-result': (
     'light': rgba(#6a9a51, 0.5),
@@ -43,8 +38,7 @@ $bg-grass-green: (
     'big': linear-gradient(110deg, #6a9a51 10%, #e4e4d9 100%),
   ),
 );
-// Opa
-$bg-lemon-blue: (
+$bg-opa: (
   'background': linear-gradient(to top, #3d7eaa, #ffe47a),
   'profile-game-result': (
     'light': rgba(#7bbddc, 0.5),
@@ -52,7 +46,6 @@ $bg-lemon-blue: (
     'big': linear-gradient(110deg, #3d7194 10%, #7bbddc 100%),
   ),
 );
-// Dracula
 $bg-dracula: (
   'background': linear-gradient(to top, #dc2424, #4a569d),
   'profile-game-result': (
@@ -61,8 +54,7 @@ $bg-dracula: (
     'big': linear-gradient(110deg, #751f3e 10%, #804a9d 100%),
   ),
 );
-// Sea Blizz
-$bg-mint-green: (
+$bg-sea-blizz: (
   'background': linear-gradient(to bottom, #1cd8d2, #93edc7),
   'profile-game-result': (
     'light': rgba(#18a5a0, 0.5),
@@ -70,8 +62,7 @@ $bg-mint-green: (
     'big': linear-gradient(110deg, #18a5a0 10%, #93edc7 100%),
   ),
 );
-// Mystic
-$bg-steel-gray: (
+$bg-mystic: (
   'background': linear-gradient(to bottom, #757f9a, #d7dde8),
   'profile-game-result': (
     'light': rgba(#757f9a, 0.5),
@@ -79,8 +70,7 @@ $bg-steel-gray: (
     'big': linear-gradient(110deg, #757f9a 10%, #d7dde8 100%),
   ),
 );
-// The Strain
-$bg-blood-red: (
+$bg-strain: (
   'background': linear-gradient(to bottom, #870000, #190a05),
   'profile-game-result': (
     'light': #a31616,
@@ -88,8 +78,7 @@ $bg-blood-red: (
     'big': linear-gradient(110deg, #650101 10%, #c63333 100%),
   ),
 );
-// Cool Sky
-$bg-blue-sky: (
+$bg-cool-sky: (
   'background': linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff),
   'profile-game-result': (
     'light': rgba(#72c2f8, 0.5),
@@ -97,8 +86,7 @@ $bg-blue-sky: (
     'big': linear-gradient(110deg, #72c2f8 10%, #cae9f5 100%),
   ),
 );
-// Jodhpur
-$bg-ocean-blue: (
+$bg-jodhpur: (
   'background': linear-gradient(to top, #9cecfb, #65c7f7, #0052d4),
   'profile-game-result': (
     'light': rgba(#4295df, 0.5),
@@ -106,8 +94,7 @@ $bg-ocean-blue: (
     'big': linear-gradient(110deg, #4295df 10%, #9cecfb 100%),
   ),
 );
-// Hazel
-$bg-pink-blue: (
+$bg-hazel: (
   'background': linear-gradient(to top, #77a1d3, #79cbca, #e684ae),
   'profile-game-result': (
     'light': rgba(#2e3562, 0.2),
@@ -115,8 +102,7 @@ $bg-pink-blue: (
     'big': linear-gradient(110deg, #757cb8 10%, #a0e4e1 100%),
   ),
 );
-// Radar
-$bg-sunset-pink: (
+$bg-radar: (
   'background': linear-gradient(to top, #a770ef, #cf8bf3, #fdb99b),
   'profile-game-result': (
     'light': rgba(#8f3ca0, 0.5),
@@ -124,8 +110,7 @@ $bg-sunset-pink: (
     'big': linear-gradient(110deg, #8f3ca0 10%, #fb94c4 100%),
   ),
 );
-// Royal Blue + Petrol
-$bg-dark-navy: (
+$bg-royal-blue: (
   'background': linear-gradient(to top, #bbd2c5, #536976, #292e49),
   'profile-game-result': (
     'light': rgba(#537c88, 0.5),
@@ -133,12 +118,46 @@ $bg-dark-navy: (
     'big': linear-gradient(110deg, #537c88 10%, #bbd2c5 100%),
   ),
 );
-// MegaTron
-$bg-orange-green: (
+$bg-megatron: (
   'background': linear-gradient(to top, #c6ffdd, #fbd786, #f7797d),
   'profile-game-result': (
     'light': rgba(#f79a75, 0.5),
     'dark': #f79a75,
     'big': linear-gradient(110deg, #fa888b 10%, #fbd786 100%),
   ),
+);
+
+$bg-basic: (
+  'background':
+    linear-gradient(180deg, #301451 23.82%, #481570 58.85%, #300e4b 98.44%),
+  'profile-game-result': (
+    'light': linear-gradient(0deg, #9134f7, #9134f7),
+    'dark': linear-gradient(180deg, #631db2 0%, #6a0db3 100%),
+    'big': linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%),
+  ),
+);
+
+$bg-theme-colors: (
+  basic: $bg-basic,
+  // 5티어
+  color1: $bg-cool-sky,
+  color2: $bg-misty-meadow,
+  color3: $bg-bupe,
+  color4: $bg-mango,
+  // 4티어
+  color5: $bg-sea-blizz,
+  color6: $bg-opa,
+  color7: $bg-strain,
+  // 3티어
+  color8: $bg-windy,
+  color9: $bg-mystic,
+  color10: $bg-dracula,
+  // 2티어
+  color11: $bg-tranquil,
+  color12: $bg-jodhpur,
+  color13: $bg-hazel,
+  // 1티어
+  color14: $bg-radar,
+  color15: $bg-royal-blue,
+  color16: $bg-megatron,
 );

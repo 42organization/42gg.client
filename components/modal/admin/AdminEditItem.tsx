@@ -1,20 +1,15 @@
 import Image from 'next/image';
+import { AxiosResponse } from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
-import { IUpdate } from 'types/modalTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminEditItem.module.scss';
 
-export default function AdminEditItemModal({
-  item,
-  state,
-}: {
-  item: Item;
-  state: IUpdate;
-}) {
+export default function AdminEditItemModal(item: Item) {
   const {
     itemId,
     itemName,
@@ -25,13 +20,13 @@ export default function AdminEditItemModal({
     discount,
     itemType,
   } = item;
-  const { setUpdate } = state;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
   const { imgData, imgPreview, uploadImg } = useUploadImg({
     maxSizeMB: 0.03,
     maxWidthOrHeight: 300,
   });
+  const queryClient = useQueryClient();
 
   const editErrorResponse: { [key: string]: string } = {
     IT200: '아이템 타입이 일치하지 않습니다.',
@@ -40,7 +35,11 @@ export default function AdminEditItemModal({
     IT415: '아이템 이미지 타입이 jpeg가 아닙니다.',
   };
 
-  const editItemHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const mutation = useMutation((formData: FormData): Promise<AxiosResponse> => {
+    return instanceInManage.post(`/items/${itemId}`, formData);
+  });
+
+  const editItemHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const name = form.get('name');
@@ -78,33 +77,30 @@ export default function AdminEditItemModal({
       formData.append('imgData', new Blob([imgData], { type: 'image/jpeg' }));
     }
 
-    try {
-      await instanceInManage.post(`/items/${itemId}`, formData);
-      setSnackBar({
-        toastName: 'edit item',
-        severity: 'success',
-        message: '아이템 정보가 수정되었습니다.',
-        clicked: true,
-      });
-    } catch (e: any) {
-      if (e.response.data.code in editErrorResponse) {
-        setSnackBar({
-          toastName: 'edit item',
-          severity: 'error',
-          message: editErrorResponse[e.response.data.code],
-          clicked: true,
-        });
-      } else {
-        setSnackBar({
-          toastName: 'edit item',
-          severity: 'error',
-          message: `아이템 정보를 수정할 수 없습니다.`,
-          clicked: true,
-        });
-      }
-    }
-    setUpdate(true);
-    setModal({ modalName: null });
+    mutation.mutate(formData, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: 'itemHistoryList' });
+        queryClient.invalidateQueries({ queryKey: 'itemList' });
+        setModal({ modalName: null });
+      },
+      onError: (e: any) => {
+        if (e.response.data.code in editErrorResponse) {
+          setSnackBar({
+            toastName: 'edit item',
+            severity: 'error',
+            message: editErrorResponse[e.response.data.code],
+            clicked: true,
+          });
+        } else {
+          setSnackBar({
+            toastName: 'edit item',
+            severity: 'error',
+            message: 'API ERROR',
+            clicked: true,
+          });
+        }
+      },
+    });
   };
 
   return (

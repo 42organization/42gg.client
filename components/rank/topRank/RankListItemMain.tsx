@@ -49,11 +49,13 @@ export default function RankListItemMain({
                   size={50}
                 />
                 <div className={`${styles.tierImageId}`}>
-                  <PlayerImage
-                    src={tierImage}
-                    styleName={'ranktier'}
-                    size={10}
-                  />
+                  {Mode === 'RANK' && (
+                    <PlayerImage
+                      src={tierImage}
+                      styleName={'ranktier'}
+                      size={10}
+                    />
+                  )}
                   {intraId}
                 </div>
               </Link>
