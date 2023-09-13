@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import {
   Paper,
@@ -9,8 +9,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { Item, ItemList } from 'types/itemTypes';
-import { IUpdate } from 'types/modalTypes';
+import { Item } from 'types/itemTypes';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
@@ -34,32 +33,21 @@ const tableTitle: { [key: string]: string } = {
   delete: '삭제',
 };
 
-function ItemList({ update, setUpdate }: IUpdate) {
-  const [itemListData, setItemListData] = useState<ItemList>({
-    itemList: [],
-  });
+function StoreItemList() {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  const getItemListHandler = useCallback(async () => {
-    try {
-      const res = await instance.get(`/pingpong/items/store`);
-      setItemListData(res.data);
-    } catch (e: unknown) {
-      setSnackBar({
-        toastName: 'get itemlist',
-        severity: 'error',
-        message: 'API 요청에 문제가 발생했습니다.',
-        clicked: true,
-      });
-    }
-  }, []);
+  const getApi = async () => {
+    const res = await instance.get(`/pingpong/items/store`);
+    return res.data;
+  };
+
+  const { data, isError } = useQuery('itemList', getApi);
 
   const editItem = (item: Item) => {
     setModal({
       modalName: 'ADMIN-ITEM_EDIT',
       item: item,
-      update: { update: update, setUpdate: setUpdate },
     });
   };
 
@@ -78,24 +66,22 @@ function ItemList({ update, setUpdate }: IUpdate) {
     });
   };
 
-  useEffect(() => {
-    getItemListHandler();
-  }, []);
-
-  useEffect(() => {
-    if (update) {
-      getItemListHandler();
-      setUpdate(false);
-    }
-  }, [update, getItemListHandler]);
+  if (isError) {
+    setSnackBar({
+      toastName: 'get itemlist',
+      severity: 'error',
+      message: 'API 요청에 문제가 발생했습니다.',
+      clicked: true,
+    });
+  }
 
   return (
     <TableContainer className={styles.tableContainer} component={Paper}>
       <Table className={styles.table} aria-label='customized table'>
         <AdminTableHead tableName={'itemList'} table={tableTitle} />
         <TableBody className={styles.tableBody}>
-          {itemListData.itemList.length > 0 ? (
-            itemListData.itemList.map((item: Item) => (
+          {data?.itemList?.length > 0 ? (
+            data?.itemList.map((item: Item) => (
               <TableRow className={styles.tableRow} key={item.itemId}>
                 {tableFormat['itemList'].columns.map(
                   (columnName: string, index: number) => {
@@ -106,7 +92,7 @@ function ItemList({ update, setUpdate }: IUpdate) {
                             src={
                               item.imageUri
                                 ? item[columnName]
-                                : '/public/image/fallBackSrc.jpeg'
+                                : '/image/not_found.svg'
                             }
                             alt='Item Iamge'
                             width={30}
@@ -171,4 +157,4 @@ function ItemList({ update, setUpdate }: IUpdate) {
   );
 }
 
-export default ItemList;
+export default StoreItemList;

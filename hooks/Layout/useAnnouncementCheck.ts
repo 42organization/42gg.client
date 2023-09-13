@@ -5,10 +5,12 @@ import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import useAxiosGet from 'hooks/useAxiosGet';
 
-const useAnnouncementCheck = (presentPath: string, user: User) => {
+const useAnnouncementCheck = (presentPath: string, user?: User) => {
   const setModal = useSetRecoilState<Modal>(modalState);
   const announcementTime: string | null =
-    localStorage.getItem('announcementTime');
+    typeof window !== 'undefined'
+      ? localStorage.getItem('announcementTime')
+      : null;
 
   const getAnnouncementHandler = useAxiosGet<any>({
     url: '/pingpong/announcement',
@@ -17,7 +19,7 @@ const useAnnouncementCheck = (presentPath: string, user: User) => {
         setModal({
           modalName: 'EVENT-ANNOUNCEMENT',
           announcement: data,
-          isAttended: user.isAttended,
+          isAttended: user?.isAttended,
         });
     },
     err: 'RJ01',
@@ -25,7 +27,7 @@ const useAnnouncementCheck = (presentPath: string, user: User) => {
   });
 
   const announcementHandler = () => {
-    if (presentPath === '/') {
+    if (presentPath === '/' && user) {
       if (
         !announcementTime ||
         Date.parse(announcementTime) < Date.parse(new Date().toString())
@@ -38,15 +40,16 @@ const useAnnouncementCheck = (presentPath: string, user: User) => {
   };
 
   const attendedHandler = () => {
-    if (!user.isAttended && presentPath === '/') {
+    if (user && !user.isAttended && presentPath === '/') {
       setModal({ modalName: 'EVENT-WELCOME' });
     }
   };
 
   useEffect(() => {
+    if (!user) return;
     announcementHandler();
     attendedHandler();
-  }, [user.isAttended, presentPath]);
+  }, [user, presentPath]);
 };
 
 export default useAnnouncementCheck;

@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { colorModeState } from 'utils/recoil/colorMode';
-import { userState } from 'utils/recoil/layout';
 import { openCurrentMatchState } from 'utils/recoil/match';
 import AdminReject from 'components/admin/AdminReject';
 import AdminLayout from 'components/admin/Layout';
@@ -17,6 +16,7 @@ import useAnnouncementCheck from 'hooks/Layout/useAnnouncementCheck';
 import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
 import useLiveCheck from 'hooks/Layout/useLiveCheck';
 import useSetAfterGameModal from 'hooks/Layout/useSetAfterGameModal';
+import { useUser } from 'hooks/Layout/useUser';
 import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/Layout/Layout.module.scss';
 
@@ -25,7 +25,7 @@ type AppLayoutProps = {
 };
 
 export default function AppLayout({ children }: AppLayoutProps) {
-  const user = useRecoilValue(userState);
+  const user = useUser();
   const colorMode = useRecoilValue(colorModeState);
   const presentPath = useRouter().asPath;
   const router = useRouter();
@@ -41,6 +41,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
     router.replace('/');
     router.push(`/match`);
   };
+
+  if (!user) return null;
 
   return presentPath.includes('/admin') ? (
     user.isAdmin ? (

@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
-import { userState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/modal';
+import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
 import { MegaphoneItem } from 'components/Layout/MegaPhone';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
 import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
+import { useUser } from 'hooks/Layout/useUser';
 import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 
@@ -26,7 +27,7 @@ const caution = [
   '삭제한 확성기는 다시 복구할 수 없습니다.',
 ];
 
-const failMessage = '확성기 데이터를 불러오는데 실패했습니다.';
+const loadingMessage = '확성기 불러오는 중... ᪤ࡇ᪤';
 
 const errorCode = ['ME200', 'RC500', 'RC200'] as const;
 
@@ -38,15 +39,17 @@ type errorPayload = {
   code: errorCodeType;
 };
 
+const { EDIT_MEGAPHONE } = ITEM_ALERT_MESSAGE;
+
 const errorMessages: Record<errorCodeType, string> = {
-  ME200: '확성기를 찾을 수 없습니다.',
-  RC500: '삭제할 수 없는 확성기입니다.',
-  RC200: '삭제할 수 없는 확성기입니다.',
+  ME200: EDIT_MEGAPHONE.NOT_FOUND_ERROR,
+  RC500: EDIT_MEGAPHONE.ITEM_ERROR,
+  RC200: EDIT_MEGAPHONE.ITEM_ERROR,
 };
 
 export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
   const resetModal = useResetRecoilState(modalState);
-  const user = useRecoilValue(userState);
+  const user = useUser();
   const [megaphoneData, setMegaphoneData] = useState<MegaphoneData>({
     megaphoneId: -1,
     content: '',
@@ -73,7 +76,7 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
     instance
       .delete(`/pingpong/megaphones/${megaphoneData.megaphoneId}`)
       .then(() => {
-        alert('확성기가 삭제되었습니다.');
+        alert(EDIT_MEGAPHONE.SUCCESS);
       })
       .catch((error: unknown) => {
         if (isAxiosError<errorPayload>(error) && error.response) {
@@ -89,6 +92,8 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
       });
   }
 
+  if (!user) return null;
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>확성기 삭제</div>
@@ -97,7 +102,7 @@ export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
           <div className={styles.sectionTitle}>미리보기</div>
           <MegaphoneItem
             content={
-              megaphoneData.content === '' ? failMessage : megaphoneData.content
+              megaphoneData.content ? megaphoneData.content : loadingMessage
             }
             intraId={user.intraId}
           />

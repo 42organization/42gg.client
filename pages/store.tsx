@@ -4,7 +4,7 @@ import { StoreMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
 import { updateCoinState } from 'utils/recoil/updateCoin';
 import { StoreModeWrap } from 'components/mode/modeWraps/StoreModeWrap';
-import { Inventory } from 'components/store/Inventory';
+import { InventoryList } from 'components/store/InventoryList';
 import ItemsList from 'components/store/purchase/ItemsList';
 import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/store/StoreContainer.module.scss';
@@ -41,7 +41,7 @@ export default function Store() {
       <h1 className={styles.title}>GG Store</h1>
       <StoreModeWrap currentMode={mode} setStoreMode={setMode} coin={coin} />
       <div className={styles.storeContainer}>
-        {mode === 'BUY' ? <ItemsList /> : <Inventory />}
+        {mode === 'BUY' ? <ItemsList /> : <InventoryList />}
       </div>
     </div>
   );

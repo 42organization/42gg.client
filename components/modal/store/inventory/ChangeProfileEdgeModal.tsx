@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useQueryClient } from 'react-query';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemRequest } from 'types/inventoryTypes';
 import { Modal } from 'types/modalTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
+import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -30,12 +32,14 @@ type errorPayload = {
   code: errorCodeType;
 };
 
+const { COMMON } = ITEM_ALERT_MESSAGE;
+
 const errorMessages: Record<errorCodeType, string> = {
-  IT200: '사용할 수 없는 아이템입니다 (｡•́︿•̀｡)',
-  RC200: '이미 사용한 아이템입니다 (｡•́︿•̀｡)',
-  RC100: '사용할 수 없는 아이템입니다 (｡•́︿•̀｡)',
-  RC403: '사용할 수 없는 아이템입니다 (｡•́︿•̀｡)',
-  UR100: 'USER NOT FOUND',
+  IT200: COMMON.ITEM_ERROR,
+  RC200: COMMON.USED_ERROR,
+  RC100: COMMON.ITEM_ERROR,
+  RC403: COMMON.ITEM_ERROR,
+  UR100: COMMON.USER_ERROR, // setError로 alert 띄우지 않고 처리
 };
 
 export default function ChangeProfileEdgeModal({
@@ -45,6 +49,7 @@ export default function ChangeProfileEdgeModal({
   const resetModal = useResetRecoilState(modalState);
   const setModal = useSetRecoilState<Modal>(modalState);
   const setError = useSetRecoilState<string>(errorState);
+  const queryClient = useQueryClient();
 
   const gachaAction = async () => {
     const data: UseItemRequest = {
@@ -57,6 +62,8 @@ export default function ChangeProfileEdgeModal({
     setIsLoading(true);
     try {
       const res = await instance.patch('/pingpong/users/edge', data);
+      queryClient.invalidateQueries('inventory');
+      queryClient.invalidateQueries('user');
       setIsLoading(false);
       setModal({
         modalName: 'USE-ITEM-GACHA',

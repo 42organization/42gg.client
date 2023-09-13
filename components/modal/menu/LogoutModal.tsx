@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useQueryClient } from 'react-query';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -9,10 +10,15 @@ import styles from 'styles/modal/menu/LogoutModal.module.scss';
 export default function LogoutModal() {
   const [isLoading, setIsLoading] = useState(false);
   const [onReturn, onLogout] = useLogoutCheck();
+  const queryClient = useQueryClient();
 
   const handleLogout = () => {
     setIsLoading(true);
-    onLogout().finally(() => setIsLoading(false));
+    onLogout()
+      .then(() => queryClient.removeQueries('user'))
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (

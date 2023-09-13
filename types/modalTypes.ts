@@ -102,11 +102,6 @@ export interface IRandomItem {
   color: string;
 }
 
-export interface IUpdate {
-  update: boolean;
-  setUpdate: Dispatch<SetStateAction<boolean>>;
-}
-
 export interface Modal {
   modalName: ModalName;
   manual?: Manual;
@@ -133,5 +128,4 @@ export interface Modal {
   isAttended?: boolean;
   totalCoin?: ICoin;
   randomItem?: IRandomItem;
-  update?: IUpdate;
 }
