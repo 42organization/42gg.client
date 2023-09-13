@@ -4,10 +4,13 @@
   @include modalContainer('DARKPURPLE');
   width: 80vw;
   max-width: 20rem;
+  justify-content: flex-start;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .title {
-  margin: 2.75rem 0;
+  margin-bottom: 1.5rem;
   font-family: 'Lexend';
   font-size: 2.25rem;
   color: #f8f8ff;
@@ -16,13 +19,13 @@
 
 .matchRadioBoxWrap {
   box-sizing: border-box;
-  width: 100%;
+  width: 90%;
 }
 
 .ruleList {
   width: 100%;
-  height: 60vh;
-  max-height: 285px;
+  height: 50vh;
+  max-height: 50vh;
   padding: 1rem;
   margin: 0 0.6rem 1.75rem;
   overflow-y: scroll;
@@ -30,8 +33,8 @@
   font-weight: 700;
   color: black;
   list-style: none;
-  background: #ffffff;
-  border-radius: 0px 0px 10px 10px;
+  background: #fdebf8;
+  border-radius: 10px;
 
   > li {
     margin-top: 1.2rem;
@@ -64,9 +67,11 @@
   margin-left: 0.8rem;
   font-size: 0.9rem;
   font-weight: 400;
+  word-break: keep-all;
 
   > li {
     margin: 0.4rem 0;
+    line-height: 150%;
     white-space: pre-wrap;
     list-style: square;
   }
