@@ -3,13 +3,14 @@ import { AxiosResponse } from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
+import { IUpdate } from 'types/modalTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminEditItem.module.scss';
 
-export default function AdminEditItemModal(props: Item) {
+export default function AdminEditItemModal(item: Item) {
   const {
     itemId,
     itemName,
@@ -19,17 +20,18 @@ export default function AdminEditItemModal(props: Item) {
     originalPrice,
     discount,
     itemType,
-  } = props;
+  } = item;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
   const { imgData, imgPreview, uploadImg } = useUploadImg({
     maxSizeMB: 0.03,
-    maxWidthOrHeight: 250,
+    maxWidthOrHeight: 300,
   });
   const queryClient = useQueryClient();
 
   const editErrorResponse: { [key: string]: string } = {
     IT200: '아이템 타입이 일치하지 않습니다.',
+    IT205: '해당 아이템에 접근할 수 없습니다.',
     IT413: '아이템 이미지가 너무 큽니다.',
     IT415: '아이템 이미지 타입이 jpeg가 아닙니다.',
   };

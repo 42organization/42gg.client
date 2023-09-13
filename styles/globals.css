@@ -117,6 +117,12 @@ body {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Jua';
+  src: url('../public/font/Jua-Regular.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 ::-webkit-scrollbar {
   display: none;

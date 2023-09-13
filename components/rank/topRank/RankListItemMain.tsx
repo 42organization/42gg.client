@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { TbQuestionMark } from 'react-icons/tb';
-import { userImages, RankUser, NormalUser } from 'types/rankTypes';
+import { userImages } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
 import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/rank/RankListMain.module.scss';
@@ -16,7 +16,7 @@ export default function RankListItemMain({
   user,
   rank,
 }: RankListItemMainProps) {
-  const { intraId, userImageUri, tierImageUri, edge } = user || {};
+  const { intraId, imageUri, tierImage, edge } = user || {};
   const Mode = useRecoilValue(colorToggleSelector);
   const renderLink = intraId !== 'intraId';
 
@@ -40,7 +40,7 @@ export default function RankListItemMain({
             {renderLink ? (
               <Link href={`users/detail?intraId=${intraId}`}>
                 <PlayerImage
-                  src={userImageUri}
+                  src={imageUri}
                   styleName={
                     rank === 1
                       ? `ranktropybig ${edge ? edge.toLowerCase() : 'basic'}`
@@ -49,11 +49,13 @@ export default function RankListItemMain({
                   size={50}
                 />
                 <div className={`${styles.tierImageId}`}>
-                  <PlayerImage
-                    src={tierImageUri}
-                    styleName={'ranktier'}
-                    size={10}
-                  />
+                  {Mode === 'RANK' && (
+                    <PlayerImage
+                      src={tierImage}
+                      styleName={'ranktier'}
+                      size={10}
+                    />
+                  )}
                   {intraId}
                 </div>
               </Link>

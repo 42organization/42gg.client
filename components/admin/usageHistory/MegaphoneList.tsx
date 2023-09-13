@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { Imegaphone, ImegaphoneTable } from 'types/admin/adminReceiptType';
 import { instanceInManage } from 'utils/axios';
-import { dateToStringShort, getFormattedDateToString } from 'utils/handleTime';
+import { getFormattedDateToString } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -57,9 +57,12 @@ function MegaphoneList() {
       );
       setMegaphoneData({
         megaphoneList: res.data.megaphoneList.map((megaphone: Imegaphone) => {
+          const { year, month, date } = getFormattedDateToString(
+            new Date(megaphone.usedAt)
+          );
           return {
             ...megaphone,
-            usedAt: dateToStringShort(new Date(megaphone.usedAt)),
+            usedAt: `${year}-${month}-${date}`,
           };
         }),
         totalPage: res.data.totalPage,
@@ -137,8 +140,15 @@ function MegaphoneList() {
                             <button
                               className={styles.deleteBtn}
                               onClick={() => deleteMegaphone(megaphone)}
+                              disabled={
+                                megaphone.status === '삭제' ||
+                                megaphone.status === '사용 완료'
+                              }
                             >
-                              삭제
+                              {megaphone.status === '삭제' ||
+                              megaphone.status === '사용 완료'
+                                ? 'X'
+                                : '삭제'}
                             </button>
                           ) : (
                             <AdminContent

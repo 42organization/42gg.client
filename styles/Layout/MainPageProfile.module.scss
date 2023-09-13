@@ -6,7 +6,7 @@
   height: max-content;
   flex-direction: column;
   margin-top: 0.8rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', 'sans-serif';
   justify-content: center;
   align-items: center;
 }
@@ -35,7 +35,7 @@
     padding-left: 0.8rem;
     .greetings {
       margin-bottom: 0.2rem;
-      font-size: 0.75rem;
+      font-size: 1rem;
     }
     .intraId {
       display: flex;

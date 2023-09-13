@@ -1,10 +1,23 @@
+import { useState } from 'react';
 import { Cancel } from 'types/modalTypes';
+import {
+  ModalButtonContainer,
+  ModalButton,
+} from 'components/modal/ModalButton';
 import useMatchCancelModal from 'hooks/modal/match/useMatchCancelModal';
 import styles from 'styles/modal/match/MatchCancelModal.module.scss';
 
 export default function MatchCancelModal({ startTime }: Cancel) {
+  const [isLoading, setIsLoading] = useState(false);
   const { content, contentType, rejectCancel, onCancel, onReturn, myMatch } =
     useMatchCancelModal({ startTime });
+
+  const handleCancel = () => {
+    setIsLoading(true);
+    onCancel().finally(() => {
+      setIsLoading(false);
+    });
+  };
 
   return (
     <div className={styles.container}>
@@ -17,22 +30,21 @@ export default function MatchCancelModal({ startTime }: Cancel) {
           <></>
         )}
       </div>
-      <div className={styles.buttons}>
+      <ModalButtonContainer>
         {rejectCancel ? (
-          <div className={styles.positive}>
-            <input onClick={onReturn} type='button' value='확인' />
-          </div>
+          <ModalButton onClick={onReturn} style='positive' value='확인' />
         ) : (
           <>
-            <div className={styles.negative}>
-              <input onClick={onReturn} type='button' value='아니오' />
-            </div>
-            <div className={styles.positive}>
-              <input onClick={onCancel} type='button' value='예' />
-            </div>
+            <ModalButton onClick={onReturn} style='negative' value='아니오' />
+            <ModalButton
+              onClick={handleCancel}
+              style='positive'
+              value='예'
+              isLoading={isLoading}
+            />
           </>
         )}
-      </div>
+      </ModalButtonContainer>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import { PriceTag } from 'types/modalTypes';
-import { instance } from 'utils/axios';
+import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { updateCoinState } from 'utils/recoil/updateCoin';
@@ -13,21 +13,55 @@ import styles from 'styles/modal/store/BuyModal.module.scss';
 
 export default function BuyModal({ itemId, product, price }: PriceTag) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const setModal = useSetRecoilState(modalState);
   const resetModal = useResetRecoilState(modalState);
   const setError = useSetRecoilState<string>(errorState);
   const updateCoin = useSetRecoilState(updateCoinState);
 
-  // TODO: 에러 처리
+  const errorCode = ['IT100', 'IT201', 'IT202', 'IT203', 'UR100'] as const;
+
+  type errorCodeType = (typeof errorCode)[number];
+
+  type errorPayload = {
+    status: number;
+    message: string;
+    code: errorCodeType;
+  };
+
+  const errorMessages: Record<errorCodeType, string> = {
+    IT100: '해당 아이템이 없습니다 (• ᴖ •｡)',
+    IT201: '지금은 구매할 수 없는 아이템입니다 (• ᴖ •｡)',
+    IT202: 'GG코인이 부족합니다 (• ᴖ •｡)',
+    IT203: '카카오 유저는 상점을 이용할 수 없습니다 (• ᴖ •｡)',
+    UR100: 'USER NOT FOUND',
+  };
+
   const onPurchase = async () => {
     setIsLoading(true);
     try {
       await instance.post(`/pingpong/items/purchases/${itemId}`, null);
-      alert(`구매 성공!`);
+      alert(`구매 성공 ¡¡¡( •̀ ᴗ •́ )و!!!`);
       updateCoin(true);
       setIsLoading(false);
-    } catch (error) {
+    } catch (error: unknown) {
       setIsLoading(false);
-      setError('HB03');
+      if (isAxiosError<errorPayload>(error) && error.response) {
+        const { code } = error.response.data;
+        if (errorCode.includes(code) && code !== 'UR100') {
+          if (code === 'IT202') {
+            setModal({
+              modalName: 'PURCHASE-NO_COIN',
+            });
+            return;
+          } else {
+            alert(errorMessages[code]);
+          }
+        } else {
+          setError('HB03');
+        }
+      } else {
+        setError('HB03');
+      }
     }
     resetModal();
   };
@@ -44,7 +78,7 @@ export default function BuyModal({ itemId, product, price }: PriceTag) {
           </div>
           <div className={styles.itemPrice}>
             <div>가격:</div>
-            <div>{price} 코인</div>
+            <div>{price.toLocaleString()} 코인</div>
           </div>
         </div>
         <div className={styles.warning}>

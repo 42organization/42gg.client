@@ -1,4 +1,5 @@
 @import 'styles/common.scss';
+@import 'styles/ProfileBackgroundTheme.scss';
 
 .container {
   display: flex;
@@ -22,52 +23,52 @@
     height: 75%;
     margin-left: 5%;
     &.color1 {
-      background: $bg-pink-orange;
+      background: map-get($map: $bg-pink-orange, $key: 'background');
     }
     &.color2 {
-      background: $bg-blue-green;
+      background: map-get($map: $bg-blue-green, $key: 'background');
     }
     &.color3 {
-      background: $bg-midnight;
+      background: map-get($map: $bg-midnight, $key: 'background');
     }
     &.color4 {
-      background: $bg-orange;
+      background: map-get($map: $bg-orange, $key: 'background');
     }
     &.color5 {
-      background: $bg-grass-green;
+      background: map-get($map: $bg-grass-green, $key: 'background');
     }
     &.color6 {
-      background: $bg-lemon-blue;
+      background: map-get($map: $bg-lemon-blue, $key: 'background');
     }
     &.color7 {
-      background: $bg-dracula;
+      background: map-get($map: $bg-dracula, $key: 'background');
     }
     &.color8 {
-      background: $bg-mint-green;
+      background: map-get($map: $bg-mint-green, $key: 'background');
     }
     &.color9 {
-      background: $bg-steel-gray;
+      background: map-get($map: $bg-steel-gray, $key: 'background');
     }
     &.color10 {
-      background: $bg-blood-red;
+      background: map-get($map: $bg-blood-red, $key: 'background');
     }
     &.color11 {
-      background: $bg-blue-sky;
+      background: map-get($map: $bg-blue-sky, $key: 'background');
     }
     &.color12 {
-      background: $bg-ocean-blue;
+      background: map-get($map: $bg-ocean-blue, $key: 'background');
     }
     &.color13 {
-      background: $bg-pink-blue;
+      background: map-get($map: $bg-pink-blue, $key: 'background');
     }
     &.color14 {
-      background: $bg-sunset-pink;
+      background: map-get($map: $bg-sunset-pink, $key: 'background');
     }
     &.color15 {
-      background: $bg-dark-navy;
+      background: map-get($map: $bg-dark-navy, $key: 'background');
     }
     &.color16 {
-      background: $bg-orange-green;
+      background: map-get($map: $bg-orange-green, $key: 'background');
     }
   }
 }

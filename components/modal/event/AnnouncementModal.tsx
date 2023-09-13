@@ -4,6 +4,10 @@ import { useSetRecoilState } from 'recoil';
 import { Announcement } from 'types/modalTypes';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { modalState } from 'utils/recoil/modal';
+import {
+  ModalButtonContainer,
+  ModalButton,
+} from 'components/modal/ModalButton';
 import styles from 'styles/modal/event/AnnouncementModal.module.scss';
 import 'react-quill/dist/quill.bubble.css';
 
@@ -75,11 +79,13 @@ export default function AnnouncementModal({
           <div>하루 동안 열지 않기</div>
         </label>
       </div>
-      <div className={styles.buttons}>
-        <div className={styles.positive}>
-          <input onClick={closeModalButtonHandler} type='button' value='닫기' />
-        </div>
-      </div>
+      <ModalButtonContainer>
+        <ModalButton
+          onClick={closeModalButtonHandler}
+          value='닫기'
+          style='positive'
+        />
+      </ModalButtonContainer>
     </div>
   );
 }

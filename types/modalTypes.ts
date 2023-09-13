@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import { Value } from 'react-quill';
 import { IcoinPolicy } from 'types/admin/adminCoinTypes';
 import { IFeedback } from 'types/admin/adminFeedbackTypes';

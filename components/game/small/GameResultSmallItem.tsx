@@ -1,8 +1,9 @@
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Game } from 'types/gameTypes';
 import { SeasonMode } from 'types/mainType';
 import { clickedGameItemState } from 'utils/recoil/game';
+import { profileState } from 'utils/recoil/user';
 import GameResultSmallScore from 'components/game/small/GameResultSmallScore';
 import GameResultSmallTeam from 'components/game/small/GameResultSmallTeam';
 import styles from 'styles/game/GameResultItem.module.scss';
@@ -12,6 +13,7 @@ interface GameResultSmallItemProps {
   type: 'LIGHT' | 'DARK';
   zIndexList: boolean;
   radioMode?: SeasonMode;
+  page: string;
 }
 
 function GameResultSmallItem({
@@ -19,18 +21,21 @@ function GameResultSmallItem({
   type,
   zIndexList,
   radioMode,
+  page,
 }: GameResultSmallItemProps) {
   const { mode, team1, team2, gameId } = game;
   const setClickedItemId = useSetRecoilState(clickedGameItemState);
+  const { background } = useRecoilValue(profileState);
 
   return (
     <div
+      onClick={() => setClickedItemId(gameId)}
       id={String(gameId)}
       className={`${styles['smallItemContainer']} 
-      ${styles[type.toLowerCase()]} ${
-        radioMode !== undefined ? styles[radioMode.toLowerCase()] : ''
-      } ${zIndexList ? styles['zIndexList'] : ''}`}
-      onClick={() => setClickedItemId(gameId)}
+        ${styles[type.toLowerCase()]}
+        ${page === 'profile' ? styles[background.toLowerCase()] : styles[page]}
+        ${radioMode !== undefined ? styles[radioMode.toLowerCase()] : ''} 
+        ${zIndexList ? styles['zIndexList'] : ''}`}
     >
       <GameResultSmallTeam team={team1} position={'Left'} />
       <GameResultSmallScore

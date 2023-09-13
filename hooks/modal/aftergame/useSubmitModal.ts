@@ -1,7 +1,6 @@
-import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
 import { AfterGame, TeamScore } from 'types/scoreTypes';
-import { instance } from 'utils/axios';
+import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { reloadMatchState } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
@@ -18,12 +17,19 @@ type normalRequest = {
   gameId: number;
 };
 
-type responseTypes = Record<'SUCCESS' | 'DUPLICATED', string>;
+const rankResponse: Record<'SUCCESS' | 'DUPLICATED', string> = {
+  SUCCESS: '결과 입력이 완료되었습니다.',
+  DUPLICATED: '이미 입력된 점수가 있습니다.',
+};
+
+const errorCode = ['GM202', 'GM204'] as const;
+
+type errorCodeType = (typeof errorCode)[number];
 
 type errorResponse = {
   status: number;
   message: string;
-  code: string;
+  code: errorCodeType;
 };
 
 const useSubmitModal = (currentGame: AfterGame) => {
@@ -32,11 +38,6 @@ const useSubmitModal = (currentGame: AfterGame) => {
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const { gameId, matchTeamsInfo, mode } = currentGame;
   const { myTeam, enemyTeam } = matchTeamsInfo;
-
-  const rankResponse: responseTypes = {
-    SUCCESS: '결과 입력이 완료되었습니다.',
-    DUPLICATED: '상대가 이미 점수를 입력했습니다.',
-  };
 
   const submitRankHandler = async (result: TeamScore) => {
     try {
@@ -50,8 +51,8 @@ const useSubmitModal = (currentGame: AfterGame) => {
       await instance.post(`/pingpong/games/rank`, requestBody);
       alert(rankResponse['SUCCESS']);
     } catch (e) {
-      if (axios.isAxiosError(e) && e.response) {
-        const { code } = e.response.data as unknown as errorResponse;
+      if (isAxiosError<errorResponse>(e) && e.response) {
+        const { code } = e.response.data;
         if (code == 'GM202' || code == 'GM204') {
           alert(rankResponse['DUPLICATED']);
           setReloadMatch(true); // 현재 유저 event 상태 재확인
@@ -61,7 +62,6 @@ const useSubmitModal = (currentGame: AfterGame) => {
         return;
       }
     }
-    openStatChangeModal();
   };
 
   const submitNormalHandler = async () => {
@@ -74,7 +74,6 @@ const useSubmitModal = (currentGame: AfterGame) => {
       setError('KP04');
       return;
     }
-    openStatChangeModal();
   };
 
   const openStatChangeModal = () => {
