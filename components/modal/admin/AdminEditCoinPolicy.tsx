@@ -14,7 +14,7 @@ export default function AdminEditCoinPolicyModal(props: IcoinPolicy) {
 
   const queryClient = useQueryClient();
 
-  const { mutate, isError, isSuccess } = useMutation(
+  const { mutate } = useMutation(
     (data: IcoinPolicy): Promise<AxiosResponse> => {
       return instanceInManage.post(`/coinpolicy`, data);
     }
