@@ -104,6 +104,22 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../public/font/Pretendard/PretendardVariable.woff2') format('woff2'),
+    url('../public/font/Pretendard/PretendardVariable.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard-Medium';
+  src: url('../public/font/Pretendard/Pretendard-Medium.woff2') format('woff2'),
+    url('../public/font/Pretendard/Pretendard-Medium.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -115,12 +131,16 @@ a {
 
 * {
   box-sizing: border-box;
-  font-family: 'NotoSansKR', sans-serif; /* common.scss의 $common-font */
+  font-family: 'Pretendard', sans-serif;
+  /* font-family: 'Pretendard-Medium', sans-serif; */
+  /* font-family: 'NotoSansKR', sans-serif; */
 }
 
 h1 {
   margin: 0;
 }
+
+/* admin */
 
 /* 페이지네이션 */
 ul {
