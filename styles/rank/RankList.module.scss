@@ -16,12 +16,14 @@
   width: fit-content;
   margin-bottom: 0.5rem;
   margin-left: auto;
-  font-family: $title-font;
   font-size: $big-font;
   font-weight: 700;
   color: #df98d7;
   opacity: 0.5;
   text-decoration-line: underline;
+  > span {
+    font-family: $rank-font;
+  }
   &.rank {
     cursor: pointer;
   }
