@@ -54,7 +54,7 @@ $admin-font: 'Inter', sans-serif;
 
 /* font-family - content */
 $title-font: 'Lexend', sans-serif;
-// $modal-title-font: 'Lexend', sans-serif;
+$modal-title-font: 'Pretendard-Black', sans-serif;
 $rank-font: 'Lexend', sans-serif; // 랭크페이지 myRank,
 $logo-font: 'Overgrow', sans-serif;
 $tier-font: 'Jua', sans-serif;
@@ -157,9 +157,8 @@ $vip-background: linear-gradient(
 }
 
 @mixin modalTitle {
-  font-family: $title-font;
+  font-family: $modal-title-font;
   font-size: 2rem;
-  font-weight: 700;
   letter-spacing: 0.04rem;
 }
 

@@ -104,6 +104,13 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Pretendard-Black';
+  src: url('../public/font/Pretendard/Pretendard-Black.woff2') format('woff2'),
+    url('../public/font/Pretendard/Pretendard-Black.otf') format('opentype');
+  font-style: normal;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
