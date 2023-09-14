@@ -50,77 +50,56 @@ body {
 }
 
 @font-face {
-  font-family: 'Agonostic Italic';
-  src: url('../public/font/Agnostic\ Italic.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Reality Hyper Regular';
-  src: url('../public/font/Reality\ Hyper\ Regular.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('../public/font/Inter-VariableFont_slnt,wght.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'NanumSquare_acR';
-  src: url('../public/font/NanumSquare_acR.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'NanumSquare_acEB';
-  src: url('../public/font/NanumSquare_acEB.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: 'Overgrow';
-  src: url('../public/font/Overgrow-Demo.otf') format('opentype');
+  src: url('../public/font/Overgrow/Overgrow-Demo.woff') format('woff'),
+    url('../public/font/Overgrow/Overgrow-Demo.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Montserrat';
-  src: url('../public/font/Montserrat-Regular.ttf') format('opentype');
+  src: url('../public/font/Montserrat/Montserrat-Regular.woff') format('woff')
+    url('../public/font/Montserrat/Montserrat-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url('../public/font/Roboto-Medium.ttf') format('opentype');
+  src: url('../public/font/Roboto/Roboto-Medium.woff') format('woff'),
+    url('../public/font/Roboto/Roboto-Medium.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Lexend';
-  src: url('../public/font/Lexend-Medium.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Gugi';
-  src: url('../public/font/Gugi-Regular.ttf') format('opentype');
+  src: url('../public/font/Lexend/Lexend-Medium.woff2') format('woff2'),
+    url('../public/font/Lexend/Lexend-Medium.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'Jua';
-  src: url('../public/font/Jua-Regular.ttf') format('opentype');
+  src: url('../public/font/Jua/Jua-Regular.woff') format('woff'),
+    url('../public/font/Jua/Jua-Regular.ttf') format('truetype');
   font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard-Medium';
+  src: url('../public/font/Pretendard/Pretendard-Medium.woff2') format('woff2'),
+    url('../public/font/Pretendard/Pretendard-Medium.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard-Black';
+  src: url('../public/font/Pretendard/Pretendard-Black.woff2') format('woff2'),
+    url('../public/font/Pretendard/Pretendard-Black.otf') format('opentype');
   font-style: normal;
 }
 
@@ -135,11 +114,14 @@ a {
 
 * {
   box-sizing: border-box;
+  font-family: 'Pretendard-Medium', sans-serif;
 }
 
 h1 {
   margin: 0;
 }
+
+/* admin */
 
 /* 페이지네이션 */
 ul {

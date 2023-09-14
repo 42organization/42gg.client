@@ -32,6 +32,9 @@
   line-height: 100%;
   color: white;
   align-items: flex-end;
+  span {
+    font-family: $rank-font;
+  }
   span:nth-child(1) {
     margin-right: 0.2rem;
     font-size: 1.5rem;

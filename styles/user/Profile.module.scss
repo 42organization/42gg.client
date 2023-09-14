@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 0.6rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: $common-en-font;
   color: $white1;
   border-radius: $small-radius;
   justify-content: space-between;
@@ -14,6 +14,7 @@
 .level {
   display: flex;
   margin-top: -2rem;
+  font-family: $rank-font;
   font-size: 3.5rem;
   font-style: normal;
   font-weight: 800;

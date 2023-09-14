@@ -51,7 +51,7 @@
     .deleteButton {
       display: flex;
       padding: 0.5rem 1rem;
-      font-family: 'Heebo', sans-serif;
+      // font-family: 'Heebo', sans-serif;
       font-size: 0.8rem;
       font-weight: 500;
       color: rgba(101, 97, 102, 1);
@@ -71,10 +71,10 @@
   justify-content: center;
   align-items: center;
   padding-top: 2.8rem;
-  font-family: 'Fenix', sans-serif;
+  // font-family: 'Fenix', sans-serif;
   .notiEmptyText {
     padding-bottom: 1.25rem;
-    font-family: 'Heebo', sans-serif;
+    // font-family: 'Heebo', sans-serif;
     font-size: 1.125rem;
     font-weight: 500;
     color: rgba(141, 119, 144, 1);
@@ -99,7 +99,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  font-family: 'Fenix', sans-serif;
+  // font-family: 'Fenix', sans-serif;
 }
 
 .notiDecorate {

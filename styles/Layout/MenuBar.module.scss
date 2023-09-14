@@ -17,8 +17,7 @@
     align-items: center;
     padding-right: 1.8rem;
     .menuLogo {
-      font-family: 'Overgrow', sans-serif;
-      font-size: 1.8rem;
+      @include logoText(1.8rem, black);
     }
     button {
       all: unset;
@@ -36,7 +35,7 @@
     width: 100%;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: $common-en-font;
     .userInfoWrapper {
       display: flex;
       flex-direction: column;
@@ -105,7 +104,7 @@
       align-items: center;
     }
     .menuText {
-      font-family: 'Fira Sans', sans-serif;
+      // font-family: 'Fira Sans', sans-serif;
       font-size: 1rem;
       font-weight: 500;
       color: rgba(26, 30, 37, 1);
@@ -130,7 +129,7 @@
     }
     div {
       padding-right: 0.375rem;
-      font-family: 'Fira Sans', sans-serif;
+      // font-family: 'Fira Sans', sans-serif;
       font-size: 1rem;
       font-weight: 600;
       color: rgba(26, 30, 37, 1);
