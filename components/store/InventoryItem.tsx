@@ -90,7 +90,7 @@ export function InvetoryItem({ item }: inventoryItemProps) {
         <div className={styles.imgContainer}>
           <Image
             className={styles.img}
-            src={imageUri === null ? '/image/fallBackSrc.jpeg' : imageUri}
+            src={imageUri === null ? '/image/not_found.svg' : imageUri}
             alt={itemName}
             fill
           />
