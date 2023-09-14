@@ -50,14 +50,6 @@ body {
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('../public/font/Inter/Inter.var.woff2') format('woff2'),
-    url('../public/font/Inter/Inter.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: 'Overgrow';
   src: url('../public/font/Overgrow/Overgrow-Demo.woff') format('woff'),
     url('../public/font/Overgrow/Overgrow-Demo.otf') format('opentype');
