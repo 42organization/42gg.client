@@ -7,7 +7,7 @@ import { InvetoryItem } from 'components/store/InventoryItem';
 import styles from 'styles/store/Inventory.module.scss';
 
 function fetchInventoryData(page: number) {
-  if (page === null) page = 0;
+  if (page === null) page = 1;
   return instance.get(`/pingpong/items?page=${page}&size=${8}`).then((res) => {
     return res.data;
   });
