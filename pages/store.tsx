@@ -12,7 +12,7 @@ import styles from 'styles/store/StoreContainer.module.scss';
 
 export default function Store() {
   const [mode, setMode] = useState<StoreMode>('BUY');
-  const coin = { coin: 0 }; // data가 undefined일 때 대비
+  const dummyCoin = { coin: 0 }; // data가 undefined일 때 대비
   const setError = useSetRecoilState(errorState);
 
   const { data, isError } = useQuery<ICoin>(
@@ -25,13 +25,14 @@ export default function Store() {
     setError('JY01');
   }
 
+  if (!data) return null;
   return (
     <div className={styles.pageWrap}>
       <h1 className={styles.title}>GG Store</h1>
       <StoreModeWrap
         currentMode={mode}
         setStoreMode={setMode}
-        coin={data ? data : coin}
+        coin={data ? data : dummyCoin}
       />
       <div className={styles.storeContainer}>
         {mode === 'BUY' ? <ItemsList /> : <InventoryList />}
