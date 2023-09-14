@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import {
   Paper,
@@ -8,10 +9,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import {
-  IcoinPolicyHistory,
-  IcoinPolicyHistoryTable,
-} from 'types/admin/adminCoinTypes';
+import { IcoinPolicyHistory } from 'types/admin/adminCoinTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
@@ -34,47 +32,43 @@ const coinPolicyHistoryTableTitle: { [key: string]: string } = {
 };
 
 function CoinPolicyHistory() {
-  const [coinPolicyHistoryData, setCoinPolicyHistoryData] =
-    useState<IcoinPolicyHistoryTable>({
-      coinPolicyList: [],
-      totalPage: 0,
-      currentPage: 0,
-    });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const setSnackBar = useSetRecoilState(toastState);
 
-  const getCoinPolicyHistoryHandler = useCallback(async () => {
-    try {
-      const res = await instanceInManage.get(
-        `/coinpolicy?page=${currentPage}&size=5`
-      );
-      setCoinPolicyHistoryData({
-        coinPolicyList: res.data.coinPolicyList.map(
-          (coinPolicyHistory: IcoinPolicyHistory) => {
+  const getApi = async (currentPage: number) => {
+    const res = await instanceInManage.get(
+      `/coinpolicy?page=${currentPage}&size=5`
+    );
+    return res.data;
+  };
+
+  const { data, isError } = useQuery(
+    ['coinPolicyHistory', currentPage],
+    () => getApi(currentPage),
+    {
+      keepPreviousData: true,
+      select: (data) => ({
+        coinPolicyList: data.coinPolicyList?.map(
+          (coinPolicy: IcoinPolicyHistory) => {
             return {
-              ...coinPolicyHistory,
-              createdAt: dateToStringShort(
-                new Date(coinPolicyHistory.createdAt)
-              ),
+              ...coinPolicy,
+              createdAt: dateToStringShort(new Date(coinPolicy.createdAt)),
             };
           }
         ),
-        totalPage: res.data.totalPage,
-        currentPage: currentPage,
-      });
-    } catch (e: unknown) {
-      setSnackBar({
-        toastName: 'get coinpolicyhistory',
-        severity: 'error',
-        message: 'API 요청에 문제가 발생했습니다.',
-        clicked: true,
-      });
+        totalPage: data.totalPage,
+      }),
     }
-  }, [currentPage]);
+  );
 
-  useEffect(() => {
-    getCoinPolicyHistoryHandler();
-  }, [currentPage]);
+  if (isError) {
+    setSnackBar({
+      toastName: 'get coinpolicyhistory',
+      severity: 'error',
+      message: 'API 요청에 문제가 발생했습니다.',
+      clicked: true,
+    });
+  }
 
   return (
     <>
@@ -85,8 +79,8 @@ function CoinPolicyHistory() {
             table={coinPolicyHistoryTableTitle}
           />
           <TableBody className={styles.tableBody}>
-            {coinPolicyHistoryData.coinPolicyList.length > 0 ? (
-              coinPolicyHistoryData.coinPolicyList.map(
+            {data?.coinPolicyList?.length > 0 ? (
+              data?.coinPolicyList?.map(
                 (coinPolicyHistory: IcoinPolicyHistory) => (
                   <TableRow
                     className={styles.tableRow}
@@ -117,8 +111,8 @@ function CoinPolicyHistory() {
       </TableContainer>
       <div className={styles.pageNationContainer}>
         <PageNation
-          curPage={coinPolicyHistoryData.currentPage}
-          totalPages={coinPolicyHistoryData.totalPage}
+          curPage={currentPage}
+          totalPages={data?.totalPage}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}
