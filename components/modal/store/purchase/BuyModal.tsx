@@ -1,10 +1,10 @@
 import { useState } from 'react';
+import { useQueryClient } from 'react-query';
 import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import { PriceTag } from 'types/modalTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import { updateCoinState } from 'utils/recoil/updateCoin';
 import { PURCHASE_ALERT_MESSAGE } from 'constants/store/purchaseAlertMessage';
 import {
   ModalButtonContainer,
@@ -17,8 +17,7 @@ export default function BuyModal({ itemId, product, price }: PriceTag) {
   const setModal = useSetRecoilState(modalState);
   const resetModal = useResetRecoilState(modalState);
   const setError = useSetRecoilState<string>(errorState);
-  const updateCoin = useSetRecoilState(updateCoinState);
-
+  const queryClient = useQueryClient();
   const errorCode = ['IT100', 'IT201', 'IT202', 'IT203', 'UR100'] as const;
 
   type errorCodeType = (typeof errorCode)[number];
@@ -43,7 +42,7 @@ export default function BuyModal({ itemId, product, price }: PriceTag) {
     try {
       await instance.post(`/pingpong/items/purchases/${itemId}`, null);
       alert(BUY.SUCCESS);
-      updateCoin(true);
+      queryClient.invalidateQueries('coin');
       setIsLoading(false);
     } catch (error: unknown) {
       setIsLoading(false);
