@@ -1,3 +1,5 @@
+import { AxiosResponse } from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { IcoinPolicy } from 'types/admin/adminCoinTypes';
 import { instanceInManage } from 'utils/axios';
@@ -10,24 +12,35 @@ export default function AdminEditCoinPolicyModal(props: IcoinPolicy) {
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
-  const editCoinPolicyHandler = async () => {
-    try {
-      await instanceInManage.post(`/coinpolicy`, props);
-      setSnackBar({
-        toastName: 'edit coinpolicy',
-        severity: 'success',
-        message: '새로운 재화 정책이 등록되었습니다.',
-        clicked: true,
-      });
-    } catch (e: unknown) {
-      setSnackBar({
-        toastName: 'edit coinpolicy',
-        severity: 'error',
-        message: 'API 요청에 문제가 발생했습니다.',
-        clicked: true,
-      });
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation(
+    (data: IcoinPolicy): Promise<AxiosResponse> => {
+      return instanceInManage.post(`/coinpolicy`, data);
     }
-    setModal({ modalName: null });
+  );
+
+  const editCoinPolicyHandler = () => {
+    mutate(props, {
+      onSuccess: () => {
+        setSnackBar({
+          toastName: 'edit coinpolicy',
+          severity: 'success',
+          message: '새로운 재화 정책이 등록되었습니다.',
+          clicked: true,
+        });
+        queryClient.invalidateQueries({ queryKey: 'coinPolicyHistory' });
+        setModal({ modalName: null });
+      },
+      onError: () => {
+        setSnackBar({
+          toastName: 'edit coinpolicy',
+          severity: 'error',
+          message: 'API 요청에 문제가 발생했습니다.',
+          clicked: true,
+        });
+      },
+    });
   };
 
   return (
@@ -63,10 +76,7 @@ export default function AdminEditCoinPolicyModal(props: IcoinPolicy) {
           </div>
         </div>
         <div className={styles.buttonWrap}>
-          <button
-            className={styles.editBtn}
-            onClick={() => editCoinPolicyHandler()}
-          >
+          <button className={styles.editBtn} onClick={editCoinPolicyHandler}>
             등록
           </button>
           <button

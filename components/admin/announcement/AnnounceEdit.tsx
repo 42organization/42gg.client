@@ -32,6 +32,15 @@ export default function AnnounceEdit() {
     resetHandler();
   }, []);
 
+  const resetHandler = async () => {
+    try {
+      const res = await instance.get('/pingpong/announcement');
+      setContent(res?.data.content);
+    } catch (e) {
+      alert(e);
+    }
+  };
+
   if (!user) return null;
 
   const currentUserId = user.intraId;
@@ -74,15 +83,6 @@ export default function AnnounceEdit() {
         message: `🔥 ${announceDeleteResponse[e.response.data.code]} 🔥`,
         clicked: true,
       });
-    }
-  };
-
-  const resetHandler = async () => {
-    try {
-      const res = await instance.get('/pingpong/announcement');
-      setContent(res?.data.content);
-    } catch (e) {
-      alert(e);
     }
   };
 
