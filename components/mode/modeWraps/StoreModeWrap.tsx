@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'types/modalTypes';

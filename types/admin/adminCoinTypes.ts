@@ -14,9 +14,3 @@ export interface IcoinPolicyHistory {
   rankLose: number;
   createdAt: Date;
 }
-
-export interface IcoinPolicyHistoryTable {
-  coinPolicyList: Array<IcoinPolicyHistory>;
-  totalPage: number;
-  currentPage: number;
-}
