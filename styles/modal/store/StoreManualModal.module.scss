@@ -4,11 +4,14 @@
   @include modalContainer('DARKPURPLE');
   width: 80vw;
   max-width: 20rem;
+  justify-content: flex-start;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .title {
-  margin: 2.75rem 0;
-  font-family: 'Lexend';
+  @include modalTitle; // font-family, font-size, font-weight, letter-spacing
+  margin-bottom: 2rem;
   font-size: 2.25rem;
   color: #f8f8ff;
   text-shadow: 0px 0px 12px #ffffff;
@@ -21,8 +24,7 @@
 
 .ruleList {
   width: 100%;
-  height: 60vh;
-  max-height: 285px;
+  height: 45vh;
   padding: 1rem;
   margin: 0 0.6rem 1.75rem;
   overflow-y: scroll;
@@ -30,8 +32,8 @@
   font-weight: 700;
   color: black;
   list-style: none;
-  background: #ffffff;
-  border-radius: 0px 0px 10px 10px;
+  background: #fdebf8;
+  border-radius: 10px;
 
   > li {
     margin-top: 1.2rem;
@@ -41,8 +43,9 @@
 
 .ruleTitle {
   display: flex;
-  align-items: center;
+  word-break: keep-all;
   vertical-align: middle;
+  align-items: center;
   &.withIcon {
     :first-child {
       min-width: 1.5rem;
@@ -64,16 +67,18 @@
   margin-left: 0.8rem;
   font-size: 0.9rem;
   font-weight: 400;
+  word-break: keep-all;
 
   > li {
     margin: 0.4rem 0;
+    line-height: 130%;
     white-space: pre-wrap;
     list-style: square;
   }
   .ruleContent {
     padding-left: 0.5rem;
     line-height: 170%;
-    list-style-type: '-';
+    list-style-type: '- ';
   }
 }
 

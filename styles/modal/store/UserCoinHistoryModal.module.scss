@@ -4,10 +4,9 @@
   @include modalContainer('SKYVIOLET');
   width: 80vw;
   max-width: 25rem;
-  font-family: 'NanumSquare_acR', sans-serif;
   .title {
+    @include modalTitle; // font-family, font-size, font-weight, letter-spacing
     margin: 2rem 0;
-    font-family: 'Lexend';
     font-size: 1.8rem;
     color: #f8f8ff;
     text-shadow: 0px 0px 12px #ffffff;

@@ -7,7 +7,6 @@
 .phrase {
   @include modal-phrase;
   margin-bottom: 0.875rem;
-  font-family: 'NanumSquare_acR', sans-serif;
   color: rgba(49, 47, 49, 1);
 
   .message {
@@ -19,7 +18,6 @@
 
   .recipient {
     margin-top: 0.875rem;
-    font-family: 'NanumSquare_acR', sans-serif;
     font-size: 1rem;
     font-weight: 700;
     line-height: 200%;
@@ -34,7 +32,6 @@
     width: 80%;
     margin-top: 0.875rem;
     margin-left: 10%;
-    font-family: 'NanumSquare_acR', sans-serif;
     font-size: 0.875rem;
     font-weight: 700;
     line-height: 150%;
@@ -53,7 +50,6 @@
   }
 
   .warning {
-    font-family: 'NanumSquare_acR', sans-serif;
     font-size: 0.875rem;
     font-weight: 700;
     color: #ff0000;

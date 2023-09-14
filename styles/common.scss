@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Life+Savers&display=swap');
 
-/* font-size */
-$giant-giant-font: 2.4rem;
-$giant-big-font: 2.1rem;
-$big-giant-font: 1.8rem;
-$giant-font: 1.5rem;
-$big-font: 1.2rem;
-$medium-font: 1rem;
-$small-font: 0.8rem;
-
 /* radius */
 $mini-radius: 0.3rem;
 $small-radius: 0.5rem;
@@ -56,6 +47,33 @@ $winner-blue: #040eff;
 
 $coin-yellow: #e8e230;
 
+/* font-family - commmon */
+$common-font: 'Pretendard-Medium', sans-serif;
+$common-en-font: 'Roboto', sans-serif;
+
+/* font-family - content */
+$title-font: 'Lexend', sans-serif;
+$modal-title-font: 'Pretendard-Black', sans-serif;
+$rank-font: 'Lexend', sans-serif; // 랭크페이지 myRank,
+$logo-font: 'Overgrow', sans-serif;
+$tier-font: 'Jua', sans-serif;
+$trophy-font: 'Montserrat', sans-serif;
+
+/* text-shadow */
+$text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
+  0 -0.1rem black;
+$text-shadow-red: 2px 2px 0px $pp-red;
+$text-shadow-blue: 2px 2px 0px $pp-blue;
+
+/* font-size */
+$giant-giant-font: 2.4rem;
+$giant-big-font: 2.1rem;
+$big-giant-font: 1.8rem;
+$giant-font: 1.5rem;
+$big-font: 1.2rem;
+$medium-font: 1rem;
+$small-font: 0.8rem;
+
 /* background-color */
 $main-background: linear-gradient(
   180deg,
@@ -76,15 +94,6 @@ $vip-background: linear-gradient(
   #1549cd 42.91%,
   #001049 59.9%
 );
-
-/* font */
-$logo-font: 'Agonostic Italic', cursive;
-$title-font: 'Lexend';
-$admin-font: 'Inter', sans-serif;
-$text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
-  0 -0.1rem black;
-$text-shadow-red: 2px 2px 0px $pp-red;
-$text-shadow-blue: 2px 2px 0px $pp-blue;
 
 @mixin ggCoin {
   color: $coin-yellow;
@@ -132,10 +141,12 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   margin: 0 auto;
 }
 
-@mixin logoTitle($shadow) {
+@mixin logoText($size, $color) {
   font-family: $logo-font;
-  font-size: 2rem;
-  color: white;
+  font-size: $size;
+  font-weight: 500;
+  color: $color;
+  text-align: center;
   letter-spacing: 0.1rem;
 }
 
@@ -145,9 +156,8 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin modalTitle {
-  font-family: 'Lexend', sans-serif;
+  font-family: $modal-title-font;
   font-size: 2rem;
-  font-weight: 700;
   letter-spacing: 0.04rem;
 }
 
@@ -271,7 +281,6 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   position: relative;
   width: $size;
   height: $size;
-  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
   border-radius: 50%;
   img {
     border-radius: 50%;
@@ -310,7 +319,6 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'NanumSquare_acR', sans-serif;
   .negative > input,
   .positive > input {
     display: flex;
@@ -355,7 +363,7 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin tierNumber() {
-  font-family: Jua;
+  font-family: $tier-font;
   background: black;
   @include txtColor();
   &.red {

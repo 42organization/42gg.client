@@ -39,7 +39,6 @@ $ppp-font: 2.8rem;
   margin-bottom: 0.6rem;
   .ppp {
     display: flex;
-    font-family: 'NanumSquare_acEB', sans-serif;
     font-size: $ppp-font;
     font-weight: 800;
     color: rgba(255, 255, 255, 1);
@@ -59,7 +58,6 @@ $ppp-font: 2.8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: 'NanumSquare_acEB', sans-serif;
   font-weight: 800;
   .level {
     margin-bottom: 0.5rem;

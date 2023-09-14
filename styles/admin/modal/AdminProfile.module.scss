@@ -1,3 +1,5 @@
+@import 'styles/common.scss';
+
 .modal {
   display: flex;
   width: 450px;
@@ -12,7 +14,6 @@
   display: flex;
   height: 50px;
   margin-left: 2rem;
-  font-family: 'Inter';
   font-size: 28px;
   font-style: normal;
   font-weight: 500;

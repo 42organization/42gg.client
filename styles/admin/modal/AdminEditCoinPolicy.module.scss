@@ -1,3 +1,5 @@
+@import 'styles/common.scss';
+
 .whole {
   display: flex;
   width: 510px;
@@ -19,7 +21,6 @@
 .titleText {
   margin-top: 15px;
   margin-left: 1rem;
-  font-family: 'Inter';
   font-size: 28px;
   font-style: normal;
   font-weight: 500;
@@ -54,7 +55,6 @@
 .bodyText {
   display: flex;
   width: 200px;
-  font-family: 'Inter';
   font-size: 0.8rem;
   font-style: normal;
   font-weight: 500;

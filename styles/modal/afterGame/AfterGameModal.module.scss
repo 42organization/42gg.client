@@ -16,23 +16,19 @@
     font-size: 2rem;
   }
   .titleNormal {
-    font-family: 'Overgrow', sans-serif;
-    font-weight: 500;
-    color: rgba(122, 110, 123, 1);
+    @include logoText(2rem, rgba(122, 110, 123, 1));
   }
   .titleRank {
     color: rgba(165, 95, 195, 1);
   }
   .message {
     padding-bottom: 1.5rem;
-    font-family: 'NanumSquare_acR', sans-serif;
     font-size: 1.25rem;
     font-weight: 800;
     letter-spacing: 0.04rem;
   }
 
   .rules {
-    font-family: 'NanumSquare_acR', sans-serif;
     font-size: 0.9rem;
     font-weight: 600;
     line-height: 150%;
@@ -62,7 +58,7 @@
   display: flex;
   padding-top: 1.5rem;
   padding-bottom: 1rem;
-  font-family: 'Roboto';
+  font-family: $common-en-font;
   font-size: 0.9rem;
   font-weight: 500;
   justify-content: space-evenly;
@@ -85,7 +81,7 @@
   justify-content: space-evenly;
   align-items: center;
   height: 3rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: $common-en-font;
   font-size: 1.6rem;
   font-weight: 800;
   text-align: center;

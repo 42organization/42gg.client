@@ -1,45 +1,39 @@
-import { useEffect, useState } from 'react';
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
+import { useSetRecoilState } from 'recoil';
 import { StoreMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
-import { updateCoinState } from 'utils/recoil/updateCoin';
+import { instance } from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
 import { StoreModeWrap } from 'components/mode/modeWraps/StoreModeWrap';
 import { InventoryList } from 'components/store/InventoryList';
 import ItemsList from 'components/store/purchase/ItemsList';
-import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/store/StoreContainer.module.scss';
 
 export default function Store() {
   const [mode, setMode] = useState<StoreMode>('BUY');
-  const [coin, setCoin] = useState<ICoin>({ coin: 0 });
-  const [reloadCoin, updateCoin] = useRecoilState(updateCoinState);
-  const resetUpdateCoinState = useResetRecoilState(updateCoinState);
+  const dummyCoin = { coin: 0 }; // data가 undefined일 때 대비
+  const setError = useSetRecoilState(errorState);
 
-  const getCoin = useAxiosGet({
-    url: '/pingpong/users/coin',
-    setState: setCoin,
-    err: 'JY01',
-    type: 'setError',
-  });
+  const { data, isError } = useQuery<ICoin>(
+    'coin',
+    () => instance.get('/pingpong/users/coin').then((res) => res.data),
+    { retry: 1 }
+  );
 
-  useEffect(() => {
-    getCoin();
-    return () => {
-      resetUpdateCoinState();
-    };
-  }, []);
+  if (isError) {
+    setError('JY01');
+  }
 
-  useEffect(() => {
-    if (reloadCoin) {
-      getCoin();
-      updateCoin(false);
-    }
-  }, [reloadCoin]);
-
+  if (!data) return null;
   return (
     <div className={styles.pageWrap}>
       <h1 className={styles.title}>GG Store</h1>
-      <StoreModeWrap currentMode={mode} setStoreMode={setMode} coin={coin} />
+      <StoreModeWrap
+        currentMode={mode}
+        setStoreMode={setMode}
+        coin={data ? data : dummyCoin}
+      />
       <div className={styles.storeContainer}>
         {mode === 'BUY' ? <ItemsList /> : <InventoryList />}
       </div>

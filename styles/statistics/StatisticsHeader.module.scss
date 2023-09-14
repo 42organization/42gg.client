@@ -4,7 +4,7 @@
   background: #141a46;
   #logo {
     div {
-      @include logoTitle(0.25rem);
+      @include logoText(2rem, white);
       display: flex;
       flex: 5;
       cursor: pointer;
