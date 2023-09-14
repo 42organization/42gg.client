@@ -6,6 +6,7 @@ import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { updateCoinState } from 'utils/recoil/updateCoin';
+import { PURCHASE_ALERT_MESSAGE } from 'constants/store/purchaseAlertMessage';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -40,24 +41,26 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
     code: errorCodeType;
   };
 
+  const { COMMON, GIFT } = PURCHASE_ALERT_MESSAGE;
+
   const errorMessages: Record<errorCodeType, string> = {
-    IT100: '해당 아이템이 없습니다 (• ᴖ •｡)',
-    IT201: '지금은 구매할 수 없는 아이템입니다 (• ᴖ •｡)',
-    IT202: 'GG코인이 부족합니다 (• ᴖ •｡)',
-    IT203: '카카오 유저는 상점을 이용할 수 없습니다 (• ᴖ •｡)',
-    IT204: '카카오 유저에게는 선물할 수 없습니다 (• ᴖ •｡)',
-    UR100: '선물하려는 유저가 없습니다 (• ᴖ •｡)',
+    IT100: COMMON.ITEM_ERROR,
+    IT201: COMMON.OUTDATED_ERROR,
+    IT202: COMMON.COIN_ERROR,
+    IT203: COMMON.KAKAO_USER_ERROR,
+    IT204: GIFT.KAKAO_RECIPIENT_ERROR,
+    UR100: GIFT.RECIPIENT_ERROR,
   };
 
   const onPurchase = async () => {
     if (giftReqData.ownerId === '') {
-      alert('선물할 유저를 선택해주세요.');
+      alert(GIFT.EMPTY_RECIPIENT);
       return;
     }
     setIsLoading(true);
     try {
       await instance.post(`/pingpong/items/gift/${itemId}`, giftReqData);
-      alert(`${giftReqData.ownerId}님께 선물이 전달되었습니다 (◞ꈍ∇ꈍ)っ■`);
+      alert(`(◞ꈍ∇ꈍ)っ■ ${giftReqData.ownerId}님께 선물이 전달되었습니다`);
       updateCoin(true);
       setIsLoading(false);
     } catch (error: unknown) {
@@ -105,7 +108,7 @@ export default function GiftModal({ itemId, product, price }: PriceTag) {
           </div>
         )}
         <div className={styles.warning}>
-          <p>⚠ 선물한 아이템은 환불 및 취소가 불가합니다 ⚠</p>
+          <p>⚠ 선물은 환불 및 취소가 불가합니다 ⚠</p>
         </div>
       </div>
       <ModalButtonContainer>

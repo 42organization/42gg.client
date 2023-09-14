@@ -5,6 +5,7 @@ import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { updateCoinState } from 'utils/recoil/updateCoin';
+import { PURCHASE_ALERT_MESSAGE } from 'constants/store/purchaseAlertMessage';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -28,19 +29,20 @@ export default function BuyModal({ itemId, product, price }: PriceTag) {
     code: errorCodeType;
   };
 
+  const { COMMON, BUY } = PURCHASE_ALERT_MESSAGE;
   const errorMessages: Record<errorCodeType, string> = {
-    IT100: '해당 아이템이 없습니다 (• ᴖ •｡)',
-    IT201: '지금은 구매할 수 없는 아이템입니다 (• ᴖ •｡)',
-    IT202: 'GG코인이 부족합니다 (• ᴖ •｡)',
-    IT203: '카카오 유저는 상점을 이용할 수 없습니다 (• ᴖ •｡)',
-    UR100: 'USER NOT FOUND',
+    IT100: COMMON.ITEM_ERROR,
+    IT201: COMMON.OUTDATED_ERROR,
+    IT202: COMMON.COIN_ERROR,
+    IT203: COMMON.KAKAO_USER_ERROR,
+    UR100: BUY.USER_ERROR,
   };
 
   const onPurchase = async () => {
     setIsLoading(true);
     try {
       await instance.post(`/pingpong/items/purchases/${itemId}`, null);
-      alert(`구매 성공 ¡¡¡( •̀ ᴗ •́ )و!!!`);
+      alert(BUY.SUCCESS);
       updateCoin(true);
       setIsLoading(false);
     } catch (error: unknown) {
