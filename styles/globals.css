@@ -97,22 +97,6 @@ body {
 }
 
 @font-face {
-  font-family: 'NotoSansKR';
-  src: url('../public/font/NotoSansKR/NotoSansKR-Medium.woff') format('woff'),
-    url('../public/font/NotoSansKR/NotoSansKR-Medium.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Pretendard';
-  src: url('../public/font/Pretendard/PretendardVariable.woff2') format('woff2'),
-    url('../public/font/Pretendard/PretendardVariable.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: 'Pretendard-Medium';
   src: url('../public/font/Pretendard/Pretendard-Medium.woff2') format('woff2'),
     url('../public/font/Pretendard/Pretendard-Medium.otf') format('opentype');
@@ -131,9 +115,7 @@ a {
 
 * {
   box-sizing: border-box;
-  font-family: 'Pretendard', sans-serif;
-  /* font-family: 'Pretendard-Medium', sans-serif; */
-  /* font-family: 'NotoSansKR', sans-serif; */
+  font-family: 'Pretendard-Medium', sans-serif;
 }
 
 h1 {
