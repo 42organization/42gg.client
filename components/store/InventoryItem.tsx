@@ -35,6 +35,7 @@ export function InvetoryItem({ item }: inventoryItemProps) {
       modalName: `USE-ITEM-${item.itemType}`,
       useItemInfo: {
         receiptId: item.receiptId,
+        itemName: item.itemName,
       },
     });
   }
