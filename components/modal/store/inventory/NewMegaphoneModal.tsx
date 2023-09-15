@@ -14,8 +14,6 @@ import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCauti
 import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 
-type NewMegaphoneProps = UseItemRequest;
-
 const MAX_LENGTH = 30;
 
 // TODO : 주의사항 구체화 필요
@@ -54,7 +52,7 @@ const errorMessages: Record<errorCodeType, string> = {
   CM007: MEGAPHONE.FORMAT_ERROR,
 };
 
-export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
+export default function NewMegaphoneModal({ receiptId }: UseItemRequest) {
   const user = useUser();
   const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState<boolean>(false);

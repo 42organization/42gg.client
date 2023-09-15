@@ -1,4 +1,5 @@
 import { useResetRecoilState } from 'recoil';
+import { IRandomItem } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import {
   ModalButtonContainer,
@@ -9,12 +10,7 @@ import EdgePreview from 'components/modal/store/inventory/EdgePreview';
 import GachaConfetti from 'components/modal/store/inventory/GachaConfetti';
 import styles from 'styles/modal/store/GachaModal.module.scss';
 
-type GachaModalProps = {
-  item: string;
-  color: string;
-};
-
-export default function GachaModal({ item, color }: GachaModalProps) {
+export default function GachaModal({ item, color }: IRandomItem) {
   const resetModal = useResetRecoilState(modalState);
   const randomBall = 'ball' + Math.floor(Math.random() * 11).toString();
 

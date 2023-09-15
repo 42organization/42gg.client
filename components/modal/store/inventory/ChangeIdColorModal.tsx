@@ -15,8 +15,6 @@ import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCauti
 import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 
-type ChangeIdColorModalProps = UseItemData;
-
 // TODO : 주의사항 구체화 필요
 const caution = [
   '아이템을 사용한 후에는 취소가 불가능합니다.',
@@ -55,7 +53,7 @@ const errorMessages: Record<errorCodeType, string> = {
 export default function ChangeIdColorModal({
   receiptId,
   itemName,
-}: ChangeIdColorModalProps) {
+}: UseItemData) {
   const setError = useSetRecoilState(errorState);
   const resetModal = useResetRecoilState(modalState);
   // const user = useRecoilValue(userState);

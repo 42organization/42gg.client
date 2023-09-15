@@ -15,8 +15,6 @@ import { useUser } from 'hooks/Layout/useUser';
 import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 
-type EditMegaphoneProps = UseItemRequest;
-
 type MegaphoneData = {
   megaphoneId: number;
   content: string;
@@ -47,7 +45,7 @@ const errorMessages: Record<errorCodeType, string> = {
   RC200: EDIT_MEGAPHONE.ITEM_ERROR,
 };
 
-export default function EditMegaphoneModal({ receiptId }: EditMegaphoneProps) {
+export default function EditMegaphoneModal({ receiptId }: UseItemRequest) {
   const resetModal = useResetRecoilState(modalState);
   const user = useUser();
   const [megaphoneData, setMegaphoneData] = useState<MegaphoneData>({

@@ -15,8 +15,6 @@ import GachaBall from 'components/modal/store/inventory/GachaBall';
 import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 
-type ChangeProfileBackgroundModalProps = UseItemData;
-
 const caution = [
   '색상은 랜덤으로 결정됩니다.',
   '아이템을 사용한 후에는 취소가 불가능합니다.',
@@ -45,7 +43,7 @@ const errorMessages: Record<errorCodeType, string> = {
 export default function ChangeProfileBackgroundModal({
   receiptId,
   itemName,
-}: ChangeProfileBackgroundModalProps) {
+}: UseItemData) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const resetModal = useResetRecoilState(modalState);
   const setModal = useSetRecoilState<Modal>(modalState);

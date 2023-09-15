@@ -18,8 +18,6 @@ import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 import { ItemCautionContainer } from './ItemCautionContainer';
 
-type ProfileImageProps = UseItemData;
-
 // TODO : 주의사항 문구 확정 필요
 const cautions = [
   '변경한 프로필 이미지는 취소할 수 없습니다.',
@@ -63,7 +61,7 @@ const errorMessage: Record<errorCodeType, string> = {
 export default function ProfileImageModal({
   receiptId,
   itemName,
-}: ProfileImageProps) {
+}: UseItemData) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const setError = useSetRecoilState(errorState);
   const user = useUser();
