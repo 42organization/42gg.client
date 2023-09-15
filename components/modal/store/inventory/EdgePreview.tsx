@@ -23,21 +23,17 @@ const edgeColorList = new Map<RandomColors, EdgeColors>([
   ['COLOR16', 'GAGARIN VIEW'],
 ]);
 
-export default function EdgePreview({ edge }: { edge: string }) {
+export default function EdgePreview({ edge }: { edge: RandomColors }) {
   const user = useUser();
 
   if (!user) return null;
 
   const { userImageUri } = user;
 
-  // TEST용 -> 추후 삭제
-  // edge = 'COLOR1';
   return (
     <div className={styles.container}>
       <div className={styles.preview}>
-        <div className={styles.title}>
-          {edgeColorList.get(edge as RandomColors)}
-        </div>
+        <div className={styles.title}>{edgeColorList.get(edge)}</div>
         <PlayerImage
           src={userImageUri}
           styleName={`mainProfile ${edge.toLowerCase()}`}
