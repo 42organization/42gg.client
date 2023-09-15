@@ -28,8 +28,9 @@ export default function WelcomeModal() {
       const res = await instance.post(`/pingpong/users/attendance`);
       return res.data;
     } catch (e: any) {
-      if (e.response.status === 400) {
+      if (e.response.status === 409) {
         alert('출석은 하루에 한 번만 가능합니다.');
+        setModal({ modalName: null });
         return;
       }
       setError('SM01');
