@@ -60,8 +60,10 @@
   }
   .list {
     padding: 0 0 0.5rem 0.5rem;
+    margin-left: 0.8rem;
+    word-break: keep-all;
+    list-style: '- ';
     list-style-position: inside;
-    list-style-type: '- ';
   }
 }
 
