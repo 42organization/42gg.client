@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { CoinResult } from 'types/coinTypes';
 import { GameResult } from 'types/gameTypes';
@@ -16,6 +17,7 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const setError = useSetRecoilState(errorState);
   const [stat, setStat] = useState<GameResult | undefined>();
+  const queryClient = useQueryClient();
 
   const getExpHandler = useAxiosGet({
     url: `/pingpong/games/${gameId}/result/${mode?.toLowerCase()}`,
@@ -26,6 +28,9 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
 
   useEffect(() => {
     getExpHandler();
+    return () => {
+      queryClient.invalidateQueries('user');
+    };
   }, []);
 
   const closeModal = () => {
