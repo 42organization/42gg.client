@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
-import { UseItemRequest } from 'types/inventoryTypes';
+import { UseItemData } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
@@ -45,7 +45,7 @@ const errorMessages: Record<errorCodeType, string> = {
   RC200: EDIT_MEGAPHONE.ITEM_ERROR,
 };
 
-export default function EditMegaphoneModal({ receiptId }: UseItemRequest) {
+export default function EditMegaphoneModal({ receiptId }: UseItemData) {
   const resetModal = useResetRecoilState(modalState);
   const user = useUser();
   const [megaphoneData, setMegaphoneData] = useState<MegaphoneData>({
