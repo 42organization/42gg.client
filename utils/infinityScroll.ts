@@ -41,7 +41,7 @@ export function InfinityScroll(
     {
       getNextPageParam: (lastPage, allPages) => {
         const nextPage = allPages.length + 1;
-        return nextPage > lastPage.totalPage ? null : nextPage;
+        return nextPage > lastPage.totalPage ? undefined : nextPage;
       },
       onError: (e: unknown) => {
         if (axios.isAxiosError(e)) {
