@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
-import { UseItemRequest, UseMegaphoneRequest } from 'types/inventoryTypes';
+import { UseItemData, UseMegaphoneRequest } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
@@ -13,8 +13,6 @@ import {
 import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
 import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
-
-type NewMegaphoneProps = UseItemRequest;
 
 const MAX_LENGTH = 30;
 
@@ -54,7 +52,7 @@ const errorMessages: Record<errorCodeType, string> = {
   CM007: MEGAPHONE.FORMAT_ERROR,
 };
 
-export default function NewMegaphoneModal({ receiptId }: NewMegaphoneProps) {
+export default function NewMegaphoneModal({ receiptId }: UseItemData) {
   const user = useUser();
   const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
