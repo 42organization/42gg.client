@@ -1,11 +1,19 @@
 .container {
   display: flex;
   justify-content: center;
-  height: 5rem;
   color: white;
   opacity: 0;
   animation: appear 0.5s 3s ease-in-out forwards;
   .preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .title {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      color: #f8f8ff;
+      text-shadow: 0px 0px 12px #ffffff;
+    }
     color: white;
     animation-name: img-poof;
     animation-duration: 0.75s;

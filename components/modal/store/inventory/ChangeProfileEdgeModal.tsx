@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
-import { UseItemRequest } from 'types/inventoryTypes';
+import { UseItemData, UseItemRequest } from 'types/inventoryTypes';
 import { Modal } from 'types/modalTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
@@ -14,8 +14,6 @@ import {
 import GachaBall from 'components/modal/store/inventory/GachaBall';
 import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
-
-type ChangeProfileEdgeModalProps = UseItemRequest;
 
 const caution = [
   '색상은 랜덤으로 결정됩니다.',
@@ -44,7 +42,8 @@ const errorMessages: Record<errorCodeType, string> = {
 
 export default function ChangeProfileEdgeModal({
   receiptId,
-}: ChangeProfileEdgeModalProps) {
+  itemName,
+}: UseItemData) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const resetModal = useResetRecoilState(modalState);
   const setModal = useSetRecoilState<Modal>(modalState);
@@ -90,7 +89,7 @@ export default function ChangeProfileEdgeModal({
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>프로필 이미지띠 변경</div>
+      <div className={styles.title}>{itemName}</div>
       <div className={styles.phrase}>
         <div className={styles.section}>
           <div className={styles.sectionTitle}></div>

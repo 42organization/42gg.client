@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
-import { UseItemRequest, UseIdColorRequest } from 'types/inventoryTypes';
+import { UseIdColorRequest, UseItemData } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
@@ -14,8 +14,6 @@ import IdPreviewComponent from 'components/modal/store/inventory/IdPreviewCompon
 import { ItemCautionContainer } from 'components/modal/store/inventory/ItemCautionContainer';
 import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
-
-type ChangeIdColorModalProps = UseItemRequest;
 
 // TODO : 주의사항 구체화 필요
 const caution = [
@@ -54,7 +52,8 @@ const errorMessages: Record<errorCodeType, string> = {
 
 export default function ChangeIdColorModal({
   receiptId,
-}: ChangeIdColorModalProps) {
+  itemName,
+}: UseItemData) {
   const setError = useSetRecoilState(errorState);
   const resetModal = useResetRecoilState(modalState);
   // const user = useRecoilValue(userState);
@@ -93,7 +92,7 @@ export default function ChangeIdColorModal({
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>아이디 색상 변경</div>
+      <div className={styles.title}>{itemName}</div>
       <div className={styles.phrase}>
         <div className={styles.section}>
           <div className={styles.sectionTitle}>미리보기</div>

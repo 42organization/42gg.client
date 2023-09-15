@@ -40,8 +40,30 @@ const backgroundColors = [
   'MEGATRON',
 ] as const;
 
+const edgeColors = [
+  'BASIC',
+  'RICH METAL',
+  'FRUIT BLEND',
+  'SEASHORE',
+  'GROWN EARLY',
+  'FLYING LEMON',
+  'NIGHT SKY',
+  'HIGHFLIGHT',
+  'FABLED SUNSET',
+  'MORNING VIBE',
+  'NEON GREEN',
+  'MAGIC PINK',
+  'SOFT CHERISH',
+  'PALO ALTO',
+  'TWILIGHT',
+  'NORTH MIRACLE',
+  'GAGARIN VIEW',
+] as const;
+
 export type RandomColors = (typeof randomColors)[number];
 
 export type BackgroundColors = (typeof backgroundColors)[number];
+
+export type EdgeColors = (typeof edgeColors)[number];
 
 export type ColorMode = MatchMode | RandomColors;

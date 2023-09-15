@@ -48,8 +48,9 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
     } catch (e) {
       setError('HB06');
       closeModal();
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (

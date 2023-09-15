@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { SyntheticEvent } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { BsGiftFill, BsCircleFill } from 'react-icons/bs';
 import { Tooltip } from '@mui/material';
@@ -35,6 +36,7 @@ export function InvetoryItem({ item }: inventoryItemProps) {
       modalName: `USE-ITEM-${item.itemType}`,
       useItemInfo: {
         receiptId: item.receiptId,
+        itemName: item.itemName,
       },
     });
   }
@@ -56,6 +58,10 @@ export function InvetoryItem({ item }: inventoryItemProps) {
     if (e.cancelable) e.preventDefault();
     itemStatus === 'USING' ? handleEditItem() : handleUseItem();
   }
+
+  const handleImageError = (e: SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = '/image/not_found.svg';
+  };
 
   if (!user) return null;
 
@@ -90,8 +96,9 @@ export function InvetoryItem({ item }: inventoryItemProps) {
         <div className={styles.imgContainer}>
           <Image
             className={styles.img}
-            src={imageUri === null ? '/image/fallBackSrc.jpeg' : imageUri}
+            src={imageUri ? imageUri : '/image/not_found.svg'}
             alt={itemName}
+            onError={handleImageError}
             fill
           />
         </div>

@@ -4,7 +4,7 @@ import styles from 'styles/modal/store/BackgroundPreview.module.scss';
 export default function BackgroundPreview({
   background,
 }: {
-  background: string;
+  background: RandomColors;
 }) {
   const colorList = new Map<RandomColors, BackgroundColors>([
     ['BASIC', 'BASIC'],
@@ -32,9 +32,7 @@ export default function BackgroundPreview({
         className={`${styles['player']}
       ${styles[background.toLowerCase()]}`}
       ></div>
-      <div className={styles.colorName}>
-        {colorList.get(background as RandomColors)}
-      </div>
+      <div className={styles.colorName}>{colorList.get(background)}</div>
     </div>
   );
 }

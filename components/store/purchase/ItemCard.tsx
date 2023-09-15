@@ -44,7 +44,7 @@ export default function ItemCard({ item }: { item: Item }) {
       <div className={styles.preview}>
         <div className={styles.img}>
           <Image
-            src={item.imageUri}
+            src={item.imageUri ? item.imageUri : '/image/not_found.svg'}
             alt={item.itemName}
             onError={handleImageError}
             fill
