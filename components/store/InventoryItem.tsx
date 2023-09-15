@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { SyntheticEvent } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { BsGiftFill, BsCircleFill } from 'react-icons/bs';
 import { Tooltip } from '@mui/material';
@@ -58,6 +59,10 @@ export function InvetoryItem({ item }: inventoryItemProps) {
     itemStatus === 'USING' ? handleEditItem() : handleUseItem();
   }
 
+  const handleImageError = (e: SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = '/image/not_found.svg';
+  };
+
   if (!user) return null;
 
   return (
@@ -91,8 +96,9 @@ export function InvetoryItem({ item }: inventoryItemProps) {
         <div className={styles.imgContainer}>
           <Image
             className={styles.img}
-            src={imageUri === null ? '/image/not_found.svg' : imageUri}
+            src={imageUri ? imageUri : '/image/not_found.svg'}
             alt={itemName}
+            onError={handleImageError}
             fill
           />
         </div>
