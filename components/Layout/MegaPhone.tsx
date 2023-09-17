@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect, useRef } from 'react';
-import { Virtuoso } from 'react-virtuoso';
+import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import { Item } from 'types/itemTypes';
 import useAxiosGet from 'hooks/useAxiosGet';
 import useInterval from 'hooks/useInterval';
@@ -66,6 +66,8 @@ const Megaphone = () => {
   const [contents, setContents] = useState<MegaphoneList>([]);
   const [itemList, setItemList] = useState<Item[]>([]);
   const [megaphoneData, setMegaphoneData] = useState<MegaphoneList>([]);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const virtuoso = useRef<VirtuosoHandle>(null);
   const presentPath = useRouter().asPath;
 
   const getItemListHandler = useAxiosGet<any>({
@@ -109,11 +111,24 @@ const Megaphone = () => {
     }
   }, [contents, itemList]);
 
+  useInterval(() => {
+    const nextIndex = (selectedIndex + 1) % megaphoneData.length;
+    setSelectedIndex(nextIndex);
+    if (virtuoso.current !== null)
+      virtuoso.current.scrollToIndex({
+        index: nextIndex,
+        align: 'start',
+        behavior: 'smooth',
+      });
+  }, 5000);
+
   return (
     <div className={styles.rollingBanner}>
       <div className={styles.wrapper}>
         <Virtuoso
           totalCount={megaphoneData.length}
+          data={megaphoneData}
+          ref={virtuoso}
           itemContent={(index) => (
             <MegaphoneItem
               content={megaphoneData[index].content}
