@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useState, useEffect, useRef } from 'react';
 import { Item } from 'types/itemTypes';
 import useAxiosGet from 'hooks/useAxiosGet';
@@ -63,6 +64,8 @@ export const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
 const Megaphone = () => {
   const [contents, setContents] = useState<MegaphoneList>([]);
   const [itemList, setItemList] = useState<Item[]>([]);
+  const [megaphoneData, setMegaphoneData] = useState<MegaphoneList>([]);
+  const presentPath = useRouter().asPath;
 
   const getItemListHandler = useAxiosGet<any>({
     url: `/pingpong/items/store`,
@@ -81,13 +84,33 @@ const Megaphone = () => {
   });
 
   useEffect(() => {
-    getItemListHandler();
     getMegaphoneHandler();
-  }, []);
+  }, [presentPath]);
 
-  return contents.length > 0 ? (
-    <MegaphoneContainer count={contents.length}>
-      {contents.map((content, idx) => (
+  useEffect(() => {
+    if (contents.length === 0) getItemListHandler();
+  }, [contents]);
+
+  useEffect(() => {
+    if (contents.length > 0) setMegaphoneData(contents);
+    else {
+      setMegaphoneData([
+        adminContent,
+        ...itemList.reduce((acc: MegaphoneList, cur) => {
+          acc.push({
+            megaphoneId: cur.itemId,
+            content: cur.itemName + ' : ' + cur.mainContent,
+            intraId: '절찬 판매 중!',
+          });
+          return acc;
+        }, []),
+      ]);
+    }
+  }, [contents, itemList]);
+
+  return (
+    <MegaphoneContainer count={megaphoneData.length}>
+      {megaphoneData.map((content, idx) => (
         <MegaphoneItem
           content={content.content}
           intraId={content.intraId}
@@ -95,21 +118,33 @@ const Megaphone = () => {
         />
       ))}
     </MegaphoneContainer>
-  ) : (
-    <MegaphoneContainer count={itemList.length + 1}>
-      <MegaphoneItem
-        content={adminContent.content}
-        intraId={adminContent.intraId}
-      />
-      {itemList.map((item, idx) => (
-        <MegaphoneItem
-          content={item.itemName + ' : ' + item.mainContent}
-          intraId={'절찬 판매 중!'}
-          key={idx}
-        />
-      ))}
-    </MegaphoneContainer>
   );
+
+  // return contents.length > 0 ? (
+  //   <MegaphoneContainer count={contents.length}>
+  //     {contents.map((content, idx) => (
+  //       <MegaphoneItem
+  //         content={content.content}
+  //         intraId={content.intraId}
+  //         key={idx}
+  //       />
+  //     ))}
+  //   </MegaphoneContainer>
+  // ) : (
+  //   <MegaphoneContainer count={itemList.length + 1}>
+  //     <MegaphoneItem
+  //       content={adminContent.content}
+  //       intraId={adminContent.intraId}
+  //     />
+  //     {itemList.map((item, idx) => (
+  //       <MegaphoneItem
+  //         content={item.itemName + ' : ' + item.mainContent}
+  //         intraId={'절찬 판매 중!'}
+  //         key={idx}
+  //       />
+  //     ))}
+  //   </MegaphoneContainer>
+  // );
 };
 
 export default Megaphone;
