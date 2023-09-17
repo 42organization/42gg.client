@@ -95,10 +95,9 @@ const Megaphone = () => {
   }, [contents]);
 
   useEffect(() => {
-    if (contents.length > 0) setMegaphoneData(contents);
+    if (contents.length > 0) setMegaphoneData([...contents, adminContent]);
     else {
       setMegaphoneData([
-        adminContent,
         ...itemList.reduce((acc: MegaphoneList, cur) => {
           acc.push({
             megaphoneId: cur.itemId,
@@ -107,6 +106,7 @@ const Megaphone = () => {
           });
           return acc;
         }, []),
+        adminContent,
       ]);
     }
   }, [contents, itemList]);
