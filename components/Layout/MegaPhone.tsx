@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect, useRef } from 'react';
+import { Virtuoso } from 'react-virtuoso';
 import { Item } from 'types/itemTypes';
 import useAxiosGet from 'hooks/useAxiosGet';
 import useInterval from 'hooks/useInterval';
@@ -109,16 +110,33 @@ const Megaphone = () => {
   }, [contents, itemList]);
 
   return (
-    <MegaphoneContainer count={megaphoneData.length}>
-      {megaphoneData.map((content, idx) => (
-        <MegaphoneItem
-          content={content.content}
-          intraId={content.intraId}
-          key={idx}
+    <div className={styles.rollingBanner}>
+      <div className={styles.wrapper}>
+        <Virtuoso
+          totalCount={megaphoneData.length}
+          itemContent={(index) => (
+            <MegaphoneItem
+              content={megaphoneData[index].content}
+              intraId={megaphoneData[index].intraId}
+            />
+          )}
+          style={{ height: '100%' }}
         />
-      ))}
-    </MegaphoneContainer>
+      </div>
+    </div>
   );
+
+  // return (
+  //   <MegaphoneContainer count={megaphoneData.length}>
+  //     {megaphoneData.map((content, idx) => (
+  //       <MegaphoneItem
+  //         content={content.content}
+  //         intraId={content.intraId}
+  //         key={idx}
+  //       />
+  //     ))}
+  //   </MegaphoneContainer>
+  // );
 
   // return contents.length > 0 ? (
   //   <MegaphoneContainer count={contents.length}>
