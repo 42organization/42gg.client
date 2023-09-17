@@ -126,6 +126,7 @@ const Megaphone = () => {
     <div className={styles.rollingBanner}>
       <div className={styles.wrapper}>
         <Virtuoso
+          className={styles.virtuoso}
           totalCount={megaphoneData.length}
           data={megaphoneData}
           ref={virtuoso}
