@@ -18,8 +18,8 @@ export default function RankListMain({ isMain, season }: RankListMainProps) {
 
   const makePathRanker = useMemo(() => {
     if (isMain === true)
-      return `/pingpong/users/images?seasonId=${season}&mode=${'RANK'}`;
-    return `/pingpong/users/images?seasonId=${season}&mode=${Mode}`;
+      return `/pingpong/users/top3?seasonId=${season}&mode=${'RANK'}`;
+    return `/pingpong/users/top3?seasonId=${season}&mode=${Mode}`;
   }, [season, Mode, isMain]);
 
   useRankListMain({
