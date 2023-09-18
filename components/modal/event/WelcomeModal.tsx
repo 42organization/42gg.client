@@ -26,9 +26,9 @@ export default function WelcomeModal() {
 
   const postCoinHandler = async () => {
     try {
+      setIsLoading(true);
       const res = await instance.post(`/pingpong/users/attendance`);
       queryClient.invalidateQueries('user');
-      setIsLoading(true);
       return res.data;
     } catch (e: any) {
       if (e.response.status === 409) {
