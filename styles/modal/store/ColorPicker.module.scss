@@ -6,12 +6,21 @@
 }
 
 .colorPreview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 2rem;
+  height: 2rem;
   padding: 0.5rem;
   cursor: pointer;
   border: 3px solid #fff;
   border-radius: 0.5rem;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  .icon {
+    width: 1rem;
+    height: 1rem;
+    color: white;
+  }
   &::after {
     display: block;
     padding-bottom: 100%;

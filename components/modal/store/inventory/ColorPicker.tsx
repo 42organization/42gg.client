@@ -23,7 +23,7 @@ export default function ColorPicker({ color, setColor }: ColorPickerProps) {
           className={styles.colorPreview}
           onClick={pickerHandler}
         >
-          <MdOutlineColorLens />
+          <MdOutlineColorLens className={styles.icon} />
         </div>
         <HexColorInput
           color={color}
@@ -40,9 +40,7 @@ export default function ColorPicker({ color, setColor }: ColorPickerProps) {
             className={styles.colorPicker}
             style={{ width: 'auto' }}
           />
-        ) : (
-          ''
-        )}
+        ) : null}
       </div>
     </>
   );
