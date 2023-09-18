@@ -38,6 +38,13 @@ export default function AdminUserCoinModal(props: { intraId: string }) {
   const inputHandler = ({
     target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
+    if (name === 'change' && isNaN(Number(value)))
+      return setSnackBar({
+        toastName: 'userCoin',
+        severity: 'error',
+        message: '지급(차감)액은 0이 아닌 숫자만 입력 가능합니다.',
+        clicked: true,
+      });
     setUserCoinInfo({ ...userCoinInfo, [name]: value });
   };
 
@@ -84,7 +91,6 @@ export default function AdminUserCoinModal(props: { intraId: string }) {
           clicked: true,
         });
       } else {
-        console.log(res.data);
         setSnackBar({
           toastName: 'userCoin',
           severity: 'success',
@@ -150,7 +156,7 @@ export default function AdminUserCoinModal(props: { intraId: string }) {
           <div className={styles.coinWrap}>
             <div className={styles.bodyText}>최종 코인:</div>
             <input
-              className={styles.coinBlan}
+              className={styles.coinBlank}
               name='afterCoin'
               value={currentCoin + Number(userCoinInfo.change)}
               readOnly
