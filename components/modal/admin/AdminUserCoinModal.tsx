@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { IUserCoin } from 'types/admin/adminUserTypes';
 import { instanceInManage } from 'utils/axios';
-import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminUserCoin.module.scss';
@@ -77,8 +76,7 @@ export default function AdminUserCoinModal(props: { intraId: string }) {
       return;
     }
     try {
-      // const res = await instanceInManage.put(`/coin`, {
-      const res = await mockInstance.put(`/admin/users/coin`, {
+      const res = await instanceInManage.put(`/coin`, {
         intraId,
         change,
         content,
