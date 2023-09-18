@@ -34,7 +34,7 @@
   .title {
     margin-top: 1rem;
     font-size: 1.1rem;
-    font-weight: bold;
+    font-weight: 800;
     color: black;
     grid-area: header;
   }
@@ -44,7 +44,7 @@
     color: $coin-yellow;
     @include ggCoin;
     .salePrice {
-      font-weight: bold;
+      font-weight: 600;
     }
     .onDiscount {
       margin-right: 0.5rem;
