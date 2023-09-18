@@ -11,6 +11,7 @@ import AdminModifyScoreModal from 'components/modal/admin/AdminModifyScoreModal'
 import AdminNotiUserModal from 'components/modal/admin/AdminNotiUserModal';
 import AdminPenaltyModal from 'components/modal/admin/AdminPenaltyModal';
 import AdminProfileModal from 'components/modal/admin/AdminProfileModal';
+import AdminUserCoinModal from 'components/modal/admin/AdminUserCoinModal';
 import DeletePenaltyModal from 'components/modal/admin/DeletePenaltyModal';
 import DetailModal from 'components/modal/admin/DetailModal';
 import AdminSeasonEdit from 'components/modal/admin/SeasonEdit';
@@ -33,6 +34,9 @@ export default function AdminModal() {
 
   const content: { [key: string]: JSX.Element | null } = {
     'ADMIN-PROFILE': intraId ? <AdminProfileModal intraId={intraId} /> : null,
+    'ADMIN-USER-COIN': intraId ? (
+      <AdminUserCoinModal intraId={intraId} />
+    ) : null,
     'ADMIN-PENALTY': intraId ? <AdminPenaltyModal intraId={intraId} /> : null,
     'ADMIN-PENALTY_DELETE':
       penaltyId && intraId ? (
