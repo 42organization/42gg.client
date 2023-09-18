@@ -4,7 +4,7 @@ import { useQueryClient } from 'react-query';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { FaArrowRight } from 'react-icons/fa';
 import { TbQuestionMark } from 'react-icons/tb';
-import { UseItemRequest } from 'types/inventoryTypes';
+import { UseItemData } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
@@ -18,12 +18,10 @@ import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 import { ItemCautionContainer } from './ItemCautionContainer';
 
-type ProfileImageProps = UseItemRequest;
-
-// TODO : 주의사항 문구 확정 필요
 const cautions = [
   '변경한 프로필 이미지는 취소할 수 없습니다.',
-  '프로필 이미지는 50KB 이하의 jpg 파일만 업로드 가능합니다.', // api 명세에 따라 변경될 수 있음
+  '50KB 이하의 jpg 파일만 업로드 가능합니다.',
+  '결과 반영에는 최대 30분 정도 소요될 수 있습니다.',
   '관리자의 판단 결과 부적절한 이미지는 삭제될 수 있습니다.',
 ];
 
@@ -60,7 +58,10 @@ const errorMessage: Record<errorCodeType, string> = {
   UR402: PROFILE.FORMAT_ERROR,
 };
 
-export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
+export default function ProfileImageModal({
+  receiptId,
+  itemName,
+}: UseItemData) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const setError = useSetRecoilState(errorState);
   const user = useUser();
@@ -109,7 +110,7 @@ export default function ProfileImageModal({ receiptId }: ProfileImageProps) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>프로필 이미지 변경</div>
+      <div className={styles.title}>{itemName}</div>
       <div className={styles.phrase}>
         <div className={styles.section}>
           <form

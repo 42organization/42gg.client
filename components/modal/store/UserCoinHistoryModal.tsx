@@ -19,8 +19,8 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [coinHistoryList, setCoinHistoryList] = useState<ICoinHistoryTable>({
     useCoinList: [],
-    totalPage: 0,
-    currentPage: 0,
+    totalPage: 1,
+    currentPage: 1,
   });
   const setError = useSetRecoilState(errorState);
 
@@ -48,8 +48,9 @@ export default function UserCoinHistoryModal({ coin }: ICoin) {
     } catch (e) {
       setError('HB06');
       closeModal();
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (

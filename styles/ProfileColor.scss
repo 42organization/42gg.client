@@ -4,11 +4,7 @@ $edge-neon-green: linear-gradient(to right bottom, #a8ff78 30%, #78ffd6 70%);
 $edge-orange-red: linear-gradient(to right bottom, #f05053 30%, #e1eec3 70%);
 $edge-red: linear-gradient(to right bottom, #b20a2c 30%, #fffbd5 70%);
 $edge-blue: linear-gradient(to right bottom, #005aa7 30%, #fffde4 70%);
-$edge-pastel-green-blue: linear-gradient(
-  to right bottom,
-  #74ebd5 30%,
-  #acb6e5 70%
-);
+$edge-morning-vibe: linear-gradient(to right bottom, #74ebd5 30%, #acb6e5 70%);
 $edge-navy: linear-gradient(to right bottom, #000c40 30%, #f0f2f0 70%);
 $edge-orange-green: linear-gradient(
   to right bottom,
@@ -28,7 +24,7 @@ $edge-blue-green: linear-gradient(
   #90a5ff 50%,
   #8fffa4 100%
 );
-$edge-pink-blue-purple: linear-gradient(
+$edge-magic-pink: linear-gradient(
   to right bottom,
   #ff10af 0%,
   #8afbff 50%,
@@ -41,7 +37,7 @@ $edge-tropical-green: linear-gradient(
   #ff7700 100%
 );
 
-$edge-navy-green: linear-gradient(
+$edge-night-sky: linear-gradient(
   to right bottom,
   #6ea5ff 0%,
   #000000 50%,
@@ -54,7 +50,7 @@ $edge-green-yellow: linear-gradient(
   #799f0c 50%,
   #ffe000 100%
 );
-$edge-pastel-orange: linear-gradient(
+$edge-twilight: linear-gradient(
   to right bottom,
   #f7797d 0%,
   #fbd786 50%,
@@ -108,18 +104,18 @@ $edge-colors: (
   color4: $edge-grown-early,
   // 4티어
   color5: $edge-flying-lemon,
-  color6: $edge-navy-green,
+  color6: $edge-night-sky,
   color7: $edge-highflight,
   // 3티어
   color8: $edge-fabled-sunset,
-  color9: $edge-pastel-green-blue,
+  color9: $edge-morning-vibe,
   color10: $edge-neon-green,
   // 2티어
-  color11: $edge-pink-blue-purple,
+  color11: $edge-magic-pink,
   color12: $edge-soft-cherish,
   color13: $edge-palo-alto,
   // 1티어
-  color14: $edge-pastel-orange,
+  color14: $edge-twilight,
   color15: $edge-north-miracle,
   color16: $edge-gagarin-view,
 );

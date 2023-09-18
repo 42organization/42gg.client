@@ -37,6 +37,7 @@
     "react-query": "^3.39.1",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.3.0",
+    "react-virtuoso": "^4.5.1",
     "recoil": "^0.7.3",
     "recoil-persist": "^4.2.0",
     "uuid": "^8.3.2",

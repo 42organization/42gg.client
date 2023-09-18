@@ -2,6 +2,7 @@
 
 .container {
   @include modalContainer('PINKWHITE');
+  padding-bottom: 0;
 }
 
 .title {
@@ -23,6 +24,11 @@
   margin: 0 0 0.3rem 0.5rem;
   font-size: $medium-font;
   color: $dark-gray;
+}
+
+.colorPickerWrapper {
+  position: relative;
+  height: 2rem;
 }
 
 .textArea {
@@ -60,8 +66,9 @@
   }
   .list {
     padding: 0 0 0.5rem 0.5rem;
-    list-style-position: inside;
-    list-style-type: '- ';
+    margin-left: 0.8rem;
+    word-break: keep-all;
+    list-style: '- ';
   }
 }
 

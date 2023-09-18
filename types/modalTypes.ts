@@ -1,11 +1,11 @@
-import { Dispatch, SetStateAction } from 'react';
 import { Value } from 'react-quill';
 import { IcoinPolicy } from 'types/admin/adminCoinTypes';
 import { IFeedback } from 'types/admin/adminFeedbackTypes';
 import { Imegaphone, Iprofile } from 'types/admin/adminReceiptType';
 import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { CoinResult } from 'types/coinTypes';
-import { RandomItem, ItemType, UseItemRequest } from 'types/inventoryTypes';
+import { RandomColors } from 'types/colorModeTypes';
+import { RandomItem, ItemType, UseItemData } from 'types/inventoryTypes';
 import { Item } from 'types/itemTypes';
 import { MatchMode } from 'types/mainType';
 import { ISeason } from 'types/seasonTypes';
@@ -99,7 +99,7 @@ export interface StoreManual {
 
 export interface IRandomItem {
   item: RandomItem;
-  color: string;
+  color: RandomColors;
 }
 
 export interface Modal {
@@ -123,7 +123,7 @@ export interface Modal {
   profile?: Iprofile;
   item?: Item;
   coinPolicy?: IcoinPolicy;
-  useItemInfo?: UseItemRequest;
+  useItemInfo?: UseItemData;
   storeManual?: StoreManual;
   isAttended?: boolean;
   totalCoin?: ICoin;
