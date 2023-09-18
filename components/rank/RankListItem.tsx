@@ -38,9 +38,13 @@ export function RankListItem({ user, textColorPreview }: RankListItemProps) {
       {rank}
       <PlayerImage src={tierImageUri} styleName={'ranktier'} size={1} />
       <div style={{ color: textColor }} className={styles.intraId}>
-        <Link href={`/users/detail?intraId=${intraId}`}>
-          <span>{intraId}</span>
-        </Link>
+        {textColorPreview ? (
+          <div>{intraId}</div>
+        ) : (
+          <Link href={`/users/detail?intraId=${intraId}`}>
+            <span>{intraId}</span>
+          </Link>
+        )}
       </div>
       {textColorPreview ? null : (
         <div className={styles.statusMessage}>{statusMessage}</div>
