@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { HexColorInput, HexColorPicker } from 'react-colorful';
-import { MdOutlineColorLens } from 'react-icons/md';
+import { MdOutlineColorLens , MdColorLens } from 'react-icons/md';
 import styles from 'styles/modal/store/ColorPicker.module.scss';
 
 type ColorPickerProps = {
@@ -23,7 +23,11 @@ export default function ColorPicker({ color, setColor }: ColorPickerProps) {
           className={styles.colorPreview}
           onClick={pickerHandler}
         >
-          <MdOutlineColorLens className={styles.icon} />
+          {openPicker ? (
+            <MdColorLens className={styles.icon} />
+          ) : (
+            <MdOutlineColorLens className={styles.icon} />
+          )}
         </div>
         <HexColorInput
           color={color}
