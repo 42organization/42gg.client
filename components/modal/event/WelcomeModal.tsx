@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'types/modalTypes';
 import { instance } from 'utils/axios';
@@ -15,6 +16,7 @@ export default function WelcomeModal() {
   const setModal = useSetRecoilState<Modal>(modalState);
   const setError = useSetRecoilState(errorState);
   const [buttonState, setButtonState] = useState(false);
+  const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(false);
   const content = {
     title: 'Welcome!',
@@ -26,10 +28,12 @@ export default function WelcomeModal() {
     try {
       setIsLoading(true);
       const res = await instance.post(`/pingpong/users/attendance`);
+      queryClient.invalidateQueries('user');
       return res.data;
     } catch (e: any) {
-      if (e.response.status === 400) {
+      if (e.response.status === 409) {
         alert('출석은 하루에 한 번만 가능합니다.');
+        setModal({ modalName: null });
         return;
       }
       setError('SM01');

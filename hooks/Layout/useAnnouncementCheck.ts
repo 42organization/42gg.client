@@ -40,7 +40,7 @@ const useAnnouncementCheck = (presentPath: string, user?: User) => {
   };
 
   const attendedHandler = () => {
-    if (user && !user.isAttended && presentPath === '/') {
+    if (user && user.isAttended === false && presentPath === '/') {
       setModal({ modalName: 'EVENT-WELCOME' });
     }
   };
