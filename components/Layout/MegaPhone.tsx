@@ -98,14 +98,13 @@ const Megaphone = () => {
     if (contents.length > 0) setMegaphoneData([...contents, adminContent]);
     else {
       setMegaphoneData([
-        ...itemList.reduce((acc: MegaphoneList, cur) => {
-          acc.push({
-            megaphoneId: cur.itemId,
-            content: cur.itemName + ' : ' + cur.mainContent,
+        ...itemList.map(
+          (item): IMegaphoneContent => ({
+            megaphoneId: item.itemId,
+            content: item.itemName + ' : ' + item.mainContent,
             intraId: '절찬 판매 중!',
-          });
-          return acc;
-        }, []),
+          })
+        ),
         adminContent,
       ]);
     }
