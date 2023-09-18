@@ -27,7 +27,11 @@
   }
 
   .loading {
-    margin: 5rem 0;
+    display: flex;
+    width: 85%;
+    height: 30vh;
+    justify-content: center;
+    padding-top: 14vh;
     color: #ffffff;
     .span1 {
       @include waitAnimation(0.3s);
