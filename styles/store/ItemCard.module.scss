@@ -39,9 +39,11 @@
     grid-area: header;
   }
   .priceTag {
+    display: flex;
     grid-area: price;
     font-size: 1rem;
     color: $coin-yellow;
+    align-items: center;
     @include ggCoin;
     .salePrice {
       font-weight: 600;

@@ -98,7 +98,7 @@ $vip-background: linear-gradient(
   color: $coin-yellow;
   img {
     margin-right: 0.2rem;
-    transform: translateY(0.2rem);
+    // transform: translateY(0.2rem); // NOTE : 왜 필요한건지 확인해보기
   }
 }
 
