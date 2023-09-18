@@ -4,6 +4,7 @@ import { InfinityScroll } from 'utils/infinityScroll';
 import EmptyImage from 'components/EmptyImage';
 import { InfiniteScrollComponent } from 'components/store/InfiniteScrollComponent';
 import { InvetoryItem } from 'components/store/InventoryItem';
+import StoreLoading from 'components/store/StoreLoading';
 import styles from 'styles/store/Inventory.module.scss';
 
 function fetchInventoryData(page: number) {
@@ -20,7 +21,7 @@ export function InventoryList() {
   );
 
   // TODO : 에러 컴포넌트 구체화 필요함.
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <StoreLoading />;
   if (error) return <div>{error.message}</div>;
   if (!data) return <div>No data</div>;
 
