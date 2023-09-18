@@ -48,12 +48,11 @@ $winner-blue: #040eff;
 $coin-yellow: #f6e24d;
 
 /* font-family - commmon */
-$common-font: 'Pretendard-Medium', sans-serif;
+$common-font: 'Pretendard', sans-serif;
 $common-en-font: 'Roboto', sans-serif;
 
 /* font-family - content */
 $title-font: 'Lexend', sans-serif;
-$modal-title-font: 'Pretendard-Black', sans-serif;
 $rank-font: 'Lexend', sans-serif; // 랭크페이지 myRank,
 $logo-font: 'Overgrow', sans-serif;
 $tier-font: 'Jua', sans-serif;
@@ -156,8 +155,8 @@ $vip-background: linear-gradient(
 }
 
 @mixin modalTitle {
-  font-family: $modal-title-font;
   font-size: 2rem;
+  font-weight: 800;
   letter-spacing: 0.04rem;
 }
 
