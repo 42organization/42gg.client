@@ -1,25 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+import { useSetRecoilState } from 'recoil';
 import { ItemList } from 'types/itemTypes';
+import { instance } from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
 import ItemCard from 'components/store/purchase/ItemCard';
-import useAxiosGet from 'hooks/useAxiosGet';
+import StoreLoading from 'components/store/StoreLoading';
 
 export default function ItemsList() {
-  const [itemList, setItemList] = useState<ItemList>({ itemList: [] });
+  const setError = useSetRecoilState(errorState);
+  const { data, isError, isLoading } = useQuery<ItemList>(
+    'itemList',
+    () => instance.get('/pingpong/items/store').then((res) => res.data),
+    {
+      retry: 1,
+    }
+  );
 
-  useEffect(() => {
-    getItemList();
-  }, []);
+  if (isError) {
+    setError('HB01');
+  }
+  if (isLoading) return <StoreLoading />;
 
-  const getItemList = useAxiosGet({
-    url: 'pingpong/items/store',
-    setState: setItemList,
-    err: 'HB01',
-    type: 'setError',
-  });
+  if (!data) return null;
 
   return (
     <div>
-      {itemList.itemList.map((item) => (
+      {data.itemList.map((item) => (
         <ItemCard key={item.itemId} item={item} />
       ))}
     </div>
