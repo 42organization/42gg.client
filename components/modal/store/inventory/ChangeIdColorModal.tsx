@@ -99,7 +99,7 @@ export default function ChangeIdColorModal({
           <IdPreviewComponent intraId={user.intraId} color={color} />
         </div>
         <div className={styles.section}>
-          <div className={styles.sectionTitle}>색상 선택</div>
+          <div className={styles.sectionTitle}>색상 선택 (HEX 코드)</div>
           <div className={styles.colorPickerWrapper}>
             <ColorPicker color={color} setColor={setColor} />
           </div>
