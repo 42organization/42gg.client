@@ -48,3 +48,9 @@
   justify-content: center;
   align-items: center;
 }
+
+.virtuoso {
+  // NOTE : 라이브러리에서 인라인 스타일로 overflow-y: auto를 주고 있어 스크롤바가 생김
+  // 이를 상쇄하기 위해서 !important를 사용함.
+  overflow-y: hidden !important;
+}

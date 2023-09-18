@@ -47,12 +47,19 @@ export function NormalListItem({
         }}
         className={styles.intraId}
       >
-        <Link href={`/users/detail?intraId=${intraId}`}>
-          <span>
+        {textColorPreview ? (
+          <div>
             {intraId}
             {level && <span className={styles.level}> ({level})</span>}
-          </span>
-        </Link>
+          </div>
+        ) : (
+          <Link href={`/users/detail?intraId=${intraId}`}>
+            <span>
+              {intraId}
+              {level && <span className={styles.level}> ({level})</span>}
+            </span>
+          </Link>
+        )}
       </div>
       {textColorPreview ? null : (
         <div className={styles.statusMessage}>{statusMessage}</div>

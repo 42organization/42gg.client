@@ -1,6 +1,7 @@
 @mixin modeWrapBasic {
   display: flex;
   justify-content: space-between;
+  gap: 0 10px;
   margin: 0 0.6rem 2rem;
 }
 
