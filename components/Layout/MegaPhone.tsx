@@ -120,7 +120,7 @@ const Megaphone = () => {
         align: 'start',
         behavior: 'smooth',
       });
-  }, 5000);
+  }, 4000);
 
   return (
     <div className={styles.rollingBanner}>
