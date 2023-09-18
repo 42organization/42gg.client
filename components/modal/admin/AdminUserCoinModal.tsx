@@ -34,17 +34,27 @@ export default function AdminUserCoinModal(props: { intraId: string }) {
     getCurrentCoinHandler();
   }, []);
 
+  const isNumeric = (num: string) => {
+    const regex = /^[+-]?\d*$/;
+    return regex.test(num);
+  };
+
   const inputHandler = ({
     target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    if (name === 'change' && isNaN(Number(value)))
-      return setSnackBar({
-        toastName: 'userCoin',
-        severity: 'error',
-        message: '지급(차감)액은 0이 아닌 숫자만 입력 가능합니다.',
-        clicked: true,
-      });
-    setUserCoinInfo({ ...userCoinInfo, [name]: value });
+    if (name === 'change') {
+      if (!isNumeric(value) || value === '0') {
+        return setSnackBar({
+          toastName: 'userCoin',
+          severity: 'error',
+          message: '지급(차감)액은 0이 아닌 숫자만 입력 가능합니다.',
+          clicked: true,
+        });
+      }
+      setUserCoinInfo({ ...userCoinInfo, [name]: Number(value) });
+    } else {
+      setUserCoinInfo({ ...userCoinInfo, [name]: value });
+    }
   };
 
   const changeCoinHanlder = async () => {
@@ -63,14 +73,6 @@ export default function AdminUserCoinModal(props: { intraId: string }) {
         toastName: 'userCoin',
         severity: 'error',
         message: `모든 항목을 입력해주세요.`,
-        clicked: true,
-      });
-      return;
-    } else if (isNaN(change) || change === 0) {
-      setSnackBar({
-        toastName: 'userCoin',
-        severity: 'error',
-        message: `지급(차감)액은 0이 아닌 숫자만 입력 가능합니다.`,
         clicked: true,
       });
       return;
@@ -147,6 +149,9 @@ export default function AdminUserCoinModal(props: { intraId: string }) {
             <input
               className={styles.coinBlank}
               name='change'
+              type='number'
+              inputMode='numeric'
+              pattern='[0-9]*'
               placeholder={'코인 지급(차감)액을 입력하세요'}
               onChange={inputHandler}
             />
