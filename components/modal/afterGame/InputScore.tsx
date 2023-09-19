@@ -26,6 +26,8 @@ export default function InputScore({
           id='myTeamScore'
           name='myTeamScore'
           type='number'
+          inputMode='numeric'
+          pattern='[0-9]*'
           value={result.myTeamScore}
           min={0}
           max={2}
