@@ -88,15 +88,15 @@
 <table>
   <tr>
     <td align=center>역할</td>
+    <td align=center>LEAD🐧</td>
     <td align=center>🌚</td>
-    <td align=center>🐧</td>
     <td align=center>🥨</td>
     <td align=center>🦥</td>
   </tr>
   <tr>
     <td align=center>이름</td>
-    <td align=center><a href="https://github.com/PHJoon">박형준 @hyungjpa</a></td>
     <td align=center><a href="https://github.com/yoouyeon">윤정연 @jeyoon</a></td>
+    <td align=center><a href="https://github.com/PHJoon">박형준 @hyungjpa</a></td>
     <td align=center><a href="https://github.com/parksangmin1543">박상민 @sangmipa</a></td>
     <td align=center><a href="https://github.com/hyobb109">조효빈 @hyobicho</td>
   </tr>
