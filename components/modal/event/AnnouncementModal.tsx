@@ -8,12 +8,13 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
+import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/modal/event/AnnouncementModal.module.scss';
 import 'react-quill/dist/quill.bubble.css';
 
 type AnnouncementModalProps = {
   announcement: Announcement;
-  isAttended?: boolean;
+  // isAttended?: boolean;
 };
 
 const Quill = dynamic(() => import('react-quill'), {
@@ -23,10 +24,11 @@ const Quill = dynamic(() => import('react-quill'), {
 
 export default function AnnouncementModal({
   announcement,
-  isAttended,
-}: AnnouncementModalProps) {
+}: // isAttended,
+AnnouncementModalProps) {
   const setModal = useSetRecoilState(modalState);
   const [neverSeeAgain, setNeverSeeAgain] = useState<boolean>(false);
+  const user = useUser();
 
   const onCheck = () => {
     setNeverSeeAgain((prev) => !prev);
@@ -40,7 +42,7 @@ export default function AnnouncementModal({
     } else {
       localStorage.removeItem('announcementTime');
     }
-    if (isAttended === false) {
+    if (user && user.isAttended === false) {
       setModal({ modalName: 'EVENT-WELCOME' });
     } else {
       setModal({ modalName: null });

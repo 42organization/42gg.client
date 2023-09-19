@@ -6,13 +6,15 @@ import { modalState, modalTypeState } from 'utils/recoil/modal';
 import AdminModal from 'components/modal/modalType/AdminModal';
 import NormalModal from 'components/modal/modalType/NormalModal';
 import StoreModal from 'components/modal/modalType/StoreModal';
+import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
-  const [{ modalName, isAttended }, setModal] = useRecoilState(modalState);
+  const [{ modalName }, setModal] = useRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const modalType = useRecoilValue(modalTypeState);
   const queryClient = useQueryClient();
+  const user = useUser();
 
   useEffect(() => {
     setModalOutsideScroll();
@@ -26,7 +28,11 @@ export default function ModalProvider() {
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
       if (modalName === 'MATCH-CANCEL') {
         setReloadMatch(true);
-      } else if (modalName === 'EVENT-ANNOUNCEMENT' && isAttended === false) {
+      } else if (
+        modalName === 'EVENT-ANNOUNCEMENT' &&
+        user &&
+        user.isAttended === false
+      ) {
         setModal({ modalName: 'EVENT-WELCOME' });
       } else if (modalName === 'COIN-ANIMATION') {
         queryClient.invalidateQueries('user');
