@@ -10,7 +10,7 @@ type AdminLayoutProps = {
 
 const theme = createTheme({
   typography: {
-    fontFamily: "'Pretendard-Medium'', sans-serif", // $common-font
+    fontFamily: "'Pretendard', sans-serif", // $common-font
   },
 });
 
