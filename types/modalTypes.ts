@@ -31,6 +31,7 @@ type StoreModal = 'MANUAL' | 'COIN_HISTORY';
 
 type AdminModal =
   | 'PROFILE'
+  | 'USER-COIN'
   | 'PENALTY'
   | 'PENALTY_DELETE'
   | 'NOTI_USER'
