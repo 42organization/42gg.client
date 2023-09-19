@@ -176,7 +176,10 @@ export default function StoreManualModal({ radioMode }: StoreManual) {
                     ))
                   ) : rule.tag === '🔗 뽑기 확률표' ? (
                     <li key={idx}>
-                      <a href='https://www.notion.so/21cadc74ddb245ea9494c7b203892c83?pvs=4'>
+                      <a
+                        href='https://www.notion.so/21cadc74ddb245ea9494c7b203892c83?pvs=4'
+                        target='_blank'
+                      >
                         {rule.tag}
                       </a>
                       <ul className={styles.ruleContent}>
