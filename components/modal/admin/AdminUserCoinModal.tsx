@@ -7,6 +7,7 @@ import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminUserCoin.module.scss';
 
 export default function AdminUserCoinModal(props: { intraId: string }) {
+  const MAX_LENGTH = 30;
   const [currentCoin, setCurrentCoin] = useState<number>(0);
   const [userCoinInfo, setUserCoinInfo] = useState<IUserCoin>({
     intraId: props.intraId,
@@ -131,7 +132,8 @@ export default function AdminUserCoinModal(props: { intraId: string }) {
             <input
               className={styles.contentBlank}
               name='content'
-              placeholder={'내용을 입력하세요'}
+              placeholder={'내용을 입력하세요(30자)'}
+              maxLength={MAX_LENGTH}
               onChange={inputHandler}
             />
           </div>
@@ -150,8 +152,6 @@ export default function AdminUserCoinModal(props: { intraId: string }) {
               className={styles.coinBlank}
               name='change'
               type='number'
-              inputMode='numeric'
-              pattern='[0-9]*'
               placeholder={'코인 지급(차감)액을 입력하세요'}
               onChange={inputHandler}
             />
