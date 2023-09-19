@@ -24,8 +24,9 @@ export default function ModalProvider() {
   const closeModalHandler = (e: React.MouseEvent) => {
     if (modalName?.split('-')[0] === 'FIXED') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
-      if (modalName === 'MATCH-CANCEL') setReloadMatch(true);
-      else if (modalName === 'EVENT-ANNOUNCEMENT' && isAttended === false) {
+      if (modalName === 'MATCH-CANCEL') {
+        setReloadMatch(true);
+      } else if (modalName === 'EVENT-ANNOUNCEMENT' && isAttended === false) {
         setModal({ modalName: 'EVENT-WELCOME' });
       } else if (modalName === 'COIN-ANIMATION') {
         queryClient.invalidateQueries('user');

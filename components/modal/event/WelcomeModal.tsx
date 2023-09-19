@@ -49,7 +49,7 @@ export default function WelcomeModal() {
     try {
       setButtonState(true);
       const updatedcoin = await postCoinHandler();
-      if (updatedcoin == null) return;
+      if (updatedcoin === null) return;
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {
