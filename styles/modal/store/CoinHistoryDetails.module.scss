@@ -2,6 +2,7 @@
 
 .data {
   display: flex;
+  width: 100%;
   padding: 0.5rem;
   margin-bottom: 0.2rem;
   font-size: 1rem;
@@ -16,15 +17,19 @@
   .section1 {
     display: flex;
     align-items: center;
+    width: 85%;
     .icon {
       display: flex;
-      align-items: center;
+      width: 10%;
       margin-right: 0.5rem;
+      align-items: center;
     }
     .content {
+      width: 90%;
       .history {
         color: black;
         word-break: keep-all;
+        word-wrap: break-word;
       }
       .date {
         font-size: 0.8rem;

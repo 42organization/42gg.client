@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'types/modalTypes';
 import { instance } from 'utils/axios';
@@ -16,7 +15,6 @@ export default function WelcomeModal() {
   const setModal = useSetRecoilState<Modal>(modalState);
   const setError = useSetRecoilState(errorState);
   const [buttonState, setButtonState] = useState(false);
-  const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(false);
   const content = {
     title: 'Welcome!',
@@ -28,7 +26,6 @@ export default function WelcomeModal() {
     try {
       setIsLoading(true);
       const res = await instance.post(`/pingpong/users/attendance`);
-      queryClient.invalidateQueries('user');
       return res.data;
     } catch (e: any) {
       if (e.response.status === 409) {
@@ -43,16 +40,14 @@ export default function WelcomeModal() {
   };
 
   const openPageManual = () => {
-    window.open(
-      'https://github.com/42organization/42arcade.gg.client/wiki/42gg.kr--%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B0%80%EC%9D%B4%EB%93%9C'
-    );
+    window.open('https://www.notion.so/bfbe7ad164d4450295e4978ce3121398?pvs=4');
   };
 
   const openAttendanceCoin = async () => {
     try {
       setButtonState(true);
       const updatedcoin = await postCoinHandler();
-      if (updatedcoin == null) return;
+      if (updatedcoin === null) return;
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {
@@ -92,7 +87,7 @@ export default function WelcomeModal() {
             value='출석하기'
             isLoading={isLoading}
           />
-          {buttonState && <CoinPopcon amount={8} coin={1} />}
+          {buttonState && <CoinPopcon amount={5} coin={0} />}
         </ModalButtonContainer>
       </div>
     </div>

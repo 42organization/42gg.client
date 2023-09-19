@@ -11,7 +11,7 @@ export default function Footer() {
         <div
           onClick={() =>
             window.open(
-              'https://github.com/42organization/42arcade.gg.client/wiki/42gg.kr--%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B0%80%EC%9D%B4%EB%93%9C'
+              'https://www.notion.so/bfbe7ad164d4450295e4978ce3121398?pvs=4'
             )
           }
         >
