@@ -41,6 +41,8 @@ export default function InputScore({
           id='enemyTeamScore'
           name='enemyTeamScore'
           type='number'
+          inputMode='numeric'
+          pattern='[0-9]*'
           value={result.enemyTeamScore}
           min={0}
           max={2}
