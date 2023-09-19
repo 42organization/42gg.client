@@ -166,7 +166,7 @@
 &nbsp;&nbsp;&nbsp;
 <img width="25%" alt="Score_Check" src="https://github.com/42organization/42gg.client/assets/100325940/089d0030-4d1f-43f7-8c36-2b4f5a2ee5bb">
 &nbsp;&nbsp;&nbsp;
-<img width="25%" alt="Score_Result" src="https://github.com/42organization/42gg.client/assets/100325940/55a1c361-a236-4b72-902c-ce305db12183">
+<img width="25%" alt="Score_Result" src="https://github.com/42organization/42gg.client/assets/100325940/5c129988-6831-4d98-a5dc-a6a4283d9d80">
 
 <br/>
 
