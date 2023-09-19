@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'types/modalTypes';
 import { instance } from 'utils/axios';
@@ -16,6 +17,8 @@ export default function WelcomeModal() {
   const setError = useSetRecoilState(errorState);
   const [buttonState, setButtonState] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
+
   const content = {
     title: 'Welcome!',
     message:
@@ -64,8 +67,10 @@ export default function WelcomeModal() {
       if (error.response.status === 409) {
         alert('출석은 하루에 한 번만 가능합니다.');
         setModal({ modalName: null });
+        queryClient.invalidateQueries('user');
         return;
       } else {
+        queryClient.invalidateQueries('user');
         setError('SM01');
       }
     } finally {
