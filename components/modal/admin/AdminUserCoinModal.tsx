@@ -151,7 +151,7 @@ export default function AdminUserCoinModal(props: { intraId: string }) {
               name='change'
               type='number'
               inputMode='numeric'
-              pattern='[0-9]*'
+              pattern='^[+-]?\d*$'
               placeholder={'코인 지급(차감)액을 입력하세요'}
               onChange={inputHandler}
             />
