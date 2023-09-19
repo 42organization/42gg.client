@@ -100,6 +100,18 @@
   </tr>
 </table>
 
+<h3>4기</h3>
+<table>
+  <tr>
+    <td align=center>역할</td>
+    <td align=center></td>
+  </tr>
+  <tr>
+    <td align=center>이름</td>
+    <td align=center><a href="https://github.com/hyobb109">조효빈 @hyobicho</td>
+  </tr>
+</table>
+
 <br>
 
 <h2>주요 기능 소개</h2>
