@@ -125,7 +125,8 @@
 ### 🙋‍♂️ 출석을 통해 코인을 획득할 수 있습니다.
 <img width="25%" alt="Attendance" src="https://github.com/42organization/42gg.client/assets/100325940/0e8cf9a5-2799-4dbf-990b-9c17b744e3b7">
 &nbsp;&nbsp;&nbsp;
-![attendance_coin](https://github.com/42organization/42gg.client/assets/100325940/a6947fc7-8aa3-4fd2-98d1-0a59cca9aa4d)
+
+<img width="25%" alt="Attendance_gif" src="https://github.com/42organization/42gg.client/assets/100325940/a6947fc7-8aa3-4fd2-98d1-0a59cca9aa4d">
 
 <br/>
 ### 💃 매치페이지에서 나와 비슷한 실력의 상대와의 경기를 매칭할 수 있습니다 🕺
