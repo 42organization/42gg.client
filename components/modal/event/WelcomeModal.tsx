@@ -22,22 +22,22 @@ export default function WelcomeModal() {
       '42GG에 오신걸 환영합니다.\n당신의 행복한 탁구 생활을\n응원합니다! 총총총...',
   };
 
-  const postCoinHandler = async () => {
-    try {
-      setIsLoading(true);
-      const res = await instance.post(`/pingpong/users/attendance`);
-      return res.data;
-    } catch (e: any) {
-      if (e.response.status === 409) {
-        alert('출석은 하루에 한 번만 가능합니다.');
-        setModal({ modalName: null });
-        return;
-      }
-      setError('SM01');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const postCoinHandler = async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     const res = await instance.post(`/pingpong/users/attendance`);
+  //     return res.data;
+  //   } catch (e: any) {
+  //     if (e.response.status === 409) {
+  //       alert('출석은 하루에 한 번만 가능합니다.');
+  //       setModal({ modalName: null });
+  //       return;
+  //     }
+  //     setError('SM01');
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   const openPageManual = () => {
     window.open('https://www.notion.so/bfbe7ad164d4450295e4978ce3121398?pvs=4');
@@ -46,8 +46,11 @@ export default function WelcomeModal() {
   const openAttendanceCoin = async () => {
     try {
       setButtonState(true);
-      const updatedcoin = await postCoinHandler();
-      if (updatedcoin === null) return;
+      setIsLoading(true);
+      // const updatedcoin = await postCoinHandler();
+      const res = await instance.post(`/pingpong/users/attendance`);
+      const updatedcoin = res.data;
+      if (!updatedcoin) return;
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {
@@ -57,9 +60,16 @@ export default function WelcomeModal() {
           coinIncrement: updatedcoin.coinIncrement,
         },
       });
-    } catch (error) {
-      setError('SM02');
-      return;
+    } catch (error: any) {
+      if (error.response.status === 409) {
+        alert('출석은 하루에 한 번만 가능합니다.');
+        setModal({ modalName: null });
+        return;
+      } else {
+        setError('SM01');
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
