@@ -52,6 +52,14 @@
                 transition: 0.3s;
               }
             }
+            .coin {
+              color: white;
+              background-color: #10b981;
+              &:hover {
+                background-color: #059669;
+                transition: 0.3s;
+              }
+            }
             .penalty {
               color: white;
               background-color: #2678f3;
