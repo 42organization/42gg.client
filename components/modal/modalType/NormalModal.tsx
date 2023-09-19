@@ -19,7 +19,7 @@ export default function NormalModal() {
 
   const content: { [key: string]: JSX.Element | null } = {
     'EVENT-ANNOUNCEMENT': announcement ? (
-      <AnnouncementModal announcement={announcement} isAttended={isAttended} />
+      <AnnouncementModal announcement={announcement} />
     ) : null,
     'EVENT-WELCOME': <WelcomeModal />,
     'MENU-REPORT': <ReportModal />,
