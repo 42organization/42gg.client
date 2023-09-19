@@ -160,13 +160,13 @@
 
 <br/>
 
-### 📝 경기가 끝난 후에는 점수를 입력해서 기록을 남겨요!
+### 📝 경기가 끝난 후 점수를 입력해서 기록을 남기고 코인을 획득하세요!
 
-<img width="25%" alt="Score_Input" src="https://github.com/42organization/42gg.client/assets/57761286/d980de4c-9478-4d7e-86e7-08e429bccee3">
+<img width="25%" alt="Score_Input" src="https://github.com/42organization/42gg.client/assets/100325940/74820ca7-9dc0-4cb5-b80f-9d3c23a503b8">
 &nbsp;&nbsp;&nbsp;
-<img width="25%" alt="Score_Check" src="https://github.com/42organization/42gg.client/assets/57761286/6a50baf4-e06e-45f9-90dc-cf5b3dbc2260">
+<img width="25%" alt="Score_Check" src="https://github.com/42organization/42gg.client/assets/100325940/089d0030-4d1f-43f7-8c36-2b4f5a2ee5bb">
 &nbsp;&nbsp;&nbsp;
-<img width="25%" alt="Score_Result" src="https://github.com/42organization/42gg.client/assets/57761286/17f23249-8ca0-46e6-a9a3-79d83b7471be">
+<img width="25%" alt="Score_Result" src="https://github.com/42organization/42gg.client/assets/100325940/55a1c361-a236-4b72-902c-ce305db12183">
 
 <br/>
 
@@ -176,6 +176,17 @@
 &nbsp;&nbsp;&nbsp;
 <img width="25%" alt="Rank_VIP" src="https://github.com/42organization/42gg.client/assets/100325940/0eafd826-9ab3-49e2-828b-2c6694f3cbe4">
 
+<br/>
+
+### 🏦 상점 페이지에서 아이템을 구매하고 사용할 수 있습니다
+<img width="25%" alt="Store_Main" src="https://github.com/42organization/42gg.client/assets/100325940/751f4dec-b8a1-4ca5-b01e-35119f930da9">
+&nbsp;&nbsp;&nbsp;
+<img width="25%" alt="Store_Inventory" src="https://github.com/42organization/42gg.client/assets/100325940/be1cabb6-9f80-4f8b-81dc-4c1c987cc313">
+
+### 💰 본인의 코인 내역도 확인할 수 있습니다
+<img width="25%" alt="Store_CoinClick" src="https://github.com/42organization/42gg.client/assets/100325940/f4d260db-2fc7-4109-a427-d6cf0bc36f75">
+&nbsp;&nbsp;&nbsp;
+<img width="25%" alt="Store_CoinHistory" src="https://github.com/42organization/42gg.client/assets/100325940/4b30f9d9-d39b-4a5d-bc09-8ed6665910bb">
 
 <br/>
 
@@ -193,19 +204,20 @@
 
 #### 👤 나의 PPP(Ping Pong Power) 변화 그래프와 최근 경기 기록을 확인할 수 있어요!
 
-<img width="25%" alt="Profile_Graph" src="https://github.com/42organization/42gg.client/assets/57761286/be4895f3-2f2c-469b-8333-77a9f4773df5">
+<img width="25%" alt="Profile_Graph" src="https://github.com/42organization/42gg.client/assets/100325940/be413e59-6308-4464-8f5c-e2b6a08ea4e2">
 &nbsp;&nbsp;&nbsp;
-<img width="25%" alt="Profile_Record" src="https://github.com/42organization/42gg.client/assets/57761286/1d56fdad-0e5d-49e7-876e-2d875f2d1484">
+<img width="25%" alt="Profile_Record" src="https://github.com/42organization/42gg.client/assets/100325940/746421c4-d04e-4418-a6c8-7c2ad54bcb85">
 
 #### 👤 상태메시지와 라켓 종류를 변경해보아요!
 
-<img width="25%" alt="Profile_Edit" src="https://github.com/42organization/42gg.client/assets/57761286/8fc38e75-cc17-47d1-b6a7-86e5f975d26a">
+<img width="25%" alt="Profile_Edit" src="https://github.com/42organization/42gg.client/assets/100325940/21e2ee20-7d3e-4042-9239-cceb298eb8b9">
 &nbsp;&nbsp;&nbsp;
-<img width="25%" alt="Profile_Edit2" src="https://github.com/42organization/42gg.client/assets/57761286/7774bf6d-1957-4e44-9080-8612ecabf440">
+<img width="25%" alt="Profile_Edit2" src="https://github.com/42organization/42gg.client/assets/100325940/e4437d0f-9bab-4b62-a245-159f679c0e99">
+
 
 #### 👤 42 계정과 Kakao 계정을 연동할 수 있어요!
 
-<img width="25%" alt="Profile_Connect_Kakao" src="https://github.com/42organization/42gg.client/assets/57761286/654fae13-7e1a-4afa-930e-1fbbb2807744">
+<img width="25%" alt="Profile_Connect_Kakao" src="https://github.com/42organization/42gg.client/assets/100325940/f748bd0c-3e44-4715-80bd-aedfd47c6521">
 &nbsp;&nbsp;&nbsp;
 <img width="25%" alt="Profile_Connect_42" src="https://github.com/42organization/42gg.client/assets/57761286/41e978d9-57ca-420d-855f-0aadc8625d10">
 
