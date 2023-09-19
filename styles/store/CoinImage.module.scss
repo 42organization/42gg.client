@@ -1,9 +1,11 @@
 @import 'styles/common.scss';
 
 .ggCoin {
+  display: flex;
   color: $coin-yellow;
+  align-items: center;
   img {
     margin-right: 0.2rem;
-    transform: translateY(0.3rem);
+    // transform: translateY(0.3rem);
   }
 }

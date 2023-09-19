@@ -124,6 +124,19 @@ const modalContents: contentsType = {
         },
       ],
     },
+    {
+      title: (
+        <ContentTitle title={'뽑기 아이템의 확률을 알고싶어요!'} icon={'🔍'} />
+      ),
+      description: [
+        {
+          tag: '🔗 뽑기 확률표',
+          content: [
+            '위 링크를 누르면 뽑기 아이템의 확률표 페이지로 이동합니다',
+          ],
+        },
+      ],
+    },
   ],
 };
 
@@ -157,7 +170,25 @@ export default function StoreManualModal({ radioMode }: StoreManual) {
               {item.title}
               <ul className={styles.ruleDetail}>
                 {item.description.map((rule, idx) =>
-                  rule.tag !== '' ? (
+                  rule.tag === '' ? (
+                    rule.content.map((content, idx) => (
+                      <li key={idx}>{content}</li>
+                    ))
+                  ) : rule.tag === '🔗 뽑기 확률표' ? (
+                    <li key={idx}>
+                      <a
+                        href='https://www.notion.so/21cadc74ddb245ea9494c7b203892c83?pvs=4'
+                        target='_blank'
+                      >
+                        {rule.tag}
+                      </a>
+                      <ul className={styles.ruleContent}>
+                        {rule.content.map((rule, idx) => (
+                          <li key={idx}>{rule}</li>
+                        ))}
+                      </ul>
+                    </li>
+                  ) : (
                     <li key={idx}>
                       {rule.tag}
                       <ul className={styles.ruleContent}>
@@ -166,8 +197,6 @@ export default function StoreManualModal({ radioMode }: StoreManual) {
                         ))}
                       </ul>
                     </li>
-                  ) : (
-                    rule.content.map((e, idx) => <li key={idx}>{e}</li>)
                   )
                 )}
               </ul>

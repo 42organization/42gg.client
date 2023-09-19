@@ -5,6 +5,12 @@ export interface IUser {
   roleType: 'USER' | 'GUEST' | 'ADMIN';
 }
 
+export interface IUserCoin {
+  intraId: string;
+  change: number;
+  content: string;
+}
+
 export interface IUserTable {
   userInfoList: IUser[];
   totalPage: number;

@@ -10,7 +10,7 @@ export const tableFormat: TableFormat = {
     columns: ['id', 'roleType', 'intraId', 'statusMessage', 'etc'],
     etc: {
       type: 'button',
-      value: ['자세히', '패널티 부여'],
+      value: ['자세히', '코인 수정', '패널티 부여'],
     },
   },
   feedback: {
