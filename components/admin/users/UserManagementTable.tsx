@@ -35,12 +35,15 @@ export default function UserManagementTable() {
   const [intraId, setIntraId] = useState<string>('');
   const setModal = useSetRecoilState(modalState);
 
-  const buttonList: string[] = [styles.detail, styles.penalty];
+  const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
 
   const handleButtonAction = (buttonName: string, intraId: string) => {
     switch (buttonName) {
       case '자세히':
         setModal({ modalName: 'ADMIN-PROFILE', intraId });
+        break;
+      case '코인 수정':
+        setModal({ modalName: 'ADMIN-USER-COIN', intraId });
         break;
       case '패널티 부여':
         setModal({ modalName: 'ADMIN-PENALTY', intraId });

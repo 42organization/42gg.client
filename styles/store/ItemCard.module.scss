@@ -7,7 +7,7 @@
   padding: 0.2rem 0 0.2rem 0.2rem;
   margin-bottom: 0.7rem;
   word-break: keep-all;
-  background: #ffffff5f;
+  background: #d4b8f2;
   border-radius: 0.3rem;
   grid-template-columns: 1fr 3fr;
   grid-template-rows: repeat(6, auto);
@@ -34,20 +34,24 @@
   .title {
     margin-top: 1rem;
     font-size: 1.1rem;
-    font-weight: bold;
+    font-weight: 800;
     color: black;
     grid-area: header;
   }
   .priceTag {
+    display: flex;
     grid-area: price;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: $coin-yellow;
+    align-items: center;
     @include ggCoin;
     .salePrice {
-      font-weight: bold;
+      font-weight: 600;
     }
     .onDiscount {
-      margin-right: 0.2rem;
+      margin-right: 0.5rem;
+      font-size: 0.8rem;
+      color: #676767;
       text-decoration-line: line-through;
       text-decoration-color: #c03434;
       text-decoration-style: solid;

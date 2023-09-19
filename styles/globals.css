@@ -2,9 +2,19 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-weight: 500;
   -ms-overflow-style: none;
+}
+
+/* body 태그에 적용한 폰트가 적용되지 않는 태그들 */
+button,
+textarea,
+input {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-weight: 500;
 }
 
 @media all and (max-width: 379px) {
@@ -89,18 +99,11 @@ body {
 }
 
 @font-face {
-  font-family: 'Pretendard-Medium';
-  src: url('../public/font/Pretendard/Pretendard-Medium.woff2') format('woff2'),
-    url('../public/font/Pretendard/Pretendard-Medium.otf') format('opentype');
-  font-weight: normal;
+  font-family: 'Pretendard';
+  src: url('../public/font/Pretendard/PretendardVariable.woff2') format('woff2'),
+    url('../public/font/Pretendard/PretendardVariable.ttf') format('truetype');
   font-style: normal;
-}
-
-@font-face {
-  font-family: 'Pretendard-Black';
-  src: url('../public/font/Pretendard/Pretendard-Black.woff2') format('woff2'),
-    url('../public/font/Pretendard/Pretendard-Black.otf') format('opentype');
-  font-style: normal;
+  font-weight: 100 900;
 }
 
 ::-webkit-scrollbar {
@@ -114,14 +117,11 @@ a {
 
 * {
   box-sizing: border-box;
-  font-family: 'Pretendard-Medium', sans-serif;
 }
 
 h1 {
   margin: 0;
 }
-
-/* admin */
 
 /* 페이지네이션 */
 ul {
