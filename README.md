@@ -183,6 +183,24 @@
 &nbsp;&nbsp;&nbsp;
 <img width="25%" alt="Store_Inventory" src="https://github.com/42organization/42gg.client/assets/100325940/be1cabb6-9f80-4f8b-81dc-4c1c987cc313">
 
+### 🧳 프로필 변경권, ID 색깔 변경권, 확성기, EDGE 뽑기, 배경 뽑기를 사용할 수 있습니다
+
+<img width="25%" alt="Item_Profile" src="https://github.com/42organization/42gg.client/assets/100325940/e6df836c-b25f-4fd4-89a9-f1ab8cabecb0">
+&nbsp;&nbsp;&nbsp;
+<img width="25%" alt="Item_Idcolor" src="https://github.com/42organization/42gg.client/assets/100325940/ef0449c3-625a-404d-83ac-a8a062e06524">
+&nbsp;&nbsp;&nbsp;
+<img width="25%" alt="Item_Edge" src="https://github.com/42organization/42gg.client/assets/100325940/85097135-ee85-41bf-97ac-f12efc62336b">
+&nbsp;&nbsp;&nbsp;
+<img width="25%" alt="Item_Background" src="https://github.com/42organization/42gg.client/assets/100325940/f787c07f-69c7-4005-a5b1-89361f63356c">
+&nbsp;&nbsp;&nbsp;
+<img width="25%" alt="Item_Megaphone" src="https://github.com/42organization/42gg.client/assets/100325940/62b28356-2c8e-4c47-9242-d2f975254de2">
+
+### 🎲 뽑기 애니메이션도 있어요
+
+<img width="25%" alt="Gacha_Background" src="https://github.com/42organization/42gg.client/assets/100325940/0af176ab-2a35-457c-8eae-dd5598f4608e">
+&nbsp;&nbsp;&nbsp;
+<img width="25%" alt="Gacha_Edge" src="https://github.com/42organization/42gg.client/assets/100325940/088d252a-fdb9-42c8-8482-859e952245f3">
+
 ### 💰 본인의 코인 내역도 확인할 수 있습니다
 <img width="25%" alt="Store_CoinClick" src="https://github.com/42organization/42gg.client/assets/100325940/f4d260db-2fc7-4109-a427-d6cf0bc36f75">
 &nbsp;&nbsp;&nbsp;
