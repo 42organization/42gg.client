@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useQueryClient } from 'react-query';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { reloadMatchState } from 'utils/recoil/match';
 import { modalState, modalTypeState } from 'utils/recoil/modal';
@@ -11,6 +12,7 @@ export default function ModalProvider() {
   const [{ modalName, isAttended }, setModal] = useRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const modalType = useRecoilValue(modalTypeState);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     setModalOutsideScroll();
@@ -22,9 +24,13 @@ export default function ModalProvider() {
   const closeModalHandler = (e: React.MouseEvent) => {
     if (modalName?.split('-')[0] === 'FIXED') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
-      if (modalName === 'MATCH-CANCEL') setReloadMatch(true);
-      else if (modalName === 'EVENT-ANNOUNCEMENT' && isAttended === false) {
+      if (modalName === 'MATCH-CANCEL') {
+        setReloadMatch(true);
+      } else if (modalName === 'EVENT-ANNOUNCEMENT' && isAttended === false) {
         setModal({ modalName: 'EVENT-WELCOME' });
+      } else if (modalName === 'COIN-ANIMATION') {
+        queryClient.invalidateQueries('user');
+        setModal({ modalName: null });
       } else {
         setModal({ modalName: null });
       }
