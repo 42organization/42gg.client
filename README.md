@@ -115,15 +115,19 @@
 <br/>
 
 ### 🏓 메인페이지에서 탁구 랭킹, 최근 경기를 확인할 수 있습니다.
-
-<img width="25%" alt="Main_Main" src="https://github.com/42organization/42gg.client/assets/57761286/26011309-9544-4afe-a2ae-f901aa0e4618">
+<img width="25%" alt="Main_Main" src="https://github.com/42organization/42gg.client/assets/100325940/61689755-1535-4e79-85d6-611b4390f9ea">
 &nbsp;&nbsp;&nbsp;
-<img width="25%" alt="Main_Menu" src="https://github.com/42organization/42gg.client/assets/57761286/98d4bbb9-56db-43bc-a068-dfdd02a12dec">
+<img width="25%" alt="Main_Menu" src="https://github.com/42organization/42gg.client/assets/100325940/625fba76-076b-4936-8679-61bdc24f2065">
 &nbsp;&nbsp;&nbsp;
-<img width="25%" alt="Main_Noti" src="https://github.com/42organization/42gg.client/assets/57761286/2cdfc50c-17a1-498f-aa6d-0cb4ba7f57a1">
+<img width="25%" alt="Main_Noti" src="https://github.com/42organization/42gg.client/assets/100325940/f4a2aa1d-c7de-47b1-971c-398145692abc">
 
 <br/>
+### 🙋‍♂️ 출석을 통해 코인을 획득할 수 있습니다.
+<img width="25%" alt="Attendance" src="https://github.com/42organization/42gg.client/assets/100325940/0e8cf9a5-2799-4dbf-990b-9c17b744e3b7">
+&nbsp;&nbsp;&nbsp;
+![attendance_coin](https://github.com/42organization/42gg.client/assets/100325940/a6947fc7-8aa3-4fd2-98d1-0a59cca9aa4d)
 
+<br/>
 ### 💃 매치페이지에서 나와 비슷한 실력의 상대와의 경기를 매칭할 수 있습니다 🕺
 
 #### 🏓 Play 아이콘을 클릭해 매치 페이지로 이동해 보아요! 최대 3개의 슬롯을 예약할 수 있습니다.
@@ -162,9 +166,10 @@
 
 ### 🥇 랭킹을 확인할 수 있습니다
 
-<img width="25%" alt="Rank_PPP" src="https://github.com/42organization/42gg.client/assets/57761286/4b505265-3dcd-453a-b632-d764510beae6">
+<img width="25%" alt="Rank_PPP" src="https://github.com/42organization/42gg.client/assets/100325940/ad2b7b10-f0ea-4bda-b914-f3ad2bf61dc7">
 &nbsp;&nbsp;&nbsp;
-<img width="25%" alt="Rank_VIP" src="https://github.com/42organization/42gg.client/assets/57761286/f0aa0d23-9c1b-4dee-9882-af184867659a">
+<img width="25%" alt="Rank_VIP" src="https://github.com/42organization/42gg.client/assets/100325940/0eafd826-9ab3-49e2-828b-2c6694f3cbe4">
+
 
 <br/>
 
