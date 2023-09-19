@@ -35,7 +35,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   useGetUserSeason(presentPath);
   useSetAfterGameModal();
   useLiveCheck(presentPath);
-  useAnnouncementCheck(presentPath, user);
+  useAnnouncementCheck(presentPath);
 
   const onClickMatch = () => {
     router.replace('/');
