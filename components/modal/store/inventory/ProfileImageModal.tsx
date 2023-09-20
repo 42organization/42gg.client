@@ -93,6 +93,7 @@ export default function ProfileImageModal({
       await instance.post('/pingpong/users/profile-image', formData);
       queryClient.invalidateQueries('user');
       alert(PROFILE.SUCCESS);
+      queryClient.invalidateQueries('inventory');
     } catch (error: unknown) {
       if (isAxiosError<errorPayload>(error) && error.response) {
         const { code } = error.response.data;
