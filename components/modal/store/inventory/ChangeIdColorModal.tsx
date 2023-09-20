@@ -1,4 +1,4 @@
-import { MouseEventHandler, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseIdColorRequest, UseItemData } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
