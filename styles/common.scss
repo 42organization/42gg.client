@@ -45,15 +45,14 @@ $g2-bottom: #b5bbf2;
 $loser-red: #ff0303;
 $winner-blue: #040eff;
 
-$coin-yellow: #e8e230;
+$coin-yellow: #f6e24d;
 
 /* font-family - commmon */
-$common-font: 'Pretendard-Medium', sans-serif;
+$common-font: 'Pretendard', sans-serif;
 $common-en-font: 'Roboto', sans-serif;
 
 /* font-family - content */
 $title-font: 'Lexend', sans-serif;
-$modal-title-font: 'Pretendard-Black', sans-serif;
 $rank-font: 'Lexend', sans-serif; // 랭크페이지 myRank,
 $logo-font: 'Overgrow', sans-serif;
 $tier-font: 'Jua', sans-serif;
@@ -99,7 +98,7 @@ $vip-background: linear-gradient(
   color: $coin-yellow;
   img {
     margin-right: 0.2rem;
-    transform: translateY(0.2rem);
+    // transform: translateY(0.2rem); // NOTE : 왜 필요한건지 확인해보기
   }
 }
 
@@ -156,8 +155,8 @@ $vip-background: linear-gradient(
 }
 
 @mixin modalTitle {
-  font-family: $modal-title-font;
   font-size: 2rem;
+  font-weight: 800;
   letter-spacing: 0.04rem;
 }
 

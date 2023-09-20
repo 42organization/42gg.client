@@ -251,8 +251,8 @@ export default function AdminProfileModal(props: { intraId: string }) {
               <div>
                 <input
                   name='coin'
-                  onChange={inputNumHandler}
                   value={userInfo.coin ?? ''}
+                  disabled={true}
                 />
               </div>
             </div>

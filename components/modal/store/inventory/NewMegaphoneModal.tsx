@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useQueryClient } from 'react-query';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemData, UseMegaphoneRequest } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
@@ -58,6 +59,8 @@ export default function NewMegaphoneModal({ receiptId }: UseItemData) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const resetModal = useResetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
+  const queryClient = useQueryClient();
+
   async function handleUseMegaphone() {
     if (content.length === 0) {
       alert(MEGAPHONE.NULL_ERROR);
@@ -71,6 +74,7 @@ export default function NewMegaphoneModal({ receiptId }: UseItemData) {
     try {
       await instance.post('/pingpong/megaphones', data);
       alert(MEGAPHONE.SUCCESS);
+      queryClient.invalidateQueries('inventory');
     } catch (error: unknown) {
       if (isAxiosError<errorPayload>(error) && error.response) {
         const { code } = error.response.data;

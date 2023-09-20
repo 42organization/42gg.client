@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { useEffect } from 'react';
+import { useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { CoinResult } from 'types/coinTypes';
 import { modalState } from 'utils/recoil/modal';
@@ -9,8 +11,16 @@ import styles from 'styles/modal/CoinChangeModal.module.scss';
 
 export default function CoinChangeModal(coin: CoinResult) {
   const setModal = useSetRecoilState(modalState);
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    return () => {
+      queryClient.refetchQueries('user');
+    };
+  }, []);
 
   const closeModal = () => {
+    queryClient.refetchQueries('user');
     setModal({ modalName: null });
   };
 

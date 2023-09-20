@@ -8,7 +8,7 @@ import StoreModal from 'components/modal/modalType/StoreModal';
 import styles from 'styles/modal/Modal.module.scss';
 
 export default function ModalProvider() {
-  const [{ modalName, isAttended }, setModal] = useRecoilState(modalState);
+  const [{ modalName }, setModal] = useRecoilState(modalState);
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const modalType = useRecoilValue(modalTypeState);
 
@@ -22,9 +22,8 @@ export default function ModalProvider() {
   const closeModalHandler = (e: React.MouseEvent) => {
     if (modalName?.split('-')[0] === 'FIXED') return;
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
-      if (modalName === 'MATCH-CANCEL') setReloadMatch(true);
-      else if (modalName === 'EVENT-ANNOUNCEMENT' && isAttended === false) {
-        setModal({ modalName: 'EVENT-WELCOME' });
+      if (modalName === 'MATCH-CANCEL') {
+        setReloadMatch(true);
       } else {
         setModal({ modalName: null });
       }

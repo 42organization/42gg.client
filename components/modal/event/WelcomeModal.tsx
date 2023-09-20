@@ -16,43 +16,43 @@ export default function WelcomeModal() {
   const setModal = useSetRecoilState<Modal>(modalState);
   const setError = useSetRecoilState(errorState);
   const [buttonState, setButtonState] = useState(false);
-  const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
+
   const content = {
     title: 'Welcome!',
     message:
       '42GG에 오신걸 환영합니다.\n당신의 행복한 탁구 생활을\n응원합니다! 총총총...',
   };
 
-  const postCoinHandler = async () => {
-    try {
-      setIsLoading(true);
-      const res = await instance.post(`/pingpong/users/attendance`);
-      queryClient.invalidateQueries('user');
-      return res.data;
-    } catch (e: any) {
-      if (e.response.status === 409) {
-        alert('출석은 하루에 한 번만 가능합니다.');
-        setModal({ modalName: null });
-        return;
-      }
-      setError('SM01');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const postCoinHandler = async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     const res = await instance.post(`/pingpong/users/attendance`);
+  //     return res.data;
+  //   } catch (e: any) {
+  //     if (e.response.status === 409) {
+  //       alert('출석은 하루에 한 번만 가능합니다.');
+  //       setModal({ modalName: null });
+  //       return;
+  //     }
+  //     setError('SM01');
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   const openPageManual = () => {
-    window.open(
-      'https://github.com/42organization/42arcade.gg.client/wiki/42gg.kr--%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B0%80%EC%9D%B4%EB%93%9C'
-    );
+    window.open('https://www.notion.so/bfbe7ad164d4450295e4978ce3121398?pvs=4');
   };
 
   const openAttendanceCoin = async () => {
     try {
       setButtonState(true);
-      const updatedcoin = await postCoinHandler();
-      if (updatedcoin == null) return;
+      setIsLoading(true);
+      const res = await instance.post(`/pingpong/users/attendance`);
+      const updatedcoin = res.data;
+      if (!updatedcoin) return;
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {
@@ -62,9 +62,19 @@ export default function WelcomeModal() {
           coinIncrement: updatedcoin.coinIncrement,
         },
       });
-    } catch (error) {
-      setError('SM02');
-      return;
+    } catch (error: any) {
+      if (error.response.status === 409) {
+        setButtonState(false);
+        alert('출석은 하루에 한 번만 가능합니다.');
+        queryClient.invalidateQueries('user').then(() => {
+          setModal({ modalName: null });
+          window.location.reload();
+        });
+      } else {
+        setError('SM01');
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -92,7 +102,7 @@ export default function WelcomeModal() {
             value='출석하기'
             isLoading={isLoading}
           />
-          {buttonState && <CoinPopcon amount={8} coin={1} />}
+          {buttonState && <CoinPopcon amount={5} coin={0} />}
         </ModalButtonContainer>
       </div>
     </div>

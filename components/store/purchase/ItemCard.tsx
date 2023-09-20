@@ -57,11 +57,11 @@ export default function ItemCard({ item }: { item: Item }) {
         <span
           className={item.discount > 0 ? styles.onDiscount : styles.salePrice}
         >
-          {item.originalPrice.toLocaleString()}
+          {item.originalPrice.toLocaleString()} 코인
         </span>
         {item.discount > 0 && (
           <span className={styles.salePrice}>
-            {item.salePrice.toLocaleString()}
+            {item.salePrice.toLocaleString()} 코인
           </span>
         )}
       </div>

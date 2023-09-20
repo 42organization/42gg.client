@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { User } from 'types/mainType';
+// import { User } from 'types/mainType';
 import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
+import { useUser } from 'hooks/Layout/useUser';
 import useAxiosGet from 'hooks/useAxiosGet';
 
-const useAnnouncementCheck = (presentPath: string, user?: User) => {
+const useAnnouncementCheck = (presentPath: string) => {
+  const user = useUser();
   const setModal = useSetRecoilState<Modal>(modalState);
   const announcementTime: string | null =
     typeof window !== 'undefined'
@@ -19,7 +21,7 @@ const useAnnouncementCheck = (presentPath: string, user?: User) => {
         setModal({
           modalName: 'EVENT-ANNOUNCEMENT',
           announcement: data,
-          isAttended: user?.isAttended,
+          // isAttended: user?.isAttended,
         });
     },
     err: 'RJ01',
@@ -39,16 +41,18 @@ const useAnnouncementCheck = (presentPath: string, user?: User) => {
     }
   };
 
-  const attendedHandler = () => {
-    if (user && user.isAttended === false && presentPath === '/') {
-      setModal({ modalName: 'EVENT-WELCOME' });
-    }
-  };
+  // const attendedHandler = () => {
+  //   if (user && user.isAttended === false && presentPath === '/') {
+  //     setModal({ modalName: 'EVENT-WELCOME' });
+  //   }
+  // };
 
   useEffect(() => {
     if (!user) return;
-    announcementHandler();
-    attendedHandler();
+    // attendedHandler();
+    if (user && user.isAttended === false && presentPath === '/') {
+      setModal({ modalName: 'EVENT-WELCOME' });
+    } else announcementHandler();
   }, [user, presentPath]);
 };
 
