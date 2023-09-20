@@ -27,4 +27,5 @@ export type ModifyScoreType = {
   gameId: number;
   team1: ITeam;
   team2: ITeam;
+  status: GameStatus;
 };

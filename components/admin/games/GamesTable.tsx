@@ -96,6 +96,7 @@ export default function GamesTable() {
                         gameId={game.gameId}
                         team1={team1}
                         team2={team2}
+                        status={game.status}
                       />
                     )}
                   </div>
