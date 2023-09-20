@@ -15,7 +15,6 @@ export default function CoinChangeModal(coin: CoinResult) {
 
   useEffect(() => {
     return () => {
-      history.go();
       queryClient.refetchQueries('user');
     };
   }, []);
