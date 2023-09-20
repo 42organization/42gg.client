@@ -28,7 +28,7 @@ export default function AnnouncementModal({
 AnnouncementModalProps) {
   const setModal = useSetRecoilState(modalState);
   const [neverSeeAgain, setNeverSeeAgain] = useState<boolean>(false);
-  const user = useUser();
+  // const user = useUser();
 
   const onCheck = () => {
     setNeverSeeAgain((prev) => !prev);
@@ -42,11 +42,12 @@ AnnouncementModalProps) {
     } else {
       localStorage.removeItem('announcementTime');
     }
-    if (user && user.isAttended === false) {
-      setModal({ modalName: 'EVENT-WELCOME' });
-    } else {
-      setModal({ modalName: null });
-    }
+    // if (user && user.isAttended === false) {
+    //   setModal({ modalName: 'EVENT-WELCOME' });
+    // } else {
+    //   setModal({ modalName: null });
+    // }
+    setModal({ modalName: null });
   };
 
   useEffect(() => {

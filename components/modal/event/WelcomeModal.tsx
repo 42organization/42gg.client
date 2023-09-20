@@ -50,7 +50,6 @@ export default function WelcomeModal() {
     try {
       setButtonState(true);
       setIsLoading(true);
-      // const updatedcoin = await postCoinHandler();
       const res = await instance.post(`/pingpong/users/attendance`);
       const updatedcoin = res.data;
       if (!updatedcoin) return;
@@ -66,12 +65,13 @@ export default function WelcomeModal() {
     } catch (error: any) {
       if (error.response.status === 409) {
         alert('출석은 하루에 한 번만 가능합니다.');
-        setModal({ modalName: null });
-        queryClient.invalidateQueries('user');
-        return;
+        // queryClient.refetchQueries('user');
+        queryClient.refetchQueries('user').then(() => {
+          setModal({ modalName: null });
+        });
       } else {
-        queryClient.invalidateQueries('user');
         setError('SM01');
+        queryClient.refetchQueries('user');
       }
     } finally {
       setIsLoading(false);
