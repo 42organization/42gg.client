@@ -15,11 +15,12 @@ export default function CoinChangeModal(coin: CoinResult) {
 
   useEffect(() => {
     return () => {
-      queryClient.invalidateQueries('user');
+      queryClient.refetchQueries('user');
     };
   }, []);
 
   const closeModal = () => {
+    queryClient.refetchQueries('user');
     setModal({ modalName: null });
   };
 
