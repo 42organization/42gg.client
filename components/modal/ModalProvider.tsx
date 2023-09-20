@@ -14,7 +14,7 @@ export default function ModalProvider() {
   const setReloadMatch = useSetRecoilState(reloadMatchState);
   const modalType = useRecoilValue(modalTypeState);
   const queryClient = useQueryClient();
-  const user = useUser();
+  // const user = useUser();
 
   useEffect(() => {
     setModalOutsideScroll();
@@ -28,13 +28,15 @@ export default function ModalProvider() {
     if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
       if (modalName === 'MATCH-CANCEL') {
         setReloadMatch(true);
-      } else if (
-        modalName === 'EVENT-ANNOUNCEMENT' &&
-        user &&
-        user.isAttended === false
-      ) {
-        setModal({ modalName: 'EVENT-WELCOME' });
-      } else if (modalName === 'COIN-ANIMATION') {
+      }
+      // else if (
+      //   modalName === 'EVENT-ANNOUNCEMENT' &&
+      //   user &&
+      //   user.isAttended === false
+      // ) {
+      //   setModal({ modalName: 'EVENT-WELCOME' });
+      // }
+      else if (modalName === 'COIN-ANIMATION') {
         queryClient.invalidateQueries('user');
         setModal({ modalName: null });
       } else {

@@ -46,14 +46,33 @@ export default function WelcomeModal() {
     window.open('https://www.notion.so/bfbe7ad164d4450295e4978ce3121398?pvs=4');
   };
 
+  // const openAttendanceModal = () => {
+  //   // step1 : 로컬스토리지에서 출석한 시간을 가져온다.
+  //   // step2 : 출석한 시간이 없거나 출석한 날짜가 오늘과 다르면
+  // };
+
   const openAttendanceCoin = async () => {
     try {
       setButtonState(true);
       setIsLoading(true);
       // const updatedcoin = await postCoinHandler();
+
+      // const expires = new Date();
+      // expires.setDate(expires.getDate());
+      // expires.setHours(0, 0, 0, 0);
+      // localStorage.setItem('AttendTime', expires.toString());
+
+      // localStorage.removeItem('AttendTime');
+
       const res = await instance.post(`/pingpong/users/attendance`);
       const updatedcoin = res.data;
       if (!updatedcoin) return;
+      // // NOTE : 여기서 출석한 시간 로컬스토리지에 저장
+      // const attendanceDay = new Date().getDate();
+      // const attendanceDay = new Date(localStorage.getitem('attendanceDay'));
+      // if (new Date() > attendanceDay) {
+      // }
+      // localStorage.setItem('attendanceTime', attendanceDay.toString());
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {
