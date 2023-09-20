@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useQueryClient } from 'react-query';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemData } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
@@ -60,6 +61,7 @@ export default function EditMegaphoneModal({ receiptId }: UseItemData) {
     type: 'setError',
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     getMegaphoneData();
@@ -75,6 +77,7 @@ export default function EditMegaphoneModal({ receiptId }: UseItemData) {
       .delete(`/pingpong/megaphones/${megaphoneData.megaphoneId}`)
       .then(() => {
         alert(EDIT_MEGAPHONE.SUCCESS);
+        queryClient.invalidateQueries('inventory');
       })
       .catch((error: unknown) => {
         if (isAxiosError<errorPayload>(error) && error.response) {

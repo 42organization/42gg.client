@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { useQueryClient } from 'react-query';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseIdColorRequest, UseItemData } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
@@ -65,6 +66,8 @@ export default function ChangeIdColorModal({
   const pickerHandler = useCallback(() => {
     setOpenPicker((prev) => !prev);
   }, []);
+  
+  const queryClient = useQueryClient();
 
   if (!user) return null;
 
@@ -82,6 +85,7 @@ export default function ChangeIdColorModal({
     try {
       await instance.patch('/pingpong/users/text-color', data);
       alert(ID_COLOR.SUCCESS);
+      queryClient.invalidateQueries('inventory');
     } catch (error: unknown) {
       if (isAxiosError<errorPayload>(error) && error.response) {
         const { code } = error.response.data;
