@@ -1,15 +1,16 @@
 import { useRouter } from 'next/router';
-import SideNavContent from './SideNavContent';
+import { BsShop } from 'react-icons/bs';
 import { GoSettings } from 'react-icons/go';
-import { MdOutlineMessage } from 'react-icons/md';
-import { TbCalendarTime } from 'react-icons/tb';
 import {
   GrUserSettings,
   GrNotification,
   GrStatusWarning,
   GrAnnounce,
 } from 'react-icons/gr';
-import { IoGameControllerOutline } from 'react-icons/io5';
+import { IoGameControllerOutline, IoReceiptOutline } from 'react-icons/io5';
+import { MdOutlineMessage } from 'react-icons/md';
+import { TbCalendarTime, TbCoin, TbPaperBag } from 'react-icons/tb';
+import SideNavContent from 'components/admin/SideNavContent';
 import styles from 'styles/admin/SideNav.module.scss';
 
 export default function SideNav() {
@@ -79,6 +80,38 @@ export default function SideNav() {
         currentPath={currentPath}
       >
         <TbCalendarTime className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/receipt'}
+        menuName={'구매내역 관리'}
+        currentPath={currentPath}
+      >
+        <IoReceiptOutline className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/usageHistory'}
+        menuName={'사용내역 관리'}
+        currentPath={currentPath}
+      >
+        <TbPaperBag className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/store'}
+        menuName={'상점 관리'}
+        currentPath={currentPath}
+      >
+        <BsShop className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/coin'}
+        menuName={'재화 정책 관리'}
+        currentPath={currentPath}
+      >
+        <TbCoin className={styles.logo} />
       </SideNavContent>
     </div>
   );

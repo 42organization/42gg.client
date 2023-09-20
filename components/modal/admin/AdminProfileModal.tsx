@@ -1,18 +1,18 @@
 import Image from 'next/legacy/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { roleTypes, UserInfo } from 'types/admin/adminUserTypes';
+import { roleTypes, IUserInfo } from 'types/admin/adminUserTypes';
 import { racketTypes } from 'types/userTypes';
+import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import { instanceInManage } from 'utils/axios';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/modal/AdminProfile.module.scss';
 
 const STAT_MSG_LIMIT = 30;
 
 export default function AdminProfileModal(props: { intraId: string }) {
-  const [userInfo, setUserInfo] = useState<UserInfo>({
+  const [userInfo, setUserInfo] = useState<IUserInfo>({
     userId: 0,
     intraId: '',
     userImageUri: null,
@@ -22,10 +22,14 @@ export default function AdminProfileModal(props: { intraId: string }) {
     losses: '',
     ppp: '',
     email: '',
-    roleType: 'ROLE_USER',
+    roleType: 'USER',
+    coin: 0,
   });
 
-  const { imgData, imgPreview, uploadImg } = useUploadImg();
+  const { imgData, imgPreview, uploadImg } = useUploadImg({
+    maxSizeMB: 0.03,
+    maxWidthOrHeight: 150,
+  });
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
@@ -80,6 +84,7 @@ export default function AdminProfileModal(props: { intraId: string }) {
       ppp: userInfo.ppp,
       email: userInfo.email,
       roleType: userInfo.roleType,
+      coin: userInfo.coin,
     };
     formData.append(
       'updateUserInfo',
@@ -163,8 +168,10 @@ export default function AdminProfileModal(props: { intraId: string }) {
           </div>
         </div>
         <div className={styles.middle}>
-          <label>상태 메시지</label>
-          <div>{`${userInfo.statusMessage.length} / ${STAT_MSG_LIMIT}`}</div>
+          <div className={styles.messageCount}>
+            <label>상태 메시지</label>
+            <div>{`${userInfo.statusMessage.length} / ${STAT_MSG_LIMIT}`}</div>
+          </div>
           <textarea
             name='statusMessage'
             onChange={inputHandler}
@@ -179,6 +186,7 @@ export default function AdminProfileModal(props: { intraId: string }) {
               <div>승</div>
               <div>패</div>
               <div>PPP</div>
+              <div>COIN</div>
             </div>
             <div className={styles.choiceBtn}>
               <div className={styles.racketTypeWrap}>
@@ -238,6 +246,13 @@ export default function AdminProfileModal(props: { intraId: string }) {
                   name='ppp'
                   onChange={inputNumHandler}
                   value={userInfo.ppp ?? ''}
+                />
+              </div>
+              <div>
+                <input
+                  name='coin'
+                  value={userInfo.coin ?? ''}
+                  disabled={true}
                 />
               </div>
             </div>

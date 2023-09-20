@@ -1,14 +1,19 @@
 import { useRouter } from 'next/router';
-import BasicProfile from 'components/user/BasicProfile';
+import { RandomColors } from 'types/colorModeTypes';
 import GameResult from 'components/game/GameResult';
-import RankProfile from 'components/user/RankProfile';
 import Section from 'components/main/Section';
+import BasicProfile from 'components/user/BasicProfile';
+import RankProfile from 'components/user/RankProfile';
+import useBasicProfile from 'hooks/users/useBasicProfile';
+import useProfileColorMode from 'hooks/users/useProfileColorMode';
 import styles from 'styles/user/user.module.scss';
 
 export default function User() {
   const router = useRouter();
   const { intraId } = router.query;
+  const { background } = useBasicProfile({ profileId: intraId as string });
 
+  useProfileColorMode(background as RandomColors);
   return (
     <div className={styles.container}>
       {typeof intraId === 'string' && (

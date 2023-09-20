@@ -4,11 +4,17 @@ import { useSetRecoilState } from 'recoil';
 import { Announcement } from 'types/modalTypes';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { modalState } from 'utils/recoil/modal';
+import {
+  ModalButtonContainer,
+  ModalButton,
+} from 'components/modal/ModalButton';
+import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/modal/event/AnnouncementModal.module.scss';
 import 'react-quill/dist/quill.bubble.css';
 
 type AnnouncementModalProps = {
   announcement: Announcement;
+  // isAttended?: boolean;
 };
 
 const Quill = dynamic(() => import('react-quill'), {
@@ -18,9 +24,11 @@ const Quill = dynamic(() => import('react-quill'), {
 
 export default function AnnouncementModal({
   announcement,
-}: AnnouncementModalProps) {
+}: // isAttended,
+AnnouncementModalProps) {
   const setModal = useSetRecoilState(modalState);
   const [neverSeeAgain, setNeverSeeAgain] = useState<boolean>(false);
+  // const user = useUser();
 
   const onCheck = () => {
     setNeverSeeAgain((prev) => !prev);
@@ -34,6 +42,11 @@ export default function AnnouncementModal({
     } else {
       localStorage.removeItem('announcementTime');
     }
+    // if (user && user.isAttended === false) {
+    //   setModal({ modalName: 'EVENT-WELCOME' });
+    // } else {
+    //   setModal({ modalName: null });
+    // }
     setModal({ modalName: null });
   };
 
@@ -69,11 +82,13 @@ export default function AnnouncementModal({
           <div>하루 동안 열지 않기</div>
         </label>
       </div>
-      <div className={styles.buttons}>
-        <div className={styles.positive}>
-          <input onClick={closeModalButtonHandler} type='button' value='닫기' />
-        </div>
-      </div>
+      <ModalButtonContainer>
+        <ModalButton
+          onClick={closeModalButtonHandler}
+          value='닫기'
+          style='positive'
+        />
+      </ModalButtonContainer>
     </div>
   );
 }

@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Life+Savers&display=swap');
 
-/* font-size */
-$giant-giant-font: 2.4rem;
-$giant-big-font: 2.1rem;
-$big-giant-font: 1.8rem;
-$giant-font: 1.5rem;
-$big-font: 1.2rem;
-$medium-font: 1rem;
-$small-font: 0.8rem;
-
 /* radius */
 $mini-radius: 0.3rem;
 $small-radius: 0.5rem;
@@ -54,44 +45,92 @@ $g2-bottom: #b5bbf2;
 $loser-red: #ff0303;
 $winner-blue: #040eff;
 
-/* font */
-$logo-font: 'Agonostic Italic', cursive;
-$title-font: 'Lexend';
-$admin-font: 'Inter', sans-serif;
+$coin-yellow: #f6e24d;
+
+/* font-family - commmon */
+$common-font: 'Pretendard', sans-serif;
+$common-en-font: 'Roboto', sans-serif;
+
+/* font-family - content */
+$title-font: 'Lexend', sans-serif;
+$rank-font: 'Lexend', sans-serif; // 랭크페이지 myRank,
+$logo-font: 'Overgrow', sans-serif;
+$tier-font: 'Jua', sans-serif;
+$trophy-font: 'Montserrat', sans-serif;
+
+/* text-shadow */
 $text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
   0 -0.1rem black;
 $text-shadow-red: 2px 2px 0px $pp-red;
 $text-shadow-blue: 2px 2px 0px $pp-blue;
 
+/* font-size */
+$giant-giant-font: 2.4rem;
+$giant-big-font: 2.1rem;
+$big-giant-font: 1.8rem;
+$giant-font: 1.5rem;
+$big-font: 1.2rem;
+$medium-font: 1rem;
+$small-font: 0.8rem;
+
+/* background-color */
+$main-background: linear-gradient(
+  180deg,
+  #301451 23.82%,
+  #481570 58.85%,
+  #300e4b 98.44%
+);
+$match-background: linear-gradient(
+  180deg,
+  #500247 0%,
+  #480141 21.35%,
+  #40013a 98.44%
+);
+
+$vip-background: linear-gradient(
+  180deg,
+  #1f2157 0%,
+  #1549cd 42.91%,
+  #001049 59.9%
+);
+
+@mixin ggCoin {
+  color: $coin-yellow;
+  img {
+    margin-right: 0.2rem;
+    // transform: translateY(0.2rem); // NOTE : 왜 필요한건지 확인해보기
+  }
+}
+
 @mixin menu-noti-Bar {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
   height: 100vh;
+  flex-direction: column;
   overflow: auto;
+  align-items: stretch;
 }
 
 @mixin match-noti-button {
   all: unset;
   padding: 0.2rem 0.5rem;
   margin: 0.7rem 0;
-  background: rgba(255, 255, 255, 0.3);
-  color: $light-gray;
   font-weight: 700;
+  color: $light-gray;
   text-align: center;
   cursor: pointer;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 @mixin reload-button {
   all: unset;
   width: 1.6rem;
   height: 1.6rem;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  color: $light-gray;
   font-weight: 700;
+  color: $light-gray;
   text-align: center;
   cursor: pointer;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
 }
 
 @mixin pageWrap {
@@ -101,30 +140,31 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   margin: 0 auto;
 }
 
-@mixin logoTitle($shadow) {
-  color: white;
+@mixin logoText($size, $color) {
   font-family: $logo-font;
-  font-size: 2rem;
+  font-size: $size;
+  font-weight: 500;
+  color: $color;
+  text-align: center;
   letter-spacing: 0.1rem;
 }
 
 @mixin pageTitle {
-  color: white;
   font-family: $title-font;
+  color: white;
 }
 
 @mixin modalTitle {
   font-size: 2rem;
-  font-family: 'Lexend', sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.04rem;
 }
 
 @mixin backdrop {
-  z-index: 5;
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 5;
   width: -webkit-fill-available;
   height: -webkit-fill-available;
   background: rgba(0, 0, 0, 0.5);
@@ -134,16 +174,16 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   all: unset;
   width: $width;
   height: $height;
-  border-radius: $small-radius;
+  font-size: $medium-font;
+  color: $txt-color;
+  text-align: center;
+  cursor: pointer;
   background: if(
     $btn-color == white,
     linear-gradient(180deg, rgba(44, 41, 46, 0.52) 0%, #454147 100%),
     $btn-color
   );
-  color: $txt-color;
-  font-size: $medium-font;
-  text-align: center;
-  cursor: pointer;
+  border-radius: $small-radius;
 }
 
 @mixin select-buttons($width: 8rem, $height: 2.8rem) {
@@ -183,27 +223,28 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
 }
 
 @mixin modal-phrase {
+  margin: 1rem 0;
+  margin-bottom: 2rem;
   text-align: center;
   .emoji {
     padding-bottom: 1rem;
     font-size: 2.5rem;
   }
   .subContent {
-    line-height: 1.5;
     margin-top: 0.5rem;
+    line-height: 1.5;
   }
-  margin-bottom: 2rem;
 }
 
 @mixin modalContainer($type) {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  margin: 2rem 1.5rem;
   padding: 2rem 1rem;
+  margin: 2rem 1.5rem;
   border-radius: 1rem;
   box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.25);
+  justify-content: space-evenly;
+  align-items: center;
 
   @if ($type == 'DARKPURPLE') {
     background: linear-gradient(
@@ -240,7 +281,6 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   width: $size;
   height: $size;
   border-radius: 50%;
-  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
   img {
     border-radius: 50%;
   }
@@ -267,37 +307,36 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   }
 }
 
+@mixin waitAnimation($delay) {
+  @include spanUpDownAnimation(0.2rem, 0.2rem);
+  position: relative;
+  display: inline-block;
+  animation-delay: $delay;
+}
+
 @mixin modalButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'NanumSquare_acR', sans-serif;
   .negative > input,
   .positive > input {
     display: flex;
-    justify-content: center;
-    align-items: center;
     width: 8rem;
     height: 2.5rem;
     padding: 0.75rem 3.1rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 1);
     border: 0;
     border-radius: 0.625rem;
-    color: rgba(255, 255, 255, 1);
-    font-size: 0.9rem;
+    justify-content: center;
+    align-items: center;
   }
   .negative {
     input {
-      background: linear-gradient(
-        180deg,
-        rgba(44, 41, 46, 0.52) 0%,
-        #454147 100%
-      );
       margin-right: 1rem;
       cursor: pointer;
-    }
-    :hover {
       background: linear-gradient(
-        to right bottom,
+        180deg,
         rgba(44, 41, 46, 0.52) 0%,
         #454147 100%
       );
@@ -305,19 +344,57 @@ $text-shadow-blue: 2px 2px 0px $pp-blue;
   }
   .positive {
     input {
+      cursor: pointer;
       background: linear-gradient(
         180deg,
         #c66bf2 0%,
         rgba(96, 6, 138, 0.52) 100%
       );
-      cursor: pointer;
     }
-    :hover {
-      background: linear-gradient(
-        to right bottom,
-        #c66bf2 0%,
-        rgba(96, 6, 138, 0.52) 100%
-      );
-    }
+  }
+}
+
+@mixin txtColor($color: black) {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.2px $color;
+}
+
+@mixin tierNumber() {
+  font-family: $tier-font;
+  background: black;
+  @include txtColor();
+  &.red {
+    background-image: linear-gradient(to right, #f77062 0%, #fe5196 100%);
+    @include txtColor(#fe5196);
+  }
+  &.yellow {
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 100%);
+    @include txtColor(#f6d365);
+  }
+  &.green {
+    background-image: linear-gradient(135deg, #81fbb8 10%, #28c76f 100%);
+    @include txtColor(#28c76f);
+  }
+  &.blue {
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    @include txtColor(#4facfe);
+  }
+  &.black {
+    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+    @include txtColor();
+  }
+  &.rainbow {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 48, 21, 0.798) 15%,
+      #f6d365 38%,
+      rgba(60, 238, 60, 0.553) 55.33%,
+      rgba(14, 204, 238, 0.867) 70%,
+      rgba(4, 4, 235, 0.568) 80.66%,
+      rgb(123, 97, 224) 100%
+    );
+    @include txtColor(rgb(123, 97, 224));
   }
 }

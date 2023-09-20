@@ -2,28 +2,28 @@
 
 .loginContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
+  flex-direction: column;
   background-image: url('../public/image/login_background_img.png');
-  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
   .innerContainer {
     display: flex;
+    height: 50vh;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    height: 50vh;
     .logoContainer {
+      position: relative;
       display: flex;
+      width: 18rem;
+      height: 7rem;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      position: relative;
-      width: 18rem;
-      height: 7rem;
     }
     .logo1 {
       position: absolute;
@@ -52,9 +52,9 @@
       width: 2.5rem;
       height: 2.5rem;
       margin-left: 15rem;
-      border-radius: 10%;
-      background: linear-gradient(180deg, #f2d210 0%, #f2b210 100%);
       cursor: pointer;
+      background: linear-gradient(180deg, #f2d210 0%, #f2b210 100%);
+      border-radius: 10%;
     }
   }
 }

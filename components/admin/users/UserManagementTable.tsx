@@ -1,33 +1,29 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/recoil/modal';
-import { tableFormat } from 'constants/admin/table';
-import AdminSearchBar from 'components/admin/common/AdminSearchBar';
-import PageNation from 'components/Pagination';
 import {
   Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@mui/material';
+import { IUser, IUserTable } from 'types/admin/adminUserTypes';
+import { instanceInManage } from 'utils/axios';
+import { modalState } from 'utils/recoil/modal';
+import { tableFormat } from 'constants/admin/table';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
+import PageNation from 'components/Pagination';
 import styles from 'styles/admin/users/UserManagementTable.module.scss';
+import { AdminEmptyItem, AdminTableHead } from '../common/AdminTable';
 
-interface IUser {
-  id: number;
-  intraId: string;
-  statusMessage: string;
-  roleType: string; // TODO : type으로 변경
-}
-
-interface IUserTable {
-  userInfoList: IUser[];
-  totalPage: number;
-  currentPage: number;
-}
+const tableTitle: { [key: string]: string } = {
+  id: 'ID',
+  roleType: '권한',
+  intraId: 'Intra ID',
+  statusMessage: '상태 메시지',
+  etc: '기타',
+};
 
 export default function UserManagementTable() {
   const [userManagements, setUserManagements] = useState<IUserTable>({
@@ -39,20 +35,15 @@ export default function UserManagementTable() {
   const [intraId, setIntraId] = useState<string>('');
   const setModal = useSetRecoilState(modalState);
 
-  const tableTitle: { [key: string]: string } = {
-    id: 'ID',
-    roleType: '권한',
-    intraId: 'Intra ID',
-    statusMessage: '상태 메시지',
-    etc: '기타',
-  };
-
-  const buttonList: string[] = [styles.detail, styles.penalty];
+  const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
 
   const handleButtonAction = (buttonName: string, intraId: string) => {
     switch (buttonName) {
       case '자세히':
         setModal({ modalName: 'ADMIN-PROFILE', intraId });
+        break;
+      case '코인 수정':
+        setModal({ modalName: 'ADMIN-USER-COIN', intraId });
         break;
       case '패널티 부여':
         setModal({ modalName: 'ADMIN-PENALTY', intraId });
@@ -67,7 +58,9 @@ export default function UserManagementTable() {
 
   const getAllUserInfo = useCallback(async () => {
     try {
-      const res = await instanceInManage.get(`/users?page=${currentPage}`);
+      const res = await instanceInManage.get(
+        `/users?page=${currentPage}&size=10`
+      );
       setUserManagements({
         userInfoList: res.data.userSearchAdminDtos,
         totalPage: res.data.totalPage,
@@ -81,7 +74,7 @@ export default function UserManagementTable() {
   const getUserInfo = useCallback(async () => {
     try {
       const res = await instanceInManage.get(
-        `/users?intraId=${intraId}&page=${currentPage}`
+        `/users?intraId=${intraId}&page=${currentPage}&size=10`
       );
       setUserManagements({
         userInfoList: res.data.userSearchAdminDtos,
@@ -106,18 +99,7 @@ export default function UserManagementTable() {
         </div>
         <TableContainer className={styles.tableContainer} component={Paper}>
           <Table className={styles.table} aria-label='UserManagementTable'>
-            <TableHead className={styles.tableHeader}>
-              <TableRow>
-                {tableFormat['userInfo'].columns.map((columnName) => (
-                  <TableCell
-                    className={styles.tableHeaderItem}
-                    key={columnName}
-                  >
-                    {tableTitle[columnName]}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
+            <AdminTableHead tableName={'userInfo'} table={tableTitle} />
             <TableBody className={styles.tableBody}>
               {userManagements.userInfoList.length > 0 ? (
                 userManagements.userInfoList.map((userInfo: IUser) => (
@@ -154,9 +136,7 @@ export default function UserManagementTable() {
                   </TableRow>
                 ))
               ) : (
-                <TableRow>
-                  <TableCell>가입 유저가 없습니다</TableCell>
-                </TableRow>
+                <AdminEmptyItem content={'유저 정보가 비어있습니다'} />
               )}
             </TableBody>
           </Table>

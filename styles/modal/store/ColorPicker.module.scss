@@ -1,0 +1,43 @@
+.container {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+  grid-gap: 0.5rem;
+}
+
+.colorPreview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  border: 3px solid #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  .icon {
+    width: 1rem;
+    height: 1rem;
+    color: white;
+  }
+  &::after {
+    display: block;
+    padding-bottom: 100%;
+    content: '';
+  }
+}
+
+.colorInput {
+  width: 100%;
+  font-size: 1rem;
+  text-align: center;
+  border: 3px solid #fff;
+  border-radius: 0.5rem;
+}
+
+.colorPicker {
+  position: absolute;
+  width: 100%;
+  max-height: 10rem;
+  grid-column: 1 / 3;
+}

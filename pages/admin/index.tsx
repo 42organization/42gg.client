@@ -7,7 +7,6 @@ export default function Admin() {
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily: 'Reality Hyper Regular',
         fontSize: '2rem',
       }}
     >

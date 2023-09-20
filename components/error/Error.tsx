@@ -1,10 +1,17 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useResetRecoilState } from 'recoil';
 import useErrorPage from 'hooks/error/useErrorPage';
 import styles from 'styles/Error.module.scss';
-import ErrorEmoji from 'public/image/noti_empty.svg';
+import ErrorEmoji from '/public/image/error_face.svg';
+import { modalState } from 'utils/recoil/modal';
 
 export default function ErrorPage() {
   const { error, goHome } = useErrorPage();
+  const resetModal = useResetRecoilState(modalState);
+
+  useEffect(() => {
+    resetModal();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -21,7 +28,7 @@ export default function ErrorPage() {
               <div></div>
               <div></div>
             </div>
-            <ErrorEmoji/>
+            <ErrorEmoji />
           </div>
         </div>
         <div className={styles.home} onClick={goHome}>

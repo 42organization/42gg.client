@@ -2,9 +2,19 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-weight: 500;
   -ms-overflow-style: none;
+}
+
+/* body 태그에 적용한 폰트가 적용되지 않는 태그들 */
+button,
+textarea,
+input {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-weight: 500;
 }
 
 @media all and (max-width: 379px) {
@@ -50,67 +60,50 @@ body {
 }
 
 @font-face {
-  font-family: 'Agonostic Italic';
-  src: url('../public/font/Agnostic\ Italic.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Reality Hyper Regular';
-  src: url('../public/font/Reality\ Hyper\ Regular.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('../public/font/Inter-VariableFont_slnt,wght.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'NanumSquare_acR';
-  src: url('../public/font/NanumSquare_acR.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'NanumSquare_acEB';
-  src: url('../public/font/NanumSquare_acEB.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-
-}
-
-@font-face {
   font-family: 'Overgrow';
-  src: url('../public/font/Overgrow-Demo.otf') format('opentype');
+  src: url('../public/font/Overgrow/Overgrow-Demo.woff') format('woff'),
+    url('../public/font/Overgrow/Overgrow-Demo.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Sacramento';
-  src: url('../public/font/Sacramento-Regular.ttf') format('opentype');
+  font-family: 'Montserrat';
+  src: url('../public/font/Montserrat/Montserrat-Regular.woff') format('woff')
+    url('../public/font/Montserrat/Montserrat-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url('../public/font/Roboto-Medium.ttf') format('opentype');
+  src: url('../public/font/Roboto/Roboto-Medium.woff') format('woff'),
+    url('../public/font/Roboto/Roboto-Medium.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Lexend';
-  src: url('../public/font/Lexend-Medium.ttf') format('opentype');
+  src: url('../public/font/Lexend/Lexend-Medium.woff2') format('woff2'),
+    url('../public/font/Lexend/Lexend-Medium.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+}
+@font-face {
+  font-family: 'Jua';
+  src: url('../public/font/Jua/Jua-Regular.woff') format('woff'),
+    url('../public/font/Jua/Jua-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../public/font/Pretendard/PretendardVariable.woff2') format('woff2'),
+    url('../public/font/Pretendard/PretendardVariable.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 100 900;
 }
 
 ::-webkit-scrollbar {
@@ -147,8 +140,8 @@ ul.pagination li {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 27px;
-  height: 27px;
+  height: 1.5rem;
+  margin: 0 0.3rem;
   font-size: 1.2rem; /* $big-font */
   font-weight: 600;
   cursor: pointer;

@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { RankUser, NormalUser, Rank } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
-import RankListMain from './topRank/RankListMain';
-import RankListFrame from './RankListFrame';
-import RankListItem from './RankListItem';
+import { NormalListItem } from 'components/rank/NormalListItem';
+import RankListFrame from 'components/rank/RankListFrame';
+import { RankListItem } from 'components/rank/RankListItem';
+import RankListMain from 'components/rank/topRank/RankListMain';
 import useRankList from 'hooks/rank/useRankList';
 
 interface RankListProps {
@@ -12,9 +13,7 @@ interface RankListProps {
   isMain?: boolean;
 }
 
-export default function RankList({
-  season,
-}: RankListProps) {
+export default function RankList({ season }: RankListProps) {
   const Mode = useRecoilValue(colorToggleSelector);
   const [rank, setRank] = useState<Rank>();
   const [page, setPage] = useState<number>(1);
@@ -24,12 +23,11 @@ export default function RankList({
     setPage,
   };
   const makePath = (): string => {
-    const modeQuery = (targetMode?: string) =>
-      targetMode !== 'NORMAL' ? 'ranks/single' : 'exp';
+    const modeQuery = Mode === 'RANK' ? 'ranks/single' : 'exp';
     const seasonQuery = Mode === 'RANK' ? `&season=${season}` : '';
-    return `/pingpong/${modeQuery(Mode)}?page=${page}&size=20${seasonQuery}`;
+    return `pingpong/${modeQuery}?page=${page}&size=20${seasonQuery}`;
   };
-  
+
   useRankList({
     makePath: makePath(),
     toggleMode: Mode,
@@ -42,32 +40,20 @@ export default function RankList({
 
   return (
     <div>
-      <RankListMain isMain={false} season={season}/>
+      <RankListMain isMain={false} season={season} />
       <RankListFrame pageInfo={pageInfo}>
-        {rank?.rankList.map((item: NormalUser | RankUser, index) => (
-          <RankListItem
-            key={index}
-            user={makeUser(item)}
-          />
-        ))}
+        {rank?.rankList.map((user: NormalUser | RankUser, index) =>
+          isRankUser(user) ? (
+            <RankListItem key={index} user={user} />
+          ) : (
+            <NormalListItem key={index} user={user} />
+          )
+        )}
       </RankListFrame>
     </div>
   );
 }
 
-function isRankModeType(arg: RankUser | NormalUser): arg is RankUser {
+function isRankUser(arg: RankUser | NormalUser): arg is RankUser {
   return 'ppp' in arg;
-}
-
-function makeUser(user: NormalUser | RankUser) {
-  const makeStatusMessage = (message: string) =>
-    message.length > 20 ? `${message.slice(0, 20)}...` : message;
-  const makeInit = (init: number) => (user.rank < 0 ? '-' : init);
-  return {
-    intraId: user.intraId,
-    rank: user.rank,
-    statusMessage: makeStatusMessage(user.statusMessage),
-    point: !isRankModeType(user) ? user.exp : makeInit(user.ppp),
-    level: !isRankModeType(user) ? user.level : null,
-  };
 }

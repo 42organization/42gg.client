@@ -21,10 +21,10 @@ export default function RankListFrame({
 
   const router = useRouter();
   const division: { [key: string]: string[] } = {
-    RANK: ['순위', 'intraId', '상태메시지', '탁구력'],
+    RANK: ['순위', '티어', 'intraId', '상태메시지', '탁구력'],
     NORMAL: ['순위', 'intraId (Lv)', '상태메시지', '경험치'],
   };
-  
+
   const pageChangeHandler = (pages: number) => {
     pageInfo.setPage(pages);
     router.push('/rank');

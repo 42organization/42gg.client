@@ -1,20 +1,16 @@
 import Login from 'pages/login';
-import WelcomeModal from './modal/event/WelcomeModal';
+import useLoginCheck from 'hooks/Login/useLoginCheck';
 import styles from 'styles/Layout/Layout.module.scss';
 
-import useLoginCheck from 'hooks/Login/useLoginCheck';
 interface LoginCheckerProps {
   children: React.ReactNode;
 }
 
 export default function LoginChecker({ children }: LoginCheckerProps) {
-  const [isLoading, loggedIn, firstVisited] = useLoginCheck();
+  const [isLoading, loggedIn] = useLoginCheck();
 
   return loggedIn ? (
-    <>
-      {firstVisited && <WelcomeModal />}
-      {children}
-    </>
+    <>{children}</>
   ) : (
     <div className={styles.appContainer}>
       <div className={styles.background}>{!isLoading && <Login />}</div>

@@ -1,4 +1,4 @@
-@import '../common.scss';
+@import 'styles/common.scss';
 
 @mixin ButtonBackground($page) {
   @if ($page == 'GAME' or $page == 'MATCH') {
@@ -23,23 +23,53 @@
     .modeButton {
       background: #98819b;
     }
+  } @else if ($page == 'STORE') {
+    :checked + .modeButton {
+      background: #a06cbf;
+    }
+    .modeButton {
+      background: #000000;
+    }
+  } @else if ($page == 'STORE_MANUAL') {
+    :checked + .modeButton {
+      background: #a06cbf;
+    }
+    .modeButton {
+      background: #000000;
+    }
   }
 }
 
-.modeButtons {
+@mixin Buttons {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   column-gap: 0.25rem;
   justify-items: stretch;
   align-items: stretch;
   margin: 0 1.25rem;
   color: #ffffff;
-  &.zIndexListButton {
-    margin: 0 1.916rem;
-  }
   input[type='radio'] {
     position: absolute;
     opacity: 0;
+  }
+  .modeButton {
+    box-sizing: border-box;
+    display: flex;
+    height: 2.063rem;
+    font-size: 0.9rem;
+    text-align: center;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 0.625rem 0.625rem 0 0;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.threeButtons {
+  @include Buttons;
+  grid-template-columns: 1fr 1fr 1fr;
+  &.zIndexListButton {
+    margin: 0 1.916rem;
   }
   // 사용되는 페이지별로 다른 background 적용
   &.game {
@@ -52,16 +82,18 @@
     @include ButtonBackground('MANUAL');
     margin: 0;
   }
-  .modeButton {
-    display: flex;
-    box-sizing: border-box;
-    justify-content: center;
-    align-items: center;
-    height: 2.063rem;
-    border-radius: 0.625rem 0.625rem 0 0;
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    text-align: center;
-    cursor: pointer;
+}
+
+.twoButtons {
+  @include Buttons;
+  grid-template-columns: 1fr 1fr;
+  &.zIndexListButton {
+    margin: 0 1.916rem;
+  }
+  &.store {
+    @include ButtonBackground('STORE');
+  }
+  &.store_manual {
+    @include ButtonBackground('STORE_MANUAL');
   }
 }

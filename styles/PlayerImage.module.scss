@@ -1,4 +1,5 @@
 @import 'styles/common.scss';
+@import 'styles/ProfileColor.scss';
 
 @mixin imageWrap {
   display: flex;
@@ -41,40 +42,8 @@
 
 .mainPageProfile {
   @include imageWrap;
-  height: 4.3rem;
-  width: 4.3rem;
-  margin-top: 0.2rem;
-  margin-bottom: 0.2rem;
-  border-radius: 50%;
-  background: linear-gradient(
-    140.76deg,
-    #0069ff 0%,
-    #be7bcf 43.97%,
-    #ff7ee3 70.25%,
-    #426bff 91.76%
-  );
-  div {
-    @include userImage(4rem);
-    cursor: pointer;
-    border: 0;
-  }
-}
-
-.mainPageProfile {
-  @include imageWrap;
-  height: 4.3rem;
-  width: 4.3rem;
-  margin-top: 0.2rem;
-  margin-bottom: 0.2rem;
-  border-radius: 50%;
-  background: linear-gradient(
-    140.76deg,
-    #0069ff 0%,
-    #be7bcf 43.97%,
-    #ff7ee3 70.25%,
-    #426bff 91.76%
-  );
-
+  @include profileEdge(4.4rem);
+  background-color: white;
   div {
     @include userImage(4rem);
     cursor: pointer;
@@ -84,12 +53,7 @@
 
 .menuProfile {
   @include imageWrap;
-  height: 4.3rem;
-  width: 4.3rem;
-  margin-top: 0.2rem;
-  margin-bottom: 0.2rem;
-  border-radius: 50%;
-  background: rgba(163, 85, 155, 1);
+  @include profileEdge(4.3rem);
   div {
     @include userImage(3.9rem);
     cursor: pointer;
@@ -110,57 +74,56 @@
   justify-content: center;
   align-items: center;
   padding: 0.2rem;
-  border-radius: 50%;
-  background: linear-gradient(
-    to right bottom,
-    #0030ac 0%,
-    #90a5ff 50%,
-    #cb8fff 100%
-  );
+  @include profileEdge(8.8rem);
   div {
     @include userImage(8rem);
   }
 }
 
-.profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.2rem;
-  border-radius: 50%;
-  background: linear-gradient(
-    to right bottom,
-    #0030ac 0%,
-    #90a5ff 50%,
-    #cb8fff 100%
-  );
-  div {
-    @include userImage(4.7rem);
-  }
-}
-
 .ranktropybig {
   @include imageWrap;
+  @include profileEdge(7.2rem);
   div {
     @include userRankImage(6.5rem);
     cursor: pointer;
   }
 }
+
 .ranktropy {
   @include imageWrap;
+  @include profileEdge(5rem);
   div {
     @include userRankImage(4.5rem);
     cursor: pointer;
   }
 }
+.ranktier {
+  @include imageWrap;
+  div {
+    position: relative;
+    width: 1.4rem;
+    height: 1.5rem;
+  }
+}
+
+.profiletier {
+  @include imageWrap;
+  div {
+    position: relative;
+    width: 1.7rem;
+    height: 2rem;
+  }
+}
 
 @media (max-width: 457px) {
   .ranktropy {
+    @include profileEdge(4.4rem);
     div {
       @include userRankImage(4rem);
     }
   }
   .ranktropybig {
+    @include profileEdge(5.5rem);
     div {
       @include userRankImage(5rem);
     }

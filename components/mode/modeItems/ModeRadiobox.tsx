@@ -1,4 +1,5 @@
 import { SeasonMode } from 'types/mainType';
+import { RadioBoxWrapper } from 'components/mode/modeItems/RadioBoxWrapper';
 import styles from 'styles/mode/ModeRadiobox.module.scss';
 
 interface ModeRadioboxProps {
@@ -21,11 +22,7 @@ export default function ModeRadiobox({
   ];
 
   return (
-    <div
-      className={`${styles.modeButtons} 
-      ${styles[page.toLowerCase()]}
-      ${zIndexList && styles['zIndexListButton']}`}
-    >
+    <RadioBoxWrapper page={page} zIndexList={zIndexList}>
       {modes.map(({ type, name }) => (
         <label key={type}>
           <input
@@ -40,6 +37,6 @@ export default function ModeRadiobox({
           </div>
         </label>
       ))}
-    </div>
+    </RadioBoxWrapper>
   );
 }

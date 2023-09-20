@@ -1,21 +1,13 @@
 import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { User } from 'types/mainType';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { SeasonList } from 'types/seasonTypes';
-import { userState } from 'utils/recoil/layout';
+import { loginState } from 'utils/recoil/login';
 import { seasonListState } from 'utils/recoil/seasons';
 import useAxiosGet from 'hooks/useAxiosGet';
 
-const useGetUserSeason = () => {
-  const setUser = useSetRecoilState<User>(userState);
+const useGetUserSeason = (presentPath: string) => {
   const setSeasonList = useSetRecoilState<SeasonList>(seasonListState);
-
-  const getUserHandler = useAxiosGet({
-    url: '/pingpong/users',
-    setState: setUser,
-    err: 'JB02',
-    type: 'setError',
-  });
+  const isLogIn = useRecoilValue(loginState);
 
   const getSeasonListHandler = useAxiosGet<any>({
     url: '/pingpong/seasons',
@@ -27,9 +19,8 @@ const useGetUserSeason = () => {
   });
 
   useEffect(() => {
-    getUserHandler();
     getSeasonListHandler();
-  }, []);
+  }, [presentPath, isLogIn]);
 };
 
 export default useGetUserSeason;

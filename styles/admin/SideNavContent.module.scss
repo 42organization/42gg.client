@@ -2,14 +2,14 @@
 
 .content {
   display: flex;
+  height: 1.7rem;
   flex-direction: row;
-  align-items: center;
-  height: 2rem;
   padding: 0 0.5rem;
   margin-bottom: 0.5rem;
-  border-radius: 0.75rem;
-  border: 1px solid rgba(0, 0, 0, 0);
   cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 0.75rem;
+  align-items: center;
 }
 
 .content:hover {
@@ -17,8 +17,8 @@
 }
 
 .contentText {
-  font-family: $admin-font;
   margin-left: 0.75rem;
+  font-size: $small-font;
 }
 
 .selected {

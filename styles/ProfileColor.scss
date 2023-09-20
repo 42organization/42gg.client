@@ -1,0 +1,134 @@
+/* profile-edge color */
+$edge-basic: #666666;
+$edge-neon-green: linear-gradient(to right bottom, #a8ff78 30%, #78ffd6 70%);
+$edge-orange-red: linear-gradient(to right bottom, #f05053 30%, #e1eec3 70%);
+$edge-red: linear-gradient(to right bottom, #b20a2c 30%, #fffbd5 70%);
+$edge-blue: linear-gradient(to right bottom, #005aa7 30%, #fffde4 70%);
+$edge-morning-vibe: linear-gradient(to right bottom, #74ebd5 30%, #acb6e5 70%);
+$edge-navy: linear-gradient(to right bottom, #000c40 30%, #f0f2f0 70%);
+$edge-orange-green: linear-gradient(
+  to right bottom,
+  #f12711 0%,
+  #f5af19 50%,
+  #9cecfb 100%
+);
+$edge-neon-yellow: linear-gradient(
+  to right bottom,
+  #ffffff 0%,
+  #d9ff4e 50%,
+  #fffc68 100%
+);
+$edge-blue-green: linear-gradient(
+  to right bottom,
+  #0030ac 0%,
+  #90a5ff 50%,
+  #8fffa4 100%
+);
+$edge-magic-pink: linear-gradient(
+  to right bottom,
+  #ff10af 0%,
+  #8afbff 50%,
+  #d452ff 100%
+);
+$edge-tropical-green: linear-gradient(
+  to right bottom,
+  #00fbff 0%,
+  #f0ff4e 50%,
+  #ff7700 100%
+);
+
+$edge-night-sky: linear-gradient(
+  to right bottom,
+  #6ea5ff 0%,
+  #000000 50%,
+  #9cecfb 100%
+);
+
+$edge-green-yellow: linear-gradient(
+  to right bottom,
+  #00416a 0%,
+  #799f0c 50%,
+  #ffe000 100%
+);
+$edge-twilight: linear-gradient(
+  to right bottom,
+  #f7797d 0%,
+  #fbd786 50%,
+  #c6ffdd 100%
+);
+$edge-pink-purple: linear-gradient(
+  to right bottom,
+  #f64f59 0%,
+  #c471ed 50%,
+  #12c2e9 100%
+);
+$edge-skyblue: linear-gradient(
+  to right bottom,
+  #7f7fd5 0%,
+  #86a8e7 50%,
+  #91eae4 100%
+);
+$edge-rich-metal: linear-gradient(to right bottom, #304352 30%, #d7d2cc 70%);
+$edge-fruit-blend: linear-gradient(to right bottom, #f9d423 30%, #ff4e50 70%);
+$edge-seashore: linear-gradient(to right bottom, #68e0cf 30%, #209cff 70%);
+$edge-grown-early: linear-gradient(to right bottom, #0ba360 30%, #3cba92 70%);
+$edge-flying-lemon: linear-gradient(to right bottom, #c2e59c 30%, #64b3f4 70%);
+$edge-highflight: linear-gradient(to right bottom, #495aff 30%, #0acffe 70%);
+$edge-fabled-sunset: linear-gradient(
+  to right bottom,
+  #44107a 0%,
+  #ff1361 50%,
+  #fff800 100%
+);
+$edge-soft-cherish: linear-gradient(
+  to right bottom,
+  #b8235a 0%,
+  #e7627d 50%,
+  #dbdcd7 100%
+);
+$edge-palo-alto: linear-gradient(to right bottom, #f4d03f 30%, #16a085 70%);
+$edge-north-miracle: linear-gradient(to right bottom, #00dbde 30%, #fc00ff 70%);
+$edge-gagarin-view: linear-gradient(
+  to right bottom,
+  #69eacb 0%,
+  #eaccf8 50%,
+  #6654f1 100%
+);
+
+$edge-colors: (
+  basic: $edge-basic,
+  // 5티어
+  color1: $edge-rich-metal,
+  color2: $edge-fruit-blend,
+  color3: $edge-seashore,
+  color4: $edge-grown-early,
+  // 4티어
+  color5: $edge-flying-lemon,
+  color6: $edge-night-sky,
+  color7: $edge-highflight,
+  // 3티어
+  color8: $edge-fabled-sunset,
+  color9: $edge-morning-vibe,
+  color10: $edge-neon-green,
+  // 2티어
+  color11: $edge-magic-pink,
+  color12: $edge-soft-cherish,
+  color13: $edge-palo-alto,
+  // 1티어
+  color14: $edge-twilight,
+  color15: $edge-north-miracle,
+  color16: $edge-gagarin-view,
+);
+
+@mixin profileEdge($size) {
+  width: $size;
+  height: $size;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  border-radius: 50%;
+  @each $key, $value in $edge-colors {
+    &.#{$key} {
+      background: $value;
+    }
+  }
+}

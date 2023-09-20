@@ -9,12 +9,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80%;
+    width: 95%;
     min-width: 700px;
     margin: 10px auto;
     .title {
+      font-size: $big-font;
       font-weight: 600;
-      font-size: $giant-font;
       line-height: 150%;
     }
     .searchWrap {
@@ -27,20 +27,10 @@
   }
 
   .tableContainer {
-    width: 80%;
+    width: 95%;
     min-width: 700px;
     margin: auto;
     .table {
-      .tableHeader {
-        background-color: lightgray;
-        .tableHeaderItem {
-          padding: 0.7rem;
-          text-align: center;
-          font-weight: 600;
-          font-size: $medium-font;
-          line-height: 150%;
-        }
-      }
       .tableBody {
         .tableRow {
           &:nth-child(odd) {
@@ -51,9 +41,9 @@
           }
           .tableBodyItem {
             padding: 10px;
-            text-align: center;
+            font-size: $small-font;
             line-height: 150%;
-            font-size: $medium-font;
+            text-align: center;
           }
         }
       }

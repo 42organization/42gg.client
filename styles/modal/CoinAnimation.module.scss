@@ -1,0 +1,109 @@
+$anim_duration: 0.65;
+$anim_delay: 0.3;
+$fontsize: 50px;
+
+.stageCoins {
+  width: 4rem;
+  height: 6rem;
+  margin: auto;
+}
+
+.stage {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  font-size: $fontsize;
+  justify-content: center;
+  align-items: center;
+}
+
+.column {
+  display: flex;
+  height: 100%;
+  flex-direction: column-reverse;
+  flex-grow: 0;
+}
+
+.stack {
+  position: relative;
+  height: 0.22em;
+}
+
+.stackl {
+  position: relative;
+  left: -0.1em;
+  height: 0.22em;
+}
+
+.stackr {
+  position: relative;
+  left: 0.1em;
+  height: 0.22em;
+}
+
+.fall {
+  opacity: 0;
+  animation: falling #{$anim_duration}s ease-in forwards 1;
+}
+
+.coin {
+  width: 2.1em;
+  height: 1.1em;
+  padding: 2rem 4.5rem 3rem 4rem;
+  transform: translateY(-100%);
+}
+
+@for $i from 1 through 15 {
+  .fall:nth-child(#{$i}) {
+    animation-delay: #{($i * $anim_delay) * $anim_duration}s;
+  }
+}
+
+.appear {
+  height: 4.15rem;
+  font-size: 2rem;
+  color: white;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
+  opacity: 0;
+  animation: appear #{$anim_duration}s ease-in forwards 1;
+}
+
+@for $i from 1 through 25 {
+  .appear:nth-child(#{$i}) {
+    animation-delay: #{($i * 3.5 * $anim_delay) * $anim_duration}s;
+  }
+}
+
+@keyframes falling {
+  0% {
+    opacity: 0;
+    transform: translatey(-100px);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translatey(0);
+  }
+  82% {
+    opacity: 1;
+    transform: translatey(-3px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translatey(0);
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

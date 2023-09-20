@@ -1,7 +1,6 @@
-import useAxiosGet from 'hooks/useAxiosGet';
 import { useEffect, Dispatch, SetStateAction } from 'react';
-import { userImages } from 'types/rankTypes';
-import { ToggleMode } from 'types/rankTypes';
+import { userImages, ToggleMode } from 'types/rankTypes';
+import useAxiosGet from 'hooks/useAxiosGet';
 
 interface useRankListProps {
   makePathRanker: string;
@@ -9,6 +8,7 @@ interface useRankListProps {
   season: number | undefined;
   setRanker: Dispatch<SetStateAction<userImages[]>>;
   page: number;
+  isMain: boolean;
 }
 
 const useRankListMain = ({
@@ -17,6 +17,7 @@ const useRankListMain = ({
   season,
   setRanker,
   page,
+  isMain,
 }: useRankListProps): void => {
   const getRankerDataHandler = useAxiosGet<any>({
     url: makePathRanker,
@@ -33,7 +34,7 @@ const useRankListMain = ({
 
   useEffect(() => {
     getRankerDataHandler();
-  }, [page, season, toggleMode]);
-}
+  }, [page, season, toggleMode, isMain]);
+};
 
 export default useRankListMain;

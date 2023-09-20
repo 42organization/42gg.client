@@ -1,13 +1,19 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Noti } from 'types/notiTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
-import { HeaderContextState, HeaderContext } from '../HeaderContext';
-import NotiStateContext, { NotiContextState, NotiProvider } from './NotiContext';
-import NotiItem from './NotiItem';
-import styles from 'styles/Layout/NotiBar.module.scss';
+import {
+  HeaderContextState,
+  HeaderContext,
+} from 'components/Layout/HeaderContext';
+import NotiStateContext, {
+  NotiContextState,
+  NotiProvider,
+} from 'components/Layout/NotiBar/NotiContext';
+import NotiItem from 'components/Layout/NotiBar/NotiItem';
 import NotiEmptyEmoji from 'public/image/noti_empty.svg';
+import styles from 'styles/Layout/NotiBar.module.scss';
 
 export default function NotiBar() {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
@@ -106,17 +112,26 @@ function ReloadNotiButton() {
 function DeleteAllButton() {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const setError = useSetRecoilState(errorState);
+  const [isLoading, setIsLoading] = useState(false);
+
   const allNotiDeleteHandler = async () => {
+    setIsLoading(true);
     try {
       await instance.delete(`/pingpong/notifications`);
       alert('알림이 성공적으로 삭제되었습니다.');
       HeaderState?.resetOpenNotiBarState();
     } catch (e) {
       setError('JB05');
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
-    <button className={styles.deleteButton} onClick={allNotiDeleteHandler}>
+    <button
+      className={styles.deleteButton}
+      onClick={allNotiDeleteHandler}
+      disabled={isLoading}
+    >
       전체 삭제
     </button>
   );

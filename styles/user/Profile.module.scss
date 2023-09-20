@@ -3,20 +3,21 @@
 .container {
   display: flex;
   flex-direction: column;
+  margin-bottom: 0.6rem;
+  font-family: $common-en-font;
+  color: $white1;
+  border-radius: $small-radius;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.6rem;
-  border-radius: $small-radius;
-  font-family: 'Roboto', sans-serif;
-  color: $white1;
 }
 
 .level {
   display: flex;
   margin-top: -2rem;
-  font-weight: 800;
-  font-style: normal;
+  font-family: $rank-font;
   font-size: 3.5rem;
+  font-style: normal;
+  font-weight: 800;
   color: white;
 }
 
@@ -26,8 +27,8 @@
   height: 0.7rem;
   margin-top: 0rem;
   margin-bottom: 1rem;
-  border-radius: $mini-radius;
   overflow: hidden;
+  border-radius: $mini-radius;
   .expCurrent {
     background: linear-gradient(
       89.81deg,
@@ -45,14 +46,20 @@
 .idContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  height: 3rem;
   align-items: center;
   margin-top: 0.5rem;
 }
 
+.ranktier {
+  justify-self: end;
+  margin-right: 0.3rem;
+}
+
 .intraId {
-  color: $white1;
   font-size: $giant-font;
   font-weight: 700;
+  color: $white1;
   text-align: center;
 }
 
@@ -63,20 +70,20 @@
   cursor: pointer;
   .kakao {
     display: flex;
-    justify-content: center;
-    align-items: center;
     width: 30px;
     height: 30px;
     margin-left: 10px;
-    border-radius: 2px;
-    background: linear-gradient(180deg, #f2d210 0%, #f2b210 100%);
     color: black;
+    background: linear-gradient(180deg, #f2d210 0%, #f2b210 100%);
+    border-radius: 2px;
+    justify-content: center;
+    align-items: center;
   }
 }
-
-.modalbuttons {
-  @include select-buttons(9rem);
-}
+// NOTE : select-buttons 믹스인 삭제 여부 판단하기 위해 남겨둠.
+// .modalbuttons {
+//   @include select-buttons(9rem);
+// }
 
 .exp {
   display: flex;
@@ -91,7 +98,7 @@
 .boxContainer {
   display: flex;
   justify-content: space-between;
-  width: 14rem;
+  width: 21rem;
   margin-bottom: 0.5rem;
   align-items: center;
 }
@@ -99,21 +106,36 @@
 .expbox {
   width: 6.5rem;
   padding: 0.5rem 0;
-  border-radius: $mini-radius;
-  background: #9e426e;
   font-size: $small-font;
-  text-align: center;
   color: #ff80bd;
+  text-align: center;
+  background: #9e426e;
+  border-radius: $mini-radius;
 }
 
 .racket {
   width: 6.5rem;
   padding: 0.5rem 0;
-  border-radius: $mini-radius;
+  font-size: $small-font;
+  color: #008234;
+  text-align: center;
   background: #cbffb9;
+  border-radius: $mini-radius;
+}
+
+.tierContainer {
+  width: 6.5rem;
+  padding: 0.5rem;
   font-size: $small-font;
   text-align: center;
-  color: #008234;
+  background-color: #8fc7fb9a;
+  border-radius: $mini-radius;
+  align-items: center;
+  .tierId {
+    @include tierNumber;
+    font-size: 0.9rem;
+    text-align: center;
+  }
 }
 
 .statusMessage {
@@ -145,8 +167,8 @@
 
 .editType {
   margin: 0 0 0.3rem 0.5rem;
-  color: $pp-gray;
   font-size: $medium-font;
+  color: $pp-gray;
 }
 
 .snsWrap {
@@ -156,19 +178,19 @@
 
 .snsButton {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 2rem;
   width: 9rem;
   height: 2rem;
-  border-radius: $mini-radius;
+  margin-bottom: 2rem;
   color: $pp-gray;
   cursor: pointer;
+  border-radius: $mini-radius;
+  justify-content: center;
+  align-items: center;
 }
 
 .snsClicked {
-  border: solid 1px #c66bf2;
   color: #c66bf2;
+  border: solid 1px #c66bf2;
 }
 
 .racketTypeWrap {
@@ -184,20 +206,20 @@
       opacity: 0;
     }
     :checked + .radioButton {
-      border: solid 1px #c66bf2;
       color: #c66bf2;
+      border: solid 1px #c66bf2;
     }
     .radioButton {
       display: flex;
-      justify-content: center;
-      align-items: center;
       width: 6rem;
       height: 2rem;
-      border-radius: $mini-radius;
-      color: $pp-gray;
       font-size: $small-font;
+      color: $pp-gray;
       text-align: center;
       cursor: pointer;
+      border-radius: $mini-radius;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
@@ -209,26 +231,26 @@
   .textareaWrap {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    border-radius: $small-radius;
-    background: white;
     overflow: hidden;
+    background: white;
+    border-radius: $small-radius;
+    align-items: stretch;
     textarea {
-      resize: none;
       height: 5rem;
       padding: 0.8rem;
-      border: none;
       font-size: $big-font;
+      resize: none;
+      border: none;
     }
     :focus {
       outline: none;
     }
     div {
       display: flex;
-      justify-content: flex-end;
       padding: 0.7rem;
-      color: $dark-gray;
       font-size: $small-font;
+      color: $dark-gray;
+      justify-content: flex-end;
     }
   }
 }

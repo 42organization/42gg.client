@@ -2,34 +2,21 @@
 
 .container {
   display: flex;
-  flex-direction: column;
   width: 100%;
-  min-width: 64rem;
-  max-width: 72rem;
+  min-width: 50rem;
   height: 100%;
+  flex-direction: column;
   padding: 1.5rem;
 }
 
 .tableContainer {
   .table {
-    .tableHeader {
-      background-color: lightgray;
-
-      .tableHeaderItem {
-        padding: 0.5rem;
-        text-align: center;
-        font-weight: 600;
-        font-size: $small-font;
-        line-height: 150%;
-      }
-    }
-
     .tableBody {
       .tableBodyItem {
         padding: 0.5rem;
-        text-align: center;
         font-size: $small-font;
-        line-height: 100%;
+        text-align: center;
+        // line-height: 100%;
       }
     }
   }
@@ -37,19 +24,18 @@
 
 .BtnContainer {
   display: flex;
-  flex-direction: row-reverse;
-  padding-top: 1rem;
-  padding-right: 1rem;
+  justify-content: center;
+  align-items: center;
 
   button {
     all: unset;
     width: 4rem;
-    height: 1.6rem;
-    background: $btn-blue;
-    border-radius: 0.5rem;
-    text-align: center;
+    height: 1.5rem;
     font-size: $small-font;
     color: white;
+    text-align: center;
     cursor: pointer;
+    background: $btn-blue;
+    border-radius: 0.5rem;
   }
 }

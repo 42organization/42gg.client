@@ -1,17 +1,18 @@
 import Image from 'next/image';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { userState } from 'utils/recoil/layout';
-import { modalState } from 'utils/recoil/modal';
-import PlayerImage from 'components/PlayerImage';
-import useBasicProfile from 'hooks/users/useBasicProfile';
 import { AiOutlineEdit } from 'react-icons/ai';
+import { modalState } from 'utils/recoil/modal';
+import { tierIdSelector } from 'utils/recoil/tierColor';
+import PlayerImage from 'components/PlayerImage';
+import { useUser } from 'hooks/Layout/useUser';
+import useBasicProfile from 'hooks/users/useBasicProfile';
 import styles from 'styles/user/Profile.module.scss';
 interface ProfileProps {
   profileId: string;
 }
 
 export default function BasicProfile({ profileId }: ProfileProps) {
-  const user = useRecoilValue(userState);
+  const user = useUser();
   const setModal = useSetRecoilState(modalState);
   const {
     intraId,
@@ -23,7 +24,13 @@ export default function BasicProfile({ profileId }: ProfileProps) {
     maxExp,
     expRate,
     MAX_LEVEL,
+    tierImageUri,
+    tierName,
+    edge,
   } = useBasicProfile({ profileId });
+  const tierId = useRecoilValue(tierIdSelector);
+
+  if (!user) return null;
 
   return (
     <div className={styles.container}>
@@ -39,10 +46,16 @@ export default function BasicProfile({ profileId }: ProfileProps) {
         ></span>
       </div>
       {intraId && (
-        <PlayerImage src={userImageUri} styleName={'mainProfile'} size={30} />
+        <PlayerImage
+          src={userImageUri}
+          styleName={`mainProfile ${edge ? edge.toLowerCase() : 'basic'}`}
+          size={30}
+        />
       )}
       <div className={styles.idContainer}>
-        <div></div>
+        <div className={styles.ranktier}>
+          <PlayerImage src={tierImageUri} styleName={'profiletier'} size={50} />
+        </div>
         <div className={styles.intraId}>{intraId}</div>
         <div className={styles.buttons}>
           {user.intraId === profileId && (
@@ -84,6 +97,9 @@ export default function BasicProfile({ profileId }: ProfileProps) {
             : `${currentExp} / Max Exp`}
         </div>
         <div className={styles.racket}>{racketType.toUpperCase()}</div>
+        <div className={styles.tierContainer}>
+          <div className={`${styles.tierId} ${styles[tierId]}`}>{tierName}</div>
+        </div>
       </div>
     </div>
   );

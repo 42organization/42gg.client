@@ -6,7 +6,11 @@ export interface ProfileBasic {
   level: number;
   currentExp: number;
   maxExp: number;
+  tierImageUri: string;
+  tierName: string;
   expRate: number;
+  edge: string;
+  background: string;
   snsNotiOpt: 'NONE' | 'SLACK' | 'EMAIL' | 'BOTH';
 }
 
@@ -27,3 +31,24 @@ export const racketTypes = [
   { id: 'SHAKEHAND' },
   { id: 'DUAL' },
 ];
+
+export interface ICoin {
+  coin: number;
+}
+
+export interface ICoinHistory {
+  history: string;
+  amount: number;
+  createdAt: Date;
+}
+
+export interface ICoinHistoryList {
+  useCoinList: ICoinHistory[];
+  totalPage: number;
+}
+
+export interface ICoinHistoryTable {
+  useCoinList: ICoinHistory[];
+  totalPage: number;
+  currentPage: number;
+}

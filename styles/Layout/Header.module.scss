@@ -3,19 +3,19 @@
 .headerWrap {
   z-index: 2;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   height: 4rem;
   margin: 0 0.7rem;
-  color: white;
   font-size: $giant-font;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .headerLeft {
   display: flex;
+  height: 100%;
   flex: 2;
   align-items: center;
-  height: 100%;
   .menuIcon {
     width: 1.5rem;
     height: 1.5rem;
@@ -24,12 +24,11 @@
 }
 
 .logoWrap {
+  @include logoText(2rem, white);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  font-family: 'Overgrow', sans-serif;
-  font-size: 2rem;
   cursor: pointer;
 }
 
@@ -41,12 +40,16 @@
   flex: 2;
   .announceIcon {
     margin-right: 0.7rem;
-    transform: scaleX(-1);
     cursor: pointer;
+    transform: scaleX(-1);
+    .storeIcon {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
     .megaphoneIcon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 }
 
@@ -64,22 +67,22 @@
 }
 
 .notiCountCircle {
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: absolute;
   top: -30%;
   left: 40%;
+  z-index: 1;
+  display: flex;
   width: 1.1rem;
   height: 1.1rem;
-  border-radius: 50%;
   background-color: red;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
 }
 
 .notiCount {
-  font-family: 'Roboto', sans-serif;
-  font-size: 0.25rem;
+  font-family: $common-en-font;
+  font-size: 0.7rem;
   font-weight: 400;
 }
 

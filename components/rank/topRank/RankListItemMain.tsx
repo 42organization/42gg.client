@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
-import { userImages } from 'types/rankTypes';
 import { useRecoilValue } from 'recoil';
-import { RankUser, NormalUser } from 'types/rankTypes';
+import { TbQuestionMark } from 'react-icons/tb';
+import { userImages } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
 import PlayerImage from 'components/PlayerImage';
-import { TbQuestionMark } from 'react-icons/tb';
 import styles from 'styles/rank/RankListMain.module.scss';
 
 interface RankListItemMainProps {
@@ -13,8 +12,11 @@ interface RankListItemMainProps {
   user: userImages;
 }
 
-export default function RankListItemMain({ user, rank }: RankListItemMainProps) {
-  const { intraId, userImageUri } = user || {};
+export default function RankListItemMain({
+  user,
+  rank,
+}: RankListItemMainProps) {
+  const { intraId, imageUri, tierImage, edge } = user || {};
   const Mode = useRecoilValue(colorToggleSelector);
   const renderLink = intraId !== 'intraId';
 
@@ -38,18 +40,31 @@ export default function RankListItemMain({ user, rank }: RankListItemMainProps) 
             {renderLink ? (
               <Link href={`users/detail?intraId=${intraId}`}>
                 <PlayerImage
-                  src={userImageUri}
-                  styleName={rank === 1 ? 'ranktropybig' : 'ranktropy'}
+                  src={imageUri}
+                  styleName={
+                    rank === 1
+                      ? `ranktropybig ${edge ? edge.toLowerCase() : 'basic'}`
+                      : `ranktropy ${edge ? edge.toLowerCase() : 'basic'}`
+                  }
                   size={50}
                 />
-                <span>{intraId}</span>
+                <div className={`${styles.tierImageId}`}>
+                  {Mode === 'RANK' && (
+                    <PlayerImage
+                      src={tierImage}
+                      styleName={'ranktier'}
+                      size={10}
+                    />
+                  )}
+                  {intraId}
+                </div>
               </Link>
             ) : (
               <div>
                 <div className={`${styles.questionCircleRank}`}>
-                  {
-                    <TbQuestionMark className={` ${rank === 1 ? styles.rank1 : styles.ranks}`}/>
-                  }
+                  <TbQuestionMark
+                    className={` ${rank === 1 ? styles.rank1 : styles.ranks}`}
+                  />
                 </div>
                 <span>{intraId}</span>
               </div>

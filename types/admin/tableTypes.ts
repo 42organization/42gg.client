@@ -4,8 +4,18 @@ export type TableName =
   | 'feedback'
   | 'games'
   | 'announcement'
-  | 'season'
-  | 'penalty';
+  | 'seasonCreate'
+  | 'seasonHistory'
+  | 'penalty'
+  | 'receiptList'
+  | 'megaphoneList'
+  | 'profileList'
+  | 'profileListCurrent'
+  | 'profileDeletedList'
+  | 'itemList'
+  | 'itemHistory'
+  | 'coinPolicy'
+  | 'coinPolicyHistory';
 
 export type EtcType = 'button' | 'toggle';
 

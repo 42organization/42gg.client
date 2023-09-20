@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import { useContext } from 'react';
-import { Noti } from 'types/notiTypes';
-import { HeaderContextState, HeaderContext } from '../HeaderContext';
 import { BsCheckLg } from 'react-icons/bs';
+import { Noti } from 'types/notiTypes';
+import {
+  HeaderContextState,
+  HeaderContext,
+} from 'components/Layout/HeaderContext';
 import styles from 'styles/Layout/NotiItem.module.scss';
 
 interface NotiItemProps {
@@ -32,6 +35,10 @@ export default function NotiItem({ data }: NotiItemProps) {
       style: styles.canceldByMan,
       content: message,
     },
+    GIFT: {
+      style: styles.gift,
+      content: message,
+    },
   };
 
   const notiWrapperStyle = isChecked ? styles.readWrap : styles.unreadWrap;
@@ -42,6 +49,8 @@ export default function NotiItem({ data }: NotiItemProps) {
       ? styles.matched
       : type === 'CANCELEDBYMAN'
       ? styles.canceledByMan
+      : type === 'GIFT'
+      ? styles.gift
       : styles.announcement;
 
   return (

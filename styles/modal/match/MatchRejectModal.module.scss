@@ -6,19 +6,14 @@
 
 .phrase {
   @include modal-phrase;
-  white-space: pre-wrap;
   color: rgba(49, 47, 49, 1);
+  white-space: pre-wrap;
   .message {
     padding: 1rem;
     font-size: 1.125rem;
-    font-family: 'NanumSqaure_acEB', sans-serif;
   }
   .subContent {
     padding-bottom: 1rem;
     font-size: 0.9rem;
   }
-}
-
-.buttons {
-  @include modalButton;
 }

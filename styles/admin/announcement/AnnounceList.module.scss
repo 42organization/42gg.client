@@ -3,11 +3,13 @@
 
 .container {
   display: flex;
-  flex-direction: column;
-  width: 100%;
+  width: 95%;
   max-width: 61.5rem;
   height: 100%;
-  padding: 1.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
 }
 
 .quillViewer {
@@ -15,8 +17,8 @@
   max-width: 16rem;
   height: 100%;
   max-height: 19rem;
-  margin: 0.5rem;
   padding: 0;
+  margin: 0.2rem;
   overflow-y: scroll;
   color: black;
 }
@@ -28,8 +30,8 @@
 }
 
 .quillViewer::-webkit-scrollbar-thumb {
-  border-radius: 10px;
   background: $gray;
+  border-radius: 10px;
 }
 
 .header {
@@ -39,31 +41,24 @@
 }
 
 .title {
-  font-weight: 700;
   font-size: $big-font;
+  font-weight: 700;
   line-height: 150%;
 }
 
 .tableContainer {
   .table {
-    .tableHeader {
-      background-color: lightgray;
-
-      .tableHeaderItem {
-        padding: 0.5rem;
-        text-align: center;
-        font-weight: 600;
-        font-size: $small-font;
-        line-height: 150%;
-      }
-    }
-
     .tableBody {
+      .tableBodyItemQuill {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
       .tableBodyItem {
         padding: 0.5rem;
-        text-align: center;
         font-size: $small-font;
         line-height: 100%;
+        text-align: center;
       }
     }
   }

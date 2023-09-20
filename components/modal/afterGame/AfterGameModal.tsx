@@ -1,7 +1,7 @@
-import NormalGame from './NormalGame';
-import RankGame from './RankGame';
-import useSubmitModal from 'hooks/modal/aftergame/useSubmitModal';
+import NormalGame from 'components/modal/afterGame/NormalGame';
+import RankGame from 'components/modal/afterGame/RankGame';
 import useCurrentGame from 'hooks/modal/aftergame/useCurrentGame';
+import useSubmitModal from 'hooks/modal/aftergame/useSubmitModal';
 
 export default function AfterGameModal() {
   const { currentGame } = useCurrentGame();
@@ -11,13 +11,16 @@ export default function AfterGameModal() {
   if (currentGame.startTime === '2022-07-13 11:50') return null;
 
   return currentGame.mode === 'NORMAL' ? (
-    <NormalGame currentGame={currentGame} onSubmit={submitNormalHandler} />
+    <NormalGame
+      currentGame={currentGame}
+      onSubmit={submitNormalHandler}
+      openStatChange={openStatChangeModal}
+    />
   ) : (
     <RankGame
       currentGame={currentGame}
-      onSubmit={
-        currentGame.isScoreExist ? openStatChangeModal : submitRankHandler
-      }
+      onSubmit={submitRankHandler}
+      openStatChange={openStatChangeModal}
     />
   );
 }

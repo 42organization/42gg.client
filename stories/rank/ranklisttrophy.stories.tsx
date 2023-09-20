@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import { Rank } from 'types/rankTypes';
+import type { Meta, StoryObj } from '@storybook/react';
 import RankListMain from 'components/rank/topRank/RankListMain';
 
 interface RankListMainProps {
@@ -40,14 +40,16 @@ export const NonDataRanker: Story = {
           intraId: 'user1',
           statusMessage: 'Hello',
           ppp: 100,
-          userImageUri: 'image1.png',
+          tierImageUri: 'image1.png',
+          textColor: '#000000',
         },
         {
           rank: 1,
           intraId: 'user2',
           statusMessage: 'Hi',
           ppp: 90,
-          userImageUri: 'image2.png',
+          tierImageUri: 'image2.png',
+          textColor: '#000000',
         },
       ],
     },

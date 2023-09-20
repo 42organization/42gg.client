@@ -1,21 +1,24 @@
 import Link from 'next/link';
 import React, { MouseEvent, useContext, MouseEventHandler } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { User } from 'types/mainType';
+import { useSetRecoilState } from 'recoil';
+import { AiFillShop } from 'react-icons/ai';
 import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
-import { userState } from 'utils/recoil/layout';
-import { HeaderContextState, HeaderContext } from '../HeaderContext';
+import {
+  HeaderContextState,
+  HeaderContext,
+} from 'components/Layout/HeaderContext';
+import AdminEmoji from 'public/image/menu_admin.svg';
+import AnnouncementEmoji from 'public/image/menu_announcement.svg';
+import CurrentMatchEmoji from 'public/image/menu_currentMatch.svg';
+import ManualEmoji from 'public/image/menu_manual.svg';
+import RankingEmoji from 'public/image/menu_ranking.svg';
+import ReportEmoji from 'public/image/menu_report.svg';
+import SignOutEmoji from 'public/image/menu_signOut.svg';
+import StatisticsEmoji from 'public/image/menu_statistics.svg';
+import { useUser } from 'hooks/Layout/useUser';
 import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/MenuBar.module.scss';
-import RankingEmoji from 'public/image/menu_ranking.svg';
-import CurrentMatchEmoji from 'public/image/menu_currentMatch.svg';
-import AnnouncementEmoji from 'public/image/menu_announcement.svg';
-import ManualEmoji from 'public/image/menu_manual.svg';
-import ReportEmoji from 'public/image/menu_report.svg';
-import StatisticsEmoji from 'public/image/menu_statistics.svg';
-import AdminEmoji from 'public/image/menu_admin.svg';
-import SignOutEmoji from 'public/image/menu_signOut.svg';
 
 interface MenuLinkProps {
   link: string;
@@ -29,6 +32,10 @@ interface menuItemProps {
 
 const MenuItem = ({ itemName, onClick }: menuItemProps) => {
   const menuList: { [key: string]: { [key: string]: string | JSX.Element } } = {
+    Store: {
+      name: '상점',
+      svg: <AiFillShop />,
+    },
     Ranking: {
       name: '랭킹',
       svg: <RankingEmoji />,
@@ -85,6 +92,7 @@ export const MainMenu = () => {
         setModal({
           modalName: 'EVENT-ANNOUNCEMENT',
           announcement: data,
+          isAttended: true,
         });
     },
     err: 'RJ01',
@@ -93,6 +101,11 @@ export const MainMenu = () => {
 
   return (
     <nav className={styles.mainMenu}>
+      <MenuLink
+        link='/store'
+        itemName='Store'
+        onClick={HeaderState?.resetOpenMenuBarState}
+      />
       <MenuLink
         link='/rank'
         itemName='Ranking'
@@ -123,8 +136,12 @@ export const MainMenu = () => {
 
 export const AdminMenu = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
-  const { isAdmin } = useRecoilValue<User>(userState);
   const setModal = useSetRecoilState<Modal>(modalState);
+  const user = useUser();
+
+  if (!user) return null;
+  const { isAdmin } = user;
+
   const logutBottomStyle = isAdmin ? styles.admin : styles.normal;
 
   return (

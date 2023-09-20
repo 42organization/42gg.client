@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { valuesIn } from 'cypress/types/lodash';
+export {};
 
 // 로그인
 Cypress.Commands.add('login', (username: string, password: string) => {

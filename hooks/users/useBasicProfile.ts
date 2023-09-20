@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
-import { profileState } from 'utils/recoil/user';
-import { errorState } from 'utils/recoil/error';
 import { instance } from 'utils/axios';
+import { errorState } from 'utils/recoil/error';
+import { profileState } from 'utils/recoil/user';
 
 interface UseBasicProfileProps {
   profileId: string;
@@ -20,6 +20,10 @@ const useBasicProfile = ({ profileId }: UseBasicProfileProps) => {
       currentExp,
       maxExp,
       expRate,
+      tierImageUri,
+      tierName,
+      edge,
+      background,
     },
     setProfile,
   ] = useRecoilState(profileState);
@@ -48,6 +52,10 @@ const useBasicProfile = ({ profileId }: UseBasicProfileProps) => {
     maxExp,
     expRate,
     MAX_LEVEL,
+    tierImageUri,
+    tierName,
+    edge,
+    background,
   };
 };
 

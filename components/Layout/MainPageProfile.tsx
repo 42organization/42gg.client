@@ -1,11 +1,12 @@
 import Link from 'next/link';
-import { useRecoilValue } from 'recoil';
-import { userState } from 'utils/recoil/layout';
 import PlayerImage from 'components/PlayerImage';
+import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/Layout/MainPageProfile.module.scss';
 
 const MainPageProfile = () => {
-  const user = useRecoilValue(userState);
+  const user = useUser();
+
+  if (!user) return null;
 
   return (
     <div className={styles.mainPageProfile}>
@@ -16,14 +17,21 @@ const MainPageProfile = () => {
         >
           <PlayerImage
             src={user.userImageUri}
-            styleName={'mainPageProfile'}
+            styleName={`mainPageProfile ${
+              user.edgeType ? user.edgeType.toLowerCase() : 'basic'
+            }`}
             size={18}
           />
         </Link>
         <div className={styles.userGreetings}>
           <div className={styles.greetings}>안녕하세요,</div>
           <div className={styles.intraId}>
-            탁구왕&nbsp;
+            <PlayerImage
+              src={user.tierImageUri}
+              styleName={'ranktier'}
+              size={50}
+            />
+            &nbsp;
             <Link href={`/users/detail?intraId=${user.intraId}`}>
               {user.intraId}
             </Link>

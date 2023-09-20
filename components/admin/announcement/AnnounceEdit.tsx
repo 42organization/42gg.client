@@ -1,10 +1,10 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
 import { instanceInManage, instance } from 'utils/axios';
-import { userState } from 'utils/recoil/layout';
 import { toastState } from 'utils/recoil/toast';
+import { useUser } from 'hooks/Layout/useUser';
 import styles from 'styles/admin/announcement/AnnounceEdit.module.scss';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
@@ -15,7 +15,7 @@ const Quill = dynamic(() => import('react-quill'), {
 });
 
 export default function AnnounceEdit() {
-  const { intraId: currentUserId } = useRecoilValue(userState);
+  const user = useUser();
   const setSnackbar = useSetRecoilState(toastState);
   const [content, setContent] = useState('');
   const announceCreateResponse: { [key: string]: string } = {
@@ -27,11 +27,23 @@ export default function AnnounceEdit() {
     SUCCESS: '공지사항이 성공적으로 삭제되었습니다.',
     AN100: '삭제 할 활성화된 공지사항이 없습니다.',
   };
-  const koreaTimeOffset = 1000 * 60 * 60 * 9;
 
   useEffect(() => {
     resetHandler();
   }, []);
+
+  const resetHandler = async () => {
+    try {
+      const res = await instance.get('/pingpong/announcement');
+      setContent(res?.data.content);
+    } catch (e) {
+      alert(e);
+    }
+  };
+
+  if (!user) return null;
+
+  const currentUserId = user.intraId;
 
   const postHandler = async () => {
     try {
@@ -71,15 +83,6 @@ export default function AnnounceEdit() {
         message: `🔥 ${announceDeleteResponse[e.response.data.code]} 🔥`,
         clicked: true,
       });
-    }
-  };
-
-  const resetHandler = async () => {
-    try {
-      const res = await instance.get('/pingpong/announcement');
-      setContent(res?.data.content);
-    } catch (e) {
-      alert(e);
     }
   };
 

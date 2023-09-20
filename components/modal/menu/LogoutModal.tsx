@@ -1,9 +1,25 @@
+import { useState } from 'react';
+import { useQueryClient } from 'react-query';
+import {
+  ModalButtonContainer,
+  ModalButton,
+} from 'components/modal/ModalButton';
+import useLogoutCheck from 'hooks/Login/useLogoutCheck';
 import styles from 'styles/modal/menu/LogoutModal.module.scss';
 
-import useLogoutCheck from 'hooks/Login/useLogoutCheck';
-
 export default function LogoutModal() {
+  const [isLoading, setIsLoading] = useState(false);
   const [onReturn, onLogout] = useLogoutCheck();
+  const queryClient = useQueryClient();
+
+  const handleLogout = () => {
+    setIsLoading(true);
+    onLogout()
+      .then(() => queryClient.removeQueries('user'))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   return (
     <div className={styles.container}>
@@ -15,14 +31,15 @@ export default function LogoutModal() {
           하시겠습니까?
         </div>
       </div>
-      <div className={styles.buttons}>
-        <div className={styles.negative}>
-          <input onClick={onReturn} type='button' value='아니오' />
-        </div>
-        <div className={styles.positive}>
-          <input onClick={onLogout} type='button' value='예' />
-        </div>
-      </div>
+      <ModalButtonContainer>
+        <ModalButton onClick={onReturn} style='negative' value='아니오' />
+        <ModalButton
+          onClick={handleLogout}
+          style='positive'
+          value='예'
+          isLoading={isLoading}
+        />
+      </ModalButtonContainer>
     </div>
   );
 }

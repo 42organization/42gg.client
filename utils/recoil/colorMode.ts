@@ -1,9 +1,9 @@
-import { MatchMode } from 'types/mainType';
-import { ToggleMode } from 'types/rankTypes';
 import { atom, selector } from 'recoil';
 import { v1 } from 'uuid';
+import { ColorMode } from 'types/colorModeTypes';
+import { ToggleMode } from 'types/rankTypes';
 
-export const colorModeState = atom<MatchMode>({
+export const colorModeState = atom<ColorMode>({
   key: `ColorMode/${v1()}`,
   default: 'RANK',
 });

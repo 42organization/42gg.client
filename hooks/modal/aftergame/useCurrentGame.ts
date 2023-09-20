@@ -1,11 +1,11 @@
+import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { AfterGame } from 'types/scoreTypes';
 import { MatchMode } from 'types/mainType';
+import { AfterGame } from 'types/scoreTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { liveState } from 'utils/recoil/layout';
-import { AxiosResponse } from 'axios';
 
 const useCurrentGame = () => {
   const setError = useSetRecoilState(errorState);

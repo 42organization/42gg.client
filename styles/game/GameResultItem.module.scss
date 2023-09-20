@@ -1,4 +1,5 @@
 @import 'styles/common.scss';
+@import 'styles/ProfileBackgroundTheme.scss';
 
 // ANCHOR : page
 
@@ -13,22 +14,22 @@
 }
 
 .gameResultWrapper {
-  z-index: 0;
   position: relative;
+  z-index: 0;
 }
 
 // ANCHOR : item container mixin
 
 @mixin itemContainer($type) {
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   align-items: center;
-  box-sizing: border-box;
   @if ($type == 'SMALL') {
     min-width: 18.4rem;
     min-height: 2.8rem;
-    border-radius: 1rem;
     padding: 0.5rem 1rem;
+    border-radius: 1rem;
   } @else if ($type == 'BIG') {
     min-width: 20.5rem;
     min-height: 6rem;
@@ -37,22 +38,122 @@
   }
 }
 
+$gameItemThemeBasic: map-get(
+  $map: $bg-basic,
+  $key: 'profile-game-result',
+);
+$gameItemTheme1: map-get(
+  $map: $bg-cool-sky,
+  $key: 'profile-game-result',
+);
+$gameItemTheme2: map-get(
+  $map: $bg-misty-meadow,
+  $key: 'profile-game-result',
+);
+$gameItemTheme3: map-get(
+  $map: $bg-bupe,
+  $key: 'profile-game-result',
+);
+$gameItemTheme4: map-get(
+  $map: $bg-mango,
+  $key: 'profile-game-result',
+);
+$gameItemTheme5: map-get(
+  $map: $bg-sea-blizz,
+  $key: 'profile-game-result',
+);
+$gameItemTheme6: map-get(
+  $map: $bg-opa,
+  $key: 'profile-game-result',
+);
+$gameItemTheme7: map-get(
+  $map: $bg-strain,
+  $key: 'profile-game-result',
+);
+$gameItemTheme8: map-get(
+  $map: $bg-windy,
+  $key: 'profile-game-result',
+);
+$gameItemTheme9: map-get(
+  $map: $bg-mystic,
+  $key: 'profile-game-result',
+);
+$gameItemTheme10: map-get(
+  $map: $bg-dracula,
+  $key: 'profile-game-result',
+);
+$gameItemTheme11: map-get(
+  $map: $bg-tranquil,
+  $key: 'profile-game-result',
+);
+$gameItemTheme12: map-get(
+  $map: $bg-jodhpur,
+  $key: 'profile-game-result',
+);
+$gameItemTheme13: map-get(
+  $map: $bg-hazel,
+  $key: 'profile-game-result',
+);
+$gameItemTheme14: map-get(
+  $map: $bg-radar,
+  $key: 'profile-game-result',
+);
+$gameItemTheme15: map-get(
+  $map: $bg-royal-blue,
+  $key: 'profile-game-result',
+);
+$gameItemTheme16: map-get(
+  $map: $bg-megatron,
+  $key: 'profile-game-result',
+);
+
+$gameItemThemes: (
+  'basic': $gameItemThemeBasic,
+  'color1': $gameItemTheme1,
+  'color2': $gameItemTheme2,
+  'color3': $gameItemTheme3,
+  'color4': $gameItemTheme4,
+  'color5': $gameItemTheme5,
+  'color6': $gameItemTheme6,
+  'color7': $gameItemTheme7,
+  'color8': $gameItemTheme8,
+  'color9': $gameItemTheme9,
+  'color10': $gameItemTheme10,
+  'color11': $gameItemTheme11,
+  'color12': $gameItemTheme12,
+  'color13': $gameItemTheme13,
+  'color14': $gameItemTheme14,
+  'color15': $gameItemTheme15,
+  'color16': $gameItemTheme16,
+);
+
 @mixin itemBackgroud($type) {
   @if ($type == 'SMALL') {
     &.light {
-      background: linear-gradient(0deg, #9134f7, #9134f7);
-      &.both {
-        background: #ff7fb8;
+      &.main {
+        background: linear-gradient(0deg, #9134f7, #9134f7);
       }
-      &.normal {
-        background: #5fa5ef;
+      &.game {
+        &.both {
+          background: #ff7fb8;
+        }
+        &.normal {
+          background: #5fa5ef;
+        }
+        &.rank {
+          background: linear-gradient(180deg, #8f2fea 0%, #8c29da 100%);
+        }
       }
-      &.rank {
-        background: linear-gradient(180deg, #8f2fea 0%, #8c29da 100%);
+      @each $theme, $color in $gameItemThemes {
+        &.#{$theme} {
+          background: map-get($map: $color, $key: 'light');
+        }
       }
     }
     &.dark {
-      background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
+      &.main {
+        background: linear-gradient(180deg, #631db2 0%, #6a0db3 100%);
+      }
       &.both {
         background: linear-gradient(180deg, #dd3b89 0%, #c71b82 100%);
       }
@@ -62,18 +163,32 @@
       &.rank {
         background: linear-gradient(180deg, #631db2 0%, #6a0db2 92.19%);
       }
+      @each $theme, $color in $gameItemThemes {
+        &.#{$theme} {
+          background: map-get($map: $color, $key: 'dark');
+        }
+      }
     }
   } @else {
     // BIG
-    background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
-    &.both {
-      background: linear-gradient(90.88deg, #ff86dd 10.44%, #ff7272 99.52%);
+    &.main {
+      background: linear-gradient(89.97deg, #8034f7 11.73%, #8120c3 99.97%);
     }
-    &.normal {
-      background: linear-gradient(90.88deg, #8fc7fb 10.44%, #4e8fdb 99.52%);
+    &.game {
+      &.both {
+        background: linear-gradient(90.88deg, #ff86dd 10.44%, #ff7272 99.52%);
+      }
+      &.normal {
+        background: linear-gradient(90.88deg, #8fc7fb 10.44%, #4e8fdb 99.52%);
+      }
+      &.rank {
+        background: linear-gradient(90.88deg, #9134f7 10.44%, #8921c5 99.52%);
+      }
     }
-    &.rank {
-      background: linear-gradient(90.88deg, #9134f7 10.44%, #8921c5 99.52%);
+    @each $theme, $color in $gameItemThemes {
+      &.#{$theme} {
+        background: map-get($map: $color, $key: 'big');
+      }
     }
   }
 }
@@ -82,8 +197,8 @@
   @if ($type == 'SMALL') {
     margin: 0 1rem;
   } @else if ($type == 'BIG') {
-    z-index: 1;
     position: relative;
+    z-index: 1;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   }
 }
@@ -109,7 +224,7 @@
     }
     span {
       margin: 0 0.5rem;
-      font-family: 'Roboto', sans-serif;
+      font-family: $common-en-font;
       font-size: 0.7rem;
       font-weight: 500;
       text-align: center;
@@ -117,10 +232,10 @@
   }
   // score
   .smallScoreBoard {
-    color: #ffffff;
-    font-family: 'Roboto', sans-serif;
+    font-family: $common-en-font;
     font-size: 1rem;
     font-weight: 600;
+    color: #ffffff;
     text-align: center;
   }
 }
@@ -140,28 +255,27 @@
     align-items: center;
     .userId {
       margin: 0.1rem 0;
-      font-family: 'Roboto', sans-serif;
+      font-family: $common-en-font;
       font-size: 1rem;
       font-weight: 500;
-      text-align: center;
       color: #ffffff;
+      text-align: center;
       cursor: pointer;
     }
     .winRate {
+      box-sizing: border-box;
       min-width: 3.8rem;
       padding: 0.15rem 0.5rem;
-      box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
+      font-size: 0.6rem;
       font-style: normal;
       font-weight: 350;
-      font-size: 0.6rem;
-      text-align: center;
       color: #000000;
+      text-align: center;
       background: #ffffff;
       border-radius: 0.2rem;
       &.zIndexWinRate {
-        background: rgba(0, 0, 0, 0.33);
         color: #ffffff;
+        background: rgba(0, 0, 0, 0.33);
       }
     }
   }
@@ -169,18 +283,18 @@
   // score
   @mixin gameStatus() {
     min-width: 2rem;
-    border-radius: 0.2rem;
-    color: white;
-    font-size: 0.6rem;
-    text-align: center;
     padding: 0.2rem 0.3rem;
     margin-bottom: 0.4rem;
+    font-size: 0.6rem;
+    color: white;
+    text-align: center;
+    border-radius: 0.2rem;
   }
 
   @mixin waitAnimation($delay) {
     @include spanUpDownAnimation(0.2rem, 0.2rem);
-    display: inline-block;
     position: relative;
+    display: inline-block;
     animation-delay: $delay;
   }
 
@@ -191,6 +305,9 @@
     .gameStatusLive {
       @include gameStatus;
       background: #ff007a;
+      &.profile {
+        background: #ffffff9b;
+      }
     }
     .gameStatusWait {
       @include gameStatus;
@@ -206,28 +323,32 @@
     }
     .gameStatusEnd {
       @include gameStatus();
-      background-color: #d4a3fb;
       font-weight: 700;
       color: #8c28d9;
+      background-color: #d4a3fb;
+      &.profile {
+        color: #0000004f;
+        background: #ffffff9b;
+      }
       &.both {
-        background-color: #ffb1d9;
         color: #b94b80;
+        background-color: #ffb1d9;
       }
       &.normal {
-        background-color: #b4dbff;
         color: #5695df;
+        background-color: #b4dbff;
       }
       &.rank {
-        background-color: #d4a3fb;
         color: #8c28d9;
+        background-color: #d4a3fb;
       }
     }
 
     .gameScore {
-      font-family: 'Roboto', sans-serif;
-      color: white;
+      font-family: $common-en-font;
       font-size: 1.5rem;
       font-weight: 700;
+      color: white;
       text-align: center;
     }
   }
@@ -237,11 +358,11 @@
   display: block;
   width: 2.2rem;
   height: 2.2rem;
-  margin: 0.8rem auto 0 auto;
-  background: none;
-  border: none;
+  margin: 0.8rem auto 0;
   color: #ffffff;
   cursor: pointer;
+  background: none;
+  border: none;
   svg {
     height: 1.2rem;
   }

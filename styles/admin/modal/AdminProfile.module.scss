@@ -1,25 +1,26 @@
+@import 'styles/common.scss';
+
 .modal {
   display: flex;
-  flex-direction: column;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
   width: 450px;
+  flex-direction: column;
+  color: #898989;
   background-color: #ffffff;
   border-radius: 10px;
-  color: #898989;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
 }
 
 .title {
   display: flex;
-  align-items: center;
-  line-height: 150%;
+  height: 50px;
   margin-left: 2rem;
-  height: 70px;
-  font-family: 'Inter';
+  font-size: 28px;
   font-style: normal;
   font-weight: 500;
-  font-size: 28px;
-  text-transform: uppercase;
+  line-height: 150%;
   color: black;
+  text-transform: uppercase;
+  align-items: center;
 }
 
 .topWrap {
@@ -29,18 +30,18 @@
 .top {
   display: flex;
   justify-content: space-between;
-  height: 170px;
+  height: 130px;
   border-top: 1.5px solid #e5e5e5;
   border-bottom: 1.5px solid #e5e5e5;
 }
 
 .imageWrap {
-  padding: 1.7rem 2rem 1.7rem 1.5rem;
+  padding: 0.5rem 2rem 0.5rem 1.5rem;
 }
 
 .image {
-  float: left;
   position: relative;
+  float: left;
   width: 120px;
   height: 110px;
   background-size: cover;
@@ -50,37 +51,45 @@
   display: flex;
   justify-content: center;
   width: 250px;
-  padding: 1.8rem 0;
+  padding: 0.5rem 0;
 }
 
 .topRight {
   display: flex;
+  width: 200px;
   flex-direction: column;
   justify-content: space-between;
-  width: 200px;
 }
 
 .topRightInput {
   width: 200px;
   height: 25px;
-  color: black;
   font-weight: 500;
+  color: black;
 }
 
 .middle {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 1rem 2rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem 0;
   :nth-child(2) {
     color: #2678f3;
   }
 }
 
+.messageCount {
+  display: flex;
+  width: 100%;
+  padding: 0 2rem;
+  justify-content: space-between;
+}
+
 .middle textarea {
   min-width: 390px;
-  min-height: 100px;
   max-width: 390px;
+  min-height: 100px;
   max-height: 100px;
   font-size: 20px;
 }
@@ -95,27 +104,27 @@
 
 .choice {
   display: flex;
+  height: 200px;
   flex-flow: column wrap;
+  padding: 0.5rem 1rem;
   justify-content: space-between;
   align-items: center;
-  height: 200px;
-  padding: 0 1rem 1rem 1rem;
 }
 
 .choiceName {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   width: 100px;
   height: 200px;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .choiceBtn {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   width: 225px;
   height: 200px;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .choiceBtn input {
@@ -129,42 +138,42 @@
 
 .btns {
   display: flex;
+  height: 90px;
   flex-direction: column;
+  padding: 0.3rem 0;
+  border-top: 1.5px solid #e5e5e5;
   justify-content: space-around;
   align-items: center;
-  height: 120px;
-  padding: 1rem 0;
-  border-top: 1.5px solid #e5e5e5;
 }
 
 .btnBlue {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 400px;
   height: 30px;
-  border: none;
-  border-radius: 8px;
-  background-color: #2678f3;
+  flex-direction: column;
   font-size: 15px;
   color: white;
   cursor: pointer;
+  background-color: #2678f3;
+  border: none;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
 }
 
 .btnGray {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 400px;
   height: 30px;
-  border: none;
-  border-radius: 8px;
-  background-color: #6c757d;
+  flex-direction: column;
   font-size: 15px;
   color: white;
   cursor: pointer;
+  background-color: #6c757d;
+  border: none;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
 }
 
 .racketTypeWrap {
@@ -179,18 +188,18 @@
       display: none;
     }
     :checked + .radioButton {
-      border: solid 1px #2678f3;
       color: #2678f3;
+      border: solid 1px #2678f3;
     }
     .radioButton {
       display: flex;
-      justify-content: center;
-      align-items: center;
       width: 70px;
       height: 22px;
-      border: 1px solid black;
       text-align: center;
       cursor: pointer;
+      border: 1px solid black;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

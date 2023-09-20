@@ -3,10 +3,10 @@
 .matchBoard {
   height: 60vh;
   padding: 1rem;
-  margin-block: 0 1rem;
-  border-radius: $small-radius;
-  background: rgba(255, 255, 255, 0.2);
   overflow-y: scroll;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: $small-radius;
+  margin-block: 0 1rem;
 }
 
 .notice {
@@ -18,13 +18,13 @@
 .slotButton {
   all: unset;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   height: 2.3rem;
   padding: 0 0.6rem;
   margin: 0.1rem;
-  border-radius: $mini-radius;
   cursor: pointer;
+  border-radius: $mini-radius;
+  justify-content: space-between;
+  align-items: center;
 
   &.mytable {
     background: linear-gradient(to bottom, #4fffca, #12a779);
@@ -43,45 +43,45 @@
   }
 
   &.disabled {
-    background: linear-gradient(to bottom, #636671, #424550);
     pointer-events: all;
     cursor: not-allowed;
+    background: linear-gradient(to bottom, #636671, #424550);
   }
 
   &.mytableDisabled {
-    background: linear-gradient(to bottom, #4fffca, #12a779);
     pointer-events: all;
     cursor: not-allowed;
+    background: linear-gradient(to bottom, #4fffca, #12a779);
   }
 }
 
 .time {
-  color: white;
   font-size: 0.9rem;
+  color: white;
 }
 
 .headCount {
-  color: white;
   font-size: $small-font;
   font-weight: 600;
+  color: white;
   text-shadow: 1px 1px 7px #a6a6a6;
 }
 
 .plus {
-  color: white;
   font-size: $big-font;
   font-weight: 600;
+  color: white;
   text-shadow: 1px 1px 7px #a6a6a6;
 }
 
 .slotHour {
   display: flex;
-  justify-content: space-between;
   margin-top: 0.7rem;
   margin-bottom: 0.5rem;
   margin-left: 0.3rem;
-  color: white;
   font-size: $big-font;
+  color: white;
+  justify-content: space-between;
 }
 
 .slotGrid {

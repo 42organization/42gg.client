@@ -9,14 +9,18 @@
 }
 
 .modalContainer {
+  position: fixed;
   display: flex;
   flex-direction: column;
+  margin: 1rem;
+  font-size: $medium-font;
+  color: white;
+  background: rgba(244, 221, 247, 0.93);
+  border-radius: $small-radius;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
-  margin: 1rem;
-  border-radius: $small-radius;
-  background: rgba(244, 221, 247, 0.93);
-  color: white;
-  font-size: $medium-font;
+}
+
+.modalButtonContainer {
+  @include modalButton;
 }

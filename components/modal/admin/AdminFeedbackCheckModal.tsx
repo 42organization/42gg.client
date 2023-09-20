@@ -1,16 +1,23 @@
 import { useSetRecoilState } from 'recoil';
+import { IoSend } from 'react-icons/io5';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
-import { IFeedback } from 'components/admin/feedback/FeedbackTable';
-import { IoSend } from 'react-icons/io5';
+import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminFeedbackCheck.module.scss';
+
+interface IfeedbackProps {
+  id: number;
+  intraId: string;
+  isSolved: boolean;
+}
 
 export default function AdminFeedbackCheck({
   id,
   intraId,
   isSolved,
-}: IFeedback) {
+}: IfeedbackProps) {
   const setModal = useSetRecoilState(modalState);
+  const setSnackBar = useSetRecoilState(toastState);
 
   const sendNotificationHandler = async (isSend: boolean) => {
     try {
@@ -23,6 +30,12 @@ export default function AdminFeedbackCheck({
           ? '피드백을 검토중입니다.'
           : '피드백이 반영되었습니다.',
         // sendMail: isSend, todo: 슬랙으로 보내는 것으로 변경
+      });
+      setSnackBar({
+        toastName: 'noti user',
+        severity: 'success',
+        message: `알림이 성공적으로 전송되었습니다!`,
+        clicked: true,
       });
       setModal({ modalName: null });
     } catch (e) {

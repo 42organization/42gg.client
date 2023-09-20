@@ -1,11 +1,11 @@
 import React from 'react';
+import { FaChevronDown } from 'react-icons/fa';
 import { Game } from 'types/gameTypes';
 import { SeasonMode } from 'types/mainType';
-import GameResultEmptyItem from './GameResultEmptyItem';
-import GameResultBigItem from './big/GameResultBigItem';
-import GameResultSmallItem from './small/GameResultSmallItem';
+import GameResultBigItem from 'components/game/big/GameResultBigItem';
+import GameResultEmptyItem from 'components/game/GameResultEmptyItem';
+import GameResultSmallItem from 'components/game/small/GameResultSmallItem';
 import useGameResultList from 'hooks/game/useGameResultList';
-import { FaChevronDown } from 'react-icons/fa';
 import styles from 'styles/game/GameResultItem.module.scss';
 
 interface GameResultListProps {
@@ -20,7 +20,8 @@ export default function GameResultList({
   const { data, status, fetchNextPage, isLast, clickedGameItem, pathName } =
     useGameResultList(path);
 
-  const isGamePage = pathName === '/game';
+  const page =
+    pathName === '/' ? 'main' : pathName === '/game' ? 'game' : 'profile';
 
   if (status === 'loading') return <GameResultEmptyItem status={status} />;
 
@@ -39,22 +40,24 @@ export default function GameResultList({
                   <GameResultBigItem
                     key={game.gameId}
                     game={game}
-                    zIndexList={!isGamePage}
+                    zIndexList={page !== 'game'}
                     radioMode={radioMode}
+                    page={page}
                   />
                 ) : (
                   <GameResultSmallItem
                     key={game.gameId}
                     type={type}
                     game={game}
-                    zIndexList={!isGamePage}
+                    zIndexList={page !== 'game'}
                     radioMode={radioMode}
+                    page={page}
                   />
                 );
               })}
             </React.Fragment>
           ))}
-          {isGamePage && !isLast && (
+          {page === 'game' && !isLast && (
             <button
               className={styles['getButton']}
               onClick={() => fetchNextPage()}
