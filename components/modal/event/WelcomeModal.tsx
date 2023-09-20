@@ -64,14 +64,14 @@ export default function WelcomeModal() {
       });
     } catch (error: any) {
       if (error.response.status === 409) {
+        setButtonState(false);
         alert('출석은 하루에 한 번만 가능합니다.');
-        // queryClient.refetchQueries('user');
-        queryClient.refetchQueries('user').then(() => {
+        queryClient.invalidateQueries('user').then(() => {
           setModal({ modalName: null });
+          window.location.reload();
         });
       } else {
         setError('SM01');
-        queryClient.refetchQueries('user');
       }
     } finally {
       setIsLoading(false);
