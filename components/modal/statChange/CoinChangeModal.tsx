@@ -20,6 +20,7 @@ export default function CoinChangeModal(coin: CoinResult) {
   }, []);
 
   const closeModal = () => {
+    queryClient.refetchQueries('user');
     setModal({ modalName: null });
   };
 
