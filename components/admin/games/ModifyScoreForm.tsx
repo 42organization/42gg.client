@@ -7,6 +7,7 @@ export default function ModifyScoreForm({
   gameId,
   team1,
   team2,
+  status,
 }: ModifyScoreType) {
   const setModal = useSetRecoilState(modalState);
 
@@ -22,6 +23,7 @@ export default function ModifyScoreForm({
           gameId: gameId,
           team1: { ...team1, score: team1Score, win: team1Score > team2Score },
           team2: { ...team2, score: team2Score, win: team2Score > team1Score },
+          status: status,
         },
       });
     }
@@ -38,6 +40,7 @@ export default function ModifyScoreForm({
         name='team1Score'
         min='0'
         max='2'
+        disabled={status !== 'END'}
         defaultValue={team1.score}
         required
       />
@@ -47,6 +50,7 @@ export default function ModifyScoreForm({
         name='team2Score'
         min='0'
         max='2'
+        disabled={status !== 'END'}
         defaultValue={team2.score}
         required
       />
