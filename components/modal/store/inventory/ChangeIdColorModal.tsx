@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { MouseEventHandler, useCallback, useState } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseIdColorRequest, UseItemData } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
@@ -60,6 +60,11 @@ export default function ChangeIdColorModal({
   const user = useUser();
   const [color, setColor] = useState<string>('#000000');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [openPicker, setOpenPicker] = useState<boolean>(false);
+
+  const pickerHandler = useCallback(() => {
+    setOpenPicker((prev) => !prev);
+  }, []);
 
   if (!user) return null;
 
@@ -91,7 +96,10 @@ export default function ChangeIdColorModal({
   }
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onClick={() => (openPicker ? setOpenPicker(false) : null)}
+    >
       <div className={styles.title}>{itemName}</div>
       <div className={styles.phrase}>
         <div className={styles.section}>
@@ -101,7 +109,12 @@ export default function ChangeIdColorModal({
         <div className={styles.section}>
           <div className={styles.sectionTitle}>색상 선택 (HEX 코드)</div>
           <div className={styles.colorPickerWrapper}>
-            <ColorPicker color={color} setColor={setColor} />
+            <ColorPicker
+              color={color}
+              setColor={setColor}
+              openPicker={openPicker}
+              pickerHandler={pickerHandler}
+            />
           </div>
         </div>
         <ItemCautionContainer caution={caution} />
