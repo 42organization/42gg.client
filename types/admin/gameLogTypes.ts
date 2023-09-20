@@ -1,5 +1,5 @@
 export type GameType = 'NORMAL' | 'RANK';
-
+export type GameStatus = 'WAIT' | 'BEFORE' | 'LIVE' | 'END';
 export interface ITeam {
   intraId1: string;
   intraId2?: string;
@@ -13,6 +13,7 @@ export interface IGameLog {
   startAt: Date;
   slotTime: string;
   mode: GameType;
+  status: GameStatus;
   team1: ITeam;
   team2: ITeam;
 }
