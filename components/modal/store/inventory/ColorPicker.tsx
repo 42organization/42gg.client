@@ -1,20 +1,21 @@
-import { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { HexColorInput, HexColorPicker } from 'react-colorful';
-import { MdOutlineColorLens , MdColorLens } from 'react-icons/md';
+import { MdOutlineColorLens, MdColorLens } from 'react-icons/md';
 import styles from 'styles/modal/store/ColorPicker.module.scss';
 
 type ColorPickerProps = {
   color: string;
   setColor: Dispatch<SetStateAction<string>>;
+  openPicker: boolean;
+  pickerHandler: () => void;
 };
 
-export default function ColorPicker({ color, setColor }: ColorPickerProps) {
-  const [openPicker, setOpenPicker] = useState<boolean>(false);
-
-  const pickerHandler = useCallback(() => {
-    setOpenPicker((prev) => !prev);
-  }, []);
-
+export default function ColorPicker({
+  color,
+  setColor,
+  openPicker,
+  pickerHandler,
+}: ColorPickerProps) {
   return (
     <>
       <div className={styles.container}>
@@ -35,12 +36,12 @@ export default function ColorPicker({ color, setColor }: ColorPickerProps) {
           prefixed
           alpha
           className={styles.colorInput}
-          onClick={pickerHandler}
         />
         {openPicker ? (
           <HexColorPicker
             color={color}
             onChange={setColor}
+            onClick={(e) => e.stopPropagation()}
             className={styles.colorPicker}
             style={{ width: 'auto' }}
           />
