@@ -55,7 +55,10 @@ const modalContents: contentsType = {
     },
     {
       title: <ContentTitle title={'노쇼'} icon={'🚨'} />,
-      description: [`노쇼는 건의사항 기능 이용해서 신고`],
+      description: [
+        '노쇼는 건의사항 기능 이용해서 신고',
+        '노쇼 시 관리자 확인 후 24시간 패널티 적용',
+      ],
     },
   ],
   NORMAL: [
@@ -80,7 +83,10 @@ const modalContents: contentsType = {
     },
     {
       title: <ContentTitle title={'노쇼'} icon={'🚨'} />,
-      description: [`노쇼는 건의사항 기능 이용해서 신고`],
+      description: [
+        '노쇼는 건의사항 기능 이용해서 신고',
+        '노쇼 시 관리자 확인 후 24시간 패널티 적용',
+      ],
     },
   ],
   RANK: [
