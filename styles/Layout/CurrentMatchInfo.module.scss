@@ -112,9 +112,11 @@ $message-color: rgba(39, 10, 70, 1);
   border-radius: 0.375rem;
   &.nonBlock {
     color: white;
+    cursor: pointer;
   }
   &.block {
     color: red;
+    cursor: not-allowed;
   }
 }
 
