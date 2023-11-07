@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# get current branch name
-branch_name=$(git symbolic-ref --short HEAD)
-exclude_branch_list=("main" "dev" "deploy")
+# # get current branch name
+# branch_name=$(git symbolic-ref --short HEAD)
+# exclude_branch_list=("main" "dev" "deploy")
 
 # # if current branch name is in exclude_branch_list, exit
 # for exclude_branch in "${exclude_branch_list[@]}"; do
@@ -45,17 +45,17 @@ exclude_branch_list=("main" "dev" "deploy")
 # fi
 
 # if issue key from commit message is equal to issue key from branch name, exit
-if [[ -n $issue_key_from_commit_msg ]]; then
-    exit 0
-fi
+# if [[ -n $issue_key_from_commit_msg ]]; then
+#     exit 0
+# fi
 
-# make commit message [{commit_action}] [{issue_key}] {commit_title_msg}
-commit_title_action=$(echo $commit_msg_title | awk '{ print $1 }') # [Feat]
-commit_title_msg=${commit_msg_title#"$commit_title_action "} # commit message
+# # make commit message [{commit_action}] [{issue_key}] {commit_title_msg}
+# commit_title_action=$(echo $commit_msg_title | awk '{ print $1 }') # [Feat]
+# commit_title_msg=${commit_msg_title#"$commit_title_action "} # commit message
 
-echo "$commit_title_action [$issue_key] $commit_title_msg" > $1
-if [[ -n $commit_msg_body ]]; then
-    echo "$commit_msg_body" >> $1
-fi
+# echo "$commit_title_action [$issue_key] $commit_title_msg" > $1
+# if [[ -n $commit_msg_body ]]; then
+#     echo "$commit_msg_body" >> $1
+# fi
 
-exit 0
+# exit 0
