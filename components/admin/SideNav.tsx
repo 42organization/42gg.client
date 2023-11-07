@@ -9,7 +9,7 @@ import {
 } from 'react-icons/gr';
 import { IoGameControllerOutline, IoReceiptOutline } from 'react-icons/io5';
 import { MdOutlineMessage } from 'react-icons/md';
-import { TbCalendarTime, TbCoin, TbPaperBag } from 'react-icons/tb';
+import { TbCalendarTime, TbCoin, TbPaperBag, TbTrophy } from 'react-icons/tb';
 import SideNavContent from 'components/admin/SideNavContent';
 import styles from 'styles/admin/SideNav.module.scss';
 
@@ -112,6 +112,14 @@ export default function SideNav() {
         currentPath={currentPath}
       >
         <TbCoin className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/tournament'}
+        menuName={'토너먼트 관리'}
+        currentPath={currentPath}
+      >
+        <TbTrophy className={styles.logo} />
       </SideNavContent>
     </div>
   );
