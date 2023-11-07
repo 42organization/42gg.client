@@ -1,0 +1,53 @@
+@import 'styles/common.scss';
+
+.pageWrap {
+  @include pageWrap;
+}
+
+.title {
+  @include pageTitle;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.tournamentContainer {
+  display: flex;
+  height: 60vh;
+  flex-direction: column;
+  padding: 1rem 1rem 0rem;
+  overflow-y: scroll;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: $small-radius;
+}
+
+.waitTournamentBox {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  flex-direction: column;
+  padding: 0.2rem 0 0.2rem 0.2rem;
+  margin-bottom: 1rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: #d4b8f2;
+  border-radius: 0.3rem;
+}
+
+.openTournamentBox {
+  display: flex;
+  width: 100%;
+  flex: 3;
+  flex-direction: column;
+  padding: 0.2rem 0 0.2rem 0.2rem;
+  margin-bottom: 1rem;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  background: #d4b8f2;
+  border-radius: 0.3rem;
+}
+
+.tournamentText {
+  font-weight: 1000;
+  color: black;
+  text-align: center; /* 텍스트를 가로로 중앙에 정렬 */
+}

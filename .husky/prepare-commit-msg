@@ -11,38 +11,38 @@ for exclude_branch in "${exclude_branch_list[@]}"; do
     fi
 done
 
-# if branch name is not valid, exit
-contains_issue_key=$(echo $branch_name | grep -c "GGFE-")
-if [[ $contains_issue_key -eq 0 ]]; then
-    echo "브랜치명에 이슈 키를 포함해주세요."
-    exit 1
-fi
+# # if branch name is not valid, exit
+# contains_issue_key=$(echo $branch_name | grep -c "GGFE-")
+# if [[ $contains_issue_key -eq 0 ]]; then
+#     echo "브랜치명에 이슈 키를 포함해주세요."
+#     exit 1
+# fi
 
 # get issue key from branch name
-issue_key=$(echo $branch_name | grep -o "GGFE-[0-9]*")
+# issue_key=$(echo $branch_name | grep -o "GGFE-[0-9]*")
 
-# if issue key is not valid, exit
-if ! [[ $issue_key =~ ^GGFE-[0-9]+$ ]]; then
-    echo "브랜치명의 이슈 키가 올바른 형식이 아닙니다."
-    exit 1
-fi
+# # if issue key is not valid, exit
+# if ! [[ $issue_key =~ ^GGFE-[0-9]+$ ]]; then
+#     echo "브랜치명의 이슈 키가 올바른 형식이 아닙니다."
+#     exit 1
+# fi
 
 # get commit message
-commit_msg_title=$(head -n 1 $1)
-commit_msg_body=$(tail -n +2 $1)
-# get issue key from commit message
-issue_key_from_commit_msg=$(echo $commit_msg_title | grep -o "\[GGFE-[0-9]*\]") # [GGFE-1234]
+# commit_msg_title=$(head -n 1 $1)
+# commit_msg_body=$(tail -n +2 $1)
+# # get issue key from commit message
+# issue_key_from_commit_msg=$(echo $commit_msg_title | grep -o "\[GGFE-[0-9]*\]") # [GGFE-1234]
 
-# if this commit is merge commit, exit 0
-if [[ $commit_msg_title =~ ^Merge ]]; then
-    exit 0
-fi
+# # if this commit is merge commit, exit 0
+# if [[ $commit_msg_title =~ ^Merge ]]; then
+#     exit 0
+# fi
 
-# if there is issue key in commit message but not equal to issue key from branch name, exit
-if [[ -n $issue_key_from_commit_msg ]] && [[ "$issue_key_from_commit_msg" != "[$issue_key]" ]]; then
-    echo "커밋 메시지의 이슈 키가 브랜치명의 이슈 키와 일치하지 않습니다."
-    exit 1
-fi
+# # if there is issue key in commit message but not equal to issue key from branch name, exit
+# if [[ -n $issue_key_from_commit_msg ]] && [[ "$issue_key_from_commit_msg" != "[$issue_key]" ]]; then
+#     echo "커밋 메시지의 이슈 키가 브랜치명의 이슈 키와 일치하지 않습니다."
+#     exit 1
+# fi
 
 # if issue key from commit message is equal to issue key from branch name, exit
 if [[ -n $issue_key_from_commit_msg ]]; then

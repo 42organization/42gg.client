@@ -10,6 +10,9 @@ const Home: NextPage = () => {
         <SearchBar />
       </div>
       <div className={styles.rank}>
+        <Section path='tournament' sectionTitle={'Tournament'} />
+      </div>
+      <div className={styles.rank}>
         <Section path='rank' sectionTitle={'Ranking'} />
       </div>
       <div className={styles.game}>
