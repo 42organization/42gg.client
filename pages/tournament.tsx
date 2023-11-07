@@ -14,7 +14,7 @@ export default function Tournament() {
       modalName: 'TOURNAMENT-REGISTRY',
       tournamentInfo: {
         tournamentName: '제1회 루키토너먼트',
-        tournamentDiscription: '첫 대회',
+        tournamentDiscription: '첫번재 루키 토너먼트 대회입니다 ! ',
         tournamentDate: '2023:12:12:24:00',
       },
     });
@@ -25,16 +25,8 @@ export default function Tournament() {
       <div className={styles.tournamentContainer}>
         <h4 className={styles.tournamentText}> 열려있는 토너먼트 </h4>
         <div className={styles.waitTournamentBox}>
-          <div> 제1회 루키 토너먼트 </div>
-          <div> 제2회 루키 토너먼트 </div>
-          <div> 제3회 루키 토너먼트 </div>
-          <div> 제3회 루키 토너먼트 </div>
-          <div> 제3회 루키 토너먼트 </div>
-          <div> 제3회 루키 토너먼트 </div>
-          <div> 제3회 루키 토너먼트 </div>
-          <div> 제3회 루키 토너먼트 </div>
-          <div> 제3회 루키 토너먼트 </div>
-          <div> 제3회 루키 토너먼트 </div>
+          <div onClick={handleTournament}> 제1회 루키 토너먼트 </div>
+          <div onClick={handleTournament}> 제2회 루키 토너먼트 </div>
         </div>
         <h4 className={styles.tournamentText}> 진행중인 토너먼트 </h4>
         <div className={styles.openTournamentBox}>
