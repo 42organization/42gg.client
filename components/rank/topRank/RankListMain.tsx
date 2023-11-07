@@ -53,7 +53,7 @@ export default function RankListMain({ isMain, season }: RankListMainProps) {
   ));
 
   return (
-    <div>
+    <div className={`${styles.RankContainer}`}>
       <div className={`${styles.bangContainer}`}>{bangElements}</div>
       <div className={`${styles.mainContainer} ${isMain && styles.isMain}`}>
         {rank !== undefined &&
