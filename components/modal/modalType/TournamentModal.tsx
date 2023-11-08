@@ -6,7 +6,9 @@ export default function TournamentModal() {
   const { modalName, tournamentInfo } = useRecoilValue(modalState);
 
   const content: { [key: string]: JSX.Element | null } = {
-    'TOURNAMENT-REGISTRY': <TournamentRegistryModal {...tournamentInfo} />,
+    'TOURNAMENT-REGISTRY': tournamentInfo ? (
+      <TournamentRegistryModal {...tournamentInfo} />
+    ) : null,
   };
 
   if (!modalName) return null;

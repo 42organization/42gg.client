@@ -93,9 +93,14 @@ export interface Manual {
 }
 
 export interface TournamentInfo {
-  tournamentName?: string;
-  tournamentDiscription?: string;
-  tournamentDate?: string;
+  title: string;
+  contents: string;
+  startDate: string;
+  status: string;
+  type: string;
+  winnerId: string;
+  winnerImage?: string | null;
+  endDate: string;
 }
 
 export interface PriceTag {

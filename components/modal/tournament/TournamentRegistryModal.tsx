@@ -16,9 +16,14 @@ const Quill = dynamic(() => import('react-quill'), {
 });
 
 export default function TournamentRegistryModal({
-  tournamentDate,
-  tournamentDiscription,
-  tournamentName,
+  title,
+  contents,
+  startDate,
+  status,
+  type,
+  winnerId,
+  winnerImage,
+  endDate,
 }: TournamentInfo) {
   const setModal = useSetRecoilState(modalState);
 
@@ -32,18 +37,31 @@ export default function TournamentRegistryModal({
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>{tournamentName}</div>
-      <div className={styles.title}>{tournamentDate}</div>
+      <div className={styles.title}>{title}</div>
+      <div className={styles.title}>{startDate}</div>
       <Quill
         className={styles.quillViewer}
         readOnly={true}
         formats={QUILL_FORMATS}
-        value={tournamentDiscription}
+        value={contents}
         theme='bubble'
       />
-      <ModalButtonContainer>
-        <ModalButton onClick={registTournament} value='등록' style='positive' />
-      </ModalButtonContainer>
+      <div>
+        <ModalButtonContainer>
+          <ModalButton
+            onClick={closeModalButtonHandler}
+            value='나가기'
+            style='positive'
+          />
+        </ModalButtonContainer>
+        <ModalButtonContainer>
+          <ModalButton
+            onClick={registTournament}
+            value='등록'
+            style='positive'
+          />
+        </ModalButtonContainer>
+      </div>
     </div>
   );
 }
