@@ -16,7 +16,7 @@
   flex-direction: column;
   padding: 1rem 1rem 0rem;
   overflow-y: scroll;
-  background: rgba(255, 255, 255, 0.2);
+  background: #d4b8f2;
   border-radius: $small-radius;
 }
 
@@ -29,7 +29,8 @@
   margin-bottom: 1rem;
   overflow-x: hidden;
   overflow-y: scroll;
-  background: #d4b8f2;
+  background: rgba(112, 0, 255, 0.17);
+  border: 2px solid #c67dff;
   border-radius: 0.3rem;
 }
 
@@ -42,7 +43,8 @@
   margin-bottom: 1rem;
   overflow-x: scroll;
   overflow-y: scroll;
-  background: #d4b8f2;
+  background: rgba(112, 0, 255, 0.17);
+  border: 2px solid #c67dff;
   border-radius: 0.3rem;
 }
 
@@ -50,4 +52,11 @@
   font-weight: 1000;
   color: black;
   text-align: center; /* 텍스트를 가로로 중앙에 정렬 */
+}
+
+.tournamentCard {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
