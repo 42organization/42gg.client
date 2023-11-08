@@ -1,0 +1,16 @@
+.tournamentCardContainer {
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: black;
+  border: 2px solid black;
+  border-radius: 0.3rem;
+
+  .text {
+    overflow: hidden;
+    color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

@@ -23,10 +23,11 @@
 .waitTournamentBox {
   display: flex;
   width: 100%;
-  flex: 1;
+  flex: 5;
   flex-direction: column;
-  padding: 0.2rem 0 0.2rem 0.2rem;
-  margin-bottom: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem 0;
   overflow-x: hidden;
   overflow-y: scroll;
   background: rgba(112, 0, 255, 0.17);
@@ -37,7 +38,7 @@
 .openTournamentBox {
   display: flex;
   width: 100%;
-  flex: 3;
+  flex: 15;
   flex-direction: column;
   padding: 0.2rem 0 0.2rem 0.2rem;
   margin-bottom: 1rem;
@@ -48,15 +49,19 @@
   border-radius: 0.3rem;
 }
 
-.tournamentText {
-  font-weight: 1000;
+.tournamentTextWait {
+  display: flex;
+  flex: 1;
+  font-weight: 700;
   color: black;
   text-align: center; /* 텍스트를 가로로 중앙에 정렬 */
 }
 
-.tournamentCard {
+.tournamentTextOpen {
   display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+  flex: 1;
+  padding-top: 1rem;
+  font-weight: 700;
+  color: black;
+  text-align: center; /* 텍스트를 가로로 중앙에 정렬 */
 }
