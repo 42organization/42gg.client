@@ -6,6 +6,7 @@ import AdminModal from 'components/modal/modalType/AdminModal';
 import NormalModal from 'components/modal/modalType/NormalModal';
 import StoreModal from 'components/modal/modalType/StoreModal';
 import styles from 'styles/modal/Modal.module.scss';
+import TournamentModal from './modalType/TournamentModal';
 
 export default function ModalProvider() {
   const [{ modalName }, setModal] = useRecoilState(modalState);
@@ -43,6 +44,8 @@ export default function ModalProvider() {
           <StoreModal />
         ) : modalType === 'ADMIN' ? (
           <AdminModal />
+        ) : modalType === 'TOURNAMENT' ? (
+          <TournamentModal />
         ) : null}
       </div>
     )
