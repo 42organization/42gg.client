@@ -41,9 +41,15 @@ export default function Tournament() {
     setModal({
       modalName: 'TOURNAMENT-REGISTRY',
       tournamentInfo: {
-        tournamentName: '제1회 루키토너먼트',
-        tournamentDiscription: '첫번재 루키 토너먼트 대회입니다 ! ',
-        tournamentDate: '2023:12:12:24:00',
+        tournametId: 5,
+        title: '5회 루키 토너먼트',
+        contents: '블라블라',
+        startDate: '2023-11-11',
+        status: '종료',
+        type: 'rookie',
+        winnerId: 'hannkim',
+        winnerImage: '',
+        endDate: '2023-11-11',
       },
     });
   };
@@ -54,11 +60,8 @@ export default function Tournament() {
         <div className={styles.tournamentTextWait}> 대기중인 토너먼트 </div>
         <div className={styles.waitTournamentBox}>
           {tempData.tournaments.map((tournament, index) => (
-            <TournamentCard key={index} tournamentName={tournament.title} />
+            <TournamentCard key={index} {...tournament} />
           ))}
-          <TournamentCard tournamentName='무엇인가 겁나 긴 이름의 토너먼트 무엇인가 겁나 긴 이름의 토너먼트 무엇인가 겁나 긴 이름의 토너먼트 무엇인가 겁나 긴 이름의 토너먼트' />
-          <TournamentCard tournamentName='무엇인가 겁나 긴 이름의 토너먼트 무엇인가 겁나 긴 이름의 토너먼트 무엇인가 겁나 긴 이름의 토너먼트 무엇인가 겁나 긴 이름의 토너먼트' />
-          <TournamentCard tournamentName='무엇인가 겁나 긴 이름의 토너먼트 무엇인가 겁나 긴 이름의 토너먼트 무엇인가 겁나 긴 이름의 토너먼트 무엇인가 겁나 긴 이름의 토너먼트' />
         </div>
         <div className={styles.tournamentTextOpen}> 진행중인 토너먼트 </div>
         <div className={styles.openTournamentBox}>
