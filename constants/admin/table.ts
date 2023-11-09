@@ -158,6 +158,7 @@ export const tableFormat: TableFormat = {
       'startTime',
       'endTime',
       'tournamentType',
+      'edit',
     ],
   },
   tournamentCreate: {
