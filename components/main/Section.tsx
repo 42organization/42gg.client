@@ -17,6 +17,7 @@ export default function Section({ sectionTitle, path }: SectionProps) {
   const pathCheck: pathType = {
     game: <GameResult />,
     rank: <RankListMain isMain={true} season={0} />,
+    tournament: <></>,
   };
 
   return (

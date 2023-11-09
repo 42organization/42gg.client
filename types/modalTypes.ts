@@ -27,7 +27,10 @@ type PurchaseModal = 'BUY' | 'GIFT' | 'NO_COIN';
 type UseItemModal = ItemType | 'GACHA';
 
 type EditItemModal = 'MEGAPHONE';
+
 type StoreModal = 'MANUAL' | 'COIN_HISTORY';
+
+type TournamentModal = 'REGISTRY';
 
 type AdminModal =
   | 'PROFILE'
@@ -59,7 +62,8 @@ type ModalName =
   | `USE-ITEM-${UseItemModal}`
   | `EDIT-ITEM-${EditItemModal}`
   | `STORE-${StoreModal}`
-  | `PURCHASE-${PurchaseModal}`;
+  | `PURCHASE-${PurchaseModal}`
+  | `TOURNAMENT-${TournamentModal}`;
 
 export interface Cancel {
   startTime: string;
@@ -86,6 +90,18 @@ export interface Coin {
 
 export interface Manual {
   radioMode: MatchMode;
+}
+
+export interface TournamentInfo {
+  tournametId: number;
+  title: string;
+  contents: string;
+  startDate: string;
+  status: string;
+  type: string;
+  winnerId: string;
+  winnerImage?: string | null;
+  endDate: string;
 }
 
 export interface PriceTag {
@@ -129,4 +145,5 @@ export interface Modal {
   isAttended?: boolean;
   totalCoin?: ICoin;
   randomItem?: IRandomItem;
+  tournamentInfo?: TournamentInfo;
 }
