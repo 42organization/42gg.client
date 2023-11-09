@@ -53,8 +53,10 @@ export default function RankListMain({ isMain, season }: RankListMainProps) {
   ));
 
   return (
-    <div className={`${styles.RankContainer}`}>
-      <div className={`${styles.bangContainer}`}>{bangElements}</div>
+    <>
+      {!isMain && (
+        <div className={`${styles.bangContainer}`}>{bangElements}</div>
+      )}
       <div className={`${styles.mainContainer} ${isMain && styles.isMain}`}>
         {rank !== undefined &&
           rank.map((item: userImages, index: number) => (
@@ -65,7 +67,7 @@ export default function RankListMain({ isMain, season }: RankListMainProps) {
             />
           ))}
       </div>
-    </div>
+    </>
   );
 }
 
