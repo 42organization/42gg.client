@@ -30,6 +30,7 @@ export default function AdminModal() {
     profile,
     item,
     coinPolicy,
+    ITournament,
   } = useRecoilValue(modalState);
 
   const content: { [key: string]: JSX.Element | null } = {
@@ -75,6 +76,9 @@ export default function AdminModal() {
     'ADMIN-ITEM_DELETE': item ? <AdminDeleteItemModal {...item} /> : null,
     'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
       <AdminEditCoinPolicyModal {...coinPolicy} />
+    ) : null,
+    'ADMIN-TOURNAMENT_BRAKET_EDIT': ITournament ? (
+      <AdminUserCoinModal intraId='JAEHYUKI' />
     ) : null,
   };
 

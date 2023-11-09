@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import {
   Paper,
   Table,
@@ -12,6 +13,7 @@ import {
   ITournament,
   ITournamentTable,
 } from 'types/admin/adminTournamentTypes';
+import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import {
   AdminEmptyItem,
@@ -44,6 +46,7 @@ const smapleTournamentList: ITournament[] = Array.from({ length: 10 }, () => ({
 }));
 
 export default function TournamentList() {
+  const setModal = useSetRecoilState(modalState);
   const [tournamentInfo, setTournamentInfo] = useState<ITournamentTable>({
     tournamentList: [],
     totalPage: 0,
@@ -106,10 +109,21 @@ export default function TournamentList() {
                     <TableCell>
                       <div>
                         <button
-                          className={styles.editBtn}
-                          // onClick={() => deleteHandler(seasonL.seasonId)}
+                        // className={styles.editBtn}
+                        // onClick={() => deleteHandler(seasonL.seasonId)}
                         >
                           삭제
+                        </button>
+                        <button
+                          className={styles.editBtn}
+                          onClick={() => {
+                            setModal({
+                              modalName: 'ADMIN-TOURNAMENT_BRAKET_EDIT',
+                              ITournament: tournament,
+                            });
+                          }}
+                        >
+                          수정
                         </button>
                       </div>
                     </TableCell>
