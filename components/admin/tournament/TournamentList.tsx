@@ -13,6 +13,7 @@ import {
   ITournament,
   ITournamentTable,
 } from 'types/admin/adminTournamentTypes';
+import { TournamentInfo } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import {
@@ -44,6 +45,18 @@ const smapleTournamentList: ITournament[] = Array.from({ length: 10 }, () => ({
   endTime: new Date(),
   tournamentType: 'CUSTOM',
 }));
+
+const sampleTournamentInfo: TournamentInfo = {
+  tournametId: 1,
+  title: '샘플 토너먼트 이름',
+  contents: '샘플 토너먼트 내용',
+  startDate: '13:00',
+  status: '종료',
+  type: 'CUSTOM',
+  winnerId: '1',
+  winnerImage: 'https://avatars.githubusercontent.com/u/93255519?v=4',
+  endDate: '15:00',
+};
 
 export default function TournamentList() {
   const setModal = useSetRecoilState(modalState);
@@ -119,7 +132,7 @@ export default function TournamentList() {
                           onClick={() => {
                             setModal({
                               modalName: 'ADMIN-TOURNAMENT_BRAKET_EDIT',
-                              ITournament: tournament,
+                              tournamentInfo: sampleTournamentInfo,
                             });
                           }}
                         >

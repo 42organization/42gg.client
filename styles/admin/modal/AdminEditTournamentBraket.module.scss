@@ -1,0 +1,10 @@
+@import 'styles/common.scss';
+
+.whole {
+  display: flex;
+  width: 510px;
+  height: 569px;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 9px;
+}
