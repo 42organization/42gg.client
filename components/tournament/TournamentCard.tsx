@@ -1,19 +1,18 @@
-import { totalmem } from 'os';
 import { useSetRecoilState } from 'recoil';
-import { TournamentInfo , Modal } from 'types/modalTypes';
+import { Modal } from 'types/modalTypes';
+import { TournamentInfo } from 'types/tournamentTypes';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/tournament/TournamentCard.module.scss';
 
 export default function TournamentCard({
-  tournametId,
+  tournamentId,
   title,
   contents,
-  startDate,
   status,
   type,
-  winnerId,
-  winnerImage,
-  endDate,
+  winnerUser,
+  startTime,
+  endTime,
 }: TournamentInfo) {
   const setModal = useSetRecoilState<Modal>(modalState);
 
@@ -21,15 +20,13 @@ export default function TournamentCard({
     setModal({
       modalName: 'TOURNAMENT-REGISTRY',
       tournamentInfo: {
-        tournametId: tournametId,
+        tournamentId: tournamentId,
         title: title,
         contents: contents,
-        startDate: startDate,
+        startTime: startTime,
         status: status,
         type: type,
-        winnerId: winnerId,
-        winnerImage: winnerImage,
-        endDate: endDate,
+        endTime: endTime,
       },
     });
   };

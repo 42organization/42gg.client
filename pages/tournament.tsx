@@ -1,91 +1,83 @@
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { TournamentInfo } from 'types/modalTypes';
+import { TournamentInfo } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import TournamentCard from 'components/tournament/TournamentCard';
 import styles from 'styles/tournament/TournamentContainer.module.scss';
 
+//나중에 삭제 필요
+interface TempData {
+  tournaments: TournamentInfo[];
+  totalPage: number;
+}
+
 // 내부의 토너먼트 보여주는 부분만 Component화 하면될까? 다른곳에서도 쓰일까?
 // 진행중인 토너먼트의 Bracket을 보여주는 부분도 다른곳에서도 쓸수있지않나?
-const tempData = {
+const tempData: TempData = {
   tournaments: [
     {
-      tournametId: 5,
+      tournamentId: 5,
       title: '5회 루키 토너먼트',
       contents: '블라블라',
-      startDate: '2023-11-11',
+      startTime: new Date(),
       status: '종료',
-      type: 'rookie',
-      winnerId: 'hannkim',
-      winnerImage: '',
-      endDate: '2023-11-11',
+      type: 'ROOKIE',
+      endTime: new Date(),
     },
     {
-      tournametId: 6,
+      tournamentId: 6,
       title: '7회 마스터 토너먼트',
       contents: '블라블라 하이하이',
-      startDate: '2023-11-12',
+      startTime: new Date(),
       status: '진행중',
-      type: 'master',
-      winnerId: 'hannkim',
-      winnerImage: '',
-      endDate: '2023-11-12',
+      type: 'MASTER',
+      endTime: new Date(),
     },
     {
-      tournametId: 6,
+      tournamentId: 6,
       title: '8회 마스터 토너먼트',
       contents: '블라블라 하이하이',
-      startDate: '2023-11-12',
+      startTime: new Date(),
       status: '진행중',
-      type: 'master',
-      winnerId: 'hannkim',
-      winnerImage: '',
-      endDate: '2023-11-12',
+      type: 'MASTER',
+      endTime: new Date(),
     },
     {
-      tournametId: 6,
+      tournamentId: 6,
       title: '9회 마스터 토너먼트',
       contents: '블라블라 하이하이',
-      startDate: '2023-11-12',
+      startTime: new Date(),
       status: '진행중',
-      type: 'master',
-      winnerId: 'hannkim',
-      winnerImage: '',
-      endDate: '2023-11-12',
+      type: 'MASTER',
+      endTime: new Date(),
     },
     {
-      tournametId: 6,
+      tournamentId: 6,
       title: '10회 마스터 토너먼트',
       contents: '블라블라 하이하이',
-      startDate: '2023-11-12',
+      startTime: new Date(),
       status: '진행중',
-      type: 'master',
-      winnerId: 'hannkim',
-      winnerImage: '',
-      endDate: '2023-11-12',
+      type: 'MASTER',
+      endTime: new Date(),
     },
     {
-      tournametId: 6,
+      tournamentId: 6,
       title: '11회 마스터 토너먼트',
       contents: '블라블라 하이하이',
-      startDate: '2023-11-12',
+      startTime: new Date(),
       status: '진행중',
-      type: 'master',
-      winnerId: 'hannkim',
-      winnerImage: '',
-      endDate: '2023-11-12',
+      type: 'MASTER',
+      endTime: new Date(),
     },
     {
-      tournametId: 6,
+      tournamentId: 6,
       title: '12회 마스터 토너먼트',
       contents: '블라블라 하이하이',
-      startDate: '2023-11-12',
+      startTime: new Date(),
       status: '진행중',
-      type: 'master',
-      winnerId: 'hannkim',
-      winnerImage: '',
-      endDate: '2023-11-12',
+      type: 'MASTER',
+      endTime: new Date(),
     },
   ],
   totalPage: 100,
