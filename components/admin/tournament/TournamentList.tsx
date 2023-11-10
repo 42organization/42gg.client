@@ -36,11 +36,12 @@ const tableTitle: { [key: string]: string } = {
 };
 
 const smapleTournamentList: ITournament[] = Array.from({ length: 10 }, () => ({
-  tournamentName: '샘플토너먼트제목',
+  title: '샘플토너먼트제목',
   content: '샘플내용',
   startTime: new Date(),
   endTime: new Date(),
   tournamentType: 'CUSTOM',
+  count: 7,
 }));
 
 export default function TournamentList() {
