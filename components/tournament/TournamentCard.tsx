@@ -1,16 +1,15 @@
-import { TournamentInfo } from 'types/modalTypes';
+import { TournamentInfo } from 'types/tournamentTypes';
 import styles from 'styles/tournament/TournamentCard.module.scss';
 
 export default function TournamentCard({
-  tournametId,
+  tournamentId,
   title,
   contents,
-  startDate,
   status,
   type,
-  winnerId,
-  winnerImage,
-  endDate,
+  winnerUser,
+  startTime,
+  endTime,
 }: TournamentInfo) {
   return (
     <div className={styles.tournamentCardContainer}>
