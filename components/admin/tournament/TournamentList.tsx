@@ -31,7 +31,8 @@ const Quill = dynamic(() => import('react-quill'), {
 });
 
 const tableTitle: { [key: string]: string } = {
-  tournamentName: '토너먼트 이름',
+  title: '토너먼트 이름',
+  content: '토너먼트 내용',
   startTime: '시작 시간',
   endTime: '종료 시간',
   tournamentType: '토너먼트 타입',
@@ -39,7 +40,7 @@ const tableTitle: { [key: string]: string } = {
 };
 
 const smapleTournamentList: ITournament[] = Array.from({ length: 10 }, () => ({
-  tournamentName: '샘플토너먼트제목',
+  title: '샘플토너먼트제목',
   content: '샘플내용',
   startTime: new Date(),
   endTime: new Date(),
@@ -121,12 +122,6 @@ export default function TournamentList() {
                     )}
                     <TableCell>
                       <div>
-                        <button
-                        // className={styles.editBtn}
-                        // onClick={() => deleteHandler(seasonL.seasonId)}
-                        >
-                          삭제
-                        </button>
                         <button
                           className={styles.editBtn}
                           onClick={() => {

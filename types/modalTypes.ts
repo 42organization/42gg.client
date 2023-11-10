@@ -95,7 +95,7 @@ export interface Manual {
 }
 
 export interface TournamentInfo {
-  tournametId: number;
+  tournamentId: number;
   title: string;
   contents: string;
   startDate: string;

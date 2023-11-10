@@ -1,5 +1,5 @@
 export interface ITournament {
-  tournamentName: string;
+  title: string;
   content: string;
   startTime: Date;
   endTime: Date;

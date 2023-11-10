@@ -153,7 +153,7 @@ export const tableFormat: TableFormat = {
   tournament: {
     name: '토너먼트',
     columns: [
-      'tournamentName',
+      'title',
       'content',
       'startTime',
       'endTime',
