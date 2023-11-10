@@ -45,6 +45,7 @@ const smapleTournamentList: ITournament[] = Array.from({ length: 10 }, () => ({
   startTime: new Date(),
   endTime: new Date(),
   tournamentType: 'CUSTOM',
+  count: 7,
 }));
 
 const sampleTournamentInfo: TournamentInfo = {

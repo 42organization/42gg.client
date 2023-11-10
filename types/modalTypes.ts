@@ -11,7 +11,7 @@ import { MatchMode } from 'types/mainType';
 import { ISeason } from 'types/seasonTypes';
 import { StoreManualMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
-import { ITournament } from './admin/adminTournamentTypes';
+import { TournamentInfo } from './tournamentTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -92,18 +92,6 @@ export interface Coin {
 
 export interface Manual {
   radioMode: MatchMode;
-}
-
-export interface TournamentInfo {
-  tournamentId: number;
-  title: string;
-  contents: string;
-  startDate: string;
-  status: string;
-  type: string;
-  winnerId: string;
-  winnerImage?: string | null;
-  endDate: string;
 }
 
 export interface PriceTag {
