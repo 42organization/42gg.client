@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import { useSetRecoilState } from 'recoil';
-import { TournamentInfo } from 'types/modalTypes';
 import { QUILL_FORMATS } from 'types/quillTypes';
+import { TournamentInfo } from 'types/tournamentTypes';
 import { modalState } from 'utils/recoil/modal';
 import {
   ModalButtonContainer,
@@ -18,12 +18,10 @@ const Quill = dynamic(() => import('react-quill'), {
 export default function TournamentRegistryModal({
   title,
   contents,
-  startDate,
+  startTime,
   status,
   type,
-  winnerId,
-  winnerImage,
-  endDate,
+  endTime,
 }: TournamentInfo) {
   const setModal = useSetRecoilState(modalState);
 
@@ -38,7 +36,7 @@ export default function TournamentRegistryModal({
   return (
     <div className={styles.container}>
       <div className={styles.title}>{title}</div>
-      <div className={styles.title}>{startDate}</div>
+      <div className={styles.title}>{startTime.toString()}</div>
       <Quill
         className={styles.quillViewer}
         readOnly={true}
