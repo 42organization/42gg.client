@@ -1,9 +1,12 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import { EffectCoverflow } from 'swiper/modules';
+import { Swiper, SwiperSlide, SwiperClass } from 'swiper/react';
 import styles from 'styles/tournament-record/WinnerSwipeView.module.scss';
-// import WinnerImageContainer from './WinnerImageContainer';
 
-const images: string[] = [
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+
+const dummyImages: string[] = [
   'https://42gg-public-image.s3.ap-northeast-2.amazonaws.com/images/jincpark.jpeg',
   'https://42gg-public-image.s3.ap-northeast-2.amazonaws.com/images/hyuim.jpeg',
   'https://42gg-public-image.s3.ap-northeast-2.amazonaws.com/images/jincpark.jpeg',
@@ -18,81 +21,39 @@ const images: string[] = [
 ];
 
 export default function WinnerSwipeView() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  function handleSwipe(direction: string) {
-    if (direction === 'left' && currentImageIndex > 0) {
-      setCurrentImageIndex(() => {
-        return currentImageIndex - 1;
-      });
-    } else if (direction === 'right' && currentImageIndex < images.length - 1) {
-      setCurrentImageIndex(() => {
-        return currentImageIndex + 1;
-      });
-    }
-  }
-
-  let touchStartX: number;
-
-  function handleTouchStart(event: React.TouchEvent) {
-    touchStartX = event.touches[0].clientX;
-  }
-
-  function handleTouchEnd(event: React.TouchEvent) {
-    const touchEndX = event.changedTouches[0].clientX;
-
-    if (touchStartX - touchEndX > 50 && currentImageIndex > 0) {
-      handleSwipe('left');
-    } else if (touchEndX - touchStartX > 50) {
-      handleSwipe('right');
-    }
-  }
-
-  function getImagePositionClass(index: number) {
-    if (index === currentImageIndex + 2) {
-      return `${styles.thirdLayer} ${styles.thirdLeft}`;
-    }
-    if (index === currentImageIndex + 1) {
-      return `${styles.secondLayer} ${styles.secondLeft}`;
-    }
-    if (index === currentImageIndex) {
-      return `${styles.firstLayer}`;
-    }
-    if (index === currentImageIndex - 1) {
-      return `${styles.secondLayer} ${styles.secondRight}`;
-    }
-    if (index === currentImageIndex - 2) {
-      return `${styles.thirdLayer} ${styles.thirdRight}`;
-    }
-    return null;
+  function indexChangeHandler(swiper: SwiperClass) {
+    console.log(swiper);
   }
 
   return (
-    <div
-      className={styles.swipeViewContainer}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
+    <Swiper
+      className={styles.swiper}
+      slidesPerView={5}
+      effect={'coverflow'}
+      centeredSlides={true}
+      coverflowEffect={{
+        rotate: 15,
+        stretch: 0,
+        depth: 300,
+        slideShadows: true,
+      }}
+      modules={[EffectCoverflow]}
+      onActiveIndexChange={indexChangeHandler}
     >
-      {images.map((src, index) => {
-        if (index < currentImageIndex - 2 || index > currentImageIndex + 2) {
-          return;
-        }
+      {dummyImages.map((src, index) => {
         return (
-          <div
-            key={src + index}
-            className={`${styles.winnerImageContainer} ${getImagePositionClass(
-              index
-            )}`}
-          >
-            <Image
-              src={src}
-              fill={true}
-              style={{ objectFit: 'cover' }}
-              alt='sample image'
-            />
-          </div>
+          <SwiperSlide key={src + index}>
+            <div className={styles.swiperSlide}>
+              <Image
+                src={src}
+                fill={true}
+                style={{ objectFit: 'cover' }}
+                alt='sample image'
+              />
+            </div>
+          </SwiperSlide>
         );
       })}
-    </div>
+    </Swiper>
   );
 }
