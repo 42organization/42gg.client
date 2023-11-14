@@ -2,7 +2,7 @@ import LoadingButton from 'components/modal/LoadingButton';
 import styles from 'styles/modal/Modal.module.scss';
 
 type ButtonProps = {
-  style: 'positive' | 'negative';
+  style: 'positive' | 'negative' | 'close';
   value: string;
   form?: string;
   isLoading?: boolean;

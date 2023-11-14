@@ -36,11 +36,13 @@ export default function TournamentRegistryModal({
   return (
     <div className={styles.container}>
       <div className={styles.closeButtonContainer}>
-        <ModalButton
-          onClick={closeModalButtonHandler}
-          value='X'
-          style='negative'
-        />
+        <ModalButtonContainer>
+          <ModalButton
+            onClick={closeModalButtonHandler}
+            value='X'
+            style='close'
+          />
+        </ModalButtonContainer>
       </div>
       <div className={styles.title}>{title}</div>
       <div className={styles.startTime}>{startTime.toString()}</div>
