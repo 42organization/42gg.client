@@ -7,7 +7,7 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
-import styles from 'styles/modal/event/AnnouncementModal.module.scss';
+import styles from 'styles/modal/event/TournamentRegistryModal.module.scss';
 import 'react-quill/dist/quill.bubble.css';
 
 const Quill = dynamic(() => import('react-quill'), {
@@ -35,8 +35,15 @@ export default function TournamentRegistryModal({
 
   return (
     <div className={styles.container}>
+      <div className={styles.closeButtonContainer}>
+        <ModalButton
+          onClick={closeModalButtonHandler}
+          value='X'
+          style='negative'
+        />
+      </div>
       <div className={styles.title}>{title}</div>
-      <div className={styles.title}>{startTime.toString()}</div>
+      <div className={styles.startTime}>{startTime.toString()}</div>
       <Quill
         className={styles.quillViewer}
         readOnly={true}
@@ -45,13 +52,6 @@ export default function TournamentRegistryModal({
         theme='bubble'
       />
       <div>
-        <ModalButtonContainer>
-          <ModalButton
-            onClick={closeModalButtonHandler}
-            value='나가기'
-            style='positive'
-          />
-        </ModalButtonContainer>
         <ModalButtonContainer>
           <ModalButton
             onClick={registTournament}
