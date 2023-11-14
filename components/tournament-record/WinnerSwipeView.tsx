@@ -48,68 +48,51 @@ export default function WinnerSwipeView() {
     }
   }
 
+  function getImagePositionClass(index: number) {
+    if (index === currentImageIndex + 2) {
+      return `${styles.thirdLayer} ${styles.thirdLeft}`;
+    }
+    if (index === currentImageIndex + 1) {
+      return `${styles.secondLayer} ${styles.secondLeft}`;
+    }
+    if (index === currentImageIndex) {
+      return `${styles.firstLayer}`;
+    }
+    if (index === currentImageIndex - 1) {
+      return `${styles.secondLayer} ${styles.secondRight}`;
+    }
+    if (index === currentImageIndex - 2) {
+      return `${styles.thirdLayer} ${styles.thirdRight}`;
+    }
+    return null;
+  }
+
   return (
     <div
       className={styles.swipeViewContainer}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {currentImageIndex + 2 < images.length && (
-        <div
-          className={`${styles.winnerImageContainer} ${styles.thirdLayer} ${styles.thirdLeft}`}
-        >
-          <Image
-            src={images[currentImageIndex + 2]}
-            fill={true}
-            style={{ objectFit: 'cover' }}
-            alt='sample image'
-          />
-        </div>
-      )}
-      {currentImageIndex + 1 < images.length && (
-        <div
-          className={`${styles.winnerImageContainer} ${styles.secondLayer} ${styles.secondLeft}`}
-        >
-          <Image
-            src={images[currentImageIndex + 1]}
-            fill={true}
-            style={{ objectFit: 'cover' }}
-            alt='sample image'
-          />
-        </div>
-      )}
-      <div className={`${styles.winnerImageContainer} ${styles.firstLayer}`}>
-        <Image
-          src={images[currentImageIndex]}
-          fill={true}
-          style={{ objectFit: 'cover' }}
-          alt='sample image'
-        />
-      </div>
-      {currentImageIndex - 1 >= 0 && (
-        <div
-          className={`${styles.winnerImageContainer} ${styles.secondLayer} ${styles.secondRight}`}
-        >
-          <Image
-            src={images[currentImageIndex - 1]}
-            fill={true}
-            style={{ objectFit: 'cover' }}
-            alt='sample image'
-          />
-        </div>
-      )}
-      {currentImageIndex - 2 >= 0 && (
-        <div
-          className={`${styles.winnerImageContainer} ${styles.thirdLayer} ${styles.thirdRight}`}
-        >
-          <Image
-            src={images[currentImageIndex - 2]}
-            fill={true}
-            style={{ objectFit: 'cover' }}
-            alt='sample image'
-          />
-        </div>
-      )}
+      {images.map((src, index) => {
+        if (index < currentImageIndex - 2 || index > currentImageIndex + 2) {
+          return;
+        }
+        return (
+          <div
+            key={src + index}
+            className={`${styles.winnerImageContainer} ${getImagePositionClass(
+              index
+            )}`}
+          >
+            <Image
+              src={src}
+              fill={true}
+              style={{ objectFit: 'cover' }}
+              alt='sample image'
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }
