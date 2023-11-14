@@ -61,3 +61,13 @@
   display: flex;
   margin-left: auto;
 }
+
+.tournamentInfo {
+  justify-content: center;
+  align-items: center;
+
+  .startTime,
+  .participants {
+    margin-right: 1rem;
+  }
+}

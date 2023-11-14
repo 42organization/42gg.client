@@ -24,6 +24,7 @@ export default function TournamentRegistryModal({
   endTime,
 }: TournamentInfo) {
   const setModal = useSetRecoilState(modalState);
+  const Date = startTime.toString().split(':').slice(0, 2).join(':');
 
   const registTournament = () => {
     console.log('토너먼트에 등록하시겠습니까.');
@@ -45,7 +46,10 @@ export default function TournamentRegistryModal({
         </ModalButtonContainer>
       </div>
       <div className={styles.title}>{title}</div>
-      <div className={styles.startTime}>{startTime.toString()}</div>
+      <div className={styles.tournamentInfo}>
+        <div className={styles.startTime}>{Date}</div>
+        <div className={styles.participants}>현재인원 / 최대인원</div>
+      </div>
       <Quill
         className={styles.quillViewer}
         readOnly={true}
