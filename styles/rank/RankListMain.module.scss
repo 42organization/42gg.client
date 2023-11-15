@@ -1,5 +1,9 @@
 @import 'styles/common.scss';
 
+.RankContainer {
+  z-index: 0;
+}
+
 .mainContainer {
   position: relative;
   top: 1.5rem;
@@ -11,7 +15,6 @@
   align-items: end;
   &.isMain {
     height: 15.5rem;
-    margin-top: 7.5rem;
   }
 }
 
@@ -82,8 +85,9 @@
 
 .bangContainer {
   display: flex;
-  justify-content: space-around;
   margin-top: -7.5rem;
+  pointer-events: none;
+  justify-content: space-around;
 }
 
 .bang {
