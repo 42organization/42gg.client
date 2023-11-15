@@ -141,7 +141,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   // page와 size에 맞게 slice
   filteredTournaments = filteredTournaments.slice(
     (parseInt(page) - 1) * SIZE,
-    SIZE
+    SIZE * parseInt(page)
   );
 
   res.status(200).json({
