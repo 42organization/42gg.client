@@ -7,7 +7,7 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
-import styles from 'styles/modal/event/AnnouncementModal.module.scss';
+import styles from 'styles/modal/event/TournamentRegistryModal.module.scss';
 import 'react-quill/dist/quill.bubble.css';
 
 const Quill = dynamic(() => import('react-quill'), {
@@ -24,6 +24,7 @@ export default function TournamentRegistryModal({
   endTime,
 }: TournamentInfo) {
   const setModal = useSetRecoilState(modalState);
+  const Date = startTime.toString().split(':').slice(0, 2).join(':');
 
   const registTournament = () => {
     console.log('토너먼트에 등록하시겠습니까.');
@@ -35,8 +36,20 @@ export default function TournamentRegistryModal({
 
   return (
     <div className={styles.container}>
+      <div className={styles.closeButtonContainer}>
+        <ModalButtonContainer>
+          <ModalButton
+            onClick={closeModalButtonHandler}
+            value='X'
+            style='close'
+          />
+        </ModalButtonContainer>
+      </div>
       <div className={styles.title}>{title}</div>
-      <div className={styles.title}>{startTime.toString()}</div>
+      <div className={styles.tournamentInfo}>
+        <div className={styles.startTime}>{Date}</div>
+        <div className={styles.participants}>현재인원 / 최대인원</div>
+      </div>
       <Quill
         className={styles.quillViewer}
         readOnly={true}
@@ -45,13 +58,6 @@ export default function TournamentRegistryModal({
         theme='bubble'
       />
       <div>
-        <ModalButtonContainer>
-          <ModalButton
-            onClick={closeModalButtonHandler}
-            value='나가기'
-            style='positive'
-          />
-        </ModalButtonContainer>
         <ModalButtonContainer>
           <ModalButton
             onClick={registTournament}
