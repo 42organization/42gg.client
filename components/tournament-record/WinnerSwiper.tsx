@@ -5,16 +5,15 @@ import { Swiper, SwiperSlide, SwiperClass } from 'swiper/react';
 import { TournamentData } from 'types/tournamentTypes';
 import { InfiniteScroll } from 'utils/infinityScroll';
 import { mockInstance } from 'utils/mockAxios';
-import styles from 'styles/tournament-record/WinnerSwipeView.module.scss';
-
+import styles from 'styles/tournament-record/WinnerSwiper.module.scss';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 
-interface WinnerSwipeViewProps {
+interface WinnerSwiperProps {
   type: 'rookie' | 'master' | 'custom';
 }
 
-export default function WinnerSwipeView(props: WinnerSwipeViewProps) {
+export default function WinnerSwiper(props: WinnerSwiperProps) {
   const fetchTournamentData = useCallback(
     async (page: number) => {
       console.log('Fetching more data...');
@@ -26,6 +25,7 @@ export default function WinnerSwipeView(props: WinnerSwipeViewProps) {
     [props.type]
   );
 
+  // TODO: error, isLoading 시 return 컴포넌트
   const { data, error, isLoading, hasNextPage, fetchNextPage } =
     InfiniteScroll<TournamentData>(
       'tournamentData',
