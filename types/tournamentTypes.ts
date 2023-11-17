@@ -5,10 +5,11 @@ export interface TournamentInfo {
   title: string;
   contents: string;
   status: string; // 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY' | 'DONE' | 'SCORE_DONE'
-  type: 'CUSTOM' | 'MASTER' | 'ROOKIE';
-  winnerUser?: IUser;
+  type: 'custom' | 'master' | 'rookie';
+  winner?: IUser;
   startTime: Date;
   endTime: Date;
+  player_cnt: number;
 }
 
 export interface TournamentData {
