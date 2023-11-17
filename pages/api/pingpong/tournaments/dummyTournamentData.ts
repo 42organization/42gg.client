@@ -1,34 +1,24 @@
-import { IUser } from 'types/admin/adminUserTypes';
 import { TournamentInfo } from 'types/tournamentTypes';
 
-const jincpark: IUser = {
-  id: 1,
+const jincpark = {
   intraId: 'jincpark',
-  userImageUri:
+  imageUrl:
     'https://42gg-public-image.s3.ap-northeast-2.amazonaws.com/images/jincpark.jpeg',
-  statusMessage: 'I am fine, thank you. And you?',
-  roleType: 'USER',
 };
 
-const jaehyuki: IUser = {
-  id: 2,
+const jaehyuki = {
   intraId: 'jaehyuki',
-  userImageUri:
+  imageUrl:
     'https://42gg-public-image.s3.ap-northeast-2.amazonaws.com/images/jaehyuki-7f6689c3-bf24-4e87-a04b-de9d61f1bef8.jpeg',
-  statusMessage: 'I am fine, thank you. And you?',
-  roleType: 'USER',
 };
 
-const junhjeon: IUser = {
-  id: 3,
+const junhjeon = {
   intraId: 'junhjeon',
-  userImageUri:
+  imageUrl:
     'https://42gg-public-image.s3.ap-northeast-2.amazonaws.com/images/junhjeon.jpeg',
-  statusMessage: 'I am fine, thank you. And you?',
-  roleType: 'USER',
 };
 
-const users: IUser[] = [jincpark, jaehyuki, junhjeon];
+const users = [jincpark, jaehyuki, junhjeon];
 
 const dummyTournaments: TournamentInfo[] = [];
 
@@ -50,7 +40,8 @@ for (let i = 28; i >= 1; i--) {
     endTime: new Date(),
     status: status,
     type: 'rookie',
-    winner: users[i % 3],
+    winnerIntraId: users[i % 3].intraId,
+    winnerImageUrl: users[i % 3].imageUrl,
     player_cnt: 8,
   };
 
@@ -62,7 +53,8 @@ for (let i = 28; i >= 1; i--) {
     endTime: new Date(),
     status: status,
     type: 'master',
-    winner: users[i % 3],
+    winnerIntraId: users[i % 3].intraId,
+    winnerImageUrl: users[i % 3].imageUrl,
     player_cnt: 8,
   };
 
