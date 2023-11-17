@@ -70,9 +70,12 @@ export function InfiniteScroll<T extends PagenatedResponse>(
     queryKey,
     ({ pageParam = 1 }) => fetchFunction(pageParam),
     {
-      getNextPageParam: (lastPage, allPages) => {
-        const nextPage = allPages.length + 1;
-        return nextPage > lastPage.totalPage ? undefined : nextPage;
+      getNextPageParam: (lastPage, currPages) => {
+        const nextPage = currPages.length + 1;
+        if (nextPage <= lastPage.totalPage) {
+          return nextPage;
+        }
+        return undefined;
       },
       onError: (e: unknown) => {
         if (axios.isAxiosError(e)) {
