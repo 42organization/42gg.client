@@ -10,6 +10,7 @@ interface IMegaphoneContent {
   megaphoneId?: number;
   content: string;
   intraId: string;
+  onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 type MegaphoneList = Array<IMegaphoneContent>;
@@ -25,9 +26,13 @@ type MegaphoneList = Array<IMegaphoneContent>;
 //   intraId: '관리자',
 // };
 
-export const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
+export const MegaphoneItem = ({
+  content,
+  intraId,
+  onClick,
+}: IMegaphoneContent) => {
   return (
-    <div className={styles.contentWrapper}>
+    <div className={styles.contentWrapper} onClick={onClick}>
       <div className={styles.intraId}>{intraId}</div>
       <div className={styles.content}>{content}</div>
     </div>
@@ -40,6 +45,7 @@ const TournamentMegaphone = () => {
   const [megaphoneData, setMegaphoneData] = useState<MegaphoneList>([]);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const virtuoso = useRef<VirtuosoHandle>(null);
+  const router = useRouter();
 
   const getTournamentListHandler = useAxiosGet<any>({
     url: `http://localhost:3000/api/pingpong/tournaments?page=1&status=예정&size=5`,
@@ -50,6 +56,9 @@ const TournamentMegaphone = () => {
     type: 'setError',
   });
 
+  const goTournamentPage = (event: React.MouseEvent<HTMLDivElement>) => {
+    router.push('tournament');
+  };
   // const getMegaphoneHandler = useAxiosGet<any>({
   //   url: `/pingpong/megaphones`,
   //   setState: setContents,
@@ -74,6 +83,7 @@ const TournamentMegaphone = () => {
             megaphoneId: item.tournamentId,
             content: item.title,
             intraId: item.startTime.toString().split(':').slice(0, 2).join(':'),
+            onClick: goTournamentPage,
           })
         ),
       ]);
@@ -105,6 +115,7 @@ const TournamentMegaphone = () => {
               <MegaphoneItem
                 content={megaphoneData[index].content}
                 intraId={megaphoneData[index].intraId}
+                onClick={goTournamentPage}
               />
             )}
             style={{ height: '100%' }}
