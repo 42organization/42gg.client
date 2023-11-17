@@ -10,3 +10,8 @@ export interface TournamentInfo {
   startTime: Date;
   endTime: Date;
 }
+
+export interface TournamentData {
+  tournaments: TournamentInfo[];
+  totalPage: number;
+}

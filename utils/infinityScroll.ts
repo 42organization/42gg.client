@@ -53,3 +53,37 @@ export function InfinityScroll(
     }
   );
 }
+
+interface PagenatedResponse {
+  totalPage: number;
+}
+
+// 무한스크롤 제네릭 함수
+// Todo: 이 함수로 프로젝트 내 무한스크롤 모두 대체
+export function InfiniteScroll<T extends PagenatedResponse>(
+  queryKey: string | string[],
+  fetchFunction: (page: number) => Promise<T>,
+  errorCode: string
+) {
+  const setError = useSetRecoilState(errorState);
+  return useInfiniteQuery<T, Error>(
+    queryKey,
+    ({ pageParam = 1 }) => fetchFunction(pageParam),
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        const nextPage = allPages.length + 1;
+        return nextPage > lastPage.totalPage ? undefined : nextPage;
+      },
+      onError: (e: unknown) => {
+        if (axios.isAxiosError(e)) {
+          setError(errorCode);
+        } else {
+          // axios에서 발생한 에러가 아닌 경우
+          setError('JY03');
+        }
+      },
+      retry: 0,
+      keepPreviousData: true,
+    }
+  );
+}

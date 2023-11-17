@@ -118,6 +118,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   if (!page) {
     res.status(404).end('You must put page!!');
+    return;
   }
 
   let filteredTournaments = dummyTournaments;
@@ -130,18 +131,24 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     });
   }
 
-  let SIZE = 20;
+  let sizeInt = 20;
   if (size) {
-    SIZE = parseInt(size);
+    sizeInt = parseInt(size);
   }
 
   // 소수점이 있을 경우 올림
-  const totalPage = Math.ceil(filteredTournaments.length / SIZE);
+  const totalPage = Math.ceil(filteredTournaments.length / sizeInt);
+
+  if (parseInt(page) > totalPage) {
+    res.status(404).end('Page number exceeded');
+    return;
+  }
 
   // page와 size에 맞게 slice
+  const startIndex = (parseInt(page) - 1) * sizeInt;
   filteredTournaments = filteredTournaments.slice(
-    (parseInt(page) - 1) * SIZE,
-    SIZE * parseInt(page)
+    startIndex,
+    startIndex + sizeInt
   );
 
   res.status(200).json({
