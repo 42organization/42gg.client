@@ -18,7 +18,7 @@ export default function WinnerSwiper(props: WinnerSwiperProps) {
     async (page: number) => {
       console.log('Fetching more data...');
       const res = await mockInstance.get(
-        `/tournaments?page=${page}&type=${props.type}&size=5`
+        `/tournament?page=${page}&type=${props.type}&size=5`
       );
       return res.data;
     },
@@ -75,6 +75,7 @@ export default function WinnerSwiper(props: WinnerSwiperProps) {
                     fill={true}
                     style={{ objectFit: 'cover' }}
                     alt={tournament.winnerIntraId}
+                    priority={true}
                   />
                 </div>
               </SwiperSlide>
