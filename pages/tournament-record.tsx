@@ -10,7 +10,7 @@ export default function TournamentRecord() {
         <button>Master</button>
         <button>Custom</button>
       </div>
-      <WinnerSwipeView />
+      <WinnerSwipeView type='rookie' />
       <div className={styles.winnerInfoContainer}>
         <p className={styles.userId}>cadet2147</p>
         <p className={styles.gameInfo}>
