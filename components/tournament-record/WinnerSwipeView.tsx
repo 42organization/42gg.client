@@ -72,12 +72,12 @@ export default function WinnerSwipeView(props: WinnerSwipeViewProps) {
                 <div className={styles.swiperSlide}>
                   <Image
                     src={
-                      tournament.winner.userImageUri ||
+                      tournament.winner?.userImageUri ||
                       'public/image/fallBackSrc.jpeg'
                     }
                     fill={true}
                     style={{ objectFit: 'cover' }}
-                    alt={tournament.winner.intraId}
+                    alt={tournament.winner?.intraId || 'sample image'}
                   />
                 </div>
               </SwiperSlide>
