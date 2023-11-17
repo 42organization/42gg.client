@@ -54,7 +54,7 @@ export default function Tournament() {
               )}
               {/* 실제로는 tournamnetId 를 key값으로 사용하는게 좋음, 현재는 mockdata에서 id 값들이 겹치기 때문에 Index로 사용
               {page.tournaments.map((tournament: TournamentInfo, tournamentIndex: number) => (
-                <TournamentCard key={tournament.tournamentId} {...tournament} />
+                < key={tournament.tournamentId} {...tournament} />
               ))} 
             */}
             </div>
