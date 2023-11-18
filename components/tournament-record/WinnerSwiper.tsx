@@ -10,7 +10,7 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 
 interface WinnerSwiperProps {
-  type: 'rookie' | 'master' | 'custom';
+  type: 'ROOKIE' | 'MASTER' | 'CUSTOM';
 }
 
 export default function WinnerSwiper(props: WinnerSwiperProps) {
