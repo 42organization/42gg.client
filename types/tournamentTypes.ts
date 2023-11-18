@@ -3,7 +3,7 @@ export interface TournamentInfo {
   title: string;
   contents: string;
   status: string; // 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY' | 'DONE' | 'SCORE_DONE'
-  type: 'custom' | 'master' | 'rookie';
+  type: 'CUSTOM' | 'MASTER' | 'ROOKIE';
   winnerIntraId: string;
   winnerImageUrl: string;
   startTime: Date;
