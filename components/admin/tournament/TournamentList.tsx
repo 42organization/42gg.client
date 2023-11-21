@@ -13,7 +13,7 @@ import {
   ITournament,
   ITournamentTable,
 } from 'types/admin/adminTournamentTypes';
-import { TournamentInfo } from 'types/modalTypes';
+import { TournamentInfo } from 'types/tournamentTypes';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import {
@@ -49,15 +49,19 @@ const smapleTournamentList: ITournament[] = Array.from({ length: 10 }, () => ({
 }));
 
 const sampleTournamentInfo: TournamentInfo = {
-  tournametId: 1,
+  tournamentId: 1,
   title: '샘플 토너먼트 이름',
   contents: '샘플 토너먼트 내용',
-  startDate: '13:00',
+  startTime: new Date(),
   status: '종료',
   type: 'CUSTOM',
-  winnerId: '1',
-  winnerImage: 'https://avatars.githubusercontent.com/u/93255519?v=4',
-  endDate: '15:00',
+  winnerUser: {
+    id: 1,
+    intraId: 'username',
+    statusMessage: 'statusMessage',
+    roleType: 'USER',
+  },
+  endTime: new Date(),
 };
 
 export default function TournamentList() {
