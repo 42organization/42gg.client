@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React, { useMemo, useCallback } from 'react';
 import { EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide, SwiperClass } from 'swiper/react';
@@ -8,9 +7,11 @@ import { mockInstance } from 'utils/mockAxios';
 import styles from 'styles/tournament-record/WinnerSwiper.module.scss';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
+import WinnerProfileImage from './WinnerProfileImage';
 
 interface WinnerSwiperProps {
   type: 'ROOKIE' | 'MASTER' | 'CUSTOM';
+  size: number;
 }
 
 export default function WinnerSwiper(props: WinnerSwiperProps) {
@@ -18,11 +19,11 @@ export default function WinnerSwiper(props: WinnerSwiperProps) {
     async (page: number) => {
       console.log('Fetching more data...');
       const res = await mockInstance.get(
-        `/tournament?page=${page}&type=${props.type}&size=5`
+        `/tournament?page=${page}&type=${props.type}&size=${props.size}`
       );
       return res.data;
     },
-    [props.type]
+    [props.type, props.size]
   );
 
   // TODO: error, isLoading 시 return 컴포넌트
@@ -35,7 +36,7 @@ export default function WinnerSwiper(props: WinnerSwiperProps) {
 
   const coverflowEffect = useMemo(
     () => ({
-      rotate: 30,
+      rotate: 35,
       stretch: 0,
       depth: 500,
       slideShadows: true,
@@ -46,7 +47,6 @@ export default function WinnerSwiper(props: WinnerSwiperProps) {
   const indexChangeHandler = useCallback(
     (swiper: SwiperClass) => {
       const slidesLength = swiper.slides.length;
-      console.log('slide length: ' + slidesLength);
       if (hasNextPage && swiper.activeIndex >= slidesLength - 3) {
         fetchNextPage();
       }
@@ -67,17 +67,12 @@ export default function WinnerSwiper(props: WinnerSwiperProps) {
       {data?.pages.map((page, pageIndex) => (
         <React.Fragment key={pageIndex}>
           {page.tournaments.length > 0 &&
-            page.tournaments.map((tournament) => (
+            page.tournaments.map((tournament, index) => (
               <SwiperSlide key={tournament.tournamentId}>
-                <div className={styles.swiperSlide}>
-                  <Image
-                    src={tournament.winnerImageUrl}
-                    fill={true}
-                    style={{ objectFit: 'cover' }}
-                    alt={tournament.winnerIntraId}
-                    priority={true}
-                  />
-                </div>
+                <WinnerProfileImage
+                  tournament={tournament}
+                  slideIndex={index + pageIndex * props.size}
+                />
               </SwiperSlide>
             ))}
         </React.Fragment>
