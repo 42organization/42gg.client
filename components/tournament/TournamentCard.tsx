@@ -10,9 +10,11 @@ export default function TournamentCard({
   contents,
   status,
   type,
-  winnerUser,
   startTime,
   endTime,
+  winnerIntraId,
+  winnerImageUrl,
+  player_cnt,
 }: TournamentInfo) {
   const setModal = useSetRecoilState<Modal>(modalState);
 
@@ -27,6 +29,9 @@ export default function TournamentCard({
         status: status,
         type: type,
         endTime: endTime,
+        winnerIntraId: winnerIntraId,
+        winnerImageUrl: winnerImageUrl,
+        player_cnt: player_cnt,
       },
     });
   };
