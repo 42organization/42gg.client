@@ -83,14 +83,7 @@ const dummyExpectedMasterTournament = {
 
 const dummyTournaments = [
   dummyExpectedRookieTournament,
-  dummyExpectedRookieTournament,
-  dummyExpectedRookieTournament,
-  dummyExpectedRookieTournament,
-  dummyExpectedRookieTournament,
-  dummyExpectedRookieTournament,
-  dummyExpectedRookieTournament,
-  dummyExpectedRookieTournament,
-  dummyExpectedRookieTournament,
+  dummyExpectedMasterTournament,
 
   dummyRunningRookieTournament,
 
