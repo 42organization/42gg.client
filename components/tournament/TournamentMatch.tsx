@@ -1,9 +1,9 @@
-import Image from 'next/image';
 import {
   MatchComponentProps,
   Participant,
 } from '@g-loot/react-tournament-brackets/dist/src/types';
 import PlayerImage from 'components/PlayerImage';
+import styles from 'styles/tournament/TournamentMatch.module.scss';
 
 interface TournamentMatchPartyProps {
   party: Participant;
@@ -20,13 +20,8 @@ function TournamentMatchParty({
 }: TournamentMatchPartyProps) {
   return (
     <div
+      className={styles.tournamentPartyWrapper}
       onMouseEnter={() => onMouseEnter(party.id)}
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        height: '50%',
-      }}
     >
       <PlayerImage
         src={party.picture ?? '/image/match_qustion.png'}
@@ -34,8 +29,8 @@ function TournamentMatchParty({
         size={1}
       />
 
-      <div>{party.name || teamNameFallback}</div>
-      <div style={{ marginLeft: 'auto' }}>
+      <div className={styles.partyName}>{party.name || teamNameFallback}</div>
+      <div className={styles.score}>
         {party.resultText ?? resultFallback(party)}
         {/* <input value={topParty.resultText ?? resultFallback(topParty)} /> */}
       </div>
@@ -63,23 +58,13 @@ export default function TournamentMatch({
   resultFallback,
 }: MatchComponentProps) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-around',
-        color: '#000',
-        width: '100%',
-        height: '100%',
-      }}
-    >
+    <div className={styles.tournamentMatchContainer}>
       <TournamentMatchParty
         party={topParty}
         teamNameFallback={teamNameFallback}
         onMouseEnter={onMouseEnter}
         resultFallback={resultFallback}
       ></TournamentMatchParty>
-      <div style={{ height: '1px', width: '100%', background: '#FF8C00' }} />
       <TournamentMatchParty
         party={bottomParty}
         teamNameFallback={teamNameFallback}

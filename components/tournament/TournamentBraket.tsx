@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-import { createTheme } from '@g-loot/react-tournament-brackets';
 import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
 import React from 'react';
 import TournamentMatch from 'components/tournament/TournamentMatch';
@@ -38,19 +37,18 @@ export default function TournamentBraket({
   const finalHeight = 500; //Math.max(height - 100, 500);
 
   return (
-    // <>
-    //   <h1></h1>
-    // </>
     <SingleEliminationBracket
       matches={singleEliminationBracketMatchs}
       matchComponent={TournamentMatch}
       options={{
         style: {
+          width: 230,
+          boxHeight: 120,
           roundHeader: {
-            backgroundColor: '#AAA',
+            isShown: false,
             fontColor: '#FFFFFF',
           },
-          connectorColor: '#000000',
+          connectorColor: '#FFFFFF',
           connectorColorHighlight: '#da96c6',
         },
       }}
