@@ -1,4 +1,8 @@
 import dynamic from 'next/dynamic';
+import {
+  SVGViewer as StaticSVGViewer,
+  SingleEliminationBracket as StaticSingleEliminationBracket,
+} from '@g-loot/react-tournament-brackets';
 import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
 import React from 'react';
 import TournamentMatch from 'components/tournament/TournamentMatch';
@@ -7,7 +11,9 @@ if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
   import('@g-loot/react-tournament-brackets');
 }
 
-const SingleEliminationBracket = dynamic(
+const SingleEliminationBracket = dynamic<
+  React.ComponentProps<typeof StaticSingleEliminationBracket>
+>(
   () => {
     return import('@g-loot/react-tournament-brackets').then(
       (mod) => mod.SingleEliminationBracket
@@ -16,7 +22,7 @@ const SingleEliminationBracket = dynamic(
   { ssr: false }
 );
 
-const SVGViewer = dynamic(
+const SVGViewer = dynamic<React.ComponentProps<typeof StaticSVGViewer>>(
   () => {
     return import('@g-loot/react-tournament-brackets').then(
       (mod) => mod.SVGViewer
