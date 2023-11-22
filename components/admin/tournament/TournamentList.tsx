@@ -48,22 +48,6 @@ const smapleTournamentList: ITournament[] = Array.from({ length: 10 }, () => ({
   count: 7,
 }));
 
-const sampleTournamentInfo: TournamentInfo = {
-  tournamentId: 1,
-  title: '샘플 토너먼트 이름',
-  contents: '샘플 토너먼트 내용',
-  startTime: new Date(),
-  status: '종료',
-  type: 'CUSTOM',
-  winnerUser: {
-    id: 1,
-    intraId: 'username',
-    statusMessage: 'statusMessage',
-    roleType: 'USER',
-  },
-  endTime: new Date(),
-};
-
 export default function TournamentList() {
   const setModal = useSetRecoilState(modalState);
   const [tournamentInfo, setTournamentInfo] = useState<ITournamentTable>({
@@ -125,7 +109,6 @@ export default function TournamentList() {
                                   onClick={() => {
                                     setModal({
                                       modalName: 'ADMIN-TOURNAMENT_BRAKET_EDIT',
-                                      tournamentInfo: sampleTournamentInfo,
                                     });
                                   }}
                                 >
