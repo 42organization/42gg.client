@@ -6,8 +6,8 @@ export interface TournamentInfo {
   type: 'CUSTOM' | 'MASTER' | 'ROOKIE';
   winnerIntraId: string;
   winnerImageUrl: string;
-  startTime: Date;
-  endTime: Date;
+  startTime: string;
+  endTime: string;
   player_cnt: number;
 }
 
