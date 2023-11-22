@@ -78,9 +78,7 @@ export default function AdminModal() {
     'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
       <AdminEditCoinPolicyModal {...coinPolicy} />
     ) : null,
-    'ADMIN-TOURNAMENT_BRAKET_EDIT': tournamentInfo ? (
-      <AdminEditTournamentBraket />
-    ) : null,
+    'ADMIN-TOURNAMENT_BRAKET_EDIT': <AdminEditTournamentBraket />,
   };
 
   if (!modalName) return null;
