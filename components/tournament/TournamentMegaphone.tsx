@@ -2,7 +2,8 @@ import { useRouter } from 'next/router';
 import { useState, useEffect, useRef } from 'react';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import { TournamentInfo } from 'types/tournamentTypes';
-import useAxiosGet from 'hooks/useAxiosGet';
+import { instance } from 'utils/axios';
+import { mockInstance } from 'utils/mockAxios';
 import useInterval from 'hooks/useInterval';
 import styles from 'styles/Layout/MegaPhone.module.scss';
 
@@ -14,17 +15,6 @@ interface IMegaphoneContent {
 }
 
 type MegaphoneList = Array<IMegaphoneContent>;
-
-// type MegaphoneContainerProps = {
-//   children: React.ReactNode;
-//   count: number;
-// };
-
-// const adminContent: IMegaphoneContent = {
-//   megaphoneId: 0,
-//   content: '상점에서 아이템을 구매해서 확성기를 등록해보세요!(30자 제한)',
-//   intraId: '관리자',
-// };
 
 export const MegaphoneItem = ({
   content,
@@ -47,28 +37,18 @@ const TournamentMegaphone = () => {
   const virtuoso = useRef<VirtuosoHandle>(null);
   const router = useRouter();
 
-  const getTournamentListHandler = useAxiosGet<any>({
-    url: `http://localhost:3000/api/pingpong/tournaments?page=1&status=예정&size=5`,
-    setState: (data) => {
-      setTournamentList(data.tournaments);
-    },
-    err: 'JJH',
-    type: 'setError',
-  });
+  function getTournamentListHandler() {
+    return mockInstance
+      .get(`tournament?page=1&status=예정&size=5`)
+      .then((res) => {
+        console.log(res.data);
+        setTournamentList(res.data.tournaments);
+      });
+  }
 
   const goTournamentPage = (event: React.MouseEvent<HTMLDivElement>) => {
     router.push('tournament');
   };
-  // const getMegaphoneHandler = useAxiosGet<any>({
-  //   url: `/pingpong/megaphones`,
-  //   setState: setContents,
-  //   err: 'HJ01',
-  //   type: 'setError',
-  // });
-
-  // useEffect(() => {
-  //   getMegaphoneHandler();
-  // }, [presentPath]);
 
   useEffect(() => {
     if (contents.length === 0) getTournamentListHandler();

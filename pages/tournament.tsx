@@ -114,14 +114,14 @@ export default function Tournament() {
   //     'openTorunamentInfo',
   //     () =>
   //       mockInstance
-  //         .get('tournaments?page=1&status=진행중')
+  //         .get('tournament?page=1&status=진행중')
   //         .then((res) => res.data),
   //     { retry: 1, staleTime: 60000 /* 60초 */ }
   // );
 
   function fetchWaitTournamentData(page: number) {
     return mockInstance
-      .get(`tournaments?page=${page}&type=rookie&status=예정&size=4`)
+      .get(`tournament?page=${page}&type=ROOKIE&status=예정&size=4`)
       .then((res) => {
         return res.data;
       });
@@ -132,10 +132,6 @@ export default function Tournament() {
     fetchWaitTournamentData,
     'JJH'
   );
-
-  // useEffect(() => {
-  //   console.log(data?.pages);
-  // }, [data]);
 
   return (
     <div className={styles.pageWrap}>
