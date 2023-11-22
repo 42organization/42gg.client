@@ -121,7 +121,7 @@ export default function Tournament() {
 
   function fetchWaitTournamentData(page: number) {
     return mockInstance
-      .get(`tournament?page=${page}&type=ROOKIE&status=예정&size=4`)
+      .get(`tournament?page=${page}&status=예정&size=4`)
       .then((res) => {
         return res.data;
       });
