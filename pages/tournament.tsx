@@ -130,7 +130,7 @@ export default function Tournament() {
   const { data, error, isLoading, hasNextPage, fetchNextPage } = InfiniteScroll(
     'waitTournament',
     fetchWaitTournamentData,
-    'JY04'
+    'JJH'
   );
 
   // useEffect(() => {
