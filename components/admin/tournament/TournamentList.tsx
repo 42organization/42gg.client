@@ -114,32 +114,33 @@ export default function TournamentList() {
                             key={index}
                           >
                             {columnName === 'startTime' ||
-                            columnName === 'endTime'
-                              ? tournament[
-                                  columnName as keyof ITournament
-                                ]?.toLocaleString()
-                              : tournament[
-                                  columnName as keyof ITournament
-                                ]?.toString()}
+                            columnName === 'endTime' ? (
+                              tournament[
+                                columnName as keyof ITournament
+                              ]?.toLocaleString()
+                            ) : columnName === 'edit' ? (
+                              <div>
+                                <button
+                                  className={styles.editBtn}
+                                  onClick={() => {
+                                    setModal({
+                                      modalName: 'ADMIN-TOURNAMENT_BRAKET_EDIT',
+                                      tournamentInfo: sampleTournamentInfo,
+                                    });
+                                  }}
+                                >
+                                  수정
+                                </button>
+                              </div>
+                            ) : (
+                              tournament[
+                                columnName as keyof ITournament
+                              ]?.toString()
+                            )}
                           </TableCell>
                         );
                       }
                     )}
-                    <TableCell>
-                      <div>
-                        <button
-                          className={styles.editBtn}
-                          onClick={() => {
-                            setModal({
-                              modalName: 'ADMIN-TOURNAMENT_BRAKET_EDIT',
-                              tournamentInfo: sampleTournamentInfo,
-                            });
-                          }}
-                        >
-                          수정
-                        </button>
-                      </div>
-                    </TableCell>
                   </TableRow>
                 )
               )
