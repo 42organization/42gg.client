@@ -119,8 +119,8 @@ export default function Tournament() {
   //     { retry: 1, staleTime: 60000 /* 60초 */ }
   // );
 
-  function fetchWaitTournamentData(page: number) {
-    return mockInstance
+  async function fetchWaitTournamentData(page: number) {
+    return await mockInstance
       .get(`tournament?page=${page}&status=예정&size=4`)
       .then((res) => {
         return res.data;
