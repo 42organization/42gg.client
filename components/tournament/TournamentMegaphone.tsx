@@ -41,7 +41,6 @@ const TournamentMegaphone = () => {
     return mockInstance
       .get(`tournament?page=1&status=예정&size=5`)
       .then((res) => {
-        console.log(res.data);
         setTournamentList(res.data.tournaments);
       });
   }
