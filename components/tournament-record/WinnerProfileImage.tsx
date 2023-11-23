@@ -28,9 +28,14 @@ export default function WinnerProfileImage({
     };
   }, [swiper, slideIndex]);
 
-  function applyStyleAndSetTournamentInfo() {
+  useEffect(() => {
     if (indexDiff === 0) {
       setTournamentInfo(tournament);
+    }
+  }, [indexDiff, tournament, setTournamentInfo]);
+
+  function applyStyle() {
+    if (indexDiff === 0) {
       return styles.firstLayer;
     }
     return styles.secondLayer;
@@ -39,7 +44,7 @@ export default function WinnerProfileImage({
   return (
     <div
       className={`${styles.winnerProfileImage} ${
-        indexDiff > -2 && indexDiff < 2 && applyStyleAndSetTournamentInfo()
+        indexDiff > -2 && indexDiff < 2 && applyStyle()
       }`}
     >
       <Image
