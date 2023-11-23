@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, SetStateAction } from 'react';
 import { useSwiper } from 'swiper/react';
 import { TournamentInfo } from 'types/tournamentTypes';
 import styles from 'styles/tournament-record/WinnerProfileImage.module.scss';
@@ -7,11 +7,13 @@ import styles from 'styles/tournament-record/WinnerProfileImage.module.scss';
 interface WinnerProfileImageProps {
   tournament: TournamentInfo;
   slideIndex: number;
+  setTournamentInfo: React.Dispatch<SetStateAction<TournamentInfo | undefined>>;
 }
 
 export default function WinnerProfileImage({
   tournament,
   slideIndex,
+  setTournamentInfo,
 }: WinnerProfileImageProps) {
   const swiper = useSwiper();
   const [indexDiff, setIndexDiff] = useState(swiper.activeIndex - slideIndex);
@@ -26,8 +28,9 @@ export default function WinnerProfileImage({
     };
   }, [swiper, slideIndex]);
 
-  function getSlideStyle() {
+  function applyStyleAndSetTournamentInfo() {
     if (indexDiff === 0) {
+      setTournamentInfo(tournament);
       return styles.firstLayer;
     }
     return styles.secondLayer;
@@ -36,7 +39,7 @@ export default function WinnerProfileImage({
   return (
     <div
       className={`${styles.winnerProfileImage} ${
-        indexDiff > -2 && indexDiff < 2 && getSlideStyle()
+        indexDiff > -2 && indexDiff < 2 && applyStyleAndSetTournamentInfo()
       }`}
     >
       <Image

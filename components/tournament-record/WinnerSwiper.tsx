@@ -1,7 +1,7 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, SetStateAction } from 'react';
 import { EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide, SwiperClass } from 'swiper/react';
-import { TournamentData } from 'types/tournamentTypes';
+import { TournamentData, TournamentInfo } from 'types/tournamentTypes';
 import { InfiniteScroll } from 'utils/infinityScroll';
 import { mockInstance } from 'utils/mockAxios';
 import styles from 'styles/tournament-record/WinnerSwiper.module.scss';
@@ -12,6 +12,7 @@ import WinnerProfileImage from './WinnerProfileImage';
 interface WinnerSwiperProps {
   type: 'ROOKIE' | 'MASTER' | 'CUSTOM';
   size: number;
+  setTournamentInfo: React.Dispatch<SetStateAction<TournamentInfo | undefined>>;
 }
 
 export default function WinnerSwiper(props: WinnerSwiperProps) {
@@ -72,6 +73,7 @@ export default function WinnerSwiper(props: WinnerSwiperProps) {
                 <WinnerProfileImage
                   tournament={tournament}
                   slideIndex={index + pageIndex * props.size}
+                  setTournamentInfo={props.setTournamentInfo}
                 />
               </SwiperSlide>
             ))}
