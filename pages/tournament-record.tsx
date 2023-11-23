@@ -1,3 +1,4 @@
+import WinnerSwiper from 'components/tournament-record/WinnerSwiper';
 import styles from 'styles/tournament-record/TournamentRecord.module.scss';
 
 export default function TournamentRecord() {
@@ -9,7 +10,7 @@ export default function TournamentRecord() {
         <button>Master</button>
         <button>Custom</button>
       </div>
-      <div className={styles.winnerImageContainer}>우승자 이미지들</div>
+      <WinnerSwiper type='ROOKIE' size={5} />
       <div className={styles.winnerInfoContainer}>
         <p className={styles.userId}>cadet2147</p>
         <p className={styles.gameInfo}>

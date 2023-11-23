@@ -24,6 +24,9 @@ const tempData: TempData = {
       status: '종료',
       type: 'ROOKIE',
       endTime: new Date(),
+      winnerIntraId: 'jincpark',
+      winnerImageUrl: '',
+      player_cnt: 8,
     },
     {
       tournamentId: 6,
@@ -33,6 +36,9 @@ const tempData: TempData = {
       status: '진행중',
       type: 'MASTER',
       endTime: new Date(),
+      winnerIntraId: 'jincpark',
+      winnerImageUrl: '',
+      player_cnt: 8,
     },
     {
       tournamentId: 6,
@@ -42,6 +48,9 @@ const tempData: TempData = {
       status: '진행중',
       type: 'MASTER',
       endTime: new Date(),
+      winnerIntraId: 'jincpark',
+      winnerImageUrl: '',
+      player_cnt: 8,
     },
     {
       tournamentId: 6,
@@ -51,6 +60,9 @@ const tempData: TempData = {
       status: '진행중',
       type: 'MASTER',
       endTime: new Date(),
+      winnerIntraId: 'jincpark',
+      winnerImageUrl: '',
+      player_cnt: 8,
     },
     {
       tournamentId: 6,
@@ -60,6 +72,9 @@ const tempData: TempData = {
       status: '진행중',
       type: 'MASTER',
       endTime: new Date(),
+      winnerIntraId: 'jincpark',
+      winnerImageUrl: '',
+      player_cnt: 8,
     },
     {
       tournamentId: 6,
@@ -69,6 +84,9 @@ const tempData: TempData = {
       status: '진행중',
       type: 'MASTER',
       endTime: new Date(),
+      winnerIntraId: 'jincpark',
+      winnerImageUrl: '',
+      player_cnt: 8,
     },
     {
       tournamentId: 6,
@@ -78,6 +96,9 @@ const tempData: TempData = {
       status: '진행중',
       type: 'MASTER',
       endTime: new Date(),
+      winnerIntraId: 'jincpark',
+      winnerImageUrl: '',
+      player_cnt: 8,
     },
   ],
   totalPage: 100,
@@ -86,27 +107,27 @@ const tempData: TempData = {
 export default function Tournament() {
   const setError = useSetRecoilState(errorState);
 
-  const openTorunamentInfo = useQuery<TournamentInfo>(
-    'openTorunamentInfo',
-    () =>
-      instance
-        .get('pingpong/tournaments?page=*&type=*&status=진행중')
-        .then((res) => res.data),
-    { retry: 1, staleTime: 60000 /* 60초 */ }
-  );
+  // const openTorunamentInfo = useQuery<TournamentInfo>(
+  //   'openTorunamentInfo',
+  //   () =>
+  //     instance
+  //       .get('pingpong/tournaments?page=*&type=*&status=진행중')
+  //       .then((res) => res.data),
+  //   { retry: 1, staleTime: 60000 /* 60초 */ }
+  // );
 
-  const waitTournamentInfo = useQuery<TournamentInfo>(
-    'waitTournamentInfo',
-    () =>
-      instance
-        .get('pingpong/tournaments?page=*&type=*&status=예정')
-        .then((res) => res.data),
-    { retry: 1, staleTime: 60000 /* 60초 */ }
-  );
+  // const waitTournamentInfo = useQuery<TournamentInfo>(
+  //   'waitTournamentInfo',
+  //   () =>
+  //     instance
+  //       .get('pingpong/tournaments?page=*&type=*&status=예정')
+  //       .then((res) => res.data),
+  //   { retry: 1, staleTime: 60000 /* 60초 */ }
+  // );
 
-  if (openTorunamentInfo.isError || waitTournamentInfo.isError) {
-    setError('junhjeon');
-  }
+  // if (openTorunamentInfo.isError || waitTournamentInfo.isError) {
+  //   setError('junhjeon');
+  // }
 
   return (
     <div className={styles.pageWrap}>
