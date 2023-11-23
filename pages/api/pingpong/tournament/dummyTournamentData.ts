@@ -55,7 +55,7 @@ for (let i = 28; i >= 1; i--) {
     type: 'MASTER',
     winnerIntraId: users[i % 3].intraId,
     winnerImageUrl: users[i % 3].imageUrl,
-    player_cnt: 8,
+    player_cnt: 7,
   };
 
   dummyTournaments.push(masterTournament, rookieTournament);
