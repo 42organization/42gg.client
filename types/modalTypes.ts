@@ -48,7 +48,8 @@ type AdminModal =
   | 'ITEM_EDIT'
   | 'ITEM_DELETE'
   | 'COINPOLICY_EDIT'
-  | 'CHECK_SEND_NOTI';
+  | 'CHECK_SEND_NOTI'
+  | 'TOURNAMENT_BRAKET_EDIT';
 
 type ModalName =
   | null

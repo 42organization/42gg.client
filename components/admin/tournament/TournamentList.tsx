@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import {
   Paper,
   Table,
@@ -12,6 +13,8 @@ import {
   ITournament,
   ITournamentTable,
 } from 'types/admin/adminTournamentTypes';
+import { TournamentInfo } from 'types/tournamentTypes';
+import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import {
   AdminEmptyItem,
@@ -28,7 +31,8 @@ const Quill = dynamic(() => import('react-quill'), {
 });
 
 const tableTitle: { [key: string]: string } = {
-  tournamentName: '토너먼트 이름',
+  title: '토너먼트 이름',
+  content: '토너먼트 내용',
   startTime: '시작 시간',
   endTime: '종료 시간',
   tournamentType: '토너먼트 타입',
@@ -45,6 +49,7 @@ const smapleTournamentList: ITournament[] = Array.from({ length: 10 }, () => ({
 }));
 
 export default function TournamentList() {
+  const setModal = useSetRecoilState(modalState);
   const [tournamentInfo, setTournamentInfo] = useState<ITournamentTable>({
     tournamentList: [],
     totalPage: 0,
@@ -93,27 +98,32 @@ export default function TournamentList() {
                             key={index}
                           >
                             {columnName === 'startTime' ||
-                            columnName === 'endTime'
-                              ? tournament[
-                                  columnName as keyof ITournament
-                                ]?.toLocaleString()
-                              : tournament[
-                                  columnName as keyof ITournament
-                                ]?.toString()}
+                            columnName === 'endTime' ? (
+                              tournament[
+                                columnName as keyof ITournament
+                              ]?.toLocaleString()
+                            ) : columnName === 'edit' ? (
+                              <div>
+                                <button
+                                  className={styles.editBtn}
+                                  onClick={() => {
+                                    setModal({
+                                      modalName: 'ADMIN-TOURNAMENT_BRAKET_EDIT',
+                                    });
+                                  }}
+                                >
+                                  수정
+                                </button>
+                              </div>
+                            ) : (
+                              tournament[
+                                columnName as keyof ITournament
+                              ]?.toString()
+                            )}
                           </TableCell>
                         );
                       }
                     )}
-                    <TableCell>
-                      <div>
-                        <button
-                          className={styles.editBtn}
-                          // onClick={() => deleteHandler(seasonL.seasonId)}
-                        >
-                          삭제
-                        </button>
-                      </div>
-                    </TableCell>
                   </TableRow>
                 )
               )
