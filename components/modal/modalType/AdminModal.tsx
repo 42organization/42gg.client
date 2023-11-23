@@ -15,6 +15,7 @@ import AdminUserCoinModal from 'components/modal/admin/AdminUserCoinModal';
 import DeletePenaltyModal from 'components/modal/admin/DeletePenaltyModal';
 import DetailModal from 'components/modal/admin/DetailModal';
 import AdminSeasonEdit from 'components/modal/admin/SeasonEdit';
+import AdminEditTournamentBraket from '../admin/AdminEditTournamentBraket';
 
 export default function AdminModal() {
   const {
@@ -30,6 +31,7 @@ export default function AdminModal() {
     profile,
     item,
     coinPolicy,
+    tournamentInfo,
   } = useRecoilValue(modalState);
 
   const content: { [key: string]: JSX.Element | null } = {
@@ -76,6 +78,7 @@ export default function AdminModal() {
     'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
       <AdminEditCoinPolicyModal {...coinPolicy} />
     ) : null,
+    'ADMIN-TOURNAMENT_BRAKET_EDIT': <AdminEditTournamentBraket />,
   };
 
   if (!modalName) return null;

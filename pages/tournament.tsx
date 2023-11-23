@@ -1,8 +1,11 @@
-import { useQuery } from 'react-query';
+import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { TournamentInfo } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
+import { InfiniteScroll } from 'utils/infinityScroll';
+import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
+import { InfiniteScrollComponent } from 'components/store/InfiniteScrollComponent';
 import TournamentCard from 'components/tournament/TournamentCard';
 import styles from 'styles/tournament/TournamentContainer.module.scss';
 
@@ -107,27 +110,28 @@ const tempData: TempData = {
 export default function Tournament() {
   const setError = useSetRecoilState(errorState);
 
-  // const openTorunamentInfo = useQuery<TournamentInfo>(
-  //   'openTorunamentInfo',
-  //   () =>
-  //     instance
-  //       .get('pingpong/tournaments?page=*&type=*&status=진행중')
-  //       .then((res) => res.data),
-  //   { retry: 1, staleTime: 60000 /* 60초 */ }
+  // const Info = useQuery<TournamentInfo>(
+  //     'openTorunamentInfo',
+  //     () =>
+  //       mockInstance
+  //         .get('tournament?page=1&status=진행중')
+  //         .then((res) => res.data),
+  //     { retry: 1, staleTime: 60000 /* 60초 */ }
   // );
 
-  // const waitTournamentInfo = useQuery<TournamentInfo>(
-  //   'waitTournamentInfo',
-  //   () =>
-  //     instance
-  //       .get('pingpong/tournaments?page=*&type=*&status=예정')
-  //       .then((res) => res.data),
-  //   { retry: 1, staleTime: 60000 /* 60초 */ }
-  // );
+  async function fetchWaitTournamentData(page: number) {
+    return await mockInstance
+      .get(`tournament?page=${page}&status=예정&size=4`)
+      .then((res) => {
+        return res.data;
+      });
+  }
 
-  // if (openTorunamentInfo.isError || waitTournamentInfo.isError) {
-  //   setError('junhjeon');
-  // }
+  const { data, error, isLoading, hasNextPage, fetchNextPage } = InfiniteScroll(
+    'waitTournament',
+    fetchWaitTournamentData,
+    'JJH'
+  );
 
   return (
     <div className={styles.pageWrap}>
@@ -135,9 +139,24 @@ export default function Tournament() {
       <div className={styles.tournamentContainer}>
         <div className={styles.tournamentTextWait}> 대기중인 토너먼트 </div>
         <div className={styles.waitTournamentBox}>
-          {tempData.tournaments.map((tournament, index) => (
-            <TournamentCard key={index} {...tournament} />
+          {data?.pages.map((page, pageIndex) => (
+            <div key={pageIndex}>
+              {page.tournaments.map(
+                (tournament: TournamentInfo, tournamentIndex: number) => (
+                  <TournamentCard key={tournamentIndex} {...tournament} />
+                )
+              )}
+              {/* 실제로는 tournamnetId 를 key값으로 사용하는게 좋음, 현재는 mockdata에서 id 값들이 겹치기 때문에 Index로 사용
+              {page.tournaments.map((tournament: TournamentInfo, tournamentIndex: number) => (
+                < key={tournament.tournamentId} {...tournament} />
+              ))} 
+            */}
+            </div>
           ))}
+          <InfiniteScrollComponent
+            fetchNextPage={fetchNextPage}
+            hasNextPage={hasNextPage}
+          />
         </div>
         <div className={styles.tournamentTextOpen}> 진행중인 토너먼트 </div>
         <div className={styles.openTournamentBox}>
