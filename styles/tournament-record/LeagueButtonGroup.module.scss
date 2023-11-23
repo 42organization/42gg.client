@@ -6,6 +6,8 @@
   justify-content: space-between;
 
   button {
+    width: 5rem;
+    height: 2rem;
     font-size: 1rem;
     font-weight: 400;
     color: #cbcbcb;
@@ -13,8 +15,7 @@
     border-color: transparent;
 
     &.active {
-      padding: 0 1rem;
-      font-weight: 900;
+      font-weight: 700;
       color: #ffffff;
       border: 2px solid #9e00ff;
       border-radius: 0.6rem;
