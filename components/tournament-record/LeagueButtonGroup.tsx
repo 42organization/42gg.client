@@ -1,4 +1,4 @@
-import React, { SetStateAction } from 'react';
+import React, { SetStateAction, useState } from 'react';
 import styles from 'styles/tournament-record/LeagueButtonGroup.module.scss';
 
 interface LeagueButtonGroupProps {
@@ -8,27 +8,33 @@ interface LeagueButtonGroupProps {
 export default function LeagueButtonGroup({
   onSelect,
 }: LeagueButtonGroupProps) {
-  const handleRookieButtonClick: React.MouseEventHandler<
-    HTMLButtonElement
-  > = () => {
-    onSelect('ROOKIE');
-  };
-  const handleMasterButtonClick: React.MouseEventHandler<
-    HTMLButtonElement
-  > = () => {
-    onSelect('MASTER');
-  };
-  const handleCustomButtonClick: React.MouseEventHandler<
-    HTMLButtonElement
-  > = () => {
-    onSelect('CUSTOM');
+  const [activeButton, setActiveButton] = useState('ROOKIE');
+
+  const handleClick = (league: string) => {
+    onSelect(league);
+    setActiveButton(league);
   };
 
   return (
     <div className={styles.leagueButtonWrapper}>
-      <button onClick={handleRookieButtonClick}>Rookie</button>
-      <button onClick={handleMasterButtonClick}>Master</button>
-      <button onClick={handleCustomButtonClick}>Custom</button>
+      <button
+        onClick={() => handleClick('ROOKIE')}
+        className={activeButton === 'ROOKIE' ? styles.active : ''}
+      >
+        Rookie
+      </button>
+      <button
+        onClick={() => handleClick('MASTER')}
+        className={activeButton === 'MASTER' ? styles.active : ''}
+      >
+        Master
+      </button>
+      <button
+        onClick={() => handleClick('CUSTOM')}
+        className={activeButton === 'CUSTOM' ? styles.active : ''}
+      >
+        Custom
+      </button>
     </div>
   );
 }
