@@ -1,8 +1,10 @@
 import dynamic from 'next/dynamic';
+import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { MdPeopleAlt } from 'react-icons/md';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { TournamentInfo } from 'types/tournamentTypes';
+import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import {
   ModalButtonContainer,
@@ -10,6 +12,7 @@ import {
 } from 'components/modal/ModalButton';
 import styles from 'styles/modal/event/TournamentRegistryModal.module.scss';
 import 'react-quill/dist/quill.bubble.css';
+
 
 const Quill = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -24,13 +27,36 @@ export default function TournamentRegistryModal({
   type,
   endTime,
   player_cnt,
+  tournamentId,
 }: TournamentInfo) {
   const setModal = useSetRecoilState(modalState);
+  const [registState, setRegistState] = useState<boolean | null>(true);
+  const [flag, setFlag] = useState<boolean>(false);
   const Date = startTime.toString().split(':').slice(0, 2).join(':');
 
-  const registTournament = () => {
-    console.log('토너먼트에 등록하시겠습니까.');
-  };
+  const registTournament = useCallback(() => {
+    return mockInstance
+      .post(`tournament/${tournamentId}/users?users=1`)
+      .then((res) => {
+        return res.data;
+      });
+  }, []);
+
+  const getStatus = useCallback(() => {
+    return mockInstance
+      .get(`tournament/${tournamentId}/users?users=1`)
+      .then((res) => {
+        return res.data;
+      });
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const status = await getStatus();
+      setRegistState(status);
+    };
+    fetchData();
+  }, []);
 
   const closeModalButtonHandler = () => {
     setModal({ modalName: null });
@@ -66,7 +92,7 @@ export default function TournamentRegistryModal({
         <ModalButtonContainer>
           <ModalButton
             onClick={registTournament}
-            value='등록'
+            value={registState == true ? '취소' : '등록'}
             style='positive'
           />
         </ModalButtonContainer>

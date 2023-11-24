@@ -33,7 +33,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   if (filteredTournaments.length == 0) {
     res.status(200).json({
-      touranments: [],
+      tournaments: [],
       totalPage: 0,
     });
   }

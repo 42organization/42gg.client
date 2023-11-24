@@ -1,14 +1,10 @@
 [
     {
-      "tournamentId": 1,
-      "users": [1, 2, 3, 4, 5]
+      "tournamentId": 56,
+      "users": []
     },
     {
-      "tournamentId": 2,
-      "users": [1, 2, 3, 4, 5]
-    },
-    {
-      "tournamentId": 3,
+      "tournamentId": 55,
       "users": [1, 2, 3, 4, 5]
     }
 ]
