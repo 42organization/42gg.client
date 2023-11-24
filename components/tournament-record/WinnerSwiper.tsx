@@ -34,13 +34,11 @@ const WinnerSwiper = forwardRef(
       [props.type, props.size]
     );
 
-    // TODO: error, isLoading 시 return 컴포넌트
-    const { data, error, isLoading, hasNextPage, fetchNextPage } =
-      InfiniteScroll<TournamentData>(
-        ['tournamentData', props.type],
-        fetchTournamentData,
-        'JC01'
-      );
+    const { data, hasNextPage, fetchNextPage } = InfiniteScroll<TournamentData>(
+      ['tournamentData', props.type],
+      fetchTournamentData,
+      'JC01'
+    );
 
     const coverflowEffect = useMemo(
       () => ({
