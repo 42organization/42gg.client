@@ -17,6 +17,7 @@ export default function WinnerProfileImage({
 }: WinnerProfileImageProps) {
   const swiper = useSwiper();
   const [indexDiff, setIndexDiff] = useState(swiper.activeIndex - slideIndex);
+  const [imageUrl, setImageUrl] = useState(tournament.winnerImageUrl);
 
   useEffect(() => {
     const swiperUpdate = () => {
@@ -49,11 +50,14 @@ export default function WinnerProfileImage({
       }`}
     >
       <Image
-        src={tournament.winnerImageUrl}
+        src={imageUrl}
         fill
         style={{ objectFit: 'cover' }}
         alt={tournament.winnerIntraId}
         priority
+        onError={() => {
+          setImageUrl('/image/fallBackSrc.jpeg');
+        }}
       />
     </div>
   );
