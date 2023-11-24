@@ -17,7 +17,7 @@ export type Team = {
   score?: number;
 };
 
-export type GameMode = 'NORMAL' | 'RANK';
+export type GameMode = 'NORMAL' | 'RANK' | 'TOURNAMENT';
 export type GameStatus = 'LIVE' | 'WAIT' | 'END';
 
 export type Game = {
