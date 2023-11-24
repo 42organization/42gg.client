@@ -37,7 +37,6 @@ export default function WinnerProfileImage({
 
   function applyStyle() {
     if (indexDiff === 0) {
-      setTournamentInfo(tournament);
       return styles.firstLayer;
     }
     return styles.secondLayer;
