@@ -11,6 +11,7 @@ import { MatchMode } from 'types/mainType';
 import { ISeason } from 'types/seasonTypes';
 import { StoreManualMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
+import { ITournament } from './admin/adminTournamentTypes';
 import { TournamentInfo } from './tournamentTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
@@ -136,4 +137,5 @@ export interface Modal {
   totalCoin?: ICoin;
   randomItem?: IRandomItem;
   tournamentInfo?: TournamentInfo;
+  tournament?: ITournament;
 }
