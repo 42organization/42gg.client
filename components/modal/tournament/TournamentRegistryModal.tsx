@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import { useSetRecoilState } from 'recoil';
+import { MdPeopleAlt } from 'react-icons/md';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { TournamentInfo } from 'types/tournamentTypes';
 import { modalState } from 'utils/recoil/modal';
@@ -22,6 +23,7 @@ export default function TournamentRegistryModal({
   status,
   type,
   endTime,
+  player_cnt,
 }: TournamentInfo) {
   const setModal = useSetRecoilState(modalState);
   const Date = startTime.toString().split(':').slice(0, 2).join(':');
@@ -48,7 +50,10 @@ export default function TournamentRegistryModal({
       <div className={styles.title}>{title}</div>
       <div className={styles.tournamentInfo}>
         <div className={styles.startTime}>{Date}</div>
-        <div className={styles.participants}>현재인원 / 최대인원</div>
+        <div className={styles.participants}>
+          <MdPeopleAlt />
+          <div className={styles.player}>{player_cnt} / 8</div>
+        </div>
       </div>
       <Quill
         className={styles.quillViewer}
