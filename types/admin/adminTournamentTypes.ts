@@ -1,10 +1,14 @@
 export interface ITournament {
-  title: string; //제목
-  content: string; //내용
-  startTime: Date; //시작시간
-  endTime: Date; // 종료시간
-  tournamentType: 'CUSTOM' | 'ROOKIE' | 'MASTER'; //토너먼트 타입
-  count?: number; //참여인원 (최대참여인원 8명 fix)
+  tournamentId: number;
+  title: string;
+  contents: string;
+  status: string; // 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY' | 'DONE' | 'SCORE_DONE'
+  type: 'CUSTOM' | 'MASTER' | 'ROOKIE';
+  winnerIntraId: string;
+  winnerImageUrl: string;
+  startTime: Date;
+  endTime: Date;
+  player_cnt: number;
 }
 
 export interface ITournamentTable {

@@ -14,6 +14,7 @@ import {
   ITournamentTable,
 } from 'types/admin/adminTournamentTypes';
 import { TournamentInfo } from 'types/tournamentTypes';
+import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import {
@@ -32,21 +33,12 @@ const Quill = dynamic(() => import('react-quill'), {
 
 const tableTitle: { [key: string]: string } = {
   title: '토너먼트 이름',
-  content: '토너먼트 내용',
+  contents: '토너먼트 내용',
   startTime: '시작 시간',
   endTime: '종료 시간',
-  tournamentType: '토너먼트 타입',
+  type: '토너먼트 타입',
   edit: '수정하기',
 };
-
-const smapleTournamentList: ITournament[] = Array.from({ length: 10 }, () => ({
-  title: '샘플토너먼트제목',
-  content: '샘플내용',
-  startTime: new Date(),
-  endTime: new Date(),
-  tournamentType: 'CUSTOM',
-  count: 7,
-}));
 
 export default function TournamentList() {
   const setModal = useSetRecoilState(modalState);
@@ -58,14 +50,12 @@ export default function TournamentList() {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const getTournaments = useCallback(async () => {
+  const fetchTournaments = useCallback(async () => {
     try {
-      // const res = await instanceInManage.get(
-      //   `/announcement?page=${currentPage}&size=3`
-      // );
+      const res = await mockInstance.get(`/tournament?page=${currentPage}`);
       setTournamentInfo({
-        tournamentList: smapleTournamentList, //res.data.tournamentList,
-        totalPage: 10, //res.data.totalPage,
+        tournamentList: res.data.tournaments,
+        totalPage: res.data.totalPage,
         currentPage: currentPage,
       });
     } catch (e) {
@@ -74,8 +64,8 @@ export default function TournamentList() {
   }, [currentPage]);
 
   useEffect(() => {
-    getTournaments();
-  }, [getTournaments]);
+    fetchTournaments();
+  }, [fetchTournaments]);
 
   return (
     <div className={styles.container}>
@@ -109,6 +99,7 @@ export default function TournamentList() {
                                   onClick={() => {
                                     setModal({
                                       modalName: 'ADMIN-TOURNAMENT_BRAKET_EDIT',
+                                      tournament: tournament,
                                     });
                                   }}
                                 >
