@@ -7,10 +7,21 @@ import { mockInstance } from 'utils/mockAxios';
 import TournamentBraket from 'components/tournament/TournamentBraket';
 import styles from 'styles/admin/modal/AdminEditTournamentBraket.module.scss';
 
+const tournamentId = 1;
+
 export default function AdminEditTournamentBraket({
   tournamentId,
 }: ITournament) {
   const [bracketMatchs, setBracketMatchs] = useState<Match[]>([]);
+
+  // const putHandler = async () => {
+  //   await instanceInManage.put(
+  //     `/pingpong/admin/tournaments/${tournamentId}}/games`,
+  //     {
+  //       games: tournament
+  //     }
+  //   );
+  // };
 
   const fetchTournamentGames = useCallback(async () => {
     console.log('Fetching more data...');
@@ -32,6 +43,7 @@ export default function AdminEditTournamentBraket({
   return (
     <div className={styles['whole']}>
       <TournamentBraket singleEliminationBracketMatchs={bracketMatchs} />
+      <button className={styles.editBtn}>수정 하기</button>
     </div>
-  );
+  ); //*onClick={putHandler}
 }
