@@ -25,7 +25,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           for (let j = 0; j < DummyData[i].users.length; ++j) {
             if (DummyData[i].users[j] == userAsNumber) {
               res.status(200).json({
-                status: 'true',
+                status: true,
               });
               return;
             }
@@ -42,7 +42,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             if (DummyData[i].users[j] == userAsNumber) {
               DummyData[i].users.splice(j, 1);
               res.status(200).json({
-                status: 'false',
+                status: false,
               });
               return;
             }
@@ -50,7 +50,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         }
         DummyData[i].users.push(userAsNumber);
         res.status(200).json({
-          status: 'true',
+          status: true,
         });
         return;
       }
