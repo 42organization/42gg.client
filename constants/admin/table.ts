@@ -150,4 +150,12 @@ export const tableFormat: TableFormat = {
       'rankLose',
     ],
   },
+  tournament: {
+    name: '토너먼트',
+    columns: ['title', 'contents', 'startTime', 'endTime', 'type', 'edit'],
+  },
+  tournamentCreate: {
+    name: '토너먼트 생성',
+    columns: ['tournamentName', 'startTime', 'endTime', 'tournamentType'],
+  },
 };

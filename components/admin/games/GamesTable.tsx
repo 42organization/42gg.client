@@ -88,7 +88,7 @@ export default function GamesTable() {
                     시작 날짜: {game.startAt.toLocaleString().split(' ')[0]}
                   </div>
                   <div>시작 시간: {gameTimeToString(game.startAt)}</div>
-                  <div>게임 모드: {mode}</div>
+                  <div>게임 모드: {`${mode}(${game.status})`}</div>
                   <div>슬롯 시간: {game.slotTime}분</div>
                   <div>
                     {mode === 'RANK' && (
@@ -96,6 +96,7 @@ export default function GamesTable() {
                         gameId={game.gameId}
                         team1={team1}
                         team2={team2}
+                        status={game.status}
                       />
                     )}
                   </div>

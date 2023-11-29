@@ -129,3 +129,11 @@
     }
   }
 }
+
+.tournament {
+  @include imageWrap;
+  div {
+    @include userImage(2.2rem);
+    cursor: pointer;
+  }
+}

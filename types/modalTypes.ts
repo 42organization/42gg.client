@@ -11,6 +11,8 @@ import { MatchMode } from 'types/mainType';
 import { ISeason } from 'types/seasonTypes';
 import { StoreManualMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
+import { ITournament } from './admin/adminTournamentTypes';
+import { TournamentInfo } from './tournamentTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
 
@@ -27,7 +29,10 @@ type PurchaseModal = 'BUY' | 'GIFT' | 'NO_COIN';
 type UseItemModal = ItemType | 'GACHA';
 
 type EditItemModal = 'MEGAPHONE';
+
 type StoreModal = 'MANUAL' | 'COIN_HISTORY';
+
+type TournamentModal = 'REGISTRY';
 
 type AdminModal =
   | 'PROFILE'
@@ -44,7 +49,8 @@ type AdminModal =
   | 'ITEM_EDIT'
   | 'ITEM_DELETE'
   | 'COINPOLICY_EDIT'
-  | 'CHECK_SEND_NOTI';
+  | 'CHECK_SEND_NOTI'
+  | 'TOURNAMENT_BRAKET_EDIT';
 
 type ModalName =
   | null
@@ -59,7 +65,8 @@ type ModalName =
   | `USE-ITEM-${UseItemModal}`
   | `EDIT-ITEM-${EditItemModal}`
   | `STORE-${StoreModal}`
-  | `PURCHASE-${PurchaseModal}`;
+  | `PURCHASE-${PurchaseModal}`
+  | `TOURNAMENT-${TournamentModal}`;
 
 export interface Cancel {
   startTime: string;
@@ -129,4 +136,6 @@ export interface Modal {
   isAttended?: boolean;
   totalCoin?: ICoin;
   randomItem?: IRandomItem;
+  tournamentInfo?: TournamentInfo;
+  tournament?: ITournament;
 }

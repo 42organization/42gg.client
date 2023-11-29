@@ -331,6 +331,7 @@ $vip-background: linear-gradient(
     justify-content: center;
     align-items: center;
   }
+
   .negative {
     input {
       margin-right: 1rem;
@@ -350,6 +351,20 @@ $vip-background: linear-gradient(
         #c66bf2 0%,
         rgba(96, 6, 138, 0.52) 100%
       );
+    }
+  }
+  .close {
+    input {
+      padding: 0.5rem 1rem;
+      color: rgba(255, 255, 255, 1);
+      cursor: pointer;
+      background: linear-gradient(
+          180deg,
+          #c66bf2 0%,
+          rgba(96, 6, 138, 0.52) 100%
+      );
+      border: 0;
+      border-radius: 0.625rem;
     }
   }
 }
