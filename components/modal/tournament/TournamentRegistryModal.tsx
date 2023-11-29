@@ -13,7 +13,6 @@ import {
 import styles from 'styles/modal/event/TournamentRegistryModal.module.scss';
 import 'react-quill/dist/quill.bubble.css';
 
-
 const Quill = dynamic(() => import('react-quill'), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
@@ -31,14 +30,15 @@ export default function TournamentRegistryModal({
 }: TournamentInfo) {
   const setModal = useSetRecoilState(modalState);
   const [registState, setRegistState] = useState<boolean | null>(true);
-  const [flag, setFlag] = useState<boolean>(false);
-  const Date = startTime.toString().split(':').slice(0, 2).join(':');
+  const [openDate, setOpenDate] = useState<string>('미정');
 
   const registTournament = useCallback(() => {
     return mockInstance
       .post(`tournament/${tournamentId}/users?users=1`)
       .then((res) => {
-        return res.data;
+        setRegistState(res.data.status);
+        console.log(res.data.status);
+        return res.data.status;
       });
   }, []);
 
@@ -46,16 +46,21 @@ export default function TournamentRegistryModal({
     return mockInstance
       .get(`tournament/${tournamentId}/users?users=1`)
       .then((res) => {
-        return res.data;
+        setRegistState(res.data.status);
+        return res.data.status;
       });
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const status = await getStatus();
-      setRegistState(status);
-    };
-    fetchData();
+    getStatus();
+
+    const date = new Date(startTime);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더해줌
+    const day = date.getDate();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    setOpenDate(`${year}년 ${month}월 ${day}일 ${hours}:${minutes}`);
   }, []);
 
   const closeModalButtonHandler = () => {
@@ -75,7 +80,7 @@ export default function TournamentRegistryModal({
       </div>
       <div className={styles.title}>{title}</div>
       <div className={styles.tournamentInfo}>
-        <div className={styles.startTime}>{Date}</div>
+        <div className={styles.startTime}>{openDate}</div>
         <div className={styles.participants}>
           <MdPeopleAlt />
           <div className={styles.player}>{player_cnt} / 8</div>
@@ -92,8 +97,12 @@ export default function TournamentRegistryModal({
         <ModalButtonContainer>
           <ModalButton
             onClick={registTournament}
-            value={registState == true ? '취소' : '등록'}
-            style='positive'
+            value={registState === true ? '취소' : '등록'}
+            style={
+              player_cnt === 8 && registState === false
+                ? 'negative'
+                : 'positive'
+            }
           />
         </ModalButtonContainer>
       </div>
