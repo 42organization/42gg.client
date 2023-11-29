@@ -50,7 +50,8 @@ type AdminModal =
   | 'ITEM_DELETE'
   | 'COINPOLICY_EDIT'
   | 'CHECK_SEND_NOTI'
-  | 'TOURNAMENT_BRAKET_EDIT';
+  | 'TOURNAMENT_BRAKET_EDIT'
+  | 'TOURNAMENT_PARTICIPANT_EDIT';
 
 type ModalName =
   | null
@@ -138,4 +139,5 @@ export interface Modal {
   randomItem?: IRandomItem;
   tournamentInfo?: TournamentInfo;
   tournament?: ITournament;
+  tournamentId?: number;
 }
