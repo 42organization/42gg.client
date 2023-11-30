@@ -9,12 +9,13 @@
   gap: 1.5rem;
 }
 
-.announceModal {
+.tournamentModal {
   display: flex;
   min-width: 16rem;
   height: min-content;
   max-height: 31rem;
   flex-direction: column;
+  padding: 1rem;
   font-size: $medium-font;
   color: white;
   background: linear-gradient(
@@ -26,11 +27,6 @@
   border-radius: $small-radius;
   justify-content: space-between;
   align-items: center;
-}
-
-.announceModalContainer {
-  @include modalContainer('SKYPINK');
-  margin: 1.6rem 1.5rem;
 }
 
 .modalTitle {
