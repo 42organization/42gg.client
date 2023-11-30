@@ -1,5 +1,10 @@
-import dynamic from 'next/dynamic';
-import { useCallback, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   Paper,
@@ -11,36 +16,45 @@ import {
 } from '@mui/material';
 import {
   ITournament,
+  ITournamentEditInfo,
   ITournamentTable,
 } from 'types/admin/adminTournamentTypes';
-import { TournamentInfo } from 'types/tournamentTypes';
+import { instanceInManage } from 'utils/axios';
+import { dateToString } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
-import styles from 'styles/admin/announcement/AnnounceList.module.scss';
-import 'react-quill/dist/quill.snow.css';
-import 'react-quill/dist/quill.bubble.css';
-
-const Quill = dynamic(() => import('react-quill'), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
+import styles from 'styles/admin/tournament/TournamentList.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   title: '토너먼트 이름',
   contents: '토너먼트 내용',
   startTime: '시작 시간',
   endTime: '종료 시간',
-  type: '토너먼트 타입',
+  type: '유형',
   edit: '수정하기',
 };
 
-export default function TournamentList() {
+interface TournamentListProps {
+  tournamentEditInfo: ITournamentEditInfo;
+  setTournamentEditInfo: Dispatch<SetStateAction<ITournamentEditInfo>>;
+}
+
+export default function TournamentList({
+  tournamentEditInfo,
+  setTournamentEditInfo,
+}: TournamentListProps) {
+  const tournamentDeleteResponse: { [key: string]: string } = {
+    SUCCESS: '토너먼트가 성공적으로 삭제되었습니다.',
+  };
+
+  const setSnackbar = useSetRecoilState(toastState);
   const setModal = useSetRecoilState(modalState);
   const [tournamentInfo, setTournamentInfo] = useState<ITournamentTable>({
     tournamentList: [],
@@ -67,6 +81,25 @@ export default function TournamentList() {
     fetchTournaments();
   }, [fetchTournaments]);
 
+  const deleteHandler = async (tournamentId: number) => {
+    try {
+      await instanceInManage.delete(`/tournament/${tournamentId}`);
+      setSnackbar({
+        toastName: `delete request`,
+        severity: 'success',
+        message: `🔥 ${tournamentDeleteResponse.SUCCESS} 🔥`,
+        clicked: true,
+      });
+    } catch (e: any) {
+      setSnackbar({
+        toastName: `bad request`,
+        severity: 'error',
+        // message: `🔥 ${announceDeleteResponse[e.response.data.code]} 🔥`,
+        clicked: true,
+      });
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -79,7 +112,15 @@ export default function TournamentList() {
             {tournamentInfo.tournamentList.length > 0 ? (
               tournamentInfo.tournamentList.map(
                 (tournament: ITournament, index: number) => (
-                  <TableRow key={index}>
+                  <TableRow
+                    className={
+                      tournamentEditInfo.tournamentId ===
+                      tournament.tournamentId
+                        ? styles.selectedTableRow
+                        : styles.tableRow
+                    }
+                    key={index}
+                  >
                     {tableFormat['tournament'].columns.map(
                       (columnName: string, index: number) => {
                         return (
@@ -89,23 +130,74 @@ export default function TournamentList() {
                           >
                             {columnName === 'startTime' ||
                             columnName === 'endTime' ? (
-                              tournament[
-                                columnName as keyof ITournament
-                              ]?.toLocaleString()
+                              dateToString(
+                                new Date(
+                                  tournament[
+                                    columnName as keyof ITournament
+                                  ] as Date
+                                )
+                              )
                             ) : columnName === 'edit' ? (
-                              <div>
-                                <button
-                                  className={styles.editBtn}
-                                  onClick={() => {
-                                    setModal({
-                                      modalName: 'ADMIN-TOURNAMENT_BRAKET_EDIT',
-                                      tournament: tournament,
-                                    });
-                                  }}
-                                >
-                                  수정
-                                </button>
-                              </div>
+                              tournament.status === 'BEFORE' ? (
+                                <div className={styles.listBtnContainer}>
+                                  <button
+                                    className={styles.edit}
+                                    onClick={() => {
+                                      setTournamentEditInfo({
+                                        tournamentId: tournament.tournamentId,
+                                        title: tournament.title,
+                                        contents: tournament.contents,
+                                        type: tournament.type,
+                                        startTime: new Date(
+                                          tournament.startTime
+                                        ),
+                                        endTime: new Date(tournament.endTime),
+                                      });
+                                      window.scrollTo({
+                                        top: 0,
+                                        behavior: 'smooth',
+                                      });
+                                    }}
+                                  >
+                                    내용 수정
+                                  </button>
+                                  <button
+                                    className={styles.editParticipants}
+                                    onClick={() => {
+                                      setModal({
+                                        modalName:
+                                          'ADMIN-TOURNAMENT_BRAKET_EDIT',
+                                        tournament: tournament,
+                                      });
+                                    }}
+                                  >
+                                    인원 수정
+                                  </button>
+                                  <button
+                                    className={styles.delete}
+                                    onClick={() =>
+                                      deleteHandler(tournament.tournamentId)
+                                    }
+                                  >
+                                    삭제
+                                  </button>
+                                </div>
+                              ) : (
+                                <div className={styles.listBtnContainer}>
+                                  <button
+                                    className={styles.editBracket}
+                                    onClick={() => {
+                                      setModal({
+                                        modalName:
+                                          'ADMIN-TOURNAMENT_BRAKET_EDIT',
+                                        tournament: tournament,
+                                      });
+                                    }}
+                                  >
+                                    대진표 수정
+                                  </button>
+                                </div>
+                              )
                             ) : (
                               tournament[
                                 columnName as keyof ITournament

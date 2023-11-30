@@ -156,6 +156,6 @@ export const tableFormat: TableFormat = {
   },
   tournamentCreate: {
     name: '토너먼트 생성',
-    columns: ['tournamentName', 'startTime', 'endTime', 'tournamentType'],
+    columns: ['title', 'startTime', 'endTime', 'type'],
   },
 };
