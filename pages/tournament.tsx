@@ -43,7 +43,7 @@ export default function Tournament() {
         <div className={styles.tournamentTextWait}> 대기중인 토너먼트 </div>
         <div className={styles.waitTournamentBox}>
           {data?.pages.map((page, pageIndex) => (
-            <div key={pageIndex}>
+            <div className={styles.cardContainer} key={pageIndex}>
               {page.tournaments.map(
                 (tournament: TournamentInfo, tournamentIndex: number) => (
                   <TournamentCard key={tournamentIndex} {...tournament} />

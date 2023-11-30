@@ -25,7 +25,7 @@
   width: 100%;
   flex: 5;
   flex-direction: column;
-  padding: 1rem 1rem 0;
+  padding: 0rem 1rem 0;
   overflow-x: hidden;
   overflow-y: scroll;
   background: rgba(112, 0, 255, 0.17);
@@ -64,4 +64,12 @@
   font-weight: 700;
   color: black;
   text-align: center; /* 텍스트를 가로로 중앙에 정렬 */
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  > div {
+    margin-bottom: 0rem;
+  }
 }
