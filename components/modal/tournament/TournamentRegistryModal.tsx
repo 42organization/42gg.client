@@ -5,7 +5,9 @@ import { MdPeopleAlt } from 'react-icons/md';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { TournamentInfo } from 'types/tournamentTypes';
 import { mockInstance } from 'utils/mockAxios';
+import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -28,17 +30,50 @@ export default function TournamentRegistryModal({
   player_cnt,
   tournamentId,
 }: TournamentInfo) {
+  const setSnackbar = useSetRecoilState(toastState);
   const setModal = useSetRecoilState(modalState);
+  const setError = useSetRecoilState(errorState);
   const [registState, setRegistState] = useState<boolean | null>(true);
   const [openDate, setOpenDate] = useState<string>('미정');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [playerCount, setPlayerCount] = useState<number>(player_cnt);
 
   const registTournament = useCallback(() => {
+    setLoading(true);
     return mockInstance
       .post(`tournament/${tournamentId}/users?users=1`)
       .then((res) => {
-        setRegistState(res.data.status);
         console.log(res.data.status);
+        if (res.data.status) {
+          setSnackbar({
+            toastName: `토너먼트 등록 신청`,
+            severity: 'success',
+            message: `토너먼트 신청이 완료됐습니다`,
+            clicked: true,
+          });
+          if (player_cnt < 8) setPlayerCount(playerCount + 1);
+        }
+        if (res.data.status == false) {
+          setSnackbar({
+            toastName: `토너먼트 등록취소 신청`,
+            severity: 'success',
+            message: `토너먼트 신청이 취소됐습니다`,
+            clicked: true,
+          });
+        }
+
+        setRegistState(res.data.status);
+        setLoading(false);
         return res.data.status;
+      })
+      .catch((error) => {
+        setSnackbar({
+          toastName: `토너먼트 등록 신청`,
+          severity: 'error',
+          message: `토너먼트 신청 중 에러가 발생했습니다`,
+          clicked: true,
+        });
+        setLoading(false);
       });
   }, []);
 
@@ -48,6 +83,9 @@ export default function TournamentRegistryModal({
       .then((res) => {
         setRegistState(res.data.status);
         return res.data.status;
+      })
+      .catch((error) => {
+        setError('JJH2');
       });
   }, []);
 
@@ -83,7 +121,7 @@ export default function TournamentRegistryModal({
         <div className={styles.startTime}>{openDate}</div>
         <div className={styles.participants}>
           <MdPeopleAlt />
-          <div className={styles.player}>{player_cnt} / 8</div>
+          <div className={styles.player}>{playerCount} / 8</div>
         </div>
       </div>
       <Quill
@@ -97,12 +135,15 @@ export default function TournamentRegistryModal({
         <ModalButtonContainer>
           <ModalButton
             onClick={registTournament}
-            value={registState === true ? '취소' : '등록'}
-            style={
-              player_cnt === 8 && registState === false
-                ? 'negative'
-                : 'positive'
+            value={
+              registState === true
+                ? '등록 취소'
+                : player_cnt === 8
+                ? '대기 등록'
+                : '등록'
             }
+            style={'positive'}
+            isLoading={loading}
           />
         </ModalButtonContainer>
       </div>

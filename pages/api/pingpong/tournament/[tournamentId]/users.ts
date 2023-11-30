@@ -1,7 +1,6 @@
 // pages/api/tournaments/[tournamentId]/users.ts
 import { NextApiRequest, NextApiResponse } from 'next';
-import DummyData from './dummyData.json';
-
+import DummyData from './dummyData';
 function isString(value: any): value is string {
   return typeof value === 'string';
 }
@@ -25,7 +24,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           for (let j = 0; j < DummyData[i].users.length; ++j) {
             if (DummyData[i].users[j] == userAsNumber) {
               res.status(200).json({
-                status: true,
+                status: false,
               });
               return;
             }
@@ -39,7 +38,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       for (let i = 0; i < DummyData.length; i++) {
         if (DummyData[i].tournamentId === idAsNumber) {
           for (let j = 0; j < DummyData[i].users.length; ++j) {
-            if (DummyData[i].users[j] == userAsNumber) {
+            if (DummyData[i].users[j] === userAsNumber) {
               DummyData[i].users.splice(j, 1);
               res.status(200).json({
                 status: false,
