@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { TournamentInfo , TournamentData } from 'types/tournamentTypes';
+import { TournamentInfo, TournamentData } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
 import { InfiniteScroll } from 'utils/infinityScroll';
 import { mockInstance } from 'utils/mockAxios';
@@ -24,7 +24,7 @@ export default function Tournament() {
 
   async function fetchWaitTournamentData(page: number) {
     return await mockInstance
-      .get(`tournament?page=${page}&status=예정&size=4`)
+      .get(`tournament?page=${page}&status=BEFORE&size=4`)
       .then((res) => {
         return res.data;
       });
