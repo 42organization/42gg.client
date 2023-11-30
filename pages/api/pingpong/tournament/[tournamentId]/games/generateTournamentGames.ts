@@ -145,7 +145,5 @@ export default function generateTournamentGames() {
       tournamentGames.push(nextTournamentGame);
     });
   }
-
-  console.log(tournamentGames);
   return tournamentGames;
 }
