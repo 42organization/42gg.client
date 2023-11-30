@@ -16,3 +16,9 @@ export interface ITournamentTable {
   totalPage: number;
   currentPage: number;
 }
+
+export interface ITournamentUser {
+  userId: number;
+  intraId: string;
+  isJoined: boolean;
+}
