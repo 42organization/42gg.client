@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { TournamentInfo } from 'types/tournamentTypes';
+import { TournamentInfo , TournamentData } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
 import { InfiniteScroll } from 'utils/infinityScroll';
 import { mockInstance } from 'utils/mockAxios';
@@ -12,14 +13,14 @@ import styles from 'styles/tournament/TournamentContainer.module.scss';
 export default function Tournament() {
   const setError = useSetRecoilState(errorState);
 
-  // const Info = useQuery<TournamentInfo>(
-  //     'openTorunamentInfo',
-  //     () =>
-  //       mockInstance
-  //         .get('tournament?page=1&status=진행중')
-  //         .then((res) => res.data),
-  //     { retry: 1, staleTime: 60000 /* 60초 */ }
-  // );
+  const openInfo = useQuery<TournamentData>(
+    'openTorunamentInfo',
+    () =>
+      mockInstance
+        .get('tournament?page=1&status=진행중')
+        .then((res) => res.data),
+    { retry: 1, staleTime: 60000 /* 60초 */ }
+  );
 
   async function fetchWaitTournamentData(page: number) {
     return await mockInstance
@@ -62,7 +63,13 @@ export default function Tournament() {
         </div>
         <div className={styles.tournamentTextOpen}> 진행중인 토너먼트 </div>
         <div className={styles.openTournamentBox}>
-          <div className={styles.tournamentText}> 무언가 토너먼트의 사진 </div>
+          <div className={styles.tournamentText}>
+            {openInfo.data && openInfo.data.tournaments.length === 0 ? (
+              <>진행중인 토너먼트가 없습니다</>
+            ) : (
+              <>진행중인 토너먼트 사진</>
+            )}
+          </div>
         </div>
       </div>
     </div>

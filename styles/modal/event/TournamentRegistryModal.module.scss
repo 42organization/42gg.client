@@ -66,3 +66,13 @@
   justify-content: center;
   align-items: center;
 }
+
+.participants {
+  display: flex;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem qw;
+  justify-content: center;
+  .player {
+    padding-left: 0.2rem;
+  }
+}
