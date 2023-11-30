@@ -17,6 +17,7 @@ export default function WinnerProfileImage({
 }: WinnerProfileImageProps) {
   const swiper = useSwiper();
   const [indexDiff, setIndexDiff] = useState(swiper.activeIndex - slideIndex);
+  const [imageUrl, setImageUrl] = useState(tournament.winnerImageUrl);
 
   useEffect(() => {
     const swiperUpdate = () => {
@@ -28,9 +29,14 @@ export default function WinnerProfileImage({
     };
   }, [swiper, slideIndex]);
 
-  function applyStyleAndSetTournamentInfo() {
+  useEffect(() => {
     if (indexDiff === 0) {
       setTournamentInfo(tournament);
+    }
+  }, [indexDiff, tournament, setTournamentInfo]);
+
+  function applyStyle() {
+    if (indexDiff === 0) {
       return styles.firstLayer;
     }
     return styles.secondLayer;
@@ -39,15 +45,18 @@ export default function WinnerProfileImage({
   return (
     <div
       className={`${styles.winnerProfileImage} ${
-        indexDiff > -2 && indexDiff < 2 && applyStyleAndSetTournamentInfo()
+        indexDiff > -2 && indexDiff < 2 && applyStyle()
       }`}
     >
       <Image
-        src={tournament.winnerImageUrl}
+        src={imageUrl}
         fill
         style={{ objectFit: 'cover' }}
         alt={tournament.winnerIntraId}
         priority
+        onError={() => {
+          setImageUrl('/image/fallBackSrc.jpeg');
+        }}
       />
     </div>
   );

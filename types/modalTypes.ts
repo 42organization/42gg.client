@@ -11,6 +11,7 @@ import { MatchMode } from 'types/mainType';
 import { ISeason } from 'types/seasonTypes';
 import { StoreManualMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
+import { ITournament } from './admin/adminTournamentTypes';
 import { TournamentInfo } from './tournamentTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
@@ -49,7 +50,8 @@ type AdminModal =
   | 'ITEM_DELETE'
   | 'COINPOLICY_EDIT'
   | 'CHECK_SEND_NOTI'
-  | 'TOURNAMENT_BRAKET_EDIT';
+  | 'TOURNAMENT_BRAKET_EDIT'
+  | 'TOURNAMENT_PARTICIPANT_EDIT';
 
 type ModalName =
   | null
@@ -136,4 +138,6 @@ export interface Modal {
   totalCoin?: ICoin;
   randomItem?: IRandomItem;
   tournamentInfo?: TournamentInfo;
+  tournament?: ITournament;
+  tournamentId?: number;
 }

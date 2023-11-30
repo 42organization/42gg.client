@@ -11,6 +11,7 @@ import {
 import AdminEmoji from 'public/image/menu_admin.svg';
 import AnnouncementEmoji from 'public/image/menu_announcement.svg';
 import CurrentMatchEmoji from 'public/image/menu_currentMatch.svg';
+import HallOfFameEmoji from 'public/image/menu_halloffame.svg';
 import ManualEmoji from 'public/image/menu_manual.svg';
 import RankingEmoji from 'public/image/menu_ranking.svg';
 import ReportEmoji from 'public/image/menu_report.svg';
@@ -43,6 +44,10 @@ const MenuItem = ({ itemName, onClick }: menuItemProps) => {
     CurrentMatch: {
       name: '최근 경기',
       svg: <CurrentMatchEmoji />,
+    },
+    HallOfFame: {
+      name: '명예의 전당',
+      svg: <HallOfFameEmoji />,
     },
     Announcement: {
       name: '공지사항',
@@ -114,6 +119,11 @@ export const MainMenu = () => {
       <MenuLink
         link='/game'
         itemName='CurrentMatch'
+        onClick={HeaderState?.resetOpenMenuBarState}
+      />
+      <MenuLink
+        link='/tournament-record'
+        itemName='HallOfFame'
         onClick={HeaderState?.resetOpenMenuBarState}
       />
       <MenuItem

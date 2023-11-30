@@ -38,6 +38,8 @@ interface TournamentBraketProps {
 export default function TournamentBraket({
   singleEliminationBracketMatchs,
 }: TournamentBraketProps) {
+  if (singleEliminationBracketMatchs.length === 0)
+    return <h1 style={{ color: 'white' }}>Loading...</h1>;
   // const [width, height] = useWindowSize();
   const finalWidth = 500; //Math.max(width - 50, 500);
   const finalHeight = 500; //Math.max(height - 100, 500);

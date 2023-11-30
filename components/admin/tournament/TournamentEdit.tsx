@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   Paper,
@@ -9,10 +9,11 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
+import { ITournamentEditInfo } from 'types/admin/adminTournamentTypes';
 import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
+import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
-import { useUser } from 'hooks/Layout/useUser';
-import styles from 'styles/admin/announcement/AnnounceEdit.module.scss';
+import styles from 'styles/admin/tournament/TournamentEdit.module.scss';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import { AdminTableHead } from '../common/AdminTable';
@@ -23,113 +24,102 @@ const Quill = dynamic(() => import('react-quill'), {
 });
 
 const tableTitle: { [key: string]: string } = {
-  tournamentName: '토너먼트 이름',
+  title: '토너먼트 이름',
   startTime: '시작 시간',
   endTime: '종료 시간',
-  tournamentType: '토너먼트 유형',
+  type: '유형',
 };
 
-export default function TournamentEdit() {
-  const user = useUser();
+interface TournamentEditProps {
+  tournamentEditInfo: ITournamentEditInfo;
+  inputChangeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
+  selectChangehandler: (event: ChangeEvent<HTMLSelectElement>) => void;
+  quillChangeHandler: (
+    value: string,
+    delta: any,
+    source: string,
+    editor: any
+  ) => void;
+  resetHandler: () => Promise<void>;
+}
+
+export default function TournamentEdit({
+  tournamentEditInfo,
+  inputChangeHandler,
+  selectChangehandler,
+  quillChangeHandler,
+  resetHandler,
+}: TournamentEditProps) {
+  const tournamentPatchResponse: { [key: string]: string } = {
+    SUCCESS: '토너먼트가 성공적으로 수정되었습니다.',
+  };
+  const tournamentCreateResponse: { [key: string]: string } = {
+    SUCCESS: '토너먼트가 성공적으로 등록되었습니다.',
+  };
+
   const setSnackbar = useSetRecoilState(toastState);
-  const [content, setContent] = useState('');
-  const announceCreateResponse: { [key: string]: string } = {
-    SUCCESS: '공지사항이 성공적으로 등록되었습니다.',
-    AN300:
-      '이미 활성화된 공지사항이 있습니다. 새로운 공지사항을 등록하시려면 활성화된 공지사항을 삭제해 주세요.',
-  };
-  const announceDeleteResponse: { [key: string]: string } = {
-    SUCCESS: '공지사항이 성공적으로 삭제되었습니다.',
-    AN100: '삭제 할 활성화된 공지사항이 없습니다.',
-  };
 
   useEffect(() => {
     resetHandler();
   }, []);
 
-  const resetHandler = async () => {
+  const patchHandler = async () => {
     try {
-      //const res = await instance.get('/pingpong/announcement');
-      setContent('가장 최근 토너먼트 내용'); //setContent(res?.data.content);
-    } catch (e) {
-      alert(e);
+      await instanceInManage.patch(
+        `/tournament/${tournamentEditInfo.tournamentId}`,
+        {
+          title: tournamentEditInfo.title,
+          contents: tournamentEditInfo.contents,
+          startTime: tournamentEditInfo.startTime,
+          endTime: tournamentEditInfo.endTime,
+          type: tournamentEditInfo.type,
+        }
+      );
+      setSnackbar({
+        toastName: `patch request`,
+        severity: 'success',
+        message: `🔥 ${tournamentPatchResponse.SUCCESS} 🔥`,
+        clicked: true,
+      });
+    } catch (e: any) {
+      setSnackbar({
+        toastName: `bad request`,
+        severity: 'error',
+        // message: `🔥 ${announceCreateResponse[e.response.data.code]} 🔥`,
+        clicked: true,
+      });
     }
   };
 
-  if (!user) return null;
-
-  const currentUserId = user.intraId;
-
   const postHandler = async () => {
-    // try {
-    //   await instanceInManage.post(`/announcement`, {
-    //     content,
-    //     creatorIntraId: currentUserId,
-    //   });
-    //   setSnackbar({
-    //     toastName: `post request`,
-    //     severity: 'success',
-    //     message: `🔥 ${announceCreateResponse.SUCCESS} 🔥`,
-    //     clicked: true,
-    //   });
-    // } catch (e: any) {
-    //   setSnackbar({
-    //     toastName: `bad request`,
-    //     severity: 'error',
-    //     message: `🔥 ${announceCreateResponse[e.response.data.code]} 🔥`,
-    //     clicked: true,
-    //   });
-    // }
-  };
-
-  const deleteHandler = async () => {
-    // try {
-    //   await instanceInManage.delete(`/announcement/${currentUserId}`);
-    //   setSnackbar({
-    //     toastName: `delete request`,
-    //     severity: 'success',
-    //     message: `🔥 ${announceDeleteResponse.SUCCESS} 🔥`,
-    //     clicked: true,
-    //   });
-    // } catch (e: any) {
-    //   setSnackbar({
-    //     toastName: `bad request`,
-    //     severity: 'error',
-    //     message: `🔥 ${announceDeleteResponse[e.response.data.code]} 🔥`,
-    //     clicked: true,
-    //   });
-    // }
+    try {
+      await instanceInManage.post(`/tournament`, {
+        title: tournamentEditInfo.title,
+        contents: tournamentEditInfo.contents,
+        startTime: tournamentEditInfo.startTime,
+        endTime: tournamentEditInfo.endTime,
+        type: tournamentEditInfo.type,
+      });
+      setSnackbar({
+        toastName: `post request`,
+        severity: 'success',
+        message: `🔥 ${tournamentCreateResponse.SUCCESS} 🔥`,
+        clicked: true,
+      });
+    } catch (e: any) {
+      setSnackbar({
+        toastName: `bad request`,
+        severity: 'error',
+        // message: `🔥 ${announceCreateResponse[e.response.data.code]} 🔥`,
+        clicked: true,
+      });
+    }
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.announceModal}>
         <h1>추후 토너먼트 페이지 모달 완성시 추가 예정</h1>
-        {/* {content ? (
-          <div className={styles.announceModalContainer}>
-            <div className={styles.modalTitle}>Notice!</div>
-            <Quill
-              className={styles.quillViewer}
-              readOnly={true}
-              formats={QUILL_FORMATS}
-              value={content}
-              theme='bubble'
-            />
-            <div className={styles.checkBox}>
-              <input type='checkbox' id='neverSeeAgain' name='neverSeeAgain' />
-              <label htmlFor='neverSeeAgain'>
-                <div>하루 동안 열지 않기</div>
-              </label>
-            </div>
-            <div className={styles.buttons}>
-              <div className={styles.positive}>
-                <input type='button' value='닫기' />
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className={styles.noActive}>활성화된 공지사항이 없습니다 !</div>
-        )} */}
       </div>
       <div className={styles.editorContainer}>
         <TableContainer className={styles.tableContainer} component={Paper}>
@@ -140,34 +130,46 @@ export default function TournamentEdit() {
                 <TableCell className={styles.tableBodyItem}>
                   <input
                     type='text'
-                    name='tournamentName'
-                    // onChange={inputChangeHandler}
+                    name='title'
+                    value={tournamentEditInfo.title}
+                    onChange={inputChangeHandler}
                   />
                 </TableCell>
                 <TableCell className={styles.tableBodyItem}>
                   <input
                     type='datetime-local'
                     name='startTime'
-                    // onChange={inputChangeHandler}
+                    value={
+                      tournamentEditInfo.startTime
+                        ? tournamentEditInfo.startTime
+                            .toISOString()
+                            .slice(0, 16)
+                        : ''
+                    }
+                    onChange={inputChangeHandler}
                   />
                 </TableCell>
                 <TableCell className={styles.tableBodyItem}>
                   <input
                     type='datetime-local'
                     name='endTime'
-                    // onChange={inputChangeHandler}
+                    value={
+                      tournamentEditInfo.endTime
+                        ? tournamentEditInfo.endTime.toISOString().slice(0, 16)
+                        : ''
+                    }
+                    onChange={inputChangeHandler}
                   />
                 </TableCell>
                 <TableCell className={styles.tableBodyItem}>
                   <select
-                    name='tournamentType'
-                    // value={selectedValue}
-                    // onChange={handleSelectChange}
+                    name='type'
+                    value={tournamentEditInfo.type ?? ''}
+                    onChange={selectChangehandler}
                   >
                     <option value='CUSTOM'>CUSTOM</option>
                     <option value='ROOKIE'>ROOKIE</option>
                     <option value='MASTER'>MASTER</option>
-                    {/* You can add more options here */}
                   </select>
                 </TableCell>
               </TableRow>
@@ -179,13 +181,20 @@ export default function TournamentEdit() {
           modules={QUILL_EDIT_MODULES}
           formats={QUILL_FORMATS}
           theme='snow'
-          value={content}
-          onChange={(content) => setContent(content)}
+          value={tournamentEditInfo.contents}
+          onChange={quillChangeHandler}
         />
         <div className={styles.editorBtnContainer}>
           <button onClick={resetHandler}>초기화</button>
-          <button onClick={postHandler}>생성</button>
-          <button onClick={deleteHandler}>토너먼트 삭제</button>
+          {tournamentEditInfo.tournamentId ? (
+            <button className={styles.edit} onClick={patchHandler}>
+              수정
+            </button>
+          ) : (
+            <button className={styles.create} onClick={postHandler}>
+              생성
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -32,7 +32,6 @@ function TournamentMatchParty({
       <div className={styles.partyName}>{party.name || teamNameFallback}</div>
       <div className={styles.score}>
         {party.resultText ?? resultFallback(party)}
-        {/* <input value={topParty.resultText ?? resultFallback(topParty)} /> */}
       </div>
     </div>
   );
