@@ -17,6 +17,12 @@ export interface ITournamentTable {
   currentPage: number;
 }
 
+export interface ITournamentUser {
+  userId: number;
+  intraId: string;
+  isJoined: boolean;
+}
+
 export interface ITournamentEditInfo {
   tournamentId: number | null;
   title: string;
