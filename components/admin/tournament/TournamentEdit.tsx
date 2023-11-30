@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent, RefObject, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   Paper,
@@ -31,6 +31,7 @@ const tableTitle: { [key: string]: string } = {
 };
 
 interface TournamentEditProps {
+  editorRef: RefObject<HTMLDivElement>;
   tournamentEditInfo: ITournamentEditInfo;
   inputChangeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
   selectChangehandler: (event: ChangeEvent<HTMLSelectElement>) => void;
@@ -44,6 +45,7 @@ interface TournamentEditProps {
 }
 
 export default function TournamentEdit({
+  editorRef,
   tournamentEditInfo,
   inputChangeHandler,
   selectChangehandler,
@@ -117,7 +119,7 @@ export default function TournamentEdit({
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={editorRef}>
       <div className={styles.announceModal}>
         <h1>추후 토너먼트 페이지 모달 완성시 추가 예정</h1>
       </div>
