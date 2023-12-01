@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { TournamentInfo, TournamentData } from 'types/tournamentTypes';
@@ -12,7 +12,9 @@ import styles from 'styles/tournament/TournamentContainer.module.scss';
 
 export default function Tournament() {
   const setError = useSetRecoilState(errorState);
-
+  const [waitTournament, setWaitTournament] = useState<TournamentData | null>(
+    null
+  );
   const openInfo = useQuery<TournamentData>(
     'openTorunamentInfo',
     () =>
@@ -22,33 +24,32 @@ export default function Tournament() {
     { retry: 1, staleTime: 60000 /* 60초 */ }
   );
 
-  async function fetchWaitTournamentData(page: number) {
-    return await mockInstance
+  const fetchWaitTournamentData = (page: number) => {
+    return mockInstance
       .get(`tournament?page=${page}&status=BEFORE&size=4`)
       .then((res) => {
         return res.data;
       });
-  }
+  };
 
-  const { data, error, isLoading, hasNextPage, fetchNextPage } = InfiniteScroll(
-    'waitTournament',
-    fetchWaitTournamentData,
-    'JJH1'
-  );
-
+  useEffect(() => {
+    fetchWaitTournamentData(1)
+      .then((data) => {
+        setWaitTournament(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
     <div className={styles.pageWrap}>
       <h1 className={styles.title}>Tournament</h1>
       <div className={styles.tournamentContainer}>
         <div className={styles.tournamentTextWait}> 대기중인 토너먼트 </div>
         <div className={styles.waitTournamentBox}>
-          {data?.pages.map((page, pageIndex) => (
-            <div className={styles.cardContainer} key={pageIndex}>
-              {page.tournaments.map(
-                (tournament: TournamentInfo, tournamentIndex: number) => (
-                  <TournamentCard key={tournamentIndex} {...tournament} />
-                )
-              )}
+          {waitTournament?.tournaments.map((tournament) => (
+            <div className={styles.cardContainer} key={tournament.tournamentId}>
+              <TournamentCard key={tournament.tournamentId} {...tournament} />
               {/* 실제로는 tournamnetId 를 key값으로 사용하는게 좋음, 현재는 mockdata에서 id 값들이 겹치기 때문에 Index로 사용
               {page.tournaments.map((tournament: TournamentInfo, tournamentIndex: number) => (
                 < key={tournament.tournamentId} {...tournament} />
@@ -56,10 +57,10 @@ export default function Tournament() {
             */}
             </div>
           ))}
-          <InfiniteScrollComponent
+          {/* <InfiniteScrollComponent
             fetchNextPage={fetchNextPage}
             hasNextPage={hasNextPage}
-          />
+          /> */}
         </div>
         <div className={styles.tournamentTextOpen}> 진행중인 토너먼트 </div>
         <div className={styles.openTournamentBox}>
