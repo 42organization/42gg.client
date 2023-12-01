@@ -26,7 +26,7 @@ export default function AdminEditTournamentBraket({
   const fetchTournamentGames = useCallback(async () => {
     console.log('Fetching more data...');
     try {
-      const res = await mockInstance.get(`/tournament/gen/games`);
+      const res = await mockInstance.get(`/tournament/${tournamentId}/games`);
       const data: TournamentGame[] = res.data.games;
       const bracketMatchs = convertTournamentGamesToBracketMatchs(data);
       setBracketMatchs(bracketMatchs);

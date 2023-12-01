@@ -3,10 +3,6 @@ import { MdPeopleAlt } from 'react-icons/md';
 import { ITournamentEditInfo } from 'types/admin/adminTournamentTypes';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { dateToString } from 'utils/handleTime';
-import {
-  ModalButton,
-  ModalButtonContainer,
-} from 'components/modal/ModalButton';
 import styles from 'styles/admin/tournament/TournamentModalPreview.module.scss';
 
 const Quill = dynamic(() => import('react-quill'), {
