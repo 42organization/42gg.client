@@ -16,7 +16,7 @@
   flex-direction: column;
   padding: 1rem 1rem 0rem;
   overflow-y: scroll;
-  background: #d4b8f2;
+  background-color: rgba(112, 0, 255, 0.17);
   border-radius: $small-radius;
 }
 
@@ -29,7 +29,7 @@
   overflow-x: hidden;
   overflow-y: scroll;
   background: rgba(112, 0, 255, 0.17);
-  border: 2px solid #c67dff;
+  border: 1px solid #c67dff;
   border-radius: 0.3rem;
 }
 
@@ -43,17 +43,17 @@
   overflow-x: scroll;
   overflow-y: scroll;
   background: rgba(112, 0, 255, 0.17);
-  border: 2px solid #c67dff;
+  border: 1px solid #c67dff;
   border-radius: 0.3rem;
   justify-content: center;
   align-items: center;
 }
 
-.tournamentTextWait {
+.tournamentText {
   display: flex;
   flex: 1;
   font-weight: 700;
-  color: black;
+  color: white;
   text-align: center; /* 텍스트를 가로로 중앙에 정렬 */
 }
 
@@ -62,7 +62,7 @@
   flex: 1;
   padding-top: 1rem;
   font-weight: 700;
-  color: black;
+  color: white;
   text-align: center; /* 텍스트를 가로로 중앙에 정렬 */
 }
 

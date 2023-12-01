@@ -4,16 +4,25 @@
   padding: 0 1rem;
   margin: 0.5rem;
   cursor: pointer;
-  background: linear-gradient(to bottom, #9134f7, #8921c5);
+  background: linear-gradient(to bottom, #7816e1, #9e35db);
   border-radius: 0.5rem;
-  justify-content: space-between;
   align-items: center;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.6);
 
   .text {
-    overflow: hidden;
+    display: flex;
+    width: 100%;
     color: white;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    justify-content: space-between;
+
+    .left {
+      flex: 2;
+      // text-align: left;
+    }
+
+    .right {
+      flex: 1;
+      // text-align: right;
+    }
   }
 }

@@ -43,7 +43,7 @@ export default function Tournament() {
     <div className={styles.pageWrap}>
       <h1 className={styles.title}>Tournament</h1>
       <div className={styles.tournamentContainer}>
-        <div className={styles.tournamentTextWait}> 대기중인 토너먼트 </div>
+        <div className={styles.tournamentText}> 예정된 토너먼트 </div>
         <div className={styles.waitTournamentBox}>
           {waitTournament?.tournaments.map((tournament) => (
             <div className={styles.cardContainer} key={tournament.tournamentId}>
