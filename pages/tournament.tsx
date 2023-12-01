@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { TournamentInfo, TournamentData } from 'types/tournamentTypes';
+import { TournamentData } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
-import { InfiniteScroll } from 'utils/infinityScroll';
 import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
-import { InfiniteScrollComponent } from 'components/store/InfiniteScrollComponent';
 import TournamentCard from 'components/tournament/TournamentCard';
 import styles from 'styles/tournament/TournamentContainer.module.scss';
 
@@ -38,7 +36,7 @@ export default function Tournament() {
         setWaitTournament(data);
       })
       .catch((error) => {
-        console.log(error);
+        setError('JHH02');
       });
   }, []);
   return (
@@ -50,17 +48,8 @@ export default function Tournament() {
           {waitTournament?.tournaments.map((tournament) => (
             <div className={styles.cardContainer} key={tournament.tournamentId}>
               <TournamentCard key={tournament.tournamentId} {...tournament} />
-              {/* 실제로는 tournamnetId 를 key값으로 사용하는게 좋음, 현재는 mockdata에서 id 값들이 겹치기 때문에 Index로 사용
-              {page.tournaments.map((tournament: TournamentInfo, tournamentIndex: number) => (
-                < key={tournament.tournamentId} {...tournament} />
-              ))} 
-            */}
             </div>
           ))}
-          {/* <InfiniteScrollComponent
-            fetchNextPage={fetchNextPage}
-            hasNextPage={hasNextPage}
-          /> */}
         </div>
         <div className={styles.tournamentTextOpen}> 진행중인 토너먼트 </div>
         <div className={styles.openTournamentBox}>
