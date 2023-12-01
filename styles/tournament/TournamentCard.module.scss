@@ -1,13 +1,14 @@
 .tournamentCardContainer {
   display: flex;
-  height: 3.5rem;
+  height: 4rem;
   padding: 0 1rem;
   margin: 0.5rem;
+  overflow-y: scroll;
   cursor: pointer;
   background: linear-gradient(to bottom, #7816e1, #9e35db);
   border-radius: 0.5rem;
-  align-items: center;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.6);
+  align-items: center;
 
   .text {
     display: flex;
@@ -17,6 +18,9 @@
 
     .left {
       flex: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       // text-align: left;
     }
 

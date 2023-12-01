@@ -33,6 +33,17 @@
   border-radius: 0.3rem;
 }
 
+.waitTournamentBox::-webkit-scrollbar {
+  display: inherit;
+  width: 0.5rem;
+  height: 1rem;
+}
+
+.waitTournamentBox::-webkit-scrollbar-thumb {
+  background: rgba(240, 210, 210, 1);
+  border-radius: 2rem;
+}
+
 .openTournamentBox {
   display: flex;
   width: 100%;
