@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { TournamentData } from 'types/tournamentTypes';
+import { TournamentData , TournamentGame } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
+import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
 import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
+import TournamentBraket from 'components/tournament/TournamentBraket';
 import TournamentCard from 'components/tournament/TournamentCard';
 import styles from 'styles/tournament/TournamentContainer.module.scss';
 
@@ -13,12 +16,16 @@ export default function Tournament() {
   const [waitTournament, setWaitTournament] = useState<TournamentData | null>(
     null
   );
+  const [openTournamentId, setOpenTournamentId] = useState<number>(0);
+  const [openTournament, setOpenTournament] = useState<Match[]>([]);
+
   const openInfo = useQuery<TournamentData>(
     'openTorunamentInfo',
     () =>
-      mockInstance
-        .get('tournament?page=1&status=진행중')
-        .then((res) => res.data),
+      mockInstance.get('tournament?page=1&status=진행중').then((res) => {
+        setOpenTournamentId(res.data.tournamentId);
+        return res.data.tournamentId;
+      }),
     { retry: 1, staleTime: 60000 /* 60초 */ }
   );
 
@@ -30,6 +37,21 @@ export default function Tournament() {
       });
   };
 
+  const fetchTournamentGames = useCallback(async () => {
+    console.log('Fetching more data...');
+    try {
+      const res = await mockInstance.get(
+        `/tournament/${openTournamentId}/games`
+      );
+      const data: TournamentGame[] = res.data.games;
+      const bracketMatchs = convertTournamentGamesToBracketMatchs(data);
+      setOpenTournament(bracketMatchs);
+      return data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }, [openTournament]);
+
   useEffect(() => {
     fetchWaitTournamentData(1)
       .then((data) => {
@@ -38,7 +60,9 @@ export default function Tournament() {
       .catch((error) => {
         setError('JHH02');
       });
+    fetchTournamentGames();
   }, []);
+
   return (
     <div className={styles.pageWrap}>
       <h1 className={styles.title}>Tournament</h1>
@@ -57,7 +81,9 @@ export default function Tournament() {
             {openInfo.data && openInfo.data.tournaments.length === 0 ? (
               <>진행중인 토너먼트가 없습니다</>
             ) : (
-              <>진행중인 토너먼트 사진</>
+              <TournamentBraket
+                singleEliminationBracketMatchs={openTournament}
+              />
             )}
           </div>
         </div>
