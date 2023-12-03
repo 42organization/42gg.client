@@ -1,8 +1,8 @@
 import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { TournamentData , TournamentGame } from 'types/tournamentTypes';
+import { TournamentData, TournamentGame } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
 import { mockInstance } from 'utils/mockAxios';
@@ -18,6 +18,8 @@ export default function Tournament() {
   );
   const [openTournamentId, setOpenTournamentId] = useState<number>(0);
   const [openTournament, setOpenTournament] = useState<Match[]>([]);
+  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+  const containerRef = useRef<HTMLDivElement | null>(null); // useRef를 사용하여 Ref 생성
 
   const openInfo = useQuery<TournamentData>(
     'openTorunamentInfo',
@@ -63,6 +65,14 @@ export default function Tournament() {
     fetchTournamentGames();
   }, []);
 
+  useEffect(() => {
+    if (containerRef.current) {
+      const width = containerRef.current.clientWidth;
+      const height = containerRef.current.clientHeight;
+      setContainerSize({ width, height });
+    }
+  }, []);
+
   return (
     <div className={styles.pageWrap}>
       <h1 className={styles.title}>Tournament</h1>
@@ -76,16 +86,17 @@ export default function Tournament() {
           ))}
         </div>
         <div className={styles.tournamentTextOpen}> 진행중인 토너먼트 </div>
-        <div className={styles.openTournamentBox}>
-          <div className={styles.tournamentText}>
-            {openInfo.data && openInfo.data.tournaments.length === 0 ? (
-              <>진행중인 토너먼트가 없습니다</>
-            ) : (
-              <TournamentBraket
-                singleEliminationBracketMatchs={openTournament}
-              />
-            )}
-          </div>
+        <div className={styles.openTournamentBox} ref={containerRef}>
+          {openInfo.data && openInfo.data.tournaments.length === 0 ? (
+            <div className={styles.tournamentText}>
+              진행중인 토너먼트가 없습니다
+            </div>
+          ) : (
+            <TournamentBraket
+              singleEliminationBracketMatchs={openTournament}
+              containerSize={containerSize}
+            />
+          )}
         </div>
       </div>
     </div>
