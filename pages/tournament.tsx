@@ -24,7 +24,7 @@ export default function Tournament() {
   const openInfo = useQuery<TournamentData>(
     'openTorunamentInfo',
     () =>
-      mockInstance.get('tournament?page=1&status=진행중').then((res) => {
+      mockInstance.get('tournament?page=1&status=BEFORE').then((res) => {
         setOpenTournamentId(res.data.tournamentId);
         return res.data.tournamentId;
       }),
@@ -59,7 +59,7 @@ export default function Tournament() {
       .then((data) => {
         setWaitTournament(data);
       })
-      .catch((error) => {
+      .catch(() => {
         setError('JHH02');
       });
     fetchTournamentGames();
