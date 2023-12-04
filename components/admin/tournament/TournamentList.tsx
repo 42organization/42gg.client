@@ -42,11 +42,13 @@ const tableTitle: { [key: string]: string } = {
 };
 
 interface TournamentListProps {
+  scrollToEditor: () => void;
   tournamentEditInfo: ITournamentEditInfo;
   setTournamentEditInfo: Dispatch<SetStateAction<ITournamentEditInfo>>;
 }
 
 export default function TournamentList({
+  scrollToEditor,
   tournamentEditInfo,
   setTournamentEditInfo,
 }: TournamentListProps) {
@@ -153,10 +155,7 @@ export default function TournamentList({
                                         ),
                                         endTime: new Date(tournament.endTime),
                                       });
-                                      window.scrollTo({
-                                        top: 0,
-                                        behavior: 'smooth',
-                                      });
+                                      scrollToEditor();
                                     }}
                                   >
                                     내용 수정
