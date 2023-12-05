@@ -1,5 +1,5 @@
 import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import { ITournament } from 'types/admin/adminTournamentTypes';
 import { TournamentGame, TournamentInfo } from 'types/tournamentTypes';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
@@ -13,6 +13,7 @@ export default function AdminEditTournamentBraket({
   tournamentId,
 }: ITournament) {
   const [bracketMatchs, setBracketMatchs] = useState<Match[]>([]);
+  const ref = useRef<HTMLDivElement>(null);
 
   // const putHandler = async () => {
   //   await instanceInManage.put(
@@ -41,8 +42,12 @@ export default function AdminEditTournamentBraket({
   }, [fetchTournamentGames]);
 
   return (
-    <div className={styles['whole']}>
-      <TournamentBraket singleEliminationBracketMatchs={bracketMatchs} />
+    <div className={styles['whole']} ref={ref}>
+      <TournamentBraket
+        singleEliminationBracketMatchs={bracketMatchs}
+        width={ref.current?.offsetWidth}
+        height={ref.current?.offsetHeight}
+      />
       <button className={styles.editBtn}>수정 하기</button>
     </div>
   ); //*onClick={putHandler}
