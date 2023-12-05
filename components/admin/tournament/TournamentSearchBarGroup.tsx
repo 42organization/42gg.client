@@ -52,7 +52,7 @@ export default function TournamentSearchBarGroup() {
       }
     }, 500);
     return () => clearTimeout(identifier);
-  }, [inputId]);
+  }, [inputId, isIdExist, setError]);
 
   return (
     <>
