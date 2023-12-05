@@ -10,7 +10,6 @@ import styles from 'styles/admin/modal/AdminTournamentParticipantEditModal.modul
 export default function AdminTournamentParticipantEditModal(props: {
   tournamentId: number;
 }) {
-  const MAX_LENGTH = 30;
   const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
@@ -28,7 +27,12 @@ export default function AdminTournamentParticipantEditModal(props: {
         </li>
       </ul>
       <div className={styles.buttonGroup}>
-        <Button variant='outlined'>취소</Button>
+        <Button
+          variant='outlined'
+          onClick={() => setModal({ modalName: null })}
+        >
+          취소
+        </Button>
       </div>
     </div>
   );
