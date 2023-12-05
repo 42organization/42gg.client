@@ -16,6 +16,7 @@ export default function UserTournamentBraket({
   const ref = useRef<HTMLDivElement>(null);
 
   const [bracketMatchs, setBracketMatchs] = useState<Match[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   // const putHandler = async () => {
   //   await instanceInManage.put(
@@ -30,26 +31,37 @@ export default function UserTournamentBraket({
     console.log('Fetching more data...');
     try {
       const res = await mockInstance.get(`/tournament/${tournamentId}/games`);
+      setIsLoading(false);
       const data: TournamentGame[] = res.data.games;
       const bracketMatchs = convertTournamentGamesToBracketMatchs(data);
       setBracketMatchs(bracketMatchs);
       return data;
     } catch (error) {
+      setIsLoading(false);
       console.error('Error fetching data:', error);
     }
-  }, []);
+  }, [tournamentId]);
 
   useEffect(() => {
-    fetchTournamentGames();
-  }, [fetchTournamentGames]);
+    setIsLoading(true);
+    const identifier = setTimeout(() => {
+      console.log('fetching tournament game data..');
+      fetchTournamentGames();
+    }, 500);
+    return () => clearTimeout(identifier);
+  }, [tournamentId, fetchTournamentGames]);
 
   return (
     <div ref={ref} className={styles.bracketContainer}>
-      <TournamentBraket
-        singleEliminationBracketMatchs={bracketMatchs}
-        width={ref.current?.offsetWidth}
-        height={ref.current?.offsetHeight}
-      />
+      {isLoading ? (
+        <div className={styles.loadingAnimation} />
+      ) : (
+        <TournamentBraket
+          singleEliminationBracketMatchs={bracketMatchs}
+          width={ref.current?.offsetWidth}
+          height={ref.current?.offsetHeight}
+        />
+      )}
     </div>
   );
 }

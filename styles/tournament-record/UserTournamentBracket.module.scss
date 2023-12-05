@@ -12,3 +12,26 @@
   align-items: center;
   justify-content: center;
 }
+
+@keyframes Rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingAnimation {
+  z-index: 100;
+  width: 3rem;
+  height: 3rem;
+
+  border: 0.3rem solid rgb(167, 167, 167);
+  border-top-color: transparent;
+  border-left-color: transparent;
+
+  border-radius: 50%;
+
+  animation: Rotate 0.8s infinite linear;
+}
