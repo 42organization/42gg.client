@@ -8,8 +8,8 @@ import React, {
 import { EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide, SwiperClass, SwiperRef } from 'swiper/react';
 import { TournamentData, TournamentInfo } from 'types/tournamentTypes';
+import { instance } from 'utils/axios';
 import { InfiniteScroll } from 'utils/infinityScroll';
-import { mockInstance } from 'utils/mockAxios';
 import styles from 'styles/tournament-record/WinnerSwiper.module.scss';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -26,8 +26,8 @@ const WinnerSwiper = forwardRef(
     const fetchTournamentData = useCallback(
       async (page: number) => {
         console.log('Fetching more data...');
-        const res = await mockInstance.get(
-          `/tournament?page=${page}&type=${props.type}&size=${props.size}&status=END`
+        const res = await instance.get(
+          `/pingpong/tournaments?page=${page}&type=${props.type}&size=${props.size}&status=END`
         );
         return res.data;
       },
