@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import TournamentEdit from 'components/admin/tournament/TournamentEdit';
 import TournamentList from 'components/admin/tournament/TournamentList';
 import useTournamentEditInfo from 'hooks/tournament/useTournamentEditInfo';
@@ -14,9 +14,15 @@ export default function Tournament() {
     resetHandler,
   } = useTournamentEditInfo();
 
+  const editorRef = useRef<HTMLDivElement>(null);
+  const scrollToEditor = () => {
+    editorRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className={styles.container}>
       <TournamentEdit
+        editorRef={editorRef}
         tournamentEditInfo={tournamentEditInfo}
         inputChangeHandler={inputChangeHandler}
         selectChangehandler={selectChangeHandler}
@@ -24,6 +30,7 @@ export default function Tournament() {
         resetHandler={resetHandler}
       />
       <TournamentList
+        scrollToEditor={scrollToEditor}
         tournamentEditInfo={tournamentEditInfo}
         setTournamentEditInfo={setTournamentEditInfo}
       />
