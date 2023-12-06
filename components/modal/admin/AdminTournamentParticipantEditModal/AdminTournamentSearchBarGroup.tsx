@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useSetRecoilState } from 'recoil';
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { Input, InputAdornment, Button, Menu, MenuItem } from '@mui/material';
+import React, { useRef } from 'react';
+import { Button } from '@mui/material';
 import { ITournamentUser } from 'types/admin/adminTournamentTypes';
-import { instance, instanceInManage } from 'utils/axios';
 import { mockInstance } from 'utils/mockAxios';
-import { errorState } from 'utils/recoil/error';
+import useAdminSearchUser from 'hooks/admin/modal/useAdminSearchUser';
 import AdminSearchUserDropDownMenu from './AdminSearchUserDropDownMenu';
+import AdminTournamentSearchBar from './AdminTournamenSearchBar';
 
 interface AdminTournamentSearchBarGroupProps {
   onAddUser: React.Dispatch<React.SetStateAction<ITournamentUser>>;
@@ -18,53 +15,20 @@ export default function AdminTournamentSearchBarGroup({
   onAddUser,
   tournamentId,
 }: AdminTournamentSearchBarGroupProps) {
-  const [inputId, setInputId] = useState('');
-  const [isIdExist, setIsIdExist] = useState(false);
-  const [isTyping, setIsTyping] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [userList, setUserList] = useState<string[]>([]);
-  const [isWaitingResponse, setIsWaitingResponse] = useState(false);
+  const {
+    inputId,
+    isIdExist,
+    isTyping,
+    menuOpen,
+    setMenuOpen,
+    userList,
+    isWaitingResponse,
+    setIsWaitingResponse,
+    inputChangeHandler,
+    handleMenuItemClick,
+  } = useAdminSearchUser();
+
   const inputRef = useRef<HTMLInputElement>(null);
-  const setError = useSetRecoilState<string>(errorState);
-
-  const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputId(event.target.value);
-    setIsTyping(true);
-    setIsIdExist(false);
-  };
-
-  const handleMenuItemClick = (id: string) => {
-    setInputId(id);
-    setIsIdExist(true);
-    setMenuOpen(false);
-  };
-
-  const fetchUserIntraId = useCallback(async () => {
-    try {
-      const res = await instance.get(
-        `/pingpong/users/searches?intraId=${inputId}`
-      );
-      const users = res.data.users;
-      setUserList(users);
-    } catch (e) {
-      setError('JC02');
-    }
-  }, [inputId, setError]);
-
-  useEffect(() => {
-    if (inputId === '' || isIdExist == true) {
-      return;
-    }
-    const identifier = setTimeout(async () => {
-      setIsTyping(false);
-      fetchUserIntraId();
-      if (userList.length > 0 && userList[0] !== inputId) {
-        setMenuOpen(true);
-      }
-      setIsIdExist(userList.length === 1 && userList[0] === inputId);
-    }, 500);
-    return () => clearTimeout(identifier);
-  }, [inputId, isIdExist, fetchUserIntraId, userList]);
 
   async function addButtonHandler() {
     if (isIdExist) {
@@ -85,24 +49,12 @@ export default function AdminTournamentSearchBarGroup({
 
   return (
     <>
-      <Input
-        ref={inputRef}
-        onChange={inputChangeHandler}
-        placeholder='인트라 ID를 입력하세요.'
-        error={!isIdExist}
-        value={inputId}
-        endAdornment={
-          inputId &&
-          !isTyping && (
-            <InputAdornment position='end'>
-              {isIdExist ? (
-                <CheckCircleOutlineIcon style={{ color: 'green' }} />
-              ) : (
-                <CancelOutlinedIcon style={{ color: 'red' }} />
-              )}
-            </InputAdornment>
-          )
-        }
+      <AdminTournamentSearchBar
+        inputRef={inputRef}
+        inputChangeHandler={inputChangeHandler}
+        isIdExist={isIdExist}
+        inputId={inputId}
+        isTyping={isTyping}
       />
       <AdminSearchUserDropDownMenu
         inputRef={inputRef.current}
