@@ -61,7 +61,12 @@ export default function AdminTournamentParticipantEditModal(props: {
 
   return (
     <div className={styles.whole}>
-      <h2>참가자 수정</h2>
+      <div className={styles.titleContainer}>
+        <h2>참가자 수정</h2>
+        <div className={styles.sampleColorContainer}>
+          <div className={styles.sampleJoinedColor} />: 참가자
+        </div>
+      </div>
       <div className={styles.hr}></div>
       <TournamentSearchBarGroup
         onAddUser={setUserToAdd}
@@ -69,9 +74,13 @@ export default function AdminTournamentParticipantEditModal(props: {
       />
       <ul>
         {participantList.map((participant) => (
-          <li key={participant.userId}>
+          <li
+            key={participant.userId}
+            className={participant.isJoined ? styles.joined : undefined}
+          >
             {participant.intraId}
             <Button
+              className={styles.deleteButtonColor}
               variant='outlined'
               color='error'
               onClick={() => participantDeleteHandler(participant.intraId)}
