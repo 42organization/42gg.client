@@ -4,6 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import { MdPeopleAlt } from 'react-icons/md';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { TournamentInfo } from 'types/tournamentTypes';
+import { dateToString } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
@@ -91,14 +92,8 @@ export default function TournamentRegistryModal({
 
   useEffect(() => {
     getStatus();
-
     const date = new Date(startTime);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더해줌
-    const day = date.getDate();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    setOpenDate(`${year}년 ${month}월 ${day}일 ${hours}:${minutes}`);
+    setOpenDate(dateToString(date));
   }, []);
 
   const closeModalButtonHandler = () => {
