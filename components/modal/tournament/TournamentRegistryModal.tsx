@@ -52,7 +52,6 @@ export default function TournamentRegistryModal({
             message: `토너먼트 신청이 완료됐습니다`,
             clicked: true,
           });
-          if (player_cnt < 8) setPlayerCount(playerCount + 1);
         }
         if (res.data.status == false) {
           setSnackbar({
@@ -65,6 +64,7 @@ export default function TournamentRegistryModal({
 
         setRegistState(res.data.status);
         setLoading(false);
+        setModal({ modalName: null });
         return res.data.status;
       })
       .catch((error) => {

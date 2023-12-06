@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import { TournamentInfo } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
+import { dateToString } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
 import useInterval from 'hooks/useInterval';
 import styles from 'styles/Layout/MegaPhone.module.scss';
@@ -39,7 +40,7 @@ const TournamentMegaphone = () => {
 
   function getTournamentListHandler() {
     return mockInstance
-      .get(`tournament?page=1&status=예정&size=5`)
+      .get(`tournament?size=20&page=1&status=BEFORE`)
       .then((res) => {
         setTournamentList(res.data.tournaments);
       });
@@ -61,7 +62,7 @@ const TournamentMegaphone = () => {
           (item): IMegaphoneContent => ({
             megaphoneId: item.tournamentId,
             content: item.title,
-            intraId: item.startTime.toString().split(':').slice(0, 2).join(':'),
+            intraId: dateToString(new Date(item.startTime)),
             onClick: goTournamentPage,
           })
         ),
