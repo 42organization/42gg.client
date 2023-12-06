@@ -69,15 +69,16 @@ export default function TournamentEdit({
 
   const patchHandler = async () => {
     try {
+      const req = {
+        title: tournamentEditInfo.title,
+        contents: tournamentEditInfo.contents,
+        startTime: tournamentEditInfo.startTime,
+        endTime: tournamentEditInfo.endTime,
+        type: tournamentEditInfo.type,
+      };
       await instanceInManage.patch(
-        `/tournament/${tournamentEditInfo.tournamentId}`,
-        {
-          title: tournamentEditInfo.title,
-          contents: tournamentEditInfo.contents,
-          startTime: tournamentEditInfo.startTime,
-          endTime: tournamentEditInfo.endTime,
-          type: tournamentEditInfo.type,
-        }
+        `/tournaments/${tournamentEditInfo.tournamentId}`,
+        req
       );
       setSnackbar({
         toastName: `patch request`,
@@ -89,7 +90,7 @@ export default function TournamentEdit({
       setSnackbar({
         toastName: `bad request`,
         severity: 'error',
-        // message: `🔥 ${announceCreateResponse[e.response.data.code]} 🔥`,
+        message: `🔥 ${e.response.data.message} 🔥`,
         clicked: true,
       });
     }
@@ -97,7 +98,7 @@ export default function TournamentEdit({
 
   const postHandler = async () => {
     try {
-      await instanceInManage.post(`/tournament`, {
+      await instanceInManage.post(`/tournaments`, {
         title: tournamentEditInfo.title,
         contents: tournamentEditInfo.contents,
         startTime: tournamentEditInfo.startTime,
@@ -114,7 +115,7 @@ export default function TournamentEdit({
       setSnackbar({
         toastName: `bad request`,
         severity: 'error',
-        // message: `🔥 ${announceCreateResponse[e.response.data.code]} 🔥`,
+        message: `🔥 ${e.response.data.message} 🔥`,
         clicked: true,
       });
     }
