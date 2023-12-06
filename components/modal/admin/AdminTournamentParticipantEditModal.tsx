@@ -50,9 +50,7 @@ export default function AdminTournamentParticipantEditModal(props: {
       await mockInstance.delete(
         `/admin/tournaments/${props.tournamentId}/users/${intraId}`
       );
-      setParticipantList((participantList) =>
-        participantList.filter((participant) => participant.intraId !== intraId)
-      );
+      fetchParticipantList();
       console.log('삭제 완료');
     } catch (error) {
       console.log(error);
@@ -81,7 +79,6 @@ export default function AdminTournamentParticipantEditModal(props: {
             {participant.intraId}
             <Button
               className={styles.deleteButtonColor}
-              variant='outlined'
               color='error'
               onClick={() => participantDeleteHandler(participant.intraId)}
             >
