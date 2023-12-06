@@ -31,11 +31,11 @@ export default function AdminTournamentParticipantEditModal(props: {
           `/admin/tournaments/${props.tournamentId}/users`
         );
       setParticipantList(res.data.users);
-    } catch (error) {
+    } catch (error: any) {
       setSnackBar({
         toastName: 'tournament user fetch noti',
         severity: 'error',
-        message: '유저 목록 조회에 실패하였습니다.',
+        message: `🔥 ${error.response.data.message} 🔥`,
         clicked: true,
       });
     }
@@ -63,11 +63,11 @@ export default function AdminTournamentParticipantEditModal(props: {
         message: '유저를 성공적으로 삭제하였습니다!',
         clicked: true,
       });
-    } catch (error) {
+    } catch (error: any) {
       setSnackBar({
         toastName: 'tournament user delete noti',
         severity: 'error',
-        message: '유저 삭제에 실패하였습니다.',
+        message: `🔥 ${error.response.data.message} 🔥`,
         clicked: true,
       });
     }

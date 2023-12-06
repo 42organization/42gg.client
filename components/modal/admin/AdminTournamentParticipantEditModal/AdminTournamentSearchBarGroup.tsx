@@ -48,12 +48,11 @@ export default function AdminTournamentSearchBarGroup({
           message: '유저를 성공적으로 추가하였습니다!',
           clicked: true,
         });
-      } catch (error) {
-        console.log(error);
+      } catch (error: any) {
         setSnackBar({
           toastName: 'tournament user add noti',
           severity: 'error',
-          message: '유저 추가에 실패하였습니다.',
+          message: `🔥 ${error.response.data.message} 🔥`,
           clicked: true,
         });
       }
