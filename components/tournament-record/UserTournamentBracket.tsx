@@ -4,6 +4,7 @@ import { TournamentGame } from 'types/tournamentTypes';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
 import { mockInstance } from 'utils/mockAxios';
 import TournamentBraket from 'components/tournament/TournamentBraket';
+import useComponentSize from 'hooks/util/useComponentSize';
 import styles from 'styles/tournament-record/UserTournamentBracket.module.scss';
 
 interface UserTournamentBracketProps {
@@ -13,7 +14,7 @@ interface UserTournamentBracketProps {
 export default function UserTournamentBraket({
   tournamentId,
 }: UserTournamentBracketProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const [ref, size] = useComponentSize<HTMLDivElement>();
 
   const [bracketMatchs, setBracketMatchs] = useState<Match[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -58,8 +59,7 @@ export default function UserTournamentBraket({
       ) : (
         <TournamentBraket
           singleEliminationBracketMatchs={bracketMatchs}
-          width={ref.current?.offsetWidth}
-          height={ref.current?.offsetHeight}
+          containerSize={size}
         />
       )}
     </div>
