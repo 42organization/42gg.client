@@ -5,6 +5,7 @@ import { TournamentGame, TournamentInfo } from 'types/tournamentTypes';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
 import { mockInstance } from 'utils/mockAxios';
 import TournamentBraket from 'components/tournament/TournamentBraket';
+import useComponentSize from 'hooks/util/useComponentSize';
 import styles from 'styles/admin/modal/AdminEditTournamentBraket.module.scss';
 
 const tournamentId = 1;
@@ -13,7 +14,7 @@ export default function AdminEditTournamentBraket({
   tournamentId,
 }: ITournament) {
   const [bracketMatchs, setBracketMatchs] = useState<Match[]>([]);
-  const ref = useRef<HTMLDivElement>(null);
+  const [ref, size] = useComponentSize<HTMLDivElement>();
 
   // const putHandler = async () => {
   //   await instanceInManage.put(
@@ -45,8 +46,7 @@ export default function AdminEditTournamentBraket({
     <div className={styles['whole']} ref={ref}>
       <TournamentBraket
         singleEliminationBracketMatchs={bracketMatchs}
-        width={ref.current?.offsetWidth}
-        height={ref.current?.offsetHeight}
+        containerSize={size}
       />
       <button className={styles.editBtn}>수정 하기</button>
     </div>
