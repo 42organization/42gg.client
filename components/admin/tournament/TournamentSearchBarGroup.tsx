@@ -3,15 +3,26 @@ import { useSetRecoilState } from 'recoil';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { Input, InputAdornment, Button, Menu, MenuItem } from '@mui/material';
-import { instance } from 'utils/axios';
+import { ITournamentUser } from 'types/admin/adminTournamentTypes';
+import { instance, instanceInManage } from 'utils/axios';
+import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
 
-export default function TournamentSearchBarGroup() {
+interface TournamentSearchBarGroupProps {
+  onAddUser: React.Dispatch<React.SetStateAction<ITournamentUser>>;
+  tournamentId: number;
+}
+
+export default function TournamentSearchBarGroup({
+  onAddUser,
+  tournamentId,
+}: TournamentSearchBarGroupProps) {
   const [inputId, setInputId] = useState('');
-  const [isIdExist, setIsIdExist] = useState(true);
+  const [isIdExist, setIsIdExist] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [userList, setUserList] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isWaitingResponse, setIsWaitingResponse] = useState(false);
   const inputRef = useRef<HTMLDivElement>(null);
   const setError = useSetRecoilState<string>(errorState);
 
@@ -54,6 +65,23 @@ export default function TournamentSearchBarGroup() {
     return () => clearTimeout(identifier);
   }, [inputId, isIdExist, setError]);
 
+  async function addButtonHandler() {
+    if (isIdExist) {
+      setIsWaitingResponse(true);
+      try {
+        const res: { data: ITournamentUser } = await mockInstance.post(
+          `/admin/tournaments/${tournamentId}/users`,
+          { intraId: inputId }
+        );
+        onAddUser(res.data);
+      } catch (error) {
+        // error handling
+        console.log(error);
+      }
+      setIsWaitingResponse(false);
+    }
+  }
+
   return (
     <>
       <Input
@@ -92,7 +120,13 @@ export default function TournamentSearchBarGroup() {
           <b>esc</b>: 포커스 탈출{' '}
         </small>
       </Menu>
-      <Button variant='contained'>추가</Button>
+      <Button
+        variant='contained'
+        onClick={addButtonHandler}
+        disabled={isWaitingResponse}
+      >
+        추가
+      </Button>
     </>
   );
 }
