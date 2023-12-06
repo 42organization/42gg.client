@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSetRecoilState } from 'recoil';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -7,6 +7,7 @@ import { ITournamentUser } from 'types/admin/adminTournamentTypes';
 import { instance, instanceInManage } from 'utils/axios';
 import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
+import AdminSearchUserDropDownMenu from './AdminSearchUserDropDownMenu';
 
 interface TournamentSearchBarGroupProps {
   onAddUser: React.Dispatch<React.SetStateAction<ITournamentUser>>;
@@ -20,10 +21,10 @@ export default function TournamentSearchBarGroup({
   const [inputId, setInputId] = useState('');
   const [isIdExist, setIsIdExist] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const [userList, setUserList] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userList, setUserList] = useState<string[]>([]);
   const [isWaitingResponse, setIsWaitingResponse] = useState(false);
-  const inputRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const setError = useSetRecoilState<string>(errorState);
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,15 +33,23 @@ export default function TournamentSearchBarGroup({
     setIsIdExist(false);
   };
 
-  const handleMenuClose = () => {
-    setMenuOpen(false);
-  };
-
   const handleMenuItemClick = (id: string) => {
     setInputId(id);
     setIsIdExist(true);
-    handleMenuClose();
+    setMenuOpen(false);
   };
+
+  const fetchUserIntraId = useCallback(async () => {
+    try {
+      const res = await instance.get(
+        `/pingpong/users/searches?intraId=${inputId}`
+      );
+      const users = res.data.users;
+      setUserList(users);
+    } catch (e) {
+      setError('JC02');
+    }
+  }, [inputId, setError]);
 
   useEffect(() => {
     if (inputId === '' || isIdExist == true) {
@@ -48,22 +57,14 @@ export default function TournamentSearchBarGroup({
     }
     const identifier = setTimeout(async () => {
       setIsTyping(false);
-      try {
-        const res = await instance.get(
-          `/pingpong/users/searches?intraId=${inputId}`
-        );
-        const users = res.data.users;
-        setUserList(users);
-        if (users.length > 0 && users[0] !== inputId) {
-          setMenuOpen(true);
-        }
-        setIsIdExist(users.length === 1 && users[0] === inputId);
-      } catch (e) {
-        setError('JC02');
+      fetchUserIntraId();
+      if (userList.length > 0 && userList[0] !== inputId) {
+        setMenuOpen(true);
       }
+      setIsIdExist(userList.length === 1 && userList[0] === inputId);
     }, 500);
     return () => clearTimeout(identifier);
-  }, [inputId, isIdExist, setError]);
+  }, [inputId, isIdExist, fetchUserIntraId, userList]);
 
   async function addButtonHandler() {
     if (isIdExist) {
@@ -103,23 +104,13 @@ export default function TournamentSearchBarGroup({
           )
         }
       />
-      <Menu
-        id='simple-menu'
-        anchorEl={inputRef.current}
-        keepMounted
-        open={menuOpen}
-        onClose={handleMenuClose}
-      >
-        {userList.map((id) => (
-          <MenuItem key={id} onClick={() => handleMenuItemClick(id)}>
-            {id}
-          </MenuItem>
-        ))}
-        <small>
-          {' '}
-          <b>esc</b>: 포커스 탈출{' '}
-        </small>
-      </Menu>
+      <AdminSearchUserDropDownMenu
+        inputRef={inputRef.current}
+        menuOpen={menuOpen}
+        onMenuClose={() => setMenuOpen(false)}
+        userList={userList}
+        onMenuClick={handleMenuItemClick}
+      />
       <Button
         variant='contained'
         onClick={addButtonHandler}
