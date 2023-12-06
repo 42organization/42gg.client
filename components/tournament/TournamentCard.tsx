@@ -1,5 +1,5 @@
 import { useSetRecoilState } from 'recoil';
-import { SlCalender } from 'react-icons/sl';
+import { BiCalendar } from 'react-icons/bi';
 import { Modal } from 'types/modalTypes';
 import { TournamentInfo } from 'types/tournamentTypes';
 import { dateToString } from 'utils/handleTime';
@@ -52,7 +52,7 @@ export default function TournamentCard({
       <div className={styles.text}>
         <div className={styles.left}>{title}</div>
         <div className={styles.right}>
-          <SlCalender /> {start}
+          <BiCalendar /> {start}
         </div>
       </div>
     </div>
