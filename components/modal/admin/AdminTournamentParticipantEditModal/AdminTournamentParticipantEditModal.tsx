@@ -8,6 +8,7 @@ import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import TournamentSearchBarGroup from 'components/admin/tournament/TournamentSearchBarGroup';
 import styles from 'styles/admin/modal/AdminTournamentParticipantEditModal.module.scss';
+import AdminTournamentParticipantList from './AdminTournamentParticipantList';
 
 export default function AdminTournamentParticipantEditModal(props: {
   tournamentId: number;
@@ -70,23 +71,10 @@ export default function AdminTournamentParticipantEditModal(props: {
         onAddUser={setUserToAdd}
         tournamentId={props.tournamentId}
       />
-      <ul>
-        {participantList.map((participant) => (
-          <li
-            key={participant.userId}
-            className={participant.isJoined ? styles.joined : undefined}
-          >
-            {participant.intraId}
-            <Button
-              className={styles.deleteButtonColor}
-              color='error'
-              onClick={() => participantDeleteHandler(participant.intraId)}
-            >
-              삭제
-            </Button>
-          </li>
-        ))}
-      </ul>
+      <AdminTournamentParticipantList
+        participantList={participantList}
+        onDelete={participantDeleteHandler}
+      />
       <div className={styles.buttonGroup}>
         <Button
           variant='outlined'
