@@ -6,7 +6,7 @@ import { instanceInManage } from 'utils/axios';
 import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import TournamentSearchBarGroup from 'components/admin/tournament/TournamentSearchBarGroup';
+import AdminTournamentSearchBarGroup from 'components/modal/admin/AdminTournamentParticipantEditModal/AdminTournamentSearchBarGroup';
 import styles from 'styles/admin/modal/AdminTournamentParticipantEditModal.module.scss';
 import AdminTournamentParticipantList from './AdminTournamentParticipantList';
 
@@ -67,7 +67,7 @@ export default function AdminTournamentParticipantEditModal(props: {
         </div>
       </div>
       <div className={styles.hr}></div>
-      <TournamentSearchBarGroup
+      <AdminTournamentSearchBarGroup
         onAddUser={setUserToAdd}
         tournamentId={props.tournamentId}
       />

@@ -9,15 +9,15 @@ import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
 import AdminSearchUserDropDownMenu from './AdminSearchUserDropDownMenu';
 
-interface TournamentSearchBarGroupProps {
+interface AdminTournamentSearchBarGroupProps {
   onAddUser: React.Dispatch<React.SetStateAction<ITournamentUser>>;
   tournamentId: number;
 }
 
-export default function TournamentSearchBarGroup({
+export default function AdminTournamentSearchBarGroup({
   onAddUser,
   tournamentId,
-}: TournamentSearchBarGroupProps) {
+}: AdminTournamentSearchBarGroupProps) {
   const [inputId, setInputId] = useState('');
   const [isIdExist, setIsIdExist] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
