@@ -41,11 +41,23 @@ export default function AdminTournamentParticipantEditModal(props: {
 
   useEffect(() => {
     if (userToAdd.intraId !== '') {
-      setParticipantList((participantList) => {
-        return [...participantList, userToAdd];
-      });
+      setParticipantList((participantList) => [...participantList, userToAdd]);
     }
   }, [userToAdd]);
+
+  async function participantDeleteHandler(intraId: string) {
+    try {
+      await mockInstance.delete(
+        `/admin/tournaments/${props.tournamentId}/users/${intraId}`
+      );
+      setParticipantList((participantList) =>
+        participantList.filter((participant) => participant.intraId !== intraId)
+      );
+      console.log('삭제 완료');
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className={styles.whole}>
@@ -59,7 +71,11 @@ export default function AdminTournamentParticipantEditModal(props: {
         {participantList.map((participant) => (
           <li key={participant.userId}>
             {participant.intraId}
-            <Button variant='outlined' color='error'>
+            <Button
+              variant='outlined'
+              color='error'
+              onClick={() => participantDeleteHandler(participant.intraId)}
+            >
               삭제
             </Button>
           </li>
