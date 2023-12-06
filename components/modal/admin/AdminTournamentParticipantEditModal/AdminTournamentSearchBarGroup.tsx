@@ -1,7 +1,9 @@
 import React, { useRef } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { Button } from '@mui/material';
 import { ITournamentUser } from 'types/admin/adminTournamentTypes';
 import { mockInstance } from 'utils/mockAxios';
+import { toastState } from 'utils/recoil/toast';
 import useAdminSearchUser from 'hooks/admin/modal/useAdminSearchUser';
 import AdminSearchUserDropDownMenu from './AdminSearchUserDropDownMenu';
 import AdminTournamentSearchBar from './AdminTournamenSearchBar';
@@ -29,6 +31,7 @@ export default function AdminTournamentSearchBarGroup({
   } = useAdminSearchUser();
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const setSnackBar = useSetRecoilState(toastState);
 
   async function addButtonHandler() {
     if (isIdExist) {
@@ -39,9 +42,20 @@ export default function AdminTournamentSearchBarGroup({
           { intraId: inputId }
         );
         onAddUser(res.data);
+        setSnackBar({
+          toastName: 'tournament user add noti',
+          severity: 'success',
+          message: '유저를 성공적으로 추가하였습니다!',
+          clicked: true,
+        });
       } catch (error) {
-        // error handling
         console.log(error);
+        setSnackBar({
+          toastName: 'tournament user add noti',
+          severity: 'error',
+          message: '유저 추가에 실패하였습니다.',
+          clicked: true,
+        });
       }
       setIsWaitingResponse(false);
     }
