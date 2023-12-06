@@ -39,6 +39,14 @@ export default function AdminTournamentParticipantEditModal(props: {
     fetchParticipantList();
   }, [fetchParticipantList]);
 
+  useEffect(() => {
+    if (userToAdd.intraId !== '') {
+      setParticipantList((participantList) => {
+        return [...participantList, userToAdd];
+      });
+    }
+  }, [userToAdd]);
+
   return (
     <div className={styles.whole}>
       <h2>참가자 수정</h2>
