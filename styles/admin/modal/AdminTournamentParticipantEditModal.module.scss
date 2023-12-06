@@ -1,6 +1,6 @@
 @import 'styles/admin/common.scss';
 
-$joinedColor: rgb(207, 246, 211);
+$joinedColor: rgb(255, 86, 86);
 
 .whole {
   @include admin-modal;
@@ -32,7 +32,8 @@ $joinedColor: rgb(207, 246, 211);
     .sampleJoinedColor {
       width: 1rem;
       height: 1rem;
-      background-color: $joinedColor;
+      border: 1px solid $joinedColor;
+      border-radius: 0.3rem;
     }
   }
 
@@ -57,7 +58,7 @@ $joinedColor: rgb(207, 246, 211);
   }
 
   .joined {
-    background-color: $joinedColor;
+    border: 1px solid $joinedColor;
   }
 
   .buttonGroup {
