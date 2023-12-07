@@ -20,9 +20,8 @@
 }
 
 .highlight {
-  /* 바깥 테두리에 반짝이는 효과를 주는 스타일 */
-  box-shadow: 0 0 10px 5px rgba(255, 255, 0, 0.5) inset; /* 노란색 그림자, inset을 사용하여 내부가 아닌 외부에 적용 */
-  transition: box-shadow 0.3s ease-in-out; /* 그림자에 부드러운 전환 */
+  box-shadow: 0 0 10px 5px #ff8c00 inset;
+  transition: box-shadow 0.3s;
 }
 
 .tournamentMatchContainer {
