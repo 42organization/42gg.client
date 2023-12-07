@@ -7,12 +7,14 @@ import { instance } from 'utils/axios';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
 import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
+import { clickedTournamentState } from 'utils/recoil/tournament';
 import TournamentBraket from 'components/tournament/TournamentBraket';
 import TournamentCard from 'components/tournament/TournamentCard';
 import styles from 'styles/tournament/TournamentContainer.module.scss';
 
 export default function Tournament() {
   const setError = useSetRecoilState(errorState);
+  const sethighLightUser = useSetRecoilState(clickedTournamentState);
   const [waitTournament, setWaitTournament] = useState<TournamentData | null>(
     null
   );
@@ -86,7 +88,14 @@ export default function Tournament() {
           ))}
         </div>
         <div className={styles.tournamentTextOpen}> 진행중인 토너먼트 </div>
-        <div className={styles.openTournamentBox} ref={containerRef}>
+        <div
+          className={styles.openTournamentBox}
+          ref={containerRef}
+          onClick={() => {
+            console.log('parent');
+            sethighLightUser('');
+          }}
+        >
           {openInfo.data && openInfo.data.tournaments.length === 0 ? (
             <div className={styles.tournamentText}>
               진행중인 토너먼트가 없습니다

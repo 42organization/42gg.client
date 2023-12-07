@@ -55,7 +55,12 @@ export default function TournamentBraket({
   return (
     <SingleEliminationBracket
       matches={singleEliminationBracketMatchs}
-      onPartyClick={(party: Participant, won: boolean) => {
+      onPartyClick={(
+        party: Participant,
+        won: boolean,
+        e: React.MouseEvent<HTMLDivElement>
+      ) => {
+        e.stopPropagation();
         setHighLightUser(party.name);
       }}
       matchComponent={TournamentMatch}

@@ -4,7 +4,6 @@ import {
 } from '@g-loot/react-tournament-brackets/dist/src/types';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { Highlight } from '@mui/icons-material';
 import { clickedTournamentState } from 'utils/recoil/tournament';
 import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/tournament/TournamentMatch.module.scss';
@@ -13,7 +12,11 @@ interface TournamentMatchPartyProps {
   teamNameFallback: string;
   resultFallback: (participant: Participant) => string;
   onMouseEnter: (partyId: string | number) => void;
-  onPartyClick: (party: Participant, partyWon: boolean) => void;
+  onPartyClick: (
+    party: Participant,
+    partyWon: boolean,
+    e: React.MouseEvent<HTMLDivElement>
+  ) => void;
   highLightUser?: string;
 }
 
@@ -26,10 +29,6 @@ function TournamentMatchParty({
 }: TournamentMatchPartyProps) {
   const highLightUser = useRecoilValue(clickedTournamentState);
 
-  useEffect(() => {
-    console.log(highLightUser);
-  }, [highLightUser]);
-
   return (
     <div
       className={`${styles.tournamentPartyWrapper} ${
@@ -38,7 +37,7 @@ function TournamentMatchParty({
           : ''
       }`}
       onMouseEnter={() => onMouseEnter(party.id)}
-      onClick={() => onPartyClick(party, false)}
+      onClick={(e) => onPartyClick(party, false, e)}
     >
       <PlayerImage
         src={party.picture ?? '/image/match_qustion.png'}
@@ -72,8 +71,6 @@ export default function TournamentMatch({
   computedStyles,
   teamNameFallback,
   resultFallback,
-  highLightUser,
-  setHighLightUser,
 }: MatchComponentProps) {
   return (
     <div className={styles.tournamentMatchContainer}>
