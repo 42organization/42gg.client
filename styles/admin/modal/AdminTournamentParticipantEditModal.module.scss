@@ -11,6 +11,16 @@ $notJoinedColor: grey;
   overflow-y: auto;
   color: black;
 
+  .deleteInputTitle {
+    font-size: 0.7rem;
+    color: grey;
+  }
+
+  .deleteInputWarning {
+    font-size: 0.7rem;
+    color: red;
+  }
+
   .titleContainer {
     display: flex;
     flex-direction: row;
@@ -46,7 +56,7 @@ $notJoinedColor: grey;
   li {
     display: flex;
     padding-left: 0.5rem;
-    margin: 0.5rem 0;
+    margin: 0.1rem 0;
     justify-content: space-between;
     align-items: center;
     border-radius: 0.3rem;
@@ -56,10 +66,6 @@ $notJoinedColor: grey;
     margin-right: 0.7rem;
     font-size: 0.8rem;
     color: grey;
-  }
-
-  .deleteButtonColor {
-    background-color: white;
   }
 
   .joined {
