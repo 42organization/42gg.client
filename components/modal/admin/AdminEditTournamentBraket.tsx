@@ -1,7 +1,7 @@
 import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
 import { useCallback, useEffect, useState, useRef } from 'react';
 import { ITournament } from 'types/admin/adminTournamentTypes';
-import { TournamentGame, TournamentInfo } from 'types/tournamentTypes';
+import { TournamentGame } from 'types/tournamentTypes';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
 import { mockInstance } from 'utils/mockAxios';
 import TournamentBraket from 'components/tournament/TournamentBraket';
