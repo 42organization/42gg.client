@@ -27,7 +27,7 @@ const WinnerSwiper = forwardRef(
       async (page: number) => {
         console.log('Fetching more data...');
         const res = await mockInstance.get(
-          `/tournament?page=${page}&type=${props.type}&size=${props.size}`
+          `/tournament?page=${page}&type=${props.type}&size=${props.size}&status=END`
         );
         return res.data;
       },

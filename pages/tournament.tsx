@@ -1,75 +1,102 @@
-import React, { useState } from 'react';
+import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { TournamentInfo , TournamentData } from 'types/tournamentTypes';
+import { TournamentData, TournamentGame } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
-import { InfiniteScroll } from 'utils/infinityScroll';
+import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
 import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
-import { InfiniteScrollComponent } from 'components/store/InfiniteScrollComponent';
+import TournamentBraket from 'components/tournament/TournamentBraket';
 import TournamentCard from 'components/tournament/TournamentCard';
 import styles from 'styles/tournament/TournamentContainer.module.scss';
 
 export default function Tournament() {
   const setError = useSetRecoilState(errorState);
+  const [waitTournament, setWaitTournament] = useState<TournamentData | null>(
+    null
+  );
+  const [openTournamentId, setOpenTournamentId] = useState<number>(0);
+  const [openTournament, setOpenTournament] = useState<Match[]>([]);
+  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+  const containerRef = useRef<HTMLDivElement | null>(null); // useRef를 사용하여 Ref 생성
 
   const openInfo = useQuery<TournamentData>(
     'openTorunamentInfo',
     () =>
-      mockInstance
-        .get('tournament?page=1&status=진행중')
-        .then((res) => res.data),
+      mockInstance.get('tournament?page=1&status=BEFORE').then((res) => {
+        setOpenTournamentId(res.data.tournamentId);
+        return res.data.tournamentId;
+      }),
     { retry: 1, staleTime: 60000 /* 60초 */ }
   );
 
-  async function fetchWaitTournamentData(page: number) {
-    return await mockInstance
-      .get(`tournament?page=${page}&status=예정&size=4`)
+  const fetchWaitTournamentData = (page: number) => {
+    return mockInstance
+      .get(`tournament?page=${page}&status=BEFORE&size=4`)
       .then((res) => {
         return res.data;
       });
-  }
+  };
 
-  const { data, error, isLoading, hasNextPage, fetchNextPage } = InfiniteScroll(
-    'waitTournament',
-    fetchWaitTournamentData,
-    'JJH1'
-  );
+  const fetchTournamentGames = useCallback(async () => {
+    console.log('Fetching more data...');
+    try {
+      const res = await mockInstance.get(
+        `/tournament/${openTournamentId}/games`
+      );
+      const data: TournamentGame[] = res.data.games;
+      const bracketMatchs = convertTournamentGamesToBracketMatchs(data);
+      setOpenTournament(bracketMatchs);
+      return data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }, [openTournament]);
+
+  useEffect(() => {
+    fetchWaitTournamentData(1)
+      .then((data) => {
+        setWaitTournament(data);
+      })
+      .catch(() => {
+        setError('JHH02');
+      });
+    fetchTournamentGames();
+  }, []);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const width = containerRef.current.clientWidth;
+      const height = containerRef.current.clientHeight;
+      setContainerSize({ width, height });
+    }
+  }, []);
 
   return (
     <div className={styles.pageWrap}>
       <h1 className={styles.title}>Tournament</h1>
       <div className={styles.tournamentContainer}>
-        <div className={styles.tournamentTextWait}> 대기중인 토너먼트 </div>
+        <div className={styles.tournamentText}> 예정된 토너먼트 </div>
         <div className={styles.waitTournamentBox}>
-          {data?.pages.map((page, pageIndex) => (
-            <div key={pageIndex}>
-              {page.tournaments.map(
-                (tournament: TournamentInfo, tournamentIndex: number) => (
-                  <TournamentCard key={tournamentIndex} {...tournament} />
-                )
-              )}
-              {/* 실제로는 tournamnetId 를 key값으로 사용하는게 좋음, 현재는 mockdata에서 id 값들이 겹치기 때문에 Index로 사용
-              {page.tournaments.map((tournament: TournamentInfo, tournamentIndex: number) => (
-                < key={tournament.tournamentId} {...tournament} />
-              ))} 
-            */}
+          {waitTournament?.tournaments.map((tournament) => (
+            <div className={styles.cardContainer} key={tournament.tournamentId}>
+              <TournamentCard key={tournament.tournamentId} {...tournament} />
             </div>
           ))}
-          <InfiniteScrollComponent
-            fetchNextPage={fetchNextPage}
-            hasNextPage={hasNextPage}
-          />
         </div>
         <div className={styles.tournamentTextOpen}> 진행중인 토너먼트 </div>
-        <div className={styles.openTournamentBox}>
-          <div className={styles.tournamentText}>
-            {openInfo.data && openInfo.data.tournaments.length === 0 ? (
-              <>진행중인 토너먼트가 없습니다</>
-            ) : (
-              <>진행중인 토너먼트 사진</>
-            )}
-          </div>
+        <div className={styles.openTournamentBox} ref={containerRef}>
+          {openInfo.data && openInfo.data.tournaments.length === 0 ? (
+            <div className={styles.tournamentText}>
+              진행중인 토너먼트가 없습니다
+            </div>
+          ) : (
+            <TournamentBraket
+              singleEliminationBracketMatchs={openTournament}
+              containerSize={containerSize}
+            />
+          )}
         </div>
       </div>
     </div>
