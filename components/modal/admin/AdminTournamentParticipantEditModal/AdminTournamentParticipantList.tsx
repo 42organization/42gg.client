@@ -13,12 +13,15 @@ export default function AdminTournamentParticipantList({
 }: AdminTournamentParticipantListProps) {
   return (
     <ul>
-      {participantList.map((participant) => (
+      {participantList.map((participant, index) => (
         <li
           key={participant.userId}
-          className={participant.isJoined ? styles.joined : undefined}
+          className={participant.isJoined ? styles.joined : styles.notJoined}
         >
-          {participant.intraId}
+          <div>
+            <i>{index + 1}</i> {participant.intraId}{' '}
+            <small>{participant.isJoined ? '참가 중' : '대기 중'}</small>
+          </div>
           <Button
             className={styles.deleteButtonColor}
             color='error'

@@ -75,17 +75,14 @@ export default function AdminTournamentParticipantEditModal(props: {
 
   return (
     <div className={styles.whole}>
-      <div className={styles.titleContainer}>
-        <h2>참가자 수정</h2>
-        <div className={styles.sampleColorContainer}>
-          <div className={styles.sampleJoinedColor} />: 참가자
-        </div>
-      </div>
+      <h2>참가자 수정</h2>
       <div className={styles.hr}></div>
-      <AdminTournamentSearchBarGroup
-        onAddUser={setUserToAdd}
-        tournamentId={props.tournamentId}
-      />
+      <div className={styles.stickyHeader}>
+        <AdminTournamentSearchBarGroup
+          onAddUser={setUserToAdd}
+          tournamentId={props.tournamentId}
+        />
+      </div>
       <AdminTournamentParticipantList
         participantList={participantList}
         onDelete={participantDeleteHandler}
