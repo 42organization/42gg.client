@@ -1,6 +1,8 @@
 import { useSetRecoilState } from 'recoil';
+import { BiCalendar } from 'react-icons/bi';
 import { Modal } from 'types/modalTypes';
 import { TournamentInfo } from 'types/tournamentTypes';
+import { dateToString } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/tournament/TournamentCard.module.scss';
 
@@ -36,12 +38,23 @@ export default function TournamentCard({
     });
   };
 
+  const date = new Date(startTime);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const il = date.getDate();
+  const start = `${year}.${month}.${il}`;
+
   return (
     <div
       className={styles.tournamentCardContainer}
       onClick={openTournamentInfoModal}
     >
-      <div className={styles.text}>{title}</div>
+      <div className={styles.text}>
+        <div className={styles.left}>{title}</div>
+        <div className={styles.right}>
+          <BiCalendar /> {start}
+        </div>
+      </div>
     </div>
   );
 }

@@ -36,6 +36,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       tournaments: [],
       totalPage: 0,
     });
+    return;
   }
 
   const totalPage = Math.ceil(filteredTournaments.length / sizeInt);
@@ -56,4 +57,5 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     tournaments: filteredTournaments,
     totalPage: totalPage,
   });
+  return;
 }

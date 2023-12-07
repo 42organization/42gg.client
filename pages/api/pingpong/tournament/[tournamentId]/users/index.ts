@@ -34,6 +34,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       res.status(200).json({
         status: false,
       });
+      return;
     } else if (method === 'POST') {
       for (let i = 0; i < DummyData.length; i++) {
         if (DummyData[i].tournamentId === idAsNumber) {
@@ -56,10 +57,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       res.status(404).json({
         error: 'Touranment Id not Found',
       });
+      return;
     } else {
       // 다른 요청 메소드에 대한 처리
       res.setHeader('Allow', ['GET']);
       res.status(405).end(`Method ${method} Not Allowed`);
+      return;
     }
   }
 }
