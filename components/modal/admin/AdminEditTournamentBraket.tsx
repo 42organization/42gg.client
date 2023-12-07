@@ -16,15 +16,6 @@ export default function AdminEditTournamentBraket({
   const [bracketMatchs, setBracketMatchs] = useState<Match[]>([]);
   const [ref, size] = useComponentSize<HTMLDivElement>();
 
-  // const putHandler = async () => {
-  //   await instanceInManage.put(
-  //     `/pingpong/admin/tournaments/${tournamentId}}/games`,
-  //     {
-  //       games: tournament
-  //     }
-  //   );
-  // };
-
   const fetchTournamentGames = useCallback(async () => {
     console.log('Fetching more data...');
     try {

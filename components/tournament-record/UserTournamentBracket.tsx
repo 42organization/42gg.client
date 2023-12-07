@@ -19,15 +19,6 @@ export default function UserTournamentBraket({
   const [bracketMatchs, setBracketMatchs] = useState<Match[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // const putHandler = async () => {
-  //   await instanceInManage.put(
-  //     `/pingpong/admin/tournaments/${tournamentId}}/games`,
-  //     {
-  //       games: tournament
-  //     }
-  //   );
-  // };
-
   const fetchTournamentGames = useCallback(async () => {
     console.log('Fetching more data...');
     try {

@@ -41,6 +41,7 @@ export const convertTournamentGameToBracketMatch = (
     ? [
         {
           id: team1.players.map((player) => player.intraId).join(' '),
+          teamId: team1.teamId,
           resultText: team1.score?.toString(),
           isWinner: team1.isWin ?? false,
           name: team1.players.map((player) => player.intraId).join(' '),
@@ -53,6 +54,7 @@ export const convertTournamentGameToBracketMatch = (
     ? [
         {
           id: team2.players.map((player) => player.intraId).join(' '),
+          teamId: team2.teamId,
           resultText: team2.score?.toString() ?? null,
           isWinner: team2.isWin ?? false,
           name: team2.players.map((player) => player.intraId).join(' '),
