@@ -91,10 +91,7 @@ export default function Tournament() {
         <div
           className={styles.openTournamentBox}
           ref={containerRef}
-          onClick={() => {
-            console.log('parent');
-            sethighLightUser('');
-          }}
+          onClick={() => sethighLightUser('')}
         >
           {openInfo.data && openInfo.data.tournaments.length === 0 ? (
             <div className={styles.tournamentText}>
