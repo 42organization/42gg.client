@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { MatchMode } from 'types/mainType';
+import { GameMode } from 'types/gameTypes';
 import { AfterGame } from 'types/scoreTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
@@ -9,11 +9,11 @@ import { liveState } from 'utils/recoil/layout';
 
 const useCurrentGame = () => {
   const setError = useSetRecoilState(errorState);
-  const { currentMatchMode, gameId } = useRecoilValue(liveState);
+  const { currentGameMode, gameId } = useRecoilValue(liveState);
   const [currentGame, setCurrentGame] = useState<AfterGame>({
     gameId: 0,
-    mode: currentMatchMode
-      ? (currentMatchMode.toUpperCase() as Uppercase<MatchMode>)
+    mode: currentGameMode
+      ? (currentGameMode.toUpperCase() as Uppercase<GameMode>)
       : null,
     startTime: '2022-07-13 11:50',
     isScoreExist: false,
