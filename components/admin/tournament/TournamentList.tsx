@@ -19,9 +19,8 @@ import {
   ITournamentEditInfo,
   ITournamentTable,
 } from 'types/admin/adminTournamentTypes';
-import { instanceInManage } from 'utils/axios';
+import { instance, instanceInManage } from 'utils/axios';
 import { dateToString } from 'utils/handleTime';
-import { mockInstance } from 'utils/mockAxios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -68,7 +67,10 @@ export default function TournamentList({
 
   const fetchTournaments = useCallback(async () => {
     try {
-      const res = await mockInstance.get(`/tournament?page=${currentPage}`);
+      const res = await instance.get(
+        `pingpong/tournaments?page=${currentPage}&size=20`
+      );
+      console.log(res.data.tournaments);
       setTournamentInfo({
         tournamentList: res.data.tournaments,
         totalPage: res.data.totalPage,
@@ -85,7 +87,7 @@ export default function TournamentList({
 
   const deleteHandler = async (tournamentId: number) => {
     try {
-      await instanceInManage.delete(`/tournament/${tournamentId}`);
+      await instanceInManage.delete(`/tournaments/${tournamentId}`);
       setSnackbar({
         toastName: `delete request`,
         severity: 'success',
@@ -96,7 +98,7 @@ export default function TournamentList({
       setSnackbar({
         toastName: `bad request`,
         severity: 'error',
-        // message: `🔥 ${announceDeleteResponse[e.response.data.code]} 🔥`,
+        message: `🔥 ${e.response.data.message} 🔥`,
         clicked: true,
       });
     }
@@ -140,26 +142,29 @@ export default function TournamentList({
                                 )
                               )
                             ) : columnName === 'edit' ? (
-                              tournament.status === 'BEFORE' ? (
+                              tournament.status === 'BEFORE' ||
+                              tournament.status === 'READY' ? (
                                 <div className={styles.listBtnContainer}>
-                                  <button
-                                    className={styles.edit}
-                                    onClick={() => {
-                                      setTournamentEditInfo({
-                                        tournamentId: tournament.tournamentId,
-                                        title: tournament.title,
-                                        contents: tournament.contents,
-                                        type: tournament.type,
-                                        startTime: new Date(
-                                          tournament.startTime
-                                        ),
-                                        endTime: new Date(tournament.endTime),
-                                      });
-                                      scrollToEditor();
-                                    }}
-                                  >
-                                    내용 수정
-                                  </button>
+                                  {tournament.status === 'BEFORE' && (
+                                    <button
+                                      className={styles.edit}
+                                      onClick={() => {
+                                        setTournamentEditInfo({
+                                          tournamentId: tournament.tournamentId,
+                                          title: tournament.title,
+                                          contents: tournament.contents,
+                                          type: tournament.type,
+                                          startTime: new Date(
+                                            tournament.startTime
+                                          ),
+                                          endTime: new Date(tournament.endTime),
+                                        });
+                                        scrollToEditor();
+                                      }}
+                                    >
+                                      내용 수정
+                                    </button>
+                                  )}
                                   <button
                                     className={styles.editParticipants}
                                     onClick={() => {
