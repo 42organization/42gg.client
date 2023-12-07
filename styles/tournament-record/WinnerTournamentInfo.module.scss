@@ -1,0 +1,26 @@
+.winnerInfoContainer {
+  font-weight: 500;
+  color: #d591ff;
+  text-align: center;
+
+  p {
+    margin: 0.4rem 0 0;
+  }
+
+  .userId {
+    font-weight: 700;
+    color: white;
+  }
+
+  .gameInfo {
+    font-size: 1rem;
+
+    .highlighted {
+      color: #ffc700;
+    }
+  }
+
+  .date {
+    font-size: 0.8rem;
+  }
+}
