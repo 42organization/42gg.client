@@ -12,6 +12,7 @@ import { ISeason } from 'types/seasonTypes';
 import { StoreManualMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
 import { ITournament } from './admin/adminTournamentTypes';
+import { GameMode } from './gameTypes';
 import { TournamentInfo } from './tournamentTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
@@ -85,7 +86,7 @@ export interface Announcement {
 
 export interface Exp {
   gameId?: number;
-  mode?: MatchMode | null;
+  mode?: GameMode | null;
 }
 export interface Coin {
   //gameId?: number;
