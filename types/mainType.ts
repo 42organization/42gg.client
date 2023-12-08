@@ -1,3 +1,5 @@
+import { GameMode } from './gameTypes';
+
 export type MatchMode = 'NORMAL' | 'RANK' | 'BOTH';
 
 export type SeasonMode = 'NORMAL' | 'RANK' | 'BOTH';
@@ -16,6 +18,6 @@ export interface User {
 export interface Live {
   notiCount: number;
   event: 'match' | 'game' | null;
-  currentMatchMode: MatchMode | null;
+  currentGameMode: GameMode | null;
   gameId: number | null;
 }

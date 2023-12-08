@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { SwiperRef } from 'swiper/react';
 import { TournamentInfo } from 'types/tournamentTypes';
 import LeagueButtonGroup from 'components/tournament-record/LeagueButtonGroup';
+import UserTournamentBracket from 'components/tournament-record/UserTournamentBracket';
 import WinnerSwiper from 'components/tournament-record/WinnerSwiper';
 import styles from 'styles/tournament-record/TournamentRecord.module.scss';
 
@@ -35,7 +36,7 @@ export default function TournamentRecord() {
         </p>
         <p className={styles.date}>{endTime?.toLocaleDateString()}</p>
       </div>
-      <div className={styles.bracketContainer}></div>
+      <UserTournamentBracket tournamentId={tournamentInfo?.tournamentId} />
     </div>
   );
 }

@@ -38,7 +38,7 @@ const SVGViewer = dynamic<React.ComponentProps<typeof StaticSVGViewer>>(
 
 interface TournamentBraketProps {
   singleEliminationBracketMatchs: Match[];
-  containerSize?: { width: number; height: number };
+  containerSize: { width: number | undefined; height: number | undefined };
 }
 
 export default function TournamentBraket({
@@ -80,8 +80,8 @@ export default function TournamentBraket({
         <SVGViewer
           background={'rgba(0, 0, 0, 0)'}
           SVGBackground={'rgba(0, 0, 0, 0)'}
-          width={finalWidth}
-          height={finalHeight}
+          width={containerSize.width}
+          height={containerSize.height}
           {...props}
         >
           {children}
