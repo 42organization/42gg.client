@@ -28,7 +28,7 @@ export default function UserTournamentBraket({
     isLoading,
     isError,
   } = useQuery<Match[]>(
-    ['tournamentGames', tournamentId],
+    ['tournamentMatches', tournamentId],
     () => fetchTournamentGames(),
     {
       enabled: !!tournamentId, // tournamentId가 undefined가 아닐 때만 작동하도록
