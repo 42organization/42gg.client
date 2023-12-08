@@ -46,9 +46,9 @@ export default function TournamentBraket({
   containerSize,
 }: TournamentBraketProps) {
   const [, setHighLightUser] = useRecoilState(clickedTournamentState);
+
   if (singleEliminationBracketMatchs.length === 0)
     return <h1 style={{ color: 'white' }}>Loading...</h1>;
-  // const [width, height] = useWindowSize();
   const finalWidth = containerSize?.width; //Math.max(width - 50, 500);
   const finalHeight = containerSize?.height; //Math.max(height - 100, 500);
 
@@ -61,7 +61,7 @@ export default function TournamentBraket({
         e: React.MouseEvent<HTMLDivElement>
       ) => {
         e.stopPropagation();
-        setHighLightUser(party.name);
+        if (party.name !== 'TBD') setHighLightUser(party.name);
       }}
       matchComponent={TournamentMatch}
       options={{

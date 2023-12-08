@@ -1,3 +1,4 @@
+import { start } from 'repl';
 import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useQuery } from 'react-query';
@@ -80,19 +81,13 @@ export default function Tournament() {
       <h1 className={styles.title}>Tournament</h1>
       <div className={styles.tournamentContainer}>
         <div className={styles.tournamentText}> 예정된 토너먼트 </div>
-        <div className={styles.waitTournamentBox}>
-          {waitTournament?.tournaments.map((tournament) => (
-            <div className={styles.cardContainer} key={tournament.tournamentId}>
-              <TournamentCard key={tournament.tournamentId} {...tournament} />
-            </div>
-          ))}
-        </div>
-        <div className={styles.tournamentTextOpen}> 진행중인 토너먼트 </div>
-        <div
-          className={styles.openTournamentBox}
-          ref={containerRef}
-          onClick={() => sethighLightUser('')}
-        >
+        {waitTournament?.tournaments.map((tournament) => (
+          <div className={styles.cardContainer} key={tournament.tournamentId}>
+            <TournamentCard key={tournament.tournamentId} {...tournament} />
+          </div>
+        ))}
+        <div className={styles.tournamentText}> 진행중인 토너먼트 </div>
+        <div className={styles.openTournamentBox} ref={containerRef}>
           {openInfo.data && openInfo.data.tournaments.length === 0 ? (
             <div className={styles.tournamentText}>
               진행중인 토너먼트가 없습니다

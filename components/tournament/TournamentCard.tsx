@@ -1,5 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { BiCalendar } from 'react-icons/bi';
+import { MdPeopleAlt } from 'react-icons/md';
 import { Modal } from 'types/modalTypes';
 import { TournamentInfo } from 'types/tournamentTypes';
 import { dateToString } from 'utils/handleTime';
@@ -51,6 +52,7 @@ export default function TournamentCard({
     >
       <div className={styles.text}>
         <div className={styles.left}>{title}</div>
+        <MdPeopleAlt /> {player_cnt} / 8
         <div className={styles.right}>
           <BiCalendar /> {start}
         </div>
