@@ -1,12 +1,14 @@
+$bannerHeight: 3rem;
+
 .rollingBanner {
   position: relative;
   display: flex;
   width: 100%;
   max-width: 28rem;
-  height: 2.8rem;
+  height: $bannerHeight;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0.7rem;
   justify-content: center;
   align-items: center;
 }
@@ -19,11 +21,10 @@
 
 .contentWrapper {
   display: flex;
-  height: 2.8rem;
+  height: $bannerHeight;
   flex-direction: column;
-  color: rgba(255, 255, 0, 0.8);
+  color: rgb(255, 255, 0);
   text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.8);
-  background-color: rgba(0, 0, 0, 0.7);
   justify-content: flex-start;
   align-items: center;
 }
