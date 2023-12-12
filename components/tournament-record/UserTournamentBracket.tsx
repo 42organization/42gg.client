@@ -14,45 +14,30 @@ interface UserTournamentBracketProps {
 export default function UserTournamentBraket({
   tournamentId,
 }: UserTournamentBracketProps) {
+  const setError = useSetRecoilState(errorState);
   const [ref, size] = useComponentSize<HTMLDivElement>();
 
-  const [bracketMatchs, setBracketMatchs] = useState<Match[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const fetchTournamentGames = async () => {
+    const res = await mockInstance.get(`/tournament/${tournamentId}/games`);
+    return convertTournamentGamesToBracketMatchs(res.data.games);
+  };
 
-  // const putHandler = async () => {
-  //   await instanceInManage.put(
-  //     `/pingpong/admin/tournaments/${tournamentId}}/games`,
-  //     {
-  //       games: tournament
-  //     }
-  //   );
-  // };
-
-  const fetchTournamentGames = useCallback(async () => {
-    console.log('Fetching more data...');
-    try {
-      const res = await instance.get(
-        `/pingpong/tournaments/${tournamentId}/games`
-      );
-      setIsLoading(false);
-      const data: TournamentGame[] = res.data.games;
-      const bracketMatchs = convertTournamentGamesToBracketMatchs(data);
-      setBracketMatchs(bracketMatchs);
-      return data;
-    } catch (error) {
-      setIsLoading(false);
-      console.error('Error fetching data:', error);
+  const {
+    data: bracketMatches = [],
+    isLoading,
+    isError,
+  } = useQuery<Match[]>(
+    ['tournamentMatches', tournamentId],
+    () => fetchTournamentGames(),
+    {
+      enabled: !!tournamentId, // tournamentId가 undefined가 아닐 때만 작동하도록
+      staleTime: 86400000, // 하루
     }
-  }, [tournamentId]);
+  );
 
-  useEffect(() => {
-    setIsLoading(true);
-    const identifier = setTimeout(() => {
-      console.log('fetching tournament game data..');
-      fetchTournamentGames();
-    }, 500);
-    return () => clearTimeout(identifier);
-  }, [tournamentId, fetchTournamentGames]);
+  if (isError) {
+    setError('JC03');
+  }
 
   return (
     <div ref={ref} className={styles.bracketContainer}>
@@ -60,7 +45,7 @@ export default function UserTournamentBraket({
         <div className={styles.loadingAnimation} />
       ) : (
         <TournamentBraket
-          singleEliminationBracketMatchs={bracketMatchs}
+          singleEliminationBracketMatchs={bracketMatches}
           containerSize={size}
         />
       )}
