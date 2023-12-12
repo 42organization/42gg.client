@@ -6,7 +6,6 @@ import { QUILL_FORMATS } from 'types/quillTypes';
 import { TournamentInfo } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
 import { dateToString } from 'utils/handleTime';
-import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
