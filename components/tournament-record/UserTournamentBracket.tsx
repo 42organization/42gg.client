@@ -32,6 +32,7 @@ export default function UserTournamentBraket({
     () => fetchTournamentGames(),
     {
       enabled: !!tournamentId, // tournamentId가 undefined가 아닐 때만 작동하도록
+      staleTime: 86400000, // 하루
     }
   );
 
