@@ -170,8 +170,8 @@ export default function TournamentList({
                                     onClick={() => {
                                       setModal({
                                         modalName:
-                                          'ADMIN-TOURNAMENT_BRAKET_EDIT',
-                                        tournament: tournament,
+                                          'ADMIN-TOURNAMENT_PARTICIPANT_EDIT',
+                                        tournamentId: tournament.tournamentId,
                                       });
                                     }}
                                   >

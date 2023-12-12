@@ -21,6 +21,7 @@ export interface ITournamentUser {
   userId: number;
   intraId: string;
   isJoined: boolean;
+  resisteredDate?: Date;
 }
 
 export interface ITournamentEditInfo {

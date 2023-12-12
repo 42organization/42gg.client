@@ -16,7 +16,7 @@ import DeletePenaltyModal from 'components/modal/admin/DeletePenaltyModal';
 import DetailModal from 'components/modal/admin/DetailModal';
 import AdminSeasonEdit from 'components/modal/admin/SeasonEdit';
 import AdminEditTournamentBraket from '../admin/AdminEditTournamentBraket';
-import AdminTournamentParticipantEditModal from '../admin/AdminTournamentParticipantEditModal';
+import AdminTournamentParticipantEditModal from '../admin/AdminTournamentParticipantEditModal/AdminTournamentParticipantEditModal';
 
 export default function AdminModal() {
   const {
