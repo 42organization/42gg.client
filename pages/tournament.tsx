@@ -24,20 +24,35 @@ export default function Tournament() {
   const openInfo = useQuery<TournamentData>(
     'openTorunamentInfo',
     () =>
-      mockInstance.get('tournament?page=1&status=BEFORE').then((res) => {
-        setOpenTournamentId(res.data.tournamentId);
-        return res.data.tournamentId;
-      }),
-    { retry: 1, staleTime: 60000 /* 60초 */ }
+      instance
+        .get('/pingpong/tournaments?size=20&page=1&status=LIVE')
+        .then((res) => {
+          setOpenTournamentId(res.data.tournamentId);
+          return res.data.tournamentId;
+        }),
+    {
+      onError: (error) => {
+        setError('JHH02');
+      },
+      retry: 1,
+      staleTime: 60000 /* 60초 */,
+    }
   );
 
-  const fetchWaitTournamentData = (page: number) => {
-    return mockInstance
-      .get(`tournament?page=${page}&status=BEFORE&size=4`)
-      .then((res) => {
-        return res.data;
-      });
-  };
+  const waitInfo = useQuery<TournamentData>(
+    'waitTournamentInfo',
+    () =>
+      instance
+        .get(`/pingpong/tournaments?size=20&page=1&status=BEFORE`)
+        .then((res) => {
+          return res.data;
+        }),
+    {
+      onError: (error) => {
+        setError('JHH02');
+      },
+    }
+  );
 
   const fetchTournamentGames = useCallback(async () => {
     console.log('Fetching more data...');
@@ -55,17 +70,7 @@ export default function Tournament() {
   }, [openTournament]);
 
   useEffect(() => {
-    fetchWaitTournamentData(1)
-      .then((data) => {
-        setWaitTournament(data);
-      })
-      .catch(() => {
-        setError('JHH02');
-      });
     fetchTournamentGames();
-  }, []);
-
-  useEffect(() => {
     if (containerRef.current) {
       const width = containerRef.current.clientWidth;
       const height = containerRef.current.clientHeight;
@@ -79,11 +84,15 @@ export default function Tournament() {
       <div className={styles.tournamentContainer}>
         <div className={styles.tournamentText}> 예정된 토너먼트 </div>
         <div className={styles.waitTournamentBox}>
-          {waitTournament?.tournaments.map((tournament) => (
-            <div className={styles.cardContainer} key={tournament.tournamentId}>
-              <TournamentCard key={tournament.tournamentId} {...tournament} />
-            </div>
-          ))}
+          {waitInfo.data &&
+            waitInfo.data.tournaments.map((tournament) => (
+              <div
+                className={styles.cardContainer}
+                key={tournament.tournamentId}
+              >
+                <TournamentCard key={tournament.tournamentId} {...tournament} />
+              </div>
+            ))}
         </div>
         <div className={styles.tournamentTextOpen}> 진행중인 토너먼트 </div>
         <div className={styles.openTournamentBox} ref={containerRef}>

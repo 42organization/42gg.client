@@ -39,8 +39,8 @@ const TournamentMegaphone = () => {
   const router = useRouter();
 
   function getTournamentListHandler() {
-    return mockInstance
-      .get(`tournament?size=20&page=1&status=BEFORE`)
+    return instance
+      .get(`/pingpong/tournaments?size=20&page=1&status=BEFORE`)
       .then((res) => {
         setTournamentList(res.data.tournaments);
       });
