@@ -12,11 +12,7 @@ interface TournamentMatchPartyProps {
   teamNameFallback: string;
   resultFallback: (participant: Participant) => string;
   onMouseEnter: (partyId: string | number) => void;
-  onPartyClick: (
-    party: Participant,
-    partyWon: boolean,
-    e: React.MouseEvent<HTMLDivElement>
-  ) => void;
+  onPartyClick: (party: Participant, partyWon: boolean) => void;
   highLightUser?: string;
 }
 
@@ -37,7 +33,7 @@ function TournamentMatchParty({
           : ''
       }`}
       onMouseEnter={() => onMouseEnter(party.id)}
-      onClick={(e) => onPartyClick(party, false, e)}
+      onClick={() => onPartyClick(party, false)}
     >
       <PlayerImage
         src={party.picture ?? '/image/match_qustion.png'}
