@@ -3,7 +3,7 @@ import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
 
 interface GuideProps {
   condition: boolean;
-  modalMode: 'NORMAL' | 'RANK' | 'CONFIRM';
+  modalMode: 'NORMAL' | 'SCORE' | 'CONFIRM';
 }
 
 export default function Guide({ condition, modalMode }: GuideProps) {
@@ -13,7 +13,7 @@ export default function Guide({ condition, modalMode }: GuideProps) {
       after: '즐거운 경기 하셨나요?',
       explains: '다음에도 사용해 주실거죠? 😉',
     },
-    RANK: {
+    SCORE: {
       before: '경기 후 점수를 입력해주세요',
       after: '경기 결과 확인',
       explains: '3판 2선승제!\n동점은 1점 내기로 승부를 결정!',
@@ -31,7 +31,7 @@ export default function Guide({ condition, modalMode }: GuideProps) {
         {modalMode === 'NORMAL' ? (
           <div className={styles.titleNormal}>42GG</div>
         ) : (
-          <div className={styles.titleRank}>
+          <div className={styles.titleScore}>
             <BsCheckCircle />
           </div>
         )}
