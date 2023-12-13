@@ -59,6 +59,13 @@ export default function AdminTournamentSearchBarGroup({
         });
       }
       setIsWaitingResponse(false);
+    } else {
+      setSnackBar({
+        toastName: 'tournament user add noti',
+        severity: 'error',
+        message: '존재하지 않는 유저입니다.',
+        clicked: true,
+      });
     }
   }
 
