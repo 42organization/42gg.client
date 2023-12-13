@@ -97,11 +97,13 @@ function generateGame(
     time: '2023-11-30',
 
     team1: {
+      teamId: generateIncrementalId(),
       players: [player1],
       isWin: score === 2 ? true : false,
       score: score,
     },
     team2: {
+      teamId: generateIncrementalId(),
       players: [player2],
       isWin: score === 2 ? false : true,
       score: score === 2 ? Math.floor(Math.random() * 2) : 2,
@@ -123,7 +125,6 @@ export default function generateTournamentGames() {
         dummyPlayers[i + 1],
         generateIncrementalId
       ),
-      status: 'END',
       nextTournamentGameId: null,
     };
     tournamentGames.push(tournamentGame);
@@ -137,7 +138,6 @@ export default function generateTournamentGames() {
       const nextTournamentGame: TournamentGame = {
         tournamentGameId: generateIncrementalId(),
         game: generateGame(players[0], players[1], generateIncrementalId),
-        status: 'END',
         nextTournamentGameId: null,
       };
       pairedGame[0].nextTournamentGameId = nextTournamentGame.tournamentGameId;
