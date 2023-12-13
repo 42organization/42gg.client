@@ -1,0 +1,79 @@
+@import 'styles/common.scss';
+
+.tournamentPartyWrapper {
+  display: flex;
+  height: 45%;
+  padding: 0.5rem;
+  color: white;
+  background-color: rgb(55, 0, 101);
+  border: 0.1rem solid white;
+  border-radius: 0.6rem;
+  justify-content: space-between;
+  align-items: center;
+  .partyName {
+    margin-left: 1rem;
+  }
+
+  .score {
+    margin-left: auto;
+  }
+
+  .scoreInput {
+    width: 2rem;
+  }
+  .scoreInput:active {
+    background: rgba(255, 255, 255, 0.7);
+  }
+}
+
+.tournamentMatchContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  color: #000000;
+  justify-content: space-around;
+}
+
+.tournamentEditMatchContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0.2rem;
+  border: 0.1rem solid;
+  border-color: #0000ff;
+
+  &:hover .tournamentEditMatchButton {
+    opacity: 1;
+  }
+
+  .tournamentEditMatchButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    padding: 1rem;
+    color: white;
+    cursor: pointer;
+    background-color: rgba(0, 0, 255, 0.5);
+    border: 0;
+    border-radius: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.buttonsContainer {
+  // z-index: 1;
+  // margin-top: 10px;
+  // position: absolute;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  // padding: 10px; /* 선택적인 여백 추가 */
+  background-color: rgba(255, 255, 255, 0.7); /* 반투명한 배경색 */
+  justify-content: space-around; /* 가로 정렬 */
+}
