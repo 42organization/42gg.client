@@ -3,8 +3,8 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { TournamentData, TournamentGame } from 'types/tournamentTypes';
+import { instance } from 'utils/axios';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
-import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
 import TournamentBraket from 'components/tournament/TournamentBraket';
 import TournamentCard from 'components/tournament/TournamentCard';
@@ -12,9 +12,6 @@ import styles from 'styles/tournament/TournamentContainer.module.scss';
 
 export default function Tournament() {
   const setError = useSetRecoilState(errorState);
-  const [waitTournament, setWaitTournament] = useState<TournamentData | null>(
-    null
-  );
   const [openTournamentId, setOpenTournamentId] = useState<number>(0);
   const [openTournament, setOpenTournament] = useState<Match[]>([]);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
@@ -26,8 +23,9 @@ export default function Tournament() {
       instance
         .get('/pingpong/tournaments?size=20&page=1&status=LIVE')
         .then((res) => {
-          setOpenTournamentId(res.data.tournamentId);
-          return res.data.tournamentId;
+          console.log(res.data.tournaments[0].tournamentId);
+          setOpenTournamentId(res.data.tournaments[0].tournamentId);
+          return res.data;
         }),
     {
       onError: (error) => {
@@ -56,8 +54,8 @@ export default function Tournament() {
   const fetchTournamentGames = useCallback(async () => {
     console.log('Fetching more data...');
     try {
-      const res = await mockInstance.get(
-        `/tournament/${openTournamentId}/games`
+      const res = await instance.get(
+        `pingpong/tournaments/${openTournamentId}/games`
       );
       const data: TournamentGame[] = res.data.games;
       const bracketMatchs = convertTournamentGamesToBracketMatchs(data);
@@ -66,16 +64,16 @@ export default function Tournament() {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  }, [openTournament]);
+  }, [openTournamentId]);
 
   useEffect(() => {
-    fetchTournamentGames();
+    if (openTournamentId !== undefined) fetchTournamentGames();
     if (containerRef.current) {
       const width = containerRef.current.clientWidth;
       const height = containerRef.current.clientHeight;
       setContainerSize({ width, height });
     }
-  }, []);
+  }, [openTournamentId]);
 
   return (
     <div className={styles.pageWrap}>
@@ -95,7 +93,7 @@ export default function Tournament() {
         </div>
         <div className={styles.tournamentTextOpen}> 진행중인 토너먼트 </div>
         <div className={styles.openTournamentBox} ref={containerRef}>
-          {openInfo.data && openInfo.data.tournaments.length === 0 ? (
+          {openInfo.data && openInfo.data.tournaments?.length === 0 ? (
             <div className={styles.tournamentText}>
               진행중인 토너먼트가 없습니다
             </div>
