@@ -44,22 +44,12 @@ export default function TournamentRegistryModal({
     return instance
       .post(`/pingpong/tournaments/${tournamentId}/users`)
       .then((res) => {
-        setSnackbar({
-          toastName: `토너먼트 등록 신청`,
-          severity: 'success',
-          message: `토너먼트 신청이 완료됐습니다`,
-          clicked: true,
-        });
+        alert('토너먼트 신청이 완료됐습니다');
         setModal({ modalName: null });
         return res.data.status;
       })
       .catch((error) => {
-        setSnackbar({
-          toastName: `토너먼트 등록 신청`,
-          severity: 'error',
-          message: `토너먼트 신청 중 에러가 발생했습니다`,
-          clicked: true,
-        });
+        alert('토너먼트 신청 중 에러가 발생했습니다.');
         setLoading(false);
       });
   }, []);
@@ -70,30 +60,15 @@ export default function TournamentRegistryModal({
       .delete(`/pingpong/tournaments/${tournamentId}/users`)
       .then((res) => {
         if (registState === 'WAIT') {
-          setSnackbar({
-            toastName: `토너먼트 대기 취소`,
-            severity: 'success',
-            message: `토너먼트 대기가 취소 되었습니다`,
-            clicked: true,
-          });
+          alert('토너먼트 대기가 취소 되었습니다');
         } else {
-          setSnackbar({
-            toastName: `토너먼트 등록 취소`,
-            severity: 'success',
-            message: `토너먼트 등록이 취소 되었습니다`,
-            clicked: true,
-          });
+          alert('토너먼트 등록이 취소 되었습니다');
         }
         setModal({ modalName: null });
         return res.data.status;
       })
       .catch((error) => {
-        setSnackbar({
-          toastName: `토너먼트 등록취소`,
-          severity: 'error',
-          message: `토너먼트 등록취소 중 에러가 발생했습니다`,
-          clicked: true,
-        });
+        alert('토너먼트 등록취소 중 에러가 발생했습니다');
         setLoading(false);
       });
   }, []);
@@ -169,7 +144,11 @@ export default function TournamentRegistryModal({
         <ModalButtonContainer>
           <ModalButton
             onClick={buttonHandler}
-            value={buttonContent}
+            value={
+              player_cnt === 8 && registState === 'BEFORE'
+                ? '대기 등록'
+                : buttonContent
+            }
             style={'positive'}
             isLoading={loading}
           />
