@@ -54,6 +54,7 @@ export default function useAdminSearchUser() {
 
   return {
     inputId,
+    setInputId,
     isIdExist,
     isTyping,
     menuOpen,
