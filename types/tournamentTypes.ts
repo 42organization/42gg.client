@@ -21,6 +21,5 @@ export interface TournamentData {
 export interface TournamentGame {
   tournamentGameId: number;
   game: Game | null;
-  status: string; // 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY' | 'DONE' | 'SCORE_DONE'
   nextTournamentGameId: number | null;
 }

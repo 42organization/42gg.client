@@ -125,7 +125,6 @@ export default function generateTournamentGames() {
         dummyPlayers[i + 1],
         generateIncrementalId
       ),
-      status: 'END',
       nextTournamentGameId: null,
     };
     tournamentGames.push(tournamentGame);
@@ -139,7 +138,6 @@ export default function generateTournamentGames() {
       const nextTournamentGame: TournamentGame = {
         tournamentGameId: generateIncrementalId(),
         game: generateGame(players[0], players[1], generateIncrementalId),
-        status: 'END',
         nextTournamentGameId: null,
       };
       pairedGame[0].nextTournamentGameId = nextTournamentGame.tournamentGameId;
