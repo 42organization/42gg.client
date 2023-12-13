@@ -1,9 +1,12 @@
+import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { BiCalendar } from 'react-icons/bi';
 import { MdPeopleAlt } from 'react-icons/md';
 import { Modal } from 'types/modalTypes';
 import { TournamentInfo } from 'types/tournamentTypes';
-import { dateToString } from 'utils/handleTime';
+import { instance } from 'utils/axios';
+import { dateToKRLocaleTimeString , dateToString } from 'utils/handleTime';
+import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/tournament/TournamentCard.module.scss';
 
@@ -20,6 +23,8 @@ export default function TournamentCard({
   player_cnt,
 }: TournamentInfo) {
   const setModal = useSetRecoilState<Modal>(modalState);
+  const [registState, setRegistState] = useState<string>('로딩중');
+  const setError = useSetRecoilState(errorState);
 
   const openTournamentInfoModal = () => {
     setModal({
@@ -39,11 +44,25 @@ export default function TournamentCard({
     });
   };
 
-  const date = new Date(startTime);
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const il = date.getDate();
-  const start = `${year}.${month}.${il}`;
+  useEffect(() => {
+    getStatus();
+  }, []);
+
+  const getStatus = useCallback(() => {
+    return instance
+      .get(`/pingpong/tournaments/${tournamentId}/users`)
+      .then((res) => {
+        setRegistState(res.data.status);
+        return res.data.status;
+      })
+      .catch((error) => {
+        setError('JJH2');
+      });
+  }, []);
+
+  const start = dateToKRLocaleTimeString(new Date(startTime));
+  const end = dateToKRLocaleTimeString(new Date(endTime));
+  const isFull = player_cnt === 8 ? 'full' : 'notFull';
 
   return (
     <div
@@ -51,10 +70,25 @@ export default function TournamentCard({
       onClick={openTournamentInfoModal}
     >
       <div className={styles.text}>
-        <div className={styles.left}>{title}</div>
-        <MdPeopleAlt /> {player_cnt} / 8
-        <div className={styles.right}>
-          <BiCalendar /> {start}
+        <div className={styles.up}>
+          <div className={styles.title}>{title}</div>
+          <div className={styles.tag}>
+            <div className={`${styles.participants} ${styles[isFull]}`}>
+              <MdPeopleAlt /> {player_cnt} / 8
+            </div>
+            <div className={`${styles.state} ${styles[registState]}`}>
+              {registState}
+            </div>
+          </div>
+        </div>
+        <div className={styles.time}>
+          <time>
+            <BiCalendar /> {start}
+          </time>
+          ~
+          <time>
+            <BiCalendar /> {end}
+          </time>
         </div>
       </div>
     </div>

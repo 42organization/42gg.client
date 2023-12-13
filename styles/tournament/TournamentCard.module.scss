@@ -1,11 +1,11 @@
 .tournamentCardContainer {
   display: flex;
-  height: 3.5rem;
+  height: 100%;
   padding: 0 1rem;
   margin-top: 0.5rem;
   overflow-y: scroll;
   cursor: pointer;
-  background: linear-gradient(to bottom, #7816e1, #9e35db);
+  background: #7816e1;
   border-radius: 0.5rem;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.6);
   align-items: center;
@@ -13,21 +13,67 @@
   .text {
     display: flex;
     width: 100%;
+    flex-direction: column;
+    padding-top: 0.5rem;
     color: white;
     justify-content: space-between;
 
-    .left {
-      flex: 2;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      // text-align: left;
-    }
+    .up {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 0.5rem;
+      justify-content: space-between;
 
-    .right {
-      flex: 1;
+      .title {
+        padding: 0.2rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .tag {
+        display: flex;
+        flex-direction: row;
+
+        .state {
+          padding: 0.2rem 0.5rem;
+          margin-right: 1rem;
+          border-radius: 0.5rem;
+          &.PLAYER {
+            background-color: rgb(87, 216, 87);
+          }
+          &.WAIT {
+            background-color: yellow;
+          }
+          &.BEFORE {
+            background-color: rgb(105, 162, 105);
+          }
+        }
+
+        .participants {
+          padding: 0.2rem 0.5rem;
+          margin-right: 1rem;
+          border-radius: 0.5rem;
+          &.full {
+            background-color: red;
+          }
+          &.notFull {
+            background-color: blue;
+          }
+        }
+      }
+    }
+    .time {
+      display: flex;
+      padding-bottom: 0.5rem;
       font-size: 0.8rem;
-      // text-align: right;
+      justify-content: space-evenly;
+      .start {
+        color: green;
+      }
+      .end {
+        color: red;
+      }
     }
   }
 }
