@@ -22,6 +22,7 @@ export const dummyLiveTournamentGames = {
         mode: 'TOURNAMENT',
         time: '13',
         team1: {
+          teamId: 1,
           players: [
             {
               intraId: 'CoKe BoYz',
@@ -34,6 +35,7 @@ export const dummyLiveTournamentGames = {
           score: 2,
         },
         team2: {
+          teamId: 2,
           players: [
             {
               intraId: 'Aids Team',
@@ -77,6 +79,7 @@ export const dummyLiveTournamentGames = {
         mode: 'TOURNAMENT',
         time: '13',
         team1: {
+          teamId: 3,
           players: [
             {
               intraId: 'BLUEJAYS',
@@ -87,6 +90,7 @@ export const dummyLiveTournamentGames = {
           ],
         },
         team2: {
+          teamId: 4,
           players: [
             {
               intraId: 'Bosphorus',
