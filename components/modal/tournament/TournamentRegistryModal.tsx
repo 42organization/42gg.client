@@ -5,7 +5,7 @@ import { MdPeopleAlt } from 'react-icons/md';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { TournamentInfo } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
-import { dateToString } from 'utils/handleTime';
+import { dateToKRLocaleTimeString } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
@@ -88,7 +88,7 @@ export default function TournamentRegistryModal({
   useEffect(() => {
     getStatus();
     const date = new Date(startTime);
-    setOpenDate(dateToString(date));
+    setOpenDate(dateToKRLocaleTimeString(date));
   }, []);
 
   const closeModalButtonHandler = () => {
