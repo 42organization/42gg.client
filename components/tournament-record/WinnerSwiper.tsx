@@ -8,8 +8,8 @@ import React, {
 import { EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide, SwiperClass, SwiperRef } from 'swiper/react';
 import { TournamentData, TournamentInfo } from 'types/tournamentTypes';
+import { instance } from 'utils/axios';
 import { InfiniteScroll } from 'utils/infinityScroll';
-import { mockInstance } from 'utils/mockAxios';
 import styles from 'styles/tournament-record/WinnerSwiper.module.scss';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -19,23 +19,32 @@ interface WinnerSwiperProps {
   type: string;
   size: number;
   setTournamentInfo: React.Dispatch<SetStateAction<TournamentInfo | undefined>>;
+  setIsEmpty: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const WinnerSwiper = forwardRef(
-  (props: WinnerSwiperProps, ref: Ref<SwiperRef> | undefined) => {
+  (
+    { type, size, setTournamentInfo, setIsEmpty }: WinnerSwiperProps,
+    ref: Ref<SwiperRef> | undefined
+  ) => {
     const fetchTournamentData = useCallback(
       async (page: number) => {
         console.log('Fetching more data...');
-        const res = await mockInstance.get(
-          `/tournament?page=${page}&type=${props.type}&size=${props.size}&status=END`
+        const res = await instance.get(
+          `/pingpong/tournaments?page=${page}&type=${type}&size=${size}&status=END`
         );
+        if (res.data.totalPage === 0) {
+          setIsEmpty(true);
+        } else {
+          setIsEmpty(false);
+        }
         return res.data;
       },
-      [props.type, props.size]
+      [type, size, setIsEmpty]
     );
 
     const { data, hasNextPage, fetchNextPage } = InfiniteScroll<TournamentData>(
-      ['tournamentData', props.type],
+      ['tournamentData', type],
       fetchTournamentData,
       'JC01'
     );
@@ -78,8 +87,8 @@ const WinnerSwiper = forwardRef(
                 <SwiperSlide key={tournament.tournamentId}>
                   <WinnerProfileImage
                     tournament={tournament}
-                    slideIndex={index + pageIndex * props.size}
-                    setTournamentInfo={props.setTournamentInfo}
+                    slideIndex={index + pageIndex * size}
+                    setTournamentInfo={setTournamentInfo}
                   />
                 </SwiperSlide>
               ))}
