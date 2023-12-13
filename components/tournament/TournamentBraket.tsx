@@ -3,8 +3,13 @@ import {
   SVGViewer as StaticSVGViewer,
   SingleEliminationBracket as StaticSingleEliminationBracket,
 } from '@g-loot/react-tournament-brackets';
-import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
+import {
+  Match,
+  Participant,
+} from '@g-loot/react-tournament-brackets/dist/src/types';
 import React from 'react';
+import { useSetRecoilState } from 'recoil';
+import { clickedTournamentState } from 'utils/recoil/tournament';
 import TournamentMatch from 'components/tournament/TournamentMatch';
 
 if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
@@ -40,13 +45,19 @@ export default function TournamentBraket({
   singleEliminationBracketMatchs,
   containerSize,
 }: TournamentBraketProps) {
-  if (singleEliminationBracketMatchs.length === 0) {
+  const setHighLightUser = useSetRecoilState(clickedTournamentState);
+
+  if (singleEliminationBracketMatchs.length === 0)
     return <h1 style={{ color: 'white' }}>Loading...</h1>;
-  }
+  const finalWidth = containerSize?.width; //Math.max(width - 50, 500);
+  const finalHeight = containerSize?.height; //Math.max(height - 100, 500);
 
   return (
     <SingleEliminationBracket
       matches={singleEliminationBracketMatchs}
+      onPartyClick={(party: Participant, won: boolean) => {
+        if (party.name !== 'TBD') setHighLightUser(party.name);
+      }}
       matchComponent={TournamentMatch}
       options={{
         style: {

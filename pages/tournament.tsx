@@ -1,3 +1,4 @@
+import { start } from 'repl';
 import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useQuery } from 'react-query';
@@ -6,12 +7,14 @@ import { TournamentData, TournamentGame } from 'types/tournamentTypes';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
 import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
+import { clickedTournamentState } from 'utils/recoil/tournament';
 import TournamentBraket from 'components/tournament/TournamentBraket';
 import TournamentCard from 'components/tournament/TournamentCard';
 import styles from 'styles/tournament/TournamentContainer.module.scss';
 
 export default function Tournament() {
   const setError = useSetRecoilState(errorState);
+  const sethighLightUser = useSetRecoilState(clickedTournamentState);
   const [waitTournament, setWaitTournament] = useState<TournamentData | null>(
     null
   );
@@ -77,14 +80,12 @@ export default function Tournament() {
       <h1 className={styles.title}>Tournament</h1>
       <div className={styles.tournamentContainer}>
         <div className={styles.tournamentText}> 예정된 토너먼트 </div>
-        <div className={styles.waitTournamentBox}>
-          {waitTournament?.tournaments.map((tournament) => (
-            <div className={styles.cardContainer} key={tournament.tournamentId}>
-              <TournamentCard key={tournament.tournamentId} {...tournament} />
-            </div>
-          ))}
-        </div>
-        <div className={styles.tournamentTextOpen}> 진행중인 토너먼트 </div>
+        {waitTournament?.tournaments.map((tournament) => (
+          <div className={styles.cardContainer} key={tournament.tournamentId}>
+            <TournamentCard key={tournament.tournamentId} {...tournament} />
+          </div>
+        ))}
+        <div className={styles.tournamentText}> 진행중인 토너먼트 </div>
         <div className={styles.openTournamentBox} ref={containerRef}>
           {openInfo.data && openInfo.data.tournaments.length === 0 ? (
             <div className={styles.tournamentText}>

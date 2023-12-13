@@ -2,7 +2,7 @@
   display: flex;
   height: 3.5rem;
   padding: 0 1rem;
-  margin: 0.5rem;
+  margin-top: 0.5rem;
   overflow-y: scroll;
   cursor: pointer;
   background: linear-gradient(to bottom, #7816e1, #9e35db);
@@ -26,6 +26,7 @@
 
     .right {
       flex: 1;
+      font-size: 0.8rem;
       // text-align: right;
     }
   }
