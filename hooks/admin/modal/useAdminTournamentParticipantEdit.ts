@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { ITournamentUser } from 'types/admin/adminTournamentTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 
 export default function useAdminTournamentParticipantEdit(
@@ -20,22 +20,22 @@ export default function useAdminTournamentParticipantEdit(
   const fetchParticipantList = useCallback(async () => {
     try {
       const res: { data: { users: ITournamentUser[] } } =
-        await mockInstance.get(`/admin/tournaments/${tournamentId}/users`);
+        await instanceInManage.get(`/tournaments/${tournamentId}/users`);
       setParticipantList(res.data.users);
     } catch (error: any) {
       setSnackBar({
         toastName: 'tournament user fetch noti',
         severity: 'error',
-        message: `🔥 ${error.response.data.message} 🔥`,
+        message: `🔥 ${error.response?.data.message} 🔥`,
         clicked: true,
       });
     }
   }, [tournamentId, setSnackBar]);
 
-  async function participantDeleteHandler(intraId: string) {
+  async function participantDeleteHandler(userId: number) {
     try {
-      await mockInstance.delete(
-        `/admin/tournaments/${tournamentId}/users/${intraId}`
+      await instanceInManage.delete(
+        `/tournaments/${tournamentId}/users/${userId}`
       );
       fetchParticipantList();
       setSnackBar({
@@ -48,7 +48,7 @@ export default function useAdminTournamentParticipantEdit(
       setSnackBar({
         toastName: 'tournament user delete noti',
         severity: 'error',
-        message: `🔥 ${error.response.data.message} 🔥`,
+        message: `🔥 ${error.response?.data.message} 🔥`,
         clicked: true,
       });
     }
