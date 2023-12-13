@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Button, TextField, InputAdornment } from '@mui/material';
+import { Button } from '@mui/material';
 import { ITournamentUser } from 'types/admin/adminTournamentTypes';
 import styles from 'styles/admin/modal/AdminTournamentParticipantEditModal.module.scss';
 import AdminTournamentParticipantDeleteConfirmInput from './AdminTournemntParticipantDeleteConfirmInput';
 
 interface AdminTournamentParticipantListProps {
   participantList: ITournamentUser[];
-  onDelete: (intraId: string) => Promise<void>;
+  onDelete: (userId: number) => Promise<void>;
 }
 
 export default function AdminTournamentParticipantList({
@@ -20,10 +20,10 @@ export default function AdminTournamentParticipantList({
     setDeleteMode((prev) => ({ [userId]: !prev[userId] }));
   }
 
-  function deleteHandler(userId: number, intraId: string) {
+  function deleteHandler(userId: number) {
     if (deleteMode[userId]) {
       if (isSame[userId]) {
-        onDelete(intraId);
+        onDelete(userId);
         setDeleteMode({});
       }
     } else {
@@ -70,9 +70,7 @@ export default function AdminTournamentParticipantList({
               disabled={
                 deleteMode[participant.userId] && !isSame[participant.userId]
               }
-              onClick={() =>
-                deleteHandler(participant.userId, participant.intraId)
-              }
+              onClick={() => deleteHandler(participant.userId)}
             >
               삭제
             </Button>
