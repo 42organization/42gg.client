@@ -1,8 +1,14 @@
 import dynamic from 'next/dynamic';
+import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { MdPeopleAlt } from 'react-icons/md';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { TournamentInfo } from 'types/tournamentTypes';
+import { instance } from 'utils/axios';
+import { dateToKRLocaleTimeString } from 'utils/handleTime';
+import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -22,17 +28,91 @@ export default function TournamentRegistryModal({
   status,
   type,
   endTime,
+  player_cnt,
+  tournamentId,
 }: TournamentInfo) {
+  const setSnackbar = useSetRecoilState(toastState);
   const setModal = useSetRecoilState(modalState);
-  const Date = startTime.toString().split(':').slice(0, 2).join(':');
+  const setError = useSetRecoilState(errorState);
+  const [registState, setRegistState] = useState<string>('LOADING');
+  const [openDate, setOpenDate] = useState<string>('미정');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [playerCount, setPlayerCount] = useState<number>(player_cnt);
 
-  const registTournament = () => {
-    console.log('토너먼트에 등록하시겠습니까.');
-  };
+  const registTournament = useCallback(() => {
+    setLoading(true);
+    return instance
+      .post(`/pingpong/tournaments/${tournamentId}/users`)
+      .then((res) => {
+        alert('토너먼트 신청이 완료됐습니다');
+        setModal({ modalName: null });
+        return res.data.status;
+      })
+      .catch((error) => {
+        alert('토너먼트 신청 중 에러가 발생했습니다.');
+        setLoading(false);
+      });
+  }, []);
+
+  const unRegistTournament = useCallback(() => {
+    setLoading(true);
+    return instance
+      .delete(`/pingpong/tournaments/${tournamentId}/users`)
+      .then((res) => {
+        if (registState === 'WAIT') {
+          alert('토너먼트 대기가 취소 되었습니다');
+        } else {
+          alert('토너먼트 등록이 취소 되었습니다');
+        }
+        setModal({ modalName: null });
+        return res.data.status;
+      })
+      .catch((error) => {
+        alert('토너먼트 등록취소 중 에러가 발생했습니다');
+        setLoading(false);
+      });
+  }, []);
+
+  const getStatus = useCallback(() => {
+    return instance
+      .get(`/pingpong/tournaments/${tournamentId}/users`)
+      .then((res) => {
+        setRegistState(res.data.status);
+        return res.data.status;
+      })
+      .catch((error) => {
+        setError('JJH2');
+      });
+  }, []);
+
+  useEffect(() => {
+    getStatus();
+    const date = new Date(startTime);
+    setOpenDate(dateToKRLocaleTimeString(date));
+  }, []);
 
   const closeModalButtonHandler = () => {
     setModal({ modalName: null });
   };
+
+  const buttonContents: Record<string, string> = {
+    LOADING: '로딩중...',
+    BEFORE: '등록',
+    WAIT: '대기 취소',
+    PLAYER: '등록 취소',
+  };
+
+  const buttonAction: Record<string, any> = {
+    BEFORE: registTournament,
+    WAIT: unRegistTournament,
+    PLAYER: unRegistTournament,
+    LOADING: () => {
+      console.log('loading..');
+    },
+  };
+
+  const buttonContent = buttonContents[registState];
+  const buttonHandler = buttonAction[registState];
 
   return (
     <div className={styles.container}>
@@ -47,8 +127,11 @@ export default function TournamentRegistryModal({
       </div>
       <div className={styles.title}>{title}</div>
       <div className={styles.tournamentInfo}>
-        <div className={styles.startTime}>{Date}</div>
-        <div className={styles.participants}>현재인원 / 최대인원</div>
+        <div className={styles.startTime}>{openDate}</div>
+        <div className={styles.participants}>
+          <MdPeopleAlt />
+          <div className={styles.player}>{playerCount} / 8</div>
+        </div>
       </div>
       <Quill
         className={styles.quillViewer}
@@ -60,9 +143,14 @@ export default function TournamentRegistryModal({
       <div>
         <ModalButtonContainer>
           <ModalButton
-            onClick={registTournament}
-            value='등록'
-            style='positive'
+            onClick={buttonHandler}
+            value={
+              player_cnt === 8 && registState === 'BEFORE'
+                ? '대기 등록'
+                : buttonContent
+            }
+            style={'positive'}
+            isLoading={loading}
           />
         </ModalButtonContainer>
       </div>

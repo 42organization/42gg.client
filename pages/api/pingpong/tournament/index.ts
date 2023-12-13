@@ -30,6 +30,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   // 소수점이 있을 경우 올림
+
+  if (filteredTournaments.length == 0) {
+    res.status(200).json({
+      tournaments: [],
+      totalPage: 0,
+    });
+    return;
+  }
+
   const totalPage = Math.ceil(filteredTournaments.length / sizeInt);
 
   if (parseInt(page) > totalPage) {
@@ -48,4 +57,5 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     tournaments: filteredTournaments,
     totalPage: totalPage,
   });
+  return;
 }

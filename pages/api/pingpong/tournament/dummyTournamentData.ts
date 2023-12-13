@@ -25,11 +25,13 @@ const dummyTournaments: TournamentInfo[] = [];
 for (let i = 28; i >= 1; i--) {
   let status;
   if (i === 28) {
-    status = '예정';
+    status = 'BEFORE';
   } else if (i === 27) {
-    status = '진행중';
+    status = 'READY';
+  } else if (i === 26) {
+    status = 'LIVE';
   } else {
-    status = '종료';
+    status = 'END';
   }
 
   const rookieTournament: TournamentInfo = {
@@ -55,7 +57,7 @@ for (let i = 28; i >= 1; i--) {
     type: 'MASTER',
     winnerIntraId: users[i % 3].intraId,
     winnerImageUrl: users[i % 3].imageUrl,
-    player_cnt: 8,
+    player_cnt: 7,
   };
 
   dummyTournaments.push(masterTournament, rookieTournament);

@@ -3,6 +3,7 @@ import GameResultSmallItem from 'components/game/small/GameResultSmallItem';
 
 const RANKTEAMS = {
   team1: {
+    teamId: 1,
     players: [
       {
         intraId: 'tak',
@@ -17,6 +18,7 @@ const RANKTEAMS = {
     score: 2,
   },
   team2: {
+    teamId: 2,
     players: [
       {
         intraId: 'gu',

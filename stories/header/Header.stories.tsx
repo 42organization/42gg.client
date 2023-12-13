@@ -28,7 +28,7 @@ const NotiHeader = ({ notiCnt }: { notiCnt: number }) => {
     setLive({
       notiCount: notiCnt,
       event: null,
-      currentMatchMode: null,
+      currentGameMode: null,
       gameId: null,
     });
   }, []);

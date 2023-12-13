@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { AfterGame, TeamScore } from 'types/scoreTypes';
 
-interface UseRankGameProps {
+interface UseScoreGameProps {
   currentGame: AfterGame;
   onSubmit: (gameResult: TeamScore) => void;
 }
 
-const useRankGame = ({ currentGame, onSubmit }: UseRankGameProps) => {
+const useScoreGame = ({ currentGame, onSubmit }: UseScoreGameProps) => {
   const { isScoreExist, matchTeamsInfo } = currentGame;
   const [result, setResult] = useState<TeamScore>({
     myTeamScore: '',
@@ -17,7 +17,11 @@ const useRankGame = ({ currentGame, onSubmit }: UseRankGameProps) => {
     target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
     const intValue = parseInt(value);
-    const score: number | '' = isNaN(intValue) ? '' : (intValue > 2 || intValue < 0 ? '' : intValue);
+    const score: number | '' = isNaN(intValue)
+      ? ''
+      : intValue > 2 || intValue < 0
+      ? ''
+      : intValue;
     setResult((prev) => ({
       ...prev,
       [name]: score,
@@ -74,4 +78,4 @@ const useRankGame = ({ currentGame, onSubmit }: UseRankGameProps) => {
   };
 };
 
-export default useRankGame;
+export default useScoreGame;

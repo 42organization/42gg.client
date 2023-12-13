@@ -49,10 +49,10 @@ export default function WinnerProfileImage({
       }`}
     >
       <Image
-        src={imageUrl}
+        src={imageUrl ?? '/image/fallBackSrc.jpeg'}
         fill
         style={{ objectFit: 'cover' }}
-        alt={tournament.winnerIntraId}
+        alt={tournament.winnerIntraId ?? 'fallback image'}
         priority
         onError={() => {
           setImageUrl('/image/fallBackSrc.jpeg');

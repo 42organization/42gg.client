@@ -2,17 +2,19 @@ import { useState, useRef, useEffect } from 'react';
 import { SwiperRef } from 'swiper/react';
 import { TournamentInfo } from 'types/tournamentTypes';
 import LeagueButtonGroup from 'components/tournament-record/LeagueButtonGroup';
+import UserTournamentBracket from 'components/tournament-record/UserTournamentBracket';
 import WinnerSwiper from 'components/tournament-record/WinnerSwiper';
+import WinnerTournamentInfo from 'components/tournament-record/WinnerTournamentInfo';
 import styles from 'styles/tournament-record/TournamentRecord.module.scss';
 
 export default function TournamentRecord() {
   const [tournamentInfo, setTournamentInfo] = useState<TournamentInfo>();
   const [selectedType, setSelectedType] = useState<string>('ROOKIE');
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
   const swiperRef = useRef<SwiperRef>(null);
-  const endTime = tournamentInfo ? new Date(tournamentInfo.endTime) : null;
 
   useEffect(() => {
-    if (swiperRef) {
+    if (swiperRef.current?.swiper) {
       swiperRef.current?.swiper.slideTo(0, 0); // index, speed
     }
   }, [selectedType]);
@@ -26,16 +28,16 @@ export default function TournamentRecord() {
         size={5}
         setTournamentInfo={setTournamentInfo}
         ref={swiperRef}
+        setIsEmpty={setIsEmpty}
       />
-      <div className={styles.winnerInfoContainer}>
-        <p className={styles.userId}>{tournamentInfo?.winnerIntraId}</p>
-        <p className={styles.gameInfo}>
-          {tournamentInfo?.title}{' '}
-          <span className={styles.highlighted}>우승자</span>
-        </p>
-        <p className={styles.date}>{endTime?.toLocaleDateString()}</p>
-      </div>
-      <div className={styles.bracketContainer}></div>
+      {isEmpty ? (
+        <p>종료된 토너먼트가 없습니다!</p>
+      ) : (
+        <>
+          <WinnerTournamentInfo tournamentInfo={tournamentInfo} />
+          <UserTournamentBracket tournamentId={tournamentInfo?.tournamentId} />
+        </>
+      )}
     </div>
   );
 }

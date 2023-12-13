@@ -1,4 +1,5 @@
 import { MatchMode } from 'types/mainType';
+import { GameMode } from './gameTypes';
 
 /**
  * 경기 후  스코어 입력시 쓰는 타입
@@ -25,7 +26,7 @@ export interface Players {
 }
 
 export type AfterGame = {
-  mode: Uppercase<MatchMode> | null;
+  mode: Uppercase<GameMode> | null;
   gameId: number;
   startTime: string;
   isScoreExist: boolean;

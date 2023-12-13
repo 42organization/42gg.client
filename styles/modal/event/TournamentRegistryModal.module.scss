@@ -4,12 +4,29 @@
   @include modalContainer('SKYPINK');
   width: 80vw;
   max-width: 22rem;
+  overflow: wrap;
 }
 
 .title {
   @include modalTitle;
-  padding-bottom: 1rem;
+  width: 100%;
+  max-height: 11rem;
+  margin-bottom: 1rem;
+  overflow-y: scroll;
   color: rgba(18, 23, 37, 1);
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.title::-webkit-scrollbar {
+  display: inherit;
+  width: 0.5rem;
+  height: 1rem;
+}
+
+.title::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 2rem;
 }
 
 .startTime {
@@ -30,13 +47,13 @@
 
 .quillViewer::-webkit-scrollbar {
   display: inherit;
-  width: 5px;
+  width: 0.5rem;
   height: 1rem;
 }
 
 .quillViewer::-webkit-scrollbar-thumb {
-  background: white;
-  border-radius: 10px;
+  background: rgba(240, 210, 210, 1);
+  border-radius: 2rem;
 }
 
 .checkBox {
@@ -59,10 +76,22 @@
 
 .closeButtonContainer {
   display: flex;
+  margin-bottom: 1rem;
   margin-left: auto;
 }
 
 .tournamentInfo {
   justify-content: center;
   align-items: center;
+  word-wrap: break-word;
+}
+
+.participants {
+  display: flex;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem qw;
+  justify-content: center;
+  .player {
+    padding-left: 0.2rem;
+  }
 }

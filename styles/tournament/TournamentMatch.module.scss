@@ -5,8 +5,8 @@
   height: 45%;
   padding: 0.5rem;
   color: white;
-  background-color: $rank-purple;
-  border: 0.1rem solid black;
+  background-color: rgb(55, 0, 101);
+  border: 0.1rem solid white;
   border-radius: 0.6rem;
   justify-content: space-between;
   align-items: center;
@@ -17,6 +17,11 @@
   .score {
     margin-left: auto;
   }
+}
+
+.highlight {
+  box-shadow: 0 0 10px 5px #ff8c00 inset;
+  transition: box-shadow 0.3s;
 }
 
 .tournamentMatchContainer {

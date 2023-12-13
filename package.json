@@ -17,6 +17,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@g-loot/react-tournament-brackets": "^1.0.30",
+    "@mui/icons-material": "^5.14.19",
     "@mui/material": "^5.11.7",
     "@react-icons/all-files": "^4.1.0",
     "@types/react-js-pagination": "^3.0.4",

@@ -24,12 +24,12 @@ export const NormalGuide: Story = {
 export const RankGuide: Story = {
   args: {
     condition: true,
-    modalMode: 'RANK',
+    modalMode: 'SCORE',
   },
 };
 export const RankFalseGuide: Story = {
   args: {
     condition: false,
-    modalMode: 'RANK',
+    modalMode: 'SCORE',
   },
 };
