@@ -1,8 +1,8 @@
 import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
+import { instance } from 'utils/axios';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
-import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
 import TournamentBraket from 'components/tournament/TournamentBraket';
 import useComponentSize from 'hooks/util/useComponentSize';
@@ -19,7 +19,9 @@ export default function UserTournamentBraket({
   const [ref, size] = useComponentSize<HTMLDivElement>();
 
   const fetchTournamentGames = async () => {
-    const res = await mockInstance.get(`/tournament/${tournamentId}/games`);
+    const res = await instance.get(
+      `/pingpong/tournaments/${tournamentId}/games`
+    );
     return convertTournamentGamesToBracketMatchs(res.data.games);
   };
 
