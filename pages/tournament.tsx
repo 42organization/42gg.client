@@ -1,23 +1,17 @@
-import { start } from 'repl';
 import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { TournamentData, TournamentGame } from 'types/tournamentTypes';
+import { instance } from 'utils/axios';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
-import { mockInstance } from 'utils/mockAxios';
 import { errorState } from 'utils/recoil/error';
-import { clickedTournamentState } from 'utils/recoil/tournament';
 import TournamentBraket from 'components/tournament/TournamentBraket';
 import TournamentCard from 'components/tournament/TournamentCard';
 import styles from 'styles/tournament/TournamentContainer.module.scss';
 
 export default function Tournament() {
   const setError = useSetRecoilState(errorState);
-  const sethighLightUser = useSetRecoilState(clickedTournamentState);
-  const [waitTournament, setWaitTournament] = useState<TournamentData | null>(
-    null
-  );
   const [openTournamentId, setOpenTournamentId] = useState<number>(0);
   const [openTournament, setOpenTournament] = useState<Match[]>([]);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
@@ -26,26 +20,42 @@ export default function Tournament() {
   const openInfo = useQuery<TournamentData>(
     'openTorunamentInfo',
     () =>
-      mockInstance.get('tournament?page=1&status=BEFORE').then((res) => {
-        setOpenTournamentId(res.data.tournamentId);
-        return res.data.tournamentId;
-      }),
-    { retry: 1, staleTime: 60000 /* 60초 */ }
+      instance
+        .get('/pingpong/tournaments?size=20&page=1&status=LIVE')
+        .then((res) => {
+          console.log(res.data.tournaments[0].tournamentId);
+          setOpenTournamentId(res.data.tournaments[0].tournamentId);
+          return res.data;
+        }),
+    {
+      onError: (error) => {
+        setError('JHH02');
+      },
+      retry: 1,
+      staleTime: 60000 /* 60초 */,
+    }
   );
 
-  const fetchWaitTournamentData = (page: number) => {
-    return mockInstance
-      .get(`tournament?page=${page}&status=BEFORE&size=4`)
-      .then((res) => {
-        return res.data;
-      });
-  };
+  const waitInfo = useQuery<TournamentData>(
+    'waitTournamentInfo',
+    () =>
+      instance
+        .get(`/pingpong/tournaments?size=20&page=1&status=BEFORE`)
+        .then((res) => {
+          return res.data;
+        }),
+    {
+      onError: (error) => {
+        setError('JHH02');
+      },
+    }
+  );
 
   const fetchTournamentGames = useCallback(async () => {
     console.log('Fetching more data...');
     try {
-      const res = await mockInstance.get(
-        `/tournament/${openTournamentId}/games`
+      const res = await instance.get(
+        `pingpong/tournaments/${openTournamentId}/games`
       );
       const data: TournamentGame[] = res.data.games;
       const bracketMatchs = convertTournamentGamesToBracketMatchs(data);
@@ -54,40 +64,30 @@ export default function Tournament() {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  }, [openTournament]);
+  }, [openTournamentId]);
 
   useEffect(() => {
-    fetchWaitTournamentData(1)
-      .then((data) => {
-        setWaitTournament(data);
-      })
-      .catch(() => {
-        setError('JHH02');
-      });
-    fetchTournamentGames();
-  }, []);
-
-  useEffect(() => {
+    if (openTournamentId !== undefined) fetchTournamentGames();
     if (containerRef.current) {
       const width = containerRef.current.clientWidth;
       const height = containerRef.current.clientHeight;
       setContainerSize({ width, height });
     }
-  }, []);
+  }, [openTournamentId]);
 
   return (
     <div className={styles.pageWrap}>
       <h1 className={styles.title}>Tournament</h1>
       <div className={styles.tournamentContainer}>
         <div className={styles.tournamentText}> 예정된 토너먼트 </div>
-        {waitTournament?.tournaments.map((tournament) => (
+        {waitInfo.data?.tournaments.map((tournament) => (
           <div className={styles.cardContainer} key={tournament.tournamentId}>
             <TournamentCard key={tournament.tournamentId} {...tournament} />
           </div>
         ))}
         <div className={styles.tournamentText}> 진행중인 토너먼트 </div>
         <div className={styles.openTournamentBox} ref={containerRef}>
-          {openInfo.data && openInfo.data.tournaments.length === 0 ? (
+          {openInfo.data && openInfo.data.tournaments?.length === 0 ? (
             <div className={styles.tournamentText}>
               진행중인 토너먼트가 없습니다
             </div>
