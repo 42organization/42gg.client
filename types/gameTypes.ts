@@ -12,6 +12,7 @@ export type Player = {
 };
 
 export type Team = {
+  teamId: number;
   players: Player[] | RankPlayer[];
   isWin?: boolean;
   score?: number;
