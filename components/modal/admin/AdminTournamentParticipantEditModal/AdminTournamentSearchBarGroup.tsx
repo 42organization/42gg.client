@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Button } from '@mui/material';
 import { ITournamentUser } from 'types/admin/adminTournamentTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import useAdminSearchUser from 'hooks/admin/modal/useAdminSearchUser';
 import AdminSearchUserDropDownMenu from './AdminSearchUserDropDownMenu';
@@ -19,6 +19,7 @@ export default function AdminTournamentSearchBarGroup({
 }: AdminTournamentSearchBarGroupProps) {
   const {
     inputId,
+    setInputId,
     isIdExist,
     isTyping,
     menuOpen,
@@ -37,11 +38,12 @@ export default function AdminTournamentSearchBarGroup({
     if (isIdExist) {
       setIsWaitingResponse(true);
       try {
-        const res: { data: ITournamentUser } = await mockInstance.post(
-          `/admin/tournaments/${tournamentId}/users`,
+        const res: { data: ITournamentUser } = await instanceInManage.post(
+          `/tournaments/${tournamentId}/users`,
           { intraId: inputId }
         );
         onAddUser(res.data);
+        setInputId('');
         setSnackBar({
           toastName: 'tournament user add noti',
           severity: 'success',
