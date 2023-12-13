@@ -1,3 +1,4 @@
+import { dateToKRLocaleTimeString } from 'utils/handleTime';
 import styles from 'styles/main/TournamentPreview/TournamentPreviewItem.module.scss';
 
 interface TournamentPreviewItemProps {
@@ -14,20 +15,8 @@ export default function TournamentPreviewItem({
   endTime,
   status,
 }: TournamentPreviewItemProps) {
-  function formatTime(timeString: string) {
-    const date = new Date(timeString);
-    return date.toLocaleTimeString('ko-KR', {
-      year: 'numeric',
-      month: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      day: 'numeric',
-      hour12: true,
-    });
-  }
-
-  const formattedStartTime = formatTime(startTime);
-  const formattedEndTime = formatTime(endTime);
+  const formattedStartTime = dateToKRLocaleTimeString(new Date(startTime));
+  const formattedEndTime = dateToKRLocaleTimeString(new Date(endTime));
 
   const statusColor = status === 'LIVE' ? 'live' : 'scheduled';
 

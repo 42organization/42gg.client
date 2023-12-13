@@ -160,3 +160,19 @@ export const dateToStringShort = (d: Date) => {
   const min = d.getMinutes().toString().padStart(2, '0');
   return `${year}-${month}-${date} ${hour}:${min}`;
 };
+
+/**
+ *  시간을 YYYY-MM-DD 오후/오전 HH:MM 형식으로 반환
+ *  @param {Date} d
+ *  @return 시간 문자열(YYYY-MM-DD 오후/오전 HH:MM)
+ */
+export const dateToKRLocaleTimeString = (d: Date) => {
+  return d.toLocaleTimeString('ko-KR', {
+    year: 'numeric',
+    month: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    day: 'numeric',
+    hour12: true,
+  });
+};
