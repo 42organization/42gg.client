@@ -44,5 +44,5 @@ export default function AdminEditTournamentBraket({
         />
       </TournamentIdContext.Provider>
     </div>
-  ); //*onClick={putHandler}
+  );
 }
