@@ -70,7 +70,6 @@ export default function TournamentList({
       const res = await instance.get(
         `pingpong/tournaments?page=${currentPage}&size=20`
       );
-      console.log(res.data.tournaments);
       setTournamentInfo({
         tournamentList: res.data.tournaments,
         totalPage: res.data.totalPage,
