@@ -16,7 +16,6 @@ import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/tournament/TournamentEdit.module.scss';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
-import TournamentPreview from './TournamentModalPreview';
 import TournamentModalPreview from './TournamentModalPreview';
 import { AdminTableHead } from '../common/AdminTable';
 
