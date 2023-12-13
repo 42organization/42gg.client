@@ -8,7 +8,7 @@ import {
   Participant,
 } from '@g-loot/react-tournament-brackets/dist/src/types';
 import React from 'react';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { clickedTournamentState } from 'utils/recoil/tournament';
 import TournamentMatch from 'components/tournament/TournamentMatch';
 
@@ -45,7 +45,7 @@ export default function TournamentBraket({
   singleEliminationBracketMatchs,
   containerSize,
 }: TournamentBraketProps) {
-  const [, setHighLightUser] = useRecoilState(clickedTournamentState);
+  const setHighLightUser = useSetRecoilState(clickedTournamentState);
 
   if (singleEliminationBracketMatchs.length === 0)
     return <h1 style={{ color: 'white' }}>Loading...</h1>;
