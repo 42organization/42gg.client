@@ -34,6 +34,9 @@ function TournamentMatchParty({
       }`}
       onMouseEnter={() => onMouseEnter(party.id)}
       onClick={() => onPartyClick(party, false)}
+      onTouchStartCapture={() => {
+        onPartyClick(party, false);
+      }}
     >
       <PlayerImage
         src={party.picture ?? '/image/match_qustion.png'}

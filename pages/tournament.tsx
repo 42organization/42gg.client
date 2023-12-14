@@ -23,7 +23,6 @@ export default function Tournament() {
       instance
         .get('/pingpong/tournaments?size=20&page=1&status=LIVE')
         .then((res) => {
-          console.log(res.data.tournaments[0].tournamentId);
           setOpenTournamentId(res.data.tournaments[0].tournamentId);
           return res.data;
         }),
