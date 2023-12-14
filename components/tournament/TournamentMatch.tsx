@@ -34,7 +34,7 @@ function TournamentMatchParty({
       }`}
       onMouseEnter={() => onMouseEnter(party.id)}
       onClick={() => onPartyClick(party, false)}
-      onTouchStartCapture={() => {
+      onTouchStart={() => {
         onPartyClick(party, false);
       }}
     >
