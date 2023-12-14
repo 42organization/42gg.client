@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { BiCalendar } from 'react-icons/bi';
 import { MdPeopleAlt } from 'react-icons/md';
 import { Modal } from 'types/modalTypes';
 import { TournamentInfo } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
-import { dateToKRLocaleTimeString , dateToString } from 'utils/handleTime';
+import { dateToKRLocaleTimeString } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/tournament/TournamentCard.module.scss';
@@ -22,8 +22,10 @@ export default function TournamentCard({
   winnerImageUrl,
   player_cnt,
 }: TournamentInfo) {
+  const modal = useRecoilValue(modalState);
   const setModal = useSetRecoilState<Modal>(modalState);
   const [registState, setRegistState] = useState<string>('로딩중');
+  const [playerCount, setPlayerCount] = useState<number>(player_cnt);
   const setError = useSetRecoilState(errorState);
 
   const openTournamentInfoModal = () => {
@@ -44,9 +46,22 @@ export default function TournamentCard({
     });
   };
 
+  const getTournamentInfo = useCallback(() => {
+    return instance
+      .get(`/pingpong/tournaments/${tournamentId}`)
+      .then((res) => {
+        setPlayerCount(res.data.player_cnt);
+        return res.data.player_cnt;
+      })
+      .catch((error) => {
+        setError('JJH2');
+      });
+  }, [tournamentId]);
+
   useEffect(() => {
+    getTournamentInfo();
     getStatus();
-  }, []);
+  }, [modal]);
 
   const getStatus = useCallback(() => {
     return instance
@@ -62,7 +77,13 @@ export default function TournamentCard({
 
   const start = dateToKRLocaleTimeString(new Date(startTime));
   const end = dateToKRLocaleTimeString(new Date(endTime));
-  const isFull = player_cnt === 8 ? 'full' : 'notFull';
+  const isFull = playerCount === 8 ? 'full' : 'notFull';
+
+  const userState: Record<string, string> = {
+    BEFORE: '미 참여',
+    PLAYER: '참여 중',
+    WAIT: '대기 중',
+  };
 
   return (
     <div
@@ -74,10 +95,10 @@ export default function TournamentCard({
           <div className={styles.title}>{title}</div>
           <div className={styles.tag}>
             <div className={`${styles.participants} ${styles[isFull]}`}>
-              <MdPeopleAlt /> {player_cnt} / 8
+              <MdPeopleAlt /> {playerCount} / 8
             </div>
             <div className={`${styles.state} ${styles[registState]}`}>
-              {registState}
+              {userState[registState]}
             </div>
           </div>
         </div>
