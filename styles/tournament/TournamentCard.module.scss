@@ -40,13 +40,13 @@
           margin-right: 1rem;
           border-radius: 0.5rem;
           &.PLAYER {
-            background-color: rgb(87, 216, 87);
+            background-color: rgb(75, 183, 75);
           }
           &.WAIT {
-            background-color: yellow;
+            background-color: rgb(216, 170, 42);
           }
           &.BEFORE {
-            background-color: rgb(105, 162, 105);
+            background-color: #949393;
           }
         }
 
