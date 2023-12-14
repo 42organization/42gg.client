@@ -10,10 +10,21 @@
   }
 }
 
+@keyframes text-fade-in-out {
+  0%,
+  100% {
+    text-shadow: rgb(255, 209, 91) 0 0 10px;
+  }
+  50% {
+    text-shadow: rgb(254, 196, 51) 0 0 20px;
+  }
+}
+
 .title {
   @include pageTitle;
   display: flex;
   justify-content: center;
+  animation: text-fade-in-out 4s infinite;
 }
 
 .winnerImageContainer {
