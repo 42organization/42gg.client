@@ -3,6 +3,6 @@
 }
 
 .swiperSlide {
-  height: 80%;
+  height: 80% !important; // 라이브러리 default height 속성 무시
   margin: 1.5rem 0;
 }
