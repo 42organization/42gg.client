@@ -84,9 +84,13 @@ const WinnerSwiper = forwardRef(
           <React.Fragment key={pageIndex}>
             {page.tournaments.length > 0 &&
               page.tournaments.map((tournament, index) => (
-                <SwiperSlide key={tournament.tournamentId}>
+                <SwiperSlide
+                  className={styles.swiperSlide}
+                  key={tournament.tournamentId}
+                >
                   <WinnerProfileImage
                     tournament={tournament}
+                    type={type}
                     slideIndex={index + pageIndex * size}
                     setTournamentInfo={setTournamentInfo}
                   />
