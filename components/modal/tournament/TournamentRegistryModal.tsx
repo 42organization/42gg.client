@@ -8,7 +8,6 @@ import { instance } from 'utils/axios';
 import { dateToKRLocaleTimeString } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import { toastState } from 'utils/recoil/toast';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -31,7 +30,6 @@ export default function TournamentRegistryModal({
   player_cnt,
   tournamentId,
 }: TournamentInfo) {
-  const setSnackbar = useSetRecoilState(toastState);
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
   const [registState, setRegistState] = useState<string>('LOADING');
@@ -45,14 +43,16 @@ export default function TournamentRegistryModal({
       .post(`/pingpong/tournaments/${tournamentId}/users`)
       .then((res) => {
         alert('토너먼트 신청이 완료됐습니다');
-        setModal({ modalName: null });
+        setLoading(false);
+        setRegistState(res.data.status);
+        if (playerCount < 8) setPlayerCount(playerCount + 1);
         return res.data.status;
       })
       .catch((error) => {
         alert('토너먼트 신청 중 에러가 발생했습니다.');
         setLoading(false);
       });
-  }, []);
+  }, [playerCount]);
 
   const unRegistTournament = useCallback(() => {
     setLoading(true);
@@ -62,16 +62,18 @@ export default function TournamentRegistryModal({
         if (registState === 'WAIT') {
           alert('토너먼트 대기가 취소 되었습니다');
         } else {
+          setPlayerCount(playerCount - 1);
           alert('토너먼트 등록이 취소 되었습니다');
         }
-        setModal({ modalName: null });
+        setRegistState(res.data.status);
+        setLoading(false);
         return res.data.status;
       })
       .catch((error) => {
         alert('토너먼트 등록취소 중 에러가 발생했습니다');
         setLoading(false);
       });
-  }, []);
+  }, [playerCount]);
 
   const getStatus = useCallback(() => {
     return instance
@@ -91,6 +93,7 @@ export default function TournamentRegistryModal({
     setOpenDate(dateToKRLocaleTimeString(date));
   }, []);
 
+  console.log(registState);
   const closeModalButtonHandler = () => {
     setModal({ modalName: null });
   };
