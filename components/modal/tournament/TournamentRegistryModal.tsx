@@ -8,7 +8,6 @@ import { instance } from 'utils/axios';
 import { dateToKRLocaleTimeString } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import { toastState } from 'utils/recoil/toast';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -31,7 +30,6 @@ export default function TournamentRegistryModal({
   player_cnt,
   tournamentId,
 }: TournamentInfo) {
-  const setSnackbar = useSetRecoilState(toastState);
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
   const [registState, setRegistState] = useState<string>('LOADING');
@@ -44,12 +42,13 @@ export default function TournamentRegistryModal({
     return instance
       .post(`/pingpong/tournaments/${tournamentId}/users`)
       .then((res) => {
-        alert('토너먼트 신청이 완료됐습니다');
-        setModal({ modalName: null });
+        // alert('토너먼트 신청이 완료됐습니다');
+        setLoading(false);
+        setRegistState(res.data.status);
         return res.data.status;
       })
       .catch((error) => {
-        alert('토너먼트 신청 중 에러가 발생했습니다.');
+        setError('토너먼트 신청 중 에러가 발생했습니다.');
         setLoading(false);
       });
   }, []);
@@ -60,15 +59,17 @@ export default function TournamentRegistryModal({
       .delete(`/pingpong/tournaments/${tournamentId}/users`)
       .then((res) => {
         if (registState === 'WAIT') {
-          alert('토너먼트 대기가 취소 되었습니다');
+          // alert('토너먼트 대기가 취소 되었습니다');
         } else {
-          alert('토너먼트 등록이 취소 되었습니다');
+          // setPlayerCount(playerCount - 1);
+          // alert('토너먼트 등록이 취소 되었습니다');
         }
-        setModal({ modalName: null });
+        setRegistState(res.data.status);
+        setLoading(false);
         return res.data.status;
       })
       .catch((error) => {
-        alert('토너먼트 등록취소 중 에러가 발생했습니다');
+        setError('토너먼트 등록취소 중 에러가 발생했습니다');
         setLoading(false);
       });
   }, []);
@@ -85,11 +86,28 @@ export default function TournamentRegistryModal({
       });
   }, []);
 
+  const getTournamentInfo = useCallback(() => {
+    return instance
+      .get(`/pingpong/tournaments/${tournamentId}`)
+      .then((res) => {
+        setPlayerCount(res.data.player_cnt);
+        return res.data.player_cnt;
+      })
+      .catch((error) => {
+        setError('JJH2');
+      });
+  }, [tournamentId]);
+
   useEffect(() => {
+    getTournamentInfo();
     getStatus();
     const date = new Date(startTime);
     setOpenDate(dateToKRLocaleTimeString(date));
   }, []);
+
+  useEffect(() => {
+    getTournamentInfo();
+  }, [registState]);
 
   const closeModalButtonHandler = () => {
     setModal({ modalName: null });
