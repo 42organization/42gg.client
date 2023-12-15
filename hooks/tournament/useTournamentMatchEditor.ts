@@ -63,11 +63,11 @@ export default function useTournamentMatchEditor(
           tournamentGameId: match.id,
           nextTournamentGameId: match.nextMatchId,
           team1: {
-            teamId: topParty.teamId,
+            teamId: topParty.id,
             score: parseInt(topParty.resultText ? topParty.resultText : '0'),
           },
           team2: {
-            teamId: bottomParty.teamId,
+            teamId: bottomParty.id,
             score: parseInt(
               bottomParty.resultText ? bottomParty.resultText : '0'
             ),
