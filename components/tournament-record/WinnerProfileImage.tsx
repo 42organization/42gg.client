@@ -44,21 +44,11 @@ export default function WinnerProfileImage({
     return styles.secondLayer;
   }
 
-  function applyTypeStyle(type: string) {
-    if (type === 'ROOKIE') {
-      return styles.rookie;
-    }
-    if (type === 'MASTER') {
-      return styles.master;
-    }
-    return styles.custom;
-  }
-
   return (
     <div
       className={`${styles.winnerProfileImage} ${
         indexDiff > -2 && indexDiff < 2 && applyLayerStyle()
-      } ${applyTypeStyle(type)}`}
+      } ${styles[type]}`}
     >
       <Image
         src={imageUrl ?? '/image/fallBackSrc.jpeg'}

@@ -20,21 +20,21 @@
   transform: translate(-50%, -50%);
   animation: fadeIn 0.3s ease-in-out;
 
-  &.rookie {
+  &.ROOKIE {
     border: 4px solid #e2be00;
   }
 
-  &.master {
+  &.MASTER {
     border: 4px solid #7ceeff;
   }
 
-  &.custom {
+  &.CUSTOM {
     border: 4px solid #7dffbe;
   }
 
   &.firstLayer {
     filter: brightness(100%);
-    box-shadow: 0 0 15px 5px rgba(255, 247, 201, 0.75); /* 후광 효과 */
+    box-shadow: 0 0 15px 5px rgba(255, 247, 201, 0.75);
   }
 
   &.secondLayer {
