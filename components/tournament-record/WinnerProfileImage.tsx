@@ -6,12 +6,14 @@ import styles from 'styles/tournament-record/WinnerProfileImage.module.scss';
 
 interface WinnerProfileImageProps {
   tournament: TournamentInfo;
+  type: string;
   slideIndex: number;
   setTournamentInfo: React.Dispatch<SetStateAction<TournamentInfo | undefined>>;
 }
 
 export default function WinnerProfileImage({
   tournament,
+  type,
   slideIndex,
   setTournamentInfo,
 }: WinnerProfileImageProps) {
@@ -35,7 +37,7 @@ export default function WinnerProfileImage({
     }
   }, [indexDiff, tournament, setTournamentInfo]);
 
-  function applyStyle() {
+  function applyLayerStyle() {
     if (indexDiff === 0) {
       return styles.firstLayer;
     }
@@ -45,8 +47,8 @@ export default function WinnerProfileImage({
   return (
     <div
       className={`${styles.winnerProfileImage} ${
-        indexDiff > -2 && indexDiff < 2 && applyStyle()
-      }`}
+        indexDiff > -2 && indexDiff < 2 && applyLayerStyle()
+      } ${styles[type]}`}
     >
       <Image
         src={imageUrl ?? '/image/fallBackSrc.jpeg'}
