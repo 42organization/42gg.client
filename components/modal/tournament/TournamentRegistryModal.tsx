@@ -100,14 +100,13 @@ export default function TournamentRegistryModal({
   }, [tournamentId]);
 
   useEffect(() => {
-    getTournamentInfo();
     getStatus();
     setOpenDate(dateToKRLocaleTimeString(new Date(startTime)));
     setCloseDate(dateToKRLocaleTimeString(new Date(endTime)));
   }, []);
 
   useEffect(() => {
-    getTournamentInfo();
+    if (registState !== 'LOADING') getTournamentInfo();
   }, [registState]);
 
   const closeModalButtonHandler = () => {
@@ -165,7 +164,7 @@ export default function TournamentRegistryModal({
           <ModalButton
             onClick={buttonHandler}
             value={
-              player_cnt === 8 && registState === 'BEFORE'
+              playerCount === 8 && registState === 'BEFORE'
                 ? '대기 등록'
                 : buttonContent
             }

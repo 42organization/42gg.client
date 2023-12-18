@@ -73,12 +73,15 @@ export default function Tournament() {
 
   useEffect(() => {
     if (openTournamentId !== undefined) fetchTournamentGames();
+  }, [openTournamentId, fetchTournamentGames]);
+
+  useEffect(() => {
     if (containerRef.current) {
       const width = containerRef.current.clientWidth;
       const height = containerRef.current.clientHeight;
       setContainerSize({ width, height });
     }
-  }, [openTournamentId]);
+  }, []);
 
   return (
     <div className={styles.pageWrap}>
