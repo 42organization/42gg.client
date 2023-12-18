@@ -59,8 +59,10 @@ export default function TournamentCard({
   }, [tournamentId]);
 
   useEffect(() => {
-    getTournamentInfo();
-    getStatus();
+    if (modal.modalName === null) {
+      getTournamentInfo();
+      getStatus();
+    }
   }, [modal]);
 
   const getStatus = useCallback(() => {

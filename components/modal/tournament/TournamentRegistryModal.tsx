@@ -75,7 +75,6 @@ export default function TournamentRegistryModal({
   }, []);
 
   const getStatus = useCallback(() => {
-    console.log(registState);
     return instance
       .get(`/pingpong/tournaments/${tournamentId}/users`)
       .then((res) => {
@@ -107,7 +106,7 @@ export default function TournamentRegistryModal({
 
   useEffect(() => {
     if (registState !== 'LOADING') getTournamentInfo();
-  }, [registState]);
+  }, [registState, getTournamentInfo]);
 
   const closeModalButtonHandler = () => {
     setModal({ modalName: null });
