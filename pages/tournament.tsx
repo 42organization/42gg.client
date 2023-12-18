@@ -33,7 +33,6 @@ export default function Tournament() {
         }),
     {
       onError: (error) => {
-        console.log(error);
         setError('JJH02');
       },
       retry: 1,

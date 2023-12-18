@@ -8,6 +8,7 @@ import { instance } from 'utils/axios';
 import { dateToKRLocaleTimeString } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -30,6 +31,7 @@ export default function TournamentRegistryModal({
   player_cnt,
   tournamentId,
 }: TournamentInfo) {
+  const setSnackbar = useSetRecoilState(toastState);
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
   const [registState, setRegistState] = useState<string>('LOADING');
@@ -42,13 +44,23 @@ export default function TournamentRegistryModal({
     return instance
       .post(`/pingpong/tournaments/${tournamentId}/users`)
       .then((res) => {
-        // alert('토너먼트 신청이 완료됐습니다');
         setLoading(false);
+        setSnackbar({
+          toastName: `토너먼트 신청`,
+          severity: 'success',
+          message: `🔥 토너먼트 참가 신청이 완료 됐습니다 ! 🔥`,
+          clicked: true,
+        });
         setRegistState(res.data.status);
         return res.data.status;
       })
       .catch((error) => {
-        setError('토너먼트 신청 중 에러가 발생했습니다.');
+        setSnackbar({
+          toastName: `토너먼트 신청`,
+          severity: 'error',
+          message: `🔥 ${error.response?.data?.message} 🔥`,
+          clicked: true,
+        });
         setLoading(false);
       });
   }, []);
@@ -59,17 +71,31 @@ export default function TournamentRegistryModal({
       .delete(`/pingpong/tournaments/${tournamentId}/users`)
       .then((res) => {
         if (registState === 'WAIT') {
-          // alert('토너먼트 대기가 취소 되었습니다');
+          setSnackbar({
+            toastName: `토너먼트 대기 취소`,
+            severity: 'success',
+            message: `토너먼트 대기 신청을 취소했습니다.`,
+            clicked: true,
+          });
         } else {
-          // setPlayerCount(playerCount - 1);
-          // alert('토너먼트 등록이 취소 되었습니다');
+          setSnackbar({
+            toastName: `토너먼트 신청 취소 `,
+            severity: 'success',
+            message: `토너먼트 참가 신청을 취소했습니다.`,
+            clicked: true,
+          });
         }
         setRegistState(res.data.status);
         setLoading(false);
         return res.data.status;
       })
       .catch((error) => {
-        setError('토너먼트 등록취소 중 에러가 발생했습니다');
+        setSnackbar({
+          toastName: `토너먼트 신청 취소`,
+          severity: 'error',
+          message: `취소중 에러가 발생했습니다. 🔥`,
+          clicked: true,
+        });
         setLoading(false);
       });
   }, []);
