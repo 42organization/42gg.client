@@ -42,7 +42,7 @@ export default function TournamentRegistryModal({
   const registTournament = useCallback(() => {
     setLoading(true);
     return instance
-      .post(`/pingpong/tournaments/${tournamentId}/usersaa`)
+      .post(`/pingpong/tournaments/${tournamentId}/users`)
       .then((res) => {
         setLoading(false);
         setSnackbar({
