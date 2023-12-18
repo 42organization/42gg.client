@@ -12,7 +12,9 @@ import styles from 'styles/tournament/TournamentContainer.module.scss';
 
 export default function Tournament() {
   const setError = useSetRecoilState(errorState);
-  const [openTournamentId, setOpenTournamentId] = useState<number>(0);
+  const [openTournamentId, setOpenTournamentId] = useState<number | undefined>(
+    undefined
+  );
   const [openTournament, setOpenTournament] = useState<Match[]>([]);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const containerRef = useRef<HTMLDivElement | null>(null); // useRef를 사용하여 Ref 생성
@@ -23,8 +25,10 @@ export default function Tournament() {
       instance
         .get('/pingpong/tournaments?size=20&page=1&status=LIVE')
         .then((res) => {
-          if (res.data.tournamets)
+          if (res.data.tournamets?.length === 1) {
+            console.log('openInfo');
             setOpenTournamentId(res.data.tournaments[0].tournamentId);
+          }
           return res.data;
         }),
     {
