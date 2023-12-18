@@ -37,7 +37,6 @@ export default function TournamentRegistryModal({
   const [closeDate, setCloseDate] = useState<string>('미정');
   const [loading, setLoading] = useState<boolean>(false);
   const [playerCount, setPlayerCount] = useState<number>(player_cnt);
-
   const registTournament = useCallback(() => {
     setLoading(true);
     return instance
@@ -76,6 +75,7 @@ export default function TournamentRegistryModal({
   }, []);
 
   const getStatus = useCallback(() => {
+    console.log(registState);
     return instance
       .get(`/pingpong/tournaments/${tournamentId}/users`)
       .then((res) => {
@@ -113,24 +113,29 @@ export default function TournamentRegistryModal({
     setModal({ modalName: null });
   };
 
-  const buttonContents: Record<string, string> = {
-    LOADING: '로딩중...',
-    BEFORE: '등록',
-    WAIT: '대기 취소',
-    PLAYER: '등록 취소',
-  };
-
-  const buttonAction: Record<string, any> = {
-    BEFORE: registTournament,
-    WAIT: unRegistTournament,
-    PLAYER: unRegistTournament,
-    LOADING: () => {
-      console.log('loading..');
+  const buttonMappings: Record<string, any> = {
+    LOADING: {
+      content: '로딩중...',
+      handler: () => {
+        console.log('loading...');
+      },
+    },
+    BEFORE: {
+      content: '등록',
+      handler: registTournament,
+    },
+    WAIT: {
+      content: '대기 취소',
+      handler: unRegistTournament,
+    },
+    PLAYER: {
+      content: '등록 취소',
+      handler: unRegistTournament,
     },
   };
 
-  const buttonContent = buttonContents[registState];
-  const buttonHandler = buttonAction[registState];
+  const { content: buttonContent, handler: buttonHandler } =
+    buttonMappings[registState];
 
   return (
     <div className={styles.container}>
