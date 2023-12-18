@@ -41,7 +41,7 @@ export default function TournamentCard({
         endTime: endTime,
         winnerIntraId: winnerIntraId,
         winnerImageUrl: winnerImageUrl,
-        player_cnt: player_cnt,
+        player_cnt: playerCount,
       },
     });
   };

@@ -12,7 +12,9 @@ import styles from 'styles/tournament/TournamentContainer.module.scss';
 
 export default function Tournament() {
   const setError = useSetRecoilState(errorState);
-  const [openTournamentId, setOpenTournamentId] = useState<number>(0);
+  const [openTournamentId, setOpenTournamentId] = useState<number | undefined>(
+    undefined
+  );
   const [openTournament, setOpenTournament] = useState<Match[]>([]);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const containerRef = useRef<HTMLDivElement | null>(null); // useRef를 사용하여 Ref 생성
@@ -23,12 +25,16 @@ export default function Tournament() {
       instance
         .get('/pingpong/tournaments?size=20&page=1&status=LIVE')
         .then((res) => {
-          setOpenTournamentId(res.data.tournaments[0].tournamentId);
+          if (res.data.tournamets?.length === 1) {
+            console.log('openInfo');
+            setOpenTournamentId(res.data.tournaments[0].tournamentId);
+          }
           return res.data;
         }),
     {
       onError: (error) => {
-        setError('JHH02');
+        console.log(error);
+        setError('JJH02');
       },
       retry: 1,
       staleTime: 60000 /* 60초 */,
@@ -45,7 +51,7 @@ export default function Tournament() {
         }),
     {
       onError: (error) => {
-        setError('JHH02');
+        setError('JJH03');
       },
     }
   );
@@ -67,27 +73,36 @@ export default function Tournament() {
 
   useEffect(() => {
     if (openTournamentId !== undefined) fetchTournamentGames();
+  }, [openTournamentId, fetchTournamentGames]);
+
+  useEffect(() => {
     if (containerRef.current) {
       const width = containerRef.current.clientWidth;
       const height = containerRef.current.clientHeight;
       setContainerSize({ width, height });
     }
-  }, [openTournamentId]);
+  }, []);
 
   return (
     <div className={styles.pageWrap}>
       <h1 className={styles.title}>Tournament</h1>
       <div className={styles.tournamentContainer}>
         <div className={styles.tournamentText}> 예정된 토너먼트 </div>
-        {waitInfo.data?.tournaments.map((tournament) => (
-          <div className={styles.cardContainer} key={tournament.tournamentId}>
-            <TournamentCard key={tournament.tournamentId} {...tournament} />
-          </div>
-        ))}
+        {waitInfo.data?.tournaments.length === 0 ? (
+          <h4 className={styles.noTournamentText}>
+            예정된 토너먼트가 없습니다.
+          </h4>
+        ) : (
+          waitInfo.data?.tournaments.map((tournament) => (
+            <div className={styles.cardContainer} key={tournament.tournamentId}>
+              <TournamentCard key={tournament.tournamentId} {...tournament} />
+            </div>
+          ))
+        )}
         <div className={styles.tournamentText}> 진행중인 토너먼트 </div>
         <div className={styles.openTournamentBox} ref={containerRef}>
           {openInfo.data && openInfo.data.tournaments?.length === 0 ? (
-            <div className={styles.tournamentText}>
+            <div className={styles.noTournamentText}>
               진행중인 토너먼트가 없습니다
             </div>
           ) : (

@@ -34,9 +34,9 @@ export default function TournamentRegistryModal({
   const setError = useSetRecoilState(errorState);
   const [registState, setRegistState] = useState<string>('LOADING');
   const [openDate, setOpenDate] = useState<string>('미정');
+  const [closeDate, setCloseDate] = useState<string>('미정');
   const [loading, setLoading] = useState<boolean>(false);
   const [playerCount, setPlayerCount] = useState<number>(player_cnt);
-
   const registTournament = useCallback(() => {
     setLoading(true);
     return instance
@@ -75,6 +75,7 @@ export default function TournamentRegistryModal({
   }, []);
 
   const getStatus = useCallback(() => {
+    console.log(registState);
     return instance
       .get(`/pingpong/tournaments/${tournamentId}/users`)
       .then((res) => {
@@ -99,38 +100,42 @@ export default function TournamentRegistryModal({
   }, [tournamentId]);
 
   useEffect(() => {
-    getTournamentInfo();
     getStatus();
-    const date = new Date(startTime);
-    setOpenDate(dateToKRLocaleTimeString(date));
+    setOpenDate(dateToKRLocaleTimeString(new Date(startTime)));
+    setCloseDate(dateToKRLocaleTimeString(new Date(endTime)));
   }, []);
 
   useEffect(() => {
-    getTournamentInfo();
+    if (registState !== 'LOADING') getTournamentInfo();
   }, [registState]);
 
   const closeModalButtonHandler = () => {
     setModal({ modalName: null });
   };
 
-  const buttonContents: Record<string, string> = {
-    LOADING: '로딩중...',
-    BEFORE: '등록',
-    WAIT: '대기 취소',
-    PLAYER: '등록 취소',
-  };
-
-  const buttonAction: Record<string, any> = {
-    BEFORE: registTournament,
-    WAIT: unRegistTournament,
-    PLAYER: unRegistTournament,
-    LOADING: () => {
-      console.log('loading..');
+  const buttonMappings: Record<string, any> = {
+    LOADING: {
+      content: '로딩중...',
+      handler: () => {
+        console.log('loading...');
+      },
+    },
+    BEFORE: {
+      content: '등록',
+      handler: registTournament,
+    },
+    WAIT: {
+      content: '대기 취소',
+      handler: unRegistTournament,
+    },
+    PLAYER: {
+      content: '등록 취소',
+      handler: unRegistTournament,
     },
   };
 
-  const buttonContent = buttonContents[registState];
-  const buttonHandler = buttonAction[registState];
+  const { content: buttonContent, handler: buttonHandler } =
+    buttonMappings[registState];
 
   return (
     <div className={styles.container}>
@@ -145,7 +150,8 @@ export default function TournamentRegistryModal({
       </div>
       <div className={styles.title}>{title}</div>
       <div className={styles.tournamentInfo}>
-        <div className={styles.startTime}>{openDate}</div>
+        <div className={styles.startTime}> 시작 : {openDate}</div>
+        <div className={styles.startTime}> 종료 : {closeDate}</div>
         <div className={styles.participants}>
           <MdPeopleAlt />
           <div className={styles.player}>{playerCount} / 8</div>
@@ -163,7 +169,7 @@ export default function TournamentRegistryModal({
           <ModalButton
             onClick={buttonHandler}
             value={
-              player_cnt === 8 && registState === 'BEFORE'
+              playerCount === 8 && registState === 'BEFORE'
                 ? '대기 등록'
                 : buttonContent
             }
