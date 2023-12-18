@@ -80,7 +80,9 @@ export default function Tournament() {
       <div className={styles.tournamentContainer}>
         <div className={styles.tournamentText}> 예정된 토너먼트 </div>
         {waitInfo.data?.tournaments.length === 0 ? (
-          <h4 className={styles.tournamentText}>예정된 토너먼트가 없습니다.</h4>
+          <h4 className={styles.noTournamentText}>
+            예정된 토너먼트가 없습니다.
+          </h4>
         ) : (
           waitInfo.data?.tournaments.map((tournament) => (
             <div className={styles.cardContainer} key={tournament.tournamentId}>
@@ -91,7 +93,7 @@ export default function Tournament() {
         <div className={styles.tournamentText}> 진행중인 토너먼트 </div>
         <div className={styles.openTournamentBox} ref={containerRef}>
           {openInfo.data && openInfo.data.tournaments?.length === 0 ? (
-            <div className={styles.tournamentText}>
+            <div className={styles.noTournamentText}>
               진행중인 토너먼트가 없습니다
             </div>
           ) : (
