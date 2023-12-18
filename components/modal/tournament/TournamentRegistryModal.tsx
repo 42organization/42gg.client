@@ -34,6 +34,7 @@ export default function TournamentRegistryModal({
   const setError = useSetRecoilState(errorState);
   const [registState, setRegistState] = useState<string>('LOADING');
   const [openDate, setOpenDate] = useState<string>('미정');
+  const [closeDate, setCloseDate] = useState<string>('미정');
   const [loading, setLoading] = useState<boolean>(false);
   const [playerCount, setPlayerCount] = useState<number>(player_cnt);
 
@@ -101,8 +102,8 @@ export default function TournamentRegistryModal({
   useEffect(() => {
     getTournamentInfo();
     getStatus();
-    const date = new Date(startTime);
-    setOpenDate(dateToKRLocaleTimeString(date));
+    setOpenDate(dateToKRLocaleTimeString(new Date(startTime)));
+    setCloseDate(dateToKRLocaleTimeString(new Date(endTime)));
   }, []);
 
   useEffect(() => {
@@ -145,7 +146,8 @@ export default function TournamentRegistryModal({
       </div>
       <div className={styles.title}>{title}</div>
       <div className={styles.tournamentInfo}>
-        <div className={styles.startTime}>{openDate}</div>
+        <div className={styles.startTime}> 시작 : {openDate}</div>
+        <div className={styles.startTime}> 종료 : {closeDate}</div>
         <div className={styles.participants}>
           <MdPeopleAlt />
           <div className={styles.player}>{playerCount} / 8</div>
