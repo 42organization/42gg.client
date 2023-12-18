@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <SearchBar />
-      {tournamentData?.length !== 0 && (
+      {tournamentData?.length && (
         <Section path='tournament' sectionTitle={'Tournament'} />
       )}
       <Section path='rank' sectionTitle={'Ranking'} />
