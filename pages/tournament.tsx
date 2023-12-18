@@ -23,12 +23,14 @@ export default function Tournament() {
       instance
         .get('/pingpong/tournaments?size=20&page=1&status=LIVE')
         .then((res) => {
-          setOpenTournamentId(res.data.tournaments[0].tournamentId);
+          if (res.data.tournamets)
+            setOpenTournamentId(res.data.tournaments[0].tournamentId);
           return res.data;
         }),
     {
       onError: (error) => {
-        setError('JHH02');
+        console.log(error);
+        setError('JJH02');
       },
       retry: 1,
       staleTime: 60000 /* 60초 */,
@@ -45,7 +47,7 @@ export default function Tournament() {
         }),
     {
       onError: (error) => {
-        setError('JHH02');
+        setError('JJH03');
       },
     }
   );
