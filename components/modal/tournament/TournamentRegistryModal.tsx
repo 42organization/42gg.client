@@ -42,7 +42,7 @@ export default function TournamentRegistryModal({
   const registTournament = useCallback(() => {
     setLoading(true);
     return instance
-      .post(`/pingpong/tournaments/${tournamentId}/users`)
+      .post(`/pingpong/tournaments/${tournamentId}/usersaa`)
       .then((res) => {
         setLoading(false);
         setSnackbar({
@@ -55,10 +55,15 @@ export default function TournamentRegistryModal({
         return res.data.status;
       })
       .catch((error) => {
+        console.log(error);
         setSnackbar({
           toastName: `토너먼트 신청`,
           severity: 'error',
-          message: `🔥 ${error.response?.data?.message} 🔥`,
+          message: `${
+            error.response?.data?.message
+              ? error.response.data.message
+              : '예상치 못한 에러가 발생했습니다 다시 시도해 주세요 😢'
+          } `,
           clicked: true,
         });
         setLoading(false);
@@ -93,7 +98,7 @@ export default function TournamentRegistryModal({
         setSnackbar({
           toastName: `토너먼트 신청 취소`,
           severity: 'error',
-          message: `취소중 에러가 발생했습니다. 🔥`,
+          message: `취소중 에러가 발생했습니다.`,
           clicked: true,
         });
         setLoading(false);
