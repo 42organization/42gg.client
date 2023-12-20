@@ -55,7 +55,6 @@ export default function TournamentRegistryModal({
         return res.data.status;
       })
       .catch((error) => {
-        console.log(error);
         setSnackbar({
           toastName: `토너먼트 신청`,
           severity: 'error',
