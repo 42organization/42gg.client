@@ -18,7 +18,7 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
   const [stat, setStat] = useState<GameResult | undefined>();
 
   const getExpHandler = useAxiosGet({
-    url: `/pingpong/games/${gameId}/result/${mode?.toLowerCase()}`,
+    url: `/pingpong/games/${gameId}/result?mode=${mode}`,
     setState: setStat,
     err: 'KP03',
     type: 'setError',
