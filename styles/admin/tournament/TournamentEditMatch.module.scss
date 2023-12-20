@@ -74,13 +74,9 @@
 }
 
 .buttonsContainer {
-  position: absolute;
   bottom: 0;
-  z-index: 1;
   display: flex;
   width: 100%;
-  padding: 10px; /* 선택적인 여백 추가 */
-  margin-top: 10px;
-  background-color: rgba(255, 255, 255, 0.7); /* 반투명한 배경색 */
-  justify-content: space-around; /* 가로 정렬 */
+  background-color: rgba(255, 255, 255, 0.7);
+  justify-content: space-around;
 }

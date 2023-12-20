@@ -46,7 +46,7 @@ export const addExpectedMatchParticipants = (matches: Match[]) => {
         if (winner) {
           const modifiedWinner = {
             ...winner,
-            isWinner: true,
+            isWinner: false,
             resultText: null,
           };
           matches[i].participants.push(modifiedWinner);

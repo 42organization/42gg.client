@@ -12,6 +12,7 @@ import {
 import { ITournamentEditInfo } from 'types/admin/adminTournamentTypes';
 import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
 import { instanceInManage } from 'utils/axios';
+import { dateToKRIOSString, dateToKRLocaleTimeString } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/tournament/TournamentEdit.module.scss';
 import 'react-quill/dist/quill.snow.css';
@@ -71,8 +72,8 @@ export default function TournamentEdit({
       const req = {
         title: tournamentEditInfo.title,
         contents: tournamentEditInfo.contents,
-        startTime: tournamentEditInfo.startTime,
-        endTime: tournamentEditInfo.endTime,
+        startTime: dateToKRIOSString(new Date(tournamentEditInfo.startTime)),
+        endTime: dateToKRIOSString(new Date(tournamentEditInfo.endTime)),
         type: tournamentEditInfo.type,
       };
       await instanceInManage.patch(
@@ -97,11 +98,15 @@ export default function TournamentEdit({
 
   const postHandler = async () => {
     try {
+      console.log('startTime : ', tournamentEditInfo.startTime);
+      console.log('endTime : ', tournamentEditInfo.endTime);
+      console.log('startTime Date : ', new Date(tournamentEditInfo.startTime));
+      console.log('endTime Date : ', new Date(tournamentEditInfo.endTime));
       await instanceInManage.post(`/tournaments`, {
         title: tournamentEditInfo.title,
         contents: tournamentEditInfo.contents,
-        startTime: tournamentEditInfo.startTime,
-        endTime: tournamentEditInfo.endTime,
+        startTime: dateToKRIOSString(new Date(tournamentEditInfo.startTime)),
+        endTime: dateToKRIOSString(new Date(tournamentEditInfo.endTime)),
         type: tournamentEditInfo.type,
       });
       setSnackbar({
