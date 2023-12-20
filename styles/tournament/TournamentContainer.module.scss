@@ -47,3 +47,23 @@
   justify-content: center;
   align-content: center;
 }
+
+.openTournamentText {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  &.ROOKIE {
+    color: #e2be00; // 텍스트 색상 설정
+    text-shadow: 0rem 0rem 1rem #e2be00;
+  }
+  &.MASTER {
+    color: #7ceeff; // 텍스트 색상 설정
+    text-shadow: 0rem 0rem 1rem #7ceeff;
+  }
+  &.CUSTOM {
+    color: #7dffbe; // 텍스트 색상 설정
+    text-shadow: 0rem 0rem 1rem #7dffbe;
+  }
+}

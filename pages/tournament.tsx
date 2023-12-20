@@ -104,12 +104,23 @@ export default function Tournament() {
             진행중인 토너먼트가 없습니다
           </div>
         ) : (
-          <div className={styles.openTournamentBox} ref={containerRef}>
-            <TournamentBraket
-              singleEliminationBracketMatchs={openTournament}
-              containerSize={containerSize}
-            />
-          </div>
+          <>
+            <div
+              className={`${styles.openTournamentText} ${
+                openInfo.data?.tournaments
+                  ? styles[openInfo.data?.tournaments[0].type]
+                  : ''
+              }`}
+            >
+              {openInfo.data?.tournaments[0].title}
+            </div>
+            <div className={styles.openTournamentBox} ref={containerRef}>
+              <TournamentBraket
+                singleEliminationBracketMatchs={openTournament}
+                containerSize={containerSize}
+              />
+            </div>
+          </>
         )}
       </div>
     </div>
