@@ -6,11 +6,10 @@ import styles from 'styles/main/Home.module.scss';
 
 const Home: NextPage = () => {
   const tournamentData = useBeforeLiveTournamentData();
-
   return (
     <div className={styles.container}>
       <SearchBar />
-      {tournamentData && (
+      {tournamentData?.length && (
         <Section path='tournament' sectionTitle={'Tournament'} />
       )}
       <Section path='rank' sectionTitle={'Ranking'} />

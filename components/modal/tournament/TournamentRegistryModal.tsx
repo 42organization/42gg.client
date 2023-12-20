@@ -8,6 +8,7 @@ import { instance } from 'utils/axios';
 import { dateToKRLocaleTimeString } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -30,25 +31,40 @@ export default function TournamentRegistryModal({
   player_cnt,
   tournamentId,
 }: TournamentInfo) {
+  const setSnackbar = useSetRecoilState(toastState);
   const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
   const [registState, setRegistState] = useState<string>('LOADING');
   const [openDate, setOpenDate] = useState<string>('미정');
+  const [closeDate, setCloseDate] = useState<string>('미정');
   const [loading, setLoading] = useState<boolean>(false);
   const [playerCount, setPlayerCount] = useState<number>(player_cnt);
-
   const registTournament = useCallback(() => {
     setLoading(true);
     return instance
       .post(`/pingpong/tournaments/${tournamentId}/users`)
       .then((res) => {
-        // alert('토너먼트 신청이 완료됐습니다');
         setLoading(false);
+        setSnackbar({
+          toastName: `토너먼트 신청`,
+          severity: 'success',
+          message: `🔥 토너먼트 참가 신청이 완료 됐습니다 ! 🔥`,
+          clicked: true,
+        });
         setRegistState(res.data.status);
         return res.data.status;
       })
       .catch((error) => {
-        setError('토너먼트 신청 중 에러가 발생했습니다.');
+        setSnackbar({
+          toastName: `토너먼트 신청`,
+          severity: 'error',
+          message: `${
+            error.response?.data?.message
+              ? error.response.data.message
+              : '예상치 못한 에러가 발생했습니다 다시 시도해 주세요 😢'
+          } `,
+          clicked: true,
+        });
         setLoading(false);
       });
   }, []);
@@ -59,17 +75,31 @@ export default function TournamentRegistryModal({
       .delete(`/pingpong/tournaments/${tournamentId}/users`)
       .then((res) => {
         if (registState === 'WAIT') {
-          // alert('토너먼트 대기가 취소 되었습니다');
+          setSnackbar({
+            toastName: `토너먼트 대기 취소`,
+            severity: 'success',
+            message: `토너먼트 대기 신청을 취소했습니다.`,
+            clicked: true,
+          });
         } else {
-          // setPlayerCount(playerCount - 1);
-          // alert('토너먼트 등록이 취소 되었습니다');
+          setSnackbar({
+            toastName: `토너먼트 신청 취소 `,
+            severity: 'success',
+            message: `토너먼트 참가 신청을 취소했습니다.`,
+            clicked: true,
+          });
         }
         setRegistState(res.data.status);
         setLoading(false);
         return res.data.status;
       })
       .catch((error) => {
-        setError('토너먼트 등록취소 중 에러가 발생했습니다');
+        setSnackbar({
+          toastName: `토너먼트 신청 취소`,
+          severity: 'error',
+          message: `취소중 에러가 발생했습니다.`,
+          clicked: true,
+        });
         setLoading(false);
       });
   }, []);
@@ -99,38 +129,42 @@ export default function TournamentRegistryModal({
   }, [tournamentId]);
 
   useEffect(() => {
-    getTournamentInfo();
     getStatus();
-    const date = new Date(startTime);
-    setOpenDate(dateToKRLocaleTimeString(date));
+    setOpenDate(dateToKRLocaleTimeString(new Date(startTime)));
+    setCloseDate(dateToKRLocaleTimeString(new Date(endTime)));
   }, []);
 
   useEffect(() => {
-    getTournamentInfo();
-  }, [registState]);
+    if (registState !== 'LOADING') getTournamentInfo();
+  }, [registState, getTournamentInfo]);
 
   const closeModalButtonHandler = () => {
     setModal({ modalName: null });
   };
 
-  const buttonContents: Record<string, string> = {
-    LOADING: '로딩중...',
-    BEFORE: '등록',
-    WAIT: '대기 취소',
-    PLAYER: '등록 취소',
-  };
-
-  const buttonAction: Record<string, any> = {
-    BEFORE: registTournament,
-    WAIT: unRegistTournament,
-    PLAYER: unRegistTournament,
-    LOADING: () => {
-      console.log('loading..');
+  const buttonMappings: Record<string, any> = {
+    LOADING: {
+      content: '로딩중...',
+      handler: () => {
+        console.log('loading...');
+      },
+    },
+    BEFORE: {
+      content: '등록',
+      handler: registTournament,
+    },
+    WAIT: {
+      content: '대기 취소',
+      handler: unRegistTournament,
+    },
+    PLAYER: {
+      content: '등록 취소',
+      handler: unRegistTournament,
     },
   };
 
-  const buttonContent = buttonContents[registState];
-  const buttonHandler = buttonAction[registState];
+  const { content: buttonContent, handler: buttonHandler } =
+    buttonMappings[registState];
 
   return (
     <div className={styles.container}>
@@ -145,7 +179,8 @@ export default function TournamentRegistryModal({
       </div>
       <div className={styles.title}>{title}</div>
       <div className={styles.tournamentInfo}>
-        <div className={styles.startTime}>{openDate}</div>
+        <div className={styles.startTime}> 시작 : {openDate}</div>
+        <div className={styles.startTime}> 종료 : {closeDate}</div>
         <div className={styles.participants}>
           <MdPeopleAlt />
           <div className={styles.player}>{playerCount} / 8</div>
@@ -163,7 +198,7 @@ export default function TournamentRegistryModal({
           <ModalButton
             onClick={buttonHandler}
             value={
-              player_cnt === 8 && registState === 'BEFORE'
+              playerCount === 8 && registState === 'BEFORE'
                 ? '대기 등록'
                 : buttonContent
             }
