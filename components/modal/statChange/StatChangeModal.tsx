@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { CoinResult } from 'types/coinTypes';
 import { GameResult } from 'types/gameTypes';
 import { Exp } from 'types/modalTypes';
 import { errorState } from 'utils/recoil/error';
@@ -34,9 +33,11 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
     openCoin();
   };
 
-  const openCoin = async () => {
+  const openCoin = () => {
     try {
-      if (!stat) return null;
+      if (!stat) {
+        return null;
+      }
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {
