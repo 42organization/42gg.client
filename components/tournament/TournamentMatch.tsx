@@ -2,10 +2,10 @@ import {
   MatchComponentProps,
   Participant,
 } from '@g-loot/react-tournament-brackets/dist/src/types';
-import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { clickedTournamentState } from 'utils/recoil/tournament';
 import PlayerImage from 'components/PlayerImage';
+import BouncingDots from 'components/UI/BouncingDots';
 import styles from 'styles/tournament/TournamentMatch.module.scss';
 interface TournamentMatchPartyProps {
   party: Participant;
@@ -31,6 +31,12 @@ function TournamentMatchParty({
         highLightUser !== 'TBD' && highLightUser === party.name
           ? styles.highlight
           : ''
+      } ${
+        party.resultText !== '' &&
+        party.resultText !== '-1' &&
+        party.resultText !== '2'
+          ? styles.lost
+          : ''
       }`}
       onMouseEnter={() => onMouseEnter(party.id)}
       onClick={() => onPartyClick(party, false)}
@@ -43,11 +49,14 @@ function TournamentMatchParty({
         styleName={`tournament`}
         size={1}
       />
-
       <div className={styles.partyName}>{party.name || teamNameFallback}</div>
-      <div className={styles.score}>
-        {party.resultText ?? resultFallback(party)}
-      </div>
+      {party.resultText === '-1' ? (
+        <BouncingDots />
+      ) : (
+        <div className={styles.score}>
+          {party.resultText ?? resultFallback(party)}
+        </div>
+      )}
     </div>
   );
 }
