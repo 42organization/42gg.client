@@ -25,7 +25,7 @@ export default function Tournament() {
       instance
         .get('/pingpong/tournaments?size=20&page=1&status=LIVE')
         .then((res) => {
-          if (res.data.tournamets?.length === 1) {
+          if (res.data.tournaments?.length === 1) {
             console.log('openInfo');
             setOpenTournamentId(res.data.tournaments[0].tournamentId);
           }
