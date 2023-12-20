@@ -13,9 +13,11 @@
   .partyName {
     margin-left: 1rem;
   }
-
   .score {
     margin-left: auto;
+  }
+  &.lost {
+    filter: brightness(50%);
   }
 }
 
