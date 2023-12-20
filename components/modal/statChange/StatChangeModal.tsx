@@ -60,8 +60,12 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
       />
       <div className={styles.container}>
         <div className={styles.emoji}>🏓</div>
-        {mode === 'RANK' && stat && <PppStat stat={stat} />}
-        {stat && <ExpStat stat={stat} />}
+        {stat && (
+          <>
+            {mode === 'RANK' && <PppStat stat={stat} />}
+            <ExpStat stat={stat} />
+          </>
+        )}
         <div className={styles.guide}>화면을 클릭해주세요!</div>
       </div>
     </div>
