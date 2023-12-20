@@ -145,13 +145,8 @@ export default function TournamentEdit({
                   <input
                     type='datetime-local'
                     name='startTime'
-                    value={
-                      tournamentEditInfo.startTime
-                        ? tournamentEditInfo.startTime
-                            .toISOString()
-                            .slice(0, 16)
-                        : ''
-                    }
+                    value={tournamentEditInfo.startTime}
+                    step='60'
                     onChange={inputChangeHandler}
                   />
                 </TableCell>
@@ -159,11 +154,8 @@ export default function TournamentEdit({
                   <input
                     type='datetime-local'
                     name='endTime'
-                    value={
-                      tournamentEditInfo.endTime
-                        ? tournamentEditInfo.endTime.toISOString().slice(0, 16)
-                        : ''
-                    }
+                    value={tournamentEditInfo.endTime}
+                    step='60'
                     onChange={inputChangeHandler}
                   />
                 </TableCell>

@@ -20,7 +20,11 @@ import {
   ITournamentTable,
 } from 'types/admin/adminTournamentTypes';
 import { instance, instanceInManage } from 'utils/axios';
-import { dateToString } from 'utils/handleTime';
+import {
+  dateToDateTimeLocalString,
+  dateToString,
+  dateToStringShort,
+} from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -133,7 +137,7 @@ export default function TournamentList({
                           >
                             {columnName === 'startTime' ||
                             columnName === 'endTime' ? (
-                              dateToString(
+                              dateToStringShort(
                                 new Date(
                                   tournament[
                                     columnName as keyof ITournament
@@ -153,10 +157,12 @@ export default function TournamentList({
                                           title: tournament.title,
                                           contents: tournament.contents,
                                           type: tournament.type,
-                                          startTime: new Date(
+                                          startTime: dateToDateTimeLocalString(
                                             tournament.startTime
                                           ),
-                                          endTime: new Date(tournament.endTime),
+                                          endTime: dateToDateTimeLocalString(
+                                            tournament.endTime
+                                          ),
                                         });
                                         scrollToEditor();
                                       }}
