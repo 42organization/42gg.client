@@ -41,7 +41,7 @@ export default function TournamentCard({
         endTime: endTime,
         winnerIntraId: winnerIntraId,
         winnerImageUrl: winnerImageUrl,
-        player_cnt: player_cnt,
+        player_cnt: playerCount,
       },
     });
   };
@@ -59,8 +59,10 @@ export default function TournamentCard({
   }, [tournamentId]);
 
   useEffect(() => {
-    getTournamentInfo();
-    getStatus();
+    if (modal.modalName === null) {
+      getTournamentInfo();
+      getStatus();
+    }
   }, [modal]);
 
   const getStatus = useCallback(() => {
