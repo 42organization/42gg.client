@@ -26,8 +26,9 @@ export default function useAdminSearchUser() {
 
   const fetchUserIntraId = useCallback(async () => {
     try {
+      const safeInput = escape(inputId);
       const res = await instance.get(
-        `/pingpong/users/searches?intraId=${inputId}`
+        `/pingpong/users/searches?intraId=${safeInput}`
       );
       const users = res.data.users;
       setUserList(users);
