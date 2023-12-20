@@ -28,7 +28,7 @@ function TournamentMatchParty({
   return (
     <div
       className={`${styles.tournamentPartyWrapper} ${
-        highLightUser !== 'TBD' && highLightUser === party.name
+        highLightUser !== '' && highLightUser === party.name
           ? styles.highlight
           : ''
       }`}
