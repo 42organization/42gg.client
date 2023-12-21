@@ -1,3 +1,4 @@
+import Image from 'next/legacy/image';
 import {
   Match,
   MatchComponentProps,
@@ -27,10 +28,9 @@ function TournamentMatchParty({
       className={styles.tournamentPartyWrapper}
       onMouseEnter={() => onMouseEnter(party.id)}
     >
-      <PlayerImage
+      <img
+        className={styles.playerImage}
         src={party.picture ?? '/image/match_qustion.png'}
-        styleName={`tournament`}
-        size={1}
       />
 
       <div className={styles.partyName}>{party.name || teamNameFallback}</div>
@@ -87,10 +87,9 @@ function TournamentEditMatchParty({
 
   return (
     <div className={styles.tournamentPartyWrapper}>
-      <PlayerImage
+      <img
+        className={styles.playerImage}
         src={party.picture ?? '/image/match_qustion.png'}
-        styleName={`tournament`}
-        size={1}
       />
 
       <div className={styles.partyName}>{party.name}</div>

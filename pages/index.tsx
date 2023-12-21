@@ -6,7 +6,6 @@ import styles from 'styles/main/Home.module.scss';
 
 const Home: NextPage = () => {
   const tournamentData = useBeforeLiveTournamentData();
-
   return (
     <div className={styles.container}>
       <SearchBar />
