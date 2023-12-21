@@ -29,6 +29,6 @@ export interface ITournamentEditInfo {
   title: string;
   contents: string;
   type: 'CUSTOM' | 'MASTER' | 'ROOKIE' | null;
-  startTime: Date;
-  endTime: Date;
+  startTime: string;
+  endTime: string;
 }

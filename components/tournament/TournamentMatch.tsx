@@ -38,10 +38,9 @@ function TournamentMatchParty({
         onPartyClick(party, false);
       }}
     >
-      <PlayerImage
+      <img
+        className={styles.playerImage}
         src={party.picture ?? '/image/match_qustion.png'}
-        styleName={`tournament`}
-        size={1}
       />
 
       <div className={styles.partyName}>{party.name || teamNameFallback}</div>

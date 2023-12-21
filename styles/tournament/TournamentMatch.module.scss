@@ -10,6 +10,13 @@
   border-radius: 0.6rem;
   justify-content: space-between;
   align-items: center;
+
+  .playerImage {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 100%;
+  }
+
   .partyName {
     margin-left: 1rem;
   }

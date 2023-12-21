@@ -6,8 +6,8 @@ const emptyTournamentEditInfo: ITournamentEditInfo = {
   title: '',
   contents: '',
   type: 'CUSTOM',
-  startTime: new Date(),
-  endTime: new Date(),
+  startTime: '',
+  endTime: '',
 };
 
 function useTournamentEditInfo() {
@@ -17,9 +17,12 @@ function useTournamentEditInfo() {
   // change
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (name === 'startTime' || name === 'endTime')
-      setTournamentEditInfo((prev) => ({ ...prev, [name]: new Date(value) }));
-    else setTournamentEditInfo((prev) => ({ ...prev, [name]: value }));
+    if (name === 'startTime' || name === 'endTime') {
+      setTournamentEditInfo((prev) => ({
+        ...prev,
+        [name]: value.slice(0, -2) + '00',
+      }));
+    } else setTournamentEditInfo((prev) => ({ ...prev, [name]: value }));
   };
 
   const selectChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
