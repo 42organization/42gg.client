@@ -11,7 +11,11 @@ import { TournamentGame } from 'types/tournamentTypes';
 export const setModifiabilityFlag = (matches: Match[]) => {
   matches.forEach((match) => {
     match.isModifiable = false;
-    if (match.state === 'WAIT' || match.state === 'END') {
+    if (
+      match.state === 'LIVE' ||
+      match.state === 'WAIT' ||
+      match.state === 'END'
+    ) {
       const nextMatch = matches.find(
         (nextMatch) => match.nextMatchId === nextMatch.id
       );
@@ -42,7 +46,7 @@ export const addExpectedMatchParticipants = (matches: Match[]) => {
         if (winner) {
           const modifiedWinner = {
             ...winner,
-            isWinner: true,
+            isWinner: false,
             resultText: null,
           };
           matches[i].participants.push(modifiedWinner);
