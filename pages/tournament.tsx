@@ -26,7 +26,6 @@ export default function Tournament() {
         .get('/pingpong/tournaments?size=20&page=1&status=LIVE')
         .then((res) => {
           if (res.data.tournaments?.length === 1) {
-            console.log('openInfo');
             setOpenTournamentId(res.data.tournaments[0].tournamentId);
           }
           return res.data;
@@ -52,11 +51,12 @@ export default function Tournament() {
       onError: (error) => {
         setError('JJH03');
       },
+      retry: 1,
+      staleTime: 60000,
     }
   );
 
   const fetchTournamentGames = useCallback(async () => {
-    console.log('Fetching more data...');
     try {
       const res = await instance.get(
         `pingpong/tournaments/${openTournamentId}/games`
