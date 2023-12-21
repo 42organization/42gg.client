@@ -29,7 +29,6 @@ const WinnerSwiper = forwardRef(
   ) => {
     const fetchTournamentData = useCallback(
       async (page: number) => {
-        console.log('Fetching more data...');
         const res = await instance.get(
           `/pingpong/tournaments?page=${page}&type=${type}&size=${size}&status=END`
         );
