@@ -208,7 +208,9 @@ export default function TournamentRegistryModal({
             />
           ) : (
             <ModalButton
-              onClick={undefined}
+              onClick={() => {
+                console.log('토너먼트가 진행중 입니다.');
+              }}
               value={'진행중...'}
               style={'positive'}
               isLoading={loading}
