@@ -16,7 +16,7 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
   const setError = useSetRecoilState(errorState);
   const [stat, setStat] = useState<GameResult | undefined>();
 
-  const getExpHandler = useAxiosGet({
+  const fetchStat = useAxiosGet({
     url: `/pingpong/games/${gameId}/pchange/result?mode=${mode}`,
     setState: setStat,
     err: 'KP03',
@@ -24,7 +24,7 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
   });
 
   useEffect(() => {
-    getExpHandler();
+    fetchStat();
   }, []);
 
   const closeModal = () => {
