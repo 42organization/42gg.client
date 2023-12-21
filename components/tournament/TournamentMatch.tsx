@@ -9,10 +9,10 @@ import styles from 'styles/tournament/TournamentMatch.module.scss';
 interface TournamentMatchPartyProps {
   party: Participant;
   teamNameFallback: string;
-  resultFallback: (participant: Participant) => string;
   onMouseEnter: (partyId: string | number) => void;
   onPartyClick: (party: Participant, partyWon: boolean) => void;
   highLightUser?: string;
+  state: string;
 }
 
 function TournamentMatchParty({
@@ -20,7 +20,7 @@ function TournamentMatchParty({
   teamNameFallback,
   onMouseEnter,
   onPartyClick,
-  resultFallback,
+  state,
 }: TournamentMatchPartyProps) {
   const highLightUser = useRecoilValue(clickedTournamentState);
 
@@ -29,12 +29,6 @@ function TournamentMatchParty({
       className={`${styles.tournamentPartyWrapper} ${
         highLightUser !== '' && highLightUser === party.name
           ? styles.highlight
-          : ''
-      } ${
-        party.resultText !== '' &&
-        party.resultText !== '-1' &&
-        party.resultText !== '2'
-          ? styles.lost
           : ''
       }`}
       onMouseEnter={() => onMouseEnter(party.id)}
@@ -54,13 +48,13 @@ function TournamentMatchParty({
         />
       </div>
       <div className={styles.partyName}>{party.name || teamNameFallback}</div>
-      {party.resultText === '-1' ? (
-        <BouncingDots />
-      ) : (
-        <div className={styles.score}>
-          {party.resultText ?? resultFallback(party)}
-        </div>
-      )}
+      <div className={styles.score}>
+        {state === 'LIVE' || state === 'WAIT' ? (
+          <BouncingDots />
+        ) : (
+          party.resultText
+        )}
+      </div>
     </div>
   );
 }
@@ -91,14 +85,14 @@ export default function TournamentMatch({
         teamNameFallback={teamNameFallback}
         onMouseEnter={onMouseEnter}
         onPartyClick={onPartyClick}
-        resultFallback={resultFallback}
+        state={match.state}
       ></TournamentMatchParty>
       <TournamentMatchParty
         party={bottomParty}
         teamNameFallback={teamNameFallback}
         onMouseEnter={onMouseEnter}
         onPartyClick={onPartyClick}
-        resultFallback={resultFallback}
+        state={match.state}
       ></TournamentMatchParty>
     </div>
   );

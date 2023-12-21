@@ -21,10 +21,10 @@
   0%,
   60%,
   100% {
-    transform: initial;
+    margin-top: 0;
   }
 
   30% {
-    transform: translateY(-0.3rem);
+    margin-top: -0.3rem;
   }
 }
