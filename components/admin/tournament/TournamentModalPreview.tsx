@@ -28,9 +28,7 @@ export default function TournamentModalPreview({
       </div>
       <div className={styles.title}>{tournamentEditInfo.title}</div>
       <div className={styles.tournamentInfo}>
-        <div className={styles.startTime}>
-          {dateToString(tournamentEditInfo.startTime)}
-        </div>
+        <div className={styles.startTime}>{tournamentEditInfo.startTime}</div>
         <div className={styles.participants}>
           <MdPeopleAlt />
           <div className={styles.player}>0 / 8</div>
