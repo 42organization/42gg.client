@@ -26,7 +26,7 @@ function TournamentMatchParty({
   return (
     <div
       className={`${styles.tournamentPartyWrapper} ${
-        highLightUser !== 'TBD' && highLightUser === party.name
+        highLightUser !== '' && highLightUser === party.name
           ? styles.highlight
           : ''
       }`}
@@ -40,7 +40,11 @@ function TournamentMatchParty({
       position: relative 혹은 absolute 가 적용되어있어야 하는데, 그럴 경우 브라켓에서 이미지가 벗어나는
       문제가 있으므로 임시 방편으로 img 태그를 사용합니다. */}
       <div className={styles.imageWrap}>
-        <img src={party.picture} className={styles.playerImage} alt='player' />
+        <img
+          src={party.picture ?? 'image/match_qustion.png'}
+          className={styles.playerImage}
+          alt='player'
+        />
       </div>
       <div className={styles.partyName}>{party.name || teamNameFallback}</div>
       <div className={styles.score}>
