@@ -4,7 +4,6 @@ import {
 } from '@g-loot/react-tournament-brackets/dist/src/types';
 import { useRecoilValue } from 'recoil';
 import { clickedTournamentState } from 'utils/recoil/tournament';
-import PlayerImage from 'components/PlayerImage';
 import BouncingDots from 'components/UI/BouncingDots';
 import styles from 'styles/tournament/TournamentMatch.module.scss';
 interface TournamentMatchPartyProps {
