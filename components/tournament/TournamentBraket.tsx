@@ -56,7 +56,7 @@ export default function TournamentBraket({
     <SingleEliminationBracket
       matches={singleEliminationBracketMatchs}
       onPartyClick={(party: Participant, won: boolean) => {
-        if (party.name !== 'TBD') setHighLightUser(party.name);
+        if (party.name !== '') setHighLightUser(party.name);
       }}
       matchComponent={TournamentMatch}
       options={{

@@ -6,8 +6,8 @@ import { useState } from 'react';
 import { instance, instanceInManage } from 'utils/axios';
 
 const emptyParty: Participant = {
-  id: 'TBD',
-  name: 'TBD',
+  id: '',
+  name: '',
   resultText: '',
 };
 
