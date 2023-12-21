@@ -195,16 +195,25 @@ export default function TournamentRegistryModal({
       />
       <div>
         <ModalButtonContainer>
-          <ModalButton
-            onClick={buttonHandler}
-            value={
-              playerCount === 8 && registState === 'BEFORE'
-                ? '대기 등록'
-                : buttonContent
-            }
-            style={'positive'}
-            isLoading={loading}
-          />
+          {status !== 'LIVE' ? (
+            <ModalButton
+              onClick={buttonHandler}
+              value={
+                playerCount === 8 && registState === 'BEFORE'
+                  ? '대기 등록'
+                  : buttonContent
+              }
+              style={'positive'}
+              isLoading={loading}
+            />
+          ) : (
+            <ModalButton
+              onClick={undefined}
+              value={'진행중...'}
+              style={'positive'}
+              isLoading={loading}
+            />
+          )}
         </ModalButtonContainer>
       </div>
     </div>
