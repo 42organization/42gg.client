@@ -10,6 +10,13 @@
   border-radius: 0.6rem;
   justify-content: space-between;
   align-items: center;
+
+  .playerImage {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 100%;
+  }
+
   .partyName {
     margin-left: 1rem;
   }
@@ -31,4 +38,16 @@
   flex-direction: column;
   color: #000000;
   justify-content: space-around;
+}
+
+.imageWrap {
+  width: 2.6rem;
+  height: 2.6rem;
+  overflow: hidden;
+  border-radius: 50%;
+  .playerImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
