@@ -2,8 +2,10 @@ import {
   MatchComponentProps,
   Participant,
 } from '@g-loot/react-tournament-brackets/dist/src/types';
+import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { clickedTournamentState } from 'utils/recoil/tournament';
+import PlayerImage from 'components/PlayerImage';
 import styles from 'styles/tournament/TournamentMatch.module.scss';
 interface TournamentMatchPartyProps {
   party: Participant;
@@ -26,7 +28,7 @@ function TournamentMatchParty({
   return (
     <div
       className={`${styles.tournamentPartyWrapper} ${
-        highLightUser !== '' && highLightUser === party.name
+        highLightUser !== 'TBD' && highLightUser === party.name
           ? styles.highlight
           : ''
       }`}
@@ -36,17 +38,15 @@ function TournamentMatchParty({
         onPartyClick(party, false);
       }}
     >
-      {/* next/image의 Image 컴포넌트로 objectFit, layout 속성 적용하려면 부모 컨테이너에
-      position: relative 혹은 absolute 가 적용되어있어야 하는데, 그럴 경우 브라켓에서 이미지가 벗어나는
-      문제가 있으므로 임시 방편으로 img 태그를 사용합니다. */}
-      <div className={styles.imageWrap}>
-        <img
-          src={party.picture ?? 'image/match_qustion.png'}
-          className={styles.playerImage}
-          alt='player'
-        />
+      <PlayerImage
+        src={party.picture ?? '/image/match_qustion.png'}
+        styleName={`tournament`}
+        size={1}
+      />
+
+      <div className={styles.partyName}>
+        {party.name !== 'TBD' ? party.name : ''}
       </div>
-      <div className={styles.partyName}>{party.name || teamNameFallback}</div>
       <div className={styles.score}>
         {party.resultText ?? resultFallback(party)}
       </div>
