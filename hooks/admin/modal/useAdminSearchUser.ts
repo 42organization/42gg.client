@@ -5,7 +5,7 @@ import { errorState } from 'utils/recoil/error';
 
 export default function useAdminSearchUser() {
   const [inputId, setInputId] = useState('');
-  const [isIdExist, setIsIdExist] = useState(false);
+  const [isIdExist, setIsIdExist] = useState(true);
   const [isTyping, setIsTyping] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [userList, setUserList] = useState<string[]>([]);
@@ -26,9 +26,8 @@ export default function useAdminSearchUser() {
 
   const fetchUserIntraId = useCallback(async () => {
     try {
-      const safeInput = escape(inputId);
       const res = await instance.get(
-        `/pingpong/users/searches?intraId=${safeInput}`
+        `/pingpong/users/searches?intraId=${inputId}`
       );
       const users = res.data.users;
       setUserList(users);
@@ -44,6 +43,12 @@ export default function useAdminSearchUser() {
 
   useEffect(() => {
     if (inputId === '' || isIdExist) {
+      return;
+    }
+    const validChar = /^[a-z|A-Z|0-9|-]+$/;
+    if (!validChar.test(inputId)) {
+      setIsTyping(false);
+      setIsIdExist(false);
       return;
     }
     const identifier = setTimeout(() => {
