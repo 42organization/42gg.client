@@ -53,7 +53,7 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
   };
 
   return (
-    <>
+    <div>
       <div
         className={`${styles.fixedContainer} ${styles.front}`}
         onClick={closeModal}
@@ -68,6 +68,6 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
         )}
         <div className={styles.guide}>화면을 클릭해주세요!</div>
       </div>
-    </>
+    </div>
   );
 }
