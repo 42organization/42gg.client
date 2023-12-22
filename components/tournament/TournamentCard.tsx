@@ -21,7 +21,8 @@ export default function TournamentCard({
   winnerIntraId,
   winnerImageUrl,
   player_cnt,
-}: TournamentInfo) {
+  page,
+}: TournamentInfo & { page: string }) {
   const modal = useRecoilValue(modalState);
   const setModal = useSetRecoilState<Modal>(modalState);
   const [registState, setRegistState] = useState<string>('로딩중');
@@ -82,26 +83,36 @@ export default function TournamentCard({
   const isFull = playerCount === 8 ? 'full' : 'notFull';
 
   const userState: Record<string, string> = {
-    BEFORE: '미 참여',
+    BEFORE: '참여하기!',
     PLAYER: '참여 중',
     WAIT: '대기 중',
   };
 
   return (
     <div
-      className={styles.tournamentCardContainer}
-      onClick={openTournamentInfoModal}
+      className={`${styles.tournamentCard} ${styles[page]}`}
+      onClick={page !== 'main' ? openTournamentInfoModal : undefined}
     >
       <div className={styles.text}>
         <div className={styles.up}>
           <div className={styles.title}>{title}</div>
           <div className={styles.tag}>
-            <div className={`${styles.participants} ${styles[isFull]}`}>
-              <MdPeopleAlt /> {playerCount} / 8
-            </div>
-            <div className={`${styles.state} ${styles[registState]}`}>
-              {userState[registState]}
-            </div>
+            {page === 'tournament' ? (
+              <>
+                <div className={`${styles.participants} ${styles[isFull]}`}>
+                  <MdPeopleAlt /> {playerCount} / 8
+                </div>
+                <div className={`${styles.playerState} ${styles[registState]}`}>
+                  {userState[registState]}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className={`${styles.gameState} ${styles[status]}`}>
+                  {status === 'LIVE' ? '경기 중' : '예정'}
+                </div>
+              </>
+            )}
           </div>
         </div>
         <div className={styles.time}>
