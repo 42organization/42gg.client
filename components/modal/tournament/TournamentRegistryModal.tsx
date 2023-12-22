@@ -28,7 +28,7 @@ export default function TournamentRegistryModal({
   status,
   type,
   endTime,
-  player_cnt,
+  playerCnt,
   tournamentId,
 }: TournamentInfo) {
   const setSnackbar = useSetRecoilState(toastState);
@@ -38,7 +38,7 @@ export default function TournamentRegistryModal({
   const [openDate, setOpenDate] = useState<string>('미정');
   const [closeDate, setCloseDate] = useState<string>('미정');
   const [loading, setLoading] = useState<boolean>(false);
-  const [playerCount, setPlayerCount] = useState<number>(player_cnt);
+  const [playerCount, setPlayerCount] = useState<number>(playerCnt);
   const registTournament = useCallback(() => {
     setLoading(true);
     return instance
@@ -120,8 +120,8 @@ export default function TournamentRegistryModal({
     return instance
       .get(`/pingpong/tournaments/${tournamentId}`)
       .then((res) => {
-        setPlayerCount(res.data.player_cnt);
-        return res.data.player_cnt;
+        setPlayerCount(res.data.playerCnt);
+        return res.data.playerCnt;
       })
       .catch((error) => {
         setError('JJH2');
@@ -195,16 +195,27 @@ export default function TournamentRegistryModal({
       />
       <div>
         <ModalButtonContainer>
-          <ModalButton
-            onClick={buttonHandler}
-            value={
-              playerCount === 8 && registState === 'BEFORE'
-                ? '대기 등록'
-                : buttonContent
-            }
-            style={'positive'}
-            isLoading={loading}
-          />
+          {status !== 'LIVE' ? (
+            <ModalButton
+              onClick={buttonHandler}
+              value={
+                playerCount === 8 && registState === 'BEFORE'
+                  ? '대기 등록'
+                  : buttonContent
+              }
+              style={'positive'}
+              isLoading={loading}
+            />
+          ) : (
+            <ModalButton
+              onClick={() => {
+                console.log('토너먼트가 진행중 입니다.');
+              }}
+              value={'진행중...'}
+              style={'positive'}
+              isLoading={loading}
+            />
+          )}
         </ModalButtonContainer>
       </div>
     </div>

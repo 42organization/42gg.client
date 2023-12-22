@@ -32,56 +32,60 @@ export default function AdminTournamentParticipantList({
   }
 
   return (
-    <ul>
-      {participantList.map((participant, index) => (
-        <>
-          {deleteMode[participant.userId] && (
-            <small className={styles.deleteInputTitle}>
-              삭제할 유저의 아이디를 입력해주세요.
-            </small>
-          )}
-          <li
-            key={participant.userId}
-            className={participant.isJoined ? styles.joined : styles.notJoined}
-          >
-            {deleteMode[participant.userId] ? (
-              <>
-                <AdminTournamentParticipantDeleteConfirmInput
-                  isSame={isSame[participant.userId]}
-                  intraId={participant.intraId}
-                  userId={participant.userId}
-                  setIsSame={setIsSame}
-                />
-              </>
-            ) : (
-              <div>
-                <i>{index + 1}</i>
-                {participant.intraId}{' '}
-                <small>{participant.isJoined ? '참가 중' : '대기 중'}</small>
-              </div>
-            )}
+    <div className={styles.tournamentUserList}>
+      <ul>
+        {participantList.map((participant, index) => (
+          <>
             {deleteMode[participant.userId] && (
-              <Button onClick={() => toggleDeleteMode(participant.userId)}>
-                취소
-              </Button>
+              <small className={styles.deleteInputTitle}>
+                삭제할 유저의 아이디를 입력해주세요.
+              </small>
             )}
-            <Button
-              color='error'
-              disabled={
-                deleteMode[participant.userId] && !isSame[participant.userId]
+            <li
+              key={participant.userId}
+              className={
+                participant.isJoined ? styles.joined : styles.notJoined
               }
-              onClick={() => deleteHandler(participant.userId)}
             >
-              삭제
-            </Button>
-          </li>
-          {deleteMode[participant.userId] && !isSame[participant.userId] && (
-            <small className={styles.deleteInputWarning}>
-              아이디가 일치하지 않습니다!
-            </small>
-          )}
-        </>
-      ))}
-    </ul>
+              {deleteMode[participant.userId] ? (
+                <>
+                  <AdminTournamentParticipantDeleteConfirmInput
+                    isSame={isSame[participant.userId]}
+                    intraId={participant.intraId}
+                    userId={participant.userId}
+                    setIsSame={setIsSame}
+                  />
+                </>
+              ) : (
+                <div>
+                  <i>{index + 1}</i>
+                  {participant.intraId}{' '}
+                  <small>{participant.isJoined ? '참가 중' : '대기 중'}</small>
+                </div>
+              )}
+              {deleteMode[participant.userId] && (
+                <Button onClick={() => toggleDeleteMode(participant.userId)}>
+                  취소
+                </Button>
+              )}
+              <Button
+                color='error'
+                disabled={
+                  deleteMode[participant.userId] && !isSame[participant.userId]
+                }
+                onClick={() => deleteHandler(participant.userId)}
+              >
+                삭제
+              </Button>
+            </li>
+            {deleteMode[participant.userId] && !isSame[participant.userId] && (
+              <small className={styles.deleteInputWarning}>
+                아이디가 일치하지 않습니다!
+              </small>
+            )}
+          </>
+        ))}
+      </ul>
+    </div>
   );
 }

@@ -10,7 +10,7 @@ export interface TournamentInfo {
   winnerImageUrl: string;
   startTime: string;
   endTime: string;
-  player_cnt: number;
+  playerCnt: number;
 }
 
 export interface TournamentData {

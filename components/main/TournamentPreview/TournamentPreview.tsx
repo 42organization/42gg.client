@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useState, useRef } from 'react';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import { TournamentInfo } from 'types/tournamentTypes';
+import TournamentCard from 'components/tournament/TournamentCard';
 import useBeforeLiveTournamentData from 'hooks/tournament/useBeforeLiveTournamentData';
 import useInterval from 'hooks/useInterval';
 import styles from 'styles/main/TournamentPreview/TournamentPreview.module.scss';
@@ -40,13 +41,7 @@ export default function TournamentPreview() {
           data={data}
           ref={virtuoso}
           itemContent={(index) => (
-            <TournamentPreviewItem
-              id={data[index].tournamentId}
-              title={data[index].title}
-              startTime={data[index].startTime}
-              endTime={data[index].endTime}
-              status={data[index].status}
-            />
+            <TournamentCard {...data[index]} page='main' />
           )}
           style={{ height: '100%' }}
         />
