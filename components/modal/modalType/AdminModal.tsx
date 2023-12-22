@@ -15,6 +15,8 @@ import AdminUserCoinModal from 'components/modal/admin/AdminUserCoinModal';
 import DeletePenaltyModal from 'components/modal/admin/DeletePenaltyModal';
 import DetailModal from 'components/modal/admin/DetailModal';
 import AdminSeasonEdit from 'components/modal/admin/SeasonEdit';
+import AdminEditTournamentBraket from '../admin/AdminEditTournamentBraket';
+import AdminTournamentParticipantEditModal from '../admin/AdminTournamentParticipantEditModal/AdminTournamentParticipantEditModal';
 
 export default function AdminModal() {
   const {
@@ -30,7 +32,13 @@ export default function AdminModal() {
     profile,
     item,
     coinPolicy,
+    tournament,
+    tournamentId,
   } = useRecoilValue(modalState);
+
+  if (!modalName) {
+    return null;
+  }
 
   const content: { [key: string]: JSX.Element | null } = {
     'ADMIN-PROFILE': intraId ? <AdminProfileModal intraId={intraId} /> : null,
@@ -76,8 +84,13 @@ export default function AdminModal() {
     'ADMIN-COINPOLICY_EDIT': coinPolicy ? (
       <AdminEditCoinPolicyModal {...coinPolicy} />
     ) : null,
+    'ADMIN-TOURNAMENT_BRAKET_EDIT': tournament ? (
+      <AdminEditTournamentBraket {...tournament} />
+    ) : null,
+    'ADMIN-TOURNAMENT_PARTICIPANT_EDIT': tournamentId ? (
+      <AdminTournamentParticipantEditModal tournamentId={tournamentId} />
+    ) : null,
   };
 
-  if (!modalName) return null;
   return content[modalName];
 }

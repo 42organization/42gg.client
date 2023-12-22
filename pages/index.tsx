@@ -1,20 +1,19 @@
 import type { NextPage } from 'next';
 import SearchBar from 'components/main/SearchBar';
 import Section from 'components/main/Section';
+import useBeforeLiveTournamentData from 'hooks/tournament/useBeforeLiveTournamentData';
 import styles from 'styles/main/Home.module.scss';
 
 const Home: NextPage = () => {
+  const tournamentData = useBeforeLiveTournamentData();
   return (
     <div className={styles.container}>
-      <div className={styles.search}>
-        <SearchBar />
-      </div>
-      <div className={styles.rank}>
-        <Section path='rank' sectionTitle={'Ranking'} />
-      </div>
-      <div className={styles.game}>
-        <Section path='game' sectionTitle={'Current Play'} />
-      </div>
+      <SearchBar />
+      {tournamentData && tournamentData?.length > 0 && (
+        <Section path='tournament' sectionTitle={'Tournament'} />
+      )}
+      <Section path='rank' sectionTitle={'Ranking'} />
+      <Section path='game' sectionTitle={'Current Play'} />
     </div>
   );
 };

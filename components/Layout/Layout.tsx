@@ -10,7 +10,7 @@ import Header from 'components/Layout/Header';
 import HeaderStateContext from 'components/Layout/HeaderContext';
 import MainPageProfile from 'components/Layout/MainPageProfile';
 import Megaphone from 'components/Layout/MegaPhone';
-import StyledButton from 'components/StyledButton';
+import StyledButton from 'components/UI/StyledButton';
 import Statistics from 'pages/statistics';
 import useAnnouncementCheck from 'hooks/Layout/useAnnouncementCheck';
 import useGetUserSeason from 'hooks/Layout/useGetUserSeason';

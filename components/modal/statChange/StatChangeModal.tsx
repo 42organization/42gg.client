@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { CoinResult } from 'types/coinTypes';
 import { GameResult } from 'types/gameTypes';
 import { Exp } from 'types/modalTypes';
 import { errorState } from 'utils/recoil/error';
@@ -17,15 +16,15 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
   const setError = useSetRecoilState(errorState);
   const [stat, setStat] = useState<GameResult | undefined>();
 
-  const getExpHandler = useAxiosGet({
-    url: `/pingpong/games/${gameId}/result/${mode?.toLowerCase()}`,
+  const fetchStat = useAxiosGet({
+    url: `/pingpong/games/${gameId}/pchange/result?mode=${mode}`,
     setState: setStat,
     err: 'KP03',
     type: 'setError',
   });
 
   useEffect(() => {
-    getExpHandler();
+    fetchStat();
   }, []);
 
   const closeModal = () => {
@@ -34,9 +33,11 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
     openCoin();
   };
 
-  const openCoin = async () => {
+  const openCoin = () => {
     try {
-      if (!stat) return null;
+      if (!stat) {
+        return null;
+      }
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {
@@ -59,8 +60,12 @@ export default function StatChangeModal({ gameId, mode }: Exp) {
       />
       <div className={styles.container}>
         <div className={styles.emoji}>🏓</div>
-        {mode === 'RANK' && stat && <PppStat stat={stat} />}
-        {stat && <ExpStat stat={stat} />}
+        {stat && (
+          <>
+            {mode === 'RANK' && <PppStat stat={stat} />}
+            <ExpStat stat={stat} />
+          </>
+        )}
         <div className={styles.guide}>화면을 클릭해주세요!</div>
       </div>
     </div>

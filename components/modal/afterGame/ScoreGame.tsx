@@ -8,20 +8,20 @@ import {
   ModalButton,
   ModalButtonContainer,
 } from 'components/modal/ModalButton';
-import useRankGame from 'hooks/modal/aftergame/useRankGame';
+import useScoreGame from 'hooks/modal/aftergame/useScoreGame';
 import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
 
-interface RankGameProps {
+interface ScoreGameProps {
   currentGame: AfterGame;
   onSubmit: (gameResult: TeamScore) => Promise<void>;
   openStatChange: () => void;
 }
 
-export default function RankGame({
+export default function ScoreGame({
   currentGame,
   onSubmit,
   openStatChange,
-}: RankGameProps) {
+}: ScoreGameProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -32,7 +32,7 @@ export default function RankGame({
     inputScoreHandler,
     enterHandler,
     resetHandler,
-  } = useRankGame({ currentGame, onSubmit });
+  } = useScoreGame({ currentGame, onSubmit });
 
   const submitHandler = () => {
     setIsLoading(true);
@@ -47,7 +47,7 @@ export default function RankGame({
       {isScoreExist ? (
         <Guide condition={onCheck} modalMode='CONFIRM' />
       ) : (
-        <Guide condition={onCheck} modalMode='RANK' />
+        <Guide condition={onCheck} modalMode='SCORE' />
       )}
       <div className={styles.resultContainer}>
         <MatchTeams matchTeams={matchTeamsInfo} />

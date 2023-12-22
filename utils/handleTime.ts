@@ -126,6 +126,25 @@ export const getFormattedDateToString = (
   return { year, month, date, hour, min };
 };
 
+export const dateToDateTimeLocalString = (d: Date) => {
+  if (!(d instanceof Date)) {
+    d = new Date(d);
+  }
+
+  const offset = d.getTimezoneOffset() * 60000;
+  const dateOffset = new Date(d.getTime() - offset);
+
+  const dateString = dateOffset.toISOString().slice(0, 16);
+  return dateString;
+};
+
+export const dateToKRIOSString = (d: Date) => {
+  const offset = d.getTimezoneOffset() * 60000;
+  const dateOffset = new Date(d.getTime() - offset);
+
+  return dateOffset.toISOString();
+};
+
 /**
  * 시간 문자열에서 hour와 min을 분리하여 반환하는
  * @return : number 타입과 string 타입 둘 다 반환
@@ -159,4 +178,20 @@ export const dateToStringShort = (d: Date) => {
   const hour = d.getHours().toString().padStart(2, '0');
   const min = d.getMinutes().toString().padStart(2, '0');
   return `${year}-${month}-${date} ${hour}:${min}`;
+};
+
+/**
+ *  시간을 YYYY-MM-DD 오후/오전 HH:MM 형식으로 반환
+ *  @param {Date} d
+ *  @return 시간 문자열(YYYY-MM-DD 오후/오전 HH:MM)
+ */
+export const dateToKRLocaleTimeString = (d: Date) => {
+  return d.toLocaleTimeString('ko-KR', {
+    year: 'numeric',
+    month: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    day: 'numeric',
+    hour12: true,
+  });
 };

@@ -12,12 +12,13 @@ export type Player = {
 };
 
 export type Team = {
+  teamId: number;
   players: Player[] | RankPlayer[];
   isWin?: boolean;
   score?: number;
 };
 
-export type GameMode = 'NORMAL' | 'RANK';
+export type GameMode = 'NORMAL' | 'RANK' | 'TOURNAMENT';
 export type GameStatus = 'LIVE' | 'WAIT' | 'END';
 
 export type Game = {

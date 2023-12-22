@@ -1,0 +1,95 @@
+@mixin tag-style {
+  display: flex;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.tournamentCard {
+  height: 5rem;
+  padding: 1rem;
+  cursor: pointer;
+  &.tournament {
+    background: #8034f7;
+  }
+  &.tournament\/playing {
+    background: #8034f7;
+  }
+  border-radius: 1rem;
+
+  .text {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    color: white;
+
+    .up {
+      display: flex;
+      flex-direction: row;
+      justify-items: flex-start;
+      gap: 1rem;
+
+      .title {
+        max-width: 55%;
+        padding: 0.2rem;
+        overflow: hidden;
+        font-size: 1rem;
+        font-weight: bold;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .tag {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        font-size: small;
+
+        .playerState {
+          @include tag-style;
+          &.PLAYER {
+            background-color: rgb(75, 183, 75);
+          }
+          &.WAIT {
+            background-color: rgb(216, 170, 42);
+          }
+          &.BEFORE {
+            background-color: #cc5af5;
+          }
+        }
+
+        .gameState {
+          @include tag-style;
+          &.LIVE {
+            background-color: rgb(251, 56, 56);
+          }
+          &.BEFORE {
+            background-color: green;
+          }
+        }
+
+        .participants {
+          @include tag-style;
+          &.full {
+            background-color: red;
+          }
+          &.notFull {
+            background-color: rgb(44, 44, 249);
+          }
+        }
+      }
+    }
+
+    .time {
+      display: flex;
+      font-size: 0.7rem;
+      color: yellow;
+      justify-content: flex-start;
+      gap: 0.5rem;
+    }
+  }
+}
