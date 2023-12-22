@@ -44,7 +44,7 @@ for (let i = 28; i >= 1; i--) {
     type: 'ROOKIE',
     winnerIntraId: users[i % 3].intraId,
     winnerImageUrl: users[i % 3].imageUrl,
-    player_cnt: 8,
+    playerCnt: 8,
   };
 
   const masterTournament: TournamentInfo = {
@@ -57,7 +57,7 @@ for (let i = 28; i >= 1; i--) {
     type: 'MASTER',
     winnerIntraId: users[i % 3].intraId,
     winnerImageUrl: users[i % 3].imageUrl,
-    player_cnt: 7,
+    playerCnt: 7,
   };
 
   dummyTournaments.push(masterTournament, rookieTournament);

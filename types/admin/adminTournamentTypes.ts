@@ -8,7 +8,7 @@ export interface ITournament {
   winnerImageUrl: string;
   startTime: Date;
   endTime: Date;
-  player_cnt: number;
+  playerCnt: number;
 }
 
 export interface ITournamentTable {

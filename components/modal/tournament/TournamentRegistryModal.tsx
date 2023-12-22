@@ -28,7 +28,7 @@ export default function TournamentRegistryModal({
   status,
   type,
   endTime,
-  player_cnt,
+  playerCnt,
   tournamentId,
 }: TournamentInfo) {
   const setSnackbar = useSetRecoilState(toastState);
@@ -38,7 +38,7 @@ export default function TournamentRegistryModal({
   const [openDate, setOpenDate] = useState<string>('미정');
   const [closeDate, setCloseDate] = useState<string>('미정');
   const [loading, setLoading] = useState<boolean>(false);
-  const [playerCount, setPlayerCount] = useState<number>(player_cnt);
+  const [playerCount, setPlayerCount] = useState<number>(playerCnt);
   const registTournament = useCallback(() => {
     setLoading(true);
     return instance
@@ -120,8 +120,8 @@ export default function TournamentRegistryModal({
     return instance
       .get(`/pingpong/tournaments/${tournamentId}`)
       .then((res) => {
-        setPlayerCount(res.data.player_cnt);
-        return res.data.player_cnt;
+        setPlayerCount(res.data.playerCnt);
+        return res.data.playerCnt;
       })
       .catch((error) => {
         setError('JJH2');
