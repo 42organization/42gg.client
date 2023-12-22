@@ -4,14 +4,15 @@ import {
 } from '@g-loot/react-tournament-brackets/dist/src/types';
 import { useRecoilValue } from 'recoil';
 import { clickedTournamentState } from 'utils/recoil/tournament';
+import BouncingDots from 'components/UI/BouncingDots';
 import styles from 'styles/tournament/TournamentMatch.module.scss';
 interface TournamentMatchPartyProps {
   party: Participant;
   teamNameFallback: string;
-  resultFallback: (participant: Participant) => string;
   onMouseEnter: (partyId: string | number) => void;
   onPartyClick: (party: Participant, partyWon: boolean) => void;
   highLightUser?: string;
+  state: string;
 }
 
 function TournamentMatchParty({
@@ -19,7 +20,7 @@ function TournamentMatchParty({
   teamNameFallback,
   onMouseEnter,
   onPartyClick,
-  resultFallback,
+  state,
 }: TournamentMatchPartyProps) {
   const highLightUser = useRecoilValue(clickedTournamentState);
 
@@ -50,7 +51,11 @@ function TournamentMatchParty({
         {party.name !== 'TBD' ? party.name : ''}
       </div>
       <div className={styles.score}>
-        {party.resultText ?? resultFallback(party)}
+        {state === 'LIVE' || state === 'WAIT' ? (
+          <BouncingDots />
+        ) : (
+          party.resultText
+        )}
       </div>
     </div>
   );
@@ -82,14 +87,14 @@ export default function TournamentMatch({
         teamNameFallback={teamNameFallback}
         onMouseEnter={onMouseEnter}
         onPartyClick={onPartyClick}
-        resultFallback={resultFallback}
+        state={match.state}
       ></TournamentMatchParty>
       <TournamentMatchParty
         party={bottomParty}
         teamNameFallback={teamNameFallback}
         onMouseEnter={onMouseEnter}
         onPartyClick={onPartyClick}
-        resultFallback={resultFallback}
+        state={match.state}
       ></TournamentMatchParty>
     </div>
   );
