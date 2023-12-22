@@ -1,10 +1,10 @@
 import React from 'react';
 import { instance } from 'utils/axios';
 import { InfinityScroll } from 'utils/infinityScroll';
-import EmptyImage from 'components/EmptyImage';
 import { InfiniteScrollComponent } from 'components/store/InfiniteScrollComponent';
 import { InvetoryItem } from 'components/store/InventoryItem';
 import StoreLoading from 'components/store/StoreLoading';
+import EmptyImage from 'components/UI/EmptyImage';
 import styles from 'styles/store/Inventory.module.scss';
 
 function fetchInventoryData(page: number) {
