@@ -20,13 +20,13 @@ export default function TournamentCard({
   endTime,
   winnerIntraId,
   winnerImageUrl,
-  player_cnt,
+  playerCnt,
   page,
 }: TournamentInfo & { page: string }) {
   const modal = useRecoilValue(modalState);
   const setModal = useSetRecoilState<Modal>(modalState);
   const [registState, setRegistState] = useState<string>('로딩중');
-  const [playerCount, setPlayerCount] = useState<number>(player_cnt);
+  const [playerCount, setPlayerCount] = useState<number>(playerCnt);
   const setError = useSetRecoilState(errorState);
 
   const openTournamentInfoModal = () => {
@@ -42,7 +42,7 @@ export default function TournamentCard({
         endTime: endTime,
         winnerIntraId: winnerIntraId,
         winnerImageUrl: winnerImageUrl,
-        player_cnt: playerCount,
+        playerCnt: playerCount,
       },
     });
   };
@@ -51,8 +51,8 @@ export default function TournamentCard({
     return instance
       .get(`/pingpong/tournaments/${tournamentId}`)
       .then((res) => {
-        setPlayerCount(res.data.player_cnt);
-        return res.data.player_cnt;
+        setPlayerCount(res.data.playerCnt);
+        return res.data.playerCnt;
       })
       .catch((error) => {
         setError('JJH2');
