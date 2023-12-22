@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { SwiperRef } from 'swiper/react';
 import { TournamentInfo } from 'types/tournamentTypes';
+import UserTournamentBracket from 'components/tournament/UserTournamentBracket';
 import LeagueButtonGroup from 'components/tournament-record/LeagueButtonGroup';
-import UserTournamentBracket from 'components/tournament-record/UserTournamentBracket';
 import WinnerSwiper from 'components/tournament-record/WinnerSwiper';
 import WinnerTournamentInfo from 'components/tournament-record/WinnerTournamentInfo';
 import styles from 'styles/tournament-record/TournamentRecord.module.scss';
@@ -15,7 +15,7 @@ export default function TournamentRecord() {
 
   useEffect(() => {
     if (swiperRef.current?.swiper) {
-      swiperRef.current?.swiper.slideTo(0, 0); // index, speed
+      swiperRef.current?.swiper.slideTo(0, 0); // 이동할 슬라이드 인덱스, 이동 속도
     }
   }, [selectedType]);
 
