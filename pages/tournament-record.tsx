@@ -21,7 +21,7 @@ export default function TournamentRecord() {
 
   return (
     <div className={styles.pageWrap}>
-      <h1 className={styles.title}>Hall of Glory</h1>
+      <h1 className={styles.title}>Hall of Fame</h1>
       <LeagueButtonGroup onSelect={setSelectedType} />
       <WinnerSwiper
         type={selectedType}
