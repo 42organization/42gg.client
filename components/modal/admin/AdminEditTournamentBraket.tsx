@@ -17,7 +17,6 @@ export default function AdminEditTournamentBraket({
   const [ref, size] = useComponentSize<HTMLDivElement>();
 
   const fetchTournamentGames = useCallback(async () => {
-    console.log('Fetching more data...');
     try {
       const res = await instance.get(
         `pingpong/tournaments/${tournamentId}/games`
