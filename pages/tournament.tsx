@@ -26,7 +26,6 @@ export default function Tournament() {
         .get('/pingpong/tournaments?size=20&page=1&status=LIVE')
         .then((res) => {
           if (res.data.tournaments?.length === 1) {
-            console.log('openInfo');
             setOpenTournamentId(res.data.tournaments[0].tournamentId);
           }
           return res.data;
@@ -52,11 +51,12 @@ export default function Tournament() {
       onError: (error) => {
         setError('JJH03');
       },
+      retry: 1,
+      staleTime: 60000,
     }
   );
 
   const fetchTournamentGames = useCallback(async () => {
-    console.log('Fetching more data...');
     try {
       const res = await instance.get(
         `pingpong/tournaments/${openTournamentId}/games`
@@ -92,11 +92,20 @@ export default function Tournament() {
             예정된 토너먼트가 없습니다.
           </h4>
         ) : (
-          waitInfo.data?.tournaments.map((tournament) => (
-            <div className={styles.cardContainer} key={tournament.tournamentId}>
-              <TournamentCard key={tournament.tournamentId} {...tournament} />
-            </div>
-          ))
+          <div className={styles.tournamentCardContainer}>
+            {waitInfo.data?.tournaments.map((tournament) => (
+              <div
+                className={styles.cardContainer}
+                key={tournament.tournamentId}
+              >
+                <TournamentCard
+                  key={tournament.tournamentId}
+                  {...tournament}
+                  page='tournament'
+                />
+              </div>
+            ))}
+          </div>
         )}
         <div className={styles.tournamentText}> 진행중인 토너먼트 </div>
         {openInfo.data && openInfo.data.tournaments?.length === 0 ? (
@@ -104,12 +113,21 @@ export default function Tournament() {
             진행중인 토너먼트가 없습니다
           </div>
         ) : (
-          <div className={styles.openTournamentBox} ref={containerRef}>
-            <TournamentBraket
-              singleEliminationBracketMatchs={openTournament}
-              containerSize={containerSize}
-            />
-          </div>
+          <>
+            {openInfo.data?.tournaments[0].tournamentId && (
+              <TournamentCard
+                key={openInfo.data?.tournaments[0].tournamentId}
+                {...openInfo.data?.tournaments[0]}
+                page='tournament/playing'
+              />
+            )}
+            <div className={styles.openTournamentBox} ref={containerRef}>
+              <TournamentBraket
+                singleEliminationBracketMatchs={openTournament}
+                containerSize={containerSize}
+              />
+            </div>
+          </>
         )}
       </div>
     </div>

@@ -142,18 +142,7 @@ function TournamentMatchEditor({
 
 export default function TournamentEditMatch({
   match,
-  onMatchClick,
-  onPartyClick,
   onMouseEnter,
-  onMouseLeave,
-  topWon,
-  bottomWon,
-  topHovered,
-  bottomHovered,
-  topText,
-  bottomText,
-  connectorColor,
-  computedStyles,
   teamNameFallback,
   resultFallback,
 }: MatchComponentProps) {
