@@ -30,7 +30,7 @@
       display: flex;
       flex-direction: row;
       justify-items: flex-start;
-      gap: 1rem;
+      gap: 0.5rem;
 
       .title {
         max-width: 55%;
@@ -47,7 +47,7 @@
         flex-direction: row;
         justify-content: flex-start;
         gap: 0.5rem;
-        font-size: small;
+        font-size: 0.7rem;
 
         .playerState {
           @include tag-style;
