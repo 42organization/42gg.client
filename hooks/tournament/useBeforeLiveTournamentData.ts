@@ -5,7 +5,17 @@ import { TournamentInfo } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 
-export default function useBeforeLiveTournamentData() {
+type UseBeforeLiveTournamentDataReturn = {
+  data:
+    | {
+        beforeTournament: TournamentInfo[];
+        liveTournament: TournamentInfo[];
+      }
+    | undefined;
+  isLoading: boolean;
+};
+
+export default function useBeforeLiveTournamentData(): UseBeforeLiveTournamentDataReturn {
   const setError = useSetRecoilState(errorState);
   const fetchTournamentData = useCallback(async () => {
     const beforeRes = await instance.get(
@@ -20,7 +30,7 @@ export default function useBeforeLiveTournamentData() {
     };
   }, []);
 
-  const { data, isError } = useQuery<{
+  const { data, isLoading, isError } = useQuery<{
     beforeTournament: TournamentInfo[];
     liveTournament: TournamentInfo[];
   }>('beforeLiveTournamentData', fetchTournamentData, {
@@ -32,5 +42,5 @@ export default function useBeforeLiveTournamentData() {
     setError('JC04');
   }
 
-  return data;
+  return { data, isLoading };
 }
