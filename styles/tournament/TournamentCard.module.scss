@@ -1,32 +1,43 @@
-.tournamentCardContainer {
+@mixin tag-style {
   display: flex;
-  height: 100%;
-  padding: 0 1rem;
-  margin-top: 0.5rem;
-  overflow-y: scroll;
-  cursor: pointer;
-  background: #7816e1;
+  padding: 0.3rem;
   border-radius: 0.5rem;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.6);
   align-items: center;
+  justify-content: center;
+}
+
+.tournamentCard {
+  height: 5rem;
+  padding: 1rem;
+  cursor: pointer;
+  &.tournament {
+    background: #8034f7;
+  }
+  &.tournament\/playing {
+    background: #8034f7;
+  }
+  border-radius: 1rem;
 
   .text {
     display: flex;
     width: 100%;
     flex-direction: column;
-    padding-top: 0.5rem;
+    justify-content: flex-start;
+    gap: 0.5rem;
     color: white;
-    justify-content: space-between;
 
     .up {
       display: flex;
       flex-direction: row;
-      margin-bottom: 0.5rem;
-      justify-content: space-between;
+      justify-items: flex-start;
+      gap: 0.5rem;
 
       .title {
+        max-width: 55%;
         padding: 0.2rem;
         overflow: hidden;
+        font-size: 1rem;
+        font-weight: bold;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
@@ -34,11 +45,12 @@
       .tag {
         display: flex;
         flex-direction: row;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        font-size: 0.7rem;
 
-        .state {
-          padding: 0.2rem 0.5rem;
-          margin-right: 1rem;
-          border-radius: 0.5rem;
+        .playerState {
+          @include tag-style;
           &.PLAYER {
             background-color: rgb(75, 183, 75);
           }
@@ -46,27 +58,36 @@
             background-color: rgb(216, 170, 42);
           }
           &.BEFORE {
-            background-color: #949393;
+            background-color: #cc5af5;
+          }
+        }
+
+        .gameState {
+          @include tag-style;
+          &.LIVE {
+            background-color: rgb(251, 56, 56);
+          }
+          &.BEFORE {
+            background-color: green;
           }
         }
 
         .participants {
-          padding: 0.2rem 0.5rem;
-          margin-right: 1rem;
-          border-radius: 0.5rem;
+          @include tag-style;
           &.full {
             background-color: red;
           }
           &.notFull {
-            background-color: blue;
+            background-color: rgb(44, 44, 249);
           }
         }
       }
     }
+
     .time {
       display: flex;
-      padding-bottom: 0.5rem;
       font-size: 0.7rem;
+      color: yellow;
       justify-content: flex-start;
       gap: 0.5rem;
     }

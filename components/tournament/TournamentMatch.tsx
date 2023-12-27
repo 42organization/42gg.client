@@ -27,7 +27,7 @@ function TournamentMatchParty({
   return (
     <div
       className={`${styles.tournamentPartyWrapper} ${
-        highLightUser !== '' && highLightUser === party.name
+        highLightUser !== 'TBD' && highLightUser === party.name
           ? styles.highlight
           : ''
       }`}
@@ -47,7 +47,9 @@ function TournamentMatchParty({
           alt='player'
         />
       </div>
-      <div className={styles.partyName}>{party.name || teamNameFallback}</div>
+      <div className={styles.partyName}>
+        {party.name !== 'TBD' ? party.name : ''}
+      </div>
       <div className={styles.score}>
         {state === 'LIVE' || state === 'WAIT' ? (
           <BouncingDots />
