@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { BiCalendar } from 'react-icons/bi';
 import { MdPeopleAlt } from 'react-icons/md';
@@ -47,7 +47,7 @@ export default function TournamentCard({
     });
   };
 
-  const getTournamentInfo = useCallback(() => {
+  const getTournamentInfo = useCallback(async () => {
     return instance
       .get(`/pingpong/tournaments/${tournamentId}`)
       .then((res) => {
@@ -57,16 +57,9 @@ export default function TournamentCard({
       .catch((error) => {
         setError('JJH2');
       });
-  }, [tournamentId]);
+  }, [tournamentId, setError]);
 
-  useEffect(() => {
-    if (modal.modalName === null) {
-      getTournamentInfo();
-      getStatus();
-    }
-  }, [modal]);
-
-  const getStatus = useCallback(() => {
+  const getStatus = useCallback(async () => {
     return instance
       .get(`/pingpong/tournaments/${tournamentId}/users`)
       .then((res) => {
@@ -79,12 +72,20 @@ export default function TournamentCard({
   }, []);
 
   const start = dateToKRLocaleTimeString(new Date(startTime));
+
+  useEffect(() => {
+    if (modal.modalName === null) {
+      getTournamentInfo();
+      getStatus();
+    }
+  }, [modal, getStatus, getTournamentInfo]);
+
   const end = dateToKRLocaleTimeString(new Date(endTime));
   const isFull = playerCount === 8 ? 'full' : 'notFull';
 
   const userState: Record<string, string> = {
-    BEFORE: '참여하기!',
-    PLAYER: '참여 중',
+    BEFORE: '참가하기!',
+    PLAYER: '참가 중',
     WAIT: '대기 중',
   };
 
