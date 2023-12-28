@@ -224,6 +224,16 @@
 
 <br/>
 
+### 토너먼트 내용
+![rank](https://github.com/42organization/42gg.client/assets/93255519/8614432d-e570-4423-a064-5655c766df5b)
+![4A71969B-DA59-4783-9E5B-483AF3DCD775_1_105_c](https://github.com/42organization/42gg.client/assets/93255519/40d5b219-fd55-4b9f-a4ab-f57c29f39e6c)
+![B279D587-DCAB-447A-A067-4A2CC6731DCC_1_105_c](https://github.com/42organization/42gg.client/assets/93255519/e6fce8ce-bb7d-4e44-b3c2-b19167c5ce39)
+
+![5F53D32F-6A6E-4BD2-BACD-4EFC60EFEECB_1_105_c](https://github.com/42organization/42gg.client/assets/93255519/53b6d903-de35-401d-979d-90ab7ec19eb5)
+
+![42899FF5-3DF3-4133-B88A-BD43DDA4E410_1_105_c](https://github.com/42organization/42gg.client/assets/93255519/524d6c26-39bb-48f6-ae08-ca0690a69bfb)
+
+
 ### 🔥 최근 경기들을 확인할 수 있습니다
 
 <img width="25%" alt="RecentGame_Both" src="https://github.com/42organization/42gg.client/assets/57761286/d014c5e8-216f-49e8-b7c9-0038650590a3">
