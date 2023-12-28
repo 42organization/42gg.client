@@ -223,6 +223,18 @@
 <img width="25%" alt="Store_CoinHistory" src="https://github.com/42organization/42gg.client/assets/100325940/4b30f9d9-d39b-4a5d-bc09-8ed6665910bb">
 
 <br/>
+### 🏓 토너먼트 경기를 신청 할 수 있습니다
+![1C169368-CDAE-48D1-BA02-7DC890896780_1_105_c](https://github.com/42organization/42gg.client/assets/93255519/8e10a6ec-cb51-4d13-b5da-3d15b6d24842)
+![4A71969B-DA59-4783-9E5B-483AF3DCD775_1_105_c](https://github.com/42organization/42gg.client/assets/93255519/0b7955a0-d2a1-4f41-b423-1d7512c797cf)
+
+### 🏓 현재 진행중인 토너먼트 진행상황을 확인 할 수 있습니다
+![FCB19951-168C-432A-B1DF-D280CDAADEE9_1_105_c](https://github.com/42organization/42gg.client/assets/93255519/515ef23f-7d82-42f4-8aa4-c65746631864)
+
+### 🏆 명예의 전당에서 토너먼트의 우승자들을 확인 할 수 있습니다
+![42899FF5-3DF3-4133-B88A-BD43DDA4E410_1_105_c](https://github.com/42organization/42gg.client/assets/93255519/67141269-3922-4776-85e6-87cc0287039f)
+![5F53D32F-6A6E-4BD2-BACD-4EFC60EFEECB_1_105_c](https://github.com/42organization/42gg.client/assets/93255519/d3bda7fe-38d0-427f-a472-19e8727f8653)
+
+<br/>
 
 ### 🔥 최근 경기들을 확인할 수 있습니다
 
