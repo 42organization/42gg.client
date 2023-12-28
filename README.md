@@ -115,7 +115,7 @@
     <td align=center>이름</td>
     <td align=center><a href="https://github.com/yoouyeon">김재혁 @jaehyuki</a></td>
     <td align=center><a href="https://github.com/joonho0410">전준호 @junhjeon</a></td>
-    <td align=center><a href="https://github.com/Clearsu">박진철 @jincipark</a></td>
+    <td align=center><a href="https://github.com/Clearsu">박진철 @jincpark</a></td>
   </tr>
 </table>
 <br>
