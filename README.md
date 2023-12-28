@@ -103,6 +103,21 @@
   </tr>
 </table>
 
+<h3>5기</h3>
+<table>
+  <tr>
+    <td align=center>역할</td>
+    <td align=center>LEAD🐧</td>
+    <td align=center>🌚</td>
+    <td align=center>🥨</td>
+  </tr>
+  <tr>
+    <td align=center>이름</td>
+    <td align=center><a href="https://github.com/yoouyeon">김재혁 @jaehyuki</a></td>
+    <td align=center><a href="https://github.com/joonho0410">전준호 @junhjeon</a></td>
+    <td align=center><a href="https://github.com/Clearsu">박진철 @jincpark</a></td>
+  </tr>
+</table>
 <br>
 
 <h2>주요 기능 소개</h2>
