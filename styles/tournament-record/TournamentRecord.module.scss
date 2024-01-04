@@ -26,3 +26,11 @@
   justify-content: center;
   animation: text-fade-in-out 4s infinite;
 }
+
+.spinnerWrapper {
+  display: flex;
+  width: 100%;
+  height: 14rem;
+  align-items: center;
+  justify-content: center;
+}
