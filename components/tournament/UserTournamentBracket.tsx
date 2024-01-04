@@ -11,12 +11,12 @@ import styles from 'styles/tournament/UserTournamentBracket.module.scss';
 
 interface UserTournamentBracketProps {
   tournamentId: number | undefined;
-  fallbackText?: string;
+  queryStaleTime: number;
 }
 
 export default function UserTournamentBraket({
   tournamentId,
-  fallbackText,
+  queryStaleTime,
 }: UserTournamentBracketProps) {
   const setError = useSetRecoilState(errorState);
   const [ref, size] = useComponentSize<HTMLDivElement>();
@@ -37,7 +37,7 @@ export default function UserTournamentBraket({
     () => fetchTournamentGames(),
     {
       enabled: !!tournamentId, // tournamentId가 undefined가 아닐 때만 작동하도록
-      staleTime: 86400000, // 하루
+      staleTime: queryStaleTime,
     }
   );
 
@@ -49,13 +49,11 @@ export default function UserTournamentBraket({
     <div ref={ref} className={styles.bracketContainer}>
       {isLoading ? (
         <LoadingSpinner />
-      ) : tournamentId ? (
+      ) : (
         <TournamentBraket
           singleEliminationBracketMatchs={bracketMatches}
           containerSize={size}
         />
-      ) : (
-        <div className={styles.noTournamentText}>{fallbackText}</div>
       )}
     </div>
   );
