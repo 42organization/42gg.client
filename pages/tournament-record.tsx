@@ -53,7 +53,9 @@ export default function TournamentRecord() {
       <h1 className={styles.title}>Hall of Fame</h1>
       <LeagueButtonGroup onSelect={setSelectedType} />
       {isLoading ? (
-        <LoadingSpinner />
+        <div className={styles.spinnerWrapper}>
+          <LoadingSpinner />
+        </div>
       ) : (
         <>
           <WinnerSwiper
@@ -71,6 +73,7 @@ export default function TournamentRecord() {
               <WinnerTournamentInfo tournamentInfo={tournamentInfo} />
               <UserTournamentBracket
                 tournamentId={tournamentInfo?.tournamentId}
+                queryStaleTime={1000 * 60 * 60}
               />
             </>
           )}
