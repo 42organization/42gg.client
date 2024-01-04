@@ -4,6 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import { instance } from 'utils/axios';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
 import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/modal';
 import TournamentBraket from 'components/tournament/TournamentBraket';
 import TournamentCard from 'components/tournament/TournamentCard';
 import useBeforeLiveTournamentData from 'hooks/tournament/useBeforeLiveTournamentData';
@@ -12,9 +13,14 @@ import styles from 'styles/tournament/TournamentContainer.module.scss';
 
 export default function Tournament() {
   const setError = useSetRecoilState(errorState);
+  const setModal = useSetRecoilState(modalState);
   const { data, isLoading } = useBeforeLiveTournamentData();
   const [ref, size] = useComponentSize<HTMLDivElement>();
   const [liveMatch, setLiveMatch] = useState<Match[]>();
+
+  const openManual = () => {
+    setModal({ modalName: 'TOURNAMENT-MANUAL' });
+  };
 
   const fetchTournamentGames = useCallback(
     async (tournamentId: number) => {
@@ -62,6 +68,12 @@ export default function Tournament() {
           </div>
         )}
         <div className={styles.tournamentText}> 진행중인 토너먼트 </div>
+        <div className={styles.buttonWrap}>
+          <button className={styles.manual} onClick={openManual}>
+            {' '}
+            경기 규칙
+          </button>
+        </div>
         {data?.liveTournament?.length === 0 ? (
           <div className={styles.noTournamentText}>
             진행중인 토너먼트가 없습니다

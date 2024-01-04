@@ -1,5 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
+import TournamentManualModal from '../tournament/TournamentManualModal';
 import TournamentRegistryModal from '../tournament/TournamentRegistryModal';
 
 export default function TournamentModal() {
@@ -9,6 +10,7 @@ export default function TournamentModal() {
     'TOURNAMENT-REGISTRY': tournamentInfo ? (
       <TournamentRegistryModal {...tournamentInfo} />
     ) : null,
+    'TOURNAMENT-MANUAL': <TournamentManualModal />,
   };
 
   if (!modalName) return null;
