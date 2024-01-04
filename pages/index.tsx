@@ -5,13 +5,16 @@ import useBeforeLiveTournamentData from 'hooks/tournament/useBeforeLiveTournamen
 import styles from 'styles/main/Home.module.scss';
 
 const Home: NextPage = () => {
-  const tournamentData = useBeforeLiveTournamentData();
+  const { data: tournamentData } = useBeforeLiveTournamentData();
+
   return (
     <div className={styles.container}>
       <SearchBar />
-      {tournamentData && tournamentData?.length > 0 && (
-        <Section path='tournament' sectionTitle={'Tournament'} />
-      )}
+      {tournamentData &&
+        (tournamentData.beforeTournament?.length > 0 ||
+          tournamentData.liveTournament?.length > 0) && (
+          <Section path='tournament' sectionTitle={'Tournament'} />
+        )}
       <Section path='rank' sectionTitle={'Ranking'} />
       <Section path='game' sectionTitle={'Current Play'} />
     </div>
