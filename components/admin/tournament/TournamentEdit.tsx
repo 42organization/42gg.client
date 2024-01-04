@@ -98,10 +98,6 @@ export default function TournamentEdit({
 
   const postHandler = async () => {
     try {
-      console.log('startTime : ', tournamentEditInfo.startTime);
-      console.log('endTime : ', tournamentEditInfo.endTime);
-      console.log('startTime Date : ', new Date(tournamentEditInfo.startTime));
-      console.log('endTime Date : ', new Date(tournamentEditInfo.endTime));
       await instanceInManage.post(`/tournaments`, {
         title: tournamentEditInfo.title,
         contents: tournamentEditInfo.contents,

@@ -103,6 +103,21 @@
   </tr>
 </table>
 
+<h3>5기</h3>
+<table>
+  <tr>
+    <td align=center>역할</td>
+    <td align=center>LEAD🐧</td>
+    <td align=center>🌚</td>
+    <td align=center>🥨</td>
+  </tr>
+  <tr>
+    <td align=center>이름</td>
+    <td align=center><a href="https://github.com/yoouyeon">김재혁 @jaehyuki</a></td>
+    <td align=center><a href="https://github.com/joonho0410">전준호 @junhjeon</a></td>
+    <td align=center><a href="https://github.com/Clearsu">박진철 @jincpark</a></td>
+  </tr>
+</table>
 <br>
 
 <h2>주요 기능 소개</h2>
@@ -206,6 +221,22 @@
 <img width="25%" alt="Store_CoinClick" src="https://github.com/42organization/42gg.client/assets/100325940/f4d260db-2fc7-4109-a427-d6cf0bc36f75">
 &nbsp;&nbsp;&nbsp;
 <img width="25%" alt="Store_CoinHistory" src="https://github.com/42organization/42gg.client/assets/100325940/4b30f9d9-d39b-4a5d-bc09-8ed6665910bb">
+
+<br/>
+
+### 🏓 개최된 토너먼트에 참가 신청을 할 수 있습니다
+<img width="25%" alt="Store_CoinHistory" src="https://github.com/42organization/42gg.client/assets/93255519/8614432d-e570-4423-a064-5655c766df5b">
+&nbsp;&nbsp;&nbsp;
+<img width="25%" alt="Store_CoinHistory" src="https://github.com/42organization/42gg.client/assets/93255519/40d5b219-fd55-4b9f-a4ab-f57c29f39e6c">
+
+### 🏓 진행중인 토너먼트를 실시간으로 확인 할 수 있습니다
+
+<img width="25%" alt="Store_CoinHistory" src="https://github.com/42organization/42gg.client/assets/93255519/e6fce8ce-bb7d-4e44-b3c2-b19167c5ce39">
+
+### 🏆 명예의 전당에서 토너먼트 우승자들을 확인 할 수 있어요!
+<img width="28.4%" alt="Store_CoinHistory" src="https://github.com/42organization/42gg.client/assets/93255519/524d6c26-39bb-48f6-ae08-ca0690a69bfb">
+&nbsp;&nbsp;&nbsp;
+<img width="25%" alt="Store_CoinHistory" src="https://github.com/42organization/42gg.client/assets/93255519/53b6d903-de35-401d-979d-90ab7ec19eb5">
 
 <br/>
 
