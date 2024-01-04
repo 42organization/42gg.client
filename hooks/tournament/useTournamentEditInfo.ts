@@ -17,12 +17,7 @@ function useTournamentEditInfo() {
   // change
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (name === 'startTime' || name === 'endTime') {
-      setTournamentEditInfo((prev) => ({
-        ...prev,
-        [name]: value.slice(0, -2) + '00',
-      }));
-    } else setTournamentEditInfo((prev) => ({ ...prev, [name]: value }));
+    setTournamentEditInfo((prev) => ({ ...prev, [name]: value }));
   };
 
   const selectChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
