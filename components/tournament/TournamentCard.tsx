@@ -69,7 +69,7 @@ export default function TournamentCard({
       .catch((error) => {
         setError('JJH2');
       });
-  }, []);
+  }, [tournamentId, setError]);
 
   const start = dateToKRLocaleTimeString(new Date(startTime));
 
