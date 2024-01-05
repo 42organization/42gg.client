@@ -5,15 +5,18 @@ import { instance } from 'utils/axios';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
 import { errorState } from 'utils/recoil/error';
 import TournamentBraket from 'components/tournament/TournamentBraket';
+import LoadingSpinner from 'components/UI/LoadingSpinner';
 import useComponentSize from 'hooks/util/useComponentSize';
-import styles from 'styles/tournament-record/UserTournamentBracket.module.scss';
+import styles from 'styles/tournament/UserTournamentBracket.module.scss';
 
 interface UserTournamentBracketProps {
   tournamentId: number | undefined;
+  queryStaleTime: number;
 }
 
 export default function UserTournamentBraket({
   tournamentId,
+  queryStaleTime,
 }: UserTournamentBracketProps) {
   const setError = useSetRecoilState(errorState);
   const [ref, size] = useComponentSize<HTMLDivElement>();
@@ -34,7 +37,7 @@ export default function UserTournamentBraket({
     () => fetchTournamentGames(),
     {
       enabled: !!tournamentId, // tournamentId가 undefined가 아닐 때만 작동하도록
-      staleTime: 86400000, // 하루
+      staleTime: queryStaleTime,
     }
   );
 
@@ -45,7 +48,7 @@ export default function UserTournamentBraket({
   return (
     <div ref={ref} className={styles.bracketContainer}>
       {isLoading ? (
-        <div className={styles.loadingAnimation} />
+        <LoadingSpinner />
       ) : (
         <TournamentBraket
           singleEliminationBracketMatchs={bracketMatches}

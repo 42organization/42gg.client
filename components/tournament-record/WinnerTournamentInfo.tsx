@@ -12,7 +12,7 @@ export default function WinnerTournamentInfo({
   return (
     <div className={styles.winnerInfoContainer}>
       <p className={styles.userId}>
-        {tournamentInfo?.winnerIntraId ?? '아이디 정보가 없습니다.'}
+        {tournamentInfo?.winnerIntraId ?? 'IntraId'}
       </p>
       <p className={styles.gameInfo}>
         {tournamentInfo?.title}{' '}
