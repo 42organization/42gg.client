@@ -1,6 +1,7 @@
 import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
+import { IoReloadSharp } from 'react-icons/io5';
 import { instance } from 'utils/axios';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
 import { errorState } from 'utils/recoil/error';
@@ -10,10 +11,12 @@ import styles from 'styles/tournament-record/UserTournamentBracket.module.scss';
 
 interface UserTournamentBracketProps {
   tournamentId: number | undefined;
+  state?: string | undefined;
 }
 
 export default function UserTournamentBraket({
   tournamentId,
+  state,
 }: UserTournamentBracketProps) {
   const setError = useSetRecoilState(errorState);
   const [ref, size] = useComponentSize<HTMLDivElement>();
@@ -28,6 +31,8 @@ export default function UserTournamentBraket({
   const {
     data: bracketMatches = [],
     isLoading,
+    isFetching,
+    refetch,
     isError,
   } = useQuery<Match[]>(
     ['tournamentMatches', tournamentId],
@@ -47,10 +52,20 @@ export default function UserTournamentBraket({
       {isLoading ? (
         <div className={styles.loadingAnimation} />
       ) : (
-        <TournamentBraket
-          singleEliminationBracketMatchs={bracketMatches}
-          containerSize={size}
-        />
+        <>
+          {state === 'LIVE' && (
+            <button
+              onClick={() => refetch()}
+              className={isFetching ? styles.refetching : ''}
+            >
+              <IoReloadSharp />
+            </button>
+          )}
+          <TournamentBraket
+            singleEliminationBracketMatchs={bracketMatches}
+            containerSize={size}
+          />
+        </>
       )}
     </div>
   );
