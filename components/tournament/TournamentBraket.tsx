@@ -11,6 +11,7 @@ import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import { clickedTournamentState } from 'utils/recoil/tournament';
 import TournamentMatch from 'components/tournament/TournamentMatch';
+import LoadingSpinner from 'components/UI/LoadingSpinner';
 
 if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
   import('@g-loot/react-tournament-brackets');
@@ -19,7 +20,7 @@ if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
 const SingleEliminationBracket = dynamic<
   React.ComponentProps<typeof StaticSingleEliminationBracket>
 >(
-  () => {
+  async () => {
     return import('@g-loot/react-tournament-brackets').then(
       (mod) => mod.SingleEliminationBracket
     );
@@ -28,7 +29,7 @@ const SingleEliminationBracket = dynamic<
 );
 
 const SVGViewer = dynamic<React.ComponentProps<typeof StaticSVGViewer>>(
-  () => {
+  async () => {
     return import('@g-loot/react-tournament-brackets').then(
       (mod) => mod.SVGViewer
     );
@@ -47,16 +48,17 @@ export default function TournamentBraket({
 }: TournamentBraketProps) {
   const setHighLightUser = useSetRecoilState(clickedTournamentState);
 
-  if (singleEliminationBracketMatchs.length === 0)
-    return <h1 style={{ color: 'white' }}>Loading...</h1>;
-  const finalWidth = containerSize?.width; //Math.max(width - 50, 500);
-  const finalHeight = containerSize?.height; //Math.max(height - 100, 500);
+  if (singleEliminationBracketMatchs.length === 0) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <SingleEliminationBracket
       matches={singleEliminationBracketMatchs}
       onPartyClick={(party: Participant, won: boolean) => {
-        if (party.name !== '') setHighLightUser(party.name);
+        if (party.name !== '') {
+          setHighLightUser(party.name);
+        }
       }}
       matchComponent={TournamentMatch}
       options={{
