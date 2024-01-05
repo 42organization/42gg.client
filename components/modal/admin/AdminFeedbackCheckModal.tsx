@@ -24,19 +24,21 @@ export default function AdminFeedbackCheck({
       await instanceInManage.patch(`/feedback/${id}`, {
         isSolved: isSolved,
       });
-      await instanceInManage.post(`/notifications`, {
-        intraId,
-        message: isSolved
-          ? '피드백을 검토중입니다.'
-          : '피드백이 반영되었습니다.',
-        // sendMail: isSend, todo: 슬랙으로 보내는 것으로 변경
-      });
-      setSnackBar({
-        toastName: 'noti user',
-        severity: 'success',
-        message: `알림이 성공적으로 전송되었습니다!`,
-        clicked: true,
-      });
+      if (isSend) {
+        await instanceInManage.post(`/notifications`, {
+          intraId,
+          message: isSolved
+            ? '피드백을 검토중입니다.'
+            : '피드백이 반영되었습니다.',
+          // sendMail: isSend, todo: 슬랙으로 보내는 것으로 변경
+        });
+        setSnackBar({
+          toastName: 'noti user',
+          severity: 'success',
+          message: `알림이 성공적으로 전송되었습니다!`,
+          clicked: true,
+        });
+      }
       setModal({ modalName: null });
     } catch (e) {
       console.error('SW03');

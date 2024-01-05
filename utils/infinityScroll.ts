@@ -86,7 +86,8 @@ export function InfiniteScroll<T extends PagenatedResponse>(
         }
       },
       retry: 0,
-      keepPreviousData: true,
+      // 쿼리 키 변경 시 쿼리를 초기화하여 isLoading 업데이트
+      // keepPreviousData: true,
     }
   );
 }
