@@ -1,53 +1,32 @@
-import React, {
-  useMemo,
-  useCallback,
-  SetStateAction,
-  forwardRef,
-  Ref,
-} from 'react';
+import React, { useMemo, SetStateAction, forwardRef, Ref } from 'react';
+import { InfiniteData } from 'react-query';
 import { EffectCoverflow } from 'swiper/modules';
-import { Swiper, SwiperSlide, SwiperClass, SwiperRef } from 'swiper/react';
-import { TournamentData, TournamentInfo } from 'types/tournamentTypes';
-import { instance } from 'utils/axios';
-import { InfiniteScroll } from 'utils/infinityScroll';
+import { Swiper, SwiperSlide, SwiperRef, SwiperClass } from 'swiper/react';
+import { TournamentInfo, TournamentData } from 'types/tournamentTypes';
 import styles from 'styles/tournament-record/WinnerSwiper.module.scss';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import WinnerProfileImage from './WinnerProfileImage';
 
 interface WinnerSwiperProps {
+  tournamentData: InfiniteData<TournamentData> | undefined;
   type: string;
   size: number;
   setTournamentInfo: React.Dispatch<SetStateAction<TournamentInfo | undefined>>;
-  setIsEmpty: React.Dispatch<SetStateAction<boolean>>;
+  onIndexChange: (swiper: SwiperClass) => void;
 }
 
 const WinnerSwiper = forwardRef(
   (
-    { type, size, setTournamentInfo, setIsEmpty }: WinnerSwiperProps,
+    {
+      tournamentData,
+      type,
+      size,
+      setTournamentInfo,
+      onIndexChange,
+    }: WinnerSwiperProps,
     ref: Ref<SwiperRef> | undefined
   ) => {
-    const fetchTournamentData = useCallback(
-      async (page: number) => {
-        const res = await instance.get(
-          `/pingpong/tournaments?page=${page}&type=${type}&size=${size}&status=END`
-        );
-        if (res.data.totalPage === 0) {
-          setIsEmpty(true);
-        } else {
-          setIsEmpty(false);
-        }
-        return res.data;
-      },
-      [type, size, setIsEmpty]
-    );
-
-    const { data, hasNextPage, fetchNextPage } = InfiniteScroll<TournamentData>(
-      ['tournamentData', type],
-      fetchTournamentData,
-      'JC01'
-    );
-
     const coverflowEffect = useMemo(
       () => ({
         rotate: 35,
@@ -58,16 +37,6 @@ const WinnerSwiper = forwardRef(
       []
     );
 
-    const indexChangeHandler = useCallback(
-      (swiper: SwiperClass) => {
-        const slidesLength = swiper.slides.length;
-        if (hasNextPage && swiper.activeIndex >= slidesLength - 3) {
-          fetchNextPage();
-        }
-      },
-      [hasNextPage, fetchNextPage]
-    );
-
     return (
       <Swiper
         className={styles.swiper}
@@ -76,10 +45,10 @@ const WinnerSwiper = forwardRef(
         centeredSlides={true}
         coverflowEffect={coverflowEffect}
         modules={[EffectCoverflow]}
-        onActiveIndexChange={indexChangeHandler}
+        onActiveIndexChange={onIndexChange}
         ref={ref}
       >
-        {data?.pages.map((page, pageIndex) => (
+        {tournamentData?.pages.map((page, pageIndex) => (
           <React.Fragment key={pageIndex}>
             {page.tournaments.length > 0 &&
               page.tournaments.map((tournament, index) => (
