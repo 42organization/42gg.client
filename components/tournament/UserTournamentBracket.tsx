@@ -1,7 +1,6 @@
 import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { IoReloadSharp } from 'react-icons/io5';
 import { instance } from 'utils/axios';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
 import { errorState } from 'utils/recoil/error';
@@ -61,7 +60,7 @@ export default function UserTournamentBraket({
               onClick={() => refetch()}
               className={isFetching ? styles.refetching : ''}
             >
-              <IoReloadSharp />
+              &#8635;
             </button>
           )}
           <TournamentBraket
