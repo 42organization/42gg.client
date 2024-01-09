@@ -33,7 +33,7 @@ type EditItemModal = 'MEGAPHONE';
 
 type StoreModal = 'MANUAL' | 'COIN_HISTORY';
 
-type TournamentModal = 'REGISTRY';
+type TournamentModal = 'REGISTRY' | 'MANUAL';
 
 type AdminModal =
   | 'PROFILE'
