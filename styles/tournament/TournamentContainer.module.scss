@@ -4,11 +4,15 @@
   @include pageWrap;
 }
 
-.title {
-  @include pageTitle;
-  width: fit-content;
-  padding-bottom: 1rem;
-  cursor: pointer;
+.titleWrap {
+  display: flex;
+  justify-content: space-between;
+  .title {
+    @include pageTitle;
+    width: fit-content;
+    padding-bottom: 1rem;
+    cursor: pointer;
+  }
 }
 
 .tournamentCardContainer {
@@ -47,7 +51,6 @@
   display: flex;
   margin-right: 0.6rem;
   margin-bottom: 1rem;
-  justify-content: flex-end;
   align-items: center;
 
   .manual {
