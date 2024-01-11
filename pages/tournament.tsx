@@ -49,6 +49,7 @@ export default function Tournament() {
             <UserTournamentBraket
               tournamentId={tournament.tournamentId}
               queryStaleTime={60 * 1000}
+              state={tournament.status}
             />
           </>
         ))
