@@ -43,19 +43,15 @@ export default function Tournament() {
           진행중인 토너먼트가 없습니다.
         </div>
       ) : (
-        data &&
-        data?.liveTournament.length > 0 && (
+        data?.liveTournament.map((tournament) => (
           <>
-            <TournamentCard
-              {...data.liveTournament[0]}
-              page='tournament/playing'
-            />
+            <TournamentCard {...tournament} page='tournament/playing' />
             <UserTournamentBraket
-              tournamentId={data?.liveTournament[0].tournamentId}
+              tournamentId={tournament.tournamentId}
               queryStaleTime={60 * 1000}
             />
           </>
-        )
+        ))
       )}
     </div>
   );
