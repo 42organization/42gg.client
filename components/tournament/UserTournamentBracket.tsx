@@ -11,11 +11,13 @@ import styles from 'styles/tournament/UserTournamentBracket.module.scss';
 
 interface UserTournamentBracketProps {
   tournamentId: number | undefined;
+  state?: string | undefined;
   queryStaleTime: number;
 }
 
 export default function UserTournamentBraket({
   tournamentId,
+  state,
   queryStaleTime,
 }: UserTournamentBracketProps) {
   const setError = useSetRecoilState(errorState);
@@ -31,6 +33,8 @@ export default function UserTournamentBraket({
   const {
     data: bracketMatches = [],
     isLoading,
+    isFetching,
+    refetch,
     isError,
   } = useQuery<Match[]>(
     ['tournamentMatches', tournamentId],
@@ -50,10 +54,20 @@ export default function UserTournamentBraket({
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <TournamentBraket
-          singleEliminationBracketMatchs={bracketMatches}
-          containerSize={size}
-        />
+        <>
+          {state === 'LIVE' && (
+            <button
+              onClick={() => refetch()}
+              className={isFetching ? styles.refetching : ''}
+            >
+              &#8635;
+            </button>
+          )}
+          <TournamentBraket
+            singleEliminationBracketMatchs={bracketMatches}
+            containerSize={size}
+          />
+        </>
       )}
     </div>
   );

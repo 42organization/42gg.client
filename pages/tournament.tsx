@@ -44,15 +44,16 @@ export default function Tournament() {
         </div>
       ) : (
         data &&
-        data?.liveTournament.length > 0 && (
+        data.liveTournament.length > 0 && (
           <>
             <TournamentCard
               {...data.liveTournament[0]}
               page='tournament/playing'
             />
             <UserTournamentBraket
-              tournamentId={data?.liveTournament[0].tournamentId}
+              tournamentId={data.liveTournament[0].tournamentId}
               queryStaleTime={60 * 1000}
+              state={data.liveTournament[0].status}
             />
           </>
         )
