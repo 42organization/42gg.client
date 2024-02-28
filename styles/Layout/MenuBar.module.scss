@@ -73,6 +73,9 @@
     padding-bottom: 3rem;
     .imageWrapper {
       background-color: rgba(244, 221, 247, 1);
+      &.recruit {
+        background-color: $recruit-yellow;
+      }
     }
   }
   .adminMenu {
