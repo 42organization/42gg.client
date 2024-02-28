@@ -1,0 +1,6 @@
+@import 'styles/common.scss';
+
+.container {
+  @include pageWrap;
+  color: $white2;
+}
