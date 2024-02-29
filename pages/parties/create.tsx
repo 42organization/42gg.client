@@ -20,12 +20,12 @@ export default function PartyCreatePage() {
 
   return flag === 'category' ? (
     <div>
-      {categorys.map((category: PartyCategory, i) => (
+      {categorys.map((category: PartyCategory) => (
         <button
           className='create-button-category'
           key={category.categoryId}
           onClick={async () => {
-            const details = await axios
+            await axios
               // .get(`/party/categorys/${categoryId}/templete`)
               .get(`/api/pingpong/party/create/templete`)
               .then(({ data }) => {
@@ -34,6 +34,7 @@ export default function PartyCreatePage() {
                 setCategoryId(category.categoryId);
               })
               .catch((err) => {
+                console.log(err);
                 alert('잘못된 요청입니다.');
                 setCategoryId(undefined);
               });
@@ -72,7 +73,9 @@ export default function PartyCreatePage() {
               router.push(`/parties/${data.partyId}`);
             })
             .catch((err) => {
+              console.log(err);
               alert('잘못된 요청입니다.');
+              router.push(`/parties`);
             });
         }}
       >
