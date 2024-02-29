@@ -11,6 +11,13 @@ export type PartyRoom = {
   createDate: Date;
 };
 
+export type PartyRoomDetail = PartyRoom & {
+  myNickname: string | null;
+  hostNickname: string;
+  roomUsers: PartyRoomUser[];
+  comments: PartyComment[];
+};
+
 export type PartyRoomUser = {
   roomUserId: number;
   nickname: string;
@@ -22,13 +29,6 @@ export type PartyComment = {
   content: string;
   isHidden: boolean;
   createDate: Date;
-};
-
-export type PartyRoomDetail = PartyRoom & {
-  myNickname: string | null;
-  hostNickname: string;
-  roomUsers: PartyRoomUser[];
-  comments: PartyComment[];
 };
 
 export type PartyCategory = {
