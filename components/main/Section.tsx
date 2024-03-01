@@ -3,6 +3,7 @@ import React from 'react';
 import { FaChevronRight } from 'react-icons/fa';
 import GameResult from 'components/game/GameResult';
 import TournamentPreview from 'components/main/TournamentPreview';
+import PartyPreview from 'components/party/PartyPreview';
 import RankListMain from 'components/rank/topRank/RankListMain';
 import styles from 'styles/main/Section.module.scss';
 
@@ -18,6 +19,7 @@ export default function Section({ sectionTitle, path }: SectionProps) {
   const pathCheck: pathType = {
     game: <GameResult />,
     rank: <RankListMain isMain={true} season={0} />,
+    party: <PartyPreview />,
     tournament: <TournamentPreview />,
   };
 
