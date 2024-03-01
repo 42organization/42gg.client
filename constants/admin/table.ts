@@ -158,4 +158,16 @@ export const tableFormat: TableFormat = {
     name: '토너먼트 생성',
     columns: ['title', 'startTime', 'endTime', 'type'],
   },
+  partyRoom: {
+    name: '파티방',
+    columns: [
+      'roomId',
+      'title',
+      'categoryName',
+      'createDate',
+      'dueDate',
+      'creatorIntraId',
+      'roomState',
+    ],
+  },
 };

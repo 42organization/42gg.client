@@ -5,10 +5,10 @@ export type PartyRoom = {
   currentPeople: number;
   minPeople: number;
   maxPeople: number;
-  isHidden: boolean;
   isOver: boolean;
   dueDate: Date;
   createDate: Date;
+  roomState: 'open' | 'start' | 'finish' | 'hidden';
 };
 
 export type PartyRoomUser = {

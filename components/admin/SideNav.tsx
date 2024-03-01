@@ -58,13 +58,13 @@ export default function SideNav() {
         <GrStatusWarning className={styles.logo} />
       </SideNavContent>
 
-      <SideNavContent
+      {/* <SideNavContent
         url={'/slot'}
         menuName={'슬롯 관리'}
         currentPath={currentPath}
       >
         <GoSettings className={styles.logo} />
-      </SideNavContent>
+      </SideNavContent> */}
 
       <SideNavContent
         url={'/games'}

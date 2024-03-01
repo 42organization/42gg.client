@@ -9,7 +9,7 @@ function Login() {
 
   useEffect(() => {
     router.replace('/');
-  }, []);
+  }, []); // 중복
 
   const onLogin = () => {
     localStorage.setItem('login', 'true');

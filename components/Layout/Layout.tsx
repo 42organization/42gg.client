@@ -25,6 +25,8 @@ type AppLayoutProps = {
 };
 
 export default function AppLayout({ children }: AppLayoutProps) {
+  return <AdminLayout>{children}</AdminLayout>;
+
   const user = useUser();
   const colorMode = useRecoilValue(colorModeState);
   const presentPath = useRouter().asPath;

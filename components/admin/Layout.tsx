@@ -15,7 +15,7 @@ const theme = createTheme({
 });
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
-  useAxiosWithToast();
+  // useAxiosWithToast();
 
   return (
     <ThemeProvider theme={theme}>
