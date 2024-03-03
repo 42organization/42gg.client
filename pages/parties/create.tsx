@@ -26,8 +26,8 @@ export default function PartyCreatePage() {
           key={category.categoryId}
           onClick={async () => {
             await axios
-              // .get(`/party/categorys/${categoryId}/templete`)
-              .get(`/api/pingpong/party/create/templete`)
+              // .get(`/party/categorys/${categoryId}/templates`)// TODO: api 경로 수정
+              .get(`/api/pingpong/party/create/templates`)
               .then(({ data }) => {
                 setGameTempletes(data);
                 setFlag('templete');
@@ -47,9 +47,9 @@ export default function PartyCreatePage() {
   ) : flag === 'templete' ? (
     <div>
       <h3> category: {categoryId}</h3>
-      <input type='text' placeholder='게임 이름' />
+      <input type='text' placeholder='검색' autoFocus />
 
-      {gameTempletes.map((templete: PartyGameTemplete, i) => (
+      {gameTempletes.map((templete: PartyGameTemplete) => (
         <div
           onClick={() => {
             setFlag('detail');
@@ -68,20 +68,23 @@ export default function PartyCreatePage() {
         onSubmit={(event) => {
           event.preventDefault();
           axios
-            .post(`/party/rooms`, { ...gameDetail, categoryId })
+            // .post(`/party/rooms`, { ...gameDetail, categoryId }) // TODO: api 경로 수정
+            .post(`/api/pingpong/party/rooms`, {
+              ...gameDetail,
+              categoryId,
+            })
             .then(({ data }) => {
-              router.push(`/parties/${data.partyId}`);
+              router.push(`/parties/${data.roomId}`);
             })
             .catch((err) => {
-              console.log(err);
               alert('잘못된 요청입니다.');
+              console.log(err);
               router.push(`/parties`);
             });
         }}
       >
         <input
           type='text'
-          placeholder='게임 이름'
           value={gameDetail.gameName}
           onChange={(event) =>
             setGameDetail({
