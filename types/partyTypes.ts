@@ -1,18 +1,25 @@
+export enum RoomStatus {
+  WAITING = 0,
+  PLAYING,
+  END,
+  HIDDEN,
+}
+
 export type PartyRoom = {
   roomId: number;
   title: string;
   categoryId: number;
   currentPeople: number;
+  content: string;
   minPeople: number;
   maxPeople: number;
-  isHidden: boolean;
-  isOver: boolean;
-  // Date는 react node에서 지원하지 않음. 따라서 string으로 변경해야함.
   dueDate: Date;
+  roomStatus: RoomStatus;
   createDate: Date;
 };
 
 export type PartyRoomDetail = PartyRoom & {
+  roomStatus: RoomStatus;
   myNickname: string | null;
   hostNickname: string;
   content: string;
