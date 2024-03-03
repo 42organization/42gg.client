@@ -2,14 +2,19 @@ export type PartyRoom = {
   roomId: number;
   title: string;
   categoryId: number;
+  content: string;
   currentPeople: number;
   minPeople: number;
   maxPeople: number;
-  isHidden: boolean;
-  isOver: boolean;
   dueDate: Date;
   createDate: Date;
+  roomStatus: 'open' | 'start' | 'finish' | 'hidden';
+  creator?: {
+    userId: number;
+    intraId: string;
+  };
 };
+b;
 
 export type PartyRoomUser = {
   roomUserId: number;

@@ -7,6 +7,10 @@ type PartyRoomProps = {
   withJoined?: boolean;
 };
 
+type Response<T> = {
+  [K in keyof T]: T[K] extends Date ? string : T[K];
+};
+
 const usePartyRoom = ({
   isAdmin = false,
   withJoined = false,
@@ -23,11 +27,20 @@ const usePartyRoom = ({
       });
   }, []);
 
+  // date타입을 어떻게 잘 받을지?
   useEffect(() => {
     const getRoomsUrl = isAdmin ? '/party/admin/rooms' : '/party/rooms';
-    mockInstance.get(getRoomsUrl).then(({ data }: { data: PartyRoom[] }) => {
-      setPartyRooms(data);
-    });
+    mockInstance
+      .get(getRoomsUrl)
+      .then(({ data }: { data: Response<PartyRoom>[] }) => {
+        setPartyRooms(
+          data.map((room) => ({
+            ...room,
+            createDate: new Date(room.createDate),
+            dueDate: new Date(room.dueDate),
+          }))
+        );
+      });
   }, [isAdmin]);
 
   useEffect(() => {
