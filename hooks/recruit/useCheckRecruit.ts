@@ -13,7 +13,7 @@ const useCheckRecruit = () => {
       setIsRecruiting(true);
     else setIsRecruiting(false);
   }, [data]);
-  return { recruitments: data?.recruitments, isRecruiting, isLoading };
+  return { isRecruiting, isLoading };
 };
 
 export default useCheckRecruit;
