@@ -1,34 +1,23 @@
-export enum RoomStatus {
-  WAITING = 0,
-  PLAYING,
-  END,
-  HIDDEN,
-}
-
 export type PartyRoom = {
   roomId: number;
   title: string;
   categoryId: number;
   content: string;
   currentPeople: number;
-  content: string;
   minPeople: number;
   maxPeople: number;
-  dueDate: Date;
-  roomStatus: RoomStatus;
-  createDate: Date;
-  roomStatus: 'open' | 'start' | 'finish' | 'hidden';
+  dueDate: string;
+  createDate: string;
+  roomStatus: 'OPEN' | 'START' | 'FINISH' | 'HIDDEN';
   creator?: {
     userId: number;
     intraId: string;
   };
 };
-b;
 
 export type PartyRoomDetail = PartyRoom & {
-  roomStatus: RoomStatus;
-  myNickname: string | null;
-  hostNickname: string;
+  myNickname: string | null; // 촉촉한 초코칩
+  hostNickname: string; // 촉촉한 초코칩
   content: string;
   roomUsers: PartyRoomUser[];
   comments: PartyComment[];
@@ -39,12 +28,14 @@ export type PartyRoomUser = {
   nickname: string;
 };
 
+// 닉네임과 아이디를 가지고 있는 api를 만들어줌. 추가 필요.
+
 export type PartyComment = {
   commentId: number;
-  nickname: string;
+  nickname: string; // 촉촉한 초코칩
   content: string;
   isHidden: boolean;
-  createDate: Date;
+  createDate: string;
 };
 
 export type PartyCategory = {
@@ -82,7 +73,7 @@ export type PartyRoomReport = {
   };
   room: PartyRoom;
   message: string;
-  createdAt: Date;
+  createdAt: string;
 };
 
 export type PartyNoshowReport = {
@@ -98,7 +89,7 @@ export type PartyNoshowReport = {
   };
   room: PartyRoom;
   message: string;
-  createdAt: Date;
+  createdAt: string;
 };
 
 export type PartyCommentReport = {
@@ -115,5 +106,5 @@ export type PartyCommentReport = {
   room: PartyRoom;
   comment: PartyComment;
   message: string;
-  createdAt: Date;
+  createdAt: string;
 };
