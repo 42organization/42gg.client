@@ -11,18 +11,18 @@ export type recruitment = {
 
 export type FormType = 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
 
-export interface IForm {
+export interface IQuestionForm {
   questionId: number;
   question: string;
   inputType: FormType;
   checkList?: { id: number; contents: string }[];
 }
 
-export interface IRecruitment {
+export interface IRecruitmentDetail {
   startDate: string;
   endDate: string;
   title: string;
   contents: string;
   generations: string;
-  form: IForm[];
+  form: IQuestionForm[];
 }
