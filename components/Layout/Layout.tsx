@@ -51,7 +51,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     );
   }
 
-  // TODO : 필요 여부 확인하기
+  // NOTE : 외부 툴을 사용해보고 외부 툴로 대체가 가능하다면 삭제 예정
   if (presentPath === '/statistics' && user.isAdmin)
     return (
       <UserLayout>
