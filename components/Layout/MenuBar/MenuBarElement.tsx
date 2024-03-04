@@ -119,18 +119,13 @@ export const MainMenu = () => {
 
   return (
     <nav className={styles.mainMenu}>
-      {/* {isRecruiting && (
+      {isRecruiting && (
         <MenuLink
           link='/recruit'
           itemName='Recruit'
           onClick={HeaderState?.resetOpenMenuBarState}
         />
-      )} */}
-      <MenuLink
-        link='/recruit'
-        itemName='Recruit'
-        onClick={HeaderState?.resetOpenMenuBarState}
-      />
+      )}
       <MenuLink
         link='/store'
         itemName='Store'

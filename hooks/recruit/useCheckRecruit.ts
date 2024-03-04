@@ -9,7 +9,7 @@ const useCheckRecruit = () => {
     return res.data;
   });
   useEffect(() => {
-    if (data.recruitments) setIsRecruiting(true);
+    if (data && data.recruitments) setIsRecruiting(true);
     else setIsRecruiting(false);
   }, [data]);
   return { isRecruiting };
