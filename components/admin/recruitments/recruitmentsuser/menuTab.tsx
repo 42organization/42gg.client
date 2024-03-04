@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import RecruitmentsHistoryList from 'components/admin/recruitments/recruitmentsHistoryList';
-import DetailRecruitUserList from 'components/admin/recruitmentsuser/detailRecruitUserList';
-import NotificationResults from 'components/admin/recruitmentsuser/notificationResults';
+import DetailRecruitUserList from 'components/admin/recruitments/recruitmentsuser/detailRecruitUserList';
+import NotificationResults from 'components/admin/recruitments/recruitmentsuser/notificationResults';
 import styles from 'styles/admin/recruitments/MenuTab.module.scss';
 
 function MenuTab({ recruitId }: { recruitId: number }) {

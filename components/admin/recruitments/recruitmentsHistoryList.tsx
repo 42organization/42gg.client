@@ -18,7 +18,7 @@ import {
   AdminTableHead,
   AdminContent,
 } from 'components/admin/common/AdminTable';
-import MenuTab from 'components/admin/recruitmentsuser/menuTab';
+import MenuTab from 'components/admin/recruitments/recruitmentsuser/menuTab';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/recruitments/Recruitments.module.scss';
 
