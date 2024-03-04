@@ -10,6 +10,19 @@ const theme = createTheme({
   typography: {
     fontFamily: "'Pretendard', sans-serif", // $common-font
   },
+  palette: {
+    primary: {
+      main: '#8EBCF9',
+      light: '#C8ECFF',
+      dark: '#6394AE',
+    },
+    // TODO : 색깔 다시 확인해보기..
+    // secondary: {
+    //   main: '#8C92AC',
+    //   light: '#DCDEE6',
+    //   dark: '#494E65',
+    // },
+  },
 });
 
 function RecruitLayout({ children }: RecruitLayoutProps) {
