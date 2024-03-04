@@ -1,14 +1,30 @@
+export enum RoomStatus {
+  WAITING = 0,
+  PLAYING,
+  END,
+  HIDDEN,
+}
+
 export type PartyRoom = {
   roomId: number;
   title: string;
   categoryId: number;
   currentPeople: number;
+  content: string;
   minPeople: number;
   maxPeople: number;
-  isHidden: boolean;
-  isOver: boolean;
   dueDate: Date;
+  roomStatus: RoomStatus;
   createDate: Date;
+};
+
+export type PartyRoomDetail = PartyRoom & {
+  roomStatus: RoomStatus;
+  myNickname: string | null;
+  hostNickname: string;
+  content: string;
+  roomUsers: PartyRoomUser[];
+  comments: PartyComment[];
 };
 
 export type PartyRoomUser = {
@@ -22,13 +38,6 @@ export type PartyComment = {
   content: string;
   isHidden: boolean;
   createDate: Date;
-};
-
-export type PartyRoomDetail = PartyRoom & {
-  myNickname: string | null;
-  hostNickname: string;
-  roomUsers: PartyRoomUser[];
-  comments: PartyComment[];
 };
 
 export type PartyCategory = {
