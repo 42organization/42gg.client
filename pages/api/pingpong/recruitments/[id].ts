@@ -75,5 +75,9 @@ const recruitments = [recruitmentDetailOne, recruitmentDetailTwo];
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query as { id: string };
 
-  res.status(200).json(recruitments[parseInt(id)]);
+  if (id === '1' || id === '2') {
+    res.status(200).json(recruitments[parseInt(id)]);
+  } else {
+    res.status(200).json({});
+  }
 }
