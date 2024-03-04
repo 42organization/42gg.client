@@ -17,7 +17,9 @@ function RecruitLayout({ children }: RecruitLayoutProps) {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className={styles.recruitLayout}>{children}</div>
+      <div className={styles.recruitLayout}>
+        <div className={styles.recruitContainer}>{children}</div>
+      </div>
     </ThemeProvider>
   );
 }
