@@ -34,6 +34,6 @@ const emptyRecruitments = {
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).json(emptyRecruitments);
-  // res.status(200).json(fullRecruitments);
+  // res.status(200).json(emptyRecruitments);
+  res.status(200).json(fullRecruitments);
 }

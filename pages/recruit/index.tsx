@@ -39,6 +39,15 @@ function Recruit() {
         animationData={recruitPingpong}
         width={'100%'}
       />
+      <div
+        style={{
+          height: '100%',
+          width: '100%',
+          border: '1px solid black',
+        }}
+      >
+        임시 목록 컴포넌트~~
+      </div>
     </div>
   );
 }
