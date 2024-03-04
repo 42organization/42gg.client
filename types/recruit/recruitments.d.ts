@@ -8,3 +8,21 @@ export type recruitment = {
   status: recruitmentStatus;
   generation: string;
 };
+
+export type FormType = 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
+
+export interface IForm {
+  questionId: number;
+  question: string;
+  inputType: FormType;
+  checkList?: { id: number; contents: string }[];
+}
+
+export interface IRecruitment {
+  startDate: string;
+  endDate: string;
+  title: string;
+  contents: string;
+  generations: string;
+  form: IForm[];
+}
