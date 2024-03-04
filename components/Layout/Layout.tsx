@@ -9,6 +9,7 @@ import Header from 'components/Layout/Header';
 import HeaderStateContext from 'components/Layout/HeaderContext';
 import MainPageProfile from 'components/Layout/MainPageProfile';
 import Megaphone from 'components/Layout/MegaPhone';
+import RecruitLayout from 'components/recruit/RecruitLayout';
 import Statistics from 'pages/statistics';
 import useAnnouncementCheck from 'hooks/Layout/useAnnouncementCheck';
 import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
@@ -40,6 +41,14 @@ export default function AppLayout({ children }: AppLayoutProps) {
   if (presentPath.includes('/admin')) {
     if (!user.isAdmin) return <AdminReject />;
     return <AdminLayout>{children}</AdminLayout>;
+  }
+
+  if (presentPath.includes('/recruit')) {
+    return (
+      <RecruitLayout>
+        <div>{children}</div>
+      </RecruitLayout>
+    );
   }
 
   // TODO : 필요 여부 확인하기

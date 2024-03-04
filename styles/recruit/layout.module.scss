@@ -1,0 +1,13 @@
+@import 'styles/common.scss';
+
+.recruitLayout {
+  display: flex;
+  width: 100vw;
+  min-width: 320px;
+  max-width: 797px;
+  height: 100vh;
+  flex-direction: column;
+  padding: 1rem 1.5rem 2rem;
+  background-color: $white2;
+  align-items: center;
+}
