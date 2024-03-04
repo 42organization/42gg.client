@@ -80,7 +80,7 @@ const MenuItem = ({ itemName, onClick }: menuItemProps) => {
     <div className={styles.menuItem} onClick={onClick}>
       <div
         className={
-          styles[`imageWrapper ${itemName === 'Recruit' ? 'recruit' : ''}`]
+          itemName === 'Recruit' ? styles.recruit : styles.imageWrapper
         }
       >
         {menuList[itemName].svg}
@@ -119,13 +119,18 @@ export const MainMenu = () => {
 
   return (
     <nav className={styles.mainMenu}>
-      {isRecruiting && (
+      {/* {isRecruiting && (
         <MenuLink
           link='/recruit'
           itemName='Recruit'
           onClick={HeaderState?.resetOpenMenuBarState}
         />
-      )}
+      )} */}
+      <MenuLink
+        link='/recruit'
+        itemName='Recruit'
+        onClick={HeaderState?.resetOpenMenuBarState}
+      />
       <MenuLink
         link='/store'
         itemName='Store'
