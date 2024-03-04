@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import {
   IrecruitUserTable,
-  IrecruitUser,
+  Iquestion,
 } from 'types/admin/adminRecruitmentsTypes';
 import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
@@ -44,20 +44,20 @@ const initialRecruitData: IrecruitTable = {
         {
           questionId: 1,
           question: '이름',
-          inputType: 'text',
+          inputType: 'TEXT',
           answer: '홍길동',
         },
         {
           questionId: 2,
           question: '나이',
-          inputType: 'number',
+          inputType: 'SINGLE_CHECK',
           answer: '20',
         },
         {
           questionId: 3,
           question: '성별',
-          inputType: 'radio',
-          checkedList: [
+          inputType: 'MULTI_CHECK',
+          checkList: [
             {
               checkId: 1,
               content: '남',
@@ -74,20 +74,20 @@ const initialRecruitData: IrecruitTable = {
         {
           questionId: 1,
           question: '이름',
-          inputType: 'text',
+          inputType: 'TEXT',
           answer: '김철수',
         },
         {
           questionId: 2,
           question: '나이',
-          inputType: 'number',
+          inputType: 'TEXT',
           answer: '25',
         },
         {
           questionId: 3,
           question: '성별',
-          inputType: 'radio',
-          checkedList: [
+          inputType: 'TEXT',
+          checkList: [
             {
               checkId: 1,
               content: '여',
@@ -104,20 +104,20 @@ const initialRecruitData: IrecruitTable = {
         {
           questionId: 1,
           question: '이름',
-          inputType: 'text',
+          inputType: 'TEXT',
           answer: '박영희',
         },
         {
           questionId: 2,
           question: '나이',
-          inputType: 'number',
+          inputType: 'TEXT',
           answer: '30',
         },
         {
           questionId: 3,
           question: '성별',
-          inputType: 'radio',
-          checkedList: [
+          inputType: 'TEXT',
+          checkList: [
             {
               checkId: 1,
               content: '여',
@@ -195,27 +195,22 @@ function DetailRecruitUserList() {
                         detailContent={recruit.status || ''}
                       />
                     </TableCell>
-                    {recruit.form?.map(
-                      (formItem: IrecruitUser, index: number) => {
-                        return (
-                          <TableCell
-                            className={styles.tableBodyItem}
-                            key={index}
-                          >
-                            <AdminContent
-                              content={
-                                formItem.answer ||
-                                formItem.checkedList
-                                  ?.map((item) => item.content)
-                                  .join(', ') ||
-                                ''
-                              }
-                              maxLen={16}
-                            />
-                          </TableCell>
-                        );
-                      }
-                    )}
+                    {recruit.form?.map((formItem: Iquestion, index: number) => {
+                      return (
+                        <TableCell className={styles.tableBodyItem} key={index}>
+                          <AdminContent
+                            content={
+                              formItem.answer ||
+                              formItem.checkList
+                                ?.map((item) => item.content)
+                                .join(', ') ||
+                              ''
+                            }
+                            maxLen={16}
+                          />
+                        </TableCell>
+                      );
+                    })}
                   </TableRow>
                 )
               )

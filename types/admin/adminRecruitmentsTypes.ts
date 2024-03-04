@@ -2,7 +2,6 @@ export interface Irecruit {
   id: number;
   startDate: string;
   endDate: string;
-  usedAt: string;
   title: string;
   status: '모집전' | '모집중' | '완료';
   generation: string;
@@ -24,16 +23,16 @@ export interface InoticationTable {
   currentPage: number;
 }
 
-export interface Ichecked {
+export interface IcheckItem {
   checkId: number;
   content: string;
 }
-export interface IrecruitUser {
+export interface Iquestion {
   questionId: number;
   question?: string;
-  inputType?: string;
+  inputType?: 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
   answer?: string;
-  checkedList?: Array<Ichecked>;
+  checkList?: Array<IcheckItem>;
 }
 
 export interface IrecruitUserTable {
@@ -41,6 +40,6 @@ export interface IrecruitUserTable {
     applicationId: number;
     intraId: string;
     status?: '합격' | '불합격' | '심사중';
-    form: Array<IrecruitUser>;
+    form: Array<Iquestion>;
   }[];
 }

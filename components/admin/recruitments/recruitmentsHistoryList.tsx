@@ -28,7 +28,6 @@ const initialRecruitData: IrecruitTable = {
       id: 1,
       startDate: '2024-04-01',
       endDate: '2024-04-30',
-      usedAt: '',
       title: '테스트 모집',
       status: '모집전',
       generation: '1기',
@@ -37,7 +36,6 @@ const initialRecruitData: IrecruitTable = {
       id: 2,
       startDate: '2024-05-01',
       endDate: '2024-05-31',
-      usedAt: '',
       title: '테스트 모집qqqqqqasdfasdasdvasvsadvasdvsadvasdvsavasvas',
       status: '모집중',
       generation: '2기',
@@ -46,7 +44,6 @@ const initialRecruitData: IrecruitTable = {
       id: 3,
       startDate: '2024-06-01',
       endDate: '2024-06-30',
-      usedAt: '',
       title: '테스트 모집',
       status: '완료',
       generation: '3기',
@@ -157,9 +154,7 @@ function RecruitmentsHistoryList() {
                                 </button>
                               ) : columnName === 'usedAt' ? (
                                 <div>
-                                  {
-                                    (recruit.usedAt = `${recruit.startDate} ~ ${recruit.endDate}`)
-                                  }
+                                  {`${recruit.startDate} ~ ${recruit.endDate}`}
                                 </div>
                               ) : (
                                 <AdminContent
