@@ -1,0 +1,7 @@
+@import './common.scss';
+
+.pageTitle {
+  @include pageTitle;
+  margin: 2rem 0;
+  text-align: center;
+}
