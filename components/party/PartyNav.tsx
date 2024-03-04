@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PartyCategory from './PartyCategory';
 import PartyPenalty from './PartyPenalty';
 import PartyReport from './PartyReport';
-import PartyRoom from './PartyRoom';
+import PartyRoomTable from './PartyRoom';
 import PartyTemplate from './PartyTemplate';
 import styles from '../../styles/admin/party/PartyNav.module.scss';
 
@@ -28,10 +28,9 @@ export default function PartyNav() {
             카테고리 관리
           </li>
         </ul>
-
         {navValue === 'penalty' && <PartyPenalty />}
         {navValue === 'report' && <PartyReport />}
-        {navValue === 'room' && <PartyRoom />}
+        {navValue === 'room' && <PartyRoomTable />}
         {navValue === 'template' && <PartyTemplate />}
         {navValue === 'category' && <PartyCategory />}
       </div>

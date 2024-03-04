@@ -9,6 +9,7 @@ export type PartyRoom = {
   roomId: number;
   title: string;
   categoryId: number;
+  content: string;
   currentPeople: number;
   content: string;
   minPeople: number;
@@ -16,7 +17,13 @@ export type PartyRoom = {
   dueDate: Date;
   roomStatus: RoomStatus;
   createDate: Date;
+  roomStatus: 'open' | 'start' | 'finish' | 'hidden';
+  creator?: {
+    userId: number;
+    intraId: string;
+  };
 };
+b;
 
 export type PartyRoomDetail = PartyRoom & {
   roomStatus: RoomStatus;
