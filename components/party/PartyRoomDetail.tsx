@@ -7,20 +7,31 @@ type PartyRoomDetailProps = { partyRoomDetail: PartyRoomDetail };
 function PartyDescription({ partyRoomDetail }: PartyRoomDetailProps) {
   return (
     <div>
-      {/*공유하기 버튼*/}
+      <button
+        onClick={() => {
+          navigator.clipboard.writeText(
+            // window.location.href // TODO: 공유하기 버튼에서 dev에서 이게 정상작동 하는지 확인할 필요가 있음
+            `http://42gg.kr/parties/${partyRoomDetail.roomId}`
+          );
+        }}
+      >
+        공유하기
+      </button>
       <h2>제목 : {partyRoomDetail.title}</h2>
-      <h3>카테고리 : {partyRoomDetail.categoryId}</h3>
-      <h3>
-        날짜 :{' '}
-        {/*한국 날짜로 수정 필요 및 남은 시간 표시 */ partyRoomDetail.dueDate}
-      </h3>
-      <h3>내용 : {partyRoomDetail.content}</h3>
-      <h3>
+      <span>카테고리 : {partyRoomDetail.categoryId}</span>
+      <span>
+        날짜 :
+        {new Date(partyRoomDetail.dueDate).getMinutes() -
+          new Date().getMinutes() +
+          `분 남음`}
+      </span>
+      <p>내용 : {partyRoomDetail.content}</p>
+      <span>
         인원 : {partyRoomDetail.currentPeople + '/' + partyRoomDetail.maxPeople}
-      </h3>
-      <h3>주최자 : {partyRoomDetail.hostNickname}</h3>
-      <h3>참여자 : {/* 호버로 인원 보여주기. */}</h3>
-      <h4>방 상황 : {partyRoomDetail.roomStatus}</h4>
+      </span>
+      <span>주최자 : {partyRoomDetail.hostNickname}</span>
+      <span>참여자 : {/* 호버로 인원 보여주기. */}</span>
+      <span>방 상황 : {partyRoomDetail.roomStatus}</span>
     </div>
   );
 }
