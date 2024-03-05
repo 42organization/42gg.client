@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { PartyRoomDetail } from 'types/partyTypes';
 import { mockInstance } from 'utils/mockAxios';
-import PartyDetail, { Hidden } from '../../../components/party/PartyRoomDetail';
+import PartyDetail from '../../../components/party/PartyRoomDetail';
 
 export default function PartyDetailPage() {
   const roomId = Number(useRouter().query.partyId);
@@ -31,8 +31,8 @@ export default function PartyDetailPage() {
   return partyRoomDetail === undefined ? (
     <div>로딩중</div>
   ) : partyRoomDetail.roomStatus !== 'HIDDEN' ? (
-    <PartyDetail {...partyRoomDetail} />
+    <PartyDetail partyRoomDetail={partyRoomDetail} />
   ) : (
-    <Hidden />
+    <div>해당 방이 존재하지 않습니다.</div>
   );
 }
