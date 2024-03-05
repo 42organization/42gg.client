@@ -1,150 +1,124 @@
-import { useEffect, useState } from 'react';
 import {
   Button,
   Checkbox,
   FormControl,
   FormControlLabel,
   FormGroup,
-  FormLabel,
   Radio,
   RadioGroup,
   TextField,
 } from '@mui/material';
-import { instance } from 'utils/axios';
-import { dateToString } from 'utils/handleTime';
-
-enum eFormType {
-  TEXT,
-  SINGLE_CHECK,
-  MULTI_CHECK,
-}
-
-interface IForm {
-  questionId: number;
-  question: string;
-  inputType: eFormType;
-  checkList?: { id: number; contents: string }[];
-}
-
-interface IRecruitment {
-  startDate: string;
-  endDate: string;
-  title: string;
-  contents: string;
-  generations: string;
-  form: IForm[];
-}
+import { ICheck, IQuestionForm } from 'types/recruit/recruitments';
+import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
+import applicationStyle from 'styles/recruit/application.module.scss';
 
 export default function ApplicationForm({ id }: { id: number }) {
-  const [recruitement, setRecruitment] = useState<IRecruitment>({
-    startDate: '2024-03-04 12:12',
-    endDate: '2024-03-04 14:12',
-    title: '42GG 모집',
-    contents: '지원서',
-    generations: '7기',
-    form: [
-      {
-        questionId: 1,
-        question: '지원동기를 적어주세요',
-        inputType: eFormType.TEXT,
-      },
-      {
-        questionId: 2,
-        question: '본인의 기수를 선택해주세요',
-        inputType: eFormType.SINGLE_CHECK,
-        checkList: [
-          { id: 1, contents: '1' },
-          { id: 2, contents: '2' },
-          { id: 3, contents: '3' },
-        ],
-      },
-      {
-        questionId: 3,
-        question: '기술스택을 선택해주세요',
-        inputType: eFormType.MULTI_CHECK,
-        checkList: [
-          { id: 1, contents: 'C' },
-          { id: 2, contents: 'C++' },
-          { id: 3, contents: 'C#' },
-        ],
-      },
-    ],
-  });
+  const { data, isLoading } = useRecruitDetail({ id });
 
-  const getRecruitment = async (id: number) => {
-    try {
-      const res = await instance.get(`/recruitments/${id}`);
-      setRecruitment({
-        ...res.data,
-        startDate: dateToString(res.data.startDate),
-        endDate: dateToString(res.data.endDate),
-      });
-    } catch (e) {
-      console.error('HJ00');
-    }
-  };
+  if (isLoading) {
+    return <div>로딩중...</div>;
+  }
 
-  // useEffect(() => {
-  //     getRecruitment(id);
-  // }, [])
+  if (!data || Object.keys(data).length === 0) {
+    return <div>지원서 항목이 없습니다</div>;
+  }
 
-  // title
-  // 객관식 질문
-  // 주관식 질문
   return (
     <div>
-      <div>{recruitement.title}</div>
-
-      <div>
-        {recruitement.form.map((form, index) => (
-          <div key={index}>
-            <div>{form.question}</div>
-            {form.inputType === eFormType.TEXT ? (
-              <TextForm />
-            ) : form.inputType === eFormType.SINGLE_CHECK ? (
-              <SingleCheckForm />
-            ) : form.inputType === eFormType.MULTI_CHECK ? (
-              <MultiCheckForm />
+      <div className={applicationStyle.titleContainer}>{data.title}</div>
+      <div className={applicationStyle.bodyContainer}>
+        {data.form.map((form: IQuestionForm, index: number) => (
+          <div className={applicationStyle.questionContainer} key={index}>
+            {form.inputType === 'TEXT' ? (
+              <TextForm question={form.question} />
+            ) : form.inputType === 'SINGLE_CHECK' ? (
+              <SingleCheckForm
+                question={form.question}
+                checkList={form.checkList}
+              />
+            ) : form.inputType === 'MULTI_CHECK' ? (
+              <MultiCheckForm
+                question={form.question}
+                checkList={form.checkList}
+              />
             ) : (
               <div>유효하지 않은 폼</div>
             )}
           </div>
         ))}
       </div>
-      <div>
-        <Button variant='contained'>제출하기</Button>
+      <div className={applicationStyle.btnContainer}>
+        <Button
+          className={applicationStyle.submitBtn}
+          sx={{ borderRadius: '1rem', fontSize: '1.5rem' }}
+          variant='contained'
+        >
+          제출하기
+        </Button>
       </div>
     </div>
   );
 }
 
-function TextForm() {
-  return <TextField id='filled-basic' label='Filled' variant='filled' />;
+function TextForm({ question }: { question: string }) {
+  return (
+    <div>
+      <div className={applicationStyle.questionText}>{question}</div>
+      <TextField id='filled-basic' label='Filled' variant='filled' />
+    </div>
+  );
 }
 
-function SingleCheckForm() {
+function SingleCheckForm({
+  question,
+  checkList,
+}: {
+  question: string;
+  checkList: ICheck[] | undefined;
+}) {
   return (
     <FormControl>
-      <FormLabel id='radio-buttons-group-label'>질문 내용</FormLabel>
+      <div className={applicationStyle.questionText}>{question}</div>
       <RadioGroup
         aria-labelledby='radio-buttons-group-label'
-        defaultValue={'test3'}
         name='radio-buttons-group'
       >
-        <FormControlLabel value='test1' control={<Radio />} label='test1' />
-        <FormControlLabel value='test2' control={<Radio />} label='test2' />
-        <FormControlLabel value='test3' control={<Radio />} label='test3' />
+        {checkList?.map((check: ICheck) => {
+          return (
+            <FormControlLabel
+              key={check.id}
+              value={check.contents}
+              control={<Radio />}
+              label={check.contents}
+            />
+          );
+        })}
       </RadioGroup>
     </FormControl>
   );
 }
 
-function MultiCheckForm() {
+function MultiCheckForm({
+  question,
+  checkList,
+}: {
+  question: string;
+  checkList: ICheck[] | undefined;
+}) {
   return (
-    <FormGroup>
-      <FormControlLabel control={<Checkbox defaultChecked />} label='one' />
-      <FormControlLabel control={<Checkbox defaultChecked />} label='two' />
-      <FormControlLabel control={<Checkbox defaultChecked />} label='three' />
-    </FormGroup>
+    <div>
+      <div className={applicationStyle.questionText}>{question}</div>
+      <FormGroup>
+        {checkList?.map((check: ICheck) => {
+          return (
+            <FormControlLabel
+              key={check.id}
+              control={<Checkbox />}
+              label={check.contents}
+            />
+          );
+        })}
+      </FormGroup>
+    </div>
   );
 }
