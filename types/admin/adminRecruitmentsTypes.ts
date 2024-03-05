@@ -1,24 +1,31 @@
 export interface Irecruit {
-  id?: number;
+  id: number;
   startDate: string;
   endDate: string;
   title: string;
-  content: string;
-  status?: '모집전' | '모집중' | '완료';
+  status: '모집전' | '모집중' | '완료';
+  generation: string;
+}
+
+export interface IrecruitEditInfo {
+  id: number | null;
+  startDate: string;
+  endDate: string;
+  title: string;
   generation: string;
   form: Array<Iquestion>;
 }
 
 export interface Iquestion {
-  questionId?: number;
+  questionId: number;
   question: string;
   inputType: 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
   answer?: string;
-  checkList?: Array<IcheckItem>;
+  checkList: Array<IcheckItem>;
 }
 
 export interface IcheckItem {
-  checkId?: number;
+  checkId: number;
   content: string;
 }
 
