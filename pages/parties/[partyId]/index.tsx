@@ -16,7 +16,6 @@ export default function PartyDetailPage() {
 
   const fetchRoomDetail = async () => {
     try {
-      // instance 사용할  것
       mockInstance
         // .get(`/party/rooms/${roomId}`) // TODO: api 경로 수정
         .get(`/party/rooms/${roomId}`)
