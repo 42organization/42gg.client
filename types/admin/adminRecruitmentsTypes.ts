@@ -21,7 +21,7 @@ export interface Iquestion {
   question: string;
   inputType: 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
   answer?: string;
-  checkList: Array<IcheckItem>;
+  checkList?: Array<IcheckItem>;
 }
 
 export interface IcheckItem {
