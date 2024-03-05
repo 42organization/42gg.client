@@ -1,6 +1,12 @@
 .container {
   display: flex;
   flex-direction: column;
+  padding-right: 10%;
+  padding-left: 10%;
   justify-content: flex-start;
   align-items: center;
+}
+
+.container > * {
+  margin-top: 0.5rem;
 }

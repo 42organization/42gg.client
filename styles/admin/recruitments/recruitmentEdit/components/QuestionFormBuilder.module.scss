@@ -1,0 +1,48 @@
+@import 'styles/common.scss';
+
+.mainContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.questionContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  border: 1px solid #000000;
+  justify-content: flex-start;
+}
+
+.questionWrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  justify-content: space-between;
+  align-items: flex-start;
+  input[type='text'] {
+    width: 80%;
+  }
+
+  select {
+    width: 18%;
+  }
+}
+
+.editConsole {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  z-index: 9999;
+  padding: 10px;
+  color: #fff;
+  background-color: #333;
+  transform: translate(0, -50%);
+}
