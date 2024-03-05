@@ -19,7 +19,7 @@ export default function PartyDetailPage() {
       // instance 사용할  것
       mockInstance
         // .get(`/party/rooms/${roomId}`) // TODO: api 경로 수정
-        .get(`/api/pingpong/party/rooms/${roomId}`)
+        .get(`/party/rooms/${roomId}`)
         .then(({ data }) => {
           setPartyRoomDetail(data);
         });
