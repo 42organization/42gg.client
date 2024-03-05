@@ -59,12 +59,23 @@ const recruitmentDetailTwo = {
     },
     {
       questionId: 3,
-      question: '못 먹는 음식 선택해주세요',
+      question: '못 먹는 음식을 선택해주세요',
       inputType: 'MULTI_CHECK',
       checkList: [
         { id: 1, contents: '오이' },
         { id: 2, contents: '가지' },
         { id: 3, contents: '복숭아' },
+      ],
+    },
+    {
+      questionId: 4,
+      question: '좋아하는 동물을 선택해주세요',
+      inputType: 'MULTI_CHECK',
+      checkList: [
+        { id: 1, contents: '병아리' },
+        { id: 2, contents: '호랑이' },
+        { id: 3, contents: '판다' },
+        { id: 3, contents: '기린' },
       ],
     },
   ],
@@ -76,7 +87,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query as { id: string };
 
   if (id === '1' || id === '2') {
-    res.status(200).json(recruitments[parseInt(id)]);
+    res.status(200).json(recruitments[parseInt(id) - 1]);
   } else {
     res.status(200).json({});
   }
