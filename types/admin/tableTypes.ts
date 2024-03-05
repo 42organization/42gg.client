@@ -20,6 +20,7 @@ export type TableName =
   | 'tournamentCreate'
   | 'recruitList'
   | 'recruitUserList'
+  | 'recruitEditTitle'
   | 'notificationList';
 
 export type EtcType = 'button' | 'toggle';
