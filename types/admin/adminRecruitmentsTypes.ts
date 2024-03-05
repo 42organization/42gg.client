@@ -1,11 +1,27 @@
 export interface Irecruit {
-  id: number;
+  id?: number;
   startDate: string;
   endDate: string;
   title: string;
-  status: '모집전' | '모집중' | '완료';
+  content: string;
+  status?: '모집전' | '모집중' | '완료';
   generation: string;
+  form: Array<Iquestion>;
 }
+
+export interface Iquestion {
+  questionId?: number;
+  question: string;
+  inputType: 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
+  answer?: string;
+  checkList?: Array<IcheckItem>;
+}
+
+export interface IcheckItem {
+  checkId?: number;
+  content: string;
+}
+
 export interface Inotication {
   id: number;
   intraId: string;
@@ -21,18 +37,6 @@ export interface InoticationTable {
   noticationList: Array<Inotication>;
   totalPage: number;
   currentPage: number;
-}
-
-export interface IcheckItem {
-  checkId: number;
-  content: string;
-}
-export interface Iquestion {
-  questionId: number;
-  question?: string;
-  inputType?: 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
-  answer?: string;
-  checkList?: Array<IcheckItem>;
 }
 
 export interface IrecruitUserTable {
