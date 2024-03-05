@@ -2,27 +2,9 @@ import { useRouter } from 'next/router';
 import { PartyRoomDetail } from 'types/partyTypes';
 import { mockInstance } from 'utils/mockAxios';
 
-type ButtonProps = { roomId: number };
 type PartyRoomDetailProps = { partyRoomDetail: PartyRoomDetail };
 
-export default function PartyDetail(partyRoomDetail: PartyRoomDetail) {
-  //TODO : finish에 댓글은 보여주고 입력만 보여주지 않기.
-  return (
-    <div>
-      <CommonDetail {...partyRoomDetail} />
-      {partyRoomDetail.roomStatus !== 'FINISH' && (
-        <PartyButtton partyRoomDetail={partyRoomDetail} />
-      )}
-      <PartyComment partyRoomDetail={partyRoomDetail} />
-      {partyRoomDetail.myNickname &&
-        partyRoomDetail.roomStatus !== 'FINISH' && (
-          <InputBar roomId={partyRoomDetail.roomId} />
-        )}
-    </div>
-  );
-}
-
-function CommonDetail(partyRoomDetail: PartyRoomDetail) {
+function PartyDescription({ partyRoomDetail }: PartyRoomDetailProps) {
   return (
     <div>
       {/*공유하기 버튼*/}
@@ -44,22 +26,57 @@ function CommonDetail(partyRoomDetail: PartyRoomDetail) {
 }
 
 function PartyButtton({ partyRoomDetail }: PartyRoomDetailProps) {
-  return (
+  const router = useRouter();
+  // TODO: 호스트도 나가기 버튼 필요.
+  return partyRoomDetail.roomStatus !== 'FINISH' ? (
     <div>
       {partyRoomDetail.hostNickname === partyRoomDetail.myNickname ? (
         partyRoomDetail.minPeople <= partyRoomDetail.currentPeople && (
-          <StartButton roomId={partyRoomDetail.roomId} />
+          <button
+            onClick={async () => {
+              mockInstance
+                .post(`/party/rooms/${partyRoomDetail.roomId}/start`)
+                .then(() => {
+                  router.push(`/parties/${partyRoomDetail.roomId}`);
+                });
+            }}
+          >
+            시작
+          </button>
         )
       ) : partyRoomDetail.myNickname ? (
-        <CancelButton roomId={partyRoomDetail.roomId} />
+        <button
+          onClick={async () => {
+            mockInstance
+              .patch(`/party/rooms/${partyRoomDetail.roomId}`)
+              .then(() => {
+                router.push(`/parties/${partyRoomDetail.roomId}`);
+              });
+          }}
+        >
+          취소하기
+        </button>
       ) : (
-        <JoinButton roomId={partyRoomDetail.roomId} />
+        <button
+          onClick={async () => {
+            mockInstance
+              .post(`/party/rooms/${partyRoomDetail.roomId}/join`)
+              .then(() => {
+                router.push(`/parties/${partyRoomDetail.roomId}`);
+              });
+          }}
+        >
+          참여하기
+        </button>
       )}
     </div>
+  ) : (
+    <div></div>
   );
 }
 
 function PartyComment({ partyRoomDetail }: PartyRoomDetailProps) {
+  const router = useRouter();
   return (
     <div>
       <h3>댓글</h3>
@@ -74,71 +91,31 @@ function PartyComment({ partyRoomDetail }: PartyRoomDetailProps) {
           </div>
         )
       )}
+      {partyRoomDetail.myNickname &&
+        partyRoomDetail.roomStatus !== 'FINISH' && (
+          <form
+            onSubmit={async () => {
+              mockInstance
+                .post(`/party/rooms/${partyRoomDetail.roomId}/comments`)
+                .then(() => {
+                  router.push(`/parties/${partyRoomDetail.roomId}`);
+                });
+            }}
+          >
+            <input type='text' />
+            <button type='submit'>댓글</button>
+          </form>
+        )}
     </div>
   );
 }
 
-function StartButton({ roomId }: ButtonProps) {
-  const router = useRouter();
+export default function PartyDetail({ partyRoomDetail }: PartyRoomDetailProps) {
   return (
-    <button
-      onClick={async () => {
-        mockInstance.post(`/party/rooms/${roomId}/start`).then(() => {
-          router.push(`/parties/${roomId}`);
-        });
-      }}
-    >
-      시작
-    </button>
+    <div>
+      <PartyDescription partyRoomDetail={partyRoomDetail} />
+      <PartyButtton partyRoomDetail={partyRoomDetail} />
+      <PartyComment partyRoomDetail={partyRoomDetail} />
+    </div>
   );
-}
-
-function CancelButton({ roomId }: ButtonProps) {
-  const router = useRouter();
-  return (
-    <button
-      onClick={async () => {
-        mockInstance.patch(`/party/rooms/${roomId}`).then(() => {
-          router.push(`/parties/${roomId}`);
-        });
-      }}
-    >
-      취소하기
-    </button>
-  );
-}
-
-function JoinButton({ roomId }: ButtonProps) {
-  const router = useRouter();
-  return (
-    <button
-      onClick={async () => {
-        mockInstance.post(`/party/rooms/${roomId}/join`).then(() => {
-          router.push(`/parties/${roomId}`);
-        });
-      }}
-    >
-      참여하기
-    </button>
-  );
-}
-
-function InputBar({ roomId }: ButtonProps) {
-  const router = useRouter();
-  return (
-    <form
-      onSubmit={async () => {
-        mockInstance.post(`/party/rooms/${roomId}/comments`).then(() => {
-          router.push(`/parties/${roomId}`);
-        });
-      }}
-    >
-      <input type='text' />
-      <button type='submit'>댓글</button>
-    </form>
-  );
-}
-
-export function Hidden() {
-  return <div>해당 방이 존재하지 않습니다.</div>;
 }
