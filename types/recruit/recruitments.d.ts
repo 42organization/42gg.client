@@ -11,11 +11,16 @@ export type recruitment = {
 
 export type FormType = 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
 
+export interface ICheck {
+  id: number;
+  contents: string;
+}
+
 export interface IQuestionForm {
   questionId: number;
   question: string;
   inputType: FormType;
-  checkList?: { id: number; contents: string }[];
+  checkList?: ICheck[];
 }
 
 export interface IRecruitmentDetail {
