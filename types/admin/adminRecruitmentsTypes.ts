@@ -8,16 +8,16 @@ export interface Irecruit {
 }
 
 export interface IrecruitEditInfo {
-  id: number | null;
   startDate: string;
   endDate: string;
   title: string;
+  content: string;
   generation: string;
   form: Array<Iquestion>;
 }
 
 export interface Iquestion {
-  questionId: number;
+  questionId?: number | null;
   question: string;
   inputType: 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
   answer?: string;
@@ -25,7 +25,7 @@ export interface Iquestion {
 }
 
 export interface IcheckItem {
-  checkId: number;
+  checkId?: number;
   content: string;
 }
 

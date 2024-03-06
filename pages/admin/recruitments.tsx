@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import RecruitmentsMain from 'components/admin/recruitments/RecruitmentsMain';
 
 export default function Recruitments() {
