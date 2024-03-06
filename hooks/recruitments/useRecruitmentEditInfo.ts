@@ -31,6 +31,35 @@ export default function useRecruitmentEditInfo(
     setRecruitmentEditInfo((prev) => ({ ...prev, content: content }));
   };
 
+  const setQuestionContent = (questionIdx: number, content: string) => {
+    const updatedForm = [...recruitmentEditInfo.form];
+    const question = updatedForm[questionIdx];
+    question.question = content;
+
+    setRecruitmentEditInfo({
+      ...recruitmentEditInfo,
+      form: updatedForm,
+    });
+  };
+
+  const setCheckItemContent = (
+    questionIdx: number,
+    checkItemIdx: number,
+    content: string
+  ) => {
+    const updatedForm = [...recruitmentEditInfo.form];
+    const question = updatedForm[questionIdx];
+
+    if (!question.checkList) return;
+    const checkItem = question.checkList[checkItemIdx];
+    checkItem.content = content;
+
+    setRecruitmentEditInfo({
+      ...recruitmentEditInfo,
+      form: updatedForm,
+    });
+  };
+
   const addEmptyQuestion = (questionIdx: number, inputType: string) => {
     const updatedForm = [...recruitmentEditInfo.form];
     const question = makeEmptyQuestion(inputType);
@@ -68,6 +97,7 @@ export default function useRecruitmentEditInfo(
   };
 
   const changeQuestionInputType = (questionIdx: number, inputType: string) => {
+    console.log(questionIdx, inputType);
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
 
@@ -119,6 +149,8 @@ export default function useRecruitmentEditInfo(
     setEndDate,
     setGeneration,
     setContent,
+    setQuestionContent,
+    setCheckItemContent,
     addEmptyQuestion,
     addCheckItemToQuestion,
     changeQuestionInputType,

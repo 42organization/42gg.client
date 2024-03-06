@@ -5,25 +5,31 @@ function TextInput() {
   return <div>TextInput</div>;
 }
 
-function CheckBoxInput() {
-  return <div>CheckBoxInput</div>;
+function MultiCheckInput() {
+  return <div>MultiCheckInput</div>;
 }
 
-function RadioInput() {
-  return <div>RadioButtonInput</div>;
+function SingleCheckInput() {
+  return <div>SingleCheckInput</div>;
 }
 
 interface QuestionProps {
-  key: number;
+  idx: number;
   question: Iquestion;
+  setQuestionContent: (questionIdx: number, content: string) => void;
+  setCheckItemContent: (
+    questionIdx: number,
+    checkItemIdx: number,
+    content: string
+  ) => void;
   changeQuestionInputType: (questionIdx: number, inputType: string) => void;
 }
 
-function Question({ key, question, changeQuestionInputType }: QuestionProps) {
+function Question({ idx, question, changeQuestionInputType }: QuestionProps) {
   const selectChangehandler = ({
     target,
   }: React.ChangeEvent<HTMLSelectElement>) => {
-    changeQuestionInputType(key, target.value);
+    changeQuestionInputType(idx, target.value);
   };
 
   return (
@@ -42,8 +48,8 @@ function Question({ key, question, changeQuestionInputType }: QuestionProps) {
       </div>
       <div>
         {question.inputType === 'TEXT' && <TextInput />}
-        {question.inputType === 'SINGLE_CHECK' && <CheckBoxInput />}
-        {question.inputType === 'MULTI_CHECK' && <RadioInput />}
+        {question.inputType === 'SINGLE_CHECK' && <SingleCheckInput />}
+        {question.inputType === 'MULTI_CHECK' && <MultiCheckInput />}
       </div>
     </div>
   );
@@ -51,6 +57,12 @@ function Question({ key, question, changeQuestionInputType }: QuestionProps) {
 
 interface QuestionFormBuilderProps {
   form: Iquestion[];
+  setQuestionContent: (questionIdx: number, content: string) => void;
+  setCheckItemContent: (
+    questionIdx: number,
+    checkItemIdx: number,
+    content: string
+  ) => void;
   addEmptyQuestion: (questionIdx: number, inputType: string) => void;
   addCheckItemToQuestion: (questionIdx: number) => void;
   changeQuestionInputType: (questionIdx: number, inputType: string) => void;
@@ -58,6 +70,8 @@ interface QuestionFormBuilderProps {
 
 export default function QuestionFormBuilder({
   form,
+  setQuestionContent,
+  setCheckItemContent,
   addEmptyQuestion,
   addCheckItemToQuestion,
   changeQuestionInputType,
@@ -72,7 +86,10 @@ export default function QuestionFormBuilder({
           return (
             <Question
               key={idx}
+              idx={idx}
               question={question}
+              setQuestionContent={setQuestionContent}
+              setCheckItemContent={setCheckItemContent}
               changeQuestionInputType={changeQuestionInputType}
             />
           );
