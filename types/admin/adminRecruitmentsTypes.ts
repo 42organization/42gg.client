@@ -1,7 +1,7 @@
 export interface Irecruit {
   id: number;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   title: string;
   status: '모집전' | '모집중' | '완료';
   generation: string;

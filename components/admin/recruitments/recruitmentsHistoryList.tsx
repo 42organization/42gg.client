@@ -77,83 +77,79 @@ function RecruitmentsHistoryList() {
     getRecruitHandler();
   }, [currentPage]);
 
+  if (view === 'detail') {
+    return <MenuTab recruitId={selectedRecruit} />;
+  }
+
+  const renderTableCell = (recruit: Irecruit, columnName: string) => {
+    if (columnName === 'detailRecruitment') {
+      return <button className={styles.deleteBtn}>상세보기</button>;
+    }
+
+    if (columnName === 'detaillUser') {
+      return (
+        <button
+          className={styles.deleteBtn}
+          onClick={() => recruitmentApplicant(recruit.id)}
+        >
+          지원자 보기
+        </button>
+      );
+    }
+
+    if (columnName === 'usedAt') {
+      return (
+        <div>
+          {`${dateToStringShort(
+            new Date(recruit.startDate)
+          )} ~ ${dateToStringShort(new Date(recruit.endDate))}`}
+        </div>
+      );
+    }
+
+    return (
+      <AdminContent
+        content={recruit[columnName as keyof Irecruit]?.toString()}
+        maxLen={16}
+        detailTitle={recruit.id.toString()}
+        detailContent={recruit.title}
+      />
+    );
+  };
+
   return (
     <>
-      {view === 'detail' ? (
-        <MenuTab recruitId={selectedRecruit} />
-      ) : (
-        <>
-          <TableContainer className={styles.tableContainer} component={Paper}>
-            <Table className={styles.table} aria-label='customized table'>
-              <AdminTableHead tableName={'recruitment'} table={tableTitle} />
-              <TableBody className={styles.tableBody}>
-                {recruitData.recruitment.length > 0 ? (
-                  recruitData.recruitment.map((recruit: Irecruit) => (
-                    <TableRow className={styles.tableRow} key={recruit.id}>
-                      {tableFormat['recruitment'].columns.map(
-                        (columnName: string, index: number) => {
-                          return (
-                            <TableCell
-                              className={styles.tableBodyItem}
-                              key={index}
-                            >
-                              {columnName === 'detailRecruitment' ? (
-                                <button
-                                  className={styles.deleteBtn}
-                                  // onClick={() => detailRecruit(recruit)}
-                                >
-                                  상세보기
-                                </button>
-                              ) : columnName === 'detaillUser' ? (
-                                <button
-                                  className={styles.deleteBtn}
-                                  onClick={() =>
-                                    recruitmentApplicant(recruit.id)
-                                  }
-                                >
-                                  지원자 보기
-                                </button>
-                              ) : columnName === 'usedAt' ? (
-                                <div>
-                                  {`${dateToStringShort(
-                                    new Date(recruit.startDate)
-                                  )} ~ ${dateToStringShort(
-                                    new Date(recruit.endDate)
-                                  )}`}
-                                </div>
-                              ) : (
-                                <AdminContent
-                                  content={recruit[
-                                    columnName as keyof Irecruit
-                                  ]?.toString()}
-                                  maxLen={16}
-                                  detailTitle={recruit.id.toString()}
-                                  detailContent={recruit.title}
-                                />
-                              )}
-                            </TableCell>
-                          );
-                        }
-                      )}
-                    </TableRow>
-                  ))
-                ) : (
-                  <AdminEmptyItem content={'공고 지원 내역이 비어있습니다'} />
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <div className={styles.pageNationContainer}>
-            <PageNation
-              curPage={recruitData.currentPage}
-              totalPages={recruitData.totalPage}
-              pageChangeHandler={(pageNumber: number) => {
-                setCurrentPage(pageNumber);
-              }}
-            />
-          </div>
-        </>
-      )}
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='customized table'>
+          <AdminTableHead tableName={'recruitment'} table={tableTitle} />
+          <TableBody className={styles.tableBody}>
+            {recruitData.recruitment.length > 0 ? (
+              recruitData.recruitment.map((recruit: Irecruit) => (
+                <TableRow className={styles.tableRow} key={recruit.id}>
+                  {tableFormat['recruitment'].columns.map(
+                    (columnName: string, index: number) => (
+                      <TableCell className={styles.tableBodyItem} key={index}>
+                        {renderTableCell(recruit, columnName)}
+                      </TableCell>
+                    )
+                  )}
+                </TableRow>
+              ))
+            ) : (
+              <AdminEmptyItem content={'공고 지원자 내역이 비어있습니다'} />
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <div className={styles.pageNationContainer}>
+        <PageNation
+          curPage={recruitData.currentPage}
+          totalPages={recruitData.totalPage}
+          pageChangeHandler={(pageNumber: number) => {
+            setCurrentPage(pageNumber);
+          }}
+        />
+      </div>
     </>
   );
 }

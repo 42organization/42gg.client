@@ -61,7 +61,6 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
       // );
       const id = recruitId;
       const res = await mockInstance.get(`/admin/recruitments/${id}`);
-      console.log(res);
       setRecruitUserData({
         applications: res.data.applications,
         totalPage: res.data.totalPages,
@@ -81,49 +80,55 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
     getRecruitUserHandler();
   }, [currentPage]);
 
+  const renderTableCell = (
+    recruit: IrecruitUserTable['applications'][number]
+  ) => {
+    return (
+      <TableRow className={styles.tableRow} key={recruit.applicationId}>
+        <TableCell className={styles.tableBodyItem}>
+          <AdminContent
+            content={recruit.intraId || ''}
+            maxLen={16}
+            detailTitle={recruit.applicationId.toString()}
+            detailContent={recruit.status || ''}
+          />
+        </TableCell>
+        {recruit.form?.map((formItem: Iquestion, index: number) => (
+          <TableCell className={styles.tableBodyItem} key={index}>
+            <AdminContent
+              content={
+                formItem.answer ||
+                formItem.checkList?.map((item) => item.content).join(', ') ||
+                ''
+              }
+              maxLen={16}
+            />
+          </TableCell>
+        ))}
+      </TableRow>
+    );
+  };
+
+  if (!recruitUserData.applications.length) {
+    return (
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='customized table'>
+          <AdminTableHead tableName={'recruitUserList'} table={tableTitle} />
+          <TableBody className={styles.tableBody}>
+            <AdminEmptyItem content={'공고 지원자 내역이 비어있습니다'} />
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  }
+
   return (
     <>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <AdminTableHead tableName={'recruitUserList'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {recruitUserData.applications.length > 0 ? (
-              recruitUserData.applications.map(
-                (recruit: IrecruitUserTable['applications'][number]) => (
-                  <TableRow
-                    className={styles.tableRow}
-                    key={recruit.applicationId}
-                  >
-                    <TableCell className={styles.tableBodyItem}>
-                      <AdminContent
-                        content={recruit.intraId || ''}
-                        maxLen={16}
-                        detailTitle={recruit.applicationId.toString()}
-                        detailContent={recruit.status || ''}
-                      />
-                    </TableCell>
-                    {recruit.form?.map((formItem: Iquestion, index: number) => {
-                      return (
-                        <TableCell className={styles.tableBodyItem} key={index}>
-                          <AdminContent
-                            content={
-                              formItem.answer ||
-                              formItem.checkList
-                                ?.map((item) => item.content)
-                                .join(', ') ||
-                              ''
-                            }
-                            maxLen={16}
-                          />
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                )
-              )
-            ) : (
-              <AdminEmptyItem content={'공고 지원자 내역이 비어있습니다'} />
-            )}
+            {recruitUserData.applications.map(renderTableCell)}
           </TableBody>
         </Table>
       </TableContainer>
