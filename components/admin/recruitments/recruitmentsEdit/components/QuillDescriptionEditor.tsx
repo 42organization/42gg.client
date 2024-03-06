@@ -22,13 +22,15 @@ export default function QuillDescriptionEditor({
   };
 
   return (
-    <Quill
-      className={styles.quillEditor}
-      modules={QUILL_EDIT_MODULES}
-      formats={QUILL_FORMATS}
-      theme='snow'
-      value={content}
-      onChange={quillChangeHandler}
-    />
+    <div className={styles.quillEditorWrapper}>
+      <Quill
+        className={styles.quillEditor}
+        modules={QUILL_EDIT_MODULES}
+        formats={QUILL_FORMATS}
+        theme='snow'
+        value={content}
+        onChange={quillChangeHandler}
+      />
+    </div>
   );
 }

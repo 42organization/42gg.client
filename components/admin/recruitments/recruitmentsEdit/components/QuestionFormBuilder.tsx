@@ -1,8 +1,35 @@
+import React from 'react';
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { Iquestion } from 'types/admin/adminRecruitmentsTypes';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/QuestionFormBuilder.module.scss';
 
 function TextInput() {
-  return <div>TextInput</div>;
+  return (
+    <TextField
+      required
+      id='question'
+      name='question'
+      label='질문'
+      fullWidth
+      size='small'
+      // autoComplete='shipping address-line1'
+      // variant='standard'
+      onChange={(e) => {
+        console.log(e.target.value);
+      }}
+    />
+  );
 }
 
 function MultiCheckInput() {
@@ -26,31 +53,50 @@ interface QuestionProps {
 }
 
 function Question({ idx, question, changeQuestionInputType }: QuestionProps) {
-  const selectChangehandler = ({
-    target,
-  }: React.ChangeEvent<HTMLSelectElement>) => {
+  const selectChangehandler = ({ target }: SelectChangeEvent) => {
     changeQuestionInputType(idx, target.value);
   };
 
   return (
     <div className={styles.questionContainer}>
-      <div className={styles.questionWrapper}>
-        <input type='text' placeholder='질문' />
-        <select
-          name='type'
-          value={question.inputType}
-          onChange={selectChangehandler}
-        >
-          <option value='TEXT'>TEXT</option>
-          <option value='SINGLE_CHECK'>SINGLE_CHECK</option>
-          <option value='MULTI_CHECK'>MULTI_CHECK</option>
-        </select>
-      </div>
-      <div>
-        {question.inputType === 'TEXT' && <TextInput />}
-        {question.inputType === 'SINGLE_CHECK' && <SingleCheckInput />}
-        {question.inputType === 'MULTI_CHECK' && <MultiCheckInput />}
-      </div>
+      <Grid container spacing={1}>
+        <Grid item xs={9}>
+          <TextField
+            required
+            name='question'
+            label='질문'
+            fullWidth
+            size='small'
+            // autoComplete='shipping address-line1'
+            // variant='standard'
+            onChange={(e) => {
+              console.log(e.target.value);
+            }}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <FormControl sx={{ m: 0, minWidth: 190 }} size='small'>
+            <InputLabel>질문 유형</InputLabel>
+            <Select
+              value={question.inputType}
+              label='질문 유형'
+              onChange={selectChangehandler}
+            >
+              <MenuItem value={'TEXT'}>TEXT</MenuItem>
+              <MenuItem value={'SINGLE_CHECK'}>SINGLE_CHECK</MenuItem>
+              <MenuItem value={'MULTI_CHECK'}>MULTI_CHECK</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={4}>
+          {/* {question.inputType === 'TEXT' && <TextInput />} */}
+          {question.inputType === 'SINGLE_CHECK' && <SingleCheckInput />}
+          {question.inputType === 'MULTI_CHECK' && <MultiCheckInput />}
+        </Grid>
+        {/* <Grid item xs={8}>
+          <Item>xs=8</Item>
+        </Grid> */}
+      </Grid>
     </div>
   );
 }
