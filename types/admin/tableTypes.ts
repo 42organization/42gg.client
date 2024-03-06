@@ -18,7 +18,7 @@ export type TableName =
   | 'coinPolicyHistory'
   | 'tournament'
   | 'tournamentCreate'
-  | 'recruitList'
+  | 'recruitment'
   | 'recruitUserList'
   | 'notificationList';
 

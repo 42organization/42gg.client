@@ -9,8 +9,9 @@ import {
   TableRow,
 } from '@mui/material';
 import { Irecruit, IrecruitTable } from 'types/admin/adminRecruitmentsTypes';
-import { instanceInManage } from 'utils/axios';
+// import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
+import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
@@ -22,37 +23,6 @@ import MenuTab from 'components/admin/recruitments/recruitmentsuser/menuTab';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/recruitments/Recruitments.module.scss';
 
-const initialRecruitData: IrecruitTable = {
-  recruitList: [
-    {
-      id: 1,
-      startDate: '2024-04-01',
-      endDate: '2024-04-30',
-      title: '테스트 모집',
-      status: '모집전',
-      generation: '1기',
-    },
-    {
-      id: 2,
-      startDate: '2024-05-01',
-      endDate: '2024-05-31',
-      title: '테스트 모집qqqqqqasdfasdasdvasvsadvasdvsadvasdvsavasvas',
-      status: '모집중',
-      generation: '2기',
-    },
-    {
-      id: 3,
-      startDate: '2024-06-01',
-      endDate: '2024-06-30',
-      title: '테스트 모집',
-      status: '완료',
-      generation: '3기',
-    },
-  ],
-  totalPage: 3,
-  currentPage: 1,
-};
-
 const tableTitle: { [key: string]: string } = {
   id: 'ID',
   usedAt: '적용 시간',
@@ -63,31 +33,24 @@ const tableTitle: { [key: string]: string } = {
 };
 
 function RecruitmentsHistoryList() {
-  // const [recruitData, setRecruitData] = useState<IrecruitTable>({
-  //   recruitList: [],
-  //   totalPage: 0,
-  //   currentPage: 0,
-  // });
-  const [view, setView] = useState<string>('recruitList');
-  const [selcetedRecruit, setSelectedRecruit] = useState<number>(1);
-  const [recruitData, setRecruitData] =
-    useState<IrecruitTable>(initialRecruitData);
+  const [recruitData, setRecruitData] = useState<IrecruitTable>({
+    recruitment: [],
+    totalPage: 0,
+    currentPage: 0,
+  });
+  const [view, setView] = useState<string>('recruitment');
+  const [selectedRecruit, setSelectedRecruit] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const setSnackBar = useSetRecoilState(toastState);
 
   const getRecruitHandler = useCallback(async () => {
     try {
-      const res = await instanceInManage.get(
-        `/admin/recruitments?page=${currentPage}&size=20`
-      );
+      // const res = await instanceInManage.get(
+      //   `/recruitments?page=${currentPage}&size=20`
+      // );
+      const res = await mockInstance.get(`admin/recruitments`);
       setRecruitData({
-        recruitList: res.data.recruitment.map((recruit: Irecruit) => {
-          return {
-            ...recruit,
-            startDate: dateToStringShort(new Date(recruit.startDate)),
-            endDate: dateToStringShort(new Date(recruit.endDate)),
-          };
-        }),
+        recruitment: res.data.recruitment,
         totalPage: res.data.totalPages,
         currentPage: res.data.number + 1,
       });
@@ -117,17 +80,17 @@ function RecruitmentsHistoryList() {
   return (
     <>
       {view === 'detail' ? (
-        <MenuTab recruitId={selcetedRecruit} />
+        <MenuTab recruitId={selectedRecruit} />
       ) : (
         <>
           <TableContainer className={styles.tableContainer} component={Paper}>
             <Table className={styles.table} aria-label='customized table'>
-              <AdminTableHead tableName={'recruitList'} table={tableTitle} />
+              <AdminTableHead tableName={'recruitment'} table={tableTitle} />
               <TableBody className={styles.tableBody}>
-                {recruitData.recruitList.length > 0 ? (
-                  recruitData.recruitList.map((recruit: Irecruit) => (
+                {recruitData.recruitment.length > 0 ? (
+                  recruitData.recruitment.map((recruit: Irecruit) => (
                     <TableRow className={styles.tableRow} key={recruit.id}>
-                      {tableFormat['recruitList'].columns.map(
+                      {tableFormat['recruitment'].columns.map(
                         (columnName: string, index: number) => {
                           return (
                             <TableCell
@@ -139,9 +102,7 @@ function RecruitmentsHistoryList() {
                                   className={styles.deleteBtn}
                                   // onClick={() => detailRecruit(recruit)}
                                 >
-                                  {recruit.status === '완료'
-                                    ? '공고 상세보기'
-                                    : '수정'}
+                                  상세보기
                                 </button>
                               ) : columnName === 'detaillUser' ? (
                                 <button
@@ -154,7 +115,11 @@ function RecruitmentsHistoryList() {
                                 </button>
                               ) : columnName === 'usedAt' ? (
                                 <div>
-                                  {`${recruit.startDate} ~ ${recruit.endDate}`}
+                                  {`${dateToStringShort(
+                                    new Date(recruit.startDate)
+                                  )} ~ ${dateToStringShort(
+                                    new Date(recruit.endDate)
+                                  )}`}
                                 </div>
                               ) : (
                                 <AdminContent

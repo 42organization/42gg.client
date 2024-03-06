@@ -17,6 +17,7 @@ import {
   InoticationTable,
 } from 'types/admin/adminRecruitmentsTypes';
 import { instanceInManage } from 'utils/axios';
+import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
@@ -26,28 +27,6 @@ import {
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/recruitments/Recruitments.module.scss';
 import 'react-datepicker/dist/react-datepicker.css';
-
-const initialnotificationData: InoticationTable = {
-  noticationList: [
-    {
-      id: 1,
-      intraId: 'test',
-      status: '합격',
-    },
-    {
-      id: 2,
-      intraId: 'test1',
-      status: '불합격',
-    },
-    {
-      id: 3,
-      intraId: 'test2',
-      status: '심사중',
-    },
-  ],
-  totalPage: 3,
-  currentPage: 1,
-};
 
 const tableTitle: { [key: string]: string } = {
   id: 'ID',
@@ -60,15 +39,12 @@ export interface notiMessageType {
   content: string;
 }
 
-function NotificationResults() {
-  // const [notificationData, setnotificationData] = useState<InoticationTable>({
-  //   noticationList: [],
-  //   totalPage: 0,
-  //   currentPage: 0,
-  // });
-  const [notificationData, setNotificationData] = useState<InoticationTable>(
-    initialnotificationData
-  );
+function NotificationResults({ recruitId }: { recruitId: number }) {
+  const [notificationData, setNotificationData] = useState<InoticationTable>({
+    noticationList: [],
+    totalPage: 0,
+    currentPage: 0,
+  });
   // const [notificationMessageData, setNotificationMessageData] =
   //   useState<notiMessageType>({ content: '' });
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -86,15 +62,13 @@ function NotificationResults() {
 
   const getRecruitNotiHandler = useCallback(async () => {
     try {
-      const res = await instanceInManage.get(
-        `/admin/recruitments?page=${currentPage}&size=20`
-      );
+      // const res = await instanceInManage.get(
+      //   `/admin/recruitments?page=${currentPage}&size=20`
+      // );
+      const id = recruitId;
+      const res = await mockInstance.get(`/admin/recruitments/${id}`);
       setNotificationData({
-        noticationList: res.data.recruitment.map((recruit: Inotication) => {
-          return {
-            ...recruit,
-          };
-        }),
+        noticationList: res.data.applications,
         totalPage: res.data.totalPages,
         currentPage: res.data.number + 1,
       });

@@ -13,7 +13,7 @@ export interface Inotication {
 }
 
 export interface IrecruitTable {
-  recruitList: Array<Irecruit>;
+  recruitment: Array<Irecruit>;
   totalPage: number;
   currentPage: number;
 }
