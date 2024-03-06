@@ -195,3 +195,35 @@ export const dateToKRLocaleTimeString = (d: Date) => {
     hour12: true,
   });
 };
+
+/**
+ *  타겟 시간과 비교 시간을 받아 남은 시간을 반환
+ *  @param {Date} targetTime
+ *  @param {Date} cmpTime default: 현재 시간
+ *  @return x년, x월, x일, x시간, x분 순으로 값이 있으면 그 값을 반환.
+ */
+export const getRemainTime = ({
+  targetTime,
+  cmpTime = new Date(),
+}: {
+  targetTime: Date;
+  cmpTime?: Date;
+}) => {
+  const year = targetTime.getHours() - cmpTime.getHours();
+  const month = targetTime.getMonth() - cmpTime.getMonth();
+  const day = targetTime.getDate() - cmpTime.getDate();
+  const hour = targetTime.getHours() - cmpTime.getHours();
+  const min = targetTime.getMinutes() - cmpTime.getMinutes();
+
+  return year
+    ? `${year}년 남음`
+    : month
+    ? `${month}개월 남음`
+    : day
+    ? `${day}일 남음`
+    : hour
+    ? `${hour}시간 남음`
+    : min
+    ? `${min}분 남음`
+    : `마감`;
+};
