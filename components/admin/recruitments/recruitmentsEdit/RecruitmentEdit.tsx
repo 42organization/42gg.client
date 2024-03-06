@@ -28,8 +28,9 @@ export default function RecruitmentEdit({ setPage }: RecruitmentEditProps) {
     setEndDate,
     setGeneration,
     setContent,
-    addQuestionToIndex,
+    addEmptyQuestion,
     addCheckItemToQuestion,
+    changeQuestionInputType,
   } = useRecruitmentEditInfo(initRecruitmentEditInfo);
 
   return (
@@ -52,7 +53,12 @@ export default function RecruitmentEdit({ setPage }: RecruitmentEditProps) {
         content={recruitmentEditInfo.content}
         setContent={setContent}
       />
-      <QuestionFormBuilder />
+      <QuestionFormBuilder
+        form={recruitmentEditInfo.form}
+        addEmptyQuestion={addEmptyQuestion}
+        addCheckItemToQuestion={addCheckItemToQuestion}
+        changeQuestionInputType={changeQuestionInputType}
+      />
       <ActionSelectorButtons />
     </div>
   );

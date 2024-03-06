@@ -29,12 +29,12 @@ export default function useRecruitmentEditInfo(
 
   const setContent = (content: string) => {
     setRecruitmentEditInfo((prev) => ({ ...prev, content: content }));
-    console.log(recruitmentEditInfo);
   };
 
-  const addQuestionToIndex = (index: number, question: Iquestion) => {
+  const addEmptyQuestion = (questionIdx: number, inputType: string) => {
     const updatedForm = [...recruitmentEditInfo.form];
-    updatedForm.splice(index, 0, question);
+    const question = makeEmptyQuestion(inputType);
+    question && updatedForm.splice(questionIdx + 1, 0, question);
 
     setRecruitmentEditInfo({
       ...recruitmentEditInfo,
@@ -42,11 +42,10 @@ export default function useRecruitmentEditInfo(
     });
   };
 
-  const addCheckItemToQuestion = (
-    questionIdx: number,
-    checkItemIdx: number,
-    checkItem: IcheckItem
-  ) => {
+  const addCheckItemToQuestion = (questionIdx: number) => {
+    const checkItem: IcheckItem = {
+      content: '',
+    };
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
 
@@ -58,7 +57,7 @@ export default function useRecruitmentEditInfo(
       if (!question.checkList) {
         question.checkList = [checkItem];
       } else {
-        question.checkList.splice(checkItemIdx + 1, 0, checkItem);
+        question.checkList.splice(question.checkList.length, 0, checkItem);
       }
 
       setRecruitmentEditInfo({
@@ -68,6 +67,51 @@ export default function useRecruitmentEditInfo(
     }
   };
 
+  const changeQuestionInputType = (questionIdx: number, inputType: string) => {
+    const updatedForm = [...recruitmentEditInfo.form];
+    const question = updatedForm[questionIdx];
+
+    if (question) {
+      const emptyQuestion = makeEmptyQuestion(inputType);
+      if (emptyQuestion) {
+        updatedForm.splice(questionIdx, 1, emptyQuestion);
+      }
+
+      setRecruitmentEditInfo({
+        ...recruitmentEditInfo,
+        form: updatedForm,
+      });
+    }
+  };
+
+  function makeEmptyQuestion(inputType: string): Iquestion | null {
+    let emptyQuestion: Iquestion | null = null;
+
+    switch (inputType) {
+      case 'TEXT':
+        emptyQuestion = {
+          question: '',
+          inputType: 'TEXT',
+        };
+        break;
+      case 'SINGLE_CHECK':
+        emptyQuestion = {
+          question: '',
+          inputType: 'SINGLE_CHECK',
+          checkList: [],
+        };
+        break;
+      case 'MULTI_CHECK':
+        emptyQuestion = {
+          question: '',
+          inputType: 'MULTI_CHECK',
+          checkList: [],
+        };
+    }
+
+    return emptyQuestion;
+  }
+
   return {
     recruitmentEditInfo,
     setTitle,
@@ -75,7 +119,8 @@ export default function useRecruitmentEditInfo(
     setEndDate,
     setGeneration,
     setContent,
-    addQuestionToIndex,
+    addEmptyQuestion,
     addCheckItemToQuestion,
+    changeQuestionInputType,
   };
 }

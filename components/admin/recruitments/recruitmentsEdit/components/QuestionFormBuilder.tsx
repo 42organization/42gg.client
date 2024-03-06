@@ -1,3 +1,4 @@
+import { Iquestion } from 'types/admin/adminRecruitmentsTypes';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/QuestionFormBuilder.module.scss';
 
 function TextInput() {
@@ -13,41 +14,72 @@ function RadioInput() {
 }
 
 interface QuestionProps {
-  inputType: 'TEXT' | 'CHECKBOX' | 'RADIO';
+  key: number;
+  question: Iquestion;
+  changeQuestionInputType: (questionIdx: number, inputType: string) => void;
 }
 
-function Question({ inputType }: QuestionProps) {
+function Question({ key, question, changeQuestionInputType }: QuestionProps) {
+  const selectChangehandler = ({
+    target,
+  }: React.ChangeEvent<HTMLSelectElement>) => {
+    changeQuestionInputType(key, target.value);
+  };
+
   return (
     <div className={styles.questionContainer}>
       <div className={styles.questionWrapper}>
         <input type='text' placeholder='질문' />
         <select
           name='type'
-          value='CUSTOM'
-          // onChange={selectChangehandler}
+          value={question.inputType}
+          onChange={selectChangehandler}
         >
           <option value='TEXT'>TEXT</option>
-          <option value='CHECKBOX'>CHECKBOX</option>
-          <option value='RADIO'>RADIO</option>
+          <option value='SINGLE_CHECK'>SINGLE_CHECK</option>
+          <option value='MULTI_CHECK'>MULTI_CHECK</option>
         </select>
       </div>
       <div>
-        {inputType === 'TEXT' && <TextInput />}
-        {inputType === 'CHECKBOX' && <CheckBoxInput />}
-        {inputType === 'RADIO' && <RadioInput />}
+        {question.inputType === 'TEXT' && <TextInput />}
+        {question.inputType === 'SINGLE_CHECK' && <CheckBoxInput />}
+        {question.inputType === 'MULTI_CHECK' && <RadioInput />}
       </div>
     </div>
   );
 }
 
-export default function QuestionFormBuilder() {
+interface QuestionFormBuilderProps {
+  form: Iquestion[];
+  addEmptyQuestion: (questionIdx: number, inputType: string) => void;
+  addCheckItemToQuestion: (questionIdx: number) => void;
+  changeQuestionInputType: (questionIdx: number, inputType: string) => void;
+}
+
+export default function QuestionFormBuilder({
+  form,
+  addEmptyQuestion,
+  addCheckItemToQuestion,
+  changeQuestionInputType,
+}: QuestionFormBuilderProps) {
+  const addQuestionHandler = () => {
+    addEmptyQuestion(form.length - 1, 'TEXT');
+  };
   return (
     <>
       <div className={styles.mainContainer}>
-        <Question inputType='TEXT' />
+        {form.map((question, idx) => {
+          return (
+            <Question
+              key={idx}
+              question={question}
+              changeQuestionInputType={changeQuestionInputType}
+            />
+          );
+        })}
       </div>
       <div className={styles.editConsole}>
-        <button>질문지 항목 추가하기</button>
+        <button onClick={addQuestionHandler}>질문지 항목 추가하기</button>
       </div>
     </>
   );
