@@ -62,7 +62,7 @@ export default function TitleTimeRangeSelector({
                 <input
                   type='text'
                   name='title'
-                  value={recruitmentEditInfo.title} //데이터
+                  value={recruitmentEditInfo.title}
                   onChange={inputChangeHandler}
                 />
               </TableCell>

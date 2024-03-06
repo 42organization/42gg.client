@@ -71,6 +71,16 @@ export default function useRecruitmentEditInfo(
     });
   };
 
+  const removeQuestion = (questionIdx: number) => {
+    const updatedForm = [...recruitmentEditInfo.form];
+    updatedForm.splice(questionIdx, 1);
+
+    setRecruitmentEditInfo({
+      ...recruitmentEditInfo,
+      form: updatedForm,
+    });
+  };
+
   const addCheckItemToQuestion = (questionIdx: number) => {
     const checkItem: IcheckItem = {
       content: '',
@@ -96,8 +106,23 @@ export default function useRecruitmentEditInfo(
     }
   };
 
+  const removeCheckItemFromQuestion = (
+    checkItemIdx: number,
+    questionIdx: number
+  ) => {
+    const updatedForm = [...recruitmentEditInfo.form];
+    const question = updatedForm[questionIdx];
+
+    if (question && question.checkList) {
+      question.checkList.splice(checkItemIdx, 1);
+      setRecruitmentEditInfo({
+        ...recruitmentEditInfo,
+        form: updatedForm,
+      });
+    }
+  };
+
   const changeQuestionInputType = (questionIdx: number, inputType: string) => {
-    console.log(questionIdx, inputType);
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
 
@@ -153,6 +178,8 @@ export default function useRecruitmentEditInfo(
     setCheckItemContent,
     addEmptyQuestion,
     addCheckItemToQuestion,
+    removeQuestion,
+    removeCheckItemFromQuestion,
     changeQuestionInputType,
   };
 }

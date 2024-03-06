@@ -1,43 +1,90 @@
 import React from 'react';
+import ClearIcon from '@mui/icons-material/Clear';
+import DeleteIcon from '@mui/icons-material/Delete';
 import {
-  Checkbox,
   FormControl,
-  FormControlLabel,
   Grid,
+  IconButton,
   InputLabel,
   MenuItem,
+  Radio,
+  RadioGroup,
   Select,
   SelectChangeEvent,
   TextField,
-  Typography,
 } from '@mui/material';
-import { Iquestion } from 'types/admin/adminRecruitmentsTypes';
+import { IcheckItem, Iquestion } from 'types/admin/adminRecruitmentsTypes';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/QuestionFormBuilder.module.scss';
 
-function TextInput() {
-  return (
-    <TextField
-      required
-      id='question'
-      name='question'
-      label='질문'
-      fullWidth
-      size='small'
-      // autoComplete='shipping address-line1'
-      // variant='standard'
-      onChange={(e) => {
-        console.log(e.target.value);
-      }}
-    />
-  );
+interface CheckInputProps {
+  checkList: IcheckItem[] | undefined;
+  questionIdx: number;
+  setCheckItemContent: (
+    questionIdx: number,
+    checkItemIdx: number,
+    content: string
+  ) => void;
+  addCheckItemToQuestion: (questionIdx: number) => void;
+  removeCheckItemFromQuestion: (
+    questionIdx: number,
+    checkItemIdx: number
+  ) => void;
 }
 
 function MultiCheckInput() {
   return <div>MultiCheckInput</div>;
 }
 
-function SingleCheckInput() {
-  return <div>SingleCheckInput</div>;
+function SingleCheckInput({
+  checkList,
+  questionIdx,
+  setCheckItemContent,
+  addCheckItemToQuestion,
+  removeCheckItemFromQuestion,
+}: CheckInputProps) {
+  const inputChangeHandler = (
+    { target }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    idx: number
+  ) => {
+    setCheckItemContent(questionIdx, idx, target.value);
+  };
+
+  return (
+    <RadioGroup>
+      {checkList &&
+        checkList.map((checkItem, idx) => {
+          return (
+            <Grid container key={idx} style={{ marginBottom: '0.2rem' }}>
+              <Grid item xs={1}>
+                <Radio value={idx} />
+              </Grid>
+              <Grid item xs={10}>
+                <TextField
+                  fullWidth
+                  required
+                  label='직접입력'
+                  value={checkItem.content}
+                  size='small'
+                  variant='standard'
+                  onChange={(e) => inputChangeHandler(e, idx)}
+                />
+              </Grid>
+              <Grid item xs={1}>
+                <IconButton
+                  aria-label='delete'
+                  onClick={() => removeCheckItemFromQuestion(questionIdx, idx)}
+                >
+                  <ClearIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
+          );
+        })}
+      <button onClick={() => addCheckItemToQuestion(questionIdx)}>
+        항목추가
+      </button>
+    </RadioGroup>
+  );
 }
 
 interface QuestionProps {
@@ -50,11 +97,32 @@ interface QuestionProps {
     content: string
   ) => void;
   changeQuestionInputType: (questionIdx: number, inputType: string) => void;
+  addCheckItemToQuestion: (questionIdx: number) => void;
+  removeQuestion: (questionIdx: number) => void;
+  removeCheckItemFromQuestion: (
+    questionIdx: number,
+    checkItemIdx: number
+  ) => void;
 }
 
-function Question({ idx, question, changeQuestionInputType }: QuestionProps) {
+function Question({
+  idx,
+  question,
+  setQuestionContent,
+  setCheckItemContent,
+  changeQuestionInputType,
+  addCheckItemToQuestion,
+  removeQuestion,
+  removeCheckItemFromQuestion,
+}: QuestionProps) {
   const selectChangehandler = ({ target }: SelectChangeEvent) => {
     changeQuestionInputType(idx, target.value);
+  };
+
+  const inputChangeHandler = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setQuestionContent(idx, target.value);
   };
 
   return (
@@ -66,12 +134,9 @@ function Question({ idx, question, changeQuestionInputType }: QuestionProps) {
             name='question'
             label='질문'
             fullWidth
+            value={question.question}
             size='small'
-            // autoComplete='shipping address-line1'
-            // variant='standard'
-            onChange={(e) => {
-              console.log(e.target.value);
-            }}
+            onChange={inputChangeHandler}
           />
         </Grid>
         <Grid item xs={3}>
@@ -88,14 +153,21 @@ function Question({ idx, question, changeQuestionInputType }: QuestionProps) {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={4}>
-          {/* {question.inputType === 'TEXT' && <TextInput />} */}
-          {question.inputType === 'SINGLE_CHECK' && <SingleCheckInput />}
+        <Grid item xs={12}>
+          {question.inputType === 'SINGLE_CHECK' && (
+            <SingleCheckInput
+              questionIdx={idx}
+              checkList={question.checkList}
+              setCheckItemContent={setCheckItemContent}
+              addCheckItemToQuestion={addCheckItemToQuestion}
+              removeCheckItemFromQuestion={removeCheckItemFromQuestion}
+            />
+          )}
           {question.inputType === 'MULTI_CHECK' && <MultiCheckInput />}
         </Grid>
-        {/* <Grid item xs={8}>
-          <Item>xs=8</Item>
-        </Grid> */}
+        <IconButton aria-label='delete' onClick={() => removeQuestion(idx)}>
+          <DeleteIcon />
+        </IconButton>
       </Grid>
     </div>
   );
@@ -111,6 +183,11 @@ interface QuestionFormBuilderProps {
   ) => void;
   addEmptyQuestion: (questionIdx: number, inputType: string) => void;
   addCheckItemToQuestion: (questionIdx: number) => void;
+  removeQuestion: (questionIdx: number) => void;
+  removeCheckItemFromQuestion: (
+    questionIdx: number,
+    checkItemIdx: number
+  ) => void;
   changeQuestionInputType: (questionIdx: number, inputType: string) => void;
 }
 
@@ -120,6 +197,8 @@ export default function QuestionFormBuilder({
   setCheckItemContent,
   addEmptyQuestion,
   addCheckItemToQuestion,
+  removeQuestion,
+  removeCheckItemFromQuestion,
   changeQuestionInputType,
 }: QuestionFormBuilderProps) {
   const addQuestionHandler = () => {
@@ -137,6 +216,9 @@ export default function QuestionFormBuilder({
               setQuestionContent={setQuestionContent}
               setCheckItemContent={setCheckItemContent}
               changeQuestionInputType={changeQuestionInputType}
+              addCheckItemToQuestion={addCheckItemToQuestion}
+              removeQuestion={removeQuestion}
+              removeCheckItemFromQuestion={removeCheckItemFromQuestion}
             />
           );
         })}

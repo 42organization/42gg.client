@@ -32,6 +32,8 @@ export default function RecruitmentEdit({ setPage }: RecruitmentEditProps) {
     setCheckItemContent,
     addEmptyQuestion,
     addCheckItemToQuestion,
+    removeQuestion,
+    removeCheckItemFromQuestion,
     changeQuestionInputType,
   } = useRecruitmentEditInfo(initRecruitmentEditInfo);
 
@@ -61,6 +63,8 @@ export default function RecruitmentEdit({ setPage }: RecruitmentEditProps) {
         setCheckItemContent={setCheckItemContent}
         addEmptyQuestion={addEmptyQuestion}
         addCheckItemToQuestion={addCheckItemToQuestion}
+        removeQuestion={removeQuestion}
+        removeCheckItemFromQuestion={removeCheckItemFromQuestion}
         changeQuestionInputType={changeQuestionInputType}
       />
       <ActionSelectorButtons />
