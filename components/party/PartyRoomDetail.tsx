@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { PartyRoomDetail } from 'types/partyTypes';
+import { dateToStringShort, getRemainTime, getTimeAgo } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
 
 type PartyRoomDetailProps = { partyRoomDetail: PartyRoomDetail };
@@ -12,6 +13,7 @@ function PartyDescription({ partyRoomDetail }: PartyRoomDetailProps) {
       {partyRoomDetail.myNickname && (
         <button
           onClick={async () => {
+            //TODO: fetch 안됨. 되게 만들어야함.
             mockInstance
               .patch(`/party/rooms/${partyRoomDetail.roomId}`)
               .then(() => {
@@ -35,10 +37,10 @@ function PartyDescription({ partyRoomDetail }: PartyRoomDetailProps) {
       <h2>제목 : {partyRoomDetail.title}</h2>
       <span>카테고리 : {partyRoomDetail.categoryId}</span>
       <span>
-        날짜 :
-        {new Date(partyRoomDetail.dueDate).getMinutes() -
-          new Date().getMinutes() +
-          `분 남음`}
+        날짜 :{dateToStringShort(new Date(partyRoomDetail.dueDate))}
+        {' (' +
+          getRemainTime({ targetTime: new Date(partyRoomDetail.dueDate) }) +
+          ')'}
       </span>
       <p>내용 : {partyRoomDetail.content}</p>
       <span>주최자 : {partyRoomDetail.hostNickname}</span>
@@ -64,6 +66,7 @@ function PartyButtton({ partyRoomDetail }: PartyRoomDetailProps) {
               mockInstance
                 .post(`/party/rooms/${partyRoomDetail.roomId}/start`)
                 .then(() => {
+                  //TODO: fetch 안됨. 되게 만들어야함.
                   router.push(`/parties/${partyRoomDetail.roomId}`);
                 });
             }}
@@ -77,6 +80,7 @@ function PartyButtton({ partyRoomDetail }: PartyRoomDetailProps) {
             mockInstance
               .post(`/party/rooms/${partyRoomDetail.roomId}/join`)
               .then(() => {
+                //TODO: fetch 안됨. 되게 만들어야함.
                 router.push(`/parties/${partyRoomDetail.roomId}`);
               });
           }}
@@ -105,14 +109,10 @@ function PartyComment({ partyRoomDetail }: PartyRoomDetailProps) {
           <div key={comment.commentId}>
             <span>{comment.nickname}</span>
             <span>{comment.content}</span>
-            <span>
-              {new Date(comment.createDate).getMinutes() -
-                new Date().getMinutes()}
-              분 전
-            </span>
+            <span>{getTimeAgo(comment.createDate)}</span>
             <button
               onClick={() => {
-                /* 신고 로직 */
+                /* TODO: 신고 로직  modal 사용 */
               }}
             >
               신고
