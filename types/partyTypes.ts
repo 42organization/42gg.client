@@ -2,7 +2,6 @@ export type PartyRoom = {
   roomId: number;
   title: string;
   categoryId: number;
-  content: string;
   currentPeople: number;
   minPeople: number;
   maxPeople: number;
@@ -46,6 +45,7 @@ export type PartyCategory = {
 export type PartyGameTemplete = {
   gameTemplateId: number;
   gameName: string;
+  categoryId: string;
   maxGamePeople: number;
   minGamePeople: number;
   maxGameTime: number;
