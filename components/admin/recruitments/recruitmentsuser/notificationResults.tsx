@@ -115,10 +115,10 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
       return (
         <div>
           <ToggleButtonGroup
-            value={alignment[recruit.id]}
+            value={alignment[recruit.applicationId]}
             exclusive
             onChange={(event, newAlignment) =>
-              handleAlignment(event, newAlignment, recruit.id)
+              handleAlignment(event, newAlignment, recruit.applicationId)
             }
           >
             <ToggleButton size='small' value='합격'>
@@ -150,7 +150,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
           <AdminTableHead tableName={'notificationList'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             {notificationData.noticationList.map((recruit: Inotication) => (
-              <TableRow className={styles.tableRow} key={recruit.id}>
+              <TableRow className={styles.tableRow} key={recruit.applicationId}>
                 {tableFormat['notificationList'].columns.map(
                   (columnName: string, index: number) => (
                     <TableCell className={styles.tableBodyItem} key={index}>

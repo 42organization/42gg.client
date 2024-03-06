@@ -7,7 +7,7 @@ export interface Irecruit {
   generation: string;
 }
 export interface Inotication {
-  id: number;
+  applicationId: number;
   intraId: string;
   status: '합격' | '불합격' | '심사중';
 }
