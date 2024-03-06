@@ -10,6 +10,13 @@ function PartyDescription({ partyRoomDetail }: PartyRoomDetailProps) {
 
   return (
     <div>
+      <button
+        onClick={() => {
+          // TODO: 신고 로직  modal 사용
+        }}
+      >
+        신고
+      </button>
       {partyRoomDetail.myNickname && (
         <button
           onClick={async () => {
