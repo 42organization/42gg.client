@@ -1,35 +1,48 @@
 @import 'styles/common.scss';
 
-.container {
+$dark-green: #024900;
+$medium-green: #4f9237;
+$light-green: #67a64a;
+
+.pageContainer {
   @include pageWrap;
   color: $white2;
+  background-color: $dark-green;
 
-  ul {
-    transition: all 1s ease;
-    li {
-      width: 100%;
-      list-style-type: circle;
-      transition: all 1s ease;
+  section {
+    margin-bottom: 20px;
 
-      div {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-      }
+    h2 {
+      margin: 0 0 0.5em;
+      font-size: $big-font;
     }
   }
+}
 
-  nav {
-    ul {
+.categoryNav {
+  ul {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px;
+
+    li {
       display: flex;
+      width: 25%;
+      padding: 0.5em 0;
+      margin: 0 2px;
+      font-size: $medium-font;
+      font-weight: 300;
+      list-style: none;
+      background-color: black;
+      border-top-left-radius: $medium-radius;
+      border-top-right-radius: $medium-radius;
+      transition: 0.3s ease width;
+      justify-content: center;
+      align-items: center;
 
-      li {
-        display: flex;
-        width: 100%;
-        margin: 0 10px;
-        list-style: none;
-        background-color: $dark-gray;
-        justify-content: space-between;
+      &.selected {
+        width: 30%;
+        background-color: $light-green;
       }
     }
   }
