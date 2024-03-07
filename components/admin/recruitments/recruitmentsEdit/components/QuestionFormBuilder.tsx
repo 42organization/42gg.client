@@ -1,4 +1,7 @@
 import React from 'react';
+import { CheckBox } from '@mui/icons-material';
+import AddIcon from '@mui/icons-material/Add';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import ClearIcon from '@mui/icons-material/Clear';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {
@@ -31,8 +34,58 @@ interface CheckInputProps {
   ) => void;
 }
 
-function MultiCheckInput() {
-  return <div>MultiCheckInput</div>;
+function MultiCheckInput({
+  checkList,
+  questionIdx,
+  setCheckItemContent,
+  addCheckItemToQuestion,
+  removeCheckItemFromQuestion,
+}: CheckInputProps) {
+  const inputChangeHandler = (
+    { target }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    idx: number
+  ) => {
+    setCheckItemContent(questionIdx, idx, target.value);
+  };
+  return (
+    <>
+      {checkList &&
+        checkList.map((checkItem, idx) => {
+          return (
+            <Grid container key={idx} style={{ marginBottom: '0.2rem' }}>
+              <Grid item xs={1} alignItems='center'>
+                <CheckBox />
+              </Grid>
+              <Grid item xs={10}>
+                <TextField
+                  fullWidth
+                  required
+                  label='직접입력'
+                  value={checkItem.content}
+                  size='small'
+                  variant='standard'
+                  onChange={(e) => inputChangeHandler(e, idx)}
+                />
+              </Grid>
+              <Grid item xs={1}>
+                <IconButton
+                  aria-label='delete'
+                  onClick={() => removeCheckItemFromQuestion(idx, questionIdx)}
+                >
+                  <ClearIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
+          );
+        })}
+      <IconButton
+        aria-label='addCheckItem'
+        onClick={() => addCheckItemToQuestion(questionIdx)}
+      >
+        <AddIcon />
+      </IconButton>
+    </>
+  );
 }
 
 function SingleCheckInput({
@@ -72,7 +125,7 @@ function SingleCheckInput({
               <Grid item xs={1}>
                 <IconButton
                   aria-label='delete'
-                  onClick={() => removeCheckItemFromQuestion(questionIdx, idx)}
+                  onClick={() => removeCheckItemFromQuestion(idx, questionIdx)}
                 >
                   <ClearIcon />
                 </IconButton>
@@ -80,9 +133,12 @@ function SingleCheckInput({
             </Grid>
           );
         })}
-      <button onClick={() => addCheckItemToQuestion(questionIdx)}>
-        항목추가
-      </button>
+      <IconButton
+        aria-label='addCheckItem'
+        onClick={() => addCheckItemToQuestion(questionIdx)}
+      >
+        <AddIcon />
+      </IconButton>
     </RadioGroup>
   );
 }
@@ -126,7 +182,7 @@ function Question({
   };
 
   return (
-    <div className={styles.questionContainer}>
+    <div className={styles.questionWrapper}>
       <Grid container spacing={1}>
         <Grid item xs={9}>
           <TextField
@@ -163,7 +219,15 @@ function Question({
               removeCheckItemFromQuestion={removeCheckItemFromQuestion}
             />
           )}
-          {question.inputType === 'MULTI_CHECK' && <MultiCheckInput />}
+          {question.inputType === 'MULTI_CHECK' && (
+            <MultiCheckInput
+              questionIdx={idx}
+              checkList={question.checkList}
+              setCheckItemContent={setCheckItemContent}
+              addCheckItemToQuestion={addCheckItemToQuestion}
+              removeCheckItemFromQuestion={removeCheckItemFromQuestion}
+            />
+          )}
         </Grid>
         <IconButton aria-label='delete' onClick={() => removeQuestion(idx)}>
           <DeleteIcon />
@@ -204,9 +268,10 @@ export default function QuestionFormBuilder({
   const addQuestionHandler = () => {
     addEmptyQuestion(form.length - 1, 'TEXT');
   };
+
   return (
-    <>
-      <div className={styles.mainContainer}>
+    <div className={styles.mainContainer}>
+      <div className={styles.questionContainer}>
         {form.map((question, idx) => {
           return (
             <Question
@@ -224,8 +289,14 @@ export default function QuestionFormBuilder({
         })}
       </div>
       <div className={styles.editConsole}>
-        <button onClick={addQuestionHandler}>질문지 항목 추가하기</button>
+        <IconButton
+          aria-label='addQuestion'
+          color='primary'
+          onClick={() => addQuestionHandler()}
+        >
+          <AddBoxIcon fontSize='large' />
+        </IconButton>
       </div>
-    </>
+    </div>
   );
 }
