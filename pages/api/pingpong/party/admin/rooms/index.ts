@@ -1,10 +1,11 @@
+import { PartyRoom } from 'types/partyTypes';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(
   _req: NextApiRequest,
-  res: NextApiResponse<any[]>
+  res: NextApiResponse<PartyRoom[]>
 ) {
-  const partyRooms = [
+  const partyRooms: PartyRoom[] = [
     {
       roomId: 1,
       title: '첫번째 방',
@@ -14,11 +15,8 @@ export default function handler(
       maxPeople: 4,
       dueDate: '2024-03-02T22:00:00',
       createDate: '2024-03-02T22:00:00',
-      roomStatus: 'open',
-      creator: {
-        userId: 1,
-        intraId: '테스트 작성자',
-      },
+      roomStatus: 'OPEN',
+      creatorIntraId: '테스트 작성자',
     },
     {
       roomId: 2,
@@ -29,11 +27,8 @@ export default function handler(
       maxPeople: 4,
       dueDate: '2024-03-02T22:00:00',
       createDate: '2024-03-02T22:00:00',
-      roomStatus: 'finish',
-      creator: {
-        userId: 2,
-        intraId: '테스트 작성자2',
-      },
+      roomStatus: 'FINISH',
+      creatorIntraId: '테스트 작성자',
     },
   ];
 

@@ -1,9 +1,11 @@
-export type PartyRoomTable = {
+import { PartyRoomStatus } from 'types/partyTypes';
+
+export type PartyRoomColumn = {
   roomId: number;
   title: string;
   categoryName: string;
   createDate: string;
   dueDate: string;
   creatorIntraId: string;
-  roomStatus: 'open' | 'start' | 'finish' | 'hidden';
+  roomStatus: PartyRoomStatus;
 };

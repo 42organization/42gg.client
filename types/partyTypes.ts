@@ -1,3 +1,5 @@
+export type PartyRoomStatus = 'OPEN' | 'START' | 'FINISH' | 'HIDDEN';
+
 export type PartyRoom = {
   roomId: number;
   title: string;
@@ -7,11 +9,8 @@ export type PartyRoom = {
   maxPeople: number;
   dueDate: string;
   createDate: string;
-  roomStatus: 'OPEN' | 'START' | 'FINISH' | 'HIDDEN';
-  creator?: {
-    userId: number;
-    intraId: string;
-  };
+  roomStatus: PartyRoomStatus;
+  creatorIntraId?: string;
 };
 
 export type PartyRoomDetail = PartyRoom & {
@@ -25,6 +24,7 @@ export type PartyRoomDetail = PartyRoom & {
 export type PartyRoomUser = {
   roomUserId: number;
   nickname: string;
+  intraId?: string;
 };
 
 // 닉네임과 아이디를 가지고 있는 api를 만들어줌. 추가 필요.
