@@ -8,3 +8,8 @@ export type recruitment = {
   status: recruitmentStatus;
   generation: string;
 };
+
+export type recruitmentListData = {
+  recruitments: recruitment[];
+  totalPage: number;
+};
