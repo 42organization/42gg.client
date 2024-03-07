@@ -35,6 +35,7 @@ export default function RecruitmentEdit({ setPage }: RecruitmentEditProps) {
     removeQuestion,
     removeCheckItemFromQuestion,
     changeQuestionInputType,
+    switchQuestionIndex,
   } = useRecruitmentEditInfo(initRecruitmentEditInfo);
 
   return (
@@ -66,6 +67,7 @@ export default function RecruitmentEdit({ setPage }: RecruitmentEditProps) {
         removeQuestion={removeQuestion}
         removeCheckItemFromQuestion={removeCheckItemFromQuestion}
         changeQuestionInputType={changeQuestionInputType}
+        switchQuestionIndex={switchQuestionIndex}
       />
       <ActionSelectorButtons />
     </div>

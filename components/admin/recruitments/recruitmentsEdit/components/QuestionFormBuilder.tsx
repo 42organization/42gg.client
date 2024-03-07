@@ -1,4 +1,5 @@
 import React from 'react';
+import { DropResult } from 'react-beautiful-dnd';
 import { CheckBox } from '@mui/icons-material';
 import AddIcon from '@mui/icons-material/Add';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -17,6 +18,7 @@ import {
   TextField,
 } from '@mui/material';
 import { IcheckItem, Iquestion } from 'types/admin/adminRecruitmentsTypes';
+import DraggableList from 'components/UI/DraggableList';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/QuestionFormBuilder.module.scss';
 
 interface CheckInputProps {
@@ -253,6 +255,7 @@ interface QuestionFormBuilderProps {
     checkItemIdx: number
   ) => void;
   changeQuestionInputType: (questionIdx: number, inputType: string) => void;
+  switchQuestionIndex: (questionIdx: number, targetIdx: number) => void;
 }
 
 export default function QuestionFormBuilder({
@@ -264,29 +267,38 @@ export default function QuestionFormBuilder({
   removeQuestion,
   removeCheckItemFromQuestion,
   changeQuestionInputType,
+  switchQuestionIndex,
 }: QuestionFormBuilderProps) {
   const addQuestionHandler = () => {
     addEmptyQuestion(form.length - 1, 'TEXT');
   };
 
+  const onDragEndHandler = ({ destination, source }: DropResult) => {
+    if (!destination) return;
+
+    switchQuestionIndex(source.index, destination.index);
+  };
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.questionContainer}>
-        {form.map((question, idx) => {
-          return (
-            <Question
-              key={idx}
-              idx={idx}
-              question={question}
-              setQuestionContent={setQuestionContent}
-              setCheckItemContent={setCheckItemContent}
-              changeQuestionInputType={changeQuestionInputType}
-              addCheckItemToQuestion={addCheckItemToQuestion}
-              removeQuestion={removeQuestion}
-              removeCheckItemFromQuestion={removeCheckItemFromQuestion}
-            />
-          );
-        })}
+        <DraggableList onDragEnd={onDragEndHandler}>
+          {form.map((question, idx) => {
+            return (
+              <Question
+                key={idx}
+                idx={idx}
+                question={question}
+                setQuestionContent={setQuestionContent}
+                setCheckItemContent={setCheckItemContent}
+                changeQuestionInputType={changeQuestionInputType}
+                addCheckItemToQuestion={addCheckItemToQuestion}
+                removeQuestion={removeQuestion}
+                removeCheckItemFromQuestion={removeCheckItemFromQuestion}
+              />
+            );
+          })}
+        </DraggableList>
       </div>
       <div className={styles.editConsole}>
         <IconButton

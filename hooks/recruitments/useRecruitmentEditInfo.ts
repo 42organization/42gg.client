@@ -139,6 +139,22 @@ export default function useRecruitmentEditInfo(
     }
   };
 
+  const switchQuestionIndex = (questionIdx: number, targetIdx: number) => {
+    const updatedForm = [...recruitmentEditInfo.form];
+    const question = updatedForm[questionIdx];
+
+    if (question) {
+      updatedForm.splice(questionIdx, 1);
+      updatedForm.splice(targetIdx, 0, question);
+
+      setRecruitmentEditInfo({
+        ...recruitmentEditInfo,
+        form: updatedForm,
+      });
+    }
+    console.log(recruitmentEditInfo.form);
+  };
+
   function makeEmptyQuestion(inputType: string): Iquestion | null {
     let emptyQuestion: Iquestion | null = null;
 
@@ -181,5 +197,6 @@ export default function useRecruitmentEditInfo(
     removeQuestion,
     removeCheckItemFromQuestion,
     changeQuestionInputType,
+    switchQuestionIndex,
   };
 }
