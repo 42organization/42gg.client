@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const fullRecruitments = {
+const fullRecruitments1 = {
   recruitments: [
     {
       id: 1,
@@ -27,6 +27,37 @@ const fullRecruitments = {
       generation: '3기',
     },
   ],
+  totalPage: 2,
+};
+
+const fullRecruitments2 = {
+  recruitments: [
+    {
+      id: 4,
+      startDate: new Date(),
+      endDate: new Date(),
+      title: '제 4기 모집',
+      status: 'BEFORE',
+      generation: '4기',
+    },
+    {
+      id: 5,
+      startDate: new Date(),
+      endDate: new Date(),
+      title: '제 5기 모집',
+      status: 'RECRUITING',
+      generation: '5기',
+    },
+    {
+      id: 6,
+      startDate: new Date(),
+      endDate: new Date(),
+      title: '제 6기 모집',
+      status: 'AFTER',
+      generation: '6기',
+    },
+  ],
+  totalPage: 2,
 };
 
 const emptyRecruitments = {
@@ -34,6 +65,15 @@ const emptyRecruitments = {
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { page } = req.query;
+  if (page === '1') {
+    res.status(200).json(fullRecruitments1);
+    return;
+  }
+  if (page === '2') {
+    res.status(200).json(fullRecruitments2);
+    return;
+  }
+  res.status(200).json(fullRecruitments1);
   // res.status(200).json(emptyRecruitments);
-  res.status(200).json(fullRecruitments);
 }
