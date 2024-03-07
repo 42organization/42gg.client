@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PartyCategory from './PartyCategory';
 import PartyPenalty from './PartyPenalty';
 import PartyReport from './PartyReport';
-import PartyRoomTable from './PartyRoom';
+import PartyRoomTable from './PartyRoomTable';
 import PartyTemplate from './PartyTemplate';
 import styles from '../../styles/admin/party/PartyNav.module.scss';
 
