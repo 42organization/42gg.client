@@ -198,7 +198,7 @@ function Question({
           />
         </Grid>
         <Grid item xs={3}>
-          <FormControl sx={{ m: 0, minWidth: 190 }} size='small'>
+          <FormControl fullWidth size='small'>
             <InputLabel>질문 유형</InputLabel>
             <Select
               value={question.inputType}
