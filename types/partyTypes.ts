@@ -45,6 +45,7 @@ export type PartyCategory = {
 
 export type PartyGameTemplete = {
   gameTemplateId: number;
+  categoryId: number;
   gameName: string;
   maxGamePeople: number;
   minGamePeople: number;
@@ -61,50 +62,28 @@ export type PartyReport =
   | PartyCommentReport;
 
 export type PartyRoomReport = {
-  reportId: number;
-  type: 'roomReport';
-  reporter: {
-    userId: number;
-    userIntraId: number;
-  };
-  reportee: {
-    userId: number;
-    userIntraId: number;
-  };
-  room: PartyRoom;
+  id: number;
+  reporterId: string;
+  reporteeId: string;
+  roomId: number;
   message: string;
-  createdAt: string;
+  createdAt: Date;
 };
 
 export type PartyNoshowReport = {
-  reportId: number;
-  type: 'noshowReport';
-  reporter: {
-    userId: number;
-    userIntraId: number;
-  };
-  reportee: {
-    userId: number;
-    userIntraId: number;
-  };
-  room: PartyRoom;
+  id: number;
+  reporterId: string;
+  reporteeId: string;
+  roomId: number;
   message: string;
-  createdAt: string;
+  createdAt: Date;
 };
 
 export type PartyCommentReport = {
-  reportId: number;
-  type: 'commentReport';
-  reporter: {
-    userId: number;
-    userIntraId: number;
-  };
-  reportee: {
-    userId: number;
-    userIntraId: number;
-  };
-  room: PartyRoom;
-  comment: PartyComment;
+  id: number;
+  reporterId: string;
+  commentsId: number;
+  roomId: number;
   message: string;
-  createdAt: string;
+  createdAt: Date;
 };

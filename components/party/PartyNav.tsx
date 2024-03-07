@@ -1,10 +1,10 @@
 import { useState } from 'react';
+import styles from 'styles/party/PartyNav.module.scss';
 import PartyCategory from './PartyCategory';
 import PartyPenalty from './PartyPenalty';
 import PartyReport from './PartyReport';
-import PartyRoomTable from './PartyRoom';
+import PartyRoom from './PartyRoom';
 import PartyTemplate from './PartyTemplate';
-import styles from '../../styles/admin/party/PartyNav.module.scss';
 
 export default function PartyNav() {
   const [navValue, setNavValue] = useState('penalty');
@@ -28,9 +28,10 @@ export default function PartyNav() {
             카테고리 관리
           </li>
         </ul>
+
         {navValue === 'penalty' && <PartyPenalty />}
         {navValue === 'report' && <PartyReport />}
-        {navValue === 'room' && <PartyRoomTable />}
+        {navValue === 'room' && <PartyRoom />}
         {navValue === 'template' && <PartyTemplate />}
         {navValue === 'category' && <PartyCategory />}
       </div>
