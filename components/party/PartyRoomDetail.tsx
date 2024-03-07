@@ -1,12 +1,23 @@
-import { useRouter } from 'next/router';
+import { Dispatch, SetStateAction } from 'react';
 import { PartyRoomDetail } from 'types/partyTypes';
 import { dateToStringShort, getRemainTime, getTimeAgo } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
 
-type PartyRoomDetailProps = { partyRoomDetail: PartyRoomDetail };
+type PartyRoomDetailProps = {
+  partyRoomDetail: PartyRoomDetail;
+  onClick: boolean;
+  setOnClick: Dispatch<SetStateAction<boolean>>;
+};
 
-function PartyDescription({ partyRoomDetail }: PartyRoomDetailProps) {
-  const router = useRouter();
+function PartyDescription({
+  partyRoomDetail,
+  setOnClick,
+  onClick,
+}: PartyRoomDetailProps) {
+  const handlerExit = async () => {
+    await mockInstance.patch(`/party/rooms/${partyRoomDetail.roomId}`);
+    setOnClick(!onClick);
+  };
 
   return (
     <div>
@@ -18,18 +29,7 @@ function PartyDescription({ partyRoomDetail }: PartyRoomDetailProps) {
         신고
       </button>
       {partyRoomDetail.myNickname && (
-        <button
-          onClick={async () => {
-            //TODO: fetch 안됨. 되게 만들어야함.
-            mockInstance
-              .patch(`/party/rooms/${partyRoomDetail.roomId}`)
-              .then(() => {
-                router.push(`/parties/${partyRoomDetail.roomId}`);
-              });
-          }}
-        >
-          방 나가기
-        </button>
+        <button onClick={handlerExit}>방 나가기</button>
       )}
       <button
         onClick={() => {
@@ -61,39 +61,36 @@ function PartyDescription({ partyRoomDetail }: PartyRoomDetailProps) {
   );
 }
 
-function PartyButtton({ partyRoomDetail }: PartyRoomDetailProps) {
-  const router = useRouter();
+function PartyButtton({
+  partyRoomDetail,
+  setOnClick,
+  onClick,
+}: PartyRoomDetailProps) {
+  const handlerStart = async () => {
+    await mockInstance
+      .post(`/party/rooms/${partyRoomDetail.roomId}/start`)
+      .then((res) => {
+        setOnClick(!onClick);
+        console.log(res.status);
+      })
+      .catch((error) => {
+        console.error('에러가 났습니다.', error);
+      });
+  };
+
+  const handlerJoin = async () => {
+    await mockInstance.post(`/party/rooms/${partyRoomDetail.roomId}/join`);
+    setOnClick(!onClick);
+  };
 
   return partyRoomDetail.roomStatus !== 'FINISH' ? (
     <div>
       {partyRoomDetail.hostNickname === partyRoomDetail.myNickname ? (
         partyRoomDetail.minPeople <= partyRoomDetail.currentPeople && (
-          <button
-            onClick={async () => {
-              mockInstance
-                .post(`/party/rooms/${partyRoomDetail.roomId}/start`)
-                .then(() => {
-                  //TODO: fetch 안됨. 되게 만들어야함.
-                  router.push(`/parties/${partyRoomDetail.roomId}`);
-                });
-            }}
-          >
-            시작
-          </button>
+          <button onClick={handlerStart}>시작</button>
         )
       ) : (
-        <button
-          onClick={async () => {
-            mockInstance
-              .post(`/party/rooms/${partyRoomDetail.roomId}/join`)
-              .then(() => {
-                //TODO: fetch 안됨. 되게 만들어야함.
-                router.push(`/parties/${partyRoomDetail.roomId}`);
-              });
-          }}
-        >
-          참여하기
-        </button>
+        <button onClick={handlerJoin}>참여하기</button>
       )}
     </div>
   ) : (
@@ -101,9 +98,16 @@ function PartyButtton({ partyRoomDetail }: PartyRoomDetailProps) {
   );
 }
 
-function PartyComment({ partyRoomDetail }: PartyRoomDetailProps) {
-  const router = useRouter();
+function PartyComment({
+  partyRoomDetail,
+  onClick,
+  setOnClick,
+}: PartyRoomDetailProps) {
   const totalComments = partyRoomDetail.comments.length;
+  const handlerComments = async () => {
+    await mockInstance.post(`/party/rooms/${partyRoomDetail.roomId}/comments`);
+    setOnClick(!onClick);
+  };
 
   return (
     <div>
@@ -129,15 +133,7 @@ function PartyComment({ partyRoomDetail }: PartyRoomDetailProps) {
       )}
       {partyRoomDetail.myNickname &&
         partyRoomDetail.roomStatus !== 'FINISH' && (
-          <form
-            onSubmit={async () => {
-              mockInstance
-                .post(`/party/rooms/${partyRoomDetail.roomId}/comments`)
-                .then(() => {
-                  router.push(`/parties/${partyRoomDetail.roomId}`);
-                });
-            }}
-          >
+          <form onSubmit={handlerComments}>
             <input type='text' />
             <button type='submit'>댓글</button>
           </form>
@@ -146,12 +142,28 @@ function PartyComment({ partyRoomDetail }: PartyRoomDetailProps) {
   );
 }
 
-export default function PartyDetail({ partyRoomDetail }: PartyRoomDetailProps) {
+export default function PartyDetail({
+  partyRoomDetail,
+  onClick,
+  setOnClick,
+}: PartyRoomDetailProps) {
   return (
     <div>
-      <PartyDescription partyRoomDetail={partyRoomDetail} />
-      <PartyButtton partyRoomDetail={partyRoomDetail} />
-      <PartyComment partyRoomDetail={partyRoomDetail} />
+      <PartyDescription
+        partyRoomDetail={partyRoomDetail}
+        onClick={onClick}
+        setOnClick={setOnClick}
+      />
+      <PartyButtton
+        partyRoomDetail={partyRoomDetail}
+        onClick={onClick}
+        setOnClick={setOnClick}
+      />
+      <PartyComment
+        partyRoomDetail={partyRoomDetail}
+        onClick={onClick}
+        setOnClick={setOnClick}
+      />
     </div>
   );
 }
