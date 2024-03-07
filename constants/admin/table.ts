@@ -158,7 +158,7 @@ export const tableFormat: TableFormat = {
     name: '토너먼트 생성',
     columns: ['title', 'startTime', 'endTime', 'type'],
   },
-  recruitList: {
+  recruitment: {
     name: '공고 목록',
     columns: [
       'id',
@@ -173,7 +173,6 @@ export const tableFormat: TableFormat = {
     ],
   },
   recruitUserList: {
-    // 가변적
     name: '지원자 목록',
     columns: [
       'id',

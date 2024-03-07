@@ -16,7 +16,8 @@ import {
   Inotication,
   InoticationTable,
 } from 'types/admin/adminRecruitmentsTypes';
-import { instanceInManage } from 'utils/axios';
+// import { instanceInManage } from 'utils/axios';
+import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
@@ -26,28 +27,6 @@ import {
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/recruitments/Recruitments.module.scss';
 import 'react-datepicker/dist/react-datepicker.css';
-
-const initialnotificationData: InoticationTable = {
-  noticationList: [
-    {
-      id: 1,
-      intraId: 'test',
-      status: '합격',
-    },
-    {
-      id: 2,
-      intraId: 'test1',
-      status: '불합격',
-    },
-    {
-      id: 3,
-      intraId: 'test2',
-      status: '심사중',
-    },
-  ],
-  totalPage: 3,
-  currentPage: 1,
-};
 
 const tableTitle: { [key: string]: string } = {
   id: 'ID',
@@ -60,17 +39,12 @@ export interface notiMessageType {
   content: string;
 }
 
-function NotificationResults() {
-  // const [notificationData, setnotificationData] = useState<InoticationTable>({
-  //   noticationList: [],
-  //   totalPage: 0,
-  //   currentPage: 0,
-  // });
-  const [notificationData, setNotificationData] = useState<InoticationTable>(
-    initialnotificationData
-  );
-  // const [notificationMessageData, setNotificationMessageData] =
-  //   useState<notiMessageType>({ content: '' });
+function NotificationResults({ recruitId }: { recruitId: number }) {
+  const [notificationData, setNotificationData] = useState<InoticationTable>({
+    noticationList: [],
+    totalPage: 0,
+    currentPage: 0,
+  });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [alignment, setAlignment] = useState<Record<number, string | null>>({});
   const setSnackBar = useSetRecoilState(toastState);
@@ -86,15 +60,13 @@ function NotificationResults() {
 
   const getRecruitNotiHandler = useCallback(async () => {
     try {
-      const res = await instanceInManage.get(
-        `/admin/recruitments?page=${currentPage}&size=20`
-      );
+      // const res = await instanceInManage.get(
+      //   `/admin/recruitments?page=${currentPage}&size=20`
+      // );
+      const id = recruitId;
+      const res = await mockInstance.get(`/admin/recruitments/${id}`);
       setNotificationData({
-        noticationList: res.data.recruitment.map((recruit: Inotication) => {
-          return {
-            ...recruit,
-          };
-        }),
+        noticationList: res.data.applications,
         totalPage: res.data.totalPages,
         currentPage: res.data.number + 1,
       });
@@ -108,92 +80,86 @@ function NotificationResults() {
     }
   }, [currentPage]);
 
-  // const resultHandler = useCallback(async (id: number, result: string | null, messageType: 'interview' | 'result') => {
-  //   try {
-  //     const res = await instanceInManage.get(
-  //       `/admin/recruitments/result/message/preview?messageType=${messageType}`
-  //     );
-  //     setNotificationMessageData({
-  //       content: res.data.content,
-  //     });
-  //   } catch (e: any) {
-  //     setSnackBar({
-  //       toastName: 'get message',
-  //       severity: 'error',
-  //       message: `API 요청에 문제가 발생했습니다.`,
-  //       clicked: true,
-  //     });
-  //   }
-  // }, []);
-
   useEffect(() => {
     getRecruitNotiHandler();
   }, [currentPage]);
 
+  if (!notificationData.noticationList.length) {
+    return (
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='customized table'>
+          <AdminTableHead tableName={'recruitUserList'} table={tableTitle} />
+          <TableBody className={styles.tableBody}>
+            <AdminEmptyItem content={'공고 지원자 내역이 비어있습니다'} />
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  }
+
+  const renderTableCell = (recruit: Inotication, columnName: string) => {
+    if (columnName === 'interview') {
+      return (
+        <div className={styles.interview}>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+          />
+          &nbsp;
+          <Button variant='outlined'>면접</Button>
+        </div>
+      );
+    }
+
+    if (columnName === 'result') {
+      return (
+        <div>
+          <ToggleButtonGroup
+            value={alignment[recruit.applicationId]}
+            exclusive
+            onChange={(event, newAlignment) =>
+              handleAlignment(event, newAlignment, recruit.applicationId)
+            }
+          >
+            <ToggleButton size='small' value='합격'>
+              합 격
+            </ToggleButton>
+            <ToggleButton size='small' value='불합격'>
+              불합격
+            </ToggleButton>
+          </ToggleButtonGroup>
+          &nbsp;
+          <Button
+            variant='outlined'
+            onClick={() => {
+              /* resultHandler(recruit.id, alignment[recruit.id], 'result'); */
+            }}
+          >
+            결과
+          </Button>
+        </div>
+      );
+    }
+
+    return recruit[columnName as keyof Inotication]?.toString();
+  };
   return (
     <>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <AdminTableHead tableName={'notificationList'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {notificationData.noticationList.length > 0 ? (
-              notificationData.noticationList.map((recruit: Inotication) => (
-                <TableRow className={styles.tableRow} key={recruit.id}>
-                  {tableFormat['notificationList'].columns.map(
-                    (columnName: string, index: number) => {
-                      return (
-                        <TableCell className={styles.tableBodyItem} key={index}>
-                          {columnName === 'interview' ? (
-                            <div className={styles.interview}>
-                              <DatePicker
-                                selected={startDate}
-                                onChange={(date) => setStartDate(date)}
-                              />
-                              &nbsp;
-                              <Button variant='outlined'>면접</Button>
-                            </div>
-                          ) : columnName === 'result' ? (
-                            <>
-                              <ToggleButtonGroup
-                                value={alignment[recruit.id] || null}
-                                exclusive
-                                onChange={(event, newAlignment) =>
-                                  handleAlignment(
-                                    event,
-                                    newAlignment,
-                                    recruit.id
-                                  )
-                                }
-                              >
-                                <ToggleButton size='small' value='합격'>
-                                  합 격
-                                </ToggleButton>
-                                <ToggleButton size='small' value='불합격'>
-                                  불합격
-                                </ToggleButton>
-                              </ToggleButtonGroup>
-                              &nbsp;
-                              <Button
-                                variant='outlined'
-                                onClick={() => {
-                                  // resultHandler(recruit.id, alignment[recruit.id], 'result');
-                                }}
-                              >
-                                결과
-                              </Button>
-                            </>
-                          ) : (
-                            recruit[columnName as keyof Inotication]?.toString()
-                          )}
-                        </TableCell>
-                      );
-                    }
-                  )}
-                </TableRow>
-              ))
-            ) : (
-              <AdminEmptyItem content={'지원자 내역이 비어있습니다'} />
-            )}
+            {notificationData.noticationList.map((recruit: Inotication) => (
+              <TableRow className={styles.tableRow} key={recruit.applicationId}>
+                {tableFormat['notificationList'].columns.map(
+                  (columnName: string, index: number) => (
+                    <TableCell className={styles.tableBodyItem} key={index}>
+                      {renderTableCell(recruit, columnName)}
+                    </TableCell>
+                  )
+                )}
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

@@ -7,7 +7,9 @@ import RecruitmentsHistoryList from '../RecruitmentsHistoryList';
 function MenuTab({ recruitId }: { recruitId: number }) {
   const [view, setView] = useState('menu');
   const [tabIdx, setTabIdx] = useState(0);
-  const [child, setChild] = useState(<DetailRecruitUserList />);
+  const [child, setChild] = useState(
+    <DetailRecruitUserList recruitId={recruitId} />
+  );
   const tabContents = [
     {
       contentId: 0,
@@ -22,10 +24,10 @@ function MenuTab({ recruitId }: { recruitId: number }) {
   useEffect(() => {
     switch (tabIdx) {
       case 0:
-        setChild(<DetailRecruitUserList />);
+        setChild(<DetailRecruitUserList recruitId={recruitId} />);
         break;
       case 1:
-        setChild(<NotificationResults />);
+        setChild(<NotificationResults recruitId={recruitId} />);
         break;
     }
   }, [tabIdx, recruitId]);
