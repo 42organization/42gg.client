@@ -47,6 +47,8 @@ $winner-blue: #040eff;
 
 $coin-yellow: #f6e24d;
 
+$recruit-yellow: #ffc61a;
+
 /* font-family - commmon */
 $common-font: 'Pretendard', sans-serif;
 $common-en-font: 'Roboto', sans-serif;
@@ -359,9 +361,9 @@ $vip-background: linear-gradient(
       color: rgba(255, 255, 255, 1);
       cursor: pointer;
       background: linear-gradient(
-          180deg,
-          #c66bf2 0%,
-          rgba(96, 6, 138, 0.52) 100%
+        180deg,
+        #c66bf2 0%,
+        rgba(96, 6, 138, 0.52) 100%
       );
       border: 0;
       border-radius: 0.625rem;
