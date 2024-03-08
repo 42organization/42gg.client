@@ -209,21 +209,21 @@ export const getRemainTime = ({
   targetTime: Date;
   cmpTime?: Date;
 }) => {
-  const year = targetTime.getHours() - cmpTime.getHours();
+  const year = targetTime.getFullYear() - cmpTime.getFullYear();
   const month = targetTime.getMonth() - cmpTime.getMonth();
   const day = targetTime.getDate() - cmpTime.getDate();
   const hour = targetTime.getHours() - cmpTime.getHours();
   const min = targetTime.getMinutes() - cmpTime.getMinutes();
 
-  return year
+  return year > 0
     ? `${year}년 남음`
-    : month
+    : month > 0
     ? `${month}개월 남음`
-    : day
+    : day > 0
     ? `${day}일 남음`
-    : hour
+    : hour > 0
     ? `${hour}시간 남음`
-    : min
+    : min > 0
     ? `${min}분 남음`
     : `마감`;
 };
