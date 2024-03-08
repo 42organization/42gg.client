@@ -42,10 +42,10 @@ export type PartyCategory = {
   categoryName: string;
 };
 
-export type PartyGameTemplete = {
+export type PartyGameTemplate = {
   gameTemplateId: number;
   gameName: string;
-  categoryId: string;
+  categoryId: number;
   maxGamePeople: number;
   minGamePeople: number;
   maxGameTime: number;
@@ -107,4 +107,16 @@ export type PartyCommentReport = {
   comment: PartyComment;
   message: string;
   createdAt: string;
+};
+
+export type PartyTemplateForm = {
+  gameName: string;
+  categoryId: number;
+  maxGamePeople: number;
+  minGamePeople: number;
+  maxGameTime: number;
+  minGameTime: number;
+  genre: string;
+  difficulty: string;
+  summary: string;
 };

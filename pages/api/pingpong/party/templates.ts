@@ -1,14 +1,15 @@
-import { PartyGameTemplete } from 'types/partyTypes';
+import { PartyGameTemplate } from 'types/partyTypes';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(
   _req: NextApiRequest,
-  res: NextApiResponse<PartyGameTemplete[]>
+  res: NextApiResponse<PartyGameTemplate[]>
 ) {
-  const templetes: PartyGameTemplete[] = [
+  const templetes: PartyGameTemplate[] = [
     {
       gameTemplateId: 0,
       gameName: '테스트 게임',
+      categoryId: 1,
       maxGamePeople: 3,
       minGamePeople: 1,
       maxGameTime: 60,
@@ -20,6 +21,7 @@ export default function handler(
     {
       gameTemplateId: 1,
       gameName: '테스트 게임2',
+      categoryId: 1,
       maxGamePeople: 4,
       minGamePeople: 2,
       maxGameTime: 120,
@@ -30,6 +32,7 @@ export default function handler(
     },
     {
       gameTemplateId: 2,
+      categoryId: 1,
       gameName: '테스트 게임3',
       maxGamePeople: 5,
       minGamePeople: 3,
