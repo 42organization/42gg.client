@@ -19,30 +19,25 @@ const useInfiniteRecruitList = () => {
       'JY09'
     );
 
-  const observer = useRef<IntersectionObserver>(
-    new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && hasNextPage) {
-        fetchNextPage();
-      }
-    })
-  );
-
   // 감지할 대상
   const targetRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 랜더링시 observe 시작
-    if (targetRef.current) {
-      observer.current.observe(targetRef.current);
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && hasNextPage) {
+        fetchNextPage();
+      }
+    });
+    const currentTarget = targetRef.current;
+    if (currentTarget && hasNextPage) {
+      observer.observe(currentTarget);
+      return;
     }
-  }, []);
-
-  useEffect(() => {
     // 다음 페이지가 없을 때 observe 중지
-    if (targetRef.current && !hasNextPage) {
-      observer.current.unobserve(targetRef.current);
+    if (currentTarget && !hasNextPage) {
+      observer.unobserve(currentTarget);
     }
-  }, [hasNextPage]);
+  }, [fetchNextPage, hasNextPage]);
 
   return { data, isLoading, isError, targetRef };
 };
