@@ -21,15 +21,6 @@ export default function usePartyCategory() {
     },
   });
 
-  const deleteMutation = useMutation(
-    (categoryId: number) =>
-      mockInstance.delete(`/party/categorys/${categoryId}`),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('partyCategory');
-      },
-    }
-  );
   const createMutation = useMutation(
     (categoryName: string) =>
       mockInstance.post('/party/categorys', { categoryName }),
@@ -39,15 +30,20 @@ export default function usePartyCategory() {
       },
     }
   );
-
-  const deleteCategory = (categoryId: number) =>
-    deleteMutation.mutate(categoryId);
-  const createCategory = (categoryName: string) =>
-    createMutation.mutate(categoryName);
+  const deleteMutation = useMutation(
+    (categoryId: number) =>
+      mockInstance.delete(`/party/categorys/${categoryId}`),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('partyCategory');
+      },
+    }
+  );
 
   return {
-    categorys: data,
-    deleteCategory,
-    createCategory,
+    categorys: data ?? [], // undefind 대신 []을 이용해 에러 처리
+    deleteCategory: (categoryId: number) => deleteMutation.mutate(categoryId),
+    createCategory: (categoryName: string) =>
+      createMutation.mutate(categoryName),
   };
 }
