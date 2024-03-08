@@ -13,3 +13,23 @@ export type recruitmentListData = {
   recruitments: recruitment[];
   totalPage: number;
 };
+export interface ICheck {
+  id: number;
+  contents: string;
+}
+
+export interface IQuestionForm {
+  questionId: number;
+  question: string;
+  inputType: 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
+  checkList?: ICheck[];
+}
+
+export interface IRecruitmentDetail {
+  startDate: string;
+  endDate: string;
+  title: string;
+  contents: string;
+  generations: string;
+  form: IQuestionForm[];
+}
