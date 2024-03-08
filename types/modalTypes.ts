@@ -54,6 +54,8 @@ type AdminModal =
   | 'TOURNAMENT_BRAKET_EDIT'
   | 'TOURNAMENT_PARTICIPANT_EDIT';
 
+type PartyModal = 'NO_SHOW' | 'ROOM' | 'COMMENT';
+
 type ModalName =
   | null
   | `EVENT-${EventModal}`
@@ -68,7 +70,8 @@ type ModalName =
   | `EDIT-ITEM-${EditItemModal}`
   | `STORE-${StoreModal}`
   | `PURCHASE-${PurchaseModal}`
-  | `TOURNAMENT-${TournamentModal}`;
+  | `TOURNAMENT-${TournamentModal}`
+  | `PARTY-${PartyModal}`;
 
 export interface Cancel {
   startTime: string;
@@ -112,6 +115,12 @@ export interface IRandomItem {
   color: RandomColors;
 }
 
+interface PartyRoomReport {
+  roomId: number;
+  commentId: number;
+  type: 'ROOM' | 'NO_SHOW' | 'COMMENT ';
+}
+
 export interface Modal {
   modalName: ModalName;
   manual?: Manual;
@@ -141,4 +150,5 @@ export interface Modal {
   tournamentInfo?: TournamentInfo;
   tournament?: ITournament;
   tournamentId?: number;
+  partyReport?: PartyRoomReport;
 }

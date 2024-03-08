@@ -1,15 +1,18 @@
-import { PartyRoomDetail, RoomStatus } from 'types/partyTypes';
+import { PartyRoomDetail } from 'types/partyTypes';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+type status = 'HIDDEN' | 'OPEN' | 'START' | 'FINISH';
 export default function handler(
   _req: NextApiRequest,
   res: NextApiResponse<PartyRoomDetail>
 ) {
   const templetes: PartyRoomDetail[] = new Array(10);
+  const roomStatus: status[] = ['HIDDEN', 'OPEN', 'START', 'FINISH'];
 
   for (let i = 1; i < 11; i++) {
-    const date = new Date();
+    const date = new Date().toString();
     const create = i;
+
     templetes.push({
       roomId: i,
       title: '파티룸 ' + i,
@@ -22,14 +25,7 @@ export default function handler(
       myNickname: create === 1 ? 'host' : 'guest' + create,
       hostNickname: 'host',
       content: 'content is good',
-      roomStatus:
-        create % 4 === RoomStatus.WAITING
-          ? RoomStatus.WAITING
-          : create % 4 === RoomStatus.PLAYING
-          ? RoomStatus.PLAYING
-          : create % 4 === RoomStatus.END
-          ? RoomStatus.END
-          : RoomStatus.HIDDEN,
+      roomStatus: roomStatus[i % 4],
       roomUsers: [
         {
           roomUserId: 1,
