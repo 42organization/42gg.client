@@ -46,7 +46,6 @@ export type PartyGameTemplate = {
   gameTemplateId: number;
   categoryId: number;
   gameName: string;
-  categoryId: number;
   maxGamePeople: number;
   minGamePeople: number;
   maxGameTime: number;
@@ -63,29 +62,29 @@ export type PartyReport =
 
 export type PartyRoomReport = {
   id: number;
-  reporterId: string;
-  reporteeId: string;
+  reporterIntraId: string;
+  reporteeIntraId: string;
   roomId: number;
   message: string;
-  createdAt: Date;
+  createdAt: string;
 };
 
 export type PartyNoshowReport = {
   id: number;
-  reporterId: string;
-  reporteeId: string;
+  reporterIntraId: string;
+  reporteeIntraId: string;
   roomId: number;
   message: string;
-  createdAt: Date;
+  createdAt: string;
 };
 
 export type PartyCommentReport = {
   id: number;
-  reporterId: string;
+  reporterIntraId: string;
   commentsId: number;
   roomId: number;
   message: string;
-  createdAt: Date;
+  createdAt: string;
 };
 
 export type PartyForm = {
@@ -107,4 +106,13 @@ export type PartyTemplateForm = {
   genre: string;
   difficulty: string;
   summary: string;
+};
+
+export type PartyPenaltyAdmin = {
+  id: number;
+  user: object;
+  penaltyType: string;
+  message: string;
+  startTime: string;
+  penaltyTime: number;
 };

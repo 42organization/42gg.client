@@ -21,19 +21,19 @@ const tableTitle: { [key: string]: string } = {
 };
 
 export default function PartyCategories() {
-  const { categorys } = usePartyRoom();
+  // const { categorys } = usePartyRoom();
   const [newCategoryName, setNewCategoryName] = useState('');
+  // usecategory hook사용
+  // const categories: PartyCategory[] = categorys.map((cate) => ({
+  //   categoryId: cate.categoryId,
+  //   categoryName:
+  //     categorys.find((c) => c.categoryId === cate.categoryId)?.categoryName ??
+  //     '???',
+  // }));
 
-  const categories: PartyCategory[] = categorys.map((cate) => ({
-    categoryId: cate.categoryId,
-    categoryName:
-      categorys.find((c) => c.categoryId === cate.categoryId)?.categoryName ??
-      '???',
-  }));
-
-  useEffect(() => {
-    console.log('render');
-  }, [categorys]);
+  // useEffect(() => {
+  //   console.log('render');
+  // }, [categorys]);
 
   const handleConfirm = () => {
     if (newCategoryName.trim() !== '') {
@@ -63,7 +63,6 @@ export default function PartyCategories() {
       (columnName) => tableTitle[columnName]
     )
   );
-  console.log(categories);
   return (
     <div className={styles.userManagementWrap}>
       <div className={styles.header}>
@@ -79,7 +78,7 @@ export default function PartyCategories() {
         <Table className={styles.table} aria-label='UserManagementTable'>
           <AdminTableHead tableName={'partyCategory'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {categories.map((c) => (
+            {/* {categories.map((c) => (
               <TableRow key={c.categoryId} className={styles.tableRow}>
                 {tableFormat['partyCategory'].columns.map((columnName) => {
                   return (
@@ -98,7 +97,7 @@ export default function PartyCategories() {
                   );
                 })}
               </TableRow>
-            ))}
+            ))} */}
           </TableBody>
         </Table>
       </TableContainer>

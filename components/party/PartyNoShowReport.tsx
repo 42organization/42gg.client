@@ -15,8 +15,8 @@ import styles from 'styles/party/PartyMain.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: '번호',
-  reporterId: '신고자 이름',
-  reporteeId: '피신고자 이름',
+  reporterIntraId: '신고자 이름',
+  reporteeIntraId: '피신고자 이름',
   roomId: '방',
   message: '메세지',
   createdAt: '시간',
@@ -25,26 +25,25 @@ const tableTitle: { [key: string]: string } = {
 export default function PartyNoShowReport() {
   const [noShowReport, setNoShowReport] = useState<PartyNoshowReport[]>([]);
 
-  useEffect(() => {
+  const fetchNoShowReport = () => {
     mockInstance
       .get('/party/admin/reports/users')
       .then(({ data }: { data: PartyNoshowReport[] }) => {
         setNoShowReport(data);
       });
-  }, []);
+  };
 
   const deleteNoshowReport = (roomId: number, userId: string) => {
     mockInstance
       .delete(`/party/reports/rooms/${roomId}/users/${userId}`)
+      .then(() => {
+        fetchNoShowReport();
+      })
       .catch((error) => {
         console.error('카테고리 삭제 중 오류가 발생했습니다:', error);
       });
   };
-  console.log(
-    tableFormat['partyNoshowReport'].columns.map(
-      (columnName) => tableTitle[columnName]
-    )
-  );
+
   return (
     <div className={styles.userManagementWrap}>
       <div className={styles.header}>
@@ -65,7 +64,7 @@ export default function PartyNoShowReport() {
                       {columnName === 'delete' ? (
                         <button
                           onClick={() =>
-                            deleteNoshowReport(rn.roomId, rn.reporteeId)
+                            deleteNoshowReport(rn.roomId, rn.reporteeIntraId)
                           }
                         >
                           삭제

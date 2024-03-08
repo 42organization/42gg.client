@@ -1,8 +1,8 @@
-import PartyReportNarv from './PartyReportNav';
+import PartyReportNav from './PartyReportNav';
 export default function PartyReport() {
   return (
     <>
-      <PartyReportNarv />
+      <PartyReportNav />
     </>
   );
 }

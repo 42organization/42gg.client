@@ -7,7 +7,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { PartyGameTemplete } from 'types/partyTypes';
+import { PartyGameTemplate } from 'types/partyTypes';
 import { mockInstance } from 'utils/mockAxios';
 import { tableFormat } from 'constants/admin/table';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
@@ -30,14 +30,18 @@ const tableTitle: { [key: string]: string } = {
 };
 
 export default function PartyTemplate() {
-  const [templates, setTemplates] = useState<PartyGameTemplete[]>([]);
+  const [templates, setTemplates] = useState<PartyGameTemplate[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTemplateId, setSelectedTemplateId] = useState<number | null>(
     null
   );
 
-  const handleAddOrEditTemplate = (templateId: number | null = null) => {
-    setSelectedTemplateId(templateId);
+  const handleAddOrEditTemplate = (templateId?: number) => {
+    if (templateId) {
+      setSelectedTemplateId(templateId);
+    } else {
+      setSelectedTemplateId(null);
+    }
     setIsModalOpen(true);
   };
 
@@ -49,7 +53,7 @@ export default function PartyTemplate() {
   useEffect(() => {
     mockInstance
       .get(`/party/templates`)
-      .then(({ data }: { data: PartyGameTemplete[] }) => {
+      .then(({ data }: { data: PartyGameTemplate[] }) => {
         console.log(data);
         setTemplates(data);
       })
@@ -105,7 +109,7 @@ export default function PartyTemplate() {
                             삭제
                           </button>
                         ) : (
-                          t[columnName as keyof PartyGameTemplete]?.toString()
+                          t[columnName as keyof PartyGameTemplate]?.toString()
                         )}
                       </TableCell>
                     );

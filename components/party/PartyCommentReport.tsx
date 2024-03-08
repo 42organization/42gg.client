@@ -15,7 +15,7 @@ import styles from 'styles/party/PartyMain.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: '번호',
-  reporterId: '신고자 이름',
+  reporterIntraId: '신고자 이름',
   commentsId: '댓글 번호',
   roomId: '방',
   message: '메세지',
@@ -23,30 +23,30 @@ const tableTitle: { [key: string]: string } = {
 };
 
 export default function PartyCommentReport() {
-  const [noCommentReport, setNoCommentReport] = useState<PartyCommentReport[]>(
-    []
-  );
+  const [CommentReport, setCommentReport] = useState<PartyCommentReport[]>([]);
 
   useEffect(() => {
+    fetcheCommentReport();
+  }, []);
+
+  const fetcheCommentReport = () => {
     mockInstance
       .get('/party/admin/reports/comments')
       .then(({ data }: { data: PartyCommentReport[] }) => {
-        setNoCommentReport(data);
+        setCommentReport(data);
       });
-  }, []);
+  };
 
   const deleteRoomReport = (commentsId: number) => {
     mockInstance
       .delete(`/party/reports/comments/${commentsId}`)
+      .then(() => {
+        fetcheCommentReport();
+      })
       .catch((error) => {
         console.error('댓글 삭제 중 오류가 발생했습니다:', error);
       });
   };
-  console.log(
-    tableFormat['partyCommentReport'].columns.map(
-      (columnName) => tableTitle[columnName]
-    )
-  );
   return (
     <div className={styles.userManagementWrap}>
       <div className={styles.header}>
@@ -56,7 +56,7 @@ export default function PartyCommentReport() {
         <Table className={styles.table} aria-label='UserManagementTable'>
           <AdminTableHead tableName={'partyCommentReport'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {noCommentReport.map((rc) => (
+            {CommentReport.map((rc) => (
               <TableRow key={rc.id} className={styles.tableRow}>
                 {tableFormat['partyCommentReport'].columns.map((columnName) => {
                   return (

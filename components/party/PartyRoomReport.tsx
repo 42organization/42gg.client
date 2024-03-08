@@ -15,8 +15,8 @@ import styles from 'styles/party/PartyMain.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: '번호',
-  reporterId: '신고자 이름',
-  reporteeId: '피신고자 이름',
+  reporterIntraId: '신고자 이름',
+  reporteeIntraId: '피신고자 이름',
   roomId: '방',
   message: '메세지',
   createdAt: '시간',
@@ -26,23 +26,28 @@ export default function PartyRoomReport() {
   const [noRoomReport, setRoomReport] = useState<PartyRoomReport[]>([]);
 
   useEffect(() => {
+    fetchRoomReport();
+  }, []);
+
+  const fetchRoomReport = () => {
     mockInstance
       .get('/party/admin/reports/rooms')
       .then(({ data }: { data: PartyRoomReport[] }) => {
         setRoomReport(data);
       });
-  }, []);
-
-  const deleteRoomReport = (room_id: number, user_id: string) => {
-    mockInstance.delete(`/party/reports/rooms/${room_id}`).catch((error) => {
-      console.error('방 신고 삭제 중 오류가 발생했습니다:', error);
-    });
   };
-  console.log(
-    tableFormat['partyRoomReport'].columns.map(
-      (columnName) => tableTitle[columnName]
-    )
-  );
+
+  const deleteRoomReport = (room_id: number) => {
+    mockInstance
+      .delete(`/party/reports/rooms/${room_id}`)
+      .then(() => {
+        fetchRoomReport();
+      })
+      .catch((error) => {
+        console.error('방 신고 삭제 중 오류가 발생했습니다:', error);
+      });
+  };
+
   return (
     <div className={styles.userManagementWrap}>
       <div className={styles.header}>
@@ -61,11 +66,7 @@ export default function PartyRoomReport() {
                       key={columnName}
                     >
                       {columnName === 'delete' ? (
-                        <button
-                          onClick={() =>
-                            deleteRoomReport(r.roomId, r.reporteeId)
-                          }
-                        >
+                        <button onClick={() => deleteRoomReport(r.roomId)}>
                           삭제
                         </button>
                       ) : (

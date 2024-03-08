@@ -4,7 +4,7 @@ import PartyCommentReport from './PartyCommentReport';
 import PartyNoShowReport from './PartyNoShowReport';
 import PartyRoomReport from './PartyRoomReport';
 
-export default function PartyReportNarv() {
+export default function PartyReportNav() {
   const [navValue, setNavValue] = useState('noshow');
   return (
     <>
@@ -21,8 +21,8 @@ export default function PartyReportNarv() {
           </li>
         </ul>
         {navValue === 'noshow' && <PartyNoShowReport />}
-        {navValue === 'room' && <PartyRoomReport />}
         {navValue === 'comment' && <PartyCommentReport />}
+        {navValue === 'room' && <PartyRoomReport />}
       </div>
     </>
   );

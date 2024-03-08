@@ -227,4 +227,15 @@ export const tableFormat: TableFormat = {
       'createdAt',
     ],
   },
+  partyPenaltyAdmin: {
+    name: '파티 패널티',
+    columns: [
+      'id',
+      'user',
+      'penaltyType',
+      'message',
+      'startTime',
+      'penaltyTime',
+    ],
+  },
 };
