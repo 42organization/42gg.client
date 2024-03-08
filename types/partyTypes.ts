@@ -109,6 +109,15 @@ export type PartyCommentReport = {
   createdAt: string;
 };
 
+export type PartyForm = {
+  title: string;
+  categoryId: number;
+  minPeople: number;
+  maxPeople: number;
+  content: string;
+  dueDate: string;
+};
+
 export type PartyTemplateForm = {
   gameName: string;
   categoryId: number;
