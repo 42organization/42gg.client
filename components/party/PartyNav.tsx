@@ -3,7 +3,7 @@ import styles from 'styles/party/PartyNav.module.scss';
 import PartyCategory from './PartyCategory';
 import PartyPenalty from './PartyPenalty';
 import PartyReport from './PartyReport';
-import PartyRoom from './PartyRoom';
+import PartyRoomTable from './PartyRoomTable';
 import PartyTemplate from './PartyTemplate';
 
 export default function PartyNav() {
@@ -31,7 +31,7 @@ export default function PartyNav() {
 
         {navValue === 'penalty' && <PartyPenalty />}
         {navValue === 'report' && <PartyReport />}
-        {navValue === 'room' && <PartyRoom />}
+        {navValue === 'room' && <PartyRoomTable />}
         {navValue === 'template' && <PartyTemplate />}
         {navValue === 'category' && <PartyCategory />}
       </div>

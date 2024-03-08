@@ -7,11 +7,13 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { PartyRoomTable } from 'types/admin/adminParty';
+import { PartyRoomColumn } from 'types/admin/adminParty';
 import { dateToStringShort } from 'utils/handleTime';
 import { tableFormat } from 'constants/admin/table';
+import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
+import usePartyCategory from 'hooks/party/usePartyCategory';
 import usePartyRoom from 'hooks/party/usePartyList';
 import styles from 'styles/party/PartyMain.module.scss';
 import PartyRoomEdit from './PartyRoomEdit';
@@ -29,27 +31,35 @@ const tableTitle: { [key: string]: string } = {
 
 export default function PartyRoomTable() {
   const [modal, setModal] = useState<number>();
-  const { partyRooms, categorys } = usePartyRoom({ isAdmin: true });
+  const { categorys } = usePartyCategory();
+  const { partyRooms, updateRoomsByTitle } = usePartyRoom({ isAdmin: true });
+  const [searchKeyword, setSearchKeyword] = useState('');
 
-  const rooms: PartyRoomTable[] = partyRooms.map((room) => ({
+  const rooms: PartyRoomColumn[] = partyRooms.map((room) => ({
     roomId: room.roomId,
     title: room.title,
     categoryName:
-      categorys.find((c) => c.categoryId === room.categoryId)?.categoryName ??
+      categorys?.find((c) => c.categoryId === room.categoryId)?.categoryName ??
       '???',
-    createDate: dateToStringShort(room.createDate),
-    dueDate: dateToStringShort(room.dueDate),
-    creatorIntraId: room.creator?.intraId ?? '작성자intra',
+    createDate: dateToStringShort(new Date(room.createDate)),
+    dueDate: dateToStringShort(new Date(room.dueDate)),
+    creatorIntraId: room.creatorIntraId ?? '작성자intra',
     roomStatus: room.roomStatus,
   }));
-  console.log(rooms);
+
   return (
     <>
       {!modal ? (
         <div className={styles.userManagementWrap}>
           <div className={styles.header}>
             <span className={styles.title}>파티방 관리</span>
-            {/* <AdminSearchBar initSearch={initSearch} /> */}
+            {/* 검색어 intraId로 되어있는거 보류 */}
+            <AdminSearchBar
+              initSearch={(keyword) => {
+                setSearchKeyword(keyword ?? '');
+                updateRoomsByTitle(searchKeyword);
+              }}
+            />
           </div>
           {/* 미리 합쳐진 컴포넌트 쓰면 좋을듯*/}
           <TableContainer className={styles.tableContainer} component={Paper}>
@@ -66,7 +76,8 @@ export default function PartyRoomTable() {
                       >
                         {columnName !== 'etc' ? (
                           <div>
-                            {room[columnName as keyof PartyRoomTable] ?? '없음'}
+                            {room[columnName as keyof PartyRoomColumn] ??
+                              '없음'}
                           </div>
                         ) : (
                           <button

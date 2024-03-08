@@ -1,18 +1,16 @@
+export type PartyRoomStatus = 'OPEN' | 'START' | 'FINISH' | 'HIDDEN';
+
 export type PartyRoom = {
   roomId: number;
   title: string;
   categoryId: number;
-  content: string;
   currentPeople: number;
   minPeople: number;
   maxPeople: number;
   dueDate: string;
   createDate: string;
-  roomStatus: 'OPEN' | 'START' | 'FINISH' | 'HIDDEN';
-  creator?: {
-    userId: number;
-    intraId: string;
-  };
+  roomStatus: PartyRoomStatus;
+  creatorIntraId?: string;
 };
 
 export type PartyRoomDetail = PartyRoom & {
@@ -26,6 +24,7 @@ export type PartyRoomDetail = PartyRoom & {
 export type PartyRoomUser = {
   roomUserId: number;
   nickname: string;
+  intraId?: string;
 };
 
 // 닉네임과 아이디를 가지고 있는 api를 만들어줌. 추가 필요.
@@ -43,10 +42,11 @@ export type PartyCategory = {
   categoryName: string;
 };
 
-export type PartyGameTemplete = {
+export type PartyGameTemplate = {
   gameTemplateId: number;
   categoryId: number;
   gameName: string;
+  categoryId: number;
   maxGamePeople: number;
   minGamePeople: number;
   maxGameTime: number;
@@ -86,4 +86,25 @@ export type PartyCommentReport = {
   roomId: number;
   message: string;
   createdAt: Date;
+};
+
+export type PartyForm = {
+  title: string;
+  categoryId: number;
+  minPeople: number;
+  maxPeople: number;
+  content: string;
+  dueDate: string;
+};
+
+export type PartyTemplateForm = {
+  gameName: string;
+  categoryId: number;
+  maxGamePeople: number;
+  minGamePeople: number;
+  maxGameTime: number;
+  minGameTime: number;
+  genre: string;
+  difficulty: string;
+  summary: string;
 };
