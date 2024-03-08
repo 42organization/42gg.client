@@ -1,5 +1,8 @@
 import { Fragment } from 'react';
+import { List } from '@mui/material';
 import useInfiniteRecruitList from 'hooks/recruit/useInfiniteRecruitList';
+import styles from 'styles/recruit/RecruitList/list.module.scss';
+import RecruitListItem from './RecruitListItem';
 
 const RecruitList = () => {
   const { data, isLoading, isError, targetRef } = useInfiniteRecruitList();
@@ -14,16 +17,18 @@ const RecruitList = () => {
   }
 
   return (
-    <div>
-      {data.pages.map((page, pageIndex) => (
-        <Fragment key={pageIndex}>
-          {page.recruitments.map((recruit) => (
-            <div key={recruit.id}>{recruit.title}</div>
-          ))}
-        </Fragment>
-      ))}
+    <>
+      <List className={styles.list}>
+        {data.pages.map((page, pageIndex) => (
+          <Fragment key={pageIndex}>
+            {page.recruitments.map((recruit) => (
+              <RecruitListItem key={recruit.id} recruit={recruit} />
+            ))}
+          </Fragment>
+        ))}
+      </List>
       <div ref={targetRef} />
-    </div>
+    </>
   );
 };
 
