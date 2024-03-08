@@ -1,16 +1,6 @@
 @import 'styles/common.scss';
 @import './common.scss';
 
-.container {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  flex-direction: column;
-  overflow-y: scroll;
-  background-color: $white2;
-  align-items: center;
-}
-
 .titleContainer {
   @include pageTitle;
   display: flex;
