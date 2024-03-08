@@ -33,7 +33,6 @@ const useInfiniteRecruitList = () => {
       observer.observe(currentTarget);
       return;
     }
-    // 다음 페이지가 없을 때 observe 중지
     if (currentTarget && !hasNextPage) {
       observer.unobserve(currentTarget);
     }
