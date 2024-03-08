@@ -9,11 +9,4 @@ export default function PartyReport() {
     return null;
   }
 
-  // const content: { [key: string]: JSX.Element | null } = {
-  //   NO_SHOW: <PartyNoShowReportModal partyReport={partyReport} />,
-  //   COMMENT: <PartyCommentReportModal partyReport={partyReport} />,
-  //   ROOM: <PartyRoomReportModal partyReport={partyReport} />,
-  // };
-
-  // return content[modalName];
 }

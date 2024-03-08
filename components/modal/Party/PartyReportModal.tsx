@@ -37,6 +37,7 @@ export function PartyReport({
     <form onSubmit={handleSubmit}>
       <textarea
         rows={10}
+        autofocus
         cols={80}
         placeholder='신고 내역 작성'
         value={value}
