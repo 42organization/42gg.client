@@ -2,11 +2,11 @@ import { useQuery } from 'react-query';
 import { IRecruitmentDetail } from 'types/recruit/recruitments';
 import { mockInstance } from 'utils/mockAxios';
 
-const useRecruitDetail = ({ id }: { id: number }) => {
+const useRecruitDetail = ({ recruitId }: { recruitId: number }) => {
   const { data, isLoading } = useQuery<IRecruitmentDetail>({
-    queryKey: ['recruitDetail', id],
+    queryKey: ['recruitDetail', recruitId],
     queryFn: async () => {
-      const res = await mockInstance.get(`/recruitments/${id}`);
+      const res = await mockInstance.get(`/recruitments/${recruitId}`);
       return res.data;
     },
     refetchOnWindowFocus: false,
