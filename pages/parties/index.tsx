@@ -1,62 +1,70 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import PartyRoomList from 'components/party/PartyRoomList';
+import usePartyCategory from 'hooks/party/usePartyCategory';
 import usePartyRoom from 'hooks/party/usePartyList';
 import styles from 'styles/party/PartyMain.module.scss';
 
 export default function PartyMainPage() {
+  const { categorys } = usePartyCategory();
   const [categoryFilter, setCategoryFilter] = useState<number | null>(null);
-  const { partyRooms, joinedPartyRooms, categorys } = usePartyRoom({
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const { partyRooms, joinedPartyRooms, updateRoomsByTitle } = usePartyRoom({
     withJoined: true,
   });
 
+  const roomsFiltered = partyRooms.filter(
+    (room) => !categoryFilter || room.categoryId === categoryFilter
+  );
+
   return (
-    <div className={styles.container}>
+    <div className={styles.pageContainer}>
       <section>
         <h2>참여중인 파티</h2>
-        <ul>
-          {joinedPartyRooms.map((room) => (
-            <li key={room.roomId}>
-              <Link href={`/parties/${room.roomId}`}>{room.title}</Link>
-              <span>{`${room.currentPeople}/${room.maxPeople}`}</span>
-            </li>
-          ))}
-        </ul>
+        <PartyRoomList rooms={joinedPartyRooms} />
       </section>
-      <section>
-        <h2>파티 목록</h2>
-        <nav>
+      <section className={styles.roomToolBar}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            updateRoomsByTitle(searchKeyword);
+          }}
+        >
+          <input
+            type='text'
+            placeholder='방 제목'
+            onChange={(e) => setSearchKeyword(e.target.value)}
+          />
+        </form>
+        <button>
+          <Link href='/parties/create'>파티 생성</Link>
+        </button>
+      </section>
+      <section className={styles.roomListAllContainer}>
+        <nav className={styles.categoryNav}>
           <ul>
-            <li key={'all'} onClick={() => setCategoryFilter(null)}>
+            <li
+              key={0}
+              onClick={() => setCategoryFilter(null)}
+              className={!categoryFilter ? styles.selected : ''}
+            >
               전체
             </li>
-            {categorys.map((c) => (
+            {categorys?.map((c) => (
               <li
                 key={c.categoryId}
                 onClick={() => setCategoryFilter(c.categoryId)}
+                className={
+                  categoryFilter === c.categoryId ? styles.selected : ''
+                }
               >
                 {c.categoryName}
               </li>
             ))}
           </ul>
         </nav>
-        <ul>
-          {partyRooms
-            .filter(
-              (room) => !categoryFilter || room.categoryId === categoryFilter
-            )
-            .map((room) => (
-              <li key={room.roomId}>
-                <div>
-                  <Link href={`/parties/${room.roomId}`}>{room.title}</Link>
-                  <span>{`${room.currentPeople}/${room.maxPeople}`}</span>
-                </div>
-              </li>
-            ))}
-        </ul>
+        <PartyRoomList rooms={roomsFiltered} />
       </section>
-      <button>
-        <Link href='/parties/create'>파티 생성</Link>
-      </button>
     </div>
   );
 }

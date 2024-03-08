@@ -1,3 +1,59 @@
-div {
-  color: black;
+@import 'styles/common.scss';
+
+.tmp {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.container {
+  width: 40%;
+  padding: 40px;
+  border: 1px solid black;
+
+  .headerWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    h2 {
+      margin: 1em 0;
+    }
+
+    select {
+      height: 1.5em;
+      padding: 0 0.5em;
+      font-size: 1em;
+    }
+  }
+
+  .commentContainer {
+    ul {
+      li {
+        margin-bottom: 1em;
+
+        .commentHeader {
+          display: flex;
+          justify-content: space-between;
+          .commentUserName {
+            font-weight: 500;
+          }
+          .commentDate {
+            margin-left: 1em;
+            font-size: $small-font;
+            font-weight: 400;
+            color: $gray;
+          }
+        }
+        .commentUserName {
+          font-weight: 600;
+        }
+        .commentContent {
+          margin: 0.5em;
+          font-weight: 400;
+        }
+      }
+    }
+  }
 }

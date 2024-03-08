@@ -1,5 +1,6 @@
+import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
-import { PartyCategory, PartyRoom } from 'types/partyTypes';
+import { PartyRoom } from 'types/partyTypes';
 import { mockInstance } from 'utils/mockAxios';
 
 type PartyRoomProps = {
@@ -7,53 +8,37 @@ type PartyRoomProps = {
   withJoined?: boolean;
 };
 
-type Response<T> = {
-  [K in keyof T]: T[K] extends Date ? string : T[K];
-};
-
-const usePartyRoom = ({
+export default function usePartyRoomList({
   isAdmin = false,
   withJoined = false,
-}: PartyRoomProps = {}) => {
-  const [categorys, setCategorys] = useState<PartyCategory[]>([]);
+}: PartyRoomProps = {}) {
   const [partyRooms, setPartyRooms] = useState<PartyRoom[]>([]);
   const [joinedPartyRooms, setJoinedPartyRooms] = useState<PartyRoom[]>([]);
 
+  const getRoomsAxios = async (
+    title?: string
+  ): Promise<AxiosResponse<PartyRoom[]>> => {
+    const query = title ? `?title${title}` : '';
+    return isAdmin
+      ? mockInstance.get('/party/admin/rooms' + query)
+      : mockInstance.get('/party/rooms' + query);
+  };
+
   useEffect(() => {
-    mockInstance
-      .get('/party/categorys')
-      .then(({ data }: { data: PartyCategory[] }) => {
-        setCategorys(data);
-      });
+    const axioses = [getRoomsAxios()];
+    withJoined && axioses.push(mockInstance.get('/party/rooms/joined'));
+
+    Promise.all(axioses).then(([roomsRes, joinedRoomsRes]) => {
+      setPartyRooms(roomsRes.data);
+      setJoinedPartyRooms(joinedRoomsRes?.data ?? []); // joinedRooms는 조건부로 가져오므로 ?.data로 접근
+    });
   }, []);
 
-  // date타입을 어떻게 잘 받을지?
-  useEffect(() => {
-    const getRoomsUrl = isAdmin ? '/party/admin/rooms' : '/party/rooms';
-    mockInstance
-      .get(getRoomsUrl)
-      .then(({ data }: { data: Response<PartyRoom>[] }) => {
-        setPartyRooms(
-          data.map((room) => ({
-            ...room,
-            createDate: new Date(room.createDate),
-            dueDate: new Date(room.dueDate),
-          }))
-        );
-      });
-  }, [isAdmin]);
+  function updateRoomsByTitle(title: string) {
+    getRoomsAxios(title).then(({ data }: { data: PartyRoom[] }) =>
+      setPartyRooms(data)
+    );
+  }
 
-  useEffect(() => {
-    if (withJoined) {
-      mockInstance
-        .get('/party/rooms/joined')
-        .then(({ data }: { data: PartyRoom[] }) => {
-          setJoinedPartyRooms(data);
-        });
-    }
-  }, [isAdmin, withJoined]);
-
-  return { partyRooms, joinedPartyRooms, categorys };
-};
-
-export default usePartyRoom;
+  return { partyRooms, joinedPartyRooms, updateRoomsByTitle };
+}

@@ -1,0 +1,59 @@
+@import 'styles/common.scss';
+
+$dark-green: #024900;
+$medium-green: #4f9237;
+$light-green: #67a64a;
+
+.roomListWrap {
+  padding: 0.5em;
+  margin: 0;
+  background-color: $medium-green;
+  border-radius: $medium-radius;
+
+  .roomItemWrap {
+    display: flex;
+    padding: 0.5em;
+    margin: 2px 0;
+    color: black;
+    background-color: $white2;
+    border-radius: $medium-radius;
+    justify-content: space-between;
+    align-items: center;
+
+    .verticalLine {
+      width: 4px;
+      background-color: black;
+    }
+
+    .roomItemDescWrap {
+
+      position: relative;
+      width: 100%;
+      .roomItemCategory {
+        font-size: $small-font;
+        font-weight: 400;
+        color: $dark-gray;
+      }
+      .roomItemTitle {
+        margin-left: 0.2em;
+        font-size: $big-font;
+      }
+
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        box-sizing: border-box;
+        width: 0;
+        height: 100%;
+        content: '';
+        border: 1px solid $medium-gray;
+      }
+    }
+
+    .roomPeopleWrap {
+      margin-left: 0.5em;
+      letter-spacing: 0.1em;
+    }
+  }
+}
