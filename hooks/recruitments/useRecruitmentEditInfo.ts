@@ -158,31 +158,27 @@ export default function useRecruitmentEditInfo(
   };
 
   function makeEmptyQuestion(inputType: string): Iquestion | null {
-    let emptyQuestion: Iquestion | null = null;
-
     switch (inputType) {
       case 'TEXT':
-        emptyQuestion = {
+        return {
           question: '',
           inputType: 'TEXT',
         };
-        break;
       case 'SINGLE_CHECK':
-        emptyQuestion = {
+        return {
           question: '',
           inputType: 'SINGLE_CHECK',
           checkList: [],
         };
-        break;
       case 'MULTI_CHECK':
-        emptyQuestion = {
+        return {
           question: '',
           inputType: 'MULTI_CHECK',
           checkList: [],
         };
+      default:
+        return null;
     }
-
-    return emptyQuestion;
   }
 
   return {
