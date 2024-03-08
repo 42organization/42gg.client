@@ -5,9 +5,13 @@ import styles from 'styles/recruit/RecruitList/list.module.scss';
 
 const RecruitListItem = ({ recruit }: { recruit: recruitment }) => {
   return (
-    <ListItemButton className={styles.list_item}>
+    <ListItemButton className={styles.listItem}>
       <ListItemText
+        className={styles.listItemText}
         primary={recruit.title}
+        primaryTypographyProps={{
+          className: styles.listItemTextPrimary,
+        }}
         secondary={
           dateToString(new Date(recruit.startDate)) +
           ' ~ ' +
