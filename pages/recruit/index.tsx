@@ -1,6 +1,7 @@
 import Lottie from 'lottie-react';
 import { Button } from '@mui/material';
 import RecruitList from 'components/recruit/RecruitList';
+import StickyHeader from 'components/recruit/StickyHeader';
 import recruitPingpong from 'public/lottie/recruitPingPong.json';
 import useCheckRecruit from 'hooks/recruit/useCheckRecruit';
 import commonStyle from 'styles/recruit/common.module.scss';
@@ -34,7 +35,7 @@ function Recruit() {
 
   return (
     <>
-      <span className={textStyle.pageTitle}>42GG 팀원 모집</span>
+      <StickyHeader headerTitle={'42GG 팀원 모집'} />
       <Lottie
         className={commonStyle.pingpongAnimation}
         animationData={recruitPingpong}

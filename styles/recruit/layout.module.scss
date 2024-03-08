@@ -3,7 +3,6 @@
 .recruitLayout {
   display: flex;
   width: 100vw;
-  height: 100vh;
   flex-direction: column;
   background-color: $white2;
   align-items: center;
@@ -14,9 +13,9 @@
   width: 100vw;
   min-width: 320px;
   max-width: 797px;
-  height: 100vh;
+  min-height: 100vh;
   flex-direction: column;
-  padding: 1rem 1.5rem 2rem;
+  padding: 0 1.5rem 2rem;
   align-items: center;
   gap: 1rem;
 }
