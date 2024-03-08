@@ -16,7 +16,7 @@ function Recruit() {
 
   if (!isLoading && !isRecruiting) {
     return (
-      <>
+      <div className={layoutStyle.noRecruit}>
         <Lottie
           className={commonStyle.pingpongAnimation}
           animationData={recruitPingpong}
@@ -28,7 +28,7 @@ function Recruit() {
         <Button size={'large'} variant={'contained'} color={'primary'} href='/'>
           42GG로 돌아가기
         </Button>
-      </>
+      </div>
     );
   }
 
