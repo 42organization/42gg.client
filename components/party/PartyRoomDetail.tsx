@@ -1,7 +1,7 @@
 import { PartyRoomDetail } from 'types/partyTypes';
 import { dateToStringShort, getRemainTime, getTimeAgo } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
-import usePartyRoom from 'hooks/party/usePartyList';
+import usePartyCategory from 'hooks/party/usePartyCategory';
 
 type PartyRoomDetailProps = {
   partyRoomDetail: PartyRoomDetail;
@@ -16,7 +16,7 @@ export function PartyDescription({
     await mockInstance.patch(`/party/rooms/${partyRoomDetail.roomId}`);
     fetchRoomDetail();
   };
-  const { categorys } = usePartyRoom({});
+  const { categorys } = usePartyCategory();
 
   return (
     <div>
