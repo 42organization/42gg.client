@@ -1,30 +1,25 @@
-import { Dispatch, SetStateAction, useState } from 'react';
 import { PartyRoomDetail } from 'types/partyTypes';
 import { dateToStringShort, getRemainTime, getTimeAgo } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
-import { PartyReport } from 'components/modal/Party/PartyReportModal';
 import usePartyRoom from 'hooks/party/usePartyList';
 
 type PartyRoomDetailProps = {
   partyRoomDetail: PartyRoomDetail;
-  onClick: boolean;
-  setOnClick: Dispatch<SetStateAction<boolean>>;
+  fetchRoomDetail: () => void;
 };
 
-function PartyDescription({
+export function PartyDescription({
   partyRoomDetail,
-  setOnClick,
-  onClick,
+  fetchRoomDetail,
 }: PartyRoomDetailProps) {
   const handlerExit = async () => {
     await mockInstance.patch(`/party/rooms/${partyRoomDetail.roomId}`);
-    setOnClick(!onClick);
+    fetchRoomDetail();
   };
-  const { categorys } = usePartyRoom({ isAdmin: false, withJoined: false });
+  const { categorys } = usePartyRoom({});
 
   return (
     <div>
-      {/* <PartyReport reportName={'ROOM'} roomId={partyRoomDetail.roomId} /> */}
       <button
         onClick={() => {
           // TODO: 신고 로직  modal 사용 신고 모달 띄우기
@@ -72,17 +67,15 @@ function PartyDescription({
   );
 }
 
-function PartyButtton({
+export function PartyButtton({
   partyRoomDetail,
-  setOnClick,
-  onClick,
+  fetchRoomDetail,
 }: PartyRoomDetailProps) {
-  const handlerStart = async () => {
-    await mockInstance
+  const handlerStart = () => {
+    mockInstance
       .post(`/party/rooms/${partyRoomDetail.roomId}/start`)
-      .then((res) => {
-        setOnClick(!onClick);
-        console.log(res.status);
+      .then(() => {
+        fetchRoomDetail();
       })
       .catch((error) => {
         console.error('에러가 났습니다.', error);
@@ -91,7 +84,7 @@ function PartyButtton({
 
   const handlerJoin = async () => {
     await mockInstance.post(`/party/rooms/${partyRoomDetail.roomId}/join`);
-    setOnClick(!onClick);
+    fetchRoomDetail();
   };
 
   return partyRoomDetail.roomStatus !== 'FINISH' ? (
@@ -109,15 +102,14 @@ function PartyButtton({
   );
 }
 
-function PartyComment({
+export function PartyComment({
   partyRoomDetail,
-  onClick,
-  setOnClick,
+  fetchRoomDetail,
 }: PartyRoomDetailProps) {
   const totalComments = partyRoomDetail.comments.length;
   const handlerComments = async () => {
     await mockInstance.post(`/party/rooms/${partyRoomDetail.roomId}/comments`);
-    setOnClick(!onClick);
+    fetchRoomDetail();
   };
 
   return (
@@ -143,32 +135,6 @@ function PartyComment({
             <button type='submit'>댓글</button>
           </form>
         )}
-    </div>
-  );
-}
-
-export default function PartyDetail({
-  partyRoomDetail,
-  onClick,
-  setOnClick,
-}: PartyRoomDetailProps) {
-  return (
-    <div>
-      <PartyDescription
-        partyRoomDetail={partyRoomDetail}
-        onClick={onClick}
-        setOnClick={setOnClick}
-      />
-      <PartyButtton
-        partyRoomDetail={partyRoomDetail}
-        onClick={onClick}
-        setOnClick={setOnClick}
-      />
-      <PartyComment
-        partyRoomDetail={partyRoomDetail}
-        onClick={onClick}
-        setOnClick={setOnClick}
-      />
     </div>
   );
 }
