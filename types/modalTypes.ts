@@ -13,6 +13,7 @@ import { StoreManualMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
 import { ITournament } from './admin/adminTournamentTypes';
 import { GameMode } from './gameTypes';
+import { IApplicantAnswer } from './recruit/recruitments';
 import { TournamentInfo } from './tournamentTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
@@ -34,6 +35,8 @@ type EditItemModal = 'MEGAPHONE';
 type StoreModal = 'MANUAL' | 'COIN_HISTORY';
 
 type TournamentModal = 'REGISTRY' | 'MANUAL';
+
+type RecruitmentModal = 'APPLY';
 
 type AdminModal =
   | 'PROFILE'
@@ -68,7 +71,8 @@ type ModalName =
   | `EDIT-ITEM-${EditItemModal}`
   | `STORE-${StoreModal}`
   | `PURCHASE-${PurchaseModal}`
-  | `TOURNAMENT-${TournamentModal}`;
+  | `TOURNAMENT-${TournamentModal}`
+  | `RECRUITMENT-${RecruitmentModal}`;
 
 export interface Cancel {
   startTime: string;
@@ -141,4 +145,6 @@ export interface Modal {
   tournamentInfo?: TournamentInfo;
   tournament?: ITournament;
   tournamentId?: number;
+  recruitId?: number;
+  applicantAnswers?: IApplicantAnswer[];
 }
