@@ -1,7 +1,9 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { PartyRoomDetail } from 'types/partyTypes';
 import { dateToStringShort, getRemainTime, getTimeAgo } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
+import { PartyReport } from 'components/modal/Party/PartyReportModal';
+import usePartyRoom from 'hooks/party/usePartyList';
 
 type PartyRoomDetailProps = {
   partyRoomDetail: PartyRoomDetail;
@@ -18,12 +20,14 @@ function PartyDescription({
     await mockInstance.patch(`/party/rooms/${partyRoomDetail.roomId}`);
     setOnClick(!onClick);
   };
+  const { categorys } = usePartyRoom({ isAdmin: false, withJoined: false });
 
   return (
     <div>
+      {/* <PartyReport reportName={'ROOM'} roomId={partyRoomDetail.roomId} /> */}
       <button
         onClick={() => {
-          // TODO: 신고 로직  modal 사용
+          // TODO: 신고 로직  modal 사용 신고 모달 띄우기
         }}
       >
         신고
@@ -42,7 +46,14 @@ function PartyDescription({
         공유하기
       </button>
       <h2>제목 : {partyRoomDetail.title}</h2>
-      <span>카테고리 : {partyRoomDetail.categoryId}</span>
+      <span>
+        카테고리 :
+        {categorys
+          ? categorys.find(
+              (categoryId) => partyRoomDetail.categoryId === Number(categoryId)
+            )?.categoryName
+          : 'not found'}
+      </span>
       <span>
         날짜 :{dateToStringShort(new Date(partyRoomDetail.dueDate))}
         {' (' +
@@ -121,13 +132,7 @@ function PartyComment({
             <span>{comment.nickname}</span>
             <span>{comment.content}</span>
             <span>{getTimeAgo(comment.createDate)}</span>
-            <button
-              onClick={() => {
-                /* TODO: 신고 로직  modal 사용 */
-              }}
-            >
-              신고
-            </button>
+            <button>{/*TODO: 온클릭시 신고 모달 띄우기 */}신고</button>
           </div>
         )
       )}
