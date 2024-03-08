@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import DatePicker from 'react-datepicker';
 import { useSetRecoilState } from 'recoil';
 import {
@@ -39,7 +45,13 @@ export interface notiMessageType {
   content: string;
 }
 
-function NotificationResults({ recruitId }: { recruitId: number }) {
+function NotificationResults({
+  recruitId,
+  setTabIdx,
+}: {
+  recruitId: number;
+  setTabIdx: Dispatch<SetStateAction<number>>;
+}) {
   const [notificationData, setNotificationData] = useState<InoticationTable>({
     noticationList: [],
     totalPage: 0,
@@ -172,6 +184,9 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
           }}
         />
       </div>
+      <button className={styles.button} onClick={() => setTabIdx(-1)}>
+        메시지 템플릿 작성하기
+      </button>
     </>
   );
 }

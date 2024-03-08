@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import RecruitmentsHistoryList from 'components/admin/recruitments/recruitmentsHistoryList';
 import DetailRecruitUserList from 'components/admin/recruitments/recruitmentsuser/detailRecruitUserList';
+import EditRecruitResultTemplates from 'components/admin/recruitments/recruitmentsuser/editRecruitResultTemplates';
 import NotificationResults from 'components/admin/recruitments/recruitmentsuser/notificationResults';
 import styles from 'styles/admin/recruitments/MenuTab.module.scss';
 
@@ -23,11 +24,16 @@ function MenuTab({ recruitId }: { recruitId: number }) {
 
   useEffect(() => {
     switch (tabIdx) {
+      case -1:
+        setChild(<EditRecruitResultTemplates />);
+        break;
       case 0:
         setChild(<DetailRecruitUserList recruitId={recruitId} />);
         break;
       case 1:
-        setChild(<NotificationResults recruitId={recruitId} />);
+        setChild(
+          <NotificationResults recruitId={recruitId} setTabIdx={setTabIdx} />
+        );
         break;
     }
   }, [tabIdx, recruitId]);
