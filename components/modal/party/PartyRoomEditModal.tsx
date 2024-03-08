@@ -8,7 +8,7 @@ import styles from 'styles/admin/party/PartyRoomEdit.module.scss';
 
 const roomStatusOpts: PartyRoomStatus[] = ['OPEN', 'START', 'FINISH', 'HIDDEN'];
 
-export default function PartyRoomEdit({ roomId }: { roomId: number }) {
+export default function PartyRoomEditModal({ roomId }: { roomId: number }) {
   const { categorys } = usePartyCategory();
   const [room, setRoom] = useState<PartyRoomDetail | null>(null);
 

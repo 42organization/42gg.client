@@ -2,16 +2,18 @@ import Link from 'next/link';
 import { useState } from 'react';
 import PartyRoomList from 'components/party/PartyRoomList';
 import usePartyCategory from 'hooks/party/usePartyCategory';
-import usePartyRoom from 'hooks/party/usePartyList';
+import usePartyRoomList from 'hooks/party/usePartyList';
 import styles from 'styles/party/PartyMain.module.scss';
 
 export default function PartyMainPage() {
   const { categorys } = usePartyCategory();
   const [categoryFilter, setCategoryFilter] = useState<number | null>(null);
   const [searchKeyword, setSearchKeyword] = useState('');
-  const { partyRooms, joinedPartyRooms, updateRoomsByTitle } = usePartyRoom({
-    withJoined: true,
-  });
+  const { partyRooms, joinedPartyRooms, updateRoomsByTitle } = usePartyRoomList(
+    {
+      withJoined: true,
+    }
+  );
 
   const roomsFiltered = partyRooms.filter(
     (room) => !categoryFilter || room.categoryId === categoryFilter
