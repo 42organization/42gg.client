@@ -49,8 +49,8 @@ export default function useRecruitmentEditInfo(
   ) => {
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
-
     if (!question.checkList) return;
+
     const checkItem = question.checkList[checkItemIdx];
     checkItem.content = content;
 
@@ -63,7 +63,9 @@ export default function useRecruitmentEditInfo(
   const addEmptyQuestion = (questionIdx: number, inputType: string) => {
     const updatedForm = [...recruitmentEditInfo.form];
     const question = makeEmptyQuestion(inputType);
-    question && updatedForm.splice(questionIdx + 1, 0, question);
+    if (!question) return;
+
+    updatedForm.splice(questionIdx + 1, 0, question);
 
     setRecruitmentEditInfo({
       ...recruitmentEditInfo,
@@ -88,10 +90,11 @@ export default function useRecruitmentEditInfo(
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
 
+    if (!question) return;
+
     if (
-      question &&
-      (question.inputType === 'SINGLE_CHECK' ||
-        question.inputType === 'MULTI_CHECK')
+      question.inputType === 'SINGLE_CHECK' ||
+      question.inputType === 'MULTI_CHECK'
     ) {
       if (!question.checkList) {
         question.checkList = [checkItem];
@@ -112,8 +115,9 @@ export default function useRecruitmentEditInfo(
   ) => {
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
+    if (!question) return;
 
-    if (question && question.checkList) {
+    if (question.checkList) {
       question.checkList.splice(checkItemIdx, 1);
       setRecruitmentEditInfo({
         ...recruitmentEditInfo,
@@ -126,33 +130,31 @@ export default function useRecruitmentEditInfo(
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
 
-    if (question) {
-      const emptyQuestion = makeEmptyQuestion(inputType);
-      if (emptyQuestion) {
-        updatedForm.splice(questionIdx, 1, emptyQuestion);
-      }
+    if (!question) return;
 
-      setRecruitmentEditInfo({
-        ...recruitmentEditInfo,
-        form: updatedForm,
-      });
+    const emptyQuestion = makeEmptyQuestion(inputType);
+    if (emptyQuestion) {
+      updatedForm.splice(questionIdx, 1, emptyQuestion);
     }
+
+    setRecruitmentEditInfo({
+      ...recruitmentEditInfo,
+      form: updatedForm,
+    });
   };
 
   const switchQuestionIndex = (questionIdx: number, targetIdx: number) => {
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
+    if (!question) return;
 
-    if (question) {
-      updatedForm.splice(questionIdx, 1);
-      updatedForm.splice(targetIdx, 0, question);
+    updatedForm.splice(questionIdx, 1);
+    updatedForm.splice(targetIdx, 0, question);
 
-      setRecruitmentEditInfo({
-        ...recruitmentEditInfo,
-        form: updatedForm,
-      });
-    }
-    console.log(recruitmentEditInfo.form);
+    setRecruitmentEditInfo({
+      ...recruitmentEditInfo,
+      form: updatedForm,
+    });
   };
 
   function makeEmptyQuestion(inputType: string): Iquestion | null {
