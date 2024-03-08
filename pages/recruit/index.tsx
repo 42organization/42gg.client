@@ -16,7 +16,7 @@ function Recruit() {
 
   if (!isLoading && !isRecruiting) {
     return (
-      <div className={layoutStyle.recruitContainer}>
+      <>
         <Lottie
           className={commonStyle.pingpongAnimation}
           animationData={recruitPingpong}
@@ -28,12 +28,12 @@ function Recruit() {
         <Button size={'large'} variant={'contained'} color={'primary'} href='/'>
           42GG로 돌아가기
         </Button>
-      </div>
+      </>
     );
   }
 
   return (
-    <div className={layoutStyle.recruitContainer}>
+    <>
       <span className={textStyle.pageTitle}>42GG 팀원 모집</span>
       <Lottie
         className={commonStyle.pingpongAnimation}
@@ -41,7 +41,7 @@ function Recruit() {
         width={'100%'}
       />
       <RecruitList />
-    </div>
+    </>
   );
 }
 
