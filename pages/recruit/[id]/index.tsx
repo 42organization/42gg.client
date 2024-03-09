@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
+import style from 'styles/recruit/Main/main.module.scss';
+import textStyle from 'styles/recruit/text.module.scss';
 
 function Recruit() {
   const router = useRouter();
@@ -17,7 +19,9 @@ function Recruit() {
 
   return (
     <>
-      <span>{data.title}</span>
+      <div className={style.pageTitleContainer}>
+        <span className={textStyle.pageTitle}>{data.title}</span>
+      </div>
     </>
   );
 }
