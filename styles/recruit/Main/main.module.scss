@@ -3,3 +3,9 @@
 .quillViewer {
   @include quillViewer($color: black, $overflowY: visible);
 }
+
+.applyButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
