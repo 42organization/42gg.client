@@ -6,7 +6,7 @@ function Application() {
   const [edit, setEdit] = useState(false);
   const [test, setTest] = useState(0);
   const click = () => {
-    setTest((prev) => (prev + 1) % 3);
+    setTest((prev) => (prev + 1) % 2);
   };
 
   return (
@@ -18,7 +18,7 @@ function Application() {
           </div>
         </div>
       </div>
-      <ApplicationForm id={test} />
+      <ApplicationForm recruitId={test} />
       <button onClick={() => click()}>test</button>
     </div>
   );
