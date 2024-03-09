@@ -415,3 +415,28 @@ $vip-background: linear-gradient(
     @include txtColor(rgb(123, 97, 224));
   }
 }
+
+// quillViewer 공통 속성 mixin
+@mixin quillViewer(
+  $color,
+  $width: 100%,
+  $height: 100%,
+  $overflowY: scroll,
+  $scrollbarWidth: 5px,
+  $scrollbarColor: white,
+  $scrollbarRadius: 10px
+) {
+  width: $width; // default : 100%
+  height: $height; // default : 100%
+  overflow-y: $overflowY; // default : scroll
+  color: $color;
+  &::-webkit-scrollbar {
+    display: inherit;
+    width: 5px;
+    height: 1rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $scrollbarColor; // default : white
+    border-radius: $scrollbarRadius; // default : 10px
+  }
+}
