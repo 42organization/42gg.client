@@ -118,8 +118,8 @@ const recruitmentDetailFive = {
 const recruitmentDetailSix = {
   startDate: '2024-12-04 00:12',
   endDate: '2024-12-04 00:12',
-  title: '긴 제목을 테스트!!!! 42GG 6기',
-  contents: '지원서',
+  title: '긴 내용을 테스트!!!! 42GG 6기',
+  contents: sampleContents.repeat(5),
   generations: '6기',
   form: formDataTwo,
 };

@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
+import DynamicQuill from 'components/DynamicQuill';
 import StickyHeader from 'components/recruit/StickyHeader';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
-// import style from 'styles/recruit/Main/main.module.scss';
+import style from 'styles/recruit/Main/main.module.scss';
+import 'react-quill/dist/quill.bubble.css';
 
 function Recruit() {
   const router = useRouter();
@@ -20,6 +22,12 @@ function Recruit() {
   return (
     <>
       <StickyHeader headerTitle={data.title} />
+      <DynamicQuill
+        className={style.quillViewer}
+        readOnly
+        value={data.contents}
+        theme='bubble'
+      />
     </>
   );
 }

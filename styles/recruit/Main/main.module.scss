@@ -1,3 +1,5 @@
-.pageTitleContainer {
-  margin: 2rem;
+@import 'styles/common.scss';
+
+.quillViewer {
+  @include quillViewer($color: black, $overflowY: visible);
 }
