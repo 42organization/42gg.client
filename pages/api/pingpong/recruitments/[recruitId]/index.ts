@@ -1,41 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const recruitmentDetail1 = {
-  startDate: '2024-12-04 00:12',
-  endDate: '2024-12-04 00:12',
-  title: '42GG',
-  contents: '지원서',
-  generations: '10기',
-  form: [
-    // {
-    //   questionId: 1,
-    //   question: '본인의 기수를 선택해주세요',
-    //   inputType: 'SINGLE_CHECK',
-    //   checkList: [
-    //     { id: 1, contents: '1' },
-    //     { id: 2, contents: '2' },
-    //     { id: 3, contents: '3' },
-    //   ],
-    // },
-    // {
-    //   questionId: 2,
-    //   question: '자기소개',
-    //   inputType: 'TEXT',
-    // },
-    // {
-    //   questionId: 3,
-    //   question: '못 먹는 음식을 선택해주세요',
-    //   inputType: 'MULTI_CHECK',
-    //   checkList: [
-    //     { id: 1, contents: '오이' },
-    //     { id: 2, contents: '가지' },
-    //     { id: 3, contents: '복숭아' },
-    //   ],
-    // },
-  ],
-};
-
-const recruitmentDetail2 = {
+const recruitmentDetail = {
   startDate: '2024-12-04 00:12',
   endDate: '2024-12-04 00:12',
   title: '42GG',
@@ -112,6 +77,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (recruitId === '0') {
     res.status(200).json({});
   } else {
-    res.status(200).json(recruitmentDetail2);
+    res.status(200).json(recruitmentDetail);
   }
 }
