@@ -52,7 +52,7 @@ const fullRecruitments2 = {
       id: 6,
       startDate: new Date(),
       endDate: new Date(),
-      title: '42GG 모집 6기',
+      title: '긴 제목을 테스트!!!! 42GG 6기 ',
       status: 'AFTER',
       generation: '6기',
     },
