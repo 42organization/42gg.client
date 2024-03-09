@@ -1,11 +1,16 @@
+import { useRouter } from 'next/router';
 import { ListItemButton, ListItemText } from '@mui/material';
 import { recruitment } from 'types/recruit/recruitments';
 import { dateToString } from 'utils/handleTime';
 import styles from 'styles/recruit/RecruitList/list.module.scss';
 
 const RecruitListItem = ({ recruit }: { recruit: recruitment }) => {
+  const router = useRouter();
   return (
-    <ListItemButton className={styles.listItem}>
+    <ListItemButton
+      onClick={() => router.push(`/recruit/${recruit.id}`)}
+      className={styles.listItem}
+    >
       <ListItemText
         className={styles.listItemText}
         primary={recruit.title}
