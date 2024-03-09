@@ -28,47 +28,74 @@
   }
 }
 
-.titleContainer {
-  @include pageTitle;
-  display: flex;
-  width: 22rem;
-  height: 6.25rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  background-color: $medium-gray;
-  border-radius: 1rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.bodyContainer {
+.form {
   display: flex;
   flex-direction: column;
-  background-color: $white2;
-}
 
-.questionContainer {
-  width: 22rem;
-  padding: 2rem;
-  margin-bottom: 1rem;
-  background-color: $medium-gray;
-  border-radius: 1rem;
-}
+  .titleContainer {
+    display: flex;
+    width: 22rem;
+    height: 6.25rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: $medium-gray;
+    border-radius: 1rem;
+    border-width: 0.5rem;
+    border-style: solid;
+    border-color: #8ebcf9;
+    justify-content: center;
+    align-items: center;
+    font-size: $giant-big-font;
+    font-weight: 300;
+  }
 
-.questionText {
-  margin-bottom: 1rem;
-  font-size: 1rem;
-}
+  .bodyContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: $white2;
+  }
 
-.btnContainer {
-  width: 22rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-}
+  .questionContainer {
+    width: 22rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    background-color: $medium-gray;
+    border-radius: 1rem;
+  }
 
-.submitBtn {
-  width: 22rem;
-  height: 4rem;
-  padding: 1rem;
-  border-radius: 1rem;
+  .questionText {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  .btnContainer {
+    width: 22rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .submitBtn {
+    width: 22rem;
+    height: 4rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .questionText,
+  .textField,
+  .checkBoxGroup,
+  .radioBoxGroup {
+    width: 18rem;
+  }
+
+  .backTitle,
+  .backBtn {
+    font-size: $giant-font;
+    margin: 2rem;
+  }
 }
