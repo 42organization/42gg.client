@@ -1,0 +1,47 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modalContainer('MISTYPINK');
+  width: 25rem;
+  height: 20rem;
+  padding-bottom: 0;
+  background-color: $medium-gray;
+}
+
+.title {
+  font-size: $giant-big-font;
+}
+
+.content {
+  font-size: $big-font;
+  line-height: 150%;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 20rem;
+  height: 4rem;
+  .cancelBtn,
+  .applyBtn {
+    width: 8rem;
+    height: 3rem;
+    font-size: $giant-font;
+    color: black;
+    border-radius: 0.8rem;
+  }
+  .cancelBtn {
+    background-color: $white2;
+    border-color: #8c92ac;
+    border-width: 0.1rem;
+    &:hover {
+      background-color: #8c92ac;
+    }
+  }
+  .applyBtn {
+    background-color: #8ebcf9;
+  }
+}
