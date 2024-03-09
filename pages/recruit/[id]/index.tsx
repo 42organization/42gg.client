@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
+import StickyHeader from 'components/recruit/StickyHeader';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
-import style from 'styles/recruit/Main/main.module.scss';
-import textStyle from 'styles/recruit/text.module.scss';
+// import style from 'styles/recruit/Main/main.module.scss';
 
 function Recruit() {
   const router = useRouter();
@@ -19,9 +19,7 @@ function Recruit() {
 
   return (
     <>
-      <div className={style.pageTitleContainer}>
-        <span className={textStyle.pageTitle}>{data.title}</span>
-      </div>
+      <StickyHeader headerTitle={data.title} />
     </>
   );
 }
