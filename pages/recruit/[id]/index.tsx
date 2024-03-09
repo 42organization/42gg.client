@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { Button } from '@mui/material';
 import DynamicQuill from 'components/DynamicQuill';
+import MyRecruitment from 'components/recruit/Main/MyRecruitment';
 import StickyHeader from 'components/recruit/StickyHeader';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
 import style from 'styles/recruit/Main/main.module.scss';
@@ -34,6 +35,8 @@ function Recruit() {
           지원하기
         </Button>
       </div>
+      <div className={style.divider} />
+      <MyRecruitment />
     </>
   );
 }
