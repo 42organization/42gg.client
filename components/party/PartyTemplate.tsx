@@ -35,7 +35,7 @@ export default function PartyTemplate() {
   const [selectedTemplateId, setSelectedTemplateId] = useState<number | null>(
     null
   );
-
+  //파티모달 머지후 적용시켜야함
   const handleAddOrEditTemplate = (templateId?: number) => {
     if (templateId) {
       setSelectedTemplateId(templateId);
@@ -54,7 +54,6 @@ export default function PartyTemplate() {
     mockInstance
       .get(`/party/templates`)
       .then(({ data }: { data: PartyGameTemplate[] }) => {
-        console.log(data);
         setTemplates(data);
       })
       .catch((error) => {
