@@ -57,6 +57,8 @@ type AdminModal =
   | 'TOURNAMENT_PARTICIPANT_EDIT'
   | 'PARTY_EDIT';
 
+type PartyModal = 'NO_SHOW' | 'ROOM' | 'COMMENT';
+
 type ModalName =
   | null
   | `EVENT-${EventModal}`
@@ -114,6 +116,12 @@ export interface StoreManual {
 export interface IRandomItem {
   item: RandomItem;
   color: RandomColors;
+}
+
+interface PartyRoomReport {
+  roomId: number;
+  commentId: number;
+  type: 'ROOM' | 'NO_SHOW' | 'COMMENT ';
 }
 
 export interface Modal {
