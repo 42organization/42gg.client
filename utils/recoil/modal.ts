@@ -24,6 +24,8 @@ export const modalTypeState = selector<string>({
       modalType = 'TOURNAMENT';
     } else if (prefix === 'ADMIN') {
       modalType = 'ADMIN';
+    } else if (prefix === 'PARTY') {
+      modalType = 'PARTY';
     }
     return modalType;
   },
