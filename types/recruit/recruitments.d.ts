@@ -29,3 +29,18 @@ export interface IRecruitmentDetail {
   generations: string;
   form: IQuestionForm[];
 }
+
+export type RecruitmentMessageType = 'INTERVIEW' | 'PASS' | 'FAIL';
+
+export interface IRecruitmentResultMessage {
+  messageType: RecruitmentMessageType;
+  message: string;
+}
+export interface IRecruitmentTemplate extends IRecruitmentResultMessage {
+  messageId: number;
+  isUse: boolean;
+}
+
+export interface IRecruitmentTemplateList {
+  messages: IRecruitmentTemplate[];
+}
