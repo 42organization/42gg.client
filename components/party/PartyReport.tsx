@@ -1,3 +1,8 @@
+import PartyReportNav from './PartyReportNav';
 export default function PartyReport() {
-  return <div>HI Report</div>;
+  return (
+    <>
+      <PartyReportNav />
+    </>
+  );
 }

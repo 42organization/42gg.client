@@ -44,8 +44,8 @@ export type PartyCategory = {
 
 export type PartyGameTemplate = {
   gameTemplateId: number;
-  gameName: string;
   categoryId: number;
+  gameName: string;
   maxGamePeople: number;
   minGamePeople: number;
   maxGameTime: number;
@@ -61,50 +61,28 @@ export type PartyReport =
   | PartyCommentReport;
 
 export type PartyRoomReport = {
-  reportId: number;
-  type: 'roomReport';
-  reporter: {
-    userId: number;
-    userIntraId: number;
-  };
-  reportee: {
-    userId: number;
-    userIntraId: number;
-  };
-  room: PartyRoom;
+  id: number;
+  reporterIntraId: string;
+  reporteeIntraId: string;
+  roomId: number;
   message: string;
   createdAt: string;
 };
 
 export type PartyNoshowReport = {
-  reportId: number;
-  type: 'noshowReport';
-  reporter: {
-    userId: number;
-    userIntraId: number;
-  };
-  reportee: {
-    userId: number;
-    userIntraId: number;
-  };
-  room: PartyRoom;
+  id: number;
+  reporterIntraId: string;
+  reporteeIntraId: string;
+  roomId: number;
   message: string;
   createdAt: string;
 };
 
 export type PartyCommentReport = {
-  reportId: number;
-  type: 'commentReport';
-  reporter: {
-    userId: number;
-    userIntraId: number;
-  };
-  reportee: {
-    userId: number;
-    userIntraId: number;
-  };
-  room: PartyRoom;
-  comment: PartyComment;
+  id: number;
+  reporterIntraId: string;
+  commentsId: number;
+  roomId: number;
   message: string;
   createdAt: string;
 };
@@ -128,4 +106,13 @@ export type PartyTemplateForm = {
   genre: string;
   difficulty: string;
   summary: string;
+};
+
+export type PartyPenaltyAdmin = {
+  id: number;
+  user: object;
+  penaltyType: string;
+  message: string;
+  startTime: string;
+  penaltyTime: number;
 };

@@ -175,4 +175,67 @@ export const tableFormat: TableFormat = {
       value: ['해제'],
     },
   },
+  partyCategory: {
+    name: '파티 카테고리',
+    columns: ['categoryId', 'categoryName', 'delete'],
+  },
+  partyTemplate: {
+    name: '파티 템플릿',
+    columns: [
+      'gameTemplateId',
+      'categoryId',
+      'gameName',
+      'maxGamePeople',
+      'minGamePeople',
+      'maxGameTime',
+      'minGameTime',
+      'genre',
+      'difficulty',
+      'summary',
+    ],
+  },
+  partyNoshowReport: {
+    name: '파티노쇼 신고',
+    columns: [
+      'id',
+      'reporterId',
+      'reporteeId',
+      'roomId',
+      'message',
+      'createdAt',
+    ],
+  },
+  partyRoomReport: {
+    name: '방 신고',
+    columns: [
+      'id',
+      'reporterId',
+      'reporteeId',
+      'roomId',
+      'message',
+      'createdAt',
+    ],
+  },
+  partyCommentReport: {
+    name: '댓글 신고',
+    columns: [
+      'id',
+      'reporterId',
+      'commentsId',
+      'roomId',
+      'message',
+      'createdAt',
+    ],
+  },
+  partyPenaltyAdmin: {
+    name: '파티 패널티',
+    columns: [
+      'id',
+      'user',
+      'penaltyType',
+      'message',
+      'startTime',
+      'penaltyTime',
+    ],
+  },
 };
