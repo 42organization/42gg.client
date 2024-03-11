@@ -37,3 +37,9 @@ export interface IApplicantAnswer {
   checkedList?: number[];
   answer?: string;
 }
+
+export interface IRefs {
+  id: number;
+  type: recruitmentQuestionTypes;
+  ref: HTMLInputElement[];
+}
