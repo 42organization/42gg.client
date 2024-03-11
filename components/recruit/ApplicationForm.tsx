@@ -119,15 +119,13 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
     router.back();
   };
 
-  if (isLoading || !data || Object.keys(data).length === 0) {
+  if (isLoading) {
     return (
       <Box>
         <Grid className={applicationStyle.form}>
           <Paper className={applicationStyle.titleContainer}>42GG 모집</Paper>
           <Paper className={applicationStyle.questionContainer}>
-            <div className={applicationStyle.backTitle}>
-              {isLoading ? '로딩중...' : '지원서 항목이 없습니다'}
-            </div>
+            <div className={applicationStyle.backTitle}>로딩중...</div>
             <Button
               className={applicationStyle.backBtn}
               variant='contained'
@@ -138,6 +136,23 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
           </Paper>
         </Grid>
       </Box>
+    );
+  }
+
+  if (!data || Object.keys(data).length === 0) {
+    setAlertOn(true);
+    router.back();
+    return (
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        open={alertOn}
+        autoHideDuration={5000}
+        onClose={closeAlert}
+      >
+        <Alert onClose={closeAlert} severity='error' variant='filled'>
+          올바르지 않은 요청입니다.
+        </Alert>
+      </Snackbar>
     );
   }
 
@@ -158,7 +173,7 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
               // todo: required 추가 필요?
               <TextForm
                 question={form.question}
-                qestionId={form.questionId}
+                questionId={form.questionId}
                 refs={formRefs}
                 refIndex={index}
               />
@@ -166,7 +181,7 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
               <SingleCheckForm
                 question={form.question}
                 checkList={form.checkList}
-                qestionId={form.questionId}
+                questionId={form.questionId}
                 refs={formRefs}
                 refIndex={index}
               />
@@ -174,7 +189,7 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
               <MultiCheckForm
                 question={form.question}
                 checkList={form.checkList}
-                qestionId={form.questionId}
+                questionId={form.questionId}
                 refs={formRefs}
                 refIndex={index}
               />
@@ -204,7 +219,7 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
         onClose={closeAlert}
       >
         <Alert onClose={closeAlert} severity='error' variant='filled'>
-          빈칸을 채워주세요
+          입력하지 않은 문항이 있습니다.
         </Alert>
       </Snackbar>
     </Box>
@@ -213,12 +228,12 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
 
 function TextForm({
   question,
-  qestionId,
+  questionId,
   refs,
   refIndex,
 }: {
   question: string;
-  qestionId: number;
+  questionId: number;
   refs: MutableRefObject<IRefs[]>;
   refIndex: number;
 }) {
@@ -232,7 +247,11 @@ function TextForm({
         rows={5}
         color={'info'}
         inputRef={(ref) =>
-          (refs.current[refIndex] = { id: qestionId, type: 'TEXT', ref: [ref] })
+          (refs.current[refIndex] = {
+            id: questionId,
+            type: 'TEXT',
+            ref: [ref],
+          })
         }
       />
     </>
@@ -242,13 +261,13 @@ function TextForm({
 function SingleCheckForm({
   question,
   checkList,
-  qestionId,
+  questionId,
   refs,
   refIndex,
 }: {
   question: string;
   checkList: ICheck[] | undefined;
-  qestionId: number;
+  questionId: number;
   refs: MutableRefObject<IRefs[]>;
   refIndex: number;
 }) {
@@ -271,7 +290,7 @@ function SingleCheckForm({
               inputRef={(ref) =>
                 refs.current[refIndex] === undefined
                   ? (refs.current[refIndex] = {
-                      id: qestionId,
+                      id: questionId,
                       type: 'SINGLE_CHECK',
                       // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
                       ref: [null, ref],
@@ -289,13 +308,13 @@ function SingleCheckForm({
 function MultiCheckForm({
   question,
   checkList,
-  qestionId,
+  questionId,
   refs,
   refIndex,
 }: {
   question: string;
   checkList: ICheck[] | undefined;
-  qestionId: number;
+  questionId: number;
   refs: MutableRefObject<IRefs[]>;
   refIndex: number;
 }) {
@@ -313,7 +332,7 @@ function MultiCheckForm({
               inputRef={(ref) =>
                 refs.current[refIndex] === undefined
                   ? (refs.current[refIndex] = {
-                      id: qestionId,
+                      id: questionId,
                       type: 'MULTI_CHECK',
                       // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
                       ref: [null, ref],
