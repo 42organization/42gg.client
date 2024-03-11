@@ -18,9 +18,9 @@ const initRecruitmentEditInfo: IrecruitEditInfo = {
 };
 
 interface RecruitmentEditProps {
-  setPage: Dispatch<SetStateAction<JSX.Element>>;
+  setPageType: Dispatch<SetStateAction<'MAIN' | 'EDIT'>>;
 }
-export default function RecruitmentEdit({ setPage }: RecruitmentEditProps) {
+export default function RecruitmentEdit({ setPageType }: RecruitmentEditProps) {
   const {
     recruitmentEditInfo,
     setTitle,
@@ -42,7 +42,7 @@ export default function RecruitmentEdit({ setPage }: RecruitmentEditProps) {
     <div className={styles.container}>
       <button
         onClick={() => {
-          setPage(<RecruitmentsMain setPage={setPage} />);
+          setPageType('MAIN');
         }}
       >
         메인으로가기

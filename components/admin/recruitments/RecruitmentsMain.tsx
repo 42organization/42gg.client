@@ -4,10 +4,10 @@ import RecruitmentEdit from './recruitmentsEdit/RecruitmentEdit';
 import RecruitmentsHistoryList from './RecruitmentsHistoryList';
 
 interface RecruitmentsMainProps {
-  setPage: Dispatch<SetStateAction<JSX.Element>>;
+  setPageType: Dispatch<SetStateAction<'MAIN' | 'EDIT'>>;
 }
 
-function RecruitmentsMain({ setPage }: RecruitmentsMainProps) {
+function RecruitmentsMain({ setPageType }: RecruitmentsMainProps) {
   //return menutab
   return (
     <div className={styles.mainContainer}>
@@ -15,7 +15,7 @@ function RecruitmentsMain({ setPage }: RecruitmentsMainProps) {
         <button
           className={styles.sectionTitle}
           onClick={() => {
-            setPage(<RecruitmentEdit setPage={setPage} />);
+            setPageType('EDIT');
           }}
         >
           지원 공고 등록
