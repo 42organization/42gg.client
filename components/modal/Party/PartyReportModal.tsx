@@ -1,49 +1,86 @@
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { Modal, PartyReportModalData } from 'types/modalTypes';
 import { mockInstance } from 'utils/mockAxios';
+import { modalState } from 'utils/recoil/modal';
+import styles from 'styles/modal/menu/ReportModal.module.scss';
+import { ModalButton, ModalButtonContainer } from '../ModalButton';
 
-type PartyReportModalProps = {
-  reportName: 'COMMENT' | 'ROOM' | 'NO_SHOW';
-  commentId?: number;
-  roomId?: number;
-  userIntraId?: number;
-};
+export function PartyReportModal({ report }: { report: PartyReportModalData }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [content, setContent] = useState('');
+  const setModal = useSetRecoilState<Modal>(modalState);
 
-export function PartyReport({
-  reportName,
-  commentId,
-  roomId,
-  userIntraId,
-}: PartyReportModalProps) {
-  const [value, setValue] = useState('');
+  const reportHandler = async () => {
+    const reportResponse: { [key: string]: string } = {
+      SUCCESS: '신고해주셔서 감사합니다 ❤️',
+      REJECT: '내용을 적어주세요 ❤️',
+    };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    switch (reportName) {
-      case 'COMMENT':
-        mockInstance.post(`/party/reports/comments/${commentId}`);
-        break;
-      case 'ROOM':
-        mockInstance.post(`/party/reports/rooms/${roomId}`);
-        break;
-      case 'NO_SHOW':
-        mockInstance.post(
-          `/party/reports/rooms/${roomId}/users/${userIntraId}`
-        );
-        break;
+    try {
+      if (content.replace(/^\s+|\s+$/g, '')) {
+        switch (report.name) {
+          case 'COMMENT':
+            await mockInstance.post(
+              `/party/reports/comments/${report.commentId}`
+            );
+            break;
+          case 'ROOM':
+            await mockInstance.post(`/party/reports/rooms/${report.roomId}`);
+            break;
+          case 'NOSHOW':
+            await mockInstance.post(
+              `/party/reports/rooms/${report.roomId}/users/${report.userIntraId}`
+            );
+            break;
+        }
+        setModal({ modalName: null });
+        alert(reportResponse.SUCCESS);
+      } else {
+        throw new Error('REJECT');
+      }
+    } catch (e) {
+      alert(reportResponse.REJECT);
+      throw new Error('REJECT');
     }
   };
 
+  const handleReport = () => {
+    setIsLoading(true);
+    reportHandler().catch(() => setIsLoading(false));
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <textarea
-        rows={10}
-        autofocus
-        cols={80}
-        placeholder='신고 내역 작성'
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      ></textarea>
-      <button type='submit'>신고하기</button>
-    </form>
+    <div className={styles.container}>
+      <div>
+        <div className={styles.title}>42GG</div>
+        <div className={styles.phrase}>{report.name}</div>
+      </div>
+      <form>
+        <div className={styles.contentWrapper}>
+          <div className={styles.content}>
+            <textarea
+              name='content'
+              maxLength={300}
+              onChange={(e) => setContent(content + e)}
+            />
+            <div>{`${content.length}/300`}</div>
+          </div>
+        </div>
+        <ModalButtonContainer>
+          <ModalButton
+            onClick={() => setModal({ modalName: null })}
+            style='negative'
+            value='취소'
+          />
+          <ModalButton
+            onClick={handleReport}
+            style='positive'
+            value='보내기'
+            isLoading={isLoading}
+          />
+        </ModalButtonContainer>
+      </form>
+    </div>
   );
 }

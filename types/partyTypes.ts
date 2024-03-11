@@ -55,11 +55,6 @@ export type PartyGameTemplate = {
   summary: string;
 };
 
-export type PartyReport =
-  | PartyRoomReport
-  | PartyNoshowReport
-  | PartyCommentReport;
-
 export type PartyRoomReport = {
   id: number;
   reporterIntraId: string;

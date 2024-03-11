@@ -1,7 +1,10 @@
+import { useSetRecoilState } from 'recoil';
 import { PartyRoomDetail } from 'types/partyTypes';
 import { dateToStringShort, getRemainTime, getTimeAgo } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
-import usePartyRoom from 'hooks/party/usePartyList';
+import { modalState } from 'utils/recoil/modal';
+import { PartyReportModal } from 'components/modal/Party/PartyReportModal';
+import usePartyCategory from 'hooks/party/usePartyCategory';
 
 type PartyRoomDetailProps = {
   partyRoomDetail: PartyRoomDetail;
@@ -16,12 +19,20 @@ export function PartyDescription({
     await mockInstance.patch(`/party/rooms/${partyRoomDetail.roomId}`);
     fetchRoomDetail();
   };
-  const { categorys } = usePartyRoom({});
+  const { categorys } = usePartyCategory();
+  const setModal = useSetRecoilState(modalState);
 
   return (
     <div>
       <button
         onClick={() => {
+          setModal({
+            partyReport: {
+              name: 'ROOM',
+              roomId: partyRoomDetail.roomId,
+            },
+            modalName: 'PARTY-REPORT',
+          });
           // TODO: 신고 로직  modal 사용 신고 모달 띄우기
         }}
       >
@@ -111,7 +122,7 @@ export function PartyComment({
     await mockInstance.post(`/party/rooms/${partyRoomDetail.roomId}/comments`);
     fetchRoomDetail();
   };
-
+  const setModal = useSetRecoilState(modalState);
   return (
     <div>
       <h3>댓글</h3>
@@ -124,7 +135,19 @@ export function PartyComment({
             <span>{comment.nickname}</span>
             <span>{comment.content}</span>
             <span>{getTimeAgo(comment.createDate)}</span>
-            <button>{/*TODO: 온클릭시 신고 모달 띄우기 */}신고</button>
+            <button
+              onClick={() => {
+                setModal({
+                  partyReport: {
+                    name: 'COMMENT',
+                    commentId: comment.commentId,
+                  },
+                  modalName: 'PARTY-REPORT',
+                });
+              }}
+            >
+              신고
+            </button>
           </div>
         )
       )}
