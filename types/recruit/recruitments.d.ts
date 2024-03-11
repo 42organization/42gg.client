@@ -32,7 +32,7 @@ export interface IRecruitmentDetail {
 }
 
 export interface IApplicantAnswer {
-  questionsId: number;
+  questionId: number;
   inputType: recruitmentQuestionTypes;
   checkedList?: number[];
   answer?: string;
