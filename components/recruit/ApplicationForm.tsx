@@ -85,11 +85,6 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
       return;
     setAnswerListState(answerList);
     setModalOpen(true);
-    // setModal({
-    //   modalName: 'RECRUITMENT-APPLY',
-    //   recruitId: recruitId,
-    //   applicantAnswers: answerList,
-    // });
   };
 
   const goBack = () => {

@@ -14,7 +14,6 @@ export const modalTypeState = selector<string>({
     const normalPrefixes = ['EVENT', 'MENU', 'MATCH', 'USER', 'FIXED'];
     const storePrefixes = ['COIN', 'STORE', 'PURCHASE', 'USE', 'EDIT'];
     const tournamentPrefixes = ['TOURNAMENT'];
-    const recruitmentPrefixes = ['RECRUITMENT'];
     const prefix = get(modalState).modalName?.split('-')[0] || '';
 
     if (normalPrefixes.includes(prefix)) {
@@ -23,8 +22,6 @@ export const modalTypeState = selector<string>({
       modalType = 'STORE';
     } else if (tournamentPrefixes.includes(prefix)) {
       modalType = 'TOURNAMENT';
-    } else if (recruitmentPrefixes.includes(prefix)) {
-      modalType = 'RECRUITMENT';
     } else if (prefix === 'ADMIN') {
       modalType = 'ADMIN';
     }
