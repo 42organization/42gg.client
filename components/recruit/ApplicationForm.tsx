@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { MutableRefObject, useRef, useState } from 'react';
 import {
+  Alert,
   Box,
   Button,
   Checkbox,
@@ -11,6 +12,7 @@ import {
   Paper,
   Radio,
   RadioGroup,
+  Snackbar,
   TextField,
 } from '@mui/material';
 import {
@@ -37,18 +39,24 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
   const [answerListState, setAnswerListState] = useState<IApplicantAnswer[]>(
     []
   );
+  const [alertOn, setAlertOn] = useState(false);
+
+  const closeAlert = () => {
+    setAlertOn(false);
+  };
 
   // todo: 응답하지 않은 질문으로 포커싱 필요?
   const submitApplicationForm = () => {
     const answerList = [];
-    console.log(formRefs.current);
     for (const answer of formRefs.current) {
+      let requiredFlag = false;
       if (answer.type === 'TEXT' && answer.ref[0].value.length !== 0) {
         answerList.push({
           questionId: answer.id,
           inputType: answer.type,
           answer: answer.ref[0].value,
         });
+        requiredFlag = true;
       } else if (answer.type === 'SINGLE_CHECK') {
         for (const checkRef of answer.ref) {
           if (!checkRef || checkRef?.checked === false) continue;
@@ -57,6 +65,7 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
             inputType: answer.type,
             checkList: [Number(answer.ref.indexOf(checkRef))],
           });
+          requiredFlag = true;
           break;
         }
       } else if (answer.type === 'MULTI_CHECK') {
@@ -76,11 +85,30 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
             // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
             foundObj.checkedList?.push(Number(answer.ref.indexOf(checkRef)));
           }
+          requiredFlag = true;
         }
+      }
+
+      // 채워지지 않은 폼으로 이동
+      if (!requiredFlag) {
+        if (answer.type === 'TEXT') {
+          answer.ref[0].focus();
+        } else {
+          // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
+          answer.ref[1].focus();
+        }
+        setAlertOn(true);
+        return;
       }
     }
     // test용 console
-    console.log(data?.form.length, answerList.length, answerList);
+    console.log(
+      '폼 질문 개수: ',
+      data?.form.length,
+      ' 응답 개수: ',
+      answerList.length
+    );
+    console.log('응답: ', answerList);
     if (answerList.length === 0 || answerList.length !== data?.form.length)
       return;
     setAnswerListState(answerList);
@@ -169,6 +197,16 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
         recruitId={recruitId}
         applicantAnswers={answerListState}
       />
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        open={alertOn}
+        autoHideDuration={5000}
+        onClose={closeAlert}
+      >
+        <Alert onClose={closeAlert} severity='error' variant='filled'>
+          빈칸을 채워주세요
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }
