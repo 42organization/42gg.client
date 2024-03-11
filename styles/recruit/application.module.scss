@@ -14,9 +14,11 @@
 .stickyHeader {
   position: sticky;
   top: 0;
+  z-index: 2;
   width: 25rem;
   background-color: rgba(246, 246, 246, 0.9);
   backdrop-filter: blur(5px);
+
   .stickyContainer {
     height: 4rem;
     padding-top: 1.5rem;
@@ -29,8 +31,7 @@
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
+  background-color: $white2;
 
   .titleContainer {
     display: flex;
@@ -38,33 +39,33 @@
     height: 6.25rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    background-color: $medium-gray;
-    border-radius: 1rem;
-    border-width: 0.5rem;
-    border-style: solid;
-    border-color: #8ebcf9;
-    justify-content: center;
-    align-items: center;
     font-size: $giant-big-font;
     font-weight: 300;
+    background-color: $medium-gray;
+    border-color: #8ebcf9;
+    border-style: solid;
+    border-width: 0.5rem;
+    border-radius: 1rem;
+    justify-content: center;
+    align-items: center;
   }
 
   .bodyContainer {
     display: flex;
     flex-direction: column;
-    background-color: $white2;
   }
 
   .questionContainer {
-    width: 22rem;
+    z-index: 1;
     display: flex;
+    width: 22rem;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     padding: 2rem;
     margin-bottom: 1rem;
     background-color: $medium-gray;
     border-radius: 1rem;
+    justify-content: center;
+    align-items: center;
   }
 
   .questionText {
@@ -72,20 +73,13 @@
     font-size: 1rem;
   }
 
-  .btnContainer {
-    width: 22rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
   .submitBtn {
     width: 22rem;
     height: 4rem;
     padding: 1rem;
-    border-radius: 1rem;
     font-size: 1.5rem;
+    border-radius: 1rem;
   }
-
   .questionText,
   .textField,
   .checkBoxGroup,
@@ -95,7 +89,7 @@
 
   .backTitle,
   .backBtn {
-    font-size: $giant-font;
     margin: 2rem;
+    font-size: $giant-font;
   }
 }

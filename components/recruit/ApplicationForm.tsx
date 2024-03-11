@@ -2,11 +2,14 @@ import { useRouter } from 'next/router';
 import { MutableRefObject, useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
+  Box,
   Button,
   Checkbox,
   FormControl,
   FormControlLabel,
   FormGroup,
+  Grid,
+  Paper,
   Radio,
   RadioGroup,
   TextField,
@@ -23,8 +26,7 @@ import applicationStyle from 'styles/recruit/application.module.scss';
 interface IRefs {
   id: number;
   type: recruitmentQuestionTypes;
-  checkId?: number;
-  ref: HTMLInputElement;
+  ref: HTMLInputElement[];
 }
 
 export default function ApplicationForm({ recruitId }: { recruitId: number }) {
@@ -33,37 +35,51 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
   const formRefs = useRef<IRefs[]>([]);
   const router = useRouter();
 
+  // todo: 응답하지 않은 질문으로 포커싱 필요?
   const submitApplicationForm = () => {
     const answerList = [];
+    console.log(formRefs.current);
     for (const answer of formRefs.current) {
-      if (answer.type === 'TEXT' && answer.ref?.value.length !== 0) {
+      if (answer.type === 'TEXT' && answer.ref[0].value.length !== 0) {
         answerList.push({
-          questionsId: answer.id,
+          questionId: answer.id,
           inputType: answer.type,
-          answer: answer.ref?.value,
+          answer: answer.ref[0].value,
         });
-      } else if (
-        answer.type === 'SINGLE_CHECK' ||
-        answer.type === 'MULTI_CHECK'
-      ) {
-        if (answer.ref?.checked === false) continue;
-        const foundObj = answerList.find(
-          (obj) => obj.questionsId === answer.id
-        );
-
-        if (foundObj === undefined) {
+      } else if (answer.type === 'SINGLE_CHECK') {
+        for (const checkRef of answer.ref) {
+          if (!checkRef || checkRef?.checked === false) continue;
           answerList.push({
-            questionsId: answer.id,
+            questionId: answer.id,
             inputType: answer.type,
-            checkedList: [Number(answer.checkId)],
+            checkList: [Number(answer.ref.indexOf(checkRef))],
           });
-        } else {
-          foundObj.checkedList?.push(Number(answer.checkId));
+          break;
+        }
+      } else if (answer.type === 'MULTI_CHECK') {
+        for (const checkRef of answer.ref) {
+          if (!checkRef || checkRef?.checked === false) continue;
+          const foundObj = answerList.find(
+            (obj) => obj.questionId === answer.id
+          );
+          if (foundObj === undefined) {
+            answerList.push({
+              questionId: answer.id,
+              inputType: answer.type,
+              // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
+              checkedList: [Number(answer.ref.indexOf(checkRef))],
+            });
+          } else {
+            // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
+            foundObj.checkedList?.push(Number(answer.ref.indexOf(checkRef)));
+          }
         }
       }
     }
-    if (answerList.length === 0) return;
-    console.log(answerList);
+    // test용 console
+    console.log(data?.form.length, answerList.length, answerList);
+    if (answerList.length === 0 || answerList.length !== data?.form.length)
+      return;
     setModal({
       modalName: 'RECRUITMENT-APPLY',
       recruitId: recruitId,
@@ -77,37 +93,46 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
 
   if (isLoading || !data || Object.keys(data).length === 0) {
     return (
-      <div className={applicationStyle.form}>
-        <div className={applicationStyle.titleContainer}></div>
-        <div className={applicationStyle.questionContainer}>
-          <div className={applicationStyle.backTitle}>
-            {isLoading ? '로딩중...' : '지원서 항목이 없습니다'}
-          </div>
-          <Button
-            className={applicationStyle.backBtn}
-            variant='contained'
-            onClick={goBack}
-          >
-            뒤로가기
-          </Button>
-        </div>
-      </div>
+      <Box>
+        <Grid className={applicationStyle.form}>
+          <Paper className={applicationStyle.titleContainer}>42GG 모집</Paper>
+          <Paper className={applicationStyle.questionContainer}>
+            <div className={applicationStyle.backTitle}>
+              {isLoading ? '로딩중...' : '지원서 항목이 없습니다'}
+            </div>
+            <Button
+              className={applicationStyle.backBtn}
+              variant='contained'
+              onClick={goBack}
+            >
+              뒤로가기
+            </Button>
+          </Paper>
+        </Grid>
+      </Box>
     );
   }
 
   return (
-    <div className={applicationStyle.form}>
-      <div className={applicationStyle.titleContainer}>
-        {data.title} {data.generations} 모집
-      </div>
-      <div className={applicationStyle.bodyContainer}>
+    <Box>
+      <Grid
+        className={applicationStyle.form}
+        container
+        direction={'column'}
+        rowSpacing={2}
+      >
+        <Paper className={applicationStyle.titleContainer}>
+          {data.title} {data.generations} 모집
+        </Paper>
         {data.form.map((form: IQuestionForm, index: number) => (
-          <div className={applicationStyle.questionContainer} key={index}>
+          <Paper className={applicationStyle.questionContainer} key={index}>
             {form.inputType === 'TEXT' ? (
+              // todo: required 추가 필요?
               <TextForm
                 question={form.question}
                 qestionId={form.questionId}
                 refs={formRefs}
+                refIndex={index}
               />
             ) : form.inputType === 'SINGLE_CHECK' ? (
               <SingleCheckForm
@@ -115,6 +140,7 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
                 checkList={form.checkList}
                 qestionId={form.questionId}
                 refs={formRefs}
+                refIndex={index}
               />
             ) : form.inputType === 'MULTI_CHECK' ? (
               <MultiCheckForm
@@ -122,14 +148,13 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
                 checkList={form.checkList}
                 qestionId={form.questionId}
                 refs={formRefs}
+                refIndex={index}
               />
             ) : (
-              <div>유효하지 않은 폼</div>
+              <span>유효하지 않은 폼입니다</span>
             )}
-          </div>
+          </Paper>
         ))}
-      </div>
-      <div className={applicationStyle.btnContainer}>
         <Button
           className={applicationStyle.submitBtn}
           variant='contained'
@@ -137,8 +162,8 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
         >
           제출하기
         </Button>
-      </div>
-    </div>
+      </Grid>
+    </Box>
   );
 }
 
@@ -146,10 +171,12 @@ function TextForm({
   question,
   qestionId,
   refs,
+  refIndex,
 }: {
   question: string;
   qestionId: number;
   refs: MutableRefObject<IRefs[]>;
+  refIndex: number;
 }) {
   return (
     <>
@@ -159,8 +186,9 @@ function TextForm({
         label='답변을 적어주세요'
         multiline
         rows={5}
+        color={'info'}
         inputRef={(ref) =>
-          refs.current.push({ id: qestionId, type: 'TEXT', ref: ref })
+          (refs.current[refIndex] = { id: qestionId, type: 'TEXT', ref: [ref] })
         }
       />
     </>
@@ -172,19 +200,21 @@ function SingleCheckForm({
   checkList,
   qestionId,
   refs,
+  refIndex,
 }: {
   question: string;
   checkList: ICheck[] | undefined;
   qestionId: number;
   refs: MutableRefObject<IRefs[]>;
+  refIndex: number;
 }) {
   return (
     <FormControl>
       <div className={applicationStyle.questionText}>{question}</div>
       <RadioGroup
         className={applicationStyle.radioBoxGroup}
-        aria-labelledby='radio-buttons-group-label'
-        name='radio-buttons-group'
+        aria-labelledby={'radio-buttons-group-label' + refIndex}
+        name={'radio-buttons-group' + refIndex}
       >
         {checkList?.map((check: ICheck) => {
           return (
@@ -195,12 +225,14 @@ function SingleCheckForm({
               control={<Radio />}
               label={check.contents}
               inputRef={(ref) =>
-                refs.current.push({
-                  id: qestionId,
-                  type: 'SINGLE_CHECK',
-                  checkId: check.id,
-                  ref: ref,
-                })
+                refs.current[refIndex] === undefined
+                  ? (refs.current[refIndex] = {
+                      id: qestionId,
+                      type: 'SINGLE_CHECK',
+                      // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
+                      ref: [null, ref],
+                    })
+                  : (refs.current[refIndex].ref[check.id] = ref)
               }
             />
           );
@@ -215,11 +247,13 @@ function MultiCheckForm({
   checkList,
   qestionId,
   refs,
+  refIndex,
 }: {
   question: string;
   checkList: ICheck[] | undefined;
   qestionId: number;
   refs: MutableRefObject<IRefs[]>;
+  refIndex: number;
 }) {
   return (
     <FormControl>
@@ -233,12 +267,14 @@ function MultiCheckForm({
               control={<Checkbox />}
               label={check.contents}
               inputRef={(ref) =>
-                refs.current.push({
-                  id: qestionId,
-                  type: 'SINGLE_CHECK',
-                  checkId: check.id,
-                  ref: ref,
-                })
+                refs.current[refIndex] === undefined
+                  ? (refs.current[refIndex] = {
+                      id: qestionId,
+                      type: 'MULTI_CHECK',
+                      // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
+                      ref: [null, ref],
+                    })
+                  : (refs.current[refIndex].ref[check.id] = ref)
               }
             />
           );
