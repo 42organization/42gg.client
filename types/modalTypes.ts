@@ -35,7 +35,7 @@ type StoreModal = 'MANUAL' | 'COIN_HISTORY';
 
 type TournamentModal = 'REGISTRY' | 'MANUAL';
 
-type PartyModal = 'REPORT_COMMENT' | 'REPORT_ROOM' | 'REPORT_NOSHOW';
+type PartyModal = 'REPORT';
 
 type AdminModal =
   | 'PROFILE'
@@ -56,8 +56,6 @@ type AdminModal =
   | 'TOURNAMENT_BRAKET_EDIT'
   | 'TOURNAMENT_PARTICIPANT_EDIT'
   | 'PARTY_EDIT';
-
-type PartyModal = 'NO_SHOW' | 'ROOM' | 'COMMENT';
 
 type ModalName =
   | null
@@ -118,10 +116,11 @@ export interface IRandomItem {
   color: RandomColors;
 }
 
-interface PartyRoomReport {
-  roomId: number;
-  commentId: number;
-  type: 'ROOM' | 'NO_SHOW' | 'COMMENT ';
+export interface PartyReportModalData {
+  name: 'COMMENT' | 'ROOM' | 'NOSHOW';
+  commentId?: number;
+  roomId?: number;
+  userIntraId?: number;
 }
 
 export interface Modal {
@@ -153,5 +152,5 @@ export interface Modal {
   tournamentInfo?: TournamentInfo;
   tournament?: ITournament;
   tournamentId?: number;
-  roomId?: number;
+  partyReport?: PartyReportModalData;
 }
