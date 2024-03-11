@@ -68,7 +68,8 @@ type ModalName =
   | `EDIT-ITEM-${EditItemModal}`
   | `STORE-${StoreModal}`
   | `PURCHASE-${PurchaseModal}`
-  | `TOURNAMENT-${TournamentModal}`;
+  | `TOURNAMENT-${TournamentModal}`
+  | `PARTY-${PartyModal}`;
 
 export interface Cancel {
   startTime: string;
