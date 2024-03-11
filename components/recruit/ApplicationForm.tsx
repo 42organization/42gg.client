@@ -1,49 +1,18 @@
 import { useRouter } from 'next/router';
-import { MutableRefObject, useRef, useState } from 'react';
-import {
-  Alert,
-  Box,
-  Button,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  Grid,
-  Paper,
-  Radio,
-  RadioGroup,
-  Snackbar,
-  TextField,
-} from '@mui/material';
-import {
-  IApplicantAnswer,
-  ICheck,
-  IQuestionForm,
-  recruitmentQuestionTypes,
-} from 'types/recruit/recruitments';
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { Alert, Box, Button, Grid, Paper, Snackbar } from '@mui/material';
+import { IApplicantAnswer, IRefs } from 'types/recruit/recruitments';
 import ApplyModal from 'components/modal/recruitment/ApplyModal';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
 import applicationStyle from 'styles/recruit/application.module.scss';
-
-interface IRefs {
-  id: number;
-  type: recruitmentQuestionTypes;
-  ref: HTMLInputElement[];
-}
+import ApplicationQuestions from './ApplicationQuestions';
 
 export default function ApplicationForm({ recruitId }: { recruitId: number }) {
   const { data, isLoading } = useRecruitDetail({ recruitId });
   const formRefs = useRef<IRefs[]>([]);
-  const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
-  const [answerListState, setAnswerListState] = useState<IApplicantAnswer[]>(
-    []
-  );
+  const [answers, setAnswers] = useState<IApplicantAnswer[]>([]);
   const [alertOn, setAlertOn] = useState(false);
-
-  const closeAlert = () => {
-    setAlertOn(false);
-  };
 
   // todo: 응답하지 않은 질문으로 포커싱 필요?
   const submitApplicationForm = () => {
@@ -111,34 +80,12 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
     console.log('응답: ', answerList);
     if (answerList.length === 0 || answerList.length !== data?.form.length)
       return;
-    setAnswerListState(answerList);
+    setAnswers(answerList);
     setModalOpen(true);
   };
 
-  const goBack = () => {
-    router.back();
-  };
-
   if (isLoading || !data || Object.keys(data).length === 0) {
-    return (
-      <Box>
-        <Grid className={applicationStyle.form}>
-          <Paper className={applicationStyle.titleContainer}>42GG 모집</Paper>
-          <Paper className={applicationStyle.questionContainer}>
-            <div className={applicationStyle.backTitle}>
-              {isLoading ? '로딩중...' : '지원서 항목이 없습니다'}
-            </div>
-            <Button
-              className={applicationStyle.backBtn}
-              variant='contained'
-              onClick={goBack}
-            >
-              뒤로가기
-            </Button>
-          </Paper>
-        </Grid>
-      </Box>
-    );
+    return <NoData isLoading={isLoading} />;
   }
 
   return (
@@ -152,37 +99,7 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
         <Paper className={applicationStyle.titleContainer}>
           {data.title} {data.generations} 모집
         </Paper>
-        {data.form.map((form: IQuestionForm, index: number) => (
-          <Paper className={applicationStyle.questionContainer} key={index}>
-            {form.inputType === 'TEXT' ? (
-              // todo: required 추가 필요?
-              <TextForm
-                question={form.question}
-                qestionId={form.questionId}
-                refs={formRefs}
-                refIndex={index}
-              />
-            ) : form.inputType === 'SINGLE_CHECK' ? (
-              <SingleCheckForm
-                question={form.question}
-                checkList={form.checkList}
-                qestionId={form.questionId}
-                refs={formRefs}
-                refIndex={index}
-              />
-            ) : form.inputType === 'MULTI_CHECK' ? (
-              <MultiCheckForm
-                question={form.question}
-                checkList={form.checkList}
-                qestionId={form.questionId}
-                refs={formRefs}
-                refIndex={index}
-              />
-            ) : (
-              <span>유효하지 않은 폼입니다</span>
-            )}
-          </Paper>
-        ))}
+        <ApplicationQuestions data={data} refs={formRefs} />
         <Button
           className={applicationStyle.submitBtn}
           variant='contained'
@@ -195,135 +112,62 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         recruitId={recruitId}
-        applicantAnswers={answerListState}
+        applicantAnswers={answers}
       />
-      <Snackbar
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        open={alertOn}
-        autoHideDuration={5000}
-        onClose={closeAlert}
-      >
-        <Alert onClose={closeAlert} severity='error' variant='filled'>
-          빈칸을 채워주세요
-        </Alert>
-      </Snackbar>
+      <SnackBar alertOn={alertOn} setAlertOn={setAlertOn} />
     </Box>
   );
 }
 
-function TextForm({
-  question,
-  qestionId,
-  refs,
-  refIndex,
-}: {
-  question: string;
-  qestionId: number;
-  refs: MutableRefObject<IRefs[]>;
-  refIndex: number;
-}) {
+function NoData({ isLoading }: { isLoading: boolean }) {
+  const router = useRouter();
+
+  const goBack = () => {
+    router.back();
+  };
+
   return (
-    <>
-      <div className={applicationStyle.questionText}>{question}</div>
-      <TextField
-        className={applicationStyle.textField}
-        label='답변을 적어주세요'
-        multiline
-        rows={5}
-        color={'info'}
-        inputRef={(ref) =>
-          (refs.current[refIndex] = { id: qestionId, type: 'TEXT', ref: [ref] })
-        }
-      />
-    </>
+    <Box>
+      <Grid className={applicationStyle.form}>
+        <Paper className={applicationStyle.titleContainer}>42GG 모집</Paper>
+        <Paper className={applicationStyle.questionContainer}>
+          <div className={applicationStyle.backTitle}>
+            {isLoading ? '로딩중...' : '지원서 항목이 없습니다'}
+          </div>
+          <Button
+            className={applicationStyle.backBtn}
+            variant='contained'
+            onClick={goBack}
+          >
+            뒤로가기
+          </Button>
+        </Paper>
+      </Grid>
+    </Box>
   );
 }
 
-function SingleCheckForm({
-  question,
-  checkList,
-  qestionId,
-  refs,
-  refIndex,
+function SnackBar({
+  alertOn,
+  setAlertOn,
 }: {
-  question: string;
-  checkList: ICheck[] | undefined;
-  qestionId: number;
-  refs: MutableRefObject<IRefs[]>;
-  refIndex: number;
+  alertOn: boolean;
+  setAlertOn: Dispatch<SetStateAction<boolean>>;
 }) {
-  return (
-    <FormControl>
-      <div className={applicationStyle.questionText}>{question}</div>
-      <RadioGroup
-        className={applicationStyle.radioBoxGroup}
-        aria-labelledby={'radio-buttons-group-label' + refIndex}
-        name={'radio-buttons-group' + refIndex}
-      >
-        {checkList?.map((check: ICheck) => {
-          return (
-            <FormControlLabel
-              className={applicationStyle.radioBox}
-              key={check.id}
-              value={check.contents}
-              control={<Radio />}
-              label={check.contents}
-              inputRef={(ref) =>
-                refs.current[refIndex] === undefined
-                  ? (refs.current[refIndex] = {
-                      id: qestionId,
-                      type: 'SINGLE_CHECK',
-                      // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
-                      ref: [null, ref],
-                    })
-                  : (refs.current[refIndex].ref[check.id] = ref)
-              }
-            />
-          );
-        })}
-      </RadioGroup>
-    </FormControl>
-  );
-}
+  const closeAlert = () => {
+    setAlertOn(false);
+  };
 
-function MultiCheckForm({
-  question,
-  checkList,
-  qestionId,
-  refs,
-  refIndex,
-}: {
-  question: string;
-  checkList: ICheck[] | undefined;
-  qestionId: number;
-  refs: MutableRefObject<IRefs[]>;
-  refIndex: number;
-}) {
   return (
-    <FormControl>
-      <div className={applicationStyle.questionText}>{question}</div>
-      <FormGroup className={applicationStyle.checkBoxGroup}>
-        {checkList?.map((check: ICheck) => {
-          return (
-            <FormControlLabel
-              key={check.id}
-              value={check.contents}
-              control={<Checkbox />}
-              label={check.contents}
-              inputRef={(ref) =>
-                refs.current[refIndex] === undefined
-                  ? (refs.current[refIndex] = {
-                      id: qestionId,
-                      type: 'MULTI_CHECK',
-                      // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
-                      ref: [null, ref],
-                    })
-                  : (refs.current[refIndex].ref[check.id] = ref)
-              }
-            />
-          );
-        })}
-      </FormGroup>
-    </FormControl>
+    <Snackbar
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+      open={alertOn}
+      autoHideDuration={5000}
+      onClose={closeAlert}
+    >
+      <Alert onClose={closeAlert} severity='error' variant='filled'>
+        빈칸을 채워주세요
+      </Alert>
+    </Snackbar>
   );
 }
