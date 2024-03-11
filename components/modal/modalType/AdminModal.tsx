@@ -17,6 +17,7 @@ import DetailModal from 'components/modal/admin/DetailModal';
 import AdminSeasonEdit from 'components/modal/admin/SeasonEdit';
 import AdminEditTournamentBraket from '../admin/AdminEditTournamentBraket';
 import AdminTournamentParticipantEditModal from '../admin/AdminTournamentParticipantEditModal/AdminTournamentParticipantEditModal';
+import PartyRoomEditModal from '../party/PartyRoomEditModal';
 
 export default function AdminModal() {
   const {
@@ -34,6 +35,7 @@ export default function AdminModal() {
     coinPolicy,
     tournament,
     tournamentId,
+    roomId,
   } = useRecoilValue(modalState);
 
   if (!modalName) {
@@ -90,6 +92,7 @@ export default function AdminModal() {
     'ADMIN-TOURNAMENT_PARTICIPANT_EDIT': tournamentId ? (
       <AdminTournamentParticipantEditModal tournamentId={tournamentId} />
     ) : null,
+    'ADMIN-PARTY_EDIT': roomId ? <PartyRoomEditModal roomId={roomId} /> : null,
   };
 
   return content[modalName];

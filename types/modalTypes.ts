@@ -35,6 +35,8 @@ type StoreModal = 'MANUAL' | 'COIN_HISTORY';
 
 type TournamentModal = 'REGISTRY' | 'MANUAL';
 
+type PartyModal = 'REPORT_COMMENT' | 'REPORT_ROOM' | 'REPORT_NOSHOW';
+
 type AdminModal =
   | 'PROFILE'
   | 'USER-COIN'
@@ -52,7 +54,8 @@ type AdminModal =
   | 'COINPOLICY_EDIT'
   | 'CHECK_SEND_NOTI'
   | 'TOURNAMENT_BRAKET_EDIT'
-  | 'TOURNAMENT_PARTICIPANT_EDIT';
+  | 'TOURNAMENT_PARTICIPANT_EDIT'
+  | 'PARTY_EDIT';
 
 type PartyModal = 'NO_SHOW' | 'ROOM' | 'COMMENT';
 
@@ -150,5 +153,5 @@ export interface Modal {
   tournamentInfo?: TournamentInfo;
   tournament?: ITournament;
   tournamentId?: number;
-  partyReport?: PartyRoomReport;
+  roomId?: number;
 }
