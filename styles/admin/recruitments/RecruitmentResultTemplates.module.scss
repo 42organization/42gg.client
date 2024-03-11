@@ -1,26 +1,32 @@
-@import 'styles/common.scss';
 @import 'styles/admin/common.scss';
 
 .container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 3rem;
+}
 
-  .templateContainer {
+.templateContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  .textarea {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-
-    .title {
-      margin-bottom: 0.5rem;
+    justify-content: center;
+    margin: 0.5rem 0;
+    .alertText {
+      height: 1rem;
+      font-size: 0.7rem;
+      color: #fe3737;
     }
-    .button {
-      @include admin-button('BLUE');
-      padding: 0.6rem;
-      margin-top: 0.5rem;
-    }
+  }
+  .button {
+    @include admin-button('BLUE');
+    padding: 0.6rem;
   }
 }

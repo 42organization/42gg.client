@@ -36,5 +36,11 @@ const templateList: IRecruitmentTemplateList = {
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).json(templateList);
+  const { method } = req;
+
+  if (method === 'GET') {
+    res.status(200).json(templateList);
+  } else if (method === 'POST') {
+    res.status(201).end();
+  }
 }

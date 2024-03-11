@@ -37,7 +37,7 @@ function EditRecruitResultTemplates() {
       setTemplates(messages);
     } catch (e: any) {
       setSnackbar({
-        toastName: `get recruitment result templates`,
+        toastName: `api error`,
         severity: 'error',
         message: `API 요청에 문제가 발생했습니다.`,
         clicked: true,
