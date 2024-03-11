@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
-import { MutableRefObject, useRef } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { MutableRefObject, useRef, useState } from 'react';
 import {
   Box,
   Button,
@@ -15,11 +14,12 @@ import {
   TextField,
 } from '@mui/material';
 import {
+  IApplicantAnswer,
   ICheck,
   IQuestionForm,
   recruitmentQuestionTypes,
 } from 'types/recruit/recruitments';
-import { modalState } from 'utils/recoil/modal';
+import ApplyModal from 'components/modal/recruitment/ApplyModal';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
 import applicationStyle from 'styles/recruit/application.module.scss';
 
@@ -31,9 +31,12 @@ interface IRefs {
 
 export default function ApplicationForm({ recruitId }: { recruitId: number }) {
   const { data, isLoading } = useRecruitDetail({ recruitId });
-  const setModal = useSetRecoilState(modalState);
   const formRefs = useRef<IRefs[]>([]);
   const router = useRouter();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [answerListState, setAnswerListState] = useState<IApplicantAnswer[]>(
+    []
+  );
 
   // todo: 응답하지 않은 질문으로 포커싱 필요?
   const submitApplicationForm = () => {
@@ -80,11 +83,13 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
     console.log(data?.form.length, answerList.length, answerList);
     if (answerList.length === 0 || answerList.length !== data?.form.length)
       return;
-    setModal({
-      modalName: 'RECRUITMENT-APPLY',
-      recruitId: recruitId,
-      applicantAnswers: answerList,
-    });
+    setAnswerListState(answerList);
+    setModalOpen(true);
+    // setModal({
+    //   modalName: 'RECRUITMENT-APPLY',
+    //   recruitId: recruitId,
+    //   applicantAnswers: answerList,
+    // });
   };
 
   const goBack = () => {
@@ -163,6 +168,12 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
           제출하기
         </Button>
       </Grid>
+      <ApplyModal
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        recruitId={recruitId}
+        applicantAnswers={answerListState}
+      />
     </Box>
   );
 }
