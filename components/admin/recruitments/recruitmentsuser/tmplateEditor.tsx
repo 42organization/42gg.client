@@ -22,7 +22,9 @@ function TemplateEditor({ messageType, message }: IRecruitmentResultMessage) {
 
   const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const message = e.target.value;
-    if (messageType === 'INTERVIEW' && !message.includes(DATE)) {
+    if (!message) {
+      setAlert(`내용을 입력해주세요.`);
+    } else if (messageType === 'INTERVIEW' && !message.includes(DATE)) {
       setAlert(`${DATE}를 포함해주세요.`);
     } else {
       setAlert('');
