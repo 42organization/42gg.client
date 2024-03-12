@@ -1,22 +1,31 @@
-import { PartyRoomDetail } from 'types/partyTypes';
 import { getRemainTime } from 'utils/handleTime';
 import usePartyCategory from 'hooks/party/usePartyCategory';
 import PartyRoomDetailButton from './PartyDetailButton';
 
-export default function PartyDetailTitleBox(partyRoomDetail: PartyRoomDetail) {
+type PartyDetailTitleBoxProps = {
+  categoryId: number;
+  title: string;
+  roomId: number;
+  dueDate: string;
+};
+
+export default function PartyDetailTitleBox({
+  categoryId,
+  title,
+  roomId,
+  dueDate,
+}: PartyDetailTitleBoxProps) {
   const category = usePartyCategory().categories.find(
-    (category) => category.categoryId === partyRoomDetail.categoryId
+    (category) => category.categoryId === categoryId
   )?.categoryName;
 
   return (
     <>
-      <span>{'#' + category}</span>
+      <span>{`#${category}`}</span>
       <PartyRoomDetailButton.ShareRoom />
-      <span>{partyRoomDetail.title}</span>
-      <span>
-        {getRemainTime({ targetTime: new Date(partyRoomDetail.dueDate) })}
-      </span>
-      <PartyRoomDetailButton.ReportRoom roomId={partyRoomDetail.roomId} />
+      <span>{title}</span>
+      <span>{getRemainTime({ targetTime: new Date(dueDate) })}</span>
+      <PartyRoomDetailButton.ReportRoom roomId={roomId} />
     </>
   );
 }
