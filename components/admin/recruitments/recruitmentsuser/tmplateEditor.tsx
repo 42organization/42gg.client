@@ -41,7 +41,6 @@ function TemplateEditor({ messageType, message }: IRecruitmentResultMessage) {
       return;
     }
     try {
-      // TODO: 해당 API가 맞는지 확인 필요
       // await instanceInManage.post('/recruitments/result/message', tempalte);
       await mockInstance.post('/admin/recruitments/result/message', tempalte);
       setSnackbar({
