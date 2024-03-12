@@ -36,11 +36,11 @@ export interface IRecruitmentDetail {
 
 export type RecruitmentMessageType = 'INTERVIEW' | 'PASS' | 'FAIL';
 
-export interface IRecruitmentResultMessage {
+export interface IRecruitMessageTemplate {
   messageType: RecruitmentMessageType;
   message: string;
 }
-export interface IRecruitmentTemplate extends IRecruitmentResultMessage {
+export interface IRecruitmentTemplate extends IRecruitMessageTemplate {
   messageId: number;
   isUse: boolean;
 }
