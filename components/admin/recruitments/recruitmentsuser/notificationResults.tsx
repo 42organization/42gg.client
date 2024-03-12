@@ -1,10 +1,4 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { useSetRecoilState } from 'recoil';
 import {
@@ -24,6 +18,7 @@ import {
 } from 'types/admin/adminRecruitmentsTypes';
 // import { instanceInManage } from 'utils/axios';
 import { mockInstance } from 'utils/mockAxios';
+import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
@@ -45,13 +40,7 @@ export interface notiMessageType {
   content: string;
 }
 
-function NotificationResults({
-  recruitId,
-  setTabIdx,
-}: {
-  recruitId: number;
-  setTabIdx: Dispatch<SetStateAction<number>>;
-}) {
+function NotificationResults({ recruitId }: { recruitId: number }) {
   const [notificationData, setNotificationData] = useState<InoticationTable>({
     noticationList: [],
     totalPage: 0,
@@ -61,6 +50,13 @@ function NotificationResults({
   const [alignment, setAlignment] = useState<Record<number, string | null>>({});
   const setSnackBar = useSetRecoilState(toastState);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const setModal = useSetRecoilState(modalState);
+
+  const onEditTemplate = () => {
+    setModal({
+      modalName: 'ADMIN-RECRUIT_MESSAGE_TEMPLATE',
+    });
+  };
 
   const handleAlignment = (
     event: React.MouseEvent<HTMLElement>,
@@ -184,7 +180,7 @@ function NotificationResults({
           }}
         />
       </div>
-      <button className={styles.button} onClick={() => setTabIdx(-1)}>
+      <button className={styles.button} onClick={onEditTemplate}>
         메시지 템플릿 작성하기
       </button>
     </>

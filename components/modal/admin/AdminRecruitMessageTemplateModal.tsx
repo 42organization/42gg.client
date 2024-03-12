@@ -8,11 +8,10 @@ import {
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import TemplateEditor from 'components/admin/recruitments/recruitmentsuser/tmplateEditor';
-import styles from 'styles/admin/recruitments/RecruitmentResultTemplates.module.scss';
+import styles from 'styles/admin/modal/AdminRecruitMessageTemplateModal.module.scss';
 
 type TemplateListType = Record<RecruitmentMessageType, string>;
-
-function EditRecruitResultTemplates() {
+function AdminRecruitMessageTemplateModal() {
   const setSnackbar = useSetRecoilState(toastState);
   const [templates, setTemplates] = useState<TemplateListType>({
     INTERVIEW: '',
@@ -58,4 +57,4 @@ function EditRecruitResultTemplates() {
   );
 }
 
-export default EditRecruitResultTemplates;
+export default AdminRecruitMessageTemplateModal;

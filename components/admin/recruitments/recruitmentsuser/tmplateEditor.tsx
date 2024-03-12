@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { IRecruitmentResultMessage } from 'types/recruit/recruitments';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
+import { IRecruitMessageTemplate } from 'types/recruit/recruitments';
 import { mockInstance } from 'utils/mockAxios';
 // import { instanceInManage } from 'utils/axios';
+import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/admin/recruitments/RecruitmentResultTemplates.module.scss';
+import styles from 'styles/admin/modal/AdminRecruitMessageTemplateModal.module.scss';
 
-function TemplateEditor({ messageType, message }: IRecruitmentResultMessage) {
-  const [tempalte, setTemplate] = useState<IRecruitmentResultMessage>({
+function TemplateEditor({ messageType, message }: IRecruitMessageTemplate) {
+  const resetModal = useResetRecoilState(modalState);
+  const [tempalte, setTemplate] = useState<IRecruitMessageTemplate>({
     messageType: messageType,
     message: message,
   });
@@ -51,6 +53,7 @@ function TemplateEditor({ messageType, message }: IRecruitmentResultMessage) {
         message: `템플릿이 성공적으로 등록되었습니다.`,
         clicked: true,
       });
+      resetModal();
     } catch (e: any) {
       setSnackbar({
         toastName: `bad request`,

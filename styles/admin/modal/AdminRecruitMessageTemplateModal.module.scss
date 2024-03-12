@@ -2,10 +2,16 @@
 
 .container {
   display: flex;
+  width: 80%;
+  min-width: 600px;
+  height: 30%;
+  min-height: 400px;
   flex-direction: row;
+  padding: 3rem;
+  background: white;
+  border-radius: 1rem;
   justify-content: space-around;
   align-items: center;
-  padding: 3rem;
 }
 
 .templateContainer {
