@@ -12,9 +12,12 @@ import {
   Box,
   Button,
   Dialog,
+  DialogContentText,
+  DialogTitle,
   Slide,
   Snackbar,
   SnackbarOrigin,
+  Typography,
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { IApplicantAnswer } from 'types/recruit/recruitments';
@@ -84,6 +87,8 @@ export default function ApplyModal({
           message: '지원되었습니다.',
           severity: 'success',
         }));
+        setModalOpen(false);
+        // todo: 제출 후 recruit로 page 이동
       },
       onError: () => {
         setSnackBarState((prev) => ({
@@ -96,8 +101,6 @@ export default function ApplyModal({
     });
   };
 
-  if (!modalOpen || applicantAnswers.length === 0) return <></>;
-
   return (
     <>
       <Dialog
@@ -107,15 +110,25 @@ export default function ApplyModal({
         sx={{ borderRadius: '3rem' }}
       >
         <Box className={styles.container}>
-          <div className={styles.title}>지원서를 제출할까요?</div>
-          <div className={styles.content}>
-            제출한 지원서는 제출 마감 전까지 수정하거나 삭제할 수 있습니다.
-          </div>
+          <DialogTitle>
+            <Typography align='center' variant='h5'>
+              지원서를 제출할까요?
+            </Typography>
+          </DialogTitle>
+          <DialogContentText
+            className={styles.content}
+            align='center'
+            variant='body1'
+          >
+            제출한 지원서는 제출 마감 전까지<br></br>수정하거나 삭제할 수
+            있습니다.
+          </DialogContentText>
           <Box className={styles.btnContainer}>
             <Button
               className={styles.cancelBtn}
               variant='outlined'
               onClick={onModalClose}
+              color={'secondary'}
             >
               취소
             </Button>
@@ -123,6 +136,7 @@ export default function ApplyModal({
               className={styles.applyBtn}
               variant='contained'
               onClick={onApply}
+              color={'primary'}
             >
               제출하기
             </Button>

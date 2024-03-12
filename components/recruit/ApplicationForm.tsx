@@ -1,5 +1,12 @@
 import { useRouter } from 'next/router';
-import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import {
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Alert, Box, Button, Grid, Paper, Snackbar } from '@mui/material';
 import { IApplicantAnswer, IRefs } from 'types/recruit/recruitments';
 import ApplyModal from 'components/modal/recruitment/ApplyModal';
@@ -14,78 +21,20 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
   const [answers, setAnswers] = useState<IApplicantAnswer[]>([]);
   const [alertOn, setAlertOn] = useState(false);
 
-  // todo: 응답하지 않은 질문으로 포커싱 필요?
-  const submitApplicationForm = () => {
-    const answerList = [];
-    for (const answer of formRefs.current) {
-      let requiredFlag = false;
-      if (answer.type === 'TEXT' && answer.ref[0].value.length !== 0) {
-        answerList.push({
-          questionId: answer.id,
-          inputType: answer.type,
-          answer: answer.ref[0].value,
-        });
-        requiredFlag = true;
-      } else if (answer.type === 'SINGLE_CHECK') {
-        for (const checkRef of answer.ref) {
-          if (!checkRef || checkRef?.checked === false) continue;
-          answerList.push({
-            questionId: answer.id,
-            inputType: answer.type,
-            checkList: [Number(answer.ref.indexOf(checkRef))],
-          });
-          requiredFlag = true;
-          break;
-        }
-      } else if (answer.type === 'MULTI_CHECK') {
-        for (const checkRef of answer.ref) {
-          if (!checkRef || checkRef?.checked === false) continue;
-          const foundObj = answerList.find(
-            (obj) => obj.questionId === answer.id
-          );
-          if (foundObj === undefined) {
-            answerList.push({
-              questionId: answer.id,
-              inputType: answer.type,
-              // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
-              checkedList: [Number(answer.ref.indexOf(checkRef))],
-            });
-          } else {
-            // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
-            foundObj.checkedList?.push(Number(answer.ref.indexOf(checkRef)));
-          }
-          requiredFlag = true;
-        }
-      }
-
-      // 채워지지 않은 폼으로 이동
-      if (!requiredFlag) {
-        if (answer.type === 'TEXT') {
-          answer.ref[0].focus();
-        } else {
-          // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
-          answer.ref[1].focus();
-        }
-        setAlertOn(true);
-        return;
-      }
-    }
-    // test용 console
-    console.log(
-      '폼 질문 개수: ',
-      data?.form.length,
-      ' 응답 개수: ',
-      answerList.length
-    );
-    console.log('응답: ', answerList);
-    if (answerList.length === 0 || answerList.length !== data?.form.length)
-      return;
-    setAnswers(answerList);
-    setModalOpen(true);
+  const closeAlert = () => {
+    setAlertOn(false);
   };
 
+  useEffect(() => {
+    if (!data || Object.keys(data).length === 0) {
+      setAlertOn(true);
+    }
+  }, [data]);
+
   if (isLoading || !data || Object.keys(data).length === 0) {
-    return <NoData isLoading={isLoading} />;
+    return (
+      <NoData isLoading={isLoading} alertOn={alertOn} closeAlert={closeAlert} />
+    );
   }
 
   return (
@@ -103,7 +52,15 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
         <Button
           className={applicationStyle.submitBtn}
           variant='contained'
-          onClick={() => submitApplicationForm()}
+          onClick={() =>
+            applicationFormCheck({
+              formRefs,
+              setAlertOn,
+              setModalOpen,
+              setAnswers,
+              numberOfQuestions: data?.form.length,
+            })
+          }
         >
           제출하기
         </Button>
@@ -114,12 +71,23 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
         recruitId={recruitId}
         applicantAnswers={answers}
       />
-      <SnackBar alertOn={alertOn} setAlertOn={setAlertOn} />
+      <SnackBar
+        alertOn={alertOn}
+        closeAlert={closeAlert}
+        message='입력하지 않은 문항이 있습니다.'
+      />
     </Box>
   );
 }
 
-function NoData({ isLoading }: { isLoading: boolean }) {
+interface INoDataProps {
+  isLoading: boolean;
+  alertOn: boolean;
+  closeAlert: () => void;
+}
+
+function NoData(props: INoDataProps) {
+  const { isLoading, alertOn, closeAlert } = props;
   const router = useRouter();
 
   const goBack = () => {
@@ -132,7 +100,7 @@ function NoData({ isLoading }: { isLoading: boolean }) {
         <Paper className={applicationStyle.titleContainer}>42GG 모집</Paper>
         <Paper className={applicationStyle.questionContainer}>
           <div className={applicationStyle.backTitle}>
-            {isLoading ? '로딩중...' : '지원서 항목이 없습니다'}
+            {isLoading ? '로딩중...' : ''}
           </div>
           <Button
             className={applicationStyle.backBtn}
@@ -143,21 +111,23 @@ function NoData({ isLoading }: { isLoading: boolean }) {
           </Button>
         </Paper>
       </Grid>
+      <SnackBar
+        alertOn={alertOn}
+        closeAlert={closeAlert}
+        message='올바르지 않은 요청입니다.'
+      />
     </Box>
   );
 }
 
-function SnackBar({
-  alertOn,
-  setAlertOn,
-}: {
+interface ISnackBarProps {
   alertOn: boolean;
-  setAlertOn: Dispatch<SetStateAction<boolean>>;
-}) {
-  const closeAlert = () => {
-    setAlertOn(false);
-  };
+  closeAlert: () => void;
+  message: string;
+}
 
+function SnackBar(props: ISnackBarProps) {
+  const { alertOn, closeAlert, message } = props;
   return (
     <Snackbar
       anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
@@ -166,8 +136,78 @@ function SnackBar({
       onClose={closeAlert}
     >
       <Alert onClose={closeAlert} severity='error' variant='filled'>
-        빈칸을 채워주세요
+        {message}
       </Alert>
     </Snackbar>
   );
 }
+
+interface IapplicationFormCheckProps {
+  formRefs: MutableRefObject<IRefs[]>;
+  setAlertOn: Dispatch<SetStateAction<boolean>>;
+  setModalOpen: Dispatch<SetStateAction<boolean>>;
+  setAnswers: Dispatch<SetStateAction<IApplicantAnswer[]>>;
+  numberOfQuestions: number;
+}
+
+const applicationFormCheck = (props: IapplicationFormCheckProps) => {
+  const { formRefs, setAlertOn, setModalOpen, setAnswers, numberOfQuestions } =
+    props;
+
+  const answerList = [];
+  for (const answer of formRefs.current) {
+    let requiredFlag = false;
+    if (answer.type === 'TEXT' && answer.ref[0].value.length !== 0) {
+      answerList.push({
+        questionId: answer.id,
+        inputType: answer.type,
+        answer: answer.ref[0].value,
+      });
+      requiredFlag = true;
+    } else if (answer.type === 'SINGLE_CHECK') {
+      for (const checkRef of answer.ref) {
+        if (!checkRef || checkRef?.checked === false) continue;
+        answerList.push({
+          questionId: answer.id,
+          inputType: answer.type,
+          checkList: [Number(answer.ref.indexOf(checkRef))],
+        });
+        requiredFlag = true;
+        break;
+      }
+    } else if (answer.type === 'MULTI_CHECK') {
+      for (const checkRef of answer.ref) {
+        if (!checkRef || checkRef?.checked === false) continue;
+        const foundObj = answerList.find((obj) => obj.questionId === answer.id);
+        if (foundObj === undefined) {
+          answerList.push({
+            questionId: answer.id,
+            inputType: answer.type,
+            // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
+            checkedList: [Number(answer.ref.indexOf(checkRef))],
+          });
+        } else {
+          // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
+          foundObj.checkedList?.push(Number(answer.ref.indexOf(checkRef)));
+        }
+        requiredFlag = true;
+      }
+    }
+    // 채워지지 않은 폼으로 이동
+    if (!requiredFlag) {
+      if (answer.type === 'TEXT') {
+        answer.ref[0].focus();
+      } else {
+        // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
+        answer.ref[1].focus();
+      }
+      setAlertOn(true);
+      return;
+    }
+  }
+
+  if (answerList.length === 0 || answerList.length !== numberOfQuestions)
+    return;
+  setAnswers(answerList);
+  setModalOpen(true);
+};
