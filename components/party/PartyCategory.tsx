@@ -20,12 +20,13 @@ const tableTitle: { [key: string]: string } = {
 };
 
 export default function PartyCategories() {
-  const { categorys, createCategory, deleteCategory } = usePartyCategory();
+  const { categories, createCategory, deleteCategory } = usePartyCategory();
   const [newCategoryName, setNewCategoryName] = useState('');
 
   const handleConfirm = () => {
     if (newCategoryName.trim() !== '') {
       createCategory(newCategoryName);
+      console.log(newCategoryName);
     }
   };
 
@@ -55,7 +56,7 @@ export default function PartyCategories() {
         <Table className={styles.table} aria-label='UserManagementTable'>
           <AdminTableHead tableName={'partyCategory'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {categorys.map((c) => (
+            {categories.map((c) => (
               <TableRow key={c.categoryId} className={styles.tableRow}>
                 {tableFormat['partyCategory'].columns.map((columnName) => {
                   return (

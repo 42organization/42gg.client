@@ -95,9 +95,7 @@ export default function AdminModal() {
       <AdminTournamentParticipantEditModal tournamentId={tournamentId} />
     ) : null,
     'ADMIN-PARTY_EDIT': roomId ? <PartyRoomEditModal roomId={roomId} /> : null,
-    'ADMIN-PARTY_TEMPLATE': template ? (
-      <TemplateModal template={template} />
-    ) : null,
+    'ADMIN-PARTY_TEMPLATE': <TemplateModal template={template} />,
   };
 
   return content[modalName];

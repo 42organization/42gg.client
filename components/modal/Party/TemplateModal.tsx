@@ -1,29 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { PartyGameTemplate } from 'types/partyTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { PartyGameTemplate, PartyTemplateForm } from 'types/partyTypes';
 import { modalState } from 'utils/recoil/modal';
+import { usePartyTemplate } from 'hooks/party/usePartyTemplate';
 import styles from 'styles/party/TemplateModal.module.scss';
+
+function isUpdate(formData: PartyTemplateForm): formData is PartyGameTemplate {
+  return !!formData.gameTemplateId;
+}
 
 export default function TemplateModal({
   template,
 }: {
-  template: PartyGameTemplate;
+  template?: PartyTemplateForm;
 }) {
-  const [formData, setFormData] = useState<PartyGameTemplate>({
-    gameTemplateId: 0,
-    categoryId: 0,
-    gameName: '',
-    maxGamePeople: 0,
-    minGamePeople: 0,
-    maxGameTime: 0,
-    minGameTime: 0,
-    genre: '',
-    difficulty: '',
-    summary: '',
-  });
+  const [formData, setFormData] = useState<PartyTemplateForm>(
+    template ?? {
+      gameName: '',
+      categoryId: 1,
+      maxGamePeople: 0,
+      minGamePeople: 0,
+      maxGameTime: 0,
+      minGameTime: 0,
+      genre: '',
+      difficulty: '',
+      summary: '',
+    }
+  );
   const setModal = useSetRecoilState(modalState);
-
+  const { createTemplate, updateTemplate } = usePartyTemplate();
   useEffect(() => {
     if (template) {
       setFormData(template);
@@ -31,16 +36,15 @@ export default function TemplateModal({
   }, []);
 
   const handleSubmit = () => {
-    console.log('submit');
+    if (isUpdate(formData)) updateTemplate(formData);
+    else createTemplate(formData);
   };
 
   return (
     <>
       <div className={styles['modal-overlay']}>
         <div className={styles['modal']}>
-          <h2>
-            {template.gameTemplateId == 0 ? '템플릿 변경' : '템플릿 추가'}
-          </h2>
+          <h2>{template ? '템플릿 변경' : '템플릿 추가'}</h2>
           <form onSubmit={handleSubmit}>
             <label>게임 이름: </label>
             <input
@@ -106,8 +110,8 @@ export default function TemplateModal({
                 setFormData({ ...formData, summary: e.target.value })
               }
             />
-            <button type='submit' className={styles.button_2}>
-              {template.gameTemplateId == 0 ? '변경' : '추가'}
+            <button onClick={handleSubmit} className={styles.button_2}>
+              {template ? '변경' : '추가'}
             </button>
             <button
               className={styles.button_2}

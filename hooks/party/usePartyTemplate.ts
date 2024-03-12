@@ -1,33 +1,36 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { PartyGameTemplate, PartyTemplateForm } from 'types/partyTypes';
-import { isAxiosError } from 'utils/axios';
-import { mockInstance } from 'utils/mockAxios';
-import { errorState } from 'utils/recoil/error';
+import { instance, instanceInPartyManage } from 'utils/axios';
+import { toastState } from 'utils/recoil/toast';
 
-export function usePartyTemplate({ categoryId }: { categoryId?: number }) {
+export function usePartyTemplate(categoryId?: number) {
   const queryClient = useQueryClient();
-  const setError = useSetRecoilState(errorState);
+  const setSnackBar = useSetRecoilState(toastState);
 
   const { data } = useQuery({
     queryKey: 'partyGameTemplate',
     queryFn: () =>
-      mockInstance
+      instance
         .get('/party/templates')
         .then(({ data }: { data: PartyGameTemplate[] }) => {
           return categoryId
             ? data.filter((d) => d.categoryId === categoryId)
             : data;
         }),
-    onError: (e: unknown) => {
-      // error처리 보류
-      if (isAxiosError(e)) setError(`${e.code}: ${e.message}`);
+    onError: () => {
+      setSnackBar({
+        toastName: 'GET request',
+        message: '템플릿을 가져오는데 실패했습니다.',
+        severity: 'error',
+        clicked: true,
+      });
     },
   });
 
   const createMutation = useMutation(
     (templateForm: PartyTemplateForm) =>
-      mockInstance.post('/party/admin/templates', templateForm),
+      instanceInPartyManage.post('/templates', templateForm),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('partyGameTemplate');
@@ -36,8 +39,8 @@ export function usePartyTemplate({ categoryId }: { categoryId?: number }) {
   );
   const updateMutation = useMutation(
     (template: PartyGameTemplate) =>
-      mockInstance.patch(
-        `/party/admin/templates/${template.gameTemplateId}`,
+      instanceInPartyManage.patch(
+        `/templates/${template.gameTemplateId}`,
         template
       ),
     {
@@ -47,8 +50,8 @@ export function usePartyTemplate({ categoryId }: { categoryId?: number }) {
     }
   );
   const deleteMutation = useMutation(
-    (templateId: number) =>
-      mockInstance.delete(`/party/admin/templates/${templateId}`),
+    (gameTemplateId: number) =>
+      instanceInPartyManage.delete(`/templates/${gameTemplateId}`),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('partyGameTemplate');
@@ -58,10 +61,11 @@ export function usePartyTemplate({ categoryId }: { categoryId?: number }) {
 
   return {
     templates: data ?? [], // undefind 대신 []을 이용해 에러 처리
-    createTemplate: (templateId: number) => deleteMutation.mutate(templateId),
+    createTemplate: (template: PartyTemplateForm) =>
+      createMutation.mutate(template),
     updateTemplate: (template: PartyGameTemplate) =>
       updateMutation.mutate(template),
-    deleteTemplate: (template: PartyTemplateForm) =>
-      createMutation.mutate(template),
+    deleteTemplate: ({ gameTemplateId }: { gameTemplateId: number }) =>
+      deleteMutation.mutate(gameTemplateId),
   };
 }

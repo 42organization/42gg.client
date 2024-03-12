@@ -92,6 +92,7 @@ export type PartyForm = {
 };
 
 export type PartyTemplateForm = {
+  gameTemplateId?: number;
   gameName: string;
   categoryId: number;
   maxGamePeople: number;

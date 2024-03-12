@@ -155,5 +155,5 @@ export interface Modal {
   tournament?: ITournament;
   tournamentId?: number;
   partyReport?: PartyReportModalData;
-  template?: PartyGameTemplate | null;
+  template?: PartyGameTemplate;
 }

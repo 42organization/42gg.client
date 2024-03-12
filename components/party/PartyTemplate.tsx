@@ -8,11 +8,11 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { PartyGameTemplate } from 'types/partyTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { PartyGameTemplate, PartyTemplateForm } from 'types/partyTypes';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
+import { usePartyTemplate } from 'hooks/party/usePartyTemplate';
 import styles from 'styles/party/PartyMain.module.scss';
 
 const tableTitle: { [key: string]: string } = {
@@ -31,53 +31,21 @@ const tableTitle: { [key: string]: string } = {
 };
 
 export default function PartyTemplate() {
-  const [templates, setTemplates] = useState<PartyGameTemplate[]>([]);
-  const newTemplate = useState<PartyGameTemplate>({
-    gameTemplateId: 0,
-    categoryId: 0,
-    gameName: '',
-    maxGamePeople: 0,
-    minGamePeople: 0,
-    maxGameTime: 0,
-    minGameTime: 0,
-    genre: '',
-    difficulty: '',
-    summary: '',
-  });
+  const { templates, deleteTemplate } = usePartyTemplate();
   const setModal = useSetRecoilState(modalState);
 
-  useEffect(() => {
-    fetchPartyPenalty();
-  }, []);
-
-  const handleAddOrEditTemplate = (template: PartyGameTemplate | null) => {
-    if (template === null) {
-      template = newTemplate;
-    }
+  const handleEditTemplate = (template?: PartyGameTemplate) => {
     setModal({ modalName: 'ADMIN-PARTY_TEMPLATE', template });
   };
 
-  const fetchPartyPenalty = () => {
-    mockInstance
-      .get(`/party/templates`)
-      .then(({ data }: { data: PartyGameTemplate[] }) => {
-        setTemplates(data);
-      })
-      .catch((error) => {
-        console.error('템플릿 정보를 가져오는 중 오류가 발생했습니다:', error);
-      });
+  const handleAddTemplate = () => {
+    setModal({ modalName: 'ADMIN-PARTY_TEMPLATE' });
   };
 
-  const deleteTemplate = (templateId: number) => {
-    mockInstance
-      .delete(`/party/admin/templates/${templateId}`)
-      .then(() => {
-        fetchPartyPenalty();
-      })
-      .catch((error) => {
-        console.error('템플릿 삭제 중 오류가 발생했습니다:', error);
-      });
+  const deleteHandler = (gameTemplateId: number) => {
+    deleteTemplate({ gameTemplateId });
   };
+
   return (
     <div>
       <div className={styles.userManagementWrap}>
@@ -85,7 +53,7 @@ export default function PartyTemplate() {
           <span className={styles.title}>템플릿 관리</span>
         </div>
         <button
-          onClick={() => handleAddOrEditTemplate(null)}
+          onClick={handleAddTemplate}
           className={`${styles.button_1} ${styles.add}`}
         >
           추가
@@ -104,7 +72,7 @@ export default function PartyTemplate() {
                       >
                         {columnName === 'change' && (
                           <button
-                            onClick={() => handleAddOrEditTemplate(t)}
+                            onClick={() => handleEditTemplate(t)}
                             className={`${styles.button_1} ${styles.add}`}
                           >
                             수정
@@ -112,7 +80,7 @@ export default function PartyTemplate() {
                         )}
                         {columnName === 'delete' ? (
                           <button
-                            onClick={() => deleteTemplate(t.gameTemplateId)}
+                            onClick={() => deleteHandler(t.gameTemplateId)}
                             className={`${styles.button_1} ${styles.delete}`}
                           >
                             삭제

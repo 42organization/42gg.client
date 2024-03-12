@@ -1,29 +1,32 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { PartyCategory } from 'types/partyTypes';
-import { isAxiosError } from 'utils/axios';
-import { mockInstance } from 'utils/mockAxios';
-import { errorState } from 'utils/recoil/error';
+import { instance, instanceInPartyManage } from 'utils/axios';
+import { toastState } from 'utils/recoil/toast';
 
 export default function usePartyCategory() {
   const queryClient = useQueryClient();
-  const setError = useSetRecoilState(errorState);
+  const setSnackBar = useSetRecoilState(toastState);
 
   const { data } = useQuery({
     queryKey: 'partyCategory',
     queryFn: () =>
-      mockInstance
-        .get('/party/categorys')
+      instance
+        .get('/party/categories')
         .then(({ data }: { data: PartyCategory[] }) => data),
-    onError: (e: unknown) => {
-      // error처리 보류
-      if (isAxiosError(e)) setError(`${e.code}: ${e.message}`);
+    onError: () => {
+      setSnackBar({
+        toastName: 'GET request',
+        message: '카테고리를 가져오는데 실패했습니다.',
+        severity: 'error',
+        clicked: true,
+      });
     },
   });
 
   const createMutation = useMutation(
     (categoryName: string) =>
-      mockInstance.post('/party/categorys', { categoryName }),
+      instanceInPartyManage.post('/categories', { categoryName }),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('partyCategory');
@@ -32,7 +35,7 @@ export default function usePartyCategory() {
   );
   const deleteMutation = useMutation(
     (categoryId: number) =>
-      mockInstance.delete(`/party/categorys/${categoryId}`),
+      instanceInPartyManage.delete(`/categories/${categoryId}`),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('partyCategory');
@@ -41,7 +44,7 @@ export default function usePartyCategory() {
   );
 
   return {
-    categorys: data ?? [], // undefind 대신 []을 이용해 에러 처리
+    categories: data ?? [], // undefind 대신 []을 이용해 에러 처리
     deleteCategory: (categoryId: number) => deleteMutation.mutate(categoryId),
     createCategory: (categoryName: string) =>
       createMutation.mutate(categoryName),
