@@ -22,6 +22,11 @@ const theme = createTheme({
     //   light: '#DCDEE6',
     //   dark: '#494E65',
     // },
+    secondary: {
+      main: '#8c92ac',
+      light: '#f6f6f6',
+      dark: '#494E65',
+    },
   },
 });
 
