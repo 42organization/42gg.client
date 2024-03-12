@@ -43,7 +43,7 @@ function ReportRoom({ roomId }: ParytButtonProps) {
         });
       }}
     >
-      신고
+      방 신고
     </button>
   );
 }
@@ -62,21 +62,27 @@ function ShareRoom() {
   );
 }
 
-function JoinRoom({ roomId }: ParytButtonProps) {
+type ReprashProps = ParytButtonProps & {
+  fetchRoomDetail: () => void;
+};
+
+function JoinRoom({ roomId, fetchRoomDetail }: ReprashProps) {
   const handlerJoin = async () => {
     await instance.post(`/party/rooms/${roomId}/join`).catch((error) => {
       console.error(error);
     });
+    fetchRoomDetail();
   };
 
-  <button onClick={handlerJoin}>참여하기</button>;
+  return <button onClick={handlerJoin}>참여하기</button>;
 }
 
-function LeaveRoom({ roomId }: ParytButtonProps) {
+function LeaveRoom({ roomId, fetchRoomDetail }: ReprashProps) {
   const handlerExit = async () => {
     await instance.patch(`/party/rooms/${roomId}`).catch((error) => {
       console.error(error);
     });
+    fetchRoomDetail();
   };
 
   return <button onClick={handlerExit}>방 나가기</button>;
