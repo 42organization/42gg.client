@@ -33,3 +33,18 @@ export interface IRecruitmentDetail {
   generations: string;
   form: IQuestionForm[];
 }
+
+export type RecruitmentMessageType = 'INTERVIEW' | 'PASS' | 'FAIL';
+
+export interface IRecruitMessageTemplate {
+  messageType: RecruitmentMessageType;
+  message: string;
+}
+export interface IRecruitmentTemplate extends IRecruitMessageTemplate {
+  messageId: number;
+  isUse: boolean;
+}
+
+export interface IRecruitmentTemplateList {
+  messages: IRecruitmentTemplate[];
+}
