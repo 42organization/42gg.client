@@ -84,6 +84,8 @@ export default function ApplyModal({
           message: '지원되었습니다.',
           severity: 'success',
         }));
+        setModalOpen(false);
+        // todo: 제출 후 recruit로 page 이동
       },
       onError: () => {
         setSnackBarState((prev) => ({
@@ -95,8 +97,6 @@ export default function ApplyModal({
       },
     });
   };
-
-  if (!modalOpen || applicantAnswers.length === 0) return <></>;
 
   return (
     <>
