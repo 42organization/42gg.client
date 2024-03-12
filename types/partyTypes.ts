@@ -1,4 +1,5 @@
 export type PartyRoomStatus = 'OPEN' | 'START' | 'FINISH' | 'HIDDEN' | 'FAIL';
+
 /**
  * @typedef {Object} PartyRoom
  *  @property {string} [creatorIntraId] - adminAPI로 조회시 존재
@@ -33,7 +34,7 @@ export type PartyRoomDetail = PartyRoom & {
  *  @property {string | null} [intraId] - Room 시작시 or Admin으로 조회시 존재
  */
 export type PartyRoomUser = {
-  roomUserId: number;
+  userRoomId: number;
   nickname: string;
   intraId: string | null;
 };
@@ -45,8 +46,6 @@ export type PartyRoomUser = {
 export type PartyComment = {
   commentId: number;
   nickname: string;
-  intraid: string | null;
-  isexist: boolean;
   content: string;
   isHidden: boolean;
   createDate: string;
