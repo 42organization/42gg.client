@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { MutableRefObject, useRef, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import {
   Alert,
   Box,
@@ -119,13 +119,21 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
     router.back();
   };
 
-  if (isLoading) {
+  useEffect(() => {
+    if (!data || Object.keys(data).length === 0) {
+      setAlertOn(true);
+    }
+  }, [data]);
+
+  if (isLoading || !data || Object.keys(data).length === 0) {
     return (
       <Box>
         <Grid className={applicationStyle.form}>
           <Paper className={applicationStyle.titleContainer}>42GG 모집</Paper>
           <Paper className={applicationStyle.questionContainer}>
-            <div className={applicationStyle.backTitle}>로딩중...</div>
+            <div className={applicationStyle.backTitle}>
+              {isLoading ? '로딩중...' : ''}
+            </div>
             <Button
               className={applicationStyle.backBtn}
               variant='contained'
@@ -135,24 +143,17 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
             </Button>
           </Paper>
         </Grid>
+        <Snackbar
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+          open={alertOn}
+          autoHideDuration={5000}
+          onClose={closeAlert}
+        >
+          <Alert onClose={closeAlert} severity='error' variant='filled'>
+            올바르지 않은 요청입니다.
+          </Alert>
+        </Snackbar>
       </Box>
-    );
-  }
-
-  if (!data || Object.keys(data).length === 0) {
-    setAlertOn(true);
-    router.back();
-    return (
-      <Snackbar
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        open={alertOn}
-        autoHideDuration={5000}
-        onClose={closeAlert}
-      >
-        <Alert onClose={closeAlert} severity='error' variant='filled'>
-          올바르지 않은 요청입니다.
-        </Alert>
-      </Snackbar>
     );
   }
 
@@ -165,9 +166,9 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
         rowSpacing={2}
       >
         <Paper className={applicationStyle.titleContainer}>
-          {data.title} {data.generations} 모집
+          {data?.title} {data?.generations} 모집
         </Paper>
-        {data.form.map((form: IQuestionForm, index: number) => (
+        {data?.form?.map((form: IQuestionForm, index: number) => (
           <Paper className={applicationStyle.questionContainer} key={index}>
             {form.inputType === 'TEXT' ? (
               // todo: required 추가 필요?
