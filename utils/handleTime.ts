@@ -56,10 +56,10 @@ export const isAfterMin = (gameTimeString: string, min: number) => {
  * */
 export const dateToString = (d: Date) => {
   const year = d.getFullYear();
-  const month = d.getMonth() + 1;
-  const date = d.getDate();
-  const hour = d.getHours();
-  const min = d.getMinutes();
+  const month = fillZero((d.getMonth() + 1).toString(), 2);
+  const date = fillZero(d.getDate().toString(), 2);
+  const hour = fillZero(d.getHours().toString(), 2);
+  const min = fillZero(d.getMinutes().toString(), 2);
   return `${year}-${month}-${date} ${hour}:${min}`;
 };
 
