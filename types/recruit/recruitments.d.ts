@@ -9,6 +9,10 @@ export type recruitment = {
   generation: string;
 };
 
+export type recruitmentListData = {
+  recruitments: recruitment[];
+  totalPage: number;
+};
 export interface ICheck {
   id: number;
   contents: string;

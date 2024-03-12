@@ -44,11 +44,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }
 
   if (presentPath.includes('/recruit')) {
-    return (
-      <RecruitLayout>
-        <div>{children}</div>
-      </RecruitLayout>
-    );
+    return <RecruitLayout>{children}</RecruitLayout>;
   }
 
   // NOTE : 외부 툴을 사용해보고 외부 툴로 대체가 가능하다면 삭제 예정
