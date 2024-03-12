@@ -30,11 +30,9 @@ function Recruit() {
         value={data.contents}
         theme='bubble'
       />
-      <div className={style.applyButtonContainer}>
-        <Button size={'large'} variant='contained' color='primary'>
-          지원하기
-        </Button>
-      </div>
+      <Button size={'large'} variant='contained' color='primary'>
+        지원하기
+      </Button>
       <div className={style.divider} />
       <MyRecruitment />
     </>

@@ -4,12 +4,6 @@
   @include quillViewer($color: black, $overflowY: visible);
 }
 
-.applyButtonContainer {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-}
-
 .divider {
   width: 100%;
   height: 1px;
