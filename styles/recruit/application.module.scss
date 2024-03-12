@@ -1,36 +1,23 @@
 @import 'styles/common.scss';
 @import './common.scss';
 
-.container {
+
+.titleContainer {
+  @include pageTitle;
   display: flex;
-  width: 100vw;
-  height: 100vh;
-  flex-direction: column;
-  overflow-y: scroll;
-  background-color: $white2;
+  width: 22rem;
+  height: 6.25rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: $medium-gray;
+  border-radius: 1rem;
+  justify-content: center;
   align-items: center;
 }
 
-.stickyHeader {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  width: 25rem;
-  background-color: rgba(246, 246, 246, 0.9);
-  backdrop-filter: blur(5px);
-
-  .stickyContainer {
-    height: 4rem;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    padding-left: 2rem;
-    .headerTitle {
-      font-size: 2rem;
-    }
-  }
-}
-
-.form {
+.bodyContainer {
+  display: flex;
+  flex-direction: column;
   background-color: $white2;
 
   .titleContainer {

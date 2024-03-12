@@ -1,0 +1,38 @@
+@import 'styles/admin/common.scss';
+
+.container {
+  display: flex;
+  width: 80%;
+  min-width: 600px;
+  height: 30%;
+  min-height: 400px;
+  flex-direction: row;
+  padding: 3rem;
+  background: white;
+  border-radius: 1rem;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.templateContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  .textarea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0.5rem 0;
+    .alertText {
+      height: 1rem;
+      font-size: 0.7rem;
+      color: #fe3737;
+    }
+  }
+  .button {
+    @include admin-button('BLUE');
+    padding: 0.6rem;
+  }
+}
