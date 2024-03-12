@@ -25,6 +25,10 @@ const tableTitle: { [key: string]: string } = {
 export default function PartyNoShowReport() {
   const [noShowReport, setNoShowReport] = useState<PartyNoshowReport[]>([]);
 
+  useEffect(() => {
+    fetchNoShowReport();
+  }, []);
+
   const fetchNoShowReport = () => {
     mockInstance
       .get('/party/admin/reports/users')

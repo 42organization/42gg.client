@@ -26,12 +26,16 @@ export default function PartyPenalty() {
   const [penalty, setPenalty] = useState<PartyPenaltyAdmin[]>([]);
 
   useEffect(() => {
+    fetchPartyPenalty();
+  }, []);
+
+  const fetchPartyPenalty = () => {
     mockInstance
       .get('/party/admin/penalty')
       .then(({ data }: { data: PartyPenaltyAdmin[] }) => {
         setPenalty(data);
       });
-  }, [penalty]);
+  };
 
   // add 로직 구현해야함 modal 형식으로 할것인지 보여지게 할것 인지 결정해야함
   // 따라서 변경 부분도 아직 구현 안함
@@ -39,19 +43,21 @@ export default function PartyPenalty() {
     console.log('추가 버튼 눌러짐');
   };
 
-  const changePenalty = () => {
-    console.log('변경 버튼 눌러짐');
-  };
+  // const changePenalty = () => {
+  //   console.log('변경 버튼 눌러짐');
+  // };
+
   const deletePenalty = (penaltyId: number) => {
-    mockInstance.delete(`/party/admin/penalty/${penaltyId}`).catch((error) => {
-      console.error('패널티 삭제 중 오류가 발생했습니다:', error);
-    });
+    mockInstance
+      .delete(`/party/admin/penalty/${penaltyId}`)
+      .then(() => {
+        fetchPartyPenalty();
+      })
+      .catch((error) => {
+        console.error('패널티 삭제 중 오류가 발생했습니다:', error);
+      });
   };
-  console.log(
-    tableFormat['partyPenaltyAdmin'].columns.map(
-      (columnName) => tableTitle[columnName]
-    )
-  );
+
   return (
     <div className={styles.userManagementWrap}>
       <div className={styles.header}>

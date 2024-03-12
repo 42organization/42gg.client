@@ -192,6 +192,8 @@ export const tableFormat: TableFormat = {
       'genre',
       'difficulty',
       'summary',
+      'change',
+      'delete',
     ],
   },
   partyNoshowReport: {

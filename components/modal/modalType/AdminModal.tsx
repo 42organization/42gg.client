@@ -15,9 +15,10 @@ import AdminUserCoinModal from 'components/modal/admin/AdminUserCoinModal';
 import DeletePenaltyModal from 'components/modal/admin/DeletePenaltyModal';
 import DetailModal from 'components/modal/admin/DetailModal';
 import AdminSeasonEdit from 'components/modal/admin/SeasonEdit';
+import TemplateModal from 'components/modal/Party/TemplateModal';
 import AdminEditTournamentBraket from '../admin/AdminEditTournamentBraket';
 import AdminTournamentParticipantEditModal from '../admin/AdminTournamentParticipantEditModal/AdminTournamentParticipantEditModal';
-import PartyRoomEditModal from '../party/PartyRoomEditModal';
+import PartyRoomEditModal from '../Party/PartyRoomEditModal';
 
 export default function AdminModal() {
   const {
@@ -36,6 +37,7 @@ export default function AdminModal() {
     tournament,
     tournamentId,
     roomId,
+    template,
   } = useRecoilValue(modalState);
 
   if (!modalName) {
@@ -93,6 +95,9 @@ export default function AdminModal() {
       <AdminTournamentParticipantEditModal tournamentId={tournamentId} />
     ) : null,
     'ADMIN-PARTY_EDIT': roomId ? <PartyRoomEditModal roomId={roomId} /> : null,
+    'ADMIN-PARTY_TEMPLATE': template ? (
+      <TemplateModal template={template} />
+    ) : null,
   };
 
   return content[modalName];

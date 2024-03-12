@@ -13,7 +13,26 @@
   align-items: center;
 }
 
+.button_2 {
+  width: 100%;
+  padding: 10px;
+  margin: 10px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  background: black;
+  border: 0;
+  border-radius: 10px;
+  outline: none;
+}
+
+.button_2:hover {
+  color: white;
+  background: orange;
+}
+
 .modal {
+  width: 30%;
   padding: 20px;
   background-color: white;
   border-radius: 5px;
@@ -39,22 +58,4 @@
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
-}
-
-.modal button {
-  padding: 8px 20px;
-  color: white;
-  cursor: pointer;
-  background-color: #007bff;
-  border: none;
-  border-radius: 3px;
-  transition: background-color 0.3s;
-}
-
-.modal button:hover {
-  background-color: #0056b3;
-}
-
-.modal button + button {
-  margin-left: 10px;
 }

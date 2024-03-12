@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import {
   Paper,
   Table,
@@ -9,10 +10,10 @@ import {
 } from '@mui/material';
 import { PartyGameTemplate } from 'types/partyTypes';
 import { mockInstance } from 'utils/mockAxios';
+import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import styles from 'styles/party/PartyMain.module.scss';
-import TemplateModal from './TemplateModal';
 
 const tableTitle: { [key: string]: string } = {
   gameTemplateId: '템플릿번호',
@@ -31,26 +32,32 @@ const tableTitle: { [key: string]: string } = {
 
 export default function PartyTemplate() {
   const [templates, setTemplates] = useState<PartyGameTemplate[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTemplateId, setSelectedTemplateId] = useState<number | null>(
-    null
-  );
-  //파티모달 머지후 적용시켜야함
-  const handleAddOrEditTemplate = (templateId?: number) => {
-    if (templateId) {
-      setSelectedTemplateId(templateId);
-    } else {
-      setSelectedTemplateId(null);
-    }
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedTemplateId(null);
-  };
+  const newTemplate = useState<PartyGameTemplate>({
+    gameTemplateId: 0,
+    categoryId: 0,
+    gameName: '',
+    maxGamePeople: 0,
+    minGamePeople: 0,
+    maxGameTime: 0,
+    minGameTime: 0,
+    genre: '',
+    difficulty: '',
+    summary: '',
+  });
+  const setModal = useSetRecoilState(modalState);
 
   useEffect(() => {
+    fetchPartyPenalty();
+  }, []);
+
+  const handleAddOrEditTemplate = (template: PartyGameTemplate | null) => {
+    if (template === null) {
+      template = newTemplate;
+    }
+    setModal({ modalName: 'ADMIN-PARTY_TEMPLATE', template });
+  };
+
+  const fetchPartyPenalty = () => {
     mockInstance
       .get(`/party/templates`)
       .then(({ data }: { data: PartyGameTemplate[] }) => {
@@ -59,15 +66,13 @@ export default function PartyTemplate() {
       .catch((error) => {
         console.error('템플릿 정보를 가져오는 중 오류가 발생했습니다:', error);
       });
-  }, []);
+  };
 
   const deleteTemplate = (templateId: number) => {
     mockInstance
       .delete(`/party/admin/templates/${templateId}`)
       .then(() => {
-        setTemplates(
-          templates.filter((template) => template.gameTemplateId !== templateId)
-        );
+        fetchPartyPenalty();
       })
       .catch((error) => {
         console.error('템플릿 삭제 중 오류가 발생했습니다:', error);
@@ -79,7 +84,12 @@ export default function PartyTemplate() {
         <div className={styles.header}>
           <span className={styles.title}>템플릿 관리</span>
         </div>
-        <button onClick={() => handleAddOrEditTemplate()}>추가</button>
+        <button
+          onClick={() => handleAddOrEditTemplate(null)}
+          className={`${styles.button_1} ${styles.add}`}
+        >
+          추가
+        </button>
         <TableContainer className={styles.tableContainer} component={Paper}>
           <Table className={styles.table} aria-label='UserManagementTable'>
             <AdminTableHead tableName={'partyTemplate'} table={tableTitle} />
@@ -94,9 +104,8 @@ export default function PartyTemplate() {
                       >
                         {columnName === 'change' && (
                           <button
-                            onClick={() =>
-                              handleAddOrEditTemplate(t.gameTemplateId)
-                            }
+                            onClick={() => handleAddOrEditTemplate(t)}
+                            className={`${styles.button_1} ${styles.add}`}
                           >
                             수정
                           </button>
@@ -104,6 +113,7 @@ export default function PartyTemplate() {
                         {columnName === 'delete' ? (
                           <button
                             onClick={() => deleteTemplate(t.gameTemplateId)}
+                            className={`${styles.button_1} ${styles.delete}`}
                           >
                             삭제
                           </button>
@@ -118,19 +128,6 @@ export default function PartyTemplate() {
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
-      <div>
-        <TemplateModal
-          isOpen={isModalOpen}
-          closeModal={closeModal}
-          template={
-            selectedTemplateId !== null
-              ? templates.find(
-                  (template) => template.gameTemplateId === selectedTemplateId
-                )
-              : undefined
-          }
-        />
       </div>
     </div>
   );
