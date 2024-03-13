@@ -8,3 +8,43 @@ export type recruitment = {
   status: recruitmentStatus;
   generation: string;
 };
+
+export type recruitmentListData = {
+  recruitments: recruitment[];
+  totalPage: number;
+};
+export interface ICheck {
+  id: number;
+  contents: string;
+}
+
+export interface IQuestionForm {
+  questionId: number;
+  question: string;
+  inputType: 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
+  checkList?: ICheck[];
+}
+
+export interface IRecruitmentDetail {
+  startDate: string;
+  endDate: string;
+  title: string;
+  contents: string;
+  generations: string;
+  form: IQuestionForm[];
+}
+
+export type RecruitmentMessageType = 'INTERVIEW' | 'PASS' | 'FAIL';
+
+export interface IRecruitMessageTemplate {
+  messageType: RecruitmentMessageType;
+  message: string;
+}
+export interface IRecruitmentTemplate extends IRecruitMessageTemplate {
+  messageId: number;
+  isUse: boolean;
+}
+
+export interface IRecruitmentTemplateList {
+  messages: IRecruitmentTemplate[];
+}
