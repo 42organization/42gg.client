@@ -88,6 +88,22 @@ function LeaveRoom({ roomId, fetchRoomDetail }: ReprashProps) {
   return <button onClick={handlerExit}>방 나가기</button>;
 }
 
+function StartRoom() {
+  const roomId = useRouter().query.roomId;
+
+  return (
+    <button
+      onClick={() => {
+        instance.patch(`/party/rooms/${roomId}/start`).catch((error) => {
+          console.error(error);
+        });
+      }}
+    >
+      시작
+    </button>
+  );
+}
+
 function BackRoomList() {
   const router = useRouter();
 
@@ -101,6 +117,7 @@ const PartyRoomDetailButton = {
   JoinRoom,
   LeaveRoom,
   BackRoomList,
+  StartRoom,
 };
 
 export default PartyRoomDetailButton;
