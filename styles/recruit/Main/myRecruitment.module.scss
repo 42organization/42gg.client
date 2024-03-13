@@ -10,19 +10,6 @@
 
 .listContainer {
   width: 100%;
-  // important는 mui 스타일을 덮어씌우기 위해 사용
-  .listButton {
-    width: 100%;
-    padding-left: 0.25rem !important;
-    color: $recruit-blue !important;
-    border-radius: 10px;
-    &:hover {
-      background-color: $recruit-blue-transparent !important;
-    }
-    .listButtonText {
-      @include subTitle;
-    }
-  }
 }
 
 .collapseContainer {
