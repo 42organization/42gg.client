@@ -14,6 +14,7 @@ import {
   Dialog,
   DialogContentText,
   DialogTitle,
+  Modal,
   Slide,
   Snackbar,
   SnackbarOrigin,
@@ -103,26 +104,18 @@ export default function ApplyModal({
 
   return (
     <>
-      <Dialog
-        onClose={onModalClose}
-        open={modalOpen}
-        TransitionComponent={Transition}
-        sx={{ borderRadius: '3rem' }}
-      >
+      <Modal onClose={onModalClose} open={modalOpen}>
         <Box className={styles.container}>
-          <DialogTitle>
-            <Typography align='center' variant='h5'>
-              지원서를 제출할까요?
+          <Typography align='center' variant='h5'>
+            지원서를 제출할까요?
+          </Typography>
+          <Box className={styles.content}>
+            <Typography align='center' variant='body1'>
+              제출한 지원서는 제출 마감 전까지
+              <br />
+              수정하거나 삭제할 수 있습니다.
             </Typography>
-          </DialogTitle>
-          <DialogContentText
-            className={styles.content}
-            align='center'
-            variant='body1'
-          >
-            제출한 지원서는 제출 마감 전까지<br></br>수정하거나 삭제할 수
-            있습니다.
-          </DialogContentText>
+          </Box>
           <Box className={styles.btnContainer}>
             <Button
               className={styles.cancelBtn}
@@ -142,7 +135,7 @@ export default function ApplyModal({
             </Button>
           </Box>
         </Box>
-      </Dialog>
+      </Modal>
       <Snackbar
         open={snackBarOpen}
         anchorOrigin={{ vertical, horizontal }}

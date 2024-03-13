@@ -1,18 +1,22 @@
 @import 'styles/common.scss';
 
 .container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   display: flex;
-  width: 25rem;
+  width: 20rem;
   height: 14rem;
   flex-direction: column;
-  border-color: #8ebcf9;
-  border-style: solid;
-  border-width: 0.3rem;
+  background-color: #dcdee6;
+  border-radius: 1rem;
+  transform: translate(-50%, -50%);
   justify-content: center;
   align-items: center;
 }
 
 .content {
+  margin: 0.5rem;
   line-height: 150%;
   word-break: keep-all;
 }
