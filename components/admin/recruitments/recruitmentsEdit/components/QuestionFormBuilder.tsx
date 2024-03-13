@@ -17,6 +17,7 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
+  Tooltip,
 } from '@mui/material';
 import { IcheckItem, Iquestion } from 'types/admin/adminRecruitmentsTypes';
 import DraggableList from 'components/UI/DraggableList';
@@ -76,6 +77,7 @@ function MultiCheckInput({
       <IconButton
         aria-label='addCheckItem'
         onClick={() => formManager.addCheckItemToQuestion(questionIdx)}
+        style={{ width: '100%' }}
       >
         <AddIcon />
       </IconButton>
@@ -247,8 +249,8 @@ export default function QuestionFormBuilder({
 
   const onDragEndHandler = ({ destination, source }: DropResult) => {
     if (!destination) return;
-
     formManager.switchQuestionIndex(source.index, destination.index);
+    setFocusedQuestion(destination.index);
   };
 
   console.log(focusedQuestionIdx);
@@ -270,15 +272,17 @@ export default function QuestionFormBuilder({
             );
           })}
         </DraggableList>
-      </div>
-      <div className={styles.editConsole}>
-        <IconButton
-          aria-label='addQuestion'
-          color='primary'
-          onClick={() => addQuestionHandler()}
-        >
-          <AddBoxIcon fontSize='large' />
-        </IconButton>
+        <div className={styles.editConsole}>
+          <Tooltip title='질문추가'>
+            <IconButton
+              aria-label='addQuestion'
+              color='primary'
+              onClick={() => addQuestionHandler()}
+            >
+              <AddBoxIcon fontSize='large' />
+            </IconButton>
+          </Tooltip>
+        </div>
       </div>
     </div>
   );

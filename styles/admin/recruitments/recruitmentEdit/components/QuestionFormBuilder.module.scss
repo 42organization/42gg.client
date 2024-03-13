@@ -22,10 +22,10 @@
   padding: 0.8rem;
   justify-content: flex-start;
 }
+
 .focused {
   border-left: 0.5rem solid blue;
   transition: border-left 10s ease;
-  // border: 1px solid blue; /* 파란색 border 추가 */
 }
 
 .editConsole {
@@ -35,10 +35,8 @@
   z-index: 9999;
   display: flex;
   width: 3rem;
-  height: auto;
-  padding: 0.3rem;
-  color: #fff;
-  border: 1px solid #000000;
+  background-color: white;
   border-radius: 5px;
+  box-shadow: 3px 2px 3px black;
   transform: translate(0, -50%);
 }
