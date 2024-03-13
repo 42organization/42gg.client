@@ -19,36 +19,17 @@ const tableTitle: { [key: string]: string } = {
 
 interface TitleTimeRangeSelectorProps {
   recruitmentEditInfo: IrecruitEditInfo;
-  setTitle: (title: string) => void;
-  setStartDate: (startDate: string) => void;
-  setEndDate: (endDate: string) => void;
-  setGeneration: (generation: string) => void;
+  setRecruitmentEditInfoField: (fieldName: string, value: any) => void;
 }
 
 export default function TitleTimeRangeSelector({
   recruitmentEditInfo,
-  setTitle,
-  setStartDate,
-  setEndDate,
-  setGeneration,
+  setRecruitmentEditInfoField,
 }: TitleTimeRangeSelectorProps) {
   const inputChangeHandler = ({
     target,
   }: React.ChangeEvent<HTMLInputElement>) => {
-    switch (target.name) {
-      case 'title':
-        setTitle(target.value);
-        break;
-      case 'startDate':
-        setStartDate(target.value);
-        break;
-      case 'endDate':
-        setEndDate(target.value);
-        break;
-      case 'generation':
-        setGeneration(target.value);
-        break;
-    }
+    setRecruitmentEditInfoField(target.name, target.value);
   };
 
   return (

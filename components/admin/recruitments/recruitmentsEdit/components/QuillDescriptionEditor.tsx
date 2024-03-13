@@ -10,15 +10,15 @@ const Quill = dynamic(() => import('react-quill'), {
 
 interface QuillDescriptionEditorProps {
   content: string;
-  setContent: (content: string) => void;
+  setRecruitmentEditInfoField: (fieldName: string, value: any) => void;
 }
 
 export default function QuillDescriptionEditor({
   content,
-  setContent,
+  setRecruitmentEditInfoField,
 }: QuillDescriptionEditorProps) {
   const quillChangeHandler = (value: string) => {
-    setContent(value);
+    setRecruitmentEditInfoField('content', value);
   };
 
   return (
