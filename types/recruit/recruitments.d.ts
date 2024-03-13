@@ -10,6 +10,13 @@ export type recruitment = {
 };
 
 export type recruitmentQuestionTypes = 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
+
+export type recruitmentListData = {
+  recruitments: recruitment[];
+  totalPage: number;
+};
+
+
 export interface ICheck {
   id: number;
   contents: string;
@@ -42,4 +49,19 @@ export interface IRefs {
   id: number;
   type: recruitmentQuestionTypes;
   ref: HTMLInputElement[];
+}
+
+export type RecruitmentMessageType = 'INTERVIEW' | 'PASS' | 'FAIL';
+
+export interface IRecruitMessageTemplate {
+  messageType: RecruitmentMessageType;
+  message: string;
+}
+export interface IRecruitmentTemplate extends IRecruitMessageTemplate {
+  messageId: number;
+  isUse: boolean;
+}
+
+export interface IRecruitmentTemplateList {
+  messages: IRecruitmentTemplate[];
 }

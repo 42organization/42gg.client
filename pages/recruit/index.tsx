@@ -1,5 +1,7 @@
 import Lottie from 'lottie-react';
 import { Button } from '@mui/material';
+import RecruitList from 'components/recruit/RecruitList';
+import StickyHeader from 'components/recruit/StickyHeader';
 import recruitPingpong from 'public/lottie/recruitPingPong.json';
 import useCheckRecruit from 'hooks/recruit/useCheckRecruit';
 import commonStyle from 'styles/recruit/common.module.scss';
@@ -15,7 +17,7 @@ function Recruit() {
 
   if (!isLoading && !isRecruiting) {
     return (
-      <div className={layoutStyle.recruitContainer}>
+      <div className={layoutStyle.noRecruit}>
         <Lottie
           className={commonStyle.pingpongAnimation}
           animationData={recruitPingpong}
@@ -32,23 +34,15 @@ function Recruit() {
   }
 
   return (
-    <div className={layoutStyle.recruitContainer}>
-      <span className={textStyle.pageTitle}>42GG 팀원 모집</span>
+    <>
+      <StickyHeader headerTitle={'42GG 팀원 모집'} />
       <Lottie
         className={commonStyle.pingpongAnimation}
         animationData={recruitPingpong}
         width={'100%'}
       />
-      <div
-        style={{
-          height: '100%',
-          width: '100%',
-          border: '1px solid black',
-        }}
-      >
-        임시 목록 컴포넌트~~
-      </div>
-    </div>
+      <RecruitList />
+    </>
   );
 }
 

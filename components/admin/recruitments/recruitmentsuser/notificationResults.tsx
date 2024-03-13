@@ -18,6 +18,7 @@ import {
 } from 'types/admin/adminRecruitmentsTypes';
 // import { instanceInManage } from 'utils/axios';
 import { mockInstance } from 'utils/mockAxios';
+import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
@@ -49,6 +50,13 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
   const [alignment, setAlignment] = useState<Record<number, string | null>>({});
   const setSnackBar = useSetRecoilState(toastState);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const setModal = useSetRecoilState(modalState);
+
+  const onEditTemplate = () => {
+    setModal({
+      modalName: 'ADMIN-RECRUIT_MESSAGE_TEMPLATE',
+    });
+  };
 
   const handleAlignment = (
     event: React.MouseEvent<HTMLElement>,
@@ -172,6 +180,9 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
           }}
         />
       </div>
+      <button className={styles.button} onClick={onEditTemplate}>
+        메시지 템플릿 작성하기
+      </button>
     </>
   );
 }
