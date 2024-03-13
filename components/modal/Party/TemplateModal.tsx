@@ -113,7 +113,7 @@ export default function TemplateModal({
                 setFormData({ ...formData, summary: e.target.value })
               }
             />
-            <button onClick={handleSubmit} className={styles.button_2}>
+            <button type='submit' className={styles.button_2}>
               {template ? '변경' : '추가'}
             </button>
             <button
