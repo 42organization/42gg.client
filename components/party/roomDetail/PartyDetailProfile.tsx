@@ -43,19 +43,15 @@ type ProfileProps = {
 
 function Profile({ roomUsers, roomStatus }: ProfileProps) {
   return (
-    <ol>
+    <ul>
       {roomUsers.map((partyRoomUser: PartyRoomUser) =>
-        partyRoomUser.intraId === null ? (
-          <></>
-        ) : roomStatus !== 'OPEN' ? (
-          <li key={partyRoomUser.intraId}>
-            <span>{partyRoomUser.nickname}</span>
-          </li>
+        partyRoomUser.intraId ? (
+          <li key={partyRoomUser.intraId}>{partyRoomUser.intraId}</li>
         ) : (
-          <li>{partyRoomUser.nickname}</li>
+          <li key={partyRoomUser.nickname}>{partyRoomUser.nickname}</li>
         )
       )}
-    </ol>
+    </ul>
   );
 }
 
