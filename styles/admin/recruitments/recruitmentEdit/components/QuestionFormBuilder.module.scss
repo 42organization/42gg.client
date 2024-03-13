@@ -20,11 +20,12 @@
   width: 100%;
   flex-direction: column;
   padding: 0.8rem;
-  margin-bottom: 1rem;
-  background-color: white;
-  border: 1px solid #000000;
-  border-radius: 5px;
   justify-content: flex-start;
+}
+.focused {
+  border-left: 0.5rem solid blue;
+  transition: border-left 10s ease;
+  // border: 1px solid blue; /* 파란색 border 추가 */
 }
 
 .editConsole {

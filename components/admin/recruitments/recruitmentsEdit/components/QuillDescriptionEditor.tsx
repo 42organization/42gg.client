@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import { Paper } from '@mui/material';
 import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
 import 'react-quill/dist/quill.snow.css';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/QuillDescriptionEditor.module.scss';
@@ -22,7 +23,7 @@ export default function QuillDescriptionEditor({
   };
 
   return (
-    <div className={styles.quillEditorWrapper}>
+    <Paper elevation={3} className={styles.quillEditorWrapper}>
       <Quill
         className={styles.quillEditor}
         modules={QUILL_EDIT_MODULES}
@@ -31,6 +32,6 @@ export default function QuillDescriptionEditor({
         value={content}
         onChange={quillChangeHandler}
       />
-    </div>
+    </Paper>
   );
 }

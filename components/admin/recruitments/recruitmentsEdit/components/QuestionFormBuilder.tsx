@@ -11,6 +11,7 @@ import {
   IconButton,
   InputLabel,
   MenuItem,
+  Paper,
   Radio,
   RadioGroup,
   Select,
@@ -141,9 +142,17 @@ interface QuestionProps {
   idx: number;
   question: Iquestion;
   formManager: IFormManager;
+  isFocused: boolean;
+  setFocusedQuestion: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-function Question({ idx, question, formManager }: QuestionProps) {
+function Question({
+  idx,
+  question,
+  formManager,
+  isFocused,
+  setFocusedQuestion,
+}: QuestionProps) {
   const selectChangehandler = ({ target }: SelectChangeEvent) => {
     formManager.changeQuestionInputType(idx, target.value);
   };
@@ -155,7 +164,11 @@ function Question({ idx, question, formManager }: QuestionProps) {
   };
 
   return (
-    <div className={styles.questionWrapper}>
+    <Paper
+      elevation={3}
+      className={`${styles.questionWrapper} ${isFocused ? styles.focused : ''}`}
+      onClick={() => setFocusedQuestion(idx)}
+    >
       <Grid container spacing={1}>
         <Grid item xs={9}>
           <TextField
@@ -205,7 +218,7 @@ function Question({ idx, question, formManager }: QuestionProps) {
           <DeleteIcon />
         </IconButton>
       </Grid>
-    </div>
+    </Paper>
   );
 }
 
@@ -218,8 +231,18 @@ export default function QuestionFormBuilder({
   form,
   formManager,
 }: QuestionFormBuilderProps) {
+  const [focusedQuestionIdx, setFocusedQuestion] = React.useState<
+    number | null
+  >(null);
+
   const addQuestionHandler = () => {
-    formManager.addEmptyQuestion(form.length - 1, 'TEXT');
+    if (focusedQuestionIdx === null) {
+      formManager.addEmptyQuestion(form.length - 1, 'TEXT');
+      setFocusedQuestion(form.length);
+    } else {
+      formManager.addEmptyQuestion(focusedQuestionIdx, 'TEXT');
+      setFocusedQuestion(focusedQuestionIdx + 1);
+    }
   };
 
   const onDragEndHandler = ({ destination, source }: DropResult) => {
@@ -227,6 +250,8 @@ export default function QuestionFormBuilder({
 
     formManager.switchQuestionIndex(source.index, destination.index);
   };
+
+  console.log(focusedQuestionIdx);
 
   return (
     <div className={styles.mainContainer}>
@@ -239,6 +264,8 @@ export default function QuestionFormBuilder({
                 idx={idx}
                 question={question}
                 formManager={formManager}
+                isFocused={focusedQuestionIdx === idx}
+                setFocusedQuestion={setFocusedQuestion}
               />
             );
           })}
