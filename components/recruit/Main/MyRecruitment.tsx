@@ -5,6 +5,7 @@ import style from 'styles/recruit/Main/myRecruitment.module.scss';
 import textStyle from 'styles/recruit/text.module.scss';
 import CollapseListItem from './CollapseListItem';
 import MyApplicationInfo from './MyApplicationInfo';
+import MyRecruitStatus from './MyRecruitStatus';
 
 const MyRecruitment = () => {
   const router = useRouter();
@@ -21,7 +22,7 @@ const MyRecruitment = () => {
           />
         </CollapseListItem>
         <CollapseListItem title={'지원 현황'}>
-          <div className={style.collapseContainer}>지원현황</div>
+          <MyRecruitStatus status={status} interviewDate={interviewDate} />
         </CollapseListItem>
       </List>
     </div>
