@@ -1,124 +1,213 @@
+import { useRouter } from 'next/router';
 import {
-  Button,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  Radio,
-  RadioGroup,
-  TextField,
-} from '@mui/material';
-import { ICheck, IQuestionForm } from 'types/recruit/recruitments';
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { Alert, Box, Button, Grid, Paper, Snackbar } from '@mui/material';
+import { IApplicantAnswer, IRefs } from 'types/recruit/recruitments';
+import ApplyModal from 'components/modal/recruitment/ApplyModal';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
 import applicationStyle from 'styles/recruit/application.module.scss';
+import ApplicationQuestions from './ApplicationQuestions';
 
-export default function ApplicationForm({ id }: { id: number }) {
-  const { data, isLoading } = useRecruitDetail({ id });
+export default function ApplicationForm({ recruitId }: { recruitId: number }) {
+  const { data, isLoading } = useRecruitDetail({ recruitId });
+  const formRefs = useRef<IRefs[]>([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [answers, setAnswers] = useState<IApplicantAnswer[]>([]);
+  const [alertOn, setAlertOn] = useState(false);
 
-  if (isLoading) {
-    return <div>로딩중...</div>;
-  }
+  const closeAlert = () => {
+    setAlertOn(false);
+  };
 
-  if (!data || Object.keys(data).length === 0) {
-    return <div>지원서 항목이 없습니다</div>;
+  useEffect(() => {
+    if (!data || Object.keys(data).length === 0) {
+      setAlertOn(true);
+    }
+  }, [data]);
+
+  if (isLoading || !data || Object.keys(data).length === 0) {
+    return (
+      <NoData isLoading={isLoading} alertOn={alertOn} closeAlert={closeAlert} />
+    );
   }
 
   return (
-    <div>
-      <div className={applicationStyle.titleContainer}>{data.title}</div>
-      <div className={applicationStyle.bodyContainer}>
-        {data.form.map((form: IQuestionForm, index: number) => (
-          <div className={applicationStyle.questionContainer} key={index}>
-            {form.inputType === 'TEXT' ? (
-              <TextForm question={form.question} />
-            ) : form.inputType === 'SINGLE_CHECK' ? (
-              <SingleCheckForm
-                question={form.question}
-                checkList={form.checkList}
-              />
-            ) : form.inputType === 'MULTI_CHECK' ? (
-              <MultiCheckForm
-                question={form.question}
-                checkList={form.checkList}
-              />
-            ) : (
-              <div>유효하지 않은 폼</div>
-            )}
-          </div>
-        ))}
-      </div>
-      <div className={applicationStyle.btnContainer}>
+    <Box>
+      <Grid
+        className={applicationStyle.form}
+        container
+        direction={'column'}
+        rowSpacing={2}
+      >
+        <Paper className={applicationStyle.titleContainer}>
+          {data.title} {data.generations} 모집
+        </Paper>
+        <ApplicationQuestions data={data} refs={formRefs} />
         <Button
           className={applicationStyle.submitBtn}
-          sx={{ borderRadius: '1rem', fontSize: '1.5rem' }}
           variant='contained'
+          onClick={() =>
+            applicationFormCheck({
+              formRefs,
+              setAlertOn,
+              setModalOpen,
+              setAnswers,
+              numberOfQuestions: data?.form.length,
+            })
+          }
         >
           제출하기
         </Button>
-      </div>
-    </div>
+      </Grid>
+      <ApplyModal
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        recruitId={recruitId}
+        applicantAnswers={answers}
+      />
+      <SnackBar
+        alertOn={alertOn}
+        closeAlert={closeAlert}
+        message='입력하지 않은 문항이 있습니다.'
+      />
+    </Box>
   );
 }
 
-function TextForm({ question }: { question: string }) {
+interface INoDataProps {
+  isLoading: boolean;
+  alertOn: boolean;
+  closeAlert: () => void;
+}
+
+function NoData(props: INoDataProps) {
+  const { isLoading, alertOn, closeAlert } = props;
+  const router = useRouter();
+
+  const goBack = () => {
+    router.back();
+  };
+
   return (
-    <div>
-      <div className={applicationStyle.questionText}>{question}</div>
-      <TextField id='filled-basic' label='Filled' variant='filled' />
-    </div>
+    <Box>
+      <Grid className={applicationStyle.form}>
+        <Paper className={applicationStyle.titleContainer}>42GG 모집</Paper>
+        <Paper className={applicationStyle.questionContainer}>
+          <div className={applicationStyle.backTitle}>
+            {isLoading ? '로딩중...' : ''}
+          </div>
+          <Button
+            className={applicationStyle.backBtn}
+            variant='contained'
+            onClick={goBack}
+          >
+            뒤로가기
+          </Button>
+        </Paper>
+      </Grid>
+      <SnackBar
+        alertOn={alertOn}
+        closeAlert={closeAlert}
+        message='올바르지 않은 요청입니다.'
+      />
+    </Box>
   );
 }
 
-function SingleCheckForm({
-  question,
-  checkList,
-}: {
-  question: string;
-  checkList: ICheck[] | undefined;
-}) {
+interface ISnackBarProps {
+  alertOn: boolean;
+  closeAlert: () => void;
+  message: string;
+}
+
+function SnackBar(props: ISnackBarProps) {
+  const { alertOn, closeAlert, message } = props;
   return (
-    <FormControl>
-      <div className={applicationStyle.questionText}>{question}</div>
-      <RadioGroup
-        aria-labelledby='radio-buttons-group-label'
-        name='radio-buttons-group'
-      >
-        {checkList?.map((check: ICheck) => {
-          return (
-            <FormControlLabel
-              key={check.id}
-              value={check.contents}
-              control={<Radio />}
-              label={check.contents}
-            />
-          );
-        })}
-      </RadioGroup>
-    </FormControl>
+    <Snackbar
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+      open={alertOn}
+      autoHideDuration={5000}
+      onClose={closeAlert}
+    >
+      <Alert onClose={closeAlert} severity='error' variant='filled'>
+        {message}
+      </Alert>
+    </Snackbar>
   );
 }
 
-function MultiCheckForm({
-  question,
-  checkList,
-}: {
-  question: string;
-  checkList: ICheck[] | undefined;
-}) {
-  return (
-    <div>
-      <div className={applicationStyle.questionText}>{question}</div>
-      <FormGroup>
-        {checkList?.map((check: ICheck) => {
-          return (
-            <FormControlLabel
-              key={check.id}
-              control={<Checkbox />}
-              label={check.contents}
-            />
-          );
-        })}
-      </FormGroup>
-    </div>
-  );
+interface IapplicationFormCheckProps {
+  formRefs: MutableRefObject<IRefs[]>;
+  setAlertOn: Dispatch<SetStateAction<boolean>>;
+  setModalOpen: Dispatch<SetStateAction<boolean>>;
+  setAnswers: Dispatch<SetStateAction<IApplicantAnswer[]>>;
+  numberOfQuestions: number;
 }
+
+const applicationFormCheck = (props: IapplicationFormCheckProps) => {
+  const { formRefs, setAlertOn, setModalOpen, setAnswers, numberOfQuestions } =
+    props;
+
+  const answerList = [];
+  for (const answer of formRefs.current) {
+    let requiredFlag = false;
+    if (answer.type === 'TEXT' && answer.ref[0].value.length !== 0) {
+      answerList.push({
+        questionId: answer.id,
+        inputType: answer.type,
+        answer: answer.ref[0].value,
+      });
+      requiredFlag = true;
+    } else if (answer.type === 'SINGLE_CHECK') {
+      for (const checkRef of answer.ref) {
+        if (!checkRef || checkRef?.checked === false) continue;
+        answerList.push({
+          questionId: answer.id,
+          inputType: answer.type,
+          checkList: [Number(answer.ref.indexOf(checkRef))],
+        });
+        requiredFlag = true;
+        break;
+      }
+    } else if (answer.type === 'MULTI_CHECK') {
+      for (const checkRef of answer.ref) {
+        if (!checkRef || checkRef?.checked === false) continue;
+        const foundObj = answerList.find((obj) => obj.questionId === answer.id);
+        if (foundObj === undefined) {
+          answerList.push({
+            questionId: answer.id,
+            inputType: answer.type,
+            // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
+            checkedList: [Number(answer.ref.indexOf(checkRef))],
+          });
+        } else {
+          // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
+          foundObj.checkedList?.push(Number(answer.ref.indexOf(checkRef)));
+        }
+        requiredFlag = true;
+      }
+    }
+    // 채워지지 않은 폼으로 이동
+    if (!requiredFlag) {
+      if (answer.type === 'TEXT') {
+        answer.ref[0].focus();
+      } else {
+        // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
+        answer.ref[1].focus();
+      }
+      setAlertOn(true);
+      return;
+    }
+  }
+
+  if (answerList.length === 0 || answerList.length !== numberOfQuestions)
+    return;
+  setAnswers(answerList);
+  setModalOpen(true);
+};

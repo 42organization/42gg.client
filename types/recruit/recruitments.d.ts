@@ -9,10 +9,14 @@ export type recruitment = {
   generation: string;
 };
 
+export type recruitmentQuestionTypes = 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
+
 export type recruitmentListData = {
   recruitments: recruitment[];
   totalPage: number;
 };
+
+
 export interface ICheck {
   id: number;
   contents: string;
@@ -21,7 +25,7 @@ export interface ICheck {
 export interface IQuestionForm {
   questionId: number;
   question: string;
-  inputType: 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
+  inputType: recruitmentQuestionTypes;
   checkList?: ICheck[];
 }
 
@@ -32,6 +36,19 @@ export interface IRecruitmentDetail {
   contents: string;
   generations: string;
   form: IQuestionForm[];
+}
+
+export interface IApplicantAnswer {
+  questionId: number;
+  inputType: recruitmentQuestionTypes;
+  checkedList?: number[];
+  answer?: string;
+}
+
+export interface IRefs {
+  id: number;
+  type: recruitmentQuestionTypes;
+  ref: HTMLInputElement[];
 }
 
 export type RecruitmentMessageType = 'INTERVIEW' | 'PASS' | 'FAIL';

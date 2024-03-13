@@ -1,47 +1,76 @@
 @import 'styles/common.scss';
 @import './common.scss';
 
-.titleContainer {
-  @include pageTitle;
+.container {
   display: flex;
-  width: 22rem;
-  height: 6.25rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  background-color: $medium-gray;
-  border-radius: 1rem;
-  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  overflow-y: scroll;
+  background-color: $white2;
   align-items: center;
 }
 
-.bodyContainer {
-  display: flex;
-  flex-direction: column;
+.form {
   background-color: $white2;
-}
 
-.questionContainer {
-  width: 22rem;
-  padding: 2rem;
-  margin-bottom: 1rem;
-  background-color: $medium-gray;
-  border-radius: 1rem;
-}
+  .titleContainer {
+    display: flex;
+    width: 22rem;
+    height: 6.25rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: $giant-big-font;
+    font-weight: 300;
+    background-color: $medium-gray;
+    border-color: #8ebcf9;
+    border-style: solid;
+    border-width: 0.5rem;
+    border-radius: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
 
-.questionText {
-  margin-bottom: 1rem;
-  font-size: 1rem;
-}
+  .bodyContainer {
+    display: flex;
+    flex-direction: column;
+  }
 
-.btnContainer {
-  width: 22rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-}
+  .questionContainer {
+    z-index: 0;
+    display: flex;
+    width: 22rem;
+    flex-direction: column;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    background-color: $medium-gray;
+    border-radius: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
 
-.submitBtn {
-  width: 22rem;
-  height: 4rem;
-  padding: 1rem;
-  border-radius: 1rem;
+  .questionText {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  .submitBtn {
+    width: 22rem;
+    height: 4rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+  }
+  .questionText,
+  .textField,
+  .checkBoxGroup,
+  .radioBoxGroup {
+    width: 18rem;
+  }
+
+  .backTitle,
+  .backBtn {
+    margin: 2rem;
+    font-size: $giant-font;
+  }
 }
