@@ -6,6 +6,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
+import { PartyRoomReport } from 'types/partyTypes';
 import { tableFormat } from 'constants/admin/table';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import { useAdminPartyRoomReport } from 'hooks/party/useAdminPartyRoomReport';
@@ -40,7 +41,7 @@ export default function AdminPartyRoomReport() {
                       className={styles.tableBodyItem}
                       key={columnName}
                     >
-                      {/* r[columnName as keyof PartyRoomReport]?.toString() */}
+                      {r[columnName as keyof PartyRoomReport]?.toString()}
                     </TableCell>
                   );
                 })}
