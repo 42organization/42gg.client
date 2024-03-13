@@ -11,11 +11,6 @@ type PartyDetailProfileProps = {
   fetchRoomDetail: () => void;
 };
 
-type ProfileProps = {
-  partyRoomUser: PartyRoomUser;
-  roomStatus: PartyRoomStatus;
-};
-
 export default function PartyDetailProfile({
   partyRoomDetail,
   fetchRoomDetail,
@@ -27,36 +22,79 @@ export default function PartyDetailProfile({
     <div>
       <span>{`참여인원 : ${currentPeople}/${maxPeople}`}</span>
       <span>{`마감기한 : ${dateToStringShort(new Date(dueDate))}`}</span>
-      {roomStatus !== 'OPEN' && <span>방장</span>}
-      {roomUsers.map((partyRoomUser) => (
-        <Profile
-          key={partyRoomUser.intraId}
-          partyRoomUser={partyRoomUser}
-          roomStatus={roomStatus}
-        />
-      ))}
-      <PartyRoomDetailButton.JoinRoom
+      <Profile roomUsers={roomUsers} roomStatus={roomStatus} />
+      <Button
+        roomStatus={roomStatus}
+        myNickname={partyRoomDetail.myNickname}
         roomId={roomId}
+        roomUsers={roomUsers}
         fetchRoomDetail={fetchRoomDetail}
       />
     </div>
   );
 }
 
-function Profile({ partyRoomUser, roomStatus }: ProfileProps) {
-  const { intraId } = partyRoomUser;
+/*------------------------profile------------------------------ */
 
-  return roomStatus === 'HIDDEN' || !intraId ? (
+type ProfileProps = {
+  roomUsers: PartyRoomUser[];
+  roomStatus: PartyRoomStatus;
+};
+
+function Profile({ roomUsers, roomStatus }: ProfileProps) {
+  return (
+    <ol>
+      {roomUsers.map((partyRoomUser: PartyRoomUser) =>
+        partyRoomUser.intraId === null ? (
+          <></>
+        ) : roomStatus !== 'OPEN' ? (
+          <li key={partyRoomUser.intraId}>
+            <span>{partyRoomUser.nickname}</span>
+          </li>
+        ) : (
+          <li>{partyRoomUser.nickname}</li>
+        )
+      )}
+    </ol>
+  );
+}
+
+/*-----------------------button------------------------------ */
+
+type ButtonProps = {
+  roomId: number;
+  roomStatus: PartyRoomStatus;
+  myNickname: string | null;
+  roomUsers: PartyRoomUser[];
+  fetchRoomDetail: () => void;
+};
+
+function Button({
+  roomStatus,
+  myNickname,
+  roomId,
+  roomUsers,
+  fetchRoomDetail,
+}: ButtonProps) {
+  return roomStatus !== 'OPEN' ? (
     <></>
-  ) : roomStatus === 'OPEN' ? (
-    <>
-      <li>{partyRoomUser.nickname}</li>
-    </>
+  ) : !myNickname ? (
+    <PartyRoomDetailButton.JoinRoom
+      roomId={roomId}
+      fetchRoomDetail={fetchRoomDetail}
+    />
+  ) : roomUsers[0].nickname !== myNickname ? (
+    <PartyRoomDetailButton.LeaveRoom
+      roomId={roomId}
+      fetchRoomDetail={fetchRoomDetail}
+    />
   ) : (
-    <span>
-      <li key={intraId}>
-        <span>{partyRoomUser.nickname}</span>
-      </li>
-    </span>
+    <>
+      <PartyRoomDetailButton.StartRoom />
+      <PartyRoomDetailButton.LeaveRoom
+        roomId={roomId}
+        fetchRoomDetail={fetchRoomDetail}
+      />
+    </>
   );
 }
