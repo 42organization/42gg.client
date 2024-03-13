@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { List } from '@mui/material';
+import { Button, List } from '@mui/material';
 import useInfiniteRecruitList from 'hooks/recruit/useInfiniteRecruitList';
 import styles from 'styles/recruit/RecruitList/list.module.scss';
 import RecruitListItem from './RecruitListItem';
@@ -28,6 +28,9 @@ const RecruitList = () => {
         ))}
       </List>
       <div ref={targetRef} />
+      <Button size={'large'} variant={'contained'} color={'primary'} href='/'>
+        42GG로 돌아가기
+      </Button>
     </>
   );
 };

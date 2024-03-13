@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { MdPeopleAlt } from 'react-icons/md';
@@ -9,17 +8,13 @@ import { dateToKRLocaleTimeString } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
+import DynamicQuill from 'components/DynamicQuill';
 import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/modal/ModalButton';
 import styles from 'styles/modal/event/TournamentRegistryModal.module.scss';
 import 'react-quill/dist/quill.bubble.css';
-
-const Quill = dynamic(() => import('react-quill'), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
 
 export default function TournamentRegistryModal({
   title,
@@ -186,7 +181,7 @@ export default function TournamentRegistryModal({
           <div className={styles.player}>{playerCount} / 8</div>
         </div>
       </div>
-      <Quill
+      <DynamicQuill
         className={styles.quillViewer}
         readOnly={true}
         formats={QUILL_FORMATS}
