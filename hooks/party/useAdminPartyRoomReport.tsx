@@ -4,7 +4,7 @@ import { PartyRoomReport } from 'types/partyTypes';
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 
-export function usePartyRoomReport() {
+export function useAdminPartyRoomReport() {
   const setSnackBar = useSetRecoilState(toastState);
 
   const { data } = useQuery({

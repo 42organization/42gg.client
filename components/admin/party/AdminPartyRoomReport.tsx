@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { tableFormat } from 'constants/admin/table';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
-import { usePartyRoomReport } from 'hooks/party/usePartyRoomReport';
+import { useAdminPartyRoomReport } from 'hooks/party/useAdminPartyRoomReport';
 import styles from 'styles/party/PartyMain.module.scss';
 
 const tableTitle: { [key: string]: string } = {
@@ -21,7 +21,7 @@ const tableTitle: { [key: string]: string } = {
 };
 
 export default function AdminPartyRoomReport() {
-  const { roomReports } = usePartyRoomReport();
+  const { roomReports } = useAdminPartyRoomReport();
 
   return (
     <div className={styles.userManagementWrap}>
