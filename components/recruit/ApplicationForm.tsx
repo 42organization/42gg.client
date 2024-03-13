@@ -8,15 +8,28 @@ import {
   useState,
 } from 'react';
 import { Alert, Box, Button, Grid, Paper, Snackbar } from '@mui/material';
-import { IApplicantAnswer, IRefs } from 'types/recruit/recruitments';
+import {
+  ApplicationFormType,
+  IApplicantAnswer,
+  IRefs,
+} from 'types/recruit/recruitments';
 import ApplyModal from 'components/modal/recruitment/ApplyModal';
+import ApplicationQuestions from 'components/recruit/ApplicationQuestions';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
 import applicationStyle from 'styles/recruit/application.module.scss';
-import ApplicationQuestions from './ApplicationQuestions';
 
-export default function ApplicationForm({ recruitId }: { recruitId: number }) {
+interface IApplicationFormProps {
+  recruitId: number;
+  applicationId: number;
+  mode: ApplicationFormType;
+}
+
+export default function ApplicationForm(props: IApplicationFormProps) {
+  const { recruitId, applicationId, mode } = props;
   const { data, isLoading } = useRecruitDetail({ recruitId });
   const formRefs = useRef<IRefs[]>([]);
+  const { answerList, setAnswerList } = useState([]);
+
   const [modalOpen, setModalOpen] = useState(false);
   const [answers, setAnswers] = useState<IApplicantAnswer[]>([]);
   const [alertOn, setAlertOn] = useState(false);
@@ -28,8 +41,12 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
   useEffect(() => {
     if (!data || Object.keys(data).length === 0) {
       setAlertOn(true);
+    } else {
+      const len = data.form.length;
+      const arr = Array.from({ length: len }, () => []);
+      setAnswerList(arr);
     }
-  }, [data]);
+  }, [data, setAnswerList]);
 
   if (isLoading || !data || Object.keys(data).length === 0) {
     return (
@@ -48,7 +65,15 @@ export default function ApplicationForm({ recruitId }: { recruitId: number }) {
         <Paper className={applicationStyle.titleContainer}>
           {data.title} {data.generations} 모집
         </Paper>
-        <ApplicationQuestions data={data} refs={formRefs} />
+        <ApplicationQuestions
+          data={data}
+          refs={formRefs}
+          mode={mode}
+          recruitId={recruitId}
+          applicationId={applicationId}
+          answerList={answerList}
+          setAnswerList={setAnswerList}
+        />
         <Button
           className={applicationStyle.submitBtn}
           variant='contained'

@@ -1,6 +1,44 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const recruitmentDetail = {
+const recruitmentDetailOne = {
+  startDate: '2024-03-13 12:25',
+  endDate: '2024-03-15 00:12',
+  title: '42GG',
+  contents: '지원서',
+  generations: '8기',
+  form: [
+    {
+      questionId: 1,
+      question: '좋아하는 숫자',
+      inputType: 'SINGLE_CHECK',
+      checkList: [
+        { id: 1, contents: '1' },
+        { id: 2, contents: '10' },
+        { id: 3, contents: '2009' },
+        { id: 4, contents: '49' },
+      ],
+    },
+    {
+      questionId: 2,
+      question: '좋아하는 색깔',
+      inputType: 'TEXT',
+    },
+    {
+      questionId: 3,
+      question: '좋아하는 과일',
+      inputType: 'MULTI_CHECK',
+      checkList: [
+        { id: 1, contents: '사과' },
+        { id: 2, contents: '귤' },
+        { id: 3, contents: '파인애플' },
+        { id: 4, contents: '딸기' },
+        { id: 5, contents: '메론' },
+      ],
+    },
+  ],
+};
+
+const recruitmentDetailTwo = {
   startDate: '2024-12-04 00:12',
   endDate: '2024-12-04 00:12',
   title: '42GG',
@@ -71,12 +109,9 @@ const recruitmentDetail = {
   ],
 };
 
+const recruitmentDetails = [{}, recruitmentDetailOne, recruitmentDetailTwo];
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { recruitId } = req.query as { recruitId: string };
 
-  if (recruitId === '0') {
-    res.status(200).json({});
-  } else {
-    res.status(200).json(recruitmentDetail);
-  }
+  res.status(200).json(recruitmentDetails[Number(recruitId)]);
 }

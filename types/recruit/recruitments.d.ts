@@ -16,7 +16,6 @@ export type recruitmentListData = {
   totalPage: number;
 };
 
-
 export interface ICheck {
   id: number;
   contents: string;
@@ -49,6 +48,15 @@ export interface IRefs {
   id: number;
   type: recruitmentQuestionTypes;
   ref: HTMLInputElement[];
+}
+
+export type ApplicationFormType = 'APPLY' | 'VIEW' | 'EDIT';
+export interface IRecruitmentDetailUser {
+  applicationId: number;
+  endDate: string;
+  title: string;
+  content: string;
+  form: IApplicantAnswer[];
 }
 
 export type RecruitmentMessageType = 'INTERVIEW' | 'PASS' | 'FAIL';
