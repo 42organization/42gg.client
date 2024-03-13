@@ -12,7 +12,7 @@ function Application() {
   return (
     <>
       <StickyHeader headerTitle={edit ? '지원서 수정' : '지원서 작성'} />
-      <ApplicationForm id={test} />
+      <ApplicationForm recruitId={test} />
       <button onClick={() => click()}>test</button>
     </>
   );
