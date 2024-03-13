@@ -61,14 +61,12 @@ function CommentLine({ comments }: { comments: PartyComment[] }) {
           <div key={comment.commentId}>`숨김 처리된 댓글입니다.`</div>
         ) : (
           <div key={comment.commentId}>
+            <div>{comment.content}</div>
+            <span>{`(${getTimeAgo(comment.createDate)})`}</span>
             <span>{comment.nickname}</span>
-            <span>
-              {comment.content}
-              {`(${getTimeAgo(comment.createDate)})`}
-              <button onClick={() => reportComment(comment.commentId)}>
-                신고
-              </button>
-            </span>
+            <button onClick={() => reportComment(comment.commentId)}>
+              신고
+            </button>
           </div>
         )
       )}
