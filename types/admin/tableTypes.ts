@@ -17,7 +17,14 @@ export type TableName =
   | 'coinPolicy'
   | 'coinPolicyHistory'
   | 'tournament'
-  | 'tournamentCreate';
+  | 'tournamentCreate'
+  | 'partyRoom'
+  | 'partyCategory'
+  | 'partyTemplate'
+  | 'partyNoshowReport'
+  | 'partyRoomReport'
+  | 'partyCommentReport'
+  | 'partyPenaltyAdmin';
 
 export type EtcType = 'button' | 'toggle';
 

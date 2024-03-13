@@ -1,8 +1,5 @@
-export type PartyRoomStatus = 'OPEN' | 'START' | 'FINISH' | 'HIDDEN' | 'FAIL';
-/**
- * @typedef {Object} PartyRoom
- *  @property {string} [creatorIntraId] - adminAPI로 조회시 존재
- */
+export type PartyRoomStatus = 'OPEN' | 'START' | 'FINISH' | 'HIDDEN';
+
 export type PartyRoom = {
   roomId: number;
   title: string;
@@ -16,37 +13,25 @@ export type PartyRoom = {
   creatorIntraId?: string;
 };
 
-/**
- * @typedef {Object} PartyRoomDetail
- *  @property {string | null} [myNickname] - Room 참여시 존재
- */
 export type PartyRoomDetail = PartyRoom & {
-  myNickname: string | null;
-  hostNickname: string;
+  myNickname: string | null; // 촉촉한 초코칩
+  hostNickname: string; // 촉촉한 초코칩
   content: string;
   roomUsers: PartyRoomUser[];
   comments: PartyComment[];
 };
 
-/**
- * @typedef {Object} PartyRoomUser
- *  @property {string | null} [intraId] - Room 시작시 or Admin으로 조회시 존재
- */
 export type PartyRoomUser = {
   roomUserId: number;
   nickname: string;
-  intraId: string | null;
+  intraId?: string;
 };
 
-/**
- * @typedef {Object} PartyRoomDetail
- *  @property {string | null} [intraid] - Room 시작시 or Admin으로 조회시 존재
- */
+// 닉네임과 아이디를 가지고 있는 api를 만들어줌. 추가 필요.
+
 export type PartyComment = {
   commentId: number;
-  nickname: string;
-  intraid: string | null;
-  isexist: boolean;
+  nickname: string; // 촉촉한 초코칩
   content: string;
   isHidden: boolean;
   createDate: string;
@@ -97,7 +82,7 @@ export type PartyCommentReport = {
   createdAt: string;
 };
 
-export type PartyCreateForm = {
+export type PartyForm = {
   title: string;
   categoryId: number;
   minPeople: number;
@@ -107,6 +92,7 @@ export type PartyCreateForm = {
 };
 
 export type PartyTemplateForm = {
+  gameTemplateId?: number;
   gameName: string;
   categoryId: number;
   maxGamePeople: number;
@@ -116,4 +102,13 @@ export type PartyTemplateForm = {
   genre: string;
   difficulty: string;
   summary: string;
+};
+
+export type PartyPenaltyAdmin = {
+  id: number;
+  user: object;
+  penaltyType: string;
+  message: string;
+  startTime: string;
+  penaltyTime: number;
 };
