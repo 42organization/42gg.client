@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Alert, Box, Button, Grid, Paper, Snackbar } from '@mui/material';
 import {
   ApplicationFormType,
@@ -15,7 +15,11 @@ import {
   refMap,
 } from 'types/recruit/recruitments';
 import { applicationFormCheck } from 'utils/handleApplicationForm';
-import { userApplicationAnswerState } from 'utils/recoil/application';
+import {
+  applicationAlertState,
+  applicationModalState,
+  userApplicationAnswerState,
+} from 'utils/recoil/application';
 import ApplyModal from 'components/modal/recruitment/ApplyModal';
 import ApplicationFormItem from 'components/recruit/Application/ApplicationFormItem';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
@@ -26,13 +30,13 @@ interface IApplicationFormProps {
   recruitId: number;
   applicationId: number;
   mode: ApplicationFormType;
+  formRefs: MutableRefObject<refMap>;
 }
 
 export default function ApplicationForm(props: IApplicationFormProps) {
-  const { recruitId, applicationId, mode } = props;
-  const [modalOpen, setModalOpen] = useState(false);
-  const [alertOn, setAlertOn] = useState(false);
-  const formRefs = useRef<refMap>({});
+  const { recruitId, applicationId, mode, formRefs } = props;
+  const [modalOpen, setModalOpen] = useRecoilState(applicationModalState);
+  const setAlertOn = useSetRecoilState(applicationAlertState);
   const setUserAnswers = useSetRecoilState<IApplicantAnswer[]>(
     userApplicationAnswerState
   );
@@ -44,10 +48,6 @@ export default function ApplicationForm(props: IApplicationFormProps) {
       applicationId: applicationId,
       mode,
     });
-
-  const closeAlert = () => {
-    setAlertOn(false);
-  };
 
   useEffect(() => {
     if (!data || Object.keys(data).length === 0) {
@@ -66,9 +66,7 @@ export default function ApplicationForm(props: IApplicationFormProps) {
   }, [mode, userAnswerLoading]);
 
   if (isLoading || !data || Object.keys(data).length === 0) {
-    return (
-      <NoData isLoading={isLoading} alertOn={alertOn} closeAlert={closeAlert} />
-    );
+    return <NoData isLoading={isLoading} />;
   }
 
   return (
@@ -83,35 +81,24 @@ export default function ApplicationForm(props: IApplicationFormProps) {
           {data.title} {data.generations} 모집
         </Paper>
         <ApplicationFormItem formRefs={formRefs} data={data} mode={mode} />
-        <SubmitButton
-          formRefs={formRefs}
-          setAlertOn={setAlertOn}
-          setModalOpen={setModalOpen}
-          mode={mode}
-        />
+        <SubmitButton formRefs={formRefs} mode={mode} />
       </Grid>
       <ApplyModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         recruitId={recruitId}
       />
-      <SnackBar
-        alertOn={alertOn}
-        closeAlert={closeAlert}
-        message='입력하지 않은 문항이 있습니다.'
-      />
+      <SnackBar message='입력하지 않은 문항이 있습니다.' />
     </Box>
   );
 }
 
 interface INoDataProps {
   isLoading: boolean;
-  alertOn: boolean;
-  closeAlert: () => void;
 }
 
 function NoData(props: INoDataProps) {
-  const { isLoading, alertOn, closeAlert } = props;
+  const { isLoading } = props;
   const router = useRouter();
 
   const goBack = () => {
@@ -135,24 +122,20 @@ function NoData(props: INoDataProps) {
           </Button>
         </Paper>
       </Grid>
-      <SnackBar
-        alertOn={alertOn}
-        closeAlert={closeAlert}
-        message='올바르지 않은 요청입니다.'
-      />
+      <SnackBar message='올바르지 않은 요청입니다.' />
     </Box>
   );
 }
 
 interface ISubmitButtonProps {
   formRefs: MutableRefObject<refMap>;
-  setAlertOn: Dispatch<SetStateAction<boolean>>;
-  setModalOpen: Dispatch<SetStateAction<boolean>>;
   mode: ApplicationFormType;
 }
 
 function SubmitButton(props: ISubmitButtonProps) {
-  const { formRefs, setAlertOn, setModalOpen, mode } = props;
+  const { formRefs, mode } = props;
+  const setAlertOn = useSetRecoilState(applicationAlertState);
+  const setModalOpen = useSetRecoilState(applicationModalState);
   const userAnswers = useRecoilValue<IApplicantAnswer[]>(
     userApplicationAnswerState
   );
@@ -179,21 +162,24 @@ function SubmitButton(props: ISubmitButtonProps) {
 }
 
 interface ISnackBarProps {
-  alertOn: boolean;
-  closeAlert: () => void;
   message: string;
 }
 
 function SnackBar(props: ISnackBarProps) {
-  const { alertOn, closeAlert, message } = props;
+  const { message } = props;
+  const [alertOn, setAlertOn] = useRecoilState(applicationAlertState);
   return (
     <Snackbar
       anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
       open={alertOn}
       autoHideDuration={5000}
-      onClose={closeAlert}
+      onClose={() => setAlertOn(false)}
     >
-      <Alert onClose={closeAlert} severity='error' variant='filled'>
+      <Alert
+        onClose={() => setAlertOn(false)}
+        severity='error'
+        variant='filled'
+      >
         {message}
       </Alert>
     </Snackbar>
