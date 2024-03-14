@@ -10,6 +10,7 @@ import {
   StepLabel,
   Stepper,
   stepConnectorClasses,
+  stepLabelClasses,
   styled,
 } from '@mui/material';
 import { resultType } from 'types/recruit/recruitments';
@@ -27,11 +28,11 @@ const RecruitStepper = ({
       className={style.stepper}
       activeStep={statusToStep(status, interviewDate)}
       alternativeLabel
-      connector={<ConnectLine />}
+      connector={<StyledConnector />}
     >
       {stepMessage.map((label) => (
         <Step key={label}>
-          <StepLabel StepIconComponent={StepIcon}>{label}</StepLabel>
+          <StyledLabel StepIconComponent={StepIcon}>{label}</StyledLabel>
         </Step>
       ))}
     </Stepper>
@@ -57,28 +58,33 @@ const StepIcon = ({ active, completed }: StepIconProps) => {
   return <Circle color={'secondary'} />;
 };
 
-const ConnectLine = styled(StepConnector)(({ theme }) => ({
+const StyledConnector = styled(StepConnector)(({ theme }) => ({
   [`.${stepConnectorClasses.line}`]: {
     borderTopWidth: 2,
     borderRadius: 1,
   },
   [`&.${stepConnectorClasses.active}`]: {
-    [`& .${stepConnectorClasses.line}`]: {
+    [`.${stepConnectorClasses.line}`]: {
       borderColor: theme.palette.primary.main,
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
-    [`& .${stepConnectorClasses.line}`]: {
+    [`.${stepConnectorClasses.line}`]: {
       borderColor: theme.palette.primary.main,
     },
   },
-  [`.${stepConnectorClasses.alternativeLabel}`]: {
-    top: 10,
+}));
+
+const StyledLabel = styled(StepLabel)(({ theme }) => ({
+  [`.${stepLabelClasses.alternativeLabel}`]: {
+    color: theme.palette.secondary.main,
+    fontSize: '0,5rem',
   },
-  [`.${stepConnectorClasses.disabled}`]: {
-    [`& .${stepConnectorClasses.line}`]: {
-      borderColor: theme.palette.primary.light,
-    },
+  [`.${stepLabelClasses.active}`]: {
+    color: theme.palette.primary.dark,
+  },
+  [`.${stepLabelClasses.completed}`]: {
+    color: theme.palette.primary.dark,
   },
 }));
 
