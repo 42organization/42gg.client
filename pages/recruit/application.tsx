@@ -3,6 +3,7 @@ import { ApplicationFormType } from 'types/recruit/recruitments';
 import ApplicationForm from 'components/recruit/ApplicationForm/ApplicationForm';
 import StickyHeader from 'components/recruit/StickyHeader';
 
+// todo: mode, recruitId, applicationId 인자로 받기
 function Application() {
   const [mode, setMode] = useState<ApplicationFormType>('APPLY');
   const [test, setTest] = useState(0);
