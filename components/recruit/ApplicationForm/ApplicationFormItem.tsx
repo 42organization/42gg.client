@@ -32,6 +32,12 @@ interface IFormItemProps {
   formRefs: MutableRefObject<refMap>;
 }
 
+interface IitemProps {
+  form: IQuestionForm;
+  mode: ApplicationFormType;
+  formRefs: MutableRefObject<refMap>;
+}
+
 export default function ApplicationFormItem(props: IFormItemProps) {
   const { data, mode, formRefs } = props;
   return (
@@ -53,15 +59,8 @@ export default function ApplicationFormItem(props: IFormItemProps) {
   );
 }
 
-function TextForm({
-  form,
-  mode,
-  formRefs,
-}: {
-  form: IQuestionForm;
-  mode: ApplicationFormType;
-  formRefs: MutableRefObject<refMap>;
-}) {
+function TextForm(props: IitemProps) {
+  const { form, mode, formRefs } = props;
   const [input, setInput] = useState<IApplicantAnswer>(inputDefault(form));
   const [userAnswers, setUserAnswers] = useRecoilState<IApplicantAnswer[]>(
     userApplicationAnswerState
@@ -100,15 +99,8 @@ function TextForm({
   );
 }
 
-function SingleCheckForm({
-  form,
-  mode,
-  formRefs,
-}: {
-  form: IQuestionForm;
-  mode: ApplicationFormType;
-  formRefs: MutableRefObject<refMap>;
-}) {
+function SingleCheckForm(props: IitemProps) {
+  const { form, mode, formRefs } = props;
   const [input, setInput] = useState<IApplicantAnswer>(inputDefault(form));
   const [userAnswers, setUserAnswers] = useRecoilState<IApplicantAnswer[]>(
     userApplicationAnswerState
@@ -160,15 +152,8 @@ function SingleCheckForm({
   );
 }
 
-function MultiCheckForm({
-  form,
-  mode,
-  formRefs,
-}: {
-  form: IQuestionForm;
-  mode: ApplicationFormType;
-  formRefs: MutableRefObject<refMap>;
-}) {
+function MultiCheckForm(props: IitemProps) {
+  const { form, mode, formRefs } = props;
   const [input, setInput] = useState<IApplicantAnswer>(inputDefault(form));
   const [userAnswers, setUserAnswers] = useRecoilState<IApplicantAnswer[]>(
     userApplicationAnswerState
