@@ -1,6 +1,12 @@
 import {
+  CheckCircleRounded,
+  FlagCircleRounded,
+  Circle,
+} from '@mui/icons-material';
+import {
   Step,
   StepConnector,
+  StepIconProps,
   StepLabel,
   Stepper,
   stepConnectorClasses,
@@ -24,8 +30,8 @@ const RecruitStepper = ({
       connector={<ConnectLine />}
     >
       {stepMessage.map((label) => (
-        <Step className={style.connector} key={label}>
-          <StepLabel>{label}</StepLabel>
+        <Step key={label}>
+          <StepLabel StepIconComponent={StepIcon}>{label}</StepLabel>
         </Step>
       ))}
     </Stepper>
@@ -41,9 +47,20 @@ const statusToStep = (status: resultType, interviewDate?: Date) => {
   return 0;
 };
 
+const StepIcon = ({ active, completed }: StepIconProps) => {
+  if (completed) {
+    return <CheckCircleRounded color={'primary'} />;
+  }
+  if (active) {
+    return <FlagCircleRounded color={'primary'} />;
+  }
+  return <Circle color={'secondary'} />;
+};
+
 const ConnectLine = styled(StepConnector)(({ theme }) => ({
   [`.${stepConnectorClasses.line}`]: {
-    borderTopWidth: 4,
+    borderTopWidth: 2,
+    borderRadius: 1,
   },
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
