@@ -24,7 +24,7 @@ const MyRecruitStatus = ({
         width={'100%'}
         alignItems={'center'}
         justifyContent={'space-between'}
-        spacing={2}
+        spacing={'2rem'}
       >
         <RecruitStepper status={status} interviewDate={interviewDate} />
         <span>{statusMessage(status, interviewDate)}</span>
