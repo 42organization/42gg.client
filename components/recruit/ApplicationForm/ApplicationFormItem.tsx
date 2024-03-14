@@ -18,12 +18,12 @@ import {
   IRecruitmentDetail,
   refMap,
 } from 'types/recruit/recruitments';
-import { userApplicationAnswerState } from 'utils/recoil/application';
 import {
   findUserAnswer,
   inputDefault,
   updateUserAnswers,
-} from 'components/recruit/ApplicationForm/applicationFormUtils';
+} from 'utils/handleApplicationForm';
+import { userApplicationAnswerState } from 'utils/recoil/application';
 import applicationStyle from 'styles/recruit/application.module.scss';
 
 interface IFormItemProps {
