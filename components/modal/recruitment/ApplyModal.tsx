@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react';
 import { useMutation } from 'react-query';
+import { useRecoilValue } from 'recoil';
 import {
   Alert,
   Box,
@@ -22,6 +23,7 @@ import {
 import { TransitionProps } from '@mui/material/transitions';
 import { IApplicantAnswer } from 'types/recruit/recruitments';
 import { mockInstance } from 'utils/mockAxios';
+import { userApplicationAnswerState } from 'utils/recoil/application';
 import styles from 'styles/modal/recruit/ApplyModal.module.scss';
 
 interface ISnackBarState extends SnackbarOrigin {
@@ -43,12 +45,10 @@ export default function ApplyModal({
   modalOpen,
   setModalOpen,
   recruitId,
-  applicantAnswers,
 }: {
   modalOpen: boolean;
   setModalOpen: Dispatch<SetStateAction<boolean>>;
   recruitId: number;
-  applicantAnswers: IApplicantAnswer[];
 }) {
   const [snackBarState, setSnackBarState] = useState<ISnackBarState>({
     snackBarOpen: false,
@@ -57,6 +57,8 @@ export default function ApplyModal({
     message: '',
     severity: 'error',
   });
+
+  const applicantAnswers = useRecoilValue(userApplicationAnswerState);
 
   const { snackBarOpen, vertical, horizontal, message, severity } =
     snackBarState;
