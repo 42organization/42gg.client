@@ -1,9 +1,13 @@
 import { Dispatch, MutableRefObject, SetStateAction } from 'react';
 import { SetterOrUpdater } from 'recoil';
-import { IApplicantAnswer, IQuestionForm } from 'types/recruit/recruitments';
+import {
+  IApplicantAnswer,
+  IQuestionForm,
+  refMap,
+} from 'types/recruit/recruitments';
 
 interface IapplicationFormCheckProps {
-  formRefs: MutableRefObject<{ [key: number]: HTMLInputElement }>;
+  formRefs: MutableRefObject<refMap>;
   setAlertOn: Dispatch<SetStateAction<boolean>>;
   setModalOpen: Dispatch<SetStateAction<boolean>>;
   userAnswers: IApplicantAnswer[];

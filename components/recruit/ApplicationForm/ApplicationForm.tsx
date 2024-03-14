@@ -5,6 +5,7 @@ import { Alert, Box, Button, Grid, Paper, Snackbar } from '@mui/material';
 import {
   ApplicationFormType,
   IApplicantAnswer,
+  refMap,
 } from 'types/recruit/recruitments';
 import { userApplicationAnswerState } from 'utils/recoil/application';
 import ApplyModal from 'components/modal/recruitment/ApplyModal';
@@ -27,7 +28,7 @@ export default function ApplicationForm(props: IApplicationFormProps) {
   const [userAnswers, setUserAnswers] = useRecoilState<IApplicantAnswer[]>(
     userApplicationAnswerState
   );
-  const formRefs = useRef<{ [key: number]: HTMLInputElement }>({});
+  const formRefs = useRef<refMap>({});
 
   const { data, isLoading } = useRecruitDetail({ recruitId });
   const { data: userApplyInfo, isLoading: userAnswerLoading } =

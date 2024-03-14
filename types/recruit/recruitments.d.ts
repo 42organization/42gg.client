@@ -56,6 +56,8 @@ export interface IRecruitmentDetailUser extends IUserApplicationInfo {
   form: IApplicantAnswer[];
 }
 
+export type refMap = { [key: number]: HTMLInputElement };
+
 export type RecruitmentMessageType = 'INTERVIEW' | 'PASS' | 'FAIL';
 
 export interface IRecruitMessageTemplate {

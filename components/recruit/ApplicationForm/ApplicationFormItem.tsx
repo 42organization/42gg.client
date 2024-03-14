@@ -16,6 +16,7 @@ import {
   ICheck,
   IQuestionForm,
   IRecruitmentDetail,
+  refMap,
 } from 'types/recruit/recruitments';
 import { userApplicationAnswerState } from 'utils/recoil/application';
 import {
@@ -25,13 +26,13 @@ import {
 } from 'components/recruit/ApplicationForm/applicationFormUtils';
 import applicationStyle from 'styles/recruit/application.module.scss';
 
-interface IQuestionProps {
+interface IFormItemProps {
   data: IRecruitmentDetail;
   mode: ApplicationFormType;
-  formRefs: MutableRefObject<{ [key: number]: HTMLInputElement }>;
+  formRefs: MutableRefObject<refMap>;
 }
 
-export default function ApplicationFormItem(props: IQuestionProps) {
+export default function ApplicationFormItem(props: IFormItemProps) {
   const { data, mode, formRefs } = props;
   return (
     <>
@@ -59,7 +60,7 @@ function TextForm({
 }: {
   form: IQuestionForm;
   mode: ApplicationFormType;
-  formRefs: MutableRefObject<{ [key: number]: HTMLInputElement }>;
+  formRefs: MutableRefObject<refMap>;
 }) {
   const [input, setInput] = useState<IApplicantAnswer>(inputDefault(form));
   const [userAnswers, setUserAnswers] = useRecoilState<IApplicantAnswer[]>(
@@ -106,7 +107,7 @@ function SingleCheckForm({
 }: {
   form: IQuestionForm;
   mode: ApplicationFormType;
-  formRefs: MutableRefObject<{ [key: number]: HTMLInputElement }>;
+  formRefs: MutableRefObject<refMap>;
 }) {
   const [input, setInput] = useState<IApplicantAnswer>(inputDefault(form));
   const [userAnswers, setUserAnswers] = useRecoilState<IApplicantAnswer[]>(
@@ -166,7 +167,7 @@ function MultiCheckForm({
 }: {
   form: IQuestionForm;
   mode: ApplicationFormType;
-  formRefs: MutableRefObject<{ [key: number]: HTMLInputElement }>;
+  formRefs: MutableRefObject<refMap>;
 }) {
   const [input, setInput] = useState<IApplicantAnswer>(inputDefault(form));
   const [userAnswers, setUserAnswers] = useRecoilState<IApplicantAnswer[]>(
