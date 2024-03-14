@@ -1,22 +1,18 @@
 import { useRouter } from 'next/router';
-import {
-  Dispatch,
-  MutableRefObject,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { Alert, Box, Button, Grid, Paper, Snackbar } from '@mui/material';
 import {
   ApplicationFormType,
   IApplicantAnswer,
-  IRefs,
 } from 'types/recruit/recruitments';
+import { userApplicationAnswerState } from 'utils/recoil/application';
 import ApplyModal from 'components/modal/recruitment/ApplyModal';
-import ApplicationQuestions from 'components/recruit/ApplicationQuestions';
+import ApplicationFormItem from 'components/recruit/ApplicationForm/ApplicationFormItem';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
+import useRecruitDetailUser from 'hooks/recruit/useRecruitDetailUser';
 import applicationStyle from 'styles/recruit/application.module.scss';
+import { applicationFormCheck } from './applicationFormUtils';
 
 interface IApplicationFormProps {
   recruitId: number;
@@ -26,13 +22,20 @@ interface IApplicationFormProps {
 
 export default function ApplicationForm(props: IApplicationFormProps) {
   const { recruitId, applicationId, mode } = props;
-  const { data, isLoading } = useRecruitDetail({ recruitId });
-  const formRefs = useRef<IRefs[]>([]);
-  const { answerList, setAnswerList } = useState([]);
-
   const [modalOpen, setModalOpen] = useState(false);
-  const [answers, setAnswers] = useState<IApplicantAnswer[]>([]);
   const [alertOn, setAlertOn] = useState(false);
+  const [userAnswers, setUserAnswers] = useRecoilState<IApplicantAnswer[]>(
+    userApplicationAnswerState
+  );
+  const formRefs = useRef<{ [key: number]: HTMLInputElement }>({});
+
+  const { data, isLoading } = useRecruitDetail({ recruitId });
+  const { data: userApplyInfo, isLoading: userAnswerLoading } =
+    useRecruitDetailUser({
+      recruitId: recruitId,
+      applicationId: applicationId,
+      mode,
+    });
 
   const closeAlert = () => {
     setAlertOn(false);
@@ -41,12 +44,16 @@ export default function ApplicationForm(props: IApplicationFormProps) {
   useEffect(() => {
     if (!data || Object.keys(data).length === 0) {
       setAlertOn(true);
-    } else {
-      const len = data.form.length;
-      const arr = Array.from({ length: len }, () => []);
-      setAnswerList(arr);
     }
-  }, [data, setAnswerList]);
+  }, [data]);
+
+  // 지원서 보기, 수정모드 => 유저 답변 데이터 가져와서 세팅
+  useEffect(() => {
+    if (mode === 'VIEW' || mode === 'EDIT') {
+      if (!userAnswerLoading && userApplyInfo)
+        setUserAnswers(userApplyInfo.form);
+    }
+  }, [mode, userAnswerLoading]);
 
   if (isLoading || !data || Object.keys(data).length === 0) {
     return (
@@ -65,15 +72,7 @@ export default function ApplicationForm(props: IApplicationFormProps) {
         <Paper className={applicationStyle.titleContainer}>
           {data.title} {data.generations} 모집
         </Paper>
-        <ApplicationQuestions
-          data={data}
-          refs={formRefs}
-          mode={mode}
-          recruitId={recruitId}
-          applicationId={applicationId}
-          answerList={answerList}
-          setAnswerList={setAnswerList}
-        />
+        <ApplicationFormItem formRefs={formRefs} data={data} mode={mode} />
         <Button
           className={applicationStyle.submitBtn}
           variant='contained'
@@ -82,8 +81,7 @@ export default function ApplicationForm(props: IApplicationFormProps) {
               formRefs,
               setAlertOn,
               setModalOpen,
-              setAnswers,
-              numberOfQuestions: data?.form.length,
+              userAnswers,
             })
           }
         >
@@ -94,7 +92,6 @@ export default function ApplicationForm(props: IApplicationFormProps) {
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         recruitId={recruitId}
-        applicantAnswers={answers}
       />
       <SnackBar
         alertOn={alertOn}
@@ -166,73 +163,3 @@ function SnackBar(props: ISnackBarProps) {
     </Snackbar>
   );
 }
-
-interface IapplicationFormCheckProps {
-  formRefs: MutableRefObject<IRefs[]>;
-  setAlertOn: Dispatch<SetStateAction<boolean>>;
-  setModalOpen: Dispatch<SetStateAction<boolean>>;
-  setAnswers: Dispatch<SetStateAction<IApplicantAnswer[]>>;
-  numberOfQuestions: number;
-}
-
-const applicationFormCheck = (props: IapplicationFormCheckProps) => {
-  const { formRefs, setAlertOn, setModalOpen, setAnswers, numberOfQuestions } =
-    props;
-
-  const answerList = [];
-  for (const answer of formRefs.current) {
-    let requiredFlag = false;
-    if (answer.type === 'TEXT' && answer.ref[0].value.length !== 0) {
-      answerList.push({
-        questionId: answer.id,
-        inputType: answer.type,
-        answer: answer.ref[0].value,
-      });
-      requiredFlag = true;
-    } else if (answer.type === 'SINGLE_CHECK') {
-      for (const checkRef of answer.ref) {
-        if (!checkRef || checkRef?.checked === false) continue;
-        answerList.push({
-          questionId: answer.id,
-          inputType: answer.type,
-          checkList: [Number(answer.ref.indexOf(checkRef))],
-        });
-        requiredFlag = true;
-        break;
-      }
-    } else if (answer.type === 'MULTI_CHECK') {
-      for (const checkRef of answer.ref) {
-        if (!checkRef || checkRef?.checked === false) continue;
-        const foundObj = answerList.find((obj) => obj.questionId === answer.id);
-        if (foundObj === undefined) {
-          answerList.push({
-            questionId: answer.id,
-            inputType: answer.type,
-            // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
-            checkedList: [Number(answer.ref.indexOf(checkRef))],
-          });
-        } else {
-          // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
-          foundObj.checkedList?.push(Number(answer.ref.indexOf(checkRef)));
-        }
-        requiredFlag = true;
-      }
-    }
-    // 채워지지 않은 폼으로 이동
-    if (!requiredFlag) {
-      if (answer.type === 'TEXT') {
-        answer.ref[0].focus();
-      } else {
-        // todo: checklist id번호 들어오는 방식 체크 필요 0,1,2 or 1,2,3
-        answer.ref[1].focus();
-      }
-      setAlertOn(true);
-      return;
-    }
-  }
-
-  if (answerList.length === 0 || answerList.length !== numberOfQuestions)
-    return;
-  setAnswers(answerList);
-  setModalOpen(true);
-};
