@@ -78,13 +78,13 @@ const StyledConnector = styled(StepConnector)(({ theme }) => ({
 const StyledLabel = styled(StepLabel)(({ theme }) => ({
   [`.${stepLabelClasses.alternativeLabel}`]: {
     color: theme.palette.secondary.main,
-    fontSize: '0,5rem',
+    fontSize: '0.75rem',
   },
   [`.${stepLabelClasses.active}`]: {
-    color: theme.palette.primary.dark,
+    color: `${theme.palette.primary.dark} !important`,
   },
   [`.${stepLabelClasses.completed}`]: {
-    color: theme.palette.primary.dark,
+    color: `${theme.palette.primary.dark} !important`,
   },
 }));
 
