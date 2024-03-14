@@ -22,3 +22,12 @@
   align-items: center;
   justify-content: center;
 }
+
+// stepper style
+
+.stepper {
+  width: 100%;
+  .connector {
+    border-top-width: 4px !important;
+  }
+}

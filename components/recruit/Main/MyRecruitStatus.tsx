@@ -2,6 +2,7 @@ import { Stack } from '@mui/material';
 import { resultType } from 'types/recruit/recruitments';
 import { dateToKRFullString } from 'utils/handleTime';
 import style from 'styles/recruit/Main/myRecruitment.module.scss';
+import RecruitStepper from './RecruitStepper';
 
 const MyRecruitStatus = ({
   status,
@@ -25,10 +26,8 @@ const MyRecruitStatus = ({
         justifyContent={'space-between'}
         spacing={2}
       >
-        <Stack>
-          <RecruitProgressBar status={status} />
-          <span>{statusMessage(status, interviewDate)}</span>
-        </Stack>
+        <RecruitStepper status={status} interviewDate={interviewDate} />
+        <span>{statusMessage(status, interviewDate)}</span>
       </Stack>
     </div>
   );
@@ -52,16 +51,6 @@ const statusMessage = (status: resultType, interviewDate?: Date) => {
     return '불합격';
   }
   return '';
-};
-
-const RecruitProgressBar = ({ status }: { status: resultType }) => {
-  return (
-    <div className={style.progressBarContainer}>
-      <div className={style.progressBar}>
-        <div className={style.progress} />
-      </div>
-    </div>
-  );
 };
 
 export default MyRecruitStatus;
