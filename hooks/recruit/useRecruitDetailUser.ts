@@ -15,7 +15,7 @@ const useRecruitDetailUser = ({
   mode: ApplicationFormType;
 }) => {
   const { data, isLoading } = useQuery<IRecruitmentDetailUser>({
-    queryKey: ['recruitDetailUser', applicationId],
+    queryKey: ['recruitDetailUser', recruitId, applicationId],
     queryFn: async () => {
       const res = await mockInstance.get(
         `/recruitments/${recruitId}/applications/${applicationId}`
