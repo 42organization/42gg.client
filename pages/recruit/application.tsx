@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ApplicationFormType } from 'types/recruit/recruitments';
-import ApplicationForm from 'components/recruit/ApplicationForm';
+import ApplicationForm from 'components/recruit/ApplicationForm/ApplicationForm';
 import StickyHeader from 'components/recruit/StickyHeader';
 
 function Application() {
