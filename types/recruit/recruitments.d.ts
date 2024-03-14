@@ -44,18 +44,15 @@ export interface IApplicantAnswer {
   answer?: string;
 }
 
-export interface IRefs {
-  id: number;
-  type: recruitmentQuestionTypes;
-  ref: HTMLInputElement[];
-}
-
 export type ApplicationFormType = 'APPLY' | 'VIEW' | 'EDIT';
-export interface IRecruitmentDetailUser {
+export interface IUserApplicationInfo {
   applicationId: number;
   endDate: string;
   title: string;
   content: string;
+}
+
+export interface IRecruitmentDetailUser extends IUserApplicationInfo {
   form: IApplicantAnswer[];
 }
 
