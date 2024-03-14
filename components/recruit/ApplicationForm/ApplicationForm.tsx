@@ -1,6 +1,13 @@
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import {
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Alert, Box, Button, Grid, Paper, Snackbar } from '@mui/material';
 import {
   ApplicationFormType,
@@ -25,10 +32,10 @@ export default function ApplicationForm(props: IApplicationFormProps) {
   const { recruitId, applicationId, mode } = props;
   const [modalOpen, setModalOpen] = useState(false);
   const [alertOn, setAlertOn] = useState(false);
-  const [userAnswers, setUserAnswers] = useRecoilState<IApplicantAnswer[]>(
+  const formRefs = useRef<refMap>({});
+  const setUserAnswers = useSetRecoilState<IApplicantAnswer[]>(
     userApplicationAnswerState
   );
-  const formRefs = useRef<refMap>({});
 
   const { data, isLoading } = useRecruitDetail({ recruitId });
   const { data: userApplyInfo, isLoading: userAnswerLoading } =
@@ -53,6 +60,8 @@ export default function ApplicationForm(props: IApplicationFormProps) {
     if (mode === 'VIEW' || mode === 'EDIT') {
       if (!userAnswerLoading && userApplyInfo)
         setUserAnswers(userApplyInfo.form);
+    } else {
+      setUserAnswers([]);
     }
   }, [mode, userAnswerLoading]);
 
@@ -74,20 +83,12 @@ export default function ApplicationForm(props: IApplicationFormProps) {
           {data.title} {data.generations} 모집
         </Paper>
         <ApplicationFormItem formRefs={formRefs} data={data} mode={mode} />
-        <Button
-          className={applicationStyle.submitBtn}
-          variant='contained'
-          onClick={() =>
-            applicationFormCheck({
-              formRefs,
-              setAlertOn,
-              setModalOpen,
-              userAnswers,
-            })
-          }
-        >
-          제출하기
-        </Button>
+        <SubmitButton
+          formRefs={formRefs}
+          setAlertOn={setAlertOn}
+          setModalOpen={setModalOpen}
+          mode={mode}
+        />
       </Grid>
       <ApplyModal
         modalOpen={modalOpen}
@@ -140,6 +141,40 @@ function NoData(props: INoDataProps) {
         message='올바르지 않은 요청입니다.'
       />
     </Box>
+  );
+}
+
+interface ISubmitButtonProps {
+  formRefs: MutableRefObject<refMap>;
+  setAlertOn: Dispatch<SetStateAction<boolean>>;
+  setModalOpen: Dispatch<SetStateAction<boolean>>;
+  mode: ApplicationFormType;
+}
+
+function SubmitButton(props: ISubmitButtonProps) {
+  const { formRefs, setAlertOn, setModalOpen, mode } = props;
+  const userAnswers = useRecoilValue<IApplicantAnswer[]>(
+    userApplicationAnswerState
+  );
+
+  if (mode === 'VIEW' || mode === 'EDIT') return <></>;
+  return (
+    <>
+      <Button
+        className={applicationStyle.submitBtn}
+        variant='contained'
+        onClick={() =>
+          applicationFormCheck({
+            formRefs,
+            setAlertOn,
+            setModalOpen,
+            userAnswers,
+          })
+        }
+      >
+        제출하기
+      </Button>
+    </>
   );
 }
 
