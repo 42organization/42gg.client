@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ApplicationFormType } from 'types/recruit/recruitments';
-import ApplicationForm from 'components/recruit/ApplicationForm/ApplicationForm';
+import ApplicationForm from 'components/recruit/Application/ApplicationForm';
+import ApplicationFormHeader from 'components/recruit/Application/ApplicationFormHeader';
 import StickyHeader from 'components/recruit/StickyHeader';
 
 // todo: mode, recruitId, applicationId 인자로 받기
@@ -18,7 +19,7 @@ function Application() {
 
   return (
     <>
-      <StickyHeader
+      {/* <StickyHeader
         headerTitle={
           mode === 'APPLY'
             ? '지원서 작성'
@@ -26,7 +27,8 @@ function Application() {
             ? '지원서 보기'
             : '지원서 수정'
         }
-      />
+      /> */}
+      <ApplicationFormHeader mode={mode} />
       {/* todo: applicationId 처리 */}
       <ApplicationForm recruitId={test} applicationId={1} mode={mode} />
       <button onClick={() => clickContent()}>내용 테스트</button>

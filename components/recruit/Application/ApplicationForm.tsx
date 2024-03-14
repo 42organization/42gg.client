@@ -17,7 +17,7 @@ import {
 import { applicationFormCheck } from 'utils/handleApplicationForm';
 import { userApplicationAnswerState } from 'utils/recoil/application';
 import ApplyModal from 'components/modal/recruitment/ApplyModal';
-import ApplicationFormItem from 'components/recruit/ApplicationForm/ApplicationFormItem';
+import ApplicationFormItem from 'components/recruit/Application/ApplicationFormItem';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
 import useRecruitDetailUser from 'hooks/recruit/useRecruitDetailUser';
 import applicationStyle from 'styles/recruit/application.module.scss';
@@ -157,7 +157,7 @@ function SubmitButton(props: ISubmitButtonProps) {
     userApplicationAnswerState
   );
 
-  if (mode === 'VIEW' || mode === 'EDIT') return <></>;
+  if (mode !== 'APPLY') return <></>;
   return (
     <>
       <Button
