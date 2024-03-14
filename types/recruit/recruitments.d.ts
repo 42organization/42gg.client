@@ -16,6 +16,13 @@ export type recruitmentListData = {
   totalPage: number;
 };
 
+export type resultType = null | 'PROGRESS' | 'PASS' | 'FAIL';
+
+export type recruitmentResult = {
+  title: string;
+  status: resultType;
+  interviewDate: Date;
+};
 
 export interface ICheck {
   id: number;

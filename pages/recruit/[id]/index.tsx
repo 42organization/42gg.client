@@ -10,7 +10,7 @@ import 'react-quill/dist/quill.bubble.css';
 function Recruit() {
   const router = useRouter();
   const { data, isLoading } = useRecruitDetail({
-    id: parseInt(router.query.id as string),
+    recruitId: parseInt(router.query.id as string),
   });
 
   // TODO : 구체화 필요함.

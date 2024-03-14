@@ -64,6 +64,22 @@ export const dateToString = (d: Date) => {
 };
 
 /**
+ * @description 시간을 YYYY년 MM월 DD일 E요일 HH시 MM분 형식으로 반환
+ * @param {Date} d 시간 문자열
+ * @return 시간(YYYY년 MM월 DD일 E요일 HH시 MM분)
+ */
+
+export const dateToKRFullString = (d: Date) => {
+  const year = d.getFullYear();
+  const month = fillZero((d.getMonth() + 1).toString(), 2);
+  const date = fillZero(d.getDate().toString(), 2);
+  const day = ['일', '월', '화', '수', '목', '금', '토'][d.getDay()];
+  const hour = fillZero(d.getHours().toString(), 2);
+  const min = fillZero(d.getMinutes().toString(), 2);
+  return `${year}년 ${month}월 ${date}일 ${day}요일 ${hour}시 ${min}분`;
+};
+
+/**
  * 현재 시간에서 특정 분(minute) 전 시간을 반환
  * @description 목업 데이터를 위해 임시로 만든 함수
  * @param {number} min 분(minute)
