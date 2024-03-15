@@ -6,6 +6,13 @@ export type PartyRoomStatus = 'OPEN' | 'START' | 'FINISH' | 'HIDDEN' | 'FAIL';
 export type PartyRoom = {
   roomId: number;
   title: string;
+  categoryId: number;
+  currentPeople: number;
+  minPeople: number;
+  maxPeople: number;
+  dueDate: string;
+  createDate: string;
+  roomStatus: PartyRoomStatus;
   creatorIntraId?: string;
 };
 
@@ -38,7 +45,9 @@ export type PartyRoomUser = {
 
 export type PartyComment = {
   commentId: number;
-  nickname: string; // 촉촉한 초코칩
+  nickname: string;
+  intraid: string | null;
+  isexist: boolean;
   content: string;
   isHidden: boolean;
   createDate: string;
