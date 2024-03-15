@@ -117,3 +117,5 @@ export type PartyTemplateForm = {
   difficulty: string;
   summary: string;
 };
+
+export type PartyColors = 'PARTY-MAIN' | 'PARTY-DETAIL';
