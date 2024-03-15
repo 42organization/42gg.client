@@ -14,7 +14,7 @@ const beforeInterview = {
 
 const afterInterview = {
   title: '면접 시간 나왔습니다~',
-  status: 'PROGRESS',
+  status: 'INTERVIEW',
   interviewDate: new Date(),
 };
 
@@ -24,9 +24,15 @@ const pass = {
   interviewDate: new Date(),
 };
 
-const fail = {
-  title: '불합격입니다ㅠㅠ',
-  status: 'FAIL',
+const applicationFail = {
+  title: '지원서 불합격입니다ㅠㅠ',
+  status: 'APPLICATION_FAIL',
+  interviewDate: null,
+};
+
+const interviewFail = {
+  title: '면접 불합격입니다ㅠㅠ',
+  status: 'INTERVIEW_FAIL',
   interviewDate: new Date(),
 };
 
@@ -43,7 +49,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     case '4':
       return res.status(200).json(pass);
     case '5':
-      return res.status(200).json(fail);
+      return res.status(200).json(applicationFail);
+    case '6':
+      return res.status(200).json(interviewFail);
     default:
       return res.status(404).json(before);
   }
