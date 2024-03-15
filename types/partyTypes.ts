@@ -1,33 +1,40 @@
-export type PartyRoomStatus = 'OPEN' | 'START' | 'FINISH' | 'HIDDEN';
-
+export type PartyRoomStatus = 'OPEN' | 'START' | 'FINISH' | 'HIDDEN' | 'FAIL';
+/**
+ * @typedef {Object} PartyRoom
+ *  @property {string} [creatorIntraId] - adminAPI로 조회시 존재
+ */
 export type PartyRoom = {
   roomId: number;
   title: string;
-  categoryId: number;
-  currentPeople: number;
-  minPeople: number;
-  maxPeople: number;
-  dueDate: string;
-  createDate: string;
-  roomStatus: PartyRoomStatus;
   creatorIntraId?: string;
 };
 
+/**
+ * @typedef {Object} PartyRoomDetail
+ *  @property {string | null} [myNickname] - Room 참여시 존재
+ */
 export type PartyRoomDetail = PartyRoom & {
-  myNickname: string | null; // 촉촉한 초코칩
-  hostNickname: string; // 촉촉한 초코칩
+  myNickname: string | null;
+  hostNickname: string;
   content: string;
   roomUsers: PartyRoomUser[];
   comments: PartyComment[];
 };
 
+/**
+ * @typedef {Object} PartyRoomUser
+ *  @property {string | null} [intraId] - Room 시작시 or Admin으로 조회시 존재
+ */
 export type PartyRoomUser = {
   roomUserId: number;
   nickname: string;
-  intraId?: string;
+  intraId: string | null;
 };
 
-// 닉네임과 아이디를 가지고 있는 api를 만들어줌. 추가 필요.
+/**
+ * @typedef {Object} PartyRoomDetail
+ *  @property {string | null} [intraid] - Room 시작시 or Admin으로 조회시 존재
+ */
 
 export type PartyComment = {
   commentId: number;
@@ -82,7 +89,7 @@ export type PartyCommentReport = {
   createdAt: string;
 };
 
-export type PartyForm = {
+export type PartyCreateForm = {
   title: string;
   categoryId: number;
   minPeople: number;

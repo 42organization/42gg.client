@@ -18,7 +18,6 @@ export type TableName =
   | 'coinPolicyHistory'
   | 'tournament'
   | 'tournamentCreate'
-  | 'partyRoom'
   | 'partyCategory'
   | 'partyTemplate'
   | 'partyNoshowReport'

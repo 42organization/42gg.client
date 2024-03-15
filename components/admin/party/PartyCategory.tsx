@@ -26,7 +26,6 @@ export default function PartyCategories() {
   const handleConfirm = () => {
     if (newCategoryName.trim() !== '') {
       createCategory(newCategoryName);
-      console.log(newCategoryName);
     }
   };
 

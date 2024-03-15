@@ -37,6 +37,7 @@ export default function PartyTemplate() {
   useEffect(() => {
     console.log('Render');
   }, [templates]);
+
   const handleEditTemplate = (template?: PartyGameTemplate) => {
     setModal({ modalName: 'ADMIN-PARTY_TEMPLATE', template });
   };

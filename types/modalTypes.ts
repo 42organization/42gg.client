@@ -36,8 +36,6 @@ type StoreModal = 'MANUAL' | 'COIN_HISTORY';
 
 type TournamentModal = 'REGISTRY' | 'MANUAL';
 
-type PartyModal = 'REPORT';
-
 type AdminModal =
   | 'PROFILE'
   | 'USER-COIN'
@@ -56,7 +54,6 @@ type AdminModal =
   | 'CHECK_SEND_NOTI'
   | 'TOURNAMENT_BRAKET_EDIT'
   | 'TOURNAMENT_PARTICIPANT_EDIT'
-  | 'PARTY_EDIT'
   | 'PARTY_TEMPLATE';
 
 type ModalName =
@@ -73,8 +70,7 @@ type ModalName =
   | `EDIT-ITEM-${EditItemModal}`
   | `STORE-${StoreModal}`
   | `PURCHASE-${PurchaseModal}`
-  | `TOURNAMENT-${TournamentModal}`
-  | `PARTY-${PartyModal}`;
+  | `TOURNAMENT-${TournamentModal}`;
 
 export interface Cancel {
   startTime: string;

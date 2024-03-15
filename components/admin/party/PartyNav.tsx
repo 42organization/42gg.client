@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import styles from 'styles/party/PartyNav.module.scss';
+import AdminPartyReport from './AdminPartyReport';
 import PartyCategory from './PartyCategory';
-import PartyPenalty from './PartyPenalty';
-import PartyReport from './PartyReport';
-import PartyRoomTable from './PartyRoomTable';
 import PartyTemplate from './PartyTemplate';
 
 export default function PartyNav() {
@@ -29,9 +27,7 @@ export default function PartyNav() {
           </li>
         </ul>
 
-        {navValue === 'penalty' && <PartyPenalty />}
-        {navValue === 'report' && <PartyReport />}
-        {navValue === 'room' && <PartyRoomTable />}
+        {navValue === 'report' && <AdminPartyReport />}
         {navValue === 'template' && <PartyTemplate />}
         {navValue === 'category' && <PartyCategory />}
       </div>
