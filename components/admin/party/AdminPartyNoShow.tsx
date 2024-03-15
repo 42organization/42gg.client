@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import {
   Paper,
   Table,
@@ -11,7 +10,7 @@ import { PartyNoshowReport } from 'types/partyTypes';
 import { tableFormat } from 'constants/admin/table';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import { useAdminPartyNoshow } from 'hooks/party/useAdminPartyNoShow';
-import styles from 'styles/party/PartyMain.module.scss';
+import styles from 'styles/admin/Party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: '번호',
@@ -26,7 +25,7 @@ export default function AdminPartyNoShow() {
   const { noShowReports } = useAdminPartyNoshow();
 
   return (
-    <div className={styles.userManagementWrap}>
+    <div className={styles.AdminTableWrap}>
       <div className={styles.header}>
         <span className={styles.title}>노쇼 신고리스트</span>
       </div>

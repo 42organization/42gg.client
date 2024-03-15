@@ -13,7 +13,7 @@ import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import { usePartyTemplate } from 'hooks/party/usePartyTemplate';
-import styles from 'styles/party/PartyMain.module.scss';
+import styles from 'styles/admin/Party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   gameTemplateId: '템플릿번호',
@@ -52,7 +52,7 @@ export default function PartyTemplate() {
 
   return (
     <div>
-      <div className={styles.userManagementWrap}>
+      <div className={styles.AdminTableWrap}>
         <div className={styles.header}>
           <span className={styles.title}>템플릿 관리</span>
         </div>

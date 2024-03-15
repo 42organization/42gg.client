@@ -11,7 +11,7 @@ import { PartyCategory } from 'types/partyTypes';
 import { tableFormat } from 'constants/admin/table';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import usePartyCategory from 'hooks/party/usePartyCategory';
-import styles from 'styles/party/PartyMain.module.scss';
+import styles from 'styles/admin/Party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   categoryId: '카테고리번호',
@@ -26,11 +26,12 @@ export default function PartyCategories() {
   const handleConfirm = () => {
     if (newCategoryName.trim() !== '') {
       createCategory(newCategoryName);
+      setNewCategoryName('');
     }
   };
 
   return (
-    <div className={styles.userManagementWrap}>
+    <div className={styles.AdminTableWrap}>
       <div className={styles.header}>
         <span className={styles.title}>카테고리 관리</span>
         <div>

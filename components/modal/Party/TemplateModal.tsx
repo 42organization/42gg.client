@@ -45,8 +45,8 @@ export default function TemplateModal({
 
   return (
     <>
-      <div className={styles['modal-overlay']}>
-        <div className={styles['modal']}>
+      <div className={styles.modal_overlay}>
+        <div className={styles.modal}>
           <h2>{template ? '템플릿 변경' : '템플릿 추가'}</h2>
           <form onSubmit={handleSubmit}>
             <label>게임 이름: </label>

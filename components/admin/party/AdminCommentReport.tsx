@@ -10,7 +10,7 @@ import { PartyCommentReport } from 'types/partyTypes';
 import { tableFormat } from 'constants/admin/table';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import { useAdminPartyCommentReport } from 'hooks/party/useAdminPartyComment';
-import styles from 'styles/party/PartyMain.module.scss';
+import styles from 'styles/admin/Party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: '번호',
@@ -25,7 +25,7 @@ export default function AdminCommentReport() {
   const { commentReports } = useAdminPartyCommentReport();
 
   return (
-    <div className={styles.userManagementWrap}>
+    <div className={styles.AdminTableWrap}>
       <div className={styles.header}>
         <span className={styles.title}>댓글 신고리스트</span>
       </div>
