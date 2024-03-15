@@ -6,27 +6,25 @@
   height: 3rem;
   margin-bottom: 0.5rem;
   color: white;
-  //   te
   text-align: center;
-  //   background: #6953db;
   background: rgba(0, 0, 0, 0.33);
   border-radius: 1rem;
-  justify-content: center; /* 수평 가운데 정렬 */
-  align-items: center; /* 수직 가운데 정렬 */
+  justify-content: center;
+  align-items: center;
   & > div {
     display: flex;
-    justify-content: space-between; /* span 요소 사이에 공간을 일정하게 배분 */
+    justify-content: space-between;
     width: 100%;
   }
 }
 .block span {
-  flex-grow: 0; /* 고정 크기 */
-  flex-shrink: 0; /* 고정 크기 */
-  flex-basis: 30%; /* 초기 크기 설정 (임의의 값) */
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 30%;
 }
 
 .container {
-  padding: 0.5rem; /* 컨테이너 안쪽 여백 설정 */
+  padding: 0.5rem;
   background: linear-gradient(180deg, #8218e6 0%, #8110d7 100%);
   border-radius: $small-radius;
 }

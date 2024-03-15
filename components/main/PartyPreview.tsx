@@ -1,9 +1,8 @@
-import usePartyRoom from 'hooks/party/usePartyList';
+import usePartyRoomList from 'hooks/party/usePartyRoomList';
 import styles from 'styles/main/PartyPreview.module.scss';
 export default function PartyPreview() {
-  const { partyRooms } = usePartyRoom();
+  const { partyRooms } = usePartyRoomList();
   const limitedRooms = partyRooms.slice(0, 3);
-  console.log(partyRooms);
   return (
     <div className={styles.container}>
       <ul>
