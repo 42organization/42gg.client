@@ -29,10 +29,6 @@ export default function PartyCategories() {
     }
   };
 
-  const deletehandler = (categoryId: number) => {
-    deleteCategory(categoryId);
-  };
-
   return (
     <div className={styles.userManagementWrap}>
       <div className={styles.header}>
@@ -65,7 +61,7 @@ export default function PartyCategories() {
                     >
                       {columnName === 'delete' ? (
                         <button
-                          onClick={() => deletehandler(c.categoryId)}
+                          onClick={() => deleteCategory(c.categoryId)}
                           className={`${styles.button_1} ${styles.delete}`}
                         >
                           삭제
