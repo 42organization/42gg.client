@@ -16,7 +16,13 @@ export type recruitmentListData = {
   totalPage: number;
 };
 
-export type resultType = null | 'PROGRESS' | 'PASS' | 'FAIL';
+export type resultType =
+  | null
+  | 'PROGRESS'
+  | 'APPLICATION_FAIL'
+  | 'INTERVIEW'
+  | 'PASS'
+  | 'INTERVIEW_FAIL';
 
 export type recruitmentResult = {
   title: string;

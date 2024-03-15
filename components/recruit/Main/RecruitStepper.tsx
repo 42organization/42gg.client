@@ -16,35 +16,32 @@ import {
 import { resultType } from 'types/recruit/recruitments';
 import style from 'styles/recruit/Main/myRecruitment.module.scss';
 
-const RecruitStepper = ({
-  status,
-  interviewDate,
-}: {
-  status: resultType;
-  interviewDate?: Date;
-}) => {
+const RecruitStepper = ({ status }: { status: resultType }) => {
   return (
     <Stepper
       className={style.stepper}
-      activeStep={statusToStep(status, interviewDate)}
+      activeStep={statusToStep(status)}
       alternativeLabel
       connector={<StyledConnector />}
     >
-      {stepMessage.map((label) => (
-        <Step key={label}>
-          <StyledLabel StepIconComponent={StepIcon}>{label}</StyledLabel>
-        </Step>
-      ))}
+      {stepMessage.map((label) => {
+        if (status === 'APPLICATION_FAIL' && label === '면접') return null; // 지원서 불합격 시 면접 단계 제거
+        return (
+          <Step key={label}>
+            <StyledLabel StepIconComponent={StepIcon}>{label}</StyledLabel>
+          </Step>
+        );
+      })}
     </Stepper>
   );
 };
 
 const stepMessage = ['지원서 확인', '면접', '결과 발표'];
 
-const statusToStep = (status: resultType, interviewDate?: Date) => {
-  if (status === 'PROGRESS' && !interviewDate) return 0; // '지원서 확인'
-  if (status === 'PROGRESS' && interviewDate) return 1; // '면접'
-  if (status === 'PASS' || status === 'FAIL') return 2;
+const statusToStep = (status: resultType) => {
+  if (status === 'PROGRESS') return 0;
+  if (status === 'INTERVIEW' || status === 'APPLICATION_FAIL') return 1; // 면접 전 상태
+  if (status === 'PASS' || status === 'INTERVIEW_FAIL') return 2; // 면접 후 상태
   return 0;
 };
 
