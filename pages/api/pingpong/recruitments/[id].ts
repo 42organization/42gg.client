@@ -71,7 +71,7 @@ const sampleContents =
   '<p class="ql-align-center"><br></p><p class="ql-align-center"><span class="ql-size-large">🎮</span><strong class="ql-size-large"> 42GG 신규 모집 </strong><span class="ql-size-large">🎮</span></p><p class="ql-align-center"><br></p><p class="ql-align-center">X월 XX일(수) XX:XX까지</p><p class="ql-align-center">면접 대상자 발표 : XX월 XX일</p><p class="ql-align-center">활동 일정 : X월 ~ X월</p><p class="ql-align-center">프론트, 백엔드 각 N명!</p><p class="ql-align-center"><br></p><p class="ql-align-center"><br></p><p class="ql-align-center">👩🏻‍💻 나도 가능하다고? ☞ <a href="https://42gg.kr/" rel="noopener noreferrer" target="_blank">링크</a> 🔥</p>';
 
 const recruitmentDetailOne = {
-  applicantId: 1,
+  applicationId: 1,
   startDate: '2024-03-04 12:12',
   endDate: '2024-03-04 14:12',
   title: '42GG 모집 1기',
@@ -81,7 +81,7 @@ const recruitmentDetailOne = {
 };
 
 const recruitmentDetailTwo = {
-  applicantId: 1,
+  applicationId: 1,
   startDate: '2024-12-04 00:12',
   endDate: '2024-12-04 00:12',
   title: '42GG 모집 2기',
@@ -91,7 +91,7 @@ const recruitmentDetailTwo = {
 };
 
 const recruitmentDetailThree = {
-  applicantId: 1,
+  applicationId: 1,
   startDate: '2024-12-04 00:12',
   endDate: '2024-12-04 00:12',
   title: '42GG 모집 3기',
@@ -101,7 +101,7 @@ const recruitmentDetailThree = {
 };
 
 const recruitmentDetailFour = {
-  applicantId: 1,
+  applicationId: 1,
   startDate: '2024-12-04 00:12',
   endDate: '2024-12-04 00:12',
   title: '42GG 모집 4기',
@@ -111,7 +111,7 @@ const recruitmentDetailFour = {
 };
 
 const recruitmentDetailFive = {
-  applicantId: 1,
+  applicationId: 1,
   startDate: '2024-12-04 00:12',
   endDate: '2024-12-04 00:12',
   title: '42GG 모집 5기',
@@ -121,7 +121,7 @@ const recruitmentDetailFive = {
 };
 
 const recruitmentDetailSix = {
-  applicantId: 1,
+  applicationId: 1,
   startDate: '2024-12-04 00:12',
   endDate: '2024-12-04 00:12',
   title: '긴 내용을 테스트!!!! 42GG 6기',

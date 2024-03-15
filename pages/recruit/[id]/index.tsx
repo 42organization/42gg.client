@@ -31,7 +31,7 @@ function Recruit() {
         theme='bubble'
       />
       <Button
-        disabled={!!data.applicantId}
+        disabled={!!data.applicationId}
         size={'large'}
         variant='contained'
         color='primary'
@@ -39,7 +39,7 @@ function Recruit() {
         지원하기
       </Button>
       <div className={style.divider} />
-      <MyRecruitment applicantId={data.applicantId} />
+      <MyRecruitment applicationId={data.applicationId} />
     </>
   );
 }

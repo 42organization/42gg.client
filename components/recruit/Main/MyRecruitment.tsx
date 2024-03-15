@@ -7,9 +7,12 @@ import CollapseListItem from './CollapseListItem';
 import MyApplicationInfo from './MyApplicationInfo';
 import MyRecruitStatus from './MyRecruitStatus';
 
-const MyRecruitment = ({ applicantId }: { applicantId?: number }) => {
+const MyRecruitment = ({ applicationId }: { applicationId?: number }) => {
   const router = useRouter();
-  const { data } = useGetRecruitResult(router.query.id as string, applicantId);
+  const { data } = useGetRecruitResult(
+    router.query.id as string,
+    applicationId
+  );
   const { status, interviewDate } = data || {}; // TODO : 에러가 난 경우 적절한 처리 필요함.
   return (
     <div className={style.container}>
