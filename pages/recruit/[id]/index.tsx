@@ -39,7 +39,7 @@ function Recruit() {
         지원하기
       </Button>
       <div className={style.divider} />
-      <MyRecruitment />
+      <MyRecruitment applicantId={data.applicantId} />
     </>
   );
 }
