@@ -37,6 +37,7 @@ export interface IQuestionForm {
 }
 
 export interface IRecruitmentDetail {
+  applicantId?: number; // 유저가 지원하지 않은 경우에는 applicantId가 없다.
   startDate: string;
   endDate: string;
   title: string;
