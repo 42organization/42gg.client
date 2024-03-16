@@ -1,0 +1,179 @@
+@import 'styles/common.scss';
+
+$detailCommonRem: 1rem;
+
+.detailPage {
+  @include pageWrap;
+
+  .titleBox {
+
+    position: relative;
+    padding: $detailCommonRem;
+    background-color: white;
+    border-radius: $mini-radius;
+
+    .titleLine {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      .titleCategory {
+        font-size: $small-font;
+      }
+
+      .shareBtn {
+        position: relative;
+        text-align: right;
+        background-color: inherit;
+        border: none;
+      }
+
+      .reportRoomBtn {
+        position: relative;
+        text-align: right;
+        background-color: inherit;
+        border: none;
+      }
+    }
+    .titleContent {
+      max-width: 100;
+      margin: 0.3rem 0;
+      font-size: $big-font;
+      font-weight: bold;
+    }
+
+    .remainTime {
+      padding: 0.2rem;
+      margin-top: 0.2rem;
+      font-size: $small-font;
+      color: aliceblue;
+      background-color: $pp-gray;
+      border-radius: $medium-radius;
+    }
+  }
+
+  .profile {
+    position: relative;
+    width: 100%;
+    margin-top: $detailCommonRem;
+    color: white;
+
+    .profileItem {
+      text-align: center;
+      li {
+        display: inline-block;
+        margin-right: 0.5rem;
+      }
+      .crown {
+        position: relative;
+        top: 0.4rem;
+        left: -0.8rem;
+        transform: rotate(-30deg);
+      }
+
+      .profileImg {
+        text-align: center;
+        border-radius: $big-radius;
+      }
+    }
+
+    .joinBtn {
+      width: 50%;
+      height: 3rem;
+      margin-bottom: $detailCommonRem;
+      font-size: $big-font;
+      border-radius: $small-radius;
+    }
+
+    .btnContainer {
+      text-align: right;
+      .leaveBtn {
+        width: 50%;
+        height: 3rem;
+        margin-bottom: $detailCommonRem;
+        font-size: $big-font;
+        border-radius: $small-radius;
+      }
+
+      .startBtn {
+        width: 50%;
+        height: 3rem;
+        margin-bottom: $detailCommonRem;
+        font-size: $big-font;
+        border-radius: $small-radius;
+      }
+    }
+
+    .line {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .user {
+      border: 0.5rem;
+    }
+  }
+
+  .contentCommentBox {
+    position: relative;
+    width: 100%;
+    padding: $detailCommonRem;
+    background-color: white;
+    border-radius: $mini-radius;
+
+    .content {
+      min-height: 13rem;
+      margin-bottom: $detailCommonRem;
+    }
+
+    .comment {
+      margin-top: $detailCommonRem * 2;
+      margin-bottom: 0.3;
+    }
+
+    .commentHidden {
+      margin-top: $detailCommonRem * 2;
+      margin-bottom: 0.3;
+      color: gray;
+      opacity: 0.7;
+    }
+
+    .commentInfo {
+      text-align: right;
+
+      .commentBtn {
+        position: relative;
+        text-align: right;
+        background-color: inherit;
+        border: none;
+      }
+    }
+  }
+
+  .commentCreateBar {
+    padding: 0.01rem;
+    margin-top: $detailCommonRem * 0.5;
+    background-color: white;
+    border-radius: $big-radius;
+
+    form {
+      display: flex;
+      align-items: center;
+
+      .textBar {
+        margin-left: 0.5rem;
+        font-size: $medium-font;
+        border: none;
+      }
+
+      .inputBtn {
+        display: flex;
+        font-size: $small-font;
+        background-color: inherit;
+        border: none;
+        align-items: center;
+      }
+    }
+  }
+}
