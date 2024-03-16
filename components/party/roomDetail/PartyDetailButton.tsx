@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
+import { CiShare2 } from 'react-icons/ci';
+import { PiSirenFill } from 'react-icons/pi';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
-
+import styles from 'styles/party/PartyDetailRoom.module.scss';
 type ParytButtonProps = {
   roomId?: number;
   commentId?: number;
@@ -13,6 +15,7 @@ function ReportComment({ commentId }: ParytButtonProps) {
 
   return (
     <button
+      className={styles.commentBtn}
       onClick={() => {
         setModal({
           partyReport: {
@@ -23,7 +26,7 @@ function ReportComment({ commentId }: ParytButtonProps) {
         });
       }}
     >
-      신고
+      <PiSirenFill color='red' />
     </button>
   );
 }
@@ -33,6 +36,7 @@ function ReportRoom({ roomId }: ParytButtonProps) {
 
   return (
     <button
+      className={styles.reportRoomBtn}
       onClick={() => {
         setModal({
           partyReport: {
@@ -43,7 +47,7 @@ function ReportRoom({ roomId }: ParytButtonProps) {
         });
       }}
     >
-      방 신고
+      <PiSirenFill color='red' />
     </button>
   );
 }
@@ -53,11 +57,12 @@ function ShareRoom() {
 
   return (
     <button
+      className={styles.shareBtn}
       onClick={() => {
         navigator.clipboard.writeText(`http://42gg.kr/parties/${roomId}`);
       }}
     >
-      공유하기
+      <CiShare2 />
     </button>
   );
 }
@@ -74,7 +79,11 @@ function JoinRoom({ roomId, fetchRoomDetail }: ReprashProps) {
     fetchRoomDetail();
   };
 
-  return <button onClick={handlerJoin}>참여하기</button>;
+  return (
+    <button className={styles.joinBtn} onClick={handlerJoin}>
+      참여하기
+    </button>
+  );
 }
 
 function LeaveRoom({ roomId, fetchRoomDetail }: ReprashProps) {
@@ -85,7 +94,11 @@ function LeaveRoom({ roomId, fetchRoomDetail }: ReprashProps) {
     fetchRoomDetail();
   };
 
-  return <button onClick={handlerExit}>방 나가기</button>;
+  return (
+    <button className={styles.leaveBtn} onClick={handlerExit}>
+      방 나가기
+    </button>
+  );
 }
 
 function StartRoom() {
@@ -93,6 +106,7 @@ function StartRoom() {
 
   return (
     <button
+      className={styles.startBtn}
       onClick={() => {
         instance.patch(`/party/rooms/${roomId}/start`).catch((error) => {
           console.error(error);
@@ -103,6 +117,8 @@ function StartRoom() {
     </button>
   );
 }
+
+// TODO: 버튼에 css입히기
 
 function BackRoomList() {
   const router = useRouter();
