@@ -29,18 +29,15 @@ export default function AdminPartyNoShow() {
       <div className={styles.header}>
         <span className={styles.title}>노쇼 신고리스트</span>
       </div>
-      <TableContainer className={styles.tableContainer} component={Paper}>
-        <Table className={styles.table} aria-label='UserManagementTable'>
+      <TableContainer component={Paper}>
+        <Table aria-label='UserManagementTable'>
           <AdminTableHead tableName={'partyNoshowReport'} table={tableTitle} />
-          <TableBody className={styles.tableBody}>
+          <TableBody>
             {noShowReports.map((rn) => (
-              <TableRow key={rn.id} className={styles.tableRow}>
+              <TableRow key={rn.id}>
                 {tableFormat['partyNoshowReport'].columns.map((columnName) => {
                   return (
-                    <TableCell
-                      className={styles.tableBodyItem}
-                      key={columnName}
-                    >
+                    <TableCell key={columnName}>
                       {rn[columnName as keyof PartyNoshowReport]?.toString()}
                     </TableCell>
                   );

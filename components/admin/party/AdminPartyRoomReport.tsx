@@ -29,18 +29,15 @@ export default function AdminPartyRoomReport() {
       <div className={styles.header}>
         <span className={styles.title}>방 신고리스트</span>
       </div>
-      <TableContainer className={styles.tableContainer} component={Paper}>
-        <Table className={styles.table} aria-label='UserManagementTable'>
+      <TableContainer component={Paper}>
+        <Table aria-label='UserManagementTable'>
           <AdminTableHead tableName={'partyRoomReport'} table={tableTitle} />
-          <TableBody className={styles.tableBody}>
+          <TableBody>
             {roomReports.map((r) => (
-              <TableRow key={r.id} className={styles.tableRow}>
+              <TableRow key={r.id}>
                 {tableFormat['partyRoomReport'].columns.map((columnName) => {
                   return (
-                    <TableCell
-                      className={styles.tableBodyItem}
-                      key={columnName}
-                    >
+                    <TableCell key={columnName}>
                       {r[columnName as keyof PartyRoomReport]?.toString()}
                     </TableCell>
                   );

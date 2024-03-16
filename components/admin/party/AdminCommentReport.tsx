@@ -29,18 +29,15 @@ export default function AdminCommentReport() {
       <div className={styles.header}>
         <span className={styles.title}>댓글 신고리스트</span>
       </div>
-      <TableContainer className={styles.tableContainer} component={Paper}>
-        <Table className={styles.table} aria-label='UserManagementTable'>
+      <TableContainer component={Paper}>
+        <Table aria-label='UserManagementTable'>
           <AdminTableHead tableName={'partyCommentReport'} table={tableTitle} />
-          <TableBody className={styles.tableBody}>
+          <TableBody>
             {commentReports.map((rc) => (
-              <TableRow key={rc.id} className={styles.tableRow}>
+              <TableRow key={rc.id}>
                 {tableFormat['partyCommentReport'].columns.map((columnName) => {
                   return (
-                    <TableCell
-                      className={styles.tableBodyItem}
-                      key={columnName}
-                    >
+                    <TableCell key={columnName}>
                       {rc[columnName as keyof PartyCommentReport]?.toString()}
                     </TableCell>
                   );

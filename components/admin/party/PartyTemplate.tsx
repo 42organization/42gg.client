@@ -62,18 +62,15 @@ export default function PartyTemplate() {
         >
           추가
         </button>
-        <TableContainer className={styles.tableContainer} component={Paper}>
-          <Table className={styles.table} aria-label='UserManagementTable'>
+        <TableContainer component={Paper}>
+          <Table aria-label='UserManagementTable'>
             <AdminTableHead tableName={'partyTemplate'} table={tableTitle} />
-            <TableBody className={styles.tableBody}>
+            <TableBody>
               {templates.map((t) => (
-                <TableRow key={t.gameTemplateId} className={styles.tableRow}>
+                <TableRow key={t.gameTemplateId}>
                   {tableFormat['partyTemplate'].columns.map((columnName) => {
                     return (
-                      <TableCell
-                        className={styles.tableBodyItem}
-                        key={columnName}
-                      >
+                      <TableCell key={columnName}>
                         {columnName === 'change' && (
                           <button
                             onClick={() => handleEditTemplate(t)}
