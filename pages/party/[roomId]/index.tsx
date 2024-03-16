@@ -2,9 +2,10 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { PartyRoomDetail } from 'types/partyTypes';
 import { instance } from 'utils/axios';
-import PartyDetailCommentBox from 'components/party/roomDetail/PartyDetailCommentBox';
+import PartyDetailContentCommentBox from 'components/party/roomDetail/PartyDetailContentCommentBox';
 import PartyDetailProfile from 'components/party/roomDetail/PartyDetailProfile';
 import PartyDetailTitleBox from 'components/party/roomDetail/PartyDetailTitleBox';
+import styles from 'styles/party/PartyDetailRoom.module.scss';
 
 export default function PartyDetailPage() {
   const roomId = useRouter().query.roomId;
@@ -28,13 +29,13 @@ export default function PartyDetailPage() {
   };
 
   return partyRoomDetail && partyRoomDetail.roomStatus !== 'HIDDEN' ? (
-    <div>
+    <div className={styles.detailPage}>
       <PartyDetailTitleBox {...partyRoomDetail} />
       <PartyDetailProfile
         partyRoomDetail={partyRoomDetail}
         fetchRoomDetail={fetchRoomDetail}
       />
-      <PartyDetailCommentBox
+      <PartyDetailContentCommentBox
         partyRoomDetail={partyRoomDetail}
         fetchRoomDetail={fetchRoomDetail}
       />
