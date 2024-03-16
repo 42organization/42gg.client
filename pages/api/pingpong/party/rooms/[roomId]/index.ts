@@ -30,16 +30,19 @@ export default function handler(
           userRoomId: 1,
           nickname: 'host',
           intraId: 'juha',
+          intraImg: `https://avatars.githubusercontent.com/u/68673565?v=4`,
         },
         {
           userRoomId: 2,
           nickname: 'guest1',
           intraId: 'wojeong',
+          intraImg: null,
         },
         {
           userRoomId: 3,
           nickname: 'guest2',
           intraId: 'jeywon',
+          intraImg: null,
         },
       ],
       comments: [
