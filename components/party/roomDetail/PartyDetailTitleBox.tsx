@@ -1,5 +1,6 @@
 import { getRemainTime } from 'utils/handleTime';
 import usePartyCategory from 'hooks/party/usePartyCategory';
+import styles from 'styles/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
 
 type PartyDetailTitleBoxProps = {
@@ -20,12 +21,18 @@ export default function PartyDetailTitleBox({
   )?.categoryName;
 
   return (
-    <>
-      <span>{`#${category}`}</span>
-      <PartyRoomDetailButton.ShareRoom />
-      <span>{title}</span>
-      <span>{getRemainTime({ targetTime: new Date(dueDate) })}</span>
-      <PartyRoomDetailButton.ReportRoom roomId={roomId} />
-    </>
+    <div className={styles.titleBox}>
+      <div className={styles.titleLine}>
+        <div className={styles.titleCategory}>{`#${category}`}</div>
+        <PartyRoomDetailButton.ShareRoom />
+      </div>
+      <div className={styles.titleContent}>{title}</div>
+      <div className={styles.titleLine}>
+        <span className={styles.remainTime}>
+          {getRemainTime({ targetTime: new Date(dueDate) })}
+        </span>
+        <PartyRoomDetailButton.ReportRoom roomId={roomId} />
+      </div>
+    </div>
   );
 }
