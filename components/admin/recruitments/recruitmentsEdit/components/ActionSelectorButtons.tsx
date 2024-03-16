@@ -19,28 +19,31 @@ export default function recruitmentsEdit({
 }: ActionSelectorButtonsProps) {
   return (
     <div className={styles.mainContainer}>
-      <div className={styles.importWrapper}>
-        <FormControl fullWidth size='small'>
-          <InputLabel>기존 공고</InputLabel>
-          <Select
-            value='TEXT'
-            label='기존 공고'
-            // onChange={selectChangehandler}
-          >
-            <MenuItem value={'TEXT'}>1회 모집공고</MenuItem>
-            <MenuItem value={'SINGLE_CHECK'}>2회 모집공고</MenuItem>
-            <MenuItem value={'MULTI_CHECK'}>3회 모집공고</MenuItem>
-          </Select>
-        </FormControl>
-        {actionType === 'CREATE' && (
+      {actionType === 'CREATE' ? (
+        <div className={styles.importWrapper}>
+          <FormControl fullWidth size='small'>
+            <InputLabel>기존 공고</InputLabel>
+            <Select
+              value='TEXT'
+              label='기존 공고'
+              style={{ backgroundColor: 'white' }}
+              // onChange={selectChangehandler}
+            >
+              <MenuItem value={'TEXT'}>1회 모집공고</MenuItem>
+              <MenuItem value={'SINGLE_CHECK'}>2회 모집공고</MenuItem>
+              <MenuItem value={'MULTI_CHECK'}>3회 모집공고</MenuItem>
+            </Select>
+          </FormControl>
           <Button
             variant='contained'
-            style={{ marginLeft: '0.5rem', width: '100%' }}
+            style={{ marginLeft: '0.5rem', width: '8rem' }}
           >
             불러오기
           </Button>
-        )}
-      </div>
+        </div>
+      ) : (
+        <></>
+      )}
       {actionType === 'CREATE' && (
         <Button variant='contained'>공고 생성</Button>
       )}

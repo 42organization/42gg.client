@@ -20,22 +20,8 @@ interface RecruitmentEditProps {
   setPageType: Dispatch<SetStateAction<'MAIN' | 'EDIT'>>;
 }
 export default function RecruitmentEdit({ setPageType }: RecruitmentEditProps) {
-  const {
-    recruitmentEditInfo,
-    setTitle,
-    setStartDate,
-    setEndDate,
-    setGeneration,
-    setContent,
-    setQuestionContent,
-    setCheckItemContent,
-    addEmptyQuestion,
-    addCheckItemToQuestion,
-    removeQuestion,
-    removeCheckItemFromQuestion,
-    changeQuestionInputType,
-    switchQuestionIndex,
-  } = useRecruitmentEditInfo(initRecruitmentEditInfo);
+  const { recruitmentEditInfo, setRecruitmentEditInfoField, formManager } =
+    useRecruitmentEditInfo(initRecruitmentEditInfo);
 
   return (
     <div className={styles.container}>
@@ -48,25 +34,15 @@ export default function RecruitmentEdit({ setPageType }: RecruitmentEditProps) {
       </button>
       <TitleTimeRangeSelector
         recruitmentEditInfo={recruitmentEditInfo}
-        setTitle={setTitle}
-        setStartDate={setStartDate}
-        setEndDate={setEndDate}
-        setGeneration={setGeneration}
+        setRecruitmentEditInfoField={setRecruitmentEditInfoField}
       />
       <QuillDescriptionEditor
         content={recruitmentEditInfo.content}
-        setContent={setContent}
+        setRecruitmentEditInfoField={setRecruitmentEditInfoField}
       />
       <QuestionFormBuilder
         form={recruitmentEditInfo.form}
-        setQuestionContent={setQuestionContent}
-        setCheckItemContent={setCheckItemContent}
-        addEmptyQuestion={addEmptyQuestion}
-        addCheckItemToQuestion={addCheckItemToQuestion}
-        removeQuestion={removeQuestion}
-        removeCheckItemFromQuestion={removeCheckItemFromQuestion}
-        changeQuestionInputType={changeQuestionInputType}
-        switchQuestionIndex={switchQuestionIndex}
+        formManager={formManager}
       />
       <ActionSelectorButtons
         recruitmentEditInfo={recruitmentEditInfo}

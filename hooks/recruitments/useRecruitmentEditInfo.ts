@@ -5,30 +5,32 @@ import {
   IrecruitEditInfo,
 } from 'types/admin/adminRecruitmentsTypes';
 
+export interface IFormManager {
+  setQuestionContent: (questionIdx: number, content: string) => void;
+  setCheckItemContent: (
+    questionIdx: number,
+    checkItemIdx: number,
+    content: string
+  ) => void;
+  addEmptyQuestion: (questionIdx: number, inputType: string) => void;
+  removeQuestion: (questionIdx: number) => void;
+  addCheckItemToQuestion: (questionIdx: number) => void;
+  removeCheckItemFromQuestion: (
+    checkItemIdx: number,
+    questionIdx: number
+  ) => void;
+  changeQuestionInputType: (questionIdx: number, inputType: string) => void;
+  switchQuestionIndex: (questionIdx: number, targetIdx: number) => void;
+}
+
 export default function useRecruitmentEditInfo(
   initRecruitmentEditInfo: IrecruitEditInfo
 ) {
   const [recruitmentEditInfo, setRecruitmentEditInfo] =
     useState<IrecruitEditInfo>(initRecruitmentEditInfo);
 
-  const setTitle = (title: string) => {
-    setRecruitmentEditInfo((prev) => ({ ...prev, title: title }));
-  };
-
-  const setStartDate = (startDate: string) => {
-    setRecruitmentEditInfo((prev) => ({ ...prev, startDate: startDate }));
-  };
-
-  const setEndDate = (endDate: string) => {
-    setRecruitmentEditInfo((prev) => ({ ...prev, endDate: endDate }));
-  };
-
-  const setGeneration = (generation: string) => {
-    setRecruitmentEditInfo((prev) => ({ ...prev, generation: generation }));
-  };
-
-  const setContent = (content: string) => {
-    setRecruitmentEditInfo((prev) => ({ ...prev, content: content }));
+  const setRecruitmentEditInfoField = (fieldName: string, value: any) => {
+    setRecruitmentEditInfo((prev) => ({ ...prev, [fieldName]: value }));
   };
 
   const setQuestionContent = (questionIdx: number, content: string) => {
@@ -36,10 +38,7 @@ export default function useRecruitmentEditInfo(
     const question = updatedForm[questionIdx];
     question.question = content;
 
-    setRecruitmentEditInfo({
-      ...recruitmentEditInfo,
-      form: updatedForm,
-    });
+    updateRecruitFrom(updatedForm);
   };
 
   const setCheckItemContent = (
@@ -54,10 +53,7 @@ export default function useRecruitmentEditInfo(
     const checkItem = question.checkList[checkItemIdx];
     checkItem.content = content;
 
-    setRecruitmentEditInfo({
-      ...recruitmentEditInfo,
-      form: updatedForm,
-    });
+    updateRecruitFrom(updatedForm);
   };
 
   const addEmptyQuestion = (questionIdx: number, inputType: string) => {
@@ -67,20 +63,14 @@ export default function useRecruitmentEditInfo(
 
     updatedForm.splice(questionIdx + 1, 0, question);
 
-    setRecruitmentEditInfo({
-      ...recruitmentEditInfo,
-      form: updatedForm,
-    });
+    updateRecruitFrom(updatedForm);
   };
 
   const removeQuestion = (questionIdx: number) => {
     const updatedForm = [...recruitmentEditInfo.form];
     updatedForm.splice(questionIdx, 1);
 
-    setRecruitmentEditInfo({
-      ...recruitmentEditInfo,
-      form: updatedForm,
-    });
+    updateRecruitFrom(updatedForm);
   };
 
   const addCheckItemToQuestion = (questionIdx: number) => {
@@ -102,10 +92,7 @@ export default function useRecruitmentEditInfo(
         question.checkList.splice(question.checkList.length, 0, checkItem);
       }
 
-      setRecruitmentEditInfo({
-        ...recruitmentEditInfo,
-        form: updatedForm,
-      });
+      updateRecruitFrom(updatedForm);
     }
   };
 
@@ -119,10 +106,7 @@ export default function useRecruitmentEditInfo(
 
     if (question.checkList) {
       question.checkList.splice(checkItemIdx, 1);
-      setRecruitmentEditInfo({
-        ...recruitmentEditInfo,
-        form: updatedForm,
-      });
+      updateRecruitFrom(updatedForm);
     }
   };
 
@@ -137,10 +121,7 @@ export default function useRecruitmentEditInfo(
       updatedForm.splice(questionIdx, 1, emptyQuestion);
     }
 
-    setRecruitmentEditInfo({
-      ...recruitmentEditInfo,
-      form: updatedForm,
-    });
+    updateRecruitFrom(updatedForm);
   };
 
   const switchQuestionIndex = (questionIdx: number, targetIdx: number) => {
@@ -151,11 +132,15 @@ export default function useRecruitmentEditInfo(
     updatedForm.splice(questionIdx, 1);
     updatedForm.splice(targetIdx, 0, question);
 
+    updateRecruitFrom(updatedForm);
+  };
+
+  function updateRecruitFrom(updatedForm: Iquestion[]) {
     setRecruitmentEditInfo({
       ...recruitmentEditInfo,
       form: updatedForm,
     });
-  };
+  }
 
   function makeEmptyQuestion(inputType: string): Iquestion | null {
     switch (inputType) {
@@ -181,20 +166,20 @@ export default function useRecruitmentEditInfo(
     }
   }
 
-  return {
-    recruitmentEditInfo,
-    setTitle,
-    setStartDate,
-    setEndDate,
-    setGeneration,
-    setContent,
+  const formManager: IFormManager = {
     setQuestionContent,
     setCheckItemContent,
     addEmptyQuestion,
-    addCheckItemToQuestion,
     removeQuestion,
+    addCheckItemToQuestion,
     removeCheckItemFromQuestion,
     changeQuestionInputType,
     switchQuestionIndex,
+  };
+
+  return {
+    recruitmentEditInfo,
+    setRecruitmentEditInfoField,
+    formManager,
   };
 }

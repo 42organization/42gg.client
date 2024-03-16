@@ -11,43 +11,35 @@ import {
   IconButton,
   InputLabel,
   MenuItem,
+  Paper,
   Radio,
   RadioGroup,
   Select,
   SelectChangeEvent,
   TextField,
+  Tooltip,
 } from '@mui/material';
 import { IcheckItem, Iquestion } from 'types/admin/adminRecruitmentsTypes';
 import DraggableList from 'components/UI/DraggableList';
+import { IFormManager } from 'hooks/recruitments/useRecruitmentEditInfo';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/QuestionFormBuilder.module.scss';
 
 interface CheckInputProps {
   checkList: IcheckItem[] | undefined;
   questionIdx: number;
-  setCheckItemContent: (
-    questionIdx: number,
-    checkItemIdx: number,
-    content: string
-  ) => void;
-  addCheckItemToQuestion: (questionIdx: number) => void;
-  removeCheckItemFromQuestion: (
-    questionIdx: number,
-    checkItemIdx: number
-  ) => void;
+  formManager: IFormManager;
 }
 
 function MultiCheckInput({
   checkList,
   questionIdx,
-  setCheckItemContent,
-  addCheckItemToQuestion,
-  removeCheckItemFromQuestion,
+  formManager,
 }: CheckInputProps) {
   const inputChangeHandler = (
     { target }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     idx: number
   ) => {
-    setCheckItemContent(questionIdx, idx, target.value);
+    formManager.setCheckItemContent(questionIdx, idx, target.value);
   };
   return (
     <>
@@ -72,7 +64,9 @@ function MultiCheckInput({
               <Grid item xs={1}>
                 <IconButton
                   aria-label='delete'
-                  onClick={() => removeCheckItemFromQuestion(idx, questionIdx)}
+                  onClick={() =>
+                    formManager.removeCheckItemFromQuestion(idx, questionIdx)
+                  }
                 >
                   <ClearIcon />
                 </IconButton>
@@ -82,7 +76,8 @@ function MultiCheckInput({
         })}
       <IconButton
         aria-label='addCheckItem'
-        onClick={() => addCheckItemToQuestion(questionIdx)}
+        onClick={() => formManager.addCheckItemToQuestion(questionIdx)}
+        style={{ width: '100%' }}
       >
         <AddIcon />
       </IconButton>
@@ -93,15 +88,13 @@ function MultiCheckInput({
 function SingleCheckInput({
   checkList,
   questionIdx,
-  setCheckItemContent,
-  addCheckItemToQuestion,
-  removeCheckItemFromQuestion,
+  formManager,
 }: CheckInputProps) {
   const inputChangeHandler = (
     { target }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     idx: number
   ) => {
-    setCheckItemContent(questionIdx, idx, target.value);
+    formManager.setCheckItemContent(questionIdx, idx, target.value);
   };
 
   return (
@@ -127,7 +120,9 @@ function SingleCheckInput({
               <Grid item xs={1}>
                 <IconButton
                   aria-label='delete'
-                  onClick={() => removeCheckItemFromQuestion(idx, questionIdx)}
+                  onClick={() =>
+                    formManager.removeCheckItemFromQuestion(idx, questionIdx)
+                  }
                 >
                   <ClearIcon />
                 </IconButton>
@@ -137,7 +132,7 @@ function SingleCheckInput({
         })}
       <IconButton
         aria-label='addCheckItem'
-        onClick={() => addCheckItemToQuestion(questionIdx)}
+        onClick={() => formManager.addCheckItemToQuestion(questionIdx)}
       >
         <AddIcon />
       </IconButton>
@@ -148,43 +143,34 @@ function SingleCheckInput({
 interface QuestionProps {
   idx: number;
   question: Iquestion;
-  setQuestionContent: (questionIdx: number, content: string) => void;
-  setCheckItemContent: (
-    questionIdx: number,
-    checkItemIdx: number,
-    content: string
-  ) => void;
-  changeQuestionInputType: (questionIdx: number, inputType: string) => void;
-  addCheckItemToQuestion: (questionIdx: number) => void;
-  removeQuestion: (questionIdx: number) => void;
-  removeCheckItemFromQuestion: (
-    questionIdx: number,
-    checkItemIdx: number
-  ) => void;
+  formManager: IFormManager;
+  isFocused: boolean;
+  setFocusedQuestion: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 function Question({
   idx,
   question,
-  setQuestionContent,
-  setCheckItemContent,
-  changeQuestionInputType,
-  addCheckItemToQuestion,
-  removeQuestion,
-  removeCheckItemFromQuestion,
+  formManager,
+  isFocused,
+  setFocusedQuestion,
 }: QuestionProps) {
   const selectChangehandler = ({ target }: SelectChangeEvent) => {
-    changeQuestionInputType(idx, target.value);
+    formManager.changeQuestionInputType(idx, target.value);
   };
 
   const inputChangeHandler = ({
     target,
   }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setQuestionContent(idx, target.value);
+    formManager.setQuestionContent(idx, target.value);
   };
 
   return (
-    <div className={styles.questionWrapper}>
+    <Paper
+      elevation={3}
+      className={`${styles.questionWrapper} ${isFocused ? styles.focused : ''}`}
+      onClick={() => setFocusedQuestion(idx)}
+    >
       <Grid container spacing={1}>
         <Grid item xs={9}>
           <TextField
@@ -216,68 +202,58 @@ function Question({
             <SingleCheckInput
               questionIdx={idx}
               checkList={question.checkList}
-              setCheckItemContent={setCheckItemContent}
-              addCheckItemToQuestion={addCheckItemToQuestion}
-              removeCheckItemFromQuestion={removeCheckItemFromQuestion}
+              formManager={formManager}
             />
           )}
           {question.inputType === 'MULTI_CHECK' && (
             <MultiCheckInput
               questionIdx={idx}
               checkList={question.checkList}
-              setCheckItemContent={setCheckItemContent}
-              addCheckItemToQuestion={addCheckItemToQuestion}
-              removeCheckItemFromQuestion={removeCheckItemFromQuestion}
+              formManager={formManager}
             />
           )}
         </Grid>
-        <IconButton aria-label='delete' onClick={() => removeQuestion(idx)}>
+        <IconButton
+          aria-label='delete'
+          onClick={() => formManager.removeQuestion(idx)}
+        >
           <DeleteIcon />
         </IconButton>
       </Grid>
-    </div>
+    </Paper>
   );
 }
 
 interface QuestionFormBuilderProps {
   form: Iquestion[];
-  setQuestionContent: (questionIdx: number, content: string) => void;
-  setCheckItemContent: (
-    questionIdx: number,
-    checkItemIdx: number,
-    content: string
-  ) => void;
-  addEmptyQuestion: (questionIdx: number, inputType: string) => void;
-  addCheckItemToQuestion: (questionIdx: number) => void;
-  removeQuestion: (questionIdx: number) => void;
-  removeCheckItemFromQuestion: (
-    questionIdx: number,
-    checkItemIdx: number
-  ) => void;
-  changeQuestionInputType: (questionIdx: number, inputType: string) => void;
-  switchQuestionIndex: (questionIdx: number, targetIdx: number) => void;
+  formManager: IFormManager;
 }
 
 export default function QuestionFormBuilder({
   form,
-  setQuestionContent,
-  setCheckItemContent,
-  addEmptyQuestion,
-  addCheckItemToQuestion,
-  removeQuestion,
-  removeCheckItemFromQuestion,
-  changeQuestionInputType,
-  switchQuestionIndex,
+  formManager,
 }: QuestionFormBuilderProps) {
+  const [focusedQuestionIdx, setFocusedQuestion] = React.useState<
+    number | null
+  >(null);
+
   const addQuestionHandler = () => {
-    addEmptyQuestion(form.length - 1, 'TEXT');
+    if (focusedQuestionIdx === null) {
+      formManager.addEmptyQuestion(form.length - 1, 'TEXT');
+      setFocusedQuestion(form.length);
+    } else {
+      formManager.addEmptyQuestion(focusedQuestionIdx, 'TEXT');
+      setFocusedQuestion(focusedQuestionIdx + 1);
+    }
   };
 
   const onDragEndHandler = ({ destination, source }: DropResult) => {
     if (!destination) return;
-
-    switchQuestionIndex(source.index, destination.index);
+    formManager.switchQuestionIndex(source.index, destination.index);
+    setFocusedQuestion(destination.index);
   };
+
+  console.log(focusedQuestionIdx);
 
   return (
     <div className={styles.mainContainer}>
@@ -289,25 +265,24 @@ export default function QuestionFormBuilder({
                 key={idx}
                 idx={idx}
                 question={question}
-                setQuestionContent={setQuestionContent}
-                setCheckItemContent={setCheckItemContent}
-                changeQuestionInputType={changeQuestionInputType}
-                addCheckItemToQuestion={addCheckItemToQuestion}
-                removeQuestion={removeQuestion}
-                removeCheckItemFromQuestion={removeCheckItemFromQuestion}
+                formManager={formManager}
+                isFocused={focusedQuestionIdx === idx}
+                setFocusedQuestion={setFocusedQuestion}
               />
             );
           })}
         </DraggableList>
-      </div>
-      <div className={styles.editConsole}>
-        <IconButton
-          aria-label='addQuestion'
-          color='primary'
-          onClick={() => addQuestionHandler()}
-        >
-          <AddBoxIcon fontSize='large' />
-        </IconButton>
+        <div className={styles.editConsole}>
+          <Tooltip title='질문추가'>
+            <IconButton
+              aria-label='addQuestion'
+              color='primary'
+              onClick={() => addQuestionHandler()}
+            >
+              <AddBoxIcon fontSize='large' />
+            </IconButton>
+          </Tooltip>
+        </div>
       </div>
     </div>
   );
