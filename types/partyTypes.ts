@@ -37,6 +37,8 @@ export type PartyRoomUser = {
   userRoomId: number;
   nickname: string;
   intraImg: string | null;
+  roomUserId: number;
+
   intraId: string | null;
 };
 
@@ -44,9 +46,12 @@ export type PartyRoomUser = {
  * @typedef {Object} PartyRoomDetail
  *  @property {string | null} [intraid] - Room 시작시 or Admin으로 조회시 존재
  */
+
 export type PartyComment = {
   commentId: number;
   nickname: string;
+  intraid: string | null;
+  isexist: boolean;
   content: string;
   isHidden: boolean;
   createDate: string;
@@ -107,6 +112,7 @@ export type PartyCreateForm = {
 };
 
 export type PartyTemplateForm = {
+  gameTemplateId?: number;
   gameName: string;
   categoryId: number;
   maxGamePeople: number;
@@ -116,4 +122,13 @@ export type PartyTemplateForm = {
   genre: string;
   difficulty: string;
   summary: string;
+};
+
+export type PartyPenaltyAdmin = {
+  id: number;
+  user: object;
+  penaltyType: string;
+  message: string;
+  startTime: string;
+  penaltyTime: number;
 };

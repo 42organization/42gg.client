@@ -13,6 +13,7 @@ import { StoreManualMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
 import { ITournament } from './admin/adminTournamentTypes';
 import { GameMode } from './gameTypes';
+import { PartyGameTemplate } from './partyTypes';
 import { TournamentInfo } from './tournamentTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
@@ -55,7 +56,9 @@ type AdminModal =
   | 'CHECK_SEND_NOTI'
   | 'TOURNAMENT_BRAKET_EDIT'
   | 'TOURNAMENT_PARTICIPANT_EDIT'
+
   | 'PARTY_EDIT';
+  | 'PARTY_TEMPLATE';
 
 type ModalName =
   | null
@@ -73,6 +76,7 @@ type ModalName =
   | `PURCHASE-${PurchaseModal}`
   | `TOURNAMENT-${TournamentModal}`
   | `PARTY-${PartyModal}`;
+
 
 export interface Cancel {
   startTime: string;
@@ -153,4 +157,6 @@ export interface Modal {
   tournament?: ITournament;
   tournamentId?: number;
   partyReport?: PartyReportModalData;
+  template?: PartyGameTemplate;
+
 }
