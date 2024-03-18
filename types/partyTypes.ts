@@ -122,9 +122,21 @@ export type PartyTemplateForm = {
 
 export type PartyPenaltyAdmin = {
   id: number;
-  user: object;
+  user: string;
   penaltyType: string;
   message: string;
   startTime: string;
   penaltyTime: number;
 };
+
+export type PartyPenaltyAdminSubmit = {
+  penaltyType: string;
+  message: string;
+  penaltyTime: number;
+};
+
+export interface PartyPenaltyTable {
+  penaltyList: PartyPenaltyAdmin[];
+  totalPage: number;
+  currentPage: number;
+}
