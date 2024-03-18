@@ -37,7 +37,6 @@ export function PartyReportModal({ report }: { report: PartyReportModalData }) {
       setModal({ modalName: null });
       alert(reportResponse.SUCCESS);
     } catch (e) {
-      console.log(e);
       alert(reportResponse.REJECT);
       throw new Error('REJECT');
     }
