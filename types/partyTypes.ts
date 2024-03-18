@@ -36,7 +36,7 @@ export type PartyRoomDetail = PartyRoom & {
 export type PartyRoomUser = {
   userRoomId: number;
   nickname: string;
-  intraImg: string | null;
+  userImage: string | null;
   roomUserId: number;
 
   intraId: string | null;

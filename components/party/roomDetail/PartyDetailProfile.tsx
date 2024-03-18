@@ -50,7 +50,7 @@ type ProfileProps = {
 function Profile({ roomUsers }: ProfileProps) {
   return (
     <ul>
-      {roomUsers.map(({ intraId, nickname, intraImg }, i) =>
+      {roomUsers.map(({ intraId, nickname, userImage }, i) =>
         intraId ? (
           <>
             <li key={intraId} className={styles.user}>
@@ -79,7 +79,7 @@ function Profile({ roomUsers }: ProfileProps) {
               )}
               <Image
                 src={
-                  intraImg ||
+                  userImage ||
                   `https://random.dog/7f6f49dd-7ca5-46bd-97fb-c534628f9a2b.jpg`
                 }
                 className={styles.profileImg}
