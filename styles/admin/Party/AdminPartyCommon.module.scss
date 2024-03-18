@@ -1,4 +1,6 @@
 @import 'styles/common.scss';
+@import 'styles/admin/common/Pagination.module.scss';
+
 .AdminTableWrap {
   width: 100%;
   height: 100%;
@@ -43,3 +45,5 @@
     }
   }
 }
+
+@include pagination;
