@@ -18,8 +18,15 @@ export default function PartyDetailProfile({
   partyRoomDetail,
   fetchRoomDetail,
 }: PartyDetailProfileProps) {
-  const { currentPeople, maxPeople, dueDate, roomId, roomStatus, roomUsers } =
-    partyRoomDetail;
+  const {
+    currentPeople,
+    maxPeople,
+    dueDate,
+    roomId,
+    roomStatus,
+    roomUsers,
+    hostNickname,
+  } = partyRoomDetail;
 
   return (
     <div className={styles.profile}>
@@ -28,13 +35,13 @@ export default function PartyDetailProfile({
         <span>{`${dateToStringShort(new Date(dueDate))}`}</span>
       </div>
       <div className={styles.profileItem}>
-        <Profile roomUsers={roomUsers} />
+        <Profile roomUsers={roomUsers} hostNickname={hostNickname} />
       </div>
       <ButtonHandler
         roomStatus={roomStatus}
         myNickname={partyRoomDetail.myNickname}
         roomId={roomId}
-        roomUsers={roomUsers}
+        hostNickname={hostNickname}
         fetchRoomDetail={fetchRoomDetail}
       />
     </div>
@@ -45,51 +52,48 @@ export default function PartyDetailProfile({
 
 type ProfileProps = {
   roomUsers: PartyRoomUser[];
+  hostNickname: string;
 };
 
-function Profile({ roomUsers }: ProfileProps) {
+function Profile({ roomUsers, hostNickname }: ProfileProps) {
   return (
     <ul>
       {roomUsers.map(({ intraId, nickname, userImage }, i) =>
         intraId ? (
-          <>
-            <li key={intraId} className={styles.user}>
-              {i === 0 && (
-                <div className={styles.crown}>
-                  <FaCrown color='gold' />
-                </div>
-              )}
-              <Image
-                src={`https://random.dog/7f6f49dd-7ca5-46bd-97fb-c534628f9a2b.jpg`}
-                className={styles.profileImg}
-                alt={intraId}
-                width={40}
-                height={40}
-              />
-              <div style={{ color: nameToRGB(nickname) }}>{intraId}</div>
-            </li>
-          </>
+          <li key={intraId} className={styles.user}>
+            {nickname === hostNickname && (
+              <div className={styles.crown}>
+                <FaCrown color='gold' />
+              </div>
+            )}
+            <Image
+              src={
+                userImage ||
+                `https://random.dog/7f6f49dd-7ca5-46bd-97fb-c534628f9a2b.jpg`
+              }
+              className={styles.profileImg}
+              alt={intraId}
+              width={40}
+              height={40}
+            />
+            <div style={{ color: nameToRGB(nickname) }}>{intraId}</div>
+          </li>
         ) : (
-          <>
-            <li key={nickname} className={styles.user}>
-              {i === 0 && (
-                <div className={styles.crown}>
-                  <FaCrown color='gold' />
-                </div>
-              )}
-              <Image
-                src={
-                  userImage ||
-                  `https://random.dog/7f6f49dd-7ca5-46bd-97fb-c534628f9a2b.jpg`
-                }
-                className={styles.profileImg}
-                alt={nickname}
-                width={40}
-                height={40}
-              />
-              <div>{nickname}</div>
-            </li>
-          </>
+          <li key={nickname} className={styles.user}>
+            {nickname === hostNickname && (
+              <div className={styles.crown}>
+                <FaCrown color='gold' />
+              </div>
+            )}
+            <Image
+              src={`https://random.dog/7f6f49dd-7ca5-46bd-97fb-c534628f9a2b.jpg`}
+              className={styles.profileImg}
+              alt={nickname}
+              width={40}
+              height={40}
+            />
+            <div>{nickname}</div>
+          </li>
         )
       )}
     </ul>
@@ -102,7 +106,7 @@ type ButtonProps = {
   roomId: number;
   roomStatus: PartyRoomStatus;
   myNickname: string | null;
-  roomUsers: PartyRoomUser[];
+  hostNickname: string;
   fetchRoomDetail: () => void;
 };
 
@@ -110,7 +114,7 @@ function ButtonHandler({
   roomStatus,
   myNickname,
   roomId,
-  roomUsers,
+  hostNickname,
   fetchRoomDetail,
 }: ButtonProps) {
   return roomStatus !== 'OPEN' ? (
@@ -120,7 +124,7 @@ function ButtonHandler({
       roomId={roomId}
       fetchRoomDetail={fetchRoomDetail}
     />
-  ) : roomUsers[0].nickname !== myNickname ? (
+  ) : hostNickname !== myNickname ? (
     <div className={styles.btnContainer}>
       <PartyRoomDetailButton.LeaveRoom
         roomId={roomId}
@@ -129,7 +133,7 @@ function ButtonHandler({
     </div>
   ) : (
     <>
-      <PartyRoomDetailButton.StartRoom />
+      <PartyRoomDetailButton.StartRoom roomId={roomId} />
       <PartyRoomDetailButton.LeaveRoom
         roomId={roomId}
         fetchRoomDetail={fetchRoomDetail}
