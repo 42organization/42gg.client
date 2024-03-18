@@ -20,7 +20,7 @@ type CommentCreateBarProps = {
   fetchRoomDetail: () => void;
 };
 
-export default function PartyDetailCommentBox({
+export default function PartyDetailContentCommentBox({
   partyRoomDetail,
   fetchRoomDetail,
 }: PartyRoomDetailProps) {
@@ -74,7 +74,6 @@ function CommentLine({ comments }: { comments: PartyComment[] }) {
 function CommentCreateBar({
   roomId,
   roomStatus,
-  myNickname,
   fetchRoomDetail,
 }: CommentCreateBarProps) {
   const handlerComments = async () => {
@@ -82,7 +81,7 @@ function CommentCreateBar({
     fetchRoomDetail();
   };
 
-  if (!myNickname || roomStatus === 'FINISH') {
+  if (roomStatus !== 'OPEN') {
     return <> </>;
   }
 
