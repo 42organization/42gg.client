@@ -12,7 +12,7 @@ export type PartyRoom = {
   maxPeople: number;
   dueDate: string;
   createDate: string;
-  roomStatus: PartyRoomStatus;
+  status: PartyRoomStatus;
   creatorIntraId?: string;
 };
 
@@ -104,7 +104,7 @@ export type PartyCreateForm = {
   minPeople: number;
   maxPeople: number;
   content: string;
-  dueDate: string;
+  minutesUntilDueDate: number;
 };
 
 export type PartyTemplateForm = {
@@ -128,3 +128,5 @@ export type PartyPenaltyAdmin = {
   startTime: string;
   penaltyTime: number;
 };
+
+export type PartyColors = 'PARTY-MAIN' | 'PARTY-DETAIL';

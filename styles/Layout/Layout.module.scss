@@ -1,5 +1,6 @@
 @import 'styles/common.scss';
 @import 'styles/ProfileBackgroundTheme.scss';
+@import 'styles/party/PartyCommon.scss';
 
 .appContainer {
   display: flex;
@@ -25,6 +26,12 @@
   }
   &.normal {
     background: $vip-background;
+  }
+  &.party-main {
+    background: url('/image/party-background.png');
+  }
+  &.party-detail {
+    background: linear-gradient(black, $party-blue-dark2 70%, $party-blue-sky3);
   }
   @each $theme, $color in $bg-theme-colors {
     &.#{$theme} {
