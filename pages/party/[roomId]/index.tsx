@@ -9,6 +9,7 @@ import styles from 'styles/party/PartyDetailRoom.module.scss';
 
 export default function PartyDetailPage() {
   const roomId = useRouter().query.roomId;
+  const router = useRouter();
   const [partyRoomDetail, setPartyRoomDetail] = useState<
     PartyRoomDetail | undefined
   >(undefined);
@@ -23,8 +24,9 @@ export default function PartyDetailPage() {
       .then(({ data }) => {
         setPartyRoomDetail(data);
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
+        alert('방 정보를 불러오는데 실패했습니다.');
+        router.push('/party');
       });
   };
 
