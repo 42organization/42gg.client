@@ -11,6 +11,7 @@ import {
   applicationModalState,
   userApplicationAnswerState,
 } from 'utils/recoil/application';
+import { sleep } from 'utils/sleep';
 import styles from 'styles/modal/recruit/recruitModal.module.scss';
 
 export default function ApplyModal() {
@@ -22,7 +23,6 @@ export default function ApplyModal() {
   const router = useRouter();
   const recruitId = parseInt(router.query.id as string);
   const applicationId = parseInt(router.query.applicationId as string);
-  console.log(router, applicationId);
 
   const onModalClose = () => {
     setModalState({ state: false, content: 'NONE' });
@@ -45,7 +45,7 @@ export default function ApplyModal() {
 
   const onApply = () => {
     mutate(applicantAnswers, {
-      onSuccess: () => {
+      onSuccess: async () => {
         setAlertState({
           alertState: true,
           message:
@@ -53,7 +53,8 @@ export default function ApplyModal() {
           severity: applicationMode === 'APPLY' ? 'success' : 'info',
         });
         setModalState({ state: false, content: 'NONE' });
-        // todo: 제출 후 recruit로 page 이동
+        await sleep(3000);
+        router.push(`/recruit/${recruitId}`);
       },
       onError: () => {
         setAlertState({

@@ -13,7 +13,6 @@ import {
   applicationInvalidInput,
   applicationModalState,
   userApplicationAnswerState,
-  userApplicationInfo,
 } from 'utils/recoil/application';
 import ApplyModal from 'components/modal/recruitment/ApplyModal';
 import CancelModal from 'components/modal/recruitment/CancelModal';
@@ -22,13 +21,7 @@ import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
 import useRecruitDetailUser from 'hooks/recruit/useRecruitDetailUser';
 import applicationStyle from 'styles/recruit/application.module.scss';
 
-interface IApplicationFormProps {
-  recruitId: number;
-  applicationId: number;
-}
-
-export default function ApplicationForm(props: IApplicationFormProps) {
-  const { recruitId, applicationId } = props;
+export default function ApplicationForm() {
   const formRefs = useRef<refMap>({});
 
   const mode = useRecoilValue(applicationFormTypeState);
@@ -40,7 +33,10 @@ export default function ApplicationForm(props: IApplicationFormProps) {
   const setUserAnswers = useSetRecoilState<IApplicantAnswer[]>(
     userApplicationAnswerState
   );
-  const setUserApplicationInfo = useSetRecoilState(userApplicationInfo);
+
+  const router = useRouter();
+  const recruitId = parseInt(router.query.id as string);
+  const applicationId = parseInt(router.query.applicationId as string) || -1;
 
   const { data, isLoading } = useRecruitDetail({ recruitId });
   const { data: userApplyInfo, isLoading: userAnswerLoading } =
@@ -62,7 +58,6 @@ export default function ApplicationForm(props: IApplicationFormProps) {
         return;
       }
       if (data) {
-        setUserApplicationInfo({ recruitId: recruitId });
         setUserAnswers(applicationAnswerDefault(data?.forms));
       }
     }
@@ -81,10 +76,6 @@ export default function ApplicationForm(props: IApplicationFormProps) {
     if (mode === 'VIEW' || mode === 'EDIT') {
       if (!userAnswerLoading && userApplyInfo) {
         setUserAnswers(userApplyInfo.forms);
-        setUserApplicationInfo({
-          recruitId: recruitId,
-          applicationId: userApplyInfo.applicationId,
-        });
       }
     }
   }, [mode, userAnswerLoading]);

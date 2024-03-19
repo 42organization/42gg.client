@@ -1,29 +1,28 @@
+import { useRouter } from 'next/router';
 import { AxiosResponse } from 'axios';
-import { useState } from 'react';
 import { useMutation } from 'react-query';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import {
-  Alert,
-  Box,
-  Button,
-  Modal,
-  Snackbar,
-  SnackbarOrigin,
-  Typography,
-} from '@mui/material';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { Box, Button, Modal, Typography } from '@mui/material';
 import { mockInstance } from 'utils/mockAxios';
 import {
-  IapplicationInfo,
   applicationAlertState,
   applicationModalState,
-  userApplicationInfo,
 } from 'utils/recoil/application';
+import { sleep } from 'utils/sleep';
 import styles from 'styles/modal/recruit/recruitModal.module.scss';
+
+interface IapplicationInfo {
+  recruitId: number;
+  applicationId?: number;
+}
 
 export default function CancelModal() {
   const setAlertState = useSetRecoilState(applicationAlertState);
   const [modalState, setModalState] = useRecoilState(applicationModalState);
-  const applicationInfo = useRecoilValue<IapplicationInfo>(userApplicationInfo);
+
+  const router = useRouter();
+  const recruitId = parseInt(router.query.id as string);
+  const applicationId = parseInt(router.query.applicationId as string);
 
   const onModalClose = () => {
     setModalState({ state: false, content: 'NONE' });
@@ -38,23 +37,28 @@ export default function CancelModal() {
   );
 
   const onCancel = () => {
-    mutate(applicationInfo, {
-      onSuccess: () => {
-        setAlertState({
-          alertState: true,
-          message: '지원이 취소되었습니다.',
-          severity: 'success',
-        });
-        setModalState({ state: false, content: 'NONE' });
-      },
-      onError: () => {
-        setAlertState({
-          alertState: true,
-          message: '요청에 문제가 발생했습니다.',
-          severity: 'error',
-        });
-      },
-    });
+    mutate(
+      { recruitId, applicationId },
+      {
+        onSuccess: async () => {
+          setAlertState({
+            alertState: true,
+            message: '지원이 취소되었습니다.',
+            severity: 'success',
+          });
+          setModalState({ state: false, content: 'NONE' });
+          await sleep(3000);
+          router.push(`/recruit/${recruitId}`);
+        },
+        onError: () => {
+          setAlertState({
+            alertState: true,
+            message: '요청에 문제가 발생했습니다.',
+            severity: 'error',
+          });
+        },
+      }
+    );
   };
 
   return (
