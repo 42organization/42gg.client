@@ -1,14 +1,12 @@
-import { useRef, useState } from 'react';
-import { ApplicationFormType, refMap } from 'types/recruit/recruitments';
+import { useState } from 'react';
+import { ApplicationFormType } from 'types/recruit/recruitments';
 import ApplicationForm from 'components/recruit/Application/ApplicationForm';
 import ApplicationFormHeader from 'components/recruit/Application/ApplicationFormHeader';
-import StickyHeader from 'components/recruit/StickyHeader';
 
 // todo: mode, recruitId, applicationId 인자로 받기
 function Application() {
   const [mode, setMode] = useState<ApplicationFormType>('APPLY');
   const [test, setTest] = useState(0);
-  const formRefs = useRef<refMap>({});
 
   const clickContent = () => {
     setTest((prev) => (prev + 1) % 3);
@@ -30,18 +28,9 @@ function Application() {
             : '지원서 수정'
         }
       /> */}
-      <ApplicationFormHeader
-        mode={mode}
-        setMode={setMode}
-        formRefs={formRefs}
-      />
+      <ApplicationFormHeader mode={mode} setMode={setMode} />
       {/* todo: applicationId 처리 */}
-      <ApplicationForm
-        recruitId={test}
-        applicationId={1}
-        mode={mode}
-        formRefs={formRefs}
-      />
+      <ApplicationForm recruitId={test} applicationId={1} mode={mode} />
       <button onClick={() => clickContent()}>내용 테스트</button>
       <button onClick={() => clickMode()}>모드 테스트</button>
     </>
