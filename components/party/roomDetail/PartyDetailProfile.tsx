@@ -58,7 +58,7 @@ type ProfileProps = {
 function Profile({ roomUsers, hostNickname }: ProfileProps) {
   return (
     <ul>
-      {roomUsers.map(({ intraId, nickname, userImage }, i) =>
+      {roomUsers.map(({ intraId, nickname, userImage }) =>
         intraId ? (
           <li key={intraId} className={styles.user}>
             {nickname === hostNickname && (
@@ -120,10 +120,12 @@ function ButtonHandler({
   return status !== 'OPEN' ? (
     <></>
   ) : !myNickname ? (
-    <PartyRoomDetailButton.JoinRoom
-      roomId={roomId}
-      fetchRoomDetail={fetchRoomDetail}
-    />
+    <div className={styles.btnContainer}>
+      <PartyRoomDetailButton.JoinRoom
+        roomId={roomId}
+        fetchRoomDetail={fetchRoomDetail}
+      />
+    </div>
   ) : hostNickname !== myNickname ? (
     <div className={styles.btnContainer}>
       <PartyRoomDetailButton.LeaveRoom
@@ -133,7 +135,10 @@ function ButtonHandler({
     </div>
   ) : (
     <>
-      <PartyRoomDetailButton.StartRoom roomId={roomId} />
+      <PartyRoomDetailButton.StartRoom
+        roomId={roomId}
+        fetchRoomDetail={fetchRoomDetail}
+      />
       <PartyRoomDetailButton.LeaveRoom
         roomId={roomId}
         fetchRoomDetail={fetchRoomDetail}
