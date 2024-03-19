@@ -1,33 +1,45 @@
-import { Dispatch, MutableRefObject, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { SetterOrUpdater } from 'recoil';
-import {
-  IApplicantAnswer,
-  IQuestionForm,
-  refMap,
-} from 'types/recruit/recruitments';
+import { IApplicantAnswer, IQuestionForm } from 'types/recruit/recruitments';
+import { IapplicationModal } from './recoil/application';
 
+export const applicationAnswerDefault = (form: IQuestionForm[] | undefined) => {
+  if (!form) return [];
+
+  const defaultAnswer = [];
+  for (const question of form) {
+    defaultAnswer.push({
+      questionId: question.questionId,
+      inputType: question.inputType,
+      checkedList: [],
+      answer: '',
+    });
+  }
+  return defaultAnswer;
+};
 interface IapplicationFormCheckProps {
-  formRefs: MutableRefObject<refMap>;
+  setInvalidInput: Dispatch<SetStateAction<number>>;
   setAlertOn: Dispatch<SetStateAction<boolean>>;
-  setModalOpen: Dispatch<SetStateAction<boolean>>;
+  setModalState: Dispatch<SetStateAction<IapplicationModal>>;
   userAnswers: IApplicantAnswer[];
 }
 
 export const applicationFormCheck = (props: IapplicationFormCheckProps) => {
-  const { formRefs, setAlertOn, setModalOpen, userAnswers } = props;
+  const { setInvalidInput, setAlertOn, setModalState, userAnswers } = props;
 
+  console.log(userAnswers);
   for (const ans of userAnswers) {
     if (
       (ans.inputType === 'TEXT' && !ans.answer?.length) ||
       ((ans.inputType === 'SINGLE_CHECK' || ans.inputType === 'MULTI_CHECK') &&
         !ans.checkedList?.length)
     ) {
-      formRefs.current[ans.questionId].focus();
+      setInvalidInput(ans.questionId);
       setAlertOn(true);
       return;
     }
   }
-  setModalOpen(true);
+  setModalState({ state: true, content: 'APPLY' });
 };
 
 interface IupdateUserAnswersProps {
@@ -43,7 +55,6 @@ export function updateUserAnswers(props: IupdateUserAnswersProps) {
   for (let i = 0; i < userAnswers.length; i++) {
     if (userAnswers[i].questionId === updateAnswer.questionId) {
       updateUserAnswers.splice(i, 1, updateAnswer);
-      console.log(11, updateUserAnswers);
       setUserAnswers(updateUserAnswers);
       return;
     }
