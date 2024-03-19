@@ -5,6 +5,7 @@ import { instance } from 'utils/axios';
 import PartyDetailContentCommentBox from 'components/party/roomDetail/PartyDetailContentCommentBox';
 import PartyDetailProfile from 'components/party/roomDetail/PartyDetailProfile';
 import PartyDetailTitleBox from 'components/party/roomDetail/PartyDetailTitleBox';
+import usePartyColorMode from 'hooks/party/usePartyColorMode';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 
 export default function PartyDetailPage() {
@@ -29,6 +30,8 @@ export default function PartyDetailPage() {
         router.push('/party');
       });
   };
+
+  usePartyColorMode('PARTY-DETAIL');
 
   return partyRoomDetail && partyRoomDetail.status !== 'HIDDEN' ? (
     <div className={styles.detailPage}>
