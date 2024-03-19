@@ -25,7 +25,33 @@ export const applicationAlertState = atom<boolean>({
   default: false,
 });
 
-export const applicationModalState = atom<boolean>({
+export interface IapplicationModal {
+  state: boolean;
+  content: 'APPLY' | 'CANCEL' | 'UPDATE' | 'NONE';
+}
+
+export const applicationModalState = atom<IapplicationModal>({
   key: `applicationModalState/${v1()}`,
-  default: false,
+  default: {
+    state: false,
+    content: 'NONE',
+  },
+});
+
+export const applicationInvalidInput = atom<number>({
+  key: `applicationInvalidInput/${v1()}`,
+  default: -1,
+});
+
+export interface IapplicationInfo {
+  recruitId: number;
+  applicationId?: number;
+}
+
+export const userApplicationInfo = atom<IapplicationInfo>({
+  key: `userApplicationInfo/${v1()}`,
+  default: {
+    recruitId: 0,
+    applicationId: 0,
+  },
 });
