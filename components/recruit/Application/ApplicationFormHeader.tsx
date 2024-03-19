@@ -1,28 +1,27 @@
-import { Dispatch, MutableRefObject, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Button } from '@mui/material';
-import { ApplicationFormType, refMap } from 'types/recruit/recruitments';
+import { ApplicationFormType } from 'types/recruit/recruitments';
 import { applicationFormCheck } from 'utils/handleApplicationForm';
 import {
   applicationAlertState,
+  applicationInvalidInput,
   applicationModalState,
   userApplicationAnswerState,
 } from 'utils/recoil/application';
 import applicationStyle from 'styles/recruit/application.module.scss';
-import commonStyle from 'styles/recruit/common.module.scss';
-import textStyle from 'styles/recruit/text.module.scss';
 
 interface IApplicationFormHeaderProps {
   mode: ApplicationFormType;
   setMode: Dispatch<SetStateAction<ApplicationFormType>>;
-  formRefs: MutableRefObject<refMap>;
 }
 
 const ApplicationFormHeader = (props: IApplicationFormHeaderProps) => {
-  const { mode, setMode, formRefs } = props;
+  const { mode, setMode } = props;
   const setAlertOn = useSetRecoilState(applicationAlertState);
-  const setModalOpen = useSetRecoilState(applicationModalState);
+  const setModalState = useSetRecoilState(applicationModalState);
   const userAnswers = useRecoilValue(userApplicationAnswerState);
+  const setInvalidInput = useSetRecoilState(applicationInvalidInput);
 
   const title =
     mode === 'APPLY'
@@ -33,7 +32,7 @@ const ApplicationFormHeader = (props: IApplicationFormHeaderProps) => {
   const editSubmit = mode === 'EDIT' ? '제출하기' : '수정하기';
 
   const cancelClick = () => {
-    // todo: 취소 요청 넣기
+    setModalState({ state: true, content: 'CANCEL' });
   };
 
   const editSubmitClick = () => {
@@ -42,9 +41,9 @@ const ApplicationFormHeader = (props: IApplicationFormHeaderProps) => {
       return;
     }
     applicationFormCheck({
-      formRefs,
+      setInvalidInput,
       setAlertOn,
-      setModalOpen,
+      setModalState,
       userAnswers,
     });
   };
