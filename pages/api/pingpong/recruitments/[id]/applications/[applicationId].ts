@@ -90,6 +90,14 @@ const applicationInfoSix = {
   forms: userAnswerTwo,
 };
 
+const applicationInfoSeven = {
+  applicationId: 7,
+  endDate: '2024-12-12 00:12',
+  title: '42GG 모집 7기',
+  contents: sampleContents,
+  forms: userAnswerTwo,
+};
+
 const applications = [
   applicationInfoOne,
   applicationInfoTwo,
@@ -97,6 +105,7 @@ const applications = [
   applicationInfoFour,
   applicationInfoFive,
   applicationInfoSix,
+  applicationInfoSeven,
 ];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

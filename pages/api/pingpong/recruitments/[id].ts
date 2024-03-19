@@ -130,6 +130,15 @@ const recruitmentDetailSix = {
   forms: formDataTwo,
 };
 
+const recruitmentDetailSeven = {
+  startDate: '2024-12-04 00:12',
+  endDate: '2024-12-04 00:12',
+  title: '42GG 7기',
+  contents: sampleContents.repeat(5),
+  generations: '7기',
+  forms: formDataTwo,
+};
+
 const recruitments = [
   recruitmentDetailOne,
   recruitmentDetailTwo,
@@ -137,6 +146,7 @@ const recruitments = [
   recruitmentDetailFour,
   recruitmentDetailFive,
   recruitmentDetailSix,
+  recruitmentDetailSeven,
 ];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
