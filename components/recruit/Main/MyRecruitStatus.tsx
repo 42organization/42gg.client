@@ -26,7 +26,7 @@ const MyRecruitStatus = ({
         justifyContent={'space-between'}
         spacing={'2rem'}
       >
-        <RecruitStepper status={status} interviewDate={interviewDate} />
+        <RecruitStepper status={status} />
         <span>{statusMessage(status, interviewDate)}</span>
       </Stack>
     </div>
@@ -34,22 +34,11 @@ const MyRecruitStatus = ({
 };
 
 const statusMessage = (status: resultType, interviewDate?: Date) => {
-  // 지원서 접수 후 ~ 면접 날짜 발표 전
-  if (!interviewDate) {
-    return '지원서를 확인하고 있습니다.';
-  }
-  // 면접 날짜 발표 후 ~ 결과 발표 전
-  if (status === 'PROGRESS' && interviewDate) {
+  if (status === 'PROGRESS') return '지원서를 확인하고 있습니다.';
+  if (status === 'INTERVIEW' && interviewDate)
     return dateToKRFullString(new Date(interviewDate));
-  }
-  // 결과 발표 후
-  // TODO : 좀 더 괜찮은 표현 찾아보기
-  if (status === 'PASS') {
-    return '합격';
-  }
-  if (status === 'FAIL') {
-    return '불합격';
-  }
+  if (status === 'PASS') return '합격';
+  if (status?.endsWith('_FAIL')) return '불합격';
   return '';
 };
 

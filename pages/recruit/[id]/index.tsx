@@ -30,11 +30,16 @@ function Recruit() {
         value={data.contents}
         theme='bubble'
       />
-      <Button size={'large'} variant='contained' color='primary'>
+      <Button
+        disabled={!!data.applicationId}
+        size={'large'}
+        variant='contained'
+        color='primary'
+      >
         지원하기
       </Button>
       <div className={style.divider} />
-      <MyRecruitment />
+      <MyRecruitment applicationId={data.applicationId} />
     </>
   );
 }
