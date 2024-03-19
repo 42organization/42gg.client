@@ -12,7 +12,7 @@ const initRecruitmentEditInfo: IrecruitEditInfo = {
   startDate: '',
   endDate: '',
   generation: '',
-  content: '',
+  contents: '',
   form: [],
 };
 
@@ -20,8 +20,12 @@ interface RecruitmentEditProps {
   setPageType: Dispatch<SetStateAction<'MAIN' | 'EDIT'>>;
 }
 export default function RecruitmentEdit({ setPageType }: RecruitmentEditProps) {
-  const { recruitmentEditInfo, setRecruitmentEditInfoField, formManager } =
-    useRecruitmentEditInfo(initRecruitmentEditInfo);
+  const {
+    recruitmentEditInfo,
+    setRecruitmentEditInfoField,
+    formManager,
+    importRecruitmentInfo,
+  } = useRecruitmentEditInfo(initRecruitmentEditInfo);
 
   return (
     <div className={styles.container}>
@@ -37,7 +41,7 @@ export default function RecruitmentEdit({ setPageType }: RecruitmentEditProps) {
         setRecruitmentEditInfoField={setRecruitmentEditInfoField}
       />
       <QuillDescriptionEditor
-        content={recruitmentEditInfo.content}
+        contents={recruitmentEditInfo.contents}
         setRecruitmentEditInfoField={setRecruitmentEditInfoField}
       />
       <QuestionFormBuilder
@@ -46,6 +50,7 @@ export default function RecruitmentEdit({ setPageType }: RecruitmentEditProps) {
       />
       <ActionSelectorButtons
         recruitmentEditInfo={recruitmentEditInfo}
+        importRecruitmentInfo={importRecruitmentInfo}
         actionType='CREATE'
       />
     </div>

@@ -11,7 +11,7 @@ export interface IrecruitEditInfo {
   startDate: string;
   endDate: string;
   title: string;
-  content: string;
+  contents: string;
   generation: string;
   form: Array<Iquestion>;
 }
@@ -26,7 +26,7 @@ export interface Iquestion {
 
 export interface IcheckItem {
   checkId?: number;
-  content: string;
+  contents: string;
 }
 
 export interface Inotication {

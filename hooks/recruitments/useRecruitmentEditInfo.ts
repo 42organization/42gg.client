@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   IcheckItem,
   Iquestion,
   IrecruitEditInfo,
 } from 'types/admin/adminRecruitmentsTypes';
+import { mockInstance } from 'utils/mockAxios';
 
 export interface IFormManager {
   setQuestionContent: (questionIdx: number, content: string) => void;
   setCheckItemContent: (
     questionIdx: number,
     checkItemIdx: number,
-    content: string
+    contents: string
   ) => void;
   addEmptyQuestion: (questionIdx: number, inputType: string) => void;
   removeQuestion: (questionIdx: number) => void;
@@ -44,14 +45,14 @@ export default function useRecruitmentEditInfo(
   const setCheckItemContent = (
     questionIdx: number,
     checkItemIdx: number,
-    content: string
+    contents: string
   ) => {
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
     if (!question.checkList) return;
 
     const checkItem = question.checkList[checkItemIdx];
-    checkItem.content = content;
+    checkItem.contents = contents;
 
     updateRecruitFrom(updatedForm);
   };
@@ -75,7 +76,7 @@ export default function useRecruitmentEditInfo(
 
   const addCheckItemToQuestion = (questionIdx: number) => {
     const checkItem: IcheckItem = {
-      content: '',
+      contents: '',
     };
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
@@ -177,9 +178,22 @@ export default function useRecruitmentEditInfo(
     switchQuestionIndex,
   };
 
+  const importRecruitmentInfo = async (recruitId: number) => {
+    const res = await mockInstance.get('/recruitments/' + recruitId);
+    console.log(res.data);
+    setRecruitmentEditInfo(res.data);
+    //   return {
+    //     beforeTournament: beforeRes.data.tournaments,
+    //     liveTournament: liveRes.data.tournaments,
+    //   };
+    // }, []);
+    // setRecruitmentEditInfo(importedRecruit);
+  };
+
   return {
     recruitmentEditInfo,
     setRecruitmentEditInfoField,
     formManager,
+    importRecruitmentInfo,
   };
 }

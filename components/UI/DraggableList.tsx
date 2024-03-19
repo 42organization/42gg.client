@@ -24,26 +24,27 @@ const DraggableList = React.memo(
               {...provided.droppableProps}
               style={{ width: '100%' }}
             >
-              {children.map((item, index) => (
-                <Draggable
-                  draggableId={`item-${index}`}
-                  index={index}
-                  key={index}
-                >
-                  {(provided, snapshot) => (
-                    <ListItem
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      className={
-                        snapshot.isDragging ? styles.draggingListItem : ''
-                      }
-                    >
-                      {item}
-                    </ListItem>
-                  )}
-                </Draggable>
-              ))}
+              {children &&
+                children.map((item, index) => (
+                  <Draggable
+                    draggableId={`item-${index}`}
+                    index={index}
+                    key={index}
+                  >
+                    {(provided, snapshot) => (
+                      <ListItem
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        className={
+                          snapshot.isDragging ? styles.draggingListItem : ''
+                        }
+                      >
+                        {item}
+                      </ListItem>
+                    )}
+                  </Draggable>
+                ))}
               {provided.placeholder}
             </div>
           )}

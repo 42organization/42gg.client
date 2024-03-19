@@ -5,7 +5,7 @@ const recruitmentDetailOne = {
   endDate: '2024-03-04 14:12',
   title: '42GG 모집',
   contents: '지원서',
-  generations: '7기',
+  generation: '7기',
   form: [
     {
       questionId: 1,
@@ -40,7 +40,7 @@ const recruitmentDetailTwo = {
   endDate: '2024-12-04 00:12',
   title: '42GG 모집',
   contents: '지원서',
-  generations: '10기',
+  generation: '10기',
   form: [
     {
       questionId: 1,
