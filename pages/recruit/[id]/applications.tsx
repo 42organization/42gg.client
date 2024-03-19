@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import ApplicationForm from 'components/recruit/Application/ApplicationForm';
+import ApplicatoinFormFooter from 'components/recruit/Application/ApplicationFormFooter';
 import ApplicationFormHeader from 'components/recruit/Application/ApplicationFormHeader';
 import ApplicationSnackBar from 'components/recruit/Application/ApplicationSnackBar';
 
@@ -12,6 +13,7 @@ function Application() {
     <>
       <ApplicationFormHeader />
       <ApplicationForm recruitId={recruitId} applicationId={applicationId} />
+      <ApplicatoinFormFooter />
       <ApplicationSnackBar />
     </>
   );
