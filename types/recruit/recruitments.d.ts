@@ -49,7 +49,7 @@ export interface IRecruitmentDetail {
   title: string;
   contents: string;
   generations: string;
-  form: IQuestionForm[];
+  forms: IQuestionForm[];
 }
 
 export interface IApplicantAnswer {
@@ -68,7 +68,7 @@ export interface IUserApplicationInfo {
 }
 
 export interface IRecruitmentDetailUser extends IUserApplicationInfo {
-  form: IApplicantAnswer[];
+  forms: IApplicantAnswer[];
 }
 
 export type refMap = { [key: number]: HTMLInputElement };

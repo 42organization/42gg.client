@@ -1,7 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 import { SetterOrUpdater } from 'recoil';
 import { IApplicantAnswer, IQuestionForm } from 'types/recruit/recruitments';
-import { IapplicationModal } from './recoil/application';
+import {
+  IapplicationAlertState,
+  IapplicationModal,
+} from './recoil/application';
 
 export const applicationAnswerDefault = (form: IQuestionForm[] | undefined) => {
   if (!form) return [];
@@ -19,15 +22,14 @@ export const applicationAnswerDefault = (form: IQuestionForm[] | undefined) => {
 };
 interface IapplicationFormCheckProps {
   setInvalidInput: Dispatch<SetStateAction<number>>;
-  setAlertOn: Dispatch<SetStateAction<boolean>>;
+  setAlertState: Dispatch<SetStateAction<IapplicationAlertState>>;
   setModalState: Dispatch<SetStateAction<IapplicationModal>>;
   userAnswers: IApplicantAnswer[];
 }
 
 export const applicationFormCheck = (props: IapplicationFormCheckProps) => {
-  const { setInvalidInput, setAlertOn, setModalState, userAnswers } = props;
+  const { setInvalidInput, setAlertState, setModalState, userAnswers } = props;
 
-  console.log(userAnswers);
   for (const ans of userAnswers) {
     if (
       (ans.inputType === 'TEXT' && !ans.answer?.length) ||
@@ -35,7 +37,11 @@ export const applicationFormCheck = (props: IapplicationFormCheckProps) => {
         !ans.checkedList?.length)
     ) {
       setInvalidInput(ans.questionId);
-      setAlertOn(true);
+      setAlertState({
+        alertState: true,
+        severity: 'error',
+        message: '입력하지 않은 문항이 있습니다.',
+      });
       return;
     }
   }
@@ -67,6 +73,7 @@ export function updateUserAnswers(props: IupdateUserAnswersProps) {
 }
 
 export function findUserAnswer(id: number, answerList: IApplicantAnswer[]) {
+  if (!answerList) return '';
   for (const answer of answerList) {
     if (answer.questionId === id) {
       return answer;
