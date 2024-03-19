@@ -183,6 +183,10 @@ export const tableFormat: TableFormat = {
       'detailRecruit',
     ],
   },
+  recruitEditTitle: {
+    name: '공고 수정',
+    columns: ['title', 'startDate', 'endDate', 'generation'],
+  },
   notificationList: {
     name: '알림 목록',
     columns: ['intraId', 'interview', 'result'],

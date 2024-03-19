@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { recruitId } = req.query as { recruitId: string };
+  const { id } = req.query as { id: string };
 
   if (req.method === 'POST') {
-    console.log('recruitId => ', recruitId);
+    console.log('id => ', id);
     console.log(req.body);
     res.status(201).send('Created');
     // 에러 응답 테스트용

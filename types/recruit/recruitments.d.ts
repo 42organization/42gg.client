@@ -16,6 +16,20 @@ export type recruitmentListData = {
   totalPage: number;
 };
 
+export type resultType =
+  | null
+  | 'PROGRESS'
+  | 'APPLICATION_FAIL'
+  | 'INTERVIEW'
+  | 'PASS'
+  | 'INTERVIEW_FAIL';
+
+export type recruitmentResult = {
+  title: string;
+  status: resultType;
+  interviewDate: Date;
+};
+
 export interface ICheck {
   id: number;
   contents: string;
@@ -29,6 +43,7 @@ export interface IQuestionForm {
 }
 
 export interface IRecruitmentDetail {
+  applicationId?: number; // 유저가 지원하지 않은 경우에는 applicationId가 없다.
   startDate: string;
   endDate: string;
   title: string;

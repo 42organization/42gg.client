@@ -36,25 +36,16 @@
 }
 
 .quillViewer {
-  width: 100%;
+  @include quillViewer(
+    $color: rgba(18, 23, 37, 1),
+    $scrollbarWidth: 0.5rem,
+    $scrollbarColor: rgba(240, 210, 210, 1),
+    $scrollbarRadius: 2rem
+  );
   min-width: 10rem;
   max-width: 15rem;
-  height: 100%;
   max-height: 19rem;
   padding-bottom: 1rem;
-  overflow-y: scroll;
-  color: rgba(18, 23, 37, 1);
-}
-
-.quillViewer::-webkit-scrollbar {
-  display: inherit;
-  width: 0.5rem;
-  height: 1rem;
-}
-
-.quillViewer::-webkit-scrollbar-thumb {
-  background: rgba(240, 210, 210, 1);
-  border-radius: 2rem;
 }
 
 .checkBox {

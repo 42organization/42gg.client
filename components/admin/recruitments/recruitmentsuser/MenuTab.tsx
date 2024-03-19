@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import RecruitmentsHistoryList from 'components/admin/recruitments/recruitmentsHistoryList';
-import DetailRecruitUserList from 'components/admin/recruitments/recruitmentsuser/detailRecruitUserList';
-import NotificationResults from 'components/admin/recruitments/recruitmentsuser/notificationResults';
+import DetailRecruitUserList from 'components/admin/recruitments/recruitmentsuser/DetailRecruitUserList';
+import NotificationResults from 'components/admin/recruitments/recruitmentsuser/NotificationResults';
 import styles from 'styles/admin/recruitments/MenuTab.module.scss';
+import RecruitmentsHistoryList from '../RecruitmentsHistoryList';
 
 function MenuTab({ recruitId }: { recruitId: number }) {
   const [view, setView] = useState('menu');
