@@ -77,7 +77,7 @@ const recruitmentDetailOne = {
   title: '42GG 모집 1기',
   contents: sampleContents,
   generations: '1기',
-  form: formDataOne,
+  forms: formDataOne,
 };
 
 const recruitmentDetailTwo = {
@@ -87,7 +87,7 @@ const recruitmentDetailTwo = {
   title: '42GG 모집 2기',
   contents: '지원서',
   generations: '2기',
-  form: formDataTwo,
+  forms: formDataTwo,
 };
 
 const recruitmentDetailThree = {
@@ -97,7 +97,7 @@ const recruitmentDetailThree = {
   title: '42GG 모집 3기',
   contents: '지원서',
   generations: '3기',
-  form: formDataTwo,
+  forms: formDataTwo,
 };
 
 const recruitmentDetailFour = {
@@ -107,7 +107,7 @@ const recruitmentDetailFour = {
   title: '42GG 모집 4기',
   contents: '지원서',
   generations: '4기',
-  form: formDataTwo,
+  forms: formDataTwo,
 };
 
 const recruitmentDetailFive = {
@@ -117,7 +117,7 @@ const recruitmentDetailFive = {
   title: '42GG 모집 5기',
   contents: '지원서',
   generations: '5기',
-  form: formDataTwo,
+  forms: formDataTwo,
 };
 
 const recruitmentDetailSix = {
@@ -127,7 +127,7 @@ const recruitmentDetailSix = {
   title: '긴 내용을 테스트!!!! 42GG 6기',
   contents: sampleContents.repeat(5),
   generations: '6기',
-  form: formDataTwo,
+  forms: formDataTwo,
 };
 
 const recruitments = [

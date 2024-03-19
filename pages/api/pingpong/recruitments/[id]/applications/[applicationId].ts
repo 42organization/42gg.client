@@ -49,7 +49,7 @@ const applicationInfoOne = {
   endDate: '2024-03-04 14:12',
   title: '42GG 모집 1기',
   contents: sampleContents,
-  form: userAnswerOne,
+  forms: userAnswerOne,
 };
 
 const applicationInfoTwo = {
@@ -57,7 +57,7 @@ const applicationInfoTwo = {
   endDate: '2024-12-12 00:12',
   title: '42GG 모집 2기',
   contents: sampleContents,
-  form: userAnswerTwo,
+  forms: userAnswerTwo,
 };
 
 const applicationInfoThree = {
@@ -65,21 +65,21 @@ const applicationInfoThree = {
   endDate: '2024-12-12 00:12',
   title: '42GG 모집 3기',
   contents: sampleContents,
-  form: userAnswerTwo,
+  forms: userAnswerTwo,
 };
 const applicationInfoFour = {
   applicationId: 4,
   endDate: '2024-12-12 00:12',
   title: '42GG 모집 4기',
   contents: sampleContents,
-  form: userAnswerTwo,
+  forms: userAnswerTwo,
 };
 const applicationInfoFive = {
   applicationId: 5,
   endDate: '2024-12-12 00:12',
   title: '42GG 모집 5기',
   contents: sampleContents,
-  form: userAnswerTwo,
+  forms: userAnswerTwo,
 };
 
 const applicationInfoSix = {
@@ -87,7 +87,7 @@ const applicationInfoSix = {
   endDate: '2024-12-12 00:12',
   title: '42GG 모집 6기',
   contents: sampleContents,
-  form: userAnswerTwo,
+  forms: userAnswerTwo,
 };
 
 const applications = [
@@ -100,16 +100,38 @@ const applications = [
 ];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { id } = req.query as {
+  const { id, applicationId } = req.query as {
     id: string;
     applicationId: string;
   };
 
-  const numberId = parseInt(id);
+  const recruitId = parseInt(id);
+  const applyId = parseInt(applicationId);
 
-  if (numberId > 0 && numberId <= applications.length) {
-    res.status(200).json(applications[numberId - 1]);
-  } else {
-    res.status(200).json({});
+  if (req.method === 'GET') {
+    if (recruitId > 0 && recruitId <= applications.length) {
+      res.status(200).json(applications[recruitId - 1]);
+    } else {
+      res.status(200).json({});
+    }
+  }
+  if (req.method === 'DELETE') {
+    console.log(
+      'DELETE SUCCESS, id => ',
+      recruitId,
+      'applicationId => ',
+      applyId
+    );
+    res.status(204).send('DELETE');
+  }
+  if (req.method === 'PATCH') {
+    console.log(
+      'PATCH SUCCESS, id => ',
+      recruitId,
+      'applicationId => ',
+      applyId
+    );
+    console.log(req.body);
+    res.status(204).send('UPDATED');
   }
 }
