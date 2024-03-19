@@ -63,16 +63,3 @@ export const applicationInvalidInput = atom<number>({
   key: `applicationInvalidInput/${v1()}`,
   default: -1,
 });
-
-export interface IapplicationInfo {
-  recruitId: number;
-  applicationId?: number;
-}
-
-export const userApplicationInfo = atom<IapplicationInfo>({
-  key: `userApplicationInfo/${v1()}`,
-  default: {
-    recruitId: 0,
-    applicationId: 0,
-  },
-});
