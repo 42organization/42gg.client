@@ -38,8 +38,7 @@ const statusMessage = (status: resultType, interviewDate?: Date) => {
   if (status === 'INTERVIEW' && interviewDate)
     return dateToKRFullString(new Date(interviewDate));
   if (status === 'PASS') return '합격';
-  if (status === 'APPLICATION_FAIL' || status === 'INTERVIEW_FAIL')
-    return '불합격';
+  if (status?.endsWith('_FAIL')) return '불합격';
   return '';
 };
 
