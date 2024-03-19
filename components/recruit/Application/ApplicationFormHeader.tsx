@@ -1,24 +1,18 @@
-import { Dispatch, SetStateAction } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Button } from '@mui/material';
-import { ApplicationFormType } from 'types/recruit/recruitments';
 import { applicationFormCheck } from 'utils/handleApplicationForm';
 import {
   applicationAlertState,
+  applicationFormTypeState,
   applicationInvalidInput,
   applicationModalState,
   userApplicationAnswerState,
 } from 'utils/recoil/application';
 import applicationStyle from 'styles/recruit/application.module.scss';
 
-interface IApplicationFormHeaderProps {
-  mode: ApplicationFormType;
-  setMode: Dispatch<SetStateAction<ApplicationFormType>>;
-}
-
-const ApplicationFormHeader = (props: IApplicationFormHeaderProps) => {
-  const { mode, setMode } = props;
-  const setAlertOn = useSetRecoilState(applicationAlertState);
+const ApplicationFormHeader = () => {
+  const [mode, setMode] = useRecoilState(applicationFormTypeState);
+  const setAlertState = useSetRecoilState(applicationAlertState);
   const setModalState = useSetRecoilState(applicationModalState);
   const userAnswers = useRecoilValue(userApplicationAnswerState);
   const setInvalidInput = useSetRecoilState(applicationInvalidInput);
@@ -42,7 +36,7 @@ const ApplicationFormHeader = (props: IApplicationFormHeaderProps) => {
     }
     applicationFormCheck({
       setInvalidInput,
-      setAlertOn,
+      setAlertState,
       setModalState,
       userAnswers,
     });

@@ -1,18 +1,15 @@
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { Alert, Box, Button, Grid, Paper, Snackbar } from '@mui/material';
-import {
-  ApplicationFormType,
-  IApplicantAnswer,
-  refMap,
-} from 'types/recruit/recruitments';
+import { Box, Button, Grid, Paper } from '@mui/material';
+import { IApplicantAnswer, refMap } from 'types/recruit/recruitments';
 import {
   applicationAnswerDefault,
   applicationFormCheck,
 } from 'utils/handleApplicationForm';
 import {
   applicationAlertState,
+  applicationFormTypeState,
   applicationInvalidInput,
   applicationModalState,
   userApplicationAnswerState,
@@ -28,14 +25,14 @@ import applicationStyle from 'styles/recruit/application.module.scss';
 interface IApplicationFormProps {
   recruitId: number;
   applicationId: number;
-  mode: ApplicationFormType;
 }
 
 export default function ApplicationForm(props: IApplicationFormProps) {
-  const { recruitId, applicationId, mode } = props;
+  const { recruitId, applicationId } = props;
   const formRefs = useRef<refMap>({});
 
-  const setAlertOn = useSetRecoilState(applicationAlertState);
+  const mode = useRecoilValue(applicationFormTypeState);
+  const setAlertState = useSetRecoilState(applicationAlertState);
   const modalState = useRecoilValue(applicationModalState);
   const [invalidInput, setInvalidInput] = useRecoilState(
     applicationInvalidInput
@@ -57,12 +54,16 @@ export default function ApplicationForm(props: IApplicationFormProps) {
   useEffect(() => {
     if (!isLoading) {
       if (!data || (data && !Object.keys(data).length)) {
-        setAlertOn(true);
+        setAlertState({
+          alertState: true,
+          message: '올바르지 않은 요청입니다.',
+          severity: 'error',
+        });
         return;
       }
       if (data) {
         setUserApplicationInfo({ recruitId: recruitId });
-        setUserAnswers(applicationAnswerDefault(data?.form));
+        setUserAnswers(applicationAnswerDefault(data?.forms));
       }
     }
   }, [isLoading, data]);
@@ -79,7 +80,7 @@ export default function ApplicationForm(props: IApplicationFormProps) {
   useEffect(() => {
     if (mode === 'VIEW' || mode === 'EDIT') {
       if (!userAnswerLoading && userApplyInfo) {
-        setUserAnswers(userApplyInfo.form);
+        setUserAnswers(userApplyInfo.forms);
         setUserApplicationInfo({
           recruitId: recruitId,
           applicationId: userApplyInfo.applicationId,
@@ -100,18 +101,11 @@ export default function ApplicationForm(props: IApplicationFormProps) {
         direction={'column'}
         rowSpacing={2}
       >
-        <Paper className={applicationStyle.titleContainer}>
-          {data.title} {data.generations} 모집
-        </Paper>
-        <ApplicationFormItem formRefs={formRefs} data={data} mode={mode} />
-        <SubmitButton mode={mode} />
+        <Paper className={applicationStyle.titleContainer}>{data.title}</Paper>
+        <ApplicationFormItem formRefs={formRefs} data={data} />
+        <SubmitButton />
       </Grid>
-      {modalState.content === 'APPLY' || modalState.content === 'UPDATE' ? (
-        <ApplyModal />
-      ) : (
-        <CancelModal />
-      )}
-      <SnackBar message='입력하지 않은 문항이 있습니다.' />
+      {modalState.content === 'APPLY' ? <ApplyModal /> : <CancelModal />}
     </Box>
   );
 }
@@ -145,22 +139,17 @@ function NoData(props: INoDataProps) {
           </Button>
         </Paper>
       </Grid>
-      <SnackBar message='올바르지 않은 요청입니다.' />
     </Box>
   );
 }
 
-interface ISubmitButtonProps {
-  mode: ApplicationFormType;
-}
-
-function SubmitButton(props: ISubmitButtonProps) {
-  const { mode } = props;
-  const setAlertOn = useSetRecoilState(applicationAlertState);
-  const setModalState = useSetRecoilState(applicationModalState);
+function SubmitButton() {
+  const mode = useRecoilValue(applicationFormTypeState);
   const userAnswers = useRecoilValue<IApplicantAnswer[]>(
     userApplicationAnswerState
   );
+  const setAlertState = useSetRecoilState(applicationAlertState);
+  const setModalState = useSetRecoilState(applicationModalState);
   const setInvalidInput = useSetRecoilState(applicationInvalidInput);
 
   if (mode !== 'APPLY') return <></>;
@@ -172,7 +161,7 @@ function SubmitButton(props: ISubmitButtonProps) {
         onClick={() =>
           applicationFormCheck({
             setInvalidInput,
-            setAlertOn,
+            setAlertState,
             setModalState,
             userAnswers,
           })
@@ -181,30 +170,5 @@ function SubmitButton(props: ISubmitButtonProps) {
         제출하기
       </Button>
     </>
-  );
-}
-
-interface ISnackBarProps {
-  message: string;
-}
-
-function SnackBar(props: ISnackBarProps) {
-  const { message } = props;
-  const [alertOn, setAlertOn] = useRecoilState(applicationAlertState);
-  return (
-    <Snackbar
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-      open={alertOn}
-      autoHideDuration={5000}
-      onClose={() => setAlertOn(false)}
-    >
-      <Alert
-        onClose={() => setAlertOn(false)}
-        severity='error'
-        variant='filled'
-      >
-        {message}
-      </Alert>
-    </Snackbar>
   );
 }

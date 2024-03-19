@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   Alert,
   Box,
@@ -14,37 +14,19 @@ import {
 import { mockInstance } from 'utils/mockAxios';
 import {
   IapplicationInfo,
+  applicationAlertState,
   applicationModalState,
   userApplicationInfo,
 } from 'utils/recoil/application';
 import styles from 'styles/modal/recruit/recruitModal.module.scss';
 
-interface ISnackBarState extends SnackbarOrigin {
-  snackBarOpen: boolean;
-  message: string;
-  severity: 'success' | 'error';
-}
-
 export default function CancelModal() {
-  const [snackBarState, setSnackBarState] = useState<ISnackBarState>({
-    snackBarOpen: false,
-    vertical: 'bottom',
-    horizontal: 'left',
-    message: '',
-    severity: 'error',
-  });
-  const { snackBarOpen, vertical, horizontal, message, severity } =
-    snackBarState;
-
+  const setAlertState = useSetRecoilState(applicationAlertState);
   const [modalState, setModalState] = useRecoilState(applicationModalState);
   const applicationInfo = useRecoilValue<IapplicationInfo>(userApplicationInfo);
 
   const onModalClose = () => {
     setModalState({ state: false, content: 'NONE' });
-  };
-
-  const onSanckBarClose = () => {
-    setSnackBarState({ ...snackBarState, snackBarOpen: false });
   };
 
   const { mutate } = useMutation(
@@ -58,21 +40,19 @@ export default function CancelModal() {
   const onCancel = () => {
     mutate(applicationInfo, {
       onSuccess: () => {
-        setSnackBarState((prev) => ({
-          ...prev,
-          snackBarOpen: true,
+        setAlertState({
+          alertState: true,
           message: '지원이 취소되었습니다.',
           severity: 'success',
-        }));
+        });
         setModalState({ state: false, content: 'NONE' });
       },
       onError: () => {
-        setSnackBarState((prev) => ({
-          ...prev,
-          snackBarOpen: true,
+        setAlertState({
+          alertState: true,
           message: '요청에 문제가 발생했습니다.',
           severity: 'error',
-        }));
+        });
       },
     });
   };
@@ -110,16 +90,6 @@ export default function CancelModal() {
           </Box>
         </Box>
       </Modal>
-      <Snackbar
-        open={snackBarOpen}
-        anchorOrigin={{ vertical, horizontal }}
-        onClose={onSanckBarClose}
-        autoHideDuration={6000}
-      >
-        <Alert onClose={onSanckBarClose} severity={severity} variant={'filled'}>
-          {message}
-        </Alert>
-      </Snackbar>
     </>
   );
 }

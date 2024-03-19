@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
 import { Button } from '@mui/material';
+import { applicationFormTypeState } from 'utils/recoil/application';
 import DynamicQuill from 'components/DynamicQuill';
 import MyRecruitment from 'components/recruit/Main/MyRecruitment';
 import StickyHeader from 'components/recruit/StickyHeader';
@@ -9,9 +11,18 @@ import 'react-quill/dist/quill.bubble.css';
 
 function Recruit() {
   const router = useRouter();
+  const recruitId = parseInt(router.query.id as string);
+
   const { data, isLoading } = useRecruitDetail({
-    recruitId: parseInt(router.query.id as string),
+    recruitId: recruitId,
   });
+
+  const setApplicationMode = useSetRecoilState(applicationFormTypeState);
+
+  const onApply = () => {
+    setApplicationMode('APPLY');
+    router.push(`/recruit/${recruitId}/applications/`);
+  };
 
   // TODO : 구체화 필요함.
   if (isLoading) {
@@ -35,6 +46,7 @@ function Recruit() {
         size={'large'}
         variant='contained'
         color='primary'
+        onClick={onApply}
       >
         지원하기
       </Button>

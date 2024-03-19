@@ -1,84 +1,66 @@
+import { useRouter } from 'next/router';
 import { AxiosResponse } from 'axios';
-import { useState } from 'react';
 import { useMutation } from 'react-query';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import {
-  Alert,
-  Box,
-  Button,
-  Modal,
-  Snackbar,
-  SnackbarOrigin,
-  Typography,
-} from '@mui/material';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { Box, Button, Modal, Typography } from '@mui/material';
 import { IApplicantAnswer } from 'types/recruit/recruitments';
 import { mockInstance } from 'utils/mockAxios';
 import {
+  applicationAlertState,
+  applicationFormTypeState,
   applicationModalState,
   userApplicationAnswerState,
-  userApplicationInfo,
 } from 'utils/recoil/application';
 import styles from 'styles/modal/recruit/recruitModal.module.scss';
 
-interface ISnackBarState extends SnackbarOrigin {
-  snackBarOpen: boolean;
-  message: string;
-  severity: 'success' | 'error';
-}
-
 export default function ApplyModal() {
-  const [snackBarState, setSnackBarState] = useState<ISnackBarState>({
-    snackBarOpen: false,
-    vertical: 'bottom',
-    horizontal: 'left',
-    message: '',
-    severity: 'error',
-  });
-
-  const { recruitId } = useRecoilValue(userApplicationInfo);
+  const setAlertState = useSetRecoilState(applicationAlertState);
   const applicantAnswers = useRecoilValue(userApplicationAnswerState);
   const [modalState, setModalState] = useRecoilState(applicationModalState);
+  const applicationMode = useRecoilValue(applicationFormTypeState);
 
-  const { snackBarOpen, vertical, horizontal, message, severity } =
-    snackBarState;
+  const router = useRouter();
+  const recruitId = parseInt(router.query.id as string);
+  const applicationId = parseInt(router.query.applicationId as string);
+  console.log(router, applicationId);
 
   const onModalClose = () => {
     setModalState({ state: false, content: 'NONE' });
   };
 
-  const onSanckBarClose = () => {
-    setSnackBarState({ ...snackBarState, snackBarOpen: false });
-  };
-
   const { mutate } = useMutation(
     (applicantAnswers: IApplicantAnswer[]): Promise<AxiosResponse> => {
-      return mockInstance.post(
-        `/recruitments/${recruitId}/applications`,
-        applicantAnswers
-      );
+      if (applicationMode === 'APPLY') {
+        return mockInstance.post(`/recruitments/${recruitId}/applications`, {
+          form: applicantAnswers,
+        });
+      } else {
+        return mockInstance.patch(
+          `/recruitments/${recruitId}/applications/${applicationId}`,
+          { form: applicantAnswers }
+        );
+      }
     }
   );
 
   const onApply = () => {
     mutate(applicantAnswers, {
       onSuccess: () => {
-        setSnackBarState((prev) => ({
-          ...prev,
-          snackBarOpen: true,
-          message: '지원되었습니다.',
-          severity: 'success',
-        }));
-        console.log(11, snackBarOpen);
+        setAlertState({
+          alertState: true,
+          message:
+            applicationMode === 'APPLY' ? '지원되었습니다.' : '수정되었습니다.',
+          severity: applicationMode === 'APPLY' ? 'success' : 'info',
+        });
         setModalState({ state: false, content: 'NONE' });
         // todo: 제출 후 recruit로 page 이동
       },
       onError: () => {
-        setSnackBarState((prev) => ({
-          ...prev,
-          snackBarOpen: true,
+        setAlertState({
+          alertState: true,
           message: '요청에 문제가 발생했습니다.',
           severity: 'error',
-        }));
+        });
       },
     });
   };
@@ -114,20 +96,6 @@ export default function ApplyModal() {
               제출하기
             </Button>
           </Box>
-          <Snackbar
-            open={snackBarOpen}
-            anchorOrigin={{ vertical, horizontal }}
-            onClose={onSanckBarClose}
-            autoHideDuration={6000}
-          >
-            <Alert
-              onClose={onSanckBarClose}
-              severity={severity}
-              variant={'filled'}
-            >
-              {message}
-            </Alert>
-          </Snackbar>
         </Box>
       </Modal>
     </>
