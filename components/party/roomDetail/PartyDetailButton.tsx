@@ -2,9 +2,9 @@ import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { CiShare2 } from 'react-icons/ci';
 import { PiSirenFill } from 'react-icons/pi';
-import { Snackbar } from '@mui/material';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 
 type ParytButtonProps = {
@@ -69,20 +69,26 @@ function ShareRoom() {
   );
 }
 
-type ReprashProps = ParytButtonProps & {
+type RefreshProps = ParytButtonProps & {
   fetchRoomDetail: () => void;
 };
 
-function JoinRoom({ roomId, fetchRoomDetail }: ReprashProps) {
-  const handlerJoin = async () => {
-    await instance.post(`/party/rooms/${roomId}/join`).catch((error) => {
-      <Snackbar
-        open={true}
-        autoHideDuration={6000}
-        message='참여에 실패했습니다.'
-      />;
-    });
-    fetchRoomDetail();
+function JoinRoom({ roomId, fetchRoomDetail }: RefreshProps) {
+  const setSnackbar = useSetRecoilState(toastState);
+  const handlerJoin = () => {
+    instance
+      .post(`/party/rooms/${roomId}`)
+      .then(() => {
+        fetchRoomDetail();
+      })
+      .catch(() => {
+        setSnackbar({
+          toastName: 'GET request',
+          message: '참여에 실패했습니다. 다시 시도해주세요.',
+          severity: 'error',
+          clicked: true,
+        });
+      });
   };
 
   return (
@@ -92,16 +98,23 @@ function JoinRoom({ roomId, fetchRoomDetail }: ReprashProps) {
   );
 }
 
-function LeaveRoom({ roomId, fetchRoomDetail }: ReprashProps) {
-  const handlerExit = async () => {
-    await instance.patch(`/party/rooms/${roomId}`).catch(() => {
-      <Snackbar
-        open={true}
-        autoHideDuration={6000}
-        message='나가기에 실패했습니다. 다시 시도해주세요.'
-      />;
-    });
-    fetchRoomDetail();
+function LeaveRoom({ roomId, fetchRoomDetail }: RefreshProps) {
+  const setSnackbar = useSetRecoilState(toastState);
+
+  const handlerExit = () => {
+    instance
+      .patch(`/party/rooms/${roomId}`)
+      .then(() => {
+        fetchRoomDetail();
+      })
+      .catch(() => {
+        setSnackbar({
+          toastName: 'patch request',
+          message: '나가기에 실패했습니다.\n 다시 시도해주세요.',
+          severity: 'error',
+          clicked: true,
+        });
+      });
   };
 
   return (
@@ -111,26 +124,32 @@ function LeaveRoom({ roomId, fetchRoomDetail }: ReprashProps) {
   );
 }
 
-function StartRoom({ roomId }: { roomId: number }) {
+function StartRoom({ roomId, fetchRoomDetail }: RefreshProps) {
+  const setSnackbar = useSetRecoilState(toastState);
+
   return (
     <button
       className={styles.startBtn}
       onClick={() => {
-        instance.patch(`/party/rooms/${roomId}/start`).catch(() => {
-          <Snackbar
-            open={true}
-            autoHideDuration={6000}
-            message='시작하지 못했습니다. 다시 시도해주세요.'
-          />;
-        });
+        instance
+          .patch(`/party/rooms/${roomId}/start`)
+          .then(() => {
+            fetchRoomDetail();
+          })
+          .catch(() => {
+            setSnackbar({
+              toastName: 'patch request',
+              message: '시작에 실패했습니다시',
+              severity: 'error',
+              clicked: true,
+            });
+          });
       }}
     >
       시작
     </button>
   );
 }
-
-// TODO: 버튼에 css입히기
 
 const PartyRoomDetailButton = {
   ReportComment,
