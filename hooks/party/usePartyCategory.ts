@@ -8,7 +8,7 @@ export default function usePartyCategory() {
   const queryClient = useQueryClient();
   const setSnackBar = useSetRecoilState(toastState);
 
-  const { data } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: 'partyCategory',
     queryFn: () =>
       instance
@@ -48,5 +48,7 @@ export default function usePartyCategory() {
     deleteCategory: (categoryId: number) => deleteMutation.mutate(categoryId),
     createCategory: (categoryName: string) =>
       createMutation.mutate(categoryName),
+    isCategoryLoading: isLoading,
+    isCategoryError: isError,
   };
 }
