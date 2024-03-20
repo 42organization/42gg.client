@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
 import {
   Paper,
   Table,
@@ -37,10 +36,10 @@ export default function AdminPartyNoShow() {
   const fetchNoShow = useCallback(async () => {
     try {
       const res = await instanceInPartyManage.get(
-        `/penalties?page=${currentPage}&size=10`
+        `/party/admin/reports/users?page=${currentPage}&size=10`
       );
       setNoShowInfo({
-        userReportPageList: res.data.penaltyList,
+        userReportPageList: res.data.userReportPageList,
         totalPages: res.data.totalPage,
         currentPage: currentPage,
       });
@@ -66,7 +65,7 @@ export default function AdminPartyNoShow() {
               noShowInfo.userReportPageList.map(
                 (report: PartyNoshowReport, index: number) => (
                   <TableRow key={index}>
-                    {tableFormat['partyPenaltyAdmin'].columns.map(
+                    {tableFormat['partyNoshowReport'].columns.map(
                       (columnName) => {
                         return (
                           <TableCell key={columnName}>
