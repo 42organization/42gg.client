@@ -21,7 +21,7 @@ import styles from 'styles/admin/Party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: '번호',
-  user: '유저',
+  userIntraId: '유저',
   penaltyType: '패널티 타입',
   message: '내용',
   startTime: '시작 시간',
@@ -75,7 +75,7 @@ export default function AdminCommentReport() {
         <Table aria-label='UserManagementTable'>
           <AdminTableHead tableName={'partyPenaltyAdmin'} table={tableTitle} />
           <TableBody>
-            {penaltyInfo.penaltyList.length > 0 ? (
+            {penaltyInfo.penaltyList && penaltyInfo.penaltyList.length > 0 ? (
               penaltyInfo.penaltyList.map(
                 (penalty: PartyPenaltyAdmin, index: number) => (
                   <TableRow key={index}>

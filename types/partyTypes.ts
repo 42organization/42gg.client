@@ -140,7 +140,7 @@ export type PartyTemplateForm = {
 
 export type PartyPenaltyAdmin = {
   id: number;
-  user: string;
+  userIntraId: string;
   penaltyType: string;
   message: string;
   startTime: string;
@@ -151,6 +151,7 @@ export type PartyPenaltyAdminSubmit = {
   penaltyType: string;
   message: string;
   penaltyTime: number;
+  userIntraId: string;
 };
 
 export interface PartyPenaltyTable {

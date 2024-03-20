@@ -15,6 +15,7 @@ export default function PartyPenaltyModal({
       penaltyType: '',
       message: '',
       penaltyTime: 0,
+      userIntraId: '',
     }
   );
   const setModal = useSetRecoilState(modalState);
@@ -28,6 +29,7 @@ export default function PartyPenaltyModal({
         penaltyType: partyPenalty.penaltyType,
         message: partyPenalty.message,
         penaltyTime: partyPenalty.penaltyTime,
+        userIntraId: partyPenalty.userIntraId,
       });
     }
   }, []);
