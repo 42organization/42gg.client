@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { PartyPenaltyAdmin, PartyPenaltyAdminSubmit } from 'types/partyTypes';
+import { instanceInPartyManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
-import usePartyPenalty from 'hooks/party/usePartyPenalty';
 import styles from 'styles/party/TemplateModal.module.scss';
 
 export default function PartyPenaltyModal({
@@ -19,7 +19,6 @@ export default function PartyPenaltyModal({
     }
   );
   const setModal = useSetRecoilState(modalState);
-  const { createPenalty, updatePenalty } = usePartyPenalty();
   const [isUpdateMode, setIsUpdateMode] = useState(false);
 
   useEffect(() => {
@@ -33,6 +32,17 @@ export default function PartyPenaltyModal({
       });
     }
   }, []);
+
+  const updatePenalty = (
+    penaltyId: number,
+    penalty: PartyPenaltyAdminSubmit
+  ) => {
+    instanceInPartyManage.patch(`/penalties/${penaltyId}`, penalty);
+  };
+
+  const createPenalty = (penalty: PartyPenaltyAdminSubmit) => {
+    instanceInPartyManage.post('/penalties', penalty);
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
