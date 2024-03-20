@@ -37,7 +37,7 @@ export default function AdminCommentReport() {
   const fetchComment = useCallback(async () => {
     try {
       const res = await instanceInPartyManage.get(
-        `/party/admin/reports/comments?page=${currentPage}&size=10`
+        `/reports/comments?page=${currentPage}&size=10`
       );
       setCommentInfo({
         commentReportList: res.data.commentReportList,
@@ -62,7 +62,8 @@ export default function AdminCommentReport() {
         <Table aria-label='UserManagementTable'>
           <AdminTableHead tableName={'partyCommentReport'} table={tableTitle} />
           <TableBody>
-            {commentInfo.commentReportList.length > 0 ? (
+            {commentInfo.commentReportList &&
+            commentInfo.commentReportList.length > 0 ? (
               commentInfo.commentReportList.map(
                 (report: PartyCommentReport, index: number) => (
                   <TableRow key={index}>

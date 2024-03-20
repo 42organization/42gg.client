@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from 'react';
 import {
   Paper,
   Table,
@@ -6,10 +7,14 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { PartyRoomReport } from 'types/partyTypes';
+import { PartyRoomReport, PartyRoomReportTable } from 'types/partyTypes';
+import { instanceInPartyManage } from 'utils/axios';
 import { tableFormat } from 'constants/admin/table';
-import { AdminTableHead } from 'components/admin/common/AdminTable';
-import { useAdminPartyRoomReport } from 'hooks/party/useAdminPartyRoomReport';
+import {
+  AdminEmptyItem,
+  AdminTableHead,
+} from 'components/admin/common/AdminTable';
+import PageNation from 'components/Pagination';
 import styles from 'styles/admin/Party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
@@ -22,7 +27,31 @@ const tableTitle: { [key: string]: string } = {
 };
 
 export default function AdminPartyRoomReport() {
-  const { roomReports } = useAdminPartyRoomReport();
+  const [roomInfo, setRoomInfo] = useState<PartyRoomReportTable>({
+    roomReportList: [],
+    totalPage: 0,
+    currentPage: 0,
+  });
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const fetchRoom = useCallback(async () => {
+    try {
+      const res = await instanceInPartyManage.get(
+        `/reports/rooms?page=${currentPage}&size=10`
+      );
+      setRoomInfo({
+        roomReportList: res.data.roomReportList,
+        totalPage: res.data.totalPage,
+        currentPage: currentPage,
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }, [currentPage]);
+
+  useEffect(() => {
+    fetchRoom();
+  }, [fetchRoom]);
 
   return (
     <div className={styles.AdminTableWrap}>
@@ -33,20 +62,37 @@ export default function AdminPartyRoomReport() {
         <Table aria-label='UserManagementTable'>
           <AdminTableHead tableName={'partyRoomReport'} table={tableTitle} />
           <TableBody>
-            {roomReports.map((r) => (
-              <TableRow key={r.id}>
-                {tableFormat['partyRoomReport'].columns.map((columnName) => {
-                  return (
-                    <TableCell key={columnName}>
-                      {r[columnName as keyof PartyRoomReport]?.toString()}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))}
+            {roomInfo.roomReportList && roomInfo.roomReportList.length > 0 ? (
+              roomInfo.roomReportList.map(
+                (report: PartyRoomReport, index: number) => (
+                  <TableRow key={index}>
+                    {tableFormat['partyRoomReport'].columns.map(
+                      (columnName) => (
+                        <TableCell key={columnName}>
+                          {report[
+                            columnName as keyof PartyRoomReport
+                          ]?.toString()}
+                        </TableCell>
+                      )
+                    )}
+                  </TableRow>
+                )
+              )
+            ) : (
+              <AdminEmptyItem content={'패널티 기록이 비어있습니다'} />
+            )}
           </TableBody>
         </Table>
       </TableContainer>
+      <div className={styles.pageNationContainer}>
+        <PageNation
+          curPage={roomInfo.currentPage}
+          totalPages={roomInfo.totalPage}
+          pageChangeHandler={(pageNumber: number) => {
+            setCurrentPage(pageNumber);
+          }}
+        />
+      </div>
     </div>
   );
 }

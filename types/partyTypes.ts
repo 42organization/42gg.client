@@ -71,6 +71,12 @@ export type PartyGameTemplate = {
   summary: string;
 };
 
+export type PartyRoomReportTable = {
+  roomReportList: PartyRoomReport[];
+  totalPage: number;
+  currentPage: number;
+};
+
 export type PartyRoomReport = {
   id: number;
   reporterIntraId: string;
@@ -79,11 +85,13 @@ export type PartyRoomReport = {
   message: string;
   createdAt: string;
 };
+
 export type PartyNoshowReportTable = {
-  userReportPageList: PartyNoshowReport[];
+  noShowReportList: PartyNoshowReport[];
   totalPages: number;
   currentPage: number;
 };
+
 export type PartyNoshowReport = {
   id: number;
   reporterIntraId: string;
@@ -92,6 +100,12 @@ export type PartyNoshowReport = {
   message: string;
   createdAt: string;
 };
+
+export interface PartyCommentReportTable {
+  commentReportList: PartyCommentReport[];
+  totalPage: number;
+  currentPage: number;
+}
 
 export type PartyCommentReport = {
   id: number;

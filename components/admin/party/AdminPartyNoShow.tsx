@@ -28,7 +28,7 @@ const tableTitle: { [key: string]: string } = {
 
 export default function AdminPartyNoShow() {
   const [noShowInfo, setNoShowInfo] = useState<PartyNoshowReportTable>({
-    userReportPageList: [],
+    noShowReportList: [],
     totalPages: 0,
     currentPage: 0,
   });
@@ -36,10 +36,10 @@ export default function AdminPartyNoShow() {
   const fetchNoShow = useCallback(async () => {
     try {
       const res = await instanceInPartyManage.get(
-        `/party/admin/reports/users?page=${currentPage}&size=10`
+        `/reports/users?page=${currentPage}&size=10`
       );
       setNoShowInfo({
-        userReportPageList: res.data.userReportPageList,
+        noShowReportList: res.data.noShowReportList,
         totalPages: res.data.totalPage,
         currentPage: currentPage,
       });
@@ -61,8 +61,9 @@ export default function AdminPartyNoShow() {
         <Table aria-label='UserManagementTable'>
           <AdminTableHead tableName={'partyNoshowReport'} table={tableTitle} />
           <TableBody>
-            {noShowInfo.userReportPageList.length > 0 ? (
-              noShowInfo.userReportPageList.map(
+            {noShowInfo.noShowReportList &&
+            noShowInfo.noShowReportList.length > 0 ? (
+              noShowInfo.noShowReportList.map(
                 (report: PartyNoshowReport, index: number) => (
                   <TableRow key={index}>
                     {tableFormat['partyNoshowReport'].columns.map(
