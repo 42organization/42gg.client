@@ -4,6 +4,7 @@ import {
   Paper,
   Table,
   TableBody,
+  TableHead,
   TableCell,
   TableContainer,
   TableRow,
@@ -15,34 +16,32 @@ import {
 // import { instanceInManage } from 'utils/axios';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
+import { tableFormat } from 'constants/admin/table';
 import {
   AdminEmptyItem,
   AdminTableHead,
   AdminContent,
 } from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
-import styles from 'styles/admin/recruitments/Recruitments.module.scss';
-
+import styles from 'styles/admin/recruitments/RecruitmentsUser.module.scss';
 //무한 스크롤로 변경
 //필터 추가
 /* 
 추가할 기능
 가로세로 길이 조절
 가로세로 위치 변경
+호버 기능?
 */
 export interface IrecruitTable {
-  applications: IrecruitUserTable['applications'];
+  applications: IrecruitUserTable[];
   totalPage: number;
   currentPage: number;
 }
 
 const tableTitle: { [key: string]: string } = {
-  id: 'ID',
-  usedAt: '적용 시간',
-  title: '제목',
+  intraId: 'intraId',
   status: '상태',
-  detailRecruitment: '공고 상세보기',
-  detaillUser: '지원자 보기',
+  question: '질문',
 };
 
 function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
@@ -80,36 +79,7 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
     getRecruitUserHandler();
   }, [currentPage]);
 
-  const renderTableCell = (
-    recruit: IrecruitUserTable['applications'][number]
-  ) => {
-    return (
-      <TableRow className={styles.tableRow} key={recruit.applicationId}>
-        <TableCell className={styles.tableBodyItem}>
-          <AdminContent
-            content={recruit.intraId || ''}
-            maxLen={16}
-            detailTitle={recruit.applicationId.toString()}
-            detailContent={recruit.status || ''}
-          />
-        </TableCell>
-        {recruit.form?.map((formItem: Iquestion, index: number) => (
-          <TableCell className={styles.tableBodyItem} key={index}>
-            <AdminContent
-              content={
-                formItem.answer ||
-                formItem.checkList?.map((item) => item.content).join(', ') ||
-                ''
-              }
-              maxLen={16}
-            />
-          </TableCell>
-        ))}
-      </TableRow>
-    );
-  };
-
-  if (!recruitUserData.applications.length) {
+  if (!recruitUserData.applications) {
     return (
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
@@ -122,13 +92,69 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
     );
   }
 
+  const questions = recruitUserData.applications.reduce(
+    (acc: string[], application: { form: { question: string }[] }) => {
+      application.form.forEach(({ question }) => {
+        if (acc.indexOf(question) === -1) {
+          acc.push(question);
+        }
+      });
+      return acc;
+    },
+    []
+  );
+
+  const renderTableCells = (recruit: IrecruitUserTable) => {
+    const answers = questions.map((question) => {
+      const formItem = recruit.form.find((form) => form.question === question);
+      if (!formItem) return 'N/A';
+
+      switch (formItem.inputType) {
+        case 'TEXT':
+          return formItem.answer;
+        case 'SINGLE_CHECK':
+          return formItem.checkedList?.map((item) => item.content).join(', ');
+        case 'MULTI_CHECK':
+          return formItem.checkedList
+            ?.flatMap((item) =>
+              item.content.map((c: { content: string }) => c.content)
+            )
+            .join(', ');
+      }
+    });
+
+    return (
+      <TableRow className={styles.tableRow} key={recruit.applicationId}>
+        <TableCell className={styles.tableBodyItem}>
+          {recruit.intraId}
+        </TableCell>
+        <TableCell className={styles.tableBodyItem}>{recruit.status}</TableCell>
+        {answers.map((answer, index) => (
+          <TableCell className={styles.tableBodyItem} key={index}>
+            {answer}
+          </TableCell>
+        ))}
+      </TableRow>
+    );
+  };
+
   return (
     <>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
-          <AdminTableHead tableName={'recruitUserList'} table={tableTitle} />
+          <TableHead className={styles.tableHeader}>
+            <TableRow>
+              <TableCell className={styles.tableHeaderItem}>intraId</TableCell>
+              <TableCell className={styles.tableHeaderItem}>status</TableCell>
+              {questions.map((question, index) => (
+                <TableCell className={styles.tableHeaderItem} key={index}>
+                  {question}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
           <TableBody className={styles.tableBody}>
-            {recruitUserData.applications.map(renderTableCell)}
+            {recruitUserData.applications.map(renderTableCells)}
           </TableBody>
         </Table>
       </TableContainer>

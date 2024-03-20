@@ -21,12 +21,12 @@ export interface Iquestion {
   question: string;
   inputType: 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
   answer?: string;
-  checkList?: Array<IcheckItem>;
+  checkedList?: Array<IcheckItem>;
 }
 
 export interface IcheckItem {
   checkId?: number;
-  content: string;
+  content: Array<{ checkId: number; content: string }>;
 }
 
 export interface Inotication {
@@ -47,10 +47,8 @@ export interface InoticationTable {
 }
 
 export interface IrecruitUserTable {
-  applications: {
-    applicationId: number;
-    intraId: string;
-    status?: '합격' | '불합격' | '심사중';
-    form: Array<Iquestion>;
-  }[];
+  applicationId: number;
+  intraId: string;
+  status?: '합격' | '불합격' | '심사중';
+  form: Iquestion[];
 }

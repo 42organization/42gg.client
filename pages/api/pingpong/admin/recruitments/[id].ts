@@ -4,29 +4,47 @@ const fullRecruitData1 = {
   applications: [
     {
       applicationId: 1,
-      intraId: 'test1',
+      intraId:
+        'test1213412342134231412412423142142142134213423421341243123412341234124124124123',
       status: '합격',
       form: [
         {
           questionId: 1,
-          question: '이름',
+          question: '질문 1',
           inputType: 'TEXT',
-          answer: '홍길동',
+          answer: '답변 1',
         },
         {
           questionId: 2,
-          question: '나이',
+          question: '질문 2',
           inputType: 'SINGLE_CHECK',
-          answer: '20',
+          checkedList: [{ checkId: 1, content: '선택지 1' }],
         },
         {
           questionId: 3,
-          question: '성별',
+          question: '질문 3',
           inputType: 'MULTI_CHECK',
-          checkList: [
+          checkedList: [
             {
               checkId: 1,
-              content: '남',
+              content: [
+                { checkId: 1, content: '선택지 1' },
+                { checkId: 2, content: '선택지 2' },
+              ],
+            },
+          ],
+        },
+        {
+          questionId: 4,
+          question: '질문 4',
+          inputType: 'MULTI_CHECK',
+          checkedList: [
+            {
+              checkId: 1,
+              content: [
+                { checkId: 1, content: '선택지 1' },
+                { checkId: 2, content: '123456789012345678901234567890' },
+              ],
             },
           ],
         },
@@ -52,8 +70,8 @@ const fullRecruitData1 = {
         {
           questionId: 3,
           question: '성별',
-          inputType: 'TEXT',
-          checkList: [
+          inputType: 'SINGLE_CHECK',
+          checkedList: [
             {
               checkId: 1,
               content: '여',
@@ -82,8 +100,8 @@ const fullRecruitData1 = {
         {
           questionId: 3,
           question: '성별',
-          inputType: 'TEXT',
-          checkList: [
+          inputType: 'SINGLE_CHECK',
+          checkedList: [
             {
               checkId: 1,
               content: '여',

@@ -26,7 +26,7 @@ import {
   AdminTableHead,
 } from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
-import styles from 'styles/admin/recruitments/Recruitments.module.scss';
+import styles from 'styles/admin/recruitments/RecruitmentsUser.module.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const tableTitle: { [key: string]: string } = {
