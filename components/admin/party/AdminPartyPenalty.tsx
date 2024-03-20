@@ -9,7 +9,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { PartyPenaltyAdmin, PartyPenaltyTable } from 'types/partyTypes';
-import { instance } from 'utils/axios';
+import { instanceInPartyManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import {
@@ -40,8 +40,8 @@ export default function AdminCommentReport() {
 
   const fetchPenalty = useCallback(async () => {
     try {
-      const res = await instance.get(
-        `/party/admin/penalties?page=${currentPage}&size=10`
+      const res = await instanceInPartyManage.get(
+        `/penalties?page=${currentPage}&size=10`
       );
       setPenaltyInfo({
         penaltyList: res.data.penaltyList,
@@ -68,7 +68,7 @@ export default function AdminCommentReport() {
   return (
     <div className={styles.AdminTableWrap}>
       <div className={styles.header}>
-        <span className={styles.title}>댓글 신고리스트</span>
+        <span className={styles.title}>패널티 리스트</span>
       </div>
       <button onClick={handleAddpenalty}>추가</button>
       <TableContainer component={Paper}>

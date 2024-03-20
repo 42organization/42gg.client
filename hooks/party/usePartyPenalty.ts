@@ -11,7 +11,7 @@ export default function usePartyPenalty(page?: number) {
   // POST 요청을 처리하는 뮤테이션 훅
   const createMutation = useMutation(
     (penalty: PartyPenaltyAdminSubmit) =>
-      instanceInPartyManage.post('/party/admin/penalties', penalty),
+      instanceInPartyManage.post('/penalties', penalty),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('partyPenaltyAdmin'); // 쿼리 재조회
@@ -27,11 +27,7 @@ export default function usePartyPenalty(page?: number) {
     }: {
       penaltyId: number;
       penalty: PartyPenaltyAdminSubmit;
-    }) =>
-      instanceInPartyManage.patch(
-        `/party/admin/penalties/${penaltyId}`,
-        penalty
-      ),
+    }) => instanceInPartyManage.patch(`/penalties/${penaltyId}`, penalty),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('partyPenaltyAdmin');
