@@ -1,3 +1,5 @@
+import { useCallback, useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import {
   Paper,
   Table,
@@ -6,10 +8,14 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { PartyNoshowReport } from 'types/partyTypes';
+import { PartyNoshowReport, PartyNoshowReportTable } from 'types/partyTypes';
+import { instanceInPartyManage } from 'utils/axios';
 import { tableFormat } from 'constants/admin/table';
-import { AdminTableHead } from 'components/admin/common/AdminTable';
-import { useAdminPartyNoshow } from 'hooks/party/useAdminPartyNoShow';
+import {
+  AdminEmptyItem,
+  AdminTableHead,
+} from 'components/admin/common/AdminTable';
+import PageNation from 'components/Pagination';
 import styles from 'styles/admin/Party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
@@ -22,7 +28,30 @@ const tableTitle: { [key: string]: string } = {
 };
 
 export default function AdminPartyNoShow() {
-  const { noShowReports } = useAdminPartyNoshow();
+  const [noShowInfo, setNoShowInfo] = useState<PartyNoshowReportTable>({
+    userReportPageList: [],
+    totalPages: 0,
+    currentPage: 0,
+  });
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const fetchNoShow = useCallback(async () => {
+    try {
+      const res = await instanceInPartyManage.get(
+        `/penalties?page=${currentPage}&size=10`
+      );
+      setNoShowInfo({
+        userReportPageList: res.data.penaltyList,
+        totalPages: res.data.totalPage,
+        currentPage: currentPage,
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }, [currentPage]);
+
+  useEffect(() => {
+    fetchNoShow();
+  }, [fetchNoShow]);
 
   return (
     <div className={styles.AdminTableWrap}>
@@ -33,20 +62,39 @@ export default function AdminPartyNoShow() {
         <Table aria-label='UserManagementTable'>
           <AdminTableHead tableName={'partyNoshowReport'} table={tableTitle} />
           <TableBody>
-            {noShowReports.map((rn) => (
-              <TableRow key={rn.id}>
-                {tableFormat['partyNoshowReport'].columns.map((columnName) => {
-                  return (
-                    <TableCell key={columnName}>
-                      {rn[columnName as keyof PartyNoshowReport]?.toString()}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))}
+            {noShowInfo.userReportPageList.length > 0 ? (
+              noShowInfo.userReportPageList.map(
+                (report: PartyNoshowReport, index: number) => (
+                  <TableRow key={index}>
+                    {tableFormat['partyPenaltyAdmin'].columns.map(
+                      (columnName) => {
+                        return (
+                          <TableCell key={columnName}>
+                            {report[
+                              columnName as keyof PartyNoshowReport
+                            ]?.toString()}
+                          </TableCell>
+                        );
+                      }
+                    )}
+                  </TableRow>
+                )
+              )
+            ) : (
+              <AdminEmptyItem content={'패널티 기록이 비어있습니다'} />
+            )}
           </TableBody>
         </Table>
       </TableContainer>
+      <div className={styles.pageNationContainer}>
+        <PageNation
+          curPage={noShowInfo.currentPage}
+          totalPages={noShowInfo.totalPages}
+          pageChangeHandler={(pageNumber: number) => {
+            setCurrentPage(pageNumber);
+          }}
+        />
+      </div>
     </div>
   );
 }

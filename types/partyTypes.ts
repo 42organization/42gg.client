@@ -79,7 +79,11 @@ export type PartyRoomReport = {
   message: string;
   createdAt: string;
 };
-
+export type PartyNoshowReportTable = {
+  userReportPageList: PartyNoshowReport[];
+  totalPages: number;
+  currentPage: number;
+};
 export type PartyNoshowReport = {
   id: number;
   reporterIntraId: string;
