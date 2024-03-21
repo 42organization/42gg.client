@@ -1,19 +1,8 @@
 import { useQuery } from 'react-query';
-import {
-  ApplicationFormType,
-  IRecruitmentDetailUser,
-} from 'types/recruit/recruitments';
+import { IRecruitmentDetailUser } from 'types/recruit/recruitments';
 import { mockInstance } from 'utils/mockAxios';
 
-const useRecruitDetailUser = ({
-  recruitId,
-  applicationId,
-  mode,
-}: {
-  recruitId: number;
-  applicationId: number;
-  mode: ApplicationFormType;
-}) => {
+const useRecruitDetailUser = (recruitId: number, applicationId: number) => {
   const { data, isLoading } = useQuery<IRecruitmentDetailUser>({
     queryKey: ['recruitDetailUser', recruitId, applicationId],
     queryFn: async () => {
@@ -23,7 +12,6 @@ const useRecruitDetailUser = ({
       return res.data;
     },
     refetchOnWindowFocus: false,
-    enabled: mode === 'APPLY' ? false : true,
   });
   return { data, isLoading };
 };
