@@ -1,4 +1,4 @@
-import { MutableRefObject } from 'react';
+import { MutableRefObject, useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
 import {
   ApplicationFormType,
@@ -17,6 +17,15 @@ interface IitemProps {
 
 export default function TextForm(props: IitemProps) {
   const { form, formRefs, mode, answer } = props;
+  const [value, setValue] = useState<string>('');
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
+  useEffect(() => {
+    if (answer && answer.answer) setValue(answer.answer);
+  }, [answer]);
 
   return (
     <>
@@ -29,7 +38,8 @@ export default function TextForm(props: IitemProps) {
         rows={5}
         color={'info'}
         disabled={mode === 'VIEW'}
-        value={answer && answer.answer}
+        onChange={onChange}
+        value={value}
         inputRef={(ref) => (formRefs.current[form.questionId] = ref)}
       />
     </>
