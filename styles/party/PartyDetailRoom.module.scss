@@ -165,7 +165,7 @@ $detailCommonRem: 1rem;
   }
 
   .commentCreateBar {
-    padding: 0.01rem;
+    padding: 0.11rem;
     margin-top: $detailCommonRem * 0.5;
     background-color: white;
     border-radius: $big-radius;
@@ -173,7 +173,6 @@ $detailCommonRem: 1rem;
     form {
       display: flex;
       align-items: center;
-
       .textBar {
         width: 100%;
         margin-left: 0.5rem;
