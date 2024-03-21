@@ -82,9 +82,15 @@ function ApplicationForm(props: IApplicationFormProps) {
           direction={'column'}
           rowSpacing={2}
         >
-          <Paper className={styles.titleContainer}>{data.title}</Paper>
+          <Paper elevation={3} className={styles.titleContainer}>
+            {data.title}
+          </Paper>
           {data.forms.map((form: IQuestionForm, index: number) => (
-            <Paper className={styles.questionContainer} key={index}>
+            <Paper
+              elevation={3}
+              className={styles.questionContainer}
+              key={index}
+            >
               {form.inputType === 'TEXT' ? (
                 <TextForm
                   form={form}
