@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
 import { Button, Stack } from '@mui/material';
 import { resultType } from 'types/recruit/recruitments';
-import { applicationFormTypeState } from 'utils/recoil/application';
 import style from 'styles/recruit/Main/myRecruitment.module.scss';
 
 const MyApplicationInfo = ({
@@ -13,13 +11,10 @@ const MyApplicationInfo = ({
   recruitId: string;
 }) => {
   const router = useRouter();
-  const setApplicationMode = useSetRecoilState(applicationFormTypeState);
 
   const onCheck = () => {
-    setApplicationMode('VIEW');
-    // applicationId ??
     // router.push(`/recruit/${recruitId}/applications?applicationId=${applicationId});
-    router.push(`/recruit/${recruitId}/applications?applicationId=${1}`);
+    router.push(`/recruit/${recruitId}/my-application?applicationId=${1}`);
   };
 
   if (!status)

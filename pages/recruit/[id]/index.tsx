@@ -1,7 +1,5 @@
 import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
 import { Button } from '@mui/material';
-import { applicationFormTypeState } from 'utils/recoil/application';
 import DynamicQuill from 'components/DynamicQuill';
 import MyRecruitment from 'components/recruit/Main/MyRecruitment';
 import StickyHeader from 'components/recruit/StickyHeader';
@@ -13,15 +11,10 @@ function Recruit() {
   const router = useRouter();
   const recruitId = parseInt(router.query.id as string);
 
-  const { data, isLoading } = useRecruitDetail({
-    recruitId: recruitId,
-  });
-
-  const setApplicationMode = useSetRecoilState(applicationFormTypeState);
+  const { data, isLoading } = useRecruitDetail(recruitId);
 
   const onApply = () => {
-    setApplicationMode('APPLY');
-    router.push(`/recruit/${recruitId}/applications/`);
+    router.push(`/recruit/${recruitId}/apply`);
   };
 
   // TODO : 구체화 필요함.
