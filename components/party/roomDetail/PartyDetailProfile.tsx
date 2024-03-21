@@ -134,7 +134,7 @@ function ButtonHandler({
       />
     </div>
   ) : (
-    <>
+    <div className={styles.btnContainer}>
       <PartyRoomDetailButton.StartRoom
         roomId={roomId}
         fetchRoomDetail={fetchRoomDetail}
@@ -143,7 +143,7 @@ function ButtonHandler({
         roomId={roomId}
         fetchRoomDetail={fetchRoomDetail}
       />
-    </>
+    </div>
   );
 }
 
