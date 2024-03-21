@@ -1,163 +1,139 @@
-import { useRouter } from 'next/router';
-import { useEffect, useRef } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRef } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Box, Button, Grid, Paper } from '@mui/material';
-import { IApplicantAnswer, refMap } from 'types/recruit/recruitments';
 import {
-  applicationAnswerDefault,
-  applicationFormCheck,
-} from 'utils/handleApplicationForm';
+  ApplicationFormType,
+  IApplicantAnswer,
+  IQuestionForm,
+  IRecruitmentDetail,
+  refMap,
+} from 'types/recruit/recruitments';
+import { applicationAnswerSet } from 'utils/handleApplicationForm';
 import {
   applicationAlertState,
-  applicationFormTypeState,
-  applicationInvalidInput,
   applicationModalState,
-  userApplicationAnswerState,
 } from 'utils/recoil/application';
-import ApplyModal from 'components/modal/recruitment/ApplyModal';
+import ApplyEditModal from 'components/modal/recruitment/ApplyEditModal';
 import CancelModal from 'components/modal/recruitment/CancelModal';
-import ApplicationFormItem from 'components/recruit/Application/ApplicationFormItem';
-import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
-import useRecruitDetailUser from 'hooks/recruit/useRecruitDetailUser';
-import applicationStyle from 'styles/recruit/application.module.scss';
+import MultiCheckForm from 'components/recruit/Application/applicationFormItems/MultiCheck';
+import SingleCheckForm from 'components/recruit/Application/applicationFormItems/SingleCheck';
+import TextForm from 'components/recruit/Application/applicationFormItems/TextForm';
+import styles from 'styles/recruit/application.module.scss';
 
-export default function ApplicationForm() {
+interface IApplicationFormProps {
+  mode: ApplicationFormType;
+  recuitId: number;
+  applicationId: number | null;
+  data: IRecruitmentDetail;
+  answerList: IApplicantAnswer[] | null;
+}
+
+function ApplicationForm(props: IApplicationFormProps) {
+  const { mode, recuitId, applicationId, data, answerList } = props;
   const formRefs = useRef<refMap>({});
-
-  const mode = useRecoilValue(applicationFormTypeState);
-  const setAlertState = useSetRecoilState(applicationAlertState);
   const modalState = useRecoilValue(applicationModalState);
-  const [invalidInput, setInvalidInput] = useRecoilState(
-    applicationInvalidInput
-  );
-  const setUserAnswers = useSetRecoilState<IApplicantAnswer[]>(
-    userApplicationAnswerState
-  );
+  const setModalState = useSetRecoilState(applicationModalState);
+  const setAlertState = useSetRecoilState(applicationAlertState);
 
-  const router = useRouter();
-  const recruitId = parseInt(router.query.id as string);
-  const applicationId = parseInt(router.query.applicationId as string) || -1;
+  console.log(answerList);
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const answerForms = applicationAnswerSet(formData, data.forms);
 
-  const { data, isLoading } = useRecruitDetail({ recruitId });
-  const { data: userApplyInfo, isLoading: userAnswerLoading } =
-    useRecruitDetailUser({
-      recruitId: recruitId,
-      applicationId: applicationId,
-      mode,
-    });
-
-  // 데이터 잘 들어온 경우 recoil 데이터 세팅
-  useEffect(() => {
-    if (!isLoading) {
-      if (!data || (data && !Object.keys(data).length)) {
+    // 입력하지 않은 문항으로 이동
+    for (const ans of answerForms) {
+      if (ans.inputType === 'TEXT' && ans.answer === '') {
+        formRefs.current[ans.questionId].focus();
         setAlertState({
           alertState: true,
-          message: '올바르지 않은 요청입니다.',
+          message: '입력하지 않은 항목이 있습니다.',
           severity: 'error',
         });
         return;
       }
-      if (data) {
-        setUserAnswers(applicationAnswerDefault(data?.forms));
+      if (
+        (ans.inputType === 'SINGLE_CHECK' || ans.inputType === 'MULTI_CHECK') &&
+        !ans.checkedList?.length
+      ) {
+        formRefs.current[ans.questionId].focus();
+        setAlertState({
+          alertState: true,
+          message: '입력하지 않은 항목이 있습니다.',
+          severity: 'error',
+        });
+        return;
       }
     }
-  }, [isLoading, data]);
-
-  // 입력하지 않은 문항으로 이동
-  useEffect(() => {
-    if (invalidInput !== -1) {
-      formRefs.current[invalidInput].focus();
-      setInvalidInput(-1);
-    }
-  }, [invalidInput]);
-
-  // 지원서 보기, 수정 모드에서는 기존 유저가 제출한 데이터 가져옴
-  useEffect(() => {
-    if (mode === 'VIEW' || mode === 'EDIT') {
-      if (!userAnswerLoading && userApplyInfo) {
-        setUserAnswers(userApplyInfo.forms);
-      }
-    }
-  }, [mode, userAnswerLoading]);
-
-  if (isLoading || !data || Object.keys(data).length === 0) {
-    return <NoData isLoading={isLoading} />;
-  }
-
-  return (
-    <Box>
-      <Grid
-        className={applicationStyle.form}
-        container
-        direction={'column'}
-        rowSpacing={2}
-      >
-        <Paper className={applicationStyle.titleContainer}>{data.title}</Paper>
-        <ApplicationFormItem formRefs={formRefs} data={data} />
-        <SubmitButton />
-      </Grid>
-      {modalState.content === 'APPLY' ? <ApplyModal /> : <CancelModal />}
-    </Box>
-  );
-}
-
-interface INoDataProps {
-  isLoading: boolean;
-}
-
-function NoData(props: INoDataProps) {
-  const { isLoading } = props;
-  const router = useRouter();
-
-  const goBack = () => {
-    router.back();
+    setModalState({
+      state: true,
+      content: mode === 'APPLY' ? 'APPLY' : 'EDIT',
+      formData: answerForms,
+    });
   };
 
   return (
     <Box>
-      <Grid className={applicationStyle.form}>
-        <Paper className={applicationStyle.titleContainer}>42GG 모집</Paper>
-        <Paper className={applicationStyle.questionContainer}>
-          <div className={applicationStyle.backTitle}>
-            {isLoading ? '로딩중...' : ''}
-          </div>
-          <Button
-            className={applicationStyle.backBtn}
-            variant='contained'
-            onClick={goBack}
-          >
-            뒤로가기
-          </Button>
-        </Paper>
-      </Grid>
+      <form id='applicationForm' onSubmit={onSubmit}>
+        <Grid
+          className={styles.form}
+          container
+          direction={'column'}
+          rowSpacing={2}
+        >
+          <Paper className={styles.titleContainer}>{data.title}</Paper>
+          {data.forms.map((form: IQuestionForm, index: number) => (
+            <Paper className={styles.questionContainer} key={index}>
+              {form.inputType === 'TEXT' ? (
+                <TextForm
+                  form={form}
+                  formRefs={formRefs}
+                  mode={mode}
+                  answer={answerList ? answerList[form.questionId - 1] : null}
+                />
+              ) : form.inputType === 'SINGLE_CHECK' ? (
+                <SingleCheckForm
+                  form={form}
+                  formRefs={formRefs}
+                  mode={mode}
+                  answer={answerList ? answerList[form.questionId - 1] : null}
+                />
+              ) : form.inputType === 'MULTI_CHECK' ? (
+                <MultiCheckForm
+                  form={form}
+                  formRefs={formRefs}
+                  mode={mode}
+                  answer={answerList ? answerList[form.questionId - 1] : null}
+                />
+              ) : (
+                <span>잘못된 타입의 항목입니다</span>
+              )}
+            </Paper>
+          ))}
+          {mode === 'APPLY' && (
+            <Button
+              className={styles.submitBtn}
+              variant='contained'
+              type='submit'
+              form='applicationForm'
+            >
+              제출하기
+            </Button>
+          )}
+        </Grid>
+      </form>
+      {modalState.content === 'CANCEL' ? (
+        <CancelModal recruitId={recuitId} applicationId={applicationId} />
+      ) : (
+        <ApplyEditModal
+          recruitId={recuitId}
+          applicationId={applicationId}
+          mode={mode}
+        />
+      )}
     </Box>
   );
 }
 
-function SubmitButton() {
-  const mode = useRecoilValue(applicationFormTypeState);
-  const userAnswers = useRecoilValue<IApplicantAnswer[]>(
-    userApplicationAnswerState
-  );
-  const setAlertState = useSetRecoilState(applicationAlertState);
-  const setModalState = useSetRecoilState(applicationModalState);
-  const setInvalidInput = useSetRecoilState(applicationInvalidInput);
-
-  if (mode !== 'APPLY') return <></>;
-  return (
-    <Button
-      className={applicationStyle.submitBtn}
-      variant='contained'
-      onClick={() =>
-        applicationFormCheck({
-          setInvalidInput,
-          setAlertState,
-          setModalState,
-          userAnswers,
-        })
-      }
-    >
-      제출하기
-    </Button>
-  );
-}
+export default ApplicationForm;

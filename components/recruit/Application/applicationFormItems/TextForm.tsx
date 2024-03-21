@@ -1,62 +1,35 @@
-import { MutableRefObject, useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { MutableRefObject } from 'react';
 import { TextField } from '@mui/material';
 import {
+  ApplicationFormType,
   IApplicantAnswer,
   IQuestionForm,
   refMap,
 } from 'types/recruit/recruitments';
-import {
-  findUserAnswer,
-  inputDefault,
-  updateUserAnswers,
-} from 'utils/handleApplicationForm';
-import {
-  applicationFormTypeState,
-  userApplicationAnswerState,
-} from 'utils/recoil/application';
-import applicationStyle from 'styles/recruit/application.module.scss';
+import styles from 'styles/recruit/application.module.scss';
 
 interface IitemProps {
   form: IQuestionForm;
   formRefs: MutableRefObject<refMap>;
+  mode: ApplicationFormType;
+  answer: IApplicantAnswer | null;
 }
 
 export default function TextForm(props: IitemProps) {
-  const { form, formRefs } = props;
-  const mode = useRecoilValue(applicationFormTypeState);
-  const [input, setInput] = useState<IApplicantAnswer>(inputDefault(form));
-  const [userAnswers, setUserAnswers] = useRecoilState<IApplicantAnswer[]>(
-    userApplicationAnswerState
-  );
-
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInput((prev) => ({ ...prev, answer: event.target.value }));
-  };
-
-  useEffect(() => {
-    if (mode === 'VIEW' || mode === 'EDIT') {
-      const userAnswer = findUserAnswer(form.questionId, userAnswers);
-      setInput(userAnswer ? userAnswer : inputDefault(form));
-    }
-  }, [mode, userAnswers]);
-
-  useEffect(() => {
-    updateUserAnswers({ updateAnswer: input, userAnswers, setUserAnswers });
-  }, [input]);
+  const { form, formRefs, mode, answer } = props;
 
   return (
     <>
-      <div className={applicationStyle.questionText}>{form.question}</div>
+      <div className={styles.questionText}>{form.question}</div>
       <TextField
-        className={applicationStyle.textField}
+        className={styles.textField}
         label={mode === 'APPLY' ? '답변을 적어주세요' : ''}
+        name={form.questionId.toString()}
         multiline
         rows={5}
         color={'info'}
-        onChange={onChange}
-        disabled={mode === 'VIEW' ? true : false}
-        value={input.answer}
+        disabled={mode === 'VIEW'}
+        value={answer && answer.answer}
         inputRef={(ref) => (formRefs.current[form.questionId] = ref)}
       />
     </>

@@ -1,5 +1,4 @@
 import { MutableRefObject, useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   FormControl,
   FormControlLabel,
@@ -7,72 +6,56 @@ import {
   RadioGroup,
 } from '@mui/material';
 import {
+  ApplicationFormType,
   IApplicantAnswer,
   ICheck,
   IQuestionForm,
   refMap,
 } from 'types/recruit/recruitments';
-import {
-  findUserAnswer,
-  inputDefault,
-  updateUserAnswers,
-} from 'utils/handleApplicationForm';
-import {
-  applicationFormTypeState,
-  userApplicationAnswerState,
-} from 'utils/recoil/application';
-import applicationStyle from 'styles/recruit/application.module.scss';
+import styles from 'styles/recruit/application.module.scss';
 
 interface IitemProps {
   form: IQuestionForm;
   formRefs: MutableRefObject<refMap>;
+  mode: ApplicationFormType;
+  answer: IApplicantAnswer | null;
 }
 
 export default function SingleCheckForm(props: IitemProps) {
-  const { form, formRefs } = props;
-  const mode = useRecoilValue(applicationFormTypeState);
-  const [input, setInput] = useState<IApplicantAnswer>(inputDefault(form));
-  const [userAnswers, setUserAnswers] = useRecoilState<IApplicantAnswer[]>(
-    userApplicationAnswerState
-  );
+  const { form, formRefs, mode, answer } = props;
+  const [singleCheck, setSingleCheck] = useState<number[]>([]);
 
-  const onChange = (checkId: number) => {
-    setInput((prev) => ({ ...prev, checkedList: [checkId] }));
+  // radio box는 defaultChecked가 적용되지 않아서 state 추가
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSingleCheck([Number(e.target.value)]);
   };
 
   useEffect(() => {
-    if (mode === 'VIEW' || mode === 'EDIT') {
-      const userAnswer = findUserAnswer(form.questionId, userAnswers);
-      setInput(userAnswer ? userAnswer : inputDefault(form));
-    }
-  }, [mode, userAnswers]);
-
-  useEffect(() => {
-    updateUserAnswers({ updateAnswer: input, userAnswers, setUserAnswers });
-  }, [input]);
+    if (answer && answer.checkedList) setSingleCheck(answer?.checkedList);
+  }, [answer]);
 
   return (
     <FormControl>
-      <div className={applicationStyle.questionText}>{form.question}</div>
+      <div className={styles.questionText}>{form.question}</div>
       <RadioGroup
-        className={applicationStyle.radioBoxGroup}
+        className={styles.radioBoxGroup}
         aria-labelledby={'radio-buttons-group-label' + form.questionId}
-        name={'radio-buttons-group' + form.questionId}
+        name={form.questionId.toString()}
       >
         {form.checkList?.map((check: ICheck) => {
           return (
             <FormControlLabel
-              className={applicationStyle.radioBox}
+              className={styles.radioBox}
               key={check.id}
-              value={check.contents}
+              value={check.id}
               control={
                 <Radio
-                  onChange={() => onChange(check.id)}
-                  checked={input.checkedList?.includes(check.id)}
+                  checked={singleCheck.includes(check.id)}
+                  onChange={onChange}
                 />
               }
               label={check.contents}
-              disabled={mode === 'VIEW' ? true : false}
+              disabled={mode === 'VIEW'}
               inputRef={(ref) => (formRefs.current[form.questionId] = ref)}
             />
           );
