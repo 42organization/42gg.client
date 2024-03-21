@@ -20,6 +20,7 @@ const ApplicationFormHeader = (props: IApplicationFormHeaderProps) => {
       <div className={styles.stickyContainer}>
         <span className={styles.pageTitle}>{title}</span>
         <Button
+          className={styles.homeBtn}
           variant='text'
           startIcon={<HomeOutlined />}
           onClick={() => goRecruitHome()}
