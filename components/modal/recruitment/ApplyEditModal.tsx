@@ -37,7 +37,7 @@ function ApplyEditModal(props: IApplyEditModalProps) {
         setAlertState({
           alertState: true,
           message: mode === 'APPLY' ? '지원되었습니다.' : '수정되었습니다.',
-          severity: 'success',
+          severity: mode === 'APPLY' ? 'success' : 'info',
         });
         resetModalState();
         router.push(`/recruit/${recruitId}`);
