@@ -139,7 +139,7 @@ function StartRoom({ roomId, fetchRoomDetail }: RefreshProps) {
       className={styles.startBtn}
       onClick={() => {
         instance
-          .patch(`/party/rooms/${roomId}/start`)
+          .post(`/party/rooms/${roomId}/start`)
           .then(() => {
             fetchRoomDetail();
           })
