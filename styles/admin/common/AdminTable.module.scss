@@ -28,3 +28,28 @@
     text-align: center;
   }
 }
+
+.tableBodyItemHover {
+  position: relative;
+  cursor: pointer;
+}
+
+.hoverInfo {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  box-sizing: border-box;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+  transform: translate3d(-50%, -20px, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.tableBodyItemHover:hover .hoverInfo {
+  visibility: visible;
+  background-color: #676869;
+  border-width: 10rem;
+  opacity: 1;
+}

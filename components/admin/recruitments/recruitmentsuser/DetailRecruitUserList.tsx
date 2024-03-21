@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
   Paper,
   Table,
@@ -8,7 +10,8 @@ import {
   TableCell,
   TableContainer,
   TableRow,
-} from '@mui/material';
+ IconButton } from '@mui/material';
+import { TableRowProps } from '@mui/material/TableRow';
 import {
   IrecruitUserTable,
   Iquestion,
@@ -16,16 +19,20 @@ import {
 // import { instanceInManage } from 'utils/axios';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
-import { tableFormat } from 'constants/admin/table';
 import {
   AdminEmptyItem,
   AdminTableHead,
-  AdminContent,
+  // AdminContent,
+  DetailContentHover,
 } from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/recruitments/RecruitmentsUser.module.scss';
-//무한 스크롤로 변경
-//필터 추가
+import RecruitSearchBar from './RecruitSearchBar';
+//TODO: 테이블 헤더, 테이블 바디, 페이지네이션 컴포넌트 분리
+// 기본적인 부분
+// 3. 페이지네이션 추가
+// 4. 필터 추가
+
 /* 
 추가할 기능
 가로세로 길이 조절
@@ -38,10 +45,44 @@ export interface IrecruitTable {
   currentPage: number;
 }
 
+interface ExpandableTableRowProps extends TableRowProps {
+  children: React.ReactNode;
+  expandComponent: React.ReactNode;
+}
+
 const tableTitle: { [key: string]: string } = {
+  id: '',
   intraId: 'intraId',
   status: '상태',
   question: '질문',
+};
+
+const ExpandableTableRow: React.FC<ExpandableTableRowProps> = ({
+  children,
+  expandComponent,
+  ...otherProps
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <>
+      <TableRow {...otherProps}>
+        <TableCell padding='checkbox'>
+          <IconButton onClick={() => setIsExpanded(!isExpanded)}>
+            {isExpanded ? <ExpandMoreIcon /> : <ChevronRightIcon />}
+          </IconButton>
+        </TableCell>
+        {children}
+      </TableRow>
+      {isExpanded && (
+        <TableRow>
+          <TableCell padding='checkbox' colSpan={children?.length + 2}>
+            {expandComponent}
+          </TableCell>
+        </TableRow>
+      )}
+    </>
+  );
 };
 
 function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
@@ -52,12 +93,46 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const setSnackBar = useSetRecoilState(toastState);
+  const [questionId, setQuestionId] = useState<string>('');
+  const [checklistIds, setChecklistIds] = useState<Array<string>>([]);
+  const [searchString, setSearchString] = useState<string>('');
+
+  const initSearch = useCallback((searchString?: string) => {
+    setSearchString(searchString || '');
+    setCurrentPage(1);
+  }, []);
+
+  const handleQuestionChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setQuestionId(event.target.value);
+  };
+
+  const handleChecklistChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const value = event.target.value;
+    if (event.target.checked) {
+      setChecklistIds([...checklistIds, value]);
+    } else {
+      setChecklistIds(checklistIds.filter((id) => id !== value));
+    }
+  };
 
   const getRecruitUserHandler = useCallback(async () => {
     try {
       // const res = await instanceInManage.get(
-      //   `/recruitments/${recruitId}/applications`
+      //   `/recruitments/${recruitId}/applications`, {
+      //     params: {
+      //       page: currentPage,
+      //       size: 20,
+      //       question: questionId,
+      //       checks: checklistIds.join(','),
+      //       search: searchString,
+      //     }
+      //   }
       // );
+      console.log('searchString', searchString);
       const id = recruitId;
       const res = await mockInstance.get(`/admin/recruitments/${id}`);
       setRecruitUserData({
@@ -73,11 +148,17 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
         clicked: true,
       });
     }
-  }, [currentPage]);
+  }, [currentPage, recruitId, questionId, checklistIds, searchString]);
 
   useEffect(() => {
     getRecruitUserHandler();
-  }, [currentPage]);
+  }, [
+    getRecruitUserHandler,
+    currentPage,
+    questionId,
+    checklistIds,
+    searchString,
+  ]);
 
   if (!recruitUserData.applications) {
     return (
@@ -91,6 +172,48 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
       </TableContainer>
     );
   }
+
+  // const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSearchString(event.target.value);
+  // }
+
+  const FilterQptionsUI = () => (
+    <div>
+      <div className={styles.searchWrap}>
+        <RecruitSearchBar initSearch={initSearch} />
+      </div>
+      <select value={questionId} onChange={handleQuestionChange}>
+        <option value=''>질문 선택</option>
+        {recruitUserData.applications.map((application) =>
+          application.form.map((form) => (
+            <option key={form.id} value={form.id}>
+              {form.question}
+            </option>
+          ))
+        )}
+      </select>
+      <div>
+        <label>
+          <input
+            type='checkbox'
+            value='check1'
+            checked={checklistIds.includes('check1')}
+            onAbort={handleChecklistChange}
+          />
+          체크박스1
+        </label>
+        <label>
+          <input
+            type='checkbox'
+            value='check2'
+            checked={checklistIds.includes('check2')}
+            onAbort={handleChecklistChange}
+          />
+          체크박스2
+        </label>
+      </div>
+    </div>
+  );
 
   const questions = recruitUserData.applications.reduce(
     (acc: string[], application: { form: { question: string }[] }) => {
@@ -124,26 +247,48 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
     });
 
     return (
-      <TableRow className={styles.tableRow} key={recruit.applicationId}>
+      <ExpandableTableRow
+        key={recruit.applicationId}
+        expandComponent={
+          <div style={{ padding: '16px' }}>
+            <div>
+              <strong>intraId:</strong> {recruit.intraId}
+            </div>
+            <div>
+              <strong>status:</strong> {recruit.status}
+            </div>
+            {recruit.form.map((form, index) => (
+              <div key={index}>
+                <strong>{form.question}</strong>:{' '}
+                {form.answer ? form.answer : 'N/A'}
+              </div>
+            ))}
+          </div>
+        }
+      >
         <TableCell className={styles.tableBodyItem}>
           {recruit.intraId}
         </TableCell>
         <TableCell className={styles.tableBodyItem}>{recruit.status}</TableCell>
         {answers.map((answer, index) => (
           <TableCell className={styles.tableBodyItem} key={index}>
-            {answer}
+            <div className={styles.tableBodyItem}>
+              <DetailContentHover content={answer} maxLen={16} />
+            </div>
           </TableCell>
         ))}
-      </TableRow>
+      </ExpandableTableRow>
     );
   };
 
   return (
     <>
+      <FilterQptionsUI />
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <TableHead className={styles.tableHeader}>
             <TableRow>
+              <TableCell className={styles.tableHeaderItem}></TableCell>
               <TableCell className={styles.tableHeaderItem}>intraId</TableCell>
               <TableCell className={styles.tableHeaderItem}>status</TableCell>
               {questions.map((question, index) => (
