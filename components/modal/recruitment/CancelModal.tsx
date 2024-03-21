@@ -62,38 +62,36 @@ export default function CancelModal() {
   };
 
   return (
-    <>
-      <Modal onClose={onModalClose} open={modalState.state}>
-        <Box className={styles.container}>
-          <Typography align='center' variant='h5'>
-            지원을 취소할까요?
+    <Modal onClose={onModalClose} open={modalState.state}>
+      <Box className={styles.container}>
+        <Typography align='center' variant='h5'>
+          지원을 취소할까요?
+        </Typography>
+        <Box className={styles.content}>
+          <Typography>
+            지원을 취소한 이후에는 <br></br>
+            다시 지원할 수 없습니다.
           </Typography>
-          <Box className={styles.content}>
-            <Typography>
-              지원을 취소한 이후에는 <br></br>
-              다시 지원할 수 없습니다.
-            </Typography>
-          </Box>
-          <Box className={styles.btnContainer}>
-            <Button
-              className={styles.cancelBtn}
-              variant='outlined'
-              onClick={onModalClose}
-              color={'secondary'}
-            >
-              돌아가기
-            </Button>
-            <Button
-              className={styles.applyCancelBtn}
-              variant='contained'
-              onClick={onCancel}
-              color={'primary'}
-            >
-              취소하기
-            </Button>
-          </Box>
         </Box>
-      </Modal>
-    </>
+        <Box className={styles.btnContainer}>
+          <Button
+            className={styles.cancelBtn}
+            variant='outlined'
+            onClick={onModalClose}
+            color={'secondary'}
+          >
+            돌아가기
+          </Button>
+          <Button
+            className={styles.applyCancelBtn}
+            variant='contained'
+            onClick={onCancel}
+            color={'primary'}
+          >
+            취소하기
+          </Button>
+        </Box>
+      </Box>
+    </Modal>
   );
 }

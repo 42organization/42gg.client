@@ -145,21 +145,19 @@ function SubmitButton() {
 
   if (mode !== 'APPLY') return <></>;
   return (
-    <>
-      <Button
-        className={applicationStyle.submitBtn}
-        variant='contained'
-        onClick={() =>
-          applicationFormCheck({
-            setInvalidInput,
-            setAlertState,
-            setModalState,
-            userAnswers,
-          })
-        }
-      >
-        제출하기
-      </Button>
-    </>
+    <Button
+      className={applicationStyle.submitBtn}
+      variant='contained'
+      onClick={() =>
+        applicationFormCheck({
+          setInvalidInput,
+          setAlertState,
+          setModalState,
+          userAnswers,
+        })
+      }
+    >
+      제출하기
+    </Button>
   );
 }
