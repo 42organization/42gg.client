@@ -1,6 +1,7 @@
 import { ThemeProvider, createTheme } from '@mui/material';
 // import useAxiosWithToast from 'hooks/useAxiosWithToast';
 import styles from 'styles/recruit/layout.module.scss';
+import ApplicationSnackBar from './Application/ApplicationSnackBar';
 
 type RecruitLayoutProps = {
   children: React.ReactNode;
@@ -38,6 +39,7 @@ function RecruitLayout({ children }: RecruitLayoutProps) {
       <div className={styles.recruitLayout}>
         <div className={styles.recruitContainer}>{children}</div>
       </div>
+      <ApplicationSnackBar />
     </ThemeProvider>
   );
 }
