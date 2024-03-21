@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 import { v1 } from 'uuid';
 import { AlertColor } from '@mui/material';
-import {} from 'types/recruit/recruitments';
+import { IApplicantAnswer } from 'types/recruit/recruitments';
 
 export interface IapplicationAlertState {
   alertState: boolean;
@@ -20,7 +20,8 @@ export const applicationAlertState = atom<IapplicationAlertState>({
 
 export interface IapplicationModal {
   state: boolean;
-  content: 'APPLY' | 'CANCEL' | 'NONE';
+  content: 'APPLY' | 'CANCEL' | 'EDIT' | 'NONE';
+  formData: IApplicantAnswer[];
 }
 
 export const applicationModalState = atom<IapplicationModal>({
@@ -28,10 +29,6 @@ export const applicationModalState = atom<IapplicationModal>({
   default: {
     state: false,
     content: 'NONE',
+    formData: [],
   },
-});
-
-export const applicationInvalidInput = atom<number>({
-  key: `applicationInvalidInput/${v1()}`,
-  default: -1,
 });
