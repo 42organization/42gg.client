@@ -67,11 +67,23 @@ export interface IUserApplicationInfo {
   content: string;
 }
 
+export interface IapplicationAlertState {
+  alertState: boolean;
+  message: string;
+  severity: AlertColor | undefined;
+}
+
+export interface IapplicationModal {
+  state: boolean;
+  content: 'APPLY' | 'CANCEL' | 'EDIT' | 'NONE';
+  formData: IApplicantAnswer[];
+}
+
 export interface IRecruitmentDetailUser extends IUserApplicationInfo {
   forms: IApplicantAnswer[];
 }
 
-export type refMap = { [key: number]: HTMLInputElement };
+export type refMap = { [key: number]: HTMLDivElement };
 
 export type RecruitmentMessageType = 'INTERVIEW' | 'PASS' | 'FAIL';
 
