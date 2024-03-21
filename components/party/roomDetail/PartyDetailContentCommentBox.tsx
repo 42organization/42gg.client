@@ -1,3 +1,4 @@
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { IoSendSharp } from 'react-icons/io5';
 import {
   PartyComment,
@@ -76,9 +77,23 @@ function CommentCreateBar({
   status,
   fetchRoomDetail,
 }: CommentCreateBarProps) {
-  const handlerComments = async () => {
-    await instance.post(`/party/rooms/${roomId}/comments`);
+  const [comment, setComment] = useState('');
+
+  const handleCommentSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!comment) {
+      fetchRoomDetail();
+      return;
+    }
+    await instance.post(`/party/rooms/${roomId}/comments`, {
+      content: comment,
+    });
     fetchRoomDetail();
+    setComment('');
+  };
+
+  const handleCommentInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setComment(e.target.value);
   };
 
   if (status !== 'OPEN') {
@@ -87,8 +102,13 @@ function CommentCreateBar({
 
   return (
     <div className={styles.commentCreateBar}>
-      <form onSubmit={handlerComments}>
-        <input className={styles.textBar} type='text' />
+      <form onSubmit={handleCommentSubmit}>
+        <input
+          className={styles.textBar}
+          onInput={handleCommentInput}
+          type='text'
+          value={comment}
+        />
         <button className={styles.inputBtn} type='submit'>
           <IoSendSharp />
         </button>
