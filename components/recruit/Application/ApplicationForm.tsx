@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Box, Button, Grid, Paper } from '@mui/material';
 import {
   ApplicationFormType,
@@ -31,8 +31,7 @@ interface IApplicationFormProps {
 function ApplicationForm(props: IApplicationFormProps) {
   const { mode, recuitId, applicationId, data, answerList } = props;
   const formRefs = useRef<refMap>({});
-  const modalState = useRecoilValue(applicationModalState);
-  const setModalState = useSetRecoilState(applicationModalState);
+  const [modalState, setModalState] = useRecoilState(applicationModalState);
   const setAlertState = useSetRecoilState(applicationAlertState);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
