@@ -136,11 +136,13 @@ $detailCommonRem: 1rem;
     .content {
       min-height: 13rem;
       margin-bottom: $detailCommonRem;
+      white-space: pre-wrap;
     }
 
     .comment {
       margin-top: $detailCommonRem * 2;
       margin-bottom: 0.3;
+      white-space: pre-wrap;
     }
 
     .commentHidden {
