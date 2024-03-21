@@ -1,22 +1,20 @@
-import { MutableRefObject, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
 import {
   ApplicationFormType,
   IApplicantAnswer,
   IQuestionForm,
-  refMap,
 } from 'types/recruit/recruitments';
 import styles from 'styles/recruit/application.module.scss';
 
 interface IitemProps {
   form: IQuestionForm;
-  formRefs: MutableRefObject<refMap>;
   mode: ApplicationFormType;
   answer: IApplicantAnswer | null;
 }
 
-export default function TextForm(props: IitemProps) {
-  const { form, formRefs, mode, answer } = props;
+function TextForm(props: IitemProps) {
+  const { form, mode, answer } = props;
   const [value, setValue] = useState<string>('');
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,8 +38,9 @@ export default function TextForm(props: IitemProps) {
         disabled={mode === 'VIEW'}
         onChange={onChange}
         value={value}
-        inputRef={(ref) => (formRefs.current[form.questionId] = ref)}
       />
     </>
   );
 }
+
+export default TextForm;

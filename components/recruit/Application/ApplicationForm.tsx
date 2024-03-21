@@ -15,8 +15,8 @@ import {
 } from 'utils/recoil/application';
 import ApplyEditModal from 'components/modal/recruitment/ApplyEditModal';
 import CancelModal from 'components/modal/recruitment/CancelModal';
-import MultiCheckForm from 'components/recruit/Application/applicationFormItems/MultiCheck';
-import SingleCheckForm from 'components/recruit/Application/applicationFormItems/SingleCheck';
+import MultiCheckForm from 'components/recruit/Application/applicationFormItems/MultiCheckForm';
+import SingleCheckForm from 'components/recruit/Application/applicationFormItems/SingleCheckForm';
 import TextForm from 'components/recruit/Application/applicationFormItems/TextForm';
 import styles from 'styles/recruit/application.module.scss';
 
@@ -35,7 +35,6 @@ function ApplicationForm(props: IApplicationFormProps) {
   const setModalState = useSetRecoilState(applicationModalState);
   const setAlertState = useSetRecoilState(applicationAlertState);
 
-  console.log(answerList);
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -44,20 +43,17 @@ function ApplicationForm(props: IApplicationFormProps) {
 
     // 입력하지 않은 문항으로 이동
     for (const ans of answerForms) {
-      if (ans.inputType === 'TEXT' && ans.answer === '') {
-        formRefs.current[ans.questionId].focus();
-        setAlertState({
-          alertState: true,
-          message: '입력하지 않은 항목이 있습니다.',
-          severity: 'error',
-        });
-        return;
-      }
       if (
-        (ans.inputType === 'SINGLE_CHECK' || ans.inputType === 'MULTI_CHECK') &&
-        !ans.checkedList?.length
+        (ans.inputType === 'TEXT' && ans.answer === '') ||
+        ((ans.inputType === 'SINGLE_CHECK' ||
+          ans.inputType === 'MULTI_CHECK') &&
+          !ans.checkedList?.length)
       ) {
         formRefs.current[ans.questionId].focus();
+        formRefs.current[ans.questionId].scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
         setAlertState({
           alertState: true,
           message: '입력하지 않은 항목이 있습니다.',
@@ -86,36 +82,39 @@ function ApplicationForm(props: IApplicationFormProps) {
             {data.title}
           </Paper>
           {data.forms.map((form: IQuestionForm, index: number) => (
-            <Paper
-              elevation={3}
-              className={styles.questionContainer}
+            <div
               key={index}
+              tabIndex={form.questionId}
+              ref={(ref) => ref && (formRefs.current[form.questionId] = ref)}
             >
-              {form.inputType === 'TEXT' ? (
-                <TextForm
-                  form={form}
-                  formRefs={formRefs}
-                  mode={mode}
-                  answer={answerList ? answerList[form.questionId - 1] : null}
-                />
-              ) : form.inputType === 'SINGLE_CHECK' ? (
-                <SingleCheckForm
-                  form={form}
-                  formRefs={formRefs}
-                  mode={mode}
-                  answer={answerList ? answerList[form.questionId - 1] : null}
-                />
-              ) : form.inputType === 'MULTI_CHECK' ? (
-                <MultiCheckForm
-                  form={form}
-                  formRefs={formRefs}
-                  mode={mode}
-                  answer={answerList ? answerList[form.questionId - 1] : null}
-                />
-              ) : (
-                <span>잘못된 타입의 항목입니다</span>
-              )}
-            </Paper>
+              <Paper
+                elevation={3}
+                className={styles.questionContainer}
+                key={index}
+              >
+                {form.inputType === 'TEXT' ? (
+                  <TextForm
+                    form={form}
+                    mode={mode}
+                    answer={answerList ? answerList[form.questionId - 1] : null}
+                  />
+                ) : form.inputType === 'SINGLE_CHECK' ? (
+                  <SingleCheckForm
+                    form={form}
+                    mode={mode}
+                    answer={answerList ? answerList[form.questionId - 1] : null}
+                  />
+                ) : form.inputType === 'MULTI_CHECK' ? (
+                  <MultiCheckForm
+                    form={form}
+                    mode={mode}
+                    answer={answerList ? answerList[form.questionId - 1] : null}
+                  />
+                ) : (
+                  <span>잘못된 타입의 항목입니다</span>
+                )}
+              </Paper>
+            </div>
           ))}
           {mode === 'APPLY' && (
             <Button

@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   FormControl,
   FormControlLabel,
@@ -10,22 +10,19 @@ import {
   IApplicantAnswer,
   ICheck,
   IQuestionForm,
-  refMap,
 } from 'types/recruit/recruitments';
 import styles from 'styles/recruit/application.module.scss';
 
 interface IitemProps {
   form: IQuestionForm;
-  formRefs: MutableRefObject<refMap>;
   mode: ApplicationFormType;
   answer: IApplicantAnswer | null;
 }
 
-export default function SingleCheckForm(props: IitemProps) {
-  const { form, formRefs, mode, answer } = props;
+function SingleCheckForm(props: IitemProps) {
+  const { form, mode, answer } = props;
   const [singleCheck, setSingleCheck] = useState<number[]>([]);
 
-  // radio box는 defaultChecked가 적용되지 않아서 state 추가
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSingleCheck([Number(e.target.value)]);
   };
@@ -56,7 +53,6 @@ export default function SingleCheckForm(props: IitemProps) {
               }
               label={check.contents}
               disabled={mode === 'VIEW'}
-              inputRef={(ref) => (formRefs.current[form.questionId] = ref)}
             />
           );
         })}
@@ -64,3 +60,5 @@ export default function SingleCheckForm(props: IitemProps) {
     </FormControl>
   );
 }
+
+export default SingleCheckForm;
