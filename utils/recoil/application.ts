@@ -1,35 +1,7 @@
 import { atom } from 'recoil';
-import { recoilPersist } from 'recoil-persist';
 import { v1 } from 'uuid';
 import { AlertColor } from '@mui/material';
-import {
-  ApplicationFormType,
-  IApplicantAnswer,
-  IUserApplicationInfo,
-} from 'types/recruit/recruitments';
-
-const { persistAtom } = recoilPersist();
-
-export const userApplicationInfoState = atom<IUserApplicationInfo>({
-  key: `userApplicationInfoState/${v1()}`,
-  default: {
-    applicationId: 0,
-    endDate: '',
-    title: '',
-    content: '',
-  },
-});
-
-export const applicationFormTypeState = atom<ApplicationFormType>({
-  key: `applicationFormTypeState/${v1()}`,
-  default: 'APPLY',
-  effects_UNSTABLE: [persistAtom],
-});
-
-export const userApplicationAnswerState = atom<IApplicantAnswer[]>({
-  key: `userApplicationAnswerState/${v1()}`,
-  default: [],
-});
+import {} from 'types/recruit/recruitments';
 
 export interface IapplicationAlertState {
   alertState: boolean;
