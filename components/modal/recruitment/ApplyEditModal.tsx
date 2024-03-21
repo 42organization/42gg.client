@@ -1,53 +1,53 @@
 import { useRouter } from 'next/router';
-import { AxiosResponse } from 'axios';
-import { useMutation } from 'react-query';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { Box, Button, Modal, Typography } from '@mui/material';
-import { mockInstance } from 'utils/mockAxios';
+import { ApplicationFormType } from 'types/recruit/recruitments';
 import {
   applicationAlertState,
   applicationModalState,
 } from 'utils/recoil/application';
+import useUserApplicationForm from 'hooks/recruit/useUserApplicationForm';
 import styles from 'styles/modal/recruit/recruitModal.module.scss';
 
-interface ICancelModalProps {
+interface IApplyEditModalProps {
   recruitId: number;
   applicationId: number | null;
+  mode: ApplicationFormType;
 }
 
-function CancelModal(props: ICancelModalProps) {
-  const { recruitId, applicationId } = props;
+function ApplyEditModal(props: IApplyEditModalProps) {
+  const { recruitId, applicationId, mode } = props;
   const router = useRouter();
   const modalState = useRecoilValue(applicationModalState);
-  const setAlertState = useSetRecoilState(applicationAlertState);
   const resetModalState = useResetRecoilState(applicationModalState);
+  const setAlertState = useSetRecoilState(applicationAlertState);
+  const { mutate } = useUserApplicationForm(recruitId, applicationId, mode);
 
-  const { mutate } = useMutation(
-    (applicationId: number | null): Promise<AxiosResponse> => {
-      return mockInstance.delete(
-        `/recruitments/${recruitId}/applications/${applicationId}`
-      );
+  const onApplyEdit = () => {
+    if (modalState.formData === null) {
+      setAlertState({
+        alertState: true,
+        message: '요청에 문제가 발생했습니다.',
+        severity: 'error',
+      });
+      return;
     }
-  );
-
-  const onCancel = () => {
-    mutate(applicationId, {
+    mutate(modalState.formData, {
       onSuccess: () => {
         setAlertState({
           alertState: true,
-          message: '지원이 취소되었습니다.',
+          message: mode === 'APPLY' ? '지원되었습니다.' : '수정되었습니다.',
           severity: 'success',
         });
         resetModalState();
         router.push(`/recruit/${recruitId}`);
       },
-      onError: () => {
+      onError: () =>
         setAlertState({
           alertState: true,
           message: '요청에 문제가 발생했습니다.',
           severity: 'error',
-        });
-      },
+        }),
     });
   };
 
@@ -55,12 +55,12 @@ function CancelModal(props: ICancelModalProps) {
     <Modal onClose={resetModalState} open={modalState.state}>
       <Box className={styles.container}>
         <Typography align='center' variant='h5'>
-          지원을 취소할까요?
+          지원서를 제출할까요?
         </Typography>
         <Box className={styles.content}>
           <Typography>
-            지원을 취소한 이후에는 <br></br>
-            다시 지원할 수 없습니다.
+            제출한 지원서는 제출 마감 전까지<br></br>수정하거나 삭제할 수
+            있습니다.
           </Typography>
         </Box>
         <Box className={styles.btnContainer}>
@@ -70,15 +70,15 @@ function CancelModal(props: ICancelModalProps) {
             onClick={() => resetModalState()}
             color={'secondary'}
           >
-            돌아가기
+            취소
           </Button>
           <Button
-            className={styles.applyCancelBtn}
+            className={styles.applyBtn}
             variant='contained'
-            onClick={() => onCancel()}
             color={'primary'}
+            onClick={() => onApplyEdit()}
           >
-            취소하기
+            제출하기
           </Button>
         </Box>
       </Box>
@@ -86,4 +86,4 @@ function CancelModal(props: ICancelModalProps) {
   );
 }
 
-export default CancelModal;
+export default ApplyEditModal;
