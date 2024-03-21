@@ -4,6 +4,10 @@ import { PartyGameTemplate, PartyTemplateForm } from 'types/partyTypes';
 import { instance, instanceInPartyManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 
+type templateResponse = {
+  templateList: PartyGameTemplate[];
+};
+
 export function usePartyTemplate(categoryId?: number) {
   const queryClient = useQueryClient();
   const setSnackBar = useSetRecoilState(toastState);
@@ -12,12 +16,8 @@ export function usePartyTemplate(categoryId?: number) {
     queryKey: 'partyGameTemplate',
     queryFn: () =>
       instance
-        .get('/party/templates')
-        .then(({ data }: { data: PartyGameTemplate[] }) => {
-          return categoryId
-            ? data.filter((d) => d.categoryId === categoryId)
-            : data;
-        }),
+        .get<templateResponse>('/party/templates')
+        .then(({ data }) => data.templateList),
     onError: () => {
       setSnackBar({
         toastName: 'GET request',
@@ -58,9 +58,12 @@ export function usePartyTemplate(categoryId?: number) {
       },
     }
   );
-
   return {
-    templates: data ?? [], // undefind 대신 []을 이용해 에러 처리
+    templates: data
+      ? categoryId
+        ? data.filter((d) => d.categoryId === categoryId)
+        : data
+      : [], // undefind 대신 []을 이용해 에러 처리
     createTemplate: (template: PartyTemplateForm) =>
       createMutation.mutate(template),
     updateTemplate: (template: PartyGameTemplate) =>

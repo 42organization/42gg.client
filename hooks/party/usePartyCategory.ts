@@ -4,6 +4,10 @@ import { PartyCategory } from 'types/partyTypes';
 import { instance, instanceInPartyManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 
+type categoryResponse = {
+  categoryList: PartyCategory[];
+};
+
 export default function usePartyCategory() {
   const queryClient = useQueryClient();
   const setSnackBar = useSetRecoilState(toastState);
@@ -12,8 +16,8 @@ export default function usePartyCategory() {
     queryKey: 'partyCategory',
     queryFn: () =>
       instance
-        .get('/party/categories')
-        .then(({ data }: { data: PartyCategory[] }) => data),
+        .get<categoryResponse>('/party/categories')
+        .then(({ data }) => data.categoryList),
     onError: () => {
       setSnackBar({
         toastName: 'GET request',
