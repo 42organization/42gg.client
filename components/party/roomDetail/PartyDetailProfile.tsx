@@ -142,7 +142,7 @@ function ButtonHandler({
     </div>
   ) : (
     <div className={styles.btnContainer}>
-      {currentPeople >= minPeople && currentPeople === 1 && (
+      {currentPeople >= minPeople && currentPeople !== 1 && (
         <PartyRoomDetailButton.StartRoom
           roomId={roomId}
           fetchRoomDetail={fetchRoomDetail}
