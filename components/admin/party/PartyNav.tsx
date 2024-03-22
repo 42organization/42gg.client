@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from 'styles/party/PartyNav.module.scss';
+import PartyPenalty from './AdminPartyPenalty';
 import PartyCategory from './PartyCategory';
 import PartyReportNav from './PartyReportNav';
 import PartyTemplate from './PartyTemplate';
@@ -30,6 +31,7 @@ export default function PartyNav() {
         {navValue === 'report' && <PartyReportNav />}
         {navValue === 'template' && <PartyTemplate />}
         {navValue === 'category' && <PartyCategory />}
+        {navValue === 'penalty' && <PartyPenalty />}
       </div>
     </>
   );
