@@ -40,7 +40,7 @@ export default function AdminPartyRoomReport() {
 
   useEffect(() => {
     instanceInPartyManage
-      .get(`/reports/comments?page=${currentPage}&size=10`)
+      .get(`/reports/rooms?page=${currentPage}&size=10`)
       .then((res) => {
         setRoomInfo({
           roomReportList: res.data.roomReportList,
