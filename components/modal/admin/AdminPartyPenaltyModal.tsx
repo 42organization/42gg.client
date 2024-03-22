@@ -20,14 +20,8 @@ export default function PartyPenaltyModal({
     }
   );
   const setModal = useSetRecoilState(modalState);
-  const [isUpdateMode, setIsUpdateMode] = useState(false);
+  const [isUpdateMode, setIsUpdateMode] = useState(partyPenalty ? true : false);
   const setSnackBar = useSetRecoilState(toastState);
-
-  useEffect(() => {
-    if (partyPenalty) {
-      setIsUpdateMode(true);
-    }
-  }, []);
 
   const updatePenalty = (
     penaltyId: number,
