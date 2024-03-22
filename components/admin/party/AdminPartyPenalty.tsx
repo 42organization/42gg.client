@@ -11,6 +11,7 @@ import {
 import { PartyPenaltyAdmin, PartyPenaltyTable } from 'types/partyTypes';
 import { instanceInPartyManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
   AdminEmptyItem,
@@ -37,20 +38,26 @@ export default function AdminCommentReport() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const setModal = useSetRecoilState(modalState);
+  const setSnackBar = useSetRecoilState(toastState);
 
-  const fetchPenalty = useCallback(async () => {
-    try {
-      const res = await instanceInPartyManage.get(
-        `/penalties?page=${currentPage}&size=10`
-      );
-      setPenaltyInfo({
-        penaltyList: res.data.penaltyList,
-        totalPage: res.data.totalPage,
-        currentPage: currentPage,
+  useEffect(() => {
+    instanceInPartyManage
+      .get(`/penalties?page=${currentPage}&size=10`)
+      .then((res) => {
+        setPenaltyInfo({
+          penaltyList: res.data.penaltyList,
+          totalPage: res.data.totalPage,
+          currentPage: currentPage,
+        });
+      })
+      .catch((error) => {
+        setSnackBar({
+          toastName: 'GET request',
+          message: '댓글신고를 가져오는데 실패했습니다.',
+          severity: 'error',
+          clicked: true,
+        });
       });
-    } catch (e) {
-      console.error(e);
-    }
   }, [currentPage]);
 
   const handleAddpenalty = () => {
@@ -60,10 +67,6 @@ export default function AdminCommentReport() {
   const handleEditpenalty = (partyPenalty?: PartyPenaltyAdmin) => {
     setModal({ modalName: 'ADMIN-PARTY_ADMIN_PENALTY', partyPenalty });
   };
-
-  useEffect(() => {
-    fetchPenalty();
-  }, [fetchPenalty]);
 
   return (
     <div className={styles.AdminTableWrap}>

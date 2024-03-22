@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import {
   Paper,
   Table,
@@ -9,6 +10,7 @@ import {
 } from '@mui/material';
 import { PartyCommentReport, PartyCommentReportTable } from 'types/partyTypes';
 import { instanceInPartyManage } from 'utils/axios';
+import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
   AdminEmptyItem,
@@ -33,25 +35,27 @@ export default function AdminCommentReport() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
-
-  const fetchComment = useCallback(async () => {
-    try {
-      const res = await instanceInPartyManage.get(
-        `/reports/comments?page=${currentPage}&size=10`
-      );
-      setCommentInfo({
-        commentReportList: res.data.commentReportList,
-        totalPage: res.data.totalPage,
-        currentPage: currentPage,
-      });
-    } catch (e) {
-      console.error(e);
-    }
-  }, [currentPage]);
+  const setSnackBar = useSetRecoilState(toastState);
 
   useEffect(() => {
-    fetchComment();
-  }, [fetchComment]);
+    instanceInPartyManage
+      .get(`/reports/comments?page=${currentPage}&size=10`)
+      .then((res) => {
+        setCommentInfo({
+          commentReportList: res.data.commentReportList,
+          totalPage: res.data.totalPage,
+          currentPage: currentPage,
+        });
+      })
+      .catch((error) => {
+        setSnackBar({
+          toastName: 'GET request',
+          message: '댓글신고를 가져오는데 실패했습니다.',
+          severity: 'error',
+          clicked: true,
+        });
+      });
+  }, [currentPage]);
 
   return (
     <div className={styles.AdminTableWrap}>

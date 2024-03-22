@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import {
   Paper,
   Table,
@@ -9,6 +10,7 @@ import {
 } from '@mui/material';
 import { PartyRoomReport, PartyRoomReportTable } from 'types/partyTypes';
 import { instanceInPartyManage } from 'utils/axios';
+import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
   AdminEmptyItem,
@@ -34,24 +36,27 @@ export default function AdminPartyRoomReport() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const fetchRoom = useCallback(async () => {
-    try {
-      const res = await instanceInPartyManage.get(
-        `/reports/rooms?page=${currentPage}&size=10`
-      );
-      setRoomInfo({
-        roomReportList: res.data.roomReportList,
-        totalPage: res.data.totalPage,
-        currentPage: currentPage,
-      });
-    } catch (e) {
-      console.error(e);
-    }
-  }, [currentPage]);
+  const setSnackBar = useSetRecoilState(toastState);
 
   useEffect(() => {
-    fetchRoom();
-  }, [fetchRoom]);
+    instanceInPartyManage
+      .get(`/reports/comments?page=${currentPage}&size=10`)
+      .then((res) => {
+        setRoomInfo({
+          roomReportList: res.data.roomReportList,
+          totalPage: res.data.totalPage,
+          currentPage: currentPage,
+        });
+      })
+      .catch((error) => {
+        setSnackBar({
+          toastName: 'GET request',
+          message: '댓글신고를 가져오는데 실패했습니다.',
+          severity: 'error',
+          clicked: true,
+        });
+      });
+  }, [currentPage]);
 
   return (
     <div className={styles.AdminTableWrap}>
