@@ -3,6 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import { PartyPenaltyAdmin, PartyPenaltyAdminSubmit } from 'types/partyTypes';
 import { instanceInPartyManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
+import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/party/TemplateModal.module.scss';
 
 export default function PartyPenaltyModal({
@@ -20,16 +21,11 @@ export default function PartyPenaltyModal({
   );
   const setModal = useSetRecoilState(modalState);
   const [isUpdateMode, setIsUpdateMode] = useState(false);
+  const setSnackBar = useSetRecoilState(toastState);
 
   useEffect(() => {
     if (partyPenalty) {
       setIsUpdateMode(true);
-      setFormData({
-        penaltyType: partyPenalty.penaltyType,
-        message: partyPenalty.message,
-        penaltyTime: partyPenalty.penaltyTime,
-        userIntraId: partyPenalty.userIntraId,
-      });
     }
   }, []);
 
@@ -37,11 +33,27 @@ export default function PartyPenaltyModal({
     penaltyId: number,
     penalty: PartyPenaltyAdminSubmit
   ) => {
-    instanceInPartyManage.patch(`/penalties/${penaltyId}`, penalty);
+    instanceInPartyManage
+      .patch(`/penalties /${penaltyId}`, penalty)
+      .catch(() => {
+        setSnackBar({
+          toastName: 'PATCH request',
+          message: '페널티 변경을 하는데 실패하였습니다.',
+          severity: 'error',
+          clicked: true,
+        });
+      });
   };
 
   const createPenalty = (penalty: PartyPenaltyAdminSubmit) => {
-    instanceInPartyManage.post('/penalties', penalty);
+    instanceInPartyManage.post('/penalties', penalty).catch(() => {
+      setSnackBar({
+        toastName: 'POST request',
+        message: '페널티 추가를 하는데 실패하였습니다.',
+        severity: 'error',
+        clicked: true,
+      });
+    });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
