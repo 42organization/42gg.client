@@ -23,9 +23,6 @@ const useLoginCheck = (): useLoginCheckReturn => {
     if (refreshToken) {
       setLoggedIn(true);
     }
-    if (localStorage.getItem('42gg-token')) {
-      setLoggedIn(true);
-    }
     setIsLoading(false);
   }, []);
   return [isLoading, loggedIn];
