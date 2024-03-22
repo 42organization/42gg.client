@@ -12,7 +12,7 @@ export type PartyRoom = {
   maxPeople: number;
   dueDate: string;
   createDate: string;
-  roomStatus: PartyRoomStatus;
+  status: PartyRoomStatus;
   creatorIntraId?: string;
 };
 
@@ -33,8 +33,10 @@ export type PartyRoomDetail = PartyRoom & {
  *  @property {string | null} [intraId] - Room 시작시 or Admin으로 조회시 존재
  */
 export type PartyRoomUser = {
-  roomUserId: number;
+  userRoomId: number;
   nickname: string;
+  userImage: string | null;
+  roomUserId: number;
   intraId: string | null;
 };
 
@@ -122,7 +124,7 @@ export type PartyCreateForm = {
   minPeople: number;
   maxPeople: number;
   content: string;
-  dueDate: string;
+  minutesUntilDueDate: number;
 };
 
 export type PartyTemplateForm = {
@@ -159,3 +161,6 @@ export interface PartyPenaltyTable {
   totalPage: number;
   currentPage: number;
 }
+
+export type PartyColors = 'PARTY-MAIN' | 'PARTY-DETAIL';
+

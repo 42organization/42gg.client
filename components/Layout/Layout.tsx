@@ -68,7 +68,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 </HeaderStateContext>
                 {presentPath !== '/match' &&
                   presentPath !== '/manual' &&
-                  presentPath !== '/store' && (
+                  presentPath !== '/store' &&
+                  !presentPath.startsWith('/party') && (
                     <div className={styles.buttonContainer}>
                       <div className={styles.buttonWrapper}>
                         <StyledButton onClick={onClickMatch} width={'5.5rem'}>
