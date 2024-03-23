@@ -1,6 +1,7 @@
 name: Deploy to 42ggClientS3
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - deploy
