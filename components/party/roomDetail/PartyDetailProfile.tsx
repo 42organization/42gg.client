@@ -95,7 +95,7 @@ function Profile({ roomUsers, hostNickname }: ProfileProps) {
               width={40}
               height={40}
             />
-            <div>{nickname}</div>
+            <div style={{ color: nameToRGB(nickname) }}>{nickname}</div>
           </li>
         )
       )}
