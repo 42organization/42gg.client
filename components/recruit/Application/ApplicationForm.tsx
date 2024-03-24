@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Box, Button, Grid, Paper } from '@mui/material';
 import {
   ApplicationFormType,
