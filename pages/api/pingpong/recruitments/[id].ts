@@ -31,7 +31,8 @@ const formDataOne = [
 const formDataTwo = [
   {
     questionId: 1,
-    question: '본인의 기수를 선택해주세요',
+    question:
+      'alskdmflaksdmflkamsdlkfmalksdmflkamsdlk alksdmflkasdmlkfamlsdkmflaksmdklfamdslkfmasdmflamsdmf',
     inputType: 'SINGLE_CHECK',
     checkList: [
       { id: 1, contents: '1' },
@@ -65,7 +66,11 @@ const formDataTwo = [
         contents:
           '병아리병아리병아리병아리병아리병아리병아리 병아리병 아리병아리병아리병아 리 병 아리병 아리병아리병아리',
       },
-      { id: 2, contents: '호랑이' },
+      {
+        id: 2,
+        contents:
+          'asdflkasjdflaksjdl;fkasdmflakskalskdfjalskdjflkasjdlkfajsldjkfkakjsdklfj',
+      },
       { id: 3, contents: '판다' },
       { id: 4, contents: '기린' },
     ],
