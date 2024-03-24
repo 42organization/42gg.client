@@ -82,7 +82,6 @@ function CommentCreateBar({
   const handleCommentSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!comment) {
-      fetchRoomDetail();
       return;
     }
     await instance.post(`/party/rooms/${roomId}/comments`, {
