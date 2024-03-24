@@ -28,6 +28,7 @@ function MultiCheckForm(props: IitemProps) {
         {form.checkList?.map((check: ICheck) => {
           return (
             <FormControlLabel
+              className={styles.checkBox}
               name={form.questionId.toString()}
               key={check.id}
               value={check.id}

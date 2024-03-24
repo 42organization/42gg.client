@@ -52,7 +52,7 @@
   .questionText {
     margin-bottom: 1rem;
     font-size: 1rem;
-    word-break: keep-all;
+    word-break: break-all;
   }
 
   .submitBtn {
@@ -67,6 +67,11 @@
   .checkBoxGroup,
   .radioBoxGroup {
     width: 18rem;
+  }
+
+  .radioBox,
+  .checkBox {
+    word-break: break-all;
   }
 
   .backTitle,
