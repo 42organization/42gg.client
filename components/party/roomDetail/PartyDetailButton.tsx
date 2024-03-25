@@ -143,12 +143,18 @@ function StartRoom({ roomId, fetchRoomDetail }: RefreshProps) {
         instance
           .post(`/party/rooms/${roomId}/start`)
           .then(() => {
+            setSnackbar({
+              toastName: 'room start',
+              message: '슬랙으로 시작 알림이 전송되었습니다.',
+              severity: 'success',
+              clicked: true,
+            });
             fetchRoomDetail();
           })
           .catch(() => {
             setSnackbar({
               toastName: 'patch request',
-              message: '시작에 실패했습니다시',
+              message: '시작에 실패했습니다.\n 다시 시도해주세요.',
               severity: 'error',
               clicked: true,
             });
