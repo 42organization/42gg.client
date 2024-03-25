@@ -73,11 +73,16 @@ export default function AdminCommentReport() {
       <div className={styles.header}>
         <span className={styles.title}>패널티 리스트</span>
       </div>
-      <button onClick={handleAddpenalty}>추가</button>
-      <TableContainer component={Paper}>
-        <Table aria-label='UserManagementTable'>
+      <button
+        onClick={handleAddpenalty}
+        className={`${styles.button_1} ${styles.add}`}
+      >
+        추가
+      </button>
+      <TableContainer component={Paper} className={styles.tableContainer}>
+        <Table aria-label='UserManagementTable' className={styles.table}>
           <AdminTableHead tableName={'partyPenaltyAdmin'} table={tableTitle} />
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {penaltyInfo.penaltyList && penaltyInfo.penaltyList.length > 0 ? (
               penaltyInfo.penaltyList.map(
                 (penalty: PartyPenaltyAdmin, index: number) => (
@@ -85,10 +90,14 @@ export default function AdminCommentReport() {
                     {tableFormat['partyPenaltyAdmin'].columns.map(
                       (columnName) => {
                         return (
-                          <TableCell key={columnName}>
+                          <TableCell
+                            key={columnName}
+                            className={styles.tableBodyItem}
+                          >
                             {columnName === 'edit' ? (
                               <button
                                 onClick={() => handleEditpenalty(penalty)}
+                                className={`${styles.button_1} ${styles.add}`}
                               >
                                 수정
                               </button>
