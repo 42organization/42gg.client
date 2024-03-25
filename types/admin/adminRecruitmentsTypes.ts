@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface Irecruit {
   id: number;
   startDate: Date;
@@ -53,4 +55,26 @@ export interface IrecruitUserTable {
     status?: '합격' | '불합격' | '심사중';
     form: Array<Iquestion>;
   }[];
+}
+
+export interface RecruitmentsPages {
+  pageType: 'MAIN' | 'EDIT' | 'DETAIL';
+  props:
+    | RecruitmentsMainProps
+    | RecruitmentEditProps
+    | RecruitmentDetailProps
+    | null;
+}
+
+export interface RecruitmentsMainProps {
+  setPage: Dispatch<SetStateAction<RecruitmentsPages>>;
+}
+
+export interface RecruitmentEditProps {
+  setPage: Dispatch<SetStateAction<RecruitmentsPages>>;
+}
+
+export interface RecruitmentDetailProps {
+  setPage: Dispatch<SetStateAction<RecruitmentsPages>>;
+  recruit: Irecruit;
 }

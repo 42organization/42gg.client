@@ -1,5 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
-import { IrecruitEditInfo } from 'types/admin/adminRecruitmentsTypes';
+import {
+  IrecruitEditInfo,
+  RecruitmentEditProps,
+  RecruitmentsPages,
+} from 'types/admin/adminRecruitmentsTypes';
 import useRecruitmentEditInfo from 'hooks/recruitments/useRecruitmentEditInfo';
 import styles from 'styles/admin/recruitments/recruitmentEdit/RecruitmentEdit.module.scss';
 import ActionSelectorButtons from './components/ActionSelectorButtons';
@@ -16,10 +20,7 @@ const initRecruitmentEditInfo: IrecruitEditInfo = {
   form: [],
 };
 
-interface RecruitmentEditProps {
-  setPageType: Dispatch<SetStateAction<'MAIN' | 'EDIT'>>;
-}
-export default function RecruitmentEdit({ setPageType }: RecruitmentEditProps) {
+export default function RecruitmentEdit({ setPage }: RecruitmentEditProps) {
   const {
     recruitmentEditInfo,
     setRecruitmentEditInfoField,
@@ -31,7 +32,7 @@ export default function RecruitmentEdit({ setPageType }: RecruitmentEditProps) {
     <div className={styles.container}>
       <button
         onClick={() => {
-          setPageType('MAIN');
+          setPage({ pageType: 'MAIN', props: null });
         }}
       >
         메인으로가기

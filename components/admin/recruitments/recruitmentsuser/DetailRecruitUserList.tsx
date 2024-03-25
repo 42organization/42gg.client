@@ -98,7 +98,7 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
             <AdminContent
               content={
                 formItem.answer ||
-                formItem.checkList?.map((item) => item.content).join(', ') ||
+                formItem.checkList?.map((item) => item.contents).join(', ') ||
                 ''
               }
               maxLen={16}

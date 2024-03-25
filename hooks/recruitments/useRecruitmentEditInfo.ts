@@ -1,10 +1,13 @@
 import { useCallback, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { FaSdCard } from 'react-icons/fa';
 import {
   IcheckItem,
   Iquestion,
   IrecruitEditInfo,
 } from 'types/admin/adminRecruitmentsTypes';
 import { mockInstance } from 'utils/mockAxios';
+import { toastState } from 'utils/recoil/toast';
 
 export interface IFormManager {
   setQuestionContent: (questionIdx: number, content: string) => void;
@@ -29,6 +32,8 @@ export default function useRecruitmentEditInfo(
 ) {
   const [recruitmentEditInfo, setRecruitmentEditInfo] =
     useState<IrecruitEditInfo>(initRecruitmentEditInfo);
+
+  const setSnackBar = useSetRecoilState(toastState);
 
   const setRecruitmentEditInfoField = (fieldName: string, value: any) => {
     setRecruitmentEditInfo((prev) => ({ ...prev, [fieldName]: value }));
@@ -179,15 +184,18 @@ export default function useRecruitmentEditInfo(
   };
 
   const importRecruitmentInfo = async (recruitId: number) => {
-    const res = await mockInstance.get('/recruitments/' + recruitId);
-    console.log(res.data);
-    setRecruitmentEditInfo(res.data);
-    //   return {
-    //     beforeTournament: beforeRes.data.tournaments,
-    //     liveTournament: liveRes.data.tournaments,
-    //   };
-    // }, []);
-    // setRecruitmentEditInfo(importedRecruit);
+    try {
+      const res = await mockInstance.get('/recruitments/' + recruitId);
+      console.log(res.data);
+      setRecruitmentEditInfo(res.data);
+    } catch (e: any) {
+      setSnackBar({
+        toastName: 'get recruitment',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
+    }
   };
 
   return {

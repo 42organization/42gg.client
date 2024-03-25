@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   Button,
@@ -39,7 +39,7 @@ export default function ActionSelectorButtons({
   const getRecruitHandler = async () => {
     try {
       // const res = await instanceInManage.get(
-      //   `/recruitments?page=${currentPage}&size=20`
+      //   `/recruitments`
       // );
       const res = await mockInstance.get(`admin/recruitments`);
       setRecruitmentsHistory(res.data.recruitment);
@@ -47,7 +47,30 @@ export default function ActionSelectorButtons({
       setSnackBar({
         toastName: 'get recruitment',
         severity: 'error',
-        message: `API 요청에 문제가 발생했습니다.`,
+        message: `이전 공고를 불러오는데 실패했습니다.`,
+        clicked: true,
+      });
+    }
+  };
+
+  const createRecruitmentHandler = async () => {
+    try {
+      // const res = await instanceInManage.get(
+      //   `/recruitments`
+      // );
+      const res = await mockInstance.post(`admin/recruitments`, {
+        title: recruitmentEditInfo.title,
+        startDate: recruitmentEditInfo.startDate,
+        endDate: recruitmentEditInfo.endDate,
+        generation: recruitmentEditInfo.generation,
+        contents: recruitmentEditInfo.contents,
+        form: recruitmentEditInfo.form,
+      });
+    } catch (e: any) {
+      setSnackBar({
+        toastName: 'post recruitment',
+        severity: 'error',
+        message: `생성 요청에 실패하였습니다.`,
         clicked: true,
       });
     }
@@ -59,9 +82,8 @@ export default function ActionSelectorButtons({
 
   useEffect(() => {
     getRecruitHandler();
-  });
+  }, []);
 
-  // actionType = 'MODIFY';
   return (
     <div className={styles.mainContainer}>
       <div className={styles.importWrapper}>
@@ -72,16 +94,14 @@ export default function ActionSelectorButtons({
             value={selectedId}
             label='기존 공고'
             style={{ backgroundColor: 'white' }}
+            onClick={getRecruitHandler}
             onChange={selectChangehandler}
           >
-            {recruitmentsHistory &&
-              recruitmentsHistory.map((recruit: Irecruit) => {
-                return (
-                  <MenuItem key={recruit.id} value={recruit.id}>
-                    {recruit.title}
-                  </MenuItem>
-                );
-              })}
+            {recruitmentsHistory.map((recruit: Irecruit) => (
+              <MenuItem key={recruit.id} value={recruit.id}>
+                {recruit.title}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
         <Button
@@ -95,7 +115,9 @@ export default function ActionSelectorButtons({
         </Button>
       </div>
       {actionType === 'CREATE' && (
-        <Button variant='contained'>공고 생성</Button>
+        <Button variant='contained' onClick={createRecruitmentHandler}>
+          공고 생성
+        </Button>
       )}
       {actionType === 'MODIFY' && (
         <Button variant='contained'>공고 수정</Button>

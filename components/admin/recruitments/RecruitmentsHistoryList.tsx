@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   Paper,
@@ -8,7 +14,12 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { Irecruit, IrecruitTable } from 'types/admin/adminRecruitmentsTypes';
+import {
+  Irecruit,
+  IrecruitTable,
+  RecruitmentDetailProps,
+  RecruitmentsPages,
+} from 'types/admin/adminRecruitmentsTypes';
 // import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { mockInstance } from 'utils/mockAxios';
@@ -32,7 +43,11 @@ const tableTitle: { [key: string]: string } = {
   detaillUser: '지원자 보기',
 };
 
-function RecruitmentsHistoryList() {
+function RecruitmentsHistoryList({
+  setPage,
+}: {
+  setPage: Dispatch<SetStateAction<RecruitmentsPages>>;
+}) {
   const [recruitData, setRecruitData] = useState<IrecruitTable>({
     recruitment: [],
     totalPage: 0,
@@ -83,7 +98,20 @@ function RecruitmentsHistoryList() {
 
   const renderTableCell = (recruit: Irecruit, columnName: string) => {
     if (columnName === 'detailRecruitment') {
-      return <button className={styles.deleteBtn}>상세보기</button>;
+      return (
+        <button
+          className={styles.deleteBtn}
+          onClick={() => {
+            const props = {
+              setPage: setPage,
+              recruit: recruit,
+            } as RecruitmentDetailProps;
+            setPage({ pageType: 'DETAIL', props: props });
+          }}
+        >
+          상세보기
+        </button>
+      );
     }
 
     if (columnName === 'detaillUser') {
