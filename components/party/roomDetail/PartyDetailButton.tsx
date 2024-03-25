@@ -62,7 +62,9 @@ function ShareRoom() {
     <button
       className={styles.shareBtn}
       onClick={() => {
-        navigator.clipboard.writeText(`http://42gg.kr/parties/${roomId}`);
+        navigator.clipboard.writeText(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/party/${roomId}`
+        );
         setSnackbar({
           toastName: 'clip board',
           message: '주소가 복사되었습니다.',
