@@ -47,6 +47,16 @@ $winner-blue: #040eff;
 
 $coin-yellow: #f6e24d;
 
+$recruit-blue: #8ebcf9;
+$recruit-blue-transparent: rgba(142, 188, 249, 0.04);
+$recruit-blue-light: #c8ecff;
+$recruit-blue-dark: #6394ae;
+$recruit-yellow: #ffc61a;
+$recruit-gray: #8c92ac;
+$recruit-gray-light: #dcdee6;
+$recruit-gray-dark: #494e65;
+$recruit-red: #ff7f7f;
+
 /* font-family - commmon */
 $common-font: 'Pretendard', sans-serif;
 $common-en-font: 'Roboto', sans-serif;
@@ -359,9 +369,9 @@ $vip-background: linear-gradient(
       color: rgba(255, 255, 255, 1);
       cursor: pointer;
       background: linear-gradient(
-          180deg,
-          #c66bf2 0%,
-          rgba(96, 6, 138, 0.52) 100%
+        180deg,
+        #c66bf2 0%,
+        rgba(96, 6, 138, 0.52) 100%
       );
       border: 0;
       border-radius: 0.625rem;
@@ -411,5 +421,30 @@ $vip-background: linear-gradient(
       rgb(123, 97, 224) 100%
     );
     @include txtColor(rgb(123, 97, 224));
+  }
+}
+
+// quillViewer 공통 속성 mixin
+@mixin quillViewer(
+  $color,
+  $width: 100%,
+  $height: 100%,
+  $overflowY: scroll,
+  $scrollbarWidth: 5px,
+  $scrollbarColor: white,
+  $scrollbarRadius: 10px
+) {
+  width: $width; // default : 100%
+  height: $height; // default : 100%
+  overflow-y: $overflowY; // default : scroll
+  color: $color;
+  &::-webkit-scrollbar {
+    display: inherit;
+    width: 5px;
+    height: 1rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $scrollbarColor; // default : white
+    border-radius: $scrollbarRadius; // default : 10px
   }
 }

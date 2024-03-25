@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import { ChangeEvent, RefObject, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
@@ -14,16 +13,12 @@ import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToKRIOSString, dateToKRLocaleTimeString } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
+import DynamicQuill from 'components/DynamicQuill';
 import styles from 'styles/admin/tournament/TournamentEdit.module.scss';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import TournamentModalPreview from './TournamentModalPreview';
 import { AdminTableHead } from '../common/AdminTable';
-
-const Quill = dynamic(() => import('react-quill'), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
 
 const tableTitle: { [key: string]: string } = {
   title: '토너먼트 이름',
@@ -175,7 +170,7 @@ export default function TournamentEdit({
             </TableBody>
           </Table>
         </TableContainer>
-        <Quill
+        <DynamicQuill
           className={styles.quillEditor}
           modules={QUILL_EDIT_MODULES}
           formats={QUILL_FORMATS}

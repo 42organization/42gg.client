@@ -158,4 +158,37 @@ export const tableFormat: TableFormat = {
     name: '토너먼트 생성',
     columns: ['title', 'startTime', 'endTime', 'type'],
   },
+  recruitment: {
+    name: '공고 목록',
+    columns: [
+      'id',
+      'usedAt',
+      'title',
+      'startAt',
+      'endAt',
+      'status',
+      'isCurrent',
+      'detailRecruitment',
+      'detaillUser',
+    ],
+  },
+  recruitUserList: {
+    name: '지원자 목록',
+    columns: [
+      'id',
+      'intraId',
+      'status',
+      'createdAt',
+      'detailUser',
+      'detailRecruit',
+    ],
+  },
+  recruitEditTitle: {
+    name: '공고 수정',
+    columns: ['title', 'startDate', 'endDate', 'generation'],
+  },
+  notificationList: {
+    name: '알림 목록',
+    columns: ['intraId', 'interview', 'result'],
+  },
 };

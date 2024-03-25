@@ -14,10 +14,12 @@ import CurrentMatchEmoji from 'public/image/menu_currentMatch.svg';
 import HallOfFameEmoji from 'public/image/menu_halloffame.svg';
 import ManualEmoji from 'public/image/menu_manual.svg';
 import RankingEmoji from 'public/image/menu_ranking.svg';
+import RecruitEmoji from 'public/image/menu_recruit.svg';
 import ReportEmoji from 'public/image/menu_report.svg';
 import SignOutEmoji from 'public/image/menu_signOut.svg';
 import StatisticsEmoji from 'public/image/menu_statistics.svg';
 import { useUser } from 'hooks/Layout/useUser';
+import useCheckRecruit from 'hooks/recruit/useCheckRecruit';
 import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
@@ -69,10 +71,20 @@ const MenuItem = ({ itemName, onClick }: menuItemProps) => {
       name: '관리자',
       svg: <AdminEmoji />,
     },
+    Recruit: {
+      name: '지원하기',
+      svg: <RecruitEmoji />,
+    },
   };
   return (
     <div className={styles.menuItem} onClick={onClick}>
-      <div className={styles.imageWrapper}>{menuList[itemName].svg}</div>
+      <div
+        className={
+          itemName === 'Recruit' ? styles.recruit : styles.imageWrapper
+        }
+      >
+        {menuList[itemName].svg}
+      </div>
       <div className={styles.menuText}>{menuList[itemName].name}</div>
     </div>
   );
@@ -89,6 +101,7 @@ const MenuLink = ({ link, onClick, itemName }: MenuLinkProps) => {
 export const MainMenu = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const setModal = useSetRecoilState<Modal>(modalState);
+  const { isRecruiting } = useCheckRecruit();
 
   const getAnnouncementHandler = useAxiosGet<any>({
     url: '/pingpong/announcement',
@@ -106,6 +119,13 @@ export const MainMenu = () => {
 
   return (
     <nav className={styles.mainMenu}>
+      {isRecruiting && (
+        <MenuLink
+          link='/recruit'
+          itemName='Recruit'
+          onClick={HeaderState?.resetOpenMenuBarState}
+        />
+      )}
       <MenuLink
         link='/store'
         itemName='Store'

@@ -74,6 +74,9 @@
     .imageWrapper {
       background-color: rgba(244, 221, 247, 1);
     }
+    .recruit {
+      background-color: $recruit-yellow;
+    }
   }
   .adminMenu {
     padding-bottom: 2.5rem;
@@ -93,7 +96,8 @@
     &:hover {
       background-color: rgba(212, 191, 215, 1);
     }
-    .imageWrapper {
+    .imageWrapper,
+    .recruit {
       display: flex;
       width: 2.5rem;
       height: 2.5rem;

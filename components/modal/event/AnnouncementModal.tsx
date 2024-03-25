@@ -1,9 +1,9 @@
-import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Announcement } from 'types/modalTypes';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { modalState } from 'utils/recoil/modal';
+import DynamicQuill from 'components/DynamicQuill';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -16,11 +16,6 @@ type AnnouncementModalProps = {
   announcement: Announcement;
   // isAttended?: boolean;
 };
-
-const Quill = dynamic(() => import('react-quill'), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
 
 export default function AnnouncementModal({
   announcement,
@@ -63,7 +58,7 @@ AnnouncementModalProps) {
   return (
     <div className={styles.container}>
       <div className={styles.title}>Notice</div>
-      <Quill
+      <DynamicQuill
         className={styles.quillViewer}
         readOnly={true}
         formats={QUILL_FORMATS}

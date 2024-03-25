@@ -1,0 +1,19 @@
+@import 'styles/common.scss';
+
+.tableContainer {
+  .table {
+    .tableBody {
+      .tableBodyItemQuill {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .tableBodyItem {
+        padding: 0.5rem;
+        font-size: $small-font;
+        line-height: 100%;
+        text-align: center;
+      }
+    }
+  }
+}

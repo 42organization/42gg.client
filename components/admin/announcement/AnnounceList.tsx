@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useState } from 'react';
 import {
   Paper,
@@ -20,15 +19,11 @@ import {
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/admin/common/AdminTable';
+import DynamicQuill from 'components/DynamicQuill';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/announcement/AnnounceList.module.scss';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
-
-const Quill = dynamic(() => import('react-quill'), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
 
 const tableTitle: { [key: string]: string } = {
   content: '내용',
@@ -97,7 +92,7 @@ export default function AnnounceList() {
                             className={styles.tableBodyItemQuill}
                             key={index}
                           >
-                            <Quill
+                            <DynamicQuill
                               className={styles.quillViewer}
                               readOnly={true}
                               formats={QUILL_FORMATS}
