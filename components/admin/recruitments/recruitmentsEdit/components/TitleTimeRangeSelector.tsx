@@ -1,3 +1,5 @@
+import { SyntheticEvent } from 'react';
+import DatePicker from 'react-datepicker';
 import {
   Paper,
   Table,
@@ -7,7 +9,11 @@ import {
   TableRow,
 } from '@mui/material';
 import { Irecruit } from 'types/admin/adminRecruitmentsTypes';
-import { dateToKRLocaleTimeString } from 'utils/handleTime';
+import {
+  dateToKRLocaleTimeString,
+  dateToString,
+  dateToStringShort,
+} from 'utils/handleTime';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/TitleTimeRangeSelector.module.scss';
 
@@ -49,23 +55,29 @@ export default function TitleTimeRangeSelector({
                 />
               </TableCell>
               <TableCell className={styles.tableBodyItem}>
-                <input
-                  type='datetime-local'
+                <DatePicker
+                  selected={recruitmentEditInfo.startDate}
                   name='startDate'
-                  value={dateToKRLocaleTimeString(
-                    recruitmentEditInfo.startDate
-                  )}
-                  step='60'
-                  onChange={inputChangeHandler}
+                  showTimeSelect
+                  timeFormat='HH:mm'
+                  dateFormat='yyyy-MM-dd HH:mm'
+                  timeIntervals={60}
+                  onChange={(date) => {
+                    setRecruitmentEditInfoField('startDate', date);
+                  }}
                 />
               </TableCell>
               <TableCell className={styles.tableBodyItem}>
-                <input
-                  type='datetime-local'
+                <DatePicker
+                  selected={recruitmentEditInfo.endDate}
                   name='endDate'
-                  value={dateToKRLocaleTimeString(recruitmentEditInfo.endDate)}
-                  step='60'
-                  onChange={inputChangeHandler}
+                  showTimeSelect
+                  timeFormat='HH:mm'
+                  dateFormat='yyyy-MM-dd HH:mm'
+                  timeIntervals={60}
+                  onChange={(date) => {
+                    setRecruitmentEditInfoField('endDate', date);
+                  }}
                 />
               </TableCell>
               <TableCell className={styles.tableBodyItem}>

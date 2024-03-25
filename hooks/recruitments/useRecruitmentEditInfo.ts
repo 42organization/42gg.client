@@ -195,8 +195,15 @@ export default function useRecruitmentEditInfo(
   const importRecruitmentInfo = async (recruitId: number) => {
     try {
       const res = await mockInstance.get('/recruitments/' + recruitId);
-      console.log(res.data);
-      setRecruitmentEditInfo(res.data);
+      const data: Irecruit = {
+        title: res.data.title,
+        startDate: new Date(res.data.startDate),
+        endDate: new Date(res.data.endDate),
+        generation: res.data.generation,
+        contents: res.data.contents,
+        form: res.data.form,
+      };
+      setRecruitmentEditInfo(data);
     } catch (e: any) {
       setSnackBar({
         toastName: 'get recruitment',
