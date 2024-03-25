@@ -8,17 +8,13 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import {
-  Irecruit,
-  IrecruitEditInfo,
-  IrecruitTable,
-} from 'types/admin/adminRecruitmentsTypes';
+import { Irecruit } from 'types/admin/adminRecruitmentsTypes';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/ActionSelectorButtons.module.scss';
 
 interface ActionSelectorButtonsProps {
-  recruitmentEditInfo: IrecruitEditInfo;
+  recruitmentEditInfo: Irecruit;
   importRecruitmentInfo: (recruitId: number) => void;
   actionType: 'CREATE' | 'MODIFY';
 }

@@ -83,7 +83,8 @@ function RecruitmentsHistoryList({
 
   // };
 
-  const recruitmentApplicant = (recruitId: number) => {
+  const recruitmentApplicant = (recruitId: number | undefined) => {
+    if (!recruitId) return;
     setSelectedRecruit(recruitId);
     setView('detail');
   };
@@ -93,7 +94,7 @@ function RecruitmentsHistoryList({
   }, [currentPage]);
 
   if (view === 'detail') {
-    return <MenuTab recruitId={selectedRecruit} />;
+    return <MenuTab setPage={setPage} recruitId={selectedRecruit} />;
   }
 
   const renderTableCell = (recruit: Irecruit, columnName: string) => {
@@ -137,9 +138,9 @@ function RecruitmentsHistoryList({
 
     return (
       <AdminContent
-        content={recruit[columnName as keyof Irecruit]?.toString()}
+        content={recruit[columnName as keyof Irecruit]?.toString() as string}
         maxLen={16}
-        detailTitle={recruit.id.toString()}
+        detailTitle={(recruit.id as number).toString()}
         detailContent={recruit.title}
       />
     );

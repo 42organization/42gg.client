@@ -4,7 +4,7 @@ import { FaSdCard } from 'react-icons/fa';
 import {
   IcheckItem,
   Iquestion,
-  IrecruitEditInfo,
+  Irecruit,
 } from 'types/admin/adminRecruitmentsTypes';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
@@ -28,10 +28,11 @@ export interface IFormManager {
 }
 
 export default function useRecruitmentEditInfo(
-  initRecruitmentEditInfo: IrecruitEditInfo
+  initRecruitmentEditInfo: Irecruit
 ) {
-  const [recruitmentEditInfo, setRecruitmentEditInfo] =
-    useState<IrecruitEditInfo>(initRecruitmentEditInfo);
+  const [recruitmentEditInfo, setRecruitmentEditInfo] = useState<Irecruit>(
+    initRecruitmentEditInfo
+  );
 
   const setSnackBar = useSetRecoilState(toastState);
 
@@ -40,6 +41,7 @@ export default function useRecruitmentEditInfo(
   };
 
   const setQuestionContent = (questionIdx: number, content: string) => {
+    if (!recruitmentEditInfo.form) return;
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
     question.question = content;
@@ -52,6 +54,7 @@ export default function useRecruitmentEditInfo(
     checkItemIdx: number,
     contents: string
   ) => {
+    if (!recruitmentEditInfo.form) return;
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
     if (!question.checkList) return;
@@ -63,6 +66,7 @@ export default function useRecruitmentEditInfo(
   };
 
   const addEmptyQuestion = (questionIdx: number, inputType: string) => {
+    if (!recruitmentEditInfo.form) return;
     const updatedForm = [...recruitmentEditInfo.form];
     const question = makeEmptyQuestion(inputType);
     if (!question) return;
@@ -73,6 +77,7 @@ export default function useRecruitmentEditInfo(
   };
 
   const removeQuestion = (questionIdx: number) => {
+    if (!recruitmentEditInfo.form) return;
     const updatedForm = [...recruitmentEditInfo.form];
     updatedForm.splice(questionIdx, 1);
 
@@ -80,6 +85,7 @@ export default function useRecruitmentEditInfo(
   };
 
   const addCheckItemToQuestion = (questionIdx: number) => {
+    if (!recruitmentEditInfo.form) return;
     const checkItem: IcheckItem = {
       contents: '',
     };
@@ -106,6 +112,7 @@ export default function useRecruitmentEditInfo(
     checkItemIdx: number,
     questionIdx: number
   ) => {
+    if (!recruitmentEditInfo.form) return;
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
     if (!question) return;
@@ -117,6 +124,7 @@ export default function useRecruitmentEditInfo(
   };
 
   const changeQuestionInputType = (questionIdx: number, inputType: string) => {
+    if (!recruitmentEditInfo.form) return;
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
 
@@ -131,6 +139,7 @@ export default function useRecruitmentEditInfo(
   };
 
   const switchQuestionIndex = (questionIdx: number, targetIdx: number) => {
+    if (!recruitmentEditInfo.form) return;
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
     if (!question) return;

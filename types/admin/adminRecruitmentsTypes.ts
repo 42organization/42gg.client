@@ -1,21 +1,14 @@
 import { Dispatch, SetStateAction } from 'react';
 
 export interface Irecruit {
-  id: number;
+  id?: number;
   startDate: Date;
   endDate: Date;
   title: string;
-  status: '모집전' | '모집중' | '완료';
+  contents?: string;
+  status?: '모집전' | '모집중' | '완료';
   generation: string;
-}
-
-export interface IrecruitEditInfo {
-  startDate: string;
-  endDate: string;
-  title: string;
-  contents: string;
-  generation: string;
-  form: Array<Iquestion>;
+  form?: Array<Iquestion>;
 }
 
 export interface Iquestion {
@@ -28,6 +21,7 @@ export interface Iquestion {
 
 export interface IcheckItem {
   checkId?: number;
+  sortNum?: number;
   contents: string;
 }
 

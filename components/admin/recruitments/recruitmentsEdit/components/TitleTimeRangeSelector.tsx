@@ -6,7 +6,8 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { IrecruitEditInfo } from 'types/admin/adminRecruitmentsTypes';
+import { Irecruit } from 'types/admin/adminRecruitmentsTypes';
+import { dateToKRLocaleTimeString } from 'utils/handleTime';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/TitleTimeRangeSelector.module.scss';
 
@@ -18,7 +19,7 @@ const tableTitle: { [key: string]: string } = {
 };
 
 interface TitleTimeRangeSelectorProps {
-  recruitmentEditInfo: IrecruitEditInfo;
+  recruitmentEditInfo: Irecruit;
   setRecruitmentEditInfoField: (fieldName: string, value: any) => void;
 }
 
@@ -51,7 +52,9 @@ export default function TitleTimeRangeSelector({
                 <input
                   type='datetime-local'
                   name='startDate'
-                  value={recruitmentEditInfo.startDate}
+                  value={dateToKRLocaleTimeString(
+                    recruitmentEditInfo.startDate
+                  )}
                   step='60'
                   onChange={inputChangeHandler}
                 />
@@ -60,7 +63,7 @@ export default function TitleTimeRangeSelector({
                 <input
                   type='datetime-local'
                   name='endDate'
-                  value={recruitmentEditInfo.endDate}
+                  value={dateToKRLocaleTimeString(recruitmentEditInfo.endDate)}
                   step='60'
                   onChange={inputChangeHandler}
                 />

@@ -1,10 +1,17 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { RecruitmentsPages } from 'types/admin/adminRecruitmentsTypes';
 import DetailRecruitUserList from 'components/admin/recruitments/recruitmentsuser/DetailRecruitUserList';
 import NotificationResults from 'components/admin/recruitments/recruitmentsuser/NotificationResults';
 import styles from 'styles/admin/recruitments/MenuTab.module.scss';
 import RecruitmentsHistoryList from '../RecruitmentsHistoryList';
 
-function MenuTab({ recruitId }: { recruitId: number }) {
+function MenuTab({
+  recruitId,
+  setPage,
+}: {
+  recruitId: number;
+  setPage: Dispatch<SetStateAction<RecruitmentsPages>>;
+}) {
   const [view, setView] = useState('menu');
   const [tabIdx, setTabIdx] = useState(0);
   const [child, setChild] = useState(
@@ -35,7 +42,7 @@ function MenuTab({ recruitId }: { recruitId: number }) {
   return (
     <>
       {view === 'history' ? (
-        <RecruitmentsHistoryList />
+        <RecruitmentsHistoryList setPage={setPage} />
       ) : (
         <>
           <div className={styles.mainContainer}>

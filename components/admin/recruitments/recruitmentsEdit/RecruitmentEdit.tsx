@@ -1,8 +1,7 @@
-import { Dispatch, SetStateAction } from 'react';
 import {
-  IrecruitEditInfo,
+  Iquestion,
+  Irecruit,
   RecruitmentEditProps,
-  RecruitmentsPages,
 } from 'types/admin/adminRecruitmentsTypes';
 import useRecruitmentEditInfo from 'hooks/recruitments/useRecruitmentEditInfo';
 import styles from 'styles/admin/recruitments/recruitmentEdit/RecruitmentEdit.module.scss';
@@ -11,10 +10,10 @@ import QuestionFormBuilder from './components/QuestionFormBuilder';
 import QuillDescriptionEditor from './components/QuillDescriptionEditor';
 import TitleTimeRangeSelector from './components/TitleTimeRangeSelector';
 
-const initRecruitmentEditInfo: IrecruitEditInfo = {
+const initRecruitmentEditInfo: Irecruit = {
   title: '',
-  startDate: '',
-  endDate: '',
+  startDate: new Date(),
+  endDate: new Date(),
   generation: '',
   contents: '',
   form: [],
@@ -42,11 +41,11 @@ export default function RecruitmentEdit({ setPage }: RecruitmentEditProps) {
         setRecruitmentEditInfoField={setRecruitmentEditInfoField}
       />
       <QuillDescriptionEditor
-        contents={recruitmentEditInfo.contents}
+        contents={recruitmentEditInfo.contents as string}
         setRecruitmentEditInfoField={setRecruitmentEditInfoField}
       />
       <QuestionFormBuilder
-        form={recruitmentEditInfo.form}
+        form={recruitmentEditInfo.form as Iquestion[]}
         formManager={formManager}
       />
       <ActionSelectorButtons
