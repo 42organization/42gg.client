@@ -56,7 +56,7 @@ export function PartyReportModal({ report }: { report: PartyReportModalData }) {
     <div className={styles.container}>
       <div>
         <div className={styles.title}>42GG</div>
-        <div className={styles.phrase}>{report.name}</div>
+        <div className={styles.phrase}>{`${report.name} REPORT`}</div>
       </div>
       <form>
         <div className={styles.contentWrapper}>
