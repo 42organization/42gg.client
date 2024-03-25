@@ -34,7 +34,7 @@ export default function PartyDetailProfile({
   return (
     <div className={styles.profile}>
       <div className={styles.line}>
-        <span>{`참여인원  (${currentPeople}/${maxPeople})`}</span>
+        <span>{`현재 ${currentPeople} | 모집 인원 ${minPeople} ~ ${maxPeople}`}</span>
         <span>{`${dateToStringShort(new Date(dueDate))}`}</span>
       </div>
       <div className={styles.profileItem}>
