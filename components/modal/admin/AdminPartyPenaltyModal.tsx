@@ -86,7 +86,10 @@ export default function PartyPenaltyModal({
               value={formData.penaltyTime}
               onChange={(e) => {
                 if (Number(e.target.value) >= 0) {
-                  setFormData({ ...formData, penaltyTime: +e.target.value });
+                  setFormData({
+                    ...formData,
+                    penaltyTime: Number(e.target.value),
+                  });
                 }
               }}
             />
