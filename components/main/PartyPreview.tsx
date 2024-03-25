@@ -7,7 +7,6 @@ export default function PartyPreview() {
   const limitedRooms = openRooms.slice(0, 3);
   const router = useRouter();
 
-  console.log(partyRooms);
   const movePartyRoom = (roomId: number) => {
     router.push(`/party/${roomId}`);
   };
