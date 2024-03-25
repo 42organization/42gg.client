@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { recruitmentResult } from 'types/recruit/recruitments';
-import { mockInstance } from 'utils/mockAxios';
+import { instance } from 'utils/axios';
 
 const useGetRecruitResult = (recruitId: string, applicationId?: number) => {
   const { data, isLoading, isError } = useQuery<recruitmentResult>({
@@ -14,7 +14,7 @@ const useGetRecruitResult = (recruitId: string, applicationId?: number) => {
           interviewDate: null,
         };
       }
-      const res = await mockInstance.get(
+      const res = await instance.get(
         `/recruitments/${recruitId}/applications/${applicationId}/result`
       );
       return res.data;
