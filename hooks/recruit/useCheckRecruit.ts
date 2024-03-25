@@ -8,7 +8,7 @@ const useCheckRecruit = () => {
     queryKey: ['checkRecruit'],
     staleTime: 1000 * 60 * 5, // 5분
     queryFn: async () => {
-      const res = await instance.get('/recruitments');
+      const res = await instance.get('/recruitments?page=1&size=1'); // 1개만 불러와서 존재 여부만 확인
       return res.data;
     },
   });
