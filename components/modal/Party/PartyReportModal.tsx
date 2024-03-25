@@ -64,7 +64,7 @@ export function PartyReportModal({ report }: { report: PartyReportModalData }) {
             <textarea
               name='content'
               maxLength={300}
-              onChange={(e) => setContent(content + e)}
+              onChange={(e) => setContent(e.target.value)}
             />
             <div>{`${content.length}/300`}</div>
           </div>
