@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   Paper,
@@ -72,13 +72,13 @@ export default function AdminCommentReport() {
     <div className={styles.AdminTableWrap}>
       <div className={styles.header}>
         <span className={styles.title}>패널티 리스트</span>
+        <button
+          onClick={handleAddpenalty}
+          className={`${styles.button_1} ${styles.add}`}
+        >
+          추가
+        </button>
       </div>
-      <button
-        onClick={handleAddpenalty}
-        className={`${styles.button_1} ${styles.add}`}
-      >
-        추가
-      </button>
       <TableContainer component={Paper} className={styles.tableContainer}>
         <Table aria-label='UserManagementTable' className={styles.table}>
           <AdminTableHead tableName={'partyPenaltyAdmin'} table={tableTitle} />
@@ -97,7 +97,7 @@ export default function AdminCommentReport() {
                             {columnName === 'edit' ? (
                               <button
                                 onClick={() => handleEditpenalty(penalty)}
-                                className={`${styles.button_1} ${styles.add}`}
+                                className={`${styles.button_1} ${styles.edit}`}
                               >
                                 수정
                               </button>

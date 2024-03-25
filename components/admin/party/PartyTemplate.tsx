@@ -55,13 +55,13 @@ export default function PartyTemplate() {
       <div className={styles.AdminTableWrap}>
         <div className={styles.header}>
           <span className={styles.title}>템플릿 관리</span>
+          <button
+            onClick={handleAddTemplate}
+            className={`${styles.button_1} ${styles.add}`}
+          >
+            추가
+          </button>
         </div>
-        <button
-          onClick={handleAddTemplate}
-          className={`${styles.button_1} ${styles.add}`}
-        >
-          추가
-        </button>
         <TableContainer className={styles.tableContainer} component={Paper}>
           <Table className={styles.table} aria-label='UserManagementTable'>
             <AdminTableHead tableName={'partyTemplate'} table={tableTitle} />
@@ -77,7 +77,7 @@ export default function PartyTemplate() {
                         {columnName === 'change' && (
                           <button
                             onClick={() => handleEditTemplate(t)}
-                            className={`${styles.button_1} ${styles.add}`}
+                            className={`${styles.button_1} ${styles.edit}`}
                           >
                             수정
                           </button>

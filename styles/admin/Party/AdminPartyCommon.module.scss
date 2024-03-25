@@ -34,7 +34,6 @@
 
   .button_1 {
     padding: 4px 12px;
-    margin-bottom: 10px;
     font-size: $small-font;
     cursor: pointer;
     border: none;
@@ -54,6 +53,14 @@
     background-color: #10b981;
     &:hover {
       background-color: #059669;
+      transition: 0.3s;
+    }
+  }
+  .edit {
+    color: white;
+    background-color: #193972;
+    &:hover {
+      background-color: #044581;
       transition: 0.3s;
     }
   }
