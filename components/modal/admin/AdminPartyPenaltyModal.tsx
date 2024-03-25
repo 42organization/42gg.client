@@ -28,8 +28,9 @@ export default function PartyPenaltyModal({
     penalty: PartyPenaltyAdminSubmit
   ) => {
     instanceInPartyManage
-      .patch(`/penalties /${penaltyId}`, penalty)
+      .patch(`/penalties/${penaltyId}`, penalty)
       .catch(() => {
+        console.log(penalty);
         setSnackBar({
           toastName: 'PATCH request',
           message: '페널티 변경을 하는데 실패하였습니다.',
@@ -83,8 +84,18 @@ export default function PartyPenaltyModal({
             <input
               type='number'
               value={formData.penaltyTime}
+              onChange={(e) => {
+                if (Number(e.target.value) >= 0) {
+                  setFormData({ ...formData, penaltyTime: +e.target.value });
+                }
+              }}
+            />
+            <label>패널티 아이디: </label>
+            <input
+              type='string'
+              value={formData.userIntraId}
               onChange={(e) =>
-                setFormData({ ...formData, penaltyTime: +e.target.value })
+                setFormData({ ...formData, userIntraId: e.target.value })
               }
             />
             <button type='submit' className={styles.button_2}>

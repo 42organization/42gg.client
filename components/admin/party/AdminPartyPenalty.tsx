@@ -90,7 +90,7 @@ export default function AdminCommentReport() {
                               <button
                                 onClick={() => handleEditpenalty(penalty)}
                               >
-                                변경
+                                수정
                               </button>
                             ) : (
                               penalty[

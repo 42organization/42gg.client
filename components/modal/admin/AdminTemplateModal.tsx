@@ -61,33 +61,41 @@ export default function TemplateModal({
             <input
               type='number'
               value={formData.maxGamePeople}
-              onChange={(e) =>
-                setFormData({ ...formData, maxGamePeople: +e.target.value })
-              }
+              onChange={(e) => {
+                if (Number(e.target.value) >= 0) {
+                  setFormData({ ...formData, maxGamePeople: +e.target.value });
+                }
+              }}
             />
             <label>최소 인원: </label>
             <input
               type='number'
               value={formData.minGamePeople}
-              onChange={(e) =>
-                setFormData({ ...formData, minGamePeople: +e.target.value })
-              }
+              onChange={(e) => {
+                if (Number(e.target.value) >= 0) {
+                  setFormData({ ...formData, minGamePeople: +e.target.value });
+                }
+              }}
             />
             <label>최대 게임 시간: </label>
             <input
               type='number'
               value={formData.maxGameTime}
-              onChange={(e) =>
-                setFormData({ ...formData, maxGameTime: +e.target.value })
-              }
+              onChange={(e) => {
+                if (Number(e.target.value) >= 0) {
+                  setFormData({ ...formData, maxGameTime: +e.target.value });
+                }
+              }}
             />
             <label>최소 게임 시간: </label>
             <input
               type='number'
               value={formData.minGameTime}
-              onChange={(e) =>
-                setFormData({ ...formData, minGameTime: +e.target.value })
-              }
+              onChange={(e) => {
+                if (Number(e.target.value) >= 0) {
+                  setFormData({ ...formData, minGameTime: +e.target.value });
+                }
+              }}
             />
             <label>장르: </label>
             <input
