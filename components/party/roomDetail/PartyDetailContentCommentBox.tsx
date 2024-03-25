@@ -9,8 +9,10 @@ import { instance } from 'utils/axios';
 import { getTimeAgo } from 'utils/handleTime';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
+
 type PartyRoomDetailProps = {
   partyRoomDetail: PartyRoomDetail;
+  nameToRGB: (name: string) => string;
   fetchRoomDetail: () => void;
 };
 
@@ -23,6 +25,7 @@ type CommentCreateBarProps = {
 
 export default function PartyDetailContentCommentBox({
   partyRoomDetail,
+  nameToRGB,
   fetchRoomDetail,
 }: PartyRoomDetailProps) {
   const totalComments = partyRoomDetail.comments.length;
@@ -33,7 +36,10 @@ export default function PartyDetailContentCommentBox({
         <div className={styles.content}>{partyRoomDetail.content}</div>
         <div className={styles.comment}>댓글 ({totalComments})</div>
         <hr />
-        <CommentLine comments={partyRoomDetail.comments} />
+        <CommentLine
+          comments={partyRoomDetail.comments}
+          nameToRGB={nameToRGB}
+        />
       </div>
       <CommentCreateBar
         roomId={partyRoomDetail.roomId}
@@ -45,7 +51,13 @@ export default function PartyDetailContentCommentBox({
   );
 }
 
-function CommentLine({ comments }: { comments: PartyComment[] }) {
+function CommentLine({
+  comments,
+  nameToRGB,
+}: {
+  comments: PartyComment[];
+  nameToRGB: (name: string) => string;
+}) {
   return (
     <>
       {comments.map((comment) =>
@@ -75,6 +87,7 @@ function CommentLine({ comments }: { comments: PartyComment[] }) {
 function CommentCreateBar({
   roomId,
   status,
+  myNickname,
   fetchRoomDetail,
 }: CommentCreateBarProps) {
   const [comment, setComment] = useState('');
@@ -95,7 +108,7 @@ function CommentCreateBar({
     setComment(e.target.value);
   };
 
-  if (status !== 'OPEN') {
+  if (status !== 'OPEN' || !myNickname) {
     return <> </>;
   }
 
@@ -114,17 +127,4 @@ function CommentCreateBar({
       </form>
     </div>
   );
-}
-
-function nameToRGB(name: string): string {
-  let codeSum = 0;
-  for (let i = 0; i < name.length; i++) {
-    codeSum += name.charCodeAt(i) ** i * 10;
-  }
-
-  const red = codeSum % 256;
-  const green = (codeSum * 2) % 256;
-  const blue = (codeSum * 3) % 256;
-
-  return `rgb(${red}, ${green}, ${blue})`;
 }

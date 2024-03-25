@@ -11,11 +11,13 @@ import PartyRoomDetailButton from './PartyDetailButton';
 
 type PartyDetailProfileProps = {
   partyRoomDetail: PartyRoomDetail;
+  nameToRGB: (name: string) => string;
   fetchRoomDetail: () => void;
 };
 
 export default function PartyDetailProfile({
   partyRoomDetail,
+  nameToRGB,
   fetchRoomDetail,
 }: PartyDetailProfileProps) {
   const {
@@ -36,7 +38,11 @@ export default function PartyDetailProfile({
         <span>{`${dateToStringShort(new Date(dueDate))}`}</span>
       </div>
       <div className={styles.profileItem}>
-        <Profile roomUsers={roomUsers} hostNickname={hostNickname} />
+        <Profile
+          roomUsers={roomUsers}
+          nameToRGB={nameToRGB}
+          hostNickname={hostNickname}
+        />
       </div>
       <ButtonHandler
         currentPeople={currentPeople}
@@ -55,10 +61,11 @@ export default function PartyDetailProfile({
 
 type ProfileProps = {
   roomUsers: PartyRoomUser[];
+  nameToRGB: (name: string) => string;
   hostNickname: string;
 };
 
-function Profile({ roomUsers, hostNickname }: ProfileProps) {
+function Profile({ roomUsers, hostNickname, nameToRGB }: ProfileProps) {
   return (
     <ul>
       {roomUsers.map(({ intraId, nickname, userImage }) =>

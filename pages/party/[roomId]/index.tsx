@@ -38,10 +38,12 @@ export default function PartyDetailPage() {
       <PartyDetailTitleBox {...partyRoomDetail} />
       <PartyDetailProfile
         partyRoomDetail={partyRoomDetail}
+        nameToRGB={nameToRGB}
         fetchRoomDetail={fetchRoomDetail}
       />
       <PartyDetailContentCommentBox
         partyRoomDetail={partyRoomDetail}
+        nameToRGB={nameToRGB}
         fetchRoomDetail={fetchRoomDetail}
       />
     </div>
@@ -50,4 +52,13 @@ export default function PartyDetailPage() {
   ) : (
     <div>방이 존재하지 않습니다.</div>
   );
+}
+
+function nameToRGB(name: string): string {
+  const randomCode = name.charCodeAt(0) + 150;
+  const red = randomCode % 256;
+  const green = randomCode ** 2 % 256;
+  const blue = randomCode ** 3 % 256;
+
+  return `rgb(${red}, ${green}, ${blue})`;
 }
