@@ -3,11 +3,12 @@ import usePartyRoomList from 'hooks/party/usePartyRoomList';
 import styles from 'styles/main/PartyPreview.module.scss';
 export default function PartyPreview() {
   const { partyRooms } = usePartyRoomList();
-  const limitedRooms = partyRooms.slice(0, 3);
+  const openRooms = partyRooms.filter((room) => room.status === 'OPEN');
+  const limitedRooms = openRooms.slice(0, 3);
   const router = useRouter();
 
+  console.log(partyRooms);
   const movePartyRoom = (roomId: number) => {
-    console.log(roomId);
     router.push(`/party/${roomId}`);
   };
   return (
