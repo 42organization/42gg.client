@@ -27,7 +27,7 @@ const fullRecruitments1 = {
       generation: '3기',
     },
   ],
-  totalPage: 2,
+  totalPage: 3,
 };
 
 const fullRecruitments2 = {
@@ -57,7 +57,21 @@ const fullRecruitments2 = {
       generation: '6기',
     },
   ],
-  totalPage: 2,
+  totalPage: 3,
+};
+
+const fullRecruitments3 = {
+  recruitments: [
+    {
+      id: 7,
+      startDate: new Date(),
+      endDate: new Date(),
+      title: '42GG 모집 7기 지원하기 테스트',
+      status: 'BEFORE',
+      generation: '7기',
+    },
+  ],
+  totalPage: 3,
 };
 
 const emptyRecruitments = {
@@ -74,6 +88,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(200).json(fullRecruitments2);
     return;
   }
+  if (page === '3') {
+    res.status(200).json(fullRecruitments3);
+    return;
+  }
+
   res.status(200).json(fullRecruitments1);
   // res.status(200).json(emptyRecruitments);
 }

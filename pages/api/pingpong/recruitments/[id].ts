@@ -31,7 +31,8 @@ const formDataOne = [
 const formDataTwo = [
   {
     questionId: 1,
-    question: '본인의 기수를 선택해주세요',
+    question:
+      'alskdmflaksdmflkamsdlkfmalksdmflkamsdlk alksdmflkasdmlkfamlsdkmflaksmdklfamdslkfmasdmflamsdmf',
     inputType: 'SINGLE_CHECK',
     checkList: [
       { id: 1, contents: '1' },
@@ -56,13 +57,22 @@ const formDataTwo = [
   },
   {
     questionId: 4,
-    question: '좋아하는 동물을 선택해주세요',
+    question:
+      '좋아하는 동물을 선택해주세요좋아하는 동물을 선택해주세요좋아하는 동물을 선택해주세요좋아하는 동물을 선택해주세요',
     inputType: 'MULTI_CHECK',
     checkList: [
-      { id: 1, contents: '병아리' },
-      { id: 2, contents: '호랑이' },
+      {
+        id: 1,
+        contents:
+          '병아리병아리병아리병아리병아리병아리병아리 병아리병 아리병아리병아리병아 리 병 아리병 아리병아리병아리',
+      },
+      {
+        id: 2,
+        contents:
+          'asdflkasjdflaksjdl;fkasdmflakskalskdfjalskdjflkasjdlkfajsldjkfkakjsdklfj',
+      },
       { id: 3, contents: '판다' },
-      { id: 3, contents: '기린' },
+      { id: 4, contents: '기린' },
     ],
   },
 ];
@@ -77,7 +87,7 @@ const recruitmentDetailOne = {
   title: '42GG 모집 1기',
   contents: sampleContents,
   generations: '1기',
-  form: formDataOne,
+  forms: formDataOne,
 };
 
 const recruitmentDetailTwo = {
@@ -87,7 +97,7 @@ const recruitmentDetailTwo = {
   title: '42GG 모집 2기',
   contents: '지원서',
   generations: '2기',
-  form: formDataTwo,
+  forms: formDataTwo,
 };
 
 const recruitmentDetailThree = {
@@ -97,7 +107,7 @@ const recruitmentDetailThree = {
   title: '42GG 모집 3기',
   contents: '지원서',
   generations: '3기',
-  form: formDataTwo,
+  forms: formDataTwo,
 };
 
 const recruitmentDetailFour = {
@@ -107,7 +117,7 @@ const recruitmentDetailFour = {
   title: '42GG 모집 4기',
   contents: '지원서',
   generations: '4기',
-  form: formDataTwo,
+  forms: formDataTwo,
 };
 
 const recruitmentDetailFive = {
@@ -117,7 +127,7 @@ const recruitmentDetailFive = {
   title: '42GG 모집 5기',
   contents: '지원서',
   generations: '5기',
-  form: formDataTwo,
+  forms: formDataTwo,
 };
 
 const recruitmentDetailSix = {
@@ -127,7 +137,16 @@ const recruitmentDetailSix = {
   title: '긴 내용을 테스트!!!! 42GG 6기',
   contents: sampleContents.repeat(5),
   generations: '6기',
-  form: formDataTwo,
+  forms: formDataTwo,
+};
+
+const recruitmentDetailSeven = {
+  startDate: '2024-12-04 00:12',
+  endDate: '2024-12-04 00:12',
+  title: '42GG 7기',
+  contents: sampleContents.repeat(5),
+  generations: '7기',
+  forms: formDataTwo,
 };
 
 const recruitments = [
@@ -137,6 +156,7 @@ const recruitments = [
   recruitmentDetailFour,
   recruitmentDetailFive,
   recruitmentDetailSix,
+  recruitmentDetailSeven,
 ];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

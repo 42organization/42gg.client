@@ -9,9 +9,13 @@ import 'react-quill/dist/quill.bubble.css';
 
 function Recruit() {
   const router = useRouter();
-  const { data, isLoading } = useRecruitDetail({
-    recruitId: parseInt(router.query.id as string),
-  });
+  const recruitId = parseInt(router.query.id as string);
+
+  const { data, isLoading } = useRecruitDetail(recruitId);
+
+  const onApply = () => {
+    router.push(`/recruit/${recruitId}/apply`);
+  };
 
   // TODO : 구체화 필요함.
   if (isLoading) {
@@ -35,6 +39,7 @@ function Recruit() {
         size={'large'}
         variant='contained'
         color='primary'
+        onClick={onApply}
       >
         지원하기
       </Button>

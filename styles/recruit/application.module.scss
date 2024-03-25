@@ -21,7 +21,7 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
     font-size: $giant-big-font;
-    font-weight: 300;
+    font-weight: 600;
     background-color: $medium-gray;
     border-color: #8ebcf9;
     border-style: solid;
@@ -52,6 +52,7 @@
   .questionText {
     margin-bottom: 1rem;
     font-size: 1rem;
+    word-break: break-all;
   }
 
   .submitBtn {
@@ -68,9 +69,70 @@
     width: 18rem;
   }
 
+  .radioBox,
+  .checkBox {
+    word-break: break-all;
+  }
+
   .backTitle,
   .backBtn {
     margin: 2rem;
     font-size: $giant-font;
+  }
+}
+
+.stickyHeader {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: rgba(246, 246, 246, 0.7);
+  backdrop-filter: blur(5px);
+
+  .stickyContainer {
+    display: flex;
+    height: 5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    justify-content: space-around;
+    .pageTitle {
+      font-size: 2rem;
+    }
+    .homeBtn {
+      height: 3rem;
+      font-size: $medium-font;
+    }
+  }
+}
+
+.stickyFooter {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: rgba(246, 246, 246, 0.4);
+  backdrop-filter: blur(5px);
+
+  .stickyContainer {
+    display: flex;
+    height: 5rem;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    justify-content: space-around;
+    .pageTitle {
+      font-size: 2rem;
+    }
+    .btnContainer {
+      display: flex;
+      width: 15rem;
+      height: 2.5rem;
+      justify-content: space-around;
+      .cancelBtn,
+      .editBtn {
+        border-radius: 1rem;
+      }
+    }
   }
 }

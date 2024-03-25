@@ -12,6 +12,11 @@ const MyApplicationInfo = ({
 }) => {
   const router = useRouter();
 
+  const onCheck = () => {
+    // router.push(`/recruit/${recruitId}/applications?applicationId=${applicationId});
+    router.push(`/recruit/${recruitId}/my-application?applicationId=${1}`);
+  };
+
   if (!status)
     return (
       <div className={style.collapseContainer}>
@@ -29,11 +34,7 @@ const MyApplicationInfo = ({
       >
         <div>지원서 제출 완료!</div>
         {/* TODO: 지원서 확인 페이지 url 확인 필요 */}
-        <Button
-          onClick={() => router.push(`/recruit/${recruitId}/applications/`)}
-          size={'small'}
-          variant='contained'
-        >
+        <Button onClick={onCheck} size={'small'} variant='contained'>
           지원서 확인하기
         </Button>
       </Stack>
