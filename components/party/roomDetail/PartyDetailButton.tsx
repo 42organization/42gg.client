@@ -56,12 +56,19 @@ function ReportRoom({ roomId }: ParytButtonProps) {
 
 function ShareRoom() {
   const roomId = useRouter().query.roomId;
+  const setSnackbar = useSetRecoilState(toastState);
 
   return (
     <button
       className={styles.shareBtn}
       onClick={() => {
         navigator.clipboard.writeText(`http://42gg.kr/parties/${roomId}`);
+        setSnackbar({
+          toastName: 'clip board',
+          message: '주소가 복사되었습니다.',
+          severity: 'success',
+          clicked: true,
+        });
       }}
     >
       <CiShare2 />
@@ -132,7 +139,7 @@ function StartRoom({ roomId, fetchRoomDetail }: RefreshProps) {
       className={styles.startBtn}
       onClick={() => {
         instance
-          .patch(`/party/rooms/${roomId}/start`)
+          .post(`/party/rooms/${roomId}/start`)
           .then(() => {
             fetchRoomDetail();
           })

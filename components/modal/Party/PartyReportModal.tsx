@@ -23,21 +23,26 @@ export function PartyReportModal({ report }: { report: PartyReportModalData }) {
       }
       switch (report.name) {
         case 'COMMENT':
-          await instance.post(`/party/reports/comments/${report.commentId}`);
+          await instance.post(`/party/reports/comments/${report.commentId}`, {
+            content: content,
+          });
           break;
         case 'ROOM':
-          await instance.post(`/party/reports/rooms/${report.roomId}`);
+          await instance.post(`/party/reports/rooms/${report.roomId}`, {
+            content: content,
+          });
           break;
         case 'NOSHOW':
           await instance.post(
-            `/party/reports/rooms/${report.roomId}/users/${report.userIntraId}`
+            `/party/reports/rooms/${report.roomId}/users/${report.userIntraId}`,
+            { content: content }
           );
           break;
       }
       setModal({ modalName: null });
       alert(reportResponse.SUCCESS);
     } catch (e) {
-      alert(reportResponse.REJECT);
+      alert('신고에 실패했습니다.');
       throw new Error('REJECT');
     }
   };

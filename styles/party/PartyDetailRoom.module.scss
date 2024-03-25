@@ -1,6 +1,7 @@
 @import 'styles/common.scss';
 @import 'styles/party/PartyCommon.scss';
 
+$detail-btn-weight: bold;
 $detailCommonRem: 1rem;
 
 .detailPage {
@@ -81,7 +82,9 @@ $detailCommonRem: 1rem;
       width: 50%;
       height: 3rem;
       margin-bottom: $detailCommonRem;
+      font-family: $common-font;
       font-size: $big-font;
+      font-weight: $detail-btn-weight;
       background: $party-gradient3;
       border-radius: $small-radius;
     }
@@ -93,7 +96,9 @@ $detailCommonRem: 1rem;
         width: 50%;
         height: 3rem;
         margin-bottom: $detailCommonRem;
+        font-family: $common-font;
         font-size: $big-font;
+        font-weight: $detail-btn-weight;
         background: $party-gradient3;
         border-radius: $small-radius;
       }
@@ -102,7 +107,9 @@ $detailCommonRem: 1rem;
         width: 50%;
         height: 3rem;
         margin-bottom: $detailCommonRem;
+        font-family: $common-font;
         font-size: $big-font;
+        font-weight: $detail-btn-weight;
         background: $party-gradient3;
         border-radius: $small-radius;
       }
@@ -129,11 +136,13 @@ $detailCommonRem: 1rem;
     .content {
       min-height: 13rem;
       margin-bottom: $detailCommonRem;
+      white-space: pre-wrap;
     }
 
     .comment {
       margin-top: $detailCommonRem * 2;
       margin-bottom: 0.3;
+      white-space: pre-wrap;
     }
 
     .commentHidden {
@@ -156,7 +165,7 @@ $detailCommonRem: 1rem;
   }
 
   .commentCreateBar {
-    padding: 0.01rem;
+    padding: 0.11rem;
     margin-top: $detailCommonRem * 0.5;
     background-color: white;
     border-radius: $big-radius;
@@ -164,7 +173,6 @@ $detailCommonRem: 1rem;
     form {
       display: flex;
       align-items: center;
-
       .textBar {
         width: 100%;
         margin-left: 0.5rem;

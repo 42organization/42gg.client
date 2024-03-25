@@ -20,6 +20,7 @@ export default function PartyDetailProfile({
 }: PartyDetailProfileProps) {
   const {
     currentPeople,
+    minPeople,
     maxPeople,
     dueDate,
     roomId,
@@ -38,6 +39,8 @@ export default function PartyDetailProfile({
         <Profile roomUsers={roomUsers} hostNickname={hostNickname} />
       </div>
       <ButtonHandler
+        currentPeople={currentPeople}
+        minPeople={minPeople}
         status={status}
         myNickname={partyRoomDetail.myNickname}
         roomId={roomId}
@@ -92,7 +95,7 @@ function Profile({ roomUsers, hostNickname }: ProfileProps) {
               width={40}
               height={40}
             />
-            <div>{nickname}</div>
+            <div style={{ color: nameToRGB(nickname) }}>{nickname}</div>
           </li>
         )
       )}
@@ -107,6 +110,8 @@ type ButtonProps = {
   status: PartyRoomStatus;
   myNickname: string | null;
   hostNickname: string;
+  minPeople: number;
+  currentPeople: number;
   fetchRoomDetail: () => void;
 };
 
@@ -115,6 +120,8 @@ function ButtonHandler({
   myNickname,
   roomId,
   hostNickname,
+  minPeople,
+  currentPeople,
   fetchRoomDetail,
 }: ButtonProps) {
   return status !== 'OPEN' ? (
@@ -134,16 +141,18 @@ function ButtonHandler({
       />
     </div>
   ) : (
-    <>
-      <PartyRoomDetailButton.StartRoom
-        roomId={roomId}
-        fetchRoomDetail={fetchRoomDetail}
-      />
+    <div className={styles.btnContainer}>
+      {currentPeople >= minPeople && currentPeople !== 1 && (
+        <PartyRoomDetailButton.StartRoom
+          roomId={roomId}
+          fetchRoomDetail={fetchRoomDetail}
+        />
+      )}
       <PartyRoomDetailButton.LeaveRoom
         roomId={roomId}
         fetchRoomDetail={fetchRoomDetail}
       />
-    </>
+    </div>
   );
 }
 
