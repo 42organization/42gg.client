@@ -162,16 +162,3 @@ function ButtonHandler({
     </div>
   );
 }
-
-function nameToRGB(name: string): string {
-  let codeSum = 0;
-  for (let i = 0; i < name.length; i++) {
-    codeSum += name.charCodeAt(i) ** i * 10;
-  }
-
-  const red = codeSum % 256;
-  const green = (codeSum * 2) % 256;
-  const blue = (codeSum * 3) % 256;
-
-  return `rgb(${red}, ${green}, ${blue})`;
-}
