@@ -83,7 +83,7 @@ export default function TemplateModal({
               value={formData.maxGameTime}
               onChange={(e) => {
                 if (Number(e.target.value) >= 0) {
-                  setFormData({ ...formData, maxGameTime: +e.target.value });
+                  setFormData({ ...formData, maxGameTime: Number(e.target.value) });
                 }
               }}
             />
