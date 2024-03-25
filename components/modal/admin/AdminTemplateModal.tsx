@@ -93,7 +93,7 @@ export default function TemplateModal({
               value={formData.minGameTime}
               onChange={(e) => {
                 if (Number(e.target.value) >= 0) {
-                  setFormData({ ...formData, minGameTime: +e.target.value });
+                  setFormData({ ...formData, minGameTime: Number(e.target.value) });
                 }
               }}
             />
