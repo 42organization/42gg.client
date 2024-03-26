@@ -12,6 +12,7 @@ import {
   peopleOptions,
 } from 'constants/party/createOptions';
 import LoadingSpinner from 'components/UI/LoadingSpinner';
+import usePartyForm from 'hooks/party/usePartyForm';
 import { usePartyTemplate } from 'hooks/party/usePartyTemplate';
 import styles from 'styles/party/PartyCreate.module.scss';
 
@@ -21,54 +22,36 @@ import styles from 'styles/party/PartyCreate.module.scss';
 
 type CategorySelectionProps = {
   categories: PartyCategory[];
-  defaultCategoryId: number;
-  setPartyForm: (data: PartyCreateForm) => void;
+  defaultCategoryName: string;
+  dispatchPartyForm: ReturnType<typeof usePartyForm>['dispatchPartyForm'];
 };
 
 function CategorySelection({
   categories,
-  defaultCategoryId,
-  setPartyForm,
+  defaultCategoryName,
+  dispatchPartyForm,
 }: CategorySelectionProps) {
   const router = useRouter();
-  const [selectedCategoryId, setSelectedCategoryId] =
-    useState(defaultCategoryId);
+  const [selectedCategoryName, setSelectedCategoryName] =
+    useState(defaultCategoryName);
   const { templates } = usePartyTemplate();
   const [selectedTemplateId, setSelectedTemplateId] = useState(
     customTemplate.gameTemplateId
   );
   const templateOptions = [
     customTemplate,
-    ...templates.filter((t) => t.categoryId === selectedCategoryId),
+    ...templates.filter((t) => t.categoryName === selectedCategoryName),
   ];
 
   function handleTemplate() {
     const template =
       templateOptions.find((t) => t.gameTemplateId === selectedTemplateId) ??
       customTemplate;
-    setPartyForm(
-      template.gameTemplateId === customTemplate.gameTemplateId
-        ? {
-            title: '',
-            categoryId: selectedCategoryId,
-            minPeople: template.minGamePeople,
-            maxPeople: template.maxGamePeople,
-            content: '',
-            minutesUntilDueDate: 60,
-          }
-        : {
-            title: `${template.gameName}`,
-            categoryId: selectedCategoryId,
-            minPeople: template.minGamePeople,
-            maxPeople: template.maxGamePeople,
-            content:
-              `난이도: ${template.difficulty}\n` +
-              `장르: ${template.genre}\n` +
-              `게임 시간: ${template.minGameTime} - ${template.maxGameTime}\n` +
-              `설명: ${template.summary}`,
-            minutesUntilDueDate: 60,
-          }
-    );
+    dispatchPartyForm({
+      type: 'APPLY_TEMPLATE',
+      template,
+      categoryName: selectedCategoryName,
+    });
     router.push({
       pathname: router.pathname,
       query: { step: 'detail' },
@@ -87,13 +70,13 @@ function CategorySelection({
       <section className={styles.categoryContainer}>
         <ul>
           {categories.map((c) => (
-            <li key={c.categoryId}>
+            <li key={c.categoryName}>
               <button
                 onClick={() => {
-                  setSelectedCategoryId(c.categoryId);
+                  setSelectedCategoryName(c.categoryName);
                 }}
                 className={`${
-                  c.categoryId === selectedCategoryId ? styles.selected : ''
+                  c.categoryName === selectedCategoryName ? styles.selected : ''
                 }`}
               >
                 {c.categoryName}
@@ -134,15 +117,13 @@ function CategorySelection({
 // ================================================================================
 
 type DetailCustomizationProps = {
-  categoryName: string;
   partyForm: PartyCreateForm;
-  setPartyForm: (data: PartyCreateForm) => void;
+  dispatchPartyForm: ReturnType<typeof usePartyForm>['dispatchPartyForm'];
 };
 
 function DetailCustomization({
-  categoryName,
   partyForm,
-  setPartyForm,
+  dispatchPartyForm,
 }: DetailCustomizationProps) {
   const router = useRouter();
   const setSnackBar = useSetRecoilState(toastState);
@@ -152,40 +133,46 @@ function DetailCustomization({
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function updatePartyForm(data: Partial<PartyCreateForm>) {
-    setPartyForm({ ...partyForm, ...data });
-  }
   function handleOpenPeriod(period: { hour: number; minute: number }) {
     setOpenPeriod(period);
-    updatePartyForm({
-      minutesUntilDueDate: period.hour * 60 + period.minute,
+    dispatchPartyForm({
+      type: 'UPDATE_OPEN_PERIOD',
+      openPeriod: period.hour * 60 + period.minute,
     });
   }
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsSubmitting(true);
-    instance
-      .post('/party/rooms', partyForm)
-      .then(({ data }) => {
-        router.push(`/party/${data.roomId}`);
-      })
-      .catch(() => {
-        setSnackBar({
-          toastName: 'GET request',
-          message: '방을 만드는데 실패했습니다. 다시 시도해주세요.',
-          severity: 'error',
-          clicked: true,
-        });
-        setTimeout(() => {
-          setIsSubmitting(false);
-        }, 1000);
+
+    const errorMessage = !partyForm.title
+      ? '제목을 입력해주세요'
+      : partyForm.content.length < 5
+      ? '상세글을 5자 이상 입력해주세요'
+      : '';
+
+    try {
+      errorMessage
+        ? await Promise.reject(new Error(errorMessage))
+        : await instance.post('/party/rooms', partyForm).then(({ data }) => {
+            router.push(`/party/${data.roomId}`);
+          });
+    } catch (e) {
+      setSnackBar({
+        toastName: 'GET request',
+        message: errorMessage || '서버 요청에 실패했습니다. 다시 시도해주세요',
+        severity: 'error',
+        clicked: true,
       });
+      setTimeout(() => {
+        setIsSubmitting(false);
+      }, 1000);
+    }
   }
 
   return (
     <div className={styles.detailFormContainer}>
       <header>
-        <h2>#{categoryName}</h2>
+        <h2>#{partyForm.categoryName}</h2>
         <button onClick={() => router.back()}>
           <FaTimes size={25} />
         </button>
@@ -195,7 +182,9 @@ function DetailCustomization({
           <h3>방 제목</h3>
           <input
             value={partyForm.title}
-            onChange={(e) => updatePartyForm({ title: e.target.value })}
+            onChange={(e) =>
+              dispatchPartyForm({ type: 'UPDATE_TITLE', title: e.target.value })
+            }
             placeholder='제목을 입력하세요'
           />
         </label>
@@ -203,7 +192,12 @@ function DetailCustomization({
           <h3>인원</h3>
           <div className={styles.peopleSelectWrap}>
             <select
-              onChange={(e) => updatePartyForm({ minPeople: +e.target.value })}
+              onChange={(e) =>
+                dispatchPartyForm({
+                  type: 'UPDATE_MIN_PEOPLE',
+                  minPeople: +e.target.value,
+                })
+              }
               defaultValue={partyForm.minPeople}
             >
               {peopleOptions.map((opt) => (
@@ -214,7 +208,12 @@ function DetailCustomization({
             </select>
             <div>~</div>
             <select
-              onChange={(e) => updatePartyForm({ maxPeople: +e.target.value })}
+              onChange={(e) =>
+                dispatchPartyForm({
+                  type: 'UPDATE_MAX_PEOPLE',
+                  maxPeople: +e.target.value,
+                })
+              }
               defaultValue={partyForm.maxPeople}
             >
               {peopleOptions
@@ -270,7 +269,12 @@ function DetailCustomization({
           <textarea
             rows={10}
             value={partyForm.content}
-            onChange={(e) => updatePartyForm({ content: e.target.value })}
+            onChange={(e) =>
+              dispatchPartyForm({
+                type: 'UPDATE_CONTENT',
+                content: e.target.value,
+              })
+            }
             placeholder='상세글을 작성해 주세요.'
           />
         </label>

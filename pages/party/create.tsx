@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { PartyCreateForm } from 'types/partyTypes';
 import { toastState } from 'utils/recoil/toast';
 import PartyCreate from 'components/party/PartyCreate';
 import usePartyCategory from 'hooks/party/usePartyCategory';
 import usePartyColorMode from 'hooks/party/usePartyColorMode';
+import usePartyForm from 'hooks/party/usePartyForm';
 import styles from 'styles/party/PartyCreate.module.scss';
 
 export default function PartyCreatePage() {
@@ -13,8 +13,7 @@ export default function PartyCreatePage() {
   const createStep = router.query['step'];
   const setSnackBar = useSetRecoilState(toastState);
   const { categories, isCategoryLoading, isCategoryError } = usePartyCategory();
-  const [partyForm, setPartyForm] = useState<PartyCreateForm>();
-  const [categoryName, setCategoryName] = useState('');
+  const { partyForm, dispatchPartyForm } = usePartyForm();
 
   useEffect(() => {
     if (!(createStep === 'category' || createStep === 'detail'))
@@ -34,25 +33,20 @@ export default function PartyCreatePage() {
           clicked: true,
         });
       }
-      router.push('/party');
+      router.replace('/party');
     }
   }, [isCategoryLoading]);
 
   useEffect(() => {
-    if (createStep === 'detail') {
-      partyForm
-        ? setCategoryName(
-            categories.find((c) => c.categoryId === partyForm.categoryId)
-              ?.categoryName ?? '' // todo: 추후에 백엔드가 categoryName을 pk로 바꾸면 수정
-          )
-        : router.replace({
-            pathname: router.pathname,
-            query: { step: 'category' },
-          });
+    if (createStep === 'detail' && !partyForm.categoryName) {
+      router.replace({
+        pathname: router.pathname,
+        query: { step: 'category' },
+      });
     }
   }, [router, !!partyForm]);
 
-  usePartyColorMode('PARTY-DETAIL');
+  usePartyColorMode('PARTY-MAIN');
 
   if (categories.length === 0) return null;
 
@@ -61,15 +55,14 @@ export default function PartyCreatePage() {
       {createStep === 'category' && (
         <PartyCreate.CategorySelection
           categories={categories}
-          defaultCategoryId={categories[0].categoryId}
-          setPartyForm={setPartyForm}
+          defaultCategoryName={categories[0].categoryName}
+          dispatchPartyForm={dispatchPartyForm}
         />
       )}
-      {createStep === 'detail' && partyForm && (
+      {createStep === 'detail' && (
         <PartyCreate.DetailCustomization
-          categoryName={categoryName}
           partyForm={partyForm}
-          setPartyForm={setPartyForm}
+          dispatchPartyForm={dispatchPartyForm}
         />
       )}
     </div>
