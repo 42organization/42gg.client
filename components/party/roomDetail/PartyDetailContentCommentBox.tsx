@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import { IoSendSharp } from 'react-icons/io5';
 import {
   PartyComment,
@@ -36,10 +36,7 @@ export default function PartyDetailContentCommentBox({
         <div className={styles.content}>{partyRoomDetail.content}</div>
         <div className={styles.comment}>댓글 ({totalComments})</div>
         <hr />
-        <CommentLine
-          comments={partyRoomDetail.comments}
-          nameToRGB={nameToRGB}
-        />
+        <CommentBox comments={partyRoomDetail.comments} nameToRGB={nameToRGB} />
       </div>
       <CommentCreateBar
         roomId={partyRoomDetail.roomId}
@@ -51,15 +48,23 @@ export default function PartyDetailContentCommentBox({
   );
 }
 
-function CommentLine({
+function CommentBox({
   comments,
   nameToRGB,
 }: {
   comments: PartyComment[];
   nameToRGB: (name: string) => string;
 }) {
+  const commentBoxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (commentBoxRef.current) {
+      commentBoxRef.current.scrollTop = commentBoxRef.current.scrollHeight;
+    }
+  }, [comments]);
+
   return (
-    <>
+    <div className={styles.commentBox} ref={commentBoxRef}>
       {comments.map((comment) =>
         comment.isHidden ? (
           <div key={comment.commentId} className={styles.commentHidden}>
@@ -80,7 +85,7 @@ function CommentLine({
           </div>
         )
       )}
-    </>
+    </div>
   );
 }
 
