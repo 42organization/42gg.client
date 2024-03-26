@@ -49,7 +49,7 @@ function ReportRoom({ roomId }: ParytButtonProps) {
         });
       }}
     >
-      <PiSirenFill color='red' />
+      <PiSirenFill color='red' size={20} />
     </button>
   );
 }
@@ -73,7 +73,7 @@ function ShareRoom() {
         });
       }}
     >
-      <CiShare2 />
+      <CiShare2 size={20} />
     </button>
   );
 }

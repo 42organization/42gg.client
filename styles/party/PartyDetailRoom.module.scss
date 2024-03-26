@@ -9,7 +9,8 @@ $detailCommonRem: 1rem;
 
   .titleBox {
     position: relative;
-    padding: $detailCommonRem;
+    padding: $detailCommonRem * 0.5;
+    padding-bottom: 0.3rem;
     background-color: white;
     border-radius: $mini-radius;
 
@@ -19,11 +20,15 @@ $detailCommonRem: 1rem;
       width: 100%;
 
       .titleCategory {
+        padding-top: 0.4rem;
         font-size: $small-font;
       }
 
       .shareBtn {
         position: relative;
+        padding-top: 0;
+        padding-right: 0;
+        padding-left: 0.2 rem;
         text-align: right;
         background-color: inherit;
         border: none;
@@ -31,21 +36,22 @@ $detailCommonRem: 1rem;
 
       .reportRoomBtn {
         position: relative;
+        padding-right: 0;
         text-align: right;
         background-color: inherit;
         border: none;
       }
     }
     .titleContent {
-      max-width: 100;
-      margin: 0.3rem 0;
-      font-size: $big-font;
+      overflow: scroll;
+      font-size: $giant-font;
       font-weight: bold;
     }
 
     .remainTime {
-      padding: 0.2rem;
-      margin-top: 0.2rem;
+      padding: 0.3rem;
+      margin: 0.2rem;
+      margin-right: 0rem;
       font-size: $small-font;
       color: aliceblue;
       background-color: $pp-gray;
@@ -56,15 +62,28 @@ $detailCommonRem: 1rem;
   .profile {
     position: relative;
     width: 100%;
-    margin-top: $detailCommonRem;
+    max-height: 16vh;
+    margin-top: $detailCommonRem * 0.6;
     color: white;
 
     .profileItem {
       text-align: center;
+
+      ul {
+        max-width: 100rem;
+        margin: 1;
+        overflow-x: scroll;
+        white-space: nowrap;
+      }
+
       li {
         display: inline-block;
+        max-width: 100%;
+        margin-top: -0.5rem;
         margin-right: 0.5rem;
+        margin-left: 0.5rem;
       }
+
       .crown {
         position: relative;
         top: 0.4rem;
@@ -130,24 +149,31 @@ $detailCommonRem: 1rem;
     position: relative;
     width: 100%;
     padding: $detailCommonRem;
+    padding-bottom: 0.3rem;
     background-color: white;
     border-radius: $mini-radius;
 
     .content {
-      min-height: 13rem;
+      min-height: 9rem;
       margin-bottom: $detailCommonRem;
       white-space: pre-wrap;
     }
 
     .comment {
-      margin-top: $detailCommonRem * 2;
-      margin-bottom: 0.3;
+      margin-top: $detailCommonRem;
+      margin-bottom: 0.3rem;
       white-space: pre-wrap;
+    }
+
+    .commentBox {
+      min-height: 13rem;
+      max-height: 13rem;
+      overflow: auto;
     }
 
     .commentHidden {
       margin-top: $detailCommonRem * 2;
-      margin-bottom: 0.3;
+      margin-bottom: 0.3rem;
       color: gray;
       opacity: 0.7;
     }

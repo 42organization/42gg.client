@@ -31,12 +31,14 @@ export default function PartyDetailTitleBox({
     <div className={styles.titleBox}>
       <div className={styles.titleLine}>
         <div className={styles.titleCategory}>{`#${category}`}</div>
-        <PartyRoomDetailButton.ShareRoom />
+        <span>
+          <PartyRoomDetailButton.ReportRoom roomId={roomId} />
+          <PartyRoomDetailButton.ShareRoom />
+        </span>
       </div>
-      <div className={styles.titleContent}>{title}</div>
       <div className={styles.titleLine}>
+        <div className={styles.titleContent}>{title}</div>
         <span className={styles.remainTime}>{time_message}</span>
-        <PartyRoomDetailButton.ReportRoom roomId={roomId} />
       </div>
     </div>
   );
