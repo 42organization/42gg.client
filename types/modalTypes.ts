@@ -56,7 +56,8 @@ type AdminModal =
   | 'CHECK_SEND_NOTI'
   | 'TOURNAMENT_BRAKET_EDIT'
   | 'TOURNAMENT_PARTICIPANT_EDIT'
-  | 'PARTY_TEMPLATE';
+  | 'PARTY_TEMPLATE'
+  | 'PARTY_EDIT';
 
 type ModalName =
   | null
@@ -155,4 +156,5 @@ export interface Modal {
   tournamentId?: number;
   partyReport?: PartyReportModalData;
   template?: PartyGameTemplate;
+  roomId?: number;
 }
