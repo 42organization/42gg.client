@@ -1,9 +1,9 @@
-import { PartyRoomStatus } from 'types/partyTypes';
+import { PartyCategory, PartyRoomStatus } from 'types/partyTypes';
 
 export type PartyRoomColumn = {
   roomId: number;
   title: string;
-  categoryName: string;
+  categoryName: PartyCategory['categoryName'];
   createDate: string;
   dueDate: string;
   creatorIntraId: string;
