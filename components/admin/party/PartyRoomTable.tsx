@@ -15,7 +15,6 @@ import AdminSearchBar from 'components/admin/common/AdminSearchBar';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
 import useAdminPartyRoomList from 'hooks/party/useAdminPartyRoomList';
-import usePartyCategory from 'hooks/party/usePartyCategory';
 import styles from 'styles/admin/party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
@@ -31,16 +30,13 @@ const tableTitle: { [key: string]: string } = {
 
 export default function PartyRoomTable() {
   const setModal = useSetRecoilState(modalState);
-  const { categories } = usePartyCategory();
   const { partyRooms } = useAdminPartyRoomList();
   // const [searchKeyword, setSearchKeyword] = useState('');
 
   const rooms: PartyRoomColumn[] = partyRooms.map((room) => ({
     roomId: room.roomId,
     title: room.title,
-    categoryName:
-      categories?.find((c) => c.categoryName === room.categoryName)
-        ?.categoryName ?? '???',
+    categoryName: room.categoryName,
     createDate: dateToStringShort(new Date(room.createDate)),
     dueDate: dateToStringShort(new Date(room.dueDate)),
     creatorIntraId: room.creatorIntraId ?? '작성자intra',
