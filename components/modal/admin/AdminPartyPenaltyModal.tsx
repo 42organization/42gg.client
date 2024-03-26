@@ -30,7 +30,6 @@ export default function PartyPenaltyModal({
     instanceInPartyManage
       .patch(`/penalties/${penaltyId}`, penalty)
       .catch(() => {
-        console.log(penalty);
         setSnackBar({
           toastName: 'PATCH request',
           message: '페널티 변경을 하는데 실패하였습니다.',
