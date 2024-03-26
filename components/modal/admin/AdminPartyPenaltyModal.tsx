@@ -84,14 +84,13 @@ export default function PartyPenaltyModal({
             <input
               type='number'
               value={formData.penaltyTime}
-              onChange={(e) => {
-                if (Number(e.target.value) >= 0) {
-                  setFormData({
-                    ...formData,
-                    penaltyTime: Number(e.target.value),
-                  });
-                }
-              }}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  penaltyTime: +e.target.value,
+                })
+              }
+              min={0}
             />
             <label>패널티 아이디: </label>
             <input
