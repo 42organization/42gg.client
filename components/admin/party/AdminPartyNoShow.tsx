@@ -62,10 +62,10 @@ export default function AdminPartyNoShow() {
       <div className={styles.header}>
         <span className={styles.title}>노쇼 신고리스트</span>
       </div>
-      <TableContainer component={Paper}>
-        <Table aria-label='UserManagementTable'>
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='UserManagementTable'>
           <AdminTableHead tableName={'partyNoshowReport'} table={tableTitle} />
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {noShowInfo.noShowReportList &&
             noShowInfo.noShowReportList.length > 0 ? (
               noShowInfo.noShowReportList.map(
@@ -74,7 +74,10 @@ export default function AdminPartyNoShow() {
                     {tableFormat['partyNoshowReport'].columns.map(
                       (columnName) => {
                         return (
-                          <TableCell key={columnName}>
+                          <TableCell
+                            key={columnName}
+                            className={styles.tableBodyItem}
+                          >
                             {report[
                               columnName as keyof PartyNoshowReport
                             ]?.toString()}

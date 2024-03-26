@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   Paper,
@@ -58,7 +58,7 @@ export default function AdminCommentReport() {
           clicked: true,
         });
       });
-  }, [currentPage]);
+  }, [currentPage, penaltyInfo]);
 
   const handleAddpenalty = () => {
     setModal({ modalName: 'ADMIN-PARTY_ADMIN_PENALTY' });
@@ -72,12 +72,17 @@ export default function AdminCommentReport() {
     <div className={styles.AdminTableWrap}>
       <div className={styles.header}>
         <span className={styles.title}>패널티 리스트</span>
+        <button
+          onClick={handleAddpenalty}
+          className={`${styles.button_1} ${styles.add}`}
+        >
+          추가
+        </button>
       </div>
-      <button onClick={handleAddpenalty}>추가</button>
-      <TableContainer component={Paper}>
-        <Table aria-label='UserManagementTable'>
+      <TableContainer component={Paper} className={styles.tableContainer}>
+        <Table aria-label='UserManagementTable' className={styles.table}>
           <AdminTableHead tableName={'partyPenaltyAdmin'} table={tableTitle} />
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {penaltyInfo.penaltyList && penaltyInfo.penaltyList.length > 0 ? (
               penaltyInfo.penaltyList.map(
                 (penalty: PartyPenaltyAdmin, index: number) => (
@@ -85,12 +90,16 @@ export default function AdminCommentReport() {
                     {tableFormat['partyPenaltyAdmin'].columns.map(
                       (columnName) => {
                         return (
-                          <TableCell key={columnName}>
+                          <TableCell
+                            key={columnName}
+                            className={styles.tableBodyItem}
+                          >
                             {columnName === 'edit' ? (
                               <button
                                 onClick={() => handleEditpenalty(penalty)}
+                                className={`${styles.button_1} ${styles.edit}`}
                               >
-                                변경
+                                수정
                               </button>
                             ) : (
                               penalty[

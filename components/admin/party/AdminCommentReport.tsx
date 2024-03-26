@@ -62,10 +62,10 @@ export default function AdminCommentReport() {
       <div className={styles.header}>
         <span className={styles.title}>댓글 신고리스트</span>
       </div>
-      <TableContainer component={Paper}>
-        <Table aria-label='UserManagementTable'>
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='UserManagementTable'>
           <AdminTableHead tableName={'partyCommentReport'} table={tableTitle} />
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {commentInfo.commentReportList &&
             commentInfo.commentReportList.length > 0 ? (
               commentInfo.commentReportList.map(
@@ -74,7 +74,10 @@ export default function AdminCommentReport() {
                     {tableFormat['partyCommentReport'].columns.map(
                       (columnName) => {
                         return (
-                          <TableCell key={columnName}>
+                          <TableCell
+                            key={columnName}
+                            className={styles.tableBodyItem}
+                          >
                             {report[
                               columnName as keyof PartyCommentReport
                             ]?.toString()}
