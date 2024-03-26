@@ -16,13 +16,6 @@ type PartyRoomDetailProps = {
   fetchRoomDetail: () => void;
 };
 
-type CommentCreateBarProps = {
-  roomId: number;
-  status: PartyRoomStatus;
-  myNickname: string | null;
-  fetchRoomDetail: () => void;
-};
-
 export default function PartyDetailContentCommentBox({
   partyRoomDetail,
   nameToRGB,
@@ -36,7 +29,11 @@ export default function PartyDetailContentCommentBox({
         <div className={styles.content}>{partyRoomDetail.content}</div>
         <div className={styles.comment}>댓글 ({totalComments})</div>
         <hr />
-        <CommentBox comments={partyRoomDetail.comments} nameToRGB={nameToRGB} />
+        <CommentBox
+          comments={partyRoomDetail.comments}
+          status={partyRoomDetail.status}
+          nameToRGB={nameToRGB}
+        />
       </div>
       <CommentCreateBar
         roomId={partyRoomDetail.roomId}
@@ -50,9 +47,11 @@ export default function PartyDetailContentCommentBox({
 
 function CommentBox({
   comments,
+  status,
   nameToRGB,
 }: {
   comments: PartyComment[];
+  status: PartyRoomStatus;
   nameToRGB: (name: string) => string;
 }) {
   const commentBoxRef = useRef<HTMLDivElement>(null);
@@ -62,6 +61,8 @@ function CommentBox({
       commentBoxRef.current.scrollTop = commentBoxRef.current.scrollHeight;
     }
   }, [comments]);
+
+  console.log(comments[0].intraId, comments[0].nickname); //TODO: remove
 
   return (
     <div className={styles.commentBox} ref={commentBoxRef}>
@@ -78,7 +79,9 @@ function CommentBox({
           >
             <div>{comment.content}</div>
             <div className={styles.commentInfo}>
-              <span>{comment.nickname}</span>
+              <span>
+                {status === 'OPEN' ? comment.nickname : comment.intraId}
+              </span>
               <span>{` (${getTimeAgo(comment.createDate)})`}</span>
               <PartyRoomDetailButton.ReportComment />
             </div>
@@ -88,6 +91,13 @@ function CommentBox({
     </div>
   );
 }
+
+type CommentCreateBarProps = {
+  roomId: number;
+  status: PartyRoomStatus;
+  myNickname: string | null;
+  fetchRoomDetail: () => void;
+};
 
 function CommentCreateBar({
   roomId,
