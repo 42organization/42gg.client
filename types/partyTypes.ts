@@ -73,6 +73,12 @@ export type PartyGameTemplate = {
   summary: string;
 };
 
+export type PartyRoomReportTable = {
+  roomReportList: PartyRoomReport[];
+  totalPage: number;
+  currentPage: number;
+};
+
 export type PartyRoomReport = {
   id: number;
   reporterIntraId: string;
@@ -80,6 +86,12 @@ export type PartyRoomReport = {
   roomId: number;
   message: string;
   createdAt: string;
+};
+
+export type PartyNoshowReportTable = {
+  noShowReportList: PartyNoshowReport[];
+  totalPages: number;
+  currentPage: number;
 };
 
 export type PartyNoshowReport = {
@@ -90,6 +102,12 @@ export type PartyNoshowReport = {
   message: string;
   createdAt: string;
 };
+
+export interface PartyCommentReportTable {
+  commentReportList: PartyCommentReport[];
+  totalPage: number;
+  currentPage: number;
+}
 
 export type PartyCommentReport = {
   id: number;
@@ -124,11 +142,25 @@ export type PartyTemplateForm = {
 
 export type PartyPenaltyAdmin = {
   id: number;
-  user: object;
+  userIntraId: string;
   penaltyType: string;
   message: string;
   startTime: string;
   penaltyTime: number;
 };
 
+export type PartyPenaltyAdminSubmit = {
+  penaltyType: string;
+  message: string;
+  penaltyTime: number;
+  userIntraId: string;
+};
+
+export interface PartyPenaltyTable {
+  penaltyList: PartyPenaltyAdmin[];
+  totalPage: number;
+  currentPage: number;
+}
+
 export type PartyColors = 'PARTY-MAIN' | 'PARTY-DETAIL';
+

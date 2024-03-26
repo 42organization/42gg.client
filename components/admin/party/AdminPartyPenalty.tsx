@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   Paper,
@@ -8,8 +8,9 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { PartyNoshowReport, PartyNoshowReportTable } from 'types/partyTypes';
+import { PartyPenaltyAdmin, PartyPenaltyTable } from 'types/partyTypes';
 import { instanceInPartyManage } from 'utils/axios';
+import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
@@ -21,29 +22,31 @@ import styles from 'styles/admin/Party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: '번호',
-  reporterIntraId: '신고자 이름',
-  reporteeIntraId: '피신고자 이름',
-  roomId: '방',
-  message: '메세지',
-  createdAt: '시간',
+  userIntraId: '유저',
+  penaltyType: '패널티 타입',
+  message: '내용',
+  startTime: '시작 시간',
+  penaltyTime: '패널티 시간',
+  edit: '수정',
 };
 
-export default function AdminPartyNoShow() {
-  const [noShowInfo, setNoShowInfo] = useState<PartyNoshowReportTable>({
-    noShowReportList: [],
-    totalPages: 0,
+export default function AdminCommentReport() {
+  const [penaltyInfo, setPenaltyInfo] = useState<PartyPenaltyTable>({
+    penaltyList: [],
+    totalPage: 0,
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
   useEffect(() => {
     instanceInPartyManage
-      .get(`/reports/users?page=${currentPage}&size=10`)
+      .get(`/penalties?page=${currentPage}&size=10`)
       .then((res) => {
-        setNoShowInfo({
-          noShowReportList: res.data.noShowReportList,
-          totalPages: res.data.totalPage,
+        setPenaltyInfo({
+          penaltyList: res.data.penaltyList,
+          totalPage: res.data.totalPage,
           currentPage: currentPage,
         });
       })
@@ -57,27 +60,43 @@ export default function AdminPartyNoShow() {
       });
   }, [currentPage]);
 
+  const handleAddpenalty = () => {
+    setModal({ modalName: 'ADMIN-PARTY_ADMIN_PENALTY' });
+  };
+
+  const handleEditpenalty = (partyPenalty?: PartyPenaltyAdmin) => {
+    setModal({ modalName: 'ADMIN-PARTY_ADMIN_PENALTY', partyPenalty });
+  };
+
   return (
     <div className={styles.AdminTableWrap}>
       <div className={styles.header}>
-        <span className={styles.title}>노쇼 신고리스트</span>
+        <span className={styles.title}>패널티 리스트</span>
       </div>
+      <button onClick={handleAddpenalty}>추가</button>
       <TableContainer component={Paper}>
         <Table aria-label='UserManagementTable'>
-          <AdminTableHead tableName={'partyNoshowReport'} table={tableTitle} />
+          <AdminTableHead tableName={'partyPenaltyAdmin'} table={tableTitle} />
           <TableBody>
-            {noShowInfo.noShowReportList &&
-            noShowInfo.noShowReportList.length > 0 ? (
-              noShowInfo.noShowReportList.map(
-                (report: PartyNoshowReport, index: number) => (
+            {penaltyInfo.penaltyList && penaltyInfo.penaltyList.length > 0 ? (
+              penaltyInfo.penaltyList.map(
+                (penalty: PartyPenaltyAdmin, index: number) => (
                   <TableRow key={index}>
-                    {tableFormat['partyNoshowReport'].columns.map(
+                    {tableFormat['partyPenaltyAdmin'].columns.map(
                       (columnName) => {
                         return (
                           <TableCell key={columnName}>
-                            {report[
-                              columnName as keyof PartyNoshowReport
-                            ]?.toString()}
+                            {columnName === 'edit' ? (
+                              <button
+                                onClick={() => handleEditpenalty(penalty)}
+                              >
+                                변경
+                              </button>
+                            ) : (
+                              penalty[
+                                columnName as keyof PartyPenaltyAdmin
+                              ]?.toString()
+                            )}
                           </TableCell>
                         );
                       }
@@ -93,8 +112,8 @@ export default function AdminPartyNoShow() {
       </TableContainer>
       <div className={styles.pageNationContainer}>
         <PageNation
-          curPage={noShowInfo.currentPage}
-          totalPages={noShowInfo.totalPages}
+          curPage={penaltyInfo.currentPage}
+          totalPages={penaltyInfo.totalPage}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}
