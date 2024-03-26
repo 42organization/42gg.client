@@ -69,7 +69,7 @@ export default function TemplateModal({
                   });
                 }
               }}
-              min={0}
+              min={1}
               max={formData.maxGamePeople}
             />
             <label>최대 인원: </label>
@@ -94,7 +94,7 @@ export default function TemplateModal({
                   minGameTime: +e.target.value,
                 });
               }}
-              min={0}
+              min={1}
               max={formData.maxGameTime}
             />
             <label>최대 게임 시간: </label>
