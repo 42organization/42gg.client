@@ -1,5 +1,6 @@
 @import 'styles/common.scss';
 @import 'styles/party/PartyCommon.scss';
+
 @mixin roomListWrap {
   padding: 0.8em;
   margin: 0;
@@ -17,7 +18,7 @@
 }
 
 .joinedRoomContainer {
-  header {
+  .joinedRoomHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,7 +43,7 @@
   }
 }
 
-.searchBarContainer {
+.searchBar {
   form {
     display: flex;
     width: 100%;
@@ -69,7 +70,7 @@
 }
 
 .allRoomContanier {
-  nav {
+  .categoryNav {
     ul {
       display: flex;
       justify-content: space-between;
@@ -99,7 +100,7 @@
   }
   .allRoomListWrap {
     @include roomListWrap;
-    height: 25em;
+    min-height: 25em;
     overflow-y: scroll;
 
     .emptyRooms {
