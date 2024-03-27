@@ -1,0 +1,119 @@
+@import 'styles/common.scss';
+
+.container {
+  width: 25rem;
+  max-height: 40rem;
+  overflow-y: scroll;
+  background-color: white;
+
+  section {
+    padding: 0 2rem;
+  }
+  .roomHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 2rem;
+
+    h2 {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+
+      .categoryName {
+        font-size: $small-font;
+        color: $dark-gray;
+      }
+    }
+    select {
+      height: 1.5em;
+      padding: 0 0.5em;
+      font-size: 1em;
+    }
+  }
+  .roomDate {
+    font-size: $small-font;
+    color: $dark-gray;
+    div {
+      text-align: end;
+    }
+  }
+  .roomContent {
+    min-height: 10em;
+    margin: 0;
+
+    p {
+      margin: 0;
+      font-weight: 400;
+      white-space: pre-wrap;
+    }
+  }
+  .roomUsers {
+    h3 {
+      margin: 1em 0;
+      font-size: $small-font;
+      font-weight: 500;
+    }
+    ul {
+      display: flex;
+      margin: 0 5%;
+
+      li {
+        display: flex;
+        width: 25%;
+        flex-direction: column;
+        overflow-y: hidden;
+        font-size: $small-font;
+        font-weight: 300;
+        text-wrap: nowrap;
+        align-items: center;
+
+        .userImage {
+          position: relative;
+          width: 3em;
+          height: 0; /* 높이를 0으로 설정 */
+          padding-top: 3em; /* 부모의 너비에 대한 50%로 설정하여 1:1 비율 유지 */
+          margin-bottom: 0.2em;
+          overflow: hidden; /* 내부 이미지가 원형을 벗어나지 않도록 설정 */
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+  .roomComments {
+    padding: 1em 2em;
+    background-color: $white2;
+
+    h3 {
+      margin-top: 0;
+    }
+    ul {
+      margin-left: 0.5em;
+      li {
+        margin-bottom: 1em;
+
+        header {
+          display: flex;
+          justify-content: space-between;
+
+          .commentUserName {
+            font-weight: 500;
+          }
+          .commentDate {
+            margin-left: 1em;
+            font-size: $small-font;
+            font-weight: 400;
+            color: $gray;
+          }
+        }
+        p {
+          margin: 0 0.5em;
+          font-size: $small-font;
+          font-weight: 200;
+          white-space: pre-wrap;
+        }
+      }
+    }
+  }
+}

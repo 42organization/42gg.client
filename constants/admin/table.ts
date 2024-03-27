@@ -238,6 +238,8 @@ export const tableFormat: TableFormat = {
       'message',
       'startTime',
       'penaltyTime',
+      'userIntraId',
+      'edit',
     ],
   },
 };

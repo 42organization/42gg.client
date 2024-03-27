@@ -7,14 +7,15 @@
   margin-bottom: 0.5rem;
   color: white;
   text-align: center;
-  background: rgba(0, 0, 0, 0.33);
+  background-image: url('../../public//image/party-background.png');
   border-radius: 1rem;
   justify-content: center;
   align-items: center;
-  & > div {
+  .divcontainer {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    padding: 0 1.5rem;
   }
 }
 .block span {

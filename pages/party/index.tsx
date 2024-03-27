@@ -8,9 +8,11 @@ import usePartyColorMode from 'hooks/party/usePartyColorMode';
 import usePartyRoomList from 'hooks/party/usePartyRoomList';
 import styles from 'styles/party/PartyMain.module.scss';
 
+const noFilter = '전체';
+
 export default function PartyMain() {
   const router = useRouter();
-  const [categoryFilter, setCategoryFilter] = useState<number>();
+  const [categoryFilter, setCategoryFilter] = useState<string>(noFilter);
   const [searchTitle, setSearchTitle] = useState(
     Array.isArray(router.query.title)
       ? router.query.title[0]
@@ -23,10 +25,10 @@ export default function PartyMain() {
   });
 
   const filteredRooms = partyRooms.filter(
-    (room) => !categoryFilter || room.categoryId === categoryFilter
+    (room) => categoryFilter == noFilter || categoryFilter === room.categoryName
   );
   const categoryNavItems = [
-    { categoryId: undefined, categoryName: '전체' },
+    { categoryId: undefined, categoryName: noFilter },
     ...categories,
   ];
 
@@ -75,12 +77,12 @@ export default function PartyMain() {
       <section className={styles.allRoomContanier}>
         <nav>
           <ul>
-            {categoryNavItems.map((c, idx) => (
+            {categoryNavItems.map((c) => (
               <li
-                key={idx}
-                onClick={() => setCategoryFilter(c.categoryId)}
+                key={c.categoryName}
+                onClick={() => setCategoryFilter(c.categoryName)}
                 className={
-                  categoryFilter === c.categoryId ? styles.selected : ''
+                  categoryFilter === c.categoryName ? styles.selected : ''
                 }
               >
                 {c.categoryName}

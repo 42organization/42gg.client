@@ -18,10 +18,10 @@ export default function TemplateModal({
     template ?? {
       gameName: '',
       categoryId: 1,
-      maxGamePeople: 0,
-      minGamePeople: 0,
-      maxGameTime: 0,
-      minGameTime: 0,
+      maxGamePeople: 1,
+      minGamePeople: 1,
+      maxGameTime: 1,
+      minGameTime: 1,
       genre: '',
       difficulty: '',
       summary: '',
@@ -57,37 +57,57 @@ export default function TemplateModal({
                 setFormData({ ...formData, gameName: e.target.value })
               }
             />
-            <label>최대 인원: </label>
-            <input
-              type='number'
-              value={formData.maxGamePeople}
-              onChange={(e) =>
-                setFormData({ ...formData, maxGamePeople: +e.target.value })
-              }
-            />
             <label>최소 인원: </label>
             <input
               type='number'
               value={formData.minGamePeople}
-              onChange={(e) =>
-                setFormData({ ...formData, minGamePeople: +e.target.value })
-              }
+              onChange={(e) => {
+                {
+                  setFormData({
+                    ...formData,
+                    minGamePeople: +e.target.value,
+                  });
+                }
+              }}
+              min={1}
+              max={formData.maxGamePeople}
             />
-            <label>최대 게임 시간: </label>
+            <label>최대 인원: </label>
             <input
               type='number'
-              value={formData.maxGameTime}
-              onChange={(e) =>
-                setFormData({ ...formData, maxGameTime: +e.target.value })
-              }
+              value={formData.maxGamePeople}
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  maxGamePeople: +e.target.value,
+                });
+              }}
+              min={formData.minGamePeople}
             />
             <label>최소 게임 시간: </label>
             <input
               type='number'
               value={formData.minGameTime}
-              onChange={(e) =>
-                setFormData({ ...formData, minGameTime: +e.target.value })
-              }
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  minGameTime: +e.target.value,
+                });
+              }}
+              min={1}
+              max={formData.maxGameTime}
+            />
+            <label>최대 게임 시간: </label>
+            <input
+              type='number'
+              value={formData.maxGameTime}
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  maxGameTime: +e.target.value,
+                });
+              }}
+              min={formData.minGameTime}
             />
             <label>장르: </label>
             <input

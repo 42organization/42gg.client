@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { PartyRoom } from 'types/partyTypes';
-import { instance, instanceInPartyManage } from 'utils/axios';
+import { instance } from 'utils/axios';
 
 type PartyRoomListProps = {
-  isAdmin?: boolean;
   withJoined?: boolean;
   searchTitle?: string;
 };
@@ -12,7 +11,6 @@ type RoomListResponse = {
 };
 
 export default function usePartyRoomList({
-  isAdmin = false,
   withJoined = false,
   searchTitle,
 }: PartyRoomListProps = {}) {
@@ -21,11 +19,7 @@ export default function usePartyRoomList({
 
   const getRoomsAxios = (title?: string) => {
     const query = title ? `?title=${title}` : '';
-    return isAdmin
-      ? instanceInPartyManage.get<RoomListResponse>(
-          '/party/admin/rooms' + query
-        )
-      : instance.get<RoomListResponse>('/party/rooms' + query);
+    return instance.get<RoomListResponse>('/party/rooms' + query);
   };
 
   useEffect(() => {

@@ -28,7 +28,7 @@ export default function PartyPenaltyModal({
     penalty: PartyPenaltyAdminSubmit
   ) => {
     instanceInPartyManage
-      .patch(`/penalties /${penaltyId}`, penalty)
+      .patch(`/penalties/${penaltyId}`, penalty)
       .catch(() => {
         setSnackBar({
           toastName: 'PATCH request',
@@ -84,7 +84,19 @@ export default function PartyPenaltyModal({
               type='number'
               value={formData.penaltyTime}
               onChange={(e) =>
-                setFormData({ ...formData, penaltyTime: +e.target.value })
+                setFormData({
+                  ...formData,
+                  penaltyTime: +e.target.value,
+                })
+              }
+              min={0}
+            />
+            <label>패널티 아이디: </label>
+            <input
+              type='string'
+              value={formData.userIntraId}
+              onChange={(e) =>
+                setFormData({ ...formData, userIntraId: e.target.value })
               }
             />
             <button type='submit' className={styles.button_2}>
