@@ -6,7 +6,7 @@ const fullRecruitments1 = {
       id: 1,
       startDate: new Date(),
       endDate: new Date(),
-      title: '제 1기 모집',
+      title: '42GG 모집 1기',
       status: 'BEFORE',
       generation: '1기',
     },
@@ -14,7 +14,7 @@ const fullRecruitments1 = {
       id: 2,
       startDate: new Date(),
       endDate: new Date(),
-      title: '제 2기 모집',
+      title: '42GG 모집 2기',
       status: 'RECRUITING',
       generation: '2기',
     },
@@ -22,12 +22,12 @@ const fullRecruitments1 = {
       id: 3,
       startDate: new Date(),
       endDate: new Date(),
-      title: '제 3기 모집',
+      title: '42GG 모집 3기',
       status: 'AFTER',
       generation: '3기',
     },
   ],
-  totalPage: 2,
+  totalPage: 3,
 };
 
 const fullRecruitments2 = {
@@ -36,7 +36,7 @@ const fullRecruitments2 = {
       id: 4,
       startDate: new Date(),
       endDate: new Date(),
-      title: '제 4기 모집',
+      title: '42GG 모집 4기',
       status: 'BEFORE',
       generation: '4기',
     },
@@ -44,7 +44,7 @@ const fullRecruitments2 = {
       id: 5,
       startDate: new Date(),
       endDate: new Date(),
-      title: '제 5기 모집',
+      title: '42GG 모집 5기',
       status: 'RECRUITING',
       generation: '5기',
     },
@@ -52,12 +52,26 @@ const fullRecruitments2 = {
       id: 6,
       startDate: new Date(),
       endDate: new Date(),
-      title: '제 6기 모집',
+      title: '긴 제목을 테스트!!!! 42GG 6기 ',
       status: 'AFTER',
       generation: '6기',
     },
   ],
-  totalPage: 2,
+  totalPage: 3,
+};
+
+const fullRecruitments3 = {
+  recruitments: [
+    {
+      id: 7,
+      startDate: new Date(),
+      endDate: new Date(),
+      title: '42GG 모집 7기 지원하기 테스트',
+      status: 'BEFORE',
+      generation: '7기',
+    },
+  ],
+  totalPage: 3,
 };
 
 const emptyRecruitments = {
@@ -74,6 +88,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(200).json(fullRecruitments2);
     return;
   }
+  if (page === '3') {
+    res.status(200).json(fullRecruitments3);
+    return;
+  }
+
   res.status(200).json(fullRecruitments1);
   // res.status(200).json(emptyRecruitments);
 }
