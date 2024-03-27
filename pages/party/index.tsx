@@ -8,9 +8,11 @@ import usePartyColorMode from 'hooks/party/usePartyColorMode';
 import usePartyRoomList from 'hooks/party/usePartyRoomList';
 import styles from 'styles/party/PartyMain.module.scss';
 
+const noFilter = '전체';
+
 export default function PartyMain() {
   const router = useRouter();
-  const [categoryFilter, setCategoryFilter] = useState<string>('전체');
+  const [categoryFilter, setCategoryFilter] = useState<string>(noFilter);
   const [searchTitle, setSearchTitle] = useState(
     Array.isArray(router.query.title)
       ? router.query.title[0]
@@ -23,10 +25,10 @@ export default function PartyMain() {
   });
 
   const filteredRooms = partyRooms.filter(
-    (room) => !categoryFilter || room.categoryName === categoryFilter
+    (room) => categoryFilter == noFilter || categoryFilter === room.categoryName
   );
   const categoryNavItems = [
-    { categoryId: undefined, categoryName: '전체' },
+    { categoryId: undefined, categoryName: noFilter },
     ...categories,
   ];
 
