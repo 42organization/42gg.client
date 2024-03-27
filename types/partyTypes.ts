@@ -1,4 +1,12 @@
-export type PartyRoomStatus = 'OPEN' | 'START' | 'FINISH' | 'HIDDEN' | 'FAIL';
+export const roomStatusOpts = [
+  'OPEN',
+  'START',
+  'FINISH',
+  'HIDDEN',
+  'FAIL',
+] as const;
+
+export type PartyRoomStatus = (typeof roomStatusOpts)[number];
 
 export type PartyRoom = {
   roomId: number;

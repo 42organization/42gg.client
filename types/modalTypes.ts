@@ -57,7 +57,8 @@ type AdminModal =
   | 'TOURNAMENT_BRAKET_EDIT'
   | 'TOURNAMENT_PARTICIPANT_EDIT'
   | 'PARTY_TEMPLATE'
-  | 'PARTY_ADMIN_PENALTY';
+  | 'PARTY_ADMIN_PENALTY'
+  | 'PARTY_EDIT';
 
 type ModalName =
   | null
@@ -157,4 +158,5 @@ export interface Modal {
   partyReport?: PartyReportModalData;
   template?: PartyGameTemplate;
   partyPenalty?: PartyPenaltyAdmin;
+  roomId?: number;
 }
