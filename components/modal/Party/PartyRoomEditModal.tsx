@@ -6,13 +6,12 @@ import {
   PartyComment,
   PartyRoomDetail,
   PartyRoomStatus,
+  roomStatusOpts,
 } from 'types/partyTypes';
 import { instanceInPartyManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/party/PartyRoomEdit.module.scss';
-
-const roomStatusOpts: PartyRoomStatus[] = ['OPEN', 'START', 'FINISH', 'HIDDEN'];
 
 export default function PartyRoomEditModal({ roomId }: { roomId: number }) {
   const setSnackBar = useSetRecoilState(toastState);

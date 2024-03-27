@@ -1,4 +1,13 @@
-export type PartyRoomStatus = 'OPEN' | 'START' | 'FINISH' | 'HIDDEN' | 'FAIL';
+export const roomStatusOpts = [
+  'OPEN',
+  'START',
+  'FINISH',
+  'HIDDEN',
+  'FAIL',
+] as const;
+
+export type PartyRoomStatus = (typeof roomStatusOpts)[number];
+
 /**
  * @typedef {Object} PartyRoom
  *  @property {string} [creatorIntraId] - adminAPI로 조회시 존재
