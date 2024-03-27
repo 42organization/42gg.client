@@ -1,5 +1,7 @@
+import { PartyTemplateWithoutCategory } from 'types/partyTypes';
+
 const custumTemplateId = 0;
-export const customTemplate = {
+export const customTemplate: PartyTemplateWithoutCategory = {
   gameTemplateId: custumTemplateId,
   gameName: '직접 입력',
   minGamePeople: 2,
