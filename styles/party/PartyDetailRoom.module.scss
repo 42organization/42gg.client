@@ -5,7 +5,17 @@ $detail-btn-weight: bold;
 $detailCommonRem: 1rem;
 
 .detailPage {
-  @include pageWrap;
+  max-width: 30rem;
+  padding: 0.3rem 1.5rem;
+  margin: 0 auto;
+
+  .exitBtn {
+    font-size: 1.3rem;
+    color: rgb(255, 255, 255);
+    background-color: inherit;
+    border: none;
+    margin-inline: 0;
+  }
 
   .titleBox {
     position: relative;
@@ -62,7 +72,7 @@ $detailCommonRem: 1rem;
   .profile {
     position: relative;
     width: 100%;
-    max-height: 16vh;
+    max-height: 30vh;
     margin-top: $detailCommonRem * 0.6;
     color: white;
 
@@ -71,7 +81,7 @@ $detailCommonRem: 1rem;
 
       ul {
         max-width: 100rem;
-        margin: 1;
+        margin: 0.8rem;
         overflow-x: scroll;
         white-space: nowrap;
       }
@@ -110,11 +120,12 @@ $detailCommonRem: 1rem;
 
     .btnContainer {
       text-align: right;
+      border-bottom: 0.3rem;
 
       .leaveBtn {
         width: 50%;
         height: 3rem;
-        margin-bottom: $detailCommonRem;
+        margin-bottom: $detailCommonRem * 0.3;
         font-family: $common-font;
         font-size: $big-font;
         font-weight: $detail-btn-weight;
@@ -125,7 +136,7 @@ $detailCommonRem: 1rem;
       .startBtn {
         width: 50%;
         height: 3rem;
-        margin-bottom: $detailCommonRem;
+        margin-bottom: $detailCommonRem * 0.3;
         font-family: $common-font;
         font-size: $big-font;
         font-weight: $detail-btn-weight;
@@ -155,19 +166,23 @@ $detailCommonRem: 1rem;
 
     .content {
       min-height: 9rem;
-      margin-bottom: $detailCommonRem;
+      margin-bottom: $detailCommonRem * 0.5;
       white-space: pre-wrap;
     }
 
     .comment {
-      margin-top: $detailCommonRem;
-      margin-bottom: 0.3rem;
+      margin-top: 0;
+      margin-bottom: 0.1rem;
       white-space: pre-wrap;
     }
 
+    hr {
+      margin: 0.1rem;
+    }
+
     .commentBox {
-      min-height: 13rem;
-      max-height: 13rem;
+      min-height: 10rem;
+      max-height: 10rem;
       overflow: auto;
     }
 

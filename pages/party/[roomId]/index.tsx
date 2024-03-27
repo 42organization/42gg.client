@@ -35,6 +35,9 @@ export default function PartyDetailPage() {
 
   return partyRoomDetail && partyRoomDetail.status !== 'HIDDEN' ? (
     <div className={styles.detailPage}>
+      <button className={styles.exitBtn} onClick={() => router.push('/party')}>
+        X
+      </button>
       <PartyDetailTitleBox {...partyRoomDetail} />
       <PartyDetailProfile
         partyRoomDetail={partyRoomDetail}
@@ -55,10 +58,18 @@ export default function PartyDetailPage() {
 }
 
 function nameToRGB(name: string): string {
-  const randomCode = name.charCodeAt(0) + 150;
-  const red = randomCode % 256;
-  const green = randomCode ** 2 % 256;
-  const blue = randomCode ** 3 % 256;
+  const randomCode = [
+    name.charCodeAt(0) % 128,
+    name.charCodeAt(1) % 128,
+    name.charCodeAt(2) % 128,
+  ];
+
+  if (randomCode[0] < 64 || randomCode[1] < 64 || randomCode[2] < 64) {
+    randomCode[randomCode[0] % 3] = 128 - randomCode[randomCode[0] % 3];
+  }
+  const red = randomCode[0] + 128;
+  const green = randomCode[1] + 128;
+  const blue = randomCode[2] + 128;
 
   return `rgb(${red}, ${green}, ${blue})`;
 }
