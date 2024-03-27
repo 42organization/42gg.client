@@ -47,17 +47,9 @@ function MultiCheckInput({ checkList, questionIdx }: CheckInputProps) {
                   variant='standard'
                 />
               </Grid>
-              <Grid item xs={1}>
-                <IconButton aria-label='delete'>
-                  <ClearIcon />
-                </IconButton>
-              </Grid>
             </Grid>
           );
         })}
-      <IconButton aria-label='addCheckItem' style={{ width: '100%' }}>
-        <AddIcon />
-      </IconButton>
     </>
   );
 }
@@ -82,17 +74,9 @@ function SingleCheckInput({ checkList, questionIdx }: CheckInputProps) {
                   variant='standard'
                 />
               </Grid>
-              <Grid item xs={1}>
-                <IconButton aria-label='delete'>
-                  <ClearIcon />
-                </IconButton>
-              </Grid>
             </Grid>
           );
         })}
-      <IconButton aria-label='addCheckItem'>
-        <AddIcon />
-      </IconButton>
     </RadioGroup>
   );
 }
@@ -104,7 +88,11 @@ interface QuestionProps {
 
 function Question({ idx, question }: QuestionProps) {
   return (
-    <Paper elevation={3} className={`${styles.questionWrapper}`}>
+    <Paper
+      elevation={3}
+      className={`${styles.questionWrapper}`}
+      style={{ marginBottom: '1rem' }}
+    >
       <Grid container spacing={1}>
         <Grid item xs={9}>
           <TextField
@@ -115,16 +103,6 @@ function Question({ idx, question }: QuestionProps) {
             value={question.question}
             size='small'
           />
-        </Grid>
-        <Grid item xs={3}>
-          <FormControl fullWidth size='small'>
-            <InputLabel>질문 유형</InputLabel>
-            <Select value={question.inputType} label='질문 유형'>
-              <MenuItem value={'TEXT'}>TEXT</MenuItem>
-              <MenuItem value={'SINGLE_CHECK'}>SINGLE_CHECK</MenuItem>
-              <MenuItem value={'MULTI_CHECK'}>MULTI_CHECK</MenuItem>
-            </Select>
-          </FormControl>
         </Grid>
         <Grid item xs={12}>
           {question.inputType === 'SINGLE_CHECK' && (
@@ -137,9 +115,6 @@ function Question({ idx, question }: QuestionProps) {
             <MultiCheckInput questionIdx={idx} checkList={question.checkList} />
           )}
         </Grid>
-        <IconButton aria-label='delete'>
-          <DeleteIcon />
-        </IconButton>
       </Grid>
     </Paper>
   );
