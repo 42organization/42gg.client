@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   Button,
@@ -104,6 +104,7 @@ export default function ActionSelectorButtons({
           variant='contained'
           style={{ marginLeft: '0.5rem', width: '8rem' }}
           onClick={() => {
+            if (selectedId === '') return;
             importRecruitmentInfo(Number(selectedId));
           }}
         >

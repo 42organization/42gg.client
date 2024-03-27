@@ -10,7 +10,7 @@ import QuestionFormBuilder from './components/QuestionFormBuilder';
 import QuillDescriptionEditor from './components/QuillDescriptionEditor';
 import TitleTimeRangeSelector from './components/TitleTimeRangeSelector';
 
-const initRecruitmentEditInfo: Irecruit = {
+const emptyRecruitmentEditInfo: Irecruit = {
   title: '',
   startDate: new Date(),
   endDate: new Date(),
@@ -19,7 +19,15 @@ const initRecruitmentEditInfo: Irecruit = {
   form: [],
 };
 
-export default function RecruitmentEdit({ setPage }: RecruitmentEditProps) {
+export default function RecruitmentEdit({
+  setPage,
+  recruitmentInfo,
+  mode,
+}: RecruitmentEditProps) {
+  const initRecruitmentEditInfo = recruitmentInfo
+    ? recruitmentInfo
+    : emptyRecruitmentEditInfo;
+
   const {
     recruitmentEditInfo,
     setRecruitmentEditInfoField,
@@ -51,7 +59,7 @@ export default function RecruitmentEdit({ setPage }: RecruitmentEditProps) {
       <ActionSelectorButtons
         recruitmentEditInfo={recruitmentEditInfo}
         importRecruitmentInfo={importRecruitmentInfo}
-        actionType='CREATE'
+        actionType={mode}
       />
     </div>
   );

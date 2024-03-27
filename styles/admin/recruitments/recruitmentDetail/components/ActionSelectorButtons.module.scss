@@ -1,0 +1,13 @@
+.mainContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  padding: 0.5rem;
+  text-align: center;
+  justify-content: flex-end; /* Changed from space-between to flex-end */
+  align-items: center;
+
+  .button {
+    margin: 0 0.5rem;
+  }
+}

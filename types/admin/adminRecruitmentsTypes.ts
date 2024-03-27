@@ -66,6 +66,8 @@ export interface RecruitmentsMainProps {
 
 export interface RecruitmentEditProps {
   setPage: Dispatch<SetStateAction<RecruitmentsPages>>;
+  recruitmentInfo?: Irecruit | null;
+  mode: 'CREATE' | 'MODIFY';
 }
 
 export interface RecruitmentDetailProps {

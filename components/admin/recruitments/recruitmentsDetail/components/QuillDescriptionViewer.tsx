@@ -16,7 +16,6 @@ interface QuillDescriptionViewerProps {
 export default function QuillDescriptionViewer({
   contents,
 }: QuillDescriptionViewerProps) {
-  console.log('CONTENT : ', contents);
   return (
     <Paper elevation={3} className={styles.quillEditorWrapper}>
       <Quill

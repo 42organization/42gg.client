@@ -15,7 +15,7 @@ function RecruitmentsMain({ setPage }: RecruitmentsMainProps) {
         <button
           className={styles.sectionTitle}
           onClick={() => {
-            setPage({ pageType: 'EDIT', props: null });
+            setPage({ pageType: 'EDIT', props: { mode: 'CREATE', setPage } });
           }}
         >
           지원 공고 등록

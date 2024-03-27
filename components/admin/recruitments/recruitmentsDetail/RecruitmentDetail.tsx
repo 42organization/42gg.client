@@ -9,6 +9,7 @@ import {
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/recruitments/recruitmentDetail/RecruitmentDetail.module.scss';
+import ActionSelectorButtons from './components/ActionSelectorButtons';
 import QuestionForm from './components/QuestionForm';
 import QuillDescriptionViewer from './components/QuillDescriptionViewer';
 import TitleTimeRange from './components/TitleTimeRange';
@@ -29,11 +30,13 @@ export default function RecruitmentDetail({
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const setSnackBar = useSetRecoilState(toastState);
 
-  const getRecruitmentInfo = async (recruitId: number) => {
+  const getRecruitmentInfo = async () => {
     setIsLoading(true);
     try {
-      const res = await mockInstance.get('/recruitments/' + recruitId);
+      const res = await mockInstance.get('/recruitments/' + recruit.id);
       const data: Irecruit = {
+        id: recruit.id,
+        status: recruit.status,
         title: res.data.title,
         startDate: new Date(res.data.startDate),
         endDate: new Date(res.data.endDate),
@@ -54,7 +57,7 @@ export default function RecruitmentDetail({
   };
 
   useEffect(() => {
-    getRecruitmentInfo(recruit.id as number);
+    getRecruitmentInfo();
   }, []);
 
   return (
@@ -71,6 +74,11 @@ export default function RecruitmentDetail({
         <p>로딩중...</p>
       ) : (
         <>
+          <ActionSelectorButtons
+            recruitmentInfo={recruitmentInfo as Irecruit}
+            actionType='CREATE'
+            setPage={setPage}
+          ></ActionSelectorButtons>
           <TitleTimeRange recruitmentInfo={recruitmentInfo as Irecruit} />
           <QuillDescriptionViewer
             contents={recruitmentInfo.contents as string}
