@@ -29,11 +29,7 @@ export default function PartyDetailContentCommentBox({
         <div className={styles.content}>{partyRoomDetail.content}</div>
         <div className={styles.comment}>댓글 ({totalComments})</div>
         <hr />
-        <CommentBox
-          comments={partyRoomDetail.comments}
-          status={partyRoomDetail.status}
-          nameToRGB={nameToRGB}
-        />
+        <CommentBox comments={partyRoomDetail.comments} nameToRGB={nameToRGB} />
       </div>
       <CommentCreateBar
         roomId={partyRoomDetail.roomId}
@@ -47,11 +43,9 @@ export default function PartyDetailContentCommentBox({
 
 function CommentBox({
   comments,
-  status,
   nameToRGB,
 }: {
   comments: PartyComment[];
-  status: PartyRoomStatus;
   nameToRGB: (name: string) => string;
 }) {
   const commentBoxRef = useRef<HTMLDivElement>(null);
@@ -77,9 +71,7 @@ function CommentBox({
           >
             <div>{comment.content}</div>
             <div className={styles.commentInfo}>
-              <span>
-                {status === 'OPEN' ? comment.nickname : comment.intraId}
-              </span>
+              <span>{comment.intraId || comment.nickname}</span>
               <span>{` (${getTimeAgo(comment.createDate)})`}</span>
               <PartyRoomDetailButton.ReportComment />
             </div>
