@@ -30,7 +30,7 @@ export default function PartyDetailTitleBox({
   return (
     <div className={styles.titleBox}>
       <div className={styles.titleLine}>
-        <div className={styles.titleCategory}>{`#${category}`}</div>
+        <div className={styles.titleCategory}>{`#${category || '기타'}`}</div>
         <span>
           <PartyRoomDetailButton.ReportRoom roomId={roomId} />
           <PartyRoomDetailButton.ShareRoom />
