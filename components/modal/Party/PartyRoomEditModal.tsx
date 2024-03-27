@@ -30,16 +30,14 @@ export default function PartyRoomEditModal({ roomId }: { roomId: number }) {
         isHidden: !comment.isHidden,
       })
       .then(() => {
-        setRoom(
-          room && {
-            ...room,
-            comments: room.comments.map((c) =>
-              c.commentId === comment.commentId
-                ? { ...c, isHidden: !comment.isHidden }
-                : c
-            ),
-          }
-        );
+        setRoom({
+          ...room!,
+          comments: room!.comments.map((c) =>
+            c.commentId === comment.commentId
+              ? { ...c, isHidden: !comment.isHidden }
+              : c
+          ),
+        });
       })
       .catch(() => {
         setSnackBar({
@@ -63,11 +61,9 @@ export default function PartyRoomEditModal({ roomId }: { roomId: number }) {
 
   return (
     <div className={styles.container}>
-      <header className={styles.modalHeader}>
+      <header className={styles.roomHeader}>
         <h2>
-          <span className={styles.categoryName}>
-            #{room.categoryName} #{`${room.minPeople}-${room.maxPeople}인`}
-          </span>
+          <span className={styles.categoryName}>#{room.categoryName}</span>
           {room.title}
         </h2>
         <select onChange={handleStatus}>
@@ -78,11 +74,18 @@ export default function PartyRoomEditModal({ roomId }: { roomId: number }) {
           ))}
         </select>
       </header>
-      {/*
-      <div>작성일: {dateToStringShort(new Date(room.createDate))}</div>
-      <div>마감일: {dateToStringShort(new Date(room.dueDate))}</div> */}
-      <p className={styles.roomContent}>{room.content}</p>
-      <section className={styles.roomUsersContainer}>
+      <section className={styles.roomDate}>
+        <div>작성일: {dateToStringShort(new Date(room.createDate))}</div>
+        <div>마감일: {dateToStringShort(new Date(room.dueDate))}</div>
+      </section>
+      <section className={styles.roomContent}>
+        <p>{room.content}</p>
+      </section>
+      <section className={styles.roomUsers}>
+        <h3>
+          현재 {room.roomUsers.length} | 모집인원{' '}
+          {`${room.minPeople} - ${room.maxPeople}`}
+        </h3>
         <ul>
           {room.roomUsers.map((user) => (
             <li key={user.roomUserId}>
@@ -100,7 +103,7 @@ export default function PartyRoomEditModal({ roomId }: { roomId: number }) {
           ))}
         </ul>
       </section>
-      <section className={styles.commentContainer}>
+      <section className={styles.roomComments}>
         <h3>코멘트</h3>
         <ul>
           {room.comments.map((comment) => (

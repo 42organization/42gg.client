@@ -1,17 +1,20 @@
 @import 'styles/common.scss';
 
 .container {
-  width: 40%;
-  max-height: 70%;
+  width: 25rem;
+  max-height: 40rem;
   overflow-y: scroll;
+  background-color: white;
 
-  .modalHeader {
+  section {
+    padding: 0 2rem;
+  }
+  .roomHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 2em 2em 1em;
-    background-color: white;
+    padding: 1rem 2rem;
 
     h2 {
       display: flex;
@@ -29,18 +32,29 @@
       font-size: 1em;
     }
   }
+  .roomDate {
+    font-size: $small-font;
+    color: $dark-gray;
+    div {
+      text-align: end;
+    }
+  }
   .roomContent {
     min-height: 10em;
-    padding: 1em 2em;
     margin: 0;
-    font-weight: 400;
-    white-space: pre;
-    background-color: white;
-  }
-  .roomUsersContainer {
-    padding: 1em 2em;
-    background-color: white;
 
+    p {
+      margin: 0;
+      font-weight: 400;
+      white-space: pre-wrap;
+    }
+  }
+  .roomUsers {
+    h3 {
+      margin: 1em 0;
+      font-size: $small-font;
+      font-weight: 500;
+    }
     ul {
       display: flex;
       margin: 0 5%;
@@ -67,9 +81,10 @@
       }
     }
   }
-  .commentContainer {
+  .roomComments {
     padding: 1em 2em;
     background-color: $white2;
+
     h3 {
       margin-top: 0;
     }
@@ -94,7 +109,9 @@
         }
         p {
           margin: 0 0.5em;
-          font-weight: 300;
+          font-size: $small-font;
+          font-weight: 200;
+          white-space: pre-wrap;
         }
       }
     }
