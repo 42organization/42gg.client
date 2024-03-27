@@ -8,7 +8,7 @@ import {
 } from 'types/admin/adminRecruitmentsTypes';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/admin/recruitments/recruitmentEdit/RecruitmentEdit.module.scss';
+import styles from 'styles/admin/recruitments/recruitmentDetail/RecruitmentDetail.module.scss';
 import QuestionForm from './components/QuestionForm';
 import QuillDescriptionViewer from './components/QuillDescriptionViewer';
 import TitleTimeRange from './components/TitleTimeRange';

@@ -40,58 +40,56 @@ export default function TitleTimeRangeSelector({
   };
 
   return (
-    <div className={styles.editorContainer}>
-      <TableContainer className={styles.tableContainer} component={Paper}>
-        <Table className={styles.table} aria-label='customized table'>
-          <AdminTableHead tableName={'recruitEditTitle'} table={tableTitle} />
-          <TableBody className={styles.tableBody}>
-            <TableRow>
-              <TableCell className={styles.tableBodyItem}>
-                <input
-                  type='text'
-                  name='title'
-                  value={recruitmentEditInfo.title}
-                  onChange={inputChangeHandler}
-                />
-              </TableCell>
-              <TableCell className={styles.tableBodyItem}>
-                <DatePicker
-                  selected={recruitmentEditInfo.startDate}
-                  name='startDate'
-                  showTimeSelect
-                  timeFormat='HH:mm'
-                  dateFormat='yyyy-MM-dd HH:mm'
-                  timeIntervals={60}
-                  onChange={(date) => {
-                    setRecruitmentEditInfoField('startDate', date);
-                  }}
-                />
-              </TableCell>
-              <TableCell className={styles.tableBodyItem}>
-                <DatePicker
-                  selected={recruitmentEditInfo.endDate}
-                  name='endDate'
-                  showTimeSelect
-                  timeFormat='HH:mm'
-                  dateFormat='yyyy-MM-dd HH:mm'
-                  timeIntervals={60}
-                  onChange={(date) => {
-                    setRecruitmentEditInfoField('endDate', date);
-                  }}
-                />
-              </TableCell>
-              <TableCell className={styles.tableBodyItem}>
-                <input
-                  type='text'
-                  name='generation'
-                  value={recruitmentEditInfo.generation}
-                  onChange={inputChangeHandler}
-                />
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+    <TableContainer className={styles.tableContainer} component={Paper}>
+      <Table className={styles.table} aria-label='customized table'>
+        <AdminTableHead tableName={'recruitEditTitle'} table={tableTitle} />
+        <TableBody className={styles.tableBody}>
+          <TableRow>
+            <TableCell className={styles.tableBodyItem}>
+              <input
+                type='text'
+                name='title'
+                value={recruitmentEditInfo.title}
+                onChange={inputChangeHandler}
+              />
+            </TableCell>
+            <TableCell className={styles.tableBodyItem}>
+              <DatePicker
+                selected={recruitmentEditInfo.startDate}
+                name='startDate'
+                showTimeSelect
+                timeFormat='HH:mm'
+                dateFormat='yyyy-MM-dd HH:mm'
+                timeIntervals={60}
+                onChange={(date) => {
+                  setRecruitmentEditInfoField('startDate', date);
+                }}
+              />
+            </TableCell>
+            <TableCell className={styles.tableBodyItem}>
+              <DatePicker
+                selected={recruitmentEditInfo.endDate}
+                name='endDate'
+                showTimeSelect
+                timeFormat='HH:mm'
+                dateFormat='yyyy-MM-dd HH:mm'
+                timeIntervals={60}
+                onChange={(date) => {
+                  setRecruitmentEditInfoField('endDate', date);
+                }}
+              />
+            </TableCell>
+            <TableCell className={styles.tableBodyItem}>
+              <input
+                type='text'
+                name='generation'
+                value={recruitmentEditInfo.generation}
+                onChange={inputChangeHandler}
+              />
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }

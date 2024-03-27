@@ -2,14 +2,13 @@ import React from 'react';
 import { CheckBox } from '@mui/icons-material';
 import { Grid, Paper, Radio, RadioGroup, TextField } from '@mui/material';
 import { IcheckItem, Iquestion } from 'types/admin/adminRecruitmentsTypes';
-import styles from 'styles/admin/recruitments/recruitmentEdit/components/QuestionFormBuilder.module.scss';
+import styles from 'styles/admin/recruitments/recruitmentDetail/components/QuestionForm.module.scss';
 
 interface CheckInputProps {
   checkList: IcheckItem[] | undefined;
-  questionIdx: number;
 }
 
-function MultiCheckInput({ checkList, questionIdx }: CheckInputProps) {
+function MultiCheckInput({ checkList }: CheckInputProps) {
   return (
     <>
       {checkList &&
@@ -36,7 +35,7 @@ function MultiCheckInput({ checkList, questionIdx }: CheckInputProps) {
   );
 }
 
-function SingleCheckInput({ checkList, questionIdx }: CheckInputProps) {
+function SingleCheckInput({ checkList }: CheckInputProps) {
   return (
     <RadioGroup>
       {checkList &&
@@ -64,11 +63,10 @@ function SingleCheckInput({ checkList, questionIdx }: CheckInputProps) {
 }
 
 interface QuestionProps {
-  idx: number;
   question: Iquestion;
 }
 
-function Question({ idx, question }: QuestionProps) {
+function Question({ question }: QuestionProps) {
   return (
     <Paper
       elevation={3}
@@ -88,13 +86,10 @@ function Question({ idx, question }: QuestionProps) {
         </Grid>
         <Grid item xs={12}>
           {question.inputType === 'SINGLE_CHECK' && (
-            <SingleCheckInput
-              questionIdx={idx}
-              checkList={question.checkList}
-            />
+            <SingleCheckInput checkList={question.checkList} />
           )}
           {question.inputType === 'MULTI_CHECK' && (
-            <MultiCheckInput questionIdx={idx} checkList={question.checkList} />
+            <MultiCheckInput checkList={question.checkList} />
           )}
         </Grid>
       </Grid>
@@ -112,7 +107,7 @@ export default function QuestionForm({ form }: QuestionFormProps) {
       <div className={styles.questionContainer}>
         {form &&
           form.map((question, idx) => {
-            return <Question key={idx} idx={idx} question={question} />;
+            return <Question key={idx} question={question} />;
           })}
       </div>
     </div>

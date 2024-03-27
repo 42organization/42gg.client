@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import { Paper } from '@mui/material';
 import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
 import 'react-quill/dist/quill.snow.css';
-import styles from 'styles/admin/recruitments/recruitmentEdit/components/QuillDescriptionEditor.module.scss';
+import styles from 'styles/admin/recruitments/recruitmentDetail/components/QuillDescription.module.scss';
 
 const Quill = dynamic(() => import('react-quill'), {
   ssr: false,
