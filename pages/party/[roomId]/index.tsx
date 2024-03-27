@@ -31,7 +31,7 @@ export default function PartyDetailPage() {
       });
   };
 
-  usePartyColorMode('PARTY-DETAIL');
+  usePartyColorMode('PARTY-MAIN');
 
   return partyRoomDetail && partyRoomDetail.status !== 'HIDDEN' ? (
     <div className={styles.detailPage}>

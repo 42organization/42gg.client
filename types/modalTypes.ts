@@ -13,7 +13,7 @@ import { StoreManualMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
 import { ITournament } from './admin/adminTournamentTypes';
 import { GameMode } from './gameTypes';
-import { PartyGameTemplate } from './partyTypes';
+import { PartyGameTemplate, PartyPenaltyAdmin } from './partyTypes';
 import { TournamentInfo } from './tournamentTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
@@ -57,6 +57,7 @@ type AdminModal =
   | 'TOURNAMENT_BRAKET_EDIT'
   | 'TOURNAMENT_PARTICIPANT_EDIT'
   | 'PARTY_TEMPLATE'
+  | 'PARTY_ADMIN_PENALTY'
   | 'PARTY_EDIT';
 
 type ModalName =
@@ -156,5 +157,6 @@ export interface Modal {
   tournamentId?: number;
   partyReport?: PartyReportModalData;
   template?: PartyGameTemplate;
+  partyPenalty?: PartyPenaltyAdmin;
   roomId?: number;
 }

@@ -9,13 +9,14 @@ import AdminEditItemModal from 'components/modal/admin/AdminEditItem';
 import AdminFeedbackCheck from 'components/modal/admin/AdminFeedbackCheckModal';
 import AdminModifyScoreModal from 'components/modal/admin/AdminModifyScoreModal';
 import AdminNotiUserModal from 'components/modal/admin/AdminNotiUserModal';
+import AdminPartyPenaltyModal from 'components/modal/admin/AdminPartyPenaltyModal';
 import AdminPenaltyModal from 'components/modal/admin/AdminPenaltyModal';
 import AdminProfileModal from 'components/modal/admin/AdminProfileModal';
+import TemplateModal from 'components/modal/admin/AdminTemplateModal';
 import AdminUserCoinModal from 'components/modal/admin/AdminUserCoinModal';
 import DeletePenaltyModal from 'components/modal/admin/DeletePenaltyModal';
 import DetailModal from 'components/modal/admin/DetailModal';
 import AdminSeasonEdit from 'components/modal/admin/SeasonEdit';
-import TemplateModal from 'components/modal/Party/TemplateModal';
 import AdminEditTournamentBraket from '../admin/AdminEditTournamentBraket';
 import AdminTournamentParticipantEditModal from '../admin/AdminTournamentParticipantEditModal/AdminTournamentParticipantEditModal';
 import PartyRoomEditModal from '../Party/PartyRoomEditModal';
@@ -37,6 +38,7 @@ export default function AdminModal() {
     tournament,
     tournamentId,
     template,
+    partyPenalty,
     roomId,
   } = useRecoilValue(modalState);
 
@@ -95,6 +97,9 @@ export default function AdminModal() {
       <AdminTournamentParticipantEditModal tournamentId={tournamentId} />
     ) : null,
     'ADMIN-PARTY_TEMPLATE': <TemplateModal template={template} />,
+    'ADMIN-PARTY_ADMIN_PENALTY': (
+      <AdminPartyPenaltyModal partyPenalty={partyPenalty} />
+    ),
     'ADMIN-PARTY_EDIT': roomId ? <PartyRoomEditModal roomId={roomId} /> : null,
   };
 

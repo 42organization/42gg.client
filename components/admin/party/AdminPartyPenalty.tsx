@@ -8,8 +8,9 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { PartyCommentReport, PartyCommentReportTable } from 'types/partyTypes';
+import { PartyPenaltyAdmin, PartyPenaltyTable } from 'types/partyTypes';
 import { instanceInPartyManage } from 'utils/axios';
+import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
@@ -21,28 +22,30 @@ import styles from 'styles/admin/Party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: '번호',
-  reporterIntraId: '신고자 이름',
-  commentsId: '댓글 번호',
-  roomId: '방',
-  message: '메세지',
-  createdAt: '시간',
+  userIntraId: '유저',
+  penaltyType: '패널티 타입',
+  message: '내용',
+  startTime: '시작 시간',
+  penaltyTime: '패널티 시간',
+  edit: '수정',
 };
 
 export default function AdminCommentReport() {
-  const [commentInfo, setCommentInfo] = useState<PartyCommentReportTable>({
-    commentReportList: [],
+  const [penaltyInfo, setPenaltyInfo] = useState<PartyPenaltyTable>({
+    penaltyList: [],
     totalPage: 0,
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const setModal = useSetRecoilState(modalState);
   const setSnackBar = useSetRecoilState(toastState);
 
   useEffect(() => {
     instanceInPartyManage
-      .get(`/reports/comments?page=${currentPage}&size=10`)
+      .get(`/penalties?page=${currentPage}&size=10`)
       .then((res) => {
-        setCommentInfo({
-          commentReportList: res.data.commentReportList,
+        setPenaltyInfo({
+          penaltyList: res.data.penaltyList,
           totalPage: res.data.totalPage,
           currentPage: currentPage,
         });
@@ -55,32 +58,54 @@ export default function AdminCommentReport() {
           clicked: true,
         });
       });
-  }, [currentPage]);
+  }, [currentPage, penaltyInfo]);
+
+  const handleAddpenalty = () => {
+    setModal({ modalName: 'ADMIN-PARTY_ADMIN_PENALTY' });
+  };
+
+  const handleEditpenalty = (partyPenalty?: PartyPenaltyAdmin) => {
+    setModal({ modalName: 'ADMIN-PARTY_ADMIN_PENALTY', partyPenalty });
+  };
 
   return (
     <div className={styles.AdminTableWrap}>
       <div className={styles.header}>
-        <span className={styles.title}>댓글 신고리스트</span>
+        <span className={styles.title}>패널티 리스트</span>
+        <button
+          onClick={handleAddpenalty}
+          className={`${styles.button_1} ${styles.add}`}
+        >
+          추가
+        </button>
       </div>
-      <TableContainer className={styles.tableContainer} component={Paper}>
-        <Table className={styles.table} aria-label='UserManagementTable'>
-          <AdminTableHead tableName={'partyCommentReport'} table={tableTitle} />
+      <TableContainer component={Paper} className={styles.tableContainer}>
+        <Table aria-label='UserManagementTable' className={styles.table}>
+          <AdminTableHead tableName={'partyPenaltyAdmin'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {commentInfo.commentReportList &&
-            commentInfo.commentReportList.length > 0 ? (
-              commentInfo.commentReportList.map(
-                (report: PartyCommentReport, index: number) => (
+            {penaltyInfo.penaltyList && penaltyInfo.penaltyList.length > 0 ? (
+              penaltyInfo.penaltyList.map(
+                (penalty: PartyPenaltyAdmin, index: number) => (
                   <TableRow key={index}>
-                    {tableFormat['partyCommentReport'].columns.map(
+                    {tableFormat['partyPenaltyAdmin'].columns.map(
                       (columnName) => {
                         return (
                           <TableCell
                             key={columnName}
                             className={styles.tableBodyItem}
                           >
-                            {report[
-                              columnName as keyof PartyCommentReport
-                            ]?.toString()}
+                            {columnName === 'edit' ? (
+                              <button
+                                onClick={() => handleEditpenalty(penalty)}
+                                className={`${styles.button_1} ${styles.edit}`}
+                              >
+                                수정
+                              </button>
+                            ) : (
+                              penalty[
+                                columnName as keyof PartyPenaltyAdmin
+                              ]?.toString()
+                            )}
                           </TableCell>
                         );
                       }
@@ -96,8 +121,8 @@ export default function AdminCommentReport() {
       </TableContainer>
       <div className={styles.pageNationContainer}>
         <PageNation
-          curPage={commentInfo.currentPage}
-          totalPages={commentInfo.totalPage}
+          curPage={penaltyInfo.currentPage}
+          totalPages={penaltyInfo.totalPage}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}

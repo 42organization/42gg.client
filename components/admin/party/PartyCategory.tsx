@@ -48,15 +48,18 @@ export default function PartyCategories() {
           </button>
         </div>
       </div>
-      <TableContainer component={Paper}>
-        <Table aria-label='UserManagementTable'>
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='UserManagementTable'>
           <AdminTableHead tableName={'partyCategory'} table={tableTitle} />
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {categories.map((c) => (
               <TableRow key={c.categoryId}>
                 {tableFormat['partyCategory'].columns.map((columnName) => {
                   return (
-                    <TableCell key={columnName}>
+                    <TableCell
+                      key={columnName}
+                      className={styles.tableBodyItem}
+                    >
                       {columnName === 'delete' ? (
                         <button
                           onClick={() => deleteCategory(c.categoryId)}

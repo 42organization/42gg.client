@@ -8,14 +8,10 @@ export const roomStatusOpts = [
 
 export type PartyRoomStatus = (typeof roomStatusOpts)[number];
 
-/**
- * @typedef {Object} PartyRoom
- *  @property {string} [creatorIntraId] - adminAPI로 조회시 존재
- */
 export type PartyRoom = {
   roomId: number;
   title: string;
-  categoryId: number;
+  categoryName: PartyCategory['categoryName'];
   currentPeople: number;
   minPeople: number;
   maxPeople: number;
@@ -25,10 +21,6 @@ export type PartyRoom = {
   creatorIntraId?: string;
 };
 
-/**
- * @typedef {Object} PartyRoomDetail
- *  @property {string | null} [myNickname] - Room 참여시 존재
- */
 export type PartyRoomDetail = PartyRoom & {
   myNickname: string | null;
   hostNickname: string;
@@ -37,10 +29,6 @@ export type PartyRoomDetail = PartyRoom & {
   comments: PartyComment[];
 };
 
-/**
- * @typedef {Object} PartyRoomUser
- *  @property {string | null} [intraId] - Room 시작시 or Admin으로 조회시 존재
- */
 export type PartyRoomUser = {
   userRoomId: number;
   nickname: string;
@@ -48,11 +36,6 @@ export type PartyRoomUser = {
   roomUserId: number;
   intraId: string | null;
 };
-
-/**
- * @typedef {Object} PartyRoomDetail
- *  @property {string | null} [intraid] - Room 시작시 or Admin으로 조회시 존재
- */
 
 export type PartyComment = {
   commentId: number;
@@ -71,7 +54,7 @@ export type PartyCategory = {
 
 export type PartyGameTemplate = {
   gameTemplateId: number;
-  categoryId: number;
+  categoryName: PartyCategory['categoryName'];
   gameName: string;
   maxGamePeople: number;
   minGamePeople: number;
@@ -81,6 +64,10 @@ export type PartyGameTemplate = {
   difficulty: string;
   summary: string;
 };
+export type PartyTemplateWithoutCategory = Omit<
+  PartyGameTemplate,
+  'categoryName'
+>;
 
 export type PartyRoomReport = {
   id: number;
@@ -111,17 +98,17 @@ export type PartyCommentReport = {
 
 export type PartyCreateForm = {
   title: string;
-  categoryId: number;
+  categoryName: PartyCategory['categoryName'];
   minPeople: number;
   maxPeople: number;
   content: string;
-  minutesUntilDueDate: number;
+  openPeriod: number;
 };
 
 export type PartyTemplateForm = {
   gameTemplateId?: number;
   gameName: string;
-  categoryId: number;
+  categoryName: PartyCategory['categoryName'];
   maxGamePeople: number;
   minGamePeople: number;
   maxGameTime: number;
