@@ -1,25 +1,7 @@
 import React from 'react';
-import { DropResult } from 'react-beautiful-dnd';
 import { CheckBox } from '@mui/icons-material';
-import AddIcon from '@mui/icons-material/Add';
-import ClearIcon from '@mui/icons-material/Clear';
-import DeleteIcon from '@mui/icons-material/Delete';
-import {
-  FormControl,
-  Grid,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Radio,
-  RadioGroup,
-  Select,
-  SelectChangeEvent,
-  TextField,
-  Tooltip,
-} from '@mui/material';
+import { Grid, Paper, Radio, RadioGroup, TextField } from '@mui/material';
 import { IcheckItem, Iquestion } from 'types/admin/adminRecruitmentsTypes';
-import DraggableList from 'components/UI/DraggableList';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/QuestionFormBuilder.module.scss';
 
 interface CheckInputProps {
