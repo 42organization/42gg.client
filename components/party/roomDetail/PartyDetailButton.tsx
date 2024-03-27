@@ -128,7 +128,7 @@ function LeaveRoom({ roomId, fetchRoomDetail }: RefreshProps) {
 
   return (
     <button className={styles.leaveBtn} onClick={handlerExit}>
-      방 나가기
+      파티 탈퇴
     </button>
   );
 }
