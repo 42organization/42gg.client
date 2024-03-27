@@ -1,27 +1,23 @@
 import { PartyRoomStatus } from 'types/partyTypes';
 import { getRemainTime } from 'utils/handleTime';
-import usePartyCategory from 'hooks/party/usePartyCategory';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
 
 type PartyDetailTitleBoxProps = {
-  categoryId: number;
   title: string;
+  categoryName: string;
   roomId: number;
   dueDate: string;
   status: PartyRoomStatus;
 };
 
 export default function PartyDetailTitleBox({
-  categoryId,
+  categoryName,
   title,
   roomId,
   dueDate,
   status,
 }: PartyDetailTitleBoxProps) {
-  const category = usePartyCategory().categories.find(
-    (category) => category.categoryId === categoryId
-  )?.categoryName;
   const time_message =
     status === 'OPEN'
       ? getRemainTime({ targetTime: new Date(dueDate) })
@@ -30,7 +26,9 @@ export default function PartyDetailTitleBox({
   return (
     <div className={styles.titleBox}>
       <div className={styles.titleLine}>
-        <div className={styles.titleCategory}>{`#${category || '기타'}`}</div>
+        <div className={styles.titleCategory}>{`#${
+          categoryName || '기타'
+        }`}</div>
         <span>
           <PartyRoomDetailButton.ReportRoom roomId={roomId} />
           <PartyRoomDetailButton.ShareRoom />
