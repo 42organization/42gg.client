@@ -187,6 +187,9 @@ function DetailCustomization({
             }
             placeholder='제목을 입력하세요'
           />
+          <div className={styles.titleCount}>
+            {`${partyForm.title.length}/15`}
+          </div>
         </label>
         <label>
           <h3>인원</h3>
@@ -206,7 +209,7 @@ function DetailCustomization({
                 </option>
               ))}
             </select>
-            <div>~</div>
+            <div className={styles.textCenter}>~</div>
             <select
               onChange={(e) =>
                 dispatchPartyForm({
@@ -224,7 +227,7 @@ function DetailCustomization({
                   </option>
                 ))}
             </select>
-            <div>인</div>
+            <div className={styles.textCenter}>인</div>
           </div>
         </label>
         <label>
@@ -245,7 +248,7 @@ function DetailCustomization({
                 </option>
               ))}
             </select>
-            <div>시간</div>
+            <div className={styles.textCenter}>시간</div>
             <select
               onChange={(e) =>
                 handleOpenPeriod({
@@ -261,7 +264,8 @@ function DetailCustomization({
                 </option>
               ))}
             </select>
-            <div>분 후</div>
+            <div className={styles.textCenter}>분 후</div>
+            <div className={styles.dueDate}>23시 34분 마감</div>
           </div>
         </label>
         <label className={styles.contentLabel}>
@@ -277,6 +281,9 @@ function DetailCustomization({
             }
             placeholder='상세글을 작성해 주세요.'
           />
+          <div
+            className={styles.contentCount}
+          >{`${partyForm.content.length}/1000`}</div>
         </label>
         <div className={styles.submitButtonWrap}>
           <button type='submit' disabled={isSubmitting}>
