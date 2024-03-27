@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { PartyRoom } from 'types/partyTypes';
+import { getRemainTime } from 'utils/handleTime';
 import styles from 'styles/party/PartyRoomListItem.module.scss';
 
 export default function PartyRoomListItem({ room }: { room: PartyRoom }) {
@@ -18,18 +19,25 @@ export default function PartyRoomListItem({ room }: { room: PartyRoom }) {
           room.status !== 'OPEN' ? styles.transparent : ''
         }`}
       >
-        <div className={styles.roomDescWrap}>
+        <article className={styles.roomContent}>
           <header>
             <div className={styles.roomCategory}>#{room.categoryName}</div>
             <div className={`${styles.roomStatus} ${styles[room.status]}`}>
               {roomStatusKo}
             </div>
           </header>
-          <div className={styles.roomTitle}>{room.title}</div>
-        </div>
-        <div
-          className={styles.roomPeopleWrap}
-        >{`${room.currentPeople}/${room.maxPeople}`}</div>
+          <p className={styles.roomTitle}>{room.title}</p>
+        </article>
+        <aside className={styles.roomInfo}>
+          <time className={styles.roomDueDate}>
+            {room.status === 'OPEN'
+              ? getRemainTime({ targetTime: new Date(room.dueDate) })
+              : '마감'}
+          </time>
+          <div
+            className={styles.roomPeople}
+          >{`${room.currentPeople}/${room.maxPeople}`}</div>
+        </aside>
       </Link>
     </li>
   );
