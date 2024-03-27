@@ -62,8 +62,6 @@ function CommentBox({
     }
   }, [comments]);
 
-  console.log(comments[0].intraId, comments[0].nickname); //TODO: remove
-
   return (
     <div className={styles.commentBox} ref={commentBoxRef}>
       {comments.map((comment) =>
