@@ -55,7 +55,7 @@ function MultiCheckInput({
                   fullWidth
                   required
                   label='직접입력'
-                  value={checkItem.content}
+                  value={checkItem.contents}
                   size='small'
                   variant='standard'
                   onChange={(e) => inputChangeHandler(e, idx)}
@@ -111,7 +111,7 @@ function SingleCheckInput({
                   fullWidth
                   required
                   label='직접입력'
-                  value={checkItem.content}
+                  value={checkItem.contents}
                   size='small'
                   variant='standard'
                   onChange={(e) => inputChangeHandler(e, idx)}
@@ -253,24 +253,23 @@ export default function QuestionFormBuilder({
     setFocusedQuestion(destination.index);
   };
 
-  console.log(focusedQuestionIdx);
-
   return (
     <div className={styles.mainContainer}>
       <div className={styles.questionContainer}>
         <DraggableList onDragEnd={onDragEndHandler}>
-          {form.map((question, idx) => {
-            return (
-              <Question
-                key={idx}
-                idx={idx}
-                question={question}
-                formManager={formManager}
-                isFocused={focusedQuestionIdx === idx}
-                setFocusedQuestion={setFocusedQuestion}
-              />
-            );
-          })}
+          {form &&
+            form.map((question, idx) => {
+              return (
+                <Question
+                  key={idx}
+                  idx={idx}
+                  question={question}
+                  formManager={formManager}
+                  isFocused={focusedQuestionIdx === idx}
+                  setFocusedQuestion={setFocusedQuestion}
+                />
+              );
+            })}
         </DraggableList>
         <div className={styles.editConsole}>
           <Tooltip title='질문추가'>

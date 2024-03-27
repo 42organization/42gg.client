@@ -36,6 +36,21 @@ const emptyRecruitData = {
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method === 'GET') {
+    handleGetRequest(req, res);
+  } else if (req.method === 'POST') {
+    handlePostRequest(req, res);
+  } else {
+    res.setHeader('Allow', ['GET', 'POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
+}
+
+function handleGetRequest(req: NextApiRequest, res: NextApiResponse) {
   res.status(200).json(fullRecruitData);
-  // res.status(200).json(emptyRecruitData);
+}
+
+function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
+  console.log(req.body);
+  res.status(200).json({ message: 'post success', body: req.body });
 }

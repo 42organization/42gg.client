@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction } from 'react';
+import {
+  RecruitmentsMainProps,
+  RecruitmentsPages,
+} from 'types/admin/adminRecruitmentsTypes';
 import styles from 'styles/admin/store/StoreMain.module.scss';
 import RecruitmentEdit from './recruitmentsEdit/RecruitmentEdit';
 import RecruitmentsHistoryList from './RecruitmentsHistoryList';
 
-interface RecruitmentsMainProps {
-  setPageType: Dispatch<SetStateAction<'MAIN' | 'EDIT'>>;
-}
-
-function RecruitmentsMain({ setPageType }: RecruitmentsMainProps) {
+function RecruitmentsMain({ setPage }: RecruitmentsMainProps) {
   //return menutab
   return (
     <div className={styles.mainContainer}>
@@ -15,7 +15,7 @@ function RecruitmentsMain({ setPageType }: RecruitmentsMainProps) {
         <button
           className={styles.sectionTitle}
           onClick={() => {
-            setPageType('EDIT');
+            setPage({ pageType: 'EDIT', props: { mode: 'CREATE', setPage } });
           }}
         >
           지원 공고 등록
@@ -23,7 +23,7 @@ function RecruitmentsMain({ setPageType }: RecruitmentsMainProps) {
       </div>
       <div className={styles.subContainer}>
         <div className={styles.sectionTitle}>변경 이력</div>
-        <RecruitmentsHistoryList />
+        <RecruitmentsHistoryList setPage={setPage} />
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+import { SyntheticEvent } from 'react';
+import DatePicker from 'react-datepicker';
 import {
   Paper,
   Table,
@@ -6,7 +8,12 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { IrecruitEditInfo } from 'types/admin/adminRecruitmentsTypes';
+import { Irecruit } from 'types/admin/adminRecruitmentsTypes';
+import {
+  dateToKRLocaleTimeString,
+  dateToString,
+  dateToStringShort,
+} from 'utils/handleTime';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/TitleTimeRangeSelector.module.scss';
 
@@ -18,7 +25,7 @@ const tableTitle: { [key: string]: string } = {
 };
 
 interface TitleTimeRangeSelectorProps {
-  recruitmentEditInfo: IrecruitEditInfo;
+  recruitmentEditInfo: Irecruit;
   setRecruitmentEditInfoField: (fieldName: string, value: any) => void;
 }
 
@@ -33,50 +40,56 @@ export default function TitleTimeRangeSelector({
   };
 
   return (
-    <div className={styles.editorContainer}>
-      <TableContainer className={styles.tableContainer} component={Paper}>
-        <Table className={styles.table} aria-label='customized table'>
-          <AdminTableHead tableName={'recruitEditTitle'} table={tableTitle} />
-          <TableBody className={styles.tableBody}>
-            <TableRow>
-              <TableCell className={styles.tableBodyItem}>
-                <input
-                  type='text'
-                  name='title'
-                  value={recruitmentEditInfo.title}
-                  onChange={inputChangeHandler}
-                />
-              </TableCell>
-              <TableCell className={styles.tableBodyItem}>
-                <input
-                  type='datetime-local'
-                  name='startDate'
-                  value={recruitmentEditInfo.startDate}
-                  step='60'
-                  onChange={inputChangeHandler}
-                />
-              </TableCell>
-              <TableCell className={styles.tableBodyItem}>
-                <input
-                  type='datetime-local'
-                  name='endDate'
-                  value={recruitmentEditInfo.endDate}
-                  step='60'
-                  onChange={inputChangeHandler}
-                />
-              </TableCell>
-              <TableCell className={styles.tableBodyItem}>
-                <input
-                  type='text'
-                  name='generation'
-                  value={recruitmentEditInfo.generation}
-                  onChange={inputChangeHandler}
-                />
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+    <TableContainer className={styles.tableContainer} component={Paper}>
+      <Table className={styles.table} aria-label='customized table'>
+        <AdminTableHead tableName={'recruitEditTitle'} table={tableTitle} />
+        <TableBody className={styles.tableBody}>
+          <TableRow>
+            <TableCell className={styles.tableBodyItem}>
+              <input
+                type='text'
+                name='title'
+                value={recruitmentEditInfo.title}
+                onChange={inputChangeHandler}
+              />
+            </TableCell>
+            <TableCell className={styles.tableBodyItem}>
+              <DatePicker
+                selected={recruitmentEditInfo.startDate}
+                name='startDate'
+                showTimeSelect
+                timeFormat='HH:mm'
+                dateFormat='yyyy-MM-dd HH:mm'
+                timeIntervals={60}
+                onChange={(date) => {
+                  setRecruitmentEditInfoField('startDate', date);
+                }}
+              />
+            </TableCell>
+            <TableCell className={styles.tableBodyItem}>
+              <DatePicker
+                selected={recruitmentEditInfo.endDate}
+                name='endDate'
+                showTimeSelect
+                timeFormat='HH:mm'
+                dateFormat='yyyy-MM-dd HH:mm'
+                timeIntervals={60}
+                onChange={(date) => {
+                  setRecruitmentEditInfoField('endDate', date);
+                }}
+              />
+            </TableCell>
+            <TableCell className={styles.tableBodyItem}>
+              <input
+                type='text'
+                name='generation'
+                value={recruitmentEditInfo.generation}
+                onChange={inputChangeHandler}
+              />
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
