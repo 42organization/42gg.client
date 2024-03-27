@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   Paper,
@@ -30,7 +31,10 @@ const tableTitle: { [key: string]: string } = {
 
 export default function PartyRoomTable() {
   const setModal = useSetRecoilState(modalState);
-  const { partyRooms } = useAdminPartyRoomList();
+  const [currentPage, setCurrentPage] = useState(1);
+  const { partyRooms, totalPages } = useAdminPartyRoomList({
+    page: currentPage,
+  });
   // const [searchKeyword, setSearchKeyword] = useState('');
 
   const rooms: PartyRoomColumn[] = partyRooms.map((room) => ({
@@ -39,7 +43,7 @@ export default function PartyRoomTable() {
     categoryName: room.categoryName,
     createDate: dateToStringShort(new Date(room.createDate)),
     dueDate: dateToStringShort(new Date(room.dueDate)),
-    creatorIntraId: room.creatorIntraId ?? '작성자intra',
+    creatorIntraId: room.creatorIntraId ?? '',
     roomStatus: room.status,
   }));
 
@@ -54,14 +58,14 @@ export default function PartyRoomTable() {
           }}
         /> */}
       </div>
-      <TableContainer component={Paper}>
-        <Table aria-label='partyRoomTable'>
+      <TableContainer component={Paper} className={styles.tableContainer}>
+        <Table aria-label='partyRoomTable' className={styles.table}>
           <AdminTableHead tableName={'partyRoom'} table={tableTitle} />
-          <TableBody>
+          <TableBody className={styles.tableBody}>
             {rooms.map((room) => (
               <TableRow key={room.roomId}>
                 {tableFormat['partyRoom'].columns.map((columnName) => (
-                  <TableCell key={columnName}>
+                  <TableCell key={columnName} className={styles.tableBodyItem}>
                     {columnName !== 'etc' ? (
                       <div>
                         {room[columnName as keyof PartyRoomColumn] ?? '없음'}
@@ -74,7 +78,7 @@ export default function PartyRoomTable() {
                             roomId: room.roomId,
                           });
                         }}
-                        className={styles.button_1}
+                        className={`${styles.button_1} ${styles.edit}`}
                       >
                         자세히
                       </button>
@@ -86,15 +90,15 @@ export default function PartyRoomTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <div className={styles.pageNationContainer}>
+      <div className={styles.pageNationContainer}>
         <PageNation
-          curPage={userManagements.currentPage}
-          totalPages={userManagements.totalPage}
+          curPage={currentPage}
+          totalPages={totalPages}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}
         />
-      </div> */}
+      </div>
     </div>
   );
 }
