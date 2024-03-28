@@ -12,12 +12,19 @@ export default function PartyPenaltyModal({
   partyPenalty?: PartyPenaltyAdmin;
 }) {
   const [formData, setFormData] = useState<PartyPenaltyAdminSubmit>(
-    partyPenalty ?? {
-      penaltyType: '',
-      message: '',
-      penaltyTime: 0,
-      userIntraId: '',
-    }
+    partyPenalty
+      ? {
+          penaltyType: partyPenalty.penaltyType,
+          message: partyPenalty.message,
+          penaltyTime: partyPenalty.penaltyTime,
+          userIntraId: partyPenalty.userIntraId || '',
+        }
+      : {
+          penaltyType: '',
+          message: '',
+          penaltyTime: 0,
+          userIntraId: '',
+        }
   );
   const setModal = useSetRecoilState(modalState);
   const [isUpdateMode, setIsUpdateMode] = useState(partyPenalty ? true : false);
@@ -67,6 +74,7 @@ export default function PartyPenaltyModal({
             <input
               type='text'
               value={formData.penaltyType}
+              maxLength={20}
               onChange={(e) =>
                 setFormData({ ...formData, penaltyType: e.target.value })
               }
@@ -75,6 +83,7 @@ export default function PartyPenaltyModal({
             <input
               type='text'
               value={formData.message}
+              maxLength={100}
               onChange={(e) =>
                 setFormData({ ...formData, message: e.target.value })
               }

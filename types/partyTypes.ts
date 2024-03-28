@@ -125,6 +125,38 @@ export type PartyPenaltyAdmin = {
   message: string;
   startTime: string;
   penaltyTime: number;
+  userIntraId?: string;
+};
+
+export type PartyPenaltyAdminSubmit = {
+  penaltyType: string;
+  message: string;
+  penaltyTime: number;
+  userIntraId: string;
+};
+
+export type PartyCommentReportTable = {
+  commentReportList: PartyCommentReport[];
+  totalPage: number;
+  currentPage: number;
+};
+
+export type PartyPenaltyTable = {
+  penaltyList: PartyPenaltyAdmin[];
+  totalPage: number;
+  currentPage: number;
+};
+
+export type PartyNoshowReportTable = {
+  noShowReportList: PartyNoshowReport[];
+  totalPages: number;
+  currentPage: number;
+};
+
+export type PartyRoomReportTable = {
+  roomReportList: PartyNoshowReport[];
+  totalPages: number;
+  currentPage: number;
 };
 
 export type PartyColors = 'PARTY-MAIN';

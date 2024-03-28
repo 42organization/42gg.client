@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { PartyPenaltyAdmin, PartyPenaltyTable } from 'types/partyTypes';
 import { instanceInPartyManage } from 'utils/axios';
+import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -18,7 +19,7 @@ import {
   AdminTableHead,
 } from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
-import styles from 'styles/admin/Party/AdminPartyCommon.module.scss';
+import styles from 'styles/admin/party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: '번호',
@@ -58,14 +59,14 @@ export default function AdminCommentReport() {
           clicked: true,
         });
       });
-  }, [currentPage, penaltyInfo]);
+  }, [currentPage]);
 
   const handleAddpenalty = () => {
-    setModal({ modalName: 'ADMIN-PARTY_ADMIN_PENALTY' });
+    setModal({ modalName: 'ADMIN-PARTY_PENALTY' });
   };
 
   const handleEditpenalty = (partyPenalty?: PartyPenaltyAdmin) => {
-    setModal({ modalName: 'ADMIN-PARTY_ADMIN_PENALTY', partyPenalty });
+    setModal({ modalName: 'ADMIN-PARTY_PENALTY', partyPenalty });
   };
 
   return (
@@ -101,6 +102,10 @@ export default function AdminCommentReport() {
                               >
                                 수정
                               </button>
+                            ) : columnName === 'startTime' ? (
+                              <span>
+                                {dateToStringShort(new Date(penalty.startTime))}
+                              </span>
                             ) : (
                               penalty[
                                 columnName as keyof PartyPenaltyAdmin
