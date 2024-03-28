@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { IoSendSharp } from 'react-icons/io5';
 import {
   PartyComment,
@@ -6,7 +6,7 @@ import {
   PartyRoomStatus,
 } from 'types/partyTypes';
 import { instance } from 'utils/axios';
-import { getTimeAgo } from 'utils/handleTime';
+import { dateToKRLocaleTimeString } from 'utils/handleTime';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
 
@@ -26,7 +26,6 @@ export default function PartyDetailContentCommentBox({
   return (
     <>
       <div className={styles.contentCommentBox}>
-        <div className={styles.content}>{partyRoomDetail.content}</div>
         <div className={styles.comment}>댓글 ({totalComments})</div>
         <hr />
         <CommentBox comments={partyRoomDetail.comments} nameToRGB={nameToRGB} />
@@ -48,34 +47,36 @@ function CommentBox({
   comments: PartyComment[];
   nameToRGB: (name: string) => string;
 }) {
-  const commentBoxRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (commentBoxRef.current) {
-      commentBoxRef.current.scrollTop = commentBoxRef.current.scrollHeight;
-    }
-  }, [comments]);
-
   return (
-    <div className={styles.commentBox} ref={commentBoxRef}>
+    <div className={styles.commentBox}>
       {comments.map((comment) =>
         comment.isHidden ? (
           <div key={comment.commentId} className={styles.commentHidden}>
             숨김 처리된 댓글입니다.
           </div>
         ) : (
-          <div
-            key={comment.commentId}
-            style={{ color: nameToRGB(comment.nickname) }}
-            className={styles.comment}
-          >
-            <div>{comment.content}</div>
-            <div className={styles.commentInfo}>
-              <span>{comment.intraId || comment.nickname}</span>
-              <span>{` (${getTimeAgo(comment.createDate)})`}</span>
-              <PartyRoomDetailButton.ReportComment />
+          <>
+            <div
+              key={comment.commentId}
+              style={{ color: nameToRGB(comment.nickname) }}
+              className={styles.comment}
+            >
+              <div className={styles.commentIntraId}>
+                {comment.intraId || comment.nickname}
+              </div>
+              <div>
+                <div>{comment.content}</div>
+                <div className={styles.commentInfo}>
+                  <div className={styles.commentTime}>
+                    {`(${dateToKRLocaleTimeString(
+                      new Date(comment.createDate)
+                    )})`}
+                  </div>
+                  <PartyRoomDetailButton.ReportComment />
+                </div>
+              </div>
             </div>
-          </div>
+          </>
         )
       )}
     </div>
