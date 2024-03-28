@@ -56,7 +56,7 @@ export function PartyReportModal({ report }: { report: PartyReportModalData }) {
     <div className={styles.container}>
       <div>
         <div className={styles.title}>42GG</div>
-        <div className={styles.phrase}>{report.name}</div>
+        <div className={styles.phrase}>{`${report.name} REPORT`}</div>
       </div>
       <form>
         <div className={styles.contentWrapper}>
@@ -64,7 +64,7 @@ export function PartyReportModal({ report }: { report: PartyReportModalData }) {
             <textarea
               name='content'
               maxLength={300}
-              onChange={(e) => setContent(content + e)}
+              onChange={(e) => setContent(e.target.value)}
             />
             <div>{`${content.length}/300`}</div>
           </div>

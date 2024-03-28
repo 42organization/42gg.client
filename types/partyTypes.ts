@@ -40,7 +40,7 @@ export type PartyRoomUser = {
 export type PartyComment = {
   commentId: number;
   nickname: string;
-  intraid: string | null;
+  intraId: string | null;
   isexist: boolean;
   content: string;
   isHidden: boolean;

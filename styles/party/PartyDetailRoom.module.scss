@@ -4,48 +4,108 @@
 $detail-btn-weight: bold;
 $detailCommonRem: 1rem;
 
+.category {
+  display: flex;
+  max-height: 1.2rem;
+  padding: 0 0.4rem;
+  margin-right: 0.3rem;
+  font-size: $small-font;
+  color: white;
+  background-color: skyblue;
+  border: 0.4rem white;
+  border-radius: $big-radius;
+  justify-content: center;
+  align-items: center;
+}
+
+.endTime {
+  display: flex;
+  margin-top: auto;
+  font-size: 0.7rem;
+  color: gray;
+  text-align: right;
+  opacity: 0.9;
+  justify-content: right;
+}
+
+.reportRoomBtn {
+  display: flex;
+  justify-content: right;
+  margin-top: auto;
+  margin-left: auto;
+  background-color: inherit;
+  border: none;
+  opacity: 0.7;
+}
+
+.commentIntraId {
+  display: flex;
+  margin-right: 3rem;
+  justify-items: center;
+}
+
+.commentTime {
+  display: flex;
+  margin-top: auto;
+  font-size: 0.7rem;
+  color: gray;
+  text-align: right;
+  opacity: 0.9;
+  justify-content: right;
+}
+
 .detailPage {
-  @include pageWrap;
+  max-width: 30rem;
+  padding: 0.3rem 1.5rem;
+  margin: 0 auto;
+  font-family: $common-font;
+  white-space: pre-wrap;
+
+  .exitBtn {
+    font-size: 1.3rem;
+    color: rgb(255, 255, 255);
+    background-color: inherit;
+    border: none;
+    margin-inline: 0;
+  }
 
   .titleBox {
-    position: relative;
-    padding: $detailCommonRem;
+    position: flex;
+    padding: $detailCommonRem * 0.7;
     background-color: white;
     border-radius: $mini-radius;
 
     .titleLine {
       display: flex;
-      justify-content: space-between;
       width: 100%;
+      border-bottom: auto;
+      justify-content: space-between;
 
-      .titleCategory {
-        font-size: $small-font;
+      .tag {
+        display: flex;
+        justify-content: start;
       }
 
       .shareBtn {
         position: relative;
-        text-align: right;
-        background-color: inherit;
-        border: none;
-      }
-
-      .reportRoomBtn {
-        position: relative;
+        padding-top: 0;
+        padding-right: 0;
+        padding-left: 0.2 rem;
         text-align: right;
         background-color: inherit;
         border: none;
       }
     }
-    .titleContent {
-      max-width: 100;
-      margin: 0.3rem 0;
-      font-size: $big-font;
+
+    .title {
+      font-size: $giant-font;
       font-weight: bold;
     }
 
     .remainTime {
-      padding: 0.2rem;
-      margin-top: 0.2rem;
+      padding: 0.3rem;
+      margin: 0.2rem;
+      margin-right: 0rem;
       font-size: $small-font;
       color: aliceblue;
       background-color: $pp-gray;
@@ -56,15 +116,28 @@ $detailCommonRem: 1rem;
   .profile {
     position: relative;
     width: 100%;
-    margin-top: $detailCommonRem;
+    max-height: 30vh;
+    margin-top: $detailCommonRem * 0.6;
     color: white;
 
     .profileItem {
       text-align: center;
+
+      ul {
+        max-width: 100rem;
+        margin: 0.8rem;
+        overflow-x: scroll;
+        white-space: nowrap;
+      }
+
       li {
         display: inline-block;
+        max-width: 100%;
+        margin-top: -0.5rem;
         margin-right: 0.5rem;
+        margin-left: 0.5rem;
       }
+
       .crown {
         position: relative;
         top: 0.4rem;
@@ -91,11 +164,12 @@ $detailCommonRem: 1rem;
 
     .btnContainer {
       text-align: right;
+      border-bottom: 0.3rem;
 
       .leaveBtn {
         width: 50%;
         height: 3rem;
-        margin-bottom: $detailCommonRem;
+        margin-bottom: $detailCommonRem * 0.3;
         font-family: $common-font;
         font-size: $big-font;
         font-weight: $detail-btn-weight;
@@ -106,7 +180,7 @@ $detailCommonRem: 1rem;
       .startBtn {
         width: 50%;
         height: 3rem;
-        margin-bottom: $detailCommonRem;
+        margin-bottom: $detailCommonRem * 0.3;
         font-family: $common-font;
         font-size: $big-font;
         font-weight: $detail-btn-weight;
@@ -129,35 +203,50 @@ $detailCommonRem: 1rem;
   .contentCommentBox {
     position: relative;
     width: 100%;
-    padding: $detailCommonRem;
+    padding: $detailCommonRem * 0.7;
+    padding-bottom: 0.3rem;
     background-color: white;
     border-radius: $mini-radius;
 
     .content {
-      min-height: 13rem;
-      margin-bottom: $detailCommonRem;
-      white-space: pre-wrap;
+      min-height: 9rem;
+      margin-bottom: $detailCommonRem * 0.5;
     }
 
     .comment {
-      margin-top: $detailCommonRem * 2;
-      margin-bottom: 0.3;
+      display: flex;
+      margin-top: 0;
+      margin-bottom: 0.1rem;
       white-space: pre-wrap;
+    }
+
+    hr {
+      margin: 0.1rem;
+    }
+
+    .commentBox {
+      min-height: 10rem;
+      // max-height: 10rem;
+      overflow: auto;
     }
 
     .commentHidden {
       margin-top: $detailCommonRem * 2;
-      margin-bottom: 0.3;
+      margin-bottom: 0.3rem;
       color: gray;
       opacity: 0.7;
     }
 
     .commentInfo {
-      text-align: right;
+      display: flex;
+      justify-content: left;
+      margin-top: 0.1rem;
+      margin-bottom: 0.8rem;
 
-      .commentBtn {
-        position: relative;
-        text-align: right;
+      .reportCommentBtn {
+        display: flex;
+        justify-items: right;
+
         background-color: inherit;
         border: none;
       }

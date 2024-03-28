@@ -6,23 +6,19 @@ import {
   PartyRoomStatus,
 } from 'types/partyTypes';
 import { instance } from 'utils/axios';
-import { getTimeAgo } from 'utils/handleTime';
+import { dateToKRLocaleTimeString } from 'utils/handleTime';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
+
 type PartyRoomDetailProps = {
   partyRoomDetail: PartyRoomDetail;
-  fetchRoomDetail: () => void;
-};
-
-type CommentCreateBarProps = {
-  roomId: number;
-  status: PartyRoomStatus;
-  myNickname: string | null;
+  nameToRGB: (name: string) => string;
   fetchRoomDetail: () => void;
 };
 
 export default function PartyDetailContentCommentBox({
   partyRoomDetail,
+  nameToRGB,
   fetchRoomDetail,
 }: PartyRoomDetailProps) {
   const totalComments = partyRoomDetail.comments.length;
@@ -30,10 +26,9 @@ export default function PartyDetailContentCommentBox({
   return (
     <>
       <div className={styles.contentCommentBox}>
-        <div className={styles.content}>{partyRoomDetail.content}</div>
         <div className={styles.comment}>댓글 ({totalComments})</div>
         <hr />
-        <CommentLine comments={partyRoomDetail.comments} />
+        <CommentBox comments={partyRoomDetail.comments} nameToRGB={nameToRGB} />
       </div>
       <CommentCreateBar
         roomId={partyRoomDetail.roomId}
@@ -45,36 +40,60 @@ export default function PartyDetailContentCommentBox({
   );
 }
 
-function CommentLine({ comments }: { comments: PartyComment[] }) {
+function CommentBox({
+  comments,
+  nameToRGB,
+}: {
+  comments: PartyComment[];
+  nameToRGB: (name: string) => string;
+}) {
   return (
-    <>
+    <div className={styles.commentBox}>
       {comments.map((comment) =>
         comment.isHidden ? (
           <div key={comment.commentId} className={styles.commentHidden}>
             숨김 처리된 댓글입니다.
           </div>
         ) : (
-          <div
-            key={comment.commentId}
-            style={{ color: nameToRGB(comment.nickname) }}
-            className={styles.comment}
-          >
-            <div>{comment.content}</div>
-            <div className={styles.commentInfo}>
-              <span>{comment.nickname}</span>
-              <span>{` (${getTimeAgo(comment.createDate)})`}</span>
-              <PartyRoomDetailButton.ReportComment />
+          <>
+            <div
+              key={comment.commentId}
+              style={{ color: nameToRGB(comment.nickname) }}
+              className={styles.comment}
+            >
+              <div className={styles.commentIntraId}>
+                {comment.intraId || comment.nickname}
+              </div>
+              <div>
+                <div>{comment.content}</div>
+                <div className={styles.commentInfo}>
+                  <div className={styles.commentTime}>
+                    {`(${dateToKRLocaleTimeString(
+                      new Date(comment.createDate)
+                    )})`}
+                  </div>
+                  <PartyRoomDetailButton.ReportComment />
+                </div>
+              </div>
             </div>
-          </div>
+          </>
         )
       )}
-    </>
+    </div>
   );
 }
+
+type CommentCreateBarProps = {
+  roomId: number;
+  status: PartyRoomStatus;
+  myNickname: string | null;
+  fetchRoomDetail: () => void;
+};
 
 function CommentCreateBar({
   roomId,
   status,
+  myNickname,
   fetchRoomDetail,
 }: CommentCreateBarProps) {
   const [comment, setComment] = useState('');
@@ -95,7 +114,7 @@ function CommentCreateBar({
     setComment(e.target.value);
   };
 
-  if (status !== 'OPEN') {
+  if (status !== 'OPEN' || !myNickname) {
     return <> </>;
   }
 
@@ -114,17 +133,4 @@ function CommentCreateBar({
       </form>
     </div>
   );
-}
-
-function nameToRGB(name: string): string {
-  let codeSum = 0;
-  for (let i = 0; i < name.length; i++) {
-    codeSum += name.charCodeAt(i) ** i * 10;
-  }
-
-  const red = codeSum % 256;
-  const green = (codeSum * 2) % 256;
-  const blue = (codeSum * 3) % 256;
-
-  return `rgb(${red}, ${green}, ${blue})`;
 }

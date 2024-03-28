@@ -5,38 +5,34 @@ import {
   PartyRoomStatus,
   PartyRoomUser,
 } from 'types/partyTypes';
-import { dateToStringShort } from 'utils/handleTime';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
 
 type PartyDetailProfileProps = {
   partyRoomDetail: PartyRoomDetail;
+  nameToRGB: (name: string) => string;
   fetchRoomDetail: () => void;
 };
 
 export default function PartyDetailProfile({
   partyRoomDetail,
+  nameToRGB,
   fetchRoomDetail,
 }: PartyDetailProfileProps) {
-  const {
-    currentPeople,
-    minPeople,
-    maxPeople,
-    dueDate,
-    roomId,
-    status,
-    roomUsers,
-    hostNickname,
-  } = partyRoomDetail;
+  const { currentPeople, minPeople, roomId, status, roomUsers, hostNickname } =
+    partyRoomDetail;
 
   return (
     <div className={styles.profile}>
       <div className={styles.line}>
-        <span>{`참여인원  (${currentPeople}/${maxPeople})`}</span>
-        <span>{`${dateToStringShort(new Date(dueDate))}`}</span>
+        <span>{`인원 : ${currentPeople}`}</span>
       </div>
       <div className={styles.profileItem}>
-        <Profile roomUsers={roomUsers} hostNickname={hostNickname} />
+        <Profile
+          roomUsers={roomUsers}
+          nameToRGB={nameToRGB}
+          hostNickname={hostNickname}
+        />
       </div>
       <ButtonHandler
         currentPeople={currentPeople}
@@ -55,10 +51,11 @@ export default function PartyDetailProfile({
 
 type ProfileProps = {
   roomUsers: PartyRoomUser[];
+  nameToRGB: (name: string) => string;
   hostNickname: string;
 };
 
-function Profile({ roomUsers, hostNickname }: ProfileProps) {
+function Profile({ roomUsers, hostNickname, nameToRGB }: ProfileProps) {
   return (
     <ul>
       {roomUsers.map(({ intraId, nickname, userImage }) =>
@@ -154,17 +151,4 @@ function ButtonHandler({
       />
     </div>
   );
-}
-
-function nameToRGB(name: string): string {
-  let codeSum = 0;
-  for (let i = 0; i < name.length; i++) {
-    codeSum += name.charCodeAt(i) ** i * 10;
-  }
-
-  const red = codeSum % 256;
-  const green = (codeSum * 2) % 256;
-  const blue = (codeSum * 3) % 256;
-
-  return `rgb(${red}, ${green}, ${blue})`;
 }
