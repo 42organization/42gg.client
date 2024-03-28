@@ -74,6 +74,7 @@ export default function PartyPenaltyModal({
             <input
               type='text'
               value={formData.penaltyType}
+              maxLength={20}
               onChange={(e) =>
                 setFormData({ ...formData, penaltyType: e.target.value })
               }
@@ -82,6 +83,7 @@ export default function PartyPenaltyModal({
             <input
               type='text'
               value={formData.message}
+              maxLength={100}
               onChange={(e) =>
                 setFormData({ ...formData, message: e.target.value })
               }

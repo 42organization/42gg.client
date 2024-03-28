@@ -59,7 +59,7 @@ export default function AdminCommentReport() {
           clicked: true,
         });
       });
-  }, [currentPage, penaltyInfo]);
+  }, [currentPage]);
 
   const handleAddpenalty = () => {
     setModal({ modalName: 'ADMIN-PARTY_PENALTY' });
