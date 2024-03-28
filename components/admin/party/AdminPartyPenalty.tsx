@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { PartyPenaltyAdmin, PartyPenaltyTable } from 'types/partyTypes';
 import { instanceInPartyManage } from 'utils/axios';
+import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -101,6 +102,10 @@ export default function AdminCommentReport() {
                               >
                                 수정
                               </button>
+                            ) : columnName === 'startTime' ? (
+                              <span>
+                                {dateToStringShort(new Date(penalty.startTime))}
+                              </span>
                             ) : (
                               penalty[
                                 columnName as keyof PartyPenaltyAdmin
