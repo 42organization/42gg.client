@@ -6,9 +6,11 @@ import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
+
 type ParytButtonProps = {
   roomId?: number;
   commentId?: number;
+  userIntraId?: string;
 };
 
 function ReportComment({ commentId }: ParytButtonProps) {
@@ -49,6 +51,29 @@ function ReportRoom({ roomId }: ParytButtonProps) {
       }}
     >
       <LuAlertTriangle color='gray' />
+    </button>
+  );
+}
+
+function ReportNoShow({ roomId, userIntraId }: ParytButtonProps) {
+  const setModal = useSetRecoilState(modalState);
+
+  return (
+    <button
+      className={styles.noShowBtn}
+      onClick={() => {
+        setModal({
+          partyReport: {
+            name: 'NOSHOW',
+            roomId: roomId,
+            userIntraId: userIntraId,
+          },
+          modalName: 'PARTY-REPORT',
+        });
+      }}
+    >
+      <div style={{ margin: '0 0.3rem' }}>노쇼 신고</div>
+      <LuAlertTriangle color='gray' style={{ marginTop: 'auto' }} />
     </button>
   );
 }
@@ -172,6 +197,7 @@ const PartyRoomDetailButton = {
   JoinRoom,
   LeaveRoom,
   StartRoom,
+  ReportNoShow,
 };
 
 export default PartyRoomDetailButton;

@@ -16,28 +16,6 @@ $detailCommonRem: 1rem;
 
 /* =========================================== */
 
-/* ----------------button--------------------- */
-.reportRoomBtn {
-  display: flex;
-  align-items: flex-end;
-  padding: 0 0 0 0.3rem;
-  background-color: inherit;
-  border: none;
-  opacity: 0.7;
-}
-
-.shareBtn {
-  position: relative;
-  padding-top: 0;
-  padding-right: 0;
-  padding-left: 0.2 rem;
-  text-align: right;
-  background-color: inherit;
-  border: none;
-}
-
-/* =========================================== */
-
 /* ----------------title---------------------- */
 .titleBox {
   position: flex;
@@ -75,6 +53,25 @@ $detailCommonRem: 1rem;
   border-radius: $big-radius;
   justify-content: center;
   align-items: center;
+}
+
+.reportRoomBtn {
+  display: flex;
+  align-items: flex-end;
+  padding: 0 0 0 0.3rem;
+  background-color: inherit;
+  border: none;
+  opacity: 0.7;
+}
+
+.shareBtn {
+  position: relative;
+  padding-top: 0;
+  padding-right: 0;
+  padding-left: 0.2 rem;
+  text-align: right;
+  background-color: inherit;
+  border: none;
 }
 
 .title {
@@ -155,6 +152,17 @@ $detailCommonRem: 1rem;
 .profileImg {
   text-align: center;
   border-radius: $big-radius;
+}
+
+.noShowBtn {
+  display: flex;
+  min-width: 100%;
+  color: white;
+  text-align: center;
+  background-color: inherit;
+  border: none;
+  justify-content: center;
+  size: 50rem;
 }
 
 .btnContainer {
@@ -294,11 +302,11 @@ $detailCommonRem: 1rem;
 
 .commentCreateBar {
   display: flex;
+  min-height: 1.3rem;
   margin-bottom: 0.3rem;
   background-color: rgba(216, 216, 216, 0.484);
   border-radius: $small-radius;
   align-items: center;
-  // justify-content: space-between;
 }
 
 .textBar {
@@ -307,14 +315,16 @@ $detailCommonRem: 1rem;
   margin-left: 0.5rem;
   font-size: $small-font;
   background-color: inherit;
-  border: none;
+  border: inherit;
+  opacity: 0.3;
 }
 
 .inputBtn {
   display: flex;
-  align-items: right;
   background-color: inherit;
   border: none;
+  opacity: 0.3;
+  align-items: right;
 }
 
 /* =========================================== */

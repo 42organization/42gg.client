@@ -52,11 +52,18 @@ export function PartyReportModal({ report }: { report: PartyReportModalData }) {
     reportHandler().catch(() => setIsLoading(false));
   };
 
+  const reportName =
+    report.name === 'NOSHOW'
+      ? `${report.userIntraId} 노쇼 신고`
+      : report.name === 'COMMENT'
+      ? '댓글 신고'
+      : '방 신고';
+
   return (
     <div className={styles.container}>
       <div>
         <div className={styles.title}>42GG</div>
-        <div className={styles.phrase}>{`${report.name} REPORT`}</div>
+        <div className={styles.phrase}>{`${reportName}`}</div>
       </div>
       <form>
         <div className={styles.contentWrapper}>

@@ -35,7 +35,11 @@ export default function PartyDetailProfile({
         </button>
       </div>
       <div className={styles.profileItem}>
-        <Profile roomUsers={roomUsers} hostNickname={hostNickname} />
+        <Profile
+          roomUsers={roomUsers}
+          hostNickname={hostNickname}
+          roomStatus={status}
+        />
       </div>
       <ButtonHandler
         currentPeople={currentPeople}
@@ -55,9 +59,10 @@ export default function PartyDetailProfile({
 type ProfileProps = {
   roomUsers: PartyRoomUser[];
   hostNickname: string;
+  roomStatus: PartyRoomStatus;
 };
 
-function Profile({ roomUsers, hostNickname }: ProfileProps) {
+function Profile({ roomUsers, hostNickname, roomStatus }: ProfileProps) {
   return (
     <ul>
       {roomUsers.map(({ intraId, nickname, userImage }) => (
@@ -80,6 +85,14 @@ function Profile({ roomUsers, hostNickname }: ProfileProps) {
           <div style={{ color: nameToRGB(nickname) }}>
             {intraId || nickname}
           </div>
+          {roomStatus !== 'OPEN' && intraId ? (
+            <PartyRoomDetailButton.ReportNoShow
+              roomId={1}
+              userIntraId={intraId}
+            />
+          ) : (
+            <></>
+          )}
         </li>
       ))}
     </ul>
