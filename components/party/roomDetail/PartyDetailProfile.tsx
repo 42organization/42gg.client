@@ -1,38 +1,41 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { FaCrown } from 'react-icons/fa';
 import {
   PartyRoomDetail,
   PartyRoomStatus,
   PartyRoomUser,
 } from 'types/partyTypes';
+import { nameToRGB } from 'utils/color';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
 
 type PartyDetailProfileProps = {
   partyRoomDetail: PartyRoomDetail;
-  nameToRGB: (name: string) => string;
   fetchRoomDetail: () => void;
 };
 
 export default function PartyDetailProfile({
   partyRoomDetail,
-  nameToRGB,
   fetchRoomDetail,
 }: PartyDetailProfileProps) {
   const { currentPeople, minPeople, roomId, status, roomUsers, hostNickname } =
     partyRoomDetail;
+  const router = useRouter();
 
   return (
     <div className={styles.profile}>
       <div className={styles.line}>
         <span>{`인원 : ${currentPeople}`}</span>
+        <button
+          className={styles.exitBtn}
+          onClick={() => router.push('/party')}
+        >
+          X
+        </button>
       </div>
       <div className={styles.profileItem}>
-        <Profile
-          roomUsers={roomUsers}
-          nameToRGB={nameToRGB}
-          hostNickname={hostNickname}
-        />
+        <Profile roomUsers={roomUsers} hostNickname={hostNickname} />
       </div>
       <ButtonHandler
         currentPeople={currentPeople}
@@ -51,11 +54,10 @@ export default function PartyDetailProfile({
 
 type ProfileProps = {
   roomUsers: PartyRoomUser[];
-  nameToRGB: (name: string) => string;
   hostNickname: string;
 };
 
-function Profile({ roomUsers, hostNickname, nameToRGB }: ProfileProps) {
+function Profile({ roomUsers, hostNickname }: ProfileProps) {
   return (
     <ul>
       {roomUsers.map(({ intraId, nickname, userImage }) =>

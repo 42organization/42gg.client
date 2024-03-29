@@ -6,19 +6,18 @@ import {
   PartyRoomStatus,
 } from 'types/partyTypes';
 import { instance } from 'utils/axios';
+import { nameToRGB } from 'utils/color';
 import { dateToKRLocaleTimeString } from 'utils/handleTime';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
 
 type PartyRoomDetailProps = {
   partyRoomDetail: PartyRoomDetail;
-  nameToRGB: (name: string) => string;
   fetchRoomDetail: () => void;
 };
 
 export default function PartyDetailContentCommentBox({
   partyRoomDetail,
-  nameToRGB,
   fetchRoomDetail,
 }: PartyRoomDetailProps) {
   const totalComments = partyRoomDetail.comments.length;
@@ -28,7 +27,7 @@ export default function PartyDetailContentCommentBox({
       <div className={styles.contentCommentBox}>
         <div className={styles.comment}>댓글 ({totalComments})</div>
         <hr />
-        <CommentBox comments={partyRoomDetail.comments} nameToRGB={nameToRGB} />
+        <CommentBox comments={partyRoomDetail.comments} />
       </div>
       <CommentCreateBar
         roomId={partyRoomDetail.roomId}
@@ -40,13 +39,7 @@ export default function PartyDetailContentCommentBox({
   );
 }
 
-function CommentBox({
-  comments,
-  nameToRGB,
-}: {
-  comments: PartyComment[];
-  nameToRGB: (name: string) => string;
-}) {
+function CommentBox({ comments }: { comments: PartyComment[] }) {
   return (
     <div className={styles.commentBox}>
       {comments.map((comment) =>

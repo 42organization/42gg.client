@@ -28,7 +28,6 @@ export default function PartyDetailTitleBox({
       <div className={styles.titleLine}>
         <span className={styles.title}>{title}</span>
         <PartyRoomDetailButton.ReportRoom roomId={roomId} />
-        {/* <span className={styles.remainTime}>{time_message}</span> */}
       </div>
       <hr />
       <span className={styles.endTime}>{`마감 시간 : ${dateToKRLocaleTimeString(

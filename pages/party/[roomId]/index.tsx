@@ -35,18 +35,13 @@ export default function PartyDetailPage() {
 
   return partyRoomDetail && partyRoomDetail.status !== 'HIDDEN' ? (
     <div className={styles.detailPage}>
-      <button className={styles.exitBtn} onClick={() => router.push('/party')}>
-        X
-      </button>
       <PartyDetailTitleBox {...partyRoomDetail} />
       <PartyDetailProfile
         partyRoomDetail={partyRoomDetail}
-        nameToRGB={nameToRGB}
         fetchRoomDetail={fetchRoomDetail}
       />
       <PartyDetailContentCommentBox
         partyRoomDetail={partyRoomDetail}
-        nameToRGB={nameToRGB}
         fetchRoomDetail={fetchRoomDetail}
       />
     </div>
@@ -55,21 +50,4 @@ export default function PartyDetailPage() {
   ) : (
     <div>방이 존재하지 않습니다.</div>
   );
-}
-
-function nameToRGB(name: string): string {
-  const randomCode = [
-    name.charCodeAt(0) % 128,
-    name.charCodeAt(1) % 128,
-    name.charCodeAt(2) % 128,
-  ];
-
-  if (randomCode[0] < 64 || randomCode[1] < 64 || randomCode[2] < 64) {
-    randomCode[randomCode[0] % 3] = 128 - randomCode[randomCode[0] % 3];
-  }
-  const red = randomCode[0] + 128;
-  const green = randomCode[1] + 128;
-  const blue = randomCode[2] + 128;
-
-  return `rgb(${red}, ${green}, ${blue})`;
 }
