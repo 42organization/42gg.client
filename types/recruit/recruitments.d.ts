@@ -49,7 +49,7 @@ export interface IRecruitmentDetail {
   title: string;
   contents: string;
   generations: string;
-  form: IQuestionForm[];
+  forms: IQuestionForm[];
 }
 
 export interface IApplicantAnswer {
@@ -59,11 +59,31 @@ export interface IApplicantAnswer {
   answer?: string;
 }
 
-export interface IRefs {
-  id: number;
-  type: recruitmentQuestionTypes;
-  ref: HTMLInputElement[];
+export type ApplicationFormType = 'APPLY' | 'VIEW' | 'EDIT';
+export interface IUserApplicationInfo {
+  applicationId: number;
+  endDate: string;
+  title: string;
+  content: string;
 }
+
+export interface IapplicationAlertState {
+  alertState: boolean;
+  message: string;
+  severity: AlertColor | undefined;
+}
+
+export interface IapplicationModal {
+  state: boolean;
+  content: 'APPLY' | 'CANCEL' | 'EDIT' | 'NONE';
+  formData: IApplicantAnswer[];
+}
+
+export interface IRecruitmentDetailUser extends IUserApplicationInfo {
+  forms: IApplicantAnswer[];
+}
+
+export type refMap = { [key: number]: HTMLDivElement };
 
 export type RecruitmentMessageType = 'INTERVIEW' | 'PASS' | 'FAIL';
 
