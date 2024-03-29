@@ -48,7 +48,7 @@ function ReportRoom({ roomId }: ParytButtonProps) {
         });
       }}
     >
-      <LuAlertTriangle color='gray' size={20} />
+      <LuAlertTriangle color='gray' />
     </button>
   );
 }

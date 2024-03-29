@@ -87,8 +87,8 @@ function CommentBox({
               <div className={styles.commentIntraId}>
                 {comment.intraId || comment.nickname}
               </div>
-              <div>
-                <div>{comment.content}</div>
+              <div className={styles.commentContentContainer}>
+                <div className={styles.commentContent}>{comment.content}</div>
                 <div className={styles.commentInfo}>
                   <div className={styles.commentTime}>
                     {`(${dateToKRLocaleTimeString(

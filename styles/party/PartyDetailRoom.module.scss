@@ -16,7 +16,13 @@ $detailCommonRem: 1rem;
   justify-content: space-between;
   display: flex;
 }
-
+.commentContent {
+  font-weight: 400;
+  word-break: break-word;
+}
+.commentContentContainer {
+  width: 100%;
+}
 .category {
   display: flex;
   max-height: 1.2rem;
@@ -33,34 +39,35 @@ $detailCommonRem: 1rem;
 
 .endTime {
   display: flex;
-  margin-top: auto;
+  margin: 0.4rem 0;
   font-size: 0.7rem;
+  font-weight: 300;
   color: gray;
-  text-align: right;
   opacity: 0.9;
   justify-content: right;
+  align-items: flex-end;
 }
 
 .reportRoomBtn {
   display: flex;
-  justify-content: right;
-  margin-top: auto;
-  margin-left: auto;
+  align-items: flex-end;
+  padding: 0 0 0 0.3rem;
   background-color: inherit;
   border: none;
   opacity: 0.7;
 }
 
 .commentIntraId {
-  display: flex;
-  margin-right: 3rem;
-  justify-items: center;
+  width: 4rem;
+  font-weight: 600;
+  white-space: pre-wrap;
 }
 
 .commentTime {
   display: flex;
   margin-top: auto;
   font-size: 0.7rem;
+  font-weight: 300;
   color: gray;
   text-align: right;
   opacity: 0.9;
@@ -119,11 +126,14 @@ $detailCommonRem: 1rem;
     .remainTime {
       padding: 0.3rem;
       margin: 0.2rem;
-      margin-right: 0rem;
       font-size: $small-font;
       color: aliceblue;
       background-color: $pp-gray;
       border-radius: $medium-radius;
+    }
+
+    hr {
+      border-top: 1px solid $medium-gray;
     }
   }
 
@@ -231,6 +241,7 @@ $detailCommonRem: 1rem;
       display: flex;
       margin-top: 0;
       margin-bottom: 0.1rem;
+      font-size: $small-font;
       white-space: pre-wrap;
     }
 

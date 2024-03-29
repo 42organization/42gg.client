@@ -1,5 +1,5 @@
-import { PartyRoomDetail, PartyRoomStatus } from 'types/partyTypes';
-import { dateToKRLocaleTimeString, getRemainTime } from 'utils/handleTime';
+import { PartyRoomDetail } from 'types/partyTypes';
+import { dateToKRLocaleTimeString } from 'utils/handleTime';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
 
@@ -27,12 +27,12 @@ export default function PartyDetailTitleBox({
 
       <div className={styles.titleLine}>
         <span className={styles.title}>{title}</span>
+      </div>
+      <div className={styles.endTime}>
+        {`마감 시간 : ${dateToKRLocaleTimeString(new Date(dueDate))}`}
         <PartyRoomDetailButton.ReportRoom roomId={roomId} />
       </div>
       <hr />
-      <span className={styles.endTime}>{`마감 시간 : ${dateToKRLocaleTimeString(
-        new Date(dueDate)
-      )}`}</span>
       <div className={styles.content}>{content}</div>
     </div>
   );
