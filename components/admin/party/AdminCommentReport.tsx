@@ -17,7 +17,7 @@ import {
   AdminTableHead,
 } from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
-import styles from 'styles/admin/Party/AdminPartyCommon.module.scss';
+import styles from 'styles/admin/party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: '번호',

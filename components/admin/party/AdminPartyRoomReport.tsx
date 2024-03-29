@@ -17,7 +17,7 @@ import {
   AdminTableHead,
 } from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
-import styles from 'styles/admin/Party/AdminPartyCommon.module.scss';
+import styles from 'styles/admin/party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: '번호',
@@ -31,7 +31,7 @@ const tableTitle: { [key: string]: string } = {
 export default function AdminPartyRoomReport() {
   const [roomInfo, setRoomInfo] = useState<PartyRoomReportTable>({
     roomReportList: [],
-    totalPage: 0,
+    totalPages: 0,
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -44,7 +44,7 @@ export default function AdminPartyRoomReport() {
       .then((res) => {
         setRoomInfo({
           roomReportList: res.data.roomReportList,
-          totalPage: res.data.totalPage,
+          totalPages: res.data.totalPage,
           currentPage: currentPage,
         });
       })
@@ -92,7 +92,7 @@ export default function AdminPartyRoomReport() {
       <div className={styles.pageNationContainer}>
         <PageNation
           curPage={roomInfo.currentPage}
-          totalPages={roomInfo.totalPage}
+          totalPages={roomInfo.totalPages}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}

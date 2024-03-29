@@ -13,7 +13,7 @@ import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/admin/table';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import { usePartyTemplate } from 'hooks/party/usePartyTemplate';
-import styles from 'styles/admin/Party/AdminPartyCommon.module.scss';
+import styles from 'styles/admin/party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   gameTemplateId: '템플릿번호',
