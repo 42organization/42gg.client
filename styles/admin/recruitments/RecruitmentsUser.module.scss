@@ -5,9 +5,11 @@
 .tableContainer {
   width: 100px;
   margin: auto;
+  overflow-x: scroll;
 
   .table {
     width: max-content;
+    min-width: 100%;
     .tableHeader {
       background-color: lightgray;
       .tableHeaderItem {
@@ -19,7 +21,6 @@
       }
     }
     .tableBody {
-      overflow-x: auto;
       .tableRow {
         &:nth-child(odd) {
           background-color: #f9fafb;
@@ -73,6 +74,13 @@
   @include admin-button('PALE-BLUE');
   padding: 0.5rem 1.3rem;
   margin-top: 1rem;
+}
+
+.filterWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.3rem;
 }
 
 @include pagination;

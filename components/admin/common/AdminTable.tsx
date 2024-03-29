@@ -86,7 +86,7 @@ export function DetailContentHover({
       <div className={styles.info}>
         {(content?.toString() || '').slice(0, maxLen)}...
       </div>
-      <div className={`${styles.hoverInfo}`}>{content}</div>
+      {/* <div className={`${styles.hoverInfo}`}>{content}</div> */}
     </div>
   ) : (
     <div>{content?.toString()}</div>

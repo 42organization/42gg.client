@@ -4,8 +4,7 @@ const fullRecruitData1 = {
   applications: [
     {
       applicationId: 1,
-      intraId:
-        'test1213412342134231412412423142142142134213423421341243123412341234124124124123',
+      intraId: 'test1',
       status: '합격',
       form: [
         {
@@ -26,11 +25,13 @@ const fullRecruitData1 = {
           inputType: 'MULTI_CHECK',
           checkedList: [
             {
-              checkId: 1,
-              content: [
-                { checkId: 1, content: '선택지 1' },
-                { checkId: 2, content: '선택지 2' },
-              ],
+              checkId: 2,
+              content: '선택지 2',
+            },
+            {
+              checkId: 3,
+              content:
+                '선택지 3ㅁㄴㅇㄹㄴㅁㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㄹㅁㄴㄹㅁㄴㅁㄴㄹㅁ',
             },
           ],
         },
@@ -40,11 +41,13 @@ const fullRecruitData1 = {
           inputType: 'MULTI_CHECK',
           checkedList: [
             {
-              checkId: 1,
-              content: [
-                { checkId: 1, content: '선택지 1' },
-                { checkId: 2, content: '123456789012345678901234567890' },
-              ],
+              checkId: 2,
+              content: '선택지 2',
+            },
+            {
+              checkId: 4,
+              content:
+                '선택지 2sadfsadfasdfasfsadfasfasdㅁㄴㅇㄹㅁㄴㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㄴㅁㅇㄹㅁㄴㄹㅁㄴㄹㄴㅁㄹㅁㄴㄹㅁㄴㄹㅁㄴㄹㅁㄹ',
             },
           ],
         },
@@ -73,8 +76,8 @@ const fullRecruitData1 = {
           inputType: 'SINGLE_CHECK',
           checkedList: [
             {
-              checkId: 1,
-              content: '여',
+              checkId: 6,
+              content: '남',
             },
           ],
         },
@@ -103,7 +106,7 @@ const fullRecruitData1 = {
           inputType: 'SINGLE_CHECK',
           checkedList: [
             {
-              checkId: 1,
+              checkId: 5,
               content: '여',
             },
           ],

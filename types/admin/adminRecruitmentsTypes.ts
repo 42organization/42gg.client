@@ -25,8 +25,8 @@ export interface Iquestion {
 }
 
 export interface IcheckItem {
-  checkId?: number;
-  content: Array<{ checkId: number; content: string }>;
+  checkId: number;
+  content: string;
 }
 
 export interface Inotication {
@@ -51,4 +51,10 @@ export interface IrecruitUserTable {
   intraId: string;
   status?: '합격' | '불합격' | '심사중';
   form: Iquestion[];
+}
+
+export interface IrecruitArrayTable {
+  applications: IrecruitUserTable[];
+  totalPage: number;
+  currentPage: number;
 }
