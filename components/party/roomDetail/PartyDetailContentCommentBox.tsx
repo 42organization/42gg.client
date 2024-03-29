@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import { IoSendSharp } from 'react-icons/io5';
 import {
   PartyComment,
@@ -21,13 +21,26 @@ export default function PartyDetailContentCommentBox({
   fetchRoomDetail,
 }: PartyRoomDetailProps) {
   const totalComments = partyRoomDetail.comments.length;
+  const [isSpreadComment, setIsSpreadComment] = useState(false);
+  const spreadbtnName = isSpreadComment ? '▲ 접기' : '▼ 펼치기';
+  const onSpreadComment = () => {
+    setIsSpreadComment(!isSpreadComment);
+  };
 
   return (
     <>
       <div className={styles.contentCommentBox}>
-        <div className={styles.comment}>댓글 ({totalComments})</div>
+        <div className={styles.commentContainer}>
+          <div className={styles.comment}>댓글 ({totalComments})</div>
+          <button className={styles.spreadBtn} onClick={onSpreadComment}>
+            {spreadbtnName}
+          </button>
+        </div>
         <hr />
-        <CommentBox comments={partyRoomDetail.comments} />
+        <CommentBox
+          comments={partyRoomDetail.comments}
+          isSpreadComment={isSpreadComment}
+        />
       </div>
       <CommentCreateBar
         roomId={partyRoomDetail.roomId}
@@ -39,9 +52,26 @@ export default function PartyDetailContentCommentBox({
   );
 }
 
-function CommentBox({ comments }: { comments: PartyComment[] }) {
+function CommentBox({
+  comments,
+  isSpreadComment,
+}: {
+  comments: PartyComment[];
+  isSpreadComment: boolean;
+}) {
+  const commentBoxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (commentBoxRef.current) {
+      commentBoxRef.current.scrollTop = commentBoxRef.current.scrollHeight;
+    }
+  }, [comments]);
+
   return (
-    <div className={styles.commentBox}>
+    <div
+      className={`${styles.commentBox} ${isSpreadComment ? styles.spread : ''}`}
+      ref={commentBoxRef}
+    >
       {comments.map((comment) =>
         comment.isHidden ? (
           <div key={comment.commentId} className={styles.commentHidden}>

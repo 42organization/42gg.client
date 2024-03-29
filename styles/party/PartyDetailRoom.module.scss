@@ -4,6 +4,19 @@
 $detail-btn-weight: bold;
 $detailCommonRem: 1rem;
 
+.spreadBtn {
+  display: flex;
+  margin: 0;
+  background-color: inherit;
+  border: none;
+}
+
+.commentContainer {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+
 .category {
   display: flex;
   max-height: 1.2rem;
@@ -71,6 +84,7 @@ $detailCommonRem: 1rem;
 
   .titleBox {
     position: flex;
+    min-height: 14rem;
     padding: $detailCommonRem * 0.7;
     background-color: white;
     border-radius: $mini-radius;
@@ -203,13 +217,13 @@ $detailCommonRem: 1rem;
   .contentCommentBox {
     position: relative;
     width: 100%;
+    min-height: 10rem;
     padding: $detailCommonRem * 0.7;
     padding-bottom: 0.3rem;
     background-color: white;
     border-radius: $mini-radius;
 
     .content {
-      min-height: 9rem;
       margin-bottom: $detailCommonRem * 0.5;
     }
 
@@ -225,8 +239,10 @@ $detailCommonRem: 1rem;
     }
 
     .commentBox {
-      min-height: 10rem;
-      // max-height: 10rem;
+      max-height: 10rem;
+      &.spread {
+        max-height: fit-content;
+      }
       overflow: auto;
     }
 
@@ -246,7 +262,6 @@ $detailCommonRem: 1rem;
       .reportCommentBtn {
         display: flex;
         justify-items: right;
-
         background-color: inherit;
         border: none;
       }
