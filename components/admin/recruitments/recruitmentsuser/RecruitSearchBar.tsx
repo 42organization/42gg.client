@@ -1,24 +1,20 @@
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
+import useRecruitmentUserFilter from 'hooks/recruitments/useRecruitmentUserFilter';
 import useSearchBar from 'hooks/useSearchBar';
 import styles from 'styles/admin/common/AdminSearchBar.module.scss';
 
 const MAX_SEARCH_LENGTH = 15;
 
-export default function RecruitSearchBar({
-  initSearch,
-}: {
-  initSearch: (searchString?: string) => void;
-}) {
-  const { keyword, setKeyword, keywordHandler, searchResult, searchBarRef } =
-    useSearchBar();
+export default function RecruitSearchBar() {
+  const { keyword, setKeyword, searchBarRef } = useSearchBar();
+
+  const { initSearch } = useRecruitmentUserFilter();
 
   const adminhandleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      if (keyword === searchResult[0]) {
-        event.currentTarget.blur();
-        initSearch(keyword);
-      }
+      event.currentTarget.blur();
+      initSearch(keyword);
     }
   };
 
@@ -26,7 +22,9 @@ export default function RecruitSearchBar({
     <div className={styles.adminSearchBar} ref={searchBarRef}>
       <input
         type='text'
-        onChange={keywordHandler}
+        onChange={(e) => {
+          setKeyword(e.target.value);
+        }}
         onKeyDown={adminhandleKeyDown}
         placeholder='검색하기...'
         maxLength={MAX_SEARCH_LENGTH}

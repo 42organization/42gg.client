@@ -4,16 +4,17 @@ import {
   Select,
   OutlinedInput,
   MenuItem,
-  Checkbox,
   ListItemText,
   SelectChangeEvent,
- TableRowProps } from '@mui/material';
+} from '@mui/material';
 import {
   IcheckItem,
   IrecruitUserTable,
 } from 'types/admin/adminRecruitmentsTypes';
+import useRecruitmentUserFilter from 'hooks/recruitments/useRecruitmentUserFilter';
 import styles from 'styles/admin/recruitments/RecruitmentsUser.module.scss';
 import RecruitSearchBar from './RecruitSearchBar';
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -25,51 +26,31 @@ const MenuProps = {
   },
 };
 
-function FilterQptionsUI(
-  recruitUserData: IrecruitUserTable[],
-  questions: string[]
-) {
+function FilterQptionsUI(recruitUserData: IrecruitUserTable[]) {
   const [answers, setAnswers] = useState<Array<IcheckItem>>([]);
-  const [checklistIds, setChecklistIds] = useState<Array<IcheckItem>>([]);
-  const [searchString, setSearchString] = useState<string>('');
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
-  const initSearch = useCallback((searchString?: string) => {
-    setSearchString(searchString || '');
-    setCurrentPage(1);
-  }, []);
-
-  const handleChecklistChange = (
-    event: SelectChangeEvent<typeof checklistIds>
-  ) => {
-    const {
-      target: { value },
-    } = event;
-    typeof value !== 'string' ? setChecklistIds(value) : value;
-  };
+  const { checklistIds, handleChecklistChange } = useRecruitmentUserFilter();
 
   useEffect(() => {
-    const newAnswers: Array<IcheckItem> = [];
-
-    recruitUserData.forEach((recruit) => {
-      recruit.form.forEach((formItem) => {
-        if (formItem.inputType !== 'TEXT') {
-          formItem.checkedList?.forEach((item) => {
-            if (!newAnswers.some((answer) => answer.checkId === item.checkId)) {
-              newAnswers.push(item);
-            }
-          });
-        }
-      });
-    });
-
-    setAnswers(newAnswers);
-  }, [recruitUserData, questions]);
+    setAnswers(
+      recruitUserData.reduce((acc, recruit) => {
+        recruit.form.forEach((formItem) => {
+          if (formItem.inputType !== 'TEXT') {
+            formItem.checkedList?.forEach((item) => {
+              if (!acc.some((answer) => answer.checkId === item.checkId)) {
+                acc.push(item);
+              }
+            });
+          }
+        });
+        return acc;
+      }, [] as Array<IcheckItem>)
+    );
+  }, [recruitUserData]);
 
   return (
     <div className={styles.filterWrap}>
       <div className={styles.searchWrap}>
-        <RecruitSearchBar initSearch={initSearch} />
+        <RecruitSearchBar />
       </div>
       <div className={styles.selectWrap}>
         <FormControl sx={{ m: 1, width: 200 }}>
@@ -84,7 +65,7 @@ function FilterQptionsUI(
             MenuProps={MenuProps}
           >
             {answers.map((answer: IcheckItem, index) => (
-              <MenuItem key={index} value={answer.content}>
+              <MenuItem key={index} value={answer.checkId}>
                 <ListItemText primary={answer.content} />
               </MenuItem>
             ))}
