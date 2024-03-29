@@ -4,7 +4,6 @@
 .pageContainer {
   @include pageWrap;
   color: $white1;
-  background: $party-gradien4;
 }
 
 .selectionPageContainer {
@@ -138,9 +137,20 @@
         font-weight: 600;
         letter-spacing: 1px;
       }
-      &.titleLabel > input {
-        width: 100%;
-        padding-left: 8px;
+      &.titleLabel {
+        position: relative;
+
+        input {
+          width: 100%;
+          padding-left: 8px;
+        }
+        .titleCount {
+          position: absolute;
+          right: 0.5em;
+          bottom: 0.5em;
+          font-size: $medium-font;
+          color: $medium-gray;
+        }
       }
       .peopleSelectWrap {
         display: flex;
@@ -151,13 +161,13 @@
           width: 2.5em;
           text-align: center;
         }
-        div {
-          display: flex;
-          justify-content: center;
+        .textCenter {
           width: 2.5em;
+          text-align: center;
         }
       }
       .dueDateWrap {
+        position: relative;
         display: flex;
         align-items: center;
         font-size: $big-font;
@@ -166,18 +176,37 @@
           width: 2.5em;
           text-align: center;
         }
-        div {
-          display: flex;
-          justify-content: center;
+        .textCenter {
           width: 2.5em;
+          text-align: center;
+        }
+        .dueDate {
+          position: absolute;
+          right: 0;
+          padding: 0.5em;
+          font-size: $medium-font;
+          color: $medium-gray;
+          text-wrap: nowrap;
+          border-radius: 8px;
         }
       }
-      &.contentLabel > textarea {
-        height: 100%;
-        padding: 0.8em;
-        overflow-y: scroll;
-        font-size: $medium-font;
-        line-height: 1.3em;
+      &.contentLabel {
+        position: relative;
+
+        textarea {
+          height: 100%;
+          padding: 0.8em;
+          overflow-y: scroll;
+          font-size: $medium-font;
+          line-height: 1.3em;
+        }
+        .contentCount {
+          position: absolute;
+          right: 0.5em;
+          bottom: 0.5em;
+          font-size: $medium-font;
+          color: $medium-gray;
+        }
       }
     }
     .submitButtonWrap {

@@ -30,9 +30,6 @@
   &.party-main {
     background: url('/image/party-background.png');
   }
-  &.party-detail {
-    background: linear-gradient(black, $party-blue-dark2 70%, $party-blue-sky3);
-  }
   @each $theme, $color in $bg-theme-colors {
     &.#{$theme} {
       background: map-get($map: $color, $key: 'background');

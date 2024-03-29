@@ -127,4 +127,4 @@ export type PartyPenaltyAdmin = {
   penaltyTime: number;
 };
 
-export type PartyColors = 'PARTY-MAIN' | 'PARTY-DETAIL';
+export type PartyColors = 'PARTY-MAIN';
