@@ -5,7 +5,6 @@ import {
   PartyRoomStatus,
   PartyRoomUser,
 } from 'types/partyTypes';
-import { dateToStringShort } from 'utils/handleTime';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
 
@@ -20,22 +19,13 @@ export default function PartyDetailProfile({
   nameToRGB,
   fetchRoomDetail,
 }: PartyDetailProfileProps) {
-  const {
-    currentPeople,
-    minPeople,
-    maxPeople,
-    dueDate,
-    roomId,
-    status,
-    roomUsers,
-    hostNickname,
-  } = partyRoomDetail;
+  const { currentPeople, minPeople, roomId, status, roomUsers, hostNickname } =
+    partyRoomDetail;
 
   return (
     <div className={styles.profile}>
       <div className={styles.line}>
-        <span>{`현재 ${currentPeople} | 모집 인원 ${minPeople} ~ ${maxPeople}`}</span>
-        <span>{`${dateToStringShort(new Date(dueDate))}`}</span>
+        <span>{`인원 : ${currentPeople}`}</span>
       </div>
       <div className={styles.profileItem}>
         <Profile

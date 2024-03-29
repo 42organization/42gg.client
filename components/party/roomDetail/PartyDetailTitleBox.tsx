@@ -1,43 +1,40 @@
-import { PartyRoomStatus } from 'types/partyTypes';
-import { getRemainTime } from 'utils/handleTime';
+import { PartyRoomDetail, PartyRoomStatus } from 'types/partyTypes';
+import { dateToKRLocaleTimeString, getRemainTime } from 'utils/handleTime';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
-
-type PartyDetailTitleBoxProps = {
-  title: string;
-  categoryName: string;
-  roomId: number;
-  dueDate: string;
-  status: PartyRoomStatus;
-};
 
 export default function PartyDetailTitleBox({
   categoryName,
   title,
-  roomId,
   dueDate,
-  status,
-}: PartyDetailTitleBoxProps) {
-  const time_message =
-    status === 'OPEN'
-      ? getRemainTime({ targetTime: new Date(dueDate) })
-      : '모집마감';
+  roomId,
+  content,
+  minPeople,
+  maxPeople,
+}: PartyRoomDetail) {
+  const startPerson =
+    minPeople === maxPeople ? maxPeople : `${minPeople} ~ ${maxPeople}`;
 
   return (
     <div className={styles.titleBox}>
       <div className={styles.titleLine}>
-        <div className={styles.titleCategory}>{`#${
-          categoryName || '기타'
-        }`}</div>
-        <span>
-          <PartyRoomDetailButton.ReportRoom roomId={roomId} />
-          <PartyRoomDetailButton.ShareRoom />
-        </span>
+        <div className={styles.tag}>
+          <div className={styles.category}>{`# ${categoryName || '기타'}`}</div>
+          <div className={styles.category}>{`# ${startPerson}인`}</div>
+        </div>
+        <PartyRoomDetailButton.ShareRoom />
       </div>
+
       <div className={styles.titleLine}>
-        <div className={styles.titleContent}>{title}</div>
-        <span className={styles.remainTime}>{time_message}</span>
+        <span className={styles.title}>{title}</span>
+        <PartyRoomDetailButton.ReportRoom roomId={roomId} />
+        {/* <span className={styles.remainTime}>{time_message}</span> */}
       </div>
+      <hr />
+      <span className={styles.endTime}>{`마감 시간 : ${dateToKRLocaleTimeString(
+        new Date(dueDate)
+      )}`}</span>
+      <div className={styles.content}>{content}</div>
     </div>
   );
 }

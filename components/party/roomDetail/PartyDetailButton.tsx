@@ -1,12 +1,11 @@
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { CiShare2 } from 'react-icons/ci';
-import { PiSirenFill } from 'react-icons/pi';
+import { LuAlertTriangle } from 'react-icons/lu';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
-
 type ParytButtonProps = {
   roomId?: number;
   commentId?: number;
@@ -17,7 +16,7 @@ function ReportComment({ commentId }: ParytButtonProps) {
 
   return (
     <button
-      className={styles.commentBtn}
+      className={styles.reportCommentBtn}
       onClick={() => {
         setModal({
           partyReport: {
@@ -28,7 +27,7 @@ function ReportComment({ commentId }: ParytButtonProps) {
         });
       }}
     >
-      <PiSirenFill color='red' />
+      <LuAlertTriangle color='gray' />
     </button>
   );
 }
@@ -49,7 +48,7 @@ function ReportRoom({ roomId }: ParytButtonProps) {
         });
       }}
     >
-      <PiSirenFill color='red' size={20} />
+      <LuAlertTriangle color='gray' size={20} />
     </button>
   );
 }
@@ -73,7 +72,7 @@ function ShareRoom() {
         });
       }}
     >
-      <CiShare2 size={20} />
+      <CiShare2 size={30} />
     </button>
   );
 }
