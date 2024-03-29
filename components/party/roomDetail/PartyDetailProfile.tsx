@@ -60,44 +60,28 @@ type ProfileProps = {
 function Profile({ roomUsers, hostNickname }: ProfileProps) {
   return (
     <ul>
-      {roomUsers.map(({ intraId, nickname, userImage }) =>
-        intraId ? (
-          <li key={intraId} className={styles.user}>
-            {nickname === hostNickname && (
-              <div className={styles.crown}>
-                <FaCrown color='gold' />
-              </div>
-            )}
-            <Image
-              src={
-                userImage ||
-                `https://random.dog/7f6f49dd-7ca5-46bd-97fb-c534628f9a2b.jpg`
-              }
-              className={styles.profileImg}
-              alt={intraId}
-              width={40}
-              height={40}
-            />
-            <div style={{ color: nameToRGB(nickname) }}>{intraId}</div>
-          </li>
-        ) : (
-          <li key={nickname} className={styles.user}>
-            {nickname === hostNickname && (
-              <div className={styles.crown}>
-                <FaCrown color='gold' />
-              </div>
-            )}
-            <Image
-              src={`https://random.dog/7f6f49dd-7ca5-46bd-97fb-c534628f9a2b.jpg`}
-              className={styles.profileImg}
-              alt={nickname}
-              width={40}
-              height={40}
-            />
-            <div style={{ color: nameToRGB(nickname) }}>{nickname}</div>
-          </li>
-        )
-      )}
+      {roomUsers.map(({ intraId, nickname, userImage }) => (
+        <li key={intraId || nickname} className={styles.user}>
+          {nickname === hostNickname && (
+            <div className={styles.crown}>
+              <FaCrown color='gold' />
+            </div>
+          )}
+          <Image
+            src={
+              userImage ||
+              `https://random.dog/7f6f49dd-7ca5-46bd-97fb-c534628f9a2b.jpg`
+            }
+            className={styles.profileImg}
+            alt={intraId || nickname}
+            width={40}
+            height={40}
+          />
+          <div style={{ color: nameToRGB(nickname) }}>
+            {intraId || nickname}
+          </div>
+        </li>
+      ))}
     </ul>
   );
 }
