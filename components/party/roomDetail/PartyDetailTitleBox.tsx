@@ -1,5 +1,5 @@
 import { PartyRoomDetail } from 'types/partyTypes';
-import { dateToKRLocaleTimeString } from 'utils/handleTime';
+import { dateToKRLocaleTimeString, getRemainTime } from 'utils/handleTime';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
 
@@ -9,9 +9,15 @@ export default function PartyDetailTitleBox({
   dueDate,
   roomId,
   content,
+  status,
   minPeople,
   maxPeople,
 }: PartyRoomDetail) {
+  const timeViewer =
+    status === 'OPEN'
+      ? `마감 시간 : ${dateToKRLocaleTimeString(new Date(dueDate))}`
+      : '마감';
+
   const startPerson =
     minPeople === maxPeople ? maxPeople : `${minPeople} ~ ${maxPeople}`;
 
@@ -29,11 +35,11 @@ export default function PartyDetailTitleBox({
         <span className={styles.title}>{title}</span>
       </div>
       <div className={styles.endTime}>
-        {`마감 시간 : ${dateToKRLocaleTimeString(new Date(dueDate))}`}
+        {timeViewer}
         <PartyRoomDetailButton.ReportRoom roomId={roomId} />
       </div>
       <hr />
-      <div className={styles.content}>{content}</div>
+      <div className={styles.detailContent}>{content}</div>
     </div>
   );
 }
