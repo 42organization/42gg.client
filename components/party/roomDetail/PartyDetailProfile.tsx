@@ -31,7 +31,7 @@ export default function PartyDetailProfile({
           className={styles.exitBtn}
           onClick={() => router.push('/party')}
         >
-          X
+          로비
         </button>
       </div>
       <div className={styles.profileItem}>
