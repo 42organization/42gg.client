@@ -76,32 +76,33 @@ function CommentBox({
     >
       {comments.map((comment) =>
         comment.isHidden ? (
-          <div key={comment.commentId} className={styles.commentHidden}>
+          <div
+            key={comment.commentId + 'Hidden'}
+            className={styles.commentHidden}
+          >
             숨김 처리된 댓글입니다.
           </div>
         ) : (
-          <>
-            <div
-              key={comment.commentId}
-              style={{ color: nameToRGB(comment.nickname) }}
-              className={styles.comment}
-            >
-              <div className={styles.commentIntraId}>
-                {comment.intraId || comment.nickname}
-              </div>
-              <div className={styles.commentContentContainer}>
-                <div className={styles.commentContent}>{comment.content}</div>
-                <div className={styles.commentInfo}>
-                  <div className={styles.commentTime}>
-                    {`(${dateToKRLocaleTimeString(
-                      new Date(comment.createDate)
-                    )})`}
-                  </div>
-                  <PartyRoomDetailButton.ReportComment />
+          <div
+            key={comment.commentId}
+            style={{ color: nameToRGB(comment.nickname) }}
+            className={styles.comment}
+          >
+            <div className={styles.commentIntraId}>
+              {comment.intraId || comment.nickname}
+            </div>
+            <div className={styles.commentContentContainer}>
+              <div className={styles.commentContent}>{comment.content}</div>
+              <div className={styles.commentInfo}>
+                <div className={styles.commentTime}>
+                  {`(${dateToKRLocaleTimeString(
+                    new Date(comment.createDate)
+                  )})`}
                 </div>
+                <PartyRoomDetailButton.ReportComment />
               </div>
             </div>
-          </>
+          </div>
         )
       )}
     </div>
