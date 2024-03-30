@@ -99,7 +99,9 @@ function CommentBox({
                     new Date(comment.createDate)
                   )})`}
                 </div>
-                <PartyRoomDetailButton.ReportComment />
+                <PartyRoomDetailButton.ReportComment
+                  commentId={comment.commentId}
+                />
               </div>
             </div>
           </div>
