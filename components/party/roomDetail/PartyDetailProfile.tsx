@@ -39,6 +39,7 @@ export default function PartyDetailProfile({
           roomUsers={roomUsers}
           hostNickname={hostNickname}
           roomStatus={status}
+          roomId={roomId}
         />
       </div>
       <ButtonHandler
@@ -60,9 +61,15 @@ type ProfileProps = {
   roomUsers: PartyRoomUser[];
   hostNickname: string;
   roomStatus: PartyRoomStatus;
+  roomId: number;
 };
 
-function Profile({ roomUsers, hostNickname, roomStatus }: ProfileProps) {
+function Profile({
+  roomUsers,
+  hostNickname,
+  roomStatus,
+  roomId,
+}: ProfileProps) {
   return (
     <ul>
       {roomUsers.map(({ intraId, nickname, userImage }) => (
@@ -87,7 +94,7 @@ function Profile({ roomUsers, hostNickname, roomStatus }: ProfileProps) {
           </div>
           {roomStatus !== 'OPEN' && intraId ? (
             <PartyRoomDetailButton.ReportNoShow
-              roomId={1}
+              roomId={roomId}
               userIntraId={intraId}
             />
           ) : (

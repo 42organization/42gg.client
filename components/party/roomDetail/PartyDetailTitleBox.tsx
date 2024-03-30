@@ -30,7 +30,6 @@ export default function PartyDetailTitleBox({
         </div>
         <PartyRoomDetailButton.ShareRoom />
       </div>
-
       <div className={styles.titleLine}>
         <span className={styles.title}>{title}</span>
       </div>
