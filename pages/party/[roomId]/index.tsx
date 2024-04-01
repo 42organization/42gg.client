@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { PartyRoomDetail } from 'types/partyTypes';
 import { instance } from 'utils/axios';
-import PartyDetailContentCommentBox from 'components/party/roomDetail/PartyDetailContentCommentBox';
+import PartyDetailCommentBox from 'components/party/roomDetail/PartyDetailContentCommentBox';
 import PartyDetailProfile from 'components/party/roomDetail/PartyDetailProfile';
 import PartyDetailTitleBox from 'components/party/roomDetail/PartyDetailTitleBox';
 import usePartyColorMode from 'hooks/party/usePartyColorMode';
@@ -40,7 +40,7 @@ export default function PartyDetailPage() {
         partyRoomDetail={partyRoomDetail}
         fetchRoomDetail={fetchRoomDetail}
       />
-      <PartyDetailContentCommentBox
+      <PartyDetailCommentBox
         partyRoomDetail={partyRoomDetail}
         fetchRoomDetail={fetchRoomDetail}
       />

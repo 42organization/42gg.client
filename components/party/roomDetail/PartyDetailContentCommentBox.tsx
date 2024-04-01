@@ -18,7 +18,7 @@ type PartyRoomDetailProps = {
   fetchRoomDetail: () => void;
 };
 
-export default function PartyDetailContentCommentBox({
+export default function PartyDetailCommentBox({
   partyRoomDetail,
   fetchRoomDetail,
 }: PartyRoomDetailProps) {
