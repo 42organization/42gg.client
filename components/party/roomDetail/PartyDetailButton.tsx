@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { CiShare2 } from 'react-icons/ci';
-import { PiSirenFill } from 'react-icons/pi';
+import { LuAlertTriangle } from 'react-icons/lu';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
@@ -10,6 +10,7 @@ import styles from 'styles/party/PartyDetailRoom.module.scss';
 type ParytButtonProps = {
   roomId?: number;
   commentId?: number;
+  userIntraId?: string;
 };
 
 function ReportComment({ commentId }: ParytButtonProps) {
@@ -17,7 +18,7 @@ function ReportComment({ commentId }: ParytButtonProps) {
 
   return (
     <button
-      className={styles.commentBtn}
+      className={styles.reportCommentBtn}
       onClick={() => {
         setModal({
           partyReport: {
@@ -28,7 +29,7 @@ function ReportComment({ commentId }: ParytButtonProps) {
         });
       }}
     >
-      <PiSirenFill color='red' />
+      <LuAlertTriangle color='gray' />
     </button>
   );
 }
@@ -49,7 +50,30 @@ function ReportRoom({ roomId }: ParytButtonProps) {
         });
       }}
     >
-      <PiSirenFill color='red' />
+      <LuAlertTriangle color='gray' />
+    </button>
+  );
+}
+
+function ReportNoShow({ roomId, userIntraId }: ParytButtonProps) {
+  const setModal = useSetRecoilState(modalState);
+
+  return (
+    <button
+      className={styles.noShowBtn}
+      onClick={() => {
+        setModal({
+          partyReport: {
+            name: 'NOSHOW',
+            roomId: roomId,
+            userIntraId: userIntraId,
+          },
+          modalName: 'PARTY-REPORT',
+        });
+      }}
+    >
+      <div style={{ margin: '0 0.3rem' }}>노쇼 신고</div>
+      <LuAlertTriangle color='gray' style={{ marginTop: 'auto' }} />
     </button>
   );
 }
@@ -62,7 +86,9 @@ function ShareRoom() {
     <button
       className={styles.shareBtn}
       onClick={() => {
-        navigator.clipboard.writeText(`http://42gg.kr/parties/${roomId}`);
+        navigator.clipboard.writeText(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/party/${roomId}`
+        );
         setSnackbar({
           toastName: 'clip board',
           message: '주소가 복사되었습니다.',
@@ -71,7 +97,7 @@ function ShareRoom() {
         });
       }}
     >
-      <CiShare2 />
+      <CiShare2 size={30} />
     </button>
   );
 }
@@ -126,7 +152,7 @@ function LeaveRoom({ roomId, fetchRoomDetail }: RefreshProps) {
 
   return (
     <button className={styles.leaveBtn} onClick={handlerExit}>
-      방 나가기
+      파티 탈퇴
     </button>
   );
 }
@@ -141,12 +167,18 @@ function StartRoom({ roomId, fetchRoomDetail }: RefreshProps) {
         instance
           .post(`/party/rooms/${roomId}/start`)
           .then(() => {
+            setSnackbar({
+              toastName: 'room start',
+              message: '슬랙으로 시작 알림이 전송되었습니다.',
+              severity: 'success',
+              clicked: true,
+            });
             fetchRoomDetail();
           })
           .catch(() => {
             setSnackbar({
               toastName: 'patch request',
-              message: '시작에 실패했습니다시',
+              message: '시작에 실패했습니다.\n 다시 시도해주세요.',
               severity: 'error',
               clicked: true,
             });
@@ -165,6 +197,7 @@ const PartyRoomDetailButton = {
   JoinRoom,
   LeaveRoom,
   StartRoom,
+  ReportNoShow,
 };
 
 export default PartyRoomDetailButton;

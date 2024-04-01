@@ -1,43 +1,44 @@
-import { PartyRoomStatus } from 'types/partyTypes';
-import { getRemainTime } from 'utils/handleTime';
-import usePartyCategory from 'hooks/party/usePartyCategory';
+import { PartyRoomDetail } from 'types/partyTypes';
+import { dateToKRLocaleTimeString, getRemainTime } from 'utils/handleTime';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
 
-type PartyDetailTitleBoxProps = {
-  categoryId: number;
-  title: string;
-  roomId: number;
-  dueDate: string;
-  status: PartyRoomStatus;
-};
-
 export default function PartyDetailTitleBox({
-  categoryId,
+  categoryName,
   title,
-  roomId,
   dueDate,
+  roomId,
+  content,
   status,
-}: PartyDetailTitleBoxProps) {
-  const category = usePartyCategory().categories.find(
-    (category) => category.categoryId === categoryId
-  )?.categoryName;
-  const time_message =
+  minPeople,
+  maxPeople,
+}: PartyRoomDetail) {
+  const timeViewer =
     status === 'OPEN'
-      ? getRemainTime({ targetTime: new Date(dueDate) })
-      : '모집마감';
+      ? `마감 시간 : ${dateToKRLocaleTimeString(new Date(dueDate))}`
+      : '마감';
+
+  const startPerson =
+    minPeople === maxPeople ? maxPeople : `${minPeople} ~ ${maxPeople}`;
 
   return (
     <div className={styles.titleBox}>
       <div className={styles.titleLine}>
-        <div className={styles.titleCategory}>{`#${category}`}</div>
+        <div className={styles.tag}>
+          <div className={styles.category}>{`# ${categoryName || '기타'}`}</div>
+          <div className={styles.category}>{`# ${startPerson}인`}</div>
+        </div>
         <PartyRoomDetailButton.ShareRoom />
       </div>
-      <div className={styles.titleContent}>{title}</div>
       <div className={styles.titleLine}>
-        <span className={styles.remainTime}>{time_message}</span>
+        <span className={styles.title}>{title}</span>
+      </div>
+      <div className={styles.endTime}>
+        {timeViewer}
         <PartyRoomDetailButton.ReportRoom roomId={roomId} />
       </div>
+      <hr />
+      <div className={styles.detailContent}>{content}</div>
     </div>
   );
 }

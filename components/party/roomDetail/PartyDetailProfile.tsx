@@ -1,11 +1,12 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { FaCrown } from 'react-icons/fa';
 import {
   PartyRoomDetail,
   PartyRoomStatus,
   PartyRoomUser,
 } from 'types/partyTypes';
-import { dateToStringShort } from 'utils/handleTime';
+import { nameToRGB } from 'utils/color';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
 
@@ -18,25 +19,28 @@ export default function PartyDetailProfile({
   partyRoomDetail,
   fetchRoomDetail,
 }: PartyDetailProfileProps) {
-  const {
-    currentPeople,
-    minPeople,
-    maxPeople,
-    dueDate,
-    roomId,
-    status,
-    roomUsers,
-    hostNickname,
-  } = partyRoomDetail;
+  const { currentPeople, minPeople, roomId, status, roomUsers, hostNickname } =
+    partyRoomDetail;
+  const router = useRouter();
 
   return (
     <div className={styles.profile}>
       <div className={styles.line}>
-        <span>{`참여인원  (${currentPeople}/${maxPeople})`}</span>
-        <span>{`${dateToStringShort(new Date(dueDate))}`}</span>
+        <span>{`인원 : ${currentPeople}`}</span>
+        <button
+          className={styles.exitBtn}
+          onClick={() => router.push('/party')}
+        >
+          로비
+        </button>
       </div>
       <div className={styles.profileItem}>
-        <Profile roomUsers={roomUsers} hostNickname={hostNickname} />
+        <Profile
+          roomUsers={roomUsers}
+          hostNickname={hostNickname}
+          roomStatus={status}
+          roomId={roomId}
+        />
       </div>
       <ButtonHandler
         currentPeople={currentPeople}
@@ -56,49 +60,48 @@ export default function PartyDetailProfile({
 type ProfileProps = {
   roomUsers: PartyRoomUser[];
   hostNickname: string;
+  roomStatus: PartyRoomStatus;
+  roomId: number;
 };
 
-function Profile({ roomUsers, hostNickname }: ProfileProps) {
+function Profile({
+  roomUsers,
+  hostNickname,
+  roomStatus,
+  roomId,
+}: ProfileProps) {
   return (
     <ul>
-      {roomUsers.map(({ intraId, nickname, userImage }) =>
-        intraId ? (
-          <li key={intraId} className={styles.user}>
-            {nickname === hostNickname && (
-              <div className={styles.crown}>
-                <FaCrown color='gold' />
-              </div>
-            )}
-            <Image
-              src={
-                userImage ||
-                `https://random.dog/7f6f49dd-7ca5-46bd-97fb-c534628f9a2b.jpg`
-              }
-              className={styles.profileImg}
-              alt={intraId}
-              width={40}
-              height={40}
+      {roomUsers.map(({ intraId, nickname, userImage }) => (
+        <li key={intraId || nickname} className={styles.user}>
+          {nickname === hostNickname && (
+            <div className={styles.crown}>
+              <FaCrown color='gold' />
+            </div>
+          )}
+          <Image
+            src={
+              userImage ||
+              `https://random.dog/7f6f49dd-7ca5-46bd-97fb-c534628f9a2b.jpg`
+            }
+            className={styles.profileImg}
+            alt={intraId || nickname}
+            width={40}
+            height={40}
+          />
+          <div style={{ color: nameToRGB(nickname) }}>
+            {intraId || nickname}
+          </div>
+          {roomStatus !== 'OPEN' && intraId ? (
+            <PartyRoomDetailButton.ReportNoShow
+              roomId={roomId}
+              userIntraId={intraId}
             />
-            <div style={{ color: nameToRGB(nickname) }}>{intraId}</div>
-          </li>
-        ) : (
-          <li key={nickname} className={styles.user}>
-            {nickname === hostNickname && (
-              <div className={styles.crown}>
-                <FaCrown color='gold' />
-              </div>
-            )}
-            <Image
-              src={`https://random.dog/7f6f49dd-7ca5-46bd-97fb-c534628f9a2b.jpg`}
-              className={styles.profileImg}
-              alt={nickname}
-              width={40}
-              height={40}
-            />
-            <div style={{ color: nameToRGB(nickname) }}>{nickname}</div>
-          </li>
-        )
-      )}
+          ) : (
+            <></>
+          )}
+        </li>
+      ))}
     </ul>
   );
 }
@@ -154,17 +157,4 @@ function ButtonHandler({
       />
     </div>
   );
-}
-
-function nameToRGB(name: string): string {
-  let codeSum = 0;
-  for (let i = 0; i < name.length; i++) {
-    codeSum += name.charCodeAt(i) ** i * 10;
-  }
-
-  const red = codeSum % 256;
-  const green = (codeSum * 2) % 256;
-  const blue = (codeSum * 3) % 256;
-
-  return `rgb(${red}, ${green}, ${blue})`;
 }

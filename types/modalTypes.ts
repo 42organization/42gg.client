@@ -123,7 +123,7 @@ export interface PartyReportModalData {
   name: 'COMMENT' | 'ROOM' | 'NOSHOW';
   commentId?: number;
   roomId?: number;
-  userIntraId?: number;
+  userIntraId?: string;
 }
 
 export interface Modal {
