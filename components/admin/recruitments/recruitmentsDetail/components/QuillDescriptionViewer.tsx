@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic';
 import { Paper } from '@mui/material';
-import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
+import { QUILL_FORMATS } from 'types/quillTypes';
 import 'react-quill/dist/quill.snow.css';
+import DynamicQuill from 'components/DynamicQuill';
 import styles from 'styles/admin/recruitments/recruitmentDetail/components/QuillDescription.module.scss';
 
 const Quill = dynamic(() => import('react-quill'), {
@@ -17,8 +18,8 @@ export default function QuillDescriptionViewer({
   contents,
 }: QuillDescriptionViewerProps) {
   return (
-    <Paper elevation={3} className={styles.quillEditorWrapper}>
-      <Quill
+    <Paper elevation={3} className={styles.quillViewerWrapper}>
+      <DynamicQuill
         className={styles.quillViewer}
         readOnly={true}
         formats={QUILL_FORMATS}
