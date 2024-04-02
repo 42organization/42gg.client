@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { BsShop } from 'react-icons/bs';
 import { GoSettings } from 'react-icons/go';
 import {
@@ -15,12 +16,14 @@ import {
   TbPaperBag,
   TbTrophy,
   TbNote,
+  TbChartBar,
 } from 'react-icons/tb';
 import SideNavContent from 'components/admin/SideNavContent';
 import styles from 'styles/admin/SideNav.module.scss';
 
 export default function SideNav() {
   const currentPath = useRouter().asPath.replace('/admin', '');
+  const [isPartyOpen, setPartyOpen] = useState(false);
 
   return (
     <div className={styles.container}>
@@ -128,13 +131,26 @@ export default function SideNav() {
         <TbTrophy className={styles.logo} />
       </SideNavContent>
 
-      <SideNavContent
-        url={'/party'}
-        menuName={'파티관리'}
-        currentPath={currentPath}
+      <div
+        className={styles.menuItem}
+        onClick={() => setPartyOpen(!isPartyOpen)}
       >
-        <TbNote className={styles.logo} />
-      </SideNavContent>
+        <TbChartBar className={styles.logo} />
+        <span className={styles.menuName}>파티 관리탭</span>
+        {isPartyOpen ? <span>▼</span> : <span>►</span>}
+      </div>
+
+      {isPartyOpen && (
+        <div className={styles.subMenu}>
+          <SideNavContent
+            url={'/party'}
+            menuName={'파티관리'}
+            currentPath={currentPath}
+          >
+            <TbNote className={styles.logo} />
+          </SideNavContent>
+        </div>
+      )}
     </div>
   );
 }
