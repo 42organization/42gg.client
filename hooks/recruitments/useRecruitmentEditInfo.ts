@@ -30,6 +30,10 @@ export interface IFormManager {
 export default function useRecruitmentEditInfo(
   initRecruitmentEditInfo: Irecruit
 ) {
+  if (initRecruitmentEditInfo.form === undefined) {
+    initRecruitmentEditInfo.form = new Array<Iquestion>();
+  }
+
   const [recruitmentEditInfo, setRecruitmentEditInfo] = useState<Irecruit>(
     initRecruitmentEditInfo
   );
@@ -203,6 +207,9 @@ export default function useRecruitmentEditInfo(
         contents: res.data.contents,
         form: res.data.form,
       };
+      if (data.form === undefined) {
+        data.form = new Array<Iquestion>();
+      }
       setRecruitmentEditInfo(data);
     } catch (e: any) {
       setSnackBar({
