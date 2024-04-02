@@ -17,6 +17,10 @@ import {
   TbTrophy,
   TbNote,
   TbChartBar,
+  TbFileReport,
+  TbMessageReport,
+  TbBuildingWarehouse,
+  TbPlaylistAdd,
 } from 'react-icons/tb';
 import SideNavContent from 'components/admin/SideNavContent';
 import styles from 'styles/admin/SideNav.module.scss';
@@ -143,11 +147,43 @@ export default function SideNav() {
       {isPartyOpen && (
         <div className={styles.subMenu}>
           <SideNavContent
-            url={'/party'}
-            menuName={'파티관리'}
+            url={'/partyPenalty'}
+            menuName={'패널티 관리'}
+            currentPath={currentPath}
+          >
+            <TbMessageReport className={styles.logo} />
+          </SideNavContent>
+
+          <SideNavContent
+            url={'/partyReport'}
+            menuName={'신고 관리'}
+            currentPath={currentPath}
+          >
+            <TbFileReport className={styles.logo} />
+          </SideNavContent>
+
+          <SideNavContent
+            url={'/partyRoom'}
+            menuName={'방 관리'}
+            currentPath={currentPath}
+          >
+            <TbBuildingWarehouse className={styles.logo} />
+          </SideNavContent>
+
+          <SideNavContent
+            url={'/partyTemplate'}
+            menuName={'템플릿 관리'}
             currentPath={currentPath}
           >
             <TbNote className={styles.logo} />
+          </SideNavContent>
+
+          <SideNavContent
+            url={'/partyCategory'}
+            menuName={'카테고리 관리'}
+            currentPath={currentPath}
+          >
+            <TbPlaylistAdd className={styles.logo} />
           </SideNavContent>
         </div>
       )}
