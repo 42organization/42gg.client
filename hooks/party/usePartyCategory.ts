@@ -26,6 +26,7 @@ export default function usePartyCategory() {
         clicked: true,
       });
     },
+    staleTime: Infinity,
   });
 
   const createMutation = useMutation(
