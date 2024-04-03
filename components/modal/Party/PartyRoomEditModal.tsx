@@ -18,10 +18,24 @@ export default function PartyRoomEditModal({ roomId }: { roomId: number }) {
   const [room, setRoom] = useState<PartyRoomDetail>();
 
   function handleStatus(e: ChangeEvent<HTMLSelectElement>) {
-    setRoom({
-      ...(room as PartyRoomDetail),
-      status: e.target.value as PartyRoomStatus,
-    });
+    instanceInPartyManage
+      .patch(`/rooms/${room?.roomId}`, {
+        status: e.target.value,
+      })
+      .then(() => {
+        setRoom({
+          ...(room as PartyRoomDetail),
+          status: e.target.value as PartyRoomStatus,
+        });
+      })
+      .catch(() => {
+        setSnackBar({
+          toastName: 'PATCH request',
+          message: '방 상태를 변경할 수 없습니다',
+          severity: 'error',
+          clicked: true,
+        });
+      });
   }
   function handleCommentHidden(comment: PartyComment) {
     instanceInPartyManage
@@ -65,7 +79,7 @@ export default function PartyRoomEditModal({ roomId }: { roomId: number }) {
           <span className={styles.categoryName}>#{room.categoryName}</span>
           {room.title}
         </h2>
-        <select onChange={handleStatus}>
+        <select onChange={handleStatus} defaultValue={room.status}>
           {roomStatusOpts.map((opt) => (
             <option key={opt} value={opt}>
               {opt}
