@@ -176,8 +176,17 @@ $detailCommonRem: 1rem;
   font-family: $common-font;
   font-size: $big-font;
   font-weight: $detail-btn-weight;
+  color: white;
   background: $party-gradient3;
+  border-style: none;
   border-radius: $small-radius;
+
+  &.penalty {
+    font-size: $medium-font;
+    font-weight: 500;
+    background: red;
+    filter: brightness(60%);
+  }
 }
 
 .leaveBtn {
@@ -187,7 +196,9 @@ $detailCommonRem: 1rem;
   font-family: $common-font;
   font-size: $big-font;
   font-weight: $detail-btn-weight;
+  color: white;
   background: $party-gradient3;
+  border-style: none;
   border-radius: $small-radius;
 }
 
@@ -198,7 +209,9 @@ $detailCommonRem: 1rem;
   font-family: $common-font;
   font-size: $big-font;
   font-weight: $detail-btn-weight;
+  color: white;
   background: $party-gradient3;
+  border-style: none;
   border-radius: $small-radius;
 }
 
@@ -309,8 +322,7 @@ $detailCommonRem: 1rem;
 }
 
 .textBar {
-  min-width: 92%;
-  max-width: fit-content;
+  width: 100%;
   margin-left: 0.5rem;
   font-size: $small-font;
   background-color: inherit;

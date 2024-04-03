@@ -5,6 +5,7 @@ import { LuAlertTriangle } from 'react-icons/lu';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
+import usePartyPenaltyTimer from 'hooks/party/usePartyPenaltyTimer';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 
 type ParytButtonProps = {
@@ -108,6 +109,8 @@ type RefreshProps = ParytButtonProps & {
 
 function JoinRoom({ roomId, fetchRoomDetail }: RefreshProps) {
   const setSnackbar = useSetRecoilState(toastState);
+  const { penaltyPeroid } = usePartyPenaltyTimer();
+
   const handlerJoin = () => {
     instance
       .post(`/party/rooms/${roomId}`)
@@ -124,7 +127,15 @@ function JoinRoom({ roomId, fetchRoomDetail }: RefreshProps) {
       });
   };
 
-  return (
+  return penaltyPeroid ? (
+    <button
+      className={`${styles.joinBtn} ${styles.penalty}`}
+      onClick={handlerJoin}
+    >
+      패널티 부여 중<br />
+      {penaltyPeroid}
+    </button>
+  ) : (
     <button className={styles.joinBtn} onClick={handlerJoin}>
       참여하기
     </button>
