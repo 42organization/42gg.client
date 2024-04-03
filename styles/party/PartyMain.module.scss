@@ -37,6 +37,19 @@
       border-style: none;
       border-radius: 1em;
     }
+    .penalty {
+      padding: 0.3em 0.6em;
+      font-size: $medium-font;
+      background: red;
+      filter: brightness(60%);
+      border-style: none;
+      border-radius: 1em;
+
+      .timer {
+        display: inline-block;
+        width: 4.3em;
+      }
+    }
   }
   ul {
     @include roomListWrap;
@@ -56,6 +69,7 @@
       color: $dark-gray;
     }
     input {
+      width: 100%;
       padding-left: 0.2em;
       font-size: $medium-font;
       font-weight: 300;
@@ -100,15 +114,20 @@
   }
   .allRoomListWrap {
     @include roomListWrap;
-    min-height: 25em;
+    position: relative;
+    min-height: 25rem;
     overflow-y: scroll;
 
+    ul {
+      margin: 0;
+    }
+
     .emptyRooms {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      font-weight: 300;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: $big-font;
+      transform: translate(-50%, -50%);
     }
   }
 }
