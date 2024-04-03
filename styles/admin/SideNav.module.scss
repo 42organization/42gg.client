@@ -15,3 +15,17 @@
   height: 1rem;
   margin-left: 0.125rem;
 }
+.menuItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.menuName {
+  padding: 0 0.5rem;
+}
+
+.subMenu {
+  margin-left: 20px;
+}

@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { BsShop } from 'react-icons/bs';
+import { FaAngleDown, FaAngleRight } from 'react-icons/fa';
 import { GoSettings } from 'react-icons/go';
 import {
   GrUserSettings,
@@ -7,7 +9,11 @@ import {
   GrStatusWarning,
   GrAnnounce,
 } from 'react-icons/gr';
-import { IoGameControllerOutline, IoReceiptOutline } from 'react-icons/io5';
+import {
+  IoGameControllerOutline,
+  IoPeople,
+  IoReceiptOutline,
+} from 'react-icons/io5';
 import { MdOutlineMessage } from 'react-icons/md';
 import {
   TbCalendarTime,
@@ -15,12 +21,18 @@ import {
   TbPaperBag,
   TbTrophy,
   TbNote,
+  TbChartBar,
+  TbFileReport,
+  TbMessageReport,
+  TbBuildingWarehouse,
+  TbPlaylistAdd,
 } from 'react-icons/tb';
 import SideNavContent from 'components/admin/SideNavContent';
 import styles from 'styles/admin/SideNav.module.scss';
 
 export default function SideNav() {
   const currentPath = useRouter().asPath.replace('/admin', '');
+  const [isPartyOpen, setPartyOpen] = useState(false);
 
   return (
     <div className={styles.container}>
@@ -128,13 +140,58 @@ export default function SideNav() {
         <TbTrophy className={styles.logo} />
       </SideNavContent>
 
-      <SideNavContent
-        url={'/party'}
-        menuName={'파티관리'}
-        currentPath={currentPath}
+      <div
+        className={styles.menuItem}
+        onClick={() => setPartyOpen(!isPartyOpen)}
       >
-        <TbNote className={styles.logo} />
-      </SideNavContent>
+        <IoPeople />
+        <span className={styles.menuName}>파티 관리탭</span>
+        {isPartyOpen ? <FaAngleDown /> : <FaAngleRight />}
+      </div>
+
+      {isPartyOpen && (
+        <div className={styles.subMenu}>
+          <SideNavContent
+            url={'/partyPenalty'}
+            menuName={'패널티 관리'}
+            currentPath={currentPath}
+          >
+            <TbMessageReport className={styles.logo} />
+          </SideNavContent>
+
+          <SideNavContent
+            url={'/partyReport'}
+            menuName={'신고 관리'}
+            currentPath={currentPath}
+          >
+            <TbFileReport className={styles.logo} />
+          </SideNavContent>
+
+          <SideNavContent
+            url={'/partyRoom'}
+            menuName={'방 관리'}
+            currentPath={currentPath}
+          >
+            <TbBuildingWarehouse className={styles.logo} />
+          </SideNavContent>
+
+          <SideNavContent
+            url={'/partyTemplate'}
+            menuName={'템플릿 관리'}
+            currentPath={currentPath}
+          >
+            <TbNote className={styles.logo} />
+          </SideNavContent>
+
+          <SideNavContent
+            url={'/partyCategory'}
+            menuName={'카테고리 관리'}
+            currentPath={currentPath}
+          >
+            <TbPlaylistAdd className={styles.logo} />
+          </SideNavContent>
+        </div>
+      )}
     </div>
   );
 }
