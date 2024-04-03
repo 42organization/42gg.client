@@ -17,7 +17,7 @@ export default function TemplateModal({
   const [formData, setFormData] = useState<PartyTemplateForm>(
     template ?? {
       gameName: '',
-      categoryId: 1,
+      categoryName: '기타',
       maxGamePeople: 1,
       minGamePeople: 1,
       maxGameTime: 1,

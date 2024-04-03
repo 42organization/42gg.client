@@ -19,7 +19,7 @@ import DetailModal from 'components/modal/admin/DetailModal';
 import AdminSeasonEdit from 'components/modal/admin/SeasonEdit';
 import AdminEditTournamentBraket from '../admin/AdminEditTournamentBraket';
 import AdminTournamentParticipantEditModal from '../admin/AdminTournamentParticipantEditModal/AdminTournamentParticipantEditModal';
-import PartyRoomEditModal from '../Party/PartyRoomEditModal';
+import PartyRoomEditModal from '../party/PartyRoomEditModal';
 
 export default function AdminModal() {
   const {
