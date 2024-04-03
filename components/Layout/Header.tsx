@@ -1,7 +1,9 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useContext } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { BsMegaphone } from 'react-icons/bs';
+import { FaArrowLeft } from 'react-icons/fa';
 import { FiMenu } from 'react-icons/fi';
 import { IoStorefrontOutline } from 'react-icons/io5';
 import { Modal } from 'types/modalTypes';
@@ -18,6 +20,7 @@ import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/Header.module.scss';
 
 export default function Header() {
+  const router = useRouter();
   const [live, setLive] = useRecoilState(liveState);
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);
   const openMenuBarHandler = () => {
@@ -54,11 +57,26 @@ export default function Header() {
     type: 'setError',
   });
 
+  // 현재 경로가 뒤로 가기 버튼을 사용해야 하는 경로 패턴 중 하나와 일치하는지 확인
+  const isBackButtonRoute = () => {
+    const path = router.asPath.split('?')[0]; // 쿼리 스트링 제거
+    const patterns = [
+      /^\/party\/create$/, // '/party/create'
+      /^\/party\/[0-9]+$/, // '/party/[roomId]'
+    ];
+
+    return patterns.some((pattern) => pattern.test(path));
+  };
+
   return (
     <div className={styles.headerContainer}>
       <div className={styles.headerWrap}>
         <div className={styles.headerLeft}>
-          <FiMenu className={styles.menuIcon} onClick={openMenuBarHandler} />
+          {isBackButtonRoute() ? (
+            <FaArrowLeft onClick={router.back} />
+          ) : (
+            <FiMenu className={styles.menuIcon} onClick={openMenuBarHandler} />
+          )}
         </div>
         <Link className={styles.logoWrap} href={'/'}>
           42GG
