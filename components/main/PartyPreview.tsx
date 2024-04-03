@@ -12,20 +12,24 @@ export default function PartyPreview() {
   };
   return (
     <div>
-      <ul>
-        {limitedRooms.map((room) => (
-          <li
-            key={room.roomId}
-            className={styles.block}
-            onClick={() => movePartyRoom(room.roomId)}
-          >
-            <div className={styles.divcontainer}>
-              <div>{room.title}</div>
-              <div>{`${room.currentPeople}/${room.maxPeople}`}</div>
-            </div>
-          </li>
-        ))}
-      </ul>
+      {limitedRooms.length === 0 ? (
+        <div className={styles.block}>현재 활성화된 방이없습니다.</div>
+      ) : (
+        <ul>
+          {limitedRooms.map((room) => (
+            <li
+              key={room.roomId}
+              className={styles.block}
+              onClick={() => movePartyRoom(room.roomId)}
+            >
+              <div className={styles.divcontainer}>
+                <div>{room.title}</div>
+                <div>{`${room.currentPeople}/${room.maxPeople}`}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
