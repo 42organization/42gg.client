@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { BsShop } from 'react-icons/bs';
+import { FaAngleDown, FaAngleRight } from 'react-icons/fa';
 import { GoSettings } from 'react-icons/go';
 import {
   GrUserSettings,
@@ -8,7 +9,11 @@ import {
   GrStatusWarning,
   GrAnnounce,
 } from 'react-icons/gr';
-import { IoGameControllerOutline, IoReceiptOutline } from 'react-icons/io5';
+import {
+  IoGameControllerOutline,
+  IoPeople,
+  IoReceiptOutline,
+} from 'react-icons/io5';
 import { MdOutlineMessage } from 'react-icons/md';
 import {
   TbCalendarTime,
@@ -139,9 +144,9 @@ export default function SideNav() {
         className={styles.menuItem}
         onClick={() => setPartyOpen(!isPartyOpen)}
       >
-        <TbChartBar className={styles.logo} />
+        <IoPeople />
         <span className={styles.menuName}>파티 관리탭</span>
-        {isPartyOpen ? <span>▼</span> : <span>►</span>}
+        {isPartyOpen ? <FaAngleDown /> : <FaAngleRight />}
       </div>
 
       {isPartyOpen && (
