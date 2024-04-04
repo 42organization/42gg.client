@@ -11,7 +11,7 @@ import { PartyCategory } from 'types/partyTypes';
 import { tableFormat } from 'constants/admin/table';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import usePartyCategory from 'hooks/party/usePartyCategory';
-import styles from 'styles/admin/Party/AdminPartyCommon.module.scss';
+import styles from 'styles/admin/party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   categoryId: '카테고리번호',

@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import { FaCrown } from 'react-icons/fa';
 import {
   PartyRoomDetail,
@@ -21,18 +20,11 @@ export default function PartyDetailProfile({
 }: PartyDetailProfileProps) {
   const { currentPeople, minPeople, roomId, status, roomUsers, hostNickname } =
     partyRoomDetail;
-  const router = useRouter();
 
   return (
     <div className={styles.profile}>
       <div className={styles.line}>
         <span>{`인원 : ${currentPeople}`}</span>
-        <button
-          className={styles.exitBtn}
-          onClick={() => router.push('/party')}
-        >
-          로비
-        </button>
       </div>
       <div className={styles.profileItem}>
         <Profile

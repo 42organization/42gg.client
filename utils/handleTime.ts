@@ -227,3 +227,29 @@ export const getRemainTime = ({
     ? `${min}분 남음`
     : `마감`;
 };
+
+/**
+ *  현재 시간부터 타겟 시간까지의 시간을 계산
+ *  @param {string | Date} dateString
+ *  @return 문자열 "HH:MM:SS"
+ */
+export function calculatePeriod(dateString: string | Date) {
+  const targetDate =
+    typeof dateString === 'string' ? new Date(dateString) : dateString;
+  const timeDifference = targetDate.getTime() - Date.now(); // 밀리초 단위의 차이
+
+  if (timeDifference < 0) {
+    return '00:00:00'; // 이미 기간이 지난 경우 00:00 반환
+  }
+
+  const hour = Math.floor(timeDifference / (60 * 60 * 1000));
+  const minute = Math.floor((timeDifference % (60 * 60 * 1000)) / (60 * 1000));
+  const second = Math.floor((timeDifference % (60 * 1000)) / 1000);
+
+  // 시간과 분을 항상 두 자리 숫자로 포맷팅
+  const formattedHour = hour < 10 ? `0${hour}` : `${hour}`;
+  const formattedMinute = minute < 10 ? `0${minute}` : `${minute}`;
+  const formattedSecond = second < 10 ? `0${second}` : `${second}`;
+
+  return formattedHour + ':' + formattedMinute + ':' + formattedSecond;
+}

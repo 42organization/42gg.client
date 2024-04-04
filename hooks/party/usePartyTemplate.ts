@@ -8,7 +8,7 @@ type templateResponse = {
   templateList: PartyGameTemplate[];
 };
 
-export function usePartyTemplate(categoryId?: number) {
+export function usePartyTemplate(categoryName?: string) {
   const queryClient = useQueryClient();
   const setSnackBar = useSetRecoilState(toastState);
 
@@ -26,6 +26,7 @@ export function usePartyTemplate(categoryId?: number) {
         clicked: true,
       });
     },
+    staleTime: 5 * 60 * 1000, // 5분
   });
 
   const createMutation = useMutation(
@@ -60,8 +61,8 @@ export function usePartyTemplate(categoryId?: number) {
   );
   return {
     templates: data
-      ? categoryId
-        ? data.filter((d) => d.categoryId === categoryId)
+      ? categoryName
+        ? data.filter((d) => d.categoryName === categoryName)
         : data
       : [], // undefind 대신 []을 이용해 에러 처리
     createTemplate: (template: PartyTemplateForm) =>

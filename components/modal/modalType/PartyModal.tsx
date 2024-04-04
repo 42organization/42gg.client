@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import { PartyReportModal } from '../Party/PartyReportModal';
+import { PartyReportModal } from '../party/PartyReportModal';
 
 export default function PartyModal() {
   const { modalName, partyReport } = useRecoilValue(modalState);
