@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
-import { CiShare2 } from 'react-icons/ci';
-import { LuAlertTriangle } from 'react-icons/lu';
+import { BsShare } from 'react-icons/bs';
+import { FiAlertTriangle } from 'react-icons/fi';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
@@ -30,7 +30,7 @@ function ReportComment({ commentId }: ParytButtonProps) {
         });
       }}
     >
-      <LuAlertTriangle color='gray' />
+      <FiAlertTriangle color='gray' />
     </button>
   );
 }
@@ -51,7 +51,7 @@ function ReportRoom({ roomId }: ParytButtonProps) {
         });
       }}
     >
-      <LuAlertTriangle color='gray' />
+      <FiAlertTriangle color='gray' />
     </button>
   );
 }
@@ -74,7 +74,7 @@ function ReportNoShow({ roomId, userIntraId }: ParytButtonProps) {
       }}
     >
       <div style={{ margin: '0 0.3rem' }}>노쇼 신고</div>
-      <LuAlertTriangle color='gray' style={{ marginTop: 'auto' }} />
+      <FiAlertTriangle color='gray' style={{ marginTop: 'auto' }} />
     </button>
   );
 }
@@ -98,7 +98,7 @@ function ShareRoom() {
         });
       }}
     >
-      <CiShare2 size={30} />
+      <BsShare size={20} />
     </button>
   );
 }
