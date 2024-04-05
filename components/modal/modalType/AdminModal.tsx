@@ -20,7 +20,7 @@ import AdminUserCoinModal from 'components/modal/admin/AdminUserCoinModal';
 import DeletePenaltyModal from 'components/modal/admin/DeletePenaltyModal';
 import DetailModal from 'components/modal/admin/DetailModal';
 import AdminSeasonEdit from 'components/modal/admin/SeasonEdit';
-import PartyRoomEditModal from '../party/PartyRoomEditModal';
+import PartyRoomEditModal from 'components/modal/party/PartyRoomEditModal';
 
 export default function AdminModal() {
   const {
