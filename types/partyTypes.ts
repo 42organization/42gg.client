@@ -41,7 +41,7 @@ export type PartyComment = {
   commentId: number;
   nickname: string;
   intraId: string | null;
-  isexist: boolean;
+  isExist: boolean;
   content: string;
   isHidden: boolean;
   createDate: string;
