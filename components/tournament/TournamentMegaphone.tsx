@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from 'react';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import { TournamentInfo } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
-import { mockInstance } from 'utils/mockAxios';
 import useInterval from 'hooks/useInterval';
 import styles from 'styles/Layout/MegaPhone.module.scss';
 
@@ -38,11 +37,10 @@ const TournamentMegaphone = () => {
   const router = useRouter();
 
   function getTournamentListHandler() {
-    return mockInstance
-      .get(`tournament?page=1&status=예정&size=5`)
-      .then((res) => {
-        setTournamentList(res.data.tournaments);
-      });
+    // // FIXME : mockInstance 사용 중이었던 점 확인 필요함
+    return instance.get(`tournament?page=1&status=예정&size=5`).then((res) => {
+      setTournamentList(res.data.tournaments);
+    });
   }
 
   const goTournamentPage = (event: React.MouseEvent<HTMLDivElement>) => {
