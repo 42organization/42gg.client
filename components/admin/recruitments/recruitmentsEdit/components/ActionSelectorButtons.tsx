@@ -71,8 +71,6 @@ export default function ActionSelectorButtons({
   const setSnackBar = useSetRecoilState(toastState);
 
   const createRecruitmentHandler = async () => {
-    console.log('REQUESTED! : ', recruitmentEditInfo);
-
     try {
       const convertedForm = recruitmentEditInfo.form?.map((question) => {
         if (question.inputType === 'TEXT') {
