@@ -1,4 +1,5 @@
 import { MatchMode } from './mainType';
+import { PartyColors } from './partyTypes';
 
 const randomColors = [
   'BASIC',
@@ -66,4 +67,4 @@ export type BackgroundColors = (typeof backgroundColors)[number];
 
 export type EdgeColors = (typeof edgeColors)[number];
 
-export type ColorMode = MatchMode | RandomColors;
+export type ColorMode = MatchMode | RandomColors | PartyColors;

@@ -1,0 +1,45 @@
+$party-blue-dark: #10296a;
+$party-blue-dark2: #193972;
+$party-blue-dark21: #044581;
+$party-blue-dark3: #2d6dc5;
+$party-blue-dark4: #466fee;
+$party-blue-dark5: #1f6bff;
+
+$party-blue: #00a3ff;
+
+$party-blue-sky0: #005d92;
+$party-blue-sky01: #0b98b7;
+$party-blue-sky1: #5193a0;
+$party-blue-sky2: #54b9b9;
+$party-blue-sky3: #51ddd4;
+$party-blue-sky4: #92fcd6;
+$party-blue-sky5: #c8ffeb;
+
+$party-purple: #ab78ff;
+$party-yellow: #c4ce0b;
+
+$party-gradient0: linear-gradient(
+  $party-blue-sky2,
+  $party-blue-sky0 35%,
+  $party-blue-dark21 55%,
+  $party-blue-sky0 75%,
+  $party-blue-dark5
+);
+$party-gradient1: linear-gradient(
+  $party-blue-dark3,
+  $party-blue-sky0 10%,
+  $party-blue-sky2 90%,
+  $party-blue-sky4
+);
+$party-gradient2: linear-gradient($party-blue-sky4, $party-blue-dark);
+$party-gradient3: linear-gradient(
+  to left,
+  $party-purple,
+  $party-blue-dark4 40%,
+  $party-blue-sky3
+);
+$party-gradien4: linear-gradient(
+  black,
+  $party-blue-dark2 70%,
+  $party-blue-sky3
+);

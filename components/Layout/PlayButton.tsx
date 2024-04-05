@@ -14,7 +14,8 @@ const PlayButton = () => {
   if (
     presentPath === '/match' ||
     presentPath === '/manual' ||
-    presentPath === '/store'
+    presentPath === '/store' ||
+    presentPath.startsWith('/party')
   )
     return null;
   return (
