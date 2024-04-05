@@ -1,0 +1,12 @@
+@import 'styles/recruit/common.scss';
+
+.list {
+  width: 100%;
+  .listItem {
+    padding: 1.5rem 2rem;
+    border-radius: 10px;
+  }
+  .listItemTextPrimary {
+    @include pageSubTitle;
+  }
+}

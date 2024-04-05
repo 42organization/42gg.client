@@ -21,11 +21,11 @@ import {
   TbPaperBag,
   TbTrophy,
   TbNote,
-  TbChartBar,
   TbFileReport,
   TbMessageReport,
   TbBuildingWarehouse,
   TbPlaylistAdd,
+  TbWallet,
 } from 'react-icons/tb';
 import SideNavContent from 'components/admin/SideNavContent';
 import styles from 'styles/admin/SideNav.module.scss';
@@ -138,6 +138,14 @@ export default function SideNav() {
         currentPath={currentPath}
       >
         <TbTrophy className={styles.logo} />
+      </SideNavContent>
+
+      <SideNavContent
+        url={'/recruitments'}
+        menuName={'공고 관리'}
+        currentPath={currentPath}
+      >
+        <TbWallet className={styles.logo} />
       </SideNavContent>
 
       <div

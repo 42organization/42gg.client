@@ -56,11 +56,27 @@ export const isAfterMin = (gameTimeString: string, min: number) => {
  * */
 export const dateToString = (d: Date) => {
   const year = d.getFullYear();
-  const month = d.getMonth() + 1;
-  const date = d.getDate();
-  const hour = d.getHours();
-  const min = d.getMinutes();
+  const month = fillZero((d.getMonth() + 1).toString(), 2);
+  const date = fillZero(d.getDate().toString(), 2);
+  const hour = fillZero(d.getHours().toString(), 2);
+  const min = fillZero(d.getMinutes().toString(), 2);
   return `${year}-${month}-${date} ${hour}:${min}`;
+};
+
+/**
+ * @description 시간을 YYYY년 MM월 DD일 E요일 HH시 MM분 형식으로 반환
+ * @param {Date} d 시간 문자열
+ * @return 시간(YYYY년 MM월 DD일 E요일 HH시 MM분)
+ */
+
+export const dateToKRFullString = (d: Date) => {
+  const year = d.getFullYear();
+  const month = fillZero((d.getMonth() + 1).toString(), 2);
+  const date = fillZero(d.getDate().toString(), 2);
+  const day = ['일', '월', '화', '수', '목', '금', '토'][d.getDay()];
+  const hour = fillZero(d.getHours().toString(), 2);
+  const min = fillZero(d.getMinutes().toString(), 2);
+  return `${year}년 ${month}월 ${date}일 ${day}요일 ${hour}시 ${min}분`;
 };
 
 /**

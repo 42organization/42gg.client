@@ -58,7 +58,8 @@ type AdminModal =
   | 'TOURNAMENT_PARTICIPANT_EDIT'
   | 'PARTY_TEMPLATE'
   | 'PARTY_PENALTY'
-  | 'PARTY_EDIT';
+  | 'PARTY_EDIT'
+  | 'RECRUIT_MESSAGE_TEMPLATE';
 
 type ModalName =
   | null

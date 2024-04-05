@@ -24,7 +24,11 @@ export type TableName =
   | 'partyRoomReport'
   | 'partyCommentReport'
   | 'partyPenaltyAdmin'
-  | 'partyRoom';
+  | 'partyRoom'
+  | 'recruitment'
+  | 'recruitUserList'
+  | 'recruitEditTitle'
+  | 'notificationList';
 
 export type EtcType = 'button' | 'toggle';
 

@@ -3,12 +3,8 @@ import { MdPeopleAlt } from 'react-icons/md';
 import { ITournamentEditInfo } from 'types/admin/adminTournamentTypes';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { dateToString } from 'utils/handleTime';
+import DynamicQuill from 'components/DynamicQuill';
 import styles from 'styles/admin/tournament/TournamentModalPreview.module.scss';
-
-const Quill = dynamic(() => import('react-quill'), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
 
 interface TournamentModalPreviewProps {
   tournamentEditInfo: ITournamentEditInfo;
@@ -34,7 +30,7 @@ export default function TournamentModalPreview({
           <div className={styles.player}>0 / 8</div>
         </div>
       </div>
-      <Quill
+      <DynamicQuill
         className={styles.quillViewer}
         readOnly={true}
         formats={QUILL_FORMATS}

@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
-import { colorModeState } from 'utils/recoil/colorMode';
 import { openCurrentMatchState } from 'utils/recoil/match';
 import AdminReject from 'components/admin/AdminReject';
 import AdminLayout from 'components/admin/Layout';
@@ -10,7 +9,7 @@ import Header from 'components/Layout/Header';
 import HeaderStateContext from 'components/Layout/HeaderContext';
 import MainPageProfile from 'components/Layout/MainPageProfile';
 import Megaphone from 'components/Layout/MegaPhone';
-import StyledButton from 'components/UI/StyledButton';
+import RecruitLayout from 'components/recruit/RecruitLayout';
 import Statistics from 'pages/statistics';
 import useAnnouncementCheck from 'hooks/Layout/useAnnouncementCheck';
 import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
@@ -19,6 +18,8 @@ import useSetAfterGameModal from 'hooks/Layout/useSetAfterGameModal';
 import { useUser } from 'hooks/Layout/useUser';
 import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/Layout/Layout.module.scss';
+import PlayButton from './PlayButton';
+import UserLayout from './UserLayout';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -26,9 +27,7 @@ type AppLayoutProps = {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   const user = useUser();
-  const colorMode = useRecoilValue(colorModeState);
   const presentPath = useRouter().asPath;
-  const router = useRouter();
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
 
   useAxiosResponse();
@@ -37,59 +36,38 @@ export default function AppLayout({ children }: AppLayoutProps) {
   useLiveCheck(presentPath);
   useAnnouncementCheck(presentPath);
 
-  const onClickMatch = () => {
-    router.replace('/');
-    router.push(`/match`);
-  };
+  if (!user || !user.intraId) return null;
 
-  if (!user) return null;
+  if (presentPath.includes('/admin')) {
+    if (!user.isAdmin) return <AdminReject />;
+    return <AdminLayout>{children}</AdminLayout>;
+  }
 
-  return presentPath.includes('/admin') ? (
-    user.isAdmin ? (
-      <AdminLayout>{children}</AdminLayout>
-    ) : (
-      <AdminReject />
-    )
-  ) : (
-    <div className={styles.appContainer}>
-      <div
-        className={`${styles.background} ${
-          colorMode ? styles[colorMode.toLowerCase()] : styles.basic
-        } `}
-      >
-        <div>
-          {presentPath === '/statistics' && user.isAdmin ? (
-            <Statistics />
-          ) : (
-            user.intraId && (
-              <>
-                <HeaderStateContext>
-                  <Header />
-                </HeaderStateContext>
-                {presentPath !== '/match' &&
-                  presentPath !== '/manual' &&
-                  presentPath !== '/store' &&
-                  !presentPath.startsWith('/party') && (
-                    <div className={styles.buttonContainer}>
-                      <div className={styles.buttonWrapper}>
-                        <StyledButton onClick={onClickMatch} width={'5.5rem'}>
-                          Play
-                        </StyledButton>
-                      </div>
-                    </div>
-                  )}
-                <div className={styles.topInfo}>
-                  <Megaphone />
-                  {openCurrentMatch && <CurrentMatch />}
-                  {presentPath === '/' && <MainPageProfile />}
-                </div>
-                {children}
-                <Footer />
-              </>
-            )
-          )}
-        </div>
+  if (presentPath.includes('/recruit')) {
+    return <RecruitLayout>{children}</RecruitLayout>;
+  }
+
+  // NOTE : 외부 툴을 사용해보고 외부 툴로 대체가 가능하다면 삭제 예정
+  if (presentPath === '/statistics' && user.isAdmin)
+    return (
+      <UserLayout>
+        <Statistics />
+      </UserLayout>
+    );
+
+  return (
+    <UserLayout>
+      <HeaderStateContext>
+        <Header />
+      </HeaderStateContext>
+      <PlayButton />
+      <div className={styles.topInfo}>
+        <Megaphone />
+        {openCurrentMatch && <CurrentMatch />}
+        {presentPath === '/' && <MainPageProfile />}
       </div>
-    </div>
+      {children}
+      <Footer />
+    </UserLayout>
   );
 }
