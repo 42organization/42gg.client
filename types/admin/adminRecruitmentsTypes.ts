@@ -36,6 +36,7 @@ export interface IrecruitTable {
   totalPage: number;
   currentPage: number;
 }
+
 export interface InoticationTable {
   noticationList: Array<Inotication>;
   totalPage: number;

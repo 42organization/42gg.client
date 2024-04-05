@@ -1,6 +1,5 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { FaSdCard } from 'react-icons/fa';
 import {
   IcheckItem,
   Iquestion,
@@ -197,6 +196,7 @@ export default function useRecruitmentEditInfo(
   };
 
   const importRecruitmentInfo = async (recruitId: number) => {
+    if (recruitId <= 0) return;
     try {
       const res = await mockInstance.get('/recruitments/' + recruitId);
       const data: Irecruit = {

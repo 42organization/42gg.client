@@ -36,9 +36,9 @@ export default function ActionSelectorButtons({
   recruitmentInfo,
   actionType,
 }: ActionSelectorButtonsProps) {
-  const [isEnded, setIsEnded] = useState<boolean>(false);
+  const STATE = recruitmentInfo.status === '모집중' ? false : true;
 
-  const setSnackBar = useSetRecoilState(toastState);
+  const [isEnded, setIsEnded] = useState<boolean>(STATE);
 
   const isStarted = recruitmentInfo.startDate > new Date();
 
@@ -60,11 +60,6 @@ export default function ActionSelectorButtons({
     // 공고 상태 수정 API 호출
     setIsEnded(checked);
   };
-
-  useEffect(() => {
-    if (recruitmentInfo.status === '모집중') setIsEnded(false);
-    else if (recruitmentInfo.status === '완료') setIsEnded(true);
-  }, []);
 
   return (
     <>

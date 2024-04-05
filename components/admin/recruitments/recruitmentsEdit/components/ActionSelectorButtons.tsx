@@ -9,9 +9,23 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 import { Irecruit } from 'types/admin/adminRecruitmentsTypes';
+import { InventoryData } from 'types/inventoryTypes';
+import { instance, instanceInManage } from 'utils/axios';
+import { InfiniteScroll } from 'utils/infinityScroll';
 import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/ActionSelectorButtons.module.scss';
+
+// interface PagenatedResponse {
+//   recruitmentHistory: Irecruit[];
+//   totalPage: number;
+// }
+
+// function fetchRecruitMemtHistoryData(page: number) {
+//   return instance.get(`/recruitments?page=${page}&size=${8}`).then((res) => {
+//     return res.data;
+//   });
+// }
 
 interface ActionSelectorButtonsProps {
   recruitmentEditInfo: Irecruit;
@@ -28,17 +42,13 @@ export default function ActionSelectorButtons({
     []
   );
 
-  const [selectedId, setSelectedId] = useState<string>('');
-
-  const setSnackBar = useSetRecoilState(toastState);
-
   const getRecruitHandler = async () => {
     try {
-      // const res = await instanceInManage.get(
-      //   `/recruitments`
-      // );
-      const res = await mockInstance.get(`admin/recruitments`);
-      setRecruitmentsHistory(res.data.recruitment);
+      const res = await instanceInManage.get(
+        `/recruitments?page=${1}&size=${100}`
+      );
+      console.log(res.data.recruitments);
+      setRecruitmentsHistory(res.data.recruitments);
     } catch (e: any) {
       setSnackBar({
         toastName: 'get recruitment',
@@ -49,19 +59,55 @@ export default function ActionSelectorButtons({
     }
   };
 
+  // const { data, error, isLoading, hasNextPage, fetchNextPage } =
+  //   InfiniteScroll<PagenatedResponse>(
+  //     'recruitment',
+  //     fetchRecruitMemtHistoryData,
+  //     'RT04'
+  //   );
+
+  const [selectedId, setSelectedId] = useState<string>('');
+
+  const setSnackBar = useSetRecoilState(toastState);
+
   const createRecruitmentHandler = async () => {
+    console.log('REQUESTED! : ', recruitmentEditInfo);
+
     try {
-      // const res = await instanceInManage.get(
-      //   `/recruitments`
-      // );
-      const res = await mockInstance.post(`admin/recruitments`, {
+      const convertedForm = recruitmentEditInfo.form?.map((question) => {
+        if (question.inputType === 'TEXT') {
+          return {
+            question: question.question,
+            inputType: question.inputType,
+          };
+        } else {
+          const stringCheckList = question.checkList?.map(
+            (item) => item.contents
+          );
+          return {
+            question: question.question,
+            inputType: question.inputType,
+            checkList: stringCheckList,
+          };
+        }
+      });
+
+      const res = await instance.post(`/admin/recruitments`, {
         title: recruitmentEditInfo.title,
-        startDate: recruitmentEditInfo.startDate,
-        endDate: recruitmentEditInfo.endDate,
+        startDateTime: '2024-04-06T08:29:07.424Z', //recruitmentEditInfo.startDate.toISOString(),
+        endDateTime: '2024-04-08T08:29:07.424Z', //recruitmentEditInfo.endDate.toISOString(),
         generation: recruitmentEditInfo.generation,
         contents: recruitmentEditInfo.contents,
-        form: recruitmentEditInfo.form,
+        form: convertedForm,
       });
+      // const res = await mockInstance.post(`admin/recruitments`, {
+      //   title: recruitmentEditInfo.title,
+      //   startDate: recruitmentEditInfo.startDate,
+      //   endDate: recruitmentEditInfo.endDate,
+      //   generation: recruitmentEditInfo.generation,
+      //   contents: recruitmentEditInfo.contents,
+      //   form: recruitmentEditInfo.form,
+      // });
     } catch (e: any) {
       setSnackBar({
         toastName: 'post recruitment',
@@ -90,14 +136,19 @@ export default function ActionSelectorButtons({
             value={selectedId}
             label='기존 공고'
             style={{ backgroundColor: 'white' }}
-            onClick={getRecruitHandler}
             onChange={selectChangehandler}
           >
-            {recruitmentsHistory.map((recruit: Irecruit) => (
-              <MenuItem key={recruit.id} value={recruit.id}>
-                {recruit.title}
+            {recruitmentsHistory.length === 0 ? (
+              <MenuItem key={-1} value={-1}>
+                기존 공고가 없습니다.
               </MenuItem>
-            ))}
+            ) : (
+              recruitmentsHistory.map((recruit: Irecruit) => (
+                <MenuItem key={recruit.id} value={recruit.id}>
+                  {recruit.title}
+                </MenuItem>
+              ))
+            )}
           </Select>
         </FormControl>
         <Button
