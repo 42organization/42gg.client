@@ -48,7 +48,7 @@ function RecruitmentsHistoryList({
   setPage: Dispatch<SetStateAction<RecruitmentsPages>>;
 }) {
   const [recruitData, setRecruitData] = useState<IrecruitTable>({
-    recruitment: [],
+    recruitmentDtoList: [],
     totalPage: 0,
     currentPage: 0,
   });
@@ -64,7 +64,7 @@ function RecruitmentsHistoryList({
       );
       // FIXME : 페이지네이션 x 임시로 1페이지로 고정
       setRecruitData({
-        recruitment: res.data.recruitments,
+        recruitmentDtoList: res.data.recruitmentDtoList,
         totalPage: 1,
         currentPage: 1,
       });
@@ -156,8 +156,8 @@ function RecruitmentsHistoryList({
         <Table className={styles.table} aria-label='customized table'>
           <AdminTableHead tableName={'recruitment'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {recruitData.recruitment.length > 0 ? (
-              recruitData.recruitment.map((recruit: Irecruit) => (
+            {recruitData.recruitmentDtoList.length > 0 ? (
+              recruitData.recruitmentDtoList.map((recruit: Irecruit) => (
                 <TableRow className={styles.tableRow} key={recruit.id}>
                   {tableFormat['recruitment'].columns.map(
                     (columnName: string, index: number) => (
@@ -169,7 +169,7 @@ function RecruitmentsHistoryList({
                 </TableRow>
               ))
             ) : (
-              <AdminEmptyItem content={'공고 지원자 내역이 비어있습니다'} />
+              <AdminEmptyItem content={'공고 지원자 내역이 비어있습니다1'} />
             )}
           </TableBody>
         </Table>
