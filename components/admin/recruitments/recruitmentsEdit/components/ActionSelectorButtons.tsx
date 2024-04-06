@@ -9,10 +9,7 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 import { Irecruit } from 'types/admin/adminRecruitmentsTypes';
-import { InventoryData } from 'types/inventoryTypes';
 import { instance, instanceInManage } from 'utils/axios';
-import { InfiniteScroll } from 'utils/infinityScroll';
-import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/ActionSelectorButtons.module.scss';
 
