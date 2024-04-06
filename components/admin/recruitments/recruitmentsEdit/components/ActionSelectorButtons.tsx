@@ -80,7 +80,7 @@ export default function ActionSelectorButtons({
           };
         } else {
           const stringCheckList = question.checkList?.map(
-            (item) => item.contents
+            (item) => item.content
           );
           return {
             question: question.question,

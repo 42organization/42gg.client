@@ -63,7 +63,7 @@ export default function useRecruitmentEditInfo(
     if (!question.checkList) return;
 
     const checkItem = question.checkList[checkItemIdx];
-    checkItem.contents = contents;
+    checkItem.content = contents;
 
     updateRecruitFrom(updatedForm);
   };
@@ -90,7 +90,7 @@ export default function useRecruitmentEditInfo(
   const addCheckItemToQuestion = (questionIdx: number) => {
     if (!recruitmentEditInfo.form) return;
     const checkItem: IcheckItem = {
-      contents: '',
+      content: '',
     };
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
