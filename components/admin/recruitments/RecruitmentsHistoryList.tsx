@@ -20,9 +20,8 @@ import {
   RecruitmentDetailProps,
   RecruitmentsPages,
 } from 'types/admin/adminRecruitmentsTypes';
-// import { instanceInManage } from 'utils/axios';
+import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
-import { mockInstance } from 'utils/mockAxios';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
 import {
@@ -60,15 +59,20 @@ function RecruitmentsHistoryList({
 
   const getRecruitHandler = useCallback(async () => {
     try {
-      // const res = await instanceInManage.get(
-      //   `/recruitments?page=${currentPage}&size=20`
-      // );
-      const res = await mockInstance.get(`admin/recruitments`);
+      const res = await instanceInManage.get(
+        `/recruitments?page=${currentPage}&size=20`
+      );
+      // FIXME : 페이지네이션 x 임시로 1페이지로 고정
       setRecruitData({
-        recruitment: res.data.recruitment,
-        totalPage: res.data.totalPages,
-        currentPage: res.data.number + 1,
+        recruitment: res.data.recruitments,
+        totalPage: 1,
+        currentPage: 1,
       });
+      // setRecruitData({
+      //   recruitment: res.data.recruitment,
+      //   totalPage: res.data.totalPages,
+      //   currentPage: res.data.number + 1,
+      // });
     } catch (e: any) {
       setSnackBar({
         toastName: 'get recruitment',
