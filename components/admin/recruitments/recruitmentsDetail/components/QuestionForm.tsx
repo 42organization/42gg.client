@@ -23,7 +23,7 @@ function MultiCheckInput({ checkList }: CheckInputProps) {
                   fullWidth
                   required
                   label='직접입력'
-                  value={checkItem.contents}
+                  value={checkItem.content}
                   size='small'
                   variant='standard'
                 />
@@ -50,7 +50,7 @@ function SingleCheckInput({ checkList }: CheckInputProps) {
                   fullWidth
                   required
                   label='직접입력'
-                  value={checkItem.contents}
+                  value={checkItem.content}
                   size='small'
                   variant='standard'
                 />

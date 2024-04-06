@@ -55,7 +55,7 @@ function MultiCheckInput({
                   fullWidth
                   required
                   label='직접입력'
-                  value={checkItem.contents}
+                  value={checkItem.content}
                   size='small'
                   variant='standard'
                   onChange={(e) => inputChangeHandler(e, idx)}
@@ -111,7 +111,7 @@ function SingleCheckInput({
                   fullWidth
                   required
                   label='직접입력'
-                  value={checkItem.contents}
+                  value={checkItem.content}
                   size='small'
                   variant='standard'
                   onChange={(e) => inputChangeHandler(e, idx)}
