@@ -145,8 +145,9 @@ export interface Modal {
   tournamentId?: number;
   // recruit result
   recruitResult?: {
+    recruitId: number;
     applicationId: number;
-    status: 'PROGRESS_INTERVIEW' | 'FAIL';
+    status: 'PROGRESS_INTERVIEW' | 'FAIL' | 'PASS';
     interviewDate: Date | null;
   };
 }

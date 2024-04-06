@@ -59,6 +59,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
   };
 
   const handleApplicationResultModal = (
+    recruitId: number,
     applicationId: number,
     status: 'PROGRESS_INTERVIEW' | 'FAIL',
     interviewDate: Date | null
@@ -66,6 +67,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
     setModal({
       modalName: 'ADMIN-RECRUIT_RESULT',
       recruitResult: {
+        recruitId,
         applicationId,
         status,
         interviewDate,
@@ -73,9 +75,19 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
     });
   };
 
-  const handleInterviewResultModal = () => {
+  const handleInterviewResultModal = (
+    recruitId: number,
+    applicationId: number,
+    status: 'PASS' | 'FAIL'
+  ) => {
     setModal({
       modalName: 'ADMIN-RECRUIT_RESULT',
+      recruitResult: {
+        recruitId,
+        applicationId,
+        status,
+        interviewDate: null,
+      },
     });
   };
 
@@ -143,6 +155,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
             variant='outlined'
             onClick={() => {
               handleApplicationResultModal(
+                recruitId,
                 recruit.applicationId,
                 'PROGRESS_INTERVIEW',
                 startDate
@@ -155,6 +168,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
             variant='outlined'
             onClick={() => {
               handleApplicationResultModal(
+                recruitId,
                 recruit.applicationId,
                 'FAIL',
                 startDate
@@ -162,7 +176,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
             }}
           >
             불합
-          </Button>{' '}
+          </Button>
           {/* 임시 버튼 */}
         </div>
       );
@@ -189,7 +203,11 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
           <Button
             variant='outlined'
             onClick={() => {
-              /* resultHandler(recruit.id, alignment[recruit.id], 'result'); */
+              handleInterviewResultModal(
+                recruitId,
+                recruit.applicationId,
+                alignment[recruit.applicationId] === '합격' ? 'PASS' : 'FAIL'
+              );
             }}
           >
             결과
