@@ -61,7 +61,7 @@ export interface IrecruitUserTable {
 }
 
 export interface IrecruitArrayTable {
-  applications: IrecruitUserTable[];
+  applicationResults: IrecruitUserTable[];
   totalPage: number;
   currentPage: number;
 }

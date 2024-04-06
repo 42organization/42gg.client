@@ -32,7 +32,7 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
     // currentPage
   );
 
-  if (!recruitUserData.applications) {
+  if (!recruitUserData.applicationResults?.length) {
     return (
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
@@ -47,7 +47,7 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
 
   return (
     <>
-      {FilterQptionsUI(recruitUserData.applications, recruitId)}
+      {FilterQptionsUI(recruitUserData.applicationResults, recruitId)}
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <TableHead className={styles.tableHeader}>
@@ -63,7 +63,7 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
             </TableRow>
           </TableHead>
           <TableBody className={styles.tableBody}>
-            {recruitUserData.applications.map((recruit) =>
+            {recruitUserData.applicationResults.map((recruit) =>
               renderTableCells(recruit, questions)
             )}
           </TableBody>
