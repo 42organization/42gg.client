@@ -73,13 +73,11 @@ function AdminRecruitResultModal({
     );
   }
 
-  if (status === 'PASS' || status === 'FAIL') {
-    return (
-      <div className={styles.container}>
-        <button onClick={sendFinalResult}>최종 결과 등록</button>
-      </div>
-    );
-  }
+  return (
+    <div className={styles.container}>
+      <button onClick={sendFinalResult}>최종 결과 등록</button>
+    </div>
+  );
 }
 
 export default AdminRecruitResultModal;
