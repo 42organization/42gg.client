@@ -5,7 +5,7 @@ import {
   Iquestion,
   Irecruit,
 } from 'types/admin/adminRecruitmentsTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 
 export interface IFormManager {
@@ -198,7 +198,7 @@ export default function useRecruitmentEditInfo(
   const importRecruitmentInfo = async (recruitId: number) => {
     if (recruitId <= 0) return;
     try {
-      const res = await mockInstance.get('/recruitments/' + recruitId);
+      const res = await instanceInManage.get('/recruitments/' + recruitId);
       const data: Irecruit = {
         title: res.data.title,
         startDate: new Date(res.data.startDate),
