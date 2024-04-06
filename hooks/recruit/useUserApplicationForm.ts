@@ -15,7 +15,7 @@ function useUserApplicationForm(
     (applicantAnswers: IApplicantAnswer[]): Promise<AxiosResponse> => {
       if (mode === 'APPLY' && applicationId === null) {
         return instance.post(`/recruitments/${recruitId}/applications`, {
-          form: applicantAnswers,
+          forms: applicantAnswers,
         });
       }
       return instance.patch(
