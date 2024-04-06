@@ -6,17 +6,21 @@ import AdminDeleteMegaphoneModal from 'components/modal/admin/AdminDeleteMegapho
 import AdminDeleteProfileModal from 'components/modal/admin/AdminDeleteProfileModal';
 import AdminEditCoinPolicyModal from 'components/modal/admin/AdminEditCoinPolicy';
 import AdminEditItemModal from 'components/modal/admin/AdminEditItem';
+import AdminEditTournamentBraket from 'components/modal/admin/AdminEditTournamentBraket';
 import AdminFeedbackCheck from 'components/modal/admin/AdminFeedbackCheckModal';
 import AdminModifyScoreModal from 'components/modal/admin/AdminModifyScoreModal';
 import AdminNotiUserModal from 'components/modal/admin/AdminNotiUserModal';
+import AdminPartyPenaltyModal from 'components/modal/admin/AdminPartyPenaltyModal';
 import AdminPenaltyModal from 'components/modal/admin/AdminPenaltyModal';
 import AdminProfileModal from 'components/modal/admin/AdminProfileModal';
+import AdminRecruitMessageTemplateModal from 'components/modal/admin/AdminRecruitMessageTemplateModal';
+import TemplateModal from 'components/modal/admin/AdminTemplateModal';
+import AdminTournamentParticipantEditModal from 'components/modal/admin/AdminTournamentParticipantEditModal/AdminTournamentParticipantEditModal';
 import AdminUserCoinModal from 'components/modal/admin/AdminUserCoinModal';
 import DeletePenaltyModal from 'components/modal/admin/DeletePenaltyModal';
 import DetailModal from 'components/modal/admin/DetailModal';
 import AdminSeasonEdit from 'components/modal/admin/SeasonEdit';
-import AdminEditTournamentBraket from '../admin/AdminEditTournamentBraket';
-import AdminTournamentParticipantEditModal from '../admin/AdminTournamentParticipantEditModal/AdminTournamentParticipantEditModal';
+import PartyRoomEditModal from 'components/modal/party/PartyRoomEditModal';
 
 export default function AdminModal() {
   const {
@@ -34,6 +38,9 @@ export default function AdminModal() {
     coinPolicy,
     tournament,
     tournamentId,
+    template,
+    partyPenalty,
+    roomId,
   } = useRecoilValue(modalState);
 
   if (!modalName) {
@@ -90,6 +97,12 @@ export default function AdminModal() {
     'ADMIN-TOURNAMENT_PARTICIPANT_EDIT': tournamentId ? (
       <AdminTournamentParticipantEditModal tournamentId={tournamentId} />
     ) : null,
+    'ADMIN-PARTY_TEMPLATE': <TemplateModal template={template} />,
+    'ADMIN-PARTY_PENALTY': (
+      <AdminPartyPenaltyModal partyPenalty={partyPenalty} />
+    ),
+    'ADMIN-PARTY_EDIT': roomId ? <PartyRoomEditModal roomId={roomId} /> : null,
+    'ADMIN-RECRUIT_MESSAGE_TEMPLATE': <AdminRecruitMessageTemplateModal />,
   };
 
   return content[modalName];

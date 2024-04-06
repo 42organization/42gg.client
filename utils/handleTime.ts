@@ -56,11 +56,27 @@ export const isAfterMin = (gameTimeString: string, min: number) => {
  * */
 export const dateToString = (d: Date) => {
   const year = d.getFullYear();
-  const month = d.getMonth() + 1;
-  const date = d.getDate();
-  const hour = d.getHours();
-  const min = d.getMinutes();
+  const month = fillZero((d.getMonth() + 1).toString(), 2);
+  const date = fillZero(d.getDate().toString(), 2);
+  const hour = fillZero(d.getHours().toString(), 2);
+  const min = fillZero(d.getMinutes().toString(), 2);
   return `${year}-${month}-${date} ${hour}:${min}`;
+};
+
+/**
+ * @description 시간을 YYYY년 MM월 DD일 E요일 HH시 MM분 형식으로 반환
+ * @param {Date} d 시간 문자열
+ * @return 시간(YYYY년 MM월 DD일 E요일 HH시 MM분)
+ */
+
+export const dateToKRFullString = (d: Date) => {
+  const year = d.getFullYear();
+  const month = fillZero((d.getMonth() + 1).toString(), 2);
+  const date = fillZero(d.getDate().toString(), 2);
+  const day = ['일', '월', '화', '수', '목', '금', '토'][d.getDay()];
+  const hour = fillZero(d.getHours().toString(), 2);
+  const min = fillZero(d.getMinutes().toString(), 2);
+  return `${year}년 ${month}월 ${date}일 ${day}요일 ${hour}시 ${min}분`;
 };
 
 /**
@@ -195,3 +211,61 @@ export const dateToKRLocaleTimeString = (d: Date) => {
     hour12: true,
   });
 };
+
+/**
+ *  타겟 시간과 비교 시간을 받아 남은 시간을 반환
+ *  @param {Date} targetTime
+ *  @param {Date} cmpTime default: 현재 시간
+ *  @return x년, x월, x일, x시간, x분 순으로 값이 있으면 그 값을 반환.
+ */
+export const getRemainTime = ({
+  targetTime,
+  cmpTime = new Date(),
+}: {
+  targetTime: Date;
+  cmpTime?: Date;
+}) => {
+  const year = targetTime.getFullYear() - cmpTime.getFullYear();
+  const month = targetTime.getMonth() - cmpTime.getMonth();
+  const day = targetTime.getDate() - cmpTime.getDate();
+  const hour = targetTime.getHours() - cmpTime.getHours();
+  const min = targetTime.getMinutes() - cmpTime.getMinutes();
+
+  return year > 0
+    ? `${year}년 남음`
+    : month > 0
+    ? `${month}개월 남음`
+    : day > 0
+    ? `${day}일 남음`
+    : hour > 0
+    ? `${hour}시간 남음`
+    : min > 0
+    ? `${min}분 남음`
+    : `마감`;
+};
+
+/**
+ *  현재 시간부터 타겟 시간까지의 시간을 계산
+ *  @param {string | Date} dateString
+ *  @return 문자열 "HH:MM:SS"
+ */
+export function calculatePeriod(dateString: string | Date) {
+  const targetDate =
+    typeof dateString === 'string' ? new Date(dateString) : dateString;
+  const timeDifference = targetDate.getTime() - Date.now(); // 밀리초 단위의 차이
+
+  if (timeDifference < 0) {
+    return '00:00:00'; // 이미 기간이 지난 경우 00:00 반환
+  }
+
+  const hour = Math.floor(timeDifference / (60 * 60 * 1000));
+  const minute = Math.floor((timeDifference % (60 * 60 * 1000)) / (60 * 1000));
+  const second = Math.floor((timeDifference % (60 * 1000)) / 1000);
+
+  // 시간과 분을 항상 두 자리 숫자로 포맷팅
+  const formattedHour = hour < 10 ? `0${hour}` : `${hour}`;
+  const formattedMinute = minute < 10 ? `0${minute}` : `${minute}`;
+  const formattedSecond = second < 10 ? `0${second}` : `${second}`;
+
+  return formattedHour + ':' + formattedMinute + ':' + formattedSecond;
+}

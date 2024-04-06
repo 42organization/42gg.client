@@ -5,6 +5,7 @@ import GameResult from 'components/game/GameResult';
 import TournamentPreview from 'components/main/TournamentPreview';
 import RankListMain from 'components/rank/topRank/RankListMain';
 import styles from 'styles/main/Section.module.scss';
+import PartyPreview from './PartyPreview';
 
 type SectionProps = {
   sectionTitle: string;
@@ -18,6 +19,7 @@ export default function Section({ sectionTitle, path }: SectionProps) {
   const pathCheck: pathType = {
     game: <GameResult />,
     rank: <RankListMain isMain={true} season={0} />,
+    party: <PartyPreview />,
     tournament: <TournamentPreview />,
   };
 
