@@ -6,7 +6,7 @@ import {
   RecruitmentDetailProps,
   RecruitmentsMainProps,
 } from 'types/admin/adminRecruitmentsTypes';
-import { instanceInManage } from 'utils/axios';
+import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/recruitments/recruitmentDetail/RecruitmentDetail.module.scss';
 import ActionSelectorButtons from './components/ActionSelectorButtons';
@@ -33,7 +33,7 @@ export default function RecruitmentDetail({
   const getRecruitmentInfo = async () => {
     setIsLoading(true);
     try {
-      const res = await instanceInManage.get('/recruitments/' + recruit.id);
+      const res = await instance.get('/recruitments/' + recruit.id);
       const data: Irecruit = {
         id: recruit.id,
         status: recruit.status,

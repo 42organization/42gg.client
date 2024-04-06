@@ -41,11 +41,11 @@ export default function ActionSelectorButtons({
 
   const getRecruitHandler = async () => {
     try {
-      const res = await instanceInManage.get(
-        `/recruitments?page=${1}&size=${100}`
+      // FIXME : 1페이지 고정인 부분 주석으로 설명 추가해주세요. (의도된것인지 / 최근 100개만 보는 것인지 등)
+      const res = await instance.get(
+        `/admin/recruitments?page=${1}&size=${100}`
       );
-      console.log(res.data.recruitments);
-      setRecruitmentsHistory(res.data.recruitments);
+      setRecruitmentsHistory(res.data.recruitmentDtoList);
     } catch (e: any) {
       setSnackBar({
         toastName: 'get recruitment',

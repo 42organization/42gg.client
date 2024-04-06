@@ -20,7 +20,7 @@ import {
   RecruitmentDetailProps,
   RecruitmentsPages,
 } from 'types/admin/adminRecruitmentsTypes';
-import { instanceInManage } from 'utils/axios';
+import { instance } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -48,7 +48,7 @@ function RecruitmentsHistoryList({
   setPage: Dispatch<SetStateAction<RecruitmentsPages>>;
 }) {
   const [recruitData, setRecruitData] = useState<IrecruitTable>({
-    recruitment: [],
+    recruitmentDtoList: [],
     totalPage: 0,
     currentPage: 0,
   });
@@ -59,12 +59,12 @@ function RecruitmentsHistoryList({
 
   const getRecruitHandler = useCallback(async () => {
     try {
-      const res = await instanceInManage.get(
-        `/recruitments?page=${currentPage}&size=20`
+      const res = await instance.get(
+        `/admin/recruitments?page=${currentPage}&size=20`
       );
       // FIXME : 페이지네이션 x 임시로 1페이지로 고정
       setRecruitData({
-        recruitment: res.data.recruitments,
+        recruitmentDtoList: res.data.recruitmentDtoList,
         totalPage: 1,
         currentPage: 1,
       });
@@ -156,8 +156,8 @@ function RecruitmentsHistoryList({
         <Table className={styles.table} aria-label='customized table'>
           <AdminTableHead tableName={'recruitment'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {recruitData.recruitment.length > 0 ? (
-              recruitData.recruitment.map((recruit: Irecruit) => (
+            {recruitData.recruitmentDtoList.length > 0 ? (
+              recruitData.recruitmentDtoList.map((recruit: Irecruit) => (
                 <TableRow className={styles.tableRow} key={recruit.id}>
                   {tableFormat['recruitment'].columns.map(
                     (columnName: string, index: number) => (
@@ -169,7 +169,7 @@ function RecruitmentsHistoryList({
                 </TableRow>
               ))
             ) : (
-              <AdminEmptyItem content={'공고 지원자 내역이 비어있습니다'} />
+              <AdminEmptyItem content={'공고 내역이 비어있습니다'} />
             )}
           </TableBody>
         </Table>

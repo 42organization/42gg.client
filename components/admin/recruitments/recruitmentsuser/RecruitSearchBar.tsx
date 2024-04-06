@@ -6,10 +6,10 @@ import styles from 'styles/admin/common/AdminSearchBar.module.scss';
 
 const MAX_SEARCH_LENGTH = 15;
 
-export default function RecruitSearchBar() {
+export default function RecruitSearchBar({ recruitId }: { recruitId: number }) {
   const { keyword, setKeyword, searchBarRef } = useSearchBar();
 
-  const { initSearch } = useRecruitmentUserFilter();
+  const { initSearch } = useRecruitmentUserFilter(recruitId);
 
   const adminhandleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
