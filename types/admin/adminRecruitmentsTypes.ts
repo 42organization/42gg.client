@@ -44,11 +44,21 @@ export interface InoticationTable {
   currentPage: number;
 }
 
+// 유저 응답 데이터 interface
+// TODO : 버그 해결용 임시 처리이기 때문에 추후 수정 필요
+export interface IuserFormResponse {
+  questionId?: number | null;
+  question: string;
+  inputType: 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
+  answer?: string;
+  checkedList?: Array<IcheckItem>;
+}
+
 export interface IrecruitUserTable {
   applicationId: number;
   intraId: string;
   status?: '합격' | '불합격' | '심사중';
-  form: Iquestion[];
+  form: IuserFormResponse[];
 }
 
 export interface IrecruitArrayTable {
