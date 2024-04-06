@@ -11,12 +11,13 @@ export interface Irecruit {
   form?: Array<Iquestion>;
 }
 
+// 지원서 질문 interface (응답 전)
 export interface Iquestion {
   questionId?: number | null;
   question: string;
   inputType: 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
   answer?: string;
-  checkedList?: Array<IcheckItem>;
+  checkList?: Array<IcheckItem>;
 }
 
 export interface IcheckItem {
