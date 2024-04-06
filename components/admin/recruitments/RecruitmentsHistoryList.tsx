@@ -20,7 +20,7 @@ import {
   RecruitmentDetailProps,
   RecruitmentsPages,
 } from 'types/admin/adminRecruitmentsTypes';
-import { instanceInManage } from 'utils/axios';
+import { instance } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -59,8 +59,8 @@ function RecruitmentsHistoryList({
 
   const getRecruitHandler = useCallback(async () => {
     try {
-      const res = await instanceInManage.get(
-        `/recruitments?page=${currentPage}&size=20`
+      const res = await instance.get(
+        `/admin/recruitments?page=${currentPage}&size=20`
       );
       // FIXME : 페이지네이션 x 임시로 1페이지로 고정
       setRecruitData({
