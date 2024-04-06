@@ -26,10 +26,10 @@ const tableTitle: { [key: string]: string } = {
 };
 
 function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  // const [currentPage, setCurrentPage] = useState<number>(1);
   const { recruitUserData, questions } = useRecruitmentUserFilter(
-    recruitId,
-    currentPage
+    recruitId
+    // currentPage
   );
 
   if (!recruitUserData.applications) {
@@ -47,7 +47,7 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
 
   return (
     <>
-      {FilterQptionsUI(recruitUserData.applications)}
+      {FilterQptionsUI(recruitUserData.applications, recruitId)}
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <TableHead className={styles.tableHeader}>
@@ -70,13 +70,13 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
         </Table>
       </TableContainer>
       <div className={styles.pageNationContainer}>
-        <PageNation
+        {/* <PageNation
           curPage={recruitUserData.currentPage}
           totalPages={recruitUserData.totalPage}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}
-        />
+        /> */}
       </div>
     </>
   );

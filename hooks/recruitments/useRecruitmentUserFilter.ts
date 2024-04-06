@@ -8,7 +8,8 @@ import {
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 
-const useRecruitmentUserFilter = (currentPage?: number, recruitId?: number) => {
+// FIXME : 페이지네이션 여부 담당자와 다시 확인하기 (현재 페이지네이션 없음)
+const useRecruitmentUserFilter = (recruitId: number, currentPage?: number) => {
   const [recruitUserData, setRecruitUserData] = useState<IrecruitArrayTable>({
     applications: [],
     totalPage: 0,
