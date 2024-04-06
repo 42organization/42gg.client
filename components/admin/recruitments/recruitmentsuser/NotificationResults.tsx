@@ -71,7 +71,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
       //   `/admin/recruitments?page=${currentPage}&size=20`
       // );
       const res = await instanceInManage.get(
-        `/admin/recruitments/${recruitId}/applicants`
+        `/recruitments/${recruitId}/applicants`
       );
       // FIXME : 페이지네이션 x 임시로 1페이지로 고정
       setNotificationData({
