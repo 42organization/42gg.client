@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import { useMutation } from 'react-query';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { Box, Button, Modal, Typography } from '@mui/material';
-import { mockInstance } from 'utils/mockAxios';
+import { instance } from 'utils/axios';
 import {
   applicationAlertState,
   applicationModalState,
@@ -24,7 +24,7 @@ function CancelModal(props: ICancelModalProps) {
 
   const { mutate } = useMutation(
     (applicationId: number | null): Promise<AxiosResponse> => {
-      return mockInstance.delete(
+      return instance.delete(
         `/recruitments/${recruitId}/applications/${applicationId}`
       );
     }

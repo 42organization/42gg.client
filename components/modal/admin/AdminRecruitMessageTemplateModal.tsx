@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-// import { instanceInManage } from 'utils/axios';
 import { useSetRecoilState } from 'recoil';
 import {
   IRecruitmentTemplate,
   RecruitmentMessageType,
 } from 'types/recruit/recruitments';
-import { mockInstance } from 'utils/mockAxios';
+import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import TemplateEditor from 'components/admin/recruitments/recruitmentsuser/tmplateEditor';
 import styles from 'styles/admin/modal/AdminRecruitMessageTemplateModal.module.scss';
@@ -20,8 +19,7 @@ function AdminRecruitMessageTemplateModal() {
   });
   const getTemplates = async () => {
     try {
-      // const res = await instanceInManage.get('/recruitments/result/message');
-      const res = await mockInstance.get('/admin/recruitments/result/message');
+      const res = await instanceInManage.get('/recruitments/result/message');
       const messages = res.data.messages.reduce(
         (acc: TemplateListType, curr: IRecruitmentTemplate) => {
           acc[curr.messageType] = curr.message;

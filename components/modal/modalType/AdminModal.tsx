@@ -14,13 +14,14 @@ import AdminPartyPenaltyModal from 'components/modal/admin/AdminPartyPenaltyModa
 import AdminPenaltyModal from 'components/modal/admin/AdminPenaltyModal';
 import AdminProfileModal from 'components/modal/admin/AdminProfileModal';
 import AdminRecruitMessageTemplateModal from 'components/modal/admin/AdminRecruitMessageTemplateModal';
-import TemplateModal from 'components/modal/admin/AdminTemplateModal';
 import AdminTournamentParticipantEditModal from 'components/modal/admin/AdminTournamentParticipantEditModal/AdminTournamentParticipantEditModal';
 import AdminUserCoinModal from 'components/modal/admin/AdminUserCoinModal';
 import DeletePenaltyModal from 'components/modal/admin/DeletePenaltyModal';
 import DetailModal from 'components/modal/admin/DetailModal';
 import AdminSeasonEdit from 'components/modal/admin/SeasonEdit';
-import PartyRoomEditModal from 'components/modal/party/PartyRoomEditModal';
+import AdminRecruitResultModal from '../admin/AdminRecruitResultModal';
+import TemplateModal from '../admin/AdminTemplateModal';
+import PartyRoomEditModal from '../party/PartyRoomEditModal';
 
 export default function AdminModal() {
   const {
@@ -38,6 +39,7 @@ export default function AdminModal() {
     coinPolicy,
     tournament,
     tournamentId,
+    recruitResult,
     template,
     partyPenalty,
     roomId,
@@ -97,12 +99,16 @@ export default function AdminModal() {
     'ADMIN-TOURNAMENT_PARTICIPANT_EDIT': tournamentId ? (
       <AdminTournamentParticipantEditModal tournamentId={tournamentId} />
     ) : null,
+    'ADMIN-RECRUIT_MESSAGE_TEMPLATE': <AdminRecruitMessageTemplateModal />,
+    // 임시 결과 등록 모달
+    'ADMIN-RECRUIT_RESULT': recruitResult ? (
+      <AdminRecruitResultModal {...recruitResult} />
+    ) : null,
     'ADMIN-PARTY_TEMPLATE': <TemplateModal template={template} />,
     'ADMIN-PARTY_PENALTY': (
       <AdminPartyPenaltyModal partyPenalty={partyPenalty} />
     ),
     'ADMIN-PARTY_EDIT': roomId ? <PartyRoomEditModal roomId={roomId} /> : null,
-    'ADMIN-RECRUIT_MESSAGE_TEMPLATE': <AdminRecruitMessageTemplateModal />,
   };
 
   return content[modalName];

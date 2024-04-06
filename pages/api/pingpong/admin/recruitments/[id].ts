@@ -9,24 +9,45 @@ const fullRecruitData1 = {
       form: [
         {
           questionId: 1,
-          question: '이름',
+          question: '질문 1',
           inputType: 'TEXT',
-          answer: '홍길동',
+          answer: '답변 1',
         },
         {
           questionId: 2,
-          question: '나이',
+          question: '질문 2',
           inputType: 'SINGLE_CHECK',
-          answer: '20',
+          checkedList: [{ checkId: 1, content: '선택지 1' }],
         },
         {
           questionId: 3,
-          question: '성별',
+          question: '질문 3',
           inputType: 'MULTI_CHECK',
-          checkList: [
+          checkedList: [
             {
-              checkId: 1,
-              content: '남',
+              checkId: 2,
+              content: '선택지 2',
+            },
+            {
+              checkId: 3,
+              content:
+                '선택지 3ㅁㄴㅇㄹㄴㅁㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㄹㅁㄴㄹㅁㄴㅁㄴㄹㅁ',
+            },
+          ],
+        },
+        {
+          questionId: 4,
+          question: '질문 4',
+          inputType: 'MULTI_CHECK',
+          checkedList: [
+            {
+              checkId: 2,
+              content: '선택지 2',
+            },
+            {
+              checkId: 4,
+              content:
+                '선택지 2sadfsadfasdfasfsadfasfasdㅁㄴㅇㄹㅁㄴㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㄴㅁㅇㄹㅁㄴㄹㅁㄴㄹㄴㅁㄹㅁㄴㄹㅁㄴㄹㅁㄴㄹㅁㄹ',
             },
           ],
         },
@@ -52,11 +73,11 @@ const fullRecruitData1 = {
         {
           questionId: 3,
           question: '성별',
-          inputType: 'TEXT',
-          checkList: [
+          inputType: 'SINGLE_CHECK',
+          checkedList: [
             {
-              checkId: 1,
-              content: '여',
+              checkId: 6,
+              content: '남',
             },
           ],
         },
@@ -82,10 +103,10 @@ const fullRecruitData1 = {
         {
           questionId: 3,
           question: '성별',
-          inputType: 'TEXT',
-          checkList: [
+          inputType: 'SINGLE_CHECK',
+          checkedList: [
             {
-              checkId: 1,
+              checkId: 5,
               content: '여',
             },
           ],

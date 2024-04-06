@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { mockInstance } from 'utils/mockAxios';
+import { instance } from 'utils/axios';
 
 const useCheckRecruit = () => {
   const [isRecruiting, setIsRecruiting] = useState<boolean>(false);
@@ -8,7 +8,7 @@ const useCheckRecruit = () => {
     queryKey: ['checkRecruit'],
     staleTime: 1000 * 60 * 5, // 5분
     queryFn: async () => {
-      const res = await mockInstance.get('/recruitments');
+      const res = await instance.get('/recruitments?page=1&size=1'); // 1개만 불러와서 존재 여부만 확인
       return res.data;
     },
   });

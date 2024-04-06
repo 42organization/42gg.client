@@ -16,8 +16,7 @@ import {
   Inotication,
   InoticationTable,
 } from 'types/admin/adminRecruitmentsTypes';
-// import { instanceInManage } from 'utils/axios';
-import { mockInstance } from 'utils/mockAxios';
+import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -26,7 +25,7 @@ import {
   AdminTableHead,
 } from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
-import styles from 'styles/admin/recruitments/Recruitments.module.scss';
+import styles from 'styles/admin/recruitments/RecruitmentsUser.module.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const tableTitle: { [key: string]: string } = {
@@ -58,6 +57,39 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
     });
   };
 
+  const handleApplicationResultModal = (
+    recruitId: number,
+    applicationId: number,
+    status: 'PROGRESS_INTERVIEW' | 'FAIL',
+    interviewDate: Date | null
+  ) => {
+    setModal({
+      modalName: 'ADMIN-RECRUIT_RESULT',
+      recruitResult: {
+        recruitId,
+        applicationId,
+        status,
+        interviewDate,
+      },
+    });
+  };
+
+  const handleInterviewResultModal = (
+    recruitId: number,
+    applicationId: number,
+    status: 'PASS' | 'FAIL'
+  ) => {
+    setModal({
+      modalName: 'ADMIN-RECRUIT_RESULT',
+      recruitResult: {
+        recruitId,
+        applicationId,
+        status,
+        interviewDate: null,
+      },
+    });
+  };
+
   const handleAlignment = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string | null,
@@ -71,13 +103,20 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
       // const res = await instanceInManage.get(
       //   `/admin/recruitments?page=${currentPage}&size=20`
       // );
-      const id = recruitId;
-      const res = await mockInstance.get(`/admin/recruitments/${id}`);
+      const res = await instanceInManage.get(
+        `/recruitments/${recruitId}/applicants`
+      );
+      // FIXME : 페이지네이션 x 임시로 1페이지로 고정
       setNotificationData({
-        noticationList: res.data.applications,
-        totalPage: res.data.totalPages,
-        currentPage: res.data.number + 1,
+        noticationList: res.data.applicationResults,
+        totalPage: 1,
+        currentPage: 1,
       });
+      // setNotificationData({
+      //   noticationList: res.data.applications,
+      //   totalPage: res.data.totalPages,
+      //   currentPage: res.data.number + 1,
+      // });
     } catch (e: any) {
       setSnackBar({
         toastName: 'get notification',
@@ -105,7 +144,11 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
     );
   }
 
-  const renderTableCell = (recruit: Inotication, columnName: string) => {
+  const renderTableCell = (
+    recruitId: number,
+    recruit: Inotication,
+    columnName: string
+  ) => {
     if (columnName === 'interview') {
       return (
         <div className={styles.interview}>
@@ -114,7 +157,33 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
             onChange={(date) => setStartDate(date)}
           />
           &nbsp;
-          <Button variant='outlined'>면접</Button>
+          <Button
+            variant='outlined'
+            onClick={() => {
+              handleApplicationResultModal(
+                recruitId,
+                recruit.applicationId,
+                'PROGRESS_INTERVIEW',
+                startDate
+              );
+            }}
+          >
+            면접
+          </Button>
+          <Button
+            variant='outlined'
+            onClick={() => {
+              handleApplicationResultModal(
+                recruitId,
+                recruit.applicationId,
+                'FAIL',
+                startDate
+              );
+            }}
+          >
+            불합
+          </Button>
+          {/* 임시 버튼 */}
         </div>
       );
     }
@@ -140,7 +209,11 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
           <Button
             variant='outlined'
             onClick={() => {
-              /* resultHandler(recruit.id, alignment[recruit.id], 'result'); */
+              handleInterviewResultModal(
+                recruitId,
+                recruit.applicationId,
+                alignment[recruit.applicationId] === '합격' ? 'PASS' : 'FAIL'
+              );
             }}
           >
             결과
@@ -162,7 +235,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
                 {tableFormat['notificationList'].columns.map(
                   (columnName: string, index: number) => (
                     <TableCell className={styles.tableBodyItem} key={index}>
-                      {renderTableCell(recruit, columnName)}
+                      {renderTableCell(recruitId, recruit, columnName)}
                     </TableCell>
                   )
                 )}
