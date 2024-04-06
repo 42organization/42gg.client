@@ -5,9 +5,10 @@ import {
   IcheckItem,
   IrecruitArrayTable,
 } from 'types/admin/adminRecruitmentsTypes';
-import { mockInstance } from 'utils/mockAxios';
+import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 
+// FIXME: 컴포넌트 이름 오타 수정
 const useRucruitmentUserFilter = (currentPage?: number, recruitId?: number) => {
   const [recruitUserData, setRecruitUserData] = useState<IrecruitArrayTable>({
     applications: [],
@@ -31,13 +32,20 @@ const useRucruitmentUserFilter = (currentPage?: number, recruitId?: number) => {
       //     }
       //   }
       // );
-      const id = recruitId;
-      const res = await mockInstance.get(`/admin/recruitments/${id}`);
+      const res = await instanceInManage.get(
+        `/recruitments/${recruitId}/applicants`
+      );
+      // FIXME: 페이지네이션 x (페이지네이션이 없는 api?) 임시로 1페이지로 고정
       setRecruitUserData({
-        applications: res.data.applications,
-        totalPage: res.data.totalPages,
-        currentPage: res.data.number + 3,
+        applications: res.data.applicationResults,
+        totalPage: 1,
+        currentPage: 1,
       });
+      // setRecruitUserData({
+      //   applications: res.data.applications,
+      //   totalPage: res.data.totalPages,
+      //   currentPage: res.data.number + 3,
+      // });
     } catch (e: any) {
       setSnackBar({
         toastName: 'get recruitment',
