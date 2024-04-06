@@ -174,14 +174,7 @@ export const tableFormat: TableFormat = {
   },
   recruitUserList: {
     name: '지원자 목록',
-    columns: [
-      'id',
-      'intraId',
-      'status',
-      'createdAt',
-      'detailUser',
-      'detailRecruit',
-    ],
+    columns: ['', 'intraId', 'status', 'question'],
   },
   recruitEditTitle: {
     name: '공고 수정',

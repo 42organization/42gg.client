@@ -16,13 +16,13 @@ export interface Iquestion {
   question: string;
   inputType: 'TEXT' | 'SINGLE_CHECK' | 'MULTI_CHECK';
   answer?: string;
-  checkList?: Array<IcheckItem>;
+  checkedList?: Array<IcheckItem>;
 }
 
 export interface IcheckItem {
   checkId?: number;
   sortNum?: number;
-  contents: string;
+  content: string;
 }
 
 export interface Inotication {
@@ -44,12 +44,16 @@ export interface InoticationTable {
 }
 
 export interface IrecruitUserTable {
-  applications: {
-    applicationId: number;
-    intraId: string;
-    status?: '합격' | '불합격' | '심사중';
-    form: Array<Iquestion>;
-  }[];
+  applicationId: number;
+  intraId: string;
+  status?: '합격' | '불합격' | '심사중';
+  form: Iquestion[];
+}
+
+export interface IrecruitArrayTable {
+  applications: IrecruitUserTable[];
+  totalPage: number;
+  currentPage: number;
 }
 
 export interface RecruitmentsPages {
