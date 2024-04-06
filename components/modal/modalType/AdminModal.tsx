@@ -18,6 +18,7 @@ import AdminUserCoinModal from 'components/modal/admin/AdminUserCoinModal';
 import DeletePenaltyModal from 'components/modal/admin/DeletePenaltyModal';
 import DetailModal from 'components/modal/admin/DetailModal';
 import AdminSeasonEdit from 'components/modal/admin/SeasonEdit';
+import AdminRecruitResultModal from '../admin/AdminRecruitResultModal';
 
 export default function AdminModal() {
   const {
@@ -35,6 +36,7 @@ export default function AdminModal() {
     coinPolicy,
     tournament,
     tournamentId,
+    recruitResult,
   } = useRecoilValue(modalState);
 
   if (!modalName) {
@@ -92,6 +94,10 @@ export default function AdminModal() {
       <AdminTournamentParticipantEditModal tournamentId={tournamentId} />
     ) : null,
     'ADMIN-RECRUIT_MESSAGE_TEMPLATE': <AdminRecruitMessageTemplateModal />,
+    // 임시 결과 등록 모달
+    'ADMIN-RECRUIT_RESULT': recruitResult ? (
+      <AdminRecruitResultModal {...recruitResult} />
+    ) : null,
   };
 
   return content[modalName];

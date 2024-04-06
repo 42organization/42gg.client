@@ -58,6 +58,39 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
     });
   };
 
+  const handleApplicationResultModal = (
+    recruitId: number,
+    applicationId: number,
+    status: 'PROGRESS_INTERVIEW' | 'FAIL',
+    interviewDate: Date | null
+  ) => {
+    setModal({
+      modalName: 'ADMIN-RECRUIT_RESULT',
+      recruitResult: {
+        recruitId,
+        applicationId,
+        status,
+        interviewDate,
+      },
+    });
+  };
+
+  const handleInterviewResultModal = (
+    recruitId: number,
+    applicationId: number,
+    status: 'PASS' | 'FAIL'
+  ) => {
+    setModal({
+      modalName: 'ADMIN-RECRUIT_RESULT',
+      recruitResult: {
+        recruitId,
+        applicationId,
+        status,
+        interviewDate: null,
+      },
+    });
+  };
+
   const handleAlignment = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string | null,
@@ -105,7 +138,11 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
     );
   }
 
-  const renderTableCell = (recruit: Inotication, columnName: string) => {
+  const renderTableCell = (
+    recruitId: number,
+    recruit: Inotication,
+    columnName: string
+  ) => {
     if (columnName === 'interview') {
       return (
         <div className={styles.interview}>
@@ -114,7 +151,33 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
             onChange={(date) => setStartDate(date)}
           />
           &nbsp;
-          <Button variant='outlined'>면접</Button>
+          <Button
+            variant='outlined'
+            onClick={() => {
+              handleApplicationResultModal(
+                recruitId,
+                recruit.applicationId,
+                'PROGRESS_INTERVIEW',
+                startDate
+              );
+            }}
+          >
+            면접
+          </Button>
+          <Button
+            variant='outlined'
+            onClick={() => {
+              handleApplicationResultModal(
+                recruitId,
+                recruit.applicationId,
+                'FAIL',
+                startDate
+              );
+            }}
+          >
+            불합
+          </Button>
+          {/* 임시 버튼 */}
         </div>
       );
     }
@@ -140,7 +203,11 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
           <Button
             variant='outlined'
             onClick={() => {
-              /* resultHandler(recruit.id, alignment[recruit.id], 'result'); */
+              handleInterviewResultModal(
+                recruitId,
+                recruit.applicationId,
+                alignment[recruit.applicationId] === '합격' ? 'PASS' : 'FAIL'
+              );
             }}
           >
             결과
@@ -162,7 +229,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
                 {tableFormat['notificationList'].columns.map(
                   (columnName: string, index: number) => (
                     <TableCell className={styles.tableBodyItem} key={index}>
-                      {renderTableCell(recruit, columnName)}
+                      {renderTableCell(recruitId, recruit, columnName)}
                     </TableCell>
                   )
                 )}
