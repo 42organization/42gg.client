@@ -92,6 +92,9 @@ export default function AdminModal() {
       <AdminTournamentParticipantEditModal tournamentId={tournamentId} />
     ) : null,
     'ADMIN-RECRUIT_MESSAGE_TEMPLATE': <AdminRecruitMessageTemplateModal />,
+    // 임시 결과 등록 모달
+    'ADMIN-RECRUIT_APPLICATION_RESULT': <AdminRecruitMessageTemplateModal />,
+    'ADMIN-RECRUIT_INTERVIEW_RESULT': <AdminRecruitMessageTemplateModal />,
   };
 
   return content[modalName];

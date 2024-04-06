@@ -58,6 +58,27 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
     });
   };
 
+  const handleApplicationResultModal = (
+    applicationId: number,
+    status: 'PROGRESS_INTERVIEW' | 'FAIL',
+    interviewDate: Date | null
+  ) => {
+    setModal({
+      modalName: 'ADMIN-RECRUIT_APPLICATION_RESULT',
+      applicationResult: {
+        applicationId,
+        status,
+        interviewDate,
+      },
+    });
+  };
+
+  const handleInterviewResultModal = () => {
+    setModal({
+      modalName: 'ADMIN-RECRUIT_INTERVIEW_RESULT',
+    });
+  };
+
   const handleAlignment = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string | null,
@@ -105,7 +126,11 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
     );
   }
 
-  const renderTableCell = (recruit: Inotication, columnName: string) => {
+  const renderTableCell = (
+    recruitId: number,
+    recruit: Inotication,
+    columnName: string
+  ) => {
     if (columnName === 'interview') {
       return (
         <div className={styles.interview}>
@@ -114,7 +139,31 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
             onChange={(date) => setStartDate(date)}
           />
           &nbsp;
-          <Button variant='outlined'>면접</Button>
+          <Button
+            variant='outlined'
+            onClick={() => {
+              handleApplicationResultModal(
+                recruit.applicationId,
+                'PROGRESS_INTERVIEW',
+                startDate
+              );
+            }}
+          >
+            면접
+          </Button>
+          <Button
+            variant='outlined'
+            onClick={() => {
+              handleApplicationResultModal(
+                recruit.applicationId,
+                'FAIL',
+                startDate
+              );
+            }}
+          >
+            불합
+          </Button>{' '}
+          {/* 임시 버튼 */}
         </div>
       );
     }
@@ -162,7 +211,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
                 {tableFormat['notificationList'].columns.map(
                   (columnName: string, index: number) => (
                     <TableCell className={styles.tableBodyItem} key={index}>
-                      {renderTableCell(recruit, columnName)}
+                      {renderTableCell(recruitId, recruit, columnName)}
                     </TableCell>
                   )
                 )}
