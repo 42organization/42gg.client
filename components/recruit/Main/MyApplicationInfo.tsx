@@ -6,15 +6,19 @@ import style from 'styles/recruit/Main/myRecruitment.module.scss';
 const MyApplicationInfo = ({
   status,
   recruitId,
+  applicationId,
 }: {
   status?: resultType;
   recruitId: string;
+  applicationId?: number;
 }) => {
   const router = useRouter();
 
   const onCheck = () => {
-    // router.push(`/recruit/${recruitId}/applications?applicationId=${applicationId});
-    router.push(`/recruit/${recruitId}/my-application?applicationId=${1}`);
+    if (!applicationId) return;
+    router.push(
+      `/recruit/${recruitId}/applications?applicationId=${applicationId}`
+    );
   };
 
   if (!status)
