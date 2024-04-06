@@ -16,7 +16,7 @@ import {
   Inotication,
   InoticationTable,
 } from 'types/admin/adminRecruitmentsTypes';
-import { instanceInManage } from 'utils/axios';
+import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -103,8 +103,8 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
       // const res = await instanceInManage.get(
       //   `/admin/recruitments?page=${currentPage}&size=20`
       // );
-      const res = await instanceInManage.get(
-        `/recruitments/${recruitId}/applicants`
+      const res = await instance.get(
+        `/admin/recruitments/${recruitId}/applicants`
       );
       // FIXME : 페이지네이션 x 임시로 1페이지로 고정
       setNotificationData({
