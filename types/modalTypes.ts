@@ -13,6 +13,7 @@ import { StoreManualMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
 import { ITournament } from './admin/adminTournamentTypes';
 import { GameMode } from './gameTypes';
+import { PartyGameTemplate, PartyPenaltyAdmin } from './partyTypes';
 import { TournamentInfo } from './tournamentTypes';
 
 type EventModal = 'WELCOME' | 'ANNOUNCEMENT';
@@ -35,6 +36,8 @@ type StoreModal = 'MANUAL' | 'COIN_HISTORY';
 
 type TournamentModal = 'REGISTRY' | 'MANUAL';
 
+type PartyModal = 'REPORT';
+
 type AdminModal =
   | 'PROFILE'
   | 'USER-COIN'
@@ -54,7 +57,11 @@ type AdminModal =
   | 'TOURNAMENT_BRAKET_EDIT'
   | 'TOURNAMENT_PARTICIPANT_EDIT'
   | 'RECRUIT_MESSAGE_TEMPLATE'
-  | 'RECRUIT_RESULT';
+  | 'RECRUIT_RESULT'
+  | 'PARTY_TEMPLATE'
+  | 'PARTY_PENALTY'
+  | 'PARTY_EDIT'
+  | 'RECRUIT_MESSAGE_TEMPLATE';
 
 type ModalName =
   | null
@@ -70,7 +77,8 @@ type ModalName =
   | `EDIT-ITEM-${EditItemModal}`
   | `STORE-${StoreModal}`
   | `PURCHASE-${PurchaseModal}`
-  | `TOURNAMENT-${TournamentModal}`;
+  | `TOURNAMENT-${TournamentModal}`
+  | `PARTY-${PartyModal}`;
 
 export interface Cancel {
   startTime: string;
@@ -114,6 +122,13 @@ export interface IRandomItem {
   color: RandomColors;
 }
 
+export interface PartyReportModalData {
+  name: 'COMMENT' | 'ROOM' | 'NOSHOW';
+  commentId?: number;
+  roomId?: number;
+  userIntraId?: string;
+}
+
 export interface Modal {
   modalName: ModalName;
   manual?: Manual;
@@ -150,4 +165,8 @@ export interface Modal {
     status: 'PROGRESS_INTERVIEW' | 'FAIL' | 'PASS';
     interviewDate: Date | null;
   };
+  partyReport?: PartyReportModalData;
+  template?: PartyGameTemplate;
+  partyPenalty?: PartyPenaltyAdmin;
+  roomId?: number;
 }

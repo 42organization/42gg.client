@@ -5,6 +5,8 @@ on:
     branches:
       - test-deploy
 
+  workflow_dispatch:
+
 jobs:
   continuous-deployment:
     runs-on: macos-12

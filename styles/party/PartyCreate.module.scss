@@ -1,0 +1,234 @@
+@import 'styles/common.scss';
+@import 'styles/party/PartyCommon.scss';
+
+.pageContainer {
+  @include pageWrap;
+  color: $white1;
+}
+
+.selectionPageContainer {
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      margin: 0;
+      font-size: $giant-big-font;
+    }
+    button {
+      padding: 0;
+      color: $white1;
+      background-color: inherit;
+      border-style: none;
+    }
+  }
+  .categoryContainer {
+    margin: 1em 0;
+    ul {
+      margin: 0;
+      li {
+        button {
+          width: 100%;
+          height: 2.5em;
+          padding: 0;
+          margin: 1px 0;
+          font-size: $giant-font;
+          color: $white1;
+          background: $party-gradient0;
+          border-style: none;
+          border-radius: $medium-radius;
+
+          &.selected {
+            background: $party-gradient1;
+            border: 2px solid white;
+          }
+        }
+      }
+    }
+  }
+  .templateContainer {
+    h3 {
+      margin: 0.6em 0;
+    }
+    ul {
+      height: 15em;
+      padding: 1em;
+      margin: 0;
+      overflow-y: scroll;
+      background-color: white;
+      border-radius: $medium-radius;
+
+      li > button {
+        display: flex;
+        width: 100%;
+        padding: 0.1em 0.5em;
+        font-size: $medium-font;
+        font-weight: 400;
+        line-height: 2em;
+        text-align: left;
+        background-color: inherit;
+        border-style: none;
+        border-bottom: 1px solid $gray;
+        justify-content: space-between;
+
+        &.selected {
+          background-color: $party-blue-sky5;
+        }
+      }
+    }
+  }
+  .submitButtonWrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5em;
+
+    button {
+      padding: 0.5em 2em;
+      font-size: $giant-big-font;
+      font-weight: 600;
+      color: white;
+      background: $party-gradient2;
+      border-style: none;
+      border-radius: $medium-radius;
+    }
+  }
+}
+
+.detailFormContainer {
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1em;
+
+    h2 {
+      margin: 0;
+      font-size: $giant-font;
+      letter-spacing: 1px;
+    }
+    button {
+      padding: 0;
+      color: $white1;
+      background-color: inherit;
+      border-style: none;
+    }
+  }
+  input,
+  select,
+  textarea {
+    height: 2em;
+    font-size: $big-font;
+    border-style: none;
+    border-radius: 8px;
+  }
+  select {
+    -webkit-appearance: none;
+  }
+  form {
+    label {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1em;
+
+      h3 {
+        margin: 0 0 0.5em;
+        font-size: $medium-font;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+      &.titleLabel {
+        position: relative;
+
+        input {
+          width: 100%;
+          padding-left: 8px;
+        }
+        .titleCount {
+          position: absolute;
+          right: 0.5em;
+          bottom: 0.5em;
+          font-size: $medium-font;
+          color: $medium-gray;
+        }
+      }
+      .peopleSelectWrap {
+        display: flex;
+        align-items: center;
+        font-size: $big-font;
+
+        select {
+          width: 2.5em;
+          text-align: center;
+        }
+        .textCenter {
+          width: 2.5em;
+          text-align: center;
+        }
+      }
+      .dueDateWrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+        font-size: $big-font;
+
+        select {
+          width: 2.5em;
+          text-align: center;
+        }
+        .textCenter {
+          width: 2.5em;
+          text-align: center;
+        }
+        .dueDate {
+          position: absolute;
+          right: 0;
+          padding: 0.5em;
+          font-size: $medium-font;
+          color: $medium-gray;
+          text-wrap: nowrap;
+          border-radius: 8px;
+        }
+      }
+      &.contentLabel {
+        position: relative;
+
+        textarea {
+          height: 100%;
+          padding: 0.8em;
+          overflow-y: scroll;
+          font-size: $medium-font;
+          line-height: 1.3em;
+        }
+        .contentCount {
+          position: absolute;
+          right: 0.5em;
+          bottom: 0.5em;
+          font-size: $medium-font;
+          color: $medium-gray;
+        }
+      }
+    }
+    .submitButtonWrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 2.5em;
+
+      button {
+        box-sizing: border-box;
+        display: flex;
+        width: 70%;
+        height: 2em;
+        padding: 0;
+        font-size: $giant-big-font;
+        font-weight: 600;
+        color: white;
+        background: $party-gradient3;
+        border-style: none;
+        border-radius: $medium-radius;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
