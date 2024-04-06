@@ -64,8 +64,8 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
     interviewDate: Date | null
   ) => {
     setModal({
-      modalName: 'ADMIN-RECRUIT_APPLICATION_RESULT',
-      applicationResult: {
+      modalName: 'ADMIN-RECRUIT_RESULT',
+      recruitResult: {
         applicationId,
         status,
         interviewDate,
@@ -75,7 +75,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
 
   const handleInterviewResultModal = () => {
     setModal({
-      modalName: 'ADMIN-RECRUIT_INTERVIEW_RESULT',
+      modalName: 'ADMIN-RECRUIT_RESULT',
     });
   };
 

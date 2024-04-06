@@ -54,8 +54,7 @@ type AdminModal =
   | 'TOURNAMENT_BRAKET_EDIT'
   | 'TOURNAMENT_PARTICIPANT_EDIT'
   | 'RECRUIT_MESSAGE_TEMPLATE'
-  | 'RECRUIT_APPLICATION_RESULT'
-  | 'RECRUIT_INTERVIEW_RESULT';
+  | 'RECRUIT_RESULT';
 
 type ModalName =
   | null
@@ -145,13 +144,9 @@ export interface Modal {
   tournament?: ITournament;
   tournamentId?: number;
   // recruit result
-  applicationResult?: {
+  recruitResult?: {
     applicationId: number;
     status: 'PROGRESS_INTERVIEW' | 'FAIL';
     interviewDate: Date | null;
-  };
-  interviewResult?: {
-    applicationId: number;
-    result: string;
   };
 }
