@@ -1,5 +1,8 @@
-import { Dispatch, SetStateAction } from 'react';
-import { IrecruitEditInfo } from 'types/admin/adminRecruitmentsTypes';
+import {
+  Iquestion,
+  Irecruit,
+  RecruitmentEditProps,
+} from 'types/admin/adminRecruitmentsTypes';
 import useRecruitmentEditInfo from 'hooks/recruitments/useRecruitmentEditInfo';
 import styles from 'styles/admin/recruitments/recruitmentEdit/RecruitmentEdit.module.scss';
 import ActionSelectorButtons from './components/ActionSelectorButtons';
@@ -7,27 +10,36 @@ import QuestionFormBuilder from './components/QuestionFormBuilder';
 import QuillDescriptionEditor from './components/QuillDescriptionEditor';
 import TitleTimeRangeSelector from './components/TitleTimeRangeSelector';
 
-const initRecruitmentEditInfo: IrecruitEditInfo = {
+const emptyRecruitmentEditInfo: Irecruit = {
   title: '',
-  startDate: '',
-  endDate: '',
+  startDate: new Date(),
+  endDate: new Date(),
   generation: '',
-  content: '',
+  contents: '',
   form: [],
 };
 
-interface RecruitmentEditProps {
-  setPageType: Dispatch<SetStateAction<'MAIN' | 'EDIT'>>;
-}
-export default function RecruitmentEdit({ setPageType }: RecruitmentEditProps) {
-  const { recruitmentEditInfo, setRecruitmentEditInfoField, formManager } =
-    useRecruitmentEditInfo(initRecruitmentEditInfo);
+export default function RecruitmentEdit({
+  setPage,
+  recruitmentInfo,
+  mode,
+}: RecruitmentEditProps) {
+  const initRecruitmentEditInfo = recruitmentInfo
+    ? recruitmentInfo
+    : emptyRecruitmentEditInfo;
+
+  const {
+    recruitmentEditInfo,
+    setRecruitmentEditInfoField,
+    formManager,
+    importRecruitmentInfo,
+  } = useRecruitmentEditInfo(initRecruitmentEditInfo);
 
   return (
     <div className={styles.container}>
       <button
         onClick={() => {
-          setPageType('MAIN');
+          setPage({ pageType: 'MAIN', props: null });
         }}
       >
         메인으로가기
@@ -37,16 +49,17 @@ export default function RecruitmentEdit({ setPageType }: RecruitmentEditProps) {
         setRecruitmentEditInfoField={setRecruitmentEditInfoField}
       />
       <QuillDescriptionEditor
-        content={recruitmentEditInfo.content}
+        contents={recruitmentEditInfo.contents as string}
         setRecruitmentEditInfoField={setRecruitmentEditInfoField}
       />
       <QuestionFormBuilder
-        form={recruitmentEditInfo.form}
+        form={recruitmentEditInfo.form as Iquestion[]}
         formManager={formManager}
       />
       <ActionSelectorButtons
         recruitmentEditInfo={recruitmentEditInfo}
-        actionType='CREATE'
+        importRecruitmentInfo={importRecruitmentInfo}
+        actionType={mode}
       />
     </div>
   );

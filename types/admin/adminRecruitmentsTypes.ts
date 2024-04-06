@@ -1,19 +1,14 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface Irecruit {
-  id: number;
+  id?: number;
   startDate: Date;
   endDate: Date;
   title: string;
-  status: '모집전' | '모집중' | '완료';
+  contents?: string;
+  status?: '모집전' | '모집중' | '완료';
   generation: string;
-}
-
-export interface IrecruitEditInfo {
-  startDate: string;
-  endDate: string;
-  title: string;
-  content: string;
-  generation: string;
-  form: Array<Iquestion>;
+  form?: Array<Iquestion>;
 }
 
 export interface Iquestion {
@@ -26,7 +21,8 @@ export interface Iquestion {
 
 export interface IcheckItem {
   checkId?: number;
-  content: string;
+  sortNum?: number;
+  contents: string;
 }
 
 export interface Inotication {
@@ -40,6 +36,7 @@ export interface IrecruitTable {
   totalPage: number;
   currentPage: number;
 }
+
 export interface InoticationTable {
   noticationList: Array<Inotication>;
   totalPage: number;
@@ -53,4 +50,28 @@ export interface IrecruitUserTable {
     status?: '합격' | '불합격' | '심사중';
     form: Array<Iquestion>;
   }[];
+}
+
+export interface RecruitmentsPages {
+  pageType: 'MAIN' | 'EDIT' | 'DETAIL';
+  props:
+    | RecruitmentsMainProps
+    | RecruitmentEditProps
+    | RecruitmentDetailProps
+    | null;
+}
+
+export interface RecruitmentsMainProps {
+  setPage: Dispatch<SetStateAction<RecruitmentsPages>>;
+}
+
+export interface RecruitmentEditProps {
+  setPage: Dispatch<SetStateAction<RecruitmentsPages>>;
+  recruitmentInfo?: Irecruit | null;
+  mode: 'CREATE' | 'MODIFY';
+}
+
+export interface RecruitmentDetailProps {
+  setPage: Dispatch<SetStateAction<RecruitmentsPages>>;
+  recruit: Irecruit;
 }
