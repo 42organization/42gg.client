@@ -16,8 +16,7 @@ import {
   Inotication,
   InoticationTable,
 } from 'types/admin/adminRecruitmentsTypes';
-// import { instanceInManage } from 'utils/axios';
-import { mockInstance } from 'utils/mockAxios';
+import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/admin/table';
@@ -71,13 +70,20 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
       // const res = await instanceInManage.get(
       //   `/admin/recruitments?page=${currentPage}&size=20`
       // );
-      const id = recruitId;
-      const res = await mockInstance.get(`/admin/recruitments/${id}`);
+      const res = await instanceInManage.get(
+        `/admin/recruitments/${recruitId}/applicants`
+      );
+      // FIXME : 페이지네이션 x 임시로 1페이지로 고정
       setNotificationData({
-        noticationList: res.data.applications,
-        totalPage: res.data.totalPages,
-        currentPage: res.data.number + 1,
+        noticationList: res.data.applicationResults,
+        totalPage: 1,
+        currentPage: 1,
       });
+      // setNotificationData({
+      //   noticationList: res.data.applications,
+      //   totalPage: res.data.totalPages,
+      //   currentPage: res.data.number + 1,
+      // });
     } catch (e: any) {
       setSnackBar({
         toastName: 'get notification',
