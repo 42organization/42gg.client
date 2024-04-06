@@ -169,7 +169,7 @@ function RecruitmentsHistoryList({
                 </TableRow>
               ))
             ) : (
-              <AdminEmptyItem content={'공고 지원자 내역이 비어있습니다1'} />
+              <AdminEmptyItem content={'공고 내역이 비어있습니다'} />
             )}
           </TableBody>
         </Table>
