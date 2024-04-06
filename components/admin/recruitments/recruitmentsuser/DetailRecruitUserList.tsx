@@ -26,13 +26,13 @@ const tableTitle: { [key: string]: string } = {
 };
 
 function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  // const [currentPage, setCurrentPage] = useState<number>(1);
   const { recruitUserData, questions } = useRecruitmentUserFilter(
-    recruitId,
-    currentPage
+    recruitId
+    // currentPage
   );
 
-  if (!recruitUserData.applications) {
+  if (!recruitUserData.applicationResults?.length) {
     return (
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
@@ -47,7 +47,7 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
 
   return (
     <>
-      {FilterQptionsUI(recruitUserData.applications)}
+      {FilterQptionsUI(recruitUserData.applicationResults, recruitId)}
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <TableHead className={styles.tableHeader}>
@@ -63,20 +63,20 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
             </TableRow>
           </TableHead>
           <TableBody className={styles.tableBody}>
-            {recruitUserData.applications.map((recruit) =>
+            {recruitUserData.applicationResults.map((recruit) =>
               renderTableCells(recruit, questions)
             )}
           </TableBody>
         </Table>
       </TableContainer>
       <div className={styles.pageNationContainer}>
-        <PageNation
+        {/* <PageNation
           curPage={recruitUserData.currentPage}
           totalPages={recruitUserData.totalPage}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}
-        />
+        /> */}
       </div>
     </>
   );

@@ -26,9 +26,14 @@ const MenuProps = {
   },
 };
 
-function FilterQptionsUI(recruitUserData: IrecruitUserTable[]) {
+// FIXME : FilterQptionsUI 이름 변경하기 (의미를 알아보기 어려움)
+function FilterQptionsUI(
+  recruitUserData: IrecruitUserTable[],
+  recruitId: number
+) {
   const [answers, setAnswers] = useState<Array<IcheckItem>>([]);
-  const { checklistIds, handleChecklistChange } = useRecruitmentUserFilter();
+  const { checklistIds, handleChecklistChange } =
+    useRecruitmentUserFilter(recruitId);
 
   useEffect(() => {
     setAnswers(
@@ -50,7 +55,7 @@ function FilterQptionsUI(recruitUserData: IrecruitUserTable[]) {
   return (
     <div className={styles.filterWrap}>
       <div className={styles.searchWrap}>
-        <RecruitSearchBar />
+        <RecruitSearchBar recruitId={recruitId} />
       </div>
       <div className={styles.selectWrap}>
         <FormControl sx={{ m: 1, width: 200 }}>
