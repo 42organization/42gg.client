@@ -5,11 +5,10 @@ import {
   IcheckItem,
   IrecruitArrayTable,
 } from 'types/admin/adminRecruitmentsTypes';
-import { instanceInManage } from 'utils/axios';
+import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 
-// FIXME: 컴포넌트 이름 오타 수정
-const useRucruitmentUserFilter = (currentPage?: number, recruitId?: number) => {
+const useRecruitmentUserFilter = (currentPage?: number, recruitId?: number) => {
   const [recruitUserData, setRecruitUserData] = useState<IrecruitArrayTable>({
     applications: [],
     totalPage: 0,
@@ -32,8 +31,8 @@ const useRucruitmentUserFilter = (currentPage?: number, recruitId?: number) => {
       //     }
       //   }
       // );
-      const res = await instanceInManage.get(
-        `/recruitments/${recruitId}/applicants`
+      const res = await instance.get(
+        `/admin/recruitments/${recruitId}/applicants`
       );
       // FIXME: 페이지네이션 x (페이지네이션이 없는 api?) 임시로 1페이지로 고정
       setRecruitUserData({
@@ -98,4 +97,4 @@ const useRucruitmentUserFilter = (currentPage?: number, recruitId?: number) => {
   };
 };
 
-export default useRucruitmentUserFilter;
+export default useRecruitmentUserFilter;
