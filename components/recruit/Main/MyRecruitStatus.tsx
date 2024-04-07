@@ -34,7 +34,7 @@ const MyRecruitStatus = ({
 };
 
 const statusMessage = (status: resultType, interviewDate?: Date) => {
-  if (status === 'PROGRESS') return '지원서를 확인하고 있습니다.';
+  if (status === 'PROGRESS_DOCS') return '지원서를 확인하고 있습니다.';
   if (status === 'INTERVIEW' && interviewDate)
     return dateToKRFullString(new Date(interviewDate));
   if (status === 'PASS') return '합격';
