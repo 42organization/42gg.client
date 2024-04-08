@@ -10,19 +10,10 @@ import {
 } from '@mui/material';
 import { Irecruit } from 'types/admin/adminRecruitmentsTypes';
 import { instance, instanceInManage } from 'utils/axios';
+import { dateToDateTimeLocalString } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
+import useInfiniteRecruitList from 'hooks/admin/recruit/useInfiniteRecruitList';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/ActionSelectorButtons.module.scss';
-
-// interface PagenatedResponse {
-//   recruitmentHistory: Irecruit[];
-//   totalPage: number;
-// }
-
-// function fetchRecruitMemtHistoryData(page: number) {
-//   return instance.get(`/recruitments?page=${page}&size=${8}`).then((res) => {
-//     return res.data;
-//   });
-// }
 
 interface ActionSelectorButtonsProps {
   recruitmentEditInfo: Irecruit;
@@ -39,75 +30,67 @@ export default function ActionSelectorButtons({
     []
   );
 
-  const getRecruitHandler = async () => {
-    try {
-      // FIXME : 1페이지 고정인 부분 주석으로 설명 추가해주세요. (의도된것인지 / 최근 100개만 보는 것인지 등)
-      const res = await instance.get(
-        `/admin/recruitments?page=${1}&size=${100}`
-      );
-      setRecruitmentsHistory(res.data.recruitmentDtoList);
-    } catch (e: any) {
-      setSnackBar({
-        toastName: 'get recruitment',
-        severity: 'error',
-        message: `이전 공고를 불러오는데 실패했습니다.`,
-        clicked: true,
-      });
-    }
-  };
-
-  // const { data, error, isLoading, hasNextPage, fetchNextPage } =
-  //   InfiniteScroll<PagenatedResponse>(
-  //     'recruitment',
-  //     fetchRecruitMemtHistoryData,
-  //     'RT04'
-  //   );
+  // const getRecruitHandler = async () => {
+  //   try {
+  //     // FIXME : 1페이지 고정인 부분 주석으로 설명 추가해주세요. (의도된것인지 / 최근 100개만 보는 것인지 등)
+  //     const res = await instance.get(
+  //       `/admin/recruitments?page=${1}&size=${100}`
+  //     );
+  //     setRecruitmentsHistory(res.data.recruitmentDtoList);
+  //   } catch (e: any) {
+  //     setSnackBar({
+  //       toastName: 'get recruitment',
+  //       severity: 'error',
+  //       message: `이전 공고를 불러오는데 실패했습니다.`,
+  //       clicked: true,
+  //     });
+  //   }
+  // };
 
   const [selectedId, setSelectedId] = useState<string>('');
+
+  const { data, isLoading, isError, targetRef } = useInfiniteRecruitList();
 
   const setSnackBar = useSetRecoilState(toastState);
 
   const createRecruitmentHandler = async () => {
     try {
-      const convertedForm = recruitmentEditInfo.form?.map((question) => {
-        if (question.inputType === 'TEXT') {
-          return {
-            question: question.question,
-            inputType: question.inputType,
-          };
-        } else {
-          const stringCheckList = question.checkList?.map(
-            (item) => item.content
-          );
-          return {
-            question: question.question,
-            inputType: question.inputType,
-            checkList: stringCheckList,
-          };
-        }
-      });
-
       const res = await instance.post(`/admin/recruitments`, {
         title: recruitmentEditInfo.title,
-        startDateTime: '2024-04-06T08:29:07.424Z', //recruitmentEditInfo.startDate.toISOString(),
-        endDateTime: '2024-04-08T08:29:07.424Z', //recruitmentEditInfo.endDate.toISOString(),
+        startDate: dateToDateTimeLocalString(recruitmentEditInfo.startDate),
+        endDate: dateToDateTimeLocalString(recruitmentEditInfo.endDate),
         generation: recruitmentEditInfo.generation,
         contents: recruitmentEditInfo.contents,
-        form: convertedForm,
+        form: recruitmentEditInfo.form,
       });
-      // const res = await mockInstance.post(`admin/recruitments`, {
-      //   title: recruitmentEditInfo.title,
-      //   startDate: recruitmentEditInfo.startDate,
-      //   endDate: recruitmentEditInfo.endDate,
-      //   generation: recruitmentEditInfo.generation,
-      //   contents: recruitmentEditInfo.contents,
-      //   form: recruitmentEditInfo.form,
-      // });
     } catch (e: any) {
       setSnackBar({
         toastName: 'post recruitment',
         severity: 'error',
-        message: `생성 요청에 실패하였습니다.`,
+        message: e.response.data.message,
+        clicked: true,
+      });
+    }
+  };
+
+  const modifyRecruitmentHandler = async () => {
+    try {
+      const res = await instance.put(
+        `/admin/recruitments/${recruitmentEditInfo.id}`,
+        {
+          title: recruitmentEditInfo.title,
+          startDate: dateToDateTimeLocalString(recruitmentEditInfo.startDate),
+          endDate: dateToDateTimeLocalString(recruitmentEditInfo.endDate),
+          generation: recruitmentEditInfo.generation,
+          contents: recruitmentEditInfo.contents,
+          form: recruitmentEditInfo.form,
+        }
+      );
+    } catch (e: any) {
+      setSnackBar({
+        toastName: 'put recruitment',
+        severity: 'error',
+        message: e.response.data.message,
         clicked: true,
       });
     }
@@ -116,10 +99,6 @@ export default function ActionSelectorButtons({
   const selectChangehandler = ({ target }: SelectChangeEvent) => {
     setSelectedId(target.value);
   };
-
-  useEffect(() => {
-    getRecruitHandler();
-  }, []);
 
   return (
     <div className={styles.mainContainer}>
@@ -133,7 +112,16 @@ export default function ActionSelectorButtons({
             style={{ backgroundColor: 'white' }}
             onChange={selectChangehandler}
           >
-            {recruitmentsHistory.length === 0 ? (
+            {data?.pages.map((page, pageIndex) => {
+              return page.recruitments?.map((recruit) => {
+                return (
+                  <MenuItem key={recruit.id} value={recruit.id}>
+                    {recruit.title}
+                  </MenuItem>
+                );
+              });
+            })}
+            {/* {recruitmentsHistory.length === 0 ? (
               <MenuItem key={-1} value={-1}>
                 기존 공고가 없습니다.
               </MenuItem>
@@ -143,7 +131,7 @@ export default function ActionSelectorButtons({
                   {recruit.title}
                 </MenuItem>
               ))
-            )}
+            )} */}
           </Select>
         </FormControl>
         <Button
@@ -163,7 +151,9 @@ export default function ActionSelectorButtons({
         </Button>
       )}
       {actionType === 'MODIFY' && (
-        <Button variant='contained'>공고 수정</Button>
+        <Button variant='contained' onClick={modifyRecruitmentHandler}>
+          공고 수정
+        </Button>
       )}
     </div>
   );

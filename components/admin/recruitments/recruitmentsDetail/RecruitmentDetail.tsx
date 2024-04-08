@@ -33,7 +33,7 @@ export default function RecruitmentDetail({
   const getRecruitmentInfo = async () => {
     setIsLoading(true);
     try {
-      const res = await instance.get('/recruitments/' + recruit.id);
+      const res = await instance.get(`/recruitments/${recruit.id}`);
       const data: Irecruit = {
         id: recruit.id,
         status: recruit.status,

@@ -33,7 +33,7 @@ export interface Inotication {
 }
 
 export interface IrecruitTable {
-  recruitmentDtoList: Array<Irecruit>;
+  recruitments: Array<Irecruit>;
   totalPage: number;
   currentPage: number;
 }
@@ -64,6 +64,11 @@ export interface IrecruitArrayTable {
   applicationResults: IrecruitUserTable[];
   totalPage: number;
   currentPage: number;
+}
+
+export interface recruitListData {
+  recruitments: Irecruit[];
+  totalPage: number;
 }
 
 export interface RecruitmentsPages {
