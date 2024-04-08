@@ -64,7 +64,7 @@ function RecruitmentsHistoryList({
       );
       // FIXME : 페이지네이션 x 임시로 1페이지로 고정
       setRecruitData({
-        recruitmentDtoList: res.data.recruitmentDtoList,
+        recruitmentDtoList: res.data.recruitments,
         totalPage: 1,
         currentPage: 1,
       });
