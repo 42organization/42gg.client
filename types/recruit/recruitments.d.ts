@@ -55,14 +55,15 @@ export interface IRecruitmentDetail {
 export interface IApplicantAnswer {
   questionId: number;
   inputType: recruitmentQuestionTypes;
-  checkedList?: number[];
-  answer?: string;
+  checkedList: { checkListId: number; content: string }[];
+  answer: string | null;
 }
 
 export type ApplicationFormType = 'APPLY' | 'VIEW' | 'EDIT';
+
 export interface IUserApplicationInfo {
   applicationId: number;
-  endDate: string;
+  endTime: string;
   title: string;
   content: string;
 }

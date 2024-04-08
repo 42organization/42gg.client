@@ -28,7 +28,8 @@ function SingleCheckForm(props: IitemProps) {
   };
 
   useEffect(() => {
-    if (answer && answer.checkedList) setSingleCheck(answer?.checkedList);
+    if (answer && answer.checkedList)
+      setSingleCheck(answer?.checkedList.map((check) => check.checkListId));
   }, [answer]);
 
   return (
