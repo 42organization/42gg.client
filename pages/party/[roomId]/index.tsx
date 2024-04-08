@@ -15,6 +15,8 @@ export default function PartyDetailPage() {
     PartyRoomDetail | undefined
   >(undefined);
 
+  console.log('roomId:', roomId);
+
   useEffect(() => {
     fetchRoomDetail();
   }, []);
