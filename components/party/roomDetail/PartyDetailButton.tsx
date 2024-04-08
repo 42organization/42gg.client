@@ -81,8 +81,8 @@ function ReportNoShow({ roomId, userIntraId }: ParytButtonProps) {
 
 function ShareRoom() {
   const setSnackbar = useSetRecoilState(toastState);
-  const shareUrl = `${process.env.NEXT_PUBLIC_CLIENT_ENDPOINT}${
-    useRouter().asPath
+  const shareUrl = `${
+    process.env.NEXT_PUBLIC_CLIENT_ENDPOINT + useRouter().asPath
   }`;
 
   return (
