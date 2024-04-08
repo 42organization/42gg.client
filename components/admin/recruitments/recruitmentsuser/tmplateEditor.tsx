@@ -6,7 +6,7 @@ import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminRecruitMessageTemplateModal.module.scss';
 
 function TemplateEditor({ messageType, content }: IRecruitMessageTemplate) {
-  const [tempalte, setTemplate] = useState<IRecruitMessageTemplate>({
+  const [template, setTemplate] = useState<IRecruitMessageTemplate>({
     messageType: messageType,
     content: content,
   });
@@ -27,7 +27,7 @@ function TemplateEditor({ messageType, content }: IRecruitMessageTemplate) {
       setAlert(`${DATE}를 포함해주세요.`);
     } else {
       setAlert('');
-      setTemplate({ ...tempalte, content: message });
+      setTemplate({ ...template, content: message });
     }
   };
 
@@ -42,7 +42,7 @@ function TemplateEditor({ messageType, content }: IRecruitMessageTemplate) {
       return;
     }
     try {
-      await instanceInManage.post('/recruitments/result/message', tempalte);
+      await instanceInManage.post('/recruitments/result/message', template);
       setSnackbar({
         toastName: `post request`,
         severity: 'success',
