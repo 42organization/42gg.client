@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { List } from '@mui/material';
+import CollapseListItem from 'components/recruit/Main/CollapseListItem';
+import MyApplicationInfo from 'components/recruit/Main/MyApplicationInfo';
+import MyRecruitStatus from 'components/recruit/Main/MyRecruitStatus';
 import useGetRecruitResult from 'hooks/recruit/useGetRecruitResult';
 import style from 'styles/recruit/Main/myRecruitment.module.scss';
 import textStyle from 'styles/recruit/text.module.scss';
-import CollapseListItem from './CollapseListItem';
-import MyApplicationInfo from './MyApplicationInfo';
-import MyRecruitStatus from './MyRecruitStatus';
 
 const MyRecruitment = ({ applicationId }: { applicationId?: number }) => {
   const router = useRouter();

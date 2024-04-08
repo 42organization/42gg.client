@@ -1,8 +1,8 @@
 import { Stack } from '@mui/material';
 import { resultType } from 'types/recruit/recruitments';
 import { dateToKRFullString } from 'utils/handleTime';
+import RecruitStepper from 'components/recruit/Main/RecruitStepper';
 import style from 'styles/recruit/Main/myRecruitment.module.scss';
-import RecruitStepper from './RecruitStepper';
 
 const MyRecruitStatus = ({
   status,
