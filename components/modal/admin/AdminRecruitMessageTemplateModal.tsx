@@ -48,9 +48,9 @@ function AdminRecruitMessageTemplateModal() {
 
   return (
     <div className={styles.container}>
-      <TemplateEditor messageType='INTERVIEW' message={templates.INTERVIEW} />
-      <TemplateEditor messageType='PASS' message={templates.PASS} />
-      <TemplateEditor messageType='FAIL' message={templates.FAIL} />
+      <TemplateEditor messageType='INTERVIEW' content={templates.INTERVIEW} />
+      <TemplateEditor messageType='PASS' content={templates.PASS} />
+      <TemplateEditor messageType='FAIL' content={templates.FAIL} />
     </div>
   );
 }

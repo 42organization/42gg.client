@@ -6,11 +6,11 @@ import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminRecruitMessageTemplateModal.module.scss';
 
-function TemplateEditor({ messageType, message }: IRecruitMessageTemplate) {
+function TemplateEditor({ messageType, content }: IRecruitMessageTemplate) {
   const resetModal = useResetRecoilState(modalState);
   const [tempalte, setTemplate] = useState<IRecruitMessageTemplate>({
     messageType: messageType,
-    message: message,
+    content: content,
   });
   const [alert, setAlert] = useState<string>('');
   const setSnackbar = useSetRecoilState(toastState);
@@ -29,7 +29,7 @@ function TemplateEditor({ messageType, message }: IRecruitMessageTemplate) {
       setAlert(`${DATE}를 포함해주세요.`);
     } else {
       setAlert('');
-      setTemplate({ ...tempalte, message: message });
+      setTemplate({ ...tempalte, content: message });
     }
   };
 
@@ -68,7 +68,7 @@ function TemplateEditor({ messageType, message }: IRecruitMessageTemplate) {
       <div className={styles.textarea}>
         <textarea
           name='template'
-          defaultValue={message}
+          defaultValue={content}
           placeholder='템플릿을 입력해주세요.'
           rows={10}
           onChange={inputHandler}
