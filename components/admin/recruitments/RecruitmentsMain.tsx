@@ -1,10 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
-import {
-  RecruitmentsMainProps,
-  RecruitmentsPages,
-} from 'types/admin/adminRecruitmentsTypes';
+import { RecruitmentsMainProps } from 'types/admin/adminRecruitmentsTypes';
 import styles from 'styles/admin/store/StoreMain.module.scss';
-import RecruitmentEdit from './recruitmentsEdit/RecruitmentEdit';
 import RecruitmentsHistoryList from './RecruitmentsHistoryList';
 
 function RecruitmentsMain({ setPage }: RecruitmentsMainProps) {
