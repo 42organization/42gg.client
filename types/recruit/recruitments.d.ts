@@ -18,7 +18,7 @@ export type recruitmentListData = {
 
 export type resultType =
   | null
-  | 'PROGRESS'
+  | 'PROGRESS_DOCS'
   | 'APPLICATION_FAIL'
   | 'INTERVIEW'
   | 'PASS'
