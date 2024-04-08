@@ -5,6 +5,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import {
   Button,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Select,
@@ -126,9 +127,9 @@ export default function ActionSelectorButtons({
               });
             })}
             {hasNextPage && (
-              <Button onClick={() => fetchNextPage()}>
+              <IconButton aria-label='더보기' onClick={() => fetchNextPage()}>
                 <MoreHorizIcon />
-              </Button>
+              </IconButton>
             )}
             {/* {recruitmentsHistory.length === 0 ? (
               <MenuItem key={-1} value={-1}>
