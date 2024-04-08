@@ -25,7 +25,7 @@ $detailCommonRem: 1rem;
   border-radius: $mini-radius;
 
   hr {
-    border-top: 1px solid $medium-gray;
+    border-top: 0.1px solid $medium-gray;
   }
 }
 
@@ -165,12 +165,14 @@ $detailCommonRem: 1rem;
 }
 
 .btnContainer {
+  display: flex;
+  justify-content: space-between;
   text-align: right;
   border-bottom: 0.3rem;
 }
 
 .joinBtn {
-  width: 50%;
+  width: 49.5%;
   height: 3rem;
   margin-bottom: $detailCommonRem;
   font-family: $common-font;
@@ -190,7 +192,7 @@ $detailCommonRem: 1rem;
 }
 
 .leaveBtn {
-  width: 50%;
+  width: 49.5%;
   height: 3rem;
   margin-bottom: $detailCommonRem * 0.3;
   font-family: $common-font;
@@ -203,7 +205,7 @@ $detailCommonRem: 1rem;
 }
 
 .startBtn {
-  width: 50%;
+  width: 49.5%;
   height: 3rem;
   margin-bottom: $detailCommonRem * 0.3;
   font-family: $common-font;
@@ -228,7 +230,7 @@ $detailCommonRem: 1rem;
   border-radius: $mini-radius;
 
   hr {
-    margin: 0.1rem;
+    border-top: 0.1px solid $medium-gray;
   }
 }
 
@@ -308,33 +310,33 @@ $detailCommonRem: 1rem;
 .reportCommentBtn {
   display: flex;
   justify-items: right;
+  align-items: flex-end;
   background-color: inherit;
-  border: none;
+  border: 0;
 }
 
 .commentCreateBar {
   display: flex;
   min-height: 1.3rem;
   margin-bottom: 0.3rem;
-  background-color: rgba(216, 216, 216, 0.484);
+  background-color: rgb(232, 232, 232);
   border-radius: $small-radius;
   align-items: center;
 }
 
 .textBar {
   width: 100%;
-  margin-left: 0.5rem;
+  margin-left: 0.4rem;
   font-size: $small-font;
-  background-color: inherit;
+  color: black;
+  background-color: rgb(232, 232, 232);
   border: inherit;
-  opacity: 0.3;
 }
 
 .inputBtn {
   display: flex;
   background-color: inherit;
   border: none;
-  opacity: 0.3;
   align-items: right;
 }
 
