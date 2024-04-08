@@ -20,7 +20,6 @@ export default function Recruitments() {
       return <RecruitmentsMain setPage={setPage} />;
     case 'EDIT': {
       const props = page.props as RecruitmentEditProps;
-      console.log(props);
       return (
         <RecruitmentEdit
           setPage={setPage}

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { More } from '@mui/icons-material';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import {
   Button,
   FormControl,
@@ -8,12 +10,23 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import { Irecruit } from 'types/admin/adminRecruitmentsTypes';
-import { instance, instanceInManage } from 'utils/axios';
+import { Irecruit, recruitListData } from 'types/admin/adminRecruitmentsTypes';
+import { instance } from 'utils/axios';
 import { dateToDateTimeLocalString } from 'utils/handleTime';
+import { InfiniteScroll } from 'utils/infinityScroll';
 import { toastState } from 'utils/recoil/toast';
-import useInfiniteRecruitList from 'hooks/admin/recruit/useInfiniteRecruitList';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/ActionSelectorButtons.module.scss';
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 interface ActionSelectorButtonsProps {
   recruitmentEditInfo: Irecruit;
@@ -26,30 +39,18 @@ export default function ActionSelectorButtons({
   importRecruitmentInfo,
   actionType,
 }: ActionSelectorButtonsProps) {
-  const [recruitmentsHistory, setRecruitmentsHistory] = useState<Irecruit[]>(
-    []
-  );
-
-  // const getRecruitHandler = async () => {
-  //   try {
-  //     // FIXME : 1페이지 고정인 부분 주석으로 설명 추가해주세요. (의도된것인지 / 최근 100개만 보는 것인지 등)
-  //     const res = await instance.get(
-  //       `/admin/recruitments?page=${1}&size=${100}`
-  //     );
-  //     setRecruitmentsHistory(res.data.recruitmentDtoList);
-  //   } catch (e: any) {
-  //     setSnackBar({
-  //       toastName: 'get recruitment',
-  //       severity: 'error',
-  //       message: `이전 공고를 불러오는데 실패했습니다.`,
-  //       clicked: true,
-  //     });
-  //   }
-  // };
-
   const [selectedId, setSelectedId] = useState<string>('');
 
-  const { data, isLoading, isError, targetRef } = useInfiniteRecruitList();
+  const fetchRecruitList = (page: number) => {
+    return instance
+      .get(`/admin/recruitments?page=${page}&size=${5}`)
+      .then((res) => {
+        return res.data;
+      });
+  };
+
+  const { data, isLoading, isError, fetchNextPage, hasNextPage } =
+    InfiniteScroll<recruitListData>(['recruitList'], fetchRecruitList, 'JY09');
 
   const setSnackBar = useSetRecoilState(toastState);
 
@@ -109,7 +110,10 @@ export default function ActionSelectorButtons({
             defaultValue={''}
             value={selectedId}
             label='기존 공고'
-            style={{ backgroundColor: 'white' }}
+            style={{
+              backgroundColor: 'white',
+            }}
+            MenuProps={MenuProps}
             onChange={selectChangehandler}
           >
             {data?.pages.map((page, pageIndex) => {
@@ -121,6 +125,11 @@ export default function ActionSelectorButtons({
                 );
               });
             })}
+            {hasNextPage && (
+              <Button onClick={() => fetchNextPage()}>
+                <MoreHorizIcon />
+              </Button>
+            )}
             {/* {recruitmentsHistory.length === 0 ? (
               <MenuItem key={-1} value={-1}>
                 기존 공고가 없습니다.
