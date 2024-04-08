@@ -20,17 +20,19 @@ function AdminRecruitMessageTemplateModal() {
   const getTemplates = async () => {
     try {
       const res = await instanceInManage.get('/recruitments/result/message');
-      const messages = res.data.messages.reduce(
-        (acc: TemplateListType, curr: IRecruitmentTemplate) => {
-          acc[curr.messageType] = curr.message;
-          return acc;
-        },
-        {
-          INTERVIEW: '',
-          PASS: '',
-          FAIL: '',
-        }
-      );
+      const messages = res.data.messages
+        .filter((message: IRecruitmentTemplate) => message.isUse)
+        .reduce(
+          (acc: TemplateListType, curr: IRecruitmentTemplate) => {
+            acc[curr.messageType] = curr.message;
+            return acc;
+          },
+          {
+            INTERVIEW: '',
+            PASS: '',
+            FAIL: '',
+          }
+        );
       setTemplates(messages);
     } catch (e: any) {
       setSnackbar({
