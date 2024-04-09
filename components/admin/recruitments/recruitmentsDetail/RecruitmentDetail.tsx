@@ -36,7 +36,7 @@ export default function RecruitmentDetail({
       const res = await instance.get(`admin/recruitments/${recruit.id}`);
       const data: Irecruit = {
         id: recruit.id,
-        status: recruit.status,
+        isFinish: recruit.isFinish,
         title: res.data.title,
         startDate: new Date(res.data.startDate),
         endDate: new Date(res.data.endDate),

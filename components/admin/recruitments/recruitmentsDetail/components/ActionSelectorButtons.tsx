@@ -19,11 +19,10 @@ interface ActionSelectorButtonsProps {
 export default function ActionSelectorButtons({
   setPage,
   recruitmentInfo,
-  actionType,
 }: ActionSelectorButtonsProps) {
-  const STATE = recruitmentInfo.status === '모집중' ? false : true;
-
-  const [isFinish, setIsFinish] = useState<boolean>(STATE);
+  const [isFinish, setIsFinish] = useState<boolean>(
+    recruitmentInfo.isFinish as boolean
+  );
 
   const isStarted = recruitmentInfo.startDate > new Date();
   const setSnackBar = useSetRecoilState(toastState);

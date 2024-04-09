@@ -6,7 +6,7 @@ export interface Irecruit {
   endDate: Date;
   title: string;
   contents?: string;
-  status?: '모집전' | '모집중' | '완료';
+  isFinish?: boolean;
   generation: string;
   form?: Array<Iquestion>;
 }
