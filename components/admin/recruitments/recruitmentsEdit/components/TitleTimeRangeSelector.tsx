@@ -1,4 +1,3 @@
-import { SyntheticEvent } from 'react';
 import DatePicker from 'react-datepicker';
 import {
   Paper,
@@ -9,11 +8,6 @@ import {
   TableRow,
 } from '@mui/material';
 import { Irecruit } from 'types/admin/adminRecruitmentsTypes';
-import {
-  dateToKRLocaleTimeString,
-  dateToString,
-  dateToStringShort,
-} from 'utils/handleTime';
 import { AdminTableHead } from 'components/admin/common/AdminTable';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/TitleTimeRangeSelector.module.scss';
 
