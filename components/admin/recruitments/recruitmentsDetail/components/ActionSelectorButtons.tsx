@@ -43,7 +43,8 @@ export default function ActionSelectorButtons({
       const res = await instance.delete(
         `/admin/recruitments/${recruitmentInfo.id}`
       );
-      console.log(res);
+      alert('성공적으로 삭제가 완료되었습니다.');
+      setPage({ pageType: 'MAIN', props: null });
     } catch (e: any) {
       setSnackBar({
         toastName: 'post recruitment',
@@ -60,7 +61,7 @@ export default function ActionSelectorButtons({
   ) => {
     try {
       const res = await instance.patch(
-        `/admin/recruitments/${recruitmentInfo.id}/statu`,
+        `/admin/recruitments/${recruitmentInfo.id}/status`,
         {
           finish: !checked,
         }

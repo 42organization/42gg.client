@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import HomeIcon from '@mui/icons-material/Home';
+import { IconButton } from '@mui/material';
 import {
   Iquestion,
   Irecruit,
   RecruitmentDetailProps,
-  RecruitmentsMainProps,
 } from 'types/admin/adminRecruitmentsTypes';
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
@@ -42,7 +43,7 @@ export default function RecruitmentDetail({
         endDate: new Date(res.data.endDate),
         generation: res.data.generation,
         contents: res.data.contents,
-        form: res.data.form,
+        form: res.data.forms,
       };
       setRecruitmentInfo(data);
       setIsLoading(false);
@@ -62,14 +63,14 @@ export default function RecruitmentDetail({
 
   return (
     <div className={styles.container}>
-      <button
+      <IconButton
+        aria-label='메인으로 가기'
         onClick={() => {
-          const props = { setPage: setPage } as RecruitmentsMainProps;
-          setPage({ pageType: 'MAIN', props: props });
+          setPage({ pageType: 'MAIN', props: null });
         }}
       >
-        홈으로 돌아가기
-      </button>
+        <HomeIcon />
+      </IconButton>
       {isLoading ? (
         <p>로딩중...</p>
       ) : (

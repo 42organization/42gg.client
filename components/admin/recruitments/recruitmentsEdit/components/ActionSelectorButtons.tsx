@@ -71,7 +71,7 @@ export default function ActionSelectorButtons({
         contents: recruitmentEditInfo.contents,
         form: recruitmentEditInfo.form,
       });
-      alert('수정이 완료되었습니다.');
+      alert('공고를 성공적을 생성하였습니다.');
       setPage({ pageType: 'MAIN', props: null });
     } catch (e: any) {
       setSnackBar({
