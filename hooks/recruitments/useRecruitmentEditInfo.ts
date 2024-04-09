@@ -198,7 +198,7 @@ export default function useRecruitmentEditInfo(
   const importRecruitmentInfo = async (recruitId: number) => {
     if (recruitId <= 0) return;
     try {
-      const res = await instance.get('/recruitments/' + recruitId);
+      const res = await instance.get('/admin/recruitments/' + recruitId);
       const data: Irecruit = {
         title: res.data.title,
         startDate: new Date(res.data.startDate),

@@ -131,17 +131,6 @@ export default function ActionSelectorButtons({
                 <MoreHorizIcon />
               </IconButton>
             )}
-            {/* {recruitmentsHistory.length === 0 ? (
-              <MenuItem key={-1} value={-1}>
-                기존 공고가 없습니다.
-              </MenuItem>
-            ) : (
-              recruitmentsHistory.map((recruit: Irecruit) => (
-                <MenuItem key={recruit.id} value={recruit.id}>
-                  {recruit.title}
-                </MenuItem>
-              ))
-            )} */}
           </Select>
         </FormControl>
         <Button

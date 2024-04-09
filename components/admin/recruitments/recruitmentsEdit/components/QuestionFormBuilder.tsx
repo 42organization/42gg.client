@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { DropResult } from 'react-beautiful-dnd';
 import { CheckBox } from '@mui/icons-material';
 import AddIcon from '@mui/icons-material/Add';
@@ -237,14 +237,16 @@ export default function QuestionFormBuilder({
     number | null
   >(null);
 
+  const questionRef = useRef<Array<HTMLDivElement | null>>([]);
+
   const addQuestionHandler = () => {
-    if (focusedQuestionIdx === null) {
-      formManager.addEmptyQuestion(form.length - 1, 'TEXT');
-      setFocusedQuestion(form.length);
-    } else {
-      formManager.addEmptyQuestion(focusedQuestionIdx, 'TEXT');
-      setFocusedQuestion(focusedQuestionIdx + 1);
-    }
+    if (focusedQuestionIdx === null) setFocusedQuestion(form.length - 1);
+
+    formManager.addEmptyQuestion(focusedQuestionIdx as number, 'TEXT');
+    setFocusedQuestion((focusedQuestionIdx as number) + 1);
+    questionRef.current[(focusedQuestionIdx as number) - 1]?.scrollIntoView({
+      behavior: 'smooth',
+    });
   };
 
   const onDragEndHandler = ({ destination, source }: DropResult) => {
@@ -260,14 +262,17 @@ export default function QuestionFormBuilder({
           {form &&
             form.map((question, idx) => {
               return (
-                <Question
-                  key={idx}
-                  idx={idx}
-                  question={question}
-                  formManager={formManager}
-                  isFocused={focusedQuestionIdx === idx}
-                  setFocusedQuestion={setFocusedQuestion}
-                />
+                <>
+                  <Question
+                    key={idx}
+                    idx={idx}
+                    question={question}
+                    formManager={formManager}
+                    isFocused={focusedQuestionIdx === idx}
+                    setFocusedQuestion={setFocusedQuestion}
+                  />
+                  <div ref={(el) => (questionRef.current[idx] = el)}></div>
+                </>
               );
             })}
         </DraggableList>
