@@ -63,6 +63,7 @@ export default function RecruitmentEdit({
         recruitmentEditInfo={recruitmentEditInfo}
         importRecruitmentInfo={importRecruitmentInfo}
         actionType={mode}
+        setPage={setPage}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { More } from '@mui/icons-material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -11,7 +11,11 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import { Irecruit, recruitListData } from 'types/admin/adminRecruitmentsTypes';
+import {
+  Irecruit,
+  RecruitmentsPages,
+  recruitListData,
+} from 'types/admin/adminRecruitmentsTypes';
 import { instance } from 'utils/axios';
 import { dateToDateTimeLocalString } from 'utils/handleTime';
 import { InfiniteScroll } from 'utils/infinityScroll';
@@ -33,12 +37,14 @@ interface ActionSelectorButtonsProps {
   recruitmentEditInfo: Irecruit;
   importRecruitmentInfo: (recruitId: number) => void;
   actionType: 'CREATE' | 'MODIFY';
+  setPage: Dispatch<SetStateAction<RecruitmentsPages>>;
 }
 
 export default function ActionSelectorButtons({
   recruitmentEditInfo,
   importRecruitmentInfo,
   actionType,
+  setPage,
 }: ActionSelectorButtonsProps) {
   const [selectedId, setSelectedId] = useState<string>('');
 
@@ -65,6 +71,8 @@ export default function ActionSelectorButtons({
         contents: recruitmentEditInfo.contents,
         form: recruitmentEditInfo.form,
       });
+      alert('수정이 완료되었습니다.');
+      setPage({ pageType: 'MAIN', props: null });
     } catch (e: any) {
       setSnackBar({
         toastName: 'post recruitment',
@@ -88,6 +96,8 @@ export default function ActionSelectorButtons({
           form: recruitmentEditInfo.form,
         }
       );
+      alert('수정이 완료되었습니다.');
+      setPage({ pageType: 'MAIN', props: null });
     } catch (e: any) {
       setSnackBar({
         toastName: 'put recruitment',
