@@ -4,7 +4,7 @@ import {
   IRecruitmentTemplate,
   RecruitmentMessageType,
 } from 'types/recruit/recruitments';
-import { instanceInManage } from 'utils/axios';
+import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import TemplateEditor from 'components/admin/recruitments/recruitmentsuser/tmplateEditor';
 import styles from 'styles/admin/modal/AdminRecruitMessageTemplateModal.module.scss';
@@ -19,7 +19,7 @@ function AdminRecruitMessageTemplateModal() {
   });
   const getTemplates = async () => {
     try {
-      const res = await instanceInManage.get('/recruitments/result/message');
+      const res = await instance.get('admin/recruitments/result/message');
       const messages = res.data.messages
         .filter((message: IRecruitmentTemplate) => message.isUse)
         .reduce(

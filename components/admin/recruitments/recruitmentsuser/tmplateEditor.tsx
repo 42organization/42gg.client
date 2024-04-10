@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { IRecruitMessageTemplate } from 'types/recruit/recruitments';
-import { instanceInManage } from 'utils/axios';
+import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminRecruitMessageTemplateModal.module.scss';
 
@@ -42,7 +42,7 @@ function TemplateEditor({ messageType, content }: IRecruitMessageTemplate) {
       return;
     }
     try {
-      await instanceInManage.post('/recruitments/result/message', template);
+      await instance.post('admin/recruitments/result/message', template);
       setSnackbar({
         toastName: `post request`,
         severity: 'success',
