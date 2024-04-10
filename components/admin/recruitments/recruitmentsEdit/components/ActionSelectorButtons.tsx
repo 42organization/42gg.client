@@ -69,7 +69,7 @@ export default function ActionSelectorButtons({
         endDate: dateToDateTimeLocalString(recruitmentEditInfo.endDate),
         generation: recruitmentEditInfo.generation,
         contents: recruitmentEditInfo.contents,
-        form: recruitmentEditInfo.form,
+        forms: recruitmentEditInfo.forms,
       });
       alert('공고를 성공적을 생성하였습니다.');
       setPage({ pageType: 'MAIN', props: null });
@@ -93,7 +93,7 @@ export default function ActionSelectorButtons({
           endDate: dateToDateTimeLocalString(recruitmentEditInfo.endDate),
           generation: recruitmentEditInfo.generation,
           contents: recruitmentEditInfo.contents,
-          form: recruitmentEditInfo.form,
+          forms: recruitmentEditInfo.forms,
         }
       );
       alert('수정이 완료되었습니다.');

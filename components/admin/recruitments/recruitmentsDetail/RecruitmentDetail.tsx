@@ -25,7 +25,7 @@ export default function RecruitmentDetail({
     endDate: new Date(),
     generation: '',
     contents: '',
-    form: [],
+    forms: [],
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -43,7 +43,7 @@ export default function RecruitmentDetail({
         endDate: new Date(res.data.endDate),
         generation: res.data.generation,
         contents: res.data.contents,
-        form: res.data.forms,
+        forms: res.data.forms,
       };
       setRecruitmentInfo(data);
       setIsLoading(false);
@@ -84,7 +84,7 @@ export default function RecruitmentDetail({
           <QuillDescriptionViewer
             contents={recruitmentInfo.contents as string}
           />
-          <QuestionForm form={recruitmentInfo.form as Iquestion[]} />
+          <QuestionForm form={recruitmentInfo.forms as Iquestion[]} />
         </>
       )}
     </div>

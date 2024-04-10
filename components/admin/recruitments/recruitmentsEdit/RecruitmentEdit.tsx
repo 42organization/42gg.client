@@ -18,7 +18,7 @@ const emptyRecruitmentEditInfo: Irecruit = {
   endDate: new Date(),
   generation: '',
   contents: '',
-  form: [],
+  forms: [],
 };
 
 export default function RecruitmentEdit({
@@ -56,7 +56,7 @@ export default function RecruitmentEdit({
         setRecruitmentEditInfoField={setRecruitmentEditInfoField}
       />
       <QuestionFormBuilder
-        form={recruitmentEditInfo.form as Iquestion[]}
+        form={recruitmentEditInfo.forms as Iquestion[]}
         formManager={formManager}
       />
       <ActionSelectorButtons
