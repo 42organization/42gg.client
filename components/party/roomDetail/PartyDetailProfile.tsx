@@ -123,6 +123,7 @@ function ButtonHandler({
     <></>
   ) : !myNickname ? (
     <div className={styles.btnContainer}>
+      <div></div>
       <PartyRoomDetailButton.JoinRoom
         roomId={roomId}
         fetchRoomDetail={fetchRoomDetail}
@@ -130,6 +131,7 @@ function ButtonHandler({
     </div>
   ) : hostNickname !== myNickname ? (
     <div className={styles.btnContainer}>
+      <div></div>
       <PartyRoomDetailButton.LeaveRoom
         roomId={roomId}
         fetchRoomDetail={fetchRoomDetail}
@@ -137,11 +139,13 @@ function ButtonHandler({
     </div>
   ) : (
     <div className={styles.btnContainer}>
-      {currentPeople >= minPeople && currentPeople !== 1 && (
+      {currentPeople >= minPeople && currentPeople !== 1 ? (
         <PartyRoomDetailButton.StartRoom
           roomId={roomId}
           fetchRoomDetail={fetchRoomDetail}
         />
+      ) : (
+        <div></div>
       )}
       <PartyRoomDetailButton.LeaveRoom
         roomId={roomId}
