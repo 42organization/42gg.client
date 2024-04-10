@@ -10,7 +10,7 @@ function TemplateEditor({ messageType, content }: IRecruitMessageTemplate) {
     messageType: messageType,
     content: content,
   });
-  const [alert, setAlert] = useState<string>('');
+  const [alert, setAlert] = useState<string>('새로운 내용을 입력해주세요');
   const setSnackbar = useSetRecoilState(toastState);
   const titles = {
     INTERVIEW: '면접',
@@ -36,7 +36,7 @@ function TemplateEditor({ messageType, content }: IRecruitMessageTemplate) {
       setSnackbar({
         toastName: `alert`,
         severity: 'error',
-        message: `치환 문구가 필요합니다.`,
+        message: alert,
         clicked: true,
       });
       return;
