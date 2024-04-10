@@ -174,7 +174,7 @@ $detailCommonRem: 1rem;
 .joinBtn {
   width: 49.5%;
   height: 3rem;
-  margin-bottom: $detailCommonRem;
+  margin-bottom: $detailCommonRem * 0.3;
   font-family: $common-font;
   font-size: $big-font;
   font-weight: $detail-btn-weight;
