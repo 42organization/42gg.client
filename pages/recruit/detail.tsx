@@ -9,7 +9,7 @@ import 'react-quill/dist/quill.bubble.css';
 
 function Recruit() {
   const router = useRouter();
-  const recruitId = parseInt(router.query.id as string);
+  const recruitId = parseInt(router.query.recruitId as string);
 
   const { data, isLoading } = useRecruitDetail(recruitId);
 
