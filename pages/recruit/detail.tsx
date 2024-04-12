@@ -14,7 +14,7 @@ function Recruit() {
   const { data, isLoading } = useRecruitDetail(recruitId);
 
   const onApply = () => {
-    router.push(`/recruit/${recruitId}/apply`);
+    router.push(`/recruit/apply?recruitId=${recruitId}`);
   };
 
   // TODO : 구체화 필요함.
