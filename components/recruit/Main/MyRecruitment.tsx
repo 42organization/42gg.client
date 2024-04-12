@@ -21,7 +21,7 @@ const MyRecruitment = ({ applicationId }: { applicationId?: number }) => {
         <CollapseListItem title={'지원서 정보'}>
           <MyApplicationInfo
             status={status}
-            recruitId={router.query.id as string}
+            recruitId={router.query.recruitId as string}
             applicationId={applicationId}
           />
         </CollapseListItem>

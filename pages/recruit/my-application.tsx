@@ -12,7 +12,7 @@ import useRecruitDetailUser from 'hooks/recruit/useRecruitDetailUser';
 
 function MyApplication() {
   const router = useRouter();
-  const recruitId = parseInt(router.query.id as string);
+  const recruitId = parseInt(router.query.recruitId as string);
   const applicationId = parseInt(router.query.applicationId as string);
   const setAlertState = useSetRecoilState(applicationAlertState);
   const [mode, setMode] = useState<ApplicationFormType>('VIEW');
