@@ -15,7 +15,7 @@ import {
 import PageNation from 'components/Pagination';
 import useRecruitmentUserFilter from 'hooks/recruitments/useRecruitmentUserFilter';
 import styles from 'styles/admin/recruitments/RecruitmentsUser.module.scss';
-import FilterQptionsUI from './FilterOptions';
+import RecruitmentFilterOptions from './RecruitmentFilterOptions';
 import renderTableCells from './renderTableCells';
 
 const tableTitle: { [key: string]: string } = {
@@ -47,7 +47,7 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
 
   return (
     <>
-      {FilterQptionsUI(recruitUserData.applicationResults, recruitId)}
+      {/* {RecruitmentFilterOptions(recruitUserData.applicationResults, recruitId)} */}
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <TableHead className={styles.tableHeader}>

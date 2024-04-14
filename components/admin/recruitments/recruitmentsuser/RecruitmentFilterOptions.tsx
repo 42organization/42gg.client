@@ -26,14 +26,13 @@ const MenuProps = {
   },
 };
 
-// FIXME : FilterQptionsUI 이름 변경하기 (의미를 알아보기 어려움)
-function FilterQptionsUI(
+function RecruitmentFilterOptions(
   recruitUserData: IrecruitUserTable[],
   recruitId: number
 ) {
-  const [answers, setAnswers] = useState<Array<IcheckItem>>([]);
   const { checklistIds, handleChecklistChange } =
     useRecruitmentUserFilter(recruitId);
+  const [answers, setAnswers] = useState<Array<IcheckItem>>([]);
 
   useEffect(() => {
     setAnswers(
@@ -81,4 +80,4 @@ function FilterQptionsUI(
   );
 }
 
-export default FilterQptionsUI;
+export default RecruitmentFilterOptions;

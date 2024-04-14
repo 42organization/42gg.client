@@ -37,7 +37,7 @@ const tableTitle: { [key: string]: string } = {
   id: 'ID',
   usedAt: '적용 시간',
   title: '제목',
-  status: '상태',
+  isFinish: '상태',
   detailRecruitment: '공고 상세보기',
   detaillUser: '지원자 보기',
 };
@@ -64,7 +64,7 @@ function RecruitmentsHistoryList({
       );
       // FIXME : 페이지네이션 x 임시로 1페이지로 고정
       setRecruitData({
-        recruitmentDtoList: res.data.recruitmentDtoList,
+        recruitmentDtoList: res.data.recruitments,
         totalPage: 1,
         currentPage: 1,
       });

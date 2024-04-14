@@ -9,7 +9,8 @@ import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 
 // FIXME : 페이지네이션 여부 담당자와 다시 확인하기 (현재 페이지네이션 없음)
-const useRecruitmentUserFilter = (recruitId: number, currentPage?: number) => {
+// const useRecruitmentUserFilter = (recruitId: number, currentPage?: number) => {
+const useRecruitmentUserFilter = (recruitId: number) => {
   const [recruitUserData, setRecruitUserData] = useState<IrecruitArrayTable>({
     applicationResults: [],
     totalPage: 0,
@@ -36,6 +37,7 @@ const useRecruitmentUserFilter = (recruitId: number, currentPage?: number) => {
         `/admin/recruitments/${recruitId}/applicants`
       );
       // FIXME: 페이지네이션 x (페이지네이션이 없는 api?) 임시로 1페이지로 고정
+      console.log(res.data);
       setRecruitUserData({
         applicationResults: res.data.applicationResults,
         totalPage: 1,
@@ -54,19 +56,23 @@ const useRecruitmentUserFilter = (recruitId: number, currentPage?: number) => {
         clicked: true,
       });
     }
-  }, [currentPage, searchString, checklistIds]);
+    // }, [currentPage, searchString, checklistIds]);
+  }, [searchString, checklistIds]);
 
   useEffect(() => {
     getRecruitUserHandler();
-  }, [currentPage, searchString, checklistIds]);
+    // }, [currentPage, searchString, checklistIds]);
+  }, [searchString, checklistIds]);
 
-  const questions = recruitUserData.applicationResults?.reduce(
+  const questions = recruitUserData.applicationResults.reduce(
     (acc: string[], application: { form: { question: string }[] }) => {
-      application.form.forEach(({ question }) => {
-        if (acc.indexOf(question) === -1) {
-          acc.push(question);
-        }
-      });
+      if (application.form) {
+        application.form.forEach(({ question }) => {
+          if (acc.indexOf(question) === -1) {
+            acc.push(question);
+          }
+        });
+      }
       return acc;
     },
     []

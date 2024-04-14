@@ -45,6 +45,7 @@ const ExpandableTableRow: React.FC<ExpandableTableRowProps> = ({
 };
 
 function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
+  console.log(recruit);
   const answers = questions.map((question) => {
     const formItem = recruit.form.find((form) => form.question === question);
     if (!formItem) return 'N/A';
@@ -72,14 +73,15 @@ function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
           <div>
             <strong>status:</strong> {recruit.status}
           </div>
-          {recruit.form.map((form, index) => (
-            <div key={index}>
-              <strong>{form.question}</strong>:{' '}
-              {form.answer
-                ? form.answer
-                : form.checkedList?.map((item) => item.content).join(', ')}
-            </div>
-          ))}
+          {recruit.form &&
+            recruit.form.map((form, index) => (
+              <div key={index}>
+                <strong>{form.question}</strong>:{' '}
+                {form.answer
+                  ? form.answer
+                  : form.checkedList?.map((item) => item.content).join(', ')}
+              </div>
+            ))}
         </div>
       }
     >
