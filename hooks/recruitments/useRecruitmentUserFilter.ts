@@ -34,14 +34,14 @@ const useRecruitmentUserFilter = (recruitId: number) => {
       //   }
       // );
       const res = await instance.get(
-        `/admin/recruitments/${recruitId}/applicants`,
+        `/admin/recruitments/${recruitId}/applications`,
         {
           params: {
             page: 1,
             size: 20,
-            // question: questions,
-            checks: checklistIds.map((check) => check).join(','),
-            search: searchString,
+            // question: '',
+            // checks: checklistIds.map((check) => check).join(','),
+            // search: searchString,
           },
         }
       );
@@ -73,9 +73,9 @@ const useRecruitmentUserFilter = (recruitId: number) => {
   }, [searchString, checklistIds]);
 
   const questions = recruitUserData.applicationResults.reduce(
-    (acc: string[], application: { form: { question: string }[] }) => {
-      if (application.form) {
-        application.form.forEach(({ question }) => {
+    (acc: string[], application: { forms: { question: string }[] }) => {
+      if (application.forms) {
+        application.forms.forEach(({ question }) => {
           if (acc.indexOf(question) === -1) {
             acc.push(question);
           }

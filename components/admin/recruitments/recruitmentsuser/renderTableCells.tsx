@@ -45,9 +45,8 @@ const ExpandableTableRow: React.FC<ExpandableTableRowProps> = ({
 };
 
 function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
-  console.log(recruit);
   const answers = questions.map((question) => {
-    const formItem = recruit.form.find((form) => form.question === question);
+    const formItem = recruit.forms.find((form) => form.question === question);
     if (!formItem) return 'N/A';
 
     switch (formItem.inputType) {
@@ -62,19 +61,32 @@ function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
     }
   });
 
+  if (recruit.status === 'PASS') recruit.status = '합격';
+  else if (recruit.status === 'INTERVIEW_FAIL') {
+    recruit.status = '면접 불합격';
+  } else if (recruit.status === 'APPLICATION_FAIL') {
+    recruit.status = '지원서 불합격';
+  } else if (recruit.status === 'PROGRESS_DOCS') {
+    recruit.status = '면접 시간 발표 전';
+  } else if (recruit.status === 'INTERVIEW') {
+    recruit.status = '면접 시간 공개';
+  } else {
+    recruit.status = '심사중';
+  }
+
   return (
     <ExpandableTableRow
       key={recruit.applicationId}
       expandComponent={
-        <div style={{ padding: '16px' }}>
+        <div className={styles.expandableTableRow}>
           <div>
             <strong>intraId:</strong> {recruit.intraId}
           </div>
           <div>
             <strong>status:</strong> {recruit.status}
           </div>
-          {recruit.form &&
-            recruit.form.map((form, index) => (
+          {recruit.forms &&
+            recruit.forms.map((form, index) => (
               <div key={index}>
                 <strong>{form.question}</strong>:{' '}
                 {form.answer

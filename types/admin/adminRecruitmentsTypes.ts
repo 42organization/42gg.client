@@ -57,8 +57,8 @@ export interface IuserFormResponse {
 export interface IrecruitUserTable {
   applicationId: number;
   intraId: string;
-  status?: '합격' | '불합격' | '심사중';
-  form: IuserFormResponse[];
+  status?: string;
+  forms: IuserFormResponse[];
 }
 
 export interface IrecruitArrayTable {

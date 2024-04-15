@@ -34,7 +34,7 @@ function RecruitmentFilterOptions({ recruitId }: { recruitId: number }) {
   useEffect(() => {
     setAnswers(
       recruitUserData.applicationResults.reduce((acc, recruit) => {
-        recruit.form?.forEach((formItem) => {
+        recruit.forms?.forEach((formItem) => {
           if (formItem.inputType !== 'TEXT') {
             formItem.checkedList?.forEach((item) => {
               if (!acc.some((answer) => answer.checkId === item.checkId)) {
