@@ -44,11 +44,14 @@ const ExpandableTableRow: React.FC<ExpandableTableRowProps> = ({
   );
 };
 
-function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
+function RenderTableCells(
+  recruit: IrecruitUserTable,
+  questions: string[],
+  status: string
+) {
   const answers = questions.map((question) => {
     const formItem = recruit.forms.find((form) => form.question === question);
     if (!formItem) return 'N/A';
-
     switch (formItem.inputType) {
       case 'TEXT':
         return formItem.answer;
@@ -60,18 +63,17 @@ function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
         return 'N/A';
     }
   });
-
-  if (recruit.status === 'PASS') recruit.status = '합격';
+  if (recruit.status === 'PASS') status = '합격';
   else if (recruit.status === 'INTERVIEW_FAIL') {
-    recruit.status = '면접 불합격';
+    status = '면접 불합격';
   } else if (recruit.status === 'APPLICATION_FAIL') {
-    recruit.status = '지원서 불합격';
+    status = '지원서 불합격';
   } else if (recruit.status === 'PROGRESS_DOCS') {
-    recruit.status = '면접 시간 발표 전';
+    status = '면접 시간 발표 전';
   } else if (recruit.status === 'INTERVIEW') {
-    recruit.status = '면접 시간 공개';
+    status = '면접 시간 공개';
   } else {
-    recruit.status = '심사중';
+    status = '심사중';
   }
 
   return (
@@ -83,7 +85,7 @@ function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
             <strong>intraId:</strong> {recruit.intraId}
           </div>
           <div>
-            <strong>status:</strong> {recruit.status}
+            <strong>status:</strong> {status}
           </div>
           {recruit.forms &&
             recruit.forms.map((form, index) => (
@@ -98,7 +100,7 @@ function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
       }
     >
       <TableCell className={styles.tableBodyItem}>{recruit.intraId}</TableCell>
-      <TableCell className={styles.tableBodyItem}>{recruit.status}</TableCell>
+      <TableCell className={styles.tableBodyItem}>{status}</TableCell>
       {answers.map(
         (answer: string | undefined, index: React.Key | null | undefined) => (
           <TableCell className={styles.tableBodyItem} key={index}>
@@ -112,4 +114,4 @@ function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
   );
 }
 
-export default renderTableCells;
+export default RenderTableCells;

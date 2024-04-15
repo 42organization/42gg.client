@@ -56,7 +56,12 @@ export interface IuserFormResponse {
 export interface IrecruitUserTable {
   applicationId: number;
   intraId: string;
-  status?: string;
+  status?:
+    | 'INTERVIEW_FAIL'
+    | 'APPLICATION_FAIL'
+    | 'PROGRESS_DOCS'
+    | 'INTERVIEW'
+    | 'PASS';
   forms: IuserFormResponse[];
 }
 

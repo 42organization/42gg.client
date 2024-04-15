@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { instanceInManage, instance } from 'utils/axios';
-import { dateToStringShort } from 'utils/handleTime';
+import { dateToStringShort , dateToDateTimeLocalString } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminRecruitMessageTemplateModal.module.scss';
 
@@ -29,12 +29,13 @@ function AdminRecruitResultModal({
   const setSnackbar = useSetRecoilState(toastState);
   const sendInterviewResult = async () => {
     try {
+      if (!interviewDate) return;
       // send interview result to server
-      await instanceInManage.post(
+      await instance.post(
         `/admin/recruitments/${recruitId}/interview?application=${applicationId}`,
         {
           status,
-          interviewDate,
+          interviewDate: dateToDateTimeLocalString(interviewDate),
         }
       );
       setSnackbar({
@@ -56,7 +57,7 @@ function AdminRecruitResultModal({
   const sendFinalResult = async () => {
     try {
       // send final result to server
-      await instanceInManage.post(
+      await instance.post(
         `/admin/recruitments/${recruitId}/result?application=${applicationId}`,
         {
           status,

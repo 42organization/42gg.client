@@ -17,7 +17,7 @@ import PageNation from 'components/Pagination';
 import useRecruitmentUserFilter from 'hooks/recruitments/useRecruitmentUserFilter';
 import styles from 'styles/admin/recruitments/RecruitmentsUser.module.scss';
 import RecruitmentFilterOptions from './RecruitmentFilterOptions';
-import renderTableCells from './renderTableCells';
+import RenderTableCells from './RenderTableCells';
 
 const tableTitle: { [key: string]: string } = {
   id: '',
@@ -65,7 +65,7 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
           </TableHead>
           <TableBody className={styles.tableBody}>
             {recruitUserData.applicationResults.map((recruit) =>
-              renderTableCells(recruit, questions)
+              RenderTableCells(recruit, questions, '')
             )}
           </TableBody>
         </Table>
