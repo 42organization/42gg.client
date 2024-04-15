@@ -37,7 +37,7 @@ const tableTitle: { [key: string]: string } = {
   id: 'ID',
   usedAt: '적용 시간',
   title: '제목',
-  isFinish: '상태',
+  status: '상태',
   detailRecruitment: '공고 상세보기',
   detaillUser: '지원자 보기',
 };
@@ -136,6 +136,30 @@ function RecruitmentsHistoryList({
           {`${dateToStringShort(
             new Date(recruit.startDate)
           )} ~ ${dateToStringShort(new Date(recruit.endDate))}`}
+        </div>
+      );
+    }
+
+    if (columnName === 'status') {
+      const today = new Date();
+      const todaystring = today.toISOString().slice(0, 19);
+      const todaydate = new Date(todaystring);
+      const endDate = new Date(recruit.endDate);
+      const startDate = new Date(recruit.startDate);
+      console.log(
+        startDate,
+        endDate,
+        todaystring,
+        startDate < todaydate,
+        endDate > todaydate
+      );
+      return (
+        <div>
+          {recruit.isFinish
+            ? '완료'
+            : startDate <= todaydate && endDate >= todaydate
+            ? '진행중'
+            : '진행전'}
         </div>
       );
     }

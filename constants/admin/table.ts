@@ -251,7 +251,6 @@ export const tableFormat: TableFormat = {
       'startAt',
       'endAt',
       'status',
-      'isFinish',
       'isCurrent',
       'detailRecruitment',
       'detaillUser',
