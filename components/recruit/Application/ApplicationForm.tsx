@@ -39,7 +39,6 @@ function ApplicationForm(props: IApplicationFormProps) {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const answerForms = applicationAnswerSet(formData, data.forms);
-
     // 입력하지 않은 문항으로 이동
     for (const ans of answerForms) {
       if (
@@ -83,8 +82,8 @@ function ApplicationForm(props: IApplicationFormProps) {
           {data.forms.map((form: IQuestionForm, index: number) => (
             <div
               key={index}
-              tabIndex={form.questionId}
-              ref={(ref) => ref && (formRefs.current[form.questionId] = ref)}
+              tabIndex={index}
+              ref={(ref) => ref && (formRefs.current[index] = ref)}
             >
               <Paper
                 elevation={3}
@@ -95,19 +94,19 @@ function ApplicationForm(props: IApplicationFormProps) {
                   <TextForm
                     form={form}
                     mode={mode}
-                    answer={answerList ? answerList[form.questionId - 1] : null}
+                    answer={answerList ? answerList[index] : null}
                   />
                 ) : form.inputType === 'SINGLE_CHECK' ? (
                   <SingleCheckForm
                     form={form}
                     mode={mode}
-                    answer={answerList ? answerList[form.questionId - 1] : null}
+                    answer={answerList ? answerList[index] : null}
                   />
                 ) : form.inputType === 'MULTI_CHECK' ? (
                   <MultiCheckForm
                     form={form}
                     mode={mode}
-                    answer={answerList ? answerList[form.questionId - 1] : null}
+                    answer={answerList ? answerList[index] : null}
                   />
                 ) : (
                   <span>잘못된 타입의 항목입니다</span>
