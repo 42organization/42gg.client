@@ -73,7 +73,11 @@ function MyApplication() {
         data={recruitDetail}
         answerList={userAnswerList?.forms ?? null}
       />
-      <ApplicatoinFormFooter mode={mode} setMode={setMode} />
+      <ApplicatoinFormFooter
+        endDate={recruitDetail.endDate}
+        mode={mode}
+        setMode={setMode}
+      />
     </>
   );
 }

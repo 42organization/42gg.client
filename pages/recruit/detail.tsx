@@ -35,13 +35,15 @@ function Recruit() {
         theme='bubble'
       />
       <Button
-        disabled={!!data.applicationId}
+        disabled={!!data.applicationId || new Date(data.endDate) < new Date()}
         size={'large'}
         variant='contained'
         color='primary'
         onClick={onApply}
       >
-        지원하기
+        {new Date(data.endDate) < new Date()
+          ? '지원이 마감되었습니다'
+          : '지원하기'}
       </Button>
       <div className={style.divider} />
       <MyRecruitment applicationId={data.applicationId} />

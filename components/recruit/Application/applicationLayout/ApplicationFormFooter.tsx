@@ -6,46 +6,53 @@ import { applicationModalState } from 'utils/recoil/application';
 import styles from 'styles/recruit/application.module.scss';
 
 interface IApplicationFormFooterProps {
+  endDate: string;
   mode: ApplicationFormType;
   setMode: Dispatch<SetStateAction<ApplicationFormType>>;
 }
 
 function ApplicatoinFormFooter(props: IApplicationFormFooterProps) {
-  const { mode, setMode } = props;
+  const { endDate, mode, setMode } = props;
   const setModalState = useSetRecoilState(applicationModalState);
 
   return (
     <div className={styles.stickyFooter}>
       <div className={styles.stickyContainer}>
-        <div className={styles.btnContainer}>
-          <Button
-            variant='contained'
-            className={styles.cancelBtn}
-            onClick={() =>
-              setModalState({ state: true, content: 'CANCEL', formData: [] })
-            }
-          >
-            지원 취소
-          </Button>
-          {mode === 'VIEW' ? (
+        {new Date() < new Date(endDate) ? (
+          <div className={styles.btnContainer}>
             <Button
               variant='contained'
-              className={styles.editBtn}
-              onClick={() => setMode('EDIT')}
+              className={styles.cancelBtn}
+              onClick={() =>
+                setModalState({ state: true, content: 'CANCEL', formData: [] })
+              }
             >
-              수정하기
+              지원 취소
             </Button>
-          ) : (
-            <Button
-              variant='contained'
-              className={styles.editBtn}
-              type='submit'
-              form='applicationForm'
-            >
-              제출하기
-            </Button>
-          )}
-        </div>
+            {mode === 'VIEW' ? (
+              <Button
+                variant='contained'
+                className={styles.editBtn}
+                onClick={() => setMode('EDIT')}
+              >
+                수정하기
+              </Button>
+            ) : (
+              <Button
+                variant='contained'
+                className={styles.editBtn}
+                type='submit'
+                form='applicationForm'
+              >
+                제출하기
+              </Button>
+            )}
+          </div>
+        ) : (
+          <div className={styles.btnContainer}>
+            지원서 수정 기한이 지났습니다
+          </div>
+        )}
       </div>
     </div>
   );
