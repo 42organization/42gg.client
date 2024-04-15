@@ -1,0 +1,17 @@
+// h1 크기
+@mixin pageTitle {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+// h2 크기
+@mixin pageSubTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+// h3 크기
+@mixin subTitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+}

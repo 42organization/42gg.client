@@ -1,0 +1,38 @@
+@import 'styles/common.scss';
+
+.mainContainer {
+  position: relative;
+  left: 2.5%;
+  display: flex;
+  width: 95%;
+  height: 100%;
+  flex-direction: column;
+}
+
+.tabMenu {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  font-size: $medium-font;
+  font-weight: 500;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.active {
+  text-decoration: underline;
+  text-underline-offset: 0.4rem;
+  cursor: pointer;
+}
+
+.inactive {
+  cursor: pointer;
+}
+
+.subContainer {
+  width: 100%;
+}
+
+.back {
+  width: 3rem;
+}

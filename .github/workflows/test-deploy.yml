@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - test-deploy
-      
+
   workflow_dispatch:
-  
+
 jobs:
   continuous-deployment:
     runs-on: macos-12
@@ -22,6 +22,8 @@ jobs:
       - name: Build
         env:
           NEXT_PUBLIC_SERVER_ENDPOINT: ${{ secrets.NEXT_DEV_PUBLIC_SERVER_ENDPOINT }}
+          NEXT_PUBLIC_CLIENT_ENDPOINT: ${{ secrets.DEV_NEXT_PUBLIC_CLIENT_ENDPOINT }}
+          NEXT_PUBLIC_PARTY_MANAGE_SERVER_ENDPOINT: ${{ secrets.DEV_NEXT_PUBLIC_PARTY_MANAGE_SERVER_ENDPOINT }}
           NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT: ${{ secrets.NEXT_DEV_PUBLIC_MANAGE_SERVER_ENDPOINT }}
           GENERATE_SOURCEMAP: ${{ secrets.GENERATE_SOURCEMAP }}
         run: |

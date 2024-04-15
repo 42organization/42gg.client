@@ -40,25 +40,11 @@
 }
 
 .quillViewer {
-  width: 100%;
+  @include quillViewer($color: black);
   min-width: 10rem;
   max-width: 15rem;
-  height: 100%;
   max-height: 19rem;
   margin: 1rem 0;
-  overflow-y: scroll;
-  color: black;
-}
-
-.quillViewer::-webkit-scrollbar {
-  display: inherit;
-  width: 5px;
-  height: 1rem;
-}
-
-.quillViewer::-webkit-scrollbar-thumb {
-  background: white;
-  border-radius: 10px;
 }
 
 .checkBox {
