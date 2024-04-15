@@ -26,18 +26,15 @@ const MenuProps = {
   },
 };
 
-function RecruitmentFilterOptions(
-  recruitUserData: IrecruitUserTable[],
-  recruitId: number
-) {
-  const { checklistIds, handleChecklistChange } =
+function RecruitmentFilterOptions({ recruitId }: { recruitId: number }) {
+  const { checklistIds, handleChecklistChange, recruitUserData } =
     useRecruitmentUserFilter(recruitId);
   const [answers, setAnswers] = useState<Array<IcheckItem>>([]);
 
   useEffect(() => {
     setAnswers(
-      recruitUserData.reduce((acc, recruit) => {
-        recruit.form.forEach((formItem) => {
+      recruitUserData.applicationResults.reduce((acc, recruit) => {
+        recruit.form?.forEach((formItem) => {
           if (formItem.inputType !== 'TEXT') {
             formItem.checkedList?.forEach((item) => {
               if (!acc.some((answer) => answer.checkId === item.checkId)) {

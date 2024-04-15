@@ -8,6 +8,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
+import { IcheckItem } from 'types/admin/adminRecruitmentsTypes';
 import {
   AdminEmptyItem,
   AdminTableHead,
@@ -47,7 +48,7 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
 
   return (
     <>
-      {/* {RecruitmentFilterOptions(recruitUserData.applicationResults, recruitId)} */}
+      <RecruitmentFilterOptions recruitId={recruitId} />
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <TableHead className={styles.tableHeader}>

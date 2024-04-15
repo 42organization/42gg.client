@@ -34,7 +34,16 @@ const useRecruitmentUserFilter = (recruitId: number) => {
       //   }
       // );
       const res = await instance.get(
-        `/admin/recruitments/${recruitId}/applicants`
+        `/admin/recruitments/${recruitId}/applicants`,
+        {
+          params: {
+            page: 1,
+            size: 20,
+            // question: questions,
+            checks: checklistIds.map((check) => check).join(','),
+            search: searchString,
+          },
+        }
       );
       // FIXME: 페이지네이션 x (페이지네이션이 없는 api?) 임시로 1페이지로 고정
       console.log(res.data);
