@@ -116,6 +116,12 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
         totalPage: 1,
         currentPage: 1,
       });
+      notificationData.noticationList.map((recruit: Inotication) => {
+        setStartDate((prev) => ({
+          ...prev,
+          [recruit.applicationId]: new Date(),
+        }));
+      });
       // setNotificationData({
       //   noticationList: res.data.applications,
       //   totalPage: res.data.totalPages,

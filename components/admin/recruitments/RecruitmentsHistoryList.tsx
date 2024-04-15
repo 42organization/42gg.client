@@ -63,6 +63,7 @@ function RecruitmentsHistoryList({
         `/admin/recruitments?page=${currentPage}&size=20`
       );
       // FIXME : 페이지네이션 x 임시로 1페이지로 고정
+
       setRecruitData({
         recruitments: res.data.recruitments,
         totalPage: 1,

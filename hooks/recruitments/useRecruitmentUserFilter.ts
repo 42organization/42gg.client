@@ -39,12 +39,13 @@ const useRecruitmentUserFilter = (recruitId: number) => {
           params: {
             page: 1,
             size: 20,
-            // question: '',
+            // question: questionId,
             // checks: checklistIds.map((check) => check).join(','),
             // search: searchString,
           },
         }
       );
+      console.log(res.data);
       // FIXME: 페이지네이션 x (페이지네이션이 없는 api?) 임시로 1페이지로 고정
       setRecruitUserData({
         applicationResults: res.data.applicationResults,
