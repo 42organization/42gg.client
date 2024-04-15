@@ -9,7 +9,7 @@ import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
 
 function Apply() {
   const router = useRouter();
-  const recruitId = parseInt(router.query.id as string);
+  const recruitId = parseInt(router.query.recruitId as string);
   const setAlertState = useSetRecoilState(applicationAlertState);
 
   const { data, isLoading } = useRecruitDetail(recruitId);

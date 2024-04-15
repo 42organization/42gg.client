@@ -53,9 +53,9 @@ function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
       case 'TEXT':
         return formItem.answer;
       case 'SINGLE_CHECK':
-        return formItem.checkedList?.map((item) => item.content).join(', ');
+        return formItem.checkedList?.map((item) => item.contents).join(', ');
       case 'MULTI_CHECK':
-        return formItem.checkedList?.map((item) => item.content).join(', ');
+        return formItem.checkedList?.map((item) => item.contents).join(', ');
       default:
         return 'N/A';
     }
@@ -91,7 +91,7 @@ function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
                 <strong>{form.question}</strong>:{' '}
                 {form.answer
                   ? form.answer
-                  : form.checkedList?.map((item) => item.content).join(', ')}
+                  : form.checkedList?.map((item) => item.contents).join(', ')}
               </div>
             ))}
         </div>

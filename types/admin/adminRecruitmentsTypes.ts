@@ -6,10 +6,9 @@ export interface Irecruit {
   endDate: Date;
   title: string;
   contents?: string;
-  status?: '모집전' | '모집중' | '완료';
   isFinish?: boolean;
   generation: string;
-  form?: Array<Iquestion>;
+  forms?: Array<Iquestion>;
 }
 
 // 지원서 질문 interface (응답 전)
@@ -24,7 +23,7 @@ export interface Iquestion {
 export interface IcheckItem {
   checkId?: number;
   sortNum?: number;
-  content: string;
+  contents: string;
 }
 
 export interface Inotication {
@@ -34,7 +33,7 @@ export interface Inotication {
 }
 
 export interface IrecruitTable {
-  recruitmentDtoList: Array<Irecruit>;
+  recruitments: Array<Irecruit>;
   totalPage: number;
   currentPage: number;
 }
@@ -65,6 +64,11 @@ export interface IrecruitArrayTable {
   applicationResults: IrecruitUserTable[];
   totalPage: number;
   currentPage: number;
+}
+
+export interface recruitListData {
+  recruitments: Irecruit[];
+  totalPage: number;
 }
 
 export interface RecruitmentsPages {

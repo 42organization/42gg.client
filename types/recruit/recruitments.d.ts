@@ -90,11 +90,13 @@ export type RecruitmentMessageType = 'INTERVIEW' | 'PASS' | 'FAIL';
 
 export interface IRecruitMessageTemplate {
   messageType: RecruitmentMessageType;
-  message: string;
+  content: string;
 }
-export interface IRecruitmentTemplate extends IRecruitMessageTemplate {
+export interface IRecruitmentTemplate {
   messageId: number;
+  messageType: RecruitmentMessageType;
   isUse: boolean;
+  message: string;
 }
 
 export interface IRecruitmentTemplateList {

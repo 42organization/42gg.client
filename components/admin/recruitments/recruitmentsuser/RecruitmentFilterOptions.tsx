@@ -67,7 +67,7 @@ function RecruitmentFilterOptions({ recruitId }: { recruitId: number }) {
           >
             {answers.map((answer: IcheckItem, index) => (
               <MenuItem key={index} value={answer.checkId}>
-                <ListItemText primary={answer.content} />
+                <ListItemText primary={answer.contents} />
               </MenuItem>
             ))}
           </Select>

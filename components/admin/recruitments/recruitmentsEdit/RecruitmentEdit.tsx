@@ -1,3 +1,5 @@
+import HomeIcon from '@mui/icons-material/Home';
+import { IconButton } from '@mui/material';
 import {
   Iquestion,
   Irecruit,
@@ -16,7 +18,7 @@ const emptyRecruitmentEditInfo: Irecruit = {
   endDate: new Date(),
   generation: '',
   contents: '',
-  form: [],
+  forms: [],
 };
 
 export default function RecruitmentEdit({
@@ -37,13 +39,14 @@ export default function RecruitmentEdit({
 
   return (
     <div className={styles.container}>
-      <button
+      <IconButton
+        aria-label='메인으로 가기'
         onClick={() => {
           setPage({ pageType: 'MAIN', props: null });
         }}
       >
-        메인으로가기
-      </button>
+        <HomeIcon />
+      </IconButton>
       <TitleTimeRangeSelector
         recruitmentEditInfo={recruitmentEditInfo}
         setRecruitmentEditInfoField={setRecruitmentEditInfoField}
@@ -53,13 +56,14 @@ export default function RecruitmentEdit({
         setRecruitmentEditInfoField={setRecruitmentEditInfoField}
       />
       <QuestionFormBuilder
-        form={recruitmentEditInfo.form as Iquestion[]}
+        form={recruitmentEditInfo.forms as Iquestion[]}
         formManager={formManager}
       />
       <ActionSelectorButtons
         recruitmentEditInfo={recruitmentEditInfo}
         importRecruitmentInfo={importRecruitmentInfo}
         actionType={mode}
+        setPage={setPage}
       />
     </div>
   );

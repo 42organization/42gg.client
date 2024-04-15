@@ -1,113 +1,108 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { More } from '@mui/icons-material';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import {
   Button,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import { Irecruit } from 'types/admin/adminRecruitmentsTypes';
-import { instance, instanceInManage } from 'utils/axios';
+import {
+  Irecruit,
+  RecruitmentsPages,
+  recruitListData,
+} from 'types/admin/adminRecruitmentsTypes';
+import { instance } from 'utils/axios';
+import { dateToDateTimeLocalString } from 'utils/handleTime';
+import { InfiniteScroll } from 'utils/infinityScroll';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/ActionSelectorButtons.module.scss';
 
-// interface PagenatedResponse {
-//   recruitmentHistory: Irecruit[];
-//   totalPage: number;
-// }
-
-// function fetchRecruitMemtHistoryData(page: number) {
-//   return instance.get(`/recruitments?page=${page}&size=${8}`).then((res) => {
-//     return res.data;
-//   });
-// }
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 interface ActionSelectorButtonsProps {
   recruitmentEditInfo: Irecruit;
   importRecruitmentInfo: (recruitId: number) => void;
   actionType: 'CREATE' | 'MODIFY';
+  setPage: Dispatch<SetStateAction<RecruitmentsPages>>;
 }
 
 export default function ActionSelectorButtons({
   recruitmentEditInfo,
   importRecruitmentInfo,
   actionType,
+  setPage,
 }: ActionSelectorButtonsProps) {
-  const [recruitmentsHistory, setRecruitmentsHistory] = useState<Irecruit[]>(
-    []
-  );
+  const [selectedId, setSelectedId] = useState<string>('');
 
-  const getRecruitHandler = async () => {
-    try {
-      // FIXME : 1페이지 고정인 부분 주석으로 설명 추가해주세요. (의도된것인지 / 최근 100개만 보는 것인지 등)
-      const res = await instance.get(
-        `/admin/recruitments?page=${1}&size=${100}`
-      );
-      setRecruitmentsHistory(res.data.recruitmentDtoList);
-    } catch (e: any) {
-      setSnackBar({
-        toastName: 'get recruitment',
-        severity: 'error',
-        message: `이전 공고를 불러오는데 실패했습니다.`,
-        clicked: true,
+  const fetchRecruitList = (page: number) => {
+    return instance
+      .get(`/admin/recruitments?page=${page}&size=${5}`)
+      .then((res) => {
+        return res.data;
       });
-    }
   };
 
-  // const { data, error, isLoading, hasNextPage, fetchNextPage } =
-  //   InfiniteScroll<PagenatedResponse>(
-  //     'recruitment',
-  //     fetchRecruitMemtHistoryData,
-  //     'RT04'
-  //   );
-
-  const [selectedId, setSelectedId] = useState<string>('');
+  const { data, isLoading, isError, fetchNextPage, hasNextPage } =
+    InfiniteScroll<recruitListData>(['recruitList'], fetchRecruitList, 'JY09');
 
   const setSnackBar = useSetRecoilState(toastState);
 
   const createRecruitmentHandler = async () => {
     try {
-      const convertedForm = recruitmentEditInfo.form?.map((question) => {
-        if (question.inputType === 'TEXT') {
-          return {
-            question: question.question,
-            inputType: question.inputType,
-          };
-        } else {
-          const stringCheckList = question.checkList?.map(
-            (item) => item.content
-          );
-          return {
-            question: question.question,
-            inputType: question.inputType,
-            checkList: stringCheckList,
-          };
-        }
-      });
-
       const res = await instance.post(`/admin/recruitments`, {
         title: recruitmentEditInfo.title,
-        startDateTime: '2024-04-06T08:29:07.424Z', //recruitmentEditInfo.startDate.toISOString(),
-        endDateTime: '2024-04-08T08:29:07.424Z', //recruitmentEditInfo.endDate.toISOString(),
+        startDate: dateToDateTimeLocalString(recruitmentEditInfo.startDate),
+        endDate: dateToDateTimeLocalString(recruitmentEditInfo.endDate),
         generation: recruitmentEditInfo.generation,
         contents: recruitmentEditInfo.contents,
-        form: convertedForm,
+        forms: recruitmentEditInfo.forms,
       });
-      // const res = await mockInstance.post(`admin/recruitments`, {
-      //   title: recruitmentEditInfo.title,
-      //   startDate: recruitmentEditInfo.startDate,
-      //   endDate: recruitmentEditInfo.endDate,
-      //   generation: recruitmentEditInfo.generation,
-      //   contents: recruitmentEditInfo.contents,
-      //   form: recruitmentEditInfo.form,
-      // });
+      alert('공고를 성공적을 생성하였습니다.');
+      setPage({ pageType: 'MAIN', props: null });
     } catch (e: any) {
       setSnackBar({
         toastName: 'post recruitment',
         severity: 'error',
-        message: `생성 요청에 실패하였습니다.`,
+        message: e.response.data.message,
+        clicked: true,
+      });
+    }
+  };
+
+  const modifyRecruitmentHandler = async () => {
+    try {
+      const res = await instance.put(
+        `/admin/recruitments/${recruitmentEditInfo.id}`,
+        {
+          title: recruitmentEditInfo.title,
+          startDate: dateToDateTimeLocalString(recruitmentEditInfo.startDate),
+          endDate: dateToDateTimeLocalString(recruitmentEditInfo.endDate),
+          generation: recruitmentEditInfo.generation,
+          contents: recruitmentEditInfo.contents,
+          forms: recruitmentEditInfo.forms,
+        }
+      );
+      alert('수정이 완료되었습니다.');
+      setPage({ pageType: 'MAIN', props: null });
+    } catch (e: any) {
+      setSnackBar({
+        toastName: 'put recruitment',
+        severity: 'error',
+        message: e.response.data.message,
         clicked: true,
       });
     }
@@ -116,10 +111,6 @@ export default function ActionSelectorButtons({
   const selectChangehandler = ({ target }: SelectChangeEvent) => {
     setSelectedId(target.value);
   };
-
-  useEffect(() => {
-    getRecruitHandler();
-  }, []);
 
   return (
     <div className={styles.mainContainer}>
@@ -130,19 +121,25 @@ export default function ActionSelectorButtons({
             defaultValue={''}
             value={selectedId}
             label='기존 공고'
-            style={{ backgroundColor: 'white' }}
+            style={{
+              backgroundColor: 'white',
+            }}
+            MenuProps={MenuProps}
             onChange={selectChangehandler}
           >
-            {recruitmentsHistory.length === 0 ? (
-              <MenuItem key={-1} value={-1}>
-                기존 공고가 없습니다.
-              </MenuItem>
-            ) : (
-              recruitmentsHistory.map((recruit: Irecruit) => (
-                <MenuItem key={recruit.id} value={recruit.id}>
-                  {recruit.title}
-                </MenuItem>
-              ))
+            {data?.pages.map((page, pageIndex) => {
+              return page.recruitments?.map((recruit) => {
+                return (
+                  <MenuItem key={recruit.id} value={recruit.id}>
+                    {recruit.title}
+                  </MenuItem>
+                );
+              });
+            })}
+            {hasNextPage && (
+              <IconButton aria-label='더보기' onClick={() => fetchNextPage()}>
+                <MoreHorizIcon />
+              </IconButton>
             )}
           </Select>
         </FormControl>
@@ -163,7 +160,9 @@ export default function ActionSelectorButtons({
         </Button>
       )}
       {actionType === 'MODIFY' && (
-        <Button variant='contained'>공고 수정</Button>
+        <Button variant='contained' onClick={modifyRecruitmentHandler}>
+          공고 수정
+        </Button>
       )}
     </div>
   );
