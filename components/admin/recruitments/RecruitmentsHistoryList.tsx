@@ -146,13 +146,6 @@ function RecruitmentsHistoryList({
       const todaydate = new Date(todaystring);
       const endDate = new Date(recruit.endDate);
       const startDate = new Date(recruit.startDate);
-      console.log(
-        startDate,
-        endDate,
-        todaystring,
-        startDate < todaydate,
-        endDate > todaydate
-      );
       return (
         <div>
           {recruit.isFinish

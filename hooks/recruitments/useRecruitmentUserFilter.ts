@@ -46,7 +46,6 @@ const useRecruitmentUserFilter = (recruitId: number) => {
         }
       );
       // FIXME: 페이지네이션 x (페이지네이션이 없는 api?) 임시로 1페이지로 고정
-      console.log(res.data);
       setRecruitUserData({
         applicationResults: res.data.applicationResults,
         totalPage: 1,
