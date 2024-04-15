@@ -20,7 +20,7 @@ function useUserApplicationForm(
       }
       return instance.patch(
         `/recruitments/${recruitId}/applications/${applicationId}`,
-        { form: applicantAnswers }
+        { forms: applicantAnswers }
       );
     }
   );
