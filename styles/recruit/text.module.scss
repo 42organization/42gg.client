@@ -10,3 +10,7 @@
   @include pageSubTitle;
   text-align: center;
 }
+
+.headerTitle {
+  @include pageTitle;
+}

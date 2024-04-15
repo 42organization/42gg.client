@@ -38,7 +38,7 @@ function FilterQptionsUI(
   useEffect(() => {
     setAnswers(
       recruitUserData.reduce((acc, recruit) => {
-        recruit.form.forEach((formItem) => {
+        recruit.forms.forEach((formItem) => {
           if (formItem.inputType !== 'TEXT') {
             formItem.checkedList?.forEach((item) => {
               if (!acc.some((answer) => answer.checkId === item.checkId)) {
@@ -71,7 +71,7 @@ function FilterQptionsUI(
           >
             {answers.map((answer: IcheckItem, index) => (
               <MenuItem key={index} value={answer.checkId}>
-                <ListItemText primary={answer.content} />
+                <ListItemText primary={answer.contents} />
               </MenuItem>
             ))}
           </Select>

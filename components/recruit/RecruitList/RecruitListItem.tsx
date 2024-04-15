@@ -8,7 +8,7 @@ const RecruitListItem = ({ recruit }: { recruit: recruitment }) => {
   const router = useRouter();
   return (
     <ListItemButton
-      onClick={() => router.push(`/recruit/${recruit.id}`)}
+      onClick={() => router.push(`/recruit/detail/?recruitId=${recruit.id}`)}
       className={styles.listItem}
     >
       <ListItemText

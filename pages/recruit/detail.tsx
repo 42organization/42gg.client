@@ -9,12 +9,12 @@ import 'react-quill/dist/quill.bubble.css';
 
 function Recruit() {
   const router = useRouter();
-  const recruitId = parseInt(router.query.id as string);
+  const recruitId = parseInt(router.query.recruitId as string);
 
   const { data, isLoading } = useRecruitDetail(recruitId);
 
   const onApply = () => {
-    router.push(`/recruit/${recruitId}/apply`);
+    router.push(`/recruit/apply?recruitId=${recruitId}`);
   };
 
   // TODO : 구체화 필요함.

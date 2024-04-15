@@ -1,15 +1,20 @@
-import { IApplicantAnswer, IQuestionForm } from 'types/recruit/recruitments';
+import {
+  IApplicantAnswerForm,
+  IQuestionForm,
+} from 'types/recruit/recruitments';
 
-const answerDefault = (form: IQuestionForm): IApplicantAnswer => {
+const answerDefault = (form: IQuestionForm): IApplicantAnswerForm => {
   const textDefault = {
     questionId: form.questionId,
     inputType: form.inputType,
-    answer: '',
+    answer: null,
+    checkedList: [],
   };
   const checkDefault = {
     questionId: form.questionId,
     inputType: form.inputType,
-    checkedList: <number[]>[],
+    answer: null,
+    checkedList: [],
   };
   return form.inputType === 'TEXT' ? textDefault : checkDefault;
 };

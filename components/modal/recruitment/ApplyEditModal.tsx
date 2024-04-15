@@ -40,7 +40,7 @@ function ApplyEditModal(props: IApplyEditModalProps) {
           severity: mode === 'APPLY' ? 'success' : 'info',
         });
         resetModalState();
-        router.push(`/recruit/${recruitId}`);
+        router.push(`/recruit/detail?recruitId=${recruitId}`);
       },
       onError: () =>
         setAlertState({

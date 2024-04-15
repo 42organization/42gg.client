@@ -18,15 +18,8 @@ function MultiCheckInput({ checkList }: CheckInputProps) {
               <Grid item xs={1} alignItems='center'>
                 <CheckBox />
               </Grid>
-              <Grid item xs={10}>
-                <TextField
-                  fullWidth
-                  required
-                  label='직접입력'
-                  value={checkItem.content}
-                  size='small'
-                  variant='standard'
-                />
+              <Grid item xs={10} alignContent={'center'}>
+                <div>{checkItem.contents}</div>
               </Grid>
             </Grid>
           );
@@ -45,15 +38,16 @@ function SingleCheckInput({ checkList }: CheckInputProps) {
               <Grid item xs={1}>
                 <Radio value={idx} />
               </Grid>
-              <Grid item xs={10}>
-                <TextField
+              <Grid item xs={10} alignContent={'center'}>
+                <div>{checkItem.contents}</div>
+                {/* <TextField
                   fullWidth
                   required
                   label='직접입력'
                   value={checkItem.content}
                   size='small'
                   variant='standard'
-                />
+                /> */}
               </Grid>
             </Grid>
           );
@@ -82,6 +76,7 @@ function Question({ question }: QuestionProps) {
             fullWidth
             value={question.question}
             size='small'
+            disabled
           />
         </Grid>
         <Grid item xs={12}>

@@ -17,7 +17,7 @@ const MyApplicationInfo = ({
   const onCheck = () => {
     if (!applicationId) return;
     router.push(
-      `/recruit/${recruitId}/my-application?applicationId=${applicationId}`
+      `/recruit/my-application?recruitId=${recruitId}&applicationId=${applicationId}`
     );
   };
 

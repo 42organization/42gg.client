@@ -61,8 +61,8 @@ const useRecruitmentUserFilter = (recruitId: number, currentPage?: number) => {
   }, [currentPage, searchString, checklistIds]);
 
   const questions = recruitUserData.applicationResults?.reduce(
-    (acc: string[], application: { form: { question: string }[] }) => {
-      application.form.forEach(({ question }) => {
+    (acc: string[], application: { forms: { question: string }[] }) => {
+      application.forms.forEach(({ question }) => {
         if (acc.indexOf(question) === -1) {
           acc.push(question);
         }

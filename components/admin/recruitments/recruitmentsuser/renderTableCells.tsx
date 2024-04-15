@@ -46,16 +46,16 @@ const ExpandableTableRow: React.FC<ExpandableTableRowProps> = ({
 
 function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
   const answers = questions.map((question) => {
-    const formItem = recruit.form.find((form) => form.question === question);
+    const formItem = recruit.forms.find((form) => form.question === question);
     if (!formItem) return 'N/A';
 
     switch (formItem.inputType) {
       case 'TEXT':
         return formItem.answer;
       case 'SINGLE_CHECK':
-        return formItem.checkedList?.map((item) => item.content).join(', ');
+        return formItem.checkedList?.map((item) => item.contents).join(', ');
       case 'MULTI_CHECK':
-        return formItem.checkedList?.map((item) => item.content).join(', ');
+        return formItem.checkedList?.map((item) => item.contents).join(', ');
       default:
         return 'N/A';
     }
@@ -72,12 +72,12 @@ function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
           <div>
             <strong>status:</strong> {recruit.status}
           </div>
-          {recruit.form.map((form, index) => (
+          {recruit.forms.map((form, index) => (
             <div key={index}>
               <strong>{form.question}</strong>:{' '}
               {form.answer
                 ? form.answer
-                : form.checkedList?.map((item) => item.content).join(', ')}
+                : form.checkedList?.map((item) => item.contents).join(', ')}
             </div>
           ))}
         </div>

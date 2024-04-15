@@ -3,13 +3,13 @@ import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { applicationAlertState } from 'utils/recoil/application';
 import ApplicationForm from 'components/recruit/Application/ApplicationForm';
-import ApplicationFormHeader from 'components/recruit/Application/applicationLayout/ApplicationFormHeader';
 import ApplicationLoadingNoData from 'components/recruit/Application/ApplicationLoadingNoData';
+import StickyHeader from 'components/recruit/StickyHeader';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
 
 function Apply() {
   const router = useRouter();
-  const recruitId = parseInt(router.query.id as string);
+  const recruitId = parseInt(router.query.recruitId as string);
   const setAlertState = useSetRecoilState(applicationAlertState);
 
   const { data, isLoading } = useRecruitDetail(recruitId);
@@ -31,7 +31,7 @@ function Apply() {
 
   return (
     <>
-      <ApplicationFormHeader title={'지원서 작성'} />
+      <StickyHeader headerTitle={'지원서 작성'} />
       <ApplicationForm
         recuitId={recruitId}
         applicationId={null}

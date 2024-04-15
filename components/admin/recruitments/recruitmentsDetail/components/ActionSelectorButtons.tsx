@@ -1,27 +1,12 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import {
-  Button,
-  FormControl,
-  FormControlLabel,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  Switch,
-} from '@mui/material';
+import { Button, FormControlLabel, Switch } from '@mui/material';
 import {
   Irecruit,
   RecruitmentEditProps,
   RecruitmentsPages,
 } from 'types/admin/adminRecruitmentsTypes';
+import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/recruitments/recruitmentDetail/components/ActionSelectorButtons.module.scss';
 
@@ -34,13 +19,13 @@ interface ActionSelectorButtonsProps {
 export default function ActionSelectorButtons({
   setPage,
   recruitmentInfo,
-  actionType,
 }: ActionSelectorButtonsProps) {
-  const STATE = recruitmentInfo.status === '모집중' ? false : true;
-
-  const [isEnded, setIsEnded] = useState<boolean>(STATE);
+  const [isFinish, setIsFinish] = useState<boolean>(
+    recruitmentInfo.isFinish as boolean
+  );
 
   const isStarted = recruitmentInfo.startDate > new Date();
+  const setSnackBar = useSetRecoilState(toastState);
 
   const goToEditPage = (mode: string) => {
     setPage({
@@ -53,19 +38,55 @@ export default function ActionSelectorButtons({
     });
   };
 
-  const switchChangeHandler = (
+  const deleteRecruitHandler = async () => {
+    try {
+      const res = await instance.delete(
+        `/admin/recruitments/${recruitmentInfo.id}`
+      );
+      alert('성공적으로 삭제가 완료되었습니다.');
+      setPage({ pageType: 'MAIN', props: null });
+    } catch (e: any) {
+      setSnackBar({
+        toastName: 'post recruitment',
+        severity: 'error',
+        message: e.response.data.message,
+        clicked: true,
+      });
+    }
+  };
+
+  const switchChangeHandler = async (
     e: ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => {
-    // 공고 상태 수정 API 호출
-    setIsEnded(checked);
+    try {
+      const res = await instance.patch(
+        `/admin/recruitments/${recruitmentInfo.id}/status`,
+        {
+          finish: !checked,
+        }
+      );
+      setIsFinish(!checked);
+      console.log(res);
+    } catch (e: any) {
+      setSnackBar({
+        toastName: 'patch recruitment',
+        severity: 'error',
+        message: 'API 요청에 실패하였습니다.',
+        clicked: true,
+      });
+    }
   };
 
   return (
     <>
       {isStarted ? (
         <div className={styles.mainContainer}>
-          <Button variant='contained' className={styles.button}>
+          <Button
+            variant='contained'
+            className={styles.button}
+            onClick={deleteRecruitHandler}
+          >
             삭제하기
           </Button>
           <Button
@@ -81,12 +102,12 @@ export default function ActionSelectorButtons({
           <FormControlLabel
             control={
               <Switch
-                checked={isEnded}
+                checked={!isFinish}
                 onChange={switchChangeHandler}
                 inputProps={{ 'aria-label': 'controlled' }}
               />
             }
-            label={isEnded ? '완료' : '모집중'}
+            label={isFinish ? '모집완료' : '모집중'}
           />
           <Button
             variant='contained'
