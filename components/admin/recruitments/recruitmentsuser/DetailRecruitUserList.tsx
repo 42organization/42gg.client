@@ -26,28 +26,28 @@ const tableTitle: { [key: string]: string } = {
 };
 
 function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
-  // // const [currentPage, setCurrentPage] = useState<number>(1);
-  // const { recruitUserData, questions } = useRecruitmentUserFilter(
-  //   recruitId
-  //   // currentPage
-  // );
+  // const [currentPage, setCurrentPage] = useState<number>(1);
+  const { recruitUserData, questions } = useRecruitmentUserFilter(
+    recruitId
+    // currentPage
+  );
 
-  // if (!recruitUserData.applicationResults?.length) {
-  //   return (
-  //     <TableContainer className={styles.tableContainer} component={Paper}>
-  //       <Table className={styles.table} aria-label='customized table'>
-  //         <AdminTableHead tableName={'recruitUserList'} table={tableTitle} />
-  //         <TableBody className={styles.tableBody}>
-  //           <AdminEmptyItem content={'공고 지원자 내역이 비어있습니다'} />
-  //         </TableBody>
-  //       </Table>
-  //     </TableContainer>
-  //   );
-  // }
+  if (!recruitUserData.applicationResults?.length) {
+    return (
+      <TableContainer className={styles.tableContainer} component={Paper}>
+        <Table className={styles.table} aria-label='customized table'>
+          <AdminTableHead tableName={'recruitUserList'} table={tableTitle} />
+          <TableBody className={styles.tableBody}>
+            <AdminEmptyItem content={'공고 지원자 내역이 비어있습니다'} />
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  }
 
   return (
     <>
-      {/* {FilterQptionsUI(recruitUserData.applicationResults, recruitId)}
+      {FilterQptionsUI(recruitUserData.applicationResults, recruitId)}
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <TableHead className={styles.tableHeader}>
@@ -68,7 +68,7 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
             )}
           </TableBody>
         </Table>
-      </TableContainer> */}
+      </TableContainer>
       <div className={styles.pageNationContainer}>
         {/* <PageNation
           curPage={recruitUserData.currentPage}
