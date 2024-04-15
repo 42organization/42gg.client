@@ -69,6 +69,10 @@
     width: 18rem;
   }
 
+  .textField {
+    z-index: 0;
+  }
+
   .radioBox,
   .checkBox {
     word-break: break-all;
