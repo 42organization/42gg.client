@@ -9,18 +9,12 @@
 .selectionPageContainer {
   header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     h2 {
       margin: 0;
       font-size: $giant-big-font;
-    }
-    button {
-      padding: 0;
-      color: $white1;
-      background-color: inherit;
-      border-style: none;
     }
   }
   .categoryContainer {

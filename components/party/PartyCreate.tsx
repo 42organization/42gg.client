@@ -61,11 +61,7 @@ function CategorySelection({
   return (
     <div className={styles.selectionPageContainer}>
       <header>
-        <div>{/* 정렬을 위한 가짜 box */}</div>
         <h2>카테고리</h2>
-        <button onClick={() => router.back()}>
-          <FaTimes size={25} />
-        </button>
       </header>
       <section className={styles.categoryContainer}>
         <ul>
