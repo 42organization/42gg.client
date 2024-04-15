@@ -142,15 +142,13 @@ function RecruitmentsHistoryList({
 
     if (columnName === 'status') {
       const today = new Date();
-      const todaystring = today.toISOString().slice(0, 19);
-      const todaydate = new Date(todaystring);
       const endDate = new Date(recruit.endDate);
       const startDate = new Date(recruit.startDate);
       return (
         <div>
           {recruit.isFinish
             ? '완료'
-            : startDate <= todaydate && endDate >= todaydate
+            : startDate <= today && endDate >= today
             ? '진행중'
             : '진행전'}
         </div>
