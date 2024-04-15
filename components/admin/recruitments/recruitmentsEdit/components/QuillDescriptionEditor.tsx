@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import { Paper } from '@mui/material';
 import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
 import 'react-quill/dist/quill.snow.css';

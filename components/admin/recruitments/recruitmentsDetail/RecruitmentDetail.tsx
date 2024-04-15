@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import HomeIcon from '@mui/icons-material/Home';
+import { IconButton } from '@mui/material';
 import {
   Iquestion,
   Irecruit,
   RecruitmentDetailProps,
-  RecruitmentsMainProps,
 } from 'types/admin/adminRecruitmentsTypes';
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
@@ -24,7 +25,7 @@ export default function RecruitmentDetail({
     endDate: new Date(),
     generation: '',
     contents: '',
-    form: [],
+    forms: [],
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -33,16 +34,16 @@ export default function RecruitmentDetail({
   const getRecruitmentInfo = async () => {
     setIsLoading(true);
     try {
-      const res = await instance.get('/recruitments/' + recruit.id);
+      const res = await instance.get(`admin/recruitments/${recruit.id}`);
       const data: Irecruit = {
         id: recruit.id,
-        status: recruit.status,
+        isFinish: recruit.isFinish,
         title: res.data.title,
         startDate: new Date(res.data.startDate),
         endDate: new Date(res.data.endDate),
         generation: res.data.generation,
         contents: res.data.contents,
-        form: res.data.form,
+        forms: res.data.forms,
       };
       setRecruitmentInfo(data);
       setIsLoading(false);
@@ -62,14 +63,14 @@ export default function RecruitmentDetail({
 
   return (
     <div className={styles.container}>
-      <button
+      <IconButton
+        aria-label='메인으로 가기'
         onClick={() => {
-          const props = { setPage: setPage } as RecruitmentsMainProps;
-          setPage({ pageType: 'MAIN', props: props });
+          setPage({ pageType: 'MAIN', props: null });
         }}
       >
-        홈으로 돌아가기
-      </button>
+        <HomeIcon />
+      </IconButton>
       {isLoading ? (
         <p>로딩중...</p>
       ) : (
@@ -83,7 +84,7 @@ export default function RecruitmentDetail({
           <QuillDescriptionViewer
             contents={recruitmentInfo.contents as string}
           />
-          <QuestionForm form={recruitmentInfo.form as Iquestion[]} />
+          <QuestionForm form={recruitmentInfo.forms as Iquestion[]} />
         </>
       )}
     </div>
