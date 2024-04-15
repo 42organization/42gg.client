@@ -83,7 +83,7 @@ function ApplicationForm(props: IApplicationFormProps) {
             <div
               key={index}
               tabIndex={index}
-              ref={(ref) => ref && (formRefs.current[index] = ref)}
+              ref={(ref) => ref && (formRefs.current[form.questionId] = ref)}
             >
               <Paper
                 elevation={3}
