@@ -59,6 +59,13 @@ export interface IApplicantAnswer {
   answer: string | null;
 }
 
+export interface IApplicantAnswerForm {
+  questionId: number;
+  inputType: recruitmentQuestionTypes;
+  checkedList: number[];
+  answer: string | null;
+}
+
 export type ApplicationFormType = 'APPLY' | 'VIEW' | 'EDIT';
 
 export interface IUserApplicationInfo {
@@ -77,7 +84,7 @@ export interface IapplicationAlertState {
 export interface IapplicationModal {
   state: boolean;
   content: 'APPLY' | 'CANCEL' | 'EDIT' | 'NONE';
-  formData: IApplicantAnswer[];
+  formData: IApplicantAnswerForm[];
 }
 
 export interface IRecruitmentDetailUser extends IUserApplicationInfo {

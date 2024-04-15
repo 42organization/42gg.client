@@ -35,7 +35,7 @@ function MultiCheckForm(props: IitemProps) {
               control={
                 <Checkbox
                   defaultChecked={answer?.checkedList
-                    ?.map((check) => check.checkListId)
+                    ?.map((checkedItem) => checkedItem.checkListId)
                     .includes(check.id)}
                 />
               }
