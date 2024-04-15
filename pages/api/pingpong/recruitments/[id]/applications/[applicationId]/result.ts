@@ -14,7 +14,7 @@ const beforeInterview = {
 
 const afterInterview = {
   title: '면접 시간 나왔습니다~',
-  status: 'INTERVIEW',
+  status: 'PROGRESS_INTERVIEW',
   interviewDate: new Date(),
 };
 

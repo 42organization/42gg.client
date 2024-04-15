@@ -20,7 +20,7 @@ export type resultType =
   | null
   | 'PROGRESS_DOCS'
   | 'APPLICATION_FAIL'
-  | 'INTERVIEW'
+  | 'PROGRESS_INTERVIEW'
   | 'PASS'
   | 'INTERVIEW_FAIL';
 

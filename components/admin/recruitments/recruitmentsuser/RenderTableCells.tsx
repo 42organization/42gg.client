@@ -70,7 +70,7 @@ function RenderTableCells(
     status = '지원서 불합격';
   } else if (recruit.status === 'PROGRESS_DOCS') {
     status = '면접 시간 발표 전';
-  } else if (recruit.status === 'INTERVIEW') {
+  } else if (recruit.status === 'PROGRESS_INTERVIEW') {
     status = '면접 시간 공개';
   } else if (recruit.status === 'FAIL') {
     status = '불합격';
