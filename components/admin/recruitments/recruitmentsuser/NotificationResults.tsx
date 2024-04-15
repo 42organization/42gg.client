@@ -48,7 +48,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [alignment, setAlignment] = useState<Record<number, string | null>>({});
   const setSnackBar = useSetRecoilState(toastState);
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [startDate, setStartDate] = useState<Record<number, Date | null>>({});
   const setModal = useSetRecoilState(modalState);
 
   const onEditTemplate = () => {
@@ -96,6 +96,10 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
     id: number
   ) => {
     setAlignment((prev) => ({ ...prev, [id]: newAlignment }));
+  };
+
+  const handleDate = (newDate: Date | null, id: number) => {
+    setStartDate((prev) => ({ ...prev, [id]: newDate }));
   };
 
   const getRecruitNotiHandler = useCallback(async () => {
@@ -153,8 +157,12 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
       return (
         <div className={styles.interview}>
           <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
+            selected={startDate[recruit.applicationId]}
+            showTimeSelect
+            timeFormat='HH:mm'
+            dateFormat='yyyy-MM-dd HH:mm'
+            timeIntervals={60}
+            onChange={(newDate) => handleDate(newDate, recruit.applicationId)}
           />
           &nbsp;
           <Button
@@ -164,7 +172,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
                 recruitId,
                 recruit.applicationId,
                 'PROGRESS_INTERVIEW',
-                startDate
+                startDate[recruit.applicationId]
               );
             }}
           >
@@ -177,7 +185,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
                 recruitId,
                 recruit.applicationId,
                 'FAIL',
-                startDate
+                startDate[recruit.applicationId]
               );
             }}
           >

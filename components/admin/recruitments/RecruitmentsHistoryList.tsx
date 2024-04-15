@@ -140,6 +140,23 @@ function RecruitmentsHistoryList({
       );
     }
 
+    if (columnName === 'status') {
+      const today = new Date();
+      const todaystring = today.toISOString().slice(0, 19);
+      const todaydate = new Date(todaystring);
+      const endDate = new Date(recruit.endDate);
+      const startDate = new Date(recruit.startDate);
+      return (
+        <div>
+          {recruit.isFinish
+            ? '완료'
+            : startDate <= todaydate && endDate >= todaydate
+            ? '진행중'
+            : '진행전'}
+        </div>
+      );
+    }
+
     return (
       <AdminContent
         content={recruit[columnName as keyof Irecruit]?.toString() as string}

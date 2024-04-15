@@ -56,7 +56,13 @@ export interface IuserFormResponse {
 export interface IrecruitUserTable {
   applicationId: number;
   intraId: string;
-  status?: '합격' | '불합격' | '심사중';
+  status?:
+    | 'INTERVIEW_FAIL'
+    | 'APPLICATION_FAIL'
+    | 'PROGRESS_DOCS'
+    | 'INTERVIEW'
+    | 'PASS'
+    | 'FAIL';
   forms: IuserFormResponse[];
 }
 
