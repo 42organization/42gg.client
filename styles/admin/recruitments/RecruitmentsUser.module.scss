@@ -6,7 +6,6 @@
   width: 100px;
   margin: auto;
   overflow-x: scroll;
-
   .table {
     width: max-content;
     min-width: 100%;
@@ -28,13 +27,13 @@
         &:nth-child(even) {
           background-color: #fff;
         }
-        .tableBodyItem {
-          padding: 10px;
-          font-size: $small-font;
-          line-height: 150%;
-          text-align: center;
-        }
       }
+    }
+    .tableBodyItem {
+      padding: 10px;
+      font-size: $small-font;
+      line-height: 150%;
+      text-align: center;
     }
   }
 }
@@ -62,6 +61,10 @@
     cursor: not-allowed;
     background-color: #929fb3;
   }
+}
+
+.expandableTableRow {
+  padding: 16px;
 }
 
 .interview {
