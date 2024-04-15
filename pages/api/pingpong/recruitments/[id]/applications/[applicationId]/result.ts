@@ -8,7 +8,7 @@ const before = {
 
 const beforeInterview = {
   title: '면접 시간 발표 전입니다~',
-  status: 'PROGRESS',
+  status: 'PROGRESS_DOCS',
   interviewDate: null,
 };
 

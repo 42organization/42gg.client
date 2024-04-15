@@ -39,7 +39,7 @@ const RecruitStepper = ({ status }: { status: resultType }) => {
 const stepMessage = ['지원서 확인', '면접', '결과 발표'];
 
 const statusToStep = (status: resultType) => {
-  if (status === 'PROGRESS') return 0;
+  if (status === 'PROGRESS_DOCS') return 0;
   if (status === 'INTERVIEW' || status === 'APPLICATION_FAIL') return 1; // 면접 전 상태
   if (status === 'PASS' || status === 'INTERVIEW_FAIL') return 2; // 면접 후 상태
   return 0;
