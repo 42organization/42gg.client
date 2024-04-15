@@ -39,7 +39,7 @@ function CancelModal(props: ICancelModalProps) {
           severity: 'success',
         });
         resetModalState();
-        router.push(`/recruit/${recruitId}`);
+        router.push(`/recruit/detail?recruitId=${recruitId}`);
       },
       onError: () => {
         setAlertState({
