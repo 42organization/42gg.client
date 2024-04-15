@@ -72,6 +72,8 @@ function RenderTableCells(
     status = '면접 시간 발표 전';
   } else if (recruit.status === 'INTERVIEW') {
     status = '면접 시간 공개';
+  } else if (recruit.status === 'FAIL') {
+    status = '불합격';
   } else {
     status = '심사중';
   }

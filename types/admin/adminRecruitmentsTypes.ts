@@ -61,7 +61,8 @@ export interface IrecruitUserTable {
     | 'APPLICATION_FAIL'
     | 'PROGRESS_DOCS'
     | 'INTERVIEW'
-    | 'PASS';
+    | 'PASS'
+    | 'FAIL';
   forms: IuserFormResponse[];
 }
 
