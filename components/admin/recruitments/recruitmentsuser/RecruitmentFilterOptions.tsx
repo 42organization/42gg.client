@@ -26,19 +26,15 @@ const MenuProps = {
   },
 };
 
-// FIXME : FilterQptionsUI 이름 변경하기 (의미를 알아보기 어려움)
-function FilterQptionsUI(
-  recruitUserData: IrecruitUserTable[],
-  recruitId: number
-) {
-  const [answers, setAnswers] = useState<Array<IcheckItem>>([]);
-  const { checklistIds, handleChecklistChange } =
+function RecruitmentFilterOptions({ recruitId }: { recruitId: number }) {
+  const { checklistIds, handleChecklistChange, recruitUserData } =
     useRecruitmentUserFilter(recruitId);
+  const [answers, setAnswers] = useState<Array<IcheckItem>>([]);
 
   useEffect(() => {
     setAnswers(
-      recruitUserData.reduce((acc, recruit) => {
-        recruit.form.forEach((formItem) => {
+      recruitUserData.applicationResults.reduce((acc, recruit) => {
+        recruit.forms?.forEach((formItem) => {
           if (formItem.inputType !== 'TEXT') {
             formItem.checkedList?.forEach((item) => {
               if (!acc.some((answer) => answer.checkId === item.checkId)) {
@@ -71,7 +67,7 @@ function FilterQptionsUI(
           >
             {answers.map((answer: IcheckItem, index) => (
               <MenuItem key={index} value={answer.checkId}>
-                <ListItemText primary={answer.content} />
+                <ListItemText primary={answer.contents} />
               </MenuItem>
             ))}
           </Select>
@@ -81,4 +77,4 @@ function FilterQptionsUI(
   );
 }
 
-export default FilterQptionsUI;
+export default RecruitmentFilterOptions;

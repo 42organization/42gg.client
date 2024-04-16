@@ -8,6 +8,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
+import { IcheckItem } from 'types/admin/adminRecruitmentsTypes';
 import {
   AdminEmptyItem,
   AdminTableHead,
@@ -15,8 +16,8 @@ import {
 import PageNation from 'components/Pagination';
 import useRecruitmentUserFilter from 'hooks/recruitments/useRecruitmentUserFilter';
 import styles from 'styles/admin/recruitments/RecruitmentsUser.module.scss';
-import FilterQptionsUI from './FilterOptions';
-import renderTableCells from './renderTableCells';
+import RecruitmentFilterOptions from './RecruitmentFilterOptions';
+import RenderTableCells from './RenderTableCells';
 
 const tableTitle: { [key: string]: string } = {
   id: '',
@@ -47,7 +48,7 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
 
   return (
     <>
-      {FilterQptionsUI(recruitUserData.applicationResults, recruitId)}
+      <RecruitmentFilterOptions recruitId={recruitId} />
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <TableHead className={styles.tableHeader}>
@@ -64,7 +65,7 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
           </TableHead>
           <TableBody className={styles.tableBody}>
             {recruitUserData.applicationResults.map((recruit) =>
-              renderTableCells(recruit, questions)
+              RenderTableCells(recruit, questions, '')
             )}
           </TableBody>
         </Table>

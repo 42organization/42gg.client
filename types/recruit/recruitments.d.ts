@@ -18,7 +18,7 @@ export type recruitmentListData = {
 
 export type resultType =
   | null
-  | 'PROGRESS'
+  | 'PROGRESS_DOCS'
   | 'APPLICATION_FAIL'
   | 'INTERVIEW'
   | 'PASS'
@@ -55,14 +55,22 @@ export interface IRecruitmentDetail {
 export interface IApplicantAnswer {
   questionId: number;
   inputType: recruitmentQuestionTypes;
-  checkedList?: number[];
-  answer?: string;
+  checkedList: { checkListId: number; content: string }[];
+  answer: string | null;
+}
+
+export interface IApplicantAnswerForm {
+  questionId: number;
+  inputType: recruitmentQuestionTypes;
+  checkedList: number[];
+  answer: string | null;
 }
 
 export type ApplicationFormType = 'APPLY' | 'VIEW' | 'EDIT';
+
 export interface IUserApplicationInfo {
   applicationId: number;
-  endDate: string;
+  endTime: string;
   title: string;
   content: string;
 }
@@ -76,7 +84,7 @@ export interface IapplicationAlertState {
 export interface IapplicationModal {
   state: boolean;
   content: 'APPLY' | 'CANCEL' | 'EDIT' | 'NONE';
-  formData: IApplicantAnswer[];
+  formData: IApplicantAnswerForm[];
 }
 
 export interface IRecruitmentDetailUser extends IUserApplicationInfo {
@@ -89,11 +97,13 @@ export type RecruitmentMessageType = 'INTERVIEW' | 'PASS' | 'FAIL';
 
 export interface IRecruitMessageTemplate {
   messageType: RecruitmentMessageType;
-  message: string;
+  content: string;
 }
-export interface IRecruitmentTemplate extends IRecruitMessageTemplate {
+export interface IRecruitmentTemplate {
   messageId: number;
+  messageType: RecruitmentMessageType;
   isUse: boolean;
+  message: string;
 }
 
 export interface IRecruitmentTemplateList {

@@ -48,7 +48,7 @@ function RecruitmentsHistoryList({
   setPage: Dispatch<SetStateAction<RecruitmentsPages>>;
 }) {
   const [recruitData, setRecruitData] = useState<IrecruitTable>({
-    recruitmentDtoList: [],
+    recruitments: [],
     totalPage: 0,
     currentPage: 0,
   });
@@ -64,7 +64,7 @@ function RecruitmentsHistoryList({
       );
       // FIXME : 페이지네이션 x 임시로 1페이지로 고정
       setRecruitData({
-        recruitmentDtoList: res.data.recruitmentDtoList,
+        recruitments: res.data.recruitments,
         totalPage: 1,
         currentPage: 1,
       });
@@ -140,6 +140,23 @@ function RecruitmentsHistoryList({
       );
     }
 
+    if (columnName === 'status') {
+      const today = new Date();
+      const todaystring = today.toISOString().slice(0, 19);
+      const todaydate = new Date(todaystring);
+      const endDate = new Date(recruit.endDate);
+      const startDate = new Date(recruit.startDate);
+      return (
+        <div>
+          {recruit.isFinish
+            ? '완료'
+            : startDate <= todaydate && endDate >= todaydate
+            ? '진행중'
+            : '진행전'}
+        </div>
+      );
+    }
+
     return (
       <AdminContent
         content={recruit[columnName as keyof Irecruit]?.toString() as string}
@@ -156,8 +173,8 @@ function RecruitmentsHistoryList({
         <Table className={styles.table} aria-label='customized table'>
           <AdminTableHead tableName={'recruitment'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {recruitData.recruitmentDtoList.length > 0 ? (
-              recruitData.recruitmentDtoList.map((recruit: Irecruit) => (
+            {recruitData.recruitments.length > 0 ? (
+              recruitData.recruitments.map((recruit: Irecruit) => (
                 <TableRow className={styles.tableRow} key={recruit.id}>
                   {tableFormat['recruitment'].columns.map(
                     (columnName: string, index: number) => (

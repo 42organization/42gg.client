@@ -44,47 +44,65 @@ const ExpandableTableRow: React.FC<ExpandableTableRowProps> = ({
   );
 };
 
-function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
+function RenderTableCells(
+  recruit: IrecruitUserTable,
+  questions: string[],
+  status: string
+) {
   const answers = questions.map((question) => {
-    const formItem = recruit.form.find((form) => form.question === question);
+    const formItem = recruit.forms.find((form) => form.question === question);
     if (!formItem) return 'N/A';
-
     switch (formItem.inputType) {
       case 'TEXT':
         return formItem.answer;
       case 'SINGLE_CHECK':
-        return formItem.checkedList?.map((item) => item.content).join(', ');
+        return formItem.checkedList?.map((item) => item.contents).join(', ');
       case 'MULTI_CHECK':
-        return formItem.checkedList?.map((item) => item.content).join(', ');
+        return formItem.checkedList?.map((item) => item.contents).join(', ');
       default:
         return 'N/A';
     }
   });
+  if (recruit.status === 'PASS') status = '합격';
+  else if (recruit.status === 'INTERVIEW_FAIL') {
+    status = '면접 불합격';
+  } else if (recruit.status === 'APPLICATION_FAIL') {
+    status = '지원서 불합격';
+  } else if (recruit.status === 'PROGRESS_DOCS') {
+    status = '면접 시간 발표 전';
+  } else if (recruit.status === 'INTERVIEW') {
+    status = '면접 시간 공개';
+  } else if (recruit.status === 'FAIL') {
+    status = '불합격';
+  } else {
+    status = '심사중';
+  }
 
   return (
     <ExpandableTableRow
       key={recruit.applicationId}
       expandComponent={
-        <div style={{ padding: '16px' }}>
+        <div className={styles.expandableTableRow}>
           <div>
             <strong>intraId:</strong> {recruit.intraId}
           </div>
           <div>
-            <strong>status:</strong> {recruit.status}
+            <strong>status:</strong> {status}
           </div>
-          {recruit.form.map((form, index) => (
-            <div key={index}>
-              <strong>{form.question}</strong>:{' '}
-              {form.answer
-                ? form.answer
-                : form.checkedList?.map((item) => item.content).join(', ')}
-            </div>
-          ))}
+          {recruit.forms &&
+            recruit.forms.map((form, index) => (
+              <div key={index}>
+                <strong>{form.question}</strong>:{' '}
+                {form.answer
+                  ? form.answer
+                  : form.checkedList?.map((item) => item.contents).join(', ')}
+              </div>
+            ))}
         </div>
       }
     >
       <TableCell className={styles.tableBodyItem}>{recruit.intraId}</TableCell>
-      <TableCell className={styles.tableBodyItem}>{recruit.status}</TableCell>
+      <TableCell className={styles.tableBodyItem}>{status}</TableCell>
       {answers.map(
         (answer: string | undefined, index: React.Key | null | undefined) => (
           <TableCell className={styles.tableBodyItem} key={index}>
@@ -98,4 +116,4 @@ function renderTableCells(recruit: IrecruitUserTable, questions: string[]) {
   );
 }
 
-export default renderTableCells;
+export default RenderTableCells;

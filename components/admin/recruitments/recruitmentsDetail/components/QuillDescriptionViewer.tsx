@@ -5,11 +5,6 @@ import 'react-quill/dist/quill.snow.css';
 import DynamicQuill from 'components/DynamicQuill';
 import styles from 'styles/admin/recruitments/recruitmentDetail/components/QuillDescription.module.scss';
 
-const Quill = dynamic(() => import('react-quill'), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
-
 interface QuillDescriptionViewerProps {
   contents: string;
 }

@@ -9,18 +9,12 @@
 .selectionPageContainer {
   header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     h2 {
       margin: 0;
       font-size: $giant-big-font;
-    }
-    button {
-      padding: 0;
-      color: $white1;
-      background-color: inherit;
-      border-style: none;
     }
   }
   .categoryContainer {
@@ -66,6 +60,7 @@
         font-size: $medium-font;
         font-weight: 400;
         line-height: 2em;
+        color: black;
         text-align: left;
         background-color: inherit;
         border-style: none;
@@ -99,19 +94,13 @@
   header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 1em;
 
     h2 {
       margin: 0;
       font-size: $giant-font;
       letter-spacing: 1px;
-    }
-    button {
-      padding: 0;
-      color: $white1;
-      background-color: inherit;
-      border-style: none;
     }
   }
   input,

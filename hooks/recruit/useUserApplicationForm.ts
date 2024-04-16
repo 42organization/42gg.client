@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { useMutation } from 'react-query';
 import {
   ApplicationFormType,
-  IApplicantAnswer,
+  IApplicantAnswerForm,
 } from 'types/recruit/recruitments';
 import { instance } from 'utils/axios';
 
@@ -12,7 +12,7 @@ function useUserApplicationForm(
   mode: ApplicationFormType
 ) {
   const { mutate } = useMutation(
-    (applicantAnswers: IApplicantAnswer[]): Promise<AxiosResponse> => {
+    (applicantAnswers: IApplicantAnswerForm[]): Promise<AxiosResponse> => {
       if (mode === 'APPLY' && applicationId === null) {
         return instance.post(`/recruitments/${recruitId}/applications`, {
           forms: applicantAnswers,
@@ -20,7 +20,7 @@ function useUserApplicationForm(
       }
       return instance.patch(
         `/recruitments/${recruitId}/applications/${applicationId}`,
-        { form: applicantAnswers }
+        { forms: applicantAnswers }
       );
     }
   );

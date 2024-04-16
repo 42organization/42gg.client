@@ -36,7 +36,7 @@ type StoreModal = 'MANUAL' | 'COIN_HISTORY';
 
 type TournamentModal = 'REGISTRY' | 'MANUAL';
 
-type PartyModal = 'REPORT';
+export type PartyModal = 'REPORT' | 'MANUAL';
 
 type AdminModal =
   | 'PROFILE'
@@ -63,7 +63,7 @@ type AdminModal =
   | 'PARTY_EDIT'
   | 'RECRUIT_MESSAGE_TEMPLATE';
 
-type ModalName =
+export type ModalName =
   | null
   | `EVENT-${EventModal}`
   | `MENU-${MenuModal}`
