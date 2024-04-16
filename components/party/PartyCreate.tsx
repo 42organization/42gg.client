@@ -61,11 +61,7 @@ function CategorySelection({
   return (
     <div className={styles.selectionPageContainer}>
       <header>
-        <div>{/* 정렬을 위한 가짜 box */}</div>
         <h2>카테고리</h2>
-        <button onClick={() => router.back()}>
-          <FaTimes size={25} />
-        </button>
       </header>
       <section className={styles.categoryContainer}>
         <ul>
@@ -154,7 +150,7 @@ function DetailCustomization({
       errorMessage
         ? await Promise.reject(new Error(errorMessage))
         : await instance.post('/party/rooms', partyForm).then(({ data }) => {
-            router.push(`/party/${data.roomId}`);
+            router.push(`/party/room?id=${data.roomId}`);
           });
     } catch (e) {
       setSnackBar({
@@ -173,9 +169,6 @@ function DetailCustomization({
     <div className={styles.detailFormContainer}>
       <header>
         <h2>#{partyForm.categoryName}</h2>
-        <button onClick={() => router.back()}>
-          <FaTimes size={25} />
-        </button>
       </header>
       <form onSubmit={handleSubmit}>
         <label className={styles.titleLabel}>

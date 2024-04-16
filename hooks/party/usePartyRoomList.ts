@@ -16,6 +16,7 @@ export default function usePartyRoomList({
 }: PartyRoomListProps = {}) {
   const [partyRooms, setPartyRooms] = useState<PartyRoom[]>([]);
   const [joinedPartyRooms, setJoinedPartyRooms] = useState<PartyRoom[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getRoomsAxios = (title?: string) => {
     const query = title ? `?title=${title}` : '';
@@ -35,8 +36,9 @@ export default function usePartyRoomList({
         )
       );
       setJoinedPartyRooms(joinedRoomsRes?.data.roomList ?? []); // joinedRooms는 조건부로 가져오므로 ?.data로 접근
+      setIsLoading(false);
     });
   }, [searchTitle]);
 
-  return { partyRooms, joinedPartyRooms };
+  return { partyRooms, joinedPartyRooms, partyRoomsLoading: isLoading };
 }

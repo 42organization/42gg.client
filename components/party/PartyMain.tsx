@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { FaSearch } from 'react-icons/fa';
+import { useSetRecoilState } from 'recoil';
+import { FaQuestion, FaSearch } from 'react-icons/fa';
 import { PartyCategory, PartyRoom } from 'types/partyTypes';
+import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/party/PartyMain.module.scss';
 import PartyRoomListItem from './PartyRoomListItem';
 
@@ -16,19 +18,29 @@ type JoinedRoomsProps = {
 };
 
 function JoinedRooms({ joinedPartyRooms, penaltyPeroid }: JoinedRoomsProps) {
+  const setModal = useSetRecoilState(modalState);
+
   return (
     <section className={styles.joinedRoomContainer}>
       <header className={styles.joinedRoomHeader}>
         <h2>참여중인 파티</h2>
-        {penaltyPeroid ? (
-          <div className={styles.penalty}>
-            패널티 <span className={styles.timer}>{penaltyPeroid}</span>
-          </div>
-        ) : (
-          <Link href='/party/create' className={styles.createRoomButton}>
-            방 만들기
-          </Link>
-        )}
+        <div>
+          <button
+            className={styles.guideButton}
+            onClick={() => setModal({ modalName: 'PARTY-MANUAL' })}
+          >
+            사용법
+          </button>
+          {penaltyPeroid ? (
+            <div className={styles.penalty}>
+              패널티 <span className={styles.timer}>{penaltyPeroid}</span>
+            </div>
+          ) : (
+            <Link href='/party/create' className={styles.createRoomButton}>
+              방 만들기
+            </Link>
+          )}
+        </div>
       </header>
       <ul>
         {joinedPartyRooms.length > 0 ? (
