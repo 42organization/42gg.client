@@ -1,6 +1,7 @@
 name: Deploy to 42ggClientS3
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - deploy
@@ -19,7 +20,9 @@ jobs:
       - name: Build
         env:
           NEXT_PUBLIC_SERVER_ENDPOINT: ${{ secrets.NEXT_PUBLIC_SERVER_ENDPOINT }}
+          NEXT_PUBLIC_CLIENT_ENDPOINT: ${{ secrets.NEXT_PUBLIC_CLIENT_ENDPOINT }}
           NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT: ${{ secrets.NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT }}
+          NEXT_PUBLIC_PARTY_MANAGE_SERVER_ENDPOINT: ${{ secrets.NEXT_PUBLIC_PARTY_MANAGE_SERVER_ENDPOINT }}
           NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS }}
           GENERATE_SOURCEMAP: ${{ secrets.GENERATE_SOURCEMAP }}
         run: |

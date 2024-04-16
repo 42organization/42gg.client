@@ -94,6 +94,6 @@
   "lint-staged": {
     "*.{ts,tsx,scss,md}": "prettier --write",
     "*.{ts,tsx}": "eslint --cache --fix",
-    "styles/**/*.{scss}": "stylelint --fix"
+    "styles/**/*.scss": "stylelint --fix"
   }
 }

@@ -1,5 +1,7 @@
 import { useRecoilValue } from 'recoil';
+import { PartyModal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
+import PartyManudalModal from '../party/PartyManualModal';
 import { PartyReportModal } from '../party/PartyReportModal';
 
 export default function PartyModal() {
@@ -9,6 +11,7 @@ export default function PartyModal() {
     'PARTY-REPORT': partyReport ? (
       <PartyReportModal report={partyReport} />
     ) : null,
+    'PARTY-MANUAL': <PartyManudalModal />,
   };
 
   if (!modalName) return null;

@@ -71,3 +71,24 @@ export function AdminContent({
     <div>{content?.toString()}</div>
   );
 }
+
+export function DetailContentHover({
+  content,
+  maxLen,
+}: {
+  content?: string;
+  maxLen: number;
+}) {
+  if (!content) return <div>N/A</div>;
+
+  return content?.length > maxLen ? (
+    <div className={styles.tableBodyItemHover}>
+      <div className={styles.info}>
+        {(content?.toString() || '').slice(0, maxLen)}...
+      </div>
+      {/* <div className={`${styles.hoverInfo}`}>{content}</div> */}
+    </div>
+  ) : (
+    <div>{content?.toString()}</div>
+  );
+}

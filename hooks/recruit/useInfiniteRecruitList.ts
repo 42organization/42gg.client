@@ -1,14 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { recruitmentListData } from 'types/recruit/recruitments';
+import { instance } from 'utils/axios';
 import { InfiniteScroll } from 'utils/infinityScroll';
-import { mockInstance } from 'utils/mockAxios';
 
 const fetchRecruitList = (page: number) => {
-  return mockInstance
-    .get(`/recruitments?page=${page}&size=${8}`)
-    .then((res) => {
-      return res.data;
-    });
+  return instance.get(`/recruitments?page=${page}&size=${8}`).then((res) => {
+    return res.data;
+  });
 };
 
 const useInfiniteRecruitList = () => {

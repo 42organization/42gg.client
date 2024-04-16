@@ -1,16 +1,19 @@
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import {
   IcheckItem,
   Iquestion,
-  IrecruitEditInfo,
+  Irecruit,
 } from 'types/admin/adminRecruitmentsTypes';
+import { instance } from 'utils/axios';
+import { toastState } from 'utils/recoil/toast';
 
 export interface IFormManager {
   setQuestionContent: (questionIdx: number, content: string) => void;
   setCheckItemContent: (
     questionIdx: number,
     checkItemIdx: number,
-    content: string
+    contents: string
   ) => void;
   addEmptyQuestion: (questionIdx: number, inputType: string) => void;
   removeQuestion: (questionIdx: number) => void;
@@ -24,16 +27,24 @@ export interface IFormManager {
 }
 
 export default function useRecruitmentEditInfo(
-  initRecruitmentEditInfo: IrecruitEditInfo
+  initRecruitmentEditInfo: Irecruit
 ) {
-  const [recruitmentEditInfo, setRecruitmentEditInfo] =
-    useState<IrecruitEditInfo>(initRecruitmentEditInfo);
+  if (initRecruitmentEditInfo.form === undefined) {
+    initRecruitmentEditInfo.form = new Array<Iquestion>();
+  }
+
+  const [recruitmentEditInfo, setRecruitmentEditInfo] = useState<Irecruit>(
+    initRecruitmentEditInfo
+  );
+
+  const setSnackBar = useSetRecoilState(toastState);
 
   const setRecruitmentEditInfoField = (fieldName: string, value: any) => {
     setRecruitmentEditInfo((prev) => ({ ...prev, [fieldName]: value }));
   };
 
   const setQuestionContent = (questionIdx: number, content: string) => {
+    if (!recruitmentEditInfo.form) return;
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
     question.question = content;
@@ -44,19 +55,21 @@ export default function useRecruitmentEditInfo(
   const setCheckItemContent = (
     questionIdx: number,
     checkItemIdx: number,
-    content: string
+    contents: string
   ) => {
+    if (!recruitmentEditInfo.form) return;
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
     if (!question.checkList) return;
 
     const checkItem = question.checkList[checkItemIdx];
-    checkItem.content = content;
+    checkItem.content = contents;
 
     updateRecruitFrom(updatedForm);
   };
 
   const addEmptyQuestion = (questionIdx: number, inputType: string) => {
+    if (!recruitmentEditInfo.form) return;
     const updatedForm = [...recruitmentEditInfo.form];
     const question = makeEmptyQuestion(inputType);
     if (!question) return;
@@ -67,6 +80,7 @@ export default function useRecruitmentEditInfo(
   };
 
   const removeQuestion = (questionIdx: number) => {
+    if (!recruitmentEditInfo.form) return;
     const updatedForm = [...recruitmentEditInfo.form];
     updatedForm.splice(questionIdx, 1);
 
@@ -74,6 +88,7 @@ export default function useRecruitmentEditInfo(
   };
 
   const addCheckItemToQuestion = (questionIdx: number) => {
+    if (!recruitmentEditInfo.form) return;
     const checkItem: IcheckItem = {
       content: '',
     };
@@ -100,6 +115,7 @@ export default function useRecruitmentEditInfo(
     checkItemIdx: number,
     questionIdx: number
   ) => {
+    if (!recruitmentEditInfo.form) return;
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
     if (!question) return;
@@ -111,6 +127,7 @@ export default function useRecruitmentEditInfo(
   };
 
   const changeQuestionInputType = (questionIdx: number, inputType: string) => {
+    if (!recruitmentEditInfo.form) return;
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
 
@@ -125,6 +142,7 @@ export default function useRecruitmentEditInfo(
   };
 
   const switchQuestionIndex = (questionIdx: number, targetIdx: number) => {
+    if (!recruitmentEditInfo.form) return;
     const updatedForm = [...recruitmentEditInfo.form];
     const question = updatedForm[questionIdx];
     if (!question) return;
@@ -177,9 +195,36 @@ export default function useRecruitmentEditInfo(
     switchQuestionIndex,
   };
 
+  const importRecruitmentInfo = async (recruitId: number) => {
+    if (recruitId <= 0) return;
+    try {
+      const res = await instance.get('/recruitments/' + recruitId);
+      const data: Irecruit = {
+        title: res.data.title,
+        startDate: new Date(res.data.startDate),
+        endDate: new Date(res.data.endDate),
+        generation: res.data.generation,
+        contents: res.data.contents,
+        form: res.data.form,
+      };
+      if (data.form === undefined) {
+        data.form = new Array<Iquestion>();
+      }
+      setRecruitmentEditInfo(data);
+    } catch (e: any) {
+      setSnackBar({
+        toastName: 'get recruitment',
+        severity: 'error',
+        message: `API 요청에 문제가 발생했습니다.`,
+        clicked: true,
+      });
+    }
+  };
+
   return {
     recruitmentEditInfo,
     setRecruitmentEditInfoField,
     formManager,
+    importRecruitmentInfo,
   };
 }

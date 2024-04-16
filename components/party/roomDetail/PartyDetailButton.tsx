@@ -80,16 +80,16 @@ function ReportNoShow({ roomId, userIntraId }: ParytButtonProps) {
 }
 
 function ShareRoom() {
-  const roomId = useRouter().query.roomId;
   const setSnackbar = useSetRecoilState(toastState);
+  const shareUrl = `${
+    process.env.NEXT_PUBLIC_CLIENT_ENDPOINT + useRouter().asPath
+  }`;
 
   return (
     <button
       className={styles.shareBtn}
       onClick={() => {
-        navigator.clipboard.writeText(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/party/${roomId}`
-        );
+        navigator.clipboard.writeText(shareUrl);
         setSnackbar({
           toastName: 'clip board',
           message: '주소가 복사되었습니다.',
@@ -116,6 +116,13 @@ function JoinRoom({ roomId, fetchRoomDetail }: RefreshProps) {
       .post(`/party/rooms/${roomId}`)
       .then(() => {
         fetchRoomDetail();
+        setSnackbar({
+          toastName: 'Party Join',
+          message:
+            '파티모집이 완료되면 slack 메세지가 보내집니다. slack 알림을 켜주세요!',
+          severity: 'success',
+          clicked: true,
+        });
       })
       .catch(() => {
         setSnackbar({

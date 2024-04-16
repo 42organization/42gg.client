@@ -11,7 +11,7 @@ export default function PartyMainPage() {
   const titleQuery = Array.isArray(router.query.title)
     ? router.query.title[0]
     : router.query.title;
-  const { partyRooms, joinedPartyRooms } = usePartyRoomList({
+  const { partyRooms, joinedPartyRooms, partyRoomsLoading } = usePartyRoomList({
     withJoined: true,
     searchTitle: titleQuery,
   });
@@ -20,7 +20,7 @@ export default function PartyMainPage() {
 
   usePartyColorMode('PARTY-MAIN');
 
-  if (isCategoryLoading || isPenaltyLoading) return null;
+  if (isCategoryLoading || isPenaltyLoading || partyRoomsLoading) return null; // 방 목록 로딩 추가
 
   return (
     <div className={styles.pageContainer}>

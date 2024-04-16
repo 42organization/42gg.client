@@ -4,7 +4,7 @@ import {
   ApplicationFormType,
   IApplicantAnswer,
 } from 'types/recruit/recruitments';
-import { mockInstance } from 'utils/mockAxios';
+import { instance } from 'utils/axios';
 
 function useUserApplicationForm(
   recruitId: number,
@@ -14,11 +14,11 @@ function useUserApplicationForm(
   const { mutate } = useMutation(
     (applicantAnswers: IApplicantAnswer[]): Promise<AxiosResponse> => {
       if (mode === 'APPLY' && applicationId === null) {
-        return mockInstance.post(`/recruitments/${recruitId}/applications`, {
-          form: applicantAnswers,
+        return instance.post(`/recruitments/${recruitId}/applications`, {
+          forms: applicantAnswers,
         });
       }
-      return mockInstance.patch(
+      return instance.patch(
         `/recruitments/${recruitId}/applications/${applicationId}`,
         { form: applicantAnswers }
       );
