@@ -154,7 +154,7 @@ function DetailCustomization({
       errorMessage
         ? await Promise.reject(new Error(errorMessage))
         : await instance.post('/party/rooms', partyForm).then(({ data }) => {
-            router.push(`/party/${data.roomId}`);
+            router.push(`/party/room?id=${data.roomId}`);
           });
     } catch (e) {
       setSnackBar({

@@ -20,7 +20,7 @@ const RecruitListItem = ({ recruit }: { recruit: recruitment }) => {
         secondary={
           dateToString(new Date(recruit.startDate)) +
           ' ~ ' +
-          dateToString(new Date(recruit.startDate))
+          dateToString(new Date(recruit.endDate))
         }
       />
     </ListItemButton>

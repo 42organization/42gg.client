@@ -8,7 +8,7 @@ export default function PartyPreview() {
   const router = useRouter();
 
   const movePartyRoom = (roomId: number) => {
-    router.push(`/party/${roomId}`);
+    router.push(`/party/room?id=${roomId}`);
   };
   return (
     <div>
