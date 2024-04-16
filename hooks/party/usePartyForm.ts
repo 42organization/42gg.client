@@ -33,7 +33,7 @@ const reducer: React.Reducer<PartyCreateForm, PartyFormAction> = (
     case 'UPDATE_MAX_PEOPLE':
       return { ...state, maxPeople: action.maxPeople };
     case 'UPDATE_CONTENT':
-      if (action.content.length > 1000) return state;
+      if (action.content.length > 100) return state;
       return { ...state, content: action.content };
     case 'UPDATE_OPEN_PERIOD':
       return {

@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { FaTimes } from 'react-icons/fa';
 import { PartyCategory, PartyCreateForm } from 'types/partyTypes';
 import { instance } from 'utils/axios';
+import { getFormattedDateToString } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
 import {
   customTemplate,
@@ -128,6 +128,9 @@ function DetailCustomization({
     minute: 0,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const dueDate = getFormattedDateToString(
+    new Date(Date.now() + partyForm.openPeriod * 60 * 1000)
+  );
 
   function handleOpenPeriod(period: { hour: number; minute: number }) {
     setOpenPeriod(period);
@@ -258,7 +261,9 @@ function DetailCustomization({
               ))}
             </select>
             <div className={styles.textCenter}>분 후</div>
-            <div className={styles.dueDate}>23시 34분 마감</div>
+            <div className={styles.dueDate}>
+              {dueDate.hour}시 {dueDate.min}분 마감
+            </div>
           </div>
         </label>
         <label className={styles.contentLabel}>
@@ -276,7 +281,7 @@ function DetailCustomization({
           />
           <div
             className={styles.contentCount}
-          >{`${partyForm.content.length}/1000`}</div>
+          >{`${partyForm.content.length}/100`}</div>
         </label>
         <div className={styles.submitButtonWrap}>
           <button type='submit' disabled={isSubmitting}>
