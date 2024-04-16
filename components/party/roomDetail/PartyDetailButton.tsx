@@ -116,6 +116,13 @@ function JoinRoom({ roomId, fetchRoomDetail }: RefreshProps) {
       .post(`/party/rooms/${roomId}`)
       .then(() => {
         fetchRoomDetail();
+        setSnackbar({
+          toastName: 'Party Join',
+          message:
+            '파티모집이 완료되면 slack 메세지가 보내집니다. slack 알림을 켜주세요!',
+          severity: 'success',
+          clicked: true,
+        });
       })
       .catch(() => {
         setSnackbar({
