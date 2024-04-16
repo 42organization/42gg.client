@@ -1,5 +1,4 @@
 import { useRecoilValue } from 'recoil';
-import { PartyModal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import PartyManudalModal from '../party/PartyManualModal';
 import { PartyReportModal } from '../party/PartyReportModal';
