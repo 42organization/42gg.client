@@ -10,6 +10,7 @@
 }
 
 @mixin admin-button($color, $disabled: '') {
+  cursor: pointer;
   border: none;
   @if ($color == 'BLUE') {
     color: #ffffff;

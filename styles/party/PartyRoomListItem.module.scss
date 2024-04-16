@@ -1,0 +1,91 @@
+@import 'styles/common.scss';
+@import 'styles/party/PartyCommon.scss';
+
+.roomWrap {
+  display: flex;
+  padding: 0.6em;
+  margin: 2px 0;
+  color: black;
+  background-color: $white2;
+  border-radius: $medium-radius;
+  justify-content: space-between;
+  align-items: center;
+
+  &.transparent {
+    opacity: 0.5;
+  }
+}
+
+.roomContent {
+  position: relative;
+  width: 100%;
+  margin: 0;
+
+  &::after {
+    position: absolute;
+    top: 10%;
+    right: 0;
+    box-sizing: border-box;
+    width: 0;
+    height: 80%;
+    content: '';
+    border: 0.5px solid $medium-gray;
+  }
+
+  header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin: 0;
+
+    .roomCategory {
+      margin-right: 0.5em;
+      font-size: $small-font;
+      font-weight: 400;
+      color: $dark-gray;
+    }
+    .roomStatus {
+      display: inline-block;
+      padding: 2px 4px;
+      font-size: 0.7em;
+      font-weight: 300;
+      color: white;
+      border-radius: 8px;
+
+      &.FINISH {
+        background-color: $dark-gray;
+      }
+      &.START {
+        background-color: $party-yellow;
+      }
+      &.OPEN {
+        background-color: $party-blue;
+      }
+    }
+  }
+
+  .roomTitle {
+    margin: 0 0 0 0.2em;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.5em;
+  }
+}
+
+.roomInfo {
+  display: flex;
+  width: 4em;
+  flex-direction: column;
+  margin-left: 0.5em;
+  align-items: center;
+
+  .roomDueDate {
+    padding: 0.3em 0;
+    font-size: 0.7rem;
+    color: $dark-gray;
+  }
+  .roomPeople {
+    font-weight: 400;
+    letter-spacing: 0.1em;
+  }
+}

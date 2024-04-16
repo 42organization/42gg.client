@@ -15,6 +15,7 @@ const Home: NextPage = () => {
           tournamentData.liveTournament?.length > 0) && (
           <Section path='tournament' sectionTitle={'Tournament'} />
         )}
+      <Section path='party' sectionTitle={'Party'} />
       <Section path='rank' sectionTitle={'Ranking'} />
       <Section path='game' sectionTitle={'Current Play'} />
     </div>

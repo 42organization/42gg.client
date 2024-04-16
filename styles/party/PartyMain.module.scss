@@ -1,0 +1,142 @@
+@import 'styles/common.scss';
+@import 'styles/party/PartyCommon.scss';
+
+@mixin roomListWrap {
+  padding: 0.8em;
+  margin: 0;
+  background: linear-gradient($party-blue-sky4, $party-blue-dark);
+  border-radius: $medium-radius;
+}
+
+.pageContainer {
+  @include pageWrap;
+  color: $white2;
+
+  section {
+    margin-bottom: 1em;
+  }
+}
+
+.joinedRoomContainer {
+  .joinedRoomHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5em;
+
+    h2 {
+      margin: 0;
+      font-size: $medium-font;
+      font-weight: 500;
+    }
+    .createRoomButton {
+      padding: 0.3em 0.6em;
+      font-size: $medium-font;
+      color: white;
+      background: $party-gradient3;
+      border-style: none;
+      border-radius: 1em;
+    }
+    .guideButton {
+      padding: 0.3em 0.6em;
+      margin-right: 0.5em;
+      font-size: $medium-font;
+      color: white;
+      background: $party-gradient3;
+      border-style: none;
+      border-radius: 1em;
+    }
+    .penalty {
+      padding: 0.3em 0.6em;
+      font-size: $medium-font;
+      background: red;
+      filter: brightness(60%);
+      border-style: none;
+      border-radius: 1em;
+
+      .timer {
+        display: inline-block;
+        width: 4.3em;
+      }
+    }
+  }
+  ul {
+    @include roomListWrap;
+  }
+}
+
+.searchBar {
+  form {
+    display: flex;
+    width: 100%;
+    padding: 0.5em;
+    background-color: $medium-gray;
+    border-radius: $small-radius;
+    align-items: center;
+
+    .searchIcon {
+      color: $dark-gray;
+    }
+    input {
+      width: 100%;
+      padding-left: 0.2em;
+      font-size: $medium-font;
+      font-weight: 300;
+      background-color: inherit;
+      border-style: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+.allRoomContanier {
+  .categoryNav {
+    ul {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 0.5em;
+
+      li {
+        display: flex;
+        width: 25%;
+        padding: 0.6em 0;
+        margin: 0 2px;
+        font-size: $medium-font;
+        font-weight: 300;
+        list-style: none;
+        background-color: $party-blue-sky0;
+        border-top-left-radius: $medium-radius;
+        border-top-right-radius: $medium-radius;
+        transition: 0.3s ease width;
+        justify-content: center;
+        align-items: center;
+
+        &.selected {
+          width: 30%;
+          background-color: $party-blue-sky01;
+        }
+      }
+    }
+  }
+  .allRoomListWrap {
+    @include roomListWrap;
+    position: relative;
+    min-height: 25rem;
+    overflow-y: scroll;
+
+    ul {
+      margin: 0;
+    }
+
+    .emptyRooms {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: $big-font;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

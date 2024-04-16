@@ -1,0 +1,48 @@
+@import 'styles/common.scss';
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  width: 20rem;
+  height: 12rem;
+  flex-direction: column;
+  background-color: #dcdee6;
+  border-radius: 1rem;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  margin: 0.5rem;
+  line-height: 150%;
+  word-break: keep-all;
+}
+
+.btnContainer {
+  display: flex;
+  width: 100%;
+  margin-top: 0.5rem;
+  justify-content: space-evenly;
+  align-items: center;
+  .cancelBtn,
+  .applyBtn,
+  .applyCancelBtn {
+    width: 7rem;
+    height: 3rem;
+    font-size: $big-font;
+    color: black;
+    border-radius: 0.8rem;
+  }
+  .cancelBtn {
+    border-width: 0.1rem;
+    &:hover {
+      background-color: #8c92ac;
+    }
+  }
+  .applyCancelBtn {
+    background-color: #ffcccc;
+  }
+}

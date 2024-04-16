@@ -1,6 +1,7 @@
 import React from 'react';
+import { InventoryData } from 'types/inventoryTypes';
 import { instance } from 'utils/axios';
-import { InfinityScroll } from 'utils/infinityScroll';
+import { InfiniteScroll } from 'utils/infinityScroll';
 import { InfiniteScrollComponent } from 'components/store/InfiniteScrollComponent';
 import { InvetoryItem } from 'components/store/InventoryItem';
 import StoreLoading from 'components/store/StoreLoading';
@@ -14,11 +15,8 @@ function fetchInventoryData(page: number) {
 }
 
 export function InventoryList() {
-  const { data, error, isLoading, hasNextPage, fetchNextPage } = InfinityScroll(
-    'inventory',
-    fetchInventoryData,
-    'JY04'
-  );
+  const { data, error, isLoading, hasNextPage, fetchNextPage } =
+    InfiniteScroll<InventoryData>('inventory', fetchInventoryData, 'JY04');
 
   // TODO : 에러 컴포넌트 구체화 필요함.
   if (isLoading) return <StoreLoading />;

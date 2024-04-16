@@ -1,0 +1,17 @@
+.mainContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  padding: 0.5rem;
+  // border: 1px solid #000000;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.importWrapper {
+  display: flex;
+  width: 50%;
+  flex-direction: row;
+  align-items: center;
+}

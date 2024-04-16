@@ -1,0 +1,69 @@
+@import 'styles/common.scss';
+@import 'styles/admin/common/Pagination.module.scss';
+
+.tableContainer {
+  .table {
+    .tableBody {
+      .tableBodyItem {
+        padding: 0.5rem;
+        font-size: $small-font;
+        line-height: 100%;
+        text-align: center;
+      }
+    }
+  }
+}
+.AdminTableWrap {
+  width: 100%;
+  height: 100%;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+    min-width: 710px;
+    margin: 10px auto;
+    text-align: center;
+    .title {
+      font-size: $big-font;
+      font-weight: 600;
+      line-height: 150%;
+    }
+  }
+
+  .button_1 {
+    padding: 4px 12px;
+    font-size: $small-font;
+    cursor: pointer;
+    border: none;
+    border-radius: $medium-radius;
+  }
+  .delete {
+    color: #ffffff;
+    background-color: #d73535;
+    &:hover {
+      background-color: #d71e1e;
+      transition: 0.3s;
+    }
+  }
+  .add {
+    margin-left: 10px;
+    color: white;
+    background-color: #10b981;
+    &:hover {
+      background-color: #059669;
+      transition: 0.3s;
+    }
+  }
+  .edit {
+    color: white;
+    background-color: #193972;
+    &:hover {
+      background-color: #044581;
+      transition: 0.3s;
+    }
+  }
+}
+
+@include pagination;

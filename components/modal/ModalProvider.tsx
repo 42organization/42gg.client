@@ -6,6 +6,7 @@ import AdminModal from 'components/modal/modalType/AdminModal';
 import NormalModal from 'components/modal/modalType/NormalModal';
 import StoreModal from 'components/modal/modalType/StoreModal';
 import styles from 'styles/modal/Modal.module.scss';
+import PartyModal from './modalType/PartyModal';
 import TournamentModal from './modalType/TournamentModal';
 
 export default function ModalProvider() {
@@ -46,6 +47,8 @@ export default function ModalProvider() {
           <AdminModal />
         ) : modalType === 'TOURNAMENT' ? (
           <TournamentModal />
+        ) : modalType === 'PARTY' ? (
+          <PartyModal />
         ) : null}
       </div>
     )
