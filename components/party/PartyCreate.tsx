@@ -169,9 +169,6 @@ function DetailCustomization({
     <div className={styles.detailFormContainer}>
       <header>
         <h2>#{partyForm.categoryName}</h2>
-        <button onClick={() => router.back()}>
-          <FaTimes size={25} />
-        </button>
       </header>
       <form onSubmit={handleSubmit}>
         <label className={styles.titleLabel}>
