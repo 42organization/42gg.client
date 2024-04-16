@@ -1,25 +1,26 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Button } from '@mui/material';
-import { ApplicationFormType } from 'types/recruit/recruitments';
+import { ApplicationFormType, resultType } from 'types/recruit/recruitments';
 import { applicationModalState } from 'utils/recoil/application';
 import styles from 'styles/recruit/application.module.scss';
 
 interface IApplicationFormFooterProps {
   endDate: string;
+  status: resultType;
   mode: ApplicationFormType;
   setMode: Dispatch<SetStateAction<ApplicationFormType>>;
 }
 
 function ApplicatoinFormFooter(props: IApplicationFormFooterProps) {
-  const { endDate, mode, setMode } = props;
+  const { endDate, status, mode, setMode } = props;
   const setModalState = useSetRecoilState(applicationModalState);
 
   return (
     <div className={styles.stickyFooter}>
       <div className={styles.stickyContainer}>
-        {new Date() < new Date(endDate) ? (
-          <div className={styles.btnContainer}>
+        <div className={styles.btnContainer}>
+          {(status === null || status === 'PROGRESS_DOCS') && (
             <Button
               variant='contained'
               className={styles.cancelBtn}
@@ -29,7 +30,10 @@ function ApplicatoinFormFooter(props: IApplicationFormFooterProps) {
             >
               지원 취소
             </Button>
-            {mode === 'VIEW' ? (
+          )}
+          {new Date() < new Date(endDate) &&
+          (status === null || status === 'PROGRESS_DOCS') ? (
+            mode === 'VIEW' ? (
               <Button
                 variant='contained'
                 className={styles.editBtn}
@@ -46,13 +50,11 @@ function ApplicatoinFormFooter(props: IApplicationFormFooterProps) {
               >
                 제출하기
               </Button>
-            )}
-          </div>
-        ) : (
-          <div className={styles.btnContainer}>
-            지원서 수정 기한이 지났습니다
-          </div>
-        )}
+            )
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </div>
   );

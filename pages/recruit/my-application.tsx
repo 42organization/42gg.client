@@ -7,6 +7,7 @@ import ApplicationForm from 'components/recruit/Application/ApplicationForm';
 import ApplicatoinFormFooter from 'components/recruit/Application/applicationLayout/ApplicationFormFooter';
 import ApplicationLoadingNoData from 'components/recruit/Application/ApplicationLoadingNoData';
 import StickyHeader from 'components/recruit/StickyHeader';
+import useGetRecruitResult from 'hooks/recruit/useGetRecruitResult';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
 import useRecruitDetailUser from 'hooks/recruit/useRecruitDetailUser';
 
@@ -21,6 +22,10 @@ function MyApplication() {
     useRecruitDetail(recruitId);
   const { data: userAnswerList, isLoading: userAnswerListLoading } =
     useRecruitDetailUser(recruitId, applicationId);
+  const { data: recruitResult } = useGetRecruitResult(
+    recruitId.toString(),
+    applicationId
+  );
 
   useEffect(() => {
     if (
@@ -75,6 +80,7 @@ function MyApplication() {
       />
       <ApplicatoinFormFooter
         endDate={recruitDetail.endDate}
+        status={recruitResult?.status ? recruitResult.status : null}
         mode={mode}
         setMode={setMode}
       />
