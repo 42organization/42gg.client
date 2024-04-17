@@ -80,7 +80,7 @@ function MyApplication() {
       />
       <ApplicatoinFormFooter
         endDate={recruitDetail.endDate}
-        status={recruitResult?.status ? recruitResult.status : null}
+        status={recruitResult?.status || null}
         mode={mode}
         setMode={setMode}
       />
