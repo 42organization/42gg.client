@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Button } from '@mui/material';
 import { ApplicationFormType, resultType } from 'types/recruit/recruitments';
@@ -14,7 +14,14 @@ interface IApplicationFormFooterProps {
 
 function ApplicatoinFormFooter(props: IApplicationFormFooterProps) {
   const { endDate, status, mode, setMode } = props;
+  const [closed, setClosed] = useState<boolean>(false);
   const setModalState = useSetRecoilState(applicationModalState);
+
+  useEffect(() => {
+    if (new Date() > new Date(endDate)) {
+      setClosed(true);
+    }
+  }, [endDate]);
 
   return (
     <div className={styles.stickyFooter}>
@@ -31,8 +38,7 @@ function ApplicatoinFormFooter(props: IApplicationFormFooterProps) {
               지원 취소
             </Button>
           )}
-          {new Date() < new Date(endDate) &&
-          (status === null || status === 'PROGRESS_DOCS') ? (
+          {!closed && (status === null || status === 'PROGRESS_DOCS') ? (
             mode === 'VIEW' ? (
               <Button
                 variant='contained'
