@@ -41,6 +41,7 @@ export default function AdminCommentReport() {
     instanceInPartyManage
       .get(`/reports/comments?page=${currentPage}&size=10`)
       .then((res) => {
+        console.log(res);
         setCommentInfo({
           commentReportList: res.data.commentReportList,
           totalPage: res.data.totalPage,
@@ -60,7 +61,7 @@ export default function AdminCommentReport() {
   return (
     <div className={styles.AdminTableWrap}>
       <div className={styles.header}>
-        <span className={styles.title}>댓글 신고리스트</span>
+        <span className={styles.title}>댓글 신고 목록</span>
       </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='UserManagementTable'>

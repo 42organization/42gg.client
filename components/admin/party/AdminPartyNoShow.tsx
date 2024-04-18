@@ -41,11 +41,13 @@ export default function AdminPartyNoShow() {
     instanceInPartyManage
       .get(`/reports/users?page=${currentPage}&size=10`)
       .then((res) => {
+        console.log(res);
         setNoShowInfo({
-          noShowReportList: res.data.noShowReportList,
+          noShowReportList: res.data.userReportList,
           totalPages: res.data.totalPage,
           currentPage: currentPage,
         });
+        console.log(noShowInfo);
       })
       .catch((error) => {
         setSnackBar({
@@ -60,7 +62,7 @@ export default function AdminPartyNoShow() {
   return (
     <div className={styles.AdminTableWrap}>
       <div className={styles.header}>
-        <span className={styles.title}>노쇼 신고리스트</span>
+        <span className={styles.title}>노쇼 신고 목록</span>
       </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='UserManagementTable'>
