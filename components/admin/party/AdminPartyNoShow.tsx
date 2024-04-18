@@ -46,7 +46,6 @@ export default function AdminPartyNoShow() {
           totalPages: res.data.totalPage,
           currentPage: currentPage,
         });
-        console.log(noShowInfo);
       })
       .catch((error) => {
         setSnackBar({
