@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import {
   Paper,
@@ -33,9 +33,9 @@ const tableTitle: { [key: string]: string } = {
 export default function PartyTemplate() {
   const { templates, deleteTemplate } = usePartyTemplate();
   const setModal = useSetRecoilState(modalState);
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   useEffect(() => {
-    console.log(templates);
     console.log('Render');
   }, [templates]);
 
@@ -51,6 +51,10 @@ export default function PartyTemplate() {
     deleteTemplate({ gameTemplateId });
   };
 
+  const handleCategorySelect = (category: string) => {
+    setSelectedCategory(category);
+  };
+
   return (
     <div>
       <div className={styles.AdminTableWrap}>
@@ -63,41 +67,75 @@ export default function PartyTemplate() {
             추가
           </button>
         </div>
+        <div className={styles.container}>
+          <ul className={styles.ullist}>
+            <li
+              className={styles.lilist}
+              onClick={() => handleCategorySelect('all')}
+            >
+              전체
+            </li>
+            <li
+              className={styles.lilist}
+              onClick={() => handleCategorySelect('콘솔게임')}
+            >
+              콘솔게임
+            </li>
+            <li
+              className={styles.lilist}
+              onClick={() => handleCategorySelect('보드게임')}
+            >
+              보드게임
+            </li>
+            <li
+              className={styles.lilist}
+              onClick={() => handleCategorySelect('기타')}
+            >
+              기타
+            </li>
+          </ul>
+        </div>
         <TableContainer className={styles.tableContainer} component={Paper}>
           <Table className={styles.table} aria-label='UserManagementTable'>
             <AdminTableHead tableName={'partyTemplate'} table={tableTitle} />
             <TableBody className={styles.tableBody}>
-              {templates.map((t) => (
-                <TableRow key={t.gameTemplateId}>
-                  {tableFormat['partyTemplate'].columns.map((columnName) => {
-                    return (
-                      <TableCell
-                        key={columnName}
-                        className={styles.tableBodyItem}
-                      >
-                        {columnName === 'change' && (
-                          <button
-                            onClick={() => handleEditTemplate(t)}
-                            className={`${styles.button_1} ${styles.edit}`}
-                          >
-                            수정
-                          </button>
-                        )}
-                        {columnName === 'delete' ? (
-                          <button
-                            onClick={() => deleteHandler(t.gameTemplateId)}
-                            className={`${styles.button_1} ${styles.delete}`}
-                          >
-                            삭제
-                          </button>
-                        ) : (
-                          t[columnName as keyof PartyGameTemplate]?.toString()
-                        )}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              ))}
+              {templates
+                .filter(
+                  (t) =>
+                    selectedCategory === 'all' ||
+                    t.categoryName === selectedCategory
+                )
+                .map((t) => (
+                  <TableRow key={t.gameTemplateId}>
+                    {tableFormat['partyTemplate'].columns.map((columnName) => {
+                      return (
+                        <TableCell
+                          key={columnName}
+                          className={styles.tableBodyItem}
+                        >
+                          {columnName === 'change' && (
+                            <button
+                              onClick={() => handleEditTemplate(t)}
+                              className={`${styles.button_1} ${styles.edit}`}
+                            >
+                              수정
+                            </button>
+                          )}
+                          {columnName === 'delete' ? (
+                            <button
+                              onClick={() => deleteHandler(t.gameTemplateId)}
+                              className={`${styles.button_1} ${styles.delete}`}
+                            >
+                              삭제
+                            </button>
+                          ) : (
+                            t[columnName as keyof PartyGameTemplate]?.toString()
+                          )}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
