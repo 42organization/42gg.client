@@ -17,7 +17,7 @@ import styles from 'styles/admin/party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   gameTemplateId: '템플릿번호',
-  categoryId: '카테고리',
+  categoryName: '카테고리',
   gameName: '템플릿이름',
   maxGamePeople: '최대인원',
   minGamePeople: '최소인원',
@@ -35,6 +35,7 @@ export default function PartyTemplate() {
   const setModal = useSetRecoilState(modalState);
 
   useEffect(() => {
+    console.log(templates);
     console.log('Render');
   }, [templates]);
 
