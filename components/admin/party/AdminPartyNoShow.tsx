@@ -41,7 +41,6 @@ export default function AdminPartyNoShow() {
     instanceInPartyManage
       .get(`/reports/users?page=${currentPage}&size=10`)
       .then((res) => {
-        console.log(res);
         setNoShowInfo({
           noShowReportList: res.data.userReportList,
           totalPages: res.data.totalPage,

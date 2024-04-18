@@ -41,7 +41,6 @@ export default function AdminCommentReport() {
     instanceInPartyManage
       .get(`/reports/comments?page=${currentPage}&size=10`)
       .then((res) => {
-        console.log(res);
         setCommentInfo({
           commentReportList: res.data.commentReportList,
           totalPage: res.data.totalPage,
