@@ -21,7 +21,11 @@ function ApplyEditModal(props: IApplyEditModalProps) {
   const modalState = useRecoilValue(applicationModalState);
   const resetModalState = useResetRecoilState(applicationModalState);
   const setAlertState = useSetRecoilState(applicationAlertState);
-  const { mutate } = useUserApplicationForm(recruitId, applicationId, mode);
+  const { mutate, isLoading } = useUserApplicationForm(
+    recruitId,
+    applicationId,
+    mode
+  );
 
   const onApplyEdit = () => {
     if (modalState.formData === null) {
@@ -69,6 +73,7 @@ function ApplyEditModal(props: IApplyEditModalProps) {
             variant='outlined'
             onClick={() => resetModalState()}
             color={'secondary'}
+            disabled={isLoading}
           >
             취소
           </Button>
@@ -77,6 +82,7 @@ function ApplyEditModal(props: IApplyEditModalProps) {
             variant='contained'
             color={'primary'}
             onClick={() => onApplyEdit()}
+            disabled={isLoading}
           >
             제출하기
           </Button>
