@@ -315,9 +315,9 @@
 | 방장 화면 | 팀원 화면 | 유저 화면 |
 | :-------: | :-------: | :-------: |
 
-|<img width=100% alt="party manager page" src="https://github.com/42organization/42gg.client/assets/68673565/f9b4866a-cfb3-407f-ba9e-99cf2d5ece6b">
-|<img width=100% alt="party member page" src="https://github.com/42organization/42gg.client/assets/68673565/f9659268-9159-4243-8c3d-151eca2cdbd2">
-|<img width=100% alt="party user page" src="https://github.com/42organization/42gg.client/assets/68673565/2276a9bb-f5d9-4581-baf8-570fbd05b5ea">|
+|<img width=25% alt="party manager page" src="https://github.com/42organization/42gg.client/assets/68673565/f9b4866a-cfb3-407f-ba9e-99cf2d5ece6b">
+|<img width=25% alt="party member page" src="https://github.com/42organization/42gg.client/assets/68673565/f9659268-9159-4243-8c3d-151eca2cdbd2">
+|<img width=25% alt="party user page" src="https://github.com/42organization/42gg.client/assets/68673565/2276a9bb-f5d9-4581-baf8-570fbd05b5ea">|
 <br/>
 <br/>
 
