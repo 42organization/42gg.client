@@ -11,7 +11,7 @@ function useUserApplicationForm(
   applicationId: number | null,
   mode: ApplicationFormType
 ) {
-  const { mutate } = useMutation(
+  const { mutate, isLoading } = useMutation(
     (applicantAnswers: IApplicantAnswerForm[]): Promise<AxiosResponse> => {
       if (mode === 'APPLY' && applicationId === null) {
         return instance.post(`/recruitments/${recruitId}/applications`, {
@@ -24,7 +24,7 @@ function useUserApplicationForm(
       );
     }
   );
-  return { mutate };
+  return { mutate, isLoading };
 }
 
 export default useUserApplicationForm;
