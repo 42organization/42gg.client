@@ -27,14 +27,14 @@ const reducer: React.Reducer<PartyCreateForm, PartyFormAction> = (
   switch (action.type) {
     case 'UPDATE_TITLE':
       if (action.title.length > 15) return state;
-      return { ...state, title: action.title };
+      return { ...state, title: action.title.trimStart() };
     case 'UPDATE_MIN_PEOPLE':
       return { ...state, minPeople: action.minPeople };
     case 'UPDATE_MAX_PEOPLE':
       return { ...state, maxPeople: action.maxPeople };
     case 'UPDATE_CONTENT':
       if (action.content.length > 100) return state;
-      return { ...state, content: action.content };
+      return { ...state, content: action.content.trimStart() };
     case 'UPDATE_OPEN_PERIOD':
       return {
         ...state,
