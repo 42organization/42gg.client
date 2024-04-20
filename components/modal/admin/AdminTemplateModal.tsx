@@ -18,8 +18,8 @@ export default function TemplateModal({
     template ?? {
       gameName: '',
       categoryName: '기타',
-      maxGamePeople: 1,
-      minGamePeople: 1,
+      maxGamePeople: 2,
+      minGamePeople: 2,
       maxGameTime: 1,
       minGameTime: 1,
       genre: '',
@@ -38,6 +38,7 @@ export default function TemplateModal({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(formData);
     if (isUpdate(formData)) updateTemplate(formData);
     else createTemplate(formData);
     setModal({ modalName: null });
@@ -57,6 +58,14 @@ export default function TemplateModal({
                 setFormData({ ...formData, gameName: e.target.value })
               }
             />
+            <label>카테고리: </label>
+            <input
+              type='text'
+              value={formData.categoryName}
+              onChange={(e) =>
+                setFormData({ ...formData, categoryName: e.target.value })
+              }
+            />
             <label>최소 인원: </label>
             <input
               type='number'
@@ -69,7 +78,7 @@ export default function TemplateModal({
                   });
                 }
               }}
-              min={1}
+              min={2}
               max={formData.maxGamePeople}
             />
             <label>최대 인원: </label>

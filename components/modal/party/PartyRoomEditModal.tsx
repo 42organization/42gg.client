@@ -125,6 +125,7 @@ export default function PartyRoomEditModal({ roomId }: { roomId: number }) {
                 <div>
                   <span className={styles.commentUserName}>
                     {comment.nickname}
+                    <span className={styles.intraId}> ({comment.intraId})</span>
                   </span>
                   <span className={styles.commentDate}>
                     {dateToStringShort(new Date(comment.createDate))}
