@@ -62,7 +62,7 @@ export default function Header() {
     const path = router.asPath.split('?')[0]; // 쿼리 스트링 제거
     const patterns = [
       /^\/party\/create$/, // '/party/create'
-      /^\/party\/[0-9]+$/, // '/party/[roomId]'
+      /^\/party\/room$/, // '/party/[roomId]'
     ];
 
     return patterns.some((pattern) => pattern.test(path));
