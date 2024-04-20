@@ -57,7 +57,7 @@
     }
     ul {
       display: flex;
-      margin: 0 5%;
+      margin: 0;
 
       li {
         display: flex;
@@ -99,6 +99,10 @@
 
           .commentUserName {
             font-weight: 500;
+
+            .intraId {
+              color: $dark-gray;
+            }
           }
           .commentDate {
             margin-left: 1em;
