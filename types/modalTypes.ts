@@ -36,7 +36,7 @@ type StoreModal = 'MANUAL' | 'COIN_HISTORY';
 
 type TournamentModal = 'REGISTRY' | 'MANUAL';
 
-export type PartyModal = 'REPORT' | 'MANUAL';
+type PartyModal = 'REPORT' | 'MANUAL';
 
 type AdminModal =
   | 'PROFILE'
