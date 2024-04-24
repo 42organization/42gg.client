@@ -60,7 +60,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
   const handleApplicationResultModal = (
     recruitId: number,
     applicationId: number,
-    status: 'PROGRESS_INTERVIEW' | 'FAIL',
+    status: 'INTERVIEW' | 'INTERVIEW_FAIL' | 'PROGRESS_INTERVIEW',
     interviewDate: Date | null
   ) => {
     setModal({
@@ -77,7 +77,14 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
   const handleInterviewResultModal = (
     recruitId: number,
     applicationId: number,
-    status: 'PASS' | 'FAIL'
+    status:
+      | 'INTERVIEW_FAIL'
+      | 'APPLICATION_FAIL'
+      | 'PROGRESS_DOCS'
+      | 'INTERVIEW'
+      | 'PASS'
+      | 'FAIL'
+      | 'PROGRESS_INTERVIEW'
   ) => {
     setModal({
       modalName: 'ADMIN-RECRUIT_RESULT',
@@ -190,7 +197,7 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
               handleApplicationResultModal(
                 recruitId,
                 recruit.applicationId,
-                'FAIL',
+                'INTERVIEW_FAIL',
                 startDate[recruit.applicationId]
               );
             }}
@@ -226,7 +233,9 @@ function NotificationResults({ recruitId }: { recruitId: number }) {
               handleInterviewResultModal(
                 recruitId,
                 recruit.applicationId,
-                alignment[recruit.applicationId] === '합격' ? 'PASS' : 'FAIL'
+                alignment[recruit.applicationId] === '합격'
+                  ? 'PASS'
+                  : 'INTERVIEW_FAIL'
               );
             }}
           >
