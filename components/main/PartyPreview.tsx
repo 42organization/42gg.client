@@ -7,7 +7,8 @@ export default function PartyPreview() {
   const limitedRooms = openRooms.slice(0, 3);
   const router = useRouter();
 
-  const movePartyRoom = (roomId: number) => {
+  const movePartyRoom = async (roomId: number) => {
+    await router.push(`/party`);
     router.push(`/party/room?id=${roomId}`);
   };
   return (
