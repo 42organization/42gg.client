@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Paper,
   Table,
@@ -7,15 +8,13 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { IcheckItem } from 'types/admin/adminRecruitmentsTypes';
+import { IrecruitArrayTable } from 'types/admin/adminRecruitmentsTypes';
 import {
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/admin/common/AdminTable';
 import PageNation from 'components/Pagination';
-import useRecruitmentUserFilter from 'hooks/recruitments/useRecruitmentUserFilter';
 import styles from 'styles/admin/recruitments/RecruitmentsUser.module.scss';
-import RecruitmentFilterOptions from './RecruitmentFilterOptions';
 import RenderTableCells from './RenderTableCells';
 
 const tableTitle: { [key: string]: string } = {
@@ -25,14 +24,35 @@ const tableTitle: { [key: string]: string } = {
   question: '질문',
 };
 
-function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
-  // const [currentPage, setCurrentPage] = useState<number>(1);
-  const { recruitUserData, questions } = useRecruitmentUserFilter(
-    recruitId
-    // currentPage
-  );
+function DetailRecruitUserList({
+  recruitId,
+  recruitUserFilter,
+}: {
+  recruitId: number;
+  recruitUserFilter: IrecruitArrayTable;
+}) {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [questions, setQuestions] = useState<string[]>([]);
 
-  if (!recruitUserData.applicationResults?.length) {
+  useEffect(() => {
+    setQuestions(
+      recruitUserFilter.applicationResults.reduce(
+        (acc: string[], application: { forms: { question: string }[] }) => {
+          if (application.forms) {
+            application.forms.forEach(({ question }) => {
+              if (acc.indexOf(question) === -1) {
+                acc.push(question);
+              }
+            });
+          }
+          return acc;
+        },
+        []
+      )
+    );
+  }, [recruitUserFilter]);
+
+  if (!recruitUserFilter.applicationResults?.length) {
     return (
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
@@ -47,7 +67,6 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
 
   return (
     <>
-      <RecruitmentFilterOptions recruitId={recruitId} />
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='customized table'>
           <TableHead className={styles.tableHeader}>
@@ -63,20 +82,20 @@ function DetailRecruitUserList({ recruitId }: { recruitId: number }) {
             </TableRow>
           </TableHead>
           <TableBody className={styles.tableBody}>
-            {recruitUserData.applicationResults.map((recruit) =>
+            {recruitUserFilter.applicationResults.map((recruit) =>
               RenderTableCells(recruit, questions, '')
             )}
           </TableBody>
         </Table>
       </TableContainer>
       <div className={styles.pageNationContainer}>
-        {/* <PageNation
-          curPage={recruitUserData.currentPage}
-          totalPages={recruitUserData.totalPage}
+        <PageNation
+          curPage={recruitUserFilter.currentPage}
+          totalPages={recruitUserFilter.totalPage}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}
-        /> */}
+        />
       </div>
     </>
   );
