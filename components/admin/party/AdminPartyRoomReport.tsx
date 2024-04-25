@@ -61,7 +61,7 @@ export default function AdminPartyRoomReport() {
   return (
     <div className={styles.AdminTableWrap}>
       <div className={styles.header}>
-        <span className={styles.title}>방 신고리스트</span>
+        <span className={styles.title}>방 신고 목록</span>
       </div>
       <TableContainer component={Paper}>
         <Table aria-label='UserManagementTable'>

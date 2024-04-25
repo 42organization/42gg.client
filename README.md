@@ -120,6 +120,23 @@
 </table>
 <br>
 
+<h3>6기</h3>
+<table>
+  <tr>
+    <td align=center>역할</td>
+    <td align=center>LEAD🐧</td>
+    <td align=center>Party detail room 개발</td>
+    <td align=center>Party admin 개발</td>
+  </tr>
+  <tr>
+    <td align=center>이름</td>
+    <td align=center><a href="https://github.com/izone00">정우진 @woojeong</a></td>
+    <td align=center><a href="https://github.com/contemplation-person">하주영 @juha</a></td>
+    <td align=center><a href="https://github.com/mantoing">원재윤 @jaeywon</a></td>
+  </tr>
+</table>
+<br>
+
 <h2>주요 기능 소개</h2>
 
 ### 🔐 42 OAuth, Kakao OAuth api를 통해 로그인할 수 있습니다.
@@ -140,9 +157,9 @@
 
 <br/>
 
-### 🏓 메인페이지에서 탁구 랭킹, 최근 경기를 확인할 수 있습니다.
+### 🏓 메인페이지에서 Party모집, 탁구 랭킹, 최근 경기를 확인할 수 있습니다.
 
-<img width="25%" alt="Main_Main" src="https://github.com/42organization/42gg.client/assets/100325940/61689755-1535-4e79-85d6-611b4390f9ea">
+<img width="25%" alt="Main_Main" src="https://github.com/42organization/42gg.client/assets/68673565/44965344-c6de-4601-bad5-4332f6e57679">
 &nbsp;&nbsp;&nbsp;
 <img width="25%" alt="Main_Menu" src="https://github.com/42organization/42gg.client/assets/100325940/625fba76-076b-4936-8679-61bdc24f2065">
 &nbsp;&nbsp;&nbsp;
@@ -195,6 +212,7 @@
 <br/>
 
 ### 🏦 상점 페이지에서 아이템을 구매하고 사용할 수 있습니다
+
 <img width="25%" alt="Store_Main" src="https://github.com/42organization/42gg.client/assets/100325940/751f4dec-b8a1-4ca5-b01e-35119f930da9">
 &nbsp;&nbsp;&nbsp;
 <img width="25%" alt="Store_Inventory" src="https://github.com/42organization/42gg.client/assets/100325940/be1cabb6-9f80-4f8b-81dc-4c1c987cc313">
@@ -218,6 +236,7 @@
 <img width="25%" alt="Gacha_Edge" src="https://github.com/42organization/42gg.client/assets/100325940/088d252a-fdb9-42c8-8482-859e952245f3">
 
 ### 💰 본인의 코인 내역도 확인할 수 있습니다
+
 <img width="25%" alt="Store_CoinClick" src="https://github.com/42organization/42gg.client/assets/100325940/f4d260db-2fc7-4109-a427-d6cf0bc36f75">
 &nbsp;&nbsp;&nbsp;
 <img width="25%" alt="Store_CoinHistory" src="https://github.com/42organization/42gg.client/assets/100325940/4b30f9d9-d39b-4a5d-bc09-8ed6665910bb">
@@ -225,6 +244,7 @@
 <br/>
 
 ### 🏓 개최된 토너먼트에 참가 신청을 할 수 있습니다
+
 <img width="25%" alt="Store_CoinHistory" src="https://github.com/42organization/42gg.client/assets/93255519/8614432d-e570-4423-a064-5655c766df5b">
 &nbsp;&nbsp;&nbsp;
 <img width="25%" alt="Store_CoinHistory" src="https://github.com/42organization/42gg.client/assets/93255519/40d5b219-fd55-4b9f-a4ab-f57c29f39e6c">
@@ -234,6 +254,7 @@
 <img width="25%" alt="Store_CoinHistory" src="https://github.com/42organization/42gg.client/assets/93255519/e6fce8ce-bb7d-4e44-b3c2-b19167c5ce39">
 
 ### 🏆 명예의 전당에서 토너먼트 우승자들을 확인 할 수 있어요!
+
 <img width="28.4%" alt="Store_CoinHistory" src="https://github.com/42organization/42gg.client/assets/93255519/524d6c26-39bb-48f6-ae08-ca0690a69bfb">
 &nbsp;&nbsp;&nbsp;
 <img width="25%" alt="Store_CoinHistory" src="https://github.com/42organization/42gg.client/assets/93255519/53b6d903-de35-401d-979d-90ab7ec19eb5">
@@ -264,7 +285,6 @@
 &nbsp;&nbsp;&nbsp;
 <img width="25%" alt="Profile_Edit2" src="https://github.com/42organization/42gg.client/assets/100325940/e4437d0f-9bab-4b62-a245-159f679c0e99">
 
-
 #### 👤 42 계정과 Kakao 계정을 연동할 수 있어요!
 
 <img width="25%" alt="Profile_Connect_Kakao" src="https://github.com/42organization/42gg.client/assets/100325940/f748bd0c-3e44-4715-80bd-aedfd47c6521">
@@ -277,6 +297,24 @@
 
 <img width=25% alt="email" src="https://user-images.githubusercontent.com/58678617/177515852-c12394c4-e926-4034-997c-c9c8cea48ded.png">
 
+### 🧑‍🤝‍🧑 파티 리스트 페이지에서 현재 생성된 방을 한 눈에 볼 수 있습니다.
+
+<!-- 파티 리스트 이미지 -->
+<img width=25% alt="party list page" src="https://github.com/42organization/42gg.client/assets/68673565/e1d00ae9-8fe3-4fd6-a18c-bb2573518164">
+
+### 🧑‍🤝‍🧑 파티 방을 만들 때도 카테고리 선택 후 방을 생성할 수 있습니다.
+
+<!-- 파티 카테고리, 파티 생성 -->
+<img width=25% alt="party category" src="https://github.com/42organization/42gg.client/assets/68673565/8638abf0-e9b7-4ef9-bc47-2353c1871c42">
+<img width=25% alt="party create room" src="https://github.com/42organization/42gg.client/assets/68673565/50792937-0f55-4b27-b2e9-675cfb4132eb">
+
+### 🧑‍🤝‍🧑  누구나 쉽게 친구 또는 익명의 사용자와 Party를 맺을 수 있어요!
+
+<!-- 파티 카테고리, 파티 생성 -->
+
+| 방장 화면 | 팀원 화면 | 유저 화면 |
+| :-------: | :-------: | :-------: |
+|<img width=100% alt="party manager page" src="https://github.com/42organization/42gg.client/assets/68673565/f9b4866a-cfb3-407f-ba9e-99cf2d5ece6b">|<img width=100% alt="party member page" src="https://github.com/42organization/42gg.client/assets/68673565/f9659268-9159-4243-8c3d-151eca2cdbd2">|<img width=100% alt="party user page" src="https://github.com/42organization/42gg.client/assets/68673565/2276a9bb-f5d9-4581-baf8-570fbd05b5ea">|
 <br/>
 <br/>
 

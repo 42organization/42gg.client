@@ -5,7 +5,7 @@ export const customTemplate: PartyTemplateWithoutCategory = {
   gameTemplateId: custumTemplateId,
   gameName: '직접 입력',
   minGamePeople: 2,
-  maxGamePeople: 4,
+  maxGamePeople: 8,
   minGameTime: 15,
   maxGameTime: 30,
   genre: '',

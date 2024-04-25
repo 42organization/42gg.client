@@ -1,6 +1,10 @@
 @import 'styles/common.scss';
 @import 'styles/admin/common/Pagination.module.scss';
 
+.container {
+  width: 100%;
+}
+
 .tableContainer {
   .table {
     .tableBody {
@@ -63,6 +67,25 @@
       background-color: #044581;
       transition: 0.3s;
     }
+  }
+}
+
+.ullist {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  list-style: none;
+}
+
+.lilist {
+  padding: 8px 16px;
+  cursor: pointer;
+  border: 2px solid #5b5a5a;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #eaeaea;
   }
 }
 
