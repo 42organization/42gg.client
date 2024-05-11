@@ -63,6 +63,7 @@ function RecruitmentsHistoryList({
         `/admin/recruitments?page=${currentPage}&size=20`
       );
       // FIXME : 페이지네이션 x 임시로 1페이지로 고정
+
       setRecruitData({
         recruitments: res.data.recruitments,
         totalPage: 1,
@@ -142,15 +143,13 @@ function RecruitmentsHistoryList({
 
     if (columnName === 'status') {
       const today = new Date();
-      const todaystring = today.toISOString().slice(0, 19);
-      const todaydate = new Date(todaystring);
       const endDate = new Date(recruit.endDate);
       const startDate = new Date(recruit.startDate);
       return (
         <div>
           {recruit.isFinish
             ? '완료'
-            : startDate <= todaydate && endDate >= todaydate
+            : startDate <= today && endDate >= today
             ? '진행중'
             : '진행전'}
         </div>

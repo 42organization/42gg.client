@@ -162,7 +162,14 @@ export interface Modal {
   recruitResult?: {
     recruitId: number;
     applicationId: number;
-    status: 'PROGRESS_INTERVIEW' | 'FAIL' | 'PASS';
+    status:
+      | 'INTERVIEW_FAIL'
+      | 'APPLICATION_FAIL'
+      | 'PROGRESS_DOCS'
+      | 'INTERVIEW'
+      | 'PASS'
+      | 'FAIL'
+      | 'PROGRESS_INTERVIEW';
     interviewDate: Date | null;
   };
   partyReport?: PartyReportModalData;

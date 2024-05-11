@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { RecruitmentsPages } from 'types/admin/adminRecruitmentsTypes';
-import DetailRecruitUserList from 'components/admin/recruitments/recruitmentsuser/DetailRecruitUserList';
 import NotificationResults from 'components/admin/recruitments/recruitmentsuser/NotificationResults';
+import RecruitmentUser from 'components/admin/recruitments/recruitmentsuser/RecruitmentUser';
 import styles from 'styles/admin/recruitments/MenuTab.module.scss';
 import RecruitmentsHistoryList from '../RecruitmentsHistoryList';
 
@@ -14,9 +14,8 @@ function MenuTab({
 }) {
   const [view, setView] = useState('menu');
   const [tabIdx, setTabIdx] = useState(0);
-  const [child, setChild] = useState(
-    <DetailRecruitUserList recruitId={recruitId} />
-  );
+  const [child, setChild] = useState(<RecruitmentUser recruitId={recruitId} />);
+
   const tabContents = [
     {
       contentId: 0,
@@ -31,7 +30,7 @@ function MenuTab({
   useEffect(() => {
     switch (tabIdx) {
       case 0:
-        setChild(<DetailRecruitUserList recruitId={recruitId} />);
+        setChild(<RecruitmentUser recruitId={recruitId} />);
         break;
       case 1:
         setChild(<NotificationResults recruitId={recruitId} />);

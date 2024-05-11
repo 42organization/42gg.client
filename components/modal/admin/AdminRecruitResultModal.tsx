@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { instanceInManage, instance } from 'utils/axios';
-import { dateToStringShort , dateToDateTimeLocalString } from 'utils/handleTime';
+import { dateToStringShort, dateToDateTimeLocalString } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/modal/AdminRecruitMessageTemplateModal.module.scss';
 
@@ -20,7 +20,14 @@ function AdminRecruitResultModal({
 }: {
   recruitId: number;
   applicationId: number;
-  status: 'PROGRESS_INTERVIEW' | 'FAIL' | 'PASS';
+  status:
+    | 'INTERVIEW_FAIL'
+    | 'APPLICATION_FAIL'
+    | 'PROGRESS_DOCS'
+    | 'INTERVIEW'
+    | 'PASS'
+    | 'FAIL'
+    | 'PROGRESS_INTERVIEW';
   interviewDate: Date | null;
 }) {
   const [passMessage, setPassMessage] = useState<notiMessageType>();
@@ -35,7 +42,7 @@ function AdminRecruitResultModal({
         `/admin/recruitments/${recruitId}/interview?application=${applicationId}`,
         {
           status,
-          interviewDate: dateToDateTimeLocalString(interviewDate),
+          interviewDate: interviewDate,
         }
       );
       setSnackbar({
