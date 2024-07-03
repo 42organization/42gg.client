@@ -12,7 +12,7 @@ import { PartyGameTemplate } from 'types/partyTypes';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/takgu/admin/table';
 import { AdminTableHead } from 'components/takgu/admin/common/AdminTable';
-import { usePartyTemplate } from 'hooks/party/usePartyTemplate';
+import { usePartyTemplate } from 'hooks/takgu/party/usePartyTemplate';
 import styles from 'styles/admin/party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {

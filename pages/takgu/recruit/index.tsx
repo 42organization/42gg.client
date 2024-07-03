@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 import RecruitList from 'components/takgu/recruit/RecruitList';
 import StickyHeader from 'components/takgu/recruit/StickyHeader';
 import recruitPingpong from 'public/lottie/recruitPingPong.json';
-import useCheckRecruit from 'hooks/recruit/useCheckRecruit';
+import useCheckRecruit from 'hooks/takgu/recruit/useCheckRecruit';
 import commonStyle from 'styles/recruit/common.module.scss';
 import layoutStyle from 'styles/recruit/layout.module.scss';
 import textStyle from 'styles/recruit/text.module.scss';

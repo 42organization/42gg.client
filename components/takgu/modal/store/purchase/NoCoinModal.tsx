@@ -1,4 +1,4 @@
-import useNoCoinModal from 'hooks/modal/store/purchase/useNoCoinModal';
+import useNoCoinModal from 'hooks/takgu/modal/store/purchase/useNoCoinModal';
 import styles from 'styles/modal/store/NoCoinModal.module.scss';
 
 export default function NoCoinModal() {

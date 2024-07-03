@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { toastState } from 'utils/recoil/toast';
 import PartyCreate from 'components/takgu/party/PartyCreate';
-import usePartyCategory from 'hooks/party/usePartyCategory';
-import usePartyColorMode from 'hooks/party/usePartyColorMode';
-import usePartyForm from 'hooks/party/usePartyForm';
+import usePartyCategory from 'hooks/takgu/party/usePartyCategory';
+import usePartyColorMode from 'hooks/takgu/party/usePartyColorMode';
+import usePartyForm from 'hooks/takgu/party/usePartyForm';
 import styles from 'styles/party/PartyCreate.module.scss';
 
 export default function PartyCreatePage() {

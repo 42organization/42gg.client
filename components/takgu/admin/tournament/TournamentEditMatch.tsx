@@ -7,7 +7,7 @@ import {
 import { useContext, useRef, useState } from 'react';
 import { TournamentIdContext } from 'components/takgu/modal/admin/AdminEditTournamentBraket';
 import PlayerImage from 'components/takgu/PlayerImage';
-import useTournamentMatchEditor from 'hooks/tournament/useTournamentMatchEditor';
+import useTournamentMatchEditor from 'hooks/takgu/tournament/useTournamentMatchEditor';
 import styles from 'styles/admin/tournament/TournamentEditMatch.module.scss';
 
 interface TournamentMatchPartyProps {

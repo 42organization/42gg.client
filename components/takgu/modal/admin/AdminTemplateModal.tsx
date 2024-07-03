@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { PartyGameTemplate, PartyTemplateForm } from 'types/partyTypes';
 import { modalState } from 'utils/recoil/modal';
-import { usePartyTemplate } from 'hooks/party/usePartyTemplate';
+import { usePartyTemplate } from 'hooks/takgu/party/usePartyTemplate';
 import styles from 'styles/party/TemplateModal.module.scss';
 
 function isUpdate(formData: PartyTemplateForm): formData is PartyGameTemplate {

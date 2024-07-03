@@ -13,7 +13,7 @@ import {
 import ColorPicker from 'components/takgu/modal/store/inventory/ColorPicker';
 import IdPreviewComponent from 'components/takgu/modal/store/inventory/IdPreviewComponent';
 import { ItemCautionContainer } from 'components/takgu/modal/store/inventory/ItemCautionContainer';
-import { useUser } from 'hooks/Layout/useUser';
+import { useUser } from 'hooks/takgu/Layout/useUser';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 
 // TODO : 주의사항 구체화 필요

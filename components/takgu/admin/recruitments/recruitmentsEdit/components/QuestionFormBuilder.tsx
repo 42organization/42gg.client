@@ -21,7 +21,7 @@ import {
 } from '@mui/material';
 import { IcheckItem, Iquestion } from 'types/admin/adminRecruitmentsTypes';
 import DraggableList from 'components/takgu/UI/DraggableList';
-import { IFormManager } from 'hooks/recruitments/useRecruitmentEditInfo';
+import { IFormManager } from 'hooks/takgu/recruitments/useRecruitmentEditInfo';
 import styles from 'styles/admin/recruitments/recruitmentEdit/components/QuestionFormBuilder.module.scss';
 
 interface CheckInputProps {

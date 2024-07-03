@@ -9,7 +9,7 @@ import {
   AdminMenu,
 } from 'components/takgu/Layout/MenuBar/MenuBarElement';
 import PlayerImage from 'components/takgu/PlayerImage';
-import { useUser } from 'hooks/Layout/useUser';
+import { useUser } from 'hooks/takgu/Layout/useUser';
 import styles from 'styles/Layout/MenuBar.module.scss';
 
 const MenuTop = () => {

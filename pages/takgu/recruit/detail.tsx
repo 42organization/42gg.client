@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 import DynamicQuill from 'components/DynamicQuill';
 import MyRecruitment from 'components/takgu/recruit/Main/MyRecruitment';
 import StickyHeader from 'components/takgu/recruit/StickyHeader';
-import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
+import useRecruitDetail from 'hooks/takgu/recruit/useRecruitDetail';
 import style from 'styles/recruit/Main/main.module.scss';
 import 'react-quill/dist/quill.bubble.css';
 

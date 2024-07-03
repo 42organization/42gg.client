@@ -18,8 +18,8 @@ import RecruitEmoji from 'public/image/takgu/menu_recruit.svg';
 import ReportEmoji from 'public/image/takgu/menu_report.svg';
 import SignOutEmoji from 'public/image/takgu/menu_signOut.svg';
 import StatisticsEmoji from 'public/image/takgu/menu_statistics.svg';
-import { useUser } from 'hooks/Layout/useUser';
-import useCheckRecruit from 'hooks/recruit/useCheckRecruit';
+import { useUser } from 'hooks/takgu/Layout/useUser';
+import useCheckRecruit from 'hooks/takgu/recruit/useCheckRecruit';
 import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/MenuBar.module.scss';
 

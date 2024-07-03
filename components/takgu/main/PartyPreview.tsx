@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import usePartyRoomList from 'hooks/party/usePartyRoomList';
+import usePartyRoomList from 'hooks/takgu/party/usePartyRoomList';
 import styles from 'styles/main/PartyPreview.module.scss';
 export default function PartyPreview() {
   const { partyRooms } = usePartyRoomList();

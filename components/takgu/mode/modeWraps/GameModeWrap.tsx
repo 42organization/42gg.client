@@ -6,7 +6,7 @@ import { colorModeState } from 'utils/recoil/colorMode';
 import ModeRadiobox from 'components/takgu/mode/modeItems/ModeRadiobox';
 import SeasonDropDown from 'components/takgu/mode/modeItems/SeasonDropDown';
 import UserGameSearchBar from 'components/takgu/mode/modeItems/UserGameSearchBar';
-import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
+import useSeasonDropDown from 'hooks/takgu/mode/useSeasonDropDown';
 import styles from 'styles/mode/ModeWrap.module.scss';
 
 interface GameModeWrapProps {

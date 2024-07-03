@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useState, useRef } from 'react';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import TournamentCard from 'components/takgu/tournament/TournamentCard';
-import useBeforeLiveTournamentData from 'hooks/tournament/useBeforeLiveTournamentData';
+import useBeforeLiveTournamentData from 'hooks/takgu/tournament/useBeforeLiveTournamentData';
 import useInterval from 'hooks/useInterval';
 import styles from 'styles/main/TournamentPreview.module.scss';
 

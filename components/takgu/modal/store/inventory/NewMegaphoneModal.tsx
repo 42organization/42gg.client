@@ -12,7 +12,7 @@ import {
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
 import { ItemCautionContainer } from 'components/takgu/modal/store/inventory/ItemCautionContainer';
-import { useUser } from 'hooks/Layout/useUser';
+import { useUser } from 'hooks/takgu/Layout/useUser';
 import styles from 'styles/modal/store/InventoryModal.module.scss';
 
 const MAX_LENGTH = 30;

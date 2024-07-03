@@ -8,7 +8,7 @@ import { stringToHourMin } from 'utils/handleTime';
 import { currentMatchState } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
 import LoudSpeaker from 'components/takgu/Layout/LoudSpeaker';
-import useGetCurrentMatch from 'hooks/Layout/useGetCurrentMatch';
+import useGetCurrentMatch from 'hooks/takgu/Layout/useGetCurrentMatch';
 import styles from 'styles/Layout/CurrentMatchInfo.module.scss';
 
 export default function CurrentMatch() {

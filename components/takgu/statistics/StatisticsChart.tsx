@@ -12,7 +12,7 @@ import {
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 import { Graphs } from 'types/chartTypes';
-import useChartData from 'hooks/statistics/useChartData';
+import useChartData from 'hooks/takgu/statistics/useChartData';
 
 ChartJS.register(
   ArcElement,

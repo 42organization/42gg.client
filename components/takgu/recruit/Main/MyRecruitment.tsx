@@ -3,7 +3,7 @@ import { List } from '@mui/material';
 import CollapseListItem from 'components/takgu/recruit/Main/CollapseListItem';
 import MyApplicationInfo from 'components/takgu/recruit/Main/MyApplicationInfo';
 import MyRecruitStatus from 'components/takgu/recruit/Main/MyRecruitStatus';
-import useGetRecruitResult from 'hooks/recruit/useGetRecruitResult';
+import useGetRecruitResult from 'hooks/takgu/recruit/useGetRecruitResult';
 import style from 'styles/recruit/Main/myRecruitment.module.scss';
 import textStyle from 'styles/recruit/text.module.scss';
 

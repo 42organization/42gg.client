@@ -1,7 +1,7 @@
 import NormalGame from 'components/takgu/modal/afterGame/NormalGame';
 import ScoreGame from 'components/takgu/modal/afterGame/ScoreGame';
-import useCurrentGame from 'hooks/modal/aftergame/useCurrentGame';
-import useSubmitModal from 'hooks/modal/aftergame/useSubmitModal';
+import useCurrentGame from 'hooks/takgu/modal/aftergame/useCurrentGame';
+import useSubmitModal from 'hooks/takgu/modal/aftergame/useSubmitModal';
 
 export default function AfterGameModal() {
   const { currentGame } = useCurrentGame();

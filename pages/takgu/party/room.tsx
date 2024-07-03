@@ -5,7 +5,7 @@ import { instance } from 'utils/axios';
 import PartyDetailCommentBox from 'components/takgu/party/roomDetail/PartyDetailContentCommentBox';
 import PartyDetailProfile from 'components/takgu/party/roomDetail/PartyDetailProfile';
 import PartyDetailTitleBox from 'components/takgu/party/roomDetail/PartyDetailTitleBox';
-import usePartyColorMode from 'hooks/party/usePartyColorMode';
+import usePartyColorMode from 'hooks/takgu/party/usePartyColorMode';
 import styles from 'styles/party/PartyDetailRoom.module.scss';
 
 export default function PartyDetailPage() {

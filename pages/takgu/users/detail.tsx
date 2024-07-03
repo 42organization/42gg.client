@@ -4,8 +4,8 @@ import GameResult from 'components/takgu/game/GameResult';
 import Section from 'components/takgu/main/Section';
 import BasicProfile from 'components/takgu/user/BasicProfile';
 import RankProfile from 'components/takgu/user/RankProfile';
-import useBasicProfile from 'hooks/users/useBasicProfile';
-import useProfileColorMode from 'hooks/users/useProfileColorMode';
+import useBasicProfile from 'hooks/takgu/users/useBasicProfile';
+import useProfileColorMode from 'hooks/takgu/users/useProfileColorMode';
 import styles from 'styles/user/user.module.scss';
 
 export default function User() {

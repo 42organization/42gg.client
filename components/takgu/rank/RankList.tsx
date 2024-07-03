@@ -6,7 +6,7 @@ import { NormalListItem } from 'components/takgu/rank/NormalListItem';
 import RankListFrame from 'components/takgu/rank/RankListFrame';
 import { RankListItem } from 'components/takgu/rank/RankListItem';
 import RankListMain from 'components/takgu/rank/topRank/RankListMain';
-import useRankList from 'hooks/rank/useRankList';
+import useRankList from 'hooks/takgu/rank/useRankList';
 
 interface RankListProps {
   season?: number;

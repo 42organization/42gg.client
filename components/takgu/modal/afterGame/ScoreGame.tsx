@@ -8,7 +8,7 @@ import {
   ModalButton,
   ModalButtonContainer,
 } from 'components/takgu/modal/ModalButton';
-import useScoreGame from 'hooks/modal/aftergame/useScoreGame';
+import useScoreGame from 'hooks/takgu/modal/aftergame/useScoreGame';
 import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
 
 interface ScoreGameProps {

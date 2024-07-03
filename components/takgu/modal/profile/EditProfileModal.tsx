@@ -6,7 +6,7 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
-import useEditProfileModal from 'hooks/modal/useEditProfileModal';
+import useEditProfileModal from 'hooks/takgu/modal/useEditProfileModal';
 import styles from 'styles/user/Profile.module.scss';
 
 export interface EditedProfile {

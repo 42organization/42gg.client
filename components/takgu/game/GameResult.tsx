@@ -1,6 +1,6 @@
 import { SeasonMode } from 'types/mainType';
 import GameResultList from 'components/takgu/game/GameResultList';
-import useGameResult from 'hooks/game/useGameResult';
+import useGameResult from 'hooks/takgu/game/useGameResult';
 
 interface GameResultProps {
   mode?: SeasonMode;

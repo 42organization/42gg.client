@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { NormalUser } from 'types/rankTypes';
-import { useUser } from 'hooks/Layout/useUser';
+import { useUser } from 'hooks/takgu/Layout/useUser';
 import styles from 'styles/rank/RankList.module.scss';
 
 type NormalListItemProps = {

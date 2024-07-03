@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { PartyMain } from 'components/takgu/party/PartyMain';
-import usePartyCategory from 'hooks/party/usePartyCategory';
-import usePartyColorMode from 'hooks/party/usePartyColorMode';
-import usePartyPenaltyTimer from 'hooks/party/usePartyPenaltyTimer';
-import usePartyRoomList from 'hooks/party/usePartyRoomList';
+import usePartyCategory from 'hooks/takgu/party/usePartyCategory';
+import usePartyColorMode from 'hooks/takgu/party/usePartyColorMode';
+import usePartyPenaltyTimer from 'hooks/takgu/party/usePartyPenaltyTimer';
+import usePartyRoomList from 'hooks/takgu/party/usePartyRoomList';
 import styles from 'styles/party/PartyMain.module.scss';
 
 export default function PartyMainPage() {

@@ -4,7 +4,7 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
-import useMatchCancelModal from 'hooks/modal/match/useMatchCancelModal';
+import useMatchCancelModal from 'hooks/takgu/modal/match/useMatchCancelModal';
 import styles from 'styles/modal/match/MatchCancelModal.module.scss';
 
 export default function MatchCancelModal({ startTime }: Cancel) {

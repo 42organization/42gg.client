@@ -1,5 +1,5 @@
 import Celebration from 'components/takgu/modal/statChange/Celebration';
-import useExpStat from 'hooks/modal/statchange/useExpStat';
+import useExpStat from 'hooks/takgu/modal/statchange/useExpStat';
 import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
 
 interface ExpGuageProps {

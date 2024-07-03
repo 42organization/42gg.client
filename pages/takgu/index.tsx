@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import SearchBar from 'components/takgu/main/SearchBar';
 import Section from 'components/takgu/main/Section';
-import useBeforeLiveTournamentData from 'hooks/tournament/useBeforeLiveTournamentData';
+import useBeforeLiveTournamentData from 'hooks/takgu/tournament/useBeforeLiveTournamentData';
 import styles from 'styles/main/Home.module.scss';
 
 const Home: NextPage = () => {

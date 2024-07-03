@@ -10,7 +10,7 @@ import {
 import { PartyCategory } from 'types/partyTypes';
 import { tableFormat } from 'constants/takgu/admin/table';
 import { AdminTableHead } from 'components/takgu/admin/common/AdminTable';
-import usePartyCategory from 'hooks/party/usePartyCategory';
+import usePartyCategory from 'hooks/takgu/party/usePartyCategory';
 import styles from 'styles/admin/party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {

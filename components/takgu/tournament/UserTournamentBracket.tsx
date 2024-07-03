@@ -6,7 +6,7 @@ import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGam
 import { errorState } from 'utils/recoil/error';
 import TournamentBraket from 'components/takgu/tournament/TournamentBraket';
 import LoadingSpinner from 'components/takgu/UI/LoadingSpinner';
-import useComponentSize from 'hooks/util/useComponentSize';
+import useComponentSize from 'hooks/takgu/util/useComponentSize';
 import styles from 'styles/tournament/UserTournamentBracket.module.scss';
 
 interface UserTournamentBracketProps {

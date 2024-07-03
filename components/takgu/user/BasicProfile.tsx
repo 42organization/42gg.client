@@ -4,8 +4,8 @@ import { AiOutlineEdit } from 'react-icons/ai';
 import { modalState } from 'utils/recoil/modal';
 import { tierIdSelector } from 'utils/recoil/tierColor';
 import PlayerImage from 'components/takgu/PlayerImage';
-import { useUser } from 'hooks/Layout/useUser';
-import useBasicProfile from 'hooks/users/useBasicProfile';
+import { useUser } from 'hooks/takgu/Layout/useUser';
+import useBasicProfile from 'hooks/takgu/users/useBasicProfile';
 import styles from 'styles/user/Profile.module.scss';
 interface ProfileProps {
   profileId: string;

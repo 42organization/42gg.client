@@ -1,6 +1,6 @@
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
-import useRecruitmentUserFilter from 'hooks/recruitments/useRecruitmentUserFilter';
+import useRecruitmentUserFilter from 'hooks/takgu/recruitments/useRecruitmentUserFilter';
 import useSearchBar from 'hooks/useSearchBar';
 import styles from 'styles/admin/common/AdminSearchBar.module.scss';
 

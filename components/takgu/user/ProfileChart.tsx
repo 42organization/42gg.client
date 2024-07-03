@@ -9,7 +9,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import useChartModule from 'hooks/users/useChartModule';
+import useChartModule from 'hooks/takgu/users/useChartModule';
 import styles from 'styles/user/Chart.module.scss';
 
 ChartJS.register(

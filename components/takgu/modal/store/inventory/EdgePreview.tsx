@@ -1,6 +1,6 @@
 import { EdgeColors, RandomColors } from 'types/colorModeTypes';
 import PlayerImage from 'components/takgu/PlayerImage';
-import { useUser } from 'hooks/Layout/useUser';
+import { useUser } from 'hooks/takgu/Layout/useUser';
 import styles from 'styles/modal/store/EdgePreview.module.scss';
 
 const edgeColorList = new Map<RandomColors, EdgeColors>([

@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { userImages } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
 import RankListItemMain from 'components/takgu/rank/topRank/RankListItemMain';
-import useRankListMain from 'hooks/rank/useRankListMain';
+import useRankListMain from 'hooks/takgu/rank/useRankListMain';
 import styles from 'styles/rank/RankListMain.module.scss';
 
 interface RankListMainProps {

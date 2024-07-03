@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import PlayerImage from 'components/takgu/PlayerImage';
-import { useUser } from 'hooks/Layout/useUser';
+import { useUser } from 'hooks/takgu/Layout/useUser';
 import styles from 'styles/Layout/MainPageProfile.module.scss';
 
 const MainPageProfile = () => {

@@ -5,7 +5,7 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
-import useMatchEnrollModal from 'hooks/modal/match/useMatchEnrollModal';
+import useMatchEnrollModal from 'hooks/takgu/modal/match/useMatchEnrollModal';
 import styles from 'styles/modal/match/MatchEnrollModal.module.scss';
 
 export default function MatchEnrollModal({ startTime, endTime, mode }: Enroll) {

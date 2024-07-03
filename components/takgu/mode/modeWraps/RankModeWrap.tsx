@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
 import ModeToggle from 'components/takgu/mode/modeItems/ModeToggle';
 import SeasonDropDown from 'components/takgu/mode/modeItems/SeasonDropDown';
-import useSeasonDropDown from 'hooks/mode/useSeasonDropDown';
+import useSeasonDropDown from 'hooks/takgu/mode/useSeasonDropDown';
 import styles from 'styles/mode/ModeWrap.module.scss';
 interface RankModeWrapProps {
   children: React.ReactNode;

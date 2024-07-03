@@ -12,8 +12,8 @@ import {
   peopleOptions,
 } from 'constants/takgu/party/createOptions';
 import LoadingSpinner from 'components/takgu/UI/LoadingSpinner';
-import usePartyForm from 'hooks/party/usePartyForm';
-import { usePartyTemplate } from 'hooks/party/usePartyTemplate';
+import usePartyForm from 'hooks/takgu/party/usePartyForm';
+import { usePartyTemplate } from 'hooks/takgu/party/usePartyTemplate';
 import styles from 'styles/party/PartyCreate.module.scss';
 
 // ================================================================================

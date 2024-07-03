@@ -5,7 +5,7 @@ import { applicationAlertState } from 'utils/recoil/application';
 import ApplicationForm from 'components/takgu/recruit/Application/ApplicationForm';
 import ApplicationLoadingNoData from 'components/takgu/recruit/Application/ApplicationLoadingNoData';
 import StickyHeader from 'components/takgu/recruit/StickyHeader';
-import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
+import useRecruitDetail from 'hooks/takgu/recruit/useRecruitDetail';
 
 function Apply() {
   const router = useRouter();

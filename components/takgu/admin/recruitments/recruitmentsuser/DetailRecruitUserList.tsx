@@ -14,7 +14,7 @@ import {
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/takgu/admin/common/AdminTable';
-import useRecruitmentUserFilter from 'hooks/recruitments/useRecruitmentUserFilter';
+import useRecruitmentUserFilter from 'hooks/takgu/recruitments/useRecruitmentUserFilter';
 import styles from 'styles/admin/recruitments/RecruitmentsUser.module.scss';
 import RecruitmentFilterOptions from './RecruitmentFilterOptions';
 import RenderTableCells from './RenderTableCells';

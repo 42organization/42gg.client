@@ -8,7 +8,7 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
-import { useUser } from 'hooks/Layout/useUser';
+import { useUser } from 'hooks/takgu/Layout/useUser';
 import styles from 'styles/modal/event/AnnouncementModal.module.scss';
 import 'react-quill/dist/quill.bubble.css';
 

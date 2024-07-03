@@ -7,8 +7,8 @@ import ApplicationForm from 'components/takgu/recruit/Application/ApplicationFor
 import ApplicatoinFormFooter from 'components/takgu/recruit/Application/applicationLayout/ApplicationFormFooter';
 import ApplicationLoadingNoData from 'components/takgu/recruit/Application/ApplicationLoadingNoData';
 import StickyHeader from 'components/takgu/recruit/StickyHeader';
-import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
-import useRecruitDetailUser from 'hooks/recruit/useRecruitDetailUser';
+import useRecruitDetail from 'hooks/takgu/recruit/useRecruitDetail';
+import useRecruitDetailUser from 'hooks/takgu/recruit/useRecruitDetailUser';
 
 function MyApplication() {
   const router = useRouter();

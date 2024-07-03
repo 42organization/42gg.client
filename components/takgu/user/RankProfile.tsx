@@ -1,6 +1,6 @@
 import ProfileModeWrap from 'components/takgu/mode/modeWraps/ProfileModeWrap';
 import ProfileChart from 'components/takgu/user/ProfileChart';
-import useGetRankProfile from 'hooks/users/useGetRankProfile';
+import useGetRankProfile from 'hooks/takgu/users/useGetRankProfile';
 import styles from 'styles/user/ProfileRank.module.scss';
 
 interface RankProfileProps {

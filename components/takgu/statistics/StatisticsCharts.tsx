@@ -1,5 +1,5 @@
 import StatisticsChart from 'components/takgu/statistics/StatisticsChart';
-import useChartsData from 'hooks/statistics/useChartsData';
+import useChartsData from 'hooks/takgu/statistics/useChartsData';
 import styles from 'styles/statistics/StatisticsSelect.module.scss';
 
 type chartElementprops = {

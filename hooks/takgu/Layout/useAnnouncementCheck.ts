@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 // import { User } from 'types/mainType';
 import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
-import { useUser } from 'hooks/Layout/useUser';
+import { useUser } from 'hooks/takgu/Layout/useUser';
 import useAxiosGet from 'hooks/useAxiosGet';
 
 const useAnnouncementCheck = (presentPath: string) => {
