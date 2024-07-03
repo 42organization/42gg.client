@@ -14,7 +14,7 @@ export default function PartyRoomListItem({ room }: { room: PartyRoom }) {
   return (
     <li key={room.roomId}>
       <Link
-        href={`/party/room?id=${room.roomId}`}
+        href={`/takgu/party/room?id=${room.roomId}`}
         className={`${styles.roomWrap} ${
           room.status !== 'OPEN' ? styles.transparent : ''
         }`}

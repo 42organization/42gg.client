@@ -172,7 +172,7 @@ function EnemyTeam({ enemyTeam, isImminent }: EnemyTeam) {
   if (!isImminent || enemyTeam.length === 0) return <></>;
   const enemyUsers = enemyTeam.map((intraId, index) => (
     <span key={intraId} id={styles.enemyUsers}>
-      <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
+      <Link href={`/takgu/users/detail?intraId=${intraId}`}>{intraId}</Link>
       {index < enemyTeam.length - 1 ? ', ' : ''}
     </span>
   ));

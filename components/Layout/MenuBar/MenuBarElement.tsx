@@ -92,7 +92,7 @@ const MenuItem = ({ itemName, onClick }: menuItemProps) => {
 
 const MenuLink = ({ link, onClick, itemName }: MenuLinkProps) => {
   return (
-    <Link href={link}>
+    <Link href={`/takgu${link}`}>
       <MenuItem itemName={itemName} onClick={onClick} />
     </Link>
   );

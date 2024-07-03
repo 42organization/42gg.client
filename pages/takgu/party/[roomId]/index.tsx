@@ -27,7 +27,7 @@ export default function PartyDetailPage() {
       })
       .catch(() => {
         alert('방 정보를 불러오는데 실패했습니다.');
-        router.push('/party');
+        router.push('/takgu/party');
       });
   };
 

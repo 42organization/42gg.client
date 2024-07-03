@@ -21,10 +21,10 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     <ThemeProvider theme={theme}>
       <div className={styles.adminContainer}>
         <div className={styles.header}>
-          <Link href='/admin'>
+          <Link href='/takgu/admin'>
             <div className={styles.title}>관리자 페이지</div>
           </Link>
-          <Link href='/'>
+          <Link href='/takgu'>
             <button className={styles.homeButton}>Home</button>
           </Link>
         </div>

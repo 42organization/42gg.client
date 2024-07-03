@@ -41,7 +41,7 @@ export function RankListItem({ user, textColorPreview }: RankListItemProps) {
         {textColorPreview ? (
           <div>{intraId}</div>
         ) : (
-          <Link href={`/users/detail?intraId=${intraId}`}>
+          <Link href={`/takgu/users/detail?intraId=${intraId}`}>
             <span>{intraId}</span>
           </Link>
         )}

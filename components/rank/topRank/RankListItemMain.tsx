@@ -38,7 +38,7 @@ export default function RankListItemMain({
             }`}
           >
             {renderLink ? (
-              <Link href={`users/detail?intraId=${intraId}`}>
+              <Link href={`/takgu/users/detail?intraId=${intraId}`}>
                 <PlayerImage
                   src={imageUri}
                   styleName={
@@ -71,7 +71,7 @@ export default function RankListItemMain({
             )}
           </div>
           <div
-            className={`${styles[`rankNumber${rank}`]} 
+            className={`${styles[`rankNumber${rank}`]}
             ${Mode === 'NORMAL' && styles.normal}`}
           >
             {rank}

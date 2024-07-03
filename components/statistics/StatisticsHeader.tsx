@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <div className={styles.headerWrap}>
       <div id={styles.logo}>
-        <Link href={'/'}>
+        <Link href={'/takgu'}>
           <div>42GG</div>
         </Link>
       </div>

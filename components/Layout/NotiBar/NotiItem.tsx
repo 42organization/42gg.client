@@ -106,7 +106,7 @@ function MakeImminentContent(message: string) {
           key={intraId}
           onClick={() => HeaderState?.resetOpenNotiBarState()}
         >
-          <Link href={`/users/detail?intraId=${intraId}`}>{intraId}</Link>
+          <Link href={`/takgu/users/detail?intraId=${intraId}`}>{intraId}</Link>
           {enemyId && i < enemyId.length - 1 ? ', ' : ''}
         </span>
       ))}

@@ -33,7 +33,7 @@ export default function PartyCreatePage() {
           clicked: true,
         });
       }
-      router.replace('/party');
+      router.replace('/takgu/party');
     }
   }, [isCategoryLoading]);
 

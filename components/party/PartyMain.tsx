@@ -36,7 +36,10 @@ function JoinedRooms({ joinedPartyRooms, penaltyPeroid }: JoinedRoomsProps) {
               패널티 <span className={styles.timer}>{penaltyPeroid}</span>
             </div>
           ) : (
-            <Link href='/party/create' className={styles.createRoomButton}>
+            <Link
+              href='/takgu/party/create'
+              className={styles.createRoomButton}
+            >
               방 만들기
             </Link>
           )}

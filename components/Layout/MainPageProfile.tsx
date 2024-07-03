@@ -13,7 +13,7 @@ const MainPageProfile = () => {
       <div className={styles.gridContainer}>
         <Link
           className={styles.myImage}
-          href={`/users/detail?intraId=${user.intraId}`}
+          href={`/takgu/users/detail?intraId=${user.intraId}`}
         >
           <PlayerImage
             src={user.userImageUri}
@@ -32,7 +32,7 @@ const MainPageProfile = () => {
               size={50}
             />
             &nbsp;
-            <Link href={`/users/detail?intraId=${user.intraId}`}>
+            <Link href={`/takgu/users/detail?intraId=${user.intraId}`}>
               {user.intraId}
             </Link>
             님

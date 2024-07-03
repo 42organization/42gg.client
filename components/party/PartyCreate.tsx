@@ -153,7 +153,7 @@ function DetailCustomization({
       errorMessage
         ? await Promise.reject(new Error(errorMessage))
         : await instance.post('/party/rooms', partyForm).then(({ data }) => {
-            router.push(`/party/room?id=${data.roomId}`);
+            router.push(`/takgu/party/room?id=${data.roomId}`);
           });
     } catch (e) {
       setSnackBar({

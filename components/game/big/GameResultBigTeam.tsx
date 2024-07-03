@@ -20,7 +20,7 @@ export default function GameResultBigTeam({
     <div className={styles.bigTeam}>
       {team.players.map((player, index) => (
         <div key={index}>
-          <Link href={`/users/detail?intraId=${player.intraId}`}>
+          <Link href={`/takgu/users/detail?intraId=${player.intraId}`}>
             <div>
               <PlayerImage
                 src={player.userImageUri}
@@ -31,7 +31,7 @@ export default function GameResultBigTeam({
             </div>
           </Link>
           <div
-            className={`${styles['winRate']} 
+            className={`${styles['winRate']}
             ${zIndexList && styles['zIndexWinRate']}`}
           >
             {isRankPlayerType(player)

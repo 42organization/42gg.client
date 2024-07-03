@@ -39,7 +39,7 @@ const MenuProfile = () => {
     <div className={styles.menuProfileWrapper}>
       <Link
         className={styles.myImage}
-        href={`/users/detail?intraId=${user.intraId}`}
+        href={`/takgu/users/detail?intraId=${user.intraId}`}
         onClick={HeaderState?.resetOpenMenuBarState}
       >
         <PlayerImage
@@ -68,7 +68,7 @@ const MenuProfile = () => {
             </div>
           </div>
           <Link
-            href={`/users/detail?intraId=${user.intraId}`}
+            href={`/takgu/users/detail?intraId=${user.intraId}`}
             onClick={HeaderState?.resetOpenMenuBarState}
           >
             {user.intraId}

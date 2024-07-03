@@ -53,7 +53,7 @@ export function NormalListItem({
             {level && <span className={styles.level}> ({level})</span>}
           </div>
         ) : (
-          <Link href={`/users/detail?intraId=${intraId}`}>
+          <Link href={`/takgu/users/detail?intraId=${intraId}`}>
             <span>
               {intraId}
               {level && <span className={styles.level}> ({level})</span>}

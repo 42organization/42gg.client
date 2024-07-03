@@ -78,12 +78,12 @@ export default function Header() {
             <FiMenu className={styles.menuIcon} onClick={openMenuBarHandler} />
           )}
         </div>
-        <Link className={styles.logoWrap} href={'/'}>
+        <Link className={styles.logoWrap} href={'/takgu'}>
           42GG
         </Link>
         <div className={styles.headerRight}>
           <div className={styles.announceIcon}>
-            <Link href={'/store'}>
+            <Link href={'/takgu/store'}>
               <IoStorefrontOutline className={styles.storeIcon} />
             </Link>
           </div>

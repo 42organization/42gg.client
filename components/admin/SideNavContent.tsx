@@ -15,7 +15,7 @@ export default function SideNavContent({
   children,
 }: SideNavContentProps) {
   return (
-    <Link href={`/admin${url}`}>
+    <Link href={`/takgu/admin${url}`}>
       <div
         className={`${styles.content} ${
           currentPath === url && styles.selected
