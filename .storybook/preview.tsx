@@ -2,6 +2,10 @@ import React from 'react';
 import type { Preview } from '@storybook/react';
 import { StoryFn } from '@storybook/react';
 import { RecoilRoot } from 'recoil';
+import { QueryClient } from 'react-query';
+import { QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 const preview: Preview = {
   parameters: {
@@ -20,7 +24,9 @@ const preview: Preview = {
   decorators: [
     (Story: StoryFn) => (
       <RecoilRoot>
-        <Story />
+        <QueryClientProvider client={queryClient}>
+          <Story />
+        </QueryClientProvider>
       </RecoilRoot>
     ),
   ],
