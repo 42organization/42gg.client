@@ -1,4 +1,4 @@
-import AdminPartyPenalty from 'components/admin/party/AdminPartyPenalty';
+import AdminPartyPenalty from 'components/takgu/admin/party/AdminPartyPenalty';
 
 export default function PartyPenalty() {
   return (

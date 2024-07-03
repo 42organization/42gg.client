@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ModeRadiobox from 'components/mode/modeItems/ModeRadiobox';
+import ModeRadiobox from 'components/takgu/mode/modeItems/ModeRadiobox';
 
 const meta: Meta<typeof ModeRadiobox> = {
   title: 'Game/ModeRadiobox',

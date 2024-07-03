@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import MatchEnrollModal from 'components/modal/match/MatchEnrollModal';
+import MatchEnrollModal from 'components/takgu/modal/match/MatchEnrollModal';
 
 const meta: Meta<typeof MatchEnrollModal> = {
   title: 'Modal/MatchEnrollModal',

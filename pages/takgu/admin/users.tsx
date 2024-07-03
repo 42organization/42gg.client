@@ -1,4 +1,4 @@
-import UserManagementTable from 'components/admin/users/UserManagementTable';
+import UserManagementTable from 'components/takgu/admin/users/UserManagementTable';
 
 export default function Users() {
   return (

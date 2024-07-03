@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { NormalListItem } from 'components/rank/NormalListItem';
+import { NormalListItem } from 'components/takgu/rank/NormalListItem';
 const meta: Meta = {
   title: 'rank/NormalListItem',
   component: NormalListItem,

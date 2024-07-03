@@ -1,4 +1,4 @@
-import SlotMain from 'components/admin/slot/SlotMain';
+import SlotMain from 'components/takgu/admin/slot/SlotMain';
 
 export default function Scheduler() {
   return (

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ExpStat from 'components/modal/statChange/ExpStat';
+import ExpStat from 'components/takgu/modal/statChange/ExpStat';
 
 const meta: Meta<typeof ExpStat> = {
   title: 'Modal/ExpStat',

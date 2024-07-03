@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ChangeProfileEdgeModal from 'components/modal/store/inventory/ChangeProfileEdgeModal';
+import ChangeProfileEdgeModal from 'components/takgu/modal/store/inventory/ChangeProfileEdgeModal';
 
 const meta: Meta<typeof ChangeProfileEdgeModal> = {
   title: 'store/Modal/ChangeProfileEdgeModal',

@@ -1,7 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import TournamentCard from 'components/tournament/TournamentCard';
-import UserTournamentBraket from 'components/tournament/UserTournamentBracket';
+import TournamentCard from 'components/takgu/tournament/TournamentCard';
+import UserTournamentBraket from 'components/takgu/tournament/UserTournamentBracket';
 import useBeforeLiveTournamentData from 'hooks/tournament/useBeforeLiveTournamentData';
 import styles from 'styles/tournament/TournamentContainer.module.scss';
 

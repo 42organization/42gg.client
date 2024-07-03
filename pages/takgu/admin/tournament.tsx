@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import TournamentEdit from 'components/admin/tournament/TournamentEdit';
-import TournamentList from 'components/admin/tournament/TournamentList';
+import TournamentEdit from 'components/takgu/admin/tournament/TournamentEdit';
+import TournamentList from 'components/takgu/admin/tournament/TournamentList';
 import useTournamentEditInfo from 'hooks/tournament/useTournamentEditInfo';
 import styles from 'styles/admin/tournament/Tournament.module.scss';
 

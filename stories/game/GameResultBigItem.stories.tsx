@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import GameResultBigItem from 'components/game/big/GameResultBigItem';
+import GameResultBigItem from 'components/takgu/game/big/GameResultBigItem';
 
 const meta: Meta<typeof GameResultBigItem> = {
   title: 'Game/GameResultBigItem',

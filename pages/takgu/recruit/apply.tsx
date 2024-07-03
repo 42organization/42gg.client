@@ -2,9 +2,9 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { applicationAlertState } from 'utils/recoil/application';
-import ApplicationForm from 'components/recruit/Application/ApplicationForm';
-import ApplicationLoadingNoData from 'components/recruit/Application/ApplicationLoadingNoData';
-import StickyHeader from 'components/recruit/StickyHeader';
+import ApplicationForm from 'components/takgu/recruit/Application/ApplicationForm';
+import ApplicationLoadingNoData from 'components/takgu/recruit/Application/ApplicationLoadingNoData';
+import StickyHeader from 'components/takgu/recruit/StickyHeader';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
 
 function Apply() {

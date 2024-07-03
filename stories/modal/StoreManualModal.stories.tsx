@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import StoreManualModal from 'components/modal/store/StoreManualModal';
+import StoreManualModal from 'components/takgu/modal/store/StoreManualModal';
 
 const meta: Meta<typeof StoreManualModal> = {
   title: 'Modal/StoreManualModal',

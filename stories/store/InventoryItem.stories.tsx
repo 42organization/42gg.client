@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { InvetoryItem } from 'components/store/InventoryItem';
+import { InvetoryItem } from 'components/takgu/store/InventoryItem';
 
 // args: {
 //   item: InventoryItem,

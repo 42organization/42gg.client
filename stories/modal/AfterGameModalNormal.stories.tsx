@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import NormalGame from 'components/modal/afterGame/NormalGame';
+import NormalGame from 'components/takgu/modal/afterGame/NormalGame';
 
 const meta: Meta<typeof NormalGame> = {
   title: 'Modal/AfterGameModalNormal',

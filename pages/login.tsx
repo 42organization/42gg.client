@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import StyledButton from 'components/UI/StyledButton';
+import StyledButton from 'components/takgu/UI/StyledButton';
 import styles from 'styles/Login.module.scss';
 
 function Login() {

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { toastState } from 'utils/recoil/toast';
-import PartyCreate from 'components/party/PartyCreate';
+import PartyCreate from 'components/takgu/party/PartyCreate';
 import usePartyCategory from 'hooks/party/usePartyCategory';
 import usePartyColorMode from 'hooks/party/usePartyColorMode';
 import usePartyForm from 'hooks/party/usePartyForm';

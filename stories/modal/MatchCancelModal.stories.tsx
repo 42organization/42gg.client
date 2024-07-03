@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import MatchCancelModal from 'components/modal/match/MatchCancelModal';
+import MatchCancelModal from 'components/takgu/modal/match/MatchCancelModal';
 
 const meta: Meta<typeof MatchCancelModal> = {
   title: 'Modal/MatchCancelModal',

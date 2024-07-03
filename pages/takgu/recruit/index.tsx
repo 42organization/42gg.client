@@ -1,7 +1,7 @@
 import Lottie from 'lottie-react';
 import { Button } from '@mui/material';
-import RecruitList from 'components/recruit/RecruitList';
-import StickyHeader from 'components/recruit/StickyHeader';
+import RecruitList from 'components/takgu/recruit/RecruitList';
+import StickyHeader from 'components/takgu/recruit/StickyHeader';
 import recruitPingpong from 'public/lottie/recruitPingPong.json';
 import useCheckRecruit from 'hooks/recruit/useCheckRecruit';
 import commonStyle from 'styles/recruit/common.module.scss';

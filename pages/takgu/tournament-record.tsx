@@ -3,11 +3,11 @@ import { SwiperClass, SwiperRef } from 'swiper/react';
 import { TournamentInfo, TournamentData } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
 import { InfiniteScroll } from 'utils/infinityScroll';
-import UserTournamentBracket from 'components/tournament/UserTournamentBracket';
-import LeagueButtonGroup from 'components/tournament-record/LeagueButtonGroup';
-import WinnerSwiper from 'components/tournament-record/WinnerSwiper';
-import WinnerTournamentInfo from 'components/tournament-record/WinnerTournamentInfo';
-import LoadingSpinner from 'components/UI/LoadingSpinner';
+import UserTournamentBracket from 'components/takgu/tournament/UserTournamentBracket';
+import LeagueButtonGroup from 'components/takgu/tournament-record/LeagueButtonGroup';
+import WinnerSwiper from 'components/takgu/tournament-record/WinnerSwiper';
+import WinnerTournamentInfo from 'components/takgu/tournament-record/WinnerTournamentInfo';
+import LoadingSpinner from 'components/takgu/UI/LoadingSpinner';
 import styles from 'styles/tournament-record/TournamentRecord.module.scss';
 
 export default function TournamentRecord() {

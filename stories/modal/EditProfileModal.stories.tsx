@@ -1,7 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 import type { Meta, StoryObj } from '@storybook/react';
 import { profileState } from 'utils/recoil/user';
-import EditProfileModal from 'components/modal/profile/EditProfileModal';
+import EditProfileModal from 'components/takgu/modal/profile/EditProfileModal';
 
 const meta: Meta<typeof EditProfileModal> = {
   title: 'Modal/EditProfileModal',

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import type { Meta, StoryObj } from '@storybook/react';
 import { userState } from 'utils/recoil/layout';
-import MainPageProfile from 'components/Layout/MainPageProfile';
+import MainPageProfile from 'components/takgu/Layout/MainPageProfile';
 
 const meta: Meta<typeof MainPageProfile> = {
   title: 'MainPageProfile/MainPageProfile',

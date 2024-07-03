@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { RandomColors } from 'types/colorModeTypes';
-import GameResult from 'components/game/GameResult';
-import Section from 'components/main/Section';
-import BasicProfile from 'components/user/BasicProfile';
-import RankProfile from 'components/user/RankProfile';
+import GameResult from 'components/takgu/game/GameResult';
+import Section from 'components/takgu/main/Section';
+import BasicProfile from 'components/takgu/user/BasicProfile';
+import RankProfile from 'components/takgu/user/RankProfile';
 import useBasicProfile from 'hooks/users/useBasicProfile';
 import useProfileColorMode from 'hooks/users/useProfileColorMode';
 import styles from 'styles/user/user.module.scss';

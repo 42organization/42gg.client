@@ -1,4 +1,4 @@
-import PartyReportNav from 'components/admin/party/PartyReportNav';
+import PartyReportNav from 'components/takgu/admin/party/PartyReportNav';
 
 export default function PartyReport() {
   return (

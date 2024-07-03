@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import NotiItem from 'components/Layout/NotiBar/NotiItem';
+import NotiItem from 'components/takgu/Layout/NotiBar/NotiItem';
 
 const meta: Meta<typeof NotiItem> = {
   title: 'Drawer/NotiItem',

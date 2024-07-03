@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import EditMegaphoneModal from 'components/modal/store/inventory/EditMegaphoneModal';
+import EditMegaphoneModal from 'components/takgu/modal/store/inventory/EditMegaphoneModal';
 
 const meta: Meta<typeof EditMegaphoneModal> = {
   title: 'store/Modal/EditMegaphoneModal',

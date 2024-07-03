@@ -1,4 +1,4 @@
-import PartyCategories from 'components/admin/party/PartyCategory';
+import PartyCategories from 'components/takgu/admin/party/PartyCategory';
 
 export default function PartyCategory() {
   return (

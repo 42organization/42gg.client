@@ -5,9 +5,9 @@ import { StoreMode } from 'types/storeTypes';
 import { ICoin } from 'types/userTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
-import { StoreModeWrap } from 'components/mode/modeWraps/StoreModeWrap';
-import { InventoryList } from 'components/store/InventoryList';
-import ItemsList from 'components/store/purchase/ItemsList';
+import { StoreModeWrap } from 'components/takgu/mode/modeWraps/StoreModeWrap';
+import { InventoryList } from 'components/takgu/store/InventoryList';
+import ItemsList from 'components/takgu/store/purchase/ItemsList';
 import styles from 'styles/store/StoreContainer.module.scss';
 
 export default function Store() {

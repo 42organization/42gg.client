@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { CurrentMatchContent } from 'components/Layout/CurrentMatch';
+import { CurrentMatchContent } from 'components/takgu/Layout/CurrentMatch';
 
 const meta: Meta<typeof CurrentMatchContent> = {
   title: 'Layout/CurrentMatch',

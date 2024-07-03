@@ -1,5 +1,5 @@
-import StatisticsHeader from 'components/statistics/StatisticsHeader';
-import StatisticsSelect from 'components/statistics/StatisticsSelect';
+import StatisticsHeader from 'components/takgu/statistics/StatisticsHeader';
+import StatisticsSelect from 'components/takgu/statistics/StatisticsSelect';
 
 function Statistics() {
   return (

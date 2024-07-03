@@ -3,10 +3,10 @@ import { useSetRecoilState } from 'recoil';
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { userState } from 'utils/recoil/layout';
 import { profileState } from 'utils/recoil/user';
-import Header from 'components/Layout/Header';
+import Header from 'components/takgu/Layout/Header';
 import HeaderStateContext, {
   HeaderContext,
-} from 'components/Layout/HeaderContext';
+} from 'components/takgu/Layout/HeaderContext';
 
 const meta: Meta<typeof Header> = {
   title: 'Drawer/MenuBar',

@@ -1,4 +1,4 @@
-import PenaltyTable from 'components/admin/penalty/PenaltyTable';
+import PenaltyTable from 'components/takgu/admin/penalty/PenaltyTable';
 
 export default function Penalty() {
   return (

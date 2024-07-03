@@ -1,4 +1,4 @@
-import StoreMain from 'components/admin/store/StoreMain';
+import StoreMain from 'components/takgu/admin/store/StoreMain';
 
 export default function Store() {
   return (

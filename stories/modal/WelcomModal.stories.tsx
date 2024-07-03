@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import WelcomeModal from 'components/modal/event/WelcomeModal';
+import WelcomeModal from 'components/takgu/modal/event/WelcomeModal';
 
 const meta: Meta<typeof WelcomeModal> = {
   title: 'Modal/WelcomeModal',

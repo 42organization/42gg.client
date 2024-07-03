@@ -1,4 +1,4 @@
-import PartyRoomTable from 'components/admin/party/PartyRoomTable';
+import PartyRoomTable from 'components/takgu/admin/party/PartyRoomTable';
 
 export default function PartyRoom() {
   return (

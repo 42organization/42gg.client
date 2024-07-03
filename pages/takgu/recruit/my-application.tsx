@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { ApplicationFormType } from 'types/recruit/recruitments';
 import { applicationAlertState } from 'utils/recoil/application';
-import ApplicationForm from 'components/recruit/Application/ApplicationForm';
-import ApplicatoinFormFooter from 'components/recruit/Application/applicationLayout/ApplicationFormFooter';
-import ApplicationLoadingNoData from 'components/recruit/Application/ApplicationLoadingNoData';
-import StickyHeader from 'components/recruit/StickyHeader';
+import ApplicationForm from 'components/takgu/recruit/Application/ApplicationForm';
+import ApplicatoinFormFooter from 'components/takgu/recruit/Application/applicationLayout/ApplicationFormFooter';
+import ApplicationLoadingNoData from 'components/takgu/recruit/Application/ApplicationLoadingNoData';
+import StickyHeader from 'components/takgu/recruit/StickyHeader';
 import useRecruitDetail from 'hooks/recruit/useRecruitDetail';
 import useRecruitDetailUser from 'hooks/recruit/useRecruitDetailUser';
 

@@ -1,5 +1,5 @@
-import SeasonCreate from 'components/admin/season/SeasonCreate';
-import SeasonList from 'components/admin/season/SeasonList';
+import SeasonCreate from 'components/takgu/admin/season/SeasonCreate';
+import SeasonList from 'components/takgu/admin/season/SeasonList';
 
 export default function Season() {
   return (

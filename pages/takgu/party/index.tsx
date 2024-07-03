@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { PartyMain } from 'components/party/PartyMain';
+import { PartyMain } from 'components/takgu/party/PartyMain';
 import usePartyCategory from 'hooks/party/usePartyCategory';
 import usePartyColorMode from 'hooks/party/usePartyColorMode';
 import usePartyPenaltyTimer from 'hooks/party/usePartyPenaltyTimer';

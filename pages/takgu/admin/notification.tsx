@@ -1,4 +1,4 @@
-import NotificationTable from 'components/admin/notification/NotificationTable';
+import NotificationTable from 'components/takgu/admin/notification/NotificationTable';
 
 export default function Notification() {
   return (

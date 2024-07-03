@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import LogoutModal from 'components/modal/menu/LogoutModal';
+import LogoutModal from 'components/takgu/modal/menu/LogoutModal';
 
 const meta: Meta<typeof LogoutModal> = {
   title: 'Modal/LogoutModal',

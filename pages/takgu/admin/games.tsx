@@ -1,4 +1,4 @@
-import GamesTable from 'components/admin/games/GamesTable';
+import GamesTable from 'components/takgu/admin/games/GamesTable';
 
 export default function Game() {
   return (

@@ -1,4 +1,4 @@
-import CoinMain from 'components/admin/coin/CoinMain';
+import CoinMain from 'components/takgu/admin/coin/CoinMain';
 
 export default function Coin() {
   return (

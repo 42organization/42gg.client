@@ -5,9 +5,9 @@ import {
   RecruitmentEditProps,
   RecruitmentsPages,
 } from 'types/admin/adminRecruitmentsTypes';
-import RecruitmentDetail from 'components/admin/recruitments/recruitmentsDetail/RecruitmentDetail';
-import RecruitmentEdit from 'components/admin/recruitments/recruitmentsEdit/RecruitmentEdit';
-import RecruitmentsMain from 'components/admin/recruitments/RecruitmentsMain';
+import RecruitmentDetail from 'components/takgu/admin/recruitments/recruitmentsDetail/RecruitmentDetail';
+import RecruitmentEdit from 'components/takgu/admin/recruitments/recruitmentsEdit/RecruitmentEdit';
+import RecruitmentsMain from 'components/takgu/admin/recruitments/RecruitmentsMain';
 
 export default function Recruitments() {
   const [page, setPage] = useState<RecruitmentsPages>({

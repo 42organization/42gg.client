@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import UserCoinHistoryModal from 'components/modal/store/UserCoinHistoryModal';
+import UserCoinHistoryModal from 'components/takgu/modal/store/UserCoinHistoryModal';
 
 const meta: Meta<typeof UserCoinHistoryModal> = {
   title: 'store/Modal/UserCoinHistoryModal',
