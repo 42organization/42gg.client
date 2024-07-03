@@ -40,7 +40,12 @@ export default function CoinChangeModal(coin: CoinResult) {
       </div>
       <div className={styles.container}>
         <div className={styles.coinImage}>
-          <Image src='/image/coinImage.svg' width={70} height={70} alt='Coin' />
+          <Image
+            src='/image/takgu/coinImage.svg'
+            width={70}
+            height={70}
+            alt='Coin'
+          />
         </div>
         <div className={styles.coinStat}>
           <CoinStat before={coin?.beforeCoin} after={coin?.afterCoin} />

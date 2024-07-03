@@ -8,7 +8,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { PartyCategory } from 'types/partyTypes';
-import { tableFormat } from 'constants/admin/table';
+import { tableFormat } from 'constants/takgu/admin/table';
 import { AdminTableHead } from 'components/takgu/admin/common/AdminTable';
 import usePartyCategory from 'hooks/party/usePartyCategory';
 import styles from 'styles/admin/party/AdminPartyCommon.module.scss';

@@ -5,7 +5,7 @@ import { PriceTag } from 'types/modalTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import { PURCHASE_ALERT_MESSAGE } from 'constants/store/purchaseAlertMessage';
+import { PURCHASE_ALERT_MESSAGE } from 'constants/takgu/store/purchaseAlertMessage';
 import {
   ModalButtonContainer,
   ModalButton,

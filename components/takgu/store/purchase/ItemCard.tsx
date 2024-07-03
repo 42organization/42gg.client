@@ -32,7 +32,7 @@ export default function ItemCard({ item }: { item: Item }) {
   };
 
   const handleImageError = (e: SyntheticEvent<HTMLImageElement>) => {
-    e.currentTarget.src = '/image/not_found.svg';
+    e.currentTarget.src = '/image/takgu/not_found.svg';
   };
 
   return (
@@ -44,7 +44,7 @@ export default function ItemCard({ item }: { item: Item }) {
       <div className={styles.preview}>
         <div className={styles.img}>
           <Image
-            src={item.imageUri ? item.imageUri : '/image/not_found.svg'}
+            src={item.imageUri ? item.imageUri : '/image/takgu/not_found.svg'}
             alt={item.itemName}
             onError={handleImageError}
             fill
@@ -53,7 +53,12 @@ export default function ItemCard({ item }: { item: Item }) {
       </div>
       <div className={styles.title}>{item.itemName}</div>
       <div className={styles.priceTag}>
-        <Image src='/image/coinImage.svg' alt={'coin'} width={15} height={15} />
+        <Image
+          src='/image/takgu/coinImage.svg'
+          alt={'coin'}
+          width={15}
+          height={15}
+        />
         <span
           className={item.discount > 0 ? styles.onDiscount : styles.salePrice}
         >

@@ -10,7 +10,12 @@ export default function CoinImage({
 }) {
   return (
     <div className={styles.ggCoin}>
-      <Image src='/image/coinImage.svg' alt='coin' width={size} height={size} />
+      <Image
+        src='/image/takgu/coinImage.svg'
+        alt='coin'
+        width={size}
+        height={size}
+      />
       {amount.toLocaleString()}
     </div>
   );

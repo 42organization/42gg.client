@@ -14,7 +14,7 @@ import {
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
-import { tableFormat } from 'constants/admin/table';
+import { tableFormat } from 'constants/takgu/admin/table';
 import DynamicQuill from 'components/DynamicQuill';
 import PageNation from 'components/Pagination';
 import {

@@ -6,7 +6,7 @@ import { Modal } from 'types/modalTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
+import { ITEM_ALERT_MESSAGE } from 'constants/takgu/store/itemAlertMessage';
 import {
   ModalButtonContainer,
   ModalButton,

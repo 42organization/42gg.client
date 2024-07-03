@@ -10,7 +10,7 @@ import {
   hourOptions,
   minuteOptions,
   peopleOptions,
-} from 'constants/party/createOptions';
+} from 'constants/takgu/party/createOptions';
 import LoadingSpinner from 'components/takgu/UI/LoadingSpinner';
 import usePartyForm from 'hooks/party/usePartyForm';
 import { usePartyTemplate } from 'hooks/party/usePartyTemplate';

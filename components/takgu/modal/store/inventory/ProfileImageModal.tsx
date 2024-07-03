@@ -8,7 +8,7 @@ import { UseItemData } from 'types/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
-import { ITEM_ALERT_MESSAGE } from 'constants/store/itemAlertMessage';
+import { ITEM_ALERT_MESSAGE } from 'constants/takgu/store/itemAlertMessage';
 import {
   ModalButtonContainer,
   ModalButton,
@@ -88,7 +88,7 @@ export default function ProfileImageModal({
       );
       formData.append(
         'profileImage',
-        new Blob([imgData], { type: 'image/jpeg' })
+        new Blob([imgData], { type: 'image/takgu/jpeg' })
       );
       await instance.post('/pingpong/users/profile-image', formData);
       queryClient.invalidateQueries('user');
@@ -140,7 +140,7 @@ export default function ProfileImageModal({
               )}
               <input
                 type='file'
-                accept='image/jpeg'
+                accept='image/takgu/jpeg'
                 style={{ display: 'none' }}
                 onChange={uploadImg}
               />

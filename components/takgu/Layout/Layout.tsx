@@ -20,6 +20,7 @@ import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/Layout/Layout.module.scss';
 import PlayButton from './PlayButton';
 import UserLayout from './UserLayout';
+import ModalProvider from '../modal/ModalProvider';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -38,37 +39,42 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   if (!user || !user.intraId) return null;
 
-  if (presentPath.includes('/admin')) {
+  if (presentPath.includes('/takgu/admin')) {
     if (!user.isAdmin) return <AdminReject />;
     return <AdminLayout>{children}</AdminLayout>;
   }
 
-  if (presentPath.includes('/recruit')) {
+  if (presentPath.includes('/takgu/recruit')) {
     return <RecruitLayout>{children}</RecruitLayout>;
   }
 
   // NOTE : 외부 툴을 사용해보고 외부 툴로 대체가 가능하다면 삭제 예정
-  if (presentPath === '/statistics' && user.isAdmin)
+  if (presentPath === '/takgu/statistics' && user.isAdmin)
     return (
       <UserLayout>
         <Statistics />
       </UserLayout>
     );
+
   if (presentPath.includes('/takgu'))
     return (
-      <UserLayout>
-        <HeaderStateContext>
-          <Header />
-        </HeaderStateContext>
-        <PlayButton />
-        <div className={styles.topInfo}>
-          <Megaphone />
-          {openCurrentMatch && <CurrentMatch />}
-          {presentPath === '/' && <MainPageProfile />}
-        </div>
-        {children}
-        <Footer />
-      </UserLayout>
+      <>
+        <UserLayout>
+          <HeaderStateContext>
+            <Header />
+          </HeaderStateContext>
+          <PlayButton />
+          <div className={styles.topInfo}>
+            <Megaphone />
+            {openCurrentMatch && <CurrentMatch />}
+            {presentPath === '/' && <MainPageProfile />}
+          </div>
+          {children}
+          <Footer />
+        </UserLayout>
+        <ModalProvider />
+      </>
     );
+
   return <>{children}</>;
 }

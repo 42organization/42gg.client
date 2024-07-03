@@ -12,7 +12,7 @@ import { ISeason, ISeasonList } from 'types/seasonTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import { tableFormat } from 'constants/admin/table';
+import { tableFormat } from 'constants/takgu/admin/table';
 import styles from 'styles/admin/season/SeasonList.module.scss';
 import { AdminTableHead } from '../common/AdminTable';
 

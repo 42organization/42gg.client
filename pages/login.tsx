@@ -31,11 +31,15 @@ function Login() {
         <div className={styles.innerContainer}>
           <div className={styles.logoContainer}>
             <div className={styles.logo1}>
-              <Image src='/image/Playwith_logo.png' alt='Playwith_logo' fill />
+              <Image
+                src='/image/takgu/Playwith_logo.png'
+                alt='Playwith_logo'
+                fill
+              />
             </div>
             <div className={styles.logo2}>
               <Image
-                src='/image/42GG_neon_logo.png'
+                src='/image/takgu/42GG_neon_logo.png'
                 alt='42GG_neon_logo'
                 fill
               />
@@ -46,7 +50,7 @@ function Login() {
               Sign in
             </StyledButton>
             <div className={styles.kakaoBtn} onClick={onKakaoLogin}>
-              <Image src='/image/kakao.png' alt='kakao_login' fill />
+              <Image src='/image/takgu/kakao.png' alt='kakao_login' fill />
             </div>
           </div>
         </div>

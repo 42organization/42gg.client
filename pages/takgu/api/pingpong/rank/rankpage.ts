@@ -11,7 +11,7 @@ export default function handler(
       rank: 1,
       ppp: 1041,
       statusMessage: '',
-      tierImageUri: '/image/fallBackSrc.jpeg',
+      tierImageUri: '/image/takgu/fallBackSrc.jpeg',
       textColor: '#000000',
     },
     {
@@ -19,7 +19,7 @@ export default function handler(
       rank: 2,
       ppp: 1041,
       statusMessage: '',
-      tierImageUri: '/image/fallBackSrc.jpeg',
+      tierImageUri: '/image/takgu/fallBackSrc.jpeg',
       textColor: '#000000',
     },
     {
@@ -27,7 +27,7 @@ export default function handler(
       rank: 3,
       ppp: 1041,
       statusMessage: '',
-      tierImageUri: '/image/fallBackSrc.jpeg',
+      tierImageUri: '/image/takgu/fallBackSrc.jpeg',
       textColor: '#000000',
     },
     {
@@ -35,7 +35,7 @@ export default function handler(
       rank: 4,
       ppp: 1041,
       statusMessage: '',
-      tierImageUri: '/image/fallBackSrc.jpeg',
+      tierImageUri: '/image/takgu/fallBackSrc.jpeg',
       textColor: '#000000',
     },
     {
@@ -43,7 +43,7 @@ export default function handler(
       rank: 5,
       ppp: 1041,
       statusMessage: '',
-      tierImageUri: '/image/fallBackSrc.jpeg',
+      tierImageUri: '/image/takgu/fallBackSrc.jpeg',
       textColor: '#000000',
     },
   ];

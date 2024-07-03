@@ -8,16 +8,16 @@ import {
   HeaderContextState,
   HeaderContext,
 } from 'components/takgu/Layout/HeaderContext';
-import AdminEmoji from 'public/image/menu_admin.svg';
-import AnnouncementEmoji from 'public/image/menu_announcement.svg';
-import CurrentMatchEmoji from 'public/image/menu_currentMatch.svg';
-import HallOfFameEmoji from 'public/image/menu_halloffame.svg';
-import ManualEmoji from 'public/image/menu_manual.svg';
-import RankingEmoji from 'public/image/menu_ranking.svg';
-import RecruitEmoji from 'public/image/menu_recruit.svg';
-import ReportEmoji from 'public/image/menu_report.svg';
-import SignOutEmoji from 'public/image/menu_signOut.svg';
-import StatisticsEmoji from 'public/image/menu_statistics.svg';
+import AdminEmoji from 'public/image/takgu/menu_admin.svg';
+import AnnouncementEmoji from 'public/image/takgu/menu_announcement.svg';
+import CurrentMatchEmoji from 'public/image/takgu/menu_currentMatch.svg';
+import HallOfFameEmoji from 'public/image/takgu/menu_halloffame.svg';
+import ManualEmoji from 'public/image/takgu/menu_manual.svg';
+import RankingEmoji from 'public/image/takgu/menu_ranking.svg';
+import RecruitEmoji from 'public/image/takgu/menu_recruit.svg';
+import ReportEmoji from 'public/image/takgu/menu_report.svg';
+import SignOutEmoji from 'public/image/takgu/menu_signOut.svg';
+import StatisticsEmoji from 'public/image/takgu/menu_statistics.svg';
 import { useUser } from 'hooks/Layout/useUser';
 import useCheckRecruit from 'hooks/recruit/useCheckRecruit';
 import useAxiosGet from 'hooks/useAxiosGet';

@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { PartyGameTemplate } from 'types/partyTypes';
 import { modalState } from 'utils/recoil/modal';
-import { tableFormat } from 'constants/admin/table';
+import { tableFormat } from 'constants/takgu/admin/table';
 import { AdminTableHead } from 'components/takgu/admin/common/AdminTable';
 import { usePartyTemplate } from 'hooks/party/usePartyTemplate';
 import styles from 'styles/admin/party/AdminPartyCommon.module.scss';

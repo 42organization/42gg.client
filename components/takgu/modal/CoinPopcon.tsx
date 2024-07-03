@@ -50,7 +50,7 @@ export default function CoinPopcon({ amount, coin }: amountProps) {
 
       const circle = document.createElement('img');
       circle.className = styles.circle;
-      circle.src = '/image/coinImage.svg';
+      circle.src = '/image/takgu/coinImage.svg';
       document.body.appendChild(circle);
       let sum = x1;
 

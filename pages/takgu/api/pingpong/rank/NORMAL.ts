@@ -8,20 +8,20 @@ export default function handler(
   const userImages: userImages[] = [
     {
       intraId: 'jeyoonnormal',
-      imageUri: '/image/fallBackSrc.jpeg',
-      tierImage: '/image/fallBackSrc.jpeg',
+      imageUri: '/image/takgu/fallBackSrc.jpeg',
+      tierImage: '/image/takgu/fallBackSrc.jpeg',
       edge: 'COLOR2',
     },
     {
       intraId: 'hyobicho',
-      imageUri: '/image/fallBackSrc.jpeg',
-      tierImage: '/image/fallBackSrc.jpeg',
+      imageUri: '/image/takgu/fallBackSrc.jpeg',
+      tierImage: '/image/takgu/fallBackSrc.jpeg',
       edge: 'COLOR3',
     },
     {
       intraId: 'hyungipa',
-      imageUri: '/image/fallBackSrc.jpeg',
-      tierImage: '/image/fallBackSrc.jpeg',
+      imageUri: '/image/takgu/fallBackSrc.jpeg',
+      tierImage: '/image/takgu/fallBackSrc.jpeg',
       edge: 'COLOR4',
     },
   ];

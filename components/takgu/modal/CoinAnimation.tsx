@@ -22,7 +22,7 @@ export default function CoinAnimation({ amount }: amountProps) {
       <div key={index} className={`${stackStyle} ${styles.fall}`}>
         <div className={`${styles.coin}`}>
           <Image
-            src='/image/coin_image.svg'
+            src='/image/takgu/coin_image.svg'
             width={60}
             height={60}
             alt='Coin'

@@ -42,7 +42,7 @@ function TournamentMatchParty({
       문제가 있으므로 임시 방편으로 img 태그를 사용합니다. */}
       <div className={styles.imageWrap}>
         <img
-          src={party.picture ?? 'image/match_qustion.png'}
+          src={party.picture ?? 'image/takgu/match_qustion.png'}
           className={styles.playerImage}
           alt='player'
         />

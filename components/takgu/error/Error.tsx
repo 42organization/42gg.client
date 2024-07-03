@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useResetRecoilState } from 'recoil';
 import useErrorPage from 'hooks/error/useErrorPage';
 import styles from 'styles/Error.module.scss';
-import ErrorEmoji from '/public/image/error_face.svg';
+import ErrorEmoji from '/public/image/takgu/error_face.svg';
 import { modalState } from 'utils/recoil/modal';
 
 export default function ErrorPage() {

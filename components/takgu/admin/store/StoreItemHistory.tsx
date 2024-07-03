@@ -15,7 +15,7 @@ import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import { tableFormat } from 'constants/admin/table';
+import { tableFormat } from 'constants/takgu/admin/table';
 import PageNation from 'components/Pagination';
 import {
   AdminEmptyItem,
@@ -100,7 +100,7 @@ function StoreItemHistory() {
                               src={
                                 itemHistory.imageUri
                                   ? itemHistory[columnName]
-                                  : '/image/not_found.svg'
+                                  : '/image/takgu/not_found.svg'
                               }
                               width={30}
                               height={30}

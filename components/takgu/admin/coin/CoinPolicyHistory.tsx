@@ -13,7 +13,7 @@ import { IcoinPolicyHistory } from 'types/admin/adminCoinTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
-import { tableFormat } from 'constants/admin/table';
+import { tableFormat } from 'constants/takgu/admin/table';
 import PageNation from 'components/Pagination';
 import {
   AdminEmptyItem,

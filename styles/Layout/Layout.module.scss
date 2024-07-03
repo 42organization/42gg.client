@@ -28,7 +28,7 @@
     background: $vip-background;
   }
   &.party-main {
-    background: url('/image/party-background.png');
+    background: url('/image/takgu/party-background.png');
   }
   @each $theme, $color in $bg-theme-colors {
     &.#{$theme} {

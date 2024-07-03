@@ -73,7 +73,7 @@ export default function BasicProfile({ profileId }: ProfileProps) {
                 }}
               >
                 <Image
-                  src='/image/kakao.png'
+                  src='/image/takgu/kakao.png'
                   alt='kakao_login'
                   width='30'
                   height='30'

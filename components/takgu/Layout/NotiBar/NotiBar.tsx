@@ -12,7 +12,7 @@ import NotiStateContext, {
   NotiProvider,
 } from 'components/takgu/Layout/NotiBar/NotiContext';
 import NotiItem from 'components/takgu/Layout/NotiBar/NotiItem';
-import NotiEmptyEmoji from 'public/image/noti_empty.svg';
+import NotiEmptyEmoji from 'public/image/takgu/noti_empty.svg';
 import styles from 'styles/Layout/NotiBar.module.scss';
 
 export default function NotiBar() {

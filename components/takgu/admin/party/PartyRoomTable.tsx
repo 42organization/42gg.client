@@ -11,7 +11,7 @@ import {
 import { PartyRoomColumn } from 'types/admin/adminPartyTypes';
 import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
-import { tableFormat } from 'constants/admin/table';
+import { tableFormat } from 'constants/takgu/admin/table';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/takgu/admin/common/AdminSearchBar';
 import { AdminTableHead } from 'components/takgu/admin/common/AdminTable';

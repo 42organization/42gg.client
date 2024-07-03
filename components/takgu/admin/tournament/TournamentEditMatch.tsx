@@ -30,7 +30,7 @@ function TournamentMatchParty({
     >
       <img
         className={styles.playerImage}
-        src={party.picture ?? '/image/match_qustion.png'}
+        src={party.picture ?? '/image/takgu/match_qustion.png'}
       />
 
       <div className={styles.partyName}>{party.name || teamNameFallback}</div>
@@ -89,7 +89,7 @@ function TournamentEditMatchParty({
     <div className={styles.tournamentPartyWrapper}>
       <img
         className={styles.playerImage}
-        src={party.picture ?? '/image/match_qustion.png'}
+        src={party.picture ?? '/image/takgu/match_qustion.png'}
       />
 
       <div className={styles.partyName}>{party.name}</div>

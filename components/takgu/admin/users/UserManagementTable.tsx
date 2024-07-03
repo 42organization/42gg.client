@@ -11,7 +11,7 @@ import {
 import { IUser, IUserTable } from 'types/admin/adminUserTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
-import { tableFormat } from 'constants/admin/table';
+import { tableFormat } from 'constants/takgu/admin/table';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/takgu/admin/common/AdminSearchBar';
 import styles from 'styles/admin/users/UserManagementTable.module.scss';

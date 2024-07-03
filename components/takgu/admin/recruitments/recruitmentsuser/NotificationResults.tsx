@@ -19,7 +19,7 @@ import {
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import { tableFormat } from 'constants/admin/table';
+import { tableFormat } from 'constants/takgu/admin/table';
 import PageNation from 'components/Pagination';
 import {
   AdminEmptyItem,

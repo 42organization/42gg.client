@@ -74,7 +74,10 @@ export default function AdminEditItemModal(item: Item) {
       })
     );
     if (imgData) {
-      formData.append('imgData', new Blob([imgData], { type: 'image/jpeg' }));
+      formData.append(
+        'imgData',
+        new Blob([imgData], { type: 'image/takgu/jpeg' })
+      );
     }
 
     mutation.mutate(formData, {

@@ -7,13 +7,13 @@ export default function handler(
 ) {
   const ProfileBasicData: ProfileBasic = {
     intraId: 'sangmipa1',
-    userImageUri: '/image/fallBackSrc.jpeg',
+    userImageUri: '/image/takgu/fallBackSrc.jpeg',
     racketType: 'PENHOLDER',
     statusMessage: '1231231313',
     level: 40,
     currentExp: 123,
     maxExp: 123,
-    tierImageUri: '/image/fallBackSrc.jpeg',
+    tierImageUri: '/image/takgu/fallBackSrc.jpeg',
     tierName: '노랑 탁구채',
     expRate: 123,
     edge: 'COLOR1',

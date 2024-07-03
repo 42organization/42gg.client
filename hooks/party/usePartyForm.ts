@@ -3,7 +3,7 @@ import {
   PartyCreateForm,
   PartyTemplateWithoutCategory,
 } from 'types/partyTypes';
-import { customTemplate } from 'constants/party/createOptions';
+import { customTemplate } from 'constants/takgu/party/createOptions';
 
 type PartyFormAction =
   | { type: 'UPDATE_TITLE'; title: string }

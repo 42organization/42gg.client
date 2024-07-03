@@ -15,7 +15,7 @@ import {
 } from 'components/takgu/Layout/HeaderContext';
 import MenuBar from 'components/takgu/Layout/MenuBar/MenuBar';
 import NotiBar from 'components/takgu/Layout/NotiBar/NotiBar';
-import NotiBell from 'public/image/noti_bell.svg';
+import NotiBell from 'public/image/takgu/noti_bell.svg';
 import useAxiosGet from 'hooks/useAxiosGet';
 import styles from 'styles/Layout/Header.module.scss';
 

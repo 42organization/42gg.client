@@ -11,7 +11,7 @@ const profile1: Iprofile = {
   createdAt: new Date('2023-08-05 10:10:10'),
   deletedAt: new Date('2023-08-05 10:10:10'),
   userIntraId: 'hyungjpa',
-  imageUri: '/image/noti_empty.svg',
+  imageUri: '/image/takgu/noti_empty.svg',
   isCurrent: true,
 };
 
@@ -20,7 +20,7 @@ const profile2: Iprofile = {
   createdAt: new Date('2023-08-05 10:10:10'),
   deletedAt: new Date('2023-08-05 10:10:10'),
   userIntraId: 'hyungjpa',
-  imageUri: '/image/noti_empty.svg',
+  imageUri: '/image/takgu/noti_empty.svg',
   isCurrent: true,
 };
 
@@ -29,7 +29,7 @@ const profile3: Iprofile = {
   createdAt: new Date('2023-08-05 10:10:10'),
   deletedAt: new Date('2023-08-05 10:10:10'),
   userIntraId: 'hyungjpa',
-  imageUri: '/image/noti_empty.svg',
+  imageUri: '/image/takgu/noti_empty.svg',
   isCurrent: true,
 };
 
@@ -38,7 +38,7 @@ const profile4: Iprofile = {
   createdAt: new Date('2023-08-05 10:10:10'),
   deletedAt: new Date('2023-08-05 10:10:10'),
   userIntraId: 'hyungjpa',
-  imageUri: '/image/noti_empty.svg',
+  imageUri: '/image/takgu/noti_empty.svg',
   isCurrent: true,
 };
 
@@ -47,7 +47,7 @@ const profile5: Iprofile = {
   createdAt: new Date('2023-08-05 10:10:10'),
   deletedAt: new Date('2023-08-05 10:10:10'),
   userIntraId: 'hyungjpa',
-  imageUri: '/image/noti_empty.svg',
+  imageUri: '/image/takgu/noti_empty.svg',
   isCurrent: true,
 };
 
@@ -56,7 +56,7 @@ const profile6: Iprofile = {
   createdAt: new Date('2023-08-05 10:10:10'),
   deletedAt: new Date('2023-08-05 10:10:10'),
   userIntraId: 'hyungjpa',
-  imageUri: '/image/noti_empty.svg',
+  imageUri: '/image/takgu/noti_empty.svg',
   isCurrent: true,
 };
 
@@ -65,7 +65,7 @@ const profile7: Iprofile = {
   createdAt: new Date('2023-08-05 10:10:10'),
   deletedAt: new Date('2023-08-05 10:10:10'),
   userIntraId: 'hyungjpa',
-  imageUri: '/image/noti_empty.svg',
+  imageUri: '/image/takgu/noti_empty.svg',
   isCurrent: true,
 };
 
@@ -74,7 +74,7 @@ const profile8: Iprofile = {
   createdAt: new Date('2023-08-05 10:10:10'),
   deletedAt: new Date('2023-08-05 10:10:10'),
   userIntraId: 'hyungjpa',
-  imageUri: '/image/noti_empty.svg',
+  imageUri: '/image/takgu/noti_empty.svg',
   isCurrent: true,
 };
 
@@ -83,7 +83,7 @@ const profile9: Iprofile = {
   createdAt: new Date('2023-08-05 10:10:10'),
   deletedAt: new Date('2023-08-05 10:10:10'),
   userIntraId: 'hyungjpa',
-  imageUri: '/image/noti_empty.svg',
+  imageUri: '/image/takgu/noti_empty.svg',
   isCurrent: true,
 };
 
@@ -92,7 +92,7 @@ const profile10: Iprofile = {
   createdAt: new Date('2023-08-05 10:10:10'),
   deletedAt: new Date('2023-08-05 10:10:10'),
   userIntraId: 'hyungjpa',
-  imageUri: '/image/noti_empty.svg',
+  imageUri: '/image/takgu/noti_empty.svg',
   isCurrent: true,
 };
 

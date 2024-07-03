@@ -60,7 +60,7 @@ export function InvetoryItem({ item }: inventoryItemProps) {
   }
 
   const handleImageError = (e: SyntheticEvent<HTMLImageElement>) => {
-    e.currentTarget.src = '/image/not_found.svg';
+    e.currentTarget.src = '/image/takgu/not_found.svg';
   };
 
   if (!user) return null;
@@ -96,7 +96,7 @@ export function InvetoryItem({ item }: inventoryItemProps) {
         <div className={styles.imgContainer}>
           <Image
             className={styles.img}
-            src={imageUri ? imageUri : '/image/not_found.svg'}
+            src={imageUri ? imageUri : '/image/takgu/not_found.svg'}
             alt={itemName}
             onError={handleImageError}
             fill

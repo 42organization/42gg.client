@@ -93,7 +93,10 @@ export default function AdminProfileModal(props: { intraId: string }) {
       })
     );
     if (imgData) {
-      formData.append('imgData', new Blob([imgData], { type: 'image/jpeg' }));
+      formData.append(
+        'imgData',
+        new Blob([imgData], { type: 'image/takgu/jpeg' })
+      );
     }
     try {
       const res = await instanceInManage.put(

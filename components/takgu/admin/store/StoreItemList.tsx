@@ -13,7 +13,7 @@ import { Item } from 'types/itemTypes';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import { tableFormat } from 'constants/admin/table';
+import { tableFormat } from 'constants/takgu/admin/table';
 import {
   AdminEmptyItem,
   AdminTableHead,
@@ -92,7 +92,7 @@ function StoreItemList() {
                             src={
                               item.imageUri
                                 ? item[columnName]
-                                : '/image/not_found.svg'
+                                : '/image/takgu/not_found.svg'
                             }
                             alt='Item Iamge'
                             width={30}

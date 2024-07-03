@@ -14,7 +14,7 @@ import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import { tableFormat } from 'constants/admin/table';
+import { tableFormat } from 'constants/takgu/admin/table';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/takgu/admin/common/AdminSearchBar';
 import {
@@ -138,7 +138,7 @@ function ProfileListCurrent() {
                               src={
                                 profile[columnName]
                                   ? profile[columnName]
-                                  : '/image/fallBackSrc.jpeg'
+                                  : '/image/takgu/fallBackSrc.jpeg'
                               }
                               width={60}
                               height={60}
