@@ -17,14 +17,14 @@ export default function Rank() {
   };
 
   return (
-      <div className={styles.pageWrap}>
-        <h1 className={`${styles.title} ${content[Mode].style}`}>
-          {content[Mode].title}
-        </h1>
-        <MyRank/>
-        <RankModeWrap>
-          <RankList/>
-        </RankModeWrap>
-      </div>
+    <div className={styles.pageWrap}>
+      <h1 className={`${styles.title} ${content[Mode].style}`}>
+        {content[Mode].title}
+      </h1>
+      <MyRank />
+      <RankModeWrap>
+        <RankList />
+      </RankModeWrap>
+    </div>
   );
 }

@@ -1,25 +1,19 @@
+import { useRouter } from 'next/router';
 import type { NextPage } from 'next';
-import SearchBar from 'components/main/SearchBar';
-import Section from 'components/main/Section';
-import useBeforeLiveTournamentData from 'hooks/tournament/useBeforeLiveTournamentData';
-import styles from 'styles/main/Home.module.scss';
 
-const Home: NextPage = () => {
-  const { data: tournamentData } = useBeforeLiveTournamentData();
+const Index: NextPage = () => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push('/takgu');
+  };
 
   return (
-    <div className={styles.container}>
-      <SearchBar />
-      {tournamentData &&
-        (tournamentData.beforeTournament?.length > 0 ||
-          tournamentData.liveTournament?.length > 0) && (
-          <Section path='tournament' sectionTitle={'Tournament'} />
-        )}
-      <Section path='party' sectionTitle={'Party'} />
-      <Section path='rank' sectionTitle={'Ranking'} />
-      <Section path='game' sectionTitle={'Current Play'} />
+    <div>
+      <h1>herererer</h1>
+      <button onClick={handleClick}>Go to Pingpong</button>
     </div>
   );
 };
 
-export default Home;
+export default Index;

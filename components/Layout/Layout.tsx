@@ -10,7 +10,7 @@ import HeaderStateContext from 'components/Layout/HeaderContext';
 import MainPageProfile from 'components/Layout/MainPageProfile';
 import Megaphone from 'components/Layout/MegaPhone';
 import RecruitLayout from 'components/recruit/RecruitLayout';
-import Statistics from 'pages/statistics';
+import Statistics from 'pages/takgu/statistics';
 import useAnnouncementCheck from 'hooks/Layout/useAnnouncementCheck';
 import useGetUserSeason from 'hooks/Layout/useGetUserSeason';
 import useLiveCheck from 'hooks/Layout/useLiveCheck';
@@ -54,20 +54,21 @@ export default function AppLayout({ children }: AppLayoutProps) {
         <Statistics />
       </UserLayout>
     );
-
-  return (
-    <UserLayout>
-      <HeaderStateContext>
-        <Header />
-      </HeaderStateContext>
-      <PlayButton />
-      <div className={styles.topInfo}>
-        <Megaphone />
-        {openCurrentMatch && <CurrentMatch />}
-        {presentPath === '/' && <MainPageProfile />}
-      </div>
-      {children}
-      <Footer />
-    </UserLayout>
-  );
+  if (presentPath.includes('/takgu'))
+    return (
+      <UserLayout>
+        <HeaderStateContext>
+          <Header />
+        </HeaderStateContext>
+        <PlayButton />
+        <div className={styles.topInfo}>
+          <Megaphone />
+          {openCurrentMatch && <CurrentMatch />}
+          {presentPath === '/' && <MainPageProfile />}
+        </div>
+        {children}
+        <Footer />
+      </UserLayout>
+    );
+  return <>{children}</>;
 }

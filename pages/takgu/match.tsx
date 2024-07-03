@@ -43,7 +43,11 @@ export default function MatchPage() {
     for (let i = 0; i < matchBoards.length; i++) {
       const matchSlot = matchBoards[i];
       for (let j = 0; j < matchSlot.length; j++) {
-        if (matchSlot[j].status === 'open' || matchSlot[j].status === 'match' || matchSlot[j].status === 'mytable') {
+        if (
+          matchSlot[j].status === 'open' ||
+          matchSlot[j].status === 'match' ||
+          matchSlot[j].status === 'mytable'
+        ) {
           return stringToHourMin(matchSlot[j].startTime).nHour;
         }
       }

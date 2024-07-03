@@ -31,7 +31,7 @@ export default function Section({ sectionTitle, path }: SectionProps) {
     >
       <div className={styles['titleWrap']}>
         <span>{sectionTitle}</span>
-        <button onClick={() => router.push(`/${path}`)}>
+        <button onClick={() => router.push(`/takgu/${path}`)}>
           <FaChevronRight />
         </button>
       </div>
