@@ -34,7 +34,7 @@ export default function TournamentPreview() {
   return (
     <div
       className={styles.rollingBanner}
-      onClick={() => router.push('tournament')}
+      onClick={() => router.push('/takgu/tournament')}
     >
       <Virtuoso
         className={styles.virtuoso}

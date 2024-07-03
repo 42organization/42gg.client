@@ -7,7 +7,7 @@ const useNoCoinModal = () => {
 
   const onPlay = () => {
     setModal({ modalName: null });
-    router.push(`/match`);
+    router.push(`/takgu/match`);
   };
 
   const onCancel = () => {

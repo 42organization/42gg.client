@@ -14,7 +14,7 @@ export default function Game() {
   useColorMode('GAME');
 
   const clickTitleHandler = () => {
-    router.push(`/game`, undefined, {
+    router.push(`/takgu/game`, undefined, {
       shallow: true,
     });
     setClickTitle(true);

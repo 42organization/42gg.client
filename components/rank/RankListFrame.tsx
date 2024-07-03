@@ -27,7 +27,7 @@ export default function RankListFrame({
 
   const pageChangeHandler = (pages: number) => {
     pageInfo.setPage(pages);
-    router.push('/rank');
+    router.push('/takgu/rank');
   };
 
   return (

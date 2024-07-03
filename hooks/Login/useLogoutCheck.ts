@@ -20,7 +20,7 @@ const useLogoutCheck = (): useLogoutCheckReturn => {
     await instance.post('/pingpong/users/logout');
     localStorage.removeItem('42gg-token');
     setLoggedIn(false);
-    router.push('/');
+    router.push('/takgu');
   };
 
   return [onReturn, onLogout];

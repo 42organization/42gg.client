@@ -17,7 +17,7 @@ const MyApplicationInfo = ({
   const onCheck = () => {
     if (!applicationId) return;
     router.push(
-      `/recruit/my-application?recruitId=${recruitId}&applicationId=${applicationId}`
+      `/takgu/recruit/my-application?recruitId=${recruitId}&applicationId=${applicationId}`
     );
   };
 

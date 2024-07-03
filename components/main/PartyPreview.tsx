@@ -8,7 +8,7 @@ export default function PartyPreview() {
   const router = useRouter();
 
   const movePartyRoom = async (roomId: number) => {
-    await router.push(`/party`);
+    await router.push(`/takgu/party`);
     router.push(`/takgu/party/room?id=${roomId}`);
   };
   return (

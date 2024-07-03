@@ -30,7 +30,7 @@ export default function UserGameSearchBar() {
   ) => {
     setKeyword(intraId);
     setShowDropDown(false);
-    router.push(`/game?intraId=${intraId}`, undefined, {
+    router.push(`/takgu/game?intraId=${intraId}`, undefined, {
       shallow: true,
     });
   };

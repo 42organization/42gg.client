@@ -7,15 +7,15 @@ const PlayButton = () => {
   const router = useRouter();
 
   const onClickMatch = () => {
-    router.replace('/');
-    router.push(`/match`);
+    router.replace('/takgu');
+    router.push(`/takgu/match`);
   };
 
   if (
-    presentPath === '/match' ||
-    presentPath === '/manual' ||
-    presentPath === '/store' ||
-    presentPath.startsWith('/party')
+    presentPath === '/takgu/match' ||
+    presentPath === '/takgu/manual' ||
+    presentPath === '/takgu/store' ||
+    presentPath.startsWith('/takgu/party')
   )
     return null;
   return (

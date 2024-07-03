@@ -44,7 +44,7 @@ const TournamentMegaphone = () => {
   }
 
   const goTournamentPage = (event: React.MouseEvent<HTMLDivElement>) => {
-    router.push('tournament');
+    router.push('/takgu/tournament');
   };
 
   useEffect(() => {

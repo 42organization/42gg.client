@@ -4,7 +4,7 @@ import styles from 'styles/admin/AdminReject.module.scss';
 
 export default function AdminReject() {
   const goHome = () => {
-    router.push('/');
+    router.push('/takgu');
   };
 
   return (

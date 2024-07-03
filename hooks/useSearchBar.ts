@@ -60,7 +60,7 @@ export default function useSearchBar(): useSearchBarReturn {
         if (data === keyword) {
           setShowDropDown(false);
           event.currentTarget.blur();
-          router.push(`/users/detail?intraId=${keyword}`);
+          router.push(`/takgu/users/detail?intraId=${keyword}`);
         }
       });
     }
@@ -72,7 +72,7 @@ export default function useSearchBar(): useSearchBarReturn {
         if (data === keyword) {
           setShowDropDown(false);
           event.currentTarget.blur();
-          router.push(`/game?intraId=${keyword}`, undefined, {
+          router.push(`/takgu/game?intraId=${keyword}`, undefined, {
             shallow: true,
           });
         }
