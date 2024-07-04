@@ -25,7 +25,7 @@ import {
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/takgu/admin/common/AdminTable';
-import styles from 'styles/admin/recruitments/RecruitmentsUser.module.scss';
+import styles from 'styles/takgu/admin/recruitments/RecruitmentsUser.module.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const tableTitle: { [key: string]: string } = {

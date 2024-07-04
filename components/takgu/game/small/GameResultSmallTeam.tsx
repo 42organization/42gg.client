@@ -1,6 +1,6 @@
 import { Team } from 'types/gameTypes';
 import PlayerImage from 'components/takgu/PlayerImage';
-import styles from 'styles/game/GameResultItem.module.scss';
+import styles from 'styles/takgu/game/GameResultItem.module.scss';
 
 interface GameResultSmallTeamProps {
   team: Team;

@@ -3,7 +3,7 @@ import { TableCell, TableHead, TableRow } from '@mui/material';
 import { TableName } from 'types/admin/tableTypes';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/takgu/admin/table';
-import styles from 'styles/admin/common/AdminTable.module.scss';
+import styles from 'styles/takgu/admin/common/AdminTable.module.scss';
 
 interface IAdminTableHead {
   tableName: TableName;

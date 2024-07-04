@@ -1,5 +1,5 @@
 import { MouseEventHandler } from 'react';
-import styles from 'styles/UI/StyledButton.module.scss';
+import styles from 'styles/takgu/UI/StyledButton.module.scss';
 
 type StyledButtonProps = {
   onClick: MouseEventHandler<HTMLButtonElement>;

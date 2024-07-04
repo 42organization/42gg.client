@@ -1,0 +1,28 @@
+@import 'styles/takgu/common.scss';
+
+.button {
+  display: flex;
+  padding: 0.2rem;
+  cursor: pointer;
+  background: linear-gradient(
+    to bottom right,
+    #0030ac 0%,
+    #90a5ff 50%,
+    #cb8fff 100%
+  );
+  border-width: 0;
+  border-radius: 3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  height: 2.3rem;
+  font-size: $big-font;
+  color: white;
+  background-color: black;
+  border-radius: 2.5rem;
+  justify-content: center;
+  align-items: center;
+}

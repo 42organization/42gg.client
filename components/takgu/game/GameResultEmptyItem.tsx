@@ -1,4 +1,4 @@
-import styles from 'styles/game/GameResultEmpty.module.scss';
+import styles from 'styles/takgu/game/GameResultEmpty.module.scss';
 
 interface GameResultEmptyItemProps {
   status: string;

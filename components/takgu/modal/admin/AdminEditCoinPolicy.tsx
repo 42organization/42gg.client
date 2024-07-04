@@ -5,7 +5,7 @@ import { IcoinPolicy } from 'types/admin/adminCoinTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/admin/modal/AdminEditCoinPolicy.module.scss';
+import styles from 'styles/takgu/admin/modal/AdminEditCoinPolicy.module.scss';
 
 export default function AdminEditCoinPolicyModal(props: IcoinPolicy) {
   const { attendance, normal, rankWin, rankLose } = props;

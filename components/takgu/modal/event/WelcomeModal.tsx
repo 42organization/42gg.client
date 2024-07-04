@@ -10,7 +10,7 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
-import styles from 'styles/modal/event/WelcomeModal.module.scss';
+import styles from 'styles/takgu/modal/event/WelcomeModal.module.scss';
 
 export default function WelcomeModal() {
   const setModal = useSetRecoilState<Modal>(modalState);

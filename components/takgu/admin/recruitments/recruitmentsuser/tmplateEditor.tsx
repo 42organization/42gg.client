@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import { IRecruitMessageTemplate } from 'types/recruit/recruitments';
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/admin/modal/AdminRecruitMessageTemplateModal.module.scss';
+import styles from 'styles/takgu/admin/modal/AdminRecruitMessageTemplateModal.module.scss';
 
 function TemplateEditor({ messageType, content }: IRecruitMessageTemplate) {
   const [template, setTemplate] = useState<IRecruitMessageTemplate>({

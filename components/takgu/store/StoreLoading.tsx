@@ -1,5 +1,5 @@
 import { RiPingPongFill } from 'react-icons/ri';
-import styles from 'styles/store/Inventory.module.scss';
+import styles from 'styles/takgu/store/Inventory.module.scss';
 
 export default function StoreLoading() {
   return (

@@ -6,7 +6,7 @@ import PartyCreate from 'components/takgu/party/PartyCreate';
 import usePartyCategory from 'hooks/takgu/party/usePartyCategory';
 import usePartyColorMode from 'hooks/takgu/party/usePartyColorMode';
 import usePartyForm from 'hooks/takgu/party/usePartyForm';
-import styles from 'styles/party/PartyCreate.module.scss';
+import styles from 'styles/takgu/party/PartyCreate.module.scss';
 
 export default function PartyCreatePage() {
   const router = useRouter();

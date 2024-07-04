@@ -1,7 +1,7 @@
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { ICoinHistory } from 'types/userTypes';
 import { dateToStringShort } from 'utils/handleTime';
-import styles from 'styles/modal/store/CoinHistoryDetails.module.scss';
+import styles from 'styles/takgu/modal/store/CoinHistoryDetails.module.scss';
 
 export default function CoinHistoryDetails({
   details,

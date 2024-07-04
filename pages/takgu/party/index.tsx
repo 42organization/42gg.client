@@ -4,7 +4,7 @@ import usePartyCategory from 'hooks/takgu/party/usePartyCategory';
 import usePartyColorMode from 'hooks/takgu/party/usePartyColorMode';
 import usePartyPenaltyTimer from 'hooks/takgu/party/usePartyPenaltyTimer';
 import usePartyRoomList from 'hooks/takgu/party/usePartyRoomList';
-import styles from 'styles/party/PartyMain.module.scss';
+import styles from 'styles/takgu/party/PartyMain.module.scss';
 
 export default function PartyMainPage() {
   const router = useRouter();

@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import { colorModeState } from 'utils/recoil/colorMode';
-import styles from 'styles/Layout/Layout.module.scss';
+import styles from 'styles/takgu/Layout/Layout.module.scss';
 
 const UserLayout = ({ children }: { children: React.ReactNode }) => {
   const colorMode = useRecoilValue(colorModeState);

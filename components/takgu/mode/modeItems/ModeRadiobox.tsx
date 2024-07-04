@@ -1,6 +1,6 @@
 import { SeasonMode } from 'types/mainType';
 import { RadioBoxWrapper } from 'components/takgu/mode/modeItems/RadioBoxWrapper';
-import styles from 'styles/mode/ModeRadiobox.module.scss';
+import styles from 'styles/takgu/mode/ModeRadiobox.module.scss';
 
 interface ModeRadioboxProps {
   mode: SeasonMode;

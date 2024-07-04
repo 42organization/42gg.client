@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from 'styles/admin/SideNavContent.module.scss';
+import styles from 'styles/takgu/admin/SideNavContent.module.scss';
 
 type SideNavContentProps = {
   url: string;

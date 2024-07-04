@@ -12,7 +12,7 @@ import {
   IrecruitUserTable,
 } from 'types/admin/adminRecruitmentsTypes';
 import useRecruitmentUserFilter from 'hooks/takgu/recruitments/useRecruitmentUserFilter';
-import styles from 'styles/admin/recruitments/RecruitmentsUser.module.scss';
+import styles from 'styles/takgu/admin/recruitments/RecruitmentsUser.module.scss';
 import RecruitSearchBar from './RecruitSearchBar';
 
 const ITEM_HEIGHT = 48;

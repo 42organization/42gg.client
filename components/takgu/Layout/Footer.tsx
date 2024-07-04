@@ -1,4 +1,4 @@
-import styles from 'styles/Layout/Footer.module.scss';
+import styles from 'styles/takgu/Layout/Footer.module.scss';
 
 export default function Footer() {
   return (

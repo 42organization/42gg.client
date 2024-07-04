@@ -9,7 +9,7 @@ import MatchBoard from 'components/takgu/match/MatchBoard';
 import MatchModeWrap from 'components/takgu/mode/modeWraps/MatchModeWrap';
 import useGetReloadMatchHandler from 'hooks/match/useGetReloadMatchHandler';
 import useColorMode from 'hooks/useColorMode';
-import styles from 'styles/match/match.module.scss';
+import styles from 'styles/takgu/match/match.module.scss';
 
 export default function MatchPage() {
   const content = {

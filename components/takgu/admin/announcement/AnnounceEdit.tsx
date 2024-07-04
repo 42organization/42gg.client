@@ -5,7 +5,7 @@ import { instanceInManage, instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import DynamicQuill from 'components/DynamicQuill';
 import { useUser } from 'hooks/takgu/Layout/useUser';
-import styles from 'styles/admin/announcement/AnnounceEdit.module.scss';
+import styles from 'styles/takgu/admin/announcement/AnnounceEdit.module.scss';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 

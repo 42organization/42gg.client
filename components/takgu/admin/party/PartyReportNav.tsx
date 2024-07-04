@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from 'styles/party/PartyNav.module.scss';
+import styles from 'styles/takgu/party/PartyNav.module.scss';
 import AdminCommentReport from './AdminCommentReport';
 import AdminPartyNoShowReport from './AdminPartyNoShow';
 import AdminPartyRoomReport from './AdminPartyRoomReport';

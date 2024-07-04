@@ -17,7 +17,7 @@ import useLiveCheck from 'hooks/takgu/Layout/useLiveCheck';
 import useSetAfterGameModal from 'hooks/takgu/Layout/useSetAfterGameModal';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import useAxiosResponse from 'hooks/useAxiosResponse';
-import styles from 'styles/Layout/Layout.module.scss';
+import styles from 'styles/takgu/Layout/Layout.module.scss';
 import PlayButton from './PlayButton';
 import UserLayout from './UserLayout';
 import ModalProvider from '../modal/ModalProvider';

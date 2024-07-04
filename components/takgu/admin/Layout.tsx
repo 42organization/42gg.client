@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ThemeProvider, createTheme } from '@mui/material';
 import SideNav from 'components/takgu/admin/SideNav';
 import useAxiosWithToast from 'hooks/useAxiosWithToast';
-import styles from 'styles/admin/Layout.module.scss';
+import styles from 'styles/takgu/admin/Layout.module.scss';
 
 type AdminLayoutProps = {
   children: React.ReactNode;

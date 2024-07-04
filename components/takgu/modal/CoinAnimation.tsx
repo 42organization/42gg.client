@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import styles from 'styles/modal/CoinAnimation.module.scss';
+import styles from 'styles/takgu/modal/CoinAnimation.module.scss';
 
 interface amountProps {
   amount: number;

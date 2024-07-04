@@ -13,7 +13,7 @@ import NotiStateContext, {
 } from 'components/takgu/Layout/NotiBar/NotiContext';
 import NotiItem from 'components/takgu/Layout/NotiBar/NotiItem';
 import NotiEmptyEmoji from 'public/image/takgu/noti_empty.svg';
-import styles from 'styles/Layout/NotiBar.module.scss';
+import styles from 'styles/takgu/Layout/NotiBar.module.scss';
 
 export default function NotiBar() {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);

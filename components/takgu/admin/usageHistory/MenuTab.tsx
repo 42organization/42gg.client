@@ -3,7 +3,7 @@ import MegaphoneList from 'components/takgu/admin/usageHistory/MegaphoneList';
 import ProfileDeleteHistoryList from 'components/takgu/admin/usageHistory/ProfileDeleteHistoryList';
 import ProfileList from 'components/takgu/admin/usageHistory/ProfileList';
 import ProfileListCurrent from 'components/takgu/admin/usageHistory/ProfileListCurrent';
-import styles from 'styles/admin/usageHistory/MenuTab.module.scss';
+import styles from 'styles/takgu/admin/usageHistory/MenuTab.module.scss';
 
 function MenuTab() {
   const [tabIdx, setTabIdx] = useState(0);

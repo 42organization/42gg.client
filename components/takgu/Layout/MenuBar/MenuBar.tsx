@@ -10,7 +10,7 @@ import {
 } from 'components/takgu/Layout/MenuBar/MenuBarElement';
 import PlayerImage from 'components/takgu/PlayerImage';
 import { useUser } from 'hooks/takgu/Layout/useUser';
-import styles from 'styles/Layout/MenuBar.module.scss';
+import styles from 'styles/takgu/Layout/MenuBar.module.scss';
 
 const MenuTop = () => {
   const HeaderState = useContext<HeaderContextState | null>(HeaderContext);

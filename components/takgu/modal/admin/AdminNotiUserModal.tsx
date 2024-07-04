@@ -5,7 +5,7 @@ import { IoIosCloseCircle } from 'react-icons/io';
 import { instance, instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/admin/modal/AdminNoti.module.scss';
+import styles from 'styles/takgu/admin/modal/AdminNoti.module.scss';
 
 let timer: ReturnType<typeof setTimeout>;
 

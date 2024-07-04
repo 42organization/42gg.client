@@ -1,6 +1,6 @@
 import { StoreMode } from 'types/storeTypes';
 import { RadioBoxWrapper } from 'components/takgu/mode/modeItems/RadioBoxWrapper';
-import styles from 'styles/mode/ModeRadiobox.module.scss';
+import styles from 'styles/takgu/mode/ModeRadiobox.module.scss';
 
 type StoreModeRadioBoxProps = {
   mode: StoreMode;

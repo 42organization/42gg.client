@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import style from 'styles/admin/notification/CreateNotificationButton.module.scss';
+import style from 'styles/takgu/admin/notification/CreateNotificationButton.module.scss';
 
 export default function CreateNotiButton() {
   const setModal = useSetRecoilState(modalState);

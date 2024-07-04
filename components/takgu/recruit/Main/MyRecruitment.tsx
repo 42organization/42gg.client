@@ -4,8 +4,8 @@ import CollapseListItem from 'components/takgu/recruit/Main/CollapseListItem';
 import MyApplicationInfo from 'components/takgu/recruit/Main/MyApplicationInfo';
 import MyRecruitStatus from 'components/takgu/recruit/Main/MyRecruitStatus';
 import useGetRecruitResult from 'hooks/takgu/recruit/useGetRecruitResult';
-import style from 'styles/recruit/Main/myRecruitment.module.scss';
-import textStyle from 'styles/recruit/text.module.scss';
+import style from 'styles/takgu/recruit/Main/myRecruitment.module.scss';
+import textStyle from 'styles/takgu/recruit/text.module.scss';
 
 const MyRecruitment = ({ applicationId }: { applicationId?: number }) => {
   const router = useRouter();

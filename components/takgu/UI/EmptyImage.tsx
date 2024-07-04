@@ -1,5 +1,5 @@
 import NotiEmptyEmoji from 'public/image/takgu/noti_empty.svg';
-import styles from 'styles/UI/EmptyImage.module.scss';
+import styles from 'styles/takgu/UI/EmptyImage.module.scss';
 
 function EmptyImage() {
   return (

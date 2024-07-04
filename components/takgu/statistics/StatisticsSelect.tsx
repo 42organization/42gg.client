@@ -1,6 +1,6 @@
 import StatisticsChart from 'components/takgu/statistics/StatisticsCharts';
 import useChartSelection from 'hooks/takgu/statistics/useChartSelection';
-import styles from 'styles/statistics/StatisticsSelect.module.scss';
+import styles from 'styles/takgu/statistics/StatisticsSelect.module.scss';
 
 export default function StatisticsSelect() {
   const { selectedChart, setSelectedChart, chartList } = useChartSelection();

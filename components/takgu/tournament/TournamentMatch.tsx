@@ -5,7 +5,7 @@ import {
 import { useRecoilValue } from 'recoil';
 import { clickedTournamentState } from 'utils/recoil/tournament';
 import BouncingDots from 'components/takgu/UI/BouncingDots';
-import styles from 'styles/tournament/TournamentMatch.module.scss';
+import styles from 'styles/takgu/tournament/TournamentMatch.module.scss';
 interface TournamentMatchPartyProps {
   party: Participant;
   teamNameFallback: string;

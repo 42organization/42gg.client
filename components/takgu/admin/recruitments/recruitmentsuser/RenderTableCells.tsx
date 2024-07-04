@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { TableCell, TableRow, IconButton, TableRowProps } from '@mui/material';
 import { IrecruitUserTable } from 'types/admin/adminRecruitmentsTypes';
 import { DetailContentHover } from 'components/takgu/admin/common/AdminTable';
-import styles from 'styles/admin/recruitments/RecruitmentsUser.module.scss';
+import styles from 'styles/takgu/admin/recruitments/RecruitmentsUser.module.scss';
 
 interface ExpandableTableRowProps extends TableRowProps {
   children: React.ReactNode;

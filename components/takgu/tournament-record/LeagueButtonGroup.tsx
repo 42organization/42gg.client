@@ -1,5 +1,5 @@
 import React, { SetStateAction, useState } from 'react';
-import styles from 'styles/tournament-record/LeagueButtonGroup.module.scss';
+import styles from 'styles/takgu/tournament-record/LeagueButtonGroup.module.scss';
 
 interface LeagueButtonGroupProps {
   onSelect: React.Dispatch<SetStateAction<string>>;

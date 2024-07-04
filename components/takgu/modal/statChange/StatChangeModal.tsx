@@ -8,7 +8,7 @@ import { modalState } from 'utils/recoil/modal';
 import ExpStat from 'components/takgu/modal/statChange/ExpStat';
 import PppStat from 'components/takgu/modal/statChange/PppStat';
 import useAxiosGet from 'hooks/useAxiosGet';
-import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
+import styles from 'styles/takgu/modal/afterGame/StatChangeModal.module.scss';
 
 export default function StatChangeModal({ gameId, mode }: Exp) {
   const setModal = useSetRecoilState(modalState);

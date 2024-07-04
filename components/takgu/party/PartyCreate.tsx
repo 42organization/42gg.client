@@ -14,7 +14,7 @@ import {
 import LoadingSpinner from 'components/takgu/UI/LoadingSpinner';
 import usePartyForm from 'hooks/takgu/party/usePartyForm';
 import { usePartyTemplate } from 'hooks/takgu/party/usePartyTemplate';
-import styles from 'styles/party/PartyCreate.module.scss';
+import styles from 'styles/takgu/party/PartyCreate.module.scss';
 
 // ================================================================================
 // CategorySelection: 방 카테고리 및 템플릿 선택

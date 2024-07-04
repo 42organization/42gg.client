@@ -1,4 +1,4 @@
-import styles from 'styles/mode/ModeRadiobox.module.scss';
+import styles from 'styles/takgu/mode/ModeRadiobox.module.scss';
 
 type RadioBoxWrapperProps = {
   children: React.ReactNode;

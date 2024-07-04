@@ -4,7 +4,7 @@ import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import { TournamentInfo } from 'types/tournamentTypes';
 import { instance } from 'utils/axios';
 import useInterval from 'hooks/useInterval';
-import styles from 'styles/Layout/MegaPhone.module.scss';
+import styles from 'styles/takgu/Layout/MegaPhone.module.scss';
 
 interface IMegaphoneContent {
   megaphoneId?: number;

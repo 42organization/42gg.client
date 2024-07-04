@@ -1,6 +1,6 @@
 import StoreItemHistory from 'components/takgu/admin/store/StoreItemHistory';
 import StoreItemList from 'components/takgu/admin/store/StoreItemList';
-import styles from 'styles/admin/store/StoreMain.module.scss';
+import styles from 'styles/takgu/admin/store/StoreMain.module.scss';
 
 function StoreMain() {
   return (

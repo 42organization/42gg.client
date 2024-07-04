@@ -13,7 +13,7 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
-import styles from 'styles/modal/event/TournamentRegistryModal.module.scss';
+import styles from 'styles/takgu/modal/event/TournamentRegistryModal.module.scss';
 import 'react-quill/dist/quill.bubble.css';
 
 export default function TournamentRegistryModal({

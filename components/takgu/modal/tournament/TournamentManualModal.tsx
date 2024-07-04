@@ -4,7 +4,7 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
-import styles from 'styles/modal/match/MatchManualModal.module.scss';
+import styles from 'styles/takgu/modal/match/MatchManualModal.module.scss';
 
 type contentType = {
   title: React.ReactNode;

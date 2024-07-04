@@ -1,0 +1,137 @@
+@import 'styles/takgu/common.scss';
+
+.backdrop {
+  @include backdrop;
+  z-index: 4;
+}
+
+.container {
+  @include menu-noti-Bar;
+  display: flex;
+  width: 20rem;
+  flex-direction: column;
+  padding: 2.8rem 2.5rem 2rem 1.5rem;
+  margin-left: auto;
+  background: rgba(244, 221, 247, 1);
+  justify-content: flex-start;
+
+  .closeButtonWrapper {
+    padding-bottom: 1.4rem;
+    button {
+      all: unset;
+      width: 1.2rem;
+      margin-left: auto;
+      font-size: 1.5rem;
+      color: rgba(101, 97, 102, 1);
+      text-align: center;
+      text-shadow: none;
+      cursor: pointer;
+    }
+  }
+
+  .buttonWrap {
+    display: flex;
+    padding-bottom: 1.625rem;
+    padding-left: 0.3rem;
+    justify-content: space-between;
+    align-items: center;
+
+    .reloadButton,
+    .spinReloadButton {
+      @include reload-button;
+      color: rgba(101, 97, 102, 1);
+      cursor: pointer;
+      background: linear-gradient(180deg, #e5c9e8 0%, #e4c8e8 100%);
+    }
+    .spinReloadButton {
+      cursor: wait;
+      opacity: 0.7;
+      animation: spin 1s infinite;
+    }
+    .deleteButton {
+      display: flex;
+      padding: 0.5rem 1rem;
+      // font-family: 'Heebo', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(101, 97, 102, 1);
+      cursor: pointer;
+      background: linear-gradient(180deg, #e5cae9 0%, #e4c8e8 100%);
+      border: 0;
+      border-radius: 0.3rem;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.notiEmptyWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2.8rem;
+  // font-family: 'Fenix', sans-serif;
+  .notiEmptyText {
+    padding-bottom: 1.25rem;
+    // font-family: 'Heebo', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: rgba(141, 119, 144, 1);
+  }
+  .threeDotImage {
+    display: flex;
+    width: 6.25rem;
+    padding-bottom: 1.25rem;
+    justify-content: space-between;
+    align-items: center;
+    div {
+      width: 0.75rem;
+      height: 0.75rem;
+      background: rgba(169, 128, 175, 1);
+      border-radius: 50%;
+    }
+  }
+}
+
+.notiExistWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  // font-family: 'Fenix', sans-serif;
+}
+
+.notiDecorate {
+  position: relative;
+  width: 100%;
+  padding-top: 3rem;
+  margin-top: auto;
+
+  .circleOne {
+    position: relative;
+    top: 60%;
+    left: 25%;
+    z-index: 1;
+    width: 8.5rem;
+    height: 8.5rem;
+    background-color: rgba(238, 201, 243, 0.5);
+    border-radius: 50%;
+  }
+
+  .circleTwo {
+    position: relative;
+    top: 33%;
+    left: -10%;
+    width: 12.5rem;
+    height: 6.25rem;
+    background-color: rgba(243, 211, 248, 1);
+    border-radius: 6.25rem 6.25rem 0rem 0rem;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

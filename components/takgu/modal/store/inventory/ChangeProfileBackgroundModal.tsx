@@ -13,7 +13,7 @@ import {
 } from 'components/takgu/modal/ModalButton';
 import GachaBall from 'components/takgu/modal/store/inventory/GachaBall';
 import { ItemCautionContainer } from 'components/takgu/modal/store/inventory/ItemCautionContainer';
-import styles from 'styles/modal/store/InventoryModal.module.scss';
+import styles from 'styles/takgu/modal/store/InventoryModal.module.scss';
 
 const caution = [
   '색상은 랜덤으로 결정됩니다.',

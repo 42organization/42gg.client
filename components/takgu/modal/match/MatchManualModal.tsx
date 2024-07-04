@@ -8,7 +8,7 @@ import {
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
 import ModeRadiobox from 'components/takgu/mode/modeItems/ModeRadiobox';
-import styles from 'styles/modal/match/MatchManualModal.module.scss';
+import styles from 'styles/takgu/modal/match/MatchManualModal.module.scss';
 
 type contentType = {
   title: React.ReactNode;

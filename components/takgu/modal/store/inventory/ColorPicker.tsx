@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { HexColorInput, HexColorPicker } from 'react-colorful';
 import { MdOutlineColorLens, MdColorLens } from 'react-icons/md';
-import styles from 'styles/modal/store/ColorPicker.module.scss';
+import styles from 'styles/takgu/modal/store/ColorPicker.module.scss';
 
 type ColorPickerProps = {
   color: string;

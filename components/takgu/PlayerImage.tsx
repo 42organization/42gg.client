@@ -1,7 +1,7 @@
 import Image from 'next/legacy/image';
 import { useState } from 'react';
 import fallBack from 'public/image/takgu/fallBackSrc.jpeg';
-import styles from 'styles/PlayerImage.module.scss';
+import styles from 'styles/takgu/PlayerImage.module.scss';
 
 interface PlayerImageProps {
   src: string;

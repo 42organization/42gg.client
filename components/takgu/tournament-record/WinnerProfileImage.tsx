@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useState, useEffect, SetStateAction } from 'react';
 import { useSwiper } from 'swiper/react';
 import { TournamentInfo } from 'types/tournamentTypes';
-import styles from 'styles/tournament-record/WinnerProfileImage.module.scss';
+import styles from 'styles/takgu/tournament-record/WinnerProfileImage.module.scss';
 
 interface WinnerProfileImageProps {
   tournament: TournamentInfo;

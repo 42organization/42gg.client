@@ -4,7 +4,7 @@ import { SeasonMode } from 'types/mainType';
 import GameResult from 'components/takgu/game/GameResult';
 import GameModeWrap from 'components/takgu/mode/modeWraps/GameModeWrap';
 import useColorMode from 'hooks/useColorMode';
-import styles from 'styles/game/GameResultItem.module.scss';
+import styles from 'styles/takgu/game/GameResultItem.module.scss';
 
 export default function Game() {
   const router = useRouter();

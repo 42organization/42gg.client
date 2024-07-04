@@ -14,7 +14,7 @@ import { instanceInManage } from 'utils/axios';
 import { dateToKRIOSString, dateToKRLocaleTimeString } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
 import DynamicQuill from 'components/DynamicQuill';
-import styles from 'styles/admin/tournament/TournamentEdit.module.scss';
+import styles from 'styles/takgu/admin/tournament/TournamentEdit.module.scss';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import TournamentModalPreview from './TournamentModalPreview';

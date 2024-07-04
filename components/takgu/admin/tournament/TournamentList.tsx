@@ -29,7 +29,7 @@ import {
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/takgu/admin/common/AdminTable';
-import styles from 'styles/admin/tournament/TournamentList.module.scss';
+import styles from 'styles/takgu/admin/tournament/TournamentList.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   title: '토너먼트 이름',

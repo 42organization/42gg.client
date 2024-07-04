@@ -1,5 +1,5 @@
 import { TournamentInfo } from 'types/tournamentTypes';
-import styles from 'styles/tournament-record/WinnerTournamentInfo.module.scss';
+import styles from 'styles/takgu/tournament-record/WinnerTournamentInfo.module.scss';
 
 interface WinnerTournamentInfoProps {
   tournamentInfo: TournamentInfo | undefined;

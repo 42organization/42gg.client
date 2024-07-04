@@ -4,7 +4,7 @@ import { userImages } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
 import RankListItemMain from 'components/takgu/rank/topRank/RankListItemMain';
 import useRankListMain from 'hooks/takgu/rank/useRankListMain';
-import styles from 'styles/rank/RankListMain.module.scss';
+import styles from 'styles/takgu/rank/RankListMain.module.scss';
 
 interface RankListMainProps {
   isMain: boolean;

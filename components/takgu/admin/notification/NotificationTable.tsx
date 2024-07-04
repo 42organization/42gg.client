@@ -23,7 +23,7 @@ import {
   AdminTableHead,
 } from 'components/takgu/admin/common/AdminTable';
 import CreateNotiButton from 'components/takgu/admin/notification/CreateNotiButton';
-import styles from 'styles/admin/notification/NotificationTable.module.scss';
+import styles from 'styles/takgu/admin/notification/NotificationTable.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: 'ID',

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { sleep } from 'utils/sleep';
-import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
+import styles from 'styles/takgu/modal/afterGame/StatChangeModal.module.scss';
 
 interface PppChangeProps {
   stat: { [key: string]: number };

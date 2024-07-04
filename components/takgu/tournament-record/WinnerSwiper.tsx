@@ -3,7 +3,7 @@ import { InfiniteData } from 'react-query';
 import { EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide, SwiperRef, SwiperClass } from 'swiper/react';
 import { TournamentInfo, TournamentData } from 'types/tournamentTypes';
-import styles from 'styles/tournament-record/WinnerSwiper.module.scss';
+import styles from 'styles/takgu/tournament-record/WinnerSwiper.module.scss';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import WinnerProfileImage from './WinnerProfileImage';

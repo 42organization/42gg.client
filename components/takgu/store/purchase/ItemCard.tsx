@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import { Item } from 'types/itemTypes';
 import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
-import styles from 'styles/store/ItemCard.module.scss';
+import styles from 'styles/takgu/store/ItemCard.module.scss';
 
 export default function ItemCard({ item }: { item: Item }) {
   const setModal = useSetRecoilState<Modal>(modalState);

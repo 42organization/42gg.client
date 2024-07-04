@@ -19,7 +19,7 @@ import {
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/takgu/admin/common/AdminTable';
-import styles from 'styles/admin/party/AdminPartyCommon.module.scss';
+import styles from 'styles/takgu/admin/party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: '번호',

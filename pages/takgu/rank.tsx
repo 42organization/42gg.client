@@ -4,7 +4,7 @@ import RankModeWrap from 'components/takgu/mode/modeWraps/RankModeWrap';
 import MyRank from 'components/takgu/rank/MyRank';
 import RankList from 'components/takgu/rank/RankList';
 import useColorMode from 'hooks/useColorMode';
-import styles from 'styles/rank/RankList.module.scss';
+import styles from 'styles/takgu/rank/RankList.module.scss';
 
 export default function Rank() {
   const Mode = useRecoilValue(colorToggleSelector);

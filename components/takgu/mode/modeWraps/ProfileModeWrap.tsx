@@ -1,7 +1,7 @@
 import React from 'react';
 import SeasonDropDown from 'components/takgu/mode/modeItems/SeasonDropDown';
 import useSeasonDropDown from 'hooks/takgu/mode/useSeasonDropDown';
-import styles from 'styles/mode/ModeWrap.module.scss';
+import styles from 'styles/takgu/mode/ModeWrap.module.scss';
 
 interface ProfileModeWrapProps {
   children: React.ReactNode;

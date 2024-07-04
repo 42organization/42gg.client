@@ -1,8 +1,8 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { HomeOutlined } from '@mui/icons-material';
 import { Button } from '@mui/material';
-import commonStyle from 'styles/recruit/common.module.scss';
-import textStyle from 'styles/recruit/text.module.scss';
+import commonStyle from 'styles/takgu/recruit/common.module.scss';
+import textStyle from 'styles/takgu/recruit/text.module.scss';
 
 const StickyHeader = ({ headerTitle }: { headerTitle: string }) => {
   const router = useRouter();

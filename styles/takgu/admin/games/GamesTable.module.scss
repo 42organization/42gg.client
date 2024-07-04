@@ -1,0 +1,107 @@
+@import 'styles/takgu/common.scss';
+@import 'styles/takgu/admin/common.scss';
+@import 'styles/takgu/admin/common/Pagination.module.scss';
+
+.gamesWrap {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  color: black;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 10px auto;
+  }
+  .title {
+    font-size: $big-font;
+    font-weight: 600;
+    line-height: 150%;
+  }
+  .tableWrap {
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    flex-direction: column;
+    padding: 26px 10px;
+    margin: 10px auto;
+    border-radius: 10px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+    gap: 26px;
+    .tableRow {
+      box-sizing: content-box;
+      display: flex;
+      height: 6.25rem;
+      justify-content: flex-end;
+      align-items: center;
+      .gameId {
+        display: flex;
+        width: 40px;
+        height: 40px;
+        margin: 20px 30px;
+        background-color: #eff0f3;
+        border-radius: 5px;
+        justify-content: center;
+        align-items: center;
+      }
+      .gameInfo {
+        display: flex;
+        width: 12.5rem;
+        height: 6.25rem;
+        flex-direction: column;
+        padding: 0 0 0 11px;
+        background-color: #eff0f3;
+        justify-content: center;
+      }
+      .tableTeam {
+        width: 12.5rem;
+        height: 6.25rem;
+        :nth-child(1) {
+          display: flex;
+          height: 30%;
+          background: #f9fafb;
+          border: 1px solid #e5e7eb;
+          justify-content: center;
+          align-items: center;
+        }
+        :nth-child(2) {
+          display: flex;
+          height: 70%;
+          line-height: 150%;
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+      .win {
+        color: #099255b0;
+        background: #e6faf1;
+        border: 1px solid #aedcc7;
+      }
+      .lose {
+        color: #f5353580;
+        background: #f9eded;
+        border: 1px solid #efc4c4;
+      }
+      .normal {
+        background-color: white;
+        border: 1px solid #e5e7eb;
+      }
+    }
+  }
+}
+
+.modifyBtn {
+  @include admin-button('PALE-BLUE');
+  padding: 0.344rem 0.75rem;
+  margin: 0 30px;
+  border-radius: 0.625rem;
+  &:disabled {
+    @include admin-button('PALE-BLUE', disabled);
+  }
+}
+
+@include pagination;

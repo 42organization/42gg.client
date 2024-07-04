@@ -5,7 +5,7 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
-import styles from 'styles/modal/match/MatchRejectModal.module.scss';
+import styles from 'styles/takgu/modal/match/MatchRejectModal.module.scss';
 
 export default function MatchRejectModal() {
   const setModal = useSetRecoilState(modalState);

@@ -8,7 +8,7 @@ import {
 } from 'types/admin/adminRecruitmentsTypes';
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/admin/recruitments/recruitmentDetail/components/ActionSelectorButtons.module.scss';
+import styles from 'styles/takgu/admin/recruitments/recruitmentDetail/components/ActionSelectorButtons.module.scss';
 
 interface ActionSelectorButtonsProps {
   setPage: Dispatch<SetStateAction<RecruitmentsPages>>;

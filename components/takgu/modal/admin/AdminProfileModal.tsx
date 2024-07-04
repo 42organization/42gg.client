@@ -7,7 +7,7 @@ import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import useUploadImg from 'hooks/useUploadImg';
-import styles from 'styles/admin/modal/AdminProfile.module.scss';
+import styles from 'styles/takgu/admin/modal/AdminProfile.module.scss';
 
 const STAT_MSG_LIMIT = 30;
 

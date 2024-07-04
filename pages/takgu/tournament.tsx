@@ -3,7 +3,7 @@ import { modalState } from 'utils/recoil/modal';
 import TournamentCard from 'components/takgu/tournament/TournamentCard';
 import UserTournamentBraket from 'components/takgu/tournament/UserTournamentBracket';
 import useBeforeLiveTournamentData from 'hooks/takgu/tournament/useBeforeLiveTournamentData';
-import styles from 'styles/tournament/TournamentContainer.module.scss';
+import styles from 'styles/takgu/tournament/TournamentContainer.module.scss';
 
 export default function Tournament() {
   const { data, isLoading } = useBeforeLiveTournamentData();

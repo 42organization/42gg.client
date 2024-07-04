@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { KeyboardArrowDown } from '@mui/icons-material';
 import { Collapse, ListItemButton, ListItemText } from '@mui/material';
-import style from 'styles/recruit/Main/collapseListItem.module.scss';
+import style from 'styles/takgu/recruit/Main/collapseListItem.module.scss';
 
 function CollapseListItem({
   title,

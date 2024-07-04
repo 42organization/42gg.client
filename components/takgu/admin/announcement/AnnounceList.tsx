@@ -21,7 +21,7 @@ import {
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/takgu/admin/common/AdminTable';
-import styles from 'styles/admin/announcement/AnnounceList.module.scss';
+import styles from 'styles/takgu/admin/announcement/AnnounceList.module.scss';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 

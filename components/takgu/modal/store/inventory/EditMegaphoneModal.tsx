@@ -14,7 +14,7 @@ import {
 import { ItemCautionContainer } from 'components/takgu/modal/store/inventory/ItemCautionContainer';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import useAxiosGet from 'hooks/useAxiosGet';
-import styles from 'styles/modal/store/InventoryModal.module.scss';
+import styles from 'styles/takgu/modal/store/InventoryModal.module.scss';
 
 type MegaphoneData = {
   megaphoneId: number;

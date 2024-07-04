@@ -4,7 +4,7 @@ import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/admin/modal/AdminModifyScoreModal.module.scss';
+import styles from 'styles/takgu/admin/modal/AdminModifyScoreModal.module.scss';
 
 type ModifyScoreBodyType = {
   team1Score: number;
@@ -55,25 +55,25 @@ export default function AdminModifyScoreModal({
         <div className={`${styles['header']} header1`}>Team 1</div>
         <div className={`${styles['header']} header2`}>Team 2</div>
         <div
-          className={`intra1 
+          className={`intra1
           ${styles['intra']} ${styles[team1.win ? 'win' : 'lose']} `}
         >
           {team1.intraId1} {team1.intraId2}
         </div>
         <div
-          className={`intra2 
+          className={`intra2
           ${styles['intra']} ${styles[team2.win ? 'win' : 'lose']}`}
         >
           {team2.intraId1} {team2.intraId2}
         </div>
         <div
-          className={`score1 
+          className={`score1
           ${styles['score']} ${styles[team1.win ? 'win' : 'lose']} `}
         >
           {team1.score}
         </div>
         <div
-          className={`score2 
+          className={`score2
           ${styles['score']} ${styles[team2.win ? 'win' : 'lose']}`}
         >
           {team2.score}

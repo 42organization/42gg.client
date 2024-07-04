@@ -2,7 +2,7 @@ import { Stack } from '@mui/material';
 import { resultType } from 'types/recruit/recruitments';
 import { dateToKRFullString } from 'utils/handleTime';
 import RecruitStepper from 'components/takgu/recruit/Main/RecruitStepper';
-import style from 'styles/recruit/Main/myRecruitment.module.scss';
+import style from 'styles/takgu/recruit/Main/myRecruitment.module.scss';
 
 const MyRecruitStatus = ({
   status,

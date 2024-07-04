@@ -6,7 +6,7 @@ import BasicProfile from 'components/takgu/user/BasicProfile';
 import RankProfile from 'components/takgu/user/RankProfile';
 import useBasicProfile from 'hooks/takgu/users/useBasicProfile';
 import useProfileColorMode from 'hooks/takgu/users/useProfileColorMode';
-import styles from 'styles/user/user.module.scss';
+import styles from 'styles/takgu/user/user.module.scss';
 
 export default function User() {
   const router = useRouter();

@@ -5,7 +5,7 @@ import { useSetRecoilState } from 'recoil';
 import { FaQuestion, FaSearch } from 'react-icons/fa';
 import { PartyCategory, PartyRoom } from 'types/partyTypes';
 import { modalState } from 'utils/recoil/modal';
-import styles from 'styles/party/PartyMain.module.scss';
+import styles from 'styles/takgu/party/PartyMain.module.scss';
 import PartyRoomListItem from './PartyRoomListItem';
 
 // ================================================================================

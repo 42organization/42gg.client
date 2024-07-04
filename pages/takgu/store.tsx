@@ -8,7 +8,7 @@ import { errorState } from 'utils/recoil/error';
 import { StoreModeWrap } from 'components/takgu/mode/modeWraps/StoreModeWrap';
 import { InventoryList } from 'components/takgu/store/InventoryList';
 import ItemsList from 'components/takgu/store/purchase/ItemsList';
-import styles from 'styles/store/StoreContainer.module.scss';
+import styles from 'styles/takgu/store/StoreContainer.module.scss';
 
 export default function Store() {
   const [mode, setMode] = useState<StoreMode>('BUY');

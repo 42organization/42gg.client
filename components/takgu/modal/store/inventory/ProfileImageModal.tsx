@@ -15,7 +15,7 @@ import {
 } from 'components/takgu/modal/ModalButton';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import useUploadImg from 'hooks/useUploadImg';
-import styles from 'styles/modal/store/InventoryModal.module.scss';
+import styles from 'styles/takgu/modal/store/InventoryModal.module.scss';
 import { ItemCautionContainer } from './ItemCautionContainer';
 
 const cautions = [

@@ -1,6 +1,6 @@
 import { GameMode, GameStatus } from 'types/gameTypes';
 import gameScore from 'components/takgu/game/GameScore';
-import styles from 'styles/game/GameResultItem.module.scss';
+import styles from 'styles/takgu/game/GameResultItem.module.scss';
 
 interface GameResultSmallScoreProps {
   mode: GameMode;

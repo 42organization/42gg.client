@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
+import styles from 'styles/takgu/modal/afterGame/StatChangeModal.module.scss';
 
 export default function Celebration() {
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { PartyRoomDetail } from 'types/partyTypes';
 import { dateToKRLocaleTimeString, getRemainTime } from 'utils/handleTime';
-import styles from 'styles/party/PartyDetailRoom.module.scss';
+import styles from 'styles/takgu/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';
 
 export default function PartyDetailTitleBox({

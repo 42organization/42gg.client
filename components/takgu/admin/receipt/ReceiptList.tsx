@@ -23,7 +23,7 @@ import {
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/takgu/admin/common/AdminTable';
-import styles from 'styles/admin/receipt/ReceiptList.module.scss';
+import styles from 'styles/takgu/admin/receipt/ReceiptList.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   receiptId: 'ID',

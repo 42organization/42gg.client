@@ -1,6 +1,6 @@
 import { ThemeProvider, createTheme } from '@mui/material';
 // import useAxiosWithToast from 'hooks/useAxiosWithToast';
-import styles from 'styles/recruit/layout.module.scss';
+import styles from 'styles/takgu/recruit/layout.module.scss';
 import ApplicationSnackBar from './Application/ApplicationSnackBar';
 
 type RecruitLayoutProps = {

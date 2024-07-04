@@ -1,0 +1,62 @@
+@import 'styles/takgu/common.scss';
+@import 'styles/takgu/ProfileBackgroundTheme.scss';
+@import 'styles/takgu/party/PartyCommon.scss';
+
+.appContainer {
+  display: flex;
+  width: 100vw;
+  min-width: 380px;
+  flex-direction: column;
+  background: black;
+  align-items: center;
+}
+
+.background {
+  position: relative;
+  width: 100vw;
+  min-width: 380px;
+  max-width: 100vh;
+  min-height: 100vh;
+  background: $main-background;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  &.both {
+    background: $match-background;
+  }
+  &.normal {
+    background: $vip-background;
+  }
+  &.party-main {
+    background: url('/image/takgu/party-background.png');
+  }
+  @each $theme, $color in $bg-theme-colors {
+    &.#{$theme} {
+      background: map-get($map: $color, $key: 'background');
+    }
+  }
+}
+
+.topInfo {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonContainer {
+  position: sticky;
+  top: 83%;
+  z-index: 3;
+  margin-left: 75%;
+  .buttonWrapper {
+    position: absolute;
+    display: flex;
+    width: 5.7rem;
+    border-radius: 3rem;
+    box-shadow: 0 0 2rem 0.5rem rgba(245, 0, 165, 1);
+    justify-content: center;
+    align-items: center;
+  }
+}

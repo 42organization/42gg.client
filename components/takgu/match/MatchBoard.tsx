@@ -7,7 +7,7 @@ import { stringToHourMin } from 'utils/handleTime';
 import { liveState } from 'utils/recoil/layout';
 import { currentMatchState } from 'utils/recoil/match';
 import { modalState } from 'utils/recoil/modal';
-import styles from 'styles/match/MatchBoard.module.scss';
+import styles from 'styles/takgu/match/MatchBoard.module.scss';
 
 interface MatchBoardProps {
   radioMode: MatchMode;

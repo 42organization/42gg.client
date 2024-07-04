@@ -6,7 +6,7 @@ import {
   HeaderContextState,
   HeaderContext,
 } from 'components/takgu/Layout/HeaderContext';
-import styles from 'styles/Layout/NotiItem.module.scss';
+import styles from 'styles/takgu/Layout/NotiItem.module.scss';
 
 interface NotiItemProps {
   data: Noti;

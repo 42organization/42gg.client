@@ -1,0 +1,16 @@
+@import 'styles/takgu/recruit/common.scss';
+@import 'styles/takgu/common.scss';
+
+.listButton {
+  // important는 mui 스타일을 덮어씌우기 위해 사용
+  width: 100%;
+  padding-left: 0.25rem !important;
+  color: $recruit-blue !important;
+  border-radius: 10px;
+  &:hover {
+    background-color: $recruit-blue-transparent !important;
+  }
+  .listButtonText {
+    @include subTitle;
+  }
+}

@@ -8,7 +8,7 @@ import LeagueButtonGroup from 'components/takgu/tournament-record/LeagueButtonGr
 import WinnerSwiper from 'components/takgu/tournament-record/WinnerSwiper';
 import WinnerTournamentInfo from 'components/takgu/tournament-record/WinnerTournamentInfo';
 import LoadingSpinner from 'components/takgu/UI/LoadingSpinner';
-import styles from 'styles/tournament-record/TournamentRecord.module.scss';
+import styles from 'styles/takgu/tournament-record/TournamentRecord.module.scss';
 
 export default function TournamentRecord() {
   const [tournamentInfo, setTournamentInfo] = useState<TournamentInfo>();

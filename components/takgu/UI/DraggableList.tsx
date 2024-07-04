@@ -6,7 +6,7 @@ import {
   Draggable,
 } from 'react-beautiful-dnd';
 import { ListItem, ListItemAvatar, makeStyles } from '@mui/material';
-import styles from 'styles/UI/DraggableList.module.scss';
+import styles from 'styles/takgu/UI/DraggableList.module.scss';
 
 export type DraggableListProps = {
   children: React.ReactNode[];

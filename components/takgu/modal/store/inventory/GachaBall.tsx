@@ -1,4 +1,4 @@
-import styles from 'styles/modal/store/GachaBall.module.scss';
+import styles from 'styles/takgu/modal/store/GachaBall.module.scss';
 
 export default function GachaBall() {
   const balls = Array.from({ length: 11 }, (el, i) => 'ball' + i.toString());

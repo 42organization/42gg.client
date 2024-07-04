@@ -6,7 +6,7 @@ import { ICoin } from 'types/userTypes';
 import { modalState } from 'utils/recoil/modal';
 import StoreModeRadioBox from 'components/takgu/mode/modeItems/StoreModeRadioBox';
 import CoinImage from 'components/takgu/store/CoinImage';
-import styles from 'styles/mode/StoreModeWrap.module.scss';
+import styles from 'styles/takgu/mode/StoreModeWrap.module.scss';
 
 type StoreModeWrapProps = {
   coin: ICoin;

@@ -4,7 +4,7 @@ import {
   SlotPreviewProps,
   Slot,
 } from 'types/admin/adminSlotTypes';
-import styles from 'styles/admin/slot/SlotCurrent.module.scss';
+import styles from 'styles/takgu/admin/slot/SlotCurrent.module.scss';
 
 export default function SlotPreview(props: SlotPreviewProps) {
   const { lastHour, scheduleInfo, currentHour, futurePreview } = props;

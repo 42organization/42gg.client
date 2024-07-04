@@ -1,5 +1,5 @@
 import { Season } from 'types/seasonTypes';
-import styles from 'styles/mode/SeasonDropDown.module.scss';
+import styles from 'styles/takgu/mode/SeasonDropDown.module.scss';
 
 interface SeasonDropDownProps {
   seasonList: Season[];

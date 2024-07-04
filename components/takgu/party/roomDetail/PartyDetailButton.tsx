@@ -6,7 +6,7 @@ import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import usePartyPenaltyTimer from 'hooks/takgu/party/usePartyPenaltyTimer';
-import styles from 'styles/party/PartyDetailRoom.module.scss';
+import styles from 'styles/takgu/party/PartyDetailRoom.module.scss';
 
 type ParytButtonProps = {
   roomId?: number;

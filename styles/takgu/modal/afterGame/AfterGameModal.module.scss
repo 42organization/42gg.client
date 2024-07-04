@@ -1,0 +1,100 @@
+@import 'styles/takgu/common.scss';
+
+.container {
+  @include modalContainer('LIGHTPINK');
+}
+
+.phrase {
+  @include modal-phrase;
+
+  .titleNormal,
+  .titleScore {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    font-size: 2rem;
+  }
+  .titleNormal {
+    @include logoText(2rem, rgba(122, 110, 123, 1));
+  }
+  .titleScore {
+    color: rgba(165, 95, 195, 1);
+  }
+  .message {
+    padding-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: 0.04rem;
+  }
+
+  .rules {
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 150%;
+    text-align: center;
+    letter-spacing: 0.04rem;
+    white-space: pre-wrap;
+  }
+}
+
+.resultContainer {
+  display: flex;
+  width: 18rem;
+  height: 13.5rem;
+  flex-direction: column;
+  margin-bottom: 3rem;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(221, 200, 224, 1);
+  border-radius: 0.625rem;
+  justify-content: flex-start;
+  align-items: stretch;
+  &.normal {
+    background-color: rgba(204, 173, 218, 1);
+  }
+}
+
+.players {
+  display: flex;
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  font-family: $common-en-font;
+  font-size: 0.9rem;
+  font-weight: 500;
+  justify-content: space-evenly;
+  align-items: center;
+  .vs {
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 0.04rem;
+  }
+  .user {
+    .intraId {
+      text-align: center;
+      letter-spacing: 0.04rem;
+    }
+  }
+}
+
+.finalScore {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 3rem;
+  font-family: $common-en-font;
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-align: center;
+  .middle {
+    font-size: 1.3rem;
+  }
+  input {
+    width: 4.25rem;
+    height: 2.2rem;
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-align: center;
+    border: 2px solid rgba(221, 200, 224, 1);
+    border-radius: 0.3rem;
+  }
+}

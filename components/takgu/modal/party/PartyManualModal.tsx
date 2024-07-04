@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'utils/recoil/modal';
-import styles from 'styles/modal/party/PartyManualModal.module.scss';
+import styles from 'styles/takgu/modal/party/PartyManualModal.module.scss';
 
 type contentType = {
   title: React.ReactNode;
@@ -83,7 +83,7 @@ function ContentTitle({ title, icon }: contentTitleProps) {
   icon = typeof icon === 'string' ? <span>{icon}</span> : icon;
   return (
     <div
-      className={`${styles.ruleTitle} 
+      className={`${styles.ruleTitle}
       ${styles[icon ? 'withIcon' : 'withoutIcon']}`}
     >
       {icon ? icon : null}

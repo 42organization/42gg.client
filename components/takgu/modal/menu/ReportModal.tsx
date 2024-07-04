@@ -6,7 +6,7 @@ import {
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
 import useReportHandler from 'hooks/takgu/modal/useReportHandler';
-import styles from 'styles/modal/menu/ReportModal.module.scss';
+import styles from 'styles/takgu/modal/menu/ReportModal.module.scss';
 
 interface Report {
   category: string;

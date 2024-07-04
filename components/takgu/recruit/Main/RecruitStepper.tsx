@@ -14,7 +14,7 @@ import {
   styled,
 } from '@mui/material';
 import { resultType } from 'types/recruit/recruitments';
-import style from 'styles/recruit/Main/myRecruitment.module.scss';
+import style from 'styles/takgu/recruit/Main/myRecruitment.module.scss';
 
 const RecruitStepper = ({ status }: { status: resultType }) => {
   return (

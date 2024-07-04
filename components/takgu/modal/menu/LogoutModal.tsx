@@ -5,7 +5,7 @@ import {
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
 import useLogoutCheck from 'hooks/Login/useLogoutCheck';
-import styles from 'styles/modal/menu/LogoutModal.module.scss';
+import styles from 'styles/takgu/modal/menu/LogoutModal.module.scss';
 
 export default function LogoutModal() {
   const [isLoading, setIsLoading] = useState(false);

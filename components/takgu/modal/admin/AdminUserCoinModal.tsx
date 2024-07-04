@@ -4,7 +4,7 @@ import { IUserCoin } from 'types/admin/adminUserTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/admin/modal/AdminUserCoin.module.scss';
+import styles from 'styles/takgu/admin/modal/AdminUserCoin.module.scss';
 
 export default function AdminUserCoinModal(props: { intraId: string }) {
   const MAX_LENGTH = 30;

@@ -4,7 +4,7 @@ import { FaChevronRight } from 'react-icons/fa';
 import GameResult from 'components/takgu/game/GameResult';
 import TournamentPreview from 'components/takgu/main/TournamentPreview';
 import RankListMain from 'components/takgu/rank/topRank/RankListMain';
-import styles from 'styles/main/Section.module.scss';
+import styles from 'styles/takgu/main/Section.module.scss';
 import PartyPreview from './PartyPreview';
 
 type SectionProps = {

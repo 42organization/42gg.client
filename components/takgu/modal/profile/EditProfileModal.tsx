@@ -7,7 +7,7 @@ import {
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
 import useEditProfileModal from 'hooks/takgu/modal/useEditProfileModal';
-import styles from 'styles/user/Profile.module.scss';
+import styles from 'styles/takgu/user/Profile.module.scss';
 
 export interface EditedProfile {
   racketType: string;

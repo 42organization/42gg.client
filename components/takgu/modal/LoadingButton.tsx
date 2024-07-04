@@ -1,4 +1,4 @@
-import styles from 'styles/modal/LoadingButton.module.scss';
+import styles from 'styles/takgu/modal/LoadingButton.module.scss';
 
 export default function LoadingButton() {
   return (

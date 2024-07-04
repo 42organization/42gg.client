@@ -1,7 +1,7 @@
 import { RankUser, NormalUser } from 'types/rankTypes';
 import { NormalListItem } from 'components/takgu/rank/NormalListItem';
 import { RankListItem } from 'components/takgu/rank/RankListItem';
-import styles from 'styles/modal/store/InventoryModal.module.scss';
+import styles from 'styles/takgu/modal/store/InventoryModal.module.scss';
 
 type IdPreviewProps = {
   intraId: string;

@@ -1,6 +1,6 @@
 import CoinPolicy from 'components/takgu/admin/coin/CoinPolicy';
 import CoinPolicyHistory from 'components/takgu/admin/coin/CoinPolicyHistory';
-import styles from 'styles/admin/coin/CoinMain.module.scss';
+import styles from 'styles/takgu/admin/coin/CoinMain.module.scss';
 
 export default function CoinMain() {
   return (

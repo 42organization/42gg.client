@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import TournamentEdit from 'components/takgu/admin/tournament/TournamentEdit';
 import TournamentList from 'components/takgu/admin/tournament/TournamentList';
 import useTournamentEditInfo from 'hooks/takgu/tournament/useTournamentEditInfo';
-import styles from 'styles/admin/tournament/Tournament.module.scss';
+import styles from 'styles/takgu/admin/tournament/Tournament.module.scss';
 
 export default function Tournament() {
   const {

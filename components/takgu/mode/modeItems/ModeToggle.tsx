@@ -1,4 +1,4 @@
-import styles from 'styles/mode/ModeToggle.module.scss';
+import styles from 'styles/takgu/mode/ModeToggle.module.scss';
 
 interface ModeToggleProps {
   id: string;

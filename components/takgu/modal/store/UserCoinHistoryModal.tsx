@@ -11,7 +11,7 @@ import {
 } from 'components/takgu/modal/ModalButton';
 import CoinHistoryContainer from 'components/takgu/modal/store/CoinHistoryContainer';
 import CoinImage from 'components/takgu/store/CoinImage';
-import styles from 'styles/modal/store/UserCoinHistoryModal.module.scss';
+import styles from 'styles/takgu/modal/store/UserCoinHistoryModal.module.scss';
 
 export default function UserCoinHistoryModal({ coin }: ICoin) {
   const setModal = useSetRecoilState(modalState);

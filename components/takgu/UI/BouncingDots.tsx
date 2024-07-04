@@ -1,4 +1,4 @@
-import styles from 'styles/UI/BouncingDots.module.scss';
+import styles from 'styles/takgu/UI/BouncingDots.module.scss';
 
 export default function BouncingDots() {
   return (

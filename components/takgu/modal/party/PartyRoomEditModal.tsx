@@ -11,7 +11,7 @@ import {
 import { instanceInPartyManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/admin/party/PartyRoomEdit.module.scss';
+import styles from 'styles/takgu/admin/party/PartyRoomEdit.module.scss';
 
 export default function PartyRoomEditModal({ roomId }: { roomId: number }) {
   const setSnackBar = useSetRecoilState(toastState);

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { Button, Stack } from '@mui/material';
 import { resultType } from 'types/recruit/recruitments';
-import style from 'styles/recruit/Main/myRecruitment.module.scss';
+import style from 'styles/takgu/recruit/Main/myRecruitment.module.scss';
 
 const MyApplicationInfo = ({
   status,

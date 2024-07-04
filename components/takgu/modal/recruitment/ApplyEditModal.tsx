@@ -7,7 +7,7 @@ import {
   applicationModalState,
 } from 'utils/recoil/application';
 import useUserApplicationForm from 'hooks/takgu/recruit/useUserApplicationForm';
-import styles from 'styles/modal/recruit/recruitModal.module.scss';
+import styles from 'styles/takgu/modal/recruit/recruitModal.module.scss';
 
 interface IApplyEditModalProps {
   recruitId: number;

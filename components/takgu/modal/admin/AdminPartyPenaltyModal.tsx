@@ -4,7 +4,7 @@ import { PartyPenaltyAdmin, PartyPenaltyAdminSubmit } from 'types/partyTypes';
 import { instanceInPartyManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/party/TemplateModal.module.scss';
+import styles from 'styles/takgu/party/TemplateModal.module.scss';
 
 export default function PartyPenaltyModal({
   partyPenalty,

@@ -6,7 +6,7 @@ import {
   RecruitmentEditProps,
 } from 'types/admin/adminRecruitmentsTypes';
 import useRecruitmentEditInfo from 'hooks/takgu/recruitments/useRecruitmentEditInfo';
-import styles from 'styles/admin/recruitments/recruitmentEdit/RecruitmentEdit.module.scss';
+import styles from 'styles/takgu/admin/recruitments/recruitmentEdit/RecruitmentEdit.module.scss';
 import ActionSelectorButtons from './components/ActionSelectorButtons';
 import QuestionFormBuilder from './components/QuestionFormBuilder';
 import QuillDescriptionEditor from './components/QuillDescriptionEditor';

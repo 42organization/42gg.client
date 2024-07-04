@@ -1,6 +1,6 @@
 import Celebration from 'components/takgu/modal/statChange/Celebration';
 import useExpStat from 'hooks/takgu/modal/statchange/useExpStat';
-import styles from 'styles/modal/afterGame/StatChangeModal.module.scss';
+import styles from 'styles/takgu/modal/afterGame/StatChangeModal.module.scss';
 
 interface ExpGuageProps {
   stat: { [key: string]: number };

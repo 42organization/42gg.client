@@ -7,7 +7,7 @@ import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import AdminSearchBar from 'components/takgu/admin/common/AdminSearchBar';
 import useAdminTournamentParticipantEdit from 'hooks/takgu/admin/modal/useAdminTournamentParticipantEdit';
-import styles from 'styles/admin/modal/AdminTournamentParticipantEditModal.module.scss';
+import styles from 'styles/takgu/admin/modal/AdminTournamentParticipantEditModal.module.scss';
 import AdminTournamentParticipantList from './AdminTournamentParticipantList';
 
 export default function AdminTournamentParticipantEditModal(props: {

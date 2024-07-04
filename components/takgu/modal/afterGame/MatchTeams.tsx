@@ -1,6 +1,6 @@
 import { Player, Players } from 'types/scoreTypes';
 import PlayerImage from 'components/takgu/PlayerImage';
-import styles from 'styles/modal/afterGame/AfterGameModal.module.scss';
+import styles from 'styles/takgu/modal/afterGame/AfterGameModal.module.scss';
 
 export function MatchTeams({ matchTeams }: { matchTeams: Players }) {
   return (

@@ -1,5 +1,5 @@
 import LoadingButton from 'components/takgu/modal/LoadingButton';
-import styles from 'styles/modal/Modal.module.scss';
+import styles from 'styles/takgu/modal/Modal.module.scss';
 
 type ButtonProps = {
   style: 'positive' | 'negative' | 'close';

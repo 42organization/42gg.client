@@ -6,7 +6,7 @@ import { instance, instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import SlotCurrent from 'components/takgu/admin/slot/SlotCurrent';
 import SlotPreview from 'components/takgu/admin/slot/SlotPreview';
-import styles from 'styles/admin/slot/SlotMain.module.scss';
+import styles from 'styles/takgu/admin/slot/SlotMain.module.scss';
 
 export default function SlotMain() {
   const [scheduleInfo, setScheduleInfo] = useState<EditedSchedule>({

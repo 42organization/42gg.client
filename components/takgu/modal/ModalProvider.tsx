@@ -5,7 +5,7 @@ import { modalState, modalTypeState } from 'utils/recoil/modal';
 import AdminModal from 'components/takgu/modal/modalType/AdminModal';
 import NormalModal from 'components/takgu/modal/modalType/NormalModal';
 import StoreModal from 'components/takgu/modal/modalType/StoreModal';
-import styles from 'styles/modal/Modal.module.scss';
+import styles from 'styles/takgu/modal/Modal.module.scss';
 import PartyModal from './modalType/PartyModal';
 import TournamentModal from './modalType/TournamentModal';
 

@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { Irecruit } from 'types/admin/adminRecruitmentsTypes';
 import { AdminTableHead } from 'components/takgu/admin/common/AdminTable';
-import styles from 'styles/admin/recruitments/recruitmentEdit/components/TitleTimeRangeSelector.module.scss';
+import styles from 'styles/takgu/admin/recruitments/recruitmentEdit/components/TitleTimeRangeSelector.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   title: '모집 제목',

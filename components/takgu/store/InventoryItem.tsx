@@ -6,7 +6,7 @@ import { Tooltip } from '@mui/material';
 import { InventoryItem, InventoryItemStatus } from 'types/inventoryTypes';
 import { modalState } from 'utils/recoil/modal';
 import { useUser } from 'hooks/takgu/Layout/useUser';
-import styles from 'styles/store/Inventory.module.scss';
+import styles from 'styles/takgu/store/Inventory.module.scss';
 
 type inventoryItemProps = {
   item: InventoryItem;

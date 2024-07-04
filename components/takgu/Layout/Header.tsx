@@ -17,7 +17,7 @@ import MenuBar from 'components/takgu/Layout/MenuBar/MenuBar';
 import NotiBar from 'components/takgu/Layout/NotiBar/NotiBar';
 import NotiBell from 'public/image/takgu/noti_bell.svg';
 import useAxiosGet from 'hooks/useAxiosGet';
-import styles from 'styles/Layout/Header.module.scss';
+import styles from 'styles/takgu/Layout/Header.module.scss';
 
 export default function Header() {
   const router = useRouter();

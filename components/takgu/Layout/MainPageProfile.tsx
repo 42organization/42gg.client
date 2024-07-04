@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import PlayerImage from 'components/takgu/PlayerImage';
 import { useUser } from 'hooks/takgu/Layout/useUser';
-import styles from 'styles/Layout/MainPageProfile.module.scss';
+import styles from 'styles/takgu/Layout/MainPageProfile.module.scss';
 
 const MainPageProfile = () => {
   const user = useUser();

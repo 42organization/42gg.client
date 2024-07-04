@@ -3,7 +3,7 @@ import { Paper } from '@mui/material';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import 'react-quill/dist/quill.snow.css';
 import DynamicQuill from 'components/DynamicQuill';
-import styles from 'styles/admin/recruitments/recruitmentDetail/components/QuillDescription.module.scss';
+import styles from 'styles/takgu/admin/recruitments/recruitmentDetail/components/QuillDescription.module.scss';
 
 interface QuillDescriptionViewerProps {
   contents: string;

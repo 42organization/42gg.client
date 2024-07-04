@@ -7,7 +7,7 @@ import {
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import TemplateEditor from 'components/takgu/admin/recruitments/recruitmentsuser/tmplateEditor';
-import styles from 'styles/admin/modal/AdminRecruitMessageTemplateModal.module.scss';
+import styles from 'styles/takgu/admin/modal/AdminRecruitMessageTemplateModal.module.scss';
 
 type TemplateListType = Record<RecruitmentMessageType, string>;
 function AdminRecruitMessageTemplateModal() {

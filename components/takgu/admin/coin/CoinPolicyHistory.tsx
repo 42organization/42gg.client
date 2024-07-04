@@ -19,7 +19,7 @@ import {
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/takgu/admin/common/AdminTable';
-import styles from 'styles/admin/coin/CoinPolicyHistory.module.scss';
+import styles from 'styles/takgu/admin/coin/CoinPolicyHistory.module.scss';
 
 const coinPolicyHistoryTableTitle: { [key: string]: string } = {
   coinPolicyId: 'ID',

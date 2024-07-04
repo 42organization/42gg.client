@@ -2,7 +2,7 @@ import React from 'react';
 import { CheckBox } from '@mui/icons-material';
 import { Grid, Paper, Radio, RadioGroup, TextField } from '@mui/material';
 import { IcheckItem, Iquestion } from 'types/admin/adminRecruitmentsTypes';
-import styles from 'styles/admin/recruitments/recruitmentDetail/components/QuestionForm.module.scss';
+import styles from 'styles/takgu/admin/recruitments/recruitmentDetail/components/QuestionForm.module.scss';
 
 interface CheckInputProps {
   checkList: IcheckItem[] | undefined;

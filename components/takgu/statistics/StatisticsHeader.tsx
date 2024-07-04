@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from 'styles/statistics/StatisticsHeader.module.scss';
+import styles from 'styles/takgu/statistics/StatisticsHeader.module.scss';
 
 export default function Header() {
   return (

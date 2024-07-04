@@ -30,7 +30,7 @@ import {
   AdminTableHead,
   AdminContent,
 } from 'components/takgu/admin/common/AdminTable';
-import styles from 'styles/admin/recruitments/Recruitments.module.scss';
+import styles from 'styles/takgu/admin/recruitments/Recruitments.module.scss';
 import MenuTab from './recruitmentsuser/MenuTab';
 
 const tableTitle: { [key: string]: string } = {

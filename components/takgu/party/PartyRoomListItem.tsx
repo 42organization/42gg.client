@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { PartyRoom } from 'types/partyTypes';
 import { getRemainTime } from 'utils/handleTime';
-import styles from 'styles/party/PartyRoomListItem.module.scss';
+import styles from 'styles/takgu/party/PartyRoomListItem.module.scss';
 
 export default function PartyRoomListItem({ room }: { room: PartyRoom }) {
   const roomStatusKo =

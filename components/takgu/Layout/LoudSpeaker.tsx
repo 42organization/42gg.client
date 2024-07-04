@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from 'styles/Layout/LoudSpeaker.module.scss';
+import styles from 'styles/takgu/Layout/LoudSpeaker.module.scss';
 
 const LoudSpeaker = () => {
   return (

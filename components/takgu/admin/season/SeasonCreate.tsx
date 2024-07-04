@@ -12,7 +12,7 @@ import { ISeasonEditInfo } from 'types/seasonTypes';
 import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import { AdminTableHead } from 'components/takgu/admin/common/AdminTable';
-import styles from 'styles/admin/season/SeasonCreate.module.scss';
+import styles from 'styles/takgu/admin/season/SeasonCreate.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   seasonName: '시즌 이름',

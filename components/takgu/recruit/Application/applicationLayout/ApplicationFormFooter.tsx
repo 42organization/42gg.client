@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import { Button } from '@mui/material';
 import { ApplicationFormType } from 'types/recruit/recruitments';
 import { applicationModalState } from 'utils/recoil/application';
-import styles from 'styles/recruit/application.module.scss';
+import styles from 'styles/takgu/recruit/application.module.scss';
 
 interface IApplicationFormFooterProps {
   mode: ApplicationFormType;

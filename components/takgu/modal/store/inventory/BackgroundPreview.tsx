@@ -1,5 +1,5 @@
 import { RandomColors, BackgroundColors } from 'types/colorModeTypes';
-import styles from 'styles/modal/store/BackgroundPreview.module.scss';
+import styles from 'styles/takgu/modal/store/BackgroundPreview.module.scss';
 
 export default function BackgroundPreview({
   background,

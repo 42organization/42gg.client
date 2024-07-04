@@ -10,7 +10,7 @@ import {
   ModalButtonContainer,
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
-import styles from 'styles/modal/store/BuyModal.module.scss';
+import styles from 'styles/takgu/modal/store/BuyModal.module.scss';
 
 export default function BuyModal({ itemId, product, price }: PriceTag) {
   const [isLoading, setIsLoading] = useState<boolean>(false);

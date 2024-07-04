@@ -4,9 +4,9 @@ import RecruitList from 'components/takgu/recruit/RecruitList';
 import StickyHeader from 'components/takgu/recruit/StickyHeader';
 import recruitPingpong from 'public/lottie/recruitPingPong.json';
 import useCheckRecruit from 'hooks/takgu/recruit/useCheckRecruit';
-import commonStyle from 'styles/recruit/common.module.scss';
-import layoutStyle from 'styles/recruit/layout.module.scss';
-import textStyle from 'styles/recruit/text.module.scss';
+import commonStyle from 'styles/takgu/recruit/common.module.scss';
+import layoutStyle from 'styles/takgu/recruit/layout.module.scss';
+import textStyle from 'styles/takgu/recruit/text.module.scss';
 
 function Recruit() {
   const { isRecruiting, isLoading } = useCheckRecruit();

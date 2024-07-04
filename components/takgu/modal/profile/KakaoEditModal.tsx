@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
-import styles from 'styles/modal/menu/KakaoEditModal.module.scss';
+import styles from 'styles/takgu/modal/menu/KakaoEditModal.module.scss';
 
 type UserType = 'kakao' | 'fortyTwo' | 'both' | '';
 

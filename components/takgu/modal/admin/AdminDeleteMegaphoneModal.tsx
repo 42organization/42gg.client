@@ -3,7 +3,7 @@ import { Imegaphone } from 'types/admin/adminReceiptType';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/admin/modal/AdminDeleteMegaphone.module.scss';
+import styles from 'styles/takgu/admin/modal/AdminDeleteMegaphone.module.scss';
 
 export default function AdminDeleteMegaphoneModal(props: Imegaphone) {
   const { megaphoneId, content, intraId } = props;

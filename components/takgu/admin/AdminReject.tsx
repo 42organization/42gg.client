@@ -1,6 +1,6 @@
 import router from 'next/router';
 import React from 'react';
-import styles from 'styles/admin/AdminReject.module.scss';
+import styles from 'styles/takgu/admin/AdminReject.module.scss';
 
 export default function AdminReject() {
   const goHome = () => {

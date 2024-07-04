@@ -5,7 +5,7 @@ import {
   IApplicantAnswer,
   IQuestionForm,
 } from 'types/recruit/recruitments';
-import styles from 'styles/recruit/application.module.scss';
+import styles from 'styles/takgu/recruit/application.module.scss';
 
 interface IitemProps {
   form: IQuestionForm;

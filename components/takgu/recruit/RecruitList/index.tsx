@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Button, List } from '@mui/material';
 import useInfiniteRecruitList from 'hooks/takgu/recruit/useInfiniteRecruitList';
-import styles from 'styles/recruit/RecruitList/list.module.scss';
+import styles from 'styles/takgu/recruit/RecruitList/list.module.scss';
 import RecruitListItem from './RecruitListItem';
 
 const RecruitList = () => {

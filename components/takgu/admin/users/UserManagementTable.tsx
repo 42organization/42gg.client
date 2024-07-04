@@ -14,7 +14,7 @@ import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/takgu/admin/table';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/takgu/admin/common/AdminSearchBar';
-import styles from 'styles/admin/users/UserManagementTable.module.scss';
+import styles from 'styles/takgu/admin/users/UserManagementTable.module.scss';
 import { AdminEmptyItem, AdminTableHead } from '../common/AdminTable';
 
 const tableTitle: { [key: string]: string } = {

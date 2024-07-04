@@ -1,4 +1,4 @@
-import styles from 'styles/load/CommingSoon.module.scss';
+import styles from 'styles/takgu/load/CommingSoon.module.scss';
 
 // code by: https://codepen.io/bratzie/pen/dOgXBq#anon-signup
 export default function Loading() {

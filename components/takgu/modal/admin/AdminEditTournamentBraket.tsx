@@ -6,7 +6,7 @@ import { instance } from 'utils/axios';
 import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
 import TournamentEditBraket from 'components/takgu/admin/tournament/TournamentEditBraket';
 import useComponentSize from 'hooks/takgu/util/useComponentSize';
-import styles from 'styles/admin/modal/AdminEditTournamentBraket.module.scss';
+import styles from 'styles/takgu/admin/modal/AdminEditTournamentBraket.module.scss';
 
 export const TournamentIdContext = createContext<number>(0);
 

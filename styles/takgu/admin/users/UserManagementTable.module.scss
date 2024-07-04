@@ -1,0 +1,78 @@
+@import 'styles/takgu/admin/common/Pagination.module.scss';
+@import 'styles/takgu/common.scss';
+
+.userManagementWrap {
+  width: 100%;
+  height: 100%;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+    min-width: 710px;
+    margin: 10px auto;
+    .title {
+      font-size: $big-font;
+      font-weight: 600;
+      line-height: 150%;
+    }
+  }
+  .tableContainer {
+    width: 95%;
+    min-width: 710px;
+    margin: auto;
+    .table {
+      .tableBody {
+        .tableRow {
+          &:nth-child(odd) {
+            background-color: #f9fafb;
+          }
+          &:nth-child(even) {
+            background-color: #fff;
+          }
+          .tableBodyItem {
+            padding: 10px;
+            font-size: $small-font;
+            line-height: 150%;
+            text-align: center;
+            .button {
+              padding: 4px 12px;
+              margin-left: 10px;
+              font-size: $small-font;
+              cursor: pointer;
+              border: none;
+              border-radius: $medium-radius;
+            }
+            .detail {
+              color: #6b7280;
+              background-color: #e5e7eb;
+              &:hover {
+                background-color: #d1d5db;
+                transition: 0.3s;
+              }
+            }
+            .coin {
+              color: white;
+              background-color: #10b981;
+              &:hover {
+                background-color: #059669;
+                transition: 0.3s;
+              }
+            }
+            .penalty {
+              color: white;
+              background-color: #2678f3;
+              &:hover {
+                background-color: #1e64d2;
+                transition: 0.3s;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include pagination;

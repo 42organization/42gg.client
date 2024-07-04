@@ -11,7 +11,7 @@ import {
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
 import { AdminTableHead } from 'components/takgu/admin/common/AdminTable';
-import styles from 'styles/admin/coin/CoinPolicy.module.scss';
+import styles from 'styles/takgu/admin/coin/CoinPolicy.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   attendance: '출석 획득',

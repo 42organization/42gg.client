@@ -20,7 +20,7 @@ import {
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/takgu/admin/common/AdminTable';
-import styles from 'styles/admin/feedback/FeedbackTable.module.scss';
+import styles from 'styles/takgu/admin/feedback/FeedbackTable.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: 'ID',

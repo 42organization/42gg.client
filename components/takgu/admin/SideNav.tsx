@@ -28,7 +28,7 @@ import {
   TbWallet,
 } from 'react-icons/tb';
 import SideNavContent from 'components/takgu/admin/SideNavContent';
-import styles from 'styles/admin/SideNav.module.scss';
+import styles from 'styles/takgu/admin/SideNav.module.scss';
 
 export default function SideNav() {
   const currentPath = useRouter().asPath.replace('/admin', '');

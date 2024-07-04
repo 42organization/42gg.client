@@ -1,4 +1,4 @@
-import styles from 'styles/mode/IsMineCheckBox.module.scss';
+import styles from 'styles/takgu/mode/IsMineCheckBox.module.scss';
 
 interface IsMineCheckBoxProps {
   isMine: boolean;

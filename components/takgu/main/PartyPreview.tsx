@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import usePartyRoomList from 'hooks/takgu/party/usePartyRoomList';
-import styles from 'styles/main/PartyPreview.module.scss';
+import styles from 'styles/takgu/main/PartyPreview.module.scss';
 export default function PartyPreview() {
   const { partyRooms } = usePartyRoomList();
   const openRooms = partyRooms.filter((room) => room.status === 'OPEN');

@@ -6,7 +6,7 @@ import { clickedGameItemState } from 'utils/recoil/game';
 import { profileState } from 'utils/recoil/user';
 import GameResultSmallScore from 'components/takgu/game/small/GameResultSmallScore';
 import GameResultSmallTeam from 'components/takgu/game/small/GameResultSmallTeam';
-import styles from 'styles/game/GameResultItem.module.scss';
+import styles from 'styles/takgu/game/GameResultItem.module.scss';
 
 interface GameResultSmallItemProps {
   game: Game;

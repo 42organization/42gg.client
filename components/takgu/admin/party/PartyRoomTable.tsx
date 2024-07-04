@@ -16,7 +16,7 @@ import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/takgu/admin/common/AdminSearchBar';
 import { AdminTableHead } from 'components/takgu/admin/common/AdminTable';
 import useAdminPartyRoomList from 'hooks/takgu/party/useAdminPartyRoomList';
-import styles from 'styles/admin/party/AdminPartyCommon.module.scss';
+import styles from 'styles/takgu/admin/party/AdminPartyCommon.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   roomId: 'ID',

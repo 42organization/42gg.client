@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import StyledButton from 'components/takgu/UI/StyledButton';
-import styles from 'styles/Layout/Layout.module.scss';
+import styles from 'styles/takgu/Layout/Layout.module.scss';
 
 const PlayButton = () => {
   const presentPath = useRouter().asPath;

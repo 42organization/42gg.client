@@ -7,7 +7,7 @@ import ModeRadiobox from 'components/takgu/mode/modeItems/ModeRadiobox';
 import SeasonDropDown from 'components/takgu/mode/modeItems/SeasonDropDown';
 import UserGameSearchBar from 'components/takgu/mode/modeItems/UserGameSearchBar';
 import useSeasonDropDown from 'hooks/takgu/mode/useSeasonDropDown';
-import styles from 'styles/mode/ModeWrap.module.scss';
+import styles from 'styles/takgu/mode/ModeWrap.module.scss';
 
 interface GameModeWrapProps {
   children: React.ReactNode;

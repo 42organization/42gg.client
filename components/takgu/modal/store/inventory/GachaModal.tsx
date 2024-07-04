@@ -8,7 +8,7 @@ import {
 import BackgroundPreview from 'components/takgu/modal/store/inventory/BackgroundPreview';
 import EdgePreview from 'components/takgu/modal/store/inventory/EdgePreview';
 import GachaConfetti from 'components/takgu/modal/store/inventory/GachaConfetti';
-import styles from 'styles/modal/store/GachaModal.module.scss';
+import styles from 'styles/takgu/modal/store/GachaModal.module.scss';
 
 export default function GachaModal({ item, color }: IRandomItem) {
   const resetModal = useResetRecoilState(modalState);

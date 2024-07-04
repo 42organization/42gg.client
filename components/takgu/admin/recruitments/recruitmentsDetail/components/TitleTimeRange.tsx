@@ -9,7 +9,7 @@ import {
 import { Irecruit } from 'types/admin/adminRecruitmentsTypes';
 import { dateToStringShort } from 'utils/handleTime';
 import { AdminTableHead } from 'components/takgu/admin/common/AdminTable';
-import styles from 'styles/admin/recruitments/recruitmentDetail/components/TitleTimeRange.module.scss';
+import styles from 'styles/takgu/admin/recruitments/recruitmentDetail/components/TitleTimeRange.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   title: '모집 제목',

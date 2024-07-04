@@ -5,7 +5,7 @@ import { TbQuestionMark } from 'react-icons/tb';
 import { userImages } from 'types/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
 import PlayerImage from 'components/takgu/PlayerImage';
-import styles from 'styles/rank/RankListMain.module.scss';
+import styles from 'styles/takgu/rank/RankListMain.module.scss';
 
 interface RankListItemMainProps {
   rank: number;

@@ -5,7 +5,7 @@ import { Modal, PartyReportModalData } from 'types/modalTypes';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/modal/menu/ReportModal.module.scss';
+import styles from 'styles/takgu/modal/menu/ReportModal.module.scss';
 import { ModalButton, ModalButtonContainer } from '../ModalButton';
 
 export function PartyReportModal({ report }: { report: PartyReportModalData }) {

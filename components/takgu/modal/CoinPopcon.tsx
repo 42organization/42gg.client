@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import styles from 'styles/modal/CoinPopcon.module.scss';
+import styles from 'styles/takgu/modal/CoinPopcon.module.scss';
 interface amountProps {
   amount: number;
   coin: number;

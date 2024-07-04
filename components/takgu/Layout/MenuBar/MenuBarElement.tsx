@@ -21,7 +21,7 @@ import StatisticsEmoji from 'public/image/takgu/menu_statistics.svg';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import useCheckRecruit from 'hooks/takgu/recruit/useCheckRecruit';
 import useAxiosGet from 'hooks/useAxiosGet';
-import styles from 'styles/Layout/MenuBar.module.scss';
+import styles from 'styles/takgu/Layout/MenuBar.module.scss';
 
 interface MenuLinkProps {
   link: string;

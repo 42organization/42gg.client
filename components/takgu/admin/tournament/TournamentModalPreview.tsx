@@ -4,7 +4,7 @@ import { ITournamentEditInfo } from 'types/admin/adminTournamentTypes';
 import { QUILL_FORMATS } from 'types/quillTypes';
 import { dateToString } from 'utils/handleTime';
 import DynamicQuill from 'components/DynamicQuill';
-import styles from 'styles/admin/tournament/TournamentModalPreview.module.scss';
+import styles from 'styles/takgu/admin/tournament/TournamentModalPreview.module.scss';
 
 interface TournamentModalPreviewProps {
   tournamentEditInfo: ITournamentEditInfo;

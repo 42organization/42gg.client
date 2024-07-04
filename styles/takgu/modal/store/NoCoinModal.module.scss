@@ -1,0 +1,28 @@
+@import 'styles/takgu/common.scss';
+
+.container {
+  @include modalContainer('SKYPINK');
+}
+
+.phrase {
+  @include modal-phrase;
+  margin-bottom: 0.875rem;
+  color: rgba(49, 47, 49, 1);
+  .message {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 200%;
+    letter-spacing: 0.04rem;
+  }
+  .details {
+    margin: 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 550;
+    color: black;
+    letter-spacing: 0.04rem;
+  }
+}
+
+.buttons {
+  @include modalButton;
+}

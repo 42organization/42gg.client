@@ -6,7 +6,7 @@ import { InfiniteScrollComponent } from 'components/takgu/store/InfiniteScrollCo
 import { InvetoryItem } from 'components/takgu/store/InventoryItem';
 import StoreLoading from 'components/takgu/store/StoreLoading';
 import EmptyImage from 'components/takgu/UI/EmptyImage';
-import styles from 'styles/store/Inventory.module.scss';
+import styles from 'styles/takgu/store/Inventory.module.scss';
 
 function fetchInventoryData(page: number) {
   return instance.get(`/pingpong/items?page=${page}&size=${8}`).then((res) => {

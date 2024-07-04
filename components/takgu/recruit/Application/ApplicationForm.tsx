@@ -18,7 +18,7 @@ import CancelModal from 'components/takgu/modal/recruitment/CancelModal';
 import MultiCheckForm from 'components/takgu/recruit/Application/applicationFormItems/MultiCheckForm';
 import SingleCheckForm from 'components/takgu/recruit/Application/applicationFormItems/SingleCheckForm';
 import TextForm from 'components/takgu/recruit/Application/applicationFormItems/TextForm';
-import styles from 'styles/recruit/application.module.scss';
+import styles from 'styles/takgu/recruit/application.module.scss';
 
 interface IApplicationFormProps {
   mode: ApplicationFormType;

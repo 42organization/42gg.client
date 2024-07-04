@@ -7,7 +7,7 @@ import { modalState } from 'utils/recoil/modal';
 import CoinAnimation from 'components/takgu/modal/CoinAnimation';
 import CoinPopcon from 'components/takgu/modal/CoinPopcon';
 import CoinStat from 'components/takgu/modal/statChange/CoinStatChange';
-import styles from 'styles/modal/CoinChangeModal.module.scss';
+import styles from 'styles/takgu/modal/CoinChangeModal.module.scss';
 
 export default function CoinChangeModal(coin: CoinResult) {
   const setModal = useSetRecoilState(modalState);

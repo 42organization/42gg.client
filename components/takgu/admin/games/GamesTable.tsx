@@ -5,7 +5,7 @@ import { getFormattedDateToString, gameTimeToString } from 'utils/handleTime';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/takgu/admin/common/AdminSearchBar';
 import ModifyScoreForm from 'components/takgu/admin/games/ModifyScoreForm';
-import styles from 'styles/admin/games/GamesTable.module.scss';
+import styles from 'styles/takgu/admin/games/GamesTable.module.scss';
 
 export default function GamesTable() {
   const [currentPage, setCurrentPage] = useState<number>(1);

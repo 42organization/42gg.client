@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from 'styles/store/CoinImage.module.scss';
+import styles from 'styles/takgu/store/CoinImage.module.scss';
 
 export default function CoinImage({
   amount,

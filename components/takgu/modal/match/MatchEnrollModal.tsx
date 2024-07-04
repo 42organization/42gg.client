@@ -6,7 +6,7 @@ import {
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
 import useMatchEnrollModal from 'hooks/takgu/modal/match/useMatchEnrollModal';
-import styles from 'styles/modal/match/MatchEnrollModal.module.scss';
+import styles from 'styles/takgu/modal/match/MatchEnrollModal.module.scss';
 
 export default function MatchEnrollModal({ startTime, endTime, mode }: Enroll) {
   const [isLoading, setIsLoading] = useState(false);

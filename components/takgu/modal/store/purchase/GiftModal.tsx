@@ -12,7 +12,7 @@ import {
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
 import GiftSearchBar from 'components/takgu/store/purchase/GiftSearchBar';
-import styles from 'styles/modal/store/GiftModal.module.scss';
+import styles from 'styles/takgu/modal/store/GiftModal.module.scss';
 
 export default function GiftModal({ itemId, product, price }: PriceTag) {
   const [isLoading, setIsLoading] = useState<boolean>(false);

@@ -10,7 +10,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import useChartModule from 'hooks/takgu/users/useChartModule';
-import styles from 'styles/user/Chart.module.scss';
+import styles from 'styles/takgu/user/Chart.module.scss';
 
 ChartJS.register(
   CategoryScale,

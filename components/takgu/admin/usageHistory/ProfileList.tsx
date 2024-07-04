@@ -21,7 +21,7 @@ import {
   AdminEmptyItem,
   AdminTableHead,
 } from 'components/takgu/admin/common/AdminTable';
-import styles from 'styles/admin/usageHistory/ProfileList.module.scss';
+import styles from 'styles/takgu/admin/usageHistory/ProfileList.module.scss';
 
 const tableTitle: { [key: string]: string } = {
   id: 'ID',

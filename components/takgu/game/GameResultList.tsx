@@ -6,7 +6,7 @@ import GameResultBigItem from 'components/takgu/game/big/GameResultBigItem';
 import GameResultEmptyItem from 'components/takgu/game/GameResultEmptyItem';
 import GameResultSmallItem from 'components/takgu/game/small/GameResultSmallItem';
 import useGameResultList from 'hooks/takgu/game/useGameResultList';
-import styles from 'styles/game/GameResultItem.module.scss';
+import styles from 'styles/takgu/game/GameResultItem.module.scss';
 
 interface GameResultListProps {
   path: string;

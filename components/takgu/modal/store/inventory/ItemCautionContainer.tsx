@@ -1,4 +1,4 @@
-import styles from 'styles/modal/store/InventoryModal.module.scss';
+import styles from 'styles/takgu/modal/store/InventoryModal.module.scss';
 
 type ItemCautionContainerProps = {
   caution: string[];

@@ -3,7 +3,7 @@ import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
 import { GiftRequest } from 'types/itemTypes';
 import useSearchBar from 'hooks/useSearchBar';
-import styles from 'styles/main/SearchBar.module.scss';
+import styles from 'styles/takgu/main/SearchBar.module.scss';
 
 export default function GiftSearchBar({
   setGiftReqData,

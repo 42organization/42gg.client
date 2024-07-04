@@ -9,7 +9,7 @@ import {
   ModalButton,
 } from 'components/takgu/modal/ModalButton';
 import { useUser } from 'hooks/takgu/Layout/useUser';
-import styles from 'styles/modal/event/AnnouncementModal.module.scss';
+import styles from 'styles/takgu/modal/event/AnnouncementModal.module.scss';
 import 'react-quill/dist/quill.bubble.css';
 
 type AnnouncementModalProps = {

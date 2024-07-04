@@ -6,7 +6,7 @@ import PartyDetailCommentBox from 'components/takgu/party/roomDetail/PartyDetail
 import PartyDetailProfile from 'components/takgu/party/roomDetail/PartyDetailProfile';
 import PartyDetailTitleBox from 'components/takgu/party/roomDetail/PartyDetailTitleBox';
 import usePartyColorMode from 'hooks/takgu/party/usePartyColorMode';
-import styles from 'styles/party/PartyDetailRoom.module.scss';
+import styles from 'styles/takgu/party/PartyDetailRoom.module.scss';
 
 export default function PartyDetailPage() {
   const roomId = useRouter().query.id;
