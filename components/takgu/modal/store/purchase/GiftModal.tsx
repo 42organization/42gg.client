@@ -4,8 +4,8 @@ import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import { GiftRequest } from 'types/takgu/itemTypes';
 import { PriceTag } from 'types/modalTypes';
 import { instance, isAxiosError } from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
-import { modalState } from 'utils/recoil/modal';
+import { errorState } from 'utils/takgu/recoil/error';
+import { modalState } from 'utils/takgu/recoil/modal';
 import { PURCHASE_ALERT_MESSAGE } from 'constants/takgu/store/purchaseAlertMessage';
 import {
   ModalButtonContainer,

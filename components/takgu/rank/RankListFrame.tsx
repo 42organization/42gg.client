@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
-import { colorToggleSelector } from 'utils/recoil/colorMode';
+import { colorToggleSelector } from 'utils/takgu/recoil/colorMode';
 import PageNation from 'components/Pagination';
 import styles from 'styles/takgu/rank/RankList.module.scss';
 interface PageInfo {

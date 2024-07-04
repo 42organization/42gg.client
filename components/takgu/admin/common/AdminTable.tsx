@@ -1,7 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 import { TableCell, TableHead, TableRow } from '@mui/material';
 import { TableName } from 'types/takgu/admin/tableTypes';
-import { modalState } from 'utils/recoil/modal';
+import { modalState } from 'utils/takgu/recoil/modal';
 import { tableFormat } from 'constants/takgu/admin/table';
 import styles from 'styles/takgu/admin/common/AdminTable.module.scss';
 

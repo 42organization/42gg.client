@@ -5,7 +5,7 @@ import { ApplicationFormType } from 'types/takgu/recruit/recruitments';
 import {
   applicationAlertState,
   applicationModalState,
-} from 'utils/recoil/application';
+} from 'utils/takgu/recoil/application';
 import useUserApplicationForm from 'hooks/takgu/recruit/useUserApplicationForm';
 import styles from 'styles/takgu/modal/recruit/recruitModal.module.scss';
 

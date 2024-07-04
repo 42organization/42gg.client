@@ -9,10 +9,10 @@ import {
   TableRow,
 } from '@mui/material';
 import { ITournamentEditInfo } from 'types/takgu/admin/adminTournamentTypes';
-import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
+import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/takgu/quillTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToKRIOSString, dateToKRLocaleTimeString } from 'utils/handleTime';
-import { toastState } from 'utils/recoil/toast';
+import { toastState } from 'utils/takgu/recoil/toast';
 import DynamicQuill from 'components/DynamicQuill';
 import styles from 'styles/takgu/admin/tournament/TournamentEdit.module.scss';
 import 'react-quill/dist/quill.snow.css';

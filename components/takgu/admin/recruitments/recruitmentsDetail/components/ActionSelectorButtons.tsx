@@ -7,7 +7,7 @@ import {
   RecruitmentsPages,
 } from 'types/takgu/admin/adminRecruitmentsTypes';
 import { instance } from 'utils/axios';
-import { toastState } from 'utils/recoil/toast';
+import { toastState } from 'utils/takgu/recoil/toast';
 import styles from 'styles/takgu/admin/recruitments/recruitmentDetail/components/ActionSelectorButtons.module.scss';
 
 interface ActionSelectorButtonsProps {

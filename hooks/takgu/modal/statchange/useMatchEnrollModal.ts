@@ -1,9 +1,9 @@
 import { useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/takgu/mainType';
 import { instance } from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
-import { reloadMatchState } from 'utils/recoil/match';
-import { modalState } from 'utils/recoil/modal';
+import { errorState } from 'utils/takgu/recoil/error';
+import { reloadMatchState } from 'utils/takgu/recoil/match';
+import { modalState } from 'utils/takgu/recoil/modal';
 
 interface EnrollProps {
   startTime: string;

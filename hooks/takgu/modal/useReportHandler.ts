@@ -1,8 +1,8 @@
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'types/modalTypes';
 import { instance } from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
-import { modalState } from 'utils/recoil/modal';
+import { errorState } from 'utils/takgu/recoil/error';
+import { modalState } from 'utils/takgu/recoil/modal';
 interface Report {
   category: string;
   content: string;

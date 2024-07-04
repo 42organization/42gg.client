@@ -1,4 +1,4 @@
-import { ProfileBasic } from 'types/userTypes';
+import { ProfileBasic } from 'types/takgu/userTypes';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(

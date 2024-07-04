@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { IUserCoin } from 'types/takgu/admin/adminUserTypes';
 import { instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/recoil/modal';
-import { toastState } from 'utils/recoil/toast';
+import { modalState } from 'utils/takgu/recoil/modal';
+import { toastState } from 'utils/takgu/recoil/toast';
 import styles from 'styles/takgu/admin/modal/AdminUserCoin.module.scss';
 
 export default function AdminUserCoinModal(props: { intraId: string }) {

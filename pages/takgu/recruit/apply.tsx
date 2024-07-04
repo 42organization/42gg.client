@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { applicationAlertState } from 'utils/recoil/application';
+import { applicationAlertState } from 'utils/takgu/recoil/application';
 import ApplicationForm from 'components/takgu/recruit/Application/ApplicationForm';
 import ApplicationLoadingNoData from 'components/takgu/recruit/Application/ApplicationLoadingNoData';
 import StickyHeader from 'components/takgu/recruit/StickyHeader';

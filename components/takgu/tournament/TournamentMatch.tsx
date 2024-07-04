@@ -3,7 +3,7 @@ import {
   Participant,
 } from '@g-loot/react-tournament-brackets/dist/src/types';
 import { useRecoilValue } from 'recoil';
-import { clickedTournamentState } from 'utils/recoil/tournament';
+import { clickedTournamentState } from 'utils/takgu/recoil/tournament';
 import BouncingDots from 'components/takgu/UI/BouncingDots';
 import styles from 'styles/takgu/tournament/TournamentMatch.module.scss';
 interface TournamentMatchPartyProps {

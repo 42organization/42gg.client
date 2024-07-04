@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState, useRef, createContext } from 'react';
 import { ITournament } from 'types/takgu/admin/adminTournamentTypes';
 import { TournamentGame } from 'types/takgu/tournamentTypes';
 import { instance } from 'utils/axios';
-import { convertTournamentGamesToBracketMatchs } from 'utils/handleTournamentGame';
+import { convertTournamentGamesToBracketMatchs } from 'utils/takgu/handleTournamentGame';
 import TournamentEditBraket from 'components/takgu/admin/tournament/TournamentEditBraket';
 import useComponentSize from 'hooks/takgu/util/useComponentSize';
 import styles from 'styles/takgu/admin/modal/AdminEditTournamentBraket.module.scss';

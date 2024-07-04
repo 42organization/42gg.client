@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import InfScroll from 'utils/infinityScroll';
-import { clickedGameItemState } from 'utils/recoil/game';
+import { clickedGameItemState } from 'utils/takgu/recoil/game';
 
 const useGameResultList = (path: string) => {
   const { data, fetchNextPage, status, remove, refetch } = InfScroll(path);

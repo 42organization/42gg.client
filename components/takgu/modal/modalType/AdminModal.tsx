@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
+import { modalState } from 'utils/takgu/recoil/modal';
 import AdminCheckSendNotiModal from 'components/takgu/modal/admin/AdminCheckSendNoti';
 import AdminDeleteItemModal from 'components/takgu/modal/admin/AdminDeleteItem';
 import AdminDeleteMegaphoneModal from 'components/takgu/modal/admin/AdminDeleteMegaphoneModal';

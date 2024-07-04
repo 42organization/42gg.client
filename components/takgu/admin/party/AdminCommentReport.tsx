@@ -8,9 +8,12 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { PartyCommentReport, PartyCommentReportTable } from 'types/partyTypes';
+import {
+  PartyCommentReport,
+  PartyCommentReportTable,
+} from 'types/takgu/partyTypes';
 import { instanceInPartyManage } from 'utils/axios';
-import { toastState } from 'utils/recoil/toast';
+import { toastState } from 'utils/takgu/recoil/toast';
 import { tableFormat } from 'constants/takgu/admin/table';
 import PageNation from 'components/Pagination';
 import {

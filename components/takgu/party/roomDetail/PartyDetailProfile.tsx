@@ -4,7 +4,7 @@ import {
   PartyRoomDetail,
   PartyRoomStatus,
   PartyRoomUser,
-} from 'types/partyTypes';
+} from 'types/takgu/partyTypes';
 import { nameToRGB } from 'utils/color';
 import styles from 'styles/takgu/party/PartyDetailRoom.module.scss';
 import PartyRoomDetailButton from './PartyDetailButton';

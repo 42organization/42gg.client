@@ -6,7 +6,7 @@ import {
   IrecruitArrayTable,
 } from 'types/takgu/admin/adminRecruitmentsTypes';
 import { instance } from 'utils/axios';
-import { toastState } from 'utils/recoil/toast';
+import { toastState } from 'utils/takgu/recoil/toast';
 
 // FIXME : 페이지네이션 여부 담당자와 다시 확인하기 (현재 페이지네이션 없음)
 // const useRecruitmentUserFilter = (recruitId: number, currentPage?: number) => {

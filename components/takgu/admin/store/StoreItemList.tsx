@@ -11,8 +11,8 @@ import {
 } from '@mui/material';
 import { Item } from 'types/takgu/itemTypes';
 import { instance } from 'utils/axios';
-import { modalState } from 'utils/recoil/modal';
-import { toastState } from 'utils/recoil/toast';
+import { modalState } from 'utils/takgu/recoil/modal';
+import { toastState } from 'utils/takgu/recoil/toast';
 import { tableFormat } from 'constants/takgu/admin/table';
 import {
   AdminEmptyItem,

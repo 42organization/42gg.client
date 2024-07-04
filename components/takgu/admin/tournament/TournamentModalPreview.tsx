@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import { MdPeopleAlt } from 'react-icons/md';
 import { ITournamentEditInfo } from 'types/takgu/admin/adminTournamentTypes';
-import { QUILL_FORMATS } from 'types/quillTypes';
+import { QUILL_FORMATS } from 'types/takgu/quillTypes';
 import { dateToString } from 'utils/handleTime';
 import DynamicQuill from 'components/DynamicQuill';
 import styles from 'styles/takgu/admin/tournament/TournamentModalPreview.module.scss';

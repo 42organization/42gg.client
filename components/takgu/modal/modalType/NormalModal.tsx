@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { modalState } from 'utils/recoil/modal';
+import { modalState } from 'utils/takgu/recoil/modal';
 import AfterGameModal from 'components/takgu/modal/afterGame/AfterGameModal';
 import AnnouncementModal from 'components/takgu/modal/event/AnnouncementModal';
 import WelcomeModal from 'components/takgu/modal/event/WelcomeModal';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getChartList } from 'utils/handleChartList';
+import { getChartList } from 'utils/takgu/handleChartList';
 
 type ChartData = {
   chartName: string;

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSetRecoilState, useResetRecoilState } from 'recoil';
-import { colorModeState } from 'utils/recoil/colorMode';
+import { colorModeState } from 'utils/takgu/recoil/colorMode';
 
 function useColorMode(page: 'GAME' | 'MATCH' | 'RANK') {
   const setColorMode = useSetRecoilState(colorModeState);

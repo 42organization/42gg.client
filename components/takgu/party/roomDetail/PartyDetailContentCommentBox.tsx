@@ -4,7 +4,7 @@ import {
   PartyComment,
   PartyRoomDetail,
   PartyRoomStatus,
-} from 'types/partyTypes';
+} from 'types/takgu/partyTypes';
 import { instance } from 'utils/axios';
 import { nameToRGB } from 'utils/color';
 import { dateToKRLocaleTimeString } from 'utils/handleTime';

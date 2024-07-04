@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { PartyCategory } from 'types/partyTypes';
+import { PartyCategory } from 'types/takgu/partyTypes';
 import { instance, instanceInPartyManage } from 'utils/axios';
-import { toastState } from 'utils/recoil/toast';
+import { toastState } from 'utils/takgu/recoil/toast';
 
 type categoryResponse = {
   categoryList: PartyCategory[];

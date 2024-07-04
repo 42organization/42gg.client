@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { SeasonList } from 'types/takgu/seasonTypes';
-import { loginState } from 'utils/recoil/login';
-import { seasonListState } from 'utils/recoil/seasons';
+import { loginState } from 'utils/takgu/recoil/login';
+import { seasonListState } from 'utils/takgu/recoil/seasons';
 import useAxiosGet from 'hooks/useAxiosGet';
 
 const useGetUserSeason = (presentPath: string) => {

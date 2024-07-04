@@ -1,5 +1,5 @@
 import { FaPlus, FaMinus } from 'react-icons/fa';
-import { ICoinHistory } from 'types/userTypes';
+import { ICoinHistory } from 'types/takgu/userTypes';
 import { dateToStringShort } from 'utils/handleTime';
 import styles from 'styles/takgu/modal/store/CoinHistoryDetails.module.scss';
 

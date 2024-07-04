@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Graphs } from 'types/takgu/chartTypes';
-import { errorState } from 'utils/recoil/error';
+import { errorState } from 'utils/takgu/recoil/error';
 
 export const useChartsData = () => {
   const [startDate, setStartDate] = useState('');

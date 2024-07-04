@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { ToggleMode } from 'types/takgu/rankTypes';
-import { seasonListState, latestSeasonIdState } from 'utils/recoil/seasons';
+import {
+  seasonListState,
+  latestSeasonIdState,
+} from 'utils/takgu/recoil/seasons';
 
 const useSeasonDropDown = (
   clickTitle?: boolean,

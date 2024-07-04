@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { PartyGameTemplate, PartyTemplateForm } from 'types/partyTypes';
-import { modalState } from 'utils/recoil/modal';
+import { PartyGameTemplate, PartyTemplateForm } from 'types/takgu/partyTypes';
+import { modalState } from 'utils/takgu/recoil/modal';
 import { usePartyTemplate } from 'hooks/takgu/party/usePartyTemplate';
 import styles from 'styles/takgu/party/TemplateModal.module.scss';
 

@@ -4,7 +4,7 @@ import { MatchMode } from 'types/takgu/mainType';
 import { Match } from 'types/takgu/matchTypes';
 import { Modal } from 'types/modalTypes';
 import { stringToHourMin } from 'utils/handleTime';
-import { modalState } from 'utils/recoil/modal';
+import { modalState } from 'utils/takgu/recoil/modal';
 import MatchBoard from 'components/takgu/match/MatchBoard';
 import MatchModeWrap from 'components/takgu/mode/modeWraps/MatchModeWrap';
 import useGetReloadMatchHandler from 'hooks/match/useGetReloadMatchHandler';

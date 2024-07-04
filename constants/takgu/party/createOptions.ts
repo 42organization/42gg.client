@@ -1,4 +1,4 @@
-import { PartyTemplateWithoutCategory } from 'types/partyTypes';
+import { PartyTemplateWithoutCategory } from 'types/takgu/partyTypes';
 
 const custumTemplateId = 0;
 export const customTemplate: PartyTemplateWithoutCategory = {

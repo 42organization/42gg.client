@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
+import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/takgu/quillTypes';
 import { instanceInManage, instance } from 'utils/axios';
-import { toastState } from 'utils/recoil/toast';
+import { toastState } from 'utils/takgu/recoil/toast';
 import DynamicQuill from 'components/DynamicQuill';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import styles from 'styles/takgu/admin/announcement/AnnounceEdit.module.scss';

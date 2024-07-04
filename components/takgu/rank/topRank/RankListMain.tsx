@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { userImages } from 'types/takgu/rankTypes';
-import { colorToggleSelector } from 'utils/recoil/colorMode';
+import { colorToggleSelector } from 'utils/takgu/recoil/colorMode';
 import RankListItemMain from 'components/takgu/rank/topRank/RankListItemMain';
 import useRankListMain from 'hooks/takgu/rank/useRankListMain';
 import styles from 'styles/takgu/rank/RankListMain.module.scss';

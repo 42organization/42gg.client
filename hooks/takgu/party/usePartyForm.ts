@@ -2,7 +2,7 @@ import { useReducer } from 'react';
 import {
   PartyCreateForm,
   PartyTemplateWithoutCategory,
-} from 'types/partyTypes';
+} from 'types/takgu/partyTypes';
 import { customTemplate } from 'constants/takgu/party/createOptions';
 
 type PartyFormAction =

@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { ITournamentUser } from 'types/takgu/admin/adminTournamentTypes';
 import { instanceInManage } from 'utils/axios';
-import { toastState } from 'utils/recoil/toast';
+import { toastState } from 'utils/takgu/recoil/toast';
 
 export default function useAdminTournamentParticipantEdit(
   tournamentId: number

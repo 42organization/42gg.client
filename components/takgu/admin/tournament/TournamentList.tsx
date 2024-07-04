@@ -21,8 +21,8 @@ import {
 } from 'types/takgu/admin/adminTournamentTypes';
 import { instance, instanceInManage } from 'utils/axios';
 import { dateToDateTimeLocalString, dateToStringShort } from 'utils/handleTime';
-import { modalState } from 'utils/recoil/modal';
-import { toastState } from 'utils/recoil/toast';
+import { modalState } from 'utils/takgu/recoil/modal';
+import { toastState } from 'utils/takgu/recoil/toast';
 import { tableFormat } from 'constants/takgu/admin/table';
 import PageNation from 'components/Pagination';
 import {

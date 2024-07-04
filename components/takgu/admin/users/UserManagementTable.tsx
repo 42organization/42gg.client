@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { IUser, IUserTable } from 'types/takgu/admin/adminUserTypes';
 import { instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/recoil/modal';
+import { modalState } from 'utils/takgu/recoil/modal';
 import { tableFormat } from 'constants/takgu/admin/table';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/takgu/admin/common/AdminSearchBar';

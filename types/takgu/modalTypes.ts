@@ -10,7 +10,7 @@ import { Item } from 'types/takgu/itemTypes';
 import { MatchMode } from 'types/takgu/mainType';
 import { ISeason } from 'types/takgu/seasonTypes';
 import { StoreManualMode } from 'types/takgu/storeTypes';
-import { ICoin } from 'types/userTypes';
+import { ICoin } from 'types/takgu/userTypes';
 import { ITournament } from './admin/adminTournamentTypes';
 import { GameMode } from './gameTypes';
 import { PartyGameTemplate, PartyPenaltyAdmin } from './partyTypes';

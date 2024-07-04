@@ -1,4 +1,4 @@
-import { ICoinHistory } from 'types/userTypes';
+import { ICoinHistory } from 'types/takgu/userTypes';
 import CoinHistoryDetails from 'components/takgu/modal/store/CoinHistoryDetails';
 import ErrorEmoji from 'public/image/takgu/noti_empty.svg';
 import styles from 'styles/takgu/modal/store/CoinHistoryContainer.module.scss';

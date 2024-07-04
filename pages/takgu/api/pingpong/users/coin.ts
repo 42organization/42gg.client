@@ -1,4 +1,4 @@
-import { ICoinHistory, ICoinHistoryList, ICoin } from 'types/userTypes';
+import { ICoinHistory, ICoinHistoryList, ICoin } from 'types/takgu/userTypes';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const coin = 100;

@@ -3,7 +3,7 @@ import { useResetRecoilState } from 'recoil';
 import useErrorPage from 'hooks/error/useErrorPage';
 import styles from 'styles/takgu/Error.module.scss';
 import ErrorEmoji from '/public/image/takgu/error_face.svg';
-import { modalState } from 'utils/recoil/modal';
+import { modalState } from 'utils/takgu/recoil/modal';
 
 export default function ErrorPage() {
   const { error, goHome } = useErrorPage();

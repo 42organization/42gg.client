@@ -3,7 +3,7 @@ import { SyntheticEvent } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Item } from 'types/takgu/itemTypes';
 import { Modal } from 'types/modalTypes';
-import { modalState } from 'utils/recoil/modal';
+import { modalState } from 'utils/takgu/recoil/modal';
 import styles from 'styles/takgu/store/ItemCard.module.scss';
 
 export default function ItemCard({ item }: { item: Item }) {

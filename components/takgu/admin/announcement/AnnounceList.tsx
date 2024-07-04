@@ -7,11 +7,11 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { QUILL_FORMATS } from 'types/quillTypes';
 import {
   IAnnouncement,
   IAnnouncementTable,
 } from 'types/takgu/admin/adminAnnouncementTypes';
+import { QUILL_FORMATS } from 'types/takgu/quillTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { tableFormat } from 'constants/takgu/admin/table';

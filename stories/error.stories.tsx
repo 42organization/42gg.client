@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import type { Meta, StoryObj } from '@storybook/react';
-import { errorState } from 'utils/recoil/error';
+import { errorState } from 'utils/takgu/recoil/error';
 import ErrorPage from 'components/takgu/error/Error';
 
 const meta: Meta = {

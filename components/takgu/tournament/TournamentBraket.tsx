@@ -9,7 +9,7 @@ import {
 } from '@g-loot/react-tournament-brackets/dist/src/types';
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
-import { clickedTournamentState } from 'utils/recoil/tournament';
+import { clickedTournamentState } from 'utils/takgu/recoil/tournament';
 import TournamentMatch from 'components/takgu/tournament/TournamentMatch';
 import LoadingSpinner from 'components/takgu/UI/LoadingSpinner';
 

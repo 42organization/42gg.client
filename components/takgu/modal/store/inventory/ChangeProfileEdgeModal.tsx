@@ -4,8 +4,8 @@ import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { UseItemData, UseItemRequest } from 'types/takgu/inventoryTypes';
 import { Modal } from 'types/modalTypes';
 import { instance, isAxiosError } from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
-import { modalState } from 'utils/recoil/modal';
+import { errorState } from 'utils/takgu/recoil/error';
+import { modalState } from 'utils/takgu/recoil/modal';
 import { ITEM_ALERT_MESSAGE } from 'constants/takgu/store/itemAlertMessage';
 import {
   ModalButtonContainer,

@@ -4,9 +4,9 @@ import { Live, MatchMode } from 'types/takgu/mainType';
 import { CurrentMatchList, Match, Slot } from 'types/takgu/matchTypes';
 import { Modal } from 'types/modalTypes';
 import { stringToHourMin } from 'utils/handleTime';
-import { liveState } from 'utils/recoil/layout';
-import { currentMatchState } from 'utils/recoil/match';
-import { modalState } from 'utils/recoil/modal';
+import { liveState } from 'utils/takgu/recoil/layout';
+import { currentMatchState } from 'utils/takgu/recoil/match';
+import { modalState } from 'utils/takgu/recoil/modal';
 import styles from 'styles/takgu/match/MatchBoard.module.scss';
 
 interface MatchBoardProps {

@@ -2,8 +2,8 @@ import { NextRouter, useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'types/modalTypes';
 import { instance } from 'utils/axios';
-import { loginState } from 'utils/recoil/login';
-import { modalState } from 'utils/recoil/modal';
+import { loginState } from 'utils/takgu/recoil/login';
+import { modalState } from 'utils/takgu/recoil/modal';
 
 type useLogoutCheckReturn = [() => void, () => Promise<void>];
 

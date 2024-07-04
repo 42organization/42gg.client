@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { CoinResult } from 'types/takgu/coinTypes';
-import { modalState } from 'utils/recoil/modal';
+import { modalState } from 'utils/takgu/recoil/modal';
 import CoinAnimation from 'components/takgu/modal/CoinAnimation';
 import CoinPopcon from 'components/takgu/modal/CoinPopcon';
 import CoinStat from 'components/takgu/modal/statChange/CoinStatChange';

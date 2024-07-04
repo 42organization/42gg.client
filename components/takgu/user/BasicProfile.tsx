@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { AiOutlineEdit } from 'react-icons/ai';
-import { modalState } from 'utils/recoil/modal';
-import { tierIdSelector } from 'utils/recoil/tierColor';
+import { modalState } from 'utils/takgu/recoil/modal';
+import { tierIdSelector } from 'utils/takgu/recoil/tierColor';
 import PlayerImage from 'components/takgu/PlayerImage';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import useBasicProfile from 'hooks/takgu/users/useBasicProfile';

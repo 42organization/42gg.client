@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { PartyRoom } from 'types/partyTypes';
+import { PartyRoom } from 'types/takgu/partyTypes';
 import { instance } from 'utils/axios';
 
 type PartyRoomListProps = {

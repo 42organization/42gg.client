@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { PartyRoomDetail } from 'types/partyTypes';
+import { PartyRoomDetail } from 'types/takgu/partyTypes';
 import { instance } from 'utils/axios';
 import PartyDetailCommentBox from 'components/takgu/party/roomDetail/PartyDetailContentCommentBox';
 import PartyDetailProfile from 'components/takgu/party/roomDetail/PartyDetailProfile';

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { errorState } from 'utils/recoil/error';
+import { errorState } from 'utils/takgu/recoil/error';
 import ErrorPage from 'components/takgu/error/Error';
 
 const Error = () => {

@@ -3,8 +3,8 @@ import { useMutation, useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { IcoinPolicy } from 'types/takgu/admin/adminCoinTypes';
 import { instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/recoil/modal';
-import { toastState } from 'utils/recoil/toast';
+import { modalState } from 'utils/takgu/recoil/modal';
+import { toastState } from 'utils/takgu/recoil/toast';
 import styles from 'styles/takgu/admin/modal/AdminEditCoinPolicy.module.scss';
 
 export default function AdminEditCoinPolicyModal(props: IcoinPolicy) {

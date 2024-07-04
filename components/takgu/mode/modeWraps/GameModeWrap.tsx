@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { SeasonMode, MatchMode } from 'types/takgu/mainType';
-import { colorModeState } from 'utils/recoil/colorMode';
+import { colorModeState } from 'utils/takgu/recoil/colorMode';
 import ModeRadiobox from 'components/takgu/mode/modeItems/ModeRadiobox';
 import SeasonDropDown from 'components/takgu/mode/modeItems/SeasonDropDown';
 import UserGameSearchBar from 'components/takgu/mode/modeItems/UserGameSearchBar';

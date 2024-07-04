@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { colorToggleSelector } from 'utils/recoil/colorMode';
+import { colorToggleSelector } from 'utils/takgu/recoil/colorMode';
 import RankModeWrap from 'components/takgu/mode/modeWraps/RankModeWrap';
 import MyRank from 'components/takgu/rank/MyRank';
 import RankList from 'components/takgu/rank/RankList';

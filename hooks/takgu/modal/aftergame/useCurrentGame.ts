@@ -4,8 +4,8 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { GameMode } from 'types/takgu/gameTypes';
 import { AfterGame } from 'types/takgu/scoreTypes';
 import { instance } from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
-import { liveState } from 'utils/recoil/layout';
+import { errorState } from 'utils/takgu/recoil/error';
+import { liveState } from 'utils/takgu/recoil/layout';
 
 const useCurrentGame = () => {
   const setError = useSetRecoilState(errorState);

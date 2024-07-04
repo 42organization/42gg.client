@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { PartyGameTemplate, PartyTemplateForm } from 'types/partyTypes';
+import { PartyGameTemplate, PartyTemplateForm } from 'types/takgu/partyTypes';
 import { instance, instanceInPartyManage } from 'utils/axios';
-import { toastState } from 'utils/recoil/toast';
+import { toastState } from 'utils/takgu/recoil/toast';
 
 type templateResponse = {
   templateList: PartyGameTemplate[];

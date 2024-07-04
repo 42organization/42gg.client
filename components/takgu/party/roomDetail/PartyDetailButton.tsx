@@ -3,8 +3,8 @@ import { useSetRecoilState } from 'recoil';
 import { BsShare } from 'react-icons/bs';
 import { FiAlertTriangle } from 'react-icons/fi';
 import { instance } from 'utils/axios';
-import { modalState } from 'utils/recoil/modal';
-import { toastState } from 'utils/recoil/toast';
+import { modalState } from 'utils/takgu/recoil/modal';
+import { toastState } from 'utils/takgu/recoil/toast';
 import usePartyPenaltyTimer from 'hooks/takgu/party/usePartyPenaltyTimer';
 import styles from 'styles/takgu/party/PartyDetailRoom.module.scss';
 

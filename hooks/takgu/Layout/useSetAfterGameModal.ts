@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Live } from 'types/takgu/mainType';
 import { Modal } from 'types/modalTypes';
-import { liveState } from 'utils/recoil/layout';
-import { openCurrentMatchState } from 'utils/recoil/match';
-import { modalState } from 'utils/recoil/modal';
+import { liveState } from 'utils/takgu/recoil/layout';
+import { openCurrentMatchState } from 'utils/takgu/recoil/match';
+import { modalState } from 'utils/takgu/recoil/modal';
 
 const useSetAfterGameModal = () => {
   const live = useRecoilValue<Live>(liveState);

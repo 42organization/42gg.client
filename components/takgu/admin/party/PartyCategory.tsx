@@ -7,7 +7,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { PartyCategory } from 'types/partyTypes';
+import { PartyCategory } from 'types/takgu/partyTypes';
 import { tableFormat } from 'constants/takgu/admin/table';
 import { AdminTableHead } from 'components/takgu/admin/common/AdminTable';
 import usePartyCategory from 'hooks/takgu/party/usePartyCategory';

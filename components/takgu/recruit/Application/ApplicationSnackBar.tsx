@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { Alert, Snackbar } from '@mui/material';
-import { applicationAlertState } from 'utils/recoil/application';
+import { applicationAlertState } from 'utils/takgu/recoil/application';
 
 export default function ApplicationSnackBar() {
   const [alertState, setAlertState] = useRecoilState(applicationAlertState);

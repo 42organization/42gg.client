@@ -8,11 +8,11 @@ import {
   IRecruitmentDetail,
   refMap,
 } from 'types/takgu/recruit/recruitments';
-import { applicationAnswerSet } from 'utils/handleApplicationForm';
+import { applicationAnswerSet } from 'utils/takgu/handleApplicationForm';
 import {
   applicationAlertState,
   applicationModalState,
-} from 'utils/recoil/application';
+} from 'utils/takgu/recoil/application';
 import ApplyEditModal from 'components/takgu/modal/recruitment/ApplyEditModal';
 import CancelModal from 'components/takgu/modal/recruitment/CancelModal';
 import MultiCheckForm from 'components/takgu/recruit/Application/applicationFormItems/MultiCheckForm';

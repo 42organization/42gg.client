@@ -1,4 +1,4 @@
-import { PartyCategory, PartyRoomStatus } from 'types/partyTypes';
+import { PartyCategory, PartyRoomStatus } from 'types/takgu/partyTypes';
 
 export type PartyRoomColumn = {
   roomId: number;

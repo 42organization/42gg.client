@@ -1,8 +1,8 @@
 import { useSetRecoilState } from 'recoil';
 import { Iprofile } from 'types/takgu/admin/adminReceiptType';
 import { instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/recoil/modal';
-import { toastState } from 'utils/recoil/toast';
+import { modalState } from 'utils/takgu/recoil/modal';
+import { toastState } from 'utils/takgu/recoil/toast';
 import PlayerImage from 'components/takgu/PlayerImage';
 import styles from 'styles/takgu/admin/modal/AdminDeleteProfile.module.scss';
 

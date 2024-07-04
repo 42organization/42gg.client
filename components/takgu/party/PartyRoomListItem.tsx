@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { PartyRoom } from 'types/partyTypes';
+import { PartyRoom } from 'types/takgu/partyTypes';
 import { getRemainTime } from 'utils/handleTime';
 import styles from 'styles/takgu/party/PartyRoomListItem.module.scss';
 

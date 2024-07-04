@@ -19,7 +19,7 @@ import {
 import { instance } from 'utils/axios';
 import { dateToDateTimeLocalString } from 'utils/handleTime';
 import { InfiniteScroll } from 'utils/infinityScroll';
-import { toastState } from 'utils/recoil/toast';
+import { toastState } from 'utils/takgu/recoil/toast';
 import styles from 'styles/takgu/admin/recruitments/recruitmentEdit/components/ActionSelectorButtons.module.scss';
 
 const ITEM_HEIGHT = 48;

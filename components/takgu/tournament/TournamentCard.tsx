@@ -6,8 +6,8 @@ import { Modal } from 'types/modalTypes';
 import { TournamentInfo } from 'types/takgu/tournamentTypes';
 import { instance } from 'utils/axios';
 import { dateToKRLocaleTimeString } from 'utils/handleTime';
-import { errorState } from 'utils/recoil/error';
-import { modalState } from 'utils/recoil/modal';
+import { errorState } from 'utils/takgu/recoil/error';
+import { modalState } from 'utils/takgu/recoil/modal';
 import styles from 'styles/takgu/tournament/TournamentCard.module.scss';
 
 export default function TournamentCard({

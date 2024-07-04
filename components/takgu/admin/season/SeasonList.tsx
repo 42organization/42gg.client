@@ -10,8 +10,8 @@ import {
 } from '@mui/material';
 import { ISeason, ISeasonList } from 'types/takgu/seasonTypes';
 import { instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/recoil/modal';
-import { toastState } from 'utils/recoil/toast';
+import { modalState } from 'utils/takgu/recoil/modal';
+import { toastState } from 'utils/takgu/recoil/toast';
 import { tableFormat } from 'constants/takgu/admin/table';
 import styles from 'styles/takgu/admin/season/SeasonList.module.scss';
 import { AdminTableHead } from '../common/AdminTable';

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { ISeason, ISeasonEditInfo } from 'types/takgu/seasonTypes';
 import { instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/recoil/modal';
-import { toastState } from 'utils/recoil/toast';
+import { modalState } from 'utils/takgu/recoil/modal';
+import { toastState } from 'utils/takgu/recoil/toast';
 import styles from 'styles/takgu/admin/modal/SeasonEdit.module.scss';
 
 const AdminSeasonEdit = ({

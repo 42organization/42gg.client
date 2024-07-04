@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
-import { openCurrentMatchState } from 'utils/recoil/match';
+import { openCurrentMatchState } from 'utils/takgu/recoil/match';
 import AdminReject from 'components/takgu/admin/AdminReject';
 import AdminLayout from 'components/takgu/admin/Layout';
 import CurrentMatch from 'components/takgu/Layout/CurrentMatch';

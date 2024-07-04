@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { reloadMatchState } from 'utils/recoil/match';
-import { modalState, modalTypeState } from 'utils/recoil/modal';
+import { reloadMatchState } from 'utils/takgu/recoil/match';
+import { modalState, modalTypeState } from 'utils/takgu/recoil/modal';
 import AdminModal from 'components/takgu/modal/modalType/AdminModal';
 import NormalModal from 'components/takgu/modal/modalType/NormalModal';
 import StoreModal from 'components/takgu/modal/modalType/StoreModal';

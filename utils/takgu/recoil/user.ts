@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { v1 } from 'uuid';
-import { ProfileBasic } from 'types/userTypes';
+import { ProfileBasic } from 'types/takgu/userTypes';
 
 export const profileState = atom<ProfileBasic>({
   key: `profileState/${v1()}`,

@@ -3,7 +3,7 @@ import React, { MouseEvent, useContext, MouseEventHandler } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { AiFillShop } from 'react-icons/ai';
 import { Modal } from 'types/modalTypes';
-import { modalState } from 'utils/recoil/modal';
+import { modalState } from 'utils/takgu/recoil/modal';
 import {
   HeaderContextState,
   HeaderContext,
