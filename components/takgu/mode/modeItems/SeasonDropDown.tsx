@@ -1,4 +1,4 @@
-import { Season } from 'types/seasonTypes';
+import { Season } from 'types/takgu/seasonTypes';
 import styles from 'styles/takgu/mode/SeasonDropDown.module.scss';
 
 interface SeasonDropDownProps {

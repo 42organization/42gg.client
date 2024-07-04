@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Button } from '@mui/material';
-import { ApplicationFormType } from 'types/recruit/recruitments';
+import { ApplicationFormType } from 'types/takgu/recruit/recruitments';
 import { applicationModalState } from 'utils/recoil/application';
 import styles from 'styles/takgu/recruit/application.module.scss';
 

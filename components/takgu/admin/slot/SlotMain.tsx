@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { GrLocationPin } from 'react-icons/gr';
-import { CurrentMatch, EditedSchedule } from 'types/admin/adminSlotTypes';
+import { CurrentMatch, EditedSchedule } from 'types/takgu/admin/adminSlotTypes';
 import { instance, instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import SlotCurrent from 'components/takgu/admin/slot/SlotCurrent';

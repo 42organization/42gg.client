@@ -1,5 +1,5 @@
-import { GameStatus, GameMode } from 'types/gameTypes';
-import { SeasonMode } from 'types/mainType';
+import { GameStatus, GameMode } from 'types/takgu/gameTypes';
+import { SeasonMode } from 'types/takgu/mainType';
 import { getTimeAgo } from 'utils/handleTime';
 import gameScore from 'components/takgu/game/GameScore';
 import styles from 'styles/takgu/game/GameResultItem.module.scss';

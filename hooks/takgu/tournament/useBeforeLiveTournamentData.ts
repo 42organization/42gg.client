@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { TournamentInfo } from 'types/tournamentTypes';
+import { TournamentInfo } from 'types/takgu/tournamentTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 

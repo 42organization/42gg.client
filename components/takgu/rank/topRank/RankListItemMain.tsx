@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { TbQuestionMark } from 'react-icons/tb';
-import { userImages } from 'types/rankTypes';
+import { userImages } from 'types/takgu/rankTypes';
 import { colorToggleSelector } from 'utils/recoil/colorMode';
 import PlayerImage from 'components/takgu/PlayerImage';
 import styles from 'styles/takgu/rank/RankListMain.module.scss';

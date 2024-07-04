@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { recruitmentListData } from 'types/recruit/recruitments';
+import { recruitmentListData } from 'types/takgu/recruit/recruitments';
 import { instance } from 'utils/axios';
 import { InfiniteScroll } from 'utils/infinityScroll';
 

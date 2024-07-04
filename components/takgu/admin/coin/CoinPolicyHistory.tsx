@@ -9,7 +9,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { IcoinPolicyHistory } from 'types/admin/adminCoinTypes';
+import { IcoinPolicyHistory } from 'types/takgu/admin/adminCoinTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';

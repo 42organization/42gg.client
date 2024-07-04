@@ -1,4 +1,4 @@
-import { Player, Players } from 'types/scoreTypes';
+import { Player, Players } from 'types/takgu/scoreTypes';
 import PlayerImage from 'components/takgu/PlayerImage';
 import styles from 'styles/takgu/modal/afterGame/AfterGameModal.module.scss';
 

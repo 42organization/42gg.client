@@ -1,4 +1,4 @@
-import { User } from 'types/mainType';
+import { User } from 'types/takgu/mainType';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(

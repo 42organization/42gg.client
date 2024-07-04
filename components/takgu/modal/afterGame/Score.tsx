@@ -1,4 +1,4 @@
-import { TeamScore } from 'types/scoreTypes';
+import { TeamScore } from 'types/takgu/scoreTypes';
 import CheckedScore from 'components/takgu/modal/afterGame/CheckedScore';
 import InputScore from 'components/takgu/modal/afterGame/InputScore';
 

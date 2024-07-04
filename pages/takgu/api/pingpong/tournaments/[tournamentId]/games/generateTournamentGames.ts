@@ -1,5 +1,5 @@
-import { Game, Player } from 'types/gameTypes';
-import { TournamentGame } from 'types/tournamentTypes';
+import { Game, Player } from 'types/takgu/gameTypes';
+import { TournamentGame } from 'types/takgu/tournamentTypes';
 
 const dummyPlayers: Player[] = [
   {

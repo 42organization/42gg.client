@@ -18,7 +18,7 @@ import {
   ITournament,
   ITournamentEditInfo,
   ITournamentTable,
-} from 'types/admin/adminTournamentTypes';
+} from 'types/takgu/admin/adminTournamentTypes';
 import { instance, instanceInManage } from 'utils/axios';
 import { dateToDateTimeLocalString, dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';

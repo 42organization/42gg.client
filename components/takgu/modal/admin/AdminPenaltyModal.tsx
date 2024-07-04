@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { IPenaltyInfo } from 'types/admin/adminPenaltyTypes';
+import { IPenaltyInfo } from 'types/takgu/admin/adminPenaltyTypes';
 import { instanceInManage } from 'utils/axios';
 import { fillZero } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';

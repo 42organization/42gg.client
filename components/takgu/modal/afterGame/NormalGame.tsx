@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AfterGame } from 'types/scoreTypes';
+import { AfterGame } from 'types/takgu/scoreTypes';
 import Guide from 'components/takgu/modal/afterGame/Guide';
 import { MatchTeams } from 'components/takgu/modal/afterGame/MatchTeams';
 import {

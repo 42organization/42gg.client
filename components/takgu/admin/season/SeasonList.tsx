@@ -8,7 +8,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { ISeason, ISeasonList } from 'types/seasonTypes';
+import { ISeason, ISeasonList } from 'types/takgu/seasonTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';

@@ -1,4 +1,4 @@
-import { TableFormat } from 'types/admin/tableTypes';
+import { TableFormat } from 'types/takgu/admin/tableTypes';
 
 export const tableFormat: TableFormat = {
   notification: {

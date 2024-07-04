@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { Graphs } from 'types/chartTypes';
+import { Graphs } from 'types/takgu/chartTypes';
 import { errorState } from 'utils/recoil/error';
 
 export const useChartsData = () => {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { MatchMode } from 'types/mainType';
-import { Match } from 'types/matchTypes';
+import { MatchMode } from 'types/takgu/mainType';
+import { Match } from 'types/takgu/matchTypes';
 import { Modal } from 'types/modalTypes';
 import { stringToHourMin } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';

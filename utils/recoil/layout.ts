@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { v1 } from 'uuid';
-import { User, Live } from 'types/mainType';
+import { User, Live } from 'types/takgu/mainType';
 
 export const userState = atom<User>({
   key: `userState/${v1()}`,

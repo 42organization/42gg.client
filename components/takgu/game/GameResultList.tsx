@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaChevronDown } from 'react-icons/fa';
-import { Game } from 'types/gameTypes';
-import { SeasonMode } from 'types/mainType';
+import { Game } from 'types/takgu/gameTypes';
+import { SeasonMode } from 'types/takgu/mainType';
 import GameResultBigItem from 'components/takgu/game/big/GameResultBigItem';
 import GameResultEmptyItem from 'components/takgu/game/GameResultEmptyItem';
 import GameResultSmallItem from 'components/takgu/game/small/GameResultSmallItem';

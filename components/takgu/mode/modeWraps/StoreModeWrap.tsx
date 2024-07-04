@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'types/modalTypes';
-import { StoreMode } from 'types/storeTypes';
+import { StoreMode } from 'types/takgu/storeTypes';
 import { ICoin } from 'types/userTypes';
 import { modalState } from 'utils/recoil/modal';
 import StoreModeRadioBox from 'components/takgu/mode/modeItems/StoreModeRadioBox';

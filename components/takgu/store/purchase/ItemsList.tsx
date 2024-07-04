@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { ItemList } from 'types/itemTypes';
+import { ItemList } from 'types/takgu/itemTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import ItemCard from 'components/takgu/store/purchase/ItemCard';

@@ -1,4 +1,4 @@
-import { Rank } from 'types/rankTypes';
+import { Rank } from 'types/takgu/rankTypes';
 import type { Meta, StoryObj } from '@storybook/react';
 import RankListMain from 'components/takgu/rank/topRank/RankListMain';
 

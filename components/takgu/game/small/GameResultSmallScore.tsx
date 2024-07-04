@@ -1,4 +1,4 @@
-import { GameMode, GameStatus } from 'types/gameTypes';
+import { GameMode, GameStatus } from 'types/takgu/gameTypes';
 import gameScore from 'components/takgu/game/GameScore';
 import styles from 'styles/takgu/game/GameResultItem.module.scss';
 

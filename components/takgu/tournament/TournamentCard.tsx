@@ -3,7 +3,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { BiCalendar } from 'react-icons/bi';
 import { MdPeopleAlt } from 'react-icons/md';
 import { Modal } from 'types/modalTypes';
-import { TournamentInfo } from 'types/tournamentTypes';
+import { TournamentInfo } from 'types/takgu/tournamentTypes';
 import { instance } from 'utils/axios';
 import { dateToKRLocaleTimeString } from 'utils/handleTime';
 import { errorState } from 'utils/recoil/error';

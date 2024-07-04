@@ -1,4 +1,4 @@
-import { SeasonMode } from 'types/mainType';
+import { SeasonMode } from 'types/takgu/mainType';
 import { RadioBoxWrapper } from 'components/takgu/mode/modeItems/RadioBoxWrapper';
 import styles from 'styles/takgu/mode/ModeRadiobox.module.scss';
 

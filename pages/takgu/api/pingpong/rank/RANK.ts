@@ -1,4 +1,4 @@
-import { RankMain, userImages } from 'types/rankTypes';
+import { RankMain, userImages } from 'types/takgu/rankTypes';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(

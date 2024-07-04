@@ -1,5 +1,5 @@
 import { Stack } from '@mui/material';
-import { resultType } from 'types/recruit/recruitments';
+import { resultType } from 'types/takgu/recruit/recruitments';
 import { dateToKRFullString } from 'utils/handleTime';
 import RecruitStepper from 'components/takgu/recruit/Main/RecruitStepper';
 import style from 'styles/takgu/recruit/Main/myRecruitment.module.scss';

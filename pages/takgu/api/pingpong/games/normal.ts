@@ -1,4 +1,4 @@
-import { GameResult } from 'types/gameTypes';
+import { GameResult } from 'types/takgu/gameTypes';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(

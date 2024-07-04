@@ -19,7 +19,7 @@ import {
   IrecruitTable,
   RecruitmentDetailProps,
   RecruitmentsPages,
-} from 'types/admin/adminRecruitmentsTypes';
+} from 'types/takgu/admin/adminRecruitmentsTypes';
 import { instance } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';

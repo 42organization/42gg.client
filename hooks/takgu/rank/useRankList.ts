@@ -1,6 +1,6 @@
 import { useEffect, Dispatch, SetStateAction } from 'react';
 import { useRecoilState } from 'recoil';
-import { Rank, MyRank, ToggleMode } from 'types/rankTypes';
+import { Rank, MyRank, ToggleMode } from 'types/takgu/rankTypes';
 import { myRankState, scrollState } from 'utils/recoil/myRank';
 import useAxiosGet, { useMockAxiosGet } from 'hooks/useAxiosGet';
 interface useRankListProps {

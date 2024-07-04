@@ -6,7 +6,7 @@ import {
   Iquestion,
   Irecruit,
   RecruitmentDetailProps,
-} from 'types/admin/adminRecruitmentsTypes';
+} from 'types/takgu/admin/adminRecruitmentsTypes';
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/takgu/admin/recruitments/recruitmentDetail/RecruitmentDetail.module.scss';

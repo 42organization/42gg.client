@@ -1,7 +1,7 @@
 import React, { SetStateAction, Dispatch } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { MatchMode } from 'types/mainType';
-import { Match } from 'types/matchTypes';
+import { MatchMode } from 'types/takgu/mainType';
+import { Match } from 'types/takgu/matchTypes';
 import { colorModeState } from 'utils/recoil/colorMode';
 import ModeRadiobox from 'components/takgu/mode/modeItems/ModeRadiobox';
 

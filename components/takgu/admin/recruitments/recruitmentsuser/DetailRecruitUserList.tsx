@@ -8,7 +8,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { IcheckItem } from 'types/admin/adminRecruitmentsTypes';
+import { IcheckItem } from 'types/takgu/admin/adminRecruitmentsTypes';
 import PageNation from 'components/Pagination';
 import {
   AdminEmptyItem,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AfterGame, TeamScore } from 'types/scoreTypes';
+import { AfterGame, TeamScore } from 'types/takgu/scoreTypes';
 
 interface UseScoreGameProps {
   currentGame: AfterGame;

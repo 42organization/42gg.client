@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useSetRecoilState, useResetRecoilState } from 'recoil';
-import { GiftRequest } from 'types/itemTypes';
+import { GiftRequest } from 'types/takgu/itemTypes';
 import { PriceTag } from 'types/modalTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';

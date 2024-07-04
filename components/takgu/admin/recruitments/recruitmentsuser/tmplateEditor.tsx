@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { IRecruitMessageTemplate } from 'types/recruit/recruitments';
+import { IRecruitMessageTemplate } from 'types/takgu/recruit/recruitments';
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/takgu/admin/modal/AdminRecruitMessageTemplateModal.module.scss';

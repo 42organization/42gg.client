@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import {
   IRecruitmentTemplate,
   RecruitmentMessageType,
-} from 'types/recruit/recruitments';
+} from 'types/takgu/recruit/recruitments';
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import TemplateEditor from 'components/takgu/admin/recruitments/recruitmentsuser/tmplateEditor';

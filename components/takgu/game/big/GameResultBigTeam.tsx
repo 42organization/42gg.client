@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Team, Player, RankPlayer } from 'types/gameTypes';
+import { Team, Player, RankPlayer } from 'types/takgu/gameTypes';
 import PlayerImage from 'components/takgu/PlayerImage';
 import styles from 'styles/takgu/game/GameResultItem.module.scss';
 

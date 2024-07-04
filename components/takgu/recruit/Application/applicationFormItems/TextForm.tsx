@@ -4,7 +4,7 @@ import {
   ApplicationFormType,
   IApplicantAnswer,
   IQuestionForm,
-} from 'types/recruit/recruitments';
+} from 'types/takgu/recruit/recruitments';
 import styles from 'styles/takgu/recruit/application.module.scss';
 
 interface IitemProps {

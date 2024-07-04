@@ -1,4 +1,4 @@
-import { StoreManualMode } from 'types/storeTypes';
+import { StoreManualMode } from 'types/takgu/storeTypes';
 import { RadioBoxWrapper } from 'components/takgu/mode/modeItems/RadioBoxWrapper';
 import styles from 'styles/takgu/mode/ModeRadiobox.module.scss';
 

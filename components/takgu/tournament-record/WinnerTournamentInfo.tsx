@@ -1,4 +1,4 @@
-import { TournamentInfo } from 'types/tournamentTypes';
+import { TournamentInfo } from 'types/takgu/tournamentTypes';
 import styles from 'styles/takgu/tournament-record/WinnerTournamentInfo.module.scss';
 
 interface WinnerTournamentInfoProps {

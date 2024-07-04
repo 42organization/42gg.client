@@ -1,4 +1,4 @@
-import { Graphs, GraphValue, Graph } from 'types/chartTypes';
+import { Graphs, GraphValue, Graph } from 'types/takgu/chartTypes';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(

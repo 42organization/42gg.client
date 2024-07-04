@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSetRecoilState, useResetRecoilState } from 'recoil';
-import { RandomColors } from 'types/colorModeTypes';
+import { RandomColors } from 'types/takgu/colorModeTypes';
 import { colorModeState } from 'utils/recoil/colorMode';
 
 function useProfileColorMode(color: RandomColors) {

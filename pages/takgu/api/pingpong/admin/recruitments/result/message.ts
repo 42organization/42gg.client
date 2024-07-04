@@ -1,7 +1,7 @@
 import {
   IRecruitmentTemplate,
   IRecruitmentTemplateList,
-} from 'types/recruit/recruitments';
+} from 'types/takgu/recruit/recruitments';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const messageList: IRecruitmentTemplate[] = [

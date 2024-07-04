@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { RecruitmentsPages } from 'types/admin/adminRecruitmentsTypes';
+import { RecruitmentsPages } from 'types/takgu/admin/adminRecruitmentsTypes';
 import DetailRecruitUserList from 'components/takgu/admin/recruitments/recruitmentsuser/DetailRecruitUserList';
 import NotificationResults from 'components/takgu/admin/recruitments/recruitmentsuser/NotificationResults';
 import styles from 'styles/takgu/admin/recruitments/MenuTab.module.scss';

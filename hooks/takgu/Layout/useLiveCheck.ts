@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { Live } from 'types/mainType';
+import { Live } from 'types/takgu/mainType';
 import { liveState } from 'utils/recoil/layout';
 import { reloadMatchState } from 'utils/recoil/match';
 import { useUser } from 'hooks/takgu/Layout/useUser';

@@ -8,7 +8,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { ISeasonEditInfo } from 'types/seasonTypes';
+import { ISeasonEditInfo } from 'types/takgu/seasonTypes';
 import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import { AdminTableHead } from 'components/takgu/admin/common/AdminTable';

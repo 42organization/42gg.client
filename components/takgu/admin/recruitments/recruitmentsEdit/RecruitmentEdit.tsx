@@ -4,7 +4,7 @@ import {
   Iquestion,
   Irecruit,
   RecruitmentEditProps,
-} from 'types/admin/adminRecruitmentsTypes';
+} from 'types/takgu/admin/adminRecruitmentsTypes';
 import useRecruitmentEditInfo from 'hooks/takgu/recruitments/useRecruitmentEditInfo';
 import styles from 'styles/takgu/admin/recruitments/recruitmentEdit/RecruitmentEdit.module.scss';
 import ActionSelectorButtons from './components/ActionSelectorButtons';

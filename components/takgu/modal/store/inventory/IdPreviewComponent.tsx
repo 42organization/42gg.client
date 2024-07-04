@@ -1,4 +1,4 @@
-import { RankUser, NormalUser } from 'types/rankTypes';
+import { RankUser, NormalUser } from 'types/takgu/rankTypes';
 import { NormalListItem } from 'components/takgu/rank/NormalListItem';
 import { RankListItem } from 'components/takgu/rank/RankListItem';
 import styles from 'styles/takgu/modal/store/InventoryModal.module.scss';

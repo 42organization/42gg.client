@@ -1,4 +1,4 @@
-import { TournamentGame } from 'types/tournamentTypes';
+import { TournamentGame } from 'types/takgu/tournamentTypes';
 
 export const dummyLiveTournamentGames = {
   games: [

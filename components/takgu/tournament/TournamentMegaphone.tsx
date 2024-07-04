@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect, useRef } from 'react';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
-import { TournamentInfo } from 'types/tournamentTypes';
+import { TournamentInfo } from 'types/takgu/tournamentTypes';
 import { instance } from 'utils/axios';
 import useInterval from 'hooks/useInterval';
 import styles from 'styles/takgu/Layout/MegaPhone.module.scss';

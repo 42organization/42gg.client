@@ -1,7 +1,7 @@
 import { atom, selector } from 'recoil';
 import { v1 } from 'uuid';
-import { ColorMode } from 'types/colorModeTypes';
-import { ToggleMode } from 'types/rankTypes';
+import { ColorMode } from 'types/takgu/colorModeTypes';
+import { ToggleMode } from 'types/takgu/rankTypes';
 
 export const colorModeState = atom<ColorMode>({
   key: `ColorMode/${v1()}`,

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { GameResult } from 'types/gameTypes';
+import { GameResult } from 'types/takgu/gameTypes';
 import { Exp } from 'types/modalTypes';
 import { errorState } from 'utils/recoil/error';
 import { reloadMatchState } from 'utils/recoil/match';

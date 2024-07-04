@@ -1,4 +1,4 @@
-import { Rank, RankUser } from 'types/rankTypes';
+import { Rank, RankUser } from 'types/takgu/rankTypes';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(

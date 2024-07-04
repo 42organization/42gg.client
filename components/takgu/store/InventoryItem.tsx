@@ -3,7 +3,7 @@ import { SyntheticEvent } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { BsGiftFill, BsCircleFill } from 'react-icons/bs';
 import { Tooltip } from '@mui/material';
-import { InventoryItem, InventoryItemStatus } from 'types/inventoryTypes';
+import { InventoryItem, InventoryItemStatus } from 'types/takgu/inventoryTypes';
 import { modalState } from 'utils/recoil/modal';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import styles from 'styles/takgu/store/Inventory.module.scss';

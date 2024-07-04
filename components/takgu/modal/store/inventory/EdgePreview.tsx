@@ -1,4 +1,4 @@
-import { EdgeColors, RandomColors } from 'types/colorModeTypes';
+import { EdgeColors, RandomColors } from 'types/takgu/colorModeTypes';
 import PlayerImage from 'components/takgu/PlayerImage';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import styles from 'styles/takgu/modal/store/EdgePreview.module.scss';

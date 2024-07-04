@@ -1,4 +1,4 @@
-import { MatchMode } from 'types/mainType';
+import { MatchMode } from 'types/takgu/mainType';
 import { GameMode } from './gameTypes';
 
 /**

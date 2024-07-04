@@ -1,7 +1,7 @@
 import {
   IApplicantAnswerForm,
   IQuestionForm,
-} from 'types/recruit/recruitments';
+} from 'types/takgu/recruit/recruitments';
 
 const answerDefault = (form: IQuestionForm): IApplicantAnswerForm => {
   const textDefault = {

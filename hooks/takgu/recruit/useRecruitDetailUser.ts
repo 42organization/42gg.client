@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { IRecruitmentDetailUser } from 'types/recruit/recruitments';
+import { IRecruitmentDetailUser } from 'types/takgu/recruit/recruitments';
 import { instance } from 'utils/axios';
 
 const useRecruitDetailUser = (recruitId: number, applicationId: number) => {

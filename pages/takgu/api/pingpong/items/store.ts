@@ -1,4 +1,4 @@
-import { Item, ItemList } from 'types/itemTypes';
+import { Item, ItemList } from 'types/takgu/itemTypes';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const itemList: Item[] = [

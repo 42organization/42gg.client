@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { AxiosResponse } from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { Item } from 'types/itemTypes';
+import { Item } from 'types/takgu/itemTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';

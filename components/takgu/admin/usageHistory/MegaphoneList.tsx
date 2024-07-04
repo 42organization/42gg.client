@@ -8,7 +8,10 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { Imegaphone, ImegaphoneTable } from 'types/admin/adminReceiptType';
+import {
+  Imegaphone,
+  ImegaphoneTable,
+} from 'types/takgu/admin/adminReceiptType';
 import { instanceInManage } from 'utils/axios';
 import { getFormattedDateToString } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/modal';

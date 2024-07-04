@@ -1,4 +1,4 @@
-import { TournamentInfo } from 'types/tournamentTypes';
+import { TournamentInfo } from 'types/takgu/tournamentTypes';
 
 const jincpark = {
   intraId: 'jincpark',

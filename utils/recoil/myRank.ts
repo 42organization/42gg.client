@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { v1 } from 'uuid';
-import { MyRank } from 'types/rankTypes';
+import { MyRank } from 'types/takgu/rankTypes';
 
 export const myRankState = atom<MyRank>({
   key: `myRankState/${v1()}`,

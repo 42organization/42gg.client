@@ -1,4 +1,4 @@
-import { InventoryData, InventoryItem } from 'types/inventoryTypes';
+import { InventoryData, InventoryItem } from 'types/takgu/inventoryTypes';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const item1: InventoryItem = {

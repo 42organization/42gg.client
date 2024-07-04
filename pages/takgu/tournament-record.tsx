@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { SwiperClass, SwiperRef } from 'swiper/react';
-import { TournamentInfo, TournamentData } from 'types/tournamentTypes';
+import { TournamentInfo, TournamentData } from 'types/takgu/tournamentTypes';
 import { instance } from 'utils/axios';
 import { InfiniteScroll } from 'utils/infinityScroll';
 import UserTournamentBracket from 'components/takgu/tournament/UserTournamentBracket';

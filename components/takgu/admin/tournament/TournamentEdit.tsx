@@ -8,7 +8,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { ITournamentEditInfo } from 'types/admin/adminTournamentTypes';
+import { ITournamentEditInfo } from 'types/takgu/admin/adminTournamentTypes';
 import { QUILL_EDIT_MODULES, QUILL_FORMATS } from 'types/quillTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToKRIOSString, dateToKRLocaleTimeString } from 'utils/handleTime';

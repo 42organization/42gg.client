@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Iprofile } from 'types/admin/adminReceiptType';
+import { Iprofile } from 'types/takgu/admin/adminReceiptType';
 
 interface IprofileRes {
   profileList: Array<Iprofile>;

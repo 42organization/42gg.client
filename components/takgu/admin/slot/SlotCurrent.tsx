@@ -3,7 +3,7 @@ import {
   CurrentMatch,
   SlotCurrentProps,
   Slots,
-} from 'types/admin/adminSlotTypes';
+} from 'types/takgu/admin/adminSlotTypes';
 import styles from 'styles/takgu/admin/slot/SlotCurrent.module.scss';
 
 export default function SlotCurrent(props: SlotCurrentProps) {

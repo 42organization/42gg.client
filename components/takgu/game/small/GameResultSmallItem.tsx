@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { Game } from 'types/gameTypes';
-import { SeasonMode } from 'types/mainType';
+import { Game } from 'types/takgu/gameTypes';
+import { SeasonMode } from 'types/takgu/mainType';
 import { clickedGameItemState } from 'utils/recoil/game';
 import { profileState } from 'utils/recoil/user';
 import GameResultSmallScore from 'components/takgu/game/small/GameResultSmallScore';

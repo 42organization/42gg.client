@@ -1,7 +1,7 @@
 import { useEffect, Dispatch, SetStateAction } from 'react';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
-import { GiftRequest } from 'types/itemTypes';
+import { GiftRequest } from 'types/takgu/itemTypes';
 import useSearchBar from 'hooks/useSearchBar';
 import styles from 'styles/takgu/main/SearchBar.module.scss';
 

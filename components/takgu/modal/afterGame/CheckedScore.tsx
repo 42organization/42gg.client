@@ -1,4 +1,4 @@
-import { TeamScore } from 'types/scoreTypes';
+import { TeamScore } from 'types/takgu/scoreTypes';
 import styles from 'styles/takgu/modal/afterGame/AfterGameModal.module.scss';
 
 interface CheckedScoreProps {

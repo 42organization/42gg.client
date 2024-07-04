@@ -8,7 +8,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { IUser, IUserTable } from 'types/admin/adminUserTypes';
+import { IUser, IUserTable } from 'types/takgu/admin/adminUserTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { tableFormat } from 'constants/takgu/admin/table';

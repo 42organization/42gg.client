@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { Live } from 'types/mainType';
+import { Live } from 'types/takgu/mainType';
 import { Modal } from 'types/modalTypes';
 import { liveState } from 'utils/recoil/layout';
 import { openCurrentMatchState } from 'utils/recoil/match';

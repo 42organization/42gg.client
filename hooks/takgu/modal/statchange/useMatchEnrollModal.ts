@@ -1,5 +1,5 @@
 import { useSetRecoilState } from 'recoil';
-import { MatchMode } from 'types/mainType';
+import { MatchMode } from 'types/takgu/mainType';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { reloadMatchState } from 'utils/recoil/match';

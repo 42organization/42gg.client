@@ -1,8 +1,8 @@
 import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { GameMode } from 'types/gameTypes';
-import { AfterGame } from 'types/scoreTypes';
+import { GameMode } from 'types/takgu/gameTypes';
+import { AfterGame } from 'types/takgu/scoreTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { liveState } from 'utils/recoil/layout';

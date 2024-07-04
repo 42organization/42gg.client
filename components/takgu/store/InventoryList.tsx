@@ -1,5 +1,5 @@
 import React from 'react';
-import { InventoryData } from 'types/inventoryTypes';
+import { InventoryData } from 'types/takgu/inventoryTypes';
 import { instance } from 'utils/axios';
 import { InfiniteScroll } from 'utils/infinityScroll';
 import { InfiniteScrollComponent } from 'components/takgu/store/InfiniteScrollComponent';

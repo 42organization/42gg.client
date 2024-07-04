@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { SeasonMode } from 'types/mainType';
+import { SeasonMode } from 'types/takgu/mainType';
 import GameResult from 'components/takgu/game/GameResult';
 import GameModeWrap from 'components/takgu/mode/modeWraps/GameModeWrap';
 import useColorMode from 'hooks/useColorMode';

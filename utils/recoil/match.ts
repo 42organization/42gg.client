@@ -1,6 +1,6 @@
 import { atom, selectorFamily } from 'recoil';
 import { v1 } from 'uuid';
-import { CurrentMatchList } from 'types/matchTypes';
+import { CurrentMatchList } from 'types/takgu/matchTypes';
 
 export const openCurrentMatchState = atom<boolean>({
   key: `openCurrentMatchState/${v1()}`,

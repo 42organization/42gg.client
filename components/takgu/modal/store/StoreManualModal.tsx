@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { StoreManual } from 'types/modalTypes';
-import { StoreManualMode } from 'types/storeTypes';
+import { StoreManualMode } from 'types/takgu/storeTypes';
 import { modalState } from 'utils/recoil/modal';
 import StoreManualModeRadiobox from 'components/takgu/mode/modeItems/StoreManualModeRadioBox';
 import styles from 'styles/takgu/modal/store/StoreManualModal.module.scss';

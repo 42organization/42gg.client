@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { ISeason, ISeasonEditInfo } from 'types/seasonTypes';
+import { ISeason, ISeasonEditInfo } from 'types/takgu/seasonTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';
 import { toastState } from 'utils/recoil/toast';

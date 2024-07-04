@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import { useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { CoinResult } from 'types/coinTypes';
+import { CoinResult } from 'types/takgu/coinTypes';
 import { modalState } from 'utils/recoil/modal';
 import CoinAnimation from 'components/takgu/modal/CoinAnimation';
 import CoinPopcon from 'components/takgu/modal/CoinPopcon';

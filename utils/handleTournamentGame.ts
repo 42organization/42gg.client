@@ -2,7 +2,7 @@ import {
   Match,
   Participant,
 } from '@g-loot/react-tournament-brackets/dist/src/types';
-import { TournamentGame } from 'types/tournamentTypes';
+import { TournamentGame } from 'types/takgu/tournamentTypes';
 
 /**
  * 매치가 수정 가능한 상태인지 판단하여 isModifiable 추가

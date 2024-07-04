@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { RandomColors } from 'types/colorModeTypes';
+import { RandomColors } from 'types/takgu/colorModeTypes';
 import GameResult from 'components/takgu/game/GameResult';
 import Section from 'components/takgu/main/Section';
 import BasicProfile from 'components/takgu/user/BasicProfile';

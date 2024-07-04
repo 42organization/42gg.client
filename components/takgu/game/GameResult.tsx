@@ -1,4 +1,4 @@
-import { SeasonMode } from 'types/mainType';
+import { SeasonMode } from 'types/takgu/mainType';
 import GameResultList from 'components/takgu/game/GameResultList';
 import useGameResult from 'hooks/takgu/game/useGameResult';
 

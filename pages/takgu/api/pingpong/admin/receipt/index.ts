@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Ireceipt } from 'types/admin/adminReceiptType';
+import { Ireceipt } from 'types/takgu/admin/adminReceiptType';
 
 interface IreceiptRes {
   receiptList: Array<Ireceipt>;

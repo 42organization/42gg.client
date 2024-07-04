@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { StoreMode } from 'types/storeTypes';
+import { StoreMode } from 'types/takgu/storeTypes';
 import { ICoin } from 'types/userTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';

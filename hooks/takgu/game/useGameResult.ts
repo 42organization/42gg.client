@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { SeasonMode } from 'types/mainType';
+import { SeasonMode } from 'types/takgu/mainType';
 
 interface GameResultProps {
   mode?: SeasonMode;

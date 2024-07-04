@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { Noti } from 'types/notiTypes';
+import { Noti } from 'types/takgu/notiTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import {

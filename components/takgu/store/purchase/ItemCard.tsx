@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { SyntheticEvent } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { Item } from 'types/itemTypes';
+import { Item } from 'types/takgu/itemTypes';
 import { Modal } from 'types/modalTypes';
 import { modalState } from 'utils/recoil/modal';
 import styles from 'styles/takgu/store/ItemCard.module.scss';

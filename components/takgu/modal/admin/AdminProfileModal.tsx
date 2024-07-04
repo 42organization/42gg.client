@@ -1,7 +1,7 @@
 import Image from 'next/legacy/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { roleTypes, IUserInfo } from 'types/admin/adminUserTypes';
+import { roleTypes, IUserInfo } from 'types/takgu/admin/adminUserTypes';
 import { racketTypes } from 'types/userTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/modal';

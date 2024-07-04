@@ -1,5 +1,5 @@
 import { useSetRecoilState } from 'recoil';
-import { AfterGame, TeamScore } from 'types/scoreTypes';
+import { AfterGame, TeamScore } from 'types/takgu/scoreTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { reloadMatchState } from 'utils/recoil/match';

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { RankUser } from 'types/rankTypes';
+import { RankUser } from 'types/takgu/rankTypes';
 import PlayerImage from 'components/takgu/PlayerImage';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import styles from 'styles/takgu/rank/RankList.module.scss';

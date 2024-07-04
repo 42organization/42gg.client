@@ -3,7 +3,7 @@ import { useMutation } from 'react-query';
 import {
   ApplicationFormType,
   IApplicantAnswerForm,
-} from 'types/recruit/recruitments';
+} from 'types/takgu/recruit/recruitments';
 import { instance } from 'utils/axios';
 
 function useUserApplicationForm(

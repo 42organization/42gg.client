@@ -1,4 +1,4 @@
-import { GameStatus, GameMode } from 'types/gameTypes';
+import { GameStatus, GameMode } from 'types/takgu/gameTypes';
 
 export default function gameScore(
   type: 'BIG' | 'SMALL',

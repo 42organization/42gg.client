@@ -1,4 +1,4 @@
-import { CoinResult } from 'types/coinTypes';
+import { CoinResult } from 'types/takgu/coinTypes';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(

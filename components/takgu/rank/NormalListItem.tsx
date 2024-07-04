@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { NormalUser } from 'types/rankTypes';
+import { NormalUser } from 'types/takgu/rankTypes';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import styles from 'styles/takgu/rank/RankList.module.scss';
 

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { ListItemButton, ListItemText } from '@mui/material';
-import { recruitment } from 'types/recruit/recruitments';
+import { recruitment } from 'types/takgu/recruit/recruitments';
 import { dateToString } from 'utils/handleTime';
 import styles from 'styles/takgu/recruit/RecruitList/list.module.scss';
 

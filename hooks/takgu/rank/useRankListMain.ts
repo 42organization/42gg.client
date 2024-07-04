@@ -1,5 +1,5 @@
 import { useEffect, Dispatch, SetStateAction } from 'react';
-import { userImages, ToggleMode } from 'types/rankTypes';
+import { userImages, ToggleMode } from 'types/takgu/rankTypes';
 import useAxiosGet from 'hooks/useAxiosGet';
 
 interface useRankListProps {

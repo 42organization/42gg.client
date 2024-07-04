@@ -1,4 +1,4 @@
-import { Graphs, GraphValue } from 'types/chartTypes';
+import { Graphs, GraphValue } from 'types/takgu/chartTypes';
 
 type ChartData = {
   labels: string[];

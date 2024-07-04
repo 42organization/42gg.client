@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { Box, Button, Modal, Typography } from '@mui/material';
-import { ApplicationFormType } from 'types/recruit/recruitments';
+import { ApplicationFormType } from 'types/takgu/recruit/recruitments';
 import {
   applicationAlertState,
   applicationModalState,

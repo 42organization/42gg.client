@@ -5,7 +5,7 @@ import {
   useState,
   useEffect,
 } from 'react';
-import { Noti } from 'types/notiTypes';
+import { Noti } from 'types/takgu/notiTypes';
 import useAxiosGet from 'hooks/useAxiosGet';
 import useReloadHandler from 'hooks/useReloadHandler';
 

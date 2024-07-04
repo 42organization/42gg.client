@@ -7,7 +7,7 @@ import {
   IQuestionForm,
   IRecruitmentDetail,
   refMap,
-} from 'types/recruit/recruitments';
+} from 'types/takgu/recruit/recruitments';
 import { applicationAnswerSet } from 'utils/handleApplicationForm';
 import {
   applicationAlertState,

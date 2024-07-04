@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useContext } from 'react';
 import { BsCheckLg } from 'react-icons/bs';
-import { Noti } from 'types/notiTypes';
+import { Noti } from 'types/takgu/notiTypes';
 import {
   HeaderContextState,
   HeaderContext,
