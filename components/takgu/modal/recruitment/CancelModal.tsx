@@ -7,7 +7,7 @@ import { instance } from 'utils/axios';
 import {
   applicationAlertState,
   applicationModalState,
-} from 'utils/takgu/recoil/application';
+} from 'utils/recoil/application';
 import styles from 'styles/takgu/modal/recruit/recruitModal.module.scss';
 
 interface ICancelModalProps {

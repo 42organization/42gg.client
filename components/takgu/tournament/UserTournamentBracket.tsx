@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { instance } from 'utils/axios';
 import { convertTournamentGamesToBracketMatchs } from 'utils/takgu/handleTournamentGame';
-import { errorState } from 'utils/takgu/recoil/error';
+import { errorState } from 'utils/recoil/error';
 import TournamentBraket from 'components/takgu/tournament/TournamentBraket';
 import LoadingSpinner from 'components/takgu/UI/LoadingSpinner';
 import useComponentSize from 'hooks/takgu/util/useComponentSize';

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { errorState } from 'utils/takgu/recoil/error';
+import { errorState } from 'utils/recoil/error';
 
 const useErrorPage = () => {
   const [error, setError] = useRecoilState(errorState);

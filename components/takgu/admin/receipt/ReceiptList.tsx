@@ -15,7 +15,7 @@ import {
 } from 'types/takgu/admin/adminReceiptType';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/takgu/admin/table';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/takgu/admin/common/AdminSearchBar';

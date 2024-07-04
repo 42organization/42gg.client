@@ -6,8 +6,8 @@ import { FaArrowRight } from 'react-icons/fa';
 import { TbQuestionMark } from 'react-icons/tb';
 import { UseItemData } from 'types/takgu/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
-import { errorState } from 'utils/takgu/recoil/error';
-import { modalState } from 'utils/takgu/recoil/modal';
+import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/takgu/modal';
 import { ITEM_ALERT_MESSAGE } from 'constants/takgu/store/itemAlertMessage';
 import {
   ModalButtonContainer,

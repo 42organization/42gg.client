@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { RankUser, NormalUser, Rank } from 'types/takgu/rankTypes';
-import { colorToggleSelector } from 'utils/takgu/recoil/colorMode';
+import { colorToggleSelector } from 'utils/recoil/takgu/colorMode';
 import { NormalListItem } from 'components/takgu/rank/NormalListItem';
 import RankListFrame from 'components/takgu/rank/RankListFrame';
 import { RankListItem } from 'components/takgu/rank/RankListItem';

@@ -6,7 +6,7 @@ import {
   Irecruit,
 } from 'types/takgu/admin/adminRecruitmentsTypes';
 import { instance } from 'utils/axios';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { toastState } from 'utils/recoil/toast';
 
 export interface IFormManager {
   setQuestionContent: (questionIdx: number, contents: string) => void;

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { ProfileRank } from 'types/takgu/userTypes';
 import { instance } from 'utils/axios';
-import { errorState } from 'utils/takgu/recoil/error';
+import { errorState } from 'utils/recoil/error';
 
 const useGetRankProfile = (profileId: string, season?: number) => {
   const setError = useSetRecoilState(errorState);

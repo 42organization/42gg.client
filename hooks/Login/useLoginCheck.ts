@@ -2,7 +2,7 @@ import { NextRouter, useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { loginState } from 'utils/takgu/recoil/login';
+import { loginState } from 'utils/recoil/login';
 
 type useLoginCheckReturn = [boolean, boolean];
 

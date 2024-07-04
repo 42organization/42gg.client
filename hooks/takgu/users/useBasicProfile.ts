@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { instance } from 'utils/axios';
-import { errorState } from 'utils/takgu/recoil/error';
-import { profileState } from 'utils/takgu/recoil/user';
+import { errorState } from 'utils/recoil/error';
+import { profileState } from 'utils/recoil/takgu/user';
 
 interface UseBasicProfileProps {
   profileId: string;

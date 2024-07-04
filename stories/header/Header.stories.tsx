@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
-import { liveState } from 'utils/takgu/recoil/layout';
+import { liveState } from 'utils/recoil/layout';
 import Header from 'components/takgu/Layout/Header';
 import HeaderStateContext from 'components/takgu/Layout/HeaderContext';
 

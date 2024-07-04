@@ -1,6 +1,6 @@
 import router from 'next/router';
 import { useSetRecoilState } from 'recoil';
-import { modalState } from 'utils/takgu/recoil/modal';
+import { modalState } from 'utils/recoil/takgu/modal';
 
 const useNoCoinModal = () => {
   const setModal = useSetRecoilState(modalState);

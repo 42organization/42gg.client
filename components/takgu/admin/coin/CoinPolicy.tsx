@@ -8,8 +8,8 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { modalState } from 'utils/takgu/recoil/modal';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { modalState } from 'utils/recoil/takgu/modal';
+import { toastState } from 'utils/recoil/toast';
 import { AdminTableHead } from 'components/takgu/admin/common/AdminTable';
 import styles from 'styles/takgu/admin/coin/CoinPolicy.module.scss';
 

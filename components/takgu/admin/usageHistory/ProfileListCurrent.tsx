@@ -12,8 +12,8 @@ import {
 import { Iprofile, IprofileTable } from 'types/takgu/admin/adminReceiptType';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
-import { modalState } from 'utils/takgu/recoil/modal';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { modalState } from 'utils/recoil/takgu/modal';
+import { toastState } from 'utils/recoil/toast';
 import { tableFormat } from 'constants/takgu/admin/table';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/takgu/admin/common/AdminSearchBar';

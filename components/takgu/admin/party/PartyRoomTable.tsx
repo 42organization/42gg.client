@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { PartyRoomColumn } from 'types/takgu/admin/adminPartyTypes';
 import { dateToStringShort } from 'utils/handleTime';
-import { modalState } from 'utils/takgu/recoil/modal';
+import { modalState } from 'utils/recoil/takgu/modal';
 import { tableFormat } from 'constants/takgu/admin/table';
 import PageNation from 'components/Pagination';
 import AdminSearchBar from 'components/takgu/admin/common/AdminSearchBar';

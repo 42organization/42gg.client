@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { User } from 'types/takgu/mainType';
 import { instance } from 'utils/axios';
-import { errorState } from 'utils/takgu/recoil/error';
+import { errorState } from 'utils/recoil/error';
 
 export const useUser = () => {
   const setError = useSetRecoilState<string>(errorState);

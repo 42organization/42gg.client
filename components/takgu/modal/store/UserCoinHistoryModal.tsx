@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { ICoin, ICoinHistoryTable } from 'types/takgu/userTypes';
 import { instance } from 'utils/axios';
-import { errorState } from 'utils/takgu/recoil/error';
-import { modalState } from 'utils/takgu/recoil/modal';
+import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/takgu/modal';
 import PageNation from 'components/Pagination';
 import {
   ModalButtonContainer,

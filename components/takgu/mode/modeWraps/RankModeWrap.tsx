@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { colorToggleSelector } from 'utils/takgu/recoil/colorMode';
+import { colorToggleSelector } from 'utils/recoil/takgu/colorMode';
 import ModeToggle from 'components/takgu/mode/modeItems/ModeToggle';
 import SeasonDropDown from 'components/takgu/mode/modeItems/SeasonDropDown';
 import useSeasonDropDown from 'hooks/takgu/mode/useSeasonDropDown';

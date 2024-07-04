@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import Stack from '@mui/material/Stack';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { toastState } from 'utils/recoil/toast';
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,

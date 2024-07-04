@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import { Modal } from 'types/modalTypes';
 import { StoreMode } from 'types/takgu/storeTypes';
 import { ICoin } from 'types/takgu/userTypes';
-import { modalState } from 'utils/takgu/recoil/modal';
+import { modalState } from 'utils/recoil/takgu/modal';
 import StoreModeRadioBox from 'components/takgu/mode/modeItems/StoreModeRadioBox';
 import CoinImage from 'components/takgu/store/CoinImage';
 import styles from 'styles/takgu/mode/StoreModeWrap.module.scss';

@@ -3,8 +3,8 @@ import { useSetRecoilState } from 'recoil';
 import { GoSearch } from 'react-icons/go';
 import { IoIosCloseCircle } from 'react-icons/io';
 import { instance, instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/takgu/recoil/modal';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { modalState } from 'utils/recoil/takgu/modal';
+import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/takgu/admin/modal/AdminNoti.module.scss';
 
 let timer: ReturnType<typeof setTimeout>;

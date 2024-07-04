@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import { StoreMode } from 'types/takgu/storeTypes';
 import { ICoin } from 'types/takgu/userTypes';
 import { instance } from 'utils/axios';
-import { errorState } from 'utils/takgu/recoil/error';
+import { errorState } from 'utils/recoil/error';
 import { StoreModeWrap } from 'components/takgu/mode/modeWraps/StoreModeWrap';
 import { InventoryList } from 'components/takgu/store/InventoryList';
 import ItemsList from 'components/takgu/store/purchase/ItemsList';

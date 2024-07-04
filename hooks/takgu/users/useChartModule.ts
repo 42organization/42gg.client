@@ -12,7 +12,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { PppChart } from 'types/takgu/userTypes';
 import { instance } from 'utils/axios';
-import { errorState } from 'utils/takgu/recoil/error';
+import { errorState } from 'utils/recoil/error';
 
 ChartJS.register(
   CategoryScale,

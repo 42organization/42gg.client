@@ -1,7 +1,7 @@
 import { useResetRecoilState } from 'recoil';
 import { FiAlertTriangle } from 'react-icons/fi';
 import { instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/takgu/recoil/modal';
+import { modalState } from 'utils/recoil/takgu/modal';
 import styles from 'styles/takgu/admin/modal/DeletePenaltyModal.module.scss';
 
 export default function DeletePenaltyModal({

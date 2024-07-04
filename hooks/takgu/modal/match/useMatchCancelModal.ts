@@ -2,14 +2,14 @@ import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Cancel } from 'types/modalTypes';
 import { instance } from 'utils/axios';
-import { errorState } from 'utils/takgu/recoil/error';
+import { errorState } from 'utils/recoil/error';
 import {
   currentMatchState,
   myCurrentMatch,
   openCurrentMatchState,
   reloadMatchState,
-} from 'utils/takgu/recoil/match';
-import { modalState } from 'utils/takgu/recoil/modal';
+} from 'utils/recoil/takgu/match';
+import { modalState } from 'utils/recoil/takgu/modal';
 
 const useMatchCancelModal = ({ startTime }: Cancel) => {
   const setOpenCurrentMatch = useSetRecoilState(openCurrentMatchState);

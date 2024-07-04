@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
-import { reloadMatchState } from 'utils/takgu/recoil/match';
-import { modalState } from 'utils/takgu/recoil/modal';
+import { reloadMatchState } from 'utils/recoil/takgu/match';
+import { modalState } from 'utils/recoil/takgu/modal';
 import {
   ModalButtonContainer,
   ModalButton,

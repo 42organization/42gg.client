@@ -1,7 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 import { instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/takgu/recoil/modal';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { modalState } from 'utils/recoil/takgu/modal';
+import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/takgu/admin/modal/AdminCheckSendNoti.module.scss';
 
 interface IsendNoti {

@@ -2,7 +2,7 @@ import React, { SetStateAction, Dispatch } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/takgu/mainType';
 import { Match } from 'types/takgu/matchTypes';
-import { colorModeState } from 'utils/takgu/recoil/colorMode';
+import { colorModeState } from 'utils/recoil/takgu/colorMode';
 import ModeRadiobox from 'components/takgu/mode/modeItems/ModeRadiobox';
 
 interface MatchModeWrapProps {

@@ -1,8 +1,8 @@
 import { useSetRecoilState } from 'recoil';
 import { Imegaphone } from 'types/takgu/admin/adminReceiptType';
 import { instance } from 'utils/axios';
-import { modalState } from 'utils/takgu/recoil/modal';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { modalState } from 'utils/recoil/takgu/modal';
+import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/takgu/admin/modal/AdminDeleteMegaphone.module.scss';
 
 export default function AdminDeleteMegaphoneModal(props: Imegaphone) {

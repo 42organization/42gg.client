@@ -1,8 +1,8 @@
 import { useContext, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
-import { userState } from 'utils/takgu/recoil/layout';
-import { profileState } from 'utils/takgu/recoil/user';
+import { userState } from 'utils/recoil/layout';
+import { profileState } from 'utils/recoil/takgu/user';
 import Header from 'components/takgu/Layout/Header';
 import HeaderStateContext, {
   HeaderContext,

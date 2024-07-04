@@ -9,7 +9,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { PartyGameTemplate } from 'types/takgu/partyTypes';
-import { modalState } from 'utils/takgu/recoil/modal';
+import { modalState } from 'utils/recoil/takgu/modal';
 import { tableFormat } from 'constants/takgu/admin/table';
 import { AdminTableHead } from 'components/takgu/admin/common/AdminTable';
 import { usePartyTemplate } from 'hooks/takgu/party/usePartyTemplate';

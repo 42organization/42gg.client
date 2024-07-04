@@ -8,7 +8,7 @@ import {
   RecruitmentDetailProps,
 } from 'types/takgu/admin/adminRecruitmentsTypes';
 import { instance } from 'utils/axios';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/takgu/admin/recruitments/recruitmentDetail/RecruitmentDetail.module.scss';
 import ActionSelectorButtons from './components/ActionSelectorButtons';
 import QuestionForm from './components/QuestionForm';

@@ -4,7 +4,7 @@ import { ToggleMode } from 'types/takgu/rankTypes';
 import {
   seasonListState,
   latestSeasonIdState,
-} from 'utils/takgu/recoil/seasons';
+} from 'utils/recoil/takgu/seasons';
 
 const useSeasonDropDown = (
   clickTitle?: boolean,

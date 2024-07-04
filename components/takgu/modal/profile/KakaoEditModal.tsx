@@ -2,7 +2,7 @@ import router from 'next/router';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { instance } from 'utils/axios';
-import { errorState } from 'utils/takgu/recoil/error';
+import { errorState } from 'utils/recoil/error';
 import styles from 'styles/takgu/modal/menu/KakaoEditModal.module.scss';
 
 type UserType = 'kakao' | 'fortyTwo' | 'both' | '';

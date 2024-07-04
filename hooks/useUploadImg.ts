@@ -1,7 +1,7 @@
 import imageCompression from 'browser-image-compression';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { toastState } from 'utils/recoil/toast';
 
 interface ICompressProps {
   maxSizeMB: number;

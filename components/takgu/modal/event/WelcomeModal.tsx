@@ -3,8 +3,8 @@ import { useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'types/modalTypes';
 import { instance } from 'utils/axios';
-import { errorState } from 'utils/takgu/recoil/error';
-import { modalState } from 'utils/takgu/recoil/modal';
+import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/takgu/modal';
 import CoinPopcon from 'components/takgu/modal/CoinPopcon';
 import {
   ModalButtonContainer,

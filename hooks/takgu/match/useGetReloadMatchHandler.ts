@@ -2,7 +2,7 @@ import { useEffect, Dispatch, SetStateAction } from 'react';
 import { useRecoilState } from 'recoil';
 import { MatchMode } from 'types/takgu/mainType';
 import { Match } from 'types/takgu/matchTypes';
-import { reloadMatchState } from 'utils/takgu/recoil/match';
+import { reloadMatchState } from 'utils/recoil/takgu/match';
 import useAxiosGet from 'hooks/useAxiosGet';
 import useReloadHandler from 'hooks/useReloadHandler';
 

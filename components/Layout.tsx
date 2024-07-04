@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
-import { openCurrentMatchState } from 'utils/takgu/recoil/match';
+import { openCurrentMatchState } from 'utils/recoil/takgu/match';
 import AdminReject from 'components/takgu/admin/AdminReject';
 import AdminLayout from 'components/takgu/admin/Layout';
 import CurrentMatch from 'components/takgu/Layout/CurrentMatch';
@@ -18,9 +18,9 @@ import useSetAfterGameModal from 'hooks/takgu/Layout/useSetAfterGameModal';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/takgu/Layout/Layout.module.scss';
-import PlayButton from './PlayButton';
-import UserLayout from './UserLayout';
-import ModalProvider from '../modal/ModalProvider';
+import PlayButton from './takgu/Layout/PlayButton';
+import UserLayout from './takgu/Layout/UserLayout';
+import ModalProvider from './takgu/modal/ModalProvider';
 
 type AppLayoutProps = {
   children: React.ReactNode;

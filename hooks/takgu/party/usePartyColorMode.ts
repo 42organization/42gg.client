@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { PartyColors } from 'types/takgu/partyTypes';
-import { colorModeState } from 'utils/takgu/recoil/colorMode';
+import { colorModeState } from 'utils/recoil/takgu/colorMode';
 
 export default function usePartyColorMode(color: PartyColors) {
   const setColorMode = useSetRecoilState(colorModeState);

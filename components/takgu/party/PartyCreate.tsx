@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import { PartyCategory, PartyCreateForm } from 'types/takgu/partyTypes';
 import { instance } from 'utils/axios';
 import { getFormattedDateToString } from 'utils/handleTime';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { toastState } from 'utils/recoil/toast';
 import {
   customTemplate,
   hourOptions,

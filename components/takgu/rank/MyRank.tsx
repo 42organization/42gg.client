@@ -1,6 +1,6 @@
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { colorToggleSelector } from 'utils/takgu/recoil/colorMode';
-import { myRankState, scrollState } from 'utils/takgu/recoil/myRank';
+import { colorToggleSelector } from 'utils/recoil/takgu/colorMode';
+import { myRankState, scrollState } from 'utils/recoil/takgu/myRank';
 import styles from 'styles/takgu/rank/RankList.module.scss';
 
 export default function MyRank() {

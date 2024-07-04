@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { ProfileBasic, racketTypes } from 'types/takgu/userTypes';
-import { profileState } from 'utils/takgu/recoil/user';
+import { profileState } from 'utils/recoil/takgu/user';
 import {
   ModalButtonContainer,
   ModalButton,

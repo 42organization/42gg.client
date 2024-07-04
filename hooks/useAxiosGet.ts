@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { instance } from 'utils/axios';
 import { mockInstance } from 'utils/mockAxios';
-import { errorState } from 'utils/takgu/recoil/error';
+import { errorState } from 'utils/recoil/error';
 
 interface useAxiosGetProps<T> {
   url: string;

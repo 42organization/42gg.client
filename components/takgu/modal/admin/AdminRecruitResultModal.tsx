@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { instanceInManage, instance } from 'utils/axios';
 import { dateToStringShort, dateToDateTimeLocalString } from 'utils/handleTime';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/takgu/admin/modal/AdminRecruitMessageTemplateModal.module.scss';
 
 interface notiMessageType {

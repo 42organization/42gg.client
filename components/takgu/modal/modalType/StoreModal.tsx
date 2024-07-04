@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { modalState } from 'utils/takgu/recoil/modal';
+import { modalState } from 'utils/recoil/takgu/modal';
 import CoinChangeModal from 'components/takgu/modal/statChange/CoinChangeModal';
 import ChangeIdColorModal from 'components/takgu/modal/store/inventory/ChangeIdColorModal';
 import ChangeProfileBackgroundModal from 'components/takgu/modal/store/inventory/ChangeProfileBackgroundModal';

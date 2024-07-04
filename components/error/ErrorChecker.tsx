@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
-import { errorState } from 'utils/takgu/recoil/error';
-import ErrorPage from 'components/takgu/error/Error';
+import { errorState } from 'utils/recoil/error';
+import ErrorPage from 'components/error/Error';
 import styles from 'styles/takgu/Layout/Layout.module.scss';
 
 interface ErrorCheckerProps {

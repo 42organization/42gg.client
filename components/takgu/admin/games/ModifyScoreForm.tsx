@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { ModifyScoreType } from 'types/takgu/admin/gameLogTypes';
-import { modalState } from 'utils/takgu/recoil/modal';
+import { modalState } from 'utils/recoil/takgu/modal';
 import styles from 'styles/takgu/admin/games/GamesTable.module.scss';
 
 export default function ModifyScoreForm({

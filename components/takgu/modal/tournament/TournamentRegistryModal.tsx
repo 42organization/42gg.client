@@ -5,9 +5,9 @@ import { QUILL_FORMATS } from 'types/takgu/quillTypes';
 import { TournamentInfo } from 'types/takgu/tournamentTypes';
 import { instance } from 'utils/axios';
 import { dateToKRLocaleTimeString } from 'utils/handleTime';
-import { errorState } from 'utils/takgu/recoil/error';
-import { modalState } from 'utils/takgu/recoil/modal';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { errorState } from 'utils/recoil/error';
+import { modalState } from 'utils/recoil/takgu/modal';
+import { toastState } from 'utils/recoil/toast';
 import DynamicQuill from 'components/DynamicQuill';
 import {
   ModalButtonContainer,

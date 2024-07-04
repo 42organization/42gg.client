@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Modal, PartyReportModalData } from 'types/modalTypes';
 import { instance } from 'utils/axios';
-import { modalState } from 'utils/takgu/recoil/modal';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { modalState } from 'utils/recoil/takgu/modal';
+import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/takgu/modal/menu/ReportModal.module.scss';
 import { ModalButton, ModalButtonContainer } from '../ModalButton';
 

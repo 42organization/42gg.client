@@ -3,8 +3,8 @@ import { useSetRecoilState } from 'recoil';
 import { IPenaltyInfo } from 'types/takgu/admin/adminPenaltyTypes';
 import { instanceInManage } from 'utils/axios';
 import { fillZero } from 'utils/handleTime';
-import { modalState } from 'utils/takgu/recoil/modal';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { modalState } from 'utils/recoil/takgu/modal';
+import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/takgu/admin/modal/AdminPenalty.module.scss';
 
 export default function AdminPenaltyModal(props: { intraId: string }) {

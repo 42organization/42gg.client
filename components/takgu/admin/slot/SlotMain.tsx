@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import { GrLocationPin } from 'react-icons/gr';
 import { CurrentMatch, EditedSchedule } from 'types/takgu/admin/adminSlotTypes';
 import { instance, instanceInManage } from 'utils/axios';
-import { toastState } from 'utils/takgu/recoil/toast';
+import { toastState } from 'utils/recoil/toast';
 import SlotCurrent from 'components/takgu/admin/slot/SlotCurrent';
 import SlotPreview from 'components/takgu/admin/slot/SlotPreview';
 import styles from 'styles/takgu/admin/slot/SlotMain.module.scss';

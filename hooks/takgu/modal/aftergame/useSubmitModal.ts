@@ -1,9 +1,9 @@
 import { useSetRecoilState } from 'recoil';
 import { AfterGame, TeamScore } from 'types/takgu/scoreTypes';
 import { instance, isAxiosError } from 'utils/axios';
-import { errorState } from 'utils/takgu/recoil/error';
-import { reloadMatchState } from 'utils/takgu/recoil/match';
-import { modalState } from 'utils/takgu/recoil/modal';
+import { errorState } from 'utils/recoil/error';
+import { reloadMatchState } from 'utils/recoil/takgu/match';
+import { modalState } from 'utils/recoil/takgu/modal';
 
 type scoreRequest = {
   gameId: number;
