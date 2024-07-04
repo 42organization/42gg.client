@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Live, MatchMode } from 'types/takgu/mainType';
 import { CurrentMatchList, Match, Slot } from 'types/takgu/matchTypes';
-import { Modal } from 'types/modalTypes';
+import { Modal } from 'types/takgu/modalTypes';
 import { stringToHourMin } from 'utils/handleTime';
 import { liveState } from 'utils/recoil/layout';
 import { currentMatchState } from 'utils/recoil/takgu/match';

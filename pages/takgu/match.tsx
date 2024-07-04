@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/takgu/mainType';
 import { Match } from 'types/takgu/matchTypes';
-import { Modal } from 'types/modalTypes';
+import { Modal } from 'types/takgu/modalTypes';
 import { stringToHourMin } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/takgu/modal';
 import MatchBoard from 'components/takgu/match/MatchBoard';
 import MatchModeWrap from 'components/takgu/mode/modeWraps/MatchModeWrap';
-import useGetReloadMatchHandler from 'hooks/match/useGetReloadMatchHandler';
+import useGetReloadMatchHandler from 'hooks/takgu/match/useGetReloadMatchHandler';
 import useColorMode from 'hooks/useColorMode';
 import styles from 'styles/takgu/match/match.module.scss';
 
