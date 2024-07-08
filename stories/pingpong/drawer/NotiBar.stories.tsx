@@ -1,9 +1,9 @@
 import { useContext, useEffect } from 'react';
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
-import Header from 'components/Layout/Header';
+import Header from 'components/takgu/Layout/Header';
 import HeaderStateContext, {
   HeaderContext,
-} from 'components/Layout/HeaderContext';
+} from 'components/takgu/Layout/HeaderContext';
 
 const meta: Meta<typeof Header> = {
   title: 'PingPong/Drawer/NotiBar',

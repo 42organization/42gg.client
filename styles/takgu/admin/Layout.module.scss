@@ -1,0 +1,53 @@
+@import 'styles/takgu/common.scss';
+
+.adminContainer {
+  display: flex;
+  width: 100vw;
+  min-width: 60rem;
+  height: 100vh;
+  flex-direction: column;
+  background: white;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  min-height: 3.5rem;
+  flex-direction: row;
+  padding: 0 1.5rem;
+  background: white;
+  box-shadow: inset 0 0 0.2rem rgba(0, 0, 0, 0.25);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: $big-font;
+  color: black;
+  cursor: pointer;
+}
+
+.homeButton {
+  @include button(white, black, 4rem, 2rem);
+  background: white;
+  border: 1px solid $medium-gray;
+}
+
+.homeButton:hover {
+  background: linear-gradient(to bottom, white, $light-gray);
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pageContent {
+  width: 100%;
+  height: calc(100vh - 4rem);
+  overflow-y: scroll;
+}

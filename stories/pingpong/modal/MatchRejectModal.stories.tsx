@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import MatchRejectModal from 'components/modal/match/MatchRejectModal';
+import MatchRejectModal from 'components/takgu/modal/match/MatchRejectModal';
 
 const meta: Meta<typeof MatchRejectModal> = {
   title: 'PingPong/Modal/MatchRejectModal',

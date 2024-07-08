@@ -1,6 +1,6 @@
-import { Rank } from 'types/rankTypes';
+import { Rank } from 'types/takgu/rankTypes';
 import type { Meta, StoryObj } from '@storybook/react';
-import RankListMain from 'components/rank/topRank/RankListMain';
+import RankListMain from 'components/takgu/rank/topRank/RankListMain';
 
 interface RankListMainProps {
   rank?: Rank;

@@ -1,0 +1,28 @@
+@import 'styles/takgu/common.scss';
+
+.whole {
+  display: flex;
+  width: 510px;
+  height: 569px;
+  flex-direction: column;
+  background: rgb(88, 88, 88);
+  border-radius: 9px;
+  align-items: center;
+}
+
+.editBtn {
+  all: unset;
+  width: 5rem;
+  height: 2rem;
+  font-size: $small-font;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  background: gray;
+  background-color: $btn-blue;
+  border-radius: 0.5rem;
+  &:hover {
+    background-color: darken($btn-blue, 10%);
+    transition: 0.3s;
+  }
+}

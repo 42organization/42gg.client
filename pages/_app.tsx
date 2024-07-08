@@ -6,10 +6,10 @@ import { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 import ErrorChecker from 'components/error/ErrorChecker';
-import Layout from 'components/Layout/Layout';
+import Layout from 'components/Layout';
 import LoginChecker from 'components/LoginChecker';
-import ModalProvider from 'components/modal/ModalProvider';
-import CustomizedSnackbars from 'components/toastmsg/toastmsg';
+import ModalProvider from 'components/takgu/modal/ModalProvider';
+import CustomizedSnackbars from 'components/takgu/toastmsg/toastmsg';
 import * as gtag from 'lib/gtag';
 import 'styles/globals.css';
 
@@ -57,7 +57,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <Layout>
                 <Component {...pageProps} />
               </Layout>
-              <ModalProvider />
+              {/* <ModalProvider /> */}
               <CustomizedSnackbars />
             </QueryClientProvider>
           </ErrorChecker>

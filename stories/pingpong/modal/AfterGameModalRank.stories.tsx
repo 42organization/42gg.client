@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import RankGame from 'components/modal/afterGame/ScoreGame';
+import RankGame from 'components/takgu/modal/afterGame/ScoreGame';
 
 const meta: Meta<typeof RankGame> = {
   title: 'PingPong/Modal/AfterGameModalRank',

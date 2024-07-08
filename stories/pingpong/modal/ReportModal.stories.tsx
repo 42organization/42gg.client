@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ReportModal from 'components/modal/menu/ReportModal';
+import ReportModal from 'components/takgu/modal/menu/ReportModal';
 
 const meta: Meta<typeof ReportModal> = {
   title: 'PingPong/Modal/ReportModal',

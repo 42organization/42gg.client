@@ -1,0 +1,42 @@
+@import 'styles/takgu/common.scss';
+
+.sectionWrap {
+  position: relative;
+  margin-top: 2.5rem;
+  &.mainRank {
+    margin-top: 1rem;
+  }
+  > .titleWrap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.813rem;
+    > span {
+      display: flex;
+      font-family: $title-font;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.25rem;
+      color: #ffffff;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      letter-spacing: 0.04em;
+      align-items: center;
+    }
+    > button {
+      z-index: 10;
+      width: 1.563rem;
+      height: 1.563rem;
+      color: #ffffff;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+    }
+  }
+
+  // NOTE : 적용되는 부분이 없어 보여 일단 주석처리 해 두었습니다.
+  // section {
+  //   #title {
+  //     font-size: $big-font;
+  //   }
+  // }
+}

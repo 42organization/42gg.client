@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import BuyModal from 'components/modal/store/purchase/BuyModal';
+import BuyModal from 'components/takgu/modal/store/purchase/BuyModal';
 
 const meta: Meta<typeof BuyModal> = {
   title: 'PingPong/store/Modal/BuyModal',

@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { liveState } from 'utils/recoil/layout';
-import Header from 'components/Layout/Header';
-import HeaderStateContext from 'components/Layout/HeaderContext';
+import Header from 'components/takgu/Layout/Header';
+import HeaderStateContext from 'components/takgu/Layout/HeaderContext';
 
 const meta: Meta<typeof Header> = {
   title: 'PingPong/Header/Header',

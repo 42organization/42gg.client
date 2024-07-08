@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import MatchManualModal from 'components/modal/match/MatchManualModal';
+import MatchManualModal from 'components/takgu/modal/match/MatchManualModal';
 
 const meta: Meta<typeof MatchManualModal> = {
   title: 'PingPong/Modal/MatchManualModal',

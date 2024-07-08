@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import GameResultSmallItem from 'components/game/small/GameResultSmallItem';
+import GameResultSmallItem from 'components/takgu/game/small/GameResultSmallItem';
 
 const RANKTEAMS = {
   team1: {

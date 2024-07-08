@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import AnnouncementModal from 'components/modal/event/AnnouncementModal';
+import AnnouncementModal from 'components/takgu/modal/event/AnnouncementModal';
 
 const meta: Meta<typeof AnnouncementModal> = {
   title: 'PingPong/Modal/AnnouncementModal',

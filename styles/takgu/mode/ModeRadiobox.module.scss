@@ -1,0 +1,99 @@
+@import 'styles/takgu/common.scss';
+
+@mixin ButtonBackground($page) {
+  @if ($page == 'GAME' or $page == 'MATCH') {
+    :checked + .modeButton {
+      &.both {
+        background: #f82f9a;
+      }
+      &.normal {
+        background: #3270cd;
+      }
+      &.rank {
+        background: #a06cbf;
+      }
+    }
+    .modeButton {
+      background: #000000;
+    }
+  } @else if ($page == 'MANUAL') {
+    :checked + .modeButton {
+      background: #380052;
+    }
+    .modeButton {
+      background: #98819b;
+    }
+  } @else if ($page == 'STORE') {
+    :checked + .modeButton {
+      background: #a06cbf;
+    }
+    .modeButton {
+      background: #000000;
+    }
+  } @else if ($page == 'STORE_MANUAL') {
+    :checked + .modeButton {
+      background: #a06cbf;
+    }
+    .modeButton {
+      background: #000000;
+    }
+  }
+}
+
+@mixin Buttons {
+  display: grid;
+  column-gap: 0.25rem;
+  justify-items: stretch;
+  align-items: stretch;
+  margin: 0 1.25rem;
+  color: #ffffff;
+  input[type='radio'] {
+    position: absolute;
+    opacity: 0;
+  }
+  .modeButton {
+    box-sizing: border-box;
+    display: flex;
+    height: 2.063rem;
+    font-size: 0.9rem;
+    text-align: center;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 0.625rem 0.625rem 0 0;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.threeButtons {
+  @include Buttons;
+  grid-template-columns: 1fr 1fr 1fr;
+  &.zIndexListButton {
+    margin: 0 1.916rem;
+  }
+  // 사용되는 페이지별로 다른 background 적용
+  &.game {
+    @include ButtonBackground('GAME');
+  }
+  &.match {
+    @include ButtonBackground('MATCH');
+  }
+  &.manual {
+    @include ButtonBackground('MANUAL');
+    margin: 0;
+  }
+}
+
+.twoButtons {
+  @include Buttons;
+  grid-template-columns: 1fr 1fr;
+  &.zIndexListButton {
+    margin: 0 1.916rem;
+  }
+  &.store {
+    @include ButtonBackground('STORE');
+  }
+  &.store_manual {
+    @include ButtonBackground('STORE_MANUAL');
+  }
+}

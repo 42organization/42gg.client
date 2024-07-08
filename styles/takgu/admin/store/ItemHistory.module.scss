@@ -1,0 +1,31 @@
+@import 'styles/takgu/admin/common/Pagination.module.scss';
+@import 'styles/takgu/common.scss';
+
+.tableContainer {
+  width: 100%;
+  min-width: 700px;
+  margin: auto;
+
+  .table {
+    .tableBody {
+      .tableRow {
+        &:nth-child(odd) {
+          background-color: #f9fafb;
+        }
+
+        &:nth-child(even) {
+          background-color: #fff;
+        }
+
+        .tableBodyItem {
+          padding: 10px;
+          font-size: 0.7rem;
+          line-height: 150%;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+@include pagination;

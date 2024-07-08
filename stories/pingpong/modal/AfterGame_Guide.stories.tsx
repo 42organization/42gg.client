@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Guide from 'components/modal/afterGame/Guide';
+import Guide from 'components/takgu/modal/afterGame/Guide';
 
 const meta: Meta<typeof Guide> = {
   title: 'PingPong/Modal/AfterGameModal_Guide',

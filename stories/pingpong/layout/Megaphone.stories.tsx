@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Megaphone from 'components/Layout/MegaPhone';
+import Megaphone from 'components/takgu/Layout/MegaPhone';
 
 const meta: Meta<typeof Megaphone> = {
   title: 'PingPong/Layout/Megaphone',

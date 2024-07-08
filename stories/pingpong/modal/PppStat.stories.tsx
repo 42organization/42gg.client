@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import PppStat from 'components/modal/statChange/PppStat';
+import PppStat from 'components/takgu/modal/statChange/PppStat';
 
 const meta: Meta<typeof PppStat> = {
   title: 'PingPong/Modal/PppStat',

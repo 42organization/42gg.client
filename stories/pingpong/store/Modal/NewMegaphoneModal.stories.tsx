@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import NewMegaphoneModal from 'components/modal/store/inventory/NewMegaphoneModal';
+import NewMegaphoneModal from 'components/takgu/modal/store/inventory/NewMegaphoneModal';
 
 const meta: Meta<typeof NewMegaphoneModal> = {
   title: 'PingPong/store/Modal/NewMegaphoneModal',
