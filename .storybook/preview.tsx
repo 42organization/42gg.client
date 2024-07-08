@@ -17,8 +17,18 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      default: 'purple',
-      values: [{ name: 'purple', value: '#301451' }],
+      default: 'light-bg',
+      values: [
+        { name: 'purple', value: '#301451' },
+        {
+          name: 'light-bg',
+          value: 'linear-gradient(180deg, #c9c9c9 0%, #6d5b93 100%)',
+        },
+        {
+          name: 'dark-bg',
+          value: 'linear-gradient(180deg, #6d5b93 0%, #301451 100%)',
+        },
+      ],
     },
   },
   decorators: [
