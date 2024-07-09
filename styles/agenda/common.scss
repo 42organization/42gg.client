@@ -1,5 +1,5 @@
 // https://dev.to/wgnrd/adding-a-dark-mode-to-your-website-using-scss-4pdc
-// @import '../global.css';
+// @import 'styles/globals.css';
 
 // radius
 $small-radius: 1rem; // 컴포넌트 속 요소
@@ -26,7 +26,9 @@ $font-family-menu: 'Cafe24 Simplehae';
   flex-direction: column;
   padding: 0 1rem;
   margin: 0 auto;
-  box-shadow: var(--default-shadow);
+  border: var(--default-border);
+  border-radius: $medium-radius;
+  box-shadow: var(--default-box-shadow);
   justify-content: center;
   align-items: center;
   @if $level == 1 {
