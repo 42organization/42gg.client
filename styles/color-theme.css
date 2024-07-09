@@ -24,25 +24,25 @@
 }
 
 html[data-theme='light'] {
-  --color-bg: #{linear-gradient(180deg, #c9c9c9 0%, #6d5b93 100%)};
-  --color-text: #{$text-light};
-  --default-border: #{$border-light};
-  --default-box-shadow: #{$border-light};
-  --highlight-yellow: #{$highlight-yellow-light};
-  --highlight-violet: #{$highlight-violet-light};
-  --box-bg-1: #{$box-bg-1-light};
-  --box-bg-2: #{$box-bg-2-light};
-  --box-bg-3: #{$box-bg-3-light};
+  --color-bg: var(--bg-light);
+  --color-text: var(--text-light);
+  --default-border: var(--border-light);
+  --default-box-shadow: var(--border-light);
+  --highlight-yellow: var(--highlight-yellow-light);
+  --highlight-violet: var(--highlight-violet-light);
+  --box-bg-1: var(--box-bg-1-light);
+  --box-bg-2: var(--box-bg-2-light);
+  --box-bg-3: var(--box-bg-3-light);
 }
 
 html[data-theme='dark'] {
-  --color-bg: #{linear-gradient(180deg, #38253a 0%, #604ecd 73%, #999772 100%)};
-  --color-text: #{$text-dark};
-  --default-border: #{$border-dark};
-  --default-box-shadow: #{$border-dark};
-  --highlight-yellow: #{$highlight-yellow-dark};
-  --highlight-violet: #{$highlight-violet-dark};
-  --box-bg-1: #{$box-bg-1-dark};
-  --box-bg-2: #{$box-bg-2-dark};
-  --box-bg-3: #{$box-bg-3-dark};
+  --color-bg: var(--bg-dark);
+  --color-text: var(--text-dark);
+  --default-border: var(--border-dark);
+  --default-box-shadow: var(--border-dark);
+  --highlight-yellow: var(--highlight-yellow-dark);
+  --highlight-violet: var(--highlight-violet-dark);
+  --box-bg-1: var(--box-bg-1-dark);
+  --box-bg-2: var(--box-bg-2-dark);
+  --box-bg-3: var(--box-bg-3-dark);
 }
