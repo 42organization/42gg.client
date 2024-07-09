@@ -17,3 +17,23 @@ $color-coalition-lee: #ff8a85;
 
 // font-family
 $font-family-menu: 'Cafe24 Simplehae';
+
+/* font-size */
+$giant-giant-font: 2.4rem;
+$giant-big-font: 2.1rem;
+$big-giant-font: 1.8rem;
+$giant-font: 1.5rem;
+$big-font: 1.2rem;
+$medium-font: 1rem;
+$small-font: 0.8rem;
+
+$logo-font: 'Overgrow', sans-serif;
+
+@mixin logoText($size, $color) {
+  font-family: $logo-font;
+  font-size: $size;
+  font-weight: 500;
+  color: $color;
+  text-align: center;
+  letter-spacing: 0.1rem;
+}

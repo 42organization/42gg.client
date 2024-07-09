@@ -1,5 +1,5 @@
 import { useSetRecoilState } from 'recoil';
-import { Modal } from 'types/modalTypes';
+import { Modal } from 'types/takgu/modalTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/takgu/modal';

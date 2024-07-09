@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { Announcement } from 'types/modalTypes';
+import { Announcement } from 'types/takgu/modalTypes';
 import { QUILL_FORMATS } from 'types/takgu/quillTypes';
 import { modalState } from 'utils/recoil/takgu/modal';
 import DynamicQuill from 'components/DynamicQuill';

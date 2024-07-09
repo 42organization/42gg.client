@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Enroll } from 'types/modalTypes';
+import { Enroll } from 'types/takgu/modalTypes';
 import { gameTimeToString } from 'utils/handleTime';
 import {
   ModalButtonContainer,

@@ -18,6 +18,9 @@ import useSetAfterGameModal from 'hooks/takgu/Layout/useSetAfterGameModal';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/takgu/Layout/Layout.module.scss';
+import AgendaFooter from './agenda/Layout/AgendaFooter';
+import AgendaHeader from './agenda/Layout/AgendaHeader';
+import AgendaUserLayout from './agenda/Layout/AgendaUserLayout';
 import PlayButton from './takgu/Layout/PlayButton';
 import UserLayout from './takgu/Layout/UserLayout';
 import ModalProvider from './takgu/modal/ModalProvider';
@@ -39,42 +42,52 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   if (!user || !user.intraId) return null;
 
-  if (presentPath.includes('/takgu/admin')) {
-    if (!user.isAdmin) return <AdminReject />;
-    return <AdminLayout>{children}</AdminLayout>;
-  }
+  switch (true) {
+    case presentPath.includes('/takgu/admin'):
+      if (!user.isAdmin) return <AdminReject />;
+      return <AdminLayout>{children}</AdminLayout>;
 
-  if (presentPath.includes('/takgu/recruit')) {
-    return <RecruitLayout>{children}</RecruitLayout>;
-  }
+    case presentPath.includes('/takgu/recruit'):
+      return <RecruitLayout>{children}</RecruitLayout>;
 
-  // NOTE : 외부 툴을 사용해보고 외부 툴로 대체가 가능하다면 삭제 예정
-  if (presentPath === '/takgu/statistics' && user.isAdmin)
-    return (
-      <UserLayout>
-        <Statistics />
-      </UserLayout>
-    );
-
-  if (presentPath.includes('/takgu'))
-    return (
-      <>
+    case presentPath === '/takgu/statistics' && user.isAdmin:
+      return (
         <UserLayout>
-          <HeaderStateContext>
-            <Header />
-          </HeaderStateContext>
-          <PlayButton />
-          <div className={styles.topInfo}>
-            <Megaphone />
-            {openCurrentMatch && <CurrentMatch />}
-            {presentPath === '/' && <MainPageProfile />}
-          </div>
-          {children}
-          <Footer />
+          <Statistics />
         </UserLayout>
-        <ModalProvider />
-      </>
-    );
+      );
 
-  return <>{children}</>;
+    case presentPath.includes('/takgu'):
+      return (
+        <>
+          <UserLayout>
+            <HeaderStateContext>
+              <Header />
+            </HeaderStateContext>
+            <PlayButton />
+            <div className={styles.topInfo}>
+              <Megaphone />
+              {openCurrentMatch && <CurrentMatch />}
+              {presentPath === '/' && <MainPageProfile />}
+            </div>
+            {children}
+            <Footer />
+          </UserLayout>
+          <ModalProvider />
+        </>
+      );
+
+    case presentPath.includes('/agenda'):
+      return (
+        <>
+          <AgendaUserLayout>
+            <AgendaHeader />
+            {children}
+            <AgendaFooter />
+          </AgendaUserLayout>
+        </>
+      );
+    default:
+      return <>{children}</>;
+  }
 }

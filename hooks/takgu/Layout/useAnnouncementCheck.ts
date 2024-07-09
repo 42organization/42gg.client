@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 // import { User } from 'types/mainType';
-import { Modal } from 'types/modalTypes';
+import { Modal } from 'types/takgu/modalTypes';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import useAxiosGet from 'hooks/useAxiosGet';

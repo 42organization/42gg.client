@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
 import { v1 } from 'uuid';
-import { Modal } from 'types/modalTypes';
+import { Modal } from 'types/takgu/modalTypes';
 
 export const modalState = atom<Modal>({
   key: `modalState/${v1()}`,

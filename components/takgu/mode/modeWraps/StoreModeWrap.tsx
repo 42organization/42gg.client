@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { Modal } from 'types/modalTypes';
+import { Modal } from 'types/takgu/modalTypes';
 import { StoreMode } from 'types/takgu/storeTypes';
 import { ICoin } from 'types/takgu/userTypes';
 import { modalState } from 'utils/recoil/takgu/modal';

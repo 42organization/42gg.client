@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { BiCalendar } from 'react-icons/bi';
 import { MdPeopleAlt } from 'react-icons/md';
-import { Modal } from 'types/modalTypes';
+import { Modal } from 'types/takgu/modalTypes';
 import { TournamentInfo } from 'types/takgu/tournamentTypes';
 import { instance } from 'utils/axios';
 import { dateToKRLocaleTimeString } from 'utils/handleTime';

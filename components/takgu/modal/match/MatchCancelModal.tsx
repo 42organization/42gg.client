@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Cancel } from 'types/modalTypes';
+import { Cancel } from 'types/takgu/modalTypes';
 import {
   ModalButtonContainer,
   ModalButton,

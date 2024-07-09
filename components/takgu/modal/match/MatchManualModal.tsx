@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { MatchMode } from 'types/takgu/mainType';
-import { Manual } from 'types/modalTypes';
+import { Manual } from 'types/takgu/modalTypes';
 import { modalState } from 'utils/recoil/takgu/modal';
 import {
   ModalButtonContainer,

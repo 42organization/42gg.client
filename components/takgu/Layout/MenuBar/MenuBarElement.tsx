@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React, { MouseEvent, useContext, MouseEventHandler } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { AiFillShop } from 'react-icons/ai';
-import { Modal } from 'types/modalTypes';
+import { Modal } from 'types/takgu/modalTypes';
 import { modalState } from 'utils/recoil/takgu/modal';
 import {
   HeaderContextState,

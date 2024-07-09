@@ -8,6 +8,7 @@ interface LoginCheckerProps {
 
 export default function LoginChecker({ children }: LoginCheckerProps) {
   const [isLoading, loggedIn] = useLoginCheck();
+  return <>{children}</>;
 
   return loggedIn ? (
     <>{children}</>
