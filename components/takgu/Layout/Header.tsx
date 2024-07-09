@@ -6,7 +6,7 @@ import { BsMegaphone } from 'react-icons/bs';
 import { FaArrowLeft } from 'react-icons/fa';
 import { FiMenu } from 'react-icons/fi';
 import { IoStorefrontOutline } from 'react-icons/io5';
-import { Modal } from 'types/modalTypes';
+import { Modal } from 'types/takgu/modalTypes';
 import { liveState } from 'utils/recoil/layout';
 import { modalState } from 'utils/recoil/takgu/modal';
 import {

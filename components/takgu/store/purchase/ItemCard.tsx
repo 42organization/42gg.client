@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { SyntheticEvent } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Item } from 'types/takgu/itemTypes';
-import { Modal } from 'types/modalTypes';
+import { Modal } from 'types/takgu/modalTypes';
 import { modalState } from 'utils/recoil/takgu/modal';
 import styles from 'styles/takgu/store/ItemCard.module.scss';
 

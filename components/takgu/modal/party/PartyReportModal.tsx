@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { Modal, PartyReportModalData } from 'types/modalTypes';
+import { Modal, PartyReportModalData } from 'types/takgu/modalTypes';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';

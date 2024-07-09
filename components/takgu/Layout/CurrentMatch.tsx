@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { TbMenu } from 'react-icons/tb';
-import { Modal } from 'types/modalTypes';
 import {
   CurrentMatchList,
   CurrentMatchListElement,
 } from 'types/takgu/matchTypes';
+import { Modal } from 'types/takgu/modalTypes';
 import { stringToHourMin } from 'utils/handleTime';
 import { currentMatchState } from 'utils/recoil/takgu/match';
 import { modalState } from 'utils/recoil/takgu/modal';

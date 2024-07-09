@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useSetRecoilState, useResetRecoilState } from 'recoil';
-import { PriceTag } from 'types/modalTypes';
+import { PriceTag } from 'types/takgu/modalTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/takgu/modal';

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { Cancel } from 'types/modalTypes';
+import { Cancel } from 'types/takgu/modalTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import {

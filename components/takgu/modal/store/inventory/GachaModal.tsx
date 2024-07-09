@@ -1,5 +1,5 @@
 import { useResetRecoilState } from 'recoil';
-import { IRandomItem } from 'types/modalTypes';
+import { IRandomItem } from 'types/takgu/modalTypes';
 import { modalState } from 'utils/recoil/takgu/modal';
 import {
   ModalButtonContainer,
