@@ -1,1 +1,24 @@
 @import 'styles/agenda/common.scss';
+
+.container {
+  @include container(1);
+}
+
+.submit_btn {
+  @include button('highlight');
+}
+
+.cancel_btn {
+  @include button('default');
+}
+
+.title {
+  @include title;
+}
+
+.description {
+  @include description;
+}
+// .backwards_btn {
+//   @include button-icon('backwards');
+// }
