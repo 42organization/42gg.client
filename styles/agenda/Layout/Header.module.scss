@@ -1,0 +1,34 @@
+@import 'styles/agenda/common.scss';
+
+.headerWrap {
+  z-index: 2;
+  display: flex;
+  height: 4rem;
+  margin: 0 0.7rem;
+  font-size: $giant-font;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerLeft {
+  display: flex;
+  height: 100%;
+  flex: 2;
+  gap: 2rem;
+  align-items: center;
+  .menuIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+.logoWrap {
+  @include logoText(2rem, white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+}

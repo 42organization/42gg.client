@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 export default function Document() {
   return (
-    <Html>
+    <Html data-theme='light'>
       <Head>
         <link rel='icon' href='/image/takgu/favicon.png' />
         <link rel='shortcut icon' href='/image/takgu/favicon.png' />

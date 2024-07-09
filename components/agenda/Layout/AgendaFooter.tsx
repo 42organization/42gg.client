@@ -1,6 +1,6 @@
 import styles from 'styles/takgu/Layout/Footer.module.scss';
 
-export default function Footer() {
+export default function AgendaFooter() {
   return (
     <footer className={styles.footerContainer}>
       <div className={styles.link}>

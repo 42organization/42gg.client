@@ -20,7 +20,6 @@ import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/takgu/Layout/Layout.module.scss';
 import AgendaFooter from './agenda/Layout/AgendaFooter';
 import AgendaHeader from './agenda/Layout/AgendaHeader';
-import AgendaHeaderStateContext from './agenda/Layout/AgendaHeaderContext';
 import AgendaUserLayout from './agenda/Layout/AgendaUserLayout';
 import PlayButton from './takgu/Layout/PlayButton';
 import UserLayout from './takgu/Layout/UserLayout';
@@ -82,9 +81,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       return (
         <>
           <AgendaUserLayout>
-            <AgendaHeaderStateContext>
-              <AgendaHeader />
-            </AgendaHeaderStateContext>
+            <AgendaHeader />
             {children}
             <AgendaFooter />
           </AgendaUserLayout>
