@@ -1,4 +1,4 @@
-import './style.scss';
+import styles from './style.module.scss';
 
 const CssTest = () => {
   const switchTheme = () => {
@@ -12,8 +12,8 @@ const CssTest = () => {
   return (
     <div id='container'>
       <h1>TEST menu</h1>
-      <div className='test-box'>test</div>
-
+      <div className={styles.test_box}>test</div>
+      <div className={styles.fuck}>????</div>
       <button onClick={() => switchTheme()}>switch</button>
     </div>
   );
