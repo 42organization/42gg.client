@@ -21,22 +21,22 @@ $font-family-menu: 'Cafe24 Simplehae';
 
 @mixin container($level) {
   display: flex;
-  width: 100%;
+  width: calc(100% - 2rem);
   max-width: 1200px;
   flex-direction: column;
   padding: 0 1rem;
-  margin: 0 auto;
+  margin: 1rem;
   border: var(--default-border);
   border-radius: $medium-radius;
   box-shadow: var(--default-box-shadow);
   justify-content: center;
   align-items: center;
   @if $level == 1 {
-    background: var(--color-bg-1);
+    background: var(--box-bg-1);
   } @else if $level == 2 {
-    background: var(--color-bg-2);
+    background: var(--box-bg-2);
   } @else if $level == 3 {
-    background: var(--color-bg-3);
+    background: var(--box-bg-3);
   }
 }
 
@@ -58,4 +58,31 @@ $logo-font: 'Overgrow', sans-serif;
   color: $color;
   text-align: center;
   letter-spacing: 0.1rem;
+}
+
+@mixin button($type) {
+  padding: 0.5rem 1rem;
+  font-size: $medium-font;
+  border: var(--default-border);
+  border-radius: $small-radius;
+  box-shadow: var(--default-box-shadow);
+  @if ($type == 'default') {
+    color: var(--default-font);
+    border-color: var(--default-border);
+  } @else if (type == 'highlight') {
+    color: white;
+    border-color: var(--highlight-violet);
+  }
+}
+
+@mixin title {
+  margin: 1rem 0;
+  font-size: $big-giant-font;
+  font-weight: 500;
+  color: var(--default-font);
+}
+
+@mixin description {
+  font-size: $small-font;
+  font-weight: 300;
 }
