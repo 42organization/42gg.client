@@ -1,9 +1,10 @@
 // https://dev.to/wgnrd/adding-a-dark-mode-to-your-website-using-scss-4pdc
+// @import '../global.css';
 
 // radius
-$small-radius: 10px; // 컴포넌트 속 요소
-$medium-radius: 20px; // 기본 컴포넌트
-$big-radius: 40px; // 제목, 웹용 큰 박스용
+$small-radius: 1rem; // 컴포넌트 속 요소
+$medium-radius: 1.2rem; // 기본 컴포넌트
+$big-radius: 1.4rem; // 제목, 웹용 큰 박스용
 
 // coalition
 $color-coalition-autumn: #ffac65;
@@ -17,6 +18,25 @@ $color-coalition-lee: #ff8a85;
 
 // font-family
 $font-family-menu: 'Cafe24 Simplehae';
+
+@mixin container($level) {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  flex-direction: column;
+  padding: 0 1rem;
+  margin: 0 auto;
+  box-shadow: var(--default-shadow);
+  justify-content: center;
+  align-items: center;
+  @if $level == 1 {
+    background: var(--color-bg-1);
+  } @else if $level == 2 {
+    background: var(--color-bg-2);
+  } @else if $level == 3 {
+    background: var(--color-bg-3);
+  }
+}
 
 /* font-size */
 $giant-giant-font: 2.4rem;
