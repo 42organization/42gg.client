@@ -1,0 +1,21 @@
+@import 'styles/agenda/common.scss';
+
+.AddButton {
+  display: inline-flex;
+  padding: 0.4rem 0.6rem;
+  background: #fff;
+
+  border-radius: $medium-radius;
+
+  /* button-import */
+  box-shadow: 0px 4px 0px 0px #000;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+
+  span {
+    font-family: $common-font;
+    font-size: $medium-font;
+    font-weight: 700;
+  }
+}
