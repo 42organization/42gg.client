@@ -15,16 +15,21 @@ const CreateTeamForm = () => {
       />
       <TimeInput name='startDate' label='시작일' />
       <TimeInput name='endDate' label='종료일' />
-      <CountInput
-        name='maxMember'
-        label='최대 인원'
-        min={1}
-        max={10}
-        value={1}
-        step={1}
-      />
-      <ImageInput name='image' label='팀 이미지' />
-      <CheckboxInput name='isPublic' label='공개 여부' />
+      <p>진행기간 : {0}일</p>
+      <TimeInput name='recruitEndDate' label='모집마감일' />
+      <div>
+        <h3>등록 가능 팀 제한</h3>
+        <CountInput name='minTeam' label='최소' min={3} max={50} value={3} />
+        <CountInput name='maxTeam' label='최대' min={3} max={50} value={3} />
+      </div>
+      <div>
+        <h3>팀당 인원 제한</h3>
+        <CheckboxInput name='isSolo' label='개인' />
+        <CountInput name='minMember' label='최소' min={1} max={10} value={3} />
+        <CountInput name='maxMember' label='최대' min={2} max={10} value={3} />
+      </div>
+      <ImageInput name='image' label='포스터 파일 첨부하기' />
+      <CheckboxInput name='isPublic' label='대회 유무' />
     </form>
   );
 };
