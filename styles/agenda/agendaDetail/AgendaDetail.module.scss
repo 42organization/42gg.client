@@ -1,0 +1,11 @@
+@import 'styles/agenda/common.scss';
+
+.agendaDetailWrap {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  margin: 0 2rem;
+  justify-content: center;
+  align-items: center;
+}
