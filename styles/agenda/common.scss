@@ -16,8 +16,12 @@ $color-coalition-gun: #ffea80;
 $color-coalition-gam: #72d3ff;
 $color-coalition-lee: #ff8a85;
 
+// color
+$color-placeholder: #b4a5b5;
+
 // font-family
 $font-family-menu: 'Cafe24 Simplehae';
+$font-default: 'Pretendard', sans-serif;
 
 @mixin container($level) {
   display: flex;
