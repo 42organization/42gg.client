@@ -39,3 +39,8 @@ $logo-font: 'Overgrow', sans-serif;
   text-align: center;
   letter-spacing: 0.1rem;
 }
+
+@mixin defaultBorder($radius: $medium-radius) {
+  border: 1px solid #000;
+  border-radius: $radius;
+}

@@ -17,7 +17,7 @@ $info-gradient: linear-gradient(
   border: 1px solid #000;
 
   border-radius: $medium-radius;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--box-shadow-light);
   flex-shrink: 0;
 }
 
@@ -44,6 +44,10 @@ $info-gradient: linear-gradient(
   h2 {
     margin: 0;
   }
+}
+
+.shareBtn {
+  cursor: pointer;
 }
 
 .enrollWarp {

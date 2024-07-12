@@ -17,7 +17,7 @@ export default function AgendaInfo() {
 
             <div className={styles.titleWarp}>
               <h2>{title}</h2>
-              <Share />
+              <Share className={styles.shareBtn} />
             </div>
 
             <div className={styles.organizerWrap}>
