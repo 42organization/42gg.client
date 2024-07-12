@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
+import AgendaTap from 'components/agenda/agendaDetail/AgendaTap';
 import styles from 'styles/agenda/agendaDetail/AgendaDetail.module.scss';
 
 export default function AgendaDetail() {
@@ -12,7 +13,8 @@ export default function AgendaDetail() {
     <>
       <div className={styles.agendaDetailWrap}>
         <AgendaInfo />
-        {/* <AgendaTap />
+        <AgendaTap />
+        {/*
         <AgendaContents />
         <AgendaParticipant />
         <AgendaAnnounce />
