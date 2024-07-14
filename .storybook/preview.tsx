@@ -37,7 +37,6 @@ const preview: Preview = {
     (Story: StoryFn) => (
       <RecoilRoot>
         <QueryClientProvider client={queryClient}>
-          <Story />
           <button
             onClick={() => {
               const theme = document.documentElement.getAttribute('data-theme');
@@ -51,6 +50,7 @@ const preview: Preview = {
           >
             theme
           </button>
+          <Story />
         </QueryClientProvider>
       </RecoilRoot>
     ),
