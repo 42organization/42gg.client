@@ -1,0 +1,31 @@
+@import 'styles/agenda/common.scss';
+
+.participantsContainer {
+
+  display: flex;
+  width: 12rem;
+  height: 0.5rem;
+  padding: 1rem 1.2rem;
+  background: var(--box-bg-1-light);
+
+  border-radius: $medium-radius;
+  box-shadow: var(--box-shadow-bottom);
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.participantWarp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 0 0;
+}
+
+.participantcontent {
+  width: 8rem;
+  flex-shrink: 0;
+
+  font-family: $common-font;
+  font-size: $medium-font;
+  font-weight: 700;
+}

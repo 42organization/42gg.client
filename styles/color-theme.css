@@ -25,6 +25,8 @@
   --box-bg-1-dark: #666666;
   --box-bg-2-dark: #888888;
   --box-bg-3-dark: #a7a7a7;
+
+  --contianer-color-gray: rgba(201, 201, 201, 0.55);
 }
 
 html[data-theme='light'] {
