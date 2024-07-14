@@ -1,7 +1,6 @@
 @import 'styles/agenda/common.scss';
 
 .participantsContainer {
-
   display: flex;
   width: 12rem;
   height: 0.5rem;
@@ -28,4 +27,40 @@
   font-family: $common-font;
   font-size: $medium-font;
   font-weight: 700;
+}
+
+.bgGam {
+  background-color: $color-coalition-gam;
+}
+
+.bgGon {
+  background-color: $color-coalition-gon;
+}
+
+.bgGun {
+  background-color: $color-coalition-gun;
+}
+
+.bgLee {
+  background-color: $color-coalition-lee;
+}
+
+.bgSpring {
+  background-color: $color-coalition-spring;
+}
+
+.bgSummer {
+  background-color: $color-coalition-summer;
+}
+
+.bgAutumn {
+  background-color: $color-coalition-autumn;
+}
+
+.bgWinter {
+  background-color: $color-coalition-winter;
+}
+
+.bgDefault {
+  background-color: #ffffff;
 }

@@ -1,6 +1,6 @@
 import { Coalition } from 'constants/agenda/coalition';
+import Participant from 'components/agenda/agendaDetail/taps/Participant';
 import styles from 'styles/agenda/agendaDetail/taps/AgendaParticipants.module.scss';
-import Participant from './Participant';
 
 export default function AgendaParticipants() {
   const curPeople = 6;
