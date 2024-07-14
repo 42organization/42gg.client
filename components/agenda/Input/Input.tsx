@@ -14,28 +14,24 @@ interface InputProps {
 }
 
 const Input = ({ name, label, type, ...rest }: InputProps) => {
-  if (type === 'checkbox' && rest?.checked === true)
-    return (
-      <div className={styles.container}>
-        <label htmlFor={name} className={styles.label}>
-          {label}
-        </label>
-        <input
-          {...rest}
-          name={name}
-          type={type}
-          id={name}
-          className={styles.input}
-          checked
-        />
-      </div>
-    );
-  else
-    return (
-      <div className={styles.container}>
-        <label htmlFor={name} className={styles.label}>
-          {label}
-        </label>
+  return (
+    <div className={` ${styles.container} + ${rest?.className}`}>
+      <label htmlFor={name} className={styles.label}>
+        {label}
+      </label>
+      {type === 'checkbox' ? (
+        <>
+          <input
+            {...rest}
+            name={name}
+            type={type}
+            id={name}
+            className={styles.checkBoxInput}
+            checked={rest?.checked}
+          />
+          <label htmlFor={name}></label>
+        </>
+      ) : (
         <input
           {...rest}
           name={name}
@@ -43,8 +39,9 @@ const Input = ({ name, label, type, ...rest }: InputProps) => {
           id={name}
           className={styles.input}
         />
-      </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default Input;

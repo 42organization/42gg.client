@@ -2,14 +2,12 @@
 
 .container {
   @include container(1);
-  color: var(--color-text);
+  padding: 0.5rem;
+  font-family: $font-default;
+  text-align: left;
 }
 
-.submit_btn {
-  @include button('submit', 'highlight');
-}
-
-.cancel_btn {
+.cancelBtn {
   @include button('cancel', 'default');
 }
 
@@ -20,6 +18,3 @@
 .description {
   @include description;
 }
-// .backwards_btn {
-//   @include button-icon('backwards');
-// }

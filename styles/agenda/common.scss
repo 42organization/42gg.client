@@ -64,18 +64,39 @@ $logo-font: 'Overgrow', sans-serif;
   letter-spacing: 0.1rem;
 }
 
-@mixin button($type) {
-  padding: 0.5rem 1rem;
+@mixin button($type, $style) {
+  padding: 1rem;
   font-size: $medium-font;
-  border: var(--default-border);
-  border-radius: $small-radius;
-  box-shadow: var(--default-box-shadow);
-  @if ($type == 'default') {
-    color: var(--default-font);
+  // border: var(--default-border);
+  // border-radius: $small-radius;
+  // box-shadow: var(--default-box-shadow);
+  color: var(--default-font);
+  border: none;
+  @if ($style == 'default') {
     border-color: var(--default-border);
-  } @else if (type == 'highlight') {
+  } @else if ($style == 'highlight') {
     color: white;
     border-color: var(--highlight-violet);
+  } @else if ($style == 'mid') {
+    border: var(--default-border);
+    box-shadow: var(--default-box-shadow);
+  }
+
+  @if ($type == 'cancel') {
+    // > .icon {
+    background: url('/buttons/cancel.svg') no-repeat center;
+    // }
+  } @else if ($type == 'add') {
+    .icon {
+      background: url('/buttons/add.svg') no-repeat center;
+    }
+  } @else if ($type == 'submit') {
+    width: 3rem;
+    height: 1.5rem;
+  } @else {
+    // default
+    width: 3rem;
+    height: 1.5rem;
   }
 }
 

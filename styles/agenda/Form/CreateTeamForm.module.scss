@@ -1,0 +1,20 @@
+@import 'styles/agenda/Form/Form.scss';
+
+.dateContainer {
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: end;
+}
+
+.countContainer {
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: end;
+}
+
+.label {
+  padding: 0 0 0 0.5rem;
+  margin-bottom: 10px;
+  font-size: $small-font;
+  font-weight: bold;
+}

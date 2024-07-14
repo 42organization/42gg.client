@@ -1,6 +1,27 @@
 @import './Input.module.scss';
 
-.input {
-  width: 20px;
-  height: 20px;
+.checkbox {
+  // width: 1.3rem;
+  // height: 1.3rem;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 2rem;
+}
+
+.checkbox input + label {
+  display: inline-block;
+
+  /* 체크박스 만들기 */
+  width: $medium-font;
+  height: $medium-font;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none; /* 드래그 금지 */
+  border: 1px solid #000;
+  border-radius: $small-radius;
+}
+input:checked + label {
+  /* 체크되었을 때 */
+  background: var(--highlight-yellow);
 }
