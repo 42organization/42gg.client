@@ -4,6 +4,8 @@ import { StoryFn } from '@storybook/react';
 import { RecoilRoot } from 'recoil';
 import { QueryClient } from 'react-query';
 import { QueryClientProvider } from 'react-query';
+import 'styles/globals.css';
+// import 'styles/color-theme.css';
 
 const queryClient = new QueryClient();
 
@@ -36,6 +38,19 @@ const preview: Preview = {
       <RecoilRoot>
         <QueryClientProvider client={queryClient}>
           <Story />
+          <button
+            onClick={() => {
+              const theme = document.documentElement.getAttribute('data-theme');
+              if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                return;
+              } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+              }
+            }}
+          >
+            theme
+          </button>
         </QueryClientProvider>
       </RecoilRoot>
     ),
