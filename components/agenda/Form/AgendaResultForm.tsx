@@ -1,5 +1,7 @@
 import { MouseEvent, useState, useRef } from 'react';
+import { Select } from '@mui/material';
 import styles from 'styles/agenda/Form/AgendaResultForm.module.scss';
+import SelectInput from '../Input/SelectInput';
 
 interface AgendaResultFormProps {
   teamlist: string[];
@@ -26,11 +28,12 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
         {awardlist?.map((award, idx) => (
           <li key={idx}>
             <p key={idx}>{award}</p>
-            <select>
+            {/* <select>
               {teamlist.map((team, idx) => (
                 <option key={idx}>{team}</option>
               ))}
-            </select>
+            </select> */}
+            <SelectInput data={teamlist} message='팀을 선택해주세요' />
           </li>
         ))}
         <li>
