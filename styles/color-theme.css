@@ -18,9 +18,9 @@
   --box-bg-1-light: #f8f8f8;
   --box-bg-2-light: #c8c8c8;
   --box-bg-3-light: #b0b0b0;
-  --box-bg-1-dark: #666666;
-  --box-bg-2-dark: #888888;
-  --box-bg-3-dark: #a7a7a7;
+  --box-bg-3-dark: #000000;
+  --box-bg-2-dark: #232323;
+  --box-bg-1-dark: #3a363b;
 }
 
 html[data-theme='light'] {
@@ -45,4 +45,8 @@ html[data-theme='dark'] {
   --box-bg-1: var(--box-bg-1-dark);
   --box-bg-2: var(--box-bg-2-dark);
   --box-bg-3: var(--box-bg-3-dark);
+}
+
+:root {
+  color: var(--color-text);
 }
