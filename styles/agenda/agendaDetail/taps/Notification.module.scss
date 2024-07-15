@@ -1,0 +1,50 @@
+@import 'styles/agenda/common.scss';
+
+.notificationContianer {
+  display: flex;
+
+  width: 100%;
+  flex: 1 0 0;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 2rem;
+  background: var(--white);
+
+  border: var(--border-light);
+  border-radius: $medium-radius;
+  box-shadow: var(--box-shadow-light);
+  align-items: flex-start;
+}
+
+.toggleWrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.titleWarp {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.toggleIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.notificationTitle {
+  font-size: $big-font;
+  font-weight: 700;
+  color: var(--black);
+}
+.notificationDate {
+  font-size: $medium-font;
+  color: var(--black);
+}
+
+.notifiacationContent {
+  font-size: $medium-font;
+  color: var(--black);
+}
