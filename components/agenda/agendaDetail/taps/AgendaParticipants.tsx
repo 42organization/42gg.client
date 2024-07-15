@@ -1,12 +1,17 @@
 import { Coalition } from 'constants/agenda/coalition';
-import Participant from 'components/agenda/agendaDetail/taps/Participant';
 import styles from 'styles/agenda/agendaDetail/taps/AgendaParticipants.module.scss';
+import ParticipantsList from './ParticipantsList';
 
 export default function AgendaParticipants() {
   const curPeople = 6;
   const maxPeople = 10;
-  const intraId = 'intraId';
-  const coalition = Coalition.GUN;
+
+  const participantsData = [
+    { name: 'intraId1', iconType: Coalition.GUN },
+    { name: 'intraId2', iconType: Coalition.GAM },
+    { name: 'intraId3', iconType: Coalition.GON },
+    { name: 'intraId4', iconType: Coalition.LEE },
+  ];
 
   return (
     <>
@@ -14,7 +19,7 @@ export default function AgendaParticipants() {
         <div className={styles.participantsTitle}>
           참가자 {curPeople} / {maxPeople}
         </div>
-        <Participant name={intraId} iconType={coalition} />
+        <ParticipantsList participants={participantsData} />
       </div>
     </>
   );

@@ -1,13 +1,24 @@
+import React from 'react';
 import { Coalition } from 'constants/agenda/coalition';
 import Participant from 'components/agenda/agendaDetail/taps/Participant';
-import styles from 'styles/agenda/agendaDetail/taps/Participant.module.scss';
+import styles from 'styles/agenda/agendaDetail/taps/ParticipantsList.module.scss';
 
-export default function ParticipantsList() {
-  const intraId = 'intraId';
-  const coalition = Coalition.GUN;
+interface ParticipantsListProps {
+  participants: { name: string; iconType: Coalition }[];
+}
+
+export default function ParticipantsList({
+  participants,
+}: ParticipantsListProps) {
   return (
     <div className={styles.ListContainer}>
-      <Participant name={intraId} iconType={coalition} />
+      {participants.map((participant, index) => (
+        <Participant
+          key={index}
+          name={participant.name}
+          iconType={participant.iconType}
+        />
+      ))}
     </div>
   );
 }
