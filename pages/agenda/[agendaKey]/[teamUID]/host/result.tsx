@@ -1,12 +1,21 @@
 //주최자 결과입력 페이지
-import { AgendaResultForm } from 'components/agenda/Form/AgendaResultForm';
+import AgendaResultForm from 'components/agenda/Form/AgendaResultForm';
 import styles from 'styles/agenda/pages/agendakey/host/result.module.scss';
 
 const SubmitAgendaResult = () => {
-  const awardlist = ['1등', '2등', '3등', '참가상'];
+  const teamlist = [
+    'apple',
+    'banana',
+    'cider',
+    'dumpling',
+    'egg',
+    'fish',
+    'grape',
+    'honey',
+  ];
   return (
     <div className={styles.container}>
-      <AgendaResultForm awardlist={awardlist} />
+      <AgendaResultForm teamlist={teamlist} />
     </div>
   );
 };
