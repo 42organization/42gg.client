@@ -1,7 +1,6 @@
 import styles from 'styles/agenda/agendaDetail/taps/AgendaDescription.module.scss';
 
 export default function AgendaDescription() {
-  // 설명 길게
   const content =
     '대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n';
   return (

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Coalition } from 'constants/agenda/coalition';
 import CoalitionDefault from 'public/image/agenda/coalition/coalition-default.svg';
-import CoalitionSummer from 'public/image/agenda/coalition/gyeongsan-autumn.svg';
-import CoalitionAutumn from 'public/image/agenda/coalition/gyeongsan-spring.svg';
-import CoalitionSpring from 'public/image/agenda/coalition/gyeongsan-summer.svg';
+import CoalitionAutumn from 'public/image/agenda/coalition/gyeongsan-autumn.svg';
+import CoalitionSpring from 'public/image/agenda/coalition/gyeongsan-spring.svg';
+import CoalitionSummer from 'public/image/agenda/coalition/gyeongsan-summer.svg';
 import CoalitionWinter from 'public/image/agenda/coalition/gyeongsan-winter.svg';
 import CoalitionGam from 'public/image/agenda/coalition/seoul-gam.svg';
 import CoalitionGon from 'public/image/agenda/coalition/seoul-gon.svg';

@@ -16,3 +16,14 @@
   box-shadow: var(--box-shadow-light);
   align-items: flex-start;
 }
+
+.conditionTitle {
+  font-size: $big-font;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.conditionWarp {
+  font-size: $medium-font;
+  color: var(--black);
+}

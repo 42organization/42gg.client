@@ -1,5 +1,11 @@
 @import 'styles/agenda/common.scss';
 
+.mainWarp {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
 .participantsContainer {
   display: flex;
 
