@@ -1,0 +1,66 @@
+@import 'styles/agenda/common.scss';
+
+.participantTeamContainer {
+  display: flex;
+
+  width: 100%;
+
+  flex: 1 0 0;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 1rem;
+  background: var(--white);
+
+  border: var(--border-light);
+  border-radius: $medium-radius;
+  box-shadow: var(--box-shadow-light);
+  align-items: flex-start;
+}
+
+.titleWarp {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infoWarp {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+
+.teamTitle {
+  font-size: $big-font;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.LeaderIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.teamLeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: stretch;
+
+  p {
+    margin: 0;
+    font-size: $medium-font;
+    color: var(--black);
+  }
+}
+
+.headCount {
+  @include headCountText();
+}
+
+.coalition {
+  display: flex;
+  width: 100%;
+}

@@ -44,3 +44,13 @@ $logo-font: 'Overgrow', sans-serif;
   border: 1px solid #000;
   border-radius: $radius;
 }
+
+@mixin headCountText($size: $giant-big-font) {
+  font-family: Inter;
+  font-size: $size;
+  font-style: normal;
+  font-weight: 100;
+  line-height: normal;
+  color: #000;
+  text-align: center;
+}
