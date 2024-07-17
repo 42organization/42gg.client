@@ -14,11 +14,6 @@ export default function AgendaDetail() {
       <div className={styles.agendaDetailWrap}>
         <AgendaInfo />
         <AgendaTap />
-        {/*
-        <AgendaContents />
-        <AgendaParticipant />
-        <AgendaAnnounce />
-        <AgendaCondition /> */}
         <div key={teamUID}>
           <Link href={`/agenda/${agendaKey}/${teamUID}`}>1번 팀</Link>
         </div>
