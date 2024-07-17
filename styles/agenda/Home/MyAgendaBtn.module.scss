@@ -1,0 +1,16 @@
+@import '../common.scss';
+
+.myagendaBtn {
+  display: flex;
+  width: 13rem;
+  height: 3rem;
+  padding: 0 0 0 1rem;
+  cursor: pointer;
+  border: 0.1rem solid black;
+  border-left-style: none;
+  border-top-right-radius: $big-radius;
+  border-bottom-right-radius: $big-radius;
+  box-shadow: 0 0.2rem 0 0 #000;
+  align-items: center;
+  @include subTitleFont;
+}
