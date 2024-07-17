@@ -40,11 +40,6 @@ $logo-font: 'Overgrow', sans-serif;
   letter-spacing: 0.1rem;
 }
 
-@mixin defaultBorder($radius: $medium-radius) {
-  border: 1px solid #000;
-  border-radius: $radius;
-}
-
 @mixin headCountText($size: $giant-big-font) {
   font-family: Inter;
   font-size: $size;
