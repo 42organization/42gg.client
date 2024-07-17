@@ -70,11 +70,11 @@ $logo-font: 'Overgrow', sans-serif;
 @mixin textButton($type, $style) {
   padding: 1rem;
   font-size: $medium-font;
-  // border: var(--default-border);
-  // border-radius: $small-radius;
-  // box-shadow: var(--default-box-shadow);
   color: var(--default-font);
+  border: var(--default-border);
   border: none;
+  border-radius: $small-radius;
+  box-shadow: var(--default-box-shadow);
   @if ($style == 'default') {
     border-color: var(--default-border);
   } @else if ($style == 'highlight') {

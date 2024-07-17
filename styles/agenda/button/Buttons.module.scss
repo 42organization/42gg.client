@@ -5,37 +5,38 @@
 .BackwardBtn,
 .ForwardBtn,
 .AddElementBtn,
+.DragBtn,
 .RemoveElementBtn {
+  width: 2rem;
+  height: 2rem;
+  padding: 1rem;
+  font-size: $medium-font;
   border: none;
+  border-color: none;
+  border-style: none;
+  box-shadow: none;
+  fill: var(--default-font); // theme맞춰서 색이 안바뀌네여
+  padding-block: none;
 }
 
 .CancelBtn {
-  .icon {
-    background: url('/buttons/cancel.svg') no-repeat center;
-  }
+  background: url('/buttons/cancel.svg') no-repeat center;
 }
 .ShareBtn {
-  .icon {
-    background: url('/buttons/share.svg') no-repeat center;
-  }
+  background: url('/buttons/share.svg') no-repeat center;
 }
 .BackwardBtn {
-  .icon {
-    background: url('/buttons/backward.svg') no-repeat center;
-  }
+  background: url('/buttons/backward.svg') no-repeat center;
 }
 .ForwardBtn {
-  .icon {
-    background: url('/buttons/forward.svg') no-repeat center;
-  }
-}
-.AddElementBtn {
-  .icon {
-    background: url('/buttons/add.svg') no-repeat center;
-  }
+  background: url('/buttons/forward.svg') no-repeat center;
 }
 .RemoveElementBtn {
-  .icon {
-    background: url('/buttons/delete.svg') no-repeat center;
-  }
+  background: url('/buttons/removeElem.svg') no-repeat center;
+}
+.AddElementBtn {
+  background: url('/buttons/addElem.svg') no-repeat center;
+}
+.DragBtn {
+  background: url('/buttons/drag.svg') no-repeat center;
 }

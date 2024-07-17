@@ -1,72 +1,84 @@
 import styles from 'styles/agenda/button/Buttons.module.scss';
 
 const CancelBtn = ({
-  func,
+  onClick,
 }: {
-  func: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }) => {
   return (
-    <button className={styles.CancelBtn} onClick={(e) => func(e)}>
+    <button className={styles.CancelBtn} onClick={(e) => onClick(e)}>
       <span className='icon' />
     </button>
   );
 };
 
 const ShareBtn = ({
-  func,
+  onClick,
 }: {
-  func: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }) => {
   return (
-    <button className={styles.ShareBtn} onClick={(e) => func(e)}>
+    <button className={styles.ShareBtn} onClick={(e) => onClick(e)}>
       <span className='icon' />
     </button>
   );
 };
 
 const BackwardBtn = ({
-  func,
+  onClick,
 }: {
-  func: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }) => {
   return (
-    <button className={styles.BackwardBtn} onClick={(e) => func(e)}>
+    <button className={styles.BackwardBtn} onClick={(e) => onClick(e)}>
       <span className='icon' />
     </button>
   );
 };
 
 const ForwardBtn = ({
-  func,
+  onClick,
 }: {
-  func: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }) => {
   return (
-    <button className={styles.ForwardBtn} onClick={(e) => func(e)}>
+    <button className={styles.ForwardBtn} onClick={(e) => onClick(e)}>
       <span className='icon' />
     </button>
   );
 };
 
 const AddElementBtn = ({
-  func,
+  onClick,
 }: {
-  func: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }) => {
   return (
-    <button className={styles.AddElementBtn} onClick={(e) => func(e)}>
+    <button className={styles.AddElementBtn} onClick={(e) => onClick(e)}>
       <span className='icon' />
     </button>
   );
 };
 
 const RemoveElementBtn = ({
-  func,
+  onClick,
 }: {
-  func: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }) => {
   return (
-    <button className={styles.RemoveElementBtn} onClick={(e) => func(e)}>
+    <button className={styles.RemoveElementBtn} onClick={(e) => onClick(e)}>
+      <span className='icon' />
+    </button>
+  );
+};
+
+const DragBtn = ({
+  onClick,
+}: {
+  onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+}) => {
+  return (
+    <button className={styles.DragBtn} onClick={(e) => onClick(e)}>
       <span className='icon' />
     </button>
   );
@@ -79,4 +91,5 @@ export {
   ForwardBtn,
   AddElementBtn,
   RemoveElementBtn,
+  DragBtn,
 };

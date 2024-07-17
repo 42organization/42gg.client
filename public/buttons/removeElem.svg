@@ -1,6 +1,11 @@
-<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="subtract-square--subtract-buttons-remove-add-button-square-delete-mathematics-math-minus">
-<path id="Vector" d="M7.14307 12.5H17.8574" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_2" d="M18.7502 0.893066H6.25021C3.29155 0.893066 0.893066 3.29155 0.893066 6.25021V18.7502C0.893066 21.709 3.29155 24.1074 6.25021 24.1074H18.7502C21.709 24.1074 24.1074 21.709 24.1074 18.7502V6.25021C24.1074 3.29155 21.709 0.893066 18.7502 0.893066Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_775_3748)">
+<path d="M7.14282 13H17.8571" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.75 1.39282H6.24997C3.2913 1.39282 0.892822 3.7913 0.892822 6.74997V19.25C0.892822 22.2087 3.2913 24.6071 6.24997 24.6071H18.75C21.7087 24.6071 24.1071 22.2087 24.1071 19.25V6.74997C24.1071 3.7913 21.7087 1.39282 18.75 1.39282Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
+<defs>
+<clipPath id="clip0_775_3748">
+<rect width="25" height="25" fill="white" transform="translate(0 0.5)"/>
+</clipPath>
+</defs>
 </svg>
