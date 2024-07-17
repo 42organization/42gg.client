@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import SubmitAgendaResult from 'pages/agenda/[agendaKey]/[teamUID]/host/result';
 
 const meta: Meta = {
-  title: 'Agenda/submit-agenda-result',
+  title: 'Agenda/Form/submit-agenda-result',
   component: SubmitAgendaResult,
   tags: ['autodocs'],
 };
