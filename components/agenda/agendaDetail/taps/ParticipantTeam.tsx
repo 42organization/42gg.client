@@ -3,7 +3,7 @@ import TeamLeaderIcon from 'public/image/agenda/rock-and-roll-hand.svg';
 import styles from 'styles/agenda/agendaDetail/taps/ParticipantTeam.module.scss';
 export default function participantTeam() {
   // 팀장이름
-  const host = '팀장 이름';
+  const leader = '팀장 이름';
   const curPeople = 1;
   const maxPeople = 4;
   return (
@@ -15,7 +15,7 @@ export default function participantTeam() {
 
             <div className={styles.teamLeader}>
               <TeamLeaderIcon className={styles.LeaderIcon} />
-              <p>{host}</p>
+              <p>{leader}</p>
             </div>
           </div>
 
@@ -24,9 +24,7 @@ export default function participantTeam() {
           </div>
         </div>
 
-        {/* <div className={styles.coalition}> */}
         <ColorList />
-        {/* </div> */}
       </div>
     </>
   );

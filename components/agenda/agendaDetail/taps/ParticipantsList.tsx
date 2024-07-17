@@ -10,15 +10,23 @@ interface ParticipantsListProps {
 export default function ParticipantsList({
   participants,
 }: ParticipantsListProps) {
+  const curPeople = 1;
+  const maxPeople = 4;
+
   return (
-    <div className={styles.ListContainer}>
-      {participants.map((participant, index) => (
-        <Participant
-          key={index}
-          name={participant.name}
-          iconType={participant.iconType}
-        />
-      ))}
-    </div>
+    <>
+      <div className={styles.participantsTitle}>
+        참가자 {curPeople} / {maxPeople}
+      </div>
+      <div className={styles.ListContainer}>
+        {participants.map((participant, index) => (
+          <Participant
+            key={index}
+            name={participant.name}
+            iconType={participant.iconType}
+          />
+        ))}
+      </div>
+    </>
   );
 }
