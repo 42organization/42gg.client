@@ -115,6 +115,14 @@ input {
   font-style: normal;
 }
 
+@font-face {
+  font-family: '11StreetGothic';
+  src: url('../public/font/11StreetGothic/11STREET_Gothic_regular.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
