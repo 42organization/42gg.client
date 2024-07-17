@@ -16,7 +16,7 @@ $color-coalition-gam: #72d3ff;
 $color-coalition-lee: #ff8a85;
 
 // font-family
-$font-family-menu: 'Cafe24 Simplehae';
+$font-family-menu: 'Simplehae';
 
 /* font-size */
 $giant-giant-font: 2.4rem;
@@ -27,6 +27,8 @@ $big-font: 1.2rem;
 $medium-font: 1rem;
 $small-font: 0.8rem;
 
+$common-font: 'Pretendard', sans-serif;
+
 $logo-font: 'Overgrow', sans-serif;
 
 @mixin logoText($size, $color) {
@@ -36,4 +38,14 @@ $logo-font: 'Overgrow', sans-serif;
   color: $color;
   text-align: center;
   letter-spacing: 0.1rem;
+}
+
+@mixin headCountText($size: $giant-big-font) {
+  font-family: Inter;
+  font-size: $size;
+  font-style: normal;
+  font-weight: 100;
+  line-height: normal;
+  color: #000;
+  text-align: center;
 }

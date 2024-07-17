@@ -1,0 +1,29 @@
+@import 'styles/agenda/common.scss';
+
+.descriptionContainer {
+  display: flex;
+
+  width: 100%;
+
+  flex: 1 0 0;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 1rem;
+  background: var(--white);
+
+  border: var(--border-light);
+  border-radius: $medium-radius;
+  box-shadow: var(--box-shadow-light);
+  align-items: flex-start;
+}
+
+.discriptionTitle {
+  font-size: $big-font;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.discriptionContent {
+  font-size: $medium-font;
+  color: var(--black);
+}
