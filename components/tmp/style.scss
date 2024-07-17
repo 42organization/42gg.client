@@ -1,7 +1,7 @@
-@import '../../styles/agenda/common.scss';
+@import '../../styles/color-theme.css';
 
 #container {
-  background-color: $bg-light;
+  background-color: --bg-light;
   width: 100%;
   height: 100%;
   margin: 0;
@@ -9,7 +9,7 @@
 }
 
 .test-box {
-  border-radius: $medium-radius;
+  border-radius: --medium-radius;
   border: var(--default-border);
   background: var(--box-bg-1);
   padding: 1rem;
@@ -20,5 +20,5 @@
 }
 
 h1 {
-  font-family: $font-family-menu;
+  font-family: --font-family-menu;
 }
