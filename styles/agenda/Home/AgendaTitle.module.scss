@@ -9,11 +9,24 @@
   @include titleFont;
 
   .agendaCreateBtn {
-    padding: 0;
-    margin: 0;
+    display: flex;
+    align-items: center;
     cursor: pointer;
     background: none;
     border: none;
     @include lightTextFont(medium);
+
+    .imageWrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5rem;
+      height: 1.5rem;
+
+      .imageBox {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 }

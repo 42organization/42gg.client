@@ -4,7 +4,7 @@
   display: flex;
   width: 13rem;
   height: 3rem;
-  padding: 0 0 0 1rem;
+  padding: 0.3rem 0 0.3rem 1rem;
   cursor: pointer;
   border: 0.1rem solid black;
   border-left-style: none;
@@ -12,5 +12,19 @@
   border-bottom-right-radius: $big-radius;
   box-shadow: 0 0.2rem 0 0 #000;
   align-items: center;
+  gap: 1rem;
   @include subTitleFont;
+
+  .imageWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2.2rem;
+
+    .imageBox {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
