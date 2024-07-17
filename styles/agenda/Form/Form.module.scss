@@ -6,11 +6,11 @@
 }
 
 .submit_btn {
-  @include button('submit', 'highlight');
+  @include textButton('submit', 'highlight');
 }
 
 .cancel_btn {
-  @include button('cancel', 'default');
+  // @include tesbutton('cancel', 'default');
 }
 
 .title {

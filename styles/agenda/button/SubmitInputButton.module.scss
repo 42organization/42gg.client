@@ -6,7 +6,7 @@
 }
 
 .label {
-  @include button('submit', 'mid');
+  @include textButton('submit', 'mid');
   display: inline-block;
   width: max-content;
   height: max-content;

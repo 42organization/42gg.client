@@ -41,6 +41,9 @@ $font-default: 'Pretendard', sans-serif;
     background: var(--box-bg-2);
   } @else if $level == 3 {
     background: var(--box-bg-3);
+  } @else if $level == 'right' {
+    background: var(--box-bg-1);
+    border-radius: $medium-radius 0 0 $medium-radius;
   }
 }
 
@@ -64,7 +67,7 @@ $logo-font: 'Overgrow', sans-serif;
   letter-spacing: 0.1rem;
 }
 
-@mixin button($type, $style) {
+@mixin textButton($type, $style) {
   padding: 1rem;
   font-size: $medium-font;
   // border: var(--default-border);
@@ -82,17 +85,11 @@ $logo-font: 'Overgrow', sans-serif;
     box-shadow: var(--default-box-shadow);
   }
 
-  @if ($type == 'cancel') {
-    // > .icon {
-    background: url('/buttons/cancel.svg') no-repeat center;
-    // }
-  } @else if ($type == 'add') {
-    .icon {
-      background: url('/buttons/add.svg') no-repeat center;
-    }
-  } @else if ($type == 'submit') {
+  @if ($type == 'submit') {
     width: 3rem;
     height: 1.5rem;
+  } @else if ($type == 'delete') {
+    background: url('/buttons/delete.svg') no-repeat center;
   } @else {
     // default
     width: 3rem;

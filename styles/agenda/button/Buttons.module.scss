@@ -1,0 +1,41 @@
+@import 'styles/agenda/common.scss';
+
+.CancelBtn,
+.ShareBtn,
+.BackwardBtn,
+.ForwardBtn,
+.AddElementBtn,
+.RemoveElementBtn {
+  border: none;
+}
+
+.CancelBtn {
+  .icon {
+    background: url('/buttons/cancel.svg') no-repeat center;
+  }
+}
+.ShareBtn {
+  .icon {
+    background: url('/buttons/share.svg') no-repeat center;
+  }
+}
+.BackwardBtn {
+  .icon {
+    background: url('/buttons/backward.svg') no-repeat center;
+  }
+}
+.ForwardBtn {
+  .icon {
+    background: url('/buttons/forward.svg') no-repeat center;
+  }
+}
+.AddElementBtn {
+  .icon {
+    background: url('/buttons/add.svg') no-repeat center;
+  }
+}
+.RemoveElementBtn {
+  .icon {
+    background: url('/buttons/delete.svg') no-repeat center;
+  }
+}

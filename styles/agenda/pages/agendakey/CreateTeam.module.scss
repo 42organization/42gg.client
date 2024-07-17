@@ -8,7 +8,7 @@
 }
 
 .cancelBtn {
-  @include button('cancel', 'default');
+  @include textButton('cancel', 'default');
 }
 
 .title {
