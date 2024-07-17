@@ -8,21 +8,32 @@ interface AgendaResultFormProps {
 }
 
 const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
-  const [awardlist, setAwardList] = useState<string[]>([
-    '참가상',
-    '아기다리상',
-    '대상',
-    '그저그런상',
+  const [awardlist, setAwardList] = useState<
+    {
+      award: string;
+      teams: string[];
+    }[]
+  >([
+    { award: '참가상', teams: ['apple'] },
+    { award: '아기다리상', teams: ['banana'] },
+    { award: '그저그런상', teams: ['cider', 'dumpling'] },
+    { award: '참가상', teams: [] },
   ]);
   const newAwardInputRef = useRef<HTMLInputElement>(null);
 
-  const addEventHandler = (e: MouseEvent<HTMLLabelElement>) => {
-    e.preventDefault();
-    alert(newAwardInputRef.current?.value);
-    const input: string | undefined = newAwardInputRef.current?.value;
-    newAwardInputRef.current ? (newAwardInputRef.current.value = '') : null;
-    input ? awardlist.push(input) : null;
-    awardlist && input ? setAwardList(awardlist) : null;
+  // const addEventHandler = (e: MouseEvent<HTMLLabelElement>) => {
+  //   e.preventDefault();
+  //   alert(newAwardInputRef.current?.value);
+  //   const input: string | undefined = newAwardInputRef.current?.value;
+  //   newAwardInputRef.current ? (newAwardInputRef.current.value = '') : null;
+  //   input ? awardlist.push(input) : null;
+  //   awardlist && input ? setAwardList(awardlist) : null;
+  // };
+
+  const addTeam = (idx: number, newTeam: string) => {
+    const newAwardList = awardlist;
+    newAwardList[idx].teams.push(newTeam);
+    setAwardList(newAwardList);
   };
 
   return (
@@ -30,24 +41,35 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
       <h1>결과 입력</h1>
       <h2 className={styles.description}>팀별 결과를 입력해주세요</h2>
       <ul className={styles.awardUl}>
-        {awardlist?.map((award, idx) => (
+        {awardlist?.map((data, idx) => (
           <li key={idx} className={styles.awardLi}>
             <DragBtn onClick={(e) => alert('DEV::dragbutton called', e)} />
             <div className={styles.awardContainer}>
               <div className={styles.awardTitleContainer}>
                 <p key={idx} className={styles.awardTitle}>
-                  {award}
+                  {data.award}
                 </p>
                 <RemoveElementBtn
                   onClick={(e) => alert('DEV::removebtn called', e)}
                 />
               </div>
-              {/* <select>
-              {teamlist.map((team, idx) => (
-                <option key={idx}>{team}</option>
+              <div className={styles.awardSelectContainer}>
+                {data.teams.map((team, idx) => (
+                  <SelectInput
+                    key={idx}
+                    selected={team}
+                    data={teamlist}
+                    message='팀을 선택해주세요'
+                  />
                 ))}
-                </select> */}
-              <SelectInput data={teamlist} message='팀을 선택해주세요' />
+                <SelectInput
+                  data={teamlist}
+                  message='팀을 선택해주세요'
+                  onChange={(e) => {
+                    addTeam(idx, e.target.value);
+                  }}
+                />
+              </div>
             </div>
           </li>
         ))}
@@ -65,7 +87,9 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
                 onClick={(e) => alert('DEV::addbutton called', e)}
               />
             </div>
-            <SelectInput data={teamlist} message='팀을 선택해주세요' />
+            <div className={styles.awardSelectContainer}>
+              <SelectInput data={teamlist} message='팀을 선택해주세요' />
+            </div>
           </div>
         </li>
       </ul>

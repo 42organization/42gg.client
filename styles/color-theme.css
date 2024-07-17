@@ -6,6 +6,8 @@
   --text-dark: #ffffff;
   --border-light: 1px solid black;
   --border-dark: 1px solid white;
+  --border-highlight-light: 2px solid black;
+  --border-highlight-dark: 2px solid white;
 
   --box-shadow-light: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   --box-shadow-dark: 0px 4px 4px 0px rgba(255, 255, 255, 0.25);
@@ -27,6 +29,7 @@ html[data-theme='light'] {
   --color-bg: var(--bg-light);
   --color-text: var(--text-light);
   --default-border: var(--border-light);
+  --highlight-border: var(--border-highlight-light);
   --default-box-shadow: var(--box-shadow-light);
   --highlight-yellow: var(--highlight-yellow-light);
   --highlight-violet: var(--highlight-violet-light);
@@ -39,6 +42,7 @@ html[data-theme='dark'] {
   --color-bg: var(--bg-dark);
   --color-text: var(--text-dark);
   --default-border: var(--border-dark);
+  --highlight-border: var(--border-highlight-dark);
   --default-box-shadow: var(--box-shadow-dark);
   --highlight-yellow: var(--highlight-yellow-dark);
   --highlight-violet: var(--highlight-violet-dark);

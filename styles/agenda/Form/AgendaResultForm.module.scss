@@ -61,11 +61,15 @@
   // @include button('default', 'delete');
   border: 2px solid red;
 }
-
-// .awardTitle {
-// }
-// .awardInputLi {
-// }
+.awardSelectContainer {
+  display: inline;
+  width: 100%;
+  height: max-content;
+  flex-direction: column;
+  word-break: keep-all;
+  align-items: center;
+  justify-content: left;
+}
 
 .newAwardInput {
   width: 100%;
