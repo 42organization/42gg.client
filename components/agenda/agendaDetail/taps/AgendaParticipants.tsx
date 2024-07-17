@@ -15,14 +15,17 @@ export default function AgendaParticipants() {
     { name: 'intraId8', iconType: Coalition.WINTER },
   ];
   const minPeople = 1;
-  const maxPeople = 1;
-  const isTeam = minPeople !== maxPeople;
+  const maxPeople = 3;
+
+  const isTeam = (min: number, max: number) => {
+    return min !== max;
+  };
 
   return (
     <>
       <div className={styles.mainWarp}>
         <div className={styles.participantsContainer}>
-          {isTeam ? (
+          {isTeam(minPeople, maxPeople) ? (
             <ParticipantTeamList />
           ) : (
             <ParticipantsList participants={participantsData} />
