@@ -56,6 +56,8 @@ $big-font: 1.2rem;
 $medium-font: 1rem;
 $small-font: 0.8rem;
 
+$common-font: 'Pretendard', sans-serif;
+
 $logo-font: 'Overgrow', sans-serif;
 
 @mixin logoText($size, $color) {
@@ -107,4 +109,14 @@ $logo-font: 'Overgrow', sans-serif;
 @mixin description {
   font-size: $small-font;
   font-weight: 300;
+}
+
+@mixin headCountText($size: $giant-big-font) {
+  font-family: Inter;
+  font-size: $size;
+  font-style: normal;
+  font-weight: 100;
+  line-height: normal;
+  color: #000;
+  text-align: center;
 }

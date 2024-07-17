@@ -9,8 +9,12 @@
   --border-highlight-light: 2px solid black;
   --border-highlight-dark: 2px solid white;
 
+  --black: #000000;
+  --white: #ffffff;
+
   --box-shadow-light: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   --box-shadow-dark: 0px 4px 4px 0px rgba(255, 255, 255, 0.25);
+  --box-shadow-bottom: 0px 4px 0px 0px #000;
 
   --highlight-yellow-light: #f8df85;
   --highlight-violet-light: #af71ff;
@@ -23,6 +27,8 @@
   --box-bg-3-dark: #000000;
   --box-bg-2-dark: #232323;
   --box-bg-1-dark: #3a363b;
+
+  --contianer-color-gray: rgba(201, 201, 201, 0.55);
 }
 
 html[data-theme='light'] {
