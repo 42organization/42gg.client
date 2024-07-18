@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import SubmitAgendaResult from 'pages/agenda/[agendaKey]/[teamUID]/host/result';
+import SubmitAgendaResult from 'pages/agenda/[agendaKey]/host/result';
 
 const meta: Meta = {
   title: 'Agenda/Form/submit-agenda-result',
