@@ -61,8 +61,10 @@ const AgendaListBtn = () => {
           </div>
         </div>
       </div>
-
-      <div className={styles.agendaImageContainer}></div>
+      <div className={styles.agendaItemDeadLineBox}>
+        <div className={styles.agendaDeadLineText}>모집마감</div>
+        <div className={styles.agendaDeadLine}>D-2</div>
+      </div>
     </button>
   );
 };
