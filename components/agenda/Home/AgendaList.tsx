@@ -29,9 +29,9 @@ const AgendaListBtn = () => {
             <div className={styles.agendaItemTimeWrapper}>
               <div className={styles.imageWrapper}>
                 <Image
-                  src='/image/agenda/Time.png'
-                  width={13}
-                  height={18}
+                  src='/image/agenda/Time.svg'
+                  width={15}
+                  height={15}
                   alt='Time'
                   className={styles.imageBox}
                 />
@@ -40,12 +40,12 @@ const AgendaListBtn = () => {
               <div>14:00 ~ 17:00</div>
             </div>
 
-            <div className={styles.agendaItemCountWrapper}>
+            <div className={styles.agendaItemTimeWrapper}>
               <div className={styles.imageWrapper}>
                 <Image
-                  src='/image/agenda/People.png'
-                  width={20}
-                  height={18}
+                  src='/image/agenda/People.svg'
+                  width={15}
+                  height={15}
                   alt='count'
                   className={styles.imageBox}
                 />
