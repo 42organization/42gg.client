@@ -1,9 +1,10 @@
 // https://dev.to/wgnrd/adding-a-dark-mode-to-your-website-using-scss-4pdc
+// @import 'styles/globals.css';
 
 // radius
-$small-radius: 10px; // 컴포넌트 속 요소
-$medium-radius: 20px; // 기본 컴포넌트
-$big-radius: 40px; // 제목, 웹용 큰 박스용
+$small-radius: 1rem; // 컴포넌트 속 요소
+$medium-radius: 1.2rem; // 기본 컴포넌트
+$big-radius: 1.4rem; // 제목, 웹용 큰 박스용
 
 // coalition
 $color-coalition-autumn: #ffac65;
@@ -15,8 +16,36 @@ $color-coalition-gun: #ffea80;
 $color-coalition-gam: #72d3ff;
 $color-coalition-lee: #ff8a85;
 
+// color
+$color-placeholder: #b4a5b5;
+
 // font-family
-$font-family-menu: 'Simplehae';
+$font-family-menu: 'Cafe24 Simplehae';
+$font-default: 'Pretendard', sans-serif;
+
+@mixin container($level) {
+  display: flex;
+  width: calc(100% - 2rem);
+  max-width: 1200px;
+  flex-direction: column;
+  padding: 0 1rem;
+  margin: 1rem;
+  border: var(--default-border);
+  border-radius: $medium-radius;
+  box-shadow: var(--default-box-shadow);
+  justify-content: center;
+  align-items: center;
+  @if $level == 1 {
+    background: var(--box-bg-1);
+  } @else if $level == 2 {
+    background: var(--box-bg-2);
+  } @else if $level == 3 {
+    background: var(--box-bg-3);
+  } @else if $level == 'right' {
+    background: var(--box-bg-1);
+    border-radius: $medium-radius 0 0 $medium-radius;
+  }
+}
 
 /* font-size */
 $giant-giant-font: 2.4rem;
@@ -38,6 +67,48 @@ $logo-font: 'Overgrow', sans-serif;
   color: $color;
   text-align: center;
   letter-spacing: 0.1rem;
+}
+
+@mixin textButton($type, $style) {
+  padding: 1rem;
+  font-size: $medium-font;
+  color: var(--default-font);
+  border: var(--default-border);
+  border: none;
+  border-radius: $small-radius;
+  box-shadow: var(--default-box-shadow);
+  @if ($style == 'default') {
+    border-color: var(--default-border);
+  } @else if ($style == 'highlight') {
+    color: white;
+    border-color: var(--highlight-violet);
+  } @else if ($style == 'mid') {
+    border: var(--default-border);
+    box-shadow: var(--default-box-shadow);
+  }
+
+  @if ($type == 'submit') {
+    width: 3rem;
+    height: 1.5rem;
+  } @else if ($type == 'delete') {
+    background: url('/buttons/delete.svg') no-repeat center;
+  } @else {
+    // default
+    width: 3rem;
+    height: 1.5rem;
+  }
+}
+
+@mixin title {
+  margin: 1rem 0;
+  font-size: $big-giant-font;
+  font-weight: 500;
+  color: var(--default-font);
+}
+
+@mixin description {
+  font-size: $small-font;
+  font-weight: 300;
 }
 
 @mixin headCountText($size: $giant-big-font) {

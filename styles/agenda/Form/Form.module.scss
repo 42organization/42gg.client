@@ -1,0 +1,51 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  @include container(1);
+  color: var(--color-text);
+}
+
+.submit_btn {
+  @include textButton('submit', 'highlight');
+}
+
+.cancel_btn {
+  // @include tesbutton('cancel', 'default');
+}
+
+.title {
+  @include title;
+}
+
+.description {
+  @include description;
+}
+// .backwards_btn {
+//   @include button-icon('backwards');
+// }
+
+.dateContainer {
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: end;
+}
+
+.countContainer {
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: end;
+}
+
+.container_label {
+  padding: 0 0 0 1rem;
+  margin: 2rem 0 0.5rem;
+  font-size: $medium-font;
+  font-weight: bold;
+}
+
+.buttonContainer {
+  display: flex;
+  margin: 2rem 4rem;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
