@@ -31,6 +31,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>42gg</title>
+        {router.pathname.startsWith('/agenda') && (
+          <link rel='stylesheet' href='/styles/reset.css' />
+        )}
       </Head>
       <Script
         strategy='afterInteractive'

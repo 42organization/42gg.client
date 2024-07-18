@@ -5,7 +5,6 @@ import { RecoilRoot } from 'recoil';
 import { QueryClient } from 'react-query';
 import { QueryClientProvider } from 'react-query';
 import 'styles/globals.css';
-// import 'styles/color-theme.css';
 
 const queryClient = new QueryClient();
 

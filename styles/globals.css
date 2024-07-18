@@ -115,6 +115,30 @@ input {
   font-style: normal;
 }
 
+@font-face {
+  font-family: '11StreetGothicRegular';
+  src: url('../public/font/11StreetGothic/11STREET_Gothic_regular.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '11StreetGothicBold';
+  src: url('../public/font/11StreetGothic/11STREET_Gothic_bold.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '11StreetGothicLight';
+  src: url('../public/font/11StreetGothic/11STREET_Gothic_light.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
