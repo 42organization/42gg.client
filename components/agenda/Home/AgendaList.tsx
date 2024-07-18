@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import styles from 'styles/agenda/Home/AgendaList.module.scss';
 
@@ -25,8 +26,32 @@ const AgendaListBtn = () => {
           <div className={styles.agendaItemTitleBox}>PUSH SWAP 경진대회</div>
 
           <div className={styles.agendaItemTimeBox}>
-            <div>12.31 / 14:00 ~ 17:00</div>
-            <div>20 / 100</div>
+            <div className={styles.agendaItemTimeWrapper}>
+              <div className={styles.imageWrapper}>
+                <Image
+                  src='/image/agenda/Time.png'
+                  width={13}
+                  height={18}
+                  alt='Time'
+                  className={styles.imageBox}
+                />
+              </div>
+              <div>12.31</div>
+              <div>14:00 ~ 17:00</div>
+            </div>
+
+            <div className={styles.agendaItemCountWrapper}>
+              <div className={styles.imageWrapper}>
+                <Image
+                  src='/image/agenda/People.png'
+                  width={20}
+                  height={18}
+                  alt='count'
+                  className={styles.imageBox}
+                />
+              </div>
+              <div>20/100</div>
+            </div>
           </div>
 
           <div className={styles.agendaItemTagBox}>
