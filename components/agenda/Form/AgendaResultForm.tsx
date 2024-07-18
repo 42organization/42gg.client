@@ -43,27 +43,29 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
       <ul className={styles.awardUl}>
         {awardlist?.map((data, idx) => (
           <li key={idx} className={styles.awardLi}>
-            <DragBtn onClick={(e) => alert('DEV::dragbutton called', e)} />
+            <DragBtn onClick={(e) => alert('DEV::dragbutton called' + e)} />
             <div className={styles.awardContainer}>
               <div className={styles.awardTitleContainer}>
                 <p key={idx} className={styles.awardTitle}>
                   {data.award}
                 </p>
                 <RemoveElementBtn
-                  onClick={(e) => alert('DEV::removebtn called', e)}
+                  onClick={(e) => alert('DEV::removebtn called' + e)}
                 />
               </div>
               <div className={styles.awardSelectContainer}>
-                {data.teams.map((team, idx) => (
+                {data.teams.map((team, teamidx) => (
                   <SelectInput
-                    key={idx}
+                    key={teamidx}
                     selected={team}
-                    data={teamlist}
+                    options={teamlist}
+                    name={`selected-team${idx}-${teamidx}`}
                     message='팀을 선택해주세요'
                   />
                 ))}
                 <SelectInput
-                  data={teamlist}
+                  options={teamlist}
+                  name={`unselected-team${idx}`}
                   message='팀을 선택해주세요'
                   onChange={(e) => {
                     addTeam(idx, e.target.value);
@@ -84,11 +86,18 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
                 placeholder='추가할 상을 입력해주세요...'
               />
               <AddElementBtn
-                onClick={(e) => alert('DEV::addbutton called', e)}
+                onClick={(e) => alert('DEV::addbutton called' + e)}
               />
             </div>
             <div className={styles.awardSelectContainer}>
-              <SelectInput data={teamlist} message='팀을 선택해주세요' />
+              {/* <SelectInput
+                options={teamlist}
+                name={`unselected-team${idx}`}
+                message='팀을 선택해주세요'
+                onChange={(e) => {
+                  addTeam(idx, e.target.value);
+                }}
+              /> */}
             </div>
           </div>
         </li>
