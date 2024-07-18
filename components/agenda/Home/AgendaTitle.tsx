@@ -11,7 +11,7 @@ const AgendaTitle = () => {
           <div>개최신청</div>
           <div className={styles.imageWrapper}>
             <Image
-              src='/image/agenda/Vector.svg'
+              src='/image/agenda/ArrowRight.svg'
               width={35}
               height={35}
               alt='Create Agenda'

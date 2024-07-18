@@ -105,12 +105,6 @@
       display: flex;
       gap: 1rem;
       margin-top: 0.4rem;
-      @include regularTextFont(small);
-      .agendaTag {
-        padding: 0.1rem 0.7rem;
-        color: #ffffff;
-        border-radius: $medium-radius;
-      }
     }
   }
 }

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import AgendaTag from 'components/agenda/utils/AgendaTag';
 import styles from 'styles/agenda/Home/AgendaList.module.scss';
 
 const AgendaList = () => {
@@ -58,9 +59,9 @@ const AgendaListBtn = () => {
             </div>
 
             <div className={styles.agendaItemTagBox}>
-              <AgendaTag tagName='#공식' />
-              <AgendaTag tagName='#팀' />
-              <AgendaTag tagName='#과제' />
+              <AgendaTag tagName='공식' />
+              <AgendaTag tagName='팀' />
+              <AgendaTag tagName='과제' />
             </div>
           </div>
         </div>
@@ -70,32 +71,6 @@ const AgendaListBtn = () => {
         </div>
       </button>
     </Link>
-  );
-};
-
-interface AgendaTagProps {
-  tagName: string;
-}
-
-const AgendaTag: React.FC<AgendaTagProps> = ({ tagName }) => {
-  let backgroundColor;
-  switch (tagName) {
-    case '#공식':
-      backgroundColor = '#39B8FF';
-      break;
-    case '#팀':
-      backgroundColor = '#FF5D5D';
-      break;
-    case '#과제':
-      backgroundColor = '#FFB039';
-      break;
-    default:
-      backgroundColor = '#000000';
-  }
-  return (
-    <div className={styles.agendaTag} style={{ backgroundColor }}>
-      {tagName}
-    </div>
   );
 };
 

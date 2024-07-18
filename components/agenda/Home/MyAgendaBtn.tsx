@@ -7,7 +7,7 @@ const MyAgendaBtn = () => {
       <div>my agenda</div>
       <div className={styles.imageWrapper}>
         <Image
-          src='/image/agenda/Vector.svg'
+          src='/image/agenda/ArrowRight.svg'
           width={35}
           height={35}
           alt='Go To My Agenda'

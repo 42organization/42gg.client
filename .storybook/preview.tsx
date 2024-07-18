@@ -4,7 +4,7 @@ import { StoryFn } from '@storybook/react';
 import { RecoilRoot } from 'recoil';
 import { QueryClient } from 'react-query';
 import { QueryClientProvider } from 'react-query';
-import '../styles/globals.css';
+import 'styles/globals.css';
 
 const queryClient = new QueryClient();
 
