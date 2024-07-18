@@ -5,6 +5,7 @@
 $small-radius: 1rem; // 컴포넌트 속 요소
 $medium-radius: 1.2rem; // 기본 컴포넌트
 $big-radius: 1.4rem; // 제목, 웹용 큰 박스용
+$circle-radius: 50%; // 원
 
 // coalition
 $color-coalition-autumn: #ffac65;
@@ -20,8 +21,13 @@ $color-coalition-lee: #ff8a85;
 $color-placeholder: #b4a5b5;
 
 // font-family
-$font-family-menu: 'Cafe24 Simplehae';
+$logo-font: 'Overgrow', sans-serif;
+$font-family-menu: 'Simplehae';
+$bold-text-font: '11StreetGothicBold';
+$regular-text-font: '11StreetGothicRegular';
+$light-text-font: '11StreetGothicLight';
 $font-default: 'Pretendard', sans-serif;
+$common-font: 'Pretendard', sans-serif;
 
 @mixin container($level) {
   display: flex;
@@ -56,9 +62,19 @@ $big-font: 1.2rem;
 $medium-font: 1rem;
 $small-font: 0.8rem;
 
-$common-font: 'Pretendard', sans-serif;
-
-$logo-font: 'Overgrow', sans-serif;
+/* font-size map */
+$font-sizes: (
+  giant-giant: 2.4rem,
+  giant-big: 2.1rem,
+  big-giant: 1.8rem,
+  giant: 1.5rem,
+  big: 1.2rem,
+  medium: 1rem,
+  small: 0.8rem,
+);
+@function font-size($size) {
+  @return map-get($font-sizes, $size);
+}
 
 @mixin logoText($size, $color) {
   font-family: $logo-font;
@@ -67,6 +83,33 @@ $logo-font: 'Overgrow', sans-serif;
   color: $color;
   text-align: center;
   letter-spacing: 0.1rem;
+}
+
+@mixin titleFont {
+  font-family: $font-family-menu;
+  font-size: font-size(big-giant);
+  font-weight: 400;
+}
+
+@mixin subTitleFont {
+  font-family: $font-family-menu;
+  font-size: font-size(giant);
+  font-weight: 300;
+}
+
+@mixin lightTextFont($size) {
+  font-family: $light-text-font;
+  font-size: font-size($size);
+}
+
+@mixin regularTextFont($size) {
+  font-family: $regular-text-font;
+  font-size: font-size($size);
+}
+
+@mixin boldTextFont($size) {
+  font-family: $bold-text-font;
+  font-size: font-size($size);
 }
 
 @mixin textButton($type, $style) {
