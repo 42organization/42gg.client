@@ -31,6 +31,8 @@
   flex-direction: column;
   padding: 1rem 0.6rem;
   cursor: pointer;
+  background: linear-gradient(180deg, #fff 37%, rgba(0, 0, 0, 0) 100%),
+    url('/image/agenda/42.jpg') lightgray 50% / cover no-repeat;
   border: 0.1rem solid black;
   border-radius: $medium-radius;
 
