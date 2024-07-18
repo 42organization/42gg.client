@@ -23,6 +23,7 @@
 .agendaListItemBtn {
   position: relative;
   display: flex;
+  width: 100%;
   min-width: 352px;
   max-width: 750px;
   height: calc(150px + (100vw - 352px) * ((600 - 150) / (750 - 352)));
@@ -40,16 +41,15 @@
     display: flex;
     width: 100%;
     gap: 1.5rem;
-
-    .agendaDateBox {
-      width: 2.5rem;
-      margin-left: 0.5rem;
-      .agendaDateMonth {
-        @include boldTextFont(giant);
-      }
-      .agendaDateDay {
-        @include lightTextFont(giant);
-      }
+  }
+  .agendaDateBox {
+    width: 2.5rem;
+    margin-left: 0.5rem;
+    .agendaDateMonth {
+      @include boldTextFont(giant);
+    }
+    .agendaDateDay {
+      @include lightTextFont(giant);
     }
   }
 
@@ -75,42 +75,42 @@
       @include boldTextFont(medium);
     }
   }
-}
 
-.agendaInfoWrapper {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.1rem;
-
-  .agendaItemTitleBox {
-    @include boldTextFont(big);
-  }
-
-  .agendaItemTimeBox {
+  .agendaInfoWrapper {
     display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    @include lightTextFont(small);
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
 
-    .agendaItemTimeWrapper {
+    .agendaItemTitleBox {
+      @include boldTextFont(big);
+    }
+
+    .agendaItemTimeBox {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-  }
+      gap: 1.5rem;
+      @include lightTextFont(small);
 
-  .agendaItemTagBox {
-    display: flex;
-    gap: 1rem;
-    margin-top: 0.4rem;
-    @include regularTextFont(small);
-    .agendaTag {
-      padding: 0.1rem 0.7rem;
-      color: #ffffff;
-      border-radius: $medium-radius;
+      .agendaItemTimeWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+    }
+
+    .agendaItemTagBox {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.4rem;
+      @include regularTextFont(small);
+      .agendaTag {
+        padding: 0.1rem 0.7rem;
+        color: #ffffff;
+        border-radius: $medium-radius;
+      }
     }
   }
 }
