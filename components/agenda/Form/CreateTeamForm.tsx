@@ -1,3 +1,4 @@
+import styles from 'styles/agenda/Form/Form.module.scss';
 import CheckBoxInput from '../Input/CheckboxInput';
 import DescriptionInput from '../Input/DescriptionInput';
 import SelectInput from '../Input/SelectInput';
@@ -9,7 +10,7 @@ interface CreateTeamFormProps {
 
 const CreateTeamForm = ({ handleSubmit }: CreateTeamFormProps) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.container}>
       <TitleInput
         name='teamName'
         label='팀 이름'

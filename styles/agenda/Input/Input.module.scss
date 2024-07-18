@@ -1,14 +1,20 @@
 @import 'styles/agenda/common.scss';
 
 .container {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0.5rem;
   // @include container(1);
-  padding: 1rem 0.5rem;
+  // padding: 0.5rem;
   font-family: $font-default;
+  gap: 1rem;
+  justify-content: center;
+  // width: max-content;
 }
 .input {
   width: calc(100% - 2rem);
   padding: 0.5rem;
-  margin: 0 0.5rem;
+  // margin: 0 0.5rem;
   background: none;
   // border-radius: $small-radius;
   border: none;
@@ -19,4 +25,11 @@
 
 .input::placeholder {
   color: $color-placeholder;
+}
+
+.label {
+  padding: 0 0 0 0.5rem;
+  // margin-bottom: 10px;
+  font-size: $medium-font;
+  font-weight: bold;
 }

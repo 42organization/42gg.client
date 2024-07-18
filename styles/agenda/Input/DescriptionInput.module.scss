@@ -1,1 +1,14 @@
 @import './Input.module.scss';
+
+// .container {
+//   padding: 1rem 0.5rem;
+//   font-family: $font-default;
+// }
+
+.description_input {
+  width: 100%;
+  height: 4rem;
+  margin-left: 0.5rem;
+  border: var(--default-border);
+  border-radius: $medium-radius;
+}

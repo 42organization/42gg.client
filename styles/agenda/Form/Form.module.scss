@@ -1,8 +1,11 @@
 @import 'styles/agenda/common.scss';
 
 .container {
-  @include container(1);
-  color: var(--color-text);
+  display: flex;
+  // @include container(1);
+  // color: var(--color-text);
+  width: 90%;
+  flex-direction: column;
 }
 
 .submit_btn {

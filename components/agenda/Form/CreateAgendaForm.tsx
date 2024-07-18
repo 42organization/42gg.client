@@ -13,7 +13,7 @@ interface CreateAgendaFormProps {
 
 const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.container}>
       <TitleInput name='title' label='제목' placeholder='제목을 입력해주세요' />
       <DescriptionInput
         name='description'
