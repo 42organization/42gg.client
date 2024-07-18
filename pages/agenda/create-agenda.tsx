@@ -18,8 +18,8 @@ const CreateAgenda = () => {
       <div>
         <CancelBtn onClick={saveLocal} />
       </div>
-      <h2 className={styles.title}>팀 만들기</h2>
-      <p className={styles.description}>팀 인원 : 3명-8명까지 가능</p>
+      <h2 className={styles.title}>새로운 아젠다 만들기</h2>
+      <p className={styles.description}>당부사항</p>
       <CreateAgendaForm handleSubmit={submitTeamForm} />
     </div>
   );
