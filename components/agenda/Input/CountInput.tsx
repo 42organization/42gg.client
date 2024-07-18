@@ -16,7 +16,7 @@ const CountInput = ({ name, label, min, max, ...rest }: CountInputProps) => {
     <Input
       name={name}
       label={label}
-      type='text'
+      type='number'
       min={min}
       max={max}
       {...rest}

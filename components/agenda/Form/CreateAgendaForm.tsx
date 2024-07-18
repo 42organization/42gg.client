@@ -38,8 +38,8 @@ const createAgendaForm = ({ handleSubmit }: createAgendaFormProps) => {
       <h3 className={styles.container_label}>팀당 인원 제한</h3>
       <CheckboxInput name='isSolo' label='개인' />
       <div className={styles.countContainer}>
-        <CountInput name='minMember' label='최소' min={1} max={10} value={3} />
-        <CountInput name='maxMember' label='최대' min={2} max={10} value={3} />
+        <CountInput name='minMember' label='최소' min={1} max={10} />
+        <CountInput name='maxMember' label='최대' min={2} max={10} />
       </div>
       <ImageInput name='image' label='포스터 파일 첨부하기' />
       <CheckboxInput name='isPublic' label='대회 유무' />
