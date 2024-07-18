@@ -1,0 +1,19 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  width: 20rem;
+  max-width: max-content;
+  padding: 0.2rem;
+  margin: 0.1rem;
+  border: var(--highlight-border);
+  border-radius: 1rem;
+}
+
+.option {
+  padding: 10px;
+  margin: 10px;
+}
+
+.unselected {
+  border-style: dotted;
+}

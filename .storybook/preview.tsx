@@ -36,6 +36,19 @@ const preview: Preview = {
     (Story: StoryFn) => (
       <RecoilRoot>
         <QueryClientProvider client={queryClient}>
+          <button
+            onClick={() => {
+              const theme = document.documentElement.getAttribute('data-theme');
+              if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                return;
+              } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+              }
+            }}
+          >
+            theme
+          </button>
           <Story />
         </QueryClientProvider>
       </RecoilRoot>

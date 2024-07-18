@@ -1,0 +1,86 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  @include container(3);
+  justify-content: right;
+  display: flex;
+  flex-direction: column;
+  padding-right: 0;
+  // width: 350px;
+}
+
+.description {
+  @include description;
+}
+
+.awardUl {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding-right: 0;
+  justify-content: flex-end;
+}
+.awardLi {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  // padding: 0rem 0
+}
+
+.awardContainer {
+  @include container('right');
+  display: flex;
+  width: 90%;
+  padding-right: 0;
+  padding-bottom: 1rem;
+  margin: 0.5rem 0;
+  margin-right: 0;
+  border-right: none;
+}
+
+.awardDragBtn {
+  // @include button('default', 'default');
+}
+
+.awardTitleContainer {
+  display: flex;
+  width: 100%;
+  padding: 0 1rem 0 0;
+  margin: 0 0 0.5rem;
+  border-bottom: 1px solid #000;
+  align-items: center;
+  justify-items: flex;
+  justify-content: space-between;
+  > p {
+    margin: 1rem 0;
+    font-size: 1.2rem;
+  }
+}
+
+.awardDeleteBtn {
+  // @include button('default', 'delete');
+  border: 2px solid red;
+}
+.awardSelectContainer {
+  display: inline;
+  width: 100%;
+  height: max-content;
+  flex-direction: column;
+  word-break: keep-all;
+  align-items: center;
+  justify-content: left;
+}
+
+.newAwardInput {
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+}
+
+.newAwardInput:focus {
+  background: var(--highlight-yellow);
+  outline: none;
+  box-shadow: 0 0 5px 5px var(--highlight-yellow);
+}

@@ -1,0 +1,18 @@
+@import 'styles/agenda/common.scss';
+
+.inputBtn {
+  // @include button('submit', 'highlight');
+  display: none;
+}
+
+.label {
+  @include textButton('submit', 'mid');
+  display: inline-block;
+  width: max-content;
+  height: max-content;
+  padding: 1rem;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none; /* 드래그 금지 */
+  border-radius: $small-radius;
+}
