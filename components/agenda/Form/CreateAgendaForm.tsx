@@ -7,11 +7,11 @@ import TitleInput from 'components/agenda/Input/TitleInput';
 import styles from 'styles/agenda/Form/Form.module.scss';
 import SubmitInputBtn from '../button/SubmitInputButton';
 
-interface createAgendaFormProps {
+interface CreateAgendaFormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const createAgendaForm = ({ handleSubmit }: createAgendaFormProps) => {
+const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
   return (
     <form onSubmit={handleSubmit}>
       <TitleInput name='title' label='제목' placeholder='제목을 입력해주세요' />
@@ -51,4 +51,4 @@ const createAgendaForm = ({ handleSubmit }: createAgendaFormProps) => {
   );
 };
 
-export default createAgendaForm;
+export default CreateAgendaForm;

@@ -12,7 +12,7 @@ const submitTeamForm = (target: React.FormEvent<HTMLFormElement>) => {
   console.log(target);
 };
 
-const createAgenda = () => {
+const CreateAgenda = () => {
   return (
     <div className={styles.container}>
       <div>
@@ -25,4 +25,4 @@ const createAgenda = () => {
   );
 };
 
-export default createAgenda;
+export default CreateAgenda;
