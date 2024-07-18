@@ -17,16 +17,6 @@
   appearance: none;
 }
 
-.checkBoxInput {
-  display: none;
-}
-
 .input::placeholder {
   color: $color-placeholder;
-}
-.label {
-  padding: 0 0 0 0.5rem;
-  // margin-bottom: 10px;
-  font-size: $medium-font;
-  font-weight: bold;
 }

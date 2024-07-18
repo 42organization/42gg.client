@@ -1,22 +1,49 @@
 import styles from 'styles/agenda/Input/CheckboxInput.module.scss';
-import Input from './Input';
+// import Input from './Input';
 interface CheckboxProps {
   name: string;
   label: string;
+  options?: string[];
   discription?: string;
   checked?: boolean;
   rest?: Record<string, unknown> | undefined;
 }
 
-const CheckBoxInput = ({ name, label, ...rest }: CheckboxProps) => {
+const CheckBoxInput = ({ name, label, options, ...rest }: CheckboxProps) => {
   return (
-    <Input
-      name={name}
-      label={label}
-      type='checkbox'
-      className={styles.checkbox}
-      {...rest}
-    />
+    <>
+      {options && options.length > 0 ? (
+        <div className={styles.checkboxContainer}>
+          {options.map((option, idx) => (
+            <>
+              <label htmlFor={option}>{label}</label>
+              <input
+                {...rest}
+                name={option}
+                key={idx}
+                type={'checkbox'}
+                id={option}
+                className={styles.checkBoxInput}
+                checked={false}
+              />
+            </>
+          ))}
+        </div>
+      ) : (
+        <>
+          <label htmlFor={name} className={styles.label}>
+            {label}
+          </label>
+          <input
+            name={name}
+            type='checkbox'
+            id={name}
+            className={styles.checkbox}
+            {...rest}
+          />
+        </>
+      )}
+    </>
   );
 };
 

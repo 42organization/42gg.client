@@ -3,13 +3,9 @@
 .checkbox {
   // width: 1.3rem;
   // height: 1.3rem;
-  display: flex;
   justify-content: left;
   align-items: center;
   gap: 2rem;
-}
-
-.checkbox input + label {
   display: inline-block;
 
   /* 체크박스 만들기 */
@@ -21,7 +17,18 @@
   border: 1px solid #000;
   border-radius: $small-radius;
 }
-input:checked + label {
+.checkbox:checked {
   /* 체크되었을 때 */
   background: var(--highlight-yellow);
+}
+
+.checkBoxInput {
+  display: none;
+}
+
+.label {
+  padding: 0 0 0 0.5rem;
+  // margin-bottom: 10px;
+  font-size: $medium-font;
+  font-weight: bold;
 }
