@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { AgendaStatus } from 'constants/agenda/agenda';
-import UploadButton from 'components/agenda/button/UploadButton';
-import Share from 'public/image/agenda/share.svg';
+import { ShareBtn } from 'components/agenda/button/Buttons';
+import { UploadBtn } from 'components/agenda/button/UploadBtn';
 import styles from 'styles/agenda/agendaDetail/AgendaInfo.module.scss';
 // 목데이터 생성
 const mockData = {
@@ -24,6 +24,16 @@ const mockData = {
   createdAt: new Date('2024-07-01'),
   announcementTitle: '대회 공지사항',
   isOfficial: true,
+};
+
+const copyLink = () => {
+  const url = window.location.href;
+  navigator.clipboard.writeText(url);
+  alert('링크가 복사되었습니다.');
+};
+
+const participationIn = () => {
+  alert('참여신청이 완료되었습니다.');
 };
 
 export default function AgendaInfo() {
@@ -54,13 +64,13 @@ export default function AgendaInfo() {
         <div className={styles.infoWarp}>
           <div className={styles.contentWarp}>
             <div className={styles.enrollWarp}>
-              <UploadButton text='참여하기' />
+              <UploadBtn text='참여하기' onClick={participationIn} />
             </div>
             {/* 태그 */}
 
             <div className={styles.titleWarp}>
               <h2>{agendaTitle}</h2>
-              <Share className={styles.shareBtn} />
+              <ShareBtn onClick={copyLink} />
             </div>
 
             <div className={styles.organizerWrap}>
