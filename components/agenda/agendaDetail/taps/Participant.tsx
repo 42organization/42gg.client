@@ -1,5 +1,5 @@
 import React from 'react';
-import { Coalition } from 'constants/agenda/coalition';
+import { Coalition } from 'constants/agenda/agenda';
 import CoalitionDefault from 'public/image/agenda/coalition/coalition-default.svg';
 import CoalitionAutumn from 'public/image/agenda/coalition/gyeongsan-autumn.svg';
 import CoalitionSpring from 'public/image/agenda/coalition/gyeongsan-spring.svg';

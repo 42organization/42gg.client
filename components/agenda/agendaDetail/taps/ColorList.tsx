@@ -1,4 +1,4 @@
-import { Coalition } from 'constants/agenda/coalition';
+import { Coalition } from 'constants/agenda/agenda';
 import styles from 'styles/agenda/agendaDetail/taps/colorList.module.scss';
 
 interface ColorMapping {
