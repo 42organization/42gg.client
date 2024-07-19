@@ -1,16 +1,27 @@
+import { useEffect } from 'react';
 import Input from './Input';
 
 interface DateInputProps {
   name: string;
-  label: string;
+  label: string | null;
   min?: string;
   max?: string;
-  value?: string;
-  rest?: Record<string, unknown> | undefined;
+  defaultValue?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+function parseTen(num: number, tenCount: number): string {
+  return num < tenCount ? '0' + num : num.toString();
 }
 
 function parseDate(date: Date): string {
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  return `${date.getFullYear()}-${parseTen(date.getMonth() + 1, 10)}-${parseTen(
+    date.getDay() + 1,
+    10
+  )}T${parseTen(date.getHours() + 1, 10)}:${parseTen(
+    date.getMinutes() + 1,
+    10
+  )}`;
 }
 
 const DateStep = -1717768479615; // 2일 차이
@@ -20,7 +31,7 @@ const DateInput = ({
   label,
   min,
   max,
-  value,
+  defaultValue,
   ...rest
 }: DateInputProps) => {
   if (min !== undefined) {
@@ -29,10 +40,30 @@ const DateInput = ({
   if (max !== undefined) {
     max = '2028-12-12'; // 한계 날짜? 임의로 설정
   }
-  if (value !== undefined) {
-    value = parseDate(new Date());
+  if (!defaultValue) {
+    defaultValue = parseDate(new Date());
   }
-  return <Input name={name} label={label} type='date' {...rest} />;
+
+  // useEffect(() => {
+  //   const dateControl = document.getElementById(name) as HTMLInputElement;
+  //   if (dateControl?.defaultValue && defaultValue)
+  //     dateControl.defaultValue = defaultValue;
+  //   console.log(defaultValue);
+  // });
+  return (
+    <Input
+      name={name}
+      label={label}
+      type='datetime-local'
+      defaultValue={defaultValue}
+      {...rest}
+    />
+    // <input
+    //   id='party'
+    //   name='partydate'
+    //   // defaultValue='2017-06-01T08:30'
+    // />
+  );
 };
 
 export default DateInput;

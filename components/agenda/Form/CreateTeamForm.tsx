@@ -20,7 +20,7 @@ const CreateTeamForm = ({ handleSubmit }: CreateTeamFormProps) => {
       <SelectInput
         name='teamLocation'
         label='클러스터 위치'
-        options={['개인', '팀']}
+        options={['서울', '경산', '둘다']}
       />
       <DescriptionInput
         name='teamDescription'

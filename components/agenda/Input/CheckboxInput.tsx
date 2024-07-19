@@ -7,6 +7,7 @@ interface CheckboxProps {
   discription?: string;
   checked?: boolean;
   rest?: Record<string, unknown> | undefined;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CheckBoxInput = ({ name, label, options, ...rest }: CheckboxProps) => {
