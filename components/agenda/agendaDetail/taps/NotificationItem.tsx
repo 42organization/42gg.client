@@ -1,9 +1,20 @@
 import { useState } from 'react';
+import { formatDate } from 'components/agenda/utils/formatDate';
 import DownArrow from 'public/image/agenda/ChevronDown.svg';
 import RightArrow from 'public/image/agenda/ChevronRight.svg';
 import styles from 'styles/agenda/agendaDetail/taps/Notification.module.scss';
 
-export default function NotificationItem() {
+type NotificationItemProps = {
+  title: string;
+  contents: string;
+  createdAt: Date;
+};
+
+export default function NotificationItem({
+  title,
+  contents,
+  createdAt,
+}: NotificationItemProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleContent = () => {
@@ -22,13 +33,13 @@ export default function NotificationItem() {
             )}
           </div>
           <div className={styles.titleWarp}>
-            <div className={styles.notificationTitle}>대회 공지사항</div>
-            <div className={styles.notificationDate}>대회 날짜</div>
+            <div className={styles.notificationTitle}>{title}</div>
+            <div className={styles.notificationDate}>
+              {formatDate(createdAt)}
+            </div>
           </div>
         </div>
-        {isOpen && (
-          <div className={styles.notificationContent}>대회 공지사항 내용</div>
-        )}
+        {isOpen && <div className={styles.notificationContent}>{contents}</div>}
       </div>
     </>
   );
