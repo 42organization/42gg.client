@@ -46,7 +46,7 @@ export default function AgendaDescription() {
   return (
     <>
       <div className={styles.descriptionContainer}>
-        <div className={styles.discriptionTitle}>대회설명 제목</div>
+        <div className={styles.descriptionTitle}>대회설명 제목</div>
         <div className={styles.descriptionWarp}>{agendaContents}</div>
       </div>
     </>

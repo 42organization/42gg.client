@@ -27,24 +27,21 @@
   flex: 1 0 0;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2px;
+  gap: 0.5rem;
 }
 
 .toggleIcon {
   width: 1.5rem;
   height: 1.5rem;
 }
+
 .notificationTitle {
-  font-size: $big-font;
-  font-weight: 700;
-  color: var(--black);
+  @include boldTextFont(big);
 }
 .notificationDate {
-  font-size: $medium-font;
-  color: var(--black);
+  @include regularTextFont(medium);
 }
 
 .notifiacationContent {
-  font-size: $medium-font;
-  color: var(--black);
+  @include regularTextFont(medium);
 }

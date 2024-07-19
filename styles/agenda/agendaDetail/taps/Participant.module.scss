@@ -3,7 +3,7 @@
 .participantsContainer {
   display: flex;
 
-  height: 0.5rem;
+  height: 2rem;
 
   flex: 1 0 0;
   padding: 1rem 0.6rem 1rem 1rem;
@@ -24,9 +24,7 @@
 }
 
 .participantcontent {
-  font-family: $common-font;
-  font-size: $medium-font;
-  font-weight: 700;
+  @include boldTextFont(medium);
 }
 
 .bgGam {

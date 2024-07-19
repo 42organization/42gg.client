@@ -1,5 +1,5 @@
 import Upload from 'public/image/agenda/upload.svg';
-import styles from 'styles/agenda/button/UploadButton.module.scss';
+import styles from 'styles/agenda/button/UploadBtn.module.scss';
 
 interface UploadButtonProps {
   text: string;

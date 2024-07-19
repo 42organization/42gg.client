@@ -18,12 +18,9 @@
 }
 
 .conditionTitle {
-  font-size: $big-font;
-  font-weight: 700;
-  color: var(--black);
+  @include boldTextFont(big);
 }
 
 .conditionWarp {
-  font-size: $medium-font;
-  color: var(--black);
+  @include regularTextFont(medium);
 }

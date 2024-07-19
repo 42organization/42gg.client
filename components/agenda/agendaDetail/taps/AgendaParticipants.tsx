@@ -14,7 +14,7 @@ const mockData = {
   agendaMinTeam: 3,
   agendaMaxTeam: 10,
   agendaCurrentTeam: 5,
-  agendaMinPeople: 2, // 개인 팀 설정
+  agendaMinPeople: 3, // 개인 팀 설정
   agendaMaxPeople: 5,
   agendaPoster: null,
   agendaHost: 'iamgroot',

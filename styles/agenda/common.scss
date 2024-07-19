@@ -142,6 +142,13 @@ $font-sizes: (
   }
 }
 
+@mixin boldTitle {
+  margin: 1rem 0;
+  font-size: $big-giant-font;
+  font-weight: 700;
+  color: var(--default-font);
+}
+
 @mixin title {
   margin: 1rem 0;
   font-size: $big-giant-font;

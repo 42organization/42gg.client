@@ -17,13 +17,10 @@
   align-items: flex-start;
 }
 
-.discriptionTitle {
-  font-size: $big-font;
-  font-weight: 700;
-  color: var(--black);
+.descriptionTitle {
+  @include boldTextFont(big);
 }
 
-.discriptionContent {
-  font-size: $medium-font;
-  color: var(--black);
+.descriptionWarp {
+  @include regularTextFont(medium);
 }

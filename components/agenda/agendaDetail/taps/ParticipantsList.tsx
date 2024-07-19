@@ -21,7 +21,7 @@ export default function ParticipantsList() {
   return (
     <>
       <div className={styles.participantsTitle}>
-        참가자 {curPeople} / {maxPeople}
+        참여자 {curPeople} / {maxPeople}
       </div>
       <div className={styles.ListContainer}>
         {participants.map((participant, index) => (

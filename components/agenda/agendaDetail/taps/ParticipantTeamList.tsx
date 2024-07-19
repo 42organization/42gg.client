@@ -7,12 +7,18 @@ export default function ParticipantTeamList() {
   const maxTeam = 4;
   return (
     <>
-      <div className={styles.participantsTitle}>모집중인 팀 {curTeam}</div>
-      <ParticipantTeam />
-      <div className={styles.participantsTitle}>
-        확정완료 팀 {confirmTeam} / {maxTeam}
+      <div className={styles.participantsWarp}>
+        <div className={styles.participantsTitle}>모집중인 팀 {curTeam}</div>
+        <ParticipantTeam />
       </div>
-      <ParticipantTeam />
+
+      <div className={styles.participantsWarp}>
+        <div className={styles.participantsTitle}>
+          확정완료 팀 {confirmTeam} / {maxTeam}
+        </div>
+        <ParticipantTeam />
+        <ParticipantTeam />
+      </div>
     </>
   );
 }
