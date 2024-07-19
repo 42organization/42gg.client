@@ -1,19 +1,15 @@
 @import 'styles/agenda/common.scss';
 
 .agendaConditionsContainer {
-  display: flex;
+  @include container(1);
 
   width: 100%;
-
   flex: 1 0 0;
+
   flex-direction: column;
   padding: 1.5rem;
+  margin: 0;
   gap: 1rem;
-  background: var(--white);
-
-  border: var(--border-light);
-  border-radius: $medium-radius;
-  box-shadow: var(--box-shadow-light);
   align-items: flex-start;
 }
 
