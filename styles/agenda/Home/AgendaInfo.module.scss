@@ -1,0 +1,59 @@
+@import '../common.scss';
+
+.agendaInfoContainer {
+  display: flex;
+  width: 100%;
+  gap: 1.5rem;
+}
+.agendaDateBox {
+  width: 2.5rem;
+  margin-left: 0.5rem;
+  .agendaDateMonth {
+    @include boldTextFont(giant);
+  }
+  .agendaDateDay {
+    @include lightTextFont(giant);
+  }
+}
+
+.agendaInfoWrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+
+  .agendaItemTitleBox {
+    @include boldTextFont(big);
+  }
+
+  .agendaItemTimeBox {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    @include lightTextFont(small);
+
+    .agendaItemTimeWrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+  }
+
+  .agendaItemTagBox {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.4rem;
+  }
+}
+
+.imageWrapper {
+  display: flex;
+  width: 0.8rem;
+  height: 0.8rem;
+  .imageBox {
+    width: 100%;
+    height: 100%;
+  }
+}
