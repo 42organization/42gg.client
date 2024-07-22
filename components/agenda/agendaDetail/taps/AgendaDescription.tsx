@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AgendaStatus } from 'constants/agenda/agenda';
+import { formatDate } from 'components/agenda/utils/formatDate';
 import styles from 'styles/agenda/agendaDetail/taps/AgendaDescription.module.scss';
 
 const mockData = {
@@ -21,6 +22,7 @@ const mockData = {
   createdAt: new Date('2024-07-01'),
   announcementTitle: '대회 공지사항',
   isOfficial: true,
+  agendaisRanking: true,
 };
 
 export default function AgendaDescription() {
@@ -38,16 +40,36 @@ export default function AgendaDescription() {
   if (!agendaData) {
     return <div>Loading...</div>;
   }
-
-  const { agendaContents } = agendaData;
-
-  // const agendaContents =
-  //   '대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n대회설명 대회 설명 길게 어쩌고저쩌고\n';
+  const {
+    agendaContents,
+    agendaDeadLine,
+    agendaStartTime,
+    agendaEndTime,
+    isOfficial,
+    agendaisRanking,
+  } = agendaData;
   return (
     <>
       <div className={styles.descriptionContainer}>
-        <div className={styles.descriptionTitle}>대회설명 제목</div>
-        <div className={styles.descriptionWarp}>{agendaContents}</div>
+        <div className={styles.descriptionTitle}>대회 정보</div>
+        <div className={styles.descriptionWarp}>
+          <div className={styles.descriptionItem}>
+            <h3>간단 설명</h3> {agendaContents}
+          </div>
+          <div className={styles.descriptionItem}>
+            <h3>모집 완료 기간</h3> ~ {formatDate(agendaDeadLine)}
+          </div>
+          <div className={styles.descriptionItem}>
+            <h3>이벤트 기간</h3>{' '}
+            {`${formatDate(agendaStartTime)} ~ ${formatDate(agendaEndTime)}`}
+          </div>
+          <div className={styles.descriptionItem}>
+            <h3>시상 여부</h3> {agendaisRanking ? '시상 있음' : '시상 없음'}
+          </div>
+          <div className={styles.descriptionItem}>
+            <h3>공식대회 여부</h3> {isOfficial ? '공식대회' : '비공식대회'}
+          </div>
+        </div>
       </div>
     </>
   );

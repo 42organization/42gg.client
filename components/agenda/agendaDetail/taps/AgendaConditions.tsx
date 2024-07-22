@@ -34,15 +34,37 @@ export default function AgendaConditions() {
   if (!agendaData) {
     return <div>Loading...</div>;
   }
-
-  const { agendaContents } = agendaData;
+  const {
+    agendaMinPeople,
+    agendaMaxPeople,
+    agendaMinTeam,
+    agendaMaxTeam,
+    agendaLocation,
+  } = agendaData;
 
   return (
     <>
       <div className={styles.agendaConditionsContainer}>
-        <div className={styles.conditionTitle}>대회 참여 조건 제목</div>
-        <div className={styles.conditionWarp}>{agendaContents}</div>
-        {/* 어떤 형식으로 조건 추가할지 생각해보기 */}
+        <div className={styles.conditionTitle}>대회 참여 조건</div>
+        <div className={styles.conditionWarp}>
+          <div className={styles.conditionItem}>
+            <span className={styles.boldText}>팀 인원</span>
+            {' : '}
+            {agendaMinPeople} ~ {agendaMaxPeople}
+          </div>
+          <div className={styles.conditionItem}>
+            <span className={styles.boldText}>최소 팀</span> {' : '}{' '}
+            {agendaMinTeam}
+          </div>
+          <div className={styles.conditionItem}>
+            <span className={styles.boldText}>최대 팀</span> {' : '}
+            {agendaMaxTeam}
+          </div>
+          <div className={styles.conditionItem}>
+            <span className={styles.boldText}>장소</span>
+            {' : '} {agendaLocation}
+          </div>
+        </div>
       </div>
     </>
   );
