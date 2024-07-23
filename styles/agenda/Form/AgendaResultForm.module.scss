@@ -9,6 +9,10 @@
   // width: 350px;
 }
 
+.title {
+  @include title;
+}
+
 .description {
   @include description;
 }
@@ -64,11 +68,14 @@
 .awardSelectContainer {
   display: inline;
   width: 100%;
-  height: max-content;
-  flex-direction: column;
+  padding: 0;
+  // height: max-content;
+  margin: 0;
+  line-height: 2.5rem;
   word-break: keep-all;
-  align-items: center;
-  justify-content: left;
+  > div {
+    margin-right: 0.5rem;
+  }
 }
 
 .newAwardInput {

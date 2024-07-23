@@ -1,43 +1,53 @@
 import styles from 'styles/agenda/Input/SelectInput.module.scss';
 
 interface SelectInputProps {
-  data: string[];
+  name: string;
+  label?: string;
+  options: string[];
   message?: string;
   selected?: string;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const SelectInput = ({
-  data,
+  name,
+  options,
   message,
   selected,
+  label,
   onChange,
   ...rest
 }: SelectInputProps) => {
   const isSelected = selected ? '' : styles.unselected;
   return (
-    <select
-      className={`${styles.container} ${isSelected}`}
-      onChange={onChange}
-      {...rest}
-    >
-      <option
-        key={0}
-        selected={selected ? false : true}
-        className={styles.option}
+    <div className={styles.container}>
+      <label htmlFor={name} className={styles.label}>
+        {label}
+      </label>
+      <select
+        className={`${styles.select} ${isSelected}`}
+        onChange={onChange}
+        name={name}
+        {...rest}
       >
-        {message ? message : '선택해주세요'}
-      </option>
-      {data.map((item: string, idx: number) => (
         <option
-          key={idx}
+          key={0}
+          selected={selected ? false : true}
           className={styles.option}
-          selected={selected ? true : false}
         >
-          {item}
+          {message ? message : '선택해주세요'}
         </option>
-      ))}
-    </select>
+        {options.map((item: string, idx: number) => (
+          <option
+            key={idx}
+            className={styles.option}
+            selected={selected ? true : false}
+          >
+            {item}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 

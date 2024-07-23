@@ -7,28 +7,29 @@ interface CheckboxProps {
   discription?: string;
   checked?: boolean;
   rest?: Record<string, unknown> | undefined;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CheckBoxInput = ({ name, label, options, ...rest }: CheckboxProps) => {
   return (
-    <>
+    <div className={styles.container}>
       {options && options.length > 0 ? (
-        <div className={styles.checkboxContainer}>
-          {options.map((option, idx) => (
-            <>
-              <label htmlFor={option}>{label}</label>
-              <input
-                {...rest}
-                name={option}
-                key={idx}
-                type={'checkbox'}
-                id={option}
-                className={styles.checkBoxInput}
-                checked={false}
-              />
-            </>
-          ))}
-        </div>
+        options.map((option, idx) => (
+          <>
+            <label htmlFor={option} className={styles.label}>
+              {label}
+            </label>
+            <input
+              {...rest}
+              name={option}
+              key={idx}
+              type={'checkbox'}
+              id={option}
+              className={styles.checkBoxInput}
+              checked={false}
+            />
+          </>
+        ))
       ) : (
         <>
           <label htmlFor={name} className={styles.label}>
@@ -43,7 +44,7 @@ const CheckBoxInput = ({ name, label, options, ...rest }: CheckboxProps) => {
           />
         </>
       )}
-    </>
+    </div>
   );
 };
 

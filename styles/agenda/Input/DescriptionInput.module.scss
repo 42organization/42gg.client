@@ -1,1 +1,15 @@
 @import './Input.module.scss';
+
+.container {
+  // padding: 1rem 0.5rem;
+  margin: 1rem 0;
+  //   font-family: $font-default;
+}
+
+.description_input {
+  width: calc(100% - 1rem);
+  height: 4rem;
+  // margin-left: 0.5rem;
+  border: var(--default-border);
+  border-radius: $medium-radius;
+}

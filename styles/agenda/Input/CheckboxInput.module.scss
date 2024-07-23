@@ -1,5 +1,10 @@
 @import './Input.module.scss';
 
+.container {
+  flex-direction: row;
+  justify-content: left;
+}
+
 .checkbox {
   // width: 1.3rem;
   // height: 1.3rem;
@@ -26,9 +31,9 @@
   display: none;
 }
 
-.label {
-  padding: 0 0 0 0.5rem;
-  // margin-bottom: 10px;
-  font-size: $medium-font;
-  font-weight: bold;
-}
+// .label {
+//   padding: 0 0 0 0.5rem;
+//   // margin-bottom: 10px;
+//   font-size: $medium-font;
+//   font-weight: bold;
+// }
