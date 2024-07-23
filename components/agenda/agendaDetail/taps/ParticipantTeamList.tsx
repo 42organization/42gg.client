@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
+import { teamDataProps } from 'types/agenda/team/teamDataTypes';
+import { AgendaStatus } from 'constants/agenda/agenda';
 import ParticipantTeam from 'components/agenda/agendaDetail/taps/ParticipantTeam';
 import styles from 'styles/agenda/agendaDetail/taps/ParticipantTeamList.module.scss';
 
-const agendaMockData = {
+const agendaMockData: AgendaDataProps = {
   agendaTitle: '아 기다리고기다리던대회',
   agendaContents:
     '이 대회는 언제부터 시작되어 어쩌구저쩌구 뭐를 겨루려고 했는데 비밀이에요',
@@ -12,34 +15,17 @@ const agendaMockData = {
   agendaMinTeam: 3,
   agendaMaxTeam: 10,
   agendaCurrentTeam: 5,
-  agendaMinPeople: 5, // 개인 팀 설정
+  agendaMinPeople: 3, // 개인 팀 설정
   agendaMaxPeople: 5,
   agendaPoster: null,
   agendaHost: 'iamgroot',
   agendaLocation: '서울',
-  // agendaStatus: AgendaStatus.ON_GOING,
+  agendaStatus: AgendaStatus.ON_GOING,
   createdAt: new Date('2024-07-01'),
   announcementTitle: '대회 공지사항',
   isOfficial: true,
+  agendaisRanking: true,
 };
-interface agendaDataProps {
-  agendaTitle: string;
-  agendaContents: string;
-  agendaDeadLine: Date;
-  agendaStartTime: Date;
-  agendaEndTime: Date;
-  agendaMinTeam: number;
-  agendaMaxTeam: number;
-  agendaCurrentTeam: number;
-  agendaMinPeople: number;
-  agendaMaxPeople: number;
-  agendaPoster: any;
-  agendaHost: string;
-  agendaLocation: string;
-  createdAt: Date;
-  announcementTitle: string;
-  isOfficial: boolean;
-}
 
 const teamData = [
   {
@@ -68,15 +54,8 @@ const teamData = [
   },
 ];
 
-interface teamDataProps {
-  teamName: string;
-  teamLeaderIntraId: string;
-  teamMateCount: number;
-  teamKey: string;
-}
-
 export default function ParticipantTeamList() {
-  const [agendaData, setAgendaData] = useState<agendaDataProps | null>(null);
+  const [agendaData, setAgendaData] = useState<AgendaDataProps | null>(null);
   const [currentTeams, setCurrentTeams] = useState<teamDataProps[]>([]);
   const [confirmedTeams, setConfirmedTeams] = useState<teamDataProps[]>([]);
 

@@ -1,17 +1,24 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Key } from '@mui/icons-material';
-import ColorList from 'components/agenda/agendaDetail/taps/ColorList';
+import {
+  ParticipantTeamProps,
+  PeopleCount,
+} from 'types/agenda/agendaDetail/taps/participantTeam';
+import { Coalition } from 'constants/agenda/agenda';
+import ColorList from 'components/agenda/utils/ColorList';
 import TeamLeaderIcon from 'public/image/agenda/rock-and-roll-hand.svg';
 import styles from 'styles/agenda/agendaDetail/taps/ParticipantTeam.module.scss';
 
-interface ParticipantTeamProps {
-  teamKey: string;
-  teamName: string;
-  teamLeaderIntraId: string;
-  teamMateCount: number;
-  maxMateCount: number;
-}
+const peopleCount: PeopleCount = {
+  [Coalition.GUN]: 2,
+  [Coalition.GON]: 7,
+  [Coalition.GAM]: 1,
+  [Coalition.LEE]: 3,
+};
+
+const totalPeople = (peopleCount: PeopleCount) => {
+  return Object.values(peopleCount).reduce((sum, count) => sum + count, 0);
+};
 
 export default function ParticipantTeam({
   teamKey,
@@ -44,7 +51,10 @@ export default function ParticipantTeam({
           </div>
         </div>
 
-        <ColorList />
+        <ColorList
+          peopleCount={peopleCount}
+          totalPeople={totalPeople(peopleCount)}
+        />
       </Link>
     </>
   );

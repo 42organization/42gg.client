@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AgendaStatus, Coalition } from 'constants/agenda/agenda';
+import { AgendaStatus } from 'constants/agenda/agenda';
 import ParticipantsList from 'components/agenda/agendaDetail/taps/ParticipantsList';
 import styles from 'styles/agenda/agendaDetail/taps/AgendaParticipants.module.scss';
 import ParticipantTeamList from './ParticipantTeamList';
@@ -14,7 +14,7 @@ const mockData = {
   agendaMinTeam: 3,
   agendaMaxTeam: 10,
   agendaCurrentTeam: 5,
-  agendaMinPeople: 3, // 개인 팀 설정
+  agendaMinPeople: 5, // 개인 팀 설정
   agendaMaxPeople: 5,
   agendaPoster: null,
   agendaHost: 'iamgroot',

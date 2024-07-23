@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
 import { AgendaStatus } from 'constants/agenda/agenda';
 import { formatDate } from 'components/agenda/utils/formatDate';
 import styles from 'styles/agenda/agendaDetail/taps/AgendaDescription.module.scss';
 
-const mockData = {
+const mockData: AgendaDataProps = {
   agendaTitle: '아 기다리고기다리던대회',
   agendaContents:
     '이 대회는 언제부터 시작되어 어쩌구저쩌구 뭐를 겨루려고 했는데 비밀이에요',

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import NotificationItem from 'components/agenda/agendaDetail/taps/NotificationItem';
-import styles from 'styles/agenda/agendaDetail/taps/AgendaNotifications.module.scss';
+import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
+import AnnouncementItem from 'components/agenda/agendaDetail/taps/AnnouncementItem';
+import styles from 'styles/agenda/agendaDetail/taps/AgendaAnnouncements.module.scss';
 
 const mockData = [
   {
@@ -17,30 +18,26 @@ const mockData = [
   },
 ];
 
-type Notification = {
-  id: number;
-  title: string;
-  contents: string;
-  createdAt: Date;
-};
-
-export default function AgendaNotifications() {
-  const [notiData, setNotiData] = useState<Notification[] | null>(null);
+export default function AgendaAnnouncements() {
+  const [announcementData, setannouncementData] = useState<
+    AnnouncementProps[] | null
+  >(null);
 
   useEffect(() => {
-    setNotiData(mockData);
+    setannouncementData(mockData);
   }, []);
 
-  if (!notiData) {
+  if (!announcementData) {
     return <div>Loading...</div>;
   }
 
   return (
     <>
-      <div className={styles.notificationsList}>
-        {notiData.map((item) => (
-          <NotificationItem
+      <div className={styles.announcementsList}>
+        {announcementData.map((item) => (
+          <AnnouncementItem
             key={item.id}
+            id={item.id}
             title={item.title}
             contents={item.contents}
             createdAt={item.createdAt}

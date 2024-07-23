@@ -8,8 +8,6 @@
   flex: 1 0 0;
   padding: 1rem 0.6rem 1rem 1rem;
 
-  background: var(--box-bg-1-light);
-
   border-radius: $medium-radius;
   box-shadow: var(--box-shadow-bottom);
   align-items: center;
@@ -25,40 +23,4 @@
 
 .participantcontent {
   @include boldTextFont(medium);
-}
-
-.bgGam {
-  background-color: $color-coalition-gam;
-}
-
-.bgGon {
-  background-color: $color-coalition-gon;
-}
-
-.bgGun {
-  background-color: $color-coalition-gun;
-}
-
-.bgLee {
-  background-color: $color-coalition-lee;
-}
-
-.bgSpring {
-  background-color: $color-coalition-spring;
-}
-
-.bgSummer {
-  background-color: $color-coalition-summer;
-}
-
-.bgAutumn {
-  background-color: $color-coalition-autumn;
-}
-
-.bgWinter {
-  background-color: $color-coalition-winter;
-}
-
-.bgDefault {
-  background-color: var(--box-bg-1-light);
 }

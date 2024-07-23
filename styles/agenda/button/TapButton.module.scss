@@ -4,12 +4,8 @@
   display: flex;
   padding: 0.3rem 0.6rem;
   @include boldTextFont(medium);
-  // font-family: $common-font;
-  // font-size: $medium-font;
-  // font-weight: 700;
   cursor: pointer;
 
-  // 기본 상태 (클릭되지 않은 상태)
   background: var(--box-bg-1-light);
   border: var(--border-light);
   border-radius: $medium-radius;

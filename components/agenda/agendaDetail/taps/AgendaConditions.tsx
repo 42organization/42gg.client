@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
 import { AgendaStatus } from 'constants/agenda/agenda';
 import styles from 'styles/agenda/agendaDetail/taps/AgendaConditions.module.scss';
 
-const mockData = {
+const mockData: AgendaDataProps = {
   agendaTitle: '아 기다리고기다리던대회',
   agendaContents:
     '이 대회는 언제부터 시작되어 어쩌구저쩌구 뭐를 겨루려고 했는데 비밀이에요',
@@ -21,11 +22,10 @@ const mockData = {
   createdAt: new Date('2024-07-01'),
   announcementTitle: '대회 공지사항',
   isOfficial: true,
+  agendaisRanking: true,
 };
 
 export default function AgendaConditions() {
-  // const content =
-  //   '이 대회에참가하려면 어쩌구저쩌구 포인트얼마를내야하며 상품은 뭔데 줄지안줄지 생각해볼게';
   const [agendaData, setAgendaData] = useState(null);
 
   useEffect(() => {

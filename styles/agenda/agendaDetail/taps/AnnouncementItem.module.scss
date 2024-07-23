@@ -1,6 +1,6 @@
 @import 'styles/agenda/common.scss';
 
-.notificationContianer {
+.announcementContianer {
   @include container(1);
 
   width: 100%;
@@ -32,13 +32,13 @@
   height: 1.5rem;
 }
 
-.notificationTitle {
+.announcementTitle {
   @include boldTextFont(big);
 }
-.notificationDate {
+.announcementDate {
   @include regularTextFont(medium);
 }
 
-.notifiacationContent {
+.announcementContent {
   @include regularTextFont(medium);
 }

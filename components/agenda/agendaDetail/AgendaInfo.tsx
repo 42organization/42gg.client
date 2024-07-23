@@ -89,14 +89,14 @@ const determineButtonText = (agendaStatus, isHost, isParticipant, isTeam) => {
   return '';
 };
 
-// export default function AgendaInfo() {
-// storybook에서 사용하기 위해 인자 넣어줌
-export default function AgendaInfo({
-  agendaData,
-  profileData,
-  teamListStatus,
-}) {
-  /*
+export default function AgendaInfo() {
+  // storybook에서 사용하기 위해 인자 넣어줌
+  // export default function AgendaInfo({
+  //   agendaData,
+  //   profileData,
+  //   teamListStatus,
+  // }) {
+
   const router = useRouter();
   const { agendaKey } = router.query;
   const [agendaData, setAgendaData] = useState(null);
@@ -114,7 +114,6 @@ export default function AgendaInfo({
   if (!agendaData) {
     return <div>Loading...</div>;
   }
-*/
 
   const { agendaTitle, agendaHost, agendaStatus } = agendaData;
 
