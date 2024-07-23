@@ -5,6 +5,9 @@
 }
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 2rem);
   > h1 {
     font-size: 1.5rem;
     font-weight: 700;
@@ -13,8 +16,11 @@
 
 .description {
   @include container(3);
+  border-top-left-radius: 0;
   > p {
     @include description;
+    font-size: 1rem;
+    font-weight: 500;
   }
 }
 
@@ -23,24 +29,42 @@
   width: 100%;
   height: 100%;
   flex-direction: column;
+  padding: 1rem;
+  margin: 0;
+  gap: 0;
 }
 
 .mateContainer {
   display: flex;
+  height: 50px;
+  padding: 0;
+  margin: 0;
   gap: 1rem;
 }
 
 .coalitionColor {
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  box-shadow: var(--default-box-shadow);
 }
 
 .connectedUp {
-  background: #1abad3;
+  padding-top: 5px;
+  margin-top: 0px;
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .connectedDown {
-  background: #8817bc;
+  padding-bottom: 5px;
+  margin-bottom: 0px;
+  border-bottom: none;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }

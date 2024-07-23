@@ -86,8 +86,10 @@ const TeamInfo = () => {
                 }`}
               ></div>
               <div className={styles.mateName}>
-                <p>{mate.intraId}</p>
-                {mate.intraId === teamDetail.teamLeaderIntraId && '👑'}
+                <p>
+                  {mate.intraId}{' '}
+                  {mate.intraId === teamDetail.teamLeaderIntraId && '👑'}
+                </p>
               </div>
             </div>
           );
