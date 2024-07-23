@@ -1,7 +1,11 @@
+import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
+import TeamInfo from 'components/agenda/teamDetail/TeamInfo';
+
 export default function TeamDetail() {
   return (
     <>
-      <div>team 상세정보</div>
+      <AgendaInfo type='team' />
+      <TeamInfo />
     </>
   );
 }
