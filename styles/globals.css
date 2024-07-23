@@ -195,3 +195,7 @@ ul.pagination li a.active {
   font-weight: 700;
   color: #de1825; /* $pp-red */
 }
+
+.hidden {
+  display: none;
+}

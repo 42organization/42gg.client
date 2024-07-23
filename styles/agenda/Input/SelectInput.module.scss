@@ -1,19 +1,45 @@
-@import 'styles/agenda/common.scss';
+// @import 'styles/agenda/common.scss';
+@import './Input.module.scss';
 
-.container {
+.select {
   width: 20rem;
   max-width: max-content;
+  height: fit-content;
   padding: 0.2rem;
   margin: 0.1rem;
   border: var(--highlight-border);
   border-radius: 1rem;
 }
 
+.container {
+  display: inline;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+
+.select_container {
+  display: inline;
+  gap: 1rem;
+  // padding: 0;
+}
+
 .option {
   padding: 10px;
+  .container {
+    flex-direction: row;
+    justify-content: left;
+  }
+
   margin: 10px;
 }
 
+.label {
+  margin-right: 0.5rem;
+}
+// container {
+
+// }
 .unselected {
   border-style: dotted;
 }

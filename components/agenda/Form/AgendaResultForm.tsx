@@ -15,7 +15,6 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
     }[]
   >([
     { award: '참가상', teams: ['apple'] },
-    { award: '아기다리상', teams: ['banana'] },
     { award: '그저그런상', teams: ['cider', 'dumpling'] },
     { award: '참가상', teams: [] },
   ]);
@@ -38,7 +37,7 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
 
   return (
     <div className={styles.container}>
-      <h1>결과 입력</h1>
+      <h1 className={styles.title}>결과 입력</h1>
       <h2 className={styles.description}>팀별 결과를 입력해주세요</h2>
       <ul className={styles.awardUl}>
         {awardlist?.map((data, idx) => (
