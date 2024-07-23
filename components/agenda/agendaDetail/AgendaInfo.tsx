@@ -1,5 +1,8 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
+import { ParticipantSummaryProps } from 'types/agenda/agendaDetail/taps/agendaInfoTypes';
+import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
 import {
   AgendaLocation,
   AgendaStatus,
@@ -32,7 +35,7 @@ const mockData = {
 };
 
 // 개인상세조회
-const profileData = {
+const profileData: ProfileDataProps = {
   userIntra: 'iamgroot',
   userContent: '안녕하세요',
   userGithub: 'test@github.abc',
@@ -63,11 +66,14 @@ const submitResults = () => {
   alert('결과 입력 버튼입니다.');
 };
 
-const isTeam = (agendaData) => {
+const isTeam = (agendaData: AgendaDataProps) => {
   return agendaData.agendaMinPeople !== agendaData.agendaMaxPeople;
 };
 
-const getIsHost = (profileData, agendaData) => {
+const getIsHost = (
+  profileData: ProfileDataProps,
+  agendaData: AgendaDataProps
+) => {
   return profileData.userIntra === agendaData.agendaHost;
 };
 
@@ -76,7 +82,12 @@ const getIsParticipant = (teamList) => {
 };
 
 // 버튼 텍스트 결정 함수
-const determineButtonText = (agendaStatus, isHost, isParticipant, isTeam) => {
+const determineButtonText = ({
+  agendaStatus,
+  isHost,
+  isParticipant,
+  isTeam,
+}: ParticipantSummaryProps) => {
   if (agendaStatus === AgendaStatus.CONFIRM) {
     return isHost ? '결과입력' : '';
   } else if (agendaStatus === AgendaStatus.ON_GOING) {
@@ -119,13 +130,12 @@ export default function AgendaInfo() {
 
   const isHost = getIsHost(profileData, agendaData);
   const isParticipant = getIsParticipant(teamListStatus);
-
-  const buttonText = determineButtonText(
+  const buttonText = determineButtonText({
     agendaStatus,
     isHost,
     isParticipant,
-    isTeam(agendaData)
-  );
+    isTeam: isTeam(agendaData),
+  });
 
   return (
     <>

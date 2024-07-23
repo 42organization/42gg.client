@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import {
   ParticipantTeamProps,
   PeopleCount,
-} from 'types/agenda/agendaDetail/taps/participantTeam';
+} from 'types/agenda/agendaDetail/taps/participantTeamTypes';
 import { Coalition } from 'constants/agenda/agenda';
 import ColorList from 'components/agenda/utils/ColorList';
 import TeamLeaderIcon from 'public/image/agenda/rock-and-roll-hand.svg';
