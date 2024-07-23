@@ -37,11 +37,13 @@ const MyAgendaBtn = () => {
         <div>my agenda</div>
         <div className={styles.imageWrapper}>
           <Image
-            src='/image/agenda/ArrowRight.svg'
+            src='/image/agenda/ChevronRight.svg'
             width={35}
             height={35}
             alt='Go To My Agenda'
-            className={styles.imageBox}
+            className={`${styles.imageBox} ${
+              widthExpanded ? styles.rotateDown : ''
+            }`}
           />
         </div>
       </div>

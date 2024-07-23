@@ -3,15 +3,31 @@
 .agendaInfoContainer {
   display: flex;
   width: 100%;
-  gap: 1.5rem;
+  height: 4.5rem;
+  gap: 1rem;
 }
+
 .agendaDateBox {
-  width: 2.5rem;
-  margin-left: 0.5rem;
+  display: flex;
+  width: fit-content;
+  height: 100%;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.2rem;
   .agendaDateMonth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.5rem;
     @include boldTextFont(giant);
   }
   .agendaDateDay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.5rem;
     @include lightTextFont(giant);
   }
 }
@@ -19,16 +35,22 @@
 .agendaInfoWrapper {
   display: flex;
   width: 100%;
+  height: 100%;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.1rem;
+  justify-content: center;
+  gap: 0.3rem;
 
   .agendaItemTitleBox {
+    display: flex;
+    align-items: center;
+    height: 1.5rem;
     @include boldTextFont(big);
   }
 
   .agendaItemTimeBox {
     display: flex;
+    height: 0.9rem;
     align-items: center;
     gap: 1.5rem;
     @include lightTextFont(small);
@@ -44,7 +66,6 @@
   .agendaItemTagBox {
     display: flex;
     gap: 1rem;
-    margin-top: 0.4rem;
   }
 }
 
