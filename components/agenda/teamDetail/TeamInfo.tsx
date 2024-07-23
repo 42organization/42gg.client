@@ -5,6 +5,7 @@ import colorstyles from 'styles/agenda/coalition.module.scss';
 import styles from 'styles/agenda/TeamDetail/TeamInfo.module.scss';
 import { ShareBtn } from '../button/Buttons';
 
+//인원 받아올려면 Team Max 인원 받아와야 함
 const TeamInfo = () => {
   const [teamDetail, setTeamDetail] = useState<TeamDetailProps>({
     teamName: '팀이름',

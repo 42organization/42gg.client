@@ -15,12 +15,12 @@
 }
 
 .description {
-  @include container(3);
+  @include container(2);
   border-top-left-radius: 0;
   > p {
     @include description;
-    font-size: 1rem;
-    font-weight: 500;
+    // font-size: 1rem;
+    // font-weight: 500;
   }
 }
 
