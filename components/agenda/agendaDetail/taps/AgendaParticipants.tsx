@@ -1,4 +1,4 @@
-import { Coalition } from 'constants/agenda/coalition';
+import { Coalition } from 'constants/agenda/agenda';
 import ParticipantsList from 'components/agenda/agendaDetail/taps/ParticipantsList';
 import styles from 'styles/agenda/agendaDetail/taps/AgendaParticipants.module.scss';
 import ParticipantTeamList from './ParticipantTeamList';

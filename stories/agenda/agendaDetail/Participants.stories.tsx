@@ -2,7 +2,7 @@
 
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { Coalition } from 'constants/agenda/coalition';
+import { Coalition } from 'constants/agenda/agenda';
 import Participant from 'components/agenda/agendaDetail/taps/Participant';
 
 interface ParticipantProps {
@@ -17,7 +17,7 @@ export default {
     iconType: {
       control: {
         type: 'select',
-        options: Object.values(Coalition),
+        // options: Object.values(),
       },
     },
   },

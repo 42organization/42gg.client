@@ -1,5 +1,5 @@
 import React from 'react';
-import { Coalition } from 'constants/agenda/coalition';
+import { Coalition } from 'constants/agenda/agenda';
 import Participant from 'components/agenda/agendaDetail/taps/Participant';
 import styles from 'styles/agenda/agendaDetail/taps/ParticipantsList.module.scss';
 
