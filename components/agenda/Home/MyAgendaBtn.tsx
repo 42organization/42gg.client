@@ -34,7 +34,7 @@ const MyAgendaBtn = () => {
       } ${heightExpanded ? styles.expandedHeight : ''}`}
     >
       <div className={styles.myagendaBtnToggle} onClick={handleClick}>
-        <div>my agenda</div>
+        <div className={styles.myagendaText}>my agenda</div>
         <div className={styles.imageWrapper}>
           <Image
             src='/image/agenda/ChevronRight.svg'
