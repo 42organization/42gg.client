@@ -41,20 +41,21 @@ const TeamInfo = () => {
   }
 
   const colorMapping: { [key: string]: string } = {
-    [Coalition.GUN]: colorstyles.bg_Gun,
-    [Coalition.GON]: colorstyles.bg_Gon,
-    [Coalition.GAM]: colorstyles.bg_Gam,
-    [Coalition.LEE]: colorstyles.bg_Lee,
-    [Coalition.SPRING]: colorstyles.bg_Spring,
-    [Coalition.SUMMER]: colorstyles.bg_Summer,
-    [Coalition.AUTUMN]: colorstyles.bg_Autumn,
-    [Coalition.WINTER]: colorstyles.bg_Winter,
-    [Coalition.OTHER]: colorstyles.bg_Default,
+    [Coalition.GUN]: colorstyles.bg_gun,
+    [Coalition.GON]: colorstyles.bg_gon,
+    [Coalition.GAM]: colorstyles.bg_gam,
+    [Coalition.LEE]: colorstyles.bg_lee,
+    [Coalition.SPRING]: colorstyles.bg_spring,
+    [Coalition.SUMMER]: colorstyles.bg_summer,
+    [Coalition.AUTUMN]: colorstyles.bg_autumn,
+    [Coalition.WINTER]: colorstyles.bg_winter,
+    [Coalition.OTHER]: colorstyles.bg_default,
   };
 
   const shareTeamInfo = () => {
     alert('공유하기');
   };
+  console.log(colorMapping[teamDetail.teamMates[0].coalition]);
 
   return (
     <div className={styles.container}>
