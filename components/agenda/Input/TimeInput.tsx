@@ -1,13 +1,5 @@
+import { DateInputProps } from 'types/aganda/InputPropTypes';
 import Input from './Input';
-
-interface DateInputProps {
-  name: string;
-  label: string;
-  min?: string;
-  max?: string;
-  value?: string;
-  rest?: Record<string, unknown> | undefined;
-}
 
 function parseDate(date: Date): string {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;

@@ -1,17 +1,5 @@
+import { InputProps } from 'types/aganda/InputPropTypes';
 import styles from 'styles/agenda/Input/Input.module.scss';
-
-interface InputProps {
-  name: string;
-  label: string;
-  type: string;
-  placeholder?: string;
-  discription?: string;
-  max?: number;
-  min?: number;
-  checked?: boolean; // 체크박스
-  className?: string;
-  rest?: Record<string, unknown> | undefined;
-}
 
 const Input = ({ name, label, type, ...rest }: InputProps) => {
   return (

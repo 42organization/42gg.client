@@ -1,13 +1,9 @@
-import { MouseEvent, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import styles from 'styles/agenda/Form/AgendaResultForm.module.scss';
 import { AddElementBtn, DragBtn, RemoveElementBtn } from '../button/Buttons';
 import SelectInput from '../Input/SelectInput';
 
-interface AgendaResultFormProps {
-  teamlist: string[];
-}
-
-const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
+const AgendaResultForm = ({ teamlist }: { teamlist: string[] }) => {
   const [awardlist, setAwardList] = useState<
     {
       award: string;
@@ -20,15 +16,6 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
     { award: '참가상', teams: [] },
   ]);
   const newAwardInputRef = useRef<HTMLInputElement>(null);
-
-  // const addEventHandler = (e: MouseEvent<HTMLLabelElement>) => {
-  //   e.preventDefault();
-  //   alert(newAwardInputRef.current?.value);
-  //   const input: string | undefined = newAwardInputRef.current?.value;
-  //   newAwardInputRef.current ? (newAwardInputRef.current.value = '') : null;
-  //   input ? awardlist.push(input) : null;
-  //   awardlist && input ? setAwardList(awardlist) : null;
-  // };
 
   const addTeam = (idx: number, newTeam: string) => {
     const newAwardList = awardlist;

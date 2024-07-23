@@ -1,10 +1,5 @@
+import { DescriptionProps } from 'types/aganda/InputPropTypes';
 import Input from './Input';
-
-interface DescriptionProps {
-  name: string;
-  label: string;
-  placeholder: string;
-}
 
 const DescriptionInput = ({
   name,

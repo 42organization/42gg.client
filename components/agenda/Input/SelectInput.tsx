@@ -1,14 +1,8 @@
+import { SelectInputProps } from 'types/aganda/InputPropTypes';
 import styles from 'styles/agenda/Input/SelectInput.module.scss';
 
-interface SelectInputProps {
-  data: string[];
-  message?: string;
-  selected?: string;
-  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-}
-
 const SelectInput = ({
-  data,
+  options,
   message,
   selected,
   onChange,
@@ -28,7 +22,7 @@ const SelectInput = ({
       >
         {message ? message : '선택해주세요'}
       </option>
-      {data.map((item: string, idx: number) => (
+      {options.map((item: string, idx: number) => (
         <option
           key={idx}
           className={styles.option}
