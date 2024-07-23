@@ -1,0 +1,46 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  @include container(1);
+}
+
+.header {
+  > h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+}
+
+.description {
+  @include container(3);
+  > p {
+    @include description;
+  }
+}
+
+.teamMateInfo {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+}
+
+.mateContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.coalitionColor {
+  width: 50px;
+  height: 50px;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+}
+
+.connectedUp {
+  background: #1abad3;
+}
+
+.connectedDown {
+  background: #8817bc;
+}
