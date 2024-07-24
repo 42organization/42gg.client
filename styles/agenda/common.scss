@@ -22,14 +22,15 @@ $color-placeholder: #b4a5b5;
 
 // font-family
 $logo-font: 'Overgrow', sans-serif;
-$font-family-menu: 'Simplehae';
+$menu-font: 'Simplehae';
 $bold-text-font: '11StreetGothicBold';
 $regular-text-font: '11StreetGothicRegular';
 $light-text-font: '11StreetGothicLight';
-$font-default: 'Pretendard', sans-serif;
+$inter-font: 'Inter';
+$font-family-menu: 'Simplehae';
+$font-default: 'Pretendard', sans-serif; // 예정
 $common-font: 'Pretendard', sans-serif;
-
-@mixin container($level) {
+/ /예정 @mixin container($level) {
   display: flex;
   width: calc(100% - 2rem);
   max-width: 1200px;
@@ -72,10 +73,12 @@ $font-sizes: (
   medium: 1rem,
   small: 0.8rem,
 );
+
 @function font-size($size) {
   @return map-get($font-sizes, $size);
 }
 
+// 42GG logo
 @mixin logoText($size, $color) {
   font-family: $logo-font;
   font-size: $size;
@@ -161,12 +164,38 @@ $font-sizes: (
   font-weight: 300;
 }
 
-@mixin headCountText($size: $giant-big-font) {
-  font-family: Inter;
-  font-size: $size;
-  font-style: normal;
-  font-weight: 100;
-  line-height: normal;
-  color: #000;
-  text-align: center;
+@mixin text($type) {
+  color: var(--color-text);
+  @if ($type == 'main-menu') {
+    // navbar 메뉴
+    font-family: $font-family-menu;
+    font-size: font-size(big-giant);
+    font-weight: 400;
+  } @else if ($type == 'sub-menu') {
+    // navbar 서브메뉴
+    font-family: $font-family-menu;
+    font-size: font-size(giant);
+    font-weight: 300;
+  } @else if ($type == 'default') {
+    // 기본 텍스트
+    font-family: $regular-text-font;
+    font-size: font-size(medium);
+  } @else if ($type == 'description') {
+    // 제목 뒤에 붙는 설명
+    font-family: $light-text-font;
+    font-size: font-size(small);
+  } @else if ($type == 'title') {
+    // 아젠다,팀 타이틀
+    font-family: $bold-text-font;
+    font-size: font-size(big-giant);
+  } @else if ($type == 'tap') {
+    font-family: $bold-text-font;
+    font-size: font-size(medium);
+  } @else if ($type == 'head-count') {
+    // 인원수 표시하는 부분
+    font-family: $inter-font;
+    font-size: $giant-big-font;
+    font-weight: 100;
+    text-align: center;
+  }
 }
