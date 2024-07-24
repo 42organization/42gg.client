@@ -33,12 +33,15 @@
 }
 
 .announcementTitle {
-  @include boldTextFont(big);
+  @include text('sub-title');
+  // @include boldTextFont(big);
 }
 .announcementDate {
-  @include regularTextFont(medium);
+  @include text('default');
+  // @include regularTextFont(medium);
 }
 
 .announcementContent {
-  @include regularTextFont(medium);
+  @include text('default');
+  // @include regularTextFont(medium);
 }

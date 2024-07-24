@@ -1,7 +1,7 @@
 import React from 'react';
 import { Coalition } from 'constants/agenda/agenda';
-import Participant from 'components/agenda/agendaDetail/taps/Participant';
-import styles from 'styles/agenda/agendaDetail/taps/ParticipantsList.module.scss';
+import Participant from 'components/agenda/agendaDetail/tabs/Participant';
+import styles from 'styles/agenda/agendaDetail/tabs/ParticipantsList.module.scss';
 
 export default function ParticipantsList() {
   const curPeople = 1;

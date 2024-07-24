@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AgendaStatus } from 'constants/agenda/agenda';
-import ParticipantsList from 'components/agenda/agendaDetail/taps/ParticipantsList';
-import styles from 'styles/agenda/agendaDetail/taps/AgendaParticipants.module.scss';
+import ParticipantsList from 'components/agenda/agendaDetail/tabs/ParticipantsList';
+import styles from 'styles/agenda/agendaDetail/tabs/AgendaParticipants.module.scss';
 import ParticipantTeamList from './ParticipantTeamList';
 
 const mockData = {

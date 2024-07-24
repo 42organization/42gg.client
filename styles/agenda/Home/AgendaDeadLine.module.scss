@@ -19,7 +19,7 @@
   }
 
   .agendaDeadLine {
-    @include text(tap);
+    @include text('tab');
     color: var(--color-text-reverse);
   }
 }

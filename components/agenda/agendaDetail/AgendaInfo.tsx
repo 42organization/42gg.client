@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
-import { ParticipantSummaryProps } from 'types/agenda/agendaDetail/taps/agendaInfoTypes';
+import { ParticipantSummaryProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes';
 import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
 import {
   AgendaLocation,

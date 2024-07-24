@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
 import { AgendaStatus } from 'constants/agenda/agenda';
 import { formatDate } from 'components/agenda/utils/formatDate';
-import styles from 'styles/agenda/agendaDetail/taps/AgendaDescription.module.scss';
+import styles from 'styles/agenda/agendaDetail/tabs/AgendaDescription.module.scss';
 
 const mockData: AgendaDataProps = {
   agendaTitle: '아 기다리고기다리던대회',

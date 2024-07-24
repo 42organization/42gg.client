@@ -133,14 +133,6 @@ $font-size-xs: 0.8rem; // $small-font
   }
 }
 
-@mixin boldTitle {
-  // main-menu
-  margin: 1rem 0;
-  font-size: $font-size-xl;
-  font-weight: 700;
-  color: var(--default-font);
-}
-
 @mixin title {
   margin: 1rem 0;
   font-size: $font-size-xl;
@@ -183,7 +175,7 @@ $font-size-xs: 0.8rem; // $small-font
     // 아젠다 리스트 아이템 - 타이틀
     font-family: $font-text-bold;
     font-size: $font-size-m;
-  } @else if ($type == 'tap') {
+  } @else if ($type == 'tab') {
     font-family: $font-text-bold;
     font-size: $font-size-s;
   } @else if ($type == 'default') {
@@ -194,5 +186,9 @@ $font-size-xs: 0.8rem; // $small-font
     // 제목 뒤에 붙는 설명
     font-family: $font-text-light;
     font-size: $font-size-xs;
+  } @else if ($type == 'agenda-title') {
+    font-family: $font-text-bold;
+    font-size: $font-size-xl;
+    font-weight: 700;
   }
 }

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
 import { teamDataProps } from 'types/agenda/team/teamDataTypes';
 import { AgendaStatus } from 'constants/agenda/agenda';
-import ParticipantTeam from 'components/agenda/agendaDetail/taps/ParticipantTeam';
-import styles from 'styles/agenda/agendaDetail/taps/ParticipantTeamList.module.scss';
+import ParticipantTeam from 'components/agenda/agendaDetail/tabs/ParticipantTeam';
+import styles from 'styles/agenda/agendaDetail/tabs/ParticipantTeamList.module.scss';
 
 const agendaMockData: AgendaDataProps = {
   agendaTitle: '아 기다리고기다리던대회',
