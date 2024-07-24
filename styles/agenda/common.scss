@@ -24,6 +24,33 @@ $color-placeholder: #b4a5b5;
 $bg-color-deadline-red: rgba(255, 75, 75, 0.8);
 $agenda-list-bg: linear-gradient(180deg, #fff 65px, rgba(0, 0, 0, 0) 100%),
   url('/image/agenda/42.jpg') lightgray 50% / cover no-repeat;
+// DELETE SOON
+// @mixin titleFont {
+// font-family: $font-menu;
+// font-size: $font-size-xxl;
+// font-weight: 400;
+// }
+// 삭제 예정
+// @mixin subTitleFont {
+// font-family: $font-family-menu;
+// font-size: $font-size-l;
+// font-weight: 300;
+// }
+// 삭제 예정
+// @mixin lightTextFont($size) {
+// font-family: $light-text-font;
+// font-size: font-size($size);
+// }
+// 삭제 예정
+// @mixin regularTextFont($size) {
+// font-family: $regular-text-font;
+// font-size: font-size($size);
+// }
+// 삭제 예정
+// @mixin boldTextFont($size) {
+// font-family: $bold-text-font;
+// font-size: font-size($size);
+// }
 
 // font-family
 $font-text-bold: '11StreetGothicBold';
@@ -34,58 +61,13 @@ $font-inter: 'Inter';
 $font-pretendard: 'Pretendard', sans-serif;
 $font-logo: 'Overgrow', sans-serif;
 
-// font-size
-$font-size-xxl: 2.1rem;
-$font-size-xl: 1.8rem;
-$font-size-l: 1.5rem;
-$font-size-m: 1.2rem;
-$font-size-s: 1rem;
-$font-size-xs: 0.8rem;
-
-// text
-@mixin text($type) {
-  color: var(--color-text);
-  @if ($type == 'head-count') {
-    // 인원수 표시하는 부분
-    font-family: $font-inter;
-    font-size: $font-size-xxl;
-    font-weight: 100;
-    text-align: center;
-  } @else if ($type == 'main-menu') {
-    // navbar 메뉴
-    font-family: $font-menu;
-    font-size: $font-size-xl;
-    font-weight: 400;
-  } @else if ($type == 'sub-menu') {
-    // navbar 서브메뉴
-    font-family: $font-menu;
-    font-size: $font-size-l;
-    font-weight: 300;
-  } @else if ($type == 'title') {
-    // 아젠다,팀 타이틀
-    font-family: $font-text-bold;
-    font-size: $font-size-xl;
-  } @else if ($type == 'date') {
-    // 날짜 - 월,일
-    font-family: $font-text-bold;
-    font-size: $font-size-l;
-  } @else if ($type == 'sub-title') {
-    // 아젠다 리스트 아이템 - 타이틀
-    font-family: $font-text-bold;
-    font-size: $font-size-m;
-  } @else if ($type == 'tap') {
-    font-family: $font-text-bold;
-    font-size: $font-size-s;
-  } @else if ($type == 'default') {
-    // 기본 텍스트
-    font-family: $font-text-regular;
-    font-size: $font-size-s;
-  } @else if ($type == 'description') {
-    // 제목 뒤에 붙는 설명
-    font-family: $font-text-light;
-    font-size: $font-size-xs;
-  }
-}
+/* font-size */
+$font-size-xxl: 2.1rem; // $giant-big-font
+$font-size-xl: 1.8rem; // $big-giant-font
+$font-size-l: 1.5rem; // $giant-font
+$font-size-m: 1.2rem; // $big-font
+$font-size-s: 1rem; // $medium-font
+$font-size-xs: 0.8rem; // $small-font
 
 @mixin container($level) {
   display: flex;
@@ -169,4 +151,48 @@ $font-size-xs: 0.8rem;
 @mixin description {
   font-size: $font-size-xs;
   font-weight: 300;
+}
+
+@mixin text($type) {
+  color: var(--color-text);
+  @if ($type == 'head-count') {
+    // 인원수 표시하는 부분
+    font-family: $font-inter;
+    font-size: $font-size-xxl;
+    font-weight: 100;
+    text-align: center;
+  } @else if ($type == 'main-menu') {
+    // navbar 메뉴
+    font-family: $font-menu;
+    font-size: $font-size-xl;
+    font-weight: 400;
+  } @else if ($type == 'sub-menu') {
+    // navbar 서브메뉴
+    font-family: $font-menu;
+    font-size: $font-size-l;
+    font-weight: 300;
+  } @else if ($type == 'title') {
+    // 아젠다,팀 타이틀
+    font-family: $font-text-bold;
+    font-size: $font-size-xl;
+  } @else if ($type == 'date') {
+    // 날짜 - 월,일
+    font-family: $font-text-bold;
+    font-size: $font-size-l;
+  } @else if ($type == 'sub-title') {
+    // 아젠다 리스트 아이템 - 타이틀
+    font-family: $font-text-bold;
+    font-size: $font-size-m;
+  } @else if ($type == 'tap') {
+    font-family: $font-text-bold;
+    font-size: $font-size-s;
+  } @else if ($type == 'default') {
+    // 기본 텍스트
+    font-family: $font-text-regular;
+    font-size: $font-size-s;
+  } @else if ($type == 'description') {
+    // 제목 뒤에 붙는 설명
+    font-family: $font-text-light;
+    font-size: $font-size-xs;
+  }
 }

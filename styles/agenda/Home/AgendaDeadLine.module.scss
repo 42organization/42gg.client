@@ -8,17 +8,18 @@
   width: 4rem;
   height: 4rem;
   flex-direction: column;
-  color: $color-white;
-  background: $color-deadline-background;
-  border-radius: $circle-radius;
+  background: $bg-color-deadline-red;
+  border-radius: $radius-circle;
   justify-content: center;
   gap: 0.2rem;
 
   .agendaDeadLineText {
-    @include regularTextFont(small);
+    @include text(description);
+    color: var(--color-text-reverse);
   }
 
   .agendaDeadLine {
-    @include boldTextFont(medium);
+    @include text(tap);
+    color: var(--color-text-reverse);
   }
 }
