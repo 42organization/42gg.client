@@ -29,7 +29,7 @@ type AppLayoutProps = {
   children: React.ReactNode;
 };
 
-export default function AppLayout({ children }: AppLayoutProps) {
+function AppLayoutBuild({ children }: AppLayoutProps) {
   const user = useUser();
   const presentPath = useRouter().asPath;
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
@@ -91,3 +91,75 @@ export default function AppLayout({ children }: AppLayoutProps) {
       return <>{children}</>;
   }
 }
+
+function AppLayoutDev({ children }: AppLayoutProps) {
+  // const user = useUser();
+  const presentPath = useRouter().asPath;
+  // const openCurrentMatch = useRecoilValue(openCurrentMatchState);
+
+  // useAxiosResponse();
+  // useGetUserSeason(presentPath);
+  // useSetAfterGameModal();
+  // useLiveCheck(presentPath);
+  // useAnnouncementCheck(presentPath);
+
+  // if (!user || !user.intraId) return null;
+
+  switch (true) {
+    case presentPath.includes('/takgu/admin'):
+      // if (!user.isAdmin) return <AdminReject />;
+      return <AdminLayout>{children}</AdminLayout>;
+
+    case presentPath.includes('/takgu/recruit'):
+      return <RecruitLayout>{children}</RecruitLayout>;
+
+    // case presentPath === '/takgu/statistics' && user.isAdmin:
+    //   return (
+    //     <UserLayout>
+    //       <Statistics />
+    //     </UserLayout>
+    //   );
+
+    case presentPath.includes('/takgu'):
+      return (
+        <>
+          <UserLayout>
+            <HeaderStateContext>
+              <Header />
+            </HeaderStateContext>
+            <PlayButton />
+            <div className={styles.topInfo}>
+              <Megaphone />
+              {/* {openCurrentMatch && <CurrentMatch />} */}
+              {presentPath === '/' && <MainPageProfile />}
+            </div>
+            {children}
+            <Footer />
+          </UserLayout>
+          <ModalProvider />
+        </>
+      );
+
+    case presentPath.includes('/agenda'):
+      return (
+        <>
+          <AgendaUserLayout>
+            <AgendaHeader />
+            {children}
+            <AgendaFooter />
+          </AgendaUserLayout>
+        </>
+      );
+    default:
+      return <>{children}</>;
+  }
+}
+
+let AppLayout;
+if (process.env.NODE_ENV === 'development') {
+  console.log('DEV MODE::: AppLayoutDev');
+  AppLayout = AppLayoutDev;
+} else {
+  AppLayout = AppLayoutBuild;
+}
+export default AppLayout;
