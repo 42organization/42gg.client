@@ -3,7 +3,6 @@ const nextConfig = {
   reactStrictMode: false,
   env: {
     BASE_URL: process.env.BASE_URL,
-    NODE_ENV: process.env.NODE_ENV,
   },
   images: {
     domains: [
