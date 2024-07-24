@@ -10,11 +10,11 @@
 }
 
 .title {
-  @include title;
+  @include text('title');
 }
 
 .description {
-  @include description;
+  @include text('description');
 }
 
 .awardUl {

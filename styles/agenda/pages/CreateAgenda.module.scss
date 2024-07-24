@@ -3,7 +3,7 @@
 .container {
   @include container(1);
   padding: 0.5rem;
-  font-family: $font-default;
+  @include text('default');
   text-align: left;
 }
 
@@ -12,9 +12,9 @@
 }
 
 .title {
-  @include title;
+  @include text('title');
 }
 
 .description {
-  @include description;
+  @include text('description');
 }

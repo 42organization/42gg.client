@@ -24,33 +24,6 @@ $color-placeholder: #b4a5b5;
 $bg-color-deadline-red: rgba(255, 75, 75, 0.8);
 $agenda-list-bg: linear-gradient(180deg, #fff 65px, rgba(0, 0, 0, 0) 100%),
   url('/image/agenda/42.jpg') lightgray 50% / cover no-repeat;
-// DELETE SOON
-// @mixin titleFont {
-// font-family: $font-menu;
-// font-size: $font-size-xxl;
-// font-weight: 400;
-// }
-// 삭제 예정
-// @mixin subTitleFont {
-// font-family: $font-family-menu;
-// font-size: $font-size-l;
-// font-weight: 300;
-// }
-// 삭제 예정
-// @mixin lightTextFont($size) {
-// font-family: $light-text-font;
-// font-size: font-size($size);
-// }
-// 삭제 예정
-// @mixin regularTextFont($size) {
-// font-family: $regular-text-font;
-// font-size: font-size($size);
-// }
-// 삭제 예정
-// @mixin boldTextFont($size) {
-// font-family: $bold-text-font;
-// font-size: font-size($size);
-// }
 
 // font-family
 $font-text-bold: '11StreetGothicBold';
@@ -133,18 +106,6 @@ $font-size-xs: 0.8rem; // $small-font
   }
 }
 
-@mixin title {
-  margin: 1rem 0;
-  font-size: $font-size-xl;
-  font-weight: 500;
-  color: var(--default-font);
-}
-
-@mixin description {
-  font-size: $font-size-xs;
-  font-weight: 300;
-}
-
 @mixin text($type) {
   color: var(--color-text);
   @if ($type == 'head-count') {
@@ -190,5 +151,9 @@ $font-size-xs: 0.8rem; // $small-font
     font-family: $font-text-bold;
     font-size: $font-size-xl;
     font-weight: 700;
+  } @else if ($type == 'label') {
+    // form 내부 label
+    font-size: $font-size-s;
+    font-weight: bold;
   }
 }

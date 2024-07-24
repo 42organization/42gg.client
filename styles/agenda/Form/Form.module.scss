@@ -16,11 +16,11 @@
 }
 
 .title {
-  @include title;
+  @include text('title');
 }
 
 .description {
-  @include description;
+  @include text('description');
 }
 
 %item-container {
@@ -69,9 +69,8 @@
   gap: 0.5rem;
 }
 .label {
+  @include text('label');
   margin: 2rem 0 0.5rem 0.5rem;
-  font-size: $medium-font;
-  font-weight: bold;
 }
 .highlight {
   color: var(--highlight-violet);

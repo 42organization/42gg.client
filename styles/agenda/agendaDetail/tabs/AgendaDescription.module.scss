@@ -15,11 +15,9 @@
 
 .descriptionTitle {
   @include text('sub-title');
-  // @include boldTextFont(big);
 }
 
 .descriptionWarp {
-  // @include regularTextFont(medium);
   @include text('default');
   display: flex;
   flex-direction: column;
@@ -31,7 +29,6 @@
   flex-direction: column;
   gap: 0.5rem;
   h3 {
-    // @include boldTextFont(medium);
     @include text('tab');
   }
 }
