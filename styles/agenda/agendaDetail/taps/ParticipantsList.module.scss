@@ -8,7 +8,5 @@
 }
 
 .participantsTitle {
-  font-size: $big-font;
-  font-weight: 700;
-  color: var(--black);
+  @include boldTextFont(big);
 }

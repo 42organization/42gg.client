@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import createAgenda from 'pages/agenda/create';
+import CreateTeam from 'pages/agenda/[agendaKey]/create-team';
 
 const meta: Meta = {
-  title: 'Agenda/Form/create-agenda',
-  component: createAgenda,
+  title: 'Agenda/Form/create-team',
+  component: CreateTeam,
   tags: ['autodocs'],
 };
 
 export default meta;
-type Story = StoryObj<typeof createAgenda>;
+type Story = StoryObj<typeof CreateTeam>;
 
 export const DarkMode: Story = {
   args: {

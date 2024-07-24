@@ -1,0 +1,24 @@
+@import 'styles/agenda/common.scss';
+
+.agendaItemDeadLineBox {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  width: 4rem;
+  height: 4rem;
+  flex-direction: column;
+  color: $color-white;
+  background: $color-deadline-background;
+  border-radius: $circle-radius;
+  justify-content: center;
+  gap: 0.2rem;
+
+  .agendaDeadLineText {
+    @include regularTextFont(small);
+  }
+
+  .agendaDeadLine {
+    @include boldTextFont(medium);
+  }
+}

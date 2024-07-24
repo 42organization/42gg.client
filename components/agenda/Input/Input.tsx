@@ -4,9 +4,11 @@ import styles from 'styles/agenda/Input/Input.module.scss';
 const Input = ({ name, label, type, ...rest }: InputProps) => {
   return (
     <div className={` ${styles.container} + ${rest?.className}`}>
-      <label htmlFor={name} className={styles.label}>
-        {label}
-      </label>
+      {label ? (
+        <label htmlFor={name} className={styles.label}>
+          {label}
+        </label>
+      ) : null}
       {type === 'checkbox' ? (
         <>
           <input
