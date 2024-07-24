@@ -1,10 +1,5 @@
+import { TapButtonProps } from 'types/agenda/button/tapButtonTypes';
 import styles from 'styles/agenda/button/TapButton.module.scss';
-
-interface TapButtonProps {
-  text: string;
-  isActive?: boolean;
-  onClick: () => void;
-}
 
 export default function TapButton({ text, isActive, onClick }: TapButtonProps) {
   return (

@@ -1,7 +1,14 @@
 @import 'styles/agenda/common.scss';
 
+.participantsWarp {
+  display: flex;
+  width: 100%;
+
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .participantsTitle {
-  font-size: $big-font;
-  font-weight: 700;
-  color: var(--black);
+  @include boldTextFont(big);
 }

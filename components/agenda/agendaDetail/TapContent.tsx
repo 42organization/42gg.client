@@ -1,14 +1,9 @@
-import { TabValues } from 'constants/agenda/agendaDetail/agendaTabs';
+import { TabContentProps } from 'types/agenda/button/tapButtonTypes';
+import AgendaAnnouncements from 'components/agenda/agendaDetail/taps/AgendaAnnouncements';
 import AgendaConditions from 'components/agenda/agendaDetail/taps/AgendaConditions';
 import AgendaDescription from 'components/agenda/agendaDetail/taps/AgendaDescription';
-import AgendaNotifications from 'components/agenda/agendaDetail/taps/AgendaNotifications';
 import AgendaParticipants from 'components/agenda/agendaDetail/taps/AgendaParticipants';
 import styles from 'styles/agenda/agendaDetail/AgendaTap.module.scss';
-
-interface TabContentProps {
-  activeTab: TabValues;
-  tabs: Record<string, TabValues>;
-}
 
 export default function TabContent({ activeTab, tabs }: TabContentProps) {
   const renderContent = () => {
@@ -18,7 +13,7 @@ export default function TabContent({ activeTab, tabs }: TabContentProps) {
       case tabs.PARTICIPANTS:
         return <AgendaParticipants />;
       case tabs.NOTIFICATIONS:
-        return <AgendaNotifications />;
+        return <AgendaAnnouncements />;
       case tabs.CONDITIONS:
         return <AgendaConditions />;
       default:

@@ -1,21 +1,5 @@
 @import 'styles/agenda/common.scss';
 
-.colorWarp {
-  display: flex;
-  align-items: flex-start;
-  width: 100%;
-  gap: 0.5rem;
-  align-self: stretch;
-
-  justify-content: space-between;
-}
-
-.colorBar {
-  width: 100%;
-  height: 1.2rem;
-  border-radius: $medium-radius;
-}
-
 .colorGun {
   background-color: $color-coalition-gun;
 }
@@ -30,4 +14,17 @@
 
 .colorLee {
   background-color: $color-coalition-lee;
+}
+
+.colorSpring {
+  background-color: $color-coalition-spring;
+}
+.colorSummer {
+  background-color: $color-coalition-summer;
+}
+.colorAutumn {
+  background-color: $color-coalition-autumn;
+}
+.colorWinter {
+  background-color: $color-coalition-winter;
 }

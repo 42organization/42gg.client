@@ -3,10 +3,10 @@
 .AddButton {
   display: inline-flex;
 
-  padding: 0.4rem 0.6rem;
+  padding: 0.3rem 0.6rem;
   cursor: pointer;
 
-  background: #fff;
+  background: var(--box-bg-1-light);
 
   border-radius: $medium-radius;
   box-shadow: var(--box-shadow-bottom);
@@ -15,8 +15,6 @@
   gap: 0.3rem;
 
   span {
-    font-family: $common-font;
-    font-size: $medium-font;
-    font-weight: 700;
+    @include boldTextFont(medium);
   }
 }

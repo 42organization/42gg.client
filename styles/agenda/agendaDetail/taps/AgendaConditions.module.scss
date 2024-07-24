@@ -1,29 +1,39 @@
 @import 'styles/agenda/common.scss';
 
 .agendaConditionsContainer {
-  display: flex;
+  @include container(1);
 
   width: 100%;
-
   flex: 1 0 0;
+
   flex-direction: column;
   padding: 1.5rem;
-  gap: 1rem;
-  background: var(--white);
-
-  border: var(--border-light);
-  border-radius: $medium-radius;
-  box-shadow: var(--box-shadow-light);
+  margin: 0;
+  gap: 1.5rem;
   align-items: flex-start;
 }
 
 .conditionTitle {
-  font-size: $big-font;
-  font-weight: 700;
-  color: var(--black);
+  @include boldTextFont(big);
 }
 
 .conditionWarp {
-  font-size: $medium-font;
-  color: var(--black);
+  @include regularTextFont(medium);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.conditionItem {
+  display: flex;
+  // flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+
+  .boldText {
+    @include boldTextFont(medium);
+
+    width: 3rem;
+    text-align: center;
+  }
 }
