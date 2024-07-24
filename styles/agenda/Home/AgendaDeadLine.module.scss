@@ -1,4 +1,4 @@
-@import '../common.scss';
+@import 'styles/agenda/common.scss';
 
 .agendaItemDeadLineBox {
   position: absolute;
@@ -8,8 +8,8 @@
   width: 4rem;
   height: 4rem;
   flex-direction: column;
-  color: #ffffff;
-  background: rgba(255, 75, 75, 0.8);
+  color: $color-white;
+  background: $color-deadline-background;
   border-radius: $circle-radius;
   justify-content: center;
   gap: 0.2rem;

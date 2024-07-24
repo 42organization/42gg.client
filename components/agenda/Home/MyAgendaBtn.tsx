@@ -29,12 +29,12 @@ const MyAgendaBtn = () => {
 
   return (
     <div
-      className={`${styles.myagendaContainer} ${
+      className={`${styles.myAgendaContainer} ${
         widthExpanded ? styles.expandedWidth : ''
       } ${heightExpanded ? styles.expandedHeight : ''}`}
     >
-      <div className={styles.myagendaBtnToggle} onClick={handleClick}>
-        <div className={styles.myagendaText}>my agenda</div>
+      <div className={styles.myAgendaBtnToggle} onClick={handleClick}>
+        <div className={styles.myAgendaText}>my agenda</div>
         <div className={styles.imageWrapper}>
           <Image
             src='/image/agenda/ChevronRight.svg'
@@ -48,7 +48,7 @@ const MyAgendaBtn = () => {
         </div>
       </div>
 
-      <div className={styles.myagendaListContainer}>
+      <div className={styles.myAgendaListContainer}>
         <AgendaItemBtn />
         <AgendaItemBtn />
         <AgendaItemBtn />

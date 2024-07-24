@@ -1,4 +1,4 @@
-@import '../common.scss';
+@import 'styles/agenda/common.scss';
 
 .agendaInfoContainer {
   display: flex;
@@ -50,8 +50,8 @@
 
   .agendaItemTimeBox {
     display: flex;
-    height: 0.9rem;
     align-items: center;
+    height: 0.9rem;
     gap: 1.5rem;
     @include lightTextFont(small);
 

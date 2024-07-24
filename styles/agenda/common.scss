@@ -19,6 +19,23 @@ $color-coalition-lee: #ff8a85;
 
 // color
 $color-placeholder: #b4a5b5;
+$color-white: #ffffff;
+$color-light-gray: #e3e3e3;
+
+// background
+$color-deadline-background: rgba(255, 75, 75, 0.8);
+$color-agenda-list-background: linear-gradient(
+    180deg,
+    #fff 65px,
+    rgba(0, 0, 0, 0) 100%
+  ),
+  url('/image/agenda/42.jpg') lightgray 50% / cover no-repeat;
+
+// border
+$border-common: 0.1rem solid black;
+
+// box-shadow
+$box-bottom-shadow: 0 0.3rem 0.3rem 0 rgba(0, 0, 0, 0.25);
 
 // font-family
 $logo-font: 'Overgrow', sans-serif;
