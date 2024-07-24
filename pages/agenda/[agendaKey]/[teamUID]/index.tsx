@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
+// import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import TeamInfo from 'components/agenda/teamDetail/TeamInfo';
 
 export default function TeamDetail() {
@@ -8,7 +8,7 @@ export default function TeamDetail() {
   const { teamUID } = router.query;
   return (
     <>
-      <AgendaInfo type='team' />
+      {/* <AgendaInfo type='team' /> 이거 어케 가져오지 */}
       <TeamInfo />
       <div>teamKey: {teamUID}</div>
     </>

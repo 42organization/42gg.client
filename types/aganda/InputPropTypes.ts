@@ -9,12 +9,15 @@ export interface InputProps {
   checked?: boolean; // 체크박스
   className?: string;
   rest?: Record<string, unknown> | undefined;
+  defaultValue?: string;
 }
 
 export interface SelectInputProps {
   options: string[];
   message?: string;
   selected?: string;
+  label?: string;
+  name: string;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -56,7 +59,7 @@ export interface DateInputProps {
   label: string;
   min?: string;
   max?: string;
-  value?: string;
+  defaultValue?: string;
   rest?: Record<string, unknown> | undefined;
 }
 
