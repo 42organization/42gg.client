@@ -66,6 +66,13 @@ $font-size-xs: 0.8rem; // $small-font
   }
 }
 
+@mixin inner-container {
+  display: flex;
+  width: 100%;
+  border: var(--default-border);
+  border-radius: $radius-medium;
+}
+
 // 42GG logo
 @mixin logoText($size, $color) {
   font-family: $font-logo;

@@ -6,7 +6,6 @@
 
 .description_input {
   // 확인필요
-  @include container(1);
-  width: calc(100% - 1rem);
+  @include inner-container;
   height: 4rem;
 }
