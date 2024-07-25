@@ -4,7 +4,7 @@ import { ISeason, ISeasonEditInfo } from 'types/takgu/seasonTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/takgu/admin/modal/SeasonEdit.module.scss';
+import styles from 'styles/admin/takgu/modal/SeasonEdit.module.scss';
 
 const AdminSeasonEdit = ({
   seasonId,

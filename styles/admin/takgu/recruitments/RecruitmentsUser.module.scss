@@ -1,0 +1,89 @@
+@import 'styles/admin/takgu/common/Pagination.module.scss';
+@import 'styles/takgu/common.scss';
+@import 'styles/admin/common.scss';
+
+.tableContainer {
+  width: 100px;
+  margin: auto;
+  overflow-x: scroll;
+  .table {
+    width: max-content;
+    min-width: 100%;
+    .tableHeader {
+      background-color: lightgray;
+      .tableHeaderItem {
+        padding: 0.5rem;
+        font-size: $small-font;
+        font-weight: 600;
+        line-height: 150%;
+        text-align: center;
+      }
+    }
+    .tableBody {
+      .tableRow {
+        &:nth-child(odd) {
+          background-color: #f9fafb;
+        }
+        &:nth-child(even) {
+          background-color: #fff;
+        }
+      }
+    }
+    .tableBodyItem {
+      padding: 10px;
+      font-size: $small-font;
+      line-height: 150%;
+      text-align: center;
+    }
+  }
+}
+.searchWrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 0.3rem;
+  :nth-child(2) {
+    margin: 0 0 0 20px;
+  }
+}
+
+.deleteBtn {
+  width: 5rem;
+  height: 1.5rem;
+  color: #ffffff;
+  cursor: pointer;
+  background: #2678f3;
+  border: none;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #929fb3;
+  }
+}
+
+.expandableTableRow {
+  padding: 16px;
+}
+
+.interview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  @include admin-button('PALE-BLUE');
+  padding: 0.5rem 1.3rem;
+  margin-top: 1rem;
+}
+
+.filterWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.3rem;
+}
+
+@include pagination;

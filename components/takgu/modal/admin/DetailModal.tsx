@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import styles from 'styles/takgu/admin/modal/FeedbackDetail.module.scss';
+import styles from 'styles/admin/takgu/modal/FeedbackDetail.module.scss';
 
 export default function DetailModal({
   detailTitle,

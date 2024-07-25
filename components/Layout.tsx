@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { openCurrentMatchState } from 'utils/recoil/takgu/match';
-import AdminReject from 'components/takgu/admin/AdminReject';
-import AdminLayout from 'components/takgu/admin/Layout';
+import AdminReject from 'components/admin/AdminReject';
+import AdminLayout from 'components/admin/Layout';
 import CurrentMatch from 'components/takgu/Layout/CurrentMatch';
 import Footer from 'components/takgu/Layout/Footer';
 import Header from 'components/takgu/Layout/Header';
@@ -43,7 +43,7 @@ function AppLayoutBuild({ children }: AppLayoutProps) {
   if (!user || !user.intraId) return null;
 
   switch (true) {
-    case presentPath.includes('/takgu/admin'):
+    case presentPath.includes('/admin'):
       if (!user.isAdmin) return <AdminReject />;
       return <AdminLayout>{children}</AdminLayout>;
 
@@ -106,7 +106,7 @@ function AppLayoutDev({ children }: AppLayoutProps) {
   // if (!user || !user.intraId) return null;
 
   switch (true) {
-    case presentPath.includes('/takgu/admin'):
+    case presentPath.includes('/admin'):
       // if (!user.isAdmin) return <AdminReject />;
       return <AdminLayout>{children}</AdminLayout>;
 
@@ -162,4 +162,5 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   AppLayout = AppLayoutBuild;
 }
+
 export default AppLayout;

@@ -1,10 +1,10 @@
 import { useSetRecoilState } from 'recoil';
 import { HiCheckCircle } from 'react-icons/hi';
-import { ModifyScoreType } from 'types/takgu/admin/gameLogTypes';
+import { ModifyScoreType } from 'types/admin/gameLogTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/takgu/admin/modal/AdminModifyScoreModal.module.scss';
+import styles from 'styles/admin/takgu/modal/AdminModifyScoreModal.module.scss';
 
 type ModifyScoreBodyType = {
   team1Score: number;

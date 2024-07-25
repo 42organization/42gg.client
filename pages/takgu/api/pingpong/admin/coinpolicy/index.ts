@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { IcoinPolicyHistory } from 'types/takgu/admin/adminCoinTypes';
+import { IcoinPolicyHistory } from 'types/admin/adminCoinTypes';
 
 interface IcoinPolicyHistoryRes {
   coinPolicyList: Array<IcoinPolicyHistory>;
