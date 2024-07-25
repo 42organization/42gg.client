@@ -26,7 +26,7 @@ const mockData: AgendaDataProps = {
 };
 
 export default function AgendaConditions() {
-  const [agendaData, setAgendaData] = useState(null);
+  const [agendaData, setAgendaData] = useState<AgendaDataProps | null>(null);
 
   useEffect(() => {
     setAgendaData(mockData);

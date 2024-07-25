@@ -29,7 +29,7 @@ const mockData: AgendaDataProps = {
 export default function AgendaDescription() {
   // axios로 받아온 데이터
   // agenda?agenda_id=${agendaKey}
-  const [agendaData, setAgendaData] = useState(null);
+  const [agendaData, setAgendaData] = useState<AgendaDataProps | null>(null);
 
   useEffect(() => {
     // axios.get(`/api/agenda?agenda_id=${agendaKey}`)
