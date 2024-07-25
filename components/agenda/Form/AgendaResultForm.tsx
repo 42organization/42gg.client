@@ -8,7 +8,7 @@ interface AgendaResultFormProps {
 }
 
 const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
-  const [awardlist, setAwardList] = useState<
+  const [awardList, setAwardList] = useState<
     {
       award: string;
       teams: string[];
@@ -19,20 +19,25 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
     { award: '참가상', teams: [] },
   ]);
   const newAwardInputRef = useRef<HTMLInputElement>(null);
+  const defaultTeam = '팀을 선택해주세요';
 
-  // const addEventHandler = (e: MouseEvent<HTMLLabelElement>) => {
-  //   e.preventDefault();
-  //   alert(newAwardInputRef.current?.value);
-  //   const input: string | undefined = newAwardInputRef.current?.value;
-  //   newAwardInputRef.current ? (newAwardInputRef.current.value = '') : null;
-  //   input ? awardlist.push(input) : null;
-  //   awardlist && input ? setAwardList(awardlist) : null;
-  // };
-
-  const addTeam = (idx: number, newTeam: string) => {
-    const newAwardList = awardlist;
-    newAwardList[idx].teams.push(newTeam);
-    setAwardList(newAwardList);
+  const addTeam = (
+    idx: number,
+    e: React.ChangeEvent<HTMLSelectElement>,
+    selected: boolean
+  ) => {
+    if (!selected) return;
+    const newTeam = e.target.value;
+    console.log('addTeam called', idx, newTeam);
+    awardList[idx].teams.push(newTeam);
+    e.target.value = defaultTeam;
+    setAwardList([...awardList]);
+  };
+  console.log(awardList);
+  const removeTeam = (idx: number, teamidx: number) => {
+    console.log('removeTeam called', idx, teamidx);
+    awardList[idx].teams.splice(teamidx, 1);
+    setAwardList([...awardList]);
   };
 
   return (
@@ -40,7 +45,7 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
       <h1 className={styles.title}>결과 입력</h1>
       <h2 className={styles.description}>팀별 결과를 입력해주세요</h2>
       <ul className={styles.awardUl}>
-        {awardlist?.map((data, idx) => (
+        {awardList?.map((data, idx) => (
           <li key={idx} className={styles.awardLi}>
             <DragBtn onClick={(e) => alert('DEV::dragbutton called' + e)} />
             <div className={styles.awardContainer}>
@@ -60,14 +65,18 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
                     options={teamlist}
                     name={`selected-team${idx}-${teamidx}`}
                     message='팀을 선택해주세요'
+                    onChange={(e, selected) => {
+                      if (!selected) removeTeam(idx, teamidx);
+                    }}
                   />
                 ))}
                 <SelectInput
                   options={teamlist}
                   name={`unselected-team${idx}`}
                   message='팀을 선택해주세요'
-                  onChange={(e) => {
-                    addTeam(idx, e.target.value);
+                  selected=''
+                  onChange={(e, selected) => {
+                    addTeam(idx, e, selected);
                   }}
                 />
               </div>
@@ -103,8 +112,8 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
       </ul>
       {/* <button
         onClick={() => {
-          awardlist.push('test');
-          setAwardList(awardlist);
+          awardList.push('test');
+          setAwardList(awardList);
         }}
       >
         test
