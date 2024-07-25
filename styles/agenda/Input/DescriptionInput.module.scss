@@ -2,10 +2,26 @@
 
 .container {
   margin: 1rem 0;
+  overflow-y: scroll;
 }
 
 .description_input {
   // 확인필요
   @include inner-container;
-  height: 4rem;
+  height: max-content;
+  padding: 1rem;
+  overflow-y: scroll;
+}
+
+.description_input::-webkit-scrollbar {
+  width: 10px;
+}
+.description_input::-webkit-scrollbar-thumb {
+  background-color: #2f3542;
+  border-radius: 10px;
+}
+.description_input::-webkit-scrollbar-track {
+  background-color: grey;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
 }

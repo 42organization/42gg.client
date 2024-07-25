@@ -1,4 +1,4 @@
-@import 'styles/agenda/common.scss';
+@import 'styles/agenda/Form/Form.module.scss';
 
 .container {
   @include container(1);
@@ -15,6 +15,7 @@
   @include text('title');
 }
 
-.description {
+.descriptionInput {
   @include text('description');
+  padding: 0.5rem;
 }

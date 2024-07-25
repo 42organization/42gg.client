@@ -6,11 +6,11 @@
   display: flex;
   flex-direction: column;
   padding-right: 0;
-  // width: 350px;
 }
 
 .title {
   @include text('title');
+  padding: 1rem;
 }
 
 .description {
@@ -23,6 +23,7 @@
   flex-direction: column;
   padding-right: 0;
   justify-content: flex-end;
+  margin: 0 0 2rem;
 }
 .awardLi {
   display: flex;
