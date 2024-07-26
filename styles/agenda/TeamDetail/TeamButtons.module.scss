@@ -1,0 +1,23 @@
+@import 'styles/agenda/common.scss';
+
+.buttonContainer {
+  @include container(0);
+  width: 100%;
+  height: max-content;
+  flex-direction: row;
+  gap: 5rem;
+}
+
+.button {
+  @include textButton('default', 'default');
+  width: 40%;
+  height: max-content;
+  padding: 1rem;
+}
+
+.confirm_button {
+  @include textButton('default', 'highlight');
+  width: 40%;
+  height: max-content;
+  padding: 1rem;
+}

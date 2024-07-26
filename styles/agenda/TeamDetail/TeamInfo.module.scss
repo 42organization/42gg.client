@@ -18,7 +18,7 @@
   @include container(2);
   border-top-left-radius: 0;
   > p {
-    @include description;
+    @include text('description');
     // font-size: 1rem;
     // font-weight: 500;
   }
@@ -67,4 +67,12 @@
   border-bottom: none;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.mateName {
+  @include text('name');
+  display: flex;
+  font-size: 1rem;
+  font-weight: 500;
+  align-items: center;
 }
