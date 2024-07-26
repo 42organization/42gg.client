@@ -34,12 +34,6 @@ const DateInput = ({
     defaultValue = parseDate(new Date());
   }
 
-  // useEffect(() => {
-  //   const dateControl = document.getElementById(name) as HTMLInputElement;
-  //   if (dateControl?.defaultValue && defaultValue)
-  //     dateControl.defaultValue = defaultValue;
-  //   console.log(defaultValue);
-  // });
   return (
     <Input
       name={name}
@@ -48,11 +42,6 @@ const DateInput = ({
       defaultValue={defaultValue}
       {...rest}
     />
-    // <input
-    //   id='party'
-    //   name='partydate'
-    //   // defaultValue='2017-06-01T08:30'
-    // />
   );
 };
 

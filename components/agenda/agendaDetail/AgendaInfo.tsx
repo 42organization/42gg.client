@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
-import { ParticipantSummaryProps } from 'types/agenda/agendaDetail/taps/agendaInfoTypes';
+import { ParticipantSummaryProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes';
 import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
 import {
   AgendaLocation,
@@ -13,7 +13,7 @@ import { UploadBtn } from 'components/agenda/button/UploadBtn';
 import styles from 'styles/agenda/agendaDetail/AgendaInfo.module.scss';
 
 // 목데이터 생성
-const mockData = {
+const mockData: AgendaDataProps = {
   agendaTitle: '아 기다리고기다리던대회',
   agendaContents:
     '이 대회는 언제부터 시작되어 어쩌구저쩌구 뭐를 겨루려고 했는데 비밀이에요',
@@ -32,6 +32,7 @@ const mockData = {
   createdAt: new Date('2024-07-01'),
   announcementTitle: '대회 공지사항',
   isOfficial: true,
+  agendaisRanking: false,
 };
 
 // 개인상세조회
@@ -110,8 +111,8 @@ export default function AgendaInfo() {
 
   const router = useRouter();
   const { agendaKey } = router.query;
-  const [agendaData, setAgendaData] = useState(null);
-  const [teamListStatus, setTeamListStatus] = useState(null);
+  const [agendaData, setAgendaData] = useState<AgendaDataProps | null>(null);
+  const [teamListStatus, setTeamListStatus] = useState<number>(200);
 
   useEffect(() => {
     // axios.get(`/api/agenda?agenda_id=${agendaKey}`)

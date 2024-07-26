@@ -40,7 +40,7 @@ $info-gradient: linear-gradient(
   justify-content: space-between;
   align-items: center;
   h2 {
-    @include boldTitle;
+    @include text('agenda-title');
   }
 }
 
@@ -58,5 +58,5 @@ $info-gradient: linear-gradient(
 }
 
 .organizerWrap {
-  @include regularTextFont(big);
+  @include text('default'); // medium
 }

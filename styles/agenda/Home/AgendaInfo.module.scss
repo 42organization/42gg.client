@@ -21,14 +21,14 @@
     align-items: center;
     justify-content: center;
     height: 1.5rem;
-    @include boldTextFont(giant);
+    @include text(date);
   }
   .agendaDateDay {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 1.5rem;
-    @include lightTextFont(giant);
+    @include text(date);
   }
 }
 
@@ -45,7 +45,7 @@
     display: flex;
     align-items: center;
     height: 1.5rem;
-    @include boldTextFont(big);
+    @include text(sub-title);
   }
 
   .agendaItemTimeBox {
@@ -53,7 +53,7 @@
     align-items: center;
     height: 0.9rem;
     gap: 1.5rem;
-    @include lightTextFont(small);
+    @include text(description);
 
     .agendaItemTimeWrapper {
       display: flex;

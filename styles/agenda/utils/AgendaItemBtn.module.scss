@@ -7,8 +7,8 @@
   width: 100%;
   min-height: 5.5rem;
   padding: 0 1.2rem;
-  background-color: #ffffff;
-  border: 1px solid #000;
-  border-radius: $big-radius;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background-color: var(--box-bg-1);
+  border: var(--default-border);
+  border-radius: $radius-big;
+  box-shadow: var(--default-box-shadow);
 }

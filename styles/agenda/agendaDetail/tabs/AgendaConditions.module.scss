@@ -1,8 +1,8 @@
 @import 'styles/agenda/common.scss';
 
-.descriptionContainer {
+.agendaConditionsContainer {
   @include container(1);
-  display: flex;
+
   width: 100%;
   flex: 1 0 0;
 
@@ -13,22 +13,26 @@
   align-items: flex-start;
 }
 
-.descriptionTitle {
-  @include boldTextFont(big);
+.conditionTitle {
+  @include text('sub-title');
 }
 
-.descriptionWarp {
-  @include regularTextFont(medium);
+.conditionWarp {
+  @include text('default');
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.descriptionItem {
+.conditionItem {
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   gap: 0.5rem;
-  h3 {
-    @include boldTextFont(medium);
+  flex: 1;
+
+  .boldText {
+    @include text('tab');
+    width: 3rem;
+    text-align: center;
   }
 }

@@ -18,7 +18,10 @@ export interface SelectInputProps {
   selected?: string;
   label?: string;
   name: string;
-  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange?: (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    selected: boolean
+  ) => void;
 }
 
 export interface CheckboxProps {

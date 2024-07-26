@@ -13,10 +13,10 @@ const DescriptionInput = ({
       <label htmlFor={name} className={styles.label}>
         {label}
       </label>
-      <input
+      <textarea
         {...rest}
         name={name}
-        type='description'
+        // type='description'
         id={name}
         className={styles.description_input}
         placeholder={placeholder}

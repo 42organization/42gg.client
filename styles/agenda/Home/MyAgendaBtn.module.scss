@@ -7,15 +7,15 @@
   flex-direction: column;
   padding: 0.55rem 1rem;
   overflow: hidden;
-  background-color: $color-light-gray;
-  border: $border-common;
+  background-color: var(--box-bg-2);
+  border: var(--default-border);
   border-left-style: none;
-  border-top-right-radius: $big-radius;
-  border-bottom-right-radius: $big-radius;
-  box-shadow: 0 0.2rem 0 0 #000;
+  border-top-right-radius: $radius-big;
+  border-bottom-right-radius: $radius-big;
+  box-shadow: var(--default-box-shadow);
   transition: width 0.15s ease, height 0.15s ease;
   gap: 1rem;
-  @include subTitleFont;
+  @include text(sub-menu);
 }
 
 .myAgendaContainer.expandedHeight {

@@ -3,7 +3,7 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { Coalition } from 'constants/agenda/agenda';
-import Participant from 'components/agenda/agendaDetail/taps/Participant';
+import Participant from 'components/agenda/agendaDetail/tabs/Participant';
 
 interface ParticipantProps {
   name: string;
@@ -17,12 +17,15 @@ export default {
     iconType: {
       control: {
         type: 'select',
-        // options: Object.values(),
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        options: Object.values(Coalition),
       },
     },
   },
 } as Meta;
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const Template: Story<ParticipantProps> = (args) => <Participant {...args} />;
 
 export const Gam = Template.bind({});
