@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
-import AgendaTap from 'components/agenda/agendaDetail/AgendaTap';
+import AgendaTab from 'components/agenda/agendaDetail/AgendaTab';
 import styles from 'styles/agenda/agendaDetail/AgendaDetail.module.scss';
 
 export default function AgendaDetail() {
@@ -13,7 +13,7 @@ export default function AgendaDetail() {
     <>
       <div className={styles.agendaDetailWrap}>
         <AgendaInfo />
-        <AgendaTap />
+        <AgendaTab />
         <div key={teamUID}>
           <Link href={`/agenda/${agendaKey}/${teamUID}`}>1번 팀</Link>
         </div>

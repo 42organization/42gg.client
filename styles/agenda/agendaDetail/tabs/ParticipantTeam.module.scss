@@ -31,7 +31,7 @@
 }
 
 .teamTitle {
-  @include boldTextFont(big);
+  @include text('sub-title');
 }
 
 .LeaderIcon {
@@ -46,12 +46,12 @@
   align-self: stretch;
 
   p {
-    @include regularTextFont(medium);
+    @include text('default');
   }
 }
 
 .headCount {
-  @include headCountText();
+  @include text('head-count');
 }
 
 .coalition {

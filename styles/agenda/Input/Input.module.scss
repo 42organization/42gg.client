@@ -2,18 +2,15 @@
 
 .container {
   display: flex;
+  width: 100%;
   flex-direction: column;
-  font-family: $font-default;
   gap: 1rem;
   justify-content: center;
-  // width: max-content;
+  @include text('default');
 }
 .input {
-  width: calc(100% - 1rem);
   padding: 0.5rem;
-  // margin: 0 0.5rem;
   background: none;
-  // border-radius: $small-radius;
   border: none;
   border-bottom: var(--default-border);
   -webkit-appearance: none;
@@ -25,8 +22,6 @@
 }
 
 .label {
+  @include text('label');
   padding: 0 0 0 0.5rem;
-  // margin-bottom: 10px;
-  font-size: $medium-font;
-  font-weight: bold;
 }

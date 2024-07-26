@@ -3,7 +3,7 @@ import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
 import { formatDate } from 'components/agenda/utils/formatDate';
 import DownArrow from 'public/image/agenda/ChevronDown.svg';
 import RightArrow from 'public/image/agenda/ChevronRight.svg';
-import styles from 'styles/agenda/agendaDetail/taps/AnnouncementItem.module.scss';
+import styles from 'styles/agenda/agendaDetail/tabs/AnnouncementItem.module.scss';
 
 export default function AnnouncementItem({
   title,

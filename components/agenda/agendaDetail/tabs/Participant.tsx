@@ -1,7 +1,7 @@
 import React from 'react';
 import { colorMapping, iconMapping } from 'types/agenda/utils/colorList';
 import { Coalition } from 'constants/agenda/agenda';
-import styles from 'styles/agenda/agendaDetail/taps/Participant.module.scss';
+import styles from 'styles/agenda/agendaDetail/tabs/Participant.module.scss';
 
 interface ParticipantProps {
   name: string;

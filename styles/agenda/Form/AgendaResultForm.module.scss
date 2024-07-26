@@ -6,15 +6,15 @@
   display: flex;
   flex-direction: column;
   padding-right: 0;
-  // width: 350px;
 }
 
 .title {
-  @include title;
+  @include text('title');
+  padding: 1rem;
 }
 
 .description {
-  @include description;
+  @include text('description');
 }
 
 .awardUl {
@@ -23,6 +23,7 @@
   flex-direction: column;
   padding-right: 0;
   justify-content: flex-end;
+  margin: 0 0 2rem;
 }
 .awardLi {
   display: flex;

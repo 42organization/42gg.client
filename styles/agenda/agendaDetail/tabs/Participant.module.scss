@@ -8,7 +8,7 @@
   flex: 1 0 0;
   padding: 1rem 0.6rem 1rem 1rem;
 
-  border-radius: $medium-radius;
+  border-radius: $radius-medium;
   box-shadow: var(--box-shadow-bottom);
   align-items: center;
 }
@@ -22,5 +22,5 @@
 }
 
 .participantcontent {
-  @include boldTextFont(medium);
+  @include text('tab');
 }

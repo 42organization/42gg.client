@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
-import AnnouncementItem from 'components/agenda/agendaDetail/taps/AnnouncementItem';
-import styles from 'styles/agenda/agendaDetail/taps/AgendaAnnouncements.module.scss';
+import AnnouncementItem from 'components/agenda/agendaDetail/tabs/AnnouncementItem';
+import styles from 'styles/agenda/agendaDetail/tabs/AgendaAnnouncements.module.scss';
 
 const mockData = [
   {

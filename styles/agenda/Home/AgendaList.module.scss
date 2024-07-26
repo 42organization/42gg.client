@@ -9,7 +9,7 @@
 
   .agendaListTextWrapper {
     margin: 0.5rem;
-    @include subTitleFont;
+    @include text(sub-menu);
   }
 }
 
@@ -31,10 +31,10 @@
   max-height: 600px;
   padding: 0.7rem 1.2rem;
   cursor: pointer;
-  background: $color-agenda-list-background;
-  border: $border-common;
-  border-radius: $medium-radius;
-  box-shadow: $box-bottom-shadow;
+  background: $agenda-list-bg; // poster img url 변수로 변경 예정
+  border: var(--default-border);
+  border-radius: $radius-medium;
+  box-shadow: var(--default-box-shadow);
   justify-content: center;
   align-items: flex-start;
 }

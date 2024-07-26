@@ -1,14 +1,14 @@
 @import 'styles/agenda/common.scss';
 
-.TapButton {
+.TabButton {
   display: flex;
   padding: 0.3rem 0.6rem;
-  @include boldTextFont(medium);
+  @include text('tab');
   cursor: pointer;
 
   background: var(--box-bg-1-light);
   border: var(--border-light);
-  border-radius: $medium-radius;
+  border-radius: $radius-medium;
 
   box-shadow: var(--box-shadow-light);
 

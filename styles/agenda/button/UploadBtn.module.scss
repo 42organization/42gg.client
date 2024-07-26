@@ -8,13 +8,13 @@
 
   background: var(--box-bg-1-light);
 
-  border-radius: $medium-radius;
+  border-radius: $radius-medium;
   box-shadow: var(--box-shadow-bottom);
   justify-content: center;
   align-items: center;
   gap: 0.3rem;
 
   span {
-    @include boldTextFont(medium);
+    @include text('tab');
   }
 }
