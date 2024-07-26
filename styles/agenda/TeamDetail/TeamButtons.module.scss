@@ -2,7 +2,6 @@
 
 .buttonContainer {
   @include container(0);
-  width: 100%;
   height: max-content;
   flex-direction: row;
   gap: 5rem;
