@@ -1,3 +1,4 @@
+import AgendaProfileImageBox from 'components/agenda/Profile/AgendaProfileImageBox';
 import AgendaUserSearchBar from 'components/agenda/Profile/AgendaUserSearchBar';
 import styles from 'styles/agenda/Profile/AgendaProfile.module.scss';
 
@@ -8,6 +9,7 @@ export default function AgendaProfile() {
         <div className={styles.agendaUserSearchBarWrap}>
           <AgendaUserSearchBar />
         </div>
+        <AgendaProfileImageBox />
       </div>
     </>
   );
