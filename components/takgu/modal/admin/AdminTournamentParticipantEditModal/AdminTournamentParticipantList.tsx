@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@mui/material';
-import { ITournamentUser } from 'types/admin/adminTournamentTypes';
+import { ITournamentUser } from 'types/admin/takgu/adminTournamentTypes';
 import styles from 'styles/admin/takgu/modal/AdminTournamentParticipantEditModal.module.scss';
 import AdminTournamentParticipantDeleteConfirmInput from './AdminTournemntParticipantDeleteConfirmInput';
 

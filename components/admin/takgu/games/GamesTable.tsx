@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { IGames, IGameLog } from 'types/admin/gameLogTypes';
+import { IGames, IGameLog } from 'types/admin/takgu/gameLogTypes';
 import { instanceInManage } from 'utils/axios';
 import { getFormattedDateToString, gameTimeToString } from 'utils/handleTime';
 import AdminSearchBar from 'components/admin/takgu/common/AdminSearchBar';

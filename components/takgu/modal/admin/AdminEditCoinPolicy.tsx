@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { IcoinPolicy } from 'types/admin/adminCoinTypes';
+import { IcoinPolicy } from 'types/admin/takgu/adminCoinTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';

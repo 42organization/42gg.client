@@ -8,7 +8,10 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { IFeedback, IFeedbackTable } from 'types/admin/adminFeedbackTypes';
+import {
+  IFeedback,
+  IFeedbackTable,
+} from 'types/admin/takgu/adminFeedbackTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/takgu/modal';

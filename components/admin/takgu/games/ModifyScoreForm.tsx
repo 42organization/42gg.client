@@ -1,5 +1,5 @@
 import { useSetRecoilState } from 'recoil';
-import { ModifyScoreType } from 'types/admin/gameLogTypes';
+import { ModifyScoreType } from 'types/admin/takgu/gameLogTypes';
 import { modalState } from 'utils/recoil/takgu/modal';
 import styles from 'styles/admin/takgu/games/GamesTable.module.scss';
 

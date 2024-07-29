@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { IUserCoin } from 'types/admin/adminUserTypes';
+import { IUserCoin } from 'types/admin/takgu/adminUserTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';

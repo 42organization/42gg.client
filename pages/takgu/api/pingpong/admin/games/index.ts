@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { IGames } from 'types/admin/gameLogTypes';
+import { IGames } from 'types/admin/takgu/gameLogTypes';
 
 interface IQuery {
   page: string;

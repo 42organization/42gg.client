@@ -10,7 +10,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { IitemHistory } from 'types/admin/adminStoreTypes';
+import { IitemHistory } from 'types/admin/takgu/adminStoreTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/takgu/modal';

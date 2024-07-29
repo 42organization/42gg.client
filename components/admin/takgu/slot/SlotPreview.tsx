@@ -3,7 +3,7 @@ import {
   PreviewMatch,
   SlotPreviewProps,
   Slot,
-} from 'types/admin/adminSlotTypes';
+} from 'types/admin/takgu/adminSlotTypes';
 import styles from 'styles/admin/takgu/slot/SlotCurrent.module.scss';
 
 export default function SlotPreview(props: SlotPreviewProps) {

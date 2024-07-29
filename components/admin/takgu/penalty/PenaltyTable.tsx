@@ -8,7 +8,7 @@ import {
   TableCell,
   Paper,
 } from '@mui/material';
-import { IPenalty, IPenaltyTable } from 'types/admin/adminPenaltyTypes';
+import { IPenalty, IPenaltyTable } from 'types/admin/takgu/adminPenaltyTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/takgu/modal';

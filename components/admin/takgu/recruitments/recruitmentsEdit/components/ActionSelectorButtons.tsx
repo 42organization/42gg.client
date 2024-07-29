@@ -15,7 +15,7 @@ import {
   Irecruit,
   RecruitmentsPages,
   recruitListData,
-} from 'types/admin/adminRecruitmentsTypes';
+} from 'types/admin/takgu/adminRecruitmentsTypes';
 import { instance } from 'utils/axios';
 import { dateToDateTimeLocalString } from 'utils/handleTime';
 import { InfiniteScroll } from 'utils/infinityScroll';

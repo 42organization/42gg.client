@@ -11,7 +11,7 @@ import {
 import {
   INotificaionTable,
   INotification,
-} from 'types/admin/adminNotificationTypes';
+} from 'types/admin/takgu/adminNotificationTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/takgu/modal';

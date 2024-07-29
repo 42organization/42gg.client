@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { HiCheckCircle } from 'react-icons/hi';
-import { ModifyScoreType } from 'types/admin/gameLogTypes';
+import { ModifyScoreType } from 'types/admin/takgu/gameLogTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';

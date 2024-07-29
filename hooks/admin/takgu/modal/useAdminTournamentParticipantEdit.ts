@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { ITournamentUser } from 'types/admin/adminTournamentTypes';
+import { ITournamentUser } from 'types/admin/takgu/adminTournamentTypes';
 import { instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 

@@ -1,6 +1,6 @@
 import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
 import { useCallback, useEffect, useState, useRef, createContext } from 'react';
-import { ITournament } from 'types/admin/adminTournamentTypes';
+import { ITournament } from 'types/admin/takgu/adminTournamentTypes';
 import { TournamentGame } from 'types/takgu/tournamentTypes';
 import { instance } from 'utils/axios';
 import { convertTournamentGamesToBracketMatchs } from 'utils/takgu/handleTournamentGame';

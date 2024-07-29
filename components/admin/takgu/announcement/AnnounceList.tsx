@@ -10,7 +10,7 @@ import {
 import {
   IAnnouncement,
   IAnnouncementTable,
-} from 'types/admin/adminAnnouncementTypes';
+} from 'types/admin/takgu/adminAnnouncementTypes';
 import { QUILL_FORMATS } from 'types/takgu/quillTypes';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';

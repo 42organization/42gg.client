@@ -15,7 +15,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import {
   Inotication,
   InoticationTable,
-} from 'types/admin/adminRecruitmentsTypes';
+} from 'types/admin/takgu/adminRecruitmentsTypes';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';

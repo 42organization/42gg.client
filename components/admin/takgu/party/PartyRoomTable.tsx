@@ -8,7 +8,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { PartyRoomColumn } from 'types/admin/adminPartyTypes';
+import { PartyRoomColumn } from 'types/admin/takgu/adminPartyTypes';
 import { dateToStringShort } from 'utils/handleTime';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { tableFormat } from 'constants/admin/table';

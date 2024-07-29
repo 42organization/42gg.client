@@ -12,7 +12,7 @@ import {
   Ireceipt,
   IreceiptTable,
   itemStatusType,
-} from 'types/admin/adminReceiptType';
+} from 'types/admin/takgu/adminReceiptType';
 import { instanceInManage } from 'utils/axios';
 import { dateToStringShort } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';

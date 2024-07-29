@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Button } from '@mui/material';
-import { ITournamentUser } from 'types/admin/adminTournamentTypes';
+import { ITournamentUser } from 'types/admin/takgu/adminTournamentTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';

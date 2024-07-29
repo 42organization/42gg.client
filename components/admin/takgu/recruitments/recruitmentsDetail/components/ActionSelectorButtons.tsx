@@ -5,7 +5,7 @@ import {
   Irecruit,
   RecruitmentEditProps,
   RecruitmentsPages,
-} from 'types/admin/adminRecruitmentsTypes';
+} from 'types/admin/takgu/adminRecruitmentsTypes';
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import styles from 'styles/admin/takgu/recruitments/recruitmentDetail/components/ActionSelectorButtons.module.scss';

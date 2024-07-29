@@ -10,7 +10,7 @@ import {
 import {
   IcheckItem,
   IrecruitUserTable,
-} from 'types/admin/adminRecruitmentsTypes';
+} from 'types/admin/takgu/adminRecruitmentsTypes';
 import useRecruitmentUserFilter from 'hooks/takgu/recruitments/useRecruitmentUserFilter';
 import styles from 'styles/admin/takgu/recruitments/RecruitmentsUser.module.scss';
 import RecruitSearchBar from './RecruitSearchBar';

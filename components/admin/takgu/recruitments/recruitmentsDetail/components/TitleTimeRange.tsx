@@ -6,7 +6,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { Irecruit } from 'types/admin/adminRecruitmentsTypes';
+import { Irecruit } from 'types/admin/takgu/adminRecruitmentsTypes';
 import { dateToStringShort } from 'utils/handleTime';
 import { AdminTableHead } from 'components/admin/takgu/common/AdminTable';
 import styles from 'styles/admin/takgu/recruitments/recruitmentDetail/components/TitleTimeRange.module.scss';

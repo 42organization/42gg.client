@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { TableCell, TableRow, IconButton, TableRowProps } from '@mui/material';
-import { IrecruitUserTable } from 'types/admin/adminRecruitmentsTypes';
+import { IrecruitUserTable } from 'types/admin/takgu/adminRecruitmentsTypes';
 import { DetailContentHover } from 'components/admin/takgu/common/AdminTable';
 import styles from 'styles/admin/takgu/recruitments/RecruitmentsUser.module.scss';
 

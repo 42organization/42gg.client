@@ -4,7 +4,7 @@ import {
   RecruitmentDetailProps,
   RecruitmentEditProps,
   RecruitmentsPages,
-} from 'types/admin/adminRecruitmentsTypes';
+} from 'types/admin/takgu/adminRecruitmentsTypes';
 import RecruitmentDetail from 'components/admin/takgu/recruitments/recruitmentsDetail/RecruitmentDetail';
 import RecruitmentEdit from 'components/admin/takgu/recruitments/recruitmentsEdit/RecruitmentEdit';
 import RecruitmentsMain from 'components/admin/takgu/recruitments/RecruitmentsMain';

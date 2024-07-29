@@ -1,7 +1,10 @@
 import React from 'react';
 import { CheckBox } from '@mui/icons-material';
 import { Grid, Paper, Radio, RadioGroup, TextField } from '@mui/material';
-import { IcheckItem, Iquestion } from 'types/admin/adminRecruitmentsTypes';
+import {
+  IcheckItem,
+  Iquestion,
+} from 'types/admin/takgu/adminRecruitmentsTypes';
 import styles from 'styles/admin/takgu/recruitments/recruitmentDetail/components/QuestionForm.module.scss';
 
 interface CheckInputProps {

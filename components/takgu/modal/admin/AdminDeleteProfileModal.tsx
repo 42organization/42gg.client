@@ -1,5 +1,5 @@
 import { useSetRecoilState } from 'recoil';
-import { Iprofile } from 'types/admin/adminReceiptType';
+import { Iprofile } from 'types/admin/takgu/adminReceiptType';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';

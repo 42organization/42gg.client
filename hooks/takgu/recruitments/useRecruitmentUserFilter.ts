@@ -4,7 +4,7 @@ import { SelectChangeEvent } from '@mui/material';
 import {
   IcheckItem,
   IrecruitArrayTable,
-} from 'types/admin/adminRecruitmentsTypes';
+} from 'types/admin/takgu/adminRecruitmentsTypes';
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 

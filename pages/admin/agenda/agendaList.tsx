@@ -1,4 +1,9 @@
-import styles from 'styles/admin/takgu/announcement/Announcement.module.scss';
+import AgendaListTable from 'components/admin/agenda/agendaList/agendaListTable';
+
 export default function Announcement() {
-  return <div className={styles.container}>agenda</div>;
+  return (
+    <>
+      <AgendaListTable />
+    </>
+  );
 }

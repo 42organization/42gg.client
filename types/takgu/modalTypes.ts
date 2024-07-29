@@ -1,9 +1,9 @@
 import { Value } from 'react-quill';
-import { IcoinPolicy } from 'types/admin/adminCoinTypes';
-import { IFeedback } from 'types/admin/adminFeedbackTypes';
-import { Imegaphone, Iprofile } from 'types/admin/adminReceiptType';
-import { ITournament } from 'types/admin/adminTournamentTypes';
-import { ModifyScoreType } from 'types/admin/gameLogTypes';
+import { IcoinPolicy } from 'types/admin/takgu/adminCoinTypes';
+import { IFeedback } from 'types/admin/takgu/adminFeedbackTypes';
+import { Imegaphone, Iprofile } from 'types/admin/takgu/adminReceiptType';
+import { ITournament } from 'types/admin/takgu/adminTournamentTypes';
+import { ModifyScoreType } from 'types/admin/takgu/gameLogTypes';
 import { CoinResult } from 'types/takgu/coinTypes';
 import { RandomColors } from 'types/takgu/colorModeTypes';
 import { RandomItem, ItemType, UseItemData } from 'types/takgu/inventoryTypes';

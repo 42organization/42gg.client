@@ -1,5 +1,5 @@
 import { useSetRecoilState } from 'recoil';
-import { Imegaphone } from 'types/admin/adminReceiptType';
+import { Imegaphone } from 'types/admin/takgu/adminReceiptType';
 import { instance } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';

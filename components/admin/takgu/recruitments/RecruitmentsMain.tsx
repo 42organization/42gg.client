@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import { Button } from '@mui/material';
-import { RecruitmentsMainProps } from 'types/admin/adminRecruitmentsTypes';
+import { RecruitmentsMainProps } from 'types/admin/takgu/adminRecruitmentsTypes';
 import styles from 'styles/admin/takgu/store/StoreMain.module.scss';
 import RecruitmentsHistoryList from './RecruitmentsHistoryList';
 
