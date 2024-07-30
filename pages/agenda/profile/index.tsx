@@ -1,3 +1,4 @@
+import AgendaParticipatingTeam from 'components/agenda/Profile/AgendaParticipatingTeam';
 import AgendaProfileContent from 'components/agenda/Profile/AgendaProfileContent';
 import AgendaProfileImageBox from 'components/agenda/Profile/AgendaProfileImageBox';
 import AgendaUserSearchBar from 'components/agenda/Profile/AgendaUserSearchBar';
@@ -12,6 +13,7 @@ export default function AgendaProfile() {
         </div>
         <AgendaProfileImageBox />
         <AgendaProfileContent />
+        <AgendaParticipatingTeam />
       </div>
     </>
   );
