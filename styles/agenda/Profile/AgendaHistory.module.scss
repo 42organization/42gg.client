@@ -6,13 +6,20 @@
   height: auto;
   max-height: 32rem;
   flex-direction: column;
-  overflow-y: scroll;
+  padding: 1rem 1.5rem;
+  background-color: var(--box-bg-2);
+  border-radius: $radius-big;
+  gap: 1rem;
 
   .historyTitleText {
     @include text(sub-title);
   }
 
   .historyItems {
-    gap: 1rem;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
