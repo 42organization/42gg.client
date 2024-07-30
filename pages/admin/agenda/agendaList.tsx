@@ -1,9 +1,9 @@
-import AgendaListTable from 'components/admin/agenda/agendaList/agendaListTable';
+import AgendaFillterTab from 'components/admin/agenda/agendaList/AgendaFillterTab';
 
 export default function Announcement() {
   return (
     <>
-      <AgendaListTable />
+      <AgendaFillterTab />
     </>
   );
 }

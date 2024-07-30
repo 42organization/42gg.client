@@ -5,9 +5,9 @@ export const enum AgendaLocation {
 }
 
 export const enum AgendaStatus {
-  CANCEL,
-  ON_GOING,
-  CONFIRM,
+  CANCEL = 'CANCEL',
+  ON_GOING = 'ON_GOING',
+  CONFIRM = 'CONFIRM',
 }
 
 export const enum TeamStatus {
