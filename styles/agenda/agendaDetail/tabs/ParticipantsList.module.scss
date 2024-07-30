@@ -8,5 +8,5 @@
 }
 
 .participantsTitle {
-  @include boldTextFont(big);
+  @include text('sub-title');
 }

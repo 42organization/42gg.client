@@ -1,11 +1,6 @@
+import { DescriptionProps } from 'types/aganda/InputPropTypes';
 import styles from 'styles/agenda/Input/DescriptionInput.module.scss';
-import Input from './Input';
-
-interface DescriptionProps {
-  name: string;
-  label: string;
-  placeholder: string;
-}
+// import Input from './Input';
 
 const DescriptionInput = ({
   name,
@@ -18,10 +13,10 @@ const DescriptionInput = ({
       <label htmlFor={name} className={styles.label}>
         {label}
       </label>
-      <input
+      <textarea
         {...rest}
         name={name}
-        type='description'
+        // type='description'
         id={name}
         className={styles.description_input}
         placeholder={placeholder}

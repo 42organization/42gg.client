@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 import {
   ParticipantTeamProps,
   PeopleCount,
-} from 'types/agenda/agendaDetail/taps/participantTeamTypes';
+} from 'types/agenda/agendaDetail/tabs/participantTeamTypes';
 import { Coalition } from 'constants/agenda/agenda';
 import ColorList from 'components/agenda/utils/ColorList';
 import TeamLeaderIcon from 'public/image/agenda/rock-and-roll-hand.svg';
-import styles from 'styles/agenda/agendaDetail/taps/ParticipantTeam.module.scss';
+import styles from 'styles/agenda/agendaDetail/tabs/ParticipantTeam.module.scss';
 
 const peopleCount: PeopleCount = {
   [Coalition.GUN]: 2,

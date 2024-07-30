@@ -1,6 +1,6 @@
 import { TabValues } from 'constants/agenda/agendaDetail/agendaTabs';
 
-export interface TapButtonProps {
+export interface TabButtonProps {
   text: string;
   isActive?: boolean;
   onClick: () => void;

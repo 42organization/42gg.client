@@ -2,10 +2,10 @@
 // @import 'styles/globals.css';
 
 // radius
-$small-radius: 1rem; // 컴포넌트 속 요소
-$medium-radius: 1.2rem; // 기본 컴포넌트
-$big-radius: 1.4rem; // 제목, 웹용 큰 박스용
-$circle-radius: 50%; // 원
+$radius-small: 1rem; // 컴포넌트 속 요소
+$radius-medium: 1.2rem; // 기본 컴포넌트
+$radius-big: 1.4rem; // 제목, 웹용 큰 박스용
+$radius-circle: 50%; // 원
 
 // coalition
 $color-coalition-autumn: #ffac65;
@@ -19,46 +19,46 @@ $color-coalition-lee: #ff8a85;
 
 // color
 $color-placeholder: #b4a5b5;
-$color-white: #ffffff;
-$color-light-gray: #e3e3e3;
 
-// background
-$color-deadline-background: rgba(255, 75, 75, 0.8);
-$color-agenda-list-background: linear-gradient(
-    180deg,
-    #fff 65px,
-    rgba(0, 0, 0, 0) 100%
-  ),
+// deadline bg color
+$bg-color-deadline-red: rgba(255, 75, 75, 0.8);
+$agenda-list-bg: linear-gradient(180deg, #fff 65px, rgba(0, 0, 0, 0) 100%),
   url('/image/agenda/42.jpg') lightgray 50% / cover no-repeat;
 
-// border
-$border-common: 0.1rem solid black;
-
-// box-shadow
-$box-bottom-shadow: 0 0.3rem 0.3rem 0 rgba(0, 0, 0, 0.25);
-
 // font-family
-$logo-font: 'Overgrow', sans-serif;
-$font-family-menu: 'Simplehae';
-$bold-text-font: '11StreetGothicBold';
-$regular-text-font: '11StreetGothicRegular';
-$light-text-font: '11StreetGothicLight';
-$font-default: 'Pretendard', sans-serif;
-$common-font: 'Pretendard', sans-serif;
+$font-text-bold: '11StreetGothicBold';
+$font-text-regular: '11StreetGothicRegular';
+$font-text-light: '11StreetGothicLight';
+$font-menu: 'Simplehae';
+$font-inter: 'Inter';
+$font-pretendard: 'Pretendard', sans-serif;
+$font-logo: 'Overgrow', sans-serif;
+
+/* font-size */
+$font-size-xxl: 2.1rem; // $giant-big-font
+$font-size-xl: 1.8rem; // $big-giant-font
+$font-size-l: 1.5rem; // $giant-font
+$font-size-m: 1.2rem; // $big-font
+$font-size-s: 1rem; // $medium-font
+$font-size-xs: 0.8rem; // $small-font
 
 @mixin container($level) {
   display: flex;
   width: calc(100% - 2rem);
   max-width: 1200px;
   flex-direction: column;
-  padding: 0 1rem;
+  padding: 1rem;
   margin: 1rem;
   border: var(--default-border);
-  border-radius: $medium-radius;
+  border-radius: $radius-medium;
   box-shadow: var(--default-box-shadow);
   justify-content: center;
   align-items: center;
-  @if $level == 1 {
+  @if $level == 0 {
+    background: none;
+    border: none;
+    box-shadow: none;
+  } @else if $level == 1 {
     background: var(--box-bg-1);
   } @else if $level == 2 {
     background: var(--box-bg-2);
@@ -66,35 +66,20 @@ $common-font: 'Pretendard', sans-serif;
     background: var(--box-bg-3);
   } @else if $level == 'right' {
     background: var(--box-bg-1);
-    border-radius: $medium-radius 0 0 $medium-radius;
+    border-radius: $radius-medium 0 0 $radius-medium;
   }
 }
 
-/* font-size */
-$giant-giant-font: 2.4rem;
-$giant-big-font: 2.1rem;
-$big-giant-font: 1.8rem;
-$giant-font: 1.5rem;
-$big-font: 1.2rem;
-$medium-font: 1rem;
-$small-font: 0.8rem;
-
-/* font-size map */
-$font-sizes: (
-  giant-giant: 2.4rem,
-  giant-big: 2.1rem,
-  big-giant: 1.8rem,
-  giant: 1.5rem,
-  big: 1.2rem,
-  medium: 1rem,
-  small: 0.8rem,
-);
-@function font-size($size) {
-  @return map-get($font-sizes, $size);
+@mixin inner-container {
+  display: flex;
+  width: 100%;
+  border: var(--default-border);
+  border-radius: $radius-medium;
 }
 
+// 42GG logo
 @mixin logoText($size, $color) {
-  font-family: $logo-font;
+  font-family: $font-logo;
   font-size: $size;
   font-weight: 500;
   color: $color;
@@ -102,50 +87,13 @@ $font-sizes: (
   letter-spacing: 0.1rem;
 }
 
-@mixin titleFont {
-  font-family: $font-family-menu;
-  font-size: font-size(big-giant);
-  font-weight: 400;
-}
-
-@mixin subTitleFont {
-  font-family: $font-family-menu;
-  font-size: font-size(giant);
-  font-weight: 300;
-}
-
-@mixin lightTextFont($size) {
-  font-family: $light-text-font;
-  font-size: font-size($size);
-}
-
-@mixin regularTextFont($size) {
-  font-family: $regular-text-font;
-  font-size: font-size($size);
-}
-
-@mixin boldTextFont($size) {
-  font-family: $bold-text-font;
-  font-size: font-size($size);
-}
-
 @mixin textButton($type, $style) {
   padding: 1rem;
-  font-size: $medium-font;
+  font-size: $font-size-s;
   color: var(--default-font);
   border: var(--default-border);
-  border: none;
-  border-radius: $small-radius;
+  border-radius: $radius-small;
   box-shadow: var(--default-box-shadow);
-  @if ($style == 'default') {
-    border-color: var(--default-border);
-  } @else if ($style == 'highlight') {
-    color: white;
-    border-color: var(--highlight-violet);
-  } @else if ($style == 'mid') {
-    border: var(--default-border);
-    box-shadow: var(--default-box-shadow);
-  }
 
   @if ($type == 'submit') {
     width: 3rem;
@@ -157,33 +105,66 @@ $font-sizes: (
     width: 3rem;
     height: 1.5rem;
   }
+
+  @if ($style == 'highlight') {
+    color: var(--highlight-violet);
+    border-color: var(--highlight-violet);
+  } @else if ($style == 'mid') {
+    border: var(--default-border);
+    box-shadow: var(--default-box-shadow);
+  } @else {
+    // default
+  }
 }
 
-@mixin boldTitle {
-  margin: 1rem 0;
-  font-size: $big-giant-font;
-  font-weight: 700;
-  color: var(--default-font);
-}
-
-@mixin title {
-  margin: 1rem 0;
-  font-size: $big-giant-font;
-  font-weight: 500;
-  color: var(--default-font);
-}
-
-@mixin description {
-  font-size: $small-font;
-  font-weight: 300;
-}
-
-@mixin headCountText($size: $giant-big-font) {
-  font-family: Inter;
-  font-size: $size;
-  font-style: normal;
-  font-weight: 100;
-  line-height: normal;
-  color: #000;
-  text-align: center;
+@mixin text($type) {
+  color: var(--color-text);
+  @if ($type == 'head-count') {
+    // 인원수 표시하는 부분
+    font-family: $font-inter;
+    font-size: $font-size-xxl;
+    font-weight: 100;
+    text-align: center;
+  } @else if ($type == 'main-menu') {
+    // navbar 메뉴
+    font-family: $font-menu;
+    font-size: $font-size-xl;
+    font-weight: 400;
+  } @else if ($type == 'sub-menu') {
+    // navbar 서브메뉴
+    font-family: $font-menu;
+    font-size: $font-size-l;
+    font-weight: 300;
+  } @else if ($type == 'title') {
+    // 아젠다,팀 타이틀
+    font-family: $font-text-bold;
+    font-size: $font-size-xl;
+  } @else if ($type == 'date') {
+    // 날짜 - 월,일
+    font-family: $font-text-bold;
+    font-size: $font-size-l;
+  } @else if ($type == 'sub-title') {
+    // 아젠다 리스트 아이템 - 타이틀
+    font-family: $font-text-bold;
+    font-size: $font-size-m;
+  } @else if ($type == 'tab') {
+    font-family: $font-text-bold;
+    font-size: $font-size-s;
+  } @else if ($type == 'default') {
+    // 기본 텍스트
+    font-family: $font-text-regular;
+    font-size: $font-size-s;
+  } @else if ($type == 'description') {
+    // 제목 뒤에 붙는 설명
+    font-family: $font-text-light;
+    font-size: $font-size-xs;
+  } @else if ($type == 'agenda-title') {
+    font-family: $font-text-bold;
+    font-size: $font-size-xl;
+    font-weight: 700;
+  } @else if ($type == 'label') {
+    // form 내부 label
+    font-size: $font-size-s;
+    font-weight: bold;
+  }
 }

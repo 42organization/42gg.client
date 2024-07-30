@@ -155,7 +155,8 @@ function AppLayoutDev({ children }: AppLayoutProps) {
   }
 }
 
-let AppLayout;
+let AppLayout: React.FC<AppLayoutProps>;
+
 if (process.env.NODE_ENV === 'development') {
   console.log('DEV MODE::: AppLayoutDev');
   AppLayout = AppLayoutDev;

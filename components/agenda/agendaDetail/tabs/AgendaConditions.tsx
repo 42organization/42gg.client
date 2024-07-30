@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
 import { AgendaStatus } from 'constants/agenda/agenda';
-import styles from 'styles/agenda/agendaDetail/taps/AgendaConditions.module.scss';
+import styles from 'styles/agenda/agendaDetail/tabs/AgendaConditions.module.scss';
 
 const mockData: AgendaDataProps = {
   agendaTitle: '아 기다리고기다리던대회',
@@ -26,7 +26,7 @@ const mockData: AgendaDataProps = {
 };
 
 export default function AgendaConditions() {
-  const [agendaData, setAgendaData] = useState(null);
+  const [agendaData, setAgendaData] = useState<AgendaDataProps | null>(null);
 
   useEffect(() => {
     setAgendaData(mockData);

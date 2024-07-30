@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
 import { AgendaStatus } from 'constants/agenda/agenda';
-import ParticipantsList from 'components/agenda/agendaDetail/taps/ParticipantsList';
-import styles from 'styles/agenda/agendaDetail/taps/AgendaParticipants.module.scss';
+import ParticipantsList from 'components/agenda/agendaDetail/tabs/ParticipantsList';
+import styles from 'styles/agenda/agendaDetail/tabs/AgendaParticipants.module.scss';
 import ParticipantTeamList from './ParticipantTeamList';
 
-const mockData = {
+const mockData: AgendaDataProps = {
   agendaTitle: '아 기다리고기다리던대회',
   agendaContents:
     '이 대회는 언제부터 시작되어 어쩌구저쩌구 뭐를 겨루려고 했는데 비밀이에요',
@@ -23,10 +24,11 @@ const mockData = {
   createdAt: new Date('2024-07-01'),
   announcementTitle: '대회 공지사항',
   isOfficial: true,
+  agendaisRanking: false,
 };
 
 export default function AgendaParticipants() {
-  const [agendaData, setAgendaData] = useState(null);
+  const [agendaData, setAgendaData] = useState<AgendaDataProps | null>(null);
 
   useEffect(() => {
     setAgendaData(mockData);

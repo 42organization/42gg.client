@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
 import { instanceInAgenda } from 'utils/axios';
 import { formatDate } from 'components/agenda/utils/formatDate';
-import styles from 'styles/agenda/agendaDetail/taps/AgendaDescription.module.scss';
+import styles from 'styles/agenda/agendaDetail/tabs/AgendaDescription.module.scss';
 
 export default function AgendaDescription() {
   const router = useRouter();
@@ -12,24 +12,23 @@ export default function AgendaDescription() {
   const [agendaData, setAgendaData] = useState<AgendaDataProps | null>(null);
 
   const fetchAgendaData = async () => {
-    try {
-      const res = await instanceInAgenda.get(`?agenda_key=${agendaKey}`);
-      setAgendaData(res.data);
-      console.log('agendaData', res.data);
-    } catch (error) {
-      console.error(error);
+    if (agendaKey) {
+      try {
+        const res = await instanceInAgenda.get(`?agenda_key=${agendaKey}`);
+        setAgendaData(res.data);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
   useEffect(() => {
     fetchAgendaData();
-  }, []);
+  }, [agendaKey]);
 
   if (!agendaData) {
     return <div>로딩 중...</div>;
   }
-
-  // --------------------------------------------
 
   const {
     agendaContents,
@@ -39,7 +38,6 @@ export default function AgendaDescription() {
     isOfficial,
     agendaisRanking,
   } = agendaData;
-
   return (
     <>
       <div className={styles.descriptionContainer}>
