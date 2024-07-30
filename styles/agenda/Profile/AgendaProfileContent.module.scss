@@ -3,7 +3,7 @@
 .content {
   display: flex;
   width: 22rem;
-  height: 16rem;
+  height: auto;
   flex-direction: column;
   padding: 1rem;
   background-color: var(--box-bg-1);
@@ -21,8 +21,7 @@
 
   .acheivementContainer {
     width: 100%;
-    height: 15rem;
-    overflow-y: scroll;
+    height: auto;
 
     .acheivementText {
       @include text(sub-menu);
