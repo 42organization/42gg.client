@@ -1,7 +1,8 @@
-import AgendaParticipatingTeam from 'components/agenda/Profile/AgendaParticipatingTeam';
-import AgendaProfileContent from 'components/agenda/Profile/AgendaProfileContent';
-import AgendaProfileImageBox from 'components/agenda/Profile/AgendaProfileImageBox';
+import AgendaHistory from 'components/agenda/Profile/AgendaHistory';
 import AgendaUserSearchBar from 'components/agenda/Profile/AgendaUserSearchBar';
+import ParticipatingTeam from 'components/agenda/Profile/ParticipatingTeam';
+import AgendaProfileContent from 'components/agenda/Profile/ProfileContent';
+import AgendaProfileImageBox from 'components/agenda/Profile/ProfileImageCard';
 import styles from 'styles/agenda/Profile/AgendaProfile.module.scss';
 
 export default function AgendaProfile() {
@@ -13,7 +14,8 @@ export default function AgendaProfile() {
         </div>
         <AgendaProfileImageBox />
         <AgendaProfileContent />
-        <AgendaParticipatingTeam />
+        <ParticipatingTeam />
+        <AgendaHistory />
       </div>
     </>
   );

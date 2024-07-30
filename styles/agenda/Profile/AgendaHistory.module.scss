@@ -1,0 +1,18 @@
+@import 'styles/agenda/common.scss';
+
+.agendaHistory {
+  display: flex;
+  width: 22rem;
+  height: auto;
+  max-height: 32rem;
+  flex-direction: column;
+  overflow-y: scroll;
+
+  .historyTitleText {
+    @include text(sub-title);
+  }
+
+  .historyItems {
+    gap: 1rem;
+  }
+}

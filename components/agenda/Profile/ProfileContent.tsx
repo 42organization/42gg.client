@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import styles from 'styles/agenda/Profile/AgendaProfileContent.module.scss';
+import styles from 'styles/agenda/Profile/ProfileContent.module.scss';
 
-const AgendaProfileContent = () => {
+const ProfileContent = () => {
   return (
-    <div className={styles.content}>
+    <div className={styles.profileContent}>
       <div className={styles.description}>
         안녕하세요. 여기에는 자신의 소개를 간략하게 작성할 수 있습니다! 최대
         길이는 두줄로 하고 싶어요. 아니면 최대 3줄?
@@ -55,4 +55,4 @@ const AgendaProfileContent = () => {
   );
 };
 
-export default AgendaProfileContent;
+export default ProfileContent;

@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import styles from 'styles/agenda/Profile/AgendaProfileImageBox.module.scss';
+import styles from 'styles/agenda/Profile/ProfileImageCard.module.scss';
 
-const AgendaProfileImageBox = () => {
+const ProfileImageCard = () => {
   return (
-    <div className={styles.agendaProfileImageBox}>
+    <div className={styles.profileImageCard}>
       <div className={styles.imageWrapper}>
         <Image
           src='/image/agenda/jeongrol.jpeg'
@@ -18,4 +18,4 @@ const AgendaProfileImageBox = () => {
   );
 };
 
-export default AgendaProfileImageBox;
+export default ProfileImageCard;
