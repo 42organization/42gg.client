@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { openCurrentMatchState } from 'utils/recoil/takgu/match';
+import ErrorChecker from 'components/error/ErrorChecker';
+import LoginChecker from 'components/LoginChecker';
 import AdminReject from 'components/takgu/admin/AdminReject';
 import AdminLayout from 'components/takgu/admin/Layout';
 import CurrentMatch from 'components/takgu/Layout/CurrentMatch';
@@ -18,18 +21,19 @@ import useSetAfterGameModal from 'hooks/takgu/Layout/useSetAfterGameModal';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/takgu/Layout/Layout.module.scss';
-import AgendaFooter from './agenda/Layout/AgendaFooter';
-import AgendaHeader from './agenda/Layout/AgendaHeader';
-import AgendaUserLayout from './agenda/Layout/AgendaUserLayout';
-import PlayButton from './takgu/Layout/PlayButton';
-import UserLayout from './takgu/Layout/UserLayout';
-import ModalProvider from './takgu/modal/ModalProvider';
+import AgendaFooter from '../components/agenda/Layout/AgendaFooter';
+import AgendaHeader from '../components/agenda/Layout/AgendaHeader';
+import AgendaUserLayout from '../components/agenda/Layout/AgendaUserLayout';
+import PlayButton from '../components/takgu/Layout/PlayButton';
+import UserLayout from '../components/takgu/Layout/UserLayout';
+import ModalProvider from '../components/takgu/modal/ModalProvider';
+import CustomizedSnackbars from '../components/takgu/toastmsg/toastmsg';
 
-type AppLayoutProps = {
+type TakguLayoutProps = {
   children: React.ReactNode;
 };
 
-function AppLayoutBuild({ children }: AppLayoutProps) {
+function TakguLayout({ children }: TakguLayoutProps) {
   const user = useUser();
   const presentPath = useRouter().asPath;
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
@@ -76,91 +80,23 @@ function AppLayoutBuild({ children }: AppLayoutProps) {
           <ModalProvider />
         </>
       );
-
-    case presentPath.includes('/agenda'):
-      return (
-        <>
-          <AgendaUserLayout>
-            <AgendaHeader />
-            {children}
-            <AgendaFooter />
-          </AgendaUserLayout>
-        </>
-      );
     default:
       return <>{children}</>;
   }
 }
 
-function AppLayoutDev({ children }: AppLayoutProps) {
-  // const user = useUser();
-  const presentPath = useRouter().asPath;
-  // const openCurrentMatch = useRecoilValue(openCurrentMatchState);
-
-  // useAxiosResponse();
-  // useGetUserSeason(presentPath);
-  // useSetAfterGameModal();
-  // useLiveCheck(presentPath);
-  // useAnnouncementCheck(presentPath);
-
-  // if (!user || !user.intraId) return null;
-
-  switch (true) {
-    case presentPath.includes('/takgu/admin'):
-      // if (!user.isAdmin) return <AdminReject />;
-      return <AdminLayout>{children}</AdminLayout>;
-
-    case presentPath.includes('/takgu/recruit'):
-      return <RecruitLayout>{children}</RecruitLayout>;
-
-    // case presentPath === '/takgu/statistics' && user.isAdmin:
-    //   return (
-    //     <UserLayout>
-    //       <Statistics />
-    //     </UserLayout>
-    //   );
-
-    case presentPath.includes('/takgu'):
-      return (
-        <>
-          <UserLayout>
-            <HeaderStateContext>
-              <Header />
-            </HeaderStateContext>
-            <PlayButton />
-            <div className={styles.topInfo}>
-              <Megaphone />
-              {/* {openCurrentMatch && <CurrentMatch />} */}
-              {presentPath === '/' && <MainPageProfile />}
-            </div>
-            {children}
-            <Footer />
-          </UserLayout>
+const TakguAppLayout = ({ children }: TakguLayoutProps) => {
+  return (
+    <LoginChecker>
+      <ErrorChecker>
+        <QueryClientProvider client={new QueryClient()}>
+          <TakguLayout>{children}</TakguLayout>
           <ModalProvider />
-        </>
-      );
+          <CustomizedSnackbars />
+        </QueryClientProvider>
+      </ErrorChecker>
+    </LoginChecker>
+  );
+};
 
-    case presentPath.includes('/agenda'):
-      return (
-        <>
-          <AgendaUserLayout>
-            <AgendaHeader />
-            {children}
-            <AgendaFooter />
-          </AgendaUserLayout>
-        </>
-      );
-    default:
-      return <>{children}</>;
-  }
-}
-
-let AppLayout: React.FC<AppLayoutProps>;
-
-if (process.env.NODE_ENV === 'development') {
-  console.log('DEV MODE::: AppLayoutDev');
-  AppLayout = AppLayoutDev;
-} else {
-  AppLayout = AppLayoutBuild;
-}
-export default AppLayout;
+export default TakguAppLayout;
