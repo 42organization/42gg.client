@@ -47,14 +47,18 @@ $font-size-xs: 0.8rem; // $small-font
   width: calc(100% - 2rem);
   max-width: 1200px;
   flex-direction: column;
-  padding: 0 1rem;
+  padding: 1rem;
   margin: 1rem;
   border: var(--default-border);
   border-radius: $radius-medium;
   box-shadow: var(--default-box-shadow);
   justify-content: center;
   align-items: center;
-  @if $level == 1 {
+  @if $level == 0 {
+    background: none;
+    border: none;
+    box-shadow: none;
+  } @else if $level == 1 {
     background: var(--box-bg-1);
   } @else if $level == 2 {
     background: var(--box-bg-2);
@@ -88,18 +92,8 @@ $font-size-xs: 0.8rem; // $small-font
   font-size: $font-size-s;
   color: var(--default-font);
   border: var(--default-border);
-  border: none;
   border-radius: $radius-small;
   box-shadow: var(--default-box-shadow);
-  @if ($style == 'default') {
-    border-color: var(--default-border);
-  } @else if ($style == 'highlight') {
-    color: white;
-    border-color: var(--highlight-violet);
-  } @else if ($style == 'mid') {
-    border: var(--default-border);
-    box-shadow: var(--default-box-shadow);
-  }
 
   @if ($type == 'submit') {
     width: 3rem;
@@ -110,6 +104,16 @@ $font-size-xs: 0.8rem; // $small-font
     // default
     width: 3rem;
     height: 1.5rem;
+  }
+
+  @if ($style == 'highlight') {
+    color: var(--highlight-violet);
+    border-color: var(--highlight-violet);
+  } @else if ($style == 'mid') {
+    border: var(--default-border);
+    box-shadow: var(--default-box-shadow);
+  } @else {
+    // default
   }
 }
 

@@ -1,23 +1,12 @@
 import { useRef, useState } from 'react';
+import { SelectInputProps } from 'types/aganda/InputPropTypes';
 import styles from 'styles/agenda/Input/SelectInput.module.scss';
-
-interface SelectInputProps {
-  name: string;
-  label?: string;
-  options: string[];
-  message?: string;
-  selected?: string;
-  onChange?: (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    selected: boolean
-  ) => void;
-}
 
 const SelectInput = ({
   name,
   options,
-  message,
   selected,
+  message,
   label,
   onChange,
   ...rest

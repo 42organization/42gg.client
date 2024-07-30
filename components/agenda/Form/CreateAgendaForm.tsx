@@ -63,6 +63,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
     if (!Array.isArray(newValue)) {
       return;
     }
+    console.log('activeThumb unused', activeThumb); // unused error
     setPeopleLimit(newValue as number[]);
   };
   const handleRecruitEnd = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,4 +1,4 @@
-import { MouseEvent, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import styles from 'styles/agenda/Form/AgendaResultForm.module.scss';
 import { AddElementBtn, DragBtn, RemoveElementBtn } from '../button/Buttons';
 import SelectInput from '../Input/SelectInput';
