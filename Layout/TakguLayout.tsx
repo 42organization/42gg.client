@@ -21,9 +21,6 @@ import useSetAfterGameModal from 'hooks/takgu/Layout/useSetAfterGameModal';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/takgu/Layout/Layout.module.scss';
-import AgendaFooter from '../components/agenda/Layout/AgendaFooter';
-import AgendaHeader from '../components/agenda/Layout/AgendaHeader';
-import AgendaUserLayout from '../components/agenda/Layout/AgendaUserLayout';
 import PlayButton from '../components/takgu/Layout/PlayButton';
 import UserLayout from '../components/takgu/Layout/UserLayout';
 import ModalProvider from '../components/takgu/modal/ModalProvider';
@@ -43,6 +40,8 @@ function TakguLayout({ children }: TakguLayoutProps) {
   useSetAfterGameModal();
   useLiveCheck(presentPath);
   useAnnouncementCheck(presentPath);
+
+  console.log(presentPath);
 
   if (!user || !user.intraId) return null;
 
@@ -85,15 +84,22 @@ function TakguLayout({ children }: TakguLayoutProps) {
   }
 }
 
+{
+  /* UserLayout : 배경색 제공 */
+  /* LoginChecker : 미로그인시 에러 던짐 */
+  /* ErrorChecker : 에러 리코일 체크해서 에러 페이지로 던짐 */
+}
 const TakguAppLayout = ({ children }: TakguLayoutProps) => {
   return (
     <LoginChecker>
       <ErrorChecker>
-        <QueryClientProvider client={new QueryClient()}>
-          <TakguLayout>{children}</TakguLayout>
-          <ModalProvider />
-          <CustomizedSnackbars />
-        </QueryClientProvider>
+        <UserLayout>
+          <QueryClientProvider client={new QueryClient()}>
+            <TakguLayout>{children}</TakguLayout>
+            <ModalProvider />
+            <CustomizedSnackbars />
+          </QueryClientProvider>
+        </UserLayout>
       </ErrorChecker>
     </LoginChecker>
   );
