@@ -1,4 +1,6 @@
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Paper,
   Table,
@@ -14,7 +16,6 @@ import { AgendaStatus } from 'constants/agenda/agenda';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
-
 const itemsPerPage = 10; // 한 페이지에 보여줄 항목 수
 
 export const mockAgendaList = [
@@ -28,7 +29,7 @@ export const mockAgendaList = [
     agendaMinPeople: 1,
     agendaMaxPeople: 10,
     agendaLocation: '장소 1',
-    agendaId: '1',
+    agendaKey: '1',
     isRanking: true,
     isOfficial: false,
     agendaStatus: 'ON_GOING',
@@ -43,7 +44,7 @@ export const mockAgendaList = [
     agendaMinPeople: 1,
     agendaMaxPeople: 10,
     agendaLocation: '장소 1',
-    agendaId: '1',
+    agendaKey: '1',
     isRanking: true,
     isOfficial: true,
     agendaStatus: 'ON_GOING',
@@ -58,7 +59,7 @@ export const mockAgendaList = [
     agendaMinPeople: 1,
     agendaMaxPeople: 10,
     agendaLocation: '장소 2',
-    agendaId: '2',
+    agendaKey: '2',
     isRanking: false,
     isOfficial: true,
     agendaStatus: 'CONFIRM',
@@ -75,10 +76,10 @@ const tableTitle: { [key: string]: string } = {
   // agendaMinPeople: '최소 인원',
   // agendaMaxPeople: '최대 인원',
   agendaLocation: '장소',
-  // agendaId: '아젠다 ID',
+  // agendaKey: '아젠다 ID',
   // isRanking: '랭킹 여부',
   isOfficial: '공식 여부',
-  agendaStatus: '아젠다 상태',
+  agendaStatus: '상태',
 
   // ---------------------
   etc: '기타',
@@ -94,7 +95,7 @@ export interface IAgenda {
   agendaMinPeople: number;
   agendaMaxPeople: number;
   agendaLocation: string;
-  agendaId: string;
+  agendaKey: string;
   isRanking: boolean;
   isOfficial: boolean;
   agendaStatus: string;
@@ -117,6 +118,7 @@ interface AgendaTableProps {
 }
 
 export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
+  const router = useRouter();
   const [agendaInfo, setAgendaInfo] = useState<IAgendaTable>({
     agendaList: [],
     totalPage: 0,
@@ -127,7 +129,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
   // const modal = useRecoilValue(modalState);
   const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
 
-  const handleButtonAction = (buttonName: string, intraId: string) => {
+  const handleButtonAction = (buttonName: string, agenda_key: string) => {
     switch (buttonName) {
       case '대회 수정':
         // setModal({ modalName: 'ADMIN-PROFILE', intraId });
@@ -137,10 +139,10 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
         alert('대회 삭제');
         break;
       case '팀 목록':
-        alert('팀 목록');
+        router.push(`/admin/agenda/teamList?agenda_key=${agenda_key}`);
         break;
       case '공지사항':
-        alert('공지사항');
+        router.push(`/admin/agenda/announcements?agenda_key=${agenda_key}`);
         break;
     }
   };
@@ -225,7 +227,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
           <AdminAgendaTableHead tableName={'agenda'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             {agendaInfo.agendaList.map((agenda: IAgenda) => (
-              <TableRow key={agenda.agendaId} className={styles.tableRow}>
+              <TableRow key={agenda.agendaKey} className={styles.tableRow}>
                 {agendaTableFormat['agenda'].columns.map(
                   (columnName: string, index: number) => {
                     return (
@@ -254,7 +256,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
                                   onClick={() =>
                                     handleButtonAction(
                                       buttonName,
-                                      agenda.agendaId
+                                      agenda.agendaKey
                                     )
                                   }
                                 >

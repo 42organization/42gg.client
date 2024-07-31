@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
 import { AgendaStatus } from 'constants/agenda/agenda';
-import MegaphoneList from 'components/admin/takgu/usageHistory/MegaphoneList';
-import ProfileDeleteHistoryList from 'components/admin/takgu/usageHistory/ProfileDeleteHistoryList';
-import ProfileList from 'components/admin/takgu/usageHistory/ProfileList';
-import ProfileListCurrent from 'components/admin/takgu/usageHistory/ProfileListCurrent';
 import styles from 'styles/admin/takgu/usageHistory/MenuTab.module.scss';
 import AgendaTable from './AgendaTable';
 

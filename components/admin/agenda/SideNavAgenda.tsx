@@ -26,6 +26,14 @@ export default function SideNavParty() {
       </SideNavContent>
       <SideNavContent
         type={'agenda'}
+        url={'/announcements'}
+        menuName={'공지사항 관리'}
+        currentPath={currentPath}
+      >
+        <TbMessageReport className={styles.logo} />
+      </SideNavContent>
+      <SideNavContent
+        type={'agenda'}
         url={'/userList'}
         menuName={'유저 관리'}
         currentPath={currentPath}

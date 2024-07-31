@@ -1,4 +1,3 @@
-import styles from 'styles/admin/takgu/announcement/Announcement.module.scss';
-export default function Announcement() {
-  return <div className={styles.container}>ticket</div>;
+export default function ticket() {
+  return <a>ticket</a>;
 }
