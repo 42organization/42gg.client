@@ -1,14 +1,5 @@
+import { DateInputProps } from 'types/aganda/InputPropTypes';
 import Input from './Input';
-
-interface DateInputProps {
-  name: string;
-  label: string | null;
-  min?: string;
-  max?: string;
-  defaultValue?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
 function parseTen(num: number, tenCount: number): string {
   return num < tenCount ? '0' + num : num.toString();
 }

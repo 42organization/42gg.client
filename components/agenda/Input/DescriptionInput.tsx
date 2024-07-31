@@ -1,11 +1,6 @@
+import { DescriptionProps } from 'types/aganda/InputPropTypes';
 import styles from 'styles/agenda/Input/DescriptionInput.module.scss';
-import Input from './Input';
-
-interface DescriptionProps {
-  name: string;
-  label: string;
-  placeholder: string;
-}
+// import Input from './Input';
 
 const DescriptionInput = ({
   name,

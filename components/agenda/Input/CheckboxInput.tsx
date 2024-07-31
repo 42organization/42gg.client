@@ -1,14 +1,6 @@
+import { CheckboxProps } from 'types/aganda/InputPropTypes';
 import styles from 'styles/agenda/Input/CheckboxInput.module.scss';
 // import Input from './Input';
-interface CheckboxProps {
-  name: string;
-  label: string;
-  options?: string[];
-  discription?: string;
-  checked?: boolean;
-  rest?: Record<string, unknown> | undefined;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
 
 const CheckBoxInput = ({ name, label, options, ...rest }: CheckboxProps) => {
   return (
