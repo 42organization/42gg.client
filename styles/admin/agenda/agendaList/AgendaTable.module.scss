@@ -36,9 +36,11 @@
             font-size: $small-font;
             line-height: 150%;
             text-align: center;
+
             .button {
-              padding: 4px 12px;
-              margin-left: 10px;
+              padding: 0.2rem 0.6rem;
+              margin: 0.2rem;
+
               font-size: $small-font;
               cursor: pointer;
               border: none;

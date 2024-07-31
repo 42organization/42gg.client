@@ -129,20 +129,25 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
   // const modal = useRecoilValue(modalState);
   const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
 
-  const handleButtonAction = (buttonName: string, agenda_key: string) => {
+  const handleButtonAction = (buttonName: string, agendaKey: string) => {
     switch (buttonName) {
+      case '자세히':
+        // setModal({ modalName: 'ADMIN-PROFILE', intraId });
+        alert('자세히');
+        break;
       case '대회 수정':
         // setModal({ modalName: 'ADMIN-PROFILE', intraId });
         alert('대회 수정');
         break;
       case '대회 삭제':
+        // 모달 추가
         alert('대회 삭제');
         break;
       case '팀 목록':
-        router.push(`/admin/agenda/teamList?agenda_key=${agenda_key}`);
+        router.push(`/admin/agenda/teamList?agenda_key=${agendaKey}`);
         break;
       case '공지사항':
-        router.push(`/admin/agenda/announcements?agenda_key=${agenda_key}`);
+        router.push(`/admin/agenda/announcements?agenda_key=${agendaKey}`);
         break;
     }
   };

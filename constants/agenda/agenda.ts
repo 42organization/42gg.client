@@ -11,9 +11,9 @@ export const enum AgendaStatus {
 }
 
 export const enum TeamStatus {
-  OPEN,
-  CANCEL,
-  CONFIRM,
+  OPEN = 'OPEN',
+  CANCEL = 'CANCEL',
+  CONFIRM = 'CONFIRM',
 }
 
 export const enum Coalition {

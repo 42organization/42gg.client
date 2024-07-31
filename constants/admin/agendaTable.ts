@@ -1,3 +1,4 @@
+import { collapseClasses } from '@mui/material';
 import { AgendaTableFormat } from 'types/admin/agenda/agendaTableTypes';
 
 export const agendaTableFormat: AgendaTableFormat = {
@@ -22,7 +23,23 @@ export const agendaTableFormat: AgendaTableFormat = {
     ],
     etc: {
       type: 'button',
-      value: ['대회 수정', '대회 삭제', '팀 목록', '공지사항'],
+      value: ['자세히', '대회 수정', '대회 삭제', '팀 목록', '공지사항'],
+    },
+  },
+  team: {
+    name: '팀 관리',
+    columns: [
+      'teamName',
+      'teamStatus',
+      'teamScore',
+      'teamIsPrivate',
+      'teamLeaderIntraId',
+      'teamMateCount',
+      'etc',
+    ],
+    etc: {
+      type: 'button',
+      value: ['자세히', '팀 수정', '팀 삭제'],
     },
   },
 };
