@@ -8,6 +8,7 @@ const HistoryItem = () => {
       <div className={styles.agendaTitle}>PUSH SWAP 경진 대회</div>
 
       <div className={styles.tagWrapper}>
+        {/* tag mapping */}
         <AgendaTag tagName='공식' />
         <AgendaTag tagName='팀' />
       </div>
@@ -37,6 +38,7 @@ const HistoryItem = () => {
           alt='team'
           className={styles.imageBox}
         />
+        {/* intra id mapping */}
         <div>jeongrol, </div>
         <div>jeongrol, </div>
         <div>jeongrol</div>

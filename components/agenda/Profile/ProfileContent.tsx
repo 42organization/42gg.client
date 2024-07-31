@@ -13,6 +13,7 @@ const ProfileContent = () => {
       <div className={styles.acheivementContainer}>
         <div className={styles.acheivementText}>Acheivements</div>
         <div className={styles.acheivementImageContainer}>
+          {/* acheivement mapping */}
           <div className={styles.imageWrapper}>
             <Image
               src='/image/agenda/acheivement.svg'

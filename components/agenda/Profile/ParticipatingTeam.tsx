@@ -8,10 +8,6 @@ const ParticipatingTeam = () => {
       <div className={styles.participatingItems}>
         <ParticipatingAgendaItem />
         <ParticipatingAgendaItem />
-        <ParticipatingAgendaItem />
-        <ParticipatingAgendaItem />
-        <ParticipatingAgendaItem />
-        <ParticipatingAgendaItem />
       </div>
     </div>
   );

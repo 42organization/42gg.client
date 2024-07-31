@@ -14,6 +14,26 @@ const ProfileImageCard = () => {
         />
       </div>
       <div className={styles.userName}>jeongrol</div>
+      <div className={styles.linkImages}>
+        <div className={styles.imageWrapper}>
+          <Image
+            src='/image/agenda/github.svg'
+            alt='profile image'
+            width={30}
+            height={30}
+            className={styles.imageBox}
+          />
+        </div>
+        <div className={styles.imageWrapper}>
+          <Image
+            src='/image/agenda/42-icon.svg'
+            alt='profile image'
+            width={30}
+            height={30}
+            className={styles.imageBox}
+          />
+        </div>
+      </div>
     </div>
   );
 };

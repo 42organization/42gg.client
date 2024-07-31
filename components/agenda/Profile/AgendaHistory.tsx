@@ -6,6 +6,7 @@ const AgendaHistory = () => {
     <div className={styles.agendaHistory}>
       <div className={styles.historyTitleText}>아젠다 기록</div>
       <div className={styles.historyItems}>
+        {/* agenda history mapping */}
         <HistoryItem />
         <HistoryItem />
       </div>
