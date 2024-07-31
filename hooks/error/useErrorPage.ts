@@ -9,11 +9,11 @@ const useErrorPage = () => {
 
   const goHome = () => {
     setError('');
-    router.push('/takgu');
+    router.push('/');
   };
 
   useEffect(() => {
-    router.replace(`/takgu`);
+    router.replace(`/`);
   }, []);
 
   return { error, goHome };
