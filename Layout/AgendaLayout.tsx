@@ -9,6 +9,7 @@ import useLiveCheck from 'hooks/takgu/Layout/useLiveCheck';
 import useSetAfterGameModal from 'hooks/takgu/Layout/useSetAfterGameModal';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import useAxiosResponse from 'hooks/useAxiosResponse';
+import styles from 'styles/agenda/Layout/Layout.module.scss';
 import ModalProvider from '../components/takgu/modal/ModalProvider';
 import CustomizedSnackbars from '../components/takgu/toastmsg/toastmsg';
 
@@ -28,7 +29,7 @@ function AgendaAppLayout({ children }: AgendaLayoutProps) {
 
   if (!user || !user.intraId) return null;
   return (
-    <>
+    <div className={styles.background}>
       <LoginChecker>
         <ErrorChecker>
           <QueryClientProvider client={new QueryClient()}>
@@ -39,7 +40,7 @@ function AgendaAppLayout({ children }: AgendaLayoutProps) {
           </QueryClientProvider>
         </ErrorChecker>
       </LoginChecker>
-    </>
+    </div>
   );
 }
 

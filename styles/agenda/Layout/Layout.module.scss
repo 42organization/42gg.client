@@ -1,12 +1,11 @@
-.appContainer {
-  display: flex;
-  width: 100vw;
-  min-width: 380px;
-  flex-direction: column;
-  background: black;
-  align-items: center;
-}
-
+@import 'styles/agenda/common.scss'; // .appContainer {
+//   display: flex;
+//   width: 100vw;
+//   min-width: 380px;
+//   flex-direction: column;
+//   background: black;
+//   align-items: center;
+// }
 .background {
   position: relative;
   width: 100vw;
@@ -16,4 +15,5 @@
   background: var(--color-bg);
   background-attachment: fixed;
   background-position: center;
+  background-size: cover;
 }
