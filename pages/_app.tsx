@@ -6,10 +6,10 @@ import { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 import ErrorChecker from 'components/error/ErrorChecker';
-import Layout from 'components/Layout';
 import LoginChecker from 'components/LoginChecker';
 import ModalProvider from 'components/takgu/modal/ModalProvider';
 import CustomizedSnackbars from 'components/takgu/toastmsg/toastmsg';
+import LayoutProvider from 'Layout/LayoutProvider';
 import * as gtag from 'lib/gtag';
 import 'styles/globals.css';
 
@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
 
   useEffect(() => {
-    const handleRouteChange = (url: any) => {
+    const handleRouteChange = (url: string) => {
       gtag.pageview(url);
     };
     router.events.on('routeChangeComplete', handleRouteChange);
@@ -26,14 +26,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
-
   return (
     <>
       <Head>
         <title>42gg</title>
-        {router.pathname.startsWith('/agenda') && (
-          <link rel='stylesheet' href='/styles/reset.css' />
-        )}
       </Head>
       <Script
         strategy='afterInteractive'
@@ -57,10 +53,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <LoginChecker>
           <ErrorChecker>
             <QueryClientProvider client={queryClient}>
-              <Layout>
+              <LayoutProvider>
                 <Component {...pageProps} />
-              </Layout>
-              {/* <ModalProvider /> */}
+                <ModalProvider />
+              </LayoutProvider>
               <CustomizedSnackbars />
             </QueryClientProvider>
           </ErrorChecker>

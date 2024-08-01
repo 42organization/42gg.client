@@ -63,6 +63,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
     if (!Array.isArray(newValue)) {
       return;
     }
+    console.log('activeThumb unused', activeThumb); // unused error
     setPeopleLimit(newValue as number[]);
   };
   const handleRecruitEnd = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -139,7 +140,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
       <div className={styles.topContainer}>
         <div className={styles.label_container}>
           <h3 className={styles.label}>모집마감까지 </h3>
-          <h3 className={`${styles.label} + ${styles.highlight}`}>
+          <h3 className={`${styles.label} ${styles.highlight}`}>
             {parseDate(new Date(recruitEnd.getTime() - today.getTime()))}
           </h3>
         </div>
@@ -155,7 +156,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
         <div className={styles.label_container}>
           <h3 className={styles.label}>등록 가능 팀 수</h3>
           <p
-            className={`${styles.label} + ${styles.highlight}`}
+            className={`${styles.label} ${styles.highlight}`}
           >{`${teamLimit[0]}팀 ~ ${teamLimit[1]}팀`}</p>
         </div>
         <div className={styles.sliderContainer}>

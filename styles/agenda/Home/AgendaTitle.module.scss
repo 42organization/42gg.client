@@ -1,27 +1,27 @@
-@import '../common.scss';
+@import 'styles/agenda/common.scss';
 
 .agendaTitleContainer {
   display: flex;
-  width: 100%;
-  padding: 0 1rem;
   justify-content: space-between;
   align-items: center;
-  @include titleFont;
+  width: 100%;
+  padding: 0 1rem;
+  @include text(main-menu);
 
   .agendaCreateBtn {
     display: flex;
-    align-items: center;
     cursor: pointer;
     background: none;
     border: none;
-    @include lightTextFont(medium);
+    align-items: center;
+    @include text(description);
 
     .imageWrapper {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1rem;
+      height: 1rem;
 
       .imageBox {
         width: 100%;

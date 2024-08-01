@@ -1,0 +1,25 @@
+@import 'styles/agenda/common.scss';
+
+.agendaHistory {
+  display: flex;
+  width: 22rem;
+  height: auto;
+  max-height: 32rem;
+  flex-direction: column;
+  padding: 1rem 1.5rem;
+  background-color: var(--box-bg-2);
+  border-radius: $radius-big;
+  gap: 1rem;
+
+  .historyTitleText {
+    @include text(sub-title);
+  }
+
+  .historyItems {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

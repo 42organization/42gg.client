@@ -1,4 +1,4 @@
-@import '../common.scss';
+@import 'styles/agenda/common.scss';
 
 .agendaListContainer {
   display: flex;
@@ -9,7 +9,7 @@
 
   .agendaListTextWrapper {
     margin: 0.5rem;
-    @include subTitleFont;
+    @include text(sub-menu);
   }
 }
 
@@ -17,7 +17,7 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .agendaListItemBtn {
@@ -29,92 +29,12 @@
   height: calc(150px + (100vw - 352px) * ((600 - 150) / (750 - 352)));
   min-height: 180px;
   max-height: 600px;
-  flex-direction: column;
-  padding: 1rem 0.6rem;
+  padding: 0.7rem 1.2rem;
   cursor: pointer;
-  background: linear-gradient(180deg, #fff 37%, rgba(0, 0, 0, 0) 100%),
-    url('/image/agenda/42.jpg') lightgray 50% / cover no-repeat;
-  border: 0.1rem solid black;
-  border-radius: $medium-radius;
-
-  .agendaInfoContainer {
-    display: flex;
-    width: 100%;
-    gap: 1.5rem;
-  }
-  .agendaDateBox {
-    width: 2.5rem;
-    margin-left: 0.5rem;
-    .agendaDateMonth {
-      @include boldTextFont(giant);
-    }
-    .agendaDateDay {
-      @include lightTextFont(giant);
-    }
-  }
-
-  .agendaItemDeadLineBox {
-    position: absolute;
-    right: 2rem;
-    bottom: 2rem;
-    display: flex;
-    width: 4rem;
-    height: 4rem;
-    flex-direction: column;
-    color: #ffffff;
-    background: rgba(255, 75, 75, 0.39);
-    border-radius: $circle-radius;
-    justify-content: center;
-    gap: 0.2rem;
-
-    .agendaDeadLineText {
-      @include regularTextFont(small);
-    }
-
-    .agendaDeadLine {
-      @include boldTextFont(medium);
-    }
-  }
-
-  .agendaInfoWrapper {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.1rem;
-
-    .agendaItemTitleBox {
-      @include boldTextFont(big);
-    }
-
-    .agendaItemTimeBox {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      @include lightTextFont(small);
-
-      .agendaItemTimeWrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-      }
-    }
-
-    .agendaItemTagBox {
-      display: flex;
-      gap: 1rem;
-      margin-top: 0.4rem;
-    }
-  }
-}
-
-.imageWrapper {
-  display: flex;
-  width: 0.8rem;
-  height: 0.8rem;
-  .imageBox {
-    width: 100%;
-    height: 100%;
-  }
+  background: $agenda-list-bg; // poster img url 변수로 변경 예정
+  border: var(--default-border);
+  border-radius: $radius-medium;
+  box-shadow: var(--default-box-shadow);
+  justify-content: center;
+  align-items: flex-start;
 }

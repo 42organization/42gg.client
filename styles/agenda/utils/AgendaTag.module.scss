@@ -1,8 +1,12 @@
 @import '../common.scss';
 
 .agendaTag {
-  padding: 0.1rem 0.7rem;
-  color: #ffffff;
-  border-radius: $medium-radius;
-  @include regularTextFont(small);
+  display: flex;
+  width: 3.3rem;
+  height: 1.2rem;
+  color: var(--color-text-reverse);
+  border-radius: $radius-medium;
+  justify-content: center;
+  align-items: center;
+  @include text(description);
 }
