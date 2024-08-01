@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 import ErrorChecker from 'components/error/ErrorChecker';
 import LoginChecker from 'components/LoginChecker';
+import ModalProvider from 'components/takgu/modal/ModalProvider';
 import CustomizedSnackbars from 'components/takgu/toastmsg/toastmsg';
 import * as gtag from 'lib/gtag';
 import 'styles/globals.css';
@@ -17,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
 
   useEffect(() => {
-    const handleRouteChange = (url: any) => {
+    const handleRouteChange = (url: string) => {
       gtag.pageview(url);
     };
     router.events.on('routeChangeComplete', handleRouteChange);
@@ -25,7 +26,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
-
   return (
     <>
       <Head>
@@ -53,17 +53,17 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
       <RecoilRoot>
-        {/* <LoginChecker>
-          <ErrorChecker> */}
-        <QueryClientProvider client={queryClient}>
-          <LayoutProvider>
-            <Component {...pageProps} />
-          </LayoutProvider>
-          {/* <ModalProvider /> */}
-          <CustomizedSnackbars />
-        </QueryClientProvider>
-        {/* </ErrorChecker>
-        </LoginChecker> */}
+        <LoginChecker>
+          <ErrorChecker>
+            <QueryClientProvider client={queryClient}>
+              <LayoutProvider>
+                <Component {...pageProps} />
+                <ModalProvider />
+              </LayoutProvider>
+              <CustomizedSnackbars />
+            </QueryClientProvider>
+          </ErrorChecker>
+        </LoginChecker>
       </RecoilRoot>
     </>
   );

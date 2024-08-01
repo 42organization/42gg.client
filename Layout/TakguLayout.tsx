@@ -1,9 +1,6 @@
 import { useRouter } from 'next/router';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { openCurrentMatchState } from 'utils/recoil/takgu/match';
-import ErrorChecker from 'components/error/ErrorChecker';
-import LoginChecker from 'components/LoginChecker';
 import AdminReject from 'components/takgu/admin/AdminReject';
 import AdminLayout from 'components/takgu/admin/Layout';
 import CurrentMatch from 'components/takgu/Layout/CurrentMatch';
@@ -91,17 +88,11 @@ function TakguLayout({ children }: TakguLayoutProps) {
 }
 const TakguAppLayout = ({ children }: TakguLayoutProps) => {
   return (
-    <LoginChecker>
-      <ErrorChecker>
-        <UserLayout>
-          <QueryClientProvider client={new QueryClient()}>
-            <TakguLayout>{children}</TakguLayout>
-            <ModalProvider />
-            <CustomizedSnackbars />
-          </QueryClientProvider>
-        </UserLayout>
-      </ErrorChecker>
-    </LoginChecker>
+    <UserLayout>
+      <TakguLayout>{children}</TakguLayout>
+      <ModalProvider />
+      <CustomizedSnackbars />
+    </UserLayout>
   );
 };
 
