@@ -1,7 +1,7 @@
 export const enum AgendaLocation {
-  SEOUL,
-  GYEONGSAN,
-  MIX,
+  SEOUL = 'SEOUL',
+  GYEONGSAN = 'GYEONGSAN',
+  MIX = 'MIX',
 }
 
 export const enum AgendaStatus {
@@ -17,13 +17,25 @@ export const enum TeamStatus {
 }
 
 export const enum Coalition {
-  GUN,
-  GON,
-  GAM,
-  LEE,
-  SPRING,
-  SUMMER,
-  AUTUMN,
-  WINTER,
-  OTHER,
+  GUN = 'GUN',
+  GON = 'GON',
+  GAM = 'GAM',
+  LEE = 'LEE',
+  SPRING = 'SPRING',
+  SUMMER = 'SUMMER',
+  AUTUMN = 'AUTUMN',
+  WINTER = 'WINTER',
+  OTHER = 'OTHER',
 }
+
+export const coalitionValues = [
+  Coalition.GUN,
+  Coalition.GON,
+  Coalition.GAM,
+  Coalition.LEE,
+  Coalition.SPRING,
+  Coalition.SUMMER,
+  Coalition.AUTUMN,
+  Coalition.WINTER,
+  Coalition.OTHER,
+];
