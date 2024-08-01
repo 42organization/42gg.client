@@ -1,17 +1,11 @@
-@import 'styles/agenda/common.scss'; // .appContainer {
-//   display: flex;
-//   width: 100vw;
-//   min-width: 380px;
-//   flex-direction: column;
-//   background: black;
-//   align-items: center;
-// }
+@import 'styles/agenda/common.scss';
 .background {
   position: relative;
+  display: flex;
   width: 100vw;
   min-width: 380px;
-  max-width: 100vh;
   min-height: 100vh;
+  flex-direction: column;
   background: var(--color-bg);
   background-attachment: fixed;
   background-position: center;

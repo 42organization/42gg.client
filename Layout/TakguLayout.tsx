@@ -41,21 +41,21 @@ function TakguLayout({ children }: TakguLayoutProps) {
   if (!user || !user.intraId) return null;
 
   switch (true) {
-    case presentPath.includes('/takgu/admin'):
+    case presentPath.includes('takgu/admin'):
       if (!user.isAdmin) return <AdminReject />;
       return <AdminLayout>{children}</AdminLayout>;
 
-    case presentPath.includes('/takgu/recruit'):
+    case presentPath.includes('takgu/recruit'):
       return <RecruitLayout>{children}</RecruitLayout>;
 
-    case presentPath === '/takgu/statistics' && user.isAdmin:
+    case presentPath === 'takgu/statistics' && user.isAdmin:
       return (
         <UserLayout>
           <Statistics />
         </UserLayout>
       );
 
-    case presentPath.includes('/takgu'):
+    case presentPath.includes('takgu'):
       return (
         <>
           <UserLayout>

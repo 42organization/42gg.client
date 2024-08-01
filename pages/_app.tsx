@@ -9,9 +9,9 @@ import ErrorChecker from 'components/error/ErrorChecker';
 import LoginChecker from 'components/LoginChecker';
 import ModalProvider from 'components/takgu/modal/ModalProvider';
 import CustomizedSnackbars from 'components/takgu/toastmsg/toastmsg';
+import LayoutProvider from 'Layout/LayoutProvider';
 import * as gtag from 'lib/gtag';
 import 'styles/globals.css';
-import LayoutProvider from '../Layout/LayoutProvider';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
