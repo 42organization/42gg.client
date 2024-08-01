@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { openCurrentMatchState } from 'utils/recoil/takgu/match';
 import AdminReject from 'components/takgu/admin/AdminReject';
@@ -11,6 +10,7 @@ import MainPageProfile from 'components/takgu/Layout/MainPageProfile';
 import Megaphone from 'components/takgu/Layout/MegaPhone';
 import RecruitLayout from 'components/takgu/recruit/RecruitLayout';
 import Statistics from 'pages/takgu/statistics';
+import { usePathname } from 'hooks/agenda/Layout/usePathname';
 import useAnnouncementCheck from 'hooks/takgu/Layout/useAnnouncementCheck';
 import useGetUserSeason from 'hooks/takgu/Layout/useGetUserSeason';
 import useLiveCheck from 'hooks/takgu/Layout/useLiveCheck';
@@ -29,7 +29,7 @@ type TakguLayoutProps = {
 
 function TakguLayout({ children }: TakguLayoutProps) {
   const user = useUser();
-  const presentPath = useRouter().asPath;
+  const presentPath = usePathname();
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
 
   useAxiosResponse();
@@ -37,8 +37,6 @@ function TakguLayout({ children }: TakguLayoutProps) {
   useSetAfterGameModal();
   useLiveCheck(presentPath);
   useAnnouncementCheck(presentPath);
-
-  console.log(presentPath);
 
   if (!user || !user.intraId) return null;
 

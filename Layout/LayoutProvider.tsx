@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { usePathname } from 'hooks/agenda/Layout/usePathname';
 import AgendaAppLayout from './AgendaLayout';
 import TakguAppLayout from './TakguLayout';
 type LayoutProviderProps = {
@@ -8,9 +8,7 @@ type LayoutProviderProps = {
 // 현재 페이지가 어떤 레이아웃을 사용할지 결정
 // 로그인 스테이트 등은 각 레이아웃에서 확인
 const LayoutProvider = ({ children }: LayoutProviderProps) => {
-  const presentPath = useRouter().pathname;
-  const app = presentPath.split('/')[1];
-  console.log(app);
+  const app = usePathname();
 
   switch (app) {
     case 'agenda':
