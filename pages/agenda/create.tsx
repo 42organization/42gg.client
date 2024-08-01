@@ -26,12 +26,15 @@ const saveLocal = () => {
 const submitTeamForm = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   console.log(e.target);
+  const form = document.querySelector('form');
+  console.log(form);
   const data = new FormData(e.target as HTMLFormElement);
-  console.log(data);
+  for (const key of data.keys()) {
+    console.log(key, data.get(key));
+  }
 };
 
 const CreateAgenda = () => {
-  const agendaData = useRef<AgendaProps>({} as AgendaProps);
   return (
     <div className={styles.container}>
       <div>
@@ -39,7 +42,7 @@ const CreateAgenda = () => {
       </div>
       <h2 className={styles.title}>새로운 아젠다 만들기</h2>
       <p className={styles.description}>당부사항</p>
-      <CreateAgendaForm handleSubmit={submitTeamForm} data={agendaData} />
+      <CreateAgendaForm handleSubmit={submitTeamForm} />
     </div>
   );
 };
