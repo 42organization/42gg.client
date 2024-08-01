@@ -154,6 +154,10 @@ $font-size-xs: 0.8rem; // $small-font
     // 기본 텍스트
     font-family: $font-text-regular;
     font-size: $font-size-s;
+  } @else if ($type == 'description-s') {
+    // 설명 s사이즈
+    font-family: $font-text-light;
+    font-size: $font-size-s;
   } @else if ($type == 'description') {
     // 제목 뒤에 붙는 설명
     font-family: $font-text-light;
