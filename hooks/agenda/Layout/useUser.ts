@@ -9,7 +9,7 @@ export const useUser = () => {
   const { data, isError } = useQuery<User>(
     'user',
     () =>
-      instanceInAgenda.get('/agenda/profile/info').then((res) => {
+      instanceInAgenda.get('/profile/info').then((res) => {
         console.log(res);
         return res.data;
       }),
