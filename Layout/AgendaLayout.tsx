@@ -3,8 +3,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import ErrorChecker from 'components/error/AgendaErrorChecker';
 import LoginChecker from 'components/LoginChecker';
 import Footer from 'components/takgu/Layout/Footer';
-// import { useUser } from 'hooks/takgu/Layout/useUser';
-import useAxiosResponse from 'hooks/useAxiosResponse';
+import { useUser } from 'hooks/agenda/Layout/useUser';
+// import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/agenda/Layout/Layout.module.scss';
 import ModalProvider from '../components/takgu/modal/ModalProvider';
 import CustomizedSnackbars from '../components/takgu/toastmsg/toastmsg';
@@ -14,16 +14,17 @@ type AgendaLayoutProps = {
 };
 
 function AgendaAppLayout({ children }: AgendaLayoutProps) {
-  // const user = useUser();
+  const user = useUser();
   // const presentPath = useRouter().asPath;
 
-  useAxiosResponse();
+  // useAxiosResponse();
   // useGetUserSeason(presentPath);
   // useSetAfterGameModal();
   // useLiveCheck(presentPath);
   // useAnnouncementCheck(presentPath);
 
-  // if (!user || !user.intraId) return null;
+  console.log(user);
+  if (!user || !user.intraId) return null;
   return (
     <div className={styles.background}>
       <LoginChecker>

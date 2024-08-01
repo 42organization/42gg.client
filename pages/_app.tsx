@@ -54,15 +54,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <RecoilRoot>
         {/* <LoginChecker>
-          <ErrorChecker>
-            <QueryClientProvider client={queryClient}> */}
-        <LayoutProvider>
-          <Component {...pageProps} />
-        </LayoutProvider>
-        {/* <ModalProvider /> */}
-        {/* <CustomizedSnackbars />
-            </QueryClientProvider>
-          </ErrorChecker>
+          <ErrorChecker> */}
+        <QueryClientProvider client={queryClient}>
+          <LayoutProvider>
+            <Component {...pageProps} />
+          </LayoutProvider>
+          {/* <ModalProvider /> */}
+          <CustomizedSnackbars />
+        </QueryClientProvider>
+        {/* </ErrorChecker>
         </LoginChecker> */}
       </RecoilRoot>
     </>
