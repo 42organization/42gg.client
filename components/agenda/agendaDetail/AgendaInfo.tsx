@@ -138,6 +138,40 @@ export default function AgendaInfo() {
     isTeam: isTeam(agendaData),
   });
 
+  // if (type === 'team') {
+  //   return (
+  //     <div className={styles.infoContainer}>
+  //       <div className={styles.infoWarp}>
+  //         <div className={styles.contentWarp}>
+  //           <div className={styles.enrollWarp}>
+  //             {buttonText !== '' && (
+  //               <UploadBtn
+  //                 text={buttonText}
+  //                 onClick={
+  //                   buttonText === '팀 만들기'
+  //                     ? makeTeam
+  //                     : buttonText === '참가하기'
+  //                     ? participationIn
+  //                     : buttonText === '주최자 관리'
+  //                     ? hostMode
+  //                     : submitResults
+  //                 }
+  //               />
+  //             )}
+  //           </div>
+  //           <div className={styles.titleWarp}>
+  //             <h2>{agendaTitle}</h2>
+  //             <ShareBtn onClick={copyLink} />
+  //           </div>
+  //           <div className={styles.organizerWrap}>
+  //             <span>주최자 : {agendaHost}</span>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
   return (
     <>
       <div className={styles.infoContainer}>
