@@ -112,6 +112,8 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
         label='설명'
         placeholder='설명을 입력해주세요'
       />
+      <input type='file' name='poster' key='name' />
+      <input type='text' name='post' key='namef' />
       <div className={styles.topContainer}>
         <div className={styles.label_container}>
           <h3 className={styles.label}>진행 기간</h3>
@@ -202,6 +204,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
           <SubmitInputBtn name='cancel' label='취소하기' />{' '}
           {/*새로만들어야 함*/}
           <SubmitInputBtn name='submit' label='팀 만들기' />
+          <button type='submit'>submit</button>
         </div>
       </div>
     </form>

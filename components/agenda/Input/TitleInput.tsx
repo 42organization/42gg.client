@@ -4,6 +4,7 @@ interface TitleInputProps {
   name: string;
   label: string;
   placeholder?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   rest?: Record<string, unknown> | undefined;
 }
 

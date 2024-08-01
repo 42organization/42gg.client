@@ -20,20 +20,15 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
   ]);
   const newAwardInputRef = useRef<HTMLInputElement>(null);
 
-  // const addEventHandler = (e: MouseEvent<HTMLLabelElement>) => {
-  //   e.preventDefault();
-  //   alert(newAwardInputRef.current?.value);
-  //   const input: string | undefined = newAwardInputRef.current?.value;
-  //   newAwardInputRef.current ? (newAwardInputRef.current.value = '') : null;
-  //   input ? awardlist.push(input) : null;
-  //   awardlist && input ? setAwardList(awardlist) : null;
-  // };
-
   const addTeam = (idx: number, newTeam: string) => {
     const newAwardList = awardlist;
     newAwardList[idx].teams.push(newTeam);
     setAwardList(newAwardList);
   };
+
+  // const submit = {
+  //   console.log(awardlist);
+  // }
 
   return (
     <div className={styles.container}>
@@ -109,6 +104,7 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
       >
         test
       </button> */}
+      {/* <button onclick={submit}>submit</ button> */}
     </div>
   );
 };

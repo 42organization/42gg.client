@@ -5,6 +5,7 @@ interface DescriptionProps {
   name: string;
   label: string;
   placeholder: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const DescriptionInput = ({
