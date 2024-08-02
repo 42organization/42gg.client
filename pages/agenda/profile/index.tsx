@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AgendaHistoryProps } from 'types/agenda/profile/agendaHistoryTypes';
+import { AgendaHistoryItemProps } from 'types/agenda/profile/agendaHistoryTypes';
 import { CurrentTeamItemProps } from 'types/agenda/profile/currentTeamTypes';
 import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
 import { instanceInAgenda } from 'utils/axios';
@@ -15,7 +15,7 @@ export default function AgendaProfile() {
     CurrentTeamItemProps[] | null
   >(null);
   const [agendaHistory, setAgendaHistory] = useState<
-    AgendaHistoryProps[] | null
+    AgendaHistoryItemProps[] | null
   >(null);
 
   const fetchProfileData = async () => {
@@ -36,6 +36,7 @@ export default function AgendaProfile() {
     }
   };
 
+  // agendaHistory API : IN PROGRESS
   const fetchAgendaHistory = async () => {
     try {
       const res = await instanceInAgenda.get('/profile/history/list', {
@@ -46,6 +47,36 @@ export default function AgendaProfile() {
       });
       setAgendaHistory(res.data);
     } catch (error) {
+      // MOCK DATA
+      const historyMockData: AgendaHistoryItemProps[] = [
+        {
+          agendaId: 'agendaId1',
+          agendaTitle: '아젠다 타이틀1',
+          agendaStartTime: new Date(),
+          agendaEndTime: new Date(),
+          agendaCurrentTeam: 8,
+          agendaLocation: 'seoul',
+          teamKey: 'team1',
+          isOfficial: false,
+          agendaMaxPeople: 100,
+          teamName: 'team Name',
+          teamMates: [
+            {
+              intraId: 'intraId1',
+              coalition: 'GUN',
+            },
+            {
+              intraId: 'intraId2',
+              coalition: 'GON',
+            },
+            {
+              intraId: 'intraId3',
+              coalition: 'LEE',
+            },
+          ],
+        },
+      ];
+      setAgendaHistory(historyMockData);
       console.error(error);
     }
   };
@@ -56,11 +87,12 @@ export default function AgendaProfile() {
     fetchAgendaHistory();
   }, []);
 
-  useEffect(() => {
-    console.log('ProfileData :', profileData);
-    console.log('CurrentAgenda :', currentTeamData);
-    console.log('History :', agendaHistory);
-  }, [profileData, currentTeamData, agendaHistory]);
+  // useEffect(() => {
+  //   // API Data Check
+  //   console.log('ProfileData :', profileData);
+  //   console.log('CurrentAgenda :', currentTeamData);
+  //   console.log('History :', agendaHistory);
+  // }, [profileData, currentTeamData, agendaHistory]);
 
   return (
     <>
@@ -70,7 +102,7 @@ export default function AgendaProfile() {
         </div>
         {profileData && <ProfileCard profileData={profileData} />}
         {currentTeamData && <CurrentTeam currentTeamData={currentTeamData} />}
-        <AgendaHistory />
+        {agendaHistory && <AgendaHistory agendaHistory={agendaHistory} />}
       </div>
     </>
   );

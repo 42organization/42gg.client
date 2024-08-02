@@ -10,6 +10,9 @@ const AgendaTag: React.FC<AgendaTagProps> = ({ tagName }) => {
     case '공식':
       backgroundColor = '#39B8FF';
       break;
+    case '비공식':
+      backgroundColor = '#FCBA03';
+      break;
     case '팀':
       backgroundColor = '#FF5D5D';
       break;
