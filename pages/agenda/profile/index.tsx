@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { AgendaHistoryProps } from 'types/agenda/profile/agendaHistoryTypes';
-import { CurrentAgendaProps } from 'types/agenda/profile/currentAgendaTypes';
+import { CurrentTeamItemProps } from 'types/agenda/profile/currentTeamTypes';
 import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
 import { instanceInAgenda } from 'utils/axios';
 import AgendaHistory from 'components/agenda/Profile/AgendaHistory';
 import AgendaUserSearchBar from 'components/agenda/Profile/AgendaUserSearchBar';
-import ParticipatingTeam from 'components/agenda/Profile/ParticipatingTeam';
+import CurrentTeam from 'components/agenda/Profile/CurrentTeam';
 import ProfileCard from 'components/agenda/Profile/ProfileCard';
 import styles from 'styles/agenda/Profile/AgendaProfile.module.scss';
 
 export default function AgendaProfile() {
   const [profileData, setProfileData] = useState<ProfileDataProps | null>(null);
-  const [currentAgenda, setCurrentAgenda] = useState<CurrentAgendaProps | null>(
-    null
-  );
+  const [currentTeamData, setCurrentTeamData] = useState<
+    CurrentTeamItemProps[] | null
+  >(null);
   const [agendaHistory, setAgendaHistory] = useState<
     AgendaHistoryProps[] | null
   >(null);
@@ -27,10 +27,10 @@ export default function AgendaProfile() {
     }
   };
 
-  const fetchCurrentAgenda = async () => {
+  const fetchCurrentTeamData = async () => {
     try {
       const res = await instanceInAgenda.get('/profile/current/list');
-      setCurrentAgenda(res.data);
+      setCurrentTeamData(res.data);
     } catch (error) {
       console.error(error);
     }
@@ -52,15 +52,15 @@ export default function AgendaProfile() {
 
   useEffect(() => {
     fetchProfileData();
-    fetchCurrentAgenda();
+    fetchCurrentTeamData();
     fetchAgendaHistory();
   }, []);
 
   useEffect(() => {
     console.log('ProfileData :', profileData);
-    console.log('CurrentAgenda :', currentAgenda);
+    console.log('CurrentAgenda :', currentTeamData);
     console.log('History :', agendaHistory);
-  }, [profileData, currentAgenda, agendaHistory]);
+  }, [profileData, currentTeamData, agendaHistory]);
 
   return (
     <>
@@ -68,8 +68,8 @@ export default function AgendaProfile() {
         <div className={styles.agendaUserSearchBarWrap}>
           <AgendaUserSearchBar />
         </div>
-        <ProfileCard profileData={profileData} />
-        <ParticipatingTeam />
+        {profileData && <ProfileCard profileData={profileData} />}
+        {currentTeamData && <CurrentTeam currentTeamData={currentTeamData} />}
         <AgendaHistory />
       </div>
     </>
