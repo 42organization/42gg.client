@@ -4,37 +4,15 @@ import {
   ParticipantTeamProps,
   PeopleCount,
 } from 'types/agenda/agendaDetail/tabs/participantTeamTypes';
-import { Coalition, coalitionValues } from 'constants/agenda/agenda';
+import { countCoalitions } from 'components/agenda/utils/coalition/countCoalitions';
 import { getCoalitionEnum } from 'components/agenda/utils/coalition/getCoalitionEnum';
 import ColorList from 'components/agenda/utils/ColorList';
 import TeamLeaderIcon from 'public/image/agenda/rock-and-roll-hand.svg';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantTeam.module.scss';
 
-const peopleCount: PeopleCount = {
-  [Coalition.GUN]: 2,
-  [Coalition.GON]: 7,
-  [Coalition.GAM]: 1,
-  [Coalition.LEE]: 3,
-};
-
 const totalPeople = (peopleCount: PeopleCount) => {
   return Object.values(peopleCount).reduce((sum, count) => sum + count, 0);
 };
-
-function countCoalitions(coalitions: Coalition[]): PeopleCount {
-  const peopleCount: PeopleCount = {};
-
-  coalitions.forEach((item) => {
-    if (coalitionValues.includes(item as Coalition)) {
-      if (!peopleCount[item as Coalition]) {
-        peopleCount[item as Coalition] = 0; // 초기화
-      }
-      peopleCount[item as Coalition] += 1; // 개수 증가
-    }
-  });
-
-  return peopleCount;
-}
 
 export default function ParticipantTeam({
   teamKey,

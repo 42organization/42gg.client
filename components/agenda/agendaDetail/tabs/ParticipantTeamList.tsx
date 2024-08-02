@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { teamDataProps } from 'types/agenda/team/teamDataTypes';
+import { instanceInAgenda } from 'utils/axios';
 import ParticipantTeam from 'components/agenda/agendaDetail/tabs/ParticipantTeam';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantTeamList.module.scss';
 
@@ -10,7 +11,7 @@ const teamData = [
     teamName: 'team1111',
     teamLeaderIntraId: 'leader',
     teamMateCount: 4,
-    coalitions: ['GUN', 'GON', 'GAM', 'LEE'],
+    coalitions: ['GUN', 'GON', 'GAM', 'GUN'],
   },
   {
     teamKey: 'team2222',
@@ -19,31 +20,24 @@ const teamData = [
     teamMateCount: 2,
     coalitions: ['GUN', 'GON'],
   },
-  {
-    teamKey: 'team3333',
-    teamName: 'team3333',
-    teamLeaderIntraId: 'leader',
-    teamMateCount: 1,
-    coalitions: ['GUN'],
-  },
 ];
 
 const confirmData = [
   {
     teamName: 'team1111',
     teamLeaderIntraId: 'leader',
-    teamMateCount: 4,
+    teamMateCount: 6,
     teamAward: 'string',
     awardPriority: 0,
-    coalitions: ['GUN', 'GON', 'GAM', 'LEE'],
+    coalitions: ['GUN', 'GON', 'GAM', 'LEE', 'GUN', 'GON'],
   },
   {
     teamName: 'team2222',
     teamLeaderIntraId: 'leader',
-    teamMateCount: 2,
+    teamMateCount: 3,
     teamAward: 'string',
     awardPriority: 0,
-    coalitions: ['GUN', 'GON'],
+    coalitions: ['GUN', 'GON', 'GON'],
   },
   {
     teamName: 'team3333',
@@ -65,14 +59,26 @@ export default function ParticipantTeamList({ max }: ParticipantListProps) {
 
   const [recruitingTeams, setRecruitingTeams] = useState<teamDataProps[]>([]);
   const [confirmedTeams, setConfirmedTeams] = useState<teamDataProps[]>([]);
+  const fetchRecruitTeams = async () => {
+    if (agendaKey) {
+      try {
+        const params = {
+          agenda_key: agendaKey,
+          page: 1,
+          size: 10,
+        };
+
+        const res = await instanceInAgenda.get(`team/open?`, { params });
+        console.log('모집 중인 팀', res.data);
+        setRecruitingTeams(res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   useEffect(() => {
-    // // 모집 중인 팀 API 호출
-    // const fetchCurrentTeams = async () => {};
-
-    // // 확정 완료 팀 API 호출
-    // const fetchConfirmedTeams = async () => {};
-
+    // fetchRecruitTeams();
     setRecruitingTeams(teamData);
     setConfirmedTeams(confirmData);
   }, [agendaKey]);
