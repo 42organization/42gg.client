@@ -84,9 +84,8 @@ export default function ParticipantTeamList({ max }: ParticipantListProps) {
   }, [agendaKey]);
 
   if (!agendaKey) {
-    return <div>로딩 중...</div>;
+    return <div>Loading...</div>;
   }
-
   return (
     <>
       <div className={styles.participantsWarp}>

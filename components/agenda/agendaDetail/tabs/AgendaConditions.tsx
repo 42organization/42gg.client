@@ -26,7 +26,7 @@ export default function AgendaConditions() {
   }, [agendaKey]);
 
   if (!agendaData) {
-    return <div>로딩 중...</div>;
+    return <div>Loading...</div>;
   }
   const {
     agendaMinPeople,

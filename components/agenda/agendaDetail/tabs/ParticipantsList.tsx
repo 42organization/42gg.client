@@ -69,7 +69,7 @@ export default function ParticipantsList({ max }: ParticipantsListProps) {
   }, [agendaKey]);
 
   if (!participants) {
-    return <div>로딩 중...</div>;
+    return <div>Loading...</div>;
   }
 
   return (

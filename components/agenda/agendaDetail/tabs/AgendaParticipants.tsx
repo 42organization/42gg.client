@@ -54,7 +54,7 @@ export default function AgendaParticipants() {
     return <div>Loading...</div>;
   }
 
-  const { agendaMinPeople, agendaMaxPeople } = agendaData;
+  const { agendaMinPeople, agendaMaxPeople, agendaMaxTeam } = agendaData;
 
   const isTeam = (min: number, max: number) => {
     return min !== max;
@@ -65,9 +65,9 @@ export default function AgendaParticipants() {
       <div className={styles.mainWarp}>
         <div className={styles.participantsContainer}>
           {isTeam(agendaMinPeople, agendaMaxPeople) ? (
-            <ParticipantTeamList max={agendaData.agendaMaxTeam} />
+            <ParticipantTeamList max={agendaMaxTeam} />
           ) : (
-            <ParticipantsList max={agendaData.agendaMaxTeam} />
+            <ParticipantsList max={agendaMaxTeam} />
           )}
         </div>
       </div>

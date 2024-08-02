@@ -2,48 +2,12 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
 import { ParticipantSummaryProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes';
-import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
-import {
-  AgendaLocation,
-  AgendaStatus,
-  Coalition,
-} from 'constants/agenda/agenda';
+import { LoginInfoDataProps } from 'types/agenda/profile/profileDataTypes';
+import { instanceInAgenda } from 'utils/axios';
+import { AgendaStatus } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
 import styles from 'styles/agenda/agendaDetail/AgendaInfo.module.scss';
-
-// 목데이터 생성
-const mockData: AgendaDataProps = {
-  agendaTitle: '아 기다리고기다리던대회',
-  agendaContents:
-    '이 대회는 언제부터 시작되어 어쩌구저쩌구 뭐를 겨루려고 했는데 비밀이에요',
-  agendaDeadLine: new Date('2024-07-20'),
-  agendaStartTime: new Date('2024-07-25'),
-  agendaEndTime: new Date('2024-07-30'),
-  agendaMinTeam: 3,
-  agendaMaxTeam: 10,
-  agendaCurrentTeam: 5,
-  agendaMinPeople: 2,
-  agendaMaxPeople: 5,
-  agendaPoster: null,
-  agendaHost: 'iamgroot',
-  agendaLocation: '서울',
-  agendaStatus: AgendaStatus.ON_GOING,
-  createdAt: new Date('2024-07-01'),
-  announcementTitle: '대회 공지사항',
-  isOfficial: true,
-  agendaisRanking: false,
-};
-
-// 개인상세조회
-const profileData: ProfileDataProps = {
-  userIntra: 'iamgroot',
-  userContent: '안녕하세요',
-  userGithub: 'test@github.abc',
-  userCoalition: Coalition.GUN,
-  userLocation: AgendaLocation.SEOUL,
-  ticketCount: 1,
-};
 
 const copyLink = () => {
   const url = window.location.href;
@@ -72,10 +36,10 @@ const isTeam = (agendaData: AgendaDataProps) => {
 };
 
 const getIsHost = (
-  profileData: ProfileDataProps,
+  profileData: LoginInfoDataProps,
   agendaData: AgendaDataProps
 ) => {
-  return profileData.userIntra === agendaData.agendaHost;
+  return profileData.intraId === agendaData.agendaHost;
 };
 
 const getIsParticipant = (teamList: number) => {
@@ -91,7 +55,7 @@ const determineButtonText = ({
 }: ParticipantSummaryProps) => {
   if (agendaStatus === AgendaStatus.CONFIRM) {
     return isHost ? '결과입력' : '';
-  } else if (agendaStatus === AgendaStatus.ON_GOING) {
+  } else if (agendaStatus === AgendaStatus.OPEN) {
     if (isTeam) {
       return isHost ? '주최자 관리' : !isParticipant ? '팀 만들기' : '';
     } else {
@@ -102,41 +66,75 @@ const determineButtonText = ({
 };
 
 export default function AgendaInfo() {
-  // storybook에서 사용하기 위해 인자 넣어줌
-  // export default function AgendaInfo({
-  //   agendaData,
-  //   profileData,
-  //   teamListStatus,
-  // }) {
-
   const router = useRouter();
   const { agendaKey } = router.query;
-  const [agendaData, setAgendaData] = useState<AgendaDataProps | null>(null);
-  const [teamListStatus, setTeamListStatus] = useState<number>(200);
+
+  const [agendaData, setAgendaData] = useState<AgendaDataProps>();
+  const [teamListStatus, setTeamListStatus] = useState<number>();
+  const [profileData, setProfileData] = useState<LoginInfoDataProps>();
+  const [buttonText, setButtonText] = useState<string>('initial');
+
+  const fetchAgendaData = async () => {
+    if (agendaKey) {
+      try {
+        const res = await instanceInAgenda.get(`?agenda_key=${agendaKey}`);
+        setAgendaData(res.data);
+        console.log(res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  const fetchTeamList = async () => {
+    if (agendaKey) {
+      try {
+        const res = await instanceInAgenda.get(
+          `team/my?agenda_key=${agendaKey}`
+        );
+        setTeamListStatus(res.status);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  const fetchLoginData = async () => {
+    try {
+      const res = await instanceInAgenda.get('profile/info');
+      setProfileData(res.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    // axios.get(`/api/agenda?agenda_id=${agendaKey}`)
-    //   .then(response => setAgendaData(response.data))
-    //   .catch(error => console.error(error));
-
-    setAgendaData(mockData);
-    setTeamListStatus(204);
+    fetchAgendaData();
+    fetchTeamList();
+    fetchLoginData();
   }, [agendaKey]);
 
-  if (!agendaData) {
+  useEffect(() => {
+    if (agendaData && teamListStatus !== undefined && profileData) {
+      const isHost = getIsHost(profileData, agendaData);
+      const isParticipant = getIsParticipant(teamListStatus);
+      const text = determineButtonText({
+        agendaStatus: agendaData.agendaStatus,
+        isHost,
+        isParticipant,
+        isTeam: isTeam(agendaData),
+      });
+      setButtonText(text); // 버튼 텍스트 설정
+    }
+  }, [agendaData, teamListStatus, profileData]); // 의존성 배열에 추가
+
+  if (!agendaData || teamListStatus === undefined || !profileData) {
     return <div>Loading...</div>;
   }
 
-  const { agendaTitle, agendaHost, agendaStatus } = agendaData;
+  const { agendaTitle, agendaHost } = agendaData;
 
-  const isHost = getIsHost(profileData, agendaData);
-  const isParticipant = getIsParticipant(teamListStatus);
-  const buttonText = determineButtonText({
-    agendaStatus,
-    isHost,
-    isParticipant,
-    isTeam: isTeam(agendaData),
-  });
+  console.log('tex', buttonText);
 
   // if (type === 'team') {
   //   return (
