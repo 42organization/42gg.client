@@ -1,10 +1,6 @@
-import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
+import { ProfileImageCardProps } from 'types/agenda/profile/profileDataTypes';
 import CustomImage from 'components/agenda/utils/CustomImage';
 import styles from 'styles/agenda/Profile/ProfileCard.module.scss';
-
-interface ProfileImageCardProps {
-  profileData: ProfileDataProps | null;
-}
 
 const ProfileImageCard = ({ profileData }: ProfileImageCardProps) => {
   if (!profileData) {
