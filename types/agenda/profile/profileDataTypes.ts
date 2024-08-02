@@ -1,7 +1,7 @@
 import { AgendaLocation, Coalition } from 'constants/agenda/agenda';
 
 export interface ProfileDataProps {
-  userIntra: string;
+  userIntraId: string;
   userContent: string;
   userGithub: string;
   userCoalition: Coalition;

@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
+import CustomImage from 'components/agenda/utils/CustomImage';
 import styles from 'styles/agenda/Profile/ProfileCard.module.scss';
 
 interface ProfileImageCardProps {
@@ -13,13 +13,12 @@ const ProfileImageCard = ({ profileData }: ProfileImageCardProps) => {
   return (
     <div>
       <div className={styles.profileImageCard}>
-        <div className={styles.imageWrapper}>
-          <Image
+        {/* 추가 예정 : profile Image  */}
+        <div className={styles.profileImageWrapper}>
+          <CustomImage
             src='/image/agenda/jeongrol.jpeg'
             alt='profile image'
-            width={30}
-            height={30}
-            className={styles.imageBox}
+            addClass={styles.profileImageBox}
           />
         </div>
 
@@ -27,73 +26,40 @@ const ProfileImageCard = ({ profileData }: ProfileImageCardProps) => {
 
         <div className={styles.linkImages}>
           <div className={styles.linkImageWrapper}>
-            <Image
-              src='/image/agenda/github.svg'
-              alt='profile image'
-              width={30}
-              height={30}
-              className={styles.imageBox}
-            />
+            <CustomImage src='/image/agenda/github.svg' alt='profile image' />
           </div>
           <div className={styles.linkImageWrapper}>
-            <Image
-              src='/image/agenda/42-icon.svg'
-              alt='profile image'
-              width={30}
-              height={30}
-              className={styles.imageBox}
-            />
+            <CustomImage src='/image/agenda/42-icon.svg' alt='profile image' />
           </div>
         </div>
       </div>
 
       <div className={styles.profileContent}>
-        <div className={styles.description}>
-          안녕하세요. 여기에는 자신의 소개를 간략하게 작성할 수 있습니다! 최대
-          길이는 두줄로 하고 싶어요. 아니면 최대 3줄?
-          요정도?요정도?요정도?요정도?요정도?요정도?
-        </div>
+        <div className={styles.description}>{profileData.userContent}</div>
 
         <hr className={styles.divider} />
 
         <div className={styles.acheivementContainer}>
           <div className={styles.acheivementText}>Acheivements</div>
+
           <div className={styles.acheivementImageContainer}>
-            {/* acheivement mapping */}
-            <div className={styles.imageWrapper}>
-              <Image
+            {/* 추가 예정 : acheivement mapping */}
+            <div className={styles.acheivementImageWrapper}>
+              <CustomImage
                 src='/image/agenda/acheivement.svg'
-                alt='profile image'
-                width={30}
-                height={30}
-                className={styles.imageBox}
+                alt='acheivement'
               />
             </div>
-            <div className={styles.imageWrapper}>
-              <Image
+            <div className={styles.acheivementImageWrapper}>
+              <CustomImage
                 src='/image/agenda/acheivement.svg'
-                alt='profile image'
-                width={30}
-                height={30}
-                className={styles.imageBox}
+                alt='acheivement'
               />
             </div>
-            <div className={styles.imageWrapper}>
-              <Image
+            <div className={styles.acheivementImageWrapper}>
+              <CustomImage
                 src='/image/agenda/acheivement.svg'
-                alt='profile image'
-                width={30}
-                height={30}
-                className={styles.imageBox}
-              />
-            </div>
-            <div className={styles.imageWrapper}>
-              <Image
-                src='/image/agenda/acheivement.svg'
-                alt='profile image'
-                width={30}
-                height={30}
-                className={styles.imageBox}
+                alt='acheivement'
               />
             </div>
           </div>
