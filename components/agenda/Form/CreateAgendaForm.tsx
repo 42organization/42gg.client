@@ -1,5 +1,5 @@
 // import { is } from 'cypress/types/bluebird';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Slider } from '@mui/material';
 import CheckboxInput from 'components/agenda/Input/CheckboxInput';
 import DescriptionInput from 'components/agenda/Input/DescriptionInput';
@@ -8,16 +8,23 @@ import TimeInput from 'components/agenda/Input/TimeInput';
 import TitleInput from 'components/agenda/Input/TitleInput';
 import styles from 'styles/agenda/Form/Form.module.scss';
 import SubmitInputBtn from '../button/SubmitInputButton';
+import SelectInput from '../Input/SelectInput';
 
 interface CreateAgendaFormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-function parseDate(date: Date): string {
-  if (date.getTime() < 60 * 60 * 24 * 100) {
-    return `${date.getHours()}시간`;
+function parseDate(a: Date, b: Date): string {
+  if (a.getTime() > b.getTime()) {
+    return '0일';
   }
-  return `${date.getDate()}일`;
+  const time = b.getTime() - a.getTime();
+  if (time / 1000 / 60 / 60 / 24 >= 1) {
+    return `${time / 1000 / 60 / 60 / 24}일`;
+  } else if (time / 1000 / 60 / 60 >= 1) return `${time / 1000 / 60 / 60}시간`;
+  else {
+    return `${time / 1000 / 60}분`;
+  }
 }
 
 const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
@@ -29,11 +36,11 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
   const [isSolo, setIsSolo] = useState<boolean>(false);
   const [recruitEnd, setRecruitEnd] = useState<Date>(new Date());
   const today = new Date();
-  const tommorrow = new Date(today.getTime() + 60 * 60 * 24 * 100);
-  const [dateRange, setDateRange] = useState<Date[]>([
-    today,
-    new Date(today.getTime() + 86400000),
-  ]);
+  console.log('today', today);
+  const tommorrow = new Date();
+  tommorrow.setDate(today.getDate() + 1);
+  const [dateRange, setDateRange] = useState<Date[]>([today, tommorrow]);
+
   const handleChange = (
     event: Event,
     newValue: number | number[],
@@ -63,7 +70,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
     if (!Array.isArray(newValue)) {
       return;
     }
-    console.log('activeThumb unused', activeThumb); // unused error
+    // console.log('activeThumb unused', activeThumb); // unused error
     setPeopleLimit(newValue as number[]);
   };
   const handleRecruitEnd = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,6 +93,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
     const newMax = new Date(e.target.value);
     if (newMax.getTime() > dateRange[1].getTime()) {
       alert('종료일 이전의 날짜를 선택해주세요');
+      console.log(newMax, dateRange[1]);
       setDateRange([dateRange[1], dateRange[1]]);
       return;
     } else if (newMax.getTime() < tommorrow.getTime()) {
@@ -107,32 +115,34 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
   };
   return (
     <form onSubmit={handleSubmit} className={styles.container}>
-      <TitleInput name='title' label='제목' placeholder='제목을 입력해주세요' />
+      <TitleInput
+        name='agendaTitle'
+        label='제목'
+        placeholder='제목을 입력해주세요'
+      />
       <DescriptionInput
-        name='description'
+        name='agendaContent'
         label='설명'
         placeholder='설명을 입력해주세요'
       />
-      <input type='file' name='poster' key='name' />
-      <input type='text' name='post' key='namef' />
       <div className={styles.topContainer}>
         <div className={styles.label_container}>
           <h3 className={styles.label}>진행 기간</h3>
           <h3 className={`${styles.label} + ${styles.highlight}`}>
-            {parseDate(
-              new Date(dateRange[1].getTime() - dateRange[0].getTime())
-            )}
+            {parseDate(dateRange[0], dateRange[1])}
           </h3>
         </div>
         <div className={styles.inputContainer}>
           <TimeInput
-            name='startDate'
+            name='agendaStartTime'
             label='시작일'
+            defaultValue={dateRange[0].toString()}
             onChange={handleDateRangeMin}
           />
           <TimeInput
-            name='endDate'
+            name='agendaEndTime'
             label='종료일'
+            defaultValue={dateRange[1].toString()}
             onChange={handleDateRangeMax}
           />
         </div>
@@ -141,14 +151,15 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
         <div className={styles.label_container}>
           <h3 className={styles.label}>모집마감까지 </h3>
           <h3 className={`${styles.label} ${styles.highlight}`}>
-            {parseDate(new Date(recruitEnd.getTime() - today.getTime()))}
+            {parseDate(recruitEnd, today)}
           </h3>
         </div>
         <div className={styles.dateContainer}>
           <TimeInput
-            name='recruitEndDate'
-            label={null}
+            name='agendaDeadLine'
+            label=''
             onChange={handleRecruitEnd}
+            defaultValue={tommorrow.toString()}
           />
         </div>
       </div>
@@ -169,6 +180,18 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
             max={100}
             color={'secondary'}
             disableSwap
+          />
+          <input
+            style={{ display: 'none' }}
+            name='agendaMinTeam'
+            value={teamLimit[0]}
+            readOnly
+          />
+          <input
+            style={{ display: 'none' }}
+            name='agendaMaxTeam'
+            value={teamLimit[1]}
+            readOnly
           />
         </div>
       </div>
@@ -192,13 +215,33 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
             disableSwap
             disabled={isSolo}
           />
+          <input
+            style={{ display: 'none' }}
+            name='agendaMinPeople'
+            value={peopleLimit[0]}
+            readOnly
+          />
+          <input
+            style={{ display: 'none' }}
+            name='agendaMaxPeople'
+            value={peopleLimit[1]}
+            readOnly
+          />
         </div>
       </div>
       <div className={styles.bottomContainer}>
-        <ImageInput name='image' label='포스터 파일 첨부하기' />
+        <ImageInput name='agendaPoster' label='포스터 파일 첨부하기' />
       </div>
       <div className={styles.bottomContainer}>
-        <CheckboxInput name='isContest' label='대회 유무' />
+        <SelectInput
+          name='agendaLocation'
+          label='대회 장소'
+          options={['SEOUL', 'GYEONGSAN', 'MIX']}
+        />
+      </div>
+      <div className={styles.bottomContainer}>
+        <CheckboxInput name='agendaIsRanking' label='대회 유무' />
+        {/* <input type='checkbox' name='agendaIsRanking' id='agendaIsRanking' /> */}
       </div>
       <div className={styles.bottomContainer}>
         <div className={styles.buttonContainer}>

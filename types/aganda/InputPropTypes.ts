@@ -31,6 +31,7 @@ export interface CheckboxProps {
   discription?: string;
   checked?: boolean;
   rest?: Record<string, unknown> | undefined;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface CountInputProps {
@@ -64,6 +65,7 @@ export interface DateInputProps {
   max?: string;
   defaultValue?: string;
   rest?: Record<string, unknown> | undefined;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface TitleInputProps {
