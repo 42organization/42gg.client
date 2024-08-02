@@ -5,17 +5,6 @@ import { Coalition } from 'constants/agenda/agenda';
 import Participant from 'components/agenda/agendaDetail/tabs/Participant';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantsList.module.scss';
 
-const mockParticipants = [
-  {
-    teamName: 'team1111',
-    teamLeaderIntraId: 'leader',
-    teamMateCount: 4,
-    teamAward: 'string',
-    awardPriority: 0,
-    coalitions: ['GUN', 'GON', 'GAM', 'LEE'],
-  },
-];
-
 const mockParticipant = [
   {
     teamName: 'team1111',

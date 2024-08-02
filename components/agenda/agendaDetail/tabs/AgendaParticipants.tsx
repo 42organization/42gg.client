@@ -65,7 +65,7 @@ export default function AgendaParticipants() {
       <div className={styles.mainWarp}>
         <div className={styles.participantsContainer}>
           {isTeam(agendaMinPeople, agendaMaxPeople) ? (
-            <ParticipantTeamList max={agendaData.agendaMaxPeople} />
+            <ParticipantTeamList max={agendaData.agendaMaxTeam} />
           ) : (
             <ParticipantsList max={agendaData.agendaMaxTeam} />
           )}
