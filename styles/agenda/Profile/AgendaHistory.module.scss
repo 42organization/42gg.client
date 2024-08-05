@@ -22,4 +22,8 @@
     flex-direction: column;
     gap: 0.5rem;
   }
+
+  .historyEmpty {
+    @include text(description-s);
+  }
 }

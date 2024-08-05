@@ -13,7 +13,7 @@ const AgendaHistory = ({ agendaHistory }: AgendaHistoryProps) => {
             <HistoryItem key={history.agendaId} historyData={history} />
           ))
         ) : (
-          <div>아젠다 기록이 없습니다.</div>
+          <div className={styles.historyEmpty}>아젠다 기록이 없습니다.</div>
         )}
       </div>
     </div>

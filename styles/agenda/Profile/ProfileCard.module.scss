@@ -71,14 +71,15 @@
   width: 22rem;
   height: auto;
   flex-direction: column;
-  padding: 1rem;
+  padding: 1.5rem 1rem 1rem;
+  gap: 0.5rem;
   background-color: var(--box-bg-1);
   border-radius: 0 0 $radius-big $radius-big;
 
   .description {
     width: 100%;
     min-height: 1rem;
-    @include text(description);
+    @include text(description-s);
   }
 
   .acheivementContainer {
