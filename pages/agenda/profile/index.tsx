@@ -18,6 +18,54 @@ export default function AgendaProfile() {
     AgendaHistoryItemProps[] | null
   >(null);
 
+  // currentTeam MOCK DATA
+  const currentTeamMockData: CurrentTeamItemProps[] = [
+    {
+      agendaId: '123',
+      agendaTitle: 'PUSH SWAP CONTEST',
+      agendaLocation: 'SEOUL',
+      teamKey: 'TEAMKEY1',
+      isOfficial: true,
+      teamName: 'jeongrol',
+    },
+    {
+      agendaId: '1234',
+      agendaTitle: 'League Of Legend 42',
+      agendaLocation: 'SEOUL',
+      teamKey: 'TEAMKEY2',
+      isOfficial: true,
+      teamName: '7-8기 멤버단',
+    },
+  ];
+  // history MOCK DATA
+  const historyMockData: AgendaHistoryItemProps[] = [
+    {
+      agendaId: 'agendaId1',
+      agendaTitle: '아젠다 타이틀1',
+      agendaStartTime: new Date(),
+      agendaEndTime: new Date(),
+      agendaCurrentTeam: 8,
+      agendaLocation: 'seoul',
+      teamKey: 'team1',
+      isOfficial: false,
+      agendaMaxPeople: 100,
+      teamName: 'team Name',
+      teamMates: [
+        {
+          intraId: 'intraId1',
+          coalition: 'GUN',
+        },
+        {
+          intraId: 'intraId2',
+          coalition: 'GON',
+        },
+        {
+          intraId: 'intraId3',
+          coalition: 'LEE',
+        },
+      ],
+    },
+  ];
   const fetchProfileData = async () => {
     try {
       const res = await instanceInAgenda.get(`/profile`);
@@ -47,36 +95,6 @@ export default function AgendaProfile() {
       });
       setAgendaHistory(res.data);
     } catch (error) {
-      // MOCK DATA
-      const historyMockData: AgendaHistoryItemProps[] = [
-        {
-          agendaId: 'agendaId1',
-          agendaTitle: '아젠다 타이틀1',
-          agendaStartTime: new Date(),
-          agendaEndTime: new Date(),
-          agendaCurrentTeam: 8,
-          agendaLocation: 'seoul',
-          teamKey: 'team1',
-          isOfficial: false,
-          agendaMaxPeople: 100,
-          teamName: 'team Name',
-          teamMates: [
-            {
-              intraId: 'intraId1',
-              coalition: 'GUN',
-            },
-            {
-              intraId: 'intraId2',
-              coalition: 'GON',
-            },
-            {
-              intraId: 'intraId3',
-              coalition: 'LEE',
-            },
-          ],
-        },
-      ];
-      setAgendaHistory(historyMockData);
       console.error(error);
     }
   };
@@ -101,8 +119,10 @@ export default function AgendaProfile() {
           <AgendaUserSearchBar />
         </div>
         {profileData && <ProfileCard profileData={profileData} />}
-        {currentTeamData && <CurrentTeam currentTeamData={currentTeamData} />}
-        {agendaHistory && <AgendaHistory agendaHistory={agendaHistory} />}
+        {currentTeamData && (
+          <CurrentTeam currentTeamData={currentTeamMockData} />
+        )}
+        {agendaHistory && <AgendaHistory agendaHistory={historyMockData} />}
       </div>
     </>
   );
