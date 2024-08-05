@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
 import { ParticipantSummaryProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes';
 import { LoginInfoDataProps } from 'types/agenda/profile/profileDataTypes';
+import { teamDataProps } from 'types/agenda/team/teamDataTypes';
 import { instanceInAgenda } from 'utils/axios';
 import { AgendaStatus } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
@@ -70,7 +71,8 @@ export default function AgendaInfo() {
   const { agendaKey } = router.query;
 
   const [agendaData, setAgendaData] = useState<AgendaDataProps>();
-  const [teamListStatus, setTeamListStatus] = useState<number>();
+  const [myTeam, setMyTeam] = useState<teamDataProps>();
+  const [teamStatus, setTeamStatus] = useState<number>(204);
   const [profileData, setProfileData] = useState<LoginInfoDataProps>();
   const [buttonText, setButtonText] = useState<string>('initial');
 
@@ -79,7 +81,6 @@ export default function AgendaInfo() {
       try {
         const res = await instanceInAgenda.get(`?agenda_key=${agendaKey}`);
         setAgendaData(res.data);
-        console.log(res.data);
       } catch (error) {
         console.error(error);
       }
@@ -92,7 +93,8 @@ export default function AgendaInfo() {
         const res = await instanceInAgenda.get(
           `team/my?agenda_key=${agendaKey}`
         );
-        setTeamListStatus(res.status);
+        setMyTeam(res.data);
+        setTeamStatus(res.status);
       } catch (error) {
         console.error(error);
       }
@@ -115,9 +117,10 @@ export default function AgendaInfo() {
   }, [agendaKey]);
 
   useEffect(() => {
-    if (agendaData && teamListStatus !== undefined && profileData) {
+    if (agendaData && myTeam && profileData) {
       const isHost = getIsHost(profileData, agendaData);
-      const isParticipant = getIsParticipant(teamListStatus);
+      const isParticipant = getIsParticipant(teamStatus);
+
       const text = determineButtonText({
         agendaStatus: agendaData.agendaStatus,
         isHost,
@@ -126,15 +129,13 @@ export default function AgendaInfo() {
       });
       setButtonText(text); // 버튼 텍스트 설정
     }
-  }, [agendaData, teamListStatus, profileData]); // 의존성 배열에 추가
+  }, [agendaData, myTeam, profileData]); // 의존성 배열에 추가
 
-  if (!agendaData || teamListStatus === undefined || !profileData) {
+  if (!agendaData || !myTeam || !profileData) {
     return <div>Loading...</div>;
   }
 
   const { agendaTitle, agendaHost } = agendaData;
-
-  console.log('tex', buttonText);
 
   // if (type === 'team') {
   //   return (

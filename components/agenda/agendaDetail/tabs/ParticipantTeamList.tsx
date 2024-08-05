@@ -57,8 +57,25 @@ export default function ParticipantTeamList({ max }: ParticipantListProps) {
   const router = useRouter();
   const { agendaKey } = router.query;
 
+  const [myTeam, setMyTeam] = useState<teamDataProps | null>(null);
+  const [teamStatus, setTeamStatus] = useState<number>(0);
   const [recruitingTeams, setRecruitingTeams] = useState<teamDataProps[]>([]);
   const [confirmedTeams, setConfirmedTeams] = useState<teamDataProps[]>([]);
+
+  const fetchMyTeam = async () => {
+    if (agendaKey) {
+      try {
+        const res = await instanceInAgenda.get(
+          `team/my?agenda_key=${agendaKey}`
+        );
+        setMyTeam(res.data);
+        setTeamStatus(res.status);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   const fetchRecruitTeams = async () => {
     if (agendaKey) {
       try {
@@ -79,6 +96,7 @@ export default function ParticipantTeamList({ max }: ParticipantListProps) {
 
   useEffect(() => {
     // fetchRecruitTeams();
+    fetchMyTeam();
     setRecruitingTeams(teamData);
     setConfirmedTeams(confirmData);
   }, [agendaKey]);
@@ -88,6 +106,22 @@ export default function ParticipantTeamList({ max }: ParticipantListProps) {
   }
   return (
     <>
+      {teamStatus === 200 && myTeam ? (
+        <div className={styles.participantsWarp}>
+          <div className={styles.participantsTitle}>내 팀</div>
+
+          <ParticipantTeam
+            key={myTeam.teamName}
+            teamKey={myTeam.teamKey}
+            teamName={myTeam.teamName}
+            teamLeaderIntraId={myTeam.teamLeaderIntraId}
+            teamMateCount={myTeam.teamMateCount}
+            maxMateCount={max}
+            coalitions={myTeam.coalitions}
+          />
+        </div>
+      ) : null}
+
       <div className={styles.participantsWarp}>
         <div className={styles.participantsTitle}>
           모집중인 팀 {recruitingTeams.length}
