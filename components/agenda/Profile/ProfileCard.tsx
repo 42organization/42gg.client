@@ -15,7 +15,12 @@ const ProfileImageCard = ({ profileData }: ProfileImageCardProps) => {
           />
         </div>
 
-        <div className={styles.userName}>{profileData.userIntraId}</div>
+        <div className={styles.userNameWrapper}>
+          <div className={styles.userName}>{profileData.userIntraId}</div>
+          <div className={styles.editWrapper}>
+            <CustomImage src='/image/agenda/edit.svg' alt='edit' />
+          </div>
+        </div>
 
         <div className={styles.linkImages}>
           <div className={styles.linkImageWrapper}>

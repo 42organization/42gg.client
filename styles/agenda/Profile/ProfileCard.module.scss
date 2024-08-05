@@ -38,12 +38,26 @@
     }
   }
 
-  .userName {
+  .userNameWrapper {
     position: absolute;
     bottom: 0.5rem;
     left: 1.5rem;
     z-index: 10;
-    @include text(title);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .userName {
+      @include text(title);
+    }
+
+    .editWrapper {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-top: 0.5rem;
+      cursor: pointer;
+      @include circle-animation;
+    }
   }
 
   .linkImages {

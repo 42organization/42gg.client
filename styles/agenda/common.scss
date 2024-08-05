@@ -172,3 +172,40 @@ $font-size-xs: 0.8rem; // $small-font
     font-weight: bold;
   }
 }
+
+@mixin circle-animation {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    display: block;
+    width: 0;
+    height: 0;
+    content: '';
+    background: rgba(214, 197, 255, 0.6);
+    border-radius: 100%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover::before {
+    animation: circle 0.75s;
+  }
+
+  @keyframes circle {
+    0% {
+      opacity: 1;
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      width: 200%;
+      height: 200%;
+      opacity: 0;
+    }
+  }
+}
