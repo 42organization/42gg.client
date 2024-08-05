@@ -24,34 +24,17 @@ const submitTeamForm = async (e: React.FormEvent<HTMLFormElement>) => {
   data.set('agendaPoster', 'string test'); // 이후 api 업데이트되면 수정
   data.set('agendaIsRanking', 'true');
 
+  //json으로 변환
   const temp = JSON.stringify(Object.fromEntries(data));
-  // const jsonData = JSON.parse(temp);
-  // jsonData.agendaIsRanking = true;
-  // console.log(jsonData);
+  const jsonData = JSON.parse(temp);
+  jsonData.agendaIsRanking = true;
 
-  const jsonData = {
-    agendaTitle: '123456',
-    agendaContent: '설명설명설명',
-    agendaDeadLine: '2024-09-01T04:35:06.872Z',
-    agendaStartTime: '2024-09-12T04:35:06.872Z',
-    agendaEndTime: '2024-09-14T04:35:06.872Z',
-    agendaMinTeam: 3,
-    agendaMaxTeam: 7,
-    agendaMinPeople: 2,
-    agendaMaxPeople: 5,
-    agendaPoster: '1',
-    agendaLocation: 'SEOUL',
-    agendaIsRanking: false,
-    agendaIsOfficial: false,
-  };
-
+  console.log('json', JSON.stringify(jsonData));
   await instanceInAgenda
-    .post('/request', {
-      // headers: {
-      //   'Content-Type': 'multipart/form-data',
-      // },
-      data: jsonData,
-    })
+    .post(
+      '/request',
+      JSON.stringify(jsonData) //json으로 변환
+    )
     .then((res) => {
       console.log(res);
     })
