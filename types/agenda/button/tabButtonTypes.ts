@@ -1,4 +1,5 @@
 import { TabValues } from 'constants/agenda/agendaDetail/agendaTabs';
+import { AgendaDataProps } from '../agendaDetail/agendaDataTypes';
 
 export interface TabButtonProps {
   text: string;
@@ -15,4 +16,5 @@ export interface TabButtonsProps {
 export interface TabContentProps {
   activeTab: TabValues;
   tabs: Record<string, TabValues>;
+  agendaData: AgendaDataProps;
 }

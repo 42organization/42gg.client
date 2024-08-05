@@ -23,7 +23,9 @@ const newAnnoucnemet = () => {
   alert('새로운 공지사항을 추가합니다.');
 };
 
-export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
+export default function AgendaAnnouncements() {
+  // { isHost }: { isHost: boolean }) {
+  const isHost = true;
   const [announcementData, setannouncementData] = useState<
     AnnouncementProps[] | null
   >(null);

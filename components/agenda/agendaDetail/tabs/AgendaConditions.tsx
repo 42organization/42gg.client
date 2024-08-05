@@ -1,33 +1,8 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
-import { instanceInAgenda } from 'utils/axios';
-import { AgendaLocation, AgendaStatus } from 'constants/agenda/agenda';
+import { AgendaProps } from 'types/agenda/agendaDetail/agendaTypes';
+import { AgendaLocation } from 'constants/agenda/agenda';
 import styles from 'styles/agenda/agendaDetail/tabs/AgendaConditions.module.scss';
 
-export default function AgendaConditions() {
-  const router = useRouter();
-  const { agendaKey } = router.query;
-  const [agendaData, setAgendaData] = useState<AgendaDataProps | null>(null);
-
-  const fetchAgendaData = async () => {
-    if (agendaKey) {
-      try {
-        const res = await instanceInAgenda.get(`?agenda_key=${agendaKey}`);
-        setAgendaData(res.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchAgendaData();
-  }, [agendaKey]);
-
-  if (!agendaData) {
-    return <div>Loading...</div>;
-  }
+export default function AgendaConditions({ agendaData }: AgendaProps) {
   const {
     agendaMinPeople,
     agendaMaxPeople,

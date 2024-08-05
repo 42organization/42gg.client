@@ -5,17 +5,21 @@ import AgendaDescription from 'components/agenda/agendaDetail/tabs/AgendaDescrip
 import AgendaParticipants from 'components/agenda/agendaDetail/tabs/AgendaParticipants';
 import styles from 'styles/agenda/agendaDetail/AgendaTab.module.scss';
 
-export default function TabContent({ activeTab, tabs }: TabContentProps) {
+export default function TabContent({
+  activeTab,
+  tabs,
+  agendaData,
+}: TabContentProps) {
   const renderContent = () => {
     switch (activeTab) {
       case tabs.DESCRIPTION:
-        return <AgendaDescription />;
+        return <AgendaDescription agendaData={agendaData} />;
       case tabs.PARTICIPANTS:
-        return <AgendaParticipants />;
+        return <AgendaParticipants agendaData={agendaData} />;
       case tabs.NOTIFICATIONS:
         return <AgendaAnnouncements />;
       case tabs.CONDITIONS:
-        return <AgendaConditions />;
+        return <AgendaConditions agendaData={agendaData} />;
       default:
         return null;
     }

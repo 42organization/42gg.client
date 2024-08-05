@@ -66,26 +66,14 @@ const determineButtonText = ({
   return '';
 };
 
-export default function AgendaInfo() {
+export default function AgendaInfo({ agendaData }: AgendaDetailProps) {
   const router = useRouter();
   const { agendaKey } = router.query;
 
-  const [agendaData, setAgendaData] = useState<AgendaDataProps>();
   const [myTeam, setMyTeam] = useState<teamDataProps>();
   const [teamStatus, setTeamStatus] = useState<number>(204);
   const [profileData, setProfileData] = useState<LoginInfoDataProps>();
   const [buttonText, setButtonText] = useState<string>('initial');
-
-  const fetchAgendaData = async () => {
-    if (agendaKey) {
-      try {
-        const res = await instanceInAgenda.get(`?agenda_key=${agendaKey}`);
-        setAgendaData(res.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
 
   const fetchTeamList = async () => {
     if (agendaKey) {
@@ -111,7 +99,6 @@ export default function AgendaInfo() {
   };
 
   useEffect(() => {
-    fetchAgendaData();
     fetchTeamList();
     fetchLoginData();
   }, [agendaKey]);
