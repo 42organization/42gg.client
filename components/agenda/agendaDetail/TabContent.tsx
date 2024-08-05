@@ -9,15 +9,17 @@ export default function TabContent({
   activeTab,
   tabs,
   agendaData,
+  isHost,
+  myTeam,
 }: TabContentProps) {
   const renderContent = () => {
     switch (activeTab) {
       case tabs.DESCRIPTION:
         return <AgendaDescription agendaData={agendaData} />;
       case tabs.PARTICIPANTS:
-        return <AgendaParticipants agendaData={agendaData} />;
+        return <AgendaParticipants agendaData={agendaData} myTeam={myTeam} />;
       case tabs.NOTIFICATIONS:
-        return <AgendaAnnouncements />;
+        return <AgendaAnnouncements isHost={isHost} />;
       case tabs.CONDITIONS:
         return <AgendaConditions agendaData={agendaData} />;
       default:

@@ -1,5 +1,6 @@
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
+import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
 import { TabValues } from 'constants/agenda/agendaDetail/agendaTabs';
-import { AgendaDataProps } from '../agendaDetail/agendaDataTypes';
 
 export interface TabButtonProps {
   text: string;
@@ -17,4 +18,6 @@ export interface TabContentProps {
   activeTab: TabValues;
   tabs: Record<string, TabValues>;
   agendaData: AgendaDataProps;
+  isHost: boolean;
+  myTeam?: TeamDataProps | null;
 }

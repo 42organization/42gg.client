@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { teamDataProps } from 'types/agenda/team/teamDataTypes';
+import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
 import { instanceInAgenda } from 'utils/axios';
 import ParticipantTeam from 'components/agenda/agendaDetail/tabs/ParticipantTeam';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantTeamList.module.scss';
@@ -49,54 +49,42 @@ const confirmData = [
   },
 ];
 
-export interface ParticipantListProps {
+export interface ParticipantTeamListProps {
   max: number;
+  myTeam?: TeamDataProps | null;
 }
 
-export default function ParticipantTeamList({ max }: ParticipantListProps) {
+export default function ParticipantTeamList({
+  max,
+  myTeam,
+}: ParticipantTeamListProps) {
   const router = useRouter();
   const { agendaKey } = router.query;
 
-  const [myTeam, setMyTeam] = useState<teamDataProps | null>(null);
-  const [teamStatus, setTeamStatus] = useState<number>(0);
-  const [recruitingTeams, setRecruitingTeams] = useState<teamDataProps[]>([]);
-  const [confirmedTeams, setConfirmedTeams] = useState<teamDataProps[]>([]);
+  const [recruitingTeams, setRecruitingTeams] = useState<TeamDataProps[]>([]);
+  const [confirmedTeams, setConfirmedTeams] = useState<TeamDataProps[]>([]);
 
-  const fetchMyTeam = async () => {
-    if (agendaKey) {
-      try {
-        const res = await instanceInAgenda.get(
-          `team/my?agenda_key=${agendaKey}`
-        );
-        setMyTeam(res.data);
-        setTeamStatus(res.status);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
+  // const fetchRecruitTeams = async () => {
+  //   if (agendaKey) {
+  //     try {
+  //       const params = {
+  //         agenda_key: agendaKey,
+  //         page: 1,
+  //         size: 10,
+  //       };
 
-  const fetchRecruitTeams = async () => {
-    if (agendaKey) {
-      try {
-        const params = {
-          agenda_key: agendaKey,
-          page: 1,
-          size: 10,
-        };
-
-        const res = await instanceInAgenda.get(`team/open?`, { params });
-        console.log('모집 중인 팀', res.data);
-        setRecruitingTeams(res.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
+  //       const res = await instanceInAgenda.get(`team/open?`, { params });
+  //       console.log('모집 중인 팀', res.data);
+  //       setRecruitingTeams(res.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     // fetchRecruitTeams();
-    fetchMyTeam();
+    // fetchMyTeam();
     setRecruitingTeams(teamData);
     setConfirmedTeams(confirmData);
   }, [agendaKey]);
@@ -106,7 +94,7 @@ export default function ParticipantTeamList({ max }: ParticipantListProps) {
   }
   return (
     <>
-      {teamStatus === 200 && myTeam ? (
+      {myTeam ? (
         <div className={styles.participantsWarp}>
           <div className={styles.participantsTitle}>내 팀</div>
 

@@ -1,14 +1,15 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
 import { ParticipantSummaryProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes';
-import { LoginInfoDataProps } from 'types/agenda/profile/profileDataTypes';
-import { teamDataProps } from 'types/agenda/team/teamDataTypes';
-import { instanceInAgenda } from 'utils/axios';
 import { AgendaStatus } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
 import styles from 'styles/agenda/agendaDetail/AgendaInfo.module.scss';
+
+interface AgendaInfoProps {
+  agendaData: AgendaDataProps;
+  isHost: boolean;
+  isParticipant: boolean;
+}
 
 const copyLink = () => {
   const url = window.location.href;
@@ -36,17 +37,6 @@ const isTeam = (agendaData: AgendaDataProps) => {
   return agendaData.agendaMinPeople !== agendaData.agendaMaxPeople;
 };
 
-const getIsHost = (
-  profileData: LoginInfoDataProps,
-  agendaData: AgendaDataProps
-) => {
-  return profileData.intraId === agendaData.agendaHost;
-};
-
-const getIsParticipant = (teamList: number) => {
-  return teamList === 200;
-};
-
 // 버튼 텍스트 결정 함수
 const determineButtonText = ({
   agendaStatus,
@@ -66,97 +56,18 @@ const determineButtonText = ({
   return '';
 };
 
-export default function AgendaInfo({ agendaData }: AgendaDetailProps) {
-  const router = useRouter();
-  const { agendaKey } = router.query;
-
-  const [myTeam, setMyTeam] = useState<teamDataProps>();
-  const [teamStatus, setTeamStatus] = useState<number>(204);
-  const [profileData, setProfileData] = useState<LoginInfoDataProps>();
-  const [buttonText, setButtonText] = useState<string>('initial');
-
-  const fetchTeamList = async () => {
-    if (agendaKey) {
-      try {
-        const res = await instanceInAgenda.get(
-          `team/my?agenda_key=${agendaKey}`
-        );
-        setMyTeam(res.data);
-        setTeamStatus(res.status);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
-
-  const fetchLoginData = async () => {
-    try {
-      const res = await instanceInAgenda.get('profile/info');
-      setProfileData(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchTeamList();
-    fetchLoginData();
-  }, [agendaKey]);
-
-  useEffect(() => {
-    if (agendaData && myTeam && profileData) {
-      const isHost = getIsHost(profileData, agendaData);
-      const isParticipant = getIsParticipant(teamStatus);
-
-      const text = determineButtonText({
-        agendaStatus: agendaData.agendaStatus,
-        isHost,
-        isParticipant,
-        isTeam: isTeam(agendaData),
-      });
-      setButtonText(text); // 버튼 텍스트 설정
-    }
-  }, [agendaData, myTeam, profileData]); // 의존성 배열에 추가
-
-  if (!agendaData || !myTeam || !profileData) {
-    return <div>Loading...</div>;
-  }
-
+export default function AgendaInfo({
+  agendaData,
+  isHost,
+  isParticipant,
+}: AgendaInfoProps) {
+  const buttonText = determineButtonText({
+    agendaStatus: agendaData.agendaStatus,
+    isHost,
+    isParticipant,
+    isTeam: isTeam(agendaData),
+  });
   const { agendaTitle, agendaHost } = agendaData;
-
-  // if (type === 'team') {
-  //   return (
-  //     <div className={styles.infoContainer}>
-  //       <div className={styles.infoWarp}>
-  //         <div className={styles.contentWarp}>
-  //           <div className={styles.enrollWarp}>
-  //             {buttonText !== '' && (
-  //               <UploadBtn
-  //                 text={buttonText}
-  //                 onClick={
-  //                   buttonText === '팀 만들기'
-  //                     ? makeTeam
-  //                     : buttonText === '참가하기'
-  //                     ? participationIn
-  //                     : buttonText === '주최자 관리'
-  //                     ? hostMode
-  //                     : submitResults
-  //                 }
-  //               />
-  //             )}
-  //           </div>
-  //           <div className={styles.titleWarp}>
-  //             <h2>{agendaTitle}</h2>
-  //             <ShareBtn onClick={copyLink} />
-  //           </div>
-  //           <div className={styles.organizerWrap}>
-  //             <span>주최자 : {agendaHost}</span>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   return (
     <>

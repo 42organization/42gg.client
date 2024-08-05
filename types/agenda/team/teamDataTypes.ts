@@ -1,6 +1,6 @@
 import { Coalition } from 'constants/agenda/agenda';
 
-export interface teamDataProps {
+export interface TeamDataProps {
   teamName: string;
   teamLeaderIntraId: string;
   teamMateCount: number;
