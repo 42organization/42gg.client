@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import {
   ParticipantTeamProps,
   PeopleCount,
-} from 'types/agenda/agendaDetail/tabs/participantTeamTypes';
+} from 'types/agenda/agendaDetail/tabs/participantTypes';
 import { countCoalitions } from 'components/agenda/utils/coalition/countCoalitions';
 import { getCoalitionEnum } from 'components/agenda/utils/coalition/getCoalitionEnum';
 import ColorList from 'components/agenda/utils/ColorList';

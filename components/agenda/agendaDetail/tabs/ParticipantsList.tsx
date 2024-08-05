@@ -1,7 +1,10 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import {
+  numberProps,
+  ParticipantProps,
+} from 'types/agenda/agendaDetail/tabs/participantTypes';
 import { instanceInAgenda } from 'utils/axios';
-import { Coalition } from 'constants/agenda/agenda';
 import Participant from 'components/agenda/agendaDetail/tabs/Participant';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantsList.module.scss';
 
@@ -24,20 +27,7 @@ const mockParticipant = [
   },
 ];
 
-export interface ParticipantProps {
-  teamName: string;
-  teamLeaderIntraId: string;
-  teamMateCount: number;
-  teamAward: string;
-  awardPriority: number;
-  coalitions: string[];
-}
-
-interface ParticipantsListProps {
-  max: number;
-}
-
-export default function ParticipantsList({ max }: ParticipantsListProps) {
+export default function ParticipantsList({ max }: numberProps) {
   const router = useRouter();
   const { agendaKey } = router.query;
 
@@ -81,7 +71,7 @@ export default function ParticipantsList({ max }: ParticipantsListProps) {
         {participants.map((participant, index) => (
           <Participant
             key={index}
-            name={participant.teamName}
+            teamName={participant.teamName}
             coalitions={participant.coalitions}
           />
         ))}

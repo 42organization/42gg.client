@@ -1,15 +1,13 @@
 import React from 'react';
+import { ParticipantProps } from 'types/agenda/agendaDetail/tabs/participantTypes';
 import { colorMapping, iconMapping } from 'types/agenda/utils/colorList';
-import { Coalition } from 'constants/agenda/agenda';
 import { getCoalitionEnum } from 'components/agenda/utils/coalition/getCoalitionEnum';
 import styles from 'styles/agenda/agendaDetail/tabs/Participant.module.scss';
 
-interface ParticipantProps {
-  name: string;
-  coalitions: string[] | Coalition[];
-}
-
-export default function Participant({ name, coalitions }: ParticipantProps) {
+export default function Participant({
+  teamName,
+  coalitions,
+}: ParticipantProps) {
   const coalitionEnum = getCoalitionEnum(coalitions);
 
   if (!coalitionEnum || coalitionEnum.length !== 1) {
@@ -26,7 +24,7 @@ export default function Participant({ name, coalitions }: ParticipantProps) {
       }`}
     >
       <div className={styles.participantWarp}>
-        <div className={styles.participantcontent}>{name}</div>
+        <div className={styles.participantcontent}>{teamName}</div>
         {IconComponent && <IconComponent />}
       </div>
     </div>

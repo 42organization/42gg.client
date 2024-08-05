@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { ParticipantTeamListProps } from 'types/agenda/agendaDetail/tabs/participantTypes';
 import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
-import { instanceInAgenda } from 'utils/axios';
 import ParticipantTeam from 'components/agenda/agendaDetail/tabs/ParticipantTeam';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantTeamList.module.scss';
 
@@ -48,11 +48,6 @@ const confirmData = [
     coalitions: ['GUN'],
   },
 ];
-
-export interface ParticipantTeamListProps {
-  max: number;
-  myTeam?: TeamDataProps | null;
-}
 
 export default function ParticipantTeamList({
   max,

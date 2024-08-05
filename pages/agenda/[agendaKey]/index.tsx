@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { instanceInAgenda } from 'utils/axios';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import AgendaTab from 'components/agenda/agendaDetail/AgendaTab';

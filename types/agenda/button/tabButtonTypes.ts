@@ -1,4 +1,4 @@
-import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
 import { TabValues } from 'constants/agenda/agendaDetail/agendaTabs';
 

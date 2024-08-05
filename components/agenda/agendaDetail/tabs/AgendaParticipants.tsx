@@ -1,18 +1,12 @@
-import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
-import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
+import { ParticipantTabProps } from 'types/agenda/agendaDetail/tabs/participantTypes';
 import ParticipantsList from 'components/agenda/agendaDetail/tabs/ParticipantsList';
 import styles from 'styles/agenda/agendaDetail/tabs/AgendaParticipants.module.scss';
 import ParticipantTeamList from './ParticipantTeamList';
 
-interface ParticipantListProps {
-  agendaData: AgendaDataProps;
-  myTeam?: TeamDataProps | null;
-}
-
 export default function AgendaParticipants({
-  agendaData,
   myTeam,
-}: ParticipantListProps) {
+  agendaData,
+}: ParticipantTabProps) {
   const { agendaMinPeople, agendaMaxPeople, agendaMaxTeam } = agendaData;
 
   const isTeam = (min: number, max: number) => {

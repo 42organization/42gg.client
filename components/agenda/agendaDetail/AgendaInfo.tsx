@@ -1,15 +1,9 @@
-import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
-import { ParticipantSummaryProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes';
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
+import { AgendaInfoProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes';
 import { AgendaStatus } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
 import styles from 'styles/agenda/agendaDetail/AgendaInfo.module.scss';
-
-interface AgendaInfoProps {
-  agendaData: AgendaDataProps;
-  isHost: boolean;
-  isParticipant: boolean;
-}
 
 const copyLink = () => {
   const url = window.location.href;
@@ -39,15 +33,14 @@ const isTeam = (agendaData: AgendaDataProps) => {
 
 // 버튼 텍스트 결정 함수
 const determineButtonText = ({
-  agendaStatus,
+  agendaData,
   isHost,
   isParticipant,
-  isTeam,
-}: ParticipantSummaryProps) => {
-  if (agendaStatus === AgendaStatus.CONFIRM) {
+}: AgendaInfoProps) => {
+  if (agendaData.agendaStatus === AgendaStatus.CONFIRM) {
     return isHost ? '결과입력' : '';
-  } else if (agendaStatus === AgendaStatus.OPEN) {
-    if (isTeam) {
+  } else if (agendaData.agendaStatus === AgendaStatus.OPEN) {
+    if (isTeam(agendaData)) {
       return isHost ? '주최자 관리' : !isParticipant ? '팀 만들기' : '';
     } else {
       return isHost ? '주최자 관리' : !isParticipant ? '참가하기' : '';
@@ -62,10 +55,9 @@ export default function AgendaInfo({
   isParticipant,
 }: AgendaInfoProps) {
   const buttonText = determineButtonText({
-    agendaStatus: agendaData.agendaStatus,
+    agendaData,
     isHost,
     isParticipant,
-    isTeam: isTeam(agendaData),
   });
   const { agendaTitle, agendaHost } = agendaData;
 
