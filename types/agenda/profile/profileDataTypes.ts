@@ -10,5 +10,5 @@ export interface ProfileDataProps {
 }
 
 export interface ProfileImageCardProps {
-  profileData: ProfileDataProps | null;
+  profileData: ProfileDataProps;
 }

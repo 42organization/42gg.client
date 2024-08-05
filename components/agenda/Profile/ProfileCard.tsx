@@ -3,9 +3,6 @@ import CustomImage from 'components/agenda/utils/CustomImage';
 import styles from 'styles/agenda/Profile/ProfileCard.module.scss';
 
 const ProfileImageCard = ({ profileData }: ProfileImageCardProps) => {
-  if (!profileData) {
-    return <></>;
-  }
   return (
     <div>
       <div className={styles.profileImageCard}>
@@ -22,10 +19,26 @@ const ProfileImageCard = ({ profileData }: ProfileImageCardProps) => {
 
         <div className={styles.linkImages}>
           <div className={styles.linkImageWrapper}>
-            <CustomImage src='/image/agenda/github.svg' alt='profile image' />
+            {profileData.userGithub ? (
+              <a
+                href={`https://github.com/${profileData.userGithub}`}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <CustomImage src='/image/agenda/github.svg' alt='github' />
+              </a>
+            ) : (
+              ''
+            )}
           </div>
           <div className={styles.linkImageWrapper}>
-            <CustomImage src='/image/agenda/42-icon.svg' alt='profile image' />
+            <a
+              href={`https://profile.intra.42.fr/users/${profileData.userIntraId}`}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <CustomImage src='/image/agenda/42-icon.svg' alt='42' />
+            </a>
           </div>
         </div>
       </div>
