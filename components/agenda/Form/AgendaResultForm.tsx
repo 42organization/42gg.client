@@ -5,9 +5,18 @@ import SelectInput from '../Input/SelectInput';
 
 interface AgendaResultFormProps {
   teamlist: string[];
+  SubmitAgendaResult: (
+    awardList: {
+      award: string;
+      teams: string[];
+    }[]
+  ) => void;
 }
 
-const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
+const AgendaResultForm = ({
+  teamlist,
+  SubmitAgendaResult,
+}: AgendaResultFormProps) => {
   const [awardList, setAwardList] = useState<
     {
       award: string;
@@ -45,24 +54,24 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
   // }
 
   return (
-    <div className={styles.container}>
+    <form className={styles.container} onSubmit={(e) => e.preventDefault()}>
       <h1 className={styles.title}>결과 입력</h1>
       <h2 className={styles.description}>팀별 결과를 입력해주세요</h2>
       <ul className={styles.awardUl}>
-        {awardList?.map((data, idx) => (
+        {awardList?.map((awardInfo, idx) => (
           <li key={idx} className={styles.awardLi}>
             <DragBtn onClick={(e) => alert('DEV::dragbutton called' + e)} />
             <div className={styles.awardContainer}>
               <div className={styles.awardTitleContainer}>
                 <p key={idx} className={styles.awardTitle}>
-                  {data.award}
+                  {awardInfo.award}
                 </p>
                 <RemoveElementBtn
                   onClick={(e) => alert('DEV::removebtn called' + e)}
                 />
               </div>
               <div className={styles.awardSelectContainer}>
-                {data.teams.map((team, teamidx) => (
+                {awardInfo.teams.map((team, teamidx) => (
                   <SelectInput
                     key={teamidx}
                     selected={team}
@@ -122,8 +131,8 @@ const AgendaResultForm = ({ teamlist }: AgendaResultFormProps) => {
       >
         test
       </button> */}
-      {/* <button onclick={submit}>submit</ button> */}
-    </div>
+      <button onClick={() => SubmitAgendaResult(awardList)}>submit</button>
+    </form>
   );
 };
 

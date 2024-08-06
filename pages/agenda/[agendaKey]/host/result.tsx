@@ -13,9 +13,24 @@ const SubmitAgendaResult = () => {
     'grape',
     'honey',
   ];
+
+  const SubmitAgendaResult = (
+    awardList: {
+      award: string;
+      teams: string[];
+    }[]
+  ) => {
+    console.log(awardList);
+    // 에러일 경우: 상은 있는데 팀이 없는 경우
+    // 한 팀이 여러 상을 받는 경우
+    // 상 안에서 같은 팀이 여러번 나오는 경우
+  };
   return (
     <div className={styles.container}>
-      <AgendaResultForm teamlist={teamlist} />
+      <AgendaResultForm
+        teamlist={teamlist}
+        SubmitAgendaResult={SubmitAgendaResult}
+      />
     </div>
   );
 };
