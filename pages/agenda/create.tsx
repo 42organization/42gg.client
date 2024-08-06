@@ -1,5 +1,3 @@
-import { json } from 'stream/consumers';
-import { useRef } from 'react';
 import { instanceInAgenda } from 'utils/axios';
 import { CancelBtn } from 'components/agenda/button/Buttons';
 import CreateAgendaForm from 'components/agenda/Form/CreateAgendaForm';
@@ -29,19 +27,17 @@ const submitTeamForm = async (e: React.FormEvent<HTMLFormElement>) => {
   for (const key of data.keys()) {
     console.log(key, data.get(key));
   }
-  // data.set('agendaPoster', 'string test'); // 이후 api 업데이트되면 수정
-  // data.set('agendaIsRanking', 'true');
+  data.set('agendaPoster', 'string test'); // 이후 api 업데이트되면 수정
 
-  // //json으로 변환
-  // const temp = JSON.stringify(Object.fromEntries(data));
-  // const jsonData = JSON.parse(temp);
-  // jsonData.agendaIsRanking = true;
-
+  //json으로 변환
+  const temp = JSON.stringify(Object.fromEntries(data));
+  const jsonData = JSON.parse(temp);
+  jsonData.agendaIsRanking = true;
   // console.log('json', JSON.stringify(jsonData));
   await instanceInAgenda
     .post(
       '/request',
-      data //json으로 변환
+      jsonData //json으로 변환
     )
     .then((res) => {
       console.log(res);
