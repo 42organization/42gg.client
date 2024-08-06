@@ -1,5 +1,6 @@
-import { PeopleCount } from 'types/agenda/agendaDetail/tabs/participantTeamTypes';
-import { Coalition, coalitionValues } from 'constants/agenda/agenda';
+import { PeopleCount } from 'types/agenda/agendaDetail/tabs/participantTypes';
+import { coalitionValues } from 'types/agenda/coalitionTypes';
+import { Coalition } from 'constants/agenda/agenda';
 
 export function countCoalitions(coalitions: Coalition[]): PeopleCount {
   const peopleCount: PeopleCount = {};

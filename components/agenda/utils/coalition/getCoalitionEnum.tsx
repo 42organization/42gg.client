@@ -1,4 +1,5 @@
-import { Coalition, coalitionValues } from 'constants/agenda/agenda';
+import { coalitionValues } from 'types/agenda/coalitionTypes';
+import { Coalition } from 'constants/agenda/agenda';
 
 export function getCoalitionEnum(input: string[] | Coalition[]): Coalition[] {
   return input
