@@ -16,17 +16,23 @@ const CreateTeamForm = ({ handleSubmit }: CreateTeamFormProps) => {
         label='팀 이름'
         placeholder='팀 이름을 입력해주세요'
       />
-      <CheckBoxInput name='isPublic' label='공개 여부' />
+      <CheckBoxInput
+        name='teamIsPrivate'
+        label='비밀방(초대만 가능, 대회 내역에서 보이지 않음)'
+      />
       <SelectInput
         name='teamLocation'
         label='클러스터 위치'
         options={['서울', '경산', '둘다']}
       />
       <DescriptionInput
-        name='teamDescription'
+        name='teamContent'
         label='팀 설명'
         placeholder='팀 설명을 입력해주세요'
       />
+      <button type='submit' className={styles.submitButton}>
+        팀 만들기
+      </button>
     </form>
   );
 };
