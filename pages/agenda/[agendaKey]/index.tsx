@@ -2,14 +2,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
+import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
 import { instanceInAgenda } from 'utils/axios';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import AgendaTab from 'components/agenda/agendaDetail/AgendaTab';
-import { useAgendaData } from 'hooks/agenda/agendaDetail/useAgendaData';
-import { useMyTeam } from 'hooks/agenda/team/useMyTeam';
+import useFetchDataGet from 'hooks/agenda/useFetchDataGet';
 import styles from 'styles/agenda/agendaDetail/AgendaDetail.module.scss';
 
-const getIsHost = (intraId: string, agendaData?: AgendaDataProps) => {
+const getIsHost = (intraId: string, agendaData?: AgendaDataProps | null) => {
   if (!agendaData) return false;
   return intraId === agendaData.agendaHost;
 };
@@ -39,8 +39,17 @@ const AgendaDetail = () => {
   const { agendaKey } = router.query;
   const teamUID = 1;
 
-  const agendaData = useAgendaData(agendaKey as string);
-  const { myTeam, isParticipant } = useMyTeam(agendaKey as string);
+  const agendaData = useFetchDataGet<AgendaDataProps>(
+    `?agenda_key=${agendaKey}`,
+    agendaKey as string
+  ).data;
+
+  // const { myTeam, isParticipant } = useMyTeam(agendaKey as string);
+  const { data: myTeam, status: status } = useFetchDataGet<TeamDataProps>(
+    `team/my?agenda_key=${agendaKey}`,
+    agendaKey as string
+  );
+
   const intraId = useIntraId(agendaKey as string);
 
   const isHost = getIsHost(intraId, agendaData);
@@ -53,7 +62,7 @@ const AgendaDetail = () => {
             <AgendaInfo
               agendaData={agendaData}
               isHost={isHost}
-              isParticipant={isParticipant}
+              status={status}
             />
             <AgendaTab
               agendaData={agendaData}

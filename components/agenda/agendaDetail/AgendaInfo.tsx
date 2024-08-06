@@ -35,8 +35,10 @@ const isTeam = (agendaData: AgendaDataProps) => {
 const determineButtonText = ({
   agendaData,
   isHost,
-  isParticipant,
+  status,
 }: AgendaInfoProps) => {
+  const isParticipant = status === 200;
+
   if (agendaData.agendaStatus === AgendaStatus.CONFIRM) {
     return isHost ? '결과입력' : '';
   } else if (agendaData.agendaStatus === AgendaStatus.OPEN) {
@@ -52,12 +54,12 @@ const determineButtonText = ({
 export default function AgendaInfo({
   agendaData,
   isHost,
-  isParticipant,
+  status,
 }: AgendaInfoProps) {
   const buttonText = determineButtonText({
     agendaData,
     isHost,
-    isParticipant,
+    status,
   });
   const { agendaTitle, agendaHost } = agendaData;
 

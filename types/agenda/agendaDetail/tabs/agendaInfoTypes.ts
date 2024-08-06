@@ -4,7 +4,7 @@ import { AgendaDataProps } from '../agendaTypes';
 export interface AgendaInfoProps {
   agendaData: AgendaDataProps;
   isHost: boolean;
-  isParticipant: boolean;
+  status: number;
 }
 
 export interface AgendaTabProps {
