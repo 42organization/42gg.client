@@ -32,23 +32,45 @@ const isTeam = (agendaData: AgendaDataProps) => {
 };
 
 // 버튼 텍스트 결정 함수
+// const determineButtonText = ({
+//   agendaData,
+//   isHost,
+//   status,
+// }: AgendaInfoProps) => {
+//   const isParticipant = status === 200;
+
+//   if (agendaData.agendaStatus === AgendaStatus.CONFIRM) {
+//     return isHost ? '결과입력' : '';
+//   } else if (agendaData.agendaStatus === AgendaStatus.OPEN) {
+//     if (isTeam(agendaData)) {
+//       return isHost ? '주최자 관리' : !isParticipant ? '팀 만들기' : '';
+//     } else {
+//       return isHost ? '주최자 관리' : !isParticipant ? '참가하기' : '';
+//     }
+//   }
+//   return '';
+// };
+
 const determineButtonText = ({
   agendaData,
   isHost,
   status,
 }: AgendaInfoProps) => {
   const isParticipant = status === 200;
+  const teamText = isTeam(agendaData) ? '팀 만들기' : '참가하기';
 
-  if (agendaData.agendaStatus === AgendaStatus.CONFIRM) {
-    return isHost ? '결과입력' : '';
-  } else if (agendaData.agendaStatus === AgendaStatus.OPEN) {
-    if (isTeam(agendaData)) {
-      return isHost ? '주최자 관리' : !isParticipant ? '팀 만들기' : '';
-    } else {
-      return isHost ? '주최자 관리' : !isParticipant ? '참가하기' : '';
-    }
+  switch (agendaData.agendaStatus) {
+    case AgendaStatus.CONFIRM:
+      return isHost ? '결과입력' : '';
+    case AgendaStatus.OPEN:
+      if (isHost) {
+        return '주최자 관리';
+      }
+      return isParticipant ? '' : teamText;
+
+    default:
+      return '';
   }
-  return '';
 };
 
 export default function AgendaInfo({
