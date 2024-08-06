@@ -245,10 +245,10 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
       </div>
       <div className={styles.bottomContainer}>
         <div className={styles.buttonContainer}>
-          <SubmitInputBtn name='cancel' label='취소하기' />{' '}
+          {/* <SubmitInputBtn name='cancel' label='취소하기' />{' '} */}
           {/*새로만들어야 함*/}
-          <SubmitInputBtn name='submit' label='팀 만들기' />
-          <button type='submit'>submit</button>
+          {/* <SubmitInputBtn name='submit' label='팀 만들기' /> */}
+          <button type='submit'>팀 만들기</button>
         </div>
       </div>
     </form>

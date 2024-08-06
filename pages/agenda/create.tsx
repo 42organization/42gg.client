@@ -15,25 +15,33 @@ const submitTeamForm = async (e: React.FormEvent<HTMLFormElement>) => {
   const form = document.querySelector('form');
   console.log(form);
   const data = new FormData(e.target as HTMLFormElement);
-  for (const key of data.keys()) {
-    console.log(key, data.get(key));
-  }
   data.set('agendaStartTime', data.get('agendaStartTime') + ':00.002Z');
   data.set('agendaEndTime', data.get('agendaEndTime') + ':00.002Z');
   data.set('agendaDeadLine', data.get('agendaDeadLine') + ':00.002Z');
-  data.set('agendaPoster', 'string test'); // 이후 api 업데이트되면 수정
-  data.set('agendaIsRanking', 'true');
+  data.set(
+    'agendaIsRanking',
+    data.get('agendaIsRanking') === 'on' ? 'true' : 'false'
+  );
+  data.set(
+    'agendaIsSolo',
+    data.get('agendaIsSolo') === 'on' ? 'true' : 'false'
+  );
+  for (const key of data.keys()) {
+    console.log(key, data.get(key));
+  }
+  // data.set('agendaPoster', 'string test'); // 이후 api 업데이트되면 수정
+  // data.set('agendaIsRanking', 'true');
 
-  //json으로 변환
-  const temp = JSON.stringify(Object.fromEntries(data));
-  const jsonData = JSON.parse(temp);
-  jsonData.agendaIsRanking = true;
+  // //json으로 변환
+  // const temp = JSON.stringify(Object.fromEntries(data));
+  // const jsonData = JSON.parse(temp);
+  // jsonData.agendaIsRanking = true;
 
-  console.log('json', JSON.stringify(jsonData));
+  // console.log('json', JSON.stringify(jsonData));
   await instanceInAgenda
     .post(
       '/request',
-      JSON.stringify(jsonData) //json으로 변환
+      data //json으로 변환
     )
     .then((res) => {
       console.log(res);
