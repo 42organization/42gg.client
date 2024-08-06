@@ -49,10 +49,6 @@ const AgendaResultForm = ({
     setAwardList([...awardList]);
   };
 
-  // const submit = {
-  //   console.log(awardlist);
-  // }
-
   return (
     <form className={styles.container} onSubmit={(e) => e.preventDefault()}>
       <h1 className={styles.title}>결과 입력</h1>
@@ -107,7 +103,17 @@ const AgendaResultForm = ({
                 placeholder='추가할 상을 입력해주세요...'
               />
               <AddElementBtn
-                onClick={(e) => alert('DEV::addbutton called' + e)}
+                onClick={(e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+                  e.preventDefault();
+                  console.log(e);
+                  const input = document.getElementsByClassName(
+                    styles.newAwardInput
+                  )[0] as HTMLInputElement;
+                  const val = input.value;
+                  if (val === '') return;
+                  input.value = '';
+                  setAwardList([...awardList, { award: val, teams: [] }]);
+                }}
               />
             </div>
             <div className={styles.awardSelectContainer}>
@@ -123,14 +129,6 @@ const AgendaResultForm = ({
           </div>
         </li>
       </ul>
-      {/* <button
-        onClick={() => {
-          awardList.push('test');
-          setAwardList(awardList);
-        }}
-      >
-        test
-      </button> */}
       <button onClick={() => SubmitAgendaResult(awardList)}>submit</button>
     </form>
   );
