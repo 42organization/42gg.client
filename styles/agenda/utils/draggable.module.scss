@@ -1,0 +1,32 @@
+.dragging {
+  box-shadow: 0 0 10px 0 rgba(167, 255, 34, 0.42);
+}
+
+.dropzone {
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+.dropzoneColor {
+  box-shadow: 0 20px 5px 0 rgba(134, 201, 255, 0.841);
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+.dragover {
+  background-color: rgb(1, 42, 43);
+  animation-duration: 0.5s;
+}
+
+.hovered {
+  box-shadow: 0 20px 5px 0 rgba(255, 237, 72, 0.841);
+  animation-name: fadeIn;
+  animation-duration: 1s;
+}
+
+@keyframes fadeIn {
+  from {
+    background-color: rgba(145, 251, 255, 0);
+  }
+  to {
+    box-shadow: 0 20px 5px 0 rgba(255, 237, 72, 0.841);
+  }
+}
