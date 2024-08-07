@@ -20,3 +20,7 @@ export interface AgendaDataProps {
   isOfficial: boolean;
   agendaisRanking: boolean;
 }
+
+export interface AgendaProps {
+  agendaData: AgendaDataProps;
+}
