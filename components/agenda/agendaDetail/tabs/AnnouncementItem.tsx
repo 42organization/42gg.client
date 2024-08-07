@@ -7,7 +7,7 @@ import styles from 'styles/agenda/agendaDetail/tabs/AnnouncementItem.module.scss
 
 export default function AnnouncementItem({
   title,
-  contents,
+  content,
   createdAt,
 }: AnnouncementProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +34,7 @@ export default function AnnouncementItem({
             </div>
           </div>
         </div>
-        {isOpen && <div className={styles.announcementContent}>{contents}</div>}
+        {isOpen && <div className={styles.announcementContent}>{content}</div>}
       </div>
     </>
   );

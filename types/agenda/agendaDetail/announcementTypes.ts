@@ -1,6 +1,6 @@
 export interface AnnouncementProps {
   id: number;
   title: string;
-  contents: string;
+  content: string;
   createdAt: Date;
 }
