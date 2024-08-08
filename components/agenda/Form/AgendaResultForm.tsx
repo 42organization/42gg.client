@@ -20,7 +20,7 @@ const AgendaResultForm = ({
   const [awardList, setAwardList] = useState<awardType[]>([
     { award: '참가상', teams: ['apple'] },
     { award: '그저그런상', teams: ['cider', 'dumpling'] },
-    { award: '참가상', teams: [] },
+    { award: '대상', teams: [] },
   ]);
   const newAwardInputRef = useRef<HTMLInputElement>(null);
   const defaultTeam = '팀을 선택해주세요';
@@ -66,6 +66,8 @@ const AgendaResultForm = ({
 
   let dragging: HTMLElement | null = null;
   const handleDragStart = (e: DragEvent) => {
+    dragging = e.target as HTMLElement;
+    dragging.classList.add(dragStyles.dragging);
     const dropzone = Array.from(
       document.getElementsByClassName(dragStyles.dropzone)
     );
@@ -73,7 +75,6 @@ const AgendaResultForm = ({
       dropzone.forEach((el) => {
         el.classList.add(dragStyles.dropzoneColor);
       });
-    dragging = e.target as HTMLElement;
     return;
   };
   const handleDragEnd = (e: DragEvent) => {
@@ -115,6 +116,7 @@ const AgendaResultForm = ({
 
   const handleDrop = (e: DragEvent) => {
     e.preventDefault();
+    dragging?.classList.remove(dragStyles.dragging);
     let target = e.target;
     console.log('drop', e.target);
     if (
@@ -131,23 +133,25 @@ const AgendaResultForm = ({
     )
       if (!target) return;
     reorderAwardList(target as HTMLElement);
+    dragging = null;
     return target;
   };
 
   const reorderAwardList = (target: HTMLElement) => {
     console.log(target && target.getAttribute('id'));
-    const key = target ? parseInt(target.getAttribute('id') || '0') - 1 : -1;
+    const key = target ? parseInt(target.getAttribute('id') || '0') - 1 : -2;
     const draggingKey = dragging
       ? parseInt(dragging.getAttribute('id') || '0') - 1
-      : -1;
+      : -2;
 
     console.log(key, draggingKey);
-    if (key === -1 || draggingKey === -1 || key === draggingKey) return;
+    if (key === -2 || draggingKey === -2 || key === draggingKey) return;
     const newAwardlist: awardType[] = [];
     console.log(awardList);
     awardList.forEach((award, idx) => {
+      if (key === -1 && idx === -1) newAwardlist.push(awardList[draggingKey]);
       if (idx !== draggingKey) newAwardlist.push(awardList[idx]);
-      if (idx === key) {
+      if (idx === key && key !== -1) {
         newAwardlist.push(awardList[draggingKey]);
       }
     });
@@ -157,7 +161,10 @@ const AgendaResultForm = ({
 
   return (
     <form className={styles.container} onSubmit={(e) => e.preventDefault()}>
-      <div className={styles.dragzone} id={'0'}>
+      <div
+        className={`${styles.titleContainer} ${dragStyles.dropzone}`}
+        id={'0'}
+      >
         <h1 className={styles.title}>결과 입력</h1>
         <h2 className={styles.description}>팀별 결과를 입력해주세요</h2>
       </div>

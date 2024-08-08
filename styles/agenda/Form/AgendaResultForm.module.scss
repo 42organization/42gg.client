@@ -8,6 +8,14 @@
   padding-right: 0;
 }
 
+.titleContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .title {
   @include text('title');
   padding: 1rem;
