@@ -2,7 +2,7 @@
 // import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
 import AnnouncementItem from 'components/agenda/agendaDetail/tabs/AnnouncementItem';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
-// import useFetchDataGet from 'hooks/agenda/useFetchDataGet';
+// import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/agendaDetail/tabs/AgendaAnnouncements.module.scss';
 
 const newAnnoucnemet = () => {
@@ -28,7 +28,7 @@ export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
   // const router = useRouter();
   // const { agendaKey } = router.query;
 
-  // const announcementData = useFetchDataGet<AnnouncementProps[]>(
+  // const announcementData = useFetchGet<AnnouncementProps[]>(
   //   `/announcement/agenda_key=${agendaKey}`,
   //   agendaKey as string
   // ).data;

@@ -6,7 +6,7 @@ import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
 import { instanceInAgenda } from 'utils/axios';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import AgendaTab from 'components/agenda/agendaDetail/AgendaTab';
-import useFetchDataGet from 'hooks/agenda/useFetchDataGet';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/agendaDetail/AgendaDetail.module.scss';
 
 const getIsHost = (intraId: string, agendaData?: AgendaDataProps | null) => {
@@ -39,15 +39,14 @@ const AgendaDetail = () => {
   const { agendaKey } = router.query;
   const teamUID = 1;
 
-  const agendaData = useFetchDataGet<AgendaDataProps>(
-    `?agenda_key=${agendaKey}`,
-    agendaKey as string
-  ).data;
+  const agendaData = useFetchGet<AgendaDataProps>(``, {
+    agenda_key: agendaKey,
+  }).data;
 
   // const { myTeam, isParticipant } = useMyTeam(agendaKey as string);
-  const { data: myTeam, status: status } = useFetchDataGet<TeamDataProps>(
-    `team/my?agenda_key=${agendaKey}`,
-    agendaKey as string
+  const { data: myTeam, status: status } = useFetchGet<TeamDataProps>(
+    `team/my`,
+    { agenda_key: agendaKey }
   );
 
   const intraId = useIntraId(agendaKey as string);
