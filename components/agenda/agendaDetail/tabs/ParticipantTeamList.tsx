@@ -1,10 +1,8 @@
 import { useRouter } from 'next/router';
 import { ParticipantTeamListProps } from 'types/agenda/agendaDetail/tabs/participantTypes';
+import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
 import ParticipantTeam from 'components/agenda/agendaDetail/tabs/ParticipantTeam';
-import {
-  useConfirmedTeams,
-  useOpenTeams,
-} from 'hooks/agenda/agendaDetail/useParticipantTeam';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantTeamList.module.scss';
 
 export default function ParticipantTeamList({
@@ -14,8 +12,17 @@ export default function ParticipantTeamList({
   const router = useRouter();
   const { agendaKey } = router.query;
 
-  const openTeams = useOpenTeams(agendaKey as string);
-  const confirmedTeams = useConfirmedTeams(agendaKey as string);
+  const openTeamParams = { agenda_key: agendaKey, page: 1, size: 10 };
+  const openTeams = useFetchGet<TeamDataProps[]>(
+    `team/open/list`,
+    openTeamParams
+  ).data;
+
+  const confirmTeamParams = { agenda_key: agendaKey, page: 1, size: 10 };
+  const confirmedTeams = useFetchGet<TeamDataProps[]>(
+    `team/confirm/list`,
+    confirmTeamParams
+  ).data;
 
   const openTeamsCount = openTeams ? openTeams.length : 0;
   const confirmedTeamsCount = confirmedTeams ? confirmedTeams.length : 0;
