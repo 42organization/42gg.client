@@ -10,7 +10,9 @@ const Input = ({ name, label, type, ...rest }: InputProps) => {
             {label}
           </label>
         ) : null}
-        {rest?.error ? <p className={styles.error}>{rest.error}</p> : null}
+        {rest?.error ? (
+          <p className={`error_text ${styles.error}`}>{rest.error}</p>
+        ) : null}
       </div>
       {type === 'checkbox' ? (
         <>

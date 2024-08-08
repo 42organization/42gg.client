@@ -1,4 +1,3 @@
-// import { is } from 'cypress/types/bluebird';
 import { useState } from 'react';
 import { Slider } from '@mui/material';
 import CheckboxInput from 'components/agenda/Input/CheckboxInput';
