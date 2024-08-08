@@ -13,31 +13,33 @@ const submitTeamForm = async (e: React.FormEvent<HTMLFormElement>) => {
   const form = document.querySelector('form');
   console.log(form);
   const data = new FormData(e.target as HTMLFormElement);
-  data.set('agendaStartTime', data.get('agendaStartTime') + ':00.002Z');
-  data.set('agendaEndTime', data.get('agendaEndTime') + ':00.002Z');
-  data.set('agendaDeadLine', data.get('agendaDeadLine') + ':00.002Z');
+  data.set('agendaStartTime', data.get('agendaStartTime') + ':00.00Z');
+  data.set('agendaEndTime', data.get('agendaEndTime') + ':00.00Z');
+  data.set('agendaDeadLine', data.get('agendaDeadLine') + ':00.00Z');
   data.set(
     'agendaIsRanking',
     data.get('agendaIsRanking') === 'on' ? 'true' : 'false'
   );
-  data.set(
-    'agendaIsSolo',
-    data.get('agendaIsSolo') === 'on' ? 'true' : 'false'
-  );
+  if (data.get('isSolo') === 'on') {
+    data.set('agendaMaxPeoPle', '1');
+    data.set('agendaMinPeoPle', '1');
+  }
   for (const key of data.keys()) {
     console.log(key, data.get(key));
   }
-  data.set('agendaPoster', 'string test'); // 이후 api 업데이트되면 수정
-
-  //json으로 변환
-  const temp = JSON.stringify(Object.fromEntries(data));
-  const jsonData = JSON.parse(temp);
-  jsonData.agendaIsRanking = true;
-  // console.log('json', JSON.stringify(jsonData));
+  const poster = data.get('agendaPoster') as File;
+  if (poster.size > 1024 * 1024) {
+    alert('파일 사이즈가 너무 큽니다.');
+    return;
+  }
+  if (poster.type !== 'image/jpeg' && poster.type !== 'image/jpg') {
+    alert('jpg, jpeg 파일만 업로드 가능합니다.');
+    return;
+  }
   await instanceInAgenda
     .post(
       '/request',
-      jsonData //json으로 변환
+      data //json으로 변환
     )
     .then((res) => {
       console.log(res);
