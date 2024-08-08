@@ -125,6 +125,7 @@ export default function AgendaProfile() {
             userContent={profileData.userContent}
             userGithub={profileData.userGithub}
             ticketCount={profileData.ticketCount}
+            fetchProfileData={fetchProfileData}
           />
         )}
         {currentTeamData && (

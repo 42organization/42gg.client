@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import { ProfileCardProps } from 'types/agenda/profile/profileCardTypes';
 import { instanceInAgenda } from 'utils/axios';
 import CustomImage from 'components/agenda/utils/CustomImage';
@@ -9,16 +9,22 @@ const ProfileImageCard = ({
   userContent,
   userGithub,
   ticketCount, // NOT YET : ticket
+  fetchProfileData,
 }: ProfileCardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [profileData, setProfileData] = useState({
     userContent,
     userGithub,
   });
-  const [initialProfileData] = useState({
+  const [initialProfileData, setInitialProfileData] = useState({
     userContent,
     userGithub,
   });
+
+  useEffect(() => {
+    setProfileData({ userContent, userGithub });
+    setInitialProfileData({ userContent, userGithub });
+  }, [userContent, userGithub]);
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -41,8 +47,9 @@ const ProfileImageCard = ({
         userContent: profileData.userContent,
         userGithub: profileData.userGithub,
       });
-      handleFlip();
+      fetchProfileData();
       console.log('Profile updated successfully:', response);
+      handleFlip();
     } catch (error) {
       console.error('Error updating profile:', error);
     }
@@ -85,7 +92,7 @@ const ProfileImageCard = ({
                 <input
                   type='text'
                   name='userGithub'
-                  placeholder='깃 허브 아이디 입력'
+                  placeholder='깃 허브 URL'
                   value={
                     profileData.userGithub !== null
                       ? profileData.userGithub
