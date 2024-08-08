@@ -3,11 +3,6 @@
 .profileImageCard {
   width: 22rem;
   height: 31rem;
-  overflow: hidden;
-  background-color: var(--box-bg-1);
-  border: var(--default-border);
-  border-radius: $radius-big;
-  box-shadow: var(--default-box-shadow);
   perspective: 1000px;
 }
 
@@ -30,6 +25,11 @@
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  overflow: hidden;
+  background-color: var(--box-bg-1);
+  border: var(--default-border);
+  border-radius: $radius-big;
+  box-shadow: var(--default-box-shadow);
 }
 
 .backCard {
