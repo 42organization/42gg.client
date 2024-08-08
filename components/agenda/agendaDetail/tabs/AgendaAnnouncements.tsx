@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
 import AnnouncementItem from 'components/agenda/agendaDetail/tabs/AnnouncementItem';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
-import useFetchDataGet from 'hooks/agenda/useFetchDataGet';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/agendaDetail/tabs/AgendaAnnouncements.module.scss';
 
 export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
@@ -10,10 +10,10 @@ export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
   const { agendaKey } = router.query;
 
   // !! page, size 변수로 변경
-  const announcementData = useFetchDataGet<AnnouncementProps[]>(
-    `/announcement?agenda_key=${agendaKey}&page=1&size=20`,
-    agendaKey as string
-  ).data;
+  const params = { agenda_key: agendaKey, page: 1, size: 20 };
+  const announcementData: AnnouncementProps[] | null = useFetchGet<
+    AnnouncementProps[]
+  >(`/announcement`, params).data;
 
   if (!announcementData) {
     return <div>Loading...</div>;
