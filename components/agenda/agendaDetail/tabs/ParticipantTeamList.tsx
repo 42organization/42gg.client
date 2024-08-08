@@ -20,7 +20,7 @@ export default function ParticipantTeamList({
 
   const confirmTeamParams = { agenda_key: agendaKey, page: 1, size: 10 };
   const confirmedTeams = useFetchGet<TeamDataProps[]>(
-    `team/open/list`,
+    `team/confirm/list`,
     confirmTeamParams
   ).data;
 

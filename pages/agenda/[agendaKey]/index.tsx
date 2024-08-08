@@ -39,11 +39,10 @@ const AgendaDetail = () => {
   const { agendaKey } = router.query;
   const teamUID = 1;
 
-  const agendaData = useFetchGet<AgendaDataProps>(``, {
+  const agendaData = useFetchGet<AgendaDataProps>(`/`, {
     agenda_key: agendaKey,
   }).data;
 
-  // const { myTeam, isParticipant } = useMyTeam(agendaKey as string);
   const { data: myTeam, status: status } = useFetchGet<TeamDataProps>(
     `team/my`,
     { agenda_key: agendaKey }
