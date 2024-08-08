@@ -1,5 +1,5 @@
 // import { is } from 'cypress/types/bluebird';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Slider } from '@mui/material';
 import CheckboxInput from 'components/agenda/Input/CheckboxInput';
 import DescriptionInput from 'components/agenda/Input/DescriptionInput';
@@ -7,7 +7,6 @@ import ImageInput from 'components/agenda/Input/ImageInput';
 import TimeInput from 'components/agenda/Input/TimeInput';
 import TitleInput from 'components/agenda/Input/TitleInput';
 import styles from 'styles/agenda/Form/Form.module.scss';
-import SubmitInputBtn from '../button/SubmitInputButton';
 import SelectInput from '../Input/SelectInput';
 
 interface CreateAgendaFormProps {
@@ -39,7 +38,11 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
   console.log('today', today);
   const tommorrow = new Date();
   tommorrow.setDate(today.getDate() + 1);
-  const [dateRange, setDateRange] = useState<Date[]>([today, tommorrow]);
+  const startDate = new Date();
+  const endDate = new Date();
+  startDate.setDate(tommorrow.getDate() + 3);
+  endDate.setDate(tommorrow.getDate() + 7);
+  const [dateRange, setDateRange] = useState<Date[]>([startDate, endDate]);
 
   const handleChange = (
     event: Event,
@@ -136,13 +139,13 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
           <TimeInput
             name='agendaStartTime'
             label='시작일'
-            defaultValue={dateRange[0].toString()}
+            defaultDate={startDate}
             onChange={handleDateRangeMin}
           />
           <TimeInput
             name='agendaEndTime'
             label='종료일'
-            defaultValue={dateRange[1].toString()}
+            defaultDate={endDate}
             onChange={handleDateRangeMax}
           />
         </div>
@@ -159,7 +162,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
             name='agendaDeadLine'
             label=''
             onChange={handleRecruitEnd}
-            defaultValue={tommorrow.toString()}
+            defaultDate={tommorrow}
           />
         </div>
       </div>

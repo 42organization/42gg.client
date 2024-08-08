@@ -1,4 +1,5 @@
 import { DateInputProps } from 'types/aganda/InputPropTypes';
+import { dateToString } from 'utils/handleTime';
 import Input from './Input';
 function parseTen(num: number, tenCount: number): string {
   return num < tenCount ? '0' + num : num.toString();
@@ -20,6 +21,7 @@ const DateInput = ({
   min,
   max,
   defaultValue,
+  defaultDate,
   ...rest
 }: DateInputProps) => {
   if (min !== undefined) {
@@ -30,19 +32,14 @@ const DateInput = ({
   if (max !== undefined) {
     max = '2028-12-12'; // 한계 날짜? 임의로 설정
   }
-  if (!defaultValue) {
-    defaultValue = parseDate(new Date());
-  } else {
-    defaultValue = parseDate(new Date(defaultValue));
-    console.log('defaultVal', defaultValue);
-  }
+  if (defaultDate) console.log('defaultDate', dateToString(defaultDate));
 
   return (
     <Input
       name={name}
       label={label}
       type='datetime-local'
-      defaultValue={defaultValue}
+      defaultValue={dateToString(defaultDate || new Date())}
       {...rest}
     />
   );
