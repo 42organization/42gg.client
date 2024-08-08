@@ -11,6 +11,7 @@ export interface InputProps {
   rest?: Record<string, unknown> | undefined;
   defaultDate?: Date;
   defaultValue?: string;
+  error?: string;
 }
 
 export interface SelectInputProps {
@@ -66,6 +67,7 @@ export interface DateInputProps {
   max?: string;
   defaultValue?: string;
   defaultDate?: Date;
+  error?: string;
   rest?: Record<string, unknown> | undefined;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

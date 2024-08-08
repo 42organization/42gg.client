@@ -32,7 +32,7 @@ const DateInput = ({
   if (max !== undefined) {
     max = '2028-12-12'; // 한계 날짜? 임의로 설정
   }
-  if (defaultDate) console.log('defaultDate', dateToString(defaultDate));
+  // if (defaultDate) console.log('defaultDate', dateToString(defaultDate));
 
   return (
     <Input
