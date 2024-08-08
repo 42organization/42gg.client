@@ -1,117 +1,82 @@
-import React, { useEffect, useState } from 'react';
-import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
-import { teamDataProps } from 'types/agenda/team/teamDataTypes';
-import { AgendaStatus } from 'constants/agenda/agenda';
+import { useRouter } from 'next/router';
+import { ParticipantTeamListProps } from 'types/agenda/agendaDetail/tabs/participantTypes';
 import ParticipantTeam from 'components/agenda/agendaDetail/tabs/ParticipantTeam';
+import {
+  useConfirmedTeams,
+  useOpenTeams,
+} from 'hooks/agenda/agendaDetail/useParticipantTeam';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantTeamList.module.scss';
 
-const agendaMockData: AgendaDataProps = {
-  agendaTitle: '아 기다리고기다리던대회',
-  agendaContents:
-    '이 대회는 언제부터 시작되어 어쩌구저쩌구 뭐를 겨루려고 했는데 비밀이에요',
-  agendaDeadLine: new Date('2024-07-20'),
-  agendaStartTime: new Date('2024-07-25'),
-  agendaEndTime: new Date('2024-07-30'),
-  agendaMinTeam: 3,
-  agendaMaxTeam: 10,
-  agendaCurrentTeam: 5,
-  agendaMinPeople: 3, // 개인 팀 설정
-  agendaMaxPeople: 5,
-  agendaPoster: null,
-  agendaHost: 'iamgroot',
-  agendaLocation: '서울',
-  agendaStatus: AgendaStatus.ON_GOING,
-  createdAt: new Date('2024-07-01'),
-  announcementTitle: '대회 공지사항',
-  isOfficial: true,
-  agendaisRanking: true,
-};
+export default function ParticipantTeamList({
+  max,
+  myTeam,
+}: ParticipantTeamListProps) {
+  const router = useRouter();
+  const { agendaKey } = router.query;
 
-const teamData = [
-  {
-    teamName: '팀 A',
-    teamLeaderIntraId: 'leaderA',
-    teamMateCount: 3,
-    teamKey: '1',
-  },
-  {
-    teamName: '팀 B',
-    teamLeaderIntraId: 'leaderB',
-    teamMateCount: 2,
-    teamKey: 'key2',
-  },
-  {
-    teamName: '팀 C',
-    teamLeaderIntraId: 'leaderC',
-    teamMateCount: 4,
-    teamKey: 'key3',
-  },
-  {
-    teamName: '팀 D',
-    teamLeaderIntraId: 'leaderD',
-    teamMateCount: 1,
-    teamKey: 'key4',
-  },
-];
+  const openTeams = useOpenTeams(agendaKey as string);
+  const confirmedTeams = useConfirmedTeams(agendaKey as string);
 
-export default function ParticipantTeamList() {
-  const [agendaData, setAgendaData] = useState<AgendaDataProps | null>(null);
-  const [currentTeams, setCurrentTeams] = useState<teamDataProps[]>([]);
-  const [confirmedTeams, setConfirmedTeams] = useState<teamDataProps[]>([]);
+  const openTeamsCount = openTeams ? openTeams.length : 0;
+  const confirmedTeamsCount = confirmedTeams ? confirmedTeams.length : 0;
 
-  useEffect(() => {
-    setAgendaData(agendaMockData);
-  }, []);
-
-  useEffect(() => {
-    if (agendaData) {
-      // // 모집 중인 팀 API 호출
-      // const fetchCurrentTeams = async () => {};
-
-      // // 확정 완료 팀 API 호출
-      // const fetchConfirmedTeams = async () => {};
-
-      setCurrentTeams(teamData);
-      setConfirmedTeams(teamData);
-    }
-  }, [agendaData]);
-
-  if (!agendaData) {
-    return <div>로딩 중...</div>;
+  if (!agendaKey) {
+    return <div>Loading...</div>;
   }
 
   return (
     <>
+      {myTeam ? (
+        <div className={styles.participantsWarp}>
+          <div className={styles.participantsTitle}>내 팀</div>
+
+          <ParticipantTeam
+            key={myTeam.teamName}
+            teamKey={myTeam.teamKey}
+            teamName={myTeam.teamName}
+            teamLeaderIntraId={myTeam.teamLeaderIntraId}
+            teamMateCount={myTeam.teamMateCount}
+            maxMateCount={max}
+            coalitions={myTeam.coalitions}
+          />
+        </div>
+      ) : null}
+
       <div className={styles.participantsWarp}>
         <div className={styles.participantsTitle}>
-          모집중인 팀 {currentTeams.length}
+          모집중인 팀 {openTeamsCount}
         </div>
-        {currentTeams.map((team) => (
-          <ParticipantTeam
-            key={team.teamKey}
-            teamKey={team.teamKey}
-            teamName={team.teamName}
-            teamLeaderIntraId={team.teamLeaderIntraId}
-            teamMateCount={team.teamMateCount}
-            maxMateCount={agendaData.agendaMaxPeople}
-          />
-        ))}
+        {openTeams
+          ? openTeams.map((team) => (
+              <ParticipantTeam
+                key={team.teamName}
+                teamKey={team.teamKey}
+                teamName={team.teamName}
+                teamLeaderIntraId={team.teamLeaderIntraId}
+                teamMateCount={team.teamMateCount}
+                maxMateCount={max}
+                coalitions={team.coalitions}
+              />
+            ))
+          : null}
       </div>
 
       <div className={styles.participantsWarp}>
         <div className={styles.participantsTitle}>
-          확정완료 팀 {confirmedTeams.length} / {agendaData.agendaMaxTeam}
+          확정완료 팀 {confirmedTeamsCount} / {max}
         </div>
-        {confirmedTeams.map((team) => (
-          <ParticipantTeam
-            key={team.teamKey}
-            teamKey={team.teamKey}
-            teamName={team.teamName}
-            teamLeaderIntraId={team.teamLeaderIntraId}
-            teamMateCount={team.teamMateCount}
-            maxMateCount={agendaData.agendaMaxPeople}
-          />
-        ))}
+        {confirmedTeams
+          ? confirmedTeams.map((team) => (
+              <ParticipantTeam
+                key={team.teamName}
+                teamName={team.teamName}
+                teamLeaderIntraId={team.teamLeaderIntraId}
+                teamMateCount={team.teamMateCount}
+                maxMateCount={max}
+                coalitions={team.coalitions}
+              />
+            ))
+          : null}
       </div>
     </>
   );
