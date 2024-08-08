@@ -8,7 +8,3 @@ export interface ProfileDataProps {
   userLocation: AgendaLocation;
   ticketCount: number;
 }
-
-export interface ProfileImageCardProps {
-  profileData: ProfileDataProps;
-}

@@ -1,6 +1,127 @@
 @import 'styles/agenda/common.scss';
 
 .profileImageCard {
+  width: 22rem;
+  height: 31rem;
+  perspective: 1000px;
+}
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.rotate-180 {
+  transform: rotateY(180deg);
+}
+
+.backCard,
+.frontCard {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.backCard {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background-color: var(--box-bg-1);
+  border-radius: $radius-big;
+  transform: rotateY(180deg);
+  gap: 0.7rem;
+
+  .editTitle {
+    @include text(title);
+  }
+
+  .editSubTitle {
+    @include text(sub-title);
+  }
+
+  .editContainer {
+    display: flex;
+    width: 19rem;
+    height: auto;
+    flex-direction: column;
+    margin: 0.5rem 0;
+    gap: 0.5rem;
+  }
+
+  .editDescription {
+    width: 100%;
+    height: 5rem;
+    padding: 1rem;
+    overflow-y: scroll;
+    resize: vertical;
+    border: var(--default-border);
+    border-radius: $radius-small;
+  }
+
+  .editOtherInfo {
+    display: flex;
+    width: 100%;
+    height: 9.5rem;
+    flex-direction: column;
+    padding-top: 0.4rem;
+    overflow-y: scroll;
+    gap: 1rem;
+
+    .editOtherInfoItem {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 2rem;
+      gap: 0.7rem;
+      @include text(default);
+
+      .infoText {
+        display: flex;
+        justify-content: center;
+        width: 10rem;
+        overflow-x: hidden;
+      }
+
+      .infoInput {
+        width: 100%;
+        height: 1.8rem;
+        padding-left: 0.8rem;
+        border: var(--default-border);
+        border-radius: $radius-extra-small;
+      }
+    }
+  }
+
+  .submitContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    gap: 2rem;
+
+    .submitBtn {
+      width: auto;
+      height: auto;
+      padding: 1rem;
+      cursor: pointer;
+      border: var(--default-border);
+      border-radius: $radius-small;
+      @include text(default);
+    }
+  }
+}
+
+.frontCard {
+  z-index: 2;
+}
+
+.profileImage {
   position: relative;
   display: flex;
   width: 22rem;
@@ -83,7 +204,7 @@
 .profileContent {
   display: flex;
   width: 22rem;
-  height: auto;
+  height: 15rem;
   flex-direction: column;
   padding: 1.5rem 1rem 1rem;
   gap: 0.5rem;
@@ -92,7 +213,7 @@
 
   .description {
     width: 100%;
-    min-height: 1rem;
+    height: 2.5rem;
     @include text(description-s);
   }
 
@@ -108,9 +229,10 @@
       display: flex;
       flex-wrap: wrap;
       width: 100%;
-      height: 100%;
+      height: 5rem;
       margin-top: 0.5rem;
       gap: 0.3rem;
+      overflow-y: scroll;
 
       .acheivementImageWrapper {
         min-width: 3rem;

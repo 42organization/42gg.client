@@ -1,3 +1,4 @@
+import { profile } from 'console';
 import { useEffect, useState } from 'react';
 import { AgendaHistoryItemProps } from 'types/agenda/profile/agendaHistoryTypes';
 import { CurrentTeamItemProps } from 'types/agenda/profile/currentTeamTypes';
@@ -118,7 +119,14 @@ export default function AgendaProfile() {
         <div className={styles.agendaUserSearchBarWrap}>
           <AgendaUserSearchBar />
         </div>
-        {profileData && <ProfileCard profileData={profileData} />}
+        {profileData && (
+          <ProfileCard
+            userIntraId={profileData.userIntraId}
+            userContent={profileData.userContent}
+            userGithub={profileData.userGithub}
+            ticketCount={profileData.ticketCount}
+          />
+        )}
         {currentTeamData && (
           <CurrentTeam currentTeamData={currentTeamMockData} />
         )}
