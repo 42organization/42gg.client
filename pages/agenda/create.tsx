@@ -8,8 +8,8 @@ const saveLocal = () => {
 };
 
 const submitTeamForm = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
   console.log(e.target);
+  e.preventDefault();
   const form = document.querySelector('form');
   console.log(form);
   const data = new FormData(e.target as HTMLFormElement);

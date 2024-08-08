@@ -172,8 +172,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
   return (
     <form
       onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmit;
+        handleSubmit(e);
       }}
       className={styles.container}
     >
