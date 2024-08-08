@@ -3,6 +3,11 @@
 .profileImageCard {
   width: 22rem;
   height: 31rem;
+  overflow: hidden;
+  background-color: var(--box-bg-1);
+  border: var(--default-border);
+  border-radius: $radius-big;
+  box-shadow: var(--default-box-shadow);
   perspective: 1000px;
 }
 
@@ -32,8 +37,6 @@
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
-  background-color: var(--box-bg-1);
-  border-radius: $radius-big;
   transform: rotateY(180deg);
   gap: 0.7rem;
 
