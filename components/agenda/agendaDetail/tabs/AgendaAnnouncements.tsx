@@ -1,35 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
 import AnnouncementItem from 'components/agenda/agendaDetail/tabs/AnnouncementItem';
+import { UploadBtn } from 'components/agenda/button/UploadBtn';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/agendaDetail/tabs/AgendaAnnouncements.module.scss';
 
-const mockData = [
-  {
-    id: 1,
-    title: '첫 번째 공지사항',
-    contents: '공지사항 이렇게 변경합니다 알아서 보세요.',
-    createdAt: new Date(),
-  },
-  {
-    id: 2,
-    title: '두 번째 공지사항',
-    contents: '공지사항 이렇게 변경합니다 알아서 보세요.',
-    createdAt: new Date(),
-  },
-];
+export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
+  const router = useRouter();
+  const { agendaKey } = router.query;
 
-export default function AgendaAnnouncements() {
-  const [announcementData, setannouncementData] = useState<
-    AnnouncementProps[] | null
-  >(null);
-
-  useEffect(() => {
-    setannouncementData(mockData);
-  }, []);
+  // !! page, size 변수로 변경
+  const params = { agenda_key: agendaKey, page: 1, size: 20 };
+  const announcementData: AnnouncementProps[] | null = useFetchGet<
+    AnnouncementProps[]
+  >(`/announcement`, params).data;
 
   if (!announcementData) {
     return <div>Loading...</div>;
   }
+
+  const newAnnouncement = () => {
+    router.push(`/agenda/${agendaKey}/host/createAnnouncement`);
+  };
 
   return (
     <>
@@ -39,10 +31,16 @@ export default function AgendaAnnouncements() {
             key={item.id}
             id={item.id}
             title={item.title}
-            contents={item.contents}
+            content={item.content}
             createdAt={item.createdAt}
           />
         ))}
+
+        {isHost ? (
+          <div className={styles.buttonWarp}>
+            <UploadBtn text='공지사항 추가' onClick={newAnnouncement} />
+          </div>
+        ) : null}
       </div>
     </>
   );

@@ -1,15 +1,5 @@
-import { useEffect } from 'react';
+import { DateInputProps } from 'types/aganda/InputPropTypes';
 import Input from './Input';
-
-interface DateInputProps {
-  name: string;
-  label: string | null;
-  min?: string;
-  max?: string;
-  defaultValue?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
 function parseTen(num: number, tenCount: number): string {
   return num < tenCount ? '0' + num : num.toString();
 }
@@ -44,12 +34,6 @@ const DateInput = ({
     defaultValue = parseDate(new Date());
   }
 
-  // useEffect(() => {
-  //   const dateControl = document.getElementById(name) as HTMLInputElement;
-  //   if (dateControl?.defaultValue && defaultValue)
-  //     dateControl.defaultValue = defaultValue;
-  //   console.log(defaultValue);
-  // });
   return (
     <Input
       name={name}
@@ -58,11 +42,6 @@ const DateInput = ({
       defaultValue={defaultValue}
       {...rest}
     />
-    // <input
-    //   id='party'
-    //   name='partydate'
-    //   // defaultValue='2017-06-01T08:30'
-    // />
   );
 };
 

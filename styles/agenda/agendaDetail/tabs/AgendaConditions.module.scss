@@ -15,11 +15,9 @@
 
 .conditionTitle {
   @include text('sub-title');
-  // @include boldTextFont(big);
 }
 
 .conditionWarp {
-  // @include regularTextFont(medium);
   @include text('default');
   display: flex;
   flex-direction: column;
@@ -33,7 +31,6 @@
   flex: 1;
 
   .boldText {
-    // @include boldTextFont(medium);
     @include text('tab');
     width: 3rem;
     text-align: center;

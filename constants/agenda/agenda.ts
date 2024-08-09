@@ -1,13 +1,14 @@
 export const enum AgendaLocation {
-  SEOUL,
-  GYEONGSAN,
-  MIX,
+  SEOUL = 'SEOUL',
+  GYEONGSAN = 'GYEONGSAN',
+  MIX = 'MIX',
 }
 
 export const enum AgendaStatus {
   CANCEL = 'CANCEL',
-  ON_GOING = 'ON_GOING',
+  OPEN = 'OPEN',
   CONFIRM = 'CONFIRM',
+  FINISH = 'FINISH',
 }
 
 export const enum TeamStatus {
@@ -17,13 +18,13 @@ export const enum TeamStatus {
 }
 
 export const enum Coalition {
-  GUN,
-  GON,
-  GAM,
-  LEE,
-  SPRING,
-  SUMMER,
-  AUTUMN,
-  WINTER,
-  OTHER,
+  GUN = 'GUN',
+  GON = 'GON',
+  GAM = 'GAM',
+  LEE = 'LEE',
+  SPRING = 'SPRING',
+  SUMMER = 'SUMMER',
+  AUTUMN = 'AUTUMN',
+  WINTER = 'WINTER',
+  OTHER = 'OTHER',
 }

@@ -6,21 +6,19 @@
 }
 
 .checkbox {
-  // width: 1.3rem;
-  // height: 1.3rem;
   justify-content: left;
   align-items: center;
   gap: 2rem;
   display: inline-block;
 
   /* 체크박스 만들기 */
-  width: $medium-font;
-  height: $medium-font;
+  width: $font-size-m;
+  height: $font-size-m;
   vertical-align: middle;
   cursor: pointer;
   user-select: none; /* 드래그 금지 */
   border: 1px solid #000;
-  border-radius: $small-radius;
+  border-radius: $radius-small;
 }
 .checkbox:checked {
   /* 체크되었을 때 */
@@ -30,10 +28,3 @@
 .checkBoxInput {
   display: none;
 }
-
-// .label {
-//   padding: 0 0 0 0.5rem;
-//   // margin-bottom: 10px;
-//   font-size: $medium-font;
-//   font-weight: bold;
-// }

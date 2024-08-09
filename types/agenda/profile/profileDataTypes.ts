@@ -8,3 +8,8 @@ export interface ProfileDataProps {
   userLocation: AgendaLocation;
   ticketCount: number;
 }
+
+export interface LoginInfoDataProps {
+  intraId: string;
+  isAdmin: boolean;
+}

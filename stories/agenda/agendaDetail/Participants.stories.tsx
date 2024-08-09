@@ -17,12 +17,15 @@ export default {
     iconType: {
       control: {
         type: 'select',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         options: Object.values(Coalition),
       },
     },
   },
 } as Meta;
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const Template: Story<ParticipantProps> = (args) => <Participant {...args} />;
 
 export const Gam = Template.bind({});
