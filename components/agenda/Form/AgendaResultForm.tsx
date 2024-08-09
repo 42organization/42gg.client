@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from 'styles/agenda/Form/AgendaResultForm.module.scss';
 import dragStyles from 'styles/agenda/utils/draggable.module.scss';
 import { AddElementBtn, DragBtn, RemoveElementBtn } from '../button/Buttons';
 import SelectInput from '../Input/SelectInput';
+import useDraggable from '../utils/useDraggable';
 
 type awardType = {
   award: string;
@@ -24,6 +25,7 @@ const AgendaResultForm = ({
   ]);
   const newAwardInputRef = useRef<HTMLInputElement>(null);
   const defaultTeam = '팀을 선택해주세요';
+  const dragging = useRef<HTMLElement | null>(null); // draggable 필요한거
 
   const addTeam = (
     idx: number,
@@ -44,104 +46,11 @@ const AgendaResultForm = ({
     setAwardList([...awardList]);
   };
 
-  useEffect(() => {
-    const Form = document.querySelector('form');
-    if (!Form) return;
-    console.log('useEffect');
-    Form.addEventListener('dragstart', handleDragStart);
-    Form.addEventListener('dragend', handleDragEnd);
-    Form.addEventListener('dragover', handleDragOver);
-    Form.addEventListener('dragenter', handleDragEnter);
-    Form.addEventListener('dragleave', handleDragLeave);
-    Form.addEventListener('drop', handleDrop);
-    return () => {
-      Form.removeEventListener('dragstart', handleDragStart);
-      Form.removeEventListener('dragend', handleDragEnd);
-      Form.removeEventListener('dragover', handleDragOver);
-      Form.removeEventListener('dragenter', handleDragEnter);
-      Form.removeEventListener('dragleave', handleDragLeave);
-      Form.removeEventListener('drop', handleDrop);
-    };
-  }, [awardList]);
-
-  let dragging: HTMLElement | null = null;
-  const handleDragStart = (e: DragEvent) => {
-    dragging = e.target as HTMLElement;
-    dragging.classList.add(dragStyles.dragging);
-    const dropzone = Array.from(
-      document.getElementsByClassName(dragStyles.dropzone)
-    );
-    dropzone.length &&
-      dropzone.forEach((el) => {
-        el.classList.add(dragStyles.dropzoneColor);
-      });
-    return;
-  };
-  const handleDragEnd = (e: DragEvent) => {
-    console.log('dragend');
-    e.preventDefault();
-    const dropzone = Array.from(
-      document.getElementsByClassName(dragStyles.dropzone)
-    );
-    dropzone.length &&
-      dropzone.forEach((el) => {
-        el.classList.remove(dragStyles.dropzoneColor);
-        el.classList.remove(dragStyles.hovered);
-      });
-  };
-  const handleDragOver = (e: DragEvent) => {
-    e.preventDefault();
-    return;
-  };
-  const handleDragEnter = (e: DragEvent) => {
-    e.preventDefault();
-    const li =
-      e.target && e.target instanceof HTMLElement
-        ? e.target.closest('li')
-        : null;
-    if (li && li.classList.contains(dragStyles.dropzone)) {
-      console.log('hover');
-      li.classList.add(dragStyles.hovered);
-    }
-  };
-
-  const handleDragLeave = (e: DragEvent) => {
-    e.preventDefault();
-    const li = e.target && e.target instanceof HTMLLIElement ? e.target : null;
-    if (li && li.classList.contains(dragStyles.hovered)) {
-      console.log('leave');
-      li.classList.remove(dragStyles.hovered);
-    }
-  };
-
-  const handleDrop = (e: DragEvent) => {
-    e.preventDefault();
-    dragging?.classList.remove(dragStyles.dragging);
-    let target = e.target;
-    console.log('drop', e.target);
-    if (
-      e.target &&
-      e.target instanceof HTMLElement &&
-      !e.target.classList.contains(dragStyles.dropzone)
-    ) {
-      target = e.target.closest(`.${dragStyles.dropzone}`);
-    }
-    if (
-      !target ||
-      !(target instanceof HTMLElement) ||
-      !target.classList.contains(dragStyles.dropzone)
-    )
-      if (!target) return;
-    reorderAwardList(target as HTMLElement);
-    dragging = null;
-    return target;
-  };
-
   const reorderAwardList = (target: HTMLElement) => {
     console.log(target && target.getAttribute('id'));
     const key = target ? parseInt(target.getAttribute('id') || '0') - 1 : -2;
-    const draggingKey = dragging
-      ? parseInt(dragging.getAttribute('id') || '0') - 1
+    const draggingKey = dragging.current
+      ? parseInt(dragging.current.getAttribute('id') || '0') - 1
       : -2;
 
     console.log(key, draggingKey);
@@ -158,6 +67,14 @@ const AgendaResultForm = ({
     console.log(newAwardlist);
     setAwardList(newAwardlist);
   };
+
+  useDraggable({
+    dragStyles,
+    parentSelector: 'form',
+    deps: awardList,
+    callback: reorderAwardList,
+    dragging: dragging,
+  });
 
   return (
     <form className={styles.container} onSubmit={(e) => e.preventDefault()}>
