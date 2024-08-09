@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from 'styles/agenda/Form/AgendaResultForm.module.scss';
 import dragStyles from 'styles/agenda/utils/draggable.module.scss';
+import { setModifiabilityFlag } from '../../../utils/takgu/handleTournamentGame';
 import { AddElementBtn, DragBtn, RemoveElementBtn } from '../button/Buttons';
 import SelectInput from '../Input/SelectInput';
 import useDraggable from '../utils/useDraggable';
@@ -41,6 +42,15 @@ const AgendaResultForm = ({
     setAwardList([...awardList]);
   };
 
+  const addAward = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.preventDefault();
+    const input = document.getElementById('newAwardInput') as HTMLInputElement;
+    const val = input.value;
+    if (val === '') return;
+    input.value = '';
+    setAwardList([...awardList, { award: val, teams: [] }]);
+  };
+
   const reorderAwardList = (target: HTMLElement) => {
     const key = target ? parseInt(target.getAttribute('id') || '0') - 1 : -2;
     const draggingKey = dragging.current
@@ -68,12 +78,81 @@ const AgendaResultForm = ({
     setAwardList(awardList.filter((_, i) => i !== idx));
   };
 
+  let modifying_award_div: HTMLDivElement | null = null;
+  let modifying_award_p: HTMLParagraphElement | null = null;
+
+  const startModifyAward = (e: Event) => {
+    e.preventDefault();
+    console.log('startModifyAward');
+    const target = e.target as HTMLParagraphElement;
+    if (target === null) return;
+    modifying_award_div = target.closest(`.${styles.awardTitleContainer}`);
+    modifying_award_p = target.closest('p');
+    console.log(modifying_award_div, modifying_award_p, target);
+    if (!modifying_award_div || !modifying_award_p) return;
+    const input = document.createElement('input');
+    input.classList.add(styles.newAwardInput);
+    input.focus();
+    input.value = modifying_award_p.innerText;
+    input.addEventListener('keydown', (e) => completeModifyAward(e));
+    input.addEventListener('blur', (e) => cancelModifyAward(e));
+    console.log(input, modifying_award_p);
+    modifying_award_div.replaceChild(input, modifying_award_p);
+  };
+
+  // 수정취소
+  const cancelModifyAward = (e: FocusEvent) => {
+    e.preventDefault();
+    if (!modifying_award_div || !modifying_award_p) return;
+    modifying_award_div.replaceChild(
+      modifying_award_p,
+      modifying_award_div.children[1]
+    );
+    modifying_award_div = null;
+    modifying_award_p = null;
+    return;
+  };
+
+  // 수정완료
+  const completeModifyAward = (e: KeyboardEvent) => {
+    const target = e.target as HTMLInputElement;
+    if (!target) return;
+    modifying_award_div = target.closest(`.${styles.awardTitleContainer}`);
+    if (!modifying_award_div || !modifying_award_p) return;
+    if (e.type !== 'keydown' || e.key !== 'Enter') return;
+    const idx = parseInt(modifying_award_div?.getAttribute('id') || '-2');
+    if (idx === -2) return;
+    console.log('completeModifyAward');
+    console.log(idx + 1);
+    const newAward = target.value;
+    console.log(awardList[idx]);
+    awardList[idx].award = newAward;
+    modifying_award_p.innerText = newAward;
+    setAwardList([...awardList]);
+    target.blur;
+    return;
+  };
   useDraggable({
     dragStyles,
     parentSelector: 'form',
     deps: awardList,
     callback: reorderAwardList,
     dragging: dragging,
+  });
+
+  useEffect(() => {
+    const temp = document.getElementsByClassName(styles.awardTitle);
+    const arr = Array.from(temp);
+    arr.forEach((p) => {
+      p.addEventListener('dblclick', (e) => startModifyAward(e));
+    });
+    return () => {
+      const temp = document.getElementsByClassName(styles.awardTitle);
+      const arr = Array.from(temp);
+      arr.forEach((p) => {
+        p.removeEventListener('dblclick', (e) => startModifyAward(e));
+      });
+    };
   });
 
   return (
@@ -99,7 +178,11 @@ const AgendaResultForm = ({
               }}
             />
             <div className={styles.awardContainer} key={`${award_idx}`}>
-              <div className={styles.awardTitleContainer}>
+              <div className={styles.awardTitleContainer} id={`${award_idx}`}>
+                <p>
+                  {award_idx}
+                  {': '}
+                </p>
                 <p key={`${award_idx}`} className={styles.awardTitle}>
                   {awardInfo.award}
                 </p>
@@ -141,18 +224,7 @@ const AgendaResultForm = ({
                 type='text'
                 placeholder='추가할 상을 입력해주세요...'
               />
-              <AddElementBtn
-                onClick={(e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-                  e.preventDefault();
-                  const input = document.getElementsByClassName(
-                    styles.newAwardInput
-                  )[0] as HTMLInputElement;
-                  const val = input.value;
-                  if (val === '') return;
-                  input.value = '';
-                  setAwardList([...awardList, { award: val, teams: [] }]);
-                }}
-              />
+              <AddElementBtn onClick={addAward} />
             </div>
             <div className={styles.awardSelectContainer}></div>
           </div>

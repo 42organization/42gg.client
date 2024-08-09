@@ -35,7 +35,7 @@
 }
 .awardLi {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   // padding: 0rem 0
 }
@@ -63,10 +63,17 @@
   align-items: center;
   justify-items: flex;
   justify-content: space-between;
-  > p {
+  > p,
+  input {
+    @include text('title');
+    padding-left: 10px;
     margin: 1rem 0;
     font-size: 1.2rem;
   }
+}
+.awardTitle {
+  width: 100%;
+  border: none;
 }
 
 .awardDeleteBtn {
