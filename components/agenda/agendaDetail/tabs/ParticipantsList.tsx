@@ -11,10 +11,9 @@ export default function ParticipantsList({ max }: numberProps) {
   const router = useRouter();
   const { agendaKey } = router.query;
 
-  // const { participants, curPeople } = useParticipant(agendaKey as string);
   const params = { agenda_key: agendaKey, page: 1, size: 10 };
   const participants = useFetchGet<ParticipantProps[]>(
-    `team/open/list`,
+    `team/confirm/list`,
     params
   ).data;
 

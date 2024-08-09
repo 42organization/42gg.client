@@ -1,43 +1,27 @@
-// import { useRouter } from 'next/router';
-// import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
+import { useRouter } from 'next/router';
+import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
 import AnnouncementItem from 'components/agenda/agendaDetail/tabs/AnnouncementItem';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
-// import useFetchGet from 'hooks/agenda/useFetchGet';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/agendaDetail/tabs/AgendaAnnouncements.module.scss';
 
-const newAnnoucnemet = () => {
-  alert('새로운 공지사항을 추가합니다.');
-};
-
-const mockData = [
-  {
-    id: 1,
-    title: '첫 번째 공지사항',
-    contents: '공지사항 이렇게 변경합니다 알아서 보세요.',
-    createdAt: new Date(),
-  },
-  {
-    id: 2,
-    title: '두 번째 공지사항',
-    contents: '공지사항 이렇게 변경합니다 알아서 보세요.',
-    createdAt: new Date(),
-  },
-];
-
 export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
-  // const router = useRouter();
-  // const { agendaKey } = router.query;
+  const router = useRouter();
+  const { agendaKey } = router.query;
 
-  // const announcementData = useFetchGet<AnnouncementProps[]>(
-  //   `/announcement/agenda_key=${agendaKey}`,
-  //   agendaKey as string
-  // ).data;
-
-  const announcementData = mockData;
+  // !! page, size 변수로 변경
+  const params = { agenda_key: agendaKey, page: 1, size: 20 };
+  const announcementData: AnnouncementProps[] | null = useFetchGet<
+    AnnouncementProps[]
+  >(`/announcement`, params).data;
 
   if (!announcementData) {
     return <div>Loading...</div>;
   }
+
+  const newAnnouncement = () => {
+    router.push(`/agenda/${agendaKey}/host/createAnnouncement`);
+  };
 
   return (
     <>
@@ -47,14 +31,14 @@ export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
             key={item.id}
             id={item.id}
             title={item.title}
-            contents={item.contents}
+            content={item.content}
             createdAt={item.createdAt}
           />
         ))}
 
         {isHost ? (
           <div className={styles.buttonWarp}>
-            <UploadBtn text='공지사항 추가' onClick={newAnnoucnemet} />
+            <UploadBtn text='공지사항 추가' onClick={newAnnouncement} />
           </div>
         ) : null}
       </div>
