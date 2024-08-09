@@ -20,8 +20,6 @@ const AgendaResultForm = ({
 }: AgendaResultFormProps) => {
   const [awardList, setAwardList] = useState<awardType[]>([
     { award: '참가상', teams: ['apple'] },
-    { award: '그저그런상', teams: ['cider', 'dumpling'] },
-    { award: '대상', teams: [] },
   ]);
   const newAwardInputRef = useRef<HTMLInputElement>(null);
   const defaultTeam = '팀을 선택해주세요';
@@ -61,6 +59,15 @@ const AgendaResultForm = ({
     setAwardList(newAwardlist);
   };
 
+  const removeAward = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    const target = (e.target as HTMLElement).closest('li');
+    if (target === null) return;
+    const idx = parseInt(target.getAttribute('id') || '0') - 1;
+    if (idx === -1) return;
+    setAwardList(awardList.filter((_, i) => i !== idx));
+  };
+
   useDraggable({
     dragStyles,
     parentSelector: 'form',
@@ -96,9 +103,7 @@ const AgendaResultForm = ({
                 <p key={`${award_idx}`} className={styles.awardTitle}>
                   {awardInfo.award}
                 </p>
-                <RemoveElementBtn
-                  onClick={(e) => alert('DEV::removebtn called' + e)}
-                />
+                <RemoveElementBtn onClick={(e) => removeAward(e)} />
               </div>
               <div className={styles.awardSelectContainer}>
                 {awardInfo.teams.map((team, teamidx) => (
