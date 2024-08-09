@@ -4,14 +4,12 @@ import CreateAgendaForm from 'components/agenda/Form/CreateAgendaForm';
 import styles from 'styles/agenda/pages/CreateAgenda.module.scss';
 const saveLocal = () => {
   // console.log('saveLocal', '팀 만들기');
+  // 임시저장 추후 추가
 };
 
 const submitTeamForm = async (e: React.FormEvent<HTMLFormElement>) => {
-  // console.log(e.target);
-  e.preventDefault();
-  const form = document.querySelector('form');
-  // console.log(form);
   const data = new FormData(e.target as HTMLFormElement);
+  if (!data) return;
   data.set('agendaStartTime', data.get('agendaStartTime') + ':00.00Z');
   data.set('agendaEndTime', data.get('agendaEndTime') + ':00.00Z');
   data.set('agendaDeadLine', data.get('agendaDeadLine') + ':00.00Z');
@@ -45,10 +43,7 @@ const submitTeamForm = async (e: React.FormEvent<HTMLFormElement>) => {
     return;
   }
   await instanceInAgenda
-    .post(
-      '/request',
-      data //json으로 변환
-    )
+    .post('/request', data)
     .then((res) => {
       console.log(res);
     })

@@ -25,14 +25,11 @@ const DateInput = ({
   ...rest
 }: DateInputProps) => {
   if (min !== undefined) {
-    const date = new Date();
-    date.setDate(date.getDate() + 1);
-    min = parseDate(date); // 현재 날짜에서 2일 뒤로 설정
+    min = parseDate(new Date()); // 지금 시간으로 설정
   }
   if (max !== undefined) {
     max = '2028-12-12'; // 한계 날짜? 임의로 설정
   }
-  // if (defaultDate) console.log('defaultDate', dateToString(defaultDate));
 
   return (
     <Input

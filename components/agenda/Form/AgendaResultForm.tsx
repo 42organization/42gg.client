@@ -170,54 +170,51 @@ const AgendaResultForm = ({
       </div>
       <ul className={styles.awardUl}>
         {awardList?.map((awardInfo, award_idx) => (
-          <>
-            <li
-              key={`${award_idx}`}
-              id={`${award_idx + 1}`}
-              className={`${styles.awardLi} ${dragStyles.dropzone}`}
-              draggable={true}
-            >
-              <DragBtn
-                onClick={(e) => {
-                  console.log(e.target);
-                }}
-              />
-              <div className={styles.awardContainer} key={`${award_idx}`}>
-                <div className={styles.awardTitleContainer}>
-                  <p key={`${award_idx}`} className={styles.awardTitle}>
-                    {awardInfo.award}
-                  </p>
-                  <RemoveElementBtn
-                    onClick={(e) => alert('DEV::removebtn called' + e)}
-                  />
-                </div>
-                <div className={styles.awardSelectContainer}>
-                  {awardInfo.teams.map((team, teamidx) => (
-                    <SelectInput
-                      key={teamidx}
-                      selected={team}
-                      options={teamlist}
-                      name={`selected-team${award_idx}-${teamidx}`}
-                      message='팀을 선택해주세요'
-                      onChange={(e, selected) => {
-                        if (!selected) removeTeam(award_idx, teamidx);
-                      }}
-                    />
-                  ))}
+          <li
+            key={`${award_idx}`}
+            id={`${award_idx + 1}`}
+            className={`${styles.awardLi} ${dragStyles.dropzone}`}
+            draggable={true}
+          >
+            <DragBtn
+              onClick={(e) => {
+                console.log(e.target);
+              }}
+            />
+            <div className={styles.awardContainer} key={`${award_idx}`}>
+              <div className={styles.awardTitleContainer}>
+                <p key={`${award_idx}`} className={styles.awardTitle}>
+                  {awardInfo.award}
+                </p>
+                <RemoveElementBtn
+                  onClick={(e) => alert('DEV::removebtn called' + e)}
+                />
+              </div>
+              <div className={styles.awardSelectContainer}>
+                {awardInfo.teams.map((team, teamidx) => (
                   <SelectInput
+                    key={teamidx}
+                    selected={team}
                     options={teamlist}
-                    name={`unselected-team${award_idx}`}
+                    name={`selected-team${award_idx}-${teamidx}`}
                     message='팀을 선택해주세요'
-                    selected=''
                     onChange={(e, selected) => {
-                      addTeam(award_idx, e, selected);
+                      if (!selected) removeTeam(award_idx, teamidx);
                     }}
                   />
-                </div>
+                ))}
+                <SelectInput
+                  options={teamlist}
+                  name={`unselected-team${award_idx}`}
+                  message='팀을 선택해주세요'
+                  selected=''
+                  onChange={(e, selected) => {
+                    addTeam(award_idx, e, selected);
+                  }}
+                />
               </div>
-            </li>
-            {/* <li className={dragStyles.dropzone} /> */}
-          </>
+            </div>
+          </li>
         ))}
         <li className={styles.awardLi}>
           <div className={styles.awardContainer}>
@@ -243,16 +240,7 @@ const AgendaResultForm = ({
                 }}
               />
             </div>
-            <div className={styles.awardSelectContainer}>
-              {/* <SelectInput
-                options={teamlist}
-                name={`unselected-team${idx}`}
-                message='팀을 선택해주세요'
-                onChange={(e) => {
-                  addTeam(idx, e.target.value);
-                }}
-              /> */}
-            </div>
+            <div className={styles.awardSelectContainer}></div>
           </div>
         </li>
       </ul>

@@ -83,22 +83,11 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
     if (!Array.isArray(newValue)) {
       return;
     }
-    // console.log('activeThumb unused', activeThumb); // unused error
     setPeopleLimit(newValue as number[]);
   };
   const handleRecruitEnd = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newWarning = '';
     if (!e.target.value) return;
     const newEnd = new Date(e.target.value);
-    // console.log(newEnd.getTime(), tommorrow.getTime());
-    // if (newEnd.getTime() < tommorrow.getTime()) {
-    //   newWarning = '내일 이후의 날짜를 선택해주세요';
-    // } else if (newEnd.getTime() > dateRange[0].getTime()) {
-    //   newWarning = '시작일 이전의 날짜를 선택해주세요';
-    // } else {
-    //   newWarning = '';
-    // }
-    // setDateWarn([newWarning, dateWarn[1]]);
     checkWarn(newEnd, 0);
     setRecruitEnd(new Date(e.target.value));
   };
@@ -109,26 +98,13 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
   };
   const handleDateRangeMin = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.value) return;
-    const newWarn = '';
     const newMax = new Date(e.target.value);
-    // if (newMax.getTime() > dateRange[1].getTime()) {
-    //   newWarn = '종료일 이전의 날짜를 선택해주세요';
-    //   console.log(newMax, dateRange[1]);
-    // } else if (newMax.getTime() < recruitEnd.getTime()) {
-    //   newWarn = '마감일 이후의 날짜를 선택해주세요';
-    // } else newWarn = '';
-    // setDateWarn([dateWarn[0], newWarn]);
     checkWarn(newMax, 1);
     setDateRange([new Date(e.target.value), dateRange[1]]);
   };
   const handleDateRangeMax = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.value) return;
-    const newWarn = '';
     const newMax = new Date(e.target.value);
-    // if (newMax.getTime() < dateRange[0].getTime()) {
-    //   newWarn = '시작일 이후의 날짜를 선택해주세요';
-    // }
-    // setDateWarn([dateWarn[0], newWarn]);
     checkWarn(newMax, 2);
     setDateRange([dateRange[0], new Date(e.target.value)]);
   };
@@ -137,6 +113,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
     const newWarning = [...dateWarn];
     const DateValues = [recruitEnd, dateRange[0], dateRange[1]];
     DateValues[index] = newDate;
+    // 모집마감일 오류
     if (DateValues[0].getTime() < tommorrow.getTime()) {
       newWarning[0] = '내일 이후의 날짜를 선택해주세요';
     } else if (
@@ -147,6 +124,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
     } else {
       newWarning[0] = '';
     }
+    // 대회 기간 시작일 오류
     if (DateValues[1].getTime() < tommorrow.getTime()) {
       newWarning[1] = '내일 이후의 날짜를 선택해주세요';
     } else if (DateValues[1].getTime() > DateValues[2].getTime()) {
@@ -156,6 +134,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
     } else {
       newWarning[1] = '';
     }
+    // 대회 기간 종료일 오류
     if (DateValues[2].getTime() < tommorrow.getTime()) {
       newWarning[2] = '내일 이후의 날짜를 선택해주세요.';
     } else if (DateValues[2].getTime() < DateValues[1].getTime()) {
@@ -304,7 +283,6 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
       </div>
       <div className={styles.bottomContainer}>
         <CheckboxInput name='agendaIsRanking' label='대회 유무' />
-        {/* <input type='checkbox' name='agendaIsRanking' id='agendaIsRanking' /> */}
       </div>
       <div className={styles.bottomContainer}>
         <div className={styles.buttonContainer}>
