@@ -1,34 +1,38 @@
-import React from 'react';
-import { Coalition } from 'constants/agenda/agenda';
+import { useRouter } from 'next/router';
+import {
+  numberProps,
+  ParticipantProps,
+} from 'types/agenda/agendaDetail/tabs/participantTypes';
 import Participant from 'components/agenda/agendaDetail/tabs/Participant';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantsList.module.scss';
 
-export default function ParticipantsList() {
-  const curPeople = 1;
-  const maxPeople = 4;
+export default function ParticipantsList({ max }: numberProps) {
+  const router = useRouter();
+  const { agendaKey } = router.query;
 
-  const participants = [
-    { name: 'intraId1', coalition: Coalition.GUN },
-    { name: 'intraId2', coalition: Coalition.GAM },
-    { name: 'intraId3', coalition: Coalition.GON },
-    { name: 'intraId4', coalition: Coalition.LEE },
-    { name: 'intraId5', coalition: Coalition.SPRING },
-    { name: 'intraId6', coalition: Coalition.SUMMER },
-    { name: 'intraId7', coalition: Coalition.AUTUMN },
-    { name: 'intraId8', coalition: Coalition.WINTER },
-  ];
+  const params = { agenda_key: agendaKey, page: 1, size: 10 };
+  const participants = useFetchGet<ParticipantProps[]>(
+    `team/confirm/list`,
+    params
+  ).data;
+
+  const curPeople = participants ? participants.length : 0;
+  if (!participants) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
       <div className={styles.participantsTitle}>
-        참여자 {curPeople} / {maxPeople}
+        참여자 {curPeople} / {max}
       </div>
       <div className={styles.ListContainer}>
         {participants.map((participant, index) => (
           <Participant
             key={index}
-            name={participant.name}
-            coalition={participant.coalition}
+            teamName={participant.teamName}
+            coalitions={participant.coalitions}
           />
         ))}
       </div>

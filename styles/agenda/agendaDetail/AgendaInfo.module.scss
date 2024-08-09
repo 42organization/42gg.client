@@ -10,13 +10,19 @@ $info-gradient: linear-gradient(
 
 .infoContainer {
   @include container(1);
-
   position: relative;
   width: 100%;
-  height: 20rem;
   padding: 1.5rem;
   margin: 0rem;
   background: $info-gradient;
+
+  &.largeHeight {
+    height: 20rem;
+  }
+
+  &.smallHeight {
+    height: 10rem;
+  }
 }
 
 .infoWarp {

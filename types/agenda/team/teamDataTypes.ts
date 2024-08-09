@@ -1,6 +1,13 @@
-export interface teamDataProps {
+import { Coalition } from 'constants/agenda/agenda';
+
+export interface TeamDataProps {
   teamName: string;
   teamLeaderIntraId: string;
   teamMateCount: number;
-  teamKey: string;
+  teamStatus?: string;
+  teamKey?: string;
+  teamLocation?: string;
+  teamAward?: string;
+  awardPriority?: number;
+  coalitions: string[] | Coalition[];
 }

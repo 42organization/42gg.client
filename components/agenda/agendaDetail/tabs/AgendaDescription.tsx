@@ -1,35 +1,8 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaDataTypes';
-import { instanceInAgenda } from 'utils/axios';
+import { AgendaProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { formatDate } from 'components/agenda/utils/formatDate';
 import styles from 'styles/agenda/agendaDetail/tabs/AgendaDescription.module.scss';
 
-export default function AgendaDescription() {
-  const router = useRouter();
-  const { agendaKey } = router.query;
-  // 65366665-3964-3664-2d34-3264362d3430
-  const [agendaData, setAgendaData] = useState<AgendaDataProps | null>(null);
-
-  const fetchAgendaData = async () => {
-    if (agendaKey) {
-      try {
-        const res = await instanceInAgenda.get(`?agenda_key=${agendaKey}`);
-        setAgendaData(res.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchAgendaData();
-  }, [agendaKey]);
-
-  if (!agendaData) {
-    return <div>로딩 중...</div>;
-  }
-
+export default function AgendaDescription({ agendaData }: AgendaProps) {
   const {
     agendaContents,
     agendaDeadLine,
@@ -38,6 +11,7 @@ export default function AgendaDescription() {
     isOfficial,
     agendaisRanking,
   } = agendaData;
+
   return (
     <>
       <div className={styles.descriptionContainer}>

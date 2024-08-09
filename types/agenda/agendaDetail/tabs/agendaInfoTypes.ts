@@ -1,9 +1,14 @@
-import { AgendaStatus } from 'constants/agenda/agenda';
+import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
+import { AgendaDataProps } from '../agendaTypes';
 
-// 참가자 정보 요약
-export interface ParticipantSummaryProps {
-  agendaStatus: AgendaStatus;
+export interface AgendaInfoProps {
+  agendaData: AgendaDataProps;
+  isHost?: boolean;
+  status?: number;
+}
+
+export interface AgendaTabProps {
+  agendaData: AgendaDataProps;
   isHost: boolean;
-  isParticipant: boolean;
-  isTeam: boolean;
+  myTeam?: TeamDataProps | null;
 }
