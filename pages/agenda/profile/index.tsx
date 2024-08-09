@@ -1,23 +1,28 @@
-import { profile } from 'console';
-import { useEffect, useState } from 'react';
 import { AgendaHistoryItemProps } from 'types/agenda/profile/agendaHistoryTypes';
 import { CurrentTeamItemProps } from 'types/agenda/profile/currentTeamTypes';
 import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
-import { instanceInAgenda } from 'utils/axios';
 import AgendaHistory from 'components/agenda/Profile/AgendaHistory';
 import AgendaUserSearchBar from 'components/agenda/Profile/AgendaUserSearchBar';
 import CurrentTeam from 'components/agenda/Profile/CurrentTeam';
 import ProfileCard from 'components/agenda/Profile/ProfileCard';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/Profile/AgendaProfile.module.scss';
 
 export default function AgendaProfile() {
-  const [profileData, setProfileData] = useState<ProfileDataProps | null>(null);
-  const [currentTeamData, setCurrentTeamData] = useState<
-    CurrentTeamItemProps[] | null
-  >(null);
-  const [agendaHistory, setAgendaHistory] = useState<
-    AgendaHistoryItemProps[] | null
-  >(null);
+  const { data: profileData, getData: getProfileData } =
+    useFetchGet<ProfileDataProps>('/profile');
+
+  const currentTeamData = useFetchGet<CurrentTeamItemProps[]>(
+    '/profile/current/list'
+  ).data;
+
+  const agendaHistory = useFetchGet<AgendaHistoryItemProps[]>(
+    '/profile/history/list',
+    {
+      page: 1,
+      size: 20,
+    }
+  ).data;
 
   // currentTeam MOCK DATA
   const currentTeamMockData: CurrentTeamItemProps[] = [
@@ -67,51 +72,6 @@ export default function AgendaProfile() {
       ],
     },
   ];
-  const fetchProfileData = async () => {
-    try {
-      const res = await instanceInAgenda.get(`/profile`);
-      setProfileData(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchCurrentTeamData = async () => {
-    try {
-      const res = await instanceInAgenda.get('/profile/current/list');
-      setCurrentTeamData(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // agendaHistory API : IN PROGRESS
-  const fetchAgendaHistory = async () => {
-    try {
-      const res = await instanceInAgenda.get('/profile/history/list', {
-        params: {
-          page: 1,
-          size: 1,
-        },
-      });
-      setAgendaHistory(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchProfileData();
-    fetchCurrentTeamData();
-    fetchAgendaHistory();
-  }, []);
-
-  // useEffect(() => {
-  //   // API Data Check
-  //   console.log('ProfileData :', profileData);
-  //   console.log('CurrentAgenda :', currentTeamData);
-  //   console.log('History :', agendaHistory);
-  // }, [profileData, currentTeamData, agendaHistory]);
 
   return (
     <>
@@ -125,13 +85,11 @@ export default function AgendaProfile() {
             userContent={profileData.userContent}
             userGithub={profileData.userGithub}
             ticketCount={profileData.ticketCount}
-            fetchProfileData={fetchProfileData}
+            getProfileData={getProfileData}
           />
         )}
-        {currentTeamData && (
-          <CurrentTeam currentTeamData={currentTeamMockData} />
-        )}
-        {agendaHistory && <AgendaHistory agendaHistory={historyMockData} />}
+        {currentTeamData && <CurrentTeam currentTeamData={currentTeamData} />}
+        {agendaHistory && <AgendaHistory agendaHistory={agendaHistory} />}
       </div>
     </>
   );

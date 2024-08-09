@@ -1,7 +1,7 @@
-import { useState , useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ProfileCardProps } from 'types/agenda/profile/profileCardTypes';
-import { instanceInAgenda } from 'utils/axios';
 import CustomImage from 'components/agenda/utils/CustomImage';
+import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/Profile/ProfileCard.module.scss';
 
 const ProfileImageCard = ({
@@ -9,27 +9,33 @@ const ProfileImageCard = ({
   userContent,
   userGithub,
   ticketCount, // NOT YET : ticket
-  fetchProfileData,
+  getProfileData,
 }: ProfileCardProps) => {
+  // 프로필 수정 버튼,수정 취소 버튼 180도 회전
   const [isFlipped, setIsFlipped] = useState(false);
-  const [profileData, setProfileData] = useState({
-    userContent,
-    userGithub,
-  });
+  // 프로필 수정 취소 시, 기존 데이터로 복구
   const [initialProfileData, setInitialProfileData] = useState({
     userContent,
     userGithub,
   });
+  // 프로필 수정 시, 데이터 변하는 것 감지
+  const [profileData, setProfileData] = useState({
+    userContent,
+    userGithub,
+  });
 
+  // 수정 성공 시, 수정된 데이터로 초기화
   useEffect(() => {
     setProfileData({ userContent, userGithub });
     setInitialProfileData({ userContent, userGithub });
   }, [userContent, userGithub]);
 
+  // 클릭 시 isFlipped, true <-> false 변환
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
 
+  // 수정되는 데이터 감지
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -40,21 +46,28 @@ const ProfileImageCard = ({
     }));
   };
 
+  const { sendRequest: editProfile } = useFetchRequest();
+  // 프로필 수정 - 수정하기 / PATCH 요청
   const handleEdit = async () => {
-    console.log(profileData);
-    try {
-      const response = await instanceInAgenda.patch('/profile', {
+    editProfile(
+      'PATCH',
+      'profile',
+      {
         userContent: profileData.userContent,
         userGithub: profileData.userGithub,
-      });
-      fetchProfileData();
-      console.log('Profile updated successfully:', response);
-      handleFlip();
-    } catch (error) {
-      console.error('Error updating profile:', error);
-    }
+      },
+      {},
+      () => {
+        getProfileData();
+        handleFlip();
+      },
+      (error: string) => {
+        console.error(error);
+      }
+    );
   };
 
+  // 프로필 수정 - 취소하기
   const handleCancel = () => {
     setProfileData(initialProfileData);
     handleFlip();

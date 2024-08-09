@@ -3,5 +3,5 @@ export interface ProfileCardProps {
   userContent: string;
   userGithub: string;
   ticketCount: number;
-  fetchProfileData: () => void;
+  getProfileData: () => void;
 }
