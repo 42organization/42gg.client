@@ -58,7 +58,7 @@ const AgendaResultForm = ({
     const newAwardlist: awardType[] = [];
     console.log(awardList);
     awardList.forEach((award, idx) => {
-      if (key === -1 && idx === -1) newAwardlist.push(awardList[draggingKey]);
+      if (key === -1 && idx === 0) newAwardlist.push(awardList[draggingKey]);
       if (idx !== draggingKey) newAwardlist.push(awardList[idx]);
       if (idx === key && key !== -1) {
         newAwardlist.push(awardList[draggingKey]);

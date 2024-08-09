@@ -106,7 +106,7 @@ const useDraggable = ({
       parent.removeEventListener('dragleave', handleDragLeave);
       parent.removeEventListener('drop', handleDrop);
     };
-  }, [dragStyles, ...deps]);
+  }, [dragStyles, deps]);
 };
 
 export default useDraggable;
