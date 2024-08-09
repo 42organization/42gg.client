@@ -10,7 +10,7 @@ export default function SideNavParty() {
     <>
       <SideNavContent
         type={'agenda'}
-        url={'/agendaList'}
+        url={'agendaList'}
         menuName={'대회 관리'}
         currentPath={currentPath}
       >
@@ -18,7 +18,7 @@ export default function SideNavParty() {
       </SideNavContent>
       <SideNavContent
         type={'agenda'}
-        url={'/teamList'}
+        url={'teamList'}
         menuName={'팀 관리'}
         currentPath={currentPath}
       >
@@ -26,7 +26,7 @@ export default function SideNavParty() {
       </SideNavContent>
       <SideNavContent
         type={'agenda'}
-        url={'/announcements'}
+        url={'announcements'}
         menuName={'공지사항 관리'}
         currentPath={currentPath}
       >
@@ -34,7 +34,7 @@ export default function SideNavParty() {
       </SideNavContent>
       <SideNavContent
         type={'agenda'}
-        url={'/userList'}
+        url={'userList'}
         menuName={'유저 관리'}
         currentPath={currentPath}
       >
@@ -42,7 +42,7 @@ export default function SideNavParty() {
       </SideNavContent>
       <SideNavContent
         type={'agenda'}
-        url={'/ticket'}
+        url={'ticket'}
         menuName={'티켓 관리'}
         currentPath={currentPath}
       >

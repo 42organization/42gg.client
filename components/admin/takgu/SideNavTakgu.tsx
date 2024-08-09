@@ -25,7 +25,7 @@ export default function SideNavTakgu() {
     <>
       <SideNavContent
         type={'takgu'}
-        url={'/users'}
+        url={'users'}
         menuName={'유저 관리'}
         currentPath={currentPath}
       >
@@ -33,7 +33,7 @@ export default function SideNavTakgu() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/feedback'}
+        url={'feedback'}
         menuName={'피드백 관리'}
         currentPath={currentPath}
       >
@@ -41,7 +41,7 @@ export default function SideNavTakgu() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/announcement'}
+        url={'announcement'}
         menuName={'공지사항 관리'}
         currentPath={currentPath}
       >
@@ -49,7 +49,7 @@ export default function SideNavTakgu() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/notification'}
+        url={'notification'}
         menuName={'알림 관리'}
         currentPath={currentPath}
       >
@@ -57,7 +57,7 @@ export default function SideNavTakgu() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/penalty'}
+        url={'penalty'}
         menuName={'페널티 관리'}
         currentPath={currentPath}
       >
@@ -65,7 +65,7 @@ export default function SideNavTakgu() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/slot'}
+        url={'slot'}
         menuName={'슬롯 관리'}
         currentPath={currentPath}
       >
@@ -73,7 +73,7 @@ export default function SideNavTakgu() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/games'}
+        url={'games'}
         menuName={'게임 관리'}
         currentPath={currentPath}
       >
@@ -81,7 +81,7 @@ export default function SideNavTakgu() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/season'}
+        url={'season'}
         menuName={'시즌 관리'}
         currentPath={currentPath}
       >
@@ -89,7 +89,7 @@ export default function SideNavTakgu() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/receipt'}
+        url={'receipt'}
         menuName={'구매내역 관리'}
         currentPath={currentPath}
       >
@@ -97,7 +97,7 @@ export default function SideNavTakgu() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/usageHistory'}
+        url={'usageHistory'}
         menuName={'사용내역 관리'}
         currentPath={currentPath}
       >
@@ -105,7 +105,7 @@ export default function SideNavTakgu() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/store'}
+        url={'store'}
         menuName={'상점 관리'}
         currentPath={currentPath}
       >
@@ -113,7 +113,7 @@ export default function SideNavTakgu() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/coin'}
+        url={'coin'}
         menuName={'재화 정책 관리'}
         currentPath={currentPath}
       >
@@ -121,7 +121,7 @@ export default function SideNavTakgu() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/tournament'}
+        url={'tournament'}
         menuName={'토너먼트 관리'}
         currentPath={currentPath}
       >
@@ -129,7 +129,7 @@ export default function SideNavTakgu() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/recruitments'}
+        url={'recruitments'}
         menuName={'공고 관리'}
         currentPath={currentPath}
       >

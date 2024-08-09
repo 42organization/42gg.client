@@ -1,6 +1,8 @@
+import AdminAppLayout from 'Layout/AdminLayout';
+import AgendaAppLayout from 'Layout/AgendaLayout';
+import TakguAppLayout from 'Layout/TakguLayout';
 import { usePathname } from 'hooks/agenda/Layout/usePathname';
-import AgendaAppLayout from './AgendaLayout';
-import TakguAppLayout from './TakguLayout';
+
 type LayoutProviderProps = {
   children: React.ReactNode;
 };
@@ -15,8 +17,8 @@ const LayoutProvider = ({ children }: LayoutProviderProps) => {
       return <AgendaAppLayout>{children}</AgendaAppLayout>;
     case 'takgu':
       return <TakguAppLayout>{children}</TakguAppLayout>;
-    // case "admin" :
-    //   return <AdminAppLayout>{children}</AdminAppLayout>;
+    case 'admin':
+      return <AdminAppLayout>{children}</AdminAppLayout>;
     default:
       return <>{children}</>;
   }

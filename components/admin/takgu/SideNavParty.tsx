@@ -16,7 +16,7 @@ export default function SideNavParty() {
     <>
       <SideNavContent
         type={'takgu'}
-        url={'/partyPenalty'}
+        url={'partyPenalty'}
         menuName={'패널티 관리'}
         currentPath={currentPath}
       >
@@ -24,7 +24,7 @@ export default function SideNavParty() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/partyReport'}
+        url={'partyReport'}
         menuName={'신고 관리'}
         currentPath={currentPath}
       >
@@ -32,7 +32,7 @@ export default function SideNavParty() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/partyRoom'}
+        url={'partyRoom'}
         menuName={'방 관리'}
         currentPath={currentPath}
       >
@@ -40,7 +40,7 @@ export default function SideNavParty() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/partyTemplate'}
+        url={'partyTemplate'}
         menuName={'템플릿 관리'}
         currentPath={currentPath}
       >
@@ -48,7 +48,7 @@ export default function SideNavParty() {
       </SideNavContent>
       <SideNavContent
         type={'takgu'}
-        url={'/partyCategory'}
+        url={'partyCategory'}
         menuName={'카테고리 관리'}
         currentPath={currentPath}
       >

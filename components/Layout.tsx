@@ -107,7 +107,7 @@ function AppLayoutDev({ children }: AppLayoutProps) {
 
   switch (true) {
     case presentPath.includes('/admin'):
-      // if (!user.isAdmin) return <AdminReject />;
+      if (!user.isAdmin) return <AdminReject />;
       return <AdminLayout>{children}</AdminLayout>;
 
     case presentPath.includes('/takgu/recruit'):
