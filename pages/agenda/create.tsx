@@ -8,6 +8,7 @@ const saveLocal = () => {
 };
 
 const submitTeamForm = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
   const data = new FormData(e.target as HTMLFormElement);
   if (!data) return;
   data.set('agendaStartTime', data.get('agendaStartTime') + ':00.00Z');
