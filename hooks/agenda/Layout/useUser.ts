@@ -10,7 +10,6 @@ export const useUser = () => {
     'user',
     () =>
       instanceInAgenda.get('/profile/info').then((res) => {
-        console.log(res);
         return res.data;
       }),
     {

@@ -34,29 +34,23 @@ const AgendaResultForm = ({
   ) => {
     if (!selected) return;
     const newTeam = e.target.value;
-    console.log('addTeam called', idx, newTeam);
     awardList[idx].teams.push(newTeam);
     e.target.value = defaultTeam;
     setAwardList([...awardList]);
   };
-  console.log(awardList);
   const removeTeam = (idx: number, teamidx: number) => {
-    console.log('removeTeam called', idx, teamidx);
     awardList[idx].teams.splice(teamidx, 1);
     setAwardList([...awardList]);
   };
 
   const reorderAwardList = (target: HTMLElement) => {
-    console.log(target && target.getAttribute('id'));
     const key = target ? parseInt(target.getAttribute('id') || '0') - 1 : -2;
     const draggingKey = dragging.current
       ? parseInt(dragging.current.getAttribute('id') || '0') - 1
       : -2;
 
-    console.log(key, draggingKey);
     if (key === -2 || draggingKey === -2 || key === draggingKey) return;
     const newAwardlist: awardType[] = [];
-    console.log(awardList);
     awardList.forEach((award, idx) => {
       if (key === -1 && idx === 0) newAwardlist.push(awardList[draggingKey]);
       if (idx !== draggingKey) newAwardlist.push(awardList[idx]);
@@ -64,7 +58,6 @@ const AgendaResultForm = ({
         newAwardlist.push(awardList[draggingKey]);
       }
     });
-    console.log(newAwardlist);
     setAwardList(newAwardlist);
   };
 
@@ -95,7 +88,7 @@ const AgendaResultForm = ({
           >
             <DragBtn
               onClick={(e) => {
-                console.log(e.target);
+                e.preventDefault();
               }}
             />
             <div className={styles.awardContainer} key={`${award_idx}`}>
@@ -146,7 +139,6 @@ const AgendaResultForm = ({
               <AddElementBtn
                 onClick={(e: React.MouseEvent<HTMLElement, MouseEvent>) => {
                   e.preventDefault();
-                  console.log(e);
                   const input = document.getElementsByClassName(
                     styles.newAwardInput
                   )[0] as HTMLInputElement;

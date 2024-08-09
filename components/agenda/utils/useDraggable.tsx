@@ -18,7 +18,6 @@ const useDraggable = ({
   useEffect(() => {
     const parent = document.querySelector(parentSelector) as HTMLElement;
     if (!parent) return;
-    console.log('useEffect');
     const handleDragStart = (e: DragEvent) => {
       dragging.current = e.target as HTMLElement;
       dragging.current.classList.add(dragStyles.dragging);
@@ -32,7 +31,6 @@ const useDraggable = ({
       return;
     };
     const handleDragEnd = (e: DragEvent) => {
-      console.log('dragend');
       e.preventDefault();
       const dropzone = Array.from(
         document.getElementsByClassName(dragStyles.dropzone)
@@ -54,7 +52,6 @@ const useDraggable = ({
           ? e.target.closest('li')
           : null;
       if (li && li.classList.contains(dragStyles.dropzone)) {
-        console.log('hover');
         li.classList.add(dragStyles.hovered);
       }
     };
@@ -64,7 +61,6 @@ const useDraggable = ({
       const li =
         e.target && e.target instanceof HTMLLIElement ? e.target : null;
       if (li && li.classList.contains(dragStyles.hovered)) {
-        console.log('leave');
         li.classList.remove(dragStyles.hovered);
       }
     };
@@ -73,7 +69,6 @@ const useDraggable = ({
       e.preventDefault();
       dragging.current?.classList.remove(dragStyles.dragging);
       let target = e.target;
-      console.log('drop', e.target);
       if (
         e.target &&
         e.target instanceof HTMLElement &&
