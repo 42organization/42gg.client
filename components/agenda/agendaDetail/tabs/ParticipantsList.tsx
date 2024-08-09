@@ -1,14 +1,23 @@
 import { useRouter } from 'next/router';
-import { numberProps } from 'types/agenda/agendaDetail/tabs/participantTypes';
+import {
+  numberProps,
+  ParticipantProps,
+} from 'types/agenda/agendaDetail/tabs/participantTypes';
 import Participant from 'components/agenda/agendaDetail/tabs/Participant';
-import useParticipant from 'hooks/agenda/agendaDetail/useParticipant';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantsList.module.scss';
 
 export default function ParticipantsList({ max }: numberProps) {
   const router = useRouter();
   const { agendaKey } = router.query;
 
-  const { participants, curPeople } = useParticipant(agendaKey as string);
+  const params = { agenda_key: agendaKey, page: 1, size: 10 };
+  const participants = useFetchGet<ParticipantProps[]>(
+    `team/confirm/list`,
+    params
+  ).data;
+
+  const curPeople = participants ? participants.length : 0;
   if (!participants) {
     return <div>Loading...</div>;
   }
