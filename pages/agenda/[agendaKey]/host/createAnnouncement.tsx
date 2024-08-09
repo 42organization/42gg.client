@@ -1,14 +1,13 @@
 import { useRouter } from 'next/router';
-import { instanceInAgenda } from 'utils/axios';
 import CreateAnnouncementForm from 'components/agenda/Form/CreateAnnouncementForm';
-import useFetchPost from 'hooks/agenda/useFetchPost';
+import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/agendaDetail/tabs/createAnnouncement.module.scss';
 
 const CreateAnnouncement = () => {
   const router = useRouter();
   const { agendaKey } = router.query;
 
-  const { data, status, error, postData } = useFetchPost();
+  const { data, status, error, sendRequest } = useFetchRequest();
 
   const submitForm = (target: React.FormEvent<HTMLFormElement>) => {
     target.preventDefault();
@@ -17,7 +16,8 @@ const CreateAnnouncement = () => {
     const announcementTitle = formData.get('announcementTitle');
     const announcementDescription = formData.get('announcementDescription');
 
-    postData(
+    sendRequest(
+      'POST',
       `announcement`,
       {
         title: announcementTitle,
@@ -43,3 +43,16 @@ const CreateAnnouncement = () => {
 };
 
 export default CreateAnnouncement;
+function sendRequest(
+  arg0: string,
+  arg1: string,
+  arg2: {
+    title: FormDataEntryValue | null;
+    content: FormDataEntryValue | null;
+  },
+  arg3: { agenda_key: string | string[] | undefined },
+  arg4: (data: any) => void,
+  arg5: (error: string) => void
+) {
+  throw new Error('Function not implemented.');
+}
