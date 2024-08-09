@@ -3,8 +3,8 @@ import { AgendaDataProps } from '../agendaTypes';
 
 export interface AgendaInfoProps {
   agendaData: AgendaDataProps;
-  isHost: boolean;
-  status: number;
+  isHost?: boolean;
+  status?: number;
 }
 
 export interface AgendaTabProps {

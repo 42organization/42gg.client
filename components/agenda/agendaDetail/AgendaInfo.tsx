@@ -63,15 +63,21 @@ export default function AgendaInfo({
     isHost,
     status,
   });
+
   const { agendaTitle, agendaHost } = agendaData;
+
+  const isAgendaDetail = isHost !== undefined && status !== undefined;
+  const containerSize = isAgendaDetail
+    ? styles.largeHeight
+    : styles.smallHeight;
 
   return (
     <>
-      <div className={styles.infoContainer}>
+      <div className={`${styles.infoContainer} ${containerSize}`}>
         <div className={styles.infoWarp}>
           <div className={styles.contentWarp}>
-            <div className={styles.enrollWarp}>
-              {buttonText !== '' && (
+            {isAgendaDetail && buttonText !== '' && (
+              <div className={styles.enrollWarp}>
                 <UploadBtn
                   text={buttonText}
                   onClick={
@@ -84,8 +90,8 @@ export default function AgendaInfo({
                       : submitResults
                   }
                 />
-              )}
-            </div>
+              </div>
+            )}
             <div className={styles.titleWarp}>
               <h2>{agendaTitle}</h2>
               <ShareBtn onClick={copyLink} />
