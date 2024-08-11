@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import {
   Paper,
   Table,
@@ -9,12 +8,13 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { instance } from 'utils/axios';
-import { dateToStringShort } from 'utils/handleTime';
+// import { instance } from 'utils/axios';
+// import { dateToStringShort } from 'utils/handleTime';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
 import { AgendaStatus } from 'constants/agenda/agenda';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
 import PageNation from 'components/Pagination';
+// import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
 const itemsPerPage = 10; // 한 페이지에 보여줄 항목 수
 
@@ -32,7 +32,7 @@ export const mockAgendaList = [
     agendaKey: '1',
     isRanking: true,
     isOfficial: false,
-    agendaStatus: 'ON_GOING',
+    agendaStatus: 'OPEN',
   },
   {
     agendaTitle: '아젠다 제목 1.1',
@@ -47,7 +47,7 @@ export const mockAgendaList = [
     agendaKey: '1',
     isRanking: true,
     isOfficial: true,
-    agendaStatus: 'ON_GOING',
+    agendaStatus: 'OPEN',
   },
   {
     agendaTitle: '아젠다 제목 2',
@@ -144,27 +144,28 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
         alert('대회 삭제');
         break;
       case '팀 목록':
-        router.push(`/admin/agenda/teamList?agenda_key=${agendaKey}`);
+        router.push(`/admin/agenda/teamList?agendaKey=${agendaKey}`);
         break;
       case '공지사항':
-        router.push(`/admin/agenda/announcements?agenda_key=${agendaKey}`);
+        router.push(`/admin/agenda/announcements?agendaKey=${agendaKey}`);
         break;
     }
   };
 
   const getAgendaList = useCallback(async () => {
     try {
-      // const params = {
-      //   page: currentPage,
-      //   size: 10,
-      // };
       // const res = await instance.get(`/agenda/admin/request/list`, {
-      //   params,
+      //   params: { page: currentPage, size: 10 },
       // });
       // const res = await instance.get(
       //   `/agenda/admin/request/list?page=${currentPage}&size=10`
       // );
       const res = mockAgendaList;
+      // const params = {
+      //   page: currentPage,
+      //   size: itemsPerPage,
+      // };
+      // const res = useFetchGet(`/agenda/admin/request/list`, params).data;
 
       const filteredAgendaList = res.filter((agenda: IAgenda) => {
         const matchesStatus = status ? agenda.agendaStatus === status : true;
@@ -205,10 +206,14 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
   // }
   const renderStatus = (status: string) => {
     switch (status) {
-      case AgendaStatus.ON_GOING:
+      case AgendaStatus.CANCEL:
+        return '취소';
+      case AgendaStatus.OPEN:
         return '진행 중';
       case AgendaStatus.CONFIRM:
-        return '완료';
+        return '확정';
+      case AgendaStatus.FINISH:
+        return '진행완료';
       default:
         return '알 수 없음';
     }

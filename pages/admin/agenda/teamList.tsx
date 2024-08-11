@@ -3,11 +3,10 @@ import TeamTable from 'components/admin/agenda/teamList/TeamTable';
 
 export default function TeamList() {
   const router = useRouter();
-  const { agenda_key } = router.query;
-  console.log(agenda_key);
+  const { agendaKey } = router.query;
   return (
     <>
-      <p>here {agenda_key}</p>
+      <p>here {agendaKey}</p>
       <TeamTable />
     </>
   );

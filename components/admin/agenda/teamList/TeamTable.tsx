@@ -1,7 +1,9 @@
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
+  MenuItem,
   Paper,
+  Select,
   Table,
   TableBody,
   TableCell,
@@ -17,6 +19,11 @@ import PageNation from 'components/Pagination';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
 
 const itemsPerPage = 10; // 한 페이지에 보여줄 항목 수
+
+const mockAgendaList = [
+  { agendaKey: '1', agendaName: '대회 1' },
+  { agendaKey: '2', agendaName: '대회 2' },
+];
 
 const mockTeamList = [
   {
@@ -47,6 +54,37 @@ const mockTeamList = [
     teamKey: '3',
   },
 ];
+
+const mockTeamList2 = [
+  {
+    teamName: '팀 이름 4',
+    teamStatus: TeamStatus.OPEN,
+    teamScore: 100,
+    teamIsPrivate: false,
+    teamLeaderIntraId: 'leader1',
+    teamMateCount: 5,
+    teamKey: '4',
+  },
+  {
+    teamName: '팀 이름 5',
+    teamStatus: TeamStatus.CONFIRM,
+    teamScore: 200,
+    teamIsPrivate: true,
+    teamLeaderIntraId: 'leader2',
+    teamMateCount: 3,
+    teamKey: '5',
+  },
+  {
+    teamName: '팀 이름 6',
+    teamStatus: TeamStatus.CANCEL,
+    teamScore: 300,
+    teamIsPrivate: false,
+    teamLeaderIntraId: 'leader3',
+    teamMateCount: 7,
+    teamKey: '6',
+  },
+];
+
 const tableTitle: { [key: string]: string } = {
   teamName: '팀 이름',
   teamStatus: '팀 상태',
@@ -78,7 +116,11 @@ export interface Request {
   size: number;
 }
 
-export default function TeamTable({ status }: { status: string }) {
+// export default function TeamTable({ status }: { status: string }) {
+export default function TeamTable() {
+  const router = useRouter();
+  const { agendaKey } = router.query;
+
   const [teamInfo, setTeamInfo] = useState<ITeamTable>({
     teamList: [],
     totalPage: 0,
@@ -86,6 +128,8 @@ export default function TeamTable({ status }: { status: string }) {
   });
 
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [selectedAgendaKey, setSelectedAgendaKey] = useState('');
+  const [agendaList, setAgendaList] = useState(mockAgendaList); // agenda 목록 저장
 
   // const modal = useRecoilValue(modalState);
   const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
@@ -93,7 +137,6 @@ export default function TeamTable({ status }: { status: string }) {
   const handleButtonAction = (buttonName: string, teamKey: string) => {
     switch (buttonName) {
       case '자세히':
-        // setModal({ modalName: 'ADMIN-PROFILE', intraId });
         alert('자세히');
         break;
       case '팀 수정':
@@ -107,36 +150,34 @@ export default function TeamTable({ status }: { status: string }) {
 
   const getTeamList = useCallback(async () => {
     try {
-      // const params = {
-      //   page: currentPage,
-      //   size: 10,
-      // };
-      // const res = await instance.get(`/agenda/admin/request/list`, {
-      //   params,
+      if (!selectedAgendaKey) {
+        return;
+      } // 선택된 agenda가 없으면 반환
+
+      // const res = mockTeamList; // 여기에 API 호출 추가
+      // const response = await axios.get(`/agenda/admin/request/list`, {
+      //   params: {
+      //     agenda_key: selectedAgendaKey,
+      //     page: currentPage,
+      //     size: itemsPerPage,
+      //   },
       // });
-      // const res = await instance.get(
-      //   `/agenda/admin/request/list?page=${currentPage}&size=10`
-      // );
-      const res = mockTeamList;
 
-      const filteredTeamList = res.filter((team: ITeam) => {
-        const teamStatus = status ? team.teamStatus === status : true;
-        return teamStatus;
-      });
+      let res = [];
+      if (selectedAgendaKey === '1') {
+        res = mockTeamList;
+      } else if (selectedAgendaKey === '2') {
+        res = mockTeamList2;
+      } else {
+        res = [];
+        return;
+      }
 
-      const totalPage = Math.ceil(filteredTeamList.length / itemsPerPage);
-      const paginatedList = filteredTeamList.slice(
+      const totalPage = Math.ceil(res.length / itemsPerPage);
+      const paginatedList = res.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
       );
-      // const agendaList = res.map((agenda: AgendaData) => {
-      //   return {
-      //     ...agenda,
-      //     agendaDeadLine: dateToStringShort(agenda.agendaDeadLine),
-      //     agendaStartTime: dateToStringShort(agenda.agendaStartTime),
-      //     agendaEndTime: dateToStringShort(agenda.agendaEndTime),
-      //   };
-      // });
 
       setTeamInfo({
         teamList: paginatedList,
@@ -144,13 +185,28 @@ export default function TeamTable({ status }: { status: string }) {
         currentPage: currentPage,
       });
     } catch (e) {
-      console.error('MS00');
+      console.error('Error fetching team list:', e);
     }
-  }, [currentPage, status]);
+  }, [currentPage, selectedAgendaKey]); // selectedAgendaKey 추가
 
   useEffect(() => {
-    getTeamList();
-  }, [getTeamList]);
+    if (agendaKey) {
+      setSelectedAgendaKey(agendaKey as string);
+    }
+  }, [agendaKey]);
+
+  useEffect(() => {
+    if (selectedAgendaKey) {
+      getTeamList();
+    }
+  }, [selectedAgendaKey, currentPage, getTeamList]);
+
+  const handleSelectChange = (event: { target: { value: any } }) => {
+    const newValue = event.target.value;
+    setSelectedAgendaKey(newValue);
+    setCurrentPage(1); // 페이지 초기화
+    router.push(`?agendaKey=${newValue}`);
+  };
 
   const renderStatus = (status: string) => {
     switch (status) {
@@ -173,59 +229,82 @@ export default function TeamTable({ status }: { status: string }) {
     <div className={styles.agendaListWrap}>
       <div className={styles.header}>
         <span className={styles.title}>팀 관리</span>
-        {/* <div className={styles.searchWrap}>
-          <AdminSearchBar initSearch={initSearch} />
-          <CreateNotiButton />
-        </div> */}
+        <Select
+          value={selectedAgendaKey}
+          onChange={handleSelectChange}
+          displayEmpty
+        >
+          <MenuItem value='' disabled>
+            Choose an agenda...
+          </MenuItem>
+          {agendaList.map((agenda) => (
+            <MenuItem key={agenda.agendaKey} value={agenda.agendaKey}>
+              {agenda.agendaName}
+            </MenuItem>
+          ))}
+        </Select>
       </div>
-      <TableContainer className={styles.tableContainer} component={Paper}>
-        <Table className={styles.table} aria-label='agenda table'>
-          <AdminAgendaTableHead tableName={'team'} table={tableTitle} />
-          <TableBody className={styles.tableBody}>
-            {teamInfo.teamList.map((team: ITeam) => (
-              <TableRow key={team.teamKey} className={styles.tableRow}>
-                {agendaTableFormat['team'].columns.map(
-                  (columnName: string, index: number) => {
-                    return (
-                      // <TableCell className={styles.tableBodyItem} key={index}>
-
-                      /* <AdminContent
-                          content={agenda[
-                            columnName as keyof IAgenda
-                          ]?.toString()}
-                          maxLen={MAX_CONTENT_LENGTH}
-                          detailTitle={agenda.title}
-                          detailContent={agenda.contents}
-                        /> */
-                      <TableCell className={styles.tableBodyItem} key={index}>
-                        {columnName === 'teamStatus'
-                          ? renderStatus(team.teamStatus) // 상태 표시
-                          : columnName === 'teamIsPrivate'
-                          ? renderIsPrivate(team.teamIsPrivate) // 공개 여부 표시
-                          : columnName !== 'etc'
-                          ? team[columnName as keyof ITeam] // 다른 열의 기본 값 표시
-                          : agendaTableFormat['team'].etc?.value.map(
-                              (buttonName: string, index: number) => (
-                                <button
-                                  key={buttonName}
-                                  className={`${styles.button} ${buttonList[index]}`}
-                                  onClick={() =>
-                                    handleButtonAction(buttonName, team.teamKey)
-                                  }
-                                >
-                                  {buttonName}
-                                </button>
-                              )
-                            )}
-                      </TableCell>
-                    );
-                  }
-                )}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {selectedAgendaKey ? (
+        <TableContainer className={styles.tableContainer} component={Paper}>
+          <Table className={styles.table} aria-label='agenda table'>
+            <AdminAgendaTableHead tableName={'team'} table={tableTitle} />
+            <TableBody className={styles.tableBody}>
+              {teamInfo.teamList.length > 0 ? (
+                teamInfo.teamList.map((team: ITeam, index) => (
+                  <TableRow
+                    key={`${team.teamKey}-${index}`}
+                    className={styles.tableRow}
+                  >
+                    {agendaTableFormat['team'].columns.map(
+                      (columnName: string, index: number) => {
+                        return (
+                          <TableCell
+                            className={styles.tableBodyItem}
+                            key={index}
+                          >
+                            {columnName === 'teamStatus'
+                              ? renderStatus(team.teamStatus) // 상태 표시
+                              : columnName === 'teamIsPrivate'
+                              ? renderIsPrivate(team.teamIsPrivate) // 공개 여부 표시
+                              : columnName !== 'etc'
+                              ? team[columnName as keyof ITeam] // 다른 열의 기본 값 표시
+                              : agendaTableFormat['team'].etc?.value.map(
+                                  (buttonName: string, index: number) => (
+                                    <button
+                                      key={buttonName}
+                                      className={`${styles.button} ${buttonList[index]}`}
+                                      onClick={() =>
+                                        handleButtonAction(
+                                          buttonName,
+                                          team.teamKey
+                                        )
+                                      }
+                                    >
+                                      {buttonName}
+                                    </button>
+                                  )
+                                )}
+                          </TableCell>
+                        );
+                      }
+                    )}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={5} style={{ textAlign: 'center' }}>
+                    팀 목록이 없습니다.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <div className={styles.noAgendaMessage}>
+          올바른 아젠다를 선택해주세요.
+        </div>
+      )}
       <div className={styles.pageNationContainer}>
         <PageNation
           curPage={teamInfo.currentPage}
