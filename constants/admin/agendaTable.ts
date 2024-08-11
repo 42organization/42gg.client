@@ -42,4 +42,33 @@ export const agendaTableFormat: AgendaTableFormat = {
       value: ['자세히', '팀 수정', '팀 삭제'],
     },
   },
+
+  announcement: {
+    name: '공지사항 관리',
+    columns: ['id', 'title', 'content', 'isShow', 'etc'],
+    etc: {
+      type: 'button',
+      value: ['자세히', '수정', '삭제'],
+    },
+  },
+  ticket: {
+    name: '티켓 관리',
+    columns: [
+      'ticketId',
+      'createdAt',
+      'issuedFrom',
+      // 'issuedFromKey',
+      'usedTo',
+      // 'usedToKey',
+      'isApproved',
+      'approvedAt',
+      'isUsed',
+      'usedAt',
+      'etc',
+    ],
+    etc: {
+      type: 'button',
+      value: ['자세히', '수정', '삭제'],
+    },
+  },
 };

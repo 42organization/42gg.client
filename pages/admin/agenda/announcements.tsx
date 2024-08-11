@@ -1,13 +1,14 @@
 import { useRouter } from 'next/router';
+import AnnouncementTable from 'components/admin/agenda/announcements/AnnouncementTable';
 
 export default function Announcements() {
   const router = useRouter();
-  const { agenda_key } = router.query;
-  console.log(agenda_key);
+  const { agendaKey } = router.query;
+  console.log(agendaKey);
   return (
     <>
-      <p>here {agenda_key}</p>
-      <p>announcementss</p>
+      <p>here {agendaKey}</p>
+      <AnnouncementTable />
     </>
   );
 }

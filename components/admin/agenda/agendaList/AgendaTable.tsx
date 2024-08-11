@@ -133,7 +133,8 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
     switch (buttonName) {
       case '자세히':
         // setModal({ modalName: 'ADMIN-PROFILE', intraId });
-        alert('자세히');
+        router.push(`/admin/agenda/${agendaKey}`);
+        // alert('자세히');
         break;
       case '대회 수정':
         // setModal({ modalName: 'ADMIN-PROFILE', intraId });
