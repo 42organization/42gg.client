@@ -1,5 +1,6 @@
 import { AgendaLocation } from 'constants/agenda/agenda';
 import styles from 'styles/agenda/Form/Form.module.scss';
+import FormBtn from '../button/FormButton';
 import CheckBoxInput from '../Input/CheckboxInput';
 import DescriptionInput from '../Input/DescriptionInput';
 import SelectInput from '../Input/SelectInput';
@@ -36,9 +37,15 @@ const CreateTeamForm = ({ handleSubmit, location }: CreateTeamFormProps) => {
         label='팀 설명'
         placeholder='팀 설명을 입력해주세요'
       />
-      <button type='submit' className={styles.submitButton}>
-        팀 만들기
-      </button>
+      <div className={styles.buttonContainer}>
+        <FormBtn
+          label='취소'
+          onClick={(e) => {
+            e.preventDefault();
+          }}
+        />
+        <FormBtn label='팀 생성' submit={true} />
+      </div>
     </form>
   );
 };
