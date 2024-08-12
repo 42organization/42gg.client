@@ -7,8 +7,7 @@ const AgendaHistory = ({ agendaHistory }: AgendaHistoryProps) => {
     <div className={styles.agendaHistory}>
       <div className={styles.historyTitleText}>아젠다 기록</div>
       <div className={styles.historyItems}>
-        {/* agenda history mapping */}
-        {agendaHistory.length !== 0 ? (
+        {agendaHistory?.length > 0 ? (
           agendaHistory.map((history) => (
             <HistoryItem key={history.agendaId} historyData={history} />
           ))

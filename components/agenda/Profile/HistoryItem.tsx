@@ -1,9 +1,9 @@
-import classNames from 'classnames';
 import { AgendaHistoryDataProps } from 'types/agenda/profile/agendaHistoryTypes';
 import AgendaTag from 'components/agenda/utils/AgendaTag';
+import { countHistoryCoalitions } from 'components/agenda/utils/coalition/countCoalitions';
+import ColorList from 'components/agenda/utils/ColorList';
 import TeamIcon from 'public/image/agenda/rock-and-roll-hand.svg';
 import TimeIcon from 'public/image/agenda/Time.svg';
-import coalition from 'styles/agenda/coalition.module.scss';
 import styles from 'styles/agenda/Profile/HistoryItem.module.scss';
 
 const HistoryItem = ({ historyData }: AgendaHistoryDataProps) => {
@@ -12,6 +12,9 @@ const HistoryItem = ({ historyData }: AgendaHistoryDataProps) => {
   let timeString = '';
   if (startTime === endTime) timeString += startTime;
   else timeString = startTime + ' ~ ' + endTime;
+
+  const totalPeople = historyData.teamMates.length;
+  const peopleCount = countHistoryCoalitions(historyData.teamMates);
 
   return (
     <div className={styles.historyItem}>
@@ -44,8 +47,8 @@ const HistoryItem = ({ historyData }: AgendaHistoryDataProps) => {
           <TeamIcon />
         </div>
 
+        {/* intra id mapping */}
         <div className={styles.intraIdWrapper}>
-          {/* intra id mapping */}
           {historyData.teamMates.map((mate) => (
             <div key={`${historyData.agendaId}-${mate.intraId}`}>
               {mate.intraId}
@@ -54,24 +57,9 @@ const HistoryItem = ({ historyData }: AgendaHistoryDataProps) => {
         </div>
       </div>
 
+      {/* coalition color mapping */}
       <div className={styles.coalitionWrapper}>
-        {/* colition mapping */}
-        {historyData.teamMates.map((mate) => (
-          <div
-            key={`${historyData.teamKey}-${mate.intraId}`}
-            className={classNames(styles.coalitionBar, {
-              [coalition.bg_autumn]: mate.coalition === 'AUTUMN',
-              [coalition.bg_gun]: mate.coalition === 'GUN',
-              [coalition.bg_gon]: mate.coalition === 'GON',
-              [coalition.bg_gam]: mate.coalition === 'GAM',
-              [coalition.bg_lee]: mate.coalition === 'LEE',
-              [coalition.bg_spring]: mate.coalition === 'SPRING',
-              [coalition.bg_summer]: mate.coalition === 'SUMMER',
-              [coalition.bg_winter]: mate.coalition === 'WINTER',
-              [coalition.bg_default]: mate.coalition === 'DEFAULT',
-            })}
-          ></div>
-        ))}
+        <ColorList peopleCount={peopleCount} totalPeople={totalPeople} />
       </div>
     </div>
   );

@@ -20,7 +20,7 @@ export interface AgendaHistoryItemProps {
   teamMates: TeamMate[];
 }
 
-interface TeamMate {
+export interface TeamMate {
   intraId: string;
   coalition: string;
 }
