@@ -8,13 +8,11 @@ const CreateTeam = () => {
   const router = useRouter();
   const { agendaKey } = router.query;
   const agendaInfo = useAgendaInfo(agendaKey as string);
-  console.log(agendaInfo);
 
   const submitTeamForm = (target: React.FormEvent<HTMLFormElement>) => {
     target.preventDefault();
     const formData = new FormData(target.currentTarget);
     const strData = JSON.stringify(Object.fromEntries(formData));
-    console.log(strData);
     const data = JSON.parse(strData);
     data.teamIsPrivate = data.teamIsPrivate === 'on' ? true : false;
     switch (data.teamLocation) {
@@ -28,11 +26,9 @@ const CreateTeam = () => {
         data.teamLocation = 'MIX';
         break;
     }
-    console.log(data);
     instanceInAgenda
       .post(`/team?agenda_key=${agendaKey}`, data)
       .then((res) => {
-        console.log(res.data.teamKey);
         router.push(`/agenda/${agendaKey}/${res.data.teamKey}`);
       })
       .catch((err) => {
@@ -44,7 +40,10 @@ const CreateTeam = () => {
     <div className={styles.container}>
       <h2 className={styles.title}>팀 만들기</h2>
       <p className={styles.description}>팀 인원 : 3명-8명까지 가능</p>
-      <CreateTeamForm handleSubmit={submitTeamForm} />
+      <CreateTeamForm
+        handleSubmit={submitTeamForm}
+        location={agendaInfo?.agendaLocation || null}
+      />
     </div>
   );
 };

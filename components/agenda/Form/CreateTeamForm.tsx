@@ -1,3 +1,4 @@
+import { AgendaLocation } from 'constants/agenda/agenda';
 import styles from 'styles/agenda/Form/Form.module.scss';
 import CheckBoxInput from '../Input/CheckboxInput';
 import DescriptionInput from '../Input/DescriptionInput';
@@ -6,9 +7,10 @@ import TitleInput from '../Input/TitleInput';
 
 interface CreateTeamFormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  location: AgendaLocation | null;
 }
 
-const CreateTeamForm = ({ handleSubmit }: CreateTeamFormProps) => {
+const CreateTeamForm = ({ handleSubmit, location }: CreateTeamFormProps) => {
   return (
     <form onSubmit={handleSubmit} className={styles.container}>
       <TitleInput
@@ -20,11 +22,15 @@ const CreateTeamForm = ({ handleSubmit }: CreateTeamFormProps) => {
         name='teamIsPrivate'
         label='비밀방(초대만 가능, 대회 내역에서 보이지 않음)'
       />
-      <SelectInput
-        name='teamLocation'
-        label='클러스터 위치'
-        options={['서울', '경산', '둘다']}
-      />
+      {location === 'MIX' ? (
+        <SelectInput
+          name='teamLocation'
+          label='클러스터 위치'
+          options={['서울', '경산', '둘다']}
+        />
+      ) : (
+        <input type='hidden' name='teamLocation' value={location || ''} />
+      )}
       <DescriptionInput
         name='teamContent'
         label='팀 설명'
