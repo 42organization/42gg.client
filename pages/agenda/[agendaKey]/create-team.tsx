@@ -1,8 +1,12 @@
+import { useRouter } from 'next/router';
 import { instanceInAgenda } from 'utils/axios';
 import CreateTeamForm from 'components/agenda/Form/CreateTeamForm';
 import styles from 'styles/agenda/pages/create-team.module.scss';
 
 const CreateTeam = () => {
+  const router = useRouter();
+  const { agendaUID } = router.query;
+
   const submitTeamForm = (target: React.FormEvent<HTMLFormElement>) => {
     target.preventDefault();
     const formData = new FormData(target.currentTarget);
@@ -22,12 +26,11 @@ const CreateTeam = () => {
         break;
     }
     console.log(data);
-
-    const agendaUID = '40e9950a-59a0-4131-8e2b-6fe1ef185b5b'; // 임시, 받아오는 부분 확인 필요
     instanceInAgenda
       .post(`/team?agenda_key=${agendaUID}`, data)
       .then((res) => {
-        console.log(res);
+        console.log(res.data.teamKey);
+        router.push(`/agenda/${agendaUID}/${res.data.teamKey}`);
       })
       .catch((err) => {
         console.log(err);
