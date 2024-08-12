@@ -2,6 +2,7 @@
 // @import 'styles/globals.css';
 
 // radius
+$radius-extra-small: 0.5rem;
 $radius-small: 1rem; // 컴포넌트 속 요소
 $radius-medium: 1.2rem; // 기본 컴포넌트
 $radius-big: 1.4rem; // 제목, 웹용 큰 박스용
@@ -16,6 +17,13 @@ $color-coalition-gon: #79e27e;
 $color-coalition-gun: #ffea80;
 $color-coalition-gam: #72d3ff;
 $color-coalition-lee: #ff8a85;
+
+// tag bg color
+$color-tag-official: #39b8ff;
+$color-tag-common: #fcba03;
+$color-tag-team: #ff5d5d;
+$color-tag-assignment: #ffb039;
+$color-tag-deafult: #000000;
 
 // color
 $color-placeholder: #b4a5b5;
@@ -170,5 +178,42 @@ $font-size-xs: 0.8rem; // $small-font
     // form 내부 label
     font-size: $font-size-s;
     font-weight: bold;
+  }
+}
+
+@mixin circle-animation {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    display: block;
+    width: 0;
+    height: 0;
+    content: '';
+    background: rgba(214, 197, 255, 0.6);
+    border-radius: 100%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover::before {
+    animation: circle 0.75s;
+  }
+
+  @keyframes circle {
+    0% {
+      opacity: 1;
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      width: 200%;
+      height: 200%;
+      opacity: 0;
+    }
   }
 }
