@@ -1,11 +1,14 @@
 import { useRouter } from 'next/router';
 import { instanceInAgenda } from 'utils/axios';
 import CreateTeamForm from 'components/agenda/Form/CreateTeamForm';
+import { useAgendaInfo } from 'hooks/agenda/useAgendaInfo';
 import styles from 'styles/agenda/pages/create-team.module.scss';
 
 const CreateTeam = () => {
   const router = useRouter();
   const { agendaKey } = router.query;
+  const agendaInfo = useAgendaInfo(agendaKey as string);
+  console.log(agendaInfo);
 
   const submitTeamForm = (target: React.FormEvent<HTMLFormElement>) => {
     target.preventDefault();
