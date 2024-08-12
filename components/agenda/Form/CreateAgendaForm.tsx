@@ -3,11 +3,10 @@ import { Slider } from '@mui/material';
 import CheckboxInput from 'components/agenda/Input/CheckboxInput';
 import DescriptionInput from 'components/agenda/Input/DescriptionInput';
 import ImageInput from 'components/agenda/Input/ImageInput';
+import SelectInput from 'components/agenda/Input/SelectInput';
 import TimeInput from 'components/agenda/Input/TimeInput';
 import TitleInput from 'components/agenda/Input/TitleInput';
 import styles from 'styles/agenda/Form/Form.module.scss';
-import SelectInput from '../Input/SelectInput';
-
 interface CreateAgendaFormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
@@ -289,7 +288,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
           {/* <SubmitInputBtn name='cancel' label='취소하기' />{' '} */}
           {/*새로만들어야 함*/}
           {/* <SubmitInputBtn name='submit' label='팀 만들기' /> */}
-          <button type='submit'>팀 만들기</button>
+          <button type='submit'>아젠다만들기</button>
         </div>
       </div>
     </form>

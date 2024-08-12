@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
+import {
+  AddElementBtn,
+  DragBtn,
+  RemoveElementBtn,
+} from 'components/agenda/button/Buttons';
+import SelectInput from 'components/agenda/Input/SelectInput';
+import useDraggable from 'components/agenda/utils/useDraggable';
 import styles from 'styles/agenda/Form/AgendaResultForm.module.scss';
 import dragStyles from 'styles/agenda/utils/draggable.module.scss';
-import { setModifiabilityFlag } from '../../../utils/takgu/handleTournamentGame';
-import { AddElementBtn, DragBtn, RemoveElementBtn } from '../button/Buttons';
-import SelectInput from '../Input/SelectInput';
-import useDraggable from '../utils/useDraggable';
 
 type awardType = {
   award: string;
