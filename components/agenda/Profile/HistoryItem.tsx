@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { AgendaHistoryDataProps } from 'types/agenda/profile/agendaHistoryTypes';
 import AgendaTag from 'components/agenda/utils/AgendaTag';
-import CustomImage from 'components/agenda/utils/CustomImage';
+import TeamIcon from 'public/image/agenda/rock-and-roll-hand.svg';
+import TimeIcon from 'public/image/agenda/Time.svg';
 import coalition from 'styles/agenda/coalition.module.scss';
 import styles from 'styles/agenda/Profile/HistoryItem.module.scss';
 
@@ -28,7 +29,7 @@ const HistoryItem = ({ historyData }: AgendaHistoryDataProps) => {
 
       <div className={styles.timeWrapper}>
         <div className={styles.imageWrapper}>
-          <CustomImage src='/image/agenda/Time.svg' alt='Time' />
+          <TimeIcon />
         </div>
 
         <div className={styles.timeContent}>{timeString}</div>
@@ -40,7 +41,7 @@ const HistoryItem = ({ historyData }: AgendaHistoryDataProps) => {
 
       <div className={styles.teamIntraIdWrapper}>
         <div className={styles.imageWrapper}>
-          <CustomImage src='/image/agenda/rock-and-roll-hand.svg' alt='team' />
+          <TeamIcon />
         </div>
 
         <div className={styles.intraIdWrapper}>

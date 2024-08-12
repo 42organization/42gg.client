@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { ProfileCardProps } from 'types/agenda/profile/profileCardTypes';
 import CustomImage from 'components/agenda/utils/CustomImage';
+import IntraIcon from 'public/image/agenda/42-icon.svg';
+import EditIcon from 'public/image/agenda/edit.svg';
+import GithubIcon from 'public/image/agenda/github.svg';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/Profile/ProfileCard.module.scss';
 
@@ -143,7 +146,7 @@ const ProfileImageCard = ({
             <div className={styles.userNameWrapper}>
               <div className={styles.userName}>{userIntraId}</div>
               <div className={styles.editWrapper} onClick={handleFlip}>
-                <CustomImage src='/image/agenda/edit.svg' alt='edit' />
+                <EditIcon />
               </div>
             </div>
 
@@ -155,7 +158,7 @@ const ProfileImageCard = ({
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <CustomImage src='/image/agenda/github.svg' alt='github' />
+                    <GithubIcon />
                   </a>
                 ) : (
                   ''
@@ -167,7 +170,7 @@ const ProfileImageCard = ({
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  <CustomImage src='/image/agenda/42-icon.svg' alt='42' />
+                  <IntraIcon />
                 </a>
               </div>
             </div>
