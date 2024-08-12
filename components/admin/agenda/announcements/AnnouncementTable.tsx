@@ -62,7 +62,7 @@ const mockTeamList2 = [
 const tableTitle: { [key: string]: string } = {
   id: 'ID',
   title: '제목',
-  contents: '내용',
+  content: '내용',
   isShow: '공개 여부',
   createdAt: '생성일',
   etc: '기타',
@@ -125,33 +125,33 @@ export default function AnnouncementTable() {
       } // 선택된 agenda가 없으면 반환
 
       // const res = mockTeamList; // 여기에 API 호출 추가
-      // const response = await axios.get(`/agenda/admin/request/list`, {
-      //   params: {
-      //     agenda_key: selectedAgendaKey,
-      //     page: currentPage,
-      //     size: itemsPerPage,
-      //   },
-      // });
+      const response = await instance.get(`/agenda/admin/announcement`, {
+        params: {
+          agenda_key: selectedAgendaKey,
+          page: currentPage,
+          size: itemsPerPage,
+        },
+      });
 
-      let res = [];
-      if (selectedAgendaKey === '1') {
-        res = mockTeamList;
-      } else if (selectedAgendaKey === '2') {
-        res = mockTeamList2;
-      } else {
-        res = [];
-        return;
-      }
+      // let res = [];
+      // if (selectedAgendaKey === '1') {
+      //   res = mockTeamList;
+      // } else if (selectedAgendaKey === '2') {
+      //   res = mockTeamList2;
+      // } else {
+      //   res = [];
+      //   return;
+      // }
 
-      const totalPage = Math.ceil(res.length / itemsPerPage);
-      const paginatedList = res.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-      );
+      // const totalPage = Math.ceil(res.length / itemsPerPage);
+      // const paginatedList = res.slice(
+      //   (currentPage - 1) * itemsPerPage,
+      //   currentPage * itemsPerPage
+      // );
 
       setAnnouncementInfo({
-        announcementList: paginatedList,
-        totalPage: totalPage,
+        announcementList: response.data,
+        totalPage: 10,
         currentPage: currentPage,
       });
     } catch (e) {
@@ -179,13 +179,13 @@ export default function AnnouncementTable() {
   };
 
   const renderIsShow = (isShow: boolean) => {
-    return isShow ? '비공개' : '공개';
+    return isShow ? '공개' : '비공개';
   };
 
   return (
     <div className={styles.agendaListWrap}>
       <div className={styles.header}>
-        <span className={styles.title}>팀 관리</span>
+        <span className={styles.title}>공지사항 관리</span>
         <Select
           value={selectedAgendaKey}
           onChange={handleSelectChange}

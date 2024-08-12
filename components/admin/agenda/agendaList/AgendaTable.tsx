@@ -10,13 +10,13 @@ import {
 } from '@mui/material';
 // import { instance } from 'utils/axios';
 // import { dateToStringShort } from 'utils/handleTime';
+import { instance } from 'utils/axios';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
 import { AgendaStatus } from 'constants/agenda/agenda';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
 import PageNation from 'components/Pagination';
 // import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
-const itemsPerPage = 10; // 한 페이지에 보여줄 항목 수
 
 export const mockAgendaList = [
   {
@@ -107,11 +107,6 @@ export interface IAgendaTable {
   currentPage: number;
 }
 
-export interface Request {
-  page: number;
-  size: number;
-}
-
 interface AgendaTableProps {
   status?: AgendaStatus;
   isOfficial?: boolean;
@@ -132,17 +127,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
   const handleButtonAction = (buttonName: string, agendaKey: string) => {
     switch (buttonName) {
       case '자세히':
-        // setModal({ modalName: 'ADMIN-PROFILE', intraId });
         router.push(`/admin/agenda/${agendaKey}`);
-        // alert('자세히');
-        break;
-      case '대회 수정':
-        // setModal({ modalName: 'ADMIN-PROFILE', intraId });
-        alert('대회 수정');
-        break;
-      case '대회 삭제':
-        // 모달 추가
-        alert('대회 삭제');
         break;
       case '팀 목록':
         router.push(`/admin/agenda/teamList?agendaKey=${agendaKey}`);
@@ -155,19 +140,12 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
 
   const getAgendaList = useCallback(async () => {
     try {
-      // const res = await instance.get(`/agenda/admin/request/list`, {
-      //   params: { page: currentPage, size: 10 },
-      // });
-      // const res = await instance.get(
-      //   `/agenda/admin/request/list?page=${currentPage}&size=10`
-      // );
-      const res = mockAgendaList;
-      // const params = {
-      //   page: currentPage,
-      //   size: itemsPerPage,
-      // };
-      // const res = useFetchGet(`/agenda/admin/request/list`, params).data;
+      const getData = await instance.get(
+        `/agenda/admin/request/list?page=${currentPage}&size=10`
+      );
+      const res = getData.data;
 
+      console.log(res);
       const filteredAgendaList = res.filter((agenda: IAgenda) => {
         const matchesStatus = status ? agenda.agendaStatus === status : true;
         const matchesOfficial =
@@ -175,23 +153,9 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
         return matchesStatus && matchesOfficial;
       });
 
-      const totalPage = Math.ceil(filteredAgendaList.length / itemsPerPage);
-      const paginatedList = filteredAgendaList.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-      );
-      // const agendaList = res.map((agenda: AgendaData) => {
-      //   return {
-      //     ...agenda,
-      //     agendaDeadLine: dateToStringShort(agenda.agendaDeadLine),
-      //     agendaStartTime: dateToStringShort(agenda.agendaStartTime),
-      //     agendaEndTime: dateToStringShort(agenda.agendaEndTime),
-      //   };
-      // });
-
       setAgendaInfo({
-        agendaList: paginatedList,
-        totalPage: totalPage,
+        agendaList: filteredAgendaList,
+        totalPage: 10,
         currentPage: currentPage,
       });
     } catch (e) {
@@ -202,9 +166,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
   useEffect(() => {
     getAgendaList();
   }, [getAgendaList]);
-  // if (agendaInfo.agendaList.length === 0) {
-  //   return <div>데이터가 없습니다.</div>;
-  // }
+
   const renderStatus = (status: string) => {
     switch (status) {
       case AgendaStatus.CANCEL:
@@ -228,30 +190,16 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
     <div className={styles.agendaListWrap}>
       <div className={styles.header}>
         <span className={styles.title}>아젠다 관리</span>
-        {/* <div className={styles.searchWrap}>
-          <AdminSearchBar initSearch={initSearch} />
-          <CreateNotiButton />
-        </div> */}
       </div>
       <TableContainer className={styles.tableContainer} component={Paper}>
         <Table className={styles.table} aria-label='agenda table'>
           <AdminAgendaTableHead tableName={'agenda'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
             {agendaInfo.agendaList.map((agenda: IAgenda) => (
-              <TableRow key={agenda.agendaKey} className={styles.tableRow}>
+              <TableRow key={agenda.agendaTitle} className={styles.tableRow}>
                 {agendaTableFormat['agenda'].columns.map(
                   (columnName: string, index: number) => {
                     return (
-                      // <TableCell className={styles.tableBodyItem} key={index}>
-
-                      /* <AdminContent
-                          content={agenda[
-                            columnName as keyof IAgenda
-                          ]?.toString()}
-                          maxLen={MAX_CONTENT_LENGTH}
-                          detailTitle={agenda.title}
-                          detailContent={agenda.contents}
-                        /> */
                       <TableCell className={styles.tableBodyItem} key={index}>
                         {columnName === 'agendaStatus'
                           ? renderStatus(agenda.agendaStatus) // 상태 표시
@@ -290,7 +238,6 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
           totalPages={agendaInfo.totalPage}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
-            getAgendaList();
           }}
         />
       </div>

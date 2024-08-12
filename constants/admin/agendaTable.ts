@@ -23,7 +23,7 @@ export const agendaTableFormat: AgendaTableFormat = {
     ],
     etc: {
       type: 'button',
-      value: ['자세히', '대회 수정', '대회 삭제', '팀 목록', '공지사항'],
+      value: ['자세히', '팀 목록', '공지사항'],
     },
   },
   team: {
@@ -45,7 +45,7 @@ export const agendaTableFormat: AgendaTableFormat = {
 
   announcement: {
     name: '공지사항 관리',
-    columns: ['id', 'title', 'content', 'isShow', 'etc'],
+    columns: ['id', 'title', 'content', 'isShow', 'createdAt', 'etc'],
     etc: {
       type: 'button',
       value: ['자세히', '수정', '삭제'],

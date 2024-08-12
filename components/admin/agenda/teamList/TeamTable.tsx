@@ -155,9 +155,9 @@ export default function TeamTable() {
       } // 선택된 agenda가 없으면 반환
 
       // const res = mockTeamList; // 여기에 API 호출 추가
-      // const response = await axios.get(`/agenda/admin/request/list`, {
+      // const response = await instance.get(`/agenda/admin/team/list`, {
       //   params: {
-      //     agenda_key: selectedAgendaKey,
+      //     agenda_key: '6821a401-849a-4269-851c-6a109c6d76bc',
       //     page: currentPage,
       //     size: itemsPerPage,
       //   },
@@ -173,15 +173,9 @@ export default function TeamTable() {
         return;
       }
 
-      const totalPage = Math.ceil(res.length / itemsPerPage);
-      const paginatedList = res.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-      );
-
       setTeamInfo({
-        teamList: paginatedList,
-        totalPage: totalPage,
+        teamList: res,
+        totalPage: 10,
         currentPage: currentPage,
       });
     } catch (e) {
@@ -311,7 +305,6 @@ export default function TeamTable() {
           totalPages={teamInfo.totalPage}
           pageChangeHandler={(pageNumber: number) => {
             setCurrentPage(pageNumber);
-            getTeamList();
           }}
         />
       </div>
