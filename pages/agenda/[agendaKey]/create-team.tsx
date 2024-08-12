@@ -5,7 +5,7 @@ import styles from 'styles/agenda/pages/create-team.module.scss';
 
 const CreateTeam = () => {
   const router = useRouter();
-  const { agendaUID } = router.query;
+  const { agendaKey } = router.query;
 
   const submitTeamForm = (target: React.FormEvent<HTMLFormElement>) => {
     target.preventDefault();
@@ -27,10 +27,10 @@ const CreateTeam = () => {
     }
     console.log(data);
     instanceInAgenda
-      .post(`/team?agenda_key=${agendaUID}`, data)
+      .post(`/team?agenda_key=${agendaKey}`, data)
       .then((res) => {
         console.log(res.data.teamKey);
-        router.push(`/agenda/${agendaUID}/${res.data.teamKey}`);
+        router.push(`/agenda/${agendaKey}/${res.data.teamKey}`);
       })
       .catch((err) => {
         console.log(err);
