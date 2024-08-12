@@ -8,7 +8,9 @@
   flex-direction: column;
   padding: 1rem 1.5rem;
   background-color: var(--box-bg-2);
+  border: var(--default-border);
   border-radius: $radius-big;
+  box-shadow: var(--default-box-shadow);
   gap: 1rem;
 
   .historyTitleText {
@@ -21,5 +23,9 @@
     height: 100%;
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .historyEmpty {
+    @include text(description-s);
   }
 }

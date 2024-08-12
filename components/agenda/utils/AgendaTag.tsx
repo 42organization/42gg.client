@@ -5,24 +5,10 @@ interface AgendaTagProps {
 }
 
 const AgendaTag: React.FC<AgendaTagProps> = ({ tagName }) => {
-  let backgroundColor;
-  switch (tagName) {
-    case '공식':
-      backgroundColor = '#39B8FF';
-      break;
-    case '팀':
-      backgroundColor = '#FF5D5D';
-      break;
-    case '과제':
-      backgroundColor = '#FFB039';
-      break;
-    default:
-      backgroundColor = '#000000';
-  }
+  const tagBackground = styles[tagName] || styles.default;
+
   return (
-    <div className={styles.agendaTag} style={{ backgroundColor }}>
-      #{tagName}
-    </div>
+    <div className={`${styles.agendaTag} ${tagBackground}`}>#{tagName}</div>
   );
 };
 

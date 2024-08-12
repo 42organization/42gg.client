@@ -1,5 +1,19 @@
 @import '../common.scss';
 
+$tags: (
+  공식: $color-tag-official,
+  비공식: $color-tag-common,
+  팀: $color-tag-team,
+  과제: $color-tag-assignment,
+  default: $color-tag-deafult,
+);
+
+@each $name, $color in $tags {
+  .#{$name} {
+    background-color: $color;
+  }
+}
+
 .agendaTag {
   display: flex;
   width: 3.3rem;

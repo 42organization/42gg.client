@@ -6,6 +6,7 @@
   height: auto;
   flex-direction: column;
   padding: 1rem;
+  cursor: pointer;
   background-color: var(--box-bg-1);
   border-radius: $radius-small;
   justify-content: flex-start;
@@ -24,8 +25,11 @@
   .timeWrapper {
     display: flex;
     align-items: center;
-    gap: 0.3rem;
-    @include text(description-s);
+    gap: 0.7rem;
+
+    .timeContent {
+      @include text(description-s);
+    }
   }
 
   .divider {
@@ -38,15 +42,21 @@
 
   .teamIntraIdWrapper {
     display: flex;
-    gap: 0.3rem;
+    align-items: center;
+    gap: 0.7rem;
     @include text(description-s);
+
+    .intraIdWrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
   }
 
   .coalitionWrapper {
+    display: flex;
     width: 100%;
     height: 1rem;
-    background-color: $color-coalition-gam;
-    border-radius: $radius-big;
   }
 }
 
@@ -54,8 +64,4 @@
   display: flex;
   width: 0.8rem;
   height: 0.8rem;
-  .imageBox {
-    width: 100%;
-    height: 100%;
-  }
 }
