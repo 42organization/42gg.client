@@ -26,6 +26,12 @@ const CreateTeam = () => {
         data.teamLocation = 'MIX';
         break;
     }
+    data.teamName = data.teamName.trim();
+    data.teamContent = data.teamContent.trim();
+    if (data.teamName === '' || data.teamContent === '') {
+      alert('모든 항목을 입력해주세요.'); //임시
+      return;
+    }
     instanceInAgenda
       .post(`/team?agenda_key=${agendaKey}`, data)
       .then((res) => {
