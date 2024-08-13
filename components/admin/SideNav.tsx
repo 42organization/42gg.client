@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { BsAwardFill } from 'react-icons/bs';
 import { FaAngleDown, FaAngleRight } from 'react-icons/fa';
 import { IoPeople } from 'react-icons/io5';
@@ -7,10 +8,27 @@ import SideNavAgenda from 'components/admin/agenda/SideNavAgenda';
 import SideNavParty from 'components/admin/takgu/SideNavParty';
 import SideNavTakgu from 'components/admin/takgu/SideNavTakgu';
 import styles from 'styles/admin/SideNav.module.scss';
+
 export default function SideNav() {
   const [isTakguOpen, setTakguOpen] = useState(false);
   const [isPartyOpen, setPartyOpen] = useState(false);
   const [isAgendaOpen, setAgendaOpen] = useState(false);
+
+  const presentPath = useRouter().asPath;
+  useEffect(() => {
+    switch (true) {
+      case presentPath.includes('/admin/takgu'):
+        setTakguOpen(true);
+        break;
+      case presentPath.includes('/admin/party'):
+        setTakguOpen(true);
+        setPartyOpen(true);
+        break;
+      case presentPath.includes('/admin/agenda'):
+        setAgendaOpen(true);
+        break;
+    }
+  }, [presentPath]);
 
   return (
     <div className={styles.container}>
