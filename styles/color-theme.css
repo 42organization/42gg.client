@@ -3,10 +3,11 @@
   --bg-light: linear-gradient(180deg, #c9c9c9 0%, #6d5b93 100%);
   --bg-dark: linear-gradient(180deg, #38253a 0%, #604ecd 73%, #999772 100%);
   --text-light: #000000;
+  --text-grey: #898989;
   --text-dark: #ffffff;
   --border-light: 1px solid black;
   --border-dark: 1px solid white;
-  --border-highlight-light: 2px solid black;
+  --border-highlight-light: 2px solid black;te
   --border-highlight-dark: 2px solid white;
 
   --black: #000000;
