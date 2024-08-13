@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { TeamDetailProps } from 'types/aganda/TeamDetailTypes';
@@ -7,6 +8,7 @@ import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import TeamButtons from 'components/agenda/teamDetail/TeamButtons';
 import TeamInfo from 'components/agenda/teamDetail/TeamInfo';
 import useFetchGet from 'hooks/agenda/useFetchGet';
+import styles from 'styles/agenda/TeamDetail/TeamDetail.module.scss';
 
 export default function TeamDetail({ intraId }: { intraId: string }) {
   const router = useRouter();
@@ -80,8 +82,12 @@ export default function TeamDetail({ intraId }: { intraId: string }) {
   console.log(authority, intraId);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {agendaData && <AgendaInfo agendaData={agendaData} />}
+    <div className={styles.teamDeatil}>
+      {agendaData && (
+        <Link href={`/agenda/${agendaKey}`} className={styles.agendaLink}>
+          <AgendaInfo agendaData={agendaData} />
+        </Link>
+      )}
       <TeamInfo teamDetail={teamDetail} shareTeamInfo={shareTeamInfo} />
       <TeamButtons authority={authority} />
     </div>
