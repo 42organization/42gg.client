@@ -11,11 +11,10 @@ import {
   TableRow,
 } from '@mui/material';
 import { instance } from 'utils/axios';
-import { dateToStringShort } from 'utils/handleTime';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
-import { AgendaStatus, TeamStatus } from 'constants/agenda/agenda';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
 import PageNation from 'components/Pagination';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
 
 const itemsPerPage = 10; // 한 페이지에 보여줄 항목 수
@@ -99,7 +98,7 @@ export default function AnnouncementTable() {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedAgendaKey, setSelectedAgendaKey] = useState('');
-  const [agendaList, setAgendaList] = useState(mockAgendaList); // agenda 목록 저장
+  const agendaList = useFetchGet(`list`).data || [];
 
   // const modal = useRecoilValue(modalState);
   const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
@@ -109,11 +108,11 @@ export default function AnnouncementTable() {
       case '자세히':
         alert('자세히');
         break;
-      case '팀 수정':
-        alert('팀 수정');
+      case '수정':
+        alert('수정');
         break;
-      case '팀 삭제':
-        alert('팀 삭제');
+      case '삭제':
+        alert('삭제');
         break;
     }
   };
@@ -194,11 +193,12 @@ export default function AnnouncementTable() {
           <MenuItem value='' disabled>
             Choose an agenda...
           </MenuItem>
-          {agendaList.map((agenda) => (
-            <MenuItem key={agenda.agendaKey} value={agenda.agendaKey}>
-              {agenda.agendaName}
-            </MenuItem>
-          ))}
+          {Array.isArray(agendaList) &&
+            agendaList.map((agenda) => (
+              <MenuItem key={agenda.agendaKey} value={agenda.agendaKey}>
+                {agenda.agendaTitle}
+              </MenuItem>
+            ))}
         </Select>
       </div>
       {selectedAgendaKey ? (
@@ -227,7 +227,9 @@ export default function AnnouncementTable() {
                                 ? renderIsShow(announce[columnName])
                                 : columnName !== 'etc'
                                 ? announce[columnName as keyof IAnnouncement] // 다른 열의 기본 값 표시
-                                : agendaTableFormat['team'].etc?.value.map(
+                                : agendaTableFormat[
+                                    'announcement'
+                                  ].etc?.value.map(
                                     (buttonName: string, index: number) => (
                                       <button
                                         key={buttonName}

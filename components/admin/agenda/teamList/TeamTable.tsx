@@ -11,11 +11,11 @@ import {
   TableRow,
 } from '@mui/material';
 import { instance } from 'utils/axios';
-import { dateToStringShort } from 'utils/handleTime';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
-import { AgendaStatus, TeamStatus } from 'constants/agenda/agenda';
+import { TeamStatus } from 'constants/agenda/agenda';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
 import PageNation from 'components/Pagination';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
 
 const itemsPerPage = 10; // 한 페이지에 보여줄 항목 수
@@ -111,12 +111,6 @@ export interface ITeamTable {
   currentPage: number;
 }
 
-export interface Request {
-  page: number;
-  size: number;
-}
-
-// export default function TeamTable({ status }: { status: string }) {
 export default function TeamTable() {
   const router = useRouter();
   const { agendaKey } = router.query;
@@ -129,7 +123,7 @@ export default function TeamTable() {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedAgendaKey, setSelectedAgendaKey] = useState('');
-  const [agendaList, setAgendaList] = useState(mockAgendaList); // agenda 목록 저장
+  const agendaList = useFetchGet(`list`).data || [];
 
   // const modal = useRecoilValue(modalState);
   const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
@@ -139,11 +133,11 @@ export default function TeamTable() {
       case '자세히':
         alert('자세히');
         break;
-      case '팀 수정':
-        alert('팀 수정');
+      case '수정':
+        alert('수정');
         break;
-      case '팀 삭제':
-        alert('팀 삭제');
+      case '삭제':
+        alert('삭제');
         break;
     }
   };
@@ -152,29 +146,28 @@ export default function TeamTable() {
     try {
       if (!selectedAgendaKey) {
         return;
-      } // 선택된 agenda가 없으면 반환
-
-      // const res = mockTeamList; // 여기에 API 호출 추가
-      // const response = await instance.get(`/agenda/admin/team/list`, {
-      //   params: {
-      //     agenda_key: '6821a401-849a-4269-851c-6a109c6d76bc',
-      //     page: currentPage,
-      //     size: itemsPerPage,
-      //   },
-      // });
-
-      let res = [];
-      if (selectedAgendaKey === '1') {
-        res = mockTeamList;
-      } else if (selectedAgendaKey === '2') {
-        res = mockTeamList2;
-      } else {
-        res = [];
-        return;
       }
 
+      const response = await instance.get(`/agenda/admin/team/list`, {
+        params: {
+          agenda_key: selectedAgendaKey,
+          page: currentPage,
+          size: itemsPerPage,
+        },
+      });
+
+      // let res = [];
+      // if (selectedAgendaKey === '1') {
+      //   res = mockTeamList;
+      // } else if (selectedAgendaKey === '2') {
+      //   res = mockTeamList2;
+      // } else {
+      //   res = [];
+      //   return;
+      // }
+
       setTeamInfo({
-        teamList: res,
+        teamList: response.data,
         totalPage: 10,
         currentPage: currentPage,
       });
@@ -231,11 +224,12 @@ export default function TeamTable() {
           <MenuItem value='' disabled>
             Choose an agenda...
           </MenuItem>
-          {agendaList.map((agenda) => (
-            <MenuItem key={agenda.agendaKey} value={agenda.agendaKey}>
-              {agenda.agendaName}
-            </MenuItem>
-          ))}
+          {Array.isArray(agendaList) &&
+            agendaList.map((agenda) => (
+              <MenuItem key={agenda.agendaKey} value={agenda.agendaKey}>
+                {agenda.agendaTitle}
+              </MenuItem>
+            ))}
         </Select>
       </div>
       {selectedAgendaKey ? (
@@ -287,7 +281,7 @@ export default function TeamTable() {
               ) : (
                 <TableRow>
                   <TableCell colSpan={5} style={{ textAlign: 'center' }}>
-                    팀 목록이 없습니다.
+                    공지사항이 없습니다.
                   </TableCell>
                 </TableRow>
               )}
