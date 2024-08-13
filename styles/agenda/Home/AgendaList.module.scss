@@ -20,20 +20,19 @@
   > div {
     height: max-content;
     margin-right: 0.5rem;
-    color: var(--text-grey);
+    color: var(--text-color);
   }
 }
 
 .agendaListStatus {
   @include text('statusButton');
-  color: var(--text-grey);
   background: none;
   border: none;
   box-shadow: none;
 }
 
 .selectedStatus {
-  color: var(--color-text);
+  font-family: '11StreetGothicRegular';
 }
 
 .agendaListItemContainer {
