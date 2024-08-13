@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import AgendaItemBtn from 'components/agenda/utils/AgendaItemBtn';
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
+import AgendaInfo from 'components/agenda/Home/AgendaInfo';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/Home/MyAgendaBtn.module.scss';
 
 const MyAgendaBtn = () => {
@@ -26,6 +28,8 @@ const MyAgendaBtn = () => {
       }, 200);
     }
   };
+  const myList =
+    useFetchGet<AgendaDataProps[]>('/agenda/profile/current/list')?.data || [];
 
   return (
     <div
@@ -49,11 +53,15 @@ const MyAgendaBtn = () => {
       </div>
 
       <div className={styles.myAgendaListContainer}>
-        <AgendaItemBtn />
-        <AgendaItemBtn />
-        <AgendaItemBtn />
-        <AgendaItemBtn />
-        <AgendaItemBtn />
+        {myList.length > 0 ? (
+          myList.map((agendaInfo, idx) => (
+            <div className={styles.myagendaItemContainer} key={idx}>
+              <AgendaInfo agendaInfo={agendaInfo} key={idx} />
+            </div>
+          ))
+        ) : (
+          <div className={styles.noAgendaText}>There is no agenda</div>
+        )}
       </div>
     </div>
   );
