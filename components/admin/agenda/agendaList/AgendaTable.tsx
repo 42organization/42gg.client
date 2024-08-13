@@ -11,6 +11,7 @@ import {
 // import { instance } from 'utils/axios';
 // import { dateToStringShort } from 'utils/handleTime';
 import { instance } from 'utils/axios';
+import { dateToString } from 'utils/handleTime';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
 import { AgendaStatus } from 'constants/agenda/agenda';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
@@ -143,10 +144,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
       const getData = await instance.get(
         `/agenda/admin/request/list?page=${currentPage}&size=10`
       );
-      const res = getData.data;
-
-      console.log(res);
-      const filteredAgendaList = res.filter((agenda: IAgenda) => {
+      const filteredAgendaList = getData.data.filter((agenda: IAgenda) => {
         const matchesStatus = status ? agenda.agendaStatus === status : true;
         const matchesOfficial =
           isOfficial !== undefined ? agenda.isOfficial === isOfficial : true;
@@ -154,7 +152,14 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
       });
 
       setAgendaInfo({
-        agendaList: filteredAgendaList,
+        agendaList: filteredAgendaList.map((agenda: IAgenda) => {
+          return {
+            ...agenda,
+            agendaDeadLine: dateToString(new Date(agenda.agendaDeadLine)),
+            agendaStartTime: dateToString(new Date(agenda.agendaStartTime)),
+            agendaEndTime: dateToString(new Date(agenda.agendaEndTime)),
+          };
+        }),
         totalPage: 10,
         currentPage: currentPage,
       });
@@ -195,40 +200,48 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
         <Table className={styles.table} aria-label='agenda table'>
           <AdminAgendaTableHead tableName={'agenda'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {agendaInfo.agendaList.map((agenda: IAgenda) => (
-              <TableRow key={agenda.agendaTitle} className={styles.tableRow}>
-                {agendaTableFormat['agenda'].columns.map(
-                  (columnName: string, index: number) => {
-                    return (
-                      <TableCell className={styles.tableBodyItem} key={index}>
-                        {columnName === 'agendaStatus'
-                          ? renderStatus(agenda.agendaStatus) // 상태 표시
-                          : columnName === 'isOfficial'
-                          ? renderOfficial(agenda.isOfficial) // 공식 여부 표시
-                          : columnName !== 'etc'
-                          ? agenda[columnName as keyof IAgenda] // 다른 열의 기본 값 표시
-                          : agendaTableFormat['agenda'].etc?.value.map(
-                              (buttonName: string, index: number) => (
-                                <button
-                                  key={buttonName}
-                                  className={`${styles.button} ${buttonList[index]}`}
-                                  onClick={() =>
-                                    handleButtonAction(
-                                      buttonName,
-                                      agenda.agendaKey
-                                    )
-                                  }
-                                >
-                                  {buttonName}
-                                </button>
-                              )
-                            )}
-                      </TableCell>
-                    );
-                  }
-                )}
+            {agendaInfo.agendaList.length > 0 ? (
+              agendaInfo.agendaList.map((agenda: IAgenda) => (
+                <TableRow key={agenda.agendaTitle} className={styles.tableRow}>
+                  {agendaTableFormat['agenda'].columns.map(
+                    (columnName: string, index: number) => {
+                      return (
+                        <TableCell className={styles.tableBodyItem} key={index}>
+                          {columnName === 'agendaStatus'
+                            ? renderStatus(agenda.agendaStatus) // 상태 표시
+                            : columnName === 'isOfficial'
+                            ? renderOfficial(agenda.isOfficial) // 공식 여부 표시
+                            : columnName !== 'etc'
+                            ? agenda[columnName as keyof IAgenda] // 다른 열의 기본 값 표시
+                            : agendaTableFormat['agenda'].etc?.value.map(
+                                (buttonName: string, index: number) => (
+                                  <button
+                                    key={buttonName}
+                                    className={`${styles.button} ${buttonList[index]}`}
+                                    onClick={() =>
+                                      handleButtonAction(
+                                        buttonName,
+                                        agenda.agendaKey
+                                      )
+                                    }
+                                  >
+                                    {buttonName}
+                                  </button>
+                                )
+                              )}
+                        </TableCell>
+                      );
+                    }
+                  )}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={8} style={{ textAlign: 'center' }}>
+                  아젠다가 없습니다.
+                </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </TableContainer>

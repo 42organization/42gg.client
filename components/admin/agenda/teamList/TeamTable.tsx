@@ -280,8 +280,8 @@ export default function TeamTable() {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={5} style={{ textAlign: 'center' }}>
-                    공지사항이 없습니다.
+                  <TableCell colSpan={7} style={{ textAlign: 'center' }}>
+                    팀이 없습니다.
                   </TableCell>
                 </TableRow>
               )}
@@ -289,9 +289,7 @@ export default function TeamTable() {
           </Table>
         </TableContainer>
       ) : (
-        <div className={styles.noAgendaMessage}>
-          올바른 아젠다를 선택해주세요.
-        </div>
+        <div className={styles.noAgendaMessage}>아젠다를 선택해주세요.</div>
       )}
       <div className={styles.pageNationContainer}>
         <PageNation

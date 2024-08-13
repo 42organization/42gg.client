@@ -11,6 +11,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { instance } from 'utils/axios';
+import { dateToString } from 'utils/handleTime';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
 import PageNation from 'components/Pagination';
@@ -30,14 +31,14 @@ const mockTeamList = [
     title: '제목1',
     contents: '내용1',
     isShow: true,
-    createdAt: '2024-08-01',
+    createdAt: '2024-09-01T04:35:06',
   },
   {
     id: 2,
     title: '제목2',
     contents: '내용2',
     isShow: false,
-    createdAt: '2023-08-02',
+    createdAt: '2024-09-01T04:35:06',
   },
 ];
 
@@ -47,14 +48,14 @@ const mockTeamList2 = [
     title: '제목3',
     contents: '내용3',
     isShow: true,
-    createdAt: '2024-08-03',
+    createdAt: '2024-09-01T04:35:06',
   },
   {
     id: 4,
     title: '제목4',
     contents: '내용4',
     isShow: false,
-    createdAt: '2023-08-04',
+    createdAt: '2024-09-01T04:35:06',
   },
 ];
 
@@ -132,24 +133,13 @@ export default function AnnouncementTable() {
         },
       });
 
-      // let res = [];
-      // if (selectedAgendaKey === '1') {
-      //   res = mockTeamList;
-      // } else if (selectedAgendaKey === '2') {
-      //   res = mockTeamList2;
-      // } else {
-      //   res = [];
-      //   return;
-      // }
-
-      // const totalPage = Math.ceil(res.length / itemsPerPage);
-      // const paginatedList = res.slice(
-      //   (currentPage - 1) * itemsPerPage,
-      //   currentPage * itemsPerPage
-      // );
-
       setAnnouncementInfo({
-        announcementList: response.data,
+        announcementList: response.data.map((announce: IAnnouncement) => {
+          return {
+            ...announce,
+            createdAt: dateToString(new Date(announce.createdAt)),
+          };
+        }),
         totalPage: 10,
         currentPage: currentPage,
       });
@@ -254,8 +244,8 @@ export default function AnnouncementTable() {
                 )
               ) : (
                 <TableRow>
-                  <TableCell colSpan={5} style={{ textAlign: 'center' }}>
-                    팀 목록이 없습니다.
+                  <TableCell colSpan={6} style={{ textAlign: 'center' }}>
+                    공지사항이 없습니다.
                   </TableCell>
                 </TableRow>
               )}
@@ -263,9 +253,7 @@ export default function AnnouncementTable() {
           </Table>
         </TableContainer>
       ) : (
-        <div className={styles.noAgendaMessage}>
-          올바른 아젠다를 선택해주세요.
-        </div>
+        <div className={styles.noAgendaMessage}>아젠다를 선택해주세요.</div>
       )}
       <div className={styles.pageNationContainer}>
         <PageNation

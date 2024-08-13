@@ -11,11 +11,12 @@ import {
 // import { instance } from 'utils/axios';
 // import { dateToStringShort } from 'utils/handleTime';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
-import { AgendaStatus } from 'constants/agenda/agenda';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
 import PageNation from 'components/Pagination';
 // import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
+import ticketStyles from 'styles/admin/agenda/TicketTable.module.scss';
+
 const itemsPerPage = 10; // 한 페이지에 보여줄 항목 수
 
 export const mockAgendaList = [
@@ -142,14 +143,6 @@ export default function TicketTable() {
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
       );
-      // const agendaList = res.map((agenda: AgendaData) => {
-      //   return {
-      //     ...agenda,
-      //     agendaDeadLine: dateToStringShort(agenda.agendaDeadLine),
-      //     agendaStartTime: dateToStringShort(agenda.agendaStartTime),
-      //     agendaEndTime: dateToStringShort(agenda.agendaEndTime),
-      //   };
-      // });
 
       setTicketInfo({
         ticketList: paginatedList,
@@ -181,45 +174,61 @@ export default function TicketTable() {
         <Table className={styles.table} aria-label='agenda table'>
           <AdminAgendaTableHead tableName={'ticket'} table={tableTitle} />
           <TableBody className={styles.tableBody}>
-            {ticketInfo.ticketList.map((ticket: ITicket) => (
-              <TableRow key={ticket.ticketId} className={styles.tableRow}>
-                {agendaTableFormat['ticket'].columns.map(
-                  (columnName: string, index: number) => {
-                    return (
-                      <TableCell
-                        className={styles.tableBodyItem}
-                        key={index}
-                        onClick={() => {
-                          if (columnName === 'issuedFrom') {
-                            handleCellClick(ticket.issuedFromKey); // issuedFromKey로 이동
-                          } else if (columnName === 'usedTo') {
-                            handleCellClick(ticket.usedToKey); // usedToKey로 이동
-                          }
-                        }}
-                      >
-                        {columnName === 'isApproved'
-                          ? renderApprove(ticket.isApproved) // 상태 표시
-                          : columnName === 'isUsed'
-                          ? renderUsed(ticket.isUsed) // 사용 여부 표시
-                          : columnName !== 'etc'
-                          ? ticket[columnName as keyof ITicket] // 다른 열의 기본 값 표시
-                          : agendaTableFormat['ticket'].etc?.value.map(
-                              (buttonName: string, index: number) => (
-                                <button
-                                  key={buttonName}
-                                  className={`${styles.button} ${buttonList[index]}`}
-                                  onClick={() => handleButtonAction(buttonName)}
-                                >
-                                  {buttonName}
-                                </button>
-                              )
-                            )}
-                      </TableCell>
-                    );
-                  }
-                )}
+            {ticketInfo.ticketList.length > 0 ? (
+              ticketInfo.ticketList.map((ticket: ITicket) => (
+                <TableRow key={ticket.ticketId} className={styles.tableRow}>
+                  {agendaTableFormat['ticket'].columns.map(
+                    (columnName: string, index: number) => {
+                      const isClickable =
+                        columnName === 'issuedFrom' || columnName === 'usedTo';
+                      return (
+                        <TableCell
+                          className={`${styles.tableBodyItem} ${
+                            isClickable ? ticketStyles.clickableCell : ''
+                          }`}
+                          key={index}
+                          onClick={() => {
+                            if (isClickable) {
+                              handleCellClick(
+                                columnName === 'issuedFrom'
+                                  ? ticket.issuedFromKey
+                                  : ticket.usedToKey
+                              );
+                            }
+                          }}
+                        >
+                          {columnName === 'isApproved'
+                            ? renderApprove(ticket.isApproved) // 상태 표시
+                            : columnName === 'isUsed'
+                            ? renderUsed(ticket.isUsed) // 사용 여부 표시
+                            : columnName !== 'etc'
+                            ? ticket[columnName as keyof ITicket] // 다른 열의 기본 값 표시
+                            : agendaTableFormat['ticket'].etc?.value.map(
+                                (buttonName: string, index: number) => (
+                                  <button
+                                    key={buttonName}
+                                    className={`${styles.button} ${buttonList[index]}`}
+                                    onClick={() =>
+                                      handleButtonAction(buttonName)
+                                    }
+                                  >
+                                    {buttonName}
+                                  </button>
+                                )
+                              )}
+                        </TableCell>
+                      );
+                    }
+                  )}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={9} style={{ textAlign: 'center' }}>
+                  티켓이 없습니다.
+                </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </TableContainer>
