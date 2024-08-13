@@ -94,7 +94,7 @@ export default function AgendaInfo({
             )}
             <div className={styles.titleWarp}>
               <h2>{agendaTitle}</h2>
-              <ShareBtn onClick={copyLink} />
+              {isAgendaDetail && <ShareBtn onClick={copyLink} />}
             </div>
             <div className={styles.organizerWrap}>
               <span>주최자 : {agendaHost}</span>
