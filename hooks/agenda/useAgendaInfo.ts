@@ -15,7 +15,9 @@ export const useAgendaInfo = (agendaKey: string) => {
       }),
     {
       staleTime: 60 * 1000 * 10, // 10분 동안은 캐시를 사용
+      cacheTime: 60 * 1000 * 10, // 10분 동안 캐시를 유지
       retry: 1, // 에러가 났을 때 1번 재시도
+      refetchOnMount: false, // 페이지 진입 시에는 새로고침을 하지 않음
     }
   );
   if (isError) {
