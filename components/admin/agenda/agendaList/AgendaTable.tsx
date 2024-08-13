@@ -18,6 +18,7 @@ import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
 import PageNation from 'components/Pagination';
 // import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
+import { NoContent } from '../utils';
 
 export const mockAgendaList = [
   {
@@ -236,11 +237,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell colSpan={8} style={{ textAlign: 'center' }}>
-                  아젠다가 없습니다.
-                </TableCell>
-              </TableRow>
+              <NoContent col={8} content={'아젠다가 없습니다.'} />
             )}
           </TableBody>
         </Table>

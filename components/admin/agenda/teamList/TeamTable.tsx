@@ -13,6 +13,7 @@ import {
 import { instance } from 'utils/axios';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
 import { TeamStatus } from 'constants/agenda/agenda';
+import { NoContent } from 'components/admin/agenda/utils';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
 import PageNation from 'components/Pagination';
 import useFetchGet from 'hooks/agenda/useFetchGet';
@@ -279,11 +280,7 @@ export default function TeamTable() {
                   </TableRow>
                 ))
               ) : (
-                <TableRow>
-                  <TableCell colSpan={7} style={{ textAlign: 'center' }}>
-                    팀이 없습니다.
-                  </TableCell>
-                </TableRow>
+                <NoContent col={7} content={'팀이 없습니다.'} />
               )}
             </TableBody>
           </Table>

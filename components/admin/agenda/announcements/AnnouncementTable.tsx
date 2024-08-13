@@ -13,6 +13,7 @@ import {
 import { instance } from 'utils/axios';
 import { dateToString } from 'utils/handleTime';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
+import { NoContent } from 'components/admin/agenda/utils';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
 import PageNation from 'components/Pagination';
 import useFetchGet from 'hooks/agenda/useFetchGet';
@@ -243,11 +244,7 @@ export default function AnnouncementTable() {
                   )
                 )
               ) : (
-                <TableRow>
-                  <TableCell colSpan={6} style={{ textAlign: 'center' }}>
-                    공지사항이 없습니다.
-                  </TableCell>
-                </TableRow>
+                <NoContent col={6} content={'공지사항이 없습니다.'} />
               )}
             </TableBody>
           </Table>

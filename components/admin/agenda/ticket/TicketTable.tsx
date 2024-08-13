@@ -11,6 +11,7 @@ import {
 // import { instance } from 'utils/axios';
 // import { dateToStringShort } from 'utils/handleTime';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
+import { NoContent } from 'components/admin/agenda/utils';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
 import PageNation from 'components/Pagination';
 // import useFetchGet from 'hooks/agenda/useFetchGet';
@@ -223,11 +224,7 @@ export default function TicketTable() {
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell colSpan={9} style={{ textAlign: 'center' }}>
-                  티켓이 없습니다.
-                </TableCell>
-              </TableRow>
+              <NoContent col={9} content={'티켓이 없습니다.'} />
             )}
           </TableBody>
         </Table>
