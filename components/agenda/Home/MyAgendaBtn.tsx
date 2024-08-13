@@ -29,7 +29,7 @@ const MyAgendaBtn = () => {
     }
   };
   const myList =
-    useFetchGet<AgendaDataProps[]>('/agenda/profile/current/list')?.data || [];
+    useFetchGet<AgendaDataProps[]>('/profile/current/list')?.data || [];
 
   return (
     <div
