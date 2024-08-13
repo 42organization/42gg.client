@@ -197,6 +197,21 @@ export const dateToStringShort = (d: Date) => {
 };
 
 /**
+ * 시간을 YYYY-MM-DDTHH:MM 형식으로 반환 : Input default value 용
+ * @param {Date} d 시간 문자열
+ * @return 시간(YYYY-MM-DDTHH:MM)
+ * */
+
+export function dateToInputFormat(d: Date): string {
+  const year = d.getFullYear().toString();
+  const month = (d.getMonth() + 1).toString().padStart(2, '0');
+  const date = d.getDate().toString().padStart(2, '0');
+  const hour = d.getHours().toString().padStart(2, '0');
+  const min = d.getMinutes().toString().padStart(2, '0');
+  return `${year}-${month}-${date}T${hour}:${min}`;
+}
+
+/**
  *  시간을 YYYY-MM-DD 오후/오전 HH:MM 형식으로 반환
  *  @param {Date} d
  *  @return 시간 문자열(YYYY-MM-DD 오후/오전 HH:MM)
@@ -220,11 +235,12 @@ export const dateToKRLocaleTimeString = (d: Date) => {
  */
 export const getRemainTime = ({
   targetTime,
-  cmpTime = new Date(),
+  cmpTime,
 }: {
   targetTime: Date;
   cmpTime?: Date;
 }) => {
+  cmpTime = cmpTime || new Date();
   const year = targetTime.getFullYear() - cmpTime.getFullYear();
   const month = targetTime.getMonth() - cmpTime.getMonth();
   const day = targetTime.getDate() - cmpTime.getDate();
