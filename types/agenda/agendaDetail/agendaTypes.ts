@@ -19,6 +19,7 @@ export interface AgendaDataProps {
   announcementTitle: string;
   isOfficial: boolean;
   agendaisRanking: boolean;
+  agendaKey: string;
 }
 
 export interface AgendaProps {

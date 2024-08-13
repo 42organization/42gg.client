@@ -10,6 +10,7 @@ export const useAgendaInfo = (agendaKey: string) => {
     agendaKey,
     () =>
       instanceInAgenda.get('?agenda_key=' + agendaKey).then((res) => {
+        res.data.agendaKey = agendaKey;
         return res.data;
       }),
     {
