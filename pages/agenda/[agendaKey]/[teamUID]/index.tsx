@@ -1,31 +1,40 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { TeamDetailProps } from 'types/aganda/TeamDetailTypes';
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { TeamStatus, Coalition, AgendaLocation } from 'constants/agenda/agenda';
+import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import TeamButtons from 'components/agenda/teamDetail/TeamButtons';
 import TeamInfo from 'components/agenda/teamDetail/TeamInfo';
-import { useUser } from 'hooks/takgu/Layout/useUser';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 
 export default function TeamDetail({ intraId }: { intraId: string }) {
   const router = useRouter();
-  console.log(router.query);
+  const { agendaKey } = router.query;
   const { teamUID } = router.query;
 
-  //테스트용
-  intraId = 'leader';
-  // intraId = 'member1';
-  // intraId = 'notMember';
+  // agenda DATA API 받아오기
+  const agendaData = useFetchGet<AgendaDataProps>(`/`, {
+    agenda_key: agendaKey,
+  }).data;
 
+  // teamDetail DATA API 받아오기
+  const teamDetailData = useFetchGet<TeamDetailProps>('/team', {
+    teamKey: teamUID,
+    agenda_key: agendaKey,
+  }).data;
+
+  // teamDetail MOCK DATA
   const [teamDetail, setTeamDetail] = useState<TeamDetailProps>({
-    teamName: '팀이름',
+    teamName: '42 GG 7 TH',
     teamLeaderIntraId: 'leader',
-    teamStatus: TeamStatus.OPEN, //e
-    teamLocation: AgendaLocation.MIX, //e
+    teamStatus: TeamStatus.OPEN, // ENUM
+    teamLocation: AgendaLocation.MIX, // ENUM
     teamContent: '우리팀이세계최강팀',
     teamMates: [
       {
         intraId: 'leader',
-        coalition: Coalition.GUN, //e
+        coalition: Coalition.GUN, //ENUM
       },
       {
         intraId: 'member1',
@@ -46,6 +55,11 @@ export default function TeamDetail({ intraId }: { intraId: string }) {
     ],
   });
 
+  /**
+   * 내 인트라 아이디 MOCK DATA -> 팀 상세 페이지 권한 체크 (리더 | 참여멤버 | 참여안함)
+   * */
+  intraId = 'notMember';
+
   if (teamDetail.teamStatus === TeamStatus.CANCEL) {
     setTeamDetail({ ...teamDetail, teamStatus: TeamStatus.CONFIRM });
   }
@@ -53,6 +67,10 @@ export default function TeamDetail({ intraId }: { intraId: string }) {
   const shareTeamInfo = () => {
     alert('공유하기');
   };
+
+  /**
+   *  권한 확인 -> 내 인트라 아이디 통해서 authority string 정하기
+   */
   const authority =
     intraId === teamDetail.teamLeaderIntraId
       ? 'LEADER'
@@ -60,11 +78,11 @@ export default function TeamDetail({ intraId }: { intraId: string }) {
       ? 'MEMBER'
       : 'NONE';
   console.log(authority, intraId);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {/* <AgendaInfo type='team' /> 이거 어케 가져오지 */}
+      {agendaData && <AgendaInfo agendaData={agendaData} />}
       <TeamInfo teamDetail={teamDetail} shareTeamInfo={shareTeamInfo} />
-      <div>teamKey: {teamUID}</div>
       <TeamButtons authority={authority} />
     </div>
   );
