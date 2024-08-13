@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
+import { User } from 'types/agenda/mainType';
 import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
-import { instanceInAgenda } from 'utils/axios';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import AgendaTab from 'components/agenda/agendaDetail/AgendaTab';
+import { useUser } from 'hooks/agenda/Layout/useUser';
+import { useAgendaInfo } from 'hooks/agenda/useAgendaInfo';
 import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/agendaDetail/AgendaDetail.module.scss';
 
@@ -14,43 +15,20 @@ const getIsHost = (intraId: string, agendaData?: AgendaDataProps | null) => {
   return intraId === agendaData.agendaHost;
 };
 
-const useIntraId = (agendaKey: string) => {
-  const [intraId, setIntraId] = useState<string>('');
-
-  useEffect(() => {
-    const fetchLoginData = async () => {
-      if (agendaKey) {
-        try {
-          const res = await instanceInAgenda.get('profile/info');
-          setIntraId(res.data.intraId);
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    };
-
-    fetchLoginData();
-  });
-  return intraId;
-};
-
 const AgendaDetail = () => {
   const router = useRouter();
   const { agendaKey } = router.query;
-  const teamUID = 1;
+  const agendaData = useAgendaInfo(agendaKey as string);
+  const user: User | undefined = useUser();
+  const intraId = user?.intraId || '';
+  const isHost = getIsHost(intraId, agendaData);
 
-  const agendaData = useFetchGet<AgendaDataProps>(`/`, {
-    agenda_key: agendaKey,
-  }).data;
+  const teamUID = 1;
 
   const { data: myTeam, status: status } = useFetchGet<TeamDataProps>(
     `team/my`,
     { agenda_key: agendaKey }
   );
-
-  const intraId = useIntraId(agendaKey as string);
-
-  const isHost = getIsHost(intraId, agendaData);
 
   return (
     <>
