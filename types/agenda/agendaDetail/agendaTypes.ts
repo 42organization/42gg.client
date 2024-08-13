@@ -18,6 +18,7 @@ export interface AgendaDataProps {
   createdAt: Date | string;
   announcementTitle: string;
   isOfficial: boolean;
+  isRanking?: boolean;
   agendaisRanking: boolean;
   agendaKey: string;
 }
