@@ -88,7 +88,13 @@ export default function TeamDetail({ intraId }: { intraId: string }) {
           <AgendaInfo agendaData={agendaData} />
         </Link>
       )}
-      <TeamInfo teamDetail={teamDetail} shareTeamInfo={shareTeamInfo} />
+      {teamDetail && agendaData && (
+        <TeamInfo
+          teamDetail={teamDetail}
+          shareTeamInfo={shareTeamInfo}
+          maxPeople={agendaData.agendaMaxPeople}
+        />
+      )}
       <TeamButtons authority={authority} />
     </div>
   );

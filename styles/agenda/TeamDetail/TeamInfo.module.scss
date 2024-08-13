@@ -9,8 +9,7 @@
   justify-content: space-between;
   width: calc(100% - 2rem);
   > h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
+    @include text('title');
   }
 }
 
@@ -18,13 +17,12 @@
   @include container(2);
   border-top-left-radius: 0;
   > p {
-    @include text('description');
-    // font-size: 1rem;
-    // font-weight: 500;
+    @include text('default');
   }
 }
 
 .teamMateInfo {
+  position: relative;
   display: flex;
   width: 100%;
   height: 100%;
@@ -70,9 +68,27 @@
 }
 
 .mateName {
-  @include text('name');
+  @include text('default');
   display: flex;
-  font-size: 1rem;
-  font-weight: 500;
   align-items: center;
+}
+
+.mateCount {
+  position: absolute;
+  right: 1rem;
+  bottom: 1.5rem;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 0.5rem;
+  width: 10rem;
+  height: 2rem;
+  @include text('default');
+
+  .countBox {
+    padding: 0.3rem;
+    background: var(--box-bg-3);
+    border: none;
+    border-radius: $radius-extra-small;
+  }
 }
