@@ -1,4 +1,3 @@
-import { collapseClasses } from '@mui/material';
 import { AgendaTableFormat } from 'types/admin/agenda/agendaTableTypes';
 
 export const agendaTableFormat: AgendaTableFormat = {
@@ -70,5 +69,10 @@ export const agendaTableFormat: AgendaTableFormat = {
       type: 'button',
       value: ['자세히', '수정', '삭제'],
     },
+  },
+
+  user: {
+    name: '사용자 정보',
+    columns: ['id', 'roleType', 'intraId', 'etc'],
   },
 };

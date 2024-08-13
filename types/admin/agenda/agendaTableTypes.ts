@@ -1,4 +1,9 @@
-export type agendaTableName = 'agenda' | 'team' | 'announcement' | 'ticket';
+export type agendaTableName =
+  | 'agenda'
+  | 'team'
+  | 'announcement'
+  | 'ticket'
+  | 'user';
 
 export type EtcType = 'button' | 'toggle';
 
