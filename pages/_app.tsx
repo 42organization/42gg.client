@@ -15,7 +15,16 @@ import 'styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000 * 10, // 10분 동안은 캐시를 사용
+        cacheTime: 60 * 1000 * 10, // 20분 동안 캐시를 유지
+        retry: 1, // 에러가 났을 때 1번 재시도
+        refetchOnMount: false,
+      },
+    },
+  });
 
   useEffect(() => {
     const handleRouteChange = (url: string) => {
@@ -52,7 +61,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <RecoilRoot>
         <LoginChecker>
           <ErrorChecker>
-            <QueryClientProvider client={queryClient}>
+            <QueryClientProvider client={queryClient} contextSharing={true}>
               <LayoutProvider>
                 <Component {...pageProps} />
                 <ModalProvider />

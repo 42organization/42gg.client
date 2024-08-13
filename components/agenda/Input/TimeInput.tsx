@@ -1,4 +1,5 @@
 import { DateInputProps } from 'types/aganda/InputPropTypes';
+import { dateToString } from 'utils/handleTime';
 import Input from './Input';
 function parseTen(num: number, tenCount: number): string {
   return num < tenCount ? '0' + num : num.toString();
@@ -14,24 +15,20 @@ function parseDate(date: Date): string {
   )}`;
 }
 
-const DateStep = -1717768479615; // 2일 차이
-
 const DateInput = ({
   name,
   label,
   min,
   max,
   defaultValue,
+  defaultDate,
   ...rest
 }: DateInputProps) => {
   if (min !== undefined) {
-    min = parseDate(new Date(Date.now() + DateStep)); // 현재 날짜에서 2일 뒤로 설정
+    min = parseDate(new Date()); // 지금 시간으로 설정
   }
   if (max !== undefined) {
     max = '2028-12-12'; // 한계 날짜? 임의로 설정
-  }
-  if (!defaultValue) {
-    defaultValue = parseDate(new Date());
   }
 
   return (
@@ -39,7 +36,7 @@ const DateInput = ({
       name={name}
       label={label}
       type='datetime-local'
-      defaultValue={defaultValue}
+      defaultValue={dateToString(defaultDate || new Date())}
       {...rest}
     />
   );
