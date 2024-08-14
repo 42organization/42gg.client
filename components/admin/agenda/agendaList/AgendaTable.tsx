@@ -20,55 +20,9 @@ import PageNation from 'components/Pagination';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
 import { NoContent } from '../utils';
 
-export const mockAgendaList = [
-  {
-    agendaTitle: '아젠다 제목 1',
-    agendaDeadLine: '2024-08-01',
-    agendaStartTime: '2024-08-10',
-    agendaEndTime: '2024-08-20',
-    agendaCurrentTeam: 5,
-    agendaMaxTeam: 10,
-    agendaMinPeople: 1,
-    agendaMaxPeople: 10,
-    agendaLocation: '장소 1',
-    agendaKey: '1',
-    isRanking: true,
-    isOfficial: false,
-    agendaStatus: 'OPEN',
-  },
-  {
-    agendaTitle: '아젠다 제목 1.1',
-    agendaDeadLine: '2024-08-01',
-    agendaStartTime: '2024-08-10',
-    agendaEndTime: '2024-08-20',
-    agendaCurrentTeam: 5,
-    agendaMaxTeam: 10,
-    agendaMinPeople: 1,
-    agendaMaxPeople: 10,
-    agendaLocation: '장소 1',
-    agendaKey: '1',
-    isRanking: true,
-    isOfficial: true,
-    agendaStatus: 'OPEN',
-  },
-  {
-    agendaTitle: '아젠다 제목 2',
-    agendaDeadLine: '2024-08-15',
-    agendaStartTime: '2024-08-20',
-    agendaEndTime: '2024-08-30',
-    agendaCurrentTeam: 3,
-    agendaMaxTeam: 8,
-    agendaMinPeople: 1,
-    agendaMaxPeople: 10,
-    agendaLocation: '장소 2',
-    agendaKey: '2',
-    isRanking: false,
-    isOfficial: true,
-    agendaStatus: 'CONFIRM',
-  },
-];
-
 const tableTitle: { [key: string]: string } = {
+  agendaId: 'Id',
+  // agendaPosterUrl:'포스터',
   agendaTitle: '제목',
   agendaDeadLine: '모집 마감일',
   agendaStartTime: '시작 시간',
@@ -88,6 +42,8 @@ const tableTitle: { [key: string]: string } = {
 };
 
 export interface IAgenda {
+  agendaId: number;
+  agendaPosterUrl: string;
   agendaTitle: string;
   agendaDeadLine: string;
   agendaStartTime: string;
@@ -203,7 +159,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
           <TableBody className={styles.tableBody}>
             {agendaInfo.agendaList.length > 0 ? (
               agendaInfo.agendaList.map((agenda: IAgenda) => (
-                <TableRow key={agenda.agendaTitle} className={styles.tableRow}>
+                <TableRow key={agenda.agendaId} className={styles.tableRow}>
                   {agendaTableFormat['agenda'].columns.map(
                     (columnName: string, index: number) => {
                       return (
@@ -237,7 +193,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
                 </TableRow>
               ))
             ) : (
-              <NoContent col={8} content={'아젠다가 없습니다.'} />
+              <NoContent col={9} content={'아젠다가 없습니다.'} />
             )}
           </TableBody>
         </Table>

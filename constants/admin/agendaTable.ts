@@ -4,6 +4,8 @@ export const agendaTableFormat: AgendaTableFormat = {
   agenda: {
     name: '대회 관리',
     columns: [
+      'agendaId',
+      // 'agendaPosterUrl',
       'agendaTitle',
       'agendaDeadLine',
       'agendaStartTime',
