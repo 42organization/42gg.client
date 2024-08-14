@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import { MyTeamDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import MyTeamInfo from 'components/agenda/Home/MyTeamInfo';
@@ -55,9 +56,15 @@ const MyAgendaBtn = () => {
       <div className={styles.myAgendaListContainer}>
         {myList.length > 0 ? (
           myList.map((myTeamInfo, idx) => (
-            <div className={styles.myagendaItemContainer} key={idx}>
-              <MyTeamInfo myTeamInfo={myTeamInfo} key={idx} />
-            </div>
+            <Link
+              href={`/agenda/${myTeamInfo.agendaKey}/${myTeamInfo.teamKey}`}
+              key={idx}
+              style={{ width: '100%' }}
+            >
+              <div className={styles.myagendaItemContainer} key={idx}>
+                <MyTeamInfo myTeamInfo={myTeamInfo} key={idx} />
+              </div>
+            </Link>
           ))
         ) : (
           <div className={styles.noAgendaText}>There is no agenda</div>
