@@ -5,7 +5,7 @@ import AgendaTag from 'components/agenda/utils/AgendaTag';
 import styles from 'styles/agenda/Home/AgendaInfo.module.scss';
 
 // Props: API data
-const AagendaInfo = ({
+const AgendaInfo = ({
   agendaInfo,
   key,
 }: {
@@ -79,4 +79,4 @@ const AagendaInfo = ({
   );
 };
 
-export default AagendaInfo;
+export default AgendaInfo;

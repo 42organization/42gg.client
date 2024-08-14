@@ -4,7 +4,6 @@ import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { instanceInAgenda } from 'utils/axios';
 import AgendaDeadLine from 'components/agenda/Home/AgendaDeadLine';
 import AgendaInfo from 'components/agenda/Home/AgendaInfo';
-import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/Home/AgendaList.module.scss';
 
 const AgendaList = () => {

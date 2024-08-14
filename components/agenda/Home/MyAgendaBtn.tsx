@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
-import AgendaInfo from 'components/agenda/Home/AgendaInfo';
+import { MyTeamDataProps } from 'types/agenda/agendaDetail/agendaTypes';
+import MyTeamInfo from 'components/agenda/Home/MyTeamInfo';
 import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/Home/MyAgendaBtn.module.scss';
 
@@ -29,7 +29,7 @@ const MyAgendaBtn = () => {
     }
   };
   const myList =
-    useFetchGet<AgendaDataProps[]>('/profile/current/list')?.data || [];
+    useFetchGet<MyTeamDataProps[]>('/profile/current/list')?.data || [];
 
   return (
     <div
@@ -54,9 +54,9 @@ const MyAgendaBtn = () => {
 
       <div className={styles.myAgendaListContainer}>
         {myList.length > 0 ? (
-          myList.map((agendaInfo, idx) => (
+          myList.map((myTeamInfo, idx) => (
             <div className={styles.myagendaItemContainer} key={idx}>
-              <AgendaInfo agendaInfo={agendaInfo} key={idx} />
+              <MyTeamInfo myTeamInfo={myTeamInfo} key={idx} />
             </div>
           ))
         ) : (
