@@ -1,0 +1,19 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  @include backdrop;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  width: 90%;
+  max-width: 500px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

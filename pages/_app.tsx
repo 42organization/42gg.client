@@ -7,7 +7,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 import ErrorChecker from 'components/error/ErrorChecker';
 import LoginChecker from 'components/LoginChecker';
-import ModalProvider from 'components/takgu/modal/ModalProvider';
 import CustomizedSnackbars from 'components/takgu/toastmsg/toastmsg';
 import LayoutProvider from 'Layout/LayoutProvider';
 import * as gtag from 'lib/gtag';
@@ -64,7 +63,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             <QueryClientProvider client={queryClient} contextSharing={true}>
               <LayoutProvider>
                 <Component {...pageProps} />
-                <ModalProvider />
               </LayoutProvider>
               <CustomizedSnackbars />
             </QueryClientProvider>

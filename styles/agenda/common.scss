@@ -227,3 +227,13 @@ $font-size-xs: 0.8rem; // $small-font
     }
   }
 }
+
+@mixin backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  background: rgba(0, 0, 0, 0.5);
+}
