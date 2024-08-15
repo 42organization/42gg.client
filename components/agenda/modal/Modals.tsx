@@ -1,4 +1,3 @@
-// components/Modal.js
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import { agendaModalState } from 'utils/recoil/agenda/modalState';
@@ -9,7 +8,7 @@ const Modal = () => {
 
   if (!modalProps) return null;
 
-  const { title, message, onProceed, children } = modalProps;
+  const { title, message, onProceed, cancel = true, children } = modalProps;
 
   const closeModal = () => {
     setModalProps(null);
@@ -18,18 +17,18 @@ const Modal = () => {
   return (
     <div className={styles.container}>
       <div className={styles.modalContent}>
-        <h2>{title}</h2>
-        <p>{message}</p>
+        {title && <h2>{title}</h2>}
+        {message && <p>{message}</p>}
         {children}
         <div className={styles.modalActions}>
-          <button onClick={closeModal}>Cancel</button>
+          {cancel && <button onClick={closeModal}>취소</button>}
           <button
             onClick={() => {
               onProceed();
               closeModal();
             }}
           >
-            Proceed
+            확인
           </button>
         </div>
       </div>

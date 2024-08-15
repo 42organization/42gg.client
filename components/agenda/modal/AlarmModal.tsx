@@ -2,18 +2,19 @@ import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import { agendaModalState } from 'utils/recoil/agenda/modalState';
 
-const ConfirmModal = ({ title, message, onProceed }) => {
+const AlarmModal = ({ title, message, onProceed, cancel }) => {
   const setModalProps = useSetRecoilState(agendaModalState);
 
-  const openConfirmModal = () => {
+  const openAlarmModal = () => {
     setModalProps({
       title,
       message,
       onProceed,
+      cancel,
     });
   };
 
-  return <button onClick={openConfirmModal}>확인</button>;
+  return <button onClick={openAlarmModal}>알람</button>;
 };
 
-export default ConfirmModal;
+export default AlarmModal;
