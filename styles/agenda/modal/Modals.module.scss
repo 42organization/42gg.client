@@ -1,5 +1,13 @@
 @import 'styles/agenda/common.scss';
 
+.backdrop {
+  @include backdrop;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .container {
   @include backdrop;
 
