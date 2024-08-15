@@ -1,11 +1,7 @@
-import { useRecoilState } from 'recoil';
-import { agendaModalState } from 'utils/recoil/agenda/modalState';
+import { agendaModal } from 'types/agenda/modalTypes';
 import styles from 'styles/agenda/modal/modal.module.scss';
 
-const ProceedCheckModal = () => {
-  const [modalProps, setModalProps] = useRecoilState(agendaModalState);
-  if (!modalProps) return null;
-  // console.log('modalProps', modalProps);
+const ProceedCheckModal = (props: agendaModal) => {
   const {
     type,
     title,
@@ -16,14 +12,7 @@ const ProceedCheckModal = () => {
     proceedText,
     cancelText,
     extraButtons,
-  } = modalProps;
-
-  const closeModal = () => {
-    {
-      onCancel && onCancel();
-    }
-    setModalProps(null);
-  };
+  } = props;
 
   return (
     <>
@@ -50,11 +39,10 @@ const ProceedCheckModal = () => {
           )}
         </div>
         <div className={styles.buttonContainer}>
-          <button onClick={closeModal}>{cancelText || '취소'}</button>
+          <button onClick={onCancel}>{cancelText || '취소'}</button>
           <button onClick={onProceed}>{proceedText || '확인'}</button>
         </div>
       </div>
-      {/* <div className={styles.modalBackground} onClick={onCancel} /> */}
     </>
   );
 };

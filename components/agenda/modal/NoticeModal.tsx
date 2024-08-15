@@ -1,15 +1,9 @@
-import { useRecoilState } from 'recoil';
-import { agendaModalState } from 'utils/recoil/agenda/modalState';
+import { agendaModal } from 'types/agenda/modalTypes';
 import styles from 'styles/agenda/modal/modal.module.scss';
+import { useModal } from './useModal';
 
-const NoticeModal = () => {
-  const [modalProps, setModalProps] = useRecoilState(agendaModalState);
-  if (!modalProps) return null;
-  const { title, description, onCancel } = modalProps;
-
-  const closeModal = () => {
-    setModalProps(null);
-  };
+const NoticeModal = (props: agendaModal) => {
+  const { title, description, onProceed } = props;
 
   return (
     <>
@@ -23,7 +17,7 @@ const NoticeModal = () => {
           <p>{description}</p>
         </div>
         <div className={styles.buttonContainer}>
-          <button onClick={closeModal}>확인</button>
+          <button onClick={onProceed}>확인</button>
         </div>
       </div>
     </>

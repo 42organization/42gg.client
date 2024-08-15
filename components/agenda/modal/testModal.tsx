@@ -1,18 +1,15 @@
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
-import { agendaModalState } from 'utils/recoil/agenda/modalState';
+import { useModal } from 'components/agenda/modal/useModal';
 
 const TestModal = () => {
-  const setModalProps = useSetRecoilState(agendaModalState);
-
+  const { openModal } = useModal();
   const test = () => {
-    setModalProps({
+    openModal({
       type: 'proceedCheck',
       title: 'title',
       description: 'message',
       onProceed: () => {
         console.log('onProceed');
-        setModalProps(null);
       },
       proceedText: '확인',
       cancelText: '취소',
@@ -23,10 +20,10 @@ const TestModal = () => {
 };
 
 const TestModal2 = () => {
-  const setModalProps = useSetRecoilState(agendaModalState);
+  const { openModal } = useModal();
 
   const openAlarmModal = () => {
-    setModalProps({
+    openModal({
       type: 'notice',
       title: 'title',
       description: 'message',

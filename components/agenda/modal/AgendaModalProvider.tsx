@@ -1,25 +1,23 @@
 import { useRecoilState } from 'recoil';
 import { agendaModalState } from 'utils/recoil/agenda/modalState';
+import NoticeModal from 'components/agenda/modal/NoticeModal';
+import ProceedCheckModal from 'components/agenda/modal/ProceedCheckModal';
+import { useModal } from 'components/agenda/modal/useModal';
 import styles from 'styles/agenda/modal/AgendaModalProvider.module.scss';
-import NoticeModal from './NoticeModal';
-import ProceedCheckModal from './ProceedCheckModal';
 
 const AgendaModalProvider = () => {
-  const [modalProps, setModalProps] = useRecoilState(agendaModalState);
-
-  const closeModalHandler = (e: React.MouseEvent) => {
-    setModalProps(null);
-  };
+  const [modalProps] = useRecoilState(agendaModalState);
+  const { closeModal } = useModal();
 
   let modalContent;
 
   if (modalProps) {
     switch (modalProps.type) {
       case 'proceedCheck':
-        modalContent = <ProceedCheckModal />;
+        modalContent = <ProceedCheckModal {...modalProps} />;
         break;
       case 'notice':
-        modalContent = <NoticeModal />;
+        modalContent = <NoticeModal {...modalProps} />;
         break;
       default:
         modalContent = null;
@@ -29,11 +27,7 @@ const AgendaModalProvider = () => {
   return (
     <>
       {modalProps && (
-        <div
-          className={styles.backdrop}
-          id='modalOutside'
-          onClick={closeModalHandler}
-        >
+        <div className={styles.backdrop} id='modalOutside' onClick={closeModal}>
           {modalContent}
         </div>
       )}
