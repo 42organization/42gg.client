@@ -75,6 +75,12 @@ $font-size-xs: 0.8rem; // $small-font
   } @else if $level == 'right' {
     background: var(--box-bg-1);
     border-radius: $radius-medium 0 0 $radius-medium;
+  } @else if $level == 'modal' {
+    background: var(--box-bg-1);
+    border-radius: $radius-medium;
+  } @else {
+    // default
+    background: var(--box-bg-1);
   }
 }
 
