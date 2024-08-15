@@ -4,12 +4,31 @@
   @include container(1);
 }
 
+/* TeamInfo */
 .header {
   display: flex;
   justify-content: space-between;
-  width: calc(100% - 2rem);
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+  gap: 0.5rem;
   > h1 {
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     @include text('title');
+  }
+
+  .iconWrapper {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+  }
+
+  .marginTop {
+    margin-top: 0.4rem;
   }
 }
 
@@ -90,5 +109,33 @@
     background: var(--box-bg-3);
     border: none;
     border-radius: $radius-extra-small;
+  }
+}
+
+/* EditTeam */
+.editContainer {
+  @include container(1);
+  gap: 2.5rem;
+
+  .editTeamTitle {
+    @include text(title);
+  }
+
+  .teamName {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .teamNameText {
+      @include text(sub-title);
+    }
+
+    .teamNameInput {
+      width: 80%;
+      height: 2rem;
+      padding-left: 0.3rem;
+      border-radius: $radius-extra-small;
+    }
   }
 }

@@ -1,85 +1,64 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TeamDetailProps } from 'types/aganda/TeamDetailTypes';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { TeamStatus, Coalition, AgendaLocation } from 'constants/agenda/agenda';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
-import TeamButtons from 'components/agenda/teamDetail/TeamButtons';
 import TeamInfo from 'components/agenda/teamDetail/TeamInfo';
+import { useUser } from 'hooks/agenda/Layout/useUser';
 import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/TeamDetail/TeamDetail.module.scss';
 
-export default function TeamDetail({ intraId }: { intraId: string }) {
+export default function TeamDetail() {
   const router = useRouter();
   const { agendaKey } = router.query;
   const { teamUID } = router.query;
 
-  // agenda DATA API 받아오기
+  /**
+   * API GET DATA
+   * 1. intraId
+   * 2. agenda Data
+   * 3. teamDetail Data
+   */
+  const intraId = useUser()?.intraId;
+
   const agendaData = useFetchGet<AgendaDataProps>(`/`, {
     agenda_key: agendaKey,
   }).data;
 
-  // teamDetail DATA API 받아오기
   const teamDetailData = useFetchGet<TeamDetailProps>('/team', {
     teamKey: teamUID,
     agenda_key: agendaKey,
   }).data;
 
-  // teamDetail MOCK DATA
-  const [teamDetail, setTeamDetail] = useState<TeamDetailProps>({
-    teamName: '42 GG 7 TH',
-    teamLeaderIntraId: 'leader',
-    teamStatus: TeamStatus.OPEN, // ENUM
-    teamLocation: AgendaLocation.MIX, // ENUM
-    teamContent: '우리팀이세계최강팀',
-    teamMates: [
-      {
-        intraId: 'leader',
-        coalition: Coalition.GUN, //ENUM
-      },
-      {
-        intraId: 'member1',
-        coalition: Coalition.SPRING,
-      },
-      {
-        intraId: 'member1',
-        coalition: Coalition.SPRING,
-      },
-      {
-        intraId: 'member1',
-        coalition: Coalition.SPRING,
-      },
-      {
-        intraId: 'member2',
-        coalition: Coalition.SUMMER,
-      },
-    ],
-  });
+  /**
+   *  useEffect / API GET 얻은 데이터 teamDetail, authority 할당
+   */
+  const [teamDetail, setTeamDetail] = useState<TeamDetailProps | null>(null);
+  const [authority, setAuthority] = useState<string>('');
+
+  useEffect(() => {
+    if (intraId && agendaData && teamDetailData) {
+      const userRole =
+        intraId === agendaData?.agendaHost
+          ? 'HOST'
+          : intraId === teamDetailData.teamLeaderIntraId
+          ? 'LEADER'
+          : teamDetailData.teamMates.find((mate) => mate.intraId === intraId)
+          ? 'MEMBER'
+          : 'NONE';
+      setAuthority(userRole);
+      setTeamDetail(teamDetailData);
+    }
+  }, [intraId, agendaData, teamDetailData]);
 
   /**
-   * 내 인트라 아이디 MOCK DATA -> 팀 상세 페이지 권한 체크 (리더 | 참여멤버 | 참여안함)
-   * */
-  intraId = 'notMember';
-
-  if (teamDetail.teamStatus === TeamStatus.CANCEL) {
-    setTeamDetail({ ...teamDetail, teamStatus: TeamStatus.CONFIRM });
-  }
-
+   * EventListener
+   */
   const shareTeamInfo = () => {
     alert('공유하기');
   };
-
-  /**
-   *  권한 확인 -> 내 인트라 아이디 통해서 authority string 정하기
-   */
-  const authority =
-    intraId === teamDetail.teamLeaderIntraId
-      ? 'LEADER'
-      : teamDetail.teamMates.find((mate) => mate.intraId === intraId)
-      ? 'MEMBER'
-      : 'NONE';
-  console.log(authority, intraId);
 
   return (
     <div className={styles.teamDeatil}>
@@ -93,9 +72,9 @@ export default function TeamDetail({ intraId }: { intraId: string }) {
           teamDetail={teamDetail}
           shareTeamInfo={shareTeamInfo}
           maxPeople={agendaData.agendaMaxPeople}
+          authority={authority}
         />
       )}
-      <TeamButtons authority={authority} />
     </div>
   );
 }
