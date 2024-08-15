@@ -4,11 +4,16 @@ import styles from 'styles/agenda/Input/Input.module.scss';
 const Input = ({ name, label, type, ...rest }: InputProps) => {
   return (
     <div className={` ${styles.container} + ${rest?.className}`}>
-      {label ? (
-        <label htmlFor={name} className={styles.label}>
-          {label}
-        </label>
-      ) : null}
+      <div style={{ display: 'flex' }}>
+        {label ? (
+          <label htmlFor={name} className={styles.label}>
+            {label}
+          </label>
+        ) : null}
+        {rest?.error ? (
+          <p className={`error_text ${styles.error}`}>{rest.error}</p>
+        ) : null}
+      </div>
       {type === 'checkbox' ? (
         <>
           <input

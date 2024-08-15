@@ -25,3 +25,8 @@
   @include text('label');
   padding: 0 0 0 0.5rem;
 }
+
+.error {
+  @include text('error');
+  padding: 0 0 0 0.5rem;
+}

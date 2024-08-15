@@ -1,7 +1,7 @@
+import FormBtn from 'components/agenda/button/FormButton';
 import DescriptionInput from 'components/agenda/Input/DescriptionInput';
 import TitleInput from 'components/agenda/Input/TitleInput';
 import styles from 'styles/agenda/Form/Form.module.scss';
-import SubmitInputBtn from '../button/SubmitInputButton';
 
 interface CreateFormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -21,9 +21,14 @@ const CreateAnnouncementForm = ({ handleSubmit }: CreateFormProps) => {
         placeholder='공지사항 내용을 입력해주세요'
       />
       <div className={styles.buttonContainer}>
-        <SubmitInputBtn name='cancel' label='취소하기' />
-        <SubmitInputBtn name='submit' label='제출하기' />
-        <button type='submit'>제출하기</button>
+        <FormBtn
+          label='취소하기'
+          onClick={(e) => {
+            e.preventDefault();
+            console.log('취소 버튼 눌림', e);
+          }}
+        />
+        <FormBtn submit={true} label='제출하기' />
       </div>
     </form>
   );

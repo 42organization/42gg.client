@@ -1,3 +1,4 @@
+import { NextRouter, useRouter } from 'next/router';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { AgendaInfoProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes';
 import { AgendaStatus } from 'constants/agenda/agenda';
@@ -5,25 +6,34 @@ import { ShareBtn } from 'components/agenda/button/Buttons';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
 import styles from 'styles/agenda/agendaDetail/AgendaInfo.module.scss';
 
+interface CallbackProps {
+  router: NextRouter;
+  agendaKey: string;
+}
+
 const copyLink = () => {
   const url = window.location.href;
   navigator.clipboard.writeText(url);
   alert('링크가 복사되었습니다.');
 };
 
-const participationIn = () => {
+// api 호출 필요
+const participateSolo = () => {
   alert('참여신청이 완료되었습니다.');
 };
 
-const hostMode = () => {
+const hostMode = ({ router, agendaKey }: CallbackProps) => {
+  router.push(`/agenda/${agendaKey}/host`);
   alert('주최자 관리 버튼입니다.');
 };
 
-const makeTeam = () => {
+const participateTeam = ({ router, agendaKey }: CallbackProps) => {
+  router.push(`/agenda/${agendaKey}/create-team`);
   alert('팀 만들기 버튼입니다.');
 };
 
-const submitResults = () => {
+const submitResults = ({ router, agendaKey }: CallbackProps) => {
+  router.push(`/agenda/${agendaKey}/host/result`);
   alert('결과 입력 버튼입니다.');
 };
 
@@ -31,25 +41,21 @@ const isTeam = (agendaData: AgendaDataProps) => {
   return agendaData.agendaMinPeople !== agendaData.agendaMaxPeople;
 };
 
-const determineButtonText = ({
-  agendaData,
-  isHost,
-  status,
-}: AgendaInfoProps) => {
+const determineButton = ({ agendaData, isHost, status }: AgendaInfoProps) => {
   const isParticipant = status === 200;
-  const teamText = isTeam(agendaData) ? '팀 만들기' : '참가하기';
-
   switch (agendaData.agendaStatus) {
     case AgendaStatus.CONFIRM:
-      return isHost ? '결과입력' : '';
+      return isHost ? { text: '결과입력', callback: submitResults } : null;
     case AgendaStatus.OPEN:
       if (isHost) {
-        return '주최자 관리';
-      }
-      return isParticipant ? '' : teamText;
-
+        return { text: '주최자 관리', callback: hostMode };
+      } else if (isParticipant) {
+        return null; // 참가자는 버튼이 없음, 아래 본인 팀 상세정보 확인 가능
+      } else if (isTeam(agendaData))
+        return { text: '팀 만들기', callback: participateTeam };
+      else return { text: '참가하기', callback: participateSolo };
     default:
-      return '';
+      return null;
   }
 };
 
@@ -58,37 +64,36 @@ export default function AgendaInfo({
   isHost,
   status,
 }: AgendaInfoProps) {
-  const buttonText = determineButtonText({
+  const buttonData = determineButton({
     agendaData,
     isHost,
     status,
   });
 
-  const { agendaTitle, agendaHost } = agendaData;
+  const { agendaTitle, agendaHost, agendaKey } = agendaData;
 
   const isAgendaDetail = isHost !== undefined && status !== undefined;
   const containerSize = isAgendaDetail
     ? styles.largeHeight
     : styles.smallHeight;
 
+  const router = useRouter();
+
   return (
     <>
       <div className={`${styles.infoContainer} ${containerSize}`}>
         <div className={styles.infoWarp}>
           <div className={styles.contentWarp}>
-            {isAgendaDetail && buttonText !== '' && (
+            {isAgendaDetail && buttonData && (
               <div className={styles.enrollWarp}>
                 <UploadBtn
-                  text={buttonText}
-                  onClick={
-                    buttonText === '팀 만들기'
-                      ? makeTeam
-                      : buttonText === '참가하기'
-                      ? participationIn
-                      : buttonText === '주최자 관리'
-                      ? hostMode
-                      : submitResults
-                  }
+                  text={buttonData.text}
+                  onClick={() => {
+                    buttonData.callback({
+                      router: router,
+                      agendaKey: agendaKey,
+                    });
+                  }}
                 />
               </div>
             )}

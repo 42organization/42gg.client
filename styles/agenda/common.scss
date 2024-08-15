@@ -178,6 +178,16 @@ $font-size-xs: 0.8rem; // $small-font
     // form 내부 label
     font-size: $font-size-s;
     font-weight: bold;
+  } @else if ($type == 'error') {
+    // form 에러 메시지
+    padding: 0.5rem;
+    margin: 0;
+    font-size: $font-size-xs;
+    color: red;
+  } @else {
+    // default
+    font-family: $font-text-regular;
+    font-size: $font-size-s;
   }
 }
 
