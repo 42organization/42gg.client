@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import type { NextPage } from 'next';
-
+import styles from 'styles/index.module.scss';
 const Index: NextPage = () => {
   const router = useRouter();
 
@@ -9,8 +9,12 @@ const Index: NextPage = () => {
   };
 
   return (
-    <div>
-      <h1>herererer</h1>
+    <div className={styles.layout}>
+      <div className={styles.flex}>
+        <div className={styles.container}> GG </div>
+        <div className={styles.container}> 다른거 </div>
+      </div>
+
       <button onClick={() => handleNavigation('/takgu')}>42gg</button>
       <button onClick={() => handleNavigation('/agenda')}>Agenda</button>
       <button onClick={() => handleNavigation('/outerMatch')}>
