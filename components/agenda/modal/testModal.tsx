@@ -14,8 +14,8 @@ const TestModal = () => {
         console.log('onProceed');
         setModalProps(null);
       },
-      proceedText: 'proceedText',
-      cancelText: 'cancelText',
+      proceedText: '확인',
+      cancelText: '취소',
     });
   };
 

@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { agendaModalState } from 'utils/recoil/agenda/modalState';
-import styles from 'styles/agenda/modal/Modals.module.scss';
+import styles from 'styles/agenda/modal/AgendaModalProvider.module.scss';
 import NoticeModal from './NoticeModal';
 import ProceedCheckModal from './ProceedCheckModal';
 

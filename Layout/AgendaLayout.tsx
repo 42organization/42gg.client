@@ -18,7 +18,6 @@ function AgendaAppLayout({ children }: AgendaLayoutProps) {
   return (
     <>
       <div className={styles.background}>
-        <AgendaModalProvider />
         <HeaderStateContext>
           <Header />
         </HeaderStateContext>

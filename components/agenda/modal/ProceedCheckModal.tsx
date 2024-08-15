@@ -1,19 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { agendaModalState } from 'utils/recoil/agenda/modalState';
-import styles from 'styles/agenda/modal.module.scss';
-
-// interface ProceedCheckModalProps {
-//   title?: string;
-//   description: string;
-//   // 체크할 필요가 있는 내용 있을 때 (예시:폼 제출시 값 확인)
-//   contentsToCheck?: { [key: string]: string };
-//   onProceed: () => void;
-//   onCancel: () => void;
-//   proceedText?: string;
-//   cancelText?: string;
-//   // 추가 버튼이 필요할 때
-//   extraButtons?: { text: string; callback: (e: React.MouseEvent) => void }[];
-// }
+import styles from 'styles/agenda/modal/modal.module.scss';
 
 const ProceedCheckModal = () => {
   const [modalProps, setModalProps] = useRecoilState(agendaModalState);
@@ -61,10 +48,10 @@ const ProceedCheckModal = () => {
               })}
             </div>
           )}
-          <div className={styles.buttonContainer}>
-            <button onClick={closeModal}>{cancelText || '취소'}</button>
-            <button onClick={onProceed}>{proceedText || '확인'}</button>
-          </div>
+        </div>
+        <div className={styles.buttonContainer}>
+          <button onClick={closeModal}>{cancelText || '취소'}</button>
+          <button onClick={onProceed}>{proceedText || '확인'}</button>
         </div>
       </div>
       {/* <div className={styles.modalBackground} onClick={onCancel} /> */}

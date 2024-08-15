@@ -1,4 +1,6 @@
+type AgendaModalType = 'notice' | 'proceedCheck';
 export interface agendaModal {
+  type: AgendaModalType;
   title?: string;
   description: string;
   // 체크할 필요가 있는 내용 있을 때 (예시:폼 제출시 값 확인)

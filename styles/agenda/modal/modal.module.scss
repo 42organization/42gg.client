@@ -21,21 +21,14 @@
 // }
 
 .buttonContainer {
-  gap: 20%;
   display: flex;
+  gap: 10%;
   width: 100%;
+  justify-content: center;
+
   > button {
     @include textButton(default, default);
     width: 6rem;
     height: max-content;
   }
-}
-
-.modalBackground {
-  top: 0px;
-  left: 0px;
-  display: absolute;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
 }

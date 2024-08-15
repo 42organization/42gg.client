@@ -1,12 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { agendaModalState } from 'utils/recoil/agenda/modalState';
-import styles from 'styles/agenda/modal.module.scss';
-
-// interface NoticeModalProps {
-//   title?: string;
-//   description: string;
-//   onCancel: () => void;
-// }
+import styles from 'styles/agenda/modal/modal.module.scss';
 
 const NoticeModal = () => {
   const [modalProps, setModalProps] = useRecoilState(agendaModalState);

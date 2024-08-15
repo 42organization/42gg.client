@@ -239,7 +239,7 @@ $font-size-xs: 0.8rem; // $small-font
   top: 0;
   left: 0;
   z-index: 5;
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.5);
 }
