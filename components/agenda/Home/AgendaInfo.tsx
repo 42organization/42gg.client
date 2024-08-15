@@ -70,9 +70,9 @@ const AgendaInfo = ({
         </div>
 
         <div className={styles.agendaItemTagBox}>
-          {agendaInfo.isOfficial ? <AgendaTag tagName='공식' /> : ''}
-          {agendaInfo.agendaMaxPeople === 1 ? <AgendaTag tagName='팀' /> : ''}
-          {agendaInfo.isRanking ? <AgendaTag tagName='대회' /> : ''}
+          {agendaInfo.isOfficial && <AgendaTag tagName='공식' />}
+          {agendaInfo.agendaMaxPeople === 1 && <AgendaTag tagName='팀' />}
+          {agendaInfo.isRanking && <AgendaTag tagName='대회' />}
         </div>
       </div>
     </div>
