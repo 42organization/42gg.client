@@ -1,0 +1,40 @@
+@import 'styles/agenda/common.scss';
+
+.modalContainer {
+  @include container(modal);
+  display: flex;
+  width: 20rem;
+  height: max-content;
+  flex-direction: column;
+}
+
+.titleContainer {
+  width: 100%;
+  > h1 {
+    @include text(sub-title);
+    // font-size: $font-size-s;
+  }
+}
+
+// .contentContainer {
+// }
+
+.buttonContainer {
+  gap: 20%;
+  display: flex;
+  width: 100%;
+  > button {
+    @include textButton(default, default);
+    width: 6rem;
+    height: max-content;
+  }
+}
+
+.modalBackground {
+  top: 0px;
+  left: 0px;
+  display: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
