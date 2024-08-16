@@ -1,4 +1,5 @@
 /**
+import { dateToString } from 'utils/handleTime';
  * width 길이만큼 origin 앞에 0을 채움
  * @param {string} origin 시간 혹은 분
  * @param {number} width 원하는 길이
@@ -197,6 +198,44 @@ export const dateToStringShort = (d: Date) => {
 };
 
 /**
+ * 시간을 YYYY년 MM월 DD일 형식으로 포매팅하여 반환
+ * @param {Date} d 시간 문자열
+ * @return 시간(YYYY년 MM월 DD일)
+ * */
+export const dateToStringFormat = (d: Date) => {
+  const year = d.getFullYear();
+  const month = fillZero((d.getMonth() + 1).toString(), 2);
+  const date = fillZero(d.getDate().toString(), 2);
+  return `${year}년 ${month}월 ${date}일`;
+};
+
+/**
+ * 시간만 포매팅하여 반환
+ * @param {Date} d 시간 문자열
+ * @return 시간(HH:MM)
+ * */
+export const timeToString = (d: Date) => {
+  const hour = fillZero(d.getHours().toString(), 2);
+  const min = fillZero(d.getMinutes().toString(), 2);
+  return `${hour}:${min}`;
+};
+
+/**
+ * 시간을 YYYY-MM-DDTHH:MM 형식으로 반환 : Input default value 용
+ * @param {Date} d 시간 문자열
+ * @return 시간(YYYY-MM-DDTHH:MM)
+ * */
+
+export function dateToInputFormat(d: Date): string {
+  const year = d.getFullYear().toString();
+  const month = (d.getMonth() + 1).toString().padStart(2, '0');
+  const date = d.getDate().toString().padStart(2, '0');
+  const hour = d.getHours().toString().padStart(2, '0');
+  const min = d.getMinutes().toString().padStart(2, '0');
+  return `${year}-${month}-${date}T${hour}:${min}`;
+}
+
+/**
  *  시간을 YYYY-MM-DD 오후/오전 HH:MM 형식으로 반환
  *  @param {Date} d
  *  @return 시간 문자열(YYYY-MM-DD 오후/오전 HH:MM)
@@ -220,11 +259,12 @@ export const dateToKRLocaleTimeString = (d: Date) => {
  */
 export const getRemainTime = ({
   targetTime,
-  cmpTime = new Date(),
+  cmpTime,
 }: {
   targetTime: Date;
   cmpTime?: Date;
 }) => {
+  cmpTime = cmpTime || new Date();
   const year = targetTime.getFullYear() - cmpTime.getFullYear();
   const month = targetTime.getMonth() - cmpTime.getMonth();
   const day = targetTime.getDate() - cmpTime.getDate();
@@ -268,4 +308,32 @@ export function calculatePeriod(dateString: string | Date) {
   const formattedSecond = second < 10 ? `0${second}` : `${second}`;
 
   return formattedHour + ':' + formattedMinute + ':' + formattedSecond;
+}
+
+/**
+ *  기간 계산
+ *  일정이 하루 이내 진행될 경우 YY:MM:DD HH:MM ~ HH:MM 형식으로 반환
+ *  일정이 하루 이상 진행될 경우 YY:MM:DD ~ YY:MM:DD 형식으로 반환
+ *  @param {string | Date} dateString
+ *  @return 문자열 "YY:MM:DD HH:MM ~ HH:MM" or "YY:MM:DD ~ YY:MM:DD"
+ */
+
+export function showPeriod({
+  startDate,
+  endDate,
+}: {
+  startDate: Date;
+  endDate: Date;
+}) {
+  if (
+    startDate.getDate() === endDate.getDate() &&
+    startDate.getMonth() === endDate.getMonth() &&
+    startDate.getFullYear() === endDate.getFullYear()
+  ) {
+    return `${dateToStringFormat(startDate)} ${timeToString(
+      startDate
+    )} ~ ${timeToString(endDate)}`;
+  } else {
+    return `${dateToStringFormat(startDate)} ~ ${dateToStringFormat(endDate)}`;
+  }
 }

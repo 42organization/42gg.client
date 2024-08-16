@@ -13,22 +13,24 @@
   height: 100%;
   flex-direction: column;
   margin-top: 0.5rem;
+  text-align: justify;
+  letter-spacing: 0.52px;
   justify-content: flex-start;
   align-items: center;
   gap: 0.2rem;
-  .agendaDateMonth {
+  .agendaStartDateMonth {
+    @include text(date);
     display: flex;
     align-items: center;
-    justify-content: center;
     height: 1.5rem;
-    @include text(date);
+    flex-shrink: 0;
   }
-  .agendaDateDay {
+  .agendaStartDateDay {
+    @include text(date);
     display: flex;
     align-items: center;
-    justify-content: center;
     height: 1.5rem;
-    @include text(date);
+    font-family: $font-text-light;
   }
 }
 

@@ -1,6 +1,9 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
-import AgendaItemBtn from 'components/agenda/utils/AgendaItemBtn';
+import { MyTeamDataProps } from 'types/agenda/agendaDetail/agendaTypes';
+import MyTeamInfo from 'components/agenda/Home/MyTeamInfo';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/Home/MyAgendaBtn.module.scss';
 
 const MyAgendaBtn = () => {
@@ -26,6 +29,8 @@ const MyAgendaBtn = () => {
       }, 200);
     }
   };
+  const myList =
+    useFetchGet<MyTeamDataProps[]>('/profile/current/list')?.data || [];
 
   return (
     <div
@@ -49,11 +54,21 @@ const MyAgendaBtn = () => {
       </div>
 
       <div className={styles.myAgendaListContainer}>
-        <AgendaItemBtn />
-        <AgendaItemBtn />
-        <AgendaItemBtn />
-        <AgendaItemBtn />
-        <AgendaItemBtn />
+        {myList.length > 0 ? (
+          myList.map((myTeamInfo, idx) => (
+            <Link
+              href={`/agenda/${myTeamInfo.agendaKey}/${myTeamInfo.teamKey}`}
+              key={idx}
+              style={{ width: '100%' }}
+            >
+              <div className={styles.myagendaItemContainer} key={idx}>
+                <MyTeamInfo myTeamInfo={myTeamInfo} key={idx} />
+              </div>
+            </Link>
+          ))
+        ) : (
+          <div className={styles.noAgendaText}>There is no agenda</div>
+        )}
       </div>
     </div>
   );
