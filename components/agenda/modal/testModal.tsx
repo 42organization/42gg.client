@@ -27,6 +27,9 @@ const TestModal2 = () => {
       type: 'notice',
       title: 'title',
       description: 'message',
+      onProceed: () => {
+        console.log('onProceed');
+      },
     });
   };
 
