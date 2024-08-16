@@ -23,7 +23,8 @@ $color-tag-official: #39b8ff;
 $color-tag-common: #fcba03;
 $color-tag-team: #ff5d5d;
 $color-tag-assignment: #ffb039;
-$color-tag-deafult: #000000;
+$color-tag-deafult: #b487d0;
+$color-tag-end: #717171;
 
 // color
 $color-placeholder: #b4a5b5;
@@ -190,6 +191,10 @@ $font-size-xs: 0.8rem; // $small-font
     margin: 0;
     font-size: $font-size-xs;
     color: red;
+  } @else if ($type == 'statusButton') {
+    // 버튼 텍스트
+    font-family: $font-text-light;
+    font-size: $font-size-s;
   } @else {
     // default
     font-family: $font-text-regular;

@@ -4,8 +4,9 @@ $tags: (
   공식: $color-tag-official,
   비공식: $color-tag-common,
   팀: $color-tag-team,
-  과제: $color-tag-assignment,
+  대회: $color-tag-assignment,
   default: $color-tag-deafult,
+  종료: $color-tag-end,
 );
 
 @each $name, $color in $tags {

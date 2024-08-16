@@ -1,19 +1,39 @@
 import Image from 'next/image';
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
+import { showPeriod, fillZero } from 'utils/handleTime';
 import AgendaTag from 'components/agenda/utils/AgendaTag';
 import styles from 'styles/agenda/Home/AgendaInfo.module.scss';
 
 // Props: API data
-const AagendaInfo = () => {
+const AgendaInfo = ({
+  agendaInfo,
+  key,
+}: {
+  agendaInfo: AgendaDataProps;
+  key: number;
+}) => {
+  if (!agendaInfo) {
+    return <div>There is no agenda</div>;
+  }
+  const startDate = new Date(agendaInfo.agendaStartTime);
+  const endDate = new Date(agendaInfo.agendaEndTime);
+
   return (
-    <div className={styles.agendaInfoContainer}>
+    <div className={styles.agendaInfoContainer} key={key}>
       <div className={styles.agendaDateBox}>
-        <div className={styles.agendaDateMonth}>12</div>
-        <div className={styles.agendaDateDay}>31</div>
+        <div className={styles.agendaStartDateMonth}>
+          {fillZero(`${startDate.getMonth()}`, 2)}
+        </div>
+
+        <div className={styles.agendaStartDateDay}>
+          {fillZero(`${startDate.getDate()}`, 2)}
+        </div>
       </div>
 
       <div className={styles.agendaInfoWrapper}>
-        <div className={styles.agendaItemTitleBox}>PUSH SWAP 경진대회</div>
-
+        <div className={styles.agendaItemTitleBox}>
+          {agendaInfo.agendaTitle}
+        </div>
         <div className={styles.agendaItemTimeBox}>
           <div className={styles.agendaItemTimeWrapper}>
             <div className={styles.imageWrapper}>
@@ -25,32 +45,38 @@ const AagendaInfo = () => {
                 className={styles.imageBox}
               />
             </div>
-            <div>12.31</div>
-            <div>14:00 ~ 17:00</div>
+            <div>{showPeriod({ startDate, endDate })}</div>
           </div>
 
           <div className={styles.agendaItemTimeWrapper}>
             <div className={styles.imageWrapper}>
               <Image
-                src='/image/agenda/People.svg'
+                src={
+                  // file 일 경우 방지
+                  typeof agendaInfo.agendaPoster === 'string'
+                    ? agendaInfo.agendaPoster
+                    : '/image/agenda/Time.svg'
+                }
                 width={15}
                 height={15}
                 alt='count'
                 className={styles.imageBox}
               />
             </div>
-            <div>20/100</div>
+            <div>
+              {agendaInfo.agendaCurrentTeam}/{agendaInfo.agendaMaxTeam}
+            </div>
           </div>
         </div>
 
         <div className={styles.agendaItemTagBox}>
-          <AgendaTag tagName='공식' />
-          <AgendaTag tagName='팀' />
-          <AgendaTag tagName='과제' />
+          {agendaInfo.isOfficial && <AgendaTag tagName='공식' />}
+          {agendaInfo.agendaMaxPeople === 1 && <AgendaTag tagName='팀' />}
+          {agendaInfo.isRanking && <AgendaTag tagName='대회' />}
         </div>
       </div>
     </div>
   );
 };
 
-export default AagendaInfo;
+export default AgendaInfo;

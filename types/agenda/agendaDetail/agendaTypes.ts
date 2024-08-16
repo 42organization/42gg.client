@@ -18,10 +18,20 @@ export interface AgendaDataProps {
   createdAt: Date | string;
   announcementTitle: string;
   isOfficial: boolean;
+  isRanking?: boolean;
   agendaisRanking: boolean;
   agendaKey: string;
 }
 
 export interface AgendaProps {
   agendaData: AgendaDataProps;
+}
+
+export interface MyTeamDataProps {
+  agendaKey: string; // 대회 고유 키
+  agendaTitle: string;
+  agendaLocation: string; // ENUM 상단참고
+  teamKey: string; // 내 팀 조회를 위한 key
+  isOfficial: boolean; //공식대회여부
+  teamName: string; //fe 추가 0728 : 와이어프레임 참고
 }

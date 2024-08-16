@@ -16,16 +16,10 @@ function AgendaAppLayout({ children }: AgendaLayoutProps) {
   if (!user || !user.intraId) return null;
 
   return (
-    <>
-      <div className={styles.background}>
-        <HeaderStateContext>
-          <Header />
-        </HeaderStateContext>
-        {children}
-        <Footer />
-      </div>
-      <AgendaModalProvider />
-    </>
+    <div className={styles.background}>
+      {children}
+      <Footer />
+    </div>
   );
 }
 
