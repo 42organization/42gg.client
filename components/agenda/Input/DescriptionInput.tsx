@@ -6,6 +6,7 @@ const DescriptionInput = ({
   name,
   label,
   placeholder,
+  defaultValue,
   ...rest
 }: DescriptionProps) => {
   return (
@@ -20,6 +21,7 @@ const DescriptionInput = ({
         id={name}
         className={styles.description_input}
         placeholder={placeholder}
+        defaultValue={defaultValue}
       />
     </div>
   );

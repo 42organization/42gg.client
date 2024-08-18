@@ -7,7 +7,7 @@ const saveLocal = () => {
   // 임시저장 추후 추가
 };
 
-const submitTeamForm = async (e: React.FormEvent<HTMLFormElement>) => {
+export const submitTeamForm = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   const data = new FormData(e.target as HTMLFormElement);
   if (!data) return;
@@ -53,7 +53,7 @@ const submitTeamForm = async (e: React.FormEvent<HTMLFormElement>) => {
     });
 };
 
-const CreateAgenda = () => {
+export const CreateAgenda = () => {
   return (
     <div className={styles.container}>
       <div>
@@ -66,4 +66,4 @@ const CreateAgenda = () => {
   );
 };
 
-export default CreateAgenda;
+// export default CreateAgenda;
