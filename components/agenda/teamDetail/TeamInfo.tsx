@@ -1,6 +1,7 @@
-import { useState , useRef } from 'react';
-import { TeamDetailProps } from 'types/aganda/TeamDetailTypes';
+import { useState } from 'react';
+import { TeamInfoProps } from 'types/agenda/teamDetail/TeamInfoTypes';
 import { colorMapping } from 'types/agenda/utils/colorList';
+import { Authority } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
 import CreateTeamForm from 'components/agenda/Form/CreateTeamForm';
 import TeamButtons from 'components/agenda/teamDetail/TeamButtons';
@@ -12,18 +13,13 @@ const TeamInfo = ({
   shareTeamInfo,
   maxPeople,
   authority,
-}: {
-  teamDetail: TeamDetailProps;
-  shareTeamInfo: () => void;
-  maxPeople: number;
-  authority: string;
-}) => {
+  manageTeamDetail,
+  editTeamDetail,
+}: TeamInfoProps) => {
   // EditTeam UI <-> TeamInfo UI 전환
   const [convert, setConvert] = useState(true);
-  const formRef = useRef<HTMLFormElement>(null);
 
-  const submitTeamForm = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log(e);
+  const handleConvert = () => {
     setConvert(!convert);
   };
 
@@ -33,7 +29,7 @@ const TeamInfo = ({
       <div className={styles.container}>
         <div className={styles.header}>
           <h1>{teamDetail.teamName}</h1>
-          {authority === 'LEADER' ? (
+          {authority === Authority.LEADER ? (
             <div className={styles.iconWrapper}>
               <EditIcon onClick={() => setConvert(!convert)} />
             </div>
@@ -87,7 +83,11 @@ const TeamInfo = ({
         </div>
       </div>
 
-      <TeamButtons authority={authority} />
+      <TeamButtons
+        authority={authority}
+        teamStatus={teamDetail.teamStatus}
+        manageTeamDetail={manageTeamDetail}
+      />
     </>
   ) : (
     /* EditTeam */
@@ -95,16 +95,16 @@ const TeamInfo = ({
       <div className={styles.container}>
         <h2 className={styles.title}>팀 수정하기</h2>
         <CreateTeamForm
-          handleSubmit={submitTeamForm}
-          formRef={formRef}
-          teamDetail={teamDetail}
+          handleSubmit={handleConvert}
+          location={teamDetail.teamLocation}
         />
       </div>
 
       <TeamButtons
         authority={authority}
-        editBtn={true}
-        onSubmit={() => formRef.current?.submit()}
+        teamStatus={teamDetail.teamStatus}
+        handleConvert={handleConvert}
+        editTeamDetail={editTeamDetail}
       />
     </>
   );

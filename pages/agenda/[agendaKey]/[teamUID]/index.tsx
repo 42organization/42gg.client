@@ -1,13 +1,17 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { TeamDetailProps } from 'types/aganda/TeamDetailTypes';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
-import { TeamStatus, Coalition, AgendaLocation } from 'constants/agenda/agenda';
+import {
+  TeamDetailProps,
+  editDataProps,
+} from 'types/agenda/teamDetail/TeamDetailTypes';
+import { Authority } from 'constants/agenda/agenda';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import TeamInfo from 'components/agenda/teamDetail/TeamInfo';
 import { useUser } from 'hooks/agenda/Layout/useUser';
 import useFetchGet from 'hooks/agenda/useFetchGet';
+import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/TeamDetail/TeamDetail.module.scss';
 
 export default function TeamDetail() {
@@ -27,37 +31,84 @@ export default function TeamDetail() {
     agenda_key: agendaKey,
   }).data;
 
-  const teamDetailData = useFetchGet<TeamDetailProps>('/team', {
-    teamKey: teamUID,
-    agenda_key: agendaKey,
-  }).data;
+  const { data: teamDetailData, getData: getTeamDetail } =
+    useFetchGet<TeamDetailProps>('/team', {
+      teamKey: teamUID,
+      agenda_key: agendaKey,
+    });
 
   /**
    *  useEffect / API GET 얻은 데이터 teamDetail, authority 할당
    */
   const [teamDetail, setTeamDetail] = useState<TeamDetailProps | null>(null);
-  const [authority, setAuthority] = useState<string>('');
+  const [authority, setAuthority] = useState<Authority>(Authority.NONE);
 
   useEffect(() => {
     if (intraId && agendaData && teamDetailData) {
       const userRole =
         intraId === agendaData?.agendaHost
-          ? 'HOST'
+          ? Authority.HOST
           : intraId === teamDetailData.teamLeaderIntraId
-          ? 'LEADER'
+          ? Authority.LEADER
           : teamDetailData.teamMates.find((mate) => mate.intraId === intraId)
-          ? 'MEMBER'
-          : 'NONE';
+          ? Authority.MEMBER
+          : Authority.GEUST;
       setAuthority(userRole);
       setTeamDetail(teamDetailData);
+      /** TEST */
+      console.log(userRole);
+      console.log(teamDetailData?.teamStatus);
     }
   }, [intraId, agendaData, teamDetailData]);
 
   /**
-   * EventListener
+   * Button Click Fucntions
    */
+  const sendRequest = useFetchRequest().sendRequest;
+
   const shareTeamInfo = () => {
     alert('공유하기');
+  };
+
+  const manageTeamDetail = async (method: 'POST' | 'PATCH', url: string) => {
+    sendRequest(
+      method,
+      url,
+      {},
+      {
+        agenda_key: agendaKey,
+        teamKey: teamUID,
+      },
+      () => {
+        getTeamDetail();
+      },
+      (err: string) => {
+        console.error(err);
+      }
+    );
+  };
+
+  const editTeamDetail = async (editData: editDataProps) => {
+    sendRequest(
+      'PATCH',
+      'team',
+      {
+        teamKey: editData.teamKey,
+        teamContent: editData.teamContent,
+        teamName: editData.teamName,
+        teamIsPrivate: editData.teamIsPrivate,
+        teamLocation: editData.teamLocation,
+      },
+      {
+        agenda_key: agendaKey,
+      },
+      () => {
+        getTeamDetail();
+      },
+      (err: string) => {
+        console.error(err);
+      }
+    );
   };
 
   return (
@@ -73,6 +124,8 @@ export default function TeamDetail() {
           shareTeamInfo={shareTeamInfo}
           maxPeople={agendaData.agendaMaxPeople}
           authority={authority}
+          manageTeamDetail={manageTeamDetail}
+          editTeamDetail={editTeamDetail}
         />
       )}
     </div>
