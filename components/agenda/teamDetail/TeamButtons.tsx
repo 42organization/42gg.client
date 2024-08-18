@@ -1,10 +1,13 @@
-import { TeamButtonsProps , BtnInfoProps } from 'types/agenda/teamDetail/TeamButtonsTypes';
+import {
+  TeamButtonsProps,
+  BtnInfoProps,
+} from 'types/agenda/teamDetail/TeamButtonsTypes';
 import { Authority, TeamStatus } from 'constants/agenda/agenda';
 import styles from 'styles/agenda/TeamDetail/TeamButtons.module.scss';
 
 const renderButton = (
-  firstBtnInfo: { handleClick: () => void; label: string },
-  secondBtnInfo?: { handleClick: () => void; label: string }
+  firstBtnInfo: BtnInfoProps,
+  secondBtnInfo?: BtnInfoProps
 ) => {
   return (
     <div className={styles.buttonContainer}>
@@ -29,9 +32,7 @@ const renderButton = (
 const TeamButtons = ({
   authority,
   teamStatus,
-  handleConvert,
   manageTeamDetail,
-  editTeamDetail,
 }: TeamButtonsProps) => {
   switch (teamStatus) {
     case TeamStatus.CANCEL:

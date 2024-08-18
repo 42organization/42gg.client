@@ -2,10 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
-import {
-  TeamDetailProps,
-  editDataProps,
-} from 'types/agenda/teamDetail/TeamDetailTypes';
+import { TeamDetailProps } from 'types/agenda/teamDetail/TeamDetailTypes';
 import { Authority } from 'constants/agenda/agenda';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import TeamInfo from 'components/agenda/teamDetail/TeamInfo';
@@ -18,7 +15,6 @@ export default function TeamDetail() {
   const router = useRouter();
   const { agendaKey } = router.query;
   const { teamUID } = router.query;
-
   /**
    * API GET DATA
    * 1. intraId
@@ -55,9 +51,6 @@ export default function TeamDetail() {
           : Authority.GEUST;
       setAuthority(userRole);
       setTeamDetail(teamDetailData);
-      /** TEST */
-      console.log(userRole);
-      console.log(teamDetailData?.teamStatus);
     }
   }, [intraId, agendaData, teamDetailData]);
 
@@ -88,16 +81,40 @@ export default function TeamDetail() {
     );
   };
 
-  const editTeamDetail = async (editData: editDataProps) => {
+  const submitTeamForm = (target: React.FormEvent<HTMLFormElement>) => {
+    target.preventDefault();
+    const formData = new FormData(target.currentTarget);
+    const strData = JSON.stringify(Object.fromEntries(formData));
+    const data = JSON.parse(strData);
+
+    data.teamIsPrivate = data.teamIsPrivate === 'on' ? true : false;
+    switch (data.teamLocation) {
+      case '서울':
+        data.teamLocation = 'SEOUL';
+        break;
+      case '경산':
+        data.teamLocation = 'GYEONGSAN';
+        break;
+      case '둘다':
+        data.teamLocation = 'MIX';
+        break;
+    }
+    data.teamContent = data.teamContent.trim();
+    data.teamName = data.teamName.trim();
+    if (data.teamName === '' || data.teamContent === '') {
+      alert('모든 항목을 입력해주세요.'); //임시
+      return;
+    }
+
     sendRequest(
       'PATCH',
       'team',
       {
-        teamKey: editData.teamKey,
-        teamContent: editData.teamContent,
-        teamName: editData.teamName,
-        teamIsPrivate: editData.teamIsPrivate,
-        teamLocation: editData.teamLocation,
+        teamKey: teamUID,
+        teamIsPrivate: data.teamIsPrivate,
+        teamLocation: data.teamLocation,
+        teamName: data.teamName,
+        teamContent: data.teamContent,
       },
       {
         agenda_key: agendaKey,
@@ -125,7 +142,7 @@ export default function TeamDetail() {
           maxPeople={agendaData.agendaMaxPeople}
           authority={authority}
           manageTeamDetail={manageTeamDetail}
-          editTeamDetail={editTeamDetail}
+          submitTeamForm={submitTeamForm}
         />
       )}
     </div>

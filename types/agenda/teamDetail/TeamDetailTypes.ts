@@ -12,11 +12,3 @@ export interface TeamDetailProps {
     coalition: Coalition; //e
   }[];
 }
-
-export interface editDataProps {
-  teamKey: string;
-  teamContent: string;
-  teamName: string;
-  teamIsPrivate: boolean;
-  teamLocation: string;
-}

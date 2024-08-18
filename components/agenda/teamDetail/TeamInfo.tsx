@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TeamInfoProps } from 'types/agenda/teamDetail/TeamInfoTypes';
 import { colorMapping } from 'types/agenda/utils/colorList';
-import { Authority } from 'constants/agenda/agenda';
+import { TeamStatus, Authority } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
 import CreateTeamForm from 'components/agenda/Form/CreateTeamForm';
 import TeamButtons from 'components/agenda/teamDetail/TeamButtons';
@@ -14,7 +14,7 @@ const TeamInfo = ({
   maxPeople,
   authority,
   manageTeamDetail,
-  editTeamDetail,
+  submitTeamForm,
 }: TeamInfoProps) => {
   // EditTeam UI <-> TeamInfo UI 전환
   const [convert, setConvert] = useState(true);
@@ -29,7 +29,8 @@ const TeamInfo = ({
       <div className={styles.container}>
         <div className={styles.header}>
           <h1>{teamDetail.teamName}</h1>
-          {authority === Authority.LEADER ? (
+          {teamDetail.teamStatus === TeamStatus.OPEN &&
+          authority === Authority.LEADER ? (
             <div className={styles.iconWrapper}>
               <EditIcon onClick={() => setConvert(!convert)} />
             </div>
@@ -95,17 +96,12 @@ const TeamInfo = ({
       <div className={styles.container}>
         <h2 className={styles.title}>팀 수정하기</h2>
         <CreateTeamForm
-          handleSubmit={handleConvert}
+          handleSubmit={submitTeamForm}
           location={teamDetail.teamLocation}
+          teamDetail={teamDetail}
+          handleConvert={handleConvert}
         />
       </div>
-
-      <TeamButtons
-        authority={authority}
-        teamStatus={teamDetail.teamStatus}
-        handleConvert={handleConvert}
-        editTeamDetail={editTeamDetail}
-      />
     </>
   );
 };

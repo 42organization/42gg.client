@@ -1,5 +1,5 @@
 import { Authority } from 'constants/agenda/agenda';
-import { TeamDetailProps, editDataProps } from './TeamDetailTypes';
+import { TeamDetailProps } from './TeamDetailTypes';
 
 export interface TeamInfoProps {
   teamDetail: TeamDetailProps;
@@ -7,5 +7,5 @@ export interface TeamInfoProps {
   maxPeople: number;
   authority: Authority;
   manageTeamDetail: (method: 'POST' | 'PATCH', url: string) => void;
-  editTeamDetail: (editData: editDataProps) => void;
+  submitTeamForm: (target: React.FormEvent<HTMLFormElement>) => void;
 }
