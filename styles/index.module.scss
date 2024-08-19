@@ -1,5 +1,7 @@
 @import 'styles/agenda/common.scss';
-
+.layout {
+  max-width: 100%;
+}
 .container {
   @include container(1);
 }

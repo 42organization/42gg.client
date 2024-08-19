@@ -8,6 +8,20 @@
 .agendaInfoContainer {
   @include container(1);
   position: relative;
+  display: flex;
+  min-width: 352px;
+  max-width: 750px;
+  height: calc(150px + (100vw - 352px) * ((600 - 150) / (750 - 352)));
+  min-height: 180px;
+  max-height: 600px;
+  padding: 0.7rem 1.2rem;
+  cursor: pointer;
+  background: $agenda-list-bg; // poster img url 변수로 변경 예정
+  border: var(--default-border);
+  border-radius: $radius-medium;
+  box-shadow: var(--default-box-shadow);
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .rest,
@@ -19,14 +33,14 @@
   box-shadow: var(--default-box-shadow);
 }
 .current {
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.6rem;
+  height: 0.6rem;
   padding: 0;
 }
 
 .rest {
-  width: 0.6rem;
-  height: 0.6rem;
+  width: 0.4rem;
+  height: 0.4rem;
   padding: 0.2rem;
   opacity: 0.5;
 }
