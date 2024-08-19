@@ -18,7 +18,7 @@ const NoticeModal = (props: agendaModal) => {
           <p>{description}</p>
         </div>
         <div className={styles.buttonContainer}>
-          <button onClick={() => handleProceed(onProceed)}>확인</button>{' '}
+          <button onClick={() => handleProceed(onProceed)}>확인</button>
         </div>
       </div>
     </>
