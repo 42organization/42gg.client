@@ -33,7 +33,7 @@ const Index: NextPage = () => {
           <PingpongIcon width='100%' height='100%' />
         </button>
       </div>
-      <PageController />
+      <PageController handleNavigation={handleNavigation} />
 
       <button className={styles.container}>아우터 매치 준비중입니다.</button>
     </div>

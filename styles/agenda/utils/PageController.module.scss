@@ -1,13 +1,13 @@
 @import 'styles/agenda/common.scss';
 
 .container {
-  position: relative;
   width: 100%;
   height: max-content;
 }
 
 .agendaInfoContainer {
   @include container(1);
+  position: relative;
 }
 
 .rest,
@@ -25,7 +25,6 @@
 }
 
 .rest {
-
   width: 0.6rem;
   height: 0.6rem;
   padding: 0.2rem;
@@ -49,7 +48,7 @@
 .prev,
 .next {
   position: absolute;
-  top: calc(40% - 1rem);
+  top: calc(50% - 1rem);
   width: 2rem;
   height: 2rem;
   background: transparent;

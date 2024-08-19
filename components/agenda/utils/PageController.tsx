@@ -31,7 +31,11 @@ const PageControllerNavigator = ({
   );
 };
 
-const PageController = () => {
+const PageController = ({
+  handleNavigation,
+}: {
+  handleNavigation: (path: string) => void;
+}) => {
   const [current, setCurrent] = useState(0);
   const [data, setData] = useState<AgendaDataProps[]>([]);
   const max = data.length;
@@ -59,16 +63,23 @@ const PageController = () => {
   return (
     <div className={styles.container}>
       <button
-        className={styles.prev}
-        onClick={() => setCurrent(current - 1 >= 0 ? current - 1 : max - 1)}
-      />
-      <button
-        className={styles.next}
-        onClick={() => setCurrent(current + 1 < max ? current + 1 : 0)}
-      />
-      <div className={styles.agendaInfoContainer}>
+        className={styles.agendaInfoContainer}
+        onClick={() =>
+          data.length && data[current]
+            ? handleNavigation('/agenda/' + data[current].agendaKey)
+            : null
+        }
+      >
+        <button
+          className={styles.prev}
+          onClick={() => setCurrent(current - 1 >= 0 ? current - 1 : max - 1)}
+        />
+        <button
+          className={styles.next}
+          onClick={() => setCurrent(current + 1 < max ? current + 1 : 0)}
+        />
         <AgendaInfo agendaInfo={data[current]} key={current || 0} />
-      </div>
+      </button>
       <PageControllerNavigator
         currentPage={current}
         maxPage={data.length}
