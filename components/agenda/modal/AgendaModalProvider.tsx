@@ -19,6 +19,9 @@ const AgendaModalProvider = () => {
       case 'notice':
         modalContent = <NoticeModal {...modalProps} />;
         break;
+      case 'modify':
+        modalContent = <ModifyModal {...modalProps} />;
+        break;
       default:
         modalContent = null;
     }
