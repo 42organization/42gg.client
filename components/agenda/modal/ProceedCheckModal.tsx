@@ -1,4 +1,5 @@
 import { agendaModal } from 'types/agenda/modalTypes';
+import { useModal } from 'components/agenda/modal/useModal';
 import styles from 'styles/agenda/modal/modal.module.scss';
 
 const ProceedCheckModal = (props: agendaModal) => {
@@ -13,6 +14,8 @@ const ProceedCheckModal = (props: agendaModal) => {
     cancelText,
     extraButtons,
   } = props;
+
+  const { handleProceed, handleCancel } = useModal();
 
   return (
     <>
@@ -39,8 +42,12 @@ const ProceedCheckModal = (props: agendaModal) => {
           )}
         </div>
         <div className={styles.buttonContainer}>
-          <button onClick={onCancel}>{cancelText || '취소'}</button>
-          <button onClick={onProceed}>{proceedText || '확인'}</button>
+          <button onClick={() => handleCancel(onCancel)}>
+            {cancelText || '취소'}
+          </button>
+          <button onClick={() => handleProceed(onProceed)}>
+            {proceedText || '확인'}
+          </button>{' '}
         </div>
       </div>
     </>

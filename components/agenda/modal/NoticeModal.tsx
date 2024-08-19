@@ -1,9 +1,10 @@
 import { agendaModal } from 'types/agenda/modalTypes';
+import { useModal } from 'components/agenda/modal/useModal';
 import styles from 'styles/agenda/modal/modal.module.scss';
-import { useModal } from './useModal';
 
 const NoticeModal = (props: agendaModal) => {
   const { title, description, onProceed } = props;
+  const { handleProceed } = useModal();
 
   return (
     <>
@@ -17,7 +18,7 @@ const NoticeModal = (props: agendaModal) => {
           <p>{description}</p>
         </div>
         <div className={styles.buttonContainer}>
-          <button onClick={onProceed}>확인</button>
+          <button onClick={() => handleProceed(onProceed)}>확인</button>{' '}
         </div>
       </div>
     </>
