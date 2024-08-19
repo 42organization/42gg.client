@@ -74,6 +74,7 @@ export default function TeamDetail() {
       },
       () => {
         getTeamDetail();
+        if (url === 'team/cancel') router.push(`/agenda/${agendaKey}`);
       },
       (err: string) => {
         console.error(err);
