@@ -64,7 +64,11 @@ const CreateTeamForm = ({
             handleConvert && handleConvert(); // 팀 상세 페이지 - 수정
           }}
         />
-        <FormBtn label='팀 생성' submit={true} />
+        {teamDetail ? (
+          <FormBtn label='팀 수정' submit={true} />
+        ) : (
+          <FormBtn label='팀 생성' submit={true} />
+        )}
       </div>
     </form>
   );
