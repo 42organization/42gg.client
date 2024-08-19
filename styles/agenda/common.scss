@@ -76,6 +76,12 @@ $font-size-xs: 0.8rem; // $small-font
   } @else if $level == 'right' {
     background: var(--box-bg-1);
     border-radius: $radius-medium 0 0 $radius-medium;
+  } @else if $level == 'modal' {
+    background: var(--box-bg-1);
+    border-radius: $radius-medium;
+  } @else {
+    // default
+    background: var(--box-bg-1);
   }
 }
 
@@ -231,4 +237,14 @@ $font-size-xs: 0.8rem; // $small-font
       opacity: 0;
     }
   }
+}
+
+@mixin backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
 }

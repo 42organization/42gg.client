@@ -69,7 +69,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <Header />
                 </HeaderStateContext>
                 <Component {...pageProps} />
-                <ModalProvider />
               </LayoutProvider>
               <CustomizedSnackbars />
             </QueryClientProvider>
