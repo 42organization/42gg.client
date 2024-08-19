@@ -1,11 +1,16 @@
 import { agendaModal } from 'types/agenda/modalTypes';
-import ModifyAgendaForm from 'components/agenda/Form/ModifyAgendaForm';
 import { useModal } from 'components/agenda/modal/useModal';
-import { submitTeamForm } from 'pages/agenda/create';
 import styles from 'styles/agenda/modal/modal.module.scss';
 
-const ModifyModal = (props: agendaModal) => {
-  const { title, description, onCancel, onProceed, data } = props;
+const ModifyModal = (
+  props: agendaModal & {
+    FormComponent: React.ComponentType<{
+      data: any;
+    }>;
+  }
+) => {
+  const { title, description, onCancel, onProceed, FormComponent, data } =
+    props;
   const { handleCancel, handleProceed } = useModal();
   return (
     <>
@@ -19,7 +24,7 @@ const ModifyModal = (props: agendaModal) => {
           {description}
         </div>
         <div className={styles.formContainer}>
-          <ModifyAgendaForm data={data} handleSubmit={submitTeamForm} />
+          <FormComponent data={data} />
         </div>
         <div className={styles.buttonContainer}>
           <button onClick={() => handleCancel(onCancel)}>취소</button>
