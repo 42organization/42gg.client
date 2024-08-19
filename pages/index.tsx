@@ -13,7 +13,11 @@ const Index: NextPage = () => {
 
   return (
     <div className={styles.layout}>
+      <h2 className={styles.title} onClick={() => handleNavigation('/agenda')}>
+        Agenda
+      </h2>
       <PageController handleNavigation={handleNavigation} />
+      <h2 className={styles.title}>Ticket & PingPong</h2>
       <div className={styles.flex}>
         <button
           className={styles.container}
