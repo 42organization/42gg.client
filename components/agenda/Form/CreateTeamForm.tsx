@@ -27,7 +27,7 @@ const CreateTeamForm = ({
       handleConvert();
     }
   };
-  console.log(teamDetail);
+
   return (
     <form onSubmit={onSubmit} className={styles.container}>
       <TitleInput
