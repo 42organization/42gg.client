@@ -40,7 +40,7 @@ const TeamButtons = ({
           <button
             className={styles.confirm_button}
             onClick={() =>
-              handleClick(fristBtn.description, fristBtn.onProceed)
+              handleClick(secondBtn.description, secondBtn.onProceed)
             }
           >
             {secondBtn.label}

@@ -73,8 +73,13 @@ export default function TeamDetail() {
         teamKey: teamUID,
       },
       () => {
-        getTeamDetail();
-        if (url === 'team/cancel') router.push(`/agenda/${agendaKey}`);
+        // 팀 폭파 API : 아젠다 디테일 페이지로 이동
+        if (url === 'team/cancel') {
+          router.push(`/agenda/${agendaKey}`);
+        } else {
+          // 그 외 API : 팀 상세 데이터 갱신
+          getTeamDetail();
+        }
       },
       (err: string) => {
         console.error(err);
