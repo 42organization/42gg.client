@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Slider } from '@mui/material';
+import { getRemainTime } from 'utils/handleTime';
 import CheckboxInput from 'components/agenda/Input/CheckboxInput';
 import DescriptionInput from 'components/agenda/Input/DescriptionInput';
 import ImageInput from 'components/agenda/Input/ImageInput';
@@ -9,22 +10,6 @@ import TitleInput from 'components/agenda/Input/TitleInput';
 import styles from 'styles/agenda/Form/Form.module.scss';
 interface CreateAgendaFormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-}
-
-function parseDate(a: Date, b: Date): string {
-  if (a.getTime() > b.getTime()) {
-    return '0일';
-  }
-  const time = b.getTime() - a.getTime();
-  if (time / 1000 / 60 / 60 / 24 >= 1) {
-    return `${Math.ceil(time / 1000 / 60 / 60 / 24 / 1)}일 ${
-      Math.ceil(time / 1000 / 60 / 60 / 1) % 24
-    }시간`;
-  } else if (time / 1000 / 60 / 60 >= 1)
-    return `${Math.ceil(time / 1000 / 60 / 60)}시간`;
-  else {
-    return `${Math.ceil(time / 1000 / 60)}분`;
-  }
 }
 
 const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
@@ -167,7 +152,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
         <div className={styles.label_container}>
           <h3 className={styles.label}>모집마감까지 </h3>
           <h3 className={`${styles.label} ${styles.highlight}`}>
-            {parseDate(recruitEnd, today)}
+            {getRemainTime({ targetTime: recruitEnd })}
           </h3>
         </div>
         <div className={styles.dateContainer}>
@@ -184,7 +169,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
         <div className={styles.label_container}>
           <h3 className={styles.label}>진행 기간</h3>
           <h3 className={`${styles.label} + ${styles.highlight}`}>
-            {parseDate(dateRange[0], dateRange[1])}
+            {getRemainTime({ targetTime: dateRange[1], cmpTime: dateRange[0] })}
           </h3>
         </div>
         <div className={styles.inputContainer}>

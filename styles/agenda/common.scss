@@ -23,7 +23,8 @@ $color-tag-official: #39b8ff;
 $color-tag-common: #fcba03;
 $color-tag-team: #ff5d5d;
 $color-tag-assignment: #ffb039;
-$color-tag-deafult: #000000;
+$color-tag-deafult: #b487d0;
+$color-tag-end: #717171;
 
 // color
 $color-placeholder: #b4a5b5;
@@ -75,6 +76,12 @@ $font-size-xs: 0.8rem; // $small-font
   } @else if $level == 'right' {
     background: var(--box-bg-1);
     border-radius: $radius-medium 0 0 $radius-medium;
+  } @else if $level == 'modal' {
+    background: var(--box-bg-1);
+    border-radius: $radius-medium;
+  } @else {
+    // default
+    background: var(--box-bg-1);
   }
 }
 
@@ -184,6 +191,10 @@ $font-size-xs: 0.8rem; // $small-font
     margin: 0;
     font-size: $font-size-xs;
     color: red;
+  } @else if ($type == 'statusButton') {
+    // 버튼 텍스트
+    font-family: $font-text-light;
+    font-size: $font-size-s;
   } @else {
     // default
     font-family: $font-text-regular;
@@ -226,4 +237,14 @@ $font-size-xs: 0.8rem; // $small-font
       opacity: 0;
     }
   }
+}
+
+@mixin backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
 }

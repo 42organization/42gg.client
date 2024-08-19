@@ -1,0 +1,9 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  @include container(1);
+}
+
+.flex {
+  display: flex;
+}
