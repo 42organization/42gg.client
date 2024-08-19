@@ -61,6 +61,8 @@ export default function TeamDetail() {
 
   const shareTeamInfo = () => {
     alert('공유하기');
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
   };
 
   const manageTeamDetail = async (method: 'POST' | 'PATCH', url: string) => {
