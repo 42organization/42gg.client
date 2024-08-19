@@ -45,6 +45,7 @@
 .agendaListItemBtn {
   position: relative;
   display: flex;
+  width: 100%;
   max-width: 750px;
   height: calc(150px + (100vw - 352px) * ((600 - 150) / (750 - 352)));
   min-height: 180px;
