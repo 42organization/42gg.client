@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
+import { instanceInAgenda } from 'utils/axios';
 import styles from 'styles/agenda/utils/PageController.module.scss';
+import AgendaInfo from '../Home/AgendaInfo';
 
 interface PageControllerNavigatorProps {
   currentPage: number;
@@ -28,13 +31,30 @@ const PageControllerNavigator = ({
   );
 };
 
-interface PageControllerProps {
-  compArray: React.ReactNode[];
-}
-
-const PageController = ({ compArray }: PageControllerProps) => {
+const PageController = () => {
   const [current, setCurrent] = useState(0);
-  const max = compArray.length;
+  const [data, setData] = useState<AgendaDataProps[]>([]);
+  const max = data.length;
+
+  const fetchAgendaList = async () => {
+    const url = '/list';
+    const data = await instanceInAgenda
+      .get(url)
+      .then((res) => {
+        return res.data;
+      })
+      .catch((error) => {
+        if (error.view === 403) return [];
+        else return []; // 에러처리 필요 ERROR
+      });
+    return data;
+  };
+
+  useEffect(() => {
+    fetchAgendaList().then((data) => {
+      setData(data);
+    });
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -46,10 +66,12 @@ const PageController = ({ compArray }: PageControllerProps) => {
         className={styles.next}
         onClick={() => setCurrent(current + 1 < max ? current + 1 : 0)}
       />
-      {compArray[current]}
+      <div className={styles.agendaInfoContainer}>
+        <AgendaInfo agendaInfo={data[current]} key={current || 0} />
+      </div>
       <PageControllerNavigator
         currentPage={current}
-        maxPage={compArray.length}
+        maxPage={data.length}
         onClick={setCurrent}
       />
     </div>
