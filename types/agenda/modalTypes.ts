@@ -1,4 +1,4 @@
-type AgendaModalType = 'notice' | 'proceedCheck';
+type AgendaModalType = 'notice' | 'proceedCheck' | 'modify';
 export interface agendaModal {
   type: AgendaModalType;
   title?: string;
@@ -11,4 +11,6 @@ export interface agendaModal {
   cancelText?: string;
   // 추가 버튼이 필요할 때
   extraButtons?: { text: string; callback: (e: React.MouseEvent) => void }[];
+  FormComponent?: React.FC<any>;
+  data?: any;
 }
