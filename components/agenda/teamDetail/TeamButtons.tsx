@@ -39,8 +39,11 @@ const TeamButtons = ({
       return null;
     case TeamStatus.CONFIRM:
       if (authority === Authority.LEADER) {
-        /** 리팩토링 예정 부분 - 팀 상태 확정일 시, 리더는 확정 취소 가능? */
-        return null;
+        return renderButton({
+          handleClick: () =>
+            manageTeamDetail && manageTeamDetail('PATCH', 'team/cancel'),
+          label: '폭파하기',
+        });
       } else {
         return null;
       }
