@@ -1,0 +1,65 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  position: relative;
+  border: 1px solid red;
+}
+
+.rest,
+.current {
+  padding: 0;
+  margin: 0;
+  background-color: var(--color-text);
+  border: none;
+  border-radius: 100%;
+  box-shadow: var(--default-box-shadow);
+}
+
+.current {
+  width: 0.7rem;
+  height: 0.7rem;
+}
+
+.rest {
+  width: 0.4rem;
+  height: 0.4rem;
+  opacity: 0.5;
+}
+
+.navContainer {
+  display: flex;
+  width: max-content;
+  max-width: 50%;
+  padding: 0.4rem;
+  margin: 0.5rem auto;
+  background: rgba(0, 0, 0, 0.01);
+  border-radius: 1rem;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+  gap: 0.8rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: calc(50% - 1rem);
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+}
+
+.prev {
+  left: 1.5rem;
+  border-top: 1rem solid transparent;
+  border-right: 1rem solid var(--color-text);
+  border-bottom: 1rem solid transparent;
+  border-left: 2rem solid transparent;
+}
+.next {
+  right: 1.5rem;
+  border-top: 1rem solid transparent;
+  border-right: 2rem solid transparent;
+  border-bottom: 1rem solid transparent;
+  border-left: 1rem solid var(--color-text);
+}

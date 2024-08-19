@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import type { NextPage } from 'next';
 import AgendaInfo from 'components/agenda/Home/AgendaInfo';
+import PageController from 'components/agenda/utils/PageController';
 import PingpongIcon from 'public/image/takgu/ping-pong.svg';
 import styles from 'styles/index.module.scss';
 
@@ -57,10 +58,13 @@ const Index: NextPage = () => {
           <PingpongIcon width='100%' height='100%' />
         </button>
       </div>
-      <div className={styles.container}>
-        <AgendaInfo agendaInfo={mockAgendaData} key={3} />
-        {/* <PageController current={} max={} /> */}
-      </div>
+      <PageController
+        compArray={[
+          <AgendaInfo agendaInfo={mockAgendaData} key={0} />,
+          <AgendaInfo agendaInfo={mockAgendaData} key={1} />,
+          <AgendaInfo agendaInfo={mockAgendaData} key={2} />,
+        ]}
+      />
 
       <button className={styles.container}>아우터 매치 준비중입니다.</button>
     </div>
