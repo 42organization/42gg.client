@@ -1,9 +1,13 @@
 @import 'styles/agenda/common.scss';
 
 .headerContainer {
+  position: fixed;
+  top: 0;
+  z-index: 2000;
   width: 100%;
   background-color: var(--color-header);
-  border-bottom: 2px solid var(--color-text);
+  border-bottom: var(--default-border);
+  box-shadow: var(--default-box-shadow);
 }
 
 .headerWrap {

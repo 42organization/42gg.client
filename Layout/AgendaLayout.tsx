@@ -17,8 +17,9 @@ function AgendaAppLayout({ children }: AgendaLayoutProps) {
 
   return (
     <>
-      <div className={styles.background}>
-        <AgendaHeader />
+      <AgendaHeader />
+      <div className={styles.background}></div>
+      <div className={styles.container}>
         {children}
         <Footer />
       </div>
