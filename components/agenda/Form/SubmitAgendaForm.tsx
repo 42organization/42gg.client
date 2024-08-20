@@ -2,7 +2,8 @@ import { instanceInAgenda } from 'utils/axios';
 
 const SubmitAgendaForm = async (
   e: React.FormEvent<HTMLFormElement>,
-  stringKey?: string
+  stringKey?: string,
+  closeModal?: () => void
 ) => {
   e.preventDefault();
 
@@ -12,7 +13,7 @@ const SubmitAgendaForm = async (
   const formatDate = (key: string) => {
     const value = data.get(key);
     if (value) {
-      data.set(key, `${value}:00.00Z`);
+      data.set(key, `${value}:00`);
     }
   };
 
@@ -62,6 +63,9 @@ const SubmitAgendaForm = async (
   // 데이터 전송
   try {
     const res = await instanceInAgenda.post(url, data);
+    if (res.status === 204) {
+      closeModal();
+    }
     console.log(res);
   } catch (err) {
     console.error(err);

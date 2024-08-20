@@ -8,19 +8,26 @@ import SelectInput from 'components/agenda/Input/SelectInput';
 import TimeInput from 'components/agenda/Input/TimeInput';
 import TitleInput from 'components/agenda/Input/TitleInput';
 import styles from 'styles/agenda/Form/Form.module.scss';
+import { useModal } from '../modal/useModal';
 
 interface CreateAgendaFormProps {
   isEdit?: boolean;
   data?: any;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleSubmit: (
+    e: React.FormEvent<HTMLFormElement>,
+    key?: string,
+    closeModal?: () => void
+  ) => void;
   submitId: string;
+  stringKey?: string;
 }
 
 const AgendaForm = ({
-  isEdit,
+  isEdit = false,
   data,
   handleSubmit,
   submitId,
+  stringKey,
 }: CreateAgendaFormProps) => {
   const minDistance = 10;
   // 날짜 초기화
@@ -148,11 +155,13 @@ const AgendaForm = ({
     setDateWarn(newWarning);
   }
 
+  const { closeModal } = useModal();
+
   return (
     <>
       <form
         onSubmit={(e) => {
-          handleSubmit(e);
+          handleSubmit(e, stringKey, closeModal);
         }}
         className={styles.container}
         id={submitId}
@@ -287,11 +296,31 @@ const AgendaForm = ({
             name='agendaLocation'
             label='대회 장소'
             options={['SEOUL', 'GYEONGSAN', 'MIX']}
+            selected={data ? data.agendaLocation : null}
           />
         </div>
+
         <div className={styles.bottomContainer}>
-          <CheckboxInput name='agendaIsRanking' label='대회 유무' />
+          <CheckboxInput
+            name={stringKey ? 'isRanking' : 'agendaIsRanking'}
+            label='대회 유무'
+          />
         </div>
+        {stringKey && (
+          <>
+            <div className={styles.bottomContainer}>
+              <CheckboxInput name='isOfficial' label='공식 여부' />
+            </div>
+            <div className={styles.bottomContainer}>
+              <SelectInput
+                name='agendaStatus'
+                label='대회 상태'
+                options={['CANCEL', 'OPEN', 'CONFIRM', 'FINISH']}
+                selected={data.agendaStatus}
+              />
+            </div>
+          </>
+        )}
       </form>
     </>
   );
