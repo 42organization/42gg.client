@@ -1,10 +1,14 @@
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import {
+  AxiosError,
+  AxiosRequestConfig,
+  AxiosResponse,
+  AxiosInstance,
+} from 'axios';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { instanceInManage } from 'utils/axios';
+import { instanceInAgenda, instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
-
-export default function useAxiosWithToast() {
+export default function useAxiosWithToast(instance: AxiosInstance) {
   const setSnackbar = useSetRecoilState(toastState);
 
   const getRequestRoute = (apiUrl: string) =>
@@ -20,14 +24,17 @@ export default function useAxiosWithToast() {
   };
 
   const errorResponseHandler = (error: AxiosError) => {
-    if (error.response?.data) return Promise.reject(error);
+    const errorDataMessage = (error.response?.data as { message?: string })
+      ?.message;
 
     switch (error.response?.status) {
       case 400:
         setSnackbar({
           toastName: `bad request`,
           severity: 'error',
-          message: `🔥 ${error.message} 🔥`,
+          message: errorDataMessage
+            ? `🔥 ${errorDataMessage} 🔥`
+            : `🔥 ${error.status}: ${error.message} 🔥`,
           clicked: true,
         });
         break;
@@ -35,7 +42,9 @@ export default function useAxiosWithToast() {
         setSnackbar({
           toastName: 'forbidden',
           severity: 'error',
-          message: `🔥 ${error.message} 🔥`,
+          message: errorDataMessage
+            ? `🔥 ${errorDataMessage} 🔥`
+            : `🔥 ${error.status}: ${error.message} 🔥`,
           clicked: true,
         });
         break;
@@ -43,7 +52,9 @@ export default function useAxiosWithToast() {
         setSnackbar({
           toastName: 'file size error',
           severity: 'error',
-          message: `🔥 ${error.message} 🔥`,
+          message: errorDataMessage
+            ? `🔥 ${errorDataMessage} 🔥`
+            : `🔥 ${error.status}: ${error.message} 🔥`,
           clicked: true,
         });
         break;
@@ -51,7 +62,9 @@ export default function useAxiosWithToast() {
         setSnackbar({
           toastName: 'file extension error',
           severity: 'error',
-          message: `🔥 ${error.message} 🔥`,
+          message: errorDataMessage
+            ? `🔥 ${errorDataMessage} 🔥`
+            : `🔥 ${error.status}: ${error.message} 🔥`,
           clicked: true,
         });
         break;
@@ -59,19 +72,27 @@ export default function useAxiosWithToast() {
         setSnackbar({
           toastName: 'default error',
           severity: 'error',
-          message: `🔥 ${error.code}: ${error.message} 🔥`,
+          message: errorDataMessage
+            ? `🔥 ${errorDataMessage} 🔥`
+            : `🔥 ${error.status}: ${error.message} 🔥`,
           clicked: true,
         });
         break;
     }
-    return;
+    return Promise.reject(error);
   };
 
   const responseHandler = (response: AxiosResponse) => {
     const { status, config } = response;
     const { method, url } = config;
 
-    if (method === 'get' && status === 200) return response;
+    if (instance === instanceInAgenda && method === 'get') return response;
+    else if (
+      instance === instanceInManage &&
+      method === 'get' &&
+      status === 200
+    )
+      return response;
 
     switch (status) {
       case 200:
@@ -116,20 +137,20 @@ export default function useAxiosWithToast() {
     return config;
   };
 
-  const responseInterceptor = instanceInManage.interceptors.response.use(
+  const responseInterceptor = instance.interceptors.response.use(
     (response) => responseHandler(response),
     (error) => errorResponseHandler(error)
   );
 
-  const requestInterceptor = instanceInManage.interceptors.request.use(
+  const requestInterceptor = instance.interceptors.request.use(
     (config) => requestHandler(config),
     (error) => errorRequestHandler(error)
   );
 
   useEffect(() => {
     return () => {
-      instanceInManage.interceptors.request.eject(requestInterceptor);
-      instanceInManage.interceptors.response.eject(responseInterceptor);
+      instance.interceptors.request.eject(requestInterceptor);
+      instance.interceptors.response.eject(responseInterceptor);
     };
   }, [responseInterceptor, requestInterceptor]);
 }

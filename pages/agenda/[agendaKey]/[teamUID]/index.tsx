@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { TeamDetailProps } from 'types/agenda/teamDetail/TeamDetailTypes';
+import { toastState } from 'utils/recoil/toast';
 import { Authority } from 'constants/agenda/agenda';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import TeamInfo from 'components/agenda/teamDetail/TeamInfo';
@@ -15,6 +17,8 @@ export default function TeamDetail() {
   const router = useRouter();
   const { agendaKey } = router.query;
   const { teamUID } = router.query;
+  const setSnackbar = useSetRecoilState(toastState);
+
   /**
    * API GET DATA
    * 1. intraId
@@ -77,9 +81,18 @@ export default function TeamDetail() {
       () => {
         // 팀 폭파 API : 아젠다 디테일 페이지로 이동
         if (url === 'team/cancel') {
+          setSnackbar({
+            toastName: `post request`,
+            severity: 'success',
+            message: `🔥 팀을 폭파했습니다! 🔥`,
+            clicked: true,
+          });
+          console.log('hi');
+
           router.push(`/agenda/${agendaKey}`);
         } else {
           // 그 외 API : 팀 상세 데이터 갱신
+
           getTeamDetail();
         }
       },
