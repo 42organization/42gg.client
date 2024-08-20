@@ -59,16 +59,9 @@ const Ticket = ({ type }: { type: string }) => {
           발급 시작
         </button>
       )}
-      <button
-        className={styles.logButton}
-        onClick={() => {
-          instanceInAgenda.get('/ticket/history?page=1&size=20').then((res) => {
-            console.log(res);
-          });
-        }}
-      >
-        내역 보기
-      </button>
+      <Link href='/agenda/ticket/history' style={{ width: '100%' }}>
+        <button className={styles.logButton}>내역 보기</button>
+      </Link>
     </div>
   ) : (
     <div className={styles.container}>
