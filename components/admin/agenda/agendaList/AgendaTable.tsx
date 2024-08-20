@@ -9,7 +9,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { instance } from 'utils/axios';
+import { instanceInAgenda } from 'utils/axios';
 import { dateToString } from 'utils/handleTime';
 import { toastState } from 'utils/recoil/toast';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
@@ -19,6 +19,7 @@ import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
 import ModifyAgendaForm from 'components/agenda/Form/ModifyAgendaForm';
 import { useModal } from 'components/agenda/modal/useModal';
 import PageNation from 'components/Pagination';
+import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
 
 const tableTitle: { [key: string]: string } = {
@@ -73,6 +74,8 @@ interface AgendaTableProps {
 
 export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
   const router = useRouter();
+  const { sendRequest } = useFetchRequest();
+
   const [agendaInfo, setAgendaInfo] = useState<IAgendaTable>({
     agendaList: [],
     totalPage: 0,
@@ -82,7 +85,56 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
   const setSnackBar = useSetRecoilState(toastState);
   const { openModal } = useModal();
   // const modal = useRecoilValue(modalState);
-  const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
+  const buttonList: string[] = [
+    styles.detail,
+    styles.delete,
+    styles.coin,
+    styles.penalty,
+  ];
+
+  const deleteAgenda = async (agenda: any) => {
+    const agendaKey = agenda.agendaKey;
+
+    const updatedAgenda = {
+      ...agenda,
+      agendaCurrentTeam: 0,
+      agendaStatus: 'CANCEL',
+      agendaPoster: null,
+    };
+    console.log(updatedAgenda);
+    const requestBody = {
+      agendaDto: {
+        agendaTitle: '대회 제목',
+        agendaContent: '대회 내용',
+        agendaDeadLine: '2024-08-19T16:53:05',
+        agendaStartTime: '2024-08-19T16:53:05',
+        agendaEndTime: '2024-08-19T16:53:05',
+        agendaMinTeam: 1, // 0 이상으로 설정
+        agendaMaxTeam: 10, // 0 이상으로 설정
+        agendaMinPeople: 1, // 0 이상으로 설정
+        agendaMaxPeople: 100, // 0 이상으로 설정
+        agendaPosterUri: '포스터 URI',
+        agendaLocation: 'SEOUL',
+        isOfficial: true,
+        isRanking: true,
+        agendaStatus: 'CANCEL',
+      },
+      agendaPoster: '포스터 URI',
+    };
+
+    await sendRequest(
+      'POST',
+      `admin/request?agenda_key=${agendaKey}`,
+      updatedAgenda,
+      undefined,
+      (data) => {
+        alert('삭제 요청이 성공적으로 전송되었습니다.');
+      },
+      (error) => {
+        alert('삭제 요청에 실패했습니다: ' + error);
+      }
+    );
+  };
 
   const handleButtonAction = (buttonName: string, agenda: any) => {
     const agendaKey = agenda.agendaKey;
@@ -98,6 +150,9 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
           stringKey: agendaKey,
         });
         break;
+      case '삭제':
+        deleteAgenda(agenda);
+        break;
       case '팀 목록':
         router.push(`/admin/agenda/teamList?agendaKey=${agendaKey}`);
         break;
@@ -109,8 +164,8 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
 
   const getAgendaList = useCallback(async () => {
     try {
-      const getData = await instance.get(
-        `/agenda/admin/request/list?page=${currentPage}&size=10`
+      const getData = await instanceInAgenda.get(
+        `/admin/request/list?page=${currentPage}&size=10`
       );
       // setSnackBar({
       //   toastName: 'GET request',

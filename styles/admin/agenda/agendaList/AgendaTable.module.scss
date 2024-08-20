@@ -54,6 +54,14 @@
                 transition: 0.3s;
               }
             }
+            .delete {
+              color: white;
+              background-color: #f09035;
+              &:hover {
+                background-color: #d07c2e;
+                transition: 0.3s;
+              }
+            }
             .coin {
               color: white;
               background-color: #10b981;
