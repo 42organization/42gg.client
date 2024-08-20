@@ -1,6 +1,7 @@
 // import { useRouter } from 'next/router';
 import AgendaModalProvider from 'components/agenda/modal/AgendaModalProvider';
 import Footer from 'components/takgu/Layout/Footer';
+import CustomizedSnackbars from 'components/toastmsg/toastmsg';
 import { useUser } from 'hooks/agenda/Layout/useUser';
 import styles from 'styles/agenda/Layout/Layout.module.scss';
 
@@ -20,6 +21,7 @@ function AgendaAppLayout({ children }: AgendaLayoutProps) {
         <Footer />
       </div>
       <AgendaModalProvider />
+      <CustomizedSnackbars />
     </>
   );
 }
