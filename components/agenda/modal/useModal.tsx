@@ -9,9 +9,19 @@ export const useModal = () => {
     setModalState(props);
   };
 
-  const closeModal = (e: React.MouseEvent) => {
+  const closeModal = () => {
     setModalState(null);
   };
 
-  return { openModal, closeModal };
+  const handleCancel = (onCancel?: () => void) => {
+    if (onCancel) onCancel();
+    closeModal();
+  };
+
+  const handleProceed = (onProceed?: () => void) => {
+    if (onProceed) onProceed();
+    closeModal();
+  };
+
+  return { openModal, closeModal, handleCancel, handleProceed };
 };
