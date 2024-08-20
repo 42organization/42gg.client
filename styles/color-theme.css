@@ -26,11 +26,11 @@
   --highlight-violet-dark: #af71ff;
 
   --box-bg-1-light: #f8f8f8;
-  --box-bg-2-light: #c8c8c8;
-  --box-bg-3-light: #b0b0b0;
+  --box-bg-2-light: #c8c8c886;
+  --box-bg-3-light: #b0b0b06e;
   --box-bg-3-dark: #000000;
-  --box-bg-2-dark: #232323;
-  --box-bg-1-dark: #3a363b;
+  --box-bg-2-dark: #2323238a;
+  --box-bg-1-dark: #3a363b7d;
 
   --contianer-color-gray: rgba(201, 201, 201, 0.55);
 }
