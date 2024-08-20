@@ -5,6 +5,7 @@ import AgendaHistory from 'components/agenda/Profile/AgendaHistory';
 import AgendaUserSearchBar from 'components/agenda/Profile/AgendaUserSearchBar';
 import CurrentTeam from 'components/agenda/Profile/CurrentTeam';
 import ProfileCard from 'components/agenda/Profile/ProfileCard';
+import Ticket from 'components/agenda/Ticket/Ticket';
 import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/Profile/AgendaProfile.module.scss';
 
@@ -89,6 +90,7 @@ export default function AgendaProfile() {
             getProfileData={getProfileData}
           />
         )}
+        <Ticket type='component' />
         {currentTeamData && <CurrentTeam currentTeamData={currentTeamData} />}
         {agendaHistory && <AgendaHistory agendaHistory={agendaHistory} />}
       </div>
