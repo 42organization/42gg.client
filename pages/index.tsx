@@ -1,25 +1,45 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import type { NextPage } from 'next';
+import PageController from 'components/agenda/utils/PageController';
+import PingpongIcon from 'public/image/takgu/ping-pong.svg';
 import styles from 'styles/index.module.scss';
+
 const Index: NextPage = () => {
   const router = useRouter();
-
   const handleNavigation = (path: string) => {
     router.push(path);
   };
 
   return (
     <div className={styles.layout}>
+      <h2 className={styles.title} onClick={() => handleNavigation('/agenda')}>
+        Agenda
+      </h2>
+      <PageController handleNavigation={handleNavigation} />
+      <h2 className={styles.title}>Ticket & PingPong</h2>
       <div className={styles.flex}>
-        <div className={styles.container}> GG </div>
-        <div className={styles.container}> 다른거 </div>
+        <button
+          className={styles.container}
+          onClick={() => handleNavigation('/agenda/ticket')}
+        >
+          <Image
+            src='/image/ticket.png'
+            alt='ticket'
+            width={0}
+            height={0}
+            style={{ width: '100%', height: '100%' }}
+          />
+        </button>
+        <button
+          className={styles.container}
+          onClick={() => handleNavigation('/takgu')}
+        >
+          <PingpongIcon width='100%' height='100%' />
+        </button>
       </div>
 
-      <button onClick={() => handleNavigation('/takgu')}>42gg</button>
-      <button onClick={() => handleNavigation('/agenda')}>Agenda</button>
-      <button onClick={() => handleNavigation('/outerMatch')}>
-        Go to Outer match
-      </button>
+      <button className={styles.container}>아우터 매치 준비중입니다.</button>
     </div>
   );
 };

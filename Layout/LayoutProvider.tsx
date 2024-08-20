@@ -18,7 +18,7 @@ const LayoutProvider = ({ children }: LayoutProviderProps) => {
     // case "admin" :
     //   return <AdminAppLayout>{children}</AdminAppLayout>;
     default:
-      return <>{children}</>;
+      return <AgendaAppLayout>{children}</AgendaAppLayout>;
   }
 };
 
