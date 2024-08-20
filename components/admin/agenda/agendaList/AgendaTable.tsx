@@ -95,6 +95,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
           FormComponent: ModifyAgendaForm,
           data: agenda,
           submitId: 'modifyAgenda',
+          stringKey: agendaKey,
         });
         break;
       case '팀 목록':

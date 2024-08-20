@@ -9,11 +9,7 @@ const CreateAgendaForm = ({ handleSubmit }: CreateAgendaFormProps) => {
 
   return (
     <>
-      <AgendaForm
-        isEdit={false}
-        handleSubmit={handleSubmit}
-        submitId={submitId}
-      />
+      <AgendaForm handleSubmit={handleSubmit} submitId={submitId} />
       <div className={styles.bottomContainer}>
         <div className={styles.buttonContainer}>
           <button type='submit' form={submitId}>

@@ -14,4 +14,5 @@ export interface agendaModal {
   FormComponent?: React.FC<any>;
   data?: any;
   submitId?: string;
+  stringKey?: string;
 }

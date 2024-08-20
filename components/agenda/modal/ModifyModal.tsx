@@ -1,11 +1,11 @@
 import { agendaModal } from 'types/agenda/modalTypes';
 import { useModal } from 'components/agenda/modal/useModal';
-import { SubmitTeamForm } from 'pages/agenda/create';
 import styles from 'styles/agenda/modal/modal.module.scss';
 
 interface FormComponentProps {
   data: any;
   submitId: string;
+  stringKey: string;
 }
 
 interface ModifyModalProps extends agendaModal {
@@ -13,9 +13,18 @@ interface ModifyModalProps extends agendaModal {
 }
 
 const ModifyModal: React.FC<ModifyModalProps> = (props) => {
-  const { title, description, onCancel, FormComponent, data, submitId } = props;
+  const {
+    title,
+    description,
+    onCancel,
+    FormComponent,
+    data,
+    submitId,
+    stringKey,
+  } = props;
   const { handleCancel } = useModal();
   const submitIdString = submitId ? submitId : '';
+  const key = stringKey ? stringKey : '';
 
   return (
     <>
@@ -31,7 +40,11 @@ const ModifyModal: React.FC<ModifyModalProps> = (props) => {
 
         <div className={styles.formContainer}>
           {FormComponent && (
-            <FormComponent data={data} submitId={submitIdString} />
+            <FormComponent
+              data={data}
+              submitId={submitIdString}
+              stringKey={key}
+            />
           )}
         </div>
         <div className={styles.buttonContainer}>

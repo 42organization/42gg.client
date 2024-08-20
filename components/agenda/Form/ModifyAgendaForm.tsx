@@ -1,4 +1,4 @@
-import { SubmitAgendaForm } from 'pages/agenda/create';
+import SubmitAgendaForm from 'components/agenda/Form/SubmitAgendaForm';
 import AgendaForm from './AgendaFrom';
 
 interface ModifyAgendaFormProps {
@@ -22,9 +22,14 @@ interface ModifyAgendaFormProps {
     agendaPosterUrl: string;
   };
   submitId: string;
+  stringKey: string;
 }
 
-const ModifyAgendaForm = ({ data, submitId }: ModifyAgendaFormProps) => {
+const ModifyAgendaForm = ({
+  data,
+  submitId,
+  stringKey,
+}: ModifyAgendaFormProps) => {
   return (
     <>
       <AgendaForm
@@ -32,6 +37,7 @@ const ModifyAgendaForm = ({ data, submitId }: ModifyAgendaFormProps) => {
         data={data}
         handleSubmit={SubmitAgendaForm}
         submitId={submitId}
+        stringKey={stringKey}
       />
     </>
   );
