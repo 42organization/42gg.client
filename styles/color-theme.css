@@ -1,7 +1,10 @@
 /* dark - light mode */
 :root {
-  --bg-light: linear-gradient(180deg, #c9c9c9 0%, #6d5b93 100%);
+  --bg-light: linear-gradient(180deg, #a9a2b9 0%, #c9c9c9 100%);
   --bg-dark: linear-gradient(180deg, #38253a 0%, #604ecd 73%, #999772 100%);
+  --header-bg-light: #a9a2b9;
+  --header-bg-dark: #49344e;
+
   --text-light: #000000;
   --text-grey: #898989;
   --text-dark: #ffffff;
@@ -34,6 +37,7 @@
 
 html[data-theme='light'] {
   --color-bg: var(--bg-light);
+  --color-header: var(--header-bg-light);
   --color-text: var(--text-light);
   --color-text-reverse: var(--text-dark);
   --default-border: var(--border-light);
@@ -48,6 +52,7 @@ html[data-theme='light'] {
 
 html[data-theme='dark'] {
   --color-bg: var(--bg-dark);
+  --color-header: var(--header-bg-dark);
   --color-text: var(--text-dark);
   --color-text-reverse: var(--text-light);
   --default-border: var(--border-dark);
