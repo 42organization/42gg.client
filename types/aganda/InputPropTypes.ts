@@ -53,6 +53,7 @@ export interface DescriptionProps {
   label: string;
   placeholder: string;
   defaultValue?: string;
+  rest?: Record<string, unknown> | undefined;
 }
 
 export interface ImageProps {

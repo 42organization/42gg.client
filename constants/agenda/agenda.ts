@@ -17,6 +17,14 @@ export const enum TeamStatus {
   CONFIRM = 'CONFIRM',
 }
 
+export const enum Authority {
+  HOST = 'HOST',
+  LEADER = 'LEADER',
+  MEMBER = 'MEMBER',
+  GEUST = 'GEUST',
+  NONE = 'NONE',
+}
+
 export const enum Coalition {
   GUN = 'GUN',
   GON = 'GON',

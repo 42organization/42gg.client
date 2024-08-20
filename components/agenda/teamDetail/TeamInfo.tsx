@@ -1,68 +1,108 @@
-import { TeamDetailProps } from 'types/aganda/TeamDetailTypes';
-import { Coalition } from 'constants/agenda/agenda';
-import colorstyles from 'styles/agenda/coalition.module.scss';
+import { useState } from 'react';
+import { TeamInfoProps } from 'types/agenda/teamDetail/TeamInfoTypes';
+import { colorMapping } from 'types/agenda/utils/colorList';
+import { TeamStatus, Authority } from 'constants/agenda/agenda';
+import { ShareBtn } from 'components/agenda/button/Buttons';
+import CreateTeamForm from 'components/agenda/Form/CreateTeamForm';
+import TeamButtons from 'components/agenda/teamDetail/TeamButtons';
+import EditIcon from 'public/image/agenda/edit.svg';
 import styles from 'styles/agenda/TeamDetail/TeamInfo.module.scss';
-import { ShareBtn } from '../button/Buttons';
 
-//인원 받아올려면 Team Max 인원 받아와야 함
 const TeamInfo = ({
   teamDetail,
   shareTeamInfo,
-}: {
-  teamDetail: TeamDetailProps;
-  shareTeamInfo: () => void;
-}) => {
-  const colorMapping: { [key: string]: string } = {
-    [Coalition.GUN]: colorstyles.bg_gun,
-    [Coalition.GON]: colorstyles.bg_gon,
-    [Coalition.GAM]: colorstyles.bg_gam,
-    [Coalition.LEE]: colorstyles.bg_lee,
-    [Coalition.SPRING]: colorstyles.bg_spring,
-    [Coalition.SUMMER]: colorstyles.bg_summer,
-    [Coalition.AUTUMN]: colorstyles.bg_autumn,
-    [Coalition.WINTER]: colorstyles.bg_winter,
-    [Coalition.OTHER]: colorstyles.bg_default,
+  maxPeople,
+  authority,
+  manageTeamDetail,
+  submitTeamForm,
+}: TeamInfoProps) => {
+  // EditTeam UI <-> TeamInfo UI 전환
+  const [convert, setConvert] = useState(true);
+
+  const handleConvert = () => {
+    setConvert(!convert);
   };
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <h1>{teamDetail.teamName}</h1>
-        <ShareBtn onClick={shareTeamInfo} />
-      </div>
-      <div className={styles.description}>
-        <p>{teamDetail.teamContent}</p>
-      </div>
-      <div className={styles.teamMateInfo}>
-        {teamDetail.teamMates?.map((mate, idx) => {
-          const isConnectedUp =
-            (idx > 0 &&
-              teamDetail.teamMates[idx - 1].coalition === mate.coalition) ||
-            false;
-          const isConnectedDown =
-            (idx < teamDetail.teamMates.length - 1 &&
-              teamDetail.teamMates[idx + 1].coalition === mate.coalition) ||
-            false;
-          return (
-            <div className={styles.mateContainer} key={idx}>
-              <div
-                className={`${styles.coalitionColor} ${
-                  isConnectedUp ? styles.connectedUp : ''
-                } ${isConnectedDown ? styles.connectedDown : ''} ${
-                  colorMapping[mate.coalition]
-                }`}
-              ></div>
-              <div className={styles.mateName}>
-                <p>
-                  {mate.intraId}{' '}
-                  {mate.intraId === teamDetail.teamLeaderIntraId && '👑'}
-                </p>
-              </div>
+  return convert ? (
+    /* TeamInfo */
+    <>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h1>{teamDetail.teamName}</h1>
+          {teamDetail.teamStatus === TeamStatus.OPEN &&
+          authority === Authority.LEADER ? (
+            <div className={styles.iconWrapper}>
+              <EditIcon onClick={() => setConvert(!convert)} />
             </div>
-          );
-        })}
+          ) : (
+            ''
+          )}
+
+          <div className={styles.marginTop}>
+            <ShareBtn onClick={shareTeamInfo} />
+          </div>
+        </div>
+
+        <div className={styles.description}>
+          <p>{teamDetail.teamContent}</p>
+        </div>
+
+        <div className={styles.teamMateInfo}>
+          {teamDetail.teamMates?.map((mate, idx) => {
+            const isConnectedUp =
+              (idx > 0 &&
+                teamDetail.teamMates[idx - 1].coalition === mate.coalition) ||
+              false;
+            const isConnectedDown =
+              (idx < teamDetail.teamMates.length - 1 &&
+                teamDetail.teamMates[idx + 1].coalition === mate.coalition) ||
+              false;
+            return (
+              <div className={styles.mateContainer} key={idx}>
+                <div
+                  className={`${styles.coalitionColor} ${
+                    isConnectedUp ? styles.connectedUp : ''
+                  } ${isConnectedDown ? styles.connectedDown : ''} ${
+                    colorMapping[mate.coalition]
+                  }`}
+                ></div>
+
+                <div className={styles.mateName}>
+                  <p>
+                    {mate.intraId}{' '}
+                    {mate.intraId === teamDetail.teamLeaderIntraId && '👑'}
+                  </p>
+                </div>
+
+                <div className={styles.mateCount}>
+                  <div className={styles.countBox}>참여인원</div>
+                  <div>{`${teamDetail.teamMates.length} / ${maxPeople}`}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+
+      <TeamButtons
+        authority={authority}
+        teamStatus={teamDetail.teamStatus}
+        manageTeamDetail={manageTeamDetail}
+      />
+    </>
+  ) : (
+    /* EditTeam */
+    <>
+      <div className={styles.container}>
+        <h2 className={styles.title}>팀 수정하기</h2>
+        <CreateTeamForm
+          handleSubmit={submitTeamForm}
+          location={teamDetail.teamLocation}
+          teamDetail={teamDetail}
+          handleConvert={handleConvert}
+        />
+      </div>
+    </>
   );
 };
 

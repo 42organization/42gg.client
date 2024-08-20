@@ -1,71 +1,158 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { TeamDetailProps } from 'types/aganda/TeamDetailTypes';
-import { TeamStatus, Coalition, AgendaLocation } from 'constants/agenda/agenda';
-import TeamButtons from 'components/agenda/teamDetail/TeamButtons';
+import { useState, useEffect } from 'react';
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
+import { TeamDetailProps } from 'types/agenda/teamDetail/TeamDetailTypes';
+import { Authority } from 'constants/agenda/agenda';
+import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import TeamInfo from 'components/agenda/teamDetail/TeamInfo';
-// import { useUser } from 'hooks/takgu/Layout/useUser';
+import { useUser } from 'hooks/agenda/Layout/useUser';
+import useFetchGet from 'hooks/agenda/useFetchGet';
+import useFetchRequest from 'hooks/agenda/useFetchRequest';
+import styles from 'styles/agenda/TeamDetail/TeamDetail.module.scss';
 
-export default function TeamDetail({ intraId }: { intraId: string }) {
+export default function TeamDetail() {
   const router = useRouter();
-  console.log(router.query);
+  const { agendaKey } = router.query;
   const { teamUID } = router.query;
+  /**
+   * API GET DATA
+   * 1. intraId
+   * 2. agenda Data
+   * 3. teamDetail Data
+   */
+  const intraId = useUser()?.intraId;
 
-  //테스트용
-  intraId = 'leader';
-  // intraId = 'member1';
-  // intraId = 'notMember';
+  const agendaData = useFetchGet<AgendaDataProps>(`/`, {
+    agenda_key: agendaKey,
+  }).data;
 
-  const [teamDetail, setTeamDetail] = useState<TeamDetailProps>({
-    teamName: '팀이름',
-    teamLeaderIntraId: 'leader',
-    teamStatus: TeamStatus.OPEN, //e
-    teamLocation: AgendaLocation.MIX, //e
-    teamContent: '우리팀이세계최강팀',
-    teamMates: [
-      {
-        intraId: 'leader',
-        coalition: Coalition.GUN, //e
-      },
-      {
-        intraId: 'member1',
-        coalition: Coalition.SPRING,
-      },
-      {
-        intraId: 'member1',
-        coalition: Coalition.SPRING,
-      },
-      {
-        intraId: 'member1',
-        coalition: Coalition.SPRING,
-      },
-      {
-        intraId: 'member2',
-        coalition: Coalition.SUMMER,
-      },
-    ],
-  });
+  const { data: teamDetailData, getData: getTeamDetail } =
+    useFetchGet<TeamDetailProps>('/team', {
+      teamKey: teamUID,
+      agenda_key: agendaKey,
+    });
 
-  if (teamDetail.teamStatus === TeamStatus.CANCEL) {
-    setTeamDetail({ ...teamDetail, teamStatus: TeamStatus.CONFIRM });
-  }
+  /**
+   *  useEffect / API GET 얻은 데이터 teamDetail, authority 할당
+   */
+  const [teamDetail, setTeamDetail] = useState<TeamDetailProps | null>(null);
+  const [authority, setAuthority] = useState<Authority>(Authority.NONE);
+
+  useEffect(() => {
+    if (intraId && agendaData && teamDetailData) {
+      const userRole =
+        intraId === agendaData?.agendaHost
+          ? Authority.HOST
+          : intraId === teamDetailData.teamLeaderIntraId
+          ? Authority.LEADER
+          : teamDetailData.teamMates.find((mate) => mate.intraId === intraId)
+          ? Authority.MEMBER
+          : Authority.GEUST;
+      setAuthority(userRole);
+      setTeamDetail(teamDetailData);
+    }
+  }, [intraId, agendaData, teamDetailData]);
+
+  /**
+   * Button Click Fucntions
+   */
+  const sendRequest = useFetchRequest().sendRequest;
 
   const shareTeamInfo = () => {
     alert('공유하기');
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
   };
-  const authority =
-    intraId === teamDetail.teamLeaderIntraId
-      ? 'LEADER'
-      : teamDetail.teamMates.find((mate) => mate.intraId === intraId)
-      ? 'MEMBER'
-      : 'NONE';
-  console.log(authority, intraId);
+
+  const manageTeamDetail = async (method: 'POST' | 'PATCH', url: string) => {
+    sendRequest(
+      method,
+      url,
+      {},
+      {
+        agenda_key: agendaKey,
+        teamKey: teamUID,
+      },
+      () => {
+        // 팀 폭파 API : 아젠다 디테일 페이지로 이동
+        if (url === 'team/cancel') {
+          router.push(`/agenda/${agendaKey}`);
+        } else {
+          // 그 외 API : 팀 상세 데이터 갱신
+          getTeamDetail();
+        }
+      },
+      (err: string) => {
+        console.error(err);
+      }
+    );
+  };
+
+  const submitTeamForm = (target: React.FormEvent<HTMLFormElement>) => {
+    target.preventDefault();
+    const formData = new FormData(target.currentTarget);
+    const strData = JSON.stringify(Object.fromEntries(formData));
+    const data = JSON.parse(strData);
+
+    data.teamIsPrivate = data.teamIsPrivate === 'on' ? true : false;
+    switch (data.teamLocation) {
+      case '서울':
+        data.teamLocation = 'SEOUL';
+        break;
+      case '경산':
+        data.teamLocation = 'GYEONGSAN';
+        break;
+      case '둘다':
+        data.teamLocation = 'MIX';
+        break;
+    }
+    data.teamContent = data.teamContent.trim();
+    data.teamName = data.teamName.trim();
+    if (data.teamName === '' || data.teamContent === '') {
+      alert('모든 항목을 입력해주세요.'); //임시
+      return;
+    }
+
+    sendRequest(
+      'PATCH',
+      'team',
+      {
+        teamKey: teamUID,
+        teamIsPrivate: data.teamIsPrivate,
+        teamLocation: data.teamLocation,
+        teamName: data.teamName,
+        teamContent: data.teamContent,
+      },
+      {
+        agenda_key: agendaKey,
+      },
+      () => {
+        getTeamDetail();
+      },
+      (err: string) => {
+        console.error(err);
+      }
+    );
+  };
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {/* <AgendaInfo type='team' /> 이거 어케 가져오지 */}
-      <TeamInfo teamDetail={teamDetail} shareTeamInfo={shareTeamInfo} />
-      <div>teamKey: {teamUID}</div>
-      <TeamButtons authority={authority} />
+    <div className={styles.teamDeatil}>
+      {agendaData && (
+        <Link href={`/agenda/${agendaKey}`} className={styles.agendaLink}>
+          <AgendaInfo agendaData={agendaData} />
+        </Link>
+      )}
+      {teamDetail && agendaData && (
+        <TeamInfo
+          teamDetail={teamDetail}
+          shareTeamInfo={shareTeamInfo}
+          maxPeople={agendaData.agendaMaxPeople}
+          authority={authority}
+          manageTeamDetail={manageTeamDetail}
+          submitTeamForm={submitTeamForm}
+        />
+      )}
     </div>
   );
 }
