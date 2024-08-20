@@ -1,0 +1,17 @@
+@import 'styles/agenda/common.scss';
+
+.teamDetail {
+  display: flex;
+  flex-direction: column;
+}
+
+.agendaLink {
+  display: flex;
+  width: calc(100% - 2rem);
+  max-width: 1200px;
+  flex-direction: column;
+  margin: 1rem;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}

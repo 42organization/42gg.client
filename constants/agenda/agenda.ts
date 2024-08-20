@@ -12,9 +12,17 @@ export const enum AgendaStatus {
 }
 
 export const enum TeamStatus {
-  OPEN,
-  CANCEL,
-  CONFIRM,
+  OPEN = 'OPEN',
+  CANCEL = 'CANCEL',
+  CONFIRM = 'CONFIRM',
+}
+
+export const enum Authority {
+  HOST = 'HOST',
+  LEADER = 'LEADER',
+  MEMBER = 'MEMBER',
+  GEUST = 'GEUST',
+  NONE = 'NONE',
 }
 
 export const enum Coalition {

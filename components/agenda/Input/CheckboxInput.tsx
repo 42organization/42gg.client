@@ -1,8 +1,13 @@
 import { CheckboxProps } from 'types/aganda/InputPropTypes';
 import styles from 'styles/agenda/Input/CheckboxInput.module.scss';
-// import Input from './Input';
 
-const CheckBoxInput = ({ name, label, options, ...rest }: CheckboxProps) => {
+const CheckBoxInput = ({
+  name,
+  label,
+  options,
+  checked,
+  ...rest
+}: CheckboxProps) => {
   return (
     <div className={styles.container}>
       {options && options.length > 0 ? (
@@ -18,7 +23,7 @@ const CheckBoxInput = ({ name, label, options, ...rest }: CheckboxProps) => {
               type={'checkbox'}
               id={option}
               className={styles.checkBoxInput}
-              checked={false}
+              defaultChecked={false}
             />
           </>
         ))
@@ -31,6 +36,7 @@ const CheckBoxInput = ({ name, label, options, ...rest }: CheckboxProps) => {
             name={name}
             type='checkbox'
             id={name}
+            defaultChecked={checked}
             className={styles.checkbox}
             {...rest}
           />
