@@ -59,26 +59,44 @@ const PageController = ({
       setData(data);
     });
   }, []);
+  useEffect(() => {
+    const interval = setInterval(moveNext, 2000);
+    return () => clearInterval(interval);
+  });
+
+  function moveNext() {
+    setCurrent(current + 1 < max ? current + 1 : 0);
+  }
+  function movePrev() {
+    setCurrent(current - 1 >= 0 ? current - 1 : max - 1);
+  }
 
   return (
     <div className={styles.container}>
       <button
         className={styles.agendaInfoContainer}
-        onClick={() =>
+        onClick={(e) => {
+          const target = e.target as HTMLElement;
+          console.log(target);
+          if (
+            target.className.includes(styles.moveButton) ||
+            target.closest(styles.moveButton)
+          )
+            return;
           data.length && data[current]
             ? handleNavigation('/agenda/' + data[current].agendaKey)
-            : null
-        }
+            : null;
+        }}
       >
         <button
-          onClick={() => setCurrent(current - 1 >= 0 ? current - 1 : max - 1)}
-          className={styles.moveButtonPrev}
+          onClick={movePrev}
+          className={`${styles.moveButton} ${styles.moveButtonPrev}`}
         >
           <div className={styles.prev} />
         </button>
         <button
-          className={styles.moveButtonNext}
-          onClick={() => setCurrent(current + 1 < max ? current + 1 : 0)}
+          className={`${styles.moveButton} ${styles.moveButtonNext}`}
+          onClick={moveNext}
         >
           <div className={styles.next} />
         </button>
