@@ -1,4 +1,4 @@
-@import '../../styles/agenda/common.scss';
+@import 'styles/agenda/common.scss';
 // @import url('../../styles/globals.css');
 
 #container {
@@ -17,7 +17,7 @@
 }
 
 .test_box {
-  border-radius: $medium-radius;
+  border-radius: $radius-medium;
   border: var(--default-border);
   box-shadow: var(--default-box-shadow);
   background: var(--box-bg-1);
@@ -31,5 +31,5 @@
 }
 
 h1 {
-  font-family: $font-family-menu;
+  font-family: $font-menu;
 }

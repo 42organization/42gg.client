@@ -51,6 +51,8 @@ export interface DescriptionProps {
   name: string;
   label: string;
   placeholder: string;
+  defaultValue?: string;
+  rest?: Record<string, unknown> | undefined;
 }
 
 export interface ImageProps {
@@ -76,5 +78,6 @@ export interface TitleInputProps {
   name: string;
   label: string;
   placeholder?: string;
+  defaultValue?: string;
   rest?: Record<string, unknown> | undefined;
 }

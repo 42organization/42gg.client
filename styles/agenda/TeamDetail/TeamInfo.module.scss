@@ -4,13 +4,31 @@
   @include container(1);
 }
 
+/* TeamInfo */
 .header {
   display: flex;
   justify-content: space-between;
-  width: calc(100% - 2rem);
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+  gap: 0.5rem;
   > h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    @include text('title');
+  }
+
+  .iconWrapper {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+  }
+
+  .marginTop {
+    margin-top: 0.4rem;
   }
 }
 
@@ -18,13 +36,12 @@
   @include container(2);
   border-top-left-radius: 0;
   > p {
-    @include text('description');
-    // font-size: 1rem;
-    // font-weight: 500;
+    @include text('default');
   }
 }
 
 .teamMateInfo {
+  position: relative;
   display: flex;
   width: 100%;
   height: 100%;
@@ -70,9 +87,55 @@
 }
 
 .mateName {
-  @include text('name');
+  @include text('default');
   display: flex;
-  font-size: 1rem;
-  font-weight: 500;
   align-items: center;
+}
+
+.mateCount {
+  position: absolute;
+  right: 1rem;
+  bottom: 1.5rem;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 0.5rem;
+  width: 10rem;
+  height: 2rem;
+  @include text('default');
+
+  .countBox {
+    padding: 0.3rem;
+    background: var(--box-bg-3);
+    border: none;
+    border-radius: $radius-extra-small;
+  }
+}
+
+/* EditTeam */
+.editContainer {
+  @include container(1);
+  gap: 2.5rem;
+
+  .editTeamTitle {
+    @include text(title);
+  }
+
+  .teamName {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .teamNameText {
+      @include text(sub-title);
+    }
+
+    .teamNameInput {
+      width: 80%;
+      height: 2rem;
+      padding-left: 0.3rem;
+      border-radius: $radius-extra-small;
+    }
+  }
 }

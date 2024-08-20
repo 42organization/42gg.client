@@ -71,7 +71,6 @@ function TakguLayout({ children }: TakguLayoutProps) {
             {children}
             <Footer />
           </UserLayout>
-          <ModalProvider />
         </>
       );
     default:
