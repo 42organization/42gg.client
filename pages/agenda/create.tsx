@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { instanceInAgenda } from 'utils/axios';
 import { CancelBtn } from 'components/agenda/button/Buttons';
 import CreateAgendaForm from 'components/agenda/Form/CreateAgendaForm';
@@ -7,10 +8,12 @@ const saveLocal = () => {
   // 임시저장 추후 추가
 };
 
-export const submitTeamForm = async (e: React.FormEvent<HTMLFormElement>) => {
+export const SubmitAgendaForm = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
+
   const data = new FormData(e.target as HTMLFormElement);
   if (!data) return;
+
   data.set('agendaStartTime', data.get('agendaStartTime') + ':00.00Z');
   data.set('agendaEndTime', data.get('agendaEndTime') + ':00.00Z');
   data.set('agendaDeadLine', data.get('agendaDeadLine') + ':00.00Z');
@@ -43,14 +46,19 @@ export const submitTeamForm = async (e: React.FormEvent<HTMLFormElement>) => {
     alert('jpg, jpeg 파일만 업로드 가능합니다.');
     return;
   }
-  await instanceInAgenda
-    .post('/request', data)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+
+  console.log(data);
+  //   ? '/request'
+  //   : '/admin/request';
+
+  // await instanceInAgenda
+  //   .post(url, data)
+  //   .then((res) => {
+  //     console.log(res);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 };
 
 export const CreateAgenda = () => {
@@ -61,9 +69,9 @@ export const CreateAgenda = () => {
       </div>
       <h2 className={styles.title}>새로운 아젠다 만들기</h2>
       <p className={styles.description}>당부사항</p>
-      <CreateAgendaForm handleSubmit={submitTeamForm} />
+      <CreateAgendaForm handleSubmit={SubmitAgendaForm} />
     </div>
   );
 };
 
-// export default CreateAgenda;
+export default CreateAgenda;

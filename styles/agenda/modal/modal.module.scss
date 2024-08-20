@@ -5,20 +5,31 @@
 
   display: flex;
   width: 20rem;
+  // width: 20rem;
   height: max-content;
   flex-direction: column;
+
+  &.wide {
+    width: 60%;
+    gap: 1rem;
+  }
 }
 
 .titleContainer {
   width: 100%;
+  padding: 0.5rem 1rem;
   > h1 {
     @include text(sub-title);
     // font-size: $font-size-s;
   }
 }
 
-// .contentContainer {
-// }
+.contentContainer {
+  &.left {
+    width: 100%;
+    padding: 0 1rem;
+  }
+}
 
 .buttonContainer {
   display: flex;
@@ -31,4 +42,11 @@
     width: 6rem;
     height: max-content;
   }
+}
+
+.formContainer {
+  width: 100%;
+  max-height: 30rem; // 최대 높이
+  padding: 1rem; // 필요에 따라 패딩 추가
+  overflow-y: auto; // 수직 스크롤 가능
 }

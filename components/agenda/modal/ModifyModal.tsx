@@ -1,17 +1,22 @@
 import { agendaModal } from 'types/agenda/modalTypes';
 import { useModal } from 'components/agenda/modal/useModal';
+import { SubmitTeamForm } from 'pages/agenda/create';
 import styles from 'styles/agenda/modal/modal.module.scss';
 
-const ModifyModal = (
-  props: agendaModal & {
-    FormComponent: React.ComponentType<{
-      data: any;
-    }>;
-  }
-) => {
-  const { title, description, onCancel, onProceed, FormComponent, data } =
-    props;
-  const { handleCancel, handleProceed } = useModal();
+interface FormComponentProps {
+  data: any;
+  submitId: string;
+}
+
+interface ModifyModalProps extends agendaModal {
+  FormComponent?: React.FC<FormComponentProps>;
+}
+
+const ModifyModal: React.FC<ModifyModalProps> = (props) => {
+  const { title, description, onCancel, FormComponent, data, submitId } = props;
+  const { handleCancel } = useModal();
+  const submitIdString = submitId ? submitId : '';
+
   return (
     <>
       <div className={`${styles.modalContainer} ${styles.wide}`}>
@@ -23,12 +28,17 @@ const ModifyModal = (
         <div className={`${styles.contentContainer} ${styles.left}`}>
           {description}
         </div>
+
         <div className={styles.formContainer}>
-          <FormComponent data={data} />
+          {FormComponent && (
+            <FormComponent data={data} submitId={submitIdString} />
+          )}
         </div>
         <div className={styles.buttonContainer}>
           <button onClick={() => handleCancel(onCancel)}>취소</button>
-          <button onClick={() => handleProceed(onProceed)}>수정</button>{' '}
+          <button type='submit' form={submitId}>
+            수정
+          </button>
         </div>
       </div>
     </>

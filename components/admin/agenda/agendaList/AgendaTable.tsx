@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import {
   Paper,
   Table,
@@ -8,17 +9,17 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-// import { instance } from 'utils/axios';
-// import { dateToStringShort } from 'utils/handleTime';
 import { instance } from 'utils/axios';
 import { dateToString } from 'utils/handleTime';
+import { toastState } from 'utils/recoil/toast';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
 import { AgendaStatus } from 'constants/agenda/agenda';
+import { NoContent } from 'components/admin/agenda/utils';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
+import ModifyAgendaForm from 'components/agenda/Form/ModifyAgendaForm';
+import { useModal } from 'components/agenda/modal/useModal';
 import PageNation from 'components/Pagination';
-// import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
-import { NoContent } from '../utils';
 
 const tableTitle: { [key: string]: string } = {
   agendaId: 'Id',
@@ -78,14 +79,23 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
-
+  const setSnackBar = useSetRecoilState(toastState);
+  const { openModal } = useModal();
   // const modal = useRecoilValue(modalState);
   const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
 
-  const handleButtonAction = (buttonName: string, agendaKey: string) => {
+  const handleButtonAction = (buttonName: string, agenda: any) => {
+    const agendaKey = agenda.agendaKey;
     switch (buttonName) {
       case '자세히':
-        router.push(`/admin/agenda/${agendaKey}`);
+        openModal({
+          type: 'modify',
+          title: '대회 상세정보',
+          description: '수정 후 확인 버튼을 눌러주세요.',
+          FormComponent: ModifyAgendaForm,
+          data: agenda,
+          submitId: 'modifyAgenda',
+        });
         break;
       case '팀 목록':
         router.push(`/admin/agenda/teamList?agendaKey=${agendaKey}`);
@@ -101,6 +111,13 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
       const getData = await instance.get(
         `/agenda/admin/request/list?page=${currentPage}&size=10`
       );
+      // setSnackBar({
+      //   toastName: 'GET request',
+      //   message: 'agenda List를 가져오는데 실패했습니다.',
+      //   severity: 'error',
+      //   clicked: true,
+      // });
+
       const filteredAgendaList = getData.data.filter((agenda: IAgenda) => {
         const matchesStatus = status ? agenda.agendaStatus === status : true;
         const matchesOfficial =
@@ -176,10 +193,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
                                     key={buttonName}
                                     className={`${styles.button} ${buttonList[index]}`}
                                     onClick={() =>
-                                      handleButtonAction(
-                                        buttonName,
-                                        agenda.agendaKey
-                                      )
+                                      handleButtonAction(buttonName, agenda)
                                     }
                                   >
                                     {buttonName}

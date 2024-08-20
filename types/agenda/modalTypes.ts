@@ -13,4 +13,5 @@ export interface agendaModal {
   extraButtons?: { text: string; callback: (e: React.MouseEvent) => void }[];
   FormComponent?: React.FC<any>;
   data?: any;
+  submitId?: string;
 }
