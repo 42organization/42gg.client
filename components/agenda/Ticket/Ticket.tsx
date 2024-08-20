@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRef } from 'react';
 import { instanceInAgenda } from 'utils/axios';
 import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/Ticket/Ticket.module.scss';
@@ -49,18 +48,27 @@ const Ticket = ({ type }: { type: string }) => {
         <button
           className={styles.submitButton}
           onClick={() => {
-            location.href = 'https://profile.intra.42.fr/';
-            status = true;
-            localStorage.setItem('ticket-issue-status', 'true');
-            instanceInAgenda.post('/ticket').then((res) => {
+            instanceInAgenda.post('/ticket').then(() => {
               alert('티켓 발급 시작');
+              status = true;
+              localStorage.setItem('ticket-issue-status', 'true');
+              location.href = 'https://profile.intra.42.fr/';
             });
           }}
         >
           발급 시작
         </button>
       )}
-      <button className={styles.logButton}>내역 보기</button>
+      <button
+        className={styles.logButton}
+        onClick={() => {
+          instanceInAgenda.get('/ticket/history?page=1&size=20').then((res) => {
+            console.log(res);
+          });
+        }}
+      >
+        내역 보기
+      </button>
     </div>
   ) : (
     <div className={styles.container}>
