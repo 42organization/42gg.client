@@ -71,13 +71,17 @@ const PageController = ({
         }
       >
         <button
-          className={styles.prev}
           onClick={() => setCurrent(current - 1 >= 0 ? current - 1 : max - 1)}
-        />
+          className={styles.moveButtonPrev}
+        >
+          <div className={styles.prev} />
+        </button>
         <button
-          className={styles.next}
+          className={styles.moveButtonNext}
           onClick={() => setCurrent(current + 1 < max ? current + 1 : 0)}
-        />
+        >
+          <div className={styles.next} />
+        </button>
         <AgendaInfo agendaInfo={data[current]} key={current || 0} />
       </button>
       <PageControllerNavigator
