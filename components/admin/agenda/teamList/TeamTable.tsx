@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import {
   MenuItem,
   Paper,
@@ -11,6 +12,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { instance } from 'utils/axios';
+import { toastState } from 'utils/recoil/toast';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
 import { TeamStatus } from 'constants/agenda/agenda';
 import { NoContent } from 'components/admin/agenda/utils';
@@ -20,71 +22,6 @@ import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
 
 const itemsPerPage = 10; // 한 페이지에 보여줄 항목 수
-
-const mockAgendaList = [
-  { agendaKey: '1', agendaName: '대회 1' },
-  { agendaKey: '2', agendaName: '대회 2' },
-];
-
-const mockTeamList = [
-  {
-    teamName: '팀 이름 1',
-    teamStatus: TeamStatus.OPEN,
-    teamScore: 100,
-    teamIsPrivate: false,
-    teamLeaderIntraId: 'leader1',
-    teamMateCount: 5,
-    teamKey: '1',
-  },
-  {
-    teamName: '팀 이름 2',
-    teamStatus: TeamStatus.CONFIRM,
-    teamScore: 200,
-    teamIsPrivate: true,
-    teamLeaderIntraId: 'leader2',
-    teamMateCount: 3,
-    teamKey: '2',
-  },
-  {
-    teamName: '팀 이름 3',
-    teamStatus: TeamStatus.CANCEL,
-    teamScore: 300,
-    teamIsPrivate: false,
-    teamLeaderIntraId: 'leader3',
-    teamMateCount: 7,
-    teamKey: '3',
-  },
-];
-
-const mockTeamList2 = [
-  {
-    teamName: '팀 이름 4',
-    teamStatus: TeamStatus.OPEN,
-    teamScore: 100,
-    teamIsPrivate: false,
-    teamLeaderIntraId: 'leader1',
-    teamMateCount: 5,
-    teamKey: '4',
-  },
-  {
-    teamName: '팀 이름 5',
-    teamStatus: TeamStatus.CONFIRM,
-    teamScore: 200,
-    teamIsPrivate: true,
-    teamLeaderIntraId: 'leader2',
-    teamMateCount: 3,
-    teamKey: '5',
-  },
-  {
-    teamName: '팀 이름 6',
-    teamStatus: TeamStatus.CANCEL,
-    teamScore: 300,
-    teamIsPrivate: false,
-    teamLeaderIntraId: 'leader3',
-    teamMateCount: 7,
-    teamKey: '6',
-  },
-];
 
 const tableTitle: { [key: string]: string } = {
   teamName: '팀 이름',
@@ -124,7 +61,8 @@ export default function TeamTable() {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedAgendaKey, setSelectedAgendaKey] = useState('');
-  const agendaList = useFetchGet(`list`).data || [];
+  const agendaList = useFetchGet(`admin/list`).data || [];
+  const setSnackBar = useSetRecoilState(toastState);
 
   // const modal = useRecoilValue(modalState);
   const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
@@ -157,15 +95,14 @@ export default function TeamTable() {
         },
       });
 
-      // let res = [];
-      // if (selectedAgendaKey === '1') {
-      //   res = mockTeamList;
-      // } else if (selectedAgendaKey === '2') {
-      //   res = mockTeamList2;
-      // } else {
-      //   res = [];
-      //   return;
-      // }
+      if (response.data.length === 0) {
+        setSnackBar({
+          toastName: 'GET request',
+          message: '팀이 없습니다.',
+          severity: 'error',
+          clicked: true,
+        });
+      }
 
       setTeamInfo({
         teamList: response.data,
@@ -174,6 +111,12 @@ export default function TeamTable() {
       });
     } catch (e) {
       console.error('Error fetching team list:', e);
+      setSnackBar({
+        toastName: 'GET request',
+        message: '팀 목록을 가져오는데 실패했습니다.',
+        severity: 'error',
+        clicked: true,
+      });
     }
   }, [currentPage, selectedAgendaKey]); // selectedAgendaKey 추가
 

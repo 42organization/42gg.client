@@ -9,7 +9,7 @@ const CreateTeam = () => {
   const { agendaKey } = router.query;
   const agendaInfo = useAgendaInfo(agendaKey as string);
 
-  const submitTeamForm = (target: React.FormEvent<HTMLFormElement>) => {
+  const SubmitTeamForm = (target: React.FormEvent<HTMLFormElement>) => {
     target.preventDefault();
     const formData = new FormData(target.currentTarget);
     const strData = JSON.stringify(Object.fromEntries(formData));
@@ -47,7 +47,7 @@ const CreateTeam = () => {
       <h2 className={styles.title}>팀 만들기</h2>
       <p className={styles.description}>팀 인원 : 3명-8명까지 가능</p>
       <CreateTeamForm
-        handleSubmit={submitTeamForm}
+        handleSubmit={SubmitTeamForm}
         location={agendaInfo?.agendaLocation || null}
       />
     </div>
