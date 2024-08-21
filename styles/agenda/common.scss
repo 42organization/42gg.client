@@ -44,6 +44,7 @@ $font-pretendard: 'Pretendard', sans-serif;
 $font-logo: 'Overgrow', sans-serif;
 
 /* font-size */
+$font-size-xxxl: 4rem; // $ticket bold
 $font-size-xxl: 2.1rem; // $giant-big-font
 $font-size-xl: 1.8rem; // $big-giant-font
 $font-size-l: 1.5rem; // $giant-font
@@ -110,15 +111,14 @@ $font-size-xs: 0.8rem; // $small-font
   border-radius: $radius-small;
   box-shadow: var(--default-box-shadow);
 
-  @if ($type == 'submit') {
-    width: 3rem;
-    height: 1.5rem;
+  @if ($type == 'text') {
+    width: 100%;
+    height: max-content;
   } @else if ($type == 'delete') {
     background: url('/buttons/delete.svg') no-repeat center;
   } @else {
-    // default
-    width: 3rem;
-    height: 1.5rem;
+    // default  width: 100%;
+    height: max-content;
   }
 
   @if ($style == 'highlight') {
