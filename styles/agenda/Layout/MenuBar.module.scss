@@ -20,12 +20,12 @@
 }
 
 .inactivebg {
-  opacity: 0%;
-  transition: all 1s;
+  right: 100vw;
+  transition: all 0.5s;
 }
 .activebg {
-  opacity: 100%;
-  transition: all 1s;
+  right: 0;
+  transition: all 0.5s;
 }
 
 .bg {
@@ -34,6 +34,8 @@
   width: 100vw;
   height: 100vh;
   background: var(--box-bg-3);
+  box-shadow: 5px 0 20px 10px var(--box-bg-3);
+  opacity: 0.5;
 }
 .button {
   display: flex;

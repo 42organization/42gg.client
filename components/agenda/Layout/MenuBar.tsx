@@ -33,7 +33,6 @@ const MenuBar = ({ isActive }: { isActive: boolean }) => {
         className={`${styles.bg} ${
           isActive ? styles.activebg : styles.inactivebg
         }`}
-        style={{ zIndex: isActive ? 1 : -1 }}
       />
     </>
   );
