@@ -45,7 +45,14 @@ const usePageNation = <T>({
     };
     fetchData();
   });
-  return { currentPage, totalPages, pageChangeHandler, content };
+
+  const PagaNationElementProps = {
+    curPage: currentPage,
+    totalPages: totalPages.current,
+    pageChangeHandler: pageChangeHandler,
+  };
+
+  return { content, PagaNationElementProps };
 };
 
 export default usePageNation;

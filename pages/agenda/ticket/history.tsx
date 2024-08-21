@@ -5,21 +5,18 @@ import usePageNation from 'hooks/agenda/usePageNation';
 
 const TicketHistoryPage = () => {
   const size = 5;
-  const res = usePageNation<TicketHistoryProps>({
-    url: '/ticket/history',
-    size: size,
-    useIdx: true,
-  });
+  const { PagaNationElementProps, content } = usePageNation<TicketHistoryProps>(
+    {
+      url: '/ticket/history',
+      size: size,
+      useIdx: true,
+    }
+  );
 
-  const { currentPage, totalPages, pageChangeHandler, content } = res;
   return (
     <div>
       <TicketHistory data={content} />
-      <PageNation
-        curPage={currentPage}
-        totalPages={totalPages.current}
-        pageChangeHandler={pageChangeHandler}
-      />
+      <PageNation {...PagaNationElementProps} />
     </div>
   );
 };
