@@ -32,7 +32,7 @@ const TicketHistory = ({ data }: { data: TicketHistoryProps[] | null }) => {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component='th' scope='row'>
-                    {index}
+                    {d.idx}
                   </TableCell>
                   <TableCell align='center'>{d.createdAt}</TableCell>
                   <TableCell align='center'>

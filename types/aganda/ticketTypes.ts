@@ -14,4 +14,6 @@ export interface TicketHistoryProps {
   approvedAt: string | null; // 발급된 시간 or null
   isUsed: boolean; // true 사용된 티켓, false 사용하지 않음
   usedAt: string | null; //}
+
+  idx?: number;
 }
