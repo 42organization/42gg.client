@@ -160,9 +160,6 @@ const AgendaForm = ({
       closeModal();
     }
   };
-  const scrollType = isAdmin ? styles.modalContainer : styles.pageContianer;
-  const rankingType = isEdit ? 'isRanking' : 'agendaIsRanking';
-
   const oncancel = () => {
     if (isAdmin) {
       closeModal();
@@ -170,6 +167,9 @@ const AgendaForm = ({
       window.history.back();
     }
   };
+
+  const scrollType = isAdmin ? styles.modalContainer : styles.pageContianer;
+  const rankingType = isEdit ? 'isRanking' : 'agendaIsRanking';
 
   return (
     <>

@@ -16,7 +16,7 @@ import { dateToString } from 'utils/handleTime';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
 import { NoContent } from 'components/admin/agenda/utils';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
-import CreateAnnouncementForm from 'components/agenda/Form/CreateAnnouncementForm';
+import AnnouncementForm from 'components/agenda/Form/AnnouncementForm';
 import { useModal } from 'components/agenda/modal/useModal';
 import PageNation from 'components/Pagination';
 import useFetchGet from 'hooks/agenda/useFetchGet';
@@ -79,7 +79,7 @@ export default function AnnouncementTable() {
           type: 'modify',
           title: '공지사항 수정',
           description: '수정 후 확인 버튼을 눌러주세요.',
-          FormComponent: CreateAnnouncementForm,
+          FormComponent: AnnouncementForm,
           data: announce,
           stringKey: agendaKey as string,
           isAdmin: true,
