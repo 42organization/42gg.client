@@ -112,13 +112,13 @@ $font-size-xs: 0.8rem; // $small-font
 
   @if ($type == 'submit') {
     width: 3rem;
-    height: 1.5rem;
+    height: 3rem;
   } @else if ($type == 'delete') {
     background: url('/buttons/delete.svg') no-repeat center;
   } @else {
     // default
     width: 3rem;
-    height: 1.5rem;
+    height: 3rem;
   }
 
   @if ($style == 'highlight') {

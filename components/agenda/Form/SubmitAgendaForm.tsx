@@ -2,8 +2,9 @@ import { instanceInAgenda } from 'utils/axios';
 
 const SubmitAgendaForm = async (
   e: React.FormEvent<HTMLFormElement>,
+  isAdmin?: boolean,
   stringKey?: string,
-  closeModal?: () => void
+  onProceed?: () => void
 ) => {
   e.preventDefault();
 
@@ -27,9 +28,11 @@ const SubmitAgendaForm = async (
   data.set(isRankingKey, data.get(isRankingKey) === 'on' ? 'true' : 'false');
 
   if (data.get('isSolo') === 'on') {
-    data.set('agendaMaxPeoPle', '1');
-    data.set('agendaMinPeoPle', '1');
+    data.set('agendaMaxPeople', '1');
+    data.set('agendaMinPeople', '1');
   }
+  data.delete('isSolo');
+
   for (const key of data.keys()) {
     console.log(key, data.get(key));
   }
@@ -56,15 +59,20 @@ const SubmitAgendaForm = async (
   // URL 설정
   let url = '/request';
   if (stringKey) {
-    data.set('isOfficial', data.get('isOfficial') === 'on' ? 'true' : 'false');
     url = `/admin/request?agenda_key=${stringKey}`;
+    if (isAdmin) {
+      data.set(
+        'isOfficial',
+        data.get('isOfficial') === 'on' ? 'true' : 'false'
+      );
+    }
   }
 
   // 데이터 전송
   try {
     const res = await instanceInAgenda.post(url, data);
-    if (res.status === 204) {
-      closeModal();
+    if (res.status === 204 || res.status === 200) {
+      onProceed && onProceed();
     }
     console.log(res);
   } catch (err) {

@@ -1,11 +1,11 @@
 import { agendaModal } from 'types/agenda/modalTypes';
-import { useModal } from 'components/agenda/modal/useModal';
 import styles from 'styles/agenda/modal/modal.module.scss';
 
 interface FormComponentProps {
+  isAdmin?: boolean;
   data: any;
-  submitId: string;
-  stringKey: string;
+  stringKey?: string;
+  onProceed?: () => void;
 }
 
 interface ModifyModalProps extends agendaModal {
@@ -16,15 +16,12 @@ const ModifyModal: React.FC<ModifyModalProps> = (props) => {
   const {
     title,
     description,
-    onCancel,
     FormComponent,
     data,
-    submitId,
+    isAdmin,
     stringKey,
+    onProceed,
   } = props;
-  const { handleCancel } = useModal();
-  const submitIdString = submitId ? submitId : '';
-  const key = stringKey ? stringKey : '';
 
   return (
     <>
@@ -41,17 +38,12 @@ const ModifyModal: React.FC<ModifyModalProps> = (props) => {
         <div className={styles.formContainer}>
           {FormComponent && (
             <FormComponent
+              isAdmin={isAdmin}
               data={data}
-              submitId={submitIdString}
-              stringKey={key}
+              stringKey={stringKey}
+              onProceed={onProceed}
             />
           )}
-        </div>
-        <div className={styles.buttonContainer}>
-          <button onClick={() => handleCancel(onCancel)}>취소</button>
-          <button type='submit' form={submitId}>
-            수정
-          </button>
         </div>
       </div>
     </>

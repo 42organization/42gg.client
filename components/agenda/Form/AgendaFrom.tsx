@@ -8,26 +8,23 @@ import SelectInput from 'components/agenda/Input/SelectInput';
 import TimeInput from 'components/agenda/Input/TimeInput';
 import TitleInput from 'components/agenda/Input/TitleInput';
 import styles from 'styles/agenda/Form/Form.module.scss';
+import SubmitAgendaForm from './SubmitAgendaForm';
 import { useModal } from '../modal/useModal';
 
 interface CreateAgendaFormProps {
+  isAdmin?: boolean;
   isEdit?: boolean;
   data?: any;
-  handleSubmit: (
-    e: React.FormEvent<HTMLFormElement>,
-    key?: string,
-    closeModal?: () => void
-  ) => void;
-  submitId: string;
   stringKey?: string;
+  onProceed?: () => void;
 }
 
 const AgendaForm = ({
+  isAdmin = false,
   isEdit = false,
   data,
-  handleSubmit,
-  submitId,
   stringKey,
+  onProceed,
 }: CreateAgendaFormProps) => {
   const minDistance = 10;
   // 날짜 초기화
@@ -154,173 +151,221 @@ const AgendaForm = ({
     }
     setDateWarn(newWarning);
   }
-
+  // ---------------------------------------------------------
   const { closeModal } = useModal();
+  const handleSuccess = () => {
+    if (onProceed) {
+      onProceed();
+    } else {
+      closeModal();
+    }
+  };
+  const scrollType = isAdmin ? styles.modalContainer : styles.pageContianer;
+  const rankingType = isEdit ? 'isRanking' : 'agendaIsRanking';
+
+  const oncancel = () => {
+    if (isAdmin) {
+      closeModal();
+    } else {
+      window.history.back();
+    }
+  };
 
   return (
     <>
       <form
         onSubmit={(e) => {
-          handleSubmit(e, stringKey, closeModal);
+          SubmitAgendaForm(e, isAdmin, stringKey, handleSuccess);
         }}
         className={styles.container}
-        id={submitId}
       >
-        <TitleInput
-          name='agendaTitle'
-          label='제목'
-          placeholder='제목을 입력해주세요'
-          defaultValue={isEdit ? data.agendaTitle : ''}
-        />
-        <DescriptionInput
-          name='agendaContent'
-          label='설명'
-          placeholder='설명을 입력해주세요'
-          defaultValue={isEdit ? data.agendaContent : ''}
-        />
-        <div className={styles.topContainer}>
-          <div className={styles.label_container}>
-            <h3 className={styles.label}>모집마감까지 </h3>
-            <h3 className={`${styles.label} ${styles.highlight}`}>
-              {getRemainTime({ targetTime: recruitEnd })}
-            </h3>
-          </div>
-          <div className={styles.dateContainer}>
-            <TimeInput
-              name='agendaDeadLine'
-              error={dateWarn[0]}
-              label=''
-              onChange={handleRecruitEnd}
-              defaultDate={recruitEnd}
-            />
-          </div>
-        </div>
-        <div className={styles.topContainer}>
-          <div className={styles.label_container}>
-            <h3 className={styles.label}>진행 기간</h3>
-            <h3 className={`${styles.label} + ${styles.highlight}`}>
-              {getRemainTime({
-                targetTime: dateRange[1],
-                cmpTime: dateRange[0],
-              })}
-            </h3>
-          </div>
-          <div className={styles.inputContainer}>
-            <TimeInput
-              name='agendaStartTime'
-              label='시작일'
-              error={dateWarn[1]}
-              defaultDate={dateRange[0]}
-              onChange={handleDateRangeMin}
-            />
-            <TimeInput
-              name='agendaEndTime'
-              label='종료일'
-              error={dateWarn[2]}
-              defaultDate={dateRange[1]}
-              onChange={handleDateRangeMax}
-            />
-          </div>
-        </div>
-        <div className={styles.topContainer}>
-          <div className={styles.label_container}>
-            <h3 className={styles.label}>등록 가능 팀 수</h3>
-            <p
-              className={`${styles.label} ${styles.highlight}`}
-            >{`${teamLimit[0]}팀 ~ ${teamLimit[1]}팀`}</p>
-          </div>
-          <div className={styles.sliderContainer}>
-            <Slider
-              getAriaLabel={() => 'Team Limit'}
-              value={teamLimit}
-              onChange={handleChange}
-              valueLabelDisplay='auto'
-              min={2}
-              max={100}
-              color={'secondary'}
-              disableSwap
-            />
-            <input
-              style={{ display: 'none' }}
-              name='agendaMinTeam'
-              value={teamLimit[0]}
-              readOnly
-            />
-            <input
-              style={{ display: 'none' }}
-              name='agendaMaxTeam'
-              value={teamLimit[1]}
-              readOnly
-            />
-          </div>
-        </div>
-        <div className={styles.topContainer}>
-          <div className={styles.label_container}>
-            <h3 className={styles.label}>팀당 인원 제한</h3>
-            <p className={`${styles.label} + ${styles.highlight}`}>
-              {isSolo ? '' : `${peopleLimit[0]}인 ~ ${peopleLimit[1]}인`}
-            </p>
-          </div>
-          <CheckboxInput name='isSolo' label='개인' onChange={handleIsSolo} />
-          <div className={styles.sliderContainer}>
-            <Slider
-              getAriaLabel={() => 'People Limit'}
-              value={peopleLimit}
-              onChange={handleChangePeople}
-              valueLabelDisplay='auto'
-              min={1}
-              max={10}
-              color={'secondary'}
-              disableSwap
-              disabled={isSolo}
-            />
-            <input
-              style={{ display: 'none' }}
-              name='agendaMinPeople'
-              value={peopleLimit[0]}
-              readOnly
-            />
-            <input
-              style={{ display: 'none' }}
-              name='agendaMaxPeople'
-              value={peopleLimit[1]}
-              readOnly
-            />
-          </div>
-        </div>
-        <div className={styles.bottomContainer}>
-          <ImageInput name='agendaPoster' label='포스터 파일 첨부하기' />
-        </div>
-        <div className={styles.bottomContainer}>
-          <SelectInput
-            name='agendaLocation'
-            label='대회 장소'
-            options={['SEOUL', 'GYEONGSAN', 'MIX']}
-            selected={data ? data.agendaLocation : null}
+        <div className={scrollType}>
+          <TitleInput
+            name='agendaTitle'
+            label='제목'
+            placeholder='제목을 입력해주세요'
+            defaultValue={isEdit ? data.agendaTitle : ''}
           />
-        </div>
-
-        <div className={styles.bottomContainer}>
-          <CheckboxInput
-            name={stringKey ? 'isRanking' : 'agendaIsRanking'}
-            label='대회 유무'
+          <DescriptionInput
+            name='agendaContent'
+            label='설명'
+            placeholder='설명을 입력해주세요'
+            defaultValue={isEdit ? data.agendaContent : ''}
           />
-        </div>
-        {stringKey && (
-          <>
-            <div className={styles.bottomContainer}>
-              <CheckboxInput name='isOfficial' label='공식 여부' />
+          <div className={styles.topContainer}>
+            <div className={styles.label_container}>
+              <h3 className={styles.label}>모집마감까지 </h3>
+              <h3 className={`${styles.label} ${styles.highlight}`}>
+                {getRemainTime({ targetTime: recruitEnd })}
+              </h3>
             </div>
-            <div className={styles.bottomContainer}>
-              <SelectInput
-                name='agendaStatus'
-                label='대회 상태'
-                options={['CANCEL', 'OPEN', 'CONFIRM', 'FINISH']}
-                selected={data.agendaStatus}
+            <div className={styles.dateContainer}>
+              <TimeInput
+                name='agendaDeadLine'
+                error={dateWarn[0]}
+                label=''
+                onChange={handleRecruitEnd}
+                defaultDate={recruitEnd}
               />
             </div>
-          </>
-        )}
+          </div>
+          <div className={styles.topContainer}>
+            <div className={styles.label_container}>
+              <h3 className={styles.label}>진행 기간</h3>
+              <h3 className={`${styles.label} + ${styles.highlight}`}>
+                {getRemainTime({
+                  targetTime: dateRange[1],
+                  cmpTime: dateRange[0],
+                })}
+              </h3>
+            </div>
+            <div className={styles.inputContainer}>
+              <TimeInput
+                name='agendaStartTime'
+                label='시작일'
+                error={dateWarn[1]}
+                defaultDate={dateRange[0]}
+                onChange={handleDateRangeMin}
+              />
+              <TimeInput
+                name='agendaEndTime'
+                label='종료일'
+                error={dateWarn[2]}
+                defaultDate={dateRange[1]}
+                onChange={handleDateRangeMax}
+              />
+            </div>
+          </div>
+          <div className={styles.topContainer}>
+            <div className={styles.label_container}>
+              <h3 className={styles.label}>등록 가능 팀 수</h3>
+              <p
+                className={`${styles.label} ${styles.highlight}`}
+              >{`${teamLimit[0]}팀 ~ ${teamLimit[1]}팀`}</p>
+            </div>
+            <div className={styles.sliderContainer}>
+              <Slider
+                getAriaLabel={() => 'Team Limit'}
+                value={teamLimit}
+                onChange={handleChange}
+                valueLabelDisplay='auto'
+                min={2}
+                max={100}
+                color={'secondary'}
+                disableSwap
+              />
+              <input
+                style={{ display: 'none' }}
+                name='agendaMinTeam'
+                value={teamLimit[0]}
+                readOnly
+              />
+              <input
+                style={{ display: 'none' }}
+                name='agendaMaxTeam'
+                value={teamLimit[1]}
+                readOnly
+              />
+            </div>
+          </div>
+          <div className={styles.topContainer}>
+            <div className={styles.label_container}>
+              <h3 className={styles.label}>팀당 인원 제한</h3>
+              <p className={`${styles.label} + ${styles.highlight}`}>
+                {isSolo ? '' : `${peopleLimit[0]}인 ~ ${peopleLimit[1]}인`}
+              </p>
+            </div>
+            <CheckboxInput
+              name='isSolo'
+              label='개인'
+              onChange={handleIsSolo}
+              checked={isSolo}
+            />
+            <div className={styles.sliderContainer}>
+              <Slider
+                getAriaLabel={() => 'People Limit'}
+                value={peopleLimit}
+                onChange={handleChangePeople}
+                valueLabelDisplay='auto'
+                min={1}
+                max={10}
+                color={'secondary'}
+                disableSwap
+                disabled={isSolo}
+              />
+              <input
+                style={{ display: 'none' }}
+                name='agendaMinPeople'
+                value={peopleLimit[0]}
+                readOnly
+              />
+              <input
+                style={{ display: 'none' }}
+                name='agendaMaxPeople'
+                value={peopleLimit[1]}
+                readOnly
+              />
+            </div>
+          </div>
+          <div className={styles.bottomContainer}>
+            <ImageInput name='agendaPoster' label='포스터 파일 첨부하기' />
+          </div>
+          <div className={styles.bottomContainer}>
+            <SelectInput
+              name='agendaLocation'
+              label='대회 장소'
+              options={['SEOUL', 'GYEONGSAN', 'MIX']}
+              selected={data ? data.agendaLocation : null}
+            />
+          </div>
+
+          <div className={styles.bottomContainer}>
+            <CheckboxInput
+              name={rankingType}
+              label='대회 유무'
+              checked={data ? data[rankingType] : false}
+            />
+          </div>
+          {isAdmin && (
+            <>
+              <div className={styles.bottomContainer}>
+                <CheckboxInput
+                  name='isOfficial'
+                  label='공식 여부'
+                  checked={data ? data.isOfficial : false}
+                />
+              </div>
+              <div className={styles.bottomContainer}>
+                <SelectInput
+                  name='agendaStatus'
+                  label='대회 상태'
+                  options={['CANCEL', 'OPEN', 'CONFIRM', 'FINISH']}
+                  selected={data.agendaStatus}
+                />
+              </div>
+            </>
+          )}
+        </div>
+        <div className={styles.bottomContainer}>
+          <div className={styles.buttonContainer}>
+            <button
+              type='button'
+              onClick={(e) => {
+                e.preventDefault();
+                oncancel();
+              }}
+              className={`${styles.formBtn} ${styles.cancel}`}
+            >
+              취소
+            </button>
+            <button
+              type='submit'
+              className={`${styles.formBtn} ${styles.submit}`}
+            >
+              {isEdit ? '수정' : '등록'}
+            </button>
+          </div>
+        </div>
       </form>
     </>
   );

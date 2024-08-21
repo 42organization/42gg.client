@@ -5,7 +5,6 @@
 
   display: flex;
   width: 20rem;
-  // width: 20rem;
   height: max-content;
   flex-direction: column;
 
@@ -47,6 +46,4 @@
 .formContainer {
   width: 100%;
   max-height: 30rem; // 최대 높이
-  padding: 1rem; // 필요에 따라 패딩 추가
-  overflow-y: auto; // 수직 스크롤 가능
 }

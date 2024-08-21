@@ -1,4 +1,3 @@
-import SubmitAgendaForm from 'components/agenda/Form/SubmitAgendaForm';
 import AgendaForm from './AgendaFrom';
 
 interface ModifyAgendaFormProps {
@@ -21,23 +20,26 @@ interface ModifyAgendaFormProps {
     agendaStatus: string;
     agendaPosterUrl: string;
   };
-  submitId: string;
   stringKey: string;
+  isAdmin?: boolean;
+  onProceed?: () => void;
 }
 
 const ModifyAgendaForm = ({
+  isAdmin,
   data,
-  submitId,
   stringKey,
+  onProceed,
 }: ModifyAgendaFormProps) => {
+  // onProceed를 전달하지 않으면 기본적으로 모달 닫기 실행
   return (
     <>
       <AgendaForm
+        isAdmin={isAdmin}
         isEdit={true}
         data={data}
-        handleSubmit={SubmitAgendaForm}
-        submitId={submitId}
         stringKey={stringKey}
+        onProceed={onProceed}
       />
     </>
   );

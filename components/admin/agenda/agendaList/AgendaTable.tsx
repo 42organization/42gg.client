@@ -86,7 +86,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const setSnackBar = useSetRecoilState(toastState);
-  const { openModal } = useModal();
+  const { openModal, closeModal } = useModal();
 
   const buttonList: string[] = [
     styles.detail,
@@ -98,23 +98,34 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
   const deleteAgenda = async (agenda: any) => {
     const agendaKey = agenda.agendaKey;
 
+    const formatDate = (date: string) => {
+      return date.replace(' ', 'T') + ':00';
+    };
+
     const updatedAgenda = {
       ...agenda,
-      agendaCurrentTeam: 0,
+      agendaStartTime: formatDate(agenda.agendaStartTime),
+      agendaEndTime: formatDate(agenda.agendaEndTime),
+      agendaDeadLine: formatDate(agenda.agendaDeadLine),
       agendaStatus: 'CANCEL',
       agendaPoster: null,
     };
 
+    const formData = new FormData();
+    Object.keys(updatedAgenda).forEach((key) => {
+      formData.append(key, updatedAgenda[key]);
+    });
+
     await sendRequest(
       'POST',
-      `admin/request?agenda_key=${agendaKey}`,
-      updatedAgenda,
-      undefined,
+      `admin/request`,
+      formData,
+      { agenda_key: agendaKey },
       (data) => {
-        alert('삭제 요청이 성공적으로 전송되었습니다.');
+        alert('취소 요청이 성공적으로 전송되었습니다.');
       },
       (error) => {
-        alert('삭제 요청에 실패했습니다: ' + error);
+        alert('취소 요청에 실패했습니다: ' + error);
       }
     );
   };
@@ -129,10 +140,15 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
           description: '수정 후 확인 버튼을 눌러주세요.',
           FormComponent: ModifyAgendaForm,
           data: agenda,
+          isAdmin: true,
           stringKey: agendaKey,
+          onProceed: () => {
+            closeModal();
+            getAgendaList();
+          },
         });
         break;
-      case '삭제':
+      case '취소':
         deleteAgenda(agenda);
         break;
       case '팀 목록':
