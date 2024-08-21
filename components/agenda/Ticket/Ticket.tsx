@@ -4,11 +4,11 @@ import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/Ticket/Ticket.module.scss';
 interface TicketProps {
   ticketCount: number;
+  setupTicket: boolean;
 }
 
 const Ticket = ({ type }: { type: string }) => {
   const { data } = useFetchGet<TicketProps>('/ticket');
-  let status = localStorage.getItem('ticket-issue-status') || false;
   return type === 'page' ? (
     <div className={styles.container}>
       <h1 className={styles.h1}>내 티켓</h1>
@@ -31,14 +31,12 @@ const Ticket = ({ type }: { type: string }) => {
         <div className={styles.arrowDown} />
         <p>현재 페이지로 돌아와 발급완료 누르기</p>
       </div>
-      {status ? (
+      {data && data.setupTicket ? (
         <button
           className={styles.submitButton}
           onClick={() => {
             instanceInAgenda.patch('/ticket').then((res) => {
               console.log(res);
-              localStorage.removeItem('ticket-issue-status');
-              status = false;
             });
           }}
         >
@@ -50,8 +48,6 @@ const Ticket = ({ type }: { type: string }) => {
           onClick={() => {
             instanceInAgenda.post('/ticket').then(() => {
               alert('티켓 발급 시작');
-              status = true;
-              localStorage.setItem('ticket-issue-status', 'true');
               location.href = 'https://profile.intra.42.fr/';
             });
           }}
