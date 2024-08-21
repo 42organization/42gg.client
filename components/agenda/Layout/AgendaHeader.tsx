@@ -3,6 +3,7 @@ import { createContext, Dispatch, SetStateAction, useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import Logo from 'public/image/main-logo.svg';
 import styles from 'styles/agenda/Layout/Header.module.scss';
+import MenuBar from './MenuBar';
 
 interface HeaderContextState {
   openMenuState: boolean;
@@ -40,7 +41,7 @@ export default function AgendaHeader() {
           />
         </div>
       </div>
-      {HeaderState?.openMenuState && <div>menu</div>}
+      {HeaderState?.openMenuState && <MenuBar />}
     </HeaderContext.Provider>
   );
 }
