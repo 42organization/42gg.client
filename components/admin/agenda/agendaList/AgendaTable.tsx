@@ -22,6 +22,8 @@ import PageNation from 'components/Pagination';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
 
+const itemsPerPage = 10;
+
 const tableTitle: { [key: string]: string } = {
   agendaId: 'Id',
   // agendaPosterUrl:'포스터',
@@ -78,13 +80,14 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
 
   const [agendaInfo, setAgendaInfo] = useState<IAgendaTable>({
     agendaList: [],
-    totalPage: 0,
-    currentPage: 0,
+    totalPage: 1,
+    currentPage: 1,
   });
+
   const [currentPage, setCurrentPage] = useState<number>(1);
   const setSnackBar = useSetRecoilState(toastState);
   const { openModal } = useModal();
-  // const modal = useRecoilValue(modalState);
+
   const buttonList: string[] = [
     styles.detail,
     styles.delete,
@@ -100,26 +103,6 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
       agendaCurrentTeam: 0,
       agendaStatus: 'CANCEL',
       agendaPoster: null,
-    };
-    console.log(updatedAgenda);
-    const requestBody = {
-      agendaDto: {
-        agendaTitle: '대회 제목',
-        agendaContent: '대회 내용',
-        agendaDeadLine: '2024-08-19T16:53:05',
-        agendaStartTime: '2024-08-19T16:53:05',
-        agendaEndTime: '2024-08-19T16:53:05',
-        agendaMinTeam: 1, // 0 이상으로 설정
-        agendaMaxTeam: 10, // 0 이상으로 설정
-        agendaMinPeople: 1, // 0 이상으로 설정
-        agendaMaxPeople: 100, // 0 이상으로 설정
-        agendaPosterUri: '포스터 URI',
-        agendaLocation: 'SEOUL',
-        isOfficial: true,
-        isRanking: true,
-        agendaStatus: 'CANCEL',
-      },
-      agendaPoster: '포스터 URI',
     };
 
     await sendRequest(
@@ -146,7 +129,6 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
           description: '수정 후 확인 버튼을 눌러주세요.',
           FormComponent: ModifyAgendaForm,
           data: agenda,
-          submitId: 'modifyAgenda',
           stringKey: agendaKey,
         });
         break;
@@ -165,7 +147,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
   const getAgendaList = useCallback(async () => {
     try {
       const getData = await instanceInAgenda.get(
-        `/admin/request/list?page=${currentPage}&size=10`
+        `/admin/request/list?page=${currentPage}&size=${itemsPerPage}`
       );
       // setSnackBar({
       //   toastName: 'GET request',
@@ -174,12 +156,14 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
       //   clicked: true,
       // });
 
-      const filteredAgendaList = getData.data.filter((agenda: IAgenda) => {
-        const matchesStatus = status ? agenda.agendaStatus === status : true;
-        const matchesOfficial =
-          isOfficial !== undefined ? agenda.isOfficial === isOfficial : true;
-        return matchesStatus && matchesOfficial;
-      });
+      const filteredAgendaList = getData.data.content.filter(
+        (agenda: IAgenda) => {
+          const matchesStatus = status ? agenda.agendaStatus === status : true;
+          const matchesOfficial =
+            isOfficial !== undefined ? agenda.isOfficial === isOfficial : true;
+          return matchesStatus && matchesOfficial;
+        }
+      );
 
       setAgendaInfo({
         agendaList: filteredAgendaList.map((agenda: IAgenda) => {
@@ -190,7 +174,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
             agendaEndTime: dateToString(new Date(agenda.agendaEndTime)),
           };
         }),
-        totalPage: 10,
+        totalPage: Math.ceil(getData.data.totalSize / itemsPerPage),
         currentPage: currentPage,
       });
     } catch (e) {

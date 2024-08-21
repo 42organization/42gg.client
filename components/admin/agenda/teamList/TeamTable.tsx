@@ -95,7 +95,7 @@ export default function TeamTable() {
         },
       });
 
-      if (response.data.length === 0) {
+      if (response.data.content.length === 0) {
         setSnackBar({
           toastName: 'GET request',
           message: '팀이 없습니다.',
@@ -105,8 +105,8 @@ export default function TeamTable() {
       }
 
       setTeamInfo({
-        teamList: response.data,
-        totalPage: 10,
+        teamList: response.data.content,
+        totalPage: Math.ceil(response.data.totalSize / itemsPerPage),
         currentPage: currentPage,
       });
     } catch (e) {

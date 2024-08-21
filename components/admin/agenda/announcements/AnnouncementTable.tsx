@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import { Description } from '@mui/icons-material';
 import {
   MenuItem,
   Paper,
@@ -15,50 +16,13 @@ import { dateToString } from 'utils/handleTime';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
 import { NoContent } from 'components/admin/agenda/utils';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
+import CreateAnnouncementForm from 'components/agenda/Form/CreateAnnouncementForm';
+import { useModal } from 'components/agenda/modal/useModal';
 import PageNation from 'components/Pagination';
 import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
 
-const itemsPerPage = 10; // 한 페이지에 보여줄 항목 수
-
-const mockAgendaList = [
-  { agendaKey: '1', agendaName: '대회 1' },
-  { agendaKey: '2', agendaName: '대회 2' },
-];
-
-const mockTeamList = [
-  {
-    id: 1,
-    title: '제목1',
-    contents: '내용1',
-    isShow: true,
-    createdAt: '2024-09-01T04:35:06',
-  },
-  {
-    id: 2,
-    title: '제목2',
-    contents: '내용2',
-    isShow: false,
-    createdAt: '2024-09-01T04:35:06',
-  },
-];
-
-const mockTeamList2 = [
-  {
-    id: 3,
-    title: '제목3',
-    contents: '내용3',
-    isShow: true,
-    createdAt: '2024-09-01T04:35:06',
-  },
-  {
-    id: 4,
-    title: '제목4',
-    contents: '내용4',
-    isShow: false,
-    createdAt: '2024-09-01T04:35:06',
-  },
-];
+const itemsPerPage = 10;
 
 const tableTitle: { [key: string]: string } = {
   id: 'ID',
@@ -91,26 +55,35 @@ export interface Request {
 export default function AnnouncementTable() {
   const router = useRouter();
   const { agendaKey } = router.query;
+  const { openModal } = useModal();
 
   const [announcementInfo, setAnnouncementInfo] = useState<IAnnouncementTable>({
     announcementList: [],
-    totalPage: 0,
-    currentPage: 0,
+    totalPage: 1,
+    currentPage: 1,
   });
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedAgendaKey, setSelectedAgendaKey] = useState('');
   const agendaList = useFetchGet(`list`).data || [];
 
-  // const modal = useRecoilValue(modalState);
   const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
 
-  const handleButtonAction = (buttonName: string, id: number) => {
+  const handleButtonAction = (buttonName: string, announce: IAnnouncement) => {
     switch (buttonName) {
       case '자세히':
         alert('자세히');
         break;
       case '수정':
+        openModal({
+          type: 'modify',
+          title: '공지사항 수정',
+          description: '수정 후 확인 버튼을 눌러주세요.',
+          FormComponent: CreateAnnouncementForm,
+          data: announce,
+          stringKey: agendaKey as string,
+          isAdmin: true,
+        });
         alert('수정');
         break;
       case '삭제':
@@ -135,13 +108,15 @@ export default function AnnouncementTable() {
       });
 
       setAnnouncementInfo({
-        announcementList: response.data.map((announce: IAnnouncement) => {
-          return {
-            ...announce,
-            createdAt: dateToString(new Date(announce.createdAt)),
-          };
-        }),
-        totalPage: 10,
+        announcementList: response.data.content.map(
+          (announce: IAnnouncement) => {
+            return {
+              ...announce,
+              createdAt: dateToString(new Date(announce.createdAt)),
+            };
+          }
+        ),
+        totalPage: Math.ceil(response.data.totalSize / itemsPerPage),
         currentPage: currentPage,
       });
     } catch (e) {
@@ -228,7 +203,7 @@ export default function AnnouncementTable() {
                                         onClick={() =>
                                           handleButtonAction(
                                             buttonName,
-                                            announce.id
+                                            announce
                                           )
                                         }
                                       >
