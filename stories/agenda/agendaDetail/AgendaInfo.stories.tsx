@@ -11,7 +11,7 @@ import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 const baseMockData = {
   agendaTitle: '아 기다리고 기다리던 대회',
   agendaHost: 'iamgroot',
-  agendaStatus: AgendaStatus.ON_GOING,
+  agendaStatus: AgendaStatus.OPEN,
   agendaDeadLine: new Date('2024-07-20'),
   agendaStartTime: new Date('2024-07-25'),
   agendaEndTime: new Date('2024-07-30'),
