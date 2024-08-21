@@ -9,16 +9,15 @@ type LayoutProviderProps = {
 // 로그인 스테이트 등은 각 레이아웃에서 확인
 const LayoutProvider = ({ children }: LayoutProviderProps) => {
   const app = usePathname();
-
+  console.log(app);
   switch (app) {
+    case '':
     case 'agenda':
       return <AgendaAppLayout>{children}</AgendaAppLayout>;
     case 'takgu':
       return <TakguAppLayout>{children}</TakguAppLayout>;
-    // case "admin" :
-    //   return <AdminAppLayout>{children}</AdminAppLayout>;
     default:
-      return <AgendaAppLayout>{children}</AgendaAppLayout>;
+      return <>{children}</>;
   }
 };
 
