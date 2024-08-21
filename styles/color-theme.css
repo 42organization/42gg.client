@@ -26,11 +26,14 @@
   --highlight-violet-dark: #af71ff;
 
   --box-bg-1-light: #f8f8f8;
-  --box-bg-2-light: #c8c8c886;
+  --box-bg-2-light: #c8c8c8ec;
   --box-bg-3-light: #b0b0b06e;
   --box-bg-3-dark: #000000;
-  --box-bg-2-dark: #2323238a;
+  --box-bg-2-dark: #232323d2;
   --box-bg-1-dark: #3a363b7d;
+
+  --menubar-bg-light: #ede7f4f0;
+  --menubar-bg-dark: #5a4e5ded;
 
   --contianer-color-gray: rgba(201, 201, 201, 0.55);
 }
@@ -48,6 +51,7 @@ html[data-theme='light'] {
   --box-bg-1: var(--box-bg-1-light);
   --box-bg-2: var(--box-bg-2-light);
   --box-bg-3: var(--box-bg-3-light);
+  --menubar-bg: var(--menubar-bg-light);
 }
 
 html[data-theme='dark'] {
@@ -63,6 +67,7 @@ html[data-theme='dark'] {
   --box-bg-1: var(--box-bg-1-dark);
   --box-bg-2: var(--box-bg-2-dark);
   --box-bg-3: var(--box-bg-3-dark);
+  --menubar-bg: var(--menubar-bg-dark);
 }
 
 :root {

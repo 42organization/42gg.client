@@ -1,0 +1,28 @@
+@import 'styles/agenda/common.scss';
+.container {
+  position: fixed;
+  right: 0;
+  z-index: 1999;
+  width: 25vw;
+  min-width: 200px;
+  height: 100vh;
+  padding: 1rem;
+  background: var(--menubar-bg);
+  box-shadow: -1px 0 6px 0 var(--color-text);
+}
+.bg {
+  position: fixed;
+  z-index: 1998;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(64, 64, 64, 0.5));
+}
+
+.content {
+  p {
+    @include text(description);
+  }
+  h1 {
+    @include text(sub-title);
+  }
+}
