@@ -2,11 +2,15 @@ import { useUser } from 'hooks/agenda/Layout/useUser';
 import styles from 'styles/agenda/Layout/MenuBar.module.scss';
 import MenuBarContent from './MenuBarContent';
 
-const MenuBar = () => {
+const MenuBar = ({ isActive }: { isActive: boolean }) => {
   const user = useUser();
 
   return (
-    <div className={styles.container}>
+    <div
+      className={`${styles.container} ${
+        isActive ? styles.active : styles.inactive
+      }`}
+    >
       <MenuBarContent
         content={`Hello. ${user?.intraId}`}
         href='/agenda/profile'
