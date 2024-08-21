@@ -6,8 +6,10 @@ import {
 } from 'axios';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
+import getAgendaSnackBarInfo from 'utils/agenda/getAgendaSnackBarInfo';
 import { instanceInAgenda, instanceInManage } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
+
 export default function useAxiosWithToast(instance: AxiosInstance) {
   const setSnackbar = useSetRecoilState(toastState);
 
@@ -27,114 +29,64 @@ export default function useAxiosWithToast(instance: AxiosInstance) {
     const errorDataMessage = (error.response?.data as { message?: string })
       ?.message;
 
-    switch (error.response?.status) {
-      case 400:
-        setSnackbar({
-          toastName: `bad request`,
-          severity: 'error',
-          message: errorDataMessage
-            ? `🔥 ${errorDataMessage} 🔥`
-            : `🔥 ${error.status}: ${error.message} 🔥`,
-          clicked: true,
-        });
-        break;
-      case 403:
-        setSnackbar({
-          toastName: 'forbidden',
-          severity: 'error',
-          message: errorDataMessage
-            ? `🔥 ${errorDataMessage} 🔥`
-            : `🔥 ${error.status}: ${error.message} 🔥`,
-          clicked: true,
-        });
-        break;
-      case 413:
-        setSnackbar({
-          toastName: 'file size error',
-          severity: 'error',
-          message: errorDataMessage
-            ? `🔥 ${errorDataMessage} 🔥`
-            : `🔥 ${error.status}: ${error.message} 🔥`,
-          clicked: true,
-        });
-        break;
-      case 415:
-        setSnackbar({
-          toastName: 'file extension error',
-          severity: 'error',
-          message: errorDataMessage
-            ? `🔥 ${errorDataMessage} 🔥`
-            : `🔥 ${error.status}: ${error.message} 🔥`,
-          clicked: true,
-        });
-        break;
-      default:
-        setSnackbar({
-          toastName: 'default error',
-          severity: 'error',
-          message: errorDataMessage
-            ? `🔥 ${errorDataMessage} 🔥`
-            : `🔥 ${error.status}: ${error.message} 🔥`,
-          clicked: true,
-        });
-        break;
-    }
+    setSnackbar({
+      toastName: `response error`,
+      severity: 'error',
+      message: errorDataMessage
+        ? `🔥 ${errorDataMessage} 🔥`
+        : `🔥 ${error.status}: ${error.message} 🔥`,
+      clicked: true,
+    });
+
     return Promise.reject(error);
+  };
+
+  const requestHandler = (config: AxiosRequestConfig) => {
+    return config;
   };
 
   const responseHandler = (response: AxiosResponse) => {
     const { status, config } = response;
     const { method, url } = config;
 
+    /** GET API에서는 Snackbar 호출 X */
     if (instance === instanceInAgenda && method === 'get') return response;
-    else if (
-      instance === instanceInManage &&
-      method === 'get' &&
-      status === 200
-    )
-      return response;
+    if (instance === instanceInManage && method === 'get') return response;
 
-    switch (status) {
-      case 200:
-        setSnackbar({
-          toastName: `${getRequestRoute(url as string)} success`,
-          severity: 'success',
-          message: `🎉 ${response.data.message || '성공했습니다!'} 🎉`,
-          clicked: true,
-        });
-        break;
-      case 204:
-        setSnackbar({
-          toastName: `${getRequestRoute(url as string)} info`,
-          severity: 'success',
-          message: `🤔 ${response.data.message || '성공했습니다!'} 🤔`,
-          clicked: true,
-        });
-        break;
-      case 207:
-        setSnackbar({
-          toastName: `${getRequestRoute(url as string)} info`,
-          severity: 'info',
-          message: `🤔 ${response.data.message || '성공했습니다!'} 🤔`,
-          clicked: true,
-        });
-        break;
-      default:
-        setSnackbar({
-          toastName: `${getRequestRoute(url as string)} info`,
-          severity: 'info',
-          message: `default: ${response.data.message} at ${getRequestRoute(
-            url as string
-          )}`,
-          clicked: true,
-        });
-        break;
+    /**
+     * Snackbar 호출
+     * - getAgendaSnackBarInfo함수에서 파싱하여 Snackbar의 유형(색상), 메시지 가져오기
+     *  */
+    if (method && url && 200 <= status && status < 300) {
+      const { severity, message } = getAgendaSnackBarInfo(method, url);
+
+      switch (severity) {
+        case 'success':
+          setSnackbar({
+            toastName: `response success`,
+            severity: 'success',
+            message: `🎉 ${message} 🎉`,
+            clicked: true,
+          });
+          break;
+        case 'info':
+          setSnackbar({
+            toastName: `response info`,
+            severity: 'info',
+            message: `🤔 ${message} 🤔`,
+            clicked: true,
+          });
+          break;
+        default:
+          setSnackbar({
+            toastName: `response default`,
+            severity: 'success',
+            message: `${message || '성공했습니다.'}'`,
+            clicked: true,
+          });
+      }
     }
     return response;
-  };
-
-  const requestHandler = (config: AxiosRequestConfig) => {
-    return config;
   };
 
   const responseInterceptor = instance.interceptors.response.use(
