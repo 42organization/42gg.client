@@ -1,0 +1,113 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  width: 100%;
+  height: max-content;
+}
+
+.agendaInfoContainer {
+  @include container(1);
+  position: relative;
+  z-index: 0;
+  display: flex;
+  min-width: 352px;
+  max-width: 750px;
+  height: calc(150px + (100vw - 352px) * ((600 - 150) / (750 - 352)));
+  min-height: 180px;
+  max-height: 600px;
+  padding: 0.7rem 1.2rem;
+  cursor: pointer;
+  background: $agenda-list-bg; // poster img url 변수로 변경 예정
+  border: var(--default-border);
+  border-radius: $radius-medium;
+  box-shadow: var(--default-box-shadow);
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.rest,
+.current {
+  margin: 0;
+  background-color: var(--color-text-reverse);
+  border: none;
+  border-radius: 100%;
+  box-shadow: var(--default-box-shadow);
+}
+.current {
+  width: 0.6rem;
+  height: 0.6rem;
+  padding: 0;
+}
+
+.rest {
+  width: 0.4rem;
+  height: 0.4rem;
+  padding: 0.2rem;
+  opacity: 0.5;
+}
+
+.navContainer {
+  display: flex;
+  width: max-content;
+  max-width: 50%;
+  padding: 0.4rem;
+  margin: 0.5rem auto;
+  background: rgba(0, 0, 0, 0.01);
+  border-radius: 1rem;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+  gap: 0.8rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.moveButtonPrev,
+.moveButtonNext {
+  position: absolute;
+  top: 0;
+  z-index: 1000;
+  width: 20%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  border-radius: $radius-medium;
+}
+
+.moveButtonPrev {
+  left: 0;
+}
+
+.moveButtonNext {
+  right: 0;
+}
+.moveButtonPrev:hover,
+.moveButtonNext:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  .prev {
+    border-right: 1rem solid white;
+  }
+  .next {
+    border-left: 1rem solid white;
+  }
+}
+
+.prev,
+.next {
+  position: relative;
+  background: transparent;
+}
+
+.prev {
+  left: 0rem;
+  border-top: 1rem solid transparent;
+  border-right: 2rem solid transparent;
+  border-bottom: 1rem solid transparent;
+  border-left: 2rem solid transparent;
+}
+
+.next {
+  right: 0rem;
+  border-top: 1rem solid transparent;
+  border-right: 2rem solid transparent;
+  border-bottom: 1rem solid transparent;
+  border-left: 1rem solid transparent;
+}

@@ -1,4 +1,13 @@
 @import 'styles/agenda/common.scss';
+.layout {
+  max-width: 100%;
+}
+
+.title {
+  @include text(main-menu);
+  margin: 1rem 0 0 1.5rem;
+  font-size: $font-size-l;
+}
 
 .container {
   @include container(1);

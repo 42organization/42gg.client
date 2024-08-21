@@ -2,6 +2,7 @@
 
 .myAgendaContainer {
   display: flex;
+  align-self: flex-end;
   width: 12.5rem;
   height: 3rem;
   flex-direction: column;
@@ -9,9 +10,9 @@
   overflow: hidden;
   background-color: var(--box-bg-2);
   border: var(--default-border);
-  border-left-style: none;
-  border-top-right-radius: $radius-big;
-  border-bottom-right-radius: $radius-big;
+  border-right-style: none;
+  border-top-left-radius: $radius-big;
+  border-bottom-left-radius: $radius-big;
   box-shadow: var(--default-box-shadow);
   transition: width 0.15s ease, height 0.15s ease;
   gap: 1rem;
