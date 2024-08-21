@@ -17,12 +17,25 @@
   height: 100vh;
   background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(64, 64, 64, 0.5));
 }
+.button {
+  display: flex;
+  width: 100%;
+  padding: none;
+  margin: none;
+  background: none;
+  border: none;
+  justify-content: flex-start;
+  align-items: center;
+}
 
 .content {
+  margin: 0;
   p {
     @include text(description);
   }
   h1 {
     @include text(sub-title);
+    padding-top: 0.5rem;
+    padding-bottom: 0.2rem;
   }
 }
