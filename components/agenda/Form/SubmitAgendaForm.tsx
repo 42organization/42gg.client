@@ -33,9 +33,10 @@ const SubmitAgendaForm = async (
   }
   data.delete('isSolo');
 
-  for (const key of data.keys()) {
-    console.log(key, data.get(key));
-  }
+  // formData 확인용
+  // for (const key of data.keys()) {
+  //   console.log(key, data.get(key));
+  // }
 
   if (document.getElementsByClassName('error_text').length > 0) {
     alert('입력값을 확인해주세요.');

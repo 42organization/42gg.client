@@ -55,7 +55,7 @@ export interface Request {
 export default function AnnouncementTable() {
   const router = useRouter();
   const { agendaKey } = router.query;
-  const { openModal } = useModal();
+  const { openModal, closeModal } = useModal();
 
   const [announcementInfo, setAnnouncementInfo] = useState<IAnnouncementTable>({
     announcementList: [],
@@ -78,13 +78,16 @@ export default function AnnouncementTable() {
         openModal({
           type: 'modify',
           title: '공지사항 수정',
-          description: '수정 후 확인 버튼을 눌러주세요.',
+          description: '변경 후 수정 버튼을 눌러주세요.',
           FormComponent: AnnouncementForm,
           data: announce,
           stringKey: agendaKey as string,
           isAdmin: true,
+          onProceed: () => {
+            closeModal();
+            getAnnoucementList();
+          },
         });
-        alert('수정');
         break;
       case '삭제':
         alert('삭제');

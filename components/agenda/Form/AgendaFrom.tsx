@@ -7,9 +7,9 @@ import ImageInput from 'components/agenda/Input/ImageInput';
 import SelectInput from 'components/agenda/Input/SelectInput';
 import TimeInput from 'components/agenda/Input/TimeInput';
 import TitleInput from 'components/agenda/Input/TitleInput';
+import { useModal } from 'components/agenda/modal/useModal';
 import styles from 'styles/agenda/Form/Form.module.scss';
 import SubmitAgendaForm from './SubmitAgendaForm';
-import { useModal } from '../modal/useModal';
 
 interface CreateAgendaFormProps {
   isAdmin?: boolean;

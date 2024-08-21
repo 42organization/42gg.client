@@ -1,5 +1,3 @@
-import router from 'next/router';
-import FormBtn from 'components/agenda/button/FormButton';
 import CheckboxInput from 'components/agenda/Input/CheckboxInput';
 import DescriptionInput from 'components/agenda/Input/DescriptionInput';
 import TitleInput from 'components/agenda/Input/TitleInput';
@@ -9,7 +7,6 @@ import styles from 'styles/agenda/Form/Form.module.scss';
 
 interface CreateFormProps {
   isAdmin?: boolean;
-  isEdit?: boolean;
   data?: any;
   stringKey: string;
   onProceed?: () => void;
@@ -20,26 +17,32 @@ const SubmitAnnouncementForm = async (
   sendRequest: any,
   agendaKey: string,
   isAdmin?: boolean,
+  data?: any,
   handleProceed?: () => void
 ) => {
   e.preventDefault();
-
   const formData = new FormData(e.currentTarget);
-  const announcementTitle = formData.get('announcementTitle');
-  const announcementDescription = formData.get('announcementDescription');
-  isAdmin &&
-    formData.set('isShow', formData.get('isShow') === 'on' ? 'true' : 'false');
+  const jsonData: any = {};
+
+  formData.forEach((value, key) => {
+    jsonData[key] = value;
+  });
+
+  if (isAdmin) {
+    jsonData.isShow = jsonData.isShow === 'on' ? true : false;
+    jsonData.id = data.id;
+  }
+
+  const request = isAdmin ? 'PATCH' : 'POST';
+  const url = isAdmin ? `admin/announcement` : 'announcement';
+  const params = isAdmin ? {} : { agenda_key: agendaKey };
 
   sendRequest(
-    'POST',
-    `announcement`,
-    {
-      title: announcementTitle,
-      content: announcementDescription,
-    },
-    { agenda_key: agendaKey },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    (data) => {
+    request,
+    url,
+    jsonData,
+    params,
+    (res) => {
       handleProceed && handleProceed();
     },
     (error: string) => {
@@ -50,7 +53,6 @@ const SubmitAnnouncementForm = async (
 
 const AnnouncementForm = ({
   isAdmin = false,
-  isEdit = false,
   data,
   stringKey,
   onProceed,
@@ -83,33 +85,48 @@ const AnnouncementForm = ({
           sendRequest,
           stringKey,
           isAdmin,
+          data,
           handleSuccess
         );
       }}
       className={styles.container}
     >
-      <TitleInput
-        name='announcementTitle'
-        label='공지사항 제목'
-        placeholder='공지사항 제목을 입력해주세요'
-      />
-      <DescriptionInput
-        name='announcementDescription'
-        label='공지사항 내용'
-        placeholder='공지사항 내용을 입력해주세요'
-      />
+      <div className={styles.modalContainer}>
+        <TitleInput
+          name='title'
+          label='공지사항 제목'
+          placeholder='공지사항 제목을 입력해주세요'
+          defaultValue={isAdmin ? data.title : ''}
+        />
+        <DescriptionInput
+          name='content'
+          label='공지사항 내용'
+          placeholder='공지사항 내용을 입력해주세요'
+          defaultValue={isAdmin ? data.content : ''}
+        />
 
-      {isAdmin && <CheckboxInput name='isShow' label='표시 여부' />}
-
+        {isAdmin && (
+          <CheckboxInput
+            name='isShow'
+            label='표시 여부'
+            checked={data ? data.isShow : false}
+          />
+        )}
+      </div>
       <div className={styles.buttonContainer}>
-        <FormBtn
-          label='취소하기'
+        <button
+          type='button'
           onClick={(e) => {
             e.preventDefault();
             oncancel();
           }}
-        />
-        <FormBtn submit={true} label='제출하기' />
+          className={`${styles.formBtn} ${styles.cancel}`}
+        >
+          취소
+        </button>
+        <button type='submit' className={`${styles.formBtn} ${styles.submit}`}>
+          {isAdmin ? '수정' : '등록'}
+        </button>
       </div>
     </form>
   );

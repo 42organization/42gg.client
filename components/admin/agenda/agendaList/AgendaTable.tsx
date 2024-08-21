@@ -137,7 +137,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
         openModal({
           type: 'modify',
           title: '대회 상세정보',
-          description: '수정 후 확인 버튼을 눌러주세요.',
+          description: '변경 후 수정 버튼을 눌러주세요.',
           FormComponent: ModifyAgendaForm,
           data: agenda,
           isAdmin: true,
