@@ -49,7 +49,7 @@ export const agendaTableFormat: AgendaTableFormat = {
     columns: ['id', 'title', 'content', 'isShow', 'createdAt', 'etc'],
     etc: {
       type: 'button',
-      value: ['자세히', '수정', '삭제'],
+      value: ['수정'],
     },
   },
   ticket: {

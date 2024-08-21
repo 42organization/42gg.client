@@ -67,13 +67,10 @@ export default function AnnouncementTable() {
   const [selectedAgendaKey, setSelectedAgendaKey] = useState('');
   const agendaList = useFetchGet(`list`).data || [];
 
-  const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
+  const buttonList: string[] = [styles.coin, styles.penalty];
 
   const handleButtonAction = (buttonName: string, announce: IAnnouncement) => {
     switch (buttonName) {
-      case '자세히':
-        alert('자세히');
-        break;
       case '수정':
         openModal({
           type: 'modify',
@@ -88,10 +85,6 @@ export default function AnnouncementTable() {
             getAnnoucementList();
           },
         });
-        break;
-      case '삭제':
-        alert('삭제');
-        break;
     }
   };
 
