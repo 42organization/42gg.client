@@ -11,14 +11,12 @@ const AgendaList = ({ agendaList }: { agendaList: AgendaDataProps[] }) => {
       <div className={styles.agendaListItemContainer}>
         {!agendaList || !agendaList.length ? (
           <div>
-            <div className={styles.emptyContainer}>Loading...</div>
+            <div className={styles.emptyContainer}>일정이 없습니다.</div>
           </div>
-        ) : agendaList && agendaList.length > 0 ? (
+        ) : (
           agendaList.map((agendaInfo, idx) => (
             <AgendaListItem agendaInfo={agendaInfo} key={idx} />
           ))
-        ) : (
-          <div className={styles.emptyContainer}>일정이 없습니다.</div>
         )}
       </div>
     </div>
