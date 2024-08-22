@@ -21,7 +21,7 @@ import styles from 'styles/takgu/Layout/Layout.module.scss';
 import PlayButton from '../components/takgu/Layout/PlayButton';
 import UserLayout from '../components/takgu/Layout/UserLayout';
 import ModalProvider from '../components/takgu/modal/ModalProvider';
-import CustomizedSnackbars from '../components/takgu/toastmsg/toastmsg';
+import CustomizedSnackbars from '../components/toastmsg/toastmsg';
 
 type TakguLayoutProps = {
   children: React.ReactNode;
