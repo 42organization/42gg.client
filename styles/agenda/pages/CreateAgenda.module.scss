@@ -19,3 +19,16 @@
   @include text('description');
   padding: 0.5rem;
 }
+
+.bottomContainer {
+  // 아래쪽에는 룰이 다르게 들어가서 갭을 더 줘야 합니다
+  @extend %item-container;
+  margin-top: 1.5rem;
+}
+
+.buttonContainer {
+  display: flex;
+  margin: 2rem 4rem;
+  margin-top: 1rem;
+  justify-content: space-between;
+}

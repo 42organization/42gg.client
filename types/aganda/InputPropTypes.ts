@@ -18,6 +18,7 @@ export interface SelectInputProps {
   options: string[];
   message?: string;
   selected?: string;
+  defaultValue?: string;
   label?: string;
   name: string;
   onChange?: (

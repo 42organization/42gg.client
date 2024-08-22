@@ -2,17 +2,23 @@
 
 .container {
   display: flex;
-  width: 90%;
+  width: 100%;
   flex-direction: column;
+}
+
+.pageContianer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.modalContainer {
+  max-height: 20rem;
+  padding: 1rem;
+  overflow-y: auto; /* 세로 스크롤 활성화 */
   gap: 1rem;
-}
-
-.submit_btn {
-  @include textButton('submit', 'highlight');
-}
-
-.cancel_btn {
-  // @include tesbutton('cancel', 'default');
 }
 
 .title {
@@ -78,7 +84,25 @@
 
 .buttonContainer {
   display: flex;
-  margin: 2rem 4rem;
-  margin-top: 1rem;
+  margin: 1em 2rem;
+  gap: 2rem;
   justify-content: space-between;
+}
+
+.formBtn {
+  display: flex;
+  flex: 1;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  border-radius: $radius-small;
+  justify-content: center;
+  align-items: center;
+
+  &.submit {
+    @include textButton('submit', 'highlight');
+  }
+  &.cancel {
+    @include textButton('cancel', 'default');
+  }
 }

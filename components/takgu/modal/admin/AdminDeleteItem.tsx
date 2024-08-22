@@ -4,7 +4,7 @@ import { Item } from 'types/takgu/itemTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/takgu/admin/modal/AdminDeleteItem.module.scss';
+import styles from 'styles/admin/takgu/modal/AdminDeleteItem.module.scss';
 
 export default function AdminDeleteItemModal(item: Item) {
   const { itemId, itemName, mainContent, subContent } = item;
