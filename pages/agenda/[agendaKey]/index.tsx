@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { User } from 'types/agenda/mainType';
