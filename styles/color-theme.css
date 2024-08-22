@@ -3,7 +3,7 @@
   --bg-light: linear-gradient(180deg, #c9c9c9 0%, #6d5b93 100%);
   --bg-dark: linear-gradient(180deg, #38253a 0%, #604ecd 73%, #999772 100%);
   --color-light: #000000;
-  --color-grey: #33333333;
+  --color-grey: #333333fe;
   --color-dark: #ffffff;
   --border-light: 1px solid black;
   --border-dark: 1px solid white;
@@ -17,14 +17,14 @@
   --box-shadow-dark: 0px 4px 4px 0px rgba(255, 255, 255, 0.25);
   --box-shadow-bottom: 0px 4px 0px 0px #000;
 
-  --highlight-yellow-light: #f8df85;
+  --highlight-yellow-light: #ffbf29;
   --highlight-violet-light: #af71ff;
-  --highlight-yellow-dark: #ff8534;
+  --highlight-yellow-dark: #fff78a;
   --highlight-violet-dark: #af71ff;
 
   --box-bg-1-light: #f8f8f8;
   --box-bg-2-light: #c8c8c8;
-  --box-bg-3-light: #b0b0b0;
+  --box-bg-3-light: #a8a0ac45;
   --box-bg-3-dark: #000000;
   --box-bg-2-dark: #232323;
   --box-bg-1-dark: #3a363b;
