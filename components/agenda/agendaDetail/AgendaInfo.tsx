@@ -1,10 +1,10 @@
 import { NextRouter, useRouter } from 'next/router';
-import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { AgendaInfoProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes';
 import { AgendaStatus } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
 import styles from 'styles/agenda/agendaDetail/AgendaInfo.module.scss';
+import { isSoloTeam } from '../utils/team';
 
 interface CallbackProps {
   router: NextRouter;
@@ -37,10 +37,6 @@ const submitResults = ({ router, agendaKey }: CallbackProps) => {
   alert('결과 입력 버튼입니다.');
 };
 
-const isTeam = (agendaData: AgendaDataProps) => {
-  return agendaData.agendaMinPeople !== agendaData.agendaMaxPeople;
-};
-
 const determineButton = ({ agendaData, isHost, status }: AgendaInfoProps) => {
   const isParticipant = status === 200;
   switch (agendaData.agendaStatus) {
@@ -51,9 +47,11 @@ const determineButton = ({ agendaData, isHost, status }: AgendaInfoProps) => {
         return { text: '주최자 관리', callback: hostMode };
       } else if (isParticipant) {
         return null; // 참가자는 버튼이 없음, 아래 본인 팀 상세정보 확인 가능
-      } else if (isTeam(agendaData))
-        return { text: '팀 만들기', callback: participateTeam };
-      else return { text: '참가하기', callback: participateSolo };
+      } else if (
+        isSoloTeam(agendaData.agendaMinPeople, agendaData.agendaMaxPeople)
+      )
+        return { text: '참가하기', callback: participateSolo };
+      else return { text: '팀 만들기', callback: participateTeam };
     default:
       return null;
   }
