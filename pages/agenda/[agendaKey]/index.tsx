@@ -23,8 +23,6 @@ const AgendaDetail = () => {
   const intraId = user?.intraId || '';
   const isHost = getIsHost(intraId, agendaData);
 
-  const teamUID = 1;
-
   const { data: myTeam, status: status } = useFetchGet<TeamDataProps>(
     `team/my`,
     { agenda_key: agendaKey }
@@ -49,10 +47,6 @@ const AgendaDetail = () => {
         ) : (
           <p>Loading...</p>
         )}
-
-        <div key={teamUID}>
-          <Link href={`/agenda/${agendaKey}/${teamUID}`}>1번 팀</Link>
-        </div>
       </div>
     </>
   );

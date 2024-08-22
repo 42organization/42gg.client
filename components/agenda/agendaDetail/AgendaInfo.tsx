@@ -22,11 +22,6 @@ const participateSolo = () => {
   alert('참여신청이 완료되었습니다.');
 };
 
-const hostMode = ({ router, agendaKey }: CallbackProps) => {
-  router.push(`/agenda/${agendaKey}/host`);
-  alert('주최자 관리 버튼입니다.');
-};
-
 const participateTeam = ({ router, agendaKey }: CallbackProps) => {
   router.push(`/agenda/${agendaKey}/create-team`);
   alert('팀 만들기 버튼입니다.');
@@ -47,13 +42,13 @@ const determineButton = ({ agendaData, isHost, status }: AgendaInfoProps) => {
     case AgendaStatus.CONFIRM:
       return isHost ? { text: '결과입력', callback: submitResults } : null;
     case AgendaStatus.OPEN:
-      if (isHost) {
-        return { text: '주최자 관리', callback: hostMode };
-      } else if (isParticipant) {
-        return null; // 참가자는 버튼이 없음, 아래 본인 팀 상세정보 확인 가능
-      } else if (isTeam(agendaData))
+      if (isParticipant || isHost) {
+        return null; // 참가자, 주최자 버튼이 없음, 아래 본인 팀 상세정보 확인 가능
+      } else if (isTeam(agendaData)) {
         return { text: '팀 만들기', callback: participateTeam };
-      else return { text: '참가하기', callback: participateSolo };
+      } else {
+        return { text: '참가하기', callback: participateSolo };
+      }
     default:
       return null;
   }
