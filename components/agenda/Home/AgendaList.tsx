@@ -5,17 +5,11 @@ import AgendaDeadLine from 'components/agenda/Home/AgendaDeadLine';
 import AgendaInfo from 'components/agenda/Home/AgendaInfo';
 import styles from 'styles/agenda/Home/AgendaList.module.scss';
 
-const AgendaList = ({
-  loadingStatus,
-  agendaList,
-}: {
-  loadingStatus?: { current: boolean };
-  agendaList: AgendaDataProps[];
-}) => {
+const AgendaList = ({ agendaList }: { agendaList: AgendaDataProps[] }) => {
   return (
     <div className={styles.agendaListContainer}>
       <div className={styles.agendaListItemContainer}>
-        {loadingStatus && loadingStatus.current === true ? (
+        {!agendaList || !agendaList.length ? (
           <div>
             <div className={styles.emptyContainer}>Loading...</div>
           </div>

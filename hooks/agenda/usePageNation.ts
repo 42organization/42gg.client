@@ -14,7 +14,7 @@ const usePageNation = <T>({
 }) => {
   const currentPage = useRef<number>(1);
   const [content, setContent] = useState<T[] | null>(null);
-  const loadingStatus = useRef<boolean>(true);
+  const status = useRef<number>(0);
   const totalPages = useRef(1);
 
   if (!size) size = 20;
@@ -23,13 +23,8 @@ const usePageNation = <T>({
   params.size = size;
   const getData = async (page: number) => {
     const res = await instanceInAgenda.get(url, { params });
-    const content = res.data.content
-      ? res.data.content
-      : res.data
-      ? res.data // totalSize 미처리된 api 핸들링
-      : [];
-    // totalSize 미처리된 api 핸들링
-    const totalSize = res.data.totalSize ? res.data.totalSize : content.length;
+    const content = res.data.content ? res.data.content : [];
+    const totalSize = res.data.totalSize ? res.data.totalSize : 0;
 
     if (useIdx) {
       res.data.content = res.data.content.map((c: T, idx: number) => {
@@ -38,14 +33,13 @@ const usePageNation = <T>({
         return temp;
       });
     }
-    loadingStatus.current = false;
+    status.current = res.status;
     return { totalSize, content };
   };
   // const data = getData(0);
 
   const pageChangeHandler = async (pageNumber: number) => {
     if (pageNumber < 1 || pageNumber > totalPages.current) return;
-    loadingStatus.current = true;
     await getData(pageNumber).then((res) => {
       currentPage.current = pageNumber;
       setContent(res.content);
@@ -58,9 +52,9 @@ const usePageNation = <T>({
       totalPages.current = Math.ceil(data.totalSize / size);
       setContent(data.content);
     };
-    if (loadingStatus.current) fetchData();
+    if (!status.current || status.current / 100 != 2) fetchData();
     console.log(url);
-  }, [url, currentPage, getData, size]);
+  }, [currentPage, getData, size]);
 
   const PagaNationElementProps = {
     curPage: currentPage.current,
@@ -68,7 +62,7 @@ const usePageNation = <T>({
     pageChangeHandler: pageChangeHandler,
   };
 
-  return { content, PagaNationElementProps, loadingStatus };
+  return { content, PagaNationElementProps };
 };
 
 export default usePageNation;

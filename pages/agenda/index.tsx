@@ -14,20 +14,16 @@ import listStyles from 'styles/agenda/Home/AgendaList.module.scss';
 const Agenda: NextPage = () => {
   const [showCurrent, setShowCurrent] = useState<boolean>(true);
 
-  const {
-    PagaNationElementProps,
-    content: historyData,
-    loadingStatus,
-  } = usePageNation<AgendaDataProps>({
-    url: '/history',
-  });
+  const { PagaNationElementProps, content: historyData } =
+    usePageNation<AgendaDataProps>({
+      url: '/history',
+    });
 
   const { data: currentData } = useFetchGet<AgendaDataProps[]>('/list');
   const toggleStatus = (e: React.MouseEvent) => {
     const target = e.target as HTMLButtonElement;
     const status = showCurrent ? 'ongoing' : 'closed';
     if ((target && target.name === status) || !target.name) return;
-    loadingStatus.current = true;
     setShowCurrent(target.name === 'ongoing');
   };
 
@@ -63,10 +59,7 @@ const Agenda: NextPage = () => {
         <AgendaList agendaList={currentData || []} />
       ) : (
         <>
-          <AgendaList
-            loadingStatus={loadingStatus}
-            agendaList={historyData || []}
-          />
+          <AgendaList agendaList={historyData || []} />
           <PageNation {...PagaNationElementProps} />{' '}
         </>
       )}
