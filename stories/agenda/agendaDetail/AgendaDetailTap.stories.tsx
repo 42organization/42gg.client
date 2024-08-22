@@ -1,8 +1,4 @@
-// src/components/agenda/agendaDetail/AgendaTab.stories.js
-
-import { action } from '@storybook/addon-actions';
 import React from 'react';
-import { TABS } from 'constants/agenda/agendaDetail/agendaTabs';
 import AgendaTab from 'components/agenda/agendaDetail/AgendaTab';
 
 export default {

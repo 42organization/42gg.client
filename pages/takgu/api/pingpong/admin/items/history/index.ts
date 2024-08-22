@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { IitemHistory } from 'types/takgu/admin/adminStoreTypes';
+import { IitemHistory } from 'types/admin/takgu/adminStoreTypes';
 
 interface IitemHistoryRes {
   itemHistoryList: Array<IitemHistory>;

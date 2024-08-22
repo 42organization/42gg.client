@@ -1,11 +1,11 @@
 import { AxiosResponse } from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { IcoinPolicy } from 'types/takgu/admin/adminCoinTypes';
+import { IcoinPolicy } from 'types/admin/takgu/adminCoinTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/takgu/admin/modal/AdminEditCoinPolicy.module.scss';
+import styles from 'styles/admin/takgu/modal/AdminEditCoinPolicy.module.scss';
 
 export default function AdminEditCoinPolicyModal(props: IcoinPolicy) {
   const { attendance, normal, rankWin, rankLose } = props;

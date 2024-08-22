@@ -1,28 +1,99 @@
+import router from 'next/router';
 import { TeamDetailProps } from 'types/agenda/teamDetail/TeamDetailTypes';
+import { transformTeamLocation } from 'utils/agenda/transformLocation';
 import { AgendaLocation } from 'constants/agenda/agenda';
+import FormBtn from 'components/agenda/button/FormButton';
+import CheckBoxInput from 'components/agenda/Input/CheckboxInput';
+import DescriptionInput from 'components/agenda/Input/DescriptionInput';
+import SelectInput from 'components/agenda/Input/SelectInput';
+import TitleInput from 'components/agenda/Input/TitleInput';
+import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/Form/Form.module.scss';
-import FormBtn from '../button/FormButton';
-import CheckBoxInput from '../Input/CheckboxInput';
-import DescriptionInput from '../Input/DescriptionInput';
-import SelectInput from '../Input/SelectInput';
-import TitleInput from '../Input/TitleInput';
 
 interface CreateTeamFormProps {
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   location: AgendaLocation | null;
+
+  isEdit?: boolean;
+  agendaKey: string;
   /** 팀 상세 페이지 - 수정 */
   teamDetail?: TeamDetailProps;
+  onProceed?: () => void;
   handleConvert?: () => void;
 }
 
+const transformFormData = (formData: FormData) => {
+  const data = JSON.parse(JSON.stringify(Object.fromEntries(formData)));
+  data.teamIsPrivate = data.teamIsPrivate === 'on';
+
+  // 팀 위치 변환
+  data.teamLocation = transformTeamLocation(data.teamLocation);
+
+  // 트림 처리
+  data.teamName = data.teamName.trim();
+  data.teamContent = data.teamContent.trim();
+
+  return data;
+};
+
+const SubmitTeamForm = (
+  target: React.FormEvent<HTMLFormElement>,
+  isEdit: boolean,
+  sendRequest: any,
+  agendaKey: string,
+  teamKey?: string,
+  onProceed?: () => void
+) => {
+  target.preventDefault();
+
+  const formData = new FormData(target.currentTarget);
+  const data = transformFormData(formData);
+
+  if (data.teamName === '' || data.teamContent === '') {
+    alert('모든 항목을 입력해주세요.'); //임시
+    return;
+  }
+  if (isEdit) data.teamKey = teamKey;
+
+  const requestMethod = isEdit ? 'PATCH' : 'POST';
+
+  sendRequest(
+    requestMethod,
+    'team',
+    data,
+    { agenda_key: agendaKey },
+    (res: any) => {
+      if (isEdit) {
+        onProceed && onProceed();
+      } else {
+        router.push(`/agenda/${agendaKey}/${res.teamKey}`);
+      }
+    },
+    (err: string) => {
+      console.error(err);
+    }
+  );
+};
+
 const CreateTeamForm = ({
-  handleSubmit,
   location,
+  isEdit = false,
+  agendaKey,
   teamDetail,
+  onProceed,
   handleConvert,
 }: CreateTeamFormProps) => {
+  const sendRequest = useFetchRequest().sendRequest;
+  const { teamUID } = router.query;
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    handleSubmit(e);
+    SubmitTeamForm(
+      e,
+      isEdit,
+      sendRequest,
+      agendaKey,
+      teamUID as string,
+      onProceed
+    );
     if (handleConvert) {
       handleConvert();
     }

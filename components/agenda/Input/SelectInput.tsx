@@ -47,6 +47,7 @@ const SelectInput = ({
           if (onChange) onChange(e, selected);
         }}
         name={name}
+        defaultValue={selected}
         {...rest}
       >
         <option

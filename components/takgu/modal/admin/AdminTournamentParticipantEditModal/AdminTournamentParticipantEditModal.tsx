@@ -1,13 +1,13 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Button } from '@mui/material';
-import { ITournamentUser } from 'types/takgu/admin/adminTournamentTypes';
+import { ITournamentUser } from 'types/admin/takgu/adminTournamentTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';
-import AdminSearchBar from 'components/takgu/admin/common/AdminSearchBar';
-import useAdminTournamentParticipantEdit from 'hooks/takgu/admin/modal/useAdminTournamentParticipantEdit';
-import styles from 'styles/takgu/admin/modal/AdminTournamentParticipantEditModal.module.scss';
+import AdminSearchBar from 'components/admin/takgu/common/AdminSearchBar';
+import useAdminTournamentParticipantEdit from 'hooks/admin/takgu/modal/useAdminTournamentParticipantEdit';
+import styles from 'styles/admin/takgu/modal/AdminTournamentParticipantEditModal.module.scss';
 import AdminTournamentParticipantList from './AdminTournamentParticipantList';
 
 export default function AdminTournamentParticipantEditModal(props: {

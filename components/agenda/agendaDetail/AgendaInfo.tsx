@@ -18,6 +18,16 @@ const copyLink = () => {
   alert('링크가 복사되었습니다.');
 };
 
+// api 호출 필요
+const participateSolo = () => {
+  alert('참여신청이 완료되었습니다.');
+};
+
+const hostMode = ({ router, agendaKey }: CallbackProps) => {
+  router.push(`/agenda/${agendaKey}/host`);
+  alert('주최자 관리 버튼입니다.');
+};
+
 const participateTeam = ({ router, agendaKey }: CallbackProps) => {
   router.push(`/agenda/${agendaKey}/create-team`);
   alert('팀 만들기 버튼입니다.');

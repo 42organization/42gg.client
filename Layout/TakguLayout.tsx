@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import { openCurrentMatchState } from 'utils/recoil/takgu/match';
-import AdminReject from 'components/takgu/admin/AdminReject';
-import AdminLayout from 'components/takgu/admin/Layout';
+import AdminReject from 'components/admin/AdminReject';
+import AdminLayout from 'components/admin/Layout';
 import CurrentMatch from 'components/takgu/Layout/CurrentMatch';
 import Footer from 'components/takgu/Layout/Footer';
 import Header from 'components/takgu/Layout/Header';

@@ -7,5 +7,5 @@ export interface TeamInfoProps {
   maxPeople: number;
   authority: Authority;
   manageTeamDetail: (method: 'POST' | 'PATCH', url: string) => void;
-  submitTeamForm: (target: React.FormEvent<HTMLFormElement>) => void;
+  submitTeamForm: () => void;
 }
