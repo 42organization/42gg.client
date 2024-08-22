@@ -6,25 +6,29 @@ import AgendaTitle from 'components/agenda/Home/AgendaTitle';
 import MyAgendaBtn from 'components/agenda/Home/MyAgendaBtn';
 import { TestModal, TestModal2 } from 'components/agenda/modal/testModal';
 import PageNation from 'components/Pagination';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import usePageNation from 'hooks/agenda/usePageNation';
 import styles from 'styles/agenda/Home/Agenda.module.scss';
 import listStyles from 'styles/agenda/Home/AgendaList.module.scss';
 
 const Agenda: NextPage = () => {
-  const [view, setView] = useState<boolean>(false);
+  const [showCurrent, setShowCurrent] = useState<boolean>(true);
 
-  const url = view ? '/history' : '/list';
-  const { PagaNationElementProps, content, loadingStatus } =
-    usePageNation<AgendaDataProps>({
-      url: url,
-    });
+  const {
+    PagaNationElementProps,
+    content: historyData,
+    loadingStatus,
+  } = usePageNation<AgendaDataProps>({
+    url: '/history',
+  });
 
+  const { data: currentData } = useFetchGet<AgendaDataProps[]>('/list');
   const toggleStatus = (e: React.MouseEvent) => {
     const target = e.target as HTMLButtonElement;
-    const status = view ? 'closed' : 'ongoing';
+    const status = showCurrent ? 'ongoing' : 'closed';
     if ((target && target.name === status) || !target.name) return;
     loadingStatus.current = true;
-    setView(target.name === 'closed');
+    setShowCurrent(target.name === 'ongoing');
   };
 
   return (
@@ -36,7 +40,7 @@ const Agenda: NextPage = () => {
         <div>
           <button
             className={`${listStyles.agendaListStatus} ${
-              view ? '' : listStyles.selectedStatus
+              showCurrent ? listStyles.selectedStatus : ''
             }`}
             name='ongoing'
             onClick={toggleStatus}
@@ -45,9 +49,8 @@ const Agenda: NextPage = () => {
           </button>
           {' | '}
           <button
-            className={`${listStyles.agendaListStatus} ${
-              view ? listStyles.selectedStatus : ''
-            }`}
+            className={`${listStyles.agendaListStatus} 
+            ${showCurrent ? '' : listStyles.selectedStatus}`}
             name='closed'
             onClick={toggleStatus}
           >
@@ -55,9 +58,18 @@ const Agenda: NextPage = () => {
           </button>
         </div>
       </div>
-      <AgendaList loadingStatus={loadingStatus} agendaList={content || []} />
 
-      {view && <PageNation {...PagaNationElementProps} />}
+      {showCurrent ? (
+        <AgendaList agendaList={currentData || []} />
+      ) : (
+        <>
+          <AgendaList
+            loadingStatus={loadingStatus}
+            agendaList={historyData || []}
+          />
+          <PageNation {...PagaNationElementProps} />{' '}
+        </>
+      )}
       <TestModal />
       <TestModal2 />
     </div>

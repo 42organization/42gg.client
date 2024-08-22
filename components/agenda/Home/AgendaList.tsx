@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
-import { instanceInAgenda } from 'utils/axios';
 import AgendaDeadLine from 'components/agenda/Home/AgendaDeadLine';
 import AgendaInfo from 'components/agenda/Home/AgendaInfo';
 import styles from 'styles/agenda/Home/AgendaList.module.scss';
@@ -10,13 +9,13 @@ const AgendaList = ({
   loadingStatus,
   agendaList,
 }: {
-  loadingStatus: { current: boolean };
+  loadingStatus?: { current: boolean };
   agendaList: AgendaDataProps[];
 }) => {
   return (
     <div className={styles.agendaListContainer}>
       <div className={styles.agendaListItemContainer}>
-        {loadingStatus.current === true ? (
+        {loadingStatus && loadingStatus.current === true ? (
           <div>
             <div className={styles.emptyContainer}>Loading...</div>
           </div>
