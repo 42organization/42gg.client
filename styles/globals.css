@@ -182,18 +182,18 @@ ul.pagination li {
 
 ul.pagination li a {
   text-decoration: none;
-  color: #f0b5f2; /* $g1-bottom */
+  color: var(--color-grey); /* $g1-bottom */
   font-size: 1rem;
 }
 
 ul.pagination li.active a {
-  color: #de1825; /* $pp-red */
+  color: var(--highlight-violet); /* $pp-red */
 }
 
 ul.pagination li a:hover,
 ul.pagination li a.active {
   font-weight: 700;
-  color: #de1825; /* $pp-red */
+  color: var(--highlight-violet); /* $pp-red */
 }
 
 .hidden {

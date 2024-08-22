@@ -1,0 +1,6 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  @include text(description);
+  font-family: $font-text-bold;
+}
