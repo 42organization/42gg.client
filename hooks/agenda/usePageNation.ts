@@ -50,7 +50,7 @@ const usePageNation = <T>({
       setContent(data.content);
     };
     fetchData();
-  });
+  }, []);
 
   const PagaNationElementProps = {
     curPage: currentPage,
