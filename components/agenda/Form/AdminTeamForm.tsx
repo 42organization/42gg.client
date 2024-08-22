@@ -53,8 +53,6 @@ const AdminTeamFrom = ({ teamKey, teamData }: AdminTeamFormProps) => {
     data.teamAward = teamData.teamAward;
     data.teamAwardPriority = teamData.teamAwardPriority;
 
-    console.log(data);
-
     sendRequest(
       'PATCH',
       'admin/team',

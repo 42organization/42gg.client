@@ -84,7 +84,6 @@ export default function TeamTable() {
       teamAwardPriority: teamInfo.teamAwardPriority,
       teamMates: [{ intraId: 'jihylim' }],
     };
-    console.log(updateTeam);
     await sendRequest('PATCH', 'admin/team', updateTeam, {}, () => {
       getTeamList();
     });
