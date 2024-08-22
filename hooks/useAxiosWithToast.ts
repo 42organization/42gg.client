@@ -26,15 +26,16 @@ export default function useAxiosWithToast(instance: AxiosInstance) {
   };
 
   const errorResponseHandler = (error: AxiosError) => {
-    const errorDataMessage = (error.response?.data as { message?: string })
+    let errorDataMessage = (error.response?.data as { message?: string })
       ?.message;
+    if (!errorDataMessage) {
+      errorDataMessage = error.message;
+    }
 
     setSnackbar({
       toastName: `response error`,
       severity: 'error',
-      message: errorDataMessage
-        ? `🔥 ${errorDataMessage} 🔥`
-        : `🔥 ${error.status}: ${error.message} 🔥`,
+      message: `🔥 ${errorDataMessage} 🔥`,
       clicked: true,
     });
 
