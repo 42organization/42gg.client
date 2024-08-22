@@ -11,6 +11,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
+import { TeamDetailProps } from 'types/agenda/teamDetail/TeamDetailTypes';
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
@@ -19,6 +20,7 @@ import { NoContent } from 'components/admin/agenda/utils';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
 import PageNation from 'components/Pagination';
 import useFetchGet from 'hooks/agenda/useFetchGet';
+import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
 
 const itemsPerPage = 10; // 한 페이지에 보여줄 항목 수
@@ -43,6 +45,7 @@ export interface ITeam {
   teamAward: string;
   teamAwardPriority: number;
   teamStatus: string;
+  coalitions: string[];
 }
 
 export interface ITeamTable {
@@ -54,6 +57,7 @@ export interface ITeamTable {
 export default function TeamTable() {
   const router = useRouter();
   const { agendaKey } = router.query;
+  const sendRequest = useFetchRequest().sendRequest;
 
   const [teamInfo, setTeamInfo] = useState<ITeamTable>({
     teamList: [],
@@ -66,18 +70,37 @@ export default function TeamTable() {
   const agendaList = useFetchGet(`admin/list`).data || [];
   const setSnackBar = useSetRecoilState(toastState);
 
-  // const modal = useRecoilValue(modalState);
   const buttonList: string[] = [styles.coin, styles.penalty];
 
-  const handleButtonAction = (buttonName: string, teamKey: string) => {
+  const deleteTeam = async (teamInfo: TeamDetailProps) => {
+    const updateTeam = {
+      teamKey: teamInfo.teamKey,
+      teamName: teamInfo.teamName,
+      teamContent: 'content', // 이후 제거
+      teamStatus: TeamStatus.CANCEL,
+      teamIsPrivate: teamInfo.teamIsPrivate,
+      teamLocation: 'SEOUL', // 이후 제거
+      teamAward: teamInfo.teamAward,
+      teamAwardPriority: teamInfo.teamAwardPriority,
+      teamMates: [{ intraId: 'jihylim' }],
+    };
+    console.log(updateTeam);
+    await sendRequest('PATCH', 'admin/team', updateTeam, {}, () => {
+      getTeamList();
+    });
+  };
+
+  const handleButtonAction = (
+    buttonName: string,
+    teamInfo: TeamDetailProps
+  ) => {
+    const teamKey = teamInfo.teamKey;
     switch (buttonName) {
       case '수정':
-        router.push(
-          `/admin/agenda/teamModify?agenda_key=${agendaKey}&team_key=${teamKey}`
-        );
+        router.push(`/admin/agenda/teamModify?team_key=${teamKey}`);
         break;
-      case '삭제':
-        alert('삭제');
+      case '취소':
+        deleteTeam(teamInfo);
         break;
     }
   };
@@ -95,7 +118,6 @@ export default function TeamTable() {
           size: itemsPerPage,
         },
       });
-      console.log('response:', response);
 
       if (response.data.content.length === 0) {
         setSnackBar({
@@ -120,7 +142,7 @@ export default function TeamTable() {
         clicked: true,
       });
     }
-  }, [currentPage, selectedAgendaKey]); // selectedAgendaKey 추가
+  }, [currentPage, selectedAgendaKey, agendaKey]);
 
   useEffect(() => {
     if (agendaKey) {
@@ -208,10 +230,7 @@ export default function TeamTable() {
                                       key={buttonName}
                                       className={`${styles.button} ${buttonList[index]}`}
                                       onClick={() =>
-                                        handleButtonAction(
-                                          buttonName,
-                                          team.teamKey
-                                        )
+                                        handleButtonAction(buttonName, team)
                                       }
                                     >
                                       {buttonName}
