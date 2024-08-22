@@ -10,7 +10,7 @@ import LoginChecker from 'components/LoginChecker';
 import Header from 'components/takgu/Layout/Header';
 import HeaderStateContext from 'components/takgu/Layout/HeaderContext';
 import ModalProvider from 'components/takgu/modal/ModalProvider';
-import CustomizedSnackbars from 'components/takgu/toastmsg/toastmsg';
+import CustomizedSnackbars from 'components/toastmsg/toastmsg';
 import LayoutProvider from 'Layout/LayoutProvider';
 import * as gtag from 'lib/gtag';
 import 'styles/globals.css';

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ThemeProvider, createTheme } from '@mui/material';
+import { instanceInManage } from 'utils/axios';
 import SideNav from 'components/takgu/admin/SideNav';
 import useAxiosWithToast from 'hooks/useAxiosWithToast';
 import styles from 'styles/takgu/admin/Layout.module.scss';
@@ -15,7 +16,7 @@ const theme = createTheme({
 });
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
-  useAxiosWithToast();
+  useAxiosWithToast(instanceInManage);
 
   return (
     <ThemeProvider theme={theme}>

@@ -15,6 +15,7 @@ export default function TeamDetail() {
   const router = useRouter();
   const { agendaKey } = router.query;
   const { teamUID } = router.query;
+
   /**
    * API GET DATA
    * 1. intraId
@@ -80,6 +81,7 @@ export default function TeamDetail() {
           router.push(`/agenda/${agendaKey}`);
         } else {
           // 그 외 API : 팀 상세 데이터 갱신
+
           getTeamDetail();
         }
       },
