@@ -31,16 +31,17 @@ export const agendaTableFormat: AgendaTableFormat = {
     name: '팀 관리',
     columns: [
       'teamName',
-      'teamStatus',
-      'teamScore',
-      'teamIsPrivate',
       'teamLeaderIntraId',
       'teamMateCount',
+      'teamIsPrivate',
+      'teamAward',
+      'teamAwardPriority',
+      'teamStatus',
       'etc',
     ],
     etc: {
       type: 'button',
-      value: ['자세히', '수정', '삭제'],
+      value: ['수정', '삭제'],
     },
   },
 

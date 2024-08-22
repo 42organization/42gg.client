@@ -25,22 +25,24 @@ const itemsPerPage = 10; // 한 페이지에 보여줄 항목 수
 
 const tableTitle: { [key: string]: string } = {
   teamName: '팀 이름',
-  teamStatus: '팀 상태',
-  teamScore: '팀 등수',
-  teamIsPrivate: '비공개 여부',
   teamLeaderIntraId: '팀장',
   teamMateCount: '팀원 수',
+  teamIsPrivate: '공개 여부',
+  teamAward: '상',
+  teamAwardPriority: '등수',
+  teamStatus: '상태',
   etc: '기타',
 };
 
 export interface ITeam {
+  teamKey: string;
   teamName: string;
-  teamStatus: string;
-  teamScore: number;
-  teamIsPrivate: boolean;
   teamLeaderIntraId: string;
   teamMateCount: number;
-  teamKey: string;
+  teamIsPrivate: boolean;
+  teamAward: string;
+  teamAwardPriority: number;
+  teamStatus: string;
 }
 
 export interface ITeamTable {
@@ -65,15 +67,14 @@ export default function TeamTable() {
   const setSnackBar = useSetRecoilState(toastState);
 
   // const modal = useRecoilValue(modalState);
-  const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
+  const buttonList: string[] = [styles.coin, styles.penalty];
 
   const handleButtonAction = (buttonName: string, teamKey: string) => {
     switch (buttonName) {
-      case '자세히':
-        alert('자세히');
-        break;
       case '수정':
-        alert('수정');
+        router.push(
+          `/admin/agenda/teamModify?agenda_key=${agendaKey}&team_key=${teamKey}`
+        );
         break;
       case '삭제':
         alert('삭제');
@@ -94,6 +95,7 @@ export default function TeamTable() {
           size: itemsPerPage,
         },
       });
+      console.log('response:', response);
 
       if (response.data.content.length === 0) {
         setSnackBar({
