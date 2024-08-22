@@ -1,6 +1,7 @@
 import { TeamStatus, Coalition, AgendaLocation } from 'constants/agenda/agenda';
 
 export interface TeamDetailProps {
+  teamKey?: string;
   teamName: string;
   teamLeaderIntraId: string;
   teamStatus: TeamStatus; //e

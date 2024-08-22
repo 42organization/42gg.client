@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { TeamInfoProps } from 'types/agenda/teamDetail/TeamInfoTypes';
 import { colorMapping } from 'types/agenda/utils/colorList';
@@ -17,12 +18,13 @@ const TeamInfo = ({
   submitTeamForm,
 }: TeamInfoProps) => {
   // EditTeam UI <-> TeamInfo UI 전환
+  const router = useRouter();
+  const { agendaKey } = router.query;
   const [convert, setConvert] = useState(true);
 
   const handleConvert = () => {
     setConvert(!convert);
   };
-
   return convert ? (
     /* TeamInfo */
     <>
@@ -96,9 +98,11 @@ const TeamInfo = ({
       <div className={styles.container}>
         <h2 className={styles.title}>팀 수정하기</h2>
         <CreateTeamForm
-          handleSubmit={submitTeamForm}
           location={teamDetail.teamLocation}
+          isEdit={true}
+          agendaKey={agendaKey as string}
           teamDetail={teamDetail}
+          onProceed={submitTeamForm}
           handleConvert={handleConvert}
         />
       </div>
