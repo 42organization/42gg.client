@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
-import { formatDate } from 'components/agenda/utils/formatDate';
+import { formatDate } from 'utils/agenda/formatDate';
 import DownArrow from 'public/image/agenda/ChevronDown.svg';
 import RightArrow from 'public/image/agenda/ChevronRight.svg';
 import styles from 'styles/agenda/agendaDetail/tabs/AnnouncementItem.module.scss';

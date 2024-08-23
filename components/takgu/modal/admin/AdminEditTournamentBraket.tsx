@@ -1,12 +1,12 @@
 import { Match } from '@g-loot/react-tournament-brackets/dist/src/types';
 import { useCallback, useEffect, useState, useRef, createContext } from 'react';
-import { ITournament } from 'types/takgu/admin/adminTournamentTypes';
+import { ITournament } from 'types/admin/takgu/adminTournamentTypes';
 import { TournamentGame } from 'types/takgu/tournamentTypes';
 import { instance } from 'utils/axios';
 import { convertTournamentGamesToBracketMatchs } from 'utils/takgu/handleTournamentGame';
-import TournamentEditBraket from 'components/takgu/admin/tournament/TournamentEditBraket';
+import TournamentEditBraket from 'components/admin/takgu/tournament/TournamentEditBraket';
 import useComponentSize from 'hooks/takgu/util/useComponentSize';
-import styles from 'styles/takgu/admin/modal/AdminEditTournamentBraket.module.scss';
+import styles from 'styles/admin/takgu/modal/AdminEditTournamentBraket.module.scss';
 
 export const TournamentIdContext = createContext<number>(0);
 

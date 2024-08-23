@@ -5,9 +5,9 @@
   --header-bg-light: #a9a2b9;
   --header-bg-dark: #49344e;
 
-  --text-light: #000000;
-  --text-grey: #898989;
-  --text-dark: #ffffff;
+  --color-light: #000000;
+  --color-grey: #333333fe;
+  --color-dark: #ffffff;
   --border-light: 1px solid black;
   --border-dark: 1px solid white;
   --border-highlight-light: 2px solid black;
@@ -20,9 +20,9 @@
   --box-shadow-dark: 0px 4px 4px 0px rgba(255, 255, 255, 0.25);
   --box-shadow-bottom: 0px 4px 0px 0px #000;
 
-  --highlight-yellow-light: #f8df85;
+  --highlight-yellow-light: #ffbf29;
   --highlight-violet-light: #af71ff;
-  --highlight-yellow-dark: #ff8534;
+  --highlight-yellow-dark: #fff78a;
   --highlight-violet-dark: #af71ff;
 
   --box-bg-1-light: #f8f8f8;

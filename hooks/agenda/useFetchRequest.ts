@@ -31,6 +31,7 @@ const useFetchRequest = <T>() => {
         if (res.data) {
           setData(res.data);
         }
+        return res.data;
       }
     } catch (error) {
       setError('request error');

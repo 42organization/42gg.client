@@ -1,0 +1,56 @@
+@import 'styles/takgu/common';
+
+.background {
+  display: flex;
+  width: 100vw;
+  min-width: 24rem;
+  height: 100vh;
+  min-height: 40rem;
+  flex-direction: row;
+  padding: 0 4rem;
+  background-image: url('../../public/image/takgu/login_background_img.png');
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  min-width: 18rem;
+  max-width: 32rem;
+  height: 40rem;
+  min-height: 28rem;
+  max-height: calc(100vh - 8rem);
+  flex-direction: column;
+  padding: 4rem 2.5rem;
+  background: linear-gradient(180deg, #cd82ce 0%, #ba9aff 100%);
+  border-radius: $medium-radius;
+  box-shadow: 0.2rem 0.2rem 1rem black;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  @include logoText(3rem, black);
+  text-align: center;
+  letter-spacing: 0.2rem;
+}
+
+.content {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.home {
+  @include select-buttons(10rem, 3.5rem);
+  .positive {
+    input {
+      font-size: $big-font;
+      font-weight: 500;
+      box-shadow: 0.1rem 0.1rem 0.3rem $pp-blue;
+    }
+  }
+}

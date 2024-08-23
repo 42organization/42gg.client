@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CreateAgenda from 'pages/agenda/create';
+import { CreateAgenda } from 'pages/agenda/create';
 
 const meta: Meta = {
   title: 'Agenda/Form/create-agenda',

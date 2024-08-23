@@ -1,5 +1,5 @@
 import { AgendaProps } from 'types/agenda/agendaDetail/agendaTypes';
-import { formatDate } from 'components/agenda/utils/formatDate';
+import { formatDate } from 'utils/agenda/formatDate';
 import styles from 'styles/agenda/agendaDetail/tabs/AgendaDescription.module.scss';
 
 export default function AgendaDescription({ agendaData }: AgendaProps) {

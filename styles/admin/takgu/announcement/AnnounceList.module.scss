@@ -1,0 +1,53 @@
+@import 'styles/takgu/common.scss';
+@import 'styles/admin/takgu/common/Pagination.module.scss';
+
+.container {
+  display: flex;
+  width: 95%;
+  max-width: 61.5rem;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+.quillViewer {
+  @include quillViewer($color: black, $scrollbarColor: $gray);
+  max-width: 16rem;
+  max-height: 19rem;
+  padding: 0;
+  margin: 0.2rem;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+
+.title {
+  font-size: $big-font;
+  font-weight: 700;
+  line-height: 150%;
+}
+
+.tableContainer {
+  .table {
+    .tableBody {
+      .tableBodyItemQuill {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .tableBodyItem {
+        padding: 0.5rem;
+        font-size: $small-font;
+        line-height: 100%;
+        text-align: center;
+      }
+    }
+  }
+}
+
+@include pagination;

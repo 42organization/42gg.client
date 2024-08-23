@@ -1,10 +1,10 @@
 import { useSetRecoilState } from 'recoil';
-import { Iprofile } from 'types/takgu/admin/adminReceiptType';
+import { Iprofile } from 'types/admin/takgu/adminReceiptType';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';
 import PlayerImage from 'components/takgu/PlayerImage';
-import styles from 'styles/takgu/admin/modal/AdminDeleteProfile.module.scss';
+import styles from 'styles/admin/takgu/modal/AdminDeleteProfile.module.scss';
 
 export default function AdminDeleteProfileModal(props: Iprofile) {
   const { id, userIntraId, imageUri } = props;

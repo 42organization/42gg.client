@@ -3,7 +3,7 @@ import { IoSend } from 'react-icons/io5';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';
-import styles from 'styles/takgu/admin/modal/AdminFeedbackCheck.module.scss';
+import styles from 'styles/admin/takgu/modal/AdminFeedbackCheck.module.scss';
 
 interface IfeedbackProps {
   id: number;

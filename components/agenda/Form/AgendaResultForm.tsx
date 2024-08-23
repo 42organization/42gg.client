@@ -86,12 +86,10 @@ const AgendaResultForm = ({
 
   const startModifyAward = (e: Event) => {
     e.preventDefault();
-    console.log('startModifyAward');
     const target = e.target as HTMLParagraphElement;
     if (target === null) return;
     modifying_award_div = target.closest(`.${styles.awardTitleContainer}`);
     modifying_award_p = target.closest('p');
-    console.log(modifying_award_div, modifying_award_p, target);
     if (!modifying_award_div || !modifying_award_p) return;
     const input = document.createElement('input');
     input.classList.add(styles.newAwardInput);
@@ -99,7 +97,6 @@ const AgendaResultForm = ({
     input.value = modifying_award_p.innerText;
     input.addEventListener('keydown', (e) => completeModifyAward(e));
     input.addEventListener('blur', (e) => cancelModifyAward(e));
-    console.log(input, modifying_award_p);
     modifying_award_div.replaceChild(input, modifying_award_p);
   };
 
@@ -125,10 +122,7 @@ const AgendaResultForm = ({
     if (e.type !== 'keydown' || e.key !== 'Enter') return;
     const idx = parseInt(modifying_award_div?.getAttribute('id') || '-2');
     if (idx === -2) return;
-    console.log('completeModifyAward');
-    console.log(idx + 1);
     const newAward = target.value;
-    console.log(awardList[idx]);
     awardList[idx].award = newAward;
     modifying_award_p.innerText = newAward;
     setAwardList([...awardList]);
