@@ -11,7 +11,6 @@ type LayoutProviderProps = {
 // 로그인 스테이트 등은 각 레이아웃에서 확인
 const LayoutProvider = ({ children }: LayoutProviderProps) => {
   const app = usePathname();
-  console.log(app);
   switch (app) {
     case '':
     case 'agenda':
