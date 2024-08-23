@@ -19,7 +19,6 @@ const DescriptionInput = ({
         className={styles.description_input}
         placeholder={placeholder}
         defaultValue={defaultValue}
-        {...rest}
       />
     </div>
   );

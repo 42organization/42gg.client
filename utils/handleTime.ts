@@ -264,6 +264,8 @@ export const getRemainTime = ({
   targetTime: Date;
   cmpTime?: Date;
 }) => {
+  const suffix = cmpTime ? '' : ' 남음';
+
   cmpTime = cmpTime || new Date();
   const year = targetTime.getFullYear() - cmpTime.getFullYear();
   const month = targetTime.getMonth() - cmpTime.getMonth();
@@ -272,15 +274,15 @@ export const getRemainTime = ({
   const min = targetTime.getMinutes() - cmpTime.getMinutes();
 
   return year > 0
-    ? `${year}년 남음`
+    ? `${year}년`
     : month > 0
-    ? `${month}개월 남음`
+    ? `${month}개월${suffix}`
     : day > 0
-    ? `${day}일 남음`
+    ? `${day}일${suffix}`
     : hour > 0
-    ? `${hour}시간 남음`
+    ? `${hour}시간${suffix}`
     : min > 0
-    ? `${min}분 남음`
+    ? `${min}분${suffix}`
     : `마감`;
 };
 

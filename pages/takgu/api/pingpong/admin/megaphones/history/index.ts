@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Imegaphone } from 'types/takgu/admin/adminReceiptType';
+import { Imegaphone } from 'types/admin/takgu/adminReceiptType';
 
 interface ImegaphoneRes {
   megaphoneList: Array<Imegaphone>;

@@ -1,17 +1,28 @@
 import { agendaModal } from 'types/agenda/modalTypes';
-import { useModal } from 'components/agenda/modal/useModal';
 import styles from 'styles/agenda/modal/modal.module.scss';
 
-const ModifyModal = (
-  props: agendaModal & {
-    FormComponent: React.ComponentType<{
-      data: any;
-    }>;
-  }
-) => {
-  const { title, description, onCancel, onProceed, FormComponent, data } =
-    props;
-  const { handleCancel, handleProceed } = useModal();
+interface FormComponentProps {
+  isAdmin?: boolean;
+  data: any;
+  stringKey?: string;
+  onProceed?: () => void;
+}
+
+interface ModifyModalProps extends agendaModal {
+  FormComponent?: React.FC<FormComponentProps>;
+}
+
+const ModifyModal: React.FC<ModifyModalProps> = (props) => {
+  const {
+    title,
+    description,
+    FormComponent,
+    data,
+    isAdmin,
+    stringKey,
+    onProceed,
+  } = props;
+
   return (
     <>
       <div className={`${styles.modalContainer} ${styles.wide}`}>
@@ -23,12 +34,16 @@ const ModifyModal = (
         <div className={`${styles.contentContainer} ${styles.left}`}>
           {description}
         </div>
+
         <div className={styles.formContainer}>
-          <FormComponent data={data} />
-        </div>
-        <div className={styles.buttonContainer}>
-          <button onClick={() => handleCancel(onCancel)}>취소</button>
-          <button onClick={() => handleProceed(onProceed)}>수정</button>{' '}
+          {FormComponent && (
+            <FormComponent
+              isAdmin={isAdmin}
+              data={data}
+              stringKey={stringKey}
+              onProceed={onProceed}
+            />
+          )}
         </div>
       </div>
     </>

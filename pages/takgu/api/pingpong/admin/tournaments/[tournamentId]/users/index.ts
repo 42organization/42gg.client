@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { ITournamentUser } from 'types/takgu/admin/adminTournamentTypes';
+import { ITournamentUser } from 'types/admin/takgu/adminTournamentTypes';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { tournamentId } = req.query;

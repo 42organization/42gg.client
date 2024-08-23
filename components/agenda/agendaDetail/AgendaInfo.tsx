@@ -23,8 +23,7 @@ const participateSolo = () => {
 };
 
 const hostMode = ({ router, agendaKey }: CallbackProps) => {
-  router.push(`/agenda/${agendaKey}/host`);
-  alert('주최자 관리 버튼입니다.');
+  router.push(`/agenda/${agendaKey}/host/modify`);
 };
 
 const participateTeam = ({ router, agendaKey }: CallbackProps) => {

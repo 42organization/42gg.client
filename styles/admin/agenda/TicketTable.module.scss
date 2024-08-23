@@ -1,0 +1,10 @@
+.clickableCell {
+  font-weight: bold;
+  color: yellow;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.clickableCell:hover {
+  color: darkorange;
+}

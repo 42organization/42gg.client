@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { ITournamentEditInfo } from 'types/takgu/admin/adminTournamentTypes';
+import { ITournamentEditInfo } from 'types/admin/takgu/adminTournamentTypes';
 
 const emptyTournamentEditInfo: ITournamentEditInfo = {
   tournamentId: null,

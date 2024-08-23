@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import { openCurrentMatchState } from 'utils/recoil/takgu/match';
-import AdminReject from 'components/takgu/admin/AdminReject';
-import AdminLayout from 'components/takgu/admin/Layout';
+import AdminReject from 'components/admin/AdminReject';
+import AdminLayout from 'components/admin/Layout';
 import CurrentMatch from 'components/takgu/Layout/CurrentMatch';
 import Footer from 'components/takgu/Layout/Footer';
 import Header from 'components/takgu/Layout/Header';
@@ -21,7 +21,7 @@ import styles from 'styles/takgu/Layout/Layout.module.scss';
 import PlayButton from '../components/takgu/Layout/PlayButton';
 import UserLayout from '../components/takgu/Layout/UserLayout';
 import ModalProvider from '../components/takgu/modal/ModalProvider';
-import CustomizedSnackbars from '../components/takgu/toastmsg/toastmsg';
+import CustomizedSnackbars from '../components/toastmsg/toastmsg';
 
 type TakguLayoutProps = {
   children: React.ReactNode;
