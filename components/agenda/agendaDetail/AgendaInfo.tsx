@@ -3,8 +3,8 @@ import { AgendaInfoProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes'
 import { AgendaStatus } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
+import { isSoloTeam } from 'components/agenda/utils/team';
 import styles from 'styles/agenda/agendaDetail/AgendaInfo.module.scss';
-import { isSoloTeam } from '../utils/team';
 
 interface CallbackProps {
   router: NextRouter;

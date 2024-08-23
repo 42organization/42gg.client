@@ -1,8 +1,8 @@
 import { ParticipantTabProps } from 'types/agenda/agendaDetail/tabs/participantTypes';
 import ParticipantsList from 'components/agenda/agendaDetail/tabs/ParticipantsList';
+import { isSoloTeam } from 'components/agenda/utils/team';
 import styles from 'styles/agenda/agendaDetail/tabs/AgendaParticipants.module.scss';
 import ParticipantTeamList from './ParticipantTeamList';
-import { isSoloTeam } from '../../utils/team';
 
 export default function AgendaParticipants({
   myTeam,
