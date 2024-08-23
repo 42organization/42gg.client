@@ -95,7 +95,6 @@ export default function TeamTable() {
           size: itemsPerPage,
         },
       });
-      console.log('response:', response);
 
       if (response.data.content.length === 0) {
         setSnackBar({

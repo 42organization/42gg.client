@@ -67,7 +67,6 @@ export default function ActionSelectorButtons({
         }
       );
       setIsFinish(!checked);
-      console.log(res);
     } catch (e: any) {
       setSnackBar({
         toastName: 'patch recruitment',

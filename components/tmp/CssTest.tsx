@@ -8,7 +8,6 @@ const CssTest = () => {
     } else {
       document.documentElement.setAttribute('data-theme', 'light');
     }
-    console.log('theme', theme);
   };
   return (
     <div id='container'>
