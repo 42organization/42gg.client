@@ -40,7 +40,6 @@ const SubmitAgendaForm = async (
 
   if (document.getElementsByClassName('error_text').length > 0) {
     alert('입력값을 확인해주세요.');
-    console.log(document.getElementsByClassName('error'));
     return;
   }
   const poster = data.get('agendaPoster') as File;
@@ -75,7 +74,6 @@ const SubmitAgendaForm = async (
     if (res.status === 204 || res.status === 200) {
       onProceed && onProceed();
     }
-    console.log(res);
   } catch (err) {
     console.error(err);
   }

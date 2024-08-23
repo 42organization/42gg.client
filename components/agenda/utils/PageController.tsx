@@ -77,7 +77,6 @@ const PageController = ({
         className={styles.agendaInfoContainer}
         onClick={(e) => {
           const target = e.target as HTMLElement;
-          console.log(target);
           if (
             target.className.includes(styles.moveButton) ||
             target.closest(styles.moveButton)

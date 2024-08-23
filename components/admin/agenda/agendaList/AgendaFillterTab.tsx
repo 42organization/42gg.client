@@ -32,7 +32,6 @@ export default function AgendaFillterTab() {
         break;
       case 1:
         setChild(<AgendaTable isOfficial={true} />);
-        console.log('공식');
         break;
       case 2:
         setChild(<AgendaTable isOfficial={false} />);

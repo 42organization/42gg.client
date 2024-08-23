@@ -53,7 +53,6 @@ const usePageNation = <T>({
       setContent(data.content);
     };
     if (!status.current || status.current / 100 != 2) fetchData();
-    console.log(url);
   }, [currentPage, getData, size]);
 
   const PagaNationElementProps = {
