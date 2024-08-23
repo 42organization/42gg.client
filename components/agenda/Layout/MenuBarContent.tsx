@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { ElementType, useContext } from 'react';
 import styles from 'styles/agenda/Layout/MenuBar.module.scss';
 import { HeaderContext, HeaderContextState } from './AgendaHeader';
@@ -10,18 +11,20 @@ interface MenuBarContentProps {
 
 const MenuBarContent = ({ as, content, href }: MenuBarContentProps) => {
   const Elem = as || 'p';
-  const context = useContext<HeaderContextState | null>(HeaderContext);
-  const moveTo =
-    context && context.moveTo && context.moveTo
-      ? context.moveTo
-      : () => {
-          alert('Error: HeaderContext not found');
-        };
+  const closeMenuBar =
+    useContext<HeaderContextState | null>(HeaderContext)
+      ?.resetOpenMenuBarState ||
+    function () {
+      console.log('resetOpenMenuBarState is not defined');
+    };
+
   return (
     <div className={styles.content}>
-      <button onClick={moveTo(href)} className={styles.button}>
-        <Elem>{content}</Elem>
-      </button>
+      <Link href={href} onClick={closeMenuBar}>
+        <button className={styles.button}>
+          <Elem>{content}</Elem>
+        </button>
+      </Link>
     </div>
   );
 };

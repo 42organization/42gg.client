@@ -1,6 +1,5 @@
 import { useUser } from 'hooks/agenda/Layout/useUser';
 import styles from 'styles/agenda/Layout/MenuBar.module.scss';
-import { style } from 'styles/takgu/recruit/Main/main.module.scss';
 import MenuBarContent from './MenuBarContent';
 
 const MenuBar = ({ isActive }: { isActive: boolean }) => {

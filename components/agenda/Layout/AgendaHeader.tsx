@@ -10,28 +10,20 @@ export interface HeaderContextState {
   openMenuState: boolean;
   setOpenMenuBarState: Dispatch<SetStateAction<boolean>>;
   resetOpenMenuBarState: () => void;
-  moveTo: (href: string) => void;
 }
 
 export const HeaderContext = createContext<HeaderContextState | null>(null);
 
 export default function AgendaHeader() {
   const [menu, setMenu] = useState<boolean>(false);
-  const router = useRouter();
   const resetMenuHandler = () => {
     setMenu(false);
-  };
-
-  const moveTo = (href: string) => () => {
-    resetMenuHandler();
-    router.push(href);
   };
 
   const HeaderState: HeaderContextState = {
     openMenuState: menu,
     setOpenMenuBarState: setMenu,
     resetOpenMenuBarState: resetMenuHandler,
-    moveTo: moveTo,
   };
 
   return (
@@ -39,7 +31,7 @@ export default function AgendaHeader() {
       <div className={styles.headerContainer}>
         <div className={styles.headerWrap}>
           <div className={styles.headerLeft}>
-            <Link href='/'>
+            <Link href='/' onClick={HeaderState.resetOpenMenuBarState}>
               <Logo className={styles.logo} />
             </Link>
           </div>
