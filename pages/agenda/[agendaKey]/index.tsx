@@ -17,12 +17,12 @@ const getIsHost = (intraId: string, agendaData?: AgendaDataProps | null) => {
 const AgendaDetail = () => {
   const router = useRouter();
   const { agendaKey } = router.query;
-  const agendaData = useAgendaInfo(agendaKey as string);
+  const agendaData = useAgendaInfo(agendaKey as string); // useFetchGet 사용해서 get하기 -> useAgendaInfo 는 데이터를 refresh 불가
   const user: User | undefined = useUser();
   const intraId = user?.intraId || '';
   const isHost = getIsHost(intraId, agendaData);
 
-  const { data: myTeam, status: status } = useFetchGet<TeamDataProps>(
+  const { data: myTeam, status: myTeamStatus } = useFetchGet<TeamDataProps>(
     `team/my`,
     { agenda_key: agendaKey }
   );
@@ -35,8 +35,8 @@ const AgendaDetail = () => {
             <AgendaInfo
               agendaData={agendaData}
               isHost={isHost}
-              intraId={intraId}
-              status={status}
+              myTeamStatus={myTeamStatus}
+              myTeam={myTeam}
             />
             <AgendaTab
               agendaData={agendaData}

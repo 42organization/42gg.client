@@ -4,7 +4,8 @@ import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
 export interface AgendaInfoProps {
   agendaData: AgendaDataProps;
   isHost?: boolean;
-  status?: number;
+  myTeamStatus?: number;
+  myTeam?: TeamDataProps | null;
 }
 
 export interface AgendaTabProps {
