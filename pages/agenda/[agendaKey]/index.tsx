@@ -35,6 +35,7 @@ const AgendaDetail = () => {
             <AgendaInfo
               agendaData={agendaData}
               isHost={isHost}
+              intraId={intraId}
               status={status}
             />
             <AgendaTab

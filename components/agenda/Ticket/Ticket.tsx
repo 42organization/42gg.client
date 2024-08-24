@@ -35,9 +35,7 @@ const Ticket = ({ type }: { type: string }) => {
         <button
           className={styles.submitButton}
           onClick={() => {
-            instanceInAgenda.patch('/ticket').then((res) => {
-              console.log(res);
-            });
+            instanceInAgenda.patch('/ticket');
           }}
         >
           발급 완료

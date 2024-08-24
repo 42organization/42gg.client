@@ -21,7 +21,6 @@ const SubmitAgendaResult = () => {
       teams: string[];
     }[]
   ) => {
-    console.log(awardList);
     const Data: {
       awardName: string;
       teamName: string;
@@ -35,9 +34,7 @@ const SubmitAgendaResult = () => {
           awardPriority: key,
         });
       });
-      console.log('data', Data);
     });
-    console.log(Data);
     // 프론트 처리 에러
     // 상은 있는데 팀이 없는 경우
     // 한 팀이 여러 상을 받는 경우

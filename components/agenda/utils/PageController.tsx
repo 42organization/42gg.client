@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { instanceInAgenda } from 'utils/axios';
+import AgendaInfo from 'components/agenda/Home/AgendaInfo';
 import styles from 'styles/agenda/utils/PageController.module.scss';
-import AgendaInfo from '../Home/AgendaInfo';
 
 interface PageControllerNavigatorProps {
   currentPage: number;
@@ -77,7 +77,6 @@ const PageController = ({
         className={styles.agendaInfoContainer}
         onClick={(e) => {
           const target = e.target as HTMLElement;
-          console.log(target);
           if (
             target.className.includes(styles.moveButton) ||
             target.closest(styles.moveButton)

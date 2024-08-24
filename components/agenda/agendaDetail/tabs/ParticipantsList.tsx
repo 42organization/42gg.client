@@ -4,18 +4,19 @@ import {
   ParticipantProps,
 } from 'types/agenda/agendaDetail/tabs/participantTypes';
 import Participant from 'components/agenda/agendaDetail/tabs/Participant';
-import useFetchGet from 'hooks/agenda/useFetchGet';
+import PageNation from 'components/Pagination';
+import usePageNation from 'hooks/agenda/usePageNation';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantsList.module.scss';
 
 export default function ParticipantsList({ max }: numberProps) {
   const router = useRouter();
   const { agendaKey } = router.query;
 
-  const params = { agenda_key: agendaKey, page: 1, size: 10 };
-  const participants = useFetchGet<ParticipantProps[]>(
-    `team/confirm/list`,
-    params
-  ).data;
+  const { content: participants, PagaNationElementProps } =
+    usePageNation<ParticipantProps>({
+      url: `team/confirm/list`,
+      params: { agenda_key: agendaKey },
+    });
 
   const curPeople = participants ? participants.length : 0;
   if (!participants) {
@@ -35,6 +36,7 @@ export default function ParticipantsList({ max }: numberProps) {
             coalitions={participant.coalitions}
           />
         ))}
+        <PageNation {...PagaNationElementProps} />
       </div>
     </>
   );

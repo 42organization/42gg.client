@@ -1,5 +1,5 @@
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
-import { AgendaDataProps } from '../agendaTypes';
 
 export interface AgendaInfoProps {
   agendaData: AgendaDataProps;

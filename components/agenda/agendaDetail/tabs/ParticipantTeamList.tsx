@@ -2,7 +2,8 @@ import { useRouter } from 'next/router';
 import { ParticipantTeamListProps } from 'types/agenda/agendaDetail/tabs/participantTypes';
 import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
 import ParticipantTeam from 'components/agenda/agendaDetail/tabs/ParticipantTeam';
-import useFetchGet from 'hooks/agenda/useFetchGet';
+import PageNation from 'components/Pagination';
+import usePageNation from 'hooks/agenda/usePageNation';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantTeamList.module.scss';
 
 export default function ParticipantTeamList({
@@ -12,17 +13,21 @@ export default function ParticipantTeamList({
   const router = useRouter();
   const { agendaKey } = router.query;
 
-  const openTeamParams = { agenda_key: agendaKey, page: 1, size: 10 };
-  const openTeams = useFetchGet<TeamDataProps[]>(
-    `team/open/list`,
-    openTeamParams
-  ).data;
+  const {
+    content: openTeams,
+    PagaNationElementProps: openTeamPageNationProps,
+  } = usePageNation<TeamDataProps>({
+    url: `team/open/list`,
+    params: { agenda_key: agendaKey },
+  });
 
-  const confirmTeamParams = { agenda_key: agendaKey, page: 1, size: 10 };
-  const confirmedTeams = useFetchGet<TeamDataProps[]>(
-    `team/confirm/list`,
-    confirmTeamParams
-  ).data;
+  const {
+    content: confirmedTeams,
+    PagaNationElementProps: confirmedTeamPageNationProps,
+  } = usePageNation<TeamDataProps>({
+    url: `team/confirm/list`,
+    params: { agenda_key: agendaKey },
+  });
 
   const openTeamsCount = openTeams ? openTeams.length : 0;
   const confirmedTeamsCount = confirmedTeams ? confirmedTeams.length : 0;
@@ -66,6 +71,7 @@ export default function ParticipantTeamList({
               />
             ))
           : null}
+        <PageNation {...openTeamPageNationProps} />
       </div>
 
       <div className={styles.participantsWarp}>
@@ -84,6 +90,7 @@ export default function ParticipantTeamList({
               />
             ))
           : null}
+        <PageNation {...confirmedTeamPageNationProps} />
       </div>
     </>
   );

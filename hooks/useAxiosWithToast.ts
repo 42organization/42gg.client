@@ -31,7 +31,7 @@ export default function useAxiosWithToast(instance: AxiosInstance) {
     if (!errorDataMessage) {
       errorDataMessage = error.message;
     }
-
+    console.log(error);
     setSnackbar({
       toastName: `response error`,
       severity: 'error',
@@ -49,7 +49,13 @@ export default function useAxiosWithToast(instance: AxiosInstance) {
   const responseHandler = (response: AxiosResponse) => {
     const { status, config } = response;
     const { method, url } = config;
+    let parseUrl = '';
 
+    if (url) {
+      parseUrl = url[0] === '/' ? url : '/' + url;
+    }
+
+    console.log(response);
     /** GET API에서는 Snackbar 호출 X */
     if (instance === instanceInAgenda && method === 'get') return response;
     if (instance === instanceInManage && method === 'get') return response;
@@ -59,7 +65,7 @@ export default function useAxiosWithToast(instance: AxiosInstance) {
      * - getAgendaSnackBarInfo함수에서 파싱하여 Snackbar의 유형(색상), 메시지 가져오기
      *  */
     if (method && url && 200 <= status && status < 300) {
-      const { severity, message } = getAgendaSnackBarInfo(method, url);
+      const { severity, message } = getAgendaSnackBarInfo(method, parseUrl);
 
       switch (severity) {
         case 'success':
