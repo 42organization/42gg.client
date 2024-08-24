@@ -40,13 +40,23 @@ export default function AgendaInfo({
   const sendRequest = useFetchRequest().sendRequest;
 
   const subscribeSolo = ({ router, agendaKey }: CallbackProps) => {
+    const myTeamKey = myTeam ? myTeam.teamKey : null;
     const soloData = {
       teamName: '개인참여',
       teamLocation: agendaData.agendaLocation,
       teamContent: '개인참여',
       teamIsPrivate: false,
     };
+
+    // 개인 참여 API === 팀 생성 API
     sendRequest('POST', 'team', soloData, { agenda_key: agendaKey });
+    // 개인 참여 확정 API === 팀 확정 API
+    sendRequest(
+      'PATCH',
+      'team/confirm',
+      {},
+      { agenda_key: agendaKey, teamKey: myTeamKey }
+    );
     // 데이터 리프레시 필요
   };
 
