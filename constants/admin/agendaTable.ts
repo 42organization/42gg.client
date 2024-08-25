@@ -41,7 +41,7 @@ export const agendaTableFormat: AgendaTableFormat = {
     ],
     etc: {
       type: 'button',
-      value: ['수정', '삭제'],
+      value: ['수정', '취소'],
     },
   },
 
