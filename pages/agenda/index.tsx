@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import type { NextPage } from 'next';
 import AgendaList from 'components/agenda/Home/AgendaList';
