@@ -1,11 +1,13 @@
 @import 'styles/agenda/common.scss';
 .layout {
+  @include layout;
   max-width: 100%;
   padding-top: 1px;
 }
 
 .title {
   @include text(main-menu);
+  @include gridHidden(mobile);
   margin: 1rem 0 0 1.5rem;
   font-size: $font-size-l;
 }

@@ -13,6 +13,7 @@
   background-size: cover;
 }
 
-.container {
+.app {
   margin-top: 4rem;
+  @include app;
 }
