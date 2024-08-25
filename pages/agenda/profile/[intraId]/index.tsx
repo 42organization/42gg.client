@@ -49,7 +49,7 @@ const AgendaProfile = () => {
             isMyProfile={isMyProfile}
           />
         )}
-        <Ticket type='component' />
+        {isMyProfile && <Ticket type='component' />}
         {currentTeamData && <CurrentTeam currentTeamData={currentTeamData} />}
         {agendaHistory && (
           <>
