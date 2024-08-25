@@ -1,6 +1,9 @@
 @import 'styles/agenda/common.scss';
 .layout {
   @include layout;
+  grid-template:
+    'top top top top' 450px
+    'content content match match' auto / 1fr 1fr 1fr 1fr;
   max-width: 100%;
   padding-top: 1px;
 }
@@ -18,4 +21,12 @@
 
 .flex {
   display: flex;
+}
+
+.content {
+  grid-area: content;
+}
+
+.match {
+  grid-area: match;
 }

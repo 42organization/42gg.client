@@ -18,7 +18,7 @@ const Index: NextPage = () => {
       </h2>
       <PageController handleNavigation={handleNavigation} />
       <h2 className={styles.title}>Ticket & PingPong</h2>
-      <div className={styles.flex}>
+      <div className={styles.flex + ' ' + styles.content}>
         <button
           className={styles.container}
           onClick={() => handleNavigation('/agenda/ticket')}
@@ -39,7 +39,9 @@ const Index: NextPage = () => {
         </button>
       </div>
 
-      <button className={styles.container}>아우터 매치 준비중입니다.</button>
+      <button className={styles.container + ' ' + styles.match}>
+        아우터 매치 준비중입니다.
+      </button>
     </div>
   );
 };

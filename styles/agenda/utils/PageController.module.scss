@@ -3,15 +3,18 @@
 .container {
   width: 100%;
   height: max-content;
+  grid-area: top;
+  @include gridContainer;
 }
 
 .agendaInfoContainer {
   @include container(1);
+  @media screen and (min-width: 961px) {
+    height: 360px;
+  }
   position: relative;
   z-index: 0;
   display: flex;
-  min-width: 352px;
-  max-width: 750px;
   height: calc(150px + (100vw - 352px) * ((600 - 150) / (750 - 352)));
   min-height: 180px;
   max-height: 600px;

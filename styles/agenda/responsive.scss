@@ -6,6 +6,10 @@
 // Layout 모듈에서 사용
 @mixin app {
   @include action;
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  align-items: center;
   @media screen and (max-width: 480px) {
     border: 1px solid red;
   }
@@ -41,6 +45,13 @@
   }
 }
 
+@mixin gridContainer {
+  @include action;
+  @media screen and (min-width: 961px) {
+    height: auto;
+  }
+}
+
 // 헤더에 붙어있는 부분
 @mixin gridHead {
   @include action;
@@ -64,11 +75,11 @@
 @mixin gridHidden($view) {
   @include action;
   @if ($view == 'web') {
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 960px) {
       display: none;
     }
   } @else {
-    @media screen and (min-width: 481px) {
+    @media screen and (min-width: 961px) {
       display: none;
     }
   }
