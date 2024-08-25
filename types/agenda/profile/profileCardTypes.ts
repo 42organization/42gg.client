@@ -4,4 +4,5 @@ export interface ProfileCardProps {
   userGithub: string;
   ticketCount: number;
   getProfileData: () => void;
+  isMyProfile: boolean;
 }
