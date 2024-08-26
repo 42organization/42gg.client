@@ -17,6 +17,8 @@ import {
   AdminAgendaTableHead,
   AdminEmptyItem,
 } from 'components/admin/takgu/common/AdminTable';
+import UserForm from 'components/agenda/Form/userForm';
+import { useModal } from 'components/agenda/modal/useModal';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/takgu/users/UserManagementTable.module.scss';
 
@@ -35,10 +37,17 @@ export default function UserTable() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
-  const setModal = useSetRecoilState(modalState);
+  const { openModal } = useModal();
 
   const handleButtonAction = (intraId: string) => {
-    alert('자세히');
+    openModal({
+      type: 'modify',
+      title: '유저 정보 수정',
+      description: '변경 후 수정 버튼을 눌러주세요.',
+      FormComponent: UserForm,
+      stringKey: intraId,
+    });
+    // alert('자세히');
   };
 
   const initSearch = useCallback((intraId?: string) => {

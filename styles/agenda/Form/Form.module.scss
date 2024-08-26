@@ -85,6 +85,11 @@
   margin: 0.5rem;
 }
 
+.label_title {
+  @include text('label');
+  margin: 0rem 0.5rem 2rem;
+}
+
 .highlight {
   color: var(--highlight-violet);
 }
