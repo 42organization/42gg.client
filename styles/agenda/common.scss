@@ -248,3 +248,10 @@ $font-size-xs: 0.8rem; // $small-font
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
 }
+
+@mixin hoverAction {
+  transition: 0.3s;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
