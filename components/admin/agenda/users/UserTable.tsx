@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
 import {
   Paper,
   Table,
@@ -10,7 +9,6 @@ import {
 } from '@mui/material';
 import { IUser, IUserTable } from 'types/admin/takgu/adminUserTypes';
 import { instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/recoil/takgu/modal';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
 import AdminSearchBar from 'components/admin/takgu/common/AdminSearchBar';
 import {
@@ -47,7 +45,6 @@ export default function UserTable() {
       FormComponent: UserForm,
       stringKey: intraId,
     });
-    // alert('자세히');
   };
 
   const initSearch = useCallback((intraId?: string) => {
