@@ -48,7 +48,7 @@ const AgendaForm = ({
   ]);
   const [dateWarn, setDateWarn] = useState<string[]>(['', '']);
   const [teamLimit, setTeamLimit] = useState<number[]>([
-    isEdit ? data.agendaMinPeople : 10,
+    isEdit ? data.agendaMinTeam : 10,
     isEdit ? data.agendaMaxTeam : 50,
   ]);
   const [peopleLimit, setPeopleLimit] = useState<number[]>([
