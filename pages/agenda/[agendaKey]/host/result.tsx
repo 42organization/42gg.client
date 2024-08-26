@@ -1,19 +1,16 @@
 //주최자 결과입력 페이지
+import { ParticipantProps } from 'types/agenda/agendaDetail/tabs/participantTypes';
 import { instanceInAgenda } from 'utils/axios';
 import AgendaResultForm from 'components/agenda/Form/AgendaResultForm';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/pages/agendakey/host/result.module.scss';
 
 const SubmitAgendaResult = () => {
-  const teamlist = [
-    'apple',
-    'banana',
-    'cider',
-    'dumpling',
-    'egg',
-    'fish',
-    'grape',
-    'honey',
-  ];
+  const { data } = useFetchGet<{
+    totalSize: number;
+    content: ParticipantProps[];
+  }>(`team/confirm/list`, { size: 100 }) || { data: {}, status: 400 };
+  const teamlist = data?.content.map((team) => team.teamName) || [];
 
   const SubmitAgendaResult = (
     awardList: {
