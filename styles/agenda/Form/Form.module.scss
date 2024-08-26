@@ -74,10 +74,17 @@
   // margin: 0 0 0 0.5rem;
   gap: 0.5rem;
 }
+
 .label {
   @include text('label');
   margin: 2rem 0 0.5rem 0.5rem;
 }
+
+.label_text {
+  @include text('label');
+  margin: 0.5rem;
+}
+
 .highlight {
   color: var(--highlight-violet);
 }

@@ -12,4 +12,6 @@ export interface TeamDetailProps {
     intraId: string;
     coalition: Coalition; //e
   }[];
+  teamAward?: string;
+  teamAwardPriority?: number;
 }

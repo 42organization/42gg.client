@@ -65,9 +65,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           <ErrorChecker>
             <QueryClientProvider client={queryClient} contextSharing={true}>
               <LayoutProvider>
-                <HeaderStateContext>
-                  <Header />
-                </HeaderStateContext>
                 <Component {...pageProps} />
               </LayoutProvider>
               <CustomizedSnackbars />
