@@ -1,4 +1,5 @@
 //주최자 결과입력 페이지
+import { useRouter } from 'next/router';
 import { ParticipantProps } from 'types/agenda/agendaDetail/tabs/participantTypes';
 import { instanceInAgenda } from 'utils/axios';
 import AgendaResultForm from 'components/agenda/Form/AgendaResultForm';
@@ -11,6 +12,9 @@ const SubmitAgendaResult = () => {
     content: ParticipantProps[];
   }>(`team/confirm/list`, { size: 100 }) || { data: {}, status: 400 };
   const teamlist = data?.content.map((team) => team.teamName) || [];
+
+  const router = useRouter();
+  const { agendaKey: agenda_key } = router.query;
 
   const SubmitAgendaResult = (
     awardList: {
@@ -36,7 +40,6 @@ const SubmitAgendaResult = () => {
     // 상은 있는데 팀이 없는 경우
     // 한 팀이 여러 상을 받는 경우
     // 상 안에서 같은 팀이 여러번 나오는 경우
-    const agenda_key = '1ae456ea-c5fd-48d0-b192-607d11942322'; //임시 키
     instanceInAgenda
       .patch(`/confirm?agenda_key=${agenda_key}`, { awards: Data })
       .then((res) => console.log(res))
