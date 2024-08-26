@@ -112,7 +112,7 @@ const SubmitAgendaResult = () => {
     openModal({
       type: 'proceedCheck',
       title: '결과 제출 전 확인',
-      description: msg + '결과를 제출하시겠습니까?',
+      description: msg + '\n결과를 제출하시겠습니까?',
       onProceed: () => {
         instanceInAgenda
           .patch(`/confirm?agenda_key=${agenda_key}`, { awards: Data })
