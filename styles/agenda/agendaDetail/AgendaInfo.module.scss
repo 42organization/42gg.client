@@ -12,6 +12,9 @@ $info-gradient: linear-gradient(
   @include container(1);
   position: relative;
   width: 100%;
+
+  min-width: 280px;
+  max-width: 100%;
   padding: 1.5rem;
   margin: 0rem;
   background: $info-gradient;
@@ -22,6 +25,10 @@ $info-gradient: linear-gradient(
 
   &.smallHeight {
     height: 10rem;
+  }
+  @media screen and (min-width: 481px) and (max-width: 960px) {
+    width: 450px;
+    max-width: 800px;
   }
 }
 

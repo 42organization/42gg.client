@@ -3,6 +3,7 @@ import { AgendaTabProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes';
 import { TABS, TabValues } from 'constants/agenda/agendaDetail/agendaTabs';
 import TabContent from 'components/agenda/agendaDetail/TabContent';
 import TabButtons from 'components/agenda/button/TabButtons';
+import styles from 'styles/agenda/agendaDetail/AgendaTab.module.scss';
 
 export default function AgendaTab({
   agendaData,
@@ -13,14 +14,20 @@ export default function AgendaTab({
 
   return (
     <>
-      <TabButtons tabs={TABS} activeTab={activeTab} onTabClick={setActiveTab} />
-      <TabContent
-        activeTab={activeTab}
-        tabs={TABS}
-        agendaData={agendaData}
-        isHost={isHost}
-        myTeam={myTeam}
-      />
+      <div className={styles.tabWarp}>
+        <TabButtons
+          tabs={TABS}
+          activeTab={activeTab}
+          onTabClick={setActiveTab}
+        />
+        <TabContent
+          activeTab={activeTab}
+          tabs={TABS}
+          agendaData={agendaData}
+          isHost={isHost}
+          myTeam={myTeam}
+        />
+      </div>
     </>
   );
 }

@@ -32,26 +32,28 @@ const AgendaDetail = () => {
 
   return (
     <>
-      <div className={styles.agendaDetailWrap}>
-        {agendaData ? (
-          <>
-            <AgendaInfo
-              agendaData={agendaData}
-              isHost={isHost}
-              status={status}
-            />
-            <AgendaTab
-              agendaData={agendaData}
-              isHost={isHost}
-              myTeam={myTeam}
-            />
-          </>
-        ) : (
-          <p>Loading...</p>
-        )}
+      <div className={styles.layout}>
+        <div className={styles.agendaDetailWrap}>
+          {agendaData ? (
+            <>
+              <AgendaInfo
+                agendaData={agendaData}
+                isHost={isHost}
+                status={status}
+              />
+              <AgendaTab
+                agendaData={agendaData}
+                isHost={isHost}
+                myTeam={myTeam}
+              />
+            </>
+          ) : (
+            <p>Loading...</p>
+          )}
 
-        <div key={teamUID}>
-          <Link href={`/agenda/${agendaKey}/${teamUID}`}>1번 팀</Link>
+          <div key={teamUID}>
+            <Link href={`/agenda/${agendaKey}/${teamUID}`}>1번 팀</Link>
+          </div>
         </div>
       </div>
     </>
