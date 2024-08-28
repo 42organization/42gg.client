@@ -1,7 +1,7 @@
-import { useSetRecoilState } from 'recoil';
+import { NextRouter } from 'next/router';
+import { SetterOrUpdater, useSetRecoilState } from 'recoil';
 import { agendaModal } from 'types/agenda/modalTypes';
 import { instanceInAgenda } from 'utils/axios';
-import { toastState } from 'utils/recoil/toast';
 function agendadataToMsg(data: FormData, isEdit: boolean) {
   let msg = '';
   msg += '행사 제목 : ' + data.get('agendaTitle') + '\n';
@@ -44,7 +44,8 @@ const SubmitAgendaForm = async (
   e: React.FormEvent<HTMLFormElement>,
   isEdit: boolean,
   openModal: (props: agendaModal) => void,
-  setSnackBar: (props: { [key: string]: string | boolean }) => void,
+  setSnackBar: SetterOrUpdater<any>,
+  router: NextRouter,
   isAdmin?: boolean,
   stringKey?: string,
   onProceed?: () => void
@@ -131,6 +132,7 @@ const SubmitAgendaForm = async (
       );
     }
   }
+
   // 모달 확인
   const msg = agendadataToMsg(data, isEdit);
   openModal({
@@ -144,6 +146,10 @@ const SubmitAgendaForm = async (
         .then((res) => {
           if (res.status === 204 || res.status === 200)
             onProceed && onProceed();
+          if (!isEdit) {
+            console.log(res.data.agendaKey);
+            router.push(`/agenda/${res.data.agendaKey}`);
+          }
         })
         .catch((err) => {
           console.error(err);

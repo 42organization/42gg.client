@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Slider } from '@mui/material';
@@ -30,6 +31,7 @@ const AgendaForm = ({
 }: CreateAgendaFormProps) => {
   const { openModal } = useModal();
   const setSnackBar = useSetRecoilState(toastState);
+  const router = useRouter();
   const minDistance = 10;
   // 날짜 초기화
   const today = new Date();
@@ -184,6 +186,7 @@ const AgendaForm = ({
             isEdit,
             openModal,
             setSnackBar,
+            router,
             isAdmin,
             stringKey,
             handleSuccess
