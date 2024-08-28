@@ -11,6 +11,11 @@
   border-radius: 1rem;
 }
 
+.select:focus {
+  border: var(--highlight-border);
+  border-color: var(--highlight-violet);
+}
+
 .container {
   display: inline;
   flex-direction: row;
