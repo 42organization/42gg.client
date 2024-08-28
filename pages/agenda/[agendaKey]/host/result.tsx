@@ -1,5 +1,4 @@
 //주최자 결과입력 페이지
-import { on } from 'events';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { ParticipantProps } from 'types/agenda/agendaDetail/tabs/participantTypes';

@@ -1,6 +1,8 @@
 import router from 'next/router';
+import { agendaModal } from 'types/agenda/modalTypes';
 import { TeamDetailProps } from 'types/agenda/teamDetail/TeamDetailTypes';
 import { transformTeamLocation } from 'utils/agenda/transformLocation';
+import { instanceInAgenda } from 'utils/axios';
 import { AgendaLocation } from 'constants/agenda/agenda';
 import FormBtn from 'components/agenda/button/FormButton';
 import CheckBoxInput from 'components/agenda/Input/CheckboxInput';
@@ -9,6 +11,7 @@ import SelectInput from 'components/agenda/Input/SelectInput';
 import TitleInput from 'components/agenda/Input/TitleInput';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/Form/Form.module.scss';
+import { useModal } from '../modal/useModal';
 
 interface CreateTeamFormProps {
   location: AgendaLocation | null;
@@ -34,12 +37,25 @@ const transformFormData = (formData: FormData) => {
 
   return data;
 };
+const teamdataToMsg = (data: { [key: string]: string }) => {
+  const msgdata: { [key: string]: string } = {};
+  let msg = '';
+  msgdata['팀 이름'] = data.teamName;
+  msgdata['팀 설명'] = data.teamContent;
+  msgdata['팀 위치'] = data.teamLocation;
+  Object.keys(msgdata).forEach((key) => {
+    msg += `${key}: ${msgdata[key]}\n`;
+  });
+  msg += data.teamIsPrivate ? '비밀방\n' : '공개방\n';
+  return msg;
+};
 
 const SubmitTeamForm = (
   target: React.FormEvent<HTMLFormElement>,
   isEdit: boolean,
   sendRequest: any,
   agendaKey: string,
+  openModal: (props: agendaModal) => void,
   teamKey?: string,
   onProceed?: () => void
 ) => {
@@ -56,22 +72,32 @@ const SubmitTeamForm = (
 
   const requestMethod = isEdit ? 'PATCH' : 'POST';
 
-  sendRequest(
-    requestMethod,
-    'team',
-    data,
-    { agenda_key: agendaKey },
-    (res: any) => {
-      if (isEdit) {
-        onProceed && onProceed();
-      } else {
-        router.push(`/agenda/${agendaKey}/${res.teamKey}`);
-      }
+  // 모달 내용체크
+  let msg = teamdataToMsg(data);
+  msg += isEdit ? '\n팀 정보를 수정하시겠습니까?' : '\n팀을 생성하시겠습니까?';
+  openModal({
+    type: 'proceedCheck',
+    title: isEdit ? '팀 수정' : '팀 생성',
+    description: msg,
+    onProceed: () => {
+      sendRequest(
+        requestMethod,
+        'team',
+        data,
+        { agenda_key: agendaKey },
+        (res: any) => {
+          if (isEdit) {
+            onProceed && onProceed();
+          } else {
+            router.push(`/agenda/${agendaKey}/${res.teamKey}`);
+          }
+        },
+        (err: string) => {
+          console.error(err);
+        }
+      );
     },
-    (err: string) => {
-      console.error(err);
-    }
-  );
+  });
 };
 
 const CreateTeamForm = ({
@@ -84,6 +110,7 @@ const CreateTeamForm = ({
 }: CreateTeamFormProps) => {
   const sendRequest = useFetchRequest().sendRequest;
   const { teamUID } = router.query;
+  const { openModal } = useModal();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     SubmitTeamForm(
@@ -91,6 +118,7 @@ const CreateTeamForm = ({
       isEdit,
       sendRequest,
       agendaKey,
+      openModal,
       teamUID as string,
       onProceed
     );
