@@ -2,6 +2,7 @@
 
 .modalContainer {
   @include container(modal);
+  z-index: 5000;
 
   display: flex;
   width: 20rem;
