@@ -8,11 +8,23 @@
   padding: 0 1rem;
   @include text(main-menu);
 
-  .agendaTitleButtonContainer {
+  .agendaTitle {
+    @include gridHidden(mobile);
+  }
+  .agendaTitleButton,
+  .agendaTitle {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     align-items: flex-end;
+  }
+  .agendaTitleButton {
+    @media screen and (min-width: 961px) {
+      position: absolute;
+      top: 5rem;
+      right: 6rem;
+      flex-direction: row;
+    }
   }
 
   .agendaCreateBtn {

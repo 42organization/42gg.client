@@ -3,7 +3,6 @@ import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import type { NextPage } from 'next';
 import AgendaList from 'components/agenda/Home/AgendaList';
 import AgendaTitle from 'components/agenda/Home/AgendaTitle';
-import MyAgendaBtn from 'components/agenda/Home/MyAgendaBtn';
 import { TestModal, TestModal2 } from 'components/agenda/modal/testModal';
 import PageNation from 'components/Pagination';
 import useFetchGet from 'hooks/agenda/useFetchGet';
@@ -30,7 +29,6 @@ const Agenda: NextPage = () => {
   return (
     <div className={styles.agendaPageContainer}>
       <AgendaTitle />
-      <MyAgendaBtn />
       <div className={listStyles.agendaListTextWrapper}>
         <h2>AGENDA LIST</h2>
         <div>
