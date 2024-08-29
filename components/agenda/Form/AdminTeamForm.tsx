@@ -45,6 +45,10 @@ const AdminTeamFrom = ({
     setTeamMates((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const isLeader = (intraId: string) => {
+    return teamData.teamLeaderIntraId === intraId;
+  };
+
   const handleAddMember = () => {
     const newMemberIdInput = document.getElementById(
       'newMemberId'
@@ -52,11 +56,11 @@ const AdminTeamFrom = ({
     const newMemberId = newMemberIdInput?.value.trim();
 
     if (newMemberId === '') {
-      alert('새 팀원의 ID를 입력해주세요.');
+      alert('intra ID를 입력해주세요.');
       return;
     }
     if (teamMates.some((member) => member.intraId === newMemberId)) {
-      alert('이미 존재하는 팀원 ID입니다.');
+      alert('이미 존재하는 팀원입니다.');
       return;
     }
     setTeamMates((prev) => [
@@ -99,8 +103,6 @@ const AdminTeamFrom = ({
       }
     );
   };
-
-  console.log('location', teamLocation, teamLocation === 'MIX');
 
   return (
     <form
@@ -157,7 +159,7 @@ const AdminTeamFrom = ({
           <input
             type='text'
             id='newMemberId'
-            placeholder='새 팀원 ID 입력'
+            placeholder='intraID'
             className={styles.input}
           />
           <AddElementBtn onClick={handleAddMember} />
@@ -170,7 +172,9 @@ const AdminTeamFrom = ({
                 teamName={participant.intraId}
                 coalitions={participant.coalition}
               />
-              <CancelBtn onClick={() => handleDeleteParticipant(index)} />
+              {!isLeader(participant.intraId) && (
+                <CancelBtn onClick={() => handleDeleteParticipant(index)} />
+              )}
             </div>
           ))}
         </div>

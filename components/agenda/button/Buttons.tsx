@@ -6,7 +6,11 @@ const CancelBtn = ({
   onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }) => {
   return (
-    <button className={styles.CancelBtn} onClick={(e) => onClick(e)}>
+    <button
+      className={styles.CancelBtn}
+      type='button'
+      onClick={(e) => onClick(e)}
+    >
       <span className='icon' />
     </button>
   );
