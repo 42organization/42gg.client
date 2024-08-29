@@ -1,6 +1,10 @@
 import router from 'next/router';
+import { useState } from 'react';
 import { TeamDetailProps } from 'types/agenda/teamDetail/TeamDetailTypes';
 import { transformTeamLocation } from 'utils/agenda/transformLocation';
+import { Coalition } from 'constants/agenda/agenda';
+import Participant from 'components/agenda/agendaDetail/tabs/Participant';
+import { AddElementBtn, CancelBtn } from 'components/agenda/button/Buttons';
 import CheckBoxInput from 'components/agenda/Input/CheckboxInput';
 import DescriptionInput from 'components/agenda/Input/DescriptionInput';
 import SelectInput from 'components/agenda/Input/SelectInput';
@@ -20,6 +24,7 @@ const AdminTeamFrom = ({
   teamLocation,
 }: AdminTeamFormProps) => {
   const sendRequest = useFetchRequest().sendRequest;
+  const [teamMates, setTeamMates] = useState(teamData.teamMates);
 
   const transformFormData = (formData: FormData) => {
     const data = JSON.parse(JSON.stringify(Object.fromEntries(formData)));
@@ -36,17 +41,40 @@ const AdminTeamFrom = ({
     return data;
   };
 
+  const handleDeleteParticipant = (index: number) => {
+    setTeamMates((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleAddMember = () => {
+    const newMemberIdInput = document.getElementById(
+      'newMemberId'
+    ) as HTMLInputElement;
+    const newMemberId = newMemberIdInput?.value.trim();
+
+    if (newMemberId === '') {
+      alert('새 팀원의 ID를 입력해주세요.');
+      return;
+    }
+    if (teamMates.some((member) => member.intraId === newMemberId)) {
+      alert('이미 존재하는 팀원 ID입니다.');
+      return;
+    }
+    setTeamMates((prev) => [
+      ...prev,
+      { intraId: newMemberId, coalition: Coalition.OTHER },
+    ]);
+    newMemberIdInput.value = ''; // 입력 필드 초기화
+  };
+
   const SubmitTeamForm = (target: React.FormEvent<HTMLFormElement>) => {
     target.preventDefault();
 
     const formData = new FormData(target.currentTarget);
-    // formData.delete('teamContent'); // 제거해야함
-
     const data = transformFormData(formData);
 
     if (
       data.teamName === '' ||
-      // data.teamContent === '' ||
+      data.teamContent === '' ||
       data.teamStatus === ''
     ) {
       alert('모든 항목을 입력해주세요.'); // 임시
@@ -54,7 +82,7 @@ const AdminTeamFrom = ({
     }
 
     data.teamKey = teamKey;
-    data.teamMates = teamData.teamMates;
+    data.teamMates = teamMates;
     data.teamAward = teamData.teamAward;
     data.teamAwardPriority = teamData.teamAwardPriority;
 
@@ -73,8 +101,13 @@ const AdminTeamFrom = ({
   };
 
   console.log('location', teamLocation, teamLocation === 'MIX');
+
   return (
-    <form onSubmit={SubmitTeamForm} className={styles.container}>
+    <form
+      id='teamModify'
+      onSubmit={SubmitTeamForm}
+      className={styles.container}
+    >
       <div className={styles.pageContianer}>
         <TitleInput
           name='teamName'
@@ -119,6 +152,28 @@ const AdminTeamFrom = ({
         <div className={styles.label_text}>
           상 순위 : {teamData.teamAwardPriority}
         </div>
+        <div className={styles.label_text}>팀원</div>
+        <div className={styles.label_text}>
+          <input
+            type='text'
+            id='newMemberId'
+            placeholder='새 팀원 ID 입력'
+            className={styles.input}
+          />
+          <AddElementBtn onClick={handleAddMember} />
+        </div>
+        <div className={styles.ListContainer}>
+          {teamMates.map((participant, index) => (
+            <div key={index} className={styles.buttonContainer}>
+              <Participant
+                key={index}
+                teamName={participant.intraId}
+                coalitions={participant.coalition}
+              />
+              <CancelBtn onClick={() => handleDeleteParticipant(index)} />
+            </div>
+          ))}
+        </div>
       </div>
       <div className={styles.buttonContainer}>
         <button
@@ -131,7 +186,11 @@ const AdminTeamFrom = ({
         >
           취소
         </button>
-        <button type='submit' className={`${styles.formBtn} ${styles.submit}`}>
+        <button
+          type='submit'
+          form='teamModify'
+          className={`${styles.formBtn} ${styles.submit}`}
+        >
           수정
         </button>
       </div>

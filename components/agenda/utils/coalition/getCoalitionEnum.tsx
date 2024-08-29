@@ -1,7 +1,13 @@
 import { coalitionValues } from 'types/agenda/coalitionTypes';
 import { Coalition } from 'constants/agenda/agenda';
 
-export function getCoalitionEnum(input: string[] | Coalition[]): Coalition[] {
+export function getCoalitionEnum(
+  input: string[] | Coalition[] | string | Coalition
+): Coalition[] {
+  if (!Array.isArray(input)) {
+    return getCoalitionEnum([input]);
+  }
+
   return input
     .map((item) => {
       if (typeof item === 'string') {

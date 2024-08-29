@@ -118,3 +118,19 @@
     @include textButton('cancel', 'default');
   }
 }
+
+.ListContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 2rem;
+  width: 100%;
+}
+
+.input {
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  border-bottom: var(--default-border);
+  -webkit-appearance: none;
+  appearance: none;
+}

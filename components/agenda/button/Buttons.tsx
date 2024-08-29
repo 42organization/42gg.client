@@ -54,7 +54,11 @@ const AddElementBtn = ({
   onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }) => {
   return (
-    <button className={styles.AddElementBtn} onClick={(e) => onClick(e)}>
+    <button
+      className={styles.AddElementBtn}
+      type='button'
+      onClick={(e) => onClick(e)}
+    >
       <span className='icon' />
     </button>
   );
@@ -66,7 +70,11 @@ const RemoveElementBtn = ({
   onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }) => {
   return (
-    <button className={styles.RemoveElementBtn} onClick={(e) => onClick(e)}>
+    <button
+      type='button'
+      className={styles.RemoveElementBtn}
+      onClick={(e) => onClick(e)}
+    >
       <span className='icon' />
     </button>
   );
