@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useUser } from 'hooks/agenda/Layout/useUser';
+import useLogoutCheck from 'hooks/Login/useLogoutCheck';
 import styles from 'styles/agenda/Layout/MenuBar.module.scss';
 import MenuBarContent from './MenuBarContent';
 import { useModal } from '../modal/useModal';
@@ -8,8 +10,9 @@ import { useModal } from '../modal/useModal';
 const MenuBar = ({ isActive }: { isActive: boolean }) => {
   const user = useUser();
   const queryClient = useQueryClient();
-  const router = useRouter();
   const { openModal, closeModal } = useModal();
+  const loading = useState(false);
+  const [onReturn, onLogout] = useLogoutCheck();
 
   const handleLogout = () => {
     openModal({
@@ -17,16 +20,12 @@ const MenuBar = ({ isActive }: { isActive: boolean }) => {
       title: '로그아웃',
       description: '로그아웃 하시겠습니까?',
       onProceed: () => {
-        // fetch('/api/user/logout', {
-        //   method: 'POST',
-        //   credentials: 'include',
-        // }).then((res) => {
-        //   if (res.status === 204) {
-        //     queryClient.removeQueries('user').then(() => {
-        //       router.push('/agenda/login');
-        //     });
-        //   }
-        // });
+        loading[1](true);
+        onLogout()
+          .then(() => queryClient.removeQueries('user'))
+          .finally(() => {
+            loading[1](false);
+          });
 
         alert('로그아웃 api가 필요합니다.');
         closeModal();
