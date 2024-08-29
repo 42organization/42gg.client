@@ -1,5 +1,6 @@
 //주최자 결과입력 페이지
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { ParticipantProps } from 'types/agenda/agendaDetail/tabs/participantTypes';
 import { instanceInAgenda } from 'utils/axios';
@@ -12,8 +13,8 @@ import styles from 'styles/agenda/pages/agendakey/host/result.module.scss';
 interface AwardListProps {
   award: string;
   teams: string[];
+  idx?: number;
 }
-
 // 프론트 처리 에러
 // 상은 있는데 팀이 없는 경우
 // 한 팀이 여러 상을 받는 경우
@@ -36,8 +37,7 @@ function checkAwardSubmitable(awardList: AwardListProps[]) {
             '상이 중복되어 있습니다.'
         );
       }
-      const list2 = awardInfo.teams.splice(idx, 1);
-      if (list2.includes(team)) {
+      if (awardInfo.teams.filter((_) => _ === team).length > 1) {
         throw new Error(
           awardInfo.award + '상에 ' + team + '팀이 중복되어 있습니다.'
         );
@@ -70,30 +70,34 @@ function awardlistToString(awardList: AwardListProps[]) {
   awardList.forEach((awardInfo, key) => {
     msg += key + '. ' + awardInfo.award + '\n';
     awardInfo.teams.forEach((team, idx) => {
-      msg += '  ' + idx + '. ' + team + '\n';
+      msg += team;
+      idx + 1 < awardInfo.teams.length && (msg += ', ');
     });
+    msg += '\n\n';
   });
   return msg;
 }
 
 const SubmitAgendaResult = () => {
-  const { data } = useFetchGet<{
-    totalSize: number;
-    content: ParticipantProps[];
-  }>(`team/confirm/list`, { size: 100 }) || { data: {}, status: 400 };
-  const teamlist = data?.content.map((team) => team.teamName) || [];
-
   const router = useRouter();
+  const [awardList, setAwardList] = useState<AwardListProps[]>([
+    { award: '참가상', teams: [] },
+  ]);
   const { agendaKey: agenda_key } = router.query;
   const setSnackbar = useSetRecoilState(toastState);
   const { openModal, closeModal } = useModal();
 
-  const SubmitAgendaResult = (
-    awardList: {
-      award: string;
-      teams: string[];
-    }[]
-  ) => {
+  const { data } = useFetchGet<{
+    totalSize: number;
+    content: ParticipantProps[];
+  }>(`team/confirm/list`, { agenda_key: agenda_key, size: 30, page: 1 }) || {
+    data: {},
+    status: 400,
+  };
+  const teamlist = data?.content.map((team) => team.teamName) || [];
+
+  const SubmitAgendaResult = (awardList: AwardListProps[]) => {
+    const Data = parseData(awardList);
     try {
       checkAwardSubmitable(awardList);
     } catch (error: any) {
@@ -105,8 +109,7 @@ const SubmitAgendaResult = () => {
       });
       return;
     }
-
-    const Data = parseData(awardList);
+    console.log(awardList);
     const msg = awardlistToString(awardList);
     openModal({
       type: 'proceedCheck',
@@ -124,8 +127,13 @@ const SubmitAgendaResult = () => {
   return (
     <div className={styles.container}>
       <AgendaResultForm
+        awardList={awardList}
+        setAwardList={setAwardList}
         teamlist={teamlist}
-        SubmitAgendaResult={SubmitAgendaResult}
+        SubmitAgendaResult={(e) => {
+          e.preventDefault();
+          SubmitAgendaResult(awardList);
+        }}
       />
     </div>
   );
