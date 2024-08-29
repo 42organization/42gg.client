@@ -20,7 +20,8 @@ const copyLink = () => {
 
 const hostMode = ({ router, agendaKey }: CallbackProps) => {
   // router.push(`/agenda/${agendaKey}/host/modify`); // 기존 코드 - 주최자가 대회 수정
-  router.push(`/agenda/${agendaKey}/host/createAnnouncement`); // 공지사항 추가로 변경
+  // router.push(`/agenda/${agendaKey}/host/createAnnouncement`); // 공지사항 추가로 변경
+  alert('host Mode 예정!');
 };
 
 const subscribeTeam = ({ router, agendaKey }: CallbackProps) => {
@@ -36,28 +37,48 @@ export default function AgendaInfo({
   isHost,
   myTeamStatus,
   myTeam,
+  intraId,
 }: AgendaInfoProps) {
   const sendRequest = useFetchRequest().sendRequest;
 
   const subscribeSolo = ({ router, agendaKey }: CallbackProps) => {
-    const myTeamKey = myTeam ? myTeam.teamKey : null;
     const soloData = {
-      teamName: '개인참여',
+      teamName: intraId,
       teamLocation: agendaData.agendaLocation,
       teamContent: '개인참여',
       teamIsPrivate: false,
     };
 
-    // 개인 참여 API === 팀 생성 API
-    sendRequest('POST', 'team', soloData, { agenda_key: agendaKey });
-    // 개인 참여 확정 API === 팀 확정 API
+    // 개인 참여
     sendRequest(
-      'PATCH',
-      'team/confirm',
-      {},
-      { agenda_key: agendaKey, teamKey: myTeamKey }
+      'POST',
+      'team',
+      soloData,
+      { agenda_key: agendaKey },
+      (response: any) => {
+        const newTeamKey = response ? response.teamKey : null;
+        if (newTeamKey) {
+          // 개인 참여 확정
+          sendRequest(
+            'PATCH',
+            'team/confirm',
+            {},
+            { agenda_key: agendaKey, teamKey: newTeamKey },
+            () => {
+              window.location.reload();
+            },
+            (err) => {
+              console.log('개인 확정에 실패했습니다.', err);
+            }
+          );
+        } else {
+          console.log('개인 팀키를 찾지 못했습니다.');
+        }
+      },
+      (err) => {
+        console.log('개인 참여에 실패했습니다.', err);
+      }
     );
-    // 데이터 리프레시 필요
   };
 
   const unsubscribeSolo = ({ router, agendaKey }: CallbackProps) => {
@@ -70,9 +91,14 @@ export default function AgendaInfo({
       {
         agenda_key: agendaKey,
         teamKey: myTeamKey,
+      },
+      () => {
+        window.location.reload();
+      },
+      (err) => {
+        console.log('등록취소에 실패했습니다.', err);
       }
     );
-    // 데이터 리프레시 필요
   };
 
   const determineButton = () => {
@@ -88,7 +114,7 @@ export default function AgendaInfo({
       case AgendaStatus.OPEN:
         if (isHost) {
           // 주최자
-          return { text: '공지사항 추가', callback: hostMode }; // 주최자 관리 -> 대회 수정 / (변경) 공지사항 추가 버튼
+          return { text: '주최자 관리', callback: hostMode }; // 주최자 관리 -> 대회 수정 / (변경) 공지사항 추가 버튼
         } else if (isParticipant) {
           // 참가자
           if (isSolo) {

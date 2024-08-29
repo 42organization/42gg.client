@@ -6,6 +6,7 @@ export interface AgendaInfoProps {
   isHost?: boolean;
   myTeamStatus?: number;
   myTeam?: TeamDataProps | null;
+  intraId?: string;
 }
 
 export interface AgendaTabProps {

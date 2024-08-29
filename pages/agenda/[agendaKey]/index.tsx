@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
-import { User } from 'types/agenda/mainType';
 import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import AgendaTab from 'components/agenda/agendaDetail/AgendaTab';
@@ -17,15 +16,13 @@ const getIsHost = (intraId: string, agendaData?: AgendaDataProps | null) => {
 const AgendaDetail = () => {
   const router = useRouter();
   const { agendaKey } = router.query;
-  const agendaData = useAgendaInfo(agendaKey as string); // useFetchGet 사용해서 get하기 -> useAgendaInfo 는 데이터를 refresh 불가
-  const user: User | undefined = useUser();
-  const intraId = user?.intraId || '';
-  const isHost = getIsHost(intraId, agendaData);
-
+  const agendaData = useAgendaInfo(agendaKey as string);
   const { data: myTeam, status: myTeamStatus } = useFetchGet<TeamDataProps>(
     `team/my`,
     { agenda_key: agendaKey }
   );
+  const intraId = useUser()?.intraId || '';
+  const isHost = getIsHost(intraId, agendaData);
 
   return (
     <>
@@ -35,8 +32,9 @@ const AgendaDetail = () => {
             <AgendaInfo
               agendaData={agendaData}
               isHost={isHost}
-              myTeamStatus={myTeamStatus}
-              myTeam={myTeam}
+              myTeamStatus={myTeamStatus && myTeamStatus}
+              myTeam={myTeam && myTeam}
+              intraId={intraId}
             />
             <AgendaTab
               agendaData={agendaData}
