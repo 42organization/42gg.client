@@ -52,7 +52,7 @@ const MenuBar = ({ isActive }: { isActive: boolean }) => {
         <MenuBarContent content='티켓 확인하기' href='/agenda/ticket' />
         {user?.isAdmin && (
           <>
-            <MenuBarContent content='admin' href='/agenda/admin' as='h1' />
+            <MenuBarContent content='admin' href='/admin/agenda' as='h1' />
           </>
         )}
         <MenuBarContent content='로그아웃' onClick={handleLogout} />
