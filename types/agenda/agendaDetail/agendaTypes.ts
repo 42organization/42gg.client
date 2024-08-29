@@ -21,6 +21,7 @@ export interface AgendaDataProps {
   isRanking?: boolean;
   agendaisRanking: boolean;
   agendaKey: string;
+  idx?: number;
 }
 
 export interface AgendaProps {

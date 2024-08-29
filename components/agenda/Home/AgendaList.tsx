@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import AgendaDeadLine from 'components/agenda/Home/AgendaDeadLine';
@@ -17,9 +17,18 @@ const AgendaList = ({ agendaList }: { agendaList: AgendaDataProps[] }) => {
               <div className={styles.emptyContainer}>일정이 없습니다.</div>
             </div>
           ) : (
-            agendaList.map((agendaInfo, idx) => (
-              <AgendaListItem agendaInfo={agendaInfo} key={idx} type='list' />
-            ))
+            agendaList.map((agendaInfo, idx) => {
+              agendaInfo.idx = idx;
+              return (
+                <AgendaListItem
+                  agendaInfo={agendaInfo}
+                  key={idx}
+                  type='list'
+                  className={idx === selectedItem ? styles.selected : ''}
+                  setSelectedItem={setSelectedItem}
+                />
+              );
+            })
           )}
         </div>
       </div>
@@ -27,7 +36,6 @@ const AgendaList = ({ agendaList }: { agendaList: AgendaDataProps[] }) => {
         <AgendaListItem
           agendaInfo={agendaList[selectedItem || 0]}
           key={selectedItem || 0}
-          className={styles.selectedItem}
           type='big'
         />
       )}
@@ -38,29 +46,39 @@ const AgendaList = ({ agendaList }: { agendaList: AgendaDataProps[] }) => {
 const AgendaListItem = ({
   agendaInfo,
   key,
-  className,
   type,
+  className,
+  setSelectedItem,
 }: {
   agendaInfo: AgendaDataProps;
   key: number;
-  className?: string;
   type?: string;
+  className?: string;
+  setSelectedItem?: (key: number) => void;
 }) => {
+  const router = useRouter();
+  const href = `/agenda/${agendaInfo.agendaKey}`;
   return (
-    <Link
-      href={`/agenda/${agendaInfo.agendaKey}`}
-      className={className ? className : undefined}
+    <button
+      className={`${styles.agendaListItemBtn} ${
+        type === 'list' && styles.listType
+      } ${type === 'big' && styles.listBig}
+       ${className && className}`}
+      onClick={() => {
+        if (window.innerWidth < 961) {
+          router.push(href);
+          return;
+        }
+        if (type === 'list' && setSelectedItem && agendaInfo.idx) {
+          setSelectedItem(agendaInfo.idx);
+          return;
+        }
+        router.push(href);
+      }}
     >
-      <button
-        className={`${styles.agendaListItemBtn} ${
-          type === 'list' && styles.listType
-        } ${type === 'big' && styles.listBig}`}
-        key={key}
-      >
-        <AgendaInfo agendaInfo={agendaInfo} key={key} />
-        <AgendaDeadLine />
-      </button>
-    </Link>
+      <AgendaInfo agendaInfo={agendaInfo} key={key} />
+      <AgendaDeadLine />
+    </button>
   );
 };
 

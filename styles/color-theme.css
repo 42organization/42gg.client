@@ -24,6 +24,8 @@
   --highlight-violet-light: #af71ff;
   --highlight-yellow-dark: #fff78a;
   --highlight-violet-dark: #af71ff;
+  --highlight-bg-dark: #af71ff;
+  --highlight-bg-light: #cda7fc;
 
   --box-bg-1-light: #f8f8f8;
   --box-bg-2-light: #c8c8c8ec;
@@ -47,6 +49,7 @@ html[data-theme='light'] {
   --highlight-border: var(--border-highlight-light);
   --default-box-shadow: var(--box-shadow-light);
   --highlight-yellow: var(--highlight-yellow-light);
+  --highlight-bg: var(--highlight-bg-light);
   --highlight-violet: var(--highlight-violet-light);
   --box-bg-1: var(--box-bg-1-light);
   --box-bg-2: var(--box-bg-2-light);
@@ -64,6 +67,7 @@ html[data-theme='dark'] {
   --default-box-shadow: var(--box-shadow-dark);
   --highlight-yellow: var(--highlight-yellow-dark);
   --highlight-violet: var(--highlight-violet-dark);
+  --highlight-bg: var(--highlight-bg-dark);
   --box-bg-1: var(--box-bg-1-dark);
   --box-bg-2: var(--box-bg-2-dark);
   --box-bg-3: var(--box-bg-3-dark);
