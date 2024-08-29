@@ -55,7 +55,6 @@ export default function useAxiosWithToast(instance: AxiosInstance) {
       parseUrl = url[0] === '/' ? url : '/' + url;
     }
 
-    console.log(response);
     /** GET API에서는 Snackbar 호출 X */
     if (instance === instanceInAgenda && method === 'get') return response;
     if (instance === instanceInManage && method === 'get') return response;

@@ -18,7 +18,6 @@ export default function getAgendaSnackBarInfo(
 ): { severity: string; message: string } {
   const parseUrl = url.split('?')[0];
 
-  console.log(parseUrl);
   const info: InfoType = {
     post: {
       '/request': {
