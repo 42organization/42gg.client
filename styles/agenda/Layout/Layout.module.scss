@@ -1,13 +1,18 @@
 @import 'styles/agenda/common.scss';
 .background {
-  position: relative;
+  position: fixed;
+  z-index: -1;
   display: flex;
   width: 100vw;
   min-width: 380px;
-  min-height: 100vh;
+  height: calc(100vh - 4rem);
   flex-direction: column;
   background: var(--color-bg);
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
+}
+
+.container {
+  margin-top: 4rem;
 }
