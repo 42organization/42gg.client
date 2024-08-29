@@ -4,10 +4,11 @@ import { useQueryClient } from 'react-query';
 import { useUser } from 'hooks/agenda/Layout/useUser';
 import useLogoutCheck from 'hooks/Login/useLogoutCheck';
 import styles from 'styles/agenda/Layout/MenuBar.module.scss';
+import { HeaderContextState } from './AgendaHeader';
 import MenuBarContent from './MenuBarContent';
 import { useModal } from '../modal/useModal';
 
-const MenuBar = ({ isActive }: { isActive: boolean }) => {
+const MenuBar = ({ headerstate }: { headerstate: HeaderContextState }) => {
   const user = useUser();
   const queryClient = useQueryClient();
   const { openModal, closeModal } = useModal();
@@ -38,7 +39,7 @@ const MenuBar = ({ isActive }: { isActive: boolean }) => {
     <>
       <div
         className={`${styles.container} ${
-          isActive ? styles.active : styles.inactive
+          headerstate.openMenuState ? styles.active : styles.inactive
         }`}
       >
         <MenuBarContent
@@ -60,8 +61,9 @@ const MenuBar = ({ isActive }: { isActive: boolean }) => {
 
       <div
         className={`${styles.bg} ${
-          isActive ? styles.activebg : styles.inactivebg
+          headerstate.openMenuState ? styles.activebg : styles.inactivebg
         }`}
+        onClick={headerstate.resetOpenMenuBarState}
       />
     </>
   );
