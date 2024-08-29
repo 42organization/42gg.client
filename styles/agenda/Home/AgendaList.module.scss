@@ -1,5 +1,8 @@
 @import 'styles/agenda/common.scss';
-
+.container {
+  display: flex;
+  justify-content: center;
+}
 .agendaListContainer {
   display: flex;
   width: 100%;
@@ -39,7 +42,13 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 1rem;
+  margin-top: 1.5rem;
+  gap: 1.5rem;
+  a {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .agendaListItemBtn {
@@ -71,4 +80,9 @@
   gap: 0.5rem;
   @include text('description');
   @include container(1);
+}
+
+.selectedItem {
+  @include gridHidden(web);
+  margin-top: 1.5rem;
 }

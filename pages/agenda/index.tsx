@@ -29,38 +29,40 @@ const Agenda: NextPage = () => {
   return (
     <div className={styles.agendaPageContainer}>
       <AgendaTitle />
-      <div className={listStyles.agendaListTextWrapper}>
-        <h2>AGENDA LIST</h2>
-        <div>
-          <button
-            className={`${listStyles.agendaListStatus} ${
-              showCurrent ? listStyles.selectedStatus : ''
-            }`}
-            name='ongoing'
-            onClick={toggleStatus}
-          >
-            진행중
-          </button>
-          {' | '}
-          <button
-            className={`${listStyles.agendaListStatus} 
+      <div className={styles.agendaContainer}>
+        <div className={listStyles.agendaListTextWrapper}>
+          <h2>AGENDA LIST</h2>
+          <div>
+            <button
+              className={`${listStyles.agendaListStatus} ${
+                showCurrent ? listStyles.selectedStatus : ''
+              }`}
+              name='ongoing'
+              onClick={toggleStatus}
+            >
+              진행중
+            </button>
+            {' | '}
+            <button
+              className={`${listStyles.agendaListStatus} 
             ${showCurrent ? '' : listStyles.selectedStatus}`}
-            name='closed'
-            onClick={toggleStatus}
-          >
-            종료된
-          </button>
+              name='closed'
+              onClick={toggleStatus}
+            >
+              종료된
+            </button>
+          </div>
         </div>
-      </div>
 
-      {showCurrent ? (
-        <AgendaList agendaList={currentData || []} />
-      ) : (
-        <>
-          <AgendaList agendaList={historyData || []} />
-          <PageNation {...PagaNationElementProps} />{' '}
-        </>
-      )}
+        {showCurrent ? (
+          <AgendaList agendaList={currentData || []} />
+        ) : (
+          <>
+            <AgendaList agendaList={historyData || []} />
+            <PageNation {...PagaNationElementProps} />{' '}
+          </>
+        )}
+      </div>
       <TestModal />
       <TestModal2 />
     </div>

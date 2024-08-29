@@ -1,5 +1,14 @@
 @import 'styles/agenda/common.scss';
 
+.agendaContainer {
+  width: calc(100% - 2rem);
+  margin: 0 auto;
+  @media screen and (min-width: 961px) {
+    @include container(2);
+    width: 100%;
+    margin: 0;
+  }
+}
 .agendaPageContainer {
   @include layout;
   display: flex;
