@@ -1,10 +1,10 @@
 import router from 'next/router';
+import { SetterOrUpdater, useSetRecoilState } from 'recoil';
 import { agendaModal } from 'types/agenda/modalTypes';
 import { TeamDetailProps } from 'types/agenda/teamDetail/TeamDetailTypes';
 import { transformTeamLocation } from 'utils/agenda/transformLocation';
-import { instanceInAgenda } from 'utils/axios';
+import { toastState } from 'utils/recoil/toast';
 import { AgendaLocation } from 'constants/agenda/agenda';
-import FormBtn from 'components/agenda/button/FormButton';
 import CheckBoxInput from 'components/agenda/Input/CheckboxInput';
 import DescriptionInput from 'components/agenda/Input/DescriptionInput';
 import SelectInput from 'components/agenda/Input/SelectInput';
@@ -13,6 +13,7 @@ import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/Form/Form.module.scss';
 import { useModal } from '../modal/useModal';
 
+const teamlocation = ['SEOUL', 'GYEONGSAN', 'NIX'];
 interface CreateTeamFormProps {
   location: AgendaLocation | null;
 
@@ -53,6 +54,7 @@ const teamdataToMsg = (data: { [key: string]: string }) => {
 const SubmitTeamForm = (
   target: React.FormEvent<HTMLFormElement>,
   isEdit: boolean,
+  setSnackBar: SetterOrUpdater<any>,
   sendRequest: any,
   agendaKey: string,
   openModal: (props: agendaModal) => void,
@@ -64,10 +66,32 @@ const SubmitTeamForm = (
   const formData = new FormData(target.currentTarget);
   const data = transformFormData(formData);
 
-  if (data.teamName === '' || data.teamContent === '') {
-    alert('모든 항목을 입력해주세요.'); //임시
+  //에러 스낵바 세팅
+  let errMsg = '';
+  if (data.teamContent === '') {
+    errMsg = '팀 설명을 입력해주세요.\n';
+    target.currentTarget.teamContent.focus();
+  }
+  if (data.teamName === '') {
+    errMsg = '팀 이름을 입력해주세요.\n';
+    target.currentTarget.teamName.focus();
+  }
+  if (!teamlocation.includes(data.teamLocation)) {
+    errMsg = '팀 위치를 선택해주세요.';
+    errMsg += data.teamLocation;
+    target.currentTarget.teamLocation.focus();
+  }
+
+  if (errMsg.length > 0) {
+    setSnackBar({
+      toastName: `bad request`,
+      severity: 'error',
+      message: `🔥 ${errMsg} 🔥`,
+      clicked: true,
+    });
     return;
   }
+
   if (isEdit) data.teamKey = teamKey;
 
   const requestMethod = isEdit ? 'PATCH' : 'POST';
@@ -111,11 +135,13 @@ const CreateTeamForm = ({
   const sendRequest = useFetchRequest().sendRequest;
   const { teamUID } = router.query;
   const { openModal } = useModal();
+  const setSnackBar = useSetRecoilState(toastState);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     SubmitTeamForm(
       e,
       isEdit,
+      setSnackBar,
       sendRequest,
       agendaKey,
       openModal,
