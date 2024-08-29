@@ -11,9 +11,14 @@ import styles from 'styles/agenda/Form/Form.module.scss';
 interface AdminTeamFormProps {
   teamKey: string;
   teamData: TeamDetailProps;
+  teamLocation: string;
 }
 
-const AdminTeamFrom = ({ teamKey, teamData }: AdminTeamFormProps) => {
+const AdminTeamFrom = ({
+  teamKey,
+  teamData,
+  teamLocation,
+}: AdminTeamFormProps) => {
   const sendRequest = useFetchRequest().sendRequest;
 
   const transformFormData = (formData: FormData) => {
@@ -67,6 +72,7 @@ const AdminTeamFrom = ({ teamKey, teamData }: AdminTeamFormProps) => {
     );
   };
 
+  console.log('location', teamLocation, teamLocation === 'MIX');
   return (
     <form onSubmit={SubmitTeamForm} className={styles.container}>
       <div className={styles.pageContianer}>
@@ -93,16 +99,17 @@ const AdminTeamFrom = ({ teamKey, teamData }: AdminTeamFormProps) => {
           selected={teamData.teamStatus}
         />
 
-        {teamData.teamLocation === 'MIX' ? (
+        {teamLocation === 'MIX' ? (
           <input type='hidden' name='teamLocation' value={'MIX'} />
         ) : (
           <SelectInput
             name='teamLocation'
             label='클러스터 위치'
-            options={['서울', '경산', '둘다']}
-            selected={teamData.teamLocation}
+            options={['SEOUL', 'GYEONGSAN', 'MIX']}
+            selected={teamLocation}
           />
         )}
+
         <CheckBoxInput
           name='teamIsPrivate'
           label='비밀방(초대만 가능, 대회 내역에서 보이지 않음)'

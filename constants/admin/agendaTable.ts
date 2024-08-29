@@ -32,6 +32,7 @@ export const agendaTableFormat: AgendaTableFormat = {
     columns: [
       'teamName',
       'teamLeaderIntraId',
+      'teamLocation',
       'teamMateCount',
       'teamIsPrivate',
       'teamAward',
