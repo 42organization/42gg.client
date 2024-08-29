@@ -32,9 +32,8 @@ $info-gradient: linear-gradient(
   }
 
   @media screen and (min-width: 961px) {
-    // width: 800px;
-    // max-width: 1200px;
     height: 5rem !important;
+    border-radius: 10rem;
   }
 }
 
@@ -44,7 +43,7 @@ $info-gradient: linear-gradient(
   bottom: 1.5rem;
   left: 1.5rem;
   @media screen and (min-width: 961px) {
-    bottom: 0.4rem;
+    bottom: 0.3rem;
   }
 }
 
@@ -68,8 +67,6 @@ $info-gradient: linear-gradient(
   width: 100%;
   gap: 1.5rem;
   @media screen and (max-width: 961px) {
-    // height: 2.5rem;
-
     justify-content: space-between;
   }
   h2 {
@@ -95,7 +92,7 @@ $info-gradient: linear-gradient(
   }
   @media screen and (min-width: 961px) {
     right: 13.5%;
-    bottom: 28%;
+    bottom: 27%;
   }
 }
 
@@ -106,6 +103,6 @@ $info-gradient: linear-gradient(
     bottom: 100%;
   }
   @media screen and (min-width: 961px) {
-    bottom: 30%;
+    bottom: 26%;
   }
 }
