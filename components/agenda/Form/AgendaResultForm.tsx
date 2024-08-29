@@ -46,6 +46,7 @@ const AgendaResultForm = ({
     e.target.value = defaultTeam;
     setAwardList([...awardList]);
   };
+
   const modifyTeam = (idx: number, teamidx: number, newTeam: string) => {
     if (awardList[idx].teams.includes(newTeam)) {
       setAwardList([...awardList]);
@@ -61,6 +62,16 @@ const AgendaResultForm = ({
 
   const addAward = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
+    const input = document.getElementById('newAwardInput') as HTMLInputElement;
+    const val = input.value;
+    if (val === '') return;
+    input.value = '';
+    setAwardList([...awardList, { award: val, teams: [] }]);
+  };
+
+  const addAwardEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (e.key !== 'Enter') return;
     const input = document.getElementById('newAwardInput') as HTMLInputElement;
     const val = input.value;
     if (val === '') return;
@@ -235,6 +246,7 @@ const AgendaResultForm = ({
                 ref={newAwardInputRef}
                 type='text'
                 placeholder='추가할 상을 입력해주세요...'
+                onKeyUp={addAwardEnter}
               />
               <AddElementBtn onClick={addAward} />
             </div>

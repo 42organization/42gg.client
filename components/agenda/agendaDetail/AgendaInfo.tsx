@@ -28,12 +28,10 @@ const hostMode = ({ router, agendaKey }: CallbackProps) => {
 
 const participateTeam = ({ router, agendaKey }: CallbackProps) => {
   router.push(`/agenda/${agendaKey}/create-team`);
-  alert('팀 만들기 버튼입니다.');
 };
 
 const submitResults = ({ router, agendaKey }: CallbackProps) => {
   router.push(`/agenda/${agendaKey}/host/result`);
-  alert('결과 입력 버튼입니다.');
 };
 
 const determineButton = ({ agendaData, isHost, status }: AgendaInfoProps) => {
