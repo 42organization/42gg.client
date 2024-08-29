@@ -17,14 +17,17 @@
   transition: width 0.15s ease, height 0.15s ease;
   gap: 1rem;
   @include text(sub-menu);
+  @include gridHead;
 }
 
 .myAgendaContainer.expandedHeight {
   height: 28rem;
+  @include gridHead;
 }
 
 .myAgendaContainer.expandedWidth {
   width: 23rem;
+  @include gridHead;
 }
 
 .myAgendaBtnToggle {

@@ -34,7 +34,7 @@
   @media screen and (min-width: 481px) and (max-width: 960px) {
     display: flex;
     flex-direction: column;
-    padding: 0 5rem;
+    // padding: 0 5rem;
     border: 2px solid blue;
   }
   @media screen and (min-width: 961px) {
@@ -55,10 +55,12 @@
 // 헤더에 붙어있는 부분
 @mixin gridHead {
   @include action;
-  // @media screen and (min-width: 481px) and (max-width: 960px) {
-  // }
-  // @media screen and (min-width: 961px) {
-  // }
+  @media screen and (min-width: 961px) {
+    width: calc(100%);
+    border: var(--default-border);
+    border-top: none;
+    border-radius: 0 0 $radius-big $radius-big;
+  }
 }
 
 // 아래 컨테이너 중 가장 위에 있는 부분
@@ -76,11 +78,11 @@
   @include action;
   @if ($view == 'web') {
     @media screen and (max-width: 960px) {
-      display: none;
+      display: none !important;
     }
   } @else {
     @media screen and (min-width: 961px) {
-      display: none;
+      display: none !important;
     }
   }
 }
