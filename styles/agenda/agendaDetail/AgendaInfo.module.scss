@@ -83,26 +83,23 @@ $info-gradient: linear-gradient(
   margin-right: auto; // UploadBtn과의 간격 확보
 }
 
-.shareWarp {
+.buttonWarp {
   position: absolute;
   right: 0;
-  @media screen and (max-width: 960px) {
-    right: 0;
-    bottom: 135%;
-  }
-  @media screen and (min-width: 961px) {
-    right: 13.5%;
-    bottom: 27%;
-  }
-}
+  display: flex; // flex 컨테이너로 설정
+  flex-direction: column; // 기본적으로 세로 정렬
+  align-items: flex-end; // 오른쪽 정렬
+  gap: 0.4rem;
 
-.enrollWarp {
-  position: absolute;
-  right: 0;
   @media screen and (max-width: 960px) {
-    bottom: 100%;
+    bottom: 100%; // 960px 이하에서 세로 정렬
   }
+
   @media screen and (min-width: 961px) {
-    bottom: 26%;
+    bottom: 26%; // 961px 이상에서 위치 조정
+    flex-direction: row; // 가로 배치
+    justify-content: flex-end; // 오른쪽 정렬
+    align-items: center; // 세로 중앙 정렬
+    gap: 1rem;
   }
 }
