@@ -81,8 +81,15 @@ export default function AgendaInfo({
       <div className={`${styles.infoContainer} ${containerSize}`}>
         <div className={styles.infoWarp}>
           <div className={styles.contentWarp}>
-            {isAgendaDetail && buttonData && (
-              <div className={styles.enrollWarp}>
+            <h2>{agendaTitle}</h2>
+
+            <div className={styles.organizerWrap}>
+              <span>주최자 : {agendaHost}</span>
+            </div>
+            <div className={styles.buttonWarp}>
+              {isAgendaDetail && <ShareBtn onClick={copyLink} />}
+
+              {isAgendaDetail && buttonData && (
                 <UploadBtn
                   text={buttonData.text}
                   onClick={() => {
@@ -92,14 +99,7 @@ export default function AgendaInfo({
                     });
                   }}
                 />
-              </div>
-            )}
-            <div className={styles.titleWarp}>
-              <h2>{agendaTitle}</h2>
-              {isAgendaDetail && <ShareBtn onClick={copyLink} />}
-            </div>
-            <div className={styles.organizerWrap}>
-              <span>주최자 : {agendaHost}</span>
+              )}
             </div>
           </div>
         </div>
