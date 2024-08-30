@@ -1,5 +1,5 @@
 import { NextRouter } from 'next/router';
-import { SetterOrUpdater, useSetRecoilState } from 'recoil';
+import { SetterOrUpdater } from 'recoil';
 import { agendaModal } from 'types/agenda/modalTypes';
 import { instanceInAgenda } from 'utils/axios';
 function agendadataToMsg(data: FormData, isEdit: boolean) {
@@ -7,7 +7,7 @@ function agendadataToMsg(data: FormData, isEdit: boolean) {
   msg += '행사 제목 : ' + data.get('agendaTitle') + '\n';
   msg += '타입: ';
   console.log(msg);
-  msg += data.get('agendaIsRanking') === 'true' ? '대회' : '행사' + '\n';
+  msg += data.get('agendaIsRanking') === 'true' ? '대회\n' : '행사\n';
   msg += '행사 내용 : ' + data.get('agendaContent') + '\n';
   msg +=
     '등록 마감 : ' +
@@ -21,10 +21,10 @@ function agendadataToMsg(data: FormData, isEdit: boolean) {
     '종료 : ' + data.get('agendaEndTime')?.toString().replace('T', ' ') + '\n';
   msg += '최소팀 및 최대 팀 :\n';
   msg += data.get('agendaMinTeam') + ' ~ ' + data.get('agendaMaxTeam') + '\n';
-  msg += '최소팀원 및 최대팀원 : ';
+  msg += '팀원 제한: ';
   msg +=
     data.get('agendaMaxPeople') === '1'
-      ? '개인참여'
+      ? '개인\n'
       : data.get('agendaMinPeople') +
         ' ~ ' +
         data.get('agendaMaxPeople') +
@@ -33,9 +33,9 @@ function agendadataToMsg(data: FormData, isEdit: boolean) {
   msg += '개최지 : ' + data.get('agendaLocation') + '\n';
   msg += '포스터 : ';
   msg +=
-    data.get('agendaPoster.name') === null
+    (data.get('agendaPoster') as File)?.name === null
       ? '없음\n\n'
-      : data.get('agendaPoster.name') + '\n\n';
+      : (data.get('agendaPoster') as File)?.name + '\n\n';
   msg += isEdit ? '행사를 수정하시겠습니까?\n' : '행사를 등록하시겠습니까?\n';
   return msg;
 }
