@@ -32,15 +32,7 @@ const AgendaListItem = ({
 }) => {
   return (
     <Link href={`/agenda/${agendaInfo.agendaKey}`}>
-      <button
-        className={styles.agendaListItemBtn}
-        style={{
-          background: `linear-gradient(180deg, #fff 5rem, rgba(0, 0, 0, 0) 10rem), url(${
-            agendaInfo.agendaPosterUrl || '/image/agenda/42.jpg'
-          })`,
-        }}
-        key={key}
-      >
+      <button className={styles.agendaListItemBtn} key={key}>
         <AgendaInfo agendaInfo={agendaInfo} key={key} />
         <AgendaDeadLine />
       </button>

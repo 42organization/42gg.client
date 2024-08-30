@@ -2,16 +2,11 @@
 
 .modalContainer {
   @include container(modal);
-  z-index: 5000;
 
   display: flex;
-  width: max-content;
-  min-width: 20rem;
+  width: 20rem;
   height: max-content;
   flex-direction: column;
-  line-height: 150%;
-  text-align: center;
-  white-space: pre;
 
   &.wide {
     width: 60%;

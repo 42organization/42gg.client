@@ -41,7 +41,7 @@ export default function AgendaHeader() {
           />
         </div>
       </div>
-      <MenuBar headerstate={HeaderState} />
+      <MenuBar isActive={HeaderState.openMenuState} />
     </HeaderContext.Provider>
   );
 }

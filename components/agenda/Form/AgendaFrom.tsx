@@ -1,9 +1,6 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { Slider } from '@mui/material';
 import { getRemainTime } from 'utils/handleTime';
-import { toastState } from 'utils/recoil/toast';
 import CheckboxInput from 'components/agenda/Input/CheckboxInput';
 import DescriptionInput from 'components/agenda/Input/DescriptionInput';
 import ImageInput from 'components/agenda/Input/ImageInput';
@@ -29,9 +26,6 @@ const AgendaForm = ({
   stringKey,
   onProceed,
 }: CreateAgendaFormProps) => {
-  const { openModal } = useModal();
-  const setSnackBar = useSetRecoilState(toastState);
-  const router = useRouter();
   const minDistance = 10;
   // 날짜 초기화
   const today = new Date();
@@ -181,16 +175,7 @@ const AgendaForm = ({
     <>
       <form
         onSubmit={(e) => {
-          SubmitAgendaForm(
-            e,
-            isEdit,
-            openModal,
-            setSnackBar,
-            router,
-            isAdmin,
-            stringKey,
-            handleSuccess
-          );
+          SubmitAgendaForm(e, isAdmin, stringKey, handleSuccess);
         }}
         className={styles.container}
       >

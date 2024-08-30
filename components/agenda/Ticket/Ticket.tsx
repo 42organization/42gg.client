@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { instanceInAgenda } from 'utils/axios';
 import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/Ticket/Ticket.module.scss';
-import { useModal } from '../modal/useModal';
 interface TicketProps {
   ticketCount: number;
   setupTicket: boolean;
@@ -10,8 +9,6 @@ interface TicketProps {
 
 const Ticket = ({ type }: { type: string }) => {
   const { data } = useFetchGet<TicketProps>('/ticket');
-  const { openModal } = useModal();
-
   return type === 'page' ? (
     <div className={styles.container}>
       <h1 className={styles.h1}>내 티켓</h1>
@@ -47,14 +44,9 @@ const Ticket = ({ type }: { type: string }) => {
         <button
           className={styles.submitButton}
           onClick={() => {
-            openModal({
-              type: 'proceedCheck',
-              description: '평가 포인트를 기부하시겠습니까?',
-              onProceed: () => {
-                instanceInAgenda.post('/ticket').then(() => {
-                  location.href = 'https://profile.intra.42.fr/';
-                });
-              },
+            instanceInAgenda.post('/ticket').then(() => {
+              alert('티켓 발급 시작');
+              location.href = 'https://profile.intra.42.fr/';
             });
           }}
         >

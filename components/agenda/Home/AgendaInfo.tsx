@@ -52,7 +52,12 @@ const AgendaInfo = ({
           <div className={styles.agendaItemTimeWrapper}>
             <div className={styles.imageWrapper}>
               <Image
-                src={'/image/agenda/Time.svg'}
+                src={
+                  // file 일 경우 방지
+                  typeof agendaInfo.agendaPoster === 'string'
+                    ? agendaInfo.agendaPoster
+                    : '/image/agenda/Time.svg'
+                }
                 width={15}
                 height={15}
                 alt='count'

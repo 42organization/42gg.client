@@ -12,7 +12,6 @@ export interface AgendaDataProps {
   agendaMinPeople: number;
   agendaMaxPeople: number;
   agendaPoster?: File | null;
-  agendaPosterUrl?: string;
   agendaHost: string;
   agendaLocation: AgendaLocation;
   agendaStatus: AgendaStatus;

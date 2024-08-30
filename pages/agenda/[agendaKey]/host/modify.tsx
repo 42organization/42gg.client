@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { CancelBtn } from 'components/agenda/button/Buttons';
-import AgendaForm from 'components/agenda/Form/AgendaForm';
+import AgendaForm from 'components/agenda/Form/AgendaFrom';
 import { saveLocal } from 'pages/agenda/create';
 import { useAgendaInfo } from 'hooks/agenda/useAgendaInfo';
 import styles from 'styles/agenda/pages/CreateAgenda.module.scss';

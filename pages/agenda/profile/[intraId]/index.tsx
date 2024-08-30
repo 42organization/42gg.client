@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { AgendaHistoryItemProps } from 'types/agenda/profile/agendaHistoryTypes';
 import { CurrentTeamItemProps } from 'types/agenda/profile/currentTeamTypes';
 import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
@@ -21,12 +20,8 @@ export default function AgendaProfile() {
     '/profile/current/list'
   ).data;
 
-  const router = useRouter();
-  const { intraId } = router.query;
   const { content: agendaHistory, PagaNationElementProps } =
-    usePageNation<AgendaHistoryItemProps>({
-      url: '/profile/history/list/' + intraId,
-    });
+    usePageNation<AgendaHistoryItemProps>({ url: '/profile/history/list' });
 
   return (
     <>

@@ -1,4 +1,4 @@
-import AgendaForm from './AgendaForm';
+import AgendaForm from './AgendaFrom';
 
 interface ModifyAgendaFormProps {
   data: {

@@ -17,10 +17,6 @@ function AgendaAppLayout({ children }: AgendaLayoutProps) {
 
   if (!user || !user.intraId) return null;
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <>
       <AgendaHeader />
@@ -30,9 +26,6 @@ function AgendaAppLayout({ children }: AgendaLayoutProps) {
         <Footer />
         <AgendaModalProvider />
       </div>
-      <button onClick={scrollToTop} className={styles.floatingButton}>
-        ↑
-      </button>
     </>
   );
 }
