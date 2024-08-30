@@ -94,7 +94,10 @@ const SubmitAgendaResult = () => {
     data: {},
     status: 400,
   };
-  const teamlist = data?.content.map((team) => team.teamName) || [];
+  const teamlist: string[] = [];
+  data?.content?.forEach((team) => {
+    team.teamName && teamlist.push(team.teamName);
+  });
 
   const SubmitAgendaResult = (awardList: AwardListProps[]) => {
     const Data = parseData(awardList);
@@ -129,7 +132,7 @@ const SubmitAgendaResult = () => {
       <AgendaResultForm
         awardList={awardList}
         setAwardList={setAwardList}
-        teamlist={teamlist}
+        teamlist={teamlist || []}
         SubmitAgendaResult={(e) => {
           e.preventDefault();
           SubmitAgendaResult(awardList);
