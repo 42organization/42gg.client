@@ -32,8 +32,8 @@ const AgendaDetail = () => {
             <AgendaInfo
               agendaData={agendaData}
               isHost={isHost}
-              myTeamStatus={myTeamStatus && myTeamStatus}
-              myTeam={myTeam && myTeam}
+              myTeamStatus={myTeamStatus}
+              myTeam={myTeam}
               intraId={intraId}
             />
             <AgendaTab
