@@ -1,4 +1,3 @@
-import router from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import {
   Paper,
@@ -8,8 +7,6 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-// import { instance } from 'utils/axios';
-// import { dateToStringShort } from 'utils/handleTime';
 import { ITicket } from 'types/agenda/ticket/ticketTypes';
 import { instance } from 'utils/axios';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
@@ -18,9 +15,7 @@ import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
 import AdminTicketForm from 'components/agenda/Form/AdminTicketForm';
 import { useModal } from 'components/agenda/modal/useModal';
 import PageNation from 'components/Pagination';
-// import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
-import ticketStyles from 'styles/admin/agenda/TicketTable.module.scss';
 
 const itemsPerPage = 10; // 한 페이지에 보여줄 항목 수
 
@@ -71,10 +66,6 @@ const TicketTable = ({ intraId }: TicketTableProps) => {
     });
   };
 
-  const handleCellClick = (agedaKey?: string) => {
-    router.push(`/admin/agenda/teamList?agendaKey=${agedaKey}`);
-  };
-
   const getTicketList = useCallback(async () => {
     const response = await instance.get(
       `/agenda/admin/ticket/list/${intraId}`,
@@ -118,23 +109,10 @@ const TicketTable = ({ intraId }: TicketTableProps) => {
                 <TableRow key={ticket.ticketId} className={styles.tableRow}>
                   {agendaTableFormat['ticket'].columns.map(
                     (columnName: string, index: number) => {
-                      const isClickable =
-                        columnName === 'issuedFrom' || columnName === 'usedTo';
                       return (
                         <TableCell
-                          className={`${styles.tableBodyItem} ${
-                            isClickable ? ticketStyles.clickableCell : ''
-                          }`}
+                          className={`${styles.tableBodyItem} `}
                           key={index}
-                          onClick={() => {
-                            if (isClickable) {
-                              handleCellClick(
-                                columnName === 'issuedFrom'
-                                  ? ticket.issuedFromKey
-                                  : ticket.usedToKey
-                              );
-                            }
-                          }}
                         >
                           {columnName === 'isApproved' ? (
                             renderApprove(ticket.isApproved) // 상태 표시
