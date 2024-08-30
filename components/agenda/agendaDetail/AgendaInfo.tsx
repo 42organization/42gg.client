@@ -4,6 +4,7 @@ import { AgendaStatus } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
 import { isSoloTeam } from 'components/agenda/utils/team';
+import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/agendaDetail/AgendaInfo.module.scss';
 
 interface CallbackProps {
@@ -17,59 +18,126 @@ const copyLink = () => {
   alert('링크가 복사되었습니다.');
 };
 
-// api 호출 필요
-const participateSolo = () => {
-  alert('참여신청이 완료되었습니다.');
-};
-
 const hostMode = ({ router, agendaKey }: CallbackProps) => {
-  router.push(`/agenda/${agendaKey}/host/modify`);
+  // router.push(`/agenda/${agendaKey}/host/modify`); // 기존 코드 - 주최자가 대회 수정
+  // router.push(`/agenda/${agendaKey}/host/createAnnouncement`); // 공지사항 추가로 변경
+  alert('host Mode 예정!');
 };
 
-const participateTeam = ({ router, agendaKey }: CallbackProps) => {
+const subscribeTeam = ({ router, agendaKey }: CallbackProps) => {
   router.push(`/agenda/${agendaKey}/create-team`);
-  alert('팀 만들기 버튼입니다.');
 };
 
 const submitResults = ({ router, agendaKey }: CallbackProps) => {
   router.push(`/agenda/${agendaKey}/host/result`);
-  alert('결과 입력 버튼입니다.');
-};
-
-const determineButton = ({ agendaData, isHost, status }: AgendaInfoProps) => {
-  const isParticipant = status === 200;
-  switch (agendaData.agendaStatus) {
-    case AgendaStatus.CONFIRM:
-      return isHost ? { text: '결과입력', callback: submitResults } : null;
-    case AgendaStatus.OPEN:
-      if (isHost) {
-        return { text: '주최자 관리', callback: hostMode };
-      } else if (isParticipant) {
-        return null; // 참가자는 버튼이 없음, 아래 본인 팀 상세정보 확인 가능
-      } else if (
-        isSoloTeam(agendaData.agendaMinPeople, agendaData.agendaMaxPeople)
-      )
-        return { text: '참가하기', callback: participateSolo };
-      else return { text: '팀 만들기', callback: participateTeam };
-    default:
-      return null;
-  }
 };
 
 export default function AgendaInfo({
   agendaData,
   isHost,
-  status,
+  myTeamStatus,
+  myTeam,
+  intraId,
 }: AgendaInfoProps) {
-  const buttonData = determineButton({
-    agendaData,
-    isHost,
-    status,
-  });
+  const sendRequest = useFetchRequest().sendRequest;
+
+  const subscribeSolo = ({ router, agendaKey }: CallbackProps) => {
+    const soloData = {
+      teamName: intraId,
+      teamLocation: agendaData.agendaLocation,
+      teamContent: '개인참여',
+      teamIsPrivate: false,
+    };
+
+    // 개인 참여
+    sendRequest(
+      'POST',
+      'team',
+      soloData,
+      { agenda_key: agendaKey },
+      (response: any) => {
+        const newTeamKey = response ? response.teamKey : null;
+        if (newTeamKey) {
+          // 개인 참여 확정
+          sendRequest(
+            'PATCH',
+            'team/confirm',
+            {},
+            { agenda_key: agendaKey, teamKey: newTeamKey },
+            () => {
+              window.location.reload();
+            },
+            (err) => {
+              console.log('개인 확정에 실패했습니다.', err);
+            }
+          );
+        } else {
+          console.log('개인 팀키를 찾지 못했습니다.');
+        }
+      },
+      (err) => {
+        console.log('개인 참여에 실패했습니다.', err);
+      }
+    );
+  };
+
+  const unsubscribeSolo = ({ router, agendaKey }: CallbackProps) => {
+    const myTeamKey = myTeam ? myTeam.teamKey : null;
+
+    sendRequest(
+      'PATCH',
+      'team/cancel',
+      {},
+      {
+        agenda_key: agendaKey,
+        teamKey: myTeamKey,
+      },
+      () => {
+        window.location.reload();
+      },
+      (err) => {
+        console.log('등록취소에 실패했습니다.', err);
+      }
+    );
+  };
+
+  const determineButton = () => {
+    const isParticipant = myTeamStatus === 200;
+    const isSolo = isSoloTeam(
+      agendaData.agendaMinPeople,
+      agendaData.agendaMaxPeople
+    );
+
+    switch (agendaData.agendaStatus) {
+      case AgendaStatus.CONFIRM:
+        return isHost ? { text: '결과입력', callback: submitResults } : null;
+      case AgendaStatus.OPEN:
+        if (isHost) {
+          // 주최자
+          return { text: '주최자 관리', callback: hostMode }; // 주최자 관리 -> 대회 수정 / (변경) 공지사항 추가 버튼
+        } else if (isParticipant) {
+          // 참가자
+          if (isSolo) {
+            return { text: '등록취소', callback: unsubscribeSolo };
+          }
+          return null;
+        } else {
+          // 손님
+          if (isSolo) {
+            return { text: '등록하기', callback: subscribeSolo };
+          }
+          return { text: '팀 만들기', callback: subscribeTeam };
+        }
+      default:
+        return null;
+    }
+  };
+
+  const buttonData = determineButton();
 
   const { agendaTitle, agendaHost, agendaKey } = agendaData;
 
-  const isAgendaDetail = isHost !== undefined && status !== undefined;
+  const isAgendaDetail = isHost !== undefined && myTeamStatus !== undefined;
   const containerSize = isAgendaDetail
     ? styles.largeHeight
     : styles.smallHeight;
