@@ -85,7 +85,6 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
   });
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const setSnackBar = useSetRecoilState(toastState);
   const { openModal, closeModal } = useModal();
 
   const buttonList: string[] = [
@@ -165,13 +164,6 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
       const getData = await instanceInAgenda.get(
         `/admin/request/list?page=${currentPage}&size=${itemsPerPage}`
       );
-      // setSnackBar({
-      //   toastName: 'GET request',
-      //   message: 'agenda List를 가져오는데 실패했습니다.',
-      //   severity: 'error',
-      //   clicked: true,
-      // });
-
       const filteredAgendaList = getData.data.content.filter(
         (agenda: IAgenda) => {
           const matchesStatus = status ? agenda.agendaStatus === status : true;
