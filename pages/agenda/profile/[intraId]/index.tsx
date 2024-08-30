@@ -13,7 +13,6 @@ import useFetchGet from 'hooks/agenda/useFetchGet';
 import usePageNation from 'hooks/agenda/usePageNation';
 import styles from 'styles/agenda/Profile/AgendaProfile.module.scss';
 
-//intraid 받아오는 페이지로 세팅 필요
 const AgendaProfile = () => {
   const router = useRouter();
   const { intraId } = router.query; // URL 상의 intraId
@@ -51,6 +50,8 @@ const AgendaProfile = () => {
     url: `/profile/history/list/${intraId}`,
   });
 
+  console.log(profileData);
+
   return (
     <>
       <div className={styles.agendaProfileContainer}>
@@ -64,7 +65,8 @@ const AgendaProfile = () => {
             userIntraId={profileData.userIntraId}
             userContent={profileData.userContent}
             userGithub={profileData.userGithub}
-            ticketCount={profileData.ticketCount}
+            imageUrl={profileData.imageUrl}
+            achievements={profileData.achievements}
             getProfileData={getProfileData}
             isMyProfile={isMyProfile}
           />

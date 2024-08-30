@@ -11,7 +11,8 @@ const ProfileImageCard = ({
   userIntraId,
   userContent,
   userGithub,
-  ticketCount, // NOT YET : ticket
+  imageUrl,
+  achievements,
   getProfileData,
   isMyProfile,
 }: ProfileCardProps) => {
@@ -77,6 +78,7 @@ const ProfileImageCard = ({
     handleFlip();
   };
 
+  console.log(achievements); //////////////////////////////////
   return (
     <div className={styles.profileImageCard}>
       <div
@@ -137,12 +139,12 @@ const ProfileImageCard = ({
         {/* Front Side */}
         <div className={styles.frontCard}>
           <div className={styles.profileImage}>
-            {/* 추가 예정 : profile Image  */}
             <div className={styles.profileImageWrapper}>
               <CustomImage
-                src='/image/agenda/jeongrol.jpeg'
+                src={imageUrl}
                 alt='profile image'
                 addClass={styles.profileImageBox}
+                isProfileImage={true}
               />
             </div>
 
@@ -190,13 +192,26 @@ const ProfileImageCard = ({
               <div className={styles.acheivementText}>Acheivements</div>
 
               <div className={styles.acheivementImageContainer}>
-                {/* 추가 예정 : acheivement mapping */}
-                <div className={styles.acheivementImageWrapper}>
-                  <CustomImage
-                    src='/image/agenda/acheivement.svg'
-                    alt='acheivement'
-                  />
-                </div>
+                {achievements.map((data, index) => {
+                  const imageUrl = data.image;
+
+                  if (imageUrl) {
+                    const parsedUrl = imageUrl.replace(
+                      '/uploads',
+                      'https://cdn.intra.42.fr'
+                    );
+
+                    return (
+                      <div
+                        key={index}
+                        className={styles.acheivementImageWrapper}
+                      >
+                        <CustomImage src={parsedUrl} alt='achievement' />
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
               </div>
             </div>
           </div>
