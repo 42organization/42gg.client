@@ -22,12 +22,20 @@
 
 .myAgendaContainer.expandedHeight {
   height: 28rem;
+  overflow-y: auto;
   @include gridHead;
+  @media screen and (min-width: 961px) {
+    height: max-content;
+  }
 }
 
 .myAgendaContainer.expandedWidth {
-  width: 23rem;
+  // width: 23rem;
+  width: max-content;
   @include gridHead;
+  @media screen and (min-width: 961px) {
+    width: 100%;
+  }
 }
 
 .myAgendaBtnToggle {
@@ -71,17 +79,27 @@
   overflow-y: scroll;
   align-items: flex-start;
   gap: 1rem;
+  @media screen and (min-width: 961px) {
+    display: flex;
+    width: auto;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
 
 .myagendaItemContainer {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
+  width: max-content;
   min-height: 5.5rem;
   padding: 0 1.2rem;
   background-color: var(--box-bg-1);
   border: var(--default-border);
   border-radius: $radius-big;
   box-shadow: var(--default-box-shadow);
+  @media screen and (min-width: 961px) {
+    width: max-content;
+  }
 }

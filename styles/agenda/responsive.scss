@@ -26,6 +26,7 @@
 // 각 페이지 내에서 그리드 템플릿 세팅 필요
 @mixin layout {
   @include action;
+  width: 100%;
   @media screen and (max-width: 480px) {
     display: flex;
     flex-direction: column;
@@ -39,7 +40,6 @@
   }
   @media screen and (min-width: 961px) {
     display: grid;
-    max-width: 1200px;
     padding: 0 5rem;
     border: 2px solid yellow;
   }
