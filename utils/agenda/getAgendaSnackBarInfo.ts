@@ -77,6 +77,6 @@ export default function getAgendaSnackBarInfo(
   if (result) {
     return { severity: result.severity, message: result.message };
   } else {
-    return { severity: 'default', message: '정의되지 않은 스낵바.' };
+    return { severity: 'default', message: '뭔진 모르겠지만 성공!.' };
   }
 }

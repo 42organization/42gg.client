@@ -1,7 +1,5 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
-import { User } from 'types/agenda/mainType';
 import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import AgendaTab from 'components/agenda/agendaDetail/AgendaTab';
@@ -19,16 +17,12 @@ const AgendaDetail = () => {
   const router = useRouter();
   const { agendaKey } = router.query;
   const agendaData = useAgendaInfo(agendaKey as string);
-  const user: User | undefined = useUser();
-  const intraId = user?.intraId || '';
-  const isHost = getIsHost(intraId, agendaData);
-
-  const teamUID = 1;
-
-  const { data: myTeam, status: status } = useFetchGet<TeamDataProps>(
+  const { data: myTeam, status: myTeamStatus } = useFetchGet<TeamDataProps>(
     `team/my`,
     { agenda_key: agendaKey }
   );
+  const intraId = useUser()?.intraId || '';
+  const isHost = getIsHost(intraId, agendaData);
 
   return (
     <>
@@ -38,7 +32,9 @@ const AgendaDetail = () => {
             <AgendaInfo
               agendaData={agendaData}
               isHost={isHost}
-              status={status}
+              myTeamStatus={myTeamStatus}
+              myTeam={myTeam}
+              intraId={intraId}
             />
             <AgendaTab
               agendaData={agendaData}
@@ -49,10 +45,6 @@ const AgendaDetail = () => {
         ) : (
           <p>Loading...</p>
         )}
-
-        <div key={teamUID}>
-          <Link href={`/agenda/${agendaKey}/${teamUID}`}>1번 팀</Link>
-        </div>
       </div>
     </>
   );

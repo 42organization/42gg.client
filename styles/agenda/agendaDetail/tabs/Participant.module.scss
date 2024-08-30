@@ -1,19 +1,16 @@
 @import 'styles/agenda/common.scss';
 
-.participantsContainer {
+.participantItem {
   display: flex;
-  max-width: 20rem;
+  align-items: center;
+  width: 10rem;
   height: 2rem;
-
-  flex: 1 0 0;
   padding: 1rem 0.6rem 1rem 1rem;
-
   border-radius: $radius-medium;
   box-shadow: var(--box-shadow-bottom);
-  align-items: center;
 }
 
-.participantWarp {
+.participantItemWarp {
   display: flex;
   justify-content: space-between;
   align-items: center;
