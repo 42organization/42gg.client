@@ -76,7 +76,14 @@ export default function AgendaInfo({
 
   return (
     <>
-      <div className={`${styles.infoContainer} ${containerSize}`}>
+      <div
+        className={`${styles.infoContainer} ${containerSize}`}
+        style={{
+          background: `linear-gradient(0deg, #fff 6rem, rgba(0, 0, 0, 0) 10rem), url(${
+            agendaData.agendaPosterUrl || '/image/agenda/42.jpg'
+          })`,
+        }}
+      >
         <div className={styles.infoWarp}>
           <div className={styles.contentWarp}>
             {isAgendaDetail && buttonData && (

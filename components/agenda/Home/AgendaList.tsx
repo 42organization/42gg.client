@@ -30,14 +30,14 @@ const AgendaListItem = ({
   agendaInfo: AgendaDataProps;
   key: number;
 }) => {
-  agendaInfo.agendaPosterUrl =
-    agendaInfo.agendaPosterUrl || '/image/agenda/42.jpg';
   return (
     <Link href={`/agenda/${agendaInfo.agendaKey}`}>
       <button
         className={styles.agendaListItemBtn}
         style={{
-          background: `linear-gradient(180deg, #fff 5rem, rgba(0, 0, 0, 0) 10rem), url(${agendaInfo.agendaPosterUrl})`,
+          background: `linear-gradient(180deg, #fff 5rem, rgba(0, 0, 0, 0) 10rem), url(${
+            agendaInfo.agendaPosterUrl || '/image/agenda/42.jpg'
+          })`,
         }}
         key={key}
       >
