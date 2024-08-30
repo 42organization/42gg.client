@@ -149,9 +149,9 @@ export default function AgendaInfo({
       <div
         className={`${styles.infoContainer} ${containerSize}`}
         style={{
-          background: `linear-gradient(0deg, #fff 6rem, rgba(0, 0, 0, 0) 10rem), url(${
+          background: `linear-gradient(0deg, #fff 7rem, rgba(0, 0, 0, 0) 10rem), url(${
             agendaData.agendaPosterUrl || '/image/agenda/42.jpg'
-          })`,
+          }) lightgray 50% / cover no-repeat`,
         }}
       >
         <div className={styles.infoWarp}>
