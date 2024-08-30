@@ -2,15 +2,15 @@
 
 .teamDetail {
   display: flex;
+  width: 100%;
   flex-direction: column;
 }
 
 .agendaLink {
   display: flex;
-  width: calc(100% - 2rem);
+  width: 100%;
   max-width: 1200px;
   flex-direction: column;
-  margin: 1rem;
   cursor: pointer;
   justify-content: center;
   align-items: center;
