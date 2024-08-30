@@ -11,7 +11,6 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { TeamDetailProps } from 'types/agenda/teamDetail/TeamDetailTypes';
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
@@ -86,7 +85,7 @@ export default function TeamTable() {
     );
   };
 
-  const handleButtonAction = (buttonName: string, team: TeamDetailProps) => {
+  const handleButtonAction = (buttonName: string, team: ITeam) => {
     const teamKey = team.teamKey;
     switch (buttonName) {
       case '수정':
