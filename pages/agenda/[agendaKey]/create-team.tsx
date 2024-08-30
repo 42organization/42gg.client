@@ -8,6 +8,10 @@ const CreateTeam = () => {
   const { agendaKey } = router.query;
   const agendaInfo = useAgendaInfo(agendaKey as string);
 
+  const backPage = () => {
+    router.back();
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>팀 만들기</h2>
@@ -15,6 +19,8 @@ const CreateTeam = () => {
       <CreateTeamForm
         location={agendaInfo?.agendaLocation || null}
         agendaKey={agendaKey as string}
+        handleConvert={backPage}
+        onProceed={backPage}
       />
     </div>
   );

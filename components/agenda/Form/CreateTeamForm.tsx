@@ -148,9 +148,6 @@ const CreateTeamForm = ({
       teamUID as string,
       onProceed
     );
-    if (handleConvert) {
-      handleConvert();
-    }
   };
 
   return (
