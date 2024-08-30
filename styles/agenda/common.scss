@@ -54,10 +54,8 @@ $font-size-s: 1rem; // $medium-font
 $font-size-xs: 0.8rem; // $small-font
 
 @mixin container($level) {
-  @include gridContainer;
   display: flex;
-  width: calc(100% - 2rem);
-  max-width: 1200px;
+  width: 100%;
   flex-direction: column;
   padding: 1rem;
   margin: 1rem;

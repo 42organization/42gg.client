@@ -4,7 +4,7 @@
   width: 100%;
   height: max-content;
   grid-area: top;
-  @include gridContainer;
+  @include pageContainer;
 }
 
 .agendaInfoContainer {

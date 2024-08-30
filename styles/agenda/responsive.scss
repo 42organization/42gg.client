@@ -44,9 +44,17 @@
     border: 2px solid yellow;
   }
 }
-
-@mixin gridContainer {
+@mixin pageContainer {
   @include action;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 0 1rem;
+  align-items: center;
+
+  @media screen and (min-width: 451px) and (max-width: 960px) {
+    padding: 0 2rem;
+  }
   @media screen and (min-width: 961px) {
     height: auto;
   }

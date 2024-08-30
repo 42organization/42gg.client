@@ -7,13 +7,13 @@
   flex: 1 0 0;
 
   flex-direction: column;
-  padding: 1.5rem;
+  padding: 1.5rem !important;
   margin: 0;
   gap: 1.2rem;
   align-items: flex-start;
 
   @media screen and (min-width: 481px) and (max-width: 960px) {
-    width: calc(100% - 2rem);
+    width: 100%;
   }
 
   @media screen and (min-width: 961px) {

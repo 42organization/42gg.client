@@ -1,9 +1,14 @@
 @import 'styles/agenda/common.scss';
 
+.pageContainer {
+  @include pageContainer;
+}
+
 .container {
   @include container(1);
   flex-direction: column;
   gap: 1.5rem;
+  margin-top: 0;
 }
 
 .h1 {
