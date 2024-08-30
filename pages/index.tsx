@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import type { NextPage } from 'next';
 import PageController from 'components/agenda/utils/PageController';
 import PingpongIcon from 'public/image/takgu/ping-pong.svg';
+import { useUser } from 'hooks/agenda/Layout/useUser';
 import styles from 'styles/index.module.scss';
 
 const Index: NextPage = () => {

@@ -4,7 +4,7 @@
   z-index: 1999;
   width: 25vw;
   min-width: 200px;
-  height: 100vh;
+  height: calc(100vh - 4rem);
   padding: 1rem;
   background: var(--menubar-bg);
 }
@@ -46,6 +46,9 @@
   border: none;
   justify-content: flex-start;
   align-items: center;
+}
+.content:last-child {
+  margin-top: 2rem;
 }
 
 .content {

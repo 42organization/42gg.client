@@ -9,22 +9,24 @@ import useDraggable from 'components/agenda/utils/useDraggable';
 import styles from 'styles/agenda/Form/AgendaResultForm.module.scss';
 import dragStyles from 'styles/agenda/utils/draggable.module.scss';
 
-type awardType = {
+interface awardType {
   award: string;
   teams: string[];
-};
+  idx?: number;
+}
 interface AgendaResultFormProps {
+  awardList: awardType[];
+  setAwardList: (args0: awardType[]) => void;
   teamlist: string[];
-  SubmitAgendaResult: (awardList: awardType[]) => void;
+  SubmitAgendaResult: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const AgendaResultForm = ({
+  awardList,
+  setAwardList,
   teamlist,
   SubmitAgendaResult,
 }: AgendaResultFormProps) => {
-  const [awardList, setAwardList] = useState<awardType[]>([
-    { award: '참가상', teams: ['apple'] },
-  ]);
   const newAwardInputRef = useRef<HTMLInputElement>(null);
   const defaultTeam = '팀을 선택해주세요';
   const dragging = useRef<HTMLElement | null>(null); // draggable 필요한거
@@ -36,8 +38,21 @@ const AgendaResultForm = ({
   ) => {
     if (!selected) return;
     const newTeam = e.target.value;
+    if (awardList[idx].teams.includes(newTeam)) {
+      e.target.value = defaultTeam;
+      return;
+    }
     awardList[idx].teams.push(newTeam);
     e.target.value = defaultTeam;
+    setAwardList([...awardList]);
+  };
+
+  const modifyTeam = (idx: number, teamidx: number, newTeam: string) => {
+    if (awardList[idx].teams.includes(newTeam)) {
+      setAwardList([...awardList]);
+      return;
+    }
+    awardList[idx].teams[teamidx] = newTeam;
     setAwardList([...awardList]);
   };
   const removeTeam = (idx: number, teamidx: number) => {
@@ -47,6 +62,16 @@ const AgendaResultForm = ({
 
   const addAward = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
+    const input = document.getElementById('newAwardInput') as HTMLInputElement;
+    const val = input.value;
+    if (val === '') return;
+    input.value = '';
+    setAwardList([...awardList, { award: val, teams: [] }]);
+  };
+
+  const addAwardEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (e.key !== 'Enter') return;
     const input = document.getElementById('newAwardInput') as HTMLInputElement;
     const val = input.value;
     if (val === '') return;
@@ -74,7 +99,7 @@ const AgendaResultForm = ({
 
   const removeAward = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    const target = (e.target as HTMLElement).closest('li');
+    const target = e.target.closest('li');
     if (target === null) return;
     const idx = parseInt(target.getAttribute('id') || '0') - 1;
     if (idx === -1) return;
@@ -153,7 +178,7 @@ const AgendaResultForm = ({
   });
 
   return (
-    <form className={styles.container} onSubmit={(e) => e.preventDefault()}>
+    <form className={styles.container} onSubmit={SubmitAgendaResult}>
       <div
         className={`${styles.titleContainer} ${dragStyles.dropzone}`}
         id={'0'}
@@ -195,6 +220,7 @@ const AgendaResultForm = ({
                     message='팀을 선택해주세요'
                     onChange={(e, selected) => {
                       if (!selected) removeTeam(award_idx, teamidx);
+                      else modifyTeam(award_idx, teamidx, e.target.value);
                     }}
                   />
                 ))}
@@ -204,7 +230,7 @@ const AgendaResultForm = ({
                   message='팀을 선택해주세요'
                   selected=''
                   onChange={(e, selected) => {
-                    addTeam(award_idx, e, selected);
+                    if (selected) addTeam(award_idx, e, selected);
                   }}
                 />
               </div>
@@ -220,6 +246,7 @@ const AgendaResultForm = ({
                 ref={newAwardInputRef}
                 type='text'
                 placeholder='추가할 상을 입력해주세요...'
+                onKeyUp={addAwardEnter}
               />
               <AddElementBtn onClick={addAward} />
             </div>
@@ -227,7 +254,7 @@ const AgendaResultForm = ({
           </div>
         </li>
       </ul>
-      <button onClick={() => SubmitAgendaResult(awardList)}>submit</button>
+      <button type='submit'>submit</button>
     </form>
   );
 };

@@ -1,11 +1,8 @@
 import { useQuery } from 'react-query';
-import { useSetRecoilState } from 'recoil';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { instanceInAgenda } from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
 
 export const useAgendaInfo = (agendaKey: string) => {
-  const setError = useSetRecoilState<string>(errorState);
   const { data, isError } = useQuery<AgendaDataProps>(
     agendaKey,
     () =>
@@ -21,7 +18,6 @@ export const useAgendaInfo = (agendaKey: string) => {
     }
   );
   if (isError) {
-    // setError('JB02');
     return undefined;
   }
   if (data) return data;
