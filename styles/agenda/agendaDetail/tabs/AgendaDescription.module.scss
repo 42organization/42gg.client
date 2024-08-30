@@ -13,8 +13,7 @@
   align-items: flex-start;
 
   @media screen and (min-width: 481px) and (max-width: 960px) {
-    width: 450px;
-    max-width: 800px;
+    width: calc(100% - 2rem);
   }
 
   @media screen and (min-width: 961px) {
