@@ -67,7 +67,7 @@ const AgendaListItem = ({
       style={{
         background: `linear-gradient(180deg, #fff 5rem, rgba(0, 0, 0, 0) 10rem), url(${
           agendaInfo.agendaPosterUrl || '/image/agenda/42.jpg'
-        })`,
+        }) lightgray 50% / cover no-repeat`,
       }}
       key={key}
       onClick={() => {
