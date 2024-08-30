@@ -43,3 +43,6 @@ yarn-error.log*
 
 #cypressConfig
 cypress.config.*
+
+#siwolee: ignore local file I can't remove
+*anima*

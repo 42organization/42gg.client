@@ -3,7 +3,7 @@ import { v1 } from 'uuid';
 import {
   IapplicationAlertState,
   IapplicationModal,
-} from 'types/recruit/recruitments';
+} from 'types/takgu/recruit/recruitments';
 
 export const applicationAlertState = atom<IapplicationAlertState>({
   key: `applicationAlertState/${v1()}`,

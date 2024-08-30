@@ -1,0 +1,55 @@
+$dropzoneColor: rgba(170, 216, 218, 0.662);
+$hoverColor: rgba(254, 194, 133, 0.534);
+$boxShadow: 0 10px 5px 0;
+
+.dragging {
+  background-color: transparent;
+  > div {
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.7);
+  }
+}
+
+.dropzone {
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+.dropzoneColor {
+  background: $dropzoneColor;
+  border-radius: 6rem;
+  box-shadow: $boxShadow $dropzoneColor;
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+.dragover {
+  background-color: rgb(1, 42, 43);
+  animation-duration: 1s;
+}
+
+.hovered {
+  margin-bottom: 4rem;
+  overflow: visible;
+  background-color: $hoverColor;
+  box-shadow: $boxShadow $hoverColor;
+  animation-name: getIn;
+  animation-duration: 1s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes getIn {
+  from {
+    margin-bottom: 0;
+    background-color: rgba(145, 251, 255, 0);
+    box-shadow: none;
+  }
+  to {
+    margin-bottom: 4rem;
+  }
+}

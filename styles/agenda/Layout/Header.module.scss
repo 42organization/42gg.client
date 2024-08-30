@@ -1,0 +1,54 @@
+@import 'styles/agenda/common.scss';
+
+.headerContainer {
+  position: fixed;
+  top: 0;
+  z-index: 2000;
+  width: 100%;
+  background-color: var(--color-header);
+  border-bottom: var(--default-border);
+  box-shadow: var(--default-box-shadow);
+}
+
+.headerWrap {
+  z-index: 2;
+  display: flex;
+  height: 4rem;
+  // margin: 0 0.7rem;
+  padding: 1rem;
+  font-size: $font-size-l;
+
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 7rem;
+  height: min-content;
+  padding: 0;
+  margin: 0;
+  fill: var(--color-text);
+}
+
+.headerLeft {
+  display: flex;
+  height: 100%;
+  flex: 2;
+  gap: 2rem;
+  justify-content: flex-start;
+  align-items: center;
+  .menuIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+.logoWrap {
+  @include logoText(2rem, white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+}

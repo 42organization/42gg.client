@@ -1,0 +1,27 @@
+@import '../common.scss';
+
+$tags: (
+  공식: $color-tag-official,
+  비공식: $color-tag-common,
+  팀: $color-tag-team,
+  대회: $color-tag-assignment,
+  default: $color-tag-deafult,
+  종료: $color-tag-end,
+);
+
+@each $name, $color in $tags {
+  .#{$name} {
+    background-color: $color;
+  }
+}
+
+.agendaTag {
+  display: flex;
+  width: 3.3rem;
+  height: 1.2rem;
+  color: var(--color-text-reverse);
+  border-radius: $radius-medium;
+  justify-content: center;
+  align-items: center;
+  @include text(description);
+}

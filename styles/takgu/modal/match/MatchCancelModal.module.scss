@@ -1,0 +1,18 @@
+@import 'styles/takgu/common.scss';
+
+.container {
+  @include modalContainer('PINKWHITE');
+}
+
+.phrase {
+  @include modal-phrase;
+  color: rgba(49, 47, 49, 1);
+  white-space: pre-wrap;
+  .message {
+    padding: 1rem 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: 0.04rem;
+  }
+}

@@ -1,0 +1,20 @@
+@import 'styles/agenda/common.scss';
+
+.AddButton {
+  display: inline-flex;
+
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+
+  background: var(--box-bg-1-light);
+
+  border-radius: $radius-medium;
+  box-shadow: var(--box-shadow-bottom);
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+
+  span {
+    @include text('tab');
+  }
+}

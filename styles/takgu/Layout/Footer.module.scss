@@ -1,0 +1,24 @@
+@import 'styles/takgu/common.scss';
+
+.footerContainer {
+  display: flex;
+  height: 4rem;
+  flex-direction: column;
+  font-size: $small-font;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  .link {
+    display: flex;
+    div {
+      cursor: pointer;
+    }
+    .bar {
+      margin: 0 0.3rem;
+      cursor: unset;
+    }
+  }
+  .copyright {
+    margin-bottom: 0.2rem;
+  }
+}

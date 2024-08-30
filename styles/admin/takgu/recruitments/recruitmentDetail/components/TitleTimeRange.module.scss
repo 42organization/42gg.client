@@ -1,0 +1,14 @@
+@import 'styles/takgu/common.scss';
+
+.tableContainer {
+  .table {
+    .tableBody {
+      .tableBodyItem {
+        padding: 0.5rem;
+        font-size: $small-font;
+        line-height: 100%;
+        text-align: center;
+      }
+    }
+  }
+}

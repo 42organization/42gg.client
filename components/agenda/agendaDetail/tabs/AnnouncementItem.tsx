@@ -1,0 +1,41 @@
+import { useState } from 'react';
+import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
+import { formatDate } from 'utils/agenda/formatDate';
+import DownArrow from 'public/image/agenda/ChevronDown.svg';
+import RightArrow from 'public/image/agenda/ChevronRight.svg';
+import styles from 'styles/agenda/agendaDetail/tabs/AnnouncementItem.module.scss';
+
+export default function AnnouncementItem({
+  title,
+  content,
+  createdAt,
+}: AnnouncementProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleContent = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <>
+      <div className={styles.announcementContianer}>
+        <div className={styles.toggleWrap}>
+          <div onClick={toggleContent}>
+            {isOpen ? (
+              <DownArrow className={styles.toggleIcon} />
+            ) : (
+              <RightArrow className={styles.toggleIcon} />
+            )}
+          </div>
+          <div className={styles.titleWarp}>
+            <div className={styles.announcementTitle}>{title}</div>
+            <div className={styles.announcementDate}>
+              {formatDate(createdAt)}
+            </div>
+          </div>
+        </div>
+        {isOpen && <div className={styles.announcementContent}>{content}</div>}
+      </div>
+    </>
+  );
+}

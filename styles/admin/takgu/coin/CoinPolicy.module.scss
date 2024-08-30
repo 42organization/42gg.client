@@ -1,0 +1,40 @@
+@import 'styles/takgu/common.scss';
+
+.tableContainer {
+  width: 100%;
+  min-width: 700px;
+  margin: auto;
+
+  .table {
+    .tableBody {
+      .tableRow {
+        &:nth-child(odd) {
+          background-color: #f9fafb;
+        }
+
+        &:nth-child(even) {
+          background-color: #fff;
+        }
+
+        .tableBodyItem {
+          padding: 10px;
+          font-size: $small-font;
+          line-height: 150%;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.editBtn {
+  width: 3rem;
+  height: 1.5rem;
+  color: #ffffff;
+  cursor: pointer;
+  background: #2678f3;
+  border: none;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+}

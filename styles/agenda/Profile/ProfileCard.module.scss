@@ -1,0 +1,248 @@
+@import 'styles/agenda/common.scss';
+
+.profileImageCard {
+  width: 22rem;
+  height: 31rem;
+  perspective: 1000px;
+}
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.rotate-180 {
+  transform: rotateY(180deg);
+}
+
+.backCard,
+.frontCard {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background-color: var(--box-bg-1);
+  border: var(--default-border);
+  border-radius: $radius-big;
+  box-shadow: var(--default-box-shadow);
+}
+
+.backCard {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  transform: rotateY(180deg);
+  gap: 0.7rem;
+
+  .editTitle {
+    @include text(title);
+  }
+
+  .editSubTitle {
+    @include text(sub-title);
+  }
+
+  .editContainer {
+    display: flex;
+    width: 19rem;
+    height: auto;
+    flex-direction: column;
+    margin: 0.5rem 0;
+    gap: 0.5rem;
+  }
+
+  .editDescription {
+    width: 100%;
+    height: 5rem;
+    padding: 1rem;
+    overflow-y: scroll;
+    resize: vertical;
+    border: var(--default-border);
+    border-radius: $radius-small;
+  }
+
+  .editOtherInfo {
+    display: flex;
+    width: 100%;
+    height: 9.5rem;
+    flex-direction: column;
+    padding-top: 0.4rem;
+    overflow-y: scroll;
+    gap: 1rem;
+
+    .editOtherInfoItem {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 2rem;
+      gap: 0.7rem;
+      @include text(default);
+
+      .infoText {
+        display: flex;
+        justify-content: center;
+        width: 10rem;
+        overflow-x: hidden;
+      }
+
+      .infoInput {
+        width: 100%;
+        height: 1.8rem;
+        padding-left: 0.8rem;
+        border: var(--default-border);
+        border-radius: $radius-extra-small;
+      }
+    }
+  }
+
+  .submitContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    gap: 2rem;
+
+    .submitBtn {
+      width: auto;
+      height: auto;
+      padding: 1rem;
+      cursor: pointer;
+      border: var(--default-border);
+      border-radius: $radius-small;
+      @include text(default);
+    }
+  }
+}
+
+.frontCard {
+  z-index: 2;
+}
+
+.profileImage {
+  position: relative;
+  display: flex;
+  width: 22rem;
+  height: 16rem;
+  flex-direction: column;
+  background-color: var(--box-bg-1);
+  border-radius: $radius-big $radius-big 0 0;
+
+  .profileImageWrapper {
+    position: relative;
+    width: 100%;
+    height: 90%;
+    overflow: hidden;
+    border-top-left-radius: $radius-big;
+    border-top-right-radius: $radius-big;
+
+    .profileImageBox {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &::after {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 25%;
+      content: '';
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 1) 100%
+      );
+    }
+  }
+
+  .userNameWrapper {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 1.5rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .userName {
+      @include text(title);
+    }
+
+    .editWrapper {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-top: 0.5rem;
+      cursor: pointer;
+      @include circle-animation;
+    }
+  }
+
+  .linkImages {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.4rem;
+    z-index: 10;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+
+    .linkImageWrapper {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}
+
+.divider {
+  width: 100%;
+}
+
+.profileContent {
+  display: flex;
+  width: 22rem;
+  height: 15rem;
+  flex-direction: column;
+  padding: 1.5rem 1rem 1rem;
+  gap: 0.5rem;
+  background-color: var(--box-bg-1);
+  border-radius: 0 0 $radius-big $radius-big;
+
+  .description {
+    width: 100%;
+    height: 2.5rem;
+    @include text(description-s);
+  }
+
+  .acheivementContainer {
+    width: 100%;
+    height: auto;
+
+    .acheivementText {
+      @include text(sub-menu);
+    }
+
+    .acheivementImageContainer {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      height: 5rem;
+      margin-top: 0.5rem;
+      gap: 0.3rem;
+      overflow-y: scroll;
+
+      .acheivementImageWrapper {
+        min-width: 3rem;
+        max-width: 3rem;
+        min-height: 3rem;
+        max-height: 3rem;
+      }
+    }
+  }
+}

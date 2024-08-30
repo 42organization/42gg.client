@@ -1,0 +1,51 @@
+@import 'styles/agenda/common.scss';
+
+.agendaTitleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0 1rem;
+  @include text(main-menu);
+
+  .agendaTitle {
+    @include gridHidden(mobile);
+  }
+  .agendaTitleButton,
+  .agendaTitle {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-end;
+  }
+  .agendaTitleButton {
+    @media screen and (min-width: 961px) {
+      position: absolute;
+      top: 1rem;
+      right: 6rem;
+      flex-direction: row;
+    }
+  }
+
+  .agendaCreateBtn {
+    display: flex;
+    cursor: pointer;
+    background: none;
+    border: none;
+    align-items: center;
+    @include text(description);
+
+    .imageWrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1rem;
+      height: 1rem;
+
+      .imageBox {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

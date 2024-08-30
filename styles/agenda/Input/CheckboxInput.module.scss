@@ -1,0 +1,30 @@
+@import './Input.module.scss';
+
+.container {
+  flex-direction: row;
+  justify-content: left;
+}
+
+.checkbox {
+  justify-content: left;
+  align-items: center;
+  gap: 2rem;
+  display: inline-block;
+
+  /* 체크박스 만들기 */
+  width: $font-size-m;
+  height: $font-size-m;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none; /* 드래그 금지 */
+  border: 1px solid #000;
+  border-radius: $radius-small;
+}
+.checkbox:checked {
+  /* 체크되었을 때 */
+  background: var(--highlight-yellow);
+}
+
+.checkBoxInput {
+  display: none;
+}

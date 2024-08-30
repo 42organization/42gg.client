@@ -1,0 +1,6 @@
+@import 'styles/takgu/common.scss';
+
+.container {
+  @include pageWrap;
+  padding-top: 0rem;
+}

@@ -1,0 +1,48 @@
+@import 'styles/takgu/common.scss';
+
+.whole {
+  width: 20rem;
+  height: 15rem;
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+  justify-content: center;
+  align-items: center;
+}
+.body {
+  flex-direction: column;
+  padding: 1rem;
+  text-align: center;
+  .content {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    color: #6b7280;
+  }
+}
+
+.btns {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  text-align: center;
+  .btn {
+    width: 100%;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    &.first {
+      background-color: #2678f3;
+    }
+    &.second {
+      background-color: #6c757d;
+    }
+  }
+}

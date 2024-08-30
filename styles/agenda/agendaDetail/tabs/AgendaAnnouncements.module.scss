@@ -1,0 +1,13 @@
+@import 'styles/agenda/common.scss';
+
+.announcementsList {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.buttonWarp {
+  display: flex;
+  justify-content: center;
+}

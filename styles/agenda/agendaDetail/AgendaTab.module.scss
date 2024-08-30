@@ -1,0 +1,22 @@
+@import 'styles/agenda/common.scss';
+
+.contentWarp {
+  display: flex;
+  width: 100%;
+}
+
+.tabButtonList {
+  display: inline-flex;
+  width: 100%;
+  padding: 1rem 0.5rem;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tabWarp {
+  width: 100vw;
+  max-width: 100%;
+  @media screen and (min-width: 481px) and (max-width: 960px) {
+    width: 100%;
+  }
+}

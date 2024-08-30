@@ -1,0 +1,140 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.pageContianer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.modalContainer {
+  max-height: 20rem;
+  padding: 1rem;
+  overflow-y: auto; /* 세로 스크롤 활성화 */
+  gap: 1rem;
+}
+
+.title {
+  @include text('title');
+}
+
+.description {
+  @include text('description');
+  padding: 0.5rem;
+}
+
+%item-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  gap: 0.5rem;
+}
+
+.topContainer {
+  @extend %item-container;
+}
+
+.bottomContainer {
+  // 아래쪽에는 룰이 다르게 들어가서 갭을 더 줘야 합니다
+  @extend %item-container;
+  margin-top: 1.5rem;
+}
+
+.sliderContainer {
+  @extend %item-container;
+  display: flex;
+  padding: 0 1rem;
+}
+
+.dateContainer {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.inputContainer {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+  @media (max-width: 500px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  > h3 {
+    @include text('default');
+    margin-left: 0.5rem;
+  }
+}
+
+.label_container {
+  display: flex;
+  // margin: 0 0 0 0.5rem;
+  gap: 0.5rem;
+}
+
+.label {
+  @include text('label');
+  margin: 2rem 0 0.5rem 0.5rem;
+}
+
+.label_text {
+  @include text('label');
+  margin: 0.5rem;
+}
+
+.label_title {
+  @include text('label');
+  margin: 0rem 0.5rem 2rem;
+}
+
+.highlight {
+  color: var(--highlight-violet);
+}
+
+.buttonContainer {
+  display: flex;
+  margin: 1em 2rem;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.formBtn {
+  display: flex;
+  flex: 1;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  border-radius: $radius-small;
+  justify-content: center;
+  align-items: center;
+
+  &.submit {
+    @include textButton('submit', 'highlight');
+  }
+  &.cancel {
+    @include textButton('cancel', 'default');
+  }
+}
+
+.ListContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 2rem;
+  width: 100%;
+}
+
+.input {
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  border-bottom: var(--default-border);
+  -webkit-appearance: none;
+  appearance: none;
+}

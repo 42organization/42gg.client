@@ -1,0 +1,49 @@
+@import 'styles/takgu/common.scss';
+
+.mainPageProfile {
+  display: flex;
+  width: 100%;
+  height: max-content;
+  flex-direction: column;
+  margin-top: 0.8rem;
+  font-family: $common-en-font;
+  justify-content: center;
+  align-items: center;
+}
+
+.pageContainer {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas: 'image greetingsArea';
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 28rem;
+  padding: 0.1rem 0.2rem 0;
+  color: white;
+  .myImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: image;
+  }
+  .userGreetings {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    grid-area: greetingsArea;
+    padding-left: 0.8rem;
+    .greetings {
+      margin-bottom: 0.2rem;
+      font-size: 1rem;
+    }
+    .intraId {
+      display: flex;
+      flex-direction: row;
+      padding: 0;
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+  }
+}

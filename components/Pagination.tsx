@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import Pagination from 'react-js-pagination';
 import {
   IoPlaySkipBackSharp,
@@ -5,6 +6,7 @@ import {
   IoCaretBackSharp,
   IoCaretForwardSharp,
 } from 'react-icons/io5';
+import styles from 'styles/PageNation.module.scss';
 
 interface GreetingProps {
   curPage: number | undefined;
@@ -17,8 +19,9 @@ function PageNation({
   totalPages,
   pageChangeHandler,
 }: GreetingProps) {
+  const router = useRouter();
   return (
-    <>
+    <div className={router.pathname.includes('takgu') ? '' : styles.container}>
       {!!totalPages && (
         <Pagination
           activePage={curPage}
@@ -32,7 +35,7 @@ function PageNation({
           onChange={(page) => pageChangeHandler(page)}
         />
       )}
-    </>
+    </div>
   );
 }
 

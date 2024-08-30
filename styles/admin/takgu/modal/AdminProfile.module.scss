@@ -1,0 +1,205 @@
+@import 'styles/takgu/common.scss';
+
+.modal {
+  display: flex;
+  width: 450px;
+  flex-direction: column;
+  color: #898989;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+}
+
+.title {
+  display: flex;
+  height: 50px;
+  margin-left: 2rem;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  color: black;
+  text-transform: uppercase;
+  align-items: center;
+}
+
+.topWrap {
+  padding: 0 1rem;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  height: 130px;
+  border-top: 1.5px solid #e5e5e5;
+  border-bottom: 1.5px solid #e5e5e5;
+}
+
+.imageWrap {
+  padding: 0.5rem 2rem 0.5rem 1.5rem;
+}
+
+.image {
+  position: relative;
+  float: left;
+  width: 120px;
+  height: 110px;
+  background-size: cover;
+}
+
+.topRightWrap {
+  display: flex;
+  justify-content: center;
+  width: 250px;
+  padding: 0.5rem 0;
+}
+
+.topRight {
+  display: flex;
+  width: 200px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.topRightInput {
+  width: 200px;
+  height: 25px;
+  font-weight: 500;
+  color: black;
+}
+
+.middle {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem 0;
+  :nth-child(2) {
+    color: #2678f3;
+  }
+}
+
+.messageCount {
+  display: flex;
+  width: 100%;
+  padding: 0 2rem;
+  justify-content: space-between;
+}
+
+.middle textarea {
+  min-width: 390px;
+  max-width: 390px;
+  min-height: 100px;
+  max-height: 100px;
+  font-size: 20px;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  object-fit: contain;
+  text-align: center;
+}
+
+.choice {
+  display: flex;
+  height: 200px;
+  flex-flow: column wrap;
+  padding: 0.5rem 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.choiceName {
+  display: flex;
+  width: 100px;
+  height: 200px;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.choiceBtn {
+  display: flex;
+  width: 225px;
+  height: 200px;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.choiceBtn input {
+  width: 225px;
+  text-align: center;
+}
+
+.btnWrap {
+  padding: 0 1rem;
+}
+
+.btns {
+  display: flex;
+  height: 90px;
+  flex-direction: column;
+  padding: 0.3rem 0;
+  border-top: 1.5px solid #e5e5e5;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.btnBlue {
+  display: flex;
+  width: 400px;
+  height: 30px;
+  flex-direction: column;
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+  background-color: #2678f3;
+  border: none;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnGray {
+  display: flex;
+  width: 400px;
+  height: 30px;
+  flex-direction: column;
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+  background-color: #6c757d;
+  border: none;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.racketTypeWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  .racketRadioButtons {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    input[type='radio'] {
+      display: none;
+    }
+    :checked + .radioButton {
+      color: #2678f3;
+      border: solid 1px #2678f3;
+    }
+    .radioButton {
+      display: flex;
+      width: 70px;
+      height: 22px;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid black;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

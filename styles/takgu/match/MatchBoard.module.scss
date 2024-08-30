@@ -1,0 +1,90 @@
+@import 'styles/takgu/common.scss';
+
+.matchBoard {
+  height: 60vh;
+  padding: 1rem;
+  overflow-y: scroll;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: $small-radius;
+  margin-block: 0 1rem;
+}
+
+.notice {
+  margin: 0.2rem 1rem 0 0;
+  color: white;
+  text-align: center;
+}
+
+.slotButton {
+  all: unset;
+  display: flex;
+  height: 2.3rem;
+  padding: 0 0.6rem;
+  margin: 0.1rem;
+  cursor: pointer;
+  border-radius: $mini-radius;
+  justify-content: space-between;
+  align-items: center;
+
+  &.mytable {
+    background: linear-gradient(to bottom, #4fffca, #12a779);
+  }
+
+  &.both {
+    background: linear-gradient(to bottom, #fe9cca, #fe6bb1);
+  }
+
+  &.rank {
+    background: linear-gradient(to bottom, #9134f7, #8921c5);
+  }
+
+  &.normal {
+    background: linear-gradient(to bottom, #8fc7fb, #4e8fdb);
+  }
+
+  &.disabled {
+    pointer-events: all;
+    cursor: not-allowed;
+    background: linear-gradient(to bottom, #636671, #424550);
+  }
+
+  &.mytableDisabled {
+    pointer-events: all;
+    cursor: not-allowed;
+    background: linear-gradient(to bottom, #4fffca, #12a779);
+  }
+}
+
+.time {
+  font-size: 0.9rem;
+  color: white;
+}
+
+.headCount {
+  font-size: $small-font;
+  font-weight: 600;
+  color: white;
+  text-shadow: 1px 1px 7px #a6a6a6;
+}
+
+.plus {
+  font-size: $big-font;
+  font-weight: 600;
+  color: white;
+  text-shadow: 1px 1px 7px #a6a6a6;
+}
+
+.slotHour {
+  display: flex;
+  margin-top: 0.7rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.3rem;
+  font-size: $big-font;
+  color: white;
+  justify-content: space-between;
+}
+
+.slotGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

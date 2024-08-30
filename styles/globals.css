@@ -1,3 +1,5 @@
+@import url('./color-theme.css');
+
 html,
 body {
   padding: 0;
@@ -106,6 +108,37 @@ input {
   font-weight: 100 900;
 }
 
+@font-face {
+  font-family: 'Simplehae';
+  src: url('../public/font/Simplehae/Simplehae.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '11StreetGothicRegular';
+  src: url('../public/font/11StreetGothic/11STREET_Gothic_regular.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '11StreetGothicBold';
+  src: url('../public/font/11StreetGothic/11STREET_Gothic_bold.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '11StreetGothicLight';
+  src: url('../public/font/11StreetGothic/11STREET_Gothic_light.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -140,25 +173,31 @@ ul.pagination li {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 1.5rem;
-  margin: 0 0.3rem;
+  margin: 0 0.1rem;
   font-size: 1.2rem; /* $big-font */
   font-weight: 600;
+  line-height: 1.5rem;
   cursor: pointer;
 }
 
 ul.pagination li a {
   text-decoration: none;
-  color: #f0b5f2; /* $g1-bottom */
-  font-size: 1rem;
+  color: var(--color-grey); /* $g1-bottom */
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
 }
 
 ul.pagination li.active a {
-  color: #de1825; /* $pp-red */
+  border-radius: 1rem;
+  color: var(--highlight-yellow);
 }
 
 ul.pagination li a:hover,
 ul.pagination li a.active {
   font-weight: 700;
-  color: #de1825; /* $pp-red */
+}
+
+.hidden {
+  display: none;
 }
