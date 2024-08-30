@@ -1,4 +1,4 @@
-@import 'styles/common';
+@import 'styles/takgu/common';
 
 .background {
   display: flex;
@@ -8,7 +8,7 @@
   min-height: 40rem;
   flex-direction: row;
   padding: 0 4rem;
-  background-image: url('../../public/image/login_background_img.png');
+  background-image: url('../../public/image/takgu/login_background_img.png');
   background-attachment: fixed;
   background-position: center;
   background-size: cover;

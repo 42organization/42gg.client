@@ -1,0 +1,27 @@
+@import 'styles/agenda/common.scss';
+
+.agendaUserSearchBar {
+  display: flex;
+  width: 12rem;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--box-bg-3);
+  border-radius: $radius-big;
+  justify-content: space-between;
+  align-items: center;
+
+  input {
+    width: 8rem;
+    color: var(--color-text-reverse);
+    background: none;
+    border: none;
+    outline: none;
+    @include text(label);
+  }
+
+  .imageBox {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--color-text-reverse);
+  }
+}

@@ -1,0 +1,17 @@
+@import 'styles/takgu/common.scss';
+
+.pageWrap {
+  @include pageWrap;
+  height: calc(100vh - 8rem);
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  padding: 2.5rem 1.2rem;
+  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  border-radius: $small-radius;
+  justify-content: center;
+  align-items: stretch;
+}

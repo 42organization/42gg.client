@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ThemeProvider, createTheme } from '@mui/material';
+import { instanceInAgenda, instanceInManage } from 'utils/axios';
 import SideNav from 'components/admin/SideNav';
 import useAxiosWithToast from 'hooks/useAxiosWithToast';
 import styles from 'styles/admin/Layout.module.scss';
@@ -15,7 +17,17 @@ const theme = createTheme({
 });
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
-  useAxiosWithToast();
+  const presentPath = usePathname();
+  let instance;
+  switch (true) {
+    case presentPath.includes('/admin/agenda'):
+      instance = instanceInAgenda;
+      break;
+    default:
+      instance = instanceInManage;
+      break;
+  }
+  useAxiosWithToast(instance);
 
   return (
     <ThemeProvider theme={theme}>

@@ -1,25 +1,50 @@
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import type { NextPage } from 'next';
-import SearchBar from 'components/main/SearchBar';
-import Section from 'components/main/Section';
-import useBeforeLiveTournamentData from 'hooks/tournament/useBeforeLiveTournamentData';
-import styles from 'styles/main/Home.module.scss';
+import PageController from 'components/agenda/utils/PageController';
+import PingpongIcon from 'public/image/takgu/ping-pong.svg';
+import { useUser } from 'hooks/agenda/Layout/useUser';
+import styles from 'styles/index.module.scss';
 
-const Home: NextPage = () => {
-  const { data: tournamentData } = useBeforeLiveTournamentData();
+const Index: NextPage = () => {
+  const router = useRouter();
+  const handleNavigation = (path: string) => {
+    router.push(path);
+  };
 
   return (
-    <div className={styles.container}>
-      <SearchBar />
-      {tournamentData &&
-        (tournamentData.beforeTournament?.length > 0 ||
-          tournamentData.liveTournament?.length > 0) && (
-          <Section path='tournament' sectionTitle={'Tournament'} />
-        )}
-      <Section path='party' sectionTitle={'Party'} />
-      <Section path='rank' sectionTitle={'Ranking'} />
-      <Section path='game' sectionTitle={'Current Play'} />
+    <div className={styles.layout}>
+      <h2 className={styles.title} onClick={() => handleNavigation('/agenda')}>
+        Agenda
+      </h2>
+      <PageController handleNavigation={handleNavigation} />
+      <h2 className={styles.title}>Ticket & PingPong</h2>
+      <div className={styles.flex + ' ' + styles.content}>
+        <button
+          className={styles.container}
+          onClick={() => handleNavigation('/agenda/ticket')}
+        >
+          <Image
+            src='/image/ticket.png'
+            alt='ticket'
+            width={0}
+            height={0}
+            style={{ width: '100%', height: '100%' }}
+          />
+        </button>
+        <button
+          className={styles.container}
+          onClick={() => handleNavigation('/takgu')}
+        >
+          <PingpongIcon width='100%' height='100%' />
+        </button>
+      </div>
+
+      <button className={styles.container + ' ' + styles.match}>
+        아우터 매치 준비중입니다.
+      </button>
     </div>
   );
 };
 
-export default Home;
+export default Index;

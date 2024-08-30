@@ -1,0 +1,23 @@
+@import 'styles/takgu/common.scss';
+
+.selectBox {
+  position: relative;
+  z-index: 1;
+  width: 5rem;
+  height: 1.6rem;
+  font-size: $small-font;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: $mini-radius;
+}
+
+.select {
+  position: relative;
+  z-index: 1;
+  width: 4rem;
+  height: inherit;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  background: transparent;
+  border: 0 none;
+  outline: 0 none;
+}

@@ -1,0 +1,49 @@
+@import 'styles/takgu/common.scss';
+
+.container {
+  @include modalContainer('SKYVIOLET');
+  width: 80vw;
+  max-width: 25rem;
+  .title {
+    @include modalTitle; // font-family, font-size, font-weight, letter-spacing
+    margin: 2rem 0;
+    font-size: 1.8rem;
+    color: #f8f8ff;
+    text-shadow: 0px 0px 12px #ffffff;
+  }
+
+  .balance {
+    display: flex;
+    width: 80%;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    color: #ffffff;
+    border-bottom: 1px solid #3b363b36;
+    justify-content: space-between;
+    .current {
+      padding-top: 0.35rem;
+    }
+  }
+
+  .loading {
+    display: flex;
+    width: 85%;
+    height: 30vh;
+    justify-content: center;
+    padding-top: 14vh;
+    color: #ffffff;
+    .span1 {
+      @include waitAnimation(0.3s);
+      font-size: 1.8rem;
+    }
+    .span2 {
+      @include waitAnimation(0.5s);
+      font-size: 1.8rem;
+    }
+    .span3 {
+      @include waitAnimation(0.7s);
+      font-size: 1.8rem;
+    }
+  }
+}

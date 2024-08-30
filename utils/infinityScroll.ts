@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useInfiniteQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { GameListData } from 'types/gameTypes';
+import { GameListData } from 'types/takgu/gameTypes';
 import { instance } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 

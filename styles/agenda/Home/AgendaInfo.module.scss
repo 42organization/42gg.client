@@ -1,0 +1,82 @@
+@import 'styles/agenda/common.scss';
+
+.agendaInfoContainer {
+  display: flex;
+  width: 100%;
+  height: 4.5rem;
+  gap: 1rem;
+}
+
+.agendaDateBox {
+  display: flex;
+  width: fit-content;
+  height: 100%;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  text-align: justify;
+  letter-spacing: 0.52px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.2rem;
+  .agendaStartDateMonth {
+    @include text(date);
+    display: flex;
+    align-items: center;
+    height: 1.5rem;
+    flex-shrink: 0;
+  }
+  .agendaStartDateDay {
+    @include text(date);
+    display: flex;
+    align-items: center;
+    height: 1.5rem;
+    font-family: $font-text-light;
+  }
+}
+
+.agendaInfoWrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.3rem;
+
+  .agendaItemTitleBox {
+    display: flex;
+    align-items: center;
+    height: 1.5rem;
+    @include text(sub-title);
+  }
+
+  .agendaItemTimeBox {
+    display: flex;
+    align-items: center;
+    height: 0.9rem;
+    gap: 1.5rem;
+    @include text(description);
+
+    .agendaItemTimeWrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+  }
+
+  .agendaItemTagBox {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+.imageWrapper {
+  display: flex;
+  width: 0.8rem;
+  height: 0.8rem;
+  .imageBox {
+    width: 100%;
+    height: 100%;
+  }
+}

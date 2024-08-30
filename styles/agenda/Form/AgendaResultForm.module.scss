@@ -1,0 +1,108 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  @include container(3);
+  justify-content: right;
+  display: flex;
+  flex-direction: column;
+  padding-right: 0;
+}
+
+.titleContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  @include text('title');
+  padding: 1rem;
+}
+
+.description {
+  @include text('description');
+}
+
+.awardUl {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding-right: 0;
+  justify-content: flex-end;
+  margin: 0 0 2rem;
+}
+.awardLi {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  // padding: 0rem 0
+}
+
+.awardContainer {
+  @include container('right');
+  display: flex;
+  width: 90%;
+  padding-right: 0;
+  padding-bottom: 1rem;
+  margin: 0;
+  border-right: none;
+}
+
+.awardDragBtn {
+  // @include button('default', 'default');
+}
+
+.awardTitleContainer {
+  display: flex;
+  width: 100%;
+  padding: 0 1rem 0 0;
+  margin: 0 0 0.5rem;
+  border-bottom: 1px solid #000;
+  align-items: center;
+  justify-items: flex;
+  justify-content: space-between;
+  > p,
+  input {
+    @include text('title');
+    padding-left: 10px;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+  }
+}
+.awardTitle {
+  width: 100%;
+  border: none;
+}
+
+.awardDeleteBtn {
+  // @include button('default', 'delete');
+  border: 2px solid red;
+}
+.awardSelectContainer {
+  display: inline;
+  width: 100%;
+  padding: 0;
+  // height: max-content;
+  margin: 0;
+  line-height: 2.5rem;
+  word-break: keep-all;
+  > div {
+    margin-right: 0.5rem;
+  }
+}
+
+.newAwardInput {
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+}
+
+.newAwardInput:focus {
+  background: var(--highlight-yellow);
+  outline: none;
+  box-shadow: 0 0 5px 5px var(--highlight-yellow);
+}

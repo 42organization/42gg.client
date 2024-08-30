@@ -1,0 +1,51 @@
+@import 'styles/agenda/common.scss';
+
+@mixin _CoalitionBg($coalition) {
+  @if ($coalition == 'autumn') {
+    background-color: $color-coalition-autumn;
+  } @else if ($coalition == 'winter') {
+    background-color: $color-coalition-winter;
+  } @else if ($coalition == 'spring') {
+    background-color: $color-coalition-spring;
+  } @else if ($coalition == 'summer') {
+    background-color: $color-coalition-summer;
+  } @else if ($coalition == 'gon') {
+    background-color: $color-coalition-gon;
+  } @else if ($coalition == 'gun') {
+    background-color: $color-coalition-gun;
+  } @else if ($coalition == 'gam') {
+    background-color: $color-coalition-gam;
+  } @else if ($coalition == 'lee') {
+    background-color: $color-coalition-lee;
+  } @else {
+    background-color: $color-placeholder;
+  }
+}
+
+.bg_autumn {
+  @include _CoalitionBg('autumn');
+}
+.bg_gun {
+  @include _CoalitionBg('gun');
+}
+.bg_gon {
+  @include _CoalitionBg('gon');
+}
+.bg_gam {
+  @include _CoalitionBg('gam');
+}
+.bg_lee {
+  @include _CoalitionBg('lee');
+}
+.bg_spring {
+  @include _CoalitionBg('spring');
+}
+.bg_summer {
+  @include _CoalitionBg('summer');
+}
+.bg_winter {
+  @include _CoalitionBg('winter');
+}
+.bg_default {
+  @include _CoalitionBg('default');
+}

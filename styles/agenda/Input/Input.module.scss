@@ -1,0 +1,32 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  @include text('default');
+}
+.input {
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  border-bottom: var(--default-border);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.input::placeholder {
+  color: $color-placeholder;
+}
+
+.label {
+  @include text('label');
+  padding: 0 0 0 0.5rem;
+}
+
+.error {
+  @include text('error');
+  padding: 0 0 0 0.5rem;
+}

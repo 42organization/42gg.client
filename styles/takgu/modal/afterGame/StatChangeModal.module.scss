@@ -1,0 +1,164 @@
+@import 'styles/takgu/common.scss';
+
+$ppp-font: 2.8rem;
+
+.fixedContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  &.front {
+    z-index: 3;
+  }
+  &.back {
+    z-index: 2;
+  }
+}
+
+.container {
+  @include modalContainer('SKYVIOLET');
+  z-index: 6;
+  min-width: 21rem;
+  min-height: 18.75rem;
+  color: black;
+  border-radius: 0.625rem;
+  box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.25);
+  align-items: stretch;
+  .emoji {
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+}
+
+.pppWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.6rem;
+  .ppp {
+    display: flex;
+    font-size: $ppp-font;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
+    letter-spacing: 0.04rem;
+    align-items: center;
+
+    span:nth-child(2) {
+      margin-top: 0.5rem;
+      font-size: $big-giant-font;
+    }
+  }
+}
+
+.levelExpWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 800;
+  .level {
+    margin-bottom: 0.5rem;
+    margin-inline: 0.2rem;
+    font-size: 1.5rem;
+    color: rgba(255, 208, 250, 1);
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
+  }
+  .expWrap {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+    .expString {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 0.2rem;
+      padding-inline: 0.2rem;
+      color: rgba(203, 185, 255, 1);
+      .expRate {
+        margin-bottom: 0.2rem;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.25rem;
+        span:nth-child(1) {
+          width: 5rem;
+        }
+      }
+      .increasedExp {
+        margin-bottom: 0.1rem;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 700;
+        color: rgba(203, 185, 255, 1);
+        letter-spacing: 0.04rem;
+        span:nth-child(2) {
+          width: 5rem;
+        }
+      }
+    }
+    .expBar {
+      display: flex;
+      width: 100%;
+      height: 1.5rem;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      border-radius: 0.4rem;
+      .expCurrent {
+        background: linear-gradient(
+          89.81deg,
+          #ff53a5 10.18%,
+          #ff017b 55.14%,
+          #ff409c 90.43%
+        );
+      }
+      .expLeft {
+        background: rgba(47, 28, 71, 1);
+      }
+    }
+  }
+}
+
+.guide {
+  font-size: $medium-font;
+  color: rgba(203, 185, 255, 1);
+  text-align: center;
+  letter-spacing: 0.04rem;
+}
+
+.buttons {
+  @include modalButton;
+}
+
+.confetti {
+  position: absolute;
+  width: 1rem;
+  height: 1.5rem;
+  opacity: 0;
+  transition: 500ms ease;
+  animation: confettiRain 5s infinite;
+}
+
+@keyframes scaleCup {
+  0% {
+    transform: scale(0.6);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes confettiRain {
+  0% {
+    margin-top: -100vh;
+    opacity: 1;
+  }
+
+  100% {
+    margin-top: 100vh;
+    opacity: 1;
+  }
+}

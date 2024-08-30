@@ -1,0 +1,345 @@
+@import 'styles/takgu/common.scss';
+@import 'styles/takgu/party/PartyCommon.scss';
+
+$detail-btn-weight: bold;
+$detailCommonRem: 1rem;
+
+/* ----------------default-------------------- */
+
+.detailPage {
+  max-width: 30rem;
+  padding: 0.3rem 1.5rem;
+  margin: 0 auto;
+  font-family: $common-font;
+  white-space: pre-wrap;
+}
+
+/* =========================================== */
+
+/* ----------------title---------------------- */
+.titleBox {
+  position: flex;
+  min-height: 14rem;
+  padding: $detailCommonRem * 0.7;
+  background-color: white;
+  border-radius: $mini-radius;
+
+  hr {
+    border-top: 0.1px solid $medium-gray;
+  }
+}
+
+.titleLine {
+  display: flex;
+  width: 100%;
+  border-bottom: auto;
+  justify-content: space-between;
+}
+
+.tag {
+  display: flex;
+}
+
+.category {
+  display: flex;
+  max-height: 1.2rem;
+  padding: 0 0.4rem;
+  margin-right: 0.3rem;
+  font-size: $small-font;
+  color: white;
+  background-color: skyblue;
+  border: 0.4rem white;
+  border-radius: $big-radius;
+  justify-content: center;
+  align-items: center;
+}
+
+.reportRoomBtn {
+  display: flex;
+  align-items: flex-end;
+  padding: 0 0 0 0.3rem;
+  background-color: inherit;
+  border: none;
+  opacity: 0.7;
+}
+
+.shareBtn {
+  position: relative;
+  padding-top: 0;
+  padding-right: 0;
+  padding-left: 0.2 rem;
+  color: black;
+  text-align: right;
+  background-color: inherit;
+  border: none;
+}
+
+.title {
+  font-size: $giant-font;
+  font-weight: bold;
+}
+
+.endTime {
+  display: flex;
+  margin: 0.4rem 0;
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: gray;
+  opacity: 0.9;
+  justify-content: right;
+  align-items: flex-end;
+}
+
+.detailContent {
+  font-size: $medium-font;
+}
+
+/* =========================================== */
+
+/* ----------------profile-------------------- */
+.profile {
+  position: relative;
+  width: 100%;
+  margin-top: $detailCommonRem * 0.6;
+  color: white;
+}
+
+.line {
+  display: flex;
+  width: 100%;
+  font-size: $medium-font;
+  justify-content: space-between;
+}
+
+.exitBtn {
+  font-size: $medium-font;
+  color: rgb(255, 255, 255);
+  background-color: inherit;
+  border: none;
+  margin-inline: 0;
+}
+
+.profileItem {
+  text-align: center;
+
+  ul {
+    max-width: 100rem;
+    margin: 0.8rem;
+    overflow-x: scroll;
+    white-space: nowrap;
+  }
+
+  li {
+    display: inline-block;
+    max-width: 100%;
+    margin-top: -0.5rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+  }
+}
+
+.user {
+  border: 0.5rem;
+}
+
+.crown {
+  position: relative;
+  top: 0.4rem;
+  left: -0.8rem;
+  transform: rotate(-30deg);
+}
+
+.profileImg {
+  text-align: center;
+  border-radius: $big-radius;
+}
+
+.noShowBtn {
+  display: flex;
+  min-width: 100%;
+  color: white;
+  text-align: center;
+  background-color: inherit;
+  border: none;
+  justify-content: center;
+  size: 50rem;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: space-between;
+  text-align: right;
+  border-bottom: 0.3rem;
+}
+
+.joinBtn {
+  width: 49.5%;
+  height: 3rem;
+  margin-bottom: $detailCommonRem * 0.3;
+  font-family: $common-font;
+  font-size: $big-font;
+  font-weight: $detail-btn-weight;
+  color: white;
+  background: $party-gradient3;
+  border-style: none;
+  border-radius: $small-radius;
+
+  &.penalty {
+    font-size: $medium-font;
+    font-weight: 500;
+    background: red;
+    filter: brightness(60%);
+  }
+}
+
+.leaveBtn {
+  width: 49.5%;
+  height: 3rem;
+  margin-bottom: $detailCommonRem * 0.3;
+  font-family: $common-font;
+  font-size: $big-font;
+  font-weight: $detail-btn-weight;
+  color: white;
+  background: $party-gradient3;
+  border-style: none;
+  border-radius: $small-radius;
+}
+
+.startBtn {
+  width: 49.5%;
+  height: 3rem;
+  margin-bottom: $detailCommonRem * 0.3;
+  font-family: $common-font;
+  font-size: $big-font;
+  font-weight: $detail-btn-weight;
+  color: white;
+  background: $party-gradient3;
+  border-style: none;
+  border-radius: $small-radius;
+}
+
+/* =========================================== */
+
+/* ----------------comment-------------------- */
+
+.contentCommentBox {
+  position: flex;
+  width: 100%;
+  padding: $detailCommonRem * 0.7;
+  padding-bottom: 0.3rem;
+  background-color: white;
+  border-radius: $mini-radius;
+
+  hr {
+    border-top: 0.1px solid $medium-gray;
+  }
+}
+
+.commentBoxInfo {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+
+.comment {
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 0.1rem;
+  font-size: $small-font;
+  white-space: pre-wrap;
+}
+
+.spreadBtn {
+  display: flex;
+  margin: 0;
+  color: black;
+  background-color: inherit;
+  border: none;
+}
+
+.commentBox {
+  min-height: 10rem;
+  max-height: 10rem;
+  overflow: auto;
+  &.spread {
+    max-height: fit-content;
+  }
+}
+
+.commentHidden {
+  margin-top: $detailCommonRem * 2;
+  margin-bottom: 0.3rem;
+  color: gray;
+  opacity: 0.7;
+}
+
+.commentIntraId {
+  min-width: 4rem;
+  max-width: 4rem;
+  margin-right: 0.3rem;
+  font-weight: 600;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.commentContentContainer {
+  width: 100%;
+}
+
+.commentContent {
+  font-weight: 400;
+  word-break: break-word;
+}
+
+.commentInfo {
+  display: flex;
+  justify-content: left;
+  margin-top: 0.1rem;
+  margin-bottom: 0.8rem;
+}
+
+.commentTime {
+  display: flex;
+  margin-top: auto;
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: gray;
+  text-align: right;
+  opacity: 0.9;
+  justify-content: right;
+}
+
+.reportCommentBtn {
+  display: flex;
+  justify-items: right;
+  align-items: flex-end;
+  background-color: inherit;
+  border: 0;
+}
+
+.commentCreateBar {
+  display: flex;
+  min-height: 1.3rem;
+  margin-bottom: 0.3rem;
+  background-color: rgb(232, 232, 232);
+  border-radius: $small-radius;
+  align-items: center;
+}
+
+.textBar {
+  width: 100%;
+  margin-left: 0.4rem;
+  font-size: $small-font;
+  color: black;
+  background-color: rgb(232, 232, 232);
+  border: inherit;
+}
+
+.inputBtn {
+  display: flex;
+  background-color: inherit;
+  border: none;
+  align-items: right;
+}
+
+/* =========================================== */
