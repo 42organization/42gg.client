@@ -75,6 +75,11 @@ const PageController = ({
     <div className={styles.container}>
       <button
         className={styles.agendaInfoContainer}
+        style={{
+          background: `linear-gradient(180deg, #fff 5rem, rgba(0, 0, 0, 0) 10rem), url(${
+            data[current].agendaPosterUrl || '/image/agenda/42.jpg'
+          })`,
+        }}
         onClick={(e) => {
           const target = e.target as HTMLElement;
           if (

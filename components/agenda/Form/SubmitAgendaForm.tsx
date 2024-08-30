@@ -1,7 +1,51 @@
+import { NextRouter } from 'next/router';
+import { SetterOrUpdater } from 'recoil';
+import { agendaModal } from 'types/agenda/modalTypes';
 import { instanceInAgenda } from 'utils/axios';
+function agendadataToMsg(data: FormData, isEdit: boolean) {
+  let msg = '';
+  msg += '행사 제목 : ' + data.get('agendaTitle') + '\n';
+  msg += '타입: ';
+  console.log(msg);
+  msg += data.get('agendaIsRanking') === 'true' ? '대회\n' : '행사\n';
+  msg += '행사 내용 : ' + data.get('agendaContent') + '\n';
+  msg +=
+    '등록 마감 : ' +
+    data.get('agendaDeadLine')?.toString().replace('T', ' ') +
+    '\n';
+  msg +=
+    '시작 : ' +
+    data.get('agendaStartTime')?.toString().replace('T', ' ') +
+    '\n';
+  msg +=
+    '종료 : ' + data.get('agendaEndTime')?.toString().replace('T', ' ') + '\n';
+  msg += '최소팀 및 최대 팀 :\n';
+  msg += data.get('agendaMinTeam') + ' ~ ' + data.get('agendaMaxTeam') + '\n';
+  msg += '팀원 제한: ';
+  msg +=
+    data.get('agendaMaxPeople') === '1'
+      ? '개인\n'
+      : data.get('agendaMinPeople') +
+        ' ~ ' +
+        data.get('agendaMaxPeople') +
+        '\n';
+  console.log(msg);
+  msg += '개최지 : ' + data.get('agendaLocation') + '\n';
+  msg += '포스터 : ';
+  msg +=
+    (data.get('agendaPoster') as File)?.name === null
+      ? '없음\n\n'
+      : (data.get('agendaPoster') as File)?.name + '\n\n';
+  msg += isEdit ? '행사를 수정하시겠습니까?\n' : '행사를 등록하시겠습니까?\n';
+  return msg;
+}
 
 const SubmitAgendaForm = async (
   e: React.FormEvent<HTMLFormElement>,
+  isEdit: boolean,
+  openModal: (props: agendaModal) => void,
+  setSnackBar: SetterOrUpdater<any>,
+  router: NextRouter,
   isAdmin?: boolean,
   stringKey?: string,
   onProceed?: () => void
@@ -11,6 +55,7 @@ const SubmitAgendaForm = async (
   const data = new FormData(e.target as HTMLFormElement);
   if (!data) return;
 
+  let errMsg = '';
   const formatDate = (key: string) => {
     const value = data.get(key);
     if (value) {
@@ -33,26 +78,46 @@ const SubmitAgendaForm = async (
   }
   data.delete('isSolo');
 
-  // formData 확인용
-  // for (const key of data.keys()) {
-  //   console.log(key, data.get(key));
-  // }
-
-  if (document.getElementsByClassName('error_text').length > 0) {
-    alert('입력값을 확인해주세요.');
-    return;
+  // 에러 체크: 위에서부터 보이도록
+  if (data.get('agendaLocation') === '선택해주세요') {
+    errMsg = '개최지를 선택해주세요.\n';
+    document.querySelector('select')?.focus();
   }
   const poster = data.get('agendaPoster') as File;
   if (poster.size > 1024 * 1024) {
-    alert('파일 사이즈가 너무 큽니다.');
-    return;
+    errMsg = '파일 사이즈가 너무 큽니다.\n';
+    document.getElementById('agendaPoster')?.focus();
   }
   if (
     poster.size != 0 &&
     poster.type !== 'image/jpeg' &&
     poster.type !== 'image/jpg'
   ) {
-    alert('jpg, jpeg 파일만 업로드 가능합니다.');
+    errMsg = 'jpg, jpeg 파일만 업로드 가능합니다.\n';
+    document.getElementById('agendaPoster')?.focus();
+  }
+  if (document.getElementsByClassName('error_text').length > 0) {
+    errMsg = '입력값을 확인해주세요.\n';
+    const err = document.querySelector('input[error]') as HTMLInputElement;
+    err?.focus();
+  }
+  if (data.get('agendaContent') === '') {
+    errMsg = '행사 내용이 필요합니다.\n';
+    document.getElementById('agendaContent')?.focus();
+  }
+  if (data.get('agendaTitle') === '') {
+    errMsg = '행사 제목이 필요합니다.\n';
+    document.getElementById('agendaTitle')?.focus();
+  }
+
+  // 에러 메세지 확인
+  if (errMsg.length > 0) {
+    setSnackBar({
+      toastName: `bad request`,
+      severity: 'error',
+      message: `🔥 ${errMsg} 🔥`,
+      clicked: true,
+    });
     return;
   }
 
@@ -68,15 +133,29 @@ const SubmitAgendaForm = async (
     }
   }
 
-  // 데이터 전송
-  try {
-    const res = await instanceInAgenda.post(url, data);
-    if (res.status === 204 || res.status === 200) {
-      onProceed && onProceed();
-    }
-  } catch (err) {
-    console.error(err);
-  }
+  // 모달 확인
+  const msg = agendadataToMsg(data, isEdit);
+  openModal({
+    type: 'proceedCheck',
+    title: isEdit ? '행사 수정' : '행사 생성',
+    description: msg,
+    onProceed: () => {
+      // 데이터 전송
+      instanceInAgenda
+        .post(url, data)
+        .then((res) => {
+          if (res.status === 204 || res.status === 200)
+            onProceed && onProceed();
+          if (!isEdit) {
+            console.log(res.data.agendaKey);
+            router.push(`/agenda/${res.data.agendaKey}`);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+  });
 };
 
 export default SubmitAgendaForm;
