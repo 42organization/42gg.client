@@ -29,13 +29,15 @@ export default function ParticipantsList({ max }: numberProps) {
         참여자 {curPeople} / {max}
       </div>
       <div className={styles.ListContainer}>
-        {participants.map((participant, index) => (
-          <Participant
-            key={index}
-            teamName={participant.teamName}
-            coalitions={participant.coalitions}
-          />
-        ))}
+        <div className={styles.participantsContainer}>
+          {participants.map((participant, index) => (
+            <Participant
+              key={index}
+              teamName={participant.teamName}
+              coalitions={participant.coalitions}
+            />
+          ))}
+        </div>
         <PageNation {...PagaNationElementProps} />
       </div>
     </>

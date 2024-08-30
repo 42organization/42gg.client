@@ -64,6 +64,12 @@ const AgendaListItem = ({
         type === 'list' && styles.listType
       } ${type === 'big' && styles.listBig}
        ${className && className}`}
+      style={{
+        background: `linear-gradient(180deg, #fff 5rem, rgba(0, 0, 0, 0) 10rem), url(${
+          agendaInfo.agendaPosterUrl || '/image/agenda/42.jpg'
+        })`,
+      }}
+      key={key}
       onClick={() => {
         if (window.innerWidth < 961) {
           router.push(href);

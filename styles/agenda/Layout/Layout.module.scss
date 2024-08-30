@@ -1,4 +1,5 @@
 @import 'styles/agenda/common.scss';
+
 .background {
   position: fixed;
   z-index: -1;
@@ -16,4 +17,24 @@
 .app {
   margin-top: 4rem;
   @include app;
+}
+
+.floatingButton {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: var(--font-size-xl);
+  color: white;
+  cursor: pointer;
+  background-color: var(--highlight-violet);
+  border: none;
+  border-radius: $radius-circle;
+  box-shadow: var(--box-shadow-light);
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: var(--highlight-yellow);
+  }
 }
