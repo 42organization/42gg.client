@@ -14,7 +14,7 @@ const MenuBar = ({ isActive }: { isActive: boolean }) => {
       >
         <MenuBarContent
           content={`Hello. ${user?.intraId}`}
-          href='/agenda/profile'
+          href={`/agenda/profile/${user?.intraId}`}
           as='h2'
         />
         <MenuBarContent content='Agenda' href='/agenda' as='h1' />

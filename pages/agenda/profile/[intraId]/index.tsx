@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import { AgendaHistoryItemProps } from 'types/agenda/profile/agendaHistoryTypes';
-import { CurrentTeamItemProps } from 'types/agenda/profile/currentTeamTypes';
+import { CurrentItemProps } from 'types/agenda/profile/currentListTypes';
+import { HistoryItemProps } from 'types/agenda/profile/historyListTypes';
 import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
-import AgendaHistory from 'components/agenda/Profile/AgendaHistory';
 import AgendaUserSearchBar from 'components/agenda/Profile/AgendaUserSearchBar';
-import CurrentTeam from 'components/agenda/Profile/CurrentTeam';
+import CurrentList from 'components/agenda/Profile/CurrentList';
+import HistoryList from 'components/agenda/Profile/HistoryList';
 import ProfileCard from 'components/agenda/Profile/ProfileCard';
 import Ticket from 'components/agenda/Ticket/Ticket';
 import PageNation from 'components/Pagination';
@@ -22,23 +22,43 @@ const AgendaProfile = () => {
 
   /** API GET */
   const { data: profileData, getData: getProfileData } =
-    useFetchGet<ProfileDataProps>('/profile');
+    useFetchGet<ProfileDataProps>(
+      isMyProfile ? '/profile' : `/profile/${intraId}`
+    );
 
-  const currentTeamData = useFetchGet<CurrentTeamItemProps[]>(
+  const {
+    content: hostCurrentListData,
+    PagaNationElementProps: PagaNationHostCurrent,
+  } = usePageNation<HistoryItemProps>({
+    url: `/host/current/list/${intraId}`,
+  });
+
+  const currentListData = useFetchGet<CurrentItemProps[]>(
     '/profile/current/list'
   ).data;
 
-  const { content: agendaHistory, PagaNationElementProps } =
-    usePageNation<AgendaHistoryItemProps>({
-      url: '/profile/history/list',
-    });
+  const {
+    content: hostHistoryListData,
+    PagaNationElementProps: PagaNationHostHistory,
+  } = usePageNation<HistoryItemProps>({
+    url: `/host/history/list/${intraId}`,
+  });
+
+  const {
+    content: historyListData,
+    PagaNationElementProps: PagaNationHistory,
+  } = usePageNation<HistoryItemProps>({
+    url: `/profile/history/list/${intraId}`,
+  });
 
   return (
     <>
       <div className={styles.agendaProfileContainer}>
+        {/* SearchBar */}
         <div className={styles.agendaUserSearchBarWrap}>
           <AgendaUserSearchBar />
         </div>
+        {/* ProfileCard */}
         {profileData && (
           <ProfileCard
             userIntraId={profileData.userIntraId}
@@ -49,12 +69,31 @@ const AgendaProfile = () => {
             isMyProfile={isMyProfile}
           />
         )}
+        {/* Ticket */}
         {isMyProfile && <Ticket type='component' />}
-        {currentTeamData && <CurrentTeam currentTeamData={currentTeamData} />}
-        {agendaHistory && (
+        {/* Host Current List */}
+        {hostCurrentListData && hostCurrentListData.length > 0 && (
           <>
-            <AgendaHistory agendaHistory={agendaHistory} />{' '}
-            <PageNation {...PagaNationElementProps} />
+            <CurrentList currentListData={hostCurrentListData} isHost={true} />
+            <PageNation {...PagaNationHostCurrent} />
+          </>
+        )}
+        {/* Current List */}
+        {isMyProfile && currentListData && (
+          <CurrentList currentListData={currentListData} isHost={false} />
+        )}
+        {/* History Host List */}
+        {hostHistoryListData && hostHistoryListData.length > 0 && (
+          <>
+            <HistoryList historyListData={hostHistoryListData} isHost={true} />{' '}
+            <PageNation {...PagaNationHostHistory} />
+          </>
+        )}
+        {/* History List */}
+        {historyListData && (
+          <>
+            <HistoryList historyListData={historyListData} isHost={false} />{' '}
+            <PageNation {...PagaNationHistory} />
           </>
         )}
       </div>
