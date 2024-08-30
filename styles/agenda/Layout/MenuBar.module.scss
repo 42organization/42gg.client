@@ -1,6 +1,7 @@
 @import 'styles/agenda/common.scss';
 .container {
   position: fixed;
+  top: 4rem;
   z-index: 1999;
   width: 25vw;
   min-width: 200px;
@@ -21,10 +22,12 @@
 
 .inactivebg {
   right: 100vw;
+  background: rgba(0, 0, 0, 0);
   transition: all 0.5s;
 }
 .activebg {
   right: 0;
+  background: var(--box-bg-3);
   transition: all 0.5s;
 }
 
@@ -33,7 +36,6 @@
   z-index: 1998;
   width: 100vw;
   height: 100vh;
-  background: var(--box-bg-3);
   box-shadow: 5px 0 20px 10px var(--box-bg-3);
   opacity: 0.5;
 }

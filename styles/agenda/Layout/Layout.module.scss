@@ -2,11 +2,12 @@
 
 .background {
   position: fixed;
+  top: 0;
   z-index: -1;
   display: flex;
-  width: 100vw;
+  width: 150vw;
   min-width: 380px;
-  height: calc(100vh - 4rem);
+  height: 150vh;
   flex-direction: column;
   background: var(--color-bg);
   background-attachment: fixed;
@@ -15,7 +16,7 @@
 }
 
 .app {
-  margin-top: 4rem;
+  margin-top: 5rem;
   @include app;
 }
 
