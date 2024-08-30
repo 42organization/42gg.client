@@ -67,6 +67,10 @@
     flex-direction: column;
     gap: 1rem;
   }
+  > h3 {
+    @include text('default');
+    margin-left: 0.5rem;
+  }
 }
 
 .label_container {
@@ -83,6 +87,11 @@
 .label_text {
   @include text('label');
   margin: 0.5rem;
+}
+
+.label_title {
+  @include text('label');
+  margin: 0rem 0.5rem 2rem;
 }
 
 .highlight {
@@ -112,4 +121,20 @@
   &.cancel {
     @include textButton('cancel', 'default');
   }
+}
+
+.ListContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 2rem;
+  width: 100%;
+}
+
+.input {
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  border-bottom: var(--default-border);
+  -webkit-appearance: none;
+  appearance: none;
 }

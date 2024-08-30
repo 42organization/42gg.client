@@ -1,5 +1,5 @@
+import router from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
 import {
   Paper,
   Table,
@@ -10,13 +10,15 @@ import {
 } from '@mui/material';
 import { IUser, IUserTable } from 'types/admin/takgu/adminUserTypes';
 import { instanceInManage } from 'utils/axios';
-import { modalState } from 'utils/recoil/takgu/modal';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
 import AdminSearchBar from 'components/admin/takgu/common/AdminSearchBar';
 import {
   AdminAgendaTableHead,
   AdminEmptyItem,
 } from 'components/admin/takgu/common/AdminTable';
+import TicketForm from 'components/agenda/Form/TicketForm';
+import UserForm from 'components/agenda/Form/userForm';
+import { useModal } from 'components/agenda/modal/useModal';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/takgu/users/UserManagementTable.module.scss';
 
@@ -35,10 +37,34 @@ export default function UserTable() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [intraId, setIntraId] = useState<string>('');
-  const setModal = useSetRecoilState(modalState);
+  const { openModal } = useModal();
+  const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
 
-  const handleButtonAction = (intraId: string) => {
-    alert('자세히');
+  const handleButtonAction = (buttonName: string, intraId: string) => {
+    switch (buttonName) {
+      case '프로필':
+        openModal({
+          type: 'modify',
+          title: '프로필 수정',
+          description: '변경 후 수정 버튼을 눌러주세요.',
+          FormComponent: UserForm,
+          stringKey: intraId,
+        });
+        break;
+
+      case '티켓발급':
+        openModal({
+          type: 'modify',
+          title: '티켓 발급',
+          description: '티켓을 발급하시겠습니까?',
+          FormComponent: TicketForm,
+          stringKey: intraId,
+        });
+        break;
+      case '티켓조회':
+        router.push(`/admin/agenda/ticket?intraId=${intraId}`);
+        break;
+    }
   };
 
   const initSearch = useCallback((intraId?: string) => {
@@ -101,19 +127,24 @@ export default function UserTable() {
                             className={styles.tableBodyItem}
                             key={columnName}
                           >
-                            {columnName !== 'etc' ? (
-                              userInfo[columnName as keyof IUser]
-                            ) : (
-                              <button
-                                key={'detail'}
-                                className={`${styles.button} ${styles.detail}`}
-                                onClick={() =>
-                                  handleButtonAction(userInfo.intraId)
-                                }
-                              >
-                                {'자세히'}
-                              </button>
-                            )}
+                            {columnName !== 'etc'
+                              ? userInfo[columnName as keyof IUser]
+                              : agendaTableFormat['user'].etc?.value.map(
+                                  (buttonName: string, index: number) => (
+                                    <button
+                                      key={buttonName}
+                                      className={`${styles.button} ${buttonList[index]}`}
+                                      onClick={() =>
+                                        handleButtonAction(
+                                          buttonName,
+                                          userInfo.intraId
+                                        )
+                                      }
+                                    >
+                                      {buttonName}
+                                    </button>
+                                  )
+                                )}
                           </TableCell>
                         );
                       }

@@ -22,12 +22,13 @@ export interface ParticipantTeamListProps {
 
 // 개인 참가자 타입
 export interface ParticipantProps {
-  teamName: string;
+  teamName?: string;
   teamLeaderIntraId?: string;
   teamMateCount?: number;
   teamAward?: string;
   awardPriority?: number;
-  coalitions: string[] | Coalition[];
+  coalitions: string[] | Coalition[] | string | Coalition;
+  delete?: boolean;
 }
 
 export interface ParticipantTeamProps {
