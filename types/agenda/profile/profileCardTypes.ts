@@ -1,7 +1,11 @@
+import { AchievementProps } from 'types/agenda/profile/profileDataTypes';
+
 export interface ProfileCardProps {
   userIntraId: string;
   userContent: string;
   userGithub: string;
-  ticketCount: number;
+  imageUrl: string;
+  achievements: AchievementProps[];
   getProfileData: () => void;
+  isMyProfile: boolean;
 }

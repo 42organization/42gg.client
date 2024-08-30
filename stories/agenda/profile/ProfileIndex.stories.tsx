@@ -1,5 +1,5 @@
-import { AgendaHistoryItemProps } from 'types/agenda/profile/agendaHistoryTypes';
-import { CurrentTeamItemProps } from 'types/agenda/profile/currentTeamTypes';
+import { CurrentTeamItemProps } from 'types/agenda/profile/currentListTypes';
+import { AgendaHistoryItemProps } from 'types/agenda/profile/historyListTypes';
 import type { Meta, StoryObj } from '@storybook/react';
 import AgendaProfile from 'pages/agenda/profile/[intraId]';
 

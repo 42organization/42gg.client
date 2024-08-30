@@ -11,8 +11,10 @@ const ProfileImageCard = ({
   userIntraId,
   userContent,
   userGithub,
-  ticketCount, // NOT YET : ticket
+  imageUrl,
+  achievements,
   getProfileData,
+  isMyProfile,
 }: ProfileCardProps) => {
   // 프로필 수정 버튼,수정 취소 버튼 180도 회전
   const [isFlipped, setIsFlipped] = useState(false);
@@ -76,6 +78,7 @@ const ProfileImageCard = ({
     handleFlip();
   };
 
+  console.log(achievements); //////////////////////////////////
   return (
     <div className={styles.profileImageCard}>
       <div
@@ -84,70 +87,74 @@ const ProfileImageCard = ({
         }`}
       >
         {/* Back Side */}
-        <div className={styles.backCard}>
-          <div className={styles.editTitle}>프로필 수정</div>
+        {isMyProfile && (
+          <div className={styles.backCard}>
+            <div className={styles.editTitle}>프로필 수정</div>
 
-          <div className={styles.editContainer}>
-            <label className={styles.editSubTitle}>상태 메시지</label>
-            <textarea
-              name='userContent'
-              maxLength={50}
-              wrap='soft'
-              value={profileData.userContent}
-              placeholder='상태 메시지를 입력하세요.'
-              className={styles.editDescription}
-              onChange={handleChange}
-            />
-          </div>
+            <div className={styles.editContainer}>
+              <label className={styles.editSubTitle}>상태 메시지</label>
+              <textarea
+                name='userContent'
+                maxLength={50}
+                wrap='soft'
+                value={profileData.userContent}
+                placeholder='상태 메시지를 입력하세요.'
+                className={styles.editDescription}
+                onChange={handleChange}
+              />
+            </div>
 
-          <div className={styles.editContainer}>
-            <div className={styles.editSubTitle}>정보 추가</div>
-            <div className={styles.editOtherInfo}>
-              <div className={styles.editOtherInfoItem}>
-                <div className={styles.infoText}>GitHub</div>
-                <input
-                  type='text'
-                  name='userGithub'
-                  placeholder='깃 허브 URL'
-                  value={
-                    profileData.userGithub !== null
-                      ? profileData.userGithub
-                      : ''
-                  }
-                  className={styles.infoInput}
-                  onChange={handleChange}
-                />
+            <div className={styles.editContainer}>
+              <div className={styles.editSubTitle}>정보 추가</div>
+              <div className={styles.editOtherInfo}>
+                <div className={styles.editOtherInfoItem}>
+                  <div className={styles.infoText}>GitHub</div>
+                  <input
+                    type='text'
+                    name='userGithub'
+                    placeholder='깃 허브 URL'
+                    value={
+                      profileData.userGithub !== null
+                        ? profileData.userGithub
+                        : ''
+                    }
+                    className={styles.infoInput}
+                    onChange={handleChange}
+                  />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className={styles.submitContainer}>
-            <button onClick={handleEdit} className={styles.submitBtn}>
-              수정하기
-            </button>
-            <button onClick={handleCancel} className={styles.submitBtn}>
-              취소하기
-            </button>
+            <div className={styles.submitContainer}>
+              <button onClick={handleEdit} className={styles.submitBtn}>
+                수정하기
+              </button>
+              <button onClick={handleCancel} className={styles.submitBtn}>
+                취소하기
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Front Side */}
         <div className={styles.frontCard}>
           <div className={styles.profileImage}>
-            {/* 추가 예정 : profile Image  */}
             <div className={styles.profileImageWrapper}>
               <CustomImage
-                src='/image/agenda/jeongrol.jpeg'
+                src={imageUrl}
                 alt='profile image'
                 addClass={styles.profileImageBox}
+                isProfileImage={true}
               />
             </div>
 
             <div className={styles.userNameWrapper}>
               <div className={styles.userName}>{userIntraId}</div>
-              <div className={styles.editWrapper} onClick={handleFlip}>
-                <EditIcon />
-              </div>
+              {isMyProfile && (
+                <div className={styles.editWrapper} onClick={handleFlip}>
+                  <EditIcon />
+                </div>
+              )}
             </div>
 
             <div className={styles.linkImages}>
@@ -185,13 +192,26 @@ const ProfileImageCard = ({
               <div className={styles.acheivementText}>Acheivements</div>
 
               <div className={styles.acheivementImageContainer}>
-                {/* 추가 예정 : acheivement mapping */}
-                <div className={styles.acheivementImageWrapper}>
-                  <CustomImage
-                    src='/image/agenda/acheivement.svg'
-                    alt='acheivement'
-                  />
-                </div>
+                {achievements.map((data, index) => {
+                  const imageUrl = data.image;
+
+                  if (imageUrl) {
+                    const parsedUrl = imageUrl.replace(
+                      '/uploads',
+                      'https://cdn.intra.42.fr'
+                    );
+
+                    return (
+                      <div
+                        key={index}
+                        className={styles.acheivementImageWrapper}
+                      >
+                        <CustomImage src={parsedUrl} alt='achievement' />
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
               </div>
             </div>
           </div>

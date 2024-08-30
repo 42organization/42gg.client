@@ -7,7 +7,7 @@
 
 import { PeopleCount } from 'types/agenda/agendaDetail/tabs/participantTypes';
 import { coalitionValues } from 'types/agenda/coalitionTypes';
-import { TeamMate } from 'types/agenda/profile/agendaHistoryTypes';
+import { TeamMate } from 'types/agenda/profile/historyListTypes';
 import { Coalition } from 'constants/agenda/agenda';
 
 export function countCoalitions(coalitions: Coalition[]): PeopleCount {

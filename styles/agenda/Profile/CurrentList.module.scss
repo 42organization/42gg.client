@@ -1,0 +1,52 @@
+@import 'styles/agenda/common.scss';
+
+.currentListContainer {
+  display: flex;
+  width: 22rem;
+  height: auto;
+  flex-direction: column;
+  padding: 1rem 1.5rem;
+  background-color: var(--box-bg-2);
+  border: var(--default-border);
+  border-radius: $radius-big;
+  box-shadow: var(--default-box-shadow);
+  gap: 1rem;
+}
+
+.currentListTitle {
+  @include text(sub-title);
+}
+
+.currentListItems {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.currentTeamEmpty {
+  @include text(description-s);
+}
+
+.currentItemWrapper {
+  display: flex;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  padding: 1rem;
+  cursor: pointer;
+  background-color: var(--box-bg-1);
+  border-radius: $radius-small;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.teamName {
+  @include text(sub-title);
+}
+
+.title {
+  @include text(default);
+}

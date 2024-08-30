@@ -1,16 +1,8 @@
-export interface AgendaHistoryDataProps {
-  historyData: AgendaHistoryItemProps;
-}
-
-export interface AgendaHistoryProps {
-  agendaHistory: AgendaHistoryItemProps[];
-}
-
-export interface AgendaHistoryItemProps {
+export interface HistoryItemProps {
   agendaId: string;
   agendaTitle: string;
-  agendaStartTime: Date;
-  agendaEndTime: Date;
+  agendaStartTime: string;
+  agendaEndTime: string;
   agendaCurrentTeam: number;
   agendaLocation: string;
   teamKey: string;
@@ -18,9 +10,15 @@ export interface AgendaHistoryItemProps {
   agendaMaxPeople: number;
   teamName: string;
   teamMates: TeamMate[];
+  agendaKey: string;
 }
 
 export interface TeamMate {
   intraId: string;
   coalition: string;
+}
+
+export interface HistoryListProps {
+  historyListData: HistoryItemProps[];
+  isHost: boolean;
 }

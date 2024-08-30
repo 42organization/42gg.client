@@ -1,15 +1,29 @@
 import { AgendaLocation, Coalition } from 'constants/agenda/agenda';
 
 export interface ProfileDataProps {
-  userIntraId: string;
+  achievements: AchievementProps[];
+  imageUrl: string;
+  ticketCount: number;
+  userCoalition: Coalition;
   userContent: string;
   userGithub: string;
-  userCoalition: Coalition;
+  userIntraId: string;
   userLocation: AgendaLocation;
-  ticketCount: number;
 }
 
 export interface LoginInfoDataProps {
   intraId: string;
   isAdmin: boolean;
+}
+
+export interface AchievementProps {
+  id: number;
+  name: string;
+  image: string;
+  description: string;
+  kind: string;
+  nbr_of_success: string;
+  tier: string;
+  users_url: string;
+  visible: boolean;
 }
