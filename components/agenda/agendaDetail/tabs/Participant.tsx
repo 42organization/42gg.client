@@ -19,11 +19,9 @@ export default function Participant({
 
   return (
     <div
-      className={`${styles.participantsContainer} ${
-        colorMapping[coalitionEnum[0]]
-      }`}
+      className={`${styles.participantItem} ${colorMapping[coalitionEnum[0]]}`}
     >
-      <div className={styles.participantWarp}>
+      <div className={styles.participantItemWarp}>
         <div className={styles.participantcontent}>{teamName}</div>
         {IconComponent && <IconComponent />}
       </div>
