@@ -76,9 +76,9 @@ const PageController = ({
       <button
         className={styles.agendaInfoContainer}
         style={{
-          background: `linear-gradient(180deg, #fff 5rem, rgba(0, 0, 0, 0) 10rem), url(${
+          background: `linear-gradient(0deg, #fff 7rem, rgba(0, 0, 0, 0) 10rem), url(${
             data[current]?.agendaPosterUrl || '/image/agenda/42.jpg'
-          })`,
+          }) lightgray 50% / cover no-repeat`,
         }}
         onClick={(e) => {
           const target = e.target as HTMLElement;

@@ -16,11 +16,11 @@ const MyTeamInfo = ({
     return <div>참가중인 일정이 없습니다.</div>;
   }
   // myTeamInfo.isOfficial = true; //css test
-  // const startDate = new Date();
+  const startDate = new Date(myTeamInfo.agendaStartTime);
   //아래 주석달린 부분은 api 변경시 추가 예정입니다.
   return (
     <div className={styles.Container} key={key}>
-      {/* <div className={agendastyles.agendaDateBox}>
+      <div className={agendastyles.agendaDateBox}>
         <div className={agendastyles.agendaStartDateMonth}>
           {fillZero(`${startDate.getMonth()}`, 2)}
         </div>
@@ -28,7 +28,7 @@ const MyTeamInfo = ({
         <div className={agendastyles.agendaStartDateDay}>
           {fillZero(`${startDate.getDate()}`, 2)}
         </div>
-      </div> */}
+      </div>
       <div className={styles.infoContainer}>
         <div className={styles.teamInfoContainer}>
           <h2 className={styles.teamTitle}>

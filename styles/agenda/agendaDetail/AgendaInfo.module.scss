@@ -12,7 +12,9 @@ $info-gradient: linear-gradient(
   @include container(1);
   position: relative;
   width: 100%;
-  padding: 1.5rem;
+  min-width: 280px;
+  max-width: 100%;
+  padding: 1.2rem;
   margin: 0rem;
   background: $info-gradient;
 
@@ -23,6 +25,16 @@ $info-gradient: linear-gradient(
   &.smallHeight {
     height: 10rem;
   }
+
+  @media screen and (min-width: 481px) and (max-width: 960px) {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 961px) {
+    width: 100%;
+    height: 5rem !important;
+    border-radius: 10rem;
+  }
 }
 
 .infoWarp {
@@ -30,6 +42,9 @@ $info-gradient: linear-gradient(
   right: 1.5rem;
   bottom: 1.5rem;
   left: 1.5rem;
+  @media screen and (min-width: 961px) {
+    bottom: 0.3rem;
+  }
 }
 
 .contentWarp {
@@ -37,14 +52,23 @@ $info-gradient: linear-gradient(
   flex-direction: column;
   align-items: flex-start;
   gap: 0.6rem;
+
+  @media screen and (min-width: 961px) {
+    flex-direction: row; // 가로 배치
+    justify-content: space-between; // 간격 조절
+    align-items: center;
+    gap: 1rem;
+  }
 }
 
 .titleWarp {
   display: flex;
-  width: 100%;
-  height: 2.5rem;
-  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  gap: 1.5rem;
+  @media screen and (max-width: 961px) {
+    justify-content: space-between;
+  }
   h2 {
     @include text('agenda-title');
   }
@@ -54,15 +78,28 @@ $info-gradient: linear-gradient(
   cursor: pointer;
 }
 
-.enrollWarp {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 10px;
-  align-self: stretch;
-}
-
 .organizerWrap {
   @include text('default'); // medium
+  margin-right: auto; // UploadBtn과의 간격 확보
+}
+
+.buttonWarp {
+  position: absolute;
+  right: 0;
+  display: flex; // flex 컨테이너로 설정
+  flex-direction: column; // 기본적으로 세로 정렬
+  align-items: flex-end; // 오른쪽 정렬
+  gap: 0.4rem;
+
+  @media screen and (max-width: 960px) {
+    bottom: 100%; // 960px 이하에서 세로 정렬
+  }
+
+  @media screen and (min-width: 961px) {
+    bottom: 26%; // 961px 이상에서 위치 조정
+    flex-direction: row; // 가로 배치
+    justify-content: flex-end; // 오른쪽 정렬
+    align-items: center; // 세로 중앙 정렬
+    gap: 1rem;
+  }
 }

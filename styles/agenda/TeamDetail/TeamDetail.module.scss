@@ -1,16 +1,13 @@
 @import 'styles/agenda/common.scss';
 
 .teamDetail {
-  display: flex;
-  flex-direction: column;
+  @include pageContainer;
 }
 
 .agendaLink {
   display: flex;
-  width: calc(100% - 2rem);
-  max-width: 1200px;
+  width: 100%;
   flex-direction: column;
-  margin: 1rem;
   cursor: pointer;
   justify-content: center;
   align-items: center;

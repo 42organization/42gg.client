@@ -25,7 +25,7 @@ function AgendaAppLayout({ children }: AgendaLayoutProps) {
     <>
       <AgendaHeader />
       <div className={styles.background}></div>
-      <div className={styles.container}>
+      <div className={styles.app}>
         {children}
         <Footer />
         <AgendaModalProvider />
