@@ -1,3 +1,4 @@
+import router from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import {
   Paper,
@@ -59,6 +60,9 @@ export default function UserTable() {
           FormComponent: TicketForm,
           stringKey: intraId,
         });
+        break;
+      case '티켓조회':
+        router.push(`/admin/agenda/ticket?intraId=${intraId}`);
         break;
     }
   };

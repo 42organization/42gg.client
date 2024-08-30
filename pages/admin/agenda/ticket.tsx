@@ -1,10 +1,12 @@
+import router from 'next/router';
 import TicketTable from 'components/admin/agenda/ticket/TicketTable';
 
 export default function Ticket() {
+  const { intraId } = router.query;
+
   return (
     <>
-      <p>ticket</p>
-      <TicketTable />
+      <TicketTable intraId={intraId as string} />
     </>
   );
 }

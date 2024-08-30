@@ -80,7 +80,7 @@ export const agendaTableFormat: AgendaTableFormat = {
     columns: ['id', 'roleType', 'intraId', 'etc'],
     etc: {
       type: 'button',
-      value: ['프로필', '티켓발급'],
+      value: ['프로필', '티켓발급', '티켓조회'],
     },
   },
 };
