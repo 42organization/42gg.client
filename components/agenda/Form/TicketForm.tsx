@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import { MenuItem, Select } from '@mui/material';
-import DescriptionInput from 'components/agenda/Input/DescriptionInput';
-import SelectInput from 'components/agenda/Input/SelectInput';
-import TitleInput from 'components/agenda/Input/TitleInput';
+import AgendaSelect from 'components/agenda/Input/AgendaSelect';
 import { useModal } from 'components/agenda/modal/useModal';
 import useFetchGet from 'hooks/agenda/useFetchGet';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
@@ -10,12 +7,6 @@ import styles from 'styles/agenda/Form/Form.module.scss';
 
 interface userFormProps {
   stringKey: string;
-}
-interface dataType {
-  userIntraId: string;
-  userContent: string;
-  userGithub: string;
-  userLocation: string;
 }
 
 const TicketForm = ({ stringKey }: userFormProps) => {
@@ -63,21 +54,11 @@ const TicketForm = ({ stringKey }: userFormProps) => {
     >
       <div className={styles.modalContainer}>
         <div className={styles.label_title}>IntraId : {stringKey}</div>
-        <Select
-          value={selectedAgendaKey}
-          onChange={handleSelectChange}
-          displayEmpty
-        >
-          <MenuItem value='' disabled>
-            Choose an agenda...
-          </MenuItem>
-          {Array.isArray(agendaList) &&
-            agendaList.map((agenda) => (
-              <MenuItem key={agenda.agendaKey} value={agenda.agendaKey}>
-                {agenda.agendaTitle}
-              </MenuItem>
-            ))}
-        </Select>
+        <AgendaSelect
+          selectedKey={selectedAgendaKey}
+          dataList={agendaList}
+          handleSelectChange={handleSelectChange}
+        />
       </div>
 
       <div className={styles.buttonContainer}>

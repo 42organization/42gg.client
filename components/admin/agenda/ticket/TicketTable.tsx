@@ -1,4 +1,4 @@
-import router, { useRouter } from 'next/router';
+import router from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import {
   Paper,
@@ -13,6 +13,8 @@ import {
 import { agendaTableFormat } from 'constants/admin/agendaTable';
 import { NoContent } from 'components/admin/agenda/utils';
 import { AdminAgendaTableHead } from 'components/admin/takgu/common/AdminTable';
+import AdminTicketForm from 'components/agenda/Form/AdminTicketForm';
+import { useModal } from 'components/agenda/modal/useModal';
 import PageNation from 'components/Pagination';
 // import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/admin/agenda/agendaList/AgendaTable.module.scss';
@@ -75,15 +77,15 @@ const tableTitle: { [key: string]: string } = {
 
 export interface ITicket {
   ticketId: number;
-  createdAt: string;
-  issuedFrom: string;
-  issuedFromKey: string;
-  usedTo: string;
-  usedToKey: string;
-  isApproved: boolean;
-  approvedAt: string;
-  isUsed: boolean;
-  usedAt: string;
+  createdAt?: string;
+  issuedFrom?: string;
+  issuedFromKey?: string;
+  usedTo?: string;
+  usedToKey?: string;
+  isApproved?: boolean;
+  approvedAt?: string;
+  isUsed?: boolean;
+  usedAt?: string;
 }
 
 export interface ITicketTable {
@@ -99,28 +101,25 @@ export default function TicketTable() {
     currentPage: 0,
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const { openModal, closeModal } = useModal();
 
-  // const modal = useRecoilValue(modalState);
-  const buttonList: string[] = [styles.detail, styles.coin, styles.penalty];
-
-  const handleButtonAction = (buttonName: string) => {
-    switch (buttonName) {
-      case '자세히':
-        // setModal({ modalName: 'ADMIN-PROFILE', intraId });
-        alert('자세히');
-        break;
-      case '대회 수정':
-        // setModal({ modalName: 'ADMIN-PROFILE', intraId });
-        alert('대회 수정');
-        break;
-      case '대회 삭제':
-        // 모달 추가
-        alert('대회 삭제');
-        break;
-    }
+  const handleButtonAction = (ticket: ITicket) => {
+    openModal({
+      type: 'modify',
+      title: '티켓 수정',
+      description: '변경 후 수정 버튼을 눌러주세요.',
+      FormComponent: AdminTicketForm,
+      data: ticket,
+      isAdmin: true,
+      stringKey: 'string',
+      onProceed: () => {
+        closeModal();
+        getTicketList();
+      },
+    });
   };
 
-  const handleCellClick = (agedaKey) => {
+  const handleCellClick = (agedaKey?: string) => {
     router.push(`/admin/agenda/${agedaKey}`);
   };
 
@@ -159,10 +158,10 @@ export default function TicketTable() {
     getTicketList();
   }, [getTicketList]);
 
-  const renderApprove = (isApproved: boolean) => {
+  const renderApprove = (isApproved?: boolean) => {
     return isApproved ? '발급완료' : '발급대기';
   };
-  const renderUsed = (isUsed: boolean) => {
+  const renderUsed = (isUsed?: boolean) => {
     return isUsed ? '사용완료' : '사용대기';
   };
 
@@ -198,25 +197,20 @@ export default function TicketTable() {
                             }
                           }}
                         >
-                          {columnName === 'isApproved'
-                            ? renderApprove(ticket.isApproved) // 상태 표시
-                            : columnName === 'isUsed'
-                            ? renderUsed(ticket.isUsed) // 사용 여부 표시
-                            : columnName !== 'etc'
-                            ? ticket[columnName as keyof ITicket] // 다른 열의 기본 값 표시
-                            : agendaTableFormat['ticket'].etc?.value.map(
-                                (buttonName: string, index: number) => (
-                                  <button
-                                    key={buttonName}
-                                    className={`${styles.button} ${buttonList[index]}`}
-                                    onClick={() =>
-                                      handleButtonAction(buttonName)
-                                    }
-                                  >
-                                    {buttonName}
-                                  </button>
-                                )
-                              )}
+                          {columnName === 'isApproved' ? (
+                            renderApprove(ticket.isApproved) // 상태 표시
+                          ) : columnName === 'isUsed' ? (
+                            renderUsed(ticket.isUsed) // 사용 여부 표시
+                          ) : columnName !== 'etc' ? (
+                            ticket[columnName as keyof ITicket] // 다른 열의 기본 값 표시
+                          ) : (
+                            <button
+                              className={`${styles.button} ${styles.coin}`}
+                              onClick={() => handleButtonAction(ticket)}
+                            >
+                              수정
+                            </button>
+                          )}
                         </TableCell>
                       );
                     }
