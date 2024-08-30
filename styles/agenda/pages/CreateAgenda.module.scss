@@ -1,5 +1,8 @@
 @import 'styles/agenda/Form/Form.module.scss';
 
+.pageContainer {
+  @include pageContainer;
+}
 .container {
   @include container(1);
   padding: 0.5rem;

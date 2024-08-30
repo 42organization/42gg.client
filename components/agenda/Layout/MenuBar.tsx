@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useUser } from 'hooks/agenda/Layout/useUser';

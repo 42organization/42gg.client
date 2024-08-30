@@ -92,7 +92,7 @@ export default function TeamDetail() {
   };
 
   return (
-    <div className={styles.teamDeatil}>
+    <div className={styles.teamDetail}>
       {agendaData && (
         <Link href={`/agenda/${agendaKey}`} className={styles.agendaLink}>
           <AgendaInfo agendaData={agendaData} />

@@ -1,5 +1,6 @@
 // https://dev.to/wgnrd/adding-a-dark-mode-to-your-website-using-scss-4pdc
 // @import 'styles/globals.css';
+@import 'responsive.scss';
 
 // radius
 $radius-extra-small: 0.5rem;
@@ -54,8 +55,7 @@ $font-size-xs: 0.8rem; // $small-font
 
 @mixin container($level) {
   display: flex;
-  width: calc(100% - 2rem);
-  max-width: 1200px;
+  width: 100%;
   flex-direction: column;
   padding: 1rem;
   margin: 1rem;

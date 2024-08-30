@@ -11,7 +11,6 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import { TeamDetailProps } from 'types/agenda/teamDetail/TeamDetailTypes';
 import { instance } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import { agendaTableFormat } from 'constants/admin/agendaTable';
@@ -33,6 +32,7 @@ const tableTitle: { [key: string]: string } = {
   teamAward: '상',
   teamAwardPriority: '등수',
   teamStatus: '상태',
+  teamLocation: '위치',
   etc: '기타',
 };
 
@@ -45,6 +45,7 @@ export interface ITeam {
   teamAward: string;
   teamAwardPriority: number;
   teamStatus: string;
+  teamLocation: string;
   coalitions: string[];
 }
 
@@ -72,34 +73,28 @@ export default function TeamTable() {
 
   const buttonList: string[] = [styles.coin, styles.penalty];
 
-  const deleteTeam = async (teamInfo: TeamDetailProps) => {
-    const updateTeam = {
-      teamKey: teamInfo.teamKey,
-      teamName: teamInfo.teamName,
-      teamContent: 'content', // 이후 제거
-      teamStatus: TeamStatus.CANCEL,
-      teamIsPrivate: teamInfo.teamIsPrivate,
-      teamLocation: 'SEOUL', // 이후 제거
-      teamAward: teamInfo.teamAward,
-      teamAwardPriority: teamInfo.teamAwardPriority,
-      teamMates: [{ intraId: 'jihylim' }],
-    };
-    await sendRequest('PATCH', 'admin/team', updateTeam, {}, () => {
-      getTeamList();
-    });
+  const deleteTeam = async (teamKey: string) => {
+    await sendRequest(
+      'PATCH',
+      'admin/team/cancel',
+      {},
+      { team_key: teamKey },
+      () => {
+        getTeamList();
+      }
+    );
   };
 
-  const handleButtonAction = (
-    buttonName: string,
-    teamInfo: TeamDetailProps
-  ) => {
-    const teamKey = teamInfo.teamKey;
+  const handleButtonAction = (buttonName: string, team: ITeam) => {
+    const teamKey = team.teamKey;
     switch (buttonName) {
       case '수정':
-        router.push(`/admin/agenda/teamModify?team_key=${teamKey}`);
+        router.push(
+          `/admin/agenda/teamModify?team_key=${teamKey}&location=${team.teamLocation}`
+        );
         break;
       case '취소':
-        deleteTeam(teamInfo);
+        deleteTeam(teamKey as string);
         break;
     }
   };

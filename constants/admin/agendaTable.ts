@@ -32,6 +32,7 @@ export const agendaTableFormat: AgendaTableFormat = {
     columns: [
       'teamName',
       'teamLeaderIntraId',
+      'teamLocation',
       'teamMateCount',
       'teamIsPrivate',
       'teamAward',
@@ -77,5 +78,9 @@ export const agendaTableFormat: AgendaTableFormat = {
   user: {
     name: '사용자 정보',
     columns: ['id', 'roleType', 'intraId', 'etc'],
+    etc: {
+      type: 'button',
+      value: ['프로필', '티켓발급', '티켓조회'],
+    },
   },
 };

@@ -10,7 +10,7 @@ const MainPageProfile = () => {
 
   return (
     <div className={styles.mainPageProfile}>
-      <div className={styles.gridContainer}>
+      <div className={styles.pageContainer}>
         <Link
           className={styles.myImage}
           href={`/takgu/users/detail?intraId=${user.intraId}`}
