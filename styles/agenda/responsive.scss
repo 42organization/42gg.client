@@ -11,13 +11,13 @@
   flex-direction: column;
   align-items: center;
   @media screen and (max-width: 480px) {
-    border: 1px solid red;
+    // border: 1px solid red;
   }
   @media screen and (min-width: 481px) and (max-width: 960px) {
-    border: 1px solid blue;
+    // border: 1px solid blue;
   }
   @media screen and (min-width: 961px) {
-    border: 1px solid yellow;
+    // border: 1px solid yellow;
   }
 }
 
@@ -30,18 +30,18 @@
   @media screen and (max-width: 480px) {
     display: flex;
     flex-direction: column;
-    border: 2px solid red;
+    // border: 2px solid red;
   }
   @media screen and (min-width: 481px) and (max-width: 960px) {
     display: flex;
     flex-direction: column;
     // padding: 0 5rem;
-    border: 2px solid blue;
+    // border: 2px solid blue;
   }
   @media screen and (min-width: 961px) {
     display: grid;
     padding: 0 5rem;
-    border: 2px solid yellow;
+    // border: 2px solid yellow;
   }
 }
 @mixin pageContainer {
