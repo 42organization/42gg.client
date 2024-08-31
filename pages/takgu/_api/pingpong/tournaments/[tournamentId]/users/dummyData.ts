@@ -3,7 +3,7 @@ type TournamentData = {
   users: number[];
 }[];
 
-const DummyData: TournamentData = [
+export const DummyData: TournamentData = [
   {
     tournamentId: 56,
     users: [1],
@@ -14,4 +14,7 @@ const DummyData: TournamentData = [
   },
 ];
 
-export default DummyData;
+const dummy = () => {
+  return null;
+};
+export default dummy;

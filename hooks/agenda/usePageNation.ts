@@ -3,7 +3,7 @@ import { instanceInAgenda } from 'utils/axios';
 
 const usePageNation = <T>({
   url,
-  size,
+  size = 20,
   useIdx,
   params,
 }: {
@@ -21,11 +21,10 @@ const usePageNation = <T>({
   params = params ? params : {};
   params.page = currentPage.current;
   params.size = size;
-  const getData = async (page: number) => {
+  const getData = async (page: number, size: number) => {
     const res = await instanceInAgenda.get(url, { params });
     const content = res.data.content ? res.data.content : [];
     const totalSize = res.data.totalSize ? res.data.totalSize : 0;
-
     if (useIdx) {
       res.data.content = res.data.content.map((c: T, idx: number) => {
         const temp = c as T & { idx: number };
@@ -40,7 +39,7 @@ const usePageNation = <T>({
 
   const pageChangeHandler = async (pageNumber: number) => {
     if (pageNumber < 1 || pageNumber > totalPages.current) return;
-    await getData(pageNumber).then((res) => {
+    await getData(pageNumber, size).then((res) => {
       currentPage.current = pageNumber;
       setContent(res.content);
     });
@@ -48,7 +47,7 @@ const usePageNation = <T>({
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getData(currentPage.current);
+      const data = await getData(currentPage.current, size);
       totalPages.current = Math.ceil(data.totalSize / size);
       setContent(data.content);
     };

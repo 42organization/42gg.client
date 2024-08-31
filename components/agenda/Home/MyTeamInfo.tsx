@@ -16,7 +16,7 @@ const MyTeamInfo = ({
     return <div>참가중인 일정이 없습니다.</div>;
   }
   // myTeamInfo.isOfficial = true; //css test
-  const startDate = new Date(myTeamInfo.agendaStartTime);
+  const startDate = new Date(myTeamInfo.agendaStartTime as string);
   //아래 주석달린 부분은 api 변경시 추가 예정입니다.
   return (
     <div className={styles.Container} key={key}>
