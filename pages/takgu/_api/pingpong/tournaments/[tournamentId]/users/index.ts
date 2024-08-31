@@ -1,6 +1,6 @@
 // pages/api/tournaments/[tournamentId]/users.ts
 import { NextApiRequest, NextApiResponse } from 'next';
-import DummyData from './dummyData';
+import { DummyData } from './dummyData';
 function isString(value: any): value is string {
   return typeof value === 'string';
 }
