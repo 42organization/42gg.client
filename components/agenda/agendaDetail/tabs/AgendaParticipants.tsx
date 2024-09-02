@@ -17,7 +17,11 @@ export default function AgendaParticipants({
           {isSoloTeam(agendaMinPeople, agendaMaxPeople) ? (
             <ParticipantsList max={agendaMaxTeam} />
           ) : (
-            <ParticipantTeamList max={agendaMaxTeam} myTeam={myTeam} />
+            <ParticipantTeamList
+              maxTeam={agendaMaxTeam}
+              maxPeople={agendaMaxPeople}
+              myTeam={myTeam}
+            />
           )}
         </div>
       </div>

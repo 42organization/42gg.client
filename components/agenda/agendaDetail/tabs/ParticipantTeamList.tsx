@@ -7,7 +7,8 @@ import usePageNation from 'hooks/agenda/usePageNation';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantTeamList.module.scss';
 
 export default function ParticipantTeamList({
-  max,
+  maxTeam,
+  maxPeople,
   myTeam,
 }: ParticipantTeamListProps) {
   const router = useRouter();
@@ -51,7 +52,7 @@ export default function ParticipantTeamList({
               teamName={myTeam.teamName}
               teamLeaderIntraId={myTeam.teamLeaderIntraId}
               teamMateCount={myTeam.teamMateCount}
-              maxMateCount={max}
+              maxMateCount={maxTeam}
               coalitions={myTeam.coalitions}
             />
           </>
@@ -73,7 +74,7 @@ export default function ParticipantTeamList({
                 teamName={team.teamName}
                 teamLeaderIntraId={team.teamLeaderIntraId}
                 teamMateCount={team.teamMateCount}
-                maxMateCount={max}
+                maxMateCount={maxPeople}
                 coalitions={team.coalitions}
               />
             ))}
@@ -86,7 +87,7 @@ export default function ParticipantTeamList({
 
       <div className={styles.participantsWarp}>
         <div className={styles.participantsTitle}>
-          확정완료 팀 {confirmedTeamsCount} / {max}
+          확정완료 팀 {confirmedTeamsCount} / {maxTeam}
         </div>
         {confirmedTeams && confirmedTeamsCount > 0 ? (
           <>
@@ -96,7 +97,7 @@ export default function ParticipantTeamList({
                 teamName={team.teamName}
                 teamLeaderIntraId={team.teamLeaderIntraId}
                 teamMateCount={team.teamMateCount}
-                maxMateCount={max}
+                maxMateCount={maxPeople}
                 coalitions={team.coalitions}
               />
             ))}
