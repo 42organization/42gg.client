@@ -2,8 +2,8 @@
 .layout {
   @include layout;
   grid-template:
-    'top top top top' 450px
-    'ticket pingpong match match' auto / 1fr 1fr 1fr 1fr;
+    'top top' 450px
+    'content match' auto / 1fr 1fr;
   max-width: 100%;
   padding-top: 1px;
   margin: 1rem;
@@ -26,10 +26,10 @@
 
 .flex {
   display: flex;
+  grid-area: content;
 }
 
 .content {
-  grid-area: content;
   @media screen and (max-width: 960px) {
     margin: 1rem;
   }
