@@ -107,16 +107,16 @@
 }
 
 .emptyContainer {
+  @include container(1);
+  @include text('description');
   display: flex;
-  width: 100%;
+  width: calc(100% - 2rem);
   height: 10rem;
   font-size: $font-size-m;
   opacity: 70%;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  @include text('description');
-  @include container(1);
 }
 
 .selected {

@@ -9,49 +9,48 @@ const AgendaList = ({ agendaList }: { agendaList: AgendaDataProps[] }) => {
   const [selectedItem, setSelectedItem] = useState<number | null>(0);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.agendaListContainer}>
-        <div className={styles.agendaListItemContainer}>
-          {!agendaList || !agendaList.length ? (
-            <div>
-              <div className={styles.emptyContainer}>일정이 없습니다.</div>
+    <>
+      {!agendaList || !agendaList.length ? (
+        <div className={styles.emptyContainer}>일정이 없습니다.</div>
+      ) : (
+        <div className={styles.container}>
+          <div className={styles.agendaListContainer}>
+            <div className={styles.agendaListItemContainer}>
+              {agendaList.map((agendaInfo, idx) => {
+                agendaInfo.idx = idx;
+                return (
+                  <AgendaListItem
+                    agendaInfo={agendaInfo}
+                    key={idx}
+                    idx={idx}
+                    type='list'
+                    className={idx === selectedItem ? styles.selected : ''}
+                    setSelectedItem={setSelectedItem}
+                  />
+                );
+              })}
             </div>
-          ) : (
-            agendaList.map((agendaInfo, idx) => {
-              agendaInfo.idx = idx;
-              return (
-                <AgendaListItem
-                  agendaInfo={agendaInfo}
-                  key={idx}
-                  type='list'
-                  className={idx === selectedItem ? styles.selected : ''}
-                  setSelectedItem={setSelectedItem}
-                />
-              );
-            })
-          )}
+          </div>
+          <AgendaListItem
+            agendaInfo={agendaList[selectedItem || 0]}
+            idx={selectedItem || 0}
+            type='big'
+          />
         </div>
-      </div>
-      {agendaList.length && (
-        <AgendaListItem
-          agendaInfo={agendaList[selectedItem || 0]}
-          key={selectedItem || 0}
-          type='big'
-        />
       )}
-    </div>
+    </>
   );
 };
 
 const AgendaListItem = ({
   agendaInfo,
-  key,
+  idx,
   type,
   className,
   setSelectedItem,
 }: {
   agendaInfo: AgendaDataProps;
-  key: number;
+  idx: number;
   type?: string;
   className?: string;
   setSelectedItem?: (key: number) => void;
@@ -69,20 +68,24 @@ const AgendaListItem = ({
           agendaInfo.agendaPosterUrl || '/image/agenda/42.jpg'
         }) lightgray 50% / cover no-repeat`,
       }}
-      key={key}
+      key={idx}
       onClick={() => {
         if (window.innerWidth < 961) {
           router.push(href);
           return;
         }
-        if (type === 'list' && setSelectedItem && agendaInfo.idx) {
+        if (
+          type === 'list' &&
+          setSelectedItem &&
+          typeof agendaInfo.idx === 'number'
+        ) {
           setSelectedItem(agendaInfo.idx);
           return;
         }
         router.push(href);
       }}
     >
-      <AgendaInfo agendaInfo={agendaInfo} key={key} />
+      <AgendaInfo agendaInfo={agendaInfo} idx={idx} />
       <AgendaDeadLine />
     </button>
   );
