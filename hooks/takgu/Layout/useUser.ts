@@ -15,7 +15,7 @@ export const useUser = () => {
     }
   );
   if (isError) {
-    setError('JB02');
+    // setError('JB02');
     return undefined;
   }
   if (data) return data;

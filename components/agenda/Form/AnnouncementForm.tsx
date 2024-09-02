@@ -42,7 +42,7 @@ const SubmitAnnouncementForm = async (
     url,
     jsonData,
     params,
-    (res) => {
+    () => {
       handleProceed && handleProceed();
     },
     (error: string) => {

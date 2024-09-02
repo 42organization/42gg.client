@@ -99,7 +99,7 @@ const AgendaResultForm = ({
 
   const removeAward = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    const target = e.target.closest('li');
+    const target = (e.target as HTMLElement).closest('li');
     if (target === null) return;
     const idx = parseInt(target.getAttribute('id') || '0') - 1;
     if (idx === -1) return;

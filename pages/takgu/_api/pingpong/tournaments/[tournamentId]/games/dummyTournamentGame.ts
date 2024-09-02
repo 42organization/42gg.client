@@ -104,3 +104,8 @@ export const dummyLiveTournamentGames = {
     },
   ],
 };
+
+const dummy = () => {
+  return null;
+};
+export default dummy;

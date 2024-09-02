@@ -1,7 +1,6 @@
 import React from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import { AgendaListProps } from 'types/agenda/agendaDetail/agendaTypes';
 
 interface AgendaSelectProps {
   selectedKey: string;

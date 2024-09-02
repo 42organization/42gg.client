@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import dummyTournaments from './dummyTournamentData';
+import { dummyTournaments } from './dummyTournamentData';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { page, type, status, size } = req.query as {

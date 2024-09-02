@@ -20,7 +20,7 @@ const junhjeon = {
 
 const users = [jincpark, jaehyuki, junhjeon];
 
-const dummyTournaments: TournamentInfo[] = [];
+export const dummyTournaments: TournamentInfo[] = [];
 
 for (let i = 28; i >= 1; i--) {
   let status;
@@ -63,4 +63,7 @@ for (let i = 28; i >= 1; i--) {
   dummyTournaments.push(masterTournament, rookieTournament);
 }
 
-export default dummyTournaments;
+const dummy = () => {
+  return null;
+};
+export default dummy;
