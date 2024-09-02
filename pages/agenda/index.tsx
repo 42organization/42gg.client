@@ -19,12 +19,6 @@ const Agenda: NextPage = () => {
 
   const { data: currentData } = useFetchGet<AgendaDataProps[]>('/confirm');
   const { data: openData } = useFetchGet<AgendaDataProps[]>('/open');
-  const toggleStatus = (e: React.MouseEvent) => {
-    const target = e.target as HTMLButtonElement;
-    const status = showCurrent ? 'ongoing' : 'closed';
-    if ((target && target.name === status) || !target.name) return;
-    // setShowCurrent(target.name === 'ongoing');
-  };
 
   return (
     <div className={styles.agendaPageContainer}>

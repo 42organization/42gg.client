@@ -9,38 +9,36 @@ const AgendaList = ({ agendaList }: { agendaList: AgendaDataProps[] }) => {
   const [selectedItem, setSelectedItem] = useState<number | null>(0);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.agendaListContainer}>
-        <div className={styles.agendaListItemContainer}>
-          {!agendaList || !agendaList.length ? (
-            <div>
-              <div className={styles.emptyContainer}>일정이 없습니다.</div>
+    <>
+      {!agendaList || !agendaList.length ? (
+        <div className={styles.emptyContainer}>일정이 없습니다.</div>
+      ) : (
+        <div className={styles.container}>
+          <div className={styles.agendaListContainer}>
+            <div className={styles.agendaListItemContainer}>
+              {agendaList.map((agendaInfo, idx) => {
+                agendaInfo.idx = idx;
+                return (
+                  <AgendaListItem
+                    agendaInfo={agendaInfo}
+                    key={idx}
+                    idx={idx}
+                    type='list'
+                    className={idx === selectedItem ? styles.selected : ''}
+                    setSelectedItem={setSelectedItem}
+                  />
+                );
+              })}
             </div>
-          ) : (
-            agendaList.map((agendaInfo, idx) => {
-              agendaInfo.idx = idx;
-              return (
-                <AgendaListItem
-                  agendaInfo={agendaInfo}
-                  key={idx}
-                  idx={idx}
-                  type='list'
-                  className={idx === selectedItem ? styles.selected : ''}
-                  setSelectedItem={setSelectedItem}
-                />
-              );
-            })
-          )}
+          </div>
+          <AgendaListItem
+            agendaInfo={agendaList[selectedItem || 0]}
+            idx={selectedItem || 0}
+            type='big'
+          />
         </div>
-      </div>
-      {agendaList.length && (
-        <AgendaListItem
-          agendaInfo={agendaList[selectedItem || 0]}
-          idx={selectedItem || 0}
-          type='big'
-        />
       )}
-    </div>
+    </>
   );
 };
 
