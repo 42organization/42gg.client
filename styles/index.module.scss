@@ -3,19 +3,25 @@
   @include layout;
   grid-template:
     'top top top top' 450px
-    'content content match match' auto / 1fr 1fr 1fr 1fr;
+    'ticket pingpong match match' auto / 1fr 1fr 1fr 1fr;
   max-width: 100%;
   padding-top: 1px;
+  margin: 1rem;
 }
-
 .title {
   @include text(main-menu);
-  margin: 1rem 0 0 1.5rem;
+  margin-bottom: 0rem;
+  margin-left: 2rem;
   font-size: $font-size-l;
 }
 
 .container {
   @include container(1);
+  width: calc(100% - 2rem);
+  @media screen and (min-width: 961px) {
+    width: auto;
+    height: calc(100% - 4.7rem);
+  }
 }
 
 .flex {
@@ -24,8 +30,32 @@
 
 .content {
   grid-area: content;
+  @media screen and (max-width: 960px) {
+    margin: 1rem;
+  }
 }
 
 .match {
   grid-area: match;
+  width: calc(100% - 2rem);
+  .container {
+    width: 100%;
+    height: calc(100% - 4.7rem);
+  }
+}
+
+// grid-template-areas:
+.top,
+.ticket,
+.pingpong {
+  width: 100%;
+}
+.top {
+  grid-area: top;
+}
+.ticket {
+  grid-area: ticket;
+}
+.pingpong {
+  grid-area: pingpong;
 }

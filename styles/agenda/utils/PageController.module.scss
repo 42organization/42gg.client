@@ -3,14 +3,17 @@
 .container {
   width: 100%;
   height: max-content;
-  grid-area: top;
   @include pageContainer;
+  @media screen and (max-width: 960px) {
+    padding: 0 1rem !important;
+  }
 }
 
 .agendaInfoContainer {
   @include container(1);
   @media screen and (min-width: 961px) {
-    height: 360px;
+    height: auto;
+    min-height: 300px;
   }
   position: relative;
   z-index: 0;

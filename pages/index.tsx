@@ -14,12 +14,17 @@ const Index: NextPage = () => {
 
   return (
     <div className={styles.layout}>
-      <h2 className={styles.title} onClick={() => handleNavigation('/agenda')}>
-        Agenda
-      </h2>
-      <PageController handleNavigation={handleNavigation} />
-      <h2 className={styles.title}>Ticket & PingPong</h2>
-      <div className={styles.flex + ' ' + styles.content}>
+      <div className={styles.top}>
+        <h2
+          className={styles.title}
+          onClick={() => handleNavigation('/agenda')}
+        >
+          Agenda
+        </h2>
+        <PageController handleNavigation={handleNavigation} />
+      </div>
+      <div className={styles.ticket}>
+        <h2 className={styles.title}>Ticket</h2>
         <button
           className={styles.container}
           onClick={() => handleNavigation('/agenda/ticket')}
@@ -32,6 +37,9 @@ const Index: NextPage = () => {
             style={{ width: '100%', height: '100%' }}
           />
         </button>
+      </div>
+      <div className={styles.pingpong}>
+        <h2 className={styles.title}>PingPong</h2>
         <button
           className={styles.container}
           onClick={() => handleNavigation('/takgu')}
@@ -40,9 +48,10 @@ const Index: NextPage = () => {
         </button>
       </div>
 
-      <button className={styles.container + ' ' + styles.match}>
-        아우터 매치 준비중입니다.
-      </button>
+      <div className={styles.match}>
+        <h2 className={styles.title}>PingPong</h2>
+        <button className={styles.container}>아우터 매치 준비중입니다.</button>
+      </div>
     </div>
   );
 };
