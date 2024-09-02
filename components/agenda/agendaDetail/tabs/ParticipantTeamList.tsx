@@ -35,31 +35,38 @@ export default function ParticipantTeamList({
   if (!agendaKey) {
     return <div>Loading...</div>;
   }
+  const noParticipants = (
+    <div className={styles.noParticipants}>팀이 없습니다.</div>
+  );
 
   return (
     <>
-      {myTeam ? (
-        <div className={styles.participantsWarp}>
-          <div className={styles.participantsTitle}>내 팀</div>
-
-          <ParticipantTeam
-            key={myTeam.teamName}
-            teamKey={myTeam.teamKey}
-            teamName={myTeam.teamName}
-            teamLeaderIntraId={myTeam.teamLeaderIntraId}
-            teamMateCount={myTeam.teamMateCount}
-            maxMateCount={max}
-            coalitions={myTeam.coalitions}
-          />
-        </div>
-      ) : null}
+      <div className={styles.participantsWarp}>
+        <div className={styles.participantsTitle}>내 팀</div>
+        {myTeam ? (
+          <>
+            <ParticipantTeam
+              key={myTeam.teamName}
+              teamKey={myTeam.teamKey}
+              teamName={myTeam.teamName}
+              teamLeaderIntraId={myTeam.teamLeaderIntraId}
+              teamMateCount={myTeam.teamMateCount}
+              maxMateCount={max}
+              coalitions={myTeam.coalitions}
+            />
+          </>
+        ) : (
+          noParticipants
+        )}
+      </div>
 
       <div className={styles.participantsWarp}>
         <div className={styles.participantsTitle}>
           모집중인 팀 {openTeamsCount}
         </div>
-        {openTeams
-          ? openTeams.map((team) => (
+        {openTeams && openTeamsCount > 0 ? (
+          <>
+            {openTeams.map((team) => (
               <ParticipantTeam
                 key={team.teamName}
                 teamKey={team.teamKey}
@@ -69,17 +76,21 @@ export default function ParticipantTeamList({
                 maxMateCount={max}
                 coalitions={team.coalitions}
               />
-            ))
-          : null}
-        <PageNation {...openTeamPageNationProps} />
+            ))}
+            <PageNation {...openTeamPageNationProps} />
+          </>
+        ) : (
+          noParticipants
+        )}
       </div>
 
       <div className={styles.participantsWarp}>
         <div className={styles.participantsTitle}>
           확정완료 팀 {confirmedTeamsCount} / {max}
         </div>
-        {confirmedTeams
-          ? confirmedTeams.map((team) => (
+        {confirmedTeams && confirmedTeamsCount > 0 ? (
+          <>
+            {confirmedTeams.map((team) => (
               <ParticipantTeam
                 key={team.teamName}
                 teamName={team.teamName}
@@ -88,9 +99,12 @@ export default function ParticipantTeamList({
                 maxMateCount={max}
                 coalitions={team.coalitions}
               />
-            ))
-          : null}
-        <PageNation {...confirmedTeamPageNationProps} />
+            ))}
+            <PageNation {...confirmedTeamPageNationProps} />
+          </>
+        ) : (
+          noParticipants
+        )}
       </div>
     </>
   );
