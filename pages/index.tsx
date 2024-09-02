@@ -39,7 +39,9 @@ const Index: NextPage = () => {
         </button>
       </div>
       <div className={styles.pingpong}>
-        <h2 className={styles.title}>PingPong</h2>
+        <h2 className={styles.title} onClick={() => handleNavigation('/takgu')}>
+          PingPong
+        </h2>
         <button
           className={styles.container}
           onClick={() => handleNavigation('/takgu')}
@@ -49,7 +51,12 @@ const Index: NextPage = () => {
       </div>
 
       <div className={styles.match}>
-        <h2 className={styles.title}>PingPong</h2>
+        <h2
+          className={styles.title}
+          // onClick={() => handleNavigation('/takgu')}
+        >
+          Outer match
+        </h2>
         <button className={styles.container}>아우터 매치 준비중입니다.</button>
       </div>
     </div>
