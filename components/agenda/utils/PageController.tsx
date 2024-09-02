@@ -76,20 +76,9 @@ const PageController = ({
       <button
         className={styles.agendaInfoContainer}
         style={{
-          background: `linear-gradient(0deg, #fff 7rem, rgba(0, 0, 0, 0) 10rem), url(${
+          background: `linear-gradient(180deg, #fff 7rem, rgba(0, 0, 0, 0) 10rem), url(${
             data[current]?.agendaPosterUrl || '/image/agenda/42.jpg'
           }) lightgray 50% / cover no-repeat`,
-        }}
-        onClick={(e) => {
-          const target = e.target as HTMLElement;
-          if (
-            target.className.includes(styles.moveButton) ||
-            target.closest(styles.moveButton)
-          )
-            return;
-          data.length && data[current]
-            ? handleNavigation('/agenda/' + data[current].agendaKey)
-            : null;
         }}
       >
         <button
@@ -98,6 +87,21 @@ const PageController = ({
         >
           <div className={styles.prev} />
         </button>
+        <button
+          onClick={(e) => {
+            const target = e.target as HTMLElement;
+            if (
+              target.className.includes(styles.moveButton) ||
+              target.closest(styles.moveButton)
+            )
+              return;
+            data.length && data[current]
+              ? handleNavigation('/agenda/' + data[current].agendaKey)
+              : null;
+          }}
+          className={styles.toClick}
+        />
+
         <button
           className={`${styles.moveButton} ${styles.moveButtonNext}`}
           onClick={moveNext}
