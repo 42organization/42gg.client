@@ -2,13 +2,14 @@
 
 .modalContainer {
   @include container(modal);
-  z-index: 5000;
+  z-index: 5;
 
   display: flex;
   width: max-content;
   min-width: 20rem;
   height: max-content;
   flex-direction: column;
+  overflow: visible;
   line-height: 150%;
   text-align: center;
   white-space: pre;
@@ -32,6 +33,7 @@
   &.left {
     width: 100%;
     padding: 0 1rem;
+    text-align: left;
   }
 }
 
