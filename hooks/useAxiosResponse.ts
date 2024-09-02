@@ -2,7 +2,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { instance } from 'utils/axios';
+import { instance, instanceInAgenda } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { loginState } from 'utils/recoil/login';
 
@@ -50,6 +50,11 @@ export default function useAxiosResponse() {
     (response: AxiosResponse) => response,
     errorResponseHandler
   );
+  const responseInAgendaInterceptor =
+    instanceInAgenda.interceptors.response.use(
+      (response: AxiosResponse) => response,
+      errorResponseHandler
+    );
 
   useEffect(() => {
     if (localStorage.getItem('42gg-token')) {
@@ -63,6 +68,7 @@ export default function useAxiosResponse() {
   useEffect(() => {
     return () => {
       instance.interceptors.response.eject(responseInterceptor);
+      instance.interceptors.response.eject(responseInAgendaInterceptor);
     };
-  }, [responseInterceptor]);
+  }, [responseInterceptor, responseInAgendaInterceptor]);
 }
