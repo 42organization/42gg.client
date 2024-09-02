@@ -73,7 +73,7 @@ const PageController = ({
 
   return (
     <div className={styles.container}>
-      <button
+      <div
         className={styles.agendaInfoContainer}
         style={{
           background: `linear-gradient(180deg, #fff 7rem, rgba(0, 0, 0, 0) 10rem), url(${
@@ -108,8 +108,8 @@ const PageController = ({
         >
           <div className={styles.next} />
         </button>
-        <AgendaInfo agendaInfo={data[current]} key={current || 0} />
-      </button>
+        <AgendaInfo agendaInfo={data[current]} idx={current || 0} />
+      </div>
       <PageControllerNavigator
         currentPage={current}
         maxPage={data.length}

@@ -23,6 +23,7 @@ const AgendaList = ({ agendaList }: { agendaList: AgendaDataProps[] }) => {
                 <AgendaListItem
                   agendaInfo={agendaInfo}
                   key={idx}
+                  idx={idx}
                   type='list'
                   className={idx === selectedItem ? styles.selected : ''}
                   setSelectedItem={setSelectedItem}
@@ -35,7 +36,7 @@ const AgendaList = ({ agendaList }: { agendaList: AgendaDataProps[] }) => {
       {agendaList.length && (
         <AgendaListItem
           agendaInfo={agendaList[selectedItem || 0]}
-          key={selectedItem || 0}
+          idx={selectedItem || 0}
           type='big'
         />
       )}
@@ -45,13 +46,13 @@ const AgendaList = ({ agendaList }: { agendaList: AgendaDataProps[] }) => {
 
 const AgendaListItem = ({
   agendaInfo,
-  key,
+  idx,
   type,
   className,
   setSelectedItem,
 }: {
   agendaInfo: AgendaDataProps;
-  key: number;
+  idx: number;
   type?: string;
   className?: string;
   setSelectedItem?: (key: number) => void;
@@ -69,7 +70,7 @@ const AgendaListItem = ({
           agendaInfo.agendaPosterUrl || '/image/agenda/42.jpg'
         }) lightgray 50% / cover no-repeat`,
       }}
-      key={key}
+      key={idx}
       onClick={() => {
         if (window.innerWidth < 961) {
           router.push(href);
@@ -82,7 +83,7 @@ const AgendaListItem = ({
         router.push(href);
       }}
     >
-      <AgendaInfo agendaInfo={agendaInfo} key={key} />
+      <AgendaInfo agendaInfo={agendaInfo} idx={idx} />
       <AgendaDeadLine />
     </button>
   );
