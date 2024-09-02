@@ -31,7 +31,6 @@ const MyAgendaBtn = () => {
   };
   const myList =
     useFetchGet<MyTeamDataProps[]>('/profile/current/list')?.data || [];
-  console.log(myList);
   return (
     <div
       className={`${styles.myAgendaContainer} ${
@@ -61,7 +60,7 @@ const MyAgendaBtn = () => {
               key={idx}
             >
               <div className={styles.myagendaItemContainer} key={idx}>
-                <MyTeamInfo myTeamInfo={myTeamInfo} key={idx} />
+                <MyTeamInfo myTeamInfo={myTeamInfo} key={idx} idx={idx} />
               </div>
             </Link>
           ))

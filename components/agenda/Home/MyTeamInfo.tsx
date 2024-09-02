@@ -7,10 +7,10 @@ import styles from 'styles/agenda/Home/MyTeamInfo.module.scss';
 // Props: API data
 const MyTeamInfo = ({
   myTeamInfo,
-  key,
+  idx,
 }: {
   myTeamInfo: MyTeamDataProps;
-  key: number;
+  idx: number;
 }) => {
   if (!myTeamInfo) {
     return <div>참가중인 일정이 없습니다.</div>;
@@ -19,7 +19,7 @@ const MyTeamInfo = ({
   const startDate = new Date(myTeamInfo.agendaStartTime as string);
   //아래 주석달린 부분은 api 변경시 추가 예정입니다.
   return (
-    <div className={styles.Container} key={key}>
+    <div className={styles.Container} key={idx}>
       <div className={agendastyles.agendaDateBox}>
         <div className={agendastyles.agendaStartDateMonth}>
           {fillZero(`${startDate.getMonth()}`, 2)}
