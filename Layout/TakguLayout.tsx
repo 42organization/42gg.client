@@ -32,7 +32,7 @@ function TakguLayout({ children }: TakguLayoutProps) {
   const presentPath = usePathname();
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
 
-  useAxiosResponse();
+  // useAxiosResponse();
   useGetUserSeason(presentPath);
   useSetAfterGameModal();
   useLiveCheck(presentPath);

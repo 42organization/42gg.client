@@ -4,6 +4,7 @@ import AdminAppLayout from 'Layout/AdminLayout';
 import AgendaAppLayout from 'Layout/AgendaLayout';
 import TakguAppLayout from 'Layout/TakguLayout';
 import { usePathname } from 'hooks/agenda/Layout/usePathname';
+import useAxiosResponse from 'hooks/useAxiosResponse';
 
 type LayoutProviderProps = {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ type LayoutProviderProps = {
 // 로그인 스테이트 등은 각 레이아웃에서 확인
 const LayoutProvider = ({ children }: LayoutProviderProps) => {
   const isLogin = useRecoilValue(loginState);
+  useAxiosResponse();
   console.log(isLogin);
   const app = usePathname();
   switch (app) {
