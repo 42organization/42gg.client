@@ -12,13 +12,13 @@ type LayoutProviderProps = {
 const LayoutProvider = ({ children }: LayoutProviderProps) => {
   const app = usePathname();
   switch (app) {
-    case '':
     case 'agenda':
       return <AgendaAppLayout>{children}</AgendaAppLayout>;
     case 'takgu':
       return <TakguAppLayout>{children}</TakguAppLayout>;
     case 'admin':
       return <AdminAppLayout>{children}</AdminAppLayout>;
+    case '':
     default:
       return <>{children}</>;
   }
