@@ -20,7 +20,9 @@ const MyTeamInfo = ({
 
   return (
     <Link
-      href={`/agenda/${myTeamInfo.agendaKey}/${myTeamInfo.teamKey}`}
+      href={`/agenda/${myTeamInfo.agendaKey}${
+        myTeamInfo.teamKey ? '/' + myTeamInfo.teamKey : ''
+      }`}
       key={idx}
     >
       <div className={styles.Container} key={idx}>

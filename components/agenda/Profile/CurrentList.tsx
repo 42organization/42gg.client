@@ -18,11 +18,9 @@ const CurrentList = ({
       <div className={styles.currentListItems}>
         {currentListData.length !== 0 ? (
           currentListData.map((data: MyTeamDataProps, idx: number) => (
-            <Link href={`/agenda/${data.agendaKey}/${data.teamKey}`} key={idx}>
-              <div className={styles.myagendaItemContainer} key={idx}>
-                <MyTeamInfo myTeamInfo={data} key={idx} idx={idx} />
-              </div>
-            </Link>
+            <div className={styles.myagendaItemContainer} key={idx}>
+              <MyTeamInfo myTeamInfo={data} key={idx} idx={idx} />
+            </div>
           ))
         ) : (
           <div className={styles.currentTeamEmpty}>
