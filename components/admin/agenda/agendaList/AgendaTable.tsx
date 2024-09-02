@@ -123,6 +123,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
       { agenda_key: agendaKey },
       (data) => {
         alert('취소 요청이 성공적으로 전송되었습니다.');
+        getAgendaList();
       },
       (error) => {
         alert('취소 요청에 실패했습니다: ' + error);
