@@ -41,7 +41,7 @@ const PageController = ({
   const max = data.length;
 
   const fetchAgendaList = async () => {
-    const url = '/list';
+    const url = '/open';
     const data = await instanceInAgenda
       .get(url)
       .then((res) => {
