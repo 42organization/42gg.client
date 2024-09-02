@@ -88,8 +88,9 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
   const { openModal, closeModal } = useModal();
 
   const buttonList: string[] = [
-    styles.detail,
     styles.delete,
+    styles.default,
+    styles.detail,
     styles.coin,
     styles.penalty,
   ];
@@ -155,6 +156,18 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
         break;
       case '공지사항':
         router.push(`/admin/agenda/announcements?agendaKey=${agendaKey}`);
+        break;
+      case '포스터':
+        if (!agenda.agendaPosterUrl) {
+          alert('포스터가 없습니다.');
+          return;
+        }
+        openModal({
+          type: 'notice',
+          title: '포스터',
+          description: "포스터 수정은 '자세히' 버튼을 눌러주세요.",
+          image: agenda.agendaPosterUrl,
+        });
         break;
     }
   };
