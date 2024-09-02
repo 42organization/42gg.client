@@ -8,10 +8,10 @@ import styles from 'styles/agenda/Home/AgendaInfo.module.scss';
 // Props: API data
 const AgendaInfo = ({
   agendaInfo,
-  key,
+  idx,
 }: {
   agendaInfo: AgendaDataProps;
-  key: number;
+  idx: number;
 }) => {
   if (!agendaInfo) {
     return <div>There is no agenda</div>;
@@ -20,7 +20,7 @@ const AgendaInfo = ({
   const endDate = new Date(agendaInfo.agendaEndTime);
 
   return (
-    <div className={styles.agendaInfoContainer} key={key}>
+    <div className={styles.agendaInfoContainer} key={idx}>
       <div className={styles.agendaDateBox}>
         <div className={styles.agendaStartDateMonth}>
           {fillZero(`${startDate.getMonth()}`, 2)}

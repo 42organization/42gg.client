@@ -73,14 +73,14 @@ const AgendaForm = ({
     if (!Array.isArray(newValue)) {
       return;
     }
-
     if (newValue[1] - newValue[0] < minDistance) {
       if (activeThumb === 0) {
         const clamped = Math.min(newValue[0], 100 - minDistance);
         setTeamLimit([clamped, clamped + minDistance]);
       } else {
         const clamped = Math.max(newValue[1], minDistance);
-        setTeamLimit([clamped - minDistance, clamped]);
+        if (clamped - minDistance < newValue[0]) setTeamLimit([2, 12]);
+        else setTeamLimit([clamped - minDistance, clamped]);
       }
     } else {
       setTeamLimit(newValue as number[]);
