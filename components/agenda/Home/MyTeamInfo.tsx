@@ -35,14 +35,20 @@ const MyTeamInfo = ({
         </div>
         <div className={styles.infoContainer}>
           <div className={styles.teamInfoContainer}>
-            <h2 className={styles.teamTitle}>{myTeamInfo.teamName}</h2>
-            <div className={styles.agendaTagBox}>
-              {myTeamInfo.teamStatus === 'OPEN' ? (
-                <AgendaTag tagName='모집중' />
-              ) : (
-                <AgendaTag tagName='확정팀' />
-              )}
-            </div>
+            {myTeamInfo.teamName ? (
+              <>
+                <h2 className={styles.teamTitle}>{myTeamInfo.teamName}</h2>
+                <div className={styles.agendaTagBox}>
+                  {myTeamInfo.teamStatus === 'OPEN' ? (
+                    <AgendaTag tagName='모집중' />
+                  ) : (
+                    <AgendaTag tagName='확정팀' />
+                  )}
+                </div>
+              </>
+            ) : (
+              ''
+            )}
           </div>
           <div className={styles.agendaInfoContainer}>
             <h3 className={styles.agendaTitle}>{myTeamInfo.agendaTitle}</h3>
