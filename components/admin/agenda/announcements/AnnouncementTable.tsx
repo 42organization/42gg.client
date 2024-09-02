@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import { Description } from '@mui/icons-material';
 import {
   MenuItem,
   Paper,
@@ -36,7 +35,7 @@ const tableTitle: { [key: string]: string } = {
 export interface IAnnouncement {
   id: number;
   title: string;
-  contents: string;
+  content: string;
   isShow: boolean;
   createdAt: string;
 }
