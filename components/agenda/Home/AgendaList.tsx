@@ -76,7 +76,11 @@ const AgendaListItem = ({
           router.push(href);
           return;
         }
-        if (type === 'list' && setSelectedItem && agendaInfo.idx) {
+        if (
+          type === 'list' &&
+          setSelectedItem &&
+          typeof agendaInfo.idx === 'number'
+        ) {
           setSelectedItem(agendaInfo.idx);
           return;
         }
