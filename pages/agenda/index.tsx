@@ -34,20 +34,28 @@ const Agenda: NextPage = () => {
           <h2>AGENDA LIST</h2>
           <div>
             <button
-              className={`${listStyles.agendaListStatus} ${
-                showCurrent ? listStyles.selectedStatus : ''
-              }`}
+              className={`${listStyles.agendaListStatus} 
+                ${showCurrent === 'open' ? listStyles.selectedStatus : ''}`}
               name='ongoing'
-              onClick={toggleStatus}
+              onClick={() => setShowCurrent('open')}
+            >
+              모집중
+            </button>
+            {' | '}
+            <button
+              className={`${listStyles.agendaListStatus} 
+            ${showCurrent === 'current' ? listStyles.selectedStatus : ''}`}
+              name='closed'
+              onClick={() => setShowCurrent('current')}
             >
               진행중
             </button>
             {' | '}
             <button
               className={`${listStyles.agendaListStatus} 
-            ${showCurrent ? '' : listStyles.selectedStatus}`}
+              ${showCurrent === 'history' ? listStyles.selectedStatus : ''}`}
               name='closed'
-              onClick={toggleStatus}
+              onClick={() => setShowCurrent('history')}
             >
               종료된
             </button>
