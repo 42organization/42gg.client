@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   CurrentListProps,
   CurrentItemProps,
@@ -13,10 +14,16 @@ const CurrentList = ({ currentListData, isHost }: CurrentListProps) => {
       <div className={styles.currentListItems}>
         {currentListData.length !== 0 ? (
           currentListData.map((data: CurrentItemProps) => (
-            <div key={data.agendaId} className={styles.currentItemWrapper}>
-              <div className={styles.teamName}>{data.agendaTitle}</div>
-              <div className={styles.title}>{data.teamName}</div>
-            </div>
+            <Link
+              href={`/agenda/${data.agendaKey}`}
+              className={styles.historyItem}
+              key={data.agendaId}
+            >
+              <div key={data.agendaId} className={styles.currentItemWrapper}>
+                <div className={styles.teamName}>{data.agendaTitle}</div>
+                <div className={styles.title}>{data.teamName}</div>
+              </div>
+            </Link>
           ))
         ) : (
           <div className={styles.currentTeamEmpty}>

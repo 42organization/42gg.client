@@ -28,7 +28,7 @@ const AgendaProfile = () => {
   const {
     content: hostCurrentListData,
     PagaNationElementProps: PagaNationHostCurrent,
-  } = usePageNation<HistoryItemProps>({
+  } = usePageNation<CurrentItemProps>({
     url: `/host/current/list/${intraId}`,
   });
 
@@ -50,7 +50,8 @@ const AgendaProfile = () => {
     url: `/profile/history/list/${intraId}`,
   });
 
-  console.log(profileData);
+  console.log('hostCurrentListData:', hostCurrentListData);
+  console.log('currentListData:', currentListData);
 
   return (
     <>

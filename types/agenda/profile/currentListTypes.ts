@@ -1,4 +1,5 @@
 export interface CurrentItemProps {
+  agendaKey: string;
   agendaId: string;
   agendaTitle: string;
   agendaLocation: string;
