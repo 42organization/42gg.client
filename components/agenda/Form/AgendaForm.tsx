@@ -39,6 +39,7 @@ const AgendaForm = ({
   tommorrow.setDate(today.getDate() + 1);
   tommorrow.setHours(0);
   tommorrow.setMinutes(0);
+  tommorrow.setSeconds(0);
   tommorrow.setMilliseconds(0);
   const startDate = new Date();
   const endDate = new Date();
@@ -99,6 +100,7 @@ const AgendaForm = ({
   const handleRecruitEnd = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.value) return;
     const newEnd = new Date(e.target.value);
+    console.log(newEnd);
     checkWarn(newEnd, 0);
     setRecruitEnd(new Date(e.target.value));
   };
@@ -124,6 +126,10 @@ const AgendaForm = ({
     const newWarning = [...dateWarn];
     const DateValues = [recruitEnd, dateRange[0], dateRange[1]];
     DateValues[index] = newDate;
+    tommorrow.setHours(0);
+    tommorrow.setMinutes(0);
+    tommorrow.setSeconds(0);
+    tommorrow.setMilliseconds(0);
     // 모집마감일 오류
     if (DateValues[0].getTime() < tommorrow.getTime()) {
       newWarning[0] = '내일 이후의 날짜를 선택해주세요';
