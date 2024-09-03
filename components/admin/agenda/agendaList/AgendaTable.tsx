@@ -178,6 +178,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
       const getData = await instanceInAgenda.get(
         `/admin/request/list?page=${currentPage}&size=${itemsPerPage}`
       );
+
       const filteredAgendaList = getData.data.content.filter(
         (agenda: IAgenda) => {
           const matchesStatus = status ? agenda.agendaStatus === status : true;
@@ -213,9 +214,9 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
       case AgendaStatus.CANCEL:
         return '취소';
       case AgendaStatus.OPEN:
-        return '진행 중';
+        return '모집 중';
       case AgendaStatus.CONFIRM:
-        return '확정';
+        return '진행 중';
       case AgendaStatus.FINISH:
         return '진행완료';
       default:
