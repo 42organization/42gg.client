@@ -1,5 +1,10 @@
 @import '../common.scss';
 
+.agendaItemTagBox {
+  display: flex;
+  gap: 0.3rem;
+}
+
 $tags: (
   공식: $color-tag-official,
   비공식: $color-tag-common,

@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
-import { showPeriod, fillZero } from 'utils/handleTime';
-import { AgendaTag } from 'components/agenda/utils/AgendaTag';
-import { isSoloTeam } from 'components/agenda/utils/team';
+import { showPeriod } from 'utils/handleTime';
+import AgendaTags from 'components/agenda/utils/AgendaTags';
+import StartDate from 'components/agenda/utils/StartDate';
 import styles from 'styles/agenda/Home/AgendaInfo.module.scss';
-import StartDate from '../utils/StartDate';
 
 // Props: API data
 const AgendaInfo = ({
@@ -58,19 +57,7 @@ const AgendaInfo = ({
             </div>
           </div>
         </div>
-
-        <div className={styles.agendaItemTagBox}>
-          {agendaInfo.isOfficial && <AgendaTag tagName='공식' />}
-          {isSoloTeam(
-            agendaInfo.agendaMinPeople,
-            agendaInfo.agendaMaxPeople
-          ) ? (
-            <AgendaTag tagName='개인' />
-          ) : (
-            <AgendaTag tagName='팀' />
-          )}
-          {agendaInfo.isRanking && <AgendaTag tagName='대회' />}
-        </div>
+        {AgendaTags(agendaInfo)}
       </div>
     </div>
   );
