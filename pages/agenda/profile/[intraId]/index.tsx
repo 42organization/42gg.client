@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { CurrentItemProps } from 'types/agenda/profile/currentListTypes';
+import { MyTeamDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { HistoryItemProps } from 'types/agenda/profile/historyListTypes';
 import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
 import AgendaUserSearchBar from 'components/agenda/Profile/AgendaUserSearchBar';
@@ -25,17 +25,20 @@ const AgendaProfile = () => {
       isMyProfile ? '/profile' : `/profile/${intraId}`
     );
 
+  // host current
   const {
     content: hostCurrentListData,
     PagaNationElementProps: PagaNationHostCurrent,
-  } = usePageNation<HistoryItemProps>({
+  } = usePageNation<MyTeamDataProps>({
     url: `/host/current/list/${intraId}`,
   });
 
-  const currentListData = useFetchGet<CurrentItemProps[]>(
+  // current team
+  const currentListData = useFetchGet<MyTeamDataProps[]>(
     '/profile/current/list'
   ).data;
 
+  // host history
   const {
     content: hostHistoryListData,
     PagaNationElementProps: PagaNationHostHistory,
@@ -43,6 +46,7 @@ const AgendaProfile = () => {
     url: `/host/history/list/${intraId}`,
   });
 
+  // history
   const {
     content: historyListData,
     PagaNationElementProps: PagaNationHistory,

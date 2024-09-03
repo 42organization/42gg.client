@@ -4,7 +4,7 @@ import styles from 'styles/agenda/agendaDetail/tabs/AgendaDescription.module.scs
 
 export default function AgendaDescription({ agendaData }: AgendaProps) {
   const {
-    agendaContents,
+    agendaContent,
     agendaDeadLine,
     agendaStartTime,
     agendaEndTime,
@@ -18,7 +18,7 @@ export default function AgendaDescription({ agendaData }: AgendaProps) {
         <div className={styles.descriptionTitle}>대회 정보</div>
         <div className={styles.descriptionWarp}>
           <div className={styles.descriptionItem}>
-            <h3>간단 설명</h3> {agendaContents}
+            <h3>간단 설명</h3> {agendaContent}
           </div>
           <div className={styles.descriptionItem}>
             <h3>모집 완료 기간</h3> ~ {formatDate(agendaDeadLine)}
