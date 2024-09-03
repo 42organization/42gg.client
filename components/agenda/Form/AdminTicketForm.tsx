@@ -50,15 +50,6 @@ const AdminTicketForm = ({ stringKey, data, onProceed }: userFormProps) => {
     jsonData.isApproved = isApproved;
     jsonData.isUsed = isUsed;
 
-    if (!jsonData.issuedFromKey) {
-      alert('발급처는 반드시 선택해야 합니다.');
-      return;
-    }
-    if ((jsonData.isUsed || jsonData.usedAt) && !jsonData.usedToKey) {
-      alert('사용처는 반드시 선택해야 합니다.');
-      return;
-    }
-
     sendRequest(
       'PATCH',
       'admin/ticket',
@@ -81,14 +72,18 @@ const AdminTicketForm = ({ stringKey, data, onProceed }: userFormProps) => {
       className={styles.container}
     >
       <div className={styles.modalContainer}>
-        <div className={styles.label_title}>IntraId : {stringKey}</div>
+        <div className={styles.label_text}>IntraId : {stringKey}</div>
         <div className={styles.topContainer}>
+          <div className={styles.description}>
+            발급처를 선택하지 않으면 <span>42Intra</span> 로 발급됩니다.
+          </div>
           <div className={styles.inputContainer}>
             <h3>발급처</h3>
             <AgendaSelect
               selectedKey={issuedFromKey}
               dataList={agendaList}
               handleSelectChange={handleissuedFrom}
+              defaultSelect='42Intra'
             />
           </div>
           <div className={styles.inputContainer}>
@@ -97,6 +92,7 @@ const AdminTicketForm = ({ stringKey, data, onProceed }: userFormProps) => {
               selectedKey={usedToKey}
               dataList={agendaList}
               handleSelectChange={handleusedTo}
+              defaultSelect='42Intra'
             />
           </div>
           <div className={styles.bottomContainer}>
