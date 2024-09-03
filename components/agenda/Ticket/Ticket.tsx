@@ -13,8 +13,7 @@ const Ticket = ({ type }: { type: string }) => {
   const { openModal } = useModal();
 
   return (
-    <div className={styles.pageContainer}>
-      {' '}
+    <>
       {type === 'page' ? (
         <div className={styles.container}>
           <h1 className={styles.h1}>내 티켓</h1>
@@ -87,7 +86,7 @@ const Ticket = ({ type }: { type: string }) => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
