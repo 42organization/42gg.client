@@ -11,3 +11,15 @@
   display: flex;
   justify-content: center;
 }
+
+.container {
+  @include container(1);
+  width: 100%;
+  flex: 1 0 0;
+
+  flex-direction: column;
+  padding: 1.5rem;
+  margin: 0;
+  gap: 1rem;
+  align-items: flex-start;
+}

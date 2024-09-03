@@ -2,6 +2,12 @@
 
 .Container {
   display: flex;
+  max-width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: var(--box-bg-1);
+  border: var(--default-border);
+  border-radius: $radius-medium;
+  box-shadow: var(--default-box-shadow);
   gap: 1rem;
 }
 

@@ -12,3 +12,12 @@
 .participantsTitle {
   @include text('sub-title');
 }
+
+.noParticipants {
+  @include text('default');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
