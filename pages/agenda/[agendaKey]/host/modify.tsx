@@ -34,7 +34,7 @@ const ModifyAgenda = () => {
 
   const confirmAgenda = () => {
     if (agendaStatus && agendaStatus === AgendaStatus.OPEN) {
-      handleClick('행사를 확정지으시겠습니까?', () => {
+      handleClick('행사를 확정하시겠습니까?', () => {
         sendRequest('PATCH', `confirm`, {}, { agenda_key: agendaKey });
         router.push(`/agenda/${agendaKey}`);
       });

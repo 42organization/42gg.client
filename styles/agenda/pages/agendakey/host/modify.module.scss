@@ -2,6 +2,7 @@
 
 .container {
   @include container(1);
+  width: 90%;
   padding: 3rem;
   text-align: left;
   gap: 3rem;
