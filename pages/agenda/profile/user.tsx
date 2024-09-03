@@ -14,8 +14,7 @@ import usePageNation from 'hooks/agenda/usePageNation';
 import styles from 'styles/agenda/Profile/AgendaProfile.module.scss';
 
 const AgendaProfile = () => {
-  const router = useRouter();
-  const { intraId } = router.query; // URL 상의 intraId
+  const intraId = useRouter().query.id;
   const userIntraId = useUser()?.intraId; // 현재 나의 intraId
   const isMyProfile = intraId === userIntraId ? true : false;
 
@@ -53,8 +52,6 @@ const AgendaProfile = () => {
   } = usePageNation<HistoryItemProps>({
     url: `/profile/history/list/${intraId}`,
   });
-
-  console.log(profileData);
 
   return (
     <>
