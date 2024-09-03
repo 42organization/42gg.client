@@ -28,11 +28,11 @@ function AgendaAppLayout({ children }: AgendaLayoutProps) {
       <div className={styles.app}>
         {children}
         <Footer />
-        <AgendaModalProvider />
       </div>
       <button onClick={scrollToTop} className={styles.floatingButton}>
         ↑
       </button>
+      <AgendaModalProvider />
     </>
   );
 }
