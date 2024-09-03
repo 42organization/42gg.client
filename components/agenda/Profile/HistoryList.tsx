@@ -3,7 +3,7 @@ import {
   HistoryListProps,
   HistoryItemProps,
 } from 'types/agenda/profile/historyListTypes';
-import AgendaTag from 'components/agenda/utils/AgendaTag';
+import { AgendaTag } from 'components/agenda/utils/AgendaTag';
 import { countHistoryCoalitions } from 'components/agenda/utils/coalition/countCoalitions';
 import ColorList from 'components/agenda/utils/ColorList';
 import TeamIcon from 'public/image/agenda/rock-and-roll-hand.svg';

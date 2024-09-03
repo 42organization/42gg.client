@@ -85,11 +85,13 @@ function TakguLayout({ children }: TakguLayoutProps) {
 }
 const TakguAppLayout = ({ children }: TakguLayoutProps) => {
   return (
-    <UserLayout>
-      <TakguLayout>{children}</TakguLayout>
+    <>
+      <UserLayout>
+        <TakguLayout>{children}</TakguLayout>
+        <CustomizedSnackbars />
+      </UserLayout>
       <ModalProvider />
-      <CustomizedSnackbars />
-    </UserLayout>
+    </>
   );
 };
 
