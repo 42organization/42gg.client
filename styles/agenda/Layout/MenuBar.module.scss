@@ -20,24 +20,11 @@
   transition: all 0.5s;
 }
 
-.inactivebg {
-  right: 100vw;
-  background: rgba(0, 0, 0, 0);
-  transition: all 0.5s;
-}
-.activebg {
-  right: 0;
-  background: var(--box-bg-3);
-  transition: all 0.5s;
-}
-
 .bg {
   position: fixed;
   z-index: 1998;
   width: 100vw;
   height: 100vh;
-  box-shadow: 5px 0 20px 10px var(--box-bg-3);
-  opacity: 0.5;
 }
 .button {
   display: flex;

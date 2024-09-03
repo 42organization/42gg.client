@@ -67,9 +67,7 @@ const MenuBar = ({ headerstate }: { headerstate: HeaderContextState }) => {
       </div>
 
       <div
-        className={`${styles.bg} ${
-          headerstate.openMenuState ? styles.activebg : styles.inactivebg
-        }`}
+        className={`${styles.bg}`}
         onClick={headerstate.resetOpenMenuBarState}
       />
     </>
