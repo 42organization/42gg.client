@@ -69,3 +69,10 @@
   margin: 0.5rem 0;
   border-bottom: var(--default-border);
 }
+
+.inactivebg {
+  z-index: -100;
+}
+.activebg {
+  z-index: 300;
+}
