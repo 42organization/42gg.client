@@ -12,4 +12,9 @@ const AgendaTag: React.FC<AgendaTagProps> = ({ tagName }) => {
   );
 };
 
-export default AgendaTag;
+const DefaultTag = ({ tagName }: AgendaTagProps) => {
+  if (!tagName) return null;
+  return <div className={`${styles.defaultTag}`}>#{tagName}</div>;
+};
+
+export { AgendaTag, DefaultTag };

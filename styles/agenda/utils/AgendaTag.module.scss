@@ -23,5 +23,19 @@ $tags: (
   border-radius: $radius-medium;
   justify-content: center;
   align-items: center;
-  @include text(description);
+  @include text(description-regular);
+}
+
+.defaultTag {
+  display: flex;
+  width: 3.3rem;
+  height: 1.2rem;
+  padding: 0.2rem;
+
+  background-color: var(--box-bg-2-light);
+  // box-shadow: var(--box-shadow-light);
+  border-radius: $radius-medium;
+  justify-content: center;
+  align-items: center;
+  @include text(description-regular);
 }
