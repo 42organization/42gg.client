@@ -1,3 +1,5 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
@@ -28,6 +30,22 @@ const AgendaDetail = () => {
   return (
     <>
       <div className={styles.agendaDetailWrap}>
+        <div className={styles.webWrapper}>
+          <Link href={`/agenda`}>
+            <button className={styles.webViewBtn}>
+              <div className={styles.imageWrapper}>
+                <Image
+                  src='/image/agenda/ArrowRight.svg'
+                  width={35}
+                  height={35}
+                  alt='Create Agenda'
+                  className={styles.imageBox}
+                />
+              </div>
+              <div>{` 행사 목록 보기`}</div>
+            </button>
+          </Link>
+        </div>
         {agendaData ? (
           <>
             <AgendaInfo
