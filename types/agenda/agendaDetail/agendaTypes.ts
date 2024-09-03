@@ -2,7 +2,7 @@ import { AgendaLocation, AgendaStatus } from 'constants/agenda/agenda';
 
 export interface AgendaDataProps {
   agendaTitle: string;
-  agendaContents: string;
+  agendaContent: string;
   agendaDeadLine: Date | string; // format: 2024-09-01T04:35:07
   agendaStartTime: Date | string;
   agendaEndTime: Date | string;

@@ -1,4 +1,3 @@
-import { json } from 'stream/consumers';
 import { useState } from 'react';
 import { ITicket } from 'types/agenda/ticket/ticketTypes';
 import AgendaSelect from 'components/agenda/Input/AgendaSelect';
