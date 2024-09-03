@@ -20,7 +20,7 @@ export default function ParticipantsList({ max }: numberProps) {
 
   const curPeople = participants ? participants.length : 0;
   if (!participants) {
-    return <div>Loading...</div>;
+    return <div className={styles.noParticipants}>Loading...</div>;
   }
 
   return (
@@ -28,18 +28,22 @@ export default function ParticipantsList({ max }: numberProps) {
       <div className={styles.participantsTitle}>
         참여자 {curPeople} / {max}
       </div>
-      <div className={styles.ListContainer}>
-        <div className={styles.participantsContainer}>
-          {participants.map((participant, index) => (
-            <Participant
-              key={index}
-              teamName={participant.teamName}
-              coalitions={participant.coalitions}
-            />
-          ))}
+      {curPeople > 0 ? (
+        <div className={styles.ListContainer}>
+          <div className={styles.participantsContainer}>
+            {participants.map((participant, index) => (
+              <Participant
+                key={index}
+                teamName={participant.teamName}
+                coalitions={participant.coalitions}
+              />
+            ))}
+          </div>
+          <PageNation {...PagaNationElementProps} />
         </div>
-        <PageNation {...PagaNationElementProps} />
-      </div>
+      ) : (
+        <div className={styles.noParticipants}>참여자가 없습니다.</div>
+      )}
     </>
   );
 }

@@ -36,7 +36,7 @@ const tableTitle: { [key: string]: string } = {
 export interface IAnnouncement {
   id: number;
   title: string;
-  contents: string;
+  content: string;
   isShow: boolean;
   createdAt: string;
 }

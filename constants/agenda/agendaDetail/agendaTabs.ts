@@ -3,6 +3,7 @@ export const TABS = {
   PARTICIPANTS: '참여자',
   NOTIFICATIONS: '공지',
   CONDITIONS: '조건',
+  POSTER: '포스터',
 } as const;
 
 export type TabKeys = keyof typeof TABS;

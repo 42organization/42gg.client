@@ -3,6 +3,7 @@ import AgendaAnnouncements from 'components/agenda/agendaDetail/tabs/AgendaAnnou
 import AgendaConditions from 'components/agenda/agendaDetail/tabs/AgendaConditions';
 import AgendaDescription from 'components/agenda/agendaDetail/tabs/AgendaDescription';
 import AgendaParticipants from 'components/agenda/agendaDetail/tabs/AgendaParticipants';
+import AgendaPoster from 'components/agenda/agendaDetail/tabs/AgendaPoster';
 import styles from 'styles/agenda/agendaDetail/AgendaTab.module.scss';
 
 export default function TabContent({
@@ -22,6 +23,8 @@ export default function TabContent({
         return <AgendaAnnouncements isHost={isHost} />;
       case tabs.CONDITIONS:
         return <AgendaConditions agendaData={agendaData} />;
+      case tabs.POSTER:
+        return <AgendaPoster poster={agendaData.agendaPosterUrl} />;
       default:
         return null;
     }
