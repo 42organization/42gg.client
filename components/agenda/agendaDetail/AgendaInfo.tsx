@@ -3,9 +3,11 @@ import { AgendaInfoProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes'
 import { AgendaStatus } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
+import AgendaTags from 'components/agenda/utils/AgendaTags';
 import { isSoloTeam } from 'components/agenda/utils/team';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/agendaDetail/AgendaInfo.module.scss';
+import StartDate from '../utils/StartDate';
 
 interface CallbackProps {
   router: NextRouter;
@@ -156,11 +158,14 @@ export default function AgendaInfo({
       >
         <div className={styles.infoWarp}>
           <div className={styles.contentWarp}>
+            <div className={styles.web}>
+              {StartDate(agendaData.agendaStartTime as string)}
+            </div>
             <h2>{agendaTitle}</h2>
             <div className={styles.organizerWrap}>
               <span>주최자 : {agendaHost}</span>
             </div>
-            <div className={styles.mobile}>{tagButton(agendaData)}</div>
+            <div className={styles.mobile}>{AgendaTags(agendaData)}</div>
             <div className={styles.buttonWarp}>
               {isAgendaDetail && <ShareBtn onClick={copyLink} />}
               {isAgendaDetail && buttonData && (

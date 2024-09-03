@@ -32,7 +32,7 @@ $info-gradient: linear-gradient(
 
   @media screen and (min-width: 961px) {
     width: 100%;
-    height: 5rem !important;
+    height: 4rem !important;
     border-radius: 10rem;
   }
 }
@@ -42,8 +42,10 @@ $info-gradient: linear-gradient(
   right: 1.5rem;
   bottom: 1.5rem;
   left: 1.5rem;
+  align-items: center;
   @media screen and (min-width: 961px) {
-    bottom: 1rem;
+    top: auto;
+    bottom: auto;
   }
 }
 
@@ -69,7 +71,13 @@ $info-gradient: linear-gradient(
 .shareBtn {
   cursor: pointer;
 }
-
+.titleWrap {
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
 .organizerWrap {
   @include text('default'); // medium
   margin-right: auto; // UploadBtn과의 간격 확보
@@ -84,19 +92,23 @@ $info-gradient: linear-gradient(
   gap: 0.8rem;
 
   @media screen and (max-width: 960px) {
-    bottom: 56%;
+    bottom: 0%;
   }
 
   @media screen and (min-width: 961px) {
+    position: relative;
     bottom: 18%;
-    flex-direction: row-reverse; // 가로 배치
+    flex-direction: row; // 가로 배치
     justify-content: flex-end; // 오른쪽 정렬
     align-items: center; // 세로 중앙 정렬
     gap: 1rem;
   }
 }
 
-.agendaItemTagBox {
-  display: flex;
-  gap: 0.3rem;
+.mobile {
+  @include gridHidden(mobile);
+}
+.web {
+  @include gridHidden(web);
+  width: max-content;
 }
