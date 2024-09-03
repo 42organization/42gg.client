@@ -1,0 +1,9 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  @include container(1);
+  padding: 3rem;
+  text-align: left;
+  gap: 3rem;
+  @include text('default');
+}
