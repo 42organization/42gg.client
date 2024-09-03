@@ -20,7 +20,7 @@ const MyTeamInfo = ({
 
   return (
     <Link
-      href={`/agenda/${myTeamInfo.agendaKey}${
+      href={`/agenda/detail?agenda_key=${myTeamInfo.agendaKey}${
         myTeamInfo.teamKey ? '/' + myTeamInfo.teamKey : ''
       }`}
       key={idx}

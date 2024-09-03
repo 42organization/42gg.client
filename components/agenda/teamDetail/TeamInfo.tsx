@@ -19,7 +19,7 @@ const TeamInfo = ({
 }: TeamInfoProps) => {
   // EditTeam UI <-> TeamInfo UI 전환
   const router = useRouter();
-  const { agendaKey } = router.query;
+  const agendaKey = router.query.agenda_key;
   const [convert, setConvert] = useState(true);
 
   const handleConvert = () => {

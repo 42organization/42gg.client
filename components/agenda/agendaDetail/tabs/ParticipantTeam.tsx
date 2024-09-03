@@ -23,7 +23,7 @@ export default function ParticipantTeam({
   coalitions,
 }: ParticipantTeamProps) {
   const router = useRouter();
-  const { agendaKey } = router.query;
+  const agendaKey = router.query.agenda_key;
   const coalitionEnum = getCoalitionEnum(coalitions);
   const peopleCount = countCoalitions(coalitionEnum);
 
@@ -56,7 +56,7 @@ export default function ParticipantTeam({
       {teamKey ? (
         <Link
           className={styles.participantTeamContainer}
-          href={`/agenda/${agendaKey}/${teamKey}`}
+          href={`/agenda/detail/team?agenda_key=${agendaKey}&team_key=${teamKey}`}
         >
           {content}
           {colorList}

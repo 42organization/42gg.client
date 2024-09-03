@@ -13,8 +13,8 @@ import styles from 'styles/agenda/TeamDetail/TeamDetail.module.scss';
 
 export default function TeamDetail() {
   const router = useRouter();
-  const { agendaKey } = router.query;
-  const { teamUID } = router.query;
+  const agendaKey = router.query.agenda_key;
+  const teamUID = router.query.tema_key;
 
   /**
    * API GET DATA
@@ -81,7 +81,6 @@ export default function TeamDetail() {
           router.push(`/agenda/${agendaKey}`);
         } else {
           // 그 외 API : 팀 상세 데이터 갱신
-
           getTeamDetail();
         }
       },
@@ -94,7 +93,10 @@ export default function TeamDetail() {
   return (
     <div className={styles.teamDetail}>
       {agendaData && (
-        <Link href={`/agenda/${agendaKey}`} className={styles.agendaLink}>
+        <Link
+          href={`/agenda/detail?agenda_key=${agendaKey}`}
+          className={styles.agendaLink}
+        >
           <AgendaInfo agendaData={agendaData} />
         </Link>
       )}

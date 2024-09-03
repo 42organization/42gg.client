@@ -12,7 +12,7 @@ export default function ParticipantTeamList({
   myTeam,
 }: ParticipantTeamListProps) {
   const router = useRouter();
-  const { agendaKey } = router.query;
+  const agendaKey = router.query.agenda_key;
 
   const {
     content: openTeams,

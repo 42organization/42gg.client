@@ -25,7 +25,7 @@ const hostMode = ({ router, agendaKey }: CallbackProps) => {
 };
 
 const subscribeTeam = ({ router, agendaKey }: CallbackProps) => {
-  router.push(`/agenda/${agendaKey}/create-team`);
+  router.push(`/agenda/detail/team/create?agenda_key=${agendaKey}`);
 };
 
 const submitResults = ({ router, agendaKey }: CallbackProps) => {

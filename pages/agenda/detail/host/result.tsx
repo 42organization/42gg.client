@@ -83,7 +83,7 @@ const SubmitAgendaResult = () => {
   const [awardList, setAwardList] = useState<AwardListProps[]>([
     { award: '참가상', teams: [] },
   ]);
-  const { agendaKey: agenda_key } = router.query;
+  const { agenda_key } = router.query;
   const setSnackbar = useSetRecoilState(toastState);
   const { openModal, closeModal } = useModal();
 

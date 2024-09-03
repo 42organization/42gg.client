@@ -113,7 +113,9 @@ const SubmitTeamForm = (
           if (isEdit) {
             onProceed && onProceed();
           } else {
-            router.push(`/agenda/${agendaKey}/${res.teamKey}`);
+            router.push(
+              `/agenda/detail/team?agenda_key=${agendaKey}&team_key=${res.teamKey}`
+            );
           }
         },
         (err: string) => {

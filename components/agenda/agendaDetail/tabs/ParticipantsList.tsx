@@ -10,7 +10,7 @@ import styles from 'styles/agenda/agendaDetail/tabs/ParticipantsList.module.scss
 
 export default function ParticipantsList({ max }: numberProps) {
   const router = useRouter();
-  const { agendaKey } = router.query;
+  const agendaKey = router.query.agenda_key;
 
   const { content: participants, PagaNationElementProps } =
     usePageNation<ParticipantProps>({

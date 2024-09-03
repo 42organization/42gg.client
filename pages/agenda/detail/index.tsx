@@ -15,7 +15,7 @@ const getIsHost = (intraId: string, agendaData?: AgendaDataProps | null) => {
 
 const AgendaDetail = () => {
   const router = useRouter();
-  const { agendaKey } = router.query;
+  const agendaKey = useRouter().query.agenda_key;
   const agendaData = useAgendaInfo(agendaKey as string);
 
   const { data: myTeam, status: myTeamStatus } = useFetchGet<TeamDataProps>(

@@ -7,7 +7,7 @@ import styles from 'styles/agenda/pages/CreateAgenda.module.scss';
 
 const ModifyAgenda = () => {
   const router = useRouter();
-  const { agendaKey } = router.query;
+  const agendaKey = router.query.agenda_key;
   const data = useAgendaInfo(agendaKey as string);
 
   return (
@@ -24,7 +24,7 @@ const ModifyAgenda = () => {
             data={data}
             stringKey={agendaKey as string}
             onProceed={() => {
-              router.push(`/agenda/${agendaKey}`);
+              router.push(`/agenda/detail?agenda_key=${agendaKey}`);
             }}
           />
         )}

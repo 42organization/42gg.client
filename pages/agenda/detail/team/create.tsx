@@ -1,16 +1,24 @@
 import { useRouter } from 'next/router';
+import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import CreateTeamForm from 'components/agenda/Form/CreateTeamForm';
-import { useAgendaInfo } from 'hooks/agenda/useAgendaInfo';
+import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/pages/create-team.module.scss';
 
 const CreateTeam = () => {
   const router = useRouter();
-  const { agendaKey } = router.query;
-  const agendaInfo = useAgendaInfo(agendaKey as string);
+  const agendaKey = router.query.agenda_key as string;
+
+  const agendaInfo = useFetchGet<AgendaDataProps>(`/`, {
+    agenda_key: agendaKey,
+  }).data;
 
   const backPage = () => {
     router.back();
   };
+
+  if (!agendaKey || !agendaInfo) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className={styles.pageContainer}>

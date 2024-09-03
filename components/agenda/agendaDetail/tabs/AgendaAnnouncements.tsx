@@ -1,23 +1,18 @@
 import { useRouter } from 'next/router';
 import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
 import AnnouncementItem from 'components/agenda/agendaDetail/tabs/AnnouncementItem';
-import { UploadBtn } from 'components/agenda/button/UploadBtn';
 import PageNation from 'components/Pagination';
 import usePageNation from 'hooks/agenda/usePageNation';
 import styles from 'styles/agenda/agendaDetail/tabs/AgendaAnnouncements.module.scss';
 
 export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
   const router = useRouter();
-  const { agendaKey } = router.query;
+  const agendaKey = router.query.agenda_key;
 
   const { content, PagaNationElementProps } = usePageNation<AnnouncementProps>({
     url: `/announcement`,
     params: { agenda_key: agendaKey },
   });
-
-  const newAnnouncement = () => {
-    router.push(`/agenda/${agendaKey}/host/createAnnouncement`);
-  };
 
   return (
     <>
@@ -36,12 +31,6 @@ export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
           <div className={styles.container}>공지사항이 없습니다.</div>
         )}
         <PageNation {...PagaNationElementProps} />
-
-        {isHost ? (
-          <div className={styles.buttonWarp}>
-            <UploadBtn text='공지사항 추가' onClick={newAnnouncement} />
-          </div>
-        ) : null}
       </div>
     </>
   );
