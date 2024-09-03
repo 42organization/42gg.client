@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { MyTeamDataProps } from 'types/agenda/agendaDetail/agendaTypes';
-import { fillZero } from 'utils/handleTime';
 import { AgendaTag } from 'components/agenda/utils/AgendaTag';
-import agendastyles from 'styles/agenda/Home/AgendaInfo.module.scss';
+import StartDate from 'components/agenda/utils/StartDate';
 import styles from 'styles/agenda/Home/MyTeamInfo.module.scss';
 
 // Props: API data
@@ -16,8 +15,6 @@ const MyTeamInfo = ({
   if (!myTeamInfo) {
     return <div>참가중인 일정이 없습니다.</div>;
   }
-  const startDate = new Date(myTeamInfo.agendaStartTime as string);
-
   return (
     <Link
       href={`/agenda/${myTeamInfo.agendaKey}${
@@ -26,15 +23,7 @@ const MyTeamInfo = ({
       key={idx}
     >
       <div className={styles.Container} key={idx}>
-        <div className={agendastyles.agendaDateBox}>
-          <div className={agendastyles.agendaStartDateMonth}>
-            {fillZero(`${startDate.getMonth()}`, 2)}
-          </div>
-
-          <div className={agendastyles.agendaStartDateDay}>
-            {fillZero(`${startDate.getDate()}`, 2)}
-          </div>
-        </div>
+        {StartDate(myTeamInfo.agendaStartTime as string)}
         <div className={styles.infoContainer}>
           <div className={styles.teamInfoContainer}>
             {myTeamInfo.teamName ? (

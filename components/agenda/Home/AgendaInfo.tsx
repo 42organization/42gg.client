@@ -4,6 +4,7 @@ import { showPeriod, fillZero } from 'utils/handleTime';
 import { AgendaTag } from 'components/agenda/utils/AgendaTag';
 import { isSoloTeam } from 'components/agenda/utils/team';
 import styles from 'styles/agenda/Home/AgendaInfo.module.scss';
+import StartDate from '../utils/StartDate';
 
 // Props: API data
 const AgendaInfo = ({
@@ -21,16 +22,9 @@ const AgendaInfo = ({
 
   return (
     <div className={styles.agendaInfoContainer} key={idx}>
-      <div className={styles.agendaDateBox}>
-        <div className={styles.agendaStartDateMonth}>
-          {fillZero(`${startDate.getMonth()}`, 2)}
-        </div>
-
-        <div className={styles.agendaStartDateDay}>
-          {fillZero(`${startDate.getDate()}`, 2)}
-        </div>
-      </div>
-
+      {agendaInfo.agendaStartTime
+        ? StartDate(agendaInfo.agendaStartTime as string)
+        : ''}
       <div className={styles.agendaInfoWrapper}>
         <div className={styles.agendaItemTitleBox}>
           {agendaInfo.agendaTitle}
