@@ -5,10 +5,10 @@ export const enum AgendaLocation {
 }
 
 export const enum AgendaStatus {
-  CANCEL = 'CANCEL',
-  OPEN = 'OPEN',
-  CONFIRM = 'CONFIRM',
-  FINISH = 'FINISH',
+  CANCEL = 'CANCEL', // 취소
+  OPEN = 'OPEN', // 모집 중
+  CONFIRM = 'CONFIRM', // 진행 중
+  FINISH = 'FINISH', // 진행 완료
 }
 
 export const enum TeamStatus {

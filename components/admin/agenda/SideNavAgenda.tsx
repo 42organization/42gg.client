@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
-import { TbMessageReport } from 'react-icons/tb';
+import { FaRegCalendarCheck, FaRegUserCircle } from 'react-icons/fa';
+import { GrAnnounce } from 'react-icons/gr';
+import { RiTeamLine } from 'react-icons/ri';
 import SideNavContent from 'components/admin/SideNavContent';
 import styles from 'styles/admin/SideNav.module.scss';
 
@@ -11,10 +13,10 @@ export default function SideNavParty() {
       <SideNavContent
         type={'agenda'}
         url={'agendaList'}
-        menuName={'대회 관리'}
+        menuName={'아젠다 관리'}
         currentPath={currentPath}
       >
-        <TbMessageReport className={styles.logo} />
+        <FaRegCalendarCheck className={styles.logo} />
       </SideNavContent>
       <SideNavContent
         type={'agenda'}
@@ -22,7 +24,7 @@ export default function SideNavParty() {
         menuName={'팀 관리'}
         currentPath={currentPath}
       >
-        <TbMessageReport className={styles.logo} />
+        <RiTeamLine className={styles.logo} />
       </SideNavContent>
       <SideNavContent
         type={'agenda'}
@@ -30,7 +32,7 @@ export default function SideNavParty() {
         menuName={'공지사항 관리'}
         currentPath={currentPath}
       >
-        <TbMessageReport className={styles.logo} />
+        <GrAnnounce className={styles.logo} />
       </SideNavContent>
       <SideNavContent
         type={'agenda'}
@@ -38,7 +40,7 @@ export default function SideNavParty() {
         menuName={'유저 관리'}
         currentPath={currentPath}
       >
-        <TbMessageReport className={styles.logo} />
+        <FaRegUserCircle className={styles.logo} />
       </SideNavContent>
     </>
   );

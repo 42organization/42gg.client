@@ -177,6 +177,9 @@ $font-size-xs: 0.8rem; // $small-font
     // 제목 뒤에 붙는 설명
     font-family: $font-text-light;
     font-size: $font-size-xs;
+  } @else if ($type == 'description-regular') {
+    font-family: $font-text-regular;
+    font-size: $font-size-xs;
   } @else if ($type == 'agenda-title') {
     font-family: $font-text-bold;
     font-size: $font-size-xl;

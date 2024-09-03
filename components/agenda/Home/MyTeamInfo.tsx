@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { MyTeamDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { fillZero } from 'utils/handleTime';
-import AgendaTag from 'components/agenda/utils/AgendaTag';
+import { AgendaTag } from 'components/agenda/utils/AgendaTag';
 import agendastyles from 'styles/agenda/Home/AgendaInfo.module.scss';
 import styles from 'styles/agenda/Home/MyTeamInfo.module.scss';
 

@@ -54,10 +54,15 @@ const TicketForm = ({ stringKey }: userFormProps) => {
     >
       <div className={styles.modalContainer}>
         <div className={styles.label_title}>IntraId : {stringKey}</div>
+        <div className={styles.label}>발급처</div>
+        <p className={styles.description}>
+          발급처를 선택하지 않으면 <span>42Intra</span> 로 발급됩니다.
+        </p>
         <AgendaSelect
           selectedKey={selectedAgendaKey}
           dataList={agendaList}
           handleSelectChange={handleSelectChange}
+          defaultSelect='42Intra'
         />
       </div>
 
