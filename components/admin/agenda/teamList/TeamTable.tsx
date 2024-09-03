@@ -113,15 +113,6 @@ export default function TeamTable() {
         },
       });
 
-      if (response.data.content.length === 0) {
-        setSnackBar({
-          toastName: 'GET request',
-          message: '팀이 없습니다.',
-          severity: 'error',
-          clicked: true,
-        });
-      }
-
       setTeamInfo({
         teamList: response.data.content,
         totalPage: Math.ceil(response.data.totalSize / itemsPerPage),
@@ -129,12 +120,6 @@ export default function TeamTable() {
       });
     } catch (e) {
       console.error('Error fetching team list:', e);
-      setSnackBar({
-        toastName: 'GET request',
-        message: '팀 목록을 가져오는데 실패했습니다.',
-        severity: 'error',
-        clicked: true,
-      });
     }
   }, [currentPage, selectedAgendaKey, agendaKey]);
 
