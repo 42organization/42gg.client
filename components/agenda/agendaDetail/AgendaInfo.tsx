@@ -52,9 +52,7 @@ const copyLink = () => {
 };
 
 const hostMode = ({ router, agendaKey }: CallbackProps) => {
-  // router.push(`/agenda/${agendaKey}/host/modify`); // 기존 코드 - 주최자가 대회 수정
-  // router.push(`/agenda/${agendaKey}/host/createAnnouncement`); // 공지사항 추가로 변경
-  alert('host Mode 예정!');
+  router.push(`/agenda/${agendaKey}/host/modify`);
 };
 
 const subscribeTeam = ({ router, agendaKey }: CallbackProps) => {
@@ -147,7 +145,7 @@ export default function AgendaInfo({
       case AgendaStatus.OPEN:
         if (isHost) {
           // 주최자
-          return { text: '주최자 관리', callback: hostMode }; // 주최자 관리 -> 대회 수정 / (변경) 공지사항 추가 버튼
+          return { text: '주최자 관리', callback: hostMode };
         } else if (isParticipant) {
           // 참가자
           if (isSolo) {
