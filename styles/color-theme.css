@@ -77,3 +77,7 @@ html[data-theme='dark'] {
 :root {
   color: var(--color-text);
 }
+
+a {
+  color: var(color-text);
+}
