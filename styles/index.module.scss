@@ -1,12 +1,13 @@
 @import 'styles/agenda/common.scss';
 .layout {
   @include layout;
-  grid-template:
-    'top top' 450px
-    'content match' auto / 1fr 1fr;
   max-width: 100%;
+  height: calc(100vh - 12rem);
   padding-top: 1px;
   margin: 1rem;
+  grid-template:
+    'top top' auto
+    'content match' 17rem / 1fr 1fr;
 }
 .title {
   @include text(main-menu);
