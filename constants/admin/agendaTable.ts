@@ -24,7 +24,7 @@ export const agendaTableFormat: AgendaTableFormat = {
     ],
     etc: {
       type: 'button',
-      value: ['자세히', '취소', '팀 목록', '공지사항'],
+      value: ['자세히', '포스터', '취소', '팀 목록', '공지사항'],
     },
   },
   team: {

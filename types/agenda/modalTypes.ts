@@ -16,4 +16,5 @@ export interface agendaModal {
   data?: any;
   stringKey?: string;
   isAdmin?: boolean;
+  image?: string;
 }

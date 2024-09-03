@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { showPeriod, fillZero } from 'utils/handleTime';
-import AgendaTag from 'components/agenda/utils/AgendaTag';
+import { AgendaTag } from 'components/agenda/utils/AgendaTag';
 import { isSoloTeam } from 'components/agenda/utils/team';
 import styles from 'styles/agenda/Home/AgendaInfo.module.scss';
 

@@ -43,7 +43,7 @@ $info-gradient: linear-gradient(
   bottom: 1.5rem;
   left: 1.5rem;
   @media screen and (min-width: 961px) {
-    bottom: 0.3rem;
+    bottom: 1rem;
   }
 }
 
@@ -59,18 +59,10 @@ $info-gradient: linear-gradient(
     align-items: center;
     gap: 1rem;
   }
-}
 
-.titleWarp {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 1.5rem;
-  @media screen and (max-width: 961px) {
-    justify-content: space-between;
-  }
   h2 {
-    @include text('agenda-title');
+    @include text('date');
+    margin: 0.5rem 0;
   }
 }
 
@@ -89,17 +81,22 @@ $info-gradient: linear-gradient(
   display: flex; // flex 컨테이너로 설정
   flex-direction: column; // 기본적으로 세로 정렬
   align-items: flex-end; // 오른쪽 정렬
-  gap: 0.4rem;
+  gap: 0.8rem;
 
   @media screen and (max-width: 960px) {
-    bottom: 100%; // 960px 이하에서 세로 정렬
+    bottom: 56%;
   }
 
   @media screen and (min-width: 961px) {
-    bottom: 26%; // 961px 이상에서 위치 조정
-    flex-direction: row; // 가로 배치
+    bottom: 18%;
+    flex-direction: row-reverse; // 가로 배치
     justify-content: flex-end; // 오른쪽 정렬
     align-items: center; // 세로 중앙 정렬
     gap: 1rem;
   }
+}
+
+.agendaItemTagBox {
+  display: flex;
+  gap: 0.3rem;
 }

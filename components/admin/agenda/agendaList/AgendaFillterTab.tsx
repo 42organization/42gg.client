@@ -13,15 +13,15 @@ export default function AgendaFillterTab() {
     },
     {
       contentId: 1,
-      contentName: '공식',
+      contentName: '모집 중',
     },
     {
       contentId: 2,
-      contentName: '비공식',
+      contentName: '진행 중',
     },
     {
       contentId: 3,
-      contentName: '완료된 대회',
+      contentName: '진행 완료',
     },
   ];
 
@@ -31,13 +31,13 @@ export default function AgendaFillterTab() {
         setChild(<AgendaTable />);
         break;
       case 1:
-        setChild(<AgendaTable isOfficial={true} />);
+        setChild(<AgendaTable status={AgendaStatus.OPEN} />);
         break;
       case 2:
-        setChild(<AgendaTable isOfficial={false} />);
+        setChild(<AgendaTable status={AgendaStatus.CONFIRM} />);
         break;
       case 3:
-        setChild(<AgendaTable status={AgendaStatus.CONFIRM} />);
+        setChild(<AgendaTable status={AgendaStatus.FINISH} />);
         break;
     }
   }, [tabIdx]);

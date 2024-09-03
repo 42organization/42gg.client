@@ -81,7 +81,7 @@ const UserForm = ({ stringKey }: userFormProps) => {
         <SelectInput
           name='userLocation'
           label='유저 위치'
-          options={['SEOUL', 'GYEONGSAN', 'MIX']}
+          options={['SEOUL', 'GYEONGSAN']}
           selected={data.userLocation}
         />
       </div>
