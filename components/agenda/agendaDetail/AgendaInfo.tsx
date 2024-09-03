@@ -29,7 +29,7 @@ const subscribeTeam = ({ router, agendaKey }: CallbackProps) => {
 };
 
 const submitResults = ({ router, agendaKey }: CallbackProps) => {
-  router.push(`/agenda/${agendaKey}/host/result`);
+  router.push(`/agenda/detail/host/result?agenda_key=${agendaKey}`);
 };
 
 export default function AgendaInfo({
