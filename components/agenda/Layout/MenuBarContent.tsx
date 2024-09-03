@@ -1,4 +1,3 @@
-import { on } from 'events';
 import Link from 'next/link';
 import { ElementType, useContext } from 'react';
 import styles from 'styles/agenda/Layout/MenuBar.module.scss';
