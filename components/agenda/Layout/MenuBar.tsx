@@ -50,11 +50,11 @@ const MenuBar = ({ headerstate }: { headerstate: HeaderContextState }) => {
         <div className={styles.divider} />
         <MenuBarContent content='진행중인 대회' href='/agenda' />
         <MenuBarContent content='티켓 확인하기' href='/agenda/ticket' />
-        {user?.isAdmin && (
+        {user?.isAdmin ? (
           <>
             <MenuBarContent content='admin' href='/admin/agenda' as='h1' />
           </>
-        )}
+        ) : null}
         <MenuBarContent content='로그아웃' onClick={handleLogout} />
       </div>
 

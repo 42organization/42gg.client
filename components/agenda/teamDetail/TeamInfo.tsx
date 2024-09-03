@@ -72,7 +72,7 @@ const TeamInfo = ({
                 <div className={styles.mateName}>
                   <p>
                     {mate.intraId}{' '}
-                    {mate.intraId === teamDetail.teamLeaderIntraId && '👑'}
+                    {mate.intraId === teamDetail.teamLeaderIntraId ? '👑' : ''}
                   </p>
                 </div>
 

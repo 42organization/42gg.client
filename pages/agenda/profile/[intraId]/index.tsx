@@ -76,31 +76,39 @@ const AgendaProfile = () => {
           />
         )}
         {/* Ticket */}
-        {isMyProfile && <Ticket type='component' />}
+        {isMyProfile ? <Ticket type='component' /> : ''}
         {/* Host Current List */}
-        {hostCurrentListData && hostCurrentListData.length > 0 && (
+        {hostCurrentListData && hostCurrentListData.length > 0 ? (
           <>
             <CurrentList currentListData={hostCurrentListData} isHost={true} />
             <PageNation {...PagaNationHostCurrent} />
           </>
+        ) : (
+          ''
         )}
         {/* Current List */}
-        {isMyProfile && currentListData && (
+        {isMyProfile && currentListData ? (
           <CurrentList currentListData={currentListData} isHost={false} />
+        ) : (
+          ''
         )}
         {/* History Host List */}
-        {hostHistoryListData && hostHistoryListData.length > 0 && (
+        {hostHistoryListData && hostHistoryListData.length > 0 ? (
           <>
             <HistoryList historyListData={hostHistoryListData} isHost={true} />{' '}
             <PageNation {...PagaNationHostHistory} />
           </>
+        ) : (
+          ''
         )}
         {/* History List */}
-        {historyListData && (
+        {historyListData ? (
           <>
             <HistoryList historyListData={historyListData} isHost={false} />{' '}
             <PageNation {...PagaNationHistory} />
           </>
+        ) : (
+          ''
         )}
       </div>
     </>

@@ -18,7 +18,7 @@ const ModifyAgenda = () => {
         </div>
         <h2 className={styles.title}>아젠다 수정하기</h2>
         <p className={styles.description}>당부사항</p>
-        {data && (
+        {data ? (
           <AgendaForm
             isEdit={true}
             data={data}
@@ -27,6 +27,8 @@ const ModifyAgenda = () => {
               router.push(`/agenda/${agendaKey}`);
             }}
           />
+        ) : (
+          ''
         )}
       </div>
     </>

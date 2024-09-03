@@ -29,7 +29,7 @@ function AdminAppLayout({ children }: AdminLayoutProps) {
   return (
     <AdminLayout>
       {children}
-      {ModalProviderComponent && <ModalProviderComponent />}
+      {ModalProviderComponent ? <ModalProviderComponent /> : ''}
     </AdminLayout>
   );
 }

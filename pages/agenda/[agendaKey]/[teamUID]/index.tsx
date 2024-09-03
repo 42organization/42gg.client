@@ -93,12 +93,14 @@ export default function TeamDetail() {
 
   return (
     <div className={styles.teamDetail}>
-      {agendaData && (
+      {agendaData ? (
         <Link href={`/agenda/${agendaKey}`} className={styles.agendaLink}>
           <AgendaInfo agendaData={agendaData} />
         </Link>
+      ) : (
+        ''
       )}
-      {teamDetail && agendaData && (
+      {teamDetail && agendaData ? (
         <TeamInfo
           teamDetail={teamDetail}
           shareTeamInfo={shareTeamInfo}
@@ -109,6 +111,8 @@ export default function TeamDetail() {
             getTeamDetail();
           }}
         />
+      ) : (
+        ''
       )}
     </div>
   );

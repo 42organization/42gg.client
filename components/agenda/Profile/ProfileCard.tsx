@@ -87,7 +87,7 @@ const ProfileImageCard = ({
         }`}
       >
         {/* Back Side */}
-        {isMyProfile && (
+        {isMyProfile ? (
           <div className={styles.backCard}>
             <div className={styles.editTitle}>프로필 수정</div>
 
@@ -134,6 +134,8 @@ const ProfileImageCard = ({
               </button>
             </div>
           </div>
+        ) : (
+          ''
         )}
 
         {/* Front Side */}
@@ -150,10 +152,12 @@ const ProfileImageCard = ({
 
             <div className={styles.userNameWrapper}>
               <div className={styles.userName}>{userIntraId}</div>
-              {isMyProfile && (
+              {isMyProfile ? (
                 <div className={styles.editWrapper} onClick={handleFlip}>
                   <EditIcon />
                 </div>
+              ) : (
+                ''
               )}
             </div>
 

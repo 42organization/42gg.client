@@ -65,7 +65,7 @@ const Agenda: NextPage = () => {
         ) : (
           <>
             <AgendaList agendaList={historyData || []} />
-            <PageNation {...PagaNationElementProps} />{' '}
+            <PageNation {...PagaNationElementProps} />
           </>
         )}
       </div>

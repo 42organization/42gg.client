@@ -65,8 +65,8 @@ function TakguLayout({ children }: TakguLayoutProps) {
             <PlayButton />
             <div className={styles.topInfo}>
               <Megaphone />
-              {openCurrentMatch && <CurrentMatch />}
-              {presentPath === '/' && <MainPageProfile />}
+              {openCurrentMatch ? <CurrentMatch /> : ''}
+              {presentPath === '/' ? <MainPageProfile /> : ''}
             </div>
             {children}
             <Footer />
