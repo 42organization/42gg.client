@@ -61,7 +61,7 @@ export default function TeamDetail() {
   const sendRequest = useFetchRequest().sendRequest;
 
   const shareTeamInfo = () => {
-    alert('공유하기');
+    alert('링크가 복사되었습니다.');
     const url = window.location.href;
     navigator.clipboard.writeText(url);
   };
