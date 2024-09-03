@@ -200,7 +200,6 @@ export default function AnnouncementTable() {
               totalPages={announcementInfo.totalPage}
               pageChangeHandler={(pageNumber: number) => {
                 setCurrentPage(pageNumber);
-                fetchAnnouncementList();
               }}
             />
           </div>
