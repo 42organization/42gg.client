@@ -8,7 +8,10 @@
   @include action;
   display: flex;
   width: 100vw;
+  min-width: 360px;
+  height: max-content;
   flex-direction: column;
+  margin-top: 5rem;
   align-items: center;
   @media screen and (max-width: 480px) {
     // border: 1px solid red;
@@ -27,6 +30,7 @@
 @mixin layout {
   @include action;
   width: 100%;
+  height: max-content;
   @media screen and (max-width: 480px) {
     display: flex;
     flex-direction: column;

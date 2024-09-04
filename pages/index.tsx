@@ -1,14 +1,9 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import type { NextPage } from 'next';
-import AgendaHeader from 'components/agenda/Layout/AgendaHeader';
-import AgendaModalProvider from 'components/agenda/modal/AgendaModalProvider';
 import PageController from 'components/agenda/utils/PageController';
-import Footer from 'components/takgu/Layout/Footer';
 import PingpongIcon from 'public/image/takgu/ping-pong.svg';
-import { useUser } from 'hooks/agenda/Layout/useUser';
 import styles from 'styles/index.module.scss';
-import Login from './login';
 
 const Index: NextPage = () => {
   const router = useRouter();
