@@ -55,8 +55,11 @@
   display: flex;
   width: 0.8rem;
   height: 0.8rem;
+  align-items: center;
+  justify-content: center;
   .imageBox {
     width: 100%;
     height: 100%;
+    margin-top: 0.2rem;
   }
 }
