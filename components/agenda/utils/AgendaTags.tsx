@@ -13,7 +13,7 @@ const AgendaTags = (data: AgendaDataProps) => {
   const LocationToTagName: Record<string, string> = {
     [AgendaLocation.SEOUL]: '서울',
     [AgendaLocation.GYEONGSAN]: '경산',
-    [AgendaLocation.MIX]: '혼합',
+    [AgendaLocation.MIX]: '전국',
   };
 
   const status = statusToTagName[data.agendaStatus];
