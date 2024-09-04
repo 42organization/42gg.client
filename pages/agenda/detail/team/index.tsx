@@ -6,15 +6,18 @@ import { TeamDetailProps } from 'types/agenda/teamDetail/TeamDetailTypes';
 import { Authority } from 'constants/agenda/agenda';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import TeamInfo from 'components/agenda/teamDetail/TeamInfo';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import { useUser } from 'hooks/agenda/Layout/useUser';
+import useAgendaKey from 'hooks/agenda/useAgendaKey';
+import useAgendaTeamKey from 'hooks/agenda/useAgendaTeamKey';
 import useFetchGet from 'hooks/agenda/useFetchGet';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/TeamDetail/TeamDetail.module.scss';
 
 export default function TeamDetail() {
   const router = useRouter();
-  const agendaKey = router.query.agenda_key;
-  const teamUID = router.query.team_key;
+  const agendaKey = useAgendaKey();
+  const teamUID = useAgendaTeamKey();
 
   /**
    * API GET DATA
@@ -90,6 +93,9 @@ export default function TeamDetail() {
     );
   };
 
+  if (!agendaKey || !agendaData || !teamDetail) {
+    return <AgendaLoading />;
+  }
   return (
     <div className={styles.teamDetail}>
       {agendaData && (

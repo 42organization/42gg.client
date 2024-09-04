@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { TeamInfoProps } from 'types/agenda/teamDetail/TeamInfoTypes';
 import { colorMapping } from 'types/agenda/utils/colorList';
@@ -7,8 +6,9 @@ import { ShareBtn } from 'components/agenda/button/Buttons';
 import CreateTeamForm from 'components/agenda/Form/CreateTeamForm';
 import TeamButtons from 'components/agenda/teamDetail/TeamButtons';
 import EditIcon from 'public/image/agenda/edit.svg';
+import useAgendaKey from 'hooks/agenda/useAgendaKey';
 import styles from 'styles/agenda/TeamDetail/TeamInfo.module.scss';
-
+import AgendaLoading from '../utils/AgendaLoading';
 const TeamInfo = ({
   teamDetail,
   shareTeamInfo,
@@ -18,13 +18,16 @@ const TeamInfo = ({
   submitTeamForm,
 }: TeamInfoProps) => {
   // EditTeam UI <-> TeamInfo UI 전환
-  const router = useRouter();
-  const agendaKey = router.query.agenda_key;
   const [convert, setConvert] = useState(true);
+  const agendaKey = useAgendaKey();
 
   const handleConvert = () => {
     setConvert(!convert);
   };
+
+  if (!agendaKey) {
+    return <AgendaLoading />;
+  }
   return convert ? (
     /* TeamInfo */
     <>

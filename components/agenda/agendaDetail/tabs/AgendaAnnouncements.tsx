@@ -1,19 +1,22 @@
-import { useRouter } from 'next/router';
 import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
 import AnnouncementItem from 'components/agenda/agendaDetail/tabs/AnnouncementItem';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import PageNation from 'components/Pagination';
+import useAgendaKey from 'hooks/agenda/useAgendaKey';
 import usePageNation from 'hooks/agenda/usePageNation';
 import styles from 'styles/agenda/agendaDetail/tabs/AgendaAnnouncements.module.scss';
 
 export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
-  const router = useRouter();
-  const agendaKey = router.query.agenda_key;
+  const agendaKey = useAgendaKey();
 
   const { content, PagaNationElementProps } = usePageNation<AnnouncementProps>({
     url: `/announcement`,
     params: { agenda_key: agendaKey },
   });
 
+  if (!agendaKey || !content) {
+    return <AgendaLoading />;
+  }
   return (
     <>
       <div className={styles.announcementsList}>

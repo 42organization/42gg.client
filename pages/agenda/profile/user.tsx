@@ -7,6 +7,7 @@ import CurrentList from 'components/agenda/Profile/CurrentList';
 import HistoryList from 'components/agenda/Profile/HistoryList';
 import ProfileCard from 'components/agenda/Profile/ProfileCard';
 import Ticket from 'components/agenda/Ticket/Ticket';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import PageNation from 'components/Pagination';
 import { useUser } from 'hooks/agenda/Layout/useUser';
 import useFetchGet from 'hooks/agenda/useFetchGet';
@@ -53,6 +54,9 @@ const AgendaProfile = () => {
     url: `/profile/history/list/${intraId}`,
   });
 
+  if (!intraId || !userIntraId) {
+    return <AgendaLoading />;
+  }
   return (
     <>
       <div className={styles.agendaProfileContainer}>

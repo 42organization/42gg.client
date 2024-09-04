@@ -1,4 +1,5 @@
 import router from 'next/router';
+import { useEffect, useState } from 'react';
 import { SetterOrUpdater, useSetRecoilState } from 'recoil';
 import { agendaModal } from 'types/agenda/modalTypes';
 import { TeamDetailProps } from 'types/agenda/teamDetail/TeamDetailTypes';
@@ -9,9 +10,11 @@ import CheckBoxInput from 'components/agenda/Input/CheckboxInput';
 import DescriptionInput from 'components/agenda/Input/DescriptionInput';
 import SelectInput from 'components/agenda/Input/SelectInput';
 import TitleInput from 'components/agenda/Input/TitleInput';
+import useAgendaTeamKey from 'hooks/agenda/useAgendaTeamKey';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/Form/Form.module.scss';
 import { useModal } from '../modal/useModal';
+import AgendaLoading from '../utils/AgendaLoading';
 
 const teamlocation = ['SEOUL', 'GYEONGSAN', 'NIX'];
 interface CreateTeamFormProps {
@@ -38,6 +41,7 @@ const transformFormData = (formData: FormData) => {
 
   return data;
 };
+
 const teamdataToMsg = (data: { [key: string]: string }) => {
   const msgdata: { [key: string]: string } = {};
   let msg = '';
@@ -59,7 +63,8 @@ const SubmitTeamForm = (
   agendaKey: string,
   openModal: (props: agendaModal) => void,
   teamKey?: string,
-  onProceed?: () => void
+  onProceed?: () => void,
+  handleConvert?: () => void
 ) => {
   target.preventDefault();
 
@@ -112,6 +117,7 @@ const SubmitTeamForm = (
         (res: any) => {
           if (isEdit) {
             onProceed && onProceed();
+            handleConvert && handleConvert();
           } else {
             router.push(
               `/agenda/detail/team?agenda_key=${agendaKey}&team_key=${res.teamKey}`
@@ -135,9 +141,21 @@ const CreateTeamForm = ({
   handleConvert,
 }: CreateTeamFormProps) => {
   const sendRequest = useFetchRequest().sendRequest;
-  const { teamUID } = router.query;
+  const teamUID = useAgendaTeamKey();
   const { openModal } = useModal();
   const setSnackBar = useSetRecoilState(toastState);
+  const [flag, setFlag] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (teamUID) {
+      // useAgendaTeamKey()로 teamUID 가져왔을 시
+      setFlag(true);
+    }
+  }, [teamUID]);
+
+  if (!flag) {
+    return <AgendaLoading />;
+  }
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     SubmitTeamForm(
@@ -148,7 +166,8 @@ const CreateTeamForm = ({
       agendaKey,
       openModal,
       teamUID as string,
-      onProceed
+      onProceed,
+      handleConvert
     );
   };
 

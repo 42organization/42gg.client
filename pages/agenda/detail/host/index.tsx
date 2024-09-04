@@ -5,14 +5,16 @@ import { toastState } from 'utils/recoil/toast';
 import { AgendaStatus } from 'constants/agenda/agenda';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
 import { useModal } from 'components/agenda/modal/useModal';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import { useAgendaInfo } from 'hooks/agenda/useAgendaInfo';
+import useAgendaKey from 'hooks/agenda/useAgendaKey';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import styles from 'styles/agenda/pages/agendakey/host/modify.module.scss';
 
 const ModifyAgenda = () => {
   const router = useRouter();
-  const agendaKey = router.query.agenda_key;
+  const agendaKey = useAgendaKey();
   const agendaData = useAgendaInfo(agendaKey as string);
   const user = useUser();
   const { sendRequest } = useFetchRequest();
@@ -106,6 +108,9 @@ const ModifyAgenda = () => {
     }
   }, [agendaData, user, router]);
 
+  if (!agendaKey) {
+    return <AgendaLoading />;
+  }
   return (
     <>
       <div className={styles.container}>

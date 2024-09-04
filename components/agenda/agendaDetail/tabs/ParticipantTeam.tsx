@@ -4,10 +4,12 @@ import {
   ParticipantTeamProps,
   PeopleCount,
 } from 'types/agenda/agendaDetail/tabs/participantTypes';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import { countCoalitions } from 'components/agenda/utils/coalition/countCoalitions';
 import { getCoalitionEnum } from 'components/agenda/utils/coalition/getCoalitionEnum';
 import ColorList from 'components/agenda/utils/ColorList';
 import TeamLeaderIcon from 'public/image/agenda/rock-and-roll-hand.svg';
+import useAgendaKey from 'hooks/agenda/useAgendaKey';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantTeam.module.scss';
 
 const totalPeople = (peopleCount: PeopleCount) => {
@@ -22,8 +24,7 @@ export default function ParticipantTeam({
   maxMateCount,
   coalitions,
 }: ParticipantTeamProps) {
-  const router = useRouter();
-  const agendaKey = router.query.agenda_key;
+  const agendaKey = useAgendaKey();
   const coalitionEnum = getCoalitionEnum(coalitions);
   const peopleCount = countCoalitions(coalitionEnum);
 
@@ -51,6 +52,9 @@ export default function ParticipantTeam({
     />
   );
 
+  if (!agendaKey) {
+    return <AgendaLoading />;
+  }
   return (
     <>
       {teamKey ? (
