@@ -86,7 +86,9 @@ const AgendaListItem = ({
       }}
     >
       <AgendaInfo agendaInfo={agendaInfo} idx={idx} />
-      <AgendaDeadLine />
+      <div className={`${type === 'list' && styles.show}`}>
+        <AgendaDeadLine deadLine={agendaInfo.agendaDeadLine} />
+      </div>
     </button>
   );
 };
