@@ -13,16 +13,17 @@ const TeamModify = () => {
 
   return (
     <>
-      <div className={styles.container}>
-        <h2 className={styles.title}>팀 수정하기</h2>
-        <p className={styles.description}>팀 인원 : 3명-8명까지 가능</p>
-        {teamData && (
-          <AdminTeamForm
-            teamKey={team_key as string}
-            teamData={teamData}
-            teamLocation={location as string}
-          />
-        )}
+      <div className={styles.modifyContainer}>
+        <div className={styles.container}>
+          <h2 className={styles.title}>팀 수정하기</h2>
+          {teamData && (
+            <AdminTeamForm
+              teamKey={team_key as string}
+              teamData={teamData}
+              teamLocation={location as string}
+            />
+          )}
+        </div>
       </div>
     </>
   );

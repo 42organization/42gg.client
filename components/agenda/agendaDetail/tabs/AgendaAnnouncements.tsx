@@ -18,19 +18,21 @@ export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
     <>
       <div className={styles.announcementsList}>
         {content && content.length > 0 ? (
-          content.map((item) => (
-            <AnnouncementItem
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              content={item.content}
-              createdAt={item.createdAt}
-            />
-          ))
+          <>
+            {content.map((item) => (
+              <AnnouncementItem
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                content={item.content}
+                createdAt={item.createdAt}
+              />
+            ))}
+            <PageNation {...PagaNationElementProps} />
+          </>
         ) : (
           <div className={styles.container}>공지사항이 없습니다.</div>
         )}
-        <PageNation {...PagaNationElementProps} />
       </div>
     </>
   );
