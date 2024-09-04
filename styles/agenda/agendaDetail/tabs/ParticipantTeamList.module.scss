@@ -1,10 +1,22 @@
 @import 'styles/agenda/common.scss';
 
+.participantsContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column; /* 기본적으로 세로로 쌓이게 설정 */
+  gap: 2rem;
+
+  @media screen and (min-width: 961px) {
+    flex-direction: row; /* 가로 방향으로 변경 */
+    justify-content: space-between; /* 컨테이너 사이의 간격 조정 */
+  }
+}
+
 .participantsWarp {
   display: flex;
   width: 100%;
-
-  flex: 1 0 0;
+  min-width: 30%;
+  flex: 1;
   flex-direction: column;
   gap: 1rem;
 }
