@@ -5,10 +5,11 @@ import { TeamStatus, Authority } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
 import CreateTeamForm from 'components/agenda/Form/CreateTeamForm';
 import TeamButtons from 'components/agenda/teamDetail/TeamButtons';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import EditIcon from 'public/image/agenda/edit.svg';
 import useAgendaKey from 'hooks/agenda/useAgendaKey';
 import styles from 'styles/agenda/TeamDetail/TeamInfo.module.scss';
-import AgendaLoading from '../utils/AgendaLoading';
+
 const TeamInfo = ({
   teamDetail,
   shareTeamInfo,

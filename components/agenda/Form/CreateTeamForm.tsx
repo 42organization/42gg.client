@@ -10,12 +10,12 @@ import CheckBoxInput from 'components/agenda/Input/CheckboxInput';
 import DescriptionInput from 'components/agenda/Input/DescriptionInput';
 import SelectInput from 'components/agenda/Input/SelectInput';
 import TitleInput from 'components/agenda/Input/TitleInput';
+import { useModal } from 'components/agenda/modal/useModal';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import useAgendaTeamKey from 'hooks/agenda/useAgendaTeamKey';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/Form/Form.module.scss';
-import { useModal } from '../modal/useModal';
-import AgendaLoading from '../utils/AgendaLoading';
-
+AgendaLoading;
 const teamlocation = ['SEOUL', 'GYEONGSAN', 'NIX'];
 interface CreateTeamFormProps {
   location: AgendaLocation | null;
