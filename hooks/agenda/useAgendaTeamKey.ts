@@ -8,7 +8,7 @@ const useAgendaTeamKey = () => {
   useEffect(() => {
     if (router.isReady) {
       const key = router.query.team_key as string;
-      setTeamKey(key);
+      setTeamKey(key || 'no-team'); // 팀 키가 없으면 'no-team' 반환
     }
   }, [router.isReady, router.query.agenda_key]);
 
