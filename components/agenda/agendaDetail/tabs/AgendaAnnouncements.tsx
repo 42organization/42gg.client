@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
 import AnnouncementItem from 'components/agenda/agendaDetail/tabs/AnnouncementItem';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
@@ -13,38 +14,51 @@ export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
   const { content, PagaNationElementProps } = usePageNation<AnnouncementProps>({
     url: `/announcement`,
     params: { agenda_key: agendaKey },
+    size: 5,
   });
 
   const newAnnouncement = () => {
     router.push(`/agenda/${agendaKey}/host/createAnnouncement`);
   };
 
+  const [selected, setSelected] = useState<number>(0);
+
   return (
     <>
-      <div className={styles.announcementsList}>
-        {content && content.length > 0 ? (
-          <>
-            {content.map((item) => (
+      {content && content.length > 0 ? (
+        <>
+          <div className={styles.announcementsList}>
+            {content.map((item, idx) => (
               <AnnouncementItem
                 key={item.id}
                 id={item.id}
                 title={item.title}
                 content={item.content}
                 createdAt={item.createdAt}
+                setSelected={() => setSelected(idx)}
               />
             ))}
             <PageNation {...PagaNationElementProps} />
-          </>
-        ) : (
-          <div className={styles.container}>공지사항이 없습니다.</div>
-        )}
-
-        {isHost ? (
-          <div className={styles.buttonWarp}>
-            <UploadBtn text='공지사항 추가' onClick={newAnnouncement} />
+            {isHost ? (
+              <div className={styles.buttonWarp}>
+                <UploadBtn text='공지사항 추가' onClick={newAnnouncement} />
+              </div>
+            ) : null}
           </div>
-        ) : null}
-      </div>
+          <AnnouncementItem
+            key={content[selected].id}
+            id={content[selected].id}
+            title={content[selected].title}
+            content={content[selected].content}
+            createdAt={content[selected].createdAt}
+            isSelected={true}
+          />
+        </>
+      ) : (
+        <div className={styles.container}>공지사항이 없습니다.</div>
+      )}
+
+      {/* </div>/ */}
     </>
   );
 }

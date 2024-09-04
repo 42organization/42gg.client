@@ -3,4 +3,6 @@ export interface AnnouncementProps {
   title: string;
   content: string;
   createdAt: Date;
+  isSelected?: boolean;
+  setSelected?: () => void;
 }
