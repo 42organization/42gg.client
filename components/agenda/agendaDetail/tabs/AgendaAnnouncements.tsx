@@ -35,6 +35,7 @@ export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
                 title={item.title}
                 content={item.content}
                 createdAt={item.createdAt}
+                isListSelected={selected === idx}
                 setSelected={() => setSelected(idx)}
               />
             ))}

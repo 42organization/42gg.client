@@ -56,3 +56,11 @@
   margin-left: 1rem;
   justify-content: flex-start;
 }
+
+.selected {
+  @media screen and (min-width: 961px) {
+    border-color: var(--highlight-violet);
+    border-width: 2px;
+    box-shadow: 2px 2px 0 2px var(--highlight-violet);
+  }
+}
