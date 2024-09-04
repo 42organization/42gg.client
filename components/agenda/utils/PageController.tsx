@@ -96,7 +96,9 @@ const PageController = ({
             )
               return;
             data.length && data[current]
-              ? handleNavigation('/agenda/' + data[current].agendaKey)
+              ? handleNavigation(
+                  '/agenda/detail?agenda_key=' + data[current].agendaKey
+                )
               : null;
           }}
           className={styles.toClick}

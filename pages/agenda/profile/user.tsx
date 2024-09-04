@@ -7,6 +7,7 @@ import CurrentList from 'components/agenda/Profile/CurrentList';
 import HistoryList from 'components/agenda/Profile/HistoryList';
 import ProfileCard from 'components/agenda/Profile/ProfileCard';
 import Ticket from 'components/agenda/Ticket/Ticket';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import PageNation from 'components/Pagination';
 import { useUser } from 'hooks/agenda/Layout/useUser';
 import useFetchGet from 'hooks/agenda/useFetchGet';
@@ -14,8 +15,7 @@ import usePageNation from 'hooks/agenda/usePageNation';
 import styles from 'styles/agenda/Profile/AgendaProfile.module.scss';
 
 const AgendaProfile = () => {
-  const router = useRouter();
-  const { intraId } = router.query; // URL 상의 intraId
+  const intraId = useRouter().query.id;
   const userIntraId = useUser()?.intraId; // 현재 나의 intraId
   const isMyProfile = intraId === userIntraId ? true : false;
 
@@ -54,8 +54,9 @@ const AgendaProfile = () => {
     url: `/profile/history/list/${intraId}`,
   });
 
-  console.log(profileData);
-
+  if (!intraId || !userIntraId) {
+    return <AgendaLoading />;
+  }
   return (
     <>
       <div className={styles.agendaProfileContainer}>

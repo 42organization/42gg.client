@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import AgendaTab from 'components/agenda/agendaDetail/AgendaTab';
 import { useUser } from 'hooks/agenda/Layout/useUser';
 import { useAgendaInfo } from 'hooks/agenda/useAgendaInfo';
+import useAgendaKey from 'hooks/agenda/useAgendaKey';
 import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/agendaDetail/AgendaDetail.module.scss';
 
@@ -14,8 +14,7 @@ const getIsHost = (intraId: string, agendaData?: AgendaDataProps | null) => {
 };
 
 const AgendaDetail = () => {
-  const router = useRouter();
-  const { agendaKey } = router.query;
+  const agendaKey = useAgendaKey();
   const agendaData = useAgendaInfo(agendaKey as string);
 
   const { data: myTeam, status: myTeamStatus } = useFetchGet<TeamDataProps>(

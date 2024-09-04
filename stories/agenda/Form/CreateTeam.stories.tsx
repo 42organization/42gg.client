@@ -1,5 +1,7 @@
+/** router 쿼리로 바꾸는 도중에 에러 떠서 모두 주석 처리 함 */
+
 import type { Meta, StoryObj } from '@storybook/react';
-import CreateTeam from 'pages/agenda/[agendaKey]/create-team';
+import CreateTeam from 'pages/agenda/detail/team/create';
 
 const meta: Meta = {
   title: 'Agenda/Form/create-team',

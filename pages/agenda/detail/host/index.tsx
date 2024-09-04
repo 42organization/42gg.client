@@ -5,14 +5,16 @@ import { toastState } from 'utils/recoil/toast';
 import { AgendaStatus } from 'constants/agenda/agenda';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
 import { useModal } from 'components/agenda/modal/useModal';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import { useAgendaInfo } from 'hooks/agenda/useAgendaInfo';
+import useAgendaKey from 'hooks/agenda/useAgendaKey';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import { useUser } from 'hooks/takgu/Layout/useUser';
 import styles from 'styles/agenda/pages/agendakey/host/modify.module.scss';
 
 const ModifyAgenda = () => {
   const router = useRouter();
-  const { agendaKey } = router.query;
+  const agendaKey = useAgendaKey();
   const agendaData = useAgendaInfo(agendaKey as string);
   const user = useUser();
   const { sendRequest } = useFetchRequest();
@@ -29,14 +31,16 @@ const ModifyAgenda = () => {
   };
 
   const newAnnouncement = () => {
-    router.push(`/agenda/${agendaKey}/host/createAnnouncement`);
+    router.push(
+      `/agenda/detail/host/createAnnouncement?agenda_key=${agendaKey}`
+    );
   };
 
   const confirmAgenda = () => {
     if (agendaStatus && agendaStatus === AgendaStatus.OPEN) {
       handleClick('행사를 확정하시겠습니까?', () => {
         sendRequest('PATCH', `confirm`, {}, { agenda_key: agendaKey });
-        router.push(`/agenda/${agendaKey}`);
+        router.push(`/agenda/detail?agenda_key=${agendaKey}`);
       });
     } else {
       setSnackbar({
@@ -68,7 +72,7 @@ const ModifyAgenda = () => {
     if (agendaStatus && agendaStatus === AgendaStatus.CONFIRM) {
       handleClick('행사를 상 입력 없이 종료하시겠습니까?', () => {
         sendRequest('PATCH', 'finish', {}, { agenda_key: agendaKey });
-        router.push(`/agenda/${agendaKey}`);
+        router.push(`/agenda/detail?agenda_key=${agendaKey}`);
       });
     } else {
       setSnackbar({
@@ -83,7 +87,7 @@ const ModifyAgenda = () => {
   const resultFormAgenda = () => {
     if (agendaStatus && agendaStatus === AgendaStatus.CONFIRM) {
       handleClick('행사 종료 후 상 입력을 하시겠습니까?', () => {
-        router.push(`/agenda/${agendaKey}/host/result`);
+        router.push(`/agenda/detail/host/result?agenda_key=${agendaKey}`);
       });
     } else {
       setSnackbar({
@@ -104,6 +108,9 @@ const ModifyAgenda = () => {
     }
   }, [agendaData, user, router]);
 
+  if (!agendaKey) {
+    return <AgendaLoading />;
+  }
   return (
     <>
       <div className={styles.container}>
@@ -117,4 +124,5 @@ const ModifyAgenda = () => {
     </>
   );
 };
+
 export default ModifyAgenda;
