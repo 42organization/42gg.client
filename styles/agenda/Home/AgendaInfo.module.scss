@@ -26,10 +26,12 @@
 
   .agendaItemTimeBox {
     display: flex;
+    width: 100%;
+    height: max-content;
     align-items: center;
     gap: 1.5rem;
+    justify-content: space-between;
     @include text(description);
-    height: max-content;
 
     .agendaItemTimeWrapper {
       display: flex;
