@@ -45,17 +45,21 @@ export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
               </div>
             ) : null}
           </div>
-          <AnnouncementItem
-            key={content[selected].id}
-            id={content[selected].id}
-            title={content[selected].title}
-            content={content[selected].content}
-            createdAt={content[selected].createdAt}
-            isSelected={true}
-          />
+          {content.length > 0 && selected >= 0 && selected < content.length ? (
+            <AnnouncementItem
+              key={content[selected].id}
+              id={content[selected].id}
+              title={content[selected].title}
+              content={content[selected].content}
+              createdAt={content[selected].createdAt}
+              isSelected={true}
+            />
+          ) : (
+            ''
+          )}
         </>
       ) : (
-        <div className={styles.container}>공지사항이 없습니다.</div>
+        <div className={styles.emptyContainer}>공지사항이 없습니다.</div>
       )}
 
       {/* </div>/ */}

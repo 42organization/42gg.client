@@ -29,3 +29,17 @@
     padding: 0.5rem;
   }
 }
+.emptyContainer {
+  @include container(1);
+  width: 100%;
+  flex: 1 0 0;
+
+  flex-direction: column;
+  padding: 1.5rem;
+  margin: 0;
+  gap: 1rem;
+  align-items: flex-start;
+  @media screen and (min-width: 961px) {
+    height: 5rem;
+  }
+}
