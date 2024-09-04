@@ -16,7 +16,14 @@ export default function TabContent({
   const renderContent = () => {
     switch (activeTab) {
       case tabs.DESCRIPTION:
-        return <AgendaDescription agendaData={agendaData} />;
+        return (
+          <>
+            <AgendaDescription agendaData={agendaData} />
+            <div className={styles.web}>
+              <AgendaPoster poster={agendaData.agendaPosterUrl} />
+            </div>
+          </>
+        );
       case tabs.PARTICIPANTS:
         return <AgendaParticipants agendaData={agendaData} myTeam={myTeam} />;
       case tabs.NOTIFICATIONS:

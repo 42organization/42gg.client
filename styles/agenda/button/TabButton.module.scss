@@ -24,3 +24,7 @@
     background: var(--highlight-yellow);
   }
 }
+
+.TabButton:last-child {
+  @include gridHidden(mobile);
+}
