@@ -16,12 +16,7 @@ const MyTeamInfo = ({
     return <div>참가중인 일정이 없습니다.</div>;
   }
   return (
-    <Link
-      href={`/agenda/${myTeamInfo.agendaKey}${
-        myTeamInfo.teamKey ? '/' + myTeamInfo.teamKey : ''
-      }`}
-      key={idx}
-    >
+    <Link href={`/agenda/detail?agenda_key=${myTeamInfo.agendaKey}`} key={idx}>
       <div className={styles.Container} key={idx}>
         {StartDate(myTeamInfo.agendaStartTime as string)}
         <div className={styles.infoContainer}>

@@ -1,0 +1,5 @@
+@import 'styles/agenda/common.scss';
+
+.contianer {
+  @include container(1);
+}

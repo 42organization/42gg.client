@@ -7,6 +7,8 @@ import { instanceInAgenda } from 'utils/axios';
 import { toastState } from 'utils/recoil/toast';
 import AgendaResultForm from 'components/agenda/Form/AgendaResultForm';
 import { useModal } from 'components/agenda/modal/useModal';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
+import useAgendaKey from 'hooks/agenda/useAgendaKey';
 import useFetchGet from 'hooks/agenda/useFetchGet';
 import styles from 'styles/agenda/pages/agendakey/host/result.module.scss';
 
@@ -83,7 +85,7 @@ const SubmitAgendaResult = () => {
   const [awardList, setAwardList] = useState<AwardListProps[]>([
     { award: '참가상', teams: [] },
   ]);
-  const { agendaKey: agenda_key } = router.query;
+  const agenda_key = useAgendaKey();
   const setSnackbar = useSetRecoilState(toastState);
   const { openModal, closeModal } = useModal();
 
@@ -112,7 +114,7 @@ const SubmitAgendaResult = () => {
       });
       return;
     }
-    console.log(awardList);
+
     const msg = awardlistToString(awardList);
     openModal({
       type: 'proceedCheck',
@@ -127,6 +129,10 @@ const SubmitAgendaResult = () => {
       },
     });
   };
+
+  if (!agenda_key) {
+    return <AgendaLoading />;
+  }
   return (
     <div className={styles.container}>
       <AgendaResultForm

@@ -2,14 +2,15 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
 import AnnouncementItem from 'components/agenda/agendaDetail/tabs/AnnouncementItem';
-import { UploadBtn } from 'components/agenda/button/UploadBtn';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import PageNation from 'components/Pagination';
+import useAgendaKey from 'hooks/agenda/useAgendaKey';
 import usePageNation from 'hooks/agenda/usePageNation';
 import styles from 'styles/agenda/agendaDetail/tabs/AgendaAnnouncements.module.scss';
 
-export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
-  const router = useRouter();
-  const { agendaKey } = router.query;
+export default function AgendaAnnouncements() {
+  const agendaKey = useAgendaKey();
+  const [selected, setSelected] = useState<number>(0);
 
   const { content, PagaNationElementProps } = usePageNation<AnnouncementProps>({
     url: `/announcement`,
@@ -17,11 +18,9 @@ export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
     size: 5,
   });
 
-  const newAnnouncement = () => {
-    router.push(`/agenda/${agendaKey}/host/createAnnouncement`);
-  };
-
-  const [selected, setSelected] = useState<number>(0);
+  if (!agendaKey || !content) {
+    return <AgendaLoading />;
+  }
 
   return (
     <>
@@ -40,27 +39,10 @@ export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
               />
             ))}
             <PageNation {...PagaNationElementProps} />
-            {isHost ? (
-              <div className={styles.buttonWarp}>
-                <UploadBtn text='공지사항 추가' onClick={newAnnouncement} />
-              </div>
-            ) : null}
           </div>
-          {content.length > 0 && selected >= 0 && selected < content.length ? (
-            <AnnouncementItem
-              key={content[selected].id}
-              id={content[selected].id}
-              title={content[selected].title}
-              content={content[selected].content}
-              createdAt={content[selected].createdAt}
-              isSelected={true}
-            />
-          ) : (
-            ''
-          )}
         </>
       ) : (
-        <div className={styles.emptyContainer}>공지사항이 없습니다.</div>
+        <div className={styles.container}>공지사항이 없습니다.</div>
       )}
     </>
   );

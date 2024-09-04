@@ -1,8 +1,9 @@
-import { useRouter } from 'next/router';
 import { ParticipantTeamListProps } from 'types/agenda/agendaDetail/tabs/participantTypes';
 import { TeamDataProps } from 'types/agenda/team/teamDataTypes';
 import ParticipantTeam from 'components/agenda/agendaDetail/tabs/ParticipantTeam';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import PageNation from 'components/Pagination';
+import useAgendaKey from 'hooks/agenda/useAgendaKey';
 import usePageNation from 'hooks/agenda/usePageNation';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantTeamList.module.scss';
 
@@ -11,8 +12,7 @@ export default function ParticipantTeamList({
   maxPeople,
   myTeam,
 }: ParticipantTeamListProps) {
-  const router = useRouter();
-  const { agendaKey } = router.query;
+  const agendaKey = useAgendaKey();
 
   const {
     content: openTeams,
@@ -30,16 +30,15 @@ export default function ParticipantTeamList({
     params: { agenda_key: agendaKey },
   });
 
-  const openTeamsCount = openTeams ? openTeams.length : 0;
-  const confirmedTeamsCount = confirmedTeams ? confirmedTeams.length : 0;
-
-  if (!agendaKey) {
-    return <div>Loading...</div>;
-  }
   const noParticipants = (
     <div className={styles.noParticipants}>팀이 없습니다.</div>
   );
+  const openTeamsCount = openTeams ? openTeams.length : 0;
+  const confirmedTeamsCount = confirmedTeams ? confirmedTeams.length : 0;
 
+  if (!agendaKey || !openTeams || !confirmedTeams) {
+    return <AgendaLoading />;
+  }
   return (
     <>
       <div className={styles.participantsContainer}>

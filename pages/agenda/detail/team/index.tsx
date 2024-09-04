@@ -6,15 +6,18 @@ import { TeamDetailProps } from 'types/agenda/teamDetail/TeamDetailTypes';
 import { Authority } from 'constants/agenda/agenda';
 import AgendaInfo from 'components/agenda/agendaDetail/AgendaInfo';
 import TeamInfo from 'components/agenda/teamDetail/TeamInfo';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import { useUser } from 'hooks/agenda/Layout/useUser';
+import useAgendaKey from 'hooks/agenda/useAgendaKey';
+import useAgendaTeamKey from 'hooks/agenda/useAgendaTeamKey';
 import useFetchGet from 'hooks/agenda/useFetchGet';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/TeamDetail/TeamDetail.module.scss';
 
 export default function TeamDetail() {
   const router = useRouter();
-  const { agendaKey } = router.query;
-  const { teamUID } = router.query;
+  const agendaKey = useAgendaKey();
+  const teamUID = useAgendaTeamKey();
 
   /**
    * API GET DATA
@@ -78,10 +81,9 @@ export default function TeamDetail() {
       () => {
         // 팀 폭파 API : 아젠다 디테일 페이지로 이동
         if (url === 'team/cancel') {
-          router.push(`/agenda/${agendaKey}`);
+          router.push(`/agenda/detail?agenda_key=${agendaKey}`);
         } else {
           // 그 외 API : 팀 상세 데이터 갱신
-
           getTeamDetail();
         }
       },
@@ -91,16 +93,20 @@ export default function TeamDetail() {
     );
   };
 
+  if (!agendaKey || !agendaData || !teamDetail) {
+    return <AgendaLoading />;
+  }
   return (
     <div className={styles.teamDetail}>
-      {agendaData ? (
-        <Link href={`/agenda/${agendaKey}`} className={styles.agendaLink}>
+      {agendaData && (
+        <Link
+          href={`/agenda/detail?agenda_key=${agendaKey}`}
+          className={styles.agendaLink}
+        >
           <AgendaInfo agendaData={agendaData} />
         </Link>
-      ) : (
-        ''
       )}
-      {teamDetail && agendaData ? (
+      {teamDetail && agendaData && (
         <TeamInfo
           teamDetail={teamDetail}
           shareTeamInfo={shareTeamInfo}
@@ -111,8 +117,6 @@ export default function TeamDetail() {
             getTeamDetail();
           }}
         />
-      ) : (
-        ''
       )}
     </div>
   );

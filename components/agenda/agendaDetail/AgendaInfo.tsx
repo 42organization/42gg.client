@@ -21,15 +21,15 @@ const copyLink = () => {
 };
 
 const hostMode = ({ router, agendaKey }: CallbackProps) => {
-  router.push(`/agenda/${agendaKey}/host/modify`);
+  router.push(`/agenda/detail/host?agenda_key=${agendaKey}`);
 };
 
 const subscribeTeam = ({ router, agendaKey }: CallbackProps) => {
-  router.push(`/agenda/${agendaKey}/create-team`);
+  router.push(`/agenda/detail/team/create?agenda_key=${agendaKey}`);
 };
 
 const submitResults = ({ router, agendaKey }: CallbackProps) => {
-  router.push(`/agenda/${agendaKey}/host/result`);
+  router.push(`/agenda/detail/host/result?agenda_key=${agendaKey}`);
 };
 
 export default function AgendaInfo({

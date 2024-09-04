@@ -43,7 +43,7 @@ const MenuBar = ({ headerstate }: { headerstate: HeaderContextState }) => {
       >
         <MenuBarContent
           content={`Hello. ${user?.intraId}`}
-          href={`/agenda/profile/${user?.intraId}`}
+          href={`/agenda/profile/user?id=${user?.intraId}`}
           as='h2'
         />
         <MenuBarContent content='Home' href='/' as='h1' />

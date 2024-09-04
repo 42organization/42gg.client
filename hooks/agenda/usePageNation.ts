@@ -25,6 +25,10 @@ const usePageNation = <T>({
 
   const getData = useCallback(
     async (page: number, size: number) => {
+      if (params && params.agenda_key === undefined) {
+        return { content: null };
+      }
+
       const res = await instanceInAgenda.get(url, { params });
       const content = res.data.content ? res.data.content : [];
       const totalSize = res.data.totalSize ? res.data.totalSize : 0;
@@ -57,10 +61,13 @@ const usePageNation = <T>({
       setContent(data.content);
     };
 
-    if (!status.current || Math.floor(status.current / 100) !== 2) {
+    if (
+      (!params || params.agenda_key) &&
+      (!status.current || Math.floor(status.current / 100) !== 2)
+    ) {
       fetchData();
     }
-  }, [getData, size]); // getData와 size에 의존
+  }, [getData, size, params]); // getData와 size에 의존
 
   const PagaNationElementProps = {
     curPage: currentPage.current,
