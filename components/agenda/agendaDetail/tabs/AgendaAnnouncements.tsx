@@ -62,8 +62,6 @@ export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
       ) : (
         <div className={styles.emptyContainer}>공지사항이 없습니다.</div>
       )}
-
-      {/* </div>/ */}
     </>
   );
 }
