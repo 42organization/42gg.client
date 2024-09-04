@@ -80,7 +80,10 @@ $info-gradient: linear-gradient(
 }
 .organizerWrap {
   @include text('default'); // medium
+  display: flex;
   margin-right: auto; // UploadBtn과의 간격 확보
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .buttonWarp {

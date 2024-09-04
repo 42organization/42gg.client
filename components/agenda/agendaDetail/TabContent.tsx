@@ -17,12 +17,12 @@ export default function TabContent({
     switch (activeTab) {
       case tabs.DESCRIPTION:
         return (
-          <>
+          <div className={styles.flex}>
             <AgendaDescription agendaData={agendaData} />
             <div className={styles.web}>
               <AgendaPoster poster={agendaData.agendaPosterUrl} />
             </div>
-          </>
+          </div>
         );
       case tabs.PARTICIPANTS:
         return <AgendaParticipants agendaData={agendaData} myTeam={myTeam} />;
@@ -31,7 +31,14 @@ export default function TabContent({
       case tabs.CONDITIONS:
         return <AgendaConditions agendaData={agendaData} />;
       case tabs.POSTER:
-        return <AgendaPoster poster={agendaData.agendaPosterUrl} />;
+        return (
+          <div className={styles.flex}>
+            <div className={styles.web}>
+              <AgendaDescription agendaData={agendaData} />
+            </div>
+            <AgendaPoster poster={agendaData.agendaPosterUrl} />
+          </div>
+        );
       default:
         return null;
     }

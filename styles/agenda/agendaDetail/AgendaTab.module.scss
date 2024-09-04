@@ -39,6 +39,21 @@
 
 .web {
   @include gridHidden(web);
-  width: auto;
-  margin-left: 1rem;
+}
+
+.flex {
+  display: flex;
+  width: 100%;
+  @media screen and (min-width: 961px) {
+    flex: 1 1 0;
+    > :first-child {
+      min-width: 400px;
+      max-width: 60%;
+    }
+    > :last-child {
+      width: max-content;
+      min-width: 40%;
+    }
+    gap: 1rem;
+  }
 }

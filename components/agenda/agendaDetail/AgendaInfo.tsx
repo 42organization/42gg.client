@@ -1,9 +1,9 @@
 import { NextRouter, useRouter } from 'next/router';
 import { AgendaInfoProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes';
-import { AgendaStatus } from 'constants/agenda/agenda';
+import { AgendaStatus, AgendaStatusTag } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
-import AgendaTags from 'components/agenda/utils/AgendaTags';
+import { AgendaTag } from 'components/agenda/utils/AgendaTag';
 import { isSoloTeam } from 'components/agenda/utils/team';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/agendaDetail/AgendaInfo.module.scss';
@@ -162,8 +162,8 @@ export default function AgendaInfo({
             <h2>{agendaTitle}</h2>
             <div className={styles.organizerWrap}>
               <span>주최자 : {agendaHost}</span>
+              <AgendaTag tagName={AgendaStatusTag[agendaData.agendaStatus]} />
             </div>
-            <div className={styles.mobile}>{AgendaTags(agendaData)}</div>
             <div className={styles.buttonWarp}>
               {isAgendaDetail && <ShareBtn onClick={copyLink} />}
               {isAgendaDetail && buttonData && (

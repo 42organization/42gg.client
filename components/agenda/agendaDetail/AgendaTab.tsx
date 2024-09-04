@@ -11,7 +11,6 @@ export default function AgendaTab({
   myTeam,
 }: AgendaTabProps) {
   const [activeTab, setActiveTab] = useState<TabValues>(TABS.DESCRIPTION);
-
   return (
     <>
       <div className={styles.tabWarp}>
