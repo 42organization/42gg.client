@@ -3,12 +3,12 @@
 .participantsContainer {
   display: flex;
   width: 100%;
-  flex-direction: column; /* 기본적으로 세로로 쌓이게 설정 */
+  flex-direction: column;
   gap: 2rem;
 
   @media screen and (min-width: 961px) {
-    flex-direction: row; /* 가로 방향으로 변경 */
-    justify-content: space-between; /* 컨테이너 사이의 간격 조정 */
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 
