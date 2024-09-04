@@ -52,7 +52,7 @@ const copyLink = () => {
 };
 
 const hostMode = ({ router, agendaKey }: CallbackProps) => {
-  router.push(`/agenda/${agendaKey}/host/modify`);
+  router.push(`/agenda/detail/host?agenda_key=${agendaKey}`);
 };
 
 const subscribeTeam = ({ router, agendaKey }: CallbackProps) => {
