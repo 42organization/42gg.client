@@ -33,7 +33,6 @@ const usePageNation = <T>({
         res.data.content = res.data.content.map((c: T, idx: number) => {
           const temp = c as T & { idx: number };
           temp.idx = idx + 1 + size * (page - 1);
-          console.log(temp.idx, idx, page, size);
           return temp;
         });
       }
