@@ -53,7 +53,7 @@ export default function ParticipantTeamList({
                 teamName={myTeam.teamName}
                 teamLeaderIntraId={myTeam.teamLeaderIntraId}
                 teamMateCount={myTeam.teamMateCount}
-                maxMateCount={maxTeam}
+                maxMateCount={maxPeople}
                 coalitions={myTeam.coalitions}
               />
             </>
