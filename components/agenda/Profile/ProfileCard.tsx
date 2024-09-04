@@ -77,8 +77,6 @@ const ProfileImageCard = ({
     setProfileData(initialProfileData);
     handleFlip();
   };
-
-  console.log(achievements); //////////////////////////////////
   return (
     <div className={styles.profileImageCard}>
       <div

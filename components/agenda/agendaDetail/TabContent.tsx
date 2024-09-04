@@ -10,7 +10,6 @@ export default function TabContent({
   activeTab,
   tabs,
   agendaData,
-  isHost,
   myTeam,
 }: TabContentProps) {
   const renderContent = () => {
@@ -27,7 +26,7 @@ export default function TabContent({
       case tabs.PARTICIPANTS:
         return <AgendaParticipants agendaData={agendaData} myTeam={myTeam} />;
       case tabs.NOTIFICATIONS:
-        return <AgendaAnnouncements isHost={isHost} />;
+        return <AgendaAnnouncements />;
       case tabs.CONDITIONS:
         return <AgendaConditions agendaData={agendaData} />;
       case tabs.POSTER:

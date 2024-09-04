@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
 import AnnouncementItem from 'components/agenda/agendaDetail/tabs/AnnouncementItem';
@@ -40,6 +39,14 @@ export default function AgendaAnnouncements() {
             ))}
             <PageNation {...PagaNationElementProps} />
           </div>
+          <AnnouncementItem
+            key={content[selected].id}
+            id={content[selected].id}
+            title={content[selected].title}
+            content={content[selected].content}
+            createdAt={content[selected].createdAt}
+            isSelected={true}
+          />
         </>
       ) : (
         <div className={styles.container}>공지사항이 없습니다.</div>
