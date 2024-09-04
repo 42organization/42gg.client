@@ -18,7 +18,7 @@ const AgendaPoster = ({ poster }: AgendaPosterProps) => {
           height={300}
         />
       ) : (
-        <div>등록된 포스터가 없습니다.</div>
+        <div className={styles.center}>등록된 포스터가 없습니다.</div>
       )}
     </div>
   );

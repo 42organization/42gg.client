@@ -20,6 +20,12 @@
 .contentWarp {
   display: flex;
   width: 100%;
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
 }
 
 .tabButtonList {
