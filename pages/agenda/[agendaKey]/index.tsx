@@ -30,7 +30,7 @@ const AgendaDetail = () => {
   return (
     <>
       <div className={styles.agendaDetailWrap}>
-        <div className={styles.webWrapper}>
+        <div className={styles.headWrapper}>
           <Link href={`/agenda`}>
             <button className={styles.webViewBtn}>
               <div className={styles.imageWrapper}>

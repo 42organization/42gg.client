@@ -27,10 +27,10 @@ function AdminAppLayout({ children }: AdminLayoutProps) {
   }
 
   return (
-    <AdminLayout>
-      {children}
-      {ModalProviderComponent ? <ModalProviderComponent /> : ''}
-    </AdminLayout>
+    <>
+      <AdminLayout>{children}</AdminLayout>
+      {ModalProviderComponent && <ModalProviderComponent />}
+    </>
   );
 }
 

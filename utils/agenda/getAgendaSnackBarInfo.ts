@@ -62,9 +62,13 @@ export default function getAgendaSnackBarInfo(
         severity: 'info',
         message: '팀이 폭파되었습니다.',
       },
+      '/team/drop': {
+        severity: 'info',
+        message: '팀에서 나갔습니다.',
+      },
       '/team/confirm': {
         severity: 'success',
-        message: '대회 정보가 성공적으로 확정되었습니다.',
+        message: '팀이 성공적으로 확정되었습니다.',
       },
       '/ticket': {
         severity: 'success',
@@ -77,6 +81,6 @@ export default function getAgendaSnackBarInfo(
   if (result) {
     return { severity: result.severity, message: result.message };
   } else {
-    return { severity: 'default', message: '뭔진 모르겠지만 성공!.' };
+    return { severity: 'default', message: '성공했습니다.' };
   }
 }
