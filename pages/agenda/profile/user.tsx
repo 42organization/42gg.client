@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { MyTeamDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { HistoryItemProps } from 'types/agenda/profile/historyListTypes';
 import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
@@ -24,6 +25,12 @@ const AgendaProfile = () => {
     useFetchGet<ProfileDataProps>(
       isMyProfile ? '/profile' : `/profile/${intraId}`
     );
+
+  useEffect(() => {
+    if (intraId) {
+      getProfileData();
+    }
+  }, [intraId]);
 
   // host current
   const {

@@ -7,7 +7,7 @@ import GithubIcon from 'public/image/agenda/github.svg';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/Profile/ProfileCard.module.scss';
 
-const ProfileImageCard = ({
+const ProfileCard = ({
   userIntraId,
   userContent,
   userGithub,
@@ -77,6 +77,7 @@ const ProfileImageCard = ({
     setProfileData(initialProfileData);
     handleFlip();
   };
+
   return (
     <div className={styles.profileImageCard}>
       <div
@@ -141,6 +142,7 @@ const ProfileImageCard = ({
           <div className={styles.profileImage}>
             <div className={styles.profileImageWrapper}>
               <CustomImage
+                key={imageUrl}
                 src={imageUrl}
                 alt='profile image'
                 addClass={styles.profileImageBox}
@@ -223,4 +225,4 @@ const ProfileImageCard = ({
   );
 };
 
-export default ProfileImageCard;
+export default ProfileCard;

@@ -22,6 +22,7 @@ const CustomImage = ({
   return src ? (
     <Image
       src={imgSrc}
+      key={imgSrc}
       alt={alt}
       width={30}
       height={30}
