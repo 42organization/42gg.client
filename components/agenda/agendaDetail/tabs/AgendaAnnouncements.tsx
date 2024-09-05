@@ -15,6 +15,7 @@ export default function AgendaAnnouncements() {
     url: `/announcement`,
     params: { agenda_key: agendaKey },
     size: 5,
+    isReady: Boolean(agendaKey),
   });
 
   if (!agendaKey || !content) {

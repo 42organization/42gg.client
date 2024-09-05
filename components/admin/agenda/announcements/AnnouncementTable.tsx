@@ -59,7 +59,7 @@ export default function AnnouncementTable() {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedAgendaKey, setSelectedAgendaKey] = useState<string>('');
-  const agendaList = useFetchGet('admin/list').data || [];
+  const agendaList = useFetchGet({ url: 'admin/list' }).data || [];
 
   useEffect(() => {
     if (agendaKey) {

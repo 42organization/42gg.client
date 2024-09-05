@@ -1,34 +1,32 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { instanceInAgenda } from 'utils/axios';
 
-const usePageNation = <T>({
-  url,
-  size = 20,
-  useIdx,
-  params,
-}: {
+interface PageNationProps {
   url: string;
   params?: Record<string, any>;
   size?: number; // 페이지 사이즈
+  isReady?: boolean; // API 호출 가능 상태 확인
   useIdx?: boolean; // 인덱싱 추가 여부
-}) => {
+}
+
+const usePageNation = <T>({
+  url,
+  params,
+  size = 20,
+  isReady,
+  useIdx,
+}: PageNationProps) => {
   const currentPage = useRef<number>(1);
   const [content, setContent] = useState<T[] | null>(null);
   const status = useRef<number>(0);
   const totalPages = useRef(1);
 
-  // 기본 파라미터 설정
-  if (!size) size = 20;
   params = params || {};
   params.page = currentPage.current;
   params.size = size;
 
   const getData = useCallback(
     async (page: number, size: number) => {
-      if (params && params.agenda_key === undefined) {
-        return { content: null };
-      }
-
       const res = await instanceInAgenda.get(url, { params });
       const content = res.data.content ? res.data.content : [];
       const totalSize = res.data.totalSize ? res.data.totalSize : 0;
@@ -62,7 +60,7 @@ const usePageNation = <T>({
     };
 
     if (
-      (!params || params.agenda_key) &&
+      isReady == true &&
       (!status.current || Math.floor(status.current / 100) !== 2)
     ) {
       fetchData();

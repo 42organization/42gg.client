@@ -27,14 +27,20 @@ export default function TeamDetail() {
    */
   const intraId = useUser()?.intraId;
 
-  const agendaData = useFetchGet<AgendaDataProps>(`/`, {
-    agenda_key: agendaKey,
+  const agendaData = useFetchGet<AgendaDataProps>({
+    url: '/',
+    isReady: Boolean(agendaKey),
+    params: { agenda_key: agendaKey },
   }).data;
 
   const { data: teamDetailData, getData: getTeamDetail } =
-    useFetchGet<TeamDetailProps>('/team', {
-      teamKey: teamUID,
-      agenda_key: agendaKey,
+    useFetchGet<TeamDetailProps>({
+      url: '/team',
+      isReady: Boolean(agendaKey && teamUID),
+      params: {
+        agenda_key: agendaKey,
+        teamKey: teamUID,
+      },
     });
 
   /**
