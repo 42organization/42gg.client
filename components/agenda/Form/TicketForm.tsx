@@ -12,7 +12,7 @@ interface userFormProps {
 const TicketForm = ({ stringKey }: userFormProps) => {
   const { closeModal } = useModal();
   const sendRequest = useFetchRequest().sendRequest;
-  const agendaList = useFetchGet('admin/list').data || [];
+  const agendaList = useFetchGet({ url: 'admin/list' }).data || [];
   const [selectedAgendaKey, setSelectedAgendaKey] = useState('');
 
   const handleSelectChange = (e: { target: { value: any } }) => {

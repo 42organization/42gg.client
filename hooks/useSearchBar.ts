@@ -55,12 +55,17 @@ export default function useSearchBar(): useSearchBarReturn {
   }, [keyword, setError]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const basePath = router.pathname.split('/')[1];
     if (event.key === 'Enter') {
       searchResult.map((data) => {
         if (data === keyword) {
           setShowDropDown(false);
           event.currentTarget.blur();
-          router.push(`/takgu/users/detail?intraId=${keyword}`);
+          if (basePath === 'takgu') {
+            router.push(`/takgu/users/detail?intraId=${keyword}`);
+          } else if (basePath === 'agenda') {
+            router.push(`/agenda/profile/user?id=${keyword}`);
+          }
         }
       });
     }

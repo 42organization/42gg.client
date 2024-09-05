@@ -92,7 +92,11 @@ const SubmitAgendaResult = () => {
   const { data } = useFetchGet<{
     totalSize: number;
     content: ParticipantProps[];
-  }>(`team/confirm/list`, { agenda_key: agenda_key, size: 30, page: 1 }) || {
+  }>({
+    url: `team/confirm/list`,
+    isReady: Boolean(agenda_key),
+    params: { agenda_key: agenda_key, size: 30, page: 1 },
+  }) || {
     data: {},
     status: 400,
   };

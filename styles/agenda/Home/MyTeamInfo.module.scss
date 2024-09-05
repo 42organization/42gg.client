@@ -2,7 +2,7 @@
 
 .Container {
   display: flex;
-  max-width: 100%;
+  width: 100%;
   padding: 0.5rem 1rem;
   background-color: var(--box-bg-1);
   border: var(--default-border);
@@ -16,7 +16,7 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  padding: 0.5rem;
+  padding: 0.4rem;
   justify-content: flex-start;
 }
 
@@ -30,12 +30,11 @@
 }
 
 .teamTitle {
-  @include text(sub-title);
+  @include text(tab);
   margin: 0;
 }
 
 .agendaTitle {
-  @include text(sub-title);
+  @include text(description-s);
   margin: 0;
-  font-family: $font-text-light;
 }

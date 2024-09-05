@@ -1,4 +1,5 @@
 import { useRecoilValue } from 'recoil';
+import { agendaErrorState } from 'utils/recoil/agendaError';
 import { errorState } from 'utils/recoil/error';
 import AgendaErrorPage from 'components/error/AgendaError';
 import TakguErrorPage from 'components/error/Error';
@@ -12,17 +13,23 @@ interface ErrorCheckerProps {
 // 추후 takgu쪽과 디자인을 어느정도 맞춘 후 통합할 예정
 export default function ErrorChecker({ children }: ErrorCheckerProps) {
   const error = useRecoilValue(errorState);
-  const app = usePathname();
+  const agendaError = useRecoilValue(agendaErrorState);
 
-  return error === '' ? (
-    <>{children}</>
-  ) : app === 'takgu' ? (
-    <div className={styles.appContainer}>
-      <div className={styles.background}>
-        <TakguErrorPage />
-      </div>
-    </div>
-  ) : (
-    <AgendaErrorPage />
-  );
+  switch (true) {
+    case agendaError.msg !== '': {
+      return <AgendaErrorPage />;
+    }
+    case error !== '': {
+      return (
+        <div className={styles.appContainer}>
+          <div className={styles.background}>
+            <TakguErrorPage />
+          </div>
+        </div>
+      );
+    }
+    default: {
+      return <>{children}</>;
+    }
+  }
 }

@@ -6,9 +6,14 @@ import styles from 'styles/agenda/pages/create-team.module.scss';
 
 const TeamModify = () => {
   const { team_key, location } = router.query;
+  const readyState = Boolean(team_key); // + team_key router.query 써서 쿼리로 못가져왔을 시, 에러 가능성 있음
 
-  const teamData = useFetchGet<TeamDetailProps>('admin/team', {
-    team_key: team_key as string,
+  const teamData = useFetchGet<TeamDetailProps>({
+    url: 'admin/team',
+    isReady: readyState,
+    params: {
+      team_key: team_key as string,
+    },
   }).data;
 
   return (
