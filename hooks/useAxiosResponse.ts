@@ -19,7 +19,7 @@ export default function useAxiosResponse() {
       );
       localStorage.setItem('42gg-token', res.data.accessToken);
     } catch (error) {
-      // setError('SW05');
+      setError('SW05');
     }
   };
 
