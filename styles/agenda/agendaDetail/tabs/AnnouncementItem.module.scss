@@ -8,6 +8,10 @@
 
   flex-direction: column;
   padding: 1.5rem;
+  @media screen and (min-width: 961px) {
+    padding: 1rem;
+    margin: 0 1rem 0 0;
+  }
   margin: 0;
   gap: 1rem;
   align-items: flex-start;
@@ -41,4 +45,22 @@
 
 .announcementContent {
   @include text('default');
+}
+
+.mobile {
+  @include gridHidden(mobile);
+}
+
+.web {
+  @include gridHidden(web);
+  margin-left: 1rem;
+  justify-content: flex-start;
+}
+
+.selected {
+  @media screen and (min-width: 961px) {
+    border-color: var(--highlight-violet);
+    border-width: 2px;
+    box-shadow: 2px 2px 0 2px var(--highlight-violet);
+  }
 }

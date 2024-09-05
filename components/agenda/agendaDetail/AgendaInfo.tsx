@@ -1,49 +1,18 @@
 import { NextRouter, useRouter } from 'next/router';
-import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { AgendaInfoProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes';
-import { AgendaLocation, AgendaStatus } from 'constants/agenda/agenda';
+import { AgendaStatus, AgendaStatusTag } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
-import { DefaultTag } from 'components/agenda/utils/AgendaTag';
+import { AgendaTag } from 'components/agenda/utils/AgendaTag';
 import { isSoloTeam } from 'components/agenda/utils/team';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/agendaDetail/AgendaInfo.module.scss';
+import StartDate from '../utils/StartDate';
 
 interface CallbackProps {
   router: NextRouter;
   agendaKey: string;
 }
-const tagButton = (data: AgendaDataProps) => {
-  const statusToTagName: Record<AgendaStatus, string> = {
-    [AgendaStatus.CANCEL]: '취소',
-    [AgendaStatus.OPEN]: '모집중',
-    [AgendaStatus.CONFIRM]: '진행중',
-    [AgendaStatus.FINISH]: '완료',
-  };
-  const LocationToTagName: Record<string, string> = {
-    [AgendaLocation.SEOUL]: '서울',
-    [AgendaLocation.GYEONGSAN]: '경산',
-    [AgendaLocation.MIX]: '혼합',
-  };
-
-  const status = statusToTagName[data.agendaStatus];
-  const location = LocationToTagName[data.agendaLocation];
-  const tags = [
-    data.isOfficial ? '공식' : '비공식',
-    data.agendaMaxPeople === 1 ? '개인' : '팀',
-    data.isRanking ? '대회' : null,
-    status,
-    location,
-  ].filter(Boolean);
-
-  return (
-    <div className={styles.agendaItemTagBox}>
-      {tags.map((tagName) => (
-        <DefaultTag key={tagName} tagName={tagName as string} />
-      ))}
-    </div>
-  );
-};
 
 const copyLink = () => {
   const url = window.location.href;
@@ -187,12 +156,16 @@ export default function AgendaInfo({
       >
         <div className={styles.infoWarp}>
           <div className={styles.contentWarp}>
+            <div className={styles.web}>
+              {StartDate(agendaData.agendaStartTime as string)}
+            </div>
             <h2>{agendaTitle}</h2>
-            {tagButton(agendaData)}
             <div className={styles.organizerWrap}>
               <span>주최자 : {agendaHost}</span>
+              <AgendaTag tagName={AgendaStatusTag[agendaData.agendaStatus]} />
             </div>
             <div className={styles.buttonWarp}>
+              {isAgendaDetail && <ShareBtn onClick={copyLink} />}
               {isAgendaDetail && buttonData && (
                 <UploadBtn
                   text={buttonData.text}
@@ -204,7 +177,6 @@ export default function AgendaInfo({
                   }}
                 />
               )}
-              {isAgendaDetail && <ShareBtn onClick={copyLink} />}
             </div>
           </div>
         </div>

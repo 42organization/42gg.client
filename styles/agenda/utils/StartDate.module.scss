@@ -1,0 +1,29 @@
+@import 'styles/agenda/common.scss';
+
+.agendaDateBox {
+  display: flex;
+  width: fit-content;
+  height: max-content;
+  flex-direction: column;
+  margin: 0.2rem 0;
+  text-align: justify;
+  letter-spacing: 0.3rem;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0rem;
+  .agendaStartDateMonth {
+    display: flex;
+    height: 1.2rem;
+    font-family: $font-text-bold;
+    font-size: 1.5rem;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .agendaStartDateDay {
+    display: flex;
+    height: 1.2rem;
+    font-family: $font-text-light;
+    font-size: 1.5rem;
+    align-items: center;
+  }
+}

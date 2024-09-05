@@ -67,7 +67,7 @@
   display: flex;
   width: 100%;
   gap: 2rem;
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     flex-direction: column;
     gap: 1rem;
   }

@@ -53,7 +53,6 @@ export default function WelcomeModal() {
       const res = await instance.post(`/pingpong/users/attendance`);
       const updatedcoin = res.data;
       if (!updatedcoin) return;
-      queryClient.invalidateQueries('user');
       setModal({
         modalName: 'COIN-ANIMATION',
         CoinResult: {

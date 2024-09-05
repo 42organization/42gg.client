@@ -1,10 +1,22 @@
 @import 'styles/agenda/common.scss';
 
+.participantsContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 2rem;
+
+  @media screen and (min-width: 961px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
 .participantsWarp {
   display: flex;
   width: 100%;
-
-  flex: 1 0 0;
+  min-width: 30%;
+  flex: 1;
   flex-direction: column;
   gap: 1rem;
 }

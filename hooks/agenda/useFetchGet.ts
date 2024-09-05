@@ -1,4 +1,4 @@
-import { useEffect, useState , useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { instanceInAgenda } from 'utils/axios';
 
 const useFetchGet = <T>(url: string, params?: Record<string, any>) => {

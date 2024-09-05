@@ -18,6 +18,5 @@ export interface TabContentProps {
   activeTab: TabValues;
   tabs: Record<string, TabValues>;
   agendaData: AgendaDataProps;
-  isHost: boolean;
   myTeam?: TeamDataProps | null;
 }
