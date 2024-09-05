@@ -196,26 +196,28 @@ const ProfileCard = ({
               <div className={styles.acheivementText}>Acheivements</div>
 
               <div className={styles.acheivementImageContainer}>
-                {achievements.map((data, index) => {
-                  const imageUrl = data.image;
+                {achievements.length
+                  ? achievements.map((data, index) => {
+                      const imageUrl = data.image;
 
-                  if (imageUrl) {
-                    const parsedUrl = imageUrl.replace(
-                      '/uploads',
-                      'https://cdn.intra.42.fr'
-                    );
+                      if (imageUrl) {
+                        const parsedUrl = imageUrl.replace(
+                          '/uploads',
+                          'https://cdn.intra.42.fr'
+                        );
 
-                    return (
-                      <div
-                        key={index}
-                        className={styles.acheivementImageWrapper}
-                      >
-                        <CustomImage src={parsedUrl} alt='achievement' />
-                      </div>
-                    );
-                  }
-                  return null;
-                })}
+                        return (
+                          <div
+                            key={index}
+                            className={styles.acheivementImageWrapper}
+                          >
+                            <CustomImage src={parsedUrl} alt='achievement' />
+                          </div>
+                        );
+                      }
+                      return null;
+                    })
+                  : ''}
               </div>
             </div>
           </div>

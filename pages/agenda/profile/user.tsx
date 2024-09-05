@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { MyTeamDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { HistoryItemProps } from 'types/agenda/profile/historyListTypes';
-import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
+import {
+  AgendaProfileDataProps,
+  IntraProfileDataProps,
+} from 'types/agenda/profile/profileDataTypes';
 import AgendaUserSearchBar from 'components/agenda/Profile/AgendaUserSearchBar';
 import CurrentList from 'components/agenda/Profile/CurrentList';
 import HistoryList from 'components/agenda/Profile/HistoryList';
@@ -20,6 +23,8 @@ const AgendaProfile = () => {
   const userIntraId = useUser()?.intraId; // 현재 나의 intraId
   const [profileUrl, setProfileUrl] = useState<string>('/profile');
   const [myProfileCheck, setMyProfileCheck] = useState<boolean | null>(null);
+  const isIntraId = useRef(false); // 인트라 아이디가 42에 있는지 확인
+  const isAgendaId = useRef(false); // 인트라 아이디가 agenda에 있는지 확인
 
   useEffect(() => {
     if (intraId && userIntraId) {
@@ -31,18 +36,27 @@ const AgendaProfile = () => {
       }
     }
   }, [intraId, userIntraId]);
-
-  /** API GET */
-  const { data: profileData, getData: getProfileData } =
-    useFetchGet<ProfileDataProps>({
-      url: profileUrl,
+  const { data: intraData, getData: getIntraData } =
+    useFetchGet<IntraProfileDataProps>({
+      url: `/profile/intra/${intraId}`,
+      isReady: Boolean(intraId),
     });
 
-  useEffect(() => {
-    if (intraId) {
-      getProfileData();
-    }
-  }, [intraId]);
+  /** Agenda API GET */
+  const { data: agendaProfileData, getData: getAgendaProfileData } =
+    useFetchGet<AgendaProfileDataProps>({
+      url: profileUrl,
+      // 본인이거나 42에 아이디가 있는 경우에만 데이터 요청
+      isReady: Boolean(
+        intraId === userIntraId || (intraId && isIntraId.current)
+      ),
+    });
+
+  // useEffect(() => {
+  //   if (intraId) {
+  //     getProfileData();
+  //   }
+  // }, [intraId]);
 
   // host current
   const {
@@ -50,7 +64,7 @@ const AgendaProfile = () => {
     PagaNationElementProps: PagaNationHostCurrent,
   } = usePageNation<MyTeamDataProps>({
     url: `/host/current/list/${intraId}`,
-    isReady: Boolean(intraId),
+    isReady: Boolean(intraId && isAgendaId.current),
   });
 
   // current team
@@ -64,7 +78,7 @@ const AgendaProfile = () => {
     PagaNationElementProps: PagaNationHostHistory,
   } = usePageNation<HistoryItemProps>({
     url: `/host/history/list/${intraId}`,
-    isReady: Boolean(intraId),
+    isReady: Boolean(intraId && isAgendaId.current),
   });
 
   // history
@@ -73,7 +87,7 @@ const AgendaProfile = () => {
     PagaNationElementProps: PagaNationHistory,
   } = usePageNation<HistoryItemProps>({
     url: `/profile/history/list/${intraId}`,
-    isReady: Boolean(intraId),
+    isReady: Boolean(intraId && isAgendaId.current),
   });
 
   if (!intraId || !userIntraId) {
@@ -87,14 +101,17 @@ const AgendaProfile = () => {
           <AgendaUserSearchBar />
         </div>
         {/* ProfileCard */}
-        {profileData && (
+        {intraData && (
           <ProfileCard
-            userIntraId={profileData.userIntraId}
-            userContent={profileData.userContent}
-            userGithub={profileData.userGithub}
-            imageUrl={profileData.imageUrl}
-            achievements={profileData.achievements}
-            getProfileData={getProfileData}
+            userIntraId={intraId}
+            userContent={
+              agendaProfileData?.userContent ||
+              'GG에 가입하지 않은 사용자입니다.'
+            }
+            userGithub={agendaProfileData?.userGithub || ''}
+            imageUrl={intraData.imageUrl}
+            achievements={intraData.achievements}
+            getProfileData={getAgendaProfileData}
             isMyProfile={myProfileCheck}
           />
         )}
