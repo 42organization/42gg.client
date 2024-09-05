@@ -13,13 +13,16 @@ export default function useAxiosResponse() {
   const refreshToken = Cookies.get('refresh_token') || '';
 
   const accessTokenHandler = async () => {
+    if (!refreshToken) {
+      return;
+    }
     try {
       const res = await instance.post(
         `/pingpong/users/accesstoken?refreshToken=${refreshToken}`
       );
       localStorage.setItem('42gg-token', res.data.accessToken);
     } catch (error) {
-      // setError('SW05');
+      setError('SW05');
     }
   };
 

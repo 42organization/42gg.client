@@ -13,7 +13,9 @@ export default function useAxiosAgendaError() {
   const refreshToken = Cookies.get('refresh_token') || '';
 
   const accessTokenHandler = async () => {
-    console.log('accessTokenHandler');
+    if (!refreshToken) {
+      return;
+    }
     try {
       const res = await instanceInAgenda.post(
         `/pingpong/users/accesstoken?refreshToken=${refreshToken}`
@@ -25,7 +27,6 @@ export default function useAxiosAgendaError() {
   };
 
   const errorResponseHandler = async (error: AxiosError) => {
-    console.log('errorResponseHandler', error);
     const defaultReturn = () => {
       if (isRecalling === true) {
         setLogin(false);
