@@ -126,3 +126,9 @@
     box-shadow: 2px 2px 0 2px var(--highlight-violet);
   }
 }
+
+.show {
+  @media screen and (min-width: 961px) {
+    display: none !important ;
+  }
+}

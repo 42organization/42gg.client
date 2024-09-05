@@ -56,7 +56,7 @@ const AgendaListItem = ({
   setSelectedItem?: (key: number) => void;
 }) => {
   const router = useRouter();
-  const href = `/agenda/${agendaInfo.agendaKey}`;
+  const href = `/agenda/detail?agenda_key=${agendaInfo.agendaKey}`;
   return (
     <button
       className={`${styles.agendaListItemBtn} ${
@@ -86,7 +86,9 @@ const AgendaListItem = ({
       }}
     >
       <AgendaInfo agendaInfo={agendaInfo} idx={idx} />
-      <AgendaDeadLine />
+      <div className={`${type === 'list' && styles.show}`}>
+        <AgendaDeadLine deadLine={agendaInfo.agendaDeadLine} />
+      </div>
     </button>
   );
 };

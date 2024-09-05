@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { TeamInfoProps } from 'types/agenda/teamDetail/TeamInfoTypes';
 import { colorMapping } from 'types/agenda/utils/colorList';
@@ -6,7 +5,9 @@ import { TeamStatus, Authority } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
 import CreateTeamForm from 'components/agenda/Form/CreateTeamForm';
 import TeamButtons from 'components/agenda/teamDetail/TeamButtons';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import EditIcon from 'public/image/agenda/edit.svg';
+import useAgendaKey from 'hooks/agenda/useAgendaKey';
 import styles from 'styles/agenda/TeamDetail/TeamInfo.module.scss';
 
 const TeamInfo = ({
@@ -18,13 +19,16 @@ const TeamInfo = ({
   submitTeamForm,
 }: TeamInfoProps) => {
   // EditTeam UI <-> TeamInfo UI 전환
-  const router = useRouter();
-  const { agendaKey } = router.query;
   const [convert, setConvert] = useState(true);
+  const agendaKey = useAgendaKey();
 
   const handleConvert = () => {
     setConvert(!convert);
   };
+
+  if (!agendaKey) {
+    return <AgendaLoading />;
+  }
   return convert ? (
     /* TeamInfo */
     <>
@@ -72,7 +76,7 @@ const TeamInfo = ({
                 <div className={styles.mateName}>
                   <p>
                     {mate.intraId}{' '}
-                    {mate.intraId === teamDetail.teamLeaderIntraId && '👑'}
+                    {mate.intraId === teamDetail.teamLeaderIntraId ? '👑' : ''}
                   </p>
                 </div>
 

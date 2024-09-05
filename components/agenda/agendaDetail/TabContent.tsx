@@ -10,21 +10,34 @@ export default function TabContent({
   activeTab,
   tabs,
   agendaData,
-  isHost,
   myTeam,
 }: TabContentProps) {
   const renderContent = () => {
     switch (activeTab) {
       case tabs.DESCRIPTION:
-        return <AgendaDescription agendaData={agendaData} />;
+        return (
+          <div className={styles.flex}>
+            <AgendaDescription agendaData={agendaData} />
+            <div className={styles.web}>
+              <AgendaPoster poster={agendaData.agendaPosterUrl} />
+            </div>
+          </div>
+        );
       case tabs.PARTICIPANTS:
         return <AgendaParticipants agendaData={agendaData} myTeam={myTeam} />;
       case tabs.NOTIFICATIONS:
-        return <AgendaAnnouncements isHost={isHost} />;
+        return <AgendaAnnouncements />;
       case tabs.CONDITIONS:
         return <AgendaConditions agendaData={agendaData} />;
       case tabs.POSTER:
-        return <AgendaPoster poster={agendaData.agendaPosterUrl} />;
+        return (
+          <div className={styles.flex}>
+            <div className={styles.web}>
+              <AgendaDescription agendaData={agendaData} />
+            </div>
+            <AgendaPoster poster={agendaData.agendaPosterUrl} />
+          </div>
+        );
       default:
         return null;
     }

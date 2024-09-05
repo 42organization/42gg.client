@@ -1,7 +1,7 @@
 import { AgendaProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { formatDate } from 'utils/agenda/formatDate';
+import AgendaTags from 'components/agenda/utils/AgendaTags';
 import styles from 'styles/agenda/agendaDetail/tabs/AgendaDescription.module.scss';
-
 export default function AgendaDescription({ agendaData }: AgendaProps) {
   const {
     agendaContent,
@@ -16,9 +16,10 @@ export default function AgendaDescription({ agendaData }: AgendaProps) {
     <>
       <div className={styles.descriptionContainer}>
         <div className={styles.descriptionTitle}>대회 정보</div>
+        {AgendaTags(agendaData)}
         <div className={styles.descriptionWarp}>
           <div className={styles.descriptionItem}>
-            <h3>간단 설명</h3> {agendaContent}
+            <h3>설명</h3> {agendaContent}
           </div>
           <div className={styles.descriptionItem}>
             <h3>모집 완료 기간</h3> ~ {formatDate(agendaDeadLine)}

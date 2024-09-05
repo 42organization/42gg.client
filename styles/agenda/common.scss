@@ -157,7 +157,7 @@ $font-size-xs: 0.8rem; // $small-font
   } @else if ($type == 'date') {
     // 날짜 - 월,일
     font-family: $font-text-bold;
-    font-size: $font-size-l;
+    font-size: $font-size-xl;
   } @else if ($type == 'sub-title') {
     // 아젠다 리스트 아이템 - 타이틀
     font-family: $font-text-bold;

@@ -5,6 +5,7 @@
   height: max-content;
   @include pageContainer;
   @media screen and (max-width: 960px) {
+    height: 90%;
     padding: 0 1rem !important;
   }
 }
@@ -12,7 +13,7 @@
 .agendaInfoContainer {
   @include container(1);
   @media screen and (min-width: 961px) {
-    height: auto;
+    height: 90%;
     min-height: 300px;
   }
   position: relative;

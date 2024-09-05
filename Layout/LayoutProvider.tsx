@@ -13,9 +13,9 @@ type LayoutProviderProps = {
 // 현재 페이지가 어떤 레이아웃을 사용할지 결정
 // 로그인 스테이트 등은 각 레이아웃에서 확인
 const LayoutProvider = ({ children }: LayoutProviderProps) => {
-  const isLogin = useRecoilValue(loginState);
+  useRecoilValue(loginState);
   useAxiosResponse();
-  console.log(isLogin);
+
   const app = usePathname();
   switch (app) {
     case '':

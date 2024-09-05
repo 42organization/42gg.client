@@ -5,13 +5,8 @@ import TabContent from 'components/agenda/agendaDetail/TabContent';
 import TabButtons from 'components/agenda/button/TabButtons';
 import styles from 'styles/agenda/agendaDetail/AgendaTab.module.scss';
 
-export default function AgendaTab({
-  agendaData,
-  isHost,
-  myTeam,
-}: AgendaTabProps) {
+export default function AgendaTab({ agendaData, myTeam }: AgendaTabProps) {
   const [activeTab, setActiveTab] = useState<TabValues>(TABS.DESCRIPTION);
-
   return (
     <>
       <div className={styles.tabWarp}>
@@ -24,7 +19,6 @@ export default function AgendaTab({
           activeTab={activeTab}
           tabs={TABS}
           agendaData={agendaData}
-          isHost={isHost}
           myTeam={myTeam}
         />
       </div>

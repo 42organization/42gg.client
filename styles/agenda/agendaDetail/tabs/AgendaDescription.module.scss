@@ -11,6 +11,8 @@
   margin: 0;
   gap: 1.2rem;
   align-items: flex-start;
+  justify-content: flex-start;
+  overflow-y: auto;
 
   @media screen and (min-width: 481px) and (max-width: 960px) {
     width: 100%;

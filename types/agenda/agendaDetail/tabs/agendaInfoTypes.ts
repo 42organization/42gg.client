@@ -11,6 +11,5 @@ export interface AgendaInfoProps {
 
 export interface AgendaTabProps {
   agendaData: AgendaDataProps;
-  isHost: boolean;
   myTeam?: TeamDataProps | null;
 }

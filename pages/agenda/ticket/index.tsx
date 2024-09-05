@@ -3,7 +3,7 @@ import styles from 'styles/agenda/Ticket/Ticket.module.scss';
 const ticket = () => {
   return (
     <div className={styles.pageContainer}>
-      <Ticket type='page' />;
+      <Ticket type='page' />
     </div>
   );
 };

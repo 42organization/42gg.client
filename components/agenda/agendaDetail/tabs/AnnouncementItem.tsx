@@ -9,8 +9,11 @@ export default function AnnouncementItem({
   title,
   content,
   createdAt,
+  isSelected,
+  isListSelected,
+  setSelected,
 }: AnnouncementProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(isSelected || false);
 
   const toggleContent = () => {
     setIsOpen(!isOpen);
@@ -18,9 +21,14 @@ export default function AnnouncementItem({
 
   return (
     <>
-      <div className={styles.announcementContianer}>
+      <div
+        className={`${styles.announcementContianer} ${
+          isSelected && styles.web
+        } ${isListSelected && styles.selected}`}
+        onClick={() => setSelected && setSelected()}
+      >
         <div className={styles.toggleWrap}>
-          <div onClick={toggleContent}>
+          <div onClick={toggleContent} className={styles.mobile}>
             {isOpen ? (
               <DownArrow className={styles.toggleIcon} />
             ) : (

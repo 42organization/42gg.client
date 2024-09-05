@@ -148,7 +148,7 @@ const SubmitAgendaForm = async (
             onProceed && onProceed();
           if (!isEdit) {
             console.log(res.data.agendaKey);
-            router.push(`/agenda/${res.data.agendaKey}`);
+            router.push(`/agenda/detail?agenda_key=${res.data.agendaKey}`);
           }
         })
         .catch((err) => {

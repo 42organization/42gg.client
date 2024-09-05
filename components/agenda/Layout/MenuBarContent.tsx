@@ -1,4 +1,3 @@
-import { on } from 'events';
 import Link from 'next/link';
 import { ElementType, useContext } from 'react';
 import styles from 'styles/agenda/Layout/MenuBar.module.scss';
@@ -28,14 +27,16 @@ const MenuBarContent = ({
 
   return (
     <div className={styles.content}>
-      {href && (
+      {href ? (
         <Link href={href} onClick={closeMenuBar}>
           <button className={styles.button}>
             <Elem>{content}</Elem>
           </button>
         </Link>
+      ) : (
+        ''
       )}
-      {!href && onClick && (
+      {!href && onClick ? (
         <button
           className={styles.button}
           onClick={() => {
@@ -45,6 +46,8 @@ const MenuBarContent = ({
         >
           <Elem>{content}</Elem>
         </button>
+      ) : (
+        ''
       )}
     </div>
   );

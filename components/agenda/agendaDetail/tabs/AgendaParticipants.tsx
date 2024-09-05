@@ -13,17 +13,19 @@ export default function AgendaParticipants({
   return (
     <>
       <div className={styles.mainWarp}>
-        <div className={styles.participantsContainer}>
-          {isSoloTeam(agendaMinPeople, agendaMaxPeople) ? (
+        {isSoloTeam(agendaMinPeople, agendaMaxPeople) ? (
+          <div className={`${styles.participantsContainer} ${styles.solo}`}>
             <ParticipantsList max={agendaMaxTeam} />
-          ) : (
+          </div>
+        ) : (
+          <div className={`${styles.participantsContainer} ${styles.team}`}>
             <ParticipantTeamList
               maxTeam={agendaMaxTeam}
               maxPeople={agendaMaxPeople}
               myTeam={myTeam}
             />
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </>
   );

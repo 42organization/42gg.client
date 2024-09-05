@@ -1,16 +1,16 @@
-import { useRouter } from 'next/router';
 import {
   numberProps,
   ParticipantProps,
 } from 'types/agenda/agendaDetail/tabs/participantTypes';
 import Participant from 'components/agenda/agendaDetail/tabs/Participant';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import PageNation from 'components/Pagination';
+import useAgendaKey from 'hooks/agenda/useAgendaKey';
 import usePageNation from 'hooks/agenda/usePageNation';
 import styles from 'styles/agenda/agendaDetail/tabs/ParticipantsList.module.scss';
 
 export default function ParticipantsList({ max }: numberProps) {
-  const router = useRouter();
-  const { agendaKey } = router.query;
+  const agendaKey = useAgendaKey();
 
   const { content: participants, PagaNationElementProps } =
     usePageNation<ParticipantProps>({
@@ -19,10 +19,10 @@ export default function ParticipantsList({ max }: numberProps) {
     });
 
   const curPeople = participants ? participants.length : 0;
-  if (!participants) {
-    return <div className={styles.noParticipants}>Loading...</div>;
-  }
 
+  if (!agendaKey || !participants) {
+    return <AgendaLoading />;
+  }
   return (
     <>
       <div className={styles.participantsTitle}>

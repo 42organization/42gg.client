@@ -23,7 +23,7 @@ export default function Participant({
     >
       <div className={styles.participantItemWarp}>
         <div className={styles.participantcontent}>{teamName}</div>
-        {IconComponent && <IconComponent />}
+        {IconComponent ? <IconComponent /> : ''}
       </div>
     </div>
   );

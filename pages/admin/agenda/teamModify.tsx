@@ -16,12 +16,14 @@ const TeamModify = () => {
       <div className={styles.modifyContainer}>
         <div className={styles.container}>
           <h2 className={styles.title}>팀 수정하기</h2>
-          {teamData && (
+          {teamData ? (
             <AdminTeamForm
               teamKey={team_key as string}
               teamData={teamData}
               teamLocation={location as string}
             />
+          ) : (
+            ''
           )}
         </div>
       </div>

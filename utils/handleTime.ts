@@ -206,7 +206,7 @@ export const dateToStringFormat = (d: Date) => {
   const year = d.getFullYear();
   const month = fillZero((d.getMonth() + 1).toString(), 2);
   const date = fillZero(d.getDate().toString(), 2);
-  return `${year}년 ${month}월 ${date}일`;
+  return `${year}년${month}월${date}일`;
 };
 
 /**
