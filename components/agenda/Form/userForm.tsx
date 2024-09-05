@@ -48,9 +48,9 @@ const UserForm = ({ stringKey }: userFormProps) => {
   const { closeModal } = useModal();
   const sendRequest = useFetchRequest().sendRequest;
 
-  const { data }: { data: dataType | null } = useFetchGet(
-    `profile/${stringKey}`
-  );
+  const { data }: { data: dataType | null } = useFetchGet({
+    url: `profile/${stringKey}`,
+  });
 
   if (!data) {
     return <div className={styles.modalContainer}>loading...</div>;

@@ -17,8 +17,10 @@ const Agenda: NextPage = () => {
       url: '/history',
     });
 
-  const { data: currentData } = useFetchGet<AgendaDataProps[]>('/confirm');
-  const { data: openData } = useFetchGet<AgendaDataProps[]>('/open');
+  const { data: currentData } = useFetchGet<AgendaDataProps[]>({
+    url: '/confirm',
+  });
+  const { data: openData } = useFetchGet<AgendaDataProps[]>({ url: '/open' });
 
   return (
     <div className={styles.agendaPageContainer}>

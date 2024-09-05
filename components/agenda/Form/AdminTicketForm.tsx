@@ -17,7 +17,7 @@ interface userFormProps {
 const AdminTicketForm = ({ stringKey, data, onProceed }: userFormProps) => {
   const { closeModal } = useModal();
   const sendRequest = useFetchRequest().sendRequest;
-  const agendaList = useFetchGet('admin/list').data || [];
+  const agendaList = useFetchGet({ url: 'admin/list' }).data || [];
 
   const [issuedFromKey, setIssuedFromKey] = useState(
     data.issuedFromKey ? data.issuedFromKey : ''

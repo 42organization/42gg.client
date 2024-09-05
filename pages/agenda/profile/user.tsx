@@ -21,9 +21,9 @@ const AgendaProfile = () => {
 
   /** API GET */
   const { data: profileData, getData: getProfileData } =
-    useFetchGet<ProfileDataProps>(
-      isMyProfile ? '/profile' : `/profile/${intraId}`
-    );
+    useFetchGet<ProfileDataProps>({
+      url: isMyProfile ? '/profile' : `/profile/${intraId}`,
+    });
 
   // host current
   const {
@@ -34,9 +34,9 @@ const AgendaProfile = () => {
   });
 
   // current team
-  const currentListData = useFetchGet<MyTeamDataProps[]>(
-    '/profile/current/list'
-  ).data;
+  const currentListData = useFetchGet<MyTeamDataProps[]>({
+    url: '/profile/current/list',
+  }).data;
 
   // host history
   const {
