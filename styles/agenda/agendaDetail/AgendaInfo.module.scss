@@ -79,7 +79,7 @@ $info-gradient: linear-gradient(
   align-items: center;
 }
 .organizerWrap {
-  @include text('default'); // medium
+  @include text('description-s'); // medium
   display: flex;
   margin-right: auto; // UploadBtn과의 간격 확보
   align-items: center;
