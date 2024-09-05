@@ -38,6 +38,12 @@ const AgendaProfile = () => {
       url: profileUrl,
     });
 
+  useEffect(() => {
+    if (intraId) {
+      getProfileData();
+    }
+  }, [intraId]);
+
   // host current
   const {
     content: hostCurrentListData,

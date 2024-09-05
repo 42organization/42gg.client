@@ -45,7 +45,7 @@ const AgendaInfo = ({
           <div className={styles.agendaItemTimeWrapper}>
             <div className={styles.imageWrapper}>
               <Image
-                src={'/image/agenda/User.svg'}
+                src={'/image/agenda/user.svg'}
                 width={15}
                 height={15}
                 alt='count'
