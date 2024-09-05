@@ -20,6 +20,7 @@ export default function ParticipantTeamList({
   } = usePageNation<TeamDataProps>({
     url: `team/open/list`,
     params: { agenda_key: agendaKey },
+    isReady: Boolean(agendaKey),
   });
 
   const {
@@ -28,6 +29,7 @@ export default function ParticipantTeamList({
   } = usePageNation<TeamDataProps>({
     url: `team/confirm/list`,
     params: { agenda_key: agendaKey },
+    isReady: Boolean(agendaKey),
   });
 
   const noParticipants = (

@@ -13,6 +13,9 @@ export default function useAxiosResponse() {
   const refreshToken = Cookies.get('refresh_token') || '';
 
   const accessTokenHandler = async () => {
+    if (!refreshToken) {
+      return;
+    }
     try {
       const res = await instance.post(
         `/pingpong/users/accesstoken?refreshToken=${refreshToken}`

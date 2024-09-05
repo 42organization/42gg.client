@@ -96,6 +96,7 @@ const ProfileCard = ({
                 name='userContent'
                 maxLength={50}
                 wrap='soft'
+                key={userIntraId}
                 value={profileData.userContent}
                 placeholder='상태 메시지를 입력하세요.'
                 className={styles.editDescription}
@@ -180,6 +181,7 @@ const ProfileCard = ({
                   href={`https://profile.intra.42.fr/users/${userIntraId}`}
                   target='_blank'
                   rel='noopener noreferrer'
+                  key={userIntraId}
                 >
                   <IntraIcon />
                 </a>
@@ -188,35 +190,40 @@ const ProfileCard = ({
           </div>
 
           <div className={styles.profileContent}>
-            <div className={styles.description}>{userContent}</div>
+            <div className={styles.description} key={userIntraId}>
+              {userContent}
+            </div>
 
             <hr className={styles.divider} />
 
             <div className={styles.acheivementContainer}>
               <div className={styles.acheivementText}>Acheivements</div>
+              <div
+                className={styles.acheivementImageContainer}
+                key={userIntraId}
+              >
+                {achievements.length
+                  ? achievements.map((data, index) => {
+                      const imageUrl = data.image;
 
-              <div className={styles.acheivementImageContainer}>
-                {achievements &&
-                  achievements.map((data, index) => {
-                    const imageUrl = data.image;
+                      if (imageUrl) {
+                        const parsedUrl = imageUrl.replace(
+                          '/uploads',
+                          'https://cdn.intra.42.fr'
+                        );
 
-                    if (imageUrl) {
-                      const parsedUrl = imageUrl.replace(
-                        '/uploads',
-                        'https://cdn.intra.42.fr'
-                      );
-
-                      return (
-                        <div
-                          key={index}
-                          className={styles.acheivementImageWrapper}
-                        >
-                          <CustomImage src={parsedUrl} alt='achievement' />
-                        </div>
-                      );
-                    }
-                    return null;
-                  })}
+                        return (
+                          <div
+                            key={index}
+                            className={styles.acheivementImageWrapper}
+                          >
+                            <CustomImage src={parsedUrl} alt='achievement' />
+                          </div>
+                        );
+                      }
+                      return null;
+                    })
+                  : ''}
               </div>
             </div>
           </div>
