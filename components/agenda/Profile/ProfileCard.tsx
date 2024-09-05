@@ -198,7 +198,6 @@ const ProfileCard = ({
 
             <div className={styles.acheivementContainer}>
               <div className={styles.acheivementText}>Acheivements</div>
-
               <div
                 className={styles.acheivementImageContainer}
                 key={userIntraId}
