@@ -101,7 +101,7 @@ const AgendaProfile = () => {
           <AgendaUserSearchBar />
         </div>
         {/* ProfileCard */}
-        {intraData && (
+        {intraData && intraId && (
           <ProfileCard
             userIntraId={intraId}
             userContent={
