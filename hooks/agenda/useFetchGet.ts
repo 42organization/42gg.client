@@ -1,13 +1,19 @@
 import { useEffect, useState, useCallback } from 'react';
 import { instanceInAgenda } from 'utils/axios';
 
-const useFetchGet = <T>(url: string, params?: Record<string, any>) => {
+interface FetchGetProps {
+  url: string;
+  isReady?: boolean;
+  params?: Record<string, any>;
+}
+
+const useFetchGet = <T>({ url, isReady = true, params }: FetchGetProps) => {
   const [data, setData] = useState<T | null>(null);
   const [status, setStatus] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
 
   const getData = useCallback(async () => {
-    if (params && params.agenda_key === undefined) {
+    if (isReady === false) {
       return;
     }
 
@@ -24,8 +30,7 @@ const useFetchGet = <T>(url: string, params?: Record<string, any>) => {
   }, [url, params]);
 
   useEffect(() => {
-    // URL이 있고 params가 없거나, agenda_key가 있는 경우에도 getData 호출 가능
-    if (url && (!params || (params && params.agenda_key))) {
+    if (url) {
       getData(); // 조건에 맞을 때만 getData 호출
     }
   }, [url, JSON.stringify(params)]);

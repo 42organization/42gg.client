@@ -41,16 +41,9 @@ const useAnnouncementCheck = (presentPath: string) => {
     }
   };
 
-  // const attendedHandler = () => {
-  //   if (user && user.isAttended === false && presentPath === '/') {
-  //     setModal({ modalName: 'EVENT-WELCOME' });
-  //   }
-  // };
-
   useEffect(() => {
     if (!user) return;
-    // attendedHandler();
-    if (user && user.isAttended === false && presentPath === '/') {
+    if (user && user.isAttended === false && presentPath === 'takgu') {
       setModal({ modalName: 'EVENT-WELCOME' });
     } else announcementHandler();
   }, [user, presentPath]);

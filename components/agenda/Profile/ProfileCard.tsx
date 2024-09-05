@@ -7,7 +7,7 @@ import GithubIcon from 'public/image/agenda/github.svg';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/Profile/ProfileCard.module.scss';
 
-const ProfileImageCard = ({
+const ProfileCard = ({
   userIntraId,
   userContent,
   userGithub,
@@ -77,6 +77,7 @@ const ProfileImageCard = ({
     setProfileData(initialProfileData);
     handleFlip();
   };
+
   return (
     <div className={styles.profileImageCard}>
       <div
@@ -95,6 +96,7 @@ const ProfileImageCard = ({
                 name='userContent'
                 maxLength={50}
                 wrap='soft'
+                key={userIntraId}
                 value={profileData.userContent}
                 placeholder='상태 메시지를 입력하세요.'
                 className={styles.editDescription}
@@ -141,6 +143,7 @@ const ProfileImageCard = ({
           <div className={styles.profileImage}>
             <div className={styles.profileImageWrapper}>
               <CustomImage
+                key={imageUrl}
                 src={imageUrl}
                 alt='profile image'
                 addClass={styles.profileImageBox}
@@ -178,6 +181,7 @@ const ProfileImageCard = ({
                   href={`https://profile.intra.42.fr/users/${userIntraId}`}
                   target='_blank'
                   rel='noopener noreferrer'
+                  key={userIntraId}
                 >
                   <IntraIcon />
                 </a>
@@ -186,34 +190,41 @@ const ProfileImageCard = ({
           </div>
 
           <div className={styles.profileContent}>
-            <div className={styles.description}>{userContent}</div>
+            <div className={styles.description} key={userIntraId}>
+              {userContent}
+            </div>
 
             <hr className={styles.divider} />
 
             <div className={styles.acheivementContainer}>
               <div className={styles.acheivementText}>Acheivements</div>
 
-              <div className={styles.acheivementImageContainer}>
-                {achievements.map((data, index) => {
-                  const imageUrl = data.image;
+              <div
+                className={styles.acheivementImageContainer}
+                key={userIntraId}
+              >
+                {achievements.length
+                  ? achievements.map((data, index) => {
+                      const imageUrl = data.image;
 
-                  if (imageUrl) {
-                    const parsedUrl = imageUrl.replace(
-                      '/uploads',
-                      'https://cdn.intra.42.fr'
-                    );
+                      if (imageUrl) {
+                        const parsedUrl = imageUrl.replace(
+                          '/uploads',
+                          'https://cdn.intra.42.fr'
+                        );
 
-                    return (
-                      <div
-                        key={index}
-                        className={styles.acheivementImageWrapper}
-                      >
-                        <CustomImage src={parsedUrl} alt='achievement' />
-                      </div>
-                    );
-                  }
-                  return null;
-                })}
+                        return (
+                          <div
+                            key={index}
+                            className={styles.acheivementImageWrapper}
+                          >
+                            <CustomImage src={parsedUrl} alt='achievement' />
+                          </div>
+                        );
+                      }
+                      return null;
+                    })
+                  : ''}
               </div>
             </div>
           </div>
@@ -223,4 +234,4 @@ const ProfileImageCard = ({
   );
 };
 
-export default ProfileImageCard;
+export default ProfileCard;
