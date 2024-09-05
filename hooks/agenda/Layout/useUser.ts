@@ -1,13 +1,10 @@
 import { useQuery } from 'react-query';
-import { useSetRecoilState } from 'recoil';
 import { User } from 'types/agenda/mainType';
 import { instanceInAgenda } from 'utils/axios';
-import { errorState } from 'utils/recoil/error';
 
 export const useUser = () => {
-  const setError = useSetRecoilState<string>(errorState);
   const { data, isError } = useQuery<User>(
-    'user',
+    'agendauser',
     () =>
       instanceInAgenda.get('/profile/info').then((res) => {
         return res.data;
@@ -18,7 +15,6 @@ export const useUser = () => {
     }
   );
   if (isError) {
-    setError('JB02');
     return undefined;
   }
   if (data) return data;
