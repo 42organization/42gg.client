@@ -16,6 +16,7 @@ export default function ParticipantsList({ max }: numberProps) {
     usePageNation<ParticipantProps>({
       url: `team/confirm/list`,
       params: { agenda_key: agendaKey },
+      isReady: Boolean(agendaKey),
     });
 
   const curPeople = participants ? participants.length : 0;
