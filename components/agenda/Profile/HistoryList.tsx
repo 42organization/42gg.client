@@ -41,80 +41,84 @@ const HistoryList = ({ historyListData, isHost }: HistoryListProps) => {
       <div className={styles.historyTitleText}>{historyTitle}</div>
       <div className={styles.historyItems}>
         {historyListData.length > 0 ? (
-          historyListData.map((historyData: HistoryItemProps) => {
-            const {
-              historyTeamMates,
-              totalPeople,
-              peopleCount,
-              startTime,
-              endTime,
-              timeString,
-            } = parsingHistoryData(historyData);
+          historyListData.map(
+            (historyData: HistoryItemProps, index: number) => {
+              const {
+                historyTeamMates,
+                totalPeople,
+                peopleCount,
+                startTime,
+                endTime,
+                timeString,
+              } = parsingHistoryData(historyData);
 
-            return (
-              <Link
-                href={`/agenda/${historyData.agendaKey}`}
-                className={styles.historyItem}
-                key={historyData.agendaId}
-              >
-                <div className={styles.agendaTitle}>
-                  {historyData.agendaTitle}
-                </div>
-
-                <div className={styles.tagWrapper}>
-                  {/* PROGRESS : tag mapping */}
-                  {historyData.isOfficial ? (
-                    <AgendaTag tagName='공식' />
-                  ) : (
-                    <AgendaTag tagName='비공식' />
-                  )}
-                  <AgendaTag tagName='팀' />
-                </div>
-
-                <div className={styles.timeWrapper}>
-                  <div className={styles.imageWrapper}>
-                    <TimeIcon />
+              return (
+                <Link
+                  href={`/agenda/detail?agenda_key=${historyData.agendaKey}`}
+                  className={styles.historyItem}
+                  key={`${historyData.agendaId}-${index}`}
+                >
+                  <div className={styles.agendaTitle}>
+                    {historyData.agendaTitle}
                   </div>
 
-                  <div className={styles.timeContent}>{timeString}</div>
-                </div>
+                  <div className={styles.tagWrapper}>
+                    {/* PROGRESS : tag mapping */}
+                    {historyData.isOfficial ? (
+                      <AgendaTag tagName='공식' />
+                    ) : (
+                      <AgendaTag tagName='비공식' />
+                    )}
+                    <AgendaTag tagName='팀' />
+                  </div>
 
-                {/* Team 정보 UI / host 경우 ❌ */}
-                {historyTeamMates && historyTeamMates.length > 0 ? (
-                  <>
-                    <hr className={styles.divider} />
-
-                    <div className={styles.teamName}>
-                      {historyData.teamName}
+                  <div className={styles.timeWrapper}>
+                    <div className={styles.imageWrapper}>
+                      <TimeIcon />
                     </div>
 
-                    <div className={styles.teamIntraIdWrapper}>
-                      <div className={styles.imageWrapper}>
-                        <TeamIcon />
+                    <div className={styles.timeContent}>{timeString}</div>
+                  </div>
+
+                  {/* Team 정보 UI / host 경우 ❌ */}
+                  {historyTeamMates && historyTeamMates.length > 0 ? (
+                    <>
+                      <hr className={styles.divider} />
+
+                      <div className={styles.teamName}>
+                        {historyData.teamName}
                       </div>
 
-                      {/* intra id mapping */}
-                      <div className={styles.intraIdWrapper}>
-                        {historyTeamMates.map((mate) => (
-                          <div key={`${historyData.agendaId}-${mate.intraId}`}>
-                            {mate.intraId}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                      <div className={styles.teamIntraIdWrapper}>
+                        <div className={styles.imageWrapper}>
+                          <TeamIcon />
+                        </div>
 
-                    {/* coalition color mapping */}
-                    <div className={styles.coalitionWrapper}>
-                      <ColorList
-                        peopleCount={peopleCount}
-                        totalPeople={totalPeople}
-                      />
-                    </div>
-                  </>
-                ) : null}
-              </Link>
-            );
-          })
+                        {/* intra id mapping */}
+                        <div className={styles.intraIdWrapper}>
+                          {historyTeamMates.map((mate, index) => (
+                            <div
+                              key={`${historyData.agendaId}-${mate.intraId}-${index}`}
+                            >
+                              {mate.intraId}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* coalition color mapping */}
+                      <div className={styles.coalitionWrapper}>
+                        <ColorList
+                          peopleCount={peopleCount}
+                          totalPeople={totalPeople}
+                        />
+                      </div>
+                    </>
+                  ) : null}
+                </Link>
+              );
+            }
+          )
         ) : (
           <div className={styles.historyEmpty}>아젠다 기록이 없습니다.</div>
         )}

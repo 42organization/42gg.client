@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 import { MyTeamDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { HistoryItemProps } from 'types/agenda/profile/historyListTypes';
 import { ProfileDataProps } from 'types/agenda/profile/profileDataTypes';
@@ -11,19 +11,32 @@ import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import PageNation from 'components/Pagination';
 import { useUser } from 'hooks/agenda/Layout/useUser';
 import useFetchGet from 'hooks/agenda/useFetchGet';
+import useIntraId from 'hooks/agenda/useIntraId';
 import usePageNation from 'hooks/agenda/usePageNation';
 import styles from 'styles/agenda/Profile/AgendaProfile.module.scss';
 
 const AgendaProfile = () => {
-  const intraId = useRouter().query.id;
+  const intraId = useIntraId(); // 쿼리의 id
   const userIntraId = useUser()?.intraId; // 현재 나의 intraId
-  const isMyProfile = intraId === userIntraId ? true : false;
+  const [profileUrl, setProfileUrl] = useState<string>('/profile');
+  const [myProfileCheck, setMyProfileCheck] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    if (intraId && userIntraId) {
+      if (intraId === userIntraId) {
+        setMyProfileCheck(true);
+      } else {
+        setProfileUrl(`/profile/${intraId}`);
+        setMyProfileCheck(false);
+      }
+    }
+  }, [intraId, userIntraId]);
 
   /** API GET */
   const { data: profileData, getData: getProfileData } =
-    useFetchGet<ProfileDataProps>(
-      isMyProfile ? '/profile' : `/profile/${intraId}`
-    );
+    useFetchGet<ProfileDataProps>({
+      url: profileUrl,
+    });
 
   // host current
   const {
@@ -31,12 +44,13 @@ const AgendaProfile = () => {
     PagaNationElementProps: PagaNationHostCurrent,
   } = usePageNation<MyTeamDataProps>({
     url: `/host/current/list/${intraId}`,
+    isReady: Boolean(intraId),
   });
 
   // current team
-  const currentListData = useFetchGet<MyTeamDataProps[]>(
-    '/profile/current/list'
-  ).data;
+  const currentListData = useFetchGet<MyTeamDataProps[]>({
+    url: '/profile/current/list',
+  }).data;
 
   // host history
   const {
@@ -44,6 +58,7 @@ const AgendaProfile = () => {
     PagaNationElementProps: PagaNationHostHistory,
   } = usePageNation<HistoryItemProps>({
     url: `/host/history/list/${intraId}`,
+    isReady: Boolean(intraId),
   });
 
   // history
@@ -52,6 +67,7 @@ const AgendaProfile = () => {
     PagaNationElementProps: PagaNationHistory,
   } = usePageNation<HistoryItemProps>({
     url: `/profile/history/list/${intraId}`,
+    isReady: Boolean(intraId),
   });
 
   if (!intraId || !userIntraId) {
@@ -73,11 +89,11 @@ const AgendaProfile = () => {
             imageUrl={profileData.imageUrl}
             achievements={profileData.achievements}
             getProfileData={getProfileData}
-            isMyProfile={isMyProfile}
+            isMyProfile={myProfileCheck}
           />
         )}
         {/* Ticket */}
-        {isMyProfile ? <Ticket type='component' /> : ''}
+        {myProfileCheck ? <Ticket type='component' /> : ''}
         {/* Host Current List */}
         {hostCurrentListData && hostCurrentListData.length > 0 ? (
           <>
@@ -88,7 +104,7 @@ const AgendaProfile = () => {
           ''
         )}
         {/* Current List */}
-        {isMyProfile && currentListData ? (
+        {myProfileCheck && currentListData ? (
           <CurrentList currentListData={currentListData} isHost={false} />
         ) : (
           ''

@@ -9,7 +9,7 @@ interface TicketProps {
 }
 
 const Ticket = ({ type }: { type: string }) => {
-  const { data } = useFetchGet<TicketProps>('/ticket');
+  const { data } = useFetchGet<TicketProps>({ url: '/ticket' });
   const { openModal } = useModal();
 
   return (

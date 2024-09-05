@@ -30,7 +30,8 @@ const MyAgendaBtn = () => {
     }
   };
   const myList =
-    useFetchGet<MyTeamDataProps[]>('/profile/current/list')?.data || [];
+    useFetchGet<MyTeamDataProps[]>({ url: '/profile/current/list' })?.data ||
+    [];
   return (
     <div
       className={`${styles.myAgendaContainer} ${

@@ -17,10 +17,11 @@ const AgendaDetail = () => {
   const agendaKey = useAgendaKey();
   const agendaData = useAgendaInfo(agendaKey as string);
 
-  const { data: myTeam, status: myTeamStatus } = useFetchGet<TeamDataProps>(
-    `team/my`,
-    { agenda_key: agendaKey }
-  );
+  const { data: myTeam, status: myTeamStatus } = useFetchGet<TeamDataProps>({
+    url: `team/my`,
+    isReady: Boolean(agendaKey),
+    params: { agenda_key: agendaKey },
+  });
   const intraId = useUser()?.intraId || '';
   const isHost = getIsHost(intraId, agendaData);
 
