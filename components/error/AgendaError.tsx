@@ -17,8 +17,16 @@ export default function ErrorPage() {
   if (status === 401) {
     localStorage.removeItem('42gg-token');
     setLoggedIn(false);
-    setError({ msg: '', status: 0 });
   }
+
+  const resetHandler = () => {
+    if (status === 401) {
+      localStorage.removeItem('42gg-token');
+      setLoggedIn(false);
+    }
+    setError({ msg: '', status: 0 });
+    goHome();
+  };
 
   useEffect(() => {
     resetModal();
@@ -40,7 +48,7 @@ export default function ErrorPage() {
             <ErrorEmoji />
           </div>
         </div>
-        <div className={styles.home} onClick={goHome}>
+        <div className={styles.home} onClick={resetHandler}>
           <div className={styles.positive}>
             <input type='button' value='🏠 홈으로 🏠' />
           </div>
