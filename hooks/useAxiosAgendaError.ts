@@ -55,20 +55,6 @@ export default function useAxiosAgendaError() {
           }
         } else return defaultReturn();
       }
-      case 400:
-        if (error.config.method === 'get') {
-          setError({
-            msg: '데이터를 가져올 수 없습니다.',
-            status: error.response.status,
-          });
-        }
-        break;
-      case 404:
-        setError({
-          msg: '문제가 발생했습니다.',
-          status: error.response.status,
-        });
-        break;
       case 500:
         setError({
           msg: '서버 오류가 발생했습니다',
