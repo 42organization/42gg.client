@@ -39,7 +39,11 @@ export default function ParticipantTeamList({
   const confirmedTeamsCount = confirmedTeams ? confirmedTeams.length : 0;
 
   if (!agendaKey || !openTeams || !confirmedTeams) {
-    return <AgendaLoading />;
+    return (
+      <div className={styles.participantsContainer}>
+        <AgendaLoading />
+      </div>
+    );
   }
   return (
     <>
