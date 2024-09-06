@@ -101,7 +101,6 @@ $font-size-xs: 0.8rem; // $small-font
 @mixin logoText($size, $color) {
   font-family: $font-logo;
   font-size: $size;
-  font-weight: 500;
   color: $color;
   text-align: center;
   letter-spacing: 0.1rem;
@@ -142,18 +141,15 @@ $font-size-xs: 0.8rem; // $small-font
     // 인원수 표시하는 부분
     font-family: $font-inter;
     font-size: $font-size-xxl;
-    font-weight: 100;
     text-align: center;
   } @else if ($type == 'main-menu') {
     // navbar 메뉴
     font-family: $font-menu;
     font-size: $font-size-xl;
-    font-weight: 400;
   } @else if ($type == 'sub-menu') {
     // navbar 서브메뉴
     font-family: $font-menu;
     font-size: $font-size-l;
-    font-weight: 300;
   } @else if ($type == 'title') {
     // 아젠다,팀 타이틀
     font-family: $font-text-bold;
