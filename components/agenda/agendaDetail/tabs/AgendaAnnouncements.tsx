@@ -18,9 +18,12 @@ export default function AgendaAnnouncements() {
   });
 
   if (!agendaKey || !content) {
-    return <AgendaLoading />;
+    return (
+      <div className={styles.emptyContainer}>
+        <AgendaLoading />
+      </div>
+    );
   }
-
   return (
     <>
       {content && content.length > 0 ? (
