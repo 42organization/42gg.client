@@ -1,6 +1,5 @@
 import { TabContentProps } from 'types/agenda/button/tabButtonTypes';
 import AgendaAnnouncements from 'components/agenda/agendaDetail/tabs/AgendaAnnouncements';
-import AgendaConditions from 'components/agenda/agendaDetail/tabs/AgendaConditions';
 import AgendaDescription from 'components/agenda/agendaDetail/tabs/AgendaDescription';
 import AgendaParticipants from 'components/agenda/agendaDetail/tabs/AgendaParticipants';
 import AgendaPoster from 'components/agenda/agendaDetail/tabs/AgendaPoster';
@@ -27,8 +26,7 @@ export default function TabContent({
         return <AgendaParticipants agendaData={agendaData} myTeam={myTeam} />;
       case tabs.NOTIFICATIONS:
         return <AgendaAnnouncements />;
-      case tabs.CONDITIONS:
-        return <AgendaConditions agendaData={agendaData} />;
+
       case tabs.POSTER:
         return (
           <div className={styles.flex}>

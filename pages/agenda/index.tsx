@@ -15,6 +15,8 @@ const Agenda: NextPage = () => {
   const { PagaNationElementProps, content: historyData } =
     usePageNation<AgendaDataProps>({
       url: '/history',
+      size: 10,
+      isReady: showCurrent === 'history',
     });
 
   const { data: currentData } = useFetchGet<AgendaDataProps[]>({
@@ -22,6 +24,7 @@ const Agenda: NextPage = () => {
   });
   const { data: openData } = useFetchGet<AgendaDataProps[]>({ url: '/open' });
 
+  console.log('historyData', historyData);
   return (
     <div className={styles.agendaPageContainer}>
       <AgendaTitle />
@@ -30,7 +33,7 @@ const Agenda: NextPage = () => {
           <h2>AGENDA LIST</h2>
           <div>
             <button
-              className={`${listStyles.agendaListStatus} 
+              className={`${listStyles.agendaListStatus}
                 ${showCurrent === 'open' ? listStyles.selectedStatus : ''}`}
               name='ongoing'
               onClick={() => setShowCurrent('open')}
@@ -39,7 +42,7 @@ const Agenda: NextPage = () => {
             </button>
             {' | '}
             <button
-              className={`${listStyles.agendaListStatus} 
+              className={`${listStyles.agendaListStatus}
             ${showCurrent === 'current' ? listStyles.selectedStatus : ''}`}
               name='closed'
               onClick={() => setShowCurrent('current')}
@@ -48,7 +51,7 @@ const Agenda: NextPage = () => {
             </button>
             {' | '}
             <button
-              className={`${listStyles.agendaListStatus} 
+              className={`${listStyles.agendaListStatus}
               ${showCurrent === 'history' ? listStyles.selectedStatus : ''}`}
               name='closed'
               onClick={() => setShowCurrent('history')}
