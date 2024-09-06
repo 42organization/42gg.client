@@ -31,23 +31,21 @@
   @include action;
   width: 100%;
   height: max-content;
+  justify-content: center;
   @media screen and (max-width: 480px) {
     display: flex;
     flex-direction: column;
-    // border: 2px solid red;
   }
   @media screen and (min-width: 481px) and (max-width: 960px) {
     display: flex;
     flex-direction: column;
-    // padding: 0 5rem;
-    // border: 2px solid blue;
   }
   @media screen and (min-width: 961px) {
     display: grid;
     padding: 0 5rem;
-    // border: 2px solid yellow;
   }
 }
+
 @mixin pageContainer {
   @include action;
   display: flex;
@@ -61,6 +59,7 @@
   }
   @media screen and (min-width: 961px) {
     height: 100%;
+    padding: 0 5rem;
   }
 }
 

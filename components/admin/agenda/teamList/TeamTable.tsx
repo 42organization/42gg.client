@@ -68,7 +68,7 @@ export default function TeamTable() {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedAgendaKey, setSelectedAgendaKey] = useState('');
-  const agendaList = useFetchGet(`admin/list`).data || [];
+  const agendaList = useFetchGet({ url: 'admin/list' }).data || [];
   const setSnackBar = useSetRecoilState(toastState);
 
   const buttonList: string[] = [styles.coin, styles.penalty];

@@ -10,8 +10,12 @@ const CreateTeam = () => {
   const router = useRouter();
   const agendaKey = useAgendaKey();
 
-  const agendaInfo = useFetchGet<AgendaDataProps>(`/`, {
-    agenda_key: agendaKey,
+  const agendaInfo = useFetchGet<AgendaDataProps>({
+    url: `/`,
+    isReady: Boolean(agendaKey),
+    params: {
+      agenda_key: agendaKey,
+    },
   }).data;
 
   const backPage = () => {

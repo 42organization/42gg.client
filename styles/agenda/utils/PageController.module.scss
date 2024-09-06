@@ -4,9 +4,9 @@
   width: 100%;
   height: max-content;
   @include pageContainer;
+  padding: 0 1rem !important;
   @media screen and (max-width: 960px) {
     height: 90%;
-    padding: 0 1rem !important;
   }
 }
 
