@@ -27,13 +27,13 @@ const useFetchGet = <T>({ url, isReady = true, params }: FetchGetProps) => {
       console.error(error);
       setError('get error');
     }
-  }, [url, params]);
+  }, [url, isReady, params]);
 
   useEffect(() => {
     if (url) {
       getData(); // 조건에 맞을 때만 getData 호출
     }
-  }, [url, JSON.stringify(params)]);
+  }, [url, isReady, JSON.stringify(params)]);
 
   return { data, status, error, getData };
 };
