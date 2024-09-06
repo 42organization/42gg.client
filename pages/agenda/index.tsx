@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import type { NextPage } from 'next';
+import { AgendaStatus } from 'constants/agenda/agenda';
 import AgendaList from 'components/agenda/Home/AgendaList';
 import AgendaTitle from 'components/agenda/Home/AgendaTitle';
 import PageNation from 'components/Pagination';
@@ -23,7 +24,6 @@ const Agenda: NextPage = () => {
     url: '/confirm',
   });
   const { data: openData } = useFetchGet<AgendaDataProps[]>({ url: '/open' });
-
   return (
     <div className={styles.agendaPageContainer}>
       <AgendaTitle />
@@ -65,10 +65,16 @@ const Agenda: NextPage = () => {
             agendaList={
               showCurrent === 'open' ? openData || [] : currentData || []
             }
+            status={
+              showCurrent === 'open' ? AgendaStatus.OPEN : AgendaStatus.CONFIRM
+            }
           />
         ) : (
           <>
-            <AgendaList agendaList={historyData || []} />
+            <AgendaList
+              agendaList={historyData || []}
+              status={AgendaStatus.FINISH}
+            />
             <PageNation {...PagaNationElementProps} />
           </>
         )}

@@ -31,7 +31,11 @@ $color-tag-end: #717171;
 $color-placeholder: #b4a5b5;
 
 // deadline bg color
-$bg-color-deadline-red: rgba(255, 75, 75, 0.8);
+$bg-color-deadline-open: rgba(255, 75, 75, 0.8);
+$bg-color-deadline-confirm: rgba(170, 41, 235, 0.8);
+$bg-color-deadline-finish: rgba(102, 58, 142, 0.8);
+$bg-color-deadline-cancel: rgba(18, 18, 18, 0.8);
+
 $agenda-list-bg: linear-gradient(180deg, #fff 65px, rgba(0, 0, 0, 0) 100%),
   url('/image/agenda/42.jpg') lightgray 50% / cover no-repeat;
 
