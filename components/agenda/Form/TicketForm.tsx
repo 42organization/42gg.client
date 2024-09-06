@@ -30,7 +30,6 @@ const TicketForm = ({ stringKey }: userFormProps) => {
 
     jsonData.issuedFromKey = selectedAgendaKey;
 
-    console.log('data', jsonData);
     sendRequest(
       'POST',
       'admin/ticket',

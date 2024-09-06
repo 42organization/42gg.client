@@ -24,7 +24,6 @@ const Agenda: NextPage = () => {
   });
   const { data: openData } = useFetchGet<AgendaDataProps[]>({ url: '/open' });
 
-  console.log('historyData', historyData);
   return (
     <div className={styles.agendaPageContainer}>
       <AgendaTitle />
