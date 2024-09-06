@@ -1,0 +1,47 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  @include container(1);
+  display: flex;
+  width: 80%;
+
+  padding: 3rem;
+  margin: 2rem;
+  text-align: left;
+  gap: 3rem;
+  justify-content: flex-start;
+}
+
+.title {
+  @include text('tab');
+  justify-content: flex-start;
+}
+
+.warp {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 2rem;
+}
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  @include text('description');
+}
+
+.contentWarp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  justify-content: space-between;
+}
+
+.buttonWarp {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+  }
+}
