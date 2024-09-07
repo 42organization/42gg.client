@@ -66,7 +66,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { page } = query as { page: string };
   if (method === 'GET') {
     const feedbacks: IPagedFeedback = makeFeedbacks(page);
-    console.log(feedbacks);
+    console.log(feedbacks); //
     return res.status(200).json(feedbacks);
   } else {
     res.setHeader('Allow', ['GET']);

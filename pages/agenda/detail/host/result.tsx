@@ -1,5 +1,4 @@
 //주최자 결과입력 페이지
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { ParticipantProps } from 'types/agenda/agendaDetail/tabs/participantTypes';
@@ -27,7 +26,7 @@ function checkAwardSubmitable(awardList: AwardListProps[]) {
     if (awardInfo.teams.length === 0) {
       throw new Error(awardInfo.award + '상에 팀이 없습니다.');
     }
-    awardInfo.teams.forEach((team, idx) => {
+    awardInfo.teams.forEach((team) => {
       if (awardedTeams[team]) {
         throw new Error(
           '한 팀이 여러 상을 받을 수 없습니다.' +
@@ -81,7 +80,6 @@ function awardlistToString(awardList: AwardListProps[]) {
 }
 
 const SubmitAgendaResult = () => {
-  const router = useRouter();
   const [awardList, setAwardList] = useState<AwardListProps[]>([
     { award: '참가상', teams: [] },
   ]);
@@ -113,7 +111,7 @@ const SubmitAgendaResult = () => {
       setSnackbar({
         toastName: `bad request`,
         severity: 'error',
-        message: `🔥 ${error.message} 🔥`,
+        message: `🔥 ${error?.message} 🔥`,
         clicked: true,
       });
       return;
@@ -125,10 +123,9 @@ const SubmitAgendaResult = () => {
       title: '결과 제출 전 확인',
       description: msg + '\n결과를 제출하시겠습니까?',
       onProceed: () => {
-        instanceInAgenda
-          .patch(`/confirm?agenda_key=${agenda_key}`, { awards: Data })
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err));
+        instanceInAgenda.patch(`/confirm?agenda_key=${agenda_key}`, {
+          awards: Data,
+        });
         closeModal();
       },
     });

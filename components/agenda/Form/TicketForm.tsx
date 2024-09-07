@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { toastState } from 'utils/recoil/toast';
 import AgendaSelect from 'components/agenda/Input/AgendaSelect';
 import { useModal } from 'components/agenda/modal/useModal';
 import useFetchGet from 'hooks/agenda/useFetchGet';
@@ -18,6 +20,7 @@ const TicketForm = ({ stringKey }: userFormProps) => {
   const handleSelectChange = (e: { target: { value: any } }) => {
     setSelectedAgendaKey(e.target.value);
   };
+  const setSnackbar = useSetRecoilState(toastState);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,7 +33,6 @@ const TicketForm = ({ stringKey }: userFormProps) => {
 
     jsonData.issuedFromKey = selectedAgendaKey;
 
-    console.log('data', jsonData);
     sendRequest(
       'POST',
       'admin/ticket',
@@ -40,7 +42,12 @@ const TicketForm = ({ stringKey }: userFormProps) => {
         closeModal();
       },
       (error: string) => {
-        console.error(error);
+        setSnackbar({
+          toastName: `response error`,
+          severity: 'error',
+          message: `🔥 ${error} 🔥`,
+          clicked: true,
+        });
       }
     );
   };

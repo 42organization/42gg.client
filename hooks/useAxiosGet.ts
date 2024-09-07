@@ -27,7 +27,7 @@ const useAxiosGet = <T>({
       if (type === 'alert') {
         alert(e);
       } else if (type === 'console') {
-        console.log(err);
+        console.log(err); // test
       } else if (type === 'setError') {
         setError(err);
       }
@@ -51,7 +51,7 @@ export const useMockAxiosGet = <T>({
       if (type === 'alert') {
         alert(e);
       } else if (type === 'console') {
-        console.log(err);
+        console.log(err); // test
       } else if (type === 'setError') {
         setError(err);
       }

@@ -18,6 +18,34 @@ input {
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-weight: 500;
 }
+/* safari */
+h2,
+h1,
+h3 {
+  font-weight: normal;
+}
+button {
+  background-color: var(--color-text-reverse);
+}
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+div,
+li,
+ul,
+ol,
+input,
+textarea,
+button {
+  color: var(--color-text);
+}
+
 /*
 @media all and (max-width: 379px) {
   html {
