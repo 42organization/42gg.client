@@ -140,9 +140,7 @@ export default function TournamentRegistryModal({
   const buttonMappings: Record<string, any> = {
     LOADING: {
       content: '로딩중...',
-      handler: () => {
-        console.log('loading...');
-      },
+      handler: null,
     },
     BEFORE: {
       content: '등록',

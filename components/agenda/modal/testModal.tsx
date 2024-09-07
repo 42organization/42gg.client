@@ -9,7 +9,7 @@ const TestModal = () => {
       title: 'title',
       description: 'message',
       onProceed: () => {
-        console.log('onProceed');
+        console.log('onProceed'); //test
       },
       proceedText: '확인',
       cancelText: '취소',
@@ -28,7 +28,7 @@ const TestModal2 = () => {
       title: 'title',
       description: 'message',
       onProceed: () => {
-        console.log('onProceed');
+        console.log('onProceed'); //test
       },
     });
   };

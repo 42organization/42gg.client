@@ -35,10 +35,6 @@ export default function PartyTemplate() {
   const setModal = useSetRecoilState(modalState);
   const [selectedCategory, setSelectedCategory] = useState('all');
 
-  useEffect(() => {
-    console.log('Render');
-  }, [templates]);
-
   const handleEditTemplate = (template?: PartyGameTemplate) => {
     setModal({ modalName: 'ADMIN-PARTY_TEMPLATE', template });
   };

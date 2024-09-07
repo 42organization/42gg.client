@@ -70,7 +70,7 @@ export default function ErrorPage() {
                 ) as HTMLInputElement;
                 if (!target) return;
 
-                console.log(target.value);
+                console.log(target.value); // DEV
                 localStorage.setItem('42gg-token', target.value);
                 router.reload();
               }}
