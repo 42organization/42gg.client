@@ -38,7 +38,6 @@ export default function TemplateModal({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
     if (isUpdate(formData)) updateTemplate(formData);
     else createTemplate(formData);
     setModal({ modalName: null });

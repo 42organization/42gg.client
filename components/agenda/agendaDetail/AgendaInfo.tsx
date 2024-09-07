@@ -66,17 +66,9 @@ export default function AgendaInfo({
             { agenda_key: agendaKey, teamKey: newTeamKey },
             () => {
               window.location.reload();
-            },
-            (err) => {
-              console.log('개인 확정에 실패했습니다.', err);
             }
           );
-        } else {
-          console.log('개인 팀키를 찾지 못했습니다.');
         }
-      },
-      (err) => {
-        console.log('개인 참여에 실패했습니다.', err);
       }
     );
   };
@@ -94,9 +86,6 @@ export default function AgendaInfo({
       },
       () => {
         window.location.reload();
-      },
-      (err) => {
-        console.log('등록취소에 실패했습니다.', err);
       }
     );
   };

@@ -108,7 +108,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(200).json(resData);
   }
   if (method === 'POST') {
-    console.log(attendance);
     if (
       parseInt(attendance) > 50 ||
       parseInt(normal) > 50 ||

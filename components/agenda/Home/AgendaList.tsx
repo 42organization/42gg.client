@@ -1,11 +1,18 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
+import { AgendaStatus } from 'constants/agenda/agenda';
 import AgendaDeadLine from 'components/agenda/Home/AgendaDeadLine';
 import AgendaInfo from 'components/agenda/Home/AgendaInfo';
 import styles from 'styles/agenda/Home/AgendaList.module.scss';
 
-const AgendaList = ({ agendaList }: { agendaList: AgendaDataProps[] }) => {
+const AgendaList = ({
+  agendaList,
+  status,
+}: {
+  agendaList: AgendaDataProps[];
+  status: AgendaStatus;
+}) => {
   const [selectedItem, setSelectedItem] = useState<number | null>(0);
 
   return (
@@ -18,6 +25,7 @@ const AgendaList = ({ agendaList }: { agendaList: AgendaDataProps[] }) => {
             <div className={styles.agendaListItemContainer}>
               {agendaList.map((agendaInfo, idx) => {
                 agendaInfo.idx = idx;
+                agendaInfo.agendaStatus = status;
                 return (
                   <AgendaListItem
                     agendaInfo={agendaInfo}
@@ -87,7 +95,19 @@ const AgendaListItem = ({
     >
       <AgendaInfo agendaInfo={agendaInfo} idx={idx} />
       <div className={`${type === 'list' && styles.show}`}>
-        <AgendaDeadLine deadLine={agendaInfo.agendaDeadLine} />
+        {agendaInfo.agendaStatus === 'CONFIRM' ? (
+          <AgendaDeadLine
+            deadLine={agendaInfo.agendaDeadLine}
+            status={agendaInfo.agendaStatus}
+            start={agendaInfo.agendaStartTime}
+            end={agendaInfo.agendaEndTime}
+          />
+        ) : (
+          <AgendaDeadLine
+            deadLine={agendaInfo.agendaDeadLine}
+            status={agendaInfo.agendaStatus}
+          />
+        )}
       </div>
     </button>
   );

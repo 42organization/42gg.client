@@ -31,7 +31,11 @@ $color-tag-end: #717171;
 $color-placeholder: #b4a5b5;
 
 // deadline bg color
-$bg-color-deadline-red: rgba(255, 75, 75, 0.8);
+$bg-color-deadline-open: rgba(255, 75, 75, 0.8);
+$bg-color-deadline-confirm: rgba(170, 41, 235, 0.8);
+$bg-color-deadline-finish: rgba(102, 58, 142, 0.8);
+$bg-color-deadline-cancel: rgba(18, 18, 18, 0.8);
+
 $agenda-list-bg: linear-gradient(180deg, #fff 65px, rgba(0, 0, 0, 0) 100%),
   url('/image/agenda/42.jpg') lightgray 50% / cover no-repeat;
 
@@ -97,7 +101,6 @@ $font-size-xs: 0.8rem; // $small-font
 @mixin logoText($size, $color) {
   font-family: $font-logo;
   font-size: $size;
-  font-weight: 500;
   color: $color;
   text-align: center;
   letter-spacing: 0.1rem;
@@ -138,18 +141,15 @@ $font-size-xs: 0.8rem; // $small-font
     // 인원수 표시하는 부분
     font-family: $font-inter;
     font-size: $font-size-xxl;
-    font-weight: 100;
     text-align: center;
   } @else if ($type == 'main-menu') {
     // navbar 메뉴
     font-family: $font-menu;
     font-size: $font-size-xl;
-    font-weight: 400;
   } @else if ($type == 'sub-menu') {
     // navbar 서브메뉴
     font-family: $font-menu;
     font-size: $font-size-l;
-    font-weight: 300;
   } @else if ($type == 'title') {
     // 아젠다,팀 타이틀
     font-family: $font-text-bold;

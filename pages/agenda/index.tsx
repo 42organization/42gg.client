@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import type { NextPage } from 'next';
+import { AgendaStatus } from 'constants/agenda/agenda';
 import AgendaList from 'components/agenda/Home/AgendaList';
 import AgendaTitle from 'components/agenda/Home/AgendaTitle';
 import PageNation from 'components/Pagination';
@@ -15,13 +16,14 @@ const Agenda: NextPage = () => {
   const { PagaNationElementProps, content: historyData } =
     usePageNation<AgendaDataProps>({
       url: '/history',
+      size: 10,
+      isReady: showCurrent === 'history',
     });
 
   const { data: currentData } = useFetchGet<AgendaDataProps[]>({
     url: '/confirm',
   });
   const { data: openData } = useFetchGet<AgendaDataProps[]>({ url: '/open' });
-
   return (
     <div className={styles.agendaPageContainer}>
       <AgendaTitle />
@@ -30,7 +32,7 @@ const Agenda: NextPage = () => {
           <h2>AGENDA LIST</h2>
           <div>
             <button
-              className={`${listStyles.agendaListStatus} 
+              className={`${listStyles.agendaListStatus}
                 ${showCurrent === 'open' ? listStyles.selectedStatus : ''}`}
               name='ongoing'
               onClick={() => setShowCurrent('open')}
@@ -39,7 +41,7 @@ const Agenda: NextPage = () => {
             </button>
             {' | '}
             <button
-              className={`${listStyles.agendaListStatus} 
+              className={`${listStyles.agendaListStatus}
             ${showCurrent === 'current' ? listStyles.selectedStatus : ''}`}
               name='closed'
               onClick={() => setShowCurrent('current')}
@@ -48,7 +50,7 @@ const Agenda: NextPage = () => {
             </button>
             {' | '}
             <button
-              className={`${listStyles.agendaListStatus} 
+              className={`${listStyles.agendaListStatus}
               ${showCurrent === 'history' ? listStyles.selectedStatus : ''}`}
               name='closed'
               onClick={() => setShowCurrent('history')}
@@ -63,10 +65,16 @@ const Agenda: NextPage = () => {
             agendaList={
               showCurrent === 'open' ? openData || [] : currentData || []
             }
+            status={
+              showCurrent === 'open' ? AgendaStatus.OPEN : AgendaStatus.CONFIRM
+            }
           />
         ) : (
           <>
-            <AgendaList agendaList={historyData || []} />
+            <AgendaList
+              agendaList={historyData || []}
+              status={AgendaStatus.FINISH}
+            />
             <PageNation {...PagaNationElementProps} />
           </>
         )}

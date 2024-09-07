@@ -22,7 +22,7 @@ const MenuBarContent = ({
     useContext<HeaderContextState | null>(HeaderContext)
       ?.resetOpenMenuBarState ||
     function () {
-      console.log('resetOpenMenuBarState is not defined');
+      console.log('resetOpenMenuBarState is not defined'); //error
     };
 
   return (

@@ -10,7 +10,7 @@ import { useAgendaInfo } from 'hooks/agenda/useAgendaInfo';
 import useAgendaKey from 'hooks/agenda/useAgendaKey';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import { useUser } from 'hooks/takgu/Layout/useUser';
-import styles from 'styles/agenda/pages/agendakey/host/modify.module.scss';
+import styles from 'styles/agenda/pages/agendakey/host/host.module.scss';
 
 const ModifyAgenda = () => {
   const router = useRouter();
@@ -46,7 +46,7 @@ const ModifyAgenda = () => {
       setSnackbar({
         toastName: `status error`,
         severity: 'error',
-        message: `🔥 행사 모집중 상태에서만 확정이 가능합니다. 🔥`,
+        message: `🔥 행사 모집 중 상태에서만 확정이 가능합니다. 🔥`,
         clicked: true,
       });
     }
@@ -62,7 +62,7 @@ const ModifyAgenda = () => {
       setSnackbar({
         toastName: `status error`,
         severity: 'error',
-        message: `🔥 행사 모집중 상태에서만 취소가 가능합니다. 🔥`,
+        message: `🔥 행사 모집 중 상태에서만 취소가 가능합니다. 🔥`,
         clicked: true,
       });
     }
@@ -78,7 +78,7 @@ const ModifyAgenda = () => {
       setSnackbar({
         toastName: `status error`,
         severity: 'error',
-        message: `🔥 행사가 진행중인 상태에서만 종료가 가능합니다. 🔥`,
+        message: `🔥 행사가 진행 중인 상태에서만 종료가 가능합니다. 🔥`,
         clicked: true,
       });
     }
@@ -93,7 +93,7 @@ const ModifyAgenda = () => {
       setSnackbar({
         toastName: `status error`,
         severity: 'error',
-        message: `🔥 행사가 진행중인 상태에서만 종료가 가능합니다. 🔥`,
+        message: `🔥 행사가 진행 중인 상태에서만 종료가 가능합니다. 🔥`,
         clicked: true,
       });
     }
@@ -114,12 +114,50 @@ const ModifyAgenda = () => {
   return (
     <>
       <div className={styles.container}>
-        <UploadBtn text='공지사항 추가하기' onClick={newAnnouncement} />
-        <UploadBtn text='참가인원 및 진행 확정' onClick={confirmAgenda} />
-        <UploadBtn text='행사 취소하기' onClick={cancelAgenda} />
-
-        <UploadBtn text='행사 종료하기' onClick={resultAgenda} />
-        <UploadBtn text='상 입력 후 종료하기' onClick={resultFormAgenda} />
+        <div className={styles.warp}>
+          <div className={styles.contentWarp}>
+            <div className={styles.title}>공지사항 관리</div>
+            <div className={styles.description}>
+              공지사항 등록시 참가자들에게 slack 알림이 갑니다.
+            </div>
+            <div className={styles.buttonWarp}>
+              <UploadBtn text='공지사항 추가하기' onClick={newAnnouncement} />
+            </div>
+          </div>
+          <div className={styles.contentWarp}>
+            <div className={styles.title}>행사 확정</div>
+            <div className={styles.description}>
+              조건을 만족하고, 팀이 모두 확정되었을 때 행사를 확정할 수
+              있습니다.
+              <br />
+            </div>
+            <div className={styles.buttonWarp}>
+              <UploadBtn text='참가인원 및 진행 확정' onClick={confirmAgenda} />
+            </div>
+          </div>
+          <div className={styles.contentWarp}>
+            <div className={styles.title}>행사 취소</div>
+            <div className={styles.description}>
+              행사가 모집 중인 상태에서만 행사를 취소할 수 있습니다.
+            </div>
+            <div className={styles.buttonWarp}>
+              <UploadBtn text='행사 취소하기' onClick={cancelAgenda} />
+            </div>
+          </div>
+          <div className={styles.contentWarp}>
+            <div className={styles.title}>행사 종료</div>
+            <div className={styles.description}>
+              행사가 진행 중인 상태에서만 행사를 종료할 수 있습니다.
+            </div>
+            <div className={styles.buttonWarp}>
+              <UploadBtn text='행사 종료하기' onClick={resultAgenda} />
+              <UploadBtn
+                text='상 입력 후 종료하기'
+                onClick={resultFormAgenda}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
