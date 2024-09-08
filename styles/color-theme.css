@@ -43,8 +43,8 @@
 html[data-theme='light'] {
   --color-bg: var(--bg-light);
   --color-header: var(--header-bg-light);
-  --color-text: var(--text-light);
-  --color-text-reverse: var(--text-dark);
+  --color-text: var(--color-light);
+  --color-text-reverse: var(--color-dark);
   --default-border: var(--border-light);
   --highlight-border: var(--border-highlight-light);
   --default-box-shadow: var(--box-shadow-light);
@@ -60,8 +60,8 @@ html[data-theme='light'] {
 html[data-theme='dark'] {
   --color-bg: var(--bg-dark);
   --color-header: var(--header-bg-dark);
-  --color-text: var(--text-dark);
-  --color-text-reverse: var(--text-light);
+  --color-text: var(--color-dark);
+  --color-text-reverse: var(--color-light);
   --default-border: var(--border-dark);
   --highlight-border: var(--border-highlight-dark);
   --default-box-shadow: var(--box-shadow-dark);

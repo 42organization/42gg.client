@@ -31,7 +31,6 @@ export default function useAxiosWithToast(instance: AxiosInstance) {
     if (!errorDataMessage) {
       errorDataMessage = error.message;
     }
-    console.log(error);
     setSnackbar({
       toastName: `response error`,
       severity: 'error',

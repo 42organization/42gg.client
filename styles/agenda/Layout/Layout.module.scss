@@ -3,18 +3,17 @@
 .background {
   position: fixed;
   top: 0;
-  z-index: -1;
+  left: 0;
+  z-index: -1001;
   display: flex;
   width: 150vw;
   min-width: 380px;
-  height: 150vh;
+  height: 100%;
   flex-direction: column;
   background: var(--color-bg);
   background-attachment: fixed;
   background-position: center;
-  background-size: cover;
 }
-
 .app {
   @include app;
 }
