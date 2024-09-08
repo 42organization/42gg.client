@@ -139,7 +139,7 @@ export default function AgendaInfo({
         className={`${styles.infoContainer} ${containerSize}`}
         style={{
           background: `linear-gradient(0deg, #fff 7rem, rgba(0, 0, 0, 0) 10rem), url(${
-            agendaData.agendaPosterUrl || '/image/agenda/42.jpg'
+            agendaData.agendaPosterUrl || 'var(--color-bg)'
           }) lightgray 50% / cover no-repeat`,
         }}
       >
