@@ -11,7 +11,7 @@ interface TicketProps {
 const Ticket = ({ type }: { type: string }) => {
   const { data } = useFetchGet<TicketProps>({ url: '/ticket' });
   const { openModal } = useModal();
-
+  console.log(data);
   return (
     <>
       {type === 'page' ? (

@@ -7,5 +7,5 @@ export interface ProfileCardProps {
   imageUrl: string;
   achievements: AchievementProps[];
   getProfileData: () => void;
-  isMyProfile: boolean | null;
+  isMyProfile: boolean;
 }
