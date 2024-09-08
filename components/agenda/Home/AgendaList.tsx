@@ -73,7 +73,7 @@ const AgendaListItem = ({
        ${className && className}`}
       style={{
         background: `linear-gradient(180deg, #fff 5rem, rgba(0, 0, 0, 0) 10rem), url(${
-          agendaInfo.agendaPosterUrl || '/image/agenda/42.jpg'
+          agendaInfo.agendaPosterUrl || 'var(--default-bg)'
         }) lightgray 50% / cover no-repeat`,
       }}
       key={idx}
