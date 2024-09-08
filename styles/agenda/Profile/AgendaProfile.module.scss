@@ -1,12 +1,33 @@
 @import 'styles/agenda/common.scss';
 
-.agendaProfileContainer {
+.profilePage {
+  @media screen and (max-width: 960px) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media screen and (min-width: 961px) {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.profileContainer {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   padding: 1rem;
   gap: 1.5rem;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  // gap: 1.5rem;
 }
 
 .agendaUserSearchBarWrap {

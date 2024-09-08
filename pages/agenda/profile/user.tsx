@@ -95,65 +95,75 @@ const AgendaProfile = () => {
   }
   return (
     <>
-      <div className={styles.agendaProfileContainer}>
-        {/* SearchBar */}
-        <div className={styles.agendaUserSearchBarWrap}>
-          <AgendaUserSearchBar />
+      <div className={styles.profilePage}>
+        <div className={styles.profileContainer}>
+          {/* SearchBar */}
+          <div className={styles.agendaUserSearchBarWrap}>
+            <AgendaUserSearchBar />
+          </div>
+          {/* ProfileCard */}
+          {intraData && (
+            <ProfileCard
+              userIntraId={queryIntraId}
+              userContent={
+                agendaProfileData?.userContent ||
+                'GG에 가입하지 않은 사용자입니다.'
+              }
+              userGithub={agendaProfileData?.userGithub || ''}
+              imageUrl={intraData.imageUrl}
+              achievements={intraData.achievements}
+              getProfileData={getAgendaProfileData}
+              isMyProfile={isMyProfile.current}
+            />
+          )}
+          {/* Ticket */}
+          {isMyProfile.current && agendaProfileData ? (
+            <Ticket type='component' />
+          ) : (
+            ''
+          )}
         </div>
-        {/* ProfileCard */}
-        {intraData && (
-          <ProfileCard
-            userIntraId={queryIntraId}
-            userContent={
-              agendaProfileData?.userContent ||
-              'GG에 가입하지 않은 사용자입니다.'
-            }
-            userGithub={agendaProfileData?.userGithub || ''}
-            imageUrl={intraData.imageUrl}
-            achievements={intraData.achievements}
-            getProfileData={getAgendaProfileData}
-            isMyProfile={isMyProfile.current}
-          />
-        )}
-        {/* Ticket */}
-        {isMyProfile.current && agendaProfileData ? (
-          <Ticket type='component' />
-        ) : (
-          ''
-        )}
-        {/* Host Current List */}
-        {hostCurrentListData && hostCurrentListData.length > 0 ? (
-          <>
-            <CurrentList currentListData={hostCurrentListData} isHost={true} />
-            <PageNation {...PagaNationHostCurrent} />
-          </>
-        ) : (
-          ''
-        )}
-        {/* Current List */}
-        {isMyProfile.current && currentListData ? (
-          <CurrentList currentListData={currentListData} isHost={false} />
-        ) : (
-          ''
-        )}
-        {/* History Host List */}
-        {hostHistoryListData && hostHistoryListData.length > 0 ? (
-          <>
-            <HistoryList historyListData={hostHistoryListData} isHost={true} />{' '}
-            <PageNation {...PagaNationHostHistory} />
-          </>
-        ) : (
-          ''
-        )}
-        {/* History List */}
-        {historyListData ? (
-          <>
-            <HistoryList historyListData={historyListData} isHost={false} />{' '}
-            <PageNation {...PagaNationHistory} />
-          </>
-        ) : (
-          ''
-        )}
+        <div className={styles.listContainer}>
+          {/* Host Current List */}
+          {hostCurrentListData && hostCurrentListData.length > 0 ? (
+            <>
+              <CurrentList
+                currentListData={hostCurrentListData}
+                isHost={true}
+              />
+              <PageNation {...PagaNationHostCurrent} />
+            </>
+          ) : (
+            ''
+          )}
+          {/* Current List */}
+          {isMyProfile.current && currentListData ? (
+            <CurrentList currentListData={currentListData} isHost={false} />
+          ) : (
+            ''
+          )}
+          {/* History Host List */}
+          {hostHistoryListData && hostHistoryListData.length > 0 ? (
+            <>
+              <HistoryList
+                historyListData={hostHistoryListData}
+                isHost={true}
+              />{' '}
+              <PageNation {...PagaNationHostHistory} />
+            </>
+          ) : (
+            ''
+          )}
+          {/* History List */}
+          {historyListData ? (
+            <>
+              <HistoryList historyListData={historyListData} isHost={false} />{' '}
+              <PageNation {...PagaNationHistory} />
+            </>
+          ) : (
+            ''
+          )}
+        </div>
       </div>
     </>
   );
