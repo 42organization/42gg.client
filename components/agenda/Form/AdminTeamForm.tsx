@@ -76,7 +76,7 @@ const AdminTeamForm = ({
         )
       ) {
         setTeamMates((prev) => [
-          { intraId: teamData.teamLeaderIntraId, coalition: Coalition.OTHER }, // 팀장을 가장 앞에 추가
+          { intraId: teamData.teamLeaderIntraId, coalition: Coalition.OTHER },
           ...prev,
         ]);
       }
@@ -117,6 +117,18 @@ const AdminTeamForm = ({
       className={styles.container}
     >
       <div className={styles.pageContianer}>
+        {teamData.teamStatus === TeamStatus.CANCEL ? (
+          <div className={styles.topContainer}>
+            <div className={`${styles.label_text} ${styles.highlight}`}>
+              팀 상태 : CANCEL
+            </div>
+            <div className={styles.description}>
+              CANCEL 상태에서는 수정이 불가능합니다.{' '}
+              <span className={styles.span}>[ OPEN/CONFIM ]</span>으로 팀 상태를
+              변경 후 이용해주세요.
+            </div>
+          </div>
+        ) : null}
         <TitleInput
           name='teamName'
           label='팀 이름'
@@ -156,7 +168,7 @@ const AdminTeamForm = ({
         <CheckBoxInput
           name='teamIsPrivate'
           label='비밀방(초대만 가능, 대회 내역에서 보이지 않음)'
-          checked={teamData.teamIsPrivate} // 팀 상세 페이지 - 수정
+          checked={teamData.teamIsPrivate}
         />
         <div className={styles.label_text}>상 이름 : {teamData.teamAward}</div>
         <div className={styles.label_text}>
