@@ -1,8 +1,9 @@
-@import '../common.scss';
+@import 'styles/agenda/common.scss';
 
 .agendaItemTagBox {
   display: flex;
   gap: 0.3rem;
+  max-width: 16rem;
 }
 
 $tags: (
