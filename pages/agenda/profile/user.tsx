@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Button } from '@mui/material';
 import { MyTeamDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import { HistoryItemProps } from 'types/agenda/profile/historyListTypes';
 import {
@@ -24,6 +25,7 @@ const AgendaProfile = () => {
   const isMyProfile = useRef(false); // 내 프로필 페이지인지 아닌지 확인
   const [isIntraId, setIsIntraId] = useState<boolean>(false); // 인트라 아이디가 42에 있는지 확인
   const [isAgendaId, setIsAgendaId] = useState<boolean>(false); // 인트라 아이디가 agenda에 있는지 확인
+  const [activeTab, setActiveTab] = useState('current'); // 현재 활성화된 탭 상태 관리
 
   /** API GET */
   //  GET: intraData (42 인트라 데이터 가져오기)
@@ -90,65 +92,130 @@ const AgendaProfile = () => {
   }
   return (
     <>
-      <div className={styles.agendaProfileContainer}>
-        {/* SearchBar */}
-        <div className={styles.agendaUserSearchBarWrap}>
-          <AgendaUserSearchBar />
+      {/* SearchBar */}
+      <div className={styles.agendaUserSearchBarWrap}>
+        <AgendaUserSearchBar />
+      </div>
+      <div className={styles.profilePage}>
+        <div className={styles.profileContainer}>
+          {/* ProfileCard */}
+          {intraData && (
+            <ProfileCard
+              userIntraId={queryIntraId}
+              userContent={
+                agendaProfileData?.userContent ||
+                'GG에 가입하지 않은 사용자입니다.'
+              }
+              userGithub={agendaProfileData?.userGithub || ''}
+              imageUrl={intraData.imageUrl}
+              achievements={intraData.achievements}
+              getProfileData={getAgendaProfileData}
+              isMyProfile={isMyProfile.current}
+            />
+          )}
+          {/* Ticket */}
+          {isMyProfile.current && agendaProfileData ? (
+            <Ticket type='component' />
+          ) : (
+            ''
+          )}
         </div>
-        {/* ProfileCard */}
-        {intraData && (
-          <ProfileCard
-            userIntraId={queryIntraId}
-            userContent={
-              agendaProfileData?.userContent ||
-              'GG에 가입하지 않은 사용자입니다.'
-            }
-            userGithub={agendaProfileData?.userGithub || ''}
-            imageUrl={intraData.imageUrl}
-            achievements={intraData.achievements}
-            getProfileData={getAgendaProfileData}
-            isMyProfile={isMyProfile.current}
-          />
-        )}
-        {/* Ticket */}
-        {isMyProfile.current && agendaProfileData ? (
-          <Ticket type='component' />
-        ) : (
-          ''
-        )}
-        {/* Host Current List */}
-        {hostCurrentListData && hostCurrentListData.length > 0 ? (
-          <>
-            <CurrentList currentListData={hostCurrentListData} isHost={true} />
-            <PageNation {...PagaNationHostCurrent} />
-          </>
-        ) : (
-          ''
-        )}
-        {/* Current List */}
-        {isMyProfile.current && currentListData ? (
-          <CurrentList currentListData={currentListData} isHost={false} />
-        ) : (
-          ''
-        )}
-        {/* History Host List */}
-        {hostHistoryListData && hostHistoryListData.length > 0 ? (
-          <>
-            <HistoryList historyListData={hostHistoryListData} isHost={true} />{' '}
-            <PageNation {...PagaNationHostHistory} />
-          </>
-        ) : (
-          ''
-        )}
-        {/* History List */}
-        {historyListData ? (
-          <>
-            <HistoryList historyListData={historyListData} isHost={false} />{' '}
-            <PageNation {...PagaNationHistory} />
-          </>
-        ) : (
-          ''
-        )}
+        <div className={styles.listContainer}>
+          <div className={styles.listTitle}>AGENDA LIST</div>
+          <div className={styles.listButtonsWrapper}>
+            <Button
+              sx={{
+                color: activeTab === 'current' ? '#af71ff' : 'black',
+                '@media (min-width: 961px)': {
+                  fontSize: '1rem', // 폰트 크기 변경
+                },
+              }}
+              onClick={() => setActiveTab('current')}
+            >
+              참여중
+            </Button>
+            <Button
+              sx={{
+                color: activeTab === 'hostCurrent' ? '#af71ff' : 'black',
+                '@media (min-width: 961px)': {
+                  fontSize: '1rem',
+                },
+              }}
+              onClick={() => setActiveTab('hostCurrent')}
+            >
+              개최중
+            </Button>
+            <Button
+              sx={{
+                color: activeTab === 'history' ? '#af71ff' : 'black',
+                '@media (min-width: 961px)': {
+                  fontSize: '1rem',
+                },
+              }}
+              onClick={() => setActiveTab('history')}
+            >
+              참여 기록
+            </Button>
+            <Button
+              sx={{
+                color: activeTab === 'hostHistory' ? '#af71ff' : 'black',
+                '@media (min-width: 961px)': {
+                  fontSize: '1rem',
+                },
+              }}
+              onClick={() => setActiveTab('hostHistory')}
+            >
+              개최 기록
+            </Button>
+          </div>
+          <hr className={styles.divider} />
+          <div className={styles.listItemContainer}>
+            {/* Host Current List */}
+            {activeTab === 'hostCurrent' &&
+            hostCurrentListData &&
+            hostCurrentListData.length > 0 ? (
+              <>
+                <CurrentList currentListData={hostCurrentListData} />
+                <PageNation {...PagaNationHostCurrent} />
+              </>
+            ) : activeTab === 'hostCurrent' ? (
+              ''
+            ) : null}
+
+            {/* Current List */}
+            {activeTab === 'current' &&
+            isMyProfile.current &&
+            currentListData ? (
+              <>
+                <CurrentList currentListData={currentListData} />
+              </>
+            ) : activeTab === 'current' ? (
+              ''
+            ) : null}
+
+            {/* History Host List */}
+            {activeTab === 'hostHistory' &&
+            hostHistoryListData &&
+            hostHistoryListData.length > 0 ? (
+              <>
+                <HistoryList historyListData={hostHistoryListData} />{' '}
+                <PageNation {...PagaNationHostHistory} />
+              </>
+            ) : activeTab === 'hostHistory' ? (
+              ''
+            ) : null}
+
+            {/* History List */}
+            {activeTab === 'history' && historyListData ? (
+              <>
+                <HistoryList historyListData={historyListData} />{' '}
+                <PageNation {...PagaNationHistory} />
+              </>
+            ) : activeTab === 'history' ? (
+              ''
+            ) : null}
+          </div>
+        </div>
       </div>
     </>
   );

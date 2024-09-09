@@ -20,5 +20,4 @@ export interface TeamMate {
 
 export interface HistoryListProps {
   historyListData: HistoryItemProps[];
-  isHost: boolean;
 }
