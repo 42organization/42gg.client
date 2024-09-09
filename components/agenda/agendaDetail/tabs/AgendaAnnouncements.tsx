@@ -17,6 +17,10 @@ export default function AgendaAnnouncements() {
     size: 5,
     isReady: Boolean(agendaKey),
   });
+  const newHandler = (page: number) => {
+    setSelected(0);
+    return PagaNationElementProps.pageChangeHandler(page);
+  };
 
   if (!agendaKey || !content) {
     return (
@@ -41,16 +45,23 @@ export default function AgendaAnnouncements() {
                 setSelected={() => setSelected(idx)}
               />
             ))}
-            <PageNation {...PagaNationElementProps} />
+            <PageNation
+              {...PagaNationElementProps}
+              pageChangeHandler={newHandler}
+            />
           </div>
-          <AnnouncementItem
-            key={content[selected].id}
-            id={content[selected].id}
-            title={content[selected].title}
-            content={content[selected].content}
-            createdAt={content[selected].createdAt}
-            isSelected={true}
-          />
+          {content[selected] ? (
+            <AnnouncementItem
+              key={content[selected].id}
+              id={content[selected].id}
+              title={content[selected].title}
+              content={content[selected].content}
+              createdAt={content[selected].createdAt}
+              isSelected={true}
+            />
+          ) : (
+            ''
+          )}
         </>
       ) : (
         <div className={styles.emptyContainer}>공지사항이 없습니다.</div>
