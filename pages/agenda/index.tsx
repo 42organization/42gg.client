@@ -29,7 +29,7 @@ const Agenda: NextPage = () => {
       <AgendaTitle />
       <div className={styles.agendaContainer}>
         <div className={listStyles.agendaListTextWrapper}>
-          <h2>AGENDA LIST</h2>
+          <h2 className={listStyles.web}>AGENDA LIST</h2>
           <div>
             <button
               className={`${listStyles.agendaListStatus}

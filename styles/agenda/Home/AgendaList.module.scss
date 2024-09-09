@@ -27,6 +27,9 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+  @media screen and (max-width: 960px) {
+    justify-content: flex-end;
+  }
   align-items: center;
   > h2 {
     margin: 1rem;
@@ -132,4 +135,8 @@
   @media screen and (min-width: 961px) {
     display: none !important ;
   }
+}
+
+.web {
+  @include gridHidden(web);
 }
