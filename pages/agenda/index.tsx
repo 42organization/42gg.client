@@ -39,7 +39,7 @@ const Agenda: NextPage = () => {
             >
               모집중
             </button>
-            {' | '}
+            {'|'}
             <button
               className={`${listStyles.agendaListStatus}
             ${showCurrent === 'current' ? listStyles.selectedStatus : ''}`}
@@ -48,7 +48,7 @@ const Agenda: NextPage = () => {
             >
               진행중
             </button>
-            {' | '}
+            {'|'}
             <button
               className={`${listStyles.agendaListStatus}
               ${showCurrent === 'history' ? listStyles.selectedStatus : ''}`}
