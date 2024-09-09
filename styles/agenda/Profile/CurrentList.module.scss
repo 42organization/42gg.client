@@ -14,6 +14,10 @@
 .currentItemWrapper {
   width: 100%;
   @media screen and (min-width: 961px) {
-    max-width: 21rem;
+    width: 48%;
   }
+}
+
+.currentItemWrapper:first-child:last-child {
+  width: 100% !important;
 }
