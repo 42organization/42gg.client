@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
-import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { agendaErrorState } from 'utils/recoil/agendaError';
-import { loginState } from 'utils/recoil/login';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { useRouter } from 'next/router';
 import useErrorPage from 'hooks/error/useErrorPage';
@@ -12,20 +11,10 @@ export default function ErrorPage() {
   const { goHome } = useErrorPage();
   const [error, setError] = useRecoilState(agendaErrorState);
   const { msg, status } = error;
-  const setLoggedIn = useSetRecoilState<boolean>(loginState);
   const resetModal = useResetRecoilState(modalState);
   const router = useRouter();
 
-  if (status === 401) {
-    localStorage.removeItem('42gg-token');
-    setLoggedIn(false);
-  }
-
   const resetHandler = () => {
-    if (status === 401) {
-      localStorage.removeItem('42gg-token');
-      setLoggedIn(false);
-    }
     setError({ msg: '', status: 0 });
     goHome();
   };
