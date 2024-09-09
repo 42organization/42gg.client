@@ -2,7 +2,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { instanceInAgenda } from 'utils/axios';
+import { instanceInAgenda, instance } from 'utils/axios';
 import { agendaErrorState } from 'utils/recoil/agendaError';
 import { loginState } from 'utils/recoil/login';
 
@@ -17,7 +17,7 @@ export default function useAxiosAgendaError() {
       return;
     }
     try {
-      const res = await instanceInAgenda.post(
+      const res = await instance.post(
         `/pingpong/users/accesstoken?refreshToken=${refreshToken}`
       );
       localStorage.setItem('42gg-token', res.data.accessToken);
@@ -42,7 +42,7 @@ export default function useAxiosAgendaError() {
         if (!isRecalling) {
           setIsRecalling(true);
           try {
-            const res = await instanceInAgenda.post(
+            const res = await instance.post(
               `/pingpong/users/accesstoken?refreshToken=${refreshToken}`
             );
             localStorage.setItem('42gg-token', res.data.accessToken);
