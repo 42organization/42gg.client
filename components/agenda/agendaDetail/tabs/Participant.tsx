@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { ParticipantProps } from 'types/agenda/agendaDetail/tabs/participantTypes';
 import { colorMapping, iconMapping } from 'types/agenda/utils/colorList';
@@ -18,13 +19,17 @@ export default function Participant({
   const IconComponent = iconMapping[coalitionEnum[0]];
 
   return (
-    <div
-      className={`${styles.participantItem} ${colorMapping[coalitionEnum[0]]}`}
-    >
-      <div className={styles.participantItemWarp}>
-        <div className={styles.participantcontent}>{teamName}</div>
-        {IconComponent ? <IconComponent /> : ''}
+    <Link href={`/agenda/profile/user?id=${teamName}`}>
+      <div
+        className={`${styles.participantItem} ${
+          colorMapping[coalitionEnum[0]]
+        }`}
+      >
+        <div className={styles.participantItemWarp}>
+          <div className={styles.participantcontent}>{teamName}</div>
+          {IconComponent ? <IconComponent /> : ''}
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }

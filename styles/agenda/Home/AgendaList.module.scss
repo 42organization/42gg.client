@@ -29,12 +29,13 @@
   justify-content: space-between;
   align-items: center;
   > h2 {
-    margin: 0.5rem;
+    margin: 1rem;
     @include text(sub-menu);
   }
   > div {
+    max-width: 15rem;
     height: max-content;
-    margin-right: 0.5rem;
+    margin-right: 1rem;
     color: var(--text-color);
   }
 }

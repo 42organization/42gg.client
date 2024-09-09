@@ -2,7 +2,7 @@ import router from 'next/router';
 import { useState } from 'react';
 import { TeamDetailProps } from 'types/agenda/teamDetail/TeamDetailTypes';
 import { transformTeamLocation } from 'utils/agenda/transformLocation';
-import { Coalition } from 'constants/agenda/agenda';
+import { Coalition, TeamStatus } from 'constants/agenda/agenda';
 import Participant from 'components/agenda/agendaDetail/tabs/Participant';
 import { AddElementBtn, CancelBtn } from 'components/agenda/button/Buttons';
 import CheckBoxInput from 'components/agenda/Input/CheckboxInput';
@@ -18,7 +18,7 @@ interface AdminTeamFormProps {
   teamLocation: string;
 }
 
-const AdminTeamFrom = ({
+const AdminTeamForm = ({
   teamKey,
   teamData,
   teamLocation,
@@ -27,18 +27,14 @@ const AdminTeamFrom = ({
   const [teamMates, setTeamMates] = useState(teamData.teamMates);
 
   const transformFormData = (formData: FormData) => {
-    const data = JSON.parse(JSON.stringify(Object.fromEntries(formData)));
-
-    data.teamIsPrivate = data.teamIsPrivate === 'on';
-
-    // 팀 위치 변환
-    data.teamLocation = transformTeamLocation(data.teamLocation);
-
-    // 트림 처리
-    data.teamName = data.teamName.trim();
-    data.teamContent = data.teamContent.trim(); // 추가
-
-    return data;
+    const data = Object.fromEntries(formData) as any;
+    return {
+      ...data,
+      teamIsPrivate: data.teamIsPrivate === 'on',
+      teamLocation: transformTeamLocation(data.teamLocation),
+      teamName: data.teamName.trim(),
+      teamContent: data.teamContent.trim(),
+    };
   };
 
   const handleDeleteParticipant = (index: number) => {
@@ -50,12 +46,11 @@ const AdminTeamFrom = ({
   };
 
   const handleAddMember = () => {
-    const newMemberIdInput = document.getElementById(
-      'newMemberId'
-    ) as HTMLInputElement;
-    const newMemberId = newMemberIdInput?.value.trim();
+    const newMemberId = (
+      document.getElementById('newMemberId') as HTMLInputElement
+    )?.value.trim();
 
-    if (newMemberId === '') {
+    if (!newMemberId) {
       alert('intra ID를 입력해주세요.');
       return;
     }
@@ -67,40 +62,51 @@ const AdminTeamFrom = ({
       ...prev,
       { intraId: newMemberId, coalition: Coalition.OTHER },
     ]);
-    newMemberIdInput.value = ''; // 입력 필드 초기화
+    (document.getElementById('newMemberId') as HTMLInputElement).value = '';
   };
 
-  const SubmitTeamForm = (target: React.FormEvent<HTMLFormElement>) => {
-    target.preventDefault();
+  const AddLeader = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (
+      teamData.teamStatus === TeamStatus.CANCEL &&
+      e.target.value !== TeamStatus.CANCEL
+    ) {
+      if (
+        !teamMates.some(
+          (member) => member.intraId === teamData.teamLeaderIntraId
+        )
+      ) {
+        setTeamMates((prev) => [
+          { intraId: teamData.teamLeaderIntraId, coalition: Coalition.OTHER },
+          ...prev,
+        ]);
+      }
+    }
+  };
 
-    const formData = new FormData(target.currentTarget);
+  const SubmitTeamForm = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
     const data = transformFormData(formData);
 
-    if (
-      data.teamName === '' ||
-      data.teamContent === '' ||
-      data.teamStatus === ''
-    ) {
-      alert('모든 항목을 입력해주세요.'); // 임시
+    if (!data.teamName || !data.teamContent || !data.teamStatus) {
+      alert('모든 항목을 입력해주세요.');
       return;
     }
-
-    data.teamKey = teamKey;
-    data.teamMates = teamMates;
-    data.teamAward = teamData.teamAward;
-    data.teamAwardPriority = teamData.teamAwardPriority;
 
     sendRequest(
       'PATCH',
       'admin/team',
-      data,
-      {},
-      (res: any) => {
-        router.back();
+      {
+        ...data,
+        teamKey,
+        teamMates,
+        teamAward: teamData.teamAward,
+        teamAwardPriority: teamData.teamAwardPriority,
       },
-      (err: string) => {
-        console.error(err);
-      }
+      {},
+      () => router.back(),
+      (err: string) => console.error(err)
     );
   };
 
@@ -111,6 +117,18 @@ const AdminTeamFrom = ({
       className={styles.container}
     >
       <div className={styles.pageContianer}>
+        {teamData.teamStatus === TeamStatus.CANCEL ? (
+          <div className={styles.topContainer}>
+            <div className={`${styles.label_text} ${styles.highlight}`}>
+              팀 상태 : CANCEL
+            </div>
+            <div className={styles.description}>
+              CANCEL 상태에서는 수정이 불가능합니다.{' '}
+              <span className={styles.span}>[ OPEN/CONFIM ]</span>으로 팀 상태를
+              변경 후 이용해주세요.
+            </div>
+          </div>
+        ) : null}
         <TitleInput
           name='teamName'
           label='팀 이름'
@@ -130,10 +148,12 @@ const AdminTeamFrom = ({
         <SelectInput
           name='teamStatus'
           label='팀 상태'
-          options={['OPEN', 'CONFIRM', 'CANCEL']}
+          options={['OPEN', 'CONFIRM']}
           selected={teamData.teamStatus}
+          onChange={(e) => {
+            AddLeader(e);
+          }}
         />
-
         {teamLocation === 'MIX' ? (
           <input type='hidden' name='teamLocation' value={'MIX'} />
         ) : (
@@ -148,7 +168,7 @@ const AdminTeamFrom = ({
         <CheckBoxInput
           name='teamIsPrivate'
           label='비밀방(초대만 가능, 대회 내역에서 보이지 않음)'
-          checked={teamData.teamIsPrivate} // 팀 상세 페이지 - 수정
+          checked={teamData.teamIsPrivate}
         />
         <div className={styles.label_text}>상 이름 : {teamData.teamAward}</div>
         <div className={styles.label_text}>
@@ -202,4 +222,4 @@ const AdminTeamFrom = ({
   );
 };
 
-export default AdminTeamFrom;
+export default AdminTeamForm;

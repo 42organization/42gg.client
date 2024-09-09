@@ -22,6 +22,8 @@
   position: fixed;
   right: 2rem;
   bottom: 2rem;
+
+  display: flex;
   width: 2.5rem;
   height: 2.5rem;
   font-size: var(--font-size-xl);
@@ -33,6 +35,8 @@
   border-radius: $radius-circle;
   box-shadow: var(--box-shadow-light);
   transition: background-color 0.3s;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     width: 3rem;

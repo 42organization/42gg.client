@@ -1,8 +1,10 @@
-@import '../common.scss';
+@import 'styles/agenda/common.scss';
 
 .agendaItemTagBox {
   display: flex;
   gap: 0.3rem;
+  max-width: 18rem;
+  flex-wrap: wrap;
 }
 
 $tags: (
@@ -38,7 +40,7 @@ $tags: (
   width: max-content;
   min-width: 3.3rem;
   height: 1.2rem;
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.3rem;
 
   background-color: var(--box-bg-2-light);
   border-radius: $radius-medium;
