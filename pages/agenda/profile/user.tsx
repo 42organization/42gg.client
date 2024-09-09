@@ -24,8 +24,6 @@ const AgendaProfile = () => {
   const isMyProfile = useRef(false); // 내 프로필 페이지인지 아닌지 확인
   const [isIntraId, setIsIntraId] = useState<boolean>(false); // 인트라 아이디가 42에 있는지 확인
   const [isAgendaId, setIsAgendaId] = useState<boolean>(false); // 인트라 아이디가 agenda에 있는지 확인
-  const [agendaProfileData, setAgendaProfileData] =
-    useState<AgendaProfileDataProps | null>(null); // agendaProfileData 상태 추가
 
   /** API GET */
   //  GET: intraData (42 인트라 데이터 가져오기)
@@ -34,7 +32,7 @@ const AgendaProfile = () => {
     isReady: Boolean(queryIntraId),
   });
   // GET: agendaProfileData (GG 아젠다 유저 데이터 가져오기)
-  const { data: fetchedAgendaProfileData, getData: getAgendaProfileData } =
+  const { data: agendaProfileData, getData: getAgendaProfileData } =
     useFetchGet<AgendaProfileDataProps>({
       url: `/profile/${queryIntraId}`,
       isReady: isIntraId,
@@ -78,20 +76,13 @@ const AgendaProfile = () => {
       // 2. intraData가 있으면 인트라 아이디가 42에 있다는 뜻이므로 isIntraId = true
       setIsIntraId(!!intraData);
       // 3. agendaProfileData가 있으면 아젠다에 등록된 사용자이므로 isAgendaId = true
-      setIsAgendaId(!!fetchedAgendaProfileData);
-      if (isAgendaId) {
-        setAgendaProfileData(fetchedAgendaProfileData);
-      } else {
-        setAgendaProfileData(null); // fetchedAgendaProfileData가 없을 때 초기화
-      }
+      setIsAgendaId(!!agendaProfileData);
     };
-    updateProfileStatus();
-  }, [queryIntraId, intraData, fetchedAgendaProfileData]);
 
-  useEffect(() => {
     setIsIntraId(false);
     setIsAgendaId(false);
-  }, [queryIntraId]);
+    updateProfileStatus();
+  }, [queryIntraId, intraData, agendaProfileData]);
 
   /** UI Rendering */
   if (!queryIntraId || !myIntraId) {
