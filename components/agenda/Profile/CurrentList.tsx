@@ -11,8 +11,9 @@ const CurrentList = ({
   isHost: boolean;
 }) => {
   const listTitle = isHost ? '개최중 아젠다' : '참여중 아젠다';
+  const bottomMargin = isHost ? '' : styles.bottomMargin;
   return (
-    <div className={styles.currentListContainer}>
+    <div className={`${styles.currentListContainer} ${bottomMargin}`}>
       <div className={styles.currentListTitle}>{listTitle}</div>
 
       <div className={styles.currentListItems}>

@@ -27,45 +27,54 @@ const usePageNation = <T>({
 
   const getData = useCallback(
     async (page: number, size: number) => {
-      const res = await instanceInAgenda.get(url, { params });
-      const content = res.data.content ? res.data.content : [];
-      const totalSize = res.data.totalSize ? res.data.totalSize : 0;
+      const res = await instanceInAgenda.get(url, {
+        params: { ...params, page, size },
+      });
+      const content = res.data.content || [];
+      const totalSize = res.data.totalSize || 0;
 
       if (useIdx) {
-        res.data.content = res.data.content.map((c: T, idx: number) => {
-          const temp = c as T & { idx: number };
-          temp.idx = idx + 1 + size * (page - 1);
-          return temp;
+        content.forEach((c: T, idx: number) => {
+          (c as T & { idx: number }).idx = idx + 1 + size * (page - 1);
         });
       }
 
-      status.current = res.status; // 상태 업데이트
+      status.current = res.status;
       return { totalSize, content };
     },
     [url, params, useIdx]
   );
 
+  const fetchData = async () => {
+    const data = await getData(currentPage.current, size);
+    totalPages.current = Math.ceil(data.totalSize / size);
+    setContent(data.content);
+  };
+
   const pageChangeHandler = async (pageNumber: number) => {
     if (pageNumber < 1 || pageNumber > totalPages.current) return;
-    const res = await getData(pageNumber, size);
     currentPage.current = pageNumber;
-    setContent(res.content);
+    await fetchData();
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getData(currentPage.current, size);
-      totalPages.current = Math.ceil(data.totalSize / size);
-      setContent(data.content);
-    };
-
     if (
-      isReady == true &&
+      isReady === true &&
       (!status.current || Math.floor(status.current / 100) !== 2)
     ) {
       fetchData();
     }
-  }, [getData, size, params]); // getData와 size에 의존
+  }, [getData, size, params, isReady]);
+
+  useEffect(() => {
+    currentPage.current = 1;
+
+    setContent(null);
+
+    if (isReady) {
+      fetchData();
+    }
+  }, [url, isReady]);
 
   const PagaNationElementProps = {
     curPage: currentPage.current,
