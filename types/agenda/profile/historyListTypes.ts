@@ -1,10 +1,12 @@
+import { AgendaLocation } from 'constants/agenda/agenda';
+
 export interface HistoryItemProps {
   agendaId: string;
   agendaTitle: string;
   agendaStartTime: string;
   agendaEndTime: string;
   agendaCurrentTeam: number;
-  agendaLocation: string;
+  agendaLocation: AgendaLocation;
   teamKey: string;
   isOfficial: boolean;
   agendaMaxPeople: number;

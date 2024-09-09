@@ -5,6 +5,8 @@ import {
 } from 'types/agenda/profile/historyListTypes';
 import AgendaTags from 'components/agenda/utils/AgendaTags';
 import { countHistoryCoalitions } from 'components/agenda/utils/coalition/countCoalitions';
+import ColorList from 'components/agenda/utils/ColorList';
+import TeamIcon from 'public/image/agenda/rock-and-roll-hand.svg';
 import TimeIcon from 'public/image/agenda/Time.svg';
 import styles from 'styles/agenda/Profile/HistoryList.module.scss';
 
@@ -68,6 +70,41 @@ const HistoryList = ({ historyListData }: HistoryListProps) => {
 
                     <div className={styles.timeContent}>{timeString}</div>
                   </div>
+                  {/* Team 정보 UI / host 경우 ❌ */}
+                  {historyTeamMates && historyTeamMates.length > 0 ? (
+                    <>
+                      <hr className={styles.divider} />
+
+                      <div className={styles.teamName}>
+                        {historyData.teamName}
+                      </div>
+
+                      <div className={styles.teamIntraIdWrapper}>
+                        <div className={styles.imageWrapper}>
+                          <TeamIcon />
+                        </div>
+
+                        {/* intra id mapping */}
+                        <div className={styles.intraIdWrapper}>
+                          {historyTeamMates.map((mate, index) => (
+                            <div
+                              key={`${historyData.agendaId}-${mate.intraId}-${index}`}
+                            >
+                              {mate.intraId}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* coalition color mapping */}
+                      <div className={styles.coalitionWrapper}>
+                        <ColorList
+                          peopleCount={peopleCount}
+                          totalPeople={totalPeople}
+                        />
+                      </div>
+                    </>
+                  ) : null}
                 </Link>
               );
             }
