@@ -30,7 +30,7 @@ const useFetchGet = <T>({ url, isReady = true, params }: FetchGetProps) => {
   }, [url, isReady, params]);
 
   useEffect(() => {
-    if (url) {
+    if (url && isReady) {
       getData(); // 조건에 맞을 때만 getData 호출
     }
   }, [url, isReady, JSON.stringify(params)]);
