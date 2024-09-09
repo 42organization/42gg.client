@@ -91,25 +91,18 @@ const AgendaProfile = () => {
     }
   }, [queryIntraId, myIntraId, intraData, agendaProfileData]);
 
-  console.log('agendaProfileData:', intraData);
-  console.log('agendaProfileData:', agendaProfileData);
-  console.log('hostCurrentListData:', hostCurrentListData);
-  console.log('currentListData:', currentListData);
-  console.log('hostHistoryListData:', hostHistoryListData);
-  console.log('historyListData:', historyListData);
-  console.log('------------------------------------');
   /** UI Rendering */
   if (!queryIntraId || !myIntraId) {
     return <AgendaLoading />;
   }
   return (
     <>
+      {/* SearchBar */}
+      <div className={styles.agendaUserSearchBarWrap}>
+        <AgendaUserSearchBar />
+      </div>
       <div className={styles.profilePage}>
         <div className={styles.profileContainer}>
-          {/* SearchBar */}
-          <div className={styles.agendaUserSearchBarWrap}>
-            <AgendaUserSearchBar />
-          </div>
           {/* ProfileCard */}
           {intraData && (
             <ProfileCard

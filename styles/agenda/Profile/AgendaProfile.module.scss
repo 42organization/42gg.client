@@ -26,7 +26,14 @@
 .agendaUserSearchBarWrap {
   display: flex;
   justify-content: flex-end;
-  width: 100%;
+  @media screen and (max-width: 960px) {
+    min-width: 22rem;
+    max-width: 22rem;
+    margin: 1rem;
+  }
+  @media screen and (min-width: 961px) {
+    width: 85%;
+  }
 }
 
 .listContainer {
@@ -48,7 +55,7 @@
     width: 100%;
     min-height: 43rem;
     max-height: 43rem;
-    margin-top: 5rem;
+    margin-top: 1rem;
   }
 }
 
