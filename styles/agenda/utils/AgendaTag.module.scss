@@ -3,7 +3,8 @@
 .agendaItemTagBox {
   display: flex;
   gap: 0.3rem;
-  max-width: 16rem;
+  max-width: 18rem;
+  flex-wrap: wrap;
 }
 
 $tags: (
