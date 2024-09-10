@@ -32,7 +32,7 @@ function TakguLayout({ children }: TakguLayoutProps) {
   const presentPath = usePathname();
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
 
-  useAxiosResponse();
+  // useAxiosResponse();
   useGetUserSeason(presentPath);
   useSetAfterGameModal();
   useLiveCheck(presentPath);
@@ -65,8 +65,8 @@ function TakguLayout({ children }: TakguLayoutProps) {
             <PlayButton />
             <div className={styles.topInfo}>
               <Megaphone />
-              {openCurrentMatch && <CurrentMatch />}
-              {presentPath === '/' && <MainPageProfile />}
+              {openCurrentMatch ? <CurrentMatch /> : ''}
+              {presentPath === '/' ? <MainPageProfile /> : ''}
             </div>
             {children}
             <Footer />
@@ -85,11 +85,13 @@ function TakguLayout({ children }: TakguLayoutProps) {
 }
 const TakguAppLayout = ({ children }: TakguLayoutProps) => {
   return (
-    <UserLayout>
-      <TakguLayout>{children}</TakguLayout>
+    <>
+      <UserLayout>
+        <TakguLayout>{children}</TakguLayout>
+        <CustomizedSnackbars />
+      </UserLayout>
       <ModalProvider />
-      <CustomizedSnackbars />
-    </UserLayout>
+    </>
   );
 };
 

@@ -22,7 +22,7 @@ function PageNation({
   const router = useRouter();
   return (
     <div className={router.pathname.includes('takgu') ? '' : styles.container}>
-      {!!totalPages && (
+      {totalPages && totalPages > 1 ? (
         <Pagination
           activePage={curPage}
           itemsCountPerPage={1}
@@ -34,6 +34,8 @@ function PageNation({
           nextPageText={<IoCaretForwardSharp />}
           onChange={(page) => pageChangeHandler(page)}
         />
+      ) : (
+        ''
       )}
     </div>
   );

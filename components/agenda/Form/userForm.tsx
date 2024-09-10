@@ -48,9 +48,9 @@ const UserForm = ({ stringKey }: userFormProps) => {
   const { closeModal } = useModal();
   const sendRequest = useFetchRequest().sendRequest;
 
-  const { data }: { data: dataType | null } = useFetchGet(
-    `profile/${stringKey}`
-  );
+  const { data }: { data: dataType | null } = useFetchGet({
+    url: `profile/${stringKey}`,
+  });
 
   if (!data) {
     return <div className={styles.modalContainer}>loading...</div>;
@@ -81,7 +81,7 @@ const UserForm = ({ stringKey }: userFormProps) => {
         <SelectInput
           name='userLocation'
           label='유저 위치'
-          options={['SEOUL', 'GYEONGSAN', 'MIX']}
+          options={['SEOUL', 'GYEONGSAN']}
           selected={data.userLocation}
         />
       </div>

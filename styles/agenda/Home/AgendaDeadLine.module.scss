@@ -1,7 +1,6 @@
 @import 'styles/agenda/common.scss';
 
 .agendaItemDeadLineBox {
-  @include gridHidden(mobile);
   position: absolute;
   right: 1rem;
   bottom: 1rem;
@@ -9,7 +8,7 @@
   width: 4rem;
   height: 4rem;
   flex-direction: column;
-  background: $bg-color-deadline-red;
+  background-color: $bg-color-deadline-open;
   border-radius: $radius-circle;
   justify-content: center;
   gap: 0.2rem;
@@ -23,4 +22,16 @@
     @include text('tab');
     color: var(--color-text-reverse);
   }
+}
+
+.confirm {
+  background-color: $bg-color-deadline-confirm !important;
+}
+
+.finished {
+  background-color: $bg-color-deadline-finish !important;
+}
+
+.cancel {
+  background-color: $bg-color-deadline-cancel !important;
 }

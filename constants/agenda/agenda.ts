@@ -5,11 +5,17 @@ export const enum AgendaLocation {
 }
 
 export const enum AgendaStatus {
-  CANCEL = 'CANCEL',
-  OPEN = 'OPEN',
-  CONFIRM = 'CONFIRM',
-  FINISH = 'FINISH',
+  CANCEL = 'CANCEL', // 취소
+  OPEN = 'OPEN', // 모집 중
+  CONFIRM = 'CONFIRM', // 진행 중
+  FINISH = 'FINISH', // 진행 완료
 }
+export const AgendaStatusTag: { [key in AgendaStatus]: string } = {
+  CANCEL: '취소', // 취소
+  OPEN: '모집중', // 모집 중
+  CONFIRM: '확정/진행중', // 진행 중
+  FINISH: '종료', // 진행 완료
+};
 
 export const enum TeamStatus {
   OPEN = 'OPEN',

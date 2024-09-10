@@ -88,8 +88,9 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
   const { openModal, closeModal } = useModal();
 
   const buttonList: string[] = [
-    styles.detail,
     styles.delete,
+    styles.default,
+    styles.detail,
     styles.coin,
     styles.penalty,
   ];
@@ -122,6 +123,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
       { agenda_key: agendaKey },
       (data) => {
         alert('취소 요청이 성공적으로 전송되었습니다.');
+        getAgendaList();
       },
       (error) => {
         alert('취소 요청에 실패했습니다: ' + error);
@@ -156,6 +158,18 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
       case '공지사항':
         router.push(`/admin/agenda/announcements?agendaKey=${agendaKey}`);
         break;
+      case '포스터':
+        if (!agenda.agendaPosterUrl) {
+          alert('포스터가 없습니다.');
+          return;
+        }
+        openModal({
+          type: 'notice',
+          title: '포스터',
+          description: "포스터 수정은 '자세히' 버튼을 눌러주세요.",
+          image: agenda.agendaPosterUrl,
+        });
+        break;
     }
   };
 
@@ -164,6 +178,7 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
       const getData = await instanceInAgenda.get(
         `/admin/request/list?page=${currentPage}&size=${itemsPerPage}`
       );
+
       const filteredAgendaList = getData.data.content.filter(
         (agenda: IAgenda) => {
           const matchesStatus = status ? agenda.agendaStatus === status : true;
@@ -199,9 +214,9 @@ export default function AgendaTable({ status, isOfficial }: AgendaTableProps) {
       case AgendaStatus.CANCEL:
         return '취소';
       case AgendaStatus.OPEN:
-        return '진행 중';
+        return '모집 중';
       case AgendaStatus.CONFIRM:
-        return '확정';
+        return '진행 중';
       case AgendaStatus.FINISH:
         return '진행완료';
       default:

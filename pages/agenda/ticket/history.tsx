@@ -10,6 +10,7 @@ const TicketHistoryPage = () => {
       url: '/ticket/history',
       size: size,
       useIdx: true,
+      isReady: true,
     }
   );
 

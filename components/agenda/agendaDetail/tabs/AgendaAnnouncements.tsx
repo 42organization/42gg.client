@@ -1,55 +1,71 @@
-import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { AnnouncementProps } from 'types/agenda/agendaDetail/announcementTypes';
 import AnnouncementItem from 'components/agenda/agendaDetail/tabs/AnnouncementItem';
-import { UploadBtn } from 'components/agenda/button/UploadBtn';
+import AgendaLoading from 'components/agenda/utils/AgendaLoading';
 import PageNation from 'components/Pagination';
-// import useFetchGet from 'hooks/agenda/useFetchGet';
+import useAgendaKey from 'hooks/agenda/useAgendaKey';
 import usePageNation from 'hooks/agenda/usePageNation';
 import styles from 'styles/agenda/agendaDetail/tabs/AgendaAnnouncements.module.scss';
 
-export default function AgendaAnnouncements({ isHost }: { isHost: boolean }) {
-  const router = useRouter();
-  const { agendaKey } = router.query;
-
-  // !! page, size 변수로 변경
-  // const params = { agenda_key: agendaKey, page: 1, size: 20 };
-  // const content: AnnouncementProps[] | null = useFetchGet<
-  //   AnnouncementProps[]
-  // >(`/announcement`, params).data;
+export default function AgendaAnnouncements() {
+  const agendaKey = useAgendaKey();
+  const [selected, setSelected] = useState<number>(0);
 
   const { content, PagaNationElementProps } = usePageNation<AnnouncementProps>({
     url: `/announcement`,
     params: { agenda_key: agendaKey },
+    size: 5,
+    isReady: Boolean(agendaKey),
   });
-
-  if (!content) {
-    return <div>Loading...</div>;
-  }
-  const newAnnouncement = () => {
-    router.push(`/agenda/${agendaKey}/host/createAnnouncement`);
+  const newHandler = (page: number) => {
+    setSelected(0);
+    return PagaNationElementProps.pageChangeHandler(page);
   };
 
+  if (!agendaKey || !content) {
+    return (
+      <div className={styles.emptyContainer}>
+        <AgendaLoading />
+      </div>
+    );
+  }
   return (
     <>
-      <div className={styles.announcementsList}>
-        {content &&
-          content.map((item) => (
-            <AnnouncementItem
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              content={item.content}
-              createdAt={item.createdAt}
+      {content && content.length > 0 ? (
+        <>
+          <div className={styles.announcementsList}>
+            {content.map((item, idx) => (
+              <AnnouncementItem
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                content={item.content}
+                createdAt={item.createdAt}
+                isListSelected={selected === idx}
+                setSelected={() => setSelected(idx)}
+              />
+            ))}
+            <PageNation
+              {...PagaNationElementProps}
+              pageChangeHandler={newHandler}
             />
-          ))}
-        <PageNation {...PagaNationElementProps} />
-
-        {isHost ? (
-          <div className={styles.buttonWarp}>
-            <UploadBtn text='공지사항 추가' onClick={newAnnouncement} />
           </div>
-        ) : null}
-      </div>
+          {content[selected] ? (
+            <AnnouncementItem
+              key={content[selected].id}
+              id={content[selected].id}
+              title={content[selected].title}
+              content={content[selected].content}
+              createdAt={content[selected].createdAt}
+              isSelected={true}
+            />
+          ) : (
+            ''
+          )}
+        </>
+      ) : (
+        <div className={styles.emptyContainer}>공지사항이 없습니다.</div>
+      )}
     </>
   );
 }

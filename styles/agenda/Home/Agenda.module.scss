@@ -14,8 +14,9 @@
   @include layout;
   position: relative;
   top: -1rem;
-  display: flex;
+  display: flex !important;
   width: 100%;
+  min-width: fit-content;
   flex-direction: column;
   padding: 1rem 0;
   margin: 0;

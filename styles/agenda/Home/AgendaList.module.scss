@@ -27,14 +27,18 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+  @media screen and (max-width: 960px) {
+    justify-content: flex-end;
+  }
   align-items: center;
   > h2 {
-    margin: 0.5rem;
+    margin: 1rem;
     @include text(sub-menu);
   }
   > div {
+    max-width: 15rem;
     height: max-content;
-    margin-right: 0.5rem;
+    margin-right: 1rem;
     color: var(--text-color);
   }
 }
@@ -107,16 +111,16 @@
 }
 
 .emptyContainer {
+  @include container(1);
+  @include text('description');
   display: flex;
-  width: 100%;
+  width: calc(100% - 2rem);
   height: 10rem;
   font-size: $font-size-m;
   opacity: 70%;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  @include text('description');
-  @include container(1);
 }
 
 .selected {
@@ -125,4 +129,14 @@
     border-width: 2px;
     box-shadow: 2px 2px 0 2px var(--highlight-violet);
   }
+}
+
+.show {
+  @media screen and (min-width: 961px) {
+    display: none !important ;
+  }
+}
+
+.web {
+  @include gridHidden(web);
 }

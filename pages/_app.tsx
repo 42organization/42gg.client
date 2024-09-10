@@ -2,14 +2,11 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 import ErrorChecker from 'components/error/ErrorChecker';
 import LoginChecker from 'components/LoginChecker';
-import Header from 'components/takgu/Layout/Header';
-import HeaderStateContext from 'components/takgu/Layout/HeaderContext';
-import ModalProvider from 'components/takgu/modal/ModalProvider';
 import CustomizedSnackbars from 'components/toastmsg/toastmsg';
 import LayoutProvider from 'Layout/LayoutProvider';
 import * as gtag from 'lib/gtag';
@@ -17,16 +14,18 @@ import 'styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 60 * 1000 * 10, // 10분 동안은 캐시를 사용
-        cacheTime: 60 * 1000 * 10, // 20분 동안 캐시를 유지
-        retry: 1, // 에러가 났을 때 1번 재시도
-        refetchOnMount: false,
-      },
-    },
-  });
+  const [queryClient, _] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 60 * 1000 * 10, // 10분 동안은 캐시를 사용
+            retry: 1, // 에러가 났을 때 1번 재시도
+            refetchOnMount: false,
+          },
+        },
+      })
+  );
 
   useEffect(() => {
     const handleRouteChange = (url: string) => {

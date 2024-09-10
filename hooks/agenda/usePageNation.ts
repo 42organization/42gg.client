@@ -1,59 +1,80 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { instanceInAgenda } from 'utils/axios';
 
-const usePageNation = <T>({
-  url,
-  size,
-  useIdx,
-  params,
-}: {
+interface PageNationProps {
   url: string;
   params?: Record<string, any>;
   size?: number; // 페이지 사이즈
-  useIdx?: boolean; // 인덱싱 추가 여부 : 해당 데이터 타입에 idx?: number; 추가 필요
-}) => {
+  isReady?: boolean; // API 호출 가능 상태 확인
+  useIdx?: boolean; // 인덱싱 추가 여부
+}
+
+const usePageNation = <T>({
+  url,
+  params,
+  size = 20,
+  isReady,
+  useIdx,
+}: PageNationProps) => {
   const currentPage = useRef<number>(1);
   const [content, setContent] = useState<T[] | null>(null);
   const status = useRef<number>(0);
   const totalPages = useRef(1);
 
-  if (!size) size = 20;
-  params = params ? params : {};
+  params = params || {};
   params.page = currentPage.current;
   params.size = size;
-  const getData = async (page: number) => {
-    const res = await instanceInAgenda.get(url, { params });
-    const content = res.data.content ? res.data.content : [];
-    const totalSize = res.data.totalSize ? res.data.totalSize : 0;
 
-    if (useIdx) {
-      res.data.content = res.data.content.map((c: T, idx: number) => {
-        const temp = c as T & { idx: number };
-        temp.idx = idx + 1 + size * (page - 1);
-        return temp;
+  const getData = useCallback(
+    async (page: number, size: number) => {
+      const res = await instanceInAgenda.get(url, {
+        params: { ...params, page, size },
       });
-    }
-    status.current = res.status;
-    return { totalSize, content };
+      const content = res.data.content || [];
+      const totalSize = res.data.totalSize || 0;
+
+      if (useIdx) {
+        content.forEach((c: T, idx: number) => {
+          (c as T & { idx: number }).idx = idx + 1 + size * (page - 1);
+        });
+      }
+
+      status.current = res.status;
+      return { totalSize, content };
+    },
+    [url, params, useIdx]
+  );
+
+  const fetchData = async () => {
+    const data = await getData(currentPage.current, size);
+    totalPages.current = Math.ceil(data.totalSize / size);
+    setContent(data.content);
   };
-  // const data = getData(0);
 
   const pageChangeHandler = async (pageNumber: number) => {
     if (pageNumber < 1 || pageNumber > totalPages.current) return;
-    await getData(pageNumber).then((res) => {
-      currentPage.current = pageNumber;
-      setContent(res.content);
-    });
+    currentPage.current = pageNumber;
+    await fetchData();
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getData(currentPage.current);
-      totalPages.current = Math.ceil(data.totalSize / size);
-      setContent(data.content);
-    };
-    if (!status.current || status.current / 100 != 2) fetchData();
-  }, [currentPage, getData, size]);
+    if (
+      isReady === true &&
+      (!status.current || Math.floor(status.current / 100) !== 2)
+    ) {
+      fetchData();
+    }
+  }, [getData, size, params, isReady]);
+
+  useEffect(() => {
+    currentPage.current = 1;
+
+    setContent(null);
+
+    if (isReady) {
+      fetchData();
+    }
+  }, [url, isReady]);
 
   const PagaNationElementProps = {
     curPage: currentPage.current,

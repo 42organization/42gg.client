@@ -1,12 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { instanceInAgenda } from 'utils/axios';
 
-const useFetchGet = <T>(url: string, params?: Record<string, any>) => {
+interface FetchGetProps {
+  url: string;
+  isReady?: boolean;
+  params?: Record<string, any>;
+}
+
+const useFetchGet = <T>({ url, isReady = true, params }: FetchGetProps) => {
   const [data, setData] = useState<T | null>(null);
   const [status, setStatus] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
+    if (isReady === false) {
+      return;
+    }
+
     try {
       const res = await instanceInAgenda.get(url, { params });
       setStatus(res.status);
@@ -17,13 +27,13 @@ const useFetchGet = <T>(url: string, params?: Record<string, any>) => {
       console.error(error);
       setError('get error');
     }
-  };
+  }, [url, isReady, params]);
 
   useEffect(() => {
-    if (url) {
-      getData();
+    if (url && isReady) {
+      getData(); // 조건에 맞을 때만 getData 호출
     }
-  }, [url, JSON.stringify(params)]);
+  }, [url, isReady, JSON.stringify(params)]);
 
   return { data, status, error, getData };
 };

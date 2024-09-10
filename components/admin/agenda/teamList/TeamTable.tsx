@@ -68,7 +68,7 @@ export default function TeamTable() {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedAgendaKey, setSelectedAgendaKey] = useState('');
-  const agendaList = useFetchGet(`admin/list`).data || [];
+  const agendaList = useFetchGet({ url: 'admin/list' }).data || [];
   const setSnackBar = useSetRecoilState(toastState);
 
   const buttonList: string[] = [styles.coin, styles.penalty];
@@ -113,15 +113,6 @@ export default function TeamTable() {
         },
       });
 
-      if (response.data.content.length === 0) {
-        setSnackBar({
-          toastName: 'GET request',
-          message: '팀이 없습니다.',
-          severity: 'error',
-          clicked: true,
-        });
-      }
-
       setTeamInfo({
         teamList: response.data.content,
         totalPage: Math.ceil(response.data.totalSize / itemsPerPage),
@@ -129,12 +120,6 @@ export default function TeamTable() {
       });
     } catch (e) {
       console.error('Error fetching team list:', e);
-      setSnackBar({
-        toastName: 'GET request',
-        message: '팀 목록을 가져오는데 실패했습니다.',
-        severity: 'error',
-        clicked: true,
-      });
     }
   }, [currentPage, selectedAgendaKey, agendaKey]);
 
@@ -195,66 +180,68 @@ export default function TeamTable() {
         </Select>
       </div>
       {selectedAgendaKey ? (
-        <TableContainer className={styles.tableContainer} component={Paper}>
-          <Table className={styles.table} aria-label='agenda table'>
-            <AdminAgendaTableHead tableName={'team'} table={tableTitle} />
-            <TableBody className={styles.tableBody}>
-              {teamInfo.teamList.length > 0 ? (
-                teamInfo.teamList.map((team: ITeam, index) => (
-                  <TableRow
-                    key={`${team.teamKey}-${index}`}
-                    className={styles.tableRow}
-                  >
-                    {agendaTableFormat['team'].columns.map(
-                      (columnName: string, index: number) => {
-                        return (
-                          <TableCell
-                            className={styles.tableBodyItem}
-                            key={index}
-                          >
-                            {columnName === 'teamStatus'
-                              ? renderStatus(team.teamStatus) // 상태 표시
-                              : columnName === 'teamIsPrivate'
-                              ? renderIsPrivate(team.teamIsPrivate) // 공개 여부 표시
-                              : columnName !== 'etc'
-                              ? team[columnName as keyof ITeam] // 다른 열의 기본 값 표시
-                              : agendaTableFormat['team'].etc?.value.map(
-                                  (buttonName: string, index: number) => (
-                                    <button
-                                      key={buttonName}
-                                      className={`${styles.button} ${buttonList[index]}`}
-                                      onClick={() =>
-                                        handleButtonAction(buttonName, team)
-                                      }
-                                    >
-                                      {buttonName}
-                                    </button>
-                                  )
-                                )}
-                          </TableCell>
-                        );
-                      }
-                    )}
-                  </TableRow>
-                ))
-              ) : (
-                <NoContent col={7} content={'팀이 없습니다.'} />
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <>
+          <TableContainer className={styles.tableContainer} component={Paper}>
+            <Table className={styles.table} aria-label='agenda table'>
+              <AdminAgendaTableHead tableName={'team'} table={tableTitle} />
+              <TableBody className={styles.tableBody}>
+                {teamInfo.teamList.length > 0 ? (
+                  teamInfo.teamList.map((team: ITeam, index) => (
+                    <TableRow
+                      key={`${team.teamKey}-${index}`}
+                      className={styles.tableRow}
+                    >
+                      {agendaTableFormat['team'].columns.map(
+                        (columnName: string, index: number) => {
+                          return (
+                            <TableCell
+                              className={styles.tableBodyItem}
+                              key={index}
+                            >
+                              {columnName === 'teamStatus'
+                                ? renderStatus(team.teamStatus) // 상태 표시
+                                : columnName === 'teamIsPrivate'
+                                ? renderIsPrivate(team.teamIsPrivate) // 공개 여부 표시
+                                : columnName !== 'etc'
+                                ? team[columnName as keyof ITeam] // 다른 열의 기본 값 표시
+                                : agendaTableFormat['team'].etc?.value.map(
+                                    (buttonName: string, index: number) => (
+                                      <button
+                                        key={buttonName}
+                                        className={`${styles.button} ${buttonList[index]}`}
+                                        onClick={() =>
+                                          handleButtonAction(buttonName, team)
+                                        }
+                                      >
+                                        {buttonName}
+                                      </button>
+                                    )
+                                  )}
+                            </TableCell>
+                          );
+                        }
+                      )}
+                    </TableRow>
+                  ))
+                ) : (
+                  <NoContent col={7} content={'팀이 없습니다.'} />
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <div className={styles.pageNationContainer}>
+            <PageNation
+              curPage={teamInfo.currentPage}
+              totalPages={teamInfo.totalPage}
+              pageChangeHandler={(pageNumber: number) => {
+                setCurrentPage(pageNumber);
+              }}
+            />
+          </div>
+        </>
       ) : (
         <div className={styles.noAgendaMessage}>아젠다를 선택해주세요.</div>
       )}
-      <div className={styles.pageNationContainer}>
-        <PageNation
-          curPage={teamInfo.currentPage}
-          totalPages={teamInfo.totalPage}
-          pageChangeHandler={(pageNumber: number) => {
-            setCurrentPage(pageNumber);
-          }}
-        />
-      </div>
     </div>
   );
 }

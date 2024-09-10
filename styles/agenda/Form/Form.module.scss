@@ -4,6 +4,7 @@
   display: flex;
   width: 100%;
   flex-direction: column;
+  text-align: left;
 }
 
 .pageContianer {
@@ -28,6 +29,9 @@
 .description {
   @include text('description');
   padding: 0.5rem;
+  > span {
+    @include text('description-regular');
+  }
 }
 
 %item-container {
@@ -63,7 +67,7 @@
   display: flex;
   width: 100%;
   gap: 2rem;
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     flex-direction: column;
     gap: 1rem;
   }

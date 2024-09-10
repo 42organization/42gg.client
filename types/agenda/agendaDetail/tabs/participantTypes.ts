@@ -16,7 +16,8 @@ export interface ParticipantTabProps {
 }
 
 export interface ParticipantTeamListProps {
-  max: number;
+  maxTeam: number;
+  maxPeople: number;
   myTeam?: TeamDataProps | null;
 }
 

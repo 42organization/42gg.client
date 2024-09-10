@@ -1,13 +1,23 @@
 import { useEffect } from 'react';
-import { useResetRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
+import { agendaErrorState } from 'utils/recoil/agendaError';
 import { modalState } from 'utils/recoil/takgu/modal';
+import { useRouter } from 'next/router';
 import useErrorPage from 'hooks/error/useErrorPage';
 import styles from 'styles/takgu/Error.module.scss';
 import ErrorEmoji from '/public/image/takgu/error_face.svg';
 
 export default function ErrorPage() {
-  const { error, goHome } = useErrorPage();
+  const { goHome } = useErrorPage();
+  const [error, setError] = useRecoilState(agendaErrorState);
+  const { msg, status } = error;
   const resetModal = useResetRecoilState(modalState);
+  const router = useRouter();
+
+  const resetHandler = () => {
+    setError({ msg: '', status: 0 });
+    goHome();
+  };
 
   useEffect(() => {
     resetModal();
@@ -18,10 +28,8 @@ export default function ErrorPage() {
       <div className={styles.errorContainer}>
         <div className={styles.title}>42GG</div>
         <div className={styles.error}>
-          {error === 'DK404'
-            ? '잘못된 요청입니다!'
-            : '데이터 요청에 실패하였습니다.'}
-          <div className={styles.errorCode}>({error})</div>
+          {msg}
+          <div className={styles.errorCode}>({status})</div>
           <div className={styles.emojiWrapper}>
             <div className={styles.threeDotImage}>
               <div></div>
@@ -31,11 +39,35 @@ export default function ErrorPage() {
             <ErrorEmoji />
           </div>
         </div>
-        <div className={styles.home} onClick={goHome}>
+        <div className={styles.home} onClick={resetHandler}>
           <div className={styles.positive}>
             <input type='button' value='🏠 홈으로 🏠' />
           </div>
         </div>
+        {/* 개발용 토큰 넣기 버튼 */}
+        {process.env.NODE_ENV === 'development' && status === 401 ? (
+          <>
+            <input
+              placeholder='insert token'
+              type='text'
+              name='tokenInput'
+            ></input>
+            <button
+              onClick={(e: React.MouseEvent) => {
+                const target = document.querySelector(
+                  'input[name=tokenInput]'
+                ) as HTMLInputElement;
+                if (!target) return;
+
+                console.log(target.value); // DEV
+                localStorage.setItem('42gg-token', target.value);
+                router.reload();
+              }}
+            >
+              토큰 넣기
+            </button>
+          </>
+        ) : null}
       </div>
     </div>
   );

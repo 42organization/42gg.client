@@ -3,7 +3,7 @@
 .backdrop {
   @include backdrop;
   position: fixed;
-  z-index: 4000;
+  z-index: 4;
 
   display: flex;
   justify-content: center;

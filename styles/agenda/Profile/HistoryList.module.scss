@@ -1,33 +1,14 @@
 @import 'styles/agenda/common.scss';
 
-.agendaHistory {
+.historyItems {
   display: flex;
-  width: 22rem;
-  height: auto;
-  max-height: 32rem;
-  flex-direction: column;
-  padding: 1rem 1.5rem;
-  background-color: var(--box-bg-2);
-  border: var(--default-border);
-  border-radius: $radius-big;
-  box-shadow: var(--default-box-shadow);
-  gap: 1rem;
+  width: 100%;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
 
-  .historyTitleText {
-    @include text(sub-title);
-  }
-
-  .historyItems {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .historyEmpty {
-    @include text(description-s);
-  }
+.historyEmpty {
+  @include text(description-s);
 }
 
 // ITEM
@@ -39,60 +20,72 @@
   padding: 1rem;
   cursor: pointer;
   background-color: var(--box-bg-1);
+  border: var(--default-border);
   border-radius: $radius-small;
+  box-shadow: var(--default-box-shadow);
   justify-content: flex-start;
   align-items: flex-start;
   gap: 0.5rem;
-
-  .agendaTitle {
-    @include text(tab);
+  @media screen and (min-width: 1441px) {
+    width: 48%;
   }
+}
 
-  .tagWrapper {
-    display: flex;
-    gap: 0.5rem;
-  }
+.historyItem:first-child:last-child {
+  width: 100% !important;
+}
 
-  .timeWrapper {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
+.agendaTitle {
+  @include text(tab);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-    .timeContent {
-      @include text(description-s);
-    }
-  }
+.tagWrapper {
+  display: flex;
+  gap: 0.5rem;
+}
 
-  .divider {
-    width: 100%;
-  }
+.timeWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
 
-  .teamName {
-    @include text(tab);
-  }
-
-  .teamIntraIdWrapper {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    @include text(description-s);
-
-    .intraIdWrapper {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-  }
-
-  .coalitionWrapper {
-    display: flex;
-    width: 100%;
-    height: 1rem;
-  }
+.timeContent {
+  @include text(description-s);
 }
 
 .imageWrapper {
   display: flex;
   width: 0.8rem;
   height: 0.8rem;
+}
+
+.divider {
+  width: 100%;
+}
+
+.teamName {
+  @include text(tab);
+}
+
+.teamIntraIdWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  @include text(description-s);
+
+  .intraIdWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.coalitionWrapper {
+  display: flex;
+  width: 100%;
+  height: 1rem;
 }

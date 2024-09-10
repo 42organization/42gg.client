@@ -6,7 +6,6 @@ function agendadataToMsg(data: FormData, isEdit: boolean) {
   let msg = '';
   msg += '행사 제목 : ' + data.get('agendaTitle') + '\n';
   msg += '타입: ';
-  console.log(msg);
   msg += data.get('agendaIsRanking') === 'true' ? '대회\n' : '행사\n';
   msg += '행사 내용 : ' + data.get('agendaContent') + '\n';
   msg +=
@@ -29,7 +28,6 @@ function agendadataToMsg(data: FormData, isEdit: boolean) {
         ' ~ ' +
         data.get('agendaMaxPeople') +
         '\n';
-  console.log(msg);
   msg += '개최지 : ' + data.get('agendaLocation') + '\n';
   msg += '포스터 : ';
   msg +=
@@ -147,8 +145,7 @@ const SubmitAgendaForm = async (
           if (res.status === 204 || res.status === 200)
             onProceed && onProceed();
           if (!isEdit) {
-            console.log(res.data.agendaKey);
-            router.push(`/agenda/${res.data.agendaKey}`);
+            router.push(`/agenda/detail?agenda_key=${res.data.agendaKey}`);
           }
         })
         .catch((err) => {

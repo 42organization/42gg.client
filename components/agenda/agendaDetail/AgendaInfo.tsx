@@ -1,11 +1,13 @@
 import { NextRouter, useRouter } from 'next/router';
 import { AgendaInfoProps } from 'types/agenda/agendaDetail/tabs/agendaInfoTypes';
-import { AgendaStatus } from 'constants/agenda/agenda';
+import { AgendaStatus, AgendaStatusTag } from 'constants/agenda/agenda';
 import { ShareBtn } from 'components/agenda/button/Buttons';
 import { UploadBtn } from 'components/agenda/button/UploadBtn';
+import { AgendaTag } from 'components/agenda/utils/AgendaTag';
 import { isSoloTeam } from 'components/agenda/utils/team';
 import useFetchRequest from 'hooks/agenda/useFetchRequest';
 import styles from 'styles/agenda/agendaDetail/AgendaInfo.module.scss';
+import StartDate from '../utils/StartDate';
 
 interface CallbackProps {
   router: NextRouter;
@@ -19,17 +21,15 @@ const copyLink = () => {
 };
 
 const hostMode = ({ router, agendaKey }: CallbackProps) => {
-  // router.push(`/agenda/${agendaKey}/host/modify`); // 기존 코드 - 주최자가 대회 수정
-  // router.push(`/agenda/${agendaKey}/host/createAnnouncement`); // 공지사항 추가로 변경
-  alert('host Mode 예정!');
+  router.push(`/agenda/detail/host?agenda_key=${agendaKey}`);
 };
 
 const subscribeTeam = ({ router, agendaKey }: CallbackProps) => {
-  router.push(`/agenda/${agendaKey}/create-team`);
+  router.push(`/agenda/detail/team/create?agenda_key=${agendaKey}`);
 };
 
 const submitResults = ({ router, agendaKey }: CallbackProps) => {
-  router.push(`/agenda/${agendaKey}/host/result`);
+  router.push(`/agenda/detail/host/result?agenda_key=${agendaKey}`);
 };
 
 export default function AgendaInfo({
@@ -41,7 +41,7 @@ export default function AgendaInfo({
 }: AgendaInfoProps) {
   const sendRequest = useFetchRequest().sendRequest;
 
-  const subscribeSolo = ({ router, agendaKey }: CallbackProps) => {
+  const subscribeSolo = ({ agendaKey }: CallbackProps) => {
     const soloData = {
       teamName: intraId,
       teamLocation: agendaData.agendaLocation,
@@ -66,22 +66,14 @@ export default function AgendaInfo({
             { agenda_key: agendaKey, teamKey: newTeamKey },
             () => {
               window.location.reload();
-            },
-            (err) => {
-              console.log('개인 확정에 실패했습니다.', err);
             }
           );
-        } else {
-          console.log('개인 팀키를 찾지 못했습니다.');
         }
-      },
-      (err) => {
-        console.log('개인 참여에 실패했습니다.', err);
       }
     );
   };
 
-  const unsubscribeSolo = ({ router, agendaKey }: CallbackProps) => {
+  const unsubscribeSolo = ({ agendaKey }: CallbackProps) => {
     const myTeamKey = myTeam ? myTeam.teamKey : null;
 
     sendRequest(
@@ -94,9 +86,6 @@ export default function AgendaInfo({
       },
       () => {
         window.location.reload();
-      },
-      (err) => {
-        console.log('등록취소에 실패했습니다.', err);
       }
     );
   };
@@ -114,7 +103,7 @@ export default function AgendaInfo({
       case AgendaStatus.OPEN:
         if (isHost) {
           // 주최자
-          return { text: '주최자 관리', callback: hostMode }; // 주최자 관리 -> 대회 수정 / (변경) 공지사항 추가 버튼
+          return { text: '주최자 관리', callback: hostMode };
         } else if (isParticipant) {
           // 참가자
           if (isSolo) {
@@ -150,20 +139,22 @@ export default function AgendaInfo({
         className={`${styles.infoContainer} ${containerSize}`}
         style={{
           background: `linear-gradient(0deg, #fff 7rem, rgba(0, 0, 0, 0) 10rem), url(${
-            agendaData.agendaPosterUrl || '/image/agenda/42.jpg'
+            agendaData.agendaPosterUrl || 'var(--color-bg)'
           }) lightgray 50% / cover no-repeat`,
         }}
       >
         <div className={styles.infoWarp}>
           <div className={styles.contentWarp}>
+            <div className={styles.web}>
+              {StartDate(agendaData.agendaStartTime as string)}
+            </div>
             <h2>{agendaTitle}</h2>
-
             <div className={styles.organizerWrap}>
               <span>주최자 : {agendaHost}</span>
+              <AgendaTag tagName={AgendaStatusTag[agendaData.agendaStatus]} />
             </div>
             <div className={styles.buttonWarp}>
               {isAgendaDetail && <ShareBtn onClick={copyLink} />}
-
               {isAgendaDetail && buttonData && (
                 <UploadBtn
                   text={buttonData.text}

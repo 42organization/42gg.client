@@ -76,7 +76,7 @@ const TeamButtons = ({
           label: '팀 나가기',
           description: '확인 버튼을 누르면, 팀에서 나가게 됩니다.',
           onProceed: () =>
-            manageTeamDetail && manageTeamDetail('PATCH', 'team/cancel'),
+            manageTeamDetail && manageTeamDetail('PATCH', 'team/drop'),
         });
       } else if (authority === Authority.LEADER) {
         return renderButton(

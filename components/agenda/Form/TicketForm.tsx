@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { toastState } from 'utils/recoil/toast';
 import AgendaSelect from 'components/agenda/Input/AgendaSelect';
 import { useModal } from 'components/agenda/modal/useModal';
 import useFetchGet from 'hooks/agenda/useFetchGet';
@@ -12,12 +14,13 @@ interface userFormProps {
 const TicketForm = ({ stringKey }: userFormProps) => {
   const { closeModal } = useModal();
   const sendRequest = useFetchRequest().sendRequest;
-  const agendaList = useFetchGet('admin/list').data || [];
+  const agendaList = useFetchGet({ url: 'admin/list' }).data || [];
   const [selectedAgendaKey, setSelectedAgendaKey] = useState('');
 
   const handleSelectChange = (e: { target: { value: any } }) => {
     setSelectedAgendaKey(e.target.value);
   };
+  const setSnackbar = useSetRecoilState(toastState);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,7 +33,6 @@ const TicketForm = ({ stringKey }: userFormProps) => {
 
     jsonData.issuedFromKey = selectedAgendaKey;
 
-    console.log('data', jsonData);
     sendRequest(
       'POST',
       'admin/ticket',
@@ -40,7 +42,12 @@ const TicketForm = ({ stringKey }: userFormProps) => {
         closeModal();
       },
       (error: string) => {
-        console.error(error);
+        setSnackbar({
+          toastName: `response error`,
+          severity: 'error',
+          message: `🔥 ${error} 🔥`,
+          clicked: true,
+        });
       }
     );
   };
@@ -54,10 +61,15 @@ const TicketForm = ({ stringKey }: userFormProps) => {
     >
       <div className={styles.modalContainer}>
         <div className={styles.label_title}>IntraId : {stringKey}</div>
+        <div className={styles.label}>발급처</div>
+        <p className={styles.description}>
+          발급처를 선택하지 않으면 <span>42Intra</span> 로 발급됩니다.
+        </p>
         <AgendaSelect
           selectedKey={selectedAgendaKey}
           dataList={agendaList}
           handleSelectChange={handleSelectChange}
+          defaultSelect='42Intra'
         />
       </div>
 

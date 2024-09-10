@@ -58,7 +58,7 @@ export default function BasicProfile({ profileId }: ProfileProps) {
         </div>
         <div className={styles.intraId}>{intraId}</div>
         <div className={styles.buttons}>
-          {user.intraId === profileId && (
+          {user.intraId === profileId ? (
             <>
               <AiOutlineEdit
                 onClick={() => {
@@ -80,6 +80,8 @@ export default function BasicProfile({ profileId }: ProfileProps) {
                 />
               </div>
             </>
+          ) : (
+            ''
           )}
         </div>
       </div>

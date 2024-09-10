@@ -30,8 +30,8 @@ const MyAgendaBtn = () => {
     }
   };
   const myList =
-    useFetchGet<MyTeamDataProps[]>('/profile/current/list')?.data || [];
-  console.log(myList);
+    useFetchGet<MyTeamDataProps[]>({ url: '/profile/current/list' })?.data ||
+    [];
   return (
     <div
       className={`${styles.myAgendaContainer} ${
@@ -56,14 +56,7 @@ const MyAgendaBtn = () => {
       <div className={styles.myAgendaListContainer}>
         {myList.length > 0 ? (
           myList.map((myTeamInfo, idx) => (
-            <Link
-              href={`/agenda/${myTeamInfo.agendaKey}/${myTeamInfo.teamKey}`}
-              key={idx}
-            >
-              <div className={styles.myagendaItemContainer} key={idx}>
-                <MyTeamInfo myTeamInfo={myTeamInfo} key={idx} />
-              </div>
-            </Link>
+            <MyTeamInfo myTeamInfo={myTeamInfo} key={idx} idx={idx} />
           ))
         ) : (
           <div className={styles.noAgendaText}>There is no agenda</div>

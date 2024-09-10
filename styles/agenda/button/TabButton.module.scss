@@ -21,6 +21,10 @@
   }
 
   &.isActive {
-    background: var(--highlight-yellow-light);
+    background: var(--highlight-violet);
   }
+}
+
+.TabButton:last-child {
+  @include gridHidden(mobile);
 }

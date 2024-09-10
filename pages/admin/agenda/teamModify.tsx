@@ -6,23 +6,31 @@ import styles from 'styles/agenda/pages/create-team.module.scss';
 
 const TeamModify = () => {
   const { team_key, location } = router.query;
+  const readyState = Boolean(team_key); // + team_key router.query 써서 쿼리로 못가져왔을 시, 에러 가능성 있음
 
-  const teamData = useFetchGet<TeamDetailProps>('admin/team', {
-    team_key: team_key as string,
+  const teamData = useFetchGet<TeamDetailProps>({
+    url: 'admin/team',
+    isReady: readyState,
+    params: {
+      team_key: team_key as string,
+    },
   }).data;
 
   return (
     <>
-      <div className={styles.container}>
-        <h2 className={styles.title}>팀 수정하기</h2>
-        <p className={styles.description}>팀 인원 : 3명-8명까지 가능</p>
-        {teamData && (
-          <AdminTeamForm
-            teamKey={team_key as string}
-            teamData={teamData}
-            teamLocation={location as string}
-          />
-        )}
+      <div className={styles.modifyContainer}>
+        <div className={styles.container}>
+          <h2 className={styles.title}>팀 수정하기</h2>
+          {teamData ? (
+            <AdminTeamForm
+              teamKey={team_key as string}
+              teamData={teamData}
+              teamLocation={location as string}
+            />
+          ) : (
+            ''
+          )}
+        </div>
       </div>
     </>
   );

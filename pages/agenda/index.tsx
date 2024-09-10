@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AgendaDataProps } from 'types/agenda/agendaDetail/agendaTypes';
 import type { NextPage } from 'next';
+import { AgendaStatus } from 'constants/agenda/agenda';
 import AgendaList from 'components/agenda/Home/AgendaList';
 import AgendaTitle from 'components/agenda/Home/AgendaTitle';
 import PageNation from 'components/Pagination';
@@ -10,55 +11,71 @@ import styles from 'styles/agenda/Home/Agenda.module.scss';
 import listStyles from 'styles/agenda/Home/AgendaList.module.scss';
 
 const Agenda: NextPage = () => {
-  const [showCurrent, setShowCurrent] = useState<boolean>(true);
+  const [showCurrent, setShowCurrent] = useState<string>('open');
 
   const { PagaNationElementProps, content: historyData } =
     usePageNation<AgendaDataProps>({
       url: '/history',
+      size: 10,
+      isReady: showCurrent === 'history',
     });
 
-  const { data: currentData } = useFetchGet<AgendaDataProps[]>('/list');
-  const toggleStatus = (e: React.MouseEvent) => {
-    const target = e.target as HTMLButtonElement;
-    const status = showCurrent ? 'ongoing' : 'closed';
-    if ((target && target.name === status) || !target.name) return;
-    setShowCurrent(target.name === 'ongoing');
-  };
-
+  const { data: currentData } = useFetchGet<AgendaDataProps[]>({
+    url: '/confirm',
+  });
+  const { data: openData } = useFetchGet<AgendaDataProps[]>({ url: '/open' });
   return (
     <div className={styles.agendaPageContainer}>
       <AgendaTitle />
       <div className={styles.agendaContainer}>
         <div className={listStyles.agendaListTextWrapper}>
-          <h2>AGENDA LIST</h2>
+          <h2 className={listStyles.web}>AGENDA LIST</h2>
           <div>
             <button
-              className={`${listStyles.agendaListStatus} ${
-                showCurrent ? listStyles.selectedStatus : ''
-              }`}
+              className={`${listStyles.agendaListStatus}
+                ${showCurrent === 'open' ? listStyles.selectedStatus : ''}`}
               name='ongoing'
-              onClick={toggleStatus}
+              onClick={() => setShowCurrent('open')}
+            >
+              모집중
+            </button>
+            {'|'}
+            <button
+              className={`${listStyles.agendaListStatus}
+            ${showCurrent === 'current' ? listStyles.selectedStatus : ''}`}
+              name='closed'
+              onClick={() => setShowCurrent('current')}
             >
               진행중
             </button>
-            {' | '}
+            {'|'}
             <button
-              className={`${listStyles.agendaListStatus} 
-            ${showCurrent ? '' : listStyles.selectedStatus}`}
+              className={`${listStyles.agendaListStatus}
+              ${showCurrent === 'history' ? listStyles.selectedStatus : ''}`}
               name='closed'
-              onClick={toggleStatus}
+              onClick={() => setShowCurrent('history')}
             >
               종료된
             </button>
           </div>
         </div>
 
-        {showCurrent ? (
-          <AgendaList agendaList={currentData || []} />
+        {showCurrent !== 'history' ? (
+          <AgendaList
+            agendaList={
+              showCurrent === 'open' ? openData || [] : currentData || []
+            }
+            status={
+              showCurrent === 'open' ? AgendaStatus.OPEN : AgendaStatus.CONFIRM
+            }
+          />
         ) : (
           <>
-            <AgendaList agendaList={historyData || []} />
-            <PageNation {...PagaNationElementProps} />{' '}
+            <AgendaList
+              agendaList={historyData || []}
+              status={AgendaStatus.FINISH}
+            />
+            <PageNation {...PagaNationElementProps} />
           </>
         )}
       </div>

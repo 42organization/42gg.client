@@ -2,7 +2,8 @@
 
 .container {
   @include container(1);
-  padding: 1.5rem;
+  width: 90%;
+  padding: 3rem;
   @include text('default');
 }
 

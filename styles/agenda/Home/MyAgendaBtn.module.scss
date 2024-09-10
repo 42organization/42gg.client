@@ -78,9 +78,10 @@
   flex-direction: column;
   overflow-y: scroll;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 0.8rem;
   @media screen and (min-width: 961px) {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 3fr));
     width: auto;
     height: auto;
     flex-direction: row;

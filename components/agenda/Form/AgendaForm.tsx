@@ -32,13 +32,14 @@ const AgendaForm = ({
   const { openModal } = useModal();
   const setSnackBar = useSetRecoilState(toastState);
   const router = useRouter();
-  const minDistance = 10;
+  const minDistance = 1;
   // 날짜 초기화
   const today = new Date();
   const tommorrow = new Date(); // 기준값으로 사용
   tommorrow.setDate(today.getDate() + 1);
   tommorrow.setHours(0);
   tommorrow.setMinutes(0);
+  tommorrow.setSeconds(0);
   tommorrow.setMilliseconds(0);
   const startDate = new Date();
   const endDate = new Date();
@@ -65,6 +66,7 @@ const AgendaForm = ({
     isEdit ? data.agendaMaxPeople === 1 : false
   );
 
+  // team limit
   const handleChange = (
     event: Event,
     newValue: number | number[],
@@ -73,19 +75,21 @@ const AgendaForm = ({
     if (!Array.isArray(newValue)) {
       return;
     }
-
     if (newValue[1] - newValue[0] < minDistance) {
       if (activeThumb === 0) {
         const clamped = Math.min(newValue[0], 100 - minDistance);
         setTeamLimit([clamped, clamped + minDistance]);
       } else {
         const clamped = Math.max(newValue[1], minDistance);
-        setTeamLimit([clamped - minDistance, clamped]);
+        if (clamped - minDistance < newValue[0]) setTeamLimit([2, 10]);
+        else setTeamLimit([clamped - minDistance, clamped]);
       }
     } else {
       setTeamLimit(newValue as number[]);
     }
   };
+
+  // people limit
   const handleChangePeople = (
     event: Event,
     newValue: number | number[],
@@ -96,9 +100,11 @@ const AgendaForm = ({
     }
     setPeopleLimit(newValue as number[]);
   };
+
   const handleRecruitEnd = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.value) return;
     const newEnd = new Date(e.target.value);
+
     checkWarn(newEnd, 0);
     setRecruitEnd(new Date(e.target.value));
   };
@@ -123,9 +129,14 @@ const AgendaForm = ({
   function checkWarn(newDate: Date, index: number) {
     const newWarning = [...dateWarn];
     const DateValues = [recruitEnd, dateRange[0], dateRange[1]];
+
     DateValues[index] = newDate;
+    tommorrow.setHours(0);
+    tommorrow.setMinutes(0);
+    tommorrow.setSeconds(0);
+    tommorrow.setMilliseconds(0);
     // 모집마감일 오류
-    if (DateValues[0].getTime() < tommorrow.getTime()) {
+    if (!isAdmin && DateValues[0].getTime() < tommorrow.getTime()) {
       newWarning[0] = '내일 이후의 날짜를 선택해주세요';
     } else if (
       DateValues[0].getTime() > DateValues[1].getTime() ||
@@ -136,7 +147,7 @@ const AgendaForm = ({
       newWarning[0] = '';
     }
     // 대회 기간 시작일 오류
-    if (DateValues[1].getTime() < tommorrow.getTime()) {
+    if (!isAdmin && DateValues[1].getTime() < tommorrow.getTime()) {
       newWarning[1] = '내일 이후의 날짜를 선택해주세요';
     } else if (DateValues[1].getTime() > DateValues[2].getTime()) {
       newWarning[1] = '종료일보다 시작일이 뒤에 있습니다.';
@@ -146,7 +157,7 @@ const AgendaForm = ({
       newWarning[1] = '';
     }
     // 대회 기간 종료일 오류
-    if (DateValues[2].getTime() < tommorrow.getTime()) {
+    if (!isAdmin && DateValues[2].getTime() < tommorrow.getTime()) {
       newWarning[2] = '내일 이후의 날짜를 선택해주세요.';
     } else if (DateValues[2].getTime() < DateValues[1].getTime()) {
       newWarning[2] = '시작일보다 이전 날짜입니다.';

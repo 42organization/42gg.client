@@ -1,7 +1,11 @@
+import { useRecoilValue } from 'recoil';
+import { loginState } from 'utils/recoil/login';
 import AdminAppLayout from 'Layout/AdminLayout';
 import AgendaAppLayout from 'Layout/AgendaLayout';
 import TakguAppLayout from 'Layout/TakguLayout';
 import { usePathname } from 'hooks/agenda/Layout/usePathname';
+import useAxiosAgendaError from 'hooks/useAxiosAgendaError';
+import useAxiosResponse from 'hooks/useAxiosResponse';
 
 type LayoutProviderProps = {
   children: React.ReactNode;
@@ -10,6 +14,10 @@ type LayoutProviderProps = {
 // 현재 페이지가 어떤 레이아웃을 사용할지 결정
 // 로그인 스테이트 등은 각 레이아웃에서 확인
 const LayoutProvider = ({ children }: LayoutProviderProps) => {
+  useRecoilValue(loginState);
+  useAxiosResponse(); // takgu axios response interceptor
+  useAxiosAgendaError(); // agenda axios response interceptor
+
   const app = usePathname();
   switch (app) {
     case '':
