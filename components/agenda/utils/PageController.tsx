@@ -99,7 +99,7 @@ const PageController = ({
               ? handleNavigation(
                   '/agenda/detail?agenda_key=' + data[current].agendaKey
                 )
-              : null;
+              : handleNavigation('/agenda');
           }}
           className={styles.toClick}
         />
