@@ -24,7 +24,12 @@ const Index: NextPage = () => {
       </div>
       <div className={styles.flex}>
         <div className={styles.ticket}>
-          <h2 className={styles.title}>Ticket</h2>
+          <h2
+            className={styles.title}
+            onClick={() => handleNavigation('/agenda/ticket')}
+          >
+            Ticket
+          </h2>
           <button
             className={styles.container}
             onClick={() => handleNavigation('/agenda/ticket')}
