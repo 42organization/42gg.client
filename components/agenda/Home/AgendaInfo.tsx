@@ -19,7 +19,7 @@ const AgendaInfo = ({
       <div className={styles.emptyContainer}>
         <div>현재 모집 중인 행사가 없습니다.</div>
         <div className={styles.emptyContent}>
-          <div>행사 리스트 페이지로 이동 하기</div>
+          <div>Agenda 페이지 이동</div>
           <RightArrow className={styles.arrowIcon} />
         </div>
       </div>
