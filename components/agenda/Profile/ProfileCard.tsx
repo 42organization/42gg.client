@@ -217,7 +217,12 @@ const ProfileCard = ({
                             key={index}
                             className={styles.acheivementImageWrapper}
                           >
-                            <CustomImage src={parsedUrl} alt='achievement' />
+                            <CustomImage
+                              src={parsedUrl}
+                              alt='achievement'
+                              name={data.name}
+                              description={data.description}
+                            />
                           </div>
                         );
                       }

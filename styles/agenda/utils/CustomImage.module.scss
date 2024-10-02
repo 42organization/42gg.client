@@ -1,6 +1,36 @@
 @import 'styles/agenda/common.scss';
 
+.imageContainer {
+  width: 100%;
+  height: 100%;
+}
+
 .customImage {
   width: 100%;
   height: 100%;
+}
+
+.hoverContainer {
+  position: absolute;
+  bottom: 90%;
+  left: 55%;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  background-color: $hover-bg-color;
+  border-radius: $radius-extra-small;
+  gap: 0.1rem;
+}
+
+.hoverName {
+  @include text('description-regular');
+  padding: 0.3rem;
+  font-weight: 900;
+  background-color: $hover-bg-title;
+  border-radius: $radius-extra-small $radius-extra-small 0 0;
+}
+
+.hoverDescription {
+  @include text('description');
+  padding: 0.3rem;
 }
