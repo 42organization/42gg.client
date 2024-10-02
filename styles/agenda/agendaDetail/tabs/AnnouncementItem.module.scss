@@ -45,6 +45,7 @@
 
 .announcementContent {
   @include text('default');
+  white-space: pre-wrap;
 }
 
 .mobile {
