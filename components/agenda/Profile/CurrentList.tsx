@@ -16,7 +16,9 @@ const CurrentList = ({
           </div>
         ))
       ) : (
-        <div className={styles.currentTeamEmpty}>참여중 아젠다가 없습니다.</div>
+        <div className={styles.currentTeamEmpty}>
+          아젠다 목록이 비어있습니다. 새로운 아젠다를 시작해보세요!
+        </div>
       )}
     </div>
   );
