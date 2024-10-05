@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { createContext, Dispatch, SetStateAction, useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import Logo from 'public/image/main-logo.svg';

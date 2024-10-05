@@ -45,6 +45,7 @@
 
 .agendaListStatus {
   @include text('statusButton');
+  cursor: pointer;
   background: none;
   border: none;
   box-shadow: none;
