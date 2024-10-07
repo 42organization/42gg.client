@@ -3,4 +3,6 @@ export interface CustomImageProps {
   alt: string;
   addClass?: string;
   isProfileImage?: boolean;
+  name?: string;
+  description?: string;
 }

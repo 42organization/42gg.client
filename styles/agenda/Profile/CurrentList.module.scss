@@ -9,11 +9,12 @@
 
 .currentTeamEmpty {
   @include text(description-s);
+  margin-left: 0.5rem;
 }
 
 .currentItemWrapper {
   width: 100%;
-  @media screen and (min-width: 961px) {
+  @media screen and (min-width: 1441px) {
     width: 48%;
   }
 }

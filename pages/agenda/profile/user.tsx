@@ -25,7 +25,7 @@ const AgendaProfile = () => {
   const isMyProfile = useRef(false); // 내 프로필 페이지인지 아닌지 확인
   const [isIntraId, setIsIntraId] = useState<boolean>(false); // 인트라 아이디가 42에 있는지 확인
   const [isAgendaId, setIsAgendaId] = useState<boolean>(false); // 인트라 아이디가 agenda에 있는지 확인
-  const [activeTab, setActiveTab] = useState('current'); // 현재 활성화된 탭 상태 관리
+  const [activeTab, setActiveTab] = useState(''); // 현재 활성화된 탭 상태 관리
 
   /** API GET */
   //  GET: intraData (42 인트라 데이터 가져오기)
@@ -39,7 +39,11 @@ const AgendaProfile = () => {
       url: `/profile/${queryIntraId}`,
       isReady: isIntraId,
     });
-
+  // GET: current
+  const currentListData = useFetchGet<MyTeamDataProps[]>({
+    url: '/profile/current/list',
+    isReady: isAgendaId,
+  }).data;
   // GET: host current
   const {
     content: hostCurrentListData,
@@ -48,11 +52,6 @@ const AgendaProfile = () => {
     url: `/host/current/list/${queryIntraId}`,
     isReady: isAgendaId,
   });
-  // GET: current team
-  const currentListData = useFetchGet<MyTeamDataProps[]>({
-    url: '/profile/current/list',
-    isReady: isAgendaId,
-  }).data;
   // GET: host history
   const {
     content: hostHistoryListData,
@@ -70,17 +69,19 @@ const AgendaProfile = () => {
     isReady: isAgendaId,
   });
 
-  /** useEffect */
+  /** useEffect - 순차적으로 데이터 호출 */
   useEffect(() => {
     const updateProfileStatus = () => {
       // 1. queryIntraId와 myIntraId가 있을 때 프로필 URL 설정
       isMyProfile.current = queryIntraId === myIntraId;
+      isMyProfile.current
+        ? setActiveTab('current')
+        : setActiveTab('hostCurrent');
       // 2. intraData가 있으면 인트라 아이디가 42에 있다는 뜻이므로 isIntraId = true
       setIsIntraId(!!intraData);
       // 3. agendaProfileData가 있으면 아젠다에 등록된 사용자이므로 isAgendaId = true
       setIsAgendaId(!!agendaProfileData);
     };
-
     setIsIntraId(false);
     setIsAgendaId(false);
     updateProfileStatus();
@@ -123,17 +124,19 @@ const AgendaProfile = () => {
         <div className={styles.listContainer}>
           <div className={styles.listTitle}>AGENDA LIST</div>
           <div className={styles.listButtonsWrapper}>
-            <Button
-              sx={{
-                color: activeTab === 'current' ? '#af71ff' : 'black',
-                '@media (min-width: 961px)': {
-                  fontSize: '1rem', // 폰트 크기 변경
-                },
-              }}
-              onClick={() => setActiveTab('current')}
-            >
-              참여중
-            </Button>
+            {isMyProfile.current ? (
+              <Button
+                sx={{
+                  color: activeTab === 'current' ? '#af71ff' : 'black',
+                  '@media (min-width: 961px)': {
+                    fontSize: '1rem', // 폰트 크기 변경
+                  },
+                }}
+                onClick={() => setActiveTab('current')}
+              >
+                참여중
+              </Button>
+            ) : null}
             <Button
               sx={{
                 color: activeTab === 'hostCurrent' ? '#af71ff' : 'black',
@@ -170,49 +173,37 @@ const AgendaProfile = () => {
           </div>
           <hr className={styles.divider} />
           <div className={styles.listItemContainer}>
-            {/* Host Current List */}
-            {activeTab === 'hostCurrent' &&
-            hostCurrentListData &&
-            hostCurrentListData.length > 0 ? (
-              <>
-                <CurrentList currentListData={hostCurrentListData} />
-                <PageNation {...PagaNationHostCurrent} />
-              </>
-            ) : activeTab === 'hostCurrent' ? (
-              ''
-            ) : null}
-
-            {/* Current List */}
+            {/* Current List - 참여중 */}
             {activeTab === 'current' &&
             isMyProfile.current &&
             currentListData ? (
               <>
                 <CurrentList currentListData={currentListData} />
               </>
-            ) : activeTab === 'current' ? (
-              ''
             ) : null}
 
-            {/* History Host List */}
-            {activeTab === 'hostHistory' &&
-            hostHistoryListData &&
-            hostHistoryListData.length > 0 ? (
+            {/* Host Current List - 개최중 */}
+            {activeTab === 'hostCurrent' && hostCurrentListData ? (
               <>
-                <HistoryList historyListData={hostHistoryListData} />{' '}
-                <PageNation {...PagaNationHostHistory} />
+                <CurrentList currentListData={hostCurrentListData} />
+                <PageNation {...PagaNationHostCurrent} />
               </>
-            ) : activeTab === 'hostHistory' ? (
-              ''
             ) : null}
 
-            {/* History List */}
+            {/* History List - 참여 기록 */}
             {activeTab === 'history' && historyListData ? (
               <>
                 <HistoryList historyListData={historyListData} />{' '}
                 <PageNation {...PagaNationHistory} />
               </>
-            ) : activeTab === 'history' ? (
-              ''
+            ) : null}
+
+            {/* History Host List - 개최 기록 */}
+            {activeTab === 'hostHistory' && hostHistoryListData ? (
+              <>
+                <HistoryList historyListData={hostHistoryListData} />{' '}
+                <PageNation {...PagaNationHostHistory} />
+              </>
             ) : null}
           </div>
         </div>

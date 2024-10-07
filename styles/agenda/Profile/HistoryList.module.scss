@@ -9,6 +9,7 @@
 
 .historyEmpty {
   @include text(description-s);
+  margin-left: 0.5rem;
 }
 
 // ITEM
@@ -26,7 +27,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   gap: 0.5rem;
-  @media screen and (min-width: 1401px) {
+  @media screen and (min-width: 1441px) {
     width: 48%;
   }
 }

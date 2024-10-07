@@ -38,11 +38,12 @@
   gap: 2rem;
   justify-content: flex-start;
   align-items: center;
-  .menuIcon {
-    width: 1.5rem;
-    height: 1.5rem;
-    cursor: pointer;
-  }
+}
+
+.menuIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
 }
 
 .logoWrap {

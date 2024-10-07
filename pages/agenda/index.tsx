@@ -29,7 +29,7 @@ const Agenda: NextPage = () => {
       <AgendaTitle />
       <div className={styles.agendaContainer}>
         <div className={listStyles.agendaListTextWrapper}>
-          <h2>AGENDA LIST</h2>
+          <h2 className={listStyles.web}>AGENDA LIST</h2>
           <div>
             <button
               className={`${listStyles.agendaListStatus}
@@ -39,7 +39,7 @@ const Agenda: NextPage = () => {
             >
               모집중
             </button>
-            {' | '}
+            {'|'}
             <button
               className={`${listStyles.agendaListStatus}
             ${showCurrent === 'current' ? listStyles.selectedStatus : ''}`}
@@ -48,7 +48,7 @@ const Agenda: NextPage = () => {
             >
               진행중
             </button>
-            {' | '}
+            {'|'}
             <button
               className={`${listStyles.agendaListStatus}
               ${showCurrent === 'history' ? listStyles.selectedStatus : ''}`}

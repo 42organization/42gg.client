@@ -8,6 +8,8 @@
   @media screen and (max-width: 960px) {
     height: 90%;
   }
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .agendaInfoContainer {
