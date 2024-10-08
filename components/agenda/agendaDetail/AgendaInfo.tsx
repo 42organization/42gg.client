@@ -28,10 +28,6 @@ const subscribeTeam = ({ router, agendaKey }: CallbackProps) => {
   router.push(`/agenda/detail/team/create?agenda_key=${agendaKey}`);
 };
 
-const submitResults = ({ router, agendaKey }: CallbackProps) => {
-  router.push(`/agenda/detail/host/result?agenda_key=${agendaKey}`);
-};
-
 export default function AgendaInfo({
   agendaData,
   isHost,
@@ -99,7 +95,7 @@ export default function AgendaInfo({
 
     switch (agendaData.agendaStatus) {
       case AgendaStatus.CONFIRM:
-        return isHost ? { text: '결과입력', callback: submitResults } : null;
+        return isHost ? { text: '주최자 관리', callback: hostMode } : null;
       case AgendaStatus.OPEN:
         if (isHost) {
           // 주최자

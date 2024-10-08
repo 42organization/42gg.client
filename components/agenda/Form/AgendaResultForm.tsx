@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import router from 'next/router';
+import React, { useEffect, useRef } from 'react';
 import {
   AddElementBtn,
   DragBtn,
@@ -178,7 +179,11 @@ const AgendaResultForm = ({
   });
 
   return (
-    <form className={styles.container} onSubmit={SubmitAgendaResult}>
+    <form
+      id='result'
+      className={styles.container}
+      onSubmit={SubmitAgendaResult}
+    >
       <div
         className={`${styles.titleContainer} ${dragStyles.dropzone}`}
         id={'0'}
@@ -202,7 +207,7 @@ const AgendaResultForm = ({
             <div className={styles.awardContainer} key={`${award_idx}`}>
               <div className={styles.awardTitleContainer} id={`${award_idx}`}>
                 <p>
-                  {award_idx}
+                  {award_idx + 1}
                   {': '}
                 </p>
                 <p key={`${award_idx}`} className={styles.awardTitle}>
@@ -245,7 +250,7 @@ const AgendaResultForm = ({
                 id='newAwardInput'
                 ref={newAwardInputRef}
                 type='text'
-                placeholder='추가할 상을 입력해주세요...'
+                placeholder='상을 입력해주세요.'
                 onKeyUp={addAwardEnter}
               />
               <AddElementBtn onClick={addAward} />
@@ -254,7 +259,25 @@ const AgendaResultForm = ({
           </div>
         </li>
       </ul>
-      <button type='submit'>submit</button>
+      <div className={styles.buttonContainer}>
+        <button
+          type='button'
+          className={`${styles.formBtn} ${styles.cancel}`}
+          onClick={(e) => {
+            e.preventDefault();
+            router.back();
+          }}
+        >
+          취소하기
+        </button>
+        <button
+          type='submit'
+          form='result'
+          className={`${styles.formBtn} ${styles.submit}`}
+        >
+          제출하기
+        </button>
+      </div>
     </form>
   );
 };
