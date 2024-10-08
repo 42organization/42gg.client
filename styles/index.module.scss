@@ -20,6 +20,12 @@
   cursor: pointer;
 }
 
+.titleWarp {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .container {
   @include container(1);
   width: calc(100% - 2rem);
@@ -65,4 +71,11 @@
 }
 .pingpong {
   grid-area: pingpong;
+}
+
+.arrowIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+  pointer-events: auto;
+  cursor: pointer;
 }
