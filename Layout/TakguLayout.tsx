@@ -1,7 +1,6 @@
+import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { openCurrentMatchState } from 'utils/recoil/takgu/match';
-import AdminReject from 'components/admin/AdminReject';
-import AdminLayout from 'components/admin/Layout';
 import CurrentMatch from 'components/takgu/Layout/CurrentMatch';
 import Footer from 'components/takgu/Layout/Footer';
 import Header from 'components/takgu/Layout/Header';
@@ -16,7 +15,6 @@ import useGetUserSeason from 'hooks/takgu/Layout/useGetUserSeason';
 import useLiveCheck from 'hooks/takgu/Layout/useLiveCheck';
 import useSetAfterGameModal from 'hooks/takgu/Layout/useSetAfterGameModal';
 import { useUser } from 'hooks/takgu/Layout/useUser';
-import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/takgu/Layout/Layout.module.scss';
 import PlayButton from '../components/takgu/Layout/PlayButton';
 import UserLayout from '../components/takgu/Layout/UserLayout';
@@ -30,9 +28,9 @@ type TakguLayoutProps = {
 function TakguLayout({ children }: TakguLayoutProps) {
   const user = useUser();
   const presentPath = usePathname();
+  const path = useRouter().pathname;
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
 
-  // useAxiosResponse();
   useGetUserSeason(presentPath);
   useSetAfterGameModal();
   useLiveCheck(presentPath);
@@ -41,14 +39,10 @@ function TakguLayout({ children }: TakguLayoutProps) {
   if (!user || !user.intraId) return null;
 
   switch (true) {
-    case presentPath.includes('takgu/admin'):
-      if (!user.isAdmin) return <AdminReject />;
-      return <AdminLayout>{children}</AdminLayout>;
-
-    case presentPath.includes('takgu/recruit'):
+    case path.includes('takgu/recruit'):
       return <RecruitLayout>{children}</RecruitLayout>;
 
-    case presentPath === 'takgu/statistics' && user.isAdmin:
+    case path.includes('takgu/statistics') && user.isAdmin:
       return (
         <UserLayout>
           <Statistics />
@@ -86,10 +80,8 @@ function TakguLayout({ children }: TakguLayoutProps) {
 const TakguAppLayout = ({ children }: TakguLayoutProps) => {
   return (
     <>
-      <UserLayout>
-        <TakguLayout>{children}</TakguLayout>
-        <CustomizedSnackbars />
-      </UserLayout>
+      <TakguLayout>{children}</TakguLayout>
+      <CustomizedSnackbars />
       <ModalProvider />
     </>
   );
