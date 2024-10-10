@@ -25,7 +25,7 @@ type TakguLayoutProps = {
   children: React.ReactNode;
 };
 
-function TakguLayout({ children }: TakguLayoutProps) {
+const TakguLayout = ({ children }: TakguLayoutProps) => {
   const user = useUser();
   const presentPath = usePathname();
   const path = useRouter().pathname;
@@ -38,18 +38,20 @@ function TakguLayout({ children }: TakguLayoutProps) {
 
   if (!user || !user.intraId) return null;
 
-  switch (true) {
-    case path.includes('takgu/recruit'):
+  const renderContent = () => {
+    if (path.includes('takgu/recruit')) {
       return <RecruitLayout>{children}</RecruitLayout>;
+    }
 
-    case path.includes('takgu/statistics') && user.isAdmin:
+    if (path.includes('takgu/statistics') && user.isAdmin) {
       return (
         <UserLayout>
           <Statistics />
         </UserLayout>
       );
+    }
 
-    case presentPath.includes('takgu'):
+    if (presentPath.includes('takgu')) {
       return (
         <>
           <UserLayout>
@@ -65,12 +67,15 @@ function TakguLayout({ children }: TakguLayoutProps) {
             {children}
             <Footer />
           </UserLayout>
+          <ModalProvider />
         </>
       );
-    default:
-      return <>{children}</>;
-  }
-}
+    }
+    return <>{children}</>;
+  };
+
+  return renderContent();
+};
 
 {
   /* UserLayout : 배경색 제공 */
@@ -82,7 +87,6 @@ const TakguAppLayout = ({ children }: TakguLayoutProps) => {
     <>
       <TakguLayout>{children}</TakguLayout>
       <CustomizedSnackbars />
-      <ModalProvider />
     </>
   );
 };
