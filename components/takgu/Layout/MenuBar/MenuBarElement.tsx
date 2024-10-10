@@ -179,11 +179,12 @@ export const AdminMenu = () => {
       {isAdmin && (
         <div>
           <MenuLink link='/statistics' itemName='Statistics' />
-          <MenuLink
-            link='/admin'
-            onClick={HeaderState?.resetOpenMenuBarState}
-            itemName='Admin'
-          />
+          <Link href={`/admin/takgu`}>
+            <MenuItem
+              itemName='Admin'
+              onClick={HeaderState?.resetOpenMenuBarState}
+            />
+          </Link>
         </div>
       )}
       <div className={`${styles.logoutWrap} ${logutBottomStyle}`}>
