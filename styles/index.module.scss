@@ -79,3 +79,13 @@
   pointer-events: auto;
   cursor: pointer;
 }
+
+.imageWarpper {
+  position: relative;
+  padding: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  @media screen and (max-width: 961px) {
+    padding: 1rem;
+  }
+}

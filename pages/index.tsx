@@ -41,13 +41,15 @@ const Index: NextPage = () => {
             className={styles.container}
             onClick={() => handleNavigation('/agenda/ticket')}
           >
-            <Image
-              src='/image/ticket.png'
-              alt='ticket'
-              width={0}
-              height={0}
-              style={{ width: '100%', height: '100%' }}
-            />
+            <div className={styles.imageWarpper}>
+              <Image
+                src='/image/ticket.png'
+                alt='ticket'
+                width={0}
+                height={0}
+                style={{ width: '100%', height: '100%' }}
+              />
+            </div>
           </button>
         </div>
         <div className={styles.pingpong}>
@@ -61,7 +63,9 @@ const Index: NextPage = () => {
             className={styles.container}
             onClick={() => handleNavigation('/takgu')}
           >
-            <PingpongIcon width='100%' height='100%' />
+            <div className={styles.imageWarpper}>
+              <PingpongIcon width='100%' height='100%' />
+            </div>
           </button>
         </div>
       </div>
