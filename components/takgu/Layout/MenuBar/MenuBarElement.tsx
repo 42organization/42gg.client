@@ -12,6 +12,7 @@ import AdminEmoji from 'public/image/takgu/menu_admin.svg';
 import AnnouncementEmoji from 'public/image/takgu/menu_announcement.svg';
 import CurrentMatchEmoji from 'public/image/takgu/menu_currentMatch.svg';
 import HallOfFameEmoji from 'public/image/takgu/menu_halloffame.svg';
+import HomeEmoji from 'public/image/takgu/menu_home.svg';
 import ManualEmoji from 'public/image/takgu/menu_manual.svg';
 import RankingEmoji from 'public/image/takgu/menu_ranking.svg';
 import RecruitEmoji from 'public/image/takgu/menu_recruit.svg';
@@ -75,6 +76,10 @@ const MenuItem = ({ itemName, onClick }: menuItemProps) => {
       name: '지원하기',
       svg: <RecruitEmoji />,
     },
+    Agenda: {
+      name: 'Home',
+      svg: <HomeEmoji />,
+    },
   };
   return (
     <div className={styles.menuItem} onClick={onClick}>
@@ -126,6 +131,12 @@ export const MainMenu = () => {
           onClick={HeaderState?.resetOpenMenuBarState}
         />
       )}
+      <Link href={`/`}>
+        <MenuItem
+          itemName='Home'
+          onClick={HeaderState?.resetOpenMenuBarState}
+        />
+      </Link>
       <MenuLink
         link='/store'
         itemName='Store'
