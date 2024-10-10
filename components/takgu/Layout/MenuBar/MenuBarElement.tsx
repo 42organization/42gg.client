@@ -76,7 +76,7 @@ const MenuItem = ({ itemName, onClick }: menuItemProps) => {
       name: '지원하기',
       svg: <RecruitEmoji />,
     },
-    Agenda: {
+    Home: {
       name: 'Home',
       svg: <HomeEmoji />,
     },
