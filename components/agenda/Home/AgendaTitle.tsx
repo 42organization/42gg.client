@@ -7,7 +7,7 @@ const AgendaTitle = () => {
   return (
     <>
       <div className={styles.agendaTitleContainer}>
-        <div className={`${styles.agendaTitle}`}>AGENDA</div>
+        <div className={`${styles.agendaTitle}`}>Agenda</div>
         <div className={styles.agendaTitleButton}>
           <Link href={`/agenda/create`}>
             <button className={styles.agendaCreateBtn}>

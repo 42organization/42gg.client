@@ -78,7 +78,7 @@ export default function Header() {
             <FiMenu className={styles.menuIcon} onClick={openMenuBarHandler} />
           )}
         </div>
-        <Link className={styles.logoWrap} href={'/'}>
+        <Link className={styles.logoWrap} href={'/takgu'}>
           42GG
         </Link>
         <div className={styles.headerRight}>

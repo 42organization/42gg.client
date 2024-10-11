@@ -37,7 +37,7 @@ export default function AgendaDescription({ agendaData }: AgendaProps) {
         <div className={styles.midContainer}>
           <div className={styles.descriptionItem}>
             <h3>대회 설명</h3>
-            <span>{agendaContent}</span>
+            <span className={styles.preWrap}>{agendaContent}</span>
           </div>
           <div className={styles.descriptionItem}>
             <h3>모집 완료 기간</h3>

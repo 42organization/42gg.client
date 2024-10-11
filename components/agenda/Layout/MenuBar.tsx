@@ -40,16 +40,20 @@ const MenuBar = ({ headerstate }: { headerstate: HeaderContextState }) => {
           headerstate.openMenuState ? styles.active : styles.inactive
         }`}
       >
-        <MenuBarContent
-          content={`Hello. ${user?.intraId}`}
-          href={`/agenda/profile/user?id=${user?.intraId}`}
-          as='h2'
-        />
+        <div className={styles.row}>
+          <MenuBarContent
+            content={`Hello, ${user?.intraId}`}
+            href={`/agenda/profile/user?id=${user?.intraId}`}
+            as='h2'
+          />
+        </div>
+        {/* <button className={styles.profile}>내 프로필</button> */}
+
         <MenuBarContent content='Home' href='/' as='h1' />
         <div className={styles.divider} />
         <MenuBarContent content='Agenda' href='/agenda' as='h1' />
         <MenuBarContent
-          content='내 대회'
+          content='내 프로필'
           href={`/agenda/profile/user?id=${user?.intraId}`}
         />
         <MenuBarContent content='티켓 확인하기' href='/agenda/ticket' />
@@ -58,6 +62,8 @@ const MenuBar = ({ headerstate }: { headerstate: HeaderContextState }) => {
         <MenuBarContent content='랭크' href='/takgu/rank' />
         <MenuBarContent content='게임' href='/takgu/game' />
         <MenuBarContent content='상점' href='/takgu/store' />
+        <div className={styles.divider} />
+        <MenuBarContent content='지원하기' href='/takgu/recruit' />
         <div className={styles.last}>
           {user?.isAdmin ? (
             <>

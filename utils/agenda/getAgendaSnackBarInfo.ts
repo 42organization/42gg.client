@@ -46,6 +46,10 @@ export default function getAgendaSnackBarInfo(
         severity: 'success',
         message: '대회가 성공적으로 확정되었습니다.',
       },
+      '/finish': {
+        severity: 'success',
+        message: '결과가 성공적으로 등록되었습니다.',
+      },
       '/cancel': {
         severity: 'info',
         message: '대회가 취소되었습니다.',

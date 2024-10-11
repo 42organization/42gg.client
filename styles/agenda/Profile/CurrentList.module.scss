@@ -9,6 +9,7 @@
 
 .currentTeamEmpty {
   @include text(description-s);
+  margin-left: 0.5rem;
 }
 
 .currentItemWrapper {

@@ -1,7 +1,6 @@
+import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { openCurrentMatchState } from 'utils/recoil/takgu/match';
-import AdminReject from 'components/admin/AdminReject';
-import AdminLayout from 'components/admin/Layout';
 import CurrentMatch from 'components/takgu/Layout/CurrentMatch';
 import Footer from 'components/takgu/Layout/Footer';
 import Header from 'components/takgu/Layout/Header';
@@ -16,7 +15,6 @@ import useGetUserSeason from 'hooks/takgu/Layout/useGetUserSeason';
 import useLiveCheck from 'hooks/takgu/Layout/useLiveCheck';
 import useSetAfterGameModal from 'hooks/takgu/Layout/useSetAfterGameModal';
 import { useUser } from 'hooks/takgu/Layout/useUser';
-import useAxiosResponse from 'hooks/useAxiosResponse';
 import styles from 'styles/takgu/Layout/Layout.module.scss';
 import PlayButton from '../components/takgu/Layout/PlayButton';
 import UserLayout from '../components/takgu/Layout/UserLayout';
@@ -27,12 +25,12 @@ type TakguLayoutProps = {
   children: React.ReactNode;
 };
 
-function TakguLayout({ children }: TakguLayoutProps) {
+const TakguLayout = ({ children }: TakguLayoutProps) => {
   const user = useUser();
   const presentPath = usePathname();
+  const path = useRouter().pathname;
   const openCurrentMatch = useRecoilValue(openCurrentMatchState);
 
-  // useAxiosResponse();
   useGetUserSeason(presentPath);
   useSetAfterGameModal();
   useLiveCheck(presentPath);
@@ -40,22 +38,20 @@ function TakguLayout({ children }: TakguLayoutProps) {
 
   if (!user || !user.intraId) return null;
 
-  switch (true) {
-    case presentPath.includes('takgu/admin'):
-      if (!user.isAdmin) return <AdminReject />;
-      return <AdminLayout>{children}</AdminLayout>;
-
-    case presentPath.includes('takgu/recruit'):
+  const renderContent = () => {
+    if (path.includes('takgu/recruit')) {
       return <RecruitLayout>{children}</RecruitLayout>;
+    }
 
-    case presentPath === 'takgu/statistics' && user.isAdmin:
+    if (path.includes('takgu/statistics') && user.isAdmin) {
       return (
         <UserLayout>
           <Statistics />
         </UserLayout>
       );
+    }
 
-    case presentPath.includes('takgu'):
+    if (presentPath.includes('takgu')) {
       return (
         <>
           <UserLayout>
@@ -71,12 +67,15 @@ function TakguLayout({ children }: TakguLayoutProps) {
             {children}
             <Footer />
           </UserLayout>
+          <ModalProvider />
         </>
       );
-    default:
-      return <>{children}</>;
-  }
-}
+    }
+    return <>{children}</>;
+  };
+
+  return renderContent();
+};
 
 {
   /* UserLayout : 배경색 제공 */
@@ -86,11 +85,8 @@ function TakguLayout({ children }: TakguLayoutProps) {
 const TakguAppLayout = ({ children }: TakguLayoutProps) => {
   return (
     <>
-      <UserLayout>
-        <TakguLayout>{children}</TakguLayout>
-        <CustomizedSnackbars />
-      </UserLayout>
-      <ModalProvider />
+      <TakguLayout>{children}</TakguLayout>
+      <CustomizedSnackbars />
     </>
   );
 };

@@ -110,7 +110,9 @@ const HistoryList = ({ historyListData }: HistoryListProps) => {
             }
           )
         ) : (
-          <div className={styles.historyEmpty}>아젠다 기록이 없습니다.</div>
+          <div className={styles.historyEmpty}>
+            아젠다 기록이 없습니다. 새로운 아젠다를 시작해보세요!
+          </div>
         )}
       </div>
     </>

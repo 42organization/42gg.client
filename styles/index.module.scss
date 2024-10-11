@@ -1,4 +1,5 @@
 @import 'styles/agenda/common.scss';
+
 .layout {
   @include layout;
   max-width: 100%;
@@ -7,11 +8,22 @@
     'top top' auto
     'content match' 17rem / 1fr 1fr;
   gap: 1rem;
+  pointer-events: none;
 }
+
 .title {
   @include text(main-menu);
+  display: inline-block;
   margin: 0 0 0 2rem;
   font-size: $font-size-l;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.titleWarp {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .container {
@@ -21,6 +33,8 @@
     width: auto;
     height: calc(100% - 4.7rem);
   }
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .flex {
@@ -57,4 +71,21 @@
 }
 .pingpong {
   grid-area: pingpong;
+}
+
+.arrowIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.imageWarpper {
+  position: relative;
+  padding: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  @media screen and (max-width: 961px) {
+    padding: 1rem;
+  }
 }

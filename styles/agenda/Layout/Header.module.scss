@@ -18,8 +18,11 @@
   padding: 1rem;
   font-size: $font-size-l;
 
-  justify-content: space-between;
+  gap: 1rem;
   align-items: center;
+  @media screen and (min-width: 481px) {
+    gap: 1.5rem;
+  }
 }
 
 .logo {
@@ -36,13 +39,18 @@
   height: 100%;
   flex: 2;
   gap: 2rem;
+  // justify-content: center;
   justify-content: flex-start;
   align-items: center;
-  .menuIcon {
-    width: 1.5rem;
-    height: 1.5rem;
-    cursor: pointer;
-  }
+}
+
+.menuIcon {
+  // position: absolute;
+  // left: 2;
+  z-index: 2;
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
 }
 
 .logoWrap {

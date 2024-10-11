@@ -1,5 +1,33 @@
 @import 'styles/agenda/common.scss';
 
+.emptyContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  @include text('default');
+}
+
+.emptyContent {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  @include text('tab');
+}
+
+.arrowIcon {
+  position: absolute;
+  right: -2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
 .agendaInfoContainer {
   display: flex;
   width: 100%;
