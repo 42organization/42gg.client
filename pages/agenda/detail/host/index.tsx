@@ -20,6 +20,7 @@ const ModifyAgenda = () => {
   const { sendRequest } = useFetchRequest();
   const { openModal } = useModal();
   const agendaStatus = agendaData?.agendaStatus;
+  const agendaIsRanking = agendaData?.isRanking;
   const setSnackbar = useSetRecoilState(toastState);
 
   const handleClick = (description: string, onProceed: () => void) => {
@@ -70,9 +71,14 @@ const ModifyAgenda = () => {
 
   const resultAgenda = () => {
     if (agendaStatus && agendaStatus === AgendaStatus.CONFIRM) {
-      handleClick('행사를 상 입력 없이 종료하시겠습니까?', () => {
-        sendRequest('PATCH', 'finish', {}, { agenda_key: agendaKey });
-        router.push(`/agenda/detail?agenda_key=${agendaKey}`);
+      handleClick('행사를 종료하시겠습니까?', () => {
+        sendRequest(
+          'PATCH',
+          'finish',
+          { awards: [] },
+          { agenda_key: agendaKey }
+        );
+        window.location.href = `/agenda/detail?agenda_key=${agendaKey}`;
       });
     } else {
       setSnackbar({
@@ -86,7 +92,7 @@ const ModifyAgenda = () => {
 
   const resultFormAgenda = () => {
     if (agendaStatus && agendaStatus === AgendaStatus.CONFIRM) {
-      handleClick('행사 종료 후 상 입력을 하시겠습니까?', () => {
+      handleClick('행사 종료 및 상 입력을 하시겠습니까?', () => {
         router.push(`/agenda/detail/host/result?agenda_key=${agendaKey}`);
       });
     } else {
@@ -111,6 +117,7 @@ const ModifyAgenda = () => {
   if (!agendaKey) {
     return <AgendaLoading />;
   }
+  console.log('data', agendaData);
   return (
     <>
       <div className={styles.container}>
@@ -150,11 +157,14 @@ const ModifyAgenda = () => {
               행사가 진행 중인 상태에서만 행사를 종료할 수 있습니다.
             </div>
             <div className={styles.buttonWarp}>
-              <UploadBtn text='행사 종료하기' onClick={resultAgenda} />
-              <UploadBtn
-                text='상 입력 후 종료하기'
-                onClick={resultFormAgenda}
-              />
+              {agendaIsRanking ? (
+                <UploadBtn
+                  text='상 입력 후 종료하기'
+                  onClick={resultFormAgenda}
+                />
+              ) : (
+                <UploadBtn text='행사 종료하기' onClick={resultAgenda} />
+              )}
             </div>
           </div>
         </div>

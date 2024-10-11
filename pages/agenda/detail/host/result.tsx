@@ -24,7 +24,7 @@ function checkAwardSubmitable(awardList: AwardListProps[]) {
   const awardedTeams: { [key: string]: string } = {};
   awardList.forEach((awardInfo) => {
     if (awardInfo.teams.length === 0) {
-      throw new Error(awardInfo.award + '상에 팀이 없습니다.');
+      throw new Error(awardInfo.award + '에 팀이 없습니다.');
     }
     awardInfo.teams.forEach((team) => {
       if (awardedTeams[team]) {
@@ -59,7 +59,7 @@ function parseData(awardList: AwardListProps[]) {
       Data.push({
         awardName: awardInfo.award,
         teamName: team,
-        awardPriority: key,
+        awardPriority: key + 1,
       });
     });
   });
@@ -118,15 +118,21 @@ const SubmitAgendaResult = () => {
     }
 
     const msg = awardlistToString(awardList);
+
     openModal({
       type: 'proceedCheck',
       title: '결과 제출 전 확인',
       description: msg + '\n결과를 제출하시겠습니까?',
-      onProceed: () => {
-        instanceInAgenda.patch(`/confirm?agenda_key=${agenda_key}`, {
-          awards: Data,
-        });
-        closeModal();
+      onProceed: async () => {
+        try {
+          await instanceInAgenda.patch(`/finish?agenda_key=${agenda_key}`, {
+            awards: Data,
+          });
+          closeModal();
+          window.location.href = `/agenda/detail?agenda_key=${agenda_key}`;
+        } catch (error) {
+          return error;
+        }
       },
     });
   };

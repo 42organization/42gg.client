@@ -29,15 +29,16 @@ export default function AgendaHeader() {
     <HeaderContext.Provider value={HeaderState}>
       <div className={styles.headerContainer}>
         <div className={styles.headerWrap}>
+          <FiMenu
+            className={styles.menuIcon}
+            onClick={() => HeaderState?.setOpenMenuBarState(!menu)}
+          />
+
           <div className={styles.headerLeft}>
             <Link href='/' onClick={HeaderState.resetOpenMenuBarState}>
               <Logo className={styles.logo} />
             </Link>
           </div>
-          <FiMenu
-            className={styles.menuIcon}
-            onClick={() => HeaderState?.setOpenMenuBarState(!menu)}
-          />
         </div>
       </div>
       <MenuBar headerstate={HeaderState} />

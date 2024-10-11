@@ -20,6 +20,12 @@
   cursor: pointer;
 }
 
+.titleWarp {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .container {
   @include container(1);
   width: calc(100% - 2rem);
@@ -65,4 +71,21 @@
 }
 .pingpong {
   grid-area: pingpong;
+}
+
+.arrowIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.imageWarpper {
+  position: relative;
+  padding: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  @media screen and (max-width: 961px) {
+    padding: 1rem;
+  }
 }
