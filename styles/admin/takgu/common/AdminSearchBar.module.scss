@@ -1,0 +1,43 @@
+@import 'styles/takgu/common.scss';
+
+.adminSearchBar {
+  position: relative;
+  display: flex;
+  height: 2rem;
+  padding: 0 0.8rem;
+  font-size: $small-font;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: $medium-radius;
+  justify-content: space-between;
+  align-items: center;
+  input {
+    all: unset;
+    width: calc(100% - 4rem);
+  }
+  .icons {
+    span {
+      display: flex;
+      align-items: center;
+      font-size: $small-font;
+    }
+    .reset {
+      color: gray;
+      cursor: pointer;
+    }
+  }
+  .dropdown {
+    position: absolute;
+    top: 2.1rem;
+    left: 0;
+    display: block;
+    width: 100%;
+    padding: 0 0.8rem 0.5rem;
+    background: white;
+    border-radius: 0 0 $small-radius $small-radius;
+    div {
+      padding: 0.5rem 0;
+      cursor: pointer;
+    }
+  }
+}

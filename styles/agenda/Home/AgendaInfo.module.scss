@@ -1,0 +1,93 @@
+@import 'styles/agenda/common.scss';
+
+.emptyContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  @include text('default');
+}
+
+.emptyContent {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  @include text('tab');
+}
+
+.arrowIcon {
+  position: absolute;
+  right: -2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.agendaInfoContainer {
+  display: flex;
+  width: 100%;
+  height: max-content;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.agendaInfoWrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.3rem;
+
+  .agendaItemTitleBox {
+    display: flex;
+    align-items: center;
+    height: 1.5rem;
+    @include text(sub-title);
+  }
+
+  .agendaItemTimeBox {
+    display: flex;
+    width: 100%;
+    height: max-content;
+    align-items: flex-start;
+    gap: 1.5rem;
+    justify-content: space-between;
+    @include text(description);
+
+    .agendaItemTimeWrapper {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0.5rem;
+      > div {
+        text-align: left;
+        word-break: keep-all;
+      }
+    }
+  }
+
+  .agendaItemTagBox {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+.imageWrapper {
+  display: flex;
+  width: 0.8rem;
+  height: 0.8rem;
+  align-items: center;
+  justify-content: center;
+  .imageBox {
+    width: 100%;
+    height: 100%;
+    margin-top: 0.2rem;
+  }
+}

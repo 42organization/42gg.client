@@ -1,0 +1,13 @@
+@import 'styles/agenda/common.scss';
+
+.container {
+  @include container(1);
+  width: 90%;
+  padding: 3rem;
+  @include text('default');
+}
+
+.title {
+  @include text('title');
+  margin: 0 0 1.5rem;
+}

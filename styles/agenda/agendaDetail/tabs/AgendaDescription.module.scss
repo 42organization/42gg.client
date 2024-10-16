@@ -1,0 +1,82 @@
+@import 'styles/agenda/common.scss';
+
+.descriptionContainer {
+  @include container(1);
+  display: flex;
+  width: 100vw;
+  flex: 1 0 0;
+  flex-direction: column;
+  padding: 1.5rem !important;
+  margin: 0;
+  gap: 1.8rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow-y: auto;
+
+  @media screen and (min-width: 481px) and (max-width: 960px) {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 961px) {
+    width: 1000px;
+    max-width: 100%;
+  }
+}
+
+.descriptionTitle {
+  @include text('sub-title');
+  width: 100%;
+}
+
+.descriptionWarp {
+  @include text('default');
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.descriptionItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  h3 {
+    margin: 0;
+    @include text('tab');
+  }
+}
+
+.midContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rowDescriptionItem {
+  display: flex;
+  gap: 0.5rem;
+  @include text('default');
+  p {
+    margin: 0;
+    @include text('tab');
+  }
+}
+
+.dateContainer {
+  display: flex;
+  flex-direction: flex-start;
+  gap: 0.5rem;
+
+  @include text('default');
+  p {
+    margin: 0;
+  }
+  @media screen and (max-width: 520px) {
+    flex-direction: column;
+  }
+}
+
+.preWrap {
+  white-space: pre-wrap;
+}

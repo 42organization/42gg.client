@@ -1,0 +1,11 @@
+@import 'styles/agenda/common.scss';
+
+.backdrop {
+  @include backdrop;
+  position: fixed;
+  z-index: 4;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

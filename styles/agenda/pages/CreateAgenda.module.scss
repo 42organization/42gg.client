@@ -1,0 +1,39 @@
+@import 'styles/agenda/Form/Form.module.scss';
+
+.pageContainer {
+  @include layout;
+  display: flex !important;
+}
+.container {
+  @include container(1);
+  max-width: 50rem;
+  padding: 0.5rem;
+  text-align: left;
+  @include text('default');
+}
+
+.cancelBtn {
+  @include textButton('cancel', 'default');
+}
+
+.title {
+  @include text('title');
+}
+
+.descriptionInput {
+  @include text('description');
+  padding: 0.5rem;
+}
+
+.bottomContainer {
+  // 아래쪽에는 룰이 다르게 들어가서 갭을 더 줘야 합니다
+  @extend %item-container;
+  margin-top: 1.5rem;
+}
+
+.buttonContainer {
+  display: flex;
+  margin: 2rem 4rem;
+  margin-top: 1rem;
+  justify-content: space-between;
+}

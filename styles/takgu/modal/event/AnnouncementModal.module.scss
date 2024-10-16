@@ -1,0 +1,39 @@
+@import 'styles/takgu/common.scss';
+
+.container {
+  @include modalContainer('SKYPINK');
+  width: 80vw;
+  max-width: 22rem;
+}
+
+.title {
+  @include modalTitle;
+  padding-bottom: 1rem;
+  color: rgba(18, 23, 37, 1);
+}
+
+.quillViewer {
+  @include quillViewer($color: rgba(18, 23, 37, 1));
+  min-width: 10rem;
+  max-width: 15rem;
+  max-height: 19rem;
+  padding-bottom: 1rem;
+}
+
+.checkBox {
+  margin-bottom: 0.5rem;
+  input {
+    position: relative;
+    top: 2px;
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin: 0 0.5rem 0 0;
+    cursor: pointer;
+  }
+  label {
+    display: inline-block;
+    color: white;
+    cursor: pointer;
+  }
+}

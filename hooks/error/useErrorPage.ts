@@ -6,6 +6,7 @@ import { errorState } from 'utils/recoil/error';
 const useErrorPage = () => {
   const [error, setError] = useRecoilState(errorState);
   const router = useRouter();
+  const home = '/' + router.asPath.split('/')[1];
 
   const goHome = () => {
     setError('');
@@ -13,7 +14,7 @@ const useErrorPage = () => {
   };
 
   useEffect(() => {
-    router.replace(`/`);
+    router.replace(home);
   }, []);
 
   return { error, goHome };

@@ -1,0 +1,43 @@
+@import 'styles/agenda/common.scss';
+
+.CancelBtn,
+.ShareBtn,
+.BackwardBtn,
+.ForwardBtn,
+.AddElementBtn,
+.DragBtn,
+.RemoveElementBtn {
+  width: 2rem;
+  height: 2rem;
+  padding: 1rem;
+  font-size: $font-size-s;
+  cursor: pointer;
+  border: none;
+  border-color: none;
+  border-style: none;
+  box-shadow: none;
+  fill: var(--default-font); // theme맞춰서 색이 안바뀌네여
+  padding-block: none;
+}
+
+.CancelBtn {
+  background: url('/image/buttons/cancel.svg') no-repeat center;
+}
+.ShareBtn {
+  background: url('/image/buttons/share.svg') no-repeat center;
+}
+.BackwardBtn {
+  background: url('/image/buttons/backward.svg') no-repeat center;
+}
+.ForwardBtn {
+  background: url('/image/buttons/forward.svg') no-repeat center;
+}
+.RemoveElementBtn {
+  background: url('/image/buttons/removeElem.svg') no-repeat center;
+}
+.AddElementBtn {
+  background: url('/image/buttons/addElem.svg') no-repeat center;
+}
+.DragBtn {
+  background: url('/image/buttons/drag.svg') no-repeat center;
+}

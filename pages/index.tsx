@@ -1,25 +1,86 @@
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import type { NextPage } from 'next';
-import SearchBar from 'components/main/SearchBar';
-import Section from 'components/main/Section';
-import useBeforeLiveTournamentData from 'hooks/tournament/useBeforeLiveTournamentData';
-import styles from 'styles/main/Home.module.scss';
+import PageController from 'components/agenda/utils/PageController';
+import RightArrow from 'public/image/agenda/ChevronRight.svg';
+import PingpongIcon from 'public/image/takgu/ping-pong.svg';
+import styles from 'styles/index.module.scss';
 
-const Home: NextPage = () => {
-  const { data: tournamentData } = useBeforeLiveTournamentData();
+const Index: NextPage = () => {
+  const router = useRouter();
+  const handleNavigation = (path: string) => {
+    router.push(path);
+  };
 
   return (
-    <div className={styles.container}>
-      <SearchBar />
-      {tournamentData &&
-        (tournamentData.beforeTournament?.length > 0 ||
-          tournamentData.liveTournament?.length > 0) && (
-          <Section path='tournament' sectionTitle={'Tournament'} />
-        )}
-      <Section path='party' sectionTitle={'Party'} />
-      <Section path='rank' sectionTitle={'Ranking'} />
-      <Section path='game' sectionTitle={'Current Play'} />
+    <div className={styles.layout}>
+      <div className={styles.top}>
+        <div className={styles.titleWarp}>
+          <h2
+            className={styles.title}
+            onClick={() => handleNavigation('/agenda')}
+          >
+            Agenda
+          </h2>
+          <RightArrow
+            className={styles.arrowIcon}
+            onClick={() => handleNavigation('/agenda')}
+          />
+        </div>
+        <PageController handleNavigation={handleNavigation} />
+      </div>
+      <div className={styles.flex}>
+        <div className={styles.ticket}>
+          <h2
+            className={styles.title}
+            onClick={() => handleNavigation('/agenda/ticket')}
+          >
+            Ticket
+          </h2>
+          <button
+            className={styles.container}
+            onClick={() => handleNavigation('/agenda/ticket')}
+          >
+            <div className={styles.imageWarpper}>
+              <Image
+                src='/image/ticket.png'
+                alt='ticket'
+                width={0}
+                height={0}
+                style={{ width: '100%', height: '100%' }}
+              />
+            </div>
+          </button>
+        </div>
+        <div className={styles.pingpong}>
+          <h2
+            className={styles.title}
+            onClick={() => handleNavigation('/takgu')}
+          >
+            PingPong
+          </h2>
+          <button
+            className={styles.container}
+            onClick={() => handleNavigation('/takgu')}
+          >
+            <div className={styles.imageWarpper}>
+              <PingpongIcon width='100%' height='100%' />
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div className={styles.match}>
+        <h2
+          className={styles.title}
+          // onClick={() => handleNavigation('/outer')}
+        >
+          Outer match
+        </h2>
+        <button className={styles.container}>아우터 매치 준비중입니다.</button>
+      </div>
     </div>
   );
 };
 
-export default Home;
+export default Index;

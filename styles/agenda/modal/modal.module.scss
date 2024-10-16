@@ -1,0 +1,57 @@
+@import 'styles/agenda/common.scss';
+
+.modalContainer {
+  @include container(modal);
+  z-index: 5;
+
+  display: flex;
+  width: max-content;
+  min-width: 20rem;
+  max-width: 30rem;
+  height: max-content;
+  flex-direction: column;
+  overflow: visible;
+  line-height: 150%;
+  text-align: center;
+  white-space: pre;
+
+  &.wide {
+    width: 60%;
+    gap: 1rem;
+  }
+}
+
+.titleContainer {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  > h1 {
+    @include text(sub-title);
+    // font-size: $font-size-s;
+  }
+}
+
+.contentContainer {
+  &.left {
+    width: 100%;
+    padding: 0 1rem;
+    text-align: left;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 10%;
+  width: 100%;
+  justify-content: center;
+
+  > button {
+    @include textButton(default, default);
+    width: 6rem;
+    height: max-content;
+  }
+}
+
+.formContainer {
+  width: 100%;
+  max-height: 30rem; // 최대 높이
+}

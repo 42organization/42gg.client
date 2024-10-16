@@ -1,0 +1,30 @@
+@import 'styles/agenda/common.scss';
+
+.agendaContainer {
+  width: 100%;
+  margin: 0 auto;
+  @media screen and (min-width: 961px) {
+    @include container(2);
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+}
+.agendaPageContainer {
+  @include layout;
+  position: relative;
+  top: -1rem;
+  display: flex !important;
+  width: 100%;
+  min-width: fit-content;
+  flex-direction: column;
+  padding: 1rem 0;
+  margin: 0;
+  gap: 1.5rem;
+  @media screen and (min-width: 961px) {
+    gap: 0rem;
+    > div:not(:first-child) {
+      margin-bottom: 1.5rem;
+    }
+  }
+}

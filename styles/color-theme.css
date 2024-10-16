@@ -1,0 +1,83 @@
+/* dark - light mode */
+:root {
+  --bg-light: linear-gradient(180deg, #a9a2b9 0%, #c9c9c9 100%);
+  --bg-dark: linear-gradient(180deg, #38253a 0%, #604ecd 73%, #999772 100%);
+  --header-bg-light: #a9a2b9;
+  --header-bg-dark: #49344e;
+
+  --color-light: #000000;
+  --color-grey: #333333fe;
+  --color-dark: #ffffff;
+  --border-light: 1px solid black;
+  --border-dark: 1px solid white;
+  --border-highlight-light: 2px solid black;
+  --border-highlight-dark: 2px solid white;
+
+  --black: #000000;
+  --white: #ffffff;
+
+  --box-shadow-light: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  --box-shadow-dark: 0px 4px 4px 0px rgba(255, 255, 255, 0.25);
+  --box-shadow-bottom: 0px 4px 0px 0px #000;
+
+  --highlight-yellow-light: #ffbf29;
+  --highlight-violet-light: #af71ff;
+  --highlight-yellow-dark: #fff78a;
+  --highlight-violet-dark: #af71ff;
+  --highlight-bg-dark: #af71ff;
+  --highlight-bg-light: #cda7fc;
+
+  --box-bg-1-light: #f8f8f8;
+  --box-bg-2-light: #c8c8c8ec;
+  --box-bg-3-light: #b0b0b06e;
+  --box-bg-3-dark: #000000;
+  --box-bg-2-dark: #232323d2;
+  --box-bg-1-dark: #3a363b7d;
+
+  --menubar-bg-light: #ede7f4f0;
+  --menubar-bg-dark: #5a4e5ded;
+
+  --contianer-color-gray: rgba(201, 201, 201, 0.55);
+}
+
+html[data-theme='light'] {
+  --color-bg: var(--bg-light);
+  --color-header: var(--header-bg-light);
+  --color-text: var(--color-light);
+  --color-text-reverse: var(--color-dark);
+  --default-border: var(--border-light);
+  --highlight-border: var(--border-highlight-light);
+  --default-box-shadow: var(--box-shadow-light);
+  --highlight-yellow: var(--highlight-yellow-light);
+  --highlight-bg: var(--highlight-bg-light);
+  --highlight-violet: var(--highlight-violet-light);
+  --box-bg-1: var(--box-bg-1-light);
+  --box-bg-2: var(--box-bg-2-light);
+  --box-bg-3: var(--box-bg-3-light);
+  --menubar-bg: var(--menubar-bg-light);
+}
+
+html[data-theme='dark'] {
+  --color-bg: var(--bg-dark);
+  --color-header: var(--header-bg-dark);
+  --color-text: var(--color-dark);
+  --color-text-reverse: var(--color-light);
+  --default-border: var(--border-dark);
+  --highlight-border: var(--border-highlight-dark);
+  --default-box-shadow: var(--box-shadow-dark);
+  --highlight-yellow: var(--highlight-yellow-dark);
+  --highlight-violet: var(--highlight-violet-dark);
+  --highlight-bg: var(--highlight-bg-dark);
+  --box-bg-1: var(--box-bg-1-dark);
+  --box-bg-2: var(--box-bg-2-dark);
+  --box-bg-3: var(--box-bg-3-dark);
+  --menubar-bg: var(--menubar-bg-dark);
+}
+
+:root {
+  color: var(--color-text);
+}
+
+a {
+  color: var(color-text);
+}

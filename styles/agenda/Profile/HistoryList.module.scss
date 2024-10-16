@@ -1,0 +1,92 @@
+@import 'styles/agenda/common.scss';
+
+.historyItems {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.historyEmpty {
+  @include text(description-s);
+  margin-left: 0.5rem;
+}
+
+// ITEM
+.historyItem {
+  display: flex;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  padding: 1rem;
+  cursor: pointer;
+  background-color: var(--box-bg-1);
+  border: var(--default-border);
+  border-radius: $radius-small;
+  box-shadow: var(--default-box-shadow);
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.5rem;
+  @media screen and (min-width: 1441px) {
+    width: 48%;
+  }
+}
+
+.historyItem:first-child:last-child {
+  width: 100% !important;
+}
+
+.agendaTitle {
+  @include text(tab);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tagWrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.timeWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.timeContent {
+  @include text(description-s);
+}
+
+.imageWrapper {
+  display: flex;
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.divider {
+  width: 100%;
+}
+
+.teamName {
+  @include text(tab);
+}
+
+.teamIntraIdWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  @include text(description-s);
+
+  .intraIdWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.coalitionWrapper {
+  display: flex;
+  width: 100%;
+  height: 1rem;
+}

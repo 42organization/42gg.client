@@ -25,7 +25,7 @@ export default function useUploadImg({
     const options = {
       maxSizeMB: maxSizeMB,
       maxWidthOrHeight: maxWidthOrHeight,
-      filetype: 'image/jpeg',
+      filetype: 'image/takgu/jpeg',
       useWebWorker: true,
     };
     try {

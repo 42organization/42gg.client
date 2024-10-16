@@ -9,7 +9,7 @@
 
 <h2>프로젝트 소개</h2>
 
-42 서울 내에서 탁구 경기 매칭, 전적 서비스를 제공하는 프로젝트 입니다.
+42 서울 내에서 탁구 경기 매칭, 전적 서비스, 행사 서비스 및 아우터 평가 매칭을 제공하는 프로젝트 입니다.
 
 🔸 Kakao 계정으로 로그인한 유저는 **매칭/전적 서비스**를 이용할 수 없습니다! 🔸
 
@@ -137,6 +137,23 @@
 </table>
 <br>
 
+<h3>7기</h3>
+<table>
+  <tr>
+    <td align=center>역할</td>
+    <td align=center>LEAD🌿</td>
+    <td align=center>🧸</td>
+    <td align=center>🦊</td>
+  </tr>
+  <tr>
+    <td align=center>이름</td>
+    <td align=center><a href="https://github.com/siwolee">이시원 @siwolee</a></td>
+    <td align=center><a href="https://github.com/irenee-14">임지현 @jihylim</a></td>
+    <td align=center><a href="https://github.com/JeongRon">이정론 @jeongrol</a></td>
+  </tr>
+</table>
+<br>
+
 <h2>주요 기능 소개</h2>
 
 ### 🔐 42 OAuth, Kakao OAuth api를 통해 로그인할 수 있습니다.
@@ -148,6 +165,19 @@
 <img width="25%" alt="Login_kakao" src="https://github.com/42organization/42gg.client/assets/57761286/2d12b6c8-b964-4f4c-a72f-dd2f08ddaed7">
 
 <br/>
+
+### 💡메인 페이지에서 행사, 티켓, 탁구, 아우터 매치 서비스로 이동할 수 있습니다.
+<img width="54%" alt="image" src="https://github.com/user-attachments/assets/b3f62df8-f458-4ee5-b4ba-dc48564a00b5">
+<img width="20%" alt="image" src="https://github.com/user-attachments/assets/5123237c-01d3-4ae3-b5a6-090005adde9c">
+<img width="20%" alt="image" src="https://github.com/user-attachments/assets/4adfc49e-8b3e-489f-8289-8f0eef7786ce">
+
+<br/>
+
+--- 
+
+<h3>🏓 탁구 서비스 🏓</h3>
+<br/>
+
 
 ### 🙋‍♂️ 출석을 통해 코인을 획득할 수 있습니다.
 
@@ -317,5 +347,73 @@
 |<img width=100% alt="party manager page" src="https://github.com/42organization/42gg.client/assets/68673565/f9b4866a-cfb3-407f-ba9e-99cf2d5ece6b">|<img width=100% alt="party member page" src="https://github.com/42organization/42gg.client/assets/68673565/f9659268-9159-4243-8c3d-151eca2cdbd2">|<img width=100% alt="party user page" src="https://github.com/42organization/42gg.client/assets/68673565/2276a9bb-f5d9-4581-baf8-570fbd05b5ea">|
 <br/>
 <br/>
+
+---
+
+<h3>📅 행사(Agenda) 서비스 📅</h3>
+<br/>
+
+### 🗓️ 현재 모집중/진행중/종료된 행사와 내가 참여중인 행사를 한눈에 볼 수 있습니다.
+<img width="54%" alt="image" src="https://github.com/user-attachments/assets/ab6ea23d-501d-4e4c-b96c-529c68cd3f6c">
+<img width="20%" alt="image" src="https://github.com/user-attachments/assets/175e678f-51fb-4484-8dfc-29460441051b">
+
+### ℹ️ 대회 설명, 참여자, 공지사항과 포스터를 확인할 수 있습니다.
+<img width="54%" alt="image" src="https://github.com/user-attachments/assets/dfa93778-31fb-483a-9fb1-a9b9807b7173">
+
+<img width="20%" alt="image" src="https://github.com/user-attachments/assets/bd1c4f8a-4335-409e-a249-067bfde4e15d">
+
+
+### 🧑‍💻 유저의 상태와 권한에 따라 버튼이 활성화 됩니다.
+
+<div> [ 주최자 ] </div>
+<br/>
+<img width="25%" alt="image" src="https://github.com/user-attachments/assets/3b82eb8b-fc5b-4494-810d-41f00893dd2a">
+<img width="35%" alt="image" src="https://github.com/user-attachments/assets/c0fa3aa2-d5c8-44bb-a92f-27d188014ffe">
+
+
+<br/>
+<br/>
+
+<div> [ 일반 유저(참여 전 / 참여 후) ] </div>
+<br/>
+<img width="25%" alt="image" src="https://github.com/user-attachments/assets/2a0c21a8-f034-464c-821f-e7f534fc8d54">
+<img width="25%" alt="image" src="https://github.com/user-attachments/assets/cfb721ba-82dc-48af-8c07-5340cde98293">
+
+
+### 👥 참여자 목록을 코알리숑과 함께 보여줍니다. (개인/팀 참여)
+<img width="25.1%" alt="image" src="https://github.com/user-attachments/assets/00b0a4fa-4d8c-4a72-a5db-4a155e717cc5">
+<img width="25%" alt="image" src="https://github.com/user-attachments/assets/738f066b-9a32-4a2d-ac7e-646fe5988413">
+
+### 👥 팀을 만들고 참여할 수 있습니다. 
+<img width="25%" alt="image" src="https://github.com/user-attachments/assets/ea44771e-60df-45f7-b356-3b0e141c6b54">
+
+<img width="25%" alt="image" src="https://github.com/user-attachments/assets/70f44996-f11e-4454-9633-ff67e227daca">
+<img width="25%" alt="image" src="https://github.com/user-attachments/assets/6b8b44f6-87db-48a7-ad56-80fd94deaf63">
+
+
+### 📢 공지사항을 한눈에 볼 수 있습니다.
+
+<div>공지사항이 등록될 경우 참여자의'Slack'으로 알림이 갑니다.</div>
+<br />
+<img width="20%" alt="image" src="https://github.com/user-attachments/assets/cfa2fd00-750d-4767-a579-b3b4af362a32">
+<img width="54%" alt="image" src="https://github.com/user-attachments/assets/10ebf6f8-ca67-43ce-ace6-21b04f97b50b">
+
+
+
+### 🛠️ 원하는 행사를 개최할 수 있습니다.
+<img width="45%" alt="image" src="https://github.com/user-attachments/assets/b2db7482-8935-49eb-a019-97890d7497de">
+
+
+### ✏️ 대회 종료 후 순위를 직접 입력할 수 있습니다.
+<img width="45%" alt="image" src="https://github.com/user-attachments/assets/3f3bf255-dabf-4972-91da-7fccd30b5459">
+
+
+### 🎫 티켓을 발급하고 내역을 확인할 수 있습니다.
+<img width="22%" alt="image" src="https://github.com/user-attachments/assets/274c93aa-995c-4ecd-8bc1-e02bb4d76344">
+<img width="50%" alt="image" src="https://github.com/user-attachments/assets/99e6835b-95a1-4fe0-b80b-c46a7cf5d463">
+
+### 👤 내 프로필과 다른 유저의 프로필을 검색하여 볼 수 있습니다.
+<img width="20%" alt="image" src="https://github.com/user-attachments/assets/f5def2be-88ac-4fc7-bd5c-452f01bc08fe">
+<img width="52%" alt="image" src="https://github.com/user-attachments/assets/2883cabc-a746-453c-8b4c-d12605e77a26">
 
 </div>

@@ -1,0 +1,24 @@
+@import 'styles/agenda/common.scss';
+
+.participantItem {
+  display: flex;
+  max-width: 15rem;
+  height: 2rem;
+  flex: 1 1 4rem;
+  padding: 1rem 0.6rem 1rem 1rem;
+  border-radius: $radius-medium;
+  box-shadow: var(--box-shadow-bottom);
+  align-items: center;
+}
+
+.participantItemWarp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 0 0;
+  cursor: pointer;
+}
+
+.participantcontent {
+  @include text('tab');
+}

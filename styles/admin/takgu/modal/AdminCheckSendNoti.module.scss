@@ -1,0 +1,88 @@
+@import 'styles/takgu/common.scss';
+
+.whole {
+  display: flex;
+  width: 510px;
+  height: 250px;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 9px;
+}
+
+.title {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-evenly;
+  width: 510px;
+  height: 130px;
+  padding: 0 1rem;
+}
+
+.titleText {
+  margin-top: 15px;
+  margin-left: 1rem;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  color: #000000;
+}
+
+.hr {
+  width: 455px;
+  height: 0.5px;
+  background: #e5e5e5;
+}
+
+.body {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.bodyWrap {
+  display: flex;
+  width: 80%;
+  height: 30%;
+  flex-direction: column;
+  margin-bottom: 30px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.intraText {
+  padding-bottom: 5px;
+}
+
+.intraId {
+  font-weight: 600;
+}
+
+.buttonWrap {
+  display: flex;
+  width: 90%;
+  height: 50%;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.deleteBtn,
+.cancelBtn {
+  width: 246.45px;
+  height: 37.73px;
+  color: #ffffff;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+}
+
+.deleteBtn {
+  background: #2678f3;
+}
+
+.cancelBtn {
+  background: #6c757d;
+}

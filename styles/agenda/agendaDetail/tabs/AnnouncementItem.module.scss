@@ -1,0 +1,67 @@
+@import 'styles/agenda/common.scss';
+
+.announcementContianer {
+  @include container(1);
+
+  width: 100%;
+  flex: 1 0 0;
+
+  flex-direction: column;
+  padding: 1.5rem;
+  @media screen and (min-width: 961px) {
+    padding: 1rem;
+    margin: 0 1rem 0 0;
+  }
+  margin: 0;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.toggleWrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.titleWarp {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.toggleIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.announcementTitle {
+  @include text('sub-title');
+}
+.announcementDate {
+  @include text('default');
+}
+
+.announcementContent {
+  @include text('default');
+  white-space: pre-wrap;
+}
+
+.mobile {
+  @include gridHidden(mobile);
+}
+
+.web {
+  @include gridHidden(web);
+  margin-left: 1rem;
+  justify-content: flex-start;
+}
+
+.selected {
+  @media screen and (min-width: 961px) {
+    border-color: var(--highlight-violet);
+    border-width: 2px;
+    box-shadow: 2px 2px 0 2px var(--highlight-violet);
+  }
+}

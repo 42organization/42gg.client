@@ -1,0 +1,99 @@
+@mixin action {
+  transition: all 0.5s;
+}
+
+// 최상위 앱 컨트롤러
+// Layout 모듈에서 사용
+@mixin app {
+  @include action;
+  display: flex;
+  width: 100vw;
+  min-width: 360px;
+  height: max-content;
+  flex-direction: column;
+  margin-top: 5rem;
+  align-items: center;
+  @media screen and (max-width: 480px) {
+    // border: 1px solid red;
+  }
+  @media screen and (min-width: 481px) and (max-width: 960px) {
+    // border: 1px solid blue;
+  }
+  @media screen and (min-width: 961px) {
+    // border: 1px solid yellow;
+  }
+}
+
+// 기본 레이아웃, 모든 페이지에서 사용
+// 웹 뷰에서는 그리드, 모바일 뷰에서는 컬럼
+// 각 페이지 내에서 그리드 템플릿 세팅 필요
+@mixin layout {
+  @include action;
+  width: 100%;
+  height: max-content;
+  justify-content: center;
+  @media screen and (max-width: 480px) {
+    display: flex;
+    flex-direction: column;
+  }
+  @media screen and (min-width: 481px) and (max-width: 960px) {
+    display: flex;
+    flex-direction: column;
+  }
+  @media screen and (min-width: 961px) {
+    display: grid;
+    padding: 0 5rem;
+  }
+}
+
+@mixin pageContainer {
+  @include action;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 0 1rem;
+  align-items: center;
+
+  @media screen and (min-width: 451px) and (max-width: 960px) {
+    padding: 0 2rem;
+  }
+  @media screen and (min-width: 961px) {
+    height: 100%;
+    padding: 0 5rem;
+  }
+}
+
+// 헤더에 붙어있는 부분
+@mixin gridHead {
+  @include action;
+  @media screen and (min-width: 961px) {
+    width: calc(100%);
+    border: var(--default-border);
+    border-top: none;
+    border-radius: 0 0 $radius-big $radius-big;
+  }
+}
+
+// 아래 컨테이너 중 가장 위에 있는 부분
+@mixin gridTop {
+  @include action;
+  // @media screen and (min-width: 481px) and (max-width: 960px) {
+  // }
+  // @media screen and (min-width: 961px) {
+  //   width: 100%;
+  //   grid-column: 1 / -1;
+  // }
+}
+
+@mixin gridHidden($view) {
+  @include action;
+  @if ($view == 'web') {
+    @media screen and (max-width: 960px) {
+      display: none !important;
+    }
+  } @else {
+    @media screen and (min-width: 961px) {
+      display: none !important;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@import 'styles/agenda/common.scss';
+
+.TabButton {
+  display: flex;
+  padding: 0.3rem 0.6rem;
+  @include text('tab');
+  cursor: pointer;
+
+  background: var(--box-bg-1-light);
+  border: var(--border-light);
+  border-radius: $radius-medium;
+
+  box-shadow: var(--box-shadow-light);
+
+  transition: 0.3s;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background: var(--box-bg-2-light);
+  }
+
+  &.isActive {
+    background: var(--highlight-violet);
+  }
+}
+
+.TabButton:last-child {
+  @include gridHidden(mobile);
+}

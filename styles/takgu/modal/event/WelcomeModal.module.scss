@@ -1,0 +1,26 @@
+@import 'styles/takgu/common.scss';
+
+.container {
+  @include modalContainer('PINKVIOLET');
+}
+
+.phrase {
+  @include modal-phrase;
+  white-space: pre-wrap;
+  .title {
+    @include modalTitle;
+    padding-bottom: 2rem;
+    color: rgba(90, 14, 102, 1);
+    text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.25);
+  }
+  .message {
+    line-height: 150%;
+  }
+  .rose {
+    padding-top: 1rem;
+    color: $pp-red;
+    span:last-child {
+      color: green;
+    }
+  }
+}
