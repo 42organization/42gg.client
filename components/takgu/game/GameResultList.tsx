@@ -21,7 +21,11 @@ export default function GameResultList({
     useGameResultList(path);
 
   const page =
-    pathName === '/' ? 'main' : pathName === '/game' ? 'game' : 'profile';
+    pathName === '/takgu'
+      ? 'main'
+      : pathName === '/takgu/game'
+      ? 'game'
+      : 'profile';
 
   if (status === 'loading') return <GameResultEmptyItem status={status} />;
 
