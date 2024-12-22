@@ -14,44 +14,11 @@ interface IMegaphoneContent {
 
 type MegaphoneList = Array<IMegaphoneContent>;
 
-// type MegaphoneContainerProps = {
-//   children: React.ReactNode;
-//   count: number;
-// };
-
 const adminContent: IMegaphoneContent = {
   megaphoneId: 0,
   content: '상점에서 아이템을 구매해서 확성기를 등록해보세요!(30자 제한)',
   intraId: '관리자',
 };
-
-// export const MegaphoneContainer = ({
-//   children,
-//   count,
-// }: MegaphoneContainerProps) => {
-//   const ref = useRef<HTMLDivElement>(null);
-//   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-
-//   useInterval(() => {
-//     const nextIndex = (selectedIndex + 1) % count;
-//     setSelectedIndex(nextIndex);
-//   }, 4000);
-
-//   return (
-//     <div className={styles.rollingBanner}>
-//       <div
-//         className={styles.wrapper}
-//         style={{
-//           transition: 'all 1s ease-in-out',
-//           transform: `translateY(${selectedIndex * -100}%)`,
-//         }}
-//         ref={ref}
-//       >
-//         {children}
-//       </div>
-//     </div>
-//   );
-// };
 
 export const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
   return (
@@ -143,44 +110,6 @@ const Megaphone = () => {
       </div>
     </div>
   );
-
-  // return (
-  //   <MegaphoneContainer count={megaphoneData.length}>
-  //     {megaphoneData.map((content, idx) => (
-  //       <MegaphoneItem
-  //         content={content.content}
-  //         intraId={content.intraId}
-  //         key={idx}
-  //       />
-  //     ))}
-  //   </MegaphoneContainer>
-  // );
-
-  // return contents.length > 0 ? (
-  //   <MegaphoneContainer count={contents.length}>
-  //     {contents.map((content, idx) => (
-  //       <MegaphoneItem
-  //         content={content.content}
-  //         intraId={content.intraId}
-  //         key={idx}
-  //       />
-  //     ))}
-  //   </MegaphoneContainer>
-  // ) : (
-  //   <MegaphoneContainer count={itemList.length + 1}>
-  //     <MegaphoneItem
-  //       content={adminContent.content}
-  //       intraId={adminContent.intraId}
-  //     />
-  //     {itemList.map((item, idx) => (
-  //       <MegaphoneItem
-  //         content={item.itemName + ' : ' + item.mainContent}
-  //         intraId={'절찬 판매 중!'}
-  //         key={idx}
-  //       />
-  //     ))}
-  //   </MegaphoneContainer>
-  // );
 };
 
 export default Megaphone;
