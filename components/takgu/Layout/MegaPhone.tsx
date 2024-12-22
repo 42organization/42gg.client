@@ -94,16 +94,10 @@ const Megaphone = () => {
       <div className={styles.wrapper}>
         {!!megaphoneData && megaphoneData.length > 0 && (
           <Virtuoso
-            className={styles.virtuoso}
             totalCount={megaphoneData.length}
             data={megaphoneData}
             ref={virtuoso}
-            itemContent={(index) => (
-              <MegaphoneItem
-                content={megaphoneData[index].content}
-                intraId={megaphoneData[index].intraId}
-              />
-            )}
+            itemContent={(_, data) => <MegaphoneItem {...data} />}
             style={{ height: '100%' }}
           />
         )}
