@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { useState, useEffect, useRef } from 'react';
-import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
+import { useState, useEffect, useRef, forwardRef } from 'react';
+import { Virtuoso, VirtuosoHandle, Components } from 'react-virtuoso';
 import { Item } from 'types/takgu/itemTypes';
 import useAxiosGet from 'hooks/useAxiosGet';
 import useInterval from 'hooks/useInterval';
@@ -20,15 +20,7 @@ const adminContent: IMegaphoneContent = {
   intraId: '관리자',
 };
 
-export const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
-  return (
-    <div className={styles.contentWrapper}>
-      <div className={styles.intraId}>{intraId}</div>
-      <div className={styles.content}>{content}</div>
-    </div>
-  );
-};
-
+// 메인 확성기 컴포넌트
 const Megaphone = () => {
   const [contents, setContents] = useState<MegaphoneList>([]);
   const [itemList, setItemList] = useState<Item[]>([]);
@@ -99,11 +91,71 @@ const Megaphone = () => {
             ref={virtuoso}
             itemContent={(_, data) => <MegaphoneItem {...data} />}
             style={{ height: '100%' }}
+            components={{
+              Scroller: MegaphoneScroller,
+            }}
           />
         )}
       </div>
     </div>
   );
 };
+
+// 확성기 아이템 컴포넌트
+export const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
+  return (
+    <div className={styles.contentWrapper}>
+      <div className={styles.intraId}>{intraId}</div>
+      <div className={styles.content}>{content}</div>
+    </div>
+  );
+};
+
+// 유저의 스크롤 이벤트 동작을 제거한 확성기 스크롤러 컴포넌트
+const MegaphoneScroller: Components['Scroller'] = forwardRef(
+  ({ children, ...props }, ref) => {
+    const localRef = useRef<HTMLDivElement | null>(null);
+
+    // 전달받은 ref와 내부 ref가 동일한 element를 가리키도록 함
+    const combinedRef = (node: HTMLDivElement | null) => {
+      localRef.current = node;
+
+      if (ref) {
+        (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }
+    };
+
+    useEffect(() => {
+      const element = localRef.current;
+
+      if (element) {
+        const preventScroll = (e: Event) => {
+          e.preventDefault();
+          e.stopPropagation();
+        };
+
+        // wheel 및 touchmove 이벤트 차단 (pc 및 모바일)
+        element.addEventListener('wheel', preventScroll, { passive: false });
+        element.addEventListener('touchmove', preventScroll, {
+          passive: false,
+        });
+
+        // 컴포넌트 언마운트 시 이벤트 제거
+        return () => {
+          element.removeEventListener('wheel', preventScroll);
+          element.removeEventListener('touchmove', preventScroll);
+        };
+      }
+    }, []);
+
+    return (
+      <div ref={combinedRef} {...props}>
+        {children}
+      </div>
+    );
+  }
+);
+
+MegaphoneScroller.displayName = 'MegaphoneScroller';
 
 export default Megaphone;
