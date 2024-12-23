@@ -7,7 +7,7 @@ on:
       - deploy
 jobs:
   continuous-deployment:
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
       - name: Git Checkout
         uses: actions/checkout@v2
