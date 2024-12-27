@@ -13,6 +13,13 @@ interface GameResultListProps {
   radioMode?: SeasonMode;
 }
 
+type pageType = 'main' | 'game' | 'profile';
+
+const pageTypeMap: Record<string, pageType> = {
+  '/takgu': 'main',
+  '/takgu/game': 'game',
+};
+
 export default function GameResultList({
   path,
   radioMode,
@@ -20,8 +27,7 @@ export default function GameResultList({
   const { data, status, fetchNextPage, isLast, clickedGameItem, pathName } =
     useGameResultList(path);
 
-  const page =
-    pathName === '/' ? 'main' : pathName === '/game' ? 'game' : 'profile';
+  const page: pageType = pageTypeMap[pathName] || 'profile';
 
   if (status === 'loading') return <GameResultEmptyItem status={status} />;
 
