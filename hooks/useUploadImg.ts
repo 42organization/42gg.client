@@ -2,6 +2,7 @@ import imageCompression from 'browser-image-compression';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { toastState } from 'utils/recoil/toast';
+import MIME_TYPE from 'constants/common/mimeType';
 
 interface ICompressProps {
   maxSizeMB: number;
@@ -25,7 +26,7 @@ export default function useUploadImg({
     const options = {
       maxSizeMB: maxSizeMB,
       maxWidthOrHeight: maxWidthOrHeight,
-      filetype: 'image/takgu/jpeg',
+      filetype: MIME_TYPE.JPEG,
       useWebWorker: true,
     };
     try {

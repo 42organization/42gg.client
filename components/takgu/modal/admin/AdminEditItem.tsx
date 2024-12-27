@@ -6,6 +6,7 @@ import { Item } from 'types/takgu/itemTypes';
 import { instanceInManage } from 'utils/axios';
 import { modalState } from 'utils/recoil/takgu/modal';
 import { toastState } from 'utils/recoil/toast';
+import MIME_TYPE from 'constants/common/mimeType';
 import useUploadImg from 'hooks/useUploadImg';
 import styles from 'styles/admin/takgu/modal/AdminEditItem.module.scss';
 
@@ -70,14 +71,11 @@ export default function AdminEditItemModal(item: Item) {
     formData.append(
       'updateItemInfo',
       new Blob([JSON.stringify(data)], {
-        type: 'application/json',
+        type: MIME_TYPE.JSON,
       })
     );
     if (imgData) {
-      formData.append(
-        'imgData',
-        new Blob([imgData], { type: 'image/takgu/jpeg' })
-      );
+      formData.append('imgData', new Blob([imgData], { type: MIME_TYPE.JPEG }));
     }
 
     mutation.mutate(formData, {
