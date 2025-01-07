@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { instanceInCalendar } from 'utils/axios';
 
-const usePublicCalendarRequest = <T>() => {
+const usePublicScheduleRequest = <T>() => {
   const [data, setData] = useState<T | null>(null);
   const [status, setStatus] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
@@ -64,4 +64,4 @@ const usePublicCalendarRequest = <T>() => {
   return postMutation;
 };
 
-export default usePublicCalendarRequest;
+export default usePublicScheduleRequest;

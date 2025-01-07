@@ -1,6 +1,6 @@
 import React from 'react';
 import { EventSchedule, JobSchedule } from 'types/calendar/scheduleTypes';
-import usePublicCalendarRequest from 'hooks/calendar/usePublicCalendarRequest';
+import usePublicScheduleRequest from 'hooks/calendar/usePublicScheduleRequest';
 
 const exampleEvent: EventSchedule = {
   classification: 'EVENT',
@@ -32,7 +32,7 @@ const Home = () => {
     isError: isEventError,
     isSuccess: isEventSuccess,
     error: eventError,
-  } = usePublicCalendarRequest<any>();
+  } = usePublicScheduleRequest<any>();
 
   const {
     mutate: mutateJob,
@@ -40,7 +40,7 @@ const Home = () => {
     isError: isJobError,
     isSuccess: isJobSuccess,
     error: jobError,
-  } = usePublicCalendarRequest<any>();
+  } = usePublicScheduleRequest<any>();
 
   const handleEventSubmit = () => {
     mutateEvent({
