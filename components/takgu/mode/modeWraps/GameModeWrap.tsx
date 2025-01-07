@@ -40,7 +40,7 @@ export default function GameModeWrap({
     setRadioMode(e.target.value as SeasonMode);
   };
 
-  const isGamePage = useRouter().pathname === '/game';
+  const isGamePage = useRouter().pathname === '/takgu/game';
 
   return (
     <div>

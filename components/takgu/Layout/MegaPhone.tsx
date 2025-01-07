@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { useState, useEffect, useRef } from 'react';
-import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
+import { useState, useEffect, useRef, forwardRef } from 'react';
+import { Virtuoso, VirtuosoHandle, Components } from 'react-virtuoso';
 import { Item } from 'types/takgu/itemTypes';
 import useAxiosGet from 'hooks/useAxiosGet';
 import useInterval from 'hooks/useInterval';
@@ -14,54 +14,13 @@ interface IMegaphoneContent {
 
 type MegaphoneList = Array<IMegaphoneContent>;
 
-// type MegaphoneContainerProps = {
-//   children: React.ReactNode;
-//   count: number;
-// };
-
 const adminContent: IMegaphoneContent = {
   megaphoneId: 0,
   content: '상점에서 아이템을 구매해서 확성기를 등록해보세요!(30자 제한)',
   intraId: '관리자',
 };
 
-// export const MegaphoneContainer = ({
-//   children,
-//   count,
-// }: MegaphoneContainerProps) => {
-//   const ref = useRef<HTMLDivElement>(null);
-//   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-
-//   useInterval(() => {
-//     const nextIndex = (selectedIndex + 1) % count;
-//     setSelectedIndex(nextIndex);
-//   }, 4000);
-
-//   return (
-//     <div className={styles.rollingBanner}>
-//       <div
-//         className={styles.wrapper}
-//         style={{
-//           transition: 'all 1s ease-in-out',
-//           transform: `translateY(${selectedIndex * -100}%)`,
-//         }}
-//         ref={ref}
-//       >
-//         {children}
-//       </div>
-//     </div>
-//   );
-// };
-
-export const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
-  return (
-    <div className={styles.contentWrapper}>
-      <div className={styles.intraId}>{intraId}</div>
-      <div className={styles.content}>{content}</div>
-    </div>
-  );
-};
-
+// 메인 확성기 컴포넌트
 const Megaphone = () => {
   const [contents, setContents] = useState<MegaphoneList>([]);
   const [itemList, setItemList] = useState<Item[]>([]);
@@ -127,60 +86,76 @@ const Megaphone = () => {
       <div className={styles.wrapper}>
         {!!megaphoneData && megaphoneData.length > 0 && (
           <Virtuoso
-            className={styles.virtuoso}
             totalCount={megaphoneData.length}
             data={megaphoneData}
             ref={virtuoso}
-            itemContent={(index) => (
-              <MegaphoneItem
-                content={megaphoneData[index].content}
-                intraId={megaphoneData[index].intraId}
-              />
-            )}
+            itemContent={(_, data) => <MegaphoneItem {...data} />}
             style={{ height: '100%' }}
+            components={{
+              Scroller: MegaphoneScroller,
+            }}
           />
         )}
       </div>
     </div>
   );
-
-  // return (
-  //   <MegaphoneContainer count={megaphoneData.length}>
-  //     {megaphoneData.map((content, idx) => (
-  //       <MegaphoneItem
-  //         content={content.content}
-  //         intraId={content.intraId}
-  //         key={idx}
-  //       />
-  //     ))}
-  //   </MegaphoneContainer>
-  // );
-
-  // return contents.length > 0 ? (
-  //   <MegaphoneContainer count={contents.length}>
-  //     {contents.map((content, idx) => (
-  //       <MegaphoneItem
-  //         content={content.content}
-  //         intraId={content.intraId}
-  //         key={idx}
-  //       />
-  //     ))}
-  //   </MegaphoneContainer>
-  // ) : (
-  //   <MegaphoneContainer count={itemList.length + 1}>
-  //     <MegaphoneItem
-  //       content={adminContent.content}
-  //       intraId={adminContent.intraId}
-  //     />
-  //     {itemList.map((item, idx) => (
-  //       <MegaphoneItem
-  //         content={item.itemName + ' : ' + item.mainContent}
-  //         intraId={'절찬 판매 중!'}
-  //         key={idx}
-  //       />
-  //     ))}
-  //   </MegaphoneContainer>
-  // );
 };
+
+// 확성기 아이템 컴포넌트
+export const MegaphoneItem = ({ content, intraId }: IMegaphoneContent) => {
+  return (
+    <div className={styles.contentWrapper}>
+      <div className={styles.intraId}>{intraId}</div>
+      <div className={styles.content}>{content}</div>
+    </div>
+  );
+};
+
+// 유저의 스크롤 이벤트 동작을 제거한 확성기 스크롤러 컴포넌트
+const MegaphoneScroller: Components['Scroller'] = forwardRef(
+  ({ children, ...props }, ref) => {
+    const localRef = useRef<HTMLDivElement | null>(null);
+
+    // 전달받은 ref와 내부 ref가 동일한 element를 가리키도록 함
+    const combinedRef = (node: HTMLDivElement | null) => {
+      localRef.current = node;
+
+      if (ref) {
+        (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }
+    };
+
+    useEffect(() => {
+      const element = localRef.current;
+
+      if (element) {
+        const preventScroll = (e: Event) => {
+          e.preventDefault();
+          e.stopPropagation();
+        };
+
+        // wheel 및 touchmove 이벤트 차단 (pc 및 모바일)
+        element.addEventListener('wheel', preventScroll, { passive: false });
+        element.addEventListener('touchmove', preventScroll, {
+          passive: false,
+        });
+
+        // 컴포넌트 언마운트 시 이벤트 제거
+        return () => {
+          element.removeEventListener('wheel', preventScroll);
+          element.removeEventListener('touchmove', preventScroll);
+        };
+      }
+    }, []);
+
+    return (
+      <div ref={combinedRef} {...props}>
+        {children}
+      </div>
+    );
+  }
+);
+
+MegaphoneScroller.displayName = 'MegaphoneScroller';
 
 export default Megaphone;
