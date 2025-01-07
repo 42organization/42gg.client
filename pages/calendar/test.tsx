@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { EventSchedule, JobSchedule } from 'types/calendar/scheduleTypes';
 import usePublicCalendarRequest from 'hooks/calendar/usePublicCalendarRequest';
 
