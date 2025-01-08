@@ -11,4 +11,5 @@ export interface Schedule {
   startTime: string;
   endTime: string;
   sharedCount?: number;
+  status?: string;
 }

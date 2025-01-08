@@ -17,20 +17,7 @@ instance.interceptors.request.use(setConfig, getError);
 instanceInManage.interceptors.request.use(setConfig, getError);
 instanceInPartyManage.interceptors.request.use(setConfig, getError);
 instanceInAgenda.interceptors.request.use(setConfig, getError);
-
-instanceInCalendar.interceptors.request.use(
-  function setConfig(config) {
-    config.headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('42gg-token')}`,
-    };
-    config.withCredentials = true;
-    return config;
-  },
-  function getError(error) {
-    return Promise.reject(error);
-  }
-);
+instanceInCalendar.interceptors.request.use(setConfig, getError);
 
 function isAxiosError<ErrorPayload>(
   error: unknown
