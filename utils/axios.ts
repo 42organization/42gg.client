@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 const baseURL = `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}`;
 const manageBaseURL = process.env.NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT ?? '/';
@@ -13,61 +13,10 @@ const instanceInPartyManage = axios.create({ baseURL: managePartyBaseURL });
 const instanceInAgenda = axios.create({ baseURL: agendaBaseURL });
 const instanceInCalendar = axios.create({ baseURL: calendarBaseURL });
 
-instance.interceptors.request.use(
-  function setConfig(config) {
-    config.headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('42gg-token')}`,
-    };
-    config.withCredentials = true;
-    return config;
-  },
-  function getError(error) {
-    return Promise.reject(error);
-  }
-);
-
-instanceInManage.interceptors.request.use(
-  function setConfig(config) {
-    config.headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('42gg-token')}`,
-    };
-    config.withCredentials = true;
-    return config;
-  },
-  function getError(error) {
-    return Promise.reject(error);
-  }
-);
-
-instanceInPartyManage.interceptors.request.use(
-  function setConfig(config) {
-    config.headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('42gg-token')}`,
-    };
-    config.withCredentials = true;
-    return config;
-  },
-  function getError(error) {
-    return Promise.reject(error);
-  }
-);
-
-instanceInAgenda.interceptors.request.use(
-  function setConfig(config) {
-    config.headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('42gg-token')}`,
-    };
-    config.withCredentials = true;
-    return config;
-  },
-  function getError(error) {
-    return Promise.reject(error);
-  }
-);
+instance.interceptors.request.use(setConfig, getError);
+instanceInManage.interceptors.request.use(setConfig, getError);
+instanceInPartyManage.interceptors.request.use(setConfig, getError);
+instanceInAgenda.interceptors.request.use(setConfig, getError);
 
 instanceInCalendar.interceptors.request.use(
   function setConfig(config) {
@@ -97,3 +46,19 @@ export {
   instanceInCalendar,
   isAxiosError,
 };
+
+function setConfig<T>(config: AxiosRequestConfig<T>) {
+  return {
+    ...config,
+    headers: {
+      ...config.headers,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('42gg-token') ?? ''}`,
+      withCredentials: true,
+    },
+  };
+}
+
+function getError(error: unknown) {
+  return Promise.reject(error);
+}
