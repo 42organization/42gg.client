@@ -1,8 +1,9 @@
-import React from 'react';
-import { EventSchedule, JobSchedule } from 'types/calendar/scheduleTypes';
+import React, { useState } from 'react';
+import { Schedule } from 'types/calendar/scheduleTypes';
+import usePublicScheduleGet from 'hooks/calendar/usePublicScheduleGet';
 import usePublicScheduleRequest from 'hooks/calendar/usePublicScheduleRequest';
 
-const exampleEvent: EventSchedule = {
+const exampleEvent: Schedule = {
   classification: 'EVENT',
   eventTag: 'ETC',
   author: 'seykim',
@@ -13,7 +14,7 @@ const exampleEvent: EventSchedule = {
   endTime: '2025-01-10T06:28:46.655Z',
 };
 
-const exampleJob: JobSchedule = {
+const exampleJob: Schedule = {
   classification: 'JOB_NOTICE',
   jobTag: 'SHORTS_INTERN',
   techTag: 'FRONT_END',
@@ -26,52 +27,223 @@ const exampleJob: JobSchedule = {
 };
 
 const Home = () => {
+  const { createMutation: eventMutation } =
+    usePublicScheduleRequest<Schedule>();
+  const { createMutation: jobMutation } = usePublicScheduleRequest<Schedule>();
+  const { deleteMutation } = usePublicScheduleRequest<any>();
+  const { updateMutation } = usePublicScheduleRequest<Schedule>();
+  //const { schedule: eventSchedules, isLoading: eventIsLoading, isError: eventIsError, error: eventError } =
+  //  usePublicScheduleGet('/public/period/EVENT?start=2025-01-01&end=2025-01-31');
+  //const { schedule: jobSchedules, isLoading: jobIsLoading, isError: jobIsError, error: jobError } =
+  //  usePublicScheduleGet('/public/period/JOB_NOTICE?start=2025-01-01&end=2025-01-31');
   const {
-    mutate: mutateEvent,
+    schedule: allSchedules,
+    isLoading: allIsLoading,
+    isError: allIsError,
+    error: allError,
+  } = usePublicScheduleGet('?start=2025-01-01&end=2025-01-31');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(
+    null
+  );
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedSchedule, setEditedSchedule] = useState<Schedule | null>(null);
+
+  const {
+    mutate: addEvent,
     isLoading: isEventLoading,
     isError: isEventError,
+    error: addEventError,
     isSuccess: isEventSuccess,
-    error: eventError,
-  } = usePublicScheduleRequest<any>();
-
+  } = eventMutation;
   const {
-    mutate: mutateJob,
+    mutate: addJob,
     isLoading: isJobLoading,
     isError: isJobError,
+    error: addJobError,
     isSuccess: isJobSuccess,
-    error: jobError,
-  } = usePublicScheduleRequest<any>();
+  } = jobMutation;
 
   const handleEventSubmit = () => {
-    mutateEvent({
-      url: '/public/event', // 이벤트 URL
+    addEvent({
+      url: '/public/event',
       data: exampleEvent,
     });
   };
 
   const handleJobSubmit = () => {
-    mutateJob({
-      url: '/public/job', // 직무 URL
+    addJob({
+      url: '/public/job',
       data: exampleJob,
     });
+  };
+
+  const handleDeleteSubmit = (id: number) => {
+    deleteMutation.mutate({ url: `/public/${id}`, data: null });
+  };
+
+  const handleOpenModal = (schedule: Schedule) => {
+    setIsModalOpen(true);
+    setSelectedSchedule(schedule);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedSchedule(null);
+  };
+
+  const handleSave = () => {
+    if (isEditing && editedSchedule) {
+      updateMutation.mutate({
+        url: `/public/${editedSchedule.id}`,
+        data: editedSchedule,
+      });
+    } else {
+      if (selectedSchedule?.classification === 'EVENT') {
+        addEvent({ url: '/public/event', data: selectedSchedule });
+      } else if (selectedSchedule?.classification === 'JOB_NOTICE') {
+        addJob({ url: '/public/job', data: selectedSchedule });
+      }
+    }
+    setIsEditing(false);
+    handleCloseModal();
+  };
+
+  const scheduleFormModal = (schedule: Schedule, isEditing: boolean) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setEditedSchedule((prev) => (prev ? { ...prev, [name]: value } : null));
+    };
+
+    return (
+      <div className='modal'>
+        <h2>{isEditing ? '일정 수정' : '일정 추가'}</h2>
+        <label>
+          제목:{' '}
+          <input
+            type='text'
+            name='title'
+            value={editedSchedule?.title || schedule.title}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          내용:{' '}
+          <input
+            type='text'
+            name='content'
+            value={editedSchedule?.content || schedule.content}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          시작:{' '}
+          <input
+            type='datetime-local'
+            name='startTime'
+            value={editedSchedule?.startTime || schedule.startTime}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          종료:{' '}
+          <input
+            type='datetime-local'
+            name='endTime'
+            value={editedSchedule?.endTime || schedule.endTime}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          링크:{' '}
+          <input
+            type='text'
+            name='link'
+            value={editedSchedule?.link || schedule.link}
+            onChange={handleChange}
+          />
+        </label>
+        <button onClick={handleSave}>{isEditing ? '수정' : '추가'}</button>
+        <button onClick={handleCloseModal}>닫기</button>
+      </div>
+    );
+  };
+
+  const scheduleDeatailModal = (schedule: Schedule) => {
+    return (
+      <div className='modal'>
+        <h2>일정 상세</h2>
+        <p>제목: {schedule.title}</p>
+        <p>내용: {schedule.content}</p>
+        <p>시작: {schedule.startTime}</p>
+        <p>종료: {schedule.endTime}</p>
+        <p>링크: {schedule.link}</p>
+        <button
+          onClick={() => {
+            setIsEditing(true);
+            setEditedSchedule(schedule);
+          }}
+        >
+          수정
+        </button>
+        <button
+          onClick={() =>
+            schedule.id !== undefined && handleDeleteSubmit(schedule.id)
+          }
+        >
+          삭제
+        </button>
+        <button onClick={handleCloseModal}>닫기</button>
+      </div>
+    );
   };
 
   return (
     <div>
       <div>
-        <button onClick={handleEventSubmit} disabled={isEventLoading}>
-          {isEventLoading ? 'Posting Event...' : 'Add Event'}
+        <h3>All Schedules</h3>
+        <button
+          onClick={() => {
+            setIsModalOpen(true);
+            setIsEditing(true);
+            setEditedSchedule({
+              classification: 'EVENT',
+              eventTag: '',
+              author: '',
+              title: '',
+              content: '',
+              link: '',
+              startTime: '',
+              endTime: '',
+            });
+          }}
+        >
+          일정 추가
         </button>
-        {isEventError && <p>Error: {eventError?.message}</p>}
-        {isEventSuccess && <p>Event added successfully!</p>}
+        {allIsLoading && <p>Loading schedules...</p>}
+        {allIsError && <p>Error: {(allError as Error)?.message}</p>}
+        {!allIsLoading && !allIsError && (
+          <ul>
+            {Array.isArray(allSchedules?.content) &&
+            allSchedules.content.length > 0 ? (
+              allSchedules.content.map((schedule: Schedule, index: number) => (
+                <li key={`${schedule.startTime}-${index}`}>
+                  {schedule.id}: [{schedule.classification}] {schedule.title}
+                  <button onClick={() => handleOpenModal(schedule)}>
+                    상세보기
+                  </button>
+                </li>
+              ))
+            ) : (
+              <p>No schedules available</p>
+            )}
+          </ul>
+        )}
       </div>
-      <div>
-        <button onClick={handleJobSubmit} disabled={isJobLoading}>
-          {isJobLoading ? 'Posting Job...' : 'Add Job'}
-        </button>
-        {isJobError && <p>Error: {jobError?.message}</p>}
-        {isJobSuccess && <p>Job added successfully!</p>}
-      </div>
+      {isModalOpen &&
+        (selectedSchedule && !isEditing
+          ? scheduleDeatailModal(selectedSchedule)
+          : scheduleFormModal(editedSchedule || exampleEvent, isEditing))}
     </div>
   );
 };

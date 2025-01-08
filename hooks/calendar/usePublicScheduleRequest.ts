@@ -8,7 +8,7 @@ const usePublicScheduleRequest = <T>() => {
   const [error, setError] = useState<string | null>(null);
 
   const sendCalendarRequest = async <T>(
-    method: 'POST' | 'PATCH',
+    method: 'POST' | 'PATCH' | 'PUT',
     url: string,
     body: Record<string, any>,
     onSuccess?: (data: T) => void,
@@ -42,7 +42,7 @@ const usePublicScheduleRequest = <T>() => {
     }
   };
 
-  const postMutation = useMutation<
+  const createMutation = useMutation<
     T,
     Error,
     { url: string; data: Record<string, any> }
@@ -61,7 +61,52 @@ const usePublicScheduleRequest = <T>() => {
       ),
   });
 
-  return postMutation;
+  const deleteMutation = useMutation<
+    T,
+    Error,
+    { url: string; data: Record<string, any> }
+  >({
+    mutationFn: ({ url, data }) =>
+      sendCalendarRequest<T>(
+        'PATCH',
+        url,
+        data,
+        (response) => {
+          console.log('Mutation Request successful', response);
+        },
+        (error) => {
+          console.log('Mutation Request Error', error);
+        }
+      ),
+  });
+
+  const updateMutation = useMutation<
+    T,
+    Error,
+    { url: string; data: Record<string, any> }
+  >({
+    mutationFn: ({ url, data }) =>
+      sendCalendarRequest<T>(
+        'PUT',
+        url,
+        data,
+        (response) => {
+          console.log('Mutation Request successful', response);
+        },
+        (error) => {
+          console.log('Mutation Request Error', error);
+        }
+      ),
+  });
+
+  return {
+    createMutation,
+    deleteMutation,
+    updateMutation,
+    data,
+    status,
+    error,
+  };
 };
 
 export default usePublicScheduleRequest;
