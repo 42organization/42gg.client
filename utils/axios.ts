@@ -5,16 +5,19 @@ const manageBaseURL = process.env.NEXT_PUBLIC_MANAGE_SERVER_ENDPOINT ?? '/';
 const managePartyBaseURL =
   process.env.NEXT_PUBLIC_PARTY_MANAGE_SERVER_ENDPOINT ?? '/';
 const agendaBaseURL = process.env.NEXT_PUBLIC_AGENDA_SERVER_ENDPOINT ?? '/';
+const calendarBaseURL = process.env.NEXT_PUBLIC_CALENDAR_SERVER_ENDPOINT ?? '/';
 
 const instance = axios.create({ baseURL });
 const instanceInManage = axios.create({ baseURL: manageBaseURL });
 const instanceInPartyManage = axios.create({ baseURL: managePartyBaseURL });
 const instanceInAgenda = axios.create({ baseURL: agendaBaseURL });
+const instanceInCalendar = axios.create({ baseURL: calendarBaseURL });
 
 instance.interceptors.request.use(setConfig, getError);
 instanceInManage.interceptors.request.use(setConfig, getError);
 instanceInPartyManage.interceptors.request.use(setConfig, getError);
 instanceInAgenda.interceptors.request.use(setConfig, getError);
+instanceInCalendar.interceptors.request.use(setConfig, getError);
 
 function isAxiosError<ErrorPayload>(
   error: unknown
@@ -27,6 +30,7 @@ export {
   instanceInManage,
   instanceInPartyManage,
   instanceInAgenda,
+  instanceInCalendar,
   isAxiosError,
 };
 
