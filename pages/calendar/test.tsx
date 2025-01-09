@@ -4,9 +4,7 @@ import usePublicScheduleGet from 'hooks/calendar/usePublicScheduleGet';
 import usePublicScheduleRequest from 'hooks/calendar/usePublicScheduleRequest';
 
 const Home = () => {
-  const { createMutation: eventMutation } =
-    usePublicScheduleRequest<Schedule>();
-  const { createMutation: jobMutation } = usePublicScheduleRequest<Schedule>();
+  const { createMutation } = usePublicScheduleRequest<Schedule>();
   const { deleteMutation } = usePublicScheduleRequest<any>();
   const { updateMutation } = usePublicScheduleRequest<Schedule>();
 
@@ -23,10 +21,9 @@ const Home = () => {
     null
   );
   const [isEditing, setIsEditing] = useState(false);
-  const [editedSchedule, setEditedSchedule] = useState<Schedule | null>(null);
+  const [currentSchedule, setCurrentSchedule] = useState<Schedule | null>(null);
 
-  const { mutate: addEvent } = eventMutation;
-  const { mutate: addJob } = jobMutation;
+  const { mutate: addSchedule } = createMutation;
 
   const handleDeleteSubmit = (id: number) => {
     deleteMutation.mutate({ url: `/public/${id}`, data: {} });
@@ -41,20 +38,20 @@ const Home = () => {
     setIsModalOpen(false);
     setIsEditing(false);
     setSelectedSchedule(null);
-    setEditedSchedule(null);
+    setCurrentSchedule(null);
   };
 
   const handleSave = () => {
-    if (isEditing && editedSchedule) {
+    if (isEditing && currentSchedule) {
       updateMutation.mutate({
-        url: `/public/${editedSchedule.id}`,
-        data: editedSchedule,
+        url: `/public/${currentSchedule.id}`,
+        data: currentSchedule,
       });
     } else {
-      if (editedSchedule?.classification === 'EVENT') {
-        addEvent({ url: '/public/event', data: editedSchedule });
-      } else if (editedSchedule?.classification === 'JOB_NOTICE') {
-        addJob({ url: '/public/job', data: editedSchedule });
+      if (currentSchedule?.classification === 'EVENT') {
+        addSchedule({ url: '/public/event', data: currentSchedule });
+      } else if (currentSchedule?.classification === 'JOB_NOTICE') {
+        addSchedule({ url: '/public/job', data: currentSchedule });
       }
     }
     handleCloseModal();
@@ -63,7 +60,7 @@ const Home = () => {
   const scheduleFormModal = (schedule: Schedule, isEditing: boolean) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
-      setEditedSchedule((prev) => (prev ? { ...prev, [name]: value } : null));
+      setCurrentSchedule((prev) => (prev ? { ...prev, [name]: value } : null));
     };
 
     return (
@@ -74,7 +71,7 @@ const Home = () => {
           <input
             type='text'
             name='title'
-            value={editedSchedule?.title || schedule.title}
+            value={currentSchedule?.title || schedule.title}
             onChange={handleChange}
           />
         </label>
@@ -83,7 +80,7 @@ const Home = () => {
           <input
             type='text'
             name='content'
-            value={editedSchedule?.content || schedule.content}
+            value={currentSchedule?.content || schedule.content}
             onChange={handleChange}
           />
         </label>
@@ -92,7 +89,7 @@ const Home = () => {
           <input
             type='datetime-local'
             name='startTime'
-            value={editedSchedule?.startTime || schedule.startTime}
+            value={currentSchedule?.startTime || schedule.startTime}
             onChange={handleChange}
           />
         </label>
@@ -101,7 +98,7 @@ const Home = () => {
           <input
             type='datetime-local'
             name='endTime'
-            value={editedSchedule?.endTime || schedule.endTime}
+            value={currentSchedule?.endTime || schedule.endTime}
             onChange={handleChange}
           />
         </label>
@@ -110,11 +107,11 @@ const Home = () => {
           <input
             type='text'
             name='link'
-            value={editedSchedule?.link || schedule.link}
+            value={currentSchedule?.link || schedule.link}
             onChange={handleChange}
           />
         </label>
-        <button onClick={handleSave}>{isEditing ? '수정' : '추가'}</button>
+        <button onClick={handleSave}>{isEditing ? '완료' : '등록'}</button>
         <button onClick={handleCloseModal}>닫기</button>
       </div>
     );
@@ -132,7 +129,7 @@ const Home = () => {
         <button
           onClick={() => {
             setIsEditing(true);
-            setEditedSchedule(schedule);
+            setCurrentSchedule(schedule);
           }}
         >
           수정
@@ -143,6 +140,13 @@ const Home = () => {
           }
         >
           삭제
+        </button>
+        <button
+          onAbort={() => {
+            addSchedule({ url: `/public/${schedule.id}/`, data: schedule });
+          }}
+        >
+          개인일정에 담기
         </button>
         <button onClick={handleCloseModal}>닫기</button>
       </div>
@@ -160,7 +164,11 @@ const Home = () => {
             {Array.isArray(allSchedules?.content) &&
             allSchedules.content.length > 0 ? (
               allSchedules.content
-                //.filter((schedule: Schedule) => schedule.status === 'ACTIVE')
+                .filter(
+                  (schedule: Schedule) =>
+                    schedule.status === 'ACTIVATE' ||
+                    schedule.status === 'DEACTIVATE'
+                )
                 .map((schedule: Schedule, index: number) => (
                   <li key={`${schedule.startTime}-${index}`}>
                     {schedule.id}: [{schedule.classification}] {schedule.title}
@@ -178,9 +186,9 @@ const Home = () => {
       <button
         onClick={() => {
           setIsModalOpen(true);
-          setEditedSchedule({
+          setCurrentSchedule({
             classification: 'EVENT',
-            eventTag: 'ETC',
+            eventTag: 'JOB_FORUM',
             author: 'seykim',
             title: '',
             content: '',
@@ -195,7 +203,7 @@ const Home = () => {
       {isModalOpen &&
         (selectedSchedule && !isEditing
           ? scheduleDeatailModal(selectedSchedule)
-          : scheduleFormModal(editedSchedule, isEditing))}
+          : scheduleFormModal(currentSchedule, isEditing))}
     </div>
   );
 };
