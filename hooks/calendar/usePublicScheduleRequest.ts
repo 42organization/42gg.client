@@ -15,7 +15,6 @@ const usePublicScheduleRequest = <T>() => {
     onError?: (error: string) => void
   ) => {
     try {
-      console.log('받은 데이터: ', body);
       const res = await instanceInCalendar.request({
         method,
         url,
@@ -47,18 +46,7 @@ const usePublicScheduleRequest = <T>() => {
     Error,
     { url: string; data: Record<string, any> }
   >({
-    mutationFn: ({ url, data }) =>
-      sendCalendarRequest<T>(
-        'POST',
-        url,
-        data,
-        (response) => {
-          console.log('Mutation Request successful', response);
-        },
-        (error) => {
-          console.log('Mutation Request Error', error);
-        }
-      ),
+    mutationFn: ({ url, data }) => sendCalendarRequest<T>('POST', url, data),
   });
 
   const deleteMutation = useMutation<
@@ -66,18 +54,7 @@ const usePublicScheduleRequest = <T>() => {
     Error,
     { url: string; data: Record<string, any> }
   >({
-    mutationFn: ({ url, data }) =>
-      sendCalendarRequest<T>(
-        'PATCH',
-        url,
-        data,
-        (response) => {
-          console.log('Mutation Request successful', response);
-        },
-        (error) => {
-          console.log('Mutation Request Error', error);
-        }
-      ),
+    mutationFn: ({ url, data }) => sendCalendarRequest<T>('PATCH', url, data),
   });
 
   const updateMutation = useMutation<
@@ -85,18 +62,7 @@ const usePublicScheduleRequest = <T>() => {
     Error,
     { url: string; data: Record<string, any> }
   >({
-    mutationFn: ({ url, data }) =>
-      sendCalendarRequest<T>(
-        'PUT',
-        url,
-        data,
-        (response) => {
-          console.log('Mutation Request successful', response);
-        },
-        (error) => {
-          console.log('Mutation Request Error', error);
-        }
-      ),
+    mutationFn: ({ url, data }) => sendCalendarRequest<T>('PUT', url, data),
   });
 
   return {

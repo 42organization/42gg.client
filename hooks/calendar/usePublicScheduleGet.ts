@@ -13,9 +13,8 @@ const usePublicScheduleGet = (url: string) => {
       const res = await instanceInCalendar.get(url);
       return res.data;
     },
-    retry: 1, //에러 났을때 1번 재시도
+    retry: 1,
   });
-  //console.log(schedule);
   return { schedule, isLoading, isError, error };
 };
 
