@@ -8,7 +8,7 @@ const useScheduleGroupGet = (url: string) => {
     isError,
     error,
   } = useQuery({
-    queryKey: ['scheduleGroup', url],
+    queryKey: 'scheduleGroup',
     queryFn: async () => {
       const res = await instanceInCalendar.get(url);
       return res.data;

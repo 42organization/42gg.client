@@ -8,12 +8,13 @@ const useScheduleGet = (url: string) => {
     isError,
     error,
   } = useQuery({
-    queryKey: ['schedule', url],
+    queryKey: 'schedule',
     queryFn: async () => {
       const res = await instanceInCalendar.get(url);
       return res.data;
     },
     retry: 1,
+    enabled: true,
   });
   return { schedule, isLoading, isError, error };
 };

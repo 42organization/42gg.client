@@ -1,16 +1,18 @@
 import { useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
+import { ScheduleGroup } from 'types/calendar/scheduleGroup';
 import { instanceInCalendar } from 'utils/axios';
 
-const useScheduleRequest = <T>() => {
+const useScheduleGroupRequest = <T>() => {
   const [data, setData] = useState<T | null>(null);
   const [status, setStatus] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
   const sendCalendarRequest = async <T>(
     method: 'POST' | 'DELETE' | 'PUT',
     url: string,
-    body: Record<string, any>,
+    body: ScheduleGroup,
     onSuccess?: (data: T) => void,
     onError?: (error: string) => void
   ) => {
@@ -44,28 +46,37 @@ const useScheduleRequest = <T>() => {
   const createMutation = useMutation<
     T,
     Error,
-    { url: string; data: Record<string, any> }
+    { url: string; data: ScheduleGroup }
   >({
     mutationFn: ({ url, data }) => sendCalendarRequest<T>('POST', url, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries('scheduleGroup');
+    },
   });
 
   const deleteMutation = useMutation<
     T,
     Error,
-    { url: string; data: Record<string, any> }
+    { url: string; data: ScheduleGroup }
   >({
     mutationFn: ({ url, data }) => sendCalendarRequest<T>('DELETE', url, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries('scheduleGroup');
+    },
   });
 
   const updateMutation = useMutation<
     T,
     Error,
-    { url: string; data: Record<string, any> }
+    { url: string; data: ScheduleGroup }
   >({
     mutationFn: ({ url, data }) => sendCalendarRequest<T>('PUT', url, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries('scheduleGroup');
+    },
   });
 
   return { createMutation, deleteMutation, updateMutation };
 };
 
-export default useScheduleRequest;
+export default useScheduleGroupRequest;

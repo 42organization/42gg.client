@@ -1,16 +1,18 @@
 import { useState } from 'react';
-import { useMutation } from 'react-query';
+import { useQueryClient, useMutation } from 'react-query';
+import { Schedule } from 'types/calendar/scheduleTypes';
 import { instanceInCalendar } from 'utils/axios';
 
 const useScheduleRequest = <T>() => {
   const [data, setData] = useState<T | null>(null);
   const [status, setStatus] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
   const sendCalendarRequest = async <T>(
     method: 'POST' | 'PATCH' | 'PUT',
     url: string,
-    body: Record<string, any>,
+    body: Schedule,
     onSuccess?: (data: T) => void,
     onError?: (error: string) => void
   ) => {
@@ -41,29 +43,32 @@ const useScheduleRequest = <T>() => {
     }
   };
 
-  const createMutation = useMutation<
-    T,
-    Error,
-    { url: string; data: Record<string, any> }
-  >({
-    mutationFn: ({ url, data }) => sendCalendarRequest<T>('POST', url, data),
-  });
+  const createMutation = useMutation<T, Error, { url: string; data: Schedule }>(
+    {
+      mutationFn: ({ url, data }) => sendCalendarRequest<T>('POST', url, data),
+      onSuccess: () => {
+        queryClient.invalidateQueries('schedule');
+      },
+    }
+  );
 
-  const deleteMutation = useMutation<
-    T,
-    Error,
-    { url: string; data: Record<string, any> }
-  >({
-    mutationFn: ({ url, data }) => sendCalendarRequest<T>('PATCH', url, data),
-  });
+  const deleteMutation = useMutation<T, Error, { url: string; data: Schedule }>(
+    {
+      mutationFn: ({ url, data }) => sendCalendarRequest<T>('PATCH', url, data),
+      onSuccess: () => {
+        queryClient.invalidateQueries('schedule');
+      },
+    }
+  );
 
-  const updateMutation = useMutation<
-    T,
-    Error,
-    { url: string; data: Record<string, any> }
-  >({
-    mutationFn: ({ url, data }) => sendCalendarRequest<T>('PUT', url, data),
-  });
+  const updateMutation = useMutation<T, Error, { url: string; data: Schedule }>(
+    {
+      mutationFn: ({ url, data }) => sendCalendarRequest<T>('PUT', url, data),
+      onSuccess: () => {
+        queryClient.invalidateQueries('schedule');
+      },
+    }
+  );
 
   return {
     createMutation,
