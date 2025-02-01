@@ -1,0 +1,19 @@
+.tabContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  font-size: 1rem;
+  font-weight: 500;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.active {
+  text-decoration: underline;
+  text-underline-offset: 0.4rem;
+  cursor: pointer;
+}
+
+.inactive {
+  cursor: pointer;
+}
