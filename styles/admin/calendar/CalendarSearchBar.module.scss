@@ -1,0 +1,28 @@
+.searchBar {
+  display: flex;
+  width: 50rem;
+  height: 5rem;
+  padding: 0.1rem;
+  margin-top: 1rem;
+  border: 0.1rem solid #d3d3d3;
+  border-radius: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dateContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  margin-right: 1rem;
+}
+
+.dateInput {
+  width: 6rem;
+  height: 50px;
+  padding-left: 0.5rem;
+  border: 0.1rem solid #d3d3d3;
+  border-radius: 0.3rem;
+}
