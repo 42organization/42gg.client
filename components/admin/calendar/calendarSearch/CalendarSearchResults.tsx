@@ -39,9 +39,10 @@ export const CalendarSearchResults = () => {
       });
 
       if (result) {
-        setSearchData(result);
         if (result.length === 0) {
           alert(`"${content}"에 대한 검색 결과가 없습니다.`);
+        } else {
+          setSearchData(result);
         }
       }
     },
