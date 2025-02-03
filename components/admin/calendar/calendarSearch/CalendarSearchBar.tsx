@@ -47,8 +47,14 @@ export const CalendarSearchBar = ({ onSearch }: CalendarSearchBarProps) => {
     onSearch({ typeOption: typeOption, content, startTime, endTime });
   };
 
+  const handleEnterPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearchClick();
+    }
+  };
+
   return (
-    <Box className={styles.searchBar}>
+    <Box className={styles.searchBar} onKeyDown={handleEnterPress}>
       {/* Type Select */}
       <FormControl sx={{ width: 100 }}>
         <Select

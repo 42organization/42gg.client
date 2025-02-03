@@ -17,7 +17,12 @@ export const useAdminCalendarSearchGet = () => {
   const showSnackbar = useShowSnackbar();
 
   const adminCalendarSearchGet = useCallback(
-    async ({ type, content, startTime, endTime }: SearchGetCallbackProps) => {
+    async ({
+      type,
+      content,
+      startTime,
+      endTime,
+    }: SearchGetCallbackProps): Promise<Schedule[] | null> => {
       setIsLoading(true);
       if (!startTime) startTime = '2024-12-25';
       if (!endTime) {
@@ -28,7 +33,9 @@ export const useAdminCalendarSearchGet = () => {
       try {
         const res = await instanceInCalendar.get(searchUrl);
         if (200 <= res.status && res.status < 300) {
-          setData(res.data.totalScheduleAdminResDtoList);
+          const resultData = res.data.totalScheduleAdminResDtoList;
+          setData(resultData);
+          return resultData;
         }
       } catch (err) {
         const axiosError = err as AxiosError;
@@ -37,6 +44,7 @@ export const useAdminCalendarSearchGet = () => {
       } finally {
         setIsLoading(false);
       }
+      return null;
     },
     [showSnackbar]
   );

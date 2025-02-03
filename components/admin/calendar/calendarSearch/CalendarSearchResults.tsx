@@ -1,4 +1,5 @@
-import { useCallback } from 'react';
+import { useState, useCallback } from 'react';
+import { Schedule } from 'types/calendar/scheduleTypes';
 import { CalendarSearchBar } from 'components/admin/calendar/calendarSearch/CalendarSearchBar';
 import { CalendarTable } from 'components/admin/calendar/CalendarTable';
 import { useAdminCalendarSearchGet } from 'hooks/calendar/admin/useAdminCalendarSearchGet';
@@ -12,10 +13,11 @@ export interface SearchData {
 }
 
 export const CalendarSearchResults = () => {
-  const { data, adminCalendarSearchGet } = useAdminCalendarSearchGet();
+  const { adminCalendarSearchGet } = useAdminCalendarSearchGet();
+  const [searchData, setSearchData] = useState<Schedule[] | null>();
 
   const handleSearchClick = useCallback(
-    ({ typeOption, content, startTime, endTime }: SearchData) => {
+    async ({ typeOption, content, startTime, endTime }: SearchData) => {
       if (!typeOption || !content) {
         alert('검색 기준과 검색 내용을 입력해주세요.');
         return;
@@ -29,12 +31,19 @@ export const CalendarSearchResults = () => {
         ? endTime.toISOString().split('T')[0]
         : defaultEndTime;
 
-      adminCalendarSearchGet({
+      const result = await adminCalendarSearchGet({
         type: typeOption,
         content,
         startTime: parsedStartTime,
         endTime: parsedEndTime,
       });
+
+      if (result) {
+        setSearchData(result);
+        if (result.length === 0) {
+          alert(`"${content}"에 대한 검색 결과가 없습니다.`);
+        }
+      }
     },
     [adminCalendarSearchGet]
   );
@@ -43,7 +52,7 @@ export const CalendarSearchResults = () => {
     <div className={styles.container}>
       <CalendarSearchBar onSearch={handleSearchClick} />
 
-      {data && <CalendarTable data={data} />}
+      {searchData && <CalendarTable data={searchData} />}
     </div>
   );
 };
