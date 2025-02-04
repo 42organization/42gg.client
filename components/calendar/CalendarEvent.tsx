@@ -10,8 +10,6 @@ const CalendarEvent = ({
   event: Schedule;
   children: React.ReactNode;
 }) => {
-  // console.log("event: ", event);
-  // console.log("children: ", children);
   return (
     <div
       className={styles.eventBox}

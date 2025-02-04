@@ -1,0 +1,102 @@
+.bubbleModal {
+  position: relative;
+  width: 400px;
+  padding: 25px 30px;
+  background: white;
+  // top: 100px;
+  border-radius: 35px;
+  justify-content: center;
+}
+
+// .bubbleModal::before {
+//   position: absolute;
+//   top: 50%;
+//   left: -9px;
+//   width: 30px;
+//   height: 20px;
+//   content: '';
+//   background: #FAFAFF;
+//   border-bottom-left-radius: 2px;
+//   transform: skewX(-42deg);
+//   clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 58% 100%);
+// }
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  color: #484848;
+}
+
+.modalContent {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.groupIndex {
+  min-width: 15px;
+  height: 15px;
+  margin: 4px 8px 4px 0;
+  background-color: #7dc163;
+  border-radius: 50%;
+  align-content: flex-start;
+}
+
+.scheduleInfo {
+  width: 100%;
+}
+
+.scheduleInfo .title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.scheduleInfo .date {
+  margin-top: 0.3rem;
+  margin-bottom: 1.5rem;
+  font-size: 10px;
+  font-weight: 300;
+  color: #808080;
+}
+
+.scheduleInfo .content {
+  margin-bottom: 0.4rem;
+  font-size: 12px;
+  font-weight: 300;
+  color: #808080;
+}
+
+.scheduleInfo .link {
+  display: flex;
+  font-size: 7px;
+  font-weight: 300;
+  color: #785ad2;
+  text-decoration: underline;
+  align-items: center;
+  gap: 0.05rem;
+}
+
+.importButton {
+  align-content: end;
+}
+
+.importButton p {
+  margin-bottom: 0.2rem;
+  font-size: 10px;
+  font-weight: 400;
+  color: #785ad2;
+  text-align: center;
+}
+
+.importButton .button {
+  width: 73px;
+  padding: 0.5rem;
+  font-size: 10px;
+  font-weight: 400;
+  color: white;
+  text-align: center;
+  background-color: #785ad2;
+  border-radius: 0.5rem;
+}

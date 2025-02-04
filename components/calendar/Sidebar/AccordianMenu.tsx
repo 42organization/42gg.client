@@ -1,65 +1,10 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import { Checkbox , FormControlLabel } from '@mui/material';
+import { Checkbox, FormControlLabel } from '@mui/material';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import DownSVG from 'public/image/calendar/downToggle.svg';
 import EditSVG from 'public/image/calendar/editIcon.svg';
 import styles from 'styles/calendar/CalendarSidebar.module.scss';
-
-const publicScheduleData: Schedule[] = [
-  {
-    id: 1,
-    classification: 'JOB_NOTICE',
-    jobTag: 'SHORTS_INTERN',
-    techTag: 'FRONT_END',
-    author: 'seykim',
-    title: 'JOB test',
-    content: 'test',
-    link: 'string',
-    startTime: '2025-01-06T06:28:46.655Z',
-    endTime: '2025-01-08T06:28:46.655Z',
-  },
-  {
-    id: 2,
-    classification: 'EVENT',
-    eventTag: 'ETC',
-    author: 'seykim',
-    title: 'EVENT test',
-    content: 'string',
-    link: 'string',
-    startTime: '2025-01-06T06:28:46.655Z',
-    endTime: '2025-01-10T06:28:46.655Z',
-  },
-];
-
-const privateScheduleData: Schedule[] = [
-  {
-    id: 3,
-    classification: 'PRIVATE_SCHEDULE',
-    author: 'seykim',
-    title: 'PRIVATE test',
-    content: 'string',
-    link: 'string',
-    startTime: '2025-01-03T06:28:46.655Z',
-    endTime: '2025-01-06T06:28:46.655Z',
-    groupId: 1,
-    groupTitle: 'group1',
-    groupColor: '#7DC163',
-  },
-  {
-    id: 4,
-    classification: 'PRIVATE_SCHEDULE',
-    author: 'seykim',
-    title: 'PRIVATE test2',
-    content: 'string',
-    link: 'string',
-    startTime: '2025-01-01T06:28:46.655Z',
-    endTime: '2025-01-02T06:28:46.655Z',
-    groupId: 2,
-    groupTitle: 'group2',
-    groupColor: '#E99A45',
-  },
-];
 
 const groupList = [
   { id: 1, title: 'group1', color: '#7DC163' },
