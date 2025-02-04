@@ -1,0 +1,29 @@
+.eventBox {
+  display: flex;
+  height: 23px;
+  margin-right: 12px;
+  margin-left: 12px;
+  overflow: hidden;
+  background-color: var(--box-color);
+  border-radius: 3px;
+  align-items: center;
+}
+
+.eventContent {
+  max-width: 100%;
+  padding-right: 3px;
+  padding-left: 3px;
+  overflow: hidden;
+  font-size: 10px;
+  // padding-bottom: 2px;
+  color: white;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  span {
+    padding-right: 3px;
+    padding-left: 3px;
+    font-size: 10px;
+    color: white;
+  }
+}

@@ -6,6 +6,7 @@ import { Schedule } from 'types/calendar/scheduleTypes';
 import styles from 'styles/calendar/Calendar.module.scss';
 import CalendarEvent from './CalendarEvent';
 import CalendarHeader from './CalendarHeader';
+import CustomCalendar from './CustomCalendar';
 import ScheduleDetailModal from './modal/ScheduleDetailModal';
 import CalendarSidebar from './Sidebar/CalendarSidebar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -88,27 +89,28 @@ const CalendarLayout = () => {
   };
 
   return (
-    <div className={styles.customCalendar}>
+    <div className={styles.calendarView}>
       <CalendarSidebar />
       <div className={styles.calendarBox}>
-        <Calendar<Schedule>
-          localizer={localizer}
-          events={parsedScheduleData}
-          startAccessor='startTime'
-          endAccessor='endTime'
-          selectable
-          // onSelectSlot={handleSelectSlot}
-          // onSelectEvent={onSelectEvent}
-          views={['month']}
-          defaultView='month'
-          popup
-          components={{
-            toolbar: CalendarHeader,
-            eventWrapper: CalendarEvent,
-          }}
-          formats={formats}
-          className={styles.cutsomCalendar}
-        />
+        <CustomCalendar>
+          <Calendar<Schedule>
+            localizer={localizer}
+            events={parsedScheduleData}
+            startAccessor='startTime'
+            endAccessor='endTime'
+            selectable
+            // onSelectSlot={handleSelectSlot}
+            // onSelectEvent={onSelectEvent}
+            views={['month']}
+            defaultView='month'
+            popup
+            components={{
+              toolbar: CalendarHeader,
+              eventWrapper: CalendarEvent,
+            }}
+            formats={formats}
+          />
+        </CustomCalendar>
       </div>
     </div>
   );
