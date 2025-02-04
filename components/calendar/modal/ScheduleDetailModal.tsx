@@ -44,7 +44,16 @@ const ScheduleDetailModal = ({
         <CloseSVG width={9} height={9} onClick={onClose} />
       </div>
       <div className={styles.modalContent}>
-        <div className={styles.groupIndex} />
+        <div
+          className={styles.groupIndex}
+          style={{
+            backgroundColor: schedule.groupId
+              ? schedule.groupColor
+              : schedule.classification === 'EVENT'
+              ? '#785AD2'
+              : '#A98CFF',
+          }}
+        />
         <div className={styles.scheduleInfo}>
           <div className={styles.title}>{schedule.title}</div>
           <div className={styles.date}>
@@ -52,7 +61,7 @@ const ScheduleDetailModal = ({
           </div>
           <div className={styles.content}>{schedule.content}</div>
           <div className={styles.link}>
-            <LinkSVG width={6} height={7} />
+            <LinkSVG width={6} height={7} stroke='#785AD2' />
             <Link href={schedule.link}>{schedule.link}</Link>
           </div>
         </div>
