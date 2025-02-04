@@ -1,0 +1,29 @@
+.dropdown {
+  position: absolute;
+  z-index: 10;
+  width: 200px;
+  padding: 22px 32px;
+  background-color: #f3f3ff;
+  border: 1px solid #c1c8f0;
+  border-radius: 10px;
+}
+
+.groupItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 300;
+  color: #785ad2;
+}
+
+.groupItem + .groupItem {
+  margin-top: 13px;
+}
+
+.groupColor {
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+  border-radius: 3px;
+}

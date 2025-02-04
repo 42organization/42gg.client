@@ -1,0 +1,179 @@
+.bubbleModal {
+    position: relative;
+    width: 570px;
+    padding: 25px 30px;
+    background: white;
+    // top: 100px;
+    border: 1px solid #D5D2F1;
+    border-radius: 35px;
+    justify-content: center;
+}
+
+.bubbleModal::before {
+    position: absolute;
+    top: 50%;
+    left: -9px;
+    width: 30px;
+    height: 20px;
+    content: '';
+    background: white;
+    border-bottom: 1px solid #D5D2F1;
+    border-left: 1px solid #D5D2F1;
+    border-bottom-left-radius: 2px;
+    transform: skewX(-40.6deg);
+    clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 58% 100%);
+}
+
+.divider {
+    width: 570px;
+    height: 1px;
+    margin: 0 -30px;
+    border-bottom: 1px solid #D5D2F1;
+}
+
+.titleContainer {
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.groupSelect {
+    display: flex;
+    width: 83px;
+    height: 42px;
+    flex-direction: row;
+    margin-left: auto;
+    background-color: #E8E8F8;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.groupSelect .nowGroup {
+    width: 24px;
+    height: 24px;
+    border-radius: 3px;
+}
+
+.groupSelect .changeGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.content {
+    margin-top: 34px;
+    margin-bottom: 20px;
+}
+
+.field {
+    width: 100%;
+    overflow: hidden;
+    font-size: 16px;
+    font-weight: 300;
+    color: #000000;
+    resize: none;
+    border: none;
+    outline: none;
+    textarea {
+        overflow: hidden;
+    }
+}
+
+
+.bigField {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-size: 25px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+}
+
+.bigField::placeholder, .field::placeholder {
+    font-weight: 300;
+    color: #C1C8F0;
+}
+
+.date {
+    display: flex;
+    padding: 0;
+    margin: 20px 0;
+    font-size: 16px;
+    font-weight: 300;
+    border: none;
+    outline: none;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.datePickerContainer {
+    padding: 0;
+    margin: 0;
+}
+
+.datePickerContainer input {
+    padding: 0;
+    margin: 0;
+}
+
+.datePicker {
+    font-size: 16px;
+    font-weight: 300;
+    color: #000000;
+    border: none;
+    outline: none;
+}
+
+.datePickerEnd {
+    font-size: 16px;
+    font-weight: 300;
+    color: #000000;
+    text-align: right;
+    border: none;
+    outline: none;
+}
+
+.link {
+    display: flex;
+    margin: 20px 0;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.buttonInactive {
+    width: 124px;
+    padding: 0.25rem 0.5rem;
+    margin: 20px 0 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    background-color: #C1C8F0;
+    border-radius: 0.5rem;
+    justify-items: center;
+}
+
+.buttonActive {
+    width: 124px;
+    padding: 0.25rem 0.5rem;
+    margin: 20px 0 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    background-color: #785AD2;
+    border-radius: 0.5rem;
+    justify-items: center;
+}
