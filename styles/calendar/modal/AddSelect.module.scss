@@ -1,0 +1,31 @@
+.dropdown {
+    position: absolute;
+    z-index: 5;
+    width: 97px;
+    padding: 5px;
+    background-color: #F3F3FF;
+    border-radius: 5px;
+}
+
+.ActiveContent {
+    display: flex;
+    width: 87px;
+    padding: 3px 10px;
+    font-size: 10px;
+    font-weight: 400;
+    color: white;
+    background-color: #785AD2;
+    border-radius: 5px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inActiveContent {
+    width: 87px;
+    padding: 3px 10px;
+    font-size: 10px;
+    font-weight: 400;
+    color: #785AD2;
+    background-color: none;
+    align-items: center;
+}
