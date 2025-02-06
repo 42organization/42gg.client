@@ -8,6 +8,7 @@ import { UseItemData } from 'types/takgu/inventoryTypes';
 import { instance, isAxiosError } from 'utils/axios';
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/takgu/modal';
+import MIME_TYPE from 'constants/common/mimeType';
 import { ITEM_ALERT_MESSAGE } from 'constants/takgu/store/itemAlertMessage';
 import {
   ModalButtonContainer,
@@ -83,12 +84,12 @@ export default function ProfileImageModal({
       formData.append(
         'userProfileImageRequestDto',
         new Blob([JSON.stringify({ receiptId: receiptId })], {
-          type: 'application/json',
+          type: MIME_TYPE.JSON,
         })
       );
       formData.append(
         'profileImage',
-        new Blob([imgData], { type: 'image/takgu/jpeg' })
+        new Blob([imgData], { type: MIME_TYPE.JPEG })
       );
       await instance.post('/pingpong/users/profile-image', formData);
       queryClient.invalidateQueries('user');
@@ -140,7 +141,7 @@ export default function ProfileImageModal({
               )}
               <input
                 type='file'
-                accept='image/takgu/jpeg'
+                accept={MIME_TYPE.JPEG}
                 style={{ display: 'none' }}
                 onChange={uploadImg}
               />
