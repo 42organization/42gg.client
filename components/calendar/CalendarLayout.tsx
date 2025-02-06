@@ -1,8 +1,14 @@
 import { format, parse, startOfWeek, getDay } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
-import React, { useState } from 'react';
-import { Calendar, dateFnsLocalizer, Event } from 'react-big-calendar';
+import React, { useState, useEffect } from 'react';
+import {
+  Calendar,
+  dateFnsLocalizer,
+  Event,
+  DateCellWrapperProps,
+} from 'react-big-calendar';
 import { Schedule } from 'types/calendar/scheduleTypes';
+import MenuSVG from 'public/image/calendar/menuIcon.svg';
 import styles from 'styles/calendar/Calendar.module.scss';
 import CalendarEvent from './CalendarEvent';
 import CalendarHeader from './CalendarHeader';
@@ -82,37 +88,86 @@ const parsedScheduleData = scheduleData.map((schedule) => ({
   endTime: new Date(schedule.endTime), // Date로 변환
 }));
 
+//setStartDate(new Date(slotInfo.start.getTime() - slotInfo.start.getTimezoneOffset() * 60000).toISOString());
 const CalendarLayout = () => {
+  const [isMobile, setIsMobile] = useState(false); //모바일 버전인지 체크
+  const [sidebarOpen, setSidebarOpen] = useState(false); //모바일 버전에서 사이드바 열고닫기
+  const [overlayVisible, setOverlayVisible] = useState(false); //모바일 버전에서 사이드바 오버레이
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsMobile(false);
+        setSidebarOpen(true);
+      } else {
+        setIsMobile(true);
+        setSidebarOpen(false);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+    setOverlayVisible(!overlayVisible);
+  };
+
   const formats = {
     dateFormat: 'd',
     weekdayFormat: (date: Date) => format(date, 'EEEE'),
   };
 
   return (
-    <div className={styles.calendarView}>
-      <CalendarSidebar />
-      <div className={styles.calendarBox}>
-        <CustomCalendar>
-          <Calendar<Schedule>
-            localizer={localizer}
-            events={parsedScheduleData}
-            startAccessor='startTime'
-            endAccessor='endTime'
-            selectable
-            // onSelectSlot={handleSelectSlot}
-            // onSelectEvent={onSelectEvent}
-            views={['month']}
-            defaultView='month'
-            popup
-            components={{
-              toolbar: CalendarHeader,
-              eventWrapper: CalendarEvent,
-            }}
-            formats={formats}
+    <>
+      {isMobile && (
+        <MenuSVG
+          width={20}
+          height={20}
+          fill='#B4BDEE'
+          className={styles.menuIcon}
+          onClick={toggleSidebar}
+        />
+      )}
+      <div className={styles.calendarView}>
+        <CalendarSidebar
+          sidebarOpen={sidebarOpen}
+          toggleSidebar={toggleSidebar}
+        />
+        {isMobile && (
+          <div
+            className={`${styles.overlay} ${overlayVisible ? styles.show : ''}`}
+            onClick={toggleSidebar}
           />
-        </CustomCalendar>
+        )}
+        <div className={styles.calendarBox}>
+          <CustomCalendar>
+            <Calendar<Schedule>
+              localizer={localizer}
+              events={parsedScheduleData}
+              startAccessor='startTime'
+              endAccessor='endTime'
+              selectable
+              // onSelectSlot={(slot) => { setSelectedDate(new Date(slot.start.getTime() - slot.start.getTimezoneOffset() * 60000).toISOString()); }}  // 선택된 날짜 상태 업데이트
+              views={['month']}
+              defaultView='month'
+              popup
+              components={{
+                toolbar: CalendarHeader,
+                eventWrapper: CalendarEvent,
+                // dateCellWrapper: (props) => <AddModalController {...props} selectedDate={selectedDate} />,  // selectedDate를 함께 전달
+              }}
+              formats={formats}
+            />
+          </CustomCalendar>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

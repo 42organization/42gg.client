@@ -2,7 +2,7 @@
 @import '~react-big-calendar/lib/sass/styles';
 
 .calendarBody {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   padding: 1.5rem;
   background: linear-gradient(#f4f5fb, #e8ebfc);
@@ -14,6 +14,7 @@
   max-width: 100%;
   height: 100%;
   flex-direction: row;
+  overflow: hidden;
   background-color: #f9f9fc;
   border-radius: 0.5rem;
 }
@@ -28,4 +29,37 @@
   box-shadow: 0 0 10px #ebedf6;
   justify-content: center;
   align-items: center;
+}
+
+/* 오버레이 스타일 */
+.overlay {
+  position: fixed; /* 화면 전체 덮기 */
+  top: 0;
+  left: 0;
+  z-index: 5; /* 사이드바보다 아래에 */
+  display: none; /* 기본적으로 숨김 */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2); /* 반투명 검정색 배경 */
+  opacity: 0;
+  transition: opacity 0.3s ease; /* 페이드 인/아웃 효과 */
+}
+
+/* 오버레이가 활성화되면 display: block, opacity: 1로 변경 */
+.overlay.show {
+  display: block;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .calendarBody {
+    padding: 0.5rem;
+  }
+  .calendarView {
+    height: 95%;
+  }
+  .calendarBox {
+    width: 100%;
+    margin: 0;
+  }
 }

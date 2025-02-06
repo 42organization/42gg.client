@@ -6,6 +6,7 @@ const CustomCalendar = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
 
   .rbc-calendar {
     width: 95%;
@@ -73,6 +74,19 @@ const CustomCalendar = styled.div`
   .rbc-button-link {
     text-indent: 5px;
     font-size: 14px;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .rbc-calendar {
+      padding: 1rem;
+      width: 100%;
+      height: 100%;
+    }
+
+    .rbc-date-cell {
+      padding: 5px 0 0 2px;
+    }
   }
 `;
 

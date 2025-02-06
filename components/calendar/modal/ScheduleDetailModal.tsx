@@ -66,7 +66,7 @@ const ScheduleDetailModal = ({
           </div>
         </div>
         <div className={styles.importButton}>
-          <p>몇명 담음!</p>
+          <p>{schedule.sharedCount}명 담음!</p>
           <div className={styles.button}>가져오기</div>
         </div>
       </div>

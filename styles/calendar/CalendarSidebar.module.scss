@@ -1,4 +1,6 @@
-.sidebar {
+.sidebarOpen {
+  position: relative;
+  z-index: 10;
   width: 16rem;
   background-color: white;
   border-top-left-radius: 0.5rem;
@@ -6,6 +8,7 @@
   border-bottom-right-radius: 0.7rem;
   border-bottom-left-radius: 0.5rem;
 }
+
 .profile {
   display: flex;
   width: 100%;
@@ -40,4 +43,21 @@
   display: flex;
   flex-direction: column;
   padding-left: 4rem;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute; /* 화면 밖으로 사이드바를 숨기기 */
+    top: 0;
+    left: -16rem; /* 사이드바를 왼쪽으로 숨김 */
+    transition: transform 0.3s ease; /* 애니메이션 효과 */
+  }
+
+  .sidebarOpen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 13rem;
+    height: 100%;
+  }
 }

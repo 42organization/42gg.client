@@ -42,12 +42,12 @@ interface GroupSelectProps {
   setSelectedGroup: (group: CustomGroup) => void;
 }
 
-const GroupSelect: React.FC<GroupSelectProps> = ({
+const GroupSelect = ({
   isDropdown,
   setIsDropdown,
   selectedGroup,
   setSelectedGroup,
-}) => {
+}: GroupSelectProps) => {
   return (
     <div className={styles.dropdown}>
       {groupList.map((group) => (
