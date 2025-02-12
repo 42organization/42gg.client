@@ -2,14 +2,11 @@ import React from 'react';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import styles from 'styles/calendar/CalendarEvent.module.scss';
 import CalendarEventContent from './CalendarEventContent';
+import { useCalendarModal } from './modal/useCalendarModal';
 
-const CalendarEvent = ({
-  event,
-  children,
-}: {
-  event: Schedule;
-  children: React.ReactNode;
-}) => {
+const CalendarEvent = ({ event }: { event: Schedule }) => {
+  const { openModal } = useCalendarModal();
+
   return (
     <div
       className={styles.eventBox}
@@ -24,6 +21,7 @@ const CalendarEvent = ({
           }`,
         } as React.CSSProperties
       }
+      onClick={() => openModal({ type: 'detail', schedule: event })}
     >
       <CalendarEventContent schedule={event} />
     </div>

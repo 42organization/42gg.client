@@ -1,11 +1,15 @@
 .bubbleModal {
-  position: relative;
+  position: absolute;
+  z-index: 5;
   width: 400px;
   padding: 25px 30px;
+  overflow: visible;
   background: white;
   // top: 100px;
   border-radius: 35px;
+  box-shadow: rgba(99, 99, 99, 0.2) 2px 6px 6px 2px;
   justify-content: center;
+  align-items: center;
 }
 
 // .bubbleModal::before {

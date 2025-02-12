@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CustomGroup } from 'types/calendar/customGroupType';
+import { Schedule } from 'types/calendar/scheduleTypes';
 import styles from 'styles/calendar/modal/GroupSelect.module.scss';
 
 const groupList: CustomGroup[] = [
@@ -38,26 +39,31 @@ const groupList: CustomGroup[] = [
 interface GroupSelectProps {
   isDropdown: boolean;
   setIsDropdown: (value: boolean) => void;
-  selectedGroup: CustomGroup;
-  setSelectedGroup: (group: CustomGroup) => void;
+  schedule: Schedule;
+  setSchedule: (value: Schedule) => void;
 }
 
+//백엔드에서 그룹 목록 get해오는 로직 필요
 const GroupSelect = ({
   isDropdown,
   setIsDropdown,
-  selectedGroup,
-  setSelectedGroup,
+  schedule,
+  setSchedule,
 }: GroupSelectProps) => {
+  const handleGroupChange = (group: CustomGroup) => {
+    schedule.groupId = group.id;
+    schedule.groupTitle = group.title;
+    schedule.groupColor = group.backgroundColor;
+    setIsDropdown(false);
+  };
+
   return (
     <div className={styles.dropdown}>
       {groupList.map((group) => (
         <div
           key={group.id}
           className={styles.groupItem}
-          onClick={() => {
-            setSelectedGroup(group);
-            setIsDropdown(false);
-          }}
+          onClick={() => handleGroupChange(group)}
         >
           <div className={styles.groupItem}>
             <div

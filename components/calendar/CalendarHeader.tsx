@@ -1,7 +1,9 @@
 import Image from 'next/image';
+import React from 'react';
 import styles from 'styles/calendar/CalendarHeader.module.scss';
 
-const CalendarHeader = (props) => {
+
+function CalendarHeader(props) {
   const { date } = props;
 
   // 날짜를 "Month Year" 형식으로 포맷
@@ -37,6 +39,6 @@ const CalendarHeader = (props) => {
       />
     </div>
   );
-};
+}
 
 export default CalendarHeader;

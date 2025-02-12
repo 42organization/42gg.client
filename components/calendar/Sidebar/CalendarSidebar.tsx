@@ -1,17 +1,7 @@
-import Image from 'next/image';
 import styles from 'styles/calendar/CalendarSidebar.module.scss';
 import AccordianMenu from './AccordianMenu';
 
-interface CalendarSidebarProps {
-  sidebarOpen: boolean;
-  toggleSidebar: () => void;
-}
-
-const CalendarSidebar = ({
-  sidebarOpen,
-  toggleSidebar,
-}: CalendarSidebarProps) => {
-  console.log(sidebarOpen);
+const CalendarSidebar = (sidebarOpen: boolean) => {
   return (
     <div className={sidebarOpen ? styles.sidebarOpen : styles.sidebar}>
       <div className={styles.profile}>

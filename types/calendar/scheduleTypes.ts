@@ -33,3 +33,8 @@ export interface PrivateSchedule extends Schedule {
   groupTitle?: string;
   groupColor?: string;
 }
+
+export interface ScheduleProps {
+  selecedSchedule: Schedule;
+  setSelecedSchedule: (schedule: Schedule) => void;
+}
