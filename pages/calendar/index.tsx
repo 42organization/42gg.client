@@ -1,7 +1,7 @@
 import { format, parse, startOfWeek, getDay } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
 import { NextPage } from 'next';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , Children, cloneElement } from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import CalendarEvent from 'components/calendar/CalendarEvent';
@@ -84,18 +84,26 @@ const parsedScheduleData = scheduleData.map((schedule) => ({
   endTime: new Date(schedule.endTime), // Date로 변환
 }));
 
+const TouchCellWrapper = ({ children, value, onSelectSlot }) =>
+  cloneElement(Children.only(children), {
+    onTouchEnd: () => onSelectSlot({ action: 'click', slots: [value] }),
+    style: {
+      className: `${children}`,
+    },
+  });
+
 const CalendarPage: NextPage = () => {
-  const [isMobile, setIsMobile] = useState(false); //모바일 버전인지 체크
-  const [sidebarOpen, setSidebarOpen] = useState(false); //모바일 버전에서 사이드바 열고닫기
-  const [overlayVisible, setOverlayVisible] = useState(false); //모바일 버전에서 사이드바 오버레이
-  const [selectedSlot, setSelectedSlot] = useState(''); //선택된 날짜
+  const [isMobile, setIsMobile] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [overlayVisible, setOverlayVisible] = useState(false);
   const { openModal, isOpen } = useCalendarModal();
 
-  const handleSelectSlot = () => {
-    if (isOpen) {
-      return;
+  const handleSelectSlot = ({ action, slots /*, ...props */ }) => {
+    if (!isOpen) {
+      console.log('click');
+      openModal({ type: 'AddSelect' });
     }
-    openModal({ type: 'AddSelect' });
+    return false;
   };
 
   useEffect(() => {
@@ -139,10 +147,7 @@ const CalendarPage: NextPage = () => {
         />
       )}
       <div className={styles.calendarView}>
-        <CalendarSidebar
-          sidebarOpen={sidebarOpen}
-          toggleSidebar={toggleSidebar}
-        />
+        <CalendarSidebar sidebarOpen={sidebarOpen} />
         {isMobile && (
           <div
             className={`${styles.overlay} ${overlayVisible ? styles.show : ''}`}
@@ -164,6 +169,12 @@ const CalendarPage: NextPage = () => {
               components={{
                 toolbar: CalendarHeader,
                 eventWrapper: CalendarEvent,
+                dateCellWrapper: (props) => (
+                  <TouchCellWrapper
+                    {...props}
+                    onSelectSlot={handleSelectSlot}
+                  />
+                ),
               }}
               formats={formats}
             />

@@ -44,32 +44,37 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
         <CloseSVG width={9} height={9} onClick={closeModal} />
       </div>
       <div className={styles.modalContent}>
-        <div
-          className={styles.groupIndex}
-          style={{
-            backgroundColor: schedule?.groupId
-              ? schedule?.groupColor
-              : schedule?.classification === 'EVENT'
-              ? '#785AD2'
-              : '#A98CFF',
-          }}
-        />
-        <div className={styles.scheduleInfo}>
-          <div className={styles.title}>{schedule?.title}</div>
-          <div className={styles.date}>
-            {schedule?.startTime && schedule?.endTime
-              ? getPeriod(schedule?.startTime, schedule?.endTime)
-              : ''}
-          </div>
-          <div className={styles.content}>{schedule?.content}</div>
-          <div className={styles.link}>
-            <LinkSVG width={6} height={7} stroke='#785AD2' />
-            <Link href={schedule?.link || '#'}>{schedule?.link}</Link>
+        <div className={styles.scheduleInfoContainer}>
+          <div
+            className={styles.groupIndex}
+            style={{
+              backgroundColor: schedule?.groupId
+                ? schedule?.groupColor
+                : schedule?.classification === 'EVENT'
+                ? '#785AD2'
+                : '#A98CFF',
+            }}
+          />
+          <div className={styles.scheduleInfo}>
+            <div className={styles.title}>{schedule?.title}</div>
+            <div className={styles.date}>
+              {schedule?.startTime && schedule?.endTime
+                ? getPeriod(schedule?.startTime, schedule?.endTime)
+                : ''}
+            </div>
+            <div className={styles.content}>{schedule?.content}</div>
+            <div className={styles.link}>
+              <LinkSVG width={10} height={10} stroke='#785AD2' />
+              <Link href={schedule?.link || '#'}>{schedule?.link}</Link>
+            </div>
           </div>
         </div>
-        <div className={styles.importButton}>
-          <p>{schedule?.sharedCount}명 담음!</p>
-          <div className={styles.button}>가져오기</div>
+        <div className={styles.importButtonContainer}>
+          <div className={styles.importButtonDevider}></div>
+          <div className={styles.importButton}>
+            <p>{schedule?.sharedCount ? schedule?.sharedCount : 0}명 담음!</p>
+            <div className={styles.button}>가져오기</div>
+          </div>
         </div>
       </div>
     </div>
