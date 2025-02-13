@@ -25,5 +25,26 @@
   width: 24px;
   height: 24px;
   margin-right: 4px;
+  text-align: center;
   border-radius: 3px;
+  flex-shrink: 0;
+  align-content: center;
+}
+
+.groupAddInput {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: #785ad2;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.groupAddInput::placeholder {
+  font-weight: 300;
+  color: #b4bdee;
 }

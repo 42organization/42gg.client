@@ -103,7 +103,7 @@ const AccordianMenu = () => {
           onClick={handleClickPrivateSchedule}
         />
         <p>개인일정</p>
-        <EditSVG stroke='#C1C8F0' width={11} height={12} />
+        <EditSVG stroke='#C1C8F0' width={16} height={17} />
       </div>
       {isOpenPrivateSchedule && (
         <div className={styles.accordianContent}>

@@ -26,13 +26,13 @@
 
 .accordianMenu {
   display: flex;
-  padding-left: 2rem;
+  padding: 0 40px;
   color: #c1c8f0;
   align-items: center;
   justify-content: flex-start;
   p {
-    padding-right: 5em;
-    padding-left: 1rem;
+    width: 100%;
+    padding-left: 15px;
     font-size: 15px;
     color: #785ad2;
   }

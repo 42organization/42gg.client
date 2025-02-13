@@ -1,6 +1,7 @@
 import React from 'react';
 import { CustomGroup } from 'types/calendar/customGroupType';
 import { Schedule } from 'types/calendar/scheduleTypes';
+import PlusSVG from 'public/image/calendar/plusIcon.svg';
 import styles from 'styles/calendar/modal/GroupSelect.module.scss';
 
 const groupList: CustomGroup[] = [
@@ -74,6 +75,28 @@ const GroupSelect = ({
           </div>
         </div>
       ))}
+      <div className={styles.groupItem}>
+        <div
+          className={styles.groupColor}
+          style={{ backgroundColor: '#B4BDEE' }}
+        >
+          <PlusSVG width={12} height={12} stroke={'#ffffff'} />
+        </div>
+        <input
+          type='text'
+          name='grupTitle'
+          placeholder='그룹 추가'
+          className={styles.groupAddInput}
+          onClick={(e) => {
+            e.stopPropagation(); // 클릭 시 드롭다운 꺼지는거 방지
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              // 그룹 추가 로직 필요
+            }
+          }}
+        />
+      </div>
     </div>
   );
 };
