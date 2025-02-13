@@ -25,7 +25,7 @@ const CustomCalendar = styled.div`
   }
 
   .rbc-header span {
-    font-size: 12px;
+    font-size: 14px;
     color: #505050;
   }
 
@@ -38,6 +38,10 @@ const CustomCalendar = styled.div`
     border-right: none;
     border-top: 1px solid #e8ebfc;
     border-bottom: 1px solid #e8ebfc;
+  }
+
+  .rbc-month-row {
+    min-height: 100px;
   }
 
   .rbc-month-row + .rbc-month-row {
@@ -75,6 +79,13 @@ const CustomCalendar = styled.div`
     text-indent: 5px;
     font-size: 14px;
     pointer-events: none;
+  }
+
+  .rbc-row-segment button {
+    font-size: 13px;
+    font-weight: 300;
+    color: #505050;
+    padding-left: 3px;
   }
 
   @media (max-width: 768px) {

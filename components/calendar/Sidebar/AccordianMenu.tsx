@@ -71,7 +71,7 @@ const AccordianMenu = () => {
             sx={{
               '& .MuiFormControlLabel-label': {
                 color: '#785AD2',
-                fontSize: '10px',
+                fontSize: '14px',
               },
             }}
           />
@@ -88,7 +88,7 @@ const AccordianMenu = () => {
             sx={{
               '& .MuiFormControlLabel-label': {
                 color: '#A98CFF',
-                fontSize: '10px',
+                fontSize: '14px',
               },
             }}
           />
@@ -125,7 +125,7 @@ const AccordianMenu = () => {
               sx={{
                 '& .MuiFormControlLabel-label': {
                   color: group.color,
-                  fontSize: '10px',
+                  fontSize: '14px',
                 },
               }}
             />

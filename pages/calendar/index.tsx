@@ -1,7 +1,7 @@
 import { format, parse, startOfWeek, getDay } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
 import { NextPage } from 'next';
-import React, { useState, useEffect , Children, cloneElement } from 'react';
+import React, { useState, useEffect, Children, cloneElement } from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import CalendarEvent from 'components/calendar/CalendarEvent';
@@ -57,8 +57,8 @@ const scheduleData: Schedule[] = [
     title: 'PRIVATE test',
     content: 'string',
     link: 'string',
-    startTime: '2025-01-28T06:28:46.655Z',
-    endTime: '2025-01-28T06:28:46.655Z',
+    startTime: '2025-02-06T06:28:46.655Z',
+    endTime: '2025-02-06T06:28:46.655Z',
     groupId: 1,
     groupTitle: 'group-test',
     groupColor: '#7DC163',
