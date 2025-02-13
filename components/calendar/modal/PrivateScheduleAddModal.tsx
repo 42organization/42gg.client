@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { CustomGroup } from 'types/calendar/customGroupType';
 import { calendarModalProps } from 'types/calendar/modalTypes';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import DownSVG from 'public/image/calendar/downToggle.svg';
 import LinkSVG from 'public/image/calendar/linkIcon.svg';
 import styles from 'styles/calendar/modal/PrivateScheduleAddModal.module.scss';
+import CustomDatepicker from './CustomDatepicker';
 import GroupSelect from './GroupSelect';
 import { useCalendarModal } from './useCalendarModal';
 
@@ -15,6 +15,7 @@ import { useCalendarModal } from './useCalendarModal';
 //등록버튼 클릭 시 일정 저장하는 로직 필요
 const PrivateScheduleAddModal = (props: calendarModalProps) => {
   const [isDropdown, setIsDropdown] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { closeModal } = useCalendarModal();
 
   //기존 스케줄
@@ -42,6 +43,23 @@ const PrivateScheduleAddModal = (props: calendarModalProps) => {
           endTime: new Date().toISOString(),
         }
   );
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    handleResize(); // 초기 실행
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -107,33 +125,41 @@ const PrivateScheduleAddModal = (props: calendarModalProps) => {
       <div className={styles.divider} />
       <div className={styles.date}>
         <div className={styles.datePickerContainer}>
-          <DatePicker
-            selected={new Date(scheduleData.startTime)}
-            name='startTime'
-            showTimeSelect
-            timeFormat='HH:mm'
-            dateFormat='yyyy.MM.dd HH시 mm분'
-            timeIntervals={30}
-            onChange={(date) => {
-              handleDateChange('startTime', date as Date);
-            }}
-            className={styles.datePicker}
-          />
+          <CustomDatepicker>
+            <DatePicker
+              selected={new Date(scheduleData.startTime)}
+              name='startTime'
+              showTimeSelect
+              timeFormat='HH:mm'
+              dateFormat={
+                isMobile ? 'yyyy.MM.dd HH시 mm분부터' : 'yyyy.MM.dd HH시 mm분'
+              }
+              timeIntervals={30}
+              onChange={(date) => {
+                handleDateChange('startTime', date as Date);
+              }}
+              className={styles.datePicker}
+            />
+          </CustomDatepicker>
         </div>
         <span>-</span>
         <div className={styles.datePickerContainer}>
-          <DatePicker
-            selected={new Date(scheduleData.endTime)}
-            name='endTime'
-            showTimeSelect
-            timeFormat='HH:mm'
-            dateFormat='yyyy.MM.dd HH시 mm분'
-            timeIntervals={30}
-            onChange={(date) => {
-              handleDateChange('endTime', date as Date);
-            }}
-            className={styles.datePickerEnd}
-          />
+          <CustomDatepicker>
+            <DatePicker
+              selected={new Date(scheduleData.endTime)}
+              name='endTime'
+              showTimeSelect
+              timeFormat='HH:mm'
+              dateFormat={
+                isMobile ? 'yyyy.MM.dd HH시 mm분까지' : 'yyyy.MM.dd HH시 mm분'
+              }
+              timeIntervals={30}
+              onChange={(date) => {
+                handleDateChange('endTime', date as Date);
+              }}
+              className={styles.datePickerEnd}
+            />
+          </CustomDatepicker>
         </div>
       </div>
       <div className={styles.divider} />

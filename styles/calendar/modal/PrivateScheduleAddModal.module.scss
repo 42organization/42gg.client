@@ -177,3 +177,43 @@
   border-radius: 0.5rem;
   justify-items: center;
 }
+
+@media (max-width: 768px) {
+  .bubbleModal {
+    width: 250px;
+  }
+
+  .titleContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .titleContainer .groupSelect {
+    order: 1;
+    margin-bottom: 10px;
+  }
+
+  .titleContainer input {
+    order: 2;
+  }
+
+  .date {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+  }
+
+  .date span {
+    display: none;
+  }
+
+  .date input {
+    width: 188px;
+  }
+
+  .datePickerEnd {
+    text-align: left;
+  }
+}
