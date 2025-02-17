@@ -1,6 +1,6 @@
 .sidebarOpen {
   position: relative;
-  width: 16rem;
+  min-width: 250px;
   background-color: white;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.7rem;
@@ -21,7 +21,6 @@
   height: 1px;
   margin: 0.5rem 0;
   border-bottom: 1px solid #b4bdee;
-  // border-bottom: var(--default-border);
 }
 
 .accordianMenu {
@@ -41,7 +40,22 @@
 .accordianContent {
   display: flex;
   flex-direction: column;
-  padding-left: 4rem;
+  padding: 0 40px 0 65px;
+}
+
+.groupInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.groupField {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid #000000;
+  outline: none;
 }
 
 @media (max-width: 768px) {

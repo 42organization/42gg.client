@@ -6,14 +6,15 @@ const CustomCalendar = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: relative;
 
   .rbc-calendar {
     width: 95%;
-    height: 90%;
+    height: 100%;
     background-color: white;
-    position: relative;
     padding: 2rem 1rem 1rem 1rem;
+    position: absolute;
+    overflow: auto;
   }
 
   .rbc-header {

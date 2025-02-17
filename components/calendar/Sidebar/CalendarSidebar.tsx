@@ -6,6 +6,7 @@ interface CalendarSidebarProps {
   sidebarOpen: boolean;
 }
 
+//프로필 부분 작업 필요
 const CalendarSidebar = ({ sidebarOpen }: CalendarSidebarProps) => {
   return (
     <div className={sidebarOpen ? styles.sidebarOpen : styles.sidebarClose}>
