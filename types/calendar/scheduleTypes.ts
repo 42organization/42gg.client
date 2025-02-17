@@ -18,22 +18,6 @@ export interface Schedule {
   groupColor?: string; //개인일정
 }
 
-export interface PublicSchedule extends Schedule {
-  eventTag?: string;
-  jobTag?: string;
-  techTag?: string;
-  author?: string;
-  sharedCount?: number;
-  status?: string;
-}
-
-export interface PrivateSchedule extends Schedule {
-  alarm?: true;
-  groupId?: number;
-  groupTitle?: string;
-  groupColor?: string;
-}
-
 export interface ScheduleProps {
   selecedSchedule: Schedule;
   setSelecedSchedule: (schedule: Schedule) => void;

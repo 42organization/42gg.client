@@ -5,7 +5,7 @@ import { calendarModalProps } from 'types/calendar/modalTypes';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import DownSVG from 'public/image/calendar/downToggle.svg';
 import LinkSVG from 'public/image/calendar/linkIcon.svg';
-import styles from 'styles/calendar/modal/PrivateScheduleAddModal.module.scss';
+import styles from 'styles/calendar/modal/PrivateScheduleUpsertModal.module.scss';
 import CustomDatepicker from './CustomDatepicker';
 import GroupSelect from './GroupSelect';
 import { useCalendarModal } from './useCalendarModal';
@@ -13,7 +13,7 @@ import { useCalendarModal } from './useCalendarModal';
 //nowGroup 부분 -> 일정 추가일시 groupid:1인 그룹이 기본으로 설정되어 있도록 하는 로직 필요(그룹 불러오기)
 //모달 바깥 클릭했을때(모달 꺼졌을 때) 수정/추가한 것 취소 로직 필요
 //등록버튼 클릭 시 일정 저장하는 로직 필요
-const PrivateScheduleAddModal = (props: calendarModalProps) => {
+const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
   const [isDropdown, setIsDropdown] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { closeModal } = useCalendarModal();
@@ -195,4 +195,4 @@ const PrivateScheduleAddModal = (props: calendarModalProps) => {
   );
 };
 
-export default PrivateScheduleAddModal;
+export default PrivateScheduleUpsertModal;

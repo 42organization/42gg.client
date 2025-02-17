@@ -84,7 +84,15 @@ const parsedScheduleData = scheduleData.map((schedule) => ({
   endTime: new Date(schedule.endTime), // Date로 변환
 }));
 
-const TouchCellWrapper = ({ children, value, onSelectSlot }) =>
+const TouchCellWrapper = ({
+  children,
+  value,
+  onSelectSlot,
+}: {
+  children: React.ReactElement;
+  value: any;
+  onSelectSlot: (slotInfo: { action: string; slots: Date[] }) => void;
+}) =>
   cloneElement(Children.only(children), {
     onTouchEnd: () => onSelectSlot({ action: 'click', slots: [value] }),
     style: {
@@ -98,10 +106,18 @@ const CalendarPage: NextPage = () => {
   const [overlayVisible, setOverlayVisible] = useState(false);
   const { openModal, isOpen } = useCalendarModal();
 
-  const handleSelectSlot = ({ action, slots /*, ...props */ }) => {
+  const handleSelectSlot = ({ slots }: { slots: any }) => {
     if (!isOpen) {
-      console.log('click');
-      openModal({ type: 'AddSelect' });
+      openModal({
+        type: 'AddSelect',
+        schedule: {
+          startTime: slots[0],
+          title: '',
+          content: '',
+          link: '',
+          endTime: slots[slots.length - 1],
+        },
+      });
     }
     return false;
   };

@@ -2,7 +2,7 @@ import { useRecoilState } from 'recoil';
 import { calendarModalState } from 'utils/recoil/calendar/modalState';
 import styles from 'styles/calendar/modal/CalendarModalProvider.module.scss';
 import AddSelect from './AddSelect';
-import PrivateScheduleAddModal from './PrivateScheduleAddModal';
+import PrivateScheduleUpsertModal from './PrivateScheduleUpsertModal';
 import ScheduleDetailModal from './ScheduleDetailModal';
 import { useCalendarModal } from './useCalendarModal';
 
@@ -20,7 +20,7 @@ const CalendarModalProvider = () => {
         modalContent = <AddSelect {...modalProps} />;
         break;
       case 'PrivateUpsert':
-        modalContent = <PrivateScheduleAddModal {...modalProps} />;
+        modalContent = <PrivateScheduleUpsertModal {...modalProps} />;
         break;
       default:
         modalContent = null;
