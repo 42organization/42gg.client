@@ -175,8 +175,12 @@ const CalendarPage: NextPage = () => {
             <Calendar<Schedule>
               localizer={localizer}
               events={scheduleData}
-              startAccessor='startTime'
-              endAccessor='endTime'
+              startAccessor={(event) => {
+                return new Date(event.startTime);
+              }}
+              endAccessor={(event) => {
+                return new Date(event.endTime);
+              }}
               selectable
               onSelectSlot={handleSelectSlot}
               views={['month']}
