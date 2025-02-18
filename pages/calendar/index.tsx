@@ -174,7 +174,7 @@ const CalendarPage: NextPage = () => {
           <CustomCalendar>
             <Calendar<Schedule>
               localizer={localizer}
-              events={parsedScheduleData}
+              events={scheduleData}
               startAccessor='startTime'
               endAccessor='endTime'
               selectable
