@@ -152,32 +152,6 @@
   width: 100%;
 }
 
-.buttonInactive {
-  width: 124px;
-  padding: 0.25rem 0.5rem;
-  margin: 20px 0 0;
-  font-size: 16px;
-  font-weight: 500;
-  color: white;
-  text-align: center;
-  background-color: #c1c8f0;
-  border-radius: 0.5rem;
-  justify-items: center;
-}
-
-.buttonActive {
-  width: 124px;
-  padding: 0.25rem 0.5rem;
-  margin: 20px 0 0;
-  font-size: 16px;
-  font-weight: 500;
-  color: white;
-  text-align: center;
-  background-color: #785ad2;
-  border-radius: 0.5rem;
-  justify-items: center;
-}
-
 @media (max-width: 768px) {
   .bubbleModal {
     width: 250px;

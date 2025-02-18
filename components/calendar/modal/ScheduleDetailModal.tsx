@@ -8,6 +8,7 @@ import LinkSVG from 'public/image/calendar/linkIcon.svg';
 import DeleteSVG from 'public/image/calendar/trashIcon.svg';
 import styles from 'styles/calendar/modal/ScheduleDetailModal.module.scss';
 import { useCalendarModal } from './useCalendarModal';
+import SubmitButton from '../button/SubmitButton';
 
 const parseDate = (data: string) => {
   const date = new Date(data);
@@ -73,7 +74,7 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
           <div className={styles.importButtonDevider}></div>
           <div className={styles.importButton}>
             <p>{schedule?.sharedCount ? schedule?.sharedCount : 0}명 담음!</p>
-            <div className={styles.button}>가져오기</div>
+            <SubmitButton type='import' label='가져오기' onClick={closeModal} />
           </div>
         </div>
       </div>

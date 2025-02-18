@@ -9,6 +9,7 @@ import styles from 'styles/calendar/modal/PrivateScheduleUpsertModal.module.scss
 import CustomDatepicker from './CustomDatepicker';
 import GroupSelect from './GroupSelect';
 import { useCalendarModal } from './useCalendarModal';
+import SumbitButton from '../button/SubmitButton';
 
 //nowGroup 부분 -> 일정 추가일시 groupid:1인 그룹이 기본으로 설정되어 있도록 하는 로직 필요(그룹 불러오기)
 //모달 바깥 클릭했을때(모달 꺼졌을 때) 수정/추가한 것 취소 로직 필요
@@ -180,16 +181,15 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
       </div>
       <div className={styles.divider} />
       <div className={styles.buttonContainer}>
-        <div
-          className={
+        <SumbitButton
+          type={
             scheduleData.title && scheduleData.content
-              ? styles.buttonActive
-              : styles.buttonInactive
+              ? 'submitActive'
+              : 'submitInactive'
           }
+          label='등록'
           onClick={closeModal}
-        >
-          등록
-        </div>
+        />
       </div>
     </div>
   );
