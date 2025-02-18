@@ -2,19 +2,26 @@ import Image from 'next/image';
 import React from 'react';
 import styles from 'styles/calendar/CalendarHeader.module.scss';
 
-
-function CalendarHeader(props) {
+function CalendarHeader(props: { onNavigate?: any; date?: any }) {
   const { date } = props;
 
   // 날짜를 "Month Year" 형식으로 포맷
   const getFormattedDate = () => {
-    const options = { month: 'long', year: 'numeric' };
+    const options: Intl.DateTimeFormatOptions = {
+      month: 'long',
+      year: 'numeric',
+    };
     return new Intl.DateTimeFormat('en-US', options).format(date);
   };
 
   // 네비게이션 함수
-  const navigate = (action) => {
-    props.onNavigate(action);
+  interface CalendarHeaderProps {
+    onNavigate?: (action: string) => void;
+    date?: Date;
+  }
+
+  const navigate = (action: 'PREV' | 'NEXT') => {
+    props.onNavigate?.(action);
   };
 
   return (
