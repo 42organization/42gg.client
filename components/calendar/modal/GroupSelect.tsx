@@ -3,6 +3,7 @@ import { CustomGroup } from 'types/calendar/customGroupType';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import PlusSVG from 'public/image/calendar/plusIcon.svg';
 import styles from 'styles/calendar/modal/GroupSelect.module.scss';
+import ColorButton from '../button/ColorButton';
 
 const groupList: CustomGroup[] = [
   {
@@ -67,9 +68,9 @@ const GroupSelect = ({
           onClick={() => handleGroupChange(group)}
         >
           <div className={styles.groupItem}>
-            <div
-              className={styles.groupColor}
-              style={{ backgroundColor: group.backgroundColor }}
+            <ColorButton
+              color={group.backgroundColor}
+              onClick={() => handleGroupChange(group)}
             />
             <div>{group.title}</div>
           </div>

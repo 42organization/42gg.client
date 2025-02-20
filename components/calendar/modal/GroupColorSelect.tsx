@@ -1,4 +1,5 @@
 import styles from 'styles/calendar/modal/GroupColorSelect.module.scss';
+import ColorButton from '../button/ColorButton';
 
 const colorList = [
   '#9C57BC',
@@ -21,14 +22,11 @@ const GroupColorSelect = ({
   return (
     <div className={styles.dropdown}>
       {colorList.map((color) => (
-        <div
+        <ColorButton
           key={color}
-          className={styles.color}
-          style={{ backgroundColor: color }}
-          onClick={() => {
-            setOpenDropdownId(0);
-          }}
-        ></div>
+          color={color}
+          onClick={() => setOpenDropdownId(0)}
+        />
       ))}
     </div>
   );
