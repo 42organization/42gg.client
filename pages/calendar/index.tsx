@@ -6,27 +6,13 @@ import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import { CustomGroup } from 'types/calendar/customGroupType';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import { Schedule } from 'types/calendar/scheduleTypes';
-import CalendarEvent from 'components/calendar/CalendarEvent';
-import CalendarHeader from 'components/calendar/CalendarHeader';
-import CustomCalendar from 'components/calendar/CustomCalendar';
+import CalendarLayout from 'components/calendar/CalendarLayout';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import CalendarModalProvider from 'components/calendar/modal/CalendarModalProvider';
 import { useCalendarModal } from 'components/calendar/modal/useCalendarModal';
 import CalendarSidebar from 'components/calendar/Sidebar/CalendarSidebar';
 import MenuSVG from 'public/image/calendar/menuIcon.svg';
 import styles from 'styles/calendar/Calendar.module.scss';
-
-const locales = {
-  'en-US': enUS,
-};
-
-const localizer = dateFnsLocalizer({
-  format,
-  parse,
-  startOfWeek: () => startOfWeek(new Date()),
-  getDay,
-  locales,
-});
 
 const scheduleData: Schedule[] = [
   {
@@ -89,33 +75,6 @@ const PublicGroupList: CustomGroup[] = [
     checked: true,
   },
 ];
-
-const parsedScheduleData = scheduleData.map((schedule) => ({
-  ...schedule,
-  startTime: new Date(schedule.startTime), // Date로 변환
-  endTime: new Date(schedule.endTime), // Date로 변환
-}));
-
-const TouchCellWrapper = ({
-  children,
-  value,
-  onSelectSlot,
-}: {
-  children: React.ReactElement;
-  value: any;
-  onSelectSlot: (slotInfo: { action: string; slots: Date[] }) => void;
-}) =>
-  cloneElement(Children.only(children), {
-    onTouchEnd: () => onSelectSlot({ action: 'click', slots: [value] }),
-    style: {
-      className: `${children}`,
-    },
-  });
-
-const formats = {
-  dateFormat: 'd',
-  weekdayFormat: (date: Date) => format(date, 'EEEE'),
-};
 
 const CalendarPage: NextPage = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -245,37 +204,13 @@ const CalendarPage: NextPage = () => {
             onClick={toggleSidebar}
           />
         )}
-        <div className={styles.calendarBox}>
-          <CustomCalendar>
-            <Calendar<Schedule>
-              localizer={localizer}
-              events={filterSchedules(scheduleData, filterList)}
-              startAccessor={(event) => {
-                return new Date(event.startTime);
-              }}
-              endAccessor={(event) => {
-                return new Date(event.endTime);
-              }}
-              selectable
-              onSelectSlot={handleSelectSlot}
-              views={['month']}
-              defaultView='month'
-              popup
-              components={{
-                toolbar: CalendarHeader,
-                eventWrapper: CalendarEvent,
-                dateCellWrapper: (props) => (
-                  <TouchCellWrapper
-                    {...props}
-                    onSelectSlot={handleSelectSlot}
-                  />
-                ),
-              }}
-              formats={formats}
-            />
-          </CustomCalendar>
-          <CalendarModalProvider />
-        </div>
+        <CalendarLayout
+          filterSchedules={filterSchedules}
+          handleSelectSlot={handleSelectSlot}
+          filterList={filterList}
+          scheduleData={scheduleData}
+        />
+        <CalendarModalProvider />
       </div>
     </div>
   );
