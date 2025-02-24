@@ -53,7 +53,7 @@ const GroupSelect = ({
   setSchedule,
 }: GroupSelectProps) => {
   const handleGroupChange = (group: CustomGroup) => {
-    schedule.groupId = group.id;
+    schedule.groupId = typeof group.id === 'number' ? group.id : 0;
     schedule.groupTitle = group.title;
     schedule.groupColor = group.backgroundColor;
     setIsDropdown(false);
