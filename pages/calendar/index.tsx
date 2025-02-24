@@ -3,6 +3,8 @@ import enUS from 'date-fns/locale/en-US';
 import { NextPage } from 'next';
 import React, { useState, useEffect, Children, cloneElement } from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
+import { CustomGroup } from 'types/calendar/customGroupType';
+import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import CalendarEvent from 'components/calendar/CalendarEvent';
 import CalendarHeader from 'components/calendar/CalendarHeader';
@@ -78,6 +80,16 @@ const scheduleData: Schedule[] = [
   },
 ];
 
+const PublicGroupList: CustomGroup[] = [
+  { id: 'EVENT', title: '42행사', backgroundColor: '#785AD2', checked: true },
+  {
+    id: 'JOB_NOTICE',
+    title: '취업공고',
+    backgroundColor: '#A98CFF',
+    checked: true,
+  },
+];
+
 const parsedScheduleData = scheduleData.map((schedule) => ({
   ...schedule,
   startTime: new Date(schedule.startTime), // Date로 변환
@@ -100,11 +112,29 @@ const TouchCellWrapper = ({
     },
   });
 
+const formats = {
+  dateFormat: 'd',
+  weekdayFormat: (date: Date) => format(date, 'EEEE'),
+};
+
 const CalendarPage: NextPage = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const { openModal, isOpen } = useCalendarModal();
+
+  const [privateGroupList, setPrivateGroupList] = useState<CustomGroup[]>([
+    { id: 1, title: 'group1', backgroundColor: '#7DC163', checked: true },
+    { id: 2, title: 'group2', backgroundColor: '#E99A45', checked: true },
+  ]); //GET 요청으로 받아올 그룹 리스트
+  const [filterList, setFilterList] = useState<ScheduleFilter>({
+    public: PublicGroupList.map((group) => group.id).filter(
+      (id): id is string => typeof id === 'string'
+    ),
+    private: privateGroupList
+      .map((group) => group.id)
+      .filter((id): id is number => typeof id === 'number'),
+  });
 
   const handleSelectSlot = ({ slots }: { slots: any }) => {
     if (!isOpen) {
@@ -146,9 +176,48 @@ const CalendarPage: NextPage = () => {
     setOverlayVisible(!overlayVisible);
   };
 
-  const formats = {
-    dateFormat: 'd',
-    weekdayFormat: (date: Date) => format(date, 'EEEE'),
+  const handleFilterChange = (
+    type: 'public' | 'private',
+    id: string | number
+  ) => {
+    setFilterList((prev) => {
+      if (type === 'public') {
+        let updatedPublic;
+
+        if (prev.public.includes(id as string)) {
+          updatedPublic = prev.public.filter((item) => item !== id);
+        } else {
+          updatedPublic = [...prev.public, id as string];
+        }
+
+        return {
+          ...prev,
+          public: updatedPublic,
+        };
+      } else {
+        if (prev.private.includes(id as number)) {
+          return {
+            ...prev,
+            private: prev.private.filter((item) => item !== id),
+          };
+        } else {
+          return { ...prev, private: [...prev.private, id as number] };
+        }
+      }
+    });
+  };
+
+  const filterSchedules = (
+    schedules: Schedule[],
+    filterList: ScheduleFilter
+  ) => {
+    return schedules.filter((schedule) => {
+      const isPublicMatch = schedule.classification
+        ? filterList.public.includes(schedule.classification)
+        : false;
+      const isPrivateMatch = filterList.private.includes(schedule.groupId!);
+      return isPublicMatch || isPrivateMatch;
+    });
   };
 
   return (
@@ -163,7 +232,13 @@ const CalendarPage: NextPage = () => {
         />
       )}
       <div className={styles.calendarView}>
-        <CalendarSidebar sidebarOpen={sidebarOpen} />
+        <CalendarSidebar
+          sidebarOpen={sidebarOpen}
+          publicGroups={PublicGroupList}
+          privateGroups={privateGroupList}
+          filter={filterList}
+          filterChange={handleFilterChange}
+        />
         {isMobile && (
           <div
             className={`${styles.overlay} ${overlayVisible ? styles.show : ''}`}
@@ -174,7 +249,7 @@ const CalendarPage: NextPage = () => {
           <CustomCalendar>
             <Calendar<Schedule>
               localizer={localizer}
-              events={scheduleData}
+              events={filterSchedules(scheduleData, filterList)}
               startAccessor={(event) => {
                 return new Date(event.startTime);
               }}
