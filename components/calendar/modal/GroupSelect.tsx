@@ -1,9 +1,9 @@
 import React from 'react';
 import { CustomGroup } from 'types/calendar/customGroupType';
 import { Schedule } from 'types/calendar/scheduleTypes';
+import ColorButton from 'components/calendar/button/ColorButton';
 import PlusSVG from 'public/image/calendar/plusIcon.svg';
 import styles from 'styles/calendar/modal/GroupSelect.module.scss';
-import ColorButton from '../button/ColorButton';
 
 const groupList: CustomGroup[] = [
   {

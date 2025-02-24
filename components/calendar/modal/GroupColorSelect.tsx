@@ -1,5 +1,5 @@
+import ColorButton from 'components/calendar/button/ColorButton';
 import styles from 'styles/calendar/modal/GroupColorSelect.module.scss';
-import ColorButton from '../button/ColorButton';
 
 const colorList = [
   '#9C57BC',
