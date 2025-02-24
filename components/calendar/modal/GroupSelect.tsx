@@ -1,11 +1,11 @@
 import React from 'react';
-import { CustomGroup } from 'types/calendar/customGroupType';
+import { ScheduleGroup } from 'types/calendar/groupType';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import ColorButton from 'components/calendar/button/ColorButton';
 import PlusSVG from 'public/image/calendar/plusIcon.svg';
 import styles from 'styles/calendar/modal/GroupSelect.module.scss';
 
-const groupList: CustomGroup[] = [
+const groupList: ScheduleGroup[] = [
   {
     id: 1,
     title: '기본',
@@ -52,7 +52,7 @@ const GroupSelect = ({
   schedule,
   setSchedule,
 }: GroupSelectProps) => {
-  const handleGroupChange = (group: CustomGroup) => {
+  const handleGroupChange = (group: ScheduleGroup) => {
     schedule.groupId = typeof group.id === 'number' ? group.id : 0;
     schedule.groupTitle = group.title;
     schedule.groupColor = group.backgroundColor;

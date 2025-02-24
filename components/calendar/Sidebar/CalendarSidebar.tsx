@@ -1,13 +1,13 @@
 import React from 'react';
-import { CustomGroup } from 'types/calendar/customGroupType';
+import { ScheduleGroup } from 'types/calendar/groupType';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import styles from 'styles/calendar/CalendarSidebar.module.scss';
 import AccordianItem from './AccordianItem';
 
 interface CalendarSidebarProps {
   sidebarOpen: boolean;
-  publicGroups: CustomGroup[];
-  privateGroups: CustomGroup[];
+  publicGroups: ScheduleGroup[];
+  privateGroups: ScheduleGroup[];
   filter: ScheduleFilter;
   filterChange: (type: 'public' | 'private', id: string | number) => void;
 }

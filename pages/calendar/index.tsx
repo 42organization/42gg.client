@@ -1,13 +1,9 @@
-import { format, parse, startOfWeek, getDay } from 'date-fns';
-import enUS from 'date-fns/locale/en-US';
 import { NextPage } from 'next';
-import React, { useState, useEffect, Children, cloneElement } from 'react';
-import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
-import { CustomGroup } from 'types/calendar/customGroupType';
+import React, { useState, useEffect } from 'react';
+import { ScheduleGroup } from 'types/calendar/groupType';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import CalendarLayout from 'components/calendar/CalendarLayout';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
 import CalendarModalProvider from 'components/calendar/modal/CalendarModalProvider';
 import { useCalendarModal } from 'components/calendar/modal/useCalendarModal';
 import CalendarSidebar from 'components/calendar/Sidebar/CalendarSidebar';
@@ -66,7 +62,7 @@ const scheduleData: Schedule[] = [
   },
 ];
 
-const PublicGroupList: CustomGroup[] = [
+const PublicGroupList: ScheduleGroup[] = [
   { id: 'EVENT', title: '42행사', backgroundColor: '#785AD2', checked: true },
   {
     id: 'JOB_NOTICE',
@@ -82,7 +78,7 @@ const CalendarPage: NextPage = () => {
   const [overlayVisible, setOverlayVisible] = useState(false);
   const { openModal, isOpen } = useCalendarModal();
 
-  const [privateGroupList, setPrivateGroupList] = useState<CustomGroup[]>([
+  const [privateGroupList, setPrivateGroupList] = useState<ScheduleGroup[]>([
     { id: 1, title: 'group1', backgroundColor: '#7DC163', checked: true },
     { id: 2, title: 'group2', backgroundColor: '#E99A45', checked: true },
   ]); //GET 요청으로 받아올 그룹 리스트

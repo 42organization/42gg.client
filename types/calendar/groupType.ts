@@ -1,4 +1,4 @@
-export interface CustomGroup {
+export interface ScheduleGroup {
   id: number | string;
   title: string;
   backgroundColor: string;

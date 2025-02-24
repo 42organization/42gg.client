@@ -7,6 +7,7 @@ import { Schedule } from 'types/calendar/scheduleTypes';
 import CalendarEvent from './CalendarEvent';
 import CalendarHeader from './CalendarHeader';
 import CustomCalendar from './CustomCalendar';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 interface calendarProps {
   filterSchedules: (
