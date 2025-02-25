@@ -11,13 +11,15 @@ const colorList = [
 ];
 
 interface GroupColorSelectProps {
-  openDropdownId: number;
+  id: number;
   setOpenDropdownId: (value: number) => void;
+  handleEdit?: (action: 'color', id: number, value?: string) => void;
 }
 
 const GroupColorSelect = ({
-  openDropdownId,
+  id,
   setOpenDropdownId,
+  handleEdit,
 }: GroupColorSelectProps) => {
   return (
     <div className={styles.dropdown}>
@@ -25,7 +27,10 @@ const GroupColorSelect = ({
         <ColorButton
           key={color}
           color={color}
-          onClick={() => setOpenDropdownId(0)}
+          onClick={() => {
+            handleEdit && handleEdit('color', id, color);
+            setOpenDropdownId(0);
+          }}
         />
       ))}
     </div>

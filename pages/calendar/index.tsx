@@ -78,6 +78,8 @@ const CalendarPage: NextPage = () => {
   const [overlayVisible, setOverlayVisible] = useState(false);
   const { openModal, isOpen } = useCalendarModal();
 
+  const [publicGroupList, setPublicGroupList] =
+    useState<ScheduleGroup[]>(PublicGroupList);
   const [privateGroupList, setPrivateGroupList] = useState<ScheduleGroup[]>([
     { id: 1, title: 'group1', backgroundColor: '#7DC163', checked: true },
     { id: 2, title: 'group2', backgroundColor: '#E99A45', checked: true },
@@ -136,29 +138,34 @@ const CalendarPage: NextPage = () => {
     id: string | number
   ) => {
     setFilterList((prev) => {
+      let updatedPublic = prev.public;
+      let updatedPrivate = prev.private;
+
       if (type === 'public') {
-        let updatedPublic;
-
-        if (prev.public.includes(id as string)) {
-          updatedPublic = prev.public.filter((item) => item !== id);
-        } else {
-          updatedPublic = [...prev.public, id as string];
-        }
-
-        return {
-          ...prev,
-          public: updatedPublic,
-        };
+        updatedPublic = prev.public.includes(id as string)
+          ? prev.public.filter((item) => item !== id)
+          : [...prev.public, id as string];
       } else {
-        if (prev.private.includes(id as number)) {
-          return {
-            ...prev,
-            private: prev.private.filter((item) => item !== id),
-          };
-        } else {
-          return { ...prev, private: [...prev.private, id as number] };
-        }
+        updatedPrivate = prev.private.includes(id as number)
+          ? prev.private.filter((item) => item !== id)
+          : [...prev.private, id as number];
       }
+
+      if (type === 'public') {
+        setPublicGroupList((prevGroups) =>
+          prevGroups.map((group) =>
+            group.id === id ? { ...group, checked: !group.checked } : group
+          )
+        );
+      } else {
+        setPrivateGroupList((prevGroups) =>
+          prevGroups.map((group) =>
+            group.id === id ? { ...group, checked: !group.checked } : group
+          )
+        );
+      }
+
+      return { ...prev, public: updatedPublic, private: updatedPrivate };
     });
   };
 

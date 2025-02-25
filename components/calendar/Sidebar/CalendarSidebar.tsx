@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScheduleGroup } from 'types/calendar/groupType';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import styles from 'styles/calendar/CalendarSidebar.module.scss';
@@ -20,6 +20,42 @@ const CalendarSidebar = ({
   filter,
   filterChange,
 }: CalendarSidebarProps) => {
+  const [isEdit, setIsEdit] = useState(false);
+  const [updatedPrivateGroups, setUpdatedPrivateGroups] =
+    useState(privateGroups);
+
+  useEffect(() => {
+    setUpdatedPrivateGroups(
+      privateGroups.map((group) => ({
+        ...group,
+        checked: filter.private.includes(group.id as number),
+      }))
+    );
+  }, [privateGroups, filter.private]);
+
+  const handleEdit = (
+    action: 'name' | 'color' | 'delete',
+    id: string | number,
+    value?: string
+  ) => {
+    setUpdatedPrivateGroups((prev) => {
+      if (action === 'name') {
+        return prev.map((group) =>
+          group.id === id ? { ...group, title: value || '' } : group
+        );
+      }
+      if (action === 'color') {
+        return prev.map((group) =>
+          group.id === id ? { ...group, backgroundColor: value || '' } : group
+        );
+      }
+      if (action === 'delete') {
+        return prev.filter((group) => group.id !== id);
+      }
+      return prev;
+    });
+  };
+
   return (
     <div className={sidebarOpen ? styles.sidebarOpen : styles.sidebarClose}>
       <div className={styles.profile}>
@@ -32,21 +68,24 @@ const CalendarSidebar = ({
           ...group,
           name: group.title || '',
           color: group.backgroundColor || '',
-          checked: group.checked ?? false,
+          checked: filter.public.includes(group.id as string),
         }))}
-        checkboxChange={filterChange}
+        onCheckboxChange={filterChange}
         type='public'
       />
       <AccordianItem
         title='개인 일정'
-        checkboxData={privateGroups.map((group) => ({
+        checkboxData={updatedPrivateGroups.map((group) => ({
           ...group,
           name: group.title || '',
           color: group.backgroundColor || '',
-          checked: group.checked ?? false,
+          checked: filter.private.includes(group.id as number),
         }))}
-        checkboxChange={filterChange}
+        onCheckboxChange={filterChange}
         type='private'
+        isEdit={isEdit}
+        setIsEdit={setIsEdit}
+        handleEdit={handleEdit}
       />
     </div>
   );

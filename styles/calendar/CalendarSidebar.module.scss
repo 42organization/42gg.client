@@ -43,10 +43,16 @@
   padding: 0 40px 0 65px;
 }
 
-.groupInfo {
+.accordianField {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+}
+
+.groupEditField {
+  display: flex;
+  flex-direction: row;
 }
 
 .groupField {
