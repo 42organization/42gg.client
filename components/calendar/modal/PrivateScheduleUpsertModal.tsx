@@ -78,7 +78,10 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
   };
 
   return (
-    <div className={styles.bubbleModal}>
+    <div
+      className={styles.bubbleModal}
+      onClick={(e) => isDropdown && setIsDropdown(false)}
+    >
       <div className={styles.titleContainer}>
         <input
           type='text'

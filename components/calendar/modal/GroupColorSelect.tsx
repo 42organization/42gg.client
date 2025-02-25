@@ -1,3 +1,4 @@
+import React, { useEffect, useRef } from 'react';
 import ColorButton from 'components/calendar/button/ColorButton';
 import styles from 'styles/calendar/modal/GroupColorSelect.module.scss';
 
@@ -21,8 +22,27 @@ const GroupColorSelect = ({
   setOpenDropdownId,
   handleEdit,
 }: GroupColorSelectProps) => {
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setOpenDropdownId(0);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [setOpenDropdownId]);
+
   return (
-    <div className={styles.dropdown}>
+    <div className={styles.dropdown} ref={dropdownRef}>
       {colorList.map((color) => (
         <ColorButton
           key={color}
