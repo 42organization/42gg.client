@@ -42,7 +42,7 @@ interface GroupSelectProps {
   isDropdown: boolean;
   setIsDropdown: (value: boolean) => void;
   schedule: Schedule;
-  setSchedule: (value: Schedule) => void;
+  setSchedule?: (value: Schedule) => void;
 }
 
 //백엔드에서 그룹 목록 get해오는 로직 필요
@@ -53,9 +53,14 @@ const GroupSelect = ({
   setSchedule,
 }: GroupSelectProps) => {
   const handleGroupChange = (group: ScheduleGroup) => {
-    schedule.groupId = typeof group.id === 'number' ? group.id : 0;
-    schedule.groupTitle = group.title;
-    schedule.groupColor = group.backgroundColor;
+    if (setSchedule) {
+      setSchedule({
+        ...schedule,
+        groupId: typeof group.id === 'number' ? group.id : 0,
+        groupTitle: group.title,
+        groupColor: group.backgroundColor,
+      });
+    }
     setIsDropdown(false);
   };
 
@@ -85,11 +90,11 @@ const GroupSelect = ({
         </div>
         <input
           type='text'
-          name='grupTitle'
+          name='groupTitle'
           placeholder='그룹 추가'
           className={styles.groupAddInput}
           onClick={(e) => {
-            e.stopPropagation(); // 클릭 시 드롭다운 꺼지는거 방지
+            e.stopPropagation();
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {

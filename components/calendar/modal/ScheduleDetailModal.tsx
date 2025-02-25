@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { calendarModalProps } from 'types/calendar/modalTypes';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import CloseSVG from 'public/image/calendar/closeIcon.svg';
@@ -7,6 +7,7 @@ import EditSVG from 'public/image/calendar/editIcon.svg';
 import LinkSVG from 'public/image/calendar/linkIcon.svg';
 import DeleteSVG from 'public/image/calendar/trashIcon.svg';
 import styles from 'styles/calendar/modal/ScheduleDetailModal.module.scss';
+import GroupSelect from './GroupSelect';
 import { useCalendarModal } from './useCalendarModal';
 import SubmitButton from '../button/SubmitButton';
 
@@ -30,6 +31,7 @@ const getPeriod = (start: string, end: string) => {
 const ScheduleDetailModal = (props: calendarModalProps) => {
   const { schedule } = props.schedule ? props : { schedule: {} as Schedule };
   const { openModal, closeModal } = useCalendarModal();
+  const [isDropdown, setIsDropdown] = useState(false);
 
   const handleEditClick = () => {
     if (schedule?.classification === 'PRIVATE_SCHEDULE') {
@@ -70,13 +72,26 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
             </div>
           </div>
         </div>
-        <div className={styles.importButtonContainer}>
-          <div className={styles.importButtonDevider}></div>
-          <div className={styles.importButton}>
-            <p>{schedule?.sharedCount ? schedule?.sharedCount : 0}명 담음!</p>
-            <SubmitButton type='import' label='가져오기' onClick={closeModal} />
+        {schedule?.classification !== 'PRIVATE_SCHEDULE' && (
+          <div className={styles.importButtonContainer}>
+            <div className={styles.importButtonDevider}></div>
+            <div className={styles.importButton}>
+              {isDropdown && schedule && (
+                <GroupSelect
+                  isDropdown={isDropdown}
+                  setIsDropdown={setIsDropdown}
+                  schedule={schedule}
+                />
+              )}
+              <p>{schedule?.sharedCount ? schedule?.sharedCount : 0}명 담음!</p>
+              <SubmitButton
+                type='import'
+                label='가져오기'
+                onClick={() => setIsDropdown(true)}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

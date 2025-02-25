@@ -4,6 +4,7 @@ import React, { Children, cloneElement } from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import { Schedule } from 'types/calendar/scheduleTypes';
+import styles from 'styles/calendar/Calendar.module.scss';
 import CalendarEvent from './CalendarEvent';
 import CalendarHeader from './CalendarHeader';
 import CustomCalendar from './CustomCalendar';
@@ -59,31 +60,33 @@ const calendarLayout = ({
   scheduleData,
 }: calendarProps) => {
   return (
-    <CustomCalendar>
-      <Calendar<Schedule>
-        localizer={localizer}
-        events={filterSchedules(scheduleData, filterList)}
-        startAccessor={(event) => {
-          return new Date(event.startTime);
-        }}
-        endAccessor={(event) => {
-          return new Date(event.endTime);
-        }}
-        selectable
-        onSelectSlot={handleSelectSlot}
-        views={['month']}
-        defaultView='month'
-        popup
-        components={{
-          toolbar: CalendarHeader,
-          eventWrapper: CalendarEvent,
-          dateCellWrapper: (props) => (
-            <TouchCellWrapper {...props} onSelectSlot={handleSelectSlot} />
-          ),
-        }}
-        formats={formats}
-      />
-    </CustomCalendar>
+    <div className={styles.calendarBox}>
+      <CustomCalendar>
+        <Calendar<Schedule>
+          localizer={localizer}
+          events={filterSchedules(scheduleData, filterList)}
+          startAccessor={(event) => {
+            return new Date(event.startTime);
+          }}
+          endAccessor={(event) => {
+            return new Date(event.endTime);
+          }}
+          selectable
+          onSelectSlot={handleSelectSlot}
+          views={['month']}
+          defaultView='month'
+          popup
+          components={{
+            toolbar: CalendarHeader,
+            eventWrapper: CalendarEvent,
+            dateCellWrapper: (props) => (
+              <TouchCellWrapper {...props} onSelectSlot={handleSelectSlot} />
+            ),
+          }}
+          formats={formats}
+        />
+      </CustomCalendar>
+    </div>
   );
 };
 
