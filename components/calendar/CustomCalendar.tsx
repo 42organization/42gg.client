@@ -79,7 +79,6 @@ const CustomCalendar = styled.div`
   .rbc-button-link {
     text-indent: 5px;
     font-size: 14px;
-    pointer-events: none;
   }
 
   .rbc-row-segment button {

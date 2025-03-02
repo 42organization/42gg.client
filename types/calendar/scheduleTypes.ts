@@ -12,7 +12,7 @@ export interface Schedule {
   endTime: string;
   sharedCount?: number; //상세조회에서 필요
   status?: string; //get에서 필요
-  alarm?: true; //개인일정
+  alarm?: boolean; //개인일정
   groupId?: number; //개인일정
   groupTitle?: string; //개인일정
   groupColor?: string; //개인일정

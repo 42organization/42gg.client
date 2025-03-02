@@ -1,11 +1,14 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { calendarModalProps } from 'types/calendar/modalTypes';
 import { Schedule } from 'types/calendar/scheduleTypes';
+import { toastState } from 'utils/recoil/toast';
 import CloseSVG from 'public/image/calendar/closeIcon.svg';
 import EditSVG from 'public/image/calendar/editIcon.svg';
 import LinkSVG from 'public/image/calendar/linkIcon.svg';
 import DeleteSVG from 'public/image/calendar/trashIcon.svg';
+import useScheduleRequest from 'hooks/calendar/useScheduleRequest';
 import styles from 'styles/calendar/modal/ScheduleDetailModal.module.scss';
 import GroupSelect from './GroupSelect';
 import { useCalendarModal } from './useCalendarModal';
@@ -29,13 +32,32 @@ const getPeriod = (start: string, end: string) => {
 };
 
 const ScheduleDetailModal = (props: calendarModalProps) => {
-  const { schedule } = props.schedule ? props : { schedule: {} as Schedule };
+  const { schedule } = props;
   const { openModal, closeModal } = useCalendarModal();
   const [isDropdown, setIsDropdown] = useState(false);
+  const { sendCalendarRequest } = useScheduleRequest();
+  // const setSnackBar = useSetRecoilState(toastState);
 
   const handleEditClick = () => {
-    if (schedule?.classification === 'PRIVATE_SCHEDULE') {
+    if (schedule.classification === 'PRIVATE_SCHEDULE') {
       openModal({ type: 'PrivateUpsert', schedule: schedule });
+    }
+  };
+
+  const deleteSchedule = async () => {
+    if (schedule.classification === 'PRIVATE_SCHEDULE') {
+      await sendCalendarRequest(
+        'PATCH',
+        `private/${schedule.id}`,
+        schedule,
+        () => {
+          closeModal();
+        }
+      );
+      // setSnackBar({
+      //   type: 'success',
+      //   message: '일정이 삭제되었습니다.',
+      // });
     }
   };
 
@@ -43,7 +65,13 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
     <div className={styles.bubbleModal}>
       <div className={styles.buttonContainer}>
         <EditSVG width={11} height={12} onClick={handleEditClick} />
-        <DeleteSVG width={12} height={12} />
+        <DeleteSVG
+          width={12}
+          height={12}
+          onClick={() => {
+            deleteSchedule();
+          }}
+        />
         <CloseSVG width={9} height={9} onClick={closeModal} />
       </div>
       <div className={styles.modalContent}>
@@ -51,28 +79,28 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
           <div
             className={styles.groupIndex}
             style={{
-              backgroundColor: schedule?.groupId
-                ? schedule?.groupColor
-                : schedule?.classification === 'EVENT'
+              backgroundColor: schedule.groupId
+                ? schedule.groupColor
+                : schedule.classification === 'EVENT'
                 ? '#785AD2'
                 : '#A98CFF',
             }}
           />
           <div className={styles.scheduleInfo}>
-            <div className={styles.title}>{schedule?.title}</div>
+            <div className={styles.title}>{schedule.title}</div>
             <div className={styles.date}>
-              {schedule?.startTime && schedule?.endTime
-                ? getPeriod(schedule?.startTime, schedule?.endTime)
+              {schedule.startTime && schedule.endTime
+                ? getPeriod(schedule.startTime, schedule.endTime)
                 : ''}
             </div>
-            <div className={styles.content}>{schedule?.content}</div>
+            <div className={styles.content}>{schedule.content}</div>
             <div className={styles.link}>
               <LinkSVG width={10} height={10} stroke='#785AD2' />
-              <Link href={schedule?.link || '#'}>{schedule?.link}</Link>
+              <Link href={schedule.link || '#'}>{schedule.link}</Link>
             </div>
           </div>
         </div>
-        {schedule?.classification !== 'PRIVATE_SCHEDULE' && (
+        {schedule.classification !== 'PRIVATE_SCHEDULE' && (
           <div className={styles.importButtonContainer}>
             <div className={styles.importButtonDevider}></div>
             <div className={styles.importButton}>
@@ -83,7 +111,7 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
                   schedule={schedule}
                 />
               )}
-              <p>{schedule?.sharedCount ? schedule?.sharedCount : 0}명 담음!</p>
+              <p>{schedule.sharedCount ? schedule.sharedCount : 0}명 담음!</p>
               <SubmitButton
                 type='import'
                 label='가져오기'

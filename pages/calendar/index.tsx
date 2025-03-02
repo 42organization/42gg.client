@@ -4,65 +4,17 @@ import { ScheduleGroup } from 'types/calendar/groupType';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import CalendarLayout from 'components/calendar/CalendarLayout';
+import { GroupProvider } from 'components/calendar/GroupContext';
 import CalendarModalProvider from 'components/calendar/modal/CalendarModalProvider';
 import { useCalendarModal } from 'components/calendar/modal/useCalendarModal';
 import CalendarSidebar from 'components/calendar/Sidebar/CalendarSidebar';
 import MenuSVG from 'public/image/calendar/menuIcon.svg';
+import useScheduleGet from 'hooks/calendar/useScheduleGet';
+import useScheduleGroupGet from 'hooks/calendar/useScheduleGroupGet';
+import useScheduleGroupRequest from 'hooks/calendar/useScheduleGroupRequest';
 import styles from 'styles/calendar/Calendar.module.scss';
 
-const scheduleData: Schedule[] = [
-  {
-    id: 1,
-    classification: 'JOB_NOTICE',
-    jobTag: 'SHORTS_INTERN',
-    techTag: 'FRONT_END',
-    author: 'seykim',
-    title: 'JOB test',
-    content: 'test',
-    link: 'string',
-    startTime: '2025-01-06T06:28:46.655Z',
-    endTime: '2025-01-08T06:28:46.655Z',
-  },
-  {
-    id: 2,
-    classification: 'EVENT',
-    eventTag: 'ETC',
-    author: 'seykim',
-    title: 'EVENT test',
-    content: 'string',
-    link: 'string',
-    startTime: '2025-01-06T06:28:46.655Z',
-    endTime: '2025-01-10T06:28:46.655Z',
-  },
-  {
-    id: 3,
-    classification: 'PRIVATE_SCHEDULE',
-    author: 'seykim',
-    title: 'PRIVATE test',
-    content: 'string',
-    link: 'string',
-    startTime: '2025-02-06T06:28:46.655Z',
-    endTime: '2025-02-06T06:28:46.655Z',
-    groupId: 1,
-    groupTitle: 'group-test',
-    groupColor: '#7DC163',
-  },
-  {
-    id: 4,
-    classification: 'PRIVATE_SCHEDULE',
-    author: 'seykim',
-    title: 'PRIVATE test2',
-    content: 'string',
-    link: 'string',
-    startTime: '2025-01-01T06:28:46.655Z',
-    endTime: '2025-01-02T06:28:46.655Z',
-    groupId: 1,
-    groupTitle: 'group-test',
-    groupColor: '#7DC163',
-  },
-];
-
-const PublicGroupList: ScheduleGroup[] = [
+const publicGroupList: ScheduleGroup[] = [
   { id: 'EVENT', title: '42행사', backgroundColor: '#785AD2', checked: true },
   {
     id: 'JOB_NOTICE',
@@ -78,19 +30,11 @@ const CalendarPage: NextPage = () => {
   const [overlayVisible, setOverlayVisible] = useState(false);
   const { openModal, isOpen } = useCalendarModal();
 
-  const [publicGroupList, setPublicGroupList] =
-    useState<ScheduleGroup[]>(PublicGroupList);
-  const [privateGroupList, setPrivateGroupList] = useState<ScheduleGroup[]>([
-    { id: 1, title: 'group1', backgroundColor: '#7DC163', checked: true },
-    { id: 2, title: 'group2', backgroundColor: '#E99A45', checked: true },
-  ]); //GET 요청으로 받아올 그룹 리스트
+  const { scheduleGroup: privateGroupList = [] } =
+    useScheduleGroupGet('custom');
   const [filterList, setFilterList] = useState<ScheduleFilter>({
-    public: PublicGroupList.map((group) => group.id).filter(
-      (id): id is string => typeof id === 'string'
-    ),
-    private: privateGroupList
-      .map((group) => group.id)
-      .filter((id): id is number => typeof id === 'number'),
+    public: publicGroupList.map((group: ScheduleGroup) => group.id as string),
+    private: privateGroupList.map((group: ScheduleGroup) => group.id as number),
   });
 
   const handleSelectSlot = ({ slots }: { slots: any }) => {
@@ -152,23 +96,24 @@ const CalendarPage: NextPage = () => {
       }
 
       if (type === 'public') {
-        setPublicGroupList((prevGroups) =>
-          prevGroups.map((group) =>
-            group.id === id ? { ...group, checked: !group.checked } : group
-          )
-        );
+        publicGroupList.forEach((group: ScheduleGroup) => {
+          if (group.id === id) {
+            group.checked = !group.checked;
+          }
+        });
       } else {
-        setPrivateGroupList((prevGroups) =>
-          prevGroups.map((group) =>
-            group.id === id ? { ...group, checked: !group.checked } : group
-          )
-        );
+        privateGroupList?.forEach((group: ScheduleGroup) => {
+          if (group.id === id) {
+            group.checked = !group.checked;
+          }
+        });
       }
 
       return { ...prev, public: updatedPublic, private: updatedPrivate };
     });
   };
 
+  //필터링 해주는 함수
   const filterSchedules = (
     schedules: Schedule[],
     filterList: ScheduleFilter
@@ -183,40 +128,47 @@ const CalendarPage: NextPage = () => {
   };
 
   return (
-    <div className={styles.calendarBody}>
-      {isMobile && (
-        <MenuSVG
-          width={20}
-          height={20}
-          fill='#B4BDEE'
-          className={styles.menuIcon}
-          onClick={toggleSidebar}
-        />
-      )}
-      <div className={styles.calendarView}>
-        <CalendarSidebar
-          sidebarOpen={sidebarOpen}
-          publicGroups={PublicGroupList}
-          privateGroups={privateGroupList}
-          filter={filterList}
-          filterChange={handleFilterChange}
-        />
+    <GroupProvider>
+      <div className={styles.calendarBody}>
         {isMobile && (
-          <div
-            className={`${styles.overlay} ${overlayVisible ? styles.show : ''}`}
+          <MenuSVG
+            width={20}
+            height={20}
+            fill='#B4BDEE'
+            className={styles.menuIcon}
             onClick={toggleSidebar}
           />
         )}
-        <CalendarLayout
-          filterSchedules={filterSchedules}
-          handleSelectSlot={handleSelectSlot}
-          filterList={filterList}
-          scheduleData={scheduleData}
-        />
-        <CalendarModalProvider />
+        <div className={styles.calendarView}>
+          <CalendarSidebar
+            sidebarOpen={sidebarOpen}
+            publicGroups={publicGroupList}
+            privateGroups={privateGroupList}
+            filter={filterList}
+            filterChange={handleFilterChange}
+          />
+          {isMobile && (
+            <div
+              className={`${styles.overlay} ${
+                overlayVisible ? styles.show : ''
+              }`}
+              onClick={toggleSidebar}
+            />
+          )}
+          <CalendarLayout
+            filterSchedules={filterSchedules}
+            handleSelectSlot={handleSelectSlot}
+            filterList={filterList}
+          />
+        </div>
       </div>
-    </div>
+    </GroupProvider>
   );
 };
 
 export default CalendarPage;
+
+/*
+1. ACTIVE / DEACTIVE 색깔
+2. 현재 선택한 필터의 일정만 나오도록
+*/

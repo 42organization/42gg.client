@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ScheduleGroup } from 'types/calendar/groupType';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
+import useScheduleGroupRequest from 'hooks/calendar/useScheduleGroupRequest';
 import styles from 'styles/calendar/CalendarSidebar.module.scss';
 import AccordianItem from './AccordianItem';
 
@@ -21,8 +22,10 @@ const CalendarSidebar = ({
   filterChange,
 }: CalendarSidebarProps) => {
   const [isEdit, setIsEdit] = useState(false);
-  const [updatedPrivateGroups, setUpdatedPrivateGroups] =
-    useState(privateGroups);
+  const [updatedPrivateGroups, setUpdatedPrivateGroups] = useState<
+    ScheduleGroup[]
+  >(privateGroups || []);
+  const { sendGroupRequest } = useScheduleGroupRequest();
 
   useEffect(() => {
     setUpdatedPrivateGroups(
@@ -33,7 +36,7 @@ const CalendarSidebar = ({
     );
   }, [privateGroups, filter.private]);
 
-  const handleEdit = (
+  const handleEdit = async (
     action: 'name' | 'color' | 'delete',
     id: string | number,
     value?: string
@@ -50,6 +53,10 @@ const CalendarSidebar = ({
         );
       }
       if (action === 'delete') {
+        const deleteGroup = prev.find((group) => group.id === id);
+        if (deleteGroup) {
+          sendGroupRequest('DELETE', `custom/${id}`, deleteGroup);
+        }
         return prev.filter((group) => group.id !== id);
       }
       return prev;

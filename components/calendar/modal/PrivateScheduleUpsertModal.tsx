@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useSetRecoilState } from 'recoil';
+import { Schedule } from '@mui/icons-material';
+import { ScheduleGroup } from 'types/calendar/groupType';
 import { calendarModalProps } from 'types/calendar/modalTypes';
 import { Schedule } from 'types/calendar/scheduleTypes';
+import { toastState } from 'utils/recoil/toast';
 import DownSVG from 'public/image/calendar/downToggle.svg';
 import LinkSVG from 'public/image/calendar/linkIcon.svg';
+import useScheduleRequest from 'hooks/calendar/useScheduleRequest';
 import styles from 'styles/calendar/modal/PrivateScheduleUpsertModal.module.scss';
 import CustomDatepicker from './CustomDatepicker';
 import GroupSelect from './GroupSelect';
 import { useCalendarModal } from './useCalendarModal';
 import SumbitButton from '../button/SubmitButton';
+import { useGroup } from '../GroupContext';
 
 //nowGroup 부분 -> 일정 추가일시 groupid:1인 그룹이 기본으로 설정되어 있도록 하는 로직 필요(그룹 불러오기)
 //모달 바깥 클릭했을때(모달 꺼졌을 때) 수정/추가한 것 취소 로직 필요
@@ -18,6 +24,17 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
   const [isDropdown, setIsDropdown] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { closeModal } = useCalendarModal();
+  const { sendCalendarRequest, error } = useScheduleRequest();
+  const setSnackbar = useSetRecoilState(toastState);
+  const groupList = useGroup();
+  // let nowGroup;
+
+  const findNowGroup = () => {
+    const nowGroup = groupList.groupList.find(
+      (group: ScheduleGroup) => group.id === scheduleData.groupId
+    );
+    return nowGroup;
+  };
 
   //기존 스케줄
   const [initialScheduleData, setInitialScheduleData] = useState<Schedule>(
@@ -62,6 +79,11 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
     };
   }, []);
 
+  const toKSTISOString = (date: Date) => {
+    const kstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+    return kstDate.toISOString();
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -77,6 +99,73 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
     setIsDropdown(!isDropdown);
   };
 
+  const createSchedule = async () => {
+    scheduleData.status = 'ACTIVATE';
+    scheduleData.alarm = false;
+    scheduleData.startTime = toKSTISOString(new Date(scheduleData.startTime));
+    scheduleData.endTime = toKSTISOString(new Date(scheduleData.endTime));
+    await sendCalendarRequest(
+      'POST',
+      'private',
+      scheduleData,
+      () => {
+        closeModal();
+      },
+      (error: string) => {
+        let errMsg;
+        if (scheduleData.title === '' || scheduleData.content === '') {
+          errMsg = '제목과 내용을 입력해주세요';
+        } else if (scheduleData.title.length > 50) {
+          errMsg = '제목은 50자 이하로 입력해주세요';
+        } else if (scheduleData.content.length > 2000) {
+          errMsg = '내용은 2000자 이하로 입력해주세요';
+        } else if (
+          new Date(scheduleData.startTime) > new Date(scheduleData.endTime)
+        ) {
+          errMsg = '시작 시간이 종료 시간보다 늦습니다';
+        } else {
+          errMsg = '일정 추가에 실패했습니다';
+        }
+      }
+    );
+  };
+
+  const updateSchedule = async () => {
+    scheduleData.startTime = toKSTISOString(new Date(scheduleData.startTime));
+    scheduleData.endTime = toKSTISOString(new Date(scheduleData.endTime));
+    await sendCalendarRequest(
+      'PUT',
+      `private/${scheduleData.id}`,
+      scheduleData,
+      () => {
+        closeModal();
+      },
+      (error: string) => {
+        let errMsg;
+        if (scheduleData.title === '' || scheduleData.content === '') {
+          errMsg = '제목과 내용을 입력해주세요';
+        } else if (scheduleData.title.length > 50) {
+          errMsg = '제목은 50자 이하로 입력해주세요';
+        } else if (scheduleData.content.length > 2000) {
+          errMsg = '내용은 2000자 이하로 입력해주세요';
+        } else if (
+          new Date(scheduleData.startTime) > new Date(scheduleData.endTime)
+        ) {
+          errMsg = '시작 시간이 종료 시간보다 늦습니다';
+        } else {
+          errMsg = '일정 수정에 실패했습니다';
+        }
+
+        setSnackbar({
+          toastName: 'response error',
+          severity: 'error',
+          message: `🔥 ${errMsg} 🔥`,
+          clicked: true,
+        });
+      }
+    );
+  };
+
   return (
     <div
       className={styles.bubbleModal}
@@ -90,12 +179,12 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
           className={styles.bigField}
           value={scheduleData.title}
           onChange={handleChange}
-          style={{ color: scheduleData.groupColor }}
+          style={{ color: findNowGroup()?.backgroundColor }}
         />
         <div className={styles.groupSelect} onClick={handleDropdown}>
           <div
             className={styles.nowGroup}
-            style={{ backgroundColor: scheduleData.groupColor }}
+            style={{ backgroundColor: findNowGroup()?.backgroundColor }}
           />
           <div className={styles.changeGroup}>
             <DownSVG
@@ -191,7 +280,14 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
               : 'submitInactive'
           }
           label='등록'
-          onClick={closeModal}
+          onClick={
+            scheduleData.title && scheduleData.content
+              ? scheduleData.id
+                ? updateSchedule
+                : createSchedule
+              : undefined
+          }
+          // onClick={()=>console.log(scheduleData)}
         />
       </div>
     </div>

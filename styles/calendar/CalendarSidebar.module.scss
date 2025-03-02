@@ -1,6 +1,7 @@
 .sidebarOpen {
   position: relative;
   min-width: 250px;
+  overflow: scroll;
   background-color: white;
   border-top-left-radius: 5px;
   border-top-right-radius: 7px;
@@ -26,6 +27,7 @@
 .accordianMenu {
   display: flex;
   padding: 0 40px;
+  overflow: scroll;
   color: #c1c8f0;
   align-items: center;
   justify-content: flex-start;
@@ -38,9 +40,11 @@
 }
 
 .accordianContent {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 0 40px 0 65px;
+  overflow: scroll;
 }
 
 .accordianField {
@@ -48,6 +52,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  overflow: scroll;
 }
 
 .groupEditField {

@@ -1,42 +1,11 @@
-import React from 'react';
-import { ScheduleGroup } from 'types/calendar/groupType';
+import React, { useState, useContext } from 'react';
+import { ScheduleGroup , groupColorTypes } from 'types/calendar/groupType';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import ColorButton from 'components/calendar/button/ColorButton';
 import PlusSVG from 'public/image/calendar/plusIcon.svg';
+import useScheduleGroupRequest from 'hooks/calendar/useScheduleGroupRequest';
 import styles from 'styles/calendar/modal/GroupSelect.module.scss';
-
-const groupList: ScheduleGroup[] = [
-  {
-    id: 1,
-    title: '기본',
-    backgroundColor: '#9C57BC',
-  },
-  {
-    id: 2,
-    title: '그룹2',
-    backgroundColor: '#7DC163',
-  },
-  {
-    id: 3,
-    title: '그룹3',
-    backgroundColor: '#E6634F',
-  },
-  {
-    id: 4,
-    title: '그룹4',
-    backgroundColor: '#FFDD47',
-  },
-  {
-    id: 5,
-    title: '그룹5',
-    backgroundColor: '#FFA646',
-  },
-  {
-    id: 6,
-    title: '그룹6',
-    backgroundColor: '#357BE5',
-  },
-];
+import { useGroup } from '../GroupContext';
 
 interface GroupSelectProps {
   isDropdown: boolean;
@@ -52,16 +21,39 @@ const GroupSelect = ({
   schedule,
   setSchedule,
 }: GroupSelectProps) => {
+  const { groupList } = useGroup();
+  const { sendGroupRequest } = useScheduleGroupRequest();
+  const [newGroupTitle, setNewGroupTitle] = useState<string>('');
+  const [isComposing, setIsComposing] = useState<boolean>(false);
+
   const handleGroupChange = (group: ScheduleGroup) => {
     if (setSchedule) {
       setSchedule({
         ...schedule,
-        groupId: typeof group.id === 'number' ? group.id : 0,
-        groupTitle: group.title,
-        groupColor: group.backgroundColor,
+        groupId:
+          typeof group.id === 'number' ? group.id : parseInt(group.id, 10),
+        // groupTitle: group.title,
+        // groupColor: group.backgroundColor,
       });
     }
     setIsDropdown(false);
+  };
+
+  const getRandomGroupColor = () => {
+    const colors = Object.values(groupColorTypes); // 색상 값만 배열로 변환
+    const randomIndex = Math.floor(Math.random() * colors.length); // 랜덤 인덱스 생성
+    return colors[randomIndex]; // 랜덤 색상 반환
+  };
+
+  const addGroup = async () => {
+    const newGroup: ScheduleGroup = {
+      title: newGroupTitle,
+      backgroundColor: getRandomGroupColor(),
+      id: 0,
+    };
+    await sendGroupRequest('POST', 'custom', newGroup, () => {
+      setNewGroupTitle('');
+    });
   };
 
   return (
@@ -92,15 +84,25 @@ const GroupSelect = ({
           type='text'
           name='groupTitle'
           placeholder='그룹 추가'
+          value={newGroupTitle}
           className={styles.groupAddInput}
           onClick={(e) => {
             e.stopPropagation();
           }}
+          onChange={(e) => {
+            setNewGroupTitle(e.target.value);
+          }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              // 그룹 추가 로직 필요
+              if (isComposing) {
+                return;
+              }
+              e.preventDefault();
+              addGroup();
             }
           }}
+          onCompositionStart={() => setIsComposing(true)}
+          onCompositionEnd={() => setIsComposing(false)}
         />
       </div>
     </div>
