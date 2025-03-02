@@ -109,27 +109,28 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
             </div>
           </div>
         </div>
-        {schedule.classification !== 'PRIVATE_SCHEDULE' && (
-          <div className={styles.importButtonContainer}>
-            <div className={styles.importButtonDevider}></div>
-            <div className={styles.importButton}>
-              {isDropdown && schedule && (
-                <GroupSelect
-                  isDropdown={isDropdown}
-                  setIsDropdown={setIsDropdown}
-                  schedule={schedule}
-                  importSchedule={importSchedule}
+        {schedule.classification !== 'PRIVATE_SCHEDULE' &&
+          !schedule.groupId && (
+            <div className={styles.importButtonContainer}>
+              <div className={styles.importButtonDevider}></div>
+              <div className={styles.importButton}>
+                {isDropdown && schedule && (
+                  <GroupSelect
+                    isDropdown={isDropdown}
+                    setIsDropdown={setIsDropdown}
+                    schedule={schedule}
+                    importSchedule={importSchedule}
+                  />
+                )}
+                <p>{schedule.sharedCount ? schedule.sharedCount : 0}명 담음!</p>
+                <SubmitButton
+                  type='import'
+                  label='가져오기'
+                  onClick={() => setIsDropdown(true)}
                 />
-              )}
-              <p>{schedule.sharedCount ? schedule.sharedCount : 0}명 담음!</p>
-              <SubmitButton
-                type='import'
-                label='가져오기'
-                onClick={() => setIsDropdown(true)}
-              />
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     </div>
   );

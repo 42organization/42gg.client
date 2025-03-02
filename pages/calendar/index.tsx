@@ -159,6 +159,9 @@ const CalendarPage: NextPage = () => {
         schedule.classification!
       );
       const isPrivateMatch = filterList.private.includes(schedule.groupId!);
+      if (schedule.classification !== 'PUBLIC_SCHEDULE' && schedule.groupId) {
+        return isPrivateMatch;
+      }
       return isPublicMatch || isPrivateMatch;
     });
   };
