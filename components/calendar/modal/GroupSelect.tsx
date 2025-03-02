@@ -12,6 +12,7 @@ interface GroupSelectProps {
   setIsDropdown: (value: boolean) => void;
   schedule: Schedule;
   setSchedule?: (value: Schedule) => void;
+  importSchedule?: (groupId: number) => void;
 }
 
 //백엔드에서 그룹 목록 get해오는 로직 필요
@@ -20,6 +21,7 @@ const GroupSelect = ({
   setIsDropdown,
   schedule,
   setSchedule,
+  importSchedule,
 }: GroupSelectProps) => {
   const { groupList } = useGroup();
   const { sendGroupRequest } = useScheduleGroupRequest();
@@ -30,10 +32,12 @@ const GroupSelect = ({
     if (setSchedule) {
       setSchedule({
         ...schedule,
-        groupId: typeof group.id === 'number' ? group.id : 0,
+        groupId: group.id!,
         // groupTitle: group.title,
         // groupColor: group.backgroundColor,
       });
+    } else if (importSchedule) {
+      importSchedule(group.id!);
     }
     setIsDropdown(false);
   };

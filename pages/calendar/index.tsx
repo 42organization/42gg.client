@@ -206,5 +206,9 @@ export default CalendarPage;
 
 /*
 1. ACTIVE / DEACTIVE 색깔
-2. 현재 선택한 필터의 일정만 나오도록
+2. 현재 선택한 필터의 일정만 나오도록(완) -> 필터링 하는 부분 커스텀 훅으로 리팩토링
+3. ui에 알람 관련해서 추가
+4. 모달 띄운 채로 일정 공유 가능한가 https://velog.io/@mjieun/Next.js-%EB%AA%A8%EB%8B%AC-%EC%97%B4%EB%A9%B4%EC%84%9C-URL-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0-Parallel-Routes-Intercepting-Routes
+5. 가져오기 부분 api, 기능
+6. 처음에 그룹이 아무것도 없을때 
 */

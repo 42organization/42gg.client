@@ -13,7 +13,9 @@ const CalendarEvent = ({ event }: { event: Schedule }) => {
       style={
         {
           '--box-color': `${
-            event.classification === 'EVENT'
+            event.groupId
+              ? event.groupColor
+              : event.classification === 'EVENT'
               ? '#785AD2'
               : event.classification === 'JOB_NOTICE'
               ? '#A98CFF'

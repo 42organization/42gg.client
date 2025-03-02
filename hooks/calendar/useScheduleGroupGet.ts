@@ -16,7 +16,6 @@ const useScheduleGroupGet = (url: string) => {
           ...group,
           checked: true,
         })) || [];
-      console.log('group get');
       return groupsWithChecked;
     },
     retry: 1,

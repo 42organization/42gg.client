@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useSetRecoilState } from 'recoil';
-import { Schedule } from '@mui/icons-material';
 import { ScheduleGroup } from 'types/calendar/groupType';
 import { calendarModalProps } from 'types/calendar/modalTypes';
 import { Schedule } from 'types/calendar/scheduleTypes';

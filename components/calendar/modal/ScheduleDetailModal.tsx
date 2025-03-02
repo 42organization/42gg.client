@@ -36,7 +36,6 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
   const { openModal, closeModal } = useCalendarModal();
   const [isDropdown, setIsDropdown] = useState(false);
   const { sendCalendarRequest } = useScheduleRequest();
-  // const setSnackBar = useSetRecoilState(toastState);
 
   const handleEditClick = () => {
     if (schedule.classification === 'PRIVATE_SCHEDULE') {
@@ -54,10 +53,20 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
           closeModal();
         }
       );
-      // setSnackBar({
-      //   type: 'success',
-      //   message: '일정이 삭제되었습니다.',
-      // });
+    }
+  };
+
+  const importSchedule = async (groupId: number) => {
+    if (schedule.classification !== 'PRIVATE_SCHEDULE') {
+      await sendCalendarRequest(
+        'POST',
+        `public/${schedule.id}/${groupId}`,
+        schedule,
+        () => {
+          // schedule.classification = 'PRIVATE_SCHEDULE';
+          closeModal();
+        }
+      );
     }
   };
 
@@ -109,6 +118,7 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
                   isDropdown={isDropdown}
                   setIsDropdown={setIsDropdown}
                   schedule={schedule}
+                  importSchedule={importSchedule}
                 />
               )}
               <p>{schedule.sharedCount ? schedule.sharedCount : 0}명 담음!</p>
