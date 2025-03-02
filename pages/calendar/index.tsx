@@ -4,7 +4,7 @@ import { ScheduleGroup } from 'types/calendar/groupType';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import CalendarLayout from 'components/calendar/CalendarLayout';
-import { GroupProvider , useGroup } from 'components/calendar/GroupContext';
+import { GroupProvider, useGroup } from 'components/calendar/GroupContext';
 import CalendarModalProvider from 'components/calendar/modal/CalendarModalProvider';
 import { useCalendarModal } from 'components/calendar/modal/useCalendarModal';
 import CalendarSidebar from 'components/calendar/Sidebar/CalendarSidebar';
@@ -37,18 +37,31 @@ const CalendarPage: NextPage = () => {
 
   const { scheduleGroup: privateGroupList = [] } =
     useScheduleGroupGet('custom');
+
   const [filterList, setFilterList] = useState<ScheduleFilter>({
-    public: publicGroupList.map(
-      (group: ScheduleGroup) => group.classification!
-    ),
-    private: privateGroupList.map((group: ScheduleGroup) => group.id!),
+    public: [],
+    private: [],
   });
 
   useEffect(() => {
-    setFilterList((prevFilterList) => ({
-      ...prevFilterList,
-      private: privateGroupList.map((group: ScheduleGroup) => group.id!),
-    }));
+    const savedFilters = localStorage.getItem('scheduleFilters');
+
+    if (savedFilters) {
+      setFilterList(JSON.parse(savedFilters));
+    } else {
+      const initialFilterList: ScheduleFilter = {
+        public: publicGroupList.map(
+          (group: ScheduleGroup) => group.classification!
+        ),
+        private: privateGroupList.map((group: ScheduleGroup) => group.id!),
+      };
+
+      setFilterList(initialFilterList);
+      localStorage.setItem(
+        'scheduleFilters',
+        JSON.stringify(initialFilterList)
+      );
+    }
   }, [privateGroupList]);
 
   const handleSelectSlot = ({ slots }: { slots: any }) => {
@@ -124,7 +137,15 @@ const CalendarPage: NextPage = () => {
         });
       }
 
-      return { ...prev, public: updatedPublic, private: updatedPrivate };
+      const newFilterList = {
+        ...prev,
+        public: updatedPublic,
+        private: updatedPrivate,
+      };
+
+      localStorage.setItem('scheduleFilters', JSON.stringify(newFilterList));
+
+      return newFilterList;
     });
   };
 

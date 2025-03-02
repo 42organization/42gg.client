@@ -19,7 +19,7 @@ interface calendarProps {
     scheduleData: Schedule[],
     filterList: ScheduleFilter
   ) => Schedule[];
-  handleSelectSlot?: (slotInfo: { action: string; slots: Date[] }) => void;
+  handleSelectSlot: (slotInfo: { action: string; slots: Date[] }) => void;
   filterList: ScheduleFilter;
 }
 

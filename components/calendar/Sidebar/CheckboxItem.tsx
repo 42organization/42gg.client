@@ -32,8 +32,6 @@ const CheckboxItem = ({
   const [newName, setNewName] = useState(name);
   const [newColor, setNewColor] = useState(color);
   const [openDropdownId, setOpenDropdownId] = useState<number>(0);
-  // console.log('checkboxData', id, name, color, checked);
-
   useEffect(() => {
     setNewName(name);
     setNewColor(color);
