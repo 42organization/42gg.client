@@ -3,7 +3,7 @@ import { instanceInCalendar } from '../../utils/axios';
 
 const useScheduleGroupGet = (url: string) => {
   const {
-    data: scheduleGroup,
+    data: scheduleGroup = [],
     isLoading,
     isError,
     error,
@@ -11,7 +11,13 @@ const useScheduleGroupGet = (url: string) => {
     queryKey: 'scheduleGroup',
     queryFn: async () => {
       const res = await instanceInCalendar.get(url);
-      return res.data.content || [];
+      const groupsWithChecked =
+        res.data.content?.map((group: any) => ({
+          ...group,
+          checked: true,
+        })) || [];
+      console.log('group get');
+      return groupsWithChecked;
     },
     retry: 1,
     enabled: true,

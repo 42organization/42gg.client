@@ -5,7 +5,8 @@ import styles from 'styles/calendar/CalendarSidebar.module.scss';
 import CheckboxItem from './CheckboxItem';
 
 interface CheckboxData {
-  id: number | string;
+  id?: number;
+  classification?: string;
   name: string;
   color: string;
   checked: boolean;
@@ -14,13 +15,17 @@ interface CheckboxData {
 interface AccordianItemProps {
   title: string;
   checkboxData: CheckboxData[];
-  onCheckboxChange: (type: 'public' | 'private', id: string | number) => void;
+  onCheckboxChange: (
+    type: 'public' | 'private',
+    id: number,
+    classification: string
+  ) => void;
   type: 'public' | 'private';
   isEdit?: boolean;
   setIsEdit?: (isEdit: boolean) => void;
   handleEdit?: (
     action: 'name' | 'color' | 'delete',
-    id: string | number,
+    id: number,
     value?: string
   ) => void;
 }
@@ -58,9 +63,11 @@ const AccordianItem = ({
         <div className={styles.accordianContent}>
           {checkboxData.map((checkbox) => (
             <CheckboxItem
-              key={checkbox.id}
+              key={checkbox.id ?? checkbox.classification}
               checkboxData={checkbox}
-              onChange={() => onCheckboxChange(type, checkbox.id)}
+              onChange={() =>
+                onCheckboxChange(type, checkbox.id!, checkbox.classification!)
+              }
               isEdit={isEdit}
               handleEdit={handleEdit}
             />

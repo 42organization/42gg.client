@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { ScheduleGroup , groupColorTypes } from 'types/calendar/groupType';
+import { ScheduleGroup, groupColorTypes } from 'types/calendar/groupType';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import ColorButton from 'components/calendar/button/ColorButton';
 import PlusSVG from 'public/image/calendar/plusIcon.svg';
@@ -30,8 +30,7 @@ const GroupSelect = ({
     if (setSchedule) {
       setSchedule({
         ...schedule,
-        groupId:
-          typeof group.id === 'number' ? group.id : parseInt(group.id, 10),
+        groupId: typeof group.id === 'number' ? group.id : 0,
         // groupTitle: group.title,
         // groupColor: group.backgroundColor,
       });

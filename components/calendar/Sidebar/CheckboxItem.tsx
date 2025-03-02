@@ -5,7 +5,8 @@ import styles from 'styles/calendar/CalendarSidebar.module.scss';
 import GroupColorSelect from '../modal/GroupColorSelect';
 
 interface CheckboxData {
-  id: number | string;
+  id?: number;
+  classification?: string;
   name: string;
   color: string;
   checked: boolean;
@@ -17,7 +18,7 @@ interface CheckboxItemProps {
   isEdit?: boolean;
   handleEdit?: (
     action: 'name' | 'color' | 'delete',
-    id: string | number,
+    id: number,
     value?: string
   ) => void;
 }
@@ -31,6 +32,7 @@ const CheckboxItem = ({
   const [newName, setNewName] = useState(name);
   const [newColor, setNewColor] = useState(color);
   const [openDropdownId, setOpenDropdownId] = useState<number>(0);
+  // console.log('checkboxData', id, name, color, checked);
 
   useEffect(() => {
     setNewName(name);
@@ -43,9 +45,9 @@ const CheckboxItem = ({
 
   const handleChangeSave = (action: 'name' | 'color' | 'delete') => {
     if (action === 'name') {
-      handleEdit && handleEdit('name', id, newName);
+      handleEdit && handleEdit('name', id!, newName);
     } else if (action === 'color') {
-      handleEdit && handleEdit('color', id, newColor);
+      handleEdit && handleEdit('color', id!, newColor);
     }
   };
 
@@ -111,7 +113,7 @@ const CheckboxItem = ({
       {isEdit && (
         <DeleteIcon
           style={{ width: 20, height: 20, right: 0, color: '#B4BDEE' }}
-          onClick={() => handleEdit && handleEdit('delete', id)}
+          onClick={() => handleEdit && handleEdit('delete', id!)}
         />
       )}
     </div>

@@ -4,7 +4,7 @@ import { ScheduleGroup } from 'types/calendar/groupType';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import CalendarLayout from 'components/calendar/CalendarLayout';
-import { GroupProvider } from 'components/calendar/GroupContext';
+import { GroupProvider , useGroup } from 'components/calendar/GroupContext';
 import CalendarModalProvider from 'components/calendar/modal/CalendarModalProvider';
 import { useCalendarModal } from 'components/calendar/modal/useCalendarModal';
 import CalendarSidebar from 'components/calendar/Sidebar/CalendarSidebar';
@@ -15,9 +15,14 @@ import useScheduleGroupRequest from 'hooks/calendar/useScheduleGroupRequest';
 import styles from 'styles/calendar/Calendar.module.scss';
 
 const publicGroupList: ScheduleGroup[] = [
-  { id: 'EVENT', title: '42행사', backgroundColor: '#785AD2', checked: true },
   {
-    id: 'JOB_NOTICE',
+    classification: 'EVENT',
+    title: '42행사',
+    backgroundColor: '#785AD2',
+    checked: true,
+  },
+  {
+    classification: 'JOB_NOTICE',
     title: '취업공고',
     backgroundColor: '#A98CFF',
     checked: true,
@@ -33,9 +38,18 @@ const CalendarPage: NextPage = () => {
   const { scheduleGroup: privateGroupList = [] } =
     useScheduleGroupGet('custom');
   const [filterList, setFilterList] = useState<ScheduleFilter>({
-    public: publicGroupList.map((group: ScheduleGroup) => group.id as string),
-    private: privateGroupList.map((group: ScheduleGroup) => group.id as number),
+    public: publicGroupList.map(
+      (group: ScheduleGroup) => group.classification!
+    ),
+    private: privateGroupList.map((group: ScheduleGroup) => group.id!),
   });
+
+  useEffect(() => {
+    setFilterList((prevFilterList) => ({
+      ...prevFilterList,
+      private: privateGroupList.map((group: ScheduleGroup) => group.id!),
+    }));
+  }, [privateGroupList]);
 
   const handleSelectSlot = ({ slots }: { slots: any }) => {
     if (!isOpen) {
@@ -79,25 +93,26 @@ const CalendarPage: NextPage = () => {
 
   const handleFilterChange = (
     type: 'public' | 'private',
-    id: string | number
+    id?: number,
+    classification?: string
   ) => {
     setFilterList((prev) => {
       let updatedPublic = prev.public;
       let updatedPrivate = prev.private;
 
       if (type === 'public') {
-        updatedPublic = prev.public.includes(id as string)
-          ? prev.public.filter((item) => item !== id)
-          : [...prev.public, id as string];
+        updatedPublic = prev.public.includes(classification!)
+          ? prev.public.filter((item) => item !== classification)
+          : [...prev.public, classification!];
       } else {
-        updatedPrivate = prev.private.includes(id as number)
+        updatedPrivate = prev.private.includes(id!)
           ? prev.private.filter((item) => item !== id)
-          : [...prev.private, id as number];
+          : [...prev.private, id!];
       }
 
       if (type === 'public') {
         publicGroupList.forEach((group: ScheduleGroup) => {
-          if (group.id === id) {
+          if (group.classification === classification) {
             group.checked = !group.checked;
           }
         });
@@ -119,9 +134,9 @@ const CalendarPage: NextPage = () => {
     filterList: ScheduleFilter
   ) => {
     return schedules.filter((schedule) => {
-      const isPublicMatch = schedule.classification
-        ? filterList.public.includes(schedule.classification)
-        : false;
+      const isPublicMatch = filterList.public.includes(
+        schedule.classification!
+      );
       const isPrivateMatch = filterList.private.includes(schedule.groupId!);
       return isPublicMatch || isPrivateMatch;
     });

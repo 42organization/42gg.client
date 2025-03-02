@@ -9,12 +9,14 @@ const GroupContext = createContext<{
 });
 
 export const GroupProvider = ({ children }: { children: React.ReactNode }) => {
-  const [groupList, setGroupList] = useState<ScheduleGroup[]>([]);
   const { scheduleGroup: groups } = useScheduleGroupGet('custom');
+  const [groupList, setGroupList] = useState<ScheduleGroup[]>([]);
 
   useEffect(() => {
-    setGroupList(groups);
-  }, [groups]);
+    if (groups.length > 0 && groupList.length === 0) {
+      setGroupList(groups);
+    }
+  }, [groups, groupList]);
 
   return (
     <GroupContext.Provider value={{ groupList }}>

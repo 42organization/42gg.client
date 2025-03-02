@@ -81,8 +81,7 @@ const CalendarLayout = ({
       <CustomCalendar>
         <Calendar<Schedule>
           localizer={localizer}
-          // events={filterSchedules(scheduleData, filterList)}
-          events={Array.isArray(scheduleData) ? scheduleData : []}
+          events={filterSchedules(scheduleData, filterList)}
           startAccessor={(event) => {
             return new Date(event.startTime);
           }}

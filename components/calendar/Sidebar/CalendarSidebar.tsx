@@ -10,7 +10,11 @@ interface CalendarSidebarProps {
   publicGroups: ScheduleGroup[];
   privateGroups: ScheduleGroup[];
   filter: ScheduleFilter;
-  filterChange: (type: 'public' | 'private', id: string | number) => void;
+  filterChange: (
+    type: 'public' | 'private',
+    id: number,
+    classification: string
+  ) => void;
 }
 
 //프로필 부분 작업 필요
@@ -75,7 +79,8 @@ const CalendarSidebar = ({
           ...group,
           name: group.title || '',
           color: group.backgroundColor || '',
-          checked: filter.public.includes(group.id as string),
+          checked: filter.public.includes(group.classification as string),
+          // checked: group.checked || true,
         }))}
         onCheckboxChange={filterChange}
         type='public'
@@ -87,6 +92,7 @@ const CalendarSidebar = ({
           name: group.title || '',
           color: group.backgroundColor || '',
           checked: filter.private.includes(group.id as number),
+          // checked: group.checked || true,
         }))}
         onCheckboxChange={filterChange}
         type='private'

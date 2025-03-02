@@ -1,5 +1,6 @@
 export interface ScheduleGroup {
-  id: number;
+  id?: number;
+  classification?: string;
   title: string;
   backgroundColor: string;
   checked?: boolean;
