@@ -1,7 +1,8 @@
 .bubbleModal {
   position: absolute;
   z-index: 7;
-  width: 400px;
+  min-width: 400px;
+  max-width: 600px;
   padding: 25px 30px;
   overflow: visible;
   background: white;
@@ -60,28 +61,28 @@
 }
 
 .scheduleInfo .title {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 600;
 }
 
 .scheduleInfo .date {
   margin-top: 0.3rem;
   margin-bottom: 1.5rem;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 300;
   color: #808080;
 }
 
 .scheduleInfo .content {
   margin-bottom: 0.45rem;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 300;
   color: #808080;
 }
 
 .scheduleInfo .link {
   display: flex;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 300;
   color: #785ad2;
   text-decoration: underline;
@@ -97,7 +98,7 @@
 
 .importButtonContainer p {
   margin-bottom: 0.2rem;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 400;
   color: #785ad2;
   text-align: center;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import styles from 'styles/calendar/CalendarEvent.module.scss';
 import CalendarEventContent from './CalendarEventContent';
-import { useCalendarModal } from './modal/useCalendarModal';
+import { useCalendarModal } from '../modal/useCalendarModal';
 
 const CalendarEvent = ({ event }: { event: Schedule }) => {
   const { openModal } = useCalendarModal();
@@ -21,6 +21,7 @@ const CalendarEvent = ({ event }: { event: Schedule }) => {
               ? '#A98CFF'
               : event.groupColor
           }`,
+          opacity: event.status === 'DEACTIVATE' ? 0.7 : 1,
         } as React.CSSProperties
       }
       onClick={() => openModal({ type: 'detail', schedule: event })}

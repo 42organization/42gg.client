@@ -11,7 +11,7 @@ export interface Schedule {
   startTime: string;
   endTime: string;
   sharedCount?: number; //상세조회에서 필요
-  status?: string; //get에서 필요
+  status?: string; //get에서 필요 ACTIVATE | DEACTIVATE | DELETE
   alarm?: boolean; //개인일정
   groupId?: number; //개인일정
   groupTitle?: string; //개인일정

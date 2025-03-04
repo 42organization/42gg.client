@@ -13,10 +13,8 @@ export const GroupProvider = ({ children }: { children: React.ReactNode }) => {
   const [groupList, setGroupList] = useState<ScheduleGroup[]>([]);
 
   useEffect(() => {
-    if (groups.length > 0 && groupList.length === 0) {
-      setGroupList(groups);
-    }
-  }, [groups, groupList]);
+    setGroupList(groups);
+  }, [groups]);
 
   return (
     <GroupContext.Provider value={{ groupList }}>

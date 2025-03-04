@@ -8,9 +8,9 @@ import useMonthScheduleGet from 'hooks/calendar/useMonthScheduleGet';
 import useScheduleGet from 'hooks/calendar/useScheduleGet';
 import useScheduleGroupGet from 'hooks/calendar/useScheduleGroupGet';
 import styles from 'styles/calendar/Calendar.module.scss';
-import CalendarEvent from './CalendarEvent';
 import CalendarHeader from './CalendarHeader';
 import CustomCalendar from './CustomCalendar';
+import CalendarEvent from './event/CalendarEvent';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import CalendarModalProvider from './modal/CalendarModalProvider';
 

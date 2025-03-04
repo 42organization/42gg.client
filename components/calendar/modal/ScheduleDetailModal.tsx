@@ -1,6 +1,7 @@
+import { send } from 'process';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { calendarModalProps } from 'types/calendar/modalTypes';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import { toastState } from 'utils/recoil/toast';
@@ -13,6 +14,7 @@ import styles from 'styles/calendar/modal/ScheduleDetailModal.module.scss';
 import GroupSelect from './GroupSelect';
 import { useCalendarModal } from './useCalendarModal';
 import SubmitButton from '../button/SubmitButton';
+import { useUserId } from '../userContext';
 
 const parseDate = (data: string) => {
   const date = new Date(data);
@@ -36,24 +38,45 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
   const { openModal, closeModal } = useCalendarModal();
   const [isDropdown, setIsDropdown] = useState(false);
   const { sendCalendarRequest } = useScheduleRequest();
+  const setSnackbar = useSetRecoilState(toastState);
+  const intraId = useUserId()?.userId ?? null;
 
   const handleEditClick = () => {
-    if (schedule.classification === 'PRIVATE_SCHEDULE') {
+    if (schedule.classification === 'PRIVATE_SCHEDULE' || schedule.groupId) {
       openModal({ type: 'PrivateUpsert', schedule: schedule });
+    } else if (schedule.author === intraId) {
+      console.log('일정 수정 가능');
+      // openModal({ type: 'PublicUpsert', schedule: schedule });
+    } else {
+      setSnackbar({
+        toastName: 'permission error',
+        severity: 'error',
+        message: '🔥 일정 수정 권한이 없습니다 🔥',
+        clicked: true,
+      });
     }
   };
 
   const deleteSchedule = async () => {
+    let url = '';
     if (schedule.classification === 'PRIVATE_SCHEDULE') {
-      await sendCalendarRequest(
-        'PATCH',
-        `private/${schedule.id}`,
-        schedule,
-        () => {
-          closeModal();
-        }
-      );
+      url = `private/${schedule.id}`;
+    } else if (schedule.groupId) {
+      url = `private/imported/${schedule.id}`;
+    } else if (schedule.author === intraId) {
+      url = `public/${schedule.id}`;
+    } else {
+      setSnackbar({
+        toastName: 'permission error',
+        severity: 'error',
+        message: '🔥 일정 삭제 권한이 없습니다 🔥',
+        clicked: true,
+      });
+      return;
     }
+    await sendCalendarRequest('PATCH', url, schedule, () => {
+      closeModal();
+    });
   };
 
   const importSchedule = async (groupId: number) => {
@@ -63,8 +86,15 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
         `public/${schedule.id}/${groupId}`,
         schedule,
         () => {
-          // schedule.classification = 'PRIVATE_SCHEDULE';
           closeModal();
+        },
+        (error: string) => {
+          setSnackbar({
+            toastName: 'response error',
+            severity: 'error',
+            message: '🔥 일정 가져오기에 실패했습니다 🔥',
+            clicked: true,
+          });
         }
       );
     }
@@ -73,15 +103,15 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
   return (
     <div className={styles.bubbleModal}>
       <div className={styles.buttonContainer}>
-        <EditSVG width={11} height={12} onClick={handleEditClick} />
+        <EditSVG width={15} height={16} onClick={handleEditClick} />
         <DeleteSVG
-          width={12}
-          height={12}
+          width={15}
+          height={15}
           onClick={() => {
             deleteSchedule();
           }}
         />
-        <CloseSVG width={9} height={9} onClick={closeModal} />
+        <CloseSVG width={12} height={12} onClick={closeModal} />
       </div>
       <div className={styles.modalContent}>
         <div className={styles.scheduleInfoContainer}>
@@ -104,7 +134,7 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
             </div>
             <div className={styles.content}>{schedule.content}</div>
             <div className={styles.link}>
-              <LinkSVG width={10} height={10} stroke='#785AD2' />
+              <LinkSVG width={14} height={14} stroke='#785AD2' />
               <Link href={schedule.link || '#'}>{schedule.link}</Link>
             </div>
           </div>

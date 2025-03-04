@@ -39,7 +39,6 @@ const GroupSelect = ({
     } else if (importSchedule) {
       importSchedule(group.id!);
     }
-    setIsDropdown(false);
   };
 
   const getRandomGroupColor = () => {
@@ -68,10 +67,7 @@ const GroupSelect = ({
           onClick={() => handleGroupChange(group)}
         >
           <div className={styles.groupItem}>
-            <ColorButton
-              color={group.backgroundColor}
-              onClick={() => handleGroupChange(group)}
-            />
+            <ColorButton color={group.backgroundColor} />
             <div>{group.title}</div>
           </div>
         </div>

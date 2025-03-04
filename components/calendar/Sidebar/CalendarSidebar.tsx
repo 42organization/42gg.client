@@ -4,6 +4,7 @@ import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import useScheduleGroupRequest from 'hooks/calendar/useScheduleGroupRequest';
 import styles from 'styles/calendar/CalendarSidebar.module.scss';
 import AccordianItem from './AccordianItem';
+import CalendarProfile from './Profile';
 
 interface CalendarSidebarProps {
   sidebarOpen: boolean;
@@ -40,21 +41,35 @@ const CalendarSidebar = ({
     );
   }, [privateGroups, filter.private]);
 
-  const handleEdit = async (
+  const handleEdit = (
     action: 'name' | 'color' | 'delete',
     id: string | number,
     value?: string
   ) => {
     setUpdatedPrivateGroups((prev) => {
       if (action === 'name') {
-        return prev.map((group) =>
-          group.id === id ? { ...group, title: value || '' } : group
-        );
+        const updateGroup = prev.find((group) => group.id === id);
+        if (updateGroup) {
+          sendGroupRequest('PUT', `custom/${id}`, {
+            ...updateGroup,
+            title: value!,
+          });
+          return prev.map((group) =>
+            group.id === id ? { ...group, title: value || '' } : group
+          );
+        }
       }
       if (action === 'color') {
-        return prev.map((group) =>
-          group.id === id ? { ...group, backgroundColor: value || '' } : group
-        );
+        const updateGroup = prev.find((group) => group.id === id);
+        if (updateGroup) {
+          sendGroupRequest('PUT', `custom/${id}`, {
+            ...updateGroup,
+            backgroundColor: value!,
+          });
+          return prev.map((group) =>
+            group.id === id ? { ...group, backgroundColor: value || '' } : group
+          );
+        }
       }
       if (action === 'delete') {
         const deleteGroup = prev.find((group) => group.id === id);
@@ -70,7 +85,7 @@ const CalendarSidebar = ({
   return (
     <div className={sidebarOpen ? styles.sidebarOpen : styles.sidebarClose}>
       <div className={styles.profile}>
-        <h3>프로필 들어갈 곳</h3>
+        <CalendarProfile />
       </div>
       <div className={styles.divider} />
       <AccordianItem

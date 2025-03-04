@@ -2,7 +2,7 @@ import styles from 'styles/calendar/button/ColorButton.module.scss';
 
 interface ColorButtonProps {
   color: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const ColorButton = ({ color, onClick }: ColorButtonProps) => (

@@ -1,15 +1,7 @@
 import React, { useEffect, useRef } from 'react';
+import { groupColorTypes } from 'types/calendar/groupType';
 import ColorButton from 'components/calendar/button/ColorButton';
 import styles from 'styles/calendar/modal/GroupColorSelect.module.scss';
-
-const colorList = [
-  '#9C57BC',
-  '#7DC163',
-  '#E6634F',
-  '#FFDD47',
-  '#FFA646',
-  '#357BE5',
-];
 
 interface GroupColorSelectProps {
   id: number;
@@ -43,12 +35,12 @@ const GroupColorSelect = ({
 
   return (
     <div className={styles.dropdown} ref={dropdownRef}>
-      {colorList.map((color) => (
+      {Object.entries(groupColorTypes).map(([key, value]) => (
         <ColorButton
-          key={color}
-          color={color}
+          key={key}
+          color={value}
           onClick={() => {
-            handleEdit && handleEdit('color', id, color);
+            handleEdit && handleEdit('color', id, value);
             setOpenDropdownId(0);
           }}
         />
