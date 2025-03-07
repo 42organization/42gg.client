@@ -7,7 +7,7 @@ import ScheduleDetailModal from './ScheduleDetailModal';
 import { useCalendarModal } from './useCalendarModal';
 
 const CalendarModalProvider = () => {
-  const [modalProps] = useRecoilState(calendarModalState);
+  const [modalProps, setModalState] = useRecoilState(calendarModalState);
   const { closeModal } = useCalendarModal();
 
   let modalContent;

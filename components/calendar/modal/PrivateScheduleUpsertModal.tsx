@@ -27,7 +27,6 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
   const { sendCalendarRequest, error } = useScheduleRequest();
   const setSnackbar = useSetRecoilState(toastState);
   const groupList = useGroup();
-  // let nowGroup;
 
   const findNowGroup = () => {
     const nowGroup = groupList.groupList.find(
@@ -46,6 +45,7 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
           link: '',
           startTime: new Date().toISOString(),
           endTime: new Date().toISOString(),
+          alarm: false,
         }
   );
 
@@ -59,6 +59,7 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
           link: '',
           startTime: new Date().toISOString(),
           endTime: new Date().toISOString(),
+          alarm: false,
         }
   );
 
@@ -101,7 +102,6 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
 
   const createSchedule = async () => {
     scheduleData.status = 'ACTIVATE';
-    scheduleData.alarm = false;
     scheduleData.startTime = toKSTISOString(new Date(scheduleData.startTime));
     scheduleData.endTime = toKSTISOString(new Date(scheduleData.endTime));
     await sendCalendarRequest(
@@ -275,9 +275,9 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
       <div className={styles.alarm}>
         <span>알림</span>
         <Switch
-          checked={scheduleData.alarm}
-          onChange={() =>
-            setScheduleData((prev) => ({ ...prev, alarm: !prev.alarm }))
+          checked={scheduleData.alarm ?? false}
+          onChange={(e) =>
+            setScheduleData((prev) => ({ ...prev, alarm: e.target.checked }))
           }
         />
       </div>
@@ -296,7 +296,6 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
                 : createSchedule
               : undefined
           }
-          // onClick={()=>console.log(scheduleData)}
         />
       </div>
     </div>

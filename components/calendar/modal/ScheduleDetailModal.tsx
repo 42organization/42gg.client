@@ -1,9 +1,10 @@
-import { send } from 'process';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import NotificationsOffIcon from '@mui/icons-material/NotificationsOff';
 import { calendarModalProps } from 'types/calendar/modalTypes';
-import { Schedule } from 'types/calendar/scheduleTypes';
 import { toastState } from 'utils/recoil/toast';
 import CloseSVG from 'public/image/calendar/closeIcon.svg';
 import EditSVG from 'public/image/calendar/editIcon.svg';
@@ -40,6 +41,7 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
   const { sendCalendarRequest } = useScheduleRequest();
   const setSnackbar = useSetRecoilState(toastState);
   const intraId = useUserId()?.userId ?? null;
+  const router = useRouter();
 
   const handleEditClick = () => {
     if (schedule.classification === 'PRIVATE_SCHEDULE' || schedule.groupId) {
@@ -134,9 +136,40 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
             </div>
             <div className={styles.content}>{schedule.content}</div>
             <div className={styles.link}>
-              <LinkSVG width={14} height={14} stroke='#785AD2' />
+              <LinkSVG width={17} height={17} stroke='#785AD2' />
               <Link href={schedule.link || '#'}>{schedule.link}</Link>
             </div>
+            {schedule.groupId && (
+              <div className={styles.alarm}>
+                {schedule.alarm ? (
+                  <>
+                    <NotificationsActiveIcon
+                      style={{
+                        color: '#785AD2',
+                        fontSize: '18px',
+                        margin: 0,
+                        padding: 0,
+                      }}
+                      sx={{ margin: 0, padding: 0 }}
+                    />
+                    <p>전날과 당일 알림 ON</p>
+                  </>
+                ) : (
+                  <>
+                    <NotificationsOffIcon
+                      style={{
+                        color: '#785AD2',
+                        fontSize: '18px',
+                        margin: 0,
+                        padding: 0,
+                      }}
+                      sx={{ margin: 0, padding: 0 }}
+                    />
+                    <p>전날과 당일 알림 OFF</p>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         </div>
         {schedule.classification !== 'PRIVATE_SCHEDULE' &&

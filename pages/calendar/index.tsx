@@ -213,6 +213,9 @@ const CalendarPage: NextPage = () => {
 export default CalendarPage;
 
 /*
+1. 알람 기능
+2. 처음에 그룹 아무것도 없을때 
+
 1. ACTIVE / DEACTIVE 색깔 (완)
 2. 현재 선택한 필터의 일정만 나오도록(완) -> 필터링 하는 부분 커스텀 훅으로 리팩토링
 3. ui에 알람 관련해서 추가

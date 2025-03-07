@@ -33,6 +33,7 @@ const useScheduleGroupRequest = <T>() => {
           setData(res.data);
         }
         queryClient.invalidateQueries('scheduleGroup');
+        queryClient.invalidateQueries('schedule');
         return res.data;
       }
     } catch (error) {

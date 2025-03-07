@@ -7,6 +7,10 @@ import { useCalendarModal } from '../modal/useCalendarModal';
 const CalendarEvent = ({ event }: { event: Schedule }) => {
   const { openModal } = useCalendarModal();
 
+  const openDetailModal = () => {
+    openModal({ type: 'detail', schedule: event });
+  };
+
   return (
     <div
       className={styles.eventBox}
@@ -24,7 +28,7 @@ const CalendarEvent = ({ event }: { event: Schedule }) => {
           opacity: event.status === 'DEACTIVATE' ? 0.7 : 1,
         } as React.CSSProperties
       }
-      onClick={() => openModal({ type: 'detail', schedule: event })}
+      onClick={openDetailModal}
     >
       <CalendarEventContent schedule={event} />
     </div>
