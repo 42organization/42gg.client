@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { ScheduleGroup, groupColorTypes } from 'types/calendar/groupType';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import ColorButton from 'components/calendar/button/ColorButton';

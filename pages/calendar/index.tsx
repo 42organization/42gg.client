@@ -4,16 +4,13 @@ import { ScheduleGroup } from 'types/calendar/groupType';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import CalendarLayout from 'components/calendar/CalendarLayout';
-import { GroupProvider, useGroup } from 'components/calendar/GroupContext';
-import CalendarModalProvider from 'components/calendar/modal/CalendarModalProvider';
+import { GroupProvider } from 'components/calendar/GroupContext';
 import { useCalendarModal } from 'components/calendar/modal/useCalendarModal';
 import CalendarSidebar from 'components/calendar/Sidebar/CalendarSidebar';
 import { UserProvider } from 'components/calendar/userContext';
 import MenuSVG from 'public/image/calendar/menuIcon.svg';
 import { useUser } from 'hooks/agenda/Layout/useUser';
-import useScheduleGet from 'hooks/calendar/useScheduleGet';
 import useScheduleGroupGet from 'hooks/calendar/useScheduleGroupGet';
-import useScheduleGroupRequest from 'hooks/calendar/useScheduleGroupRequest';
 import styles from 'styles/calendar/Calendar.module.scss';
 
 const publicGroupList: ScheduleGroup[] = [

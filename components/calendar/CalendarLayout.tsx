@@ -5,14 +5,12 @@ import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import useMonthScheduleGet from 'hooks/calendar/useMonthScheduleGet';
-import useScheduleGet from 'hooks/calendar/useScheduleGet';
-import useScheduleGroupGet from 'hooks/calendar/useScheduleGroupGet';
 import styles from 'styles/calendar/Calendar.module.scss';
 import CalendarHeader from './CalendarHeader';
 import CustomCalendar from './CustomCalendar';
 import CalendarEvent from './event/CalendarEvent';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
 import CalendarModalProvider from './modal/CalendarModalProvider';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 interface calendarProps {
   filterSchedules: (
