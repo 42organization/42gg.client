@@ -16,6 +16,7 @@ import DownSVG from 'public/image/calendar/downToggle.svg';
 import LinkSVG from 'public/image/calendar/linkIcon.svg';
 import useScheduleRequest from 'hooks/calendar/useScheduleRequest';
 import styles from 'styles/calendar/modal/PrivateScheduleUpsertModal.module.scss';
+import ToggleSwitch from '../button/ToggleSwitch';
 
 const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
   const [isDropdown, setIsDropdown] = useState(false);
@@ -271,10 +272,10 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
       <div className={styles.divider} />
       <div className={styles.alarm}>
         <span>알림</span>
-        <Switch
+        <ToggleSwitch
           checked={scheduleData.alarm ?? false}
-          onChange={(e) =>
-            setScheduleData((prev) => ({ ...prev, alarm: e.target.checked }))
+          onChange={() =>
+            setScheduleData((prev) => ({ ...prev, alarm: !prev.alarm }))
           }
         />
       </div>
