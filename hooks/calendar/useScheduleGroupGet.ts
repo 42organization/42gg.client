@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { instanceInCalendar } from '../../utils/axios';
+import { instanceInCalendar } from 'utils/axios';
 
 const useScheduleGroupGet = (url: string) => {
   const {

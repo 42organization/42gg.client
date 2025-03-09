@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { ScheduleGroup } from 'types/calendar/groupType';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import { Schedule } from 'types/calendar/scheduleTypes';
+import { useCalendarModal } from 'utils/calendar/useCalendarModal';
 import CalendarLayout from 'components/calendar/CalendarLayout';
 import { GroupProvider } from 'components/calendar/GroupContext';
-import { useCalendarModal } from 'components/calendar/modal/useCalendarModal';
-import CalendarSidebar from 'components/calendar/Sidebar/CalendarSidebar';
+import CalendarSidebar from 'components/calendar/sidebar/CalendarSidebar';
 import { UserProvider } from 'components/calendar/userContext';
 import MenuSVG from 'public/image/calendar/menuIcon.svg';
 import { useUser } from 'hooks/agenda/Layout/useUser';
@@ -210,14 +210,11 @@ const CalendarPage: NextPage = () => {
 export default CalendarPage;
 
 /*
-1. 알람 기능
-2. 처음에 그룹 아무것도 없을때 
+1. 알람 기능, 알람버튼
+2. ACTIVE / DEACTIVE 색깔 (완)
+3. console.log 없애기
+4. import 절대경로로 수정
+5. useCalendarModal.tsx -> utils
 
-1. ACTIVE / DEACTIVE 색깔 (완)
-2. 현재 선택한 필터의 일정만 나오도록(완) -> 필터링 하는 부분 커스텀 훅으로 리팩토링
-3. ui에 알람 관련해서 추가
-4. 모달 띄운 채로 일정 공유 가능한가 https://velog.io/@mjieun/Next.js-%EB%AA%A8%EB%8B%AC-%EC%97%B4%EB%A9%B4%EC%84%9C-URL-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0-Parallel-Routes-Intercepting-Routes
-5. 가져오기 부분 api, 기능 (완)
-6. 처음에 그룹이 아무것도 없을때 
-7. 사이드바 프로필
+나중에. 모달 띄운 채로 일정 공유 가능한가 https://velog.io/@mjieun/Next.js-%EB%AA%A8%EB%8B%AC-%EC%97%B4%EB%A9%B4%EC%84%9C-URL-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0-Parallel-Routes-Intercepting-Routes
 */

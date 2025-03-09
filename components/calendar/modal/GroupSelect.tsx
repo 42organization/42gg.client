@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { ScheduleGroup, groupColorTypes } from 'types/calendar/groupType';
 import { Schedule } from 'types/calendar/scheduleTypes';
+import { toastState } from 'utils/recoil/toast';
 import ColorButton from 'components/calendar/button/ColorButton';
+import { useGroup } from 'components/calendar/GroupContext';
 import PlusSVG from 'public/image/calendar/plusIcon.svg';
 import useScheduleGroupRequest from 'hooks/calendar/useScheduleGroupRequest';
 import styles from 'styles/calendar/modal/GroupSelect.module.scss';
-import { useGroup } from '../GroupContext';
 
 interface GroupSelectProps {
   isDropdown: boolean;
@@ -27,6 +29,7 @@ const GroupSelect = ({
   const { sendGroupRequest } = useScheduleGroupRequest();
   const [newGroupTitle, setNewGroupTitle] = useState<string>('');
   const [isComposing, setIsComposing] = useState<boolean>(false);
+  const setSnackbar = useSetRecoilState(toastState);
 
   const handleGroupChange = (group: ScheduleGroup) => {
     if (setSchedule) {
@@ -53,9 +56,22 @@ const GroupSelect = ({
       backgroundColor: getRandomGroupColor(),
       id: 0,
     };
-    await sendGroupRequest('POST', 'custom', newGroup, () => {
-      setNewGroupTitle('');
-    });
+    await sendGroupRequest(
+      'POST',
+      'custom',
+      newGroup,
+      () => {
+        setNewGroupTitle('');
+      },
+      (error: string) => {
+        setSnackbar({
+          toastName: 'post error',
+          severity: 'error',
+          message: '그룹 생성에 실패했습니다.',
+          clicked: true,
+        });
+      }
+    );
   };
 
   return (

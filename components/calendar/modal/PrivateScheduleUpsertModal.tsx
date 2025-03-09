@@ -6,20 +6,17 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { ScheduleGroup } from 'types/calendar/groupType';
 import { calendarModalProps } from 'types/calendar/modalTypes';
 import { Schedule } from 'types/calendar/scheduleTypes';
+import { useCalendarModal } from 'utils/calendar/useCalendarModal';
 import { toastState } from 'utils/recoil/toast';
+import SumbitButton from 'components/calendar/button/SubmitButton';
+import { useGroup } from 'components/calendar/GroupContext';
+import CustomDatepicker from 'components/calendar/modal/CustomDatepicker';
+import GroupSelect from 'components/calendar/modal/GroupSelect';
 import DownSVG from 'public/image/calendar/downToggle.svg';
 import LinkSVG from 'public/image/calendar/linkIcon.svg';
 import useScheduleRequest from 'hooks/calendar/useScheduleRequest';
 import styles from 'styles/calendar/modal/PrivateScheduleUpsertModal.module.scss';
-import CustomDatepicker from './CustomDatepicker';
-import GroupSelect from './GroupSelect';
-import { useCalendarModal } from './useCalendarModal';
-import SumbitButton from '../button/SubmitButton';
-import { useGroup } from '../GroupContext';
 
-//nowGroup 부분 -> 일정 추가일시 groupid:1인 그룹이 기본으로 설정되어 있도록 하는 로직 필요(그룹 불러오기)
-//모달 바깥 클릭했을때(모달 꺼졌을 때) 수정/추가한 것 취소 로직 필요
-//등록버튼 클릭 시 일정 저장하는 로직 필요
 const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
   const [isDropdown, setIsDropdown] = useState(false);
   const [isMobile, setIsMobile] = useState(false);

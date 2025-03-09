@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Checkbox, FormControlLabel } from '@mui/material';
+import GroupColorSelect from 'components/calendar/modal/GroupColorSelect';
 import styles from 'styles/calendar/CalendarSidebar.module.scss';
-import GroupColorSelect from '../modal/GroupColorSelect';
 
 interface CheckboxData {
   id?: number;

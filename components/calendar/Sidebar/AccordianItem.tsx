@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import CheckboxItem from 'components/calendar/sidebar/CheckboxItem';
 import DownSVG from 'public/image/calendar/downToggle.svg';
 import EditSVG from 'public/image/calendar/editIcon.svg';
 import styles from 'styles/calendar/CalendarSidebar.module.scss';
-import CheckboxItem from './CheckboxItem';
 
 interface CheckboxData {
   id?: number;

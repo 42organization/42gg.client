@@ -1,7 +1,7 @@
 import { IntraProfileDataProps } from 'types/agenda/profile/profileDataTypes';
+import { useUserId } from 'components/calendar/userContext';
 import { useUser } from 'hooks/agenda/Layout/useUser';
 import useFetchGet from 'hooks/agenda/useFetchGet';
-import { useUserId } from '../userContext';
 
 const CalendarProfile = () => {
   const intraId = useUser()?.intraId;

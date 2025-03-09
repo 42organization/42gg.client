@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { calendarModalProps } from 'types/calendar/modalTypes';
+import { useCalendarModal } from 'utils/calendar/useCalendarModal';
 import CheckSVG from 'public/image/calendar/checkIcon.svg';
 import styles from 'styles/calendar/modal/AddSelect.module.scss';
-import { useCalendarModal } from './useCalendarModal';
 
 const AddSelect = (props: calendarModalProps) => {
   const [modalType, setModalType] = useState('');

@@ -5,17 +5,17 @@ import { useSetRecoilState } from 'recoil';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import NotificationsOffIcon from '@mui/icons-material/NotificationsOff';
 import { calendarModalProps } from 'types/calendar/modalTypes';
+import { useCalendarModal } from 'utils/calendar/useCalendarModal';
 import { toastState } from 'utils/recoil/toast';
+import SubmitButton from 'components/calendar/button/SubmitButton';
+import GroupSelect from 'components/calendar/modal/GroupSelect';
+import { useUserId } from 'components/calendar/userContext';
 import CloseSVG from 'public/image/calendar/closeIcon.svg';
 import EditSVG from 'public/image/calendar/editIcon.svg';
 import LinkSVG from 'public/image/calendar/linkIcon.svg';
 import DeleteSVG from 'public/image/calendar/trashIcon.svg';
 import useScheduleRequest from 'hooks/calendar/useScheduleRequest';
 import styles from 'styles/calendar/modal/ScheduleDetailModal.module.scss';
-import GroupSelect from './GroupSelect';
-import { useCalendarModal } from './useCalendarModal';
-import SubmitButton from '../button/SubmitButton';
-import { useUserId } from '../userContext';
 
 const parseDate = (data: string) => {
   const date = new Date(data);

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { ScheduleGroup } from 'types/calendar/groupType';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
+import { toastState } from 'utils/recoil/toast';
+import AccordianItem from 'components/calendar/sidebar/AccordianItem';
+import CalendarProfile from 'components/calendar/sidebar/Profile';
 import useScheduleGroupRequest from 'hooks/calendar/useScheduleGroupRequest';
 import styles from 'styles/calendar/CalendarSidebar.module.scss';
-import AccordianItem from './AccordianItem';
-import CalendarProfile from './Profile';
 
 interface CalendarSidebarProps {
   sidebarOpen: boolean;
@@ -31,6 +33,7 @@ const CalendarSidebar = ({
     ScheduleGroup[]
   >(privateGroups || []);
   const { sendGroupRequest } = useScheduleGroupRequest();
+  const setSnackbar = useSetRecoilState(toastState);
 
   useEffect(() => {
     setUpdatedPrivateGroups(
@@ -50,10 +53,22 @@ const CalendarSidebar = ({
       if (action === 'name') {
         const updateGroup = prev.find((group) => group.id === id);
         if (updateGroup) {
-          sendGroupRequest('PUT', `custom/${id}`, {
-            ...updateGroup,
-            title: value!,
-          });
+          sendGroupRequest(
+            'PUT',
+            `custom/${id}`,
+            {
+              ...updateGroup,
+              title: value!,
+            },
+            (error: string) => {
+              setSnackbar({
+                toastName: 'post error',
+                severity: 'error',
+                message: '그룹 이름 수정에 실패했습니다.',
+                clicked: true,
+              });
+            }
+          );
           return prev.map((group) =>
             group.id === id ? { ...group, title: value || '' } : group
           );
@@ -62,10 +77,22 @@ const CalendarSidebar = ({
       if (action === 'color') {
         const updateGroup = prev.find((group) => group.id === id);
         if (updateGroup) {
-          sendGroupRequest('PUT', `custom/${id}`, {
-            ...updateGroup,
-            backgroundColor: value!,
-          });
+          sendGroupRequest(
+            'PUT',
+            `custom/${id}`,
+            {
+              ...updateGroup,
+              backgroundColor: value!,
+            },
+            (error: string) => {
+              setSnackbar({
+                toastName: 'post error',
+                severity: 'error',
+                message: '그룹 컬러 수정에 실패했습니다.',
+                clicked: true,
+              });
+            }
+          );
           return prev.map((group) =>
             group.id === id ? { ...group, backgroundColor: value || '' } : group
           );
@@ -74,7 +101,19 @@ const CalendarSidebar = ({
       if (action === 'delete') {
         const deleteGroup = prev.find((group) => group.id === id);
         if (deleteGroup) {
-          sendGroupRequest('DELETE', `custom/${id}`, deleteGroup);
+          sendGroupRequest(
+            'DELETE',
+            `custom/${id}`,
+            deleteGroup,
+            (error: string) => {
+              setSnackbar({
+                toastName: 'post error',
+                severity: 'error',
+                message: '그룹 삭제에 실패했습니다.',
+                clicked: true,
+              });
+            }
+          );
         }
         return prev.filter((group) => group.id !== id);
       }
@@ -95,7 +134,6 @@ const CalendarSidebar = ({
           name: group.title || '',
           color: group.backgroundColor || '',
           checked: filter.public.includes(group.classification as string),
-          // checked: group.checked || true,
         }))}
         onCheckboxChange={filterChange}
         type='public'
@@ -107,7 +145,6 @@ const CalendarSidebar = ({
           name: group.title || '',
           color: group.backgroundColor || '',
           checked: filter.private.includes(group.id as number),
-          // checked: group.checked || true,
         }))}
         onCheckboxChange={filterChange}
         type='private'

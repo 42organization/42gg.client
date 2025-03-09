@@ -1,10 +1,10 @@
 import { useRecoilState } from 'recoil';
+import { useCalendarModal } from 'utils/calendar/useCalendarModal';
 import { calendarModalState } from 'utils/recoil/calendar/modalState';
+import AddSelect from 'components/calendar/modal/AddSelect';
+import PrivateScheduleUpsertModal from 'components/calendar/modal/PrivateScheduleUpsertModal';
+import ScheduleDetailModal from 'components/calendar/modal/ScheduleDetailModal';
 import styles from 'styles/calendar/modal/CalendarModalProvider.module.scss';
-import AddSelect from './AddSelect';
-import PrivateScheduleUpsertModal from './PrivateScheduleUpsertModal';
-import ScheduleDetailModal from './ScheduleDetailModal';
-import { useCalendarModal } from './useCalendarModal';
 
 const CalendarModalProvider = () => {
   const [modalProps, setModalState] = useRecoilState(calendarModalState);

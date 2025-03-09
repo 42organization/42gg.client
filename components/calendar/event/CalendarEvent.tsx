@@ -2,7 +2,7 @@ import React from 'react';
 import { Schedule } from 'types/calendar/scheduleTypes';
 import styles from 'styles/calendar/CalendarEvent.module.scss';
 import CalendarEventContent from './CalendarEventContent';
-import { useCalendarModal } from '../modal/useCalendarModal';
+import { useCalendarModal } from '../../../utils/calendar/useCalendarModal';
 
 const CalendarEvent = ({ event }: { event: Schedule }) => {
   const { openModal } = useCalendarModal();

@@ -1,16 +1,16 @@
 import { format, parse, startOfWeek, getDay } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
-import React, { Children, cloneElement, useEffect, useState } from 'react';
+import React, { Children, cloneElement, useState } from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import { Schedule } from 'types/calendar/scheduleTypes';
+import CalendarHeader from 'components/calendar/CalendarHeader';
+import CustomCalendar from 'components/calendar/CustomCalendar';
+import CalendarEvent from 'components/calendar/event/CalendarEvent';
+import CalendarModalProvider from 'components/calendar/modal/CalendarModalProvider';
 import useMonthScheduleGet from 'hooks/calendar/useMonthScheduleGet';
-import styles from 'styles/calendar/Calendar.module.scss';
-import CalendarHeader from './CalendarHeader';
-import CustomCalendar from './CustomCalendar';
-import CalendarEvent from './event/CalendarEvent';
-import CalendarModalProvider from './modal/CalendarModalProvider';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import styles from 'styles/calendar/Calendar.module.scss';
 
 interface calendarProps {
   filterSchedules: (
