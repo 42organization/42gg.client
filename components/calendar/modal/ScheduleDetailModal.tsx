@@ -47,7 +47,7 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
     if (schedule.classification === 'PRIVATE_SCHEDULE' || schedule.groupId) {
       openModal({ type: 'PrivateUpsert', schedule: schedule });
     } else if (schedule.author === intraId) {
-      console.log('일정 수정 가능');
+      // 전체일정 수정 모달
       // openModal({ type: 'PublicUpsert', schedule: schedule });
     } else {
       setSnackbar({

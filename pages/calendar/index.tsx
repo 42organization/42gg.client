@@ -208,13 +208,3 @@ const CalendarPage: NextPage = () => {
 };
 
 export default CalendarPage;
-
-/*
-1. 알람 기능, 알람버튼
-2. ACTIVE / DEACTIVE 색깔 (완)
-3. console.log 없애기
-4. import 절대경로로 수정
-5. useCalendarModal.tsx -> utils
-
-나중에. 모달 띄운 채로 일정 공유 가능한가 https://velog.io/@mjieun/Next.js-%EB%AA%A8%EB%8B%AC-%EC%97%B4%EB%A9%B4%EC%84%9C-URL-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0-Parallel-Routes-Intercepting-Routes
-*/

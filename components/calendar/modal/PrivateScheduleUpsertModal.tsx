@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useId } from 'react';
 import DatePicker from 'react-datepicker';
 import { useSetRecoilState } from 'recoil';
-import { Switch } from '@mui/material';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ScheduleGroup } from 'types/calendar/groupType';
 import { calendarModalProps } from 'types/calendar/modalTypes';
@@ -128,12 +127,17 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
     );
   };
 
+  //imported 일정에서 그룹, 알람 외 다른 것 수정 시 setSnackbar로 에러 메세지 띄우기
   const updateSchedule = async () => {
     scheduleData.startTime = toKSTISOString(new Date(scheduleData.startTime));
     scheduleData.endTime = toKSTISOString(new Date(scheduleData.endTime));
+    const url =
+      scheduleData.classification !== 'PRIVATE_SCHEDULE'
+        ? `private/imported/${scheduleData.id}`
+        : `private/${scheduleData.id}`;
     await sendCalendarRequest(
       'PUT',
-      `private/${scheduleData.id}`,
+      url,
       scheduleData,
       () => {
         closeModal();
