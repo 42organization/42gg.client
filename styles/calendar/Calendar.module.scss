@@ -1,0 +1,63 @@
+@import '~react-big-calendar/lib/css/react-big-calendar.css';
+@import '~react-big-calendar/lib/sass/styles';
+
+.calendarBody {
+  width: 100%;
+  height: 100vh;
+  padding: 1.5rem;
+  background: linear-gradient(#f4f5fb, #e8ebfc);
+}
+
+.calendarView {
+  position: relative;
+  display: flex;
+  max-width: 100%;
+  height: 100%;
+  flex-direction: row;
+  // overflow: hidden;
+  background-color: #f9f9fc;
+  border-radius: 0.5rem;
+}
+
+.calendarBox {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin: 4rem 2rem 2.5rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px #ebedf6;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.show {
+  display: block;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .calendarBody {
+    padding: 0.5rem;
+  }
+  .calendarView {
+    height: 95%;
+  }
+  .calendarBox {
+    width: 100%;
+    margin: 0;
+  }
+}

@@ -1,0 +1,87 @@
+.sidebarOpen {
+  position: relative;
+  min-width: 250px;
+  overflow: scroll;
+  background-color: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 5px;
+}
+
+.profile {
+  display: flex;
+  width: 100%;
+  height: 250px;
+  align-items: center;
+  justify-content: center;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  margin: 5px 0;
+  border-bottom: 1px solid #b4bdee;
+}
+
+.accordianMenu {
+  display: flex;
+  padding: 0 40px;
+  overflow: scroll;
+  color: #c1c8f0;
+  align-items: center;
+  justify-content: flex-start;
+  p {
+    width: 100%;
+    padding-left: 15px;
+    font-size: 15px;
+    color: #785ad2;
+  }
+}
+
+.accordianContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0 40px 0 65px;
+}
+
+.accordianField {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  overflow: scroll;
+}
+
+.groupEditField {
+  display: flex;
+  flex-direction: row;
+}
+
+.groupField {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid #000000;
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .sidebarClose {
+    position: absolute;
+    top: 0;
+    left: -250px;
+    transition: transform 0.3s ease;
+  }
+
+  .sidebarOpen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 250px;
+    height: 100%;
+  }
+}

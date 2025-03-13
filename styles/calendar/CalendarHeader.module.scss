@@ -1,0 +1,24 @@
+.headerContainer {
+  display: flex;
+  padding: 10px 0;
+  margin: 0;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.button {
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.dateText {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .headerContainer {
+    padding: 0 0 1rem;
+  }
+}
