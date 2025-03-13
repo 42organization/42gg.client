@@ -2,6 +2,8 @@ import { NextRouter } from 'next/router';
 import { SetterOrUpdater } from 'recoil';
 import { agendaModal } from 'types/agenda/modalTypes';
 import { instanceInAgenda } from 'utils/axios';
+import MIME_TYPE from 'constants/common/mimeType';
+
 function agendadataToMsg(data: FormData, isEdit: boolean) {
   let msg = '';
   msg += '행사 제목 : ' + data.get('agendaTitle') + '\n';
@@ -88,8 +90,8 @@ const SubmitAgendaForm = async (
   }
   if (
     poster.size != 0 &&
-    poster.type !== 'image/jpeg' &&
-    poster.type !== 'image/jpg'
+    poster.type !== MIME_TYPE.JPEG &&
+    poster.type !== MIME_TYPE.JPG
   ) {
     errMsg = 'jpg, jpeg 파일만 업로드 가능합니다.\n';
     document.getElementById('agendaPoster')?.focus();
