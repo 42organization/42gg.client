@@ -10,14 +10,14 @@ import {
   Box,
   Tooltip,
 } from '@mui/material';
-import { Schedule } from 'types/calendar/scheduleTypes';
+import { AdminSchedule } from 'types/calendar/scheduleTypes';
 import { CalendarStatus } from 'constants/calendar/calendarConstants';
 import PageNation from 'components/Pagination';
 import styles from 'styles/admin/calendar/CalendarTable.module.scss';
 import { NoContent } from '../agenda/utils';
 
 interface CalendarTableProps {
-  data: Schedule[];
+  data: AdminSchedule[];
 }
 
 export const CalendarTable = ({ data }: CalendarTableProps) => {

@@ -1,12 +1,12 @@
 import { AxiosError } from 'axios';
 import { useState, useCallback } from 'react';
-import { Schedule } from 'types/calendar/scheduleTypes';
+import { AdminSchedule } from 'types/calendar/scheduleTypes';
 import { instanceInCalendar } from 'utils/axios';
 import { CalendarClassification } from 'constants/calendar/calendarConstants';
 import { useShowSnackbar } from './useShowSnackbar';
 
 export const useAdminCalendarClassGet = () => {
-  const [data, setData] = useState<Schedule[] | null>(null);
+  const [data, setData] = useState<AdminSchedule[] | null>(null);
   const [isLoading, setLoading] = useState(false);
   const showSnackbar = useShowSnackbar();
 

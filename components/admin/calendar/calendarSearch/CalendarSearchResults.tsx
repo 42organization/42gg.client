@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Schedule } from 'types/calendar/scheduleTypes';
+import { AdminSchedule } from 'types/calendar/scheduleTypes';
 import { CalendarSearchBar } from 'components/admin/calendar/calendarSearch/CalendarSearchBar';
 import { CalendarTable } from 'components/admin/calendar/CalendarTable';
 import { useAdminCalendarSearchGet } from 'hooks/calendar/admin/useAdminCalendarSearchGet';
@@ -14,7 +14,7 @@ export interface SearchData {
 
 export const CalendarSearchResults = () => {
   const { adminCalendarSearchGet } = useAdminCalendarSearchGet();
-  const [searchData, setSearchData] = useState<Schedule[] | null>();
+  const [searchData, setSearchData] = useState<AdminSchedule[] | null>();
 
   const handleSearchClick = useCallback(
     async ({ typeOption, content, startTime, endTime }: SearchData) => {

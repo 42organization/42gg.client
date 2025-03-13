@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { useState, useCallback } from 'react';
-import { Schedule } from 'types/calendar/scheduleTypes';
+import { AdminSchedule } from 'types/calendar/scheduleTypes';
 import { instanceInCalendar } from 'utils/axios';
 import { useShowSnackbar } from './useShowSnackbar';
 
@@ -12,7 +12,7 @@ interface SearchGetCallbackProps {
 }
 
 export const useAdminCalendarSearchGet = () => {
-  const [data, setData] = useState<Schedule[] | null>(null);
+  const [data, setData] = useState<AdminSchedule[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const showSnackbar = useShowSnackbar();
 
@@ -22,7 +22,7 @@ export const useAdminCalendarSearchGet = () => {
       content,
       startTime,
       endTime,
-    }: SearchGetCallbackProps): Promise<Schedule[] | null> => {
+    }: SearchGetCallbackProps): Promise<AdminSchedule[] | null> => {
       setIsLoading(true);
       if (!startTime) startTime = '2024-12-25';
       if (!endTime) {
