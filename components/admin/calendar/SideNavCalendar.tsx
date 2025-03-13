@@ -11,7 +11,7 @@ export default function SideNavCalendar() {
     <>
       <SideNavContent
         type={'calendar'}
-        url={'calendarList'}
+        url={'list'}
         menuName={'캘린더 조회'}
         currentPath={currentPath}
       >
@@ -20,7 +20,7 @@ export default function SideNavCalendar() {
 
       <SideNavContent
         type={'calendar'}
-        url={'calendarSearch'}
+        url={'search'}
         menuName={'캘린더 검색'}
         currentPath={currentPath}
       >
@@ -29,7 +29,7 @@ export default function SideNavCalendar() {
 
       <SideNavContent
         type={'calendar'}
-        url={'calendarCreate'}
+        url={'create'}
         menuName={'캘린더 일정 추가'}
         currentPath={currentPath}
       >

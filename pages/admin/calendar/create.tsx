@@ -2,12 +2,13 @@ import CalendarForm from 'components/calendar/CalendarForm';
 import styles from 'styles/admin/calendar/Calendar.module.scss';
 
 export default function CalendarCreate() {
-  // 제출 시, api 날리는거 구현
-
+  const onSubmit = () => {
+    console.log('hi');
+  };
   return (
     <div className={styles.createContainer}>
       <div className={styles.formContainer}>
-        <CalendarForm mode='add' />
+        <CalendarForm mode='add' onSubmit={onSubmit} />
       </div>
     </div>
   );
