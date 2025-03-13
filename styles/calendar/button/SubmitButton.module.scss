@@ -1,0 +1,39 @@
+.import {
+  width: 80px;
+  padding: 0.5rem;
+  font-size: 12px;
+  font-weight: 400;
+  color: white;
+  text-align: center;
+  background-color: #785ad2;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.submitInactive {
+  width: 124px;
+  padding: 0.25rem 0.5rem;
+  margin: 20px 0 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  text-align: center;
+  background-color: #c1c8f0;
+  border: none;
+  border-radius: 0.5rem;
+  justify-items: center;
+}
+
+.submitActive {
+  width: 124px;
+  padding: 0.25rem 0.5rem;
+  margin: 20px 0 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  text-align: center;
+  background-color: #785ad2;
+  border: none;
+  border-radius: 0.5rem;
+  justify-items: center;
+}

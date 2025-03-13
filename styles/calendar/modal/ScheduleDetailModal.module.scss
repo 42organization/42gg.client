@@ -1,0 +1,143 @@
+.bubbleModal {
+  position: absolute;
+  z-index: 7;
+  min-width: 400px;
+  max-width: 600px;
+  padding: 25px 30px;
+  overflow: visible;
+  background: white;
+  // top: 100px;
+  border-radius: 35px;
+  box-shadow: rgba(99, 99, 99, 0.2) 2px 6px 6px 2px;
+  justify-content: center;
+  align-items: center;
+}
+
+// .bubbleModal::before {
+//   position: absolute;
+//   top: 50%;
+//   left: -9px;
+//   width: 30px;
+//   height: 20px;
+//   content: '';
+//   background: #FAFAFF;
+//   border-bottom-left-radius: 2px;
+//   transform: skewX(-42deg);
+//   clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 58% 100%);
+// }
+
+.buttonContainer {
+  display: flex;
+  padding-bottom: 3px;
+  color: #484848;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.modalContent {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.groupIndex {
+  min-width: 15px;
+  max-width: 15px;
+  height: 15px;
+  margin: 4px 8px 4px 0;
+  border-radius: 50%;
+  align-content: flex-start;
+}
+
+.scheduleInfoContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.scheduleInfo {
+  width: 100%;
+}
+
+.scheduleInfo .title {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.scheduleInfo .date {
+  margin-top: 0.3rem;
+  margin-bottom: 1.5rem;
+  font-size: 16px;
+  font-weight: 300;
+  color: #808080;
+}
+
+.scheduleInfo .content {
+  margin-bottom: 0.45rem;
+  font-size: 18px;
+  font-weight: 300;
+  color: #808080;
+}
+
+.scheduleInfo .link {
+  display: flex;
+  margin-bottom: 0.45rem;
+  font-size: 16px;
+  font-weight: 300;
+  color: #785ad2;
+  text-decoration: underline;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.scheduleInfo .alarm {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  font-size: 16px;
+  font-weight: 300;
+  p {
+    padding: 0;
+    margin: 0;
+    color: #785AD2;
+  }
+}
+
+.importButtonContainer {
+  padding: 0;
+  margin: 0;
+  align-content: end;
+}
+
+.importButtonContainer p {
+  margin-bottom: 0.2rem;
+  font-size: 12px;
+  font-weight: 400;
+  color: #785ad2;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .bubbleModal {
+    width: 250px;
+    padding: 20px 25px;
+  }
+  .modalContent {
+    flex-direction: column;
+  }
+  .importButtonContainer {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .importButtonDevider {
+    width: 100%;
+  }
+
+  .importButtonContainer p {
+    width: 100%; /* 버튼 크기에 맞게 */
+    margin-bottom: 5px; /* 버튼과 간격 조정 */
+    text-align: center;
+  }
+}

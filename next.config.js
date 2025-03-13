@@ -38,6 +38,9 @@ const nextConfig = {
     });
     return config;
   },
+  compiler: {
+    styledComponents: true,  // styled-components 설정 활성화
+  },
 };
 
 module.exports = nextConfig;

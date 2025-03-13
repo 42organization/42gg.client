@@ -42,6 +42,7 @@ const TicketForm = ({ stringKey }: userFormProps) => {
         closeModal();
       },
       (error: string) => {
+        console.log('f');
         setSnackbar({
           toastName: `response error`,
           severity: 'error',
