@@ -30,15 +30,15 @@ jobs:
         run: |
           npm install
           npm run build
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          aws-access-key-id: ${{ secrets.AWS_DEV_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_DEV_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_BUCKET_REGION }}
+      # - name: Configure AWS credentials
+      #   uses: aws-actions/configure-aws-credentials@v3
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_DEV_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_DEV_SECRET_ACCESS_KEY }}
+      #     aws-region: ${{ secrets.AWS_BUCKET_REGION }}
 
-      - name: Deploy to S3
-        run: aws s3 sync ./${{ secrets.BUILD_DIRECTORY }} ${{ secrets.AWS_DEV_BUCKET_NAME }} --acl public-read --delete
+      # - name: Deploy to S3
+      #   run: aws s3 sync ./${{ secrets.BUILD_DIRECTORY }} ${{ secrets.AWS_DEV_BUCKET_NAME }} --acl public-read --delete
 
-      - name: CloudFront Invalidate Cache
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DEV_CLOUDFRONT_DISTRIBUTION_ID }} --paths '/*'
+      # - name: CloudFront Invalidate Cache
+      #   run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DEV_CLOUDFRONT_DISTRIBUTION_ID }} --paths '/*'
