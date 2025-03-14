@@ -10,6 +10,7 @@ import CalendarEvent from 'components/calendar/event/CalendarEvent';
 import CalendarModalProvider from 'components/calendar/modal/CalendarModalProvider';
 import useMonthScheduleGet from 'hooks/calendar/useMonthScheduleGet';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import useScheduleGet from 'hooks/calendar/useScheduleGet';
 import styles from 'styles/calendar/Calendar.module.scss';
 
 interface calendarProps {
@@ -69,6 +70,7 @@ const CalendarLayout = ({
     'private',
     currentDate
   );
+
   const scheduleData = [...PublicSchedule, ...PrivateSchedule];
   const handleNavigate = (date: Date) => {
     setCurrentDate(date);

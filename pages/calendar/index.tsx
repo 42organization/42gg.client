@@ -155,6 +155,9 @@ const CalendarPage: NextPage = () => {
     filterList: ScheduleFilter
   ) => {
     return schedules.filter((schedule) => {
+      if (schedule.status === 'DELETE') {
+        return false;
+      }
       const isPublicMatch = filterList.public.includes(
         schedule.classification!
       );
