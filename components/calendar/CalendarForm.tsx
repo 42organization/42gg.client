@@ -1,26 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { CalendarFormData } from 'types/calendar/formType';
+import {
+  CalendarClassification,
+  CalendarEventTag,
+  CalendarJobTag,
+  CalendarTechTag,
+} from 'constants/calendar/calendarConstants';
 import styles from 'styles/calendar/Form/CalendarForm.module.scss';
 
 interface CalendarFormProps {
   mode: 'add' | 'edit';
   isModal?: boolean;
-  initialData?: {
-    title: string;
-    startDate: Date;
-    endDate: Date;
-    description: string;
-    link?: string;
-  };
+  initialData?: Partial<CalendarFormData>;
   onClose?: () => void;
-  onSubmit: (data: {
-    title: string;
-    startDate: Date;
-    endDate: Date;
-    description: string;
-    link?: string;
-  }) => void;
+  onSubmit: (data: CalendarFormData) => void;
 }
 
 const CalendarForm: React.FC<CalendarFormProps> = ({
@@ -30,21 +25,31 @@ const CalendarForm: React.FC<CalendarFormProps> = ({
   onClose,
   onSubmit,
 }) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<CalendarFormData>({
     title: '',
     startDate: new Date(),
     endDate: new Date(),
     description: '',
     link: '',
+    ...initialData,
   });
 
-  const [selectedTag, setSelectedTag] = useState<'42서울일정' | '취업 공고'>(
-    '42서울일정'
+  const [selectedTag, setSelectedTag] = useState<CalendarClassification>(
+    CalendarClassification.EVENT
   );
+  const [selectedSubTag, setSelectedSubTag] = useState<
+    CalendarEventTag | CalendarJobTag | null
+  >(null);
+  const [selectedTechTag, setSelectedTechTag] =
+    useState<CalendarTechTag | null>(null);
 
   useEffect(() => {
     if (mode === 'edit' && initialData) {
-      setFormData(initialData);
+      setFormData((prev) => ({
+        ...prev,
+        ...initialData,
+        link: initialData.link || '',
+      }));
     }
   }, [mode, initialData]);
 
@@ -61,9 +66,21 @@ const CalendarForm: React.FC<CalendarFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    const requestData = {
+      ...formData,
+      tag: selectedTag,
+      subTag: selectedSubTag,
+      techTag:
+        selectedTag === CalendarClassification.JOB ? selectedTechTag : null,
+      link: formData.link ? formData.link.trim() : '',
+    };
+    onSubmit(requestData);
     if (isModal && onClose) onClose();
   };
+
+  const availableTags = Object.values(CalendarClassification).filter(
+    (tag) => tag !== CalendarClassification.PRIVATE
+  );
 
   return (
     <div className={styles.container}>
@@ -94,35 +111,72 @@ const CalendarForm: React.FC<CalendarFormProps> = ({
           <div className={styles.label}>태그</div>
           <div className={styles.tagField}>
             <div className={styles.selectTagContainer}>
-              <div
-                className={`${styles.tagItem} ${
-                  selectedTag === '42서울일정' ? styles.selected : ''
-                }`}
-                onClick={() => setSelectedTag('42서울일정')}
-              >
-                42서울일정
-              </div>
-
-              <div
-                className={`${styles.tagItem} ${
-                  selectedTag === '취업 공고' ? styles.selected : ''
-                }`}
-                onClick={() => setSelectedTag('취업 공고')}
-              >
-                취업 공고
-              </div>
+              {availableTags.map((tag) => (
+                <div
+                  key={tag}
+                  className={`${styles.tagItem} ${
+                    selectedTag === tag ? styles.selected : ''
+                  }`}
+                  onClick={() => {
+                    setSelectedTag(tag);
+                    setSelectedSubTag(null);
+                    setSelectedTechTag(null);
+                  }}
+                >
+                  {tag === CalendarClassification.EVENT
+                    ? '42서울일정'
+                    : '취업 공고'}
+                </div>
+              ))}
             </div>
 
-            <div className={styles.selectTagContainer}>
-              <div
-                className={`${styles.tagItem} ${
-                  selectedTag === '42서울일정' ? styles.selected : ''
-                }`}
-                onClick={() => setSelectedTag('42서울일정')}
-              >
-                42서울일정
+            {selectedTag === CalendarClassification.EVENT && (
+              <div className={styles.subTagWrapper}>
+                {Object.values(CalendarEventTag).map((tag) => (
+                  <div
+                    key={tag}
+                    className={`${styles.subTagItem} ${
+                      selectedSubTag === tag ? styles.subTagSelected : ''
+                    }`}
+                    onClick={() => setSelectedSubTag(tag)}
+                  >
+                    {tag}
+                  </div>
+                ))}
               </div>
-            </div>
+            )}
+
+            {selectedTag === CalendarClassification.JOB && (
+              <div className={styles.subTagWrapper}>
+                {Object.values(CalendarJobTag).map((tag) => (
+                  <div
+                    key={tag}
+                    className={`${styles.subTagItem} ${
+                      selectedSubTag === tag ? styles.selected : ''
+                    }`}
+                    onClick={() => setSelectedSubTag(tag)}
+                  >
+                    {tag}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {selectedTag === CalendarClassification.JOB && selectedSubTag && (
+              <div className={styles.subTagWrapper}>
+                {Object.values(CalendarTechTag).map((tag) => (
+                  <div
+                    key={tag}
+                    className={`${styles.subTagItem} ${
+                      selectedTechTag === tag ? styles.selected : ''
+                    }`}
+                    onClick={() => setSelectedTechTag(tag)}
+                  >
+                    {tag}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
@@ -134,6 +188,7 @@ const CalendarForm: React.FC<CalendarFormProps> = ({
             onChange={handleChange}
             placeholder='내용을 입력하세요.'
             className={styles.textareaField}
+            required
           />
         </div>
 
@@ -174,13 +229,13 @@ const CalendarForm: React.FC<CalendarFormProps> = ({
             className={styles.inputField}
           />
         </div>
-      </form>
 
-      <div className={styles.buttonContainer}>
-        <button type='submit' className={styles.submitButton}>
-          {mode === 'add' ? '등록' : '수정'}
-        </button>
-      </div>
+        <div className={styles.buttonContainer}>
+          <button type='submit' className={styles.submitButton}>
+            {mode === 'add' ? '등록' : '수정'}
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

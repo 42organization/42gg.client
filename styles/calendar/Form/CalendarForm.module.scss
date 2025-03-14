@@ -84,6 +84,30 @@
   border-bottom: 1px solid #785ad2;
 }
 
+.subTagWrapper {
+  display: flex;
+  gap: 0.3rem;
+  overflow: scroll;
+}
+
+.subTagItem {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: #b8b8b8;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+}
+
+.subTagItem:hover {
+  color: #785ad2;
+}
+
+.subTagSelected {
+  font-weight: 600;
+  color: #785ad2;
+  border-bottom: 1px solid #785ad2;
+}
+
 .tagDetailWrapper {
   display: flex;
   align-items: center;

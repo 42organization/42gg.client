@@ -1,10 +1,10 @@
-export const enum CalendarClassification {
+export enum CalendarClassification {
   EVENT = 'EVENT',
   JOB = 'JOB_NOTICE',
   PRIVATE = 'PRIVATE_SCHEDULE',
 }
 
-export const enum CalendarEventTag {
+export enum CalendarEventTag {
   OFFICIAL_EVENT = 'OFFICIAL_EVENT',
   WENDS_FORUM = 'WENDS_FORUM',
   JOB_FORUM = 'JOB_FORUM',
@@ -12,14 +12,14 @@ export const enum CalendarEventTag {
   ETC = 'ETC',
 }
 
-export const enum CalendarJobTag {
+export enum CalendarJobTag {
   SHORTS_INTERN = 'SHORTS_INTERN',
   INCRUIT_INTERN = 'INCRUIT_INTERN',
   NEW_COMER = 'NEW_COMER',
   EXPERIENCED = 'EXPERIENCED',
 }
 
-export const enum CalendarTechTag {
+export enum CalendarTechTag {
   FRONT = 'FRONT_END',
   BACK = 'BACK_END',
   DATA = 'DATA',
@@ -30,7 +30,7 @@ export const enum CalendarTechTag {
   ETC = 'ETC',
 }
 
-export const enum CalendarStatus {
+export enum CalendarStatus {
   ACTIVATE = 'ACTIVATE',
   DEACTIVATE = 'DEACTIVATE',
   DELETE = 'DELETE',
