@@ -7,14 +7,17 @@ const CustomCalendar = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow: auto;
 
   .rbc-calendar {
     width: 95%;
-    height: 100%;
     background-color: white;
-    padding: 2rem 1rem 1rem 1rem;
-    position: absolute;
-    overflow: auto;
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
+    overflow: hidden;
   }
 
   .rbc-header {
@@ -35,6 +38,8 @@ const CustomCalendar = styled.div`
   }
 
   .rbc-month-view {
+    flex-grow: 1;
+    overflow-y: auto;
     border-left: none;
     border-right: none;
     border-top: 1px solid #e8ebfc;

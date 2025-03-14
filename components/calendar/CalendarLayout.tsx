@@ -69,6 +69,7 @@ const CalendarLayout = ({
     'private',
     currentDate
   );
+
   const scheduleData = [...PublicSchedule, ...PrivateSchedule];
   const handleNavigate = (date: Date) => {
     setCurrentDate(date);
