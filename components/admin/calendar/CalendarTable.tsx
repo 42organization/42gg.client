@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Paper,
   Table,
@@ -11,8 +11,9 @@ import {
   Tooltip,
 } from '@mui/material';
 import { AdminSchedule } from 'types/calendar/scheduleTypes';
-import { CalendarStatus } from 'constants/calendar/calendarConstants';
+import { CalendarStatus , CalendarClassification } from 'constants/calendar/calendarConstants';
 import PageNation from 'components/Pagination';
+import { useAdminCalendarDelete } from 'hooks/calendar/admin/useAdminCalendarDelete';
 import styles from 'styles/admin/calendar/CalendarTable.module.scss';
 import { NoContent } from '../agenda/utils';
 
@@ -24,6 +25,8 @@ export const CalendarTable = ({ data }: CalendarTableProps) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 10;
   const totalPage = Math.ceil(data.length / itemsPerPage);
+  const { deleteCalendar } = useAdminCalendarDelete();
+  const [tableData, setTableData] = useState<AdminSchedule[]>(data);
 
   const paginatedData = data.slice(
     (currentPage - 1) * itemsPerPage,
@@ -47,6 +50,20 @@ export const CalendarTable = ({ data }: CalendarTableProps) => {
     JOB_NOTICE: 'JOB',
     PRIVATE_SCHEDULE: 'PRIVATE',
     EVENT: 'EVENT',
+  };
+
+  useEffect(() => {
+    setTableData(data);
+  }, [data]);
+
+  const handleDelete = async (id: number) => {
+    const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
+    if (!confirmDelete) return;
+
+    const success = await deleteCalendar(id);
+    if (success) {
+      window.location.reload();
+    }
   };
 
   return (
@@ -157,10 +174,15 @@ export const CalendarTable = ({ data }: CalendarTableProps) => {
                     <button className={`${styles.btn} ${styles.detail}`}>
                       자세히
                     </button>
-                    <button className={`${styles.btn} ${styles.modify}`}>
-                      수정
-                    </button>
-                    <button className={`${styles.btn} ${styles.delete}`}>
+                    {row.classification !== CalendarClassification.PRIVATE && (
+                      <button className={`${styles.btn} ${styles.modify}`}>
+                        수정
+                      </button>
+                    )}
+                    <button
+                      onClick={() => handleDelete(row.id)}
+                      className={`${styles.btn} ${styles.delete}`}
+                    >
                       삭제
                     </button>
                   </TableCell>
