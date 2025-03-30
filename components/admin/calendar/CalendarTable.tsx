@@ -29,7 +29,6 @@ export const CalendarTable = ({ data }: CalendarTableProps) => {
   const itemsPerPage = 10;
   const totalPage = Math.ceil(data.length / itemsPerPage);
   const { deleteCalendar } = useAdminCalendarDelete();
-  const [tableData, setTableData] = useState<AdminSchedule[]>(data);
 
   const paginatedData = data.slice(
     (currentPage - 1) * itemsPerPage,
@@ -54,10 +53,6 @@ export const CalendarTable = ({ data }: CalendarTableProps) => {
     PRIVATE_SCHEDULE: 'PRIVATE',
     EVENT: 'EVENT',
   };
-
-  useEffect(() => {
-    setTableData(data);
-  }, [data]);
 
   const handleDelete = async (id: number) => {
     const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
