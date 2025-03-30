@@ -80,15 +80,6 @@ export const CalendarTablePageNation = () => {
     return <div>Loading...</div>;
   }
 
-  if (!calendarData || calendarData.length === 0) {
-    return (
-      <NoContent
-        col={8}
-        content='조회 결과가 없습니다. 조건을 변경하거나 새로운 일정을 추가해보세요.'
-      />
-    );
-  }
-
   return (
     <div className={styles.container}>
       <TableContainer className={styles.tableContainer} component={Paper}>
