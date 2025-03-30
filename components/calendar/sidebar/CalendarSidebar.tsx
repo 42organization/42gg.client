@@ -60,6 +60,13 @@ const CalendarSidebar = ({
               ...updateGroup,
               title: value!,
             },
+            () => {
+              setUpdatedPrivateGroups((prev) =>
+                prev.map((group) =>
+                  group.id === id ? { ...group, title: value || '' } : group
+                )
+              );
+            },
             (error: string) => {
               setSnackbar({
                 toastName: 'post error',
@@ -84,6 +91,13 @@ const CalendarSidebar = ({
               ...updateGroup,
               backgroundColor: value!,
             },
+            () => {
+              setUpdatedPrivateGroups((prev) =>
+                prev.map((group) =>
+                  group.id === id ? { ...group, title: value || '' } : group
+                )
+              );
+            },
             (error: string) => {
               setSnackbar({
                 toastName: 'post error',
@@ -105,7 +119,12 @@ const CalendarSidebar = ({
             'DELETE',
             `custom/${id}`,
             deleteGroup,
-            (error: string) => {
+            () => {
+              setUpdatedPrivateGroups((prev) =>
+                prev.filter((group) => group.id !== id)
+              );
+            },
+            () => {
               setSnackbar({
                 toastName: 'post error',
                 severity: 'error',
@@ -115,8 +134,8 @@ const CalendarSidebar = ({
             }
           );
         }
-        return prev.filter((group) => group.id !== id);
       }
+
       return prev;
     });
   };
