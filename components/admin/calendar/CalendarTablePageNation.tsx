@@ -17,25 +17,46 @@ import {
 } from 'constants/calendar/calendarConstants';
 import PageNation from 'components/Pagination';
 import { useAdminCalendarDelete } from 'hooks/calendar/admin/useAdminCalendarDelete';
+import { useAdminCalendarTotalGet } from 'hooks/calendar/admin/useAdminCalendarTotalGet';
 import styles from 'styles/admin/calendar/CalendarTable.module.scss';
 import { NoContent } from '../agenda/utils';
 
-interface CalendarTableProps {
-  data: AdminSchedule[];
-}
-
-export const CalendarTable = ({ data }: CalendarTableProps) => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 10;
-  const totalPage = Math.ceil(data.length / itemsPerPage);
+export const CalendarTablePageNation = () => {
+  // api hooks call
+  const { isLoading, adminCalendarTotalGet } = useAdminCalendarTotalGet();
   const { deleteCalendar } = useAdminCalendarDelete();
-  const [tableData, setTableData] = useState<AdminSchedule[]>(data);
 
-  const paginatedData = data.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+  // data state
+  const [calendarData, setCalendarData] = useState<AdminSchedule[] | null>(
+    null
   );
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPage, setTotalPage] = useState<number>(1);
 
+  useEffect(() => {
+    const fetchCalendarData = async () => {
+      const data = await adminCalendarTotalGet(currentPage);
+      if (data) {
+        setCalendarData(data.content);
+        setTotalPage(Math.ceil(data.totalSize / 10));
+      }
+    };
+
+    fetchCalendarData();
+  }, [adminCalendarTotalGet, currentPage]);
+
+  // handle event
+  const handleDelete = async (id: number) => {
+    const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
+    if (!confirmDelete) return;
+
+    const success = await deleteCalendar(id);
+    if (success) {
+      window.location.reload();
+    }
+  };
+
+  // define
   const calendarTableFormat = {
     columns: [
       'ID',
@@ -55,19 +76,18 @@ export const CalendarTable = ({ data }: CalendarTableProps) => {
     EVENT: 'EVENT',
   };
 
-  useEffect(() => {
-    setTableData(data);
-  }, [data]);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  const handleDelete = async (id: number) => {
-    const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
-    if (!confirmDelete) return;
-
-    const success = await deleteCalendar(id);
-    if (success) {
-      window.location.reload();
-    }
-  };
+  if (!calendarData || calendarData.length === 0) {
+    return (
+      <NoContent
+        col={8}
+        content='조회 결과가 없습니다. 조건을 변경하거나 새로운 일정을 추가해보세요.'
+      />
+    );
+  }
 
   return (
     <div className={styles.container}>
@@ -89,9 +109,9 @@ export const CalendarTable = ({ data }: CalendarTableProps) => {
           </TableHead>
 
           {/* Table Body */}
-          {data && data.length > 0 ? (
+          {calendarData && calendarData.length > 0 ? (
             <TableBody>
-              {paginatedData.map((row) => (
+              {calendarData.map((row) => (
                 <TableRow key={row.id} className={styles.tableRow}>
                   <TableCell className={styles.tableCell} align='center'>
                     {row.id}

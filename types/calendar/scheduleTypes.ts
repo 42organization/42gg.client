@@ -22,6 +22,11 @@ export interface AdminSchedule {
   status?: CalendarStatus;
 }
 
+export interface AdminCalendarResponse {
+  totalSize: number;
+  content: AdminSchedule[];
+}
+
 export interface Schedule {
   id?: number; //post할땐 필요없음 get에서 필요
   classification?: string; //전체일정, 개인일정은 get 할때만

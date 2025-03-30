@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { CalendarClassification } from 'constants/calendar/calendarConstants';
 import { CalendarTable } from 'components/admin/calendar/CalendarTable';
+import { CalendarTablePageNation } from 'components/admin/calendar/CalendarTablePageNation';
 import { useAdminCalendarClassGet } from 'hooks/calendar/admin/useAdminCalendarClassGet';
-import { useAdminCalendarTotalGet } from 'hooks/calendar/admin/useAdminCalendarTotalGet';
 
 interface CalenarListTableProps {
   content: string;
@@ -33,15 +33,7 @@ export const CalendarListTable = ({ content }: CalenarListTableProps) => {
 };
 
 const CalendarTableTotal = () => {
-  const { data, isLoading, adminCalendarTotalGet } = useAdminCalendarTotalGet();
-
-  useEffect(() => {
-    adminCalendarTotalGet();
-  }, [adminCalendarTotalGet]);
-
-  if (isLoading) return <div>Loading...</div>;
-
-  return <CalendarTable data={data || []} />;
+  return <CalendarTablePageNation />;
 };
 
 const CalendarTableClass = ({ classification }: CalendarTableClassProps) => {
