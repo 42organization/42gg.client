@@ -5,6 +5,7 @@ import { FaAngleDown, FaAngleRight } from 'react-icons/fa';
 import { IoPeople } from 'react-icons/io5';
 import { RiPingPongFill } from 'react-icons/ri';
 import SideNavAgenda from 'components/admin/agenda/SideNavAgenda';
+import SideNavCalendar from 'components/admin/calendar/SideNavCalendar';
 import SideNavParty from 'components/admin/takgu/SideNavParty';
 import SideNavTakgu from 'components/admin/takgu/SideNavTakgu';
 import styles from 'styles/admin/SideNav.module.scss';
@@ -13,6 +14,7 @@ export default function SideNav() {
   const [isTakguOpen, setTakguOpen] = useState(false);
   const [isPartyOpen, setPartyOpen] = useState(false);
   const [isAgendaOpen, setAgendaOpen] = useState(false);
+  const [isCalendarOpen, setCalendarOpen] = useState(false);
 
   const presentPath = useRouter().asPath;
   useEffect(() => {
@@ -26,6 +28,9 @@ export default function SideNav() {
         break;
       case presentPath.includes('/admin/agenda'):
         setAgendaOpen(true);
+        break;
+      case presentPath.includes('/admin/calendar'):
+        setCalendarOpen(true);
         break;
     }
   }, [presentPath]);
@@ -74,6 +79,21 @@ export default function SideNav() {
       {isAgendaOpen && (
         <div className={styles.subMenu}>
           <SideNavAgenda />
+        </div>
+      )}
+      {/* ------------------------------------- */}
+      <div
+        className={styles.menuItem}
+        onClick={() => setCalendarOpen(!isCalendarOpen)}
+      >
+        <BsAwardFill />
+        <span className={styles.menuName}>Calendar 관리</span>
+        {isCalendarOpen ? <FaAngleDown /> : <FaAngleRight />}
+      </div>
+
+      {isCalendarOpen && (
+        <div className={styles.subMenu}>
+          <SideNavCalendar />
         </div>
       )}
     </div>

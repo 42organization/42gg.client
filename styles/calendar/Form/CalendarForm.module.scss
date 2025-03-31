@@ -1,0 +1,193 @@
+.container {
+  display: flex;
+  width: 25rem;
+  flex-direction: column;
+  // max-width: 50rem;
+  background-color: #ffffff;
+  border-radius: 0.8rem;
+}
+
+.formHeaderContainer {
+  padding: 1.2rem 2rem;
+  font-size: 1.2rem;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem 2rem;
+  background-color: #fafaff;
+  gap: 1.2rem;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 1.8rem;
+  gap: 1.5rem;
+}
+
+.tagWrapper {
+  display: flex;
+  width: 100%;
+  gap: 1.5rem;
+}
+
+.contentWrapper {
+  display: flex;
+  width: 100%;
+  gap: 1.5rem;
+}
+
+.label {
+  width: 2rem;
+  font-size: 0.8rem;
+}
+
+.contentLabel {
+  width: 2rem;
+  padding-top: 0.3rem;
+  font-size: 0.8rem;
+}
+
+.tagField {
+  display: flex;
+  width: 95%;
+  height: 100%;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.selectTagContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+}
+
+.tagItem {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #b8b8b8;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+}
+
+.tagItem:hover {
+  color: #785ad2;
+}
+
+.selected {
+  font-weight: 700;
+  color: #785ad2;
+  border-bottom: 1px solid #785ad2;
+}
+
+.subTagWrapper {
+  display: flex;
+  gap: 0.3rem;
+  overflow: scroll;
+}
+
+.subTagItem {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: #b8b8b8;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+}
+
+.subTagItem:hover {
+  color: #785ad2;
+}
+
+.subTagSelected {
+  font-weight: 600;
+  color: #785ad2;
+  border-bottom: 1px solid #785ad2;
+}
+
+.tagDetailWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1.5rem;
+}
+
+.tagDetailItem {
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: #b8b8b8;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+}
+.tagDetailItem:hover {
+  color: #785ad2;
+}
+
+.inputField {
+  width: 95%;
+  height: 100%;
+  padding-left: 0.5rem;
+  border: 1px solid #c1c8f0;
+  border-radius: 0.2rem;
+}
+
+.textareaField {
+  width: 95%;
+  height: 4rem;
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+  resize: none;
+  border: 1px solid #c1c8f0;
+  border-radius: 0.2rem;
+}
+
+.datePickerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.datePicker {
+  display: flex;
+  width: 8rem;
+  height: 100%;
+  padding: 0.5rem 1rem;
+  font-weight: 300;
+  color: #000000;
+  border: 1px solid #c1c8f0;
+  border-radius: 0.2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonContainer {
+  display: flex;
+  padding: 1.2rem 2rem;
+  font-size: 1.2rem;
+  justify-content: center;
+  align-items: center;
+}
+.submitButton {
+  width: 5rem;
+  height: 2rem;
+  font-size: 0.8rem;
+  color: #ffffff;
+  cursor: pointer;
+  background-color: #785ad2;
+  border: none;
+  border-radius: 0.2rem;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+
+  &:hover {
+    background-color: #6248b0;
+  }
+
+  &:active {
+    background-color: #4f3a8f;
+    transform: scale(0.95);
+  }
+}

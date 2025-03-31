@@ -1,3 +1,32 @@
+import {
+  CalendarClassification,
+  CalendarEventTag,
+  CalendarJobTag,
+  CalendarTechTag,
+  CalendarStatus,
+} from 'constants/calendar/calendarConstants';
+
+export interface AdminSchedule {
+  id: number;
+  classification: CalendarClassification;
+  eventTag?: CalendarEventTag;
+  jobTag?: CalendarJobTag;
+  techTag?: CalendarTechTag;
+  author: string;
+  title: string;
+  content: string;
+  startTime: string;
+  endTime: string;
+  link: string;
+  sharedCount?: number;
+  status?: CalendarStatus;
+}
+
+export interface AdminCalendarResponse {
+  totalSize: number;
+  content: AdminSchedule[];
+}
+
 export interface Schedule {
   id?: number; //post할땐 필요없음 get에서 필요
   classification?: string; //전체일정, 개인일정은 get 할때만
