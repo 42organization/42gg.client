@@ -1,3 +1,4 @@
+import React, { useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { useCalendarModal } from 'utils/calendar/useCalendarModal';
 import { calendarModalState } from 'utils/recoil/calendar/modalState';
@@ -9,6 +10,7 @@ import styles from 'styles/calendar/modal/CalendarModalProvider.module.scss';
 const CalendarModalProvider = () => {
   const [modalProps, setModalState] = useRecoilState(calendarModalState);
   const { closeModal } = useCalendarModal();
+  const modalRef = useRef<HTMLDivElement>(null);
 
   let modalContent;
   if (modalProps) {
@@ -27,7 +29,12 @@ const CalendarModalProvider = () => {
     }
   }
   const closeModalHandler = (e: React.MouseEvent) => {
-    if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutside') {
+    if (
+      e.target instanceof HTMLDivElement &&
+      e.target.id === 'modalOutside' &&
+      modalRef.current &&
+      !modalRef.current.contains(e.target as Node)
+    ) {
       closeModal();
     }
   };
@@ -40,7 +47,9 @@ const CalendarModalProvider = () => {
           id='modalOutside'
           onClick={closeModalHandler}
         >
-          {modalContent}
+          <div ref={modalRef} className={styles.modal}>
+            {modalContent}
+          </div>
         </div>
       )}
     </>

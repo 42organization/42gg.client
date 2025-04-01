@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useId } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import { useSetRecoilState } from 'recoil';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -24,6 +24,32 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
   const { sendCalendarRequest, error } = useScheduleRequest();
   const setSnackbar = useSetRecoilState(toastState);
   const groupList = useGroup();
+
+  const modalRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        isDropdown &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setIsDropdown(false);
+        return;
+      }
+      if (
+        !isDropdown &&
+        modalRef.current &&
+        !modalRef.current.contains(e.target as Node)
+      ) {
+        closeModal();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isDropdown, closeModal]);
 
   const findNowGroup = () => {
     const nowGroup = groupList.groupList.find(
@@ -171,7 +197,8 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
   return (
     <div
       className={styles.bubbleModal}
-      onClick={(e) => isDropdown && setIsDropdown(false)}
+      ref={modalRef}
+      // onClick={(e) => isDropdown && setIsDropdown(false)}
     >
       <div className={styles.titleContainer}>
         <input
@@ -189,6 +216,16 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
             style={{ backgroundColor: findNowGroup()?.backgroundColor }}
           />
           <div className={styles.changeGroup}>
+            {isDropdown && (
+              <div ref={dropdownRef}>
+                <GroupSelect
+                  isDropdown={isDropdown}
+                  setIsDropdown={setIsDropdown}
+                  schedule={scheduleData}
+                  setSchedule={setScheduleData}
+                />
+              </div>
+            )}
             <DownSVG
               width={14}
               height={9}
@@ -197,14 +234,6 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
             />
             <DownSVG width={14} height={9} fill='#785AD2' />
           </div>
-          {isDropdown && (
-            <GroupSelect
-              isDropdown={isDropdown}
-              setIsDropdown={setIsDropdown}
-              schedule={scheduleData}
-              setSchedule={setScheduleData}
-            />
-          )}
         </div>
       </div>
       <div className={styles.content}>
