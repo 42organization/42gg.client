@@ -65,7 +65,7 @@ const CalendarPage: NextPage = () => {
   }, [privateGroupList]);
 
   const handleSelectSlot = ({ slots }: { slots: any }) => {
-    if (!isOpen) {
+    if (!isOpen && !sidebarOpen) {
       openModal({
         type: 'AddSelect',
         schedule: {
