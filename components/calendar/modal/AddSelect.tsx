@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { calendarModalProps } from 'types/calendar/modalTypes';
 import { useCalendarModal } from 'utils/calendar/useCalendarModal';
 import CheckSVG from 'public/image/calendar/checkIcon.svg';
