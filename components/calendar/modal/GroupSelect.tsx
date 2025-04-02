@@ -64,10 +64,20 @@ const GroupSelect = ({
         setNewGroupTitle('');
       },
       (error: string) => {
+        let errMsg;
+        if (newGroup.title === '') {
+          errMsg = '그룹 이름을 입력해주세요.';
+        } else if (newGroup.title.length > 50) {
+          errMsg = '그룹 이름은 50자 이내로 입력해주세요.';
+        } else if (
+          Object.values(groupColorTypes).includes(newGroup.backgroundColor)
+        ) {
+          errMsg = '유효한 색깔이 아닙니다.';
+        }
         setSnackbar({
           toastName: 'post error',
           severity: 'error',
-          message: '그룹 생성에 실패했습니다.',
+          message: `🔥 ${errMsg} 🔥`,
           clicked: true,
         });
       }
