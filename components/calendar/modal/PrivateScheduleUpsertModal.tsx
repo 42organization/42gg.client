@@ -149,6 +149,12 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
         } else {
           errMsg = '일정 추가에 실패했습니다';
         }
+        setSnackbar({
+          toastName: 'post error',
+          severity: 'error',
+          message: `🔥 ${errMsg} 🔥`,
+          clicked: true,
+        });
       }
     );
   };
@@ -185,7 +191,7 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
         }
 
         setSnackbar({
-          toastName: 'response error',
+          toastName: 'put error',
           severity: 'error',
           message: `🔥 ${errMsg} 🔥`,
           clicked: true,
