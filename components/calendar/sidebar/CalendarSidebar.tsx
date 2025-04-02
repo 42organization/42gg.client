@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { ScheduleGroup } from 'types/calendar/groupType';
+import { ScheduleGroup, groupColorTypes } from 'types/calendar/groupType';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import { toastState } from 'utils/recoil/toast';
 import AccordianItem from 'components/calendar/sidebar/AccordianItem';
@@ -68,10 +68,22 @@ const CalendarSidebar = ({
               );
             },
             (error: string) => {
+              let errMsg;
+              if (updateGroup.title === '') {
+                errMsg = '그룹 이름을 입력해주세요.';
+              } else if (updateGroup.title.length > 50) {
+                errMsg = '그룹 이름은 50자 이내로 입력해주세요.';
+              } else if (
+                Object.values(groupColorTypes).includes(
+                  updateGroup.backgroundColor
+                )
+              ) {
+                errMsg = '유효한 색깔이 아닙니다.';
+              }
               setSnackbar({
                 toastName: 'post error',
                 severity: 'error',
-                message: '그룹 이름 수정에 실패했습니다.',
+                message: `🔥 ${errMsg} 🔥`,
                 clicked: true,
               });
             }
@@ -94,15 +106,29 @@ const CalendarSidebar = ({
             () => {
               setUpdatedPrivateGroups((prev) =>
                 prev.map((group) =>
-                  group.id === id ? { ...group, title: value || '' } : group
+                  group.id === id
+                    ? { ...group, backgroundColor: value || '' }
+                    : group
                 )
               );
             },
             (error: string) => {
+              let errMsg;
+              if (updateGroup.title === '') {
+                errMsg = '그룹 이름을 입력해주세요.';
+              } else if (updateGroup.title.length > 50) {
+                errMsg = '그룹 이름은 50자 이내로 입력해주세요.';
+              } else if (
+                Object.values(groupColorTypes).includes(
+                  updateGroup.backgroundColor
+                )
+              ) {
+                errMsg = '유효한 색깔이 아닙니다.';
+              }
               setSnackbar({
                 toastName: 'post error',
                 severity: 'error',
-                message: '그룹 컬러 수정에 실패했습니다.',
+                message: `🔥 ${errMsg} 🔥`,
                 clicked: true,
               });
             }
