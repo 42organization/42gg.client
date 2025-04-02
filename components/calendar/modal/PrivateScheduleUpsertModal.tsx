@@ -315,13 +315,13 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
       <div className={styles.buttonContainer}>
         <SumbitButton
           type={
-            scheduleData.title && scheduleData.content
+            scheduleData.title && scheduleData.content && scheduleData.groupId
               ? 'submitActive'
               : 'submitInactive'
           }
           label='등록'
           onClick={
-            scheduleData.title && scheduleData.content
+            scheduleData.title && scheduleData.content && scheduleData.groupId
               ? scheduleData.id
                 ? updateSchedule
                 : createSchedule
