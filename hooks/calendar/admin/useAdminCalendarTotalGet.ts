@@ -13,7 +13,7 @@ export const useAdminCalendarTotalGet = () => {
       setIsLoading(true);
       try {
         const res = await instanceInCalendar.get<AdminCalendarResponse>(
-          `admin/calendar/total?page=${pageNumber}&size=10`
+          `admin/total?page=${pageNumber}&size=10`
         );
         if (200 <= res.status && res.status < 300) {
           return res.data;
