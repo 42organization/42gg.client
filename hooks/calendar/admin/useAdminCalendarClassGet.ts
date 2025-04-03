@@ -13,7 +13,7 @@ export const useAdminCalendarClassGet = () => {
   const adminCalendarClassGet = useCallback(
     async (classification: CalendarClassification) => {
       setLoading(true);
-      const url = `admin/calendar/list/${classification}`;
+      const url = `admin/list/${classification}`;
       try {
         const res = await instanceInCalendar.get(url);
         if (200 <= res.status && res.status < 300) {

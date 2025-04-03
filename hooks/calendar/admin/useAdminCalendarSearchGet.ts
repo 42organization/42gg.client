@@ -29,7 +29,7 @@ export const useAdminCalendarSearchGet = () => {
         const today = new Date();
         endTime = today.toISOString().split('T')[0];
       }
-      const searchUrl = `admin/calendar/search?type=${type}&content=${content}&startTime=${startTime}&endTime=${endTime}`;
+      const searchUrl = `admin/search?type=${type}&content=${content}&startTime=${startTime}&endTime=${endTime}`;
       try {
         const res = await instanceInCalendar.get(searchUrl);
         if (200 <= res.status && res.status < 300) {

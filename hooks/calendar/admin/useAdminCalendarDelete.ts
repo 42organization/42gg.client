@@ -11,7 +11,7 @@ export const useAdminCalendarDelete = () => {
     async (calendarId: number) => {
       setLoading(true);
       try {
-        const url = `/admin/calendar/public/${calendarId}`;
+        const url = `/admin/public/${calendarId}`;
 
         const response = await instanceInCalendar.patch(url);
 
