@@ -269,6 +269,9 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
                 handleDateChange('startTime', date as Date);
               }}
               className={styles.datePicker}
+              onKeyDown={(e) => {
+                e.preventDefault();
+              }}
             />
           </CustomDatepicker>
         </div>
@@ -288,6 +291,9 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
                 handleDateChange('endTime', date as Date);
               }}
               className={styles.datePickerEnd}
+              onKeyDown={(e) => {
+                e.preventDefault();
+              }}
             />
           </CustomDatepicker>
         </div>

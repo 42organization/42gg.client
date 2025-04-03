@@ -68,6 +68,13 @@
   outline: none;
 }
 
+.groupName {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+}
+
 @media (max-width: 768px) {
   .sidebarClose {
     position: absolute;

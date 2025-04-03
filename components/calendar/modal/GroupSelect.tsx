@@ -94,7 +94,7 @@ const GroupSelect = ({
         >
           <div className={styles.groupItem}>
             <ColorButton color={group.backgroundColor} />
-            <div>{group.title}</div>
+            <div className={styles.groupName}>{group.title}</div>
           </div>
         </div>
       ))}

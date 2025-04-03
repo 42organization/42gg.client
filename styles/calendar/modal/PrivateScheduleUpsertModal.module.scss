@@ -125,8 +125,10 @@
   font-size: 16px;
   font-weight: 300;
   color: #000000;
+  cursor: default;
   border: none;
   outline: none;
+  caret-color: transparent;
 }
 
 .datePickerEnd {
@@ -134,8 +136,10 @@
   font-weight: 300;
   color: #000000;
   text-align: right;
+  cursor: default;
   border: none;
   outline: none;
+  caret-color: transparent;
 }
 
 .link {

@@ -33,6 +33,13 @@
   align-content: center;
 }
 
+.groupName {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .groupAddInput {
   width: 100%;
   padding: 0;
