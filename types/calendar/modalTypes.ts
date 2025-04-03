@@ -9,7 +9,7 @@ type CalendarModalType =
 
 export interface calendarModalProps {
   type: CalendarModalType;
-  schedule?: Schedule;
+  schedule: Schedule;
   groups?: ScheduleGroup[];
   onProceed?: () => void;
   onCancel?: () => void;

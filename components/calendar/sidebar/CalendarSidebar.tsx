@@ -73,12 +73,8 @@ const CalendarSidebar = ({
                 errMsg = '그룹 이름을 입력해주세요.';
               } else if (updateGroup.title.length > 50) {
                 errMsg = '그룹 이름은 50자 이내로 입력해주세요.';
-              } else if (
-                Object.values(groupColorTypes).includes(
-                  updateGroup.backgroundColor
-                )
-              ) {
-                errMsg = '유효한 색깔이 아닙니다.';
+              } else {
+                errMsg = '그룹 이름 변경에 실패했습니다.';
               }
               setSnackbar({
                 toastName: 'post error',
@@ -118,12 +114,8 @@ const CalendarSidebar = ({
                 errMsg = '그룹 이름을 입력해주세요.';
               } else if (updateGroup.title.length > 50) {
                 errMsg = '그룹 이름은 50자 이내로 입력해주세요.';
-              } else if (
-                Object.values(groupColorTypes).includes(
-                  updateGroup.backgroundColor
-                )
-              ) {
-                errMsg = '유효한 색깔이 아닙니다.';
+              } else {
+                errMsg = '그룹 컬러 변경에 실패했습니다.';
               }
               setSnackbar({
                 toastName: 'post error',
