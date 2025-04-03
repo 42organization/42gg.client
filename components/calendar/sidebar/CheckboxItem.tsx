@@ -90,7 +90,7 @@ const CheckboxItem = ({
               className={styles.groupField}
             />
           ) : (
-            <span>{name}</span>
+            <div style={{ maxWidth: 100, overflowX: 'scroll' }}>{name}</div>
           )
         }
         sx={{
