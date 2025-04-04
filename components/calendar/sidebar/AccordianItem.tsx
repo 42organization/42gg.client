@@ -69,6 +69,7 @@ const AccordianItem = ({
                 onCheckboxChange(type, checkbox.id!, checkbox.classification!)
               }
               isEdit={isEdit}
+              setIsEdit={setIsEdit}
               handleEdit={handleEdit}
             />
           ))}

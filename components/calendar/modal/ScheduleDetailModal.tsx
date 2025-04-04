@@ -19,7 +19,23 @@ import styles from 'styles/calendar/modal/ScheduleDetailModal.module.scss';
 
 const parseDate = (data: string) => {
   const date = new Date(data);
-  return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
+  if (date.getHours() == 0 && date.getMinutes() == 0) {
+    return `${date.getFullYear()}년 ${
+      date.getMonth() + 1
+    }월 ${date.getDate()}일`;
+  } else if (date.getHours() == 0) {
+    return `${date.getFullYear()}년 ${
+      date.getMonth() + 1
+    }월 ${date.getDate()}일 00시 ${date.getMinutes()}분`;
+  } else if (date.getMinutes() == 0) {
+    return `${date.getFullYear()}년 ${
+      date.getMonth() + 1
+    }월 ${date.getDate()}일 ${date.getHours()}시`;
+  } else {
+    return `${date.getFullYear()}년 ${
+      date.getMonth() + 1
+    }월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분`;
+  }
 };
 
 const getPeriod = (start: string, end: string) => {
@@ -29,7 +45,8 @@ const getPeriod = (start: string, end: string) => {
   if (startDate === endDate) {
     return startDate;
   } else if (startDate.split(' ')[0] === endDate.split(' ')[0]) {
-    return `${startDate} - ${endDate.split(' ')[1]} ${endDate.split(' ')[2]}`;
+    const endParts = endDate.split(' ');
+    return `${startDate} - ${endParts.slice(1).join(' ')}`;
   }
   return `${startDate} - ${endDate}`;
 };

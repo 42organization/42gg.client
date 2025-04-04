@@ -124,13 +124,18 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
   };
 
   const createSchedule = async () => {
-    scheduleData.status = 'ACTIVATE';
-    scheduleData.startTime = toKSTISOString(new Date(scheduleData.startTime));
-    scheduleData.endTime = toKSTISOString(new Date(scheduleData.endTime));
+    const endDate = new Date(scheduleData.endTime);
+    const now = new Date();
+    const newScheduleData = {
+      ...scheduleData,
+      status: endDate < now ? 'DEACTIVATE' : 'ACTIVATE',
+      startTime: toKSTISOString(new Date(scheduleData.startTime)),
+      endTime: toKSTISOString(new Date(scheduleData.endTime)),
+    };
     await sendCalendarRequest(
       'POST',
       'private',
-      scheduleData,
+      newScheduleData,
       () => {
         closeModal();
       },
@@ -161,8 +166,12 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
 
   //imported 일정에서 그룹, 알람 외 다른 것 수정 시 setSnackbar로 에러 메세지 띄우기
   const updateSchedule = async () => {
-    scheduleData.startTime = toKSTISOString(new Date(scheduleData.startTime));
-    scheduleData.endTime = toKSTISOString(new Date(scheduleData.endTime));
+    const updateScheduleData = {
+      ...scheduleData,
+      // scheduleData.status = 'ACTIVATE',
+      startTime: toKSTISOString(new Date(scheduleData.startTime)),
+      endTime: toKSTISOString(new Date(scheduleData.endTime)),
+    };
     const url =
       scheduleData.classification !== 'PRIVATE_SCHEDULE'
         ? `private/imported/${scheduleData.id}`
@@ -170,7 +179,7 @@ const PrivateScheduleUpsertModal = (props: calendarModalProps) => {
     await sendCalendarRequest(
       'PUT',
       url,
-      scheduleData,
+      updateScheduleData,
       () => {
         closeModal();
       },

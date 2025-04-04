@@ -16,6 +16,7 @@ interface CheckboxItemProps {
   checkboxData: CheckboxData;
   onChange: () => void;
   isEdit?: boolean;
+  setIsEdit?: (isEdit: boolean) => void;
   handleEdit?: (
     action: 'name' | 'color' | 'delete',
     id: number,
@@ -27,6 +28,7 @@ const CheckboxItem = ({
   checkboxData: { id, name, color, checked },
   onChange,
   isEdit,
+  setIsEdit,
   handleEdit,
 }: CheckboxItemProps) => {
   const [newName, setNewName] = useState(name);
@@ -84,6 +86,7 @@ const CheckboxItem = ({
                 if (e.key === 'Enter') {
                   handleChangeSave('name');
                   e.currentTarget.blur();
+                  setIsEdit && setIsEdit(false);
                 }
               }}
               onBlur={() => handleChangeSave('name')}
