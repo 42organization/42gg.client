@@ -15,10 +15,12 @@ import {
   CalendarStatus,
   CalendarClassification,
 } from 'constants/calendar/calendarConstants';
+import { NoContent } from 'components/admin/agenda/utils';
+import { CalendarDetailModal } from 'components/admin/calendar/CalendarDetailModal';
 import PageNation from 'components/Pagination';
 import { useAdminCalendarDelete } from 'hooks/calendar/admin/useAdminCalendarDelete';
+import { useAdminCalendarDetail } from 'hooks/calendar/admin/useAdminCalendarDetail';
 import styles from 'styles/admin/calendar/CalendarTable.module.scss';
-import { NoContent } from '../agenda/utils';
 
 interface CalendarTableProps {
   data: AdminSchedule[];
@@ -26,9 +28,12 @@ interface CalendarTableProps {
 
 export const CalendarTable = ({ data }: CalendarTableProps) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
+
   const itemsPerPage = 10;
   const totalPage = Math.ceil(data.length / itemsPerPage);
   const { deleteCalendar } = useAdminCalendarDelete();
+  const { detailData, getCalendarDetail } = useAdminCalendarDetail();
 
   const paginatedData = data.slice(
     (currentPage - 1) * itemsPerPage,
@@ -52,6 +57,16 @@ export const CalendarTable = ({ data }: CalendarTableProps) => {
     JOB_NOTICE: 'JOB',
     PRIVATE_SCHEDULE: 'PRIVATE',
     EVENT: 'EVENT',
+  };
+
+  // handle button
+  const handleDetail = async (
+    id: number,
+    classification: CalendarClassification
+  ) => {
+    await getCalendarDetail(id, classification);
+
+    setShowDetailModal(true);
   };
 
   const handleDelete = async (id: number) => {
@@ -169,7 +184,10 @@ export const CalendarTable = ({ data }: CalendarTableProps) => {
                   </TableCell>
 
                   <TableCell className={styles.etcTableCell}>
-                    <button className={`${styles.btn} ${styles.detail}`}>
+                    <button
+                      className={`${styles.btn} ${styles.detail}`}
+                      onClick={() => handleDetail(row.id, row.classification)}
+                    >
                       자세히
                     </button>
                     {row.classification !== CalendarClassification.PRIVATE && (
@@ -209,6 +227,13 @@ export const CalendarTable = ({ data }: CalendarTableProps) => {
           }}
         />
       </div>
+
+      {showDetailModal && (
+        <CalendarDetailModal
+          data={detailData}
+          onClose={() => setShowDetailModal(false)}
+        />
+      )}
     </div>
   );
 };

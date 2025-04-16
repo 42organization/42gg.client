@@ -2,7 +2,6 @@
   display: flex;
   width: 25rem;
   flex-direction: column;
-  // max-width: 50rem;
   background-color: #ffffff;
   border-radius: 0.8rem;
 }
@@ -28,6 +27,7 @@
   width: 100%;
   height: 1.8rem;
   gap: 1.5rem;
+  overflow: scroll;
 }
 
 .tagWrapper {
@@ -209,4 +209,64 @@
     background-color: #4f3a8f;
     transform: scale(0.95);
   }
+}
+
+// CalendarDetailModal
+.modalCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.2);
+  transform: translate(-50%, -50%);
+}
+
+.detailTitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.detailTagField {
+  display: flex;
+  width: 95%;
+  height: 100%;
+  gap: 1.5rem;
+}
+
+.detailSelectTagContainer {
+  display: flex;
+  align-items: center;
+  // width: 100%;
+  gap: 2rem;
+}
+
+.detailTagWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1.5rem;
+}
+
+.detailText {
+  height: 100%;
+  font-size: 0.7rem;
+  color: #836ad1;
+}
+
+.detailTextareaField {
+  width: 95%;
+  height: 4rem;
+  padding: 0.5rem;
+  font-size: 0.7rem;
+  border: 1px solid #c1c8f0;
+  border-radius: 0.2rem;
+}
+
+.detailDatePickerContainer {
+  font-size: 0.7rem;
+}
+
+.detailInputField {
+  font-size: 0.7rem;
 }

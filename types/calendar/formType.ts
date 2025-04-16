@@ -9,7 +9,7 @@ export interface CalendarFormData {
   title: string;
   startDate: Date;
   endDate: Date;
-  description: string;
+  content: string;
   classificationTag: CalendarClassification;
   eventTag?: CalendarEventTag;
   jobTag?: CalendarJobTag;

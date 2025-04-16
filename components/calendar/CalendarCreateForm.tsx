@@ -23,7 +23,7 @@ const CalendarCreateForm: React.FC<CalendarFormProps> = ({ onSubmit }) => {
     title: '',
     startDate: new Date(),
     endDate: new Date(),
-    description: '',
+    content: '',
     classificationTag: CalendarClassification.EVENT,
     eventTag: CalendarEventTag.OFFICIAL_EVENT,
     jobTag: undefined,
@@ -181,8 +181,8 @@ const CalendarCreateForm: React.FC<CalendarFormProps> = ({ onSubmit }) => {
         <div className={styles.contentWrapper}>
           <div className={styles.contentLabel}>내용</div>
           <textarea
-            name='description'
-            value={formData.description}
+            name='content'
+            value={formData.content}
             onChange={handleChange}
             placeholder='내용을 입력하세요.'
             className={styles.textareaField}
