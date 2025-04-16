@@ -15,16 +15,19 @@ import {
   CalendarStatus,
   CalendarClassification,
 } from 'constants/calendar/calendarConstants';
+import { NoContent } from 'components/admin/agenda/utils';
+import { CalendarDetailModal } from 'components/admin/calendar/CalendarDetailModal';
 import PageNation from 'components/Pagination';
 import { useAdminCalendarDelete } from 'hooks/calendar/admin/useAdminCalendarDelete';
+import { useAdminCalendarDetail } from 'hooks/calendar/admin/useAdminCalendarDetail';
 import { useAdminCalendarTotalGet } from 'hooks/calendar/admin/useAdminCalendarTotalGet';
 import styles from 'styles/admin/calendar/CalendarTable.module.scss';
-import { NoContent } from '../agenda/utils';
 
 export const CalendarTablePageNation = () => {
   // api hooks call
   const { isLoading, adminCalendarTotalGet } = useAdminCalendarTotalGet();
   const { deleteCalendar } = useAdminCalendarDelete();
+  const { detailData, getCalendarDetail } = useAdminCalendarDetail();
 
   // data state
   const [calendarData, setCalendarData] = useState<AdminSchedule[] | null>(
@@ -32,6 +35,7 @@ export const CalendarTablePageNation = () => {
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
+  const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchCalendarData = async () => {
@@ -54,6 +58,15 @@ export const CalendarTablePageNation = () => {
     if (success) {
       window.location.reload();
     }
+  };
+
+  const handleDetail = async (
+    id: number,
+    classification: CalendarClassification
+  ) => {
+    await getCalendarDetail(id, classification);
+
+    setShowDetailModal(true);
   };
 
   // define
@@ -185,7 +198,10 @@ export const CalendarTablePageNation = () => {
                   </TableCell>
 
                   <TableCell className={styles.etcTableCell}>
-                    <button className={`${styles.btn} ${styles.detail}`}>
+                    <button
+                      className={`${styles.btn} ${styles.detail}`}
+                      onClick={() => handleDetail(row.id, row.classification)}
+                    >
                       자세히
                     </button>
                     {row.classification !== CalendarClassification.PRIVATE && (
@@ -225,6 +241,13 @@ export const CalendarTablePageNation = () => {
           }}
         />
       </div>
+
+      {showDetailModal && (
+        <CalendarDetailModal
+          data={detailData}
+          onClose={() => setShowDetailModal(false)}
+        />
+      )}
     </div>
   );
 };

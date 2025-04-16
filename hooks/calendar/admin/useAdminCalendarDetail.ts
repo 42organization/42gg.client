@@ -13,7 +13,6 @@ export const useAdminCalendarDetail = () => {
   const getCalendarDetail = useCallback(
     async (scheduleId: number, classification: CalendarClassification) => {
       setLoading(true);
-      console.log(scheduleId, classification);
       try {
         let url = 'admin/';
         url +=
@@ -24,8 +23,6 @@ export const useAdminCalendarDetail = () => {
         const res = await instanceInCalendar.get(url);
         if (200 <= res.status && res.status < 300) {
           setDetailData(res.data);
-          console.log('res');
-          console.log(res.data);
         }
       } catch (err) {
         const axiosError = err as AxiosError;

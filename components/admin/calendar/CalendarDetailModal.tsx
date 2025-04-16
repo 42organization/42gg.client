@@ -18,7 +18,6 @@ export const CalendarDetailModal = ({
   data,
   onClose,
 }: CalendarDetailModalProps) => {
-  console.log(data);
   if (data === null) {
     return null;
   }
