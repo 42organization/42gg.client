@@ -7,7 +7,7 @@ import {
   CalendarClassification,
   CalendarStatus,
 } from 'constants/calendar/calendarConstants';
-import { useShowSnackbar } from './useShowSnackbar';
+import { useShowSnackbar } from 'hooks/calendar/admin/useShowSnackbar';
 
 export const useAdminCalendarCreate = () => {
   const [data, setData] = useState<AdminSchedule[] | null>(null);

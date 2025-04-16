@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+  Box,
   Paper,
   Table,
   TableBody,
@@ -7,7 +8,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Box,
   Tooltip,
 } from '@mui/material';
 import { AdminSchedule } from 'types/calendar/scheduleTypes';
@@ -17,9 +17,11 @@ import {
 } from 'constants/calendar/calendarConstants';
 import { NoContent } from 'components/admin/agenda/utils';
 import { CalendarDetailModal } from 'components/admin/calendar/CalendarDetailModal';
+import { EditCalendarModal } from 'components/calendar/EditCalendarModal';
 import PageNation from 'components/Pagination';
 import { useAdminCalendarDelete } from 'hooks/calendar/admin/useAdminCalendarDelete';
 import { useAdminCalendarDetail } from 'hooks/calendar/admin/useAdminCalendarDetail';
+import { useAdminCalendarUpdate } from 'hooks/calendar/admin/useAdminCalendarUpdate';
 import styles from 'styles/admin/calendar/CalendarTable.module.scss';
 
 interface CalendarTableProps {
@@ -29,11 +31,13 @@ interface CalendarTableProps {
 export const CalendarTable = ({ data }: CalendarTableProps) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const itemsPerPage = 10;
   const totalPage = Math.ceil(data.length / itemsPerPage);
   const { deleteCalendar } = useAdminCalendarDelete();
   const { detailData, getCalendarDetail } = useAdminCalendarDetail();
+  const { updateCalendar } = useAdminCalendarUpdate();
 
   const paginatedData = data.slice(
     (currentPage - 1) * itemsPerPage,
@@ -67,6 +71,15 @@ export const CalendarTable = ({ data }: CalendarTableProps) => {
     await getCalendarDetail(id, classification);
 
     setShowDetailModal(true);
+  };
+
+  const handleEdit = async (
+    id: number,
+    classification: CalendarClassification
+  ) => {
+    await getCalendarDetail(id, classification);
+
+    setShowEditModal(true);
   };
 
   const handleDelete = async (id: number) => {
@@ -191,7 +204,10 @@ export const CalendarTable = ({ data }: CalendarTableProps) => {
                       자세히
                     </button>
                     {row.classification !== CalendarClassification.PRIVATE && (
-                      <button className={`${styles.btn} ${styles.modify}`}>
+                      <button
+                        className={`${styles.btn} ${styles.modify}`}
+                        onClick={() => handleEdit(row.id, row.classification)}
+                      >
                         수정
                       </button>
                     )}
@@ -232,6 +248,29 @@ export const CalendarTable = ({ data }: CalendarTableProps) => {
         <CalendarDetailModal
           data={detailData}
           onClose={() => setShowDetailModal(false)}
+        />
+      )}
+
+      {showEditModal && detailData && (
+        <EditCalendarModal
+          open={showEditModal}
+          initialData={{
+            title: detailData.title,
+            content: detailData.content,
+            link: detailData.link,
+            startDate: new Date(detailData.startTime),
+            endDate: new Date(detailData.endTime),
+            classificationTag: detailData.classification,
+            eventTag: detailData.eventTag ?? undefined,
+            jobTag: detailData.jobTag ?? undefined,
+            techTag: detailData.techTag ?? undefined,
+          }}
+          onClose={() => setShowEditModal(false)}
+          onSubmit={async (updatedData) => {
+            // 파싱-true or false
+            await updateCalendar(detailData.id, updatedData);
+            setShowEditModal(false);
+          }}
         />
       )}
     </div>

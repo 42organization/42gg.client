@@ -14,11 +14,16 @@ import {
 import styles from 'styles/calendar/Form/CalendarForm.module.scss';
 
 interface CalendarFormProps {
+  mode: 'add' | 'edit';
   initialData?: Partial<CalendarFormData>;
   onSubmit: (data: CalendarFormData) => void;
 }
 
-const CalendarCreateForm: React.FC<CalendarFormProps> = ({ onSubmit }) => {
+export const CalendarForm: React.FC<CalendarFormProps> = ({
+  mode,
+  initialData,
+  onSubmit,
+}) => {
   const [formData, setFormData] = useState<CalendarFormData>({
     title: '',
     startDate: new Date(),
@@ -29,19 +34,45 @@ const CalendarCreateForm: React.FC<CalendarFormProps> = ({ onSubmit }) => {
     jobTag: undefined,
     techTag: undefined,
     link: '',
+    ...initialData,
   });
 
   const [selectedClassificationTag, setSelectedClassificationTag] =
-    useState<CalendarClassification>(CalendarClassification.EVENT);
+    useState<CalendarClassification>(
+      initialData?.classificationTag ?? CalendarClassification.EVENT
+    );
+
   const [selectedEventTag, setSelectedEventTag] = useState<CalendarEventTag>(
-    CalendarEventTag.OFFICIAL_EVENT
+    initialData?.eventTag ?? CalendarEventTag.OFFICIAL_EVENT
   );
+
   const [selectedJobTag, setSelectedJobTag] = useState<
     CalendarJobTag | undefined
-  >(undefined);
+  >(initialData?.jobTag);
+
   const [selectedTechTag, setSelectedTechTag] = useState<
     CalendarTechTag | undefined
-  >(undefined);
+  >(initialData?.techTag);
+
+  useEffect(() => {
+    if (initialData) {
+      setSelectedClassificationTag(
+        initialData.classificationTag ?? CalendarClassification.EVENT
+      );
+
+      if (initialData.classificationTag === CalendarClassification.EVENT) {
+        setSelectedEventTag(
+          initialData.eventTag ?? CalendarEventTag.OFFICIAL_EVENT
+        );
+        setSelectedJobTag(undefined);
+        setSelectedTechTag(undefined);
+      } else if (initialData.classificationTag === CalendarClassification.JOB) {
+        setSelectedJobTag(initialData.jobTag);
+        setSelectedTechTag(initialData.techTag);
+        setSelectedEventTag(undefined as unknown as CalendarEventTag); // 타입 안정용
+      }
+    }
+  }, [initialData]);
 
   useEffect(() => {
     setFormData((prev) => ({
@@ -89,7 +120,9 @@ const CalendarCreateForm: React.FC<CalendarFormProps> = ({ onSubmit }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.formHeaderContainer}>일정 추가</div>
+      <div className={styles.formHeaderContainer}>
+        {mode === 'add' ? '일정 추가' : '일정 수정'}
+      </div>
 
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         <div className={styles.inputWrapper}>
@@ -118,6 +151,7 @@ const CalendarCreateForm: React.FC<CalendarFormProps> = ({ onSubmit }) => {
                     setSelectedClassificationTag(tag);
                     setSelectedJobTag(undefined);
                     setSelectedTechTag(undefined);
+                    setSelectedEventTag(CalendarEventTag.OFFICIAL_EVENT);
                   }}
                 >
                   {tag === CalendarClassification.EVENT
@@ -230,12 +264,10 @@ const CalendarCreateForm: React.FC<CalendarFormProps> = ({ onSubmit }) => {
 
         <div className={styles.buttonContainer}>
           <button type='submit' className={styles.submitButton}>
-            등록
+            {mode === 'add' ? '등록' : '수정'}
           </button>
         </div>
       </form>
     </div>
   );
 };
-
-export default CalendarCreateForm;
