@@ -21,8 +21,8 @@ export const useAdminCalendarCreate = () => {
       try {
         const url =
           formData.classificationTag === CalendarClassification.EVENT
-            ? `/admin/public/event`
-            : `/admin/public/job`;
+            ? `admin/public/event`
+            : `admin/public/job`;
 
         const requestData =
           formData.classificationTag === CalendarClassification.EVENT

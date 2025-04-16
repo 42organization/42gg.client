@@ -7,24 +7,18 @@ import {
   CalendarEventTag,
   CalendarJobTag,
   CalendarTechTag,
+  eventTagLabels,
+  jobTagLabels,
+  techTagLabels,
 } from 'constants/calendar/calendarConstants';
 import styles from 'styles/calendar/Form/CalendarForm.module.scss';
 
 interface CalendarFormProps {
-  mode: 'add' | 'edit';
-  isModal?: boolean;
   initialData?: Partial<CalendarFormData>;
-  onClose?: () => void;
   onSubmit: (data: CalendarFormData) => void;
 }
 
-const CalendarForm: React.FC<CalendarFormProps> = ({
-  mode,
-  isModal = false,
-  initialData,
-  onClose,
-  onSubmit,
-}) => {
+const CalendarCreateForm: React.FC<CalendarFormProps> = ({ onSubmit }) => {
   const [formData, setFormData] = useState<CalendarFormData>({
     title: '',
     startDate: new Date(),
@@ -35,7 +29,6 @@ const CalendarForm: React.FC<CalendarFormProps> = ({
     jobTag: undefined,
     techTag: undefined,
     link: '',
-    ...initialData,
   });
 
   const [selectedClassificationTag, setSelectedClassificationTag] =
@@ -88,7 +81,6 @@ const CalendarForm: React.FC<CalendarFormProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(formData);
-    if (isModal && onClose) onClose();
   };
 
   const availableTags = Object.values(CalendarClassification).filter(
@@ -97,14 +89,8 @@ const CalendarForm: React.FC<CalendarFormProps> = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.formHeaderContainer}>
-        {mode === 'add' ? '일정 추가' : '일정 수정'}
-        {isModal && (
-          <button className={styles.closeButton} onClick={onClose}>
-            ✖
-          </button>
-        )}
-      </div>
+      <div className={styles.formHeaderContainer}>일정 추가</div>
+
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         <div className={styles.inputWrapper}>
           <div className={styles.label}>제목</div>
@@ -147,27 +133,27 @@ const CalendarForm: React.FC<CalendarFormProps> = ({
                   <div
                     key={tag}
                     className={`${styles.subTagItem} ${
-                      selectedEventTag === tag ? styles.selected : ''
+                      selectedEventTag === tag ? styles.subTagSelected : ''
                     }`}
                     onClick={() => setSelectedEventTag(tag)}
                   >
-                    {tag}
+                    # {eventTagLabels[tag]}
                   </div>
                 ))}
               </div>
             )}
 
             {selectedClassificationTag === CalendarClassification.JOB && (
-              <div className={styles.subTagWrapper}>
+              <div className={styles.subTagJobWrapper}>
                 {Object.values(CalendarJobTag).map((tag) => (
                   <div
                     key={tag}
                     className={`${styles.subTagItem} ${
-                      selectedJobTag === tag ? styles.selected : ''
+                      selectedJobTag === tag ? styles.subTagSelected : ''
                     }`}
                     onClick={() => setSelectedJobTag(tag)}
                   >
-                    {tag}
+                    # {jobTagLabels[tag]}
                   </div>
                 ))}
               </div>
@@ -179,12 +165,12 @@ const CalendarForm: React.FC<CalendarFormProps> = ({
                   {Object.values(CalendarTechTag).map((tag) => (
                     <div
                       key={tag}
-                      className={`${styles.subTagItem} ${
-                        selectedTechTag === tag ? styles.selected : ''
+                      className={`${styles.subTagTechItem} ${
+                        selectedTechTag === tag ? styles.subTagSelected : ''
                       }`}
                       onClick={() => setSelectedTechTag(tag)}
                     >
-                      {tag}
+                      # {techTagLabels[tag]}
                     </div>
                   ))}
                 </div>
@@ -244,7 +230,7 @@ const CalendarForm: React.FC<CalendarFormProps> = ({
 
         <div className={styles.buttonContainer}>
           <button type='submit' className={styles.submitButton}>
-            {mode === 'add' ? '등록' : '수정'}
+            등록
           </button>
         </div>
       </form>
@@ -252,4 +238,4 @@ const CalendarForm: React.FC<CalendarFormProps> = ({
   );
 };
 
-export default CalendarForm;
+export default CalendarCreateForm;

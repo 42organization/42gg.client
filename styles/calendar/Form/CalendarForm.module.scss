@@ -17,6 +17,8 @@
   flex-direction: column;
   padding: 1.2rem 2rem;
   background-color: #fafaff;
+  border-top: 0.1rem solid rgba(220, 220, 220, 0.5);
+  border-radius: 0 0 0.8rem 0.8rem;
   gap: 1.2rem;
 }
 
@@ -86,13 +88,28 @@
 
 .subTagWrapper {
   display: flex;
-  gap: 0.3rem;
+  justify-content: space-between;
+  overflow: scroll;
+}
+
+.subTagJobWrapper {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
   overflow: scroll;
 }
 
 .subTagItem {
   font-size: 0.6rem;
   font-weight: 400;
+  color: #b8b8b8;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+}
+
+.subTagTechItem {
+  font-size: 0.5rem;
+  font-weight: 300;
   color: #b8b8b8;
   cursor: pointer;
   transition: color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
@@ -122,6 +139,7 @@
   cursor: pointer;
   transition: color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
 }
+
 .tagDetailItem:hover {
   color: #785ad2;
 }
@@ -166,11 +184,12 @@
 
 .buttonContainer {
   display: flex;
-  padding: 1.2rem 2rem;
+  padding-top: 1.3rem;
   font-size: 1.2rem;
   justify-content: center;
   align-items: center;
 }
+
 .submitButton {
   width: 5rem;
   height: 2rem;
