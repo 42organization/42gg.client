@@ -29,7 +29,7 @@ export const useAdminCalendarCreate = () => {
             ? {
                 eventTag: formData.eventTag,
                 title: formData.title,
-                content: formData.description,
+                content: formData.content,
                 link: formData.link || '',
                 status: CalendarStatus.ACTIVATE,
                 startTime: formData.startDate.toISOString(),
@@ -39,7 +39,7 @@ export const useAdminCalendarCreate = () => {
                 jobTag: formData.jobTag,
                 techTag: formData.techTag,
                 title: formData.title,
-                content: formData.description,
+                content: formData.content,
                 link: formData.link || '',
                 status: CalendarStatus.ACTIVATE,
                 startTime: formData.startDate.toISOString(),
