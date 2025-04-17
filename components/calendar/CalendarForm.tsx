@@ -41,38 +41,35 @@ export const CalendarForm: React.FC<CalendarFormProps> = ({
     useState<CalendarClassification>(
       initialData?.classificationTag ?? CalendarClassification.EVENT
     );
-
   const [selectedEventTag, setSelectedEventTag] = useState<CalendarEventTag>(
     initialData?.eventTag ?? CalendarEventTag.OFFICIAL_EVENT
   );
-
   const [selectedJobTag, setSelectedJobTag] = useState<
     CalendarJobTag | undefined
   >(initialData?.jobTag);
-
   const [selectedTechTag, setSelectedTechTag] = useState<
     CalendarTechTag | undefined
   >(initialData?.techTag);
 
   useEffect(() => {
-    if (initialData) {
-      setSelectedClassificationTag(
-        initialData.classificationTag ?? CalendarClassification.EVENT
-      );
+    if (mode !== 'edit' || !initialData) return;
 
-      if (initialData.classificationTag === CalendarClassification.EVENT) {
-        setSelectedEventTag(
-          initialData.eventTag ?? CalendarEventTag.OFFICIAL_EVENT
-        );
-        setSelectedJobTag(undefined);
-        setSelectedTechTag(undefined);
-      } else if (initialData.classificationTag === CalendarClassification.JOB) {
-        setSelectedJobTag(initialData.jobTag);
-        setSelectedTechTag(initialData.techTag);
-        setSelectedEventTag(undefined as unknown as CalendarEventTag); // 타입 안정용
-      }
+    const classification =
+      initialData.classificationTag ?? CalendarClassification.EVENT;
+    setSelectedClassificationTag(classification);
+
+    if (classification === CalendarClassification.EVENT) {
+      setSelectedEventTag(
+        initialData.eventTag ?? CalendarEventTag.OFFICIAL_EVENT
+      );
+      setSelectedJobTag(undefined);
+      setSelectedTechTag(undefined);
+    } else if (classification === CalendarClassification.JOB) {
+      setSelectedJobTag(initialData.jobTag);
+      setSelectedTechTag(initialData.techTag);
+      setSelectedEventTag(undefined as unknown as CalendarEventTag);
     }
-  }, [initialData]);
+  }, [mode, initialData]);
 
   useEffect(() => {
     setFormData((prev) => ({

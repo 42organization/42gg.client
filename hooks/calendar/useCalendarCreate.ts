@@ -2,10 +2,7 @@ import { AxiosError } from 'axios';
 import { useState, useCallback } from 'react';
 import { CalendarFormData } from 'types/calendar/formType';
 import { instanceInCalendar } from 'utils/axios';
-import {
-  CalendarClassification,
-  CalendarStatus,
-} from 'constants/calendar/calendarConstants';
+import { CalendarClassification } from 'constants/calendar/calendarConstants';
 import { useShowSnackbar } from 'hooks/calendar/admin/useShowSnackbar';
 
 export const useCalendarCreate = () => {

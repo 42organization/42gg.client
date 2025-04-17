@@ -256,8 +256,9 @@
 
 .detailTextareaField {
   width: 95%;
-  height: 4rem;
+  height: 4.3rem;
   padding: 0.5rem;
+  overflow-y: scroll;
   font-size: 0.7rem;
   border: 1px solid #c1c8f0;
   border-radius: 0.2rem;

@@ -6,6 +6,7 @@ import {
 } from 'constants/calendar/calendarConstants';
 
 export interface CalendarFormData {
+  id?: number;
   title: string;
   startDate: Date;
   endDate: Date;
