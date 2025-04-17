@@ -80,12 +80,22 @@
   cursor: pointer;
 }
 
-.imageWarpper {
+.imageWrapper {
   position: relative;
   padding: 0.5rem;
   overflow: hidden;
   cursor: pointer;
   @media screen and (max-width: 961px) {
     padding: 1rem;
+  }
+}
+
+.calendarImageWrapper {
+  position: relative;
+  padding: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  @media screen and (max-width: 961px) {
+    padding: 0.5rem;
   }
 }

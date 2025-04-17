@@ -2,7 +2,6 @@
   display: flex;
   width: 25rem;
   flex-direction: column;
-  // max-width: 50rem;
   background-color: #ffffff;
   border-radius: 0.8rem;
 }
@@ -17,6 +16,8 @@
   flex-direction: column;
   padding: 1.2rem 2rem;
   background-color: #fafaff;
+  border-top: 0.1rem solid rgba(220, 220, 220, 0.5);
+  border-radius: 0 0 0.8rem 0.8rem;
   gap: 1.2rem;
 }
 
@@ -26,6 +27,7 @@
   width: 100%;
   height: 1.8rem;
   gap: 1.5rem;
+  overflow: scroll;
 }
 
 .tagWrapper {
@@ -86,13 +88,28 @@
 
 .subTagWrapper {
   display: flex;
-  gap: 0.3rem;
+  justify-content: space-between;
+  overflow: scroll;
+}
+
+.subTagJobWrapper {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
   overflow: scroll;
 }
 
 .subTagItem {
   font-size: 0.6rem;
   font-weight: 400;
+  color: #b8b8b8;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+}
+
+.subTagTechItem {
+  font-size: 0.5rem;
+  font-weight: 300;
   color: #b8b8b8;
   cursor: pointer;
   transition: color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
@@ -122,6 +139,7 @@
   cursor: pointer;
   transition: color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
 }
+
 .tagDetailItem:hover {
   color: #785ad2;
 }
@@ -166,11 +184,12 @@
 
 .buttonContainer {
   display: flex;
-  padding: 1.2rem 2rem;
+  padding-top: 1.3rem;
   font-size: 1.2rem;
   justify-content: center;
   align-items: center;
 }
+
 .submitButton {
   width: 5rem;
   height: 2rem;
@@ -190,4 +209,65 @@
     background-color: #4f3a8f;
     transform: scale(0.95);
   }
+}
+
+// CalendarDetailModal
+.modalCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.2);
+  transform: translate(-50%, -50%);
+}
+
+.detailTitle {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.detailTagField {
+  display: flex;
+  width: 95%;
+  height: 100%;
+  gap: 1.5rem;
+}
+
+.detailSelectTagContainer {
+  display: flex;
+  align-items: center;
+  // width: 100%;
+  gap: 2rem;
+}
+
+.detailTagWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1.5rem;
+}
+
+.detailText {
+  height: 100%;
+  font-size: 0.7rem;
+  color: #836ad1;
+}
+
+.detailTextareaField {
+  width: 95%;
+  height: 4.3rem;
+  padding: 0.5rem;
+  overflow-y: scroll;
+  font-size: 0.7rem;
+  border: 1px solid #c1c8f0;
+  border-radius: 0.2rem;
+}
+
+.detailDatePickerContainer {
+  font-size: 0.7rem;
+}
+
+.detailInputField {
+  font-size: 0.7rem;
 }

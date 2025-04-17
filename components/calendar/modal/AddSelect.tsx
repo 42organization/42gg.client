@@ -13,6 +13,9 @@ const AddSelect = (props: calendarModalProps) => {
     if (modalType === '개인 일정') {
       openModal({ type: 'PrivateUpsert', schedule: props.schedule });
     }
+    if (modalType === '공유 일정') {
+      openModal({ type: 'PublicUpsert', schedule: props.schedule });
+    }
   };
 
   return (

@@ -15,16 +15,22 @@ import {
   CalendarStatus,
   CalendarClassification,
 } from 'constants/calendar/calendarConstants';
+import { NoContent } from 'components/admin/agenda/utils';
+import { CalendarDetailModal } from 'components/admin/calendar/CalendarDetailModal';
+import { EditCalendarModal } from 'components/calendar/EditCalendarModal';
 import PageNation from 'components/Pagination';
 import { useAdminCalendarDelete } from 'hooks/calendar/admin/useAdminCalendarDelete';
+import { useAdminCalendarDetail } from 'hooks/calendar/admin/useAdminCalendarDetail';
 import { useAdminCalendarTotalGet } from 'hooks/calendar/admin/useAdminCalendarTotalGet';
+import { useAdminCalendarUpdate } from 'hooks/calendar/admin/useAdminCalendarUpdate';
 import styles from 'styles/admin/calendar/CalendarTable.module.scss';
-import { NoContent } from '../agenda/utils';
 
 export const CalendarTablePageNation = () => {
   // api hooks call
   const { isLoading, adminCalendarTotalGet } = useAdminCalendarTotalGet();
   const { deleteCalendar } = useAdminCalendarDelete();
+  const { detailData, getCalendarDetail } = useAdminCalendarDetail();
+  const { updateCalendar } = useAdminCalendarUpdate();
 
   // data state
   const [calendarData, setCalendarData] = useState<AdminSchedule[] | null>(
@@ -32,6 +38,8 @@ export const CalendarTablePageNation = () => {
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
+  const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   useEffect(() => {
     const fetchCalendarData = async () => {
@@ -54,6 +62,24 @@ export const CalendarTablePageNation = () => {
     if (success) {
       window.location.reload();
     }
+  };
+
+  const handleDetail = async (
+    id: number,
+    classification: CalendarClassification
+  ) => {
+    await getCalendarDetail(id, classification);
+
+    setShowDetailModal(true);
+  };
+
+  const handleEdit = async (
+    id: number,
+    classification: CalendarClassification
+  ) => {
+    await getCalendarDetail(id, classification);
+
+    setShowEditModal(true);
   };
 
   // define
@@ -185,11 +211,19 @@ export const CalendarTablePageNation = () => {
                   </TableCell>
 
                   <TableCell className={styles.etcTableCell}>
-                    <button className={`${styles.btn} ${styles.detail}`}>
-                      자세히
-                    </button>
                     {row.classification !== CalendarClassification.PRIVATE && (
-                      <button className={`${styles.btn} ${styles.modify}`}>
+                      <button
+                        className={`${styles.btn} ${styles.detail}`}
+                        onClick={() => handleDetail(row.id, row.classification)}
+                      >
+                        자세히
+                      </button>
+                    )}
+                    {row.classification !== CalendarClassification.PRIVATE && (
+                      <button
+                        className={`${styles.btn} ${styles.modify}`}
+                        onClick={() => handleEdit(row.id, row.classification)}
+                      >
                         수정
                       </button>
                     )}
@@ -225,6 +259,35 @@ export const CalendarTablePageNation = () => {
           }}
         />
       </div>
+
+      {showDetailModal && (
+        <CalendarDetailModal
+          data={detailData}
+          onClose={() => setShowDetailModal(false)}
+        />
+      )}
+
+      {showEditModal && detailData && (
+        <EditCalendarModal
+          open={showEditModal}
+          initialData={{
+            title: detailData.title,
+            content: detailData.content,
+            link: detailData.link,
+            startDate: new Date(detailData.startTime),
+            endDate: new Date(detailData.endTime),
+            classificationTag: detailData.classification,
+            eventTag: detailData.eventTag ?? undefined,
+            jobTag: detailData.jobTag ?? undefined,
+            techTag: detailData.techTag ?? undefined,
+          }}
+          onClose={() => setShowEditModal(false)}
+          onSubmit={async (updatedData) => {
+            await updateCalendar(detailData.id, updatedData);
+            setShowEditModal(false);
+          }}
+        />
+      )}
     </div>
   );
 };

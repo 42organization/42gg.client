@@ -3,6 +3,8 @@ import { useCalendarModal } from 'utils/calendar/useCalendarModal';
 import { calendarModalState } from 'utils/recoil/calendar/modalState';
 import AddSelect from 'components/calendar/modal/AddSelect';
 import PrivateScheduleUpsertModal from 'components/calendar/modal/PrivateScheduleUpsertModal';
+import { PublicScheduleEditModal } from 'components/calendar/modal/PublicScheduleEditModal';
+import { PublicScheduleUpsertModal } from 'components/calendar/modal/PublicScheduleUpsertModal';
 import ScheduleDetailModal from 'components/calendar/modal/ScheduleDetailModal';
 import styles from 'styles/calendar/modal/CalendarModalProvider.module.scss';
 
@@ -21,6 +23,12 @@ const CalendarModalProvider = () => {
         break;
       case 'PrivateUpsert':
         modalContent = <PrivateScheduleUpsertModal {...modalProps} />;
+        break;
+      case 'PublicUpsert':
+        modalContent = <PublicScheduleUpsertModal {...modalProps} />;
+        break;
+      case 'PublicEdit':
+        modalContent = <PublicScheduleEditModal {...modalProps} />;
         break;
       default:
         modalContent = null;

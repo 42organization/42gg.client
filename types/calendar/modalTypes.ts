@@ -5,7 +5,8 @@ type CalendarModalType =
   | 'detail'
   | 'AddSelect'
   | 'PrivateUpsert'
-  | 'PublicUpsert';
+  | 'PublicUpsert'
+  | 'PublicEdit';
 
 export interface calendarModalProps {
   type: CalendarModalType;

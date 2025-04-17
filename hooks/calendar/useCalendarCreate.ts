@@ -1,16 +1,11 @@
 import { AxiosError } from 'axios';
 import { useState, useCallback } from 'react';
 import { CalendarFormData } from 'types/calendar/formType';
-import { AdminSchedule } from 'types/calendar/scheduleTypes';
 import { instanceInCalendar } from 'utils/axios';
-import {
-  CalendarClassification,
-  CalendarStatus,
-} from 'constants/calendar/calendarConstants';
+import { CalendarClassification } from 'constants/calendar/calendarConstants';
 import { useShowSnackbar } from 'hooks/calendar/admin/useShowSnackbar';
 
-export const useAdminCalendarCreate = () => {
-  const [data, setData] = useState<AdminSchedule[] | null>(null);
+export const useCalendarCreate = () => {
   const [isLoading, setLoading] = useState(false);
   const showSnackbar = useShowSnackbar();
 
@@ -21,40 +16,39 @@ export const useAdminCalendarCreate = () => {
       try {
         const url =
           formData.classificationTag === CalendarClassification.EVENT
-            ? `admin/public/event`
-            : `admin/public/job`;
+            ? 'public/event'
+            : 'public/job';
 
         const requestData =
           formData.classificationTag === CalendarClassification.EVENT
             ? {
                 eventTag: formData.eventTag,
+                author: formData.author,
                 title: formData.title,
                 content: formData.content,
                 link: formData.link || '',
-                status: CalendarStatus.ACTIVATE,
                 startTime: formData.startDate.toISOString(),
                 endTime: formData.endDate.toISOString(),
               }
             : {
                 jobTag: formData.jobTag,
                 techTag: formData.techTag,
+                author: formData.author,
                 title: formData.title,
                 content: formData.content,
                 link: formData.link || '',
-                status: CalendarStatus.ACTIVATE,
                 startTime: formData.startDate.toISOString(),
                 endTime: formData.endDate.toISOString(),
               };
 
-        const response = await instanceInCalendar.post(url, requestData);
+        const res = await instanceInCalendar.post(url, requestData);
 
-        if (response.status >= 200 && response.status < 300) {
-          setData(response.data.totalScheduleAdminResDtoList || []);
-          showSnackbar('success', '✅ 일정이 성공적으로 등록되었습니다!');
+        if (res.status >= 200 && res.status < 300) {
+          showSnackbar('success', '✅ 공유 일정이 성공적으로 등록되었습니다!');
         }
       } catch (err) {
         const axiosError = err as AxiosError;
-        showSnackbar('error', `❌ 일정 등록 실패: ${axiosError.message}`);
+        showSnackbar('error', `❌ 공유 일정 등록 실패: ${axiosError.message}`);
         console.error(err);
       } finally {
         setLoading(false);
@@ -63,5 +57,5 @@ export const useAdminCalendarCreate = () => {
     [showSnackbar]
   );
 
-  return { data, isLoading, createCalendar };
+  return { isLoading, createCalendar };
 };
