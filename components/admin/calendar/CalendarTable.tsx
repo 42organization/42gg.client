@@ -197,12 +197,14 @@ export const CalendarTable = ({ data }: CalendarTableProps) => {
                   </TableCell>
 
                   <TableCell className={styles.etcTableCell}>
-                    <button
-                      className={`${styles.btn} ${styles.detail}`}
-                      onClick={() => handleDetail(row.id, row.classification)}
-                    >
-                      자세히
-                    </button>
+                    {row.classification !== CalendarClassification.PRIVATE && (
+                      <button
+                        className={`${styles.btn} ${styles.detail}`}
+                        onClick={() => handleDetail(row.id, row.classification)}
+                      >
+                        자세히
+                      </button>
+                    )}
                     {row.classification !== CalendarClassification.PRIVATE && (
                       <button
                         className={`${styles.btn} ${styles.modify}`}
