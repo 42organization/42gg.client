@@ -11,6 +11,7 @@ export interface CalendarFormData {
   endDate: Date;
   content: string;
   classificationTag: CalendarClassification;
+  author?: string;
   eventTag?: CalendarEventTag;
   jobTag?: CalendarJobTag;
   techTag?: CalendarTechTag;
