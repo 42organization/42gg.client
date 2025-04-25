@@ -6,6 +6,8 @@ import { useCalendarModal } from 'utils/calendar/useCalendarModal';
 import {
   CalendarClassification,
   CalendarEventTag,
+  CalendarJobTag,
+  CalendarTechTag,
 } from 'constants/calendar/calendarConstants';
 import { CalendarForm } from 'components/calendar/CalendarForm';
 import { useUser } from 'hooks/agenda/Layout/useUser';
@@ -20,8 +22,10 @@ export const PublicScheduleEditModal = ({ schedule }: calendarModalProps) => {
     id: schedule.id,
     title: schedule?.title || '',
     content: schedule?.content || '',
-    classificationTag: CalendarClassification.EVENT,
-    eventTag: CalendarEventTag.OFFICIAL_EVENT,
+    classificationTag: schedule.classification as CalendarClassification,
+    eventTag: schedule.eventTag as CalendarEventTag,
+    jobTag: schedule.jobTag as CalendarJobTag,
+    techTag: schedule.techTag as CalendarTechTag,
     link: schedule?.link || '',
     author: intraId,
     startDate: schedule?.startTime ? new Date(schedule.startTime) : new Date(),
