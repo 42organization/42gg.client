@@ -136,7 +136,15 @@ const ScheduleDetailModal = (props: calendarModalProps) => {
             <div className={styles.content}>{schedule.content}</div>
             <div className={styles.link}>
               <LinkSVG width={17} height={17} stroke='#785AD2' />
-              <Link href={schedule.link || '#'}>{schedule.link}</Link>
+              <Link href={schedule.link || '#'} legacyBehavior>
+                <a
+                  className={styles.linkText}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  {schedule.link}
+                </a>
+              </Link>
             </div>
             {schedule.groupId && (
               <div className={styles.alarm}>
