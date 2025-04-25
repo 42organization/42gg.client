@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
 import { ScheduleGroup } from 'types/calendar/groupType';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import { toastState } from 'utils/recoil/toast';
 import AccordianItem from 'components/calendar/sidebar/AccordianItem';
 import CalendarProfile from 'components/calendar/sidebar/Profile';
+import HomeEmoji from 'public/image/takgu/menu_home.svg';
 import useScheduleGroupRequest from 'hooks/calendar/useScheduleGroupRequest';
 import styles from 'styles/calendar/CalendarSidebar.module.scss';
 
@@ -149,10 +149,10 @@ const CalendarSidebar = ({
       <div className={styles.profile}>
         <IconButton
           className={styles.backButton}
-          onClick={() => router.back()}
+          onClick={() => router.push('/')}
           size='small'
         >
-          <ArrowBackIcon />
+          <HomeEmoji />
         </IconButton>
         <CalendarProfile />
       </div>
