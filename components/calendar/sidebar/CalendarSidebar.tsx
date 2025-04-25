@@ -1,5 +1,8 @@
+import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import IconButton from '@mui/material/IconButton';
 import { ScheduleGroup } from 'types/calendar/groupType';
 import { ScheduleFilter } from 'types/calendar/scheduleFilterType';
 import { toastState } from 'utils/recoil/toast';
@@ -34,6 +37,7 @@ const CalendarSidebar = ({
   >(privateGroups || []);
   const { sendGroupRequest } = useScheduleGroupRequest();
   const setSnackbar = useSetRecoilState(toastState);
+  const router = useRouter();
 
   useEffect(() => {
     setUpdatedPrivateGroups(
@@ -143,6 +147,13 @@ const CalendarSidebar = ({
   return (
     <div className={sidebarOpen ? styles.sidebarOpen : styles.sidebarClose}>
       <div className={styles.profile}>
+        <IconButton
+          className={styles.backButton}
+          onClick={() => router.back()}
+          size='small'
+        >
+          <ArrowBackIcon />
+        </IconButton>
         <CalendarProfile />
       </div>
       <div className={styles.divider} />

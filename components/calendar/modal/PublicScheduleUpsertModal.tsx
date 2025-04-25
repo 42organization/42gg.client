@@ -2,19 +2,22 @@ import React from 'react';
 import { Modal, Box } from '@mui/material';
 import { CalendarFormData } from 'types/calendar/formType';
 import { calendarModalProps } from 'types/calendar/modalTypes';
+import { Schedule } from 'types/calendar/scheduleTypes';
 import { useCalendarModal } from 'utils/calendar/useCalendarModal';
 import {
   CalendarClassification,
   CalendarEventTag,
+  CalendarJobTag,
+  CalendarTechTag,
 } from 'constants/calendar/calendarConstants';
 import { CalendarForm } from 'components/calendar/CalendarForm';
 import { useUser } from 'hooks/agenda/Layout/useUser';
-import { useCalendarCreate } from 'hooks/calendar/useCalendarCreate';
+import useScheduleRequest from 'hooks/calendar/useScheduleRequest';
 
 export const PublicScheduleUpsertModal = ({ schedule }: calendarModalProps) => {
   const { closeModal } = useCalendarModal();
-  const { createCalendar } = useCalendarCreate();
   const intraId = useUser()?.intraId;
+  const { sendCalendarRequest } = useScheduleRequest();
 
   const initialData: Partial<CalendarFormData> = {
     title: schedule?.title || '',
@@ -28,8 +31,27 @@ export const PublicScheduleUpsertModal = ({ schedule }: calendarModalProps) => {
   };
 
   const handleSubmit = async (data: CalendarFormData) => {
-    await createCalendar(data);
-    closeModal();
+    const parsedData: Schedule = {
+      classification: data.classificationTag,
+      author: data.author!,
+      title: data.title,
+      content: data.content,
+      link: data.link ?? '',
+      startTime: data.startDate.toISOString(),
+      endTime: data.endDate.toISOString(),
+      eventTag: data.eventTag,
+      jobTag: data.jobTag,
+      techTag: data.techTag,
+    };
+
+    const url =
+      data.classificationTag === CalendarClassification.EVENT
+        ? 'public/event'
+        : 'public/job';
+
+    await sendCalendarRequest('POST', url, parsedData, () => {
+      closeModal();
+    });
   };
 
   return (
