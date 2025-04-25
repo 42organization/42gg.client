@@ -12,7 +12,6 @@ import MenuSVG from 'public/image/calendar/menuIcon.svg';
 import { useUser } from 'hooks/agenda/Layout/useUser';
 import useScheduleGroupGet from 'hooks/calendar/useScheduleGroupGet';
 import styles from 'styles/calendar/Calendar.module.scss';
-
 const publicGroupList: ScheduleGroup[] = [
   {
     classification: 'EVENT',
